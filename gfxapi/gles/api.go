@@ -38,11 +38,6 @@ func NewIndicesPointer(addr memory.Pointer) IndicesPointer {
 	return IndicesPointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p IndicesPointer) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that IndicesPointer points to.
 func (p IndicesPointer) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -71,11 +66,6 @@ type VertexPointer struct {
 // NewVertexPointer returns a VertexPointer that points to addr in the application pool.
 func NewVertexPointer(addr memory.Pointer) VertexPointer {
 	return VertexPointer{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p VertexPointer) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that VertexPointer points to.
@@ -108,11 +98,6 @@ func NewTexturePointer(addr memory.Pointer) TexturePointer {
 	return TexturePointer{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p TexturePointer) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that TexturePointer points to.
 func (p TexturePointer) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -141,11 +126,6 @@ type BufferDataPointer struct {
 // NewBufferDataPointer returns a BufferDataPointer that points to addr in the application pool.
 func NewBufferDataPointer(addr memory.Pointer) BufferDataPointer {
 	return BufferDataPointer{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p BufferDataPointer) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that BufferDataPointer points to.
@@ -183,11 +163,6 @@ func NewEGLConfig(addr memory.Pointer) EGLConfig {
 	return EGLConfig{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p EGLConfig) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that EGLConfig points to.
 func (p EGLConfig) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -216,11 +191,6 @@ type EGLContext struct {
 // NewEGLContext returns a EGLContext that points to addr in the application pool.
 func NewEGLContext(addr memory.Pointer) EGLContext {
 	return EGLContext{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p EGLContext) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that EGLContext points to.
@@ -253,11 +223,6 @@ func NewEGLDisplay(addr memory.Pointer) EGLDisplay {
 	return EGLDisplay{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p EGLDisplay) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that EGLDisplay points to.
 func (p EGLDisplay) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -286,11 +251,6 @@ type EGLSurface struct {
 // NewEGLSurface returns a EGLSurface that points to addr in the application pool.
 func NewEGLSurface(addr memory.Pointer) EGLSurface {
 	return EGLSurface{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p EGLSurface) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that EGLSurface points to.
@@ -323,11 +283,6 @@ func NewGLXContext(addr memory.Pointer) GLXContext {
 	return GLXContext{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p GLXContext) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that GLXContext points to.
 func (p GLXContext) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -356,11 +311,6 @@ type GLXDrawable struct {
 // NewGLXDrawable returns a GLXDrawable that points to addr in the application pool.
 func NewGLXDrawable(addr memory.Pointer) GLXDrawable {
 	return GLXDrawable{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p GLXDrawable) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that GLXDrawable points to.
@@ -393,11 +343,6 @@ func NewHGLRC(addr memory.Pointer) HGLRC {
 	return HGLRC{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p HGLRC) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that HGLRC points to.
 func (p HGLRC) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -426,11 +371,6 @@ type HDC struct {
 // NewHDC returns a HDC that points to addr in the application pool.
 func NewHDC(addr memory.Pointer) HDC {
 	return HDC{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p HDC) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that HDC points to.
@@ -466,11 +406,6 @@ func NewCGLPixelFormatObj(addr memory.Pointer) CGLPixelFormatObj {
 	return CGLPixelFormatObj{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p CGLPixelFormatObj) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that CGLPixelFormatObj points to.
 func (p CGLPixelFormatObj) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -499,11 +434,6 @@ type CGLContextObj struct {
 // NewCGLContextObj returns a CGLContextObj that points to addr in the application pool.
 func NewCGLContextObj(addr memory.Pointer) CGLContextObj {
 	return CGLContextObj{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p CGLContextObj) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that CGLContextObj points to.
@@ -536,11 +466,6 @@ func NewImageOES(addr memory.Pointer) ImageOES {
 	return ImageOES{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p ImageOES) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that ImageOES points to.
 func (p ImageOES) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -571,11 +496,6 @@ func NewVoidᵖ(addr memory.Pointer) Voidᵖ {
 	return Voidᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p Voidᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that Voidᵖ points to.
 func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -604,11 +524,6 @@ type U8ᵖ struct {
 // NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
 func NewU8ᵖ(addr memory.Pointer) U8ᵖ {
 	return U8ᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p U8ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that U8ᵖ points to.
@@ -651,11 +566,6 @@ func NewCharᵖ(addr memory.Pointer) Charᵖ {
 	return Charᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p Charᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that Charᵖ points to.
 func (p Charᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
@@ -669,6 +579,22 @@ func (p Charᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) 
 // Write writes value to the byte element at the pointer.
 func (p Charᵖ) Write(value byte, ϟs *gfxapi.State) {
 	p.Slice(0, 1, ϟs).Write([]byte{value}, ϟs)
+}
+
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+// If incNullTerm is true then the null-terminator is included in the slice.
+func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		if b, _ := d.Uint8(); b == 0 {
+			if incNullTerm {
+				return p.Slice(0, i+1, ϟs)
+			} else {
+				return p.Slice(0, i, ϟs)
+			}
+		}
+		i++
+	}
 }
 
 // Slice returns a new Charˢ from the pointer using start and end indices.
@@ -694,11 +620,6 @@ type EGLintᵖ struct {
 // NewEGLintᵖ returns a EGLintᵖ that points to addr in the application pool.
 func NewEGLintᵖ(addr memory.Pointer) EGLintᵖ {
 	return EGLintᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p EGLintᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that EGLintᵖ points to.
@@ -739,11 +660,6 @@ type Intᵖ struct {
 // NewIntᵖ returns a Intᵖ that points to addr in the application pool.
 func NewIntᵖ(addr memory.Pointer) Intᵖ {
 	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p Intᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that Intᵖ points to.
@@ -790,11 +706,6 @@ func NewCGLContextObjᵖ(addr memory.Pointer) CGLContextObjᵖ {
 	return CGLContextObjᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p CGLContextObjᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that CGLContextObjᵖ points to.
 func (p CGLContextObjᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	if p.Pool == memory.ApplicationPool {
@@ -839,11 +750,6 @@ func NewS32ᵖ(addr memory.Pointer) S32ᵖ {
 	return S32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p S32ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that S32ᵖ points to.
 func (p S32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -882,11 +788,6 @@ type U32ᵖ struct {
 // NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
 func NewU32ᵖ(addr memory.Pointer) U32ᵖ {
 	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p U32ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that U32ᵖ points to.
@@ -929,11 +830,6 @@ func NewDiscardFramebufferAttachmentᵖ(addr memory.Pointer) DiscardFramebufferA
 	return DiscardFramebufferAttachmentᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p DiscardFramebufferAttachmentᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that DiscardFramebufferAttachmentᵖ points to.
 func (p DiscardFramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -972,11 +868,6 @@ type VertexArrayIdᵖ struct {
 // NewVertexArrayIdᵖ returns a VertexArrayIdᵖ that points to addr in the application pool.
 func NewVertexArrayIdᵖ(addr memory.Pointer) VertexArrayIdᵖ {
 	return VertexArrayIdᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p VertexArrayIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that VertexArrayIdᵖ points to.
@@ -1019,11 +910,6 @@ func NewShaderAttribTypeᵖ(addr memory.Pointer) ShaderAttribTypeᵖ {
 	return ShaderAttribTypeᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p ShaderAttribTypeᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that ShaderAttribTypeᵖ points to.
 func (p ShaderAttribTypeᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1062,11 +948,6 @@ type ShaderUniformTypeᵖ struct {
 // NewShaderUniformTypeᵖ returns a ShaderUniformTypeᵖ that points to addr in the application pool.
 func NewShaderUniformTypeᵖ(addr memory.Pointer) ShaderUniformTypeᵖ {
 	return ShaderUniformTypeᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p ShaderUniformTypeᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that ShaderUniformTypeᵖ points to.
@@ -1109,11 +990,6 @@ func NewF32ᵖ(addr memory.Pointer) F32ᵖ {
 	return F32ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p F32ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that F32ᵖ points to.
 func (p F32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1152,11 +1028,6 @@ type TextureIdᵖ struct {
 // NewTextureIdᵖ returns a TextureIdᵖ that points to addr in the application pool.
 func NewTextureIdᵖ(addr memory.Pointer) TextureIdᵖ {
 	return TextureIdᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p TextureIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that TextureIdᵖ points to.
@@ -1199,11 +1070,6 @@ func NewFramebufferIdᵖ(addr memory.Pointer) FramebufferIdᵖ {
 	return FramebufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p FramebufferIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that FramebufferIdᵖ points to.
 func (p FramebufferIdᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1244,11 +1110,6 @@ func NewRenderbufferIdᵖ(addr memory.Pointer) RenderbufferIdᵖ {
 	return RenderbufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p RenderbufferIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that RenderbufferIdᵖ points to.
 func (p RenderbufferIdᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1287,11 +1148,6 @@ type BufferIdᵖ struct {
 // NewBufferIdᵖ returns a BufferIdᵖ that points to addr in the application pool.
 func NewBufferIdᵖ(addr memory.Pointer) BufferIdᵖ {
 	return BufferIdᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p BufferIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that BufferIdᵖ points to.
@@ -1338,11 +1194,6 @@ func NewCharᵖᵖ(addr memory.Pointer) Charᵖᵖ {
 	return Charᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p Charᵖᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
 func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	if p.Pool == memory.ApplicationPool {
@@ -1387,11 +1238,6 @@ func NewShaderIdᵖ(addr memory.Pointer) ShaderIdᵖ {
 	return ShaderIdᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p ShaderIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that ShaderIdᵖ points to.
 func (p ShaderIdᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1430,11 +1276,6 @@ type Boolᵖ struct {
 // NewBoolᵖ returns a Boolᵖ that points to addr in the application pool.
 func NewBoolᵖ(addr memory.Pointer) Boolᵖ {
 	return Boolᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p Boolᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that Boolᵖ points to.
@@ -1477,11 +1318,6 @@ func NewFramebufferAttachmentᵖ(addr memory.Pointer) FramebufferAttachmentᵖ {
 	return FramebufferAttachmentᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p FramebufferAttachmentᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that FramebufferAttachmentᵖ points to.
 func (p FramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
@@ -1520,11 +1356,6 @@ type QueryIdᵖ struct {
 // NewQueryIdᵖ returns a QueryIdᵖ that points to addr in the application pool.
 func NewQueryIdᵖ(addr memory.Pointer) QueryIdᵖ {
 	return QueryIdᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p QueryIdᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that QueryIdᵖ points to.
@@ -1567,11 +1398,6 @@ func NewS64ᵖ(addr memory.Pointer) S64ᵖ {
 	return S64ᵖ{Address: addr, Pool: memory.ApplicationPool}
 }
 
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p S64ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
-}
-
 // ElementSize returns the size in bytes of an element that S64ᵖ points to.
 func (p S64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(8)
@@ -1610,11 +1436,6 @@ type U64ᵖ struct {
 // NewU64ᵖ returns a U64ᵖ that points to addr in the application pool.
 func NewU64ᵖ(addr memory.Pointer) U64ᵖ {
 	return U64ᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// Unbounded returns a new unbounded memory.Slice based at p.
-func (p U64ᵖ) Unbounded(ϟs *gfxapi.State) memory.Slice {
-	return ϟs.Memory[p.Pool].At(p.Address)
 }
 
 // ElementSize returns the size in bytes of an element that U64ᵖ points to.
@@ -6953,13 +6774,13 @@ type GlGetActiveUniform struct {
 	Location           int32
 	BufferSize         int32
 	BufferBytesWritten S32ᵖ
-	Size               S32ᵖ
+	VectorCount        S32ᵖ
 	Type               ShaderUniformTypeᵖ
 	Name               Charᵖ
 }
 
 func (a *GlGetActiveUniform) String() string {
-	return fmt.Sprintf("glGetActiveUniform(program: %v, location: %v, buffer_size: %v, buffer_bytes_written: %v, size: %v, type: %v, name: %v)", a.Program, a.Location, a.BufferSize, a.BufferBytesWritten, a.Size, a.Type, a.Name)
+	return fmt.Sprintf("glGetActiveUniform(program: %v, location: %v, buffer_size: %v, buffer_bytes_written: %v, vector_count: %v, type: %v, name: %v)", a.Program, a.Location, a.BufferSize, a.BufferBytesWritten, a.VectorCount, a.Type, a.Name)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -14362,8 +14183,8 @@ func NewGlVertexAttribPointer(Location AttributeLocation, Size int32, Type Verte
 func NewGlGetActiveAttrib(Program ProgramId, Location AttributeLocation, Buffer_size int32, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveAttrib {
 	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: NewS32ᵖ(Buffer_bytes_written), VectorCount: NewS32ᵖ(Vector_count), Type: NewShaderAttribTypeᵖ(Type), Name: NewCharᵖ(Name)}
 }
-func NewGlGetActiveUniform(Program ProgramId, Location int32, Buffer_size int32, Buffer_bytes_written memory.Pointer, Size memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
-	return &GlGetActiveUniform{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: NewS32ᵖ(Buffer_bytes_written), Size: NewS32ᵖ(Size), Type: NewShaderUniformTypeᵖ(Type), Name: NewCharᵖ(Name)}
+func NewGlGetActiveUniform(Program ProgramId, Location int32, Buffer_size int32, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
+	return &GlGetActiveUniform{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: NewS32ᵖ(Buffer_bytes_written), VectorCount: NewS32ᵖ(Vector_count), Type: NewShaderUniformTypeᵖ(Type), Name: NewCharᵖ(Name)}
 }
 func NewGlGetError(Result Error) *GlGetError {
 	return &GlGetError{Result: Result}

@@ -96,17 +96,8 @@ func runTest(t *testing.T, src string, expected string) {
 
 	srcPtr := cmd.Source.Read(s, d, l) // 0'th glShaderSource string pointer
 
-	got, err := s.MemoryDecoder(srcPtr.Unbounded(s), d, l).String()
-	ok := true
-	if err != nil {
-		t.Errorf("Failed read transformed source at %v: %v", srcPtr, err)
-		ok = false
-	}
-	if got != expected {
+	if got := string(srcPtr.StringSlice(s, d, l, false).Read(s, d, l)); got != expected {
 		t.Errorf("Received unexpected string at %v: got `%s`, expected `%s`.", srcPtr, got, expected)
-		ok = false
-	}
-	if !ok {
 		t.Errorf("Application memory pool writes:\n%v", s.Memory[memory.ApplicationPool])
 	}
 }

@@ -1038,6 +1038,12 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟp := &postCall{}
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
+	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	_ = l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -1060,6 +1066,12 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟp := &postCall{}
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
+	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	_ = l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
@@ -1069,7 +1081,7 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(value.S32(ϟa.Location))
 	ϟb.Push(value.S32(ϟa.BufferSize))
 	ϟb.Push(ϟa.BufferBytesWritten.value())
-	ϟb.Push(ϟa.Size.value())
+	ϟb.Push(ϟa.VectorCount.value())
 	ϟb.Push(ϟa.Type.value())
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveUniform)
@@ -1148,9 +1160,9 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 				}
 			}()
 		case ShaderParameter_GL_INFO_LOG_LENGTH:
-			return int32(externs{ϟs, ϟd, ϟl}.strlen(s.InfoLog))
+			return int32(s.InfoLog.Count)
 		case ShaderParameter_GL_SHADER_SOURCE_LENGTH:
-			return int32(externs{ϟs, ϟd, ϟl}.strlen(s.Source))
+			return int32(len(s.Source))
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -3447,20 +3459,20 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ctx := GetContext_86_result                                        // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)                          // Shaderʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		l := func() (result uint32) {
+		str := func() (result string) {
 			switch ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))) {
 			case true:
-				return externs{ϟs, ϟd, ϟl}.strlen(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
+				return string(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 			case false:
-				return uint32(lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
+				return string(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(int32(0)), uint64(lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟs).Read(ϟs, ϟd, ϟl))
 			default:
 				// TODO: better unmatched handling
 				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))), ϟa))
 				return result
 			}
-		}() // u32
-		s.Source += string(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(uint32(0)), uint64(l), ϟs).Read(ϟs, ϟd, ϟl))
-		_ = l
+		}() // string
+		s.Source += str
+		_ = str
 	}
 	_, _, _, _, _, _ = sources, lengths, context, GetContext_86_result, ctx, s
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -3500,12 +3512,12 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟp := &postCall{}
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)             // Contextʳ
-	GetContext_87_result := context                          // Contextʳ
-	ctx := GetContext_87_result                              // Contextʳ
-	s := ctx.Instances.Shaders.Get(ϟa.Shader)                // Shaderʳ
-	min_88_a := ϟa.BufferLength                              // s32
-	min_88_b := int32(externs{ϟs, ϟd, ϟl}.strlen(s.InfoLog)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_87_result := context              // Contextʳ
+	ctx := GetContext_87_result                  // Contextʳ
+	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
+	min_88_a := ϟa.BufferLength                  // s32
+	min_88_b := int32(s.InfoLog.Count)           // s32
 	min_88_result := func() (result int32) {
 		switch (min_88_a) < (min_88_b) {
 		case true:
@@ -3541,12 +3553,12 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟp := &postCall{}
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_89_result := context                         // Contextʳ
-	ctx := GetContext_89_result                             // Contextʳ
-	s := ctx.Instances.Shaders.Get(ϟa.Shader)               // Shaderʳ
-	min_90_a := ϟa.BufferLength                             // s32
-	min_90_b := int32(externs{ϟs, ϟd, ϟl}.strlen(s.Source)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_89_result := context              // Contextʳ
+	ctx := GetContext_89_result                  // Contextʳ
+	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
+	min_90_a := ϟa.BufferLength                  // s32
+	min_90_b := int32(len(s.Source))             // s32
 	min_90_result := func() (result int32) {
 		switch (min_90_a) < (min_90_b) {
 		case true:
@@ -3785,12 +3797,12 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟp := &postCall{}
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)             // Contextʳ
-	GetContext_98_result := context                          // Contextʳ
-	ctx := GetContext_98_result                              // Contextʳ
-	p := ctx.Instances.Programs.Get(ϟa.Program)              // Programʳ
-	min_99_a := ϟa.BufferLength                              // s32
-	min_99_b := int32(externs{ϟs, ϟd, ϟl}.strlen(p.InfoLog)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_98_result := context              // Contextʳ
+	ctx := GetContext_98_result                  // Contextʳ
+	p := ctx.Instances.Programs.Get(ϟa.Program)  // Programʳ
+	min_99_a := ϟa.BufferLength                  // s32
+	min_99_b := int32(p.InfoLog.Count)           // s32
 	min_99_result := func() (result int32) {
 		switch (min_99_a) < (min_99_b) {
 		case true:

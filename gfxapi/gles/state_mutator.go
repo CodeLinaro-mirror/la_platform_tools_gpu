@@ -1109,6 +1109,11 @@ func (ϟa *GlGetActiveAttrib) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)) // s32
+	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	_ = l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1116,6 +1121,11 @@ func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)) // s32
+	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
+	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	_ = l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1174,9 +1184,9 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 				}
 			}()
 		case ShaderParameter_GL_INFO_LOG_LENGTH:
-			return int32(externs{ϟs, ϟd, ϟl}.strlen(s.InfoLog))
+			return int32(s.InfoLog.Count)
 		case ShaderParameter_GL_SHADER_SOURCE_LENGTH:
-			return int32(externs{ϟs, ϟd, ϟl}.strlen(s.Source))
+			return int32(len(s.Source))
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -2744,20 +2754,20 @@ func (ϟa *GlShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ctx := GetContext_86_result                                        // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)                          // Shaderʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		l := func() (result uint32) {
+		str := func() (result string) {
 			switch ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))) {
 			case true:
-				return externs{ϟs, ϟd, ϟl}.strlen(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
+				return string(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 			case false:
-				return uint32(lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
+				return string(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).Slice(uint64(int32(0)), uint64(lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)), ϟs).Read(ϟs, ϟd, ϟl))
 			default:
 				// TODO: better unmatched handling
 				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))), ϟa))
 				return result
 			}
-		}() // u32
-		s.Source += string(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).Slice(uint64(uint32(0)), uint64(l), ϟs).Read(ϟs, ϟd, ϟl))
-		_ = l
+		}() // string
+		s.Source += str
+		_ = str
 	}
 	_, _, _, _, _, _ = sources, lengths, context, GetContext_86_result, ctx, s
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -2776,12 +2786,12 @@ func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)             // Contextʳ
-	GetContext_87_result := context                          // Contextʳ
-	ctx := GetContext_87_result                              // Contextʳ
-	s := ctx.Instances.Shaders.Get(ϟa.Shader)                // Shaderʳ
-	min_88_a := ϟa.BufferLength                              // s32
-	min_88_b := int32(externs{ϟs, ϟd, ϟl}.strlen(s.InfoLog)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_87_result := context              // Contextʳ
+	ctx := GetContext_87_result                  // Contextʳ
+	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
+	min_88_a := ϟa.BufferLength                  // s32
+	min_88_b := int32(s.InfoLog.Count)           // s32
 	min_88_result := func() (result int32) {
 		switch (min_88_a) < (min_88_b) {
 		case true:
@@ -2805,12 +2815,12 @@ func (ϟa *GlGetShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_89_result := context                         // Contextʳ
-	ctx := GetContext_89_result                             // Contextʳ
-	s := ctx.Instances.Shaders.Get(ϟa.Shader)               // Shaderʳ
-	min_90_a := ϟa.BufferLength                             // s32
-	min_90_b := int32(externs{ϟs, ϟd, ϟl}.strlen(s.Source)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_89_result := context              // Contextʳ
+	ctx := GetContext_89_result                  // Contextʳ
+	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
+	min_90_a := ϟa.BufferLength                  // s32
+	min_90_b := int32(len(s.Source))             // s32
 	min_90_result := func() (result int32) {
 		switch (min_90_a) < (min_90_b) {
 		case true:
@@ -2953,12 +2963,12 @@ func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)             // Contextʳ
-	GetContext_98_result := context                          // Contextʳ
-	ctx := GetContext_98_result                              // Contextʳ
-	p := ctx.Instances.Programs.Get(ϟa.Program)              // Programʳ
-	min_99_a := ϟa.BufferLength                              // s32
-	min_99_b := int32(externs{ϟs, ϟd, ϟl}.strlen(p.InfoLog)) // s32
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_98_result := context              // Contextʳ
+	ctx := GetContext_98_result                  // Contextʳ
+	p := ctx.Instances.Programs.Get(ϟa.Program)  // Programʳ
+	min_99_a := ϟa.BufferLength                  // s32
+	min_99_b := int32(p.InfoLog.Count)           // s32
 	min_99_result := func() (result int32) {
 		switch (min_99_a) < (min_99_b) {
 		case true:

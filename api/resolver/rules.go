@@ -119,6 +119,9 @@ func castable(from semantic.Type, to semantic.Type) bool {
 	if fromIsSlice && toIsPointer && fromSlice.To == toPointer.To { // T[] -> T*
 		return equal(fromSlice.To, toPointer.To)
 	}
+	if fromIsPointer && fromPointer.To == semantic.CharType && to == semantic.StringType { // char* -> string
+		return true
+	}
 	if fromIsSlice && fromSlice.To == semantic.CharType && to == semantic.StringType { // char[] -> string
 		return true
 	}

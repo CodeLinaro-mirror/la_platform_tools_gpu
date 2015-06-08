@@ -35,11 +35,16 @@ cmd void cmd_make(u32 cnt) {
 }
 
 cmd void cmd_copy(u8* src, u32 cnt) {
+  buf = make!u8(cnt)
   copy(buf, src[0:cnt])
 }
 
 cmd void cmd_charslice_to_string(char* s, u32 len) {
   str = as!string(s[0:len])
+}
+
+cmd void cmd_charptr_to_string(char* s) {
+  str = as!string(s)
 }
 
 ////////////////////////////////////////////////////////////////

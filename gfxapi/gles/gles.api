@@ -16,7 +16,6 @@ import "glenum.api"
 
 alias map!(TextureUnit, map!(TextureTarget, TextureId)) TextureUnitMap
 
-extern u32    strlen(any s)
 extern u32    imageSize(u32 width, u32 height, TexelFormat format, TexelType type)
 extern s32    stateVariableSize(StateVariable v)
 
@@ -988,6 +987,11 @@ cmd void glGetActiveAttrib(ProgramId            program,
                            s32*                 vector_count,
                            ShaderAttribType*    type,
                            char*                name) {
+    l := as!s32(?)
+    buffer_bytes_written[0] = l
+    vector_count[0] = as!s32(?)
+    type[0] = as!ShaderAttribType(?)
+    write(name[0:l])
 }
 
 // TODO: This method cannot use UniformLocation as the location type
@@ -998,9 +1002,14 @@ cmd void glGetActiveUniform(ProgramId             program,
                             s32                   location,
                             s32                   buffer_size,
                             s32*                  buffer_bytes_written,
-                            s32*                  size,
+                            s32*                  vector_count,
                             ShaderUniformType*    type,
                             char*                 name) {
+    l := as!s32(?)
+    buffer_bytes_written[0] = l
+    vector_count[0] = as!s32(?)
+    type[0] = as!ShaderUniformType(?)
+    write(name[0:l])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml
@@ -1021,8 +1030,8 @@ cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, s32* value) {
       case GL_SHADER_TYPE:          as!s32(s.Type)
       case GL_DELETE_STATUS:        switch (s.Deletable) { case true: 1 case false: 0 }
       case GL_COMPILE_STATUS:       switch (s.Compiled)  { case true: 1 case false: 0 }
-      case GL_INFO_LOG_LENGTH:      as!s32(strlen(s.InfoLog))
-      case GL_SHADER_SOURCE_LENGTH: as!s32(strlen(s.Source))
+      case GL_INFO_LOG_LENGTH:      as!s32(len(s.InfoLog))
+      case GL_SHADER_SOURCE_LENGTH: as!s32(len(s.Source))
     }
 }
 
@@ -1949,13 +1958,13 @@ cmd void glShaderSource(ShaderId shader, s32 count, char** source, s32* length) 
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
     for i in (0 .. count) {
-        l := switch ((length == null) || (lengths[i] < 0)) {
-            case true:  strlen(sources[i])
-            case false: as!u32(lengths[i])
+        str := switch ((length == null) || (lengths[i] < 0)) {
+            case true:  as!string(sources[i])
+            case false: as!string(sources[i][0:lengths[i]])
         }
         // TODO: We should have a newline between sources to avoid unintentional
         // concatenation. The language currently does not support string literals.
-        s.Source += as!string(sources[i][0:l])
+        s.Source += str
     }
 }
 
@@ -1977,7 +1986,7 @@ cmd void glGetShaderInfoLog(ShaderId  shader,
                             char*     info) {
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
-    l := min(buffer_length, as!s32(strlen(s.InfoLog)))
+    l := min(buffer_length, as!s32(len(s.InfoLog)))
     copy(info[0:l], s.InfoLog[0:l])
     string_length_written[0] = l
 }
@@ -1989,7 +1998,7 @@ cmd void glGetShaderSource(ShaderId   shader,
                            char*      source) {
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
-    l := min(buffer_length, as!s32(strlen(s.Source)))
+    l := min(buffer_length, as!s32(len(s.Source)))
     copy(source[0:l], as!char[](s.Source)[0:l])
     string_length_written[0] = l
 }
@@ -2071,7 +2080,7 @@ cmd void glGetProgramInfoLog(ProgramId  program,
                              char*      info) {
     ctx := GetContext()
     p := ctx.Instances.Programs[program]
-    l := min(buffer_length, as!s32(strlen(p.InfoLog)))
+    l := min(buffer_length, as!s32(len(p.InfoLog)))
     copy(info[0:l], p.InfoLog[0:l])
     string_length_written[0] = l
 }

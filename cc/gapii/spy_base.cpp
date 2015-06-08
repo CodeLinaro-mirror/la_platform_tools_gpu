@@ -29,11 +29,11 @@ void SpyBase::init(std::shared_ptr<gapic::Encoder> encoder) {
     mEncoder = encoder;
 }
 
-void SpyBase::read(void* base, uint64_t size) {
+void SpyBase::read(const void* base, uint64_t size) {
     mReads.push_back(observe(base, size));
 }
 
-void SpyBase::write(void* base, uint64_t size) {
+void SpyBase::write(const void* base, uint64_t size) {
     mWrites.push_back(observe(base, size));
 }
 
@@ -50,7 +50,7 @@ void SpyBase::encodeObservations() {
     mWrites.clear();
 }
 
-SpyBase::Observation SpyBase::observe(void* base, uint64_t size) {
+SpyBase::Observation SpyBase::observe(const void* base, uint64_t size) {
     gapic::Id id = gapic::Id::Hash(base, size);
     if (mResources.count(id) == 0) {
         mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);

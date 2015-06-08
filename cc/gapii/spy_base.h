@@ -50,49 +50,68 @@ protected:
     typedef std::shared_ptr<gapic::Encoder> EncoderSPtr;
 
     // read is called to make a read memory observation of size bytes, starting at base.
-    void read(void* base, uint64_t size);
+    void read(const void* base, uint64_t size);
 
     // write is called to make a write memory observation of size bytes, starting at base.
-    void write(void* base, uint64_t size);
+    void write(const void* base, uint64_t size);
 
     // encodeObservations encodes all read and write observations to the encoder, and clears the
     // read and write lists.
     void encodeObservations();
 
+    // read observes the memory for the given slice as a read operation.
     template <typename T>
     inline void read(const Slice<T>& slice);
 
-    // Read reads and returns the i'th element from the slice src.
+    // read reads and returns the i'th element from the slice src.
     template <typename T>
     inline T read(const Slice<T>& src, uint64_t i);
 
+    // write observes the memory for the given slice as a write operation.
     template <typename T>
     inline void write(const Slice<T>& slice);
 
-    // Writes a value to i'th element in the slice dst.
+    // writes a value to i'th element in the slice dst.
     template <typename T>
     inline void write(const Slice<T>& dst, uint64_t i, T value);
 
+    // copy copies N elements from src to dst, where N is the smaller of src.count() and
+    // dst.count(). src is observed as a read operation and dst is observed as a write operation.
     template <typename T>
     inline void copy(const Slice<T>& dst, const Slice<T>& src);
 
+    // clone observes src as a read operation and returns a copy of src in a new Pool.
     template<typename T>
     inline Slice<T> clone(const Slice<T>& src);
 
+    // make constructs and returns a Slice backed by a new pool.
     template<typename T>
     inline Slice<T> make(uint64_t count) const;
 
+    // slice returns a slice wrapping the application-pool pointer src, starting at elements s
+    // ending at one element before e.
     template<typename T>
     inline Slice<T> slice(T* src, uint64_t s, uint64_t e) const;
 
+    // slice returns a slice wrapping the application-pool pointer src, starting at s bytes
+    // from src and ending at one byte before e.
     inline Slice<uint8_t> slice(void* src, uint64_t s, uint64_t e) const;
 
+    // slice returns a Slice<char>, backed by a new pool, holding a copy of the string src.
+    // src is observed as a read operation.
     inline Slice<char> slice(const std::string& src) const;
 
+    // slice returns a sub-slice of src, starting at elements s and ending at one element before e.
     template<typename T>
     inline Slice<T> slice(const Slice<T>& src, uint64_t s, uint64_t e) const;
 
-    inline std::string string(const Slice<char>& slice) const;
+    // string returns a std::string from the null-terminated string str.
+    // str is observed as a read operation.
+    inline std::string string(const char* str);
+
+    // string returns a std::string from the Slice<char> slice.
+    // slice is observed as a read operation.
+    inline std::string string(const Slice<char>& slice);
 
     ObservationList mReads;  // The list of read observations made by the spy.
     ObservationList mWrites; // The list of write observations made by the spy.
@@ -100,13 +119,13 @@ protected:
     EncoderSPtr mEncoder;    // The output stream encoder.
 
 private:
-    Observation observe(void* base, uint64_t size);
+    Observation observe(const void* base, uint64_t size);
 };
 
 template <typename T>
 inline void SpyBase::read(const Slice<T>& slice) {
     if (slice.isApplicationPool()) {
-        return read(slice.begin(), slice.count() * sizeof(T));
+        read(slice.begin(), slice.count() * sizeof(T));
     }
 }
 
@@ -183,7 +202,17 @@ inline Slice<T> SpyBase::slice(const Slice<T>& src, uint64_t s, uint64_t e) cons
     return src(s, e);
 }
 
-inline std::string SpyBase::string(const Slice<char>& slice) const {
+inline std::string SpyBase::string(const char* str) {
+    for (uint64_t i = 0; ; i++) {
+        if (str[i] == 0) {
+            read(str, i);
+            return std::string(str, str + i);
+        }
+    }
+}
+
+inline std::string SpyBase::string(const Slice<char>& slice) {
+    read(slice);
     return std::string(slice.begin(), slice.end());
 }
 

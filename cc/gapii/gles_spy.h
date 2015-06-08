@@ -107,8 +107,8 @@ public:
                                   int32_t* buffer_bytes_written, int32_t* vector_count,
                                   uint32_t* type, char* name);
     inline void glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
-                                   int32_t* buffer_bytes_written, int32_t* size, uint32_t* type,
-                                   char* name);
+                                   int32_t* buffer_bytes_written, int32_t* vector_count,
+                                   uint32_t* type, char* name);
     inline uint32_t glGetError();
     inline void glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value);
     inline void glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value);
@@ -1601,6 +1601,11 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
                                type, name);
 
     do {
+        int32_t l_l = (int32_t)(read(slice(buffer_bytes_written, 0, 1), 0));
+        write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+        write(slice(vector_count, 0, 1), 0, (int32_t)(read(slice(vector_count, 0, 1), 0)));
+        write(slice(type, 0, 1), 0, (uint32_t)(read(slice(type, 0, 1), 0)));
+        write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
 
     mEncoder->Uint16(53);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
@@ -1619,13 +1624,18 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
 }
 
 inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
-                                        int32_t* buffer_bytes_written, int32_t* size,
+                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                         uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveUniform()\n");
-    mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
-                                name);
+    mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
+                                type, name);
 
     do {
+        int32_t l_l = (int32_t)(read(slice(buffer_bytes_written, 0, 1), 0));
+        write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+        write(slice(vector_count, 0, 1), 0, (int32_t)(read(slice(vector_count, 0, 1), 0)));
+        write(slice(type, 0, 1), 0, (uint32_t)(read(slice(type, 0, 1), 0)));
+        write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
 
     mEncoder->Uint16(54);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_ID);
@@ -1635,7 +1645,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
     mEncoder->Int32(buffer_size);
     mEncoder->Uint64(reinterpret_cast<uint64_t>(buffer_bytes_written));
     mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(size));
+    mEncoder->Uint64(reinterpret_cast<uint64_t>(vector_count));
     mEncoder->Uint32(0);  // PoolID
     mEncoder->Uint64(reinterpret_cast<uint64_t>(type));
     mEncoder->Uint32(0);  // PoolID
@@ -1702,12 +1712,12 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
                                       :
                                       /* case ShaderParameter::GL_INFO_LOG_LENGTH: */ ((
                                               (parameter) == (ShaderParameter::GL_INFO_LOG_LENGTH)))
-                                              ? ((int32_t)(strlen(l_s->mInfoLog)))
+                                              ? (int32_t((l_s->mInfoLog.count())))
                                               :
                                               /* case ShaderParameter::GL_SHADER_SOURCE_LENGTH: */ (
                                                       ((parameter) ==
                                                        (ShaderParameter::GL_SHADER_SOURCE_LENGTH)))
-                                                      ? ((int32_t)(strlen(l_s->mSource)))
+                                                      ? (int32_t((l_s->mSource.size())))
                                                       :
                                                       /* default: */ 0 /* clang-format on */);
     } while (false);
@@ -3692,13 +3702,12 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
         std::shared_ptr<Context> l_ctx = l_GetContext_86_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         for (int32_t l_i = 0; l_i < count; ++l_i) {
-            uint32_t l_l = /* clang-format off */
+            std::string l_str = /* clang-format off */
             /* switch(length == nullptr || read(l_lengths, (uint64_t)(l_i)) < 0) */
-                /* case true: */(((length == nullptr || read(l_lengths, (uint64_t)(l_i)) < 0) == (true))) ? (strlen(read(l_sources, (uint64_t)(l_i)))) :
-                /* case false: */(((length == nullptr || read(l_lengths, (uint64_t)(l_i)) < 0) == (false))) ? ((uint32_t)(read(l_lengths, (uint64_t)(l_i)))) :
-                /* default: */ 0 /* clang-format on */;
-            l_s->mSource +=
-                    string(slice(read(l_sources, (uint64_t)(l_i)), (uint64_t)(0), (uint64_t)(l_l)));
+                /* case true: */(((length == nullptr || read(l_lengths, (uint64_t)(l_i)) < 0) == (true))) ? (string(read(l_sources, (uint64_t)(l_i)))) :
+                /* case false: */(((length == nullptr || read(l_lengths, (uint64_t)(l_i)) < 0) == (false))) ? (string(slice(read(l_sources, (uint64_t)(l_i)), (uint64_t)(0), (uint64_t)(read(l_lengths, (uint64_t)(l_i)))))) :
+                /* default: */ "" /* clang-format on */;
+            l_s->mSource += l_str;
         }
     } while (false);
 
@@ -3744,7 +3753,7 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
         std::shared_ptr<Context> l_ctx = l_GetContext_87_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         int32_t l_min_88_a = buffer_length;
-        int32_t l_min_88_b = (int32_t)(strlen(l_s->mInfoLog));
+        int32_t l_min_88_b = int32_t((l_s->mInfoLog.count()));
         int32_t l_min_88_result = /* clang-format off */
         /* switch(l_min_88_a < l_min_88_b) */
             /* case true: */(((l_min_88_a < l_min_88_b) == (true))) ? (l_min_88_a) :
@@ -3777,7 +3786,7 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
         std::shared_ptr<Context> l_ctx = l_GetContext_89_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         int32_t l_min_90_a = buffer_length;
-        int32_t l_min_90_b = (int32_t)(strlen(l_s->mSource));
+        int32_t l_min_90_b = int32_t((l_s->mSource.size()));
         int32_t l_min_90_result = /* clang-format off */
         /* switch(l_min_90_a < l_min_90_b) */
             /* case true: */(((l_min_90_a < l_min_90_b) == (true))) ? (l_min_90_a) :
@@ -3926,7 +3935,7 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
         std::shared_ptr<Context> l_ctx = l_GetContext_96_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         int32_t l_min_97_a = buffer_length;
-        int32_t l_min_97_b = l_p->mShaders.size();
+        int32_t l_min_97_b = int32_t((l_p->mShaders.size()));
         int32_t l_min_97_result = /* clang-format off */
         /* switch(l_min_97_a < l_min_97_b) */
             /* case true: */(((l_min_97_a < l_min_97_b) == (true))) ? (l_min_97_a) :
@@ -3969,7 +3978,7 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
         std::shared_ptr<Context> l_ctx = l_GetContext_98_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         int32_t l_min_99_a = buffer_length;
-        int32_t l_min_99_b = (int32_t)(strlen(l_p->mInfoLog));
+        int32_t l_min_99_b = int32_t((l_p->mInfoLog.count()));
         int32_t l_min_99_result = /* clang-format off */
         /* switch(l_min_99_a < l_min_99_b) */
             /* case true: */(((l_min_99_a < l_min_99_b) == (true))) ? (l_min_99_a) :
@@ -4344,7 +4353,8 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             std::shared_ptr<Context> l_ReadVertexArrays_114_ctx = l_ctx;
             uint32_t l_ReadVertexArrays_114_first_index = l_first;
             uint32_t l_ReadVertexArrays_114_last_index = l_last;
-            for (int32_t l_i = 0; l_i < l_ReadVertexArrays_114_ctx->mVertexAttributeArrays.size();
+            for (int32_t l_i = 0;
+                 l_i < int32_t((l_ReadVertexArrays_114_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
                         l_ReadVertexArrays_114_ctx
@@ -4383,7 +4393,8 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             std::shared_ptr<Context> l_ReadVertexArrays_116_ctx = l_ctx;
             uint32_t l_ReadVertexArrays_116_first_index = l_first;
             uint32_t l_ReadVertexArrays_116_last_index = l_last;
-            for (int32_t l_i = 0; l_i < l_ReadVertexArrays_116_ctx->mVertexAttributeArrays.size();
+            for (int32_t l_i = 0;
+                 l_i < int32_t((l_ReadVertexArrays_116_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
                         l_ReadVertexArrays_116_ctx
@@ -4448,8 +4459,8 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
         std::shared_ptr<Context> l_ReadVertexArrays_120_ctx = l_ctx;
         uint32_t l_ReadVertexArrays_120_first_index = (uint32_t)(first_index);
         uint32_t l_ReadVertexArrays_120_last_index = (uint32_t)(l_last_index);
-        for (int32_t l_i = 0; l_i < l_ReadVertexArrays_120_ctx->mVertexAttributeArrays.size();
-             ++l_i) {
+        for (int32_t l_i = 0;
+             l_i < int32_t((l_ReadVertexArrays_120_ctx->mVertexAttributeArrays.size())); ++l_i) {
             std::shared_ptr<VertexAttributeArray> l_arr =
                     l_ReadVertexArrays_120_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
             if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
