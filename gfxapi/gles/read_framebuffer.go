@@ -49,9 +49,7 @@ func (a readFramebufferDepth) Flags() atom.Flags                                
 func (a readFramebufferDepth) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 func (a readFramebufferDepth) Observations() *atom.Observations                          { return &atom.Observations{} }
 
-func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
-	defer b.EndAtom()
-
+func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	arch := gs.Architecture
 
 	s := getState(gs)
@@ -59,11 +57,11 @@ func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 
 	colorW, colorH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 	if err != nil {
-		return
+		return err
 	}
 	depthW, depthH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
 	if err != nil {
-		return
+		return err
 	}
 
 	const (
@@ -134,12 +132,12 @@ func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 	positionsData := store.Blob{Data: buffer.Bytes()}
 	positionsDataId, err := a.database.Store(&positionsData, log.Nop{})
 	if err != nil {
-		return
+		return err
 	}
 	indicesData := store.Blob{Data: []byte{0, 1, 2, 3}}
 	indicesDataId, err := a.database.Store(&indicesData, log.Nop{})
 	if err != nil {
-		return
+		return err
 	}
 
 	// Temporarily change rasterizing/blending state and enable VAP 0.
@@ -239,6 +237,7 @@ func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 		NewGlDeleteFramebuffers(1, memory.Tmp.Base).
 			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 	)
+	return nil
 }
 
 // readFramebufferColor is an atom used to postback the content of the currently
@@ -254,16 +253,14 @@ func (a readFramebufferColor) Flags() atom.Flags                                
 func (a readFramebufferColor) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 func (a readFramebufferColor) Observations() *atom.Observations                          { return &atom.Observations{} }
 
-func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
-	defer b.EndAtom()
-
+func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	arch := gs.Architecture
 
 	s := getState(gs)
 	c := s.getContext()
 	colorW, colorH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 	if err != nil {
-		return
+		return err
 	}
 
 	var (
@@ -309,6 +306,7 @@ func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 		)
 	}
+	return nil
 }
 
 func postColorData(i atom.ID, c *Context, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32) {

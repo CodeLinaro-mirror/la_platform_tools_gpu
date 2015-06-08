@@ -28,7 +28,7 @@ type Replayer interface {
 	// with identifier i, and graphics API state s. If the replay action will
 	// have an effect on the graphics driver state, then the call to Replay should
 	// also apply the corresponding changes to the state s.
-	Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder)
+	Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
 }
 
 // Replay issues replay operations to the replay builder b for the given atom a
@@ -41,17 +41,14 @@ func Replay(
 	s *gfxapi.State,
 	d database.Database,
 	l log.Logger,
-	b *builder.Builder) {
-
-	b.BeginAtom(i)
+	b *builder.Builder) error {
 
 	switch a := a.(type) {
 	case Replayer:
-		a.Replay(i, s, d, l, b)
+		return a.Replay(i, s, d, l, b)
 
 	default:
-		a.Mutate(s, d, l)
+		return a.Mutate(s, d, l)
 	}
 
-	b.EndAtom()
 }

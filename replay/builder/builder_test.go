@@ -24,7 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func TestEndAtom(t *testing.T) {
+func TestCommitAtom(t *testing.T) {
 	for _, test := range []struct {
 		name     string
 		f        func(*Builder)
@@ -37,7 +37,7 @@ func TestEndAtom(t *testing.T) {
 				b.Push(value.U8(1))
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 1})
 				b.Store(value.AbsolutePointer(0x10000))
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -52,7 +52,7 @@ func TestEndAtom(t *testing.T) {
 				b.BeginAtom(10)
 				b.Push(value.U8(1))
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 1})
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -65,7 +65,7 @@ func TestEndAtom(t *testing.T) {
 			func(b *Builder) {
 				b.BeginAtom(10)
 				b.Push(value.U32(12))
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -78,7 +78,7 @@ func TestEndAtom(t *testing.T) {
 				b.Push(value.U32(12))
 				b.Push(value.U32(34))
 				b.Push(value.U32(56))
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -90,7 +90,7 @@ func TestEndAtom(t *testing.T) {
 				b.BeginAtom(10)
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 0})
 				b.Clone(0)
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -105,7 +105,7 @@ func TestEndAtom(t *testing.T) {
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 0})
 				b.Clone(0)
 				b.Store(value.AbsolutePointer(0x10000))
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -120,7 +120,7 @@ func TestEndAtom(t *testing.T) {
 				b.BeginAtom(10)
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 0})
 				b.Clone(0)
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -138,7 +138,7 @@ func TestEndAtom(t *testing.T) {
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 0})
 				b.Clone(1)
 				b.Store(value.AbsolutePointer(0x10000))
-				b.EndAtom()
+				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -146,6 +146,58 @@ func TestEndAtom(t *testing.T) {
 				asm.Call{PushReturn: true, FunctionID: 123},
 				asm.Call{PushReturn: false, FunctionID: 123},
 				asm.Nop{},
+				asm.Store{Destination: value.AbsolutePointer(0x10000)},
+			},
+		},
+	} {
+		b := New(device.Architecture{
+			PointerAlignment: 4,
+			PointerSize:      4,
+			IntegerSize:      4,
+			ByteOrder:        endian.Little,
+		})
+		test.f(b)
+		if !asm.Check(t, b.instructions, test.expected) {
+			t.Errorf("Test '%s' failed:", test.name)
+		}
+	}
+}
+
+func TestRevertAtom(t *testing.T) {
+	for _, test := range []struct {
+		name     string
+		f        func(*Builder)
+		expected []asm.Instruction
+	}{
+		{
+			"Revert atom",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Push(value.U8(1))
+				b.Call(FunctionInfo{123, protocol.TypeUint8, 1})
+				b.Store(value.AbsolutePointer(0x10000))
+				b.RevertAtom()
+			},
+			[]asm.Instruction{},
+		},
+		{
+			"Commit atom, revert atom",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Push(value.U8(1))
+				b.Call(FunctionInfo{123, protocol.TypeUint8, 1})
+				b.Store(value.AbsolutePointer(0x10000))
+				b.CommitAtom()
+				b.BeginAtom(20)
+				b.Push(value.U8(2))
+				b.Call(FunctionInfo{234, protocol.TypeUint8, 1})
+				b.Store(value.AbsolutePointer(0x10000))
+				b.RevertAtom()
+			},
+			[]asm.Instruction{
+				asm.Label{Value: 10},
+				asm.Push{Value: value.U8(1)},
+				asm.Call{PushReturn: true, FunctionID: 123},
 				asm.Store{Destination: value.AbsolutePointer(0x10000)},
 			},
 		},

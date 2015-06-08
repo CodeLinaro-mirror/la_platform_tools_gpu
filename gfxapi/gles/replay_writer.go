@@ -332,7 +332,7 @@ func (c CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.St
 }
 
 var _ = replay.Replayer(&GlEnableClientState{}) // interface compliance check
-func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -346,10 +346,11 @@ func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Call(funcInfoGlEnableClientState)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDisableClientState{}) // interface compliance check
-func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -363,10 +364,11 @@ func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Call(funcInfoGlDisableClientState)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetProgramBinaryOES{}) // interface compliance check
-func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -388,10 +390,11 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Binary.value())
 	ϟb.Call(funcInfoGlGetProgramBinaryOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlProgramBinaryOES{}) // interface compliance check
-func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -407,10 +410,11 @@ func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(value.S32(ϟa.BinarySize))
 	ϟb.Call(funcInfoGlProgramBinaryOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlStartTilingQCOM{}) // interface compliance check
-func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -423,10 +427,11 @@ func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.U32(ϟa.PreserveMask))
 	ϟb.Call(funcInfoGlStartTilingQCOM)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEndTilingQCOM{}) // interface compliance check
-func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -435,10 +440,11 @@ func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.U32(ϟa.PreserveMask))
 	ϟb.Call(funcInfoGlEndTilingQCOM)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDiscardFramebufferEXT{}) // interface compliance check
-func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -449,10 +455,11 @@ func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(ϟa.Attachments.value())
 	ϟb.Call(funcInfoGlDiscardFramebufferEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlInsertEventMarkerEXT{}) // interface compliance check
-func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -462,10 +469,11 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟb.String(ϟa.Marker))
 	ϟb.Call(funcInfoGlInsertEventMarkerEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlPushGroupMarkerEXT{}) // interface compliance check
-func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -475,10 +483,11 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟb.String(ϟa.Marker))
 	ϟb.Call(funcInfoGlPushGroupMarkerEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlPopGroupMarkerEXT{}) // interface compliance check
-func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -486,10 +495,11 @@ func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlPopGroupMarkerEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexStorage1DEXT{}) // interface compliance check
-func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -501,10 +511,11 @@ func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.S32(ϟa.Width))
 	ϟb.Call(funcInfoGlTexStorage1DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexStorage2DEXT{}) // interface compliance check
-func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -517,10 +528,11 @@ func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlTexStorage2DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexStorage3DEXT{}) // interface compliance check
-func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -534,10 +546,11 @@ func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.S32(ϟa.Depth))
 	ϟb.Call(funcInfoGlTexStorage3DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTextureStorage1DEXT{}) // interface compliance check
-func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -554,10 +567,11 @@ func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.S32(ϟa.Width))
 	ϟb.Call(funcInfoGlTextureStorage1DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTextureStorage2DEXT{}) // interface compliance check
-func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -575,10 +589,11 @@ func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlTextureStorage2DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTextureStorage3DEXT{}) // interface compliance check
-func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -597,10 +612,11 @@ func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.S32(ϟa.Depth))
 	ϟb.Call(funcInfoGlTextureStorage3DEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenVertexArraysOES{}) // interface compliance check
-func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -625,10 +641,11 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlGenVertexArraysOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindVertexArrayOES{}) // interface compliance check
-func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -653,10 +670,11 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	}
 	ϟb.Call(funcInfoGlBindVertexArrayOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteVertexArraysOES{}) // interface compliance check
-func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -674,10 +692,11 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlDeleteVertexArraysOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsVertexArrayOES{}) // interface compliance check
-func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -695,10 +714,11 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	}
 	ϟb.Call(funcInfoGlIsVertexArrayOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEGLImageTargetTexture2DOES{}) // interface compliance check
-func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -708,10 +728,11 @@ func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEGLImageTargetTexture2DOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEGLImageTargetRenderbufferStorageOES{}) // interface compliance check
-func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -721,10 +742,11 @@ func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxa
 	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEGLImageTargetRenderbufferStorageOES)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetGraphicsResetStatusEXT{}) // interface compliance check
-func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -733,10 +755,11 @@ func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlGetGraphicsResetStatusEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindAttribLocation{}) // interface compliance check
-func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -757,10 +780,11 @@ func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlBindAttribLocation)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlendFunc{}) // interface compliance check
-func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -778,10 +802,11 @@ func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.U32(ϟa.DstFactor))
 	ϟb.Call(funcInfoGlBlendFunc)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlendFuncSeparate{}) // interface compliance check
-func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -801,10 +826,11 @@ func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(value.U32(ϟa.DstFactorAlpha))
 	ϟb.Call(funcInfoGlBlendFuncSeparate)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlendEquation{}) // interface compliance check
-func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -819,10 +845,11 @@ func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.U32(ϟa.Equation))
 	ϟb.Call(funcInfoGlBlendEquation)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlendEquationSeparate{}) // interface compliance check
-func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -838,10 +865,11 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(value.U32(ϟa.Alpha))
 	ϟb.Call(funcInfoGlBlendEquationSeparate)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlendColor{}) // interface compliance check
-func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -866,10 +894,11 @@ func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(value.F32(ϟa.Alpha))
 	ϟb.Call(funcInfoGlBlendColor)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEnableVertexAttribArray{}) // interface compliance check
-func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -883,10 +912,11 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlEnableVertexAttribArray)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDisableVertexAttribArray{}) // interface compliance check
-func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -900,10 +930,11 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDisableVertexAttribArray)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttribPointer{}) // interface compliance check
-func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -928,10 +959,11 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribPointer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetActiveAttrib{}) // interface compliance check
-func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -956,10 +988,11 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveAttrib)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetActiveUniform{}) // interface compliance check
-func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -984,10 +1017,11 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveUniform)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetError{}) // interface compliance check
-func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -996,10 +1030,11 @@ func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlGetError)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetProgramiv{}) // interface compliance check
-func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1015,10 +1050,11 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetProgramiv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetShaderiv{}) // interface compliance check
-func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1078,10 +1114,11 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetShaderiv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetUniformLocation{}) // interface compliance check
-func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1096,10 +1133,11 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlGetUniformLocation)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetAttribLocation{}) // interface compliance check
-func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1114,10 +1152,11 @@ func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlGetAttribLocation)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlPixelStorei{}) // interface compliance check
-func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1132,10 +1171,11 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.Call(funcInfoGlPixelStorei)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexParameteri{}) // interface compliance check
-func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1176,10 +1216,11 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.Call(funcInfoGlTexParameteri)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexParameterf{}) // interface compliance check
-func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1220,10 +1261,11 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.F32(ϟa.Value))
 	ϟb.Call(funcInfoGlTexParameterf)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetTexParameteriv{}) // interface compliance check
-func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1266,10 +1308,11 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetTexParameteriv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetTexParameterfv{}) // interface compliance check
-func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1312,10 +1355,11 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetTexParameterfv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform1i{}) // interface compliance check
-func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1338,10 +1382,11 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.Call(funcInfoGlUniform1i)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform2i{}) // interface compliance check
-func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1371,10 +1416,11 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value1))
 	ϟb.Call(funcInfoGlUniform2i)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform3i{}) // interface compliance check
-func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1406,10 +1452,11 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value2))
 	ϟb.Call(funcInfoGlUniform3i)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform4i{}) // interface compliance check
-func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1443,10 +1490,11 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value3))
 	ϟb.Call(funcInfoGlUniform4i)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform1iv{}) // interface compliance check
-func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1470,10 +1518,11 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform1iv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform2iv{}) // interface compliance check
-func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1504,10 +1553,11 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform2iv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform3iv{}) // interface compliance check
-func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1539,10 +1589,11 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform3iv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform4iv{}) // interface compliance check
-func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1575,10 +1626,11 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform4iv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform1f{}) // interface compliance check
-func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1601,10 +1653,11 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value))
 	ϟb.Call(funcInfoGlUniform1f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform2f{}) // interface compliance check
-func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1634,10 +1687,11 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value1))
 	ϟb.Call(funcInfoGlUniform2f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform3f{}) // interface compliance check
-func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1669,10 +1723,11 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value2))
 	ϟb.Call(funcInfoGlUniform3f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform4f{}) // interface compliance check
-func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1706,10 +1761,11 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value3))
 	ϟb.Call(funcInfoGlUniform4f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform1fv{}) // interface compliance check
-func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1734,10 +1790,11 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform1fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform2fv{}) // interface compliance check
-func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1768,10 +1825,11 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform2fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform3fv{}) // interface compliance check
-func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1803,10 +1861,11 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform3fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniform4fv{}) // interface compliance check
-func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1839,10 +1898,11 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlUniform4fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniformMatrix2fv{}) // interface compliance check
-func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1886,10 +1946,11 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniformMatrix2fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniformMatrix3fv{}) // interface compliance check
-func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -1943,10 +2004,11 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniformMatrix3fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUniformMatrix4fv{}) // interface compliance check
-func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2011,10 +2073,11 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniformMatrix4fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetUniformfv{}) // interface compliance check
-func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2033,10 +2096,11 @@ func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetUniformfv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetUniformiv{}) // interface compliance check
-func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2055,10 +2119,11 @@ func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetUniformiv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib1f{}) // interface compliance check
-func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2068,10 +2133,11 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.F32(ϟa.Value0))
 	ϟb.Call(funcInfoGlVertexAttrib1f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib2f{}) // interface compliance check
-func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2082,10 +2148,11 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.F32(ϟa.Value1))
 	ϟb.Call(funcInfoGlVertexAttrib2f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib3f{}) // interface compliance check
-func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2097,10 +2164,11 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.F32(ϟa.Value2))
 	ϟb.Call(funcInfoGlVertexAttrib3f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib4f{}) // interface compliance check
-func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2113,10 +2181,11 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.F32(ϟa.Value3))
 	ϟb.Call(funcInfoGlVertexAttrib4f)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib1fv{}) // interface compliance check
-func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2127,10 +2196,11 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib1fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib2fv{}) // interface compliance check
-func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2141,10 +2211,11 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib2fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib3fv{}) // interface compliance check
-func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2155,10 +2226,11 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib3fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlVertexAttrib4fv{}) // interface compliance check
-func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2169,10 +2241,11 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib4fv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetShaderPrecisionFormat{}) // interface compliance check
-func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2186,10 +2259,11 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟb.Push(ϟa.Precision.value())
 	ϟb.Call(funcInfoGlGetShaderPrecisionFormat)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDepthMask{}) // interface compliance check
-func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2203,10 +2277,11 @@ func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.Bool(ϟa.Enabled))
 	ϟb.Call(funcInfoGlDepthMask)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDepthFunc{}) // interface compliance check
-func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2220,10 +2295,11 @@ func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.U32(ϟa.Function))
 	ϟb.Call(funcInfoGlDepthFunc)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDepthRangef{}) // interface compliance check
-func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2239,10 +2315,11 @@ func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.F32(ϟa.Far))
 	ϟb.Call(funcInfoGlDepthRangef)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlColorMask{}) // interface compliance check
-func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2262,10 +2339,11 @@ func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.Bool(ϟa.Alpha))
 	ϟb.Call(funcInfoGlColorMask)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlStencilMask{}) // interface compliance check
-func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2280,10 +2358,11 @@ func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.Call(funcInfoGlStencilMask)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlStencilMaskSeparate{}) // interface compliance check
-func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2310,10 +2389,11 @@ func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.Call(funcInfoGlStencilMaskSeparate)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlStencilFuncSeparate{}) // interface compliance check
-func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2325,10 +2405,11 @@ func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.S32(ϟa.Mask))
 	ϟb.Call(funcInfoGlStencilFuncSeparate)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlStencilOpSeparate{}) // interface compliance check
-func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2340,10 +2421,11 @@ func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(value.U32(ϟa.StencilPassDepthPass))
 	ϟb.Call(funcInfoGlStencilOpSeparate)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlFrontFace{}) // interface compliance check
-func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2357,10 +2439,11 @@ func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.U32(ϟa.Orientation))
 	ϟb.Call(funcInfoGlFrontFace)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlViewport{}) // interface compliance check
-func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2385,10 +2468,11 @@ func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlViewport)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlScissor{}) // interface compliance check
-func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2413,10 +2497,11 @@ func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlScissor)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlActiveTexture{}) // interface compliance check
-func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2433,10 +2518,11 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.U32(ϟa.Unit))
 	ϟb.Call(funcInfoGlActiveTexture)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenTextures{}) // interface compliance check
-func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2461,10 +2547,11 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(ϟa.Textures.value())
 	ϟb.Call(funcInfoGlGenTextures)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteTextures{}) // interface compliance check
-func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2482,10 +2569,11 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Textures.value())
 	ϟb.Call(funcInfoGlDeleteTextures)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsTexture{}) // interface compliance check
-func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2503,10 +2591,11 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}
 	ϟb.Call(funcInfoGlIsTexture)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindTexture{}) // interface compliance check
-func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2532,10 +2621,11 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Call(funcInfoGlBindTexture)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexImage2D{}) // interface compliance check
-func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2610,10 +2700,11 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlTexSubImage2D{}) // interface compliance check
-func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2680,10 +2771,11 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexSubImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCopyTexImage2D{}) // interface compliance check
-func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2699,10 +2791,11 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.S32(ϟa.Border))
 	ϟb.Call(funcInfoGlCopyTexImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCopyTexSubImage2D{}) // interface compliance check
-func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2718,10 +2811,11 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlCopyTexSubImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCompressedTexImage2D{}) // interface compliance check
-func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2787,10 +2881,11 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCompressedTexSubImage2D{}) // interface compliance check
-func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2807,10 +2902,11 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCompressedTexSubImage2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenerateMipmap{}) // interface compliance check
-func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2819,10 +2915,11 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlGenerateMipmap)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlReadPixels{}) // interface compliance check
-func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2838,10 +2935,11 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value())
 	ϟb.Call(funcInfoGlReadPixels)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenFramebuffers{}) // interface compliance check
-func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2866,10 +2964,11 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Framebuffers.value())
 	ϟb.Call(funcInfoGlGenFramebuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindFramebuffer{}) // interface compliance check
-func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2900,10 +2999,11 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Call(funcInfoGlBindFramebuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCheckFramebufferStatus{}) // interface compliance check
-func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2913,10 +3013,11 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlCheckFramebufferStatus)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteFramebuffers{}) // interface compliance check
-func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2934,10 +3035,11 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Framebuffers.value())
 	ϟb.Call(funcInfoGlDeleteFramebuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsFramebuffer{}) // interface compliance check
-func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2955,10 +3057,11 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlIsFramebuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenRenderbuffers{}) // interface compliance check
-func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -2983,10 +3086,11 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Renderbuffers.value())
 	ϟb.Call(funcInfoGlGenRenderbuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindRenderbuffer{}) // interface compliance check
-func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3012,10 +3116,11 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	}
 	ϟb.Call(funcInfoGlBindRenderbuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlRenderbufferStorage{}) // interface compliance check
-func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3036,10 +3141,11 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlRenderbufferStorage)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteRenderbuffers{}) // interface compliance check
-func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3057,10 +3163,11 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Renderbuffers.value())
 	ϟb.Call(funcInfoGlDeleteRenderbuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsRenderbuffer{}) // interface compliance check
-func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3078,10 +3185,11 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	}
 	ϟb.Call(funcInfoGlIsRenderbuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetRenderbufferParameteriv{}) // interface compliance check
-func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3112,10 +3220,11 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetRenderbufferParameteriv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenBuffers{}) // interface compliance check
-func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3140,10 +3249,11 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Buffers.value())
 	ϟb.Call(funcInfoGlGenBuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBindBuffer{}) // interface compliance check
-func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3169,10 +3279,11 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlBindBuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBufferData{}) // interface compliance check
-func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3204,10 +3315,11 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(value.U32(ϟa.Usage))
 	ϟb.Call(funcInfoGlBufferData)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBufferSubData{}) // interface compliance check
-func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3220,10 +3332,11 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Data.value())
 	ϟb.Call(funcInfoGlBufferSubData)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteBuffers{}) // interface compliance check
-func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3241,10 +3354,11 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Buffers.value())
 	ϟb.Call(funcInfoGlDeleteBuffers)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsBuffer{}) // interface compliance check
-func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3262,10 +3376,11 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Call(funcInfoGlIsBuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetBufferParameteriv{}) // interface compliance check
-func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3294,10 +3409,11 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetBufferParameteriv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCreateShader{}) // interface compliance check
-func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3319,10 +3435,11 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Call(funcInfoGlCreateShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteShader{}) // interface compliance check
-func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3342,10 +3459,11 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	}
 	ϟb.Call(funcInfoGlDeleteShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlShaderSource{}) // interface compliance check
-func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3384,10 +3502,11 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Length.value())
 	ϟb.Call(funcInfoGlShaderSource)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlShaderBinary{}) // interface compliance check
-func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3402,10 +3521,11 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.S32(ϟa.BinarySize))
 	ϟb.Call(funcInfoGlShaderBinary)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetShaderInfoLog{}) // interface compliance check
-func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3443,10 +3563,11 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Info.value())
 	ϟb.Call(funcInfoGlGetShaderInfoLog)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetShaderSource{}) // interface compliance check
-func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3484,10 +3605,11 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Source.value())
 	ϟb.Call(funcInfoGlGetShaderSource)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlReleaseShaderCompiler{}) // interface compliance check
-func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3495,10 +3617,11 @@ func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlReleaseShaderCompiler)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCompileShader{}) // interface compliance check
-func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3511,10 +3634,11 @@ func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlCompileShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsShader{}) // interface compliance check
-func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3532,10 +3656,11 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Call(funcInfoGlIsShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCreateProgram{}) // interface compliance check
-func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3554,10 +3679,11 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlCreateProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteProgram{}) // interface compliance check
-func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3575,10 +3701,11 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlDeleteProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlAttachShader{}) // interface compliance check
-func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3603,10 +3730,11 @@ func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	}
 	ϟb.Call(funcInfoGlAttachShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDetachShader{}) // interface compliance check
-func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3631,10 +3759,11 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	}
 	ϟb.Call(funcInfoGlDetachShader)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetAttachedShaders{}) // interface compliance check
-func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3671,10 +3800,11 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Shaders.value())
 	ϟb.Call(funcInfoGlGetAttachedShaders)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlLinkProgram{}) // interface compliance check
-func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3687,10 +3817,11 @@ func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Call(funcInfoGlLinkProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetProgramInfoLog{}) // interface compliance check
-func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3728,10 +3859,11 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Info.value())
 	ϟb.Call(funcInfoGlGetProgramInfoLog)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUseProgram{}) // interface compliance check
-func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3749,10 +3881,11 @@ func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlUseProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsProgram{}) // interface compliance check
-func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3770,10 +3903,11 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}
 	ϟb.Call(funcInfoGlIsProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlValidateProgram{}) // interface compliance check
-func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3786,10 +3920,11 @@ func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Call(funcInfoGlValidateProgram)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlClearColor{}) // interface compliance check
-func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3814,10 +3949,11 @@ func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(value.F32(ϟa.A))
 	ϟb.Call(funcInfoGlClearColor)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlClearDepthf{}) // interface compliance check
-func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3831,10 +3967,11 @@ func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.F32(ϟa.Depth))
 	ϟb.Call(funcInfoGlClearDepthf)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlClearStencil{}) // interface compliance check
-func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3848,10 +3985,11 @@ func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.S32(ϟa.Stencil))
 	ϟb.Call(funcInfoGlClearStencil)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlClear{}) // interface compliance check
-func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3862,10 +4000,11 @@ func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.Call(funcInfoGlClear)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlCullFace{}) // interface compliance check
-func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3879,10 +4018,11 @@ func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Call(funcInfoGlCullFace)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlPolygonOffset{}) // interface compliance check
-func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3898,10 +4038,11 @@ func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.F32(ϟa.Units))
 	ϟb.Call(funcInfoGlPolygonOffset)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlLineWidth{}) // interface compliance check
-func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3915,10 +4056,11 @@ func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Width))
 	ϟb.Call(funcInfoGlLineWidth)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlSampleCoverage{}) // interface compliance check
-func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3934,10 +4076,11 @@ func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.Bool(ϟa.Invert))
 	ϟb.Call(funcInfoGlSampleCoverage)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlHint{}) // interface compliance check
-func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -3952,10 +4095,11 @@ func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Call(funcInfoGlHint)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlFramebufferRenderbuffer{}) // interface compliance check
-func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4001,10 +4145,11 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	}
 	ϟb.Call(funcInfoGlFramebufferRenderbuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlFramebufferTexture2D{}) // interface compliance check
-func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4075,10 +4220,11 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(value.S32(ϟa.Level))
 	ϟb.Call(funcInfoGlFramebufferTexture2D)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetFramebufferAttachmentParameteriv{}) // interface compliance check
-func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4127,10 +4273,11 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetFramebufferAttachmentParameteriv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDrawElements{}) // interface compliance check
-func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4282,10 +4429,11 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawElements)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDrawArrays{}) // interface compliance check
-func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4354,10 +4502,11 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(value.S32(ϟa.IndexCount))
 	ϟb.Call(funcInfoGlDrawArrays)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlFlush{}) // interface compliance check
-func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4365,10 +4514,11 @@ func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlFlush)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlFinish{}) // interface compliance check
-func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4376,10 +4526,11 @@ func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoGlFinish)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetBooleanv{}) // interface compliance check
-func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4431,10 +4582,11 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetBooleanv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetFloatv{}) // interface compliance check
-func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4481,10 +4633,11 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetFloatv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetIntegerv{}) // interface compliance check
-func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4650,10 +4803,11 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlGetIntegerv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetString{}) // interface compliance check
-func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4663,10 +4817,11 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Call(funcInfoGlGetString)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEnable{}) // interface compliance check
-func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4680,10 +4835,11 @@ func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlEnable)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDisable{}) // interface compliance check
-func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4697,10 +4853,11 @@ func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlDisable)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsEnabled{}) // interface compliance check
-func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4714,10 +4871,11 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.Call(funcInfoGlIsEnabled)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlMapBufferRange{}) // interface compliance check
-func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4730,10 +4888,11 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.U32(ϟa.Access))
 	ϟb.Call(funcInfoGlMapBufferRange)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlUnmapBuffer{}) // interface compliance check
-func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4742,10 +4901,11 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlUnmapBuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlInvalidateFramebuffer{}) // interface compliance check
-func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4756,10 +4916,11 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(ϟa.Attachments.value())
 	ϟb.Call(funcInfoGlInvalidateFramebuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlRenderbufferStorageMultisample{}) // interface compliance check
-func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4772,10 +4933,11 @@ func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.Call(funcInfoGlRenderbufferStorageMultisample)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBlitFramebuffer{}) // interface compliance check
-func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4793,10 +4955,11 @@ func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.U32(ϟa.Filter))
 	ϟb.Call(funcInfoGlBlitFramebuffer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenQueries{}) // interface compliance check
-func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4821,10 +4984,11 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlGenQueries)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBeginQuery{}) // interface compliance check
-func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4838,10 +5002,11 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlBeginQuery)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEndQuery{}) // interface compliance check
-func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4850,10 +5015,11 @@ func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlEndQuery)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteQueries{}) // interface compliance check
-func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4871,10 +5037,11 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlDeleteQueries)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsQuery{}) // interface compliance check
-func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4892,10 +5059,11 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	}
 	ϟb.Call(funcInfoGlIsQuery)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryiv{}) // interface compliance check
-func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4907,10 +5075,11 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryiv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryObjectuiv{}) // interface compliance check
-func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4926,10 +5095,11 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectuiv)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGenQueriesEXT{}) // interface compliance check
-func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4954,10 +5124,11 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlGenQueriesEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlBeginQueryEXT{}) // interface compliance check
-func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4971,10 +5142,11 @@ func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Call(funcInfoGlBeginQueryEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlEndQueryEXT{}) // interface compliance check
-func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -4983,10 +5155,11 @@ func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlEndQueryEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlDeleteQueriesEXT{}) // interface compliance check
-func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5004,10 +5177,11 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlDeleteQueriesEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlIsQueryEXT{}) // interface compliance check
-func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5025,10 +5199,11 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlIsQueryEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlQueryCounterEXT{}) // interface compliance check
-func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5042,10 +5217,11 @@ func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlQueryCounterEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryivEXT{}) // interface compliance check
-func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5057,10 +5233,11 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryivEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryObjectivEXT{}) // interface compliance check
-func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5076,10 +5253,11 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectivEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryObjectuivEXT{}) // interface compliance check
-func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5095,10 +5273,11 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectuivEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryObjecti64vEXT{}) // interface compliance check
-func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5114,10 +5293,11 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjecti64vEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&GlGetQueryObjectui64vEXT{}) // interface compliance check
-func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5133,10 +5313,11 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlGetQueryObjectui64vEXT)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&ReplayCreateRenderer{}) // interface compliance check
-func (ϟa *ReplayCreateRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *ReplayCreateRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5145,10 +5326,11 @@ func (ϟa *ReplayCreateRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(value.U32(ϟa.Id))
 	ϟb.Call(funcInfoReplayCreateRenderer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&ReplayBindRenderer{}) // interface compliance check
-func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5157,10 +5339,11 @@ func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(value.U32(ϟa.Id))
 	ϟb.Call(funcInfoReplayBindRenderer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&BackbufferInfo{}) // interface compliance check
-func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5200,10 +5383,11 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.Bool(ϟa.ResetViewportScissor))
 	ϟb.Call(funcInfoBackbufferInfo)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&StartTimer{}) // interface compliance check
-func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5212,10 +5396,11 @@ func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(value.U8(ϟa.Index))
 	ϟb.Call(funcInfoStartTimer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&StopTimer{}) // interface compliance check
-func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5225,10 +5410,11 @@ func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U8(ϟa.Index))
 	ϟb.Call(funcInfoStopTimer)
 	ϟp.exec()
+	return nil
 }
 
 var _ = replay.Replayer(&FlushPostBuffer{}) // interface compliance check
-func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
 	ϟc := getState(ϟs)
 	ϟp := &postCall{}
 	_ = ϟc
@@ -5236,6 +5422,7 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoFlushPostBuffer)
 	ϟp.exec()
+	return nil
 }
 func (p Voidᵖ) value() value.Pointer {
 	if p.Address != 0 {
