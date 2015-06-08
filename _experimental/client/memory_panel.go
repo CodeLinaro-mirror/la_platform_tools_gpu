@@ -32,7 +32,9 @@ func CreateMemoryPanelReinterpretButtons(
 		U8(0), S8(0),
 		U16(0), S16(0),
 		U32(0), S32(0),
+		U64(0), S64(0),
 		F32(0), F64(0),
+		ASCII(0),
 	} {
 		t := t
 		modes = append(modes, t.Name())
