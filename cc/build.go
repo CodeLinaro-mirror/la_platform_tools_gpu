@@ -401,6 +401,9 @@ func getBuildTargets() map[string]Target {
 	noext := ""
 
 	linux := base(gcc.GCC, "linux", "x64").Extend(Target{
+		GapicTests: cpp.Config{
+			Libraries: build.FileSet{"pthread"},
+		},
 		GapirTests: cpp.Config{
 			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
 		},
