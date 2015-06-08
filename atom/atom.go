@@ -15,6 +15,8 @@
 // Package atom provides the fundamental types used to describe a capture stream.
 package atom
 
+// binary: cpp = atom
+
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"

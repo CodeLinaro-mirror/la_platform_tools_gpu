@@ -14,7 +14,7 @@ namespace coder {
 namespace gles {
     class Architecture: public Encodable {
     public:
-        Architecture(atom.Observations observations, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
+        Architecture(atom::Observations observations, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
             mobservations(observations),
             mPointerAlignment(PointerAlignment),
             mPointerSize(PointerSize),
@@ -32,7 +32,7 @@ namespace gles {
             e->Bool(this->mLittleEndian);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint32_t mPointerAlignment;
         uint32_t mPointerSize;
         uint32_t mIntegerSize;
@@ -41,7 +41,7 @@ namespace gles {
 
     class BackbufferInfo: public Encodable {
     public:
-        BackbufferInfo(atom.Observations observations, int32_t Width, int32_t Height, RenderbufferFormat ColorFmt, RenderbufferFormat DepthFmt, RenderbufferFormat StencilFmt, bool ResetViewportScissor) :
+        BackbufferInfo(atom::Observations observations, int32_t Width, int32_t Height, RenderbufferFormat ColorFmt, RenderbufferFormat DepthFmt, RenderbufferFormat StencilFmt, bool ResetViewportScissor) :
             mobservations(observations),
             mWidth(Width),
             mHeight(Height),
@@ -63,7 +63,7 @@ namespace gles {
             e->Bool(this->mResetViewportScissor);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mWidth;
         int32_t mHeight;
         RenderbufferFormat mColorFmt;
@@ -74,7 +74,7 @@ namespace gles {
 
     class Color: public Encodable {
     public:
-        Color(atom.ID CreatedAt, float Red, float Green, float Blue, float Alpha) :
+        Color(atom::ID CreatedAt, float Red, float Green, float Blue, float Alpha) :
             mCreatedAt(CreatedAt),
             mRed(Red),
             mGreen(Green),
@@ -92,7 +92,7 @@ namespace gles {
             e->Float32(this->mAlpha);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         float mRed;
         float mGreen;
         float mBlue;
@@ -101,7 +101,7 @@ namespace gles {
 
     class BlendState: public Encodable {
     public:
-        BlendState(atom.ID CreatedAt, BlendFactor SrcRgbBlendFactor, BlendFactor SrcAlphaBlendFactor, BlendFactor DstRgbBlendFactor, BlendFactor DstAlphaBlendFactor, BlendEquation BlendEquationRgb, BlendEquation BlendEquationAlpha, Color BlendColor) :
+        BlendState(atom::ID CreatedAt, BlendFactor SrcRgbBlendFactor, BlendFactor SrcAlphaBlendFactor, BlendFactor DstRgbBlendFactor, BlendFactor DstAlphaBlendFactor, BlendEquation BlendEquationRgb, BlendEquation BlendEquationAlpha, Color BlendColor) :
             mCreatedAt(CreatedAt),
             mSrcRgbBlendFactor(SrcRgbBlendFactor),
             mSrcAlphaBlendFactor(SrcAlphaBlendFactor),
@@ -125,7 +125,7 @@ namespace gles {
             e->Value(&this->mBlendColor);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         BlendFactor mSrcRgbBlendFactor;
         BlendFactor mSrcAlphaBlendFactor;
         BlendFactor mDstRgbBlendFactor;
@@ -135,9 +135,9 @@ namespace gles {
         Color mBlendColor;
     };
 
-    class Boolˢ: public Encodable {
+    class Bool__S: public Encodable {
     public:
-        Boolˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        Bool__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -153,15 +153,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class Boolᵖ: public Encodable {
+    class Bool__P: public Encodable {
     public:
-        Boolᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        Bool__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -173,13 +173,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class U8ˢ: public Encodable {
+    class U8__S: public Encodable {
     public:
-        U8ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        U8__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -195,15 +195,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
     class Buffer: public Encodable {
     public:
-        Buffer(atom.ID CreatedAt, U8ˢ Data, int32_t Size, BufferUsage Usage) :
+        Buffer(atom::ID CreatedAt, U8__S Data, int32_t Size, BufferUsage Usage) :
             mCreatedAt(CreatedAt),
             mData(Data),
             mSize(Size),
@@ -219,15 +219,15 @@ namespace gles {
             e->Uint32(this->mUsage);
         }
 
-        atom.ID mCreatedAt;
-        U8ˢ mData;
+        atom::ID mCreatedAt;
+        U8__S mData;
         int32_t mSize;
         BufferUsage mUsage;
     };
 
     class BufferDataPointer: public Encodable {
     public:
-        BufferDataPointer(memory.Pointer Address, memory.PoolID Pool) :
+        BufferDataPointer(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -239,13 +239,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class BufferIdˢ: public Encodable {
+    class BufferId__S: public Encodable {
     public:
-        BufferIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        BufferId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -261,15 +261,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class BufferIdᵖ: public Encodable {
+    class BufferId__P: public Encodable {
     public:
-        BufferIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        BufferId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -281,13 +281,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class CGLContextObj: public Encodable {
     public:
-        CGLContextObj(memory.Pointer Address, memory.PoolID Pool) :
+        CGLContextObj(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -299,13 +299,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class CGLContextObjˢ: public Encodable {
+    class CGLContextObj__S: public Encodable {
     public:
-        CGLContextObjˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        CGLContextObj__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -321,15 +321,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class CGLContextObjᵖ: public Encodable {
+    class CGLContextObj__P: public Encodable {
     public:
-        CGLContextObjᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        CGLContextObj__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -341,13 +341,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class CGLPixelFormatObj: public Encodable {
     public:
-        CGLPixelFormatObj(memory.Pointer Address, memory.PoolID Pool) :
+        CGLPixelFormatObj(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -359,13 +359,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class CGLCreateContext: public Encodable {
     public:
-        CGLCreateContext(atom.Observations observations, CGLPixelFormatObj Pix, CGLContextObj Share, CGLContextObjᵖ Ctx, CGLError Result) :
+        CGLCreateContext(atom::Observations observations, CGLPixelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, CGLError Result) :
             mobservations(observations),
             mPix(Pix),
             mShare(Share),
@@ -383,16 +383,16 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         CGLPixelFormatObj mPix;
         CGLContextObj mShare;
-        CGLContextObjᵖ mCtx;
+        CGLContextObj__P mCtx;
         CGLError mResult;
     };
 
     class CGLSetCurrentContext: public Encodable {
     public:
-        CGLSetCurrentContext(atom.Observations observations, CGLContextObj Ctx, CGLError Result) :
+        CGLSetCurrentContext(atom::Observations observations, CGLContextObj Ctx, CGLError Result) :
             mobservations(observations),
             mCtx(Ctx),
             mResult(Result) {}
@@ -406,14 +406,14 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         CGLContextObj mCtx;
         CGLError mResult;
     };
 
-    class Charˢ: public Encodable {
+    class Char__S: public Encodable {
     public:
-        Charˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        Char__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -429,15 +429,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class Charᵖ: public Encodable {
+    class Char__P: public Encodable {
     public:
-        Charᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        Char__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -449,13 +449,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class Charᵖˢ: public Encodable {
+    class Char__P__S: public Encodable {
     public:
-        Charᵖˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        Char__P__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -471,15 +471,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class Charᵖᵖ: public Encodable {
+    class Char__P__P: public Encodable {
     public:
-        Charᵖᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        Char__P__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -491,13 +491,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class ClearState: public Encodable {
     public:
-        ClearState(atom.ID CreatedAt, Color ClearColor, float ClearDepth, int32_t ClearStencil) :
+        ClearState(atom::ID CreatedAt, Color ClearColor, float ClearDepth, int32_t ClearStencil) :
             mCreatedAt(CreatedAt),
             mClearColor(ClearColor),
             mClearDepth(ClearDepth),
@@ -513,7 +513,7 @@ namespace gles {
             e->Int32(this->mClearStencil);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         Color mClearColor;
         float mClearDepth;
         int32_t mClearStencil;
@@ -521,7 +521,7 @@ namespace gles {
 
     class Rect: public Encodable {
     public:
-        Rect(atom.ID CreatedAt, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        Rect(atom::ID CreatedAt, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y),
@@ -539,7 +539,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -548,7 +548,7 @@ namespace gles {
 
     class RasterizerState: public Encodable {
     public:
-        RasterizerState(atom.ID CreatedAt, bool DepthMask, TestFunction DepthTestFunction, float DepthNear, float DepthFar, bool ColorMaskRed, bool ColorMaskGreen, bool ColorMaskBlue, bool ColorMaskAlpha, std::unordered_map<FaceMode,uint32_t>* StencilMask, Rect Viewport, Rect Scissor, FaceOrientation FrontFace, FaceMode CullFace, float LineWidth, float PolygonOffsetFactor, float PolygonOffsetUnits, float SampleCoverageValue, bool SampleCoverageInvert) :
+        RasterizerState(atom::ID CreatedAt, bool DepthMask, TestFunction DepthTestFunction, float DepthNear, float DepthFar, bool ColorMaskRed, bool ColorMaskGreen, bool ColorMaskBlue, bool ColorMaskAlpha, std::unordered_map<FaceMode,uint32_t>* StencilMask, Rect Viewport, Rect Scissor, FaceOrientation FrontFace, FaceMode CullFace, float LineWidth, float PolygonOffsetFactor, float PolygonOffsetUnits, float SampleCoverageValue, bool SampleCoverageInvert) :
             mCreatedAt(CreatedAt),
             mDepthMask(DepthMask),
             mDepthTestFunction(DepthTestFunction),
@@ -594,7 +594,7 @@ namespace gles {
             e->Bool(this->mSampleCoverageInvert);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         bool mDepthMask;
         TestFunction mDepthTestFunction;
         float mDepthNear;
@@ -617,7 +617,7 @@ namespace gles {
 
     class VertexPointer: public Encodable {
     public:
-        VertexPointer(memory.Pointer Address, memory.PoolID Pool) :
+        VertexPointer(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -629,13 +629,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class VertexAttributeArray: public Encodable {
     public:
-        VertexAttributeArray(atom.ID CreatedAt, bool Enabled, uint32_t Size, VertexAttribType Type, bool Normalized, int32_t Stride, BufferId Buffer, VertexPointer Pointer) :
+        VertexAttributeArray(atom::ID CreatedAt, bool Enabled, uint32_t Size, VertexAttribType Type, bool Normalized, int32_t Stride, BufferId Buffer, VertexPointer Pointer) :
             mCreatedAt(CreatedAt),
             mEnabled(Enabled),
             mSize(Size),
@@ -659,7 +659,7 @@ namespace gles {
             e->Value(&this->mPointer);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         bool mEnabled;
         uint32_t mSize;
         VertexAttribType mType;
@@ -671,7 +671,7 @@ namespace gles {
 
     class Renderbuffer: public Encodable {
     public:
-        Renderbuffer(atom.ID CreatedAt, int32_t Width, int32_t Height, U8ˢ Data, RenderbufferFormat Format) :
+        Renderbuffer(atom::ID CreatedAt, int32_t Width, int32_t Height, U8__S Data, RenderbufferFormat Format) :
             mCreatedAt(CreatedAt),
             mWidth(Width),
             mHeight(Height),
@@ -689,16 +689,16 @@ namespace gles {
             e->Uint32(this->mFormat);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mWidth;
         int32_t mHeight;
-        U8ˢ mData;
+        U8__S mData;
         RenderbufferFormat mFormat;
     };
 
     class Image: public Encodable {
     public:
-        Image(atom.ID CreatedAt, int32_t Width, int32_t Height, U8ˢ Data, uint32_t Size, ImageTexelFormat Format) :
+        Image(atom::ID CreatedAt, int32_t Width, int32_t Height, U8__S Data, uint32_t Size, ImageTexelFormat Format) :
             mCreatedAt(CreatedAt),
             mWidth(Width),
             mHeight(Height),
@@ -718,17 +718,17 @@ namespace gles {
             e->Uint32(this->mFormat);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mWidth;
         int32_t mHeight;
-        U8ˢ mData;
+        U8__S mData;
         uint32_t mSize;
         ImageTexelFormat mFormat;
     };
 
     class CubemapLevel: public Encodable {
     public:
-        CubemapLevel(atom.ID CreatedAt, std::unordered_map<CubeMapImageTarget,Image>* Faces) :
+        CubemapLevel(atom::ID CreatedAt, std::unordered_map<CubeMapImageTarget,Image>* Faces) :
             mCreatedAt(CreatedAt),
             mFaces(Faces) {}
         virtual const gapic::Id& Id() const {
@@ -740,13 +740,13 @@ namespace gles {
             
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         std::unordered_map<CubeMapImageTarget,Image>* mFaces;
     };
 
     class Texture: public Encodable {
     public:
-        Texture(atom.ID CreatedAt, TextureKind Kind, ImageTexelFormat Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, TextureFilterMode MagFilter, TextureFilterMode MinFilter, TextureWrapMode WrapS, TextureWrapMode WrapT, TexelComponent SwizzleR, TexelComponent SwizzleG, TexelComponent SwizzleB, TexelComponent SwizzleA, float MaxAnisotropy) :
+        Texture(atom::ID CreatedAt, TextureKind Kind, ImageTexelFormat Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, TextureFilterMode MagFilter, TextureFilterMode MinFilter, TextureWrapMode WrapS, TextureWrapMode WrapT, TexelComponent SwizzleR, TexelComponent SwizzleG, TexelComponent SwizzleB, TexelComponent SwizzleA, float MaxAnisotropy) :
             mCreatedAt(CreatedAt),
             mKind(Kind),
             mFormat(Format),
@@ -782,7 +782,7 @@ namespace gles {
             e->Float32(this->mMaxAnisotropy);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         TextureKind mKind;
         ImageTexelFormat mFormat;
         std::unordered_map<int32_t,Image>* mTexture2D;
@@ -800,7 +800,7 @@ namespace gles {
 
     class FramebufferAttachmentInfo: public Encodable {
     public:
-        FramebufferAttachmentInfo(atom.ID CreatedAt, uint32_t Object, FramebufferAttachmentType Type, int32_t TextureLevel, CubeMapImageTarget CubeMapFace) :
+        FramebufferAttachmentInfo(atom::ID CreatedAt, uint32_t Object, FramebufferAttachmentType Type, int32_t TextureLevel, CubeMapImageTarget CubeMapFace) :
             mCreatedAt(CreatedAt),
             mObject(Object),
             mType(Type),
@@ -818,7 +818,7 @@ namespace gles {
             e->Uint32(this->mCubeMapFace);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         uint32_t mObject;
         FramebufferAttachmentType mType;
         int32_t mTextureLevel;
@@ -827,7 +827,7 @@ namespace gles {
 
     class Framebuffer: public Encodable {
     public:
-        Framebuffer(atom.ID CreatedAt, std::unordered_map<FramebufferAttachment,FramebufferAttachmentInfo>* Attachments) :
+        Framebuffer(atom::ID CreatedAt, std::unordered_map<FramebufferAttachment,FramebufferAttachmentInfo>* Attachments) :
             mCreatedAt(CreatedAt),
             mAttachments(Attachments) {}
         virtual const gapic::Id& Id() const {
@@ -839,13 +839,13 @@ namespace gles {
             
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         std::unordered_map<FramebufferAttachment,FramebufferAttachmentInfo>* mAttachments;
     };
 
     class Shader: public Encodable {
     public:
-        Shader(atom.ID CreatedAt, U8ˢ Binary, bool Compiled, bool Deletable, Charˢ InfoLog, char* Source, ShaderType Type) :
+        Shader(atom::ID CreatedAt, U8__S Binary, bool Compiled, bool Deletable, Char__S InfoLog, char* Source, ShaderType Type) :
             mCreatedAt(CreatedAt),
             mBinary(Binary),
             mCompiled(Compiled),
@@ -867,18 +867,18 @@ namespace gles {
             e->Uint32(this->mType);
         }
 
-        atom.ID mCreatedAt;
-        U8ˢ mBinary;
+        atom::ID mCreatedAt;
+        U8__S mBinary;
         bool mCompiled;
         bool mDeletable;
-        Charˢ mInfoLog;
+        Char__S mInfoLog;
         char* mSource;
         ShaderType mType;
     };
 
     class VertexAttribute: public Encodable {
     public:
-        VertexAttribute(atom.ID CreatedAt, Charˢ Name, int32_t VectorCount, ShaderAttribType Type) :
+        VertexAttribute(atom::ID CreatedAt, Char__S Name, int32_t VectorCount, ShaderAttribType Type) :
             mCreatedAt(CreatedAt),
             mName(Name),
             mVectorCount(VectorCount),
@@ -894,15 +894,15 @@ namespace gles {
             e->Uint32(this->mType);
         }
 
-        atom.ID mCreatedAt;
-        Charˢ mName;
+        atom::ID mCreatedAt;
+        Char__S mName;
         int32_t mVectorCount;
         ShaderAttribType mType;
     };
 
     class Vec2f: public Encodable {
     public:
-        Vec2f(atom.ID CreatedAt, float X, float Y) :
+        Vec2f(atom::ID CreatedAt, float X, float Y) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y) {}
@@ -916,14 +916,14 @@ namespace gles {
             e->Float32(this->mY);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         float mX;
         float mY;
     };
 
     class Vec3f: public Encodable {
     public:
-        Vec3f(atom.ID CreatedAt, float X, float Y, float Z) :
+        Vec3f(atom::ID CreatedAt, float X, float Y, float Z) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y),
@@ -939,7 +939,7 @@ namespace gles {
             e->Float32(this->mZ);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         float mX;
         float mY;
         float mZ;
@@ -947,7 +947,7 @@ namespace gles {
 
     class Vec4f: public Encodable {
     public:
-        Vec4f(atom.ID CreatedAt, float X, float Y, float Z, float W) :
+        Vec4f(atom::ID CreatedAt, float X, float Y, float Z, float W) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y),
@@ -965,7 +965,7 @@ namespace gles {
             e->Float32(this->mW);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         float mX;
         float mY;
         float mZ;
@@ -974,7 +974,7 @@ namespace gles {
 
     class Vec2i: public Encodable {
     public:
-        Vec2i(atom.ID CreatedAt, int32_t X, int32_t Y) :
+        Vec2i(atom::ID CreatedAt, int32_t X, int32_t Y) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y) {}
@@ -988,14 +988,14 @@ namespace gles {
             e->Int32(this->mY);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mX;
         int32_t mY;
     };
 
     class Vec3i: public Encodable {
     public:
-        Vec3i(atom.ID CreatedAt, int32_t X, int32_t Y, int32_t Z) :
+        Vec3i(atom::ID CreatedAt, int32_t X, int32_t Y, int32_t Z) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y),
@@ -1011,7 +1011,7 @@ namespace gles {
             e->Int32(this->mZ);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -1019,7 +1019,7 @@ namespace gles {
 
     class Vec4i: public Encodable {
     public:
-        Vec4i(atom.ID CreatedAt, int32_t X, int32_t Y, int32_t Z, int32_t W) :
+        Vec4i(atom::ID CreatedAt, int32_t X, int32_t Y, int32_t Z, int32_t W) :
             mCreatedAt(CreatedAt),
             mX(X),
             mY(Y),
@@ -1037,7 +1037,7 @@ namespace gles {
             e->Int32(this->mW);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         int32_t mX;
         int32_t mY;
         int32_t mZ;
@@ -1046,7 +1046,7 @@ namespace gles {
 
     class Mat2f: public Encodable {
     public:
-        Mat2f(atom.ID CreatedAt, Vec2f Col0, Vec2f Col1) :
+        Mat2f(atom::ID CreatedAt, Vec2f Col0, Vec2f Col1) :
             mCreatedAt(CreatedAt),
             mCol0(Col0),
             mCol1(Col1) {}
@@ -1060,14 +1060,14 @@ namespace gles {
             e->Value(&this->mCol1);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         Vec2f mCol0;
         Vec2f mCol1;
     };
 
     class Mat3f: public Encodable {
     public:
-        Mat3f(atom.ID CreatedAt, Vec3f Col0, Vec3f Col1, Vec3f Col2) :
+        Mat3f(atom::ID CreatedAt, Vec3f Col0, Vec3f Col1, Vec3f Col2) :
             mCreatedAt(CreatedAt),
             mCol0(Col0),
             mCol1(Col1),
@@ -1083,7 +1083,7 @@ namespace gles {
             e->Value(&this->mCol2);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         Vec3f mCol0;
         Vec3f mCol1;
         Vec3f mCol2;
@@ -1091,7 +1091,7 @@ namespace gles {
 
     class Mat4f: public Encodable {
     public:
-        Mat4f(atom.ID CreatedAt, Vec4f Col0, Vec4f Col1, Vec4f Col2, Vec4f Col3) :
+        Mat4f(atom::ID CreatedAt, Vec4f Col0, Vec4f Col1, Vec4f Col2, Vec4f Col3) :
             mCreatedAt(CreatedAt),
             mCol0(Col0),
             mCol1(Col1),
@@ -1109,7 +1109,7 @@ namespace gles {
             e->Value(&this->mCol3);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         Vec4f mCol0;
         Vec4f mCol1;
         Vec4f mCol2;
@@ -1118,7 +1118,7 @@ namespace gles {
 
     class UniformValue: public Encodable {
     public:
-        UniformValue(atom.ID CreatedAt, float F32, Vec2f Vec2f, Vec3f Vec3f, Vec4f Vec4f, int32_t S32, Vec2i Vec2i, Vec3i Vec3i, Vec4i Vec4i, Mat2f Mat2f, Mat3f Mat3f, Mat4f Mat4f) :
+        UniformValue(atom::ID CreatedAt, float F32, Vec2f Vec2f, Vec3f Vec3f, Vec4f Vec4f, int32_t S32, Vec2i Vec2i, Vec3i Vec3i, Vec4i Vec4i, Mat2f Mat2f, Mat3f Mat3f, Mat4f Mat4f) :
             mCreatedAt(CreatedAt),
             mF32(F32),
             mVec2f(Vec2f),
@@ -1150,7 +1150,7 @@ namespace gles {
             e->Value(&this->mMat4f);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         float mF32;
         Vec2f mVec2f;
         Vec3f mVec3f;
@@ -1166,7 +1166,7 @@ namespace gles {
 
     class Uniform: public Encodable {
     public:
-        Uniform(atom.ID CreatedAt, char* Name, ShaderUniformType Type, UniformValue Value) :
+        Uniform(atom::ID CreatedAt, char* Name, ShaderUniformType Type, UniformValue Value) :
             mCreatedAt(CreatedAt),
             mName(Name),
             mType(Type),
@@ -1182,7 +1182,7 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         char* mName;
         ShaderUniformType mType;
         UniformValue mValue;
@@ -1190,7 +1190,7 @@ namespace gles {
 
     class Program: public Encodable {
     public:
-        Program(atom.ID CreatedAt, std::unordered_map<ShaderType,ShaderId>* Shaders, bool Linked, U8ˢ Binary, std::unordered_map<char*,AttributeLocation>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<UniformLocation,Uniform>* Uniforms, Charˢ InfoLog) :
+        Program(atom::ID CreatedAt, std::unordered_map<ShaderType,ShaderId>* Shaders, bool Linked, U8__S Binary, std::unordered_map<char*,AttributeLocation>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<UniformLocation,Uniform>* Uniforms, Char__S InfoLog) :
             mCreatedAt(CreatedAt),
             mShaders(Shaders),
             mLinked(Linked),
@@ -1214,19 +1214,19 @@ namespace gles {
             e->Value(&this->mInfoLog);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         std::unordered_map<ShaderType,ShaderId>* mShaders;
         bool mLinked;
-        U8ˢ mBinary;
+        U8__S mBinary;
         std::unordered_map<char*,AttributeLocation>* mAttributeBindings;
         std::unordered_map<int32_t,VertexAttribute>* mAttributes;
         std::unordered_map<UniformLocation,Uniform>* mUniforms;
-        Charˢ mInfoLog;
+        Char__S mInfoLog;
     };
 
     class VertexArray: public Encodable {
     public:
-        VertexArray(atom.ID CreatedAt) :
+        VertexArray(atom::ID CreatedAt) :
             mCreatedAt(CreatedAt) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4,  } };
@@ -1236,12 +1236,12 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
     };
 
     class Query: public Encodable {
     public:
-        Query(atom.ID CreatedAt) :
+        Query(atom::ID CreatedAt) :
             mCreatedAt(CreatedAt) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2,  } };
@@ -1251,12 +1251,12 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
     };
 
     class Objects: public Encodable {
     public:
-        Objects(atom.ID CreatedAt, std::unordered_map<RenderbufferId,Renderbuffer*>* Renderbuffers, std::unordered_map<TextureId,Texture*>* Textures, std::unordered_map<FramebufferId,Framebuffer*>* Framebuffers, std::unordered_map<BufferId,Buffer*>* Buffers, std::unordered_map<ShaderId,Shader*>* Shaders, std::unordered_map<ProgramId,Program*>* Programs, std::unordered_map<VertexArrayId,VertexArray*>* VertexArrays, std::unordered_map<QueryId,Query*>* Queries) :
+        Objects(atom::ID CreatedAt, std::unordered_map<RenderbufferId,Renderbuffer*>* Renderbuffers, std::unordered_map<TextureId,Texture*>* Textures, std::unordered_map<FramebufferId,Framebuffer*>* Framebuffers, std::unordered_map<BufferId,Buffer*>* Buffers, std::unordered_map<ShaderId,Shader*>* Shaders, std::unordered_map<ProgramId,Program*>* Programs, std::unordered_map<VertexArrayId,VertexArray*>* VertexArrays, std::unordered_map<QueryId,Query*>* Queries) :
             mCreatedAt(CreatedAt),
             mRenderbuffers(Renderbuffers),
             mTextures(Textures),
@@ -1282,7 +1282,7 @@ namespace gles {
             
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         std::unordered_map<RenderbufferId,Renderbuffer*>* mRenderbuffers;
         std::unordered_map<TextureId,Texture*>* mTextures;
         std::unordered_map<FramebufferId,Framebuffer*>* mFramebuffers;
@@ -1295,7 +1295,7 @@ namespace gles {
 
     class Context: public Encodable {
     public:
-        Context(atom.ID CreatedAt, ContextID Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<FramebufferTarget,FramebufferId>* BoundFramebuffers, std::unordered_map<RenderbufferTarget,RenderbufferId>* BoundRenderbuffers, std::unordered_map<BufferTarget,BufferId>* BoundBuffers, ProgramId BoundProgram, VertexArrayId BoundVertexArray, std::unordered_map<AttributeLocation,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<TextureUnit,std::unordered_map<TextureTarget,TextureId>*>* TextureUnits, TextureUnit ActiveTextureUnit, std::unordered_map<Capability,bool>* Capabilities, HintMode GenerateMipmapHint, std::unordered_map<PixelStoreParameter,int32_t>* PixelStorage, Objects Instances) :
+        Context(atom::ID CreatedAt, ContextID Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<FramebufferTarget,FramebufferId>* BoundFramebuffers, std::unordered_map<RenderbufferTarget,RenderbufferId>* BoundRenderbuffers, std::unordered_map<BufferTarget,BufferId>* BoundBuffers, ProgramId BoundProgram, VertexArrayId BoundVertexArray, std::unordered_map<AttributeLocation,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<TextureUnit,std::unordered_map<TextureTarget,TextureId>*>* TextureUnits, TextureUnit ActiveTextureUnit, std::unordered_map<Capability,bool>* Capabilities, HintMode GenerateMipmapHint, std::unordered_map<PixelStoreParameter,int32_t>* PixelStorage, Objects Instances) :
             mCreatedAt(CreatedAt),
             mIdentifier(Identifier),
             mBlending(Blending),
@@ -1337,7 +1337,7 @@ namespace gles {
             e->Value(&this->mInstances);
         }
 
-        atom.ID mCreatedAt;
+        atom::ID mCreatedAt;
         ContextID mIdentifier;
         BlendState mBlending;
         RasterizerState mRasterizing;
@@ -1356,9 +1356,9 @@ namespace gles {
         Objects mInstances;
     };
 
-    class DiscardFramebufferAttachmentˢ: public Encodable {
+    class DiscardFramebufferAttachment__S: public Encodable {
     public:
-        DiscardFramebufferAttachmentˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        DiscardFramebufferAttachment__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -1374,15 +1374,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class DiscardFramebufferAttachmentᵖ: public Encodable {
+    class DiscardFramebufferAttachment__P: public Encodable {
     public:
-        DiscardFramebufferAttachmentᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        DiscardFramebufferAttachment__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1394,13 +1394,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EGLConfig: public Encodable {
     public:
-        EGLConfig(memory.Pointer Address, memory.PoolID Pool) :
+        EGLConfig(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1412,13 +1412,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EGLContext: public Encodable {
     public:
-        EGLContext(memory.Pointer Address, memory.PoolID Pool) :
+        EGLContext(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1430,13 +1430,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EGLDisplay: public Encodable {
     public:
-        EGLDisplay(memory.Pointer Address, memory.PoolID Pool) :
+        EGLDisplay(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1448,13 +1448,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EGLSurface: public Encodable {
     public:
-        EGLSurface(memory.Pointer Address, memory.PoolID Pool) :
+        EGLSurface(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1466,13 +1466,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class EGLintˢ: public Encodable {
+    class EGLint__S: public Encodable {
     public:
-        EGLintˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        EGLint__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -1488,15 +1488,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class EGLintᵖ: public Encodable {
+    class EGLint__P: public Encodable {
     public:
-        EGLintᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        EGLint__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1508,13 +1508,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EglCreateContext: public Encodable {
     public:
-        EglCreateContext(atom.Observations observations, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLintᵖ AttribList, EGLContext Result) :
+        EglCreateContext(atom::Observations observations, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLint__P AttribList, EGLContext Result) :
             mobservations(observations),
             mDisplay(Display),
             mConfig(Config),
@@ -1534,17 +1534,17 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLConfig mConfig;
         EGLContext mShareContext;
-        EGLintᵖ mAttribList;
+        EGLint__P mAttribList;
         EGLContext mResult;
     };
 
     class EglInitialize: public Encodable {
     public:
-        EglInitialize(atom.Observations observations, EGLDisplay Dpy, EGLintᵖ Major, EGLintᵖ Minor, EGLBoolean Result) :
+        EglInitialize(atom::Observations observations, EGLDisplay Dpy, EGLint__P Major, EGLint__P Minor, EGLBoolean Result) :
             mobservations(observations),
             mDpy(Dpy),
             mMajor(Major),
@@ -1562,16 +1562,16 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         EGLDisplay mDpy;
-        EGLintᵖ mMajor;
-        EGLintᵖ mMinor;
+        EGLint__P mMajor;
+        EGLint__P mMinor;
         EGLBoolean mResult;
     };
 
     class EglMakeCurrent: public Encodable {
     public:
-        EglMakeCurrent(atom.Observations observations, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, EGLBoolean Result) :
+        EglMakeCurrent(atom::Observations observations, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, EGLBoolean Result) :
             mobservations(observations),
             mDisplay(Display),
             mDraw(Draw),
@@ -1591,7 +1591,7 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLSurface mDraw;
         EGLSurface mRead;
@@ -1601,7 +1601,7 @@ namespace gles {
 
     class EglQuerySurface: public Encodable {
     public:
-        EglQuerySurface(atom.Observations observations, EGLDisplay Display, EGLSurface Surface, EGLint Attribute, EGLintᵖ Value, EGLBoolean Result) :
+        EglQuerySurface(atom::Observations observations, EGLDisplay Display, EGLSurface Surface, EGLint Attribute, EGLint__P Value, EGLBoolean Result) :
             mobservations(observations),
             mDisplay(Display),
             mSurface(Surface),
@@ -1621,17 +1621,17 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLSurface mSurface;
         EGLint mAttribute;
-        EGLintᵖ mValue;
+        EGLint__P mValue;
         EGLBoolean mResult;
     };
 
-    class Voidᵖ: public Encodable {
+    class Void__P: public Encodable {
     public:
-        Voidᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        Void__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1643,13 +1643,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class EglSwapBuffers: public Encodable {
     public:
-        EglSwapBuffers(atom.Observations observations, EGLDisplay Display, Voidᵖ Surface, EGLBoolean Result) :
+        EglSwapBuffers(atom::Observations observations, EGLDisplay Display, Void__P Surface, EGLBoolean Result) :
             mobservations(observations),
             mDisplay(Display),
             mSurface(Surface),
@@ -1665,15 +1665,15 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         EGLDisplay mDisplay;
-        Voidᵖ mSurface;
+        Void__P mSurface;
         EGLBoolean mResult;
     };
 
-    class F32ˢ: public Encodable {
+    class F32__S: public Encodable {
     public:
-        F32ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        F32__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -1689,15 +1689,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class F32ᵖ: public Encodable {
+    class F32__P: public Encodable {
     public:
-        F32ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        F32__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1709,13 +1709,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class FlushPostBuffer: public Encodable {
     public:
-        FlushPostBuffer(atom.Observations observations) :
+        FlushPostBuffer(atom::Observations observations) :
             mobservations(observations) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x26, 0x4e, 0x20, 0xbb, 0xf9, 0x53, 0x75, 0xcd, 0x08, 0x98, 0x6d, 0x82, 0x25, 0x7d, 0xb5, 0xb6, 0x1e, 0xbb, 0xe1, 0xbf,  } };
@@ -1725,12 +1725,12 @@ namespace gles {
             e->Value(&this->mobservations);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
     };
 
-    class FramebufferAttachmentˢ: public Encodable {
+    class FramebufferAttachment__S: public Encodable {
     public:
-        FramebufferAttachmentˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        FramebufferAttachment__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -1746,15 +1746,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class FramebufferAttachmentᵖ: public Encodable {
+    class FramebufferAttachment__P: public Encodable {
     public:
-        FramebufferAttachmentᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        FramebufferAttachment__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1766,13 +1766,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class FramebufferIdˢ: public Encodable {
+    class FramebufferId__S: public Encodable {
     public:
-        FramebufferIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        FramebufferId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -1788,15 +1788,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class FramebufferIdᵖ: public Encodable {
+    class FramebufferId__P: public Encodable {
     public:
-        FramebufferIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        FramebufferId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1808,13 +1808,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GLXContext: public Encodable {
     public:
-        GLXContext(memory.Pointer Address, memory.PoolID Pool) :
+        GLXContext(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1826,13 +1826,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GLXDrawable: public Encodable {
     public:
-        GLXDrawable(memory.Pointer Address, memory.PoolID Pool) :
+        GLXDrawable(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -1844,13 +1844,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlActiveTexture: public Encodable {
     public:
-        GlActiveTexture(atom.Observations observations, TextureUnit Unit) :
+        GlActiveTexture(atom::Observations observations, TextureUnit Unit) :
             mobservations(observations),
             mUnit(Unit) {}
         virtual const gapic::Id& Id() const {
@@ -1862,13 +1862,13 @@ namespace gles {
             e->Uint32(this->mUnit);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureUnit mUnit;
     };
 
     class GlAttachShader: public Encodable {
     public:
-        GlAttachShader(atom.Observations observations, ProgramId Program, ShaderId Shader) :
+        GlAttachShader(atom::Observations observations, ProgramId Program, ShaderId Shader) :
             mobservations(observations),
             mProgram(Program),
             mShader(Shader) {}
@@ -1882,14 +1882,14 @@ namespace gles {
             e->Uint32(this->mShader);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         ShaderId mShader;
     };
 
     class GlBeginQuery: public Encodable {
     public:
-        GlBeginQuery(atom.Observations observations, QueryTarget Target, QueryId Query) :
+        GlBeginQuery(atom::Observations observations, QueryTarget Target, QueryId Query) :
             mobservations(observations),
             mTarget(Target),
             mQuery(Query) {}
@@ -1903,14 +1903,14 @@ namespace gles {
             e->Uint32(this->mQuery);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
         QueryId mQuery;
     };
 
     class GlBeginQueryEXT: public Encodable {
     public:
-        GlBeginQueryEXT(atom.Observations observations, QueryTarget Target, QueryId Query) :
+        GlBeginQueryEXT(atom::Observations observations, QueryTarget Target, QueryId Query) :
             mobservations(observations),
             mTarget(Target),
             mQuery(Query) {}
@@ -1924,14 +1924,14 @@ namespace gles {
             e->Uint32(this->mQuery);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
         QueryId mQuery;
     };
 
     class GlBindAttribLocation: public Encodable {
     public:
-        GlBindAttribLocation(atom.Observations observations, ProgramId Program, AttributeLocation Location, char* Name) :
+        GlBindAttribLocation(atom::Observations observations, ProgramId Program, AttributeLocation Location, char* Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -1947,7 +1947,7 @@ namespace gles {
             e->String(this->mName);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         AttributeLocation mLocation;
         char* mName;
@@ -1955,7 +1955,7 @@ namespace gles {
 
     class GlBindBuffer: public Encodable {
     public:
-        GlBindBuffer(atom.Observations observations, BufferTarget Target, BufferId Buffer) :
+        GlBindBuffer(atom::Observations observations, BufferTarget Target, BufferId Buffer) :
             mobservations(observations),
             mTarget(Target),
             mBuffer(Buffer) {}
@@ -1969,14 +1969,14 @@ namespace gles {
             e->Uint32(this->mBuffer);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
         BufferId mBuffer;
     };
 
     class GlBindFramebuffer: public Encodable {
     public:
-        GlBindFramebuffer(atom.Observations observations, FramebufferTarget Target, FramebufferId Framebuffer) :
+        GlBindFramebuffer(atom::Observations observations, FramebufferTarget Target, FramebufferId Framebuffer) :
             mobservations(observations),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
@@ -1990,14 +1990,14 @@ namespace gles {
             e->Uint32(this->mFramebuffer);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mTarget;
         FramebufferId mFramebuffer;
     };
 
     class GlBindRenderbuffer: public Encodable {
     public:
-        GlBindRenderbuffer(atom.Observations observations, RenderbufferTarget Target, RenderbufferId Renderbuffer) :
+        GlBindRenderbuffer(atom::Observations observations, RenderbufferTarget Target, RenderbufferId Renderbuffer) :
             mobservations(observations),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
@@ -2011,14 +2011,14 @@ namespace gles {
             e->Uint32(this->mRenderbuffer);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         RenderbufferTarget mTarget;
         RenderbufferId mRenderbuffer;
     };
 
     class GlBindTexture: public Encodable {
     public:
-        GlBindTexture(atom.Observations observations, TextureTarget Target, TextureId Texture) :
+        GlBindTexture(atom::Observations observations, TextureTarget Target, TextureId Texture) :
             mobservations(observations),
             mTarget(Target),
             mTexture(Texture) {}
@@ -2032,14 +2032,14 @@ namespace gles {
             e->Uint32(this->mTexture);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         TextureId mTexture;
     };
 
     class GlBindVertexArrayOES: public Encodable {
     public:
-        GlBindVertexArrayOES(atom.Observations observations, VertexArrayId Array) :
+        GlBindVertexArrayOES(atom::Observations observations, VertexArrayId Array) :
             mobservations(observations),
             mArray(Array) {}
         virtual const gapic::Id& Id() const {
@@ -2051,13 +2051,13 @@ namespace gles {
             e->Uint32(this->mArray);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         VertexArrayId mArray;
     };
 
     class GlBlendColor: public Encodable {
     public:
-        GlBlendColor(atom.Observations observations, float Red, float Green, float Blue, float Alpha) :
+        GlBlendColor(atom::Observations observations, float Red, float Green, float Blue, float Alpha) :
             mobservations(observations),
             mRed(Red),
             mGreen(Green),
@@ -2075,7 +2075,7 @@ namespace gles {
             e->Float32(this->mAlpha);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mRed;
         float mGreen;
         float mBlue;
@@ -2084,7 +2084,7 @@ namespace gles {
 
     class GlBlendEquation: public Encodable {
     public:
-        GlBlendEquation(atom.Observations observations, BlendEquation Equation) :
+        GlBlendEquation(atom::Observations observations, BlendEquation Equation) :
             mobservations(observations),
             mEquation(Equation) {}
         virtual const gapic::Id& Id() const {
@@ -2096,13 +2096,13 @@ namespace gles {
             e->Uint32(this->mEquation);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BlendEquation mEquation;
     };
 
     class GlBlendEquationSeparate: public Encodable {
     public:
-        GlBlendEquationSeparate(atom.Observations observations, BlendEquation Rgb, BlendEquation Alpha) :
+        GlBlendEquationSeparate(atom::Observations observations, BlendEquation Rgb, BlendEquation Alpha) :
             mobservations(observations),
             mRgb(Rgb),
             mAlpha(Alpha) {}
@@ -2116,14 +2116,14 @@ namespace gles {
             e->Uint32(this->mAlpha);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BlendEquation mRgb;
         BlendEquation mAlpha;
     };
 
     class GlBlendFunc: public Encodable {
     public:
-        GlBlendFunc(atom.Observations observations, BlendFactor SrcFactor, BlendFactor DstFactor) :
+        GlBlendFunc(atom::Observations observations, BlendFactor SrcFactor, BlendFactor DstFactor) :
             mobservations(observations),
             mSrcFactor(SrcFactor),
             mDstFactor(DstFactor) {}
@@ -2137,14 +2137,14 @@ namespace gles {
             e->Uint32(this->mDstFactor);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BlendFactor mSrcFactor;
         BlendFactor mDstFactor;
     };
 
     class GlBlendFuncSeparate: public Encodable {
     public:
-        GlBlendFuncSeparate(atom.Observations observations, BlendFactor SrcFactorRgb, BlendFactor DstFactorRgb, BlendFactor SrcFactorAlpha, BlendFactor DstFactorAlpha) :
+        GlBlendFuncSeparate(atom::Observations observations, BlendFactor SrcFactorRgb, BlendFactor DstFactorRgb, BlendFactor SrcFactorAlpha, BlendFactor DstFactorAlpha) :
             mobservations(observations),
             mSrcFactorRgb(SrcFactorRgb),
             mDstFactorRgb(DstFactorRgb),
@@ -2162,7 +2162,7 @@ namespace gles {
             e->Uint32(this->mDstFactorAlpha);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BlendFactor mSrcFactorRgb;
         BlendFactor mDstFactorRgb;
         BlendFactor mSrcFactorAlpha;
@@ -2171,7 +2171,7 @@ namespace gles {
 
     class GlBlitFramebuffer: public Encodable {
     public:
-        GlBlitFramebuffer(atom.Observations observations, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, ClearMask Mask, TextureFilterMode Filter) :
+        GlBlitFramebuffer(atom::Observations observations, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, ClearMask Mask, TextureFilterMode Filter) :
             mobservations(observations),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
@@ -2201,7 +2201,7 @@ namespace gles {
             e->Uint32(this->mFilter);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mSrcX0;
         int32_t mSrcY0;
         int32_t mSrcX1;
@@ -2216,7 +2216,7 @@ namespace gles {
 
     class GlBufferData: public Encodable {
     public:
-        GlBufferData(atom.Observations observations, BufferTarget Target, int32_t Size, BufferDataPointer Data, BufferUsage Usage) :
+        GlBufferData(atom::Observations observations, BufferTarget Target, int32_t Size, BufferDataPointer Data, BufferUsage Usage) :
             mobservations(observations),
             mTarget(Target),
             mSize(Size),
@@ -2234,7 +2234,7 @@ namespace gles {
             e->Uint32(this->mUsage);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
         int32_t mSize;
         BufferDataPointer mData;
@@ -2243,7 +2243,7 @@ namespace gles {
 
     class GlBufferSubData: public Encodable {
     public:
-        GlBufferSubData(atom.Observations observations, BufferTarget Target, int32_t Offset, int32_t Size, Voidᵖ Data) :
+        GlBufferSubData(atom::Observations observations, BufferTarget Target, int32_t Offset, int32_t Size, Void__P Data) :
             mobservations(observations),
             mTarget(Target),
             mOffset(Offset),
@@ -2261,16 +2261,16 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
         int32_t mOffset;
         int32_t mSize;
-        Voidᵖ mData;
+        Void__P mData;
     };
 
     class GlCheckFramebufferStatus: public Encodable {
     public:
-        GlCheckFramebufferStatus(atom.Observations observations, FramebufferTarget Target, FramebufferStatus Result) :
+        GlCheckFramebufferStatus(atom::Observations observations, FramebufferTarget Target, FramebufferStatus Result) :
             mobservations(observations),
             mTarget(Target),
             mResult(Result) {}
@@ -2284,14 +2284,14 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mTarget;
         FramebufferStatus mResult;
     };
 
     class GlClear: public Encodable {
     public:
-        GlClear(atom.Observations observations, ClearMask Mask) :
+        GlClear(atom::Observations observations, ClearMask Mask) :
             mobservations(observations),
             mMask(Mask) {}
         virtual const gapic::Id& Id() const {
@@ -2303,13 +2303,13 @@ namespace gles {
             e->Uint32(this->mMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ClearMask mMask;
     };
 
     class GlClearColor: public Encodable {
     public:
-        GlClearColor(atom.Observations observations, float R, float G, float B, float A) :
+        GlClearColor(atom::Observations observations, float R, float G, float B, float A) :
             mobservations(observations),
             mR(R),
             mG(G),
@@ -2327,7 +2327,7 @@ namespace gles {
             e->Float32(this->mA);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mR;
         float mG;
         float mB;
@@ -2336,7 +2336,7 @@ namespace gles {
 
     class GlClearDepthf: public Encodable {
     public:
-        GlClearDepthf(atom.Observations observations, float Depth) :
+        GlClearDepthf(atom::Observations observations, float Depth) :
             mobservations(observations),
             mDepth(Depth) {}
         virtual const gapic::Id& Id() const {
@@ -2348,13 +2348,13 @@ namespace gles {
             e->Float32(this->mDepth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mDepth;
     };
 
     class GlClearStencil: public Encodable {
     public:
-        GlClearStencil(atom.Observations observations, int32_t Stencil) :
+        GlClearStencil(atom::Observations observations, int32_t Stencil) :
             mobservations(observations),
             mStencil(Stencil) {}
         virtual const gapic::Id& Id() const {
@@ -2366,13 +2366,13 @@ namespace gles {
             e->Int32(this->mStencil);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mStencil;
     };
 
     class GlColorMask: public Encodable {
     public:
-        GlColorMask(atom.Observations observations, bool Red, bool Green, bool Blue, bool Alpha) :
+        GlColorMask(atom::Observations observations, bool Red, bool Green, bool Blue, bool Alpha) :
             mobservations(observations),
             mRed(Red),
             mGreen(Green),
@@ -2390,7 +2390,7 @@ namespace gles {
             e->Bool(this->mAlpha);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         bool mRed;
         bool mGreen;
         bool mBlue;
@@ -2399,7 +2399,7 @@ namespace gles {
 
     class GlCompileShader: public Encodable {
     public:
-        GlCompileShader(atom.Observations observations, ShaderId Shader) :
+        GlCompileShader(atom::Observations observations, ShaderId Shader) :
             mobservations(observations),
             mShader(Shader) {}
         virtual const gapic::Id& Id() const {
@@ -2411,13 +2411,13 @@ namespace gles {
             e->Uint32(this->mShader);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
     };
 
     class TexturePointer: public Encodable {
     public:
-        TexturePointer(memory.Pointer Address, memory.PoolID Pool) :
+        TexturePointer(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -2429,13 +2429,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlCompressedTexImage2D: public Encodable {
     public:
-        GlCompressedTexImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, CompressedTexelFormat Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, CompressedTexelFormat Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -2461,7 +2461,7 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         CompressedTexelFormat mFormat;
@@ -2474,7 +2474,7 @@ namespace gles {
 
     class GlCompressedTexSubImage2D: public Encodable {
     public:
-        GlCompressedTexSubImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, CompressedTexelFormat Format, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexSubImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, CompressedTexelFormat Format, int32_t ImageSize, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -2502,7 +2502,7 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -2516,7 +2516,7 @@ namespace gles {
 
     class GlCopyTexImage2D: public Encodable {
     public:
-        GlCopyTexImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, TexelFormat Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
+        GlCopyTexImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, TexelFormat Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -2542,7 +2542,7 @@ namespace gles {
             e->Int32(this->mBorder);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         TexelFormat mFormat;
@@ -2555,7 +2555,7 @@ namespace gles {
 
     class GlCopyTexSubImage2D: public Encodable {
     public:
-        GlCopyTexSubImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlCopyTexSubImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -2581,7 +2581,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -2594,7 +2594,7 @@ namespace gles {
 
     class GlCreateProgram: public Encodable {
     public:
-        GlCreateProgram(atom.Observations observations, ProgramId Result) :
+        GlCreateProgram(atom::Observations observations, ProgramId Result) :
             mobservations(observations),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
@@ -2606,13 +2606,13 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mResult;
     };
 
     class GlCreateShader: public Encodable {
     public:
-        GlCreateShader(atom.Observations observations, ShaderType Type, ShaderId Result) :
+        GlCreateShader(atom::Observations observations, ShaderType Type, ShaderId Result) :
             mobservations(observations),
             mType(Type),
             mResult(Result) {}
@@ -2626,14 +2626,14 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderType mType;
         ShaderId mResult;
     };
 
     class GlCullFace: public Encodable {
     public:
-        GlCullFace(atom.Observations observations, FaceMode Mode) :
+        GlCullFace(atom::Observations observations, FaceMode Mode) :
             mobservations(observations),
             mMode(Mode) {}
         virtual const gapic::Id& Id() const {
@@ -2645,13 +2645,13 @@ namespace gles {
             e->Uint32(this->mMode);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FaceMode mMode;
     };
 
     class GlDeleteBuffers: public Encodable {
     public:
-        GlDeleteBuffers(atom.Observations observations, int32_t Count, BufferIdᵖ Buffers) :
+        GlDeleteBuffers(atom::Observations observations, int32_t Count, BufferId__P Buffers) :
             mobservations(observations),
             mCount(Count),
             mBuffers(Buffers) {}
@@ -2665,14 +2665,14 @@ namespace gles {
             e->Value(&this->mBuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        BufferIdᵖ mBuffers;
+        BufferId__P mBuffers;
     };
 
     class GlDeleteFramebuffers: public Encodable {
     public:
-        GlDeleteFramebuffers(atom.Observations observations, int32_t Count, FramebufferIdᵖ Framebuffers) :
+        GlDeleteFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__P Framebuffers) :
             mobservations(observations),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
@@ -2686,14 +2686,14 @@ namespace gles {
             e->Value(&this->mFramebuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        FramebufferIdᵖ mFramebuffers;
+        FramebufferId__P mFramebuffers;
     };
 
     class GlDeleteProgram: public Encodable {
     public:
-        GlDeleteProgram(atom.Observations observations, ProgramId Program) :
+        GlDeleteProgram(atom::Observations observations, ProgramId Program) :
             mobservations(observations),
             mProgram(Program) {}
         virtual const gapic::Id& Id() const {
@@ -2705,13 +2705,13 @@ namespace gles {
             e->Uint32(this->mProgram);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
     };
 
-    class QueryIdᵖ: public Encodable {
+    class QueryId__P: public Encodable {
     public:
-        QueryIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        QueryId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -2723,13 +2723,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlDeleteQueries: public Encodable {
     public:
-        GlDeleteQueries(atom.Observations observations, int32_t Count, QueryIdᵖ Queries) :
+        GlDeleteQueries(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
@@ -2743,14 +2743,14 @@ namespace gles {
             e->Value(&this->mQueries);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        QueryIdᵖ mQueries;
+        QueryId__P mQueries;
     };
 
     class GlDeleteQueriesEXT: public Encodable {
     public:
-        GlDeleteQueriesEXT(atom.Observations observations, int32_t Count, QueryIdᵖ Queries) :
+        GlDeleteQueriesEXT(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
@@ -2764,14 +2764,14 @@ namespace gles {
             e->Value(&this->mQueries);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        QueryIdᵖ mQueries;
+        QueryId__P mQueries;
     };
 
-    class RenderbufferIdᵖ: public Encodable {
+    class RenderbufferId__P: public Encodable {
     public:
-        RenderbufferIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        RenderbufferId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -2783,13 +2783,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlDeleteRenderbuffers: public Encodable {
     public:
-        GlDeleteRenderbuffers(atom.Observations observations, int32_t Count, RenderbufferIdᵖ Renderbuffers) :
+        GlDeleteRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__P Renderbuffers) :
             mobservations(observations),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
@@ -2803,14 +2803,14 @@ namespace gles {
             e->Value(&this->mRenderbuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        RenderbufferIdᵖ mRenderbuffers;
+        RenderbufferId__P mRenderbuffers;
     };
 
     class GlDeleteShader: public Encodable {
     public:
-        GlDeleteShader(atom.Observations observations, ShaderId Shader) :
+        GlDeleteShader(atom::Observations observations, ShaderId Shader) :
             mobservations(observations),
             mShader(Shader) {}
         virtual const gapic::Id& Id() const {
@@ -2822,13 +2822,13 @@ namespace gles {
             e->Uint32(this->mShader);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
     };
 
-    class TextureIdᵖ: public Encodable {
+    class TextureId__P: public Encodable {
     public:
-        TextureIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        TextureId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -2840,13 +2840,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlDeleteTextures: public Encodable {
     public:
-        GlDeleteTextures(atom.Observations observations, int32_t Count, TextureIdᵖ Textures) :
+        GlDeleteTextures(atom::Observations observations, int32_t Count, TextureId__P Textures) :
             mobservations(observations),
             mCount(Count),
             mTextures(Textures) {}
@@ -2860,14 +2860,14 @@ namespace gles {
             e->Value(&this->mTextures);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        TextureIdᵖ mTextures;
+        TextureId__P mTextures;
     };
 
-    class VertexArrayIdᵖ: public Encodable {
+    class VertexArrayId__P: public Encodable {
     public:
-        VertexArrayIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        VertexArrayId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -2879,13 +2879,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlDeleteVertexArraysOES: public Encodable {
     public:
-        GlDeleteVertexArraysOES(atom.Observations observations, int32_t Count, VertexArrayIdᵖ Arrays) :
+        GlDeleteVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
@@ -2899,14 +2899,14 @@ namespace gles {
             e->Value(&this->mArrays);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        VertexArrayIdᵖ mArrays;
+        VertexArrayId__P mArrays;
     };
 
     class GlDepthFunc: public Encodable {
     public:
-        GlDepthFunc(atom.Observations observations, TestFunction Function) :
+        GlDepthFunc(atom::Observations observations, TestFunction Function) :
             mobservations(observations),
             mFunction(Function) {}
         virtual const gapic::Id& Id() const {
@@ -2918,13 +2918,13 @@ namespace gles {
             e->Uint32(this->mFunction);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TestFunction mFunction;
     };
 
     class GlDepthMask: public Encodable {
     public:
-        GlDepthMask(atom.Observations observations, bool Enabled) :
+        GlDepthMask(atom::Observations observations, bool Enabled) :
             mobservations(observations),
             mEnabled(Enabled) {}
         virtual const gapic::Id& Id() const {
@@ -2936,13 +2936,13 @@ namespace gles {
             e->Bool(this->mEnabled);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         bool mEnabled;
     };
 
     class GlDepthRangef: public Encodable {
     public:
-        GlDepthRangef(atom.Observations observations, float Near, float Far) :
+        GlDepthRangef(atom::Observations observations, float Near, float Far) :
             mobservations(observations),
             mNear(Near),
             mFar(Far) {}
@@ -2956,14 +2956,14 @@ namespace gles {
             e->Float32(this->mFar);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mNear;
         float mFar;
     };
 
     class GlDetachShader: public Encodable {
     public:
-        GlDetachShader(atom.Observations observations, ProgramId Program, ShaderId Shader) :
+        GlDetachShader(atom::Observations observations, ProgramId Program, ShaderId Shader) :
             mobservations(observations),
             mProgram(Program),
             mShader(Shader) {}
@@ -2977,14 +2977,14 @@ namespace gles {
             e->Uint32(this->mShader);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         ShaderId mShader;
     };
 
     class GlDisable: public Encodable {
     public:
-        GlDisable(atom.Observations observations, Capability Capability) :
+        GlDisable(atom::Observations observations, Capability Capability) :
             mobservations(observations),
             mCapability(Capability) {}
         virtual const gapic::Id& Id() const {
@@ -2996,13 +2996,13 @@ namespace gles {
             e->Uint32(this->mCapability);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         Capability mCapability;
     };
 
     class GlDisableClientState: public Encodable {
     public:
-        GlDisableClientState(atom.Observations observations, ArrayType Type) :
+        GlDisableClientState(atom::Observations observations, ArrayType Type) :
             mobservations(observations),
             mType(Type) {}
         virtual const gapic::Id& Id() const {
@@ -3014,13 +3014,13 @@ namespace gles {
             e->Uint32(this->mType);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ArrayType mType;
     };
 
     class GlDisableVertexAttribArray: public Encodable {
     public:
-        GlDisableVertexAttribArray(atom.Observations observations, AttributeLocation Location) :
+        GlDisableVertexAttribArray(atom::Observations observations, AttributeLocation Location) :
             mobservations(observations),
             mLocation(Location) {}
         virtual const gapic::Id& Id() const {
@@ -3032,13 +3032,13 @@ namespace gles {
             e->Uint32(this->mLocation);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
     };
 
     class GlDiscardFramebufferEXT: public Encodable {
     public:
-        GlDiscardFramebufferEXT(atom.Observations observations, FramebufferTarget Target, int32_t NumAttachments, DiscardFramebufferAttachmentᵖ Attachments) :
+        GlDiscardFramebufferEXT(atom::Observations observations, FramebufferTarget Target, int32_t NumAttachments, DiscardFramebufferAttachment__P Attachments) :
             mobservations(observations),
             mTarget(Target),
             mNumAttachments(NumAttachments),
@@ -3054,15 +3054,15 @@ namespace gles {
             e->Value(&this->mAttachments);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mTarget;
         int32_t mNumAttachments;
-        DiscardFramebufferAttachmentᵖ mAttachments;
+        DiscardFramebufferAttachment__P mAttachments;
     };
 
     class GlDrawArrays: public Encodable {
     public:
-        GlDrawArrays(atom.Observations observations, DrawMode DrawMode, int32_t FirstIndex, int32_t IndexCount) :
+        GlDrawArrays(atom::Observations observations, DrawMode DrawMode, int32_t FirstIndex, int32_t IndexCount) :
             mobservations(observations),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
@@ -3078,7 +3078,7 @@ namespace gles {
             e->Int32(this->mIndexCount);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         DrawMode mDrawMode;
         int32_t mFirstIndex;
         int32_t mIndexCount;
@@ -3086,7 +3086,7 @@ namespace gles {
 
     class IndicesPointer: public Encodable {
     public:
-        IndicesPointer(memory.Pointer Address, memory.PoolID Pool) :
+        IndicesPointer(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3098,13 +3098,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlDrawElements: public Encodable {
     public:
-        GlDrawElements(atom.Observations observations, DrawMode DrawMode, int32_t ElementCount, IndicesType IndicesType, IndicesPointer Indices) :
+        GlDrawElements(atom::Observations observations, DrawMode DrawMode, int32_t ElementCount, IndicesType IndicesType, IndicesPointer Indices) :
             mobservations(observations),
             mDrawMode(DrawMode),
             mElementCount(ElementCount),
@@ -3122,7 +3122,7 @@ namespace gles {
             e->Value(&this->mIndices);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         DrawMode mDrawMode;
         int32_t mElementCount;
         IndicesType mIndicesType;
@@ -3131,7 +3131,7 @@ namespace gles {
 
     class GlEGLImageTargetRenderbufferStorageOES: public Encodable {
     public:
-        GlEGLImageTargetRenderbufferStorageOES(atom.Observations observations, ImageTargetRenderbufferStorage Target, TexturePointer Image) :
+        GlEGLImageTargetRenderbufferStorageOES(atom::Observations observations, ImageTargetRenderbufferStorage Target, TexturePointer Image) :
             mobservations(observations),
             mTarget(Target),
             mImage(Image) {}
@@ -3145,14 +3145,14 @@ namespace gles {
             e->Value(&this->mImage);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ImageTargetRenderbufferStorage mTarget;
         TexturePointer mImage;
     };
 
     class ImageOES: public Encodable {
     public:
-        ImageOES(memory.Pointer Address, memory.PoolID Pool) :
+        ImageOES(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3164,13 +3164,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlEGLImageTargetTexture2DOES: public Encodable {
     public:
-        GlEGLImageTargetTexture2DOES(atom.Observations observations, ImageTargetTexture Target, ImageOES Image) :
+        GlEGLImageTargetTexture2DOES(atom::Observations observations, ImageTargetTexture Target, ImageOES Image) :
             mobservations(observations),
             mTarget(Target),
             mImage(Image) {}
@@ -3184,14 +3184,14 @@ namespace gles {
             e->Value(&this->mImage);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ImageTargetTexture mTarget;
         ImageOES mImage;
     };
 
     class GlEnable: public Encodable {
     public:
-        GlEnable(atom.Observations observations, Capability Capability) :
+        GlEnable(atom::Observations observations, Capability Capability) :
             mobservations(observations),
             mCapability(Capability) {}
         virtual const gapic::Id& Id() const {
@@ -3203,13 +3203,13 @@ namespace gles {
             e->Uint32(this->mCapability);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         Capability mCapability;
     };
 
     class GlEnableClientState: public Encodable {
     public:
-        GlEnableClientState(atom.Observations observations, ArrayType Type) :
+        GlEnableClientState(atom::Observations observations, ArrayType Type) :
             mobservations(observations),
             mType(Type) {}
         virtual const gapic::Id& Id() const {
@@ -3221,13 +3221,13 @@ namespace gles {
             e->Uint32(this->mType);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ArrayType mType;
     };
 
     class GlEnableVertexAttribArray: public Encodable {
     public:
-        GlEnableVertexAttribArray(atom.Observations observations, AttributeLocation Location) :
+        GlEnableVertexAttribArray(atom::Observations observations, AttributeLocation Location) :
             mobservations(observations),
             mLocation(Location) {}
         virtual const gapic::Id& Id() const {
@@ -3239,13 +3239,13 @@ namespace gles {
             e->Uint32(this->mLocation);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
     };
 
     class GlEndQuery: public Encodable {
     public:
-        GlEndQuery(atom.Observations observations, QueryTarget Target) :
+        GlEndQuery(atom::Observations observations, QueryTarget Target) :
             mobservations(observations),
             mTarget(Target) {}
         virtual const gapic::Id& Id() const {
@@ -3257,13 +3257,13 @@ namespace gles {
             e->Uint32(this->mTarget);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
     };
 
     class GlEndQueryEXT: public Encodable {
     public:
-        GlEndQueryEXT(atom.Observations observations, QueryTarget Target) :
+        GlEndQueryEXT(atom::Observations observations, QueryTarget Target) :
             mobservations(observations),
             mTarget(Target) {}
         virtual const gapic::Id& Id() const {
@@ -3275,13 +3275,13 @@ namespace gles {
             e->Uint32(this->mTarget);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
     };
 
     class GlEndTilingQCOM: public Encodable {
     public:
-        GlEndTilingQCOM(atom.Observations observations, TilePreserveMaskQCOM PreserveMask) :
+        GlEndTilingQCOM(atom::Observations observations, TilePreserveMaskQCOM PreserveMask) :
             mobservations(observations),
             mPreserveMask(PreserveMask) {}
         virtual const gapic::Id& Id() const {
@@ -3293,13 +3293,13 @@ namespace gles {
             e->Uint32(this->mPreserveMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TilePreserveMaskQCOM mPreserveMask;
     };
 
     class GlFinish: public Encodable {
     public:
-        GlFinish(atom.Observations observations) :
+        GlFinish(atom::Observations observations) :
             mobservations(observations) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x62, 0xe9, 0xca, 0xf4, 0x39, 0xd8, 0x39, 0x1e, 0x49, 0x43, 0x1f, 0x40, 0xbb, 0x3d, 0x1b, 0x11, 0xc9, 0x5c, 0x9a, 0xf9,  } };
@@ -3309,12 +3309,12 @@ namespace gles {
             e->Value(&this->mobservations);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
     };
 
     class GlFlush: public Encodable {
     public:
-        GlFlush(atom.Observations observations) :
+        GlFlush(atom::Observations observations) :
             mobservations(observations) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x63, 0x83, 0x26, 0x9a, 0x10, 0x6b, 0x68, 0x9f, 0x90, 0x65, 0x54, 0xba, 0x66, 0x25, 0xc8, 0x09, 0x24, 0xe3, 0x21, 0x00,  } };
@@ -3324,12 +3324,12 @@ namespace gles {
             e->Value(&this->mobservations);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
     };
 
     class GlFramebufferRenderbuffer: public Encodable {
     public:
-        GlFramebufferRenderbuffer(atom.Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment FramebufferAttachment, RenderbufferTarget RenderbufferTarget, RenderbufferId Renderbuffer) :
+        GlFramebufferRenderbuffer(atom::Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment FramebufferAttachment, RenderbufferTarget RenderbufferTarget, RenderbufferId Renderbuffer) :
             mobservations(observations),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
@@ -3347,7 +3347,7 @@ namespace gles {
             e->Uint32(this->mRenderbuffer);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mFramebufferTarget;
         FramebufferAttachment mFramebufferAttachment;
         RenderbufferTarget mRenderbufferTarget;
@@ -3356,7 +3356,7 @@ namespace gles {
 
     class GlFramebufferTexture2D: public Encodable {
     public:
-        GlFramebufferTexture2D(atom.Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment FramebufferAttachment, TextureImageTarget TextureTarget, TextureId Texture, int32_t Level) :
+        GlFramebufferTexture2D(atom::Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment FramebufferAttachment, TextureImageTarget TextureTarget, TextureId Texture, int32_t Level) :
             mobservations(observations),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
@@ -3376,7 +3376,7 @@ namespace gles {
             e->Int32(this->mLevel);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mFramebufferTarget;
         FramebufferAttachment mFramebufferAttachment;
         TextureImageTarget mTextureTarget;
@@ -3386,7 +3386,7 @@ namespace gles {
 
     class GlFrontFace: public Encodable {
     public:
-        GlFrontFace(atom.Observations observations, FaceOrientation Orientation) :
+        GlFrontFace(atom::Observations observations, FaceOrientation Orientation) :
             mobservations(observations),
             mOrientation(Orientation) {}
         virtual const gapic::Id& Id() const {
@@ -3398,13 +3398,13 @@ namespace gles {
             e->Uint32(this->mOrientation);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FaceOrientation mOrientation;
     };
 
     class GlGenBuffers: public Encodable {
     public:
-        GlGenBuffers(atom.Observations observations, int32_t Count, BufferIdᵖ Buffers) :
+        GlGenBuffers(atom::Observations observations, int32_t Count, BufferId__P Buffers) :
             mobservations(observations),
             mCount(Count),
             mBuffers(Buffers) {}
@@ -3418,14 +3418,14 @@ namespace gles {
             e->Value(&this->mBuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        BufferIdᵖ mBuffers;
+        BufferId__P mBuffers;
     };
 
     class GlGenFramebuffers: public Encodable {
     public:
-        GlGenFramebuffers(atom.Observations observations, int32_t Count, FramebufferIdᵖ Framebuffers) :
+        GlGenFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__P Framebuffers) :
             mobservations(observations),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
@@ -3439,14 +3439,14 @@ namespace gles {
             e->Value(&this->mFramebuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        FramebufferIdᵖ mFramebuffers;
+        FramebufferId__P mFramebuffers;
     };
 
     class GlGenQueries: public Encodable {
     public:
-        GlGenQueries(atom.Observations observations, int32_t Count, QueryIdᵖ Queries) :
+        GlGenQueries(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
@@ -3460,14 +3460,14 @@ namespace gles {
             e->Value(&this->mQueries);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        QueryIdᵖ mQueries;
+        QueryId__P mQueries;
     };
 
     class GlGenQueriesEXT: public Encodable {
     public:
-        GlGenQueriesEXT(atom.Observations observations, int32_t Count, QueryIdᵖ Queries) :
+        GlGenQueriesEXT(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
@@ -3481,14 +3481,14 @@ namespace gles {
             e->Value(&this->mQueries);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        QueryIdᵖ mQueries;
+        QueryId__P mQueries;
     };
 
     class GlGenRenderbuffers: public Encodable {
     public:
-        GlGenRenderbuffers(atom.Observations observations, int32_t Count, RenderbufferIdᵖ Renderbuffers) :
+        GlGenRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__P Renderbuffers) :
             mobservations(observations),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
@@ -3502,14 +3502,14 @@ namespace gles {
             e->Value(&this->mRenderbuffers);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        RenderbufferIdᵖ mRenderbuffers;
+        RenderbufferId__P mRenderbuffers;
     };
 
     class GlGenTextures: public Encodable {
     public:
-        GlGenTextures(atom.Observations observations, int32_t Count, TextureIdᵖ Textures) :
+        GlGenTextures(atom::Observations observations, int32_t Count, TextureId__P Textures) :
             mobservations(observations),
             mCount(Count),
             mTextures(Textures) {}
@@ -3523,14 +3523,14 @@ namespace gles {
             e->Value(&this->mTextures);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        TextureIdᵖ mTextures;
+        TextureId__P mTextures;
     };
 
     class GlGenVertexArraysOES: public Encodable {
     public:
-        GlGenVertexArraysOES(atom.Observations observations, int32_t Count, VertexArrayIdᵖ Arrays) :
+        GlGenVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
@@ -3544,14 +3544,14 @@ namespace gles {
             e->Value(&this->mArrays);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        VertexArrayIdᵖ mArrays;
+        VertexArrayId__P mArrays;
     };
 
     class GlGenerateMipmap: public Encodable {
     public:
-        GlGenerateMipmap(atom.Observations observations, TextureImageTarget Target) :
+        GlGenerateMipmap(atom::Observations observations, TextureImageTarget Target) :
             mobservations(observations),
             mTarget(Target) {}
         virtual const gapic::Id& Id() const {
@@ -3563,13 +3563,13 @@ namespace gles {
             e->Uint32(this->mTarget);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
     };
 
-    class S32ᵖ: public Encodable {
+    class S32__P: public Encodable {
     public:
-        S32ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        S32__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3581,13 +3581,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class ShaderAttribTypeᵖ: public Encodable {
+    class ShaderAttribType__P: public Encodable {
     public:
-        ShaderAttribTypeᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        ShaderAttribType__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3599,13 +3599,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetActiveAttrib: public Encodable {
     public:
-        GlGetActiveAttrib(atom.Observations observations, ProgramId Program, AttributeLocation Location, int32_t BufferSize, S32ᵖ BufferBytesWritten, S32ᵖ VectorCount, ShaderAttribTypeᵖ Type, Charᵖ Name) :
+        GlGetActiveAttrib(atom::Observations observations, ProgramId Program, AttributeLocation Location, int32_t BufferSize, S32__P BufferBytesWritten, S32__P VectorCount, ShaderAttribType__P Type, Char__P Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -3629,19 +3629,19 @@ namespace gles {
             e->Value(&this->mName);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         AttributeLocation mLocation;
         int32_t mBufferSize;
-        S32ᵖ mBufferBytesWritten;
-        S32ᵖ mVectorCount;
-        ShaderAttribTypeᵖ mType;
-        Charᵖ mName;
+        S32__P mBufferBytesWritten;
+        S32__P mVectorCount;
+        ShaderAttribType__P mType;
+        Char__P mName;
     };
 
-    class ShaderUniformTypeᵖ: public Encodable {
+    class ShaderUniformType__P: public Encodable {
     public:
-        ShaderUniformTypeᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        ShaderUniformType__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3653,13 +3653,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetActiveUniform: public Encodable {
     public:
-        GlGetActiveUniform(atom.Observations observations, ProgramId Program, int32_t Location, int32_t BufferSize, S32ᵖ BufferBytesWritten, S32ᵖ VectorCount, ShaderUniformTypeᵖ Type, Charᵖ Name) :
+        GlGetActiveUniform(atom::Observations observations, ProgramId Program, int32_t Location, int32_t BufferSize, S32__P BufferBytesWritten, S32__P VectorCount, ShaderUniformType__P Type, Char__P Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -3683,19 +3683,19 @@ namespace gles {
             e->Value(&this->mName);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         int32_t mLocation;
         int32_t mBufferSize;
-        S32ᵖ mBufferBytesWritten;
-        S32ᵖ mVectorCount;
-        ShaderUniformTypeᵖ mType;
-        Charᵖ mName;
+        S32__P mBufferBytesWritten;
+        S32__P mVectorCount;
+        ShaderUniformType__P mType;
+        Char__P mName;
     };
 
-    class ShaderIdᵖ: public Encodable {
+    class ShaderId__P: public Encodable {
     public:
-        ShaderIdᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        ShaderId__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3707,13 +3707,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetAttachedShaders: public Encodable {
     public:
-        GlGetAttachedShaders(atom.Observations observations, ProgramId Program, int32_t BufferLength, S32ᵖ ShadersLengthWritten, ShaderIdᵖ Shaders) :
+        GlGetAttachedShaders(atom::Observations observations, ProgramId Program, int32_t BufferLength, S32__P ShadersLengthWritten, ShaderId__P Shaders) :
             mobservations(observations),
             mProgram(Program),
             mBufferLength(BufferLength),
@@ -3731,16 +3731,16 @@ namespace gles {
             e->Value(&this->mShaders);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         int32_t mBufferLength;
-        S32ᵖ mShadersLengthWritten;
-        ShaderIdᵖ mShaders;
+        S32__P mShadersLengthWritten;
+        ShaderId__P mShaders;
     };
 
     class GlGetAttribLocation: public Encodable {
     public:
-        GlGetAttribLocation(atom.Observations observations, ProgramId Program, char* Name, AttributeLocation Result) :
+        GlGetAttribLocation(atom::Observations observations, ProgramId Program, char* Name, AttributeLocation Result) :
             mobservations(observations),
             mProgram(Program),
             mName(Name),
@@ -3756,7 +3756,7 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         char* mName;
         AttributeLocation mResult;
@@ -3764,7 +3764,7 @@ namespace gles {
 
     class GlGetBooleanv: public Encodable {
     public:
-        GlGetBooleanv(atom.Observations observations, StateVariable Param, Boolᵖ Values) :
+        GlGetBooleanv(atom::Observations observations, StateVariable Param, Bool__P Values) :
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
@@ -3778,14 +3778,14 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         StateVariable mParam;
-        Boolᵖ mValues;
+        Bool__P mValues;
     };
 
     class GlGetBufferParameteriv: public Encodable {
     public:
-        GlGetBufferParameteriv(atom.Observations observations, BufferTarget Target, BufferParameter Parameter, S32ᵖ Value) :
+        GlGetBufferParameteriv(atom::Observations observations, BufferTarget Target, BufferParameter Parameter, S32__P Value) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -3801,15 +3801,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
         BufferParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlGetError: public Encodable {
     public:
-        GlGetError(atom.Observations observations, Error Result) :
+        GlGetError(atom::Observations observations, Error Result) :
             mobservations(observations),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
@@ -3821,13 +3821,13 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         Error mResult;
     };
 
     class GlGetFloatv: public Encodable {
     public:
-        GlGetFloatv(atom.Observations observations, StateVariable Param, F32ᵖ Values) :
+        GlGetFloatv(atom::Observations observations, StateVariable Param, F32__P Values) :
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
@@ -3841,14 +3841,14 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         StateVariable mParam;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlGetFramebufferAttachmentParameteriv: public Encodable {
     public:
-        GlGetFramebufferAttachmentParameteriv(atom.Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment Attachment, FramebufferAttachmentParameter Parameter, S32ᵖ Value) :
+        GlGetFramebufferAttachmentParameteriv(atom::Observations observations, FramebufferTarget FramebufferTarget, FramebufferAttachment Attachment, FramebufferAttachmentParameter Parameter, S32__P Value) :
             mobservations(observations),
             mFramebufferTarget(FramebufferTarget),
             mAttachment(Attachment),
@@ -3866,16 +3866,16 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mFramebufferTarget;
         FramebufferAttachment mAttachment;
         FramebufferAttachmentParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlGetGraphicsResetStatusEXT: public Encodable {
     public:
-        GlGetGraphicsResetStatusEXT(atom.Observations observations, ResetStatus Result) :
+        GlGetGraphicsResetStatusEXT(atom::Observations observations, ResetStatus Result) :
             mobservations(observations),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
@@ -3887,13 +3887,13 @@ namespace gles {
             e->Uint32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ResetStatus mResult;
     };
 
     class GlGetIntegerv: public Encodable {
     public:
-        GlGetIntegerv(atom.Observations observations, StateVariable Param, S32ᵖ Values) :
+        GlGetIntegerv(atom::Observations observations, StateVariable Param, S32__P Values) :
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
@@ -3907,14 +3907,14 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         StateVariable mParam;
-        S32ᵖ mValues;
+        S32__P mValues;
     };
 
-    class U32ᵖ: public Encodable {
+    class U32__P: public Encodable {
     public:
-        U32ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        U32__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -3926,13 +3926,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetProgramBinaryOES: public Encodable {
     public:
-        GlGetProgramBinaryOES(atom.Observations observations, ProgramId Program, int32_t BufferSize, S32ᵖ BytesWritten, U32ᵖ BinaryFormat, Voidᵖ Binary) :
+        GlGetProgramBinaryOES(atom::Observations observations, ProgramId Program, int32_t BufferSize, S32__P BytesWritten, U32__P BinaryFormat, Void__P Binary) :
             mobservations(observations),
             mProgram(Program),
             mBufferSize(BufferSize),
@@ -3952,17 +3952,17 @@ namespace gles {
             e->Value(&this->mBinary);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         int32_t mBufferSize;
-        S32ᵖ mBytesWritten;
-        U32ᵖ mBinaryFormat;
-        Voidᵖ mBinary;
+        S32__P mBytesWritten;
+        U32__P mBinaryFormat;
+        Void__P mBinary;
     };
 
     class GlGetProgramInfoLog: public Encodable {
     public:
-        GlGetProgramInfoLog(atom.Observations observations, ProgramId Program, int32_t BufferLength, S32ᵖ StringLengthWritten, Charᵖ Info) :
+        GlGetProgramInfoLog(atom::Observations observations, ProgramId Program, int32_t BufferLength, S32__P StringLengthWritten, Char__P Info) :
             mobservations(observations),
             mProgram(Program),
             mBufferLength(BufferLength),
@@ -3980,16 +3980,16 @@ namespace gles {
             e->Value(&this->mInfo);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         int32_t mBufferLength;
-        S32ᵖ mStringLengthWritten;
-        Charᵖ mInfo;
+        S32__P mStringLengthWritten;
+        Char__P mInfo;
     };
 
     class GlGetProgramiv: public Encodable {
     public:
-        GlGetProgramiv(atom.Observations observations, ProgramId Program, ProgramParameter Parameter, S32ᵖ Value) :
+        GlGetProgramiv(atom::Observations observations, ProgramId Program, ProgramParameter Parameter, S32__P Value) :
             mobservations(observations),
             mProgram(Program),
             mParameter(Parameter),
@@ -4005,15 +4005,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         ProgramParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
-    class S64ᵖ: public Encodable {
+    class S64__P: public Encodable {
     public:
-        S64ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        S64__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -4025,13 +4025,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetQueryObjecti64vEXT: public Encodable {
     public:
-        GlGetQueryObjecti64vEXT(atom.Observations observations, QueryId Query, QueryObjectParameter Parameter, S64ᵖ Value) :
+        GlGetQueryObjecti64vEXT(atom::Observations observations, QueryId Query, QueryObjectParameter Parameter, S64__P Value) :
             mobservations(observations),
             mQuery(Query),
             mParameter(Parameter),
@@ -4047,15 +4047,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryObjectParameter mParameter;
-        S64ᵖ mValue;
+        S64__P mValue;
     };
 
     class GlGetQueryObjectivEXT: public Encodable {
     public:
-        GlGetQueryObjectivEXT(atom.Observations observations, QueryId Query, QueryObjectParameter Parameter, S32ᵖ Value) :
+        GlGetQueryObjectivEXT(atom::Observations observations, QueryId Query, QueryObjectParameter Parameter, S32__P Value) :
             mobservations(observations),
             mQuery(Query),
             mParameter(Parameter),
@@ -4071,15 +4071,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryObjectParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
-    class U64ᵖ: public Encodable {
+    class U64__P: public Encodable {
     public:
-        U64ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        U64__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -4091,13 +4091,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class GlGetQueryObjectui64vEXT: public Encodable {
     public:
-        GlGetQueryObjectui64vEXT(atom.Observations observations, QueryId Query, QueryObjectParameter Parameter, U64ᵖ Value) :
+        GlGetQueryObjectui64vEXT(atom::Observations observations, QueryId Query, QueryObjectParameter Parameter, U64__P Value) :
             mobservations(observations),
             mQuery(Query),
             mParameter(Parameter),
@@ -4113,15 +4113,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryObjectParameter mParameter;
-        U64ᵖ mValue;
+        U64__P mValue;
     };
 
     class GlGetQueryObjectuiv: public Encodable {
     public:
-        GlGetQueryObjectuiv(atom.Observations observations, QueryId Query, QueryObjectParameter Parameter, U32ᵖ Value) :
+        GlGetQueryObjectuiv(atom::Observations observations, QueryId Query, QueryObjectParameter Parameter, U32__P Value) :
             mobservations(observations),
             mQuery(Query),
             mParameter(Parameter),
@@ -4137,15 +4137,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryObjectParameter mParameter;
-        U32ᵖ mValue;
+        U32__P mValue;
     };
 
     class GlGetQueryObjectuivEXT: public Encodable {
     public:
-        GlGetQueryObjectuivEXT(atom.Observations observations, QueryId Query, QueryObjectParameter Parameter, U32ᵖ Value) :
+        GlGetQueryObjectuivEXT(atom::Observations observations, QueryId Query, QueryObjectParameter Parameter, U32__P Value) :
             mobservations(observations),
             mQuery(Query),
             mParameter(Parameter),
@@ -4161,15 +4161,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryObjectParameter mParameter;
-        U32ᵖ mValue;
+        U32__P mValue;
     };
 
     class GlGetQueryiv: public Encodable {
     public:
-        GlGetQueryiv(atom.Observations observations, QueryTarget Target, QueryParameter Parameter, S32ᵖ Value) :
+        GlGetQueryiv(atom::Observations observations, QueryTarget Target, QueryParameter Parameter, S32__P Value) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -4185,15 +4185,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
         QueryParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlGetQueryivEXT: public Encodable {
     public:
-        GlGetQueryivEXT(atom.Observations observations, QueryTarget Target, QueryParameter Parameter, S32ᵖ Value) :
+        GlGetQueryivEXT(atom::Observations observations, QueryTarget Target, QueryParameter Parameter, S32__P Value) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -4209,15 +4209,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryTarget mTarget;
         QueryParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlGetRenderbufferParameteriv: public Encodable {
     public:
-        GlGetRenderbufferParameteriv(atom.Observations observations, RenderbufferTarget Target, RenderbufferParameter Parameter, S32ᵖ Values) :
+        GlGetRenderbufferParameteriv(atom::Observations observations, RenderbufferTarget Target, RenderbufferParameter Parameter, S32__P Values) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -4233,15 +4233,15 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         RenderbufferTarget mTarget;
         RenderbufferParameter mParameter;
-        S32ᵖ mValues;
+        S32__P mValues;
     };
 
     class GlGetShaderInfoLog: public Encodable {
     public:
-        GlGetShaderInfoLog(atom.Observations observations, ShaderId Shader, int32_t BufferLength, S32ᵖ StringLengthWritten, Charᵖ Info) :
+        GlGetShaderInfoLog(atom::Observations observations, ShaderId Shader, int32_t BufferLength, S32__P StringLengthWritten, Char__P Info) :
             mobservations(observations),
             mShader(Shader),
             mBufferLength(BufferLength),
@@ -4259,16 +4259,16 @@ namespace gles {
             e->Value(&this->mInfo);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
         int32_t mBufferLength;
-        S32ᵖ mStringLengthWritten;
-        Charᵖ mInfo;
+        S32__P mStringLengthWritten;
+        Char__P mInfo;
     };
 
     class GlGetShaderPrecisionFormat: public Encodable {
     public:
-        GlGetShaderPrecisionFormat(atom.Observations observations, ShaderType ShaderType, PrecisionType PrecisionType, S32ᵖ Range, S32ᵖ Precision) :
+        GlGetShaderPrecisionFormat(atom::Observations observations, ShaderType ShaderType, PrecisionType PrecisionType, S32__P Range, S32__P Precision) :
             mobservations(observations),
             mShaderType(ShaderType),
             mPrecisionType(PrecisionType),
@@ -4286,16 +4286,16 @@ namespace gles {
             e->Value(&this->mPrecision);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderType mShaderType;
         PrecisionType mPrecisionType;
-        S32ᵖ mRange;
-        S32ᵖ mPrecision;
+        S32__P mRange;
+        S32__P mPrecision;
     };
 
     class GlGetShaderSource: public Encodable {
     public:
-        GlGetShaderSource(atom.Observations observations, ShaderId Shader, int32_t BufferLength, S32ᵖ StringLengthWritten, Charᵖ Source) :
+        GlGetShaderSource(atom::Observations observations, ShaderId Shader, int32_t BufferLength, S32__P StringLengthWritten, Char__P Source) :
             mobservations(observations),
             mShader(Shader),
             mBufferLength(BufferLength),
@@ -4313,16 +4313,16 @@ namespace gles {
             e->Value(&this->mSource);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
         int32_t mBufferLength;
-        S32ᵖ mStringLengthWritten;
-        Charᵖ mSource;
+        S32__P mStringLengthWritten;
+        Char__P mSource;
     };
 
     class GlGetShaderiv: public Encodable {
     public:
-        GlGetShaderiv(atom.Observations observations, ShaderId Shader, ShaderParameter Parameter, S32ᵖ Value) :
+        GlGetShaderiv(atom::Observations observations, ShaderId Shader, ShaderParameter Parameter, S32__P Value) :
             mobservations(observations),
             mShader(Shader),
             mParameter(Parameter),
@@ -4338,15 +4338,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
         ShaderParameter mParameter;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlGetString: public Encodable {
     public:
-        GlGetString(atom.Observations observations, StringConstant Param, Charᵖ Result) :
+        GlGetString(atom::Observations observations, StringConstant Param, Char__P Result) :
             mobservations(observations),
             mParam(Param),
             mResult(Result) {}
@@ -4360,14 +4360,14 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         StringConstant mParam;
-        Charᵖ mResult;
+        Char__P mResult;
     };
 
     class GlGetTexParameterfv: public Encodable {
     public:
-        GlGetTexParameterfv(atom.Observations observations, TextureTarget Target, TextureParameter Parameter, F32ᵖ Values) :
+        GlGetTexParameterfv(atom::Observations observations, TextureTarget Target, TextureParameter Parameter, F32__P Values) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -4383,15 +4383,15 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         TextureParameter mParameter;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlGetTexParameteriv: public Encodable {
     public:
-        GlGetTexParameteriv(atom.Observations observations, TextureTarget Target, TextureParameter Parameter, S32ᵖ Values) :
+        GlGetTexParameteriv(atom::Observations observations, TextureTarget Target, TextureParameter Parameter, S32__P Values) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -4407,15 +4407,15 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         TextureParameter mParameter;
-        S32ᵖ mValues;
+        S32__P mValues;
     };
 
     class GlGetUniformLocation: public Encodable {
     public:
-        GlGetUniformLocation(atom.Observations observations, ProgramId Program, char* Name, UniformLocation Result) :
+        GlGetUniformLocation(atom::Observations observations, ProgramId Program, char* Name, UniformLocation Result) :
             mobservations(observations),
             mProgram(Program),
             mName(Name),
@@ -4431,7 +4431,7 @@ namespace gles {
             e->Int32(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         char* mName;
         UniformLocation mResult;
@@ -4439,7 +4439,7 @@ namespace gles {
 
     class GlGetUniformfv: public Encodable {
     public:
-        GlGetUniformfv(atom.Observations observations, ProgramId Program, UniformLocation Location, F32ᵖ Values) :
+        GlGetUniformfv(atom::Observations observations, ProgramId Program, UniformLocation Location, F32__P Values) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -4455,15 +4455,15 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         UniformLocation mLocation;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlGetUniformiv: public Encodable {
     public:
-        GlGetUniformiv(atom.Observations observations, ProgramId Program, UniformLocation Location, S32ᵖ Values) :
+        GlGetUniformiv(atom::Observations observations, ProgramId Program, UniformLocation Location, S32__P Values) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -4479,15 +4479,15 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         UniformLocation mLocation;
-        S32ᵖ mValues;
+        S32__P mValues;
     };
 
     class GlHint: public Encodable {
     public:
-        GlHint(atom.Observations observations, HintTarget Target, HintMode Mode) :
+        GlHint(atom::Observations observations, HintTarget Target, HintMode Mode) :
             mobservations(observations),
             mTarget(Target),
             mMode(Mode) {}
@@ -4501,14 +4501,14 @@ namespace gles {
             e->Uint32(this->mMode);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         HintTarget mTarget;
         HintMode mMode;
     };
 
     class GlInsertEventMarkerEXT: public Encodable {
     public:
-        GlInsertEventMarkerEXT(atom.Observations observations, int32_t Length, char* Marker) :
+        GlInsertEventMarkerEXT(atom::Observations observations, int32_t Length, char* Marker) :
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
@@ -4522,14 +4522,14 @@ namespace gles {
             e->String(this->mMarker);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mLength;
         char* mMarker;
     };
 
     class GlInvalidateFramebuffer: public Encodable {
     public:
-        GlInvalidateFramebuffer(atom.Observations observations, FramebufferTarget Target, int32_t Count, FramebufferAttachmentᵖ Attachments) :
+        GlInvalidateFramebuffer(atom::Observations observations, FramebufferTarget Target, int32_t Count, FramebufferAttachment__P Attachments) :
             mobservations(observations),
             mTarget(Target),
             mCount(Count),
@@ -4545,15 +4545,15 @@ namespace gles {
             e->Value(&this->mAttachments);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferTarget mTarget;
         int32_t mCount;
-        FramebufferAttachmentᵖ mAttachments;
+        FramebufferAttachment__P mAttachments;
     };
 
     class GlIsBuffer: public Encodable {
     public:
-        GlIsBuffer(atom.Observations observations, BufferId Buffer, bool Result) :
+        GlIsBuffer(atom::Observations observations, BufferId Buffer, bool Result) :
             mobservations(observations),
             mBuffer(Buffer),
             mResult(Result) {}
@@ -4567,14 +4567,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferId mBuffer;
         bool mResult;
     };
 
     class GlIsEnabled: public Encodable {
     public:
-        GlIsEnabled(atom.Observations observations, Capability Capability, bool Result) :
+        GlIsEnabled(atom::Observations observations, Capability Capability, bool Result) :
             mobservations(observations),
             mCapability(Capability),
             mResult(Result) {}
@@ -4588,14 +4588,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         Capability mCapability;
         bool mResult;
     };
 
     class GlIsFramebuffer: public Encodable {
     public:
-        GlIsFramebuffer(atom.Observations observations, FramebufferId Framebuffer, bool Result) :
+        GlIsFramebuffer(atom::Observations observations, FramebufferId Framebuffer, bool Result) :
             mobservations(observations),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
@@ -4609,14 +4609,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FramebufferId mFramebuffer;
         bool mResult;
     };
 
     class GlIsProgram: public Encodable {
     public:
-        GlIsProgram(atom.Observations observations, ProgramId Program, bool Result) :
+        GlIsProgram(atom::Observations observations, ProgramId Program, bool Result) :
             mobservations(observations),
             mProgram(Program),
             mResult(Result) {}
@@ -4630,14 +4630,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         bool mResult;
     };
 
     class GlIsQuery: public Encodable {
     public:
-        GlIsQuery(atom.Observations observations, QueryId Query, bool Result) :
+        GlIsQuery(atom::Observations observations, QueryId Query, bool Result) :
             mobservations(observations),
             mQuery(Query),
             mResult(Result) {}
@@ -4651,14 +4651,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         bool mResult;
     };
 
     class GlIsQueryEXT: public Encodable {
     public:
-        GlIsQueryEXT(atom.Observations observations, QueryId Query, bool Result) :
+        GlIsQueryEXT(atom::Observations observations, QueryId Query, bool Result) :
             mobservations(observations),
             mQuery(Query),
             mResult(Result) {}
@@ -4672,14 +4672,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         bool mResult;
     };
 
     class GlIsRenderbuffer: public Encodable {
     public:
-        GlIsRenderbuffer(atom.Observations observations, RenderbufferId Renderbuffer, bool Result) :
+        GlIsRenderbuffer(atom::Observations observations, RenderbufferId Renderbuffer, bool Result) :
             mobservations(observations),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
@@ -4693,14 +4693,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         RenderbufferId mRenderbuffer;
         bool mResult;
     };
 
     class GlIsShader: public Encodable {
     public:
-        GlIsShader(atom.Observations observations, ShaderId Shader, bool Result) :
+        GlIsShader(atom::Observations observations, ShaderId Shader, bool Result) :
             mobservations(observations),
             mShader(Shader),
             mResult(Result) {}
@@ -4714,14 +4714,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
         bool mResult;
     };
 
     class GlIsTexture: public Encodable {
     public:
-        GlIsTexture(atom.Observations observations, TextureId Texture, bool Result) :
+        GlIsTexture(atom::Observations observations, TextureId Texture, bool Result) :
             mobservations(observations),
             mTexture(Texture),
             mResult(Result) {}
@@ -4735,14 +4735,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureId mTexture;
         bool mResult;
     };
 
     class GlIsVertexArrayOES: public Encodable {
     public:
-        GlIsVertexArrayOES(atom.Observations observations, VertexArrayId Array, bool Result) :
+        GlIsVertexArrayOES(atom::Observations observations, VertexArrayId Array, bool Result) :
             mobservations(observations),
             mArray(Array),
             mResult(Result) {}
@@ -4756,14 +4756,14 @@ namespace gles {
             e->Bool(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         VertexArrayId mArray;
         bool mResult;
     };
 
     class GlLineWidth: public Encodable {
     public:
-        GlLineWidth(atom.Observations observations, float Width) :
+        GlLineWidth(atom::Observations observations, float Width) :
             mobservations(observations),
             mWidth(Width) {}
         virtual const gapic::Id& Id() const {
@@ -4775,13 +4775,13 @@ namespace gles {
             e->Float32(this->mWidth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mWidth;
     };
 
     class GlLinkProgram: public Encodable {
     public:
-        GlLinkProgram(atom.Observations observations, ProgramId Program) :
+        GlLinkProgram(atom::Observations observations, ProgramId Program) :
             mobservations(observations),
             mProgram(Program) {}
         virtual const gapic::Id& Id() const {
@@ -4793,13 +4793,13 @@ namespace gles {
             e->Uint32(this->mProgram);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
     };
 
     class GlMapBufferRange: public Encodable {
     public:
-        GlMapBufferRange(atom.Observations observations, BufferTarget Target, int32_t Offset, int32_t Length, MapBufferRangeAccess Access, Voidᵖ Result) :
+        GlMapBufferRange(atom::Observations observations, BufferTarget Target, int32_t Offset, int32_t Length, MapBufferRangeAccess Access, Void__P Result) :
             mobservations(observations),
             mTarget(Target),
             mOffset(Offset),
@@ -4819,17 +4819,17 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
         int32_t mOffset;
         int32_t mLength;
         MapBufferRangeAccess mAccess;
-        Voidᵖ mResult;
+        Void__P mResult;
     };
 
     class GlPixelStorei: public Encodable {
     public:
-        GlPixelStorei(atom.Observations observations, PixelStoreParameter Parameter, int32_t Value) :
+        GlPixelStorei(atom::Observations observations, PixelStoreParameter Parameter, int32_t Value) :
             mobservations(observations),
             mParameter(Parameter),
             mValue(Value) {}
@@ -4843,14 +4843,14 @@ namespace gles {
             e->Int32(this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         PixelStoreParameter mParameter;
         int32_t mValue;
     };
 
     class GlPolygonOffset: public Encodable {
     public:
-        GlPolygonOffset(atom.Observations observations, float ScaleFactor, float Units) :
+        GlPolygonOffset(atom::Observations observations, float ScaleFactor, float Units) :
             mobservations(observations),
             mScaleFactor(ScaleFactor),
             mUnits(Units) {}
@@ -4864,14 +4864,14 @@ namespace gles {
             e->Float32(this->mUnits);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mScaleFactor;
         float mUnits;
     };
 
     class GlPopGroupMarkerEXT: public Encodable {
     public:
-        GlPopGroupMarkerEXT(atom.Observations observations) :
+        GlPopGroupMarkerEXT(atom::Observations observations) :
             mobservations(observations) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x63, 0xb8, 0xb9, 0x5e, 0x5d, 0xf9, 0x13, 0xbb, 0xc7, 0xce, 0x02, 0x0f, 0xc7, 0x14, 0x03, 0x22, 0xe5, 0x70, 0x9f, 0x87,  } };
@@ -4881,12 +4881,12 @@ namespace gles {
             e->Value(&this->mobservations);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
     };
 
     class GlProgramBinaryOES: public Encodable {
     public:
-        GlProgramBinaryOES(atom.Observations observations, ProgramId Program, uint32_t BinaryFormat, Voidᵖ Binary, int32_t BinarySize) :
+        GlProgramBinaryOES(atom::Observations observations, ProgramId Program, uint32_t BinaryFormat, Void__P Binary, int32_t BinarySize) :
             mobservations(observations),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
@@ -4904,16 +4904,16 @@ namespace gles {
             e->Int32(this->mBinarySize);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
         uint32_t mBinaryFormat;
-        Voidᵖ mBinary;
+        Void__P mBinary;
         int32_t mBinarySize;
     };
 
     class GlPushGroupMarkerEXT: public Encodable {
     public:
-        GlPushGroupMarkerEXT(atom.Observations observations, int32_t Length, char* Marker) :
+        GlPushGroupMarkerEXT(atom::Observations observations, int32_t Length, char* Marker) :
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
@@ -4927,14 +4927,14 @@ namespace gles {
             e->String(this->mMarker);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mLength;
         char* mMarker;
     };
 
     class GlQueryCounterEXT: public Encodable {
     public:
-        GlQueryCounterEXT(atom.Observations observations, QueryId Query, QueryTarget Target) :
+        GlQueryCounterEXT(atom::Observations observations, QueryId Query, QueryTarget Target) :
             mobservations(observations),
             mQuery(Query),
             mTarget(Target) {}
@@ -4948,14 +4948,14 @@ namespace gles {
             e->Uint32(this->mTarget);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         QueryId mQuery;
         QueryTarget mTarget;
     };
 
     class GlReadPixels: public Encodable {
     public:
-        GlReadPixels(atom.Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, BaseTexelFormat Format, TexelType Type, Voidᵖ Data) :
+        GlReadPixels(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, BaseTexelFormat Format, TexelType Type, Void__P Data) :
             mobservations(observations),
             mX(X),
             mY(Y),
@@ -4979,19 +4979,19 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
         int32_t mHeight;
         BaseTexelFormat mFormat;
         TexelType mType;
-        Voidᵖ mData;
+        Void__P mData;
     };
 
     class GlReleaseShaderCompiler: public Encodable {
     public:
-        GlReleaseShaderCompiler(atom.Observations observations) :
+        GlReleaseShaderCompiler(atom::Observations observations) :
             mobservations(observations) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0x75, 0x57, 0x32, 0x6e, 0x7b, 0x73, 0x9d, 0x61, 0x34, 0xf4, 0xfe, 0x45, 0xb6, 0xb2, 0x1d, 0x6e, 0xd0, 0xab, 0xbb, 0x78,  } };
@@ -5001,12 +5001,12 @@ namespace gles {
             e->Value(&this->mobservations);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
     };
 
     class GlRenderbufferStorage: public Encodable {
     public:
-        GlRenderbufferStorage(atom.Observations observations, RenderbufferTarget Target, RenderbufferFormat Format, int32_t Width, int32_t Height) :
+        GlRenderbufferStorage(atom::Observations observations, RenderbufferTarget Target, RenderbufferFormat Format, int32_t Width, int32_t Height) :
             mobservations(observations),
             mTarget(Target),
             mFormat(Format),
@@ -5024,7 +5024,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         RenderbufferTarget mTarget;
         RenderbufferFormat mFormat;
         int32_t mWidth;
@@ -5033,7 +5033,7 @@ namespace gles {
 
     class GlRenderbufferStorageMultisample: public Encodable {
     public:
-        GlRenderbufferStorageMultisample(atom.Observations observations, RenderbufferTarget Target, int32_t Samples, RenderbufferFormat Format, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisample(atom::Observations observations, RenderbufferTarget Target, int32_t Samples, RenderbufferFormat Format, int32_t Width, int32_t Height) :
             mobservations(observations),
             mTarget(Target),
             mSamples(Samples),
@@ -5053,7 +5053,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         RenderbufferTarget mTarget;
         int32_t mSamples;
         RenderbufferFormat mFormat;
@@ -5063,7 +5063,7 @@ namespace gles {
 
     class GlSampleCoverage: public Encodable {
     public:
-        GlSampleCoverage(atom.Observations observations, float Value, bool Invert) :
+        GlSampleCoverage(atom::Observations observations, float Value, bool Invert) :
             mobservations(observations),
             mValue(Value),
             mInvert(Invert) {}
@@ -5077,14 +5077,14 @@ namespace gles {
             e->Bool(this->mInvert);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         float mValue;
         bool mInvert;
     };
 
     class GlScissor: public Encodable {
     public:
-        GlScissor(atom.Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlScissor(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mobservations(observations),
             mX(X),
             mY(Y),
@@ -5102,7 +5102,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -5111,7 +5111,7 @@ namespace gles {
 
     class GlShaderBinary: public Encodable {
     public:
-        GlShaderBinary(atom.Observations observations, int32_t Count, ShaderIdᵖ Shaders, uint32_t BinaryFormat, Voidᵖ Binary, int32_t BinarySize) :
+        GlShaderBinary(atom::Observations observations, int32_t Count, ShaderId__P Shaders, uint32_t BinaryFormat, Void__P Binary, int32_t BinarySize) :
             mobservations(observations),
             mCount(Count),
             mShaders(Shaders),
@@ -5131,17 +5131,17 @@ namespace gles {
             e->Int32(this->mBinarySize);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mCount;
-        ShaderIdᵖ mShaders;
+        ShaderId__P mShaders;
         uint32_t mBinaryFormat;
-        Voidᵖ mBinary;
+        Void__P mBinary;
         int32_t mBinarySize;
     };
 
     class GlShaderSource: public Encodable {
     public:
-        GlShaderSource(atom.Observations observations, ShaderId Shader, int32_t Count, Charᵖᵖ Source, S32ᵖ Length) :
+        GlShaderSource(atom::Observations observations, ShaderId Shader, int32_t Count, Char__P__P Source, S32__P Length) :
             mobservations(observations),
             mShader(Shader),
             mCount(Count),
@@ -5159,16 +5159,16 @@ namespace gles {
             e->Value(&this->mLength);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ShaderId mShader;
         int32_t mCount;
-        Charᵖᵖ mSource;
-        S32ᵖ mLength;
+        Char__P__P mSource;
+        S32__P mLength;
     };
 
     class GlStartTilingQCOM: public Encodable {
     public:
-        GlStartTilingQCOM(atom.Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, TilePreserveMaskQCOM PreserveMask) :
+        GlStartTilingQCOM(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, TilePreserveMaskQCOM PreserveMask) :
             mobservations(observations),
             mX(X),
             mY(Y),
@@ -5188,7 +5188,7 @@ namespace gles {
             e->Uint32(this->mPreserveMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -5198,7 +5198,7 @@ namespace gles {
 
     class GlStencilFuncSeparate: public Encodable {
     public:
-        GlStencilFuncSeparate(atom.Observations observations, FaceMode Face, TestFunction Function, int32_t ReferenceValue, int32_t Mask) :
+        GlStencilFuncSeparate(atom::Observations observations, FaceMode Face, TestFunction Function, int32_t ReferenceValue, int32_t Mask) :
             mobservations(observations),
             mFace(Face),
             mFunction(Function),
@@ -5216,7 +5216,7 @@ namespace gles {
             e->Int32(this->mMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FaceMode mFace;
         TestFunction mFunction;
         int32_t mReferenceValue;
@@ -5225,7 +5225,7 @@ namespace gles {
 
     class GlStencilMask: public Encodable {
     public:
-        GlStencilMask(atom.Observations observations, uint32_t Mask) :
+        GlStencilMask(atom::Observations observations, uint32_t Mask) :
             mobservations(observations),
             mMask(Mask) {}
         virtual const gapic::Id& Id() const {
@@ -5237,13 +5237,13 @@ namespace gles {
             e->Uint32(this->mMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint32_t mMask;
     };
 
     class GlStencilMaskSeparate: public Encodable {
     public:
-        GlStencilMaskSeparate(atom.Observations observations, FaceMode Face, uint32_t Mask) :
+        GlStencilMaskSeparate(atom::Observations observations, FaceMode Face, uint32_t Mask) :
             mobservations(observations),
             mFace(Face),
             mMask(Mask) {}
@@ -5257,14 +5257,14 @@ namespace gles {
             e->Uint32(this->mMask);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FaceMode mFace;
         uint32_t mMask;
     };
 
     class GlStencilOpSeparate: public Encodable {
     public:
-        GlStencilOpSeparate(atom.Observations observations, FaceMode Face, StencilAction StencilFail, StencilAction StencilPassDepthFail, StencilAction StencilPassDepthPass) :
+        GlStencilOpSeparate(atom::Observations observations, FaceMode Face, StencilAction StencilFail, StencilAction StencilPassDepthFail, StencilAction StencilPassDepthPass) :
             mobservations(observations),
             mFace(Face),
             mStencilFail(StencilFail),
@@ -5282,7 +5282,7 @@ namespace gles {
             e->Uint32(this->mStencilPassDepthPass);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         FaceMode mFace;
         StencilAction mStencilFail;
         StencilAction mStencilPassDepthFail;
@@ -5291,7 +5291,7 @@ namespace gles {
 
     class GlTexImage2D: public Encodable {
     public:
-        GlTexImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, TexelFormat InternalFormat, int32_t Width, int32_t Height, int32_t Border, TexelFormat Format, TexelType Type, TexturePointer Data) :
+        GlTexImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, TexelFormat InternalFormat, int32_t Width, int32_t Height, int32_t Border, TexelFormat Format, TexelType Type, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -5319,7 +5319,7 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         TexelFormat mInternalFormat;
@@ -5333,7 +5333,7 @@ namespace gles {
 
     class GlTexParameterf: public Encodable {
     public:
-        GlTexParameterf(atom.Observations observations, TextureTarget Target, TextureParameter Parameter, float Value) :
+        GlTexParameterf(atom::Observations observations, TextureTarget Target, TextureParameter Parameter, float Value) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -5349,7 +5349,7 @@ namespace gles {
             e->Float32(this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         TextureParameter mParameter;
         float mValue;
@@ -5357,7 +5357,7 @@ namespace gles {
 
     class GlTexParameteri: public Encodable {
     public:
-        GlTexParameteri(atom.Observations observations, TextureTarget Target, TextureParameter Parameter, int32_t Value) :
+        GlTexParameteri(atom::Observations observations, TextureTarget Target, TextureParameter Parameter, int32_t Value) :
             mobservations(observations),
             mTarget(Target),
             mParameter(Parameter),
@@ -5373,7 +5373,7 @@ namespace gles {
             e->Int32(this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         TextureParameter mParameter;
         int32_t mValue;
@@ -5381,7 +5381,7 @@ namespace gles {
 
     class GlTexStorage1DEXT: public Encodable {
     public:
-        GlTexStorage1DEXT(atom.Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width) :
+        GlTexStorage1DEXT(atom::Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width) :
             mobservations(observations),
             mTarget(Target),
             mLevels(Levels),
@@ -5399,7 +5399,7 @@ namespace gles {
             e->Int32(this->mWidth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         int32_t mLevels;
         TexelFormat mFormat;
@@ -5408,7 +5408,7 @@ namespace gles {
 
     class GlTexStorage2DEXT: public Encodable {
     public:
-        GlTexStorage2DEXT(atom.Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height) :
+        GlTexStorage2DEXT(atom::Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height) :
             mobservations(observations),
             mTarget(Target),
             mLevels(Levels),
@@ -5428,7 +5428,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         int32_t mLevels;
         TexelFormat mFormat;
@@ -5438,7 +5438,7 @@ namespace gles {
 
     class GlTexStorage3DEXT: public Encodable {
     public:
-        GlTexStorage3DEXT(atom.Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height, int32_t Depth) :
+        GlTexStorage3DEXT(atom::Observations observations, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height, int32_t Depth) :
             mobservations(observations),
             mTarget(Target),
             mLevels(Levels),
@@ -5460,7 +5460,7 @@ namespace gles {
             e->Int32(this->mDepth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureTarget mTarget;
         int32_t mLevels;
         TexelFormat mFormat;
@@ -5471,7 +5471,7 @@ namespace gles {
 
     class GlTexSubImage2D: public Encodable {
     public:
-        GlTexSubImage2D(atom.Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, TexelFormat Format, TexelType Type, TexturePointer Data) :
+        GlTexSubImage2D(atom::Observations observations, TextureImageTarget Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, TexelFormat Format, TexelType Type, TexturePointer Data) :
             mobservations(observations),
             mTarget(Target),
             mLevel(Level),
@@ -5499,7 +5499,7 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureImageTarget mTarget;
         int32_t mLevel;
         int32_t mXoffset;
@@ -5513,7 +5513,7 @@ namespace gles {
 
     class GlTextureStorage1DEXT: public Encodable {
     public:
-        GlTextureStorage1DEXT(atom.Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width) :
+        GlTextureStorage1DEXT(atom::Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width) :
             mobservations(observations),
             mTexture(Texture),
             mTarget(Target),
@@ -5533,7 +5533,7 @@ namespace gles {
             e->Int32(this->mWidth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureId mTexture;
         TextureTarget mTarget;
         int32_t mLevels;
@@ -5543,7 +5543,7 @@ namespace gles {
 
     class GlTextureStorage2DEXT: public Encodable {
     public:
-        GlTextureStorage2DEXT(atom.Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height) :
+        GlTextureStorage2DEXT(atom::Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height) :
             mobservations(observations),
             mTexture(Texture),
             mTarget(Target),
@@ -5565,7 +5565,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureId mTexture;
         TextureTarget mTarget;
         int32_t mLevels;
@@ -5576,7 +5576,7 @@ namespace gles {
 
     class GlTextureStorage3DEXT: public Encodable {
     public:
-        GlTextureStorage3DEXT(atom.Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height, int32_t Depth) :
+        GlTextureStorage3DEXT(atom::Observations observations, TextureId Texture, TextureTarget Target, int32_t Levels, TexelFormat Format, int32_t Width, int32_t Height, int32_t Depth) :
             mobservations(observations),
             mTexture(Texture),
             mTarget(Target),
@@ -5600,7 +5600,7 @@ namespace gles {
             e->Int32(this->mDepth);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         TextureId mTexture;
         TextureTarget mTarget;
         int32_t mLevels;
@@ -5612,7 +5612,7 @@ namespace gles {
 
     class GlUniform1f: public Encodable {
     public:
-        GlUniform1f(atom.Observations observations, UniformLocation Location, float Value) :
+        GlUniform1f(atom::Observations observations, UniformLocation Location, float Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -5626,14 +5626,14 @@ namespace gles {
             e->Float32(this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         float mValue;
     };
 
     class GlUniform1fv: public Encodable {
     public:
-        GlUniform1fv(atom.Observations observations, UniformLocation Location, int32_t Count, F32ᵖ Value) :
+        GlUniform1fv(atom::Observations observations, UniformLocation Location, int32_t Count, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5649,15 +5649,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlUniform1i: public Encodable {
     public:
-        GlUniform1i(atom.Observations observations, UniformLocation Location, int32_t Value) :
+        GlUniform1i(atom::Observations observations, UniformLocation Location, int32_t Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -5671,14 +5671,14 @@ namespace gles {
             e->Int32(this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mValue;
     };
 
     class GlUniform1iv: public Encodable {
     public:
-        GlUniform1iv(atom.Observations observations, UniformLocation Location, int32_t Count, S32ᵖ Value) :
+        GlUniform1iv(atom::Observations observations, UniformLocation Location, int32_t Count, S32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5694,15 +5694,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlUniform2f: public Encodable {
     public:
-        GlUniform2f(atom.Observations observations, UniformLocation Location, float Value0, float Value1) :
+        GlUniform2f(atom::Observations observations, UniformLocation Location, float Value0, float Value1) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5718,7 +5718,7 @@ namespace gles {
             e->Float32(this->mValue1);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         float mValue0;
         float mValue1;
@@ -5726,7 +5726,7 @@ namespace gles {
 
     class GlUniform2fv: public Encodable {
     public:
-        GlUniform2fv(atom.Observations observations, UniformLocation Location, int32_t Count, F32ᵖ Value) :
+        GlUniform2fv(atom::Observations observations, UniformLocation Location, int32_t Count, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5742,15 +5742,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlUniform2i: public Encodable {
     public:
-        GlUniform2i(atom.Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1) :
+        GlUniform2i(atom::Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5766,7 +5766,7 @@ namespace gles {
             e->Int32(this->mValue1);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -5774,7 +5774,7 @@ namespace gles {
 
     class GlUniform2iv: public Encodable {
     public:
-        GlUniform2iv(atom.Observations observations, UniformLocation Location, int32_t Count, S32ᵖ Value) :
+        GlUniform2iv(atom::Observations observations, UniformLocation Location, int32_t Count, S32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5790,15 +5790,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlUniform3f: public Encodable {
     public:
-        GlUniform3f(atom.Observations observations, UniformLocation Location, float Value0, float Value1, float Value2) :
+        GlUniform3f(atom::Observations observations, UniformLocation Location, float Value0, float Value1, float Value2) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5816,7 +5816,7 @@ namespace gles {
             e->Float32(this->mValue2);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         float mValue0;
         float mValue1;
@@ -5825,7 +5825,7 @@ namespace gles {
 
     class GlUniform3fv: public Encodable {
     public:
-        GlUniform3fv(atom.Observations observations, UniformLocation Location, int32_t Count, F32ᵖ Value) :
+        GlUniform3fv(atom::Observations observations, UniformLocation Location, int32_t Count, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5841,15 +5841,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlUniform3i: public Encodable {
     public:
-        GlUniform3i(atom.Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1, int32_t Value2) :
+        GlUniform3i(atom::Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1, int32_t Value2) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5867,7 +5867,7 @@ namespace gles {
             e->Int32(this->mValue2);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -5876,7 +5876,7 @@ namespace gles {
 
     class GlUniform3iv: public Encodable {
     public:
-        GlUniform3iv(atom.Observations observations, UniformLocation Location, int32_t Count, S32ᵖ Value) :
+        GlUniform3iv(atom::Observations observations, UniformLocation Location, int32_t Count, S32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5892,15 +5892,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlUniform4f: public Encodable {
     public:
-        GlUniform4f(atom.Observations observations, UniformLocation Location, float Value0, float Value1, float Value2, float Value3) :
+        GlUniform4f(atom::Observations observations, UniformLocation Location, float Value0, float Value1, float Value2, float Value3) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5920,7 +5920,7 @@ namespace gles {
             e->Float32(this->mValue3);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         float mValue0;
         float mValue1;
@@ -5930,7 +5930,7 @@ namespace gles {
 
     class GlUniform4fv: public Encodable {
     public:
-        GlUniform4fv(atom.Observations observations, UniformLocation Location, int32_t Count, F32ᵖ Value) :
+        GlUniform4fv(atom::Observations observations, UniformLocation Location, int32_t Count, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -5946,15 +5946,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlUniform4i: public Encodable {
     public:
-        GlUniform4i(atom.Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
+        GlUniform4i(atom::Observations observations, UniformLocation Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -5974,7 +5974,7 @@ namespace gles {
             e->Int32(this->mValue3);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mValue0;
         int32_t mValue1;
@@ -5984,7 +5984,7 @@ namespace gles {
 
     class GlUniform4iv: public Encodable {
     public:
-        GlUniform4iv(atom.Observations observations, UniformLocation Location, int32_t Count, S32ᵖ Value) :
+        GlUniform4iv(atom::Observations observations, UniformLocation Location, int32_t Count, S32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -6000,15 +6000,15 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
-        S32ᵖ mValue;
+        S32__P mValue;
     };
 
     class GlUniformMatrix2fv: public Encodable {
     public:
-        GlUniformMatrix2fv(atom.Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32ᵖ Values) :
+        GlUniformMatrix2fv(atom::Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32__P Values) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -6026,16 +6026,16 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
         bool mTranspose;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlUniformMatrix3fv: public Encodable {
     public:
-        GlUniformMatrix3fv(atom.Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32ᵖ Values) :
+        GlUniformMatrix3fv(atom::Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32__P Values) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -6053,16 +6053,16 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
         bool mTranspose;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlUniformMatrix4fv: public Encodable {
     public:
-        GlUniformMatrix4fv(atom.Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32ᵖ Values) :
+        GlUniformMatrix4fv(atom::Observations observations, UniformLocation Location, int32_t Count, bool Transpose, F32__P Values) :
             mobservations(observations),
             mLocation(Location),
             mCount(Count),
@@ -6080,16 +6080,16 @@ namespace gles {
             e->Value(&this->mValues);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         UniformLocation mLocation;
         int32_t mCount;
         bool mTranspose;
-        F32ᵖ mValues;
+        F32__P mValues;
     };
 
     class GlUnmapBuffer: public Encodable {
     public:
-        GlUnmapBuffer(atom.Observations observations, BufferTarget Target) :
+        GlUnmapBuffer(atom::Observations observations, BufferTarget Target) :
             mobservations(observations),
             mTarget(Target) {}
         virtual const gapic::Id& Id() const {
@@ -6101,13 +6101,13 @@ namespace gles {
             e->Uint32(this->mTarget);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         BufferTarget mTarget;
     };
 
     class GlUseProgram: public Encodable {
     public:
-        GlUseProgram(atom.Observations observations, ProgramId Program) :
+        GlUseProgram(atom::Observations observations, ProgramId Program) :
             mobservations(observations),
             mProgram(Program) {}
         virtual const gapic::Id& Id() const {
@@ -6119,13 +6119,13 @@ namespace gles {
             e->Uint32(this->mProgram);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
     };
 
     class GlValidateProgram: public Encodable {
     public:
-        GlValidateProgram(atom.Observations observations, ProgramId Program) :
+        GlValidateProgram(atom::Observations observations, ProgramId Program) :
             mobservations(observations),
             mProgram(Program) {}
         virtual const gapic::Id& Id() const {
@@ -6137,13 +6137,13 @@ namespace gles {
             e->Uint32(this->mProgram);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         ProgramId mProgram;
     };
 
     class GlVertexAttrib1f: public Encodable {
     public:
-        GlVertexAttrib1f(atom.Observations observations, AttributeLocation Location, float Value0) :
+        GlVertexAttrib1f(atom::Observations observations, AttributeLocation Location, float Value0) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0) {}
@@ -6157,14 +6157,14 @@ namespace gles {
             e->Float32(this->mValue0);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
         float mValue0;
     };
 
     class GlVertexAttrib1fv: public Encodable {
     public:
-        GlVertexAttrib1fv(atom.Observations observations, AttributeLocation Location, F32ᵖ Value) :
+        GlVertexAttrib1fv(atom::Observations observations, AttributeLocation Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6178,14 +6178,14 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlVertexAttrib2f: public Encodable {
     public:
-        GlVertexAttrib2f(atom.Observations observations, AttributeLocation Location, float Value0, float Value1) :
+        GlVertexAttrib2f(atom::Observations observations, AttributeLocation Location, float Value0, float Value1) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6201,7 +6201,7 @@ namespace gles {
             e->Float32(this->mValue1);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
         float mValue0;
         float mValue1;
@@ -6209,7 +6209,7 @@ namespace gles {
 
     class GlVertexAttrib2fv: public Encodable {
     public:
-        GlVertexAttrib2fv(atom.Observations observations, AttributeLocation Location, F32ᵖ Value) :
+        GlVertexAttrib2fv(atom::Observations observations, AttributeLocation Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6223,14 +6223,14 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlVertexAttrib3f: public Encodable {
     public:
-        GlVertexAttrib3f(atom.Observations observations, AttributeLocation Location, float Value0, float Value1, float Value2) :
+        GlVertexAttrib3f(atom::Observations observations, AttributeLocation Location, float Value0, float Value1, float Value2) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6248,7 +6248,7 @@ namespace gles {
             e->Float32(this->mValue2);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
         float mValue0;
         float mValue1;
@@ -6257,7 +6257,7 @@ namespace gles {
 
     class GlVertexAttrib3fv: public Encodable {
     public:
-        GlVertexAttrib3fv(atom.Observations observations, AttributeLocation Location, F32ᵖ Value) :
+        GlVertexAttrib3fv(atom::Observations observations, AttributeLocation Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6271,14 +6271,14 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlVertexAttrib4f: public Encodable {
     public:
-        GlVertexAttrib4f(atom.Observations observations, AttributeLocation Location, float Value0, float Value1, float Value2, float Value3) :
+        GlVertexAttrib4f(atom::Observations observations, AttributeLocation Location, float Value0, float Value1, float Value2, float Value3) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6298,7 +6298,7 @@ namespace gles {
             e->Float32(this->mValue3);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
         float mValue0;
         float mValue1;
@@ -6308,7 +6308,7 @@ namespace gles {
 
     class GlVertexAttrib4fv: public Encodable {
     public:
-        GlVertexAttrib4fv(atom.Observations observations, AttributeLocation Location, F32ᵖ Value) :
+        GlVertexAttrib4fv(atom::Observations observations, AttributeLocation Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6322,14 +6322,14 @@ namespace gles {
             e->Value(&this->mValue);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
-        F32ᵖ mValue;
+        F32__P mValue;
     };
 
     class GlVertexAttribPointer: public Encodable {
     public:
-        GlVertexAttribPointer(atom.Observations observations, AttributeLocation Location, int32_t Size, VertexAttribType Type, bool Normalized, int32_t Stride, VertexPointer Data) :
+        GlVertexAttribPointer(atom::Observations observations, AttributeLocation Location, int32_t Size, VertexAttribType Type, bool Normalized, int32_t Stride, VertexPointer Data) :
             mobservations(observations),
             mLocation(Location),
             mSize(Size),
@@ -6351,7 +6351,7 @@ namespace gles {
             e->Value(&this->mData);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         AttributeLocation mLocation;
         int32_t mSize;
         VertexAttribType mType;
@@ -6362,7 +6362,7 @@ namespace gles {
 
     class GlViewport: public Encodable {
     public:
-        GlViewport(atom.Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlViewport(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mobservations(observations),
             mX(X),
             mY(Y),
@@ -6380,7 +6380,7 @@ namespace gles {
             e->Int32(this->mHeight);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -6389,7 +6389,7 @@ namespace gles {
 
     class GlXCreateContext: public Encodable {
     public:
-        GlXCreateContext(atom.Observations observations, Voidᵖ Dpy, Voidᵖ Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
+        GlXCreateContext(atom::Observations observations, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
             mobservations(observations),
             mDpy(Dpy),
             mVis(Vis),
@@ -6409,9 +6409,9 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
-        Voidᵖ mDpy;
-        Voidᵖ mVis;
+        atom::Observations mobservations;
+        Void__P mDpy;
+        Void__P mVis;
         GLXContext mShareList;
         bool mDirect;
         GLXContext mResult;
@@ -6419,7 +6419,7 @@ namespace gles {
 
     class GlXCreateNewContext: public Encodable {
     public:
-        GlXCreateNewContext(atom.Observations observations, Voidᵖ Display, Voidᵖ Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
+        GlXCreateNewContext(atom::Observations observations, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
             mobservations(observations),
             mDisplay(Display),
             mFbconfig(Fbconfig),
@@ -6441,9 +6441,9 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
-        Voidᵖ mDisplay;
-        Voidᵖ mFbconfig;
+        atom::Observations mobservations;
+        Void__P mDisplay;
+        Void__P mFbconfig;
         uint32_t mType;
         GLXContext mShared;
         bool mDirect;
@@ -6452,7 +6452,7 @@ namespace gles {
 
     class GlXMakeContextCurrent: public Encodable {
     public:
-        GlXMakeContextCurrent(atom.Observations observations, Voidᵖ Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx) :
+        GlXMakeContextCurrent(atom::Observations observations, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx) :
             mobservations(observations),
             mDisplay(Display),
             mDraw(Draw),
@@ -6470,8 +6470,8 @@ namespace gles {
             e->Value(&this->mCtx);
         }
 
-        atom.Observations mobservations;
-        Voidᵖ mDisplay;
+        atom::Observations mobservations;
+        Void__P mDisplay;
         GLXDrawable mDraw;
         GLXDrawable mRead;
         GLXContext mCtx;
@@ -6479,7 +6479,7 @@ namespace gles {
 
     class GlXSwapBuffers: public Encodable {
     public:
-        GlXSwapBuffers(atom.Observations observations, Voidᵖ Display, GLXDrawable Drawable) :
+        GlXSwapBuffers(atom::Observations observations, Void__P Display, GLXDrawable Drawable) :
             mobservations(observations),
             mDisplay(Display),
             mDrawable(Drawable) {}
@@ -6493,14 +6493,14 @@ namespace gles {
             e->Value(&this->mDrawable);
         }
 
-        atom.Observations mobservations;
-        Voidᵖ mDisplay;
+        atom::Observations mobservations;
+        Void__P mDisplay;
         GLXDrawable mDrawable;
     };
 
     class HGLRC: public Encodable {
     public:
-        HGLRC(memory.Pointer Address, memory.PoolID Pool) :
+        HGLRC(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -6512,8 +6512,8 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
     class Globals: public Encodable {
@@ -6551,7 +6551,7 @@ namespace gles {
 
     class HDC: public Encodable {
     public:
-        HDC(memory.Pointer Address, memory.PoolID Pool) :
+        HDC(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -6563,13 +6563,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class Intˢ: public Encodable {
+    class Int__S: public Encodable {
     public:
-        Intˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        Int__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6585,15 +6585,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class Intᵖ: public Encodable {
+    class Int__P: public Encodable {
     public:
-        Intᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        Int__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -6605,13 +6605,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class QueryIdˢ: public Encodable {
+    class QueryId__S: public Encodable {
     public:
-        QueryIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        QueryId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6627,15 +6627,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class RenderbufferIdˢ: public Encodable {
+    class RenderbufferId__S: public Encodable {
     public:
-        RenderbufferIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        RenderbufferId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6651,15 +6651,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
     class ReplayBindRenderer: public Encodable {
     public:
-        ReplayBindRenderer(atom.Observations observations, uint32_t Id) :
+        ReplayBindRenderer(atom::Observations observations, uint32_t Id) :
             mobservations(observations),
             mId(Id) {}
         virtual const gapic::Id& Id() const {
@@ -6671,13 +6671,13 @@ namespace gles {
             e->Uint32(this->mId);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint32_t mId;
     };
 
     class ReplayCreateRenderer: public Encodable {
     public:
-        ReplayCreateRenderer(atom.Observations observations, uint32_t Id) :
+        ReplayCreateRenderer(atom::Observations observations, uint32_t Id) :
             mobservations(observations),
             mId(Id) {}
         virtual const gapic::Id& Id() const {
@@ -6689,13 +6689,13 @@ namespace gles {
             e->Uint32(this->mId);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint32_t mId;
     };
 
-    class S32ˢ: public Encodable {
+    class S32__S: public Encodable {
     public:
-        S32ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        S32__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6711,15 +6711,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class S64ˢ: public Encodable {
+    class S64__S: public Encodable {
     public:
-        S64ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        S64__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6735,15 +6735,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class ShaderAttribTypeˢ: public Encodable {
+    class ShaderAttribType__S: public Encodable {
     public:
-        ShaderAttribTypeˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        ShaderAttribType__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6759,15 +6759,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class ShaderIdˢ: public Encodable {
+    class ShaderId__S: public Encodable {
     public:
-        ShaderIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        ShaderId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6783,15 +6783,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class ShaderUniformTypeˢ: public Encodable {
+    class ShaderUniformType__S: public Encodable {
     public:
-        ShaderUniformTypeˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        ShaderUniformType__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6807,15 +6807,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
     class StartTimer: public Encodable {
     public:
-        StartTimer(atom.Observations observations, uint8_t Index) :
+        StartTimer(atom::Observations observations, uint8_t Index) :
             mobservations(observations),
             mIndex(Index) {}
         virtual const gapic::Id& Id() const {
@@ -6827,13 +6827,13 @@ namespace gles {
             e->Uint8(this->mIndex);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint8_t mIndex;
     };
 
     class StopTimer: public Encodable {
     public:
-        StopTimer(atom.Observations observations, uint8_t Index, uint64_t Result) :
+        StopTimer(atom::Observations observations, uint8_t Index, uint64_t Result) :
             mobservations(observations),
             mIndex(Index),
             mResult(Result) {}
@@ -6847,14 +6847,14 @@ namespace gles {
             e->Uint64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         uint8_t mIndex;
         uint64_t mResult;
     };
 
-    class TextureIdˢ: public Encodable {
+    class TextureId__S: public Encodable {
     public:
-        TextureIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        TextureId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6870,15 +6870,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class U32ˢ: public Encodable {
+    class U32__S: public Encodable {
     public:
-        U32ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        U32__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6894,15 +6894,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class U64ˢ: public Encodable {
+    class U64__S: public Encodable {
     public:
-        U64ˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        U64__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6918,15 +6918,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class U8ᵖ: public Encodable {
+    class U8__P: public Encodable {
     public:
-        U8ᵖ(memory.Pointer Address, memory.PoolID Pool) :
+        U8__P(memory::Pointer Address, memory::PoolID Pool) :
             mAddress(Address),
             mPool(Pool) {}
         virtual const gapic::Id& Id() const {
@@ -6938,13 +6938,13 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mAddress;
-        memory.PoolID mPool;
+        memory::Pointer mAddress;
+        memory::PoolID mPool;
     };
 
-    class VertexArrayIdˢ: public Encodable {
+    class VertexArrayId__S: public Encodable {
     public:
-        VertexArrayIdˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        VertexArrayId__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6960,15 +6960,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
-    class Voidˢ: public Encodable {
+    class Void__S: public Encodable {
     public:
-        Voidˢ(memory.Pointer Root, memory.Pointer Base, uint64_t Count, memory.PoolID Pool) :
+        Void__S(memory::Pointer Root, memory::Pointer Base, uint64_t Count, memory::PoolID Pool) :
             mRoot(Root),
             mBase(Base),
             mCount(Count),
@@ -6984,15 +6984,15 @@ namespace gles {
             e->Uint32(this->mPool);
         }
 
-        memory.Pointer mRoot;
-        memory.Pointer mBase;
+        memory::Pointer mRoot;
+        memory::Pointer mBase;
         uint64_t mCount;
-        memory.PoolID mPool;
+        memory::PoolID mPool;
     };
 
     class WglCreateContext: public Encodable {
     public:
-        WglCreateContext(atom.Observations observations, HDC Hdc, HGLRC Result) :
+        WglCreateContext(atom::Observations observations, HDC Hdc, HGLRC Result) :
             mobservations(observations),
             mHdc(Hdc),
             mResult(Result) {}
@@ -7006,14 +7006,14 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         HDC mHdc;
         HGLRC mResult;
     };
 
     class WglCreateContextAttribsARB: public Encodable {
     public:
-        WglCreateContextAttribsARB(atom.Observations observations, HDC Hdc, HGLRC HShareContext, Intᵖ AttribList, HGLRC Result) :
+        WglCreateContextAttribsARB(atom::Observations observations, HDC Hdc, HGLRC HShareContext, Int__P AttribList, HGLRC Result) :
             mobservations(observations),
             mHdc(Hdc),
             mHShareContext(HShareContext),
@@ -7031,16 +7031,16 @@ namespace gles {
             e->Value(&this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         HDC mHdc;
         HGLRC mHShareContext;
-        Intᵖ mAttribList;
+        Int__P mAttribList;
         HGLRC mResult;
     };
 
     class WglMakeCurrent: public Encodable {
     public:
-        WglMakeCurrent(atom.Observations observations, HDC Hdc, HGLRC Hglrc, BOOL Result) :
+        WglMakeCurrent(atom::Observations observations, HDC Hdc, HGLRC Hglrc, BOOL Result) :
             mobservations(observations),
             mHdc(Hdc),
             mHglrc(Hglrc),
@@ -7056,7 +7056,7 @@ namespace gles {
             e->Int64(this->mResult);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         HDC mHdc;
         HGLRC mHglrc;
         BOOL mResult;
@@ -7064,7 +7064,7 @@ namespace gles {
 
     class WglSwapBuffers: public Encodable {
     public:
-        WglSwapBuffers(atom.Observations observations, HDC Hdc) :
+        WglSwapBuffers(atom::Observations observations, HDC Hdc) :
             mobservations(observations),
             mHdc(Hdc) {}
         virtual const gapic::Id& Id() const {
@@ -7076,7 +7076,7 @@ namespace gles {
             e->Value(&this->mHdc);
         }
 
-        atom.Observations mobservations;
+        atom::Observations mobservations;
         HDC mHdc;
     };
 

@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
@@ -38,18 +39,25 @@ var (
 	}
 )
 
+func (f *functions) FixupName(n string) string {
+	n = strings.Replace(n, ".", "::", -1)
+	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
+	n = strings.Replace(n, resolver.SliceSuffix, "__S", -1)
+	return n
+}
+
 func (f *functions) CppStorage(t schema.Type) string {
 	switch t := t.(type) {
 	case *schema.Primitive:
-		name := t.Name
+		name := f.FixupName(t.Name)
 		if result, ok := cppTypeMap[name]; ok {
 			return result
 		}
 		return name
 	case *schema.Struct:
-		return t.Name
+		return f.FixupName(t.Name)
 	case *schema.Interface:
-		return t.Name + "*"
+		return f.FixupName(t.Name) + "*"
 	case *schema.Pointer:
 		return f.CppStorage(t.Type) + "*"
 	case *schema.Array:
