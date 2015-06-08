@@ -132,8 +132,12 @@ func ReadType(ty service.TypeInfo, d binary.Decoder) (interface{}, error) {
 		}
 		return m, nil
 	case service.TypeKindPointer:
-		v, err := d.Uint64()
-		return memory.Pointer(v), err
+		addr, err := d.Uint64()
+		if err != nil {
+			return nil, nil
+		}
+		_, err = d.Uint32() // Pool - currently not used
+		return addr, err
 	case service.TypeKindMemory:
 		// TODO: Memory currently has no payload
 		return nil, nil

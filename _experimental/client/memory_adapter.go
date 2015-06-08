@@ -15,8 +15,6 @@
 package client
 
 import (
-	"fmt"
-
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -88,7 +86,7 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 	ll := t.CreateLinearLayout()
 	ll.SetDirection(gxui.LeftToRight)
 	base := a.AddressAtIndex(index)
-	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
+	ll.AddChild(CreateLabel(t, base.String(), LINE_NUMBER_COLOR, true))
 
 	var cancel chan<- struct{}
 	ll.OnAttach(func() {

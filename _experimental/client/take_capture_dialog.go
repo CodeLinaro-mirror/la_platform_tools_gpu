@@ -158,10 +158,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 		clickSubscription.Unlisten()
 		button.SetText("Stop")
-		clickSubscription = button.OnClick(func(gxui.MouseEvent) {
-			clickSubscription.Unlisten()
-			stop.raise()
-		})
+		clickSubscription = button.OnClick(func(gxui.MouseEvent) { stop.raise() })
 
 		go func() {
 			if data := takeCapture(appCtx, stop, updateStatus); data != nil {
@@ -177,13 +174,6 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 				theme.Driver().Call(func() {
 					window.Close()
 				})
-			} else {
-				theme.Driver().Call(func() {
-					button.SetText("Close")
-					button.OnClick(func(gxui.MouseEvent) {
-						window.Close()
-					})
-				})
 			}
 		}()
 	}
@@ -196,9 +186,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 type signal chan struct{}
 
-func (s signal) raise() {
-	close(s)
-}
+func (s signal) raise() { close(s) }
 func (s signal) signaled() bool {
 	select {
 	case <-s:
@@ -222,7 +210,6 @@ func takeCapture(appCtx *ApplicationContext, stop signal, updateStatus func(stri
 waiting:
 	for {
 		if stop.signaled() {
-			updateStatus("Capture stopped")
 			return nil
 		}
 		time.Sleep(500 * time.Millisecond)
@@ -270,4 +257,6 @@ waiting:
 			}
 		}
 	}
+
+	return nil
 }
