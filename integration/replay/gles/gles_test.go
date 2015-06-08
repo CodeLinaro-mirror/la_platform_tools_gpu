@@ -147,22 +147,8 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
+	atoms.Add(gles.NewProgram(a, d, l, vs, fs, program, vsSource, fsSource)...)
 	triangle := atoms.Add(
-		gles.NewGlCreateShader(gles.ShaderType_GL_VERTEX_SHADER, vs),
-		gles.NewGlShaderSource(vs, 1, 0x100000, 0x100010).
-			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
-			AddRead(atom.Data(a, d, l, 0x100010, int32(len(vsSource)))).
-			AddRead(atom.Data(a, d, l, 0x100020, vsSource)),
-		gles.NewGlCompileShader(vs),
-		gles.NewGlCreateShader(gles.ShaderType_GL_FRAGMENT_SHADER, fs),
-		gles.NewGlShaderSource(fs, 1, 0x100000, 0x100010).
-			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
-			AddRead(atom.Data(a, d, l, 0x100010, int32(len(fsSource)))).
-			AddRead(atom.Data(a, d, l, 0x100020, fsSource)),
-		gles.NewGlCompileShader(fs),
-		gles.NewGlCreateProgram(program),
-		gles.NewGlAttachShader(program, vs),
-		gles.NewGlAttachShader(program, fs),
 		gles.NewGlLinkProgram(program),
 		gles.NewGlUseProgram(program),
 		gles.NewGlGetAttribLocation(program, "position", position),
