@@ -117,9 +117,7 @@
       GAPID_INFO("{{$name}}(§
         {{range $i, $p := $.CallParameters}}
           {{if $i}}, {{end}}§
-          {{if $p.Output}}%p§
-          {{else        }}{{Macro "C++.PrintfFormatCode" (TypeOf $p)}}§
-          {{end}}
+          {{Macro "C++.PrintfFormatCode" (TypeOf $p)}}§
         {{end}}
         )\n"§
         {{range $p := $.CallParameters}}

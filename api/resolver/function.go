@@ -31,7 +31,6 @@ func (m *macroStub) ExpressionType() semantic.Type { return m.function.Signature
 func functionSignature(ctx *context, out *semantic.Function) {
 	in := out.AST
 	args := make([]semantic.Type, 0, len(in.Parameters)-1)
-	out.Outputs = make([]*semantic.Parameter, 0, len(in.Parameters))
 	out.FullParameters = make([]*semantic.Parameter, 0, len(in.Parameters))
 	for i, inp := range in.Parameters {
 		outp := parameter(ctx, out, inp)
@@ -49,15 +48,11 @@ func functionSignature(ctx *context, out *semantic.Function) {
 			if !inp.This {
 				args = append(args, outp.Type)
 			}
-			if inp.Output {
-				out.Outputs = append(out.Outputs, outp)
-			}
 			out.FullParameters = append(out.FullParameters, outp)
 		} else {
 			out.Return = outp
 			if !isVoid(outp.ExpressionType()) {
 				out.Return.Name = "result"
-				out.Outputs = append(out.Outputs, outp)
 				out.FullParameters = append(out.FullParameters, outp)
 			}
 		}
@@ -69,8 +64,6 @@ func functionSignature(ctx *context, out *semantic.Function) {
 func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *semantic.Parameter {
 	out := &semantic.Parameter{
 		AST:      in,
-		Input:    in.Input,
-		Output:   in.Output,
 		Function: owner,
 	}
 	if in.Name != nil {
