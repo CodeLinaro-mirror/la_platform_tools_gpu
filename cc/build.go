@@ -261,7 +261,7 @@ func (t Target) Build(env build.Environment) error {
 		gapicTestSource := GapicRoot.Glob(t.SourceFiles...).
 			Append(GapicRoot.Join(t.Gapic.OS).Glob(t.SourceFiles...)...).
 			Filter("*_test.cpp")
-		gapicTestInputs := gapicTestSource.Append(gapicLib, gtestLib, gmockLib)
+		gapicTestInputs := gapicTestSource.Append(gtestLib, gmockLib, gapicLib)
 		gapicTest, err := cpp.Executable(gapicTestInputs, t.GapicTests, env)
 		if err != nil {
 			return err
@@ -271,7 +271,7 @@ func (t Target) Build(env build.Environment) error {
 		gapirTestSource := GapirRoot.Glob(t.SourceFiles...).
 			Append(GapirRoot.Join(t.Gapir.OS).Glob(t.SourceFiles...)...).
 			Filter("*_test.cpp")
-		gapirTestInputs := gapirTestSource.Append(gapirLib, gapicLib, gtestLib, gmockLib)
+		gapirTestInputs := gapirTestSource.Append(gtestLib, gmockLib, gapirLib, gapicLib)
 		gapirTest, err := cpp.Executable(gapirTestInputs, t.GapirTests, env)
 		if err != nil {
 			return err
@@ -463,6 +463,10 @@ func getBuildTargets() map[string]Target {
 	})
 
 	android_target := Target{
+		GapicTests: cpp.Config{
+			Toolchain: ndk.EXE,
+			Libraries: build.FileSet{"log", "android", "z", "m"},
+		},
 		GapirTests: cpp.Config{
 			Toolchain: ndk.EXE,
 			Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
