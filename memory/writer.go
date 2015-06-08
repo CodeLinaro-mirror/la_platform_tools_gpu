@@ -15,14 +15,25 @@
 package memory
 
 import (
-	"bytes"
+	"errors"
 	"io"
 )
 
 // Writer returns a binary writer for the specified memory pool and range.
 func Writer(p *Pool, rng Range) io.Writer {
 	b := make([]byte, rng.Size)
-	w := Blob(b)
-	p.Write(rng.Base, w)
-	return bytes.NewBuffer(b)
+	p.Write(rng.Base, Blob(b))
+	w := writer(b)
+	return &w
+}
+
+type writer []byte
+
+func (w *writer) Write(p []byte) (n int, err error) {
+	n = copy(*w, p)
+	if n < len(p) {
+		err = errors.New("Write overflowed buffer")
+	}
+	*w = (*w)[n:]
+	return
 }
