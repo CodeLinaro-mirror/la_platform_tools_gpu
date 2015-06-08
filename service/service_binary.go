@@ -217,7 +217,7 @@ var schemaApiId = &schema.Class{
 	TypeID: binaryIDApiId,
 	Name:   "ApiId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -282,8 +282,8 @@ var schemaFieldInfo = &schema.Class{
 	TypeID: binaryIDFieldInfo,
 	Name:   "FieldInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
 	},
 }
 
@@ -377,9 +377,9 @@ var schemaStructInfo = &schema.Class{
 	TypeID: binaryIDStructInfo,
 	Name:   "StructInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
 	},
 }
 
@@ -434,8 +434,8 @@ var schemaApiSchema = &schema.Class{
 	TypeID: binaryIDApiSchema,
 	Name:   "ApiSchema",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
-		schema.Field{Declared: "State", Type: &schema.Struct{Name: "StructInfo"}},
+		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "State", Type: &schema.Struct{Name: "StructInfo"}},
 	},
 }
 
@@ -511,9 +511,9 @@ var schemaArrayInfo = &schema.Class{
 	TypeID: binaryIDArrayInfo,
 	Name:   "ArrayInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "ElementType", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "ElementType", Type: &schema.Interface{Name: "TypeInfo"}},
 	},
 }
 
@@ -572,8 +572,8 @@ var schemaAtomRange = &schema.Class{
 	TypeID: binaryIDAtomRange,
 	Name:   "AtomRange",
 	Fields: []schema.Field{
-		schema.Field{Declared: "First", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "First", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -657,9 +657,9 @@ var schemaAtomGroup = &schema.Class{
 	TypeID: binaryIDAtomGroup,
 	Name:   "AtomGroup",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "AtomRange"}},
-		schema.Field{Declared: "SubGroups", Type: &schema.Slice{Alias: "AtomGroupArray", ValueType: &schema.Struct{Name: "AtomGroup"}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange"}},
+		{Declared: "SubGroups", Type: &schema.Slice{Alias: "AtomGroupArray", ValueType: &schema.Struct{Name: "AtomGroup"}}},
 	},
 }
 
@@ -735,9 +735,9 @@ var schemaParameterInfo = &schema.Class{
 	TypeID: binaryIDParameterInfo,
 	Name:   "ParameterInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
-		schema.Field{Declared: "Out", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "Out", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -876,14 +876,14 @@ var schemaAtomInfo = &schema.Class{
 	TypeID: binaryIDAtomInfo,
 	Name:   "AtomInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Parameters", Type: &schema.Slice{Alias: "ParameterInfoArray", ValueType: &schema.Struct{Name: "ParameterInfo"}}},
-		schema.Field{Declared: "IsCommand", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "IsDrawCall", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "IsEndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "DocumentationUrl", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Parameters", Type: &schema.Slice{Alias: "ParameterInfoArray", ValueType: &schema.Struct{Name: "ParameterInfo"}}},
+		{Declared: "IsCommand", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "IsDrawCall", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "IsEndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "DocumentationUrl", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -953,9 +953,9 @@ var schemaAtomRangeTimer = &schema.Class{
 	TypeID: binaryIDAtomRangeTimer,
 	Name:   "AtomRangeTimer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "FromAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "ToAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "FromAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "ToAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -1013,7 +1013,7 @@ var schemaAtomStream = &schema.Class{
 	TypeID: binaryIDAtomStream,
 	Name:   "AtomStream",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -1061,7 +1061,7 @@ var schemaAtomStreamId = &schema.Class{
 	TypeID: binaryIDAtomStreamId,
 	Name:   "AtomStreamId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1120,8 +1120,8 @@ var schemaAtomTimer = &schema.Class{
 	TypeID: binaryIDAtomTimer,
 	Name:   "AtomTimer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "AtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "AtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -1179,7 +1179,7 @@ var schemaBinary = &schema.Class{
 	TypeID: binaryIDBinary,
 	Name:   "Binary",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -1227,7 +1227,7 @@ var schemaBinaryId = &schema.Class{
 	TypeID: binaryIDBinaryId,
 	Name:   "BinaryId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1275,7 +1275,7 @@ var schemaSchemaId = &schema.Class{
 	TypeID: binaryIDSchemaId,
 	Name:   "SchemaId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1368,10 +1368,10 @@ var schemaCapture = &schema.Class{
 	TypeID: binaryIDCapture,
 	Name:   "Capture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId"}},
-		schema.Field{Declared: "Apis", Type: &schema.Slice{Alias: "ApiIdArray", ValueType: &schema.Struct{Name: "ApiId"}}},
-		schema.Field{Declared: "Schema", Type: &schema.Struct{Name: "SchemaId"}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId"}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiIdArray", ValueType: &schema.Struct{Name: "ApiId"}}},
+		{Declared: "Schema", Type: &schema.Struct{Name: "SchemaId"}},
 	},
 }
 
@@ -1419,7 +1419,7 @@ var schemaCaptureId = &schema.Class{
 	TypeID: binaryIDCaptureId,
 	Name:   "CaptureId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1548,10 +1548,10 @@ var schemaClassInfo = &schema.Class{
 	TypeID: binaryIDClassInfo,
 	Name:   "ClassInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
-		schema.Field{Declared: "Extends", Type: &schema.Slice{Alias: "ClassInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ClassInfo"}}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
+		{Declared: "Extends", Type: &schema.Slice{Alias: "ClassInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ClassInfo"}}}},
 	},
 }
 
@@ -1665,13 +1665,13 @@ var schemaDevice = &schema.Class{
 	TypeID: binaryIDDevice,
 	Name:   "Device",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Model", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "OS", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
-		schema.Field{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
-		schema.Field{Declared: "MaxMemorySize", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "RequiresShaderPatching", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Model", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "OS", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		{Declared: "MaxMemorySize", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "RequiresShaderPatching", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -1719,7 +1719,7 @@ var schemaDeviceId = &schema.Class{
 	TypeID: binaryIDDeviceId,
 	Name:   "DeviceId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1778,8 +1778,8 @@ var schemaEnumEntry = &schema.Class{
 	TypeID: binaryIDEnumEntry,
 	Name:   "EnumEntry",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -1900,10 +1900,10 @@ var schemaEnumInfo = &schema.Class{
 	TypeID: binaryIDEnumInfo,
 	Name:   "EnumInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "Entries", Type: &schema.Slice{Alias: "EnumEntryArray", ValueType: &schema.Struct{Name: "EnumEntry"}}},
-		schema.Field{Declared: "Extends", Type: &schema.Slice{Alias: "EnumInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "EnumInfo"}}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "Entries", Type: &schema.Slice{Alias: "EnumEntryArray", ValueType: &schema.Struct{Name: "EnumEntry"}}},
+		{Declared: "Extends", Type: &schema.Slice{Alias: "EnumInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "EnumInfo"}}}},
 	},
 }
 
@@ -1949,7 +1949,7 @@ var schemaHierarchy = &schema.Class{
 	TypeID: binaryIDHierarchy,
 	Name:   "Hierarchy",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup"}},
+		{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup"}},
 	},
 }
 
@@ -1997,7 +1997,7 @@ var schemaHierarchyId = &schema.Class{
 	TypeID: binaryIDHierarchyId,
 	Name:   "HierarchyId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -2076,10 +2076,10 @@ var schemaImageInfo = &schema.Class{
 	TypeID: binaryIDImageInfo,
 	Name:   "ImageInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "BinaryId"}},
 	},
 }
 
@@ -2127,7 +2127,7 @@ var schemaImageInfoId = &schema.Class{
 	TypeID: binaryIDImageInfoId,
 	Name:   "ImageInfoId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -2220,10 +2220,10 @@ var schemaMapInfo = &schema.Class{
 	TypeID: binaryIDMapInfo,
 	Name:   "MapInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "KeyType", Type: &schema.Interface{Name: "TypeInfo"}},
-		schema.Field{Declared: "ValueType", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "KeyType", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "ValueType", Type: &schema.Interface{Name: "TypeInfo"}},
 	},
 }
 
@@ -2282,8 +2282,8 @@ var schemaMemoryRange = &schema.Class{
 	TypeID: binaryIDMemoryRange,
 	Name:   "MemoryRange",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -2422,10 +2422,10 @@ var schemaMemoryInfo = &schema.Class{
 	TypeID: binaryIDMemoryInfo,
 	Name:   "MemoryInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		schema.Field{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
-		schema.Field{Declared: "Current", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
-		schema.Field{Declared: "Unknown", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
+		{Declared: "Current", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
+		{Declared: "Unknown", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
 	},
 }
 
@@ -2473,7 +2473,7 @@ var schemaMemoryInfoId = &schema.Class{
 	TypeID: binaryIDMemoryInfoId,
 	Name:   "MemoryInfoId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -2543,9 +2543,9 @@ var schemaRenderSettings = &schema.Class{
 	TypeID: binaryIDRenderSettings,
 	Name:   "RenderSettings",
 	Fields: []schema.Field{
-		schema.Field{Declared: "MaxWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "MaxHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Wireframe", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "MaxWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "MaxHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Wireframe", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -2636,8 +2636,8 @@ var schemaSchema = &schema.Class{
 	TypeID: binaryIDSchema,
 	Name:   "Schema",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Atoms", Type: &schema.Slice{Alias: "AtomInfoArray", ValueType: &schema.Struct{Name: "AtomInfo"}}},
-		schema.Field{Declared: "Apis", Type: &schema.Slice{Alias: "ApiSchemaArray", ValueType: &schema.Struct{Name: "ApiSchema"}}},
+		{Declared: "Atoms", Type: &schema.Slice{Alias: "AtomInfoArray", ValueType: &schema.Struct{Name: "AtomInfo"}}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiSchemaArray", ValueType: &schema.Struct{Name: "ApiSchema"}}},
 	},
 }
 
@@ -2696,8 +2696,8 @@ var schemaSimpleInfo = &schema.Class{
 	TypeID: binaryIDSimpleInfo,
 	Name:   "SimpleInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
 	},
 }
 
@@ -2784,10 +2784,10 @@ var schemaStaticArrayInfo = &schema.Class{
 	TypeID: binaryIDStaticArrayInfo,
 	Name:   "StaticArrayInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		schema.Field{Declared: "ElementType", Type: &schema.Interface{Name: "TypeInfo"}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
+		{Declared: "ElementType", Type: &schema.Interface{Name: "TypeInfo"}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -2905,9 +2905,9 @@ var schemaTimingInfo = &schema.Class{
 	TypeID: binaryIDTimingInfo,
 	Name:   "TimingInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer"}}},
-		schema.Field{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
-		schema.Field{Declared: "PerFrame", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
+		{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer"}}},
+		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
+		{Declared: "PerFrame", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
 	},
 }
 
@@ -2955,7 +2955,7 @@ var schemaTimingInfoId = &schema.Class{
 	TypeID: binaryIDTimingInfoId,
 	Name:   "TimingInfoId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -3113,11 +3113,11 @@ var schemacallGetFramebufferColor = &schema.Class{
 	TypeID: binaryIDcallGetFramebufferColor,
 	Name:   "callGetFramebufferColor",
 	Fields: []schema.Field{
-		schema.Field{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
-		schema.Field{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "settings", Type: &schema.Struct{Name: "RenderSettings"}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "settings", Type: &schema.Struct{Name: "RenderSettings"}},
 	},
 }
 
@@ -3196,10 +3196,10 @@ var schemacallGetFramebufferDepth = &schema.Class{
 	TypeID: binaryIDcallGetFramebufferDepth,
 	Name:   "callGetFramebufferDepth",
 	Fields: []schema.Field{
-		schema.Field{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
-		schema.Field{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -3245,7 +3245,7 @@ var schemacallGetHierarchy = &schema.Class{
 	TypeID: binaryIDcallGetHierarchy,
 	Name:   "callGetHierarchy",
 	Fields: []schema.Field{
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
 	},
 }
 
@@ -3311,9 +3311,9 @@ var schemacallGetMemoryInfo = &schema.Class{
 	TypeID: binaryIDcallGetMemoryInfo,
 	Name:   "callGetMemoryInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "rng", Type: &schema.Struct{Name: "MemoryRange"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "rng", Type: &schema.Struct{Name: "MemoryRange"}},
 	},
 }
 
@@ -3370,8 +3370,8 @@ var schemacallGetState = &schema.Class{
 	TypeID: binaryIDcallGetState,
 	Name:   "callGetState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -3437,9 +3437,9 @@ var schemacallGetTimingInfo = &schema.Class{
 	TypeID: binaryIDcallGetTimingInfo,
 	Name:   "callGetTimingInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "mask", Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "mask", Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32}},
 	},
 }
 
@@ -3508,8 +3508,8 @@ var schemacallImport = &schema.Class{
 	TypeID: binaryIDcallImport,
 	Name:   "callImport",
 	Fields: []schema.Field{
-		schema.Field{Declared: "name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -3628,12 +3628,12 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 	TypeID: binaryIDcallPrerenderFramebuffers,
 	Name:   "callPrerenderFramebuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
-		schema.Field{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "atomIds", Type: &schema.Slice{Alias: "U64Array", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "atomIds", Type: &schema.Slice{Alias: "U64Array", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 	},
 }
 
@@ -3710,10 +3710,10 @@ var schemacallReplaceAtom = &schema.Class{
 	TypeID: binaryIDcallReplaceAtom,
 	Name:   "callReplaceAtom",
 	Fields: []schema.Field{
-		schema.Field{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		schema.Field{Declared: "atomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "atomType", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
-		schema.Field{Declared: "data", Type: &schema.Struct{Name: "Binary"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "atomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "atomType", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+		{Declared: "data", Type: &schema.Struct{Name: "Binary"}},
 	},
 }
 
@@ -3761,7 +3761,7 @@ var schemacallResolveAtomStream = &schema.Class{
 	TypeID: binaryIDcallResolveAtomStream,
 	Name:   "callResolveAtomStream",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId"}},
 	},
 }
 
@@ -3807,7 +3807,7 @@ var schemacallResolveBinary = &schema.Class{
 	TypeID: binaryIDcallResolveBinary,
 	Name:   "callResolveBinary",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "BinaryId"}},
 	},
 }
 
@@ -3853,7 +3853,7 @@ var schemacallResolveCapture = &schema.Class{
 	TypeID: binaryIDcallResolveCapture,
 	Name:   "callResolveCapture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "CaptureId"}},
 	},
 }
 
@@ -3899,7 +3899,7 @@ var schemacallResolveDevice = &schema.Class{
 	TypeID: binaryIDcallResolveDevice,
 	Name:   "callResolveDevice",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "DeviceId"}},
 	},
 }
 
@@ -3947,7 +3947,7 @@ var schemacallResolveHierarchy = &schema.Class{
 	TypeID: binaryIDcallResolveHierarchy,
 	Name:   "callResolveHierarchy",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "HierarchyId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "HierarchyId"}},
 	},
 }
 
@@ -3995,7 +3995,7 @@ var schemacallResolveImageInfo = &schema.Class{
 	TypeID: binaryIDcallResolveImageInfo,
 	Name:   "callResolveImageInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
 }
 
@@ -4043,7 +4043,7 @@ var schemacallResolveMemoryInfo = &schema.Class{
 	TypeID: binaryIDcallResolveMemoryInfo,
 	Name:   "callResolveMemoryInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId"}},
 	},
 }
 
@@ -4089,7 +4089,7 @@ var schemacallResolveSchema = &schema.Class{
 	TypeID: binaryIDcallResolveSchema,
 	Name:   "callResolveSchema",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "SchemaId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "SchemaId"}},
 	},
 }
 
@@ -4137,7 +4137,7 @@ var schemacallResolveTimingInfo = &schema.Class{
 	TypeID: binaryIDcallResolveTimingInfo,
 	Name:   "callResolveTimingInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId"}},
 	},
 }
 
@@ -4201,7 +4201,7 @@ var schemaresultGetCaptures = &schema.Class{
 	TypeID: binaryIDresultGetCaptures,
 	Name:   "resultGetCaptures",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId"}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId"}}},
 	},
 }
 
@@ -4265,7 +4265,7 @@ var schemaresultGetDevices = &schema.Class{
 	TypeID: binaryIDresultGetDevices,
 	Name:   "resultGetDevices",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId"}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId"}}},
 	},
 }
 
@@ -4315,7 +4315,7 @@ var schemaresultGetFramebufferColor = &schema.Class{
 	TypeID: binaryIDresultGetFramebufferColor,
 	Name:   "resultGetFramebufferColor",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
 }
 
@@ -4365,7 +4365,7 @@ var schemaresultGetFramebufferDepth = &schema.Class{
 	TypeID: binaryIDresultGetFramebufferDepth,
 	Name:   "resultGetFramebufferDepth",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
 }
 
@@ -4411,7 +4411,7 @@ var schemaresultGetHierarchy = &schema.Class{
 	TypeID: binaryIDresultGetHierarchy,
 	Name:   "resultGetHierarchy",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "HierarchyId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "HierarchyId"}},
 	},
 }
 
@@ -4459,7 +4459,7 @@ var schemaresultGetMemoryInfo = &schema.Class{
 	TypeID: binaryIDresultGetMemoryInfo,
 	Name:   "resultGetMemoryInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId"}},
 	},
 }
 
@@ -4505,7 +4505,7 @@ var schemaresultGetState = &schema.Class{
 	TypeID: binaryIDresultGetState,
 	Name:   "resultGetState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
 	},
 }
 
@@ -4553,7 +4553,7 @@ var schemaresultGetTimingInfo = &schema.Class{
 	TypeID: binaryIDresultGetTimingInfo,
 	Name:   "resultGetTimingInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId"}},
 	},
 }
 
@@ -4599,7 +4599,7 @@ var schemaresultImport = &schema.Class{
 	TypeID: binaryIDresultImport,
 	Name:   "resultImport",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
 	},
 }
 
@@ -4653,7 +4653,7 @@ var schemaresultPrerenderFramebuffers = &schema.Class{
 	TypeID: binaryIDresultPrerenderFramebuffers,
 	Name:   "resultPrerenderFramebuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
 	},
 }
 
@@ -4699,7 +4699,7 @@ var schemaresultReplaceAtom = &schema.Class{
 	TypeID: binaryIDresultReplaceAtom,
 	Name:   "resultReplaceAtom",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
 	},
 }
 
@@ -4749,7 +4749,7 @@ var schemaresultResolveAtomStream = &schema.Class{
 	TypeID: binaryIDresultResolveAtomStream,
 	Name:   "resultResolveAtomStream",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "AtomStream"}},
+		{Declared: "value", Type: &schema.Struct{Name: "AtomStream"}},
 	},
 }
 
@@ -4797,7 +4797,7 @@ var schemaresultResolveBinary = &schema.Class{
 	TypeID: binaryIDresultResolveBinary,
 	Name:   "resultResolveBinary",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Binary"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Binary"}},
 	},
 }
 
@@ -4845,7 +4845,7 @@ var schemaresultResolveCapture = &schema.Class{
 	TypeID: binaryIDresultResolveCapture,
 	Name:   "resultResolveCapture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Capture"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Capture"}},
 	},
 }
 
@@ -4893,7 +4893,7 @@ var schemaresultResolveDevice = &schema.Class{
 	TypeID: binaryIDresultResolveDevice,
 	Name:   "resultResolveDevice",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Device"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Device"}},
 	},
 }
 
@@ -4941,7 +4941,7 @@ var schemaresultResolveHierarchy = &schema.Class{
 	TypeID: binaryIDresultResolveHierarchy,
 	Name:   "resultResolveHierarchy",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Hierarchy"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Hierarchy"}},
 	},
 }
 
@@ -4989,7 +4989,7 @@ var schemaresultResolveImageInfo = &schema.Class{
 	TypeID: binaryIDresultResolveImageInfo,
 	Name:   "resultResolveImageInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "ImageInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfo"}},
 	},
 }
 
@@ -5039,7 +5039,7 @@ var schemaresultResolveMemoryInfo = &schema.Class{
 	TypeID: binaryIDresultResolveMemoryInfo,
 	Name:   "resultResolveMemoryInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo"}},
 	},
 }
 
@@ -5087,7 +5087,7 @@ var schemaresultResolveSchema = &schema.Class{
 	TypeID: binaryIDresultResolveSchema,
 	Name:   "resultResolveSchema",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Schema"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Schema"}},
 	},
 }
 
@@ -5137,7 +5137,7 @@ var schemaresultResolveTimingInfo = &schema.Class{
 	TypeID: binaryIDresultResolveTimingInfo,
 	Name:   "resultResolveTimingInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "TimingInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "TimingInfo"}},
 	},
 }
 

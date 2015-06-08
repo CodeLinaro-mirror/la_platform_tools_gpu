@@ -7,11 +7,6 @@ package parse
 
 import "fmt"
 
-func init() {
-}
-
-var ()
-
 const _NumberKind_name = "NotNumericDecimalOctalHexadecimalFloatingScientific"
 
 var _NumberKind_map = map[NumberKind]string{

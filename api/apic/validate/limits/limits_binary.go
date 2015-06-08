@@ -7,11 +7,6 @@ package limits
 
 import "fmt"
 
-func init() {
-}
-
-var ()
-
 const _boolLimit_name = "FalseTrueMaybe"
 
 var _boolLimit_map = map[boolLimit]string{

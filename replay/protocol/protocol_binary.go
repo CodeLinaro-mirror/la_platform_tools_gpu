@@ -78,8 +78,8 @@ var schemaResourceInfo = &schema.Class{
 	TypeID: binaryIDResourceInfo,
 	Name:   "ResourceInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -207,11 +207,11 @@ var schemaPayload = &schema.Class{
 	TypeID: binaryIDPayload,
 	Name:   "Payload",
 	Fields: []schema.Field{
-		schema.Field{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
-		schema.Field{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo"}}},
-		schema.Field{Declared: "Opcodes", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo"}}},
+		{Declared: "Opcodes", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }
 

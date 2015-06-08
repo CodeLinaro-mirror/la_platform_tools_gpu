@@ -63,6 +63,6 @@ var schemaError = &schema.Class{
 	TypeID: binaryIDError,
 	Name:   "Error",
 	Fields: []schema.Field{
-		schema.Field{Declared: "message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

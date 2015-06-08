@@ -140,9 +140,9 @@ var schemaArray = &Class{
 	TypeID: binaryIDArray,
 	Name:   "Array",
 	Fields: []Field{
-		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Size", Type: &Primitive{Name: "uint32", Method: Uint32}},
+		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+		{Declared: "Size", Type: &Primitive{Name: "uint32", Method: Uint32}},
 	},
 }
 
@@ -207,8 +207,8 @@ var schemaField = &Class{
 	TypeID: binaryIDField,
 	Name:   "Field",
 	Fields: []Field{
-		Field{Declared: "Declared", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Declared", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
 	},
 }
 
@@ -305,10 +305,10 @@ var schemaClass = &Class{
 	TypeID: binaryIDClass,
 	Name:   "Class",
 	Fields: []Field{
-		Field{Declared: "TypeID", Type: &Primitive{Name: "binary.ID", Method: ID}},
-		Field{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field"}}},
+		{Declared: "TypeID", Type: &Primitive{Name: "binary.ID", Method: ID}},
+		{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field"}}},
 	},
 }
 
@@ -367,8 +367,8 @@ var schemaInt16Constant = &Class{
 	TypeID: binaryIDInt16Constant,
 	Name:   "Int16Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "int16", Method: Int16}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "int16", Method: Int16}},
 	},
 }
 
@@ -449,8 +449,8 @@ var schemaInt16Constants = &Class{
 	TypeID: binaryIDInt16Constants,
 	Name:   "Int16Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant"}}},
 	},
 }
 
@@ -509,8 +509,8 @@ var schemaInt32Constant = &Class{
 	TypeID: binaryIDInt32Constant,
 	Name:   "Int32Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "int32", Method: Int32}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "int32", Method: Int32}},
 	},
 }
 
@@ -591,8 +591,8 @@ var schemaInt32Constants = &Class{
 	TypeID: binaryIDInt32Constants,
 	Name:   "Int32Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant"}}},
 	},
 }
 
@@ -651,8 +651,8 @@ var schemaInt64Constant = &Class{
 	TypeID: binaryIDInt64Constant,
 	Name:   "Int64Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "int64", Method: Int64}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "int64", Method: Int64}},
 	},
 }
 
@@ -733,8 +733,8 @@ var schemaInt64Constants = &Class{
 	TypeID: binaryIDInt64Constants,
 	Name:   "Int64Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant"}}},
 	},
 }
 
@@ -793,8 +793,8 @@ var schemaInt8Constant = &Class{
 	TypeID: binaryIDInt8Constant,
 	Name:   "Int8Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "int8", Method: Int8}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "int8", Method: Int8}},
 	},
 }
 
@@ -875,8 +875,8 @@ var schemaInt8Constants = &Class{
 	TypeID: binaryIDInt8Constants,
 	Name:   "Int8Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant"}}},
 	},
 }
 
@@ -924,7 +924,7 @@ var schemaInterface = &Class{
 	TypeID: binaryIDInterface,
 	Name:   "Interface",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 	},
 }
 
@@ -1006,9 +1006,9 @@ var schemaMap = &Class{
 	TypeID: binaryIDMap,
 	Name:   "Map",
 	Fields: []Field{
-		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "KeyType", Type: &Interface{Name: "Type"}},
-		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "KeyType", Type: &Interface{Name: "Type"}},
+		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
 	},
 }
 
@@ -1062,7 +1062,7 @@ var schemaPointer = &Class{
 	TypeID: binaryIDPointer,
 	Name:   "Pointer",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
 	},
 }
 
@@ -1121,8 +1121,8 @@ var schemaPrimitive = &Class{
 	TypeID: binaryIDPrimitive,
 	Name:   "Primitive",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Method", Type: &Primitive{Name: "Method", Method: Int32}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Method", Type: &Primitive{Name: "Method", Method: Int32}},
 	},
 }
 
@@ -1187,8 +1187,8 @@ var schemaSlice = &Class{
 	TypeID: binaryIDSlice,
 	Name:   "Slice",
 	Fields: []Field{
-		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
 	},
 }
 
@@ -1253,8 +1253,8 @@ var schemaStream = &Class{
 	TypeID: binaryIDStream,
 	Name:   "Stream",
 	Fields: []Field{
-		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
 	},
 }
 
@@ -1313,8 +1313,8 @@ var schemaStruct = &Class{
 	TypeID: binaryIDStruct,
 	Name:   "Struct",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "ID", Type: &Primitive{Name: "binary.ID", Method: ID}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "ID", Type: &Primitive{Name: "binary.ID", Method: ID}},
 	},
 }
 
@@ -1373,8 +1373,8 @@ var schemaUint16Constant = &Class{
 	TypeID: binaryIDUint16Constant,
 	Name:   "Uint16Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "uint16", Method: Uint16}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "uint16", Method: Uint16}},
 	},
 }
 
@@ -1455,8 +1455,8 @@ var schemaUint16Constants = &Class{
 	TypeID: binaryIDUint16Constants,
 	Name:   "Uint16Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant"}}},
 	},
 }
 
@@ -1515,8 +1515,8 @@ var schemaUint32Constant = &Class{
 	TypeID: binaryIDUint32Constant,
 	Name:   "Uint32Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "uint32", Method: Uint32}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "uint32", Method: Uint32}},
 	},
 }
 
@@ -1597,8 +1597,8 @@ var schemaUint32Constants = &Class{
 	TypeID: binaryIDUint32Constants,
 	Name:   "Uint32Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant"}}},
 	},
 }
 
@@ -1657,8 +1657,8 @@ var schemaUint64Constant = &Class{
 	TypeID: binaryIDUint64Constant,
 	Name:   "Uint64Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "uint64", Method: Uint64}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "uint64", Method: Uint64}},
 	},
 }
 
@@ -1739,8 +1739,8 @@ var schemaUint64Constants = &Class{
 	TypeID: binaryIDUint64Constants,
 	Name:   "Uint64Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant"}}},
 	},
 }
 
@@ -1799,8 +1799,8 @@ var schemaUint8Constant = &Class{
 	TypeID: binaryIDUint8Constant,
 	Name:   "Uint8Constant",
 	Fields: []Field{
-		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		Field{Declared: "Value", Type: &Primitive{Name: "uint8", Method: Uint8}},
+		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Value", Type: &Primitive{Name: "uint8", Method: Uint8}},
 	},
 }
 
@@ -1881,7 +1881,7 @@ var schemaUint8Constants = &Class{
 	TypeID: binaryIDUint8Constants,
 	Name:   "Uint8Constants",
 	Fields: []Field{
-		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
-		Field{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant"}}},
+		{Declared: "Type", Type: &Interface{Name: "Type"}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant"}}},
 	},
 }

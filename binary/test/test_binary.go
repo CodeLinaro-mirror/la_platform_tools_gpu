@@ -65,7 +65,7 @@ var schemaTypeA = &schema.Class{
 	TypeID: TypeAID,
 	Name:   "TypeA",
 	Fields: []schema.Field{
-		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -113,6 +113,6 @@ var schemaTypeB = &schema.Class{
 	TypeID: TypeBID,
 	Name:   "TypeB",
 	Fields: []schema.Field{
-		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

@@ -76,8 +76,8 @@ var schemaRange = &schema.Class{
 	TypeID: binaryIDRange,
 	Name:   "Range",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 

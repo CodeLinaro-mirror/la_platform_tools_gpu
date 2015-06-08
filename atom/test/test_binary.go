@@ -79,8 +79,8 @@ var schemaAtomA = &schema.Class{
 	TypeID: AtomAID,
 	Name:   "AtomA",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "AtomFlags", Type: &schema.Primitive{Name: "atom.Flags", Method: schema.Uint32}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "AtomFlags", Type: &schema.Primitive{Name: "atom.Flags", Method: schema.Uint32}},
 	},
 }
 
@@ -139,8 +139,8 @@ var schemaAtomB = &schema.Class{
 	TypeID: AtomBID,
 	Name:   "AtomB",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -188,6 +188,6 @@ var schemaAtomC = &schema.Class{
 	TypeID: AtomCID,
 	Name:   "AtomC",
 	Fields: []schema.Field{
-		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
