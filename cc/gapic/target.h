@@ -65,6 +65,8 @@
 #ifdef _MSC_VER // MSVC
 #   define ftruncate _chsize
 #   define snprintf _snprintf
+#   define alignof __alignof
+#   define _ALLOW_KEYWORD_MACROS 1
 #endif // _MSC_VER
 
 #endif  // GAPIC_TARGET_H

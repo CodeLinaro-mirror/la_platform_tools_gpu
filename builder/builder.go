@@ -285,7 +285,7 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 	for i, a := range atoms {
 		id = atom.ID(i)
 		if err := a.Mutate(s, d, l); err != nil {
-			return err
+			l.Warningf("Atom %d %v: %v", i, a, err)
 		}
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
 			api := a.API()
