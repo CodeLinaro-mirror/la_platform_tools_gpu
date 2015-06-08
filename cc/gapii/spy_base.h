@@ -208,7 +208,7 @@ inline Slice<T> SpyBase::slice(const Slice<T>& src, uint64_t s, uint64_t e) cons
 inline std::string SpyBase::string(const char* str) {
     for (uint64_t i = 0; ; i++) {
         if (str[i] == 0) {
-            read(str, i);
+            read(str, i + 1);
             return std::string(str, str + i);
         }
     }
