@@ -18,10 +18,11 @@
 #include "context.h"
 #include "interpreter.h"
 #include "memory_manager.h"
-#include "mock_connection.h"
 #include "mock_resource_provider.h"
 #include "resource_provider.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -161,7 +162,7 @@ TEST_F(ContextTest, PostData) {
     pushUint32(&expected, 6);
     pushBytes(&expected, {1, 2, 3, 4, 5, 6});
 
-    auto connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     resourceProviderLoadReplay(mResourceProvider.get(), replayData);
     auto gazerConnection = createServerConnection(connection, "", replayData.size());
     auto context = Context::create(*gazerConnection, mResourceProvider.get(), mMemoryManager.get());
@@ -192,7 +193,7 @@ TEST_F(ContextTest, PostDataErrorPost) {
              instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 6),
              instruction(Interpreter::InstructionCode::POST)});
 
-    auto connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     connection->out_limit = 7;
     resourceProviderLoadReplay(mResourceProvider.get(), replayData);
     auto gazerConnection = createServerConnection(connection, "", replayData.size());

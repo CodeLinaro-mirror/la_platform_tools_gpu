@@ -16,9 +16,10 @@
 
 #include "base_type.h"
 #include "interpreter.h"
-#include "mock_connection.h"
 #include "server_connection.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 
@@ -95,9 +96,9 @@ std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemor
     return replayData;
 }
 
-std::unique_ptr<ServerConnection> createServerConnection(MockConnection* connection,
-                                                       const std::string& replayId,
-                                                       uint32_t replayLength) {
+std::unique_ptr<ServerConnection> createServerConnection(gapic::test::MockConnection* connection,
+                                                         const std::string& replayId,
+                                                         uint32_t replayLength) {
     pushString(&connection->in, replayId);
     pushUint32(&connection->in, replayLength);
 
@@ -111,7 +112,7 @@ std::unique_ptr<ServerConnection> createServerConnection(MockConnection* connect
 
 std::unique_ptr<ServerConnection> createServerConnection(const std::string& replayId,
                                                        uint32_t replayLength) {
-    return createServerConnection(new MockConnection(), replayId, replayLength);
+    return createServerConnection(new gapic::test::MockConnection(), replayId, replayLength);
 }
 
 }  // namespace test

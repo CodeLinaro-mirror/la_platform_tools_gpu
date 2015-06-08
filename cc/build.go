@@ -146,6 +146,7 @@ type Target struct {
 	Gtest       cpp.Config
 	Gmock       cpp.Config
 	Gapic       cpp.Config
+	GapicTests  cpp.Config
 	Gapii       cpp.Config
 	Gapir       cpp.Config
 	GapirTests  cpp.Config
@@ -159,6 +160,7 @@ func (t Target) Extend(n Target) Target {
 		Gtest:       t.Gtest.Extend(n.Gtest),
 		Gmock:       t.Gmock.Extend(n.Gmock),
 		Gapic:       t.Gapic.Extend(n.Gapic),
+		GapicTests:  t.GapicTests.Extend(n.GapicTests),
 		Gapii:       t.Gapii.Extend(n.Gapii),
 		Gapir:       t.Gapir.Extend(n.Gapir),
 		GapirTests:  t.GapirTests.Extend(n.GapirTests),
@@ -253,8 +255,18 @@ func (t Target) Build(env build.Environment) error {
 		return err
 	}
 
-	// Build gapir tests.
+	// Build tests.
 	if *buildtests {
+		env.Logger = begin(t.GapicTests.Name)
+		gapicTestSource := GapicRoot.Glob(t.SourceFiles...).
+			Append(GapicRoot.Join(t.Gapic.OS).Glob(t.SourceFiles...)...).
+			Filter("*_test.cpp")
+		gapicTestInputs := gapicTestSource.Append(gapicLib, gtestLib, gmockLib)
+		gapicTest, err := cpp.Executable(gapicTestInputs, t.GapicTests, env)
+		if err != nil {
+			return err
+		}
+
 		env.Logger = begin(t.GapirTests.Name)
 		gapirTestSource := GapirRoot.Glob(t.SourceFiles...).
 			Append(GapirRoot.Join(t.Gapir.OS).Glob(t.SourceFiles...)...).
@@ -266,7 +278,11 @@ func (t Target) Build(env build.Environment) error {
 		}
 
 		if *runtests && t.Replayd.OS == build.HostOS {
-			env.Logger = begin("Running gapir-tests")
+			env.Logger = begin("Running gapic tests")
+			if err := gapicTest.Exec(env); err != nil {
+				return err
+			}
+			env.Logger = begin("Running gapir tests")
 			if err := gapirTest.Exec(env); err != nil {
 				return err
 			}
@@ -338,6 +354,14 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 		Gapic: base.Extend(cpp.Config{
 			Name:               "gapic",
 			IncludeSearchPaths: build.FileSet{CCRoot},
+		}),
+		GapicTests: base.Extend(cpp.Config{
+			Name: "gapic-tests",
+			IncludeSearchPaths: build.FileSet{
+				CCRoot,
+				GmockRoot.Join("include"),
+				GtestRoot.Join("include"),
+			},
 		}),
 		Gapii: base.Extend(cpp.Config{
 			Name:               "gapii",
