@@ -762,10 +762,10 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
 
 bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindAttribLocation(%u, %u, %s)\n", program, location, name);
+        GAPID_INFO("glBindAttribLocation(%u, %d, %s)\n", program, location, name);
         if (glBindAttribLocation != nullptr) {
             glBindAttribLocation(program, location, name);
         } else {
@@ -868,9 +868,9 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glEnableVertexAttribArray(%u)\n", location);
+        GAPID_INFO("glEnableVertexAttribArray(%d)\n", location);
         if (glEnableVertexAttribArray != nullptr) {
             glEnableVertexAttribArray(location);
         } else {
@@ -884,9 +884,9 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDisableVertexAttribArray(%u)\n", location);
+        GAPID_INFO("glDisableVertexAttribArray(%d)\n", location);
         if (glDisableVertexAttribArray != nullptr) {
             glDisableVertexAttribArray(location);
         } else {
@@ -905,9 +905,9 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     bool normalized = stack->pop<bool>();
     VertexAttribType type = stack->pop<VertexAttribType>();
     int32_t size = stack->pop<int32_t>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribPointer(%u, %d, %u, %d, %d, %p)\n", location, size, type,
+        GAPID_INFO("glVertexAttribPointer(%d, %d, %u, %d, %d, %p)\n", location, size, type,
                    normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);
@@ -927,10 +927,10 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveAttrib(%u, %u, %d, %p, %p, %p, %p)\n", program, location,
+        GAPID_INFO("glGetActiveAttrib(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
                    buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveAttrib != nullptr) {
             glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
@@ -1051,10 +1051,10 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glGetAttribLocation(%u, %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
-            uint32_t return_value = glGetAttribLocation(program, name);
-            GAPID_INFO("Returned: %u\n", return_value);
+            int32_t return_value = glGetAttribLocation(program, name);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t>(return_value);
+                stack->push<int32_t>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetAttribLocation\n");
@@ -1542,9 +1542,9 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib1f(%u, %f)\n", location, value0);
+        GAPID_INFO("glVertexAttrib1f(%d, %f)\n", location, value0);
         if (glVertexAttrib1f != nullptr) {
             glVertexAttrib1f(location, value0);
         } else {
@@ -1560,9 +1560,9 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
 bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib2f(%u, %f, %f)\n", location, value0, value1);
+        GAPID_INFO("glVertexAttrib2f(%d, %f, %f)\n", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
             glVertexAttrib2f(location, value0, value1);
         } else {
@@ -1579,9 +1579,9 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib3f(%u, %f, %f, %f)\n", location, value0, value1, value2);
+        GAPID_INFO("glVertexAttrib3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
             glVertexAttrib3f(location, value0, value1, value2);
         } else {
@@ -1599,9 +1599,9 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib4f(%u, %f, %f, %f, %f)\n", location, value0, value1, value2,
+        GAPID_INFO("glVertexAttrib4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2,
                    value3);
         if (glVertexAttrib4f != nullptr) {
             glVertexAttrib4f(location, value0, value1, value2, value3);
@@ -1617,9 +1617,9 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib1fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib1fv(%d, %p)\n", location, value);
         if (glVertexAttrib1fv != nullptr) {
             glVertexAttrib1fv(location, value);
         } else {
@@ -1634,9 +1634,9 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib2fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib2fv(%d, %p)\n", location, value);
         if (glVertexAttrib2fv != nullptr) {
             glVertexAttrib2fv(location, value);
         } else {
@@ -1651,9 +1651,9 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib3fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib3fv(%d, %p)\n", location, value);
         if (glVertexAttrib3fv != nullptr) {
             glVertexAttrib3fv(location, value);
         } else {
@@ -1668,9 +1668,9 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
-    uint32_t location = stack->pop<uint32_t>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib4fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib4fv(%d, %p)\n", location, value);
         if (glVertexAttrib4fv != nullptr) {
             glVertexAttrib4fv(location, value);
         } else {

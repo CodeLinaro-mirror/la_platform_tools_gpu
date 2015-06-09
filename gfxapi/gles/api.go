@@ -24,7 +24,7 @@ type ProgramId uint32
 type VertexArrayId uint32
 type QueryId uint32
 type UniformLocation int32
-type AttributeLocation uint32
+type AttributeLocation int32
 
 // IndicesPointer is a pointer to a void element.
 type IndicesPointer struct {

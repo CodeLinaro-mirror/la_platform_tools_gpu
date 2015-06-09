@@ -1943,7 +1943,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
             e->Uint32(this->mProgram);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->String(this->mName);
         }
 
@@ -3029,7 +3029,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
         }
 
         atom::Observations mobservations;
@@ -3236,7 +3236,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
         }
 
         atom::Observations mobservations;
@@ -3621,7 +3621,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
             e->Uint32(this->mProgram);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Int32(this->mBufferSize);
             e->Value(&this->mBufferBytesWritten);
             e->Value(&this->mVectorCount);
@@ -3753,7 +3753,7 @@ namespace gles {
             e->Value(&this->mobservations);
             e->Uint32(this->mProgram);
             e->String(this->mName);
-            e->Uint32(this->mResult);
+            e->Int32(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -6153,7 +6153,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Float32(this->mValue0);
         }
 
@@ -6174,7 +6174,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Value(&this->mValue);
         }
 
@@ -6196,7 +6196,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
         }
@@ -6219,7 +6219,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Value(&this->mValue);
         }
 
@@ -6242,7 +6242,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
             e->Float32(this->mValue2);
@@ -6267,7 +6267,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Value(&this->mValue);
         }
 
@@ -6291,7 +6291,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
             e->Float32(this->mValue2);
@@ -6318,7 +6318,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Value(&this->mValue);
         }
 
@@ -6343,7 +6343,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
-            e->Uint32(this->mLocation);
+            e->Int32(this->mLocation);
             e->Int32(this->mSize);
             e->Uint32(this->mType);
             e->Bool(this->mNormalized);

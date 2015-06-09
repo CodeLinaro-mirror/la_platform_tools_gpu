@@ -1068,7 +1068,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1209,7 +1209,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 		},
@@ -1225,7 +1225,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 		},
@@ -1241,7 +1241,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1287,7 +1287,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1478,7 +1478,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "result",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  true,
 			},
 		},
@@ -2200,7 +2200,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2221,7 +2221,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2247,7 +2247,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2278,7 +2278,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2314,7 +2314,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2335,7 +2335,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2356,7 +2356,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2377,7 +2377,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.U32,
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -5278,7 +5278,7 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateMapInfo("AttributeLocationːVertexAttributeArrayʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
+		e = service.CreateMapInfo("AttributeLocationːVertexAttributeArrayʳᵐ", service.TypeKindMap, schema.S32, schema.Int /* TODO: Reference */)
 	case 1:
 		e = service.CreateMapInfo("BufferIdːBufferʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 2:
@@ -5324,7 +5324,7 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 22:
 		e = service.CreateMapInfo("ShaderTypeːShaderIdᵐ", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
 	case 23:
-		e = service.CreateMapInfo("StringːAttributeLocationᵐ", service.TypeKindMap, schema.String, schema.U32)
+		e = service.CreateMapInfo("StringːAttributeLocationᵐ", service.TypeKindMap, schema.String, schema.S32)
 	case 24:
 		e = service.CreateMapInfo("TextureIdːTextureʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 25:

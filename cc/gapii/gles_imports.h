@@ -85,7 +85,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLEGLIMAGETARGETTEXTURE2DOES)(uint32_t target, void *image);
     typedef void(STDCALL *PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES)(uint32_t target, void *image);
     typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
-    typedef void(STDCALL *PFNGLBINDATTRIBLOCATION)(uint32_t program, uint32_t location, char *name);
+    typedef void(STDCALL *PFNGLBINDATTRIBLOCATION)(uint32_t program, int32_t location, char *name);
     typedef void(STDCALL *PFNGLBLENDFUNC)(uint32_t src_factor, uint32_t dst_factor);
     typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                                   uint32_t src_factor_alpha,
@@ -93,11 +93,11 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLBLENDEQUATION)(uint32_t equation);
     typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(uint32_t rgb, uint32_t alpha);
     typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
-    typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(uint32_t location);
-    typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(uint32_t location);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(uint32_t location, int32_t size, uint32_t type,
+    typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(int32_t location);
+    typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(int32_t location);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(int32_t location, int32_t size, uint32_t type,
                                                     bool normalized, int32_t stride, void *data);
-    typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, uint32_t location,
+    typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, int32_t location,
                                                 int32_t buffer_size, int32_t *buffer_bytes_written,
                                                 int32_t *vector_count, uint32_t *type, char *name);
     typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, int32_t location,
@@ -107,7 +107,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, uint32_t parameter, int32_t *value);
     typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, uint32_t parameter, int32_t *value);
     typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
-    typedef uint32_t(STDCALL *PFNGLGETATTRIBLOCATION)(uint32_t program, char *name);
+    typedef int32_t(STDCALL *PFNGLGETATTRIBLOCATION)(uint32_t program, char *name);
     typedef void(STDCALL *PFNGLPIXELSTOREI)(uint32_t parameter, int32_t value);
     typedef void(STDCALL *PFNGLTEXPARAMETERI)(uint32_t target, uint32_t parameter, int32_t value);
     typedef void(STDCALL *PFNGLTEXPARAMETERF)(uint32_t target, uint32_t parameter, float value);
@@ -143,16 +143,16 @@ struct GlesImports {
                                                  float *values);
     typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
     typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(uint32_t location, float value0);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(uint32_t location, float value0, float value1);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB3F)(uint32_t location, float value0, float value1,
+    typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(int32_t location, float value0);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(int32_t location, float value0, float value1);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB3F)(int32_t location, float value0, float value1,
                                                float value2);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB4F)(uint32_t location, float value0, float value1,
+    typedef void(STDCALL *PFNGLVERTEXATTRIB4F)(int32_t location, float value0, float value1,
                                                float value2, float value3);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(uint32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB2FV)(uint32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB3FV)(uint32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(uint32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(int32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB2FV)(int32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB3FV)(int32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(int32_t location, float *value);
     typedef void(STDCALL *PFNGLGETSHADERPRECISIONFORMAT)(uint32_t shader_type,
                                                          uint32_t precision_type, int32_t *range,
                                                          int32_t *precision);

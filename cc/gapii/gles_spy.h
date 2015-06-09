@@ -85,18 +85,18 @@ public:
     inline void glEGLImageTargetTexture2DOES(uint32_t target, void* image);
     inline void glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image);
     inline uint32_t glGetGraphicsResetStatusEXT();
-    inline void glBindAttribLocation(uint32_t program, uint32_t location, char* name);
+    inline void glBindAttribLocation(uint32_t program, int32_t location, char* name);
     inline void glBlendFunc(uint32_t src_factor, uint32_t dst_factor);
     inline void glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                     uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
     inline void glBlendEquation(uint32_t equation);
     inline void glBlendEquationSeparate(uint32_t rgb, uint32_t alpha);
     inline void glBlendColor(float red, float green, float blue, float alpha);
-    inline void glEnableVertexAttribArray(uint32_t location);
-    inline void glDisableVertexAttribArray(uint32_t location);
-    inline void glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
+    inline void glEnableVertexAttribArray(int32_t location);
+    inline void glDisableVertexAttribArray(int32_t location);
+    inline void glVertexAttribPointer(int32_t location, int32_t size, uint32_t type,
                                       bool normalized, int32_t stride, void* data);
-    inline void glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
+    inline void glGetActiveAttrib(uint32_t program, int32_t location, int32_t buffer_size,
                                   int32_t* buffer_bytes_written, int32_t* vector_count,
                                   uint32_t* type, char* name);
     inline void glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
@@ -106,7 +106,7 @@ public:
     inline void glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value);
     inline void glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value);
     inline int32_t glGetUniformLocation(uint32_t program, char* name);
-    inline uint32_t glGetAttribLocation(uint32_t program, char* name);
+    inline int32_t glGetAttribLocation(uint32_t program, char* name);
     inline void glPixelStorei(uint32_t parameter, int32_t value);
     inline void glTexParameteri(uint32_t target, uint32_t parameter, int32_t value);
     inline void glTexParameterf(uint32_t target, uint32_t parameter, float value);
@@ -135,15 +135,15 @@ public:
     inline void glUniformMatrix4fv(int32_t location, int32_t count, bool transpose, float* values);
     inline void glGetUniformfv(uint32_t program, int32_t location, float* values);
     inline void glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
-    inline void glVertexAttrib1f(uint32_t location, float value0);
-    inline void glVertexAttrib2f(uint32_t location, float value0, float value1);
-    inline void glVertexAttrib3f(uint32_t location, float value0, float value1, float value2);
-    inline void glVertexAttrib4f(uint32_t location, float value0, float value1, float value2,
+    inline void glVertexAttrib1f(int32_t location, float value0);
+    inline void glVertexAttrib2f(int32_t location, float value0, float value1);
+    inline void glVertexAttrib3f(int32_t location, float value0, float value1, float value2);
+    inline void glVertexAttrib4f(int32_t location, float value0, float value1, float value2,
                                  float value3);
-    inline void glVertexAttrib1fv(uint32_t location, float* value);
-    inline void glVertexAttrib2fv(uint32_t location, float* value);
-    inline void glVertexAttrib3fv(uint32_t location, float* value);
-    inline void glVertexAttrib4fv(uint32_t location, float* value);
+    inline void glVertexAttrib1fv(int32_t location, float* value);
+    inline void glVertexAttrib2fv(int32_t location, float* value);
+    inline void glVertexAttrib3fv(int32_t location, float* value);
+    inline void glVertexAttrib4fv(int32_t location, float* value);
     inline void glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                            int32_t* range, int32_t* precision);
     inline void glDepthMask(bool enabled);
@@ -1288,7 +1288,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
     return result;
 }
 
-inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, char* name) {
+inline void GlesSpy::glBindAttribLocation(uint32_t program, int32_t location, char* name) {
     GAPID_INFO("glBindAttribLocation()\n");
 
     do {
@@ -1303,7 +1303,7 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, uint32_t location, c
     mEncoder->Uint16(38);  // Type ID -- TODO: mEncoder->Id(GL_BIND_ATTRIB_LOCATION_ID);
     encodeObservations();
     mEncoder->Uint32(program);
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->String(name);
 }
 
@@ -1406,7 +1406,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
     mEncoder->Float32(alpha);
 }
 
-inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
+inline void GlesSpy::glEnableVertexAttribArray(int32_t location) {
     GAPID_INFO("glEnableVertexAttribArray()\n");
 
     do {
@@ -1419,10 +1419,10 @@ inline void GlesSpy::glEnableVertexAttribArray(uint32_t location) {
 
     mEncoder->Uint16(44);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_VERTEX_ATTRIB_ARRAY_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
 }
 
-inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
+inline void GlesSpy::glDisableVertexAttribArray(int32_t location) {
     GAPID_INFO("glDisableVertexAttribArray()\n");
 
     do {
@@ -1435,10 +1435,10 @@ inline void GlesSpy::glDisableVertexAttribArray(uint32_t location) {
 
     mEncoder->Uint16(45);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_VERTEX_ATTRIB_ARRAY_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
 }
 
-inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
+inline void GlesSpy::glVertexAttribPointer(int32_t location, int32_t size, uint32_t type,
                                            bool normalized, int32_t stride, void* data) {
     GAPID_INFO("glVertexAttribPointer()\n");
 
@@ -1458,7 +1458,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
 
     mEncoder->Uint16(46);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB_POINTER_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Int32(size);
     mEncoder->Uint32(static_cast<uint32_t>(type));
     mEncoder->Bool(normalized);
@@ -1466,7 +1466,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
     mEncoder->Pointer(data);
 }
 
-inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
+inline void GlesSpy::glGetActiveAttrib(uint32_t program, int32_t location, int32_t buffer_size,
                                        int32_t* buffer_bytes_written, int32_t* vector_count,
                                        uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveAttrib()\n");
@@ -1484,7 +1484,7 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
     mEncoder->Uint16(47);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
     encodeObservations();
     mEncoder->Uint32(program);
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Int32(buffer_size);
     mEncoder->Pointer(buffer_bytes_written);
     mEncoder->Pointer(vector_count);
@@ -1614,10 +1614,10 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
     return result;
 }
 
-inline uint32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
+inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetAttribLocation()\n");
 
-    uint32_t result = 0;
+    int32_t result = 0;
 
     do {
         result = mImports.glGetAttribLocation(program, name);
@@ -1628,7 +1628,7 @@ inline uint32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->String(name);
-    mEncoder->Uint32(result);
+    mEncoder->Int32(result);
 
     return result;
 }
@@ -2108,6 +2108,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* value)
         std::shared_ptr<Context> l_GetContext_43_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_43_result;
         Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT;
@@ -2131,6 +2132,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* value)
         std::shared_ptr<Context> l_GetContext_44_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_44_result;
         Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 2));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
@@ -2154,6 +2156,7 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* value)
         std::shared_ptr<Context> l_GetContext_45_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
         Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 3));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
@@ -2177,6 +2180,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* value)
         std::shared_ptr<Context> l_GetContext_46_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
         Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 4));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
@@ -2202,6 +2206,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_GetContext_47_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_47_result;
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 4));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
@@ -2229,6 +2234,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_GetContext_48_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_48_result;
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 9));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT3;
@@ -2258,6 +2264,7 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_GetContext_49_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_49_result;
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 16));
+        read(l_v);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mValue.mMat4f =
@@ -2322,7 +2329,7 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
     mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
+inline void GlesSpy::glVertexAttrib1f(int32_t location, float value0) {
     GAPID_INFO("glVertexAttrib1f()\n");
 
     do {
@@ -2331,11 +2338,11 @@ inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
 
     mEncoder->Uint16(80);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1F_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Float32(value0);
 }
 
-inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float value1) {
+inline void GlesSpy::glVertexAttrib2f(int32_t location, float value0, float value1) {
     GAPID_INFO("glVertexAttrib2f()\n");
 
     do {
@@ -2344,12 +2351,12 @@ inline void GlesSpy::glVertexAttrib2f(uint32_t location, float value0, float val
 
     mEncoder->Uint16(81);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2F_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Float32(value0);
     mEncoder->Float32(value1);
 }
 
-inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float value1, float value2) {
+inline void GlesSpy::glVertexAttrib3f(int32_t location, float value0, float value1, float value2) {
     GAPID_INFO("glVertexAttrib3f()\n");
 
     do {
@@ -2358,13 +2365,13 @@ inline void GlesSpy::glVertexAttrib3f(uint32_t location, float value0, float val
 
     mEncoder->Uint16(82);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3F_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Float32(value0);
     mEncoder->Float32(value1);
     mEncoder->Float32(value2);
 }
 
-inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float value1, float value2,
+inline void GlesSpy::glVertexAttrib4f(int32_t location, float value0, float value1, float value2,
                                       float value3) {
     GAPID_INFO("glVertexAttrib4f()\n");
 
@@ -2374,14 +2381,14 @@ inline void GlesSpy::glVertexAttrib4f(uint32_t location, float value0, float val
 
     mEncoder->Uint16(83);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4F_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Float32(value0);
     mEncoder->Float32(value1);
     mEncoder->Float32(value2);
     mEncoder->Float32(value3);
 }
 
-inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
+inline void GlesSpy::glVertexAttrib1fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib1fv()\n");
 
     do {
@@ -2391,11 +2398,11 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
 
     mEncoder->Uint16(84);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1FV_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Pointer(value);
 }
 
-inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
+inline void GlesSpy::glVertexAttrib2fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib2fv()\n");
 
     do {
@@ -2405,11 +2412,11 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
 
     mEncoder->Uint16(85);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2FV_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Pointer(value);
 }
 
-inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
+inline void GlesSpy::glVertexAttrib3fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib3fv()\n");
 
     do {
@@ -2419,11 +2426,11 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
 
     mEncoder->Uint16(86);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3FV_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Pointer(value);
 }
 
-inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
+inline void GlesSpy::glVertexAttrib4fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib4fv()\n");
 
     do {
@@ -2433,7 +2440,7 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
 
     mEncoder->Uint16(87);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4FV_ID);
     encodeObservations();
-    mEncoder->Uint32(location);
+    mEncoder->Int32(location);
     mEncoder->Pointer(value);
 }
 
