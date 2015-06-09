@@ -17,6 +17,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
@@ -24,7 +25,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-const captureParamName = "capture"
+const (
+	idParamName   = "id"
+	nameParamName = "name"
+)
 
 // AtomsHandler is an HTTP request handler that returns a human-readable description
 // of the atoms for a given capture and context.
@@ -43,18 +47,26 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	captureName := req.URL.Query().Get(captureParamName)
-
 	var capture service.Capture
-	for _, id := range captures {
-		if err := h.Load(id.ID, logger, &capture); err == nil {
-			if capture.Name == captureName {
+
+	if id := req.URL.Query().Get(idParamName); id != "" {
+		for _, cid := range captures {
+			if strings.EqualFold(cid.ID.String(), id) {
+				h.Load(cid.ID, logger, &capture)
 				break
+			}
+		}
+	} else if name := req.URL.Query().Get(nameParamName); name != "" {
+		for _, id := range captures {
+			if err := h.Load(id.ID, logger, &capture); err == nil {
+				if strings.EqualFold(capture.Name, name) {
+					break
+				}
 			}
 		}
 	}
 
-	if capture.Name != captureName {
+	if capture.Name == "" {
 		http.NotFound(res, req)
 		return
 	}

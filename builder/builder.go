@@ -194,14 +194,15 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 	return service.CaptureId{ID: id}, nil
 }
 
-// Captures returns all the captures stored by the database.
+// Captures returns all the captures stored by the database by identifier.
 func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, error) {
 	var c captures
 	err := db.Load(captureIdsDatabaseID, logger, &c)
 	return c.ids, err
 }
 
-func loadCapture(captureID service.CaptureId, db database.Database, logger log.Logger) (service.Capture, error) {
+// LoadCapture loads and returns a Capture from a CaptureId.
+func LoadCapture(captureID service.CaptureId, db database.Database, logger log.Logger) (service.Capture, error) {
 	var capture service.Capture
 	if err := db.Load(captureID.ID, logger, &capture); err != nil {
 		return service.Capture{}, err
@@ -269,7 +270,7 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 			panic(fmt.Errorf("Panic at atom %d: %v", id, err))
 		}
 	}()
-	capture, err := loadCapture(request.Capture, d, l)
+	capture, err := LoadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
 	}
