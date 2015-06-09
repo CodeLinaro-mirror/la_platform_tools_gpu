@@ -83,18 +83,18 @@ EXPORT bool STDCALL glIsVertexArrayOES(uint32_t array);
 EXPORT void STDCALL glEGLImageTargetTexture2DOES(uint32_t target, void* image);
 EXPORT void STDCALL glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image);
 EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT();
-EXPORT void STDCALL glBindAttribLocation(uint32_t program, uint32_t location, char* name);
+EXPORT void STDCALL glBindAttribLocation(uint32_t program, int32_t location, char* name);
 EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor);
 EXPORT void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                         uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
 EXPORT void STDCALL glBlendEquation(uint32_t equation);
 EXPORT void STDCALL glBlendEquationSeparate(uint32_t rgb, uint32_t alpha);
 EXPORT void STDCALL glBlendColor(float red, float green, float blue, float alpha);
-EXPORT void STDCALL glEnableVertexAttribArray(uint32_t location);
-EXPORT void STDCALL glDisableVertexAttribArray(uint32_t location);
-EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
+EXPORT void STDCALL glEnableVertexAttribArray(int32_t location);
+EXPORT void STDCALL glDisableVertexAttribArray(int32_t location);
+EXPORT void STDCALL glVertexAttribPointer(int32_t location, int32_t size, uint32_t type,
                                           bool normalized, int32_t stride, void* data);
-EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
+EXPORT void STDCALL glGetActiveAttrib(uint32_t program, int32_t location, int32_t buffer_size,
                                       int32_t* buffer_bytes_written, int32_t* vector_count,
                                       uint32_t* type, char* name);
 EXPORT void STDCALL glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
@@ -104,7 +104,7 @@ EXPORT uint32_t STDCALL glGetError();
 EXPORT void STDCALL glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value);
 EXPORT void STDCALL glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value);
 EXPORT int32_t STDCALL glGetUniformLocation(uint32_t program, char* name);
-EXPORT uint32_t STDCALL glGetAttribLocation(uint32_t program, char* name);
+EXPORT int32_t STDCALL glGetAttribLocation(uint32_t program, char* name);
 EXPORT void STDCALL glPixelStorei(uint32_t parameter, int32_t value);
 EXPORT void STDCALL glTexParameteri(uint32_t target, uint32_t parameter, int32_t value);
 EXPORT void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value);
@@ -136,15 +136,15 @@ EXPORT void STDCALL
 glUniformMatrix4fv(int32_t location, int32_t count, bool transpose, float* values);
 EXPORT void STDCALL glGetUniformfv(uint32_t program, int32_t location, float* values);
 EXPORT void STDCALL glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
-EXPORT void STDCALL glVertexAttrib1f(uint32_t location, float value0);
-EXPORT void STDCALL glVertexAttrib2f(uint32_t location, float value0, float value1);
-EXPORT void STDCALL glVertexAttrib3f(uint32_t location, float value0, float value1, float value2);
+EXPORT void STDCALL glVertexAttrib1f(int32_t location, float value0);
+EXPORT void STDCALL glVertexAttrib2f(int32_t location, float value0, float value1);
+EXPORT void STDCALL glVertexAttrib3f(int32_t location, float value0, float value1, float value2);
 EXPORT void STDCALL
-glVertexAttrib4f(uint32_t location, float value0, float value1, float value2, float value3);
-EXPORT void STDCALL glVertexAttrib1fv(uint32_t location, float* value);
-EXPORT void STDCALL glVertexAttrib2fv(uint32_t location, float* value);
-EXPORT void STDCALL glVertexAttrib3fv(uint32_t location, float* value);
-EXPORT void STDCALL glVertexAttrib4fv(uint32_t location, float* value);
+glVertexAttrib4f(int32_t location, float value0, float value1, float value2, float value3);
+EXPORT void STDCALL glVertexAttrib1fv(int32_t location, float* value);
+EXPORT void STDCALL glVertexAttrib2fv(int32_t location, float* value);
+EXPORT void STDCALL glVertexAttrib3fv(int32_t location, float* value);
+EXPORT void STDCALL glVertexAttrib4fv(int32_t location, float* value);
 EXPORT void STDCALL glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                                int32_t* range, int32_t* precision);
 EXPORT void STDCALL glDepthMask(bool enabled);
@@ -725,7 +725,7 @@ EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT() {
     GAPID_INFO("glGetGraphicsResetStatusEXT()\n");
     return spy()->glGetGraphicsResetStatusEXT();
 }
-EXPORT void STDCALL glBindAttribLocation(uint32_t program, uint32_t location, char* name) {
+EXPORT void STDCALL glBindAttribLocation(uint32_t program, int32_t location, char* name) {
     GAPID_INFO("glBindAttribLocation()\n");
     spy()->glBindAttribLocation(program, location, name);
 }
@@ -750,20 +750,20 @@ EXPORT void STDCALL glBlendColor(float red, float green, float blue, float alpha
     GAPID_INFO("glBlendColor()\n");
     spy()->glBlendColor(red, green, blue, alpha);
 }
-EXPORT void STDCALL glEnableVertexAttribArray(uint32_t location) {
+EXPORT void STDCALL glEnableVertexAttribArray(int32_t location) {
     GAPID_INFO("glEnableVertexAttribArray()\n");
     spy()->glEnableVertexAttribArray(location);
 }
-EXPORT void STDCALL glDisableVertexAttribArray(uint32_t location) {
+EXPORT void STDCALL glDisableVertexAttribArray(int32_t location) {
     GAPID_INFO("glDisableVertexAttribArray()\n");
     spy()->glDisableVertexAttribArray(location);
 }
-EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
+EXPORT void STDCALL glVertexAttribPointer(int32_t location, int32_t size, uint32_t type,
                                           bool normalized, int32_t stride, void* data) {
     GAPID_INFO("glVertexAttribPointer()\n");
     spy()->glVertexAttribPointer(location, size, type, normalized, stride, data);
 }
-EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
+EXPORT void STDCALL glGetActiveAttrib(uint32_t program, int32_t location, int32_t buffer_size,
                                       int32_t* buffer_bytes_written, int32_t* vector_count,
                                       uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveAttrib()\n");
@@ -793,7 +793,7 @@ EXPORT int32_t STDCALL glGetUniformLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetUniformLocation()\n");
     return spy()->glGetUniformLocation(program, name);
 }
-EXPORT uint32_t STDCALL glGetAttribLocation(uint32_t program, char* name) {
+EXPORT int32_t STDCALL glGetAttribLocation(uint32_t program, char* name) {
     GAPID_INFO("glGetAttribLocation()\n");
     return spy()->glGetAttribLocation(program, name);
 }
@@ -906,36 +906,36 @@ EXPORT void STDCALL glGetUniformiv(uint32_t program, int32_t location, int32_t* 
     GAPID_INFO("glGetUniformiv()\n");
     spy()->glGetUniformiv(program, location, values);
 }
-EXPORT void STDCALL glVertexAttrib1f(uint32_t location, float value0) {
+EXPORT void STDCALL glVertexAttrib1f(int32_t location, float value0) {
     GAPID_INFO("glVertexAttrib1f()\n");
     spy()->glVertexAttrib1f(location, value0);
 }
-EXPORT void STDCALL glVertexAttrib2f(uint32_t location, float value0, float value1) {
+EXPORT void STDCALL glVertexAttrib2f(int32_t location, float value0, float value1) {
     GAPID_INFO("glVertexAttrib2f()\n");
     spy()->glVertexAttrib2f(location, value0, value1);
 }
-EXPORT void STDCALL glVertexAttrib3f(uint32_t location, float value0, float value1, float value2) {
+EXPORT void STDCALL glVertexAttrib3f(int32_t location, float value0, float value1, float value2) {
     GAPID_INFO("glVertexAttrib3f()\n");
     spy()->glVertexAttrib3f(location, value0, value1, value2);
 }
 EXPORT void STDCALL
-glVertexAttrib4f(uint32_t location, float value0, float value1, float value2, float value3) {
+glVertexAttrib4f(int32_t location, float value0, float value1, float value2, float value3) {
     GAPID_INFO("glVertexAttrib4f()\n");
     spy()->glVertexAttrib4f(location, value0, value1, value2, value3);
 }
-EXPORT void STDCALL glVertexAttrib1fv(uint32_t location, float* value) {
+EXPORT void STDCALL glVertexAttrib1fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib1fv()\n");
     spy()->glVertexAttrib1fv(location, value);
 }
-EXPORT void STDCALL glVertexAttrib2fv(uint32_t location, float* value) {
+EXPORT void STDCALL glVertexAttrib2fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib2fv()\n");
     spy()->glVertexAttrib2fv(location, value);
 }
-EXPORT void STDCALL glVertexAttrib3fv(uint32_t location, float* value) {
+EXPORT void STDCALL glVertexAttrib3fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib3fv()\n");
     spy()->glVertexAttrib3fv(location, value);
 }
-EXPORT void STDCALL glVertexAttrib4fv(uint32_t location, float* value) {
+EXPORT void STDCALL glVertexAttrib4fv(int32_t location, float* value) {
     GAPID_INFO("glVertexAttrib4fv()\n");
     spy()->glVertexAttrib4fv(location, value);
 }

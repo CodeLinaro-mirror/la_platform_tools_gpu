@@ -84,7 +84,7 @@ var funcInfoGlGetError = builder.FunctionInfo{ID: 49, ReturnType: protocol.TypeU
 var funcInfoGlGetProgramiv = builder.FunctionInfo{ID: 50, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetShaderiv = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetUniformLocation = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeInt32, Parameters: 2}
-var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeUint32, Parameters: 2}
+var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeInt32, Parameters: 2}
 var funcInfoGlPixelStorei = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlTexParameteri = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlTexParameterf = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -263,7 +263,7 @@ func (c UniformLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.
 	return value.S32(int32(c))
 }
 func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return value.S32(int32(c))
 }
 func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
@@ -1645,8 +1645,9 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	GetContext_43_result := context                             // Contextʳ
 	ctx := GetContext_43_result                                 // Contextʳ
 	v := ϟa.Value.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)     // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
 	uniform.Value.F32 = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	program.Uniforms[ϟa.Location] = uniform
@@ -1672,8 +1673,9 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	GetContext_44_result := context                                          // Contextʳ
 	ctx := GetContext_44_result                                              // Contextʳ
 	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(2))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
 	uniform.Value.Vec2f = func() Vec2f {
 		s := Vec2f{}
@@ -1705,8 +1707,9 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	GetContext_45_result := context                                          // Contextʳ
 	ctx := GetContext_45_result                                              // Contextʳ
 	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(3))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
 	uniform.Value.Vec3f = func() Vec3f {
 		s := Vec3f{}
@@ -1739,8 +1742,9 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	GetContext_46_result := context                                          // Contextʳ
 	ctx := GetContext_46_result                                              // Contextʳ
 	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
 	uniform.Value.Vec4f = func() Vec4f {
 		s := Vec4f{}
@@ -1774,8 +1778,9 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	GetContext_47_result := context                                           // Contextʳ
 	ctx := GetContext_47_result                                               // Contextʳ
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                   // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                              // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT2
 	uniform.Value.Mat2f = func() Mat2f {
 		s := Mat2f{}
@@ -1820,8 +1825,9 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	GetContext_48_result := context                                           // Contextʳ
 	ctx := GetContext_48_result                                               // Contextʳ
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(9))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                   // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                              // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT3
 	uniform.Value.Mat3f = func() Mat3f {
 		s := Mat3f{}
@@ -1876,8 +1882,9 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	GetContext_49_result := context                                            // Contextʳ
 	ctx := GetContext_49_result                                                // Contextʳ
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(16))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                    // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                               // Uniform
+	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Value.Mat4f = func() Mat4f {
 		s := Mat4f{}
 		s.Init()
