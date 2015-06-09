@@ -387,7 +387,12 @@ func (b *Builder) Push(val value.Value) {
 	if pv, ok := val.(value.Pointer); ok && !pv.IsValid() {
 		panic(fmt.Errorf("PointerValue %v is not valid", val))
 	}
-	b.pushStack(val.Type())
+	// HACK: RemappedPointers will use the temporary volatileMemoryLayout to
+	// decide the protocol type of the pointer. This will always be
+	// 'unobserved' and therefor a TypeAbsolutePointer instead of a
+	// TypeVolatilePointer. Nothing really cares at the moment though.
+	ty, _ := val.Get(volatileMemoryLayout{})
+	b.pushStack(ty)
 	b.instructions = append(b.instructions, asm.Push{
 		Value: val,
 	})
@@ -540,17 +545,23 @@ type volatileMemoryLayout struct {
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
 // the replay/value package.
-func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) (uint64, error) {
-	return l.tempBase + offset, nil
+func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
+	return l.tempBase + offset
 }
 
-// TranslateCapturePointer implements the PointerResolver interface method in
+// TranslateRemappedPointer implements the PointerResolver interface method in
 // the replay/value package.
-func (l volatileMemoryLayout) TranslateCapturePointer(offset uint64) (uint64, error) {
+func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.Type, uint64) {
 	bufferIdx := interval.IndexOf(&l.mappedMemory, offset)
 	if bufferIdx < 0 {
-		return 0, fmt.Errorf("Pointer 0x%x was not found in the observed memory ranges", offset)
+		// Pointer is not observed. This can be legal - for example
+		// glVertexAttribPointer may have been passed a pointer that was never
+		// observed. In this situation we pass a pointer that should cause an access
+		// violation if it is dereferenced. We opt to not use 0x00 as this is often
+		// overloaded to mean something else.
+		return protocol.TypeAbsolutePointer, 0xBADF00D
 	}
 	bufferStart := l.mappedMemory[bufferIdx].First()
-	return l.remappedBases[bufferIdx] + offset - uint64(bufferStart), nil
+	pointer := l.remappedBases[bufferIdx] + offset - uint64(bufferStart)
+	return protocol.TypeVolatilePointer, pointer
 }

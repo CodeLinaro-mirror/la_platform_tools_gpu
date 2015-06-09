@@ -14,13 +14,15 @@
 
 package value
 
+import "android.googlesource.com/platform/tools/gpu/replay/protocol"
+
 // PointerResolver is used to translate pointers into the volatile address-space.
 type PointerResolver interface {
 	// TranslateTemporaryPointer returns the temporary address-space pointer ptr
 	// translated to volatile address-space.
-	TranslateTemporaryPointer(ptr uint64) (uint64, error)
+	TranslateTemporaryPointer(ptr uint64) uint64
 
-	// TranslateCapturePointer returns the capture-observed pointer
-	// translated to volatile address-space.
-	TranslateCapturePointer(ptr uint64) (uint64, error)
+	// TranslateRemappedPointer returns the capture-observed pointer
+	// translated to volatile or absolute address-space.
+	TranslateRemappedPointer(ptr uint64) (protocol.Type, uint64)
 }

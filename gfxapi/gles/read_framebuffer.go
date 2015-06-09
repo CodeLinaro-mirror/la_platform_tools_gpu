@@ -268,7 +268,7 @@ func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger
 
 	imageSize := uint64(width * height * 4)
 	NewGlReadPixels(0, 0, width, height, BaseTexelFormat_GL_RGBA, TexelType_GL_UNSIGNED_BYTE, memory.Tmp.Base).Replay(i, s, d, l, b)
-	b.Post(value.VolatileCapturePointer(memory.Tmp.Base), imageSize, func(d binary.Decoder, err error) error {
+	b.Post(value.RemappedPointer(memory.Tmp.Base), imageSize, func(d binary.Decoder, err error) error {
 		var data []byte
 		if err == nil {
 			data = make([]byte, imageSize)

@@ -18,11 +18,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func loadRemap(ϟb *builder.Builder, key interface{}, val value.Value) {
+func loadRemap(ϟb *builder.Builder, key interface{}, ty protocol.Type, val value.Value) {
 	if ptr, found := ϟb.Remappings[key]; found {
-		ϟb.Load(val.Type(), ptr)
+		ϟb.Load(ty, ptr)
 	} else {
-		ptr = ϟb.AllocateMemory(uint64(val.Type().Size(ϟb.Architecture().PointerSize)))
+		ptr = ϟb.AllocateMemory(uint64(ty.Size(ϟb.Architecture().PointerSize)))
 		ϟb.Push(val) // We have an input to an unknown id, use the unmapped value.
 		ϟb.Clone(0)
 		ϟb.Store(ptr)
@@ -844,17 +844,17 @@ func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.A.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.A.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.A.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.B.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.B.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.B.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.C.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.C.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.C.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	}
@@ -937,7 +937,7 @@ func (p U8ᵖ) replayWrite(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 }
 func (p U8ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -956,7 +956,7 @@ func (p Charᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Charᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -975,7 +975,7 @@ func (p Intᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Intᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -994,7 +994,7 @@ func (p U32ᵖ) replayWrite(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 }
 func (p U32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1013,7 +1013,7 @@ func (p Charᵖᵖ) replayWrite(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State,
 }
 func (p Charᵖᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1032,7 +1032,7 @@ func (p S8ᵖ) replayWrite(value int8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 }
 func (p S8ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1051,7 +1051,7 @@ func (p U16ᵖ) replayWrite(value uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 }
 func (p U16ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1070,7 +1070,7 @@ func (p S16ᵖ) replayWrite(value int16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p S16ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1089,7 +1089,7 @@ func (p F32ᵖ) replayWrite(value float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd
 }
 func (p F32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1108,7 +1108,7 @@ func (p S32ᵖ) replayWrite(value int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p S32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1127,7 +1127,7 @@ func (p F64ᵖ) replayWrite(value float64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd
 }
 func (p F64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1146,7 +1146,7 @@ func (p U64ᵖ) replayWrite(value uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 }
 func (p U64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1165,7 +1165,7 @@ func (p S64ᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p S64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1184,14 +1184,14 @@ func (p Boolᵖ) replayWrite(value bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Boolᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
 func (p Voidᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1210,7 +1210,7 @@ func (p Remappedᵖ) replayWrite(value remapped, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 func (p Remappedᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1264,7 +1264,7 @@ func (s Charˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 func (s Charᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			ϟb.Push(v.value())
 			ϟb.Store(ptr)
@@ -1361,10 +1361,10 @@ func (s Intˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 func (s Remappedˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -1378,7 +1378,7 @@ func (s Remappedˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
