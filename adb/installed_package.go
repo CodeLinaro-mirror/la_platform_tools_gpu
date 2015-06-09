@@ -15,7 +15,6 @@
 package adb
 
 import (
-	"errors"
 	"fmt"
 	"sort"
 	"strings"
@@ -26,9 +25,9 @@ import (
 const maxPropName = 31
 
 type InstalledPackage struct {
-	Name   string  // Name of the package.
-	Path   string  // Path to the package's APK.
-	Device *Device // The device this package is installed on.
+	Name    string    // Name of the package.
+	Device  *Device   // The device this package is installed on.
+	Actions []*Action // The actions this package supports.
 }
 
 // WrapProperties returns the list of wrap-properties for the given installed
@@ -47,18 +46,9 @@ func (p *InstalledPackage) SetWrapProperties(props ...string) error {
 
 // Action represents an Android action that can be sent as an intent.
 type Action struct {
-	Name       string   // Example: android.intent.action.MAIN
-	Component  string   // Example: com.foo.bar/.FooBarActivity
-	Categories []string // Example: android.intent.category.LAUNCHER
-}
-
-// Actions returns all the actions supported by the specified package.
-func (p *InstalledPackage) Actions() ([]*Action, error) {
-	str, err := p.Device.Command("dumpsys", "package", p.Name).Call()
-	if err != nil {
-		return nil, err
-	}
-	return parseActions(str)
+	Name     string // Example: android.intent.action.MAIN
+	Package  *InstalledPackage
+	Activity string // Example: .FooBarActivity
 }
 
 // String returns the package name.
@@ -74,50 +64,84 @@ func (p *InstalledPackage) wrapPropName() string {
 	return name
 }
 
+func (a *Action) String() string {
+	return a.Name + ":" + a.Package.Name + "/" + a.Activity
+}
+
 // InstalledPackages returns the sorted list of installed packages on the device.
-func (d *Device) InstalledPackages() ([]*InstalledPackage, error) {
-	str, err := d.Command("pm", "list", "packages", "-f").Call()
+func (d *Device) InstalledPackages() (Packages, error) {
+	str, err := d.Command("dumpsys", "package").Call()
 	if err != nil {
 		return nil, err
 	}
-	return parsePackages(str, d)
-}
-
-type pkgList []*InstalledPackage
-
-func (l pkgList) Len() int           { return len(l) }
-func (l pkgList) Less(i, j int) bool { return l[i].Name < l[j].Name }
-func (l pkgList) Swap(i, j int)      { l[i], l[j] = l[j], l[i] }
-
-func parsePackages(str string, device *Device) (pkgList, error) {
-	lines := strings.Split(str, "\n")
-	packages := make(pkgList, 0, len(lines))
-	for _, line := range lines {
-		line = strings.TrimRight(line, "\r")
-		segments := strings.SplitAfter(line, "package:")
-		if len(segments) != 2 {
-			continue
+	tree := parseTabbedTree(str)
+	activities := tree.find("Activity Resolver Table:")
+	if activities == nil {
+		return nil, fmt.Errorf("Could not find Activity Resolver Table in dumpsys")
+	}
+	actions := activities.find("Non-Data Actions:")
+	if actions == nil {
+		return nil, fmt.Errorf("Could not find Non-Data Actions in dumpsys")
+	}
+	packageMap := map[string]*InstalledPackage{}
+	for _, action := range actions.children {
+		for _, entry := range action.children {
+			// 43178558 com.google.foo/.FooActivity filter 431d7db8
+			// 43178558 com.google.foo/.FooActivity
+			fields := strings.Fields(entry.text)
+			if len(fields) < 2 {
+				return nil, fmt.Errorf("Could not parse package: '%v'", entry.text)
+			}
+			component := fields[1]
+			parts := strings.SplitN(component, "/", 2)
+			name := parts[0]
+			p, ok := packageMap[name]
+			if !ok {
+				p = &InstalledPackage{
+					Name:    name,
+					Device:  d,
+					Actions: []*Action{},
+				}
+				packageMap[name] = p
+			}
+			p.Actions = append(p.Actions, &Action{
+				Package:  p,
+				Name:     strings.TrimRight(action.text, ":"),
+				Activity: parts[1],
+			})
 		}
-		fields := strings.Split(segments[1], "=")
-		if len(fields) != 2 {
-			return nil, errors.New("Could not parse package list")
-		}
-		pkg := &InstalledPackage{
-			Path:   fields[0],
-			Name:   fields[1],
-			Device: device,
-		}
-		packages = append(packages, pkg)
+	}
+	packages := make(Packages, 0, len(packageMap))
+	for _, p := range packageMap {
+		packages = append(packages, p)
 	}
 	sort.Sort(packages)
 	return packages, nil
 }
+
+type Packages []*InstalledPackage
+
+func (l Packages) Len() int           { return len(l) }
+func (l Packages) Less(i, j int) bool { return l[i].Name < l[j].Name }
+func (l Packages) Swap(i, j int)      { l[i], l[j] = l[j], l[i] }
 
 type treeNode struct {
 	text     string
 	children []*treeNode
 	parent   *treeNode
 	depth    int
+}
+
+func (t *treeNode) find(name string) *treeNode {
+	if t == nil {
+		return nil
+	}
+	for _, c := range t.children {
+		if c.text == name {
+			return c
+		}
+	}
+	return nil
 }
 
 func parseTabbedTree(str string) *treeNode {
@@ -155,64 +179,4 @@ func parseTabbedTree(str string) *treeNode {
 		head = head.parent
 	}
 	return head
-}
-
-func unquote(s string) string {
-	return strings.Trim(s, `"`)
-}
-
-// Currently parses only the non-data actions.
-func parseActions(str string) ([]*Action, error) {
-	actions := []*Action{}
-	for _, root := range parseTabbedTree(str).children {
-		if root.text == "Activity Resolver Table:" {
-			for _, node := range root.children {
-				if node.text == "Non-Data Actions:" {
-					for _, node := range node.children {
-						for _, node := range node.children {
-							if action, err := parseAction(node); err == nil {
-								actions = append(actions, action)
-							} else {
-								return nil, err
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	return actions, nil
-}
-
-func parseAction(node *treeNode) (*Action, error) {
-	action := &Action{}
-
-	// 43178558 com.google.foo/.FooActivity filter 431d7db8
-	// 43178558 com.google.foo/.FooActivity
-	fields := strings.Fields(node.text)
-	if len(fields) < 2 {
-		return action, fmt.Errorf("Could not parse component: '%v'", node.text)
-	}
-
-	action.Component = fields[1]
-
-	for _, detail := range node.children {
-		fields = strings.Fields(detail.text)
-		if len(fields) != 2 {
-			continue
-		}
-		switch fields[0] {
-		case "Action:":
-			action.Name = unquote(fields[1])
-
-		case "Category:":
-			action.Categories = append(action.Categories, unquote(fields[1]))
-
-		default:
-			return action, fmt.Errorf("Unknown field: '%v'", fields[0])
-		}
-	}
-
-	return action, nil
 }
