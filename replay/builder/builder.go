@@ -39,32 +39,22 @@ type stackItem struct {
 	idx int           // Index of the op that generated this.
 }
 
-type idPostDecoder struct {
-	id atom.ID
-	pd PostDecoder
-}
-
 type marker struct {
 	instruction int     // first instruction index for this marker
 	atom        atom.ID // the atom identifier
 }
 
-// Postback holds the information for a single atom's postback data.
-type Postback struct {
-	ID    atom.ID     // The associated atom for this Postback.
-	Data  interface{} // The postback data. Nil if Error is non-nil.
-	Error error       // Error raised decoding the postback, or nil if there was no error.
-}
+// ResponseDecoder decodes all postback responses from the replay virtual machine.
+// If err is nil, then r is the Reader to the sequential postback data. If r is nil,
+// then the postback data was absent or corrupted and err holds the error.
+type ResponseDecoder func(r io.Reader, err error)
 
-// ResponseDecoder decodes all postback responses from the replay virtual
-// machine, writing each to the returned chan. The chan will be closed once all
-// postbacks have been read, or after the first Postback with a non-nil Error.
-type ResponseDecoder func(r io.Reader) <-chan Postback
-
-// PostDecoder decodes a single atom's postback, returning the postback data or
-// an error. The PostDecoder must decode all the data that was issued in the
-// Post call before returning.
-type PostDecoder func(binary.Decoder) (interface{}, error)
+// Postback decodes a single atom's postback, returning and carrying over errors.
+// The Postback must decode all the data that was issued in the Post call before
+// returning. If err is nil, then d is the Decoder to the postback data. If d is nil,
+// then a previous postback failed to decode before decoding could begin for this
+// postback and err holds the error.
+type Postback func(d binary.Decoder, err error) error
 
 // Builder is used to build the Payload to send to the replay virtual machine.
 // The builder has a number of methods for mutating the virtual machine stack,
@@ -76,7 +66,7 @@ type Builder struct {
 	resources       []protocol.ResourceInfo
 	mappedMemory    memory.RangeList
 	instructions    []asm.Instruction
-	decoders        []idPostDecoder
+	decoders        []Postback
 	stack           []stackItem
 	architecture    device.Architecture
 	inAtom          bool
@@ -376,7 +366,7 @@ func (b *Builder) Strcpy(maxCount uint64) {
 // Post posts size bytes from addr to the decoder d. The decoder d must consume
 // all size bytes before returning; failure to do this will corrupt all
 // subsequent postbacks.
-func (b *Builder) Post(addr value.Pointer, size uint64, id atom.ID, d PostDecoder) {
+func (b *Builder) Post(addr value.Pointer, size uint64, p Postback) {
 	if !addr.IsValid() {
 		panic(fmt.Errorf("Pointer address %v is not valid", addr))
 	}
@@ -384,7 +374,7 @@ func (b *Builder) Post(addr value.Pointer, size uint64, id atom.ID, d PostDecode
 		Source: addr,
 		Size:   size,
 	})
-	b.decoders = append(b.decoders, idPostDecoder{id, d})
+	b.decoders = append(b.decoders, p)
 }
 
 // Push pushes val to the top of the stack.
@@ -474,24 +464,20 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 		logger.Infof("Resource count:         %d", len(payload.Resources))
 	}
 
-	responseDecoder := func(r io.Reader) <-chan Postback {
-		d := flat.Decoder(endian.Reader(r, byteOrder))
-		c := make(chan Postback, 8)
+	// TODO: check that each Postback consumes its expected number of bytes.
+	responseDecoder := func(r io.Reader, err error) {
+		var d binary.Decoder
+		if r != nil {
+			d = flat.Decoder(endian.Reader(r, byteOrder))
+		}
 		go func() {
 			for _, p := range b.decoders {
-				data, err := p.pd(d)
-				c <- Postback{
-					ID:    p.id,
-					Data:  data,
-					Error: err,
-				}
+				err = p(d, err)
 				if err != nil {
-					break
+					d = nil
 				}
 			}
-			close(c)
 		}()
-		return c
 	}
 	return payload, responseDecoder, nil
 }

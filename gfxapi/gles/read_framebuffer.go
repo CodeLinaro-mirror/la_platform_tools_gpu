@@ -15,15 +15,11 @@
 package gles
 
 import (
-	"bytes"
 	"math/rand"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
-	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -32,256 +28,99 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-// These must conform to the replay.Replayer interface.
-var _ = replay.Replayer(readFramebufferDepth{})
-var _ = replay.Replayer(readFramebufferColor{})
+func readFramebufferDepth(out chan replay.Image) atom.Atom {
+	return replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+		arch := s.Architecture
+		c := getContext(s)
 
-// readFramebufferDepth is an atom used to postback the content of the currently
-// bound framebuffer's depth attachment.
-type readFramebufferDepth struct {
-	binary.Generate `disable:"true"`
-	database        database.Database
-}
-
-func (a readFramebufferDepth) API() gfxapi.API                                           { return nil }
-func (a readFramebufferDepth) TypeID() atom.TypeID                                       { return 0 }
-func (a readFramebufferDepth) Flags() atom.Flags                                         { return 0 }
-func (a readFramebufferDepth) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
-func (a readFramebufferDepth) Observations() *atom.Observations                          { return &atom.Observations{} }
-
-func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-	arch := gs.Architecture
-
-	s := getState(gs)
-	c := s.getContext()
-
-	colorW, colorH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
-	if err != nil {
-		return err
-	}
-	depthW, depthH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
-	if err != nil {
-		return err
-	}
-
-	const (
-		uTextureLocation      UniformLocation   = 0
-		aScreenCoordsLocation AttributeLocation = 0
-
-		// TODO: Add a way to allocate memory from a free range for injected observations.
-		positionsAddr memory.Pointer = 0xffffffffdeadbead
-		indicesAddr   memory.Pointer = 0xffffffffdeadbeef
-
-		vertexShaderSource string = `
-			precision highp float;
-			attribute vec2 aScreenCoords;
-			varying vec2 vTexCoords;
-
-			void main() {
-				vTexCoords = aScreenCoords / 2. + vec2(0.5, 0.5);
-				gl_Position = vec4(aScreenCoords.xy, 0., 1.);
-			}`
-		fragmentShaderSource string = `
-			precision highp float;
-			uniform sampler2D uTexture;
-			varying vec2 vTexCoords;
-
-			vec4 float2rgba(float f) {
-				vec4 v = fract(f * vec4(1., 255., 65025., 16581375.));
-				return v - vec4(v.yzw, 0.) / 255.;
-			}
-
-			void main() {
-				float sample = texture2D(uTexture, vTexCoords).r;
-				gl_FragColor = float2rgba(sample);
-			}`
-	)
-
-	var (
-		origRenderbufferID       = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
-		origReadFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
-		origDrawFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
-		origTextureID            = c.TextureUnits[c.ActiveTextureUnit][TextureTarget_GL_TEXTURE_2D]
-		origArrayBufferID        = c.BoundBuffers[BufferTarget_GL_ARRAY_BUFFER]
-		origElementArrayBufferID = c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
-		origActiveTextureUnit    = int32(c.ActiveTextureUnit - TextureUnit_GL_TEXTURE0)
-
-		inW  = int32(depthW)
-		inH  = int32(depthH)
-		outW = int32(colorW)
-		outH = int32(colorH)
-	)
-
-	// Generate new unused object IDs.
-	renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
-	framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
-	textureID := TextureId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Textures[TextureId(x)]; return ok }))
-	programID := ProgramId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Programs[ProgramId(x)]; return ok }))
-	vertexShaderID := ShaderId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Shaders[ShaderId(x)]; return ok }))
-	fragmentShaderID := ShaderId(newUnusedID(func(x uint32) bool {
-		_, ok := c.Instances.Shaders[ShaderId(x)]
-		return ok || ShaderId(x) == vertexShaderID
-	}))
-
-	// Map vertex attrib and indice resources.
-	var buffer bytes.Buffer
-	enc := flat.Encoder(endian.Writer(&buffer, endian.Little))
-	for _, f := range []float32{-1., -1., 1., -1., -1., 1., 1., 1.} {
-		enc.Float32(f)
-	}
-	positionsData := store.Blob{Data: buffer.Bytes()}
-	positionsDataId, err := a.database.Store(&positionsData, log.Nop{})
-	if err != nil {
-		return err
-	}
-	indicesData := store.Blob{Data: []byte{0, 1, 2, 3}}
-	indicesDataId, err := a.database.Store(&indicesData, log.Nop{})
-	if err != nil {
-		return err
-	}
-
-	// Temporarily change rasterizing/blending state and enable VAP 0.
-	undoList := []atom.Atom{}
-	for _, cap := range []Capability{
-		Capability_GL_BLEND,
-		Capability_GL_DEPTH_TEST,
-		Capability_GL_STENCIL_TEST,
-		Capability_GL_CULL_FACE,
-	} {
-		capability := cap
-		if c.Capabilities[capability] {
-			replayNoPost(i, gs, d, l, b, NewGlDisable(capability))
-			undoList = append(undoList, NewGlEnable(capability))
+		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		if err != nil {
+			return err
 		}
-	}
-	if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
-		replayNoPost(i, gs, d, l, b, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
-		undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
-	}
+		depthW, depthH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
+		if err != nil {
+			return err
+		}
 
-	replayNoPost(i, gs, d, l, b,
-		// Setup new framebuffer/renderbuffer.
-		NewGlGenFramebuffers(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
-		NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
-		NewGlGenRenderbuffers(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
-		NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
-		NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
-		NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
+		const (
+			uTextureLocation      UniformLocation   = 0
+			aScreenCoordsLocation AttributeLocation = 0
 
-		// Setup depth texture.
-		NewGlGenTextures(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
-		NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
-		NewGlTexImage2D(TextureImageTarget_GL_TEXTURE_2D, 0, TexelFormat_GL_DEPTH24_STENCIL8, outW, outH, 0, TexelFormat_GL_DEPTH_STENCIL, TexelType_GL_UNSIGNED_INT_24_8, 0),
-		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MIN_FILTER, int32(TextureFilterMode_GL_NEAREST)),
-		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MAG_FILTER, int32(TextureFilterMode_GL_NEAREST)),
-		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_S, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
-		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_T, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
+			vertexShaderSource string = `
+				precision highp float;
+				attribute vec2 aScreenCoords;
+				varying vec2 vTexCoords;
 
-		// Blit depth attachment.
-		NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, textureID, 0),
-		NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_DEPTH_BUFFER_BIT, TextureFilterMode_GL_NEAREST),
-		NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, TextureId(0), 0),
+				void main() {
+					vTexCoords = aScreenCoords / 2. + vec2(0.5, 0.5);
+					gl_Position = vec4(aScreenCoords.xy, 0., 1.);
+				}`
+			fragmentShaderSource string = `
+				precision highp float;
+				uniform sampler2D uTexture;
+				varying vec2 vTexCoords;
 
-		// Bind new framebuffer.
-		NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
+				vec4 float2rgba(float f) {
+					vec4 v = fract(f * vec4(1., 255., 65025., 16581375.));
+					return v - vec4(v.yzw, 0.) / 255.;
+				}
 
-		// Render depth texture to framebuffer color attachment.
-		NewGlClear(ClearMask_GL_COLOR_BUFFER_BIT),
-	)
+				void main() {
+					float sample = texture2D(uTexture, vTexCoords).r;
+					gl_FragColor = float2rgba(sample);
+				}`
+		)
 
-	// Create the shader program
-	replayNoPost(i, gs, d, l, b,
-		NewProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
+		var (
+			origRenderbufferID       = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
+			origReadFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
+			origDrawFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
+			origTextureID            = c.TextureUnits[c.ActiveTextureUnit][TextureTarget_GL_TEXTURE_2D]
+			origArrayBufferID        = c.BoundBuffers[BufferTarget_GL_ARRAY_BUFFER]
+			origElementArrayBufferID = c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
+			origActiveTextureUnit    = int32(c.ActiveTextureUnit - TextureUnit_GL_TEXTURE0)
 
-	replayNoPost(i, gs, d, l, b,
-		NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
-		NewGlLinkProgram(programID),
-		NewGlUseProgram(programID),
-		NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
-		NewGlGetUniformLocation(programID, "uTexture", uTextureLocation),
-		NewGlUniform1i(uTextureLocation, origActiveTextureUnit),
-		NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, 0),
-		NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0),
-		NewGlVertexAttribPointer(aScreenCoordsLocation, 2, VertexAttribType_GL_FLOAT, false, 0, positionsAddr),
-		NewGlDrawElements(DrawMode_GL_TRIANGLE_STRIP, 4, IndicesType_GL_UNSIGNED_BYTE, indicesAddr).
-			AddRead(positionsAddr.Range(8*4), positionsDataId).
-			AddRead(indicesAddr.Range(4), indicesDataId),
-	)
+			inW  = int32(depthW)
+			inH  = int32(depthH)
+			outW = int32(colorW)
+			outH = int32(colorH)
+		)
 
-	postColorData(i, c, gs, d, l, b, outW, outH)
+		// Generate new unused object IDs.
+		renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
+		framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
+		textureID := TextureId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Textures[TextureId(x)]; return ok }))
+		programID := ProgramId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Programs[ProgramId(x)]; return ok }))
+		vertexShaderID := ShaderId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Shaders[ShaderId(x)]; return ok }))
+		fragmentShaderID := ShaderId(newUnusedID(func(x uint32) bool {
+			_, ok := c.Instances.Shaders[ShaderId(x)]
+			return ok || ShaderId(x) == vertexShaderID
+		}))
 
-	// Restore conditionally changed state.
-	replayNoPost(i, gs, d, l, b, undoList...)
+		// 2D vertices positions for a full screen 2D triangle strip.
+		positions := []float32{-1., -1., 1., -1., -1., 1., 1., 1.}
 
-	replayNoPost(i, gs, d, l, b,
-		// Restore buffer/vertexAttrib state.
-		NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
-		NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, origArrayBufferID),
-		// Note: we're not restoring the original VertexAttribPointer as we may re-enter an inconsistent state, which would abort the current replay batch.
-		// NewGlVertexAttribPointer(aScreenCoordsLocation, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, VertexPointer(origVertexAttrib.Data)),
+		// Temporarily change rasterizing/blending state and enable VAP 0.
+		undoList := []atom.Atom{}
+		for _, cap := range []Capability{
+			Capability_GL_BLEND,
+			Capability_GL_DEPTH_TEST,
+			Capability_GL_STENCIL_TEST,
+			Capability_GL_CULL_FACE,
+		} {
+			capability := cap
+			if c.Capabilities[capability] {
+				NewGlDisable(capability).Replay(i, s, d, l, b)
+				undoList = append(undoList, NewGlEnable(capability))
+			}
+		}
+		if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
+			NewGlEnableVertexAttribArray(aScreenCoordsLocation).Replay(i, s, d, l, b)
+			undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
+		}
 
-		// Restore texture state.
-		NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, origTextureID),
-		NewGlDeleteTextures(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
-
-		// Restore framebuffer/renderbuffer state.
-		NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
-		NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
-		NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
-		NewGlDeleteRenderbuffers(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
-		NewGlDeleteFramebuffers(1, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
-	)
-	return nil
-}
-
-// readFramebufferColor is an atom used to postback the content of the currently
-// bound framebuffer's color attachment.
-type readFramebufferColor struct {
-	binary.Generate `disable:"true"`
-	width, height   uint32
-}
-
-func (a readFramebufferColor) API() gfxapi.API                                           { return nil }
-func (a readFramebufferColor) TypeID() atom.TypeID                                       { return 0 }
-func (a readFramebufferColor) Flags() atom.Flags                                         { return 0 }
-func (a readFramebufferColor) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
-func (a readFramebufferColor) Observations() *atom.Observations                          { return &atom.Observations{} }
-
-func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-	arch := gs.Architecture
-
-	s := getState(gs)
-	c := s.getContext()
-	colorW, colorH, err := s.getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
-	if err != nil {
-		return err
-	}
-
-	var (
-		origRenderbufferID    = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
-		origReadFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
-		origDrawFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
-
-		inW  = int32(colorW)
-		inH  = int32(colorH)
-		outW = int32(a.width)
-		outH = int32(a.height)
-	)
-
-	// Generate new unused object IDs.
-	renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
-	framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
-
-	if inW == outW && inH == outH {
-		postColorData(i, c, gs, d, l, b, outW, outH)
-	} else {
-		replayNoPost(i, gs, d, l, b,
+		replayEach(i, s, d, l, b,
+			// Setup new framebuffer/renderbuffer.
 			NewGlGenFramebuffers(1, memory.Tmp.Base).
 				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
@@ -290,13 +129,65 @@ func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
 			NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
 			NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
-			NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_COLOR_BUFFER_BIT, TextureFilterMode_GL_LINEAR),
+
+			// Setup depth texture.
+			NewGlGenTextures(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
+			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
+			NewGlTexImage2D(TextureImageTarget_GL_TEXTURE_2D, 0, TexelFormat_GL_DEPTH24_STENCIL8, outW, outH, 0, TexelFormat_GL_DEPTH_STENCIL, TexelType_GL_UNSIGNED_INT_24_8, 0),
+			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MIN_FILTER, int32(TextureFilterMode_GL_NEAREST)),
+			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MAG_FILTER, int32(TextureFilterMode_GL_NEAREST)),
+			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_S, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
+			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_T, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
+
+			// Blit depth attachment.
+			NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, textureID, 0),
+			NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_DEPTH_BUFFER_BIT, TextureFilterMode_GL_NEAREST),
+			NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, TextureId(0), 0),
+
+			// Bind new framebuffer.
 			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
+
+			// Render depth texture to framebuffer color attachment.
+			NewGlClear(ClearMask_GL_COLOR_BUFFER_BIT),
 		)
 
-		postColorData(i, c, gs, d, l, b, outW, outH)
+		// Create the shader program
+		replayEach(i, s, d, l, b,
+			NewProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
 
-		replayNoPost(i, gs, d, l, b,
+		replayEach(i, s, d, l, b,
+			NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
+			NewGlLinkProgram(programID),
+			NewGlUseProgram(programID),
+			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
+			NewGlGetUniformLocation(programID, "uTexture", uTextureLocation),
+			NewGlUniform1i(uTextureLocation, origActiveTextureUnit),
+			NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, 0),
+			NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0),
+			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, VertexAttribType_GL_FLOAT, false, 0, memory.Tmp.Base),
+			NewGlDrawArrays(DrawMode_GL_TRIANGLE_STRIP, 0, 4).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, len(positions)*4, positions)),
+		)
+
+		postColorData(i, s, d, l, b, outW, outH, out)
+
+		// Restore conditionally changed state.
+		replayEach(i, s, d, l, b, undoList...)
+
+		replayEach(i, s, d, l, b,
+			// Restore buffer/vertexAttrib state.
+			NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
+			NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, origArrayBufferID),
+			// Note: we're not restoring the original VertexAttribPointer as we may re-enter an inconsistent state, which would abort the current replay batch.
+			// NewGlVertexAttribPointer(aScreenCoordsLocation, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, VertexPointer(origVertexAttrib.Data)),
+
+			// Restore texture state.
+			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, origTextureID),
+			NewGlDeleteTextures(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
+
+			// Restore framebuffer/renderbuffer state.
 			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
 			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
 			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
@@ -305,41 +196,97 @@ func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 			NewGlDeleteFramebuffers(1, memory.Tmp.Base).
 				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 		)
-	}
-	return nil
+
+		return nil
+	})
 }
 
-func postColorData(i atom.ID, c *Context, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32) {
-	origPackAlignment := c.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
+func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom {
+	return replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+		arch := s.Architecture
+		c := getContext(s)
+
+		colorW, colorH, err := getState(s).getFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+		if err != nil {
+			return err
+		}
+
+		var (
+			origRenderbufferID    = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
+			origReadFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
+			origDrawFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
+
+			inW  = int32(colorW)
+			inH  = int32(colorH)
+			outW = int32(width)
+			outH = int32(height)
+		)
+
+		// Generate new unused object IDs.
+		renderbufferID := RenderbufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Renderbuffers[RenderbufferId(x)]; return ok }))
+		framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
+
+		if inW == outW && inH == outH {
+			postColorData(i, s, d, l, b, outW, outH, out)
+		} else {
+			replayEach(i, s, d, l, b,
+				NewGlGenFramebuffers(1, memory.Tmp.Base).
+					AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
+				NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
+				NewGlGenRenderbuffers(1, memory.Tmp.Base).
+					AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
+				NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
+				NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
+				NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
+				NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_COLOR_BUFFER_BIT, TextureFilterMode_GL_LINEAR),
+				NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
+			)
+
+			postColorData(i, s, d, l, b, outW, outH, out)
+
+			replayEach(i, s, d, l, b,
+				NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
+				NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
+				NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
+				NewGlDeleteRenderbuffers(1, memory.Tmp.Base).
+					AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
+				NewGlDeleteFramebuffers(1, memory.Tmp.Base).
+					AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
+			)
+		}
+
+		return nil
+	})
+}
+
+func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32, img chan<- replay.Image) {
+	origPackAlignment := getContext(s).PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
-		replayNoPost(i, gs, d, l, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1))
-		defer replayNoPost(i, gs, d, l, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment))
+		NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1).Replay(i, s, d, l, b)
+		defer NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment).Replay(i, s, d, l, b)
 	}
 
 	imageSize := uint64(width * height * 4)
-	addr := b.AllocateTemporaryMemory(imageSize)
-
-	// glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, addr)
-	b.Push(value.S32(0))
-	b.Push(value.S32(0))
-	b.Push(value.S32(width))
-	b.Push(value.S32(height))
-	b.Push(value.U32(TexelFormat_GL_RGBA))
-	b.Push(value.U32(TexelType_GL_UNSIGNED_BYTE))
-	b.Push(addr)
-	b.Call(funcInfoGlReadPixels)
-	b.Post(addr, imageSize, i,
-		func(d binary.Decoder) (interface{}, error) {
-			buf := make([]byte, imageSize)
-			err := d.Data(buf)
-			return buf, err
-		},
-	)
+	NewGlReadPixels(0, 0, width, height, BaseTexelFormat_GL_RGBA, TexelType_GL_UNSIGNED_BYTE, memory.Tmp.Base).Replay(i, s, d, l, b)
+	b.Post(value.VolatileCapturePointer(memory.Tmp.Base), imageSize, func(d binary.Decoder, err error) error {
+		var data []byte
+		if err == nil {
+			data = make([]byte, imageSize)
+			err = d.Data(data)
+		}
+		if err != nil {
+			data = nil
+		}
+		img <- replay.Image{Data: data, Error: err}
+		return err
+	})
 }
 
-func replayNoPost(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, atoms ...atom.Atom) {
+func replayEach(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, atoms ...atom.Atom) {
 	for _, a := range atoms {
-		replay.Replay(i, a, s, d, l, b)
+		if r, ok := a.(replay.Replayer); ok {
+			r.Replay(i, s, d, l, b)
+		}
 	}
 }
 

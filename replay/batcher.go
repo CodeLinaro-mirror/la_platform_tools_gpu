@@ -72,20 +72,6 @@ func (b *batcher) run() {
 }
 
 func (b *batcher) send(requests []Request) (err error) {
-	postbackHandlers := make(executor.PostbackHandlerMap)
-
-	defer func() {
-		if r := recover(); r != nil {
-			err = fmt.Errorf("Failed to send replay: %v", r)
-		}
-		if err != nil {
-			// Report errors to all postback handlers.
-			for _, h := range postbackHandlers {
-				h(nil, err)
-			}
-		}
-	}()
-
 	var c service.Capture
 	if err := b.transientDb.Load(b.context.CaptureID.ID, b.logger, &c); err != nil {
 		return fmt.Errorf("Failed to load capture (%s): %v", b.context.CaptureID, err)
@@ -101,21 +87,12 @@ func (b *batcher) send(requests []Request) (err error) {
 		return err
 	}
 
-	nextID := atom.ID(0x10000000)
-	postback := func(handler PostbackHandler) atom.ID {
-		id := nextID
-		nextID++
-		postbackHandlers[id] = handler
-		return id
-	}
-
 	td := b.device.Info()
 
 	transforms := b.context.Generator.ReplayTransforms(
 		b.context.Context,
 		b.context.Config,
 		requests,
-		postback,
 		td,
 		b.persistentDb,
 		b.logger)
@@ -147,6 +124,19 @@ func (b *batcher) send(requests []Request) (err error) {
 		return fmt.Errorf("Failed to build replay payload: %v", err)
 	}
 
+	defer func() {
+		if err == nil {
+			err, _ = recover().(error)
+		}
+		if err != nil {
+			// An error was returned or thrown after the replay postbacks were requested.
+			// Inform each postback handler that they're not going to get data,
+			// to avoid chans blocking forever.
+			decoder(nil, err)
+			panic(err)
+		}
+	}()
+
 	connection, err := b.device.Connect()
 	if err != nil {
 		return fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
@@ -163,7 +153,6 @@ func (b *batcher) send(requests []Request) (err error) {
 		connection,
 		b.persistentDb,
 		b.logger,
-		postbackHandlers,
 		architecture,
 	)
 }
