@@ -645,13 +645,14 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.PrintfFormatCode"}}
-  {{AssertType $ "Type"}}
-
-  {{     if IsPseudonym     $}}{{Macro "C++.PrintfFormatCode" $.To}}
+  {{if not (IsType $)}}{{Macro "C++.PrintfFormatCode" (TypeOf $)}}
+  {{else if IsPseudonym     $}}{{Macro "C++.PrintfFormatCode" $.To}}
   {{else if IsPointer       $}}%p
   {{else if IsClass         $}}%p
   {{else if IsString        $}}%s
   {{else if IsBool          $}}%d
+  {{else if IsS8            $}}%c
+  {{else if IsU8            $}}%c
   {{else if IsS32           $}}%d
   {{else if IsU32           $}}%u
   {{else if IsF32           $}}%f
@@ -661,6 +662,22 @@
   {{else if IsEnum          $}}%u
   {{else}}{{Error "C++.PrintfFormatCode passed unsupported type: %s" $.Name}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a printf-style string and arguments for logging a call to command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.PrintfCommandCall"}}
+  {{AssertType $ "Function"}}
+
+  {{$name := Macro "CmdName" $}}
+  {{$args := Macro "C++.CallArguments" $}}
+
+  "{{$name}}({{ForEach $.CallParameters "C++.PrintfFormatCode" | JoinWith ", "}})\n"
+  {{if $args}}, {{$args}}{{end}}
 {{end}}
 
 

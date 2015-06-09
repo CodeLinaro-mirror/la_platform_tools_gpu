@@ -120,7 +120,7 @@
   {{$spyname := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
-    GAPID_INFO("{{$name}}()\n");
+    GAPID_INFO({{Macro "C++.PrintfCommandCall" $}});
     {{if not (IsVoid $.Return.Type)}}¶
       {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
     {{end}}

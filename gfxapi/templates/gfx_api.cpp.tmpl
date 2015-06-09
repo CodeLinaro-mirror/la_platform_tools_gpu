@@ -114,16 +114,7 @@
     {{end}}
 
     if (stack->isValid()) {
-      GAPID_INFO("{{$name}}(§
-        {{range $i, $p := $.CallParameters}}
-          {{if $i}}, {{end}}§
-          {{Macro "C++.PrintfFormatCode" (TypeOf $p)}}§
-        {{end}}
-        )\n"§
-        {{range $p := $.CallParameters}}
-          , {{$p.Name}}§
-        {{end}}
-      );
+    GAPID_INFO({{Macro "C++.PrintfCommandCall" $}});
 
       if ({{$name}} != nullptr) {
         {{if not (IsVoid $.Return.Type)}}
