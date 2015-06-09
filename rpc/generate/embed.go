@@ -540,6 +540,7 @@ func (h {{$.Name}}) Valid() bool {
     "io"
     "runtime/debug"
 
+    "android.googlesource.com/platform/tools/gpu/config"
     "android.googlesource.com/platform/tools/gpu/log"
     "android.googlesource.com/platform/tools/gpu/rpc"
   )
@@ -549,7 +550,9 @@ func (h {{$.Name}}) Valid() bool {
       l := l.Fork().Enter(fmt.Sprintf("%v", in))
       defer func() {
         if err := recover(); err == nil {
-          l.Infof("↪ %v", res)
+          if config.DebugRPCCalls {
+            l.Infof("returned: %v", res)
+          }
         } else {
           msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
           l.Errorf(msg)

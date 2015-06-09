@@ -22,6 +22,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -61,7 +62,7 @@ type standaloneRequest interface {
 
 // BuildResource builds the output of the given request and writes it to the given out.
 func (b *builder) BuildResource(request interface{}, db database.Database, logger log.Logger, out binary.Object) error {
-	if logger != nil {
+	if config.DebugDatabaseBuilds && logger != nil {
 		logger.Infof("Building resource: %T %v", request, request)
 	}
 

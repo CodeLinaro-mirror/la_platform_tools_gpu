@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -132,8 +133,10 @@ func (t *transient) Store(r binary.Object, logger log.Logger) (id binary.ID, err
 // underlying store. If in the transient store, drop it and return it.
 func (t *transient) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
 	logger = logger.Enter("Transient.Load")
-	logger.Infof("(id: %v total_size: %v)", id, t.size)
-	defer func() { logger.Infof("↪ err: %v total_size: %v", err, t.size) }()
+	if config.DebugDatabase {
+		logger.Infof("(id: %v total_size: %v)", id, t.size)
+		defer func() { logger.Infof("↪ err: %v total_size: %v", err, t.size) }()
+	}
 
 	t.mutex.Lock()
 	if entry, ok := t.entries[id]; ok {
