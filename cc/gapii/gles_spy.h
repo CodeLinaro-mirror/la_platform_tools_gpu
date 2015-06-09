@@ -332,12 +332,9 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
 
     mEncoder->Uint16(0);  // Type ID -- TODO: mEncoder->Id(EGL_INITIALIZE_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(dpy));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(major));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(minor));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(dpy);
+    mEncoder->Pointer(major);
+    mEncoder->Pointer(minor);
     mEncoder->Int64(result);
 
     return result;
@@ -404,16 +401,11 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
 
     mEncoder->Uint16(1);  // Type ID -- TODO: mEncoder->Id(EGL_CREATE_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(config));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(share_context));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(attrib_list));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(config);
+    mEncoder->Pointer(share_context);
+    mEncoder->Pointer(attrib_list);
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -432,14 +424,10 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 
     mEncoder->Uint16(2);  // Type ID -- TODO: mEncoder->Id(EGL_MAKE_CURRENT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(draw));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(read));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(context));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(draw);
+    mEncoder->Pointer(read);
+    mEncoder->Pointer(context);
     mEncoder->Int64(result);
 
     return result;
@@ -457,10 +445,8 @@ inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
 
     mEncoder->Uint16(3);  // Type ID -- TODO: mEncoder->Id(EGL_SWAP_BUFFERS_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(surface));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(surface);
     mEncoder->Int64(result);
 
     return result;
@@ -479,13 +465,10 @@ inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute,
 
     mEncoder->Uint16(4);  // Type ID -- TODO: mEncoder->Id(EGL_QUERY_SURFACE_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(surface));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(surface);
     mEncoder->Int64(attribute);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
     mEncoder->Int64(result);
 
     return result;
@@ -551,15 +534,11 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
 
     mEncoder->Uint16(5);  // Type ID -- TODO: mEncoder->Id(GL_X_CREATE_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(dpy));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(vis));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(shareList));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(dpy);
+    mEncoder->Pointer(vis);
+    mEncoder->Pointer(shareList);
     mEncoder->Bool(direct);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -625,16 +604,12 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
 
     mEncoder->Uint16(6);  // Type ID -- TODO: mEncoder->Id(GL_X_CREATE_NEW_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(fbconfig));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(fbconfig);
     mEncoder->Uint32(type);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(shared));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(shared);
     mEncoder->Bool(direct);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -650,14 +625,10 @@ inline void GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read
 
     mEncoder->Uint16(7);  // Type ID -- TODO: mEncoder->Id(GL_X_MAKE_CONTEXT_CURRENT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(draw));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(read));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(ctx));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(draw);
+    mEncoder->Pointer(read);
+    mEncoder->Pointer(ctx);
 }
 
 inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
@@ -669,10 +640,8 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
 
     mEncoder->Uint16(8);  // Type ID -- TODO: mEncoder->Id(GL_X_SWAP_BUFFERS_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(display));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(drawable));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(drawable);
 }
 
 inline void* GlesSpy::wglCreateContext(void* hdc) {
@@ -735,10 +704,8 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
 
     mEncoder->Uint16(9);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hdc));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(hdc);
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -803,14 +770,10 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
 
     mEncoder->Uint16(10);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ATTRIBS_A_R_B_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hdc));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hShareContext));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(attribList));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(hdc);
+    mEncoder->Pointer(hShareContext);
+    mEncoder->Pointer(attribList);
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -829,10 +792,8 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     mEncoder->Uint16(11);  // Type ID -- TODO: mEncoder->Id(WGL_MAKE_CURRENT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hdc));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hglrc));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(hdc);
+    mEncoder->Pointer(hglrc);
     mEncoder->Int64(result);
 
     return result;
@@ -847,8 +808,7 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
 
     mEncoder->Uint16(12);  // Type ID -- TODO: mEncoder->Id(WGL_SWAP_BUFFERS_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(hdc));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(hdc);
 }
 
 inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
@@ -912,12 +872,9 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
 
     mEncoder->Uint16(13);  // Type ID -- TODO: mEncoder->Id(C_G_L_CREATE_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(pix));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(share));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(ctx));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(pix);
+    mEncoder->Pointer(share);
+    mEncoder->Pointer(ctx);
     mEncoder->Int64(result);
 
     return result;
@@ -937,8 +894,7 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     mEncoder->Uint16(14);  // Type ID -- TODO: mEncoder->Id(C_G_L_SET_CURRENT_CONTEXT_ID);
     encodeObservations();
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(ctx));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(ctx);
     mEncoder->Int64(result);
 
     return result;
@@ -993,12 +949,9 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(bytes_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(binary_format));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(binary));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(bytes_written);
+    mEncoder->Pointer(binary_format);
+    mEncoder->Pointer(binary);
 }
 
 inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format, void* binary,
@@ -1013,8 +966,7 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Uint32(binary_format);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(binary));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(binary);
     mEncoder->Int32(binary_size);
 }
 
@@ -1059,8 +1011,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(numAttachments);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(attachments));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(attachments);
 }
 
 inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
@@ -1227,8 +1178,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     mEncoder->Uint16(31);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_O_E_S_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(arrays));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(arrays);
 }
 
 inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
@@ -1269,8 +1219,7 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
     mEncoder->Uint16(33);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_O_E_S_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(arrays));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(arrays);
 }
 
 inline bool GlesSpy::glIsVertexArrayOES(uint32_t array) {
@@ -1305,8 +1254,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
             35);  // Type ID -- TODO: mEncoder->Id(GL_E_G_L_IMAGE_TARGET_TEXTURE2D_O_E_S_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(image));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(image);
 }
 
 inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, void* image) {
@@ -1320,8 +1268,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
                            // mEncoder->Id(GL_E_G_L_IMAGE_TARGET_RENDERBUFFER_STORAGE_O_E_S_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(image));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(image);
 }
 
 inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
@@ -1516,8 +1463,7 @@ inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint
     mEncoder->Uint32(static_cast<uint32_t>(type));
     mEncoder->Bool(normalized);
     mEncoder->Int32(stride);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int32_t buffer_size,
@@ -1540,14 +1486,10 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
     mEncoder->Uint32(program);
     mEncoder->Uint32(location);
     mEncoder->Int32(buffer_size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(buffer_bytes_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(vector_count));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(type));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(name));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(buffer_bytes_written);
+    mEncoder->Pointer(vector_count);
+    mEncoder->Pointer(type);
+    mEncoder->Pointer(name);
 }
 
 inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
@@ -1570,14 +1512,10 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
     mEncoder->Int32(buffer_size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(buffer_bytes_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(vector_count));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(type));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(name));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(buffer_bytes_written);
+    mEncoder->Pointer(vector_count);
+    mEncoder->Pointer(type);
+    mEncoder->Pointer(name);
 }
 
 inline uint32_t GlesSpy::glGetError() {
@@ -1609,8 +1547,7 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value) {
@@ -1655,8 +1592,7 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
     encodeObservations();
     mEncoder->Uint32(shader);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
@@ -1856,8 +1792,7 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
@@ -1888,8 +1823,7 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
@@ -2002,8 +1936,7 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* value) {
@@ -2026,8 +1959,7 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* value) {
@@ -2050,8 +1982,7 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* value) {
@@ -2075,8 +2006,7 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform1f(int32_t location, float value) {
@@ -2190,8 +2120,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* value)
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* value) {
@@ -2214,8 +2143,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* value)
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* value) {
@@ -2238,8 +2166,7 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* value)
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* value) {
@@ -2263,8 +2190,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* value)
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool transpose,
@@ -2291,8 +2217,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
     mEncoder->Int32(location);
     mEncoder->Int32(count);
     mEncoder->Bool(transpose);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool transpose,
@@ -2321,8 +2246,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
     mEncoder->Int32(location);
     mEncoder->Int32(count);
     mEncoder->Bool(transpose);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool transpose,
@@ -2367,8 +2291,7 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool tr
     mEncoder->Int32(location);
     mEncoder->Int32(count);
     mEncoder->Bool(transpose);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* values) {
@@ -2382,8 +2305,7 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t* values) {
@@ -2397,8 +2319,7 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glVertexAttrib1f(uint32_t location, float value0) {
@@ -2471,8 +2392,7 @@ inline void GlesSpy::glVertexAttrib1fv(uint32_t location, float* value) {
     mEncoder->Uint16(84);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1FV_ID);
     encodeObservations();
     mEncoder->Uint32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
@@ -2486,8 +2406,7 @@ inline void GlesSpy::glVertexAttrib2fv(uint32_t location, float* value) {
     mEncoder->Uint16(85);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2FV_ID);
     encodeObservations();
     mEncoder->Uint32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
@@ -2501,8 +2420,7 @@ inline void GlesSpy::glVertexAttrib3fv(uint32_t location, float* value) {
     mEncoder->Uint16(86);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3FV_ID);
     encodeObservations();
     mEncoder->Uint32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
@@ -2516,8 +2434,7 @@ inline void GlesSpy::glVertexAttrib4fv(uint32_t location, float* value) {
     mEncoder->Uint16(87);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4FV_ID);
     encodeObservations();
     mEncoder->Uint32(location);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
@@ -2534,10 +2451,8 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(shader_type));
     mEncoder->Uint32(static_cast<uint32_t>(precision_type));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(range));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(precision));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(range);
+    mEncoder->Pointer(precision);
 }
 
 inline void GlesSpy::glDepthMask(bool enabled) {
@@ -2787,8 +2702,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     mEncoder->Uint16(101);  // Type ID -- TODO: mEncoder->Id(GL_GEN_TEXTURES_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(textures));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(textures);
 }
 
 inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
@@ -2808,8 +2722,7 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     mEncoder->Uint16(102);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_TEXTURES_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(textures));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(textures);
 }
 
 inline bool GlesSpy::glIsTexture(uint32_t texture) {
@@ -2933,8 +2846,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
     mEncoder->Int32(border);
     mEncoder->Uint32(static_cast<uint32_t>(format));
     mEncoder->Uint32(static_cast<uint32_t>(type));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
@@ -3009,8 +2921,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
     mEncoder->Int32(height);
     mEncoder->Uint32(static_cast<uint32_t>(format));
     mEncoder->Uint32(static_cast<uint32_t>(type));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
@@ -3123,8 +3034,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
     mEncoder->Int32(height);
     mEncoder->Int32(border);
     mEncoder->Int32(image_size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
@@ -3147,8 +3057,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
     mEncoder->Int32(height);
     mEncoder->Uint32(static_cast<uint32_t>(format));
     mEncoder->Int32(image_size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glGenerateMipmap(uint32_t target) {
@@ -3181,8 +3090,7 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
     mEncoder->Int32(height);
     mEncoder->Uint32(static_cast<uint32_t>(format));
     mEncoder->Uint32(static_cast<uint32_t>(type));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
@@ -3206,8 +3114,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     mEncoder->Uint16(113);  // Type ID -- TODO: mEncoder->Id(GL_GEN_FRAMEBUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(framebuffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(framebuffers);
 }
 
 inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
@@ -3272,8 +3179,7 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
     mEncoder->Uint16(116);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_FRAMEBUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(framebuffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(framebuffers);
 }
 
 inline bool GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
@@ -3318,8 +3224,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
     mEncoder->Uint16(118);  // Type ID -- TODO: mEncoder->Id(GL_GEN_RENDERBUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(renderbuffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(renderbuffers);
 }
 
 inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) {
@@ -3385,8 +3290,7 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
     mEncoder->Uint16(121);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_RENDERBUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(renderbuffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(renderbuffers);
 }
 
 inline bool GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
@@ -3433,8 +3337,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
@@ -3457,8 +3360,7 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     mEncoder->Uint16(124);  // Type ID -- TODO: mEncoder->Id(GL_GEN_BUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(buffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(buffers);
 }
 
 inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
@@ -3504,8 +3406,7 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
     mEncoder->Uint32(static_cast<uint32_t>(usage));
 }
 
@@ -3522,8 +3423,7 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(offset);
     mEncoder->Int32(size);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(data));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(data);
 }
 
 inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
@@ -3543,8 +3443,7 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     mEncoder->Uint16(128);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_BUFFERS_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(buffers));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(buffers);
 }
 
 inline bool GlesSpy::glIsBuffer(uint32_t buffer) {
@@ -3589,8 +3488,7 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
@@ -3662,10 +3560,8 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
     encodeObservations();
     mEncoder->Uint32(shader);
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(source));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(length));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(source);
+    mEncoder->Pointer(length);
 }
 
 inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t binary_format,
@@ -3681,11 +3577,9 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
     mEncoder->Uint16(134);  // Type ID -- TODO: mEncoder->Id(GL_SHADER_BINARY_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(shaders));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(shaders);
     mEncoder->Uint32(binary_format);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(binary));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(binary);
     mEncoder->Int32(binary_size);
 }
 
@@ -3717,10 +3611,8 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
     encodeObservations();
     mEncoder->Uint32(shader);
     mEncoder->Int32(buffer_length);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(string_length_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(info));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(string_length_written);
+    mEncoder->Pointer(info);
 }
 
 inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
@@ -3751,10 +3643,8 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
     encodeObservations();
     mEncoder->Uint32(shader);
     mEncoder->Int32(buffer_length);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(string_length_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(source));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(string_length_written);
+    mEncoder->Pointer(source);
 }
 
 inline void GlesSpy::glReleaseShaderCompiler() {
@@ -3902,10 +3792,8 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_length);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(shaders_length_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(shaders));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(shaders_length_written);
+    mEncoder->Pointer(shaders);
 }
 
 inline void GlesSpy::glLinkProgram(uint32_t program) {
@@ -3948,10 +3836,8 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
     encodeObservations();
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_length);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(string_length_written));
-    mEncoder->Uint32(0);  // PoolID
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(info));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(string_length_written);
+    mEncoder->Pointer(info);
 }
 
 inline void GlesSpy::glUseProgram(uint32_t program) {
@@ -4286,8 +4172,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_target));
     mEncoder->Uint32(static_cast<uint32_t>(attachment));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
@@ -4399,8 +4284,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
     mEncoder->Uint32(static_cast<uint32_t>(draw_mode));
     mEncoder->Int32(element_count);
     mEncoder->Uint32(static_cast<uint32_t>(indices_type));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(indices));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(indices);
 }
 
 inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
@@ -4554,8 +4438,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
     mEncoder->Uint16(166);  // Type ID -- TODO: mEncoder->Id(GL_GET_BOOLEANV_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(param));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
@@ -4625,8 +4508,7 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     mEncoder->Uint16(167);  // Type ID -- TODO: mEncoder->Id(GL_GET_FLOATV_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(param));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
@@ -4918,8 +4800,7 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     mEncoder->Uint16(168);  // Type ID -- TODO: mEncoder->Id(GL_GET_INTEGERV_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(param));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(values));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(values);
 }
 
 inline char* GlesSpy::glGetString(uint32_t param) {
@@ -4935,8 +4816,7 @@ inline char* GlesSpy::glGetString(uint32_t param) {
     mEncoder->Uint16(169);  // Type ID -- TODO: mEncoder->Id(GL_GET_STRING_ID);
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(param));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -5011,8 +4891,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
     mEncoder->Int32(offset);
     mEncoder->Int32(length);
     mEncoder->Uint32(static_cast<uint32_t>(access));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(result));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(result);
 
     return result;
 }
@@ -5041,8 +4920,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(attachments));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(attachments);
 }
 
 inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
@@ -5108,8 +4986,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     mEncoder->Uint16(178);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(queries));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(queries);
 }
 
 inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
@@ -5154,8 +5031,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     mEncoder->Uint16(181);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(queries));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(queries);
 }
 
 inline bool GlesSpy::glIsQuery(uint32_t query) {
@@ -5191,8 +5067,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value) {
@@ -5207,8 +5082,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
     encodeObservations();
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
@@ -5231,8 +5105,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     mEncoder->Uint16(185);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_E_X_T_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(queries));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(queries);
 }
 
 inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
@@ -5277,8 +5150,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     mEncoder->Uint16(188);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_E_X_T_ID);
     encodeObservations();
     mEncoder->Int32(count);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(queries));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(queries);
 }
 
 inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
@@ -5327,8 +5199,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
     encodeObservations();
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, int32_t* value) {
@@ -5343,8 +5214,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
     encodeObservations();
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, uint32_t* value) {
@@ -5359,8 +5229,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
     encodeObservations();
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter, int64_t* value) {
@@ -5375,8 +5244,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
     encodeObservations();
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter, uint64_t* value) {
@@ -5391,8 +5259,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
     encodeObservations();
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(value));
-    mEncoder->Uint32(0);  // PoolID
+    mEncoder->Pointer(value);
 }
 
 inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_size,

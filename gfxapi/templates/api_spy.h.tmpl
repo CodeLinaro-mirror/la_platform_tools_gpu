@@ -169,9 +169,7 @@
   {{else if IsUint        $.Type}}mEncoder->Uint64({{$.Name}});
   {{else if IsString      $.Type}}mEncoder->String({{$.Name}});
   {{else if IsEnum        $.Type}}mEncoder->Uint32(static_cast<uint32_t>({{$.Name}}));
-  {{else if IsPointer     $.Type}}
-    mEncoder->Uint64(reinterpret_cast<uint64_t>({{$.Name}}));
-    mEncoder->Uint32(0); // PoolID
+  {{else if IsPointer     $.Type}}mEncoder->Pointer({{$.Name}});
   {{else if IsStaticArray $.Type}}
     for (int i = 0; i < {{$.Type.Size}}; i++) {
       {{Macro "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}

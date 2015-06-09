@@ -52,6 +52,7 @@ public:
     void Float64(double);
     void Uint64(uint64_t);
     void Int64(int64_t);
+    void Pointer(const void*);
     void String(const char*);
     void Data(const void* ptr, int32_t size);
     void Id(const gapic::Id&);
@@ -59,11 +60,13 @@ public:
     void Value(const Encodable* obj);
     void Variant(const Encodable* obj);
     void Object(const Encodable* obj);
+
 private:
     std::unordered_map<gapic::Id, uint32_t> mIds;
     std::shared_ptr<StreamWriter> mOutput;
     uint32_t mLastObjectId;
 };
+
 
 } // namespace gapic
 

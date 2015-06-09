@@ -19,7 +19,7 @@
 namespace gapii {
 
 void SpyBase::Observation::encode(gapic::Encoder* e) const {
-    e->Uint64(reinterpret_cast<uint64_t>(mBase));
+    e->Uint64(reinterpret_cast<uintptr_t>(mBase));
     e->Uint64(mSize);
     e->Id(mId);
 }
