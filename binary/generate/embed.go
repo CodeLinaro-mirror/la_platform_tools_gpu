@@ -26,7 +26,8 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "Cpp.Constructor"}}»»{{FixupName .Name}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{CppStorage $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
+{{define "Cpp.Constructor"}}»»{{FixupName .Name}}() = default;
+»»{{FixupName .Name}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{CppStorage $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
 »»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
 
 {{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
@@ -38,7 +39,7 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{range .Fields}}»»»{{Encode (print "this->m" .Name) .Type}}
 {{end}}»»}{{end}}
 
-{{define "Cpp.EncodePrimitive"}}e->{{.Type.Method}}({{.Name}});{{end}}
+{{define "Cpp.EncodePrimitive"}}e->{{CppMethod .Type}}({{.Name}});{{end}}
 {{define "Cpp.EncodeStruct"}}e->Value(&{{.Name}});{{end}}
 {{define "Cpp.EncodePointer"}}e->object({{.Name}});{{end}}
 {{define "Cpp.EncodeInterface"}}e->object({{.Name}});{{end}}
@@ -58,6 +59,8 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.EncodeMap"}}{{end}}
 
 {{define "Cpp.File"}}{{$.Copyright}}
+
+#include <vector>
 
 namespace gapic {
 

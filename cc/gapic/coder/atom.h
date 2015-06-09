@@ -5,6 +5,8 @@
 
 
 
+#include <vector>
+
 namespace gapic {
 
 class Encodable;
@@ -14,7 +16,8 @@ namespace coder {
 namespace atom {
     class Range: public Encodable {
     public:
-        Range(ID Start, ID End) :
+        Range() = default;
+        Range(uint64_t Start, uint64_t End) :
             mStart(Start),
             mEnd(End) {}
         virtual const gapic::Id& Id() const {
@@ -26,13 +29,14 @@ namespace atom {
             e->Uint64(this->mEnd);
         }
 
-        ID mStart;
-        ID mEnd;
+        uint64_t mStart;
+        uint64_t mEnd;
     };
 
     class Group: public Encodable {
     public:
-        Group(char* Name, Range Range, Group* SubGroups) :
+        Group() = default;
+        Group(char* Name, Range Range, std::vector<Group> SubGroups) :
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
@@ -51,12 +55,13 @@ namespace atom {
 
         char* mName;
         Range mRange;
-        Group* mSubGroups;
+        std::vector<Group> mSubGroups;
     };
 
     class Observation: public Encodable {
     public:
-        Observation(memory::Range Range, binary::ID ID) :
+        Observation() = default;
+        Observation(memory::Range Range, gapic::Id ID) :
             mRange(Range),
             mID(ID) {}
         virtual const gapic::Id& Id() const {
@@ -65,16 +70,17 @@ namespace atom {
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mRange);
-            e->ID(this->mID);
+            e->Id(this->mID);
         }
 
         memory::Range mRange;
-        binary::ID mID;
+        gapic::Id mID;
     };
 
     class Observations: public Encodable {
     public:
-        Observations(Observation* Reads, Observation* Writes) :
+        Observations() = default;
+        Observations(std::vector<Observation> Reads, std::vector<Observation> Writes) :
             mReads(Reads),
             mWrites(Writes) {}
         virtual const gapic::Id& Id() const {
@@ -92,13 +98,14 @@ namespace atom {
             }
         }
 
-        Observation* mReads;
-        Observation* mWrites;
+        std::vector<Observation> mReads;
+        std::vector<Observation> mWrites;
     };
 
     class Resource: public Encodable {
     public:
-        Resource(binary::ID ID, byte* Data) :
+        Resource() = default;
+        Resource(gapic::Id ID, std::vector<uint8_t> Data) :
             mID(ID),
             mData(Data) {}
         virtual const gapic::Id& Id() const {
@@ -106,15 +113,15 @@ namespace atom {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->ID(this->mID);
+            e->Id(this->mID);
             e->Int32(this->mData.size());
             for (int i = 0; i < this->mData.size(); i++) {
                 e->Uint8(this->mData[i]);
             }
         }
 
-        binary::ID mID;
-        byte* mData;
+        gapic::Id mID;
+        std::vector<uint8_t> mData;
     };
 
 

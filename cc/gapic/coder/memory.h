@@ -5,6 +5,8 @@
 
 
 
+#include <vector>
+
 namespace gapic {
 
 class Encodable;
@@ -14,7 +16,8 @@ namespace coder {
 namespace memory {
     class Range: public Encodable {
     public:
-        Range(Pointer Base, uint64_t Size) :
+        Range() = default;
+        Range(uint64_t Base, uint64_t Size) :
             mBase(Base),
             mSize(Size) {}
         virtual const gapic::Id& Id() const {
@@ -26,7 +29,7 @@ namespace memory {
             e->Uint64(this->mSize);
         }
 
-        Pointer mBase;
+        uint64_t mBase;
         uint64_t mSize;
     };
 
