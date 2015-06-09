@@ -910,7 +910,7 @@ typedef uint32_t QueryId;
 
 typedef int32_t UniformLocation;
 
-typedef uint32_t AttributeLocation;
+typedef int32_t AttributeLocation;
 
 typedef void* IndicesPointer;
 

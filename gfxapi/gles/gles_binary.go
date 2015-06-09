@@ -4903,7 +4903,7 @@ func doEncodeProgram(e binary.Encoder, o *Program) error {
 		if err := e.String(k); err != nil {
 			return err
 		}
-		if err := e.Uint32(uint32(v)); err != nil {
+		if err := e.Int32(int32(v)); err != nil {
 			return err
 		}
 	}
@@ -4982,7 +4982,7 @@ func doDecodeProgram(d binary.Decoder, o *Program) error {
 			} else {
 				k = string(obj)
 			}
-			if obj, err := d.Uint32(); err != nil {
+			if obj, err := d.Int32(); err != nil {
 				return err
 			} else {
 				v = AttributeLocation(obj)
@@ -5062,7 +5062,7 @@ func doSkipProgram(d binary.Decoder) error {
 			if err := d.SkipString(); err != nil {
 				return err
 			}
-			if _, err := d.Uint32(); err != nil {
+			if _, err := d.Int32(); err != nil {
 				return err
 			}
 		}
@@ -5119,7 +5119,7 @@ var schemaProgram = &schema.Class{
 		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderTypeːShaderIdᵐ", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ"}},
-		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
+		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}}},
 		{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "VertexAttribute"}}},
 		{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Uniform"}}},
 		{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ"}},
@@ -5742,7 +5742,7 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 		return err
 	}
 	for k, v := range o.VertexAttributeArrays {
-		if err := e.Uint32(uint32(k)); err != nil {
+		if err := e.Int32(int32(k)); err != nil {
 			return err
 		}
 		if v != nil {
@@ -5906,7 +5906,7 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 		for i := uint32(0); i < count; i++ {
 			var k AttributeLocation
 			var v *VertexAttributeArray
-			if obj, err := d.Uint32(); err != nil {
+			if obj, err := d.Int32(); err != nil {
 				return err
 			} else {
 				k = AttributeLocation(obj)
@@ -6077,7 +6077,7 @@ func doSkipContext(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
+			if _, err := d.Int32(); err != nil {
 				return err
 			}
 			if _, err := d.SkipObject(); err != nil {
@@ -6170,7 +6170,7 @@ var schemaContext = &schema.Class{
 		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "BufferTargetːBufferIdᵐ", KeyType: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
 		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray"}}}},
+		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray"}}}},
 		{Declared: "TextureUnits", Type: &schema.Map{Alias: "TextureUnitːTextureTargetːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "TextureTargetːTextureIdᵐ", KeyType: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
 		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
 		{Declared: "Capabilities", Type: &schema.Map{Alias: "Capabilityːboolᵐ", KeyType: &schema.Primitive{Name: "Capability", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
@@ -8130,7 +8130,7 @@ func doEncodeGlBindAttribLocation(e binary.Encoder, o *GlBindAttribLocation) err
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.String(o.Name); err != nil {
@@ -8147,7 +8147,7 @@ func doDecodeGlBindAttribLocation(d binary.Decoder, o *GlBindAttribLocation) err
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -8166,7 +8166,7 @@ func doSkipGlBindAttribLocation(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
@@ -8197,7 +8197,7 @@ var schemaGlBindAttribLocation = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -11831,7 +11831,7 @@ func doEncodeGlDisableVertexAttribArray(e binary.Encoder, o *GlDisableVertexAttr
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	return nil
@@ -11840,7 +11840,7 @@ func doDecodeGlDisableVertexAttribArray(d binary.Decoder, o *GlDisableVertexAttr
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -11851,7 +11851,7 @@ func doSkipGlDisableVertexAttribArray(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
@@ -11884,7 +11884,7 @@ var schemaGlDisableVertexAttribArray = &schema.Class{
 	Name:   "GlDisableVertexAttribArray",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 	},
 }
 
@@ -12545,7 +12545,7 @@ func doEncodeGlEnableVertexAttribArray(e binary.Encoder, o *GlEnableVertexAttrib
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	return nil
@@ -12554,7 +12554,7 @@ func doDecodeGlEnableVertexAttribArray(d binary.Decoder, o *GlEnableVertexAttrib
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -12565,7 +12565,7 @@ func doSkipGlEnableVertexAttribArray(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
@@ -12594,7 +12594,7 @@ var schemaGlEnableVertexAttribArray = &schema.Class{
 	Name:   "GlEnableVertexAttribArray",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 	},
 }
 
@@ -13798,7 +13798,7 @@ func doEncodeGlGetActiveAttrib(e binary.Encoder, o *GlGetActiveAttrib) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(o.BufferSize); err != nil {
@@ -13827,7 +13827,7 @@ func doDecodeGlGetActiveAttrib(d binary.Decoder, o *GlGetActiveAttrib) error {
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -13858,7 +13858,7 @@ func doSkipGlGetActiveAttrib(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -13899,7 +13899,7 @@ var schemaGlGetActiveAttrib = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
 		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
@@ -14259,7 +14259,7 @@ func doEncodeGlGetAttribLocation(e binary.Encoder, o *GlGetAttribLocation) error
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Result)); err != nil {
+	if err := e.Int32(int32(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -14278,7 +14278,7 @@ func doDecodeGlGetAttribLocation(d binary.Decoder, o *GlGetAttribLocation) error
 	} else {
 		o.Name = string(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Result = AttributeLocation(obj)
@@ -14295,7 +14295,7 @@ func doSkipGlGetAttribLocation(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
@@ -14324,7 +14324,7 @@ var schemaGlGetAttribLocation = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 	},
 }
 
@@ -22477,7 +22477,7 @@ func doEncodeGlVertexAttrib1f(e binary.Encoder, o *GlVertexAttrib1f) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -22489,7 +22489,7 @@ func doDecodeGlVertexAttrib1f(d binary.Decoder, o *GlVertexAttrib1f) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22505,7 +22505,7 @@ func doSkipGlVertexAttrib1f(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Float32(); err != nil {
@@ -22533,7 +22533,7 @@ var schemaGlVertexAttrib1f = &schema.Class{
 	Name:   "GlVertexAttrib1f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -22547,7 +22547,7 @@ func doEncodeGlVertexAttrib1fv(e binary.Encoder, o *GlVertexAttrib1fv) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Value); err != nil {
@@ -22559,7 +22559,7 @@ func doDecodeGlVertexAttrib1fv(d binary.Decoder, o *GlVertexAttrib1fv) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22573,7 +22573,7 @@ func doSkipGlVertexAttrib1fv(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
@@ -22601,7 +22601,7 @@ var schemaGlVertexAttrib1fv = &schema.Class{
 	Name:   "GlVertexAttrib1fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
@@ -22615,7 +22615,7 @@ func doEncodeGlVertexAttrib2f(e binary.Encoder, o *GlVertexAttrib2f) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -22630,7 +22630,7 @@ func doDecodeGlVertexAttrib2f(d binary.Decoder, o *GlVertexAttrib2f) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22651,7 +22651,7 @@ func doSkipGlVertexAttrib2f(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Float32(); err != nil {
@@ -22682,7 +22682,7 @@ var schemaGlVertexAttrib2f = &schema.Class{
 	Name:   "GlVertexAttrib2f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
@@ -22697,7 +22697,7 @@ func doEncodeGlVertexAttrib2fv(e binary.Encoder, o *GlVertexAttrib2fv) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Value); err != nil {
@@ -22709,7 +22709,7 @@ func doDecodeGlVertexAttrib2fv(d binary.Decoder, o *GlVertexAttrib2fv) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22723,7 +22723,7 @@ func doSkipGlVertexAttrib2fv(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
@@ -22751,7 +22751,7 @@ var schemaGlVertexAttrib2fv = &schema.Class{
 	Name:   "GlVertexAttrib2fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
@@ -22765,7 +22765,7 @@ func doEncodeGlVertexAttrib3f(e binary.Encoder, o *GlVertexAttrib3f) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -22783,7 +22783,7 @@ func doDecodeGlVertexAttrib3f(d binary.Decoder, o *GlVertexAttrib3f) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22809,7 +22809,7 @@ func doSkipGlVertexAttrib3f(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Float32(); err != nil {
@@ -22843,7 +22843,7 @@ var schemaGlVertexAttrib3f = &schema.Class{
 	Name:   "GlVertexAttrib3f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -22859,7 +22859,7 @@ func doEncodeGlVertexAttrib3fv(e binary.Encoder, o *GlVertexAttrib3fv) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Value); err != nil {
@@ -22871,7 +22871,7 @@ func doDecodeGlVertexAttrib3fv(d binary.Decoder, o *GlVertexAttrib3fv) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22885,7 +22885,7 @@ func doSkipGlVertexAttrib3fv(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
@@ -22913,7 +22913,7 @@ var schemaGlVertexAttrib3fv = &schema.Class{
 	Name:   "GlVertexAttrib3fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
@@ -22927,7 +22927,7 @@ func doEncodeGlVertexAttrib4f(e binary.Encoder, o *GlVertexAttrib4f) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -22948,7 +22948,7 @@ func doDecodeGlVertexAttrib4f(d binary.Decoder, o *GlVertexAttrib4f) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -22979,7 +22979,7 @@ func doSkipGlVertexAttrib4f(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Float32(); err != nil {
@@ -23016,7 +23016,7 @@ var schemaGlVertexAttrib4f = &schema.Class{
 	Name:   "GlVertexAttrib4f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -23033,7 +23033,7 @@ func doEncodeGlVertexAttrib4fv(e binary.Encoder, o *GlVertexAttrib4fv) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Value); err != nil {
@@ -23045,7 +23045,7 @@ func doDecodeGlVertexAttrib4fv(d binary.Decoder, o *GlVertexAttrib4fv) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -23059,7 +23059,7 @@ func doSkipGlVertexAttrib4fv(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
@@ -23087,7 +23087,7 @@ var schemaGlVertexAttrib4fv = &schema.Class{
 	Name:   "GlVertexAttrib4fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
@@ -23101,7 +23101,7 @@ func doEncodeGlVertexAttribPointer(e binary.Encoder, o *GlVertexAttribPointer) e
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Location)); err != nil {
+	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(o.Size); err != nil {
@@ -23125,7 +23125,7 @@ func doDecodeGlVertexAttribPointer(d binary.Decoder, o *GlVertexAttribPointer) e
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -23159,7 +23159,7 @@ func doSkipGlVertexAttribPointer(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -23201,7 +23201,7 @@ var schemaGlVertexAttribPointer = &schema.Class{
 	Name:   "GlVertexAttribPointer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},

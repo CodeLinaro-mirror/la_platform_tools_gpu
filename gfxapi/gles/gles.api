@@ -392,7 +392,7 @@ class ClearState {
 // @replay_remap type u32 SyncObjectId
 @replay_remap type s32 UniformLocation
 
-type u32 AttributeLocation
+type s32 AttributeLocation
 
 @replay_custom_value type void* IndicesPointer
 @replay_custom_value type void* VertexPointer
@@ -1209,8 +1209,8 @@ cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value
 cmd void glUniform1fv(UniformLocation location, s32 count, f32* value) {
     ctx := GetContext()
     v := value[0:count]
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
     uniform.Value.F32 = v[0]
@@ -1221,8 +1221,8 @@ cmd void glUniform1fv(UniformLocation location, s32 count, f32* value) {
 cmd void glUniform2fv(UniformLocation location, s32 count, f32* value) {
     ctx := GetContext()
     v := value[0:count*2]
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
     uniform.Value.Vec2f = Vec2f(v[0], v[1])
@@ -1233,7 +1233,7 @@ cmd void glUniform2fv(UniformLocation location, s32 count, f32* value) {
 cmd void glUniform3fv(UniformLocation location, s32 count, f32* value) {
     ctx := GetContext()
     v := value[0:count*3]
-    // TODO: Use count
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
@@ -1245,7 +1245,7 @@ cmd void glUniform3fv(UniformLocation location, s32 count, f32* value) {
 cmd void glUniform4fv(UniformLocation location, s32 count, f32* value) {
     ctx := GetContext()
     v := value[0:count*4]
-    // TODO: Use count
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
@@ -1257,7 +1257,7 @@ cmd void glUniform4fv(UniformLocation location, s32 count, f32* value) {
 cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
     v := values[0:count*4]
-    // TODO: Use count
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT2
@@ -1272,7 +1272,7 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
     v := values[0:count*9]
-    // TODO: Use count
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT3
@@ -1288,7 +1288,7 @@ cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose,
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
     v := values[0:count*16]
-    // TODO: Use count
+    read(v) // TODO: Use count
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Value.Mat4f = Mat4f(
