@@ -15,27 +15,37 @@
 package memory
 
 import (
+	"bufio"
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
+// Maximum number of bytes to buffer
+const maxReadBuffer = 1024
+
 // Reader returns a binary reader for the specified Slice.
 func Reader(s Slice, d database.Database, l log.Logger) io.Reader {
-	return &reader{s, d, l, 0}
+	c := s.Size()
+	return bufio.NewReaderSize(&reader{s, d, l, c, 0}, int(min(c, maxReadBuffer)))
 }
 
 type reader struct {
 	s Slice
 	d database.Database
 	l log.Logger
-	o Pointer
+	r uint64
+	o uint64
 }
 
 func (r *reader) Read(dst []byte) (n int, err error) {
-	src, err := r.s.Slice(Range{Base: r.o, Size: uint64(len(dst))}).Get(r.d, r.l)
-	n = copy(dst, src)
-	r.o += Pointer(n)
-	return n, err
+	if r.r == 0 {
+		return 0, io.EOF
+	}
+	c := min(uint64(len(dst)), r.r)
+	src, err := r.s.Slice(Range{Base: Pointer(r.o), Size: c}).Get(r.d, r.l)
+	r.o += c
+	r.r -= c
+	return copy(dst, src), err
 }
