@@ -29,7 +29,7 @@ import (
 
 // build writes to out the MemoryInfo resource resulting from the given GetMemoryInfo request.
 func (request *GetMemoryInfo) build(d database.Database, l log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, d, l)
+	capture, err := LoadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
 	}

@@ -34,7 +34,7 @@ func (request *GetTimingInfo) build(mgr *replay.Manager, db database.Database, l
 		CaptureID: request.Capture,
 	}
 
-	capture, err := loadCapture(request.Capture, db, logger)
+	capture, err := LoadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}

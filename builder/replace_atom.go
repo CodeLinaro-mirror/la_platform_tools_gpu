@@ -30,7 +30,7 @@ import (
 
 // build writes to out the Capture resource resulting from the given ReplaceAtom request.
 func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, db, logger)
+	capture, err := LoadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}
