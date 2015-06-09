@@ -18,39 +18,26 @@
 
 namespace gapii {
 
-void SpyBase::Observation::encode(gapic::Encoder* e) const {
-    e->Uint64(reinterpret_cast<uintptr_t>(mBase));
-    e->Uint64(mSize);
-    e->Id(mId);
-}
-
 // Inline methods
 void SpyBase::init(std::shared_ptr<gapic::Encoder> encoder) {
     mEncoder = encoder;
 }
 
 void SpyBase::read(const void* base, uint64_t size) {
-    mReads.push_back(observe(base, size));
+  mObservations.mReads.push_back(observe(base, size));
 }
 
 void SpyBase::write(const void* base, uint64_t size) {
-    mWrites.push_back(observe(base, size));
+  mObservations.mWrites.push_back(observe(base, size));
 }
 
 void SpyBase::encodeObservations() {
-    mEncoder->Uint32(mReads.size());
-    for (auto r : mReads) {
-        r.encode(mEncoder.get());
-    }
-    mEncoder->Uint32(mWrites.size());
-    for (auto r : mWrites) {
-        r.encode(mEncoder.get());
-    }
-    mReads.clear();
-    mWrites.clear();
+    mEncoder->Value(&mObservations);
+    mObservations.mReads.clear();
+    mObservations.mWrites.clear();
 }
 
-SpyBase::Observation SpyBase::observe(const void* base, uint64_t size) {
+Observation SpyBase::observe(const void* base, uint64_t size) {
     gapic::Id id = gapic::Id::Hash(base, size);
     if (mResources.count(id) == 0) {
         mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
@@ -58,8 +45,7 @@ SpyBase::Observation SpyBase::observe(const void* base, uint64_t size) {
         mEncoder->Data(base, size);
         mResources.emplace(id);
     }
-    return Observation{ base, size, id };
+    return Observation(Range(reinterpret_cast<uintptr_t>(base), size), id);
 }
 
 }  // namespace gapii
-

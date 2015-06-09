@@ -20,6 +20,8 @@
 #include "slice.h"
 
 #include <gapic/encoder.h>
+#include <gapic/coder/memory.h>
+#include <gapic/coder/atom.h>
 
 #include <stdint.h>
 
@@ -30,23 +32,18 @@
 
 namespace gapii {
 
+using gapic::coder::atom::Observation;
+using gapic::coder::atom::Observations;
+using gapic::coder::atom::Resource;
+using gapic::coder::memory::Range;
+
 class SpyBase {
 public:
     void init(std::shared_ptr<gapic::Encoder> encoder);
 
 protected:
-    // Observation is a single read or write memory observation.
-    struct Observation {
-        // encode writes this observation to the encoder e.
-        void encode(gapic::Encoder* e) const;
-
-        const void*     mBase; // Base address of the observation.
-        const uint64_t  mSize; // Number of bytes of the observation.
-        const gapic::Id mId;   // The resource identifier of the observation.
-    };
 
     typedef std::unordered_set<gapic::Id> IdSet;
-    typedef std::vector<Observation> ObservationList;
     typedef std::shared_ptr<gapic::Encoder> EncoderSPtr;
 
     // read is called to make a read memory observation of size bytes, starting at base.
@@ -116,10 +113,9 @@ protected:
     // slice is observed as a read operation.
     inline std::string string(const Slice<char>& slice);
 
-    ObservationList mReads;  // The list of read observations made by the spy.
-    ObservationList mWrites; // The list of write observations made by the spy.
-    IdSet mResources;        // The list of observations that have already been encoded.
-    EncoderSPtr mEncoder;    // The output stream encoder.
+    Observations mObservations; // The list of observations made by the spy.
+    IdSet mResources;           // The list of observations that have already been encoded.
+    EncoderSPtr mEncoder;       // The output stream encoder.
 
 private:
     Observation observe(const void* base, uint64_t size);
