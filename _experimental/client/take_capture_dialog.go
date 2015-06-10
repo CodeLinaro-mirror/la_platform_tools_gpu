@@ -18,8 +18,6 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"io"
-	"net"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
@@ -167,17 +165,20 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 	var clickSubscription gxui.EventSubscription
 	capture := func() {
-		stop := make(signal)
+		stop := make(chan struct{})
 
 		clickSubscription.Unlisten()
 		button.SetText("Stop")
 		clickSubscription = button.OnClick(func(gxui.MouseEvent) {
 			clickSubscription.Unlisten()
-			stop.raise()
+			close(stop)
 		})
 
 		go func() {
-			if data := takeCapture(appCtx, stop, statusLogger); data != nil {
+			buf := &bytes.Buffer{}
+			count, _ := gapii.Capture(statusLogger, *spyport, buf, stop)
+			if count > 0 {
+				data := buf.Bytes()
 				statusLogger.Infof("Importing...")
 				id, err := appCtx.Rpc().Import(appCtx.Logger(), name.Text(), data)
 				if err != nil {
@@ -205,83 +206,4 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	launch.OnClick(func(ev gxui.MouseEvent) {
 		CreateLaunchAndroidDialog(theme, statusLogger, capture)
 	})
-}
-
-type signal chan struct{}
-
-func (s signal) raise() {
-	close(s)
-}
-func (s signal) signaled() bool {
-	select {
-	case <-s:
-		return true
-	default:
-		return false
-	}
-}
-
-type tcUpdate struct {
-	msg  string
-	data []byte
-}
-
-func takeCapture(appCtx *ApplicationContext, stop signal, statusLogger log.Logger) []byte {
-	var conn net.Conn
-	var err error
-
-	statusLogger.Infof("Waiting for connection to localhost:%d...", *spyport)
-
-waiting:
-	for {
-		if stop.signaled() {
-			return nil
-		}
-		time.Sleep(500 * time.Millisecond)
-		conn, err = net.Dial("tcp", fmt.Sprintf("localhost:%d", *spyport))
-		if err == nil {
-			buf := &bytes.Buffer{}
-			bytesWritten := int64(0)
-			for {
-				if stop.signaled() {
-					conn.Close()
-					return buf.Bytes()
-				}
-
-				conn.SetReadDeadline(time.Now().Add(time.Millisecond * 100)) // Allow for stop event and UI refreshes.
-				n, err := io.CopyN(buf, conn, 1024*64)
-
-				if err, neterr := err.(net.Error); neterr {
-					if err.Temporary() || err.Timeout() {
-						bytesWritten += n
-						statusLogger.Infof("Capturing...\n%v bytes", bytesWritten)
-						continue
-					}
-				}
-
-				switch err {
-				case nil:
-					bytesWritten += n
-					statusLogger.Infof("Capturing...\n%v bytes", bytesWritten)
-
-				case io.EOF:
-					if len(buf.Bytes()) == 0 {
-						// ADB has an annoying tendancy to insta-close forwarded sockets when
-						// there's no application waiting for the connection. Treat this as
-						// another waiting-for-connection case.
-						continue waiting
-					}
-
-					statusLogger.Infof("Done")
-					return buf.Bytes()
-
-				default:
-					statusLogger.Infof("Connection error: %v", err)
-					return buf.Bytes()
-				}
-			}
-		}
-	}
-
-	return nil
 }
