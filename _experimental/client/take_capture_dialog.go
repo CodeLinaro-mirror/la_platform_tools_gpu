@@ -32,11 +32,10 @@ var (
 )
 
 type launchItem struct {
-	pkg    *adb.InstalledPackage
-	action *adb.Action
+	*adb.Action
 }
 
-func (i launchItem) String() string { return i.pkg.Name }
+func (i launchItem) String() string { return fmt.Sprintf("%s/%s", i.Package.Name, i.Activity) }
 
 func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...interface{}), capture func()) {
 	driver := theme.Driver()
@@ -77,25 +76,16 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...in
 				return fmt.Errorf("Failed to restart ADB as root: %v", err)
 			}
 			packages, err := device.InstalledPackages()
-			if err != nil {
+			if len(packages) == 0 || err != nil {
 				return fmt.Errorf(fmt.Sprintf("Could not get list of installed packages: %v", err))
 			}
 			for _, pkg := range packages {
-				actions, _ := pkg.Actions()
-				for _, action := range actions {
-					launcher := false
-					for _, category := range action.Categories {
-						if category == "android.intent.category.LAUNCHER" {
-							launcher = true
-							break
-						}
-					}
-					if launcher {
+				for _, action := range pkg.Actions {
+					if action.Name == "android.intent.action.MAIN" {
 						driver.CallSync(func() {
-							items = append(items, launchItem{pkg, action})
+							items = append(items, launchItem{action})
 							adapter.SetItems(items)
 						})
-						break
 					}
 				}
 			}
@@ -109,19 +99,17 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...in
 				go func() {
 					driver.Call(window.Close)
 
-					pkg, dev := item.pkg, item.pkg.Device
-
 					updateStatus("Disabling SELinux enforcing...")
-					dev.SetSELinuxEnforcing(false)
+					item.Package.Device.SetSELinuxEnforcing(false)
 
 					updateStatus("Setting LD_PRELOAD...")
-					pkg.SetWrapProperties("LD_PRELOAD=/data/spy.so")
+					item.Package.SetWrapProperties("LD_PRELOAD=/data/spy.so")
 
 					updateStatus("Forwarding port...")
-					dev.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
+					item.Package.Device.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
 
 					updateStatus("Starting activity...")
-					dev.StartActivity(*item.action)
+					item.Package.Device.StartActivity(*item.Action)
 
 					capture()
 				}()

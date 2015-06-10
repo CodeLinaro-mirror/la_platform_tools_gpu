@@ -94,7 +94,7 @@ func (d *Device) StartActivity(a Action) error {
 		//		"-W", // Wait for launch to complete
 		"-S", // Force-stop the target app before starting the activity
 		"-a", a.Name,
-		"-n", a.Component).Run()
+		"-n", a.Package.Name+"/"+a.Activity).Run()
 }
 
 // String returns a string representing the device.
