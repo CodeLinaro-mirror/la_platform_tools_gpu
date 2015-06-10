@@ -19,6 +19,9 @@ import (
 	"time"
 )
 
+const fmtTimestamp = "%.2d:%.2d:%.2d.%.3d"
+const fmtString = "#%.4d %v: %s%s"
+
 // Entry is a single Info, Warning or Error message written to the chan passed to Channel.
 type Entry struct {
 	Kind      Kind      // The Entry kind
@@ -31,13 +34,15 @@ type Entry struct {
 // String returns the string representation of the entry with timestamp.
 func (e *Entry) String() string {
 	h, m, s := e.Timestamp.Clock()
-	return fmt.Sprintf("%.2d:%.2d:%.2d.%.3d %s\n",
-		h, m, s, e.Timestamp.Nanosecond()/1000000, e.StringNoTimestamp())
+	return fmt.Sprintf(fmtTimestamp+fmtString+"\n",
+		h, m, s, e.Timestamp.Nanosecond()/1000000,
+		e.Context, e.Kind, e.Scope, e.Message)
 }
 
 // StringNoTimestamp String returns the string representation of the entry without the timestamp.
 func (e *Entry) StringNoTimestamp() string {
-	return fmt.Sprintf("#%.4d %s: %s%s\n", e.Context, e.Kind, e.Scope, e.Message)
+	return fmt.Sprintf(fmtString+"\n",
+		e.Context, e.Kind, e.Scope, e.Message)
 }
 
 // Kind defines an entry's message kind - either Info, Warning or Error.
