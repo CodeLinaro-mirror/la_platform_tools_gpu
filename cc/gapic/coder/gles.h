@@ -399,6 +399,116 @@ namespace gles {
         int64_t mResult;
     };
 
+    class CGLFlushDrawable: public Encodable {
+    public:
+        CGLFlushDrawable() = default;
+        CGLFlushDrawable(atom::Observations observations, CGLContextObj Ctx, int64_t Result) :
+            mobservations(observations),
+            mCtx(Ctx),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x66, 0xb7, 0x6a, 0xa6, 0xc2, 0x2a, 0xab, 0x8e, 0xda, 0x18, 0x0e, 0x76, 0x78, 0xc5, 0xf3, 0xe5, 0xce, 0x2f, 0x91, 0x54,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Value(&this->mCtx);
+            e->Int64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        CGLContextObj mCtx;
+        int64_t mResult;
+    };
+
+    class CGSConnectionID__P: public Encodable {
+    public:
+        CGSConnectionID__P() = default;
+        CGSConnectionID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x38, 0x8c, 0x60, 0xcd, 0x8b, 0x2b, 0x18, 0xa7, 0x29, 0x99, 0xbf, 0x46, 0x8d, 0xfb, 0xc0, 0x3d, 0xe9, 0x9a, 0xd5, 0x48,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class CGSWindowID__P: public Encodable {
+    public:
+        CGSWindowID__P() = default;
+        CGSWindowID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbf, 0x73, 0x42, 0x2f, 0xcd, 0xec, 0xa9, 0x1e, 0x11, 0x55, 0x2d, 0x08, 0x00, 0xd1, 0x37, 0x01, 0x08, 0xc6, 0x5d, 0x24,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class CGSSurfaceID__P: public Encodable {
+    public:
+        CGSSurfaceID__P() = default;
+        CGSSurfaceID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x19, 0x36, 0xee, 0x80, 0x3a, 0xe1, 0x89, 0x37, 0xcf, 0xe1, 0x30, 0xfa, 0xde, 0x0e, 0xff, 0x1a, 0x4c, 0x08, 0x08, 0x51,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class CGLGetSurface: public Encodable {
+    public:
+        CGLGetSurface() = default;
+        CGLGetSurface(atom::Observations observations, CGLContextObj Ctx, CGSConnectionID__P Cid, CGSWindowID__P Wid, CGSSurfaceID__P Sid, int64_t Result) :
+            mobservations(observations),
+            mCtx(Ctx),
+            mCid(Cid),
+            mWid(Wid),
+            mSid(Sid),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x74, 0xdc, 0x8d, 0x31, 0x83, 0x7c, 0x92, 0x53, 0x8b, 0xbe, 0x2b, 0x76, 0x07, 0xa2, 0xaf, 0x98, 0x27, 0x26, 0xd2, 0x16,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Value(&this->mCtx);
+            e->Value(&this->mCid);
+            e->Value(&this->mWid);
+            e->Value(&this->mSid);
+            e->Int64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        CGLContextObj mCtx;
+        CGSConnectionID__P mCid;
+        CGSWindowID__P mWid;
+        CGSSurfaceID__P mSid;
+        int64_t mResult;
+    };
+
     class CGLSetCurrentContext: public Encodable {
     public:
         CGLSetCurrentContext() = default;
@@ -419,6 +529,123 @@ namespace gles {
         atom::Observations mobservations;
         CGLContextObj mCtx;
         int64_t mResult;
+    };
+
+    class CGSConnectionID: public Encodable {
+    public:
+        CGSConnectionID() = default;
+        CGSConnectionID(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x44, 0x54, 0x8b, 0xc2, 0x8e, 0x89, 0xcb, 0x34, 0x5f, 0xc6, 0x32, 0x5f, 0xd8, 0x3f, 0x4f, 0x0b, 0x38, 0x21, 0xf7, 0xa2,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class CGSConnectionID__S: public Encodable {
+    public:
+        CGSConnectionID__S() = default;
+        CGSConnectionID__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xb8, 0x92, 0xdf, 0x8c, 0xe0, 0x7b, 0x48, 0xa0, 0x2e, 0x72, 0x45, 0x2b, 0x8e, 0x08, 0xbf, 0x3a, 0x9b, 0x4f, 0x5d, 0x2f,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
+    };
+
+    class F64__P: public Encodable {
+    public:
+        F64__P() = default;
+        F64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf2, 0xcc, 0xdb, 0xcc, 0xed, 0x7e, 0x95, 0x7d, 0xf8, 0xdc, 0xe8, 0xbc, 0x49, 0xbf, 0xdd, 0x12, 0xd9, 0xf2, 0xd8, 0x55,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class CGSGetSurfaceBounds: public Encodable {
+    public:
+        CGSGetSurfaceBounds() = default;
+        CGSGetSurfaceBounds(atom::Observations observations, CGSConnectionID Cid, int32_t Wid, int32_t Sid, F64__P Bounds, int64_t Result) :
+            mobservations(observations),
+            mCid(Cid),
+            mWid(Wid),
+            mSid(Sid),
+            mBounds(Bounds),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xc3, 0x59, 0xf1, 0x88, 0xb4, 0x83, 0x28, 0xd2, 0x24, 0x88, 0xdf, 0xf5, 0xb5, 0x59, 0x80, 0xdd, 0x77, 0x5e, 0xfa, 0xd7,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Value(&this->mCid);
+            e->Int32(this->mWid);
+            e->Int32(this->mSid);
+            e->Value(&this->mBounds);
+            e->Int64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        CGSConnectionID mCid;
+        int32_t mWid;
+        int32_t mSid;
+        F64__P mBounds;
+        int64_t mResult;
+    };
+
+    class CGSSurfaceID__S: public Encodable {
+    public:
+        CGSSurfaceID__S() = default;
+        CGSSurfaceID__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf2, 0xbd, 0x74, 0x6c, 0x45, 0x68, 0xbc, 0x71, 0x0c, 0x0d, 0xc4, 0x8d, 0x7b, 0xc9, 0x40, 0x1b, 0xbe, 0xb9, 0xf5, 0xed,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
+    };
+
+    class CGSWindowID__S: public Encodable {
+    public:
+        CGSWindowID__S() = default;
+        CGSWindowID__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x88, 0x07, 0x63, 0x00, 0x36, 0x4d, 0x91, 0x9e, 0x1a, 0x10, 0x78, 0x10, 0xde, 0x80, 0xd8, 0x30, 0x03, 0x4e, 0x64, 0x7a,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
     };
 
     class Char__S: public Encodable {
@@ -1508,6 +1735,22 @@ namespace gles {
 
         uint64_t mAddress;
         uint32_t mPool;
+    };
+
+    class F64__S: public Encodable {
+    public:
+        F64__S() = default;
+        F64__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x6a, 0xef, 0x25, 0x73, 0x5b, 0x6a, 0x6b, 0x8e, 0xcd, 0x9c, 0x2f, 0x95, 0x76, 0x64, 0x3d, 0x9d, 0x20, 0x0f, 0x94, 0x39,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
     };
 
     class FlushPostBuffer: public Encodable {
@@ -6639,14 +6882,15 @@ namespace gles {
     class GlXMakeContextCurrent: public Encodable {
     public:
         GlXMakeContextCurrent() = default;
-        GlXMakeContextCurrent(atom::Observations observations, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx) :
+        GlXMakeContextCurrent(atom::Observations observations, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
             mobservations(observations),
             mDisplay(Display),
             mDraw(Draw),
             mRead(Read),
-            mCtx(Ctx) {}
+            mCtx(Ctx),
+            mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x78, 0x1c, 0x13, 0x6d, 0x45, 0x65, 0x07, 0xf2, 0x7d, 0xa0, 0x15, 0xa1, 0x59, 0x22, 0x6d, 0xbe, 0xbd, 0x15, 0xb8, 0x90,  } };
+            static gapic::Id ID{ { 0x4e, 0x6d, 0x3c, 0x63, 0x7f, 0x49, 0x79, 0x4e, 0x3d, 0xd0, 0xd9, 0x0c, 0xcf, 0x72, 0x94, 0x3f, 0x6b, 0xfd, 0x77, 0xfd,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -6655,6 +6899,7 @@ namespace gles {
             e->Value(&this->mDraw);
             e->Value(&this->mRead);
             e->Value(&this->mCtx);
+            e->Int64(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -6662,6 +6907,85 @@ namespace gles {
         GLXDrawable mDraw;
         GLXDrawable mRead;
         GLXContext mCtx;
+        int64_t mResult;
+    };
+
+    class GlXMakeCurrent: public Encodable {
+    public:
+        GlXMakeCurrent() = default;
+        GlXMakeCurrent(atom::Observations observations, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
+            mobservations(observations),
+            mDisplay(Display),
+            mDrawable(Drawable),
+            mCtx(Ctx),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xa6, 0xaf, 0xc1, 0x6f, 0x1c, 0x9b, 0xdb, 0x26, 0x13, 0x0b, 0x75, 0xa3, 0x14, 0xb9, 0x1b, 0x58, 0x37, 0xa6, 0x23, 0xc8,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Value(&this->mDisplay);
+            e->Value(&this->mDrawable);
+            e->Value(&this->mCtx);
+            e->Int64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        Void__P mDisplay;
+        GLXDrawable mDrawable;
+        GLXContext mCtx;
+        int64_t mResult;
+    };
+
+    class Int__P: public Encodable {
+    public:
+        Int__P() = default;
+        Int__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class GlXQueryDrawable: public Encodable {
+    public:
+        GlXQueryDrawable() = default;
+        GlXQueryDrawable(atom::Observations observations, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
+            mobservations(observations),
+            mDisplay(Display),
+            mDraw(Draw),
+            mAttribute(Attribute),
+            mValue(Value),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x17, 0xd3, 0x19, 0xa4, 0xba, 0x07, 0x32, 0xb5, 0xc2, 0x76, 0xae, 0xde, 0xfe, 0x31, 0x95, 0x07, 0x79, 0xdb, 0xd0, 0xd6,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Value(&this->mDisplay);
+            e->Value(&this->mDraw);
+            e->Int64(this->mAttribute);
+            e->Value(&this->mValue);
+            e->Int64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        Void__P mDisplay;
+        GLXDrawable mDraw;
+        int64_t mAttribute;
+        Int__P mValue;
+        int64_t mResult;
     };
 
     class GlXSwapBuffers: public Encodable {
@@ -6772,25 +7096,6 @@ namespace gles {
         }
 
         SliceInfo mSliceInfo;
-    };
-
-    class Int__P: public Encodable {
-    public:
-        Int__P() = default;
-        Int__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
-        }
-
-        uint64_t mAddress;
-        uint32_t mPool;
     };
 
     class Vec2f: public Encodable {

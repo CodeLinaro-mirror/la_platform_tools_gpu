@@ -33,7 +33,8 @@ public:
                               EGLContext context);
     BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
     CGLError CGLSetCurrentContext(CGLContextObj ctx);
-    void glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
+    Bool glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
+    Bool glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx);
 
     inline void RegisterSymbol(const std::string& name, void* symbol) {
         mSymbols.emplace(name, symbol);

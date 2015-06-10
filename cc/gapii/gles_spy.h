@@ -46,14 +46,19 @@ public:
     inline void* glXCreateContext(void* dpy, void* vis, void* shareList, bool direct);
     inline void* glXCreateNewContext(void* display, void* fbconfig, uint32_t type, void* shared,
                                      bool direct);
-    inline void glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx);
+    inline int glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx);
+    inline int glXMakeCurrent(void* display, void* drawable, void* ctx);
     inline void glXSwapBuffers(void* display, void* drawable);
+    inline int glXQueryDrawable(void* display, void* draw, int attribute, int* value);
     inline void* wglCreateContext(void* hdc);
     inline void* wglCreateContextAttribsARB(void* hdc, void* hShareContext, int* attribList);
     inline int wglMakeCurrent(void* hdc, void* hglrc);
     inline void wglSwapBuffers(void* hdc);
     inline int CGLCreateContext(void* pix, void* share, void** ctx);
     inline int CGLSetCurrentContext(void* ctx);
+    inline int CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* sid);
+    inline int CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, double* bounds);
+    inline int CGLFlushDrawable(void* ctx);
     inline void glEnableClientState(uint32_t type);
     inline void glDisableClientState(uint32_t type);
     inline void glGetProgramBinaryOES(uint32_t program, int32_t buffer_size, int32_t* bytes_written,
@@ -652,15 +657,18 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
     return result;
 }
 
-inline void GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx) {
+inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read, void* ctx) {
     GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)\n", display, draw, read, ctx);
+
+    int result = 0;
 
     Observations observations;
     do {
         std::shared_ptr<Context> l_SetContext_4_context = this->GLXContexts[ctx];
         this->Contexts[this->CurrentThread] = l_SetContext_4_context;
         observe(observations.mReads);
-        mImports.glXMakeContextCurrent(display, draw, read, ctx);
+        result = mImports.glXMakeContextCurrent(display, draw, read, ctx);
+        break;
     } while (false);
     observe(observations.mWrites);
 
@@ -670,6 +678,34 @@ inline void GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read
     mEncoder->Pointer(draw);
     mEncoder->Pointer(read);
     mEncoder->Pointer(ctx);
+    mEncoder->Int64(result);
+
+    return result;
+}
+
+inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
+    GAPID_INFO("glXMakeCurrent(%p, %p, %p)\n", display, drawable, ctx);
+
+    int result = 0;
+
+    Observations observations;
+    do {
+        std::shared_ptr<Context> l_SetContext_5_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_5_context;
+        observe(observations.mReads);
+        result = mImports.glXMakeCurrent(display, drawable, ctx);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(8);  // Type ID -- TODO: mEncoder->Id(GL_X_MAKE_CURRENT_ID);
+    mEncoder->Value(&observations);
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(drawable);
+    mEncoder->Pointer(ctx);
+    mEncoder->Int64(result);
+
+    return result;
 }
 
 inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
@@ -682,10 +718,35 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(8);  // Type ID -- TODO: mEncoder->Id(GL_X_SWAP_BUFFERS_ID);
+    mEncoder->Uint16(9);  // Type ID -- TODO: mEncoder->Id(GL_X_SWAP_BUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(display);
     mEncoder->Pointer(drawable);
+}
+
+inline int GlesSpy::glXQueryDrawable(void* display, void* draw, int attribute, int* value) {
+    GAPID_INFO("glXQueryDrawable(%p, %p, %d, %p)\n", display, draw, attribute, value);
+
+    int result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.glXQueryDrawable(display, draw, attribute, value);
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(10);  // Type ID -- TODO: mEncoder->Id(GL_X_QUERY_DRAWABLE_ID);
+    mEncoder->Value(&observations);
+    mEncoder->Pointer(display);
+    mEncoder->Pointer(draw);
+    mEncoder->Int64(attribute);
+    mEncoder->Pointer(value);
+    mEncoder->Int64(result);
+
+    return result;
 }
 
 inline void* GlesSpy::wglCreateContext(void* hdc) {
@@ -743,13 +804,13 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
         }
-        std::shared_ptr<Context> l_CreateContext_5_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_5_result;
+        std::shared_ptr<Context> l_CreateContext_6_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_6_result;
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(9);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ID);
+    mEncoder->Uint16(11);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(hdc);
     mEncoder->Pointer(result);
@@ -812,13 +873,13 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
         }
-        std::shared_ptr<Context> l_CreateContext_6_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_6_result;
+        std::shared_ptr<Context> l_CreateContext_7_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_7_result;
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(10);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ATTRIBS_A_R_B_ID);
+    mEncoder->Uint16(12);  // Type ID -- TODO: mEncoder->Id(WGL_CREATE_CONTEXT_ATTRIBS_A_R_B_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(hdc);
     mEncoder->Pointer(hShareContext);
@@ -835,15 +896,15 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_7_context = this->WGLContexts[hglrc];
-        this->Contexts[this->CurrentThread] = l_SetContext_7_context;
+        std::shared_ptr<Context> l_SetContext_8_context = this->WGLContexts[hglrc];
+        this->Contexts[this->CurrentThread] = l_SetContext_8_context;
         observe(observations.mReads);
         result = mImports.wglMakeCurrent(hdc, hglrc);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(11);  // Type ID -- TODO: mEncoder->Id(WGL_MAKE_CURRENT_ID);
+    mEncoder->Uint16(13);  // Type ID -- TODO: mEncoder->Id(WGL_MAKE_CURRENT_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(hdc);
     mEncoder->Pointer(hglrc);
@@ -862,7 +923,7 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(12);  // Type ID -- TODO: mEncoder->Id(WGL_SWAP_BUFFERS_ID);
+    mEncoder->Uint16(14);  // Type ID -- TODO: mEncoder->Id(WGL_SWAP_BUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(hdc);
 }
@@ -922,14 +983,14 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
         }
-        std::shared_ptr<Context> l_CreateContext_8_result = l_ctx;
-        this->CGLContexts[l_context] = l_CreateContext_8_result;
+        std::shared_ptr<Context> l_CreateContext_9_result = l_ctx;
+        this->CGLContexts[l_context] = l_CreateContext_9_result;
         write(slice(ctx, 0, 1), 0, l_context);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(13);  // Type ID -- TODO: mEncoder->Id(C_G_L_CREATE_CONTEXT_ID);
+    mEncoder->Uint16(15);  // Type ID -- TODO: mEncoder->Id(C_G_L_CREATE_CONTEXT_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(pix);
     mEncoder->Pointer(share);
@@ -946,15 +1007,88 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_9_context = this->CGLContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_9_context;
+        std::shared_ptr<Context> l_SetContext_10_context = this->CGLContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_10_context;
         observe(observations.mReads);
         result = mImports.CGLSetCurrentContext(ctx);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(14);  // Type ID -- TODO: mEncoder->Id(C_G_L_SET_CURRENT_CONTEXT_ID);
+    mEncoder->Uint16(16);  // Type ID -- TODO: mEncoder->Id(C_G_L_SET_CURRENT_CONTEXT_ID);
+    mEncoder->Value(&observations);
+    mEncoder->Pointer(ctx);
+    mEncoder->Int64(result);
+
+    return result;
+}
+
+inline int GlesSpy::CGLGetSurface(void* ctx, void** cid, int32_t* wid, int32_t* sid) {
+    GAPID_INFO("CGLGetSurface(%p, %p, %p, %p)\n", ctx, cid, wid, sid);
+
+    int result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.CGLGetSurface(ctx, cid, wid, sid);
+        write(slice(cid, 0, 1), 0, slice(cid, 0, 1)[0]);
+        write(slice(wid, 0, 1), 0, slice(wid, 0, 1)[0]);
+        write(slice(sid, 0, 1), 0, slice(sid, 0, 1)[0]);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(17);  // Type ID -- TODO: mEncoder->Id(C_G_L_GET_SURFACE_ID);
+    mEncoder->Value(&observations);
+    mEncoder->Pointer(ctx);
+    mEncoder->Pointer(cid);
+    mEncoder->Pointer(wid);
+    mEncoder->Pointer(sid);
+    mEncoder->Int64(result);
+
+    return result;
+}
+
+inline int GlesSpy::CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, double* bounds) {
+    GAPID_INFO("CGSGetSurfaceBounds(%p, %d, %d, %p)\n", cid, wid, sid, bounds);
+
+    int result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.CGSGetSurfaceBounds(cid, wid, sid, bounds);
+        write(slice(bounds, 0, 4));
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(18);  // Type ID -- TODO: mEncoder->Id(C_G_S_GET_SURFACE_BOUNDS_ID);
+    mEncoder->Value(&observations);
+    mEncoder->Pointer(cid);
+    mEncoder->Int32(wid);
+    mEncoder->Int32(sid);
+    mEncoder->Pointer(bounds);
+    mEncoder->Int64(result);
+
+    return result;
+}
+
+inline int GlesSpy::CGLFlushDrawable(void* ctx) {
+    GAPID_INFO("CGLFlushDrawable(%p)\n", ctx);
+
+    int result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.CGLFlushDrawable(ctx);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(19);  // Type ID -- TODO: mEncoder->Id(C_G_L_FLUSH_DRAWABLE_ID);
     mEncoder->Value(&observations);
     mEncoder->Pointer(ctx);
     mEncoder->Int64(result);
@@ -968,15 +1102,15 @@ inline void GlesSpy::glEnableClientState(uint32_t type) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_10_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_10_result;
+        std::shared_ptr<Context> l_GetContext_11_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_11_result;
         l_ctx->mCapabilities[(uint32_t)(type)] = true;
         observe(observations.mReads);
         mImports.glEnableClientState(type);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(15);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_CLIENT_STATE_ID);
+    mEncoder->Uint16(20);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_CLIENT_STATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(type));
 }
@@ -987,15 +1121,15 @@ inline void GlesSpy::glDisableClientState(uint32_t type) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_11_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_11_result;
+        std::shared_ptr<Context> l_GetContext_12_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_12_result;
         l_ctx->mCapabilities[(uint32_t)(type)] = false;
         observe(observations.mReads);
         mImports.glDisableClientState(type);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(16);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_CLIENT_STATE_ID);
+    mEncoder->Uint16(21);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_CLIENT_STATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(type));
 }
@@ -1017,7 +1151,7 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(17);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_BINARY_O_E_S_ID);
+    mEncoder->Uint16(22);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_BINARY_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_size);
@@ -1037,7 +1171,7 @@ inline void GlesSpy::glProgramBinaryOES(uint32_t program, uint32_t binary_format
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(18);  // Type ID -- TODO: mEncoder->Id(GL_PROGRAM_BINARY_O_E_S_ID);
+    mEncoder->Uint16(23);  // Type ID -- TODO: mEncoder->Id(GL_PROGRAM_BINARY_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(binary_format);
@@ -1056,7 +1190,7 @@ inline void GlesSpy::glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int3
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(19);  // Type ID -- TODO: mEncoder->Id(GL_START_TILING_Q_C_O_M_ID);
+    mEncoder->Uint16(24);  // Type ID -- TODO: mEncoder->Id(GL_START_TILING_Q_C_O_M_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(x);
     mEncoder->Int32(y);
@@ -1075,7 +1209,7 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(20);  // Type ID -- TODO: mEncoder->Id(GL_END_TILING_Q_C_O_M_ID);
+    mEncoder->Uint16(25);  // Type ID -- TODO: mEncoder->Id(GL_END_TILING_Q_C_O_M_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(preserve_mask));
 }
@@ -1091,7 +1225,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(21);  // Type ID -- TODO: mEncoder->Id(GL_DISCARD_FRAMEBUFFER_E_X_T_ID);
+    mEncoder->Uint16(26);  // Type ID -- TODO: mEncoder->Id(GL_DISCARD_FRAMEBUFFER_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(numAttachments);
@@ -1113,7 +1247,7 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(22);  // Type ID -- TODO: mEncoder->Id(GL_INSERT_EVENT_MARKER_E_X_T_ID);
+    mEncoder->Uint16(27);  // Type ID -- TODO: mEncoder->Id(GL_INSERT_EVENT_MARKER_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(length);
     mEncoder->Pointer(marker);
@@ -1134,7 +1268,7 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(23);  // Type ID -- TODO: mEncoder->Id(GL_PUSH_GROUP_MARKER_E_X_T_ID);
+    mEncoder->Uint16(28);  // Type ID -- TODO: mEncoder->Id(GL_PUSH_GROUP_MARKER_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(length);
     mEncoder->Pointer(marker);
@@ -1150,7 +1284,7 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(24);  // Type ID -- TODO: mEncoder->Id(GL_POP_GROUP_MARKER_E_X_T_ID);
+    mEncoder->Uint16(29);  // Type ID -- TODO: mEncoder->Id(GL_POP_GROUP_MARKER_E_X_T_ID);
     mEncoder->Value(&observations);
 }
 
@@ -1165,7 +1299,7 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(25);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE1D_E_X_T_ID);
+    mEncoder->Uint16(30);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE1D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(levels);
@@ -1184,7 +1318,7 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(26);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE2D_E_X_T_ID);
+    mEncoder->Uint16(31);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE2D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(levels);
@@ -1205,7 +1339,7 @@ inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(27);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE3D_E_X_T_ID);
+    mEncoder->Uint16(32);  // Type ID -- TODO: mEncoder->Id(GL_TEX_STORAGE3D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(levels);
@@ -1227,7 +1361,7 @@ inline void GlesSpy::glTextureStorage1DEXT(uint32_t texture, uint32_t target, in
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(28);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE1D_E_X_T_ID);
+    mEncoder->Uint16(33);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE1D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(texture);
     mEncoder->Uint32(static_cast<uint32_t>(target));
@@ -1248,7 +1382,7 @@ inline void GlesSpy::glTextureStorage2DEXT(uint32_t texture, uint32_t target, in
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(29);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE2D_E_X_T_ID);
+    mEncoder->Uint16(34);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE2D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(texture);
     mEncoder->Uint32(static_cast<uint32_t>(target));
@@ -1271,7 +1405,7 @@ inline void GlesSpy::glTextureStorage3DEXT(uint32_t texture, uint32_t target, in
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(30);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE3D_E_X_T_ID);
+    mEncoder->Uint16(35);  // Type ID -- TODO: mEncoder->Id(GL_TEXTURE_STORAGE3D_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(texture);
     mEncoder->Uint32(static_cast<uint32_t>(target));
@@ -1289,8 +1423,8 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     do {
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_12_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_12_result;
+        std::shared_ptr<Context> l_GetContext_13_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_13_result;
         observe(observations.mReads);
         mImports.glGenVertexArraysOES(count, arrays);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -1303,7 +1437,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(31);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_O_E_S_ID);
+    mEncoder->Uint16(36);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(arrays);
@@ -1315,8 +1449,8 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_13_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_13_result;
+        std::shared_ptr<Context> l_GetContext_14_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_14_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>((new VertexArray()));
@@ -1327,7 +1461,7 @@ inline void GlesSpy::glBindVertexArrayOES(uint32_t array) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(32);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_O_E_S_ID);
+    mEncoder->Uint16(37);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(array);
 }
@@ -1338,8 +1472,8 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_14_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_14_result;
+        std::shared_ptr<Context> l_GetContext_15_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_15_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -1350,7 +1484,7 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(33);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_O_E_S_ID);
+    mEncoder->Uint16(38);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(arrays);
@@ -1364,15 +1498,15 @@ inline bool GlesSpy::glIsVertexArrayOES(uint32_t array) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_15_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_15_result;
+        std::shared_ptr<Context> l_GetContext_16_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_16_result;
         observe(observations.mReads);
         result = mImports.glIsVertexArrayOES(array);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(34);  // Type ID -- TODO: mEncoder->Id(GL_IS_VERTEX_ARRAY_O_E_S_ID);
+    mEncoder->Uint16(39);  // Type ID -- TODO: mEncoder->Id(GL_IS_VERTEX_ARRAY_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(array);
     mEncoder->Bool(result);
@@ -1391,7 +1525,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, void* image) 
     observe(observations.mWrites);
 
     mEncoder->Uint16(
-            35);  // Type ID -- TODO: mEncoder->Id(GL_E_G_L_IMAGE_TARGET_TEXTURE2D_O_E_S_ID);
+            40);  // Type ID -- TODO: mEncoder->Id(GL_E_G_L_IMAGE_TARGET_TEXTURE2D_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Pointer(image);
@@ -1407,7 +1541,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, voi
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(36);  // Type ID -- TODO:
+    mEncoder->Uint16(41);  // Type ID -- TODO:
                            // mEncoder->Id(GL_E_G_L_IMAGE_TARGET_RENDERBUFFER_STORAGE_O_E_S_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
@@ -1427,7 +1561,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(37);  // Type ID -- TODO: mEncoder->Id(GL_GET_GRAPHICS_RESET_STATUS_E_X_T_ID);
+    mEncoder->Uint16(42);  // Type ID -- TODO: mEncoder->Id(GL_GET_GRAPHICS_RESET_STATUS_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(result));
 
@@ -1440,8 +1574,8 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, int32_t location, ch
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_16_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_16_result;
+        std::shared_ptr<Context> l_GetContext_17_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_17_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         l_p->mAttributeBindings[name] = location;
         observe(observations.mReads);
@@ -1449,7 +1583,7 @@ inline void GlesSpy::glBindAttribLocation(uint32_t program, int32_t location, ch
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(38);  // Type ID -- TODO: mEncoder->Id(GL_BIND_ATTRIB_LOCATION_ID);
+    mEncoder->Uint16(43);  // Type ID -- TODO: mEncoder->Id(GL_BIND_ATTRIB_LOCATION_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
@@ -1462,8 +1596,8 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_17_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_17_result;
+        std::shared_ptr<Context> l_GetContext_18_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_18_result;
         l_ctx->mBlending.mSrcRgbBlendFactor = src_factor;
         l_ctx->mBlending.mSrcAlphaBlendFactor = src_factor;
         l_ctx->mBlending.mDstRgbBlendFactor = dst_factor;
@@ -1473,7 +1607,7 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(39);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_FUNC_ID);
+    mEncoder->Uint16(44);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_FUNC_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(src_factor));
     mEncoder->Uint32(static_cast<uint32_t>(dst_factor));
@@ -1487,8 +1621,8 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_18_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_18_result;
+        std::shared_ptr<Context> l_GetContext_19_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_19_result;
         l_ctx->mBlending.mSrcRgbBlendFactor = src_factor_rgb;
         l_ctx->mBlending.mDstRgbBlendFactor = dst_factor_rgb;
         l_ctx->mBlending.mSrcAlphaBlendFactor = src_factor_alpha;
@@ -1499,7 +1633,7 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(40);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_FUNC_SEPARATE_ID);
+    mEncoder->Uint16(45);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_FUNC_SEPARATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(src_factor_rgb));
     mEncoder->Uint32(static_cast<uint32_t>(dst_factor_rgb));
@@ -1513,8 +1647,8 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_19_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_19_result;
+        std::shared_ptr<Context> l_GetContext_20_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_20_result;
         l_ctx->mBlending.mBlendEquationRgb = equation;
         l_ctx->mBlending.mBlendEquationAlpha = equation;
         observe(observations.mReads);
@@ -1522,7 +1656,7 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(41);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_EQUATION_ID);
+    mEncoder->Uint16(46);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_EQUATION_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(equation));
 }
@@ -1533,8 +1667,8 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_20_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_20_result;
+        std::shared_ptr<Context> l_GetContext_21_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_21_result;
         l_ctx->mBlending.mBlendEquationRgb = rgb;
         l_ctx->mBlending.mBlendEquationAlpha = alpha;
         observe(observations.mReads);
@@ -1542,7 +1676,7 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(42);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_EQUATION_SEPARATE_ID);
+    mEncoder->Uint16(47);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_EQUATION_SEPARATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(rgb));
     mEncoder->Uint32(static_cast<uint32_t>(alpha));
@@ -1554,8 +1688,8 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_21_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_21_result;
+        std::shared_ptr<Context> l_GetContext_22_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_22_result;
         l_ctx->mBlending.mBlendColor =
                 Color().SetRed(red).SetGreen(green).SetBlue(blue).SetAlpha(alpha);
         observe(observations.mReads);
@@ -1563,7 +1697,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(43);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_COLOR_ID);
+    mEncoder->Uint16(48);  // Type ID -- TODO: mEncoder->Id(GL_BLEND_COLOR_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(red);
     mEncoder->Float32(green);
@@ -1577,15 +1711,15 @@ inline void GlesSpy::glEnableVertexAttribArray(int32_t location) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_22_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_22_result;
+        std::shared_ptr<Context> l_GetContext_23_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_23_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = true;
         observe(observations.mReads);
         mImports.glEnableVertexAttribArray(location);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(44);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_VERTEX_ATTRIB_ARRAY_ID);
+    mEncoder->Uint16(49);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_VERTEX_ATTRIB_ARRAY_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
 }
@@ -1596,15 +1730,15 @@ inline void GlesSpy::glDisableVertexAttribArray(int32_t location) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_23_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_23_result;
+        std::shared_ptr<Context> l_GetContext_24_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_24_result;
         l_ctx->mVertexAttributeArrays[location]->mEnabled = false;
         observe(observations.mReads);
         mImports.glDisableVertexAttribArray(location);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(45);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_VERTEX_ATTRIB_ARRAY_ID);
+    mEncoder->Uint16(50);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_VERTEX_ATTRIB_ARRAY_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
 }
@@ -1617,8 +1751,8 @@ inline void GlesSpy::glVertexAttribPointer(int32_t location, int32_t size, uint3
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_24_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_24_result;
+        std::shared_ptr<Context> l_GetContext_25_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_25_result;
         std::shared_ptr<VertexAttributeArray> l_a = l_ctx->mVertexAttributeArrays[location];
         l_a->mSize = (uint32_t)(size);
         l_a->mType = type;
@@ -1631,7 +1765,7 @@ inline void GlesSpy::glVertexAttribPointer(int32_t location, int32_t size, uint3
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(46);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB_POINTER_ID);
+    mEncoder->Uint16(51);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB_POINTER_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(size);
@@ -1660,7 +1794,7 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, int32_t location, int32
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(47);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
+    mEncoder->Uint16(52);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
@@ -1690,7 +1824,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(48);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_ID);
+    mEncoder->Uint16(53);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
@@ -1714,7 +1848,7 @@ inline uint32_t GlesSpy::glGetError() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(49);  // Type ID -- TODO: mEncoder->Id(GL_GET_ERROR_ID);
+    mEncoder->Uint16(54);  // Type ID -- TODO: mEncoder->Id(GL_GET_ERROR_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(result));
 
@@ -1732,7 +1866,7 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(50);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAMIV_ID);
+    mEncoder->Uint16(55);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAMIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -1745,8 +1879,8 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_25_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_25_result;
+        std::shared_ptr<Context> l_GetContext_26_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_26_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         observe(observations.mReads);
         mImports.glGetShaderiv(shader, parameter, value);
@@ -1780,7 +1914,7 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(51);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADERIV_ID);
+    mEncoder->Uint16(56);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADERIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -1800,7 +1934,7 @@ inline int32_t GlesSpy::glGetUniformLocation(uint32_t program, char* name) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(52);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORM_LOCATION_ID);
+    mEncoder->Uint16(57);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORM_LOCATION_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->String(name);
@@ -1822,7 +1956,7 @@ inline int32_t GlesSpy::glGetAttribLocation(uint32_t program, char* name) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(53);  // Type ID -- TODO: mEncoder->Id(GL_GET_ATTRIB_LOCATION_ID);
+    mEncoder->Uint16(58);  // Type ID -- TODO: mEncoder->Id(GL_GET_ATTRIB_LOCATION_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->String(name);
@@ -1837,15 +1971,15 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_26_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_26_result;
+        std::shared_ptr<Context> l_GetContext_27_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_27_result;
         l_ctx->mPixelStorage[parameter] = value;
         observe(observations.mReads);
         mImports.glPixelStorei(parameter, value);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(54);  // Type ID -- TODO: mEncoder->Id(GL_PIXEL_STOREI_ID);
+    mEncoder->Uint16(59);  // Type ID -- TODO: mEncoder->Id(GL_PIXEL_STOREI_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
     mEncoder->Int32(value);
@@ -1857,8 +1991,8 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_27_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_27_result;
+        std::shared_ptr<Context> l_GetContext_28_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_28_result;
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
@@ -1904,7 +2038,7 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(55);  // Type ID -- TODO: mEncoder->Id(GL_TEX_PARAMETERI_ID);
+    mEncoder->Uint16(60);  // Type ID -- TODO: mEncoder->Id(GL_TEX_PARAMETERI_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -1917,8 +2051,8 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_28_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_28_result;
+        std::shared_ptr<Context> l_GetContext_29_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_29_result;
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
@@ -1964,7 +2098,7 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(56);  // Type ID -- TODO: mEncoder->Id(GL_TEX_PARAMETERF_ID);
+    mEncoder->Uint16(61);  // Type ID -- TODO: mEncoder->Id(GL_TEX_PARAMETERF_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -1977,8 +2111,8 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_29_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_29_result;
+        std::shared_ptr<Context> l_GetContext_30_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_30_result;
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         observe(observations.mReads);
@@ -1998,7 +2132,7 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(57);  // Type ID -- TODO: mEncoder->Id(GL_GET_TEX_PARAMETERIV_ID);
+    mEncoder->Uint16(62);  // Type ID -- TODO: mEncoder->Id(GL_GET_TEX_PARAMETERIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -2011,8 +2145,8 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_30_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_30_result;
+        std::shared_ptr<Context> l_GetContext_31_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_31_result;
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         observe(observations.mReads);
@@ -2032,7 +2166,7 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(58);  // Type ID -- TODO: mEncoder->Id(GL_GET_TEX_PARAMETERFV_ID);
+    mEncoder->Uint16(63);  // Type ID -- TODO: mEncoder->Id(GL_GET_TEX_PARAMETERFV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -2045,8 +2179,8 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_31_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_31_result;
+        std::shared_ptr<Context> l_GetContext_32_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_32_result;
         Slice<int32_t> l_v = make<int32_t>(1);
         observe(observations.mReads);
         mImports.glUniform1i(location, value);
@@ -2059,7 +2193,7 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(59);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1I_ID);
+    mEncoder->Uint16(64);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1I_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(value);
@@ -2071,8 +2205,8 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_32_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_32_result;
+        std::shared_ptr<Context> l_GetContext_33_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_33_result;
         Slice<Vec2i> l_v = make<Vec2i>(1);
         observe(observations.mReads);
         mImports.glUniform2i(location, value0, value1);
@@ -2085,7 +2219,7 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(60);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2I_ID);
+    mEncoder->Uint16(65);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2I_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(value0);
@@ -2098,8 +2232,8 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_33_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_33_result;
+        std::shared_ptr<Context> l_GetContext_34_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_34_result;
         Slice<Vec3i> l_v = make<Vec3i>(1);
         observe(observations.mReads);
         mImports.glUniform3i(location, value0, value1, value2);
@@ -2112,7 +2246,7 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(61);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3I_ID);
+    mEncoder->Uint16(66);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3I_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(value0);
@@ -2127,8 +2261,8 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_34_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_34_result;
+        std::shared_ptr<Context> l_GetContext_35_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_35_result;
         Slice<Vec4i> l_v = make<Vec4i>(1);
         observe(observations.mReads);
         mImports.glUniform4i(location, value0, value1, value2, value3);
@@ -2141,7 +2275,7 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(62);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4I_ID);
+    mEncoder->Uint16(67);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4I_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(value0);
@@ -2156,8 +2290,8 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_35_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_35_result;
+        std::shared_ptr<Context> l_GetContext_36_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_36_result;
         Slice<int32_t> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2169,7 +2303,7 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(63);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1IV_ID);
+    mEncoder->Uint16(68);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1IV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2182,8 +2316,8 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_36_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_36_result;
+        std::shared_ptr<Context> l_GetContext_37_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_37_result;
         Slice<Vec2i> l_v = slice((Vec2i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2195,7 +2329,7 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(64);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2IV_ID);
+    mEncoder->Uint16(69);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2IV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2208,8 +2342,8 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_37_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_37_result;
+        std::shared_ptr<Context> l_GetContext_38_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_38_result;
         Slice<Vec3i> l_v = slice((Vec3i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2221,7 +2355,7 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(65);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3IV_ID);
+    mEncoder->Uint16(70);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3IV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2234,8 +2368,8 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_38_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_38_result;
+        std::shared_ptr<Context> l_GetContext_39_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_39_result;
         Slice<Vec4i> l_v = slice((Vec4i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2247,7 +2381,7 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(66);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4IV_ID);
+    mEncoder->Uint16(71);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4IV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2260,8 +2394,8 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_39_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_39_result;
+        std::shared_ptr<Context> l_GetContext_40_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_40_result;
         Slice<float> l_v = make<float>(1);
         observe(observations.mReads);
         mImports.glUniform1f(location, value);
@@ -2274,7 +2408,7 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(67);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1F_ID);
+    mEncoder->Uint16(72);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value);
@@ -2286,8 +2420,8 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_40_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_40_result;
+        std::shared_ptr<Context> l_GetContext_41_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_41_result;
         Slice<Vec2f> l_v = make<Vec2f>(1);
         observe(observations.mReads);
         mImports.glUniform2f(location, value0, value1);
@@ -2300,7 +2434,7 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(68);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2F_ID);
+    mEncoder->Uint16(73);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2313,8 +2447,8 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_41_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_41_result;
+        std::shared_ptr<Context> l_GetContext_42_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_42_result;
         Slice<Vec3f> l_v = make<Vec3f>(1);
         observe(observations.mReads);
         mImports.glUniform3f(location, value0, value1, value2);
@@ -2327,7 +2461,7 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(69);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3F_ID);
+    mEncoder->Uint16(74);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2342,8 +2476,8 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_42_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_42_result;
+        std::shared_ptr<Context> l_GetContext_43_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_43_result;
         Slice<Vec4f> l_v = make<Vec4f>(1);
         observe(observations.mReads);
         mImports.glUniform4f(location, value0, value1, value2, value3);
@@ -2356,7 +2490,7 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(70);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4F_ID);
+    mEncoder->Uint16(75);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2371,8 +2505,8 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_43_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_43_result;
+        std::shared_ptr<Context> l_GetContext_44_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_44_result;
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2384,7 +2518,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(71);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1FV_ID);
+    mEncoder->Uint16(76);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2397,8 +2531,8 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_44_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_44_result;
+        std::shared_ptr<Context> l_GetContext_45_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
         Slice<Vec2f> l_v = slice((Vec2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2410,7 +2544,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(72);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2FV_ID);
+    mEncoder->Uint16(77);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2423,8 +2557,8 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_45_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
+        std::shared_ptr<Context> l_GetContext_46_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
         Slice<Vec3f> l_v = slice((Vec3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2436,7 +2570,7 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(73);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3FV_ID);
+    mEncoder->Uint16(78);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2449,8 +2583,8 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_46_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
+        std::shared_ptr<Context> l_GetContext_47_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_47_result;
         Slice<Vec4f> l_v = slice((Vec4f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2462,7 +2596,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(74);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4FV_ID);
+    mEncoder->Uint16(79);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2476,8 +2610,8 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_47_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_47_result;
+        std::shared_ptr<Context> l_GetContext_48_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_48_result;
         Slice<Mat2f> l_v = slice((Mat2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2489,7 +2623,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(75);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX2FV_ID);
+    mEncoder->Uint16(80);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX2FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2504,8 +2638,8 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_48_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_48_result;
+        std::shared_ptr<Context> l_GetContext_49_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_49_result;
         Slice<Mat3f> l_v = slice((Mat3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2517,7 +2651,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(76);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX3FV_ID);
+    mEncoder->Uint16(81);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX3FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2532,8 +2666,8 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool tr
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_49_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_49_result;
+        std::shared_ptr<Context> l_GetContext_50_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_50_result;
         Slice<Mat4f> l_v = slice((Mat4f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
@@ -2544,7 +2678,7 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool tr
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(77);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX4FV_ID);
+    mEncoder->Uint16(82);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_MATRIX4FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Int32(count);
@@ -2562,7 +2696,7 @@ inline void GlesSpy::glGetUniformfv(uint32_t program, int32_t location, float* v
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(78);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORMFV_ID);
+    mEncoder->Uint16(83);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORMFV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
@@ -2579,7 +2713,7 @@ inline void GlesSpy::glGetUniformiv(uint32_t program, int32_t location, int32_t*
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(79);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORMIV_ID);
+    mEncoder->Uint16(84);  // Type ID -- TODO: mEncoder->Id(GL_GET_UNIFORMIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(location);
@@ -2596,7 +2730,7 @@ inline void GlesSpy::glVertexAttrib1f(int32_t location, float value0) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(80);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1F_ID);
+    mEncoder->Uint16(85);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2612,7 +2746,7 @@ inline void GlesSpy::glVertexAttrib2f(int32_t location, float value0, float valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(81);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2F_ID);
+    mEncoder->Uint16(86);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2629,7 +2763,7 @@ inline void GlesSpy::glVertexAttrib3f(int32_t location, float value0, float valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(82);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3F_ID);
+    mEncoder->Uint16(87);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2648,7 +2782,7 @@ inline void GlesSpy::glVertexAttrib4f(int32_t location, float value0, float valu
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(83);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4F_ID);
+    mEncoder->Uint16(88);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4F_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Float32(value0);
@@ -2668,7 +2802,7 @@ inline void GlesSpy::glVertexAttrib1fv(int32_t location, float* value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(84);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1FV_ID);
+    mEncoder->Uint16(89);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Pointer(value);
@@ -2685,7 +2819,7 @@ inline void GlesSpy::glVertexAttrib2fv(int32_t location, float* value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(85);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2FV_ID);
+    mEncoder->Uint16(90);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Pointer(value);
@@ -2702,7 +2836,7 @@ inline void GlesSpy::glVertexAttrib3fv(int32_t location, float* value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(86);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3FV_ID);
+    mEncoder->Uint16(91);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Pointer(value);
@@ -2719,7 +2853,7 @@ inline void GlesSpy::glVertexAttrib4fv(int32_t location, float* value) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(87);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4FV_ID);
+    mEncoder->Uint16(92);  // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4FV_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(location);
     mEncoder->Pointer(value);
@@ -2739,7 +2873,7 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(88);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_PRECISION_FORMAT_ID);
+    mEncoder->Uint16(93);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_PRECISION_FORMAT_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(shader_type));
     mEncoder->Uint32(static_cast<uint32_t>(precision_type));
@@ -2753,15 +2887,15 @@ inline void GlesSpy::glDepthMask(bool enabled) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_50_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_50_result;
+        std::shared_ptr<Context> l_GetContext_51_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_51_result;
         l_ctx->mRasterizing.mDepthMask = enabled;
         observe(observations.mReads);
         mImports.glDepthMask(enabled);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(89);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_MASK_ID);
+    mEncoder->Uint16(94);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_MASK_ID);
     mEncoder->Value(&observations);
     mEncoder->Bool(enabled);
 }
@@ -2772,15 +2906,15 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_51_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_51_result;
+        std::shared_ptr<Context> l_GetContext_52_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_52_result;
         l_ctx->mRasterizing.mDepthTestFunction = function;
         observe(observations.mReads);
         mImports.glDepthFunc(function);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(90);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_FUNC_ID);
+    mEncoder->Uint16(95);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_FUNC_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(function));
 }
@@ -2791,8 +2925,8 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_52_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_52_result;
+        std::shared_ptr<Context> l_GetContext_53_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_53_result;
         l_ctx->mRasterizing.mDepthNear = near;
         l_ctx->mRasterizing.mDepthFar = far;
         observe(observations.mReads);
@@ -2800,7 +2934,7 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(91);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_RANGEF_ID);
+    mEncoder->Uint16(96);  // Type ID -- TODO: mEncoder->Id(GL_DEPTH_RANGEF_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(near);
     mEncoder->Float32(far);
@@ -2812,8 +2946,8 @@ inline void GlesSpy::glColorMask(bool red, bool green, bool blue, bool alpha) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_53_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_53_result;
+        std::shared_ptr<Context> l_GetContext_54_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_54_result;
         l_ctx->mRasterizing.mColorMaskRed = red;
         l_ctx->mRasterizing.mColorMaskGreen = green;
         l_ctx->mRasterizing.mColorMaskBlue = blue;
@@ -2823,7 +2957,7 @@ inline void GlesSpy::glColorMask(bool red, bool green, bool blue, bool alpha) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(92);  // Type ID -- TODO: mEncoder->Id(GL_COLOR_MASK_ID);
+    mEncoder->Uint16(97);  // Type ID -- TODO: mEncoder->Id(GL_COLOR_MASK_ID);
     mEncoder->Value(&observations);
     mEncoder->Bool(red);
     mEncoder->Bool(green);
@@ -2837,8 +2971,8 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_54_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_54_result;
+        std::shared_ptr<Context> l_GetContext_55_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_55_result;
         l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = mask;
         l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = mask;
         observe(observations.mReads);
@@ -2846,7 +2980,7 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(93);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_MASK_ID);
+    mEncoder->Uint16(98);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_MASK_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(mask);
 }
@@ -2857,8 +2991,8 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_55_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_55_result;
+        std::shared_ptr<Context> l_GetContext_56_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_56_result;
         switch (face) {
             case FaceMode::GL_FRONT: {
                 l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = mask;
@@ -2879,7 +3013,7 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(94);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_MASK_SEPARATE_ID);
+    mEncoder->Uint16(99);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_MASK_SEPARATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(face));
     mEncoder->Uint32(mask);
@@ -2896,7 +3030,7 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(95);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_FUNC_SEPARATE_ID);
+    mEncoder->Uint16(100);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_FUNC_SEPARATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(face));
     mEncoder->Uint32(static_cast<uint32_t>(function));
@@ -2918,7 +3052,7 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(96);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_OP_SEPARATE_ID);
+    mEncoder->Uint16(101);  // Type ID -- TODO: mEncoder->Id(GL_STENCIL_OP_SEPARATE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(face));
     mEncoder->Uint32(static_cast<uint32_t>(stencil_fail));
@@ -2932,15 +3066,15 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_56_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_56_result;
+        std::shared_ptr<Context> l_GetContext_57_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_57_result;
         l_ctx->mRasterizing.mFrontFace = orientation;
         observe(observations.mReads);
         mImports.glFrontFace(orientation);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(97);  // Type ID -- TODO: mEncoder->Id(GL_FRONT_FACE_ID);
+    mEncoder->Uint16(102);  // Type ID -- TODO: mEncoder->Id(GL_FRONT_FACE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(orientation));
 }
@@ -2951,15 +3085,15 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_57_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_57_result;
+        std::shared_ptr<Context> l_GetContext_58_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_58_result;
         l_ctx->mRasterizing.mViewport = Rect().SetX(x).SetY(y).SetWidth(width).SetHeight(height);
         observe(observations.mReads);
         mImports.glViewport(x, y, width, height);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(98);  // Type ID -- TODO: mEncoder->Id(GL_VIEWPORT_ID);
+    mEncoder->Uint16(103);  // Type ID -- TODO: mEncoder->Id(GL_VIEWPORT_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(x);
     mEncoder->Int32(y);
@@ -2973,15 +3107,15 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_58_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_58_result;
+        std::shared_ptr<Context> l_GetContext_59_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_59_result;
         l_ctx->mRasterizing.mScissor = Rect().SetX(x).SetY(y).SetWidth(width).SetHeight(height);
         observe(observations.mReads);
         mImports.glScissor(x, y, width, height);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(99);  // Type ID -- TODO: mEncoder->Id(GL_SCISSOR_ID);
+    mEncoder->Uint16(104);  // Type ID -- TODO: mEncoder->Id(GL_SCISSOR_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(x);
     mEncoder->Int32(y);
@@ -2995,8 +3129,8 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_59_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_59_result;
+        std::shared_ptr<Context> l_GetContext_60_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_60_result;
         l_ctx->mActiveTextureUnit = unit;
         if (!(l_ctx->mTextureUnits.count(unit) > 0)) {
             l_ctx->mTextureUnits[unit] = l_ctx->mTextureUnits[unit];
@@ -3006,7 +3140,7 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(100);  // Type ID -- TODO: mEncoder->Id(GL_ACTIVE_TEXTURE_ID);
+    mEncoder->Uint16(105);  // Type ID -- TODO: mEncoder->Id(GL_ACTIVE_TEXTURE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(unit));
 }
@@ -3018,8 +3152,8 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     do {
         Slice<TextureId> l_t = slice(textures, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_60_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_60_result;
+        std::shared_ptr<Context> l_GetContext_61_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_61_result;
         observe(observations.mReads);
         mImports.glGenTextures(count, textures);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -3031,7 +3165,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(101);  // Type ID -- TODO: mEncoder->Id(GL_GEN_TEXTURES_ID);
+    mEncoder->Uint16(106);  // Type ID -- TODO: mEncoder->Id(GL_GEN_TEXTURES_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(textures);
@@ -3044,8 +3178,8 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     do {
         Slice<TextureId> l_t = slice(textures, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_61_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_61_result;
+        std::shared_ptr<Context> l_GetContext_62_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_62_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mTextures[read(l_t, (uint64_t)(l_i))] = std::shared_ptr<Texture>();
         }
@@ -3054,7 +3188,7 @@ inline void GlesSpy::glDeleteTextures(int32_t count, uint32_t* textures) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(102);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_TEXTURES_ID);
+    mEncoder->Uint16(107);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_TEXTURES_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(textures);
@@ -3068,15 +3202,15 @@ inline bool GlesSpy::glIsTexture(uint32_t texture) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_62_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_62_result;
+        std::shared_ptr<Context> l_GetContext_63_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_63_result;
         observe(observations.mReads);
         result = mImports.glIsTexture(texture);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(103);  // Type ID -- TODO: mEncoder->Id(GL_IS_TEXTURE_ID);
+    mEncoder->Uint16(108);  // Type ID -- TODO: mEncoder->Id(GL_IS_TEXTURE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(texture);
     mEncoder->Bool(result);
@@ -3090,8 +3224,8 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_63_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_63_result;
+        std::shared_ptr<Context> l_GetContext_64_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_64_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
             l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>((new Texture()));
         }
@@ -3101,7 +3235,7 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(104);  // Type ID -- TODO: mEncoder->Id(GL_BIND_TEXTURE_ID);
+    mEncoder->Uint16(109);  // Type ID -- TODO: mEncoder->Id(GL_BIND_TEXTURE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(texture);
@@ -3116,15 +3250,14 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_64_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_64_result;
+        std::shared_ptr<Context> l_GetContext_65_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_65_result;
         switch (target) {
             case TextureImageTarget::GL_TEXTURE_2D: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
@@ -3152,8 +3285,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
@@ -3181,7 +3313,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(105);  // Type ID -- TODO: mEncoder->Id(GL_TEX_IMAGE2D_ID);
+    mEncoder->Uint16(110);  // Type ID -- TODO: mEncoder->Id(GL_TEX_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3203,15 +3335,14 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_65_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_65_result;
+        std::shared_ptr<Context> l_GetContext_66_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_66_result;
         switch (target) {
             case TextureImageTarget::GL_TEXTURE_2D: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
@@ -3235,8 +3366,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
@@ -3260,7 +3390,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(106);  // Type ID -- TODO: mEncoder->Id(GL_TEX_SUB_IMAGE2D_ID);
+    mEncoder->Uint16(111);  // Type ID -- TODO: mEncoder->Id(GL_TEX_SUB_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3285,7 +3415,7 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(107);  // Type ID -- TODO: mEncoder->Id(GL_COPY_TEX_IMAGE2D_ID);
+    mEncoder->Uint16(112);  // Type ID -- TODO: mEncoder->Id(GL_COPY_TEX_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3310,7 +3440,7 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(108);  // Type ID -- TODO: mEncoder->Id(GL_COPY_TEX_SUB_IMAGE2D_ID);
+    mEncoder->Uint16(113);  // Type ID -- TODO: mEncoder->Id(GL_COPY_TEX_SUB_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3331,15 +3461,14 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_66_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_66_result;
+        std::shared_ptr<Context> l_GetContext_67_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_67_result;
         switch (target) {
             case TextureImageTarget::GL_TEXTURE_2D: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize((uint32_t)(image_size))
                                     .SetFormat((uint32_t)(format));
@@ -3362,8 +3491,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                      [TextureTarget::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image()
-                                    .SetWidth(width)
+                Image l_l = Image().SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize((uint32_t)(image_size))
                                     .SetFormat((uint32_t)(format));
@@ -3386,7 +3514,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(109);  // Type ID -- TODO: mEncoder->Id(GL_COMPRESSED_TEX_IMAGE2D_ID);
+    mEncoder->Uint16(114);  // Type ID -- TODO: mEncoder->Id(GL_COMPRESSED_TEX_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3412,7 +3540,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(110);  // Type ID -- TODO: mEncoder->Id(GL_COMPRESSED_TEX_SUB_IMAGE2D_ID);
+    mEncoder->Uint16(115);  // Type ID -- TODO: mEncoder->Id(GL_COMPRESSED_TEX_SUB_IMAGE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(level);
@@ -3435,7 +3563,7 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(111);  // Type ID -- TODO: mEncoder->Id(GL_GENERATE_MIPMAP_ID);
+    mEncoder->Uint16(116);  // Type ID -- TODO: mEncoder->Id(GL_GENERATE_MIPMAP_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
 }
@@ -3454,7 +3582,7 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(112);  // Type ID -- TODO: mEncoder->Id(GL_READ_PIXELS_ID);
+    mEncoder->Uint16(117);  // Type ID -- TODO: mEncoder->Id(GL_READ_PIXELS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(x);
     mEncoder->Int32(y);
@@ -3472,8 +3600,8 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     do {
         Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_67_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_67_result;
+        std::shared_ptr<Context> l_GetContext_68_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_68_result;
         observe(observations.mReads);
         mImports.glGenFramebuffers(count, framebuffers);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -3486,7 +3614,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(113);  // Type ID -- TODO: mEncoder->Id(GL_GEN_FRAMEBUFFERS_ID);
+    mEncoder->Uint16(118);  // Type ID -- TODO: mEncoder->Id(GL_GEN_FRAMEBUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(framebuffers);
@@ -3498,8 +3626,8 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_68_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_68_result;
+        std::shared_ptr<Context> l_GetContext_69_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_69_result;
         if (!(l_ctx->mInstances.mFramebuffers.count(framebuffer) > 0)) {
             l_ctx->mInstances.mFramebuffers[framebuffer] =
                     std::shared_ptr<Framebuffer>((new Framebuffer()));
@@ -3515,7 +3643,7 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(114);  // Type ID -- TODO: mEncoder->Id(GL_BIND_FRAMEBUFFER_ID);
+    mEncoder->Uint16(119);  // Type ID -- TODO: mEncoder->Id(GL_BIND_FRAMEBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(framebuffer);
@@ -3534,7 +3662,7 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(115);  // Type ID -- TODO: mEncoder->Id(GL_CHECK_FRAMEBUFFER_STATUS_ID);
+    mEncoder->Uint16(120);  // Type ID -- TODO: mEncoder->Id(GL_CHECK_FRAMEBUFFER_STATUS_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(result));
@@ -3549,8 +3677,8 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
     do {
         Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_69_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_69_result;
+        std::shared_ptr<Context> l_GetContext_70_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_70_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mFramebuffers[read(l_f, (uint64_t)(l_i))] =
                     std::shared_ptr<Framebuffer>();
@@ -3560,7 +3688,7 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, uint32_t* framebuffers)
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(116);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_FRAMEBUFFERS_ID);
+    mEncoder->Uint16(121);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_FRAMEBUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(framebuffers);
@@ -3574,15 +3702,15 @@ inline bool GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_70_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_70_result;
+        std::shared_ptr<Context> l_GetContext_71_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_71_result;
         observe(observations.mReads);
         result = mImports.glIsFramebuffer(framebuffer);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(117);  // Type ID -- TODO: mEncoder->Id(GL_IS_FRAMEBUFFER_ID);
+    mEncoder->Uint16(122);  // Type ID -- TODO: mEncoder->Id(GL_IS_FRAMEBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(framebuffer);
     mEncoder->Bool(result);
@@ -3597,8 +3725,8 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
     do {
         Slice<RenderbufferId> l_r = slice(renderbuffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_71_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_71_result;
+        std::shared_ptr<Context> l_GetContext_72_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_72_result;
         observe(observations.mReads);
         mImports.glGenRenderbuffers(count, renderbuffers);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -3611,7 +3739,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(118);  // Type ID -- TODO: mEncoder->Id(GL_GEN_RENDERBUFFERS_ID);
+    mEncoder->Uint16(123);  // Type ID -- TODO: mEncoder->Id(GL_GEN_RENDERBUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(renderbuffers);
@@ -3623,8 +3751,8 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_72_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_72_result;
+        std::shared_ptr<Context> l_GetContext_73_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_73_result;
         if (!(l_ctx->mInstances.mRenderbuffers.count(renderbuffer) > 0)) {
             l_ctx->mInstances.mRenderbuffers[renderbuffer] =
                     std::shared_ptr<Renderbuffer>((new Renderbuffer()));
@@ -3635,7 +3763,7 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, uint32_t renderbuffer) 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(119);  // Type ID -- TODO: mEncoder->Id(GL_BIND_RENDERBUFFER_ID);
+    mEncoder->Uint16(124);  // Type ID -- TODO: mEncoder->Id(GL_BIND_RENDERBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(renderbuffer);
@@ -3648,8 +3776,8 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_73_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_73_result;
+        std::shared_ptr<Context> l_GetContext_74_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_74_result;
         RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
         std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
         l_rb->mFormat = format;
@@ -3660,7 +3788,7 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(120);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_ID);
+    mEncoder->Uint16(125);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(format));
@@ -3675,8 +3803,8 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
     do {
         Slice<RenderbufferId> l_r = slice(renderbuffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_74_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_74_result;
+        std::shared_ptr<Context> l_GetContext_75_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_75_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mRenderbuffers[read(l_r, (uint64_t)(l_i))] =
                     std::shared_ptr<Renderbuffer>();
@@ -3686,7 +3814,7 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(121);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_RENDERBUFFERS_ID);
+    mEncoder->Uint16(126);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_RENDERBUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(renderbuffers);
@@ -3700,15 +3828,15 @@ inline bool GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_75_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_75_result;
+        std::shared_ptr<Context> l_GetContext_76_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_76_result;
         observe(observations.mReads);
         result = mImports.glIsRenderbuffer(renderbuffer);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(122);  // Type ID -- TODO: mEncoder->Id(GL_IS_RENDERBUFFER_ID);
+    mEncoder->Uint16(127);  // Type ID -- TODO: mEncoder->Id(GL_IS_RENDERBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(renderbuffer);
     mEncoder->Bool(result);
@@ -3723,8 +3851,8 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_76_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_76_result;
+        std::shared_ptr<Context> l_GetContext_77_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_77_result;
         RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
         std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
         observe(observations.mReads);
@@ -3738,7 +3866,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(123);  // Type ID -- TODO: mEncoder->Id(GL_GET_RENDERBUFFER_PARAMETERIV_ID);
+    mEncoder->Uint16(128);  // Type ID -- TODO: mEncoder->Id(GL_GET_RENDERBUFFER_PARAMETERIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -3752,8 +3880,8 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     do {
         Slice<BufferId> l_b = slice(buffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_77_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_77_result;
+        std::shared_ptr<Context> l_GetContext_78_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_78_result;
         observe(observations.mReads);
         mImports.glGenBuffers(count, buffers);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -3765,7 +3893,7 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(124);  // Type ID -- TODO: mEncoder->Id(GL_GEN_BUFFERS_ID);
+    mEncoder->Uint16(129);  // Type ID -- TODO: mEncoder->Id(GL_GEN_BUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(buffers);
@@ -3777,8 +3905,8 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_78_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_78_result;
+        std::shared_ptr<Context> l_GetContext_79_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_79_result;
         if (!(l_ctx->mInstances.mBuffers.count(buffer) > 0)) {
             l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>((new Buffer()));
         }
@@ -3788,7 +3916,7 @@ inline void GlesSpy::glBindBuffer(uint32_t target, uint32_t buffer) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(125);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_ID);
+    mEncoder->Uint16(130);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(buffer);
@@ -3800,8 +3928,8 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_79_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_79_result;
+        std::shared_ptr<Context> l_GetContext_80_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_80_result;
         BufferId l_id = l_ctx->mBoundBuffers[target];
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
         l_b->mData = /* clang-format off */
@@ -3816,7 +3944,7 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, void* data, uin
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(126);  // Type ID -- TODO: mEncoder->Id(GL_BUFFER_DATA_ID);
+    mEncoder->Uint16(131);  // Type ID -- TODO: mEncoder->Id(GL_BUFFER_DATA_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(size);
@@ -3835,7 +3963,7 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(127);  // Type ID -- TODO: mEncoder->Id(GL_BUFFER_SUB_DATA_ID);
+    mEncoder->Uint16(132);  // Type ID -- TODO: mEncoder->Id(GL_BUFFER_SUB_DATA_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(offset);
@@ -3850,8 +3978,8 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     do {
         Slice<BufferId> l_b = slice(buffers, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_80_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_80_result;
+        std::shared_ptr<Context> l_GetContext_81_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_81_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mBuffers[read(l_b, (uint64_t)(l_i))] = std::shared_ptr<Buffer>();
         }
@@ -3860,7 +3988,7 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, uint32_t* buffers) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(128);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_BUFFERS_ID);
+    mEncoder->Uint16(133);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_BUFFERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(buffers);
@@ -3874,15 +4002,15 @@ inline bool GlesSpy::glIsBuffer(uint32_t buffer) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_81_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_81_result;
+        std::shared_ptr<Context> l_GetContext_82_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_82_result;
         observe(observations.mReads);
         result = mImports.glIsBuffer(buffer);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(129);  // Type ID -- TODO: mEncoder->Id(GL_IS_BUFFER_ID);
+    mEncoder->Uint16(134);  // Type ID -- TODO: mEncoder->Id(GL_IS_BUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(buffer);
     mEncoder->Bool(result);
@@ -3896,8 +4024,8 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_82_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_82_result;
+        std::shared_ptr<Context> l_GetContext_83_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_83_result;
         BufferId l_id = l_ctx->mBoundBuffers[target];
         std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
         observe(observations.mReads);
@@ -3910,7 +4038,7 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(130);  // Type ID -- TODO: mEncoder->Id(GL_GET_BUFFER_PARAMETERIV_ID);
+    mEncoder->Uint16(135);  // Type ID -- TODO: mEncoder->Id(GL_GET_BUFFER_PARAMETERIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -3925,8 +4053,8 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_83_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_83_result;
+        std::shared_ptr<Context> l_GetContext_84_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_84_result;
         observe(observations.mReads);
         result = mImports.glCreateShader(type);
         ShaderId l_id = (ShaderId)(result);
@@ -3937,7 +4065,7 @@ inline uint32_t GlesSpy::glCreateShader(uint32_t type) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(131);  // Type ID -- TODO: mEncoder->Id(GL_CREATE_SHADER_ID);
+    mEncoder->Uint16(136);  // Type ID -- TODO: mEncoder->Id(GL_CREATE_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(type));
     mEncoder->Uint32(result);
@@ -3951,8 +4079,8 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_84_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_84_result;
+        std::shared_ptr<Context> l_GetContext_85_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_85_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_s->mDeletable = true;
         l_ctx->mInstances.mShaders[shader] = std::shared_ptr<Shader>();
@@ -3961,7 +4089,7 @@ inline void GlesSpy::glDeleteShader(uint32_t shader) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(132);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_SHADER_ID);
+    mEncoder->Uint16(137);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
 }
@@ -3975,8 +4103,8 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
         Slice<char*> l_sources = slice(source, (uint64_t)(0), (uint64_t)(count));
         Slice<int32_t> l_lengths = slice(length, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_85_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_85_result;
+        std::shared_ptr<Context> l_GetContext_86_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_86_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             std::string l_str = /* clang-format off */
@@ -3991,7 +4119,7 @@ inline void GlesSpy::glShaderSource(uint32_t shader, int32_t count, char** sourc
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(133);  // Type ID -- TODO: mEncoder->Id(GL_SHADER_SOURCE_ID);
+    mEncoder->Uint16(138);  // Type ID -- TODO: mEncoder->Id(GL_SHADER_SOURCE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
     mEncoder->Int32(count);
@@ -4013,7 +4141,7 @@ inline void GlesSpy::glShaderBinary(int32_t count, uint32_t* shaders, uint32_t b
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(134);  // Type ID -- TODO: mEncoder->Id(GL_SHADER_BINARY_ID);
+    mEncoder->Uint16(139);  // Type ID -- TODO: mEncoder->Id(GL_SHADER_BINARY_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(shaders);
@@ -4030,17 +4158,17 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_86_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_86_result;
+        std::shared_ptr<Context> l_GetContext_87_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_87_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-        int32_t l_min_87_a = buffer_length;
-        int32_t l_min_87_b = int32_t((l_s->mInfoLog.count()));
-        int32_t l_min_87_result = /* clang-format off */
-        /* switch(l_min_87_a < l_min_87_b) */
-            /* case true: */(((l_min_87_a < l_min_87_b) == (true))) ? (l_min_87_a) :
-            /* case false: */(((l_min_87_a < l_min_87_b) == (false))) ? (l_min_87_b) :
+        int32_t l_min_88_a = buffer_length;
+        int32_t l_min_88_b = int32_t((l_s->mInfoLog.count()));
+        int32_t l_min_88_result = /* clang-format off */
+        /* switch(l_min_88_a < l_min_88_b) */
+            /* case true: */(((l_min_88_a < l_min_88_b) == (true))) ? (l_min_88_a) :
+            /* case false: */(((l_min_88_a < l_min_88_b) == (false))) ? (l_min_88_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_87_result;
+        int32_t l_l = l_min_88_result;
         Slice<char> copy__dst__ = copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
                                        slice(l_s->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -4050,7 +4178,7 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(135);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_INFO_LOG_ID);
+    mEncoder->Uint16(140);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_INFO_LOG_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
     mEncoder->Int32(buffer_length);
@@ -4066,17 +4194,17 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_88_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_88_result;
+        std::shared_ptr<Context> l_GetContext_89_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_89_result;
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-        int32_t l_min_89_a = buffer_length;
-        int32_t l_min_89_b = int32_t((l_s->mSource.size()));
-        int32_t l_min_89_result = /* clang-format off */
-        /* switch(l_min_89_a < l_min_89_b) */
-            /* case true: */(((l_min_89_a < l_min_89_b) == (true))) ? (l_min_89_a) :
-            /* case false: */(((l_min_89_a < l_min_89_b) == (false))) ? (l_min_89_b) :
+        int32_t l_min_90_a = buffer_length;
+        int32_t l_min_90_b = int32_t((l_s->mSource.size()));
+        int32_t l_min_90_result = /* clang-format off */
+        /* switch(l_min_90_a < l_min_90_b) */
+            /* case true: */(((l_min_90_a < l_min_90_b) == (true))) ? (l_min_90_a) :
+            /* case false: */(((l_min_90_a < l_min_90_b) == (false))) ? (l_min_90_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_89_result;
+        int32_t l_l = l_min_90_result;
         Slice<char> copy__dst__ = copy(slice(source, (uint64_t)(0), (uint64_t)(l_l)),
                                        slice(slice(l_s->mSource), (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -4086,7 +4214,7 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(136);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_SOURCE_ID);
+    mEncoder->Uint16(141);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_SOURCE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
     mEncoder->Int32(buffer_length);
@@ -4104,7 +4232,7 @@ inline void GlesSpy::glReleaseShaderCompiler() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(137);  // Type ID -- TODO: mEncoder->Id(GL_RELEASE_SHADER_COMPILER_ID);
+    mEncoder->Uint16(142);  // Type ID -- TODO: mEncoder->Id(GL_RELEASE_SHADER_COMPILER_ID);
     mEncoder->Value(&observations);
 }
 
@@ -4118,7 +4246,7 @@ inline void GlesSpy::glCompileShader(uint32_t shader) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(138);  // Type ID -- TODO: mEncoder->Id(GL_COMPILE_SHADER_ID);
+    mEncoder->Uint16(143);  // Type ID -- TODO: mEncoder->Id(GL_COMPILE_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
 }
@@ -4131,15 +4259,15 @@ inline bool GlesSpy::glIsShader(uint32_t shader) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_90_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_90_result;
+        std::shared_ptr<Context> l_GetContext_91_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_91_result;
         observe(observations.mReads);
         result = mImports.glIsShader(shader);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(139);  // Type ID -- TODO: mEncoder->Id(GL_IS_SHADER_ID);
+    mEncoder->Uint16(144);  // Type ID -- TODO: mEncoder->Id(GL_IS_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(shader);
     mEncoder->Bool(result);
@@ -4155,8 +4283,8 @@ inline uint32_t GlesSpy::glCreateProgram() {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_91_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_91_result;
+        std::shared_ptr<Context> l_GetContext_92_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_92_result;
         observe(observations.mReads);
         result = mImports.glCreateProgram();
         ProgramId l_id = (ProgramId)(result);
@@ -4165,7 +4293,7 @@ inline uint32_t GlesSpy::glCreateProgram() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(140);  // Type ID -- TODO: mEncoder->Id(GL_CREATE_PROGRAM_ID);
+    mEncoder->Uint16(145);  // Type ID -- TODO: mEncoder->Id(GL_CREATE_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(result);
 
@@ -4178,15 +4306,15 @@ inline void GlesSpy::glDeleteProgram(uint32_t program) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_92_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_92_result;
+        std::shared_ptr<Context> l_GetContext_93_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_93_result;
         l_ctx->mInstances.mPrograms[program] = std::shared_ptr<Program>();
         observe(observations.mReads);
         mImports.glDeleteProgram(program);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(141);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_PROGRAM_ID);
+    mEncoder->Uint16(146);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
 }
@@ -4197,8 +4325,8 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_93_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_93_result;
+        std::shared_ptr<Context> l_GetContext_94_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_94_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_p->mShaders[l_s->mType] = shader;
@@ -4207,7 +4335,7 @@ inline void GlesSpy::glAttachShader(uint32_t program, uint32_t shader) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(142);  // Type ID -- TODO: mEncoder->Id(GL_ATTACH_SHADER_ID);
+    mEncoder->Uint16(147);  // Type ID -- TODO: mEncoder->Id(GL_ATTACH_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(shader);
@@ -4219,8 +4347,8 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_94_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_94_result;
+        std::shared_ptr<Context> l_GetContext_95_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_95_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
         std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
         l_p->mShaders[l_s->mType] = 0;
@@ -4229,7 +4357,7 @@ inline void GlesSpy::glDetachShader(uint32_t program, uint32_t shader) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(143);  // Type ID -- TODO: mEncoder->Id(GL_DETACH_SHADER_ID);
+    mEncoder->Uint16(148);  // Type ID -- TODO: mEncoder->Id(GL_DETACH_SHADER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(shader);
@@ -4243,24 +4371,24 @@ inline void GlesSpy::glGetAttachedShaders(uint32_t program, int32_t buffer_lengt
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_95_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_95_result;
+        std::shared_ptr<Context> l_GetContext_96_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_96_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
-        int32_t l_min_96_a = buffer_length;
-        int32_t l_min_96_b = int32_t((l_p->mShaders.size()));
-        int32_t l_min_96_result = /* clang-format off */
-        /* switch(l_min_96_a < l_min_96_b) */
-            /* case true: */(((l_min_96_a < l_min_96_b) == (true))) ? (l_min_96_a) :
-            /* case false: */(((l_min_96_a < l_min_96_b) == (false))) ? (l_min_96_b) :
+        int32_t l_min_97_a = buffer_length;
+        int32_t l_min_97_b = int32_t((l_p->mShaders.size()));
+        int32_t l_min_97_result = /* clang-format off */
+        /* switch(l_min_97_a < l_min_97_b) */
+            /* case true: */(((l_min_97_a < l_min_97_b) == (true))) ? (l_min_97_a) :
+            /* case false: */(((l_min_97_a < l_min_97_b) == (false))) ? (l_min_97_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_96_result;
+        int32_t l_l = l_min_97_result;
         observe(observations.mReads);
         mImports.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
         write(slice(shaders_length_written, 0, 1), 0, l_l);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(144);  // Type ID -- TODO: mEncoder->Id(GL_GET_ATTACHED_SHADERS_ID);
+    mEncoder->Uint16(149);  // Type ID -- TODO: mEncoder->Id(GL_GET_ATTACHED_SHADERS_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_length);
@@ -4278,7 +4406,7 @@ inline void GlesSpy::glLinkProgram(uint32_t program) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(145);  // Type ID -- TODO: mEncoder->Id(GL_LINK_PROGRAM_ID);
+    mEncoder->Uint16(150);  // Type ID -- TODO: mEncoder->Id(GL_LINK_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
 }
@@ -4291,17 +4419,17 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_97_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_97_result;
+        std::shared_ptr<Context> l_GetContext_98_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_98_result;
         std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
-        int32_t l_min_98_a = buffer_length;
-        int32_t l_min_98_b = int32_t((l_p->mInfoLog.count()));
-        int32_t l_min_98_result = /* clang-format off */
-        /* switch(l_min_98_a < l_min_98_b) */
-            /* case true: */(((l_min_98_a < l_min_98_b) == (true))) ? (l_min_98_a) :
-            /* case false: */(((l_min_98_a < l_min_98_b) == (false))) ? (l_min_98_b) :
+        int32_t l_min_99_a = buffer_length;
+        int32_t l_min_99_b = int32_t((l_p->mInfoLog.count()));
+        int32_t l_min_99_result = /* clang-format off */
+        /* switch(l_min_99_a < l_min_99_b) */
+            /* case true: */(((l_min_99_a < l_min_99_b) == (true))) ? (l_min_99_a) :
+            /* case false: */(((l_min_99_a < l_min_99_b) == (false))) ? (l_min_99_b) :
             /* default: */ 0 /* clang-format on */;
-        int32_t l_l = l_min_98_result;
+        int32_t l_l = l_min_99_result;
         Slice<char> copy__dst__ = copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
                                        slice(l_p->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
         observe(observations.mReads);
@@ -4311,7 +4439,7 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(146);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_INFO_LOG_ID);
+    mEncoder->Uint16(151);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_INFO_LOG_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Int32(buffer_length);
@@ -4325,15 +4453,15 @@ inline void GlesSpy::glUseProgram(uint32_t program) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_99_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_99_result;
+        std::shared_ptr<Context> l_GetContext_100_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_100_result;
         l_ctx->mBoundProgram = program;
         observe(observations.mReads);
         mImports.glUseProgram(program);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(147);  // Type ID -- TODO: mEncoder->Id(GL_USE_PROGRAM_ID);
+    mEncoder->Uint16(152);  // Type ID -- TODO: mEncoder->Id(GL_USE_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
 }
@@ -4346,15 +4474,15 @@ inline bool GlesSpy::glIsProgram(uint32_t program) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_100_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_100_result;
+        std::shared_ptr<Context> l_GetContext_101_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_101_result;
         observe(observations.mReads);
         result = mImports.glIsProgram(program);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(148);  // Type ID -- TODO: mEncoder->Id(GL_IS_PROGRAM_ID);
+    mEncoder->Uint16(153);  // Type ID -- TODO: mEncoder->Id(GL_IS_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Bool(result);
@@ -4372,7 +4500,7 @@ inline void GlesSpy::glValidateProgram(uint32_t program) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(149);  // Type ID -- TODO: mEncoder->Id(GL_VALIDATE_PROGRAM_ID);
+    mEncoder->Uint16(154);  // Type ID -- TODO: mEncoder->Id(GL_VALIDATE_PROGRAM_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
 }
@@ -4383,15 +4511,15 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_101_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_101_result;
+        std::shared_ptr<Context> l_GetContext_102_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_102_result;
         l_ctx->mClearing.mClearColor = Color().SetRed(r).SetGreen(g).SetBlue(b).SetAlpha(a);
         observe(observations.mReads);
         mImports.glClearColor(r, g, b, a);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(150);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_COLOR_ID);
+    mEncoder->Uint16(155);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_COLOR_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(r);
     mEncoder->Float32(g);
@@ -4405,15 +4533,15 @@ inline void GlesSpy::glClearDepthf(float depth) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_102_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_102_result;
+        std::shared_ptr<Context> l_GetContext_103_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_103_result;
         l_ctx->mClearing.mClearDepth = depth;
         observe(observations.mReads);
         mImports.glClearDepthf(depth);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(151);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_DEPTHF_ID);
+    mEncoder->Uint16(156);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_DEPTHF_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(depth);
 }
@@ -4424,15 +4552,15 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_103_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_103_result;
+        std::shared_ptr<Context> l_GetContext_104_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_104_result;
         l_ctx->mClearing.mClearStencil = stencil;
         observe(observations.mReads);
         mImports.glClearStencil(stencil);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(152);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_STENCIL_ID);
+    mEncoder->Uint16(157);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_STENCIL_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(stencil);
 }
@@ -4449,7 +4577,7 @@ inline void GlesSpy::glClear(uint32_t mask) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(153);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_ID);
+    mEncoder->Uint16(158);  // Type ID -- TODO: mEncoder->Id(GL_CLEAR_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(mask));
 }
@@ -4460,15 +4588,15 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_104_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_104_result;
+        std::shared_ptr<Context> l_GetContext_105_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_105_result;
         l_ctx->mRasterizing.mCullFace = mode;
         observe(observations.mReads);
         mImports.glCullFace(mode);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(154);  // Type ID -- TODO: mEncoder->Id(GL_CULL_FACE_ID);
+    mEncoder->Uint16(159);  // Type ID -- TODO: mEncoder->Id(GL_CULL_FACE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(mode));
 }
@@ -4479,8 +4607,8 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_105_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_105_result;
+        std::shared_ptr<Context> l_GetContext_106_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_106_result;
         l_ctx->mRasterizing.mPolygonOffsetUnits = units;
         l_ctx->mRasterizing.mPolygonOffsetFactor = scale_factor;
         observe(observations.mReads);
@@ -4488,7 +4616,7 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(155);  // Type ID -- TODO: mEncoder->Id(GL_POLYGON_OFFSET_ID);
+    mEncoder->Uint16(160);  // Type ID -- TODO: mEncoder->Id(GL_POLYGON_OFFSET_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(scale_factor);
     mEncoder->Float32(units);
@@ -4500,15 +4628,15 @@ inline void GlesSpy::glLineWidth(float width) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_106_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_106_result;
+        std::shared_ptr<Context> l_GetContext_107_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_107_result;
         l_ctx->mRasterizing.mLineWidth = width;
         observe(observations.mReads);
         mImports.glLineWidth(width);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(156);  // Type ID -- TODO: mEncoder->Id(GL_LINE_WIDTH_ID);
+    mEncoder->Uint16(161);  // Type ID -- TODO: mEncoder->Id(GL_LINE_WIDTH_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(width);
 }
@@ -4519,8 +4647,8 @@ inline void GlesSpy::glSampleCoverage(float value, bool invert) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_107_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_107_result;
+        std::shared_ptr<Context> l_GetContext_108_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_108_result;
         l_ctx->mRasterizing.mSampleCoverageValue = value;
         l_ctx->mRasterizing.mSampleCoverageInvert = invert;
         observe(observations.mReads);
@@ -4528,7 +4656,7 @@ inline void GlesSpy::glSampleCoverage(float value, bool invert) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(157);  // Type ID -- TODO: mEncoder->Id(GL_SAMPLE_COVERAGE_ID);
+    mEncoder->Uint16(162);  // Type ID -- TODO: mEncoder->Id(GL_SAMPLE_COVERAGE_ID);
     mEncoder->Value(&observations);
     mEncoder->Float32(value);
     mEncoder->Bool(invert);
@@ -4540,15 +4668,15 @@ inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_108_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_108_result;
+        std::shared_ptr<Context> l_GetContext_109_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_109_result;
         l_ctx->mGenerateMipmapHint = mode;
         observe(observations.mReads);
         mImports.glHint(target, mode);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(158);  // Type ID -- TODO: mEncoder->Id(GL_HINT_ID);
+    mEncoder->Uint16(163);  // Type ID -- TODO: mEncoder->Id(GL_HINT_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(mode));
@@ -4564,8 +4692,8 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_109_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_109_result;
+        std::shared_ptr<Context> l_GetContext_110_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_110_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
@@ -4592,7 +4720,7 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(159);  // Type ID -- TODO: mEncoder->Id(GL_FRAMEBUFFER_RENDERBUFFER_ID);
+    mEncoder->Uint16(164);  // Type ID -- TODO: mEncoder->Id(GL_FRAMEBUFFER_RENDERBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_target));
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_attachment));
@@ -4610,8 +4738,8 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_110_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_110_result;
+        std::shared_ptr<Context> l_GetContext_111_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_111_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
@@ -4650,7 +4778,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(160);  // Type ID -- TODO: mEncoder->Id(GL_FRAMEBUFFER_TEXTURE2D_ID);
+    mEncoder->Uint16(165);  // Type ID -- TODO: mEncoder->Id(GL_FRAMEBUFFER_TEXTURE2D_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_target));
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_attachment));
@@ -4668,8 +4796,8 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_111_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_111_result;
+        std::shared_ptr<Context> l_GetContext_112_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_112_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
             /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
@@ -4694,7 +4822,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
     observe(observations.mWrites);
 
     mEncoder->Uint16(
-            161);  // Type ID -- TODO: mEncoder->Id(GL_GET_FRAMEBUFFER_ATTACHMENT_PARAMETERIV_ID);
+            166);  // Type ID -- TODO: mEncoder->Id(GL_GET_FRAMEBUFFER_ATTACHMENT_PARAMETERIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(framebuffer_target));
     mEncoder->Uint32(static_cast<uint32_t>(attachment));
@@ -4709,8 +4837,8 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_112_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_112_result;
+        std::shared_ptr<Context> l_GetContext_113_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_113_result;
         uint32_t l_count = (uint32_t)(element_count);
         BufferId l_id = l_ctx->mBoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER];
         if (l_id != (BufferId)(0)) {
@@ -4718,36 +4846,36 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             uint32_t l_offset = (uint32_t)((uint64_t)(indices));
             uint32_t l_first = minIndex(l_index_data.begin(), indices_type, l_offset, l_count);
             uint32_t l_last = maxIndex(l_index_data.begin(), indices_type, l_offset, l_count);
-            std::shared_ptr<Context> l_ReadVertexArrays_113_ctx = l_ctx;
-            uint32_t l_ReadVertexArrays_113_first_index = l_first;
-            uint32_t l_ReadVertexArrays_113_last_index = l_last;
+            std::shared_ptr<Context> l_ReadVertexArrays_114_ctx = l_ctx;
+            uint32_t l_ReadVertexArrays_114_first_index = l_first;
+            uint32_t l_ReadVertexArrays_114_last_index = l_last;
             for (int32_t l_i = 0;
-                 l_i < int32_t((l_ReadVertexArrays_113_ctx->mVertexAttributeArrays.size()));
+                 l_i < int32_t((l_ReadVertexArrays_114_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
-                        l_ReadVertexArrays_113_ctx
+                        l_ReadVertexArrays_114_ctx
                                 ->mVertexAttributeArrays[(AttributeLocation)(l_i)];
                 if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                    uint32_t l_vertexAttribTypeSize_114_t = l_arr->mType;
-                    uint32_t l_vertexAttribTypeSize_114_result = /* clang-format off */
-                    /* switch(l_vertexAttribTypeSize_114_t) */
-                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_114_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                    uint32_t l_vertexAttribTypeSize_115_t = l_arr->mType;
+                    uint32_t l_vertexAttribTypeSize_115_result = /* clang-format off */
+                    /* switch(l_vertexAttribTypeSize_115_t) */
+                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
-                    uint32_t l_elsize = l_vertexAttribTypeSize_114_result * l_arr->mSize;
+                    uint32_t l_elsize = l_vertexAttribTypeSize_115_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
                     /* switch(l_arr->mStride == 0) */
                         /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
                         /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                         /* default: */ 0 /* clang-format on */;
-                    for (uint32_t l_v = l_ReadVertexArrays_113_first_index;
-                         l_v < l_ReadVertexArrays_113_last_index + 1; ++l_v) {
+                    for (uint32_t l_v = l_ReadVertexArrays_114_first_index;
+                         l_v < l_ReadVertexArrays_114_last_index + 1; ++l_v) {
                         uint32_t l_offset = l_elstride * l_v;
                         read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                    (uint64_t)(l_offset + l_elsize)));
@@ -4758,58 +4886,58 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             uint8_t* l_index_data = (uint8_t*)(indices);
             uint32_t l_first = minIndex(l_index_data, indices_type, 0, l_count);
             uint32_t l_last = maxIndex(l_index_data, indices_type, 0, l_count);
-            std::shared_ptr<Context> l_ReadVertexArrays_115_ctx = l_ctx;
-            uint32_t l_ReadVertexArrays_115_first_index = l_first;
-            uint32_t l_ReadVertexArrays_115_last_index = l_last;
+            std::shared_ptr<Context> l_ReadVertexArrays_116_ctx = l_ctx;
+            uint32_t l_ReadVertexArrays_116_first_index = l_first;
+            uint32_t l_ReadVertexArrays_116_last_index = l_last;
             for (int32_t l_i = 0;
-                 l_i < int32_t((l_ReadVertexArrays_115_ctx->mVertexAttributeArrays.size()));
+                 l_i < int32_t((l_ReadVertexArrays_116_ctx->mVertexAttributeArrays.size()));
                  ++l_i) {
                 std::shared_ptr<VertexAttributeArray> l_arr =
-                        l_ReadVertexArrays_115_ctx
+                        l_ReadVertexArrays_116_ctx
                                 ->mVertexAttributeArrays[(AttributeLocation)(l_i)];
                 if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                    uint32_t l_vertexAttribTypeSize_116_t = l_arr->mType;
-                    uint32_t l_vertexAttribTypeSize_116_result = /* clang-format off */
-                    /* switch(l_vertexAttribTypeSize_116_t) */
-                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                    uint32_t l_vertexAttribTypeSize_117_t = l_arr->mType;
+                    uint32_t l_vertexAttribTypeSize_117_result = /* clang-format off */
+                    /* switch(l_vertexAttribTypeSize_117_t) */
+                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
-                    uint32_t l_elsize = l_vertexAttribTypeSize_116_result * l_arr->mSize;
+                    uint32_t l_elsize = l_vertexAttribTypeSize_117_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
                     /* switch(l_arr->mStride == 0) */
                         /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
                         /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                         /* default: */ 0 /* clang-format on */;
-                    for (uint32_t l_v = l_ReadVertexArrays_115_first_index;
-                         l_v < l_ReadVertexArrays_115_last_index + 1; ++l_v) {
+                    for (uint32_t l_v = l_ReadVertexArrays_116_first_index;
+                         l_v < l_ReadVertexArrays_116_last_index + 1; ++l_v) {
                         uint32_t l_offset = l_elstride * l_v;
                         read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                    (uint64_t)(l_offset + l_elsize)));
                     }
                 }
             }
-            uint32_t l_IndexSize_117_indices_type = indices_type;
-            uint32_t l_IndexSize_117_result = /* clang-format off */
-            /* switch(l_IndexSize_117_indices_type) */
-                /* case IndicesType::GL_UNSIGNED_BYTE: */(((l_IndexSize_117_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
-                /* case IndicesType::GL_UNSIGNED_SHORT: */(((l_IndexSize_117_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
-                /* case IndicesType::GL_UNSIGNED_INT: */(((l_IndexSize_117_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
+            uint32_t l_IndexSize_118_indices_type = indices_type;
+            uint32_t l_IndexSize_118_result = /* clang-format off */
+            /* switch(l_IndexSize_118_indices_type) */
+                /* case IndicesType::GL_UNSIGNED_BYTE: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case IndicesType::GL_UNSIGNED_SHORT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case IndicesType::GL_UNSIGNED_INT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
                 /* default: */ 0 /* clang-format on */;
             read(slice(l_index_data, (uint64_t)(0),
-                       (uint64_t)((uint32_t)(element_count)*l_IndexSize_117_result)));
+                       (uint64_t)((uint32_t)(element_count)*l_IndexSize_118_result)));
         }
         observe(observations.mReads);
         mImports.glDrawElements(draw_mode, element_count, indices_type, indices);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(162);  // Type ID -- TODO: mEncoder->Id(GL_DRAW_ELEMENTS_ID);
+    mEncoder->Uint16(167);  // Type ID -- TODO: mEncoder->Id(GL_DRAW_ELEMENTS_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(draw_mode));
     mEncoder->Int32(element_count);
@@ -4823,37 +4951,37 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_118_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_118_result;
+        std::shared_ptr<Context> l_GetContext_119_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_119_result;
         int32_t l_last_index = first_index + index_count - 1;
-        std::shared_ptr<Context> l_ReadVertexArrays_119_ctx = l_ctx;
-        uint32_t l_ReadVertexArrays_119_first_index = (uint32_t)(first_index);
-        uint32_t l_ReadVertexArrays_119_last_index = (uint32_t)(l_last_index);
+        std::shared_ptr<Context> l_ReadVertexArrays_120_ctx = l_ctx;
+        uint32_t l_ReadVertexArrays_120_first_index = (uint32_t)(first_index);
+        uint32_t l_ReadVertexArrays_120_last_index = (uint32_t)(l_last_index);
         for (int32_t l_i = 0;
-             l_i < int32_t((l_ReadVertexArrays_119_ctx->mVertexAttributeArrays.size())); ++l_i) {
+             l_i < int32_t((l_ReadVertexArrays_120_ctx->mVertexAttributeArrays.size())); ++l_i) {
             std::shared_ptr<VertexAttributeArray> l_arr =
-                    l_ReadVertexArrays_119_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
+                    l_ReadVertexArrays_120_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
             if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-                uint32_t l_vertexAttribTypeSize_120_t = l_arr->mType;
-                uint32_t l_vertexAttribTypeSize_120_result = /* clang-format off */
-                /* switch(l_vertexAttribTypeSize_120_t) */
-                    /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                    /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                    /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                    /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                    /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                    /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                    /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
-                    /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_120_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                uint32_t l_vertexAttribTypeSize_121_t = l_arr->mType;
+                uint32_t l_vertexAttribTypeSize_121_result = /* clang-format off */
+                /* switch(l_vertexAttribTypeSize_121_t) */
+                    /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                    /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                    /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                    /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                     /* default: */ 0 /* clang-format on */;
-                uint32_t l_elsize = l_vertexAttribTypeSize_120_result * l_arr->mSize;
+                uint32_t l_elsize = l_vertexAttribTypeSize_121_result * l_arr->mSize;
                 uint32_t l_elstride = /* clang-format off */
                 /* switch(l_arr->mStride == 0) */
                     /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
                     /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                     /* default: */ 0 /* clang-format on */;
-                for (uint32_t l_v = l_ReadVertexArrays_119_first_index;
-                     l_v < l_ReadVertexArrays_119_last_index + 1; ++l_v) {
+                for (uint32_t l_v = l_ReadVertexArrays_120_first_index;
+                     l_v < l_ReadVertexArrays_120_last_index + 1; ++l_v) {
                     uint32_t l_offset = l_elstride * l_v;
                     read(slice(l_arr->mPointer, (uint64_t)(l_offset),
                                (uint64_t)(l_offset + l_elsize)));
@@ -4865,7 +4993,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(163);  // Type ID -- TODO: mEncoder->Id(GL_DRAW_ARRAYS_ID);
+    mEncoder->Uint16(168);  // Type ID -- TODO: mEncoder->Id(GL_DRAW_ARRAYS_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(draw_mode));
     mEncoder->Int32(first_index);
@@ -4882,7 +5010,7 @@ inline void GlesSpy::glFlush() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(164);  // Type ID -- TODO: mEncoder->Id(GL_FLUSH_ID);
+    mEncoder->Uint16(169);  // Type ID -- TODO: mEncoder->Id(GL_FLUSH_ID);
     mEncoder->Value(&observations);
 }
 
@@ -4896,7 +5024,7 @@ inline void GlesSpy::glFinish() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(165);  // Type ID -- TODO: mEncoder->Id(GL_FINISH_ID);
+    mEncoder->Uint16(170);  // Type ID -- TODO: mEncoder->Id(GL_FINISH_ID);
     mEncoder->Value(&observations);
 }
 
@@ -4907,8 +5035,8 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
     do {
         Slice<bool> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_121_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_121_result;
+        std::shared_ptr<Context> l_GetContext_122_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_122_result;
         observe(observations.mReads);
         mImports.glGetBooleanv(param, values);
         switch (param) {
@@ -4977,7 +5105,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(166);  // Type ID -- TODO: mEncoder->Id(GL_GET_BOOLEANV_ID);
+    mEncoder->Uint16(171);  // Type ID -- TODO: mEncoder->Id(GL_GET_BOOLEANV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(param));
     mEncoder->Pointer(values);
@@ -4990,8 +5118,8 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     do {
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_122_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_122_result;
+        std::shared_ptr<Context> l_GetContext_123_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_123_result;
         observe(observations.mReads);
         mImports.glGetFloatv(param, values);
         switch (param) {
@@ -5050,7 +5178,7 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(167);  // Type ID -- TODO: mEncoder->Id(GL_GET_FLOATV_ID);
+    mEncoder->Uint16(172);  // Type ID -- TODO: mEncoder->Id(GL_GET_FLOATV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(param));
     mEncoder->Pointer(values);
@@ -5063,8 +5191,8 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     do {
         Slice<int32_t> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_123_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_123_result;
+        std::shared_ptr<Context> l_GetContext_124_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_124_result;
         observe(observations.mReads);
         mImports.glGetIntegerv(param, values);
         switch (param) {
@@ -5345,7 +5473,7 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(168);  // Type ID -- TODO: mEncoder->Id(GL_GET_INTEGERV_ID);
+    mEncoder->Uint16(173);  // Type ID -- TODO: mEncoder->Id(GL_GET_INTEGERV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(param));
     mEncoder->Pointer(values);
@@ -5364,7 +5492,7 @@ inline char* GlesSpy::glGetString(uint32_t param) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(169);  // Type ID -- TODO: mEncoder->Id(GL_GET_STRING_ID);
+    mEncoder->Uint16(174);  // Type ID -- TODO: mEncoder->Id(GL_GET_STRING_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(param));
     mEncoder->Pointer(result);
@@ -5378,15 +5506,15 @@ inline void GlesSpy::glEnable(uint32_t capability) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_124_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_124_result;
+        std::shared_ptr<Context> l_GetContext_125_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_125_result;
         l_ctx->mCapabilities[capability] = true;
         observe(observations.mReads);
         mImports.glEnable(capability);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(170);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_ID);
+    mEncoder->Uint16(175);  // Type ID -- TODO: mEncoder->Id(GL_ENABLE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(capability));
 }
@@ -5397,15 +5525,15 @@ inline void GlesSpy::glDisable(uint32_t capability) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_125_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_125_result;
+        std::shared_ptr<Context> l_GetContext_126_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_126_result;
         l_ctx->mCapabilities[capability] = false;
         observe(observations.mReads);
         mImports.glDisable(capability);
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(171);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_ID);
+    mEncoder->Uint16(176);  // Type ID -- TODO: mEncoder->Id(GL_DISABLE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(capability));
 }
@@ -5418,15 +5546,15 @@ inline bool GlesSpy::glIsEnabled(uint32_t capability) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_126_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_126_result;
+        std::shared_ptr<Context> l_GetContext_127_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_127_result;
         observe(observations.mReads);
         result = mImports.glIsEnabled(capability);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(172);  // Type ID -- TODO: mEncoder->Id(GL_IS_ENABLED_ID);
+    mEncoder->Uint16(177);  // Type ID -- TODO: mEncoder->Id(GL_IS_ENABLED_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(capability));
     mEncoder->Bool(result);
@@ -5448,7 +5576,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(173);  // Type ID -- TODO: mEncoder->Id(GL_MAP_BUFFER_RANGE_ID);
+    mEncoder->Uint16(178);  // Type ID -- TODO: mEncoder->Id(GL_MAP_BUFFER_RANGE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(offset);
@@ -5469,7 +5597,7 @@ inline void GlesSpy::glUnmapBuffer(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(174);  // Type ID -- TODO: mEncoder->Id(GL_UNMAP_BUFFER_ID);
+    mEncoder->Uint16(179);  // Type ID -- TODO: mEncoder->Id(GL_UNMAP_BUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
 }
@@ -5485,7 +5613,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(175);  // Type ID -- TODO: mEncoder->Id(GL_INVALIDATE_FRAMEBUFFER_ID);
+    mEncoder->Uint16(180);  // Type ID -- TODO: mEncoder->Id(GL_INVALIDATE_FRAMEBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(count);
@@ -5506,7 +5634,7 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
     observe(observations.mWrites);
 
     mEncoder->Uint16(
-            176);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_MULTISAMPLE_ID);
+            181);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_MULTISAMPLE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Int32(samples);
@@ -5529,7 +5657,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(177);  // Type ID -- TODO: mEncoder->Id(GL_BLIT_FRAMEBUFFER_ID);
+    mEncoder->Uint16(182);  // Type ID -- TODO: mEncoder->Id(GL_BLIT_FRAMEBUFFER_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(srcX0);
     mEncoder->Int32(srcY0);
@@ -5550,8 +5678,8 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_127_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_127_result;
+        std::shared_ptr<Context> l_GetContext_128_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_128_result;
         observe(observations.mReads);
         mImports.glGenQueries(count, queries);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5563,7 +5691,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(178);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_ID);
+    mEncoder->Uint16(183);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(queries);
@@ -5579,7 +5707,7 @@ inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(179);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_ID);
+    mEncoder->Uint16(184);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(query);
@@ -5595,7 +5723,7 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(180);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_ID);
+    mEncoder->Uint16(185);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
 }
@@ -5607,8 +5735,8 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_128_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_128_result;
+        std::shared_ptr<Context> l_GetContext_129_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_129_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mQueries[read(l_q, (uint64_t)(l_i))] = std::shared_ptr<Query>();
         }
@@ -5617,7 +5745,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(181);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_ID);
+    mEncoder->Uint16(186);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(queries);
@@ -5631,15 +5759,15 @@ inline bool GlesSpy::glIsQuery(uint32_t query) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_129_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_129_result;
+        std::shared_ptr<Context> l_GetContext_130_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
         observe(observations.mReads);
         result = mImports.glIsQuery(query);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(182);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_ID);
+    mEncoder->Uint16(187);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Bool(result);
@@ -5658,7 +5786,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(183);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
+    mEncoder->Uint16(188);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -5676,7 +5804,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(184);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
+    mEncoder->Uint16(189);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -5700,7 +5828,7 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(185);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCK_NAME_ID);
+    mEncoder->Uint16(190);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCK_NAME_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(uniform_block_index);
@@ -5723,7 +5851,7 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(186);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCKIV_ID);
+    mEncoder->Uint16(191);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCKIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(uniform_block_index);
@@ -5743,7 +5871,7 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(187);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_BLOCK_BINDING_ID);
+    mEncoder->Uint16(192);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_BLOCK_BINDING_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(uniform_block_index);
@@ -5766,7 +5894,7 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, uint32_t uniform_co
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(188);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORMSIV_ID);
+    mEncoder->Uint16(193);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORMSIV_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(program);
     mEncoder->Uint32(uniform_count);
@@ -5785,7 +5913,7 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(189);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_BASE_ID);
+    mEncoder->Uint16(194);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_BASE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(index);
@@ -5799,8 +5927,8 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     do {
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_130_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
+        std::shared_ptr<Context> l_GetContext_131_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
         observe(observations.mReads);
         mImports.glGenVertexArrays(count, arrays);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5813,7 +5941,7 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(190);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_ID);
+    mEncoder->Uint16(195);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(arrays);
@@ -5825,8 +5953,8 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_131_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
+        std::shared_ptr<Context> l_GetContext_132_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_132_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>((new VertexArray()));
@@ -5837,7 +5965,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(191);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_ID);
+    mEncoder->Uint16(196);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(array);
 }
@@ -5848,8 +5976,8 @@ inline void GlesSpy::glDeleteVertexArrays(uint32_t count, uint32_t* arrays) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_132_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_132_result;
+        std::shared_ptr<Context> l_GetContext_133_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_133_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         for (uint32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -5860,7 +5988,7 @@ inline void GlesSpy::glDeleteVertexArrays(uint32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(192);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_ID);
+    mEncoder->Uint16(197);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(count);
     mEncoder->Pointer(arrays);
@@ -5873,8 +6001,8 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_133_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_133_result;
+        std::shared_ptr<Context> l_GetContext_134_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_134_result;
         observe(observations.mReads);
         mImports.glGenQueriesEXT(count, queries);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5886,7 +6014,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(193);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_E_X_T_ID);
+    mEncoder->Uint16(198);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(queries);
@@ -5902,7 +6030,7 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(194);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_E_X_T_ID);
+    mEncoder->Uint16(199);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(query);
@@ -5918,7 +6046,7 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(195);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_E_X_T_ID);
+    mEncoder->Uint16(200);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
 }
@@ -5930,8 +6058,8 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_134_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_134_result;
+        std::shared_ptr<Context> l_GetContext_135_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_135_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mQueries[read(l_q, (uint64_t)(l_i))] = std::shared_ptr<Query>();
         }
@@ -5940,7 +6068,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(196);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_E_X_T_ID);
+    mEncoder->Uint16(201);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(count);
     mEncoder->Pointer(queries);
@@ -5954,15 +6082,15 @@ inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_135_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_135_result;
+        std::shared_ptr<Context> l_GetContext_136_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_136_result;
         observe(observations.mReads);
         result = mImports.glIsQueryEXT(query);
         break;
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(197);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_E_X_T_ID);
+    mEncoder->Uint16(202);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Bool(result);
@@ -5980,7 +6108,7 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(198);  // Type ID -- TODO: mEncoder->Id(GL_QUERY_COUNTER_E_X_T_ID);
+    mEncoder->Uint16(203);  // Type ID -- TODO: mEncoder->Id(GL_QUERY_COUNTER_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(target));
@@ -5997,7 +6125,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(199);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
+    mEncoder->Uint16(204);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(static_cast<uint32_t>(target));
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -6015,7 +6143,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(200);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
+    mEncoder->Uint16(205);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -6033,7 +6161,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(201);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
+    mEncoder->Uint16(206);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -6051,7 +6179,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(202);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
+    mEncoder->Uint16(207);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -6069,7 +6197,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(203);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);
+    mEncoder->Uint16(208);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(query);
     mEncoder->Uint32(static_cast<uint32_t>(parameter));
@@ -6087,7 +6215,7 @@ inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_s
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(204);  // Type ID -- TODO: mEncoder->Id(ARCHITECTURE_ID);
+    mEncoder->Uint16(209);  // Type ID -- TODO: mEncoder->Id(ARCHITECTURE_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(pointer_alignment);
     mEncoder->Uint32(pointer_size);
@@ -6104,7 +6232,7 @@ inline void GlesSpy::replayCreateRenderer(uint32_t id) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(205);  // Type ID -- TODO: mEncoder->Id(REPLAY_CREATE_RENDERER_ID);
+    mEncoder->Uint16(210);  // Type ID -- TODO: mEncoder->Id(REPLAY_CREATE_RENDERER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(id);
 }
@@ -6118,7 +6246,7 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(206);  // Type ID -- TODO: mEncoder->Id(REPLAY_BIND_RENDERER_ID);
+    mEncoder->Uint16(211);  // Type ID -- TODO: mEncoder->Id(REPLAY_BIND_RENDERER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint32(id);
 }
@@ -6132,8 +6260,8 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_136_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_136_result;
+        std::shared_ptr<Context> l_GetContext_137_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_137_result;
         std::shared_ptr<Framebuffer> l_backbuffer =
                 l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)];
         RenderbufferId l_color_id = (RenderbufferId)(
@@ -6165,7 +6293,7 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(207);  // Type ID -- TODO: mEncoder->Id(BACKBUFFER_INFO_ID);
+    mEncoder->Uint16(212);  // Type ID -- TODO: mEncoder->Id(BACKBUFFER_INFO_ID);
     mEncoder->Value(&observations);
     mEncoder->Int32(width);
     mEncoder->Int32(height);
@@ -6184,7 +6312,7 @@ inline void GlesSpy::startTimer(uint8_t index) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(208);  // Type ID -- TODO: mEncoder->Id(START_TIMER_ID);
+    mEncoder->Uint16(213);  // Type ID -- TODO: mEncoder->Id(START_TIMER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint8(index);
 }
@@ -6201,7 +6329,7 @@ inline uint64_t GlesSpy::stopTimer(uint8_t index) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(209);  // Type ID -- TODO: mEncoder->Id(STOP_TIMER_ID);
+    mEncoder->Uint16(214);  // Type ID -- TODO: mEncoder->Id(STOP_TIMER_ID);
     mEncoder->Value(&observations);
     mEncoder->Uint8(index);
     mEncoder->Uint64(result);
@@ -6218,7 +6346,7 @@ inline void GlesSpy::flushPostBuffer() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(210);  // Type ID -- TODO: mEncoder->Id(FLUSH_POST_BUFFER_ID);
+    mEncoder->Uint16(215);  // Type ID -- TODO: mEncoder->Id(FLUSH_POST_BUFFER_ID);
     mEncoder->Value(&observations);
 }
 

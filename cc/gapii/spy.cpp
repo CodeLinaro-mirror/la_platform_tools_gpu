@@ -18,6 +18,7 @@
 #include "connection_writer.h"
 
 #include <gapic/encoder.h>
+#include <gapic/log.h>
 #include <gapic/target.h>
 
 #if TARGET_OS == GAPID_OS_WINDOWS
@@ -28,6 +29,11 @@ namespace {
 
 const uint32_t EGL_WIDTH  = 0x3057;
 const uint32_t EGL_HEIGHT = 0x3056;
+
+const uint32_t GLX_WIDTH  = 0x801D;
+const uint32_t GLX_HEIGHT = 0x801E;
+
+const uint32_t kCGLCPSurfaceBackingSize = 304;
 
 bool isLittleEndian() {
     union {
@@ -63,8 +69,7 @@ EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
     return res;
 }
 
-EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,
-                               EGLContext context) {
+EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read, EGLContext context) {
     using namespace RenderbufferFormat;
 
     EGLBoolean res = GlesSpy::eglMakeCurrent(display, draw, read, context);
@@ -99,20 +104,59 @@ BOOL Spy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 
 CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
     using namespace RenderbufferFormat;
+
     CGLError err = GlesSpy::CGLSetCurrentContext(ctx);
     if (err == 0 && ctx != nullptr) {
-        // TODO: Fetch dimensions and formats from OS.
-        GlesSpy::backbufferInfo(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+        CGSConnectionID cid;
+        CGSWindowID wid;
+        CGSSurfaceID sid;
+        double bounds[4];
+
+        if (mImports.CGLGetSurface(ctx, &cid, &wid, &sid) == 0) {
+            mImports.CGSGetSurfaceBounds(cid, wid, sid, bounds);
+        }
+        int width = bounds[2] - bounds[0];  // size.x - origin.x
+        int height = bounds[3] - bounds[1]; // size.y - origin.y
+
+        // TODO: Probe formats
+        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
     }
     return err;
 }
 
-void Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read,
-                                GLXContext ctx) {
+Bool Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
     using namespace RenderbufferFormat;
-    GlesSpy::glXMakeContextCurrent(display, draw, read, ctx);
-    // TODO: Fetch dimensions and formats from OS.
-    GlesSpy::backbufferInfo(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+
+    Bool res = GlesSpy::glXMakeContextCurrent(display, draw, read, ctx);
+    if (res != 0 && display != nullptr) {
+        int width = 0;
+        int height = 0;
+        mImports.glXQueryDrawable(display, draw, GLX_WIDTH, &width);
+        mImports.glXQueryDrawable(display, draw, GLX_HEIGHT, &height);
+
+        // TODO: Probe formats
+        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+    }
+
+    return res;
+}
+
+Bool Spy::glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx) {
+    using namespace RenderbufferFormat;
+
+    Bool res = GlesSpy::glXMakeCurrent(display, drawable, ctx);
+    if (res != 0 && display != nullptr) {
+        int width = 0;
+        int height = 0;
+        mImports.glXQueryDrawable(display, drawable, GLX_WIDTH, &width);
+        mImports.glXQueryDrawable(display, drawable, GLX_HEIGHT, &height);
+
+        // TODO: Probe formats
+        GlesSpy::backbufferInfo(
+            width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+    }
+
+    return res;
 }
 
 } // namespace gapii

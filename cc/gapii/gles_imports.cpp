@@ -37,7 +37,10 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glXCreateNewContext", true));
     glXMakeContextCurrent = reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(
             GetGfxProcAddress("glXMakeContextCurrent", true));
+    glXMakeCurrent = reinterpret_cast<PFNGLXMAKECURRENT>(GetGfxProcAddress("glXMakeCurrent", true));
     glXSwapBuffers = reinterpret_cast<PFNGLXSWAPBUFFERS>(GetGfxProcAddress("glXSwapBuffers", true));
+    glXQueryDrawable =
+            reinterpret_cast<PFNGLXQUERYDRAWABLE>(GetGfxProcAddress("glXQueryDrawable", true));
     wglCreateContext =
             reinterpret_cast<PFNWGLCREATECONTEXT>(GetGfxProcAddress("wglCreateContext", true));
     wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARB>(
@@ -48,6 +51,11 @@ void GlesImports::Resolve() {
             reinterpret_cast<PFNCGLCREATECONTEXT>(GetGfxProcAddress("CGLCreateContext", true));
     CGLSetCurrentContext = reinterpret_cast<PFNCGLSETCURRENTCONTEXT>(
             GetGfxProcAddress("CGLSetCurrentContext", true));
+    CGLGetSurface = reinterpret_cast<PFNCGLGETSURFACE>(GetGfxProcAddress("CGLGetSurface", true));
+    CGSGetSurfaceBounds = reinterpret_cast<PFNCGSGETSURFACEBOUNDS>(
+            GetGfxProcAddress("CGSGetSurfaceBounds", true));
+    CGLFlushDrawable =
+            reinterpret_cast<PFNCGLFLUSHDRAWABLE>(GetGfxProcAddress("CGLFlushDrawable", true));
     glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
             GetGfxProcAddress("glEnableClientState", true));
     glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(

@@ -33,7 +33,18 @@ func init() {
 	registry.Add((*CGLContextObjᵖ)(nil).Class())
 	registry.Add((*CGLPixelFormatObj)(nil).Class())
 	registry.Add((*CGLCreateContext)(nil).Class())
+	registry.Add((*CGLFlushDrawable)(nil).Class())
+	registry.Add((*CGSConnectionIDᵖ)(nil).Class())
+	registry.Add((*CGSWindowIDᵖ)(nil).Class())
+	registry.Add((*CGSSurfaceIDᵖ)(nil).Class())
+	registry.Add((*CGLGetSurface)(nil).Class())
 	registry.Add((*CGLSetCurrentContext)(nil).Class())
+	registry.Add((*CGSConnectionID)(nil).Class())
+	registry.Add((*CGSConnectionIDˢ)(nil).Class())
+	registry.Add((*F64ᵖ)(nil).Class())
+	registry.Add((*CGSGetSurfaceBounds)(nil).Class())
+	registry.Add((*CGSSurfaceIDˢ)(nil).Class())
+	registry.Add((*CGSWindowIDˢ)(nil).Class())
 	registry.Add((*Charˢ)(nil).Class())
 	registry.Add((*Charᵖ)(nil).Class())
 	registry.Add((*Charᵖˢ)(nil).Class())
@@ -76,6 +87,7 @@ func init() {
 	registry.Add((*F32ː4ᵃ)(nil).Class())
 	registry.Add((*F32ˢ)(nil).Class())
 	registry.Add((*F32ᵖ)(nil).Class())
+	registry.Add((*F64ˢ)(nil).Class())
 	registry.Add((*FlushPostBuffer)(nil).Class())
 	registry.Add((*FramebufferAttachmentˢ)(nil).Class())
 	registry.Add((*FramebufferAttachmentᵖ)(nil).Class())
@@ -289,12 +301,14 @@ func init() {
 	registry.Add((*GlXCreateContext)(nil).Class())
 	registry.Add((*GlXCreateNewContext)(nil).Class())
 	registry.Add((*GlXMakeContextCurrent)(nil).Class())
+	registry.Add((*GlXMakeCurrent)(nil).Class())
+	registry.Add((*Intᵖ)(nil).Class())
+	registry.Add((*GlXQueryDrawable)(nil).Class())
 	registry.Add((*GlXSwapBuffers)(nil).Class())
 	registry.Add((*HGLRC)(nil).Class())
 	registry.Add((*Globals)(nil).Class())
 	registry.Add((*HDC)(nil).Class())
 	registry.Add((*Intˢ)(nil).Class())
-	registry.Add((*Intᵖ)(nil).Class())
 	registry.Add((*Vec2f)(nil).Class())
 	registry.Add((*Mat2f)(nil).Class())
 	registry.Add((*Mat2fˢ)(nil).Class())
@@ -369,7 +383,18 @@ var (
 	binaryIDCGLContextObjᵖ                         = binary.ID{0xa5, 0xae, 0x0c, 0xd1, 0xe4, 0x8a, 0xce, 0xaa, 0x58, 0x17, 0x44, 0x03, 0x19, 0xcc, 0xf2, 0xea, 0x50, 0x88, 0x53, 0xb9}
 	binaryIDCGLPixelFormatObj                      = binary.ID{0x81, 0x5b, 0xcb, 0x83, 0x09, 0xbc, 0x3d, 0x7e, 0x40, 0x9c, 0xdd, 0x21, 0x56, 0xa3, 0x69, 0xef, 0x28, 0xea, 0x84, 0x41}
 	binaryIDCGLCreateContext                       = binary.ID{0x87, 0xeb, 0x7f, 0x5e, 0x46, 0xd1, 0x7c, 0xf4, 0x3c, 0x36, 0x44, 0x4b, 0x60, 0x5d, 0xaf, 0xc5, 0x43, 0xc5, 0x2c, 0x61}
+	binaryIDCGLFlushDrawable                       = binary.ID{0x66, 0xb7, 0x6a, 0xa6, 0xc2, 0x2a, 0xab, 0x8e, 0xda, 0x18, 0x0e, 0x76, 0x78, 0xc5, 0xf3, 0xe5, 0xce, 0x2f, 0x91, 0x54}
+	binaryIDCGSConnectionIDᵖ                       = binary.ID{0x38, 0x8c, 0x60, 0xcd, 0x8b, 0x2b, 0x18, 0xa7, 0x29, 0x99, 0xbf, 0x46, 0x8d, 0xfb, 0xc0, 0x3d, 0xe9, 0x9a, 0xd5, 0x48}
+	binaryIDCGSWindowIDᵖ                           = binary.ID{0xbf, 0x73, 0x42, 0x2f, 0xcd, 0xec, 0xa9, 0x1e, 0x11, 0x55, 0x2d, 0x08, 0x00, 0xd1, 0x37, 0x01, 0x08, 0xc6, 0x5d, 0x24}
+	binaryIDCGSSurfaceIDᵖ                          = binary.ID{0x19, 0x36, 0xee, 0x80, 0x3a, 0xe1, 0x89, 0x37, 0xcf, 0xe1, 0x30, 0xfa, 0xde, 0x0e, 0xff, 0x1a, 0x4c, 0x08, 0x08, 0x51}
+	binaryIDCGLGetSurface                          = binary.ID{0x74, 0xdc, 0x8d, 0x31, 0x83, 0x7c, 0x92, 0x53, 0x8b, 0xbe, 0x2b, 0x76, 0x07, 0xa2, 0xaf, 0x98, 0x27, 0x26, 0xd2, 0x16}
 	binaryIDCGLSetCurrentContext                   = binary.ID{0x88, 0xc1, 0x83, 0x0a, 0xe8, 0x2c, 0x03, 0xa0, 0x88, 0x20, 0xb9, 0x75, 0xfd, 0xb0, 0x14, 0xca, 0xbd, 0x78, 0x2d, 0x6f}
+	binaryIDCGSConnectionID                        = binary.ID{0x44, 0x54, 0x8b, 0xc2, 0x8e, 0x89, 0xcb, 0x34, 0x5f, 0xc6, 0x32, 0x5f, 0xd8, 0x3f, 0x4f, 0x0b, 0x38, 0x21, 0xf7, 0xa2}
+	binaryIDCGSConnectionIDˢ                       = binary.ID{0xb8, 0x92, 0xdf, 0x8c, 0xe0, 0x7b, 0x48, 0xa0, 0x2e, 0x72, 0x45, 0x2b, 0x8e, 0x08, 0xbf, 0x3a, 0x9b, 0x4f, 0x5d, 0x2f}
+	binaryIDF64ᵖ                                   = binary.ID{0xf2, 0xcc, 0xdb, 0xcc, 0xed, 0x7e, 0x95, 0x7d, 0xf8, 0xdc, 0xe8, 0xbc, 0x49, 0xbf, 0xdd, 0x12, 0xd9, 0xf2, 0xd8, 0x55}
+	binaryIDCGSGetSurfaceBounds                    = binary.ID{0xc3, 0x59, 0xf1, 0x88, 0xb4, 0x83, 0x28, 0xd2, 0x24, 0x88, 0xdf, 0xf5, 0xb5, 0x59, 0x80, 0xdd, 0x77, 0x5e, 0xfa, 0xd7}
+	binaryIDCGSSurfaceIDˢ                          = binary.ID{0xf2, 0xbd, 0x74, 0x6c, 0x45, 0x68, 0xbc, 0x71, 0x0c, 0x0d, 0xc4, 0x8d, 0x7b, 0xc9, 0x40, 0x1b, 0xbe, 0xb9, 0xf5, 0xed}
+	binaryIDCGSWindowIDˢ                           = binary.ID{0x88, 0x07, 0x63, 0x00, 0x36, 0x4d, 0x91, 0x9e, 0x1a, 0x10, 0x78, 0x10, 0xde, 0x80, 0xd8, 0x30, 0x03, 0x4e, 0x64, 0x7a}
 	binaryIDCharˢ                                  = binary.ID{0x70, 0x6d, 0x95, 0x73, 0x2e, 0xce, 0x6e, 0x8c, 0xc5, 0x05, 0x19, 0x07, 0x10, 0xbd, 0x46, 0x47, 0x9e, 0x83, 0x55, 0x5c}
 	binaryIDCharᵖ                                  = binary.ID{0x67, 0xe3, 0xfd, 0x6e, 0x09, 0x7e, 0xa7, 0x65, 0x7f, 0x40, 0x8d, 0xd4, 0x35, 0x40, 0xcc, 0x38, 0x25, 0x23, 0x66, 0xdf}
 	binaryIDCharᵖˢ                                 = binary.ID{0x5e, 0x23, 0xd9, 0xba, 0xac, 0xf5, 0x87, 0x07, 0xb1, 0xef, 0x52, 0x7a, 0x95, 0xfb, 0x13, 0xec, 0x0b, 0x2e, 0x61, 0xf7}
@@ -412,6 +437,7 @@ var (
 	binaryIDF32ː4ᵃ                                 = binary.ID{0xb4, 0x29, 0x60, 0xf4, 0x43, 0x6b, 0xf8, 0xd9, 0xe8, 0x53, 0x77, 0x94, 0x87, 0x34, 0xbb, 0x38, 0x7b, 0x6f, 0x8c, 0x0b}
 	binaryIDF32ˢ                                   = binary.ID{0x80, 0xa1, 0x30, 0xea, 0x1b, 0x77, 0xd4, 0x58, 0x3c, 0xac, 0xef, 0x6d, 0xd4, 0xc8, 0x16, 0xdc, 0x5f, 0xd6, 0x7b, 0xee}
 	binaryIDF32ᵖ                                   = binary.ID{0x25, 0x42, 0x8d, 0x14, 0xfa, 0x29, 0xc8, 0xad, 0xe4, 0x75, 0x2b, 0xfa, 0xf4, 0x35, 0x5b, 0x12, 0x23, 0x97, 0x38, 0x77}
+	binaryIDF64ˢ                                   = binary.ID{0x6a, 0xef, 0x25, 0x73, 0x5b, 0x6a, 0x6b, 0x8e, 0xcd, 0x9c, 0x2f, 0x95, 0x76, 0x64, 0x3d, 0x9d, 0x20, 0x0f, 0x94, 0x39}
 	binaryIDFlushPostBuffer                        = binary.ID{0x26, 0x4e, 0x20, 0xbb, 0xf9, 0x53, 0x75, 0xcd, 0x08, 0x98, 0x6d, 0x82, 0x25, 0x7d, 0xb5, 0xb6, 0x1e, 0xbb, 0xe1, 0xbf}
 	binaryIDFramebufferAttachmentˢ                 = binary.ID{0x96, 0x6f, 0x1f, 0xa4, 0x3c, 0xa5, 0xd5, 0x57, 0xcd, 0xaf, 0xae, 0x97, 0x82, 0xbc, 0xda, 0xeb, 0xae, 0x2c, 0x93, 0xfc}
 	binaryIDFramebufferAttachmentᵖ                 = binary.ID{0xc1, 0xc1, 0xe5, 0xa2, 0x3a, 0x14, 0xc7, 0x83, 0xf8, 0x0a, 0xf2, 0xc9, 0x7e, 0x42, 0x47, 0x17, 0x34, 0x93, 0x1a, 0x91}
@@ -624,13 +650,15 @@ var (
 	binaryIDGlViewport                             = binary.ID{0x96, 0x41, 0xef, 0xd3, 0x17, 0x6b, 0x50, 0x3c, 0xeb, 0x46, 0x86, 0x49, 0x1c, 0x1b, 0xec, 0x65, 0xe1, 0xe0, 0xa7, 0xcb}
 	binaryIDGlXCreateContext                       = binary.ID{0x69, 0xd6, 0x87, 0x67, 0x9c, 0x50, 0x4f, 0xe6, 0x49, 0x6b, 0x1a, 0x51, 0x2f, 0xd7, 0x22, 0x72, 0x8e, 0x01, 0xda, 0x6e}
 	binaryIDGlXCreateNewContext                    = binary.ID{0x84, 0x7e, 0x5e, 0x97, 0x8c, 0x27, 0x99, 0x7b, 0x5e, 0xd5, 0x5f, 0xc8, 0xd5, 0xc1, 0x5e, 0x0c, 0x90, 0x64, 0xf7, 0x43}
-	binaryIDGlXMakeContextCurrent                  = binary.ID{0x78, 0x1c, 0x13, 0x6d, 0x45, 0x65, 0x07, 0xf2, 0x7d, 0xa0, 0x15, 0xa1, 0x59, 0x22, 0x6d, 0xbe, 0xbd, 0x15, 0xb8, 0x90}
+	binaryIDGlXMakeContextCurrent                  = binary.ID{0x4e, 0x6d, 0x3c, 0x63, 0x7f, 0x49, 0x79, 0x4e, 0x3d, 0xd0, 0xd9, 0x0c, 0xcf, 0x72, 0x94, 0x3f, 0x6b, 0xfd, 0x77, 0xfd}
+	binaryIDGlXMakeCurrent                         = binary.ID{0xa6, 0xaf, 0xc1, 0x6f, 0x1c, 0x9b, 0xdb, 0x26, 0x13, 0x0b, 0x75, 0xa3, 0x14, 0xb9, 0x1b, 0x58, 0x37, 0xa6, 0x23, 0xc8}
+	binaryIDIntᵖ                                   = binary.ID{0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46}
+	binaryIDGlXQueryDrawable                       = binary.ID{0x17, 0xd3, 0x19, 0xa4, 0xba, 0x07, 0x32, 0xb5, 0xc2, 0x76, 0xae, 0xde, 0xfe, 0x31, 0x95, 0x07, 0x79, 0xdb, 0xd0, 0xd6}
 	binaryIDGlXSwapBuffers                         = binary.ID{0x6f, 0x6a, 0xec, 0x59, 0x43, 0x85, 0x4a, 0xf5, 0x61, 0xc7, 0xb1, 0x28, 0x6c, 0x34, 0xa5, 0xb8, 0xbd, 0x25, 0x12, 0xc2}
 	binaryIDHGLRC                                  = binary.ID{0x95, 0xfc, 0xcf, 0x7f, 0x79, 0x35, 0x44, 0x38, 0xd4, 0x4f, 0x6d, 0xad, 0xae, 0xcd, 0xf0, 0xa5, 0x4d, 0x49, 0x48, 0xc7}
 	binaryIDGlobals                                = binary.ID{0x6b, 0xd7, 0xb2, 0xf9, 0x46, 0xfa, 0xb5, 0xa7, 0x8e, 0x26, 0xe5, 0x72, 0xe7, 0x8f, 0x33, 0x91, 0xb4, 0xb9, 0x49, 0x0c}
 	binaryIDHDC                                    = binary.ID{0x77, 0x14, 0x36, 0x4d, 0x67, 0xdb, 0x2d, 0xd0, 0xcc, 0x8e, 0x01, 0x72, 0xfa, 0x85, 0x42, 0x9c, 0x04, 0x31, 0x53, 0xcc}
 	binaryIDIntˢ                                   = binary.ID{0x81, 0xe7, 0x7a, 0x15, 0x73, 0x0c, 0x03, 0xb6, 0x9f, 0x6c, 0xec, 0x7b, 0x08, 0xf2, 0xc1, 0x20, 0x9f, 0xcd, 0x72, 0x5a}
-	binaryIDIntᵖ                                   = binary.ID{0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46}
 	binaryIDVec2f                                  = binary.ID{0x43, 0x30, 0xe0, 0xc8, 0xdc, 0x80, 0xf3, 0x61, 0xf7, 0xc9, 0x32, 0xe8, 0x58, 0x5f, 0xa0, 0xe9, 0xc3, 0xff, 0x0d, 0x21}
 	binaryIDMat2f                                  = binary.ID{0xb3, 0xca, 0x65, 0x73, 0x09, 0x4d, 0x46, 0x20, 0x2e, 0x2a, 0x3d, 0x75, 0x6b, 0x7b, 0xc3, 0xaf, 0x18, 0x79, 0xfe, 0xcb}
 	binaryIDMat2fˢ                                 = binary.ID{0xfd, 0x99, 0x6e, 0x41, 0x72, 0xbc, 0xf9, 0x44, 0xfb, 0x0c, 0x17, 0x18, 0x6e, 0x78, 0x41, 0x4a, 0xe4, 0xf9, 0x01, 0xe9}
@@ -1923,6 +1951,352 @@ var schemaCGLCreateContext = &schema.Class{
 	},
 }
 
+type binaryClassCGLFlushDrawable struct{}
+
+func (*CGLFlushDrawable) Class() binary.Class {
+	return (*binaryClassCGLFlushDrawable)(nil)
+}
+func doEncodeCGLFlushDrawable(e binary.Encoder, o *CGLFlushDrawable) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGLFlushDrawable(d binary.Decoder, o *CGLFlushDrawable) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = CGLError(obj)
+	}
+	return nil
+}
+func doSkipCGLFlushDrawable(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGLContextObj)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGLFlushDrawable) ID() binary.ID      { return binaryIDCGLFlushDrawable }
+func (*binaryClassCGLFlushDrawable) New() binary.Object { return &CGLFlushDrawable{} }
+func (*binaryClassCGLFlushDrawable) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGLFlushDrawable(e, obj.(*CGLFlushDrawable))
+}
+func (*binaryClassCGLFlushDrawable) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGLFlushDrawable{}
+	return obj, doDecodeCGLFlushDrawable(d, obj)
+}
+func (*binaryClassCGLFlushDrawable) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGLFlushDrawable(d, obj.(*CGLFlushDrawable))
+}
+func (*binaryClassCGLFlushDrawable) Skip(d binary.Decoder) error { return doSkipCGLFlushDrawable(d) }
+func (*binaryClassCGLFlushDrawable) Schema() *schema.Class       { return schemaCGLFlushDrawable }
+
+var schemaCGLFlushDrawable = &schema.Class{
+	TypeID: binaryIDCGLFlushDrawable,
+	Name:   "CGLFlushDrawable",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+	},
+}
+
+type binaryClassCGSConnectionIDᵖ struct{}
+
+func (*CGSConnectionIDᵖ) Class() binary.Class {
+	return (*binaryClassCGSConnectionIDᵖ)(nil)
+}
+func doEncodeCGSConnectionIDᵖ(e binary.Encoder, o *CGSConnectionIDᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSConnectionIDᵖ(d binary.Decoder, o *CGSConnectionIDᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCGSConnectionIDᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSConnectionIDᵖ) ID() binary.ID      { return binaryIDCGSConnectionIDᵖ }
+func (*binaryClassCGSConnectionIDᵖ) New() binary.Object { return &CGSConnectionIDᵖ{} }
+func (*binaryClassCGSConnectionIDᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSConnectionIDᵖ(e, obj.(*CGSConnectionIDᵖ))
+}
+func (*binaryClassCGSConnectionIDᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSConnectionIDᵖ{}
+	return obj, doDecodeCGSConnectionIDᵖ(d, obj)
+}
+func (*binaryClassCGSConnectionIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSConnectionIDᵖ(d, obj.(*CGSConnectionIDᵖ))
+}
+func (*binaryClassCGSConnectionIDᵖ) Skip(d binary.Decoder) error { return doSkipCGSConnectionIDᵖ(d) }
+func (*binaryClassCGSConnectionIDᵖ) Schema() *schema.Class       { return schemaCGSConnectionIDᵖ }
+
+var schemaCGSConnectionIDᵖ = &schema.Class{
+	TypeID: binaryIDCGSConnectionIDᵖ,
+	Name:   "CGSConnectionIDᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCGSWindowIDᵖ struct{}
+
+func (*CGSWindowIDᵖ) Class() binary.Class {
+	return (*binaryClassCGSWindowIDᵖ)(nil)
+}
+func doEncodeCGSWindowIDᵖ(e binary.Encoder, o *CGSWindowIDᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSWindowIDᵖ(d binary.Decoder, o *CGSWindowIDᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCGSWindowIDᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSWindowIDᵖ) ID() binary.ID      { return binaryIDCGSWindowIDᵖ }
+func (*binaryClassCGSWindowIDᵖ) New() binary.Object { return &CGSWindowIDᵖ{} }
+func (*binaryClassCGSWindowIDᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSWindowIDᵖ(e, obj.(*CGSWindowIDᵖ))
+}
+func (*binaryClassCGSWindowIDᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSWindowIDᵖ{}
+	return obj, doDecodeCGSWindowIDᵖ(d, obj)
+}
+func (*binaryClassCGSWindowIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSWindowIDᵖ(d, obj.(*CGSWindowIDᵖ))
+}
+func (*binaryClassCGSWindowIDᵖ) Skip(d binary.Decoder) error { return doSkipCGSWindowIDᵖ(d) }
+func (*binaryClassCGSWindowIDᵖ) Schema() *schema.Class       { return schemaCGSWindowIDᵖ }
+
+var schemaCGSWindowIDᵖ = &schema.Class{
+	TypeID: binaryIDCGSWindowIDᵖ,
+	Name:   "CGSWindowIDᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCGSSurfaceIDᵖ struct{}
+
+func (*CGSSurfaceIDᵖ) Class() binary.Class {
+	return (*binaryClassCGSSurfaceIDᵖ)(nil)
+}
+func doEncodeCGSSurfaceIDᵖ(e binary.Encoder, o *CGSSurfaceIDᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSSurfaceIDᵖ(d binary.Decoder, o *CGSSurfaceIDᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCGSSurfaceIDᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSSurfaceIDᵖ) ID() binary.ID      { return binaryIDCGSSurfaceIDᵖ }
+func (*binaryClassCGSSurfaceIDᵖ) New() binary.Object { return &CGSSurfaceIDᵖ{} }
+func (*binaryClassCGSSurfaceIDᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSSurfaceIDᵖ(e, obj.(*CGSSurfaceIDᵖ))
+}
+func (*binaryClassCGSSurfaceIDᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSSurfaceIDᵖ{}
+	return obj, doDecodeCGSSurfaceIDᵖ(d, obj)
+}
+func (*binaryClassCGSSurfaceIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSSurfaceIDᵖ(d, obj.(*CGSSurfaceIDᵖ))
+}
+func (*binaryClassCGSSurfaceIDᵖ) Skip(d binary.Decoder) error { return doSkipCGSSurfaceIDᵖ(d) }
+func (*binaryClassCGSSurfaceIDᵖ) Schema() *schema.Class       { return schemaCGSSurfaceIDᵖ }
+
+var schemaCGSSurfaceIDᵖ = &schema.Class{
+	TypeID: binaryIDCGSSurfaceIDᵖ,
+	Name:   "CGSSurfaceIDᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCGLGetSurface struct{}
+
+func (*CGLGetSurface) Class() binary.Class {
+	return (*binaryClassCGLGetSurface)(nil)
+}
+func doEncodeCGLGetSurface(e binary.Encoder, o *CGLGetSurface) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Cid); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Wid); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Sid); err != nil {
+		return err
+	}
+	if err := e.Int64(o.Result); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGLGetSurface(d binary.Decoder, o *CGLGetSurface) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Cid); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Wid); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Sid); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = int64(obj)
+	}
+	return nil
+}
+func doSkipCGLGetSurface(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGLContextObj)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGSConnectionIDᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGSWindowIDᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGSSurfaceIDᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGLGetSurface) ID() binary.ID      { return binaryIDCGLGetSurface }
+func (*binaryClassCGLGetSurface) New() binary.Object { return &CGLGetSurface{} }
+func (*binaryClassCGLGetSurface) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGLGetSurface(e, obj.(*CGLGetSurface))
+}
+func (*binaryClassCGLGetSurface) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGLGetSurface{}
+	return obj, doDecodeCGLGetSurface(d, obj)
+}
+func (*binaryClassCGLGetSurface) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGLGetSurface(d, obj.(*CGLGetSurface))
+}
+func (*binaryClassCGLGetSurface) Skip(d binary.Decoder) error { return doSkipCGLGetSurface(d) }
+func (*binaryClassCGLGetSurface) Schema() *schema.Class       { return schemaCGLGetSurface }
+
+var schemaCGLGetSurface = &schema.Class{
+	TypeID: binaryIDCGLGetSurface,
+	Name:   "CGLGetSurface",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj"}},
+		{Declared: "Cid", Type: &schema.Struct{Name: "CGSConnectionIDᵖ"}},
+		{Declared: "Wid", Type: &schema.Struct{Name: "CGSWindowIDᵖ"}},
+		{Declared: "Sid", Type: &schema.Struct{Name: "CGSSurfaceIDᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
+
 type binaryClassCGLSetCurrentContext struct{}
 
 func (*CGLSetCurrentContext) Class() binary.Class {
@@ -1990,6 +2364,368 @@ var schemaCGLSetCurrentContext = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+	},
+}
+
+type binaryClassCGSConnectionID struct{}
+
+func (*CGSConnectionID) Class() binary.Class {
+	return (*binaryClassCGSConnectionID)(nil)
+}
+func doEncodeCGSConnectionID(e binary.Encoder, o *CGSConnectionID) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSConnectionID(d binary.Decoder, o *CGSConnectionID) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCGSConnectionID(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSConnectionID) ID() binary.ID      { return binaryIDCGSConnectionID }
+func (*binaryClassCGSConnectionID) New() binary.Object { return &CGSConnectionID{} }
+func (*binaryClassCGSConnectionID) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSConnectionID(e, obj.(*CGSConnectionID))
+}
+func (*binaryClassCGSConnectionID) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSConnectionID{}
+	return obj, doDecodeCGSConnectionID(d, obj)
+}
+func (*binaryClassCGSConnectionID) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSConnectionID(d, obj.(*CGSConnectionID))
+}
+func (*binaryClassCGSConnectionID) Skip(d binary.Decoder) error { return doSkipCGSConnectionID(d) }
+func (*binaryClassCGSConnectionID) Schema() *schema.Class       { return schemaCGSConnectionID }
+
+var schemaCGSConnectionID = &schema.Class{
+	TypeID: binaryIDCGSConnectionID,
+	Name:   "CGSConnectionID",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCGSConnectionIDˢ struct{}
+
+func (*CGSConnectionIDˢ) Class() binary.Class {
+	return (*binaryClassCGSConnectionIDˢ)(nil)
+}
+func doEncodeCGSConnectionIDˢ(e binary.Encoder, o *CGSConnectionIDˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSConnectionIDˢ(d binary.Decoder, o *CGSConnectionIDˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCGSConnectionIDˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSConnectionIDˢ) ID() binary.ID      { return binaryIDCGSConnectionIDˢ }
+func (*binaryClassCGSConnectionIDˢ) New() binary.Object { return &CGSConnectionIDˢ{} }
+func (*binaryClassCGSConnectionIDˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSConnectionIDˢ(e, obj.(*CGSConnectionIDˢ))
+}
+func (*binaryClassCGSConnectionIDˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSConnectionIDˢ{}
+	return obj, doDecodeCGSConnectionIDˢ(d, obj)
+}
+func (*binaryClassCGSConnectionIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSConnectionIDˢ(d, obj.(*CGSConnectionIDˢ))
+}
+func (*binaryClassCGSConnectionIDˢ) Skip(d binary.Decoder) error { return doSkipCGSConnectionIDˢ(d) }
+func (*binaryClassCGSConnectionIDˢ) Schema() *schema.Class       { return schemaCGSConnectionIDˢ }
+
+var schemaCGSConnectionIDˢ = &schema.Class{
+	TypeID: binaryIDCGSConnectionIDˢ,
+	Name:   "CGSConnectionIDˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassF64ᵖ struct{}
+
+func (*F64ᵖ) Class() binary.Class {
+	return (*binaryClassF64ᵖ)(nil)
+}
+func doEncodeF64ᵖ(e binary.Encoder, o *F64ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipF64ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassF64ᵖ) ID() binary.ID      { return binaryIDF64ᵖ }
+func (*binaryClassF64ᵖ) New() binary.Object { return &F64ᵖ{} }
+func (*binaryClassF64ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF64ᵖ(e, obj.(*F64ᵖ))
+}
+func (*binaryClassF64ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F64ᵖ{}
+	return obj, doDecodeF64ᵖ(d, obj)
+}
+func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF64ᵖ(d, obj.(*F64ᵖ))
+}
+func (*binaryClassF64ᵖ) Skip(d binary.Decoder) error { return doSkipF64ᵖ(d) }
+func (*binaryClassF64ᵖ) Schema() *schema.Class       { return schemaF64ᵖ }
+
+var schemaF64ᵖ = &schema.Class{
+	TypeID: binaryIDF64ᵖ,
+	Name:   "F64ᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCGSGetSurfaceBounds struct{}
+
+func (*CGSGetSurfaceBounds) Class() binary.Class {
+	return (*binaryClassCGSGetSurfaceBounds)(nil)
+}
+func doEncodeCGSGetSurfaceBounds(e binary.Encoder, o *CGSGetSurfaceBounds) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Cid); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Wid)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Sid)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Bounds); err != nil {
+		return err
+	}
+	if err := e.Int64(o.Result); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSGetSurfaceBounds(d binary.Decoder, o *CGSGetSurfaceBounds) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Cid); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Wid = CGSWindowID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Sid = CGSSurfaceID(obj)
+	}
+	if err := d.Value(&o.Bounds); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = int64(obj)
+	}
+	return nil
+}
+func doSkipCGSGetSurfaceBounds(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGSConnectionID)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F64ᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSGetSurfaceBounds) ID() binary.ID      { return binaryIDCGSGetSurfaceBounds }
+func (*binaryClassCGSGetSurfaceBounds) New() binary.Object { return &CGSGetSurfaceBounds{} }
+func (*binaryClassCGSGetSurfaceBounds) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSGetSurfaceBounds(e, obj.(*CGSGetSurfaceBounds))
+}
+func (*binaryClassCGSGetSurfaceBounds) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSGetSurfaceBounds{}
+	return obj, doDecodeCGSGetSurfaceBounds(d, obj)
+}
+func (*binaryClassCGSGetSurfaceBounds) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSGetSurfaceBounds(d, obj.(*CGSGetSurfaceBounds))
+}
+func (*binaryClassCGSGetSurfaceBounds) Skip(d binary.Decoder) error {
+	return doSkipCGSGetSurfaceBounds(d)
+}
+func (*binaryClassCGSGetSurfaceBounds) Schema() *schema.Class { return schemaCGSGetSurfaceBounds }
+
+var schemaCGSGetSurfaceBounds = &schema.Class{
+	TypeID: binaryIDCGSGetSurfaceBounds,
+	Name:   "CGSGetSurfaceBounds",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Cid", Type: &schema.Struct{Name: "CGSConnectionID"}},
+		{Declared: "Wid", Type: &schema.Primitive{Name: "CGSWindowID", Method: schema.Int32}},
+		{Declared: "Sid", Type: &schema.Primitive{Name: "CGSSurfaceID", Method: schema.Int32}},
+		{Declared: "Bounds", Type: &schema.Struct{Name: "F64ᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
+
+type binaryClassCGSSurfaceIDˢ struct{}
+
+func (*CGSSurfaceIDˢ) Class() binary.Class {
+	return (*binaryClassCGSSurfaceIDˢ)(nil)
+}
+func doEncodeCGSSurfaceIDˢ(e binary.Encoder, o *CGSSurfaceIDˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSSurfaceIDˢ(d binary.Decoder, o *CGSSurfaceIDˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCGSSurfaceIDˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSSurfaceIDˢ) ID() binary.ID      { return binaryIDCGSSurfaceIDˢ }
+func (*binaryClassCGSSurfaceIDˢ) New() binary.Object { return &CGSSurfaceIDˢ{} }
+func (*binaryClassCGSSurfaceIDˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSSurfaceIDˢ(e, obj.(*CGSSurfaceIDˢ))
+}
+func (*binaryClassCGSSurfaceIDˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSSurfaceIDˢ{}
+	return obj, doDecodeCGSSurfaceIDˢ(d, obj)
+}
+func (*binaryClassCGSSurfaceIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSSurfaceIDˢ(d, obj.(*CGSSurfaceIDˢ))
+}
+func (*binaryClassCGSSurfaceIDˢ) Skip(d binary.Decoder) error { return doSkipCGSSurfaceIDˢ(d) }
+func (*binaryClassCGSSurfaceIDˢ) Schema() *schema.Class       { return schemaCGSSurfaceIDˢ }
+
+var schemaCGSSurfaceIDˢ = &schema.Class{
+	TypeID: binaryIDCGSSurfaceIDˢ,
+	Name:   "CGSSurfaceIDˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassCGSWindowIDˢ struct{}
+
+func (*CGSWindowIDˢ) Class() binary.Class {
+	return (*binaryClassCGSWindowIDˢ)(nil)
+}
+func doEncodeCGSWindowIDˢ(e binary.Encoder, o *CGSWindowIDˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGSWindowIDˢ(d binary.Decoder, o *CGSWindowIDˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCGSWindowIDˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGSWindowIDˢ) ID() binary.ID      { return binaryIDCGSWindowIDˢ }
+func (*binaryClassCGSWindowIDˢ) New() binary.Object { return &CGSWindowIDˢ{} }
+func (*binaryClassCGSWindowIDˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGSWindowIDˢ(e, obj.(*CGSWindowIDˢ))
+}
+func (*binaryClassCGSWindowIDˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGSWindowIDˢ{}
+	return obj, doDecodeCGSWindowIDˢ(d, obj)
+}
+func (*binaryClassCGSWindowIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGSWindowIDˢ(d, obj.(*CGSWindowIDˢ))
+}
+func (*binaryClassCGSWindowIDˢ) Skip(d binary.Decoder) error { return doSkipCGSWindowIDˢ(d) }
+func (*binaryClassCGSWindowIDˢ) Schema() *schema.Class       { return schemaCGSWindowIDˢ }
+
+var schemaCGSWindowIDˢ = &schema.Class{
+	TypeID: binaryIDCGSWindowIDˢ,
+	Name:   "CGSWindowIDˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6459,6 +7195,52 @@ var schemaF32ᵖ = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassF64ˢ struct{}
+
+func (*F64ˢ) Class() binary.Class {
+	return (*binaryClassF64ˢ)(nil)
+}
+func doEncodeF64ˢ(e binary.Encoder, o *F64ˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeF64ˢ(d binary.Decoder, o *F64ˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipF64ˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassF64ˢ) ID() binary.ID      { return binaryIDF64ˢ }
+func (*binaryClassF64ˢ) New() binary.Object { return &F64ˢ{} }
+func (*binaryClassF64ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF64ˢ(e, obj.(*F64ˢ))
+}
+func (*binaryClassF64ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F64ˢ{}
+	return obj, doDecodeF64ˢ(d, obj)
+}
+func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF64ˢ(d, obj.(*F64ˢ))
+}
+func (*binaryClassF64ˢ) Skip(d binary.Decoder) error { return doSkipF64ˢ(d) }
+func (*binaryClassF64ˢ) Schema() *schema.Class       { return schemaF64ˢ }
+
+var schemaF64ˢ = &schema.Class{
+	TypeID: binaryIDF64ˢ,
+	Name:   "F64ˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -23201,6 +23983,9 @@ func doEncodeGlXMakeContextCurrent(e binary.Encoder, o *GlXMakeContextCurrent) e
 	if err := e.Value(&o.Ctx); err != nil {
 		return err
 	}
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeGlXMakeContextCurrent(d binary.Decoder, o *GlXMakeContextCurrent) error {
@@ -23219,6 +24004,11 @@ func doDecodeGlXMakeContextCurrent(d binary.Decoder, o *GlXMakeContextCurrent) e
 	if err := d.Value(&o.Ctx); err != nil {
 		return err
 	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = Bool(obj)
+	}
 	return nil
 }
 func doSkipGlXMakeContextCurrent(d binary.Decoder) error {
@@ -23235,6 +24025,9 @@ func doSkipGlXMakeContextCurrent(d binary.Decoder) error {
 		return err
 	}
 	if err := d.SkipValue((*GLXContext)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
 		return err
 	}
 	return nil
@@ -23265,6 +24058,255 @@ var schemaGlXMakeContextCurrent = &schema.Class{
 		{Declared: "Draw", Type: &schema.Struct{Name: "GLXDrawable"}},
 		{Declared: "Read", Type: &schema.Struct{Name: "GLXDrawable"}},
 		{Declared: "Ctx", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "Bool", Method: schema.Int64}},
+	},
+}
+
+type binaryClassGlXMakeCurrent struct{}
+
+func (*GlXMakeCurrent) Class() binary.Class {
+	return (*binaryClassGlXMakeCurrent)(nil)
+}
+func doEncodeGlXMakeCurrent(e binary.Encoder, o *GlXMakeCurrent) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Display); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Drawable); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXMakeCurrent(d binary.Decoder, o *GlXMakeCurrent) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Display); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Drawable); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ctx); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = Bool(obj)
+	}
+	return nil
+}
+func doSkipGlXMakeCurrent(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLXDrawable)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLXContext)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXMakeCurrent) ID() binary.ID      { return binaryIDGlXMakeCurrent }
+func (*binaryClassGlXMakeCurrent) New() binary.Object { return &GlXMakeCurrent{} }
+func (*binaryClassGlXMakeCurrent) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXMakeCurrent(e, obj.(*GlXMakeCurrent))
+}
+func (*binaryClassGlXMakeCurrent) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXMakeCurrent{}
+	return obj, doDecodeGlXMakeCurrent(d, obj)
+}
+func (*binaryClassGlXMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXMakeCurrent(d, obj.(*GlXMakeCurrent))
+}
+func (*binaryClassGlXMakeCurrent) Skip(d binary.Decoder) error { return doSkipGlXMakeCurrent(d) }
+func (*binaryClassGlXMakeCurrent) Schema() *schema.Class       { return schemaGlXMakeCurrent }
+
+var schemaGlXMakeCurrent = &schema.Class{
+	TypeID: binaryIDGlXMakeCurrent,
+	Name:   "GlXMakeCurrent",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Drawable", Type: &schema.Struct{Name: "GLXDrawable"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "Bool", Method: schema.Int64}},
+	},
+}
+
+type binaryClassIntᵖ struct{}
+
+func (*Intᵖ) Class() binary.Class {
+	return (*binaryClassIntᵖ)(nil)
+}
+func doEncodeIntᵖ(e binary.Encoder, o *Intᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipIntᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIntᵖ) ID() binary.ID      { return binaryIDIntᵖ }
+func (*binaryClassIntᵖ) New() binary.Object { return &Intᵖ{} }
+func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIntᵖ(e, obj.(*Intᵖ))
+}
+func (*binaryClassIntᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Intᵖ{}
+	return obj, doDecodeIntᵖ(d, obj)
+}
+func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIntᵖ(d, obj.(*Intᵖ))
+}
+func (*binaryClassIntᵖ) Skip(d binary.Decoder) error { return doSkipIntᵖ(d) }
+func (*binaryClassIntᵖ) Schema() *schema.Class       { return schemaIntᵖ }
+
+var schemaIntᵖ = &schema.Class{
+	TypeID: binaryIDIntᵖ,
+	Name:   "Intᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlXQueryDrawable struct{}
+
+func (*GlXQueryDrawable) Class() binary.Class {
+	return (*binaryClassGlXQueryDrawable)(nil)
+}
+func doEncodeGlXQueryDrawable(e binary.Encoder, o *GlXQueryDrawable) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Display); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Draw); err != nil {
+		return err
+	}
+	if err := e.Int64(o.Attribute); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Value); err != nil {
+		return err
+	}
+	if err := e.Int64(o.Result); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXQueryDrawable(d binary.Decoder, o *GlXQueryDrawable) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Display); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Draw); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Attribute = int64(obj)
+	}
+	if err := d.Value(&o.Value); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = int64(obj)
+	}
+	return nil
+}
+func doSkipGlXQueryDrawable(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*GLXDrawable)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Intᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXQueryDrawable) ID() binary.ID      { return binaryIDGlXQueryDrawable }
+func (*binaryClassGlXQueryDrawable) New() binary.Object { return &GlXQueryDrawable{} }
+func (*binaryClassGlXQueryDrawable) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXQueryDrawable(e, obj.(*GlXQueryDrawable))
+}
+func (*binaryClassGlXQueryDrawable) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXQueryDrawable{}
+	return obj, doDecodeGlXQueryDrawable(d, obj)
+}
+func (*binaryClassGlXQueryDrawable) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXQueryDrawable(d, obj.(*GlXQueryDrawable))
+}
+func (*binaryClassGlXQueryDrawable) Skip(d binary.Decoder) error { return doSkipGlXQueryDrawable(d) }
+func (*binaryClassGlXQueryDrawable) Schema() *schema.Class       { return schemaGlXQueryDrawable }
+
+var schemaGlXQueryDrawable = &schema.Class{
+	TypeID: binaryIDGlXQueryDrawable,
+	Name:   "GlXQueryDrawable",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Draw", Type: &schema.Struct{Name: "GLXDrawable"}},
+		{Declared: "Attribute", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+		{Declared: "Value", Type: &schema.Struct{Name: "Intᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
 
@@ -23804,66 +24846,6 @@ var schemaIntˢ = &schema.Class{
 	Name:   "Intˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
-	},
-}
-
-type binaryClassIntᵖ struct{}
-
-func (*Intᵖ) Class() binary.Class {
-	return (*binaryClassIntᵖ)(nil)
-}
-func doEncodeIntᵖ(e binary.Encoder, o *Intᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipIntᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassIntᵖ) ID() binary.ID      { return binaryIDIntᵖ }
-func (*binaryClassIntᵖ) New() binary.Object { return &Intᵖ{} }
-func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeIntᵖ(e, obj.(*Intᵖ))
-}
-func (*binaryClassIntᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Intᵖ{}
-	return obj, doDecodeIntᵖ(d, obj)
-}
-func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeIntᵖ(d, obj.(*Intᵖ))
-}
-func (*binaryClassIntᵖ) Skip(d binary.Decoder) error { return doSkipIntᵖ(d) }
-func (*binaryClassIntᵖ) Schema() *schema.Class       { return schemaIntᵖ }
-
-var schemaIntᵖ = &schema.Class{
-	TypeID: binaryIDIntᵖ,
-	Name:   "Intᵖ",
-	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 

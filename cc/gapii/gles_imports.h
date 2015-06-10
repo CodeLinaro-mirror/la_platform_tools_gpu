@@ -39,9 +39,11 @@ struct GlesImports {
                                                  bool direct);
     typedef void *(STDCALL *PFNGLXCREATENEWCONTEXT)(void *display, void *fbconfig, uint32_t type,
                                                     void *shared, bool direct);
-    typedef void(STDCALL *PFNGLXMAKECONTEXTCURRENT)(void *display, void *draw, void *read,
-                                                    void *ctx);
+    typedef int(STDCALL *PFNGLXMAKECONTEXTCURRENT)(void *display, void *draw, void *read,
+                                                   void *ctx);
+    typedef int(STDCALL *PFNGLXMAKECURRENT)(void *display, void *drawable, void *ctx);
     typedef void(STDCALL *PFNGLXSWAPBUFFERS)(void *display, void *drawable);
+    typedef int(STDCALL *PFNGLXQUERYDRAWABLE)(void *display, void *draw, int attribute, int *value);
     typedef void *(STDCALL *PFNWGLCREATECONTEXT)(void *hdc);
     typedef void *(STDCALL *PFNWGLCREATECONTEXTATTRIBSARB)(void *hdc, void *hShareContext,
                                                            int *attribList);
@@ -49,6 +51,10 @@ struct GlesImports {
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(void *hdc);
     typedef int(STDCALL *PFNCGLCREATECONTEXT)(void *pix, void *share, void **ctx);
     typedef int(STDCALL *PFNCGLSETCURRENTCONTEXT)(void *ctx);
+    typedef int(STDCALL *PFNCGLGETSURFACE)(void *ctx, void **cid, int32_t *wid, int32_t *sid);
+    typedef int(STDCALL *PFNCGSGETSURFACEBOUNDS)(void *cid, int32_t wid, int32_t sid,
+                                                 double *bounds);
+    typedef int(STDCALL *PFNCGLFLUSHDRAWABLE)(void *ctx);
     typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(uint32_t program, int32_t buffer_size,
@@ -345,13 +351,18 @@ struct GlesImports {
     PFNGLXCREATECONTEXT glXCreateContext;
     PFNGLXCREATENEWCONTEXT glXCreateNewContext;
     PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent;
+    PFNGLXMAKECURRENT glXMakeCurrent;
     PFNGLXSWAPBUFFERS glXSwapBuffers;
+    PFNGLXQUERYDRAWABLE glXQueryDrawable;
     PFNWGLCREATECONTEXT wglCreateContext;
     PFNWGLCREATECONTEXTATTRIBSARB wglCreateContextAttribsARB;
     PFNWGLMAKECURRENT wglMakeCurrent;
     PFNWGLSWAPBUFFERS wglSwapBuffers;
     PFNCGLCREATECONTEXT CGLCreateContext;
     PFNCGLSETCURRENTCONTEXT CGLSetCurrentContext;
+    PFNCGLGETSURFACE CGLGetSurface;
+    PFNCGSGETSURFACEBOUNDS CGSGetSurfaceBounds;
+    PFNCGLFLUSHDRAWABLE CGLFlushDrawable;
     PFNGLENABLECLIENTSTATE glEnableClientState;
     PFNGLDISABLECLIENTSTATE glDisableClientState;
     PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;
