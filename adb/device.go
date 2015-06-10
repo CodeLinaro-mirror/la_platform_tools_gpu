@@ -40,6 +40,7 @@ var ErrDeviceNotRooted = errors.New("Device is not rooted")
 type Device struct {
 	Serial string
 	State  DeviceState
+	abi    string
 }
 
 // Command returns a new Cmd that will run the command with the specified name
@@ -91,10 +92,21 @@ func (d *Device) SetSELinuxEnforcing(enforce bool) error {
 // StartActivity launches the specified action.
 func (d *Device) StartActivity(a Action) error {
 	return d.Command("am", "start",
-		//		"-W", // Wait for launch to complete
 		"-S", // Force-stop the target app before starting the activity
+		"-W", // Wait for the activity to start
 		"-a", a.Name,
 		"-n", a.Package.Name+"/"+a.Activity).Run()
+}
+
+// String returns a string representing the device.
+func (d *Device) Abi() string {
+	if d.abi == "" {
+		res, err := d.Command("getprop", "ro.product.cpu.abi").Call()
+		if err == nil {
+			d.abi = strings.TrimSpace(res)
+		}
+	}
+	return d.abi
 }
 
 // String returns a string representing the device.
