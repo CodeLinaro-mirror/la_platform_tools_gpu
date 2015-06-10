@@ -27,8 +27,10 @@ import (
 
 type testPtrResolver struct{}
 
-func (testPtrResolver) TranslateTemporaryPointer(ptr uint64) (uint64, error) { return ptr, nil }
-func (testPtrResolver) TranslateCapturePointer(ptr uint64) (uint64, error)   { return ptr, nil }
+func (testPtrResolver) TranslateTemporaryPointer(ptr uint64) uint64 { return ptr }
+func (testPtrResolver) TranslateRemappedPointer(ptr uint64) (protocol.Type, uint64) {
+	return protocol.TypeVolatilePointer, ptr
+}
 
 func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}

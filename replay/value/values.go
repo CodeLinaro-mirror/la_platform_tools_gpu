@@ -23,117 +23,105 @@ import (
 // Bool is a Value of type TypeBool.
 type Bool bool
 
-// Type returns TypeBool.
-func (v Bool) Type() protocol.Type { return protocol.TypeBool }
-
-// Get returns 1 if the Bool is true, otherwise 0.
-func (v Bool) Get(PointerResolver) (uint64, error) {
+// Get returns TypeBool and 1 if the Bool is true, otherwise 0.
+func (v Bool) Get(PointerResolver) (protocol.Type, uint64) {
 	if v {
-		return 1, nil
+		return protocol.TypeBool, 1
 	} else {
-		return 0, nil
+		return protocol.TypeBool, 0
 	}
 }
 
 // U8 is a Value of type TypeUint8.
 type U8 uint8
 
-// Type returns TypeUint8.
-func (v U8) Type() protocol.Type { return protocol.TypeUint8 }
-
-// Get returns the value zero-extended to a uint64.
-func (v U8) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeUint8 and the value zero-extended to a uint64.
+func (v U8) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeUint8, uint64(v)
+}
 
 // S8 is a Value of type TypeInt8.
 type S8 int8
 
-// Type returns TypeInt8.
-func (v S8) Type() protocol.Type { return protocol.TypeInt8 }
-
-// Get returns the value sign-extended to a uint64.
-func (v S8) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeInt8 and the value sign-extended to a uint64.
+func (v S8) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeInt8, uint64(v)
+}
 
 // U16 is a Value of type TypeUint16.
 type U16 uint16
 
-// Type returns TypeUint16.
-func (v U16) Type() protocol.Type { return protocol.TypeUint16 }
-
-// Get returns the value zero-extended to a uint64.
-func (v U16) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeUint16 and the value zero-extended to a uint64.
+func (v U16) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeUint16, uint64(v)
+}
 
 // S16 is a Value of type TypeInt16.
 type S16 int16
 
-// Type returns TypeInt16.
-func (v S16) Type() protocol.Type { return protocol.TypeInt16 }
-
-// Get returns the value sign-extended to a uint64.
-func (v S16) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeInt16 and the value sign-extended to a uint64.
+func (v S16) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeInt16, uint64(v)
+}
 
 // F32 is a Value of type TypeFloat.
 type F32 float32
 
-// Type returns TypeFloat.
-func (v F32) Type() protocol.Type { return protocol.TypeFloat }
-
-// Get returns the IEEE 754 representation of the value packed into the low part of a uint64.
-func (v F32) Get(PointerResolver) (uint64, error) { return uint64(math.Float32bits(float32(v))), nil }
+// Get returns TypeFloat and the IEEE 754 representation of the value packed
+// into the low part of a uint64.
+func (v F32) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeFloat, uint64(math.Float32bits(float32(v)))
+}
 
 // U32 is a Value of type TypeUint32.
 type U32 uint32
 
-// Type returns TypeUint32.
-func (v U32) Type() protocol.Type { return protocol.TypeUint32 }
-
-// Get returns the value zero-extended to a uint64.
-func (v U32) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeUint32 and the value zero-extended to a uint64.
+func (v U32) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeUint32, uint64(v)
+}
 
 // S32 is a Value of type TypeInt32.
 type S32 int32
 
-// Type returns TypeInt32.
-func (v S32) Type() protocol.Type { return protocol.TypeInt32 }
-
-// Get returns the value sign-extended to a uint64.
-func (v S32) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeInt32 and the value sign-extended to a uint64.
+func (v S32) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeInt32, uint64(v)
+}
 
 // F64 is a Value of type TypeDouble.
 type F64 float64
 
-// Type returns TypeDouble.
-func (v F64) Type() protocol.Type { return protocol.TypeDouble }
-
-// Get returns the IEEE 754 representation of the value packed into a uint64.
-func (v F64) Get(PointerResolver) (uint64, error) { return math.Float64bits(float64(v)), nil }
+// Get returns TypeDouble and the IEEE 754 representation of the value packed
+// into a uint64.
+func (v F64) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeDouble, math.Float64bits(float64(v))
+}
 
 // U64 is a Value of type TypeUint64.
 type U64 uint64
 
-// Type returns TypeUint64.
-func (v U64) Type() protocol.Type { return protocol.TypeUint64 }
-
-// Get returns the value zero-extended to a uint64.
-func (v U64) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeUint64 the value zero-extended to a uint64.
+func (v U64) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeUint64, uint64(v)
+}
 
 // S64 is a Value of type TypeInt64.
 type S64 int64
 
-// Type returns TypeInt64.
-func (v S64) Type() protocol.Type { return protocol.TypeInt64 }
-
-// Get returns the value reinterpreted as a uint64.
-func (v S64) Get(PointerResolver) (uint64, error) { return uint64(v), nil }
+// Get returns TypeInt64 and the value reinterpreted as a uint64.
+func (v S64) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeInt64, uint64(v)
+}
 
 // AbsolutePointer is a pointer in the absolute address-space that will not be
 // altered before being passed to the protocol.
 type AbsolutePointer uint64
 
-// Type returns TypeAbsolutePointer.
-func (p AbsolutePointer) Type() protocol.Type { return protocol.TypeAbsolutePointer }
-
-// Get returns the uint64 value of the absolute pointer.
-func (p AbsolutePointer) Get(PointerResolver) (uint64, error) { return uint64(p), nil }
+// Get returns TypeAbsolutePointer and the uint64 value of the absolute pointer.
+func (p AbsolutePointer) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeAbsolutePointer, uint64(p)
+}
 
 // Offset returns the sum of the pointer with offset.
 func (p AbsolutePointer) Offset(offset uint64) Pointer {
@@ -143,43 +131,41 @@ func (p AbsolutePointer) Offset(offset uint64) Pointer {
 // IsValid returns true for all absolute pointers.
 func (p AbsolutePointer) IsValid() bool { return true }
 
-// VolatileCapturePointer is a pointer that was observed at capture time.
+// RemappedPointer is a pointer that was observed at capture time.
 // Pointers of this type are remapped to an equivalent volatile address-space
-// pointer before being passed to the protocol.
-type VolatileCapturePointer uint64
+// pointer, or absolute address-space pointer before being passed to the
+// protocol.
+type RemappedPointer uint64
 
-// Type returns TypeVolatilePointer.
-func (p VolatileCapturePointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
-
-// Get returns the observed pointer translated to an equivalent volatile
-// address-space pointer.
-func (p VolatileCapturePointer) Get(r PointerResolver) (uint64, error) {
-	return r.TranslateCapturePointer(uint64(p))
+// Get returns the pointer type and the pointer translated to either an
+// equivalent volatile address-space pointer or absolute pointer.
+func (p RemappedPointer) Get(r PointerResolver) (protocol.Type, uint64) {
+	return r.TranslateRemappedPointer(uint64(p))
 }
 
 // Offset returns the sum of the pointer with offset.
-func (p VolatileCapturePointer) Offset(offset uint64) Pointer {
-	return p + VolatileCapturePointer(offset)
+func (p RemappedPointer) Offset(offset uint64) Pointer {
+	return p + RemappedPointer(offset)
 }
 
 // IsValid returns true if the pointer considered valid. Currently this is a
-// test for the pointer being greater than 0x10000 as low addresses are likely
+// test for the pointer being greater than 0x1000 as low addresses are likely
 // to be a wrong interpretation of the value. This may change in the future.
-func (p VolatileCapturePointer) IsValid() bool {
+func (p RemappedPointer) IsValid() bool {
 	// Anything very low in applciation address-space is extremely
 	// unlikely to be a valid pointer.
-	return p > 0x10000
+	return p > 0x1000
 }
 
 // VolatilePointer is a pointer to the volatile address-space.
-// Unlike VolatileCapturePointer, there is no remapping.
+// Unlike RemappedPointer, there is no remapping.
 type VolatilePointer uint64
 
-// Type returns TypeVolatilePointer.
-func (p VolatilePointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
-
-// Get returns the uint64 value of the pointer in volatile address-space.
-func (p VolatilePointer) Get(PointerResolver) (uint64, error) { return uint64(p), nil }
+// Get returns TypeVolatilePointer and the uint64 value of the pointer in
+// volatile address-space.
+func (p VolatilePointer) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeVolatilePointer, uint64(p)
+}
 
 // Offset returns the sum of the pointer with offset.
 func (p VolatilePointer) Offset(offset uint64) Pointer {
@@ -194,13 +180,10 @@ func (p VolatilePointer) IsValid() bool { return true }
 // address space and its offset is calculated dynamically.
 type VolatileTemporaryPointer uint64
 
-// Type returns TypeVolatilePointer.
-func (p VolatileTemporaryPointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
-
-// Get returns the dynamically calculated offset of the temporary pointer within
-// volatile address-space.
-func (p VolatileTemporaryPointer) Get(r PointerResolver) (uint64, error) {
-	return r.TranslateTemporaryPointer(uint64(p))
+// Get returns TypeVolatilePointer and the dynamically calculated offset of the
+// temporary pointer within volatile address-space.
+func (p VolatileTemporaryPointer) Get(r PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeVolatilePointer, r.TranslateTemporaryPointer(uint64(p))
 }
 
 // Offset returns the sum of the pointer with offset.
@@ -215,11 +198,10 @@ func (p VolatileTemporaryPointer) IsValid() bool { return true }
 // altered before being passed to the protocol.
 type ConstantPointer uint64
 
-// Type returns TypeConstantPointer.
-func (p ConstantPointer) Type() protocol.Type { return protocol.TypeConstantPointer }
-
-// Get returns the uint64 value of the pointer in constant address-space.
-func (p ConstantPointer) Get(PointerResolver) (uint64, error) { return uint64(p), nil }
+// Get returns TypeConstantPointer and the uint64 value of the pointer in constant address-space.
+func (p ConstantPointer) Get(PointerResolver) (protocol.Type, uint64) {
+	return protocol.TypeConstantPointer, uint64(p)
+}
 
 // Offset returns the sum of the pointer with offset.
 func (p ConstantPointer) Offset(offset uint64) Pointer {

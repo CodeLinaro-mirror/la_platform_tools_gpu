@@ -40,11 +40,11 @@
   {{Global "Go.Statement.Override" "Statement"}}
   {{Global "Go.Read.Override"      "Read"}}
 
-  func loadRemap(ϟb *builder.Builder, key interface{}, val value.Value) {
+  func loadRemap(ϟb *builder.Builder, key interface{}, ty protocol.Type, val value.Value) {
     if ptr, found := ϟb.Remappings[key]; found {
-      ϟb.Load(val.Type(), ptr)
+      ϟb.Load(ty, ptr)
     } else {
-      ptr = ϟb.AllocateMemory(uint64(val.Type().Size(ϟb.Architecture().PointerSize)))
+      ptr = ϟb.AllocateMemory(uint64(ty.Size(ϟb.Architecture().PointerSize)))
       ϟb.Push(val) // We have an input to an unknown id, use the unmapped value.
       ϟb.Clone(0)
       ϟb.Store(ptr)
@@ -102,7 +102,7 @@
 
   {{if (GetAnnotation $.Type "replay_remap")}}
     if key, remap := {{$.Name}}.remap(ϟa, ϟs); remap {
-      loadRemap(ϟb, key, {{Macro "Value" "Type" $.Type "Name" $.Name}})
+      loadRemap(ϟb, key, {{Macro "BuilderType" $.Type}}, {{Macro "Value" "Type" $.Type "Name" $.Name}})
     } else {
       ϟb.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
     }
@@ -390,7 +390,7 @@
 
   func (p {{$ptr_ty}}) value() value.Pointer {
     if p.Address != 0 {
-      return value.VolatileCapturePointer(p.Address)
+      return value.RemappedPointer(p.Address)
     } else {
       return value.AbsolutePointer(0)
     }
@@ -416,10 +416,10 @@
     if s.Pool == memory.ApplicationPool {
       s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
       {{if (GetAnnotation $s.To "replay_remap")}}
-        ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
           if key, remap := v.remap(ϟa, ϟs); remap {
-            loadRemap(ϟb, key, {{Macro "Value" "Type" $s.To "Name" "v"}})
+            loadRemap(ϟb, key, {{Macro "BuilderType" $s.To}}, {{Macro "Value" "Type" $s.To "Name" "v"}})
           } else {
             ϟb.Push({{Macro "Value" "Type" $s.To "Name" "v"}})
           }
@@ -427,7 +427,7 @@
           ptr += step
         }
       {{else if IsPointer ($s.To | Underlying)}}
-        ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
           ϟb.Push({{Macro "Value" "Type" $s.To "Name" "v"}})
           ϟb.Store(ptr)
@@ -445,7 +445,7 @@
       ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
       {{if (GetAnnotation $s.To "replay_remap")}}
         size := s.ElementSize(ϟs)
-        ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
           if key, remap := v.remap(ϟa, ϟs); remap {
             if _, found := ϟb.Remappings[key]; !found {

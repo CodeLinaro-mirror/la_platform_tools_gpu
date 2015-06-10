@@ -25,13 +25,11 @@ import "android.googlesource.com/platform/tools/gpu/replay/protocol"
 // Value is the interface for all values to be passed either in opcodes or
 // constant memory to the replay virtual machine.
 type Value interface {
-	// Type returns the virtual-machine type of the Value.
-	Type() protocol.Type
-
-	// Get returns the bit-representation of the value. For example a boolean
-	// value would either be 0 or 1, a uint32 value would be zero-extended, a
-	// float64 would be the IEEE 754 representation reinterpreted as a uint64.
-	Get(PointerResolver) (uint64, error)
+	// Get returns the protocol type and the bit-representation of the value.
+	// For example a boolean value would either be 0 or 1, a uint32 value would be
+	// zero-extended, a float64 would be the IEEE 754 representation
+	// reinterpreted as a uint64.
+	Get(PointerResolver) (protocol.Type, uint64)
 }
 
 // Pointer is a pointer-typed Value.

@@ -19,11 +19,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func loadRemap(ϟb *builder.Builder, key interface{}, val value.Value) {
+func loadRemap(ϟb *builder.Builder, key interface{}, ty protocol.Type, val value.Value) {
 	if ptr, found := ϟb.Remappings[key]; found {
-		ϟb.Load(val.Type(), ptr)
+		ϟb.Load(ty, ptr)
 	} else {
-		ptr = ϟb.AllocateMemory(uint64(val.Type().Size(ϟb.Architecture().PointerSize)))
+		ptr = ϟb.AllocateMemory(uint64(ty.Size(ϟb.Architecture().PointerSize)))
 		ϟb.Push(val) // We have an input to an unknown id, use the unmapped value.
 		ϟb.Clone(0)
 		ϟb.Store(ptr)
@@ -352,7 +352,7 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -376,7 +376,7 @@ func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -512,7 +512,7 @@ func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -531,7 +531,7 @@ func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -551,7 +551,7 @@ func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -610,7 +610,7 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Array.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Array.value(ϟb, ϟa, ϟs))
 	}
@@ -649,7 +649,7 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	GetContext_15_result := context              // Contextʳ
 	ctx := GetContext_15_result                  // Contextʳ
 	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Array.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Array.value(ϟb, ϟa, ϟs))
 	}
@@ -704,7 +704,7 @@ func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	p := ctx.Instances.Programs.Get(ϟa.Program)  // Programʳ
 	p.AttributeBindings[ϟa.Name] = ϟa.Location
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -885,7 +885,7 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -912,7 +912,7 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -949,7 +949,7 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -971,7 +971,7 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ctx := GetContext_25_result                  // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -1029,7 +1029,7 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -1053,7 +1053,7 @@ func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -1268,7 +1268,7 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	uniform.Value.S32 = ϟa.Value
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1299,7 +1299,7 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1332,7 +1332,7 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1367,7 +1367,7 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1395,7 +1395,7 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	uniform.Value.S32 = ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1428,7 +1428,7 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1462,7 +1462,7 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1497,7 +1497,7 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1523,7 +1523,7 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	uniform.Value.F32 = ϟa.Value
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1554,7 +1554,7 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1587,7 +1587,7 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1622,7 +1622,7 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1652,7 +1652,7 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	uniform.Value.F32 = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1686,7 +1686,7 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1721,7 +1721,7 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1757,7 +1757,7 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1803,7 +1803,7 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1860,7 +1860,7 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1928,7 +1928,7 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	}()
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1947,12 +1947,12 @@ func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -1968,12 +1968,12 @@ func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
@@ -2395,7 +2395,7 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	GetContext_62_result := context              // Contextʳ
 	ctx := GetContext_62_result                  // Contextʳ
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -2423,7 +2423,7 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ctx.TextureUnits.Get(ctx.ActiveTextureUnit)[ϟa.Target] = ϟa.Texture
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -2778,7 +2778,7 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
@@ -2828,7 +2828,7 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	GetContext_70_result := context              // Contextʳ
 	ctx := GetContext_70_result                  // Contextʳ
 	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
@@ -2883,7 +2883,7 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ctx.BoundRenderbuffers[ϟa.Target] = ϟa.Renderbuffer
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
@@ -2945,7 +2945,7 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	GetContext_75_result := context              // Contextʳ
 	ctx := GetContext_75_result                  // Contextʳ
 	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
@@ -3033,7 +3033,7 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ctx.BoundBuffers[ϟa.Target] = ϟa.Buffer
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Buffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	}
@@ -3121,7 +3121,7 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	GetContext_81_result := context              // Contextʳ
 	ctx := GetContext_81_result                  // Contextʳ
 	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Buffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	}
@@ -3205,7 +3205,7 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	s.Deletable = true
 	ctx.Instances.Shaders[ϟa.Shader] = (*Shader)(nil)
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3243,7 +3243,7 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 		_ = str
 	}
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3300,7 +3300,7 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟdst, ϟsrc := ϟa.Info.Slice(uint64(int32(0)), uint64(l), ϟs).Copy(s.InfoLog.Slice(uint64(int32(0)), uint64(l), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3342,7 +3342,7 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟdst, ϟsrc := ϟa.Source.Slice(uint64(int32(0)), uint64(l), ϟs).Copy(MakeCharˢFromString(s.Source, ϟs).Slice(uint64(int32(0)), uint64(l), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3373,7 +3373,7 @@ func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3391,7 +3391,7 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	GetContext_90_result := context              // Contextʳ
 	ctx := GetContext_90_result                  // Contextʳ
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3439,7 +3439,7 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ctx := GetContext_92_result                  // Contextʳ
 	ctx.Instances.Programs[ϟa.Program] = (*Program)(nil)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3461,12 +3461,12 @@ func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
 	p.Shaders[s.Type] = ϟa.Shader
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3488,12 +3488,12 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
 	p.Shaders[s.Type] = ShaderId(uint32(0))
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
@@ -3528,7 +3528,7 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	}() // s32
 	l := min_96_result // s32
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3548,7 +3548,7 @@ func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3584,7 +3584,7 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟdst, ϟsrc := ϟa.Info.Slice(uint64(int32(0)), uint64(l), ϟs).Copy(p.InfoLog.Slice(uint64(int32(0)), uint64(l), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3609,7 +3609,7 @@ func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ctx := GetContext_99_result                  // Contextʳ
 	ctx.BoundProgram = ϟa.Program
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3628,7 +3628,7 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	GetContext_100_result := context             // Contextʳ
 	ctx := GetContext_100_result                 // Contextʳ
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3644,7 +3644,7 @@ func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
@@ -3848,7 +3848,7 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
 	ϟb.Push(value.U32(ϟa.RenderbufferTarget))
 	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
@@ -3920,7 +3920,7 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
 	ϟb.Push(value.U32(ϟa.TextureTarget))
 	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
@@ -4660,7 +4660,7 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4709,7 +4709,7 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	GetContext_129_result := context             // Contextʳ
 	ctx := GetContext_129_result                 // Contextʳ
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4739,7 +4739,7 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4785,7 +4785,7 @@ func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Push(value.U32(ϟa.Target))
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4834,7 +4834,7 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	GetContext_132_result := context             // Contextʳ
 	ctx := GetContext_132_result                 // Contextʳ
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4850,7 +4850,7 @@ func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4880,7 +4880,7 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4898,7 +4898,7 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4916,7 +4916,7 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -4934,7 +4934,7 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
+		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
@@ -5043,7 +5043,7 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 }
 func (p Voidᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5062,7 +5062,7 @@ func (p U8ᵖ) replayWrite(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 }
 func (p U8ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5081,7 +5081,7 @@ func (p Charᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Charᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5100,7 +5100,7 @@ func (p EGLintᵖ) replayWrite(value EGLint, ϟa atom.Atom, ϟs *gfxapi.State, �
 }
 func (p EGLintᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5119,7 +5119,7 @@ func (p Intᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Intᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5138,7 +5138,7 @@ func (p CGLContextObjᵖ) replayWrite(value CGLContextObj, ϟa atom.Atom, ϟs *g
 }
 func (p CGLContextObjᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5157,7 +5157,7 @@ func (p S32ᵖ) replayWrite(value int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p S32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5176,7 +5176,7 @@ func (p U32ᵖ) replayWrite(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 }
 func (p U32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5195,7 +5195,7 @@ func (p DiscardFramebufferAttachmentᵖ) replayWrite(value DiscardFramebufferAtt
 }
 func (p DiscardFramebufferAttachmentᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5214,7 +5214,7 @@ func (p VertexArrayIdᵖ) replayWrite(value VertexArrayId, ϟa atom.Atom, ϟs *g
 }
 func (p VertexArrayIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5233,7 +5233,7 @@ func (p ShaderAttribTypeᵖ) replayWrite(value ShaderAttribType, ϟa atom.Atom, 
 }
 func (p ShaderAttribTypeᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5252,7 +5252,7 @@ func (p ShaderUniformTypeᵖ) replayWrite(value ShaderUniformType, ϟa atom.Atom
 }
 func (p ShaderUniformTypeᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5271,7 +5271,7 @@ func (p F32ᵖ) replayWrite(value float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd
 }
 func (p F32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5290,7 +5290,7 @@ func (p TextureIdᵖ) replayWrite(value TextureId, ϟa atom.Atom, ϟs *gfxapi.St
 }
 func (p TextureIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5309,7 +5309,7 @@ func (p FramebufferIdᵖ) replayWrite(value FramebufferId, ϟa atom.Atom, ϟs *g
 }
 func (p FramebufferIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5328,7 +5328,7 @@ func (p RenderbufferIdᵖ) replayWrite(value RenderbufferId, ϟa atom.Atom, ϟs 
 }
 func (p RenderbufferIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5347,7 +5347,7 @@ func (p BufferIdᵖ) replayWrite(value BufferId, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 func (p BufferIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5366,7 +5366,7 @@ func (p Charᵖᵖ) replayWrite(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State,
 }
 func (p Charᵖᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5385,7 +5385,7 @@ func (p ShaderIdᵖ) replayWrite(value ShaderId, ϟa atom.Atom, ϟs *gfxapi.Stat
 }
 func (p ShaderIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5404,7 +5404,7 @@ func (p Boolᵖ) replayWrite(value bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p Boolᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5423,7 +5423,7 @@ func (p FramebufferAttachmentᵖ) replayWrite(value FramebufferAttachment, ϟa a
 }
 func (p FramebufferAttachmentᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5442,7 +5442,7 @@ func (p QueryIdᵖ) replayWrite(value QueryId, ϟa atom.Atom, ϟs *gfxapi.State,
 }
 func (p QueryIdᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5461,7 +5461,7 @@ func (p S64ᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 func (p S64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5480,7 +5480,7 @@ func (p U64ᵖ) replayWrite(value uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd 
 }
 func (p U64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
-		return value.VolatileCapturePointer(p.Address)
+		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -5511,10 +5511,10 @@ func (s Boolˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 func (s BufferIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) BufferIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -5528,7 +5528,7 @@ func (s BufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -5556,7 +5556,7 @@ func (s BufferIdˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 func (s CGLContextObjˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLContextObjˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			ϟb.Store(ptr)
@@ -5607,7 +5607,7 @@ func (s Charˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 func (s Charᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			ϟb.Push(v.value())
 			ϟb.Store(ptr)
@@ -5727,10 +5727,10 @@ func (s FramebufferAttachmentˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟ
 func (s FramebufferIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -5744,7 +5744,7 @@ func (s FramebufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -5795,10 +5795,10 @@ func (s Intˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 func (s QueryIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) QueryIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -5812,7 +5812,7 @@ func (s QueryIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -5840,10 +5840,10 @@ func (s QueryIdˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Dat
 func (s RenderbufferIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -5857,7 +5857,7 @@ func (s RenderbufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -5954,10 +5954,10 @@ func (s ShaderAttribTypeˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 func (s ShaderIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -5971,7 +5971,7 @@ func (s ShaderIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -6022,10 +6022,10 @@ func (s ShaderUniformTypeˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 func (s TextureIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) TextureIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -6039,7 +6039,7 @@ func (s TextureIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {
@@ -6136,10 +6136,10 @@ func (s U8ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database
 func (s VertexArrayIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, v.value(ϟb, ϟa, ϟs))
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
 			} else {
 				ϟb.Push(v.value(ϟb, ϟa, ϟs))
 			}
@@ -6153,7 +6153,7 @@ func (s VertexArrayIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 	if s.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
 		size := s.ElementSize(ϟs)
-		ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
 				if _, found := ϟb.Remappings[key]; !found {

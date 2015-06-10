@@ -100,7 +100,7 @@ func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) 
 	if getContext(s).BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i.Address)
+		return value.RemappedPointer(i.Address)
 	}
 }
 
@@ -108,7 +108,7 @@ func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) v
 	if getContext(s).BoundBuffers[BufferTarget_GL_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i.Address)
+		return value.RemappedPointer(i.Address)
 	}
 }
 
@@ -116,7 +116,7 @@ func (i TexturePointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) 
 	if i.Address == 0 {
 		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i.Address)
+		return value.RemappedPointer(i.Address)
 	}
 }
 
@@ -124,7 +124,7 @@ func (i BufferDataPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.Stat
 	if i.Address == 0 {
 		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i.Address)
+		return value.RemappedPointer(i.Address)
 	}
 }
 
