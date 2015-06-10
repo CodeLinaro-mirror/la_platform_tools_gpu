@@ -15,8 +15,10 @@
 package builder
 
 import (
+	"errors"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
@@ -176,7 +178,7 @@ func TestRevertAtom(t *testing.T) {
 				b.Push(value.U8(1))
 				b.Call(FunctionInfo{123, protocol.TypeUint8, 1})
 				b.Store(value.AbsolutePointer(0x10000))
-				b.RevertAtom()
+				b.RevertAtom(nil)
 			},
 			[]asm.Instruction{},
 		},
@@ -192,7 +194,7 @@ func TestRevertAtom(t *testing.T) {
 				b.Push(value.U8(2))
 				b.Call(FunctionInfo{234, protocol.TypeUint8, 1})
 				b.Store(value.AbsolutePointer(0x10000))
-				b.RevertAtom()
+				b.RevertAtom(nil)
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
@@ -212,5 +214,47 @@ func TestRevertAtom(t *testing.T) {
 		if !asm.Check(t, b.instructions, test.expected) {
 			t.Errorf("Test '%s' failed:", test.name)
 		}
+	}
+}
+
+func TestRevertPostbackAtom(t *testing.T) {
+	expectedErr := errors.New("Oh noes!")
+	postbackErr := error(nil)
+	postback := Postback(func(d binary.Decoder, err error) error {
+		if d != nil {
+			t.Errorf("Unexpected decoder passed to postback on RevertAtom")
+		}
+		postbackErr = err
+		return nil
+	})
+
+	for _, test := range []struct {
+		name     string
+		f        func(*Builder)
+		expected []asm.Instruction
+	}{
+		{
+			"Revert postback atom",
+			func(b *Builder) {
+				b.BeginAtom(10)
+				b.Post(value.AbsolutePointer(0x10000), 100, postback)
+				b.RevertAtom(expectedErr)
+			},
+			[]asm.Instruction{},
+		},
+	} {
+		b := New(device.Architecture{
+			PointerAlignment: 4,
+			PointerSize:      4,
+			IntegerSize:      4,
+			ByteOrder:        endian.Little,
+		})
+		test.f(b)
+		if !asm.Check(t, b.instructions, test.expected) {
+			t.Errorf("Test '%s' failed:", test.name)
+		}
+	}
+	if postbackErr != expectedErr {
+		t.Errorf("Postback was not informed of RevertAtom")
 	}
 }
