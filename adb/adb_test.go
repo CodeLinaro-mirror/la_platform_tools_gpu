@@ -15,7 +15,6 @@
 package adb
 
 import (
-	"reflect"
 	"strings"
 	"testing"
 )
@@ -65,47 +64,6 @@ func TestParseDevices(t *testing.T) {
 	}
 }
 
-func TestParsePackages(t *testing.T) {
-	for i, c := range []struct {
-		s string
-		e error
-		p []InstalledPackage
-	}{
-		{
-			p: []InstalledPackage{
-				{Name: "android", Path: "/system/framework/framework-res.apk"},
-				{Name: "com.android.dreams.basic", Path: "/system/app/BasicDreams.apk"},
-				{Name: "com.google.earth", Path: "/data/app/com.google.earth-1.apk"},
-			},
-			e: nil,
-			s: "package:/system/framework/framework-res.apk=android\n" +
-				"package:/system/app/BasicDreams.apk=com.android.dreams.basic\r\n" +
-				"package:/data/app/com.google.earth-1.apk=com.google.earth\n",
-		},
-	} {
-		pkgs, err := parsePackages(c.s, nil)
-		if c.e != err {
-			t.Errorf("(%d) Expected error: %v, got error: %v", i, c.e, err)
-		}
-		count := len(pkgs)
-		if count < len(c.p) {
-			count = len(c.p)
-		}
-		for j := 0; j < count; j++ {
-			var got, expected InstalledPackage
-			if j < len(pkgs) {
-				got = *pkgs[j]
-			}
-			if j < len(c.p) {
-				expected = c.p[j]
-			}
-			if got != expected {
-				t.Errorf("(%d) Package %d was not as expected. Expected: %+v, got: %+v", i, j, expected, got)
-			}
-		}
-	}
-}
-
 func (t treeNode) String() string {
 	var s string
 	if t.depth > 0 {
@@ -144,62 +102,50 @@ func TestParseTabbedTree(t *testing.T) {
 }
 
 func TestParseActions(t *testing.T) {
-	for i, c := range []struct {
-		s string
-		e error
-		a []Action
-	}{
-		{
-			a: []Action{
-				{
-					Name:       "android.intent.action.MAIN",
-					Component:  "com.google.foo/.FooActivity",
-					Categories: []string{"android.intent.category.LAUNCHER"},
-				}, {
-					Name:       "com.google.android.FOO",
-					Component:  "com.google.foo/.FooActivity",
-					Categories: []string{"android.intent.category.DEFAULT"},
-				}, {
-					Name:       "android.intent.action.SEARCH",
-					Component:  "com.google.foo/.FooActivity",
-					Categories: []string{"android.intent.category.DEFAULT"},
-				}},
-			e: nil,
-			s: `
+	str := `
 Activity Resolver Table:
   Non-Data Actions:
-      android.intent.action.MAIN:
-        43178558 com.google.foo/.FooActivity filter 4327f110
-          Action: "android.intent.action.MAIN"
-          Category: "android.intent.category.LAUNCHER"
-      com.google.android.FOO:
-        43178558 com.google.foo/.FooActivity filter 431d7db8
-          Action: "com.google.android.FOO"
-          Category: "android.intent.category.DEFAULT"
-      android.intent.action.SEARCH:
-        43178558 com.google.foo/.FooActivity filter 4327cc40
-          Action: "android.intent.action.SEARCH"
-          Category: "android.intent.category.DEFAULT"`,
+    android.intent.action.MAIN:
+      43178558 com.google.foo/.FooActivity filter 4327f110
+    com.google.android.FOO:
+      43178558 com.google.foo/.FooActivity filter 431d7db8
+    android.intent.action.SEARCH:
+      43178558 com.google.foo/.FooActivity filter 4327cc40
+`
+	expected := &InstalledPackage{
+		Name: "com.google.foo",
+	}
+	expected.Actions = []*Action{
+		{
+			Package:  expected,
+			Name:     "android.intent.action.MAIN",
+			Activity: ".FooActivity",
+		}, {
+			Package:  expected,
+			Name:     "com.google.android.FOO",
+			Activity: ".FooActivity",
+		}, {
+			Package:  expected,
+			Name:     "android.intent.action.SEARCH",
+			Activity: ".FooActivity",
 		},
-	} {
-		actions, err := parseActions(c.s)
-		if c.e != err {
-			t.Errorf("(%d) Expected error: %v, got error: %v", i, c.e, err)
-		}
-		count := len(actions)
-		if count < len(c.a) {
-			count = len(c.a)
-		}
-		for j := 0; j < count; j++ {
-			var got, expected *Action
-			if j < len(actions) {
-				got = actions[j]
+	}
+	d := &Device{}
+	packages, err := d.parsePackages(str)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	if len(packages) != 1 {
+		t.Errorf("Got %d packages, expected 1", len(packages))
+	} else if len(packages[0].Actions) != len(expected.Actions) {
+		t.Errorf("Got %d actions, expected %d", len(packages[0].Actions), len(expected.Actions))
+	} else {
+		for i, a := range packages[0].Actions {
+			if a.Name != expected.Actions[i].Name {
+				t.Errorf("[%d] Expected action %s got %s", i, a.Name, expected.Actions[i].Name)
 			}
-			if j < len(c.a) {
-				expected = &c.a[j]
-			}
-			if !reflect.DeepEqual(got, expected) {
-				t.Errorf("(%d) Action %d was not as expected. Expected: %+v, got: %+v", i, j, expected, got)
+			if a.Activity != expected.Actions[i].Activity {
+				t.Errorf("[%d] Expected activity %s got %s", i, a.Activity, expected.Actions[i].Activity)
 			}
 		}
 	}

@@ -74,6 +74,10 @@ func (d *Device) InstalledPackages() (Packages, error) {
 	if err != nil {
 		return nil, err
 	}
+	return d.parsePackages(str)
+}
+
+func (d *Device) parsePackages(str string) (Packages, error) {
 	tree := parseTabbedTree(str)
 	activities := tree.find("Activity Resolver Table:")
 	if activities == nil {
