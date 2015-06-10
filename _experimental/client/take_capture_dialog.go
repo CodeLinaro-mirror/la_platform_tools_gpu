@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -37,7 +38,7 @@ type launchItem struct {
 
 func (i launchItem) String() string { return fmt.Sprintf("%s/%s", i.Package.Name, i.Activity) }
 
-func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...interface{}), capture func()) {
+func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, capture func()) {
 	driver := theme.Driver()
 	window := theme.CreateWindow(500, 800, "Launch Android application...")
 
@@ -99,16 +100,16 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...in
 				go func() {
 					driver.Call(window.Close)
 
-					updateStatus("Disabling SELinux enforcing...")
+					statusLogger.Infof("Disabling SELinux enforcing...")
 					item.Package.Device.SetSELinuxEnforcing(false)
 
-					updateStatus("Setting LD_PRELOAD...")
+					statusLogger.Infof("Setting LD_PRELOAD...")
 					item.Package.SetWrapProperties("LD_PRELOAD=/data/spy.so")
 
-					updateStatus("Forwarding port...")
+					statusLogger.Infof("Forwarding port...")
 					item.Package.Device.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
 
-					updateStatus("Starting activity...")
+					statusLogger.Infof("Starting activity...")
 					item.Package.Device.StartActivity(*item.Action)
 
 					capture()
@@ -156,14 +157,11 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	row.AddChild(name)
 	top.AddChild(row)
 
-	status := theme.CreateLabel()
+	statusAdapter := CreateLogAdapter(1024, appCtx.Theme().Driver().Call)
+	statusLogger := statusAdapter.Logger()
+	status := theme.CreateList()
+	status.SetAdapter(statusAdapter)
 	top.AddChild(status)
-
-	updateStatus := func(s string, args ...interface{}) {
-		theme.Driver().Call(func() {
-			status.SetText(fmt.Sprintf(s, args...))
-		})
-	}
 
 	bottom := theme.CreateLinearLayout()
 	bottom.SetDirection(gxui.RightToLeft)
@@ -189,14 +187,14 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 		})
 
 		go func() {
-			if data := takeCapture(appCtx, stop, updateStatus); data != nil {
-				updateStatus("Importing...")
+			if data := takeCapture(appCtx, stop, statusLogger); data != nil {
+				statusLogger.Infof("Importing...")
 				id, err := appCtx.Rpc().Import(appCtx.Logger(), name.Text(), data)
 				if err != nil {
 					panic(err)
 				}
 
-				updateStatus("Loading...")
+				statusLogger.Infof("Loading...")
 				appCtx.LoadCapture(id, true)
 
 				theme.Driver().Call(func() {
@@ -215,7 +213,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 	clickSubscription = button.OnClick(func(gxui.MouseEvent) { capture() })
 	launch.OnClick(func(ev gxui.MouseEvent) {
-		CreateLaunchAndroidDialog(theme, updateStatus, capture)
+		CreateLaunchAndroidDialog(theme, statusLogger, capture)
 	})
 }
 
@@ -238,11 +236,11 @@ type tcUpdate struct {
 	data []byte
 }
 
-func takeCapture(appCtx *ApplicationContext, stop signal, updateStatus func(string, ...interface{})) []byte {
+func takeCapture(appCtx *ApplicationContext, stop signal, statusLogger log.Logger) []byte {
 	var conn net.Conn
 	var err error
 
-	updateStatus("Waiting for connection to localhost:%d...", *spyport)
+	statusLogger.Infof("Waiting for connection to localhost:%d...", *spyport)
 
 waiting:
 	for {
@@ -266,7 +264,7 @@ waiting:
 				if err, neterr := err.(net.Error); neterr {
 					if err.Temporary() || err.Timeout() {
 						bytesWritten += n
-						updateStatus("Capturing...\n%v bytes", bytesWritten)
+						statusLogger.Infof("Capturing...\n%v bytes", bytesWritten)
 						continue
 					}
 				}
@@ -274,7 +272,7 @@ waiting:
 				switch err {
 				case nil:
 					bytesWritten += n
-					updateStatus("Capturing...\n%v bytes", bytesWritten)
+					statusLogger.Infof("Capturing...\n%v bytes", bytesWritten)
 
 				case io.EOF:
 					if len(buf.Bytes()) == 0 {
@@ -284,11 +282,11 @@ waiting:
 						continue waiting
 					}
 
-					updateStatus("Done")
+					statusLogger.Infof("Done")
 					return buf.Bytes()
 
 				default:
-					updateStatus("Connection error: %v", err)
+					statusLogger.Infof("Connection error: %v", err)
 					return buf.Bytes()
 				}
 			}
