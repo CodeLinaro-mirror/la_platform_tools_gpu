@@ -69,7 +69,8 @@ type Builder struct {
 	decoders        []Postback
 	stack           []stackItem
 	architecture    device.Architecture
-	inAtom          bool
+	inAtom          bool // true if between BeginAtom and CommitAtom/RevertAtom
+	atomStart       int  // index of current atom's first instruction
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -159,6 +160,7 @@ func (b *Builder) BeginAtom(id atom.ID) {
 		panic("BeginAtom called while already building an atom")
 	}
 	b.inAtom = true
+	b.atomStart = len(b.instructions)
 	if id <= 0x3ffffff { // Labels have 26 bit values.
 		b.instructions = append(b.instructions, asm.Label{
 			Value: uint32(id),
@@ -206,7 +208,9 @@ func (b *Builder) CommitAtom() {
 }
 
 // RevertAtom reverts all the instructions since the last call to BeginAtom.
-func (b *Builder) RevertAtom() {
+// Any postbacks issued since the last call to BeginAtom will be called with
+// the error err and a nil decoder.
+func (b *Builder) RevertAtom(err error) {
 	if !b.inAtom {
 		panic("RevertAtom called without a call to BeginAtom")
 	}
@@ -214,15 +218,16 @@ func (b *Builder) RevertAtom() {
 	// TODO: Revert calls to: AllocateMemory, Buffer, String, MapMemory, Write.
 	b.temp.reset()
 	b.stack = b.stack[:0]
-	for {
-		i := b.instructions[len(b.instructions)-1]
-		b.instructions = b.instructions[:len(b.instructions)-1]
-		switch i.(type) {
-		case asm.Post:
-			b.decoders = b.decoders[:len(b.decoders)-1]
-		case asm.Label:
-			return
+	if len(b.instructions) > 0 {
+		for i := len(b.instructions) - 1; i >= b.atomStart; i-- {
+			switch b.instructions[i].(type) {
+			case asm.Post:
+				idx := len(b.decoders) - 1
+				b.decoders[idx](nil, err)
+				b.decoders = b.decoders[:idx]
+			}
 		}
+		b.instructions = b.instructions[:b.atomStart]
 	}
 }
 

@@ -168,9 +168,9 @@ type adapter struct {
 
 func (w *adapter) Write(i atom.ID, a atom.Atom) {
 	w.builder.BeginAtom(i)
-	if Replay(i, a, w.state, w.db, w.logger, w.builder) == nil {
+	if err := Replay(i, a, w.state, w.db, w.logger, w.builder); err == nil {
 		w.builder.CommitAtom()
 	} else {
-		w.builder.RevertAtom()
+		w.builder.RevertAtom(err)
 	}
 }
