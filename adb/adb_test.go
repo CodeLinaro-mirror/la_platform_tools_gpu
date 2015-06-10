@@ -26,7 +26,10 @@ func TestParseDevices(t *testing.T) {
 		d []Device
 	}{
 		{
-			d: []Device{{"02a2a2de20d7f6de", Unauthorized}},
+			d: []Device{{
+				Serial: "02a2a2de20d7f6de",
+				State:  Unauthorized,
+			}},
 			e: nil,
 			s: `* daemon not running. starting it now on port 5037
 * * daemon started successfully
