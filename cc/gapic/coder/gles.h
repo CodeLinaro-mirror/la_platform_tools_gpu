@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef GAPIC_CODER_GLES_H
+#define GAPIC_CODER_GLES_H
 
 #include <vector>
 
@@ -7385,3 +7387,5 @@ namespace gles {
 } // namespace gles
 } // namespace coder
 } // namespace gapic
+
+#endif // GAPIC_CODER_GLES_H

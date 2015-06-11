@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef GAPIC_CODER_ATOM_H
+#define GAPIC_CODER_ATOM_H
 
 #include <vector>
 
@@ -129,3 +131,5 @@ namespace atom {
 } // namespace atom
 } // namespace coder
 } // namespace gapic
+
+#endif // GAPIC_CODER_ATOM_H
