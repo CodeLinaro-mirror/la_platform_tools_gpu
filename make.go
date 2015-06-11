@@ -52,6 +52,7 @@ var (
 		Rpcapi   Entity
 		Apic     Entity
 		Codergen Entity
+		Gapit    Entity
 	}
 
 	Apps struct {
@@ -68,6 +69,8 @@ func init() {
 		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
 		Tools.Apic = GoInstall(GPURoot + "/api/apic")
 		Tools.Codergen = GoInstall(GPURoot + "/binary/codergen")
+		Tools.Gapit = GoInstall(GPURoot + "/tools/gapit")
+		List("gapit").DependsOn(Tools.Gapit)
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
 		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
