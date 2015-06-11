@@ -59,6 +59,8 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.EncodeMap"}}{{end}}
 
 {{define "Cpp.File"}}{{$.Copyright}}
+#ifndef GAPIC_CODER_{{.Package | Upper}}_H
+#define GAPIC_CODER_{{.Package | Upper}}_H
 
 #include <vector>
 
@@ -83,6 +85,8 @@ namespace {{.Package}} {
 } // namespace {{.Package}}
 } // namespace coder
 } // namespace gapic
+
+#endif // GAPIC_CODER_{{.Package | Upper}}_H
 {{end}}
 `
 const go_tmpl_file = `go.tmpl`

@@ -129,6 +129,10 @@ func (f *functions) Lower(s interface{}) string {
 	return strings.ToLower(fmt.Sprint(s))
 }
 
+func (f *functions) Upper(s interface{}) string {
+	return strings.ToUpper(fmt.Sprint(s))
+}
+
 func (f *functions) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
 }

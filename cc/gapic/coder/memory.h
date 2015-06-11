@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
+#ifndef GAPIC_CODER_MEMORY_H
+#define GAPIC_CODER_MEMORY_H
 
 #include <vector>
 
@@ -38,3 +40,5 @@ namespace memory {
 } // namespace memory
 } // namespace coder
 } // namespace gapic
+
+#endif // GAPIC_CODER_MEMORY_H
