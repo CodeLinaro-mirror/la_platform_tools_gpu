@@ -315,7 +315,12 @@
 */}}
 {{define "C++.Assign"}}
   {{AssertType $ "Assign"}}
-  {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
+  {{if IsIgnore $.LHS}}
+    {{if ne $.Operator "="}}{{Error "Compound assignments to '_' are not supported (%s)" $.Operator}}{{end}}
+    {{Macro "C++.Read" $.RHS}};
+  {{else}}
+    {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
+  {{end}}
 {{end}}
 
 
