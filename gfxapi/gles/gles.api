@@ -717,16 +717,25 @@ cmd void glDiscardFramebufferEXT(FramebufferTarget target, s32 numAttachments, D
 // EXT_debug_marker
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
-cmd void glInsertEventMarkerEXT(s32 length, string marker) {
+cmd void glInsertEventMarkerEXT(s32 length, char *marker) {
+    if length > 0 {
+        _ = as!string(marker)
+    } else {
+        read(marker[0:length])
+    }
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
-cmd void glPushGroupMarkerEXT(s32 length, string marker) {
+cmd void glPushGroupMarkerEXT(s32 length, char *marker) {
+    if length > 0 {
+        _ = as!string(marker)
+    } else {
+        read(marker[0:length])
+    }
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
-cmd void glPopGroupMarkerEXT() {
-}
+cmd void glPopGroupMarkerEXT() {}
 
 // EXT_texture_storage
 

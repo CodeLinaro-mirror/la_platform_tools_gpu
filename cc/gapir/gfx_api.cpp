@@ -462,7 +462,7 @@ bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
     char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glInsertEventMarkerEXT(%d, %s)\n", length, marker);
+        GAPID_INFO("glInsertEventMarkerEXT(%d, %p)\n", length, marker);
         if (glInsertEventMarkerEXT != nullptr) {
             glInsertEventMarkerEXT(length, marker);
         } else {
@@ -479,7 +479,7 @@ bool callGlPushGroupMarkerEXT(Stack* stack, bool pushReturn) {
     char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glPushGroupMarkerEXT(%d, %s)\n", length, marker);
+        GAPID_INFO("glPushGroupMarkerEXT(%d, %p)\n", length, marker);
         if (glPushGroupMarkerEXT != nullptr) {
             glPushGroupMarkerEXT(length, marker);
         } else {

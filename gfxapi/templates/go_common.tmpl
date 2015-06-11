@@ -414,22 +414,27 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the logic to assign the RHS to the LHS
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.Assign"}}
-  {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   Emits the logic to copy from Src to Dst
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Copy"}}
   {{AssertType $ "Copy"}}
   {{Macro "Go.Read" $.Dst}}.Copy({{Macro "Go.Read" $.Src}}, ϟs, ϟd, ϟl)
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to assign the RHS to the LHS
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Assign"}}
+  {{if IsIgnore $.LHS}}
+    {{if ne $.Operator "="}}{{Error "Compound assignments to '_' are not supported (%s)" $.Operator}}{{end}}
+    _ = {{Macro "Go.Read" $.RHS}}
+  {{else}}
+    {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
+  {{end}}
 {{end}}
 
 
