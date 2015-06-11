@@ -299,11 +299,11 @@ protected:
     // Globals
     ContextID NextContextID;
     ThreadID CurrentThread;
-    ThreadIDToContextRef Contexts;
-    EGLContextToContextRef EGLContexts;
-    GLXContextToContextRef GLXContexts;
-    HGLRCToContextRef WGLContexts;
-    CGLContextObjToContextRef CGLContexts;
+    ThreadIDToContext__R Contexts;
+    EGLContextToContext__R EGLContexts;
+    GLXContextToContext__R GLXContexts;
+    HGLRCToContext__R WGLContexts;
+    CGLContextObjToContext__R CGLContexts;
 
 #include "gles_state_externs.inl"
 };

@@ -78,9 +78,9 @@
   {{else if IsU64         $}}U64
   {{else if IsS64         $}}S64
   {{else if IsString      $}}String
-  {{else if IsReference   $}}{{Macro "C++.TypeName" $.To}}Ref
-  {{else if IsSlice       $}}{{Macro "C++.TypeName" $.To}}Slice
-  {{else if IsPointer     $}}{{Macro "C++.TypeName" $.To}}Ptr
+  {{else if IsReference   $}}{{Macro "C++.TypeName" $.To}}__R
+  {{else if IsSlice       $}}{{Macro "C++.TypeName" $.To}}__S
+  {{else if IsPointer     $}}{{Macro "C++.TypeName" $.To}}__P
   {{else}}{{Error "C++.TypeName passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
 {{end}}
