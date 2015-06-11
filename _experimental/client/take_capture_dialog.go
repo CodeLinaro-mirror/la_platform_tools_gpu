@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
+	"android.googlesource.com/platform/tools/gpu/gapii"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
@@ -99,18 +100,7 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, captur
 			if item, ok := sel.(launchItem); ok {
 				go func() {
 					driver.Call(window.Close)
-
-					statusLogger.Infof("Disabling SELinux enforcing...")
-					item.Package.Device.SetSELinuxEnforcing(false)
-
-					statusLogger.Infof("Setting LD_PRELOAD...")
-					item.Package.SetWrapProperties("LD_PRELOAD=/data/spy.so")
-
-					statusLogger.Infof("Forwarding port...")
-					item.Package.Device.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
-
-					statusLogger.Infof("Starting activity...")
-					item.Package.Device.StartActivity(*item.Action)
+					gapii.AdbStart(statusLogger, item.Action, adb.TCPPort(*spyport))
 
 					capture()
 				}()
