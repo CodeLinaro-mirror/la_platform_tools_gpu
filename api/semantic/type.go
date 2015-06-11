@@ -179,6 +179,19 @@ type StaticArray struct {
 func (t StaticArray) Typename() string        { return t.Name }
 func (t StaticArray) Member(name string) Node { return nil }
 
+// ArrayInitializer represents an expression that creates a new StaticArray
+// instance using a value list, of the form T(v0, v1, v2)
+type ArrayInitializer struct {
+	AST    *ast.Call    // the underlying syntax node this was built from
+	Array  Type         // the array type to initialize (may be aliased)
+	Values []Expression // the list of element values
+}
+
+// ExpressionType implements Expression returning the class type being initialized.
+func (c *ArrayInitializer) ExpressionType() Type {
+	return c.Array
+}
+
 // Map represents an api map type declaration, of the form
 // map!(KeyType, ValueType)
 type Map struct {

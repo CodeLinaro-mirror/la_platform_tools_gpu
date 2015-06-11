@@ -339,10 +339,13 @@ func importedType(ctx *context, in *ast.Imported) semantic.Type {
 	return t
 }
 
-func typename(e semantic.Type) string {
-	if e == nil {
+func typename(t semantic.Type) string {
+	switch t := t.(type) {
+	case nil:
 		return "missing"
-	} else {
-		return e.Typename()
+	case *semantic.StaticArray:
+		return fmt.Sprintf("%s[%d]", typename(t.ValueType), t.Size)
+	default:
+		return t.Typename()
 	}
 }

@@ -115,8 +115,29 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 5,
+		Name: "cmd_slice_casts",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "s",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "l",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
 		Api:              service.ApiId{ID: binary.ID(apiID)},
-		Type:             5,
+		Type:             6,
 		Name:             "cmd_void",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -126,7 +147,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 6,
+		Type: 7,
 		Name: "cmd_unknown_ret",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -142,7 +163,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 7,
+		Type: 8,
 		Name: "cmd_unknown_write_ptr",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -158,7 +179,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 8,
+		Type: 9,
 		Name: "cmd_unknown_write_slice",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -174,7 +195,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 9,
+		Type: 10,
 		Name: "cmd_void_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -190,7 +211,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 10,
+		Type: 11,
 		Name: "cmd_void_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -206,7 +227,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 11,
+		Type: 12,
 		Name: "cmd_void_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -222,7 +243,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 12,
+		Type: 13,
 		Name: "cmd_void_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -238,7 +259,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 13,
+		Type: 14,
 		Name: "cmd_void_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -254,7 +275,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 14,
+		Type: 15,
 		Name: "cmd_void_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -270,7 +291,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 15,
+		Type: 16,
 		Name: "cmd_void_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -286,7 +307,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 16,
+		Type: 17,
 		Name: "cmd_void_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -302,7 +323,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 17,
+		Type: 18,
 		Name: "cmd_void_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -318,7 +339,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 18,
+		Type: 19,
 		Name: "cmd_void_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -334,7 +355,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 19,
+		Type: 20,
 		Name: "cmd_void_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -350,7 +371,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 20,
+		Type: 21,
 		Name: "cmd_void_string",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -366,7 +387,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 21,
+		Type: 22,
 		Name: "cmd_void_3_strings",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -392,7 +413,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 22,
+		Type: 23,
 		Name: "cmd_void_3_in_arrays",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -418,7 +439,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 23,
+		Type: 24,
 		Name: "cmd_void_in_array_of_pointers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -439,7 +460,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 24,
+		Type: 25,
 		Name: "cmd_void_read_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -455,7 +476,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 25,
+		Type: 26,
 		Name: "cmd_void_read_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -471,7 +492,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 26,
+		Type: 27,
 		Name: "cmd_void_read_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -487,7 +508,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 27,
+		Type: 28,
 		Name: "cmd_void_read_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -503,7 +524,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 28,
+		Type: 29,
 		Name: "cmd_void_read_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -519,7 +540,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 29,
+		Type: 30,
 		Name: "cmd_void_read_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -535,7 +556,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 30,
+		Type: 31,
 		Name: "cmd_void_read_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -551,7 +572,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 31,
+		Type: 32,
 		Name: "cmd_void_read_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -567,7 +588,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 32,
+		Type: 33,
 		Name: "cmd_void_read_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -583,7 +604,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 33,
+		Type: 34,
 		Name: "cmd_void_read_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -599,7 +620,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 34,
+		Type: 35,
 		Name: "cmd_void_read_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -615,7 +636,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 35,
+		Type: 36,
 		Name: "cmd_void_read_ptrs",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -641,7 +662,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 36,
+		Type: 37,
 		Name: "cmd_void_write_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -657,7 +678,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 37,
+		Type: 38,
 		Name: "cmd_void_write_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -673,7 +694,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 38,
+		Type: 39,
 		Name: "cmd_void_write_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -689,7 +710,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 39,
+		Type: 40,
 		Name: "cmd_void_write_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -705,7 +726,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 40,
+		Type: 41,
 		Name: "cmd_void_write_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -721,7 +742,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 41,
+		Type: 42,
 		Name: "cmd_void_write_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -737,7 +758,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 42,
+		Type: 43,
 		Name: "cmd_void_write_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -753,7 +774,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 43,
+		Type: 44,
 		Name: "cmd_void_write_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -769,7 +790,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 44,
+		Type: 45,
 		Name: "cmd_void_write_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -785,7 +806,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 45,
+		Type: 46,
 		Name: "cmd_void_write_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -801,7 +822,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 46,
+		Type: 47,
 		Name: "cmd_void_write_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -817,7 +838,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 47,
+		Type: 48,
 		Name: "cmd_void_write_ptrs",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -843,7 +864,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 48,
+		Type: 49,
 		Name: "cmd_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -859,7 +880,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 49,
+		Type: 50,
 		Name: "cmd_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -875,7 +896,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 50,
+		Type: 51,
 		Name: "cmd_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -891,7 +912,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 51,
+		Type: 52,
 		Name: "cmd_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -907,7 +928,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 52,
+		Type: 53,
 		Name: "cmd_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -923,7 +944,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 53,
+		Type: 54,
 		Name: "cmd_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -939,7 +960,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 54,
+		Type: 55,
 		Name: "cmd_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -955,7 +976,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 55,
+		Type: 56,
 		Name: "cmd_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -971,7 +992,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 56,
+		Type: 57,
 		Name: "cmd_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -987,7 +1008,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 57,
+		Type: 58,
 		Name: "cmd_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1003,7 +1024,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 58,
+		Type: 59,
 		Name: "cmd_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1019,7 +1040,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 59,
+		Type: 60,
 		Name: "cmd_string",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1035,7 +1056,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 60,
+		Type: 61,
 		Name: "cmd_pointer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1051,7 +1072,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 61,
+		Type: 62,
 		Name: "cmd_void_3_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1077,7 +1098,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 62,
+		Type: 63,
 		Name: "cmd_void_in_array_of_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1093,7 +1114,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 63,
+		Type: 64,
 		Name: "cmd_void_out_array_of_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1109,7 +1130,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 64,
+		Type: 65,
 		Name: "cmd_void_out_array_of_unknown_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1125,7 +1146,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 65,
+		Type: 66,
 		Name: "cmd_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1144,7 +1165,19 @@ func init() {
 		Kind: service.TypeKindStruct,
 		Fields: service.FieldInfoPtrArray{
 			&service.FieldInfo{
-				Name: "buf",
+				Name: "u8s",
+				Type: schema.Int, /* TODO: Slice */
+			},
+			&service.FieldInfo{
+				Name: "u16s",
+				Type: schema.Int, /* TODO: Slice */
+			},
+			&service.FieldInfo{
+				Name: "u32s",
+				Type: schema.Int, /* TODO: Slice */
+			},
+			&service.FieldInfo{
+				Name: "ints",
 				Type: schema.Int, /* TODO: Slice */
 			},
 			&service.FieldInfo{

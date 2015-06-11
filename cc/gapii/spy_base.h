@@ -70,7 +70,11 @@ protected:
 
     // writes a value to i'th element in the slice dst.
     template <typename T>
-    inline void write(const Slice<T>& dst, uint64_t i, T value);
+    inline void write(const Slice<T>& dst, uint64_t i, const T& value);
+
+    // writes an array-value to i'th element in the slice dst.
+    template <typename T, size_t N>
+    inline void write(const Slice<T[N]>& dst, uint64_t i, const T(&value)[N]);
 
     // copy copies N elements from src to dst, where N is the smaller of src.count() and
     // dst.count().
@@ -145,11 +149,22 @@ inline void SpyBase::write(const Slice<T>& slice) {
 }
 
 template<typename T>
-inline void SpyBase::write(const Slice<T>& dst, uint64_t index, T value) {
+inline void SpyBase::write(const Slice<T>& dst, uint64_t index, const T& value) {
     if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
         dst[index] = value;
     } else {
         write(&dst[index], sizeof(T));
+    }
+}
+
+template <typename T, size_t N>
+inline void SpyBase::write(const Slice<T[N]>& dst, uint64_t index, const T(&value)[N]) {
+    if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
+        for (size_t i = 0; i < N; i++) {
+            dst[index][i] = value[i];
+        }
+    } else {
+        write(&dst[index], sizeof(T[N]));
     }
 }
 

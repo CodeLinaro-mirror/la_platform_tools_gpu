@@ -110,6 +110,8 @@ func assign(ctx *context, in *ast.Assign) semantic.Node {
 		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
 	}
 	switch lhs := lhs.(type) {
+	case *semantic.ArrayIndex:
+		out = &semantic.ArrayAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
 	case *semantic.MapIndex:
 		out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
 	case *semantic.SliceIndex:

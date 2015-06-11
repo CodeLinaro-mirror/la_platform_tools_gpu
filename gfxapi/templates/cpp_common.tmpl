@@ -53,6 +53,18 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the fixed-size-array postfix for static array types.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.StaticArraySuffix"}}
+  {{if not (IsType $)}}{{Macro "C++.StaticArraySuffix" (TypeOf $)}}
+  {{else if IsStaticArray $}}[{{$.Size}}]
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits a typename that can be used for string concatenation for the given type.
 -------------------------------------------------------------------------------
 */}}
@@ -275,35 +287,20 @@
 {{define "C++.Statement.Default"}}
   {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{Macro "C++.LocalName" $.Local}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
+  {{else if IsArrayAssign  $}}{{Macro "C++.ArrayAssign" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
   {{else if IsSliceAssign  $}}{{Macro "C++.SliceAssign" $}}
   {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
-  {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
-      {{Macro "C++.Block" $.True}}
-      {{if len $.False.Statements}}
-    } else {
-      {{Macro "C++.Block" $.False}}
-    {{end}}
-    }
-  {{else if IsSwitch $}}
-    switch ({{Macro "C++.Read" $.Value}}) {
-      {{range $i, $c := $.Cases}}
-        {{range $j, $cond := $c.Conditions}}
-          case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} {{"{"}}{{end}}
-        {{end}}
-          {{Macro "C++.Block" $c.Block}}
-          break;
-        }
-      {{end}}
-    }
-  {{else if IsIteration $}}{{Macro "C++.Iteration" $}}
-  {{else if IsCall      $}}{{Macro "C++.Call" $}};
-  {{else if IsAssert    $}}
-  {{else if IsRead      $}}read({{Macro "C++.Read" $.Slice}});
-  {{else if IsWrite     $}}write({{Macro "C++.Read" $.Slice}});
-  {{else if IsCopy      $}}copy({{Macro "C++.Read" $.Dst}}, {{Macro "C++.Read" $.Src}});
-  {{else if IsFence     $}}{{if not (IsNil $.Statement)}}{{Macro "C++.Statement" $.Statement}}{{end}}
-  {{else                 }}{{Error "unsupported statement %T: %+v" $ $}}
+  {{else if IsBranch       $}}{{Macro "C++.Branch" $}}
+  {{else if IsSwitch       $}}{{Macro "C++.Switch" $}}
+  {{else if IsIteration    $}}{{Macro "C++.Iteration" $}}
+  {{else if IsCall         $}}{{Macro "C++.Call" $}};
+  {{else if IsAssert       $}}
+  {{else if IsRead         $}}read({{Macro "C++.Read" $.Slice}});
+  {{else if IsWrite        $}}write({{Macro "C++.Read" $.Slice}});
+  {{else if IsCopy         $}}copy({{Macro "C++.Read" $.Dst}}, {{Macro "C++.Read" $.Src}});
+  {{else if IsFence        $}}{{if not (IsNil $.Statement)}}{{Macro "C++.Statement" $.Statement}}{{end}}
+  {{else                    }}{{Error "unsupported statement %T: %+v" $ $}}
   {{end}}
 {{end}}
 
@@ -315,6 +312,7 @@
 */}}
 {{define "C++.Assign"}}
   {{AssertType $ "Assign"}}
+
   {{if IsIgnore $.LHS}}
     {{if ne $.Operator "="}}{{Error "Compound assignments to '_' are not supported (%s)" $.Operator}}{{end}}
     {{Macro "C++.Read" $.RHS}};
@@ -326,11 +324,24 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the C++ logic to perform a static-array assign statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ArrayAssign"}}
+  {{AssertType $ "ArrayAssign"}}
+
+  {{Macro "C++.Read" $.To.Array}}[{{Macro "C++.Read" $.To.Index}}] {{$.Operator}} {{Macro "C++.Read" $.Value}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the C++ logic to perform a map assign statement.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.MapAssign"}}
   {{AssertType $ "MapAssign"}}
+
   {{Macro "C++.Read" $.To.Map}}[{{Macro "C++.Read" $.To.Index}}] {{$.Operator}} {{Macro "C++.Read" $.Value}};
 {{end}}
 
@@ -342,8 +353,48 @@
 */}}
 {{define "C++.SliceAssign"}}
   {{AssertType $ "SliceAssign"}}
+
   {{if eq $.Operator "="}}write({{Macro "C++.Read" $.To.Slice}}, {{Macro "C++.Read" $.To.Index}}, {{Macro "C++.Read" $.Value}});
   {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic for a branch statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Branch"}}
+  {{AssertType $ "Branch"}}
+
+  if ({{Macro "C++.Read" $.Condition}}) {
+    {{Macro "C++.Block" $.True}}
+    {{if len $.False.Statements}}
+  } else {
+    {{Macro "C++.Block" $.False}}
+    {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic for a switch statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Switch"}}
+  {{AssertType $ "Switch"}}
+
+  switch ({{Macro "C++.Read" $.Value}}) {
+    {{range $i, $c := $.Cases}}
+      {{range $j, $cond := $c.Conditions}}
+        case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} {{"{"}}{{end}}
+      {{end}}
+        {{Macro "C++.Block" $c.Block}}
+        break;
+      }
+    {{end}}
+  }
 {{end}}
 
 
@@ -396,21 +447,14 @@
   {{else if IsNull             $}}{{Macro "C++.Null" $.Type}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
   {{else if IsCreate           $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>((new {{Macro "C++.Type" $ty.To}}()){{Macro "C++.InitializeFields" $.Initializer}})
+  {{else if IsArrayInitializer $}}{{Macro "C++.Type" $}}{ {{ForEach $.Values "C++.Read" | JoinWith ", "}} }
   {{else if IsClassInitializer $}}{{Macro "C++.Type" $}}(){{Macro "C++.InitializeFields" $}}
   {{else if IsSliceIndex       $}}{{Macro "C++.SliceIndex" $}}
   {{else if IsSliceRange       $}}slice({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsPointerRange     $}}slice({{Macro "C++.Read" $.Pointer}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsClone            $}}clone({{Macro "C++.Read" $.Slice}})
   {{else if IsMake             $}}make<{{Macro "C++.Type" ($.Type | Unpack).To}}>({{Macro "C++.Read" $.Size}})
-  {{else if IsSelect           $}}/* clang-format off */
-    /* switch({{Macro "C++.Read" $.Value}}) */»
-    {{range $c := $.Choices}}
-      /* case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}{{end}}: */§
-      ({{range $i, $cond := $c.Conditions}}§
-          {{if $i}} || {{end}}(({{Macro "C++.Read" $.Value}}) == ({{Macro "C++.Read" $cond}}))§
-      {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
-    {{end}}
-    /* default: */ {{Macro "C++.Null" $.Type}}« /* clang-format on */
+  {{else if IsSelect           $}}{{Macro "C++.Select" $}}
   {{else}}{{Error "macro C++.Read called with unsupported type: %T" $}}
   {{end}}
 {{end}}
@@ -471,10 +515,12 @@
   {{AssertType $ "Cast"}}
 
   {{$src_ty := $.Object | TypeOf | Underlying | Unpack}}
-  {{$dst_ty := $.Type | Underlying}}
+  {{$dst_ty := $.Type | Underlying | Unpack}}
   {{$src    := Macro "C++.Read" $.Object}}
 
-  {{/* T[] -> T* */}}{{if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
+  {{/* A[] -> B[] */}}{{if and (IsSlice $src_ty) (IsSlice $dst_ty)}}
+    {{$src}}.as<{{Macro "C++.Type" $dst_ty.To}}>()
+  {{/* T[] -> T* */}}{{else if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
     {{$src}}.begin()
   {{/* char* -> string */}}{{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
     string({{$src}})
@@ -540,6 +586,26 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the C++ logic for a select expression.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Select"}}
+  {{AssertType $ "Select"}}
+
+  /* clang-format off */
+  /* switch({{Macro "C++.Read" $.Value}}) */»
+  {{range $c := $.Choices}}
+    /* case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}{{end}}: */§
+    ({{range $i, $cond := $c.Conditions}}§
+        {{if $i}} || {{end}}(({{Macro "C++.Read" $.Value}}) == ({{Macro "C++.Read" $cond}}))§
+    {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
+  {{end}}
+  /* default: */ {{Macro "C++.Null" $.Type}}« /* clang-format on */
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the C++ logic to execute a method call expression.
 -------------------------------------------------------------------------------
 */}}
@@ -580,18 +646,6 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.AOSP.Copyright"}}⋖{{Copyright "generated_aosp_c" "apic"}}⋗{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the fixed-size-array postfix for static array types.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.ArrayPostfix"}}
-  {{if not (IsType $)}}{{Macro "C++.ArrayPostfix" (TypeOf $)}}
-  {{else if IsStaticArray $}}[{{$.Size}}]
-  {{end}}
-{{end}}
 
 
 {{/*

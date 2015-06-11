@@ -35,67 +35,68 @@ var funcInfoCmdMake = builder.FunctionInfo{ID: 1, ReturnType: protocol.TypeVoid,
 var funcInfoCmdCopy = builder.FunctionInfo{ID: 2, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoCmdCharsliceToString = builder.FunctionInfo{ID: 3, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoCmdCharptrToString = builder.FunctionInfo{ID: 4, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoid = builder.FunctionInfo{ID: 5, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoCmdUnknownRet = builder.FunctionInfo{ID: 6, ReturnType: protocol.TypeInt64, Parameters: 0}
-var funcInfoCmdUnknownWritePtr = builder.FunctionInfo{ID: 7, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdUnknownWriteSlice = builder.FunctionInfo{ID: 8, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidU8 = builder.FunctionInfo{ID: 9, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidS8 = builder.FunctionInfo{ID: 10, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidU16 = builder.FunctionInfo{ID: 11, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidS16 = builder.FunctionInfo{ID: 12, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidF32 = builder.FunctionInfo{ID: 13, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidU32 = builder.FunctionInfo{ID: 14, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidS32 = builder.FunctionInfo{ID: 15, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidF64 = builder.FunctionInfo{ID: 16, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidU64 = builder.FunctionInfo{ID: 17, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidS64 = builder.FunctionInfo{ID: 18, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidBool = builder.FunctionInfo{ID: 19, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidString = builder.FunctionInfo{ID: 20, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoid3Strings = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdVoid3InArrays = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdVoidInArrayOfPointers = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoCmdVoidReadU8 = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadS8 = builder.FunctionInfo{ID: 25, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadU16 = builder.FunctionInfo{ID: 26, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadS16 = builder.FunctionInfo{ID: 27, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadF32 = builder.FunctionInfo{ID: 28, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadU32 = builder.FunctionInfo{ID: 29, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadS32 = builder.FunctionInfo{ID: 30, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadF64 = builder.FunctionInfo{ID: 31, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadU64 = builder.FunctionInfo{ID: 32, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadS64 = builder.FunctionInfo{ID: 33, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadBool = builder.FunctionInfo{ID: 34, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidReadPtrs = builder.FunctionInfo{ID: 35, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdVoidWriteU8 = builder.FunctionInfo{ID: 36, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteS8 = builder.FunctionInfo{ID: 37, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteU16 = builder.FunctionInfo{ID: 38, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteS16 = builder.FunctionInfo{ID: 39, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteF32 = builder.FunctionInfo{ID: 40, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteU32 = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteS32 = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteF64 = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteU64 = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteS64 = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWriteBool = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidWritePtrs = builder.FunctionInfo{ID: 47, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdU8 = builder.FunctionInfo{ID: 48, ReturnType: protocol.TypeUint8, Parameters: 0}
-var funcInfoCmdS8 = builder.FunctionInfo{ID: 49, ReturnType: protocol.TypeInt8, Parameters: 0}
-var funcInfoCmdU16 = builder.FunctionInfo{ID: 50, ReturnType: protocol.TypeUint16, Parameters: 0}
-var funcInfoCmdS16 = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeInt16, Parameters: 0}
-var funcInfoCmdF32 = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeFloat, Parameters: 0}
-var funcInfoCmdU32 = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeUint32, Parameters: 0}
-var funcInfoCmdS32 = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeInt32, Parameters: 0}
-var funcInfoCmdF64 = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeDouble, Parameters: 0}
-var funcInfoCmdU64 = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeUint64, Parameters: 0}
-var funcInfoCmdS64 = builder.FunctionInfo{ID: 57, ReturnType: protocol.TypeInt64, Parameters: 0}
-var funcInfoCmdBool = builder.FunctionInfo{ID: 58, ReturnType: protocol.TypeBool, Parameters: 0}
-var funcInfoCmdString = builder.FunctionInfo{ID: 59, ReturnType: protocol.TypeVolatilePointer, Parameters: 0}
-var funcInfoCmdPointer = builder.FunctionInfo{ID: 60, ReturnType: protocol.TypeVolatilePointer, Parameters: 0}
-var funcInfoCmdVoid3Remapped = builder.FunctionInfo{ID: 61, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdVoidInArrayOfRemapped = builder.FunctionInfo{ID: 62, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidOutArrayOfRemapped = builder.FunctionInfo{ID: 63, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdVoidOutArrayOfUnknownRemapped = builder.FunctionInfo{ID: 64, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCmdRemapped = builder.FunctionInfo{ID: 65, ReturnType: protocol.TypeUint32, Parameters: 0}
+var funcInfoCmdSliceCasts = builder.FunctionInfo{ID: 5, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoCmdVoid = builder.FunctionInfo{ID: 6, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoCmdUnknownRet = builder.FunctionInfo{ID: 7, ReturnType: protocol.TypeInt64, Parameters: 0}
+var funcInfoCmdUnknownWritePtr = builder.FunctionInfo{ID: 8, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdUnknownWriteSlice = builder.FunctionInfo{ID: 9, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidU8 = builder.FunctionInfo{ID: 10, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidS8 = builder.FunctionInfo{ID: 11, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidU16 = builder.FunctionInfo{ID: 12, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidS16 = builder.FunctionInfo{ID: 13, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidF32 = builder.FunctionInfo{ID: 14, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidU32 = builder.FunctionInfo{ID: 15, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidS32 = builder.FunctionInfo{ID: 16, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidF64 = builder.FunctionInfo{ID: 17, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidU64 = builder.FunctionInfo{ID: 18, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidS64 = builder.FunctionInfo{ID: 19, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidBool = builder.FunctionInfo{ID: 20, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidString = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoid3Strings = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoCmdVoid3InArrays = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoCmdVoidInArrayOfPointers = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoCmdVoidReadU8 = builder.FunctionInfo{ID: 25, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadS8 = builder.FunctionInfo{ID: 26, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadU16 = builder.FunctionInfo{ID: 27, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadS16 = builder.FunctionInfo{ID: 28, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadF32 = builder.FunctionInfo{ID: 29, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadU32 = builder.FunctionInfo{ID: 30, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadS32 = builder.FunctionInfo{ID: 31, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadF64 = builder.FunctionInfo{ID: 32, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadU64 = builder.FunctionInfo{ID: 33, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadS64 = builder.FunctionInfo{ID: 34, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadBool = builder.FunctionInfo{ID: 35, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidReadPtrs = builder.FunctionInfo{ID: 36, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoCmdVoidWriteU8 = builder.FunctionInfo{ID: 37, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteS8 = builder.FunctionInfo{ID: 38, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteU16 = builder.FunctionInfo{ID: 39, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteS16 = builder.FunctionInfo{ID: 40, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteF32 = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteU32 = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteS32 = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteF64 = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteU64 = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteS64 = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWriteBool = builder.FunctionInfo{ID: 47, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidWritePtrs = builder.FunctionInfo{ID: 48, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoCmdU8 = builder.FunctionInfo{ID: 49, ReturnType: protocol.TypeUint8, Parameters: 0}
+var funcInfoCmdS8 = builder.FunctionInfo{ID: 50, ReturnType: protocol.TypeInt8, Parameters: 0}
+var funcInfoCmdU16 = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeUint16, Parameters: 0}
+var funcInfoCmdS16 = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeInt16, Parameters: 0}
+var funcInfoCmdF32 = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeFloat, Parameters: 0}
+var funcInfoCmdU32 = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeUint32, Parameters: 0}
+var funcInfoCmdS32 = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeInt32, Parameters: 0}
+var funcInfoCmdF64 = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeDouble, Parameters: 0}
+var funcInfoCmdU64 = builder.FunctionInfo{ID: 57, ReturnType: protocol.TypeUint64, Parameters: 0}
+var funcInfoCmdS64 = builder.FunctionInfo{ID: 58, ReturnType: protocol.TypeInt64, Parameters: 0}
+var funcInfoCmdBool = builder.FunctionInfo{ID: 59, ReturnType: protocol.TypeBool, Parameters: 0}
+var funcInfoCmdString = builder.FunctionInfo{ID: 60, ReturnType: protocol.TypeVolatilePointer, Parameters: 0}
+var funcInfoCmdPointer = builder.FunctionInfo{ID: 61, ReturnType: protocol.TypeVolatilePointer, Parameters: 0}
+var funcInfoCmdVoid3Remapped = builder.FunctionInfo{ID: 62, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoCmdVoidInArrayOfRemapped = builder.FunctionInfo{ID: 63, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidOutArrayOfRemapped = builder.FunctionInfo{ID: 64, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdVoidOutArrayOfUnknownRemapped = builder.FunctionInfo{ID: 65, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCmdRemapped = builder.FunctionInfo{ID: 66, ReturnType: protocol.TypeUint32, Parameters: 0}
 
 func (c remapped) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
@@ -106,7 +107,7 @@ func (ϟa *CmdClone) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Buf = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
+	ϟc.U8s = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	ϟb.Push(ϟa.Src.value())
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdClone)
@@ -119,7 +120,7 @@ func (ϟa *CmdMake) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Buf = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
+	ϟc.U8s = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdMake)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -131,8 +132,8 @@ func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Buf = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
-	ϟdst, ϟsrc := ϟc.Buf.Copy(ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs), ϟs, ϟd, ϟl)
+	ϟc.U8s = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
+	ϟdst, ϟsrc := ϟc.U8s.Copy(ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Src.value())
 	ϟb.Push(value.U32(ϟa.Cnt))
@@ -163,6 +164,22 @@ func (ϟa *CmdCharptrToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc.Str = strings.TrimRight(string(ϟa.S.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	ϟb.Push(ϟa.S.value())
 	ϟb.Call(funcInfoCmdCharptrToString)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+
+var _ = replay.Replayer(&CmdSliceCasts{}) // interface compliance check
+func (ϟa *CmdSliceCasts) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.U8s = AsU8ˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
+	ϟc.U16s = ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs)
+	ϟc.U32s = AsU32ˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
+	ϟc.Ints = AsIntˢ(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.L), ϟs), ϟs)
+	ϟb.Push(ϟa.S.value())
+	ϟb.Push(value.U32(ϟa.L))
+	ϟb.Call(funcInfoCmdSliceCasts)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -368,10 +385,10 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Buf = MakeU8ˢ(uint64(10), ϟs)
+	ϟc.U8s = MakeU8ˢ(uint64(10), ϟs)
 	ϟa.B.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.C.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟdst, ϟsrc := ϟc.Buf.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
+	ϟdst, ϟsrc := ϟc.U8s.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.A.value())
 	ϟb.Push(ϟa.B.value())
@@ -943,19 +960,38 @@ func (p U8ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p Charᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+func (p U16ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p Charᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+func (p U16ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
 	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p Charᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (p U16ᵖ) replayWrite(value uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	p.Write(value, ϟs)
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
-func (p Charᵖ) value() value.Pointer {
+func (p U16ᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p U32ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p U32ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p U32ᵖ) replayWrite(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p U32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -981,19 +1017,19 @@ func (p Intᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p U32ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
+func (p Charᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p U32ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
+func (p Charᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
 	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p U32ᵖ) replayWrite(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (p Charᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	p.Write(value, ϟs)
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
-func (p U32ᵖ) value() value.Pointer {
+func (p Charᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -1032,25 +1068,6 @@ func (p S8ᵖ) replayWrite(value int8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p S8ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U16ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U16ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U16ᵖ) replayWrite(value uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-func (p U16ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {

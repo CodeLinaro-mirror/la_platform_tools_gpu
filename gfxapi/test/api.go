@@ -49,11 +49,131 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U8ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return U8ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the U8ᵖ pointer.
 func (p U8ᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// U16ᵖ is a pointer to a uint16 element.
+type U16ᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewU16ᵖ returns a U16ᵖ that points to addr in the application pool.
+func NewU16ᵖ(addr memory.Pointer) U16ᵖ {
+	return U16ᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that U16ᵖ points to.
+func (p U16ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(2)
+}
+
+// Read reads and returns the uint16 element at the pointer.
+func (p U16ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint16 {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the uint16 element at the pointer.
+func (p U16ᵖ) Write(value uint16, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]uint16{value}, ϟs)
+}
+
+// Slice returns a new U16ˢ from the pointer using start and end indices.
+func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return U16ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the U16ᵖ pointer.
+func (p U16ᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// U32ᵖ is a pointer to a uint32 element.
+type U32ᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
+func NewU32ᵖ(addr memory.Pointer) U32ᵖ {
+	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that U32ᵖ points to.
+func (p U32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the uint32 element at the pointer.
+func (p U32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint32 {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the uint32 element at the pointer.
+func (p U32ᵖ) Write(value uint32, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]uint32{value}, ϟs)
+}
+
+// Slice returns a new U32ˢ from the pointer using start and end indices.
+func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return U32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the U32ᵖ pointer.
+func (p U32ᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Intᵖ is a pointer to a int64 element.
+type Intᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewIntᵖ returns a Intᵖ that points to addr in the application pool.
+func NewIntᵖ(addr memory.Pointer) Intᵖ {
+	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Intᵖ points to.
+func (p Intᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(ϟs.Architecture.IntegerSize)
+}
+
+// Read reads and returns the int64 element at the pointer.
+func (p Intᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int64 {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the int64 element at the pointer.
+func (p Intᵖ) Write(value int64, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟs)
+}
+
+// Slice returns a new Intˢ from the pointer using start and end indices.
+func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Intˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Intᵖ pointer.
+func (p Intᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
@@ -105,91 +225,11 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Charˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Charᵖ pointer.
 func (p Charᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
-}
-
-// Intᵖ is a pointer to a int64 element.
-type Intᵖ struct {
-	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
-}
-
-// NewIntᵖ returns a Intᵖ that points to addr in the application pool.
-func NewIntᵖ(addr memory.Pointer) Intᵖ {
-	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// ElementSize returns the size in bytes of an element that Intᵖ points to.
-func (p Intᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(ϟs.Architecture.IntegerSize)
-}
-
-// Read reads and returns the int64 element at the pointer.
-func (p Intᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int64 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the int64 element at the pointer.
-func (p Intᵖ) Write(value int64, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟs)
-}
-
-// Slice returns a new Intˢ from the pointer using start and end indices.
-func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return Intˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
-}
-
-// String returns a string description of the Intᵖ pointer.
-func (p Intᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
-}
-
-// U32ᵖ is a pointer to a uint32 element.
-type U32ᵖ struct {
-	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
-}
-
-// NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
-func NewU32ᵖ(addr memory.Pointer) U32ᵖ {
-	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// ElementSize returns the size in bytes of an element that U32ᵖ points to.
-func (p U32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the uint32 element at the pointer.
-func (p U32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint32 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the uint32 element at the pointer.
-func (p U32ᵖ) Write(value uint32, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint32{value}, ϟs)
-}
-
-// Slice returns a new U32ˢ from the pointer using start and end indices.
-func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return U32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
-}
-
-// String returns a string description of the U32ᵖ pointer.
-func (p U32ᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
@@ -233,7 +273,7 @@ func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᵖˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Charᵖᵖ pointer.
@@ -273,51 +313,11 @@ func (p S8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S8ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S8ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S8ᵖ pointer.
 func (p S8ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
-}
-
-// U16ᵖ is a pointer to a uint16 element.
-type U16ᵖ struct {
-	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
-}
-
-// NewU16ᵖ returns a U16ᵖ that points to addr in the application pool.
-func NewU16ᵖ(addr memory.Pointer) U16ᵖ {
-	return U16ᵖ{Address: addr, Pool: memory.ApplicationPool}
-}
-
-// ElementSize returns the size in bytes of an element that U16ᵖ points to.
-func (p U16ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(2)
-}
-
-// Read reads and returns the uint16 element at the pointer.
-func (p U16ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint16 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the uint16 element at the pointer.
-func (p U16ᵖ) Write(value uint16, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint16{value}, ϟs)
-}
-
-// Slice returns a new U16ˢ from the pointer using start and end indices.
-func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return U16ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
-}
-
-// String returns a string description of the U16ᵖ pointer.
-func (p U16ᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
@@ -353,7 +353,7 @@ func (p S16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S16ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S16ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S16ᵖ pointer.
@@ -393,7 +393,7 @@ func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return F32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the F32ᵖ pointer.
@@ -433,7 +433,7 @@ func (p S32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S32ᵖ pointer.
@@ -473,7 +473,7 @@ func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F64ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return F64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the F64ᵖ pointer.
@@ -513,7 +513,7 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U64ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return U64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the U64ᵖ pointer.
@@ -553,7 +553,7 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S64ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S64ᵖ pointer.
@@ -593,7 +593,7 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Boolˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Boolˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Boolᵖ pointer.
@@ -623,7 +623,7 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Voidᵖ pointer.
@@ -663,7 +663,7 @@ func (p Remappedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Remappedˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Remappedˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Remappedᵖ pointer.
@@ -671,12 +671,10 @@ func (p Remappedᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
+// Boolˢ is a slice of bool.
 type Boolˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeBoolˢ returns a Boolˢ backed by a new memory pool.
@@ -684,7 +682,7 @@ func MakeBoolˢ(count uint64, ϟs *gfxapi.State) Boolˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Boolˢ{Count: count, Pool: id}
+	return Boolˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Boolˢ in a new memory pool.
@@ -694,7 +692,7 @@ func (s Boolˢ) Clone(ϟs *gfxapi.State) Boolˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Boolˢ{Count: s.Count, Pool: id}
+	dst := Boolˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -726,6 +724,15 @@ func (s Boolˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 // Encoder returns a memory encoder for the slice.
 func (s Boolˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsBoolˢ returns s cast to a Boolˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsBoolˢ(s Slice, ϟs *gfxapi.State) Boolˢ {
+	out := Boolˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the bool elements in this Boolˢ.
@@ -778,7 +785,7 @@ func (s Boolˢ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Boolˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Boolˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Boolˢ slice.
@@ -786,12 +793,10 @@ func (s Boolˢ) String() string {
 	return fmt.Sprintf("bool(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Charˢ is a slice of byte.
 type Charˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeCharˢFromString returns a Charˢ backed by a new
@@ -802,7 +807,7 @@ func MakeCharˢFromString(str string, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	return Charˢ{Count: uint64(len(str)), Pool: id}
+	return Charˢ{SliceInfo: SliceInfo{Count: uint64(len(str)), Pool: id}}
 }
 
 // MakeCharˢ returns a Charˢ backed by a new memory pool.
@@ -810,7 +815,7 @@ func MakeCharˢ(count uint64, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charˢ{Count: count, Pool: id}
+	return Charˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Charˢ in a new memory pool.
@@ -820,7 +825,7 @@ func (s Charˢ) Clone(ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charˢ{Count: s.Count, Pool: id}
+	dst := Charˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -852,6 +857,15 @@ func (s Charˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 // Encoder returns a memory encoder for the slice.
 func (s Charˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsCharˢ returns s cast to a Charˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsCharˢ(s Slice, ϟs *gfxapi.State) Charˢ {
+	out := Charˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the byte elements in this Charˢ.
@@ -904,7 +918,7 @@ func (s Charˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Charˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Charˢ slice.
@@ -912,12 +926,10 @@ func (s Charˢ) String() string {
 	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Charᵖˢ is a slice of Charᵖ.
 type Charᵖˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeCharᵖˢ returns a Charᵖˢ backed by a new memory pool.
@@ -925,7 +937,7 @@ func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charᵖˢ{Count: count, Pool: id}
+	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Charᵖˢ in a new memory pool.
@@ -935,7 +947,7 @@ func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charᵖˢ{Count: s.Count, Pool: id}
+	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -971,6 +983,15 @@ func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 // Encoder returns a memory encoder for the slice.
 func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsCharᵖˢ returns s cast to a Charᵖˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ {
+	out := Charᵖˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the Charᵖ elements in this Charᵖˢ.
@@ -1039,7 +1060,7 @@ func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charᵖˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Charᵖˢ slice.
@@ -1047,12 +1068,10 @@ func (s Charᵖˢ) String() string {
 	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// F32ˢ is a slice of float32.
 type F32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeF32ˢ returns a F32ˢ backed by a new memory pool.
@@ -1060,7 +1079,7 @@ func MakeF32ˢ(count uint64, ϟs *gfxapi.State) F32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return F32ˢ{Count: count, Pool: id}
+	return F32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the F32ˢ in a new memory pool.
@@ -1070,7 +1089,7 @@ func (s F32ˢ) Clone(ϟs *gfxapi.State) F32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := F32ˢ{Count: s.Count, Pool: id}
+	dst := F32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1102,6 +1121,15 @@ func (s F32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s F32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsF32ˢ returns s cast to a F32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsF32ˢ(s Slice, ϟs *gfxapi.State) F32ˢ {
+	out := F32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the float32 elements in this F32ˢ.
@@ -1154,7 +1182,7 @@ func (s F32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return F32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return F32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the F32ˢ slice.
@@ -1162,12 +1190,10 @@ func (s F32ˢ) String() string {
 	return fmt.Sprintf("float32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// F64ˢ is a slice of float64.
 type F64ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeF64ˢ returns a F64ˢ backed by a new memory pool.
@@ -1175,7 +1201,7 @@ func MakeF64ˢ(count uint64, ϟs *gfxapi.State) F64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return F64ˢ{Count: count, Pool: id}
+	return F64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the F64ˢ in a new memory pool.
@@ -1185,7 +1211,7 @@ func (s F64ˢ) Clone(ϟs *gfxapi.State) F64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := F64ˢ{Count: s.Count, Pool: id}
+	dst := F64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1217,6 +1243,15 @@ func (s F64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s F64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsF64ˢ returns s cast to a F64ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsF64ˢ(s Slice, ϟs *gfxapi.State) F64ˢ {
+	out := F64ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the float64 elements in this F64ˢ.
@@ -1269,7 +1304,7 @@ func (s F64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return F64ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return F64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the F64ˢ slice.
@@ -1277,12 +1312,10 @@ func (s F64ˢ) String() string {
 	return fmt.Sprintf("float64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Intˢ is a slice of int64.
 type Intˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeIntˢ returns a Intˢ backed by a new memory pool.
@@ -1290,7 +1323,7 @@ func MakeIntˢ(count uint64, ϟs *gfxapi.State) Intˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Intˢ{Count: count, Pool: id}
+	return Intˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Intˢ in a new memory pool.
@@ -1300,7 +1333,7 @@ func (s Intˢ) Clone(ϟs *gfxapi.State) Intˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Intˢ{Count: s.Count, Pool: id}
+	dst := Intˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1332,6 +1365,15 @@ func (s Intˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s Intˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsIntˢ returns s cast to a Intˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsIntˢ(s Slice, ϟs *gfxapi.State) Intˢ {
+	out := Intˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int64 elements in this Intˢ.
@@ -1384,7 +1426,7 @@ func (s Intˢ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Intˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Intˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Intˢ slice.
@@ -1392,12 +1434,10 @@ func (s Intˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Remappedˢ is a slice of remapped.
 type Remappedˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeRemappedˢ returns a Remappedˢ backed by a new memory pool.
@@ -1405,7 +1445,7 @@ func MakeRemappedˢ(count uint64, ϟs *gfxapi.State) Remappedˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Remappedˢ{Count: count, Pool: id}
+	return Remappedˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Remappedˢ in a new memory pool.
@@ -1415,7 +1455,7 @@ func (s Remappedˢ) Clone(ϟs *gfxapi.State) Remappedˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Remappedˢ{Count: s.Count, Pool: id}
+	dst := Remappedˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1447,6 +1487,15 @@ func (s Remappedˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Lo
 // Encoder returns a memory encoder for the slice.
 func (s Remappedˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsRemappedˢ returns s cast to a Remappedˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsRemappedˢ(s Slice, ϟs *gfxapi.State) Remappedˢ {
+	out := Remappedˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the remapped elements in this Remappedˢ.
@@ -1499,7 +1548,7 @@ func (s Remappedˢ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Remappedˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Remappedˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Remappedˢ slice.
@@ -1507,12 +1556,10 @@ func (s Remappedˢ) String() string {
 	return fmt.Sprintf("remapped(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S16ˢ is a slice of int16.
 type S16ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS16ˢ returns a S16ˢ backed by a new memory pool.
@@ -1520,7 +1567,7 @@ func MakeS16ˢ(count uint64, ϟs *gfxapi.State) S16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S16ˢ{Count: count, Pool: id}
+	return S16ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S16ˢ in a new memory pool.
@@ -1530,7 +1577,7 @@ func (s S16ˢ) Clone(ϟs *gfxapi.State) S16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S16ˢ{Count: s.Count, Pool: id}
+	dst := S16ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1562,6 +1609,15 @@ func (s S16ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s S16ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS16ˢ returns s cast to a S16ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS16ˢ(s Slice, ϟs *gfxapi.State) S16ˢ {
+	out := S16ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int16 elements in this S16ˢ.
@@ -1614,7 +1670,7 @@ func (s S16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S16ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S16ˢ slice.
@@ -1622,12 +1678,10 @@ func (s S16ˢ) String() string {
 	return fmt.Sprintf("int16(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S32ˢ is a slice of int32.
 type S32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS32ˢ returns a S32ˢ backed by a new memory pool.
@@ -1635,7 +1689,7 @@ func MakeS32ˢ(count uint64, ϟs *gfxapi.State) S32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S32ˢ{Count: count, Pool: id}
+	return S32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S32ˢ in a new memory pool.
@@ -1645,7 +1699,7 @@ func (s S32ˢ) Clone(ϟs *gfxapi.State) S32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S32ˢ{Count: s.Count, Pool: id}
+	dst := S32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1677,6 +1731,15 @@ func (s S32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s S32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS32ˢ returns s cast to a S32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS32ˢ(s Slice, ϟs *gfxapi.State) S32ˢ {
+	out := S32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int32 elements in this S32ˢ.
@@ -1729,7 +1792,7 @@ func (s S32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S32ˢ slice.
@@ -1737,12 +1800,10 @@ func (s S32ˢ) String() string {
 	return fmt.Sprintf("int32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S64ˢ is a slice of int64.
 type S64ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS64ˢ returns a S64ˢ backed by a new memory pool.
@@ -1750,7 +1811,7 @@ func MakeS64ˢ(count uint64, ϟs *gfxapi.State) S64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S64ˢ{Count: count, Pool: id}
+	return S64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S64ˢ in a new memory pool.
@@ -1760,7 +1821,7 @@ func (s S64ˢ) Clone(ϟs *gfxapi.State) S64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S64ˢ{Count: s.Count, Pool: id}
+	dst := S64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1792,6 +1853,15 @@ func (s S64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s S64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS64ˢ returns s cast to a S64ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS64ˢ(s Slice, ϟs *gfxapi.State) S64ˢ {
+	out := S64ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int64 elements in this S64ˢ.
@@ -1844,7 +1914,7 @@ func (s S64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S64ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S64ˢ slice.
@@ -1852,12 +1922,10 @@ func (s S64ˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S8ˢ is a slice of int8.
 type S8ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS8ˢ returns a S8ˢ backed by a new memory pool.
@@ -1865,7 +1933,7 @@ func MakeS8ˢ(count uint64, ϟs *gfxapi.State) S8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S8ˢ{Count: count, Pool: id}
+	return S8ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S8ˢ in a new memory pool.
@@ -1875,7 +1943,7 @@ func (s S8ˢ) Clone(ϟs *gfxapi.State) S8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S8ˢ{Count: s.Count, Pool: id}
+	dst := S8ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1907,6 +1975,15 @@ func (s S8ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) 
 // Encoder returns a memory encoder for the slice.
 func (s S8ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS8ˢ returns s cast to a S8ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS8ˢ(s Slice, ϟs *gfxapi.State) S8ˢ {
+	out := S8ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int8 elements in this S8ˢ.
@@ -1959,7 +2036,7 @@ func (s S8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S8ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S8ˢ slice.
@@ -1967,12 +2044,10 @@ func (s S8ˢ) String() string {
 	return fmt.Sprintf("int8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U16ˢ is a slice of uint16.
 type U16ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU16ˢ returns a U16ˢ backed by a new memory pool.
@@ -1980,7 +2055,7 @@ func MakeU16ˢ(count uint64, ϟs *gfxapi.State) U16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U16ˢ{Count: count, Pool: id}
+	return U16ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U16ˢ in a new memory pool.
@@ -1990,7 +2065,7 @@ func (s U16ˢ) Clone(ϟs *gfxapi.State) U16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U16ˢ{Count: s.Count, Pool: id}
+	dst := U16ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2022,6 +2097,15 @@ func (s U16ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s U16ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU16ˢ returns s cast to a U16ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU16ˢ(s Slice, ϟs *gfxapi.State) U16ˢ {
+	out := U16ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint16 elements in this U16ˢ.
@@ -2074,7 +2158,7 @@ func (s U16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U16ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U16ˢ slice.
@@ -2082,12 +2166,10 @@ func (s U16ˢ) String() string {
 	return fmt.Sprintf("uint16(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U32ˢ is a slice of uint32.
 type U32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU32ˢ returns a U32ˢ backed by a new memory pool.
@@ -2095,7 +2177,7 @@ func MakeU32ˢ(count uint64, ϟs *gfxapi.State) U32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U32ˢ{Count: count, Pool: id}
+	return U32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U32ˢ in a new memory pool.
@@ -2105,7 +2187,7 @@ func (s U32ˢ) Clone(ϟs *gfxapi.State) U32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U32ˢ{Count: s.Count, Pool: id}
+	dst := U32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2137,6 +2219,15 @@ func (s U32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s U32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU32ˢ returns s cast to a U32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU32ˢ(s Slice, ϟs *gfxapi.State) U32ˢ {
+	out := U32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint32 elements in this U32ˢ.
@@ -2189,7 +2280,7 @@ func (s U32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U32ˢ slice.
@@ -2197,12 +2288,10 @@ func (s U32ˢ) String() string {
 	return fmt.Sprintf("uint32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U64ˢ is a slice of uint64.
 type U64ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU64ˢ returns a U64ˢ backed by a new memory pool.
@@ -2210,7 +2299,7 @@ func MakeU64ˢ(count uint64, ϟs *gfxapi.State) U64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U64ˢ{Count: count, Pool: id}
+	return U64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U64ˢ in a new memory pool.
@@ -2220,7 +2309,7 @@ func (s U64ˢ) Clone(ϟs *gfxapi.State) U64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U64ˢ{Count: s.Count, Pool: id}
+	dst := U64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2252,6 +2341,15 @@ func (s U64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s U64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU64ˢ returns s cast to a U64ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU64ˢ(s Slice, ϟs *gfxapi.State) U64ˢ {
+	out := U64ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint64 elements in this U64ˢ.
@@ -2304,7 +2402,7 @@ func (s U64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U64ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U64ˢ slice.
@@ -2312,12 +2410,10 @@ func (s U64ˢ) String() string {
 	return fmt.Sprintf("uint64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U8ˢ is a slice of uint8.
 type U8ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU8ˢ returns a U8ˢ backed by a new memory pool.
@@ -2325,7 +2421,7 @@ func MakeU8ˢ(count uint64, ϟs *gfxapi.State) U8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U8ˢ{Count: count, Pool: id}
+	return U8ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U8ˢ in a new memory pool.
@@ -2335,7 +2431,7 @@ func (s U8ˢ) Clone(ϟs *gfxapi.State) U8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U8ˢ{Count: s.Count, Pool: id}
+	dst := U8ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2367,6 +2463,15 @@ func (s U8ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) 
 // Encoder returns a memory encoder for the slice.
 func (s U8ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU8ˢ returns s cast to a U8ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU8ˢ(s Slice, ϟs *gfxapi.State) U8ˢ {
+	out := U8ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint8 elements in this U8ˢ.
@@ -2419,7 +2524,7 @@ func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U8ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U8ˢ slice.
@@ -2427,12 +2532,10 @@ func (s U8ˢ) String() string {
 	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Voidˢ is a slice of void.
 type Voidˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeVoidˢ returns a Voidˢ backed by a new memory pool.
@@ -2440,7 +2543,7 @@ func MakeVoidˢ(count uint64, ϟs *gfxapi.State) Voidˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Voidˢ{Count: count, Pool: id}
+	return Voidˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Voidˢ in a new memory pool.
@@ -2450,7 +2553,7 @@ func (s Voidˢ) Clone(ϟs *gfxapi.State) Voidˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Voidˢ{Count: s.Count, Pool: id}
+	dst := Voidˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2497,7 +2600,7 @@ func (s Voidˢ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Voidˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Voidˢ slice.
@@ -2674,6 +2777,40 @@ func (c *CmdCharptrToString) Flags() atom.Flags                { return 0 }
 func (a *CmdCharptrToString) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// CmdSliceCasts
+////////////////////////////////////////////////////////////////////////////////
+type CmdSliceCasts struct {
+	binary.Generate
+	observations atom.Observations
+	S            U16ᵖ
+	L            uint32
+}
+
+func (a *CmdSliceCasts) String() string {
+	return fmt.Sprintf("cmd_slice_casts(s: %v, l: %v)", a.S, a.L)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The CmdSliceCasts pointer is returned so that calls can be chained.
+func (a *CmdSliceCasts) AddRead(rng memory.Range, id binary.ID) *CmdSliceCasts {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The CmdSliceCasts pointer is returned so that calls can be chained.
+func (a *CmdSliceCasts) AddWrite(rng memory.Range, id binary.ID) *CmdSliceCasts {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *CmdSliceCasts) API() gfxapi.API                  { return api{} }
+func (c *CmdSliceCasts) TypeID() atom.TypeID              { return 5 }
+func (c *CmdSliceCasts) Flags() atom.Flags                { return 0 }
+func (a *CmdSliceCasts) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // CmdVoid
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid struct {
@@ -2701,7 +2838,7 @@ func (a *CmdVoid) AddWrite(rng memory.Range, id binary.ID) *CmdVoid {
 	return a
 }
 func (c *CmdVoid) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid) TypeID() atom.TypeID              { return 5 }
+func (c *CmdVoid) TypeID() atom.TypeID              { return 6 }
 func (c *CmdVoid) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid) Observations() *atom.Observations { return &a.observations }
 
@@ -2734,7 +2871,7 @@ func (a *CmdUnknownRet) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownRet 
 	return a
 }
 func (c *CmdUnknownRet) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownRet) TypeID() atom.TypeID              { return 6 }
+func (c *CmdUnknownRet) TypeID() atom.TypeID              { return 7 }
 func (c *CmdUnknownRet) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownRet) Observations() *atom.Observations { return &a.observations }
 
@@ -2767,7 +2904,7 @@ func (a *CmdUnknownWritePtr) AddWrite(rng memory.Range, id binary.ID) *CmdUnknow
 	return a
 }
 func (c *CmdUnknownWritePtr) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownWritePtr) TypeID() atom.TypeID              { return 7 }
+func (c *CmdUnknownWritePtr) TypeID() atom.TypeID              { return 8 }
 func (c *CmdUnknownWritePtr) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWritePtr) Observations() *atom.Observations { return &a.observations }
 
@@ -2800,7 +2937,7 @@ func (a *CmdUnknownWriteSlice) AddWrite(rng memory.Range, id binary.ID) *CmdUnkn
 	return a
 }
 func (c *CmdUnknownWriteSlice) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownWriteSlice) TypeID() atom.TypeID              { return 8 }
+func (c *CmdUnknownWriteSlice) TypeID() atom.TypeID              { return 9 }
 func (c *CmdUnknownWriteSlice) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWriteSlice) Observations() *atom.Observations { return &a.observations }
 
@@ -2833,7 +2970,7 @@ func (a *CmdVoidU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU8 {
 	return a
 }
 func (c *CmdVoidU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU8) TypeID() atom.TypeID              { return 9 }
+func (c *CmdVoidU8) TypeID() atom.TypeID              { return 10 }
 func (c *CmdVoidU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU8) Observations() *atom.Observations { return &a.observations }
 
@@ -2866,7 +3003,7 @@ func (a *CmdVoidS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS8 {
 	return a
 }
 func (c *CmdVoidS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS8) TypeID() atom.TypeID              { return 10 }
+func (c *CmdVoidS8) TypeID() atom.TypeID              { return 11 }
 func (c *CmdVoidS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS8) Observations() *atom.Observations { return &a.observations }
 
@@ -2899,7 +3036,7 @@ func (a *CmdVoidU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU16 {
 	return a
 }
 func (c *CmdVoidU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU16) TypeID() atom.TypeID              { return 11 }
+func (c *CmdVoidU16) TypeID() atom.TypeID              { return 12 }
 func (c *CmdVoidU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU16) Observations() *atom.Observations { return &a.observations }
 
@@ -2932,7 +3069,7 @@ func (a *CmdVoidS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS16 {
 	return a
 }
 func (c *CmdVoidS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS16) TypeID() atom.TypeID              { return 12 }
+func (c *CmdVoidS16) TypeID() atom.TypeID              { return 13 }
 func (c *CmdVoidS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS16) Observations() *atom.Observations { return &a.observations }
 
@@ -2965,7 +3102,7 @@ func (a *CmdVoidF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF32 {
 	return a
 }
 func (c *CmdVoidF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidF32) TypeID() atom.TypeID              { return 13 }
+func (c *CmdVoidF32) TypeID() atom.TypeID              { return 14 }
 func (c *CmdVoidF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF32) Observations() *atom.Observations { return &a.observations }
 
@@ -2998,7 +3135,7 @@ func (a *CmdVoidU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU32 {
 	return a
 }
 func (c *CmdVoidU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU32) TypeID() atom.TypeID              { return 14 }
+func (c *CmdVoidU32) TypeID() atom.TypeID              { return 15 }
 func (c *CmdVoidU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU32) Observations() *atom.Observations { return &a.observations }
 
@@ -3031,7 +3168,7 @@ func (a *CmdVoidS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS32 {
 	return a
 }
 func (c *CmdVoidS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS32) TypeID() atom.TypeID              { return 15 }
+func (c *CmdVoidS32) TypeID() atom.TypeID              { return 16 }
 func (c *CmdVoidS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS32) Observations() *atom.Observations { return &a.observations }
 
@@ -3064,7 +3201,7 @@ func (a *CmdVoidF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF64 {
 	return a
 }
 func (c *CmdVoidF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidF64) TypeID() atom.TypeID              { return 16 }
+func (c *CmdVoidF64) TypeID() atom.TypeID              { return 17 }
 func (c *CmdVoidF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF64) Observations() *atom.Observations { return &a.observations }
 
@@ -3097,7 +3234,7 @@ func (a *CmdVoidU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU64 {
 	return a
 }
 func (c *CmdVoidU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU64) TypeID() atom.TypeID              { return 17 }
+func (c *CmdVoidU64) TypeID() atom.TypeID              { return 18 }
 func (c *CmdVoidU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU64) Observations() *atom.Observations { return &a.observations }
 
@@ -3130,7 +3267,7 @@ func (a *CmdVoidS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS64 {
 	return a
 }
 func (c *CmdVoidS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS64) TypeID() atom.TypeID              { return 18 }
+func (c *CmdVoidS64) TypeID() atom.TypeID              { return 19 }
 func (c *CmdVoidS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS64) Observations() *atom.Observations { return &a.observations }
 
@@ -3163,7 +3300,7 @@ func (a *CmdVoidBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidBool {
 	return a
 }
 func (c *CmdVoidBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidBool) TypeID() atom.TypeID              { return 19 }
+func (c *CmdVoidBool) TypeID() atom.TypeID              { return 20 }
 func (c *CmdVoidBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidBool) Observations() *atom.Observations { return &a.observations }
 
@@ -3196,7 +3333,7 @@ func (a *CmdVoidString) AddWrite(rng memory.Range, id binary.ID) *CmdVoidString 
 	return a
 }
 func (c *CmdVoidString) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidString) TypeID() atom.TypeID              { return 20 }
+func (c *CmdVoidString) TypeID() atom.TypeID              { return 21 }
 func (c *CmdVoidString) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidString) Observations() *atom.Observations { return &a.observations }
 
@@ -3231,7 +3368,7 @@ func (a *CmdVoid3Strings) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Stri
 	return a
 }
 func (c *CmdVoid3Strings) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3Strings) TypeID() atom.TypeID              { return 21 }
+func (c *CmdVoid3Strings) TypeID() atom.TypeID              { return 22 }
 func (c *CmdVoid3Strings) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Strings) Observations() *atom.Observations { return &a.observations }
 
@@ -3266,7 +3403,7 @@ func (a *CmdVoid3InArrays) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3InA
 	return a
 }
 func (c *CmdVoid3InArrays) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3InArrays) TypeID() atom.TypeID              { return 22 }
+func (c *CmdVoid3InArrays) TypeID() atom.TypeID              { return 23 }
 func (c *CmdVoid3InArrays) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -3300,7 +3437,7 @@ func (a *CmdVoidInArrayOfPointers) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	return a
 }
 func (c *CmdVoidInArrayOfPointers) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidInArrayOfPointers) TypeID() atom.TypeID              { return 23 }
+func (c *CmdVoidInArrayOfPointers) TypeID() atom.TypeID              { return 24 }
 func (c *CmdVoidInArrayOfPointers) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfPointers) Observations() *atom.Observations { return &a.observations }
 
@@ -3333,7 +3470,7 @@ func (a *CmdVoidReadU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU8 
 	return a
 }
 func (c *CmdVoidReadU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU8) TypeID() atom.TypeID              { return 24 }
+func (c *CmdVoidReadU8) TypeID() atom.TypeID              { return 25 }
 func (c *CmdVoidReadU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU8) Observations() *atom.Observations { return &a.observations }
 
@@ -3366,7 +3503,7 @@ func (a *CmdVoidReadS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS8 
 	return a
 }
 func (c *CmdVoidReadS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS8) TypeID() atom.TypeID              { return 25 }
+func (c *CmdVoidReadS8) TypeID() atom.TypeID              { return 26 }
 func (c *CmdVoidReadS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS8) Observations() *atom.Observations { return &a.observations }
 
@@ -3399,7 +3536,7 @@ func (a *CmdVoidReadU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU1
 	return a
 }
 func (c *CmdVoidReadU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU16) TypeID() atom.TypeID              { return 26 }
+func (c *CmdVoidReadU16) TypeID() atom.TypeID              { return 27 }
 func (c *CmdVoidReadU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU16) Observations() *atom.Observations { return &a.observations }
 
@@ -3432,7 +3569,7 @@ func (a *CmdVoidReadS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS1
 	return a
 }
 func (c *CmdVoidReadS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS16) TypeID() atom.TypeID              { return 27 }
+func (c *CmdVoidReadS16) TypeID() atom.TypeID              { return 28 }
 func (c *CmdVoidReadS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS16) Observations() *atom.Observations { return &a.observations }
 
@@ -3465,7 +3602,7 @@ func (a *CmdVoidReadF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF3
 	return a
 }
 func (c *CmdVoidReadF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadF32) TypeID() atom.TypeID              { return 28 }
+func (c *CmdVoidReadF32) TypeID() atom.TypeID              { return 29 }
 func (c *CmdVoidReadF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF32) Observations() *atom.Observations { return &a.observations }
 
@@ -3498,7 +3635,7 @@ func (a *CmdVoidReadU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU3
 	return a
 }
 func (c *CmdVoidReadU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU32) TypeID() atom.TypeID              { return 29 }
+func (c *CmdVoidReadU32) TypeID() atom.TypeID              { return 30 }
 func (c *CmdVoidReadU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU32) Observations() *atom.Observations { return &a.observations }
 
@@ -3531,7 +3668,7 @@ func (a *CmdVoidReadS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS3
 	return a
 }
 func (c *CmdVoidReadS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS32) TypeID() atom.TypeID              { return 30 }
+func (c *CmdVoidReadS32) TypeID() atom.TypeID              { return 31 }
 func (c *CmdVoidReadS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS32) Observations() *atom.Observations { return &a.observations }
 
@@ -3564,7 +3701,7 @@ func (a *CmdVoidReadF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF6
 	return a
 }
 func (c *CmdVoidReadF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadF64) TypeID() atom.TypeID              { return 31 }
+func (c *CmdVoidReadF64) TypeID() atom.TypeID              { return 32 }
 func (c *CmdVoidReadF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF64) Observations() *atom.Observations { return &a.observations }
 
@@ -3597,7 +3734,7 @@ func (a *CmdVoidReadU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU6
 	return a
 }
 func (c *CmdVoidReadU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU64) TypeID() atom.TypeID              { return 32 }
+func (c *CmdVoidReadU64) TypeID() atom.TypeID              { return 33 }
 func (c *CmdVoidReadU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU64) Observations() *atom.Observations { return &a.observations }
 
@@ -3630,7 +3767,7 @@ func (a *CmdVoidReadS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS6
 	return a
 }
 func (c *CmdVoidReadS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS64) TypeID() atom.TypeID              { return 33 }
+func (c *CmdVoidReadS64) TypeID() atom.TypeID              { return 34 }
 func (c *CmdVoidReadS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS64) Observations() *atom.Observations { return &a.observations }
 
@@ -3663,7 +3800,7 @@ func (a *CmdVoidReadBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadB
 	return a
 }
 func (c *CmdVoidReadBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadBool) TypeID() atom.TypeID              { return 34 }
+func (c *CmdVoidReadBool) TypeID() atom.TypeID              { return 35 }
 func (c *CmdVoidReadBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadBool) Observations() *atom.Observations { return &a.observations }
 
@@ -3698,7 +3835,7 @@ func (a *CmdVoidReadPtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadP
 	return a
 }
 func (c *CmdVoidReadPtrs) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadPtrs) TypeID() atom.TypeID              { return 35 }
+func (c *CmdVoidReadPtrs) TypeID() atom.TypeID              { return 36 }
 func (c *CmdVoidReadPtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadPtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -3731,7 +3868,7 @@ func (a *CmdVoidWriteU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU
 	return a
 }
 func (c *CmdVoidWriteU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU8) TypeID() atom.TypeID              { return 36 }
+func (c *CmdVoidWriteU8) TypeID() atom.TypeID              { return 37 }
 func (c *CmdVoidWriteU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU8) Observations() *atom.Observations { return &a.observations }
 
@@ -3764,7 +3901,7 @@ func (a *CmdVoidWriteS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS
 	return a
 }
 func (c *CmdVoidWriteS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS8) TypeID() atom.TypeID              { return 37 }
+func (c *CmdVoidWriteS8) TypeID() atom.TypeID              { return 38 }
 func (c *CmdVoidWriteS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS8) Observations() *atom.Observations { return &a.observations }
 
@@ -3797,7 +3934,7 @@ func (a *CmdVoidWriteU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU16) TypeID() atom.TypeID              { return 38 }
+func (c *CmdVoidWriteU16) TypeID() atom.TypeID              { return 39 }
 func (c *CmdVoidWriteU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU16) Observations() *atom.Observations { return &a.observations }
 
@@ -3830,7 +3967,7 @@ func (a *CmdVoidWriteS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS16) TypeID() atom.TypeID              { return 39 }
+func (c *CmdVoidWriteS16) TypeID() atom.TypeID              { return 40 }
 func (c *CmdVoidWriteS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS16) Observations() *atom.Observations { return &a.observations }
 
@@ -3863,7 +4000,7 @@ func (a *CmdVoidWriteF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteF32) TypeID() atom.TypeID              { return 40 }
+func (c *CmdVoidWriteF32) TypeID() atom.TypeID              { return 41 }
 func (c *CmdVoidWriteF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF32) Observations() *atom.Observations { return &a.observations }
 
@@ -3896,7 +4033,7 @@ func (a *CmdVoidWriteU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU32) TypeID() atom.TypeID              { return 41 }
+func (c *CmdVoidWriteU32) TypeID() atom.TypeID              { return 42 }
 func (c *CmdVoidWriteU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU32) Observations() *atom.Observations { return &a.observations }
 
@@ -3929,7 +4066,7 @@ func (a *CmdVoidWriteS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS32) TypeID() atom.TypeID              { return 42 }
+func (c *CmdVoidWriteS32) TypeID() atom.TypeID              { return 43 }
 func (c *CmdVoidWriteS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS32) Observations() *atom.Observations { return &a.observations }
 
@@ -3962,7 +4099,7 @@ func (a *CmdVoidWriteF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteF64) TypeID() atom.TypeID              { return 43 }
+func (c *CmdVoidWriteF64) TypeID() atom.TypeID              { return 44 }
 func (c *CmdVoidWriteF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF64) Observations() *atom.Observations { return &a.observations }
 
@@ -3995,7 +4132,7 @@ func (a *CmdVoidWriteU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU64) TypeID() atom.TypeID              { return 44 }
+func (c *CmdVoidWriteU64) TypeID() atom.TypeID              { return 45 }
 func (c *CmdVoidWriteU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4028,7 +4165,7 @@ func (a *CmdVoidWriteS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS64) TypeID() atom.TypeID              { return 45 }
+func (c *CmdVoidWriteS64) TypeID() atom.TypeID              { return 46 }
 func (c *CmdVoidWriteS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4061,7 +4198,7 @@ func (a *CmdVoidWriteBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	return a
 }
 func (c *CmdVoidWriteBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteBool) TypeID() atom.TypeID              { return 46 }
+func (c *CmdVoidWriteBool) TypeID() atom.TypeID              { return 47 }
 func (c *CmdVoidWriteBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4096,7 +4233,7 @@ func (a *CmdVoidWritePtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	return a
 }
 func (c *CmdVoidWritePtrs) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWritePtrs) TypeID() atom.TypeID              { return 47 }
+func (c *CmdVoidWritePtrs) TypeID() atom.TypeID              { return 48 }
 func (c *CmdVoidWritePtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWritePtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -4129,7 +4266,7 @@ func (a *CmdU8) AddWrite(rng memory.Range, id binary.ID) *CmdU8 {
 	return a
 }
 func (c *CmdU8) API() gfxapi.API                  { return api{} }
-func (c *CmdU8) TypeID() atom.TypeID              { return 48 }
+func (c *CmdU8) TypeID() atom.TypeID              { return 49 }
 func (c *CmdU8) Flags() atom.Flags                { return 0 }
 func (a *CmdU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4162,7 +4299,7 @@ func (a *CmdS8) AddWrite(rng memory.Range, id binary.ID) *CmdS8 {
 	return a
 }
 func (c *CmdS8) API() gfxapi.API                  { return api{} }
-func (c *CmdS8) TypeID() atom.TypeID              { return 49 }
+func (c *CmdS8) TypeID() atom.TypeID              { return 50 }
 func (c *CmdS8) Flags() atom.Flags                { return 0 }
 func (a *CmdS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4195,7 +4332,7 @@ func (a *CmdU16) AddWrite(rng memory.Range, id binary.ID) *CmdU16 {
 	return a
 }
 func (c *CmdU16) API() gfxapi.API                  { return api{} }
-func (c *CmdU16) TypeID() atom.TypeID              { return 50 }
+func (c *CmdU16) TypeID() atom.TypeID              { return 51 }
 func (c *CmdU16) Flags() atom.Flags                { return 0 }
 func (a *CmdU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4228,7 +4365,7 @@ func (a *CmdS16) AddWrite(rng memory.Range, id binary.ID) *CmdS16 {
 	return a
 }
 func (c *CmdS16) API() gfxapi.API                  { return api{} }
-func (c *CmdS16) TypeID() atom.TypeID              { return 51 }
+func (c *CmdS16) TypeID() atom.TypeID              { return 52 }
 func (c *CmdS16) Flags() atom.Flags                { return 0 }
 func (a *CmdS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4261,7 +4398,7 @@ func (a *CmdF32) AddWrite(rng memory.Range, id binary.ID) *CmdF32 {
 	return a
 }
 func (c *CmdF32) API() gfxapi.API                  { return api{} }
-func (c *CmdF32) TypeID() atom.TypeID              { return 52 }
+func (c *CmdF32) TypeID() atom.TypeID              { return 53 }
 func (c *CmdF32) Flags() atom.Flags                { return 0 }
 func (a *CmdF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4294,7 +4431,7 @@ func (a *CmdU32) AddWrite(rng memory.Range, id binary.ID) *CmdU32 {
 	return a
 }
 func (c *CmdU32) API() gfxapi.API                  { return api{} }
-func (c *CmdU32) TypeID() atom.TypeID              { return 53 }
+func (c *CmdU32) TypeID() atom.TypeID              { return 54 }
 func (c *CmdU32) Flags() atom.Flags                { return 0 }
 func (a *CmdU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4327,7 +4464,7 @@ func (a *CmdS32) AddWrite(rng memory.Range, id binary.ID) *CmdS32 {
 	return a
 }
 func (c *CmdS32) API() gfxapi.API                  { return api{} }
-func (c *CmdS32) TypeID() atom.TypeID              { return 54 }
+func (c *CmdS32) TypeID() atom.TypeID              { return 55 }
 func (c *CmdS32) Flags() atom.Flags                { return 0 }
 func (a *CmdS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4360,7 +4497,7 @@ func (a *CmdF64) AddWrite(rng memory.Range, id binary.ID) *CmdF64 {
 	return a
 }
 func (c *CmdF64) API() gfxapi.API                  { return api{} }
-func (c *CmdF64) TypeID() atom.TypeID              { return 55 }
+func (c *CmdF64) TypeID() atom.TypeID              { return 56 }
 func (c *CmdF64) Flags() atom.Flags                { return 0 }
 func (a *CmdF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4393,7 +4530,7 @@ func (a *CmdU64) AddWrite(rng memory.Range, id binary.ID) *CmdU64 {
 	return a
 }
 func (c *CmdU64) API() gfxapi.API                  { return api{} }
-func (c *CmdU64) TypeID() atom.TypeID              { return 56 }
+func (c *CmdU64) TypeID() atom.TypeID              { return 57 }
 func (c *CmdU64) Flags() atom.Flags                { return 0 }
 func (a *CmdU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4426,7 +4563,7 @@ func (a *CmdS64) AddWrite(rng memory.Range, id binary.ID) *CmdS64 {
 	return a
 }
 func (c *CmdS64) API() gfxapi.API                  { return api{} }
-func (c *CmdS64) TypeID() atom.TypeID              { return 57 }
+func (c *CmdS64) TypeID() atom.TypeID              { return 58 }
 func (c *CmdS64) Flags() atom.Flags                { return 0 }
 func (a *CmdS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4459,7 +4596,7 @@ func (a *CmdBool) AddWrite(rng memory.Range, id binary.ID) *CmdBool {
 	return a
 }
 func (c *CmdBool) API() gfxapi.API                  { return api{} }
-func (c *CmdBool) TypeID() atom.TypeID              { return 58 }
+func (c *CmdBool) TypeID() atom.TypeID              { return 59 }
 func (c *CmdBool) Flags() atom.Flags                { return 0 }
 func (a *CmdBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4492,7 +4629,7 @@ func (a *CmdString) AddWrite(rng memory.Range, id binary.ID) *CmdString {
 	return a
 }
 func (c *CmdString) API() gfxapi.API                  { return api{} }
-func (c *CmdString) TypeID() atom.TypeID              { return 59 }
+func (c *CmdString) TypeID() atom.TypeID              { return 60 }
 func (c *CmdString) Flags() atom.Flags                { return 0 }
 func (a *CmdString) Observations() *atom.Observations { return &a.observations }
 
@@ -4525,7 +4662,7 @@ func (a *CmdPointer) AddWrite(rng memory.Range, id binary.ID) *CmdPointer {
 	return a
 }
 func (c *CmdPointer) API() gfxapi.API                  { return api{} }
-func (c *CmdPointer) TypeID() atom.TypeID              { return 60 }
+func (c *CmdPointer) TypeID() atom.TypeID              { return 61 }
 func (c *CmdPointer) Flags() atom.Flags                { return 0 }
 func (a *CmdPointer) Observations() *atom.Observations { return &a.observations }
 
@@ -4560,7 +4697,7 @@ func (a *CmdVoid3Remapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Rem
 	return a
 }
 func (c *CmdVoid3Remapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3Remapped) TypeID() atom.TypeID              { return 61 }
+func (c *CmdVoid3Remapped) TypeID() atom.TypeID              { return 62 }
 func (c *CmdVoid3Remapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Remapped) Observations() *atom.Observations { return &a.observations }
 
@@ -4593,7 +4730,7 @@ func (a *CmdVoidInArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	return a
 }
 func (c *CmdVoidInArrayOfRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidInArrayOfRemapped) TypeID() atom.TypeID              { return 62 }
+func (c *CmdVoidInArrayOfRemapped) TypeID() atom.TypeID              { return 63 }
 func (c *CmdVoidInArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -4626,7 +4763,7 @@ func (a *CmdVoidOutArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cm
 	return a
 }
 func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID              { return 63 }
+func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID              { return 64 }
 func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -4659,7 +4796,7 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) AddWrite(rng memory.Range, id binary.
 	return a
 }
 func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidOutArrayOfUnknownRemapped) TypeID() atom.TypeID              { return 64 }
+func (c *CmdVoidOutArrayOfUnknownRemapped) TypeID() atom.TypeID              { return 65 }
 func (c *CmdVoidOutArrayOfUnknownRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfUnknownRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -4692,7 +4829,7 @@ func (a *CmdRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdRemapped {
 	return a
 }
 func (c *CmdRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdRemapped) TypeID() atom.TypeID              { return 65 }
+func (c *CmdRemapped) TypeID() atom.TypeID              { return 66 }
 func (c *CmdRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -4730,8 +4867,11 @@ func (c *Included) GetCreatedAt() atom.ID { return c.CreatedAt }
 ////////////////////////////////////////////////////////////////////////////////
 type Globals struct {
 	binary.Generate
-	Buf U8ˢ
-	Str string
+	U8s  U8ˢ
+	U16s U16ˢ
+	U32s U32ˢ
+	Ints Intˢ
+	Str  string
 }
 
 func (g *Globals) Init() {
@@ -4750,6 +4890,9 @@ func NewCmdCharsliceToString(S memory.Pointer, Len uint32) *CmdCharsliceToString
 }
 func NewCmdCharptrToString(S memory.Pointer) *CmdCharptrToString {
 	return &CmdCharptrToString{S: NewCharᵖ(S)}
+}
+func NewCmdSliceCasts(S memory.Pointer, L uint32) *CmdSliceCasts {
+	return &CmdSliceCasts{S: NewU16ᵖ(S), L: L}
 }
 func NewCmdVoid() *CmdVoid {
 	return &CmdVoid{}
@@ -4987,369 +5130,375 @@ func init() {
 		New:  func() atom.Atom { return &CmdCharptrToString{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "cmd_void",
+		Name: "cmd_slice_casts",
 		Docs: "[]",
 		ID:   5,
+		New:  func() atom.Atom { return &CmdSliceCasts{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "cmd_void",
+		Docs: "[]",
+		ID:   6,
 		New:  func() atom.Atom { return &CmdVoid{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_unknown_ret",
 		Docs: "[]",
-		ID:   6,
+		ID:   7,
 		New:  func() atom.Atom { return &CmdUnknownRet{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_unknown_write_ptr",
 		Docs: "[]",
-		ID:   7,
+		ID:   8,
 		New:  func() atom.Atom { return &CmdUnknownWritePtr{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_unknown_write_slice",
 		Docs: "[]",
-		ID:   8,
+		ID:   9,
 		New:  func() atom.Atom { return &CmdUnknownWriteSlice{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_u8",
 		Docs: "[]",
-		ID:   9,
+		ID:   10,
 		New:  func() atom.Atom { return &CmdVoidU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_s8",
 		Docs: "[]",
-		ID:   10,
+		ID:   11,
 		New:  func() atom.Atom { return &CmdVoidS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_u16",
 		Docs: "[]",
-		ID:   11,
+		ID:   12,
 		New:  func() atom.Atom { return &CmdVoidU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_s16",
 		Docs: "[]",
-		ID:   12,
+		ID:   13,
 		New:  func() atom.Atom { return &CmdVoidS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_f32",
 		Docs: "[]",
-		ID:   13,
+		ID:   14,
 		New:  func() atom.Atom { return &CmdVoidF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_u32",
 		Docs: "[]",
-		ID:   14,
+		ID:   15,
 		New:  func() atom.Atom { return &CmdVoidU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_s32",
 		Docs: "[]",
-		ID:   15,
+		ID:   16,
 		New:  func() atom.Atom { return &CmdVoidS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_f64",
 		Docs: "[]",
-		ID:   16,
+		ID:   17,
 		New:  func() atom.Atom { return &CmdVoidF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_u64",
 		Docs: "[]",
-		ID:   17,
+		ID:   18,
 		New:  func() atom.Atom { return &CmdVoidU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_s64",
 		Docs: "[]",
-		ID:   18,
+		ID:   19,
 		New:  func() atom.Atom { return &CmdVoidS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_bool",
 		Docs: "[]",
-		ID:   19,
+		ID:   20,
 		New:  func() atom.Atom { return &CmdVoidBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_string",
 		Docs: "[]",
-		ID:   20,
+		ID:   21,
 		New:  func() atom.Atom { return &CmdVoidString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_3_strings",
 		Docs: "[]",
-		ID:   21,
+		ID:   22,
 		New:  func() atom.Atom { return &CmdVoid3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_3_in_arrays",
 		Docs: "[]",
-		ID:   22,
+		ID:   23,
 		New:  func() atom.Atom { return &CmdVoid3InArrays{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_in_array_of_pointers",
 		Docs: "[]",
-		ID:   23,
+		ID:   24,
 		New:  func() atom.Atom { return &CmdVoidInArrayOfPointers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_u8",
 		Docs: "[]",
-		ID:   24,
+		ID:   25,
 		New:  func() atom.Atom { return &CmdVoidReadU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_s8",
 		Docs: "[]",
-		ID:   25,
+		ID:   26,
 		New:  func() atom.Atom { return &CmdVoidReadS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_u16",
 		Docs: "[]",
-		ID:   26,
+		ID:   27,
 		New:  func() atom.Atom { return &CmdVoidReadU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_s16",
 		Docs: "[]",
-		ID:   27,
+		ID:   28,
 		New:  func() atom.Atom { return &CmdVoidReadS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_f32",
 		Docs: "[]",
-		ID:   28,
+		ID:   29,
 		New:  func() atom.Atom { return &CmdVoidReadF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_u32",
 		Docs: "[]",
-		ID:   29,
+		ID:   30,
 		New:  func() atom.Atom { return &CmdVoidReadU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_s32",
 		Docs: "[]",
-		ID:   30,
+		ID:   31,
 		New:  func() atom.Atom { return &CmdVoidReadS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_f64",
 		Docs: "[]",
-		ID:   31,
+		ID:   32,
 		New:  func() atom.Atom { return &CmdVoidReadF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_u64",
 		Docs: "[]",
-		ID:   32,
+		ID:   33,
 		New:  func() atom.Atom { return &CmdVoidReadU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_s64",
 		Docs: "[]",
-		ID:   33,
+		ID:   34,
 		New:  func() atom.Atom { return &CmdVoidReadS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_bool",
 		Docs: "[]",
-		ID:   34,
+		ID:   35,
 		New:  func() atom.Atom { return &CmdVoidReadBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_read_ptrs",
 		Docs: "[]",
-		ID:   35,
+		ID:   36,
 		New:  func() atom.Atom { return &CmdVoidReadPtrs{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_u8",
 		Docs: "[]",
-		ID:   36,
+		ID:   37,
 		New:  func() atom.Atom { return &CmdVoidWriteU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_s8",
 		Docs: "[]",
-		ID:   37,
+		ID:   38,
 		New:  func() atom.Atom { return &CmdVoidWriteS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_u16",
 		Docs: "[]",
-		ID:   38,
+		ID:   39,
 		New:  func() atom.Atom { return &CmdVoidWriteU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_s16",
 		Docs: "[]",
-		ID:   39,
+		ID:   40,
 		New:  func() atom.Atom { return &CmdVoidWriteS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_f32",
 		Docs: "[]",
-		ID:   40,
+		ID:   41,
 		New:  func() atom.Atom { return &CmdVoidWriteF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_u32",
 		Docs: "[]",
-		ID:   41,
+		ID:   42,
 		New:  func() atom.Atom { return &CmdVoidWriteU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_s32",
 		Docs: "[]",
-		ID:   42,
+		ID:   43,
 		New:  func() atom.Atom { return &CmdVoidWriteS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_f64",
 		Docs: "[]",
-		ID:   43,
+		ID:   44,
 		New:  func() atom.Atom { return &CmdVoidWriteF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_u64",
 		Docs: "[]",
-		ID:   44,
+		ID:   45,
 		New:  func() atom.Atom { return &CmdVoidWriteU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_s64",
 		Docs: "[]",
-		ID:   45,
+		ID:   46,
 		New:  func() atom.Atom { return &CmdVoidWriteS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_bool",
 		Docs: "[]",
-		ID:   46,
+		ID:   47,
 		New:  func() atom.Atom { return &CmdVoidWriteBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_write_ptrs",
 		Docs: "[]",
-		ID:   47,
+		ID:   48,
 		New:  func() atom.Atom { return &CmdVoidWritePtrs{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_u8",
 		Docs: "[]",
-		ID:   48,
+		ID:   49,
 		New:  func() atom.Atom { return &CmdU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_s8",
 		Docs: "[]",
-		ID:   49,
+		ID:   50,
 		New:  func() atom.Atom { return &CmdS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_u16",
 		Docs: "[]",
-		ID:   50,
+		ID:   51,
 		New:  func() atom.Atom { return &CmdU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_s16",
 		Docs: "[]",
-		ID:   51,
+		ID:   52,
 		New:  func() atom.Atom { return &CmdS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_f32",
 		Docs: "[]",
-		ID:   52,
+		ID:   53,
 		New:  func() atom.Atom { return &CmdF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_u32",
 		Docs: "[]",
-		ID:   53,
+		ID:   54,
 		New:  func() atom.Atom { return &CmdU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_s32",
 		Docs: "[]",
-		ID:   54,
+		ID:   55,
 		New:  func() atom.Atom { return &CmdS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_f64",
 		Docs: "[]",
-		ID:   55,
+		ID:   56,
 		New:  func() atom.Atom { return &CmdF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_u64",
 		Docs: "[]",
-		ID:   56,
+		ID:   57,
 		New:  func() atom.Atom { return &CmdU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_s64",
 		Docs: "[]",
-		ID:   57,
+		ID:   58,
 		New:  func() atom.Atom { return &CmdS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_bool",
 		Docs: "[]",
-		ID:   58,
+		ID:   59,
 		New:  func() atom.Atom { return &CmdBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_string",
 		Docs: "[]",
-		ID:   59,
+		ID:   60,
 		New:  func() atom.Atom { return &CmdString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_pointer",
 		Docs: "[]",
-		ID:   60,
+		ID:   61,
 		New:  func() atom.Atom { return &CmdPointer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_3_remapped",
 		Docs: "[]",
-		ID:   61,
+		ID:   62,
 		New:  func() atom.Atom { return &CmdVoid3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_in_array_of_remapped",
 		Docs: "[]",
-		ID:   62,
+		ID:   63,
 		New:  func() atom.Atom { return &CmdVoidInArrayOfRemapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_out_array_of_remapped",
 		Docs: "[]",
-		ID:   63,
+		ID:   64,
 		New:  func() atom.Atom { return &CmdVoidOutArrayOfRemapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_void_out_array_of_unknown_remapped",
 		Docs: "[]",
-		ID:   64,
+		ID:   65,
 		New:  func() atom.Atom { return &CmdVoidOutArrayOfUnknownRemapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "cmd_remapped",
 		Docs: "[]",
-		ID:   65,
+		ID:   66,
 		New:  func() atom.Atom { return &CmdRemapped{} },
 	})
 }
@@ -5359,4 +5508,24 @@ func min(a, b uint64) uint64 {
 	} else {
 		return b
 	}
+}
+
+// SliceInfo is the common data between all slice types.
+type SliceInfo struct {
+	binary.Generate
+	Root  memory.Pointer // Original pointer this slice derives from.
+	Base  memory.Pointer // Address of first element.
+	Count uint64         // Number of elements in the slice.
+	Pool  memory.PoolID  // Pool that holds the element data.
+}
+
+// Info returns the SliceInfo. It is used to conform to the Slice interface.
+func (s SliceInfo) Info() SliceInfo { return s }
+
+// Slice is the interface implemented by all slice types
+type Slice interface {
+	// Info returns the SliceInfo of this slice.
+	Info() SliceInfo
+	// ElementSize returns the size in bytes of a single element in the slice.
+	ElementSize(ϟs *gfxapi.State) uint64
 }

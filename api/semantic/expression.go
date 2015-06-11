@@ -121,13 +121,25 @@ func (i *PointerRange) ExpressionType() Type { return i.Type }
 type SliceRange struct {
 	AST   *ast.Index // the underlying syntax node this was built from
 	Type  *Slice     // the slice type
-	Slice Expression // the expression that returns the array to be indexed
+	Slice Expression // the expression that returns the slice to be indexed
 	Range *BinaryOp  // the range to use on the slice
 }
 
 // ExpressionType implements Expression.
 // It returns the same slice type being sliced.
 func (i *SliceRange) ExpressionType() Type { return i.Type }
+
+// ArrayIndex represents using the indexing operator on a static-array type.
+type ArrayIndex struct {
+	AST   *ast.Index   // the underlying syntax node this was built from
+	Type  *StaticArray // the array type
+	Array Expression   // the expression that returns the array to be indexed
+	Index Expression   // the index to use on the array
+}
+
+// ExpressionType implements Expression.
+// It returns the element type of the array.
+func (i *ArrayIndex) ExpressionType() Type { return i.Type.ValueType }
 
 // SliceIndex represents using the indexing operator on a slice type.
 type SliceIndex struct {
@@ -144,7 +156,7 @@ func (i *SliceIndex) ExpressionType() Type { return i.Type.To }
 // MapIndex represents using the indexing operator on a map type.
 type MapIndex struct {
 	AST   *ast.Index // the underlying syntax node this was built from
-	Type  *Map       // the value type of the array being indexed
+	Type  *Map       // the value type of the map being indexed
 	Map   Expression // the expression that returns the map to be indexed
 	Index Expression // the index to use on the map
 }

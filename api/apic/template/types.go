@@ -43,6 +43,8 @@ var (
 		semantic.Float64Value(1.0),
 		// semantic node types
 		semantic.API{},
+		semantic.ArrayAssign{},
+		semantic.ArrayInitializer{},
 		semantic.Assert{},
 		semantic.Assign{},
 		semantic.BinaryOp{},

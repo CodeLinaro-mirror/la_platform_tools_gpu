@@ -23,20 +23,23 @@ class Tester {
 ////////////////////////////////////////////////////////////////
 // Intrinsics tests
 ////////////////////////////////////////////////////////////////
-u8[]   buf
+u8[]   u8s
+u16[]  u16s
+u32[]  u32s
+int[]  ints
 string str
 
 cmd void cmd_clone(u8* src, u32 cnt) {
-  buf = clone(src[0:cnt])
+  u8s = clone(src[0:cnt])
 }
 
 cmd void cmd_make(u32 cnt) {
-  buf = make!u8(cnt)
+  u8s = make!u8(cnt)
 }
 
 cmd void cmd_copy(u8* src, u32 cnt) {
-  buf = make!u8(cnt)
-  copy(buf, src[0:cnt])
+  u8s = make!u8(cnt)
+  copy(u8s, src[0:cnt])
 }
 
 cmd void cmd_charslice_to_string(char* s, u32 len) {
@@ -45,6 +48,13 @@ cmd void cmd_charslice_to_string(char* s, u32 len) {
 
 cmd void cmd_charptr_to_string(char* s) {
   str = as!string(s)
+}
+
+cmd void cmd_slice_casts(u16* s, u32 l) {
+  u8s  = as!u8[](s[0:l])
+  u16s = as!u16[](s[0:l])
+  u32s = as!u32[](s[0:l])
+  ints = as!int[](s[0:l])
 }
 
 ////////////////////////////////////////////////////////////////
@@ -112,10 +122,10 @@ cmd void cmd_void_3_strings(string a, string b, string c) {}
 // Commands with input arrays
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_3_in_arrays(u8* a, u32* b, int* c) {
-  buf = make!u8(10)
+  u8s = make!u8(10)
   read(b[5:15])
 	read(c[5:15])
-	copy(buf, a[5:25]) // only 10 elements should be copied
+	copy(u8s, a[5:25]) // only 10 elements should be copied
 }
 
 ////////////////////////////////////////////////////////////////

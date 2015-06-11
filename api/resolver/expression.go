@@ -71,6 +71,9 @@ func call(ctx *context, in *ast.Call) semantic.Expression {
 	if b := internalCall(ctx, in); b != nil {
 		return b
 	}
+	if a := arrayCall(ctx, in); a != nil {
+		return a
+	}
 	if c := classCall(ctx, in); c != nil {
 		return c
 	}
@@ -258,6 +261,21 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 	var index semantic.Expression
 
 	switch at := at.(type) {
+	case *semantic.StaticArray:
+		ctx.with(semantic.Uint64Type, func() {
+			index = expression(ctx, in.Index)
+		})
+		it := index.ExpressionType()
+		if isNumber(it) {
+			if v, ok := index.(semantic.Uint64Value); ok && uint32(v) >= at.Size {
+				ctx.errorf(in, "array index %d is out of bounds for %s", index, typename(at))
+			}
+		} else {
+			ctx.errorf(in, "array index must be a number, got %s", typename(it))
+		}
+		out := &semantic.ArrayIndex{AST: in, Array: object, Type: at, Index: index}
+		ctx.mappings[in] = out
+		return out
 	case *semantic.Pointer:
 		ctx.with(semantic.Uint64Type, func() {
 			index = expression(ctx, in.Index)
@@ -329,6 +347,34 @@ func identifier(ctx *context, in *ast.Identifier) semantic.Expression {
 		ctx.errorf(in, "Symbol %s was non expression %T", in.Value, out)
 		return invalid{}
 	}
+}
+
+func arrayCall(ctx *context, in *ast.Call) semantic.Expression {
+	g, ok := in.Target.(*ast.Generic)
+	if !ok {
+		return nil
+	}
+	t := ctx.findType(in, g.Name.Value)
+	array, ok := baseType(t).(*semantic.StaticArray)
+	if !ok {
+		return nil
+	}
+
+	out := &semantic.ArrayInitializer{AST: in, Array: t}
+	ctx.mappings[in] = out
+	for _, a := range in.Arguments {
+		ctx.with(array.ValueType, func() {
+			v := expression(ctx, a)
+			if vt := v.ExpressionType(); !assignable(array.ValueType, vt) {
+				ctx.errorf(a, "cannot assign %s to array element type %s", typename(vt), array.ValueType)
+			}
+			out.Values = append(out.Values, v)
+		})
+	}
+	if len(out.Values) != int(array.Size) {
+		ctx.errorf(in, "expected %d values, got %d", array.Size, len(out.Values))
+	}
+	return out
 }
 
 func classCall(ctx *context, in *ast.Call) semantic.Expression {

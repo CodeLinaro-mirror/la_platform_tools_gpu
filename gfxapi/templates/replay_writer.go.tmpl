@@ -154,9 +154,12 @@
 {{define "DeclarePseudonymValue"}}
   {{AssertType $ "Pseudonym"}}
 
-  {{if not (GetAnnotation $ "replay_custom_value")}}
-    {{$v := print (Macro "Go.Type" $.To) "(c)"}}
-    func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+  {{$u := $ | TypeOf | Underlying}}
+  {{if or (IsNumericType $u) (IsPointer $u)}}
+    {{if not (GetAnnotation $ "replay_custom_value")}}
+      {{$v := print (Macro "Go.Type" $.To) "(c)"}}
+      func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+    {{end}}
   {{end}}
 {{end}}
 

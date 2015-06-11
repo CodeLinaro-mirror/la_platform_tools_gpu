@@ -34,7 +34,7 @@
 »»}{{end}}
 
 {{define "Java.EncodeArray"}}
-»»for (int i = 0; i < {{.Type.Length}}; i++) {
+»»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»{{Encode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 
@@ -57,8 +57,8 @@
 »»»{{Decode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 
-{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Length}}];
-»»for (int i = 0; i < {{.Type.Length}}; i++) {
+{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
+»»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»{{Decode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 

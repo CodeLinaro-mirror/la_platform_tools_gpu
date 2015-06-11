@@ -50,7 +50,7 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»»}{{end}}
 
 {{define "Cpp.EncodeArray"}}
-»»»for (int i = 0; i < {{.Type.Length}}; i++) {
+»»»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»»{{Encode (print .Name "[i]") .Type.ValueType}}
 »»»}{{end}}
 
@@ -276,7 +276,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			}{{end}}
 		} {{end}}
 
-{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Length}}; i++ {
+{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Size}}; i++ {
 			{{Skip (print .Name "[i]") .Type.ValueType}}
 		}{{end}}
 
@@ -394,7 +394,7 @@ const java_tmpl = `{{/*
 »»}{{end}}
 
 {{define "Java.EncodeArray"}}
-»»for (int i = 0; i < {{.Type.Length}}; i++) {
+»»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»{{Encode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 
@@ -417,8 +417,8 @@ const java_tmpl = `{{/*
 »»»{{Decode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 
-{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Length}}];
-»»for (int i = 0; i < {{.Type.Length}}; i++) {
+{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
+»»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»{{Decode (print .Name "[i]") .Type.ValueType}}
 »»}{{end}}
 

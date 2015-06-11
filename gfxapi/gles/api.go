@@ -48,7 +48,7 @@ func (p IndicesPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the IndicesPointer pointer.
@@ -78,7 +78,7 @@ func (p VertexPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the VertexPointer pointer.
@@ -108,7 +108,7 @@ func (p TexturePointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the TexturePointer pointer.
@@ -138,7 +138,7 @@ func (p BufferDataPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the BufferDataPointer pointer.
@@ -173,7 +173,7 @@ func (p EGLConfig) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the EGLConfig pointer.
@@ -203,7 +203,7 @@ func (p EGLContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the EGLContext pointer.
@@ -233,7 +233,7 @@ func (p EGLDisplay) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the EGLDisplay pointer.
@@ -263,7 +263,7 @@ func (p EGLSurface) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the EGLSurface pointer.
@@ -293,7 +293,7 @@ func (p GLXContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the GLXContext pointer.
@@ -323,7 +323,7 @@ func (p GLXDrawable) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the GLXDrawable pointer.
@@ -353,7 +353,7 @@ func (p HGLRC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the HGLRC pointer.
@@ -383,7 +383,7 @@ func (p HDC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the HDC pointer.
@@ -416,7 +416,7 @@ func (p CGLPixelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the CGLPixelFormatObj pointer.
@@ -446,7 +446,7 @@ func (p CGLContextObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the CGLContextObj pointer.
@@ -476,7 +476,7 @@ func (p ImageOES) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the ImageOES pointer.
@@ -506,7 +506,7 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Voidᵖ pointer.
@@ -546,7 +546,7 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U8ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return U8ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the U8ᵖ pointer.
@@ -602,7 +602,7 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Charˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Charᵖ pointer.
@@ -642,7 +642,7 @@ func (p EGLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) EGLintˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return EGLintˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return EGLintˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the EGLintᵖ pointer.
@@ -682,7 +682,7 @@ func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Intˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Intˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Intᵖ pointer.
@@ -730,7 +730,7 @@ func (p CGLContextObjᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGLContext
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return CGLContextObjˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return CGLContextObjˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the CGLContextObjᵖ pointer.
@@ -770,7 +770,7 @@ func (p S32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S32ᵖ pointer.
@@ -810,7 +810,7 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return U32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the U32ᵖ pointer.
@@ -850,7 +850,7 @@ func (p DiscardFramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.St
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return DiscardFramebufferAttachmentˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the DiscardFramebufferAttachmentᵖ pointer.
@@ -890,7 +890,7 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return VertexArrayIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the VertexArrayIdᵖ pointer.
@@ -930,7 +930,7 @@ func (p ShaderAttribTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderA
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ShaderAttribTypeˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the ShaderAttribTypeᵖ pointer.
@@ -970,7 +970,7 @@ func (p ShaderUniformTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Shader
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ShaderUniformTypeˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the ShaderUniformTypeᵖ pointer.
@@ -1010,7 +1010,7 @@ func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F32ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return F32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the F32ᵖ pointer.
@@ -1050,7 +1050,7 @@ func (p TextureIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return TextureIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the TextureIdᵖ pointer.
@@ -1090,7 +1090,7 @@ func (p FramebufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffe
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return FramebufferIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the FramebufferIdᵖ pointer.
@@ -1130,7 +1130,7 @@ func (p RenderbufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Renderbuf
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return RenderbufferIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the RenderbufferIdᵖ pointer.
@@ -1170,7 +1170,7 @@ func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return BufferIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the BufferIdᵖ pointer.
@@ -1218,7 +1218,7 @@ func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᵖˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Charᵖᵖ pointer.
@@ -1258,7 +1258,7 @@ func (p ShaderIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return ShaderIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the ShaderIdᵖ pointer.
@@ -1298,7 +1298,7 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Boolˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return Boolˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the Boolᵖ pointer.
@@ -1338,7 +1338,7 @@ func (p FramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Fr
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return FramebufferAttachmentˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the FramebufferAttachmentᵖ pointer.
@@ -1378,7 +1378,7 @@ func (p QueryIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return QueryIdˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the QueryIdᵖ pointer.
@@ -1418,7 +1418,7 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S64ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return S64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the S64ᵖ pointer.
@@ -1458,7 +1458,7 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U64ˢ{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}
+	return U64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
 }
 
 // String returns a string description of the U64ᵖ pointer.
@@ -1466,12 +1466,10 @@ func (p U64ᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
+// Boolˢ is a slice of bool.
 type Boolˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeBoolˢ returns a Boolˢ backed by a new memory pool.
@@ -1479,7 +1477,7 @@ func MakeBoolˢ(count uint64, ϟs *gfxapi.State) Boolˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Boolˢ{Count: count, Pool: id}
+	return Boolˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Boolˢ in a new memory pool.
@@ -1489,7 +1487,7 @@ func (s Boolˢ) Clone(ϟs *gfxapi.State) Boolˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Boolˢ{Count: s.Count, Pool: id}
+	dst := Boolˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1521,6 +1519,15 @@ func (s Boolˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 // Encoder returns a memory encoder for the slice.
 func (s Boolˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsBoolˢ returns s cast to a Boolˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsBoolˢ(s Slice, ϟs *gfxapi.State) Boolˢ {
+	out := Boolˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the bool elements in this Boolˢ.
@@ -1573,7 +1580,7 @@ func (s Boolˢ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Boolˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Boolˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Boolˢ slice.
@@ -1581,12 +1588,10 @@ func (s Boolˢ) String() string {
 	return fmt.Sprintf("bool(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// BufferIdˢ is a slice of BufferId.
 type BufferIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeBufferIdˢ returns a BufferIdˢ backed by a new memory pool.
@@ -1594,7 +1599,7 @@ func MakeBufferIdˢ(count uint64, ϟs *gfxapi.State) BufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return BufferIdˢ{Count: count, Pool: id}
+	return BufferIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the BufferIdˢ in a new memory pool.
@@ -1604,7 +1609,7 @@ func (s BufferIdˢ) Clone(ϟs *gfxapi.State) BufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := BufferIdˢ{Count: s.Count, Pool: id}
+	dst := BufferIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1636,6 +1641,15 @@ func (s BufferIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Lo
 // Encoder returns a memory encoder for the slice.
 func (s BufferIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsBufferIdˢ returns s cast to a BufferIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsBufferIdˢ(s Slice, ϟs *gfxapi.State) BufferIdˢ {
+	out := BufferIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the BufferId elements in this BufferIdˢ.
@@ -1688,7 +1702,7 @@ func (s BufferIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return BufferIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return BufferIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the BufferIdˢ slice.
@@ -1696,12 +1710,10 @@ func (s BufferIdˢ) String() string {
 	return fmt.Sprintf("BufferId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// CGLContextObjˢ is a slice of CGLContextObj.
 type CGLContextObjˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeCGLContextObjˢ returns a CGLContextObjˢ backed by a new memory pool.
@@ -1709,7 +1721,7 @@ func MakeCGLContextObjˢ(count uint64, ϟs *gfxapi.State) CGLContextObjˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return CGLContextObjˢ{Count: count, Pool: id}
+	return CGLContextObjˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the CGLContextObjˢ in a new memory pool.
@@ -1719,7 +1731,7 @@ func (s CGLContextObjˢ) Clone(ϟs *gfxapi.State) CGLContextObjˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := CGLContextObjˢ{Count: s.Count, Pool: id}
+	dst := CGLContextObjˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1755,6 +1767,15 @@ func (s CGLContextObjˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 // Encoder returns a memory encoder for the slice.
 func (s CGLContextObjˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsCGLContextObjˢ returns s cast to a CGLContextObjˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsCGLContextObjˢ(s Slice, ϟs *gfxapi.State) CGLContextObjˢ {
+	out := CGLContextObjˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the CGLContextObj elements in this CGLContextObjˢ.
@@ -1823,7 +1844,7 @@ func (s CGLContextObjˢ) Slice(start, end uint64, ϟs *gfxapi.State) CGLContextO
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return CGLContextObjˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return CGLContextObjˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the CGLContextObjˢ slice.
@@ -1831,12 +1852,10 @@ func (s CGLContextObjˢ) String() string {
 	return fmt.Sprintf("CGLContextObj(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Charˢ is a slice of byte.
 type Charˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeCharˢFromString returns a Charˢ backed by a new
@@ -1847,7 +1866,7 @@ func MakeCharˢFromString(str string, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	return Charˢ{Count: uint64(len(str)), Pool: id}
+	return Charˢ{SliceInfo: SliceInfo{Count: uint64(len(str)), Pool: id}}
 }
 
 // MakeCharˢ returns a Charˢ backed by a new memory pool.
@@ -1855,7 +1874,7 @@ func MakeCharˢ(count uint64, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charˢ{Count: count, Pool: id}
+	return Charˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Charˢ in a new memory pool.
@@ -1865,7 +1884,7 @@ func (s Charˢ) Clone(ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charˢ{Count: s.Count, Pool: id}
+	dst := Charˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -1897,6 +1916,15 @@ func (s Charˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 // Encoder returns a memory encoder for the slice.
 func (s Charˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsCharˢ returns s cast to a Charˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsCharˢ(s Slice, ϟs *gfxapi.State) Charˢ {
+	out := Charˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the byte elements in this Charˢ.
@@ -1949,7 +1977,7 @@ func (s Charˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Charˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Charˢ slice.
@@ -1957,12 +1985,10 @@ func (s Charˢ) String() string {
 	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Charᵖˢ is a slice of Charᵖ.
 type Charᵖˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeCharᵖˢ returns a Charᵖˢ backed by a new memory pool.
@@ -1970,7 +1996,7 @@ func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charᵖˢ{Count: count, Pool: id}
+	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Charᵖˢ in a new memory pool.
@@ -1980,7 +2006,7 @@ func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charᵖˢ{Count: s.Count, Pool: id}
+	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2016,6 +2042,15 @@ func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 // Encoder returns a memory encoder for the slice.
 func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsCharᵖˢ returns s cast to a Charᵖˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ {
+	out := Charᵖˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the Charᵖ elements in this Charᵖˢ.
@@ -2084,7 +2119,7 @@ func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charᵖˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Charᵖˢ slice.
@@ -2092,12 +2127,10 @@ func (s Charᵖˢ) String() string {
 	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// DiscardFramebufferAttachmentˢ is a slice of DiscardFramebufferAttachment.
 type DiscardFramebufferAttachmentˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeDiscardFramebufferAttachmentˢ returns a DiscardFramebufferAttachmentˢ backed by a new memory pool.
@@ -2105,7 +2138,7 @@ func MakeDiscardFramebufferAttachmentˢ(count uint64, ϟs *gfxapi.State) Discard
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return DiscardFramebufferAttachmentˢ{Count: count, Pool: id}
+	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the DiscardFramebufferAttachmentˢ in a new memory pool.
@@ -2115,7 +2148,7 @@ func (s DiscardFramebufferAttachmentˢ) Clone(ϟs *gfxapi.State) DiscardFramebuf
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := DiscardFramebufferAttachmentˢ{Count: s.Count, Pool: id}
+	dst := DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2147,6 +2180,15 @@ func (s DiscardFramebufferAttachmentˢ) Decoder(ϟs *gfxapi.State, ϟd database.
 // Encoder returns a memory encoder for the slice.
 func (s DiscardFramebufferAttachmentˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsDiscardFramebufferAttachmentˢ returns s cast to a DiscardFramebufferAttachmentˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsDiscardFramebufferAttachmentˢ(s Slice, ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
+	out := DiscardFramebufferAttachmentˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the DiscardFramebufferAttachment elements in this DiscardFramebufferAttachmentˢ.
@@ -2199,7 +2241,7 @@ func (s DiscardFramebufferAttachmentˢ) Slice(start, end uint64, ϟs *gfxapi.Sta
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return DiscardFramebufferAttachmentˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the DiscardFramebufferAttachmentˢ slice.
@@ -2207,12 +2249,10 @@ func (s DiscardFramebufferAttachmentˢ) String() string {
 	return fmt.Sprintf("DiscardFramebufferAttachment(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// EGLintˢ is a slice of EGLint.
 type EGLintˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeEGLintˢ returns a EGLintˢ backed by a new memory pool.
@@ -2220,7 +2260,7 @@ func MakeEGLintˢ(count uint64, ϟs *gfxapi.State) EGLintˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return EGLintˢ{Count: count, Pool: id}
+	return EGLintˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the EGLintˢ in a new memory pool.
@@ -2230,7 +2270,7 @@ func (s EGLintˢ) Clone(ϟs *gfxapi.State) EGLintˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := EGLintˢ{Count: s.Count, Pool: id}
+	dst := EGLintˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2262,6 +2302,15 @@ func (s EGLintˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 // Encoder returns a memory encoder for the slice.
 func (s EGLintˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsEGLintˢ returns s cast to a EGLintˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsEGLintˢ(s Slice, ϟs *gfxapi.State) EGLintˢ {
+	out := EGLintˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the EGLint elements in this EGLintˢ.
@@ -2314,7 +2363,7 @@ func (s EGLintˢ) Slice(start, end uint64, ϟs *gfxapi.State) EGLintˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return EGLintˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return EGLintˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the EGLintˢ slice.
@@ -2322,12 +2371,10 @@ func (s EGLintˢ) String() string {
 	return fmt.Sprintf("EGLint(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// F32ˢ is a slice of float32.
 type F32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeF32ˢ returns a F32ˢ backed by a new memory pool.
@@ -2335,7 +2382,7 @@ func MakeF32ˢ(count uint64, ϟs *gfxapi.State) F32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return F32ˢ{Count: count, Pool: id}
+	return F32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the F32ˢ in a new memory pool.
@@ -2345,7 +2392,7 @@ func (s F32ˢ) Clone(ϟs *gfxapi.State) F32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := F32ˢ{Count: s.Count, Pool: id}
+	dst := F32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2377,6 +2424,15 @@ func (s F32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s F32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsF32ˢ returns s cast to a F32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsF32ˢ(s Slice, ϟs *gfxapi.State) F32ˢ {
+	out := F32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the float32 elements in this F32ˢ.
@@ -2429,7 +2485,7 @@ func (s F32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return F32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return F32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the F32ˢ slice.
@@ -2437,12 +2493,10 @@ func (s F32ˢ) String() string {
 	return fmt.Sprintf("float32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// FramebufferAttachmentˢ is a slice of FramebufferAttachment.
 type FramebufferAttachmentˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeFramebufferAttachmentˢ returns a FramebufferAttachmentˢ backed by a new memory pool.
@@ -2450,7 +2504,7 @@ func MakeFramebufferAttachmentˢ(count uint64, ϟs *gfxapi.State) FramebufferAtt
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return FramebufferAttachmentˢ{Count: count, Pool: id}
+	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the FramebufferAttachmentˢ in a new memory pool.
@@ -2460,7 +2514,7 @@ func (s FramebufferAttachmentˢ) Clone(ϟs *gfxapi.State) FramebufferAttachment�
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := FramebufferAttachmentˢ{Count: s.Count, Pool: id}
+	dst := FramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2492,6 +2546,15 @@ func (s FramebufferAttachmentˢ) Decoder(ϟs *gfxapi.State, ϟd database.Databas
 // Encoder returns a memory encoder for the slice.
 func (s FramebufferAttachmentˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsFramebufferAttachmentˢ returns s cast to a FramebufferAttachmentˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsFramebufferAttachmentˢ(s Slice, ϟs *gfxapi.State) FramebufferAttachmentˢ {
+	out := FramebufferAttachmentˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the FramebufferAttachment elements in this FramebufferAttachmentˢ.
@@ -2544,7 +2607,7 @@ func (s FramebufferAttachmentˢ) Slice(start, end uint64, ϟs *gfxapi.State) Fra
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return FramebufferAttachmentˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the FramebufferAttachmentˢ slice.
@@ -2552,12 +2615,10 @@ func (s FramebufferAttachmentˢ) String() string {
 	return fmt.Sprintf("FramebufferAttachment(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// FramebufferIdˢ is a slice of FramebufferId.
 type FramebufferIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeFramebufferIdˢ returns a FramebufferIdˢ backed by a new memory pool.
@@ -2565,7 +2626,7 @@ func MakeFramebufferIdˢ(count uint64, ϟs *gfxapi.State) FramebufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return FramebufferIdˢ{Count: count, Pool: id}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the FramebufferIdˢ in a new memory pool.
@@ -2575,7 +2636,7 @@ func (s FramebufferIdˢ) Clone(ϟs *gfxapi.State) FramebufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := FramebufferIdˢ{Count: s.Count, Pool: id}
+	dst := FramebufferIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2607,6 +2668,15 @@ func (s FramebufferIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 // Encoder returns a memory encoder for the slice.
 func (s FramebufferIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsFramebufferIdˢ returns s cast to a FramebufferIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsFramebufferIdˢ(s Slice, ϟs *gfxapi.State) FramebufferIdˢ {
+	out := FramebufferIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the FramebufferId elements in this FramebufferIdˢ.
@@ -2659,7 +2729,7 @@ func (s FramebufferIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffer
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return FramebufferIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the FramebufferIdˢ slice.
@@ -2667,12 +2737,10 @@ func (s FramebufferIdˢ) String() string {
 	return fmt.Sprintf("FramebufferId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Intˢ is a slice of int64.
 type Intˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeIntˢ returns a Intˢ backed by a new memory pool.
@@ -2680,7 +2748,7 @@ func MakeIntˢ(count uint64, ϟs *gfxapi.State) Intˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Intˢ{Count: count, Pool: id}
+	return Intˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Intˢ in a new memory pool.
@@ -2690,7 +2758,7 @@ func (s Intˢ) Clone(ϟs *gfxapi.State) Intˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Intˢ{Count: s.Count, Pool: id}
+	dst := Intˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2722,6 +2790,15 @@ func (s Intˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s Intˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsIntˢ returns s cast to a Intˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsIntˢ(s Slice, ϟs *gfxapi.State) Intˢ {
+	out := Intˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int64 elements in this Intˢ.
@@ -2774,7 +2851,7 @@ func (s Intˢ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Intˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Intˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Intˢ slice.
@@ -2782,12 +2859,10 @@ func (s Intˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// QueryIdˢ is a slice of QueryId.
 type QueryIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeQueryIdˢ returns a QueryIdˢ backed by a new memory pool.
@@ -2795,7 +2870,7 @@ func MakeQueryIdˢ(count uint64, ϟs *gfxapi.State) QueryIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return QueryIdˢ{Count: count, Pool: id}
+	return QueryIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the QueryIdˢ in a new memory pool.
@@ -2805,7 +2880,7 @@ func (s QueryIdˢ) Clone(ϟs *gfxapi.State) QueryIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := QueryIdˢ{Count: s.Count, Pool: id}
+	dst := QueryIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2837,6 +2912,15 @@ func (s QueryIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 // Encoder returns a memory encoder for the slice.
 func (s QueryIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsQueryIdˢ returns s cast to a QueryIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsQueryIdˢ(s Slice, ϟs *gfxapi.State) QueryIdˢ {
+	out := QueryIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the QueryId elements in this QueryIdˢ.
@@ -2889,7 +2973,7 @@ func (s QueryIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return QueryIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return QueryIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the QueryIdˢ slice.
@@ -2897,12 +2981,10 @@ func (s QueryIdˢ) String() string {
 	return fmt.Sprintf("QueryId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// RenderbufferIdˢ is a slice of RenderbufferId.
 type RenderbufferIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeRenderbufferIdˢ returns a RenderbufferIdˢ backed by a new memory pool.
@@ -2910,7 +2992,7 @@ func MakeRenderbufferIdˢ(count uint64, ϟs *gfxapi.State) RenderbufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return RenderbufferIdˢ{Count: count, Pool: id}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the RenderbufferIdˢ in a new memory pool.
@@ -2920,7 +3002,7 @@ func (s RenderbufferIdˢ) Clone(ϟs *gfxapi.State) RenderbufferIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := RenderbufferIdˢ{Count: s.Count, Pool: id}
+	dst := RenderbufferIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -2952,6 +3034,15 @@ func (s RenderbufferIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 // Encoder returns a memory encoder for the slice.
 func (s RenderbufferIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsRenderbufferIdˢ returns s cast to a RenderbufferIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsRenderbufferIdˢ(s Slice, ϟs *gfxapi.State) RenderbufferIdˢ {
+	out := RenderbufferIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the RenderbufferId elements in this RenderbufferIdˢ.
@@ -3004,7 +3095,7 @@ func (s RenderbufferIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) Renderbuff
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return RenderbufferIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the RenderbufferIdˢ slice.
@@ -3012,12 +3103,10 @@ func (s RenderbufferIdˢ) String() string {
 	return fmt.Sprintf("RenderbufferId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S32ˢ is a slice of int32.
 type S32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS32ˢ returns a S32ˢ backed by a new memory pool.
@@ -3025,7 +3114,7 @@ func MakeS32ˢ(count uint64, ϟs *gfxapi.State) S32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S32ˢ{Count: count, Pool: id}
+	return S32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S32ˢ in a new memory pool.
@@ -3035,7 +3124,7 @@ func (s S32ˢ) Clone(ϟs *gfxapi.State) S32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S32ˢ{Count: s.Count, Pool: id}
+	dst := S32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3067,6 +3156,15 @@ func (s S32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s S32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS32ˢ returns s cast to a S32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS32ˢ(s Slice, ϟs *gfxapi.State) S32ˢ {
+	out := S32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int32 elements in this S32ˢ.
@@ -3119,7 +3217,7 @@ func (s S32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S32ˢ slice.
@@ -3127,12 +3225,10 @@ func (s S32ˢ) String() string {
 	return fmt.Sprintf("int32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// S64ˢ is a slice of int64.
 type S64ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeS64ˢ returns a S64ˢ backed by a new memory pool.
@@ -3140,7 +3236,7 @@ func MakeS64ˢ(count uint64, ϟs *gfxapi.State) S64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S64ˢ{Count: count, Pool: id}
+	return S64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the S64ˢ in a new memory pool.
@@ -3150,7 +3246,7 @@ func (s S64ˢ) Clone(ϟs *gfxapi.State) S64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S64ˢ{Count: s.Count, Pool: id}
+	dst := S64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3182,6 +3278,15 @@ func (s S64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s S64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsS64ˢ returns s cast to a S64ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsS64ˢ(s Slice, ϟs *gfxapi.State) S64ˢ {
+	out := S64ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the int64 elements in this S64ˢ.
@@ -3234,7 +3339,7 @@ func (s S64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S64ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return S64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the S64ˢ slice.
@@ -3242,12 +3347,10 @@ func (s S64ˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// ShaderAttribTypeˢ is a slice of ShaderAttribType.
 type ShaderAttribTypeˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeShaderAttribTypeˢ returns a ShaderAttribTypeˢ backed by a new memory pool.
@@ -3255,7 +3358,7 @@ func MakeShaderAttribTypeˢ(count uint64, ϟs *gfxapi.State) ShaderAttribTypeˢ 
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return ShaderAttribTypeˢ{Count: count, Pool: id}
+	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the ShaderAttribTypeˢ in a new memory pool.
@@ -3265,7 +3368,7 @@ func (s ShaderAttribTypeˢ) Clone(ϟs *gfxapi.State) ShaderAttribTypeˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := ShaderAttribTypeˢ{Count: s.Count, Pool: id}
+	dst := ShaderAttribTypeˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3297,6 +3400,15 @@ func (s ShaderAttribTypeˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟ
 // Encoder returns a memory encoder for the slice.
 func (s ShaderAttribTypeˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsShaderAttribTypeˢ returns s cast to a ShaderAttribTypeˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsShaderAttribTypeˢ(s Slice, ϟs *gfxapi.State) ShaderAttribTypeˢ {
+	out := ShaderAttribTypeˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the ShaderAttribType elements in this ShaderAttribTypeˢ.
@@ -3349,7 +3461,7 @@ func (s ShaderAttribTypeˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderAt
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return ShaderAttribTypeˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the ShaderAttribTypeˢ slice.
@@ -3357,12 +3469,10 @@ func (s ShaderAttribTypeˢ) String() string {
 	return fmt.Sprintf("ShaderAttribType(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// ShaderIdˢ is a slice of ShaderId.
 type ShaderIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeShaderIdˢ returns a ShaderIdˢ backed by a new memory pool.
@@ -3370,7 +3480,7 @@ func MakeShaderIdˢ(count uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return ShaderIdˢ{Count: count, Pool: id}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the ShaderIdˢ in a new memory pool.
@@ -3380,7 +3490,7 @@ func (s ShaderIdˢ) Clone(ϟs *gfxapi.State) ShaderIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := ShaderIdˢ{Count: s.Count, Pool: id}
+	dst := ShaderIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3412,6 +3522,15 @@ func (s ShaderIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Lo
 // Encoder returns a memory encoder for the slice.
 func (s ShaderIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsShaderIdˢ returns s cast to a ShaderIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsShaderIdˢ(s Slice, ϟs *gfxapi.State) ShaderIdˢ {
+	out := ShaderIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the ShaderId elements in this ShaderIdˢ.
@@ -3464,7 +3583,7 @@ func (s ShaderIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return ShaderIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the ShaderIdˢ slice.
@@ -3472,12 +3591,10 @@ func (s ShaderIdˢ) String() string {
 	return fmt.Sprintf("ShaderId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// ShaderUniformTypeˢ is a slice of ShaderUniformType.
 type ShaderUniformTypeˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeShaderUniformTypeˢ returns a ShaderUniformTypeˢ backed by a new memory pool.
@@ -3485,7 +3602,7 @@ func MakeShaderUniformTypeˢ(count uint64, ϟs *gfxapi.State) ShaderUniformType�
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return ShaderUniformTypeˢ{Count: count, Pool: id}
+	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the ShaderUniformTypeˢ in a new memory pool.
@@ -3495,7 +3612,7 @@ func (s ShaderUniformTypeˢ) Clone(ϟs *gfxapi.State) ShaderUniformTypeˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := ShaderUniformTypeˢ{Count: s.Count, Pool: id}
+	dst := ShaderUniformTypeˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3527,6 +3644,15 @@ func (s ShaderUniformTypeˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, �
 // Encoder returns a memory encoder for the slice.
 func (s ShaderUniformTypeˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsShaderUniformTypeˢ returns s cast to a ShaderUniformTypeˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsShaderUniformTypeˢ(s Slice, ϟs *gfxapi.State) ShaderUniformTypeˢ {
+	out := ShaderUniformTypeˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the ShaderUniformType elements in this ShaderUniformTypeˢ.
@@ -3579,7 +3705,7 @@ func (s ShaderUniformTypeˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderU
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return ShaderUniformTypeˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the ShaderUniformTypeˢ slice.
@@ -3587,12 +3713,10 @@ func (s ShaderUniformTypeˢ) String() string {
 	return fmt.Sprintf("ShaderUniformType(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// TextureIdˢ is a slice of TextureId.
 type TextureIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeTextureIdˢ returns a TextureIdˢ backed by a new memory pool.
@@ -3600,7 +3724,7 @@ func MakeTextureIdˢ(count uint64, ϟs *gfxapi.State) TextureIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return TextureIdˢ{Count: count, Pool: id}
+	return TextureIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the TextureIdˢ in a new memory pool.
@@ -3610,7 +3734,7 @@ func (s TextureIdˢ) Clone(ϟs *gfxapi.State) TextureIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := TextureIdˢ{Count: s.Count, Pool: id}
+	dst := TextureIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3642,6 +3766,15 @@ func (s TextureIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 // Encoder returns a memory encoder for the slice.
 func (s TextureIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsTextureIdˢ returns s cast to a TextureIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsTextureIdˢ(s Slice, ϟs *gfxapi.State) TextureIdˢ {
+	out := TextureIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the TextureId elements in this TextureIdˢ.
@@ -3694,7 +3827,7 @@ func (s TextureIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return TextureIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return TextureIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the TextureIdˢ slice.
@@ -3702,12 +3835,10 @@ func (s TextureIdˢ) String() string {
 	return fmt.Sprintf("TextureId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U32ˢ is a slice of uint32.
 type U32ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU32ˢ returns a U32ˢ backed by a new memory pool.
@@ -3715,7 +3846,7 @@ func MakeU32ˢ(count uint64, ϟs *gfxapi.State) U32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U32ˢ{Count: count, Pool: id}
+	return U32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U32ˢ in a new memory pool.
@@ -3725,7 +3856,7 @@ func (s U32ˢ) Clone(ϟs *gfxapi.State) U32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U32ˢ{Count: s.Count, Pool: id}
+	dst := U32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3757,6 +3888,15 @@ func (s U32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s U32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU32ˢ returns s cast to a U32ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU32ˢ(s Slice, ϟs *gfxapi.State) U32ˢ {
+	out := U32ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint32 elements in this U32ˢ.
@@ -3809,7 +3949,7 @@ func (s U32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U32ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U32ˢ slice.
@@ -3817,12 +3957,10 @@ func (s U32ˢ) String() string {
 	return fmt.Sprintf("uint32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U64ˢ is a slice of uint64.
 type U64ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU64ˢ returns a U64ˢ backed by a new memory pool.
@@ -3830,7 +3968,7 @@ func MakeU64ˢ(count uint64, ϟs *gfxapi.State) U64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U64ˢ{Count: count, Pool: id}
+	return U64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U64ˢ in a new memory pool.
@@ -3840,7 +3978,7 @@ func (s U64ˢ) Clone(ϟs *gfxapi.State) U64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U64ˢ{Count: s.Count, Pool: id}
+	dst := U64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3872,6 +4010,15 @@ func (s U64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger)
 // Encoder returns a memory encoder for the slice.
 func (s U64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU64ˢ returns s cast to a U64ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU64ˢ(s Slice, ϟs *gfxapi.State) U64ˢ {
+	out := U64ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint64 elements in this U64ˢ.
@@ -3924,7 +4071,7 @@ func (s U64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U64ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U64ˢ slice.
@@ -3932,12 +4079,10 @@ func (s U64ˢ) String() string {
 	return fmt.Sprintf("uint64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// U8ˢ is a slice of uint8.
 type U8ˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeU8ˢ returns a U8ˢ backed by a new memory pool.
@@ -3945,7 +4090,7 @@ func MakeU8ˢ(count uint64, ϟs *gfxapi.State) U8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U8ˢ{Count: count, Pool: id}
+	return U8ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the U8ˢ in a new memory pool.
@@ -3955,7 +4100,7 @@ func (s U8ˢ) Clone(ϟs *gfxapi.State) U8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U8ˢ{Count: s.Count, Pool: id}
+	dst := U8ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -3987,6 +4132,15 @@ func (s U8ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) 
 // Encoder returns a memory encoder for the slice.
 func (s U8ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsU8ˢ returns s cast to a U8ˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsU8ˢ(s Slice, ϟs *gfxapi.State) U8ˢ {
+	out := U8ˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the uint8 elements in this U8ˢ.
@@ -4039,7 +4193,7 @@ func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U8ˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return U8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the U8ˢ slice.
@@ -4047,12 +4201,10 @@ func (s U8ˢ) String() string {
 	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// VertexArrayIdˢ is a slice of VertexArrayId.
 type VertexArrayIdˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeVertexArrayIdˢ returns a VertexArrayIdˢ backed by a new memory pool.
@@ -4060,7 +4212,7 @@ func MakeVertexArrayIdˢ(count uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return VertexArrayIdˢ{Count: count, Pool: id}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the VertexArrayIdˢ in a new memory pool.
@@ -4070,7 +4222,7 @@ func (s VertexArrayIdˢ) Clone(ϟs *gfxapi.State) VertexArrayIdˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := VertexArrayIdˢ{Count: s.Count, Pool: id}
+	dst := VertexArrayIdˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -4102,6 +4254,15 @@ func (s VertexArrayIdˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 // Encoder returns a memory encoder for the slice.
 func (s VertexArrayIdˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVertexArrayIdˢ returns s cast to a VertexArrayIdˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVertexArrayIdˢ(s Slice, ϟs *gfxapi.State) VertexArrayIdˢ {
+	out := VertexArrayIdˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
 }
 
 // Read reads and returns all the VertexArrayId elements in this VertexArrayIdˢ.
@@ -4154,7 +4315,7 @@ func (s VertexArrayIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArray
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return VertexArrayIdˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the VertexArrayIdˢ slice.
@@ -4162,12 +4323,10 @@ func (s VertexArrayIdˢ) String() string {
 	return fmt.Sprintf("VertexArrayId(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Voidˢ is a slice of void.
 type Voidˢ struct {
 	binary.Generate
-	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
-	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
+	SliceInfo
 }
 
 // MakeVoidˢ returns a Voidˢ backed by a new memory pool.
@@ -4175,7 +4334,7 @@ func MakeVoidˢ(count uint64, ϟs *gfxapi.State) Voidˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Voidˢ{Count: count, Pool: id}
+	return Voidˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
 }
 
 // Clone returns a copy of the Voidˢ in a new memory pool.
@@ -4185,7 +4344,7 @@ func (s Voidˢ) Clone(ϟs *gfxapi.State) Voidˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Voidˢ{Count: s.Count, Pool: id}
+	dst := Voidˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
 	return dst
 }
 
@@ -4232,7 +4391,7 @@ func (s Voidˢ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Voidˢ{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}
+	return Voidˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
 }
 
 // String returns a string description of the Voidˢ slice.
@@ -15913,4 +16072,24 @@ func min(a, b uint64) uint64 {
 	} else {
 		return b
 	}
+}
+
+// SliceInfo is the common data between all slice types.
+type SliceInfo struct {
+	binary.Generate
+	Root  memory.Pointer // Original pointer this slice derives from.
+	Base  memory.Pointer // Address of first element.
+	Count uint64         // Number of elements in the slice.
+	Pool  memory.PoolID  // Pool that holds the element data.
+}
+
+// Info returns the SliceInfo. It is used to conform to the Slice interface.
+func (s SliceInfo) Info() SliceInfo { return s }
+
+// Slice is the interface implemented by all slice types
+type Slice interface {
+	// Info returns the SliceInfo of this slice.
+	Info() SliceInfo
+	// ElementSize returns the size in bytes of a single element in the slice.
+	ElementSize(ϟs *gfxapi.State) uint64
 }
