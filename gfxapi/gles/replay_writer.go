@@ -1046,12 +1046,13 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.Call(funcInfoGlGetUniformLocation)
 	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-		if ptr, found := ϟb.Remappings[key]; !found {
+		ptr, found := ϟb.Remappings[key]
+		if !found {
 			ptr = ϟb.AllocateMemory(uint64(4))
-			ϟb.Clone(0)
-			ϟb.Store(ptr)
 			ϟb.Remappings[key] = ptr
 		}
+		ϟb.Clone(0)
+		ϟb.Store(ptr)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -3183,12 +3184,13 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Call(funcInfoGlCreateShader)
 	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-		if ptr, found := ϟb.Remappings[key]; !found {
+		ptr, found := ϟb.Remappings[key]
+		if !found {
 			ptr = ϟb.AllocateMemory(uint64(4))
-			ϟb.Clone(0)
-			ϟb.Store(ptr)
 			ϟb.Remappings[key] = ptr
 		}
+		ϟb.Clone(0)
+		ϟb.Store(ptr)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ShaderId(ϟa.Result) // ShaderId
@@ -3421,12 +3423,13 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ctx := GetContext_91_result                  // Contextʳ
 	ϟb.Call(funcInfoGlCreateProgram)
 	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-		if ptr, found := ϟb.Remappings[key]; !found {
+		ptr, found := ϟb.Remappings[key]
+		if !found {
 			ptr = ϟb.AllocateMemory(uint64(4))
-			ϟb.Clone(0)
-			ϟb.Store(ptr)
 			ϟb.Remappings[key] = ptr
 		}
+		ϟb.Clone(0)
+		ϟb.Store(ptr)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	id := ProgramId(ϟa.Result) // ProgramId
@@ -5541,12 +5544,13 @@ func (s BufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -5757,12 +5761,13 @@ func (s FramebufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -5825,12 +5830,13 @@ func (s QueryIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -5870,12 +5876,13 @@ func (s RenderbufferIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -5984,12 +5991,13 @@ func (s ShaderIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -6052,12 +6060,13 @@ func (s TextureIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd databas
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}
@@ -6166,12 +6175,13 @@ func (s VertexArrayIdˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd dat
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}

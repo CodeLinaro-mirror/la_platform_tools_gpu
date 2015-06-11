@@ -990,9 +990,17 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*1},
 				opcode.StoreV{Address: tbase + 4*1},
 
+				// param[2] --> remap[0]
+				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*2},
+				opcode.StoreV{Address: tbase + 4*0},
+
 				// param[3] --> remap[2]
 				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*3},
 				opcode.StoreV{Address: tbase + 4*2},
+
+				// param[4] --> remap[2]
+				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*4},
+				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
 	})
@@ -1030,9 +1038,17 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*1},
 				opcode.StoreV{Address: tbase + 4*1},
 
+				// param[2] --> remap[0]
+				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*2},
+				opcode.StoreV{Address: tbase + 4*0},
+
 				// param[3] --> remap[2]
 				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*3},
 				opcode.StoreV{Address: tbase + 4*2},
+
+				// param[4] --> remap[1]
+				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*4},
+				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
 	})
