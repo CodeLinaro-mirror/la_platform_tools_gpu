@@ -1238,7 +1238,7 @@ namespace gles {
     class Program: public Encodable {
     public:
         Program() = default;
-        Program(uint64_t CreatedAt, std::unordered_map<uint32_t,uint32_t>* Shaders, bool Linked, U8__S Binary, std::unordered_map<char*,uint32_t>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<int32_t,Uniform>* Uniforms, Char__S InfoLog) :
+        Program(uint64_t CreatedAt, std::unordered_map<uint32_t,uint32_t>* Shaders, bool Linked, U8__S Binary, std::unordered_map<char*,int32_t>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<int32_t,Uniform>* Uniforms, Char__S InfoLog) :
             mCreatedAt(CreatedAt),
             mShaders(Shaders),
             mLinked(Linked),
@@ -1266,7 +1266,7 @@ namespace gles {
         std::unordered_map<uint32_t,uint32_t>* mShaders;
         bool mLinked;
         U8__S mBinary;
-        std::unordered_map<char*,uint32_t>* mAttributeBindings;
+        std::unordered_map<char*,int32_t>* mAttributeBindings;
         std::unordered_map<int32_t,VertexAttribute>* mAttributes;
         std::unordered_map<int32_t,Uniform>* mUniforms;
         Char__S mInfoLog;
@@ -1347,7 +1347,7 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint64_t CreatedAt, uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
+        Context(uint64_t CreatedAt, uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<int32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
             mCreatedAt(CreatedAt),
             mIdentifier(Identifier),
             mBlending(Blending),
@@ -1399,7 +1399,7 @@ namespace gles {
         std::unordered_map<uint32_t,uint32_t>* mBoundBuffers;
         uint32_t mBoundProgram;
         uint32_t mBoundVertexArray;
-        std::unordered_map<uint32_t,VertexAttributeArray*>* mVertexAttributeArrays;
+        std::unordered_map<int32_t,VertexAttributeArray*>* mVertexAttributeArrays;
         std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* mTextureUnits;
         uint32_t mActiveTextureUnit;
         std::unordered_map<uint32_t,bool>* mCapabilities;
@@ -2011,7 +2011,7 @@ namespace gles {
     class GlBindAttribLocation: public Encodable {
     public:
         GlBindAttribLocation() = default;
-        GlBindAttribLocation(atom::Observations observations, uint32_t Program, uint32_t Location, char* Name) :
+        GlBindAttribLocation(atom::Observations observations, uint32_t Program, int32_t Location, char* Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -2029,7 +2029,7 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mProgram;
-        uint32_t mLocation;
+        int32_t mLocation;
         char* mName;
     };
 
@@ -3148,7 +3148,7 @@ namespace gles {
     class GlDisableVertexAttribArray: public Encodable {
     public:
         GlDisableVertexAttribArray() = default;
-        GlDisableVertexAttribArray(atom::Observations observations, uint32_t Location) :
+        GlDisableVertexAttribArray(atom::Observations observations, int32_t Location) :
             mobservations(observations),
             mLocation(Location) {}
         virtual const gapic::Id& Id() const {
@@ -3161,7 +3161,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
     };
 
     class GlDiscardFramebufferEXT: public Encodable {
@@ -3365,7 +3365,7 @@ namespace gles {
     class GlEnableVertexAttribArray: public Encodable {
     public:
         GlEnableVertexAttribArray() = default;
-        GlEnableVertexAttribArray(atom::Observations observations, uint32_t Location) :
+        GlEnableVertexAttribArray(atom::Observations observations, int32_t Location) :
             mobservations(observations),
             mLocation(Location) {}
         virtual const gapic::Id& Id() const {
@@ -3378,7 +3378,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
     };
 
     class GlEndQuery: public Encodable {
@@ -3762,7 +3762,7 @@ namespace gles {
     class GlGetActiveAttrib: public Encodable {
     public:
         GlGetActiveAttrib() = default;
-        GlGetActiveAttrib(atom::Observations observations, uint32_t Program, uint32_t Location, int32_t BufferSize, S32__P BufferBytesWritten, S32__P VectorCount, ShaderAttribType__P Type, Char__P Name) :
+        GlGetActiveAttrib(atom::Observations observations, uint32_t Program, int32_t Location, int32_t BufferSize, S32__P BufferBytesWritten, S32__P VectorCount, ShaderAttribType__P Type, Char__P Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
@@ -3788,7 +3788,7 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mProgram;
-        uint32_t mLocation;
+        int32_t mLocation;
         int32_t mBufferSize;
         S32__P mBufferBytesWritten;
         S32__P mVectorCount;
@@ -3902,7 +3902,7 @@ namespace gles {
     class GlGetAttribLocation: public Encodable {
     public:
         GlGetAttribLocation() = default;
-        GlGetAttribLocation(atom::Observations observations, uint32_t Program, char* Name, uint32_t Result) :
+        GlGetAttribLocation(atom::Observations observations, uint32_t Program, char* Name, int32_t Result) :
             mobservations(observations),
             mProgram(Program),
             mName(Name),
@@ -3921,7 +3921,7 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mName;
-        uint32_t mResult;
+        int32_t mResult;
     };
 
     class GlGetBooleanv: public Encodable {
@@ -4703,23 +4703,23 @@ namespace gles {
     class GlInsertEventMarkerEXT: public Encodable {
     public:
         GlInsertEventMarkerEXT() = default;
-        GlInsertEventMarkerEXT(atom::Observations observations, int32_t Length, char* Marker) :
+        GlInsertEventMarkerEXT(atom::Observations observations, int32_t Length, Char__P Marker) :
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe0, 0x62, 0x82, 0xd3, 0x0a, 0x0c, 0xae, 0xde, 0xf3, 0xac, 0xe6, 0xa9, 0x5f, 0xb5, 0xc7, 0x8b, 0x2c, 0xe1, 0x99, 0xea,  } };
+            static gapic::Id ID{ { 0xe1, 0x4b, 0x4f, 0x0b, 0x55, 0x5a, 0x51, 0x47, 0xff, 0xb8, 0x3e, 0xd9, 0x68, 0xd2, 0x80, 0x26, 0x7c, 0x18, 0x58, 0xf1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
             e->Int32(this->mLength);
-            e->String(this->mMarker);
+            e->Value(&this->mMarker);
         }
 
         atom::Observations mobservations;
         int32_t mLength;
-        char* mMarker;
+        Char__P mMarker;
     };
 
     class GlInvalidateFramebuffer: public Encodable {
@@ -5127,23 +5127,23 @@ namespace gles {
     class GlPushGroupMarkerEXT: public Encodable {
     public:
         GlPushGroupMarkerEXT() = default;
-        GlPushGroupMarkerEXT(atom::Observations observations, int32_t Length, char* Marker) :
+        GlPushGroupMarkerEXT(atom::Observations observations, int32_t Length, Char__P Marker) :
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x02, 0x2e, 0x06, 0x0f, 0xcb, 0x78, 0xe3, 0x76, 0x55, 0x1d, 0x6b, 0x9f, 0x57, 0xd2, 0x40, 0x46, 0x1a, 0x0a, 0x70, 0x02,  } };
+            static gapic::Id ID{ { 0xbc, 0xfe, 0x9c, 0x74, 0x61, 0x24, 0x36, 0x50, 0xf2, 0x59, 0xdb, 0x58, 0x87, 0xaa, 0xea, 0x45, 0xf7, 0x67, 0xef, 0xab,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Value(&this->mobservations);
             e->Int32(this->mLength);
-            e->String(this->mMarker);
+            e->Value(&this->mMarker);
         }
 
         atom::Observations mobservations;
         int32_t mLength;
-        char* mMarker;
+        Char__P mMarker;
     };
 
     class GlQueryCounterEXT: public Encodable {
@@ -6404,7 +6404,7 @@ namespace gles {
     class GlVertexAttrib1f: public Encodable {
     public:
         GlVertexAttrib1f() = default;
-        GlVertexAttrib1f(atom::Observations observations, uint32_t Location, float Value0) :
+        GlVertexAttrib1f(atom::Observations observations, int32_t Location, float Value0) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0) {}
@@ -6419,14 +6419,14 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         float mValue0;
     };
 
     class GlVertexAttrib1fv: public Encodable {
     public:
         GlVertexAttrib1fv() = default;
-        GlVertexAttrib1fv(atom::Observations observations, uint32_t Location, F32__P Value) :
+        GlVertexAttrib1fv(atom::Observations observations, int32_t Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6441,14 +6441,14 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         F32__P mValue;
     };
 
     class GlVertexAttrib2f: public Encodable {
     public:
         GlVertexAttrib2f() = default;
-        GlVertexAttrib2f(atom::Observations observations, uint32_t Location, float Value0, float Value1) :
+        GlVertexAttrib2f(atom::Observations observations, int32_t Location, float Value0, float Value1) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6465,7 +6465,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         float mValue0;
         float mValue1;
     };
@@ -6473,7 +6473,7 @@ namespace gles {
     class GlVertexAttrib2fv: public Encodable {
     public:
         GlVertexAttrib2fv() = default;
-        GlVertexAttrib2fv(atom::Observations observations, uint32_t Location, F32__P Value) :
+        GlVertexAttrib2fv(atom::Observations observations, int32_t Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6488,14 +6488,14 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         F32__P mValue;
     };
 
     class GlVertexAttrib3f: public Encodable {
     public:
         GlVertexAttrib3f() = default;
-        GlVertexAttrib3f(atom::Observations observations, uint32_t Location, float Value0, float Value1, float Value2) :
+        GlVertexAttrib3f(atom::Observations observations, int32_t Location, float Value0, float Value1, float Value2) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6514,7 +6514,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         float mValue0;
         float mValue1;
         float mValue2;
@@ -6523,7 +6523,7 @@ namespace gles {
     class GlVertexAttrib3fv: public Encodable {
     public:
         GlVertexAttrib3fv() = default;
-        GlVertexAttrib3fv(atom::Observations observations, uint32_t Location, F32__P Value) :
+        GlVertexAttrib3fv(atom::Observations observations, int32_t Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6538,14 +6538,14 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         F32__P mValue;
     };
 
     class GlVertexAttrib4f: public Encodable {
     public:
         GlVertexAttrib4f() = default;
-        GlVertexAttrib4f(atom::Observations observations, uint32_t Location, float Value0, float Value1, float Value2, float Value3) :
+        GlVertexAttrib4f(atom::Observations observations, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0),
@@ -6566,7 +6566,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         float mValue0;
         float mValue1;
         float mValue2;
@@ -6576,7 +6576,7 @@ namespace gles {
     class GlVertexAttrib4fv: public Encodable {
     public:
         GlVertexAttrib4fv() = default;
-        GlVertexAttrib4fv(atom::Observations observations, uint32_t Location, F32__P Value) :
+        GlVertexAttrib4fv(atom::Observations observations, int32_t Location, F32__P Value) :
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
@@ -6591,14 +6591,14 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         F32__P mValue;
     };
 
     class GlVertexAttribPointer: public Encodable {
     public:
         GlVertexAttribPointer() = default;
-        GlVertexAttribPointer(atom::Observations observations, uint32_t Location, int32_t Size, uint32_t Type, bool Normalized, int32_t Stride, VertexPointer Data) :
+        GlVertexAttribPointer(atom::Observations observations, int32_t Location, int32_t Size, uint32_t Type, bool Normalized, int32_t Stride, VertexPointer Data) :
             mobservations(observations),
             mLocation(Location),
             mSize(Size),
@@ -6621,7 +6621,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        uint32_t mLocation;
+        int32_t mLocation;
         int32_t mSize;
         uint32_t mType;
         bool mNormalized;

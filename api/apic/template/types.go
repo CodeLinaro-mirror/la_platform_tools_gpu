@@ -64,6 +64,7 @@ var (
 		semantic.Field{},
 		semantic.Function{},
 		semantic.Global{},
+		semantic.Ignore{},
 		semantic.Iteration{},
 		semantic.Length{},
 		semantic.Local{},

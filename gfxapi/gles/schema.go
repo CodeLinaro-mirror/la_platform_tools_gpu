@@ -648,7 +648,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "marker",
-				Type: schema.String,
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -669,7 +669,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "marker",
-				Type: schema.String,
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},

@@ -1017,29 +1017,39 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
 }
 
 inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
-    GAPID_INFO("glInsertEventMarkerEXT(%d, %s)\n", length, marker);
+    GAPID_INFO("glInsertEventMarkerEXT(%d, %p)\n", length, marker);
 
     do {
+        if (length > 0) {
+            string(marker);
+        } else {
+            read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        }
         mImports.glInsertEventMarkerEXT(length, marker);
     } while (false);
 
     mEncoder->Uint16(22);  // Type ID -- TODO: mEncoder->Id(GL_INSERT_EVENT_MARKER_E_X_T_ID);
     encodeObservations();
     mEncoder->Int32(length);
-    mEncoder->String(marker);
+    mEncoder->Pointer(marker);
 }
 
 inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
-    GAPID_INFO("glPushGroupMarkerEXT(%d, %s)\n", length, marker);
+    GAPID_INFO("glPushGroupMarkerEXT(%d, %p)\n", length, marker);
 
     do {
+        if (length > 0) {
+            string(marker);
+        } else {
+            read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        }
         mImports.glPushGroupMarkerEXT(length, marker);
     } while (false);
 
     mEncoder->Uint16(23);  // Type ID -- TODO: mEncoder->Id(GL_PUSH_GROUP_MARKER_E_X_T_ID);
     encodeObservations();
     mEncoder->Int32(length);
-    mEncoder->String(marker);
+    mEncoder->Pointer(marker);
 }
 
 inline void GlesSpy::glPopGroupMarkerEXT() {

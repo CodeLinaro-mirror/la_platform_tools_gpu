@@ -5654,7 +5654,7 @@ type GlInsertEventMarkerEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Length       int32
-	Marker       string
+	Marker       Charᵖ
 }
 
 func (a *GlInsertEventMarkerEXT) String() string {
@@ -5688,7 +5688,7 @@ type GlPushGroupMarkerEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Length       int32
-	Marker       string
+	Marker       Charᵖ
 }
 
 func (a *GlPushGroupMarkerEXT) String() string {
@@ -14123,11 +14123,11 @@ func NewGlEndTilingQCOM(Preserve_mask TilePreserveMaskQCOM) *GlEndTilingQCOM {
 func NewGlDiscardFramebufferEXT(Target FramebufferTarget, NumAttachments int32, Attachments memory.Pointer) *GlDiscardFramebufferEXT {
 	return &GlDiscardFramebufferEXT{Target: Target, NumAttachments: NumAttachments, Attachments: NewDiscardFramebufferAttachmentᵖ(Attachments)}
 }
-func NewGlInsertEventMarkerEXT(Length int32, Marker string) *GlInsertEventMarkerEXT {
-	return &GlInsertEventMarkerEXT{Length: Length, Marker: Marker}
+func NewGlInsertEventMarkerEXT(Length int32, Marker memory.Pointer) *GlInsertEventMarkerEXT {
+	return &GlInsertEventMarkerEXT{Length: Length, Marker: NewCharᵖ(Marker)}
 }
-func NewGlPushGroupMarkerEXT(Length int32, Marker string) *GlPushGroupMarkerEXT {
-	return &GlPushGroupMarkerEXT{Length: Length, Marker: Marker}
+func NewGlPushGroupMarkerEXT(Length int32, Marker memory.Pointer) *GlPushGroupMarkerEXT {
+	return &GlPushGroupMarkerEXT{Length: Length, Marker: NewCharᵖ(Marker)}
 }
 func NewGlPopGroupMarkerEXT() *GlPopGroupMarkerEXT {
 	return &GlPopGroupMarkerEXT{}
