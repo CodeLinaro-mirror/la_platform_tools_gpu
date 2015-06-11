@@ -913,12 +913,13 @@ func (ϟa *CmdRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Call(funcInfoCmdRemapped)
 	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-		if ptr, found := ϟb.Remappings[key]; !found {
+		ptr, found := ϟb.Remappings[key]
+		if !found {
 			ptr = ϟb.AllocateMemory(uint64(4))
-			ϟb.Clone(0)
-			ϟb.Store(ptr)
 			ϟb.Remappings[key] = ptr
 		}
+		ϟb.Clone(0)
+		ϟb.Store(ptr)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -1381,12 +1382,13 @@ func (s Remappedˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
 		for _, v := range s.Read(ϟs, ϟd, ϟl) {
 			if key, remap := v.remap(ϟa, ϟs); remap {
-				if _, found := ϟb.Remappings[key]; !found {
-					dst := ϟb.AllocateMemory(size)
-					ϟb.Load(protocol.TypeUint32, ptr)
-					ϟb.Store(dst)
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
 					ϟb.Remappings[key] = dst
 				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
 			}
 			ptr += step
 		}

@@ -299,12 +299,13 @@
   {{$rty := TypeOf $c.Return}}
   {{if (GetAnnotation $rty "replay_remap")}}
     if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-      if ptr, found := ϟb.Remappings[key]; !found {
+      ptr, found := ϟb.Remappings[key]
+      if !found {
         ptr = ϟb.AllocateMemory({{Macro "Go.SizeOf" $rty}})
-        ϟb.Clone(0)
-        ϟb.Store(ptr)
         ϟb.Remappings[key] = ptr
       }
+      ϟb.Clone(0)
+      ϟb.Store(ptr)
     }
   {{end}}
 
@@ -448,12 +449,13 @@
         ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
           if key, remap := v.remap(ϟa, ϟs); remap {
-            if _, found := ϟb.Remappings[key]; !found {
-              dst := ϟb.AllocateMemory(size)
-              ϟb.Load({{Macro "BuilderType" $s.To}}, ptr)
-              ϟb.Store(dst)
+            dst, found := ϟb.Remappings[key]
+            if !found {
+              dst = ϟb.AllocateMemory(size)
               ϟb.Remappings[key] = dst
             }
+            ϟb.Load({{Macro "BuilderType" $s.To}}, ptr)
+            ϟb.Store(dst)
           }
           ptr += step
         }
