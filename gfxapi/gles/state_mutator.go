@@ -1322,121 +1322,103 @@ func (ϟa *GlUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_31_result := context                         // Contextʳ
-	ctx := GetContext_31_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_31_result := context              // Contextʳ
+	ctx := GetContext_31_result                  // Contextʳ
+	v := MakeS32ˢ(uint64(1), ϟs)                 // S32ˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
-	uniform.Value.S32 = ϟa.Value
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_31_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_31_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_32_result := context                         // Contextʳ
-	ctx := GetContext_32_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_32_result := context              // Contextʳ
+	ctx := GetContext_32_result                  // Contextʳ
+	v := MakeVec2iˢ(uint64(1), ϟs)               // Vec2iˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec2i{Elements: [2]int32{ϟa.Value0, ϟa.Value1}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC2
-	uniform.Value.Vec2i = func() Vec2i {
-		s := Vec2i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_32_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_32_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_33_result := context                         // Contextʳ
-	ctx := GetContext_33_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_33_result := context              // Contextʳ
+	ctx := GetContext_33_result                  // Contextʳ
+	v := MakeVec3iˢ(uint64(1), ϟs)               // Vec3iˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec3i{Elements: [3]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC3
-	uniform.Value.Vec3i = func() Vec3i {
-		s := Vec3i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_33_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_33_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_34_result := context                         // Contextʳ
-	ctx := GetContext_34_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_34_result := context              // Contextʳ
+	ctx := GetContext_34_result                  // Contextʳ
+	v := MakeVec4iˢ(uint64(1), ϟs)               // Vec4iˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec4i{Elements: [4]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC4
-	uniform.Value.Vec4i = func() Vec4i {
-		s := Vec4i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		s.W = ϟa.Value3
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_34_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_34_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_35_result := context                         // Contextʳ
-	ctx := GetContext_35_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
+	GetContext_35_result := context                              // Contextʳ
+	ctx := GetContext_35_result                                  // Contextʳ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // S32ˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
-	uniform.Value.S32 = ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_35_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_35_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_36_result := context                                          // Contextʳ
-	ctx := GetContext_36_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(2))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_36_result := context                                      // Contextʳ
+	ctx := GetContext_36_result                                          // Contextʳ
+	v := Vec2iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC2
-	uniform.Value.Vec2i = func() Vec2i {
-		s := Vec2i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_36_result, ctx, v, program, uniform
@@ -1446,21 +1428,14 @@ func (ϟa *GlUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_37_result := context                                          // Contextʳ
-	ctx := GetContext_37_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(3))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_37_result := context                                      // Contextʳ
+	ctx := GetContext_37_result                                          // Contextʳ
+	v := Vec3iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC3
-	uniform.Value.Vec3i = func() Vec3i {
-		s := Vec3i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_37_result, ctx, v, program, uniform
@@ -1470,22 +1445,14 @@ func (ϟa *GlUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_38_result := context                                          // Contextʳ
-	ctx := GetContext_38_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_38_result := context                                      // Contextʳ
+	ctx := GetContext_38_result                                          // Contextʳ
+	v := Vec4iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC4
-	uniform.Value.Vec4i = func() Vec4i {
-		s := Vec4i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-		s.W = v.Index(uint64(3), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_38_result, ctx, v, program, uniform
@@ -1495,99 +1462,86 @@ func (ϟa *GlUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_39_result := context                         // Contextʳ
-	ctx := GetContext_39_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_39_result := context              // Contextʳ
+	ctx := GetContext_39_result                  // Contextʳ
+	v := MakeF32ˢ(uint64(1), ϟs)                 // F32ˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
-	uniform.Value.F32 = ϟa.Value
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_39_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_39_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_40_result := context                         // Contextʳ
-	ctx := GetContext_40_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_40_result := context              // Contextʳ
+	ctx := GetContext_40_result                  // Contextʳ
+	v := MakeVec2fˢ(uint64(1), ϟs)               // Vec2fˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec2f{Elements: [2]float32{ϟa.Value0, ϟa.Value1}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
-	uniform.Value.Vec2f = func() Vec2f {
-		s := Vec2f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_40_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_40_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_41_result := context                         // Contextʳ
-	ctx := GetContext_41_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_41_result := context              // Contextʳ
+	ctx := GetContext_41_result                  // Contextʳ
+	v := MakeVec3fˢ(uint64(1), ϟs)               // Vec3fˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec3f{Elements: [3]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
-	uniform.Value.Vec3f = func() Vec3f {
-		s := Vec3f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_41_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_41_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_42_result := context                         // Contextʳ
-	ctx := GetContext_42_result                             // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_42_result := context              // Contextʳ
+	ctx := GetContext_42_result                  // Contextʳ
+	v := MakeVec4fˢ(uint64(1), ϟs)               // Vec4fˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	v.Index(uint64(0), ϟs).Write(Vec4f{Elements: [4]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
-	uniform.Value.Vec4f = func() Vec4f {
-		s := Vec4f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		s.W = ϟa.Value3
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_42_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_42_result, ctx, v, program, uniform
 	return nil
 }
 func (ϟa *GlUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                // Contextʳ
-	GetContext_43_result := context                             // Contextʳ
-	ctx := GetContext_43_result                                 // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)     // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
+	GetContext_43_result := context                              // Contextʳ
+	ctx := GetContext_43_result                                  // Contextʳ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
-	uniform.Value.F32 = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_43_result, ctx, v, program, uniform
@@ -1597,20 +1551,14 @@ func (ϟa *GlUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_44_result := context                                          // Contextʳ
-	ctx := GetContext_44_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(2))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_44_result := context                                      // Contextʳ
+	ctx := GetContext_44_result                                          // Contextʳ
+	v := Vec2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
-	uniform.Value.Vec2f = func() Vec2f {
-		s := Vec2f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_44_result, ctx, v, program, uniform
@@ -1620,21 +1568,14 @@ func (ϟa *GlUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_45_result := context                                          // Contextʳ
-	ctx := GetContext_45_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(3))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_45_result := context                                      // Contextʳ
+	ctx := GetContext_45_result                                          // Contextʳ
+	v := Vec3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
-	uniform.Value.Vec3f = func() Vec3f {
-		s := Vec3f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_45_result, ctx, v, program, uniform
@@ -1644,22 +1585,14 @@ func (ϟa *GlUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_46_result := context                                          // Contextʳ
-	ctx := GetContext_46_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_46_result := context                                      // Contextʳ
+	ctx := GetContext_46_result                                          // Contextʳ
+	v := Vec4fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
-	uniform.Value.Vec4f = func() Vec4f {
-		s := Vec4f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-		s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-		s.W = v.Index(uint64(3), ϟs).Read(ϟs, ϟd, ϟl)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_46_result, ctx, v, program, uniform
@@ -1669,32 +1602,14 @@ func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                              // Contextʳ
-	GetContext_47_result := context                                           // Contextʳ
-	ctx := GetContext_47_result                                               // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                   // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                              // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_47_result := context                                      // Contextʳ
+	ctx := GetContext_47_result                                          // Contextʳ
+	v := Mat2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat2fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT2
-	uniform.Value.Mat2f = func() Mat2f {
-		s := Mat2f{}
-		s.Init()
-		s.Col0 = func() Vec2f {
-			s := Vec2f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col1 = func() Vec2f {
-			s := Vec2f{}
-			s.Init()
-			s.X = v.Index(uint64(3), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(4), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_47_result, ctx, v, program, uniform
@@ -1704,42 +1619,14 @@ func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                              // Contextʳ
-	GetContext_48_result := context                                           // Contextʳ
-	ctx := GetContext_48_result                                               // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(9))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                   // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                              // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_48_result := context                                      // Contextʳ
+	ctx := GetContext_48_result                                          // Contextʳ
+	v := Mat3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat3fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT3
-	uniform.Value.Mat3f = func() Mat3f {
-		s := Mat3f{}
-		s.Init()
-		s.Col0 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col1 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(3), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(4), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(5), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col2 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(6), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(7), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(8), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_48_result, ctx, v, program, uniform
@@ -1749,53 +1636,13 @@ func (ϟa *GlUniformMatrix4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                               // Contextʳ
-	GetContext_49_result := context                                            // Contextʳ
-	ctx := GetContext_49_result                                                // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(16))), ϟs) // F32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                    // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                               // Uniform
-	uniform.Value.Mat4f = func() Mat4f {
-		s := Mat4f{}
-		s.Init()
-		s.Col0 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(2), ϟs).Read(ϟs, ϟd, ϟl)
-			s.W = v.Index(uint64(3), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col1 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(4), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(5), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(6), ϟs).Read(ϟs, ϟd, ϟl)
-			s.W = v.Index(uint64(7), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col2 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(8), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(9), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(10), ϟs).Read(ϟs, ϟd, ϟl)
-			s.W = v.Index(uint64(11), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		s.Col3 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(12), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Y = v.Index(uint64(13), ϟs).Read(ϟs, ϟd, ϟl)
-			s.Z = v.Index(uint64(14), ϟs).Read(ϟs, ϟd, ϟl)
-			s.W = v.Index(uint64(15), ϟs).Read(ϟs, ϟd, ϟl)
-			return s
-		}()
-		return s
-	}()
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_49_result := context                                      // Contextʳ
+	ctx := GetContext_49_result                                          // Contextʳ
+	v := Mat4fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat4fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
+	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_49_result, ctx, v, program, uniform

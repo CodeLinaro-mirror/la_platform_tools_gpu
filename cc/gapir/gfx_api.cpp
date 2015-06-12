@@ -1230,13 +1230,13 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, values);
         if (glUniform1iv != nullptr) {
-            glUniform1iv(location, count, value);
+            glUniform1iv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1iv\n");
         }
@@ -1248,13 +1248,13 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, values);
         if (glUniform2iv != nullptr) {
-            glUniform2iv(location, count, value);
+            glUniform2iv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2iv\n");
         }
@@ -1266,13 +1266,13 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, values);
         if (glUniform3iv != nullptr) {
-            glUniform3iv(location, count, value);
+            glUniform3iv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3iv\n");
         }
@@ -1284,13 +1284,13 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4iv(Stack* stack, bool pushReturn) {
-    int32_t* value = stack->pop<int32_t*>();
+    int32_t* values = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, values);
         if (glUniform4iv != nullptr) {
-            glUniform4iv(location, count, value);
+            glUniform4iv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4iv\n");
         }
@@ -1376,13 +1376,13 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, values);
         if (glUniform1fv != nullptr) {
-            glUniform1fv(location, count, value);
+            glUniform1fv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform1fv\n");
         }
@@ -1394,13 +1394,13 @@ bool callGlUniform1fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, values);
         if (glUniform2fv != nullptr) {
-            glUniform2fv(location, count, value);
+            glUniform2fv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform2fv\n");
         }
@@ -1412,13 +1412,13 @@ bool callGlUniform2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, values);
         if (glUniform3fv != nullptr) {
-            glUniform3fv(location, count, value);
+            glUniform3fv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform3fv\n");
         }
@@ -1430,13 +1430,13 @@ bool callGlUniform3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4fv(Stack* stack, bool pushReturn) {
-    float* value = stack->pop<float*>();
+    float* values = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, values);
         if (glUniform4fv != nullptr) {
-            glUniform4fv(location, count, value);
+            glUniform4fv(location, count, values);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glUniform4fv\n");
         }

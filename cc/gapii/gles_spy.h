@@ -117,19 +117,19 @@ public:
     inline void glUniform3i(int32_t location, int32_t value0, int32_t value1, int32_t value2);
     inline void glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2,
                             int32_t value3);
-    inline void glUniform1iv(int32_t location, int32_t count, int32_t* value);
-    inline void glUniform2iv(int32_t location, int32_t count, int32_t* value);
-    inline void glUniform3iv(int32_t location, int32_t count, int32_t* value);
-    inline void glUniform4iv(int32_t location, int32_t count, int32_t* value);
+    inline void glUniform1iv(int32_t location, int32_t count, int32_t* values);
+    inline void glUniform2iv(int32_t location, int32_t count, int32_t* values);
+    inline void glUniform3iv(int32_t location, int32_t count, int32_t* values);
+    inline void glUniform4iv(int32_t location, int32_t count, int32_t* values);
     inline void glUniform1f(int32_t location, float value);
     inline void glUniform2f(int32_t location, float value0, float value1);
     inline void glUniform3f(int32_t location, float value0, float value1, float value2);
     inline void glUniform4f(int32_t location, float value0, float value1, float value2,
                             float value3);
-    inline void glUniform1fv(int32_t location, int32_t count, float* value);
-    inline void glUniform2fv(int32_t location, int32_t count, float* value);
-    inline void glUniform3fv(int32_t location, int32_t count, float* value);
-    inline void glUniform4fv(int32_t location, int32_t count, float* value);
+    inline void glUniform1fv(int32_t location, int32_t count, float* values);
+    inline void glUniform2fv(int32_t location, int32_t count, float* values);
+    inline void glUniform3fv(int32_t location, int32_t count, float* values);
+    inline void glUniform4fv(int32_t location, int32_t count, float* values);
     inline void glUniformMatrix2fv(int32_t location, int32_t count, bool transpose, float* values);
     inline void glUniformMatrix3fv(int32_t location, int32_t count, bool transpose, float* values);
     inline void glUniformMatrix4fv(int32_t location, int32_t count, bool transpose, float* values);
@@ -1853,12 +1853,14 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_31_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_31_result;
+        Slice<int32_t> l_v = make<int32_t>(1);
+        mImports.glUniform1i(location, value);
+        write(l_v, 0, value);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT;
-        l_uniform.mValue.mS32 = value;
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform1i(location, value);
     } while (false);
 
     mEncoder->Uint16(59);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1I_ID);
@@ -1874,12 +1876,14 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_32_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_32_result;
+        Slice<Vec2i> l_v = make<Vec2i>(1);
+        mImports.glUniform2i(location, value0, value1);
+        write(l_v, 0, Vec2i{value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC2;
-        l_uniform.mValue.mVec2i = Vec2i().SetX(value0).SetY(value1);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform2i(location, value0, value1);
     } while (false);
 
     mEncoder->Uint16(60);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2I_ID);
@@ -1896,12 +1900,14 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_33_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_33_result;
+        Slice<Vec3i> l_v = make<Vec3i>(1);
+        mImports.glUniform3i(location, value0, value1, value2);
+        write(l_v, 0, Vec3i{value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC3;
-        l_uniform.mValue.mVec3i = Vec3i().SetX(value0).SetY(value1).SetZ(value2);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform3i(location, value0, value1, value2);
     } while (false);
 
     mEncoder->Uint16(61);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3I_ID);
@@ -1920,12 +1926,14 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_34_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_34_result;
+        Slice<Vec4i> l_v = make<Vec4i>(1);
+        mImports.glUniform4i(location, value0, value1, value2, value3);
+        write(l_v, 0, Vec4i{value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC4;
-        l_uniform.mValue.mVec4i = Vec4i().SetX(value0).SetY(value1).SetZ(value2).SetW(value3);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform4i(location, value0, value1, value2, value3);
     } while (false);
 
     mEncoder->Uint16(62);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4I_ID);
@@ -1937,96 +1945,96 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
     mEncoder->Int32(value3);
 }
 
-inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* value) {
-    GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* values) {
+    GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_35_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_35_result;
+        Slice<int32_t> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT;
-        l_uniform.mValue.mS32 = read(slice(value, 0, 1), 0);
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform1iv(location, count, value);
+        mImports.glUniform1iv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(63);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1IV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* value) {
-    GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* values) {
+    GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_36_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_36_result;
-        Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 2));
+        Slice<Vec2i> l_v = slice((Vec2i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC2;
-        l_uniform.mValue.mVec2i = Vec2i().SetX(read(l_v, 0)).SetY(read(l_v, 1));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform2iv(location, count, value);
+        mImports.glUniform2iv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(64);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2IV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* value) {
-    GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* values) {
+    GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_37_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_37_result;
-        Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 3));
+        Slice<Vec3i> l_v = slice((Vec3i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC3;
-        l_uniform.mValue.mVec3i = Vec3i().SetX(read(l_v, 0)).SetY(read(l_v, 1)).SetZ(read(l_v, 2));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform3iv(location, count, value);
+        mImports.glUniform3iv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(65);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3IV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* value) {
-    GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* values) {
+    GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_38_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_38_result;
-        Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 4));
+        Slice<Vec4i> l_v = slice((Vec4i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_INT_VEC4;
-        l_uniform.mValue.mVec4i =
-                Vec4i().SetX(read(l_v, 0)).SetY(read(l_v, 1)).SetZ(read(l_v, 2)).SetW(read(l_v, 3));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform4iv(location, count, value);
+        mImports.glUniform4iv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(66);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4IV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glUniform1f(int32_t location, float value) {
@@ -2036,12 +2044,14 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_39_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_39_result;
+        Slice<float> l_v = make<float>(1);
+        mImports.glUniform1f(location, value);
+        write(l_v, 0, value);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT;
-        l_uniform.mValue.mF32 = value;
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform1f(location, value);
     } while (false);
 
     mEncoder->Uint16(67);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1F_ID);
@@ -2057,12 +2067,14 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_40_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_40_result;
+        Slice<Vec2f> l_v = make<Vec2f>(1);
+        mImports.glUniform2f(location, value0, value1);
+        write(l_v, 0, Vec2f{value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
-        l_uniform.mValue.mVec2f = Vec2f().SetX(value0).SetY(value1);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform2f(location, value0, value1);
     } while (false);
 
     mEncoder->Uint16(68);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2F_ID);
@@ -2079,12 +2091,14 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_41_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_41_result;
+        Slice<Vec3f> l_v = make<Vec3f>(1);
+        mImports.glUniform3f(location, value0, value1, value2);
+        write(l_v, 0, Vec3f{value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
-        l_uniform.mValue.mVec3f = Vec3f().SetX(value0).SetY(value1).SetZ(value2);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform3f(location, value0, value1, value2);
     } while (false);
 
     mEncoder->Uint16(69);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3F_ID);
@@ -2103,12 +2117,14 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_42_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_42_result;
+        Slice<Vec4f> l_v = make<Vec4f>(1);
+        mImports.glUniform4f(location, value0, value1, value2, value3);
+        write(l_v, 0, Vec4f{value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
-        l_uniform.mValue.mVec4f = Vec4f().SetX(value0).SetY(value1).SetZ(value2).SetW(value3);
+        l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform4f(location, value0, value1, value2, value3);
     } while (false);
 
     mEncoder->Uint16(70);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4F_ID);
@@ -2120,101 +2136,96 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
     mEncoder->Float32(value3);
 }
 
-inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* value) {
-    GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values) {
+    GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_43_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_43_result;
-        Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count));
-        read(l_v);
+        Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT;
-        l_uniform.mValue.mF32 = read(l_v, 0);
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform1fv(location, count, value);
+        mImports.glUniform1fv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(71);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM1FV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* value) {
-    GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values) {
+    GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_44_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_44_result;
-        Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 2));
-        read(l_v);
+        Slice<Vec2f> l_v = slice((Vec2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
-        l_uniform.mValue.mVec2f = Vec2f().SetX(read(l_v, 0)).SetY(read(l_v, 1));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform2fv(location, count, value);
+        mImports.glUniform2fv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(72);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM2FV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* value) {
-    GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values) {
+    GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_45_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
-        Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 3));
-        read(l_v);
+        Slice<Vec3f> l_v = slice((Vec3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
-        l_uniform.mValue.mVec3f = Vec3f().SetX(read(l_v, 0)).SetY(read(l_v, 1)).SetZ(read(l_v, 2));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform3fv(location, count, value);
+        mImports.glUniform3fv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(73);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM3FV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
-inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* value) {
-    GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, value);
+inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values) {
+    GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, values);
 
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_46_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
-        Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 4));
-        read(l_v);
+        Slice<Vec4f> l_v = slice((Vec4f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
-        l_uniform.mValue.mVec4f =
-                Vec4f().SetX(read(l_v, 0)).SetY(read(l_v, 1)).SetZ(read(l_v, 2)).SetW(read(l_v, 3));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
-        mImports.glUniform4fv(location, count, value);
+        mImports.glUniform4fv(location, count, values);
     } while (false);
 
     mEncoder->Uint16(74);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM4FV_ID);
     encodeObservations();
     mEncoder->Int32(location);
     mEncoder->Int32(count);
-    mEncoder->Pointer(value);
+    mEncoder->Pointer(values);
 }
 
 inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool transpose,
@@ -2225,14 +2236,11 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_47_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_47_result;
-        Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 4));
-        read(l_v);
+        Slice<Mat2f> l_v = slice((Mat2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
-        l_uniform.mValue.mMat2f = Mat2f()
-                                          .SetCol0(Vec2f().SetX(read(l_v, 0)).SetY(read(l_v, 1)))
-                                          .SetCol1(Vec2f().SetX(read(l_v, 3)).SetY(read(l_v, 4)));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         mImports.glUniformMatrix2fv(location, count, transpose, values);
     } while (false);
@@ -2253,16 +2261,11 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_48_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_48_result;
-        Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 9));
-        read(l_v);
+        Slice<Mat3f> l_v = slice((Mat3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
         l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT3;
-        l_uniform.mValue.mMat3f =
-                Mat3f()
-                        .SetCol0(Vec3f().SetX(read(l_v, 0)).SetY(read(l_v, 1)).SetZ(read(l_v, 2)))
-                        .SetCol1(Vec3f().SetX(read(l_v, 3)).SetY(read(l_v, 4)).SetZ(read(l_v, 5)))
-                        .SetCol2(Vec3f().SetX(read(l_v, 6)).SetY(read(l_v, 7)).SetZ(read(l_v, 8)));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         mImports.glUniformMatrix3fv(location, count, transpose, values);
     } while (false);
@@ -2283,32 +2286,10 @@ inline void GlesSpy::glUniformMatrix4fv(int32_t location, int32_t count, bool tr
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_49_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_49_result;
-        Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 16));
-        read(l_v);
+        Slice<Mat4f> l_v = slice((Mat4f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mValue.mMat4f =
-                Mat4f()
-                        .SetCol0(Vec4f()
-                                         .SetX(read(l_v, 0))
-                                         .SetY(read(l_v, 1))
-                                         .SetZ(read(l_v, 2))
-                                         .SetW(read(l_v, 3)))
-                        .SetCol1(Vec4f()
-                                         .SetX(read(l_v, 4))
-                                         .SetY(read(l_v, 5))
-                                         .SetZ(read(l_v, 6))
-                                         .SetW(read(l_v, 7)))
-                        .SetCol2(Vec4f()
-                                         .SetX(read(l_v, 8))
-                                         .SetY(read(l_v, 9))
-                                         .SetZ(read(l_v, 10))
-                                         .SetW(read(l_v, 11)))
-                        .SetCol3(Vec4f()
-                                         .SetX(read(l_v, 12))
-                                         .SetY(read(l_v, 13))
-                                         .SetZ(read(l_v, 14))
-                                         .SetW(read(l_v, 15)));
+        l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         mImports.glUniformMatrix4fv(location, count, transpose, values);
     } while (false);

@@ -15,6 +15,15 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
+type Vec2i S32ː2ᵃ
+type Vec3i S32ː3ᵃ
+type Vec4i S32ː4ᵃ
+type Vec2f F32ː2ᵃ
+type Vec3f F32ː3ᵃ
+type Vec4f F32ː4ᵃ
+type Mat2f Vec2fː2ᵃ
+type Mat3f Vec3fː3ᵃ
+type Mat4f Vec4fː4ᵃ
 type RenderbufferId uint32
 type TextureId uint32
 type FramebufferId uint32
@@ -1018,6 +1027,366 @@ func (p F32ᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
 }
 
+// Vec2iᵖ is a pointer to a Vec2i element.
+type Vec2iᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec2iᵖ returns a Vec2iᵖ that points to addr in the application pool.
+func NewVec2iᵖ(addr memory.Pointer) Vec2iᵖ {
+	return Vec2iᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec2iᵖ points to.
+func (p Vec2iᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Read reads and returns the Vec2i element at the pointer.
+func (p Vec2iᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec2i {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec2i element at the pointer.
+func (p Vec2iᵖ) Write(value Vec2i, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec2i{value}, ϟs)
+}
+
+// Slice returns a new Vec2iˢ from the pointer using start and end indices.
+func (p Vec2iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec2iˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec2iᵖ pointer.
+func (p Vec2iᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Vec3iᵖ is a pointer to a Vec3i element.
+type Vec3iᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec3iᵖ returns a Vec3iᵖ that points to addr in the application pool.
+func NewVec3iᵖ(addr memory.Pointer) Vec3iᵖ {
+	return Vec3iᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec3iᵖ points to.
+func (p Vec3iᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Read reads and returns the Vec3i element at the pointer.
+func (p Vec3iᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec3i {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec3i element at the pointer.
+func (p Vec3iᵖ) Write(value Vec3i, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec3i{value}, ϟs)
+}
+
+// Slice returns a new Vec3iˢ from the pointer using start and end indices.
+func (p Vec3iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec3iˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec3iᵖ pointer.
+func (p Vec3iᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Vec4iᵖ is a pointer to a Vec4i element.
+type Vec4iᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec4iᵖ returns a Vec4iᵖ that points to addr in the application pool.
+func NewVec4iᵖ(addr memory.Pointer) Vec4iᵖ {
+	return Vec4iᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec4iᵖ points to.
+func (p Vec4iᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Read reads and returns the Vec4i element at the pointer.
+func (p Vec4iᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec4i {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec4i element at the pointer.
+func (p Vec4iᵖ) Write(value Vec4i, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec4i{value}, ϟs)
+}
+
+// Slice returns a new Vec4iˢ from the pointer using start and end indices.
+func (p Vec4iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec4iˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec4iᵖ pointer.
+func (p Vec4iᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Vec2fᵖ is a pointer to a Vec2f element.
+type Vec2fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec2fᵖ returns a Vec2fᵖ that points to addr in the application pool.
+func NewVec2fᵖ(addr memory.Pointer) Vec2fᵖ {
+	return Vec2fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec2fᵖ points to.
+func (p Vec2fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Read reads and returns the Vec2f element at the pointer.
+func (p Vec2fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec2f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec2f element at the pointer.
+func (p Vec2fᵖ) Write(value Vec2f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec2f{value}, ϟs)
+}
+
+// Slice returns a new Vec2fˢ from the pointer using start and end indices.
+func (p Vec2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec2fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec2fᵖ pointer.
+func (p Vec2fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Vec3fᵖ is a pointer to a Vec3f element.
+type Vec3fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec3fᵖ returns a Vec3fᵖ that points to addr in the application pool.
+func NewVec3fᵖ(addr memory.Pointer) Vec3fᵖ {
+	return Vec3fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec3fᵖ points to.
+func (p Vec3fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Read reads and returns the Vec3f element at the pointer.
+func (p Vec3fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec3f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec3f element at the pointer.
+func (p Vec3fᵖ) Write(value Vec3f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec3f{value}, ϟs)
+}
+
+// Slice returns a new Vec3fˢ from the pointer using start and end indices.
+func (p Vec3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec3fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec3fᵖ pointer.
+func (p Vec3fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Vec4fᵖ is a pointer to a Vec4f element.
+type Vec4fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewVec4fᵖ returns a Vec4fᵖ that points to addr in the application pool.
+func NewVec4fᵖ(addr memory.Pointer) Vec4fᵖ {
+	return Vec4fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Vec4fᵖ points to.
+func (p Vec4fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Read reads and returns the Vec4f element at the pointer.
+func (p Vec4fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Vec4f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Vec4f element at the pointer.
+func (p Vec4fᵖ) Write(value Vec4f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Vec4f{value}, ϟs)
+}
+
+// Slice returns a new Vec4fˢ from the pointer using start and end indices.
+func (p Vec4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Vec4fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Vec4fᵖ pointer.
+func (p Vec4fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Mat2fᵖ is a pointer to a Mat2f element.
+type Mat2fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewMat2fᵖ returns a Mat2fᵖ that points to addr in the application pool.
+func NewMat2fᵖ(addr memory.Pointer) Mat2fᵖ {
+	return Mat2fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Mat2fᵖ points to.
+func (p Mat2fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 2
+}
+
+// Read reads and returns the Mat2f element at the pointer.
+func (p Mat2fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Mat2f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Mat2f element at the pointer.
+func (p Mat2fᵖ) Write(value Mat2f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Mat2f{value}, ϟs)
+}
+
+// Slice returns a new Mat2fˢ from the pointer using start and end indices.
+func (p Mat2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat2fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Mat2fᵖ pointer.
+func (p Mat2fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Mat3fᵖ is a pointer to a Mat3f element.
+type Mat3fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewMat3fᵖ returns a Mat3fᵖ that points to addr in the application pool.
+func NewMat3fᵖ(addr memory.Pointer) Mat3fᵖ {
+	return Mat3fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Mat3fᵖ points to.
+func (p Mat3fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 3
+}
+
+// Read reads and returns the Mat3f element at the pointer.
+func (p Mat3fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Mat3f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Mat3f element at the pointer.
+func (p Mat3fᵖ) Write(value Mat3f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Mat3f{value}, ϟs)
+}
+
+// Slice returns a new Mat3fˢ from the pointer using start and end indices.
+func (p Mat3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat3fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Mat3fᵖ pointer.
+func (p Mat3fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+// Mat4fᵖ is a pointer to a Mat4f element.
+type Mat4fᵖ struct {
+	binary.Generate
+	Address memory.Pointer
+	Pool    memory.PoolID
+}
+
+// NewMat4fᵖ returns a Mat4fᵖ that points to addr in the application pool.
+func NewMat4fᵖ(addr memory.Pointer) Mat4fᵖ {
+	return Mat4fᵖ{Address: addr, Pool: memory.ApplicationPool}
+}
+
+// ElementSize returns the size in bytes of an element that Mat4fᵖ points to.
+func (p Mat4fᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 4
+}
+
+// Read reads and returns the Mat4f element at the pointer.
+func (p Mat4fᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Mat4f {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Mat4f element at the pointer.
+func (p Mat4fᵖ) Write(value Mat4f, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Mat4f{value}, ϟs)
+}
+
+// Slice returns a new Mat4fˢ from the pointer using start and end indices.
+func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Mat4fˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
+}
+
+// String returns a string description of the Mat4fᵖ pointer.
+func (p Mat4fᵖ) String() string {
+	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
 // TextureIdᵖ is a pointer to a TextureId element.
 type TextureIdᵖ struct {
 	binary.Generate
@@ -1464,6 +1833,43 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 // String returns a string description of the U64ᵖ pointer.
 func (p U64ᵖ) String() string {
 	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+}
+
+type S32ː2ᵃ struct {
+	binary.Generate
+	Elements [2]int32
+}
+type S32ː3ᵃ struct {
+	binary.Generate
+	Elements [3]int32
+}
+type S32ː4ᵃ struct {
+	binary.Generate
+	Elements [4]int32
+}
+type F32ː2ᵃ struct {
+	binary.Generate
+	Elements [2]float32
+}
+type F32ː3ᵃ struct {
+	binary.Generate
+	Elements [3]float32
+}
+type F32ː4ᵃ struct {
+	binary.Generate
+	Elements [4]float32
+}
+type Vec2fː2ᵃ struct {
+	binary.Generate
+	Elements [2]Vec2f
+}
+type Vec3fː3ᵃ struct {
+	binary.Generate
+	Elements [3]Vec3f
+}
+type Vec4fː4ᵃ struct {
+	binary.Generate
+	Elements [4]Vec4f
 }
 
 // Boolˢ is a slice of bool.
@@ -2859,6 +3265,366 @@ func (s Intˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
+// Mat2fˢ is a slice of Mat2f.
+type Mat2fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat2fˢ returns a Mat2fˢ backed by a new memory pool.
+func MakeMat2fˢ(count uint64, ϟs *gfxapi.State) Mat2fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat2fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Mat2fˢ in a new memory pool.
+func (s Mat2fˢ) Clone(ϟs *gfxapi.State) Mat2fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat2fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat2fˢ points to.
+func (s Mat2fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2 * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat2fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat2fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat2fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat2fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsMat2fˢ returns s cast to a Mat2fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat2fˢ(s Slice, ϟs *gfxapi.State) Mat2fˢ {
+	out := Mat2fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat2f elements in this Mat2fˢ.
+func (s Mat2fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Mat2f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat2f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Mat2fˢ) Write(src []Mat2f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat2fˢ) Copy(src Mat2fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Mat2fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Mat2fᵖ to the i'th element in this Mat2fˢ.
+func (s Mat2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2fᵖ {
+	return Mat2fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Mat2fˢ using start and end indices.
+func (s Mat2fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat2fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Mat2fˢ slice.
+func (s Mat2fˢ) String() string {
+	return fmt.Sprintf("Mat2f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Mat3fˢ is a slice of Mat3f.
+type Mat3fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat3fˢ returns a Mat3fˢ backed by a new memory pool.
+func MakeMat3fˢ(count uint64, ϟs *gfxapi.State) Mat3fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat3fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Mat3fˢ in a new memory pool.
+func (s Mat3fˢ) Clone(ϟs *gfxapi.State) Mat3fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat3fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat3fˢ points to.
+func (s Mat3fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3 * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat3fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat3fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat3fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat3fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsMat3fˢ returns s cast to a Mat3fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat3fˢ(s Slice, ϟs *gfxapi.State) Mat3fˢ {
+	out := Mat3fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat3f elements in this Mat3fˢ.
+func (s Mat3fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Mat3f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat3f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Mat3fˢ) Write(src []Mat3f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat3fˢ) Copy(src Mat3fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Mat3fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Mat3fᵖ to the i'th element in this Mat3fˢ.
+func (s Mat3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3fᵖ {
+	return Mat3fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Mat3fˢ using start and end indices.
+func (s Mat3fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat3fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Mat3fˢ slice.
+func (s Mat3fˢ) String() string {
+	return fmt.Sprintf("Mat3f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Mat4fˢ is a slice of Mat4f.
+type Mat4fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeMat4fˢ returns a Mat4fˢ backed by a new memory pool.
+func MakeMat4fˢ(count uint64, ϟs *gfxapi.State) Mat4fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Mat4fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Mat4fˢ in a new memory pool.
+func (s Mat4fˢ) Clone(ϟs *gfxapi.State) Mat4fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Mat4fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Mat4fˢ points to.
+func (s Mat4fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4 * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Mat4fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Mat4fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Mat4fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Mat4fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsMat4fˢ returns s cast to a Mat4fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsMat4fˢ(s Slice, ϟs *gfxapi.State) Mat4fˢ {
+	out := Mat4fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Mat4f elements in this Mat4fˢ.
+func (s Mat4fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Mat4f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Mat4f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Mat4fˢ) Write(src []Mat4f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Mat4fˢ) Copy(src Mat4fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Mat4fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Mat4fᵖ to the i'th element in this Mat4fˢ.
+func (s Mat4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4fᵖ {
+	return Mat4fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Mat4fˢ using start and end indices.
+func (s Mat4fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Mat4fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Mat4fˢ slice.
+func (s Mat4fˢ) String() string {
+	return fmt.Sprintf("Mat4f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
 // QueryIdˢ is a slice of QueryId.
 type QueryIdˢ struct {
 	binary.Generate
@@ -4199,6 +4965,726 @@ func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 // String returns a string description of the U8ˢ slice.
 func (s U8ˢ) String() string {
 	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec2fˢ is a slice of Vec2f.
+type Vec2fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec2fˢ returns a Vec2fˢ backed by a new memory pool.
+func MakeVec2fˢ(count uint64, ϟs *gfxapi.State) Vec2fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec2fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec2fˢ in a new memory pool.
+func (s Vec2fˢ) Clone(ϟs *gfxapi.State) Vec2fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec2fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec2fˢ points to.
+func (s Vec2fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec2fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec2fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec2fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec2fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec2fˢ returns s cast to a Vec2fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec2fˢ(s Slice, ϟs *gfxapi.State) Vec2fˢ {
+	out := Vec2fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec2f elements in this Vec2fˢ.
+func (s Vec2fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec2f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec2fˢ) Write(src []Vec2f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec2fˢ) Copy(src Vec2fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec2fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec2fᵖ to the i'th element in this Vec2fˢ.
+func (s Vec2fˢ) Index(i uint64, ϟs *gfxapi.State) Vec2fᵖ {
+	return Vec2fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec2fˢ using start and end indices.
+func (s Vec2fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec2fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec2fˢ slice.
+func (s Vec2fˢ) String() string {
+	return fmt.Sprintf("Vec2f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec2iˢ is a slice of Vec2i.
+type Vec2iˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec2iˢ returns a Vec2iˢ backed by a new memory pool.
+func MakeVec2iˢ(count uint64, ϟs *gfxapi.State) Vec2iˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec2iˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec2iˢ in a new memory pool.
+func (s Vec2iˢ) Clone(ϟs *gfxapi.State) Vec2iˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec2iˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec2iˢ points to.
+func (s Vec2iˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 2
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec2iˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec2iˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec2iˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec2iˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec2iˢ returns s cast to a Vec2iˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec2iˢ(s Slice, ϟs *gfxapi.State) Vec2iˢ {
+	out := Vec2iˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec2i elements in this Vec2iˢ.
+func (s Vec2iˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec2i {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec2i, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec2iˢ) Write(src []Vec2i, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec2iˢ) Copy(src Vec2iˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec2iˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec2iᵖ to the i'th element in this Vec2iˢ.
+func (s Vec2iˢ) Index(i uint64, ϟs *gfxapi.State) Vec2iᵖ {
+	return Vec2iᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec2iˢ using start and end indices.
+func (s Vec2iˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec2iˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec2iˢ slice.
+func (s Vec2iˢ) String() string {
+	return fmt.Sprintf("Vec2i(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec3fˢ is a slice of Vec3f.
+type Vec3fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec3fˢ returns a Vec3fˢ backed by a new memory pool.
+func MakeVec3fˢ(count uint64, ϟs *gfxapi.State) Vec3fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec3fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec3fˢ in a new memory pool.
+func (s Vec3fˢ) Clone(ϟs *gfxapi.State) Vec3fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec3fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec3fˢ points to.
+func (s Vec3fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec3fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec3fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec3fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec3fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec3fˢ returns s cast to a Vec3fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec3fˢ(s Slice, ϟs *gfxapi.State) Vec3fˢ {
+	out := Vec3fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec3f elements in this Vec3fˢ.
+func (s Vec3fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec3f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec3fˢ) Write(src []Vec3f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec3fˢ) Copy(src Vec3fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec3fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec3fᵖ to the i'th element in this Vec3fˢ.
+func (s Vec3fˢ) Index(i uint64, ϟs *gfxapi.State) Vec3fᵖ {
+	return Vec3fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec3fˢ using start and end indices.
+func (s Vec3fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec3fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec3fˢ slice.
+func (s Vec3fˢ) String() string {
+	return fmt.Sprintf("Vec3f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec3iˢ is a slice of Vec3i.
+type Vec3iˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec3iˢ returns a Vec3iˢ backed by a new memory pool.
+func MakeVec3iˢ(count uint64, ϟs *gfxapi.State) Vec3iˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec3iˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec3iˢ in a new memory pool.
+func (s Vec3iˢ) Clone(ϟs *gfxapi.State) Vec3iˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec3iˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec3iˢ points to.
+func (s Vec3iˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 3
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec3iˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec3iˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec3iˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec3iˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec3iˢ returns s cast to a Vec3iˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec3iˢ(s Slice, ϟs *gfxapi.State) Vec3iˢ {
+	out := Vec3iˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec3i elements in this Vec3iˢ.
+func (s Vec3iˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec3i {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec3i, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec3iˢ) Write(src []Vec3i, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec3iˢ) Copy(src Vec3iˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec3iˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec3iᵖ to the i'th element in this Vec3iˢ.
+func (s Vec3iˢ) Index(i uint64, ϟs *gfxapi.State) Vec3iᵖ {
+	return Vec3iᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec3iˢ using start and end indices.
+func (s Vec3iˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec3iˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec3iˢ slice.
+func (s Vec3iˢ) String() string {
+	return fmt.Sprintf("Vec3i(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec4fˢ is a slice of Vec4f.
+type Vec4fˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec4fˢ returns a Vec4fˢ backed by a new memory pool.
+func MakeVec4fˢ(count uint64, ϟs *gfxapi.State) Vec4fˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec4fˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec4fˢ in a new memory pool.
+func (s Vec4fˢ) Clone(ϟs *gfxapi.State) Vec4fˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec4fˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec4fˢ points to.
+func (s Vec4fˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec4fˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec4fˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec4fˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec4fˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec4fˢ returns s cast to a Vec4fˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec4fˢ(s Slice, ϟs *gfxapi.State) Vec4fˢ {
+	out := Vec4fˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec4f elements in this Vec4fˢ.
+func (s Vec4fˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec4f {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4f, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec4fˢ) Write(src []Vec4f, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec4fˢ) Copy(src Vec4fˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec4fˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec4fᵖ to the i'th element in this Vec4fˢ.
+func (s Vec4fˢ) Index(i uint64, ϟs *gfxapi.State) Vec4fᵖ {
+	return Vec4fᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec4fˢ using start and end indices.
+func (s Vec4fˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4fˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec4fˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec4fˢ slice.
+func (s Vec4fˢ) String() string {
+	return fmt.Sprintf("Vec4f(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+}
+
+// Vec4iˢ is a slice of Vec4i.
+type Vec4iˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVec4iˢ returns a Vec4iˢ backed by a new memory pool.
+func MakeVec4iˢ(count uint64, ϟs *gfxapi.State) Vec4iˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return Vec4iˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+}
+
+// Clone returns a copy of the Vec4iˢ in a new memory pool.
+func (s Vec4iˢ) Clone(ϟs *gfxapi.State) Vec4iˢ {
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := Vec4iˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that Vec4iˢ points to.
+func (s Vec4iˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4) * 4
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s Vec4iˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s Vec4iˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s Vec4iˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s Vec4iˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+}
+
+// AsVec4iˢ returns s cast to a Vec4iˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVec4iˢ(s Slice, ϟs *gfxapi.State) Vec4iˢ {
+	out := Vec4iˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the Vec4i elements in this Vec4iˢ.
+func (s Vec4iˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Vec4i {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Vec4i, s.Count)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of dst.Count and src.Count.
+func (dst Vec4iˢ) Write(src []Vec4i, ϟs *gfxapi.State) uint64 {
+	count := min(dst.Count, uint64(len(src)))
+	dst = dst.Slice(0, count, ϟs)
+	e := dst.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst Vec4iˢ) Copy(src Vec4iˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Vec4iˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	return dst, src
+}
+
+// Index returns a Vec4iᵖ to the i'th element in this Vec4iˢ.
+func (s Vec4iˢ) Index(i uint64, ϟs *gfxapi.State) Vec4iᵖ {
+	return Vec4iᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+}
+
+// Slice returns a sub-slice from the Vec4iˢ using start and end indices.
+func (s Vec4iˢ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return Vec4iˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+}
+
+// String returns a string description of the Vec4iˢ slice.
+func (s Vec4iˢ) String() string {
+	return fmt.Sprintf("Vec4i(%v@%v)[%d]", s.Base, s.Pool, s.Count)
 }
 
 // VertexArrayIdˢ is a slice of VertexArrayId.
@@ -7256,11 +8742,11 @@ type GlUniform1iv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        S32ᵖ
+	Values       S32ᵖ
 }
 
 func (a *GlUniform1iv) String() string {
-	return fmt.Sprintf("glUniform1iv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform1iv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7291,11 +8777,11 @@ type GlUniform2iv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        S32ᵖ
+	Values       S32ᵖ
 }
 
 func (a *GlUniform2iv) String() string {
-	return fmt.Sprintf("glUniform2iv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform2iv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7326,11 +8812,11 @@ type GlUniform3iv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        S32ᵖ
+	Values       S32ᵖ
 }
 
 func (a *GlUniform3iv) String() string {
-	return fmt.Sprintf("glUniform3iv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform3iv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7361,11 +8847,11 @@ type GlUniform4iv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        S32ᵖ
+	Values       S32ᵖ
 }
 
 func (a *GlUniform4iv) String() string {
-	return fmt.Sprintf("glUniform4iv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform4iv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7538,11 +9024,11 @@ type GlUniform1fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        F32ᵖ
+	Values       F32ᵖ
 }
 
 func (a *GlUniform1fv) String() string {
-	return fmt.Sprintf("glUniform1fv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform1fv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7573,11 +9059,11 @@ type GlUniform2fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        F32ᵖ
+	Values       F32ᵖ
 }
 
 func (a *GlUniform2fv) String() string {
-	return fmt.Sprintf("glUniform2fv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform2fv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7608,11 +9094,11 @@ type GlUniform3fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        F32ᵖ
+	Values       F32ᵖ
 }
 
 func (a *GlUniform3fv) String() string {
-	return fmt.Sprintf("glUniform3fv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform3fv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -7643,11 +9129,11 @@ type GlUniform4fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Value        F32ᵖ
+	Values       F32ᵖ
 }
 
 func (a *GlUniform4fv) String() string {
-	return fmt.Sprintf("glUniform4fv(location: %v, count: %v, value: %v)", a.Location, a.Count, a.Value)
+	return fmt.Sprintf("glUniform4fv(location: %v, count: %v, values: %v)", a.Location, a.Count, a.Values)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -12319,182 +13805,6 @@ func (c *VertexAttribute) Init() {
 func (c *VertexAttribute) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
-// class Vec2i
-////////////////////////////////////////////////////////////////////////////////
-type Vec2i struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         int32
-	Y         int32
-}
-
-func (c *Vec2i) Init() {
-}
-func (c *Vec2i) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Vec3i
-////////////////////////////////////////////////////////////////////////////////
-type Vec3i struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         int32
-	Y         int32
-	Z         int32
-}
-
-func (c *Vec3i) Init() {
-}
-func (c *Vec3i) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Vec4i
-////////////////////////////////////////////////////////////////////////////////
-type Vec4i struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         int32
-	Y         int32
-	Z         int32
-	W         int32
-}
-
-func (c *Vec4i) Init() {
-}
-func (c *Vec4i) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Vec2f
-////////////////////////////////////////////////////////////////////////////////
-type Vec2f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         float32
-	Y         float32
-}
-
-func (c *Vec2f) Init() {
-}
-func (c *Vec2f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Vec3f
-////////////////////////////////////////////////////////////////////////////////
-type Vec3f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         float32
-	Y         float32
-	Z         float32
-}
-
-func (c *Vec3f) Init() {
-}
-func (c *Vec3f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Vec4f
-////////////////////////////////////////////////////////////////////////////////
-type Vec4f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	X         float32
-	Y         float32
-	Z         float32
-	W         float32
-}
-
-func (c *Vec4f) Init() {
-}
-func (c *Vec4f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Mat2f
-////////////////////////////////////////////////////////////////////////////////
-type Mat2f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	Col0      Vec2f
-	Col1      Vec2f
-}
-
-func (c *Mat2f) Init() {
-	c.Col0.Init()
-	c.Col1.Init()
-}
-func (c *Mat2f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Mat3f
-////////////////////////////////////////////////////////////////////////////////
-type Mat3f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	Col0      Vec3f
-	Col1      Vec3f
-	Col2      Vec3f
-}
-
-func (c *Mat3f) Init() {
-	c.Col0.Init()
-	c.Col1.Init()
-	c.Col2.Init()
-}
-func (c *Mat3f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class Mat4f
-////////////////////////////////////////////////////////////////////////////////
-type Mat4f struct {
-	binary.Generate
-	CreatedAt atom.ID
-	Col0      Vec4f
-	Col1      Vec4f
-	Col2      Vec4f
-	Col3      Vec4f
-}
-
-func (c *Mat4f) Init() {
-	c.Col0.Init()
-	c.Col1.Init()
-	c.Col2.Init()
-	c.Col3.Init()
-}
-func (c *Mat4f) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
-// class UniformValue
-////////////////////////////////////////////////////////////////////////////////
-type UniformValue struct {
-	binary.Generate
-	CreatedAt atom.ID
-	F32       float32
-	Vec2f     Vec2f
-	Vec3f     Vec3f
-	Vec4f     Vec4f
-	S32       int32
-	Vec2i     Vec2i
-	Vec3i     Vec3i
-	Vec4i     Vec4i
-	Mat2f     Mat2f
-	Mat3f     Mat3f
-	Mat4f     Mat4f
-}
-
-func (c *UniformValue) Init() {
-	c.Vec2f.Init()
-	c.Vec3f.Init()
-	c.Vec4f.Init()
-	c.Vec2i.Init()
-	c.Vec3i.Init()
-	c.Vec4i.Init()
-	c.Mat2f.Init()
-	c.Mat3f.Init()
-	c.Mat4f.Init()
-}
-func (c *UniformValue) GetCreatedAt() atom.ID { return c.CreatedAt }
-
-////////////////////////////////////////////////////////////////////////////////
 // class Uniform
 ////////////////////////////////////////////////////////////////////////////////
 type Uniform struct {
@@ -12502,11 +13812,10 @@ type Uniform struct {
 	CreatedAt atom.ID
 	Name      string
 	Type      ShaderUniformType
-	Value     UniformValue
+	Value     U8ˢ
 }
 
 func (c *Uniform) Init() {
-	c.Value.Init()
 }
 func (c *Uniform) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -14405,17 +15714,17 @@ func NewGlUniform3i(Location UniformLocation, Value0 int32, Value1 int32, Value2
 func NewGlUniform4i(Location UniformLocation, Value0 int32, Value1 int32, Value2 int32, Value3 int32) *GlUniform4i {
 	return &GlUniform4i{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlUniform1iv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform1iv {
-	return &GlUniform1iv{Location: Location, Count: Count, Value: NewS32ᵖ(Value)}
+func NewGlUniform1iv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform1iv {
+	return &GlUniform1iv{Location: Location, Count: Count, Values: NewS32ᵖ(Values)}
 }
-func NewGlUniform2iv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform2iv {
-	return &GlUniform2iv{Location: Location, Count: Count, Value: NewS32ᵖ(Value)}
+func NewGlUniform2iv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform2iv {
+	return &GlUniform2iv{Location: Location, Count: Count, Values: NewS32ᵖ(Values)}
 }
-func NewGlUniform3iv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform3iv {
-	return &GlUniform3iv{Location: Location, Count: Count, Value: NewS32ᵖ(Value)}
+func NewGlUniform3iv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform3iv {
+	return &GlUniform3iv{Location: Location, Count: Count, Values: NewS32ᵖ(Values)}
 }
-func NewGlUniform4iv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform4iv {
-	return &GlUniform4iv{Location: Location, Count: Count, Value: NewS32ᵖ(Value)}
+func NewGlUniform4iv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform4iv {
+	return &GlUniform4iv{Location: Location, Count: Count, Values: NewS32ᵖ(Values)}
 }
 func NewGlUniform1f(Location UniformLocation, Value float32) *GlUniform1f {
 	return &GlUniform1f{Location: Location, Value: Value}
@@ -14429,17 +15738,17 @@ func NewGlUniform3f(Location UniformLocation, Value0 float32, Value1 float32, Va
 func NewGlUniform4f(Location UniformLocation, Value0 float32, Value1 float32, Value2 float32, Value3 float32) *GlUniform4f {
 	return &GlUniform4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
-func NewGlUniform1fv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform1fv {
-	return &GlUniform1fv{Location: Location, Count: Count, Value: NewF32ᵖ(Value)}
+func NewGlUniform1fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform1fv {
+	return &GlUniform1fv{Location: Location, Count: Count, Values: NewF32ᵖ(Values)}
 }
-func NewGlUniform2fv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform2fv {
-	return &GlUniform2fv{Location: Location, Count: Count, Value: NewF32ᵖ(Value)}
+func NewGlUniform2fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform2fv {
+	return &GlUniform2fv{Location: Location, Count: Count, Values: NewF32ᵖ(Values)}
 }
-func NewGlUniform3fv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform3fv {
-	return &GlUniform3fv{Location: Location, Count: Count, Value: NewF32ᵖ(Value)}
+func NewGlUniform3fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform3fv {
+	return &GlUniform3fv{Location: Location, Count: Count, Values: NewF32ᵖ(Values)}
 }
-func NewGlUniform4fv(Location UniformLocation, Count int32, Value memory.Pointer) *GlUniform4fv {
-	return &GlUniform4fv{Location: Location, Count: Count, Value: NewF32ᵖ(Value)}
+func NewGlUniform4fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform4fv {
+	return &GlUniform4fv{Location: Location, Count: Count, Values: NewF32ᵖ(Values)}
 }
 func NewGlUniformMatrix2fv(Location UniformLocation, Count int32, Transpose bool, Values memory.Pointer) *GlUniformMatrix2fv {
 	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: NewF32ᵖ(Values)}

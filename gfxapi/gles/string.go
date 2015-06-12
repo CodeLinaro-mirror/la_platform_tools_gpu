@@ -21,43 +21,48 @@ func (c Color) String() string {
 }
 
 func (v Vec2f) String() string {
-	return fmt.Sprintf("(% 6f, % 6f)", v.X, v.Y)
+	return fmt.Sprintf("(% 6f, % 6f)",
+		v.Elements[0], v.Elements[1])
 }
 
 func (v Vec3f) String() string {
-	return fmt.Sprintf("(% 6f, % 6f, % 6f)", v.X, v.Y, v.Z)
+	return fmt.Sprintf("(% 6f, % 6f, % 6f)",
+		v.Elements[0], v.Elements[1], v.Elements[2])
 }
 
 func (v Vec4f) String() string {
-	return fmt.Sprintf("(% 6f, % 6f, % 6f, % 6f)", v.X, v.Y, v.Z, v.W)
+	return fmt.Sprintf("(% 6f, % 6f, % 6f, % 6f)",
+		v.Elements[0], v.Elements[1], v.Elements[2], v.Elements[3])
 }
 
 func (v Vec2i) String() string {
-	return fmt.Sprintf("(% 6d, % 6d)", v.X, v.Y)
+	return fmt.Sprintf("(% 6d, % 6d)",
+		v.Elements[0], v.Elements[1])
 }
 
 func (v Vec3i) String() string {
-	return fmt.Sprintf("(% 6d, % 6d, % 6d)", v.X, v.Y, v.Z)
+	return fmt.Sprintf("(% 6d, % 6d, % 6d)",
+		v.Elements[0], v.Elements[1], v.Elements[2])
 }
 
 func (v Vec4i) String() string {
-	return fmt.Sprintf("(% 6d, % 6d, % 6d, % 6d)", v.X, v.Y, v.Z, v.W)
+	return fmt.Sprintf("(% 6d, % 6d, % 6d, % 6d)",
+		v.Elements[0], v.Elements[1], v.Elements[2], v.Elements[3])
 }
 
 func (m Mat2f) String() string {
-	return fmt.Sprintf("[%s, %s]", m.Col0, m.Col1)
+	return fmt.Sprintf("[%v, %v]",
+		m.Elements[0], m.Elements[1])
 }
 
 func (m Mat3f) String() string {
-	return fmt.Sprintf("[%s, %s, %s]", m.Col0, m.Col1, m.Col2)
+	return fmt.Sprintf("[%v, %v, %v]",
+		m.Elements[0], m.Elements[1], m.Elements[2])
 }
 
 func (m Mat4f) String() string {
-	return fmt.Sprintf("[%s, %s, %s, %s]", m.Col0, m.Col1, m.Col2, m.Col3)
-}
-
-func (u Uniform) String() string {
-	return fmt.Sprintf("%v %v", u.Name, u.Value)
+	return fmt.Sprintf("[%v, %v, %v, %v]",
+		m.Elements[0], m.Elements[1], m.Elements[2], m.Elements[3])
 }
 
 func (a VertexAttributeArray) String() string {

@@ -51,16 +51,6 @@ func init() {
 	registry.Add((*Framebuffer)(nil).Class())
 	registry.Add((*Shader)(nil).Class())
 	registry.Add((*VertexAttribute)(nil).Class())
-	registry.Add((*Vec2f)(nil).Class())
-	registry.Add((*Vec3f)(nil).Class())
-	registry.Add((*Vec4f)(nil).Class())
-	registry.Add((*Vec2i)(nil).Class())
-	registry.Add((*Vec3i)(nil).Class())
-	registry.Add((*Vec4i)(nil).Class())
-	registry.Add((*Mat2f)(nil).Class())
-	registry.Add((*Mat3f)(nil).Class())
-	registry.Add((*Mat4f)(nil).Class())
-	registry.Add((*UniformValue)(nil).Class())
 	registry.Add((*Uniform)(nil).Class())
 	registry.Add((*Program)(nil).Class())
 	registry.Add((*VertexArray)(nil).Class())
@@ -81,6 +71,9 @@ func init() {
 	registry.Add((*EglQuerySurface)(nil).Class())
 	registry.Add((*Voidᵖ)(nil).Class())
 	registry.Add((*EglSwapBuffers)(nil).Class())
+	registry.Add((*F32ː2ᵃ)(nil).Class())
+	registry.Add((*F32ː3ᵃ)(nil).Class())
+	registry.Add((*F32ː4ᵃ)(nil).Class())
 	registry.Add((*F32ˢ)(nil).Class())
 	registry.Add((*F32ᵖ)(nil).Class())
 	registry.Add((*FlushPostBuffer)(nil).Class())
@@ -294,10 +287,25 @@ func init() {
 	registry.Add((*HDC)(nil).Class())
 	registry.Add((*Intˢ)(nil).Class())
 	registry.Add((*Intᵖ)(nil).Class())
+	registry.Add((*Vec2f)(nil).Class())
+	registry.Add((*Mat2f)(nil).Class())
+	registry.Add((*Mat2fˢ)(nil).Class())
+	registry.Add((*Mat2fᵖ)(nil).Class())
+	registry.Add((*Vec3f)(nil).Class())
+	registry.Add((*Mat3f)(nil).Class())
+	registry.Add((*Mat3fˢ)(nil).Class())
+	registry.Add((*Mat3fᵖ)(nil).Class())
+	registry.Add((*Vec4f)(nil).Class())
+	registry.Add((*Mat4f)(nil).Class())
+	registry.Add((*Mat4fˢ)(nil).Class())
+	registry.Add((*Mat4fᵖ)(nil).Class())
 	registry.Add((*QueryIdˢ)(nil).Class())
 	registry.Add((*RenderbufferIdˢ)(nil).Class())
 	registry.Add((*ReplayBindRenderer)(nil).Class())
 	registry.Add((*ReplayCreateRenderer)(nil).Class())
+	registry.Add((*S32ː2ᵃ)(nil).Class())
+	registry.Add((*S32ː3ᵃ)(nil).Class())
+	registry.Add((*S32ː4ᵃ)(nil).Class())
 	registry.Add((*S32ˢ)(nil).Class())
 	registry.Add((*S64ˢ)(nil).Class())
 	registry.Add((*ShaderAttribTypeˢ)(nil).Class())
@@ -309,6 +317,24 @@ func init() {
 	registry.Add((*U32ˢ)(nil).Class())
 	registry.Add((*U64ˢ)(nil).Class())
 	registry.Add((*U8ᵖ)(nil).Class())
+	registry.Add((*Vec2fː2ᵃ)(nil).Class())
+	registry.Add((*Vec2fˢ)(nil).Class())
+	registry.Add((*Vec2fᵖ)(nil).Class())
+	registry.Add((*Vec2i)(nil).Class())
+	registry.Add((*Vec2iˢ)(nil).Class())
+	registry.Add((*Vec2iᵖ)(nil).Class())
+	registry.Add((*Vec3fː3ᵃ)(nil).Class())
+	registry.Add((*Vec3fˢ)(nil).Class())
+	registry.Add((*Vec3fᵖ)(nil).Class())
+	registry.Add((*Vec3i)(nil).Class())
+	registry.Add((*Vec3iˢ)(nil).Class())
+	registry.Add((*Vec3iᵖ)(nil).Class())
+	registry.Add((*Vec4fː4ᵃ)(nil).Class())
+	registry.Add((*Vec4fˢ)(nil).Class())
+	registry.Add((*Vec4fᵖ)(nil).Class())
+	registry.Add((*Vec4i)(nil).Class())
+	registry.Add((*Vec4iˢ)(nil).Class())
+	registry.Add((*Vec4iᵖ)(nil).Class())
 	registry.Add((*VertexArrayIdˢ)(nil).Class())
 	registry.Add((*Voidˢ)(nil).Class())
 	registry.Add((*WglCreateContext)(nil).Class())
@@ -353,17 +379,7 @@ var (
 	binaryIDFramebuffer                            = binary.ID{0xb2, 0x34, 0xfe, 0x22, 0x59, 0xe9, 0xe0, 0xaa, 0x31, 0xca, 0xad, 0xc9, 0x51, 0x2a, 0x24, 0x04, 0xb4, 0xfd, 0xa3, 0xa4}
 	binaryIDShader                                 = binary.ID{0x40, 0x98, 0xcd, 0x17, 0xd2, 0xcf, 0x4f, 0x55, 0x35, 0x5a, 0xb1, 0x03, 0x70, 0x31, 0x41, 0x01, 0x5b, 0x8d, 0x83, 0xf6}
 	binaryIDVertexAttribute                        = binary.ID{0x88, 0x44, 0xf7, 0x6b, 0x96, 0x07, 0x99, 0x03, 0xe3, 0x56, 0xab, 0x34, 0x20, 0x80, 0xc6, 0x13, 0xbc, 0xd0, 0x53, 0xe8}
-	binaryIDVec2f                                  = binary.ID{0x9a, 0x80, 0x74, 0xe4, 0x78, 0x9c, 0x6c, 0x16, 0xc7, 0xc6, 0x4e, 0x4c, 0x66, 0x6a, 0x86, 0x52, 0x06, 0x24, 0x41, 0x5d}
-	binaryIDVec3f                                  = binary.ID{0x09, 0x06, 0xf7, 0xa9, 0xb3, 0xbf, 0x8f, 0x42, 0x96, 0xf4, 0xd6, 0xff, 0x4f, 0x93, 0x98, 0x44, 0x2e, 0xaf, 0x7b, 0x07}
-	binaryIDVec4f                                  = binary.ID{0x94, 0x20, 0x1e, 0xeb, 0xde, 0x5b, 0xa9, 0xe1, 0xd7, 0x73, 0xcd, 0x9e, 0x3b, 0x09, 0x01, 0x8a, 0x9a, 0x41, 0xe7, 0x4b}
-	binaryIDVec2i                                  = binary.ID{0x76, 0x85, 0xad, 0x18, 0xef, 0x9b, 0x0e, 0xea, 0x49, 0x44, 0xf7, 0x89, 0x4e, 0xdb, 0x0d, 0x34, 0xbb, 0x27, 0xb8, 0x43}
-	binaryIDVec3i                                  = binary.ID{0xc5, 0x31, 0xeb, 0x05, 0xd1, 0xdf, 0x5c, 0xf7, 0xc0, 0x7a, 0x20, 0xc9, 0x91, 0xb0, 0xf0, 0x2e, 0x1e, 0x9d, 0x94, 0xd5}
-	binaryIDVec4i                                  = binary.ID{0x61, 0x00, 0x31, 0xa3, 0x7a, 0x91, 0x14, 0x17, 0x6e, 0xd2, 0xe2, 0x62, 0x30, 0x92, 0xce, 0x4e, 0x0c, 0x72, 0xd1, 0x9c}
-	binaryIDMat2f                                  = binary.ID{0x8a, 0xda, 0xb2, 0x20, 0xfa, 0xe4, 0xf7, 0x80, 0x3a, 0x25, 0xf4, 0xbf, 0xbc, 0x97, 0xea, 0x48, 0x14, 0xed, 0xcb, 0x98}
-	binaryIDMat3f                                  = binary.ID{0x2c, 0xe7, 0xc3, 0x90, 0x92, 0x9b, 0xa6, 0xc1, 0x86, 0x6e, 0x89, 0xc7, 0x16, 0x6d, 0x9f, 0x83, 0x54, 0x64, 0x40, 0x3a}
-	binaryIDMat4f                                  = binary.ID{0x5c, 0x2f, 0x64, 0xb8, 0x4e, 0xf0, 0xa8, 0x30, 0x10, 0x31, 0x81, 0x75, 0xb7, 0x82, 0xf3, 0x8f, 0x70, 0x68, 0x83, 0xdc}
-	binaryIDUniformValue                           = binary.ID{0xab, 0x2c, 0x54, 0x24, 0xdf, 0x48, 0x16, 0xcb, 0x4a, 0x5d, 0x7f, 0x47, 0x42, 0x4b, 0x4e, 0x3e, 0x5d, 0x0e, 0x54, 0x0c}
-	binaryIDUniform                                = binary.ID{0x92, 0x24, 0x45, 0xb8, 0x0b, 0xfa, 0x86, 0x62, 0xac, 0x08, 0xfd, 0xbc, 0xbc, 0x95, 0x50, 0x12, 0x22, 0x6e, 0xa5, 0x1d}
+	binaryIDUniform                                = binary.ID{0x0a, 0x74, 0x76, 0xe0, 0x20, 0x63, 0xb8, 0x20, 0x73, 0xd7, 0x15, 0x85, 0x4b, 0x0e, 0xcf, 0x31, 0x05, 0x80, 0x2e, 0x94}
 	binaryIDProgram                                = binary.ID{0x7f, 0x2e, 0x5d, 0xa3, 0x21, 0x31, 0xb3, 0x68, 0x3a, 0xae, 0x2d, 0x85, 0xc1, 0x89, 0xac, 0xe2, 0xa6, 0x14, 0x42, 0x2d}
 	binaryIDVertexArray                            = binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}
 	binaryIDQuery                                  = binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}
@@ -383,6 +399,9 @@ var (
 	binaryIDEglQuerySurface                        = binary.ID{0x14, 0x6c, 0x8d, 0x6c, 0x45, 0xd9, 0xcd, 0xde, 0xde, 0xd0, 0x12, 0xea, 0x3f, 0x95, 0xeb, 0x43, 0xc6, 0x33, 0x40, 0x22}
 	binaryIDVoidᵖ                                  = binary.ID{0xa7, 0x86, 0xcc, 0x23, 0x0b, 0x73, 0x10, 0x9d, 0xda, 0xc6, 0x41, 0xcb, 0xf7, 0xe4, 0x97, 0x87, 0x01, 0x69, 0xc2, 0x2e}
 	binaryIDEglSwapBuffers                         = binary.ID{0x57, 0x1f, 0xe4, 0x1b, 0x20, 0xa1, 0x87, 0x17, 0x6c, 0x31, 0x05, 0x59, 0x10, 0x83, 0xb5, 0x3a, 0xb0, 0xa9, 0x3c, 0x39}
+	binaryIDF32ː2ᵃ                                 = binary.ID{0x5a, 0xac, 0xd4, 0xc3, 0x89, 0x9b, 0x74, 0x64, 0x55, 0x84, 0xbe, 0xec, 0xad, 0x58, 0x5d, 0xd0, 0x38, 0xf6, 0x3d, 0xdb}
+	binaryIDF32ː3ᵃ                                 = binary.ID{0x12, 0xc6, 0x38, 0xb8, 0x8c, 0x94, 0x33, 0xbc, 0xc5, 0x10, 0x2d, 0x3d, 0x61, 0xb3, 0xc1, 0x98, 0xaa, 0xda, 0x27, 0x86}
+	binaryIDF32ː4ᵃ                                 = binary.ID{0xb4, 0x29, 0x60, 0xf4, 0x43, 0x6b, 0xf8, 0xd9, 0xe8, 0x53, 0x77, 0x94, 0x87, 0x34, 0xbb, 0x38, 0x7b, 0x6f, 0x8c, 0x0b}
 	binaryIDF32ˢ                                   = binary.ID{0x80, 0xa1, 0x30, 0xea, 0x1b, 0x77, 0xd4, 0x58, 0x3c, 0xac, 0xef, 0x6d, 0xd4, 0xc8, 0x16, 0xdc, 0x5f, 0xd6, 0x7b, 0xee}
 	binaryIDF32ᵖ                                   = binary.ID{0x25, 0x42, 0x8d, 0x14, 0xfa, 0x29, 0xc8, 0xad, 0xe4, 0x75, 0x2b, 0xfa, 0xf4, 0x35, 0x5b, 0x12, 0x23, 0x97, 0x38, 0x77}
 	binaryIDFlushPostBuffer                        = binary.ID{0x26, 0x4e, 0x20, 0xbb, 0xf9, 0x53, 0x75, 0xcd, 0x08, 0x98, 0x6d, 0x82, 0x25, 0x7d, 0xb5, 0xb6, 0x1e, 0xbb, 0xe1, 0xbf}
@@ -556,21 +575,21 @@ var (
 	binaryIDGlTextureStorage2DEXT                  = binary.ID{0xaa, 0x63, 0x10, 0x72, 0xaf, 0x48, 0x52, 0xce, 0x02, 0x08, 0x02, 0xac, 0xf5, 0xf9, 0xb8, 0x03, 0x87, 0x02, 0xcc, 0x3a}
 	binaryIDGlTextureStorage3DEXT                  = binary.ID{0xc3, 0x4b, 0xb7, 0x25, 0xcd, 0x73, 0x0d, 0x77, 0x57, 0x84, 0xb6, 0xc0, 0x9c, 0x0f, 0x3e, 0xaf, 0x93, 0xd7, 0xc0, 0xe6}
 	binaryIDGlUniform1f                            = binary.ID{0xdc, 0x09, 0x5b, 0x59, 0xd2, 0xff, 0x8d, 0xd9, 0xab, 0xf7, 0x80, 0xbb, 0xc4, 0x33, 0xf6, 0x28, 0xf3, 0x93, 0x52, 0x4e}
-	binaryIDGlUniform1fv                           = binary.ID{0x6c, 0x24, 0x91, 0x06, 0x3a, 0x75, 0x28, 0xf4, 0xef, 0x98, 0xed, 0xf2, 0x17, 0x37, 0x85, 0xa4, 0xcc, 0x91, 0x2a, 0xc7}
+	binaryIDGlUniform1fv                           = binary.ID{0xa9, 0xdf, 0x65, 0x79, 0xc0, 0x3f, 0x44, 0x3c, 0xd8, 0xc3, 0xd5, 0xdf, 0xd3, 0x3e, 0xdc, 0x3c, 0xd3, 0xbf, 0x02, 0x07}
 	binaryIDGlUniform1i                            = binary.ID{0xdc, 0xc5, 0xf9, 0x9f, 0xe8, 0xdf, 0x34, 0x63, 0x92, 0x71, 0x0c, 0xc1, 0xb5, 0xa9, 0xed, 0xa0, 0xfb, 0x74, 0x32, 0xd9}
-	binaryIDGlUniform1iv                           = binary.ID{0xa4, 0x66, 0xca, 0x9b, 0x82, 0xb9, 0x81, 0x2f, 0xe3, 0x70, 0xa5, 0xf4, 0x7b, 0x3b, 0xc4, 0x40, 0x12, 0xd2, 0x75, 0xba}
+	binaryIDGlUniform1iv                           = binary.ID{0x4a, 0x28, 0x0b, 0xb9, 0x72, 0xe8, 0x16, 0x36, 0x56, 0x3e, 0xb0, 0xdb, 0x2c, 0xdf, 0x41, 0x22, 0x91, 0xda, 0x08, 0xb1}
 	binaryIDGlUniform2f                            = binary.ID{0xfe, 0xb0, 0x7e, 0x45, 0x14, 0x3c, 0xc4, 0xd6, 0x30, 0x6e, 0xae, 0x61, 0x65, 0x50, 0x23, 0x75, 0xa8, 0x21, 0x3e, 0x79}
-	binaryIDGlUniform2fv                           = binary.ID{0xe5, 0x71, 0x7a, 0x00, 0x7e, 0xcc, 0x57, 0x43, 0xc2, 0x55, 0x11, 0x21, 0x30, 0xeb, 0x7b, 0x53, 0xeb, 0x16, 0x19, 0xd6}
+	binaryIDGlUniform2fv                           = binary.ID{0x63, 0x95, 0x83, 0xdf, 0x30, 0xfd, 0x01, 0x92, 0x3b, 0x04, 0xd5, 0x1f, 0x1b, 0x5f, 0x90, 0x54, 0xd9, 0xd6, 0xb9, 0x07}
 	binaryIDGlUniform2i                            = binary.ID{0x4c, 0x11, 0x73, 0xaa, 0xef, 0x59, 0xde, 0x41, 0x09, 0x12, 0xd7, 0x30, 0x31, 0x24, 0x6f, 0x29, 0x57, 0x6f, 0x90, 0x65}
-	binaryIDGlUniform2iv                           = binary.ID{0x73, 0xaa, 0xfe, 0x04, 0x12, 0x5c, 0xa9, 0x23, 0x5a, 0x84, 0x12, 0x0c, 0x33, 0xdd, 0x7c, 0xe8, 0x34, 0x0e, 0xbe, 0xb8}
+	binaryIDGlUniform2iv                           = binary.ID{0xcf, 0x7a, 0x3b, 0xfd, 0x16, 0x84, 0xbe, 0x1c, 0x42, 0xe6, 0xa3, 0xb0, 0xd4, 0xb5, 0xc1, 0x3c, 0x9e, 0xc7, 0xb6, 0xf8}
 	binaryIDGlUniform3f                            = binary.ID{0x15, 0xd9, 0x47, 0x62, 0x1f, 0xf4, 0x8a, 0x57, 0x8d, 0x50, 0x0d, 0xc7, 0x32, 0xda, 0x19, 0x25, 0xe9, 0x27, 0xca, 0x7b}
-	binaryIDGlUniform3fv                           = binary.ID{0xf5, 0x0d, 0x86, 0x4d, 0xe7, 0x26, 0x8b, 0xb8, 0xc3, 0xcc, 0x16, 0x99, 0xbd, 0x43, 0x2c, 0x3d, 0x1a, 0x3b, 0xfa, 0x4a}
+	binaryIDGlUniform3fv                           = binary.ID{0x0e, 0x39, 0xa8, 0x19, 0x39, 0xcf, 0xa2, 0x5e, 0xce, 0x7c, 0x03, 0x93, 0x19, 0x38, 0x16, 0x4e, 0xf1, 0x1b, 0x6f, 0xe3}
 	binaryIDGlUniform3i                            = binary.ID{0xd2, 0x99, 0x76, 0x0a, 0x2c, 0xb1, 0x75, 0xac, 0x1b, 0xd1, 0x5d, 0xa4, 0x56, 0x1b, 0x90, 0xce, 0x23, 0xf1, 0x4f, 0x65}
-	binaryIDGlUniform3iv                           = binary.ID{0x09, 0x38, 0xc6, 0xb0, 0x6a, 0x6a, 0xd1, 0xa2, 0x4f, 0xf5, 0x5c, 0x81, 0xab, 0xf1, 0xc6, 0x75, 0xe9, 0x70, 0x23, 0xa9}
+	binaryIDGlUniform3iv                           = binary.ID{0x50, 0xe9, 0x5c, 0xc1, 0x0b, 0x30, 0x00, 0x6d, 0x37, 0xb5, 0x25, 0x22, 0xe4, 0xb3, 0xbd, 0xf4, 0xb3, 0xa0, 0x97, 0x1e}
 	binaryIDGlUniform4f                            = binary.ID{0x07, 0x94, 0x2a, 0xa5, 0x8e, 0xd5, 0x4b, 0x3f, 0x2b, 0xe3, 0x52, 0xb1, 0x7c, 0x18, 0x9e, 0x23, 0xb1, 0xdb, 0x6f, 0x84}
-	binaryIDGlUniform4fv                           = binary.ID{0x99, 0x5e, 0x7c, 0xb3, 0xe9, 0xc3, 0x3b, 0x80, 0x13, 0x0a, 0xb9, 0x71, 0x56, 0x25, 0x5c, 0x5f, 0xac, 0x3a, 0xbf, 0x26}
+	binaryIDGlUniform4fv                           = binary.ID{0x1d, 0xe7, 0x76, 0xfb, 0xc2, 0x42, 0x87, 0x7c, 0x91, 0x30, 0x28, 0x67, 0xc6, 0xe2, 0xa7, 0x14, 0xe6, 0x0e, 0x19, 0x7a}
 	binaryIDGlUniform4i                            = binary.ID{0xe2, 0x70, 0x4f, 0xe8, 0xf2, 0xdd, 0xbc, 0xba, 0x90, 0xde, 0x98, 0x18, 0x14, 0x07, 0x29, 0x53, 0xad, 0x3e, 0x18, 0x74}
-	binaryIDGlUniform4iv                           = binary.ID{0x7a, 0x46, 0x92, 0x39, 0x56, 0x96, 0x2c, 0x53, 0x0f, 0x88, 0xa5, 0x8f, 0x95, 0xbf, 0xc5, 0x5b, 0xb4, 0xfe, 0xee, 0x2f}
+	binaryIDGlUniform4iv                           = binary.ID{0xce, 0x48, 0x89, 0xe1, 0xf1, 0xfa, 0x5f, 0xa0, 0x80, 0xa2, 0x0c, 0x27, 0xa9, 0x34, 0x56, 0x34, 0x14, 0xcf, 0xc4, 0xd3}
 	binaryIDGlUniformMatrix2fv                     = binary.ID{0x92, 0x32, 0x5c, 0x87, 0x66, 0x8a, 0x8e, 0x3e, 0xc5, 0x07, 0x28, 0xbf, 0x42, 0x3c, 0x6a, 0x29, 0x30, 0x8f, 0x6d, 0x1f}
 	binaryIDGlUniformMatrix3fv                     = binary.ID{0xfb, 0x5f, 0x49, 0x7f, 0xef, 0x17, 0xfd, 0x81, 0xea, 0x06, 0x70, 0x21, 0x6d, 0xcc, 0x87, 0x33, 0x58, 0xf7, 0x95, 0x94}
 	binaryIDGlUniformMatrix4fv                     = binary.ID{0x52, 0x0f, 0x12, 0x1c, 0xe8, 0x4b, 0x78, 0xfd, 0xd9, 0x60, 0x03, 0x9b, 0xb8, 0x66, 0x8e, 0x83, 0x74, 0x7f, 0x9d, 0xae}
@@ -596,10 +615,25 @@ var (
 	binaryIDHDC                                    = binary.ID{0x77, 0x14, 0x36, 0x4d, 0x67, 0xdb, 0x2d, 0xd0, 0xcc, 0x8e, 0x01, 0x72, 0xfa, 0x85, 0x42, 0x9c, 0x04, 0x31, 0x53, 0xcc}
 	binaryIDIntˢ                                   = binary.ID{0x81, 0xe7, 0x7a, 0x15, 0x73, 0x0c, 0x03, 0xb6, 0x9f, 0x6c, 0xec, 0x7b, 0x08, 0xf2, 0xc1, 0x20, 0x9f, 0xcd, 0x72, 0x5a}
 	binaryIDIntᵖ                                   = binary.ID{0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46}
+	binaryIDVec2f                                  = binary.ID{0x43, 0x30, 0xe0, 0xc8, 0xdc, 0x80, 0xf3, 0x61, 0xf7, 0xc9, 0x32, 0xe8, 0x58, 0x5f, 0xa0, 0xe9, 0xc3, 0xff, 0x0d, 0x21}
+	binaryIDMat2f                                  = binary.ID{0xb3, 0xca, 0x65, 0x73, 0x09, 0x4d, 0x46, 0x20, 0x2e, 0x2a, 0x3d, 0x75, 0x6b, 0x7b, 0xc3, 0xaf, 0x18, 0x79, 0xfe, 0xcb}
+	binaryIDMat2fˢ                                 = binary.ID{0xfd, 0x99, 0x6e, 0x41, 0x72, 0xbc, 0xf9, 0x44, 0xfb, 0x0c, 0x17, 0x18, 0x6e, 0x78, 0x41, 0x4a, 0xe4, 0xf9, 0x01, 0xe9}
+	binaryIDMat2fᵖ                                 = binary.ID{0xcf, 0x92, 0x77, 0xb8, 0xbc, 0x32, 0x83, 0x5d, 0xca, 0xa4, 0x88, 0xa5, 0x7b, 0x72, 0x7d, 0xe5, 0xfe, 0xf1, 0x1d, 0x01}
+	binaryIDVec3f                                  = binary.ID{0xa4, 0xa3, 0x2e, 0xbb, 0x48, 0x0d, 0x4e, 0xfa, 0x22, 0xeb, 0xb4, 0x7e, 0x88, 0x10, 0xcd, 0x9d, 0xaf, 0xb4, 0xbc, 0x81}
+	binaryIDMat3f                                  = binary.ID{0x47, 0x2d, 0x69, 0x38, 0x46, 0x76, 0x50, 0xf5, 0x0b, 0x0f, 0x50, 0x2f, 0x41, 0xfb, 0x03, 0xa7, 0xd3, 0xd7, 0x38, 0x51}
+	binaryIDMat3fˢ                                 = binary.ID{0x0e, 0x3f, 0xf2, 0x97, 0xf4, 0x3f, 0x26, 0xb0, 0x40, 0x83, 0x20, 0xad, 0x0b, 0xa3, 0xce, 0xf7, 0x9b, 0xd8, 0x51, 0x10}
+	binaryIDMat3fᵖ                                 = binary.ID{0x9e, 0xf8, 0xc1, 0x91, 0x65, 0x71, 0x0a, 0x19, 0x44, 0x44, 0xa8, 0xd0, 0xb0, 0xae, 0x8a, 0x52, 0x7c, 0x08, 0xda, 0xd8}
+	binaryIDVec4f                                  = binary.ID{0x96, 0xe2, 0x6f, 0x24, 0x1a, 0xf9, 0x8f, 0xaf, 0x42, 0x52, 0xcf, 0xd5, 0x09, 0x2f, 0x40, 0x52, 0xdb, 0xc5, 0x78, 0xd5}
+	binaryIDMat4f                                  = binary.ID{0xb7, 0xf0, 0xe0, 0x8d, 0x26, 0xbd, 0x22, 0x55, 0x90, 0xcd, 0x63, 0x7d, 0x27, 0x59, 0xbd, 0xa2, 0xa3, 0x72, 0xc2, 0x95}
+	binaryIDMat4fˢ                                 = binary.ID{0xd0, 0xcc, 0x8f, 0x5c, 0xd1, 0x03, 0xe7, 0x55, 0x69, 0x29, 0xad, 0x0e, 0x5c, 0xe3, 0xd2, 0x1f, 0xb7, 0xa9, 0xf1, 0xa1}
+	binaryIDMat4fᵖ                                 = binary.ID{0x00, 0x10, 0x29, 0x45, 0xd8, 0x78, 0x44, 0x1a, 0x4c, 0x76, 0x90, 0x0e, 0x8d, 0xde, 0x05, 0x0f, 0x5a, 0x51, 0x06, 0x4c}
 	binaryIDQueryIdˢ                               = binary.ID{0x31, 0x42, 0xbd, 0xc9, 0x65, 0x42, 0xa6, 0x82, 0xd0, 0xba, 0x8e, 0x4f, 0x11, 0x84, 0xe4, 0xf5, 0x7a, 0xad, 0xa8, 0x88}
 	binaryIDRenderbufferIdˢ                        = binary.ID{0x8a, 0x81, 0xb2, 0x12, 0x5d, 0xf9, 0xa4, 0x6a, 0x07, 0x61, 0xd1, 0x2e, 0xff, 0x46, 0x04, 0x32, 0xf9, 0x38, 0xe5, 0xed}
 	binaryIDReplayBindRenderer                     = binary.ID{0xdb, 0xb2, 0x76, 0x5b, 0xa5, 0x3d, 0xb0, 0xef, 0x04, 0x2a, 0x03, 0xf1, 0x57, 0x07, 0x5a, 0x92, 0x20, 0xa9, 0x0a, 0x8a}
 	binaryIDReplayCreateRenderer                   = binary.ID{0xd5, 0x5d, 0xca, 0x28, 0xdc, 0x88, 0xac, 0x79, 0x3a, 0x31, 0xd4, 0xe3, 0x68, 0x68, 0xb9, 0x7a, 0xac, 0x48, 0x7e, 0x52}
+	binaryIDS32ː2ᵃ                                 = binary.ID{0x28, 0x8c, 0x37, 0x1b, 0x20, 0x9d, 0xdd, 0x75, 0xff, 0xa9, 0x56, 0xca, 0xc1, 0xef, 0x67, 0x39, 0x97, 0xdf, 0x1b, 0x43}
+	binaryIDS32ː3ᵃ                                 = binary.ID{0xc7, 0x0a, 0x1a, 0xfc, 0xbc, 0x3f, 0xa5, 0x7f, 0x8d, 0x1e, 0xed, 0x57, 0x3f, 0xfa, 0x19, 0x82, 0x06, 0x38, 0xbe, 0x29}
+	binaryIDS32ː4ᵃ                                 = binary.ID{0x87, 0xe0, 0xb2, 0x47, 0xdf, 0x91, 0x9c, 0x2a, 0x41, 0xd2, 0x23, 0x25, 0x6d, 0x21, 0xd7, 0x1f, 0x3d, 0x85, 0x5c, 0x01}
 	binaryIDS32ˢ                                   = binary.ID{0xbc, 0xd6, 0x9a, 0xa9, 0x35, 0x5d, 0xfe, 0xc7, 0x17, 0xb7, 0x2d, 0x64, 0xa7, 0x4a, 0xee, 0xb1, 0x4e, 0x16, 0x85, 0x9c}
 	binaryIDS64ˢ                                   = binary.ID{0xf2, 0x00, 0xfb, 0x5a, 0xa6, 0x5d, 0x3a, 0xcb, 0x0c, 0x2e, 0x2d, 0xa5, 0x81, 0xbb, 0x08, 0x09, 0x13, 0x3a, 0xae, 0xb5}
 	binaryIDShaderAttribTypeˢ                      = binary.ID{0x37, 0x6b, 0xf4, 0x67, 0x43, 0x8f, 0x81, 0xc8, 0x1e, 0x12, 0x8c, 0x34, 0xc3, 0xd3, 0x5c, 0xda, 0x94, 0x28, 0xfb, 0xb4}
@@ -611,6 +645,24 @@ var (
 	binaryIDU32ˢ                                   = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
 	binaryIDU64ˢ                                   = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
 	binaryIDU8ᵖ                                    = binary.ID{0xf6, 0x6e, 0x22, 0xf8, 0x33, 0x69, 0x05, 0xe9, 0x8b, 0xdf, 0xfa, 0x53, 0x75, 0xae, 0x80, 0xcc, 0x2c, 0x27, 0x98, 0x17}
+	binaryIDVec2fː2ᵃ                               = binary.ID{0xf3, 0xfe, 0xa2, 0xa3, 0xb6, 0xdd, 0xd4, 0x15, 0x8c, 0x00, 0x2c, 0x4d, 0x78, 0x65, 0x14, 0x70, 0xe7, 0xcb, 0x7b, 0xe7}
+	binaryIDVec2fˢ                                 = binary.ID{0x79, 0x71, 0xb9, 0xc2, 0x40, 0xfa, 0x23, 0xa9, 0x13, 0xc3, 0x59, 0x96, 0xcb, 0x6b, 0x81, 0xed, 0x4d, 0x1f, 0x31, 0x65}
+	binaryIDVec2fᵖ                                 = binary.ID{0x5e, 0xb4, 0x5d, 0x6a, 0x0d, 0x6e, 0x66, 0x4a, 0x85, 0xf0, 0x5e, 0xc1, 0x82, 0x6f, 0x53, 0xf4, 0x2c, 0x5b, 0x74, 0x28}
+	binaryIDVec2i                                  = binary.ID{0x1f, 0x5b, 0xbe, 0x8d, 0x37, 0x6d, 0xaa, 0x47, 0xf0, 0xe0, 0xe3, 0xc9, 0x18, 0x2d, 0x09, 0x9c, 0x7a, 0x2e, 0xb2, 0x4f}
+	binaryIDVec2iˢ                                 = binary.ID{0x6b, 0x83, 0xed, 0xc6, 0xad, 0xba, 0x33, 0x3e, 0xcd, 0x20, 0x1a, 0x3a, 0x70, 0x29, 0xa0, 0xc1, 0x65, 0xa0, 0x53, 0x5e}
+	binaryIDVec2iᵖ                                 = binary.ID{0xcc, 0xca, 0x5a, 0x47, 0xa7, 0xa9, 0x37, 0xbd, 0x32, 0x96, 0x80, 0x88, 0xd2, 0x06, 0xd3, 0x39, 0x6d, 0xc0, 0x74, 0x8b}
+	binaryIDVec3fː3ᵃ                               = binary.ID{0x13, 0xcd, 0x31, 0x33, 0xcd, 0xd2, 0xb7, 0xe2, 0xaa, 0xc1, 0xb9, 0x3d, 0xbb, 0x10, 0x88, 0x95, 0x1b, 0xcf, 0xd1, 0xde}
+	binaryIDVec3fˢ                                 = binary.ID{0xba, 0xc9, 0xa5, 0x3c, 0xaa, 0x62, 0xc5, 0x18, 0x36, 0xc6, 0x3c, 0xaa, 0x5c, 0x15, 0xe9, 0x37, 0x5d, 0x11, 0xf4, 0xa1}
+	binaryIDVec3fᵖ                                 = binary.ID{0xc9, 0x3f, 0xc0, 0x13, 0x49, 0x5a, 0x81, 0xe9, 0x85, 0x38, 0x36, 0xb9, 0x36, 0xca, 0x1d, 0x7e, 0xfc, 0x88, 0x4a, 0x69}
+	binaryIDVec3i                                  = binary.ID{0x6c, 0xf3, 0x3f, 0x3d, 0xbd, 0x74, 0x0b, 0xdb, 0xcc, 0xa4, 0x89, 0x5f, 0x63, 0x28, 0x3f, 0xad, 0x88, 0x98, 0xbd, 0xd6}
+	binaryIDVec3iˢ                                 = binary.ID{0x1a, 0x46, 0x23, 0xaf, 0x7e, 0x76, 0xc7, 0x5b, 0xca, 0xbd, 0x76, 0xaa, 0xaf, 0xb3, 0xdf, 0x90, 0xc7, 0xe5, 0xa0, 0x5f}
+	binaryIDVec3iᵖ                                 = binary.ID{0x83, 0xb1, 0x09, 0x1f, 0xd2, 0x6a, 0x35, 0x38, 0x09, 0x7a, 0x85, 0x5e, 0x63, 0x38, 0xfa, 0x97, 0x63, 0xf4, 0x32, 0xa4}
+	binaryIDVec4fː4ᵃ                               = binary.ID{0x5b, 0x6d, 0xf1, 0x71, 0x8d, 0x7c, 0xc1, 0x20, 0x2b, 0x99, 0xb2, 0x24, 0xce, 0xb1, 0xf6, 0x8a, 0x90, 0xd9, 0xeb, 0x6c}
+	binaryIDVec4fˢ                                 = binary.ID{0x9e, 0xbf, 0xba, 0xe1, 0x7e, 0xae, 0xbc, 0x30, 0x0c, 0x1b, 0xdf, 0xe9, 0x03, 0x12, 0x2d, 0xa3, 0x28, 0x55, 0xc6, 0x4b}
+	binaryIDVec4fᵖ                                 = binary.ID{0x1e, 0xc6, 0x03, 0xc9, 0x2e, 0xad, 0x84, 0x5a, 0x75, 0x19, 0x6f, 0xa4, 0x5e, 0x8b, 0x7d, 0x21, 0xe1, 0x85, 0x43, 0x54}
+	binaryIDVec4i                                  = binary.ID{0x89, 0x5d, 0x1c, 0x1a, 0xcf, 0x39, 0xe8, 0x21, 0x4f, 0xd4, 0x00, 0x64, 0xd6, 0xfc, 0x3e, 0x15, 0xde, 0xf2, 0xe0, 0xb0}
+	binaryIDVec4iˢ                                 = binary.ID{0xee, 0x88, 0xf0, 0x68, 0xd6, 0xb7, 0xfa, 0xda, 0xb5, 0x1a, 0x68, 0x05, 0x6d, 0xbb, 0x69, 0x97, 0x08, 0x4f, 0x37, 0xe3}
+	binaryIDVec4iᵖ                                 = binary.ID{0xdd, 0xfb, 0x4f, 0x4c, 0x20, 0x0e, 0x99, 0x02, 0x8f, 0xe2, 0x87, 0xb4, 0x86, 0xd1, 0x96, 0xa3, 0xd7, 0x6c, 0x2d, 0x94}
 	binaryIDVertexArrayIdˢ                         = binary.ID{0x33, 0x17, 0x79, 0xfd, 0x5c, 0x69, 0x07, 0xce, 0x86, 0x55, 0xd5, 0x6f, 0xde, 0x1e, 0xc6, 0xee, 0x52, 0x0a, 0xd8, 0x01}
 	binaryIDVoidˢ                                  = binary.ID{0x8e, 0x07, 0x40, 0xb5, 0x18, 0x86, 0xc9, 0x8b, 0x33, 0xd0, 0x40, 0xab, 0x75, 0xb9, 0xef, 0x2f, 0x74, 0x66, 0x0a, 0x26}
 	binaryIDWglCreateContext                       = binary.ID{0x8e, 0xe0, 0x9b, 0x8b, 0x3d, 0x3c, 0xc7, 0x22, 0x61, 0xb4, 0xee, 0xa9, 0x75, 0x75, 0xd6, 0x53, 0x0d, 0x31, 0x15, 0xcc}
@@ -3746,906 +3798,6 @@ var schemaVertexAttribute = &schema.Class{
 	},
 }
 
-type binaryClassVec2f struct{}
-
-func (*Vec2f) Class() binary.Class {
-	return (*binaryClassVec2f)(nil)
-}
-func doEncodeVec2f(e binary.Encoder, o *Vec2f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec2f(d binary.Decoder, o *Vec2f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	return nil
-}
-func doSkipVec2f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec2f) ID() binary.ID      { return binaryIDVec2f }
-func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
-func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec2f(e, obj.(*Vec2f))
-}
-func (*binaryClassVec2f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec2f{}
-	return obj, doDecodeVec2f(d, obj)
-}
-func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec2f(d, obj.(*Vec2f))
-}
-func (*binaryClassVec2f) Skip(d binary.Decoder) error { return doSkipVec2f(d) }
-func (*binaryClassVec2f) Schema() *schema.Class       { return schemaVec2f }
-
-var schemaVec2f = &schema.Class{
-	TypeID: binaryIDVec2f,
-	Name:   "Vec2f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-	},
-}
-
-type binaryClassVec3f struct{}
-
-func (*Vec3f) Class() binary.Class {
-	return (*binaryClassVec3f)(nil)
-}
-func doEncodeVec3f(e binary.Encoder, o *Vec3f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec3f(d binary.Decoder, o *Vec3f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Z = float32(obj)
-	}
-	return nil
-}
-func doSkipVec3f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec3f) ID() binary.ID      { return binaryIDVec3f }
-func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
-func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec3f(e, obj.(*Vec3f))
-}
-func (*binaryClassVec3f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec3f{}
-	return obj, doDecodeVec3f(d, obj)
-}
-func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec3f(d, obj.(*Vec3f))
-}
-func (*binaryClassVec3f) Skip(d binary.Decoder) error { return doSkipVec3f(d) }
-func (*binaryClassVec3f) Schema() *schema.Class       { return schemaVec3f }
-
-var schemaVec3f = &schema.Class{
-	TypeID: binaryIDVec3f,
-	Name:   "Vec3f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-	},
-}
-
-type binaryClassVec4f struct{}
-
-func (*Vec4f) Class() binary.Class {
-	return (*binaryClassVec4f)(nil)
-}
-func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Z); err != nil {
-		return err
-	}
-	if err := e.Float32(o.W); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Z = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.W = float32(obj)
-	}
-	return nil
-}
-func doSkipVec4f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
-func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
-func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec4f(e, obj.(*Vec4f))
-}
-func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec4f{}
-	return obj, doDecodeVec4f(d, obj)
-}
-func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec4f(d, obj.(*Vec4f))
-}
-func (*binaryClassVec4f) Skip(d binary.Decoder) error { return doSkipVec4f(d) }
-func (*binaryClassVec4f) Schema() *schema.Class       { return schemaVec4f }
-
-var schemaVec4f = &schema.Class{
-	TypeID: binaryIDVec4f,
-	Name:   "Vec4f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "W", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-	},
-}
-
-type binaryClassVec2i struct{}
-
-func (*Vec2i) Class() binary.Class {
-	return (*binaryClassVec2i)(nil)
-}
-func doEncodeVec2i(e binary.Encoder, o *Vec2i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec2i(d binary.Decoder, o *Vec2i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	return nil
-}
-func doSkipVec2i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec2i) ID() binary.ID      { return binaryIDVec2i }
-func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
-func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec2i(e, obj.(*Vec2i))
-}
-func (*binaryClassVec2i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec2i{}
-	return obj, doDecodeVec2i(d, obj)
-}
-func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec2i(d, obj.(*Vec2i))
-}
-func (*binaryClassVec2i) Skip(d binary.Decoder) error { return doSkipVec2i(d) }
-func (*binaryClassVec2i) Schema() *schema.Class       { return schemaVec2i }
-
-var schemaVec2i = &schema.Class{
-	TypeID: binaryIDVec2i,
-	Name:   "Vec2i",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
-
-type binaryClassVec3i struct{}
-
-func (*Vec3i) Class() binary.Class {
-	return (*binaryClassVec3i)(nil)
-}
-func doEncodeVec3i(e binary.Encoder, o *Vec3i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec3i(d binary.Decoder, o *Vec3i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Z = int32(obj)
-	}
-	return nil
-}
-func doSkipVec3i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec3i) ID() binary.ID      { return binaryIDVec3i }
-func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
-func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec3i(e, obj.(*Vec3i))
-}
-func (*binaryClassVec3i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec3i{}
-	return obj, doDecodeVec3i(d, obj)
-}
-func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec3i(d, obj.(*Vec3i))
-}
-func (*binaryClassVec3i) Skip(d binary.Decoder) error { return doSkipVec3i(d) }
-func (*binaryClassVec3i) Schema() *schema.Class       { return schemaVec3i }
-
-var schemaVec3i = &schema.Class{
-	TypeID: binaryIDVec3i,
-	Name:   "Vec3i",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
-
-type binaryClassVec4i struct{}
-
-func (*Vec4i) Class() binary.Class {
-	return (*binaryClassVec4i)(nil)
-}
-func doEncodeVec4i(e binary.Encoder, o *Vec4i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Z); err != nil {
-		return err
-	}
-	if err := e.Int32(o.W); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec4i(d binary.Decoder, o *Vec4i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Z = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.W = int32(obj)
-	}
-	return nil
-}
-func doSkipVec4i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec4i) ID() binary.ID      { return binaryIDVec4i }
-func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
-func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec4i(e, obj.(*Vec4i))
-}
-func (*binaryClassVec4i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec4i{}
-	return obj, doDecodeVec4i(d, obj)
-}
-func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec4i(d, obj.(*Vec4i))
-}
-func (*binaryClassVec4i) Skip(d binary.Decoder) error { return doSkipVec4i(d) }
-func (*binaryClassVec4i) Schema() *schema.Class       { return schemaVec4i }
-
-var schemaVec4i = &schema.Class{
-	TypeID: binaryIDVec4i,
-	Name:   "Vec4i",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "W", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
-
-type binaryClassMat2f struct{}
-
-func (*Mat2f) Class() binary.Class {
-	return (*binaryClassMat2f)(nil)
-}
-func doEncodeMat2f(e binary.Encoder, o *Mat2f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat2f(d binary.Decoder, o *Mat2f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat2f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat2f) ID() binary.ID      { return binaryIDMat2f }
-func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
-func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat2f(e, obj.(*Mat2f))
-}
-func (*binaryClassMat2f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat2f{}
-	return obj, doDecodeMat2f(d, obj)
-}
-func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat2f(d, obj.(*Mat2f))
-}
-func (*binaryClassMat2f) Skip(d binary.Decoder) error { return doSkipMat2f(d) }
-func (*binaryClassMat2f) Schema() *schema.Class       { return schemaMat2f }
-
-var schemaMat2f = &schema.Class{
-	TypeID: binaryIDMat2f,
-	Name:   "Mat2f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Col0", Type: &schema.Struct{Name: "Vec2f"}},
-		{Declared: "Col1", Type: &schema.Struct{Name: "Vec2f"}},
-	},
-}
-
-type binaryClassMat3f struct{}
-
-func (*Mat3f) Class() binary.Class {
-	return (*binaryClassMat3f)(nil)
-}
-func doEncodeMat3f(e binary.Encoder, o *Mat3f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col2); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat3f(d binary.Decoder, o *Mat3f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col2); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat3f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat3f) ID() binary.ID      { return binaryIDMat3f }
-func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
-func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat3f(e, obj.(*Mat3f))
-}
-func (*binaryClassMat3f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat3f{}
-	return obj, doDecodeMat3f(d, obj)
-}
-func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat3f(d, obj.(*Mat3f))
-}
-func (*binaryClassMat3f) Skip(d binary.Decoder) error { return doSkipMat3f(d) }
-func (*binaryClassMat3f) Schema() *schema.Class       { return schemaMat3f }
-
-var schemaMat3f = &schema.Class{
-	TypeID: binaryIDMat3f,
-	Name:   "Mat3f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Col0", Type: &schema.Struct{Name: "Vec3f"}},
-		{Declared: "Col1", Type: &schema.Struct{Name: "Vec3f"}},
-		{Declared: "Col2", Type: &schema.Struct{Name: "Vec3f"}},
-	},
-}
-
-type binaryClassMat4f struct{}
-
-func (*Mat4f) Class() binary.Class {
-	return (*binaryClassMat4f)(nil)
-}
-func doEncodeMat4f(e binary.Encoder, o *Mat4f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col2); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col3); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat4f(d binary.Decoder, o *Mat4f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col2); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col3); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat4f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat4f) ID() binary.ID      { return binaryIDMat4f }
-func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
-func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat4f(e, obj.(*Mat4f))
-}
-func (*binaryClassMat4f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat4f{}
-	return obj, doDecodeMat4f(d, obj)
-}
-func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat4f(d, obj.(*Mat4f))
-}
-func (*binaryClassMat4f) Skip(d binary.Decoder) error { return doSkipMat4f(d) }
-func (*binaryClassMat4f) Schema() *schema.Class       { return schemaMat4f }
-
-var schemaMat4f = &schema.Class{
-	TypeID: binaryIDMat4f,
-	Name:   "Mat4f",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Col0", Type: &schema.Struct{Name: "Vec4f"}},
-		{Declared: "Col1", Type: &schema.Struct{Name: "Vec4f"}},
-		{Declared: "Col2", Type: &schema.Struct{Name: "Vec4f"}},
-		{Declared: "Col3", Type: &schema.Struct{Name: "Vec4f"}},
-	},
-}
-
-type binaryClassUniformValue struct{}
-
-func (*UniformValue) Class() binary.Class {
-	return (*binaryClassUniformValue)(nil)
-}
-func doEncodeUniformValue(e binary.Encoder, o *UniformValue) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.F32); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec2f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec3f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec4f); err != nil {
-		return err
-	}
-	if err := e.Int32(o.S32); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec2i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec3i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec4i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat2f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat3f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat4f); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUniformValue(d binary.Decoder, o *UniformValue) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.F32 = float32(obj)
-	}
-	if err := d.Value(&o.Vec2f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec3f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec4f); err != nil {
-		return err
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.S32 = int32(obj)
-	}
-	if err := d.Value(&o.Vec2i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec3i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec4i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat2f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat3f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat4f); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipUniformValue(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat4f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUniformValue) ID() binary.ID      { return binaryIDUniformValue }
-func (*binaryClassUniformValue) New() binary.Object { return &UniformValue{} }
-func (*binaryClassUniformValue) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUniformValue(e, obj.(*UniformValue))
-}
-func (*binaryClassUniformValue) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &UniformValue{}
-	return obj, doDecodeUniformValue(d, obj)
-}
-func (*binaryClassUniformValue) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUniformValue(d, obj.(*UniformValue))
-}
-func (*binaryClassUniformValue) Skip(d binary.Decoder) error { return doSkipUniformValue(d) }
-func (*binaryClassUniformValue) Schema() *schema.Class       { return schemaUniformValue }
-
-var schemaUniformValue = &schema.Class{
-	TypeID: binaryIDUniformValue,
-	Name:   "UniformValue",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "F32", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		{Declared: "Vec2f", Type: &schema.Struct{Name: "Vec2f"}},
-		{Declared: "Vec3f", Type: &schema.Struct{Name: "Vec3f"}},
-		{Declared: "Vec4f", Type: &schema.Struct{Name: "Vec4f"}},
-		{Declared: "S32", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Vec2i", Type: &schema.Struct{Name: "Vec2i"}},
-		{Declared: "Vec3i", Type: &schema.Struct{Name: "Vec3i"}},
-		{Declared: "Vec4i", Type: &schema.Struct{Name: "Vec4i"}},
-		{Declared: "Mat2f", Type: &schema.Struct{Name: "Mat2f"}},
-		{Declared: "Mat3f", Type: &schema.Struct{Name: "Mat3f"}},
-		{Declared: "Mat4f", Type: &schema.Struct{Name: "Mat4f"}},
-	},
-}
-
 type binaryClassUniform struct{}
 
 func (*Uniform) Class() binary.Class {
@@ -4697,7 +3849,7 @@ func doSkipUniform(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*UniformValue)(nil)); err != nil {
+	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -4724,7 +3876,7 @@ var schemaUniform = &schema.Class{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "UniformValue"}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U8ˢ"}},
 	},
 }
 
@@ -7023,6 +6175,168 @@ var schemaEglSwapBuffers = &schema.Class{
 		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
 		{Declared: "Surface", Type: &schema.Struct{Name: "Voidᵖ"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+	},
+}
+
+type binaryClassF32ː2ᵃ struct{}
+
+func (*F32ː2ᵃ) Class() binary.Class {
+	return (*binaryClassF32ː2ᵃ)(nil)
+}
+func doEncodeF32ː2ᵃ(e binary.Encoder, o *F32ː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeF32ː2ᵃ(d binary.Decoder, o *F32ː2ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipF32ː2ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassF32ː2ᵃ) ID() binary.ID      { return binaryIDF32ː2ᵃ }
+func (*binaryClassF32ː2ᵃ) New() binary.Object { return &F32ː2ᵃ{} }
+func (*binaryClassF32ː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF32ː2ᵃ(e, obj.(*F32ː2ᵃ))
+}
+func (*binaryClassF32ː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F32ː2ᵃ{}
+	return obj, doDecodeF32ː2ᵃ(d, obj)
+}
+func (*binaryClassF32ː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF32ː2ᵃ(d, obj.(*F32ː2ᵃ))
+}
+func (*binaryClassF32ː2ᵃ) Skip(d binary.Decoder) error { return doSkipF32ː2ᵃ(d) }
+func (*binaryClassF32ː2ᵃ) Schema() *schema.Class       { return schemaF32ː2ᵃ }
+
+var schemaF32ː2ᵃ = &schema.Class{
+	TypeID: binaryIDF32ː2ᵃ,
+	Name:   "F32ː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 2}},
+	},
+}
+
+type binaryClassF32ː3ᵃ struct{}
+
+func (*F32ː3ᵃ) Class() binary.Class {
+	return (*binaryClassF32ː3ᵃ)(nil)
+}
+func doEncodeF32ː3ᵃ(e binary.Encoder, o *F32ː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeF32ː3ᵃ(d binary.Decoder, o *F32ː3ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipF32ː3ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassF32ː3ᵃ) ID() binary.ID      { return binaryIDF32ː3ᵃ }
+func (*binaryClassF32ː3ᵃ) New() binary.Object { return &F32ː3ᵃ{} }
+func (*binaryClassF32ː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF32ː3ᵃ(e, obj.(*F32ː3ᵃ))
+}
+func (*binaryClassF32ː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F32ː3ᵃ{}
+	return obj, doDecodeF32ː3ᵃ(d, obj)
+}
+func (*binaryClassF32ː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF32ː3ᵃ(d, obj.(*F32ː3ᵃ))
+}
+func (*binaryClassF32ː3ᵃ) Skip(d binary.Decoder) error { return doSkipF32ː3ᵃ(d) }
+func (*binaryClassF32ː3ᵃ) Schema() *schema.Class       { return schemaF32ː3ᵃ }
+
+var schemaF32ː3ᵃ = &schema.Class{
+	TypeID: binaryIDF32ː3ᵃ,
+	Name:   "F32ː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 3}},
+	},
+}
+
+type binaryClassF32ː4ᵃ struct{}
+
+func (*F32ː4ᵃ) Class() binary.Class {
+	return (*binaryClassF32ː4ᵃ)(nil)
+}
+func doEncodeF32ː4ᵃ(e binary.Encoder, o *F32ː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeF32ː4ᵃ(d binary.Decoder, o *F32ː4ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipF32ː4ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassF32ː4ᵃ) ID() binary.ID      { return binaryIDF32ː4ᵃ }
+func (*binaryClassF32ː4ᵃ) New() binary.Object { return &F32ː4ᵃ{} }
+func (*binaryClassF32ː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF32ː4ᵃ(e, obj.(*F32ː4ᵃ))
+}
+func (*binaryClassF32ː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F32ː4ᵃ{}
+	return obj, doDecodeF32ː4ᵃ(d, obj)
+}
+func (*binaryClassF32ː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF32ː4ᵃ(d, obj.(*F32ː4ᵃ))
+}
+func (*binaryClassF32ː4ᵃ) Skip(d binary.Decoder) error { return doSkipF32ː4ᵃ(d) }
+func (*binaryClassF32ː4ᵃ) Schema() *schema.Class       { return schemaF32ː4ᵃ }
+
+var schemaF32ː4ᵃ = &schema.Class{
+	TypeID: binaryIDF32ː4ᵃ,
+	Name:   "F32ː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 4}},
 	},
 }
 
@@ -20423,7 +19737,7 @@ func doEncodeGlUniform1fv(e binary.Encoder, o *GlUniform1fv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20442,7 +19756,7 @@ func doDecodeGlUniform1fv(d binary.Decoder, o *GlUniform1fv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20484,7 +19798,7 @@ var schemaGlUniform1fv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -20573,7 +19887,7 @@ func doEncodeGlUniform1iv(e binary.Encoder, o *GlUniform1iv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20592,7 +19906,7 @@ func doDecodeGlUniform1iv(d binary.Decoder, o *GlUniform1iv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20634,7 +19948,7 @@ var schemaGlUniform1iv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -20735,7 +20049,7 @@ func doEncodeGlUniform2fv(e binary.Encoder, o *GlUniform2fv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20754,7 +20068,7 @@ func doDecodeGlUniform2fv(d binary.Decoder, o *GlUniform2fv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20796,7 +20110,7 @@ var schemaGlUniform2fv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -20897,7 +20211,7 @@ func doEncodeGlUniform2iv(e binary.Encoder, o *GlUniform2iv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20916,7 +20230,7 @@ func doDecodeGlUniform2iv(d binary.Decoder, o *GlUniform2iv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -20958,7 +20272,7 @@ var schemaGlUniform2iv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -21071,7 +20385,7 @@ func doEncodeGlUniform3fv(e binary.Encoder, o *GlUniform3fv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21090,7 +20404,7 @@ func doDecodeGlUniform3fv(d binary.Decoder, o *GlUniform3fv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21132,7 +20446,7 @@ var schemaGlUniform3fv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -21245,7 +20559,7 @@ func doEncodeGlUniform3iv(e binary.Encoder, o *GlUniform3iv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21264,7 +20578,7 @@ func doDecodeGlUniform3iv(d binary.Decoder, o *GlUniform3iv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21306,7 +20620,7 @@ var schemaGlUniform3iv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -21431,7 +20745,7 @@ func doEncodeGlUniform4fv(e binary.Encoder, o *GlUniform4fv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21450,7 +20764,7 @@ func doDecodeGlUniform4fv(d binary.Decoder, o *GlUniform4fv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21492,7 +20806,7 @@ var schemaGlUniform4fv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -21617,7 +20931,7 @@ func doEncodeGlUniform4iv(e binary.Encoder, o *GlUniform4iv) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Value); err != nil {
+	if err := e.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21636,7 +20950,7 @@ func doDecodeGlUniform4iv(d binary.Decoder, o *GlUniform4iv) error {
 	} else {
 		o.Count = int32(obj)
 	}
-	if err := d.Value(&o.Value); err != nil {
+	if err := d.Value(&o.Values); err != nil {
 		return err
 	}
 	return nil
@@ -21678,7 +20992,7 @@ var schemaGlUniform4iv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -23865,6 +23179,642 @@ var schemaIntᵖ = &schema.Class{
 	},
 }
 
+type binaryClassVec2f struct{}
+
+func (*Vec2f) Class() binary.Class {
+	return (*binaryClassVec2f)(nil)
+}
+func doEncodeVec2f(e binary.Encoder, o *Vec2f) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2f(d binary.Decoder, o *Vec2f) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec2f(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2f) ID() binary.ID      { return binaryIDVec2f }
+func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
+func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2f(e, obj.(*Vec2f))
+}
+func (*binaryClassVec2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2f{}
+	return obj, doDecodeVec2f(d, obj)
+}
+func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2f(d, obj.(*Vec2f))
+}
+func (*binaryClassVec2f) Skip(d binary.Decoder) error { return doSkipVec2f(d) }
+func (*binaryClassVec2f) Schema() *schema.Class       { return schemaVec2f }
+
+var schemaVec2f = &schema.Class{
+	TypeID: binaryIDVec2f,
+	Name:   "Vec2f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 2}},
+	},
+}
+
+type binaryClassMat2f struct{}
+
+func (*Mat2f) Class() binary.Class {
+	return (*binaryClassMat2f)(nil)
+}
+func doEncodeMat2f(e binary.Encoder, o *Mat2f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat2f(d binary.Decoder, o *Mat2f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipMat2f(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if err := d.SkipValue((*Vec2f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat2f) ID() binary.ID      { return binaryIDMat2f }
+func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
+func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2f(e, obj.(*Mat2f))
+}
+func (*binaryClassMat2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2f{}
+	return obj, doDecodeMat2f(d, obj)
+}
+func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2f(d, obj.(*Mat2f))
+}
+func (*binaryClassMat2f) Skip(d binary.Decoder) error { return doSkipMat2f(d) }
+func (*binaryClassMat2f) Schema() *schema.Class       { return schemaMat2f }
+
+var schemaMat2f = &schema.Class{
+	TypeID: binaryIDMat2f,
+	Name:   "Mat2f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f"}, Size: 2}},
+	},
+}
+
+type binaryClassMat2fˢ struct{}
+
+func (*Mat2fˢ) Class() binary.Class {
+	return (*binaryClassMat2fˢ)(nil)
+}
+func doEncodeMat2fˢ(e binary.Encoder, o *Mat2fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2fˢ(d binary.Decoder, o *Mat2fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat2fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2fˢ) ID() binary.ID      { return binaryIDMat2fˢ }
+func (*binaryClassMat2fˢ) New() binary.Object { return &Mat2fˢ{} }
+func (*binaryClassMat2fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2fˢ(e, obj.(*Mat2fˢ))
+}
+func (*binaryClassMat2fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2fˢ{}
+	return obj, doDecodeMat2fˢ(d, obj)
+}
+func (*binaryClassMat2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2fˢ(d, obj.(*Mat2fˢ))
+}
+func (*binaryClassMat2fˢ) Skip(d binary.Decoder) error { return doSkipMat2fˢ(d) }
+func (*binaryClassMat2fˢ) Schema() *schema.Class       { return schemaMat2fˢ }
+
+var schemaMat2fˢ = &schema.Class{
+	TypeID: binaryIDMat2fˢ,
+	Name:   "Mat2fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassMat2fᵖ struct{}
+
+func (*Mat2fᵖ) Class() binary.Class {
+	return (*binaryClassMat2fᵖ)(nil)
+}
+func doEncodeMat2fᵖ(e binary.Encoder, o *Mat2fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2fᵖ(d binary.Decoder, o *Mat2fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipMat2fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2fᵖ) ID() binary.ID      { return binaryIDMat2fᵖ }
+func (*binaryClassMat2fᵖ) New() binary.Object { return &Mat2fᵖ{} }
+func (*binaryClassMat2fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2fᵖ(e, obj.(*Mat2fᵖ))
+}
+func (*binaryClassMat2fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2fᵖ{}
+	return obj, doDecodeMat2fᵖ(d, obj)
+}
+func (*binaryClassMat2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2fᵖ(d, obj.(*Mat2fᵖ))
+}
+func (*binaryClassMat2fᵖ) Skip(d binary.Decoder) error { return doSkipMat2fᵖ(d) }
+func (*binaryClassMat2fᵖ) Schema() *schema.Class       { return schemaMat2fᵖ }
+
+var schemaMat2fᵖ = &schema.Class{
+	TypeID: binaryIDMat2fᵖ,
+	Name:   "Mat2fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec3f struct{}
+
+func (*Vec3f) Class() binary.Class {
+	return (*binaryClassVec3f)(nil)
+}
+func doEncodeVec3f(e binary.Encoder, o *Vec3f) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3f(d binary.Decoder, o *Vec3f) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec3f(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3f) ID() binary.ID      { return binaryIDVec3f }
+func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
+func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3f(e, obj.(*Vec3f))
+}
+func (*binaryClassVec3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3f{}
+	return obj, doDecodeVec3f(d, obj)
+}
+func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3f(d, obj.(*Vec3f))
+}
+func (*binaryClassVec3f) Skip(d binary.Decoder) error { return doSkipVec3f(d) }
+func (*binaryClassVec3f) Schema() *schema.Class       { return schemaVec3f }
+
+var schemaVec3f = &schema.Class{
+	TypeID: binaryIDVec3f,
+	Name:   "Vec3f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 3}},
+	},
+}
+
+type binaryClassMat3f struct{}
+
+func (*Mat3f) Class() binary.Class {
+	return (*binaryClassMat3f)(nil)
+}
+func doEncodeMat3f(e binary.Encoder, o *Mat3f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat3f(d binary.Decoder, o *Mat3f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipMat3f(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat3f) ID() binary.ID      { return binaryIDMat3f }
+func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
+func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3f(e, obj.(*Mat3f))
+}
+func (*binaryClassMat3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3f{}
+	return obj, doDecodeMat3f(d, obj)
+}
+func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3f(d, obj.(*Mat3f))
+}
+func (*binaryClassMat3f) Skip(d binary.Decoder) error { return doSkipMat3f(d) }
+func (*binaryClassMat3f) Schema() *schema.Class       { return schemaMat3f }
+
+var schemaMat3f = &schema.Class{
+	TypeID: binaryIDMat3f,
+	Name:   "Mat3f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f"}, Size: 3}},
+	},
+}
+
+type binaryClassMat3fˢ struct{}
+
+func (*Mat3fˢ) Class() binary.Class {
+	return (*binaryClassMat3fˢ)(nil)
+}
+func doEncodeMat3fˢ(e binary.Encoder, o *Mat3fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3fˢ(d binary.Decoder, o *Mat3fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat3fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3fˢ) ID() binary.ID      { return binaryIDMat3fˢ }
+func (*binaryClassMat3fˢ) New() binary.Object { return &Mat3fˢ{} }
+func (*binaryClassMat3fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3fˢ(e, obj.(*Mat3fˢ))
+}
+func (*binaryClassMat3fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3fˢ{}
+	return obj, doDecodeMat3fˢ(d, obj)
+}
+func (*binaryClassMat3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3fˢ(d, obj.(*Mat3fˢ))
+}
+func (*binaryClassMat3fˢ) Skip(d binary.Decoder) error { return doSkipMat3fˢ(d) }
+func (*binaryClassMat3fˢ) Schema() *schema.Class       { return schemaMat3fˢ }
+
+var schemaMat3fˢ = &schema.Class{
+	TypeID: binaryIDMat3fˢ,
+	Name:   "Mat3fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassMat3fᵖ struct{}
+
+func (*Mat3fᵖ) Class() binary.Class {
+	return (*binaryClassMat3fᵖ)(nil)
+}
+func doEncodeMat3fᵖ(e binary.Encoder, o *Mat3fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3fᵖ(d binary.Decoder, o *Mat3fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipMat3fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3fᵖ) ID() binary.ID      { return binaryIDMat3fᵖ }
+func (*binaryClassMat3fᵖ) New() binary.Object { return &Mat3fᵖ{} }
+func (*binaryClassMat3fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3fᵖ(e, obj.(*Mat3fᵖ))
+}
+func (*binaryClassMat3fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3fᵖ{}
+	return obj, doDecodeMat3fᵖ(d, obj)
+}
+func (*binaryClassMat3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3fᵖ(d, obj.(*Mat3fᵖ))
+}
+func (*binaryClassMat3fᵖ) Skip(d binary.Decoder) error { return doSkipMat3fᵖ(d) }
+func (*binaryClassMat3fᵖ) Schema() *schema.Class       { return schemaMat3fᵖ }
+
+var schemaMat3fᵖ = &schema.Class{
+	TypeID: binaryIDMat3fᵖ,
+	Name:   "Mat3fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec4f struct{}
+
+func (*Vec4f) Class() binary.Class {
+	return (*binaryClassVec4f)(nil)
+}
+func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
+	for i := range o.Elements {
+		if err := e.Float32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
+	for i := range o.Elements {
+		if obj, err := d.Float32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = float32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec4f(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if _, err := d.Float32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
+func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
+func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4f(e, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4f{}
+	return obj, doDecodeVec4f(d, obj)
+}
+func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4f(d, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Skip(d binary.Decoder) error { return doSkipVec4f(d) }
+func (*binaryClassVec4f) Schema() *schema.Class       { return schemaVec4f }
+
+var schemaVec4f = &schema.Class{
+	TypeID: binaryIDVec4f,
+	Name:   "Vec4f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 4}},
+	},
+}
+
+type binaryClassMat4f struct{}
+
+func (*Mat4f) Class() binary.Class {
+	return (*binaryClassMat4f)(nil)
+}
+func doEncodeMat4f(e binary.Encoder, o *Mat4f) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeMat4f(d binary.Decoder, o *Mat4f) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipMat4f(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassMat4f) ID() binary.ID      { return binaryIDMat4f }
+func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
+func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4f(e, obj.(*Mat4f))
+}
+func (*binaryClassMat4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4f{}
+	return obj, doDecodeMat4f(d, obj)
+}
+func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4f(d, obj.(*Mat4f))
+}
+func (*binaryClassMat4f) Skip(d binary.Decoder) error { return doSkipMat4f(d) }
+func (*binaryClassMat4f) Schema() *schema.Class       { return schemaMat4f }
+
+var schemaMat4f = &schema.Class{
+	TypeID: binaryIDMat4f,
+	Name:   "Mat4f",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f"}, Size: 4}},
+	},
+}
+
+type binaryClassMat4fˢ struct{}
+
+func (*Mat4fˢ) Class() binary.Class {
+	return (*binaryClassMat4fˢ)(nil)
+}
+func doEncodeMat4fˢ(e binary.Encoder, o *Mat4fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4fˢ(d binary.Decoder, o *Mat4fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat4fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4fˢ) ID() binary.ID      { return binaryIDMat4fˢ }
+func (*binaryClassMat4fˢ) New() binary.Object { return &Mat4fˢ{} }
+func (*binaryClassMat4fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4fˢ(e, obj.(*Mat4fˢ))
+}
+func (*binaryClassMat4fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4fˢ{}
+	return obj, doDecodeMat4fˢ(d, obj)
+}
+func (*binaryClassMat4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4fˢ(d, obj.(*Mat4fˢ))
+}
+func (*binaryClassMat4fˢ) Skip(d binary.Decoder) error { return doSkipMat4fˢ(d) }
+func (*binaryClassMat4fˢ) Schema() *schema.Class       { return schemaMat4fˢ }
+
+var schemaMat4fˢ = &schema.Class{
+	TypeID: binaryIDMat4fˢ,
+	Name:   "Mat4fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassMat4fᵖ struct{}
+
+func (*Mat4fᵖ) Class() binary.Class {
+	return (*binaryClassMat4fᵖ)(nil)
+}
+func doEncodeMat4fᵖ(e binary.Encoder, o *Mat4fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4fᵖ(d binary.Decoder, o *Mat4fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipMat4fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4fᵖ) ID() binary.ID      { return binaryIDMat4fᵖ }
+func (*binaryClassMat4fᵖ) New() binary.Object { return &Mat4fᵖ{} }
+func (*binaryClassMat4fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4fᵖ(e, obj.(*Mat4fᵖ))
+}
+func (*binaryClassMat4fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4fᵖ{}
+	return obj, doDecodeMat4fᵖ(d, obj)
+}
+func (*binaryClassMat4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4fᵖ(d, obj.(*Mat4fᵖ))
+}
+func (*binaryClassMat4fᵖ) Skip(d binary.Decoder) error { return doSkipMat4fᵖ(d) }
+func (*binaryClassMat4fᵖ) Schema() *schema.Class       { return schemaMat4fᵖ }
+
+var schemaMat4fᵖ = &schema.Class{
+	TypeID: binaryIDMat4fᵖ,
+	Name:   "Mat4fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassQueryIdˢ struct{}
 
 func (*QueryIdˢ) Class() binary.Class {
@@ -24072,6 +24022,168 @@ var schemaReplayCreateRenderer = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassS32ː2ᵃ struct{}
+
+func (*S32ː2ᵃ) Class() binary.Class {
+	return (*binaryClassS32ː2ᵃ)(nil)
+}
+func doEncodeS32ː2ᵃ(e binary.Encoder, o *S32ː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeS32ː2ᵃ(d binary.Decoder, o *S32ː2ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipS32ː2ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassS32ː2ᵃ) ID() binary.ID      { return binaryIDS32ː2ᵃ }
+func (*binaryClassS32ː2ᵃ) New() binary.Object { return &S32ː2ᵃ{} }
+func (*binaryClassS32ː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS32ː2ᵃ(e, obj.(*S32ː2ᵃ))
+}
+func (*binaryClassS32ː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S32ː2ᵃ{}
+	return obj, doDecodeS32ː2ᵃ(d, obj)
+}
+func (*binaryClassS32ː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS32ː2ᵃ(d, obj.(*S32ː2ᵃ))
+}
+func (*binaryClassS32ː2ᵃ) Skip(d binary.Decoder) error { return doSkipS32ː2ᵃ(d) }
+func (*binaryClassS32ː2ᵃ) Schema() *schema.Class       { return schemaS32ː2ᵃ }
+
+var schemaS32ː2ᵃ = &schema.Class{
+	TypeID: binaryIDS32ː2ᵃ,
+	Name:   "S32ː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 2}},
+	},
+}
+
+type binaryClassS32ː3ᵃ struct{}
+
+func (*S32ː3ᵃ) Class() binary.Class {
+	return (*binaryClassS32ː3ᵃ)(nil)
+}
+func doEncodeS32ː3ᵃ(e binary.Encoder, o *S32ː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeS32ː3ᵃ(d binary.Decoder, o *S32ː3ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipS32ː3ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassS32ː3ᵃ) ID() binary.ID      { return binaryIDS32ː3ᵃ }
+func (*binaryClassS32ː3ᵃ) New() binary.Object { return &S32ː3ᵃ{} }
+func (*binaryClassS32ː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS32ː3ᵃ(e, obj.(*S32ː3ᵃ))
+}
+func (*binaryClassS32ː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S32ː3ᵃ{}
+	return obj, doDecodeS32ː3ᵃ(d, obj)
+}
+func (*binaryClassS32ː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS32ː3ᵃ(d, obj.(*S32ː3ᵃ))
+}
+func (*binaryClassS32ː3ᵃ) Skip(d binary.Decoder) error { return doSkipS32ː3ᵃ(d) }
+func (*binaryClassS32ː3ᵃ) Schema() *schema.Class       { return schemaS32ː3ᵃ }
+
+var schemaS32ː3ᵃ = &schema.Class{
+	TypeID: binaryIDS32ː3ᵃ,
+	Name:   "S32ː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 3}},
+	},
+}
+
+type binaryClassS32ː4ᵃ struct{}
+
+func (*S32ː4ᵃ) Class() binary.Class {
+	return (*binaryClassS32ː4ᵃ)(nil)
+}
+func doEncodeS32ː4ᵃ(e binary.Encoder, o *S32ː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeS32ː4ᵃ(d binary.Decoder, o *S32ː4ᵃ) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipS32ː4ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassS32ː4ᵃ) ID() binary.ID      { return binaryIDS32ː4ᵃ }
+func (*binaryClassS32ː4ᵃ) New() binary.Object { return &S32ː4ᵃ{} }
+func (*binaryClassS32ː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS32ː4ᵃ(e, obj.(*S32ː4ᵃ))
+}
+func (*binaryClassS32ː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S32ː4ᵃ{}
+	return obj, doDecodeS32ː4ᵃ(d, obj)
+}
+func (*binaryClassS32ː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS32ː4ᵃ(d, obj.(*S32ː4ᵃ))
+}
+func (*binaryClassS32ː4ᵃ) Skip(d binary.Decoder) error { return doSkipS32ː4ᵃ(d) }
+func (*binaryClassS32ː4ᵃ) Schema() *schema.Class       { return schemaS32ː4ᵃ }
+
+var schemaS32ː4ᵃ = &schema.Class{
+	TypeID: binaryIDS32ː4ᵃ,
+	Name:   "S32ː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 4}},
 	},
 }
 
@@ -24627,6 +24739,960 @@ func (*binaryClassU8ᵖ) Schema() *schema.Class       { return schemaU8ᵖ }
 var schemaU8ᵖ = &schema.Class{
 	TypeID: binaryIDU8ᵖ,
 	Name:   "U8ᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec2fː2ᵃ struct{}
+
+func (*Vec2fː2ᵃ) Class() binary.Class {
+	return (*binaryClassVec2fː2ᵃ)(nil)
+}
+func doEncodeVec2fː2ᵃ(e binary.Encoder, o *Vec2fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2fː2ᵃ(d binary.Decoder, o *Vec2fː2ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipVec2fː2ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if err := d.SkipValue((*Vec2f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2fː2ᵃ) ID() binary.ID      { return binaryIDVec2fː2ᵃ }
+func (*binaryClassVec2fː2ᵃ) New() binary.Object { return &Vec2fː2ᵃ{} }
+func (*binaryClassVec2fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2fː2ᵃ(e, obj.(*Vec2fː2ᵃ))
+}
+func (*binaryClassVec2fː2ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2fː2ᵃ{}
+	return obj, doDecodeVec2fː2ᵃ(d, obj)
+}
+func (*binaryClassVec2fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2fː2ᵃ(d, obj.(*Vec2fː2ᵃ))
+}
+func (*binaryClassVec2fː2ᵃ) Skip(d binary.Decoder) error { return doSkipVec2fː2ᵃ(d) }
+func (*binaryClassVec2fː2ᵃ) Schema() *schema.Class       { return schemaVec2fː2ᵃ }
+
+var schemaVec2fː2ᵃ = &schema.Class{
+	TypeID: binaryIDVec2fː2ᵃ,
+	Name:   "Vec2fː2ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f"}, Size: 2}},
+	},
+}
+
+type binaryClassVec2fˢ struct{}
+
+func (*Vec2fˢ) Class() binary.Class {
+	return (*binaryClassVec2fˢ)(nil)
+}
+func doEncodeVec2fˢ(e binary.Encoder, o *Vec2fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2fˢ(d binary.Decoder, o *Vec2fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec2fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2fˢ) ID() binary.ID      { return binaryIDVec2fˢ }
+func (*binaryClassVec2fˢ) New() binary.Object { return &Vec2fˢ{} }
+func (*binaryClassVec2fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2fˢ(e, obj.(*Vec2fˢ))
+}
+func (*binaryClassVec2fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2fˢ{}
+	return obj, doDecodeVec2fˢ(d, obj)
+}
+func (*binaryClassVec2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2fˢ(d, obj.(*Vec2fˢ))
+}
+func (*binaryClassVec2fˢ) Skip(d binary.Decoder) error { return doSkipVec2fˢ(d) }
+func (*binaryClassVec2fˢ) Schema() *schema.Class       { return schemaVec2fˢ }
+
+var schemaVec2fˢ = &schema.Class{
+	TypeID: binaryIDVec2fˢ,
+	Name:   "Vec2fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec2fᵖ struct{}
+
+func (*Vec2fᵖ) Class() binary.Class {
+	return (*binaryClassVec2fᵖ)(nil)
+}
+func doEncodeVec2fᵖ(e binary.Encoder, o *Vec2fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2fᵖ(d binary.Decoder, o *Vec2fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec2fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2fᵖ) ID() binary.ID      { return binaryIDVec2fᵖ }
+func (*binaryClassVec2fᵖ) New() binary.Object { return &Vec2fᵖ{} }
+func (*binaryClassVec2fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2fᵖ(e, obj.(*Vec2fᵖ))
+}
+func (*binaryClassVec2fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2fᵖ{}
+	return obj, doDecodeVec2fᵖ(d, obj)
+}
+func (*binaryClassVec2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2fᵖ(d, obj.(*Vec2fᵖ))
+}
+func (*binaryClassVec2fᵖ) Skip(d binary.Decoder) error { return doSkipVec2fᵖ(d) }
+func (*binaryClassVec2fᵖ) Schema() *schema.Class       { return schemaVec2fᵖ }
+
+var schemaVec2fᵖ = &schema.Class{
+	TypeID: binaryIDVec2fᵖ,
+	Name:   "Vec2fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec2i struct{}
+
+func (*Vec2i) Class() binary.Class {
+	return (*binaryClassVec2i)(nil)
+}
+func doEncodeVec2i(e binary.Encoder, o *Vec2i) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec2i(d binary.Decoder, o *Vec2i) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec2i(d binary.Decoder) error {
+	for i := uint32(0); i < 2; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec2i) ID() binary.ID      { return binaryIDVec2i }
+func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
+func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2i(e, obj.(*Vec2i))
+}
+func (*binaryClassVec2i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2i{}
+	return obj, doDecodeVec2i(d, obj)
+}
+func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2i(d, obj.(*Vec2i))
+}
+func (*binaryClassVec2i) Skip(d binary.Decoder) error { return doSkipVec2i(d) }
+func (*binaryClassVec2i) Schema() *schema.Class       { return schemaVec2i }
+
+var schemaVec2i = &schema.Class{
+	TypeID: binaryIDVec2i,
+	Name:   "Vec2i",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 2}},
+	},
+}
+
+type binaryClassVec2iˢ struct{}
+
+func (*Vec2iˢ) Class() binary.Class {
+	return (*binaryClassVec2iˢ)(nil)
+}
+func doEncodeVec2iˢ(e binary.Encoder, o *Vec2iˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2iˢ(d binary.Decoder, o *Vec2iˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec2iˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2iˢ) ID() binary.ID      { return binaryIDVec2iˢ }
+func (*binaryClassVec2iˢ) New() binary.Object { return &Vec2iˢ{} }
+func (*binaryClassVec2iˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2iˢ(e, obj.(*Vec2iˢ))
+}
+func (*binaryClassVec2iˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2iˢ{}
+	return obj, doDecodeVec2iˢ(d, obj)
+}
+func (*binaryClassVec2iˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2iˢ(d, obj.(*Vec2iˢ))
+}
+func (*binaryClassVec2iˢ) Skip(d binary.Decoder) error { return doSkipVec2iˢ(d) }
+func (*binaryClassVec2iˢ) Schema() *schema.Class       { return schemaVec2iˢ }
+
+var schemaVec2iˢ = &schema.Class{
+	TypeID: binaryIDVec2iˢ,
+	Name:   "Vec2iˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec2iᵖ struct{}
+
+func (*Vec2iᵖ) Class() binary.Class {
+	return (*binaryClassVec2iᵖ)(nil)
+}
+func doEncodeVec2iᵖ(e binary.Encoder, o *Vec2iᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2iᵖ(d binary.Decoder, o *Vec2iᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec2iᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2iᵖ) ID() binary.ID      { return binaryIDVec2iᵖ }
+func (*binaryClassVec2iᵖ) New() binary.Object { return &Vec2iᵖ{} }
+func (*binaryClassVec2iᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2iᵖ(e, obj.(*Vec2iᵖ))
+}
+func (*binaryClassVec2iᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2iᵖ{}
+	return obj, doDecodeVec2iᵖ(d, obj)
+}
+func (*binaryClassVec2iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2iᵖ(d, obj.(*Vec2iᵖ))
+}
+func (*binaryClassVec2iᵖ) Skip(d binary.Decoder) error { return doSkipVec2iᵖ(d) }
+func (*binaryClassVec2iᵖ) Schema() *schema.Class       { return schemaVec2iᵖ }
+
+var schemaVec2iᵖ = &schema.Class{
+	TypeID: binaryIDVec2iᵖ,
+	Name:   "Vec2iᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec3fː3ᵃ struct{}
+
+func (*Vec3fː3ᵃ) Class() binary.Class {
+	return (*binaryClassVec3fː3ᵃ)(nil)
+}
+func doEncodeVec3fː3ᵃ(e binary.Encoder, o *Vec3fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3fː3ᵃ(d binary.Decoder, o *Vec3fː3ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipVec3fː3ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3fː3ᵃ) ID() binary.ID      { return binaryIDVec3fː3ᵃ }
+func (*binaryClassVec3fː3ᵃ) New() binary.Object { return &Vec3fː3ᵃ{} }
+func (*binaryClassVec3fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3fː3ᵃ(e, obj.(*Vec3fː3ᵃ))
+}
+func (*binaryClassVec3fː3ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3fː3ᵃ{}
+	return obj, doDecodeVec3fː3ᵃ(d, obj)
+}
+func (*binaryClassVec3fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3fː3ᵃ(d, obj.(*Vec3fː3ᵃ))
+}
+func (*binaryClassVec3fː3ᵃ) Skip(d binary.Decoder) error { return doSkipVec3fː3ᵃ(d) }
+func (*binaryClassVec3fː3ᵃ) Schema() *schema.Class       { return schemaVec3fː3ᵃ }
+
+var schemaVec3fː3ᵃ = &schema.Class{
+	TypeID: binaryIDVec3fː3ᵃ,
+	Name:   "Vec3fː3ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f"}, Size: 3}},
+	},
+}
+
+type binaryClassVec3fˢ struct{}
+
+func (*Vec3fˢ) Class() binary.Class {
+	return (*binaryClassVec3fˢ)(nil)
+}
+func doEncodeVec3fˢ(e binary.Encoder, o *Vec3fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3fˢ(d binary.Decoder, o *Vec3fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec3fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3fˢ) ID() binary.ID      { return binaryIDVec3fˢ }
+func (*binaryClassVec3fˢ) New() binary.Object { return &Vec3fˢ{} }
+func (*binaryClassVec3fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3fˢ(e, obj.(*Vec3fˢ))
+}
+func (*binaryClassVec3fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3fˢ{}
+	return obj, doDecodeVec3fˢ(d, obj)
+}
+func (*binaryClassVec3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3fˢ(d, obj.(*Vec3fˢ))
+}
+func (*binaryClassVec3fˢ) Skip(d binary.Decoder) error { return doSkipVec3fˢ(d) }
+func (*binaryClassVec3fˢ) Schema() *schema.Class       { return schemaVec3fˢ }
+
+var schemaVec3fˢ = &schema.Class{
+	TypeID: binaryIDVec3fˢ,
+	Name:   "Vec3fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec3fᵖ struct{}
+
+func (*Vec3fᵖ) Class() binary.Class {
+	return (*binaryClassVec3fᵖ)(nil)
+}
+func doEncodeVec3fᵖ(e binary.Encoder, o *Vec3fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3fᵖ(d binary.Decoder, o *Vec3fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec3fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3fᵖ) ID() binary.ID      { return binaryIDVec3fᵖ }
+func (*binaryClassVec3fᵖ) New() binary.Object { return &Vec3fᵖ{} }
+func (*binaryClassVec3fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3fᵖ(e, obj.(*Vec3fᵖ))
+}
+func (*binaryClassVec3fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3fᵖ{}
+	return obj, doDecodeVec3fᵖ(d, obj)
+}
+func (*binaryClassVec3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3fᵖ(d, obj.(*Vec3fᵖ))
+}
+func (*binaryClassVec3fᵖ) Skip(d binary.Decoder) error { return doSkipVec3fᵖ(d) }
+func (*binaryClassVec3fᵖ) Schema() *schema.Class       { return schemaVec3fᵖ }
+
+var schemaVec3fᵖ = &schema.Class{
+	TypeID: binaryIDVec3fᵖ,
+	Name:   "Vec3fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec3i struct{}
+
+func (*Vec3i) Class() binary.Class {
+	return (*binaryClassVec3i)(nil)
+}
+func doEncodeVec3i(e binary.Encoder, o *Vec3i) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec3i(d binary.Decoder, o *Vec3i) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec3i(d binary.Decoder) error {
+	for i := uint32(0); i < 3; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec3i) ID() binary.ID      { return binaryIDVec3i }
+func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
+func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3i(e, obj.(*Vec3i))
+}
+func (*binaryClassVec3i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3i{}
+	return obj, doDecodeVec3i(d, obj)
+}
+func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3i(d, obj.(*Vec3i))
+}
+func (*binaryClassVec3i) Skip(d binary.Decoder) error { return doSkipVec3i(d) }
+func (*binaryClassVec3i) Schema() *schema.Class       { return schemaVec3i }
+
+var schemaVec3i = &schema.Class{
+	TypeID: binaryIDVec3i,
+	Name:   "Vec3i",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 3}},
+	},
+}
+
+type binaryClassVec3iˢ struct{}
+
+func (*Vec3iˢ) Class() binary.Class {
+	return (*binaryClassVec3iˢ)(nil)
+}
+func doEncodeVec3iˢ(e binary.Encoder, o *Vec3iˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3iˢ(d binary.Decoder, o *Vec3iˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec3iˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3iˢ) ID() binary.ID      { return binaryIDVec3iˢ }
+func (*binaryClassVec3iˢ) New() binary.Object { return &Vec3iˢ{} }
+func (*binaryClassVec3iˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3iˢ(e, obj.(*Vec3iˢ))
+}
+func (*binaryClassVec3iˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3iˢ{}
+	return obj, doDecodeVec3iˢ(d, obj)
+}
+func (*binaryClassVec3iˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3iˢ(d, obj.(*Vec3iˢ))
+}
+func (*binaryClassVec3iˢ) Skip(d binary.Decoder) error { return doSkipVec3iˢ(d) }
+func (*binaryClassVec3iˢ) Schema() *schema.Class       { return schemaVec3iˢ }
+
+var schemaVec3iˢ = &schema.Class{
+	TypeID: binaryIDVec3iˢ,
+	Name:   "Vec3iˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec3iᵖ struct{}
+
+func (*Vec3iᵖ) Class() binary.Class {
+	return (*binaryClassVec3iᵖ)(nil)
+}
+func doEncodeVec3iᵖ(e binary.Encoder, o *Vec3iᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3iᵖ(d binary.Decoder, o *Vec3iᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec3iᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3iᵖ) ID() binary.ID      { return binaryIDVec3iᵖ }
+func (*binaryClassVec3iᵖ) New() binary.Object { return &Vec3iᵖ{} }
+func (*binaryClassVec3iᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3iᵖ(e, obj.(*Vec3iᵖ))
+}
+func (*binaryClassVec3iᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3iᵖ{}
+	return obj, doDecodeVec3iᵖ(d, obj)
+}
+func (*binaryClassVec3iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3iᵖ(d, obj.(*Vec3iᵖ))
+}
+func (*binaryClassVec3iᵖ) Skip(d binary.Decoder) error { return doSkipVec3iᵖ(d) }
+func (*binaryClassVec3iᵖ) Schema() *schema.Class       { return schemaVec3iᵖ }
+
+var schemaVec3iᵖ = &schema.Class{
+	TypeID: binaryIDVec3iᵖ,
+	Name:   "Vec3iᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec4fː4ᵃ struct{}
+
+func (*Vec4fː4ᵃ) Class() binary.Class {
+	return (*binaryClassVec4fː4ᵃ)(nil)
+}
+func doEncodeVec4fː4ᵃ(e binary.Encoder, o *Vec4fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := e.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4fː4ᵃ(d binary.Decoder, o *Vec4fː4ᵃ) error {
+	for i := range o.Elements {
+		if err := d.Value(&o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipVec4fː4ᵃ(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4fː4ᵃ) ID() binary.ID      { return binaryIDVec4fː4ᵃ }
+func (*binaryClassVec4fː4ᵃ) New() binary.Object { return &Vec4fː4ᵃ{} }
+func (*binaryClassVec4fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4fː4ᵃ(e, obj.(*Vec4fː4ᵃ))
+}
+func (*binaryClassVec4fː4ᵃ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4fː4ᵃ{}
+	return obj, doDecodeVec4fː4ᵃ(d, obj)
+}
+func (*binaryClassVec4fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4fː4ᵃ(d, obj.(*Vec4fː4ᵃ))
+}
+func (*binaryClassVec4fː4ᵃ) Skip(d binary.Decoder) error { return doSkipVec4fː4ᵃ(d) }
+func (*binaryClassVec4fː4ᵃ) Schema() *schema.Class       { return schemaVec4fː4ᵃ }
+
+var schemaVec4fː4ᵃ = &schema.Class{
+	TypeID: binaryIDVec4fː4ᵃ,
+	Name:   "Vec4fː4ᵃ",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f"}, Size: 4}},
+	},
+}
+
+type binaryClassVec4fˢ struct{}
+
+func (*Vec4fˢ) Class() binary.Class {
+	return (*binaryClassVec4fˢ)(nil)
+}
+func doEncodeVec4fˢ(e binary.Encoder, o *Vec4fˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4fˢ(d binary.Decoder, o *Vec4fˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec4fˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4fˢ) ID() binary.ID      { return binaryIDVec4fˢ }
+func (*binaryClassVec4fˢ) New() binary.Object { return &Vec4fˢ{} }
+func (*binaryClassVec4fˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4fˢ(e, obj.(*Vec4fˢ))
+}
+func (*binaryClassVec4fˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4fˢ{}
+	return obj, doDecodeVec4fˢ(d, obj)
+}
+func (*binaryClassVec4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4fˢ(d, obj.(*Vec4fˢ))
+}
+func (*binaryClassVec4fˢ) Skip(d binary.Decoder) error { return doSkipVec4fˢ(d) }
+func (*binaryClassVec4fˢ) Schema() *schema.Class       { return schemaVec4fˢ }
+
+var schemaVec4fˢ = &schema.Class{
+	TypeID: binaryIDVec4fˢ,
+	Name:   "Vec4fˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec4fᵖ struct{}
+
+func (*Vec4fᵖ) Class() binary.Class {
+	return (*binaryClassVec4fᵖ)(nil)
+}
+func doEncodeVec4fᵖ(e binary.Encoder, o *Vec4fᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4fᵖ(d binary.Decoder, o *Vec4fᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec4fᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4fᵖ) ID() binary.ID      { return binaryIDVec4fᵖ }
+func (*binaryClassVec4fᵖ) New() binary.Object { return &Vec4fᵖ{} }
+func (*binaryClassVec4fᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4fᵖ(e, obj.(*Vec4fᵖ))
+}
+func (*binaryClassVec4fᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4fᵖ{}
+	return obj, doDecodeVec4fᵖ(d, obj)
+}
+func (*binaryClassVec4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4fᵖ(d, obj.(*Vec4fᵖ))
+}
+func (*binaryClassVec4fᵖ) Skip(d binary.Decoder) error { return doSkipVec4fᵖ(d) }
+func (*binaryClassVec4fᵖ) Schema() *schema.Class       { return schemaVec4fᵖ }
+
+var schemaVec4fᵖ = &schema.Class{
+	TypeID: binaryIDVec4fᵖ,
+	Name:   "Vec4fᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVec4i struct{}
+
+func (*Vec4i) Class() binary.Class {
+	return (*binaryClassVec4i)(nil)
+}
+func doEncodeVec4i(e binary.Encoder, o *Vec4i) error {
+	for i := range o.Elements {
+		if err := e.Int32(o.Elements[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeVec4i(d binary.Decoder, o *Vec4i) error {
+	for i := range o.Elements {
+		if obj, err := d.Int32(); err != nil {
+			return err
+		} else {
+			o.Elements[i] = int32(obj)
+		}
+	}
+	return nil
+}
+func doSkipVec4i(d binary.Decoder) error {
+	for i := uint32(0); i < 4; i++ {
+		if _, err := d.Int32(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassVec4i) ID() binary.ID      { return binaryIDVec4i }
+func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
+func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4i(e, obj.(*Vec4i))
+}
+func (*binaryClassVec4i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4i{}
+	return obj, doDecodeVec4i(d, obj)
+}
+func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4i(d, obj.(*Vec4i))
+}
+func (*binaryClassVec4i) Skip(d binary.Decoder) error { return doSkipVec4i(d) }
+func (*binaryClassVec4i) Schema() *schema.Class       { return schemaVec4i }
+
+var schemaVec4i = &schema.Class{
+	TypeID: binaryIDVec4i,
+	Name:   "Vec4i",
+	Fields: []schema.Field{
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 4}},
+	},
+}
+
+type binaryClassVec4iˢ struct{}
+
+func (*Vec4iˢ) Class() binary.Class {
+	return (*binaryClassVec4iˢ)(nil)
+}
+func doEncodeVec4iˢ(e binary.Encoder, o *Vec4iˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4iˢ(d binary.Decoder, o *Vec4iˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipVec4iˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4iˢ) ID() binary.ID      { return binaryIDVec4iˢ }
+func (*binaryClassVec4iˢ) New() binary.Object { return &Vec4iˢ{} }
+func (*binaryClassVec4iˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4iˢ(e, obj.(*Vec4iˢ))
+}
+func (*binaryClassVec4iˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4iˢ{}
+	return obj, doDecodeVec4iˢ(d, obj)
+}
+func (*binaryClassVec4iˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4iˢ(d, obj.(*Vec4iˢ))
+}
+func (*binaryClassVec4iˢ) Skip(d binary.Decoder) error { return doSkipVec4iˢ(d) }
+func (*binaryClassVec4iˢ) Schema() *schema.Class       { return schemaVec4iˢ }
+
+var schemaVec4iˢ = &schema.Class{
+	TypeID: binaryIDVec4iˢ,
+	Name:   "Vec4iˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassVec4iᵖ struct{}
+
+func (*Vec4iᵖ) Class() binary.Class {
+	return (*binaryClassVec4iᵖ)(nil)
+}
+func doEncodeVec4iᵖ(e binary.Encoder, o *Vec4iᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4iᵖ(d binary.Decoder, o *Vec4iᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVec4iᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4iᵖ) ID() binary.ID      { return binaryIDVec4iᵖ }
+func (*binaryClassVec4iᵖ) New() binary.Object { return &Vec4iᵖ{} }
+func (*binaryClassVec4iᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4iᵖ(e, obj.(*Vec4iᵖ))
+}
+func (*binaryClassVec4iᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4iᵖ{}
+	return obj, doDecodeVec4iᵖ(d, obj)
+}
+func (*binaryClassVec4iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4iᵖ(d, obj.(*Vec4iᵖ))
+}
+func (*binaryClassVec4iᵖ) Skip(d binary.Decoder) error { return doSkipVec4iᵖ(d) }
+func (*binaryClassVec4iᵖ) Schema() *schema.Class       { return schemaVec4iᵖ }
+
+var schemaVec4iᵖ = &schema.Class{
+	TypeID: binaryIDVec4iᵖ,
+	Name:   "Vec4iᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
