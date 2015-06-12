@@ -21,18 +21,18 @@ inline uint32_t minIndex(const uint8_t* indices, uint32_t indices_type, uint32_t
     uint32_t v = ~(uint32_t)0;
     switch (indices_type) {
         case gapii::IndicesType::GL_UNSIGNED_BYTE: {
-            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[0]);
-            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
+            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[offset]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_SHORT: {
-            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[0]);
-            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
+            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[offset]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_INT: {
-            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[0]);
-            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
+            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[offset]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
         }
     }
@@ -43,17 +43,17 @@ inline uint32_t maxIndex(const uint8_t* indices, uint32_t indices_type, uint32_t
     uint32_t v = 0;
     switch (indices_type) {
         case gapii::IndicesType::GL_UNSIGNED_BYTE: {
-            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[0]);
+            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_SHORT: {
-            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[0]);
+            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_INT: {
-            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[0]);
+            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
