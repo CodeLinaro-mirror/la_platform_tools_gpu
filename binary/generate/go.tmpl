@@ -184,7 +184,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			}{{end}}
 		} {{end}}
 
-{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Length}}; i++ {
+{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Size}}; i++ {
 			{{Skip (print .Name "[i]") .Type.ValueType}}
 		}{{end}}
 

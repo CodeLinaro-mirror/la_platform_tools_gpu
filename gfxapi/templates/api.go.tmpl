@@ -41,6 +41,10 @@
     {{template "Pointer" $p}}
   {{end}}
 
+  {{range $s := $.StaticArrays}}
+    {{template "Array" $s}}
+  {{end}}
+
   {{range $s := $.Slices}}
     {{template "Slice" $s}}
   {{end}}
@@ -86,6 +90,27 @@
       return b
     }
   }
+
+  // SliceInfo is the common data between all slice types.
+  type SliceInfo struct {
+    binary.Generate
+    Root  memory.Pointer // Original pointer this slice derives from.
+    Base  memory.Pointer // Address of first element.
+    Count uint64         // Number of elements in the slice.
+    Pool  memory.PoolID  // Pool that holds the element data.
+  }
+
+  // Info returns the SliceInfo. It is used to conform to the Slice interface.
+  func (s SliceInfo) Info() SliceInfo { return s }
+
+  // Slice is the interface implemented by all slice types
+  type Slice interface {
+    // Info returns the SliceInfo of this slice.
+    Info() SliceInfo
+
+    // ElementSize returns the size in bytes of a single element in the slice.
+    ElementSize(ϟs *gfxapi.State) uint64
+  }
 {{end}}
 
 
@@ -102,6 +127,21 @@
   {{else if IsSlice    $u}}{{Macro "Slice"   $}}
   {{else                 }}type {{$.Name}} {{Macro "Go.Type" $.To}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration for the static-array type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Array"}}
+  {{AssertType $ "StaticArray"}}
+
+  type {{Macro "Go.Type" $}} struct {
+    binary.Generate
+    Elements [{{$.Size}}]{{Macro "Go.Type" $.ValueType}}
+  }
 {{end}}
 
 
@@ -188,7 +228,7 @@
     if start > end {
       panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
     }
-    return {{$slice_ty}}{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end-start, Pool: p.Pool}
+    return {{$slice_ty}}{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end-start, Pool: p.Pool}}
   }
 
   // String returns a string description of the {{$ptr_ty}} pointer.
@@ -216,12 +256,10 @@
   {{$el_is_void := IsVoid    ($s.To | Underlying | Unpack) }}
   {{$el_is_ptr  := IsPointer ($s.To | Underlying | Unpack) }}
 
+  // {{$slice_ty}} is a slice of {{$el_ty}}.
   type {{$slice_ty}} struct {
     binary.Generate
-    Root    memory.Pointer // Original pointer this slice derives from.
-    Base    memory.Pointer // Address of first element.
-    Count   uint64         // Number of elements in the slice.
-    Pool    memory.PoolID  // Pool that holds the element data.
+    SliceInfo
   }
 
   {{if $el_is_char}}
@@ -233,7 +271,7 @@
       id := ϟs.NextPoolID
       ϟs.Memory[id] = pool
       ϟs.NextPoolID++
-      return {{$slice_ty}}{Count: uint64(len(str)), Pool: id}
+      return {{$slice_ty}}{SliceInfo: SliceInfo{Count: uint64(len(str)), Pool: id}}
     }
   {{end}}
 
@@ -242,7 +280,7 @@
     id := ϟs.NextPoolID
     ϟs.Memory[id] = &memory.Pool{}
     ϟs.NextPoolID++
-    return {{$slice_ty}}{Count: count, Pool: id}
+    return {{$slice_ty}}{SliceInfo: SliceInfo{Count: count, Pool: id}}
   }
 
   // Clone returns a copy of the {{$slice_ty}} in a new memory pool.
@@ -252,7 +290,7 @@
     id := ϟs.NextPoolID
     ϟs.Memory[id] = pool
     ϟs.NextPoolID++
-    dst := {{$slice_ty}}{Count: s.Count, Pool: id}
+    dst := {{$slice_ty}}{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
     return dst
   }
 
@@ -295,6 +333,15 @@
   }
 
   {{if not $el_is_void}}
+    // As{{$slice_ty}} returns s cast to a {{$slice_ty}}.
+    // The returned slice length will be calculated so that the returned slice is
+    // no longer (in bytes) than s.
+    func As{{$slice_ty}}(s Slice, ϟs *gfxapi.State) {{$slice_ty}} {
+      out := {{$slice_ty}}{ SliceInfo: s.Info() }
+      out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+      return out
+    }
+
     // Read reads and returns all the {{$el_ty}} elements in this {{$slice_ty}}.
     func (s {{$slice_ty}}) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []{{$el_ty}} {
       d, res := s.Decoder(ϟs, ϟd, ϟl), make([]{{$el_ty}}, s.Count)
@@ -365,7 +412,7 @@
     if end > s.Count {
       panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
     }
-    return {{$slice_ty}}{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end-start, Pool: s.Pool}
+    return {{$slice_ty}}{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end-start, Pool: s.Pool}}
   }
 
   // String returns a string description of the {{$slice_ty}} slice.

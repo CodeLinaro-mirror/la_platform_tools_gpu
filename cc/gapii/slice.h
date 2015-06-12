@@ -46,6 +46,11 @@ public:
     // Care must be taken to not mutate data in the application pool.
     inline T& operator[](uint64_t index) const;
 
+    // As casts this slice to a slice of type U.
+    // The return slice length will be calculated so that the returned slice length is no longer
+    // (in bytes) than this slice.
+    template<typename U> inline Slice<U> as() const;
+
     // Support for range-based for looping
     inline T* begin() const;
     inline T* end() const;
@@ -86,6 +91,12 @@ inline Slice<T> Slice<T>::operator()(uint64_t start, uint64_t end) const {
 template<typename T>
 inline T& Slice<T>::operator[](uint64_t index) const {
     return mBase[index];
+}
+
+template<typename T> template<typename U>
+inline Slice<U> Slice<T>::as() const {
+    uint64_t count = size() / sizeof(U);
+    return Slice<U>(reinterpret_cast<U*>(mBase), count, mPool);
 }
 
 template<typename T>

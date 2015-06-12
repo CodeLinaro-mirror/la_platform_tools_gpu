@@ -106,7 +106,7 @@
 
   struct {{Macro "C++.Type" $}} {
     {{range $f := $.Fields}}
-      inline {{Macro "C++.Type" $}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v{{Macro "C++.ArrayPostfix" $f}}) {
+      inline {{Macro "C++.Type" $}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v{{Macro "C++.StaticArraySuffix" $f}}) {
       {{if IsStaticArray $f.Type}}
         {{$sa := Unpack $f.Type}}
         memcpy(m{{$f.Name}}, v, sizeof({{Macro "C++.Type" $f}}) * {{$sa.Size}});
@@ -118,7 +118,7 @@
     {{end}}
 ¶
     {{range $f := $.Fields}}
-      {{Macro "C++.Type" $f}} m{{$f.Name}}{{Macro "C++.ArrayPostfix" $f}};
+      {{Macro "C++.Type" $f}} m{{$f.Name}}{{Macro "C++.StaticArraySuffix" $f}};
     {{end}}
   };
 {{end}}
@@ -151,7 +151,7 @@
 
   {{Macro "DeclareType" $.To}}
 
-  typedef {{Macro "C++.Type" $.To}} {{Macro "C++.Type" $}};
+  typedef {{Macro "C++.Type" $.To}} {{Macro "C++.Type" $}}{{Macro "C++.StaticArraySuffix" $.To}};
 {{end}}
 
 

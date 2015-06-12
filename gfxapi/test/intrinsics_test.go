@@ -22,6 +22,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 func checkBytes(t *testing.T, got, expected []byte) {
@@ -39,7 +40,7 @@ func TestClone(t *testing.T) {
 	} {
 		a.Mutate(s, d, l)
 	}
-	got := getState(s).Buf.Read(s, d, l)
+	got := getState(s).U8s.Read(s, d, l)
 	checkBytes(t, got, expected)
 }
 
@@ -49,7 +50,7 @@ func TestMake(t *testing.T) {
 		t.Errorf("Expected initial NextPoolID to be 1, instead got %d", s.NextPoolID)
 	}
 	NewCmdMake(10).Mutate(s, d, l)
-	if c := getState(s).Buf.Count; c != 10 {
+	if c := getState(s).U8s.Count; c != 10 {
 		t.Errorf("Expected buffer count to be 10, instead got %d", c)
 	}
 	if s.NextPoolID != 2 {
@@ -67,7 +68,7 @@ func TestCopy(t *testing.T) {
 	} {
 		a.Mutate(s, d, l)
 	}
-	got := getState(s).Buf.Read(s, d, l)
+	got := getState(s).U8s.Read(s, d, l)
 	checkBytes(t, got, expected)
 }
 
@@ -90,5 +91,24 @@ func TestCharptrToString(t *testing.T) {
 		Mutate(s, d, l)
 	if got := getState(s).Str; got != expected {
 		t.Errorf("Data was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
+	}
+}
+
+func TestSliceCasts(t *testing.T) {
+	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s.Architecture.IntegerSize = 6 // non-multiple of u16
+	addr := memory.Pointer(0x1234)
+	NewCmdSliceCasts(0x1234, 10).Mutate(s, d, l)
+	if got, expected := getState(s).U8s, NewU8ᵖ(addr).Slice(0, 20, s); got != expected {
+		t.Errorf("U16[] -> U8[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
+	}
+	if got, expected := getState(s).U16s, NewU16ᵖ(addr).Slice(0, 10, s); got != expected {
+		t.Errorf("U16[] -> U16[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
+	}
+	if got, expected := getState(s).U32s, NewU32ᵖ(addr).Slice(0, 5, s); got != expected {
+		t.Errorf("U16[] -> U32[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
+	}
+	if got, expected := getState(s).Ints, NewIntᵖ(addr).Slice(0, 3, s); got != expected {
+		t.Errorf("U16[] -> int[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
 }

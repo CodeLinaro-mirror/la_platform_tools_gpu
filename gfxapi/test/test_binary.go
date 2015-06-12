@@ -14,6 +14,7 @@ import (
 )
 
 func init() {
+	registry.Add((*SliceInfo)(nil).Class())
 	registry.Add((*Boolˢ)(nil).Class())
 	registry.Add((*Boolᵖ)(nil).Class())
 	registry.Add((*Charˢ)(nil).Class())
@@ -36,6 +37,8 @@ func init() {
 	registry.Add((*CmdS32)(nil).Class())
 	registry.Add((*CmdS64)(nil).Class())
 	registry.Add((*CmdS8)(nil).Class())
+	registry.Add((*U16ᵖ)(nil).Class())
+	registry.Add((*CmdSliceCasts)(nil).Class())
 	registry.Add((*CmdString)(nil).Class())
 	registry.Add((*CmdU16)(nil).Class())
 	registry.Add((*CmdU32)(nil).Class())
@@ -63,7 +66,6 @@ func init() {
 	registry.Add((*CmdVoidReadF32)(nil).Class())
 	registry.Add((*F64ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadF64)(nil).Class())
-	registry.Add((*U16ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadPtrs)(nil).Class())
 	registry.Add((*S16ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadS16)(nil).Class())
@@ -102,28 +104,29 @@ func init() {
 	registry.Add((*F32ˢ)(nil).Class())
 	registry.Add((*F64ˢ)(nil).Class())
 	registry.Add((*U8ˢ)(nil).Class())
+	registry.Add((*U16ˢ)(nil).Class())
+	registry.Add((*U32ˢ)(nil).Class())
+	registry.Add((*Intˢ)(nil).Class())
 	registry.Add((*Globals)(nil).Class())
 	registry.Add((*Imported)(nil).Class())
 	registry.Add((*Included)(nil).Class())
-	registry.Add((*Intˢ)(nil).Class())
 	registry.Add((*Remappedˢ)(nil).Class())
 	registry.Add((*S16ˢ)(nil).Class())
 	registry.Add((*S32ˢ)(nil).Class())
 	registry.Add((*S64ˢ)(nil).Class())
 	registry.Add((*S8ˢ)(nil).Class())
 	registry.Add((*Tester)(nil).Class())
-	registry.Add((*U16ˢ)(nil).Class())
-	registry.Add((*U32ˢ)(nil).Class())
 	registry.Add((*U64ˢ)(nil).Class())
 	registry.Add((*Voidˢ)(nil).Class())
 }
 
 var (
-	binaryIDBoolˢ                            = binary.ID{0x57, 0xbe, 0xc5, 0xcb, 0x57, 0x68, 0xc1, 0x3a, 0x6f, 0xf1, 0xe4, 0x17, 0x5d, 0x7d, 0x3a, 0xac, 0xc7, 0xf0, 0x55, 0x28}
+	binaryIDSliceInfo                        = binary.ID{0xe9, 0xd1, 0x22, 0xc7, 0x71, 0x2d, 0x54, 0x91, 0x77, 0xaf, 0x62, 0x30, 0x92, 0xf4, 0x43, 0x44, 0x79, 0x81, 0x31, 0xf0}
+	binaryIDBoolˢ                            = binary.ID{0x58, 0x6d, 0x94, 0xd0, 0x00, 0x2c, 0x22, 0x1d, 0x5d, 0xe4, 0x4f, 0x2f, 0x30, 0x37, 0xe5, 0x19, 0x74, 0x24, 0x39, 0xcc}
 	binaryIDBoolᵖ                            = binary.ID{0x5d, 0x1a, 0xc1, 0x43, 0xe5, 0x22, 0xa0, 0x0d, 0x01, 0xf5, 0x15, 0xd5, 0xb7, 0xe6, 0x74, 0xa5, 0xfa, 0x62, 0x3e, 0x0a}
-	binaryIDCharˢ                            = binary.ID{0xc3, 0xfa, 0x01, 0xb8, 0x39, 0x25, 0x6e, 0xee, 0x19, 0x67, 0xb8, 0x9f, 0x4d, 0x42, 0x73, 0xcd, 0x70, 0x0f, 0x94, 0x0f}
+	binaryIDCharˢ                            = binary.ID{0x46, 0x24, 0x2f, 0x53, 0xb2, 0xd7, 0xb7, 0x6f, 0x1c, 0x7c, 0x46, 0xb3, 0xc9, 0x59, 0x57, 0x07, 0x58, 0x8f, 0x47, 0x57}
 	binaryIDCharᵖ                            = binary.ID{0x1f, 0x6c, 0x0a, 0xf7, 0xe7, 0x85, 0x27, 0x3a, 0x09, 0xe5, 0xdb, 0x03, 0xad, 0xa2, 0x81, 0x57, 0x7f, 0x5a, 0xb5, 0x9a}
-	binaryIDCharᵖˢ                           = binary.ID{0xf9, 0x77, 0x27, 0x5a, 0x2f, 0xc1, 0xce, 0x70, 0x76, 0x50, 0x1d, 0xbf, 0xce, 0xb9, 0x33, 0xc3, 0x45, 0x63, 0x99, 0x5c}
+	binaryIDCharᵖˢ                           = binary.ID{0xf1, 0x50, 0x6d, 0xd5, 0xb6, 0x11, 0x3c, 0x87, 0x89, 0xd2, 0x01, 0x60, 0x20, 0x37, 0x9a, 0xe9, 0x40, 0xc2, 0xa7, 0x6c}
 	binaryIDCharᵖᵖ                           = binary.ID{0xaa, 0x7a, 0x0c, 0x33, 0x7a, 0xc3, 0xdd, 0xf7, 0x79, 0x2f, 0x6c, 0x63, 0x8e, 0x36, 0xe9, 0x75, 0xea, 0x87, 0xaf, 0x03}
 	binaryIDCmdBool                          = binary.ID{0x80, 0x77, 0xdf, 0x53, 0x3b, 0x89, 0xeb, 0x5f, 0x66, 0xfc, 0xe7, 0xd8, 0x38, 0x69, 0x06, 0x15, 0x7e, 0x0d, 0xcb, 0x23}
 	binaryIDCmdCharptrToString               = binary.ID{0xdf, 0x31, 0x80, 0x37, 0xc7, 0x34, 0x4e, 0x03, 0xe2, 0xb9, 0x46, 0xc3, 0xe3, 0x1c, 0x71, 0xed, 0xe6, 0x40, 0xd9, 0x47}
@@ -141,6 +144,8 @@ var (
 	binaryIDCmdS32                           = binary.ID{0x08, 0xf9, 0xd9, 0x7a, 0x65, 0x69, 0x0e, 0x37, 0xa8, 0x82, 0x10, 0xf9, 0x68, 0xfb, 0x4a, 0xaa, 0x3a, 0x12, 0x59, 0xaa}
 	binaryIDCmdS64                           = binary.ID{0x95, 0xcd, 0x41, 0x0e, 0x54, 0x5d, 0x34, 0x9f, 0xa5, 0x3f, 0x9a, 0x5d, 0x0f, 0xb6, 0x75, 0x6a, 0x30, 0xb3, 0x03, 0xcd}
 	binaryIDCmdS8                            = binary.ID{0xa7, 0xb1, 0x9e, 0xdc, 0x20, 0x5a, 0x8e, 0x2c, 0x2d, 0x4f, 0xda, 0xe8, 0xd0, 0x8e, 0xc9, 0x89, 0x35, 0x68, 0x67, 0x67}
+	binaryIDU16ᵖ                             = binary.ID{0xd9, 0x3e, 0xe1, 0x20, 0xd0, 0x57, 0x8e, 0x72, 0x21, 0xa6, 0x72, 0xef, 0x6f, 0x87, 0x51, 0xff, 0xbc, 0x12, 0x51, 0xe5}
+	binaryIDCmdSliceCasts                    = binary.ID{0xe5, 0x7a, 0xfa, 0x50, 0xe7, 0xf5, 0x5a, 0x13, 0xd8, 0x71, 0xca, 0x37, 0x4a, 0x85, 0x1a, 0x88, 0x02, 0x0c, 0xd2, 0x12}
 	binaryIDCmdString                        = binary.ID{0x76, 0x54, 0x94, 0xc8, 0x96, 0x02, 0xc5, 0x03, 0x45, 0xb6, 0x1a, 0xaa, 0x44, 0xd7, 0x0c, 0x2d, 0xb3, 0x8e, 0x89, 0x77}
 	binaryIDCmdU16                           = binary.ID{0xbe, 0x5a, 0x77, 0xd3, 0xd8, 0x90, 0xb6, 0xed, 0xa1, 0x0d, 0xb6, 0xe7, 0xdf, 0x09, 0xf8, 0x5d, 0x5b, 0x0a, 0xed, 0x7a}
 	binaryIDCmdU32                           = binary.ID{0x6f, 0xa9, 0x12, 0x58, 0x71, 0x99, 0x90, 0xa5, 0x2f, 0x44, 0xc6, 0x4d, 0x06, 0x12, 0x39, 0x7a, 0x11, 0xa9, 0x3f, 0x5b}
@@ -168,7 +173,6 @@ var (
 	binaryIDCmdVoidReadF32                   = binary.ID{0x9f, 0xbf, 0x8b, 0x12, 0x64, 0x78, 0xea, 0x3a, 0xfd, 0x33, 0xb3, 0x4a, 0x72, 0xae, 0x82, 0x58, 0x56, 0xeb, 0x6c, 0x15}
 	binaryIDF64ᵖ                             = binary.ID{0x54, 0xb3, 0x8f, 0xc5, 0xd8, 0xe8, 0x4c, 0xa5, 0x75, 0x19, 0xff, 0x39, 0x5c, 0x40, 0xc6, 0x4f, 0xac, 0xf6, 0xfa, 0x16}
 	binaryIDCmdVoidReadF64                   = binary.ID{0x76, 0x50, 0xaa, 0x83, 0x23, 0x22, 0xf5, 0xb4, 0xb7, 0xa8, 0xc6, 0xa9, 0x45, 0x2a, 0x54, 0xd1, 0xe5, 0x61, 0x04, 0xd0}
-	binaryIDU16ᵖ                             = binary.ID{0xd9, 0x3e, 0xe1, 0x20, 0xd0, 0x57, 0x8e, 0x72, 0x21, 0xa6, 0x72, 0xef, 0x6f, 0x87, 0x51, 0xff, 0xbc, 0x12, 0x51, 0xe5}
 	binaryIDCmdVoidReadPtrs                  = binary.ID{0x42, 0x7f, 0x5e, 0x10, 0xa6, 0x0d, 0xdb, 0x58, 0x65, 0x6e, 0x07, 0x84, 0x54, 0xe1, 0x18, 0x17, 0x9f, 0x6e, 0x17, 0xdf}
 	binaryIDS16ᵖ                             = binary.ID{0x86, 0x53, 0xff, 0xb6, 0x38, 0x31, 0x0b, 0x93, 0xdb, 0xe4, 0x8f, 0x14, 0xf0, 0x3c, 0xde, 0x39, 0x33, 0xa0, 0x26, 0x6a}
 	binaryIDCmdVoidReadS16                   = binary.ID{0xfc, 0x45, 0xde, 0x7b, 0xea, 0x09, 0x25, 0xcb, 0x5b, 0xa8, 0x7c, 0xbb, 0x18, 0xb9, 0xbe, 0x80, 0xb8, 0x10, 0x0c, 0xbb}
@@ -204,31 +208,31 @@ var (
 	binaryIDCmdVoidWriteU32                  = binary.ID{0x38, 0x33, 0x9f, 0x07, 0x02, 0xa2, 0xc0, 0xaa, 0x5a, 0x0f, 0x7e, 0xff, 0x3b, 0xaf, 0xa3, 0xfa, 0x47, 0xe4, 0xde, 0x20}
 	binaryIDCmdVoidWriteU64                  = binary.ID{0x72, 0x75, 0x15, 0x1a, 0x4f, 0x55, 0x04, 0x34, 0xc5, 0xe8, 0x1a, 0x0d, 0xe4, 0xea, 0x02, 0xd7, 0xc7, 0xdd, 0xf0, 0xfc}
 	binaryIDCmdVoidWriteU8                   = binary.ID{0x95, 0xb5, 0x2c, 0x8d, 0x91, 0xe2, 0x72, 0xcf, 0x9c, 0x02, 0xf9, 0x02, 0x2a, 0x4e, 0x75, 0x1a, 0x41, 0xdb, 0x18, 0x49}
-	binaryIDF32ˢ                             = binary.ID{0xf8, 0xe6, 0xb5, 0x95, 0xd1, 0x7d, 0xeb, 0xf0, 0x4a, 0x4f, 0x87, 0x52, 0x9d, 0xa2, 0x2c, 0x8b, 0x7b, 0x38, 0x0a, 0x38}
-	binaryIDF64ˢ                             = binary.ID{0xa2, 0xde, 0x6b, 0x7d, 0x7c, 0x50, 0xf2, 0x96, 0x3c, 0xba, 0x2f, 0x97, 0xde, 0x90, 0x0f, 0xdb, 0xf4, 0x4a, 0xa0, 0x1d}
-	binaryIDU8ˢ                              = binary.ID{0xa6, 0x1d, 0x0e, 0xdc, 0x15, 0xf0, 0x7d, 0x6a, 0xc9, 0xc1, 0xb1, 0xbd, 0xbc, 0xa9, 0x47, 0x38, 0xb3, 0x59, 0xc5, 0xc7}
-	binaryIDGlobals                          = binary.ID{0x9a, 0x1e, 0x0e, 0x21, 0xec, 0xe3, 0xd8, 0x04, 0x11, 0x06, 0x33, 0x62, 0xe7, 0x81, 0x4b, 0xe0, 0x42, 0xd4, 0x66, 0x86}
+	binaryIDF32ˢ                             = binary.ID{0x54, 0x55, 0x98, 0x14, 0xf9, 0x77, 0x54, 0x5f, 0x90, 0x80, 0xb5, 0xb1, 0x2e, 0x8c, 0x31, 0xe6, 0xa4, 0x33, 0x5f, 0xf5}
+	binaryIDF64ˢ                             = binary.ID{0x5d, 0x0f, 0x67, 0xb1, 0xc5, 0xc5, 0xa1, 0x95, 0x62, 0xf7, 0x9f, 0x9d, 0x1d, 0x4a, 0xb5, 0x46, 0x6c, 0x29, 0x55, 0x3e}
+	binaryIDU8ˢ                              = binary.ID{0xdd, 0x14, 0x3c, 0xe6, 0xbc, 0xbc, 0xf7, 0xf8, 0xa9, 0xcc, 0x9a, 0x3c, 0x3a, 0x59, 0xe8, 0xc3, 0xd0, 0x10, 0x92, 0x30}
+	binaryIDU16ˢ                             = binary.ID{0xc7, 0xa5, 0xcb, 0x47, 0x9e, 0x5c, 0xe6, 0x7f, 0x50, 0x83, 0xb2, 0x43, 0xc4, 0x84, 0xf7, 0x24, 0xa1, 0xdd, 0xda, 0xd9}
+	binaryIDU32ˢ                             = binary.ID{0xe7, 0x11, 0xfe, 0xcf, 0x39, 0xfa, 0xde, 0x56, 0xbf, 0x84, 0xe2, 0x80, 0x70, 0xa2, 0xd5, 0xa8, 0xa2, 0xdc, 0xe8, 0xa9}
+	binaryIDIntˢ                             = binary.ID{0xc3, 0xee, 0xa2, 0x43, 0x6d, 0x9d, 0xe6, 0x4f, 0x53, 0x50, 0xb0, 0x74, 0x32, 0x1c, 0xae, 0xc6, 0xa4, 0x6e, 0x01, 0x36}
+	binaryIDGlobals                          = binary.ID{0x5e, 0x12, 0x1d, 0x44, 0x4c, 0x7c, 0x0f, 0x99, 0x82, 0x24, 0x0b, 0x57, 0x71, 0xff, 0x87, 0x4b, 0x5f, 0x58, 0x67, 0x02}
 	binaryIDImported                         = binary.ID{0xdf, 0xef, 0xfd, 0x6d, 0x61, 0x4d, 0x78, 0xcf, 0x04, 0x14, 0xfb, 0xd3, 0x19, 0x00, 0x92, 0xa8, 0x23, 0xd1, 0x4a, 0xf4}
 	binaryIDIncluded                         = binary.ID{0xc1, 0xa7, 0xc7, 0xd9, 0xf3, 0x7c, 0x57, 0xbc, 0x60, 0xb0, 0x48, 0x00, 0x29, 0xfa, 0x2f, 0x9c, 0xda, 0xf9, 0x49, 0x02}
-	binaryIDIntˢ                             = binary.ID{0x9e, 0x35, 0xe5, 0x46, 0x67, 0x60, 0x3a, 0x5b, 0xc0, 0x8e, 0x65, 0x93, 0xb6, 0x47, 0xb2, 0x03, 0x1e, 0xce, 0x3b, 0x43}
-	binaryIDRemappedˢ                        = binary.ID{0xce, 0x33, 0xb7, 0x76, 0x01, 0x0b, 0xa8, 0x96, 0xe3, 0xd3, 0x62, 0x84, 0xd3, 0x69, 0x9a, 0xec, 0x7a, 0x18, 0x7c, 0xec}
-	binaryIDS16ˢ                             = binary.ID{0x5a, 0xdc, 0xb7, 0xb4, 0xa2, 0x4a, 0xd2, 0x09, 0xe7, 0x71, 0x23, 0x52, 0xce, 0xfe, 0x2f, 0x89, 0x97, 0x66, 0xf0, 0xcf}
-	binaryIDS32ˢ                             = binary.ID{0x8e, 0xf3, 0xae, 0xe9, 0xcb, 0x95, 0x8e, 0xd1, 0xfe, 0x58, 0xe9, 0xb7, 0x7d, 0x28, 0x6d, 0x4f, 0x8f, 0xd1, 0x98, 0xfb}
-	binaryIDS64ˢ                             = binary.ID{0x68, 0x67, 0x96, 0x59, 0x3d, 0x30, 0x9a, 0x97, 0xd5, 0x5f, 0x25, 0xbf, 0x7c, 0x72, 0x3d, 0xd4, 0xba, 0x77, 0x9b, 0x90}
-	binaryIDS8ˢ                              = binary.ID{0x6f, 0xc0, 0x49, 0xd3, 0x7d, 0x5d, 0xec, 0x75, 0xd5, 0xb2, 0xb9, 0x5f, 0xf2, 0xf1, 0x5a, 0xfe, 0x75, 0xa3, 0x69, 0x8b}
+	binaryIDRemappedˢ                        = binary.ID{0xef, 0x06, 0x9d, 0x01, 0x03, 0x41, 0x17, 0xac, 0x8f, 0xa9, 0x11, 0xc7, 0xbb, 0xfe, 0x5b, 0xbc, 0x9b, 0xbc, 0xdb, 0xab}
+	binaryIDS16ˢ                             = binary.ID{0x5c, 0xd3, 0x80, 0x31, 0x3b, 0x48, 0x76, 0x42, 0xda, 0xdf, 0x12, 0x48, 0x3f, 0x3f, 0x8f, 0xaf, 0xc0, 0x5c, 0x04, 0x87}
+	binaryIDS32ˢ                             = binary.ID{0x8c, 0x2e, 0x40, 0x90, 0x28, 0x81, 0xef, 0x07, 0xba, 0xfa, 0x3f, 0x27, 0x2c, 0xae, 0x3c, 0xe0, 0x54, 0x71, 0x1c, 0x4d}
+	binaryIDS64ˢ                             = binary.ID{0x07, 0xa9, 0x58, 0x7a, 0xb4, 0x74, 0xb3, 0x73, 0xaa, 0xe2, 0x9a, 0x60, 0xbc, 0x6f, 0x10, 0xe7, 0xd7, 0x3a, 0xd9, 0x37}
+	binaryIDS8ˢ                              = binary.ID{0xaa, 0xcd, 0x0d, 0xd7, 0x77, 0x60, 0x96, 0xb2, 0x9f, 0x68, 0x10, 0x8b, 0xda, 0x1a, 0xf9, 0x94, 0xb7, 0xb2, 0x32, 0xae}
 	binaryIDTester                           = binary.ID{0xbd, 0x19, 0x4d, 0xd3, 0x5a, 0x62, 0xbb, 0x36, 0x7d, 0x71, 0xc9, 0xf2, 0xfd, 0xc8, 0xb0, 0xc1, 0xc6, 0x2e, 0xe1, 0xd6}
-	binaryIDU16ˢ                             = binary.ID{0x8e, 0x0c, 0x8f, 0x4e, 0x66, 0xc0, 0x00, 0x11, 0x4d, 0x2b, 0x25, 0xc7, 0xa9, 0x68, 0x15, 0x79, 0xd9, 0x79, 0x52, 0x7b}
-	binaryIDU32ˢ                             = binary.ID{0x9d, 0x85, 0xba, 0x7d, 0xb2, 0xb7, 0x1d, 0x1b, 0x59, 0x27, 0x0b, 0x61, 0xc3, 0x73, 0x26, 0x66, 0xe2, 0x8d, 0x3d, 0xca}
-	binaryIDU64ˢ                             = binary.ID{0xc8, 0x21, 0x63, 0x96, 0xba, 0xef, 0x4e, 0xe6, 0xaf, 0xbe, 0xd8, 0xb8, 0x6d, 0xd0, 0x8d, 0x10, 0x76, 0x14, 0x21, 0xdf}
-	binaryIDVoidˢ                            = binary.ID{0xe3, 0xfe, 0x0f, 0x4c, 0x55, 0x49, 0x0d, 0x75, 0xe8, 0x00, 0x97, 0x83, 0x04, 0x90, 0x1a, 0xf6, 0x67, 0x69, 0xb3, 0x81}
+	binaryIDU64ˢ                             = binary.ID{0x6a, 0x22, 0x1c, 0x24, 0x7b, 0x1c, 0xd2, 0x70, 0x0b, 0x08, 0xb6, 0x86, 0x94, 0x76, 0x5d, 0xe6, 0x9d, 0xa4, 0xf3, 0xb6}
+	binaryIDVoidˢ                            = binary.ID{0x5a, 0x79, 0xba, 0x0c, 0xc5, 0xf5, 0x42, 0x43, 0xc3, 0x94, 0xc5, 0xa1, 0xa9, 0x73, 0xd6, 0x07, 0xb0, 0xd2, 0xb9, 0x34}
 )
 
-type binaryClassBoolˢ struct{}
+type binaryClassSliceInfo struct{}
 
-func (*Boolˢ) Class() binary.Class {
-	return (*binaryClassBoolˢ)(nil)
+func (*SliceInfo) Class() binary.Class {
+	return (*binaryClassSliceInfo)(nil)
 }
-func doEncodeBoolˢ(e binary.Encoder, o *Boolˢ) error {
+func doEncodeSliceInfo(e binary.Encoder, o *SliceInfo) error {
 	if err := e.Uint64(uint64(o.Root)); err != nil {
 		return err
 	}
@@ -243,7 +247,7 @@ func doEncodeBoolˢ(e binary.Encoder, o *Boolˢ) error {
 	}
 	return nil
 }
-func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) error {
+func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -266,7 +270,7 @@ func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) error {
 	}
 	return nil
 }
-func doSkipBoolˢ(d binary.Decoder) error {
+func doSkipSliceInfo(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -277,6 +281,55 @@ func doSkipBoolˢ(d binary.Decoder) error {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassSliceInfo) ID() binary.ID      { return binaryIDSliceInfo }
+func (*binaryClassSliceInfo) New() binary.Object { return &SliceInfo{} }
+func (*binaryClassSliceInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeSliceInfo(e, obj.(*SliceInfo))
+}
+func (*binaryClassSliceInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &SliceInfo{}
+	return obj, doDecodeSliceInfo(d, obj)
+}
+func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeSliceInfo(d, obj.(*SliceInfo))
+}
+func (*binaryClassSliceInfo) Skip(d binary.Decoder) error { return doSkipSliceInfo(d) }
+func (*binaryClassSliceInfo) Schema() *schema.Class       { return schemaSliceInfo }
+
+var schemaSliceInfo = &schema.Class{
+	TypeID: binaryIDSliceInfo,
+	Name:   "SliceInfo",
+	Fields: []schema.Field{
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassBoolˢ struct{}
+
+func (*Boolˢ) Class() binary.Class {
+	return (*binaryClassBoolˢ)(nil)
+}
+func doEncodeBoolˢ(e binary.Encoder, o *Boolˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipBoolˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -300,10 +353,7 @@ var schemaBoolˢ = &schema.Class{
 	TypeID: binaryIDBoolˢ,
 	Name:   "Boolˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -373,54 +423,19 @@ func (*Charˢ) Class() binary.Class {
 	return (*binaryClassCharˢ)(nil)
 }
 func doEncodeCharˢ(e binary.Encoder, o *Charˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCharˢ(d binary.Decoder, o *Charˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCharˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -444,10 +459,7 @@ var schemaCharˢ = &schema.Class{
 	TypeID: binaryIDCharˢ,
 	Name:   "Charˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -517,54 +529,19 @@ func (*Charᵖˢ) Class() binary.Class {
 	return (*binaryClassCharᵖˢ)(nil)
 }
 func doEncodeCharᵖˢ(e binary.Encoder, o *Charᵖˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCharᵖˢ(d binary.Decoder, o *Charᵖˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCharᵖˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -588,10 +565,7 @@ var schemaCharᵖˢ = &schema.Class{
 	TypeID: binaryIDCharᵖˢ,
 	Name:   "Charᵖˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -1612,6 +1586,134 @@ var schemaCmdS8 = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+	},
+}
+
+type binaryClassU16ᵖ struct{}
+
+func (*U16ᵖ) Class() binary.Class {
+	return (*binaryClassU16ᵖ)(nil)
+}
+func doEncodeU16ᵖ(e binary.Encoder, o *U16ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU16ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU16ᵖ) ID() binary.ID      { return binaryIDU16ᵖ }
+func (*binaryClassU16ᵖ) New() binary.Object { return &U16ᵖ{} }
+func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ᵖ(e, obj.(*U16ᵖ))
+}
+func (*binaryClassU16ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ᵖ{}
+	return obj, doDecodeU16ᵖ(d, obj)
+}
+func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ᵖ(d, obj.(*U16ᵖ))
+}
+func (*binaryClassU16ᵖ) Skip(d binary.Decoder) error { return doSkipU16ᵖ(d) }
+func (*binaryClassU16ᵖ) Schema() *schema.Class       { return schemaU16ᵖ }
+
+var schemaU16ᵖ = &schema.Class{
+	TypeID: binaryIDU16ᵖ,
+	Name:   "U16ᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdSliceCasts struct{}
+
+func (*CmdSliceCasts) Class() binary.Class {
+	return (*binaryClassCmdSliceCasts)(nil)
+}
+func doEncodeCmdSliceCasts(e binary.Encoder, o *CmdSliceCasts) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.S); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.L); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdSliceCasts(d binary.Decoder, o *CmdSliceCasts) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.S); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.L = uint32(obj)
+	}
+	return nil
+}
+func doSkipCmdSliceCasts(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdSliceCasts) ID() binary.ID      { return binaryIDCmdSliceCasts }
+func (*binaryClassCmdSliceCasts) New() binary.Object { return &CmdSliceCasts{} }
+func (*binaryClassCmdSliceCasts) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdSliceCasts(e, obj.(*CmdSliceCasts))
+}
+func (*binaryClassCmdSliceCasts) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdSliceCasts{}
+	return obj, doDecodeCmdSliceCasts(d, obj)
+}
+func (*binaryClassCmdSliceCasts) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdSliceCasts(d, obj.(*CmdSliceCasts))
+}
+func (*binaryClassCmdSliceCasts) Skip(d binary.Decoder) error { return doSkipCmdSliceCasts(d) }
+func (*binaryClassCmdSliceCasts) Schema() *schema.Class       { return schemaCmdSliceCasts }
+
+var schemaCmdSliceCasts = &schema.Class{
+	TypeID: binaryIDCmdSliceCasts,
+	Name:   "CmdSliceCasts",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "S", Type: &schema.Struct{Name: "U16ᵖ"}},
+		{Declared: "L", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -3258,66 +3360,6 @@ var schemaCmdVoidReadF64 = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
-	},
-}
-
-type binaryClassU16ᵖ struct{}
-
-func (*U16ᵖ) Class() binary.Class {
-	return (*binaryClassU16ᵖ)(nil)
-}
-func doEncodeU16ᵖ(e binary.Encoder, o *U16ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU16ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU16ᵖ) ID() binary.ID      { return binaryIDU16ᵖ }
-func (*binaryClassU16ᵖ) New() binary.Object { return &U16ᵖ{} }
-func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU16ᵖ(e, obj.(*U16ᵖ))
-}
-func (*binaryClassU16ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U16ᵖ{}
-	return obj, doDecodeU16ᵖ(d, obj)
-}
-func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU16ᵖ(d, obj.(*U16ᵖ))
-}
-func (*binaryClassU16ᵖ) Skip(d binary.Decoder) error { return doSkipU16ᵖ(d) }
-func (*binaryClassU16ᵖ) Schema() *schema.Class       { return schemaU16ᵖ }
-
-var schemaU16ᵖ = &schema.Class{
-	TypeID: binaryIDU16ᵖ,
-	Name:   "U16ᵖ",
-	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5365,54 +5407,19 @@ func (*F32ˢ) Class() binary.Class {
 	return (*binaryClassF32ˢ)(nil)
 }
 func doEncodeF32ˢ(e binary.Encoder, o *F32ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeF32ˢ(d binary.Decoder, o *F32ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipF32ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -5436,10 +5443,7 @@ var schemaF32ˢ = &schema.Class{
 	TypeID: binaryIDF32ˢ,
 	Name:   "F32ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -5449,54 +5453,19 @@ func (*F64ˢ) Class() binary.Class {
 	return (*binaryClassF64ˢ)(nil)
 }
 func doEncodeF64ˢ(e binary.Encoder, o *F64ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeF64ˢ(d binary.Decoder, o *F64ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipF64ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -5520,10 +5489,7 @@ var schemaF64ˢ = &schema.Class{
 	TypeID: binaryIDF64ˢ,
 	Name:   "F64ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -5533,54 +5499,19 @@ func (*U8ˢ) Class() binary.Class {
 	return (*binaryClassU8ˢ)(nil)
 }
 func doEncodeU8ˢ(e binary.Encoder, o *U8ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeU8ˢ(d binary.Decoder, o *U8ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipU8ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -5604,10 +5535,145 @@ var schemaU8ˢ = &schema.Class{
 	TypeID: binaryIDU8ˢ,
 	Name:   "U8ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassU16ˢ struct{}
+
+func (*U16ˢ) Class() binary.Class {
+	return (*binaryClassU16ˢ)(nil)
+}
+func doEncodeU16ˢ(e binary.Encoder, o *U16ˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU16ˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU16ˢ) ID() binary.ID      { return binaryIDU16ˢ }
+func (*binaryClassU16ˢ) New() binary.Object { return &U16ˢ{} }
+func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ˢ(e, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ˢ{}
+	return obj, doDecodeU16ˢ(d, obj)
+}
+func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ˢ(d, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Skip(d binary.Decoder) error { return doSkipU16ˢ(d) }
+func (*binaryClassU16ˢ) Schema() *schema.Class       { return schemaU16ˢ }
+
+var schemaU16ˢ = &schema.Class{
+	TypeID: binaryIDU16ˢ,
+	Name:   "U16ˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassU32ˢ struct{}
+
+func (*U32ˢ) Class() binary.Class {
+	return (*binaryClassU32ˢ)(nil)
+}
+func doEncodeU32ˢ(e binary.Encoder, o *U32ˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU32ˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ˢ) ID() binary.ID      { return binaryIDU32ˢ }
+func (*binaryClassU32ˢ) New() binary.Object { return &U32ˢ{} }
+func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ˢ(e, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ˢ{}
+	return obj, doDecodeU32ˢ(d, obj)
+}
+func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ˢ(d, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Skip(d binary.Decoder) error { return doSkipU32ˢ(d) }
+func (*binaryClassU32ˢ) Schema() *schema.Class       { return schemaU32ˢ }
+
+var schemaU32ˢ = &schema.Class{
+	TypeID: binaryIDU32ˢ,
+	Name:   "U32ˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+	},
+}
+
+type binaryClassIntˢ struct{}
+
+func (*Intˢ) Class() binary.Class {
+	return (*binaryClassIntˢ)(nil)
+}
+func doEncodeIntˢ(e binary.Encoder, o *Intˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIntˢ(d binary.Decoder, o *Intˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipIntˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIntˢ) ID() binary.ID      { return binaryIDIntˢ }
+func (*binaryClassIntˢ) New() binary.Object { return &Intˢ{} }
+func (*binaryClassIntˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIntˢ(e, obj.(*Intˢ))
+}
+func (*binaryClassIntˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Intˢ{}
+	return obj, doDecodeIntˢ(d, obj)
+}
+func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIntˢ(d, obj.(*Intˢ))
+}
+func (*binaryClassIntˢ) Skip(d binary.Decoder) error { return doSkipIntˢ(d) }
+func (*binaryClassIntˢ) Schema() *schema.Class       { return schemaIntˢ }
+
+var schemaIntˢ = &schema.Class{
+	TypeID: binaryIDIntˢ,
+	Name:   "Intˢ",
+	Fields: []schema.Field{
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -5617,7 +5683,16 @@ func (*Globals) Class() binary.Class {
 	return (*binaryClassGlobals)(nil)
 }
 func doEncodeGlobals(e binary.Encoder, o *Globals) error {
-	if err := e.Value(&o.Buf); err != nil {
+	if err := e.Value(&o.U8s); err != nil {
+		return err
+	}
+	if err := e.Value(&o.U16s); err != nil {
+		return err
+	}
+	if err := e.Value(&o.U32s); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Ints); err != nil {
 		return err
 	}
 	if err := e.String(o.Str); err != nil {
@@ -5626,7 +5701,16 @@ func doEncodeGlobals(e binary.Encoder, o *Globals) error {
 	return nil
 }
 func doDecodeGlobals(d binary.Decoder, o *Globals) error {
-	if err := d.Value(&o.Buf); err != nil {
+	if err := d.Value(&o.U8s); err != nil {
+		return err
+	}
+	if err := d.Value(&o.U16s); err != nil {
+		return err
+	}
+	if err := d.Value(&o.U32s); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Ints); err != nil {
 		return err
 	}
 	if obj, err := d.String(); err != nil {
@@ -5638,6 +5722,15 @@ func doDecodeGlobals(d binary.Decoder, o *Globals) error {
 }
 func doSkipGlobals(d binary.Decoder) error {
 	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ˢ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U32ˢ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Intˢ)(nil)); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
@@ -5664,7 +5757,10 @@ var schemaGlobals = &schema.Class{
 	TypeID: binaryIDGlobals,
 	Name:   "Globals",
 	Fields: []schema.Field{
-		{Declared: "Buf", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "U8s", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "U16s", Type: &schema.Struct{Name: "U16ˢ"}},
+		{Declared: "U32s", Type: &schema.Struct{Name: "U32ˢ"}},
+		{Declared: "Ints", Type: &schema.Struct{Name: "Intˢ"}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -5777,144 +5873,25 @@ var schemaIncluded = &schema.Class{
 	},
 }
 
-type binaryClassIntˢ struct{}
-
-func (*Intˢ) Class() binary.Class {
-	return (*binaryClassIntˢ)(nil)
-}
-func doEncodeIntˢ(e binary.Encoder, o *Intˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeIntˢ(d binary.Decoder, o *Intˢ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipIntˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassIntˢ) ID() binary.ID      { return binaryIDIntˢ }
-func (*binaryClassIntˢ) New() binary.Object { return &Intˢ{} }
-func (*binaryClassIntˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeIntˢ(e, obj.(*Intˢ))
-}
-func (*binaryClassIntˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Intˢ{}
-	return obj, doDecodeIntˢ(d, obj)
-}
-func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeIntˢ(d, obj.(*Intˢ))
-}
-func (*binaryClassIntˢ) Skip(d binary.Decoder) error { return doSkipIntˢ(d) }
-func (*binaryClassIntˢ) Schema() *schema.Class       { return schemaIntˢ }
-
-var schemaIntˢ = &schema.Class{
-	TypeID: binaryIDIntˢ,
-	Name:   "Intˢ",
-	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
-	},
-}
-
 type binaryClassRemappedˢ struct{}
 
 func (*Remappedˢ) Class() binary.Class {
 	return (*binaryClassRemappedˢ)(nil)
 }
 func doEncodeRemappedˢ(e binary.Encoder, o *Remappedˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeRemappedˢ(d binary.Decoder, o *Remappedˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipRemappedˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -5938,10 +5915,7 @@ var schemaRemappedˢ = &schema.Class{
 	TypeID: binaryIDRemappedˢ,
 	Name:   "Remappedˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -5951,54 +5925,19 @@ func (*S16ˢ) Class() binary.Class {
 	return (*binaryClassS16ˢ)(nil)
 }
 func doEncodeS16ˢ(e binary.Encoder, o *S16ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS16ˢ(d binary.Decoder, o *S16ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS16ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6022,10 +5961,7 @@ var schemaS16ˢ = &schema.Class{
 	TypeID: binaryIDS16ˢ,
 	Name:   "S16ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6035,54 +5971,19 @@ func (*S32ˢ) Class() binary.Class {
 	return (*binaryClassS32ˢ)(nil)
 }
 func doEncodeS32ˢ(e binary.Encoder, o *S32ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS32ˢ(d binary.Decoder, o *S32ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS32ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6106,10 +6007,7 @@ var schemaS32ˢ = &schema.Class{
 	TypeID: binaryIDS32ˢ,
 	Name:   "S32ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6119,54 +6017,19 @@ func (*S64ˢ) Class() binary.Class {
 	return (*binaryClassS64ˢ)(nil)
 }
 func doEncodeS64ˢ(e binary.Encoder, o *S64ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS64ˢ(d binary.Decoder, o *S64ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS64ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6190,10 +6053,7 @@ var schemaS64ˢ = &schema.Class{
 	TypeID: binaryIDS64ˢ,
 	Name:   "S64ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6203,54 +6063,19 @@ func (*S8ˢ) Class() binary.Class {
 	return (*binaryClassS8ˢ)(nil)
 }
 func doEncodeS8ˢ(e binary.Encoder, o *S8ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS8ˢ(d binary.Decoder, o *S8ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS8ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6274,10 +6099,7 @@ var schemaS8ˢ = &schema.Class{
 	TypeID: binaryIDS8ˢ,
 	Name:   "S8ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6349,228 +6171,25 @@ var schemaTester = &schema.Class{
 	},
 }
 
-type binaryClassU16ˢ struct{}
-
-func (*U16ˢ) Class() binary.Class {
-	return (*binaryClassU16ˢ)(nil)
-}
-func doEncodeU16ˢ(e binary.Encoder, o *U16ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU16ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU16ˢ) ID() binary.ID      { return binaryIDU16ˢ }
-func (*binaryClassU16ˢ) New() binary.Object { return &U16ˢ{} }
-func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU16ˢ(e, obj.(*U16ˢ))
-}
-func (*binaryClassU16ˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U16ˢ{}
-	return obj, doDecodeU16ˢ(d, obj)
-}
-func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU16ˢ(d, obj.(*U16ˢ))
-}
-func (*binaryClassU16ˢ) Skip(d binary.Decoder) error { return doSkipU16ˢ(d) }
-func (*binaryClassU16ˢ) Schema() *schema.Class       { return schemaU16ˢ }
-
-var schemaU16ˢ = &schema.Class{
-	TypeID: binaryIDU16ˢ,
-	Name:   "U16ˢ",
-	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
-	},
-}
-
-type binaryClassU32ˢ struct{}
-
-func (*U32ˢ) Class() binary.Class {
-	return (*binaryClassU32ˢ)(nil)
-}
-func doEncodeU32ˢ(e binary.Encoder, o *U32ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU32ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU32ˢ) ID() binary.ID      { return binaryIDU32ˢ }
-func (*binaryClassU32ˢ) New() binary.Object { return &U32ˢ{} }
-func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU32ˢ(e, obj.(*U32ˢ))
-}
-func (*binaryClassU32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U32ˢ{}
-	return obj, doDecodeU32ˢ(d, obj)
-}
-func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU32ˢ(d, obj.(*U32ˢ))
-}
-func (*binaryClassU32ˢ) Skip(d binary.Decoder) error { return doSkipU32ˢ(d) }
-func (*binaryClassU32ˢ) Schema() *schema.Class       { return schemaU32ˢ }
-
-var schemaU32ˢ = &schema.Class{
-	TypeID: binaryIDU32ˢ,
-	Name:   "U32ˢ",
-	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
-	},
-}
-
 type binaryClassU64ˢ struct{}
 
 func (*U64ˢ) Class() binary.Class {
 	return (*binaryClassU64ˢ)(nil)
 }
 func doEncodeU64ˢ(e binary.Encoder, o *U64ˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeU64ˢ(d binary.Decoder, o *U64ˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipU64ˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6594,10 +6213,7 @@ var schemaU64ˢ = &schema.Class{
 	TypeID: binaryIDU64ˢ,
 	Name:   "U64ˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }
 
@@ -6607,54 +6223,19 @@ func (*Voidˢ) Class() binary.Class {
 	return (*binaryClassVoidˢ)(nil)
 }
 func doEncodeVoidˢ(e binary.Encoder, o *Voidˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.SliceInfo); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVoidˢ(d binary.Decoder, o *Voidˢ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.SliceInfo); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVoidˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6678,9 +6259,6 @@ var schemaVoidˢ = &schema.Class{
 	TypeID: binaryIDVoidˢ,
 	Name:   "Voidˢ",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
 }

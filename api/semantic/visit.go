@@ -23,6 +23,17 @@ func Visit(node Node, visitor func(Node)) {
 		for _, c := range n.Members {
 			visitor(c)
 		}
+	case *ArrayAssign:
+		visitor(n.To)
+		visitor(n.Value)
+	case *ArrayIndex:
+		visitor(n.Array)
+		visitor(n.Index)
+	case *ArrayInitializer:
+		visitor(n.Array)
+		for _, c := range n.Values {
+			visitor(c)
+		}
 	case *Slice:
 		visitor(n.To)
 	case *SliceIndex:

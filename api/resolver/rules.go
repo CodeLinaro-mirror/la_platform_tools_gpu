@@ -112,10 +112,13 @@ func castable(from semantic.Type, to semantic.Type) bool {
 	fromPointer, fromIsPointer := fromBase.(*semantic.Pointer)
 	toPointer, toIsPointer := toBase.(*semantic.Pointer)
 	if fromIsPointer && toIsPointer { // A* -> B*
-		return fromPointer.To == semantic.VoidType || toPointer.To == semantic.VoidType
+		return true
 	}
 	fromSlice, fromIsSlice := baseType(from).(*semantic.Slice)
 	toSlice, toIsSlice := baseType(to).(*semantic.Slice)
+	if fromIsSlice && toIsSlice { // A[] -> B[]
+		return true
+	}
 	if fromIsSlice && toIsPointer && fromSlice.To == toPointer.To { // T[] -> T*
 		return equal(fromSlice.To, toPointer.To)
 	}
