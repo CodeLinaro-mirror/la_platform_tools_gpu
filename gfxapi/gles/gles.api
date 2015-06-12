@@ -247,66 +247,21 @@ class VertexAttribute {
     ShaderAttribType Type
 }
 
-@internal
-class Vec2i { s32 X, s32 Y }
-
-@internal
-class Vec3i { s32 X, s32 Y, s32 Z }
-
-@internal
-class Vec4i { s32 X, s32 Y, s32 Z, s32 W }
-
-@internal
-class Vec2f { f32 X, f32 Y }
-
-@internal
-class Vec3f { f32 X, f32 Y, f32 Z }
-
-@internal
-class Vec4f { f32 X, f32 Y, f32 Z, f32 W }
-
-@internal
-class Mat2f {
-  Vec2f Col0
-  Vec2f Col1
-}
-
-@internal
-class Mat3f {
-  Vec3f Col0
-  Vec3f Col1
-  Vec3f Col2
-}
-
-@internal
-class Mat4f {
-  Vec4f Col0
-  Vec4f Col1
-  Vec4f Col2
-  Vec4f Col3
-}
-
-@internal
-@union
-class UniformValue {
-    f32               F32
-    Vec2f             Vec2f
-    Vec3f             Vec3f
-    Vec4f             Vec4f
-    s32               S32
-    Vec2i             Vec2i
-    Vec3i             Vec3i
-    Vec4i             Vec4i
-    Mat2f             Mat2f
-    Mat3f             Mat3f
-    Mat4f             Mat4f
-}
+@internal type s32[2]   Vec2i
+@internal type s32[3]   Vec3i
+@internal type s32[4]   Vec4i
+@internal type f32[2]   Vec2f
+@internal type f32[3]   Vec3f
+@internal type f32[4]   Vec4f
+@internal type Vec2f[2] Mat2f
+@internal type Vec3f[3] Mat3f
+@internal type Vec4f[4] Mat4f
 
 @internal
 class Uniform {
     string            Name
     ShaderUniformType Type
-    UniformValue      Value
+    u8[]              Value
 }
 
 @internal
@@ -1090,222 +1045,216 @@ cmd void glGetTexParameterfv(TextureTarget    target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1i(UniformLocation location, s32 value) {
     ctx := GetContext()
+    v := make!s32(1)
+    v[0] = value
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT
-    uniform.Value.S32 = value
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
     ctx := GetContext()
+    v := make!Vec2i(1)
+    v[0] = Vec2i(value0, value1)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC2
-    uniform.Value.Vec2i = Vec2i(value0, value1)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value2) {
     ctx := GetContext()
+    v := make!Vec3i(1)
+    v[0] = Vec3i(value0, value1, value2)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC3
-    uniform.Value.Vec3i = Vec3i(value0, value1, value2)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value2, s32 value3) {
     ctx := GetContext()
+    v := make!Vec4i(1)
+    v[0] = Vec4i(value0, value1, value2, value3)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC4
-    uniform.Value.Vec4i = Vec4i(value0, value1, value2, value3)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform1iv(UniformLocation location, s32 count, s32* value) {
+cmd void glUniform1iv(UniformLocation location, s32 count, s32* values) {
     ctx := GetContext()
+    v := values[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT
-    uniform.Value.S32 = value[0]
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform2iv(UniformLocation location, s32 count, s32* value) {
+cmd void glUniform2iv(UniformLocation location, s32 count, s32* values) {
     ctx := GetContext()
-    v := value[0:count*2]
+    v := as!Vec2i*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC2
-    uniform.Value.Vec2i = Vec2i(v[0], v[1])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform3iv(UniformLocation location, s32 count, s32* value) {
+cmd void glUniform3iv(UniformLocation location, s32 count, s32* values) {
     ctx := GetContext()
-    v := value[0:count*3]
+    v := as!Vec3i*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC3
-    uniform.Value.Vec3i = Vec3i(v[0], v[1], v[2])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform4iv(UniformLocation location, s32 count, s32* value) {
+cmd void glUniform4iv(UniformLocation location, s32 count, s32* values) {
     ctx := GetContext()
-    v := value[0:count*4]
+    v := as!Vec4i*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
-    // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC4
-    uniform.Value.Vec4i = Vec4i(v[0], v[1], v[2], v[3])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1f(UniformLocation location, f32 value) {
     ctx := GetContext()
+    v := make!f32(1)
+    v[0] = value
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
-    uniform.Value.F32 = value
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
     ctx := GetContext()
+    v := make!Vec2f(1)
+    v[0] = Vec2f(value0, value1)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
-    uniform.Value.Vec2f = Vec2f(value0, value1)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value2) {
     ctx := GetContext()
+    v := make!Vec3f(1)
+    v[0] = Vec3f(value0, value1, value2)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
-    uniform.Value.Vec3f = Vec3f(value0, value1, value2)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value2, f32 value3) {
     ctx := GetContext()
+    v := make!Vec4f(1)
+    v[0] = Vec4f(value0, value1, value2, value3)
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
-    uniform.Value.Vec4f = Vec4f(value0, value1, value2, value3)
+    uniform.Value = as!u8[](v)
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform1fv(UniformLocation location, s32 count, f32* value) {
+cmd void glUniform1fv(UniformLocation location, s32 count, f32* values) {
     ctx := GetContext()
-    v := value[0:count]
-    read(v) // TODO: Use count
+    v := values[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
-    uniform.Value.F32 = v[0]
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform2fv(UniformLocation location, s32 count, f32* value) {
+cmd void glUniform2fv(UniformLocation location, s32 count, f32* values) {
     ctx := GetContext()
-    v := value[0:count*2]
-    read(v) // TODO: Use count
+    v := as!Vec2f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
-    uniform.Value.Vec2f = Vec2f(v[0], v[1])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform3fv(UniformLocation location, s32 count, f32* value) {
+cmd void glUniform3fv(UniformLocation location, s32 count, f32* values) {
     ctx := GetContext()
-    v := value[0:count*3]
-    read(v) // TODO: Use count
+    v := as!Vec3f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
-    uniform.Value.Vec3f = Vec3f(v[0], v[1], v[2])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform4fv(UniformLocation location, s32 count, f32* value) {
+cmd void glUniform4fv(UniformLocation location, s32 count, f32* values) {
     ctx := GetContext()
-    v := value[0:count*4]
-    read(v) // TODO: Use count
+    v := as!Vec4f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
-    uniform.Value.Vec4f = Vec4f(v[0], v[1], v[2], v[3])
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
-    v := values[0:count*4]
-    read(v) // TODO: Use count
+    v := as!Mat2f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT2
-    uniform.Value.Mat2f = Mat2f(
-        Vec2f(v[0], v[1]),
-        Vec2f(v[3], v[4]),
-    )
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
-    v := values[0:count*9]
-    read(v) // TODO: Use count
+    v := as!Mat3f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT3
-    uniform.Value.Mat3f = Mat3f(
-        Vec3f(v[0], v[1], v[2]),
-        Vec3f(v[3], v[4], v[5]),
-        Vec3f(v[6], v[7], v[8]),
-    )
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, f32* values) {
     ctx := GetContext()
-    v := values[0:count*16]
-    read(v) // TODO: Use count
+    v := as!Mat4f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value.Mat4f = Mat4f(
-        Vec4f(v[0],  v[1],  v[2],  v[3]),
-        Vec4f(v[4],  v[5],  v[6],  v[7]),
-        Vec4f(v[8],  v[9],  v[10], v[11]),
-        Vec4f(v[12], v[13], v[14], v[15]),
-    )
+    uniform.Value = clone(as!u8[](v))
     program.Uniforms[location] = uniform
 }
 

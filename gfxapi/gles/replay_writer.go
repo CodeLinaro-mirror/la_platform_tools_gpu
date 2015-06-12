@@ -1258,14 +1258,10 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_31_result := context                         // Contextʳ
-	ctx := GetContext_31_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT
-	uniform.Value.S32 = ϟa.Value
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_31_result := context              // Contextʳ
+	ctx := GetContext_31_result                  // Contextʳ
+	v := MakeS32ˢ(uint64(1), ϟs)                 // S32ˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1274,7 +1270,13 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.Call(funcInfoGlUniform1i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_31_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(ϟa.Value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_INT
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_31_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1283,20 +1285,10 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_32_result := context                         // Contextʳ
-	ctx := GetContext_32_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC2
-	uniform.Value.Vec2i = func() Vec2i {
-		s := Vec2i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_32_result := context              // Contextʳ
+	ctx := GetContext_32_result                  // Contextʳ
+	v := MakeVec2iˢ(uint64(1), ϟs)               // Vec2iˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1306,7 +1298,13 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value1))
 	ϟb.Call(funcInfoGlUniform2i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_32_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec2i{Elements: [2]int32{ϟa.Value0, ϟa.Value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_INT_VEC2
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_32_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1315,21 +1313,10 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_33_result := context                         // Contextʳ
-	ctx := GetContext_33_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC3
-	uniform.Value.Vec3i = func() Vec3i {
-		s := Vec3i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_33_result := context              // Contextʳ
+	ctx := GetContext_33_result                  // Contextʳ
+	v := MakeVec3iˢ(uint64(1), ϟs)               // Vec3iˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1340,7 +1327,13 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value2))
 	ϟb.Call(funcInfoGlUniform3i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_33_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec3i{Elements: [3]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_INT_VEC3
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_33_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1349,22 +1342,10 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_34_result := context                         // Contextʳ
-	ctx := GetContext_34_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC4
-	uniform.Value.Vec4i = func() Vec4i {
-		s := Vec4i{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		s.W = ϟa.Value3
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_34_result := context              // Contextʳ
+	ctx := GetContext_34_result                  // Contextʳ
+	v := MakeVec4iˢ(uint64(1), ϟs)               // Vec4iˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1376,7 +1357,13 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.S32(ϟa.Value3))
 	ϟb.Call(funcInfoGlUniform4i)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_34_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec4i{Elements: [4]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_INT_VEC4
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_34_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1385,13 +1372,14 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_35_result := context                         // Contextʳ
-	ctx := GetContext_35_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
+	GetContext_35_result := context                              // Contextʳ
+	ctx := GetContext_35_result                                  // Contextʳ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // S32ˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
-	uniform.Value.S32 = ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1399,10 +1387,10 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform1iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_35_result, ctx, program, uniform
+	_, _, _, _, _, _ = context, GetContext_35_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1411,20 +1399,14 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_36_result := context                                          // Contextʳ
-	ctx := GetContext_36_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(2))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_36_result := context                                      // Contextʳ
+	ctx := GetContext_36_result                                          // Contextʳ
+	v := Vec2iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC2
-	uniform.Value.Vec2i = func() Vec2i {
-		s := Vec2i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1432,7 +1414,7 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform2iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_36_result, ctx, v, program, uniform
@@ -1444,21 +1426,14 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_37_result := context                                          // Contextʳ
-	ctx := GetContext_37_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(3))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_37_result := context                                      // Contextʳ
+	ctx := GetContext_37_result                                          // Contextʳ
+	v := Vec3iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC3
-	uniform.Value.Vec3i = func() Vec3i {
-		s := Vec3i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1466,7 +1441,7 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform3iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_37_result, ctx, v, program, uniform
@@ -1478,22 +1453,14 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_38_result := context                                          // Contextʳ
-	ctx := GetContext_38_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // S32ˢ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram)                  // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)                             // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_38_result := context                                      // Contextʳ
+	ctx := GetContext_38_result                                          // Contextʳ
+	v := Vec4iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4iˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC4
-	uniform.Value.Vec4i = func() Vec4i {
-		s := Vec4i{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.W = v.Index(uint64(3), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1501,7 +1468,7 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform4iv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_38_result, ctx, v, program, uniform
@@ -1513,14 +1480,10 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_39_result := context                         // Contextʳ
-	ctx := GetContext_39_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT
-	uniform.Value.F32 = ϟa.Value
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_39_result := context              // Contextʳ
+	ctx := GetContext_39_result                  // Contextʳ
+	v := MakeF32ˢ(uint64(1), ϟs)                 // F32ˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1529,7 +1492,13 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value))
 	ϟb.Call(funcInfoGlUniform1f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_39_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(ϟa.Value, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_FLOAT
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_39_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1538,20 +1507,10 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_40_result := context                         // Contextʳ
-	ctx := GetContext_40_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
-	uniform.Value.Vec2f = func() Vec2f {
-		s := Vec2f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_40_result := context              // Contextʳ
+	ctx := GetContext_40_result                  // Contextʳ
+	v := MakeVec2fˢ(uint64(1), ϟs)               // Vec2fˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1561,7 +1520,13 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value1))
 	ϟb.Call(funcInfoGlUniform2f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_40_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec2f{Elements: [2]float32{ϟa.Value0, ϟa.Value1}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_40_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1570,21 +1535,10 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_41_result := context                         // Contextʳ
-	ctx := GetContext_41_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
-	uniform.Value.Vec3f = func() Vec3f {
-		s := Vec3f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_41_result := context              // Contextʳ
+	ctx := GetContext_41_result                  // Contextʳ
+	v := MakeVec3fˢ(uint64(1), ϟs)               // Vec3fˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1595,7 +1549,13 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value2))
 	ϟb.Call(funcInfoGlUniform3f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_41_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec3f{Elements: [3]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_41_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1604,22 +1564,10 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)            // Contextʳ
-	GetContext_42_result := context                         // Contextʳ
-	ctx := GetContext_42_result                             // Contextʳ
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
-	uniform.Value.Vec4f = func() Vec4f {
-		s := Vec4f{}
-		s.Init()
-		s.X = ϟa.Value0
-		s.Y = ϟa.Value1
-		s.Z = ϟa.Value2
-		s.W = ϟa.Value3
-		return s
-	}()
-	program.Uniforms[ϟa.Location] = uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_42_result := context              // Contextʳ
+	ctx := GetContext_42_result                  // Contextʳ
+	v := MakeVec4fˢ(uint64(1), ϟs)               // Vec4fˢ
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
@@ -1631,7 +1579,13 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟb.Push(value.F32(ϟa.Value3))
 	ϟb.Call(funcInfoGlUniform4f)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = context, GetContext_42_result, ctx, program, uniform
+	v.Index(uint64(0), ϟs).replayWrite(Vec4f{Elements: [4]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
+	uniform.Value = AsU8ˢ(v, ϟs)
+	program.Uniforms[ϟa.Location] = uniform
+	_, _, _, _, _, _ = context, GetContext_42_result, ctx, v, program, uniform
 	return nil
 }
 
@@ -1640,15 +1594,14 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                // Contextʳ
-	GetContext_43_result := context                             // Contextʳ
-	ctx := GetContext_43_result                                 // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
+	GetContext_43_result := context                              // Contextʳ
+	ctx := GetContext_43_result                                  // Contextʳ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
-	uniform.Value.F32 = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1656,7 +1609,7 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform1fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_43_result, ctx, v, program, uniform
@@ -1668,21 +1621,14 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_44_result := context                                          // Contextʳ
-	ctx := GetContext_44_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(2))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_44_result := context                                      // Contextʳ
+	ctx := GetContext_44_result                                          // Contextʳ
+	v := Vec2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
-	uniform.Value.Vec2f = func() Vec2f {
-		s := Vec2f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1690,7 +1636,7 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform2fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_44_result, ctx, v, program, uniform
@@ -1702,22 +1648,14 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_45_result := context                                          // Contextʳ
-	ctx := GetContext_45_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(3))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_45_result := context                                      // Contextʳ
+	ctx := GetContext_45_result                                          // Contextʳ
+	v := Vec3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
-	uniform.Value.Vec3f = func() Vec3f {
-		s := Vec3f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1725,7 +1663,7 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform3fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_45_result, ctx, v, program, uniform
@@ -1737,23 +1675,14 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                             // Contextʳ
-	GetContext_46_result := context                                          // Contextʳ
-	ctx := GetContext_46_result                                              // Contextʳ
-	v := ϟa.Value.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_46_result := context                                      // Contextʳ
+	ctx := GetContext_46_result                                          // Contextʳ
+	v := Vec4fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
-	uniform.Value.Vec4f = func() Vec4f {
-		s := Vec4f{}
-		s.Init()
-		s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		s.W = v.Index(uint64(3), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1761,7 +1690,7 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Values.value())
 	ϟb.Call(funcInfoGlUniform4fv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _ = context, GetContext_46_result, ctx, v, program, uniform
@@ -1773,33 +1702,14 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                              // Contextʳ
-	GetContext_47_result := context                                           // Contextʳ
-	ctx := GetContext_47_result                                               // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(4))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_47_result := context                                      // Contextʳ
+	ctx := GetContext_47_result                                          // Contextʳ
+	v := Mat2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat2fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT2
-	uniform.Value.Mat2f = func() Mat2f {
-		s := Mat2f{}
-		s.Init()
-		s.Col0 = func() Vec2f {
-			s := Vec2f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col1 = func() Vec2f {
-			s := Vec2f{}
-			s.Init()
-			s.X = v.Index(uint64(3), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(4), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1820,43 +1730,14 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                              // Contextʳ
-	GetContext_48_result := context                                           // Contextʳ
-	ctx := GetContext_48_result                                               // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(9))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_48_result := context                                      // Contextʳ
+	ctx := GetContext_48_result                                          // Contextʳ
+	v := Mat3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat3fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT3
-	uniform.Value.Mat3f = func() Mat3f {
-		s := Mat3f{}
-		s.Init()
-		s.Col0 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col1 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(3), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(4), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(5), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col2 = func() Vec3f {
-			s := Vec3f{}
-			s.Init()
-			s.X = v.Index(uint64(6), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(7), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(8), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		return s
-	}()
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -1877,54 +1758,13 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                               // Contextʳ
-	GetContext_49_result := context                                            // Contextʳ
-	ctx := GetContext_49_result                                                // Contextʳ
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64((ϟa.Count)*(int32(16))), ϟs) // F32ˢ
-	v.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
-	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Value.Mat4f = func() Mat4f {
-		s := Mat4f{}
-		s.Init()
-		s.Col0 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(1), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(2), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.W = v.Index(uint64(3), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col1 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(4), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(5), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(6), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.W = v.Index(uint64(7), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col2 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(8), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(9), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(10), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.W = v.Index(uint64(11), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		s.Col3 = func() Vec4f {
-			s := Vec4f{}
-			s.Init()
-			s.X = v.Index(uint64(12), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Y = v.Index(uint64(13), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.Z = v.Index(uint64(14), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			s.W = v.Index(uint64(15), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-			return s
-		}()
-		return s
-	}()
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                         // Contextʳ
+	GetContext_49_result := context                                      // Contextʳ
+	ctx := GetContext_49_result                                          // Contextʳ
+	v := Mat4fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat4fˢ
+	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
+	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
+	uniform.Value = AsU8ˢ(v, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeInt32, ϟa.Location.value(ϟb, ϟa, ϟs))
@@ -5277,6 +5117,177 @@ func (p F32ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p Vec2iᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2i {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec2iᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2i {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec2iᵖ) replayWrite(value Vec2i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec2iᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Vec3iᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3i {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec3iᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3i {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec3iᵖ) replayWrite(value Vec3i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec3iᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Vec4iᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4i {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec4iᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4i {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec4iᵖ) replayWrite(value Vec4i, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec4iᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Vec2fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec2fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec2fᵖ) replayWrite(value Vec2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec2fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Vec3fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec3fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec3fᵖ) replayWrite(value Vec3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec3fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Vec4fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec4fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Vec4fᵖ) replayWrite(value Vec4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Vec4fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Mat2fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat2fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat2fᵖ) replayWrite(value Mat2f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Mat2fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Mat3fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat3fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat3fᵖ) replayWrite(value Mat3f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Mat3fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Mat4fᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4f {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat4fᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4f {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Mat4fᵖ) replayWrite(value Mat4f, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Mat4fᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p TextureIdᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) TextureId {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -5795,6 +5806,75 @@ func (s Intˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return s.Read(ϟs, ϟd, ϟl)
 }
+func (s Mat2fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Mat2fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat2fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Mat2fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Mat2fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat2f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Mat3fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Mat3fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat3fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Mat3fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Mat3fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat3f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Mat4fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Mat4fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Mat4fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Mat4fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Mat4fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Mat4f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
 func (s QueryIdˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) QueryIdˢ {
 	if s.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -6137,6 +6217,144 @@ func (s U8ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 	}
 }
 func (s U8ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint8 {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec2fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec2fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec2fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec2fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec2f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec2iˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2iˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec2iˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec2iˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec2iˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec2iˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec2i {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec3fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec3fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec3fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec3fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec3f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec3iˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3iˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec3iˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec3iˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec3iˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec3iˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec3i {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec4fˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4fˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec4fˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4fˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec4fˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec4fˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec4f {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
+}
+func (s Vec4iˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4iˢ {
+	if s.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s Vec4iˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Vec4iˢ {
+	if s.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+	}
+	return s
+}
+func (s Vec4iˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+	}
+}
+func (s Vec4iˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Vec4i {
 	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return s.Read(ϟs, ϟd, ϟl)
 }

@@ -892,6 +892,24 @@ static const uint32_t GL_MAP_FLUSH_EXPLICIT_BIT = 16;
 static const uint32_t GL_MAP_UNSYNCHRONIZED_BIT = 32;
 }
 
+typedef int32_t Vec2i[2];
+
+typedef int32_t Vec3i[3];
+
+typedef int32_t Vec4i[4];
+
+typedef float Vec2f[2];
+
+typedef float Vec3f[3];
+
+typedef float Vec4f[4];
+
+typedef Vec2f Mat2f[2];
+
+typedef Vec3f Mat3f[3];
+
+typedef Vec4f Mat4f[4];
+
 typedef uint32_t RenderbufferId;
 
 typedef uint32_t TextureId;
@@ -1476,236 +1494,6 @@ struct VertexAttribute {
 
 typedef std::unordered_map<int32_t, VertexAttribute> S32ToVertexAttribute;
 
-struct Vec2f {
-    inline Vec2f& SetX(float v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec2f& SetY(float v) {
-        mY = v;
-        return *this;
-    }
-
-    float mX;
-    float mY;
-};
-
-struct Vec3f {
-    inline Vec3f& SetX(float v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec3f& SetY(float v) {
-        mY = v;
-        return *this;
-    }
-    inline Vec3f& SetZ(float v) {
-        mZ = v;
-        return *this;
-    }
-
-    float mX;
-    float mY;
-    float mZ;
-};
-
-struct Vec4f {
-    inline Vec4f& SetX(float v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec4f& SetY(float v) {
-        mY = v;
-        return *this;
-    }
-    inline Vec4f& SetZ(float v) {
-        mZ = v;
-        return *this;
-    }
-    inline Vec4f& SetW(float v) {
-        mW = v;
-        return *this;
-    }
-
-    float mX;
-    float mY;
-    float mZ;
-    float mW;
-};
-
-struct Vec2i {
-    inline Vec2i& SetX(int32_t v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec2i& SetY(int32_t v) {
-        mY = v;
-        return *this;
-    }
-
-    int32_t mX;
-    int32_t mY;
-};
-
-struct Vec3i {
-    inline Vec3i& SetX(int32_t v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec3i& SetY(int32_t v) {
-        mY = v;
-        return *this;
-    }
-    inline Vec3i& SetZ(int32_t v) {
-        mZ = v;
-        return *this;
-    }
-
-    int32_t mX;
-    int32_t mY;
-    int32_t mZ;
-};
-
-struct Vec4i {
-    inline Vec4i& SetX(int32_t v) {
-        mX = v;
-        return *this;
-    }
-    inline Vec4i& SetY(int32_t v) {
-        mY = v;
-        return *this;
-    }
-    inline Vec4i& SetZ(int32_t v) {
-        mZ = v;
-        return *this;
-    }
-    inline Vec4i& SetW(int32_t v) {
-        mW = v;
-        return *this;
-    }
-
-    int32_t mX;
-    int32_t mY;
-    int32_t mZ;
-    int32_t mW;
-};
-
-struct Mat2f {
-    inline Mat2f& SetCol0(Vec2f v) {
-        mCol0 = v;
-        return *this;
-    }
-    inline Mat2f& SetCol1(Vec2f v) {
-        mCol1 = v;
-        return *this;
-    }
-
-    Vec2f mCol0;
-    Vec2f mCol1;
-};
-
-struct Mat3f {
-    inline Mat3f& SetCol0(Vec3f v) {
-        mCol0 = v;
-        return *this;
-    }
-    inline Mat3f& SetCol1(Vec3f v) {
-        mCol1 = v;
-        return *this;
-    }
-    inline Mat3f& SetCol2(Vec3f v) {
-        mCol2 = v;
-        return *this;
-    }
-
-    Vec3f mCol0;
-    Vec3f mCol1;
-    Vec3f mCol2;
-};
-
-struct Mat4f {
-    inline Mat4f& SetCol0(Vec4f v) {
-        mCol0 = v;
-        return *this;
-    }
-    inline Mat4f& SetCol1(Vec4f v) {
-        mCol1 = v;
-        return *this;
-    }
-    inline Mat4f& SetCol2(Vec4f v) {
-        mCol2 = v;
-        return *this;
-    }
-    inline Mat4f& SetCol3(Vec4f v) {
-        mCol3 = v;
-        return *this;
-    }
-
-    Vec4f mCol0;
-    Vec4f mCol1;
-    Vec4f mCol2;
-    Vec4f mCol3;
-};
-
-struct UniformValue {
-    inline UniformValue& SetF32(float v) {
-        mF32 = v;
-        return *this;
-    }
-    inline UniformValue& SetVec2f(Vec2f v) {
-        mVec2f = v;
-        return *this;
-    }
-    inline UniformValue& SetVec3f(Vec3f v) {
-        mVec3f = v;
-        return *this;
-    }
-    inline UniformValue& SetVec4f(Vec4f v) {
-        mVec4f = v;
-        return *this;
-    }
-    inline UniformValue& SetS32(int32_t v) {
-        mS32 = v;
-        return *this;
-    }
-    inline UniformValue& SetVec2i(Vec2i v) {
-        mVec2i = v;
-        return *this;
-    }
-    inline UniformValue& SetVec3i(Vec3i v) {
-        mVec3i = v;
-        return *this;
-    }
-    inline UniformValue& SetVec4i(Vec4i v) {
-        mVec4i = v;
-        return *this;
-    }
-    inline UniformValue& SetMat2f(Mat2f v) {
-        mMat2f = v;
-        return *this;
-    }
-    inline UniformValue& SetMat3f(Mat3f v) {
-        mMat3f = v;
-        return *this;
-    }
-    inline UniformValue& SetMat4f(Mat4f v) {
-        mMat4f = v;
-        return *this;
-    }
-
-    float mF32;
-    Vec2f mVec2f;
-    Vec3f mVec3f;
-    Vec4f mVec4f;
-    int32_t mS32;
-    Vec2i mVec2i;
-    Vec3i mVec3i;
-    Vec4i mVec4i;
-    Mat2f mMat2f;
-    Mat3f mMat3f;
-    Mat4f mMat4f;
-};
-
 struct Uniform {
     inline Uniform& SetName(std::string v) {
         mName = v;
@@ -1715,14 +1503,14 @@ struct Uniform {
         mType = v;
         return *this;
     }
-    inline Uniform& SetValue(UniformValue v) {
+    inline Uniform& SetValue(Slice<uint8_t> v) {
         mValue = v;
         return *this;
     }
 
     std::string mName;
     uint32_t mType;
-    UniformValue mValue;
+    Slice<uint8_t> mValue;
 };
 
 typedef std::unordered_map<UniformLocation, Uniform> UniformLocationToUniform;

@@ -902,6 +902,15 @@ enum class MapBufferRangeAccess : uint32_t {
     GL_MAP_UNSYNCHRONIZED_BIT = 32,
 };
 
+typedef int32_t Vec2i;
+typedef int32_t Vec3i;
+typedef int32_t Vec4i;
+typedef float Vec2f;
+typedef float Vec3f;
+typedef float Vec4f;
+typedef Vec2f Mat2f;
+typedef Vec3f Mat3f;
+typedef Vec4f Mat4f;
 typedef uint32_t RenderbufferId;
 typedef uint32_t TextureId;
 typedef uint32_t FramebufferId;
@@ -1032,19 +1041,19 @@ typedef void(STDCALL *PFNGLUNIFORM3I)(int32_t location, int32_t value0, int32_t 
                                       int32_t value2);
 typedef void(STDCALL *PFNGLUNIFORM4I)(int32_t location, int32_t value0, int32_t value1,
                                       int32_t value2, int32_t value3);
-typedef void(STDCALL *PFNGLUNIFORM1IV)(int32_t location, int32_t count, int32_t *value);
-typedef void(STDCALL *PFNGLUNIFORM2IV)(int32_t location, int32_t count, int32_t *value);
-typedef void(STDCALL *PFNGLUNIFORM3IV)(int32_t location, int32_t count, int32_t *value);
-typedef void(STDCALL *PFNGLUNIFORM4IV)(int32_t location, int32_t count, int32_t *value);
+typedef void(STDCALL *PFNGLUNIFORM1IV)(int32_t location, int32_t count, int32_t *values);
+typedef void(STDCALL *PFNGLUNIFORM2IV)(int32_t location, int32_t count, int32_t *values);
+typedef void(STDCALL *PFNGLUNIFORM3IV)(int32_t location, int32_t count, int32_t *values);
+typedef void(STDCALL *PFNGLUNIFORM4IV)(int32_t location, int32_t count, int32_t *values);
 typedef void(STDCALL *PFNGLUNIFORM1F)(int32_t location, float value);
 typedef void(STDCALL *PFNGLUNIFORM2F)(int32_t location, float value0, float value1);
 typedef void(STDCALL *PFNGLUNIFORM3F)(int32_t location, float value0, float value1, float value2);
 typedef void(STDCALL *PFNGLUNIFORM4F)(int32_t location, float value0, float value1, float value2,
                                       float value3);
-typedef void(STDCALL *PFNGLUNIFORM1FV)(int32_t location, int32_t count, float *value);
-typedef void(STDCALL *PFNGLUNIFORM2FV)(int32_t location, int32_t count, float *value);
-typedef void(STDCALL *PFNGLUNIFORM3FV)(int32_t location, int32_t count, float *value);
-typedef void(STDCALL *PFNGLUNIFORM4FV)(int32_t location, int32_t count, float *value);
+typedef void(STDCALL *PFNGLUNIFORM1FV)(int32_t location, int32_t count, float *values);
+typedef void(STDCALL *PFNGLUNIFORM2FV)(int32_t location, int32_t count, float *values);
+typedef void(STDCALL *PFNGLUNIFORM3FV)(int32_t location, int32_t count, float *values);
+typedef void(STDCALL *PFNGLUNIFORM4FV)(int32_t location, int32_t count, float *values);
 typedef void(STDCALL *PFNGLUNIFORMMATRIX2FV)(int32_t location, int32_t count, bool transpose,
                                              float *values);
 typedef void(STDCALL *PFNGLUNIFORMMATRIX3FV)(int32_t location, int32_t count, bool transpose,

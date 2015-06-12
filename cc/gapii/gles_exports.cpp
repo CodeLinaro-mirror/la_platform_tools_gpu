@@ -115,19 +115,19 @@ EXPORT void STDCALL glUniform2i(int32_t location, int32_t value0, int32_t value1
 EXPORT void STDCALL glUniform3i(int32_t location, int32_t value0, int32_t value1, int32_t value2);
 EXPORT void STDCALL
 glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2, int32_t value3);
-EXPORT void STDCALL glUniform1iv(int32_t location, int32_t count, int32_t* value);
-EXPORT void STDCALL glUniform2iv(int32_t location, int32_t count, int32_t* value);
-EXPORT void STDCALL glUniform3iv(int32_t location, int32_t count, int32_t* value);
-EXPORT void STDCALL glUniform4iv(int32_t location, int32_t count, int32_t* value);
+EXPORT void STDCALL glUniform1iv(int32_t location, int32_t count, int32_t* values);
+EXPORT void STDCALL glUniform2iv(int32_t location, int32_t count, int32_t* values);
+EXPORT void STDCALL glUniform3iv(int32_t location, int32_t count, int32_t* values);
+EXPORT void STDCALL glUniform4iv(int32_t location, int32_t count, int32_t* values);
 EXPORT void STDCALL glUniform1f(int32_t location, float value);
 EXPORT void STDCALL glUniform2f(int32_t location, float value0, float value1);
 EXPORT void STDCALL glUniform3f(int32_t location, float value0, float value1, float value2);
 EXPORT void STDCALL
 glUniform4f(int32_t location, float value0, float value1, float value2, float value3);
-EXPORT void STDCALL glUniform1fv(int32_t location, int32_t count, float* value);
-EXPORT void STDCALL glUniform2fv(int32_t location, int32_t count, float* value);
-EXPORT void STDCALL glUniform3fv(int32_t location, int32_t count, float* value);
-EXPORT void STDCALL glUniform4fv(int32_t location, int32_t count, float* value);
+EXPORT void STDCALL glUniform1fv(int32_t location, int32_t count, float* values);
+EXPORT void STDCALL glUniform2fv(int32_t location, int32_t count, float* values);
+EXPORT void STDCALL glUniform3fv(int32_t location, int32_t count, float* values);
+EXPORT void STDCALL glUniform4fv(int32_t location, int32_t count, float* values);
 EXPORT void STDCALL
 glUniformMatrix2fv(int32_t location, int32_t count, bool transpose, float* values);
 EXPORT void STDCALL
@@ -834,21 +834,21 @@ glUniform4i(int32_t location, int32_t value0, int32_t value1, int32_t value2, in
     GAPID_INFO("glUniform4i()\n");
     spy()->glUniform4i(location, value0, value1, value2, value3);
 }
-EXPORT void STDCALL glUniform1iv(int32_t location, int32_t count, int32_t* value) {
+EXPORT void STDCALL glUniform1iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform1iv()\n");
-    spy()->glUniform1iv(location, count, value);
+    spy()->glUniform1iv(location, count, values);
 }
-EXPORT void STDCALL glUniform2iv(int32_t location, int32_t count, int32_t* value) {
+EXPORT void STDCALL glUniform2iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform2iv()\n");
-    spy()->glUniform2iv(location, count, value);
+    spy()->glUniform2iv(location, count, values);
 }
-EXPORT void STDCALL glUniform3iv(int32_t location, int32_t count, int32_t* value) {
+EXPORT void STDCALL glUniform3iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform3iv()\n");
-    spy()->glUniform3iv(location, count, value);
+    spy()->glUniform3iv(location, count, values);
 }
-EXPORT void STDCALL glUniform4iv(int32_t location, int32_t count, int32_t* value) {
+EXPORT void STDCALL glUniform4iv(int32_t location, int32_t count, int32_t* values) {
     GAPID_INFO("glUniform4iv()\n");
-    spy()->glUniform4iv(location, count, value);
+    spy()->glUniform4iv(location, count, values);
 }
 EXPORT void STDCALL glUniform1f(int32_t location, float value) {
     GAPID_INFO("glUniform1f()\n");
@@ -867,21 +867,21 @@ glUniform4f(int32_t location, float value0, float value1, float value2, float va
     GAPID_INFO("glUniform4f()\n");
     spy()->glUniform4f(location, value0, value1, value2, value3);
 }
-EXPORT void STDCALL glUniform1fv(int32_t location, int32_t count, float* value) {
+EXPORT void STDCALL glUniform1fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform1fv()\n");
-    spy()->glUniform1fv(location, count, value);
+    spy()->glUniform1fv(location, count, values);
 }
-EXPORT void STDCALL glUniform2fv(int32_t location, int32_t count, float* value) {
+EXPORT void STDCALL glUniform2fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform2fv()\n");
-    spy()->glUniform2fv(location, count, value);
+    spy()->glUniform2fv(location, count, values);
 }
-EXPORT void STDCALL glUniform3fv(int32_t location, int32_t count, float* value) {
+EXPORT void STDCALL glUniform3fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform3fv()\n");
-    spy()->glUniform3fv(location, count, value);
+    spy()->glUniform3fv(location, count, values);
 }
-EXPORT void STDCALL glUniform4fv(int32_t location, int32_t count, float* value) {
+EXPORT void STDCALL glUniform4fv(int32_t location, int32_t count, float* values) {
     GAPID_INFO("glUniform4fv()\n");
-    spy()->glUniform4fv(location, count, value);
+    spy()->glUniform4fv(location, count, values);
 }
 EXPORT void STDCALL
 glUniformMatrix2fv(int32_t location, int32_t count, bool transpose, float* values) {
