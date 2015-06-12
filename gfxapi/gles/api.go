@@ -12991,6 +12991,287 @@ func (c *GlGetQueryObjectuiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectuiv) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlGetActiveUniformBlockName
+////////////////////////////////////////////////////////////////////////////////
+type GlGetActiveUniformBlockName struct {
+	binary.Generate
+	observations       atom.Observations
+	Program            ProgramId
+	UniformBlockIndex  uint32
+	BufferSize         int32
+	BufferBytesWritten S32ᵖ
+	Name               Charᵖ
+}
+
+func (a *GlGetActiveUniformBlockName) String() string {
+	return fmt.Sprintf("glGetActiveUniformBlockName(program: %v, uniform_block_index: %v, buffer_size: %v, buffer_bytes_written: %v, name: %v)", a.Program, a.UniformBlockIndex, a.BufferSize, a.BufferBytesWritten, a.Name)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformBlockName pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformBlockName) AddRead(rng memory.Range, id binary.ID) *GlGetActiveUniformBlockName {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformBlockName pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformBlockName) AddWrite(rng memory.Range, id binary.ID) *GlGetActiveUniformBlockName {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetActiveUniformBlockName) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformBlockName) TypeID() atom.TypeID              { return 185 }
+func (c *GlGetActiveUniformBlockName) Flags() atom.Flags                { return 0 }
+func (a *GlGetActiveUniformBlockName) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetActiveUniformBlockiv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetActiveUniformBlockiv struct {
+	binary.Generate
+	observations      atom.Observations
+	Program           ProgramId
+	UniformBlockIndex uint32
+	ParameterName     UniformBlockParameter
+	Parameters        S32ᵖ
+}
+
+func (a *GlGetActiveUniformBlockiv) String() string {
+	return fmt.Sprintf("glGetActiveUniformBlockiv(program: %v, uniform_block_index: %v, parameter_name: %v, parameters: %v)", a.Program, a.UniformBlockIndex, a.ParameterName, a.Parameters)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformBlockiv pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformBlockiv) AddRead(rng memory.Range, id binary.ID) *GlGetActiveUniformBlockiv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformBlockiv pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformBlockiv) AddWrite(rng memory.Range, id binary.ID) *GlGetActiveUniformBlockiv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetActiveUniformBlockiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformBlockiv) TypeID() atom.TypeID              { return 186 }
+func (c *GlGetActiveUniformBlockiv) Flags() atom.Flags                { return 0 }
+func (a *GlGetActiveUniformBlockiv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlUniformBlockBinding
+////////////////////////////////////////////////////////////////////////////////
+type GlUniformBlockBinding struct {
+	binary.Generate
+	observations        atom.Observations
+	Program             ProgramId
+	UniformBlockIndex   uint32
+	UniformBlockBinding uint32
+}
+
+func (a *GlUniformBlockBinding) String() string {
+	return fmt.Sprintf("glUniformBlockBinding(program: %v, uniform_block_index: %v, uniform_block_binding: %v)", a.Program, a.UniformBlockIndex, a.UniformBlockBinding)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlUniformBlockBinding pointer is returned so that calls can be chained.
+func (a *GlUniformBlockBinding) AddRead(rng memory.Range, id binary.ID) *GlUniformBlockBinding {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlUniformBlockBinding pointer is returned so that calls can be chained.
+func (a *GlUniformBlockBinding) AddWrite(rng memory.Range, id binary.ID) *GlUniformBlockBinding {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlUniformBlockBinding) API() gfxapi.API                  { return api{} }
+func (c *GlUniformBlockBinding) TypeID() atom.TypeID              { return 187 }
+func (c *GlUniformBlockBinding) Flags() atom.Flags                { return 0 }
+func (a *GlUniformBlockBinding) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetActiveUniformsiv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetActiveUniformsiv struct {
+	binary.Generate
+	observations   atom.Observations
+	Program        ProgramId
+	UniformCount   uint32
+	UniformIndices U32ᵖ
+	ParameterName  UniformBlockParameter
+	Parameters     S32ᵖ
+}
+
+func (a *GlGetActiveUniformsiv) String() string {
+	return fmt.Sprintf("glGetActiveUniformsiv(program: %v, uniform_count: %v, uniform_indices: %v, parameter_name: %v, parameters: %v)", a.Program, a.UniformCount, a.UniformIndices, a.ParameterName, a.Parameters)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformsiv pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformsiv) AddRead(rng memory.Range, id binary.ID) *GlGetActiveUniformsiv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetActiveUniformsiv pointer is returned so that calls can be chained.
+func (a *GlGetActiveUniformsiv) AddWrite(rng memory.Range, id binary.ID) *GlGetActiveUniformsiv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetActiveUniformsiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformsiv) TypeID() atom.TypeID              { return 188 }
+func (c *GlGetActiveUniformsiv) Flags() atom.Flags                { return 0 }
+func (a *GlGetActiveUniformsiv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBindBufferBase
+////////////////////////////////////////////////////////////////////////////////
+type GlBindBufferBase struct {
+	binary.Generate
+	observations atom.Observations
+	Target       IndexedBufferTarget
+	Index        uint32
+	Buffer       BufferId
+}
+
+func (a *GlBindBufferBase) String() string {
+	return fmt.Sprintf("glBindBufferBase(target: %v, index: %v, buffer: %v)", a.Target, a.Index, a.Buffer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindBufferBase pointer is returned so that calls can be chained.
+func (a *GlBindBufferBase) AddRead(rng memory.Range, id binary.ID) *GlBindBufferBase {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindBufferBase pointer is returned so that calls can be chained.
+func (a *GlBindBufferBase) AddWrite(rng memory.Range, id binary.ID) *GlBindBufferBase {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindBufferBase) API() gfxapi.API                  { return api{} }
+func (c *GlBindBufferBase) TypeID() atom.TypeID              { return 189 }
+func (c *GlBindBufferBase) Flags() atom.Flags                { return 0 }
+func (a *GlBindBufferBase) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGenVertexArrays
+////////////////////////////////////////////////////////////////////////////////
+type GlGenVertexArrays struct {
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Arrays       VertexArrayIdᵖ
+}
+
+func (a *GlGenVertexArrays) String() string {
+	return fmt.Sprintf("glGenVertexArrays(count: %v, arrays: %v)", a.Count, a.Arrays)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGenVertexArrays pointer is returned so that calls can be chained.
+func (a *GlGenVertexArrays) AddRead(rng memory.Range, id binary.ID) *GlGenVertexArrays {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGenVertexArrays pointer is returned so that calls can be chained.
+func (a *GlGenVertexArrays) AddWrite(rng memory.Range, id binary.ID) *GlGenVertexArrays {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGenVertexArrays) API() gfxapi.API                  { return api{} }
+func (c *GlGenVertexArrays) TypeID() atom.TypeID              { return 190 }
+func (c *GlGenVertexArrays) Flags() atom.Flags                { return 0 }
+func (a *GlGenVertexArrays) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBindVertexArray
+////////////////////////////////////////////////////////////////////////////////
+type GlBindVertexArray struct {
+	binary.Generate
+	observations atom.Observations
+	Array        VertexArrayId
+}
+
+func (a *GlBindVertexArray) String() string {
+	return fmt.Sprintf("glBindVertexArray(array: %v)", a.Array)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindVertexArray pointer is returned so that calls can be chained.
+func (a *GlBindVertexArray) AddRead(rng memory.Range, id binary.ID) *GlBindVertexArray {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindVertexArray pointer is returned so that calls can be chained.
+func (a *GlBindVertexArray) AddWrite(rng memory.Range, id binary.ID) *GlBindVertexArray {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindVertexArray) API() gfxapi.API                  { return api{} }
+func (c *GlBindVertexArray) TypeID() atom.TypeID              { return 191 }
+func (c *GlBindVertexArray) Flags() atom.Flags                { return 0 }
+func (a *GlBindVertexArray) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDeleteVertexArrays
+////////////////////////////////////////////////////////////////////////////////
+type GlDeleteVertexArrays struct {
+	binary.Generate
+	observations atom.Observations
+	Count        uint32
+	Arrays       VertexArrayIdᵖ
+}
+
+func (a *GlDeleteVertexArrays) String() string {
+	return fmt.Sprintf("glDeleteVertexArrays(count: %v, arrays: %v)", a.Count, a.Arrays)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDeleteVertexArrays pointer is returned so that calls can be chained.
+func (a *GlDeleteVertexArrays) AddRead(rng memory.Range, id binary.ID) *GlDeleteVertexArrays {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDeleteVertexArrays pointer is returned so that calls can be chained.
+func (a *GlDeleteVertexArrays) AddWrite(rng memory.Range, id binary.ID) *GlDeleteVertexArrays {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDeleteVertexArrays) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteVertexArrays) TypeID() atom.TypeID              { return 192 }
+func (c *GlDeleteVertexArrays) Flags() atom.Flags                { return 0 }
+func (a *GlDeleteVertexArrays) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // GlGenQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenQueriesEXT struct {
@@ -13020,7 +13301,7 @@ func (a *GlGenQueriesEXT) AddWrite(rng memory.Range, id binary.ID) *GlGenQueries
 	return a
 }
 func (c *GlGenQueriesEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGenQueriesEXT) TypeID() atom.TypeID              { return 185 }
+func (c *GlGenQueriesEXT) TypeID() atom.TypeID              { return 193 }
 func (c *GlGenQueriesEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGenQueriesEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13054,7 +13335,7 @@ func (a *GlBeginQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlBeginQuery
 	return a
 }
 func (c *GlBeginQueryEXT) API() gfxapi.API                  { return api{} }
-func (c *GlBeginQueryEXT) TypeID() atom.TypeID              { return 186 }
+func (c *GlBeginQueryEXT) TypeID() atom.TypeID              { return 194 }
 func (c *GlBeginQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlBeginQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13087,7 +13368,7 @@ func (a *GlEndQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlEndQueryEXT 
 	return a
 }
 func (c *GlEndQueryEXT) API() gfxapi.API                  { return api{} }
-func (c *GlEndQueryEXT) TypeID() atom.TypeID              { return 187 }
+func (c *GlEndQueryEXT) TypeID() atom.TypeID              { return 195 }
 func (c *GlEndQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlEndQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13121,7 +13402,7 @@ func (a *GlDeleteQueriesEXT) AddWrite(rng memory.Range, id binary.ID) *GlDeleteQ
 	return a
 }
 func (c *GlDeleteQueriesEXT) API() gfxapi.API                  { return api{} }
-func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID              { return 188 }
+func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID              { return 196 }
 func (c *GlDeleteQueriesEXT) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteQueriesEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13155,7 +13436,7 @@ func (a *GlIsQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlIsQueryEXT {
 	return a
 }
 func (c *GlIsQueryEXT) API() gfxapi.API                  { return api{} }
-func (c *GlIsQueryEXT) TypeID() atom.TypeID              { return 189 }
+func (c *GlIsQueryEXT) TypeID() atom.TypeID              { return 197 }
 func (c *GlIsQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlIsQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13189,7 +13470,7 @@ func (a *GlQueryCounterEXT) AddWrite(rng memory.Range, id binary.ID) *GlQueryCou
 	return a
 }
 func (c *GlQueryCounterEXT) API() gfxapi.API                  { return api{} }
-func (c *GlQueryCounterEXT) TypeID() atom.TypeID              { return 190 }
+func (c *GlQueryCounterEXT) TypeID() atom.TypeID              { return 198 }
 func (c *GlQueryCounterEXT) Flags() atom.Flags                { return 0 }
 func (a *GlQueryCounterEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13224,7 +13505,7 @@ func (a *GlGetQueryivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetQueryiv
 	return a
 }
 func (c *GlGetQueryivEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGetQueryivEXT) TypeID() atom.TypeID              { return 191 }
+func (c *GlGetQueryivEXT) TypeID() atom.TypeID              { return 199 }
 func (c *GlGetQueryivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13259,7 +13540,7 @@ func (a *GlGetQueryObjectivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetQ
 	return a
 }
 func (c *GlGetQueryObjectivEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID              { return 192 }
+func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID              { return 200 }
 func (c *GlGetQueryObjectivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13294,7 +13575,7 @@ func (a *GlGetQueryObjectuivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGet
 	return a
 }
 func (c *GlGetQueryObjectuivEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID              { return 193 }
+func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID              { return 201 }
 func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectuivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13329,7 +13610,7 @@ func (a *GlGetQueryObjecti64vEXT) AddWrite(rng memory.Range, id binary.ID) *GlGe
 	return a
 }
 func (c *GlGetQueryObjecti64vEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID              { return 194 }
+func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID              { return 202 }
 func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjecti64vEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13364,7 +13645,7 @@ func (a *GlGetQueryObjectui64vEXT) AddWrite(rng memory.Range, id binary.ID) *GlG
 	return a
 }
 func (c *GlGetQueryObjectui64vEXT) API() gfxapi.API                  { return api{} }
-func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID              { return 195 }
+func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID              { return 203 }
 func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectui64vEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -13400,7 +13681,7 @@ func (a *Architecture) AddWrite(rng memory.Range, id binary.ID) *Architecture {
 	return a
 }
 func (c *Architecture) API() gfxapi.API                  { return api{} }
-func (c *Architecture) TypeID() atom.TypeID              { return 196 }
+func (c *Architecture) TypeID() atom.TypeID              { return 204 }
 func (c *Architecture) Flags() atom.Flags                { return 0 }
 func (a *Architecture) Observations() *atom.Observations { return &a.observations }
 
@@ -13433,7 +13714,7 @@ func (a *ReplayCreateRenderer) AddWrite(rng memory.Range, id binary.ID) *ReplayC
 	return a
 }
 func (c *ReplayCreateRenderer) API() gfxapi.API                  { return api{} }
-func (c *ReplayCreateRenderer) TypeID() atom.TypeID              { return 197 }
+func (c *ReplayCreateRenderer) TypeID() atom.TypeID              { return 205 }
 func (c *ReplayCreateRenderer) Flags() atom.Flags                { return 0 }
 func (a *ReplayCreateRenderer) Observations() *atom.Observations { return &a.observations }
 
@@ -13466,7 +13747,7 @@ func (a *ReplayBindRenderer) AddWrite(rng memory.Range, id binary.ID) *ReplayBin
 	return a
 }
 func (c *ReplayBindRenderer) API() gfxapi.API                  { return api{} }
-func (c *ReplayBindRenderer) TypeID() atom.TypeID              { return 198 }
+func (c *ReplayBindRenderer) TypeID() atom.TypeID              { return 206 }
 func (c *ReplayBindRenderer) Flags() atom.Flags                { return 0 }
 func (a *ReplayBindRenderer) Observations() *atom.Observations { return &a.observations }
 
@@ -13504,7 +13785,7 @@ func (a *BackbufferInfo) AddWrite(rng memory.Range, id binary.ID) *BackbufferInf
 	return a
 }
 func (c *BackbufferInfo) API() gfxapi.API                  { return api{} }
-func (c *BackbufferInfo) TypeID() atom.TypeID              { return 199 }
+func (c *BackbufferInfo) TypeID() atom.TypeID              { return 207 }
 func (c *BackbufferInfo) Flags() atom.Flags                { return 0 }
 func (a *BackbufferInfo) Observations() *atom.Observations { return &a.observations }
 
@@ -13537,7 +13818,7 @@ func (a *StartTimer) AddWrite(rng memory.Range, id binary.ID) *StartTimer {
 	return a
 }
 func (c *StartTimer) API() gfxapi.API                  { return api{} }
-func (c *StartTimer) TypeID() atom.TypeID              { return 200 }
+func (c *StartTimer) TypeID() atom.TypeID              { return 208 }
 func (c *StartTimer) Flags() atom.Flags                { return 0 }
 func (a *StartTimer) Observations() *atom.Observations { return &a.observations }
 
@@ -13571,7 +13852,7 @@ func (a *StopTimer) AddWrite(rng memory.Range, id binary.ID) *StopTimer {
 	return a
 }
 func (c *StopTimer) API() gfxapi.API                  { return api{} }
-func (c *StopTimer) TypeID() atom.TypeID              { return 201 }
+func (c *StopTimer) TypeID() atom.TypeID              { return 209 }
 func (c *StopTimer) Flags() atom.Flags                { return 0 }
 func (a *StopTimer) Observations() *atom.Observations { return &a.observations }
 
@@ -13603,7 +13884,7 @@ func (a *FlushPostBuffer) AddWrite(rng memory.Range, id binary.ID) *FlushPostBuf
 	return a
 }
 func (c *FlushPostBuffer) API() gfxapi.API                  { return api{} }
-func (c *FlushPostBuffer) TypeID() atom.TypeID              { return 202 }
+func (c *FlushPostBuffer) TypeID() atom.TypeID              { return 210 }
 func (c *FlushPostBuffer) Flags() atom.Flags                { return 0 }
 func (a *FlushPostBuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -15440,6 +15721,32 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
+// enum UniformBlockParameter
+////////////////////////////////////////////////////////////////////////////////
+type UniformBlockParameter uint32
+
+const (
+	UniformBlockParameter_GL_UNIFORM_BLOCK_BINDING                       = UniformBlockParameter(35391)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_DATA_SIZE                     = UniformBlockParameter(35392)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_NAME_LENGTH                   = UniformBlockParameter(35393)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS               = UniformBlockParameter(35394)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES        = UniformBlockParameter(35395)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER   = UniformBlockParameter(35396)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER = UniformBlockParameter(35397)
+	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = UniformBlockParameter(35398)
+)
+
+////////////////////////////////////////////////////////////////////////////////
+// enum IndexedBufferTarget
+////////////////////////////////////////////////////////////////////////////////
+type IndexedBufferTarget uint32
+
+const (
+	IndexedBufferTarget_GL_TRANSFORM_FEEDBACK_BUFFER = IndexedBufferTarget(35982)
+	IndexedBufferTarget_GL_UNIFORM_BUFFER            = IndexedBufferTarget(35345)
+)
+
+////////////////////////////////////////////////////////////////////////////////
 // enum TilePreserveMaskQCOM
 ////////////////////////////////////////////////////////////////////////////////
 type TilePreserveMaskQCOM uint32
@@ -16079,6 +16386,30 @@ func NewGlGetQueryiv(Target QueryTarget, Parameter QueryParameter, Value memory.
 }
 func NewGlGetQueryObjectuiv(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectuiv {
 	return &GlGetQueryObjectuiv{Query: Query, Parameter: Parameter, Value: NewU32ᵖ(Value)}
+}
+func NewGlGetActiveUniformBlockName(Program ProgramId, Uniform_block_index uint32, Buffer_size int32, Buffer_bytes_written memory.Pointer, Name memory.Pointer) *GlGetActiveUniformBlockName {
+	return &GlGetActiveUniformBlockName{Program: Program, UniformBlockIndex: Uniform_block_index, BufferSize: Buffer_size, BufferBytesWritten: NewS32ᵖ(Buffer_bytes_written), Name: NewCharᵖ(Name)}
+}
+func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index uint32, Parameter_name UniformBlockParameter, Parameters memory.Pointer) *GlGetActiveUniformBlockiv {
+	return &GlGetActiveUniformBlockiv{Program: Program, UniformBlockIndex: Uniform_block_index, ParameterName: Parameter_name, Parameters: NewS32ᵖ(Parameters)}
+}
+func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index uint32, Uniform_block_binding uint32) *GlUniformBlockBinding {
+	return &GlUniformBlockBinding{Program: Program, UniformBlockIndex: Uniform_block_index, UniformBlockBinding: Uniform_block_binding}
+}
+func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count uint32, Uniform_indices memory.Pointer, Parameter_name UniformBlockParameter, Parameters memory.Pointer) *GlGetActiveUniformsiv {
+	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: NewU32ᵖ(Uniform_indices), ParameterName: Parameter_name, Parameters: NewS32ᵖ(Parameters)}
+}
+func NewGlBindBufferBase(Target IndexedBufferTarget, Index uint32, Buffer BufferId) *GlBindBufferBase {
+	return &GlBindBufferBase{Target: Target, Index: Index, Buffer: Buffer}
+}
+func NewGlGenVertexArrays(Count int32, Arrays memory.Pointer) *GlGenVertexArrays {
+	return &GlGenVertexArrays{Count: Count, Arrays: NewVertexArrayIdᵖ(Arrays)}
+}
+func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray {
+	return &GlBindVertexArray{Array: Array}
+}
+func NewGlDeleteVertexArrays(Count uint32, Arrays memory.Pointer) *GlDeleteVertexArrays {
+	return &GlDeleteVertexArrays{Count: Count, Arrays: NewVertexArrayIdᵖ(Arrays)}
 }
 func NewGlGenQueriesEXT(Count int32, Queries memory.Pointer) *GlGenQueriesEXT {
 	return &GlGenQueriesEXT{Count: Count, Queries: NewQueryIdᵖ(Queries)}
@@ -17267,111 +17598,159 @@ func init() {
 		New:  func() atom.Atom { return &GlGetQueryObjectuiv{} },
 	})
 	atom.Register(atom.TypeInfo{
+		Name: "glGetActiveUniformBlockName",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockName.xhtml]",
+		ID:   185,
+		New:  func() atom.Atom { return &GlGetActiveUniformBlockName{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glGetActiveUniformBlockiv",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockiv.xhtml]",
+		ID:   186,
+		New:  func() atom.Atom { return &GlGetActiveUniformBlockiv{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glUniformBlockBinding",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glUniformBlockBinding.xhtml]",
+		ID:   187,
+		New:  func() atom.Atom { return &GlUniformBlockBinding{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glGetActiveUniformsiv",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformsiv.xhtml]",
+		ID:   188,
+		New:  func() atom.Atom { return &GlGetActiveUniformsiv{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glBindBufferBase",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml]",
+		ID:   189,
+		New:  func() atom.Atom { return &GlBindBufferBase{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glGenVertexArrays",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenVertexArrays.xhtml]",
+		ID:   190,
+		New:  func() atom.Atom { return &GlGenVertexArrays{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glBindVertexArray",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml]",
+		ID:   191,
+		New:  func() atom.Atom { return &GlBindVertexArray{} },
+	})
+	atom.Register(atom.TypeInfo{
+		Name: "glDeleteVertexArrays",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml]",
+		ID:   192,
+		New:  func() atom.Atom { return &GlDeleteVertexArrays{} },
+	})
+	atom.Register(atom.TypeInfo{
 		Name: "glGenQueriesEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   185,
+		ID:   193,
 		New:  func() atom.Atom { return &GlGenQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glBeginQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   186,
+		ID:   194,
 		New:  func() atom.Atom { return &GlBeginQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glEndQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   187,
+		ID:   195,
 		New:  func() atom.Atom { return &GlEndQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glDeleteQueriesEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   188,
+		ID:   196,
 		New:  func() atom.Atom { return &GlDeleteQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glIsQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   189,
+		ID:   197,
 		New:  func() atom.Atom { return &GlIsQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glQueryCounterEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   190,
+		ID:   198,
 		New:  func() atom.Atom { return &GlQueryCounterEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glGetQueryivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   191,
+		ID:   199,
 		New:  func() atom.Atom { return &GlGetQueryivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glGetQueryObjectivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   192,
+		ID:   200,
 		New:  func() atom.Atom { return &GlGetQueryObjectivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glGetQueryObjectuivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   193,
+		ID:   201,
 		New:  func() atom.Atom { return &GlGetQueryObjectuivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glGetQueryObjecti64vEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   194,
+		ID:   202,
 		New:  func() atom.Atom { return &GlGetQueryObjecti64vEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "glGetQueryObjectui64vEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
-		ID:   195,
+		ID:   203,
 		New:  func() atom.Atom { return &GlGetQueryObjectui64vEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "architecture",
 		Docs: "[]",
-		ID:   196,
+		ID:   204,
 		New:  func() atom.Atom { return &Architecture{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "replayCreateRenderer",
 		Docs: "[]",
-		ID:   197,
+		ID:   205,
 		New:  func() atom.Atom { return &ReplayCreateRenderer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "replayBindRenderer",
 		Docs: "[]",
-		ID:   198,
+		ID:   206,
 		New:  func() atom.Atom { return &ReplayBindRenderer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "backbufferInfo",
 		Docs: "[]",
-		ID:   199,
+		ID:   207,
 		New:  func() atom.Atom { return &BackbufferInfo{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "startTimer",
 		Docs: "[]",
-		ID:   200,
+		ID:   208,
 		New:  func() atom.Atom { return &StartTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "stopTimer",
 		Docs: "[]",
-		ID:   201,
+		ID:   209,
 		New:  func() atom.Atom { return &StopTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "flushPostBuffer",
 		Docs: "[]",
-		ID:   202,
+		ID:   210,
 		New:  func() atom.Atom { return &FlushPostBuffer{} },
 	})
 }
