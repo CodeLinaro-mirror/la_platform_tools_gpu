@@ -23,11 +23,11 @@ import (
 	"os/exec"
 	"time"
 
+	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
-	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -113,7 +113,7 @@ func connectServer(config Config) (net.Conn, error) {
 		proc.Wait()
 	}, time.Second)
 	// and try to connect to it (for a while)
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 30; i++ {
 		conn, err = net.Dial("tcp", config.Gapis)
 		if err == nil {
 			return conn, nil
