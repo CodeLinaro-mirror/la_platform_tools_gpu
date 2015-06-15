@@ -50,6 +50,8 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 			markUsed(t.To)
 		case *semantic.Slice:
 			markUsed(t.To)
+		case *semantic.StaticArray:
+			markUsed(t.ValueType)
 		case *semantic.Map:
 			markUsed(t.ValueType)
 			markUsed(t.KeyType)
