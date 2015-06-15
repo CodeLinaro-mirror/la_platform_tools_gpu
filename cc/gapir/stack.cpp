@@ -21,6 +21,8 @@
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
+#define DEBUG_STACK(...)
+
 namespace gapir {
 
 const char* Stack::Entry::debugInfo(const MemoryManager* memoryManager) const {
@@ -122,7 +124,7 @@ void Stack::pushFrom(BaseType type, const void* data) {
     }
 
     mStack[mTop].set(type, data);
-    GAPID_DEBUG("+%s pushFrom(%p)\n", mStack[mTop].debugInfo(mMemoryManager), data);
+    DEBUG_STACK("+%s pushFrom(%p)\n", mStack[mTop].debugInfo(mMemoryManager), data);
     mTop++;
 }
 
@@ -140,7 +142,7 @@ void Stack::popTo(void* address, bool castPtrsToAbsolute) {
     }
 
     mTop--;
-    GAPID_DEBUG("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
+    DEBUG_STACK("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
 
     if (castPtrsToAbsolute) {
         switch (mStack[mTop].type()) {
@@ -177,7 +179,7 @@ void Stack::discard(uint32_t count) {
     }
 
     for (uint32_t i = 0; i < count; i++) {
-        GAPID_DEBUG("-%s discard()\n", mStack[mTop - i - 1].debugInfo(mMemoryManager));
+        DEBUG_STACK("-%s discard()\n", mStack[mTop - i - 1].debugInfo(mMemoryManager));
     }
 
     mTop -= count;
@@ -202,7 +204,7 @@ void Stack::clone(uint32_t n) {
     }
 
     mStack[mTop] = mStack[mTop - n - 1];
-    GAPID_DEBUG("+%s clone(%d)\n", mStack[mTop].debugInfo(mMemoryManager), n);
+    DEBUG_STACK("+%s clone(%d)\n", mStack[mTop].debugInfo(mMemoryManager), n);
     mTop++;
 }
 
