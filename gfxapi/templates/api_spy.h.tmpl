@@ -45,6 +45,8 @@
   #include <memory>
   #include <string>
 ¶
+  using gapic::coder::atom::Observations;
+¶
   namespace gapii {«
 ¶
   class {{$spyname}} : public SpyBase {
@@ -125,13 +127,15 @@
       {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
     {{end}}
 ¶
+    Observations observations;
     do {
       {{Global "CurrentCommand" $}}
       {{Macro "C++.Block" $.Block}}
     } while(false);
+    observe(observations.mWrites);
 ¶
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-    encodeObservations();
+    mEncoder->Value(&observations);
     {{range $p := $.FullParameters}}
       {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $p.Name}}
     {{end}}
@@ -216,6 +220,10 @@
     {{end}}
   {{end}}
 
+  {{/* Observe all reads */}}
+  observe(observations.mReads);
+
+  {{/* Perform the call */}}
   {{if not (GetAnnotation $c "synthetic")}}
     {{if not (IsVoid $c.Return.Type)}}result = {{end}}mImports.{{Macro "CmdName" $c}}({{Macro "C++.CallArguments" $c}});
   {{end}}

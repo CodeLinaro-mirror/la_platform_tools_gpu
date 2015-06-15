@@ -16,6 +16,9 @@
 
 #include "spy_base.h"
 
+using gapic::coder::memory::Range;
+using gapic::Interval;
+
 namespace gapii {
 
 // Inline methods
@@ -24,28 +27,35 @@ void SpyBase::init(std::shared_ptr<gapic::Encoder> encoder) {
 }
 
 void SpyBase::read(const void* base, uint64_t size) {
-  mObservations.mReads.push_back(observe(base, size));
+    if (size > 0) {
+        uintptr_t start = reinterpret_cast<uintptr_t>(base);
+        mPendingObservations.merge(Interval<uintptr_t>{start, start + size});
+    }
 }
 
 void SpyBase::write(const void* base, uint64_t size) {
-  mObservations.mWrites.push_back(observe(base, size));
-}
-
-void SpyBase::encodeObservations() {
-    mEncoder->Value(&mObservations);
-    mObservations.mReads.clear();
-    mObservations.mWrites.clear();
-}
-
-Observation SpyBase::observe(const void* base, uint64_t size) {
-    gapic::Id id = gapic::Id::Hash(base, size);
-    if (mResources.count(id) == 0) {
-        mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
-        mEncoder->Id(id);
-        mEncoder->Data(base, size);
-        mResources.emplace(id);
+    if (size > 0) {
+        uintptr_t start = reinterpret_cast<uintptr_t>(base);
+        mPendingObservations.merge(Interval<uintptr_t>{start, start + size});
     }
-    return Observation(Range(reinterpret_cast<uintptr_t>(base), size), id);
+}
+
+void SpyBase::observe(std::vector<Observation>& observations) {
+    observations.clear();
+    observations.reserve(mPendingObservations.count());
+    for (auto p : mPendingObservations) {
+        const void* base = reinterpret_cast<const void*>(p.start);
+        uint64_t size = p.end - p.start;
+        gapic::Id id = gapic::Id::Hash(base, size);
+        if (mResources.count(id) == 0) {
+            mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
+            mEncoder->Id(id);
+            mEncoder->Data(base, size);
+            mResources.emplace(id);
+        }
+        observations.push_back(Observation(Range(p.start, size), id));
+    }
+    mPendingObservations.clear();
 }
 
 }  // namespace gapii
