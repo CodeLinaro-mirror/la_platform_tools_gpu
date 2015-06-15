@@ -47,6 +47,8 @@ func (f *functions) FixupName(n string) string {
 	n = strings.Replace(n, ".", "::", -1)
 	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
 	n = strings.Replace(n, resolver.SliceSuffix, "__S", -1)
+	n = strings.Replace(n, resolver.ArraySuffix, "__A", -1)
+	n = strings.Replace(n, resolver.TypeInfix, "__", -1)
 	if result, ok := cppTypeMap[n]; ok {
 		return result
 	}

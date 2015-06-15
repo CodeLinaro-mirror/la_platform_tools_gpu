@@ -41,6 +41,9 @@
   #include "spy_base.h"
 ¶
   #include <gapic/log.h>
+  #include <gapic/coder/memory.h>
+  #include <gapic/coder/atom.h>
+  #include <gapic/coder/{{Global "API"}}.h>
 ¶
   #include <memory>
   #include <string>
@@ -112,6 +115,32 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the possibly converted coder argument.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CoderArgument"}}
+  {{AssertType $ "Parameter"}}
+  
+  {{if IsPointer (Underlying $.Type)}}
+    gapic::coder::{{Global "API"}}::{{Template "C++.TypeName" $.Type}}(reinterpret_cast<uintptr_t>({{$.Name}}), 0)
+  {{else}}{{$.Name}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of argument names for the given function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CoderArguments"}}
+  {{AssertType $ "Function"}}
+
+  observations {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the inline method body for the given atom.
 -------------------------------------------------------------------------------
 */}}
@@ -135,10 +164,8 @@
     observe(observations.mWrites);
 ¶
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-    mEncoder->Value(&observations);
-    {{range $p := $.FullParameters}}
-      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $p.Name}}
-    {{end}}
+    gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Macro "C++.CoderArguments" $}});
+    mEncoder->Value(&coder);
 
     {{if not (IsVoid $.Return.Type)}}¶
       return result;
