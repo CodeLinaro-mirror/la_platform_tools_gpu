@@ -19,6 +19,8 @@
 
 #include "pool.h"
 
+#include <gapic/assert.h>
+
 #include <memory>
 #include <stdint.h>
 
@@ -85,11 +87,14 @@ inline bool Slice<T>::isApplicationPool() const {
 
 template<typename T>
 inline Slice<T> Slice<T>::operator()(uint64_t start, uint64_t end) const {
+    GAPID_ASSERT(start <= end);
+    GAPID_ASSERT(end <= mCount);
     return Slice<T>(mBase+start, end-start, mPool);
 }
 
 template<typename T>
 inline T& Slice<T>::operator[](uint64_t index) const {
+    GAPID_ASSERT(index < mCount);
     return mBase[index];
 }
 
