@@ -137,7 +137,7 @@ func ReadType(ty service.TypeInfo, d binary.Decoder) (interface{}, error) {
 			return nil, nil
 		}
 		_, err = d.Uint32() // Pool - currently not used
-		return addr, err
+		return memory.Pointer(addr), err
 	case service.TypeKindMemory:
 		// TODO: Memory currently has no payload
 		return nil, nil
@@ -235,7 +235,10 @@ func WriteType(v interface{}, e binary.Encoder) error {
 		}
 		return nil
 	case memory.Pointer:
-		return e.Uint64(uint64(v))
+		if err := e.Uint64(uint64(v)); err != nil {
+			return err
+		}
+		return e.Uint32(0) // Pool - currently not used
 	default:
 		return fmt.Errorf("Schema does not support encoding type %T", v)
 	}

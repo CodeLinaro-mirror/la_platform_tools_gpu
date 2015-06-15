@@ -28,6 +28,9 @@ import (
 
 const kCommandAdapterItemHeight = 18
 
+type parser func(s string) (interface{}, bool)
+type committer func(interface{})
+
 func createEnumList(t gxui.Theme, appCtx *ApplicationContext, values interface{}, selected gxui.AdapterItem, active bool, onChange func(item gxui.AdapterItem)) gxui.DropDownList {
 	a := gxui.CreateDefaultAdapter()
 	a.SetItems(values)
@@ -47,7 +50,8 @@ func createEnumList(t gxui.Theme, appCtx *ApplicationContext, values interface{}
 	return l
 }
 
-func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, active bool, onChange func(s string) bool) gxui.TextBox {
+func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, active bool, parse parser, commit committer) gxui.TextBox {
+	newvalue := value
 	tb := t.CreateTextBox()
 	tb.SetMargin(math.Spacing{})
 	tb.SetPadding(math.Spacing{})
@@ -58,16 +62,16 @@ func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, 
 		text := tb.Text()
 		b := &gxui.TextBlock{Runes: []rune(text)}
 		tb.SetDesiredWidth(tb.Font().Measure(b).W + 4)
-		if onChange(text) {
+		if v, ok := parse(text); ok {
 			tb.SetTextColor(CONSTANT_COLOR)
+			newvalue = v
 		} else {
 			tb.SetTextColor(gxui.Red)
 		}
 	})
 	tb.OnLostFocus(func() {
-		text := fmt.Sprintf("%v", value)
-		if text != tb.Text() {
-			tb.SetText(text)
+		if value != newvalue {
+			commit(newvalue)
 		}
 	})
 	if active {
@@ -116,12 +120,13 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 			var c gxui.Control
 			switch p.Type.GetKind() {
 			case service.TypeKindPointer:
+				v := v.(memory.Pointer)
 				b := t.CreateButton()
 				b.SetMargin(math.Spacing{})
 				//b.SetPadding(math.Spacing{})
-				b.AddChild(CreateLabel(t, fmt.Sprintf("0x%x", v), CONSTANT_COLOR, active))
+				b.AddChild(CreateLabel(t, v.String(), CONSTANT_COLOR, active))
 				b.OnClick(func(gxui.MouseEvent) {
-					appCtx.SelectAddress(v.(memory.Pointer))
+					appCtx.SelectAddress(v)
 				})
 				c = b
 			case service.TypeKindEnum:
@@ -141,54 +146,59 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 					appCtx.ReplaceAtom(a, id)
 				})
 			case service.TypeKindS32:
-				c = createTextbox(t, appCtx, v, active, func(s string) bool {
+				c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
 					if i, err := strconv.ParseInt(s, 0, 32); err == nil {
-						a.Arguments[argIdx] = int32(i)
-						appCtx.ReplaceAtom(a, id)
-						return true
+						return int32(i), true
 					} else {
-						return false
+						return nil, false
 					}
+				}, func(v interface{}) {
+					a.Arguments[argIdx] = v.(int32)
+					appCtx.ReplaceAtom(a, id)
 				})
 			case service.TypeKindS64:
-				c = createTextbox(t, appCtx, v, active, func(s string) bool {
+				c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
 					if i, err := strconv.ParseInt(s, 0, 64); err == nil {
-						a.Arguments[argIdx] = int64(i)
-						appCtx.ReplaceAtom(a, id)
-						return true
+						return int64(i), true
 					} else {
-						return false
+						return nil, false
 					}
+				}, func(v interface{}) {
+					a.Arguments[argIdx] = v.(int64)
+					appCtx.ReplaceAtom(a, id)
 				})
 			case service.TypeKindU32:
-				c = createTextbox(t, appCtx, v, active, func(s string) bool {
+				c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
 					if i, err := strconv.ParseUint(s, 0, 32); err == nil {
-						a.Arguments[argIdx] = uint32(i)
-						appCtx.ReplaceAtom(a, id)
-						return true
+						return uint32(i), true
 					} else {
-						return false
+						return nil, false
 					}
+				}, func(v interface{}) {
+					a.Arguments[argIdx] = v.(uint32)
+					appCtx.ReplaceAtom(a, id)
 				})
 			case service.TypeKindU64:
-				c = createTextbox(t, appCtx, v, active, func(s string) bool {
+				c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
 					if i, err := strconv.ParseUint(s, 0, 64); err == nil {
-						a.Arguments[argIdx] = uint64(i)
-						appCtx.ReplaceAtom(a, id)
-						return true
+						return uint64(i), true
 					} else {
-						return false
+						return nil, false
 					}
+				}, func(v interface{}) {
+					a.Arguments[argIdx] = v.(uint64)
+					appCtx.ReplaceAtom(a, id)
 				})
 			case service.TypeKindF32:
-				c = createTextbox(t, appCtx, v, active, func(s string) bool {
+				c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
 					if f, err := strconv.ParseFloat(s, 32); err == nil {
-						a.Arguments[argIdx] = float32(f)
-						appCtx.ReplaceAtom(a, id)
-						return true
+						return float32(f), true
 					} else {
-						return false
+						return nil, false
 					}
+				}, func(v interface{}) {
+					a.Arguments[argIdx] = v.(float32)
+					appCtx.ReplaceAtom(a, id)
 				})
 			default:
 				c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)

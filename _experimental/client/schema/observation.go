@@ -24,7 +24,7 @@ type Observations struct {
 	Writes []Observation
 }
 
-// Decode decodes an Observations structure from the decode d.
+// Decode decodes an Observations structure from the decoder d.
 func (o *Observations) Decode(d binary.Decoder) error {
 	if count, err := d.Uint32(); err == nil {
 		o.Reads = make([]Observation, count)
@@ -50,12 +50,34 @@ func (o *Observations) Decode(d binary.Decoder) error {
 	return nil
 }
 
+// Encode encodes an Observations structure to the encoder e.
+func (o *Observations) Encode(e binary.Encoder) error {
+	if err := e.Uint32(uint32(len(o.Reads))); err != nil {
+		return err
+	}
+	for _, r := range o.Reads {
+		if err := r.Encode(e); err != nil {
+			return err
+		}
+	}
+
+	if err := e.Uint32(uint32(len(o.Writes))); err != nil {
+		return err
+	}
+	for _, w := range o.Writes {
+		if err := w.Encode(e); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 type Observation struct {
 	Range memory.Range // Memory range that was observed.
 	ID    binary.ID    // The resource identifier of the observed data.
 }
 
-// Decode decodes an Observations structure from the decode d.
+// Decode decodes an Observation structure from the decoder d.
 func (o *Observation) Decode(d binary.Decoder) error {
 	if base, err := d.Uint64(); err == nil {
 		o.Range.Base = memory.Pointer(base)
@@ -72,6 +94,23 @@ func (o *Observation) Decode(d binary.Decoder) error {
 	if id, err := d.ID(); err == nil {
 		o.ID = id
 	} else {
+		return err
+	}
+
+	return nil
+}
+
+// Encode encodes an Observation structure to the encoder e.
+func (o *Observation) Encode(e binary.Encoder) error {
+	if err := e.Uint64(uint64(o.Range.Base)); err != nil {
+		return err
+	}
+
+	if err := e.Uint64(o.Range.Size); err != nil {
+		return err
+	}
+
+	if err := e.ID(o.ID); err != nil {
 		return err
 	}
 
