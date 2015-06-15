@@ -672,6 +672,22 @@ enum QueryTarget
     : QueryTarget_GLES_3
     , QueryTarget_EXT_disjoint_timer_query {}
 
+enum UniformBlockParameter {
+    GL_UNIFORM_BLOCK_BINDING                        = 0x8A3F,
+    GL_UNIFORM_BLOCK_DATA_SIZE                      = 0x8A40,
+    GL_UNIFORM_BLOCK_NAME_LENGTH                    = 0x8A41,
+    GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS                = 0x8A42,
+    GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES         = 0x8A43,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER    = 0x8A44,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER  = 0x8A45,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER  = 0x8A46,
+}
+
+enum IndexedBufferTarget {
+    GL_TRANSFORM_FEEDBACK_BUFFER                    = 0x8C8E,
+    GL_UNIFORM_BUFFER                               = 0x8A11,
+}
+
 /////////////////////////////////////////////////////////////////
 // Bitfields
 /////////////////////////////////////////////////////////////////
@@ -726,3 +742,4 @@ bitfield MapBufferRangeAccess {
     GL_MAP_FLUSH_EXPLICIT_BIT                       = 0x0010,
     GL_MAP_UNSYNCHRONIZED_BIT                       = 0x0020,
 }
+

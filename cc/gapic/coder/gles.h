@@ -1766,6 +1766,31 @@ namespace gles {
         uint32_t mBuffer;
     };
 
+    class GlBindBufferBase: public Encodable {
+    public:
+        GlBindBufferBase() = default;
+        GlBindBufferBase(atom::Observations observations, uint32_t Target, uint32_t Index, uint32_t Buffer) :
+            mobservations(observations),
+            mTarget(Target),
+            mIndex(Index),
+            mBuffer(Buffer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x1d, 0x75, 0x02, 0x08, 0x0d, 0xd4, 0xce, 0xc8, 0x1f, 0x20, 0x21, 0x6f, 0x73, 0x11, 0xfc, 0x8b, 0x11, 0x48, 0x1c, 0xfd,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mTarget);
+            e->Uint32(this->mIndex);
+            e->Uint32(this->mBuffer);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mIndex;
+        uint32_t mBuffer;
+    };
+
     class GlBindFramebuffer: public Encodable {
     public:
         GlBindFramebuffer() = default;
@@ -1830,6 +1855,25 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mTexture;
+    };
+
+    class GlBindVertexArray: public Encodable {
+    public:
+        GlBindVertexArray() = default;
+        GlBindVertexArray(atom::Observations observations, uint32_t Array) :
+            mobservations(observations),
+            mArray(Array) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x23, 0x61, 0xb4, 0x30, 0xbe, 0x1c, 0x45, 0xfe, 0x34, 0x7d, 0xaf, 0x2f, 0xb9, 0xf3, 0x4e, 0xef, 0xa3, 0x25, 0x61, 0x46,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mArray);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mArray;
     };
 
     class GlBindVertexArrayOES: public Encodable {
@@ -2714,6 +2758,28 @@ namespace gles {
         uint32_t mPool;
     };
 
+    class GlDeleteVertexArrays: public Encodable {
+    public:
+        GlDeleteVertexArrays() = default;
+        GlDeleteVertexArrays(atom::Observations observations, uint32_t Count, VertexArrayId__P Arrays) :
+            mobservations(observations),
+            mCount(Count),
+            mArrays(Arrays) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf1, 0xb1, 0xd2, 0x4e, 0x22, 0xf5, 0x6b, 0x07, 0xf7, 0x2b, 0x4d, 0xa2, 0xe1, 0x7f, 0x9d, 0xf0, 0xeb, 0x79, 0xa9, 0x07,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mCount);
+            e->Value(&this->mArrays);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mCount;
+        VertexArrayId__P mArrays;
+    };
+
     class GlDeleteVertexArraysOES: public Encodable {
     public:
         GlDeleteVertexArraysOES() = default;
@@ -3391,6 +3457,28 @@ namespace gles {
         TextureId__P mTextures;
     };
 
+    class GlGenVertexArrays: public Encodable {
+    public:
+        GlGenVertexArrays() = default;
+        GlGenVertexArrays(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
+            mobservations(observations),
+            mCount(Count),
+            mArrays(Arrays) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xd2, 0x6e, 0x78, 0x1d, 0x4f, 0x80, 0xa0, 0x4b, 0x65, 0x54, 0x54, 0x08, 0x63, 0x7c, 0x73, 0x1b, 0x70, 0xdc, 0x31, 0xb5,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Int32(this->mCount);
+            e->Value(&this->mArrays);
+        }
+
+        atom::Observations mobservations;
+        int32_t mCount;
+        VertexArrayId__P mArrays;
+    };
+
     class GlGenVertexArraysOES: public Encodable {
     public:
         GlGenVertexArraysOES() = default;
@@ -3561,6 +3649,115 @@ namespace gles {
         S32__P mVectorCount;
         ShaderUniformType__P mType;
         Char__P mName;
+    };
+
+    class GlGetActiveUniformBlockName: public Encodable {
+    public:
+        GlGetActiveUniformBlockName() = default;
+        GlGetActiveUniformBlockName(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, int32_t BufferSize, S32__P BufferBytesWritten, Char__P Name) :
+            mobservations(observations),
+            mProgram(Program),
+            mUniformBlockIndex(UniformBlockIndex),
+            mBufferSize(BufferSize),
+            mBufferBytesWritten(BufferBytesWritten),
+            mName(Name) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x8c, 0x0b, 0xa2, 0x61, 0x99, 0xb3, 0xf4, 0x5f, 0x45, 0xea, 0x15, 0xca, 0x29, 0x4b, 0x04, 0xcf, 0x25, 0xde, 0xc2, 0xbc,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mProgram);
+            e->Uint32(this->mUniformBlockIndex);
+            e->Int32(this->mBufferSize);
+            e->Value(&this->mBufferBytesWritten);
+            e->Value(&this->mName);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mProgram;
+        uint32_t mUniformBlockIndex;
+        int32_t mBufferSize;
+        S32__P mBufferBytesWritten;
+        Char__P mName;
+    };
+
+    class GlGetActiveUniformBlockiv: public Encodable {
+    public:
+        GlGetActiveUniformBlockiv() = default;
+        GlGetActiveUniformBlockiv(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, uint32_t ParameterName, S32__P Parameters) :
+            mobservations(observations),
+            mProgram(Program),
+            mUniformBlockIndex(UniformBlockIndex),
+            mParameterName(ParameterName),
+            mParameters(Parameters) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x61, 0xa9, 0x41, 0x52, 0x0b, 0xb2, 0x9f, 0x02, 0xcc, 0x2f, 0xf0, 0xfb, 0x75, 0x44, 0xdb, 0x1e, 0x63, 0x59, 0x96, 0x25,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mProgram);
+            e->Uint32(this->mUniformBlockIndex);
+            e->Uint32(this->mParameterName);
+            e->Value(&this->mParameters);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mProgram;
+        uint32_t mUniformBlockIndex;
+        uint32_t mParameterName;
+        S32__P mParameters;
+    };
+
+    class U32__P: public Encodable {
+    public:
+        U32__P() = default;
+        U32__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
+    class GlGetActiveUniformsiv: public Encodable {
+    public:
+        GlGetActiveUniformsiv() = default;
+        GlGetActiveUniformsiv(atom::Observations observations, uint32_t Program, uint32_t UniformCount, U32__P UniformIndices, uint32_t ParameterName, S32__P Parameters) :
+            mobservations(observations),
+            mProgram(Program),
+            mUniformCount(UniformCount),
+            mUniformIndices(UniformIndices),
+            mParameterName(ParameterName),
+            mParameters(Parameters) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbb, 0x92, 0x01, 0x42, 0x71, 0x55, 0x77, 0x57, 0x88, 0x3b, 0x27, 0x92, 0x9c, 0x05, 0x62, 0x6f, 0x4a, 0xca, 0xfd, 0x41,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mProgram);
+            e->Uint32(this->mUniformCount);
+            e->Value(&this->mUniformIndices);
+            e->Uint32(this->mParameterName);
+            e->Value(&this->mParameters);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mProgram;
+        uint32_t mUniformCount;
+        U32__P mUniformIndices;
+        uint32_t mParameterName;
+        S32__P mParameters;
     };
 
     class ShaderId__P: public Encodable {
@@ -3790,25 +3987,6 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mParam;
         S32__P mValues;
-    };
-
-    class U32__P: public Encodable {
-    public:
-        U32__P() = default;
-        U32__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
-        }
-
-        uint64_t mAddress;
-        uint32_t mPool;
     };
 
     class GlGetProgramBinaryOES: public Encodable {
@@ -5969,6 +6147,31 @@ namespace gles {
         int32_t mLocation;
         int32_t mCount;
         S32__P mValues;
+    };
+
+    class GlUniformBlockBinding: public Encodable {
+    public:
+        GlUniformBlockBinding() = default;
+        GlUniformBlockBinding(atom::Observations observations, uint32_t Program, uint32_t UniformBlockIndex, uint32_t UniformBlockBinding) :
+            mobservations(observations),
+            mProgram(Program),
+            mUniformBlockIndex(UniformBlockIndex),
+            mUniformBlockBinding(UniformBlockBinding) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbf, 0x77, 0x25, 0xfc, 0xec, 0xac, 0x89, 0xf4, 0x6f, 0x54, 0xcc, 0xd2, 0xba, 0x32, 0xf2, 0x4e, 0xff, 0x96, 0xc8, 0x69,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mProgram);
+            e->Uint32(this->mUniformBlockIndex);
+            e->Uint32(this->mUniformBlockBinding);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mProgram;
+        uint32_t mUniformBlockIndex;
+        uint32_t mUniformBlockBinding;
     };
 
     class GlUniformMatrix2fv: public Encodable {

@@ -2646,6 +2646,78 @@ cmd void glGetQueryObjectuiv(QueryId query, QueryObjectParameter parameter, u32*
     value[0] = ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockName.xhtml
+cmd void glGetActiveUniformBlockName(ProgramId program,
+                                     u32       uniform_block_index,
+                                     s32       buffer_size,
+                                     s32*      buffer_bytes_written,
+                                     char*     name) {
+    l := as!s32(?)
+    buffer_bytes_written[0] = l
+    write(name[0:l])
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockiv.xhtml
+cmd void glGetActiveUniformBlockiv(ProgramId             program,
+                                   u32                   uniform_block_index,
+                                   UniformBlockParameter parameter_name,
+                                   s32*                  parameters) {
+    parameters[0] = ?
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glUniformBlockBinding.xhtml
+cmd void glUniformBlockBinding(ProgramId program,
+                               u32       uniform_block_index,
+                               u32       uniform_block_binding) {
+    // TODO
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformsiv.xhtml
+cmd void glGetActiveUniformsiv(ProgramId             program,
+                               u32                   uniform_count,
+                               u32*                  uniform_indices,
+                               UniformBlockParameter parameter_name,
+                               s32*                  parameters) {
+    read(uniform_indices[0:uniform_count])
+    write(parameters[0:uniform_count])
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml
+cmd void glBindBufferBase(IndexedBufferTarget target,
+                          u32                 index,
+                          BufferId            buffer) {
+    // TODO
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGenVertexArrays.xhtml
+cmd void glGenVertexArrays(s32 count, VertexArrayId* arrays) {
+    a := arrays[0:count]
+    ctx := GetContext()
+    for i in (0 .. count) {
+        id := as!VertexArrayId(?)
+        ctx.Instances.VertexArrays[id] = new!VertexArray()
+        a[i] = id
+    }
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml
+cmd void glBindVertexArray(VertexArrayId array) {
+    ctx := GetContext()
+    if !(array in ctx.Instances.VertexArrays) {
+        ctx.Instances.VertexArrays[array] = new!VertexArray()
+    }
+    ctx.BoundVertexArray = array
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml
+cmd void glDeleteVertexArrays(u32 count, VertexArrayId* arrays) {
+    ctx := GetContext()
+    a := arrays[0:count]
+    for i in (0 .. count) {
+      ctx.Instances.VertexArrays[a[i]] = null
+    }
+}
+
 // EXT_disjoint_timer_query
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt

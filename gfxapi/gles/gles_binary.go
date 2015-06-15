@@ -89,9 +89,11 @@ func init() {
 	registry.Add((*GlBeginQueryEXT)(nil).Class())
 	registry.Add((*GlBindAttribLocation)(nil).Class())
 	registry.Add((*GlBindBuffer)(nil).Class())
+	registry.Add((*GlBindBufferBase)(nil).Class())
 	registry.Add((*GlBindFramebuffer)(nil).Class())
 	registry.Add((*GlBindRenderbuffer)(nil).Class())
 	registry.Add((*GlBindTexture)(nil).Class())
+	registry.Add((*GlBindVertexArray)(nil).Class())
 	registry.Add((*GlBindVertexArrayOES)(nil).Class())
 	registry.Add((*GlBlendColor)(nil).Class())
 	registry.Add((*GlBlendEquation)(nil).Class())
@@ -128,6 +130,7 @@ func init() {
 	registry.Add((*TextureIdᵖ)(nil).Class())
 	registry.Add((*GlDeleteTextures)(nil).Class())
 	registry.Add((*VertexArrayIdᵖ)(nil).Class())
+	registry.Add((*GlDeleteVertexArrays)(nil).Class())
 	registry.Add((*GlDeleteVertexArraysOES)(nil).Class())
 	registry.Add((*GlDepthFunc)(nil).Class())
 	registry.Add((*GlDepthMask)(nil).Class())
@@ -160,6 +163,7 @@ func init() {
 	registry.Add((*GlGenQueriesEXT)(nil).Class())
 	registry.Add((*GlGenRenderbuffers)(nil).Class())
 	registry.Add((*GlGenTextures)(nil).Class())
+	registry.Add((*GlGenVertexArrays)(nil).Class())
 	registry.Add((*GlGenVertexArraysOES)(nil).Class())
 	registry.Add((*GlGenerateMipmap)(nil).Class())
 	registry.Add((*S32ᵖ)(nil).Class())
@@ -167,6 +171,10 @@ func init() {
 	registry.Add((*GlGetActiveAttrib)(nil).Class())
 	registry.Add((*ShaderUniformTypeᵖ)(nil).Class())
 	registry.Add((*GlGetActiveUniform)(nil).Class())
+	registry.Add((*GlGetActiveUniformBlockName)(nil).Class())
+	registry.Add((*GlGetActiveUniformBlockiv)(nil).Class())
+	registry.Add((*U32ᵖ)(nil).Class())
+	registry.Add((*GlGetActiveUniformsiv)(nil).Class())
 	registry.Add((*ShaderIdᵖ)(nil).Class())
 	registry.Add((*GlGetAttachedShaders)(nil).Class())
 	registry.Add((*GlGetAttribLocation)(nil).Class())
@@ -177,7 +185,6 @@ func init() {
 	registry.Add((*GlGetFramebufferAttachmentParameteriv)(nil).Class())
 	registry.Add((*GlGetGraphicsResetStatusEXT)(nil).Class())
 	registry.Add((*GlGetIntegerv)(nil).Class())
-	registry.Add((*U32ᵖ)(nil).Class())
 	registry.Add((*GlGetProgramBinaryOES)(nil).Class())
 	registry.Add((*GlGetProgramInfoLog)(nil).Class())
 	registry.Add((*GlGetProgramiv)(nil).Class())
@@ -262,6 +269,7 @@ func init() {
 	registry.Add((*GlUniform4fv)(nil).Class())
 	registry.Add((*GlUniform4i)(nil).Class())
 	registry.Add((*GlUniform4iv)(nil).Class())
+	registry.Add((*GlUniformBlockBinding)(nil).Class())
 	registry.Add((*GlUniformMatrix2fv)(nil).Class())
 	registry.Add((*GlUniformMatrix3fv)(nil).Class())
 	registry.Add((*GlUniformMatrix4fv)(nil).Class())
@@ -417,9 +425,11 @@ var (
 	binaryIDGlBeginQueryEXT                        = binary.ID{0x35, 0x2d, 0x3a, 0x78, 0xe5, 0xf5, 0xbe, 0x4d, 0x23, 0xd9, 0x25, 0xb4, 0x7c, 0xf5, 0x52, 0x5a, 0x7b, 0x3b, 0x51, 0x1b}
 	binaryIDGlBindAttribLocation                   = binary.ID{0xab, 0xe2, 0x34, 0x53, 0x26, 0xbc, 0x1d, 0x86, 0xd6, 0x8b, 0xd8, 0xaa, 0xd9, 0x38, 0x2f, 0xca, 0x5a, 0x1d, 0xc0, 0x10}
 	binaryIDGlBindBuffer                           = binary.ID{0xb3, 0xb1, 0xb5, 0x5e, 0xc2, 0xe9, 0x44, 0x46, 0x28, 0x6f, 0x55, 0x56, 0xc0, 0xa9, 0x57, 0xc2, 0x09, 0x9f, 0xbb, 0x04}
+	binaryIDGlBindBufferBase                       = binary.ID{0x1d, 0x75, 0x02, 0x08, 0x0d, 0xd4, 0xce, 0xc8, 0x1f, 0x20, 0x21, 0x6f, 0x73, 0x11, 0xfc, 0x8b, 0x11, 0x48, 0x1c, 0xfd}
 	binaryIDGlBindFramebuffer                      = binary.ID{0x3b, 0x20, 0x3d, 0xca, 0x34, 0xac, 0x3e, 0x7c, 0x8b, 0xd7, 0xe0, 0xd8, 0x23, 0x84, 0xdb, 0x5b, 0xac, 0x43, 0x56, 0xa2}
 	binaryIDGlBindRenderbuffer                     = binary.ID{0xc4, 0xd9, 0xb9, 0x94, 0x42, 0x83, 0xf5, 0x48, 0xd1, 0x68, 0x54, 0x9d, 0x7d, 0x9c, 0x49, 0x6d, 0x0a, 0xcf, 0xdb, 0xa7}
 	binaryIDGlBindTexture                          = binary.ID{0xf9, 0x83, 0xaa, 0x55, 0xc0, 0x52, 0xe8, 0x65, 0xb0, 0x66, 0x1c, 0x7a, 0x33, 0xc9, 0x4a, 0xfd, 0xd1, 0xda, 0xf0, 0x69}
+	binaryIDGlBindVertexArray                      = binary.ID{0x23, 0x61, 0xb4, 0x30, 0xbe, 0x1c, 0x45, 0xfe, 0x34, 0x7d, 0xaf, 0x2f, 0xb9, 0xf3, 0x4e, 0xef, 0xa3, 0x25, 0x61, 0x46}
 	binaryIDGlBindVertexArrayOES                   = binary.ID{0x2c, 0x88, 0xbc, 0x5d, 0x79, 0xf5, 0x34, 0x2a, 0x35, 0xca, 0x72, 0x5c, 0xcf, 0x78, 0xee, 0x4b, 0xe5, 0x5f, 0xc8, 0xb4}
 	binaryIDGlBlendColor                           = binary.ID{0x60, 0xbd, 0x6d, 0x61, 0x66, 0xd6, 0x47, 0xea, 0x9c, 0xa7, 0x16, 0xba, 0xf4, 0x59, 0x00, 0x75, 0xaf, 0x03, 0x5a, 0x2b}
 	binaryIDGlBlendEquation                        = binary.ID{0xe1, 0x81, 0x90, 0xcf, 0x2b, 0xd7, 0x3e, 0xfc, 0xa7, 0x45, 0x6d, 0xd6, 0x60, 0xa3, 0xbd, 0xbd, 0xbe, 0x14, 0xe5, 0x56}
@@ -456,6 +466,7 @@ var (
 	binaryIDTextureIdᵖ                             = binary.ID{0x99, 0x6c, 0x61, 0x83, 0x7a, 0xc0, 0x86, 0x16, 0x1a, 0x93, 0x45, 0x97, 0x32, 0x66, 0x80, 0x91, 0xd1, 0x87, 0xd1, 0x8e}
 	binaryIDGlDeleteTextures                       = binary.ID{0x8e, 0x87, 0xbe, 0x83, 0xfc, 0x68, 0xab, 0x65, 0x39, 0x6d, 0x29, 0xe8, 0x91, 0x0a, 0xb4, 0x3b, 0x72, 0x6b, 0x87, 0xdc}
 	binaryIDVertexArrayIdᵖ                         = binary.ID{0xfb, 0x13, 0x6e, 0xf5, 0x8d, 0x52, 0xf5, 0xb2, 0xb5, 0x02, 0x1f, 0x10, 0x15, 0x84, 0x51, 0xb2, 0xc6, 0x8b, 0xc5, 0x5f}
+	binaryIDGlDeleteVertexArrays                   = binary.ID{0xf1, 0xb1, 0xd2, 0x4e, 0x22, 0xf5, 0x6b, 0x07, 0xf7, 0x2b, 0x4d, 0xa2, 0xe1, 0x7f, 0x9d, 0xf0, 0xeb, 0x79, 0xa9, 0x07}
 	binaryIDGlDeleteVertexArraysOES                = binary.ID{0xb6, 0xb4, 0x59, 0xf8, 0x46, 0x00, 0x47, 0x2c, 0x12, 0xa7, 0x1a, 0xfe, 0xee, 0xd4, 0xa6, 0x1a, 0xfc, 0x47, 0xef, 0x0c}
 	binaryIDGlDepthFunc                            = binary.ID{0xa7, 0x7e, 0x09, 0x94, 0x5c, 0x20, 0x03, 0xac, 0x59, 0x2f, 0xe6, 0xfd, 0x3e, 0xcc, 0x20, 0x33, 0xa8, 0x09, 0xce, 0x0b}
 	binaryIDGlDepthMask                            = binary.ID{0xc5, 0x6d, 0x4e, 0x1a, 0x87, 0x06, 0xec, 0xa4, 0xe8, 0xb4, 0x2e, 0x82, 0xff, 0x78, 0x0a, 0x83, 0x79, 0x82, 0xce, 0xf1}
@@ -488,6 +499,7 @@ var (
 	binaryIDGlGenQueriesEXT                        = binary.ID{0xa9, 0x25, 0x0c, 0x6b, 0x1d, 0x84, 0x28, 0x3b, 0x88, 0xc1, 0xff, 0xc1, 0x76, 0x53, 0x13, 0x2f, 0x27, 0x5e, 0x30, 0x53}
 	binaryIDGlGenRenderbuffers                     = binary.ID{0x07, 0x42, 0x56, 0x00, 0xfe, 0x35, 0xc4, 0xa9, 0x57, 0xec, 0x42, 0x13, 0x7f, 0xd4, 0x19, 0xb8, 0xa8, 0xa8, 0x6c, 0x71}
 	binaryIDGlGenTextures                          = binary.ID{0x64, 0x29, 0x1a, 0xec, 0x06, 0x04, 0x37, 0x17, 0xd4, 0x7d, 0x2a, 0x05, 0x6a, 0xdc, 0x2d, 0x0f, 0x1e, 0xce, 0x1e, 0x5a}
+	binaryIDGlGenVertexArrays                      = binary.ID{0xd2, 0x6e, 0x78, 0x1d, 0x4f, 0x80, 0xa0, 0x4b, 0x65, 0x54, 0x54, 0x08, 0x63, 0x7c, 0x73, 0x1b, 0x70, 0xdc, 0x31, 0xb5}
 	binaryIDGlGenVertexArraysOES                   = binary.ID{0xe0, 0x5b, 0x77, 0xc1, 0x67, 0x6d, 0xa5, 0xa2, 0xc7, 0x21, 0x8c, 0x2b, 0x0c, 0xd5, 0xab, 0x25, 0x91, 0xb2, 0x4d, 0x9c}
 	binaryIDGlGenerateMipmap                       = binary.ID{0x42, 0xea, 0x5b, 0xaa, 0xcc, 0x26, 0x78, 0xf5, 0xf0, 0x10, 0x98, 0x9f, 0xa8, 0xb6, 0x7b, 0xae, 0xf8, 0xbd, 0x42, 0x3e}
 	binaryIDS32ᵖ                                   = binary.ID{0x15, 0xd8, 0xda, 0x55, 0xc7, 0x51, 0xdc, 0x13, 0x0e, 0xe6, 0xf3, 0x33, 0x66, 0x41, 0xd6, 0xf1, 0x5f, 0x02, 0x93, 0x41}
@@ -495,6 +507,10 @@ var (
 	binaryIDGlGetActiveAttrib                      = binary.ID{0xa6, 0x71, 0x22, 0x04, 0xa2, 0x0e, 0x8a, 0x5b, 0x9e, 0x05, 0x76, 0x4a, 0x54, 0x82, 0x91, 0xce, 0xfb, 0x76, 0x4b, 0x97}
 	binaryIDShaderUniformTypeᵖ                     = binary.ID{0xec, 0x33, 0x14, 0x93, 0x2e, 0xbc, 0x9b, 0x5b, 0x66, 0x62, 0x30, 0x7a, 0x5d, 0x8f, 0x13, 0x4e, 0x2b, 0x39, 0xc9, 0x32}
 	binaryIDGlGetActiveUniform                     = binary.ID{0x6e, 0xac, 0x3c, 0x92, 0xee, 0x19, 0x7e, 0x39, 0x44, 0x04, 0x5d, 0xec, 0xb0, 0xa2, 0xdc, 0x94, 0x6e, 0x5b, 0x05, 0x3c}
+	binaryIDGlGetActiveUniformBlockName            = binary.ID{0x8c, 0x0b, 0xa2, 0x61, 0x99, 0xb3, 0xf4, 0x5f, 0x45, 0xea, 0x15, 0xca, 0x29, 0x4b, 0x04, 0xcf, 0x25, 0xde, 0xc2, 0xbc}
+	binaryIDGlGetActiveUniformBlockiv              = binary.ID{0x61, 0xa9, 0x41, 0x52, 0x0b, 0xb2, 0x9f, 0x02, 0xcc, 0x2f, 0xf0, 0xfb, 0x75, 0x44, 0xdb, 0x1e, 0x63, 0x59, 0x96, 0x25}
+	binaryIDU32ᵖ                                   = binary.ID{0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67}
+	binaryIDGlGetActiveUniformsiv                  = binary.ID{0xbb, 0x92, 0x01, 0x42, 0x71, 0x55, 0x77, 0x57, 0x88, 0x3b, 0x27, 0x92, 0x9c, 0x05, 0x62, 0x6f, 0x4a, 0xca, 0xfd, 0x41}
 	binaryIDShaderIdᵖ                              = binary.ID{0x08, 0x41, 0x7d, 0x5d, 0x94, 0x16, 0xc5, 0x83, 0xb1, 0x5b, 0x6b, 0x53, 0x78, 0xac, 0x10, 0xbd, 0x1e, 0x59, 0x09, 0x1d}
 	binaryIDGlGetAttachedShaders                   = binary.ID{0xc3, 0xf9, 0x1d, 0xd0, 0xcc, 0x89, 0x4c, 0x62, 0xad, 0x92, 0x44, 0x25, 0x6d, 0x63, 0x8b, 0x92, 0x1a, 0x01, 0xeb, 0xb4}
 	binaryIDGlGetAttribLocation                    = binary.ID{0x31, 0x3d, 0x4f, 0xb6, 0x80, 0x95, 0xce, 0x6a, 0x65, 0x25, 0x0a, 0xb5, 0xff, 0x15, 0x44, 0x1d, 0x3e, 0x91, 0xc7, 0xef}
@@ -505,7 +521,6 @@ var (
 	binaryIDGlGetFramebufferAttachmentParameteriv  = binary.ID{0xea, 0x0f, 0x37, 0x28, 0xa8, 0x59, 0x9e, 0x90, 0x50, 0x4a, 0xa4, 0x6d, 0xa2, 0xe3, 0x43, 0xf2, 0xd2, 0x6d, 0x09, 0x40}
 	binaryIDGlGetGraphicsResetStatusEXT            = binary.ID{0x05, 0xbe, 0x22, 0x49, 0x59, 0x3a, 0x7c, 0x01, 0xa0, 0x5c, 0x5c, 0xf3, 0x08, 0xa2, 0xc6, 0xfa, 0x87, 0x3e, 0xdd, 0x53}
 	binaryIDGlGetIntegerv                          = binary.ID{0x93, 0xaa, 0x39, 0x40, 0xc7, 0xf4, 0x20, 0x49, 0x7b, 0x61, 0xfc, 0x8f, 0x9d, 0x2d, 0xe9, 0x9c, 0x8c, 0xb3, 0xc7, 0x62}
-	binaryIDU32ᵖ                                   = binary.ID{0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67}
 	binaryIDGlGetProgramBinaryOES                  = binary.ID{0x41, 0xe1, 0x61, 0x7a, 0xa2, 0x17, 0x6f, 0x2f, 0xd4, 0xaf, 0x47, 0x68, 0xce, 0x51, 0x64, 0x3a, 0x97, 0xbb, 0xf3, 0xec}
 	binaryIDGlGetProgramInfoLog                    = binary.ID{0x7f, 0xd8, 0xe7, 0x8b, 0xf6, 0xa4, 0x9e, 0xe4, 0xcd, 0xbf, 0x72, 0x0d, 0xc9, 0xc0, 0xdc, 0xb0, 0x5e, 0x3c, 0x52, 0x21}
 	binaryIDGlGetProgramiv                         = binary.ID{0x0c, 0x30, 0x8a, 0xb8, 0x12, 0x64, 0xb2, 0x25, 0xfe, 0x4c, 0x3e, 0xaf, 0x2c, 0x0d, 0x05, 0x67, 0x8f, 0x95, 0xb2, 0x41}
@@ -590,6 +605,7 @@ var (
 	binaryIDGlUniform4fv                           = binary.ID{0x1d, 0xe7, 0x76, 0xfb, 0xc2, 0x42, 0x87, 0x7c, 0x91, 0x30, 0x28, 0x67, 0xc6, 0xe2, 0xa7, 0x14, 0xe6, 0x0e, 0x19, 0x7a}
 	binaryIDGlUniform4i                            = binary.ID{0xe2, 0x70, 0x4f, 0xe8, 0xf2, 0xdd, 0xbc, 0xba, 0x90, 0xde, 0x98, 0x18, 0x14, 0x07, 0x29, 0x53, 0xad, 0x3e, 0x18, 0x74}
 	binaryIDGlUniform4iv                           = binary.ID{0xce, 0x48, 0x89, 0xe1, 0xf1, 0xfa, 0x5f, 0xa0, 0x80, 0xa2, 0x0c, 0x27, 0xa9, 0x34, 0x56, 0x34, 0x14, 0xcf, 0xc4, 0xd3}
+	binaryIDGlUniformBlockBinding                  = binary.ID{0xbf, 0x77, 0x25, 0xfc, 0xec, 0xac, 0x89, 0xf4, 0x6f, 0x54, 0xcc, 0xd2, 0xba, 0x32, 0xf2, 0x4e, 0xff, 0x96, 0xc8, 0x69}
 	binaryIDGlUniformMatrix2fv                     = binary.ID{0x92, 0x32, 0x5c, 0x87, 0x66, 0x8a, 0x8e, 0x3e, 0xc5, 0x07, 0x28, 0xbf, 0x42, 0x3c, 0x6a, 0x29, 0x30, 0x8f, 0x6d, 0x1f}
 	binaryIDGlUniformMatrix3fv                     = binary.ID{0xfb, 0x5f, 0x49, 0x7f, 0xef, 0x17, 0xfd, 0x81, 0xea, 0x06, 0x70, 0x21, 0x6d, 0xcc, 0x87, 0x33, 0x58, 0xf7, 0x95, 0x94}
 	binaryIDGlUniformMatrix4fv                     = binary.ID{0x52, 0x0f, 0x12, 0x1c, 0xe8, 0x4b, 0x78, 0xfd, 0xd9, 0x60, 0x03, 0x9b, 0xb8, 0x66, 0x8e, 0x83, 0x74, 0x7f, 0x9d, 0xae}
@@ -7254,6 +7270,88 @@ var schemaGlBindBuffer = &schema.Class{
 	},
 }
 
+type binaryClassGlBindBufferBase struct{}
+
+func (*GlBindBufferBase) Class() binary.Class {
+	return (*binaryClassGlBindBufferBase)(nil)
+}
+func doEncodeGlBindBufferBase(e binary.Encoder, o *GlBindBufferBase) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Target)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Index); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buffer)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBindBufferBase(d binary.Decoder, o *GlBindBufferBase) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Target = IndexedBufferTarget(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Index = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buffer = BufferId(obj)
+	}
+	return nil
+}
+func doSkipGlBindBufferBase(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBindBufferBase) ID() binary.ID      { return binaryIDGlBindBufferBase }
+func (*binaryClassGlBindBufferBase) New() binary.Object { return &GlBindBufferBase{} }
+func (*binaryClassGlBindBufferBase) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBindBufferBase(e, obj.(*GlBindBufferBase))
+}
+func (*binaryClassGlBindBufferBase) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBindBufferBase{}
+	return obj, doDecodeGlBindBufferBase(d, obj)
+}
+func (*binaryClassGlBindBufferBase) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBindBufferBase(d, obj.(*GlBindBufferBase))
+}
+func (*binaryClassGlBindBufferBase) Skip(d binary.Decoder) error { return doSkipGlBindBufferBase(d) }
+func (*binaryClassGlBindBufferBase) Schema() *schema.Class       { return schemaGlBindBufferBase }
+
+var schemaGlBindBufferBase = &schema.Class{
+	TypeID: binaryIDGlBindBufferBase,
+	Name:   "GlBindBufferBase",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlBindFramebuffer struct{}
 
 func (*GlBindFramebuffer) Class() binary.Class {
@@ -7461,6 +7559,64 @@ var schemaGlBindTexture = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBindVertexArray struct{}
+
+func (*GlBindVertexArray) Class() binary.Class {
+	return (*binaryClassGlBindVertexArray)(nil)
+}
+func doEncodeGlBindVertexArray(e binary.Encoder, o *GlBindVertexArray) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Array)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlBindVertexArray(d binary.Decoder, o *GlBindVertexArray) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Array = VertexArrayId(obj)
+	}
+	return nil
+}
+func doSkipGlBindVertexArray(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlBindVertexArray) ID() binary.ID      { return binaryIDGlBindVertexArray }
+func (*binaryClassGlBindVertexArray) New() binary.Object { return &GlBindVertexArray{} }
+func (*binaryClassGlBindVertexArray) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlBindVertexArray(e, obj.(*GlBindVertexArray))
+}
+func (*binaryClassGlBindVertexArray) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlBindVertexArray{}
+	return obj, doDecodeGlBindVertexArray(d, obj)
+}
+func (*binaryClassGlBindVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlBindVertexArray(d, obj.(*GlBindVertexArray))
+}
+func (*binaryClassGlBindVertexArray) Skip(d binary.Decoder) error { return doSkipGlBindVertexArray(d) }
+func (*binaryClassGlBindVertexArray) Schema() *schema.Class       { return schemaGlBindVertexArray }
+
+var schemaGlBindVertexArray = &schema.Class{
+	TypeID: binaryIDGlBindVertexArray,
+	Name:   "GlBindVertexArray",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
 }
 
@@ -10358,6 +10514,76 @@ var schemaVertexArrayIdᵖ = &schema.Class{
 	},
 }
 
+type binaryClassGlDeleteVertexArrays struct{}
+
+func (*GlDeleteVertexArrays) Class() binary.Class {
+	return (*binaryClassGlDeleteVertexArrays)(nil)
+}
+func doEncodeGlDeleteVertexArrays(e binary.Encoder, o *GlDeleteVertexArrays) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Count); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Arrays); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDeleteVertexArrays(d binary.Decoder, o *GlDeleteVertexArrays) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Count = uint32(obj)
+	}
+	if err := d.Value(&o.Arrays); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlDeleteVertexArrays(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*VertexArrayIdᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDeleteVertexArrays) ID() binary.ID      { return binaryIDGlDeleteVertexArrays }
+func (*binaryClassGlDeleteVertexArrays) New() binary.Object { return &GlDeleteVertexArrays{} }
+func (*binaryClassGlDeleteVertexArrays) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDeleteVertexArrays(e, obj.(*GlDeleteVertexArrays))
+}
+func (*binaryClassGlDeleteVertexArrays) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDeleteVertexArrays{}
+	return obj, doDecodeGlDeleteVertexArrays(d, obj)
+}
+func (*binaryClassGlDeleteVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDeleteVertexArrays(d, obj.(*GlDeleteVertexArrays))
+}
+func (*binaryClassGlDeleteVertexArrays) Skip(d binary.Decoder) error {
+	return doSkipGlDeleteVertexArrays(d)
+}
+func (*binaryClassGlDeleteVertexArrays) Schema() *schema.Class { return schemaGlDeleteVertexArrays }
+
+var schemaGlDeleteVertexArrays = &schema.Class{
+	TypeID: binaryIDGlDeleteVertexArrays,
+	Name:   "GlDeleteVertexArrays",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
+	},
+}
+
 type binaryClassGlDeleteVertexArraysOES struct{}
 
 func (*GlDeleteVertexArraysOES) Class() binary.Class {
@@ -12518,6 +12744,74 @@ var schemaGlGenTextures = &schema.Class{
 	},
 }
 
+type binaryClassGlGenVertexArrays struct{}
+
+func (*GlGenVertexArrays) Class() binary.Class {
+	return (*binaryClassGlGenVertexArrays)(nil)
+}
+func doEncodeGlGenVertexArrays(e binary.Encoder, o *GlGenVertexArrays) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Count); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Arrays); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGenVertexArrays(d binary.Decoder, o *GlGenVertexArrays) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = int32(obj)
+	}
+	if err := d.Value(&o.Arrays); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGenVertexArrays(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*VertexArrayIdᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGenVertexArrays) ID() binary.ID      { return binaryIDGlGenVertexArrays }
+func (*binaryClassGlGenVertexArrays) New() binary.Object { return &GlGenVertexArrays{} }
+func (*binaryClassGlGenVertexArrays) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGenVertexArrays(e, obj.(*GlGenVertexArrays))
+}
+func (*binaryClassGlGenVertexArrays) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGenVertexArrays{}
+	return obj, doDecodeGlGenVertexArrays(d, obj)
+}
+func (*binaryClassGlGenVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGenVertexArrays(d, obj.(*GlGenVertexArrays))
+}
+func (*binaryClassGlGenVertexArrays) Skip(d binary.Decoder) error { return doSkipGlGenVertexArrays(d) }
+func (*binaryClassGlGenVertexArrays) Schema() *schema.Class       { return schemaGlGenVertexArrays }
+
+var schemaGlGenVertexArrays = &schema.Class{
+	TypeID: binaryIDGlGenVertexArrays,
+	Name:   "GlGenVertexArrays",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
+	},
+}
+
 type binaryClassGlGenVertexArraysOES struct{}
 
 func (*GlGenVertexArraysOES) Class() binary.Class {
@@ -13071,6 +13365,376 @@ var schemaGlGetActiveUniform = &schema.Class{
 		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
 		{Declared: "Type", Type: &schema.Struct{Name: "ShaderUniformTypeᵖ"}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
+	},
+}
+
+type binaryClassGlGetActiveUniformBlockName struct{}
+
+func (*GlGetActiveUniformBlockName) Class() binary.Class {
+	return (*binaryClassGlGetActiveUniformBlockName)(nil)
+}
+func doEncodeGlGetActiveUniformBlockName(e binary.Encoder, o *GlGetActiveUniformBlockName) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.UniformBlockIndex); err != nil {
+		return err
+	}
+	if err := e.Int32(o.BufferSize); err != nil {
+		return err
+	}
+	if err := e.Value(&o.BufferBytesWritten); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Name); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetActiveUniformBlockName(d binary.Decoder, o *GlGetActiveUniformBlockName) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.UniformBlockIndex = uint32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.BufferSize = int32(obj)
+	}
+	if err := d.Value(&o.BufferBytesWritten); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Name); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetActiveUniformBlockName(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Charᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetActiveUniformBlockName) ID() binary.ID {
+	return binaryIDGlGetActiveUniformBlockName
+}
+func (*binaryClassGlGetActiveUniformBlockName) New() binary.Object {
+	return &GlGetActiveUniformBlockName{}
+}
+func (*binaryClassGlGetActiveUniformBlockName) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetActiveUniformBlockName(e, obj.(*GlGetActiveUniformBlockName))
+}
+func (*binaryClassGlGetActiveUniformBlockName) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetActiveUniformBlockName{}
+	return obj, doDecodeGlGetActiveUniformBlockName(d, obj)
+}
+func (*binaryClassGlGetActiveUniformBlockName) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetActiveUniformBlockName(d, obj.(*GlGetActiveUniformBlockName))
+}
+func (*binaryClassGlGetActiveUniformBlockName) Skip(d binary.Decoder) error {
+	return doSkipGlGetActiveUniformBlockName(d)
+}
+func (*binaryClassGlGetActiveUniformBlockName) Schema() *schema.Class {
+	return schemaGlGetActiveUniformBlockName
+}
+
+var schemaGlGetActiveUniformBlockName = &schema.Class{
+	TypeID: binaryIDGlGetActiveUniformBlockName,
+	Name:   "GlGetActiveUniformBlockName",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
+	},
+}
+
+type binaryClassGlGetActiveUniformBlockiv struct{}
+
+func (*GlGetActiveUniformBlockiv) Class() binary.Class {
+	return (*binaryClassGlGetActiveUniformBlockiv)(nil)
+}
+func doEncodeGlGetActiveUniformBlockiv(e binary.Encoder, o *GlGetActiveUniformBlockiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.UniformBlockIndex); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.ParameterName)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Parameters); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetActiveUniformBlockiv(d binary.Decoder, o *GlGetActiveUniformBlockiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.UniformBlockIndex = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.ParameterName = UniformBlockParameter(obj)
+	}
+	if err := d.Value(&o.Parameters); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetActiveUniformBlockiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetActiveUniformBlockiv) ID() binary.ID      { return binaryIDGlGetActiveUniformBlockiv }
+func (*binaryClassGlGetActiveUniformBlockiv) New() binary.Object { return &GlGetActiveUniformBlockiv{} }
+func (*binaryClassGlGetActiveUniformBlockiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetActiveUniformBlockiv(e, obj.(*GlGetActiveUniformBlockiv))
+}
+func (*binaryClassGlGetActiveUniformBlockiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetActiveUniformBlockiv{}
+	return obj, doDecodeGlGetActiveUniformBlockiv(d, obj)
+}
+func (*binaryClassGlGetActiveUniformBlockiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetActiveUniformBlockiv(d, obj.(*GlGetActiveUniformBlockiv))
+}
+func (*binaryClassGlGetActiveUniformBlockiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetActiveUniformBlockiv(d)
+}
+func (*binaryClassGlGetActiveUniformBlockiv) Schema() *schema.Class {
+	return schemaGlGetActiveUniformBlockiv
+}
+
+var schemaGlGetActiveUniformBlockiv = &schema.Class{
+	TypeID: binaryIDGlGetActiveUniformBlockiv,
+	Name:   "GlGetActiveUniformBlockiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "ParameterName", Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32}},
+		{Declared: "Parameters", Type: &schema.Struct{Name: "S32ᵖ"}},
+	},
+}
+
+type binaryClassU32ᵖ struct{}
+
+func (*U32ᵖ) Class() binary.Class {
+	return (*binaryClassU32ᵖ)(nil)
+}
+func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU32ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
+func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
+func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ᵖ{}
+	return obj, doDecodeU32ᵖ(d, obj)
+}
+func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
+func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
+
+var schemaU32ᵖ = &schema.Class{
+	TypeID: binaryIDU32ᵖ,
+	Name:   "U32ᵖ",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlGetActiveUniformsiv struct{}
+
+func (*GlGetActiveUniformsiv) Class() binary.Class {
+	return (*binaryClassGlGetActiveUniformsiv)(nil)
+}
+func doEncodeGlGetActiveUniformsiv(e binary.Encoder, o *GlGetActiveUniformsiv) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.UniformCount); err != nil {
+		return err
+	}
+	if err := e.Value(&o.UniformIndices); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.ParameterName)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Parameters); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetActiveUniformsiv(d binary.Decoder, o *GlGetActiveUniformsiv) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.UniformCount = uint32(obj)
+	}
+	if err := d.Value(&o.UniformIndices); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.ParameterName = UniformBlockParameter(obj)
+	}
+	if err := d.Value(&o.Parameters); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetActiveUniformsiv(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U32ᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetActiveUniformsiv) ID() binary.ID      { return binaryIDGlGetActiveUniformsiv }
+func (*binaryClassGlGetActiveUniformsiv) New() binary.Object { return &GlGetActiveUniformsiv{} }
+func (*binaryClassGlGetActiveUniformsiv) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetActiveUniformsiv(e, obj.(*GlGetActiveUniformsiv))
+}
+func (*binaryClassGlGetActiveUniformsiv) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetActiveUniformsiv{}
+	return obj, doDecodeGlGetActiveUniformsiv(d, obj)
+}
+func (*binaryClassGlGetActiveUniformsiv) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetActiveUniformsiv(d, obj.(*GlGetActiveUniformsiv))
+}
+func (*binaryClassGlGetActiveUniformsiv) Skip(d binary.Decoder) error {
+	return doSkipGlGetActiveUniformsiv(d)
+}
+func (*binaryClassGlGetActiveUniformsiv) Schema() *schema.Class { return schemaGlGetActiveUniformsiv }
+
+var schemaGlGetActiveUniformsiv = &schema.Class{
+	TypeID: binaryIDGlGetActiveUniformsiv,
+	Name:   "GlGetActiveUniformsiv",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "UniformCount", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "UniformIndices", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "ParameterName", Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32}},
+		{Declared: "Parameters", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -13817,66 +14481,6 @@ var schemaGlGetIntegerv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
-	},
-}
-
-type binaryClassU32ᵖ struct{}
-
-func (*U32ᵖ) Class() binary.Class {
-	return (*binaryClassU32ᵖ)(nil)
-}
-func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU32ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
-func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
-func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U32ᵖ{}
-	return obj, doDecodeU32ᵖ(d, obj)
-}
-func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
-func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
-
-var schemaU32ᵖ = &schema.Class{
-	TypeID: binaryIDU32ᵖ,
-	Name:   "U32ᵖ",
-	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -20996,6 +21600,90 @@ var schemaGlUniform4iv = &schema.Class{
 	},
 }
 
+type binaryClassGlUniformBlockBinding struct{}
+
+func (*GlUniformBlockBinding) Class() binary.Class {
+	return (*binaryClassGlUniformBlockBinding)(nil)
+}
+func doEncodeGlUniformBlockBinding(e binary.Encoder, o *GlUniformBlockBinding) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Program)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.UniformBlockIndex); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.UniformBlockBinding); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlUniformBlockBinding(d binary.Decoder, o *GlUniformBlockBinding) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Program = ProgramId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.UniformBlockIndex = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.UniformBlockBinding = uint32(obj)
+	}
+	return nil
+}
+func doSkipGlUniformBlockBinding(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlUniformBlockBinding) ID() binary.ID      { return binaryIDGlUniformBlockBinding }
+func (*binaryClassGlUniformBlockBinding) New() binary.Object { return &GlUniformBlockBinding{} }
+func (*binaryClassGlUniformBlockBinding) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlUniformBlockBinding(e, obj.(*GlUniformBlockBinding))
+}
+func (*binaryClassGlUniformBlockBinding) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlUniformBlockBinding{}
+	return obj, doDecodeGlUniformBlockBinding(d, obj)
+}
+func (*binaryClassGlUniformBlockBinding) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlUniformBlockBinding(d, obj.(*GlUniformBlockBinding))
+}
+func (*binaryClassGlUniformBlockBinding) Skip(d binary.Decoder) error {
+	return doSkipGlUniformBlockBinding(d)
+}
+func (*binaryClassGlUniformBlockBinding) Schema() *schema.Class { return schemaGlUniformBlockBinding }
+
+var schemaGlUniformBlockBinding = &schema.Class{
+	TypeID: binaryIDGlUniformBlockBinding,
+	Name:   "GlUniformBlockBinding",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "UniformBlockBinding", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlUniformMatrix2fv struct{}
 
 func (*GlUniformMatrix2fv) Class() binary.Class {
@@ -26978,6 +27666,30 @@ func (v *ImageTexelFormat) Parse(s string) error {
 	return fmt.Errorf("%s not in ImageTexelFormat", s)
 }
 
+const _IndexedBufferTarget_name = "GL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFER"
+
+var _IndexedBufferTarget_map = map[IndexedBufferTarget]string{
+	35345: _IndexedBufferTarget_name[0:17],
+	35982: _IndexedBufferTarget_name[17:45],
+}
+
+func (v IndexedBufferTarget) String() string {
+	if s, ok := _IndexedBufferTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("IndexedBufferTarget(%d)", v)
+}
+
+func (v *IndexedBufferTarget) Parse(s string) error {
+	for k, t := range _IndexedBufferTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in IndexedBufferTarget", s)
+}
+
 const _IndicesType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INT"
 
 var _IndicesType_map = map[IndicesType]string{
@@ -28565,6 +29277,36 @@ func (v *Type_OES_vertex_half_float) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in Type_OES_vertex_half_float", s)
+}
+
+const _UniformBlockParameter_name = "GL_UNIFORM_BLOCK_BINDINGGL_UNIFORM_BLOCK_DATA_SIZEGL_UNIFORM_BLOCK_NAME_LENGTHGL_UNIFORM_BLOCK_ACTIVE_UNIFORMSGL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICESGL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER"
+
+var _UniformBlockParameter_map = map[UniformBlockParameter]string{
+	35391: _UniformBlockParameter_name[0:24],
+	35392: _UniformBlockParameter_name[24:50],
+	35393: _UniformBlockParameter_name[50:78],
+	35394: _UniformBlockParameter_name[78:110],
+	35395: _UniformBlockParameter_name[110:149],
+	35396: _UniformBlockParameter_name[149:193],
+	35397: _UniformBlockParameter_name[193:239],
+	35398: _UniformBlockParameter_name[239:285],
+}
+
+func (v UniformBlockParameter) String() string {
+	if s, ok := _UniformBlockParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("UniformBlockParameter(%d)", v)
+}
+
+func (v *UniformBlockParameter) Parse(s string) error {
+	for k, t := range _UniformBlockParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in UniformBlockParameter", s)
 }
 
 const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_ARB_half_float_vertexGL_FIXEDGL_HALF_FLOAT_OES"

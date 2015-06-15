@@ -303,6 +303,24 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETQUERYIV)(uint32_t target, uint32_t parameter, int32_t *value);
     typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, uint32_t parameter,
                                                   uint32_t *value);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
+                                                          uint32_t uniform_block_index,
+                                                          int32_t buffer_size,
+                                                          int32_t *buffer_bytes_written,
+                                                          char *name);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKIV)(uint32_t program,
+                                                        uint32_t uniform_block_index,
+                                                        uint32_t parameter_name,
+                                                        int32_t *parameters);
+    typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
+                                                    uint32_t uniform_block_binding);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMSIV)(uint32_t program, uint32_t uniform_count,
+                                                    uint32_t *uniform_indices,
+                                                    uint32_t parameter_name, int32_t *parameters);
+    typedef void(STDCALL *PFNGLBINDBUFFERBASE)(uint32_t target, uint32_t index, uint32_t buffer);
+    typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
+    typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
     typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
     typedef void(STDCALL *PFNGLBEGINQUERYEXT)(uint32_t target, uint32_t query);
     typedef void(STDCALL *PFNGLENDQUERYEXT)(uint32_t target);
@@ -504,6 +522,14 @@ struct GlesImports {
     PFNGLISQUERY glIsQuery;
     PFNGLGETQUERYIV glGetQueryiv;
     PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv;
+    PFNGLGETACTIVEUNIFORMBLOCKNAME glGetActiveUniformBlockName;
+    PFNGLGETACTIVEUNIFORMBLOCKIV glGetActiveUniformBlockiv;
+    PFNGLUNIFORMBLOCKBINDING glUniformBlockBinding;
+    PFNGLGETACTIVEUNIFORMSIV glGetActiveUniformsiv;
+    PFNGLBINDBUFFERBASE glBindBufferBase;
+    PFNGLGENVERTEXARRAYS glGenVertexArrays;
+    PFNGLBINDVERTEXARRAY glBindVertexArray;
+    PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
     PFNGLGENQUERIESEXT glGenQueriesEXT;
     PFNGLBEGINQUERYEXT glBeginQueryEXT;
     PFNGLENDQUERYEXT glEndQueryEXT;

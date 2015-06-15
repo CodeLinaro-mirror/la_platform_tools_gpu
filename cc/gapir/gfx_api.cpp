@@ -3477,6 +3477,157 @@ bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlGetActiveUniformBlockName(Stack* stack, bool pushReturn) {
+    char* name = stack->pop<char*>();
+    int32_t* buffer_bytes_written = stack->pop<int32_t*>();
+    int32_t buffer_size = stack->pop<int32_t>();
+    uint32_t uniform_block_index = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetActiveUniformBlockName(%u, %u, %d, %p, %p)\n", program,
+                   uniform_block_index, buffer_size, buffer_bytes_written, name);
+        if (glGetActiveUniformBlockName != nullptr) {
+            glGetActiveUniformBlockName(program, uniform_block_index, buffer_size,
+                                        buffer_bytes_written, name);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformBlockName\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetActiveUniformBlockName\n");
+        return false;
+    }
+}
+
+bool callGlGetActiveUniformBlockiv(Stack* stack, bool pushReturn) {
+    int32_t* parameters = stack->pop<int32_t*>();
+    UniformBlockParameter parameter_name = stack->pop<UniformBlockParameter>();
+    uint32_t uniform_block_index = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetActiveUniformBlockiv(%u, %u, %u, %p)\n", program, uniform_block_index,
+                   parameter_name, parameters);
+        if (glGetActiveUniformBlockiv != nullptr) {
+            glGetActiveUniformBlockiv(program, uniform_block_index, parameter_name, parameters);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformBlockiv\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetActiveUniformBlockiv\n");
+        return false;
+    }
+}
+
+bool callGlUniformBlockBinding(Stack* stack, bool pushReturn) {
+    uint32_t uniform_block_binding = stack->pop<uint32_t>();
+    uint32_t uniform_block_index = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glUniformBlockBinding(%u, %u, %u)\n", program, uniform_block_index,
+                   uniform_block_binding);
+        if (glUniformBlockBinding != nullptr) {
+            glUniformBlockBinding(program, uniform_block_index, uniform_block_binding);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glUniformBlockBinding\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glUniformBlockBinding\n");
+        return false;
+    }
+}
+
+bool callGlGetActiveUniformsiv(Stack* stack, bool pushReturn) {
+    int32_t* parameters = stack->pop<int32_t*>();
+    UniformBlockParameter parameter_name = stack->pop<UniformBlockParameter>();
+    uint32_t* uniform_indices = stack->pop<uint32_t*>();
+    uint32_t uniform_count = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetActiveUniformsiv(%u, %u, %p, %u, %p)\n", program, uniform_count,
+                   uniform_indices, parameter_name, parameters);
+        if (glGetActiveUniformsiv != nullptr) {
+            glGetActiveUniformsiv(program, uniform_count, uniform_indices, parameter_name,
+                                  parameters);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetActiveUniformsiv\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetActiveUniformsiv\n");
+        return false;
+    }
+}
+
+bool callGlBindBufferBase(Stack* stack, bool pushReturn) {
+    uint32_t buffer = stack->pop<uint32_t>();
+    uint32_t index = stack->pop<uint32_t>();
+    IndexedBufferTarget target = stack->pop<IndexedBufferTarget>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindBufferBase(%u, %u, %u)\n", target, index, buffer);
+        if (glBindBufferBase != nullptr) {
+            glBindBufferBase(target, index, buffer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBindBufferBase\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindBufferBase\n");
+        return false;
+    }
+}
+
+bool callGlGenVertexArrays(Stack* stack, bool pushReturn) {
+    uint32_t* arrays = stack->pop<uint32_t*>();
+    int32_t count = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGenVertexArrays(%d, %p)\n", count, arrays);
+        if (glGenVertexArrays != nullptr) {
+            glGenVertexArrays(count, arrays);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGenVertexArrays\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGenVertexArrays\n");
+        return false;
+    }
+}
+
+bool callGlBindVertexArray(Stack* stack, bool pushReturn) {
+    uint32_t array = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindVertexArray(%u)\n", array);
+        if (glBindVertexArray != nullptr) {
+            glBindVertexArray(array);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBindVertexArray\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindVertexArray\n");
+        return false;
+    }
+}
+
+bool callGlDeleteVertexArrays(Stack* stack, bool pushReturn) {
+    uint32_t* arrays = stack->pop<uint32_t*>();
+    uint32_t count = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDeleteVertexArrays(%u, %p)\n", count, arrays);
+        if (glDeleteVertexArrays != nullptr) {
+            glDeleteVertexArrays(count, arrays);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDeleteVertexArrays\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDeleteVertexArrays\n");
+        return false;
+    }
+}
+
 bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
@@ -3858,6 +4009,14 @@ PFNGLDELETEQUERIES glDeleteQueries = nullptr;
 PFNGLISQUERY glIsQuery = nullptr;
 PFNGLGETQUERYIV glGetQueryiv = nullptr;
 PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv = nullptr;
+PFNGLGETACTIVEUNIFORMBLOCKNAME glGetActiveUniformBlockName = nullptr;
+PFNGLGETACTIVEUNIFORMBLOCKIV glGetActiveUniformBlockiv = nullptr;
+PFNGLUNIFORMBLOCKBINDING glUniformBlockBinding = nullptr;
+PFNGLGETACTIVEUNIFORMSIV glGetActiveUniformsiv = nullptr;
+PFNGLBINDBUFFERBASE glBindBufferBase = nullptr;
+PFNGLGENVERTEXARRAYS glGenVertexArrays = nullptr;
+PFNGLBINDVERTEXARRAY glBindVertexArray = nullptr;
+PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays = nullptr;
 PFNGLGENQUERIESEXT glGenQueriesEXT = nullptr;
 PFNGLBEGINQUERYEXT glBeginQueryEXT = nullptr;
 PFNGLENDQUERYEXT glEndQueryEXT = nullptr;
@@ -4062,6 +4221,15 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlIsQuery, callGlIsQuery);
     interpreter->registerFunction(Ids::GlGetQueryiv, callGlGetQueryiv);
     interpreter->registerFunction(Ids::GlGetQueryObjectuiv, callGlGetQueryObjectuiv);
+    interpreter->registerFunction(Ids::GlGetActiveUniformBlockName,
+                                  callGlGetActiveUniformBlockName);
+    interpreter->registerFunction(Ids::GlGetActiveUniformBlockiv, callGlGetActiveUniformBlockiv);
+    interpreter->registerFunction(Ids::GlUniformBlockBinding, callGlUniformBlockBinding);
+    interpreter->registerFunction(Ids::GlGetActiveUniformsiv, callGlGetActiveUniformsiv);
+    interpreter->registerFunction(Ids::GlBindBufferBase, callGlBindBufferBase);
+    interpreter->registerFunction(Ids::GlGenVertexArrays, callGlGenVertexArrays);
+    interpreter->registerFunction(Ids::GlBindVertexArray, callGlBindVertexArray);
+    interpreter->registerFunction(Ids::GlDeleteVertexArrays, callGlDeleteVertexArrays);
     interpreter->registerFunction(Ids::GlGenQueriesEXT, callGlGenQueriesEXT);
     interpreter->registerFunction(Ids::GlBeginQueryEXT, callGlBeginQueryEXT);
     interpreter->registerFunction(Ids::GlEndQueryEXT, callGlEndQueryEXT);
@@ -4414,6 +4582,22 @@ void Initialize() {
             reinterpret_cast<PFNGLGETQUERYIV>(gapic::GetGfxProcAddress("glGetQueryiv", false));
     glGetQueryObjectuiv = reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(
             gapic::GetGfxProcAddress("glGetQueryObjectuiv", false));
+    glGetActiveUniformBlockName = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKNAME>(
+            gapic::GetGfxProcAddress("glGetActiveUniformBlockName", false));
+    glGetActiveUniformBlockiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKIV>(
+            gapic::GetGfxProcAddress("glGetActiveUniformBlockiv", false));
+    glUniformBlockBinding = reinterpret_cast<PFNGLUNIFORMBLOCKBINDING>(
+            gapic::GetGfxProcAddress("glUniformBlockBinding", false));
+    glGetActiveUniformsiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMSIV>(
+            gapic::GetGfxProcAddress("glGetActiveUniformsiv", false));
+    glBindBufferBase = reinterpret_cast<PFNGLBINDBUFFERBASE>(
+            gapic::GetGfxProcAddress("glBindBufferBase", false));
+    glGenVertexArrays = reinterpret_cast<PFNGLGENVERTEXARRAYS>(
+            gapic::GetGfxProcAddress("glGenVertexArrays", false));
+    glBindVertexArray = reinterpret_cast<PFNGLBINDVERTEXARRAY>(
+            gapic::GetGfxProcAddress("glBindVertexArray", false));
+    glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
+            gapic::GetGfxProcAddress("glDeleteVertexArrays", false));
     glGenQueriesEXT = reinterpret_cast<PFNGLGENQUERIESEXT>(
             gapic::GetGfxProcAddress("glGenQueriesEXT", false));
     glBeginQueryEXT = reinterpret_cast<PFNGLBEGINQUERYEXT>(
