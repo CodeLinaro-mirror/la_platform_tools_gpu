@@ -44,17 +44,17 @@ inline uint32_t maxIndex(const uint8_t* indices, uint32_t indices_type, uint32_t
     switch (indices_type) {
         case gapii::IndicesType::GL_UNSIGNED_BYTE: {
             const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[offset]);
-            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_SHORT: {
             const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[offset]);
-            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_INT: {
             const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[offset]);
-            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
         }
     }
