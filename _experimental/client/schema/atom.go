@@ -29,6 +29,10 @@ type Atom struct {
 // Pack encodes the Atom to the encoder e.
 // The Atom can be decoded using the Unpack method of the atom's AtomInfo.
 func (a Atom) Pack(e binary.Encoder) error {
+	if err := a.Observations.Encode(e); err != nil {
+		return err
+	}
+
 	for _, a := range a.Arguments {
 		if err := WriteType(a, e); err != nil {
 			return err
