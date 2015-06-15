@@ -525,6 +525,7 @@ cmd EGLBoolean eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint at
 /////////////////////////////////////////////////////////////////
 type void* GLXContext
 type void* GLXDrawable
+type int   Bool
 
 map!(GLXContext, ref!Context) GLXContexts
 
@@ -543,13 +544,26 @@ cmd GLXContext glXCreateNewContext(void* display, void* fbconfig, u32 type, GLXC
 }
 
 @no_replay
-cmd void glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
+cmd Bool glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
     SetContext(GLXContexts[ctx])
+    return ?
+}
+
+@no_replay
+cmd Bool glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx) {
+    SetContext(GLXContexts[ctx])
+    return ?
 }
 
 @no_replay
 @EndOfFrame
 cmd void glXSwapBuffers(void* display, GLXDrawable drawable) {
+}
+
+@no_replay
+cmd int glXQueryDrawable(void* display, GLXDrawable draw, int attribute, int* value) {
+    value[0] = ?
+    return ?
 }
 
 /////////////////////////////////////////////////////////////////
@@ -595,6 +609,9 @@ cmd void wglSwapBuffers(HDC hdc) {}
 type int CGLError
 type void* CGLPixelFormatObj
 type void* CGLContextObj
+type void* CGSConnectionID
+type s32 CGSWindowID
+type s32 CGSSurfaceID
 
 map!(CGLContextObj, ref!Context) CGLContexts
 
@@ -610,6 +627,26 @@ cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLCon
 @no_replay
 cmd CGLError CGLSetCurrentContext(CGLContextObj ctx) {
     SetContext(CGLContexts[ctx])
+    return ?
+}
+
+@no_replay
+cmd int CGLGetSurface(CGLContextObj ctx, CGSConnectionID* cid, CGSWindowID* wid, CGSSurfaceID* sid) {
+    cid[0] = ?
+    wid[0] = ?
+    sid[0] = ?
+    return ?
+}
+
+@no_replay
+cmd int CGSGetSurfaceBounds(CGSConnectionID cid, CGSWindowID wid, CGSSurfaceID sid, f64* bounds) {
+    write(bounds[0:4])
+    return ?
+}
+
+@no_replay
+@EndOfFrame
+cmd CGLError CGLFlushDrawable(CGLContextObj ctx) {
     return ?
 }
 

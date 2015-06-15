@@ -86,10 +86,6 @@ static void* real__CGLErrorString = nullptr;
 EXPORT void __attribute__((naked)) CGLErrorString() {
     asm("jmp *%%rax" : : "a"(real__CGLErrorString) : );
 }
-static void* real__CGLFlushDrawable = nullptr;
-EXPORT void __attribute__((naked)) CGLFlushDrawable() {
-    asm("jmp *%%rax" : : "a"(real__CGLFlushDrawable) : );
-}
 static void* real__CGLFrontDispatch = nullptr;
 EXPORT void __attribute__((naked)) CGLFrontDispatch() {
     asm("jmp *%%rax" : : "a"(real__CGLFrontDispatch) : );
@@ -141,10 +137,6 @@ EXPORT void __attribute__((naked)) CGLGetPixelFormatRetainCount() {
 static void* real__CGLGetShareGroup = nullptr;
 EXPORT void __attribute__((naked)) CGLGetShareGroup() {
     asm("jmp *%%rax" : : "a"(real__CGLGetShareGroup) : );
-}
-static void* real__CGLGetSurface = nullptr;
-EXPORT void __attribute__((naked)) CGLGetSurface() {
-    asm("jmp *%%rax" : : "a"(real__CGLGetSurface) : );
 }
 static void* real__CGLGetVersion = nullptr;
 EXPORT void __attribute__((naked)) CGLGetVersion() {
@@ -5109,7 +5101,6 @@ static void initExports() {
     real__CGLDisable = gapic::GetGfxProcAddress("CGLDisable", true);
     real__CGLEnable = gapic::GetGfxProcAddress("CGLEnable", true);
     real__CGLErrorString = gapic::GetGfxProcAddress("CGLErrorString", true);
-    real__CGLFlushDrawable = gapic::GetGfxProcAddress("CGLFlushDrawable", true);
     real__CGLFrontDispatch = gapic::GetGfxProcAddress("CGLFrontDispatch", true);
     real__CGLGetContextRetainCount = gapic::GetGfxProcAddress("CGLGetContextRetainCount", true);
     real__CGLGetCurrentContext = gapic::GetGfxProcAddress("CGLGetCurrentContext", true);
@@ -5123,7 +5114,6 @@ static void initExports() {
     real__CGLGetPixelFormat = gapic::GetGfxProcAddress("CGLGetPixelFormat", true);
     real__CGLGetPixelFormatRetainCount = gapic::GetGfxProcAddress("CGLGetPixelFormatRetainCount", true);
     real__CGLGetShareGroup = gapic::GetGfxProcAddress("CGLGetShareGroup", true);
-    real__CGLGetSurface = gapic::GetGfxProcAddress("CGLGetSurface", true);
     real__CGLGetVersion = gapic::GetGfxProcAddress("CGLGetVersion", true);
     real__CGLGetVirtualScreen = gapic::GetGfxProcAddress("CGLGetVirtualScreen", true);
     real__CGLIsEnabled = gapic::GetGfxProcAddress("CGLIsEnabled", true);

@@ -974,6 +974,8 @@ typedef void* GLXContext;
 
 typedef void* GLXDrawable;
 
+typedef int Bool;
+
 typedef void* HGLRC;
 
 typedef void* HDC;
@@ -985,6 +987,12 @@ typedef int CGLError;
 typedef void* CGLPixelFormatObj;
 
 typedef void* CGLContextObj;
+
+typedef void* CGSConnectionID;
+
+typedef int32_t CGSWindowID;
+
+typedef int32_t CGSSurfaceID;
 
 typedef void* ImageOES;
 

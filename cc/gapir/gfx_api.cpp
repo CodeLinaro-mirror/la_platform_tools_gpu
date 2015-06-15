@@ -182,13 +182,39 @@ bool callGlXMakeContextCurrent(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)\n", display, draw, read, ctx);
         if (glXMakeContextCurrent != nullptr) {
-            glXMakeContextCurrent(display, draw, read, ctx);
+            int return_value = glXMakeContextCurrent(display, draw, read, ctx);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXMakeContextCurrent\n");
         }
         return true;
     } else {
         GAPID_WARNING("Error during calling function glXMakeContextCurrent\n");
+        return false;
+    }
+}
+
+bool callGlXMakeCurrent(Stack* stack, bool pushReturn) {
+    void* ctx = stack->pop<void*>();
+    void* drawable = stack->pop<void*>();
+    void* display = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXMakeCurrent(%p, %p, %p)\n", display, drawable, ctx);
+        if (glXMakeCurrent != nullptr) {
+            int return_value = glXMakeCurrent(display, drawable, ctx);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXMakeCurrent\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXMakeCurrent\n");
         return false;
     }
 }
@@ -206,6 +232,29 @@ bool callGlXSwapBuffers(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function glXSwapBuffers\n");
+        return false;
+    }
+}
+
+bool callGlXQueryDrawable(Stack* stack, bool pushReturn) {
+    int* value = stack->pop<int*>();
+    int attribute = stack->pop<int>();
+    void* draw = stack->pop<void*>();
+    void* display = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXQueryDrawable(%p, %p, %d, %p)\n", display, draw, attribute, value);
+        if (glXQueryDrawable != nullptr) {
+            int return_value = glXQueryDrawable(display, draw, attribute, value);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXQueryDrawable\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXQueryDrawable\n");
         return false;
     }
 }
@@ -327,6 +376,72 @@ bool callCGLSetCurrentContext(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function CGLSetCurrentContext\n");
+        return false;
+    }
+}
+
+bool callCGLGetSurface(Stack* stack, bool pushReturn) {
+    int32_t* sid = stack->pop<int32_t*>();
+    int32_t* wid = stack->pop<int32_t*>();
+    void** cid = stack->pop<void**>();
+    void* ctx = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("CGLGetSurface(%p, %p, %p, %p)\n", ctx, cid, wid, sid);
+        if (CGLGetSurface != nullptr) {
+            int return_value = CGLGetSurface(ctx, cid, wid, sid);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function CGLGetSurface\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function CGLGetSurface\n");
+        return false;
+    }
+}
+
+bool callCGSGetSurfaceBounds(Stack* stack, bool pushReturn) {
+    double* bounds = stack->pop<double*>();
+    int32_t sid = stack->pop<int32_t>();
+    int32_t wid = stack->pop<int32_t>();
+    void* cid = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("CGSGetSurfaceBounds(%p, %d, %d, %p)\n", cid, wid, sid, bounds);
+        if (CGSGetSurfaceBounds != nullptr) {
+            int return_value = CGSGetSurfaceBounds(cid, wid, sid, bounds);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function CGSGetSurfaceBounds\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function CGSGetSurfaceBounds\n");
+        return false;
+    }
+}
+
+bool callCGLFlushDrawable(Stack* stack, bool pushReturn) {
+    void* ctx = stack->pop<void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("CGLFlushDrawable(%p)\n", ctx);
+        if (CGLFlushDrawable != nullptr) {
+            int return_value = CGLFlushDrawable(ctx);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<int>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function CGLFlushDrawable\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function CGLFlushDrawable\n");
         return false;
     }
 }
@@ -3832,13 +3947,18 @@ PFNEGLQUERYSURFACE eglQuerySurface = nullptr;
 PFNGLXCREATECONTEXT glXCreateContext = nullptr;
 PFNGLXCREATENEWCONTEXT glXCreateNewContext = nullptr;
 PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent = nullptr;
+PFNGLXMAKECURRENT glXMakeCurrent = nullptr;
 PFNGLXSWAPBUFFERS glXSwapBuffers = nullptr;
+PFNGLXQUERYDRAWABLE glXQueryDrawable = nullptr;
 PFNWGLCREATECONTEXT wglCreateContext = nullptr;
 PFNWGLCREATECONTEXTATTRIBSARB wglCreateContextAttribsARB = nullptr;
 PFNWGLMAKECURRENT wglMakeCurrent = nullptr;
 PFNWGLSWAPBUFFERS wglSwapBuffers = nullptr;
 PFNCGLCREATECONTEXT CGLCreateContext = nullptr;
 PFNCGLSETCURRENTCONTEXT CGLSetCurrentContext = nullptr;
+PFNCGLGETSURFACE CGLGetSurface = nullptr;
+PFNCGSGETSURFACEBOUNDS CGSGetSurfaceBounds = nullptr;
+PFNCGLFLUSHDRAWABLE CGLFlushDrawable = nullptr;
 PFNGLENABLECLIENTSTATE glEnableClientState = nullptr;
 PFNGLDISABLECLIENTSTATE glDisableClientState = nullptr;
 PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES = nullptr;
@@ -4038,13 +4158,18 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlXCreateContext, callGlXCreateContext);
     interpreter->registerFunction(Ids::GlXCreateNewContext, callGlXCreateNewContext);
     interpreter->registerFunction(Ids::GlXMakeContextCurrent, callGlXMakeContextCurrent);
+    interpreter->registerFunction(Ids::GlXMakeCurrent, callGlXMakeCurrent);
     interpreter->registerFunction(Ids::GlXSwapBuffers, callGlXSwapBuffers);
+    interpreter->registerFunction(Ids::GlXQueryDrawable, callGlXQueryDrawable);
     interpreter->registerFunction(Ids::WglCreateContext, callWglCreateContext);
     interpreter->registerFunction(Ids::WglCreateContextAttribsARB, callWglCreateContextAttribsARB);
     interpreter->registerFunction(Ids::WglMakeCurrent, callWglMakeCurrent);
     interpreter->registerFunction(Ids::WglSwapBuffers, callWglSwapBuffers);
     interpreter->registerFunction(Ids::CGLCreateContext, callCGLCreateContext);
     interpreter->registerFunction(Ids::CGLSetCurrentContext, callCGLSetCurrentContext);
+    interpreter->registerFunction(Ids::CGLGetSurface, callCGLGetSurface);
+    interpreter->registerFunction(Ids::CGSGetSurfaceBounds, callCGSGetSurfaceBounds);
+    interpreter->registerFunction(Ids::CGLFlushDrawable, callCGLFlushDrawable);
     interpreter->registerFunction(Ids::GlEnableClientState, callGlEnableClientState);
     interpreter->registerFunction(Ids::GlDisableClientState, callGlDisableClientState);
     interpreter->registerFunction(Ids::GlGetProgramBinaryOES, callGlGetProgramBinaryOES);
@@ -4259,8 +4384,12 @@ void Initialize() {
             gapic::GetGfxProcAddress("glXCreateNewContext", false));
     glXMakeContextCurrent = reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(
             gapic::GetGfxProcAddress("glXMakeContextCurrent", false));
+    glXMakeCurrent =
+            reinterpret_cast<PFNGLXMAKECURRENT>(gapic::GetGfxProcAddress("glXMakeCurrent", false));
     glXSwapBuffers =
             reinterpret_cast<PFNGLXSWAPBUFFERS>(gapic::GetGfxProcAddress("glXSwapBuffers", false));
+    glXQueryDrawable = reinterpret_cast<PFNGLXQUERYDRAWABLE>(
+            gapic::GetGfxProcAddress("glXQueryDrawable", false));
     wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(
             gapic::GetGfxProcAddress("wglCreateContext", false));
     wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARB>(
@@ -4273,6 +4402,12 @@ void Initialize() {
             gapic::GetGfxProcAddress("CGLCreateContext", false));
     CGLSetCurrentContext = reinterpret_cast<PFNCGLSETCURRENTCONTEXT>(
             gapic::GetGfxProcAddress("CGLSetCurrentContext", false));
+    CGLGetSurface =
+            reinterpret_cast<PFNCGLGETSURFACE>(gapic::GetGfxProcAddress("CGLGetSurface", false));
+    CGSGetSurfaceBounds = reinterpret_cast<PFNCGSGETSURFACEBOUNDS>(
+            gapic::GetGfxProcAddress("CGSGetSurfaceBounds", false));
+    CGLFlushDrawable = reinterpret_cast<PFNCGLFLUSHDRAWABLE>(
+            gapic::GetGfxProcAddress("CGLFlushDrawable", false));
     glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
             gapic::GetGfxProcAddress("glEnableClientState", false));
     glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(
