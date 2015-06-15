@@ -398,10 +398,6 @@ static void* real__glBindBufferARB = nullptr;
 EXPORT void __attribute__((naked)) glBindBufferARB() {
     asm("jmp *%%rax" : : "a"(real__glBindBufferARB) : );
 }
-static void* real__glBindBufferBase = nullptr;
-EXPORT void __attribute__((naked)) glBindBufferBase() {
-    asm("jmp *%%rax" : : "a"(real__glBindBufferBase) : );
-}
 static void* real__glBindBufferBaseEXT = nullptr;
 EXPORT void __attribute__((naked)) glBindBufferBaseEXT() {
     asm("jmp *%%rax" : : "a"(real__glBindBufferBaseEXT) : );
@@ -453,10 +449,6 @@ EXPORT void __attribute__((naked)) glBindSampler() {
 static void* real__glBindTransformFeedback = nullptr;
 EXPORT void __attribute__((naked)) glBindTransformFeedback() {
     asm("jmp *%%rax" : : "a"(real__glBindTransformFeedback) : );
-}
-static void* real__glBindVertexArray = nullptr;
-EXPORT void __attribute__((naked)) glBindVertexArray() {
-    asm("jmp *%%rax" : : "a"(real__glBindVertexArray) : );
 }
 static void* real__glBindVertexArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glBindVertexArrayAPPLE() {
@@ -974,10 +966,6 @@ static void* real__glDeleteTransformFeedbacks = nullptr;
 EXPORT void __attribute__((naked)) glDeleteTransformFeedbacks() {
     asm("jmp *%%rax" : : "a"(real__glDeleteTransformFeedbacks) : );
 }
-static void* real__glDeleteVertexArrays = nullptr;
-EXPORT void __attribute__((naked)) glDeleteVertexArrays() {
-    asm("jmp *%%rax" : : "a"(real__glDeleteVertexArrays) : );
-}
 static void* real__glDeleteVertexArraysAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glDeleteVertexArraysAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glDeleteVertexArraysAPPLE) : );
@@ -1390,10 +1378,6 @@ static void* real__glGenTransformFeedbacks = nullptr;
 EXPORT void __attribute__((naked)) glGenTransformFeedbacks() {
     asm("jmp *%%rax" : : "a"(real__glGenTransformFeedbacks) : );
 }
-static void* real__glGenVertexArrays = nullptr;
-EXPORT void __attribute__((naked)) glGenVertexArrays() {
-    asm("jmp *%%rax" : : "a"(real__glGenVertexArrays) : );
-}
 static void* real__glGenVertexArraysAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glGenVertexArraysAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glGenVertexArraysAPPLE) : );
@@ -1422,21 +1406,9 @@ static void* real__glGetActiveUniformARB = nullptr;
 EXPORT void __attribute__((naked)) glGetActiveUniformARB() {
     asm("jmp *%%rax" : : "a"(real__glGetActiveUniformARB) : );
 }
-static void* real__glGetActiveUniformBlockName = nullptr;
-EXPORT void __attribute__((naked)) glGetActiveUniformBlockName() {
-    asm("jmp *%%rax" : : "a"(real__glGetActiveUniformBlockName) : );
-}
-static void* real__glGetActiveUniformBlockiv = nullptr;
-EXPORT void __attribute__((naked)) glGetActiveUniformBlockiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetActiveUniformBlockiv) : );
-}
 static void* real__glGetActiveUniformName = nullptr;
 EXPORT void __attribute__((naked)) glGetActiveUniformName() {
     asm("jmp *%%rax" : : "a"(real__glGetActiveUniformName) : );
-}
-static void* real__glGetActiveUniformsiv = nullptr;
-EXPORT void __attribute__((naked)) glGetActiveUniformsiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetActiveUniformsiv) : );
 }
 static void* real__glGetAttachedObjectsARB = nullptr;
 EXPORT void __attribute__((naked)) glGetAttachedObjectsARB() {
@@ -3902,10 +3874,6 @@ static void* real__glUniform4uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform4uivEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniform4uivEXT) : );
 }
-static void* real__glUniformBlockBinding = nullptr;
-EXPORT void __attribute__((naked)) glUniformBlockBinding() {
-    asm("jmp *%%rax" : : "a"(real__glUniformBlockBinding) : );
-}
 static void* real__glUniformBufferEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniformBufferEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniformBufferEXT) : );
@@ -5219,7 +5187,6 @@ static void initExports() {
     real__glBeginTransformFeedbackEXT = gapic::GetGfxProcAddress("glBeginTransformFeedbackEXT", true);
     real__glBindAttribLocationARB = gapic::GetGfxProcAddress("glBindAttribLocationARB", true);
     real__glBindBufferARB = gapic::GetGfxProcAddress("glBindBufferARB", true);
-    real__glBindBufferBase = gapic::GetGfxProcAddress("glBindBufferBase", true);
     real__glBindBufferBaseEXT = gapic::GetGfxProcAddress("glBindBufferBaseEXT", true);
     real__glBindBufferOffsetEXT = gapic::GetGfxProcAddress("glBindBufferOffsetEXT", true);
     real__glBindBufferRange = gapic::GetGfxProcAddress("glBindBufferRange", true);
@@ -5233,7 +5200,6 @@ static void initExports() {
     real__glBindRenderbufferEXT = gapic::GetGfxProcAddress("glBindRenderbufferEXT", true);
     real__glBindSampler = gapic::GetGfxProcAddress("glBindSampler", true);
     real__glBindTransformFeedback = gapic::GetGfxProcAddress("glBindTransformFeedback", true);
-    real__glBindVertexArray = gapic::GetGfxProcAddress("glBindVertexArray", true);
     real__glBindVertexArrayAPPLE = gapic::GetGfxProcAddress("glBindVertexArrayAPPLE", true);
     real__glBitmap = gapic::GetGfxProcAddress("glBitmap", true);
     real__glBlendColorEXT = gapic::GetGfxProcAddress("glBlendColorEXT", true);
@@ -5363,7 +5329,6 @@ static void initExports() {
     real__glDeleteSamplers = gapic::GetGfxProcAddress("glDeleteSamplers", true);
     real__glDeleteSync = gapic::GetGfxProcAddress("glDeleteSync", true);
     real__glDeleteTransformFeedbacks = gapic::GetGfxProcAddress("glDeleteTransformFeedbacks", true);
-    real__glDeleteVertexArrays = gapic::GetGfxProcAddress("glDeleteVertexArrays", true);
     real__glDeleteVertexArraysAPPLE = gapic::GetGfxProcAddress("glDeleteVertexArraysAPPLE", true);
     real__glDepthBoundsEXT = gapic::GetGfxProcAddress("glDepthBoundsEXT", true);
     real__glDepthRange = gapic::GetGfxProcAddress("glDepthRange", true);
@@ -5467,7 +5432,6 @@ static void initExports() {
     real__glGenRenderbuffersEXT = gapic::GetGfxProcAddress("glGenRenderbuffersEXT", true);
     real__glGenSamplers = gapic::GetGfxProcAddress("glGenSamplers", true);
     real__glGenTransformFeedbacks = gapic::GetGfxProcAddress("glGenTransformFeedbacks", true);
-    real__glGenVertexArrays = gapic::GetGfxProcAddress("glGenVertexArrays", true);
     real__glGenVertexArraysAPPLE = gapic::GetGfxProcAddress("glGenVertexArraysAPPLE", true);
     real__glGenerateMipmapEXT = gapic::GetGfxProcAddress("glGenerateMipmapEXT", true);
     real__glGetActiveAttribARB = gapic::GetGfxProcAddress("glGetActiveAttribARB", true);
@@ -5475,10 +5439,7 @@ static void initExports() {
     real__glGetActiveSubroutineUniformName = gapic::GetGfxProcAddress("glGetActiveSubroutineUniformName", true);
     real__glGetActiveSubroutineUniformiv = gapic::GetGfxProcAddress("glGetActiveSubroutineUniformiv", true);
     real__glGetActiveUniformARB = gapic::GetGfxProcAddress("glGetActiveUniformARB", true);
-    real__glGetActiveUniformBlockName = gapic::GetGfxProcAddress("glGetActiveUniformBlockName", true);
-    real__glGetActiveUniformBlockiv = gapic::GetGfxProcAddress("glGetActiveUniformBlockiv", true);
     real__glGetActiveUniformName = gapic::GetGfxProcAddress("glGetActiveUniformName", true);
-    real__glGetActiveUniformsiv = gapic::GetGfxProcAddress("glGetActiveUniformsiv", true);
     real__glGetAttachedObjectsARB = gapic::GetGfxProcAddress("glGetAttachedObjectsARB", true);
     real__glGetAttribLocationARB = gapic::GetGfxProcAddress("glGetAttribLocationARB", true);
     real__glGetBooleanIndexedvEXT = gapic::GetGfxProcAddress("glGetBooleanIndexedvEXT", true);
@@ -6095,7 +6056,6 @@ static void initExports() {
     real__glUniform4uiEXT = gapic::GetGfxProcAddress("glUniform4uiEXT", true);
     real__glUniform4uiv = gapic::GetGfxProcAddress("glUniform4uiv", true);
     real__glUniform4uivEXT = gapic::GetGfxProcAddress("glUniform4uivEXT", true);
-    real__glUniformBlockBinding = gapic::GetGfxProcAddress("glUniformBlockBinding", true);
     real__glUniformBufferEXT = gapic::GetGfxProcAddress("glUniformBufferEXT", true);
     real__glUniformMatrix2dv = gapic::GetGfxProcAddress("glUniformMatrix2dv", true);
     real__glUniformMatrix2fvARB = gapic::GetGfxProcAddress("glUniformMatrix2fvARB", true);

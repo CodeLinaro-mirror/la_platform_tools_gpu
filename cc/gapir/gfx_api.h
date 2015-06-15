@@ -209,24 +209,32 @@ static const uint16_t GlDeleteQueries = 181;
 static const uint16_t GlIsQuery = 182;
 static const uint16_t GlGetQueryiv = 183;
 static const uint16_t GlGetQueryObjectuiv = 184;
-static const uint16_t GlGenQueriesEXT = 185;
-static const uint16_t GlBeginQueryEXT = 186;
-static const uint16_t GlEndQueryEXT = 187;
-static const uint16_t GlDeleteQueriesEXT = 188;
-static const uint16_t GlIsQueryEXT = 189;
-static const uint16_t GlQueryCounterEXT = 190;
-static const uint16_t GlGetQueryivEXT = 191;
-static const uint16_t GlGetQueryObjectivEXT = 192;
-static const uint16_t GlGetQueryObjectuivEXT = 193;
-static const uint16_t GlGetQueryObjecti64vEXT = 194;
-static const uint16_t GlGetQueryObjectui64vEXT = 195;
-static const uint16_t Architecture = 196;
-static const uint16_t ReplayCreateRenderer = 197;
-static const uint16_t ReplayBindRenderer = 198;
-static const uint16_t BackbufferInfo = 199;
-static const uint16_t StartTimer = 200;
-static const uint16_t StopTimer = 201;
-static const uint16_t FlushPostBuffer = 202;
+static const uint16_t GlGetActiveUniformBlockName = 185;
+static const uint16_t GlGetActiveUniformBlockiv = 186;
+static const uint16_t GlUniformBlockBinding = 187;
+static const uint16_t GlGetActiveUniformsiv = 188;
+static const uint16_t GlBindBufferBase = 189;
+static const uint16_t GlGenVertexArrays = 190;
+static const uint16_t GlBindVertexArray = 191;
+static const uint16_t GlDeleteVertexArrays = 192;
+static const uint16_t GlGenQueriesEXT = 193;
+static const uint16_t GlBeginQueryEXT = 194;
+static const uint16_t GlEndQueryEXT = 195;
+static const uint16_t GlDeleteQueriesEXT = 196;
+static const uint16_t GlIsQueryEXT = 197;
+static const uint16_t GlQueryCounterEXT = 198;
+static const uint16_t GlGetQueryivEXT = 199;
+static const uint16_t GlGetQueryObjectivEXT = 200;
+static const uint16_t GlGetQueryObjectuivEXT = 201;
+static const uint16_t GlGetQueryObjecti64vEXT = 202;
+static const uint16_t GlGetQueryObjectui64vEXT = 203;
+static const uint16_t Architecture = 204;
+static const uint16_t ReplayCreateRenderer = 205;
+static const uint16_t ReplayBindRenderer = 206;
+static const uint16_t BackbufferInfo = 207;
+static const uint16_t StartTimer = 208;
+static const uint16_t StopTimer = 209;
+static const uint16_t FlushPostBuffer = 210;
 }  // namespace FunctionIds
 
 enum class DrawMode : uint32_t {
@@ -852,6 +860,22 @@ enum class QueryTarget_EXT_disjoint_timer_query : uint32_t {
 
 enum class QueryTarget : uint32_t {};
 
+enum class UniformBlockParameter : uint32_t {
+    GL_UNIFORM_BLOCK_BINDING = 35391,
+    GL_UNIFORM_BLOCK_DATA_SIZE = 35392,
+    GL_UNIFORM_BLOCK_NAME_LENGTH = 35393,
+    GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS = 35394,
+    GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 35395,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 35396,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER = 35397,
+    GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 35398,
+};
+
+enum class IndexedBufferTarget : uint32_t {
+    GL_TRANSFORM_FEEDBACK_BUFFER = 35982,
+    GL_UNIFORM_BUFFER = 35345,
+};
+
 enum class TilePreserveMaskQCOM : uint32_t {
     GL_COLOR_BUFFER_BIT0_QCOM = 1,
     GL_COLOR_BUFFER_BIT1_QCOM = 2,
@@ -1223,6 +1247,24 @@ typedef void(STDCALL *PFNGLGETQUERYIV)(QueryTarget target, QueryParameter parame
                                        int32_t *value);
 typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, QueryObjectParameter parameter,
                                               uint32_t *value);
+typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
+                                                      uint32_t uniform_block_index,
+                                                      int32_t buffer_size,
+                                                      int32_t *buffer_bytes_written, char *name);
+typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKIV)(uint32_t program, uint32_t uniform_block_index,
+                                                    UniformBlockParameter parameter_name,
+                                                    int32_t *parameters);
+typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
+                                                uint32_t uniform_block_binding);
+typedef void(STDCALL *PFNGLGETACTIVEUNIFORMSIV)(uint32_t program, uint32_t uniform_count,
+                                                uint32_t *uniform_indices,
+                                                UniformBlockParameter parameter_name,
+                                                int32_t *parameters);
+typedef void(STDCALL *PFNGLBINDBUFFERBASE)(IndexedBufferTarget target, uint32_t index,
+                                           uint32_t buffer);
+typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
+typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
+typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
 typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
 typedef void(STDCALL *PFNGLBEGINQUERYEXT)(QueryTarget target, uint32_t query);
 typedef void(STDCALL *PFNGLENDQUERYEXT)(QueryTarget target);
@@ -1425,6 +1467,14 @@ extern PFNGLDELETEQUERIES glDeleteQueries;
 extern PFNGLISQUERY glIsQuery;
 extern PFNGLGETQUERYIV glGetQueryiv;
 extern PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv;
+extern PFNGLGETACTIVEUNIFORMBLOCKNAME glGetActiveUniformBlockName;
+extern PFNGLGETACTIVEUNIFORMBLOCKIV glGetActiveUniformBlockiv;
+extern PFNGLUNIFORMBLOCKBINDING glUniformBlockBinding;
+extern PFNGLGETACTIVEUNIFORMSIV glGetActiveUniformsiv;
+extern PFNGLBINDBUFFERBASE glBindBufferBase;
+extern PFNGLGENVERTEXARRAYS glGenVertexArrays;
+extern PFNGLBINDVERTEXARRAY glBindVertexArray;
+extern PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
 extern PFNGLGENQUERIESEXT glGenQueriesEXT;
 extern PFNGLBEGINQUERYEXT glBeginQueryEXT;
 extern PFNGLENDQUERYEXT glEndQueryEXT;

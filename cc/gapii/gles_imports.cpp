@@ -315,6 +315,22 @@ void GlesImports::Resolve() {
     glGetQueryiv = reinterpret_cast<PFNGLGETQUERYIV>(GetGfxProcAddress("glGetQueryiv", true));
     glGetQueryObjectuiv = reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(
             GetGfxProcAddress("glGetQueryObjectuiv", true));
+    glGetActiveUniformBlockName = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKNAME>(
+            GetGfxProcAddress("glGetActiveUniformBlockName", true));
+    glGetActiveUniformBlockiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKIV>(
+            GetGfxProcAddress("glGetActiveUniformBlockiv", true));
+    glUniformBlockBinding = reinterpret_cast<PFNGLUNIFORMBLOCKBINDING>(
+            GetGfxProcAddress("glUniformBlockBinding", true));
+    glGetActiveUniformsiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMSIV>(
+            GetGfxProcAddress("glGetActiveUniformsiv", true));
+    glBindBufferBase =
+            reinterpret_cast<PFNGLBINDBUFFERBASE>(GetGfxProcAddress("glBindBufferBase", true));
+    glGenVertexArrays =
+            reinterpret_cast<PFNGLGENVERTEXARRAYS>(GetGfxProcAddress("glGenVertexArrays", true));
+    glBindVertexArray =
+            reinterpret_cast<PFNGLBINDVERTEXARRAY>(GetGfxProcAddress("glBindVertexArray", true));
+    glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
+            GetGfxProcAddress("glDeleteVertexArrays", true));
     glGenQueriesEXT =
             reinterpret_cast<PFNGLGENQUERIESEXT>(GetGfxProcAddress("glGenQueriesEXT", true));
     glBeginQueryEXT =

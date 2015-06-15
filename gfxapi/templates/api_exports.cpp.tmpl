@@ -97,7 +97,6 @@
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "CmdName" $c}}
       EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
-        GAPID_INFO("{{$name}}()\n");
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
         spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }

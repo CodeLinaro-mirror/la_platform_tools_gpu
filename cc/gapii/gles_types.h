@@ -842,6 +842,22 @@ static const uint32_t GL_TIME_ELAPSED_EXT = 35007;
 static const uint32_t GL_TIMESTAMP_EXT = 36392;
 }
 
+namespace UniformBlockParameter {
+static const uint32_t GL_UNIFORM_BLOCK_BINDING = 35391;
+static const uint32_t GL_UNIFORM_BLOCK_DATA_SIZE = 35392;
+static const uint32_t GL_UNIFORM_BLOCK_NAME_LENGTH = 35393;
+static const uint32_t GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS = 35394;
+static const uint32_t GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 35395;
+static const uint32_t GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 35396;
+static const uint32_t GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER = 35397;
+static const uint32_t GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 35398;
+}
+
+namespace IndexedBufferTarget {
+static const uint32_t GL_TRANSFORM_FEEDBACK_BUFFER = 35982;
+static const uint32_t GL_UNIFORM_BUFFER = 35345;
+}
+
 namespace TilePreserveMaskQCOM {
 static const uint32_t GL_COLOR_BUFFER_BIT0_QCOM = 1;
 static const uint32_t GL_COLOR_BUFFER_BIT1_QCOM = 2;
