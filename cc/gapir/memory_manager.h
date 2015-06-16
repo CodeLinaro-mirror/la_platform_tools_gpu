@@ -35,9 +35,10 @@ namespace gapir {
 // | In memory resource cache | Volatile Memory | Replay data |
 class MemoryManager {
 public:
-    // Creating a memory manager with try to allocate memory based on the size list provided.
-    // Stopping after the first successful allocation and cause a fatal error if all allocation was
-    // unsuccessful
+    // Creating a memory manager will try to allocate memory based on the size list provided, while
+    // keeping at least size * kOverheadFactor free bytes for possible driver overhead allocations.
+    // Stopping after the first successful allocation and cause a fatal error if none of the sizes
+    // could be allocated.
     explicit MemoryManager(const std::vector<uint32_t>& sizeList);
 
     // Sets the size of the replay data. Returns true if the given size fits in the memory and false
