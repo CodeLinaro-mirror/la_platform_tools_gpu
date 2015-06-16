@@ -114,15 +114,22 @@ func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*
 	}
 	// Resolve all the imports
 	imports := map[string]*semantic.API{}
+	importPaths := map[string]string{}
 	for _, api := range list {
 		for _, i := range api.Imports {
 			if i.Name == nil {
 				// unnamed imports have already been included
 				continue
 			}
-			if _, seen := imports[i.Name.Value]; seen {
+			path := filepath.Join(wd, i.Path.Value)
+			if importedPath, seen := importPaths[i.Name.Value]; seen {
+				if path == importedPath {
+					// import with same path and name already included
+					continue
+				}
 				return nil, parse.ErrorList{parse.Error{
-					Message: fmt.Sprintf("Duplicate import %s", i.Name.Value)},
+					Message: fmt.Sprintf("Import name '%s' used for different paths (%s != %s)",
+						i.Name.Value, path, importedPath)},
 				}
 			}
 			api, errs := p.resolve(wd, i.Path.Value, mappings)
@@ -130,6 +137,7 @@ func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*
 				return nil, errs
 			}
 			imports[i.Name.Value] = api
+			importPaths[i.Name.Value] = path
 		}
 	}
 	// Now resolve the api set as a single unit
