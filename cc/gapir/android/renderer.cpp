@@ -222,19 +222,23 @@ void RendererImpl::unbind() {
 }
 
 const char* RendererImpl::name() {
-    return eglQueryString(mDisplay, EGL_EXTENSIONS);
+    return reinterpret_cast<const char*>(
+        gfxapi::glGetString(gfxapi::StringConstant::GL_RENDERER));
 }
 
 const char* RendererImpl::extensions() {
-    return eglQueryString(mDisplay, EGL_CLIENT_APIS);
+    return reinterpret_cast<const char*>(
+        gfxapi::glGetString(gfxapi::StringConstant::GL_EXTENSIONS));
 }
 
 const char* RendererImpl::vendor() {
-    return eglQueryString(mDisplay, EGL_VERSION);
+    return reinterpret_cast<const char*>(
+        gfxapi::glGetString(gfxapi::StringConstant::GL_VENDOR));
 }
 
 const char* RendererImpl::version() {
-    return eglQueryString(mDisplay, EGL_VENDOR);
+    return reinterpret_cast<const char*>(
+        gfxapi::glGetString(gfxapi::StringConstant::GL_VERSION));
 }
 
 } // anonymous namespace
