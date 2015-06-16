@@ -24,6 +24,11 @@
 
 namespace gapir {
 
+namespace {
+// Expected driver memory overhead to be left free as a factor of allocated managed memory.
+const float kDriverOverheadFactor = 0.3f;
+}
+
 MemoryManager::MemoryRange::MemoryRange() : base(nullptr), size(0) {
 }
 
@@ -32,9 +37,14 @@ MemoryManager::MemoryRange::MemoryRange(uint8_t* base, uint32_t size) : base(bas
 
 MemoryManager::MemoryManager(const std::vector<uint32_t>& sizeList) : mConstantMemory(nullptr, 0) {
     for (auto size : sizeList) {
-        mSize = size;
+        // Try over-allocating to leave at least (size * kDriverOverheadFactor) free bytes.
+        mSize = size * (1 + kDriverOverheadFactor);
         mMemory.reset(new(std::nothrow) uint8_t[mSize]);
         if (mMemory) {
+            // Free the over-allocation first, then attempt allocating the (smaller) original size.
+            mMemory.reset();
+            mSize = size;
+            mMemory.reset(new(std::nothrow) uint8_t[mSize]);
             break;
         }
         GAPID_INFO("Failed to allocate %u bytes of volatile memory, continuing...\n", size);
