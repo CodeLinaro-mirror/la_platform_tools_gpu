@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "renderer.h"
 #include "server_connection.h"
 #include "server_listener.h"
 
@@ -55,12 +56,18 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
                 uint8_t ptrSize = sizeof(void*);
                 uint8_t ptrAlign = std::alignment_of<void*>::value;
                 uint8_t targetOs = TARGET_OS;
+                std::unique_ptr<Renderer> r(Renderer::create());
+                r->bind();
 
                 if (!client->send(PROTOCOL_VERSION) ||
                     !client->send(ptrSize) ||
                     !client->send(ptrAlign) ||
                     !client->send(mMaxMemorySize) ||
-                    !client->send(targetOs)) {
+                    !client->send(targetOs) ||
+                    !client->sendString(r->extensions()) ||
+                    !client->sendString(r->name()) ||
+                    !client->sendString(r->vendor()) ||
+                    !client->sendString(r->version())) {
                     GAPID_WARNING("Failed to send connection header\n");
                     return nullptr;
                 }

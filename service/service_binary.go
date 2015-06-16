@@ -113,7 +113,7 @@ var (
 	binaryIDCapture                     = binary.ID{0xe3, 0xb4, 0x59, 0x42, 0xf5, 0xfc, 0xe5, 0x09, 0x29, 0x27, 0x0b, 0xb9, 0x4f, 0x22, 0x3b, 0x4d, 0x13, 0xb5, 0x68, 0xb0}
 	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
 	binaryIDClassInfo                   = binary.ID{0x82, 0x7f, 0xfa, 0x73, 0x67, 0x83, 0x4a, 0x7b, 0x4e, 0x8b, 0x52, 0xa0, 0x48, 0xab, 0x03, 0x63, 0xeb, 0xc0, 0x90, 0x32}
-	binaryIDDevice                      = binary.ID{0x7f, 0xa5, 0x70, 0xd9, 0x93, 0xfc, 0x70, 0x27, 0x32, 0xd9, 0xb8, 0x6e, 0x2a, 0x9b, 0xf3, 0x84, 0x55, 0x4f, 0x26, 0x50}
+	binaryIDDevice                      = binary.ID{0x35, 0xcb, 0x3f, 0x05, 0x2a, 0xcb, 0xc0, 0x0f, 0x33, 0x17, 0x23, 0xa2, 0x34, 0x73, 0xcb, 0x72, 0x96, 0xae, 0x05, 0x3f}
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
 	binaryIDEnumEntry                   = binary.ID{0xea, 0x7f, 0xa3, 0xef, 0xb6, 0x4c, 0x5a, 0x85, 0xc9, 0x5f, 0xb5, 0xa1, 0x28, 0xfe, 0xb3, 0xa7, 0x53, 0xae, 0xb7, 0xd0}
 	binaryIDEnumInfo                    = binary.ID{0xc8, 0xb4, 0x37, 0x51, 0xa6, 0x94, 0x50, 0xe5, 0x0e, 0xc7, 0xe1, 0x2f, 0xd6, 0xf2, 0xad, 0x68, 0xf5, 0x31, 0x06, 0xe3}
@@ -1582,6 +1582,18 @@ func doEncodeDevice(e binary.Encoder, o *Device) error {
 	if err := e.Bool(o.RequiresShaderPatching); err != nil {
 		return err
 	}
+	if err := e.String(o.Extensions); err != nil {
+		return err
+	}
+	if err := e.String(o.Renderer); err != nil {
+		return err
+	}
+	if err := e.String(o.Vendor); err != nil {
+		return err
+	}
+	if err := e.String(o.Version); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeDevice(d binary.Decoder, o *Device) error {
@@ -1620,6 +1632,26 @@ func doDecodeDevice(d binary.Decoder, o *Device) error {
 	} else {
 		o.RequiresShaderPatching = bool(obj)
 	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Extensions = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Renderer = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Vendor = string(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Version = string(obj)
+	}
 	return nil
 }
 func doSkipDevice(d binary.Decoder) error {
@@ -1642,6 +1674,18 @@ func doSkipDevice(d binary.Decoder) error {
 		return err
 	}
 	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
 		return err
 	}
 	return nil
@@ -1672,6 +1716,10 @@ var schemaDevice = &schema.Class{
 		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "MaxMemorySize", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "RequiresShaderPatching", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Renderer", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
