@@ -63,11 +63,13 @@ type ApplicationContext struct {
 	onDeviceSelected    gxui.Event
 	onAtomsUpdated      gxui.Event
 	onHierarchyUpdated  gxui.Event
+	onReportUpdated     gxui.Event
 	onStateUpdated      gxui.Event
 	onTimingInfoUpdated gxui.Event
 	schema              service.Schema
 	atoms               []schema.Atom
 	hierarchy           atom.Group
+	report              service.Report
 	state               schema.Struct
 	selectedAtomID      atom.ID
 	selectedAddress     memory.Pointer
@@ -156,6 +158,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		onDeviceSelected:    gxui.CreateEvent(func() {}),
 		onAtomsUpdated:      gxui.CreateEvent(func() {}),
 		onHierarchyUpdated:  gxui.CreateEvent(func() {}),
+		onReportUpdated:     gxui.CreateEvent(func() {}),
 		onStateUpdated:      gxui.CreateEvent(func() {}),
 		onTimingInfoUpdated: gxui.CreateEvent(func() {}),
 		selectedAtomID:      InvalidAtomID,
@@ -309,6 +312,24 @@ func (c *ApplicationContext) LoadHierarchy() {
 			root.Root.Unpack(&c.hierarchy)
 			c.onHierarchyUpdated.Fire()
 			l.Infof("Hierarchy loaded")
+		})
+	}()
+}
+
+func (c *ApplicationContext) LoadReport() {
+	captureID := c.captureID
+	l := c.logger.Fork().Enter("LoadReport")
+	l.Infof("(capture: %v)", captureID)
+
+	go func() {
+		report, err := c.rpc.ResolveReport(c.capture.Report, l)
+		if err != nil {
+			return
+		}
+		c.Run(func() {
+			c.report = report
+			c.onReportUpdated.Fire()
+			l.Infof("Report loaded")
 		})
 	}()
 }
@@ -537,6 +558,10 @@ func (c *ApplicationContext) OnAtomsUpdated(f func()) gxui.EventSubscription {
 
 func (c *ApplicationContext) OnHierarchyUpdated(f func()) gxui.EventSubscription {
 	return c.onHierarchyUpdated.Listen(f)
+}
+
+func (c *ApplicationContext) OnReportUpdated(f func()) gxui.EventSubscription {
+	return c.onReportUpdated.Listen(f)
 }
 
 func (c *ApplicationContext) OnStateUpdated(f func()) gxui.EventSubscription {

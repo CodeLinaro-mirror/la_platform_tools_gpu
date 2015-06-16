@@ -89,6 +89,7 @@ func createPanels(appCtx *ApplicationContext, window gxui.Window) gxui.Control {
 		}
 		{
 			holder := theme.CreatePanelHolder()
+			holder.AddPanel(CreateReportPanel(appCtx), "Report")
 			holder.AddPanel(CreateMemoryPanel(appCtx), "Memory")
 			holder.AddPanel(CreateImageViewerPanel(appCtx), "Image")
 			holder.AddPanel(CreateDocsPanel(appCtx), "Docs")
@@ -419,6 +420,7 @@ func (a app) main(driver gxui.Driver) {
 	// Perhaps add button to disable this?
 	appCtx.OnAtomSelected(appCtx.RequestReplay)
 	appCtx.OnAtomsUpdated(appCtx.LoadHierarchy)
+	appCtx.OnAtomsUpdated(appCtx.LoadReport)
 	appCtx.OnAtomsUpdated(func() { loadTiming(appCtx) })
 	appCtx.OnRequestReplay(func() { DoReplay(appCtx) })
 	appCtx.OnAtomSelected(appCtx.LoadState)

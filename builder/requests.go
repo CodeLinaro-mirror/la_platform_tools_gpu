@@ -123,6 +123,12 @@ type ConvertImage struct {
 	FormatTo   image.Format
 }
 
+// BuildReport generates a service.Report for the given capture.
+type BuildReport struct {
+	binary.Generate
+	Atoms service.AtomStreamId
+}
+
 // getCaptureFramebufferDimensions records the parameters of an internal request.
 type getCaptureFramebufferDimensions struct {
 	binary.Generate
