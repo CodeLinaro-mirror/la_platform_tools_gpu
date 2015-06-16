@@ -160,6 +160,19 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 		// by each of the gfxapis for extensions they require.
 		td.RequiresShaderPatching = !os.IsAndroid()
 
+		if td.Extensions, err = dec.String(); err != nil {
+			return err
+		}
+		if td.Renderer, err = dec.String(); err != nil {
+			return err
+		}
+		if td.Vendor, err = dec.String(); err != nil {
+			return err
+		}
+		if td.Version, err = dec.String(); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("Unsupported device protocol version: %d", protocolVersion)
 	}

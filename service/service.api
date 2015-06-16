@@ -119,18 +119,22 @@ cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
 // Device describes replay target avaliable to the server.
 class Device {
-  string Name             // The name of the device. i.e. "Bob's phone"
-  string Model            // The model of the device. i.e. "Nexus 5"
-  string OS               // The operating system of the device. i.e. "Android 5.0"
+  string Name             // The name of the device. e.g. "Bob's phone"
+  string Model            // The model of the device. e.g. "Nexus 5"
+  string OS               // The operating system of the device. e.g. "Android 5.0"
   u8     PointerSize      // Size in bytes of a pointer on the device's architecture.
   u8     PointerAlignment // Alignment in bytes of a pointer on the device's architecture.
   u64    MaxMemorySize    // The total amount of contiguous memory pre-allocated for replay.
   bool   RequiresShaderPatching // HACK. Will be removed.
+  string Extensions       // Renderer extensions list. e.g. "GL_KHR_debug GL_EXT_sRGB [...]".
+  string Renderer         // Renderer name. e.g. "Adreno (TM) 320".
+  string Vendor           // Renderer vendor name. e.g. "Qualcomm".
+  string Version          // Renderer version. e.g. "OpenGL ES 3.0 V@53.0 AU@  (CL@)".
 }
 
 // Capture describes single capture file held by the server.
 class Capture {
-  string              Name     // Name given to the capture. i.e. "KittyWorld"
+  string              Name     // Name given to the capture. e.g. "KittyWorld"
   AtomStreamId        Atoms    // The identifier to the stream of atoms in this capture.
   ApiId[]             Apis     // List of graphics APIs used by this capture.
   SchemaId            Schema   // The schema used to decode types in this capture.

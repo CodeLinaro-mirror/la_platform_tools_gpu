@@ -215,6 +215,10 @@ type Device struct {
 	PointerAlignment       uint8
 	MaxMemorySize          uint64
 	RequiresShaderPatching bool
+	Extensions             string
+	Renderer               string
+	Vendor                 string
+	Version                string
 }
 
 // Class Capture

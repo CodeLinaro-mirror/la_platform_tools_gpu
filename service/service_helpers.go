@@ -292,6 +292,10 @@ func CreateDevice(
 	PointerAlignment uint8,
 	MaxMemorySize uint64,
 	RequiresShaderPatching bool,
+	Extensions string,
+	Renderer string,
+	Vendor string,
+	Version string,
 ) *Device {
 	return &Device{
 		Name:                   Name,
@@ -301,6 +305,10 @@ func CreateDevice(
 		PointerAlignment:       PointerAlignment,
 		MaxMemorySize:          MaxMemorySize,
 		RequiresShaderPatching: RequiresShaderPatching,
+		Extensions:             Extensions,
+		Renderer:               Renderer,
+		Vendor:                 Vendor,
+		Version:                Version,
 	}
 }
 
@@ -311,6 +319,10 @@ func (c *Device) GetPointerSize() uint8           { return c.PointerSize }
 func (c *Device) GetPointerAlignment() uint8      { return c.PointerAlignment }
 func (c *Device) GetMaxMemorySize() uint64        { return c.MaxMemorySize }
 func (c *Device) GetRequiresShaderPatching() bool { return c.RequiresShaderPatching }
+func (c *Device) GetExtensions() string           { return c.Extensions }
+func (c *Device) GetRenderer() string             { return c.Renderer }
+func (c *Device) GetVendor() string               { return c.Vendor }
+func (c *Device) GetVersion() string              { return c.Version }
 
 func CreateCapture(
 	Name string,
