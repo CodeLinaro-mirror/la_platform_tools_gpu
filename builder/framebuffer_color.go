@@ -19,7 +19,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -52,7 +51,7 @@ func (request *GetFramebufferColor) build(db database.Database, logger log.Logge
 		return err
 	}
 
-	store.CopyResource(out, &service.ImageInfo{
+	database.CopyResource(out, &service.ImageInfo{
 		Format: service.ImageFormatRGBA8, // TODO: Add support for other formats.
 		Width:  imgWidth,
 		Height: imgHeight,
@@ -84,6 +83,6 @@ func (request *RenderFramebufferColor) build(mgr *replay.Manager, db database.Da
 		return img.Error
 	}
 
-	store.CopyResource(out, &service.Binary{Data: img.Data})
+	database.CopyResource(out, &service.Binary{Data: img.Data})
 	return nil
 }

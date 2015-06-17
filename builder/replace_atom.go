@@ -23,7 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -68,6 +67,6 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 
 	capture.Atoms = service.AtomStreamId{ID: newStreamId}
 
-	store.CopyResource(out, &capture)
+	database.CopyResource(out, &capture)
 	return nil
 }
