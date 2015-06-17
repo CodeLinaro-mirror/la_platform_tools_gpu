@@ -25,12 +25,11 @@ import (
 // Manager is used discover replay devices and to send replay requests to those
 // discovered devices.
 type Manager struct {
-	persistentDb database.Database
-	transientDb  database.Database
-	discovery    *discovery
-	batchers     map[batcherContext]*batcher
-	mutex        sync.Mutex // guards batchers
-	logger       log.Logger
+	database  database.Database
+	discovery *discovery
+	batchers  map[batcherContext]*batcher
+	mutex     sync.Mutex // guards batchers
+	logger    log.Logger
 }
 
 func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
@@ -46,12 +45,11 @@ func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 			return nil, fmt.Errorf("Unknown device %v", ctx.DeviceID)
 		}
 		b = &batcher{
-			context:      ctx,
-			feed:         make(chan Request, 8),
-			persistentDb: m.persistentDb,
-			transientDb:  m.transientDb,
-			device:       device,
-			logger:       m.logger,
+			context:  ctx,
+			feed:     make(chan Request, 8),
+			database: m.database,
+			device:   device,
+			logger:   m.logger,
 		}
 		m.batchers[ctx] = b
 		go b.run()
@@ -60,13 +58,12 @@ func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 }
 
 // New returns a new Manager instance using the database db and logger l.
-func New(db database.Database, l log.Logger) *Manager {
+func New(d database.Database, l log.Logger) *Manager {
 	return &Manager{
-		persistentDb: db,
-		transientDb:  database.CreateTransientDatabase(db),
-		discovery:    newDiscovery(db, l),
-		batchers:     make(map[batcherContext]*batcher),
-		logger:       l,
+		database:  d,
+		discovery: newDiscovery(d, l),
+		batchers:  make(map[batcherContext]*batcher),
+		logger:    l,
 	}
 }
 

@@ -37,12 +37,11 @@ type batcherContext struct {
 }
 
 type batcher struct {
-	feed         chan Request
-	context      batcherContext
-	persistentDb database.Database
-	transientDb  database.Database
-	device       Device
-	logger       log.Logger
+	feed     chan Request
+	context  batcherContext
+	database database.Database
+	device   Device
+	logger   log.Logger
 }
 
 func (b *batcher) run() {
@@ -73,12 +72,12 @@ func (b *batcher) run() {
 
 func (b *batcher) send(requests []Request) (err error) {
 	var c service.Capture
-	if err := b.transientDb.Load(b.context.CaptureID.ID, b.logger, &c); err != nil {
+	if err := b.database.Load(b.context.CaptureID.ID, b.logger, &c); err != nil {
 		return fmt.Errorf("Failed to load capture (%s): %v", b.context.CaptureID, err)
 	}
 
 	var stream service.AtomStream
-	if err := b.transientDb.Load(c.Atoms.ID, b.logger, &stream); err != nil {
+	if err := b.database.Load(c.Atoms.ID, b.logger, &stream); err != nil {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}
 
@@ -94,7 +93,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.context.Config,
 		requests,
 		td,
-		b.persistentDb,
+		b.database,
 		b.logger)
 
 	if config.DebugReplay {
@@ -110,7 +109,7 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	transforms.Transform(atoms, &adapter{
 		state:   gfxapi.NewState(),
-		db:      b.persistentDb,
+		db:      b.database,
 		logger:  b.logger,
 		builder: builder,
 	})
@@ -151,7 +150,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		payload,
 		decoder,
 		connection,
-		b.persistentDb,
+		b.database,
 		b.logger,
 		architecture,
 	)
