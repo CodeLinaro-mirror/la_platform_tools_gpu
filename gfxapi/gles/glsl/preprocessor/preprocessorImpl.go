@@ -439,9 +439,9 @@ func (p *preprocessorImpl) processDirective(info TokenInfo) {
 		}
 		return
 
-	case ppPragma, ppExtension:
+	// TODO: support #version, #pragma and #extension instead of silently ignoring them.
+	case ppVersion, ppPragma, ppExtension:
 		_ = p.getDirectiveArguments(info, false)
-		p.err.Errorf("'%s' not supported.", info.Token)
 		return
 
 	case ppIfdef, ppIfndef:
