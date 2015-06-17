@@ -14,13 +14,15 @@
 
 package image
 
-type fmtAlpha struct{}
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-func (fmtAlpha) String() string                 { return "Alpha" }
-func (fmtAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }
+type fmtAlpha struct{ binary.Generate }
+
+func (*fmtAlpha) String() string                 { return "Alpha" }
+func (*fmtAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 8) }
 
 // Alpha returns a format containing a single 8-bit alpha channel per pixel.
-func Alpha() Format { return fmtAlpha{} }
+func Alpha() Format { return &fmtAlpha{} }
 
 func init() {
 	RegisterConverter(Alpha(), RGBA(),

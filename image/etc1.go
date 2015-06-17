@@ -14,16 +14,18 @@
 
 package image
 
-type fmtETC1_RGB8_OES struct{}
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-func (fmtETC1_RGB8_OES) String() string { return "ETC1_RGB8_OES" }
-func (fmtETC1_RGB8_OES) Check(d []byte, w, h int) error {
+type fmtETC1_RGB8_OES struct{ binary.Generate }
+
+func (*fmtETC1_RGB8_OES) String() string { return "ETC1_RGB8_OES" }
+func (*fmtETC1_RGB8_OES) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 4)
 }
 
 // ETC1_RGB8_OES returns a format representing the texture compression format
 // with the same name.
-func ETC1_RGB8_OES() Format { return fmtETC1_RGB8_OES{} }
+func ETC1_RGB8_OES() Format { return &fmtETC1_RGB8_OES{} }
 
 func init() {
 	RegisterConverter(ETC1_RGB8_OES(), RGBA(), func(src []byte, width, height int) ([]byte, error) {

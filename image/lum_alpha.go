@@ -14,14 +14,16 @@
 
 package image
 
-type fmtLuminanceAlpha struct{}
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-func (fmtLuminanceAlpha) String() string                 { return "LuminanceAlpha" }
-func (fmtLuminanceAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 16) }
+type fmtLuminanceAlpha struct{ binary.Generate }
+
+func (*fmtLuminanceAlpha) String() string                 { return "LuminanceAlpha" }
+func (*fmtLuminanceAlpha) Check(d []byte, w, h int) error { return checkSize(d, w, h, 16) }
 
 // LuminanceAlpha returns a format containing an 8-bit luminance and alpha
 // channel per pixel.
-func LuminanceAlpha() Format { return fmtLuminanceAlpha{} }
+func LuminanceAlpha() Format { return &fmtLuminanceAlpha{} }
 
 func init() {
 	RegisterConverter(LuminanceAlpha(), RGBA(),

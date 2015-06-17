@@ -19,16 +19,18 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-type fmtPNG struct{}
+type fmtPNG struct{ binary.Generate }
 
-func (fmtPNG) String() string                 { return "PNG" }
-func (fmtPNG) Check(d []byte, w, h int) error { return nil }
+func (*fmtPNG) String() string                 { return "PNG" }
+func (*fmtPNG) Check(d []byte, w, h int) error { return nil }
 
 // PNG returns a format representing the the texture compression format with the
 // same name.
-func PNG() Format { return fmtPNG{} }
+func PNG() Format { return &fmtPNG{} }
 
 func init() {
 	RegisterConverter(RGBA(), PNG(),
