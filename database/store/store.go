@@ -17,22 +17,7 @@ package store
 
 import (
 	"reflect"
-
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/log"
 )
-
-// Store is the interface to a database storage layer.
-type Store interface {
-	// Stores the resource r with the key id. d holds r as binary encoded.
-	Store(id binary.ID, r binary.Object, d []byte, l log.Logger) error
-	// Load puts the resource with key id into the out parameter
-	Load(id binary.ID, l log.Logger, out binary.Object) (size int, err error)
-	// Contains returns true if this store contains the resource identified by id.
-	Contains(id binary.ID) bool
-	// Close shuts down the store, it is an error to call any other method after this one.
-	Close()
-}
 
 // CopyResource assigns the value object to the variable out points to
 func CopyResource(out interface{}, value interface{}) {
