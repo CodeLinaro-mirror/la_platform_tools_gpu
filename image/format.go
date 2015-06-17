@@ -14,13 +14,19 @@
 
 package image
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 // Format is the interface for an image and/or pixel format.
 //
 // Check returns an error if the combination of data, image width and image
 // height is invalid for the given format, otherwise Check returns nil.
 type Format interface {
+	binary.Object
+
 	Check(data []byte, width, height int) error
 }
 
@@ -34,11 +40,11 @@ func checkSize(data []byte, width, height int, bpp int) error {
 	return nil
 }
 
-type fmtRGBA struct{}
+type fmtRGBA struct{ binary.Generate }
 
-func (fmtRGBA) String() string                 { return "RGBA" }
-func (fmtRGBA) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }
+func (*fmtRGBA) String() string                 { return "RGBA" }
+func (*fmtRGBA) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) }
 
 // RGBA returns a format containing an 8-bit red, green, blue and alpha channel
 // per pixel.
-func RGBA() Format { return fmtRGBA{} }
+func RGBA() Format { return &fmtRGBA{} }

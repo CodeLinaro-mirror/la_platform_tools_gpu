@@ -16,27 +16,27 @@ package image
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
-type fmtATC_RGB_AMD struct{}
+type fmtATC_RGB_AMD struct{ binary.Generate }
 
-func (fmtATC_RGB_AMD) String() string { return "ATC_RGB_AMD" }
-func (fmtATC_RGB_AMD) Check(d []byte, w, h int) error {
+func (*fmtATC_RGB_AMD) String() string { return "ATC_RGB_AMD" }
+func (*fmtATC_RGB_AMD) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 4)
 }
 
-type fmtATC_RGBA_EXPLICIT_ALPHA_AMD struct{}
+type fmtATC_RGBA_EXPLICIT_ALPHA_AMD struct{ binary.Generate }
 
-func (fmtATC_RGBA_EXPLICIT_ALPHA_AMD) String() string { return "ATC_RGBA_EXPLICIT_ALPHA_AMD" }
-func (fmtATC_RGBA_EXPLICIT_ALPHA_AMD) Check(d []byte, w, h int) error {
+func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) String() string { return "ATC_RGBA_EXPLICIT_ALPHA_AMD" }
+func (*fmtATC_RGBA_EXPLICIT_ALPHA_AMD) Check(d []byte, w, h int) error {
 	return checkSize(d, max(w, 4), max(h, 4), 8)
 }
 
 // ATC_RGB_AMD returns a format representing the texture compression format with
 // the same name.
-func ATC_RGB_AMD() Format { return fmtATC_RGB_AMD{} }
+func ATC_RGB_AMD() Format { return &fmtATC_RGB_AMD{} }
 
 // ATC_RGBA_EXPLICIT_ALPHA_AMD returns a format representing the texture
 // compression format with the same name.
-func ATC_RGBA_EXPLICIT_ALPHA_AMD() Format { return fmtATC_RGBA_EXPLICIT_ALPHA_AMD{} }
+func ATC_RGBA_EXPLICIT_ALPHA_AMD() Format { return &fmtATC_RGBA_EXPLICIT_ALPHA_AMD{} }
 
 func init() {
 	RegisterConverter(ATC_RGB_AMD(), RGBA(),

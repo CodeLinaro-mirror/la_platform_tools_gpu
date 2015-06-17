@@ -14,14 +14,16 @@
 
 package image
 
-type fmtRGB struct{}
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-func (fmtRGB) String() string                 { return "RGB" }
-func (fmtRGB) Check(d []byte, w, h int) error { return checkSize(d, w, h, 24) }
+type fmtRGB struct{ binary.Generate }
+
+func (*fmtRGB) String() string                 { return "RGB" }
+func (*fmtRGB) Check(d []byte, w, h int) error { return checkSize(d, w, h, 24) }
 
 // RGB returns a format containing an 8-bit red, green and blue channel per
 // pixel.
-func RGB() Format { return fmtRGB{} }
+func RGB() Format { return &fmtRGB{} }
 
 func init() {
 	RegisterConverter(RGB(), RGBA(),
