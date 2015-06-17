@@ -34,7 +34,7 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 
 	var wg sync.WaitGroup
 	for _, atomID := range request.AtomIDs {
-		imageInfoID, err := db.StoreRequest(&GetFramebufferColor{
+		id, err := db.StoreRequest(&GetFramebufferColor{
 			Capture:  request.Capture,
 			Device:   request.Device,
 			API:      request.API,
@@ -48,10 +48,9 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 			go func() {
 				defer wg.Done()
 
-				var imageInfo service.ImageInfo
-				if err := db.Load(imageInfoID, logger, &imageInfo); err == nil {
-					var dummy service.Binary
-					db.Load(imageInfo.Data.ID, logger, &dummy)
+				imageInfo, err := service.ResolveImageInfo(db, logger, service.ImageInfoId{ID: id})
+				if err == nil {
+					service.ResolveBinary(db, logger, imageInfo.Data)
 				}
 			}()
 		}

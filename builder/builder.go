@@ -199,18 +199,9 @@ func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, 
 	return c.ids, err
 }
 
-// LoadCapture loads and returns a Capture from a CaptureId.
-func LoadCapture(captureID service.CaptureId, db database.Database, logger log.Logger) (service.Capture, error) {
-	var capture service.Capture
-	if err := db.Load(captureID.ID, logger, &capture); err != nil {
-		return service.Capture{}, err
-	}
-	return capture, nil
-}
-
 func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.Logger) (atom.List, error) {
-	var stream service.AtomStream
-	if err := db.Load(streamID.ID, logger, &stream); err != nil {
+	stream, err := service.ResolveAtomStream(db, logger, streamID)
+	if err != nil {
 		return atom.List{}, err
 	}
 	atomList, err := stream.List()
@@ -268,7 +259,7 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 			panic(fmt.Errorf("Panic at atom %d: %v", id, err))
 		}
 	}()
-	capture, err := LoadCapture(request.Capture, d, l)
+	capture, err := service.ResolveCapture(d, l, request.Capture)
 	if err != nil {
 		return err
 	}

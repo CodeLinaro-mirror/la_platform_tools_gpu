@@ -26,7 +26,7 @@ import (
 
 // build writes to out the Hierarchy resource resulting from the given GetHierarchy request.
 func (request *GetHierarchy) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := LoadCapture(request.Capture, db, logger)
+	capture, err := service.ResolveCapture(db, logger, request.Capture)
 	if err != nil {
 		return err
 	}
