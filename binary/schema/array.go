@@ -46,11 +46,19 @@ type Stream struct {
 	ValueType Type   // The value type stored in the stream.
 }
 
-func (a *Array) String() string {
+func (a *Array) Basename() string {
+	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Basename())
+}
+
+func (a *Array) Typename() string {
 	if a.Alias != "" {
 		return a.Alias
 	}
-	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType)
+	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Typename())
+}
+
+func (a *Array) String() string {
+	return a.Typename()
 }
 
 func (a *Array) Encode(e binary.Encoder, value interface{}) error {
@@ -81,11 +89,19 @@ func (a *Array) Skip(d binary.Decoder) error {
 	return nil
 }
 
-func (s *Slice) String() string {
+func (s *Slice) Basename() string {
+	return fmt.Sprintf("[]%s", s.ValueType.Basename())
+}
+
+func (s *Slice) Typename() string {
 	if s.Alias != "" {
 		return s.Alias
 	}
-	return fmt.Sprintf("[]%s", s.ValueType)
+	return fmt.Sprintf("[]%s", s.ValueType.Typename())
+}
+
+func (s *Slice) String() string {
+	return s.Typename()
 }
 
 func (s *Slice) Encode(e binary.Encoder, value interface{}) error {
@@ -126,11 +142,19 @@ func (s *Slice) Skip(d binary.Decoder) error {
 	return nil
 }
 
-func (s *Stream) String() string {
+func (s *Stream) Basename() string {
+	return fmt.Sprintf("[]%s", s.ValueType.Basename())
+}
+
+func (s *Stream) Typename() string {
 	if s.Alias != "" {
 		return s.Alias
 	}
-	return fmt.Sprintf("[]%s", s.ValueType)
+	return fmt.Sprintf("[]%s", s.ValueType.Typename())
+}
+
+func (s *Stream) String() string {
+	return s.Typename()
 }
 
 func (s *Stream) Encode(e binary.Encoder, value interface{}) error {
