@@ -305,6 +305,11 @@ void GlesImports::Resolve() {
     glEnable = reinterpret_cast<PFNGLENABLE>(GetGfxProcAddress("glEnable", true));
     glDisable = reinterpret_cast<PFNGLDISABLE>(GetGfxProcAddress("glDisable", true));
     glIsEnabled = reinterpret_cast<PFNGLISENABLED>(GetGfxProcAddress("glIsEnabled", true));
+    glFenceSync = reinterpret_cast<PFNGLFENCESYNC>(GetGfxProcAddress("glFenceSync", true));
+    glDeleteSync = reinterpret_cast<PFNGLDELETESYNC>(GetGfxProcAddress("glDeleteSync", true));
+    glWaitSync = reinterpret_cast<PFNGLWAITSYNC>(GetGfxProcAddress("glWaitSync", true));
+    glClientWaitSync =
+            reinterpret_cast<PFNGLCLIENTWAITSYNC>(GetGfxProcAddress("glClientWaitSync", true));
     glMapBufferRange =
             reinterpret_cast<PFNGLMAPBUFFERRANGE>(GetGfxProcAddress("glMapBufferRange", true));
     glUnmapBuffer = reinterpret_cast<PFNGLUNMAPBUFFER>(GetGfxProcAddress("glUnmapBuffer", true));
@@ -339,6 +344,10 @@ void GlesImports::Resolve() {
             reinterpret_cast<PFNGLBINDVERTEXARRAY>(GetGfxProcAddress("glBindVertexArray", true));
     glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
             GetGfxProcAddress("glDeleteVertexArrays", true));
+    glGetQueryObjecti64v = reinterpret_cast<PFNGLGETQUERYOBJECTI64V>(
+            GetGfxProcAddress("glGetQueryObjecti64v", true));
+    glGetQueryObjectui64v = reinterpret_cast<PFNGLGETQUERYOBJECTUI64V>(
+            GetGfxProcAddress("glGetQueryObjectui64v", true));
     glGenQueriesEXT =
             reinterpret_cast<PFNGLGENQUERIESEXT>(GetGfxProcAddress("glGenQueriesEXT", true));
     glBeginQueryEXT =

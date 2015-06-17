@@ -202,44 +202,50 @@ static const uint16_t GlGetString = 174;
 static const uint16_t GlEnable = 175;
 static const uint16_t GlDisable = 176;
 static const uint16_t GlIsEnabled = 177;
-static const uint16_t GlMapBufferRange = 178;
-static const uint16_t GlUnmapBuffer = 179;
-static const uint16_t GlInvalidateFramebuffer = 180;
-static const uint16_t GlRenderbufferStorageMultisample = 181;
-static const uint16_t GlBlitFramebuffer = 182;
-static const uint16_t GlGenQueries = 183;
-static const uint16_t GlBeginQuery = 184;
-static const uint16_t GlEndQuery = 185;
-static const uint16_t GlDeleteQueries = 186;
-static const uint16_t GlIsQuery = 187;
-static const uint16_t GlGetQueryiv = 188;
-static const uint16_t GlGetQueryObjectuiv = 189;
-static const uint16_t GlGetActiveUniformBlockName = 190;
-static const uint16_t GlGetActiveUniformBlockiv = 191;
-static const uint16_t GlUniformBlockBinding = 192;
-static const uint16_t GlGetActiveUniformsiv = 193;
-static const uint16_t GlBindBufferBase = 194;
-static const uint16_t GlGenVertexArrays = 195;
-static const uint16_t GlBindVertexArray = 196;
-static const uint16_t GlDeleteVertexArrays = 197;
-static const uint16_t GlGenQueriesEXT = 198;
-static const uint16_t GlBeginQueryEXT = 199;
-static const uint16_t GlEndQueryEXT = 200;
-static const uint16_t GlDeleteQueriesEXT = 201;
-static const uint16_t GlIsQueryEXT = 202;
-static const uint16_t GlQueryCounterEXT = 203;
-static const uint16_t GlGetQueryivEXT = 204;
-static const uint16_t GlGetQueryObjectivEXT = 205;
-static const uint16_t GlGetQueryObjectuivEXT = 206;
-static const uint16_t GlGetQueryObjecti64vEXT = 207;
-static const uint16_t GlGetQueryObjectui64vEXT = 208;
-static const uint16_t Architecture = 209;
-static const uint16_t ReplayCreateRenderer = 210;
-static const uint16_t ReplayBindRenderer = 211;
-static const uint16_t BackbufferInfo = 212;
-static const uint16_t StartTimer = 213;
-static const uint16_t StopTimer = 214;
-static const uint16_t FlushPostBuffer = 215;
+static const uint16_t GlFenceSync = 178;
+static const uint16_t GlDeleteSync = 179;
+static const uint16_t GlWaitSync = 180;
+static const uint16_t GlClientWaitSync = 181;
+static const uint16_t GlMapBufferRange = 182;
+static const uint16_t GlUnmapBuffer = 183;
+static const uint16_t GlInvalidateFramebuffer = 184;
+static const uint16_t GlRenderbufferStorageMultisample = 185;
+static const uint16_t GlBlitFramebuffer = 186;
+static const uint16_t GlGenQueries = 187;
+static const uint16_t GlBeginQuery = 188;
+static const uint16_t GlEndQuery = 189;
+static const uint16_t GlDeleteQueries = 190;
+static const uint16_t GlIsQuery = 191;
+static const uint16_t GlGetQueryiv = 192;
+static const uint16_t GlGetQueryObjectuiv = 193;
+static const uint16_t GlGetActiveUniformBlockName = 194;
+static const uint16_t GlGetActiveUniformBlockiv = 195;
+static const uint16_t GlUniformBlockBinding = 196;
+static const uint16_t GlGetActiveUniformsiv = 197;
+static const uint16_t GlBindBufferBase = 198;
+static const uint16_t GlGenVertexArrays = 199;
+static const uint16_t GlBindVertexArray = 200;
+static const uint16_t GlDeleteVertexArrays = 201;
+static const uint16_t GlGetQueryObjecti64v = 202;
+static const uint16_t GlGetQueryObjectui64v = 203;
+static const uint16_t GlGenQueriesEXT = 204;
+static const uint16_t GlBeginQueryEXT = 205;
+static const uint16_t GlEndQueryEXT = 206;
+static const uint16_t GlDeleteQueriesEXT = 207;
+static const uint16_t GlIsQueryEXT = 208;
+static const uint16_t GlQueryCounterEXT = 209;
+static const uint16_t GlGetQueryivEXT = 210;
+static const uint16_t GlGetQueryObjectivEXT = 211;
+static const uint16_t GlGetQueryObjectuivEXT = 212;
+static const uint16_t GlGetQueryObjecti64vEXT = 213;
+static const uint16_t GlGetQueryObjectui64vEXT = 214;
+static const uint16_t Architecture = 215;
+static const uint16_t ReplayCreateRenderer = 216;
+static const uint16_t ReplayBindRenderer = 217;
+static const uint16_t BackbufferInfo = 218;
+static const uint16_t StartTimer = 219;
+static const uint16_t StopTimer = 220;
+static const uint16_t FlushPostBuffer = 221;
 }  // namespace FunctionIds
 
 enum class DrawMode : uint32_t {
@@ -931,6 +937,21 @@ enum class MapBufferRangeAccess : uint32_t {
     GL_MAP_UNSYNCHRONIZED_BIT = 32,
 };
 
+enum class SyncCondition : uint32_t {
+    GL_SYNC_GPU_COMMANDS_COMPLETE = 37143,
+};
+
+enum class ClientWaitSyncSignal : uint32_t {
+    GL_ALREADY_SIGNALED = 37146,
+    GL_TIMEOUT_EXPIRED = 37147,
+    GL_CONDITION_SATISFIED = 37148,
+    GL_WAIT_FAILED = 37149,
+};
+
+enum class SyncFlags : uint32_t {
+    GL_SYNC_FLUSH_COMMANDS_BIT = 1,
+};
+
 typedef int32_t Vec2i;
 typedef int32_t Vec3i;
 typedef int32_t Vec4i;
@@ -975,6 +996,7 @@ typedef void *CGSConnectionID;
 typedef int32_t CGSWindowID;
 typedef int32_t CGSSurfaceID;
 typedef void *ImageOES;
+typedef uint64_t SyncObject;
 
 typedef int(STDCALL *PFNEGLINITIALIZE)(void *dpy, int *major, int *minor);
 typedef void *(STDCALL *PFNEGLCREATECONTEXT)(void *display, void *config, void *share_context,
@@ -1239,6 +1261,11 @@ typedef char *(STDCALL *PFNGLGETSTRING)(StringConstant param);
 typedef void(STDCALL *PFNGLENABLE)(Capability capability);
 typedef void(STDCALL *PFNGLDISABLE)(Capability capability);
 typedef bool(STDCALL *PFNGLISENABLED)(Capability capability);
+typedef uint64_t(STDCALL *PFNGLFENCESYNC)(SyncCondition condition, SyncFlags syncFlags);
+typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
+typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, SyncFlags syncFlags, uint64_t timeout);
+typedef ClientWaitSyncSignal(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, SyncFlags syncFlags,
+                                                           uint64_t timeout);
 typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(BufferTarget target, int32_t offset, int32_t length,
                                              MapBufferRangeAccess access);
 typedef void(STDCALL *PFNGLUNMAPBUFFER)(BufferTarget target);
@@ -1279,6 +1306,10 @@ typedef void(STDCALL *PFNGLBINDBUFFERBASE)(IndexedBufferTarget target, uint32_t 
 typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
 typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
 typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, QueryObjectParameter parameter,
+                                               int64_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, QueryObjectParameter parameter,
+                                                uint64_t *value);
 typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
 typedef void(STDCALL *PFNGLBEGINQUERYEXT)(QueryTarget target, uint32_t query);
 typedef void(STDCALL *PFNGLENDQUERYEXT)(QueryTarget target);
@@ -1474,6 +1505,10 @@ extern PFNGLGETSTRING glGetString;
 extern PFNGLENABLE glEnable;
 extern PFNGLDISABLE glDisable;
 extern PFNGLISENABLED glIsEnabled;
+extern PFNGLFENCESYNC glFenceSync;
+extern PFNGLDELETESYNC glDeleteSync;
+extern PFNGLWAITSYNC glWaitSync;
+extern PFNGLCLIENTWAITSYNC glClientWaitSync;
 extern PFNGLMAPBUFFERRANGE glMapBufferRange;
 extern PFNGLUNMAPBUFFER glUnmapBuffer;
 extern PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer;
@@ -1494,6 +1529,8 @@ extern PFNGLBINDBUFFERBASE glBindBufferBase;
 extern PFNGLGENVERTEXARRAYS glGenVertexArrays;
 extern PFNGLBINDVERTEXARRAY glBindVertexArray;
 extern PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
+extern PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v;
+extern PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v;
 extern PFNGLGENQUERIESEXT glGenQueriesEXT;
 extern PFNGLBEGINQUERYEXT glBeginQueryEXT;
 extern PFNGLENDQUERYEXT glEndQueryEXT;

@@ -289,6 +289,11 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLENABLE)(uint32_t capability);
     typedef void(STDCALL *PFNGLDISABLE)(uint32_t capability);
     typedef bool(STDCALL *PFNGLISENABLED)(uint32_t capability);
+    typedef uint64_t(STDCALL *PFNGLFENCESYNC)(uint32_t condition, uint32_t syncFlags);
+    typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
+    typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+    typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, uint32_t syncFlags,
+                                                   uint64_t timeout);
     typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(uint32_t target, int32_t offset, int32_t length,
                                                  uint32_t access);
     typedef void(STDCALL *PFNGLUNMAPBUFFER)(uint32_t target);
@@ -327,6 +332,10 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
     typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
     typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, uint32_t parameter,
+                                                   int64_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, uint32_t parameter,
+                                                    uint64_t *value);
     typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
     typedef void(STDCALL *PFNGLBEGINQUERYEXT)(uint32_t target, uint32_t query);
     typedef void(STDCALL *PFNGLENDQUERYEXT)(uint32_t target);
@@ -521,6 +530,10 @@ struct GlesImports {
     PFNGLENABLE glEnable;
     PFNGLDISABLE glDisable;
     PFNGLISENABLED glIsEnabled;
+    PFNGLFENCESYNC glFenceSync;
+    PFNGLDELETESYNC glDeleteSync;
+    PFNGLWAITSYNC glWaitSync;
+    PFNGLCLIENTWAITSYNC glClientWaitSync;
     PFNGLMAPBUFFERRANGE glMapBufferRange;
     PFNGLUNMAPBUFFER glUnmapBuffer;
     PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer;
@@ -541,6 +554,8 @@ struct GlesImports {
     PFNGLGENVERTEXARRAYS glGenVertexArrays;
     PFNGLBINDVERTEXARRAY glBindVertexArray;
     PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
+    PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v;
+    PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v;
     PFNGLGENQUERIESEXT glGenQueriesEXT;
     PFNGLBEGINQUERYEXT glBeginQueryEXT;
     PFNGLENDQUERYEXT glEndQueryEXT;

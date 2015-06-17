@@ -120,6 +120,7 @@ func init() {
 	registry.Add((*GlClearColor)(nil).Class())
 	registry.Add((*GlClearDepthf)(nil).Class())
 	registry.Add((*GlClearStencil)(nil).Class())
+	registry.Add((*GlClientWaitSync)(nil).Class())
 	registry.Add((*GlColorMask)(nil).Class())
 	registry.Add((*GlCompileShader)(nil).Class())
 	registry.Add((*TexturePointer)(nil).Class())
@@ -139,6 +140,7 @@ func init() {
 	registry.Add((*RenderbufferIdᵖ)(nil).Class())
 	registry.Add((*GlDeleteRenderbuffers)(nil).Class())
 	registry.Add((*GlDeleteShader)(nil).Class())
+	registry.Add((*GlDeleteSync)(nil).Class())
 	registry.Add((*TextureIdᵖ)(nil).Class())
 	registry.Add((*GlDeleteTextures)(nil).Class())
 	registry.Add((*VertexArrayIdᵖ)(nil).Class())
@@ -164,6 +166,7 @@ func init() {
 	registry.Add((*GlEndQuery)(nil).Class())
 	registry.Add((*GlEndQueryEXT)(nil).Class())
 	registry.Add((*GlEndTilingQCOM)(nil).Class())
+	registry.Add((*GlFenceSync)(nil).Class())
 	registry.Add((*GlFinish)(nil).Class())
 	registry.Add((*GlFlush)(nil).Class())
 	registry.Add((*GlFramebufferRenderbuffer)(nil).Class())
@@ -201,9 +204,11 @@ func init() {
 	registry.Add((*GlGetProgramInfoLog)(nil).Class())
 	registry.Add((*GlGetProgramiv)(nil).Class())
 	registry.Add((*S64ᵖ)(nil).Class())
+	registry.Add((*GlGetQueryObjecti64v)(nil).Class())
 	registry.Add((*GlGetQueryObjecti64vEXT)(nil).Class())
 	registry.Add((*GlGetQueryObjectivEXT)(nil).Class())
 	registry.Add((*U64ᵖ)(nil).Class())
+	registry.Add((*GlGetQueryObjectui64v)(nil).Class())
 	registry.Add((*GlGetQueryObjectui64vEXT)(nil).Class())
 	registry.Add((*GlGetQueryObjectuiv)(nil).Class())
 	registry.Add((*GlGetQueryObjectuivEXT)(nil).Class())
@@ -298,6 +303,7 @@ func init() {
 	registry.Add((*GlVertexAttrib4fv)(nil).Class())
 	registry.Add((*GlVertexAttribPointer)(nil).Class())
 	registry.Add((*GlViewport)(nil).Class())
+	registry.Add((*GlWaitSync)(nil).Class())
 	registry.Add((*GlXCreateContext)(nil).Class())
 	registry.Add((*GlXCreateNewContext)(nil).Class())
 	registry.Add((*GlXMakeContextCurrent)(nil).Class())
@@ -470,6 +476,7 @@ var (
 	binaryIDGlClearColor                           = binary.ID{0x3b, 0x2c, 0x7f, 0xdf, 0xca, 0xea, 0x73, 0xe9, 0x9d, 0xaa, 0xb9, 0x94, 0x97, 0xc8, 0xc0, 0x1d, 0x7e, 0x0f, 0xa6, 0xc2}
 	binaryIDGlClearDepthf                          = binary.ID{0x64, 0x57, 0xb0, 0xf4, 0x14, 0x5f, 0xfd, 0x32, 0x8a, 0x6d, 0x28, 0xec, 0xb9, 0x33, 0x25, 0xc9, 0x28, 0x9c, 0x97, 0x04}
 	binaryIDGlClearStencil                         = binary.ID{0x7c, 0xd3, 0x47, 0x40, 0xf0, 0x5d, 0xcc, 0xec, 0x2e, 0x49, 0xea, 0x0d, 0x3e, 0x90, 0xda, 0xf2, 0x95, 0xb8, 0xcb, 0xe2}
+	binaryIDGlClientWaitSync                       = binary.ID{0xea, 0x1e, 0x79, 0x45, 0x87, 0x25, 0x3c, 0x33, 0xcb, 0xc3, 0x9c, 0x40, 0x3c, 0x47, 0xdd, 0xee, 0x6a, 0x11, 0xa4, 0x5f}
 	binaryIDGlColorMask                            = binary.ID{0x0b, 0x72, 0x03, 0xf6, 0x51, 0x6a, 0xe3, 0xca, 0x0c, 0x5d, 0x08, 0x46, 0xf6, 0x8b, 0x71, 0xdf, 0x67, 0xe5, 0xae, 0xf9}
 	binaryIDGlCompileShader                        = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
 	binaryIDTexturePointer                         = binary.ID{0xb6, 0x31, 0x39, 0xfa, 0x37, 0x1c, 0x57, 0x16, 0x83, 0x12, 0x2a, 0xe9, 0x1c, 0xa8, 0x0f, 0x9d, 0xaf, 0xcf, 0xb3, 0xa3}
@@ -489,6 +496,7 @@ var (
 	binaryIDRenderbufferIdᵖ                        = binary.ID{0x18, 0xae, 0x51, 0x0d, 0xb7, 0xf3, 0xf8, 0xe7, 0x47, 0x3f, 0x5d, 0x29, 0xf8, 0x43, 0x60, 0xe2, 0x5a, 0x2d, 0xa6, 0x9b}
 	binaryIDGlDeleteRenderbuffers                  = binary.ID{0xc7, 0x91, 0x63, 0x48, 0xf4, 0xe3, 0xea, 0x86, 0x4b, 0x3c, 0x40, 0x44, 0x6c, 0x5d, 0x8c, 0x87, 0xb9, 0x7d, 0x26, 0x4b}
 	binaryIDGlDeleteShader                         = binary.ID{0x11, 0xd1, 0xa7, 0x92, 0xf4, 0x7b, 0x74, 0x2a, 0xac, 0x29, 0x4f, 0x42, 0x17, 0x9c, 0x3e, 0xb9, 0x03, 0x8d, 0xbd, 0xe7}
+	binaryIDGlDeleteSync                           = binary.ID{0x65, 0x90, 0x00, 0x50, 0x30, 0x0f, 0xb5, 0x2b, 0x84, 0x77, 0xef, 0x13, 0x40, 0x76, 0x93, 0x58, 0x9e, 0x0a, 0xd0, 0xce}
 	binaryIDTextureIdᵖ                             = binary.ID{0x99, 0x6c, 0x61, 0x83, 0x7a, 0xc0, 0x86, 0x16, 0x1a, 0x93, 0x45, 0x97, 0x32, 0x66, 0x80, 0x91, 0xd1, 0x87, 0xd1, 0x8e}
 	binaryIDGlDeleteTextures                       = binary.ID{0x8e, 0x87, 0xbe, 0x83, 0xfc, 0x68, 0xab, 0x65, 0x39, 0x6d, 0x29, 0xe8, 0x91, 0x0a, 0xb4, 0x3b, 0x72, 0x6b, 0x87, 0xdc}
 	binaryIDVertexArrayIdᵖ                         = binary.ID{0xfb, 0x13, 0x6e, 0xf5, 0x8d, 0x52, 0xf5, 0xb2, 0xb5, 0x02, 0x1f, 0x10, 0x15, 0x84, 0x51, 0xb2, 0xc6, 0x8b, 0xc5, 0x5f}
@@ -514,6 +522,7 @@ var (
 	binaryIDGlEndQuery                             = binary.ID{0xb0, 0xc0, 0x56, 0x8b, 0xa4, 0xc3, 0x2b, 0xde, 0xb0, 0xaa, 0x61, 0xa9, 0x06, 0x63, 0x1b, 0xc6, 0xe2, 0x5b, 0xa0, 0x42}
 	binaryIDGlEndQueryEXT                          = binary.ID{0x12, 0x04, 0x23, 0x20, 0x96, 0x9c, 0x40, 0xb8, 0x80, 0xfe, 0x76, 0x70, 0x48, 0xdf, 0x81, 0x60, 0xb1, 0x23, 0xab, 0x12}
 	binaryIDGlEndTilingQCOM                        = binary.ID{0x51, 0x3b, 0x7d, 0x13, 0xa0, 0xbc, 0xcf, 0x24, 0x84, 0x9a, 0xc3, 0x78, 0x7e, 0x2c, 0xe4, 0x23, 0x6e, 0x23, 0xdd, 0x9a}
+	binaryIDGlFenceSync                            = binary.ID{0x30, 0x0f, 0xf7, 0x76, 0x20, 0x97, 0x0a, 0x1b, 0xcb, 0x08, 0xeb, 0x6f, 0x98, 0x6f, 0xfd, 0x5f, 0x88, 0x85, 0x23, 0x2f}
 	binaryIDGlFinish                               = binary.ID{0x62, 0xe9, 0xca, 0xf4, 0x39, 0xd8, 0x39, 0x1e, 0x49, 0x43, 0x1f, 0x40, 0xbb, 0x3d, 0x1b, 0x11, 0xc9, 0x5c, 0x9a, 0xf9}
 	binaryIDGlFlush                                = binary.ID{0x63, 0x83, 0x26, 0x9a, 0x10, 0x6b, 0x68, 0x9f, 0x90, 0x65, 0x54, 0xba, 0x66, 0x25, 0xc8, 0x09, 0x24, 0xe3, 0x21, 0x00}
 	binaryIDGlFramebufferRenderbuffer              = binary.ID{0x08, 0x60, 0xdc, 0xd3, 0x3d, 0xe4, 0xdf, 0xea, 0xb9, 0x9c, 0xa5, 0xd2, 0x51, 0x4b, 0x35, 0x5a, 0xf0, 0xc7, 0xd6, 0xe2}
@@ -551,9 +560,11 @@ var (
 	binaryIDGlGetProgramInfoLog                    = binary.ID{0x7f, 0xd8, 0xe7, 0x8b, 0xf6, 0xa4, 0x9e, 0xe4, 0xcd, 0xbf, 0x72, 0x0d, 0xc9, 0xc0, 0xdc, 0xb0, 0x5e, 0x3c, 0x52, 0x21}
 	binaryIDGlGetProgramiv                         = binary.ID{0x0c, 0x30, 0x8a, 0xb8, 0x12, 0x64, 0xb2, 0x25, 0xfe, 0x4c, 0x3e, 0xaf, 0x2c, 0x0d, 0x05, 0x67, 0x8f, 0x95, 0xb2, 0x41}
 	binaryIDS64ᵖ                                   = binary.ID{0x94, 0xcc, 0x14, 0xe7, 0xe5, 0xaa, 0x45, 0x47, 0x68, 0x47, 0x60, 0x90, 0x4d, 0x40, 0x9e, 0x4e, 0xa3, 0x65, 0x3a, 0x9b}
+	binaryIDGlGetQueryObjecti64v                   = binary.ID{0x64, 0xaa, 0xa7, 0x71, 0xe5, 0xb1, 0x66, 0x92, 0x4b, 0xe7, 0x40, 0x95, 0x8d, 0xa8, 0xa7, 0x4f, 0x9a, 0x6b, 0xcc, 0xc8}
 	binaryIDGlGetQueryObjecti64vEXT                = binary.ID{0x4d, 0xad, 0xff, 0x92, 0xcd, 0xd0, 0xac, 0xe7, 0x0e, 0x9f, 0xa7, 0x7b, 0x91, 0x31, 0xfb, 0x37, 0xea, 0x2c, 0xbd, 0x9c}
 	binaryIDGlGetQueryObjectivEXT                  = binary.ID{0x83, 0xd8, 0xfe, 0x13, 0x5b, 0xce, 0x42, 0x6f, 0x82, 0xbc, 0x0b, 0xfe, 0x33, 0xae, 0xd6, 0x73, 0x87, 0xe4, 0x95, 0xad}
 	binaryIDU64ᵖ                                   = binary.ID{0x5b, 0xb1, 0xae, 0xc9, 0xd5, 0x8f, 0x30, 0x22, 0xf4, 0x8f, 0x96, 0xf2, 0x6f, 0xb2, 0x65, 0xa7, 0xfd, 0xfb, 0xae, 0x50}
+	binaryIDGlGetQueryObjectui64v                  = binary.ID{0xcb, 0xd2, 0x0b, 0x21, 0x98, 0x10, 0x2c, 0x9c, 0x98, 0xbb, 0x71, 0x6e, 0xc2, 0x2c, 0x5b, 0x24, 0x3a, 0xc2, 0x11, 0x66}
 	binaryIDGlGetQueryObjectui64vEXT               = binary.ID{0x5d, 0x7e, 0xa2, 0xff, 0x4b, 0x0c, 0x64, 0x67, 0xbf, 0x8e, 0xe0, 0x4c, 0x78, 0xd5, 0x6c, 0xb3, 0xf9, 0xc1, 0x47, 0xe5}
 	binaryIDGlGetQueryObjectuiv                    = binary.ID{0xac, 0x6d, 0xbf, 0x24, 0x6d, 0xf4, 0xd4, 0x03, 0x1b, 0x6f, 0xfe, 0xc4, 0xa0, 0xa7, 0xf7, 0x21, 0xe9, 0x73, 0x96, 0x06}
 	binaryIDGlGetQueryObjectuivEXT                 = binary.ID{0xa5, 0xa4, 0x75, 0x56, 0xa4, 0x9f, 0xc4, 0x89, 0xa3, 0xd6, 0x58, 0x74, 0xfc, 0xd1, 0x52, 0xd7, 0xd0, 0x3e, 0x83, 0x66}
@@ -648,6 +659,7 @@ var (
 	binaryIDGlVertexAttrib4fv                      = binary.ID{0xef, 0xb2, 0x40, 0xe1, 0xb9, 0xd1, 0x42, 0x98, 0x84, 0x6f, 0xa0, 0xeb, 0x0f, 0x22, 0x31, 0x6c, 0x79, 0xb5, 0x22, 0xc9}
 	binaryIDGlVertexAttribPointer                  = binary.ID{0x9d, 0xd0, 0xda, 0x47, 0xd9, 0x9e, 0x24, 0x1d, 0x75, 0x48, 0x0f, 0x8d, 0x27, 0x76, 0x63, 0x2d, 0x79, 0x41, 0xb8, 0xca}
 	binaryIDGlViewport                             = binary.ID{0x96, 0x41, 0xef, 0xd3, 0x17, 0x6b, 0x50, 0x3c, 0xeb, 0x46, 0x86, 0x49, 0x1c, 0x1b, 0xec, 0x65, 0xe1, 0xe0, 0xa7, 0xcb}
+	binaryIDGlWaitSync                             = binary.ID{0x96, 0xae, 0xf7, 0x2a, 0x78, 0xbc, 0x46, 0xe3, 0xbb, 0x46, 0x02, 0xce, 0x80, 0x2a, 0xa9, 0xed, 0x43, 0xfc, 0xb1, 0x58}
 	binaryIDGlXCreateContext                       = binary.ID{0x69, 0xd6, 0x87, 0x67, 0x9c, 0x50, 0x4f, 0xe6, 0x49, 0x6b, 0x1a, 0x51, 0x2f, 0xd7, 0x22, 0x72, 0x8e, 0x01, 0xda, 0x6e}
 	binaryIDGlXCreateNewContext                    = binary.ID{0x84, 0x7e, 0x5e, 0x97, 0x8c, 0x27, 0x99, 0x7b, 0x5e, 0xd5, 0x5f, 0xc8, 0xd5, 0xc1, 0x5e, 0x0c, 0x90, 0x64, 0xf7, 0x43}
 	binaryIDGlXMakeContextCurrent                  = binary.ID{0x4e, 0x6d, 0x3c, 0x63, 0x7f, 0x49, 0x79, 0x4e, 0x3d, 0xd0, 0xd9, 0x0c, 0xcf, 0x72, 0x94, 0x3f, 0x6b, 0xfd, 0x77, 0xfd}
@@ -9546,6 +9558,100 @@ var schemaGlClearStencil = &schema.Class{
 	},
 }
 
+type binaryClassGlClientWaitSync struct{}
+
+func (*GlClientWaitSync) Class() binary.Class {
+	return (*binaryClassGlClientWaitSync)(nil)
+}
+func doEncodeGlClientWaitSync(e binary.Encoder, o *GlClientWaitSync) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Sync)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SyncFlags)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Timeout); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlClientWaitSync(d binary.Decoder, o *GlClientWaitSync) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Sync = SyncObject(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SyncFlags = SyncFlags(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Timeout = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Result = ClientWaitSyncSignal(obj)
+	}
+	return nil
+}
+func doSkipGlClientWaitSync(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlClientWaitSync) ID() binary.ID      { return binaryIDGlClientWaitSync }
+func (*binaryClassGlClientWaitSync) New() binary.Object { return &GlClientWaitSync{} }
+func (*binaryClassGlClientWaitSync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlClientWaitSync(e, obj.(*GlClientWaitSync))
+}
+func (*binaryClassGlClientWaitSync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlClientWaitSync{}
+	return obj, doDecodeGlClientWaitSync(d, obj)
+}
+func (*binaryClassGlClientWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlClientWaitSync(d, obj.(*GlClientWaitSync))
+}
+func (*binaryClassGlClientWaitSync) Skip(d binary.Decoder) error { return doSkipGlClientWaitSync(d) }
+func (*binaryClassGlClientWaitSync) Schema() *schema.Class       { return schemaGlClientWaitSync }
+
+var schemaGlClientWaitSync = &schema.Class{
+	TypeID: binaryIDGlClientWaitSync,
+	Name:   "GlClientWaitSync",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
+		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "SyncFlags", Method: schema.Uint32}},
+		{Declared: "Timeout", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "ClientWaitSyncSignal", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlColorMask struct{}
 
 func (*GlColorMask) Class() binary.Class {
@@ -11105,6 +11211,64 @@ var schemaGlDeleteShader = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlDeleteSync struct{}
+
+func (*GlDeleteSync) Class() binary.Class {
+	return (*binaryClassGlDeleteSync)(nil)
+}
+func doEncodeGlDeleteSync(e binary.Encoder, o *GlDeleteSync) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Sync)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlDeleteSync(d binary.Decoder, o *GlDeleteSync) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Sync = SyncObject(obj)
+	}
+	return nil
+}
+func doSkipGlDeleteSync(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlDeleteSync) ID() binary.ID      { return binaryIDGlDeleteSync }
+func (*binaryClassGlDeleteSync) New() binary.Object { return &GlDeleteSync{} }
+func (*binaryClassGlDeleteSync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlDeleteSync(e, obj.(*GlDeleteSync))
+}
+func (*binaryClassGlDeleteSync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlDeleteSync{}
+	return obj, doDecodeGlDeleteSync(d, obj)
+}
+func (*binaryClassGlDeleteSync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlDeleteSync(d, obj.(*GlDeleteSync))
+}
+func (*binaryClassGlDeleteSync) Skip(d binary.Decoder) error { return doSkipGlDeleteSync(d) }
+func (*binaryClassGlDeleteSync) Schema() *schema.Class       { return schemaGlDeleteSync }
+
+var schemaGlDeleteSync = &schema.Class{
+	TypeID: binaryIDGlDeleteSync,
+	Name:   "GlDeleteSync",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
 	},
 }
 
@@ -12759,6 +12923,88 @@ var schemaGlEndTilingQCOM = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlFenceSync struct{}
+
+func (*GlFenceSync) Class() binary.Class {
+	return (*binaryClassGlFenceSync)(nil)
+}
+func doEncodeGlFenceSync(e binary.Encoder, o *GlFenceSync) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Condition)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SyncFlags)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlFenceSync(d binary.Decoder, o *GlFenceSync) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Condition = SyncCondition(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SyncFlags = SyncFlags(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Result = SyncObject(obj)
+	}
+	return nil
+}
+func doSkipGlFenceSync(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlFenceSync) ID() binary.ID      { return binaryIDGlFenceSync }
+func (*binaryClassGlFenceSync) New() binary.Object { return &GlFenceSync{} }
+func (*binaryClassGlFenceSync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlFenceSync(e, obj.(*GlFenceSync))
+}
+func (*binaryClassGlFenceSync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlFenceSync{}
+	return obj, doDecodeGlFenceSync(d, obj)
+}
+func (*binaryClassGlFenceSync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlFenceSync(d, obj.(*GlFenceSync))
+}
+func (*binaryClassGlFenceSync) Skip(d binary.Decoder) error { return doSkipGlFenceSync(d) }
+func (*binaryClassGlFenceSync) Schema() *schema.Class       { return schemaGlFenceSync }
+
+var schemaGlFenceSync = &schema.Class{
+	TypeID: binaryIDGlFenceSync,
+	Name:   "GlFenceSync",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Condition", Type: &schema.Primitive{Name: "SyncCondition", Method: schema.Uint32}},
+		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "SyncFlags", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
 	},
 }
 
@@ -15600,6 +15846,88 @@ var schemaS64ᵖ = &schema.Class{
 	},
 }
 
+type binaryClassGlGetQueryObjecti64v struct{}
+
+func (*GlGetQueryObjecti64v) Class() binary.Class {
+	return (*binaryClassGlGetQueryObjecti64v)(nil)
+}
+func doEncodeGlGetQueryObjecti64v(e binary.Encoder, o *GlGetQueryObjecti64v) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Query)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Parameter)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetQueryObjecti64v(d binary.Decoder, o *GlGetQueryObjecti64v) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Query = QueryId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Parameter = QueryObjectParameter(obj)
+	}
+	if err := d.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetQueryObjecti64v(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetQueryObjecti64v) ID() binary.ID      { return binaryIDGlGetQueryObjecti64v }
+func (*binaryClassGlGetQueryObjecti64v) New() binary.Object { return &GlGetQueryObjecti64v{} }
+func (*binaryClassGlGetQueryObjecti64v) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetQueryObjecti64v(e, obj.(*GlGetQueryObjecti64v))
+}
+func (*binaryClassGlGetQueryObjecti64v) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetQueryObjecti64v{}
+	return obj, doDecodeGlGetQueryObjecti64v(d, obj)
+}
+func (*binaryClassGlGetQueryObjecti64v) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetQueryObjecti64v(d, obj.(*GlGetQueryObjecti64v))
+}
+func (*binaryClassGlGetQueryObjecti64v) Skip(d binary.Decoder) error {
+	return doSkipGlGetQueryObjecti64v(d)
+}
+func (*binaryClassGlGetQueryObjecti64v) Schema() *schema.Class { return schemaGlGetQueryObjecti64v }
+
+var schemaGlGetQueryObjecti64v = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjecti64v,
+	Name:   "GlGetQueryObjecti64v",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S64ᵖ"}},
+	},
+}
+
 type binaryClassGlGetQueryObjecti64vEXT struct{}
 
 func (*GlGetQueryObjecti64vEXT) Class() binary.Class {
@@ -15823,6 +16151,88 @@ var schemaU64ᵖ = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlGetQueryObjectui64v struct{}
+
+func (*GlGetQueryObjectui64v) Class() binary.Class {
+	return (*binaryClassGlGetQueryObjectui64v)(nil)
+}
+func doEncodeGlGetQueryObjectui64v(e binary.Encoder, o *GlGetQueryObjectui64v) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Query)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Parameter)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlGetQueryObjectui64v(d binary.Decoder, o *GlGetQueryObjectui64v) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Query = QueryId(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Parameter = QueryObjectParameter(obj)
+	}
+	if err := d.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGlGetQueryObjectui64v(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlGetQueryObjectui64v) ID() binary.ID      { return binaryIDGlGetQueryObjectui64v }
+func (*binaryClassGlGetQueryObjectui64v) New() binary.Object { return &GlGetQueryObjectui64v{} }
+func (*binaryClassGlGetQueryObjectui64v) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlGetQueryObjectui64v(e, obj.(*GlGetQueryObjectui64v))
+}
+func (*binaryClassGlGetQueryObjectui64v) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlGetQueryObjectui64v{}
+	return obj, doDecodeGlGetQueryObjectui64v(d, obj)
+}
+func (*binaryClassGlGetQueryObjectui64v) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlGetQueryObjectui64v(d, obj.(*GlGetQueryObjectui64v))
+}
+func (*binaryClassGlGetQueryObjectui64v) Skip(d binary.Decoder) error {
+	return doSkipGlGetQueryObjectui64v(d)
+}
+func (*binaryClassGlGetQueryObjectui64v) Schema() *schema.Class { return schemaGlGetQueryObjectui64v }
+
+var schemaGlGetQueryObjectui64v = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjectui64v,
+	Name:   "GlGetQueryObjectui64v",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U64ᵖ"}},
 	},
 }
 
@@ -23752,6 +24162,88 @@ var schemaGlViewport = &schema.Class{
 	},
 }
 
+type binaryClassGlWaitSync struct{}
+
+func (*GlWaitSync) Class() binary.Class {
+	return (*binaryClassGlWaitSync)(nil)
+}
+func doEncodeGlWaitSync(e binary.Encoder, o *GlWaitSync) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Sync)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SyncFlags)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Timeout); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlWaitSync(d binary.Decoder, o *GlWaitSync) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Sync = SyncObject(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SyncFlags = SyncFlags(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Timeout = uint64(obj)
+	}
+	return nil
+}
+func doSkipGlWaitSync(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlWaitSync) ID() binary.ID      { return binaryIDGlWaitSync }
+func (*binaryClassGlWaitSync) New() binary.Object { return &GlWaitSync{} }
+func (*binaryClassGlWaitSync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlWaitSync(e, obj.(*GlWaitSync))
+}
+func (*binaryClassGlWaitSync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlWaitSync{}
+	return obj, doDecodeGlWaitSync(d, obj)
+}
+func (*binaryClassGlWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlWaitSync(d, obj.(*GlWaitSync))
+}
+func (*binaryClassGlWaitSync) Skip(d binary.Decoder) error { return doSkipGlWaitSync(d) }
+func (*binaryClassGlWaitSync) Schema() *schema.Class       { return schemaGlWaitSync }
+
+var schemaGlWaitSync = &schema.Class{
+	TypeID: binaryIDGlWaitSync,
+	Name:   "GlWaitSync",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
+		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "SyncFlags", Method: schema.Uint32}},
+		{Declared: "Timeout", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
+
 type binaryClassGlXCreateContext struct{}
 
 func (*GlXCreateContext) Class() binary.Class {
@@ -28058,6 +28550,32 @@ func (v *ClearMask) Parse(s string) error {
 	return fmt.Errorf("%s not in ClearMask", s)
 }
 
+const _ClientWaitSyncSignal_name = "GL_ALREADY_SIGNALEDGL_TIMEOUT_EXPIREDGL_CONDITION_SATISFIEDGL_WAIT_FAILED"
+
+var _ClientWaitSyncSignal_map = map[ClientWaitSyncSignal]string{
+	37146: _ClientWaitSyncSignal_name[0:19],
+	37147: _ClientWaitSyncSignal_name[19:37],
+	37148: _ClientWaitSyncSignal_name[37:59],
+	37149: _ClientWaitSyncSignal_name[59:73],
+}
+
+func (v ClientWaitSyncSignal) String() string {
+	if s, ok := _ClientWaitSyncSignal_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ClientWaitSyncSignal(%d)", v)
+}
+
+func (v *ClientWaitSyncSignal) Parse(s string) error {
+	for k, t := range _ClientWaitSyncSignal_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ClientWaitSyncSignal", s)
+}
+
 const _CompressedTexelFormat_AMD_compressed_ATC_texture_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
 
 var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelFormat_AMD_compressed_ATC_texture]string{
@@ -29571,6 +30089,52 @@ func (v *StringConstant) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in StringConstant", s)
+}
+
+const _SyncCondition_name = "GL_SYNC_GPU_COMMANDS_COMPLETE"
+
+var _SyncCondition_map = map[SyncCondition]string{
+	37143: _SyncCondition_name[0:29],
+}
+
+func (v SyncCondition) String() string {
+	if s, ok := _SyncCondition_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("SyncCondition(%d)", v)
+}
+
+func (v *SyncCondition) Parse(s string) error {
+	for k, t := range _SyncCondition_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in SyncCondition", s)
+}
+
+const _SyncFlags_name = "GL_SYNC_FLUSH_COMMANDS_BIT"
+
+var _SyncFlags_map = map[SyncFlags]string{
+	1: _SyncFlags_name[0:26],
+}
+
+func (v SyncFlags) String() string {
+	if s, ok := _SyncFlags_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("SyncFlags(%d)", v)
+}
+
+func (v *SyncFlags) Parse(s string) error {
+	for k, t := range _SyncFlags_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in SyncFlags", s)
 }
 
 const _TestFunction_name = "GL_NEVERGL_LESSGL_EQUALGL_LEQUALGL_GREATERGL_NOTEQUALGL_GEQUALGL_ALWAYS"

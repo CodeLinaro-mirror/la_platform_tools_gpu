@@ -344,7 +344,6 @@ class ClearState {
 @replay_remap type u32 ProgramId
 @replay_remap type u32 VertexArrayId
 @replay_remap type u32 QueryId
-// @replay_remap type u32 SyncObjectId
 @replay_remap type s32 UniformLocation
 
 type s32 AttributeLocation
@@ -363,7 +362,6 @@ class Objects {
     map!(ShaderId,       ref!Shader)            Shaders
     map!(ProgramId,      ref!Program)           Programs
     map!(VertexArrayId,  ref!VertexArray)       VertexArrays
-//    map!(SyncObjectId, ref!SyncObject)        SyncObjects
     map!(QueryId,        ref!Query)             Queries
 }
 
@@ -2571,9 +2569,10 @@ cmd bool glIsEnabled(Capability capability) {
 // GLES 3 APIs
 /////////////////////////////////////////////////////////////////
 
-/*
-// TODO: SyncObject is not a regular class/GL object, alias it handle<separately>.
-class SyncObject{}
+// TODO: Consider switching to a remapped non-volatile void* if handling
+//       this opaque pointer as a u64 causes issues on some platforms.
+@replay_remap type u64 SyncObject
+
 enum SyncCondition {
     GL_SYNC_GPU_COMMANDS_COMPLETE       = 0x9117,
 }
@@ -2585,23 +2584,28 @@ enum ClientWaitSyncSignal {
     GL_WAIT_FAILED                      = 0x911D,
 }
 
-bitfield SyncFlags {}
+bitfield SyncFlags {
+    GL_SYNC_FLUSH_COMMANDS_BIT          = 0x00000001,
+}
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glFenceSync.xhtml
-cmd SyncObject glFenceSync(SyncCondition condition, SyncFlags flags) {
+cmd SyncObject glFenceSync(SyncCondition condition, SyncFlags syncFlags) {
     return ?
-    create(result)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteSync.xhtml
 cmd void glDeleteSync(SyncObject sync) {
-    Instances.SyncObjects.Delete(sync)
+}
+
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glWaitSync.xhtml
+cmd void glWaitSync(SyncObject sync, SyncFlags syncFlags, u64 timeout) {
+    assert(timeout == 0xFFFFFFFFFFFFFFFF) // GL_TIMEOUT_IGNORED
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glClientWaitSync.xhtml
-cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags flags, s32 timeout) {
+cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags syncFlags, u64 timeout) {
+    return ?
 }
-*/
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd void* glMapBufferRange(BufferTarget target, s32 offset, s32 length, MapBufferRangeAccess access) {
@@ -2756,6 +2760,14 @@ cmd void glDeleteVertexArrays(u32 count, VertexArrayId* arrays) {
 }
 
 // EXT_disjoint_timer_query
+
+cmd void glGetQueryObjecti64v(QueryId query, QueryObjectParameter parameter, s64* value) {
+    value[0] = ?
+}
+
+cmd void glGetQueryObjectui64v(QueryId query, QueryObjectParameter parameter, u64* value) {
+    value[0] = ?
+}
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGenQueriesEXT(s32 count, QueryId* queries) {

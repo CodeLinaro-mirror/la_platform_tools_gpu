@@ -4656,6 +4656,105 @@ func init() {
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
 		Type: 178,
+		Name: "glFenceSync",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "condition",
+				Type: s.getEnumInfo(90),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "syncFlags",
+				Type: s.getEnumInfo(92),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.U64,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glFenceSync.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 179,
+		Name: "glDeleteSync",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "sync",
+				Type: schema.U64,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteSync.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 180,
+		Name: "glWaitSync",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "sync",
+				Type: schema.U64,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "syncFlags",
+				Type: s.getEnumInfo(92),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "timeout",
+				Type: schema.U64,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glWaitSync.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 181,
+		Name: "glClientWaitSync",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "sync",
+				Type: schema.U64,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "syncFlags",
+				Type: s.getEnumInfo(92),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "timeout",
+				Type: schema.U64,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: s.getEnumInfo(91),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glClientWaitSync.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 182,
 		Name: "glMapBufferRange",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4691,7 +4790,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 179,
+		Type: 183,
 		Name: "glUnmapBuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4707,7 +4806,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 180,
+		Type: 184,
 		Name: "glInvalidateFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4733,7 +4832,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 181,
+		Type: 185,
 		Name: "glRenderbufferStorageMultisample",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4769,7 +4868,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 182,
+		Type: 186,
 		Name: "glBlitFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4830,7 +4929,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 183,
+		Type: 187,
 		Name: "glGenQueries",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4851,7 +4950,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 184,
+		Type: 188,
 		Name: "glBeginQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4872,7 +4971,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 185,
+		Type: 189,
 		Name: "glEndQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4888,7 +4987,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 186,
+		Type: 190,
 		Name: "glDeleteQueries",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4909,7 +5008,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 187,
+		Type: 191,
 		Name: "glIsQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4930,7 +5029,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 188,
+		Type: 192,
 		Name: "glGetQueryiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4956,7 +5055,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 189,
+		Type: 193,
 		Name: "glGetQueryObjectuiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4982,7 +5081,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 190,
+		Type: 194,
 		Name: "glGetActiveUniformBlockName",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5018,7 +5117,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 191,
+		Type: 195,
 		Name: "glGetActiveUniformBlockiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5049,7 +5148,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 192,
+		Type: 196,
 		Name: "glUniformBlockBinding",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5075,7 +5174,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 193,
+		Type: 197,
 		Name: "glGetActiveUniformsiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5111,7 +5210,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 194,
+		Type: 198,
 		Name: "glBindBufferBase",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5137,7 +5236,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 195,
+		Type: 199,
 		Name: "glGenVertexArrays",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5158,7 +5257,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 196,
+		Type: 200,
 		Name: "glBindVertexArray",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5174,7 +5273,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 197,
+		Type: 201,
 		Name: "glDeleteVertexArrays",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5195,7 +5294,59 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 198,
+		Type: 202,
+		Name: "glGetQueryObjecti64v",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(81),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 203,
+		Name: "glGetQueryObjectui64v",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(81),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 204,
 		Name: "glGenQueriesEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5216,7 +5367,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 199,
+		Type: 205,
 		Name: "glBeginQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5237,7 +5388,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 200,
+		Type: 206,
 		Name: "glEndQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5253,7 +5404,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 201,
+		Type: 207,
 		Name: "glDeleteQueriesEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5274,7 +5425,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 202,
+		Type: 208,
 		Name: "glIsQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5295,7 +5446,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 203,
+		Type: 209,
 		Name: "glQueryCounterEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5316,7 +5467,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 204,
+		Type: 210,
 		Name: "glGetQueryivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5342,7 +5493,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 205,
+		Type: 211,
 		Name: "glGetQueryObjectivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5368,7 +5519,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 206,
+		Type: 212,
 		Name: "glGetQueryObjectuivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5394,7 +5545,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 207,
+		Type: 213,
 		Name: "glGetQueryObjecti64vEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5420,7 +5571,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 208,
+		Type: 214,
 		Name: "glGetQueryObjectui64vEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5446,7 +5597,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 209,
+		Type: 215,
 		Name: "architecture",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5477,7 +5628,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 210,
+		Type: 216,
 		Name: "replayCreateRenderer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5493,7 +5644,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 211,
+		Type: 217,
 		Name: "replayBindRenderer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5509,7 +5660,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 212,
+		Type: 218,
 		Name: "backbufferInfo",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5550,7 +5701,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 213,
+		Type: 219,
 		Name: "startTimer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5566,7 +5717,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 214,
+		Type: 220,
 		Name: "stopTimer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -5587,7 +5738,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:              service.ApiId{ID: binary.ID(apiID)},
-		Type:             215,
+		Type:             221,
 		Name:             "flushPostBuffer",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -8228,6 +8379,54 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 				service.EnumEntry{
 					Name:  "GL_MAP_UNSYNCHRONIZED_BIT",
 					Value: 32,
+				},
+			},
+			service.EnumInfoPtrArray{},
+		)
+	case 90:
+		e = service.CreateEnumInfo(
+			"SyncCondition",
+			service.TypeKindEnum,
+			[]service.EnumEntry{
+				service.EnumEntry{
+					Name:  "GL_SYNC_GPU_COMMANDS_COMPLETE",
+					Value: 37143,
+				},
+			},
+			service.EnumInfoPtrArray{},
+		)
+	case 91:
+		e = service.CreateEnumInfo(
+			"ClientWaitSyncSignal",
+			service.TypeKindEnum,
+			[]service.EnumEntry{
+				service.EnumEntry{
+					Name:  "GL_ALREADY_SIGNALED",
+					Value: 37146,
+				},
+				service.EnumEntry{
+					Name:  "GL_TIMEOUT_EXPIRED",
+					Value: 37147,
+				},
+				service.EnumEntry{
+					Name:  "GL_CONDITION_SATISFIED",
+					Value: 37148,
+				},
+				service.EnumEntry{
+					Name:  "GL_WAIT_FAILED",
+					Value: 37149,
+				},
+			},
+			service.EnumInfoPtrArray{},
+		)
+	case 92:
+		e = service.CreateEnumInfo(
+			"SyncFlags",
+			service.TypeKindEnum,
+			[]service.EnumEntry{
+				service.EnumEntry{
+					Name:  "GL_SYNC_FLUSH_COMMANDS_BIT",
+					Value: 1,
 				},
 			},
 			service.EnumInfoPtrArray{},

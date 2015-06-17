@@ -908,6 +908,21 @@ static const uint32_t GL_MAP_FLUSH_EXPLICIT_BIT = 16;
 static const uint32_t GL_MAP_UNSYNCHRONIZED_BIT = 32;
 }
 
+namespace SyncCondition {
+static const uint32_t GL_SYNC_GPU_COMMANDS_COMPLETE = 37143;
+}
+
+namespace ClientWaitSyncSignal {
+static const uint32_t GL_ALREADY_SIGNALED = 37146;
+static const uint32_t GL_TIMEOUT_EXPIRED = 37147;
+static const uint32_t GL_CONDITION_SATISFIED = 37148;
+static const uint32_t GL_WAIT_FAILED = 37149;
+}
+
+namespace SyncFlags {
+static const uint32_t GL_SYNC_FLUSH_COMMANDS_BIT = 1;
+}
+
 typedef int32_t Vec2i[2];
 
 typedef int32_t Vec3i[3];
@@ -995,6 +1010,8 @@ typedef int32_t CGSWindowID;
 typedef int32_t CGSSurfaceID;
 
 typedef void* ImageOES;
+
+typedef uint64_t SyncObject;
 
 struct VertexAttributeArray {
     inline VertexAttributeArray& SetEnabled(bool v) {
