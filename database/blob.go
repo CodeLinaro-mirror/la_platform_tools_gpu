@@ -12,33 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package memory
+package database
 
 import (
-	"fmt"
-
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-type nullSlice uint64
-
-func (s nullSlice) Get(database.Database, log.Logger) ([]byte, error) {
-	return make([]byte, s), nil
+// blob is an encodable wrapper for a byte array, used for storing raw data
+// in databases.
+type blob struct {
+	binary.Generate
+	Data []byte
 }
 
-func (s nullSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
-	return database.StoreBlob(make([]byte, s), d, l)
+// StoreBlob stores the byte slice data inside a Blob to the database d.
+func StoreBlob(data []byte, d Database, l log.Logger) (binary.ID, error) {
+	return d.Store(&blob{Data: data}, l)
 }
 
-func (s nullSlice) Size() uint64 {
-	return uint64(s)
-}
-
-func (s nullSlice) Slice(r Range) Slice {
-	if uint64(r.Last()) > uint64(s) {
-		panic(fmt.Errorf("nullSlice(%d).Slice(%v) - out of bounds", s, r))
+// Resolve blob loads a Blob from the database, returning the byte slice.
+func ResolveBlob(id binary.ID, d Database, l log.Logger) ([]byte, error) {
+	b := blob{}
+	err := d.Load(id, l, &b)
+	if err != nil {
+		return nil, err
 	}
-	return nullSlice(r.Size)
+	return b.Data, nil
 }

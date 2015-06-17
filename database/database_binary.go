@@ -12,12 +12,72 @@ import (
 )
 
 func init() {
+	registry.Add((*blob)(nil).Class())
 	registry.Add((*metadata)(nil).Class())
 }
 
 var (
+	binaryIDblob     = binary.ID{0x38, 0x16, 0x87, 0x7a, 0x38, 0x4f, 0xaf, 0x5d, 0x34, 0xf4, 0xeb, 0x7e, 0x3f, 0x26, 0x23, 0x3d, 0x6f, 0xd8, 0x32, 0x62}
 	binaryIDmetadata = binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}
 )
+
+type binaryClassblob struct{}
+
+func (*blob) Class() binary.Class {
+	return (*binaryClassblob)(nil)
+}
+func doEncodeblob(e binary.Encoder, o *blob) error {
+	if err := e.Uint32(uint32(len(o.Data))); err != nil {
+		return err
+	}
+	if err := e.Data(o.Data); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeblob(d binary.Decoder, o *blob) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Data = make([]byte, count)
+		if err := d.Data(o.Data); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipblob(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassblob) ID() binary.ID      { return binaryIDblob }
+func (*binaryClassblob) New() binary.Object { return &blob{} }
+func (*binaryClassblob) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeblob(e, obj.(*blob))
+}
+func (*binaryClassblob) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &blob{}
+	return obj, doDecodeblob(d, obj)
+}
+func (*binaryClassblob) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeblob(d, obj.(*blob))
+}
+func (*binaryClassblob) Skip(d binary.Decoder) error { return doSkipblob(d) }
+func (*binaryClassblob) Schema() *schema.Class       { return schemablob }
+
+var schemablob = &schema.Class{
+	TypeID: binaryIDblob,
+	Name:   "blob",
+	Fields: []schema.Field{
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}
 
 type binaryClassmetadata struct{}
 

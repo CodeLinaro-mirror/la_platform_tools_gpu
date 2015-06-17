@@ -23,7 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -48,14 +47,14 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
 			resourceID := calcTextureID(capture, id, a)
-			var blob store.Blob
-			if d.Load(resourceID, l, &blob) != nil {
+			data, err := database.ResolveBlob(resourceID, d, l)
+			if err != nil {
 				decompressed, err := decompress(d, l, a, s.Memory[memory.ApplicationPool])
 				if err != nil {
 					panic(err)
 				}
-				blob = store.Blob{Data: decompressed}
-				decompressedID, err := d.Store(&blob, l)
+				data = decompressed
+				decompressedID, err := database.StoreBlob(data, d, l)
 				if err != nil {
 					panic(err)
 				}
@@ -77,7 +76,7 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 				TexelFormat_GL_RGBA,
 				TexelType_GL_UNSIGNED_BYTE,
 				address,
-			).AddRead(address.Range(uint64(len(blob.Data))), resourceID))
+			).AddRead(address.Range(uint64(len(data))), resourceID))
 
 		default:
 			out.Write(id, a)

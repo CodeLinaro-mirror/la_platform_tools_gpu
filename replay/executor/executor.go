@@ -24,7 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -70,10 +69,10 @@ func (r executor) execute() error {
 	if err := e.Value(&r.payload); err != nil {
 		return err
 	}
+	data := buf.Bytes()
 
 	// Store the payload to the database
-	data := store.Blob{Data: buf.Bytes()}
-	id, err := r.database.Store(&data, r.logger)
+	id, err := database.StoreBlob(data, r.database, r.logger)
 	if err != nil {
 		return err
 	}
@@ -82,7 +81,7 @@ func (r executor) execute() error {
 	responseR, responseW := io.Pipe()
 	comErr := make(chan error)
 	go func() {
-		comErr <- r.handleReplayCommunication(id, uint32(len(data.Data)), responseW)
+		comErr <- r.handleReplayCommunication(id, uint32(len(data)), responseW)
 	}()
 
 	// Decode and handle postbacks as they are received
@@ -171,12 +170,11 @@ func (r executor) handleGetData() error {
 	}
 
 	for _, rid := range resourceIDs {
-		data := store.Blob{}
-		err = r.database.Load(rid, logger, &data)
+		data, err := database.ResolveBlob(rid, r.database, logger)
 		if err != nil {
 			return err
 		}
-		if _, err := r.connection.Write(data.Data); err != nil {
+		if _, err := r.connection.Write(data); err != nil {
 			return err
 		}
 	}

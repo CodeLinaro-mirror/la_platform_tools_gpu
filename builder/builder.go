@@ -89,8 +89,7 @@ func extractResources(atoms atom.List, db database.Database, logger log.Logger) 
 	for _, a := range atoms {
 		switch a := a.(type) {
 		case *atom.Resource:
-			blob := store.Blob{Data: a.Data}
-			if id, err := db.Store(&blob, logger); err != nil {
+			if id, err := database.StoreBlob(a.Data, db, logger); err != nil {
 				return nil, err
 			} else {
 				idmap[a.ID] = id

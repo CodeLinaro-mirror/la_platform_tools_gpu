@@ -20,7 +20,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -35,7 +34,7 @@ func Data(a device.Architecture, d database.Database, l log.Logger, at memory.Po
 	if err := memory.Write(w, a, v); err != nil {
 		panic(err)
 	}
-	id, err := d.Store(&store.Blob{Data: buf.Bytes()}, l)
+	id, err := database.StoreBlob(buf.Bytes(), d, l)
 	if err != nil {
 		panic(err)
 	}
