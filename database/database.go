@@ -16,7 +16,7 @@
 package database
 
 import (
-	"bytes"
+	"crypto/sha1"
 	"fmt"
 	"reflect"
 	"sync"
@@ -76,7 +76,10 @@ func (d *database) StoreLink(to, id binary.ID, logger log.Logger) error {
 }
 
 func (d *database) StoreRequest(o binary.Object, logger log.Logger) (binary.ID, error) {
-	id := hash(o)
+	id, err := Hash(o)
+	if err != nil {
+		return id, err
+	}
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 	_, got := d.records[id]
@@ -87,7 +90,10 @@ func (d *database) StoreRequest(o binary.Object, logger log.Logger) (binary.ID, 
 }
 
 func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) {
-	id := hash(o)
+	id, err := Hash(o)
+	if err != nil {
+		return id, err
+	}
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 	_, got := d.records[id]
@@ -147,13 +153,21 @@ func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
 
 func (d *database) Close() {}
 
-func hash(o binary.Object) binary.ID {
-	b := bytes.Buffer{}
-	e := cyclic.Encoder(vle.Writer(&b))
+// Hash returns a unique binary.ID based on the contents of the object.
+// Two objects of identical content will return the same ID, and the
+// probability of two objects with different content generating the same ID
+// will be ignorable.
+// Objects with a graph structure are allowed.
+// Only members that would be encoded using a binary.Encoder are considered.
+func Hash(o binary.Object) (binary.ID, error) {
+	id := binary.ID{}
+	h := sha1.New()
+	e := cyclic.Encoder(vle.Writer(h))
 	if err := e.Value(o); err != nil {
-		panic(err)
+		return id, err
 	}
-	return binary.NewID(b.Bytes())
+	copy(id[:], h.Sum(nil))
+	return id, nil
 }
 
 // CopyResource assigns the value object to the variable out points to
