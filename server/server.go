@@ -25,6 +25,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type Config struct {
@@ -62,7 +63,7 @@ func Run(config Config, rpcReady chan<- struct{}) {
 
 	// Setup and run the (blocking) RPC listener on a separate goroutine.
 	rpc := &rpcServer{
-		Database:      database,
+		Resolver:      service.Resolver{Database: database},
 		ReplayManager: replayManager,
 	}
 	go rpc.ListenAndServe(config.RpcAddress, mtu, logger)

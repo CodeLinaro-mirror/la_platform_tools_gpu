@@ -200,6 +200,11 @@ func (Functions) Contains(substr string, v ...interface{}) bool {
 	return false
 }
 
+// HasPrefix tests whether the string s begins with prefix.
+func (Functions) HasPrefix(s string, prefix string) bool {
+	return strings.HasPrefix(s, prefix)
+}
+
 // Replace any occurance of old with new in the string segments.
 func (Functions) Replace(old string, new string, v ...interface{}) stringList {
 	l := stringify(v...)
