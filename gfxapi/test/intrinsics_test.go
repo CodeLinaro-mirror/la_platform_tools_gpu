@@ -32,7 +32,7 @@ func checkBytes(t *testing.T, got, expected []byte) {
 }
 
 func TestClone(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := []byte{0x54, 0x33, 0x42, 0x43, 0x46, 0x34, 0x63, 0x24, 0x14, 0x24}
 	for _, a := range []atom.Atom{
 		NewCmdClone(0x1234, 10).
@@ -45,7 +45,7 @@ func TestClone(t *testing.T) {
 }
 
 func TestMake(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	if s.NextPoolID != 1 {
 		t.Errorf("Expected initial NextPoolID to be 1, instead got %d", s.NextPoolID)
 	}
@@ -59,7 +59,7 @@ func TestMake(t *testing.T) {
 }
 
 func TestCopy(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := []byte{0x54, 0x33, 0x42, 0x43, 0x46, 0x34, 0x63, 0x24, 0x14, 0x24}
 	for _, a := range []atom.Atom{
 		NewCmdMake(10),
@@ -73,7 +73,7 @@ func TestCopy(t *testing.T) {
 }
 
 func TestCharsliceToString(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := "ħęľĺő ŵōřŀď"
 	NewCmdCharsliceToString(0x1234, uint32(len(expected))).
 		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
@@ -84,7 +84,7 @@ func TestCharsliceToString(t *testing.T) {
 }
 
 func TestCharptrToString(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := "ħęľĺő ŵōřŀď"
 	NewCmdCharptrToString(0x1234).
 		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
@@ -95,7 +95,7 @@ func TestCharptrToString(t *testing.T) {
 }
 
 func TestSliceCasts(t *testing.T) {
-	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	s.Architecture.IntegerSize = 6 // non-multiple of u16
 	addr := memory.Pointer(0x1234)
 	NewCmdSliceCasts(0x1234, 10).Mutate(s, d, l)

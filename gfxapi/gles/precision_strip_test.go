@@ -38,7 +38,7 @@ func (m *mockWriter) Write(id atom.ID, a atom.Atom) {
 }
 
 func runTest(t *testing.T, src string, expected string) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,

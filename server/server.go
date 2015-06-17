@@ -39,10 +39,7 @@ const (
 	capturesRoute = "/captures/"
 	schemaRoute   = "/schema/"
 
-	maxDataCacheSize       = 2 << 30   // 2 gigabytes
-	maxDerivedCacheSize    = 1 << 29   // 0.5 gigabytes
-	metaDataCompactionSize = 100 << 20 // 100 metabytes
-	mtu                    = 1024
+	mtu = 1024
 )
 
 // Run listens on the HTTP and RPC TCP ports given in config, initializes the resource database,
@@ -59,7 +56,7 @@ func Run(config Config, rpcReady chan<- struct{}) {
 
 	// Initialize the resource database and replay manager for RPC requests.
 	b := builder.New()
-	database := database.Create(config.DataPath, maxDataCacheSize, metaDataCompactionSize, maxDerivedCacheSize, b)
+	database := database.NewInMemory(b)
 	replayManager := replay.New(database, logger)
 	b.SetReplayManager(replayManager)
 
