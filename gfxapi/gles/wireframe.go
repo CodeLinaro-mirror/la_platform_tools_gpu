@@ -23,7 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -55,8 +54,7 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 
 			// Store the wire-frame data to a temporary address.
 			wireframeData, wireframeDataType := encodeIndices(indices)
-			res := store.Blob{Data: wireframeData}
-			resID, err := d.Store(&res, l)
+			resID, err := database.StoreBlob(wireframeData, d, l)
 			if err != nil {
 				panic(err)
 			}

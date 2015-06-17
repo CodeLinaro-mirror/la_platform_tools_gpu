@@ -20,7 +20,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -146,11 +145,11 @@ func TestMemoryBlobWriteReadScattered(t *testing.T) {
 //
 func TestMemoryResourceWriteReadScattered(t *testing.T) {
 	d, l := database.InMemory(), log.Testing(t)
-	resA, _ := d.Store(&store.Blob{Data: []byte{10, 11, 12}}, l)
-	resB, _ := d.Store(&store.Blob{Data: []byte{20, 21, 22, 23}}, l)
-	resC, _ := d.Store(&store.Blob{Data: []byte{30, 31}}, l)
-	resD, _ := d.Store(&store.Blob{Data: []byte{40, 41, 42}}, l)
-	resE, _ := d.Store(&store.Blob{Data: []byte{50}}, l)
+	resA, _ := database.StoreBlob([]byte{10, 11, 12}, d, l)
+	resB, _ := database.StoreBlob([]byte{20, 21, 22, 23}, d, l)
+	resC, _ := database.StoreBlob([]byte{30, 31}, d, l)
+	resD, _ := database.StoreBlob([]byte{40, 41, 42}, d, l)
+	resE, _ := database.StoreBlob([]byte{50}, d, l)
 	p := Pool{}
 	p.Write(1, Resource(resA, 3))
 	p.Write(7, Resource(resB, 4))

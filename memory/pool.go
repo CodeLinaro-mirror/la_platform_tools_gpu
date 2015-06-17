@@ -20,7 +20,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -122,7 +121,7 @@ func (m poolSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, err
 	if err != nil {
 		return binary.ID{}, err
 	}
-	return d.Store(&store.Blob{Data: bytes}, l)
+	return database.StoreBlob(bytes, d, l)
 }
 
 func (m poolSlice) Slice(rng Range) Slice {
