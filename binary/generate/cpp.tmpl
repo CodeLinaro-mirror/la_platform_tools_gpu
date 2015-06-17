@@ -22,27 +22,27 @@
 »»}{{end}}
 
 {{define "Cpp.Encoder"}}»»virtual void Encode(Encoder* e) const {
-{{range .Fields}}»»»{{Encode (print "this->m" .Name) .Type}}
+{{range .Fields}}»»»{{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}
 {{end}}»»}{{end}}
 
-{{define "Cpp.EncodePrimitive"}}e->{{CppMethod .Type}}({{.Name}});{{end}}
-{{define "Cpp.EncodeStruct"}}e->Value(&{{.Name}});{{end}}
-{{define "Cpp.EncodePointer"}}e->object({{.Name}});{{end}}
-{{define "Cpp.EncodeInterface"}}e->object({{.Name}});{{end}}
+{{define "Cpp.Encode.Primitive"}}e->{{CppMethod .Type}}({{.Name}});{{end}}
+{{define "Cpp.Encode.Struct"}}e->Value(&{{.Name}});{{end}}
+{{define "Cpp.Encode.Pointer"}}e->object({{.Name}});{{end}}
+{{define "Cpp.Encode.Interface"}}e->object({{.Name}});{{end}}
 
-{{define "Cpp.EncodeSlice"}}e->Uint32({{.Name}}.size());
+{{define "Cpp.Encode.Slice"}}e->Uint32({{.Name}}.size());
 »»»for (int i = 0; i < {{.Name}}.size(); i++) {
-»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.EncodeArray"}}
+{{define "Cpp.Encode.Array"}}
 »»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.EncodeStream"}}{{end}}
+{{define "Cpp.Encode.Stream"}}{{end}}
 
-{{define "Cpp.EncodeMap"}}{{end}}
+{{define "Cpp.Encode.Map"}}{{end}}
 
 {{define "Cpp.File"}}{{$.Copyright}}
 #ifndef GAPIC_CODER_{{.Package | Upper}}_H

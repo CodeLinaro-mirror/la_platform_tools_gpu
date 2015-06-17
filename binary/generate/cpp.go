@@ -88,13 +88,12 @@ func (f *functions) CppMethod(t *schema.Primitive) string {
 
 // CppFile generates the all the cpp code for a file with a set of structs.
 func (g *Generator) CppFile(file *File) ([]byte, error) {
-	g.f.prefix = "Cpp."
 	f := *file
 	if f.Indent == "" {
 		f.Indent = "    "
 	}
 	b := &bytes.Buffer{}
-	if err := g.f.execute(g.f.prefix+"File", b, &f); err != nil {
+	if err := g.f.execute("Cpp.File", b, &f); err != nil {
 		return nil, err
 	}
 	s := b.String()

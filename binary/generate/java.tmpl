@@ -20,50 +20,50 @@
 
 {{define "Java.Encoder"}}
 »public static void encode(Encoder e, {{JavaClass .Name}} o) throws IOException {
-{{range .Fields}}»»{{Encode (print "o." (JavaFieldName .Name)) .Type}}
+{{range .Fields}}»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
-{{define "Java.EncodePrimitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
-{{define "Java.EncodeStruct"}}{{.Name}}.encode(e);{{end}}
-{{define "Java.EncodePointer"}}e.object({{.Name}});{{end}}
-{{define "Java.EncodeInterface"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
 
-{{define "Java.EncodeSlice"}}e.int32({{.Name}}.length);
+{{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.EncodeArray"}}
+{{define "Java.Encode.Array"}}
 »»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.EncodeStream"}}TODO: Java stream handling{{end}}
+{{define "Java.Encode.Stream"}}TODO: Java stream handling{{end}}
 
-{{define "Java.EncodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
 »public static void decode(Decoder d, {{JavaClass .Name}} o) throws IOException {
-{{range .Fields}}»»{{Decode (print "o." (JavaFieldName .Name)) .Type}}
+{{range .Fields}}»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
-{{define "Java.DecodePrimitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
-{{define "Java.DecodeStruct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "Java.DecodePointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
-{{define "Java.DecodeInterface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.Decode.Pointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Interface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
 
-{{define "Java.DecodeSlice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
+{{define "Java.Decode.Slice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{Decode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
+{{define "Java.Decode.Array"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
 »»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Decode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.DecodeMap"}}TODO: Java map handling{{end}}
-{{define "Java.DecodeStream"}}TODO: Java stream handling{{end}}
+{{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
+{{define "Java.Decode.Stream"}}TODO: Java stream handling{{end}}
 
 {{define "Java.File"}}{{$.Copyright}}package {{.Package}};
 
