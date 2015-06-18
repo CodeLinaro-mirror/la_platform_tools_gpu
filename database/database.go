@@ -29,18 +29,21 @@ import (
 
 // Database is the interface to a resource store.
 type Database interface {
-	Store(binary.Object, log.Logger) (binary.ID, error)
+	Store(binary.ID, binary.Object, log.Logger) error
 	Resolve(binary.ID, log.Logger) (binary.Object, error)
 	Contains(binary.ID, log.Logger) bool
-	Close()
 }
 
 func StoreRequest(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
-	return d.Store(obj, l)
+	return Store(d, obj, l)
 }
 
 func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
-	return d.Store(obj, l)
+	id, err := Hash(obj)
+	if err != nil {
+		return id, err
+	}
+	return id, d.Store(id, obj, l)
 }
 
 func Load(d Database, id binary.ID, l log.Logger, out binary.Object) error {
@@ -69,14 +72,10 @@ type database struct {
 	buildContext interface{} // The build context, user-defined.
 }
 
-func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) {
-	id, err := Hash(o)
-	if err != nil {
-		return id, err
-	}
+func (d *database) Store(id binary.ID, o binary.Object, logger log.Logger) error {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
-	return id, d.store(id, o, logger)
+	return d.store(id, o, logger)
 }
 
 func (d *database) store(id binary.ID, o binary.Object, logger log.Logger) error {
@@ -136,8 +135,6 @@ func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
 	_, got := d.records[id]
 	return got
 }
-
-func (d *database) Close() {}
 
 // Hash returns a unique binary.ID based on the contents of the object.
 // Two objects of identical content will return the same ID, and the
