@@ -17,7 +17,6 @@ package database
 
 import (
 	"crypto/sha1"
-	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
@@ -57,11 +56,4 @@ func Hash(o binary.Object) (binary.ID, error) {
 	}
 	copy(id[:], h.Sum(nil))
 	return id, nil
-}
-
-// CopyResource assigns the value object to the variable out points to
-func CopyResource(out interface{}, value interface{}) {
-	o := reflect.ValueOf(out).Elem()
-	v := reflect.ValueOf(value).Elem()
-	o.Set(v)
 }
