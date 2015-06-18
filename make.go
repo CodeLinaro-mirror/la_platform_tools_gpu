@@ -21,7 +21,6 @@ import (
 	"os"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/cc"
 	. "android.googlesource.com/platform/tools/gpu/maker"
 )
@@ -113,7 +112,7 @@ func init() {
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
-		cctargets := []string{build.HostOS}
+		cctargets := []string{HostOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}

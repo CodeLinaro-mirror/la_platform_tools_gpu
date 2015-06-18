@@ -21,6 +21,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 var GCC = &cpp.Toolchain{
@@ -59,7 +60,7 @@ type tools struct {
 func getTools(cfg cpp.Config) (*tools, error) {
 	var t tools
 
-	if build.HostOS == "linux" {
+	if maker.HostOS == "linux" {
 		switch cfg.OS {
 		case "linux":
 			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")

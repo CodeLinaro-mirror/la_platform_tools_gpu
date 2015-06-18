@@ -24,6 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/build/cpp/msvc"
 	"android.googlesource.com/platform/tools/gpu/build/cpp/ndk"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 var (
@@ -202,7 +203,7 @@ func (t Target) Build(env build.Environment) {
 	gapirTestInputs := gapirTestSource.Append(gtestLib, gmockLib, gapirLib, gapicLib)
 	gapirTest := cpp.MakeExecutable(gapirTestInputs, t.GapirTests, env)
 
-	if t.Replayd.OS == build.HostOS {
+	if t.Replayd.OS == maker.HostOS {
 		cpp.MakeRunTest(gapicTest, t.GapicTests)
 
 		cpp.MakeRunTest(gapirTest, t.GapirTests)

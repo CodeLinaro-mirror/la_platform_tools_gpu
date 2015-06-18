@@ -195,7 +195,7 @@ func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) bui
 // The test is automatically included in the "test" target.
 func MakeRunTest(test build.File, cfg Config) {
 	// We only run tests on the host OS.
-	if cfg.OS == build.HostOS {
+	if cfg.OS == maker.HostOS {
 		phony := maker.Virtual("")
 		maker.Command(makeEntity(test)).Creates(phony)
 		maker.List("test").DependsOn(phony)
@@ -206,7 +206,7 @@ func MakeRunTest(test build.File, cfg Config) {
 // happens on the host OS.
 func MakeCopy(src build.File, dest build.File, cfg Config, env build.Environment) {
 	logger := env.Logger
-	if cfg.OS == build.HostOS {
+	if cfg.OS == maker.HostOS {
 		makeStep(cfg.Name, dest, build.Files(src), env.ForceBuild,
 			func(*maker.Step) error {
 				logger.Infof("Copying %s -> %s", src, dest)
