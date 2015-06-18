@@ -118,11 +118,17 @@ func StoreResource(ϟd database.Database, ϟl log.Logger, ϟv *Resource) (Resour
 	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return ResourceId{ID: ϟid}, ϟerr
 }
-func ResolveResource(ϟd database.Database, ϟl log.Logger, ϟid ResourceId) (Resource, error) {
-	var ϟout Resource
-	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
-	return ϟout, ϟerr
+func ResolveResource(ϟd database.Database, ϟl log.Logger, ϟid ResourceId) (*Resource, error) {
+	ϟout, ϟerr := ϟd.Resolve(ϟid.ID, ϟl)
+	if ϟerr != nil {
+		return nil, ϟerr
+	}
+	return ϟout.(*Resource), ϟerr
 }
 func (ϟr Resolver) ResolveResource(ϟl log.Logger, r ResourceId) (Resource, error) {
-	return ResolveResource(ϟr.Database, ϟl, r)
+	ϟout, ϟerr := ϟr.Database.Resolve(r.ID, ϟl)
+	if ϟerr != nil {
+		return Resource{}, ϟerr
+	}
+	return *(ϟout.(*Resource)), nil
 }

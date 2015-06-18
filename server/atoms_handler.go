@@ -47,7 +47,7 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	var capture service.Capture
+	var capture *service.Capture
 
 	if id := req.URL.Query().Get(idParamName); id != "" {
 		for _, cid := range captures {

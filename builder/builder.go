@@ -172,7 +172,9 @@ func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, d 
 	}
 
 	var captureFbDims *captureFramebufferDimensions
-	if err := database.Load(d, id, l, captureFbDims); err != nil {
+	if obj, err := d.Resolve(id, l); err == nil {
+		captureFbDims = obj.(*captureFramebufferDimensions)
+	} else {
 		return 0, 0, err
 	}
 
