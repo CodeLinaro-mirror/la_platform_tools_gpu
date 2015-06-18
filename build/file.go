@@ -21,7 +21,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"time"
 )
 
 // File represents the path to a file or directory.
@@ -69,20 +68,6 @@ func (d File) Contains(f File) bool {
 		return false
 	}
 	return b[:len(a)] == a && b[len(a)] == filepath.Separator
-}
-
-// LastModified returns the time the file was last modified.
-func (f File) LastModified() time.Time {
-	s, err := os.Stat(string(f.Absolute()))
-	if err != nil {
-		panic(err)
-	}
-	return s.ModTime()
-}
-
-// Delete deletes the File.
-func (f File) Delete() error {
-	return os.Remove(string(f))
 }
 
 // Name returns the name part of the File (without directories).
@@ -209,6 +194,8 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	switch {
 	case err != nil:
 		logger.Errorf("\n\n%s\n--- %s failed: %v ---", string(buffer.Bytes()), f.Name(), err)
+		logger.Errorf("Failed command: %v %v", path, args)
+		logger.Flush()
 
 	case env.Verbose:
 		if msg := string(buffer.Bytes()); msg != "" {

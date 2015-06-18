@@ -14,8 +14,6 @@
 
 package build
 
-import "time"
-
 // FileSet is a list of Files with no duplicates.
 type FileSet []File
 
@@ -30,18 +28,6 @@ func (fs FileSet) Append(files ...File) FileSet {
 	m := fs.toMap()
 	out := append(FileSet{}, fs...)
 	for _, file := range files {
-		if _, found := m[file]; !found {
-			out = append(out, file)
-		}
-	}
-	return out
-}
-
-// Remove returns a new FileSet with files removed from this FileSet.
-func (fs FileSet) Remove(files ...File) FileSet {
-	m := FileSet(files).toMap()
-	out := FileSet{}
-	for _, file := range fs {
 		if _, found := m[file]; !found {
 			out = append(out, file)
 		}
@@ -73,18 +59,6 @@ nextfile:
 		out = append(out, file)
 	}
 	return out
-}
-
-// LastModified returns the most recent time any of the files were modified.
-func (fs FileSet) LastModified() time.Time {
-	t := time.Time{}
-	for _, f := range fs {
-		m := f.LastModified()
-		if t.Before(m) {
-			t = m
-		}
-	}
-	return t
 }
 
 func (fs FileSet) toMap() map[File]struct{} {

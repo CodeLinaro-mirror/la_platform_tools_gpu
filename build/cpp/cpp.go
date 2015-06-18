@@ -15,10 +15,7 @@
 package cpp
 
 import (
-	"errors"
-	"path/filepath"
 	"strings"
-	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/build"
 )
@@ -26,8 +23,6 @@ import (
 type misotool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
 type sisotool func(input build.File, output build.File, cfg Config, env build.Environment) error
 type depsFor func(output build.File, cfg Config, env build.Environment) (deps build.FileSet, valid bool)
-
-var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
 
 // OptimisationLevel is an enumerator of optimisation levels to use by a toolchain.
 type OptimizationLevel int
@@ -118,167 +113,6 @@ func (c Config) Extend(n Config) Config {
 	return c
 }
 
-func combineErrors(errs []error) error {
-	msgs := []string{}
-	for _, err := range errs {
-		if err != nil {
-			msgs = append(msgs, err.Error())
-		}
-	}
-	if len(msgs) > 0 {
-		return errors.New(strings.Join(msgs, "\n"))
-	} else {
-		return nil
-	}
-}
-
-// Compile compiles the list of source files into object files using the Config
-// and build Environment. Compile returns the list of object files.
-func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.FileSet, error) {
-	env.Logger = env.Logger.Enter("C++.Compile")
-
-	ext := cfg.Toolchain.ObjExt(cfg)
-	if cfg.OutputExt != nil {
-		ext = *cfg.OutputExt
-	}
-
-	wg := sync.WaitGroup{}
-	sources = sources.Append(cfg.AdditionalSources...)
-	objects := make([]build.File, len(sources))
-	errors := make([]error, len(sources))
-	wg.Add(len(sources))
-	for i, source := range sources {
-		i, source, env := i, source, env
-		object := IntermediatePath(source, ext, cfg, env)
-
-		if requiresCompile(source, object, cfg, env) {
-			env.Logger = env.Logger.Fork() // Give each go-routine a unique logger context id.
-			go func() {
-				defer wg.Done()
-				objects[i] = object
-				errors[i] = cfg.Toolchain.Compiler(source, object, cfg, env)
-			}()
-		} else {
-			objects[i] = object
-			wg.Done()
-			if env.Verbose {
-				env.Logger.Infof("%s is up-to-date", object)
-			}
-		}
-	}
-	wg.Wait()
-	return objects, combineErrors(errors)
-}
-
-// StaticLibrary archives the list of input files into an static library using
-// the Config and build Environment. The inputs can be a combination of source
-// files and / or object files. StaticLibrary returns the output static library
-// file.
-func StaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
-	env.Logger = env.Logger.Enter("C++.StaticLibrary")
-
-	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
-	if err != nil {
-		return "", err
-	}
-
-	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
-
-	name := cfg.Toolchain.LibName(cfg)
-	output := env.Intermediates.Join(Triplet(cfg), name).ChangeExt(cfg.Toolchain.LibExt(cfg))
-	if cfg.OutputExt != nil {
-		output = output.ChangeExt(*cfg.OutputExt)
-	}
-	output.MkdirAll()
-
-	if requiresArchive(objects, output, env) {
-		return output, cfg.Toolchain.Archiver(objects, output, cfg, env)
-	} else {
-		if env.Verbose {
-			env.Logger.Infof("%s is up-to-date", output)
-		}
-		return output, nil
-	}
-}
-
-// DynamicLibrary links the list of input files into an dynamically-linked
-// library using the Config and build Environment. The inputs can be a
-// combination of source files, object files and / or library files.
-// DynamicLibrary returns the output dynamic-library file file.
-func DynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
-	env.Logger = env.Logger.Enter("C++.DynamicLibrary")
-
-	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
-	if err != nil {
-		return "", err
-	}
-
-	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
-
-	libraries := build.FileSet{}
-	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
-		dir, base := filepath.Split(library.Absolute())
-		libraries = libraries.Append(build.File(base))
-		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
-	}
-
-	cfg.Libraries = append(libraries, cfg.Libraries...)
-
-	output := cfg.OutputDir.Join(cfg.Toolchain.DllName(cfg))
-	if cfg.OutputExt != nil {
-		output = output.ChangeExt(*cfg.OutputExt)
-	}
-	output.MkdirAll()
-
-	if requiresLink(inputs.Append(objects...), output, env) {
-		return output, cfg.Toolchain.DllLinker(objects, output, cfg, env)
-	} else {
-		if env.Verbose {
-			env.Logger.Infof("%s is up-to-date", output)
-		}
-		return output, nil
-	}
-}
-
-// Executable links the list of input files into an executable using the Config
-// and build Environment. The inputs can be a combination of source files,
-// object files and / or library files. Executable returns the output executable
-// file.
-func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
-	env.Logger = env.Logger.Enter("C++.Executable")
-
-	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
-	if err != nil {
-		return "", err
-	}
-
-	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
-
-	libraries := build.FileSet{}
-	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
-		dir, base := filepath.Split(library.Absolute())
-		libraries = libraries.Append(build.File(base).ChangeExt(""))
-		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
-	}
-
-	cfg.Libraries = append(libraries, cfg.Libraries...)
-
-	output := cfg.OutputDir.Join(cfg.Toolchain.ExeName(cfg))
-	if cfg.OutputExt != nil {
-		output = output.ChangeExt(*cfg.OutputExt)
-	}
-	output.MkdirAll()
-
-	if requiresLink(inputs.Append(objects...), output, env) {
-		return output, cfg.Toolchain.ExeLinker(objects, output, cfg, env)
-	} else {
-		if env.Verbose {
-			env.Logger.Infof("%s is up-to-date", output)
-		}
-		return output, nil
-	}
-}
-
 // Triplet returns a string combining the os, architecture and flavour of cfg.
 func Triplet(cfg Config) string {
 	return strings.Join([]string{cfg.OS, cfg.Architecture, cfg.Flavor}, "-")
@@ -296,52 +130,4 @@ func IntermediatePath(source build.File, ext string, cfg Config, env build.Envir
 	out := env.Intermediates.Join(Triplet(cfg), root.Name, rel).ChangeExt(ext)
 	out.MkdirAll()
 	return out
-}
-
-func requiresCompile(source, output build.File, cfg Config, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
-	}
-	if !output.Exists() {
-		return true
-	}
-	t := output.LastModified()
-	if source.LastModified().After(t) {
-		return true
-	}
-	depsFor := cfg.Toolchain.DepsFor
-	if depsFor == nil {
-		return true // If the toolchain can't check dependencies, then we have to build
-	}
-	deps, valid := depsFor(output, cfg, env)
-	if !valid || deps.LastModified().After(t) {
-		return true
-	}
-	return false
-}
-
-func requiresArchive(objects build.FileSet, output build.File, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
-	}
-	if !output.Exists() {
-		return true
-	}
-	if objects.LastModified().After(output.LastModified()) {
-		return true
-	}
-	return false
-}
-
-func requiresLink(inputs build.FileSet, output build.File, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
-	}
-	if !output.Exists() {
-		return true
-	}
-	if inputs.LastModified().After(output.LastModified()) {
-		return true
-	}
-	return false
 }

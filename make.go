@@ -22,6 +22,7 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/cc"
 	. "android.googlesource.com/platform/tools/gpu/maker"
 )
 
@@ -112,14 +113,11 @@ func init() {
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
-		cctargets := build.HostOS
+		cctargets := []string{build.HostOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
-			cctargets += ",android-arm,android-arm64"
+			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
-		GoRun(Path(gpusrc, "cc/build.go"),
-			"--runtests",
-			"--targets="+cctargets,
-		).Creates(Apps.Gapir).DependsOn("code")
+		cc.Graph(cctargets)
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
 		Creator(gotest).DependsOn("code", Apps.Gapir)
@@ -183,7 +181,7 @@ func Apic(path string, api string, template string) {
 		"template",
 		"--dir", dst.Name(),
 		"--deps", deps.Name(),
-		a.Name(), t.Name()).DependsOn(a, t, dst)
+		a.Name(), t.Name()).DependsOn(a, t, dst, Dir(Paths.Deps))
 	s.UseDepsFile(deps)
 	List("apic").DependsOn(deps)
 }

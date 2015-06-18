@@ -108,6 +108,10 @@ func (f *file) Timestamp() time.Time {
 	if f.stat == nil {
 		return time.Time{}
 	}
+	if f.stat.IsDir() {
+		// Do not cause dependency to rebuild just because of a directory change
+		return time.Time{}
+	}
 	return f.stat.ModTime()
 }
 
