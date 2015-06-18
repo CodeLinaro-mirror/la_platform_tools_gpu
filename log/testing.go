@@ -14,12 +14,13 @@
 
 package log
 
-import (
-	"testing"
-)
+type delegate interface {
+	Error(...interface{})
+	Log(...interface{})
+}
 
 // Testing returns a Logger that writes to t's log methods.
-func Testing(t *testing.T) Logger {
+func Testing(t delegate) Logger {
 	out := make(chan interface{}, 64)
 	go func() {
 		for o := range out {
