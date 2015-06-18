@@ -17,12 +17,14 @@
 package builder
 
 import (
+	"bytes"
 	"fmt"
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/config"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
@@ -31,64 +33,37 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// The root database ID to a captures object, storing the identifiers to all
-// captures that are held in the database.
-var captureIdsDatabaseID = binary.NewID([]byte("ALL CAPTURES VERSION 1.0"))
+// The list of captures currently imported.
+// TODO: This needs to be moved to persistent storage.
+var captures = service.CaptureIdArray{}
 
-type builder struct {
+// Context is the type that should be passed to the database constructor's
+// buildContext parameter.
+type Context struct {
 	ReplayManager *replay.Manager
 }
 
-// New creates a database.builder which can hold a replayManager, potentially required to build request outputs.
-func New() *builder {
-	return &builder{}
-}
-
-// SetReplayManager assigns the given replayManager.
-func (b *builder) SetReplayManager(replayManager *replay.Manager) {
-	b.ReplayManager = replayManager
-}
-
-type replayRequest interface {
-	build(*replay.Manager, database.Database, log.Logger, binary.Object) error
-}
-
-type standaloneRequest interface {
-	build(database.Database, log.Logger, binary.Object) error
-}
-
-// Compliance with the database.builder interface.
-
-// BuildResource builds the output of the given request and writes it to the given out.
-func (b *builder) BuildResource(request interface{}, db database.Database, logger log.Logger, out binary.Object) error {
-	if config.DebugDatabaseBuilds && logger != nil {
-		logger.Infof("Building resource: %T %v", request, request)
+func encode(v binary.Object) ([]byte, error) {
+	buf := &bytes.Buffer{}
+	if err := cyclic.Encoder(vle.Writer(buf)).Value(v); err != nil {
+		return nil, err
 	}
-
-	switch ty := request.(type) {
-	case replayRequest:
-		return ty.build(b.ReplayManager, db, logger, out)
-	case standaloneRequest:
-		return ty.build(db, logger, out)
-	default:
-		return fmt.Errorf("Unknown builder request type: %T", request)
-	}
+	return buf.Bytes(), nil
 }
 
-// Version returns the builder's version number.
-func (b *builder) Version() uint32 {
-	return 0
+func decode(data []byte, v binary.Object) error {
+	return cyclic.Decoder(vle.Reader(bytes.NewBuffer(data))).Value(v)
 }
 
 // extractResources returns a new atom list with all the resources extracted
 // and placed into the database.
-func extractResources(atoms atom.List, db database.Database, logger log.Logger) (atom.List, error) {
+func extractResources(atoms atom.List, d database.Database, l log.Logger) (atom.List, error) {
 	out := make(atom.List, 0, len(atoms))
 	idmap := map[binary.ID]binary.ID{}
 	for _, a := range atoms {
 		switch a := a.(type) {
 		case *atom.Resource:
-			if id, err := database.StoreBlob(a.Data, db, logger); err != nil {
+			if id, err := database.StoreBlob(a.Data, d, l); err != nil {
 				return nil, err
 			} else {
 				idmap[a.ID] = id
@@ -116,8 +91,8 @@ func extractResources(atoms atom.List, db database.Database, logger log.Logger) 
 
 // ImportCapture builds a new capture containing atoms, stores it into db and
 // returns the new capture identifier.
-func ImportCapture(name string, atoms atom.List, db database.Database, logger log.Logger) (service.CaptureId, error) {
-	atoms, err := extractResources(atoms, db, logger)
+func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (service.CaptureId, error) {
+	atoms, err := extractResources(atoms, d, l)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
@@ -127,13 +102,13 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 		return service.CaptureId{}, err
 	}
 
-	streamID, err := db.Store(&stream, logger)
+	streamID, err := service.StoreAtomStream(d, l, &stream)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
 
 	schema := schema.Schema()
-	schemaID, err := db.Store(&schema, logger)
+	schemaID, err := service.StoreSchema(d, l, &schema)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
@@ -150,53 +125,26 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 		}
 	}
 
-	capture := service.Capture{
+	capture := &service.Capture{
 		Apis:   apiIDs,
 		Name:   name,
-		Atoms:  service.AtomStreamId{ID: streamID},
-		Schema: service.SchemaId{ID: schemaID},
+		Atoms:  streamID,
+		Schema: schemaID,
 	}
 
-	id, err := db.Store(&capture, logger)
+	captureID, err := service.StoreCapture(d, l, capture)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
 
-	// TODO: This is a read-modify-write operation with no safty for concurrent
-	// writes! A mutex in this function would provided limited safety as the
-	// database could be modifying the captures list elsewhere. We really need
-	// atomic write support in the database. b/19889089.
+	captures = append(captures, captureID)
 
-	// Load the list of captures stored in the database
-	ids, _ := Captures(db, logger)
-
-	for _, i := range ids {
-		if i.ID == id {
-			// Capture already imported
-			return service.CaptureId{ID: id}, nil
-		}
-	}
-
-	// Add the capture into the list of captures stored by the database.
-	c := captures{ids: ids}
-	c.ids = append(c.ids, service.CaptureId{ID: id})
-
-	record, err := db.Store(&c, logger)
-	if err != nil {
-		return service.CaptureId{}, err
-	}
-	if err := db.StoreLink(record, captureIdsDatabaseID, logger); err != nil {
-		return service.CaptureId{}, err
-	}
-
-	return service.CaptureId{ID: id}, nil
+	return captureID, nil
 }
 
 // Captures returns all the captures stored by the database by identifier.
 func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, error) {
-	var c captures
-	err := db.Load(captureIdsDatabaseID, logger, &c)
-	return c.ids, err
+	return captures, nil
 }
 
 func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.Logger) (atom.List, error) {
@@ -211,18 +159,20 @@ func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.L
 	return atomList, nil
 }
 
-// getAtomFramebufferDimensions returns the framebuffer dimensions after a given atom in the given capture and context.
-// The first call to getAtomFramebufferDimensions for a given capture/context will trigger a computation of the dimensions for
-// all atoms of this capture/context, which will be cached to the database for subsequent calls, regardless of the given atom.
-func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, db database.Database, logger log.Logger) (width, height uint32, err error) {
-	id, err := db.StoreRequest(&getCaptureFramebufferDimensions{Capture: captureID}, logger)
+// getAtomFramebufferDimensions returns the framebuffer dimensions after a given
+// atom in the given capture and context.
+// The first call to getAtomFramebufferDimensions for a given capture/context
+// will trigger a computation of the dimensions for all atoms of this
+// capture, which will be cached to the database for subsequent calls,
+// regardless of the given atom.
+func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, d database.Database, l log.Logger) (width, height uint32, err error) {
+	id, err := d.Store(&getCaptureFramebufferDimensions{Capture: captureID}, l)
 	if err != nil {
 		return 0, 0, err
 	}
 
-	var captureFbDims captureFramebufferDimensions
-	err = db.Load(id, logger, &captureFbDims)
-	if err != nil {
+	var captureFbDims *captureFramebufferDimensions
+	if err := d.Load(id, l, captureFbDims); err != nil {
 		return 0, 0, err
 	}
 
@@ -251,8 +201,9 @@ func uniformScale(width, height, maxWidth, maxHeight uint32) (w, h uint32) {
 	return w, h
 }
 
-// build writes to out the captureFramebufferDimensions resource resulting from the given getCaptureFramebufferDimensions request.
-func (request *getCaptureFramebufferDimensions) build(d database.Database, l log.Logger, out binary.Object) error {
+// BuildLazy writes to out the captureFramebufferDimensions resource resulting
+// from the given getCaptureFramebufferDimensions request.
+func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
 	var id atom.ID
 	defer func() {
 		if err := recover(); err != nil {
@@ -261,16 +212,17 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 	}()
 	capture, err := service.ResolveCapture(d, l, request.Capture)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	var captureFbDims captureFramebufferDimensions
 	var currentDims *atomFramebufferDimensions
+
+	captureFbDims := &captureFramebufferDimensions{}
 
 	s := gfxapi.NewState()
 	for i, a := range atoms {
@@ -291,6 +243,5 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 			}
 		}
 	}
-	database.CopyResource(out, &captureFbDims)
-	return nil
+	return captureFbDims, nil
 }

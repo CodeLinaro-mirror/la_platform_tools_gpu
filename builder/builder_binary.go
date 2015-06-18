@@ -10,11 +10,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 func init() {
+	registry.Add((*ConvertImage)(nil).Class())
 	registry.Add((*GetFramebufferColor)(nil).Class())
 	registry.Add((*GetFramebufferDepth)(nil).Class())
 	registry.Add((*GetHierarchy)(nil).Class())
@@ -27,11 +29,11 @@ func init() {
 	registry.Add((*ReplaceAtom)(nil).Class())
 	registry.Add((*atomFramebufferDimensions)(nil).Class())
 	registry.Add((*captureFramebufferDimensions)(nil).Class())
-	registry.Add((*captures)(nil).Class())
 	registry.Add((*getCaptureFramebufferDimensions)(nil).Class())
 }
 
 var (
+	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
 	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
 	binaryIDGetFramebufferDepth             = binary.ID{0x59, 0xd2, 0x23, 0x3c, 0xfd, 0xdc, 0xbf, 0x12, 0xf5, 0xe3, 0xff, 0x94, 0x6c, 0x8a, 0xb8, 0x86, 0xba, 0x9d, 0xb6, 0x55}
 	binaryIDGetHierarchy                    = binary.ID{0x58, 0xc3, 0xc8, 0x77, 0xcf, 0x3d, 0xd5, 0x5f, 0xba, 0x3f, 0x2c, 0xa9, 0x7e, 0x16, 0xdf, 0x52, 0x5b, 0xbb, 0x65, 0x8b}
@@ -44,9 +46,116 @@ var (
 	binaryIDReplaceAtom                     = binary.ID{0x81, 0x95, 0x81, 0x1b, 0xdd, 0x39, 0xfe, 0x7c, 0x43, 0x51, 0x80, 0xbc, 0x3b, 0xf1, 0x71, 0x44, 0x1e, 0x7b, 0x9e, 0x3a}
 	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
-	binaryIDcaptures                        = binary.ID{0xcd, 0x35, 0x8f, 0x5e, 0x40, 0x7f, 0x41, 0x75, 0x9b, 0xf7, 0x39, 0x22, 0xe1, 0xc2, 0x06, 0xd0, 0x20, 0xcc, 0xca, 0xe4}
 	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x92, 0xe3, 0x84, 0xf0, 0x3e, 0x83, 0x2c, 0x83, 0xc0, 0x22, 0x15, 0xad, 0x75, 0x9b, 0x02, 0xdc, 0x1f, 0x4e, 0x49, 0x4c}
 )
+
+type binaryClassConvertImage struct{}
+
+func (*ConvertImage) Class() binary.Class {
+	return (*binaryClassConvertImage)(nil)
+}
+func doEncodeConvertImage(e binary.Encoder, o *ConvertImage) error {
+	if err := e.ID(o.Data); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Width)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.Height)); err != nil {
+		return err
+	}
+	if o.FormatFrom != nil {
+		if err := e.Object(o.FormatFrom); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if o.FormatTo != nil {
+		if err := e.Object(o.FormatTo); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeConvertImage(d binary.Decoder, o *ConvertImage) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.Data = binary.ID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Width = int(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Height = int(obj)
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.FormatFrom = obj.(image.Format)
+	} else {
+		o.FormatFrom = nil
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.FormatTo = obj.(image.Format)
+	} else {
+		o.FormatTo = nil
+	}
+	return nil
+}
+func doSkipConvertImage(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassConvertImage) ID() binary.ID      { return binaryIDConvertImage }
+func (*binaryClassConvertImage) New() binary.Object { return &ConvertImage{} }
+func (*binaryClassConvertImage) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeConvertImage(e, obj.(*ConvertImage))
+}
+func (*binaryClassConvertImage) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ConvertImage{}
+	return obj, doDecodeConvertImage(d, obj)
+}
+func (*binaryClassConvertImage) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeConvertImage(d, obj.(*ConvertImage))
+}
+func (*binaryClassConvertImage) Skip(d binary.Decoder) error { return doSkipConvertImage(d) }
+func (*binaryClassConvertImage) Schema() *schema.Class       { return schemaConvertImage }
+
+var schemaConvertImage = &schema.Class{
+	TypeID: binaryIDConvertImage,
+	Name:   "ConvertImage",
+	Fields: []schema.Field{
+		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "FormatFrom", Type: &schema.Interface{Name: "image.Format"}},
+		{Declared: "FormatTo", Type: &schema.Interface{Name: "image.Format"}},
+	},
+}
 
 type binaryClassGetFramebufferColor struct{}
 
@@ -1025,70 +1134,6 @@ var schemacaptureFramebufferDimensions = &schema.Class{
 	Name:   "captureFramebufferDimensions",
 	Fields: []schema.Field{
 		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions"}}},
-	},
-}
-
-type binaryClasscaptures struct{}
-
-func (*captures) Class() binary.Class {
-	return (*binaryClasscaptures)(nil)
-}
-func doEncodecaptures(e binary.Encoder, o *captures) error {
-	if err := e.Uint32(uint32(len(o.ids))); err != nil {
-		return err
-	}
-	for i := range o.ids {
-		if err := e.Value(&o.ids[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodecaptures(d binary.Decoder, o *captures) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.ids = make(service.CaptureIdArray, count)
-		for i := range o.ids {
-			if err := d.Value(&o.ids[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipcaptures(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClasscaptures) ID() binary.ID      { return binaryIDcaptures }
-func (*binaryClasscaptures) New() binary.Object { return &captures{} }
-func (*binaryClasscaptures) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecaptures(e, obj.(*captures))
-}
-func (*binaryClasscaptures) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &captures{}
-	return obj, doDecodecaptures(d, obj)
-}
-func (*binaryClasscaptures) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecaptures(d, obj.(*captures))
-}
-func (*binaryClasscaptures) Skip(d binary.Decoder) error { return doSkipcaptures(d) }
-func (*binaryClasscaptures) Schema() *schema.Class       { return schemacaptures }
-
-var schemacaptures = &schema.Class{
-	TypeID: binaryIDcaptures,
-	Name:   "captures",
-	Fields: []schema.Field{
-		{Declared: "ids", Type: &schema.Slice{Alias: "service.CaptureIdArray", ValueType: &schema.Struct{Name: "service.CaptureId"}}},
 	},
 }
 

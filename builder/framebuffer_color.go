@@ -25,64 +25,66 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build writes to out the ImageInfo resource resulting from the given GetFramebufferColor request.
-func (request *GetFramebufferColor) build(db database.Database, logger log.Logger, out binary.Object) error {
-	if !request.API.Valid() {
-		return fmt.Errorf("API must be valid")
+// BuildLazy returns the *service.ImageInfo resulting from the given
+// GetFramebufferColor request.
+func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	if !r.API.Valid() {
+		return nil, fmt.Errorf("API must be valid")
 	}
 
-	fbWidth, fbHeight, err := getAtomFramebufferDimensions(request.Capture, request.After, db, logger)
+	fbWidth, fbHeight, err := getAtomFramebufferDimensions(r.Capture, r.After, d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	imgWidth, imgHeight := uniformScale(fbWidth, fbHeight, request.Settings.MaxWidth, request.Settings.MaxHeight)
+	imgWidth, imgHeight := uniformScale(fbWidth, fbHeight, r.Settings.MaxWidth, r.Settings.MaxHeight)
 
-	data, err := db.StoreRequest(&RenderFramebufferColor{
-		Capture:   request.Capture,
-		Device:    request.Device,
-		API:       request.API,
-		After:     request.After,
+	data, err := d.Store(&RenderFramebufferColor{
+		Capture:   r.Capture,
+		Device:    r.Device,
+		API:       r.API,
+		After:     r.After,
 		Width:     imgWidth,
 		Height:    imgHeight,
-		Wireframe: request.Settings.Wireframe,
-	}, logger)
+		Wireframe: r.Settings.Wireframe,
+	}, l)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	database.CopyResource(out, &service.ImageInfo{
+	return &service.ImageInfo{
 		Format: service.ImageFormatRGBA8, // TODO: Add support for other formats.
 		Width:  imgWidth,
 		Height: imgHeight,
 		Data:   service.BinaryId{ID: data},
-	})
-	return nil
+	}, nil
 }
 
-// build computes and writes the output of the given RenderFramebufferColor request to the given out.
-func (request *RenderFramebufferColor) build(mgr *replay.Manager, db database.Database, logger log.Logger, out binary.Object) error {
+// BuildLazy returns the *service.Binary data for the given RenderFramebufferColor
+// request.
+func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	mgr := c.(*Context).ReplayManager
+
 	ctx := &replay.Context{
-		DeviceID:  request.Device,
-		CaptureID: request.Capture,
+		DeviceID:  r.Device,
+		CaptureID: r.Capture,
 	}
 
-	api := gfxapi.Find(gfxapi.ID(request.API.ID))
+	api := gfxapi.Find(gfxapi.ID(r.API.ID))
 	if api == nil {
-		return fmt.Errorf("Unknown graphics API '%v'", request.API.ID)
+		return nil, fmt.Errorf("Unknown graphics API '%v'", r.API.ID)
 	}
 
 	query, ok := api.(replay.QueryColorBuffer)
 	if !ok {
-		return fmt.Errorf("The graphics API %s does not support reading color buffers", api.Name())
+		return nil, fmt.Errorf("The graphics API %s does not support reading color buffers", api.Name())
 	}
 
-	img := <-query.QueryColorBuffer(ctx, mgr, request.After, request.Width, request.Height, request.Wireframe)
+	img := <-query.QueryColorBuffer(ctx, mgr, r.After, r.Width, r.Height, r.Wireframe)
 	if img.Error != nil {
-		logger.Errorf("%v", img.Error)
-		return img.Error
+		l.Errorf("%v", img.Error)
+		return nil, img.Error
 	}
 
-	database.CopyResource(out, &service.Binary{Data: img.Data})
-	return nil
+	return &service.Binary{Data: img.Data}, nil
 }

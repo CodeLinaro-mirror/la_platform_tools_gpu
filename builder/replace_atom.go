@@ -15,58 +15,53 @@
 package builder
 
 import (
-	"bytes"
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build writes to out the Capture resource resulting from the given ReplaceAtom request.
-func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := service.ResolveCapture(db, logger, request.Capture)
+// BuildLazy returns a new *service.Capture, with a single atom replaced.
+func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	original, err := service.ResolveCapture(d, l, request.Capture)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	atoms, err := loadAtoms(original.Atoms, d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if request.Atom >= atom.ID(len(atoms)) {
-		return fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
+		return nil, fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
 	}
 
 	atom, err := atom.New(request.Type)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(request.Data.Data)))
-	if err := d.Value(atom); err != nil {
-		return err
+	if err := decode(request.Data.Data, atom); err != nil {
+		return nil, err
 	}
 
 	atoms = atoms.Clone()
 	atoms[request.Atom] = atom
 	newStream, err := service.NewAtomStream(atoms)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	newStreamId, err := db.Store(&newStream, logger)
+	newStreamId, err := service.StoreAtomStream(d, l, &newStream)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	capture.Atoms = service.AtomStreamId{ID: newStreamId}
-
-	database.CopyResource(out, &capture)
-	return nil
+	capture := original
+	capture.Atoms = newStreamId
+	return &capture, nil
 }

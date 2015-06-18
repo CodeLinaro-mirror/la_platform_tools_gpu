@@ -12,14 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package database
+package builder
 
 import (
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/log"
+	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/database"
 )
 
-type builder interface {
-	BuildResource(interface{}, Database, log.Logger, binary.Object) error
-	Version() uint32
+func TestLazyInterfaceCompliance(t *testing.T) {
+	// Interface compliance tests
+	_ = []database.Lazy{
+		(*ConvertImage)(nil),
+		(*GetFramebufferColor)(nil),
+		(*GetFramebufferDepth)(nil),
+		(*GetHierarchy)(nil),
+		(*GetMemoryInfo)(nil),
+		(*GetState)(nil),
+		(*GetTimingInfo)(nil),
+		(*PrerenderFramebuffers)(nil),
+		(*RenderFramebufferColor)(nil),
+		(*RenderFramebufferDepth)(nil),
+		(*ReplaceAtom)(nil),
+
+		(*getCaptureFramebufferDimensions)(nil),
+	}
 }
