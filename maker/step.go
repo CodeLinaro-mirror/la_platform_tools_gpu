@@ -32,6 +32,7 @@ import (
 type Step struct {
 	inputs   []Entity
 	outputs  []Entity
+	disabled bool
 	always   bool
 	action   func(*Step) error
 	once     sync.Once
@@ -135,6 +136,12 @@ func (s *Step) HasOutput(e Entity) bool {
 	return false
 }
 
+// Disable marks a step as disabled, so it will not run.
+func (s *Step) Disable() *Step {
+	s.disabled = true
+	return s
+}
+
 // AlwaysRun marks a step as always needing to run, rather than running only
 // when it's outputs need updating.
 func (s *Step) AlwaysRun() *Step {
@@ -189,6 +196,9 @@ func (s *Step) DependsStruct(v interface{}) {
 }
 
 func (s *Step) updateInputs() {
+	if s.disabled {
+		return
+	}
 	deps := make([]*Step, 0, len(s.inputs))
 	// Bring all inputs up to date in parallel
 	for _, e := range s.inputs {
@@ -208,6 +218,9 @@ func (s *Step) updateInputs() {
 }
 
 func (s *Step) shouldRun() bool {
+	if s.disabled {
+		return false
+	}
 	if s.always {
 		return true
 	}
