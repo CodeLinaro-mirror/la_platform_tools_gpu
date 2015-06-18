@@ -587,11 +587,19 @@ func (h {{$.Name}}) Valid() bool {
     Database      database.Database
   }
 
-  {{range $_, $c := $.Functions}}{{if HasPrefix $c.Name "Resolve"}}
+  {{range $_, $c := $.Functions}}
+  {{if not (IsVoid $c.Return.Type)}}
+  {{$type := Macro "Type" $c.Return.Type}}
+  {{if eq $c.Name (print "Resolve" $type)}}
+  {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
+  func Store{{$type}}(ϟd database.Database, ϟl log.Logger, ϟv *{{$type}}) ({{$handle}}, error) {
+    ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+		return {{$handle}}{ID:ϟid}, ϟerr
+  }
 
-  func {{$c.Name}}(ϟd database.Database, ϟl log.Logger, {{Macro "Parameters" $c}})§
-    (ϟout {{Macro "Type" $c.Return.Type}}, ϟerr error) {
-    ϟerr = ϟd.Load({{(index $c.CallParameters 0).Name}}.ID, ϟl, &ϟout)
+  func Resolve{{$type}}(ϟd database.Database, ϟl log.Logger, ϟid {{$handle}}) ({{$type}}, error) {
+    var ϟout {{$type}}
+    ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
 		return ϟout, ϟerr
   }
 
@@ -600,7 +608,7 @@ func (h {{$.Name}}) Valid() bool {
     return {{$c.Name}}(ϟr.Database, ϟl{{range $p := $c.CallParameters}}, {{$p.Name}}{{end}})
   }
 
-  {{end}}{{end}}
+  {{end}}{{end}}{{end}}
 
 {{end}}
 `
