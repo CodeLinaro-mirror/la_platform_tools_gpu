@@ -17,9 +17,7 @@ package database
 
 import (
 	"crypto/sha1"
-	"fmt"
 	"reflect"
-	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
@@ -46,90 +44,6 @@ func Load(d Database, id binary.ID, l log.Logger, out binary.Object) error {
 	obj, err := d.Resolve(id, l)
 	CopyResource(out, obj)
 	return err
-}
-
-// NewInMemory builds a new in memory database.
-func NewInMemory(buildContext interface{}) Database {
-	return &database{
-		records:      map[binary.ID]*record{},
-		buildContext: buildContext,
-	}
-}
-
-type record struct {
-	value binary.Object
-	err   error
-	wait  chan struct{}
-}
-
-type database struct {
-	mutex        sync.Mutex
-	records      map[binary.ID]*record
-	buildContext interface{} // The build context, user-defined.
-}
-
-func (d *database) Store(id binary.ID, o binary.Object, logger log.Logger) error {
-	d.mutex.Lock()
-	defer d.mutex.Unlock()
-	return d.store(id, o, logger)
-}
-
-func (d *database) store(id binary.ID, o binary.Object, logger log.Logger) error {
-	_, got := d.records[id]
-	if !got {
-		d.records[id] = &record{value: o}
-	}
-	return nil
-}
-
-func (d *database) Resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
-	d.mutex.Lock()
-	defer d.mutex.Unlock()
-	return d.resolve(id, logger)
-}
-
-// load function must be called with a locked mutex
-func (d *database) resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
-	r, got := d.records[id]
-	if !got {
-		return nil, fmt.Errorf("Resource '%v' not found", id)
-	}
-	if r.err != nil {
-		return r.value, r.err
-	}
-	lazy, islazy := r.value.(Lazy)
-	if !islazy {
-		return r.value, r.err
-	}
-	// transform the id to get the lazy result id
-	lazyID := LazyOutputID(id)
-	if r.wait != nil {
-		// an in progress request, wait for it
-		d.mutex.Unlock() // unlock before waiting
-		<-r.wait
-		d.mutex.Lock() // relock after waiting
-		return d.resolve(lazyID, logger)
-	}
-	// must be a first time access to request
-	r.wait = make(chan struct{})
-	value, err := func() (binary.Object, error) { // func for defer scope
-		d.mutex.Unlock()     // don't build under the lock
-		defer d.mutex.Lock() // relock after build
-		return lazy.BuildLazy(d.buildContext, d, logger)
-	}()
-	if err == nil {
-		err = d.store(lazyID, value, logger)
-	}
-	r.err = err
-	close(r.wait)
-	return value, r.err
-}
-
-func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
-	d.mutex.Lock()
-	defer d.mutex.Unlock()
-	_, got := d.records[id]
-	return got
 }
 
 // Hash returns a unique binary.ID based on the contents of the object.
