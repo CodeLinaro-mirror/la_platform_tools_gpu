@@ -28,7 +28,7 @@ func storeAtoms(t *testing.T, atoms atom.List, db database.Database, l log.Logge
 	if err != nil {
 		t.Fatalf("Failed to build atom stream: %v", err)
 	}
-	id, err := db.Store(&stream, l)
+	id, err := database.Store(db, &stream, l)
 	if err != nil {
 		t.Fatalf("Failed to store atom stream: %v", err)
 	}
@@ -42,7 +42,7 @@ func StoreCapture(t *testing.T, atoms atom.List, db database.Database, l log.Log
 		Name:  "test-capture",
 		Atoms: storeAtoms(t, atoms, db, l),
 	}
-	id, err := db.Store(&capture, l)
+	id, err := database.Store(db, &capture, l)
 	if err != nil {
 		t.Fatalf("Failed to store test capture: %v", err)
 	}

@@ -37,6 +37,22 @@ type Database interface {
 	Close()
 }
 
+func StoreLink(d Database, to, id binary.ID, l log.Logger) error {
+	return d.StoreLink(to, id, l)
+}
+
+func StoreRequest(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
+	return d.StoreRequest(obj, l)
+}
+
+func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
+	return d.Store(obj, l)
+}
+
+func Load(d Database, id binary.ID, l log.Logger, out binary.Object) error {
+	return d.Load(id, l, out)
+}
+
 // NewInMemory builds a new in memory database.
 func NewInMemory(buildContext interface{}) Database {
 	return &database{

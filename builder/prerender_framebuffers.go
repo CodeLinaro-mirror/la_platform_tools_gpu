@@ -35,7 +35,7 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 
 	var wg sync.WaitGroup
 	for _, atomID := range r.AtomIDs {
-		id, err := d.StoreRequest(&GetFramebufferColor{
+		id, err := database.StoreRequest(d, &GetFramebufferColor{
 			Capture:  r.Capture,
 			Device:   r.Device,
 			API:      r.API,

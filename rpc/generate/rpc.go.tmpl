@@ -579,13 +579,13 @@ func (h {{$.Name}}) Valid() bool {
   {{if eq $c.Name (print "Resolve" $type)}}
   {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
   func Store{{$type}}(ϟd database.Database, ϟl log.Logger, ϟv *{{$type}}) ({{$handle}}, error) {
-    ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+    ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 		return {{$handle}}{ID:ϟid}, ϟerr
   }
 
   func Resolve{{$type}}(ϟd database.Database, ϟl log.Logger, ϟid {{$handle}}) ({{$type}}, error) {
     var ϟout {{$type}}
-    ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+    ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 		return ϟout, ϟerr
   }
 
