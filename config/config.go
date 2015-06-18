@@ -18,8 +18,7 @@ package config
 const (
 	DebugAtom           = false
 	DebugDatabase       = false
-	DebugDatabaseBuilds = false
-	DebugDatabaseStores = false
+	DebugDatabaseVerify = false
 	DebugReplay         = false
 	DebugReplayBuilder  = false
 	DebugRPCCalls       = false
