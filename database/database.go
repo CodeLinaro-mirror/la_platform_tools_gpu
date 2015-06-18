@@ -34,10 +34,6 @@ type Database interface {
 	Contains(binary.ID, log.Logger) bool
 }
 
-func StoreRequest(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
-	return Store(d, obj, l)
-}
-
 func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
 	id, err := Hash(obj)
 	if err != nil {
