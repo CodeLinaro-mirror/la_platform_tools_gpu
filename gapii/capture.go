@@ -33,7 +33,8 @@ func closed(s chan struct{}) bool {
 	}
 }
 
-const messageGap = 1024 * 128
+const sizeGap = 1024 * 1024 * 5
+const timeGap = time.Second
 
 type siSize int64
 
@@ -64,13 +65,16 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 		return 0, err
 	}
 	defer conn.Close()
-	var count, nextMessage siSize
+	var count, nextSize siSize
+	startTime := time.Now()
+	nextTime := startTime
 	for {
 		if closed(stop) {
 			logger.Infof("Stop: %v", count)
 			break
 		}
-		conn.SetReadDeadline(time.Now().Add(time.Millisecond * 100)) // Allow for stop event and UI refreshes.
+		now := time.Now()
+		conn.SetReadDeadline(now.Add(time.Millisecond * 100)) // Allow for stop event and UI refreshes.
 		n, err := io.CopyN(w, conn, 1024*64)
 		count += siSize(n)
 		if err == io.EOF {
@@ -84,9 +88,11 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 				return int64(count), err
 			}
 		}
-		if count > nextMessage {
-			nextMessage = count + messageGap
-			logger.Infof("Capturing: %v", count)
+		if count > nextSize || now.After(nextTime) {
+			nextSize = count + sizeGap
+			nextTime = now.Add(timeGap)
+			delta := time.Duration(int64(now.Sub(startTime)/time.Millisecond)) * time.Millisecond
+			logger.Infof("Capturing: %v in %v", count, delta)
 		}
 	}
 	return int64(count), nil
