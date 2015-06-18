@@ -24,7 +24,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 // ErrADBNotFound is returned when the ADB executable is not found.
@@ -41,7 +41,7 @@ var adb string
 func init() {
 	// Search for ADB using ANDROID_HOME
 	if home := os.Getenv("ANDROID_HOME"); home != "" {
-		path, err := filepath.Abs(filepath.Join(home, "platform-tools", "adb") + build.HostExecutableExtension)
+		path, err := filepath.Abs(filepath.Join(home, "platform-tools", "adb") + maker.HostExecutableExtension)
 		if err == nil {
 			if _, err := os.Stat(path); err == nil {
 				adb = path
