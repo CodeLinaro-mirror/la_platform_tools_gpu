@@ -30,7 +30,6 @@ import (
 // Database is the interface to a resource store.
 type Database interface {
 	StoreLink(to, id binary.ID, logger log.Logger) error
-	StoreRequest(request binary.Object, logger log.Logger) (id binary.ID, err error)
 	Store(binary.Object, log.Logger) (binary.ID, error)
 	Load(binary.ID, log.Logger, binary.Object) error
 	Contains(binary.ID, log.Logger) bool
@@ -42,7 +41,7 @@ func StoreLink(d Database, to, id binary.ID, l log.Logger) error {
 }
 
 func StoreRequest(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
-	return d.StoreRequest(obj, l)
+	return d.Store(obj, l)
 }
 
 func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
@@ -85,20 +84,6 @@ func (d *database) StoreLink(to, id binary.ID, logger log.Logger) error {
 	return nil
 }
 
-func (d *database) StoreRequest(o binary.Object, logger log.Logger) (binary.ID, error) {
-	id, err := Hash(o)
-	if err != nil {
-		return id, err
-	}
-	d.mutex.Lock()
-	defer d.mutex.Unlock()
-	_, got := d.records[id]
-	if !got {
-		d.records[id] = &record{lazy: o.(Lazy)}
-	}
-	return id, nil
-}
-
 func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) {
 	id, err := Hash(o)
 	if err != nil {
@@ -108,7 +93,11 @@ func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) 
 	defer d.mutex.Unlock()
 	_, got := d.records[id]
 	if !got {
-		d.records[id] = &record{value: o}
+		if lazy, islazy := o.(Lazy); islazy {
+			d.records[id] = &record{lazy: lazy}
+		} else {
+			d.records[id] = &record{value: o}
+		}
 	}
 	return id, nil
 }
