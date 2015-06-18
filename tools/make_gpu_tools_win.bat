@@ -14,4 +14,4 @@ set GO_TEST_FLAGS=-v -x
 
 go build    %GO_BUILD_FLAGS%    %GPU_BUILD_ROOT%\bin\gapis.exe    %GPU_RELATIVE_SOURCE_PATH%\server\gapis
 
-go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --runtests
+go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -v=1 -f -verbose=true cc test

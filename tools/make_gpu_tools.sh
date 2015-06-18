@@ -81,14 +81,17 @@ export GO_TEST_FLAGS="-v -x"
 
 go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
 
-# build.go is failing with gcc errors on the build machine,
+# make.go is failing with gcc errors on the build machine,
 # so disable it for now.
-# TODO: Remove this once build.go runs on the build machine.
+# TODO: Remove this once make.go runs on the build machine.
 if [[ $HOST_OS == "osx-x64" ]]; then
   exit 0
 fi
 
-go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --runtests
+# Kill any existing replay daemon before running tests.
+killall replayd || true
+
+go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true cc test
 
 # Kill any existing replay daemon before running tests.
 killall replayd || true
@@ -108,7 +111,7 @@ fi
 killall replayd || true
 
 if [ $crosscompile_windows -eq 1 ]; then
-  go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --targets=windows
+  go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true -targetos=windows replayd
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
   go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-x64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/gapis
 fi

@@ -26,6 +26,7 @@ import (
 )
 
 var noapic = flag.Bool("noapic", false, "Disable apic code generation")
+var targetOS = flag.String("targetos", HostOS, "target OS to build")
 
 func main() { Run() }
 
@@ -112,7 +113,7 @@ func init() {
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
-		cctargets := []string{HostOS}
+		cctargets := []string{*targetOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
