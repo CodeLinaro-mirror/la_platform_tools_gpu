@@ -265,6 +265,10 @@ EXPORT char* STDCALL glGetString(uint32_t param);
 EXPORT void STDCALL glEnable(uint32_t capability);
 EXPORT void STDCALL glDisable(uint32_t capability);
 EXPORT bool STDCALL glIsEnabled(uint32_t capability);
+EXPORT uint64_t STDCALL glFenceSync(uint32_t condition, uint32_t syncFlags);
+EXPORT void STDCALL glDeleteSync(uint64_t sync);
+EXPORT void STDCALL glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+EXPORT uint32_t STDCALL glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
 EXPORT void* STDCALL
 glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
 EXPORT void STDCALL glUnmapBuffer(uint32_t target);
@@ -296,6 +300,8 @@ EXPORT void STDCALL glBindBufferBase(uint32_t target, uint32_t index, uint32_t b
 EXPORT void STDCALL glGenVertexArrays(int32_t count, uint32_t* arrays);
 EXPORT void STDCALL glBindVertexArray(uint32_t array);
 EXPORT void STDCALL glDeleteVertexArrays(uint32_t count, uint32_t* arrays);
+EXPORT void STDCALL glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value);
+EXPORT void STDCALL glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value);
 EXPORT void STDCALL glGenQueriesEXT(int32_t count, uint32_t* queries);
 EXPORT void STDCALL glBeginQueryEXT(uint32_t target, uint32_t query);
 EXPORT void STDCALL glEndQueryEXT(uint32_t target);
@@ -532,6 +538,10 @@ Spy* spy() {
         gSpy->RegisterSymbol("glEnable", reinterpret_cast<void*>(glEnable));
         gSpy->RegisterSymbol("glDisable", reinterpret_cast<void*>(glDisable));
         gSpy->RegisterSymbol("glIsEnabled", reinterpret_cast<void*>(glIsEnabled));
+        gSpy->RegisterSymbol("glFenceSync", reinterpret_cast<void*>(glFenceSync));
+        gSpy->RegisterSymbol("glDeleteSync", reinterpret_cast<void*>(glDeleteSync));
+        gSpy->RegisterSymbol("glWaitSync", reinterpret_cast<void*>(glWaitSync));
+        gSpy->RegisterSymbol("glClientWaitSync", reinterpret_cast<void*>(glClientWaitSync));
         gSpy->RegisterSymbol("glMapBufferRange", reinterpret_cast<void*>(glMapBufferRange));
         gSpy->RegisterSymbol("glUnmapBuffer", reinterpret_cast<void*>(glUnmapBuffer));
         gSpy->RegisterSymbol("glInvalidateFramebuffer",
@@ -558,6 +568,9 @@ Spy* spy() {
         gSpy->RegisterSymbol("glGenVertexArrays", reinterpret_cast<void*>(glGenVertexArrays));
         gSpy->RegisterSymbol("glBindVertexArray", reinterpret_cast<void*>(glBindVertexArray));
         gSpy->RegisterSymbol("glDeleteVertexArrays", reinterpret_cast<void*>(glDeleteVertexArrays));
+        gSpy->RegisterSymbol("glGetQueryObjecti64v", reinterpret_cast<void*>(glGetQueryObjecti64v));
+        gSpy->RegisterSymbol("glGetQueryObjectui64v",
+                             reinterpret_cast<void*>(glGetQueryObjectui64v));
         gSpy->RegisterSymbol("glGenQueriesEXT", reinterpret_cast<void*>(glGenQueriesEXT));
         gSpy->RegisterSymbol("glBeginQueryEXT", reinterpret_cast<void*>(glBeginQueryEXT));
         gSpy->RegisterSymbol("glEndQueryEXT", reinterpret_cast<void*>(glEndQueryEXT));
@@ -1105,6 +1118,16 @@ EXPORT char* STDCALL glGetString(uint32_t param) { return spy()->glGetString(par
 EXPORT void STDCALL glEnable(uint32_t capability) { spy()->glEnable(capability); }
 EXPORT void STDCALL glDisable(uint32_t capability) { spy()->glDisable(capability); }
 EXPORT bool STDCALL glIsEnabled(uint32_t capability) { return spy()->glIsEnabled(capability); }
+EXPORT uint64_t STDCALL glFenceSync(uint32_t condition, uint32_t syncFlags) {
+    return spy()->glFenceSync(condition, syncFlags);
+}
+EXPORT void STDCALL glDeleteSync(uint64_t sync) { spy()->glDeleteSync(sync); }
+EXPORT void STDCALL glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
+    spy()->glWaitSync(sync, syncFlags, timeout);
+}
+EXPORT uint32_t STDCALL glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
+    return spy()->glClientWaitSync(sync, syncFlags, timeout);
+}
 EXPORT void* STDCALL
 glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access) {
     return spy()->glMapBufferRange(target, offset, length, access);
@@ -1169,6 +1192,12 @@ EXPORT void STDCALL glGenVertexArrays(int32_t count, uint32_t* arrays) {
 EXPORT void STDCALL glBindVertexArray(uint32_t array) { spy()->glBindVertexArray(array); }
 EXPORT void STDCALL glDeleteVertexArrays(uint32_t count, uint32_t* arrays) {
     spy()->glDeleteVertexArrays(count, arrays);
+}
+EXPORT void STDCALL glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value) {
+    spy()->glGetQueryObjecti64v(query, parameter, value);
+}
+EXPORT void STDCALL glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value) {
+    spy()->glGetQueryObjectui64v(query, parameter, value);
 }
 EXPORT void STDCALL glGenQueriesEXT(int32_t count, uint32_t* queries) {
     spy()->glGenQueriesEXT(count, queries);

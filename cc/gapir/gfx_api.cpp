@@ -3364,6 +3364,83 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlFenceSync(Stack* stack, bool pushReturn) {
+    SyncFlags syncFlags = stack->pop<SyncFlags>();
+    SyncCondition condition = stack->pop<SyncCondition>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFenceSync(%u, %u)\n", condition, syncFlags);
+        if (glFenceSync != nullptr) {
+            uint64_t return_value = glFenceSync(condition, syncFlags);
+            GAPID_INFO("Returned: %u\n", return_value);
+            if (pushReturn) {
+                stack->push<uint64_t>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFenceSync\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFenceSync\n");
+        return false;
+    }
+}
+
+bool callGlDeleteSync(Stack* stack, bool pushReturn) {
+    uint64_t sync = stack->pop<uint64_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDeleteSync(%u)\n", sync);
+        if (glDeleteSync != nullptr) {
+            glDeleteSync(sync);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDeleteSync\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDeleteSync\n");
+        return false;
+    }
+}
+
+bool callGlWaitSync(Stack* stack, bool pushReturn) {
+    uint64_t timeout = stack->pop<uint64_t>();
+    SyncFlags syncFlags = stack->pop<SyncFlags>();
+    uint64_t sync = stack->pop<uint64_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+        if (glWaitSync != nullptr) {
+            glWaitSync(sync, syncFlags, timeout);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glWaitSync\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glWaitSync\n");
+        return false;
+    }
+}
+
+bool callGlClientWaitSync(Stack* stack, bool pushReturn) {
+    uint64_t timeout = stack->pop<uint64_t>();
+    SyncFlags syncFlags = stack->pop<SyncFlags>();
+    uint64_t sync = stack->pop<uint64_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClientWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+        if (glClientWaitSync != nullptr) {
+            ClientWaitSyncSignal return_value = glClientWaitSync(sync, syncFlags, timeout);
+            GAPID_INFO("Returned: %u\n", return_value);
+            if (pushReturn) {
+                stack->push<ClientWaitSyncSignal>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClientWaitSync\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClientWaitSync\n");
+        return false;
+    }
+}
+
 bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
     MapBufferRangeAccess access = stack->pop<MapBufferRangeAccess>();
     int32_t length = stack->pop<int32_t>();
@@ -3743,6 +3820,42 @@ bool callGlDeleteVertexArrays(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlGetQueryObjecti64v(Stack* stack, bool pushReturn) {
+    int64_t* value = stack->pop<int64_t*>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    uint32_t query = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetQueryObjecti64v(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjecti64v != nullptr) {
+            glGetQueryObjecti64v(query, parameter, value);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjecti64v\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetQueryObjecti64v\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjectui64v(Stack* stack, bool pushReturn) {
+    uint64_t* value = stack->pop<uint64_t*>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    uint32_t query = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetQueryObjectui64v(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjectui64v != nullptr) {
+            glGetQueryObjectui64v(query, parameter, value);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectui64v\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetQueryObjectui64v\n");
+        return false;
+    }
+}
+
 bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
@@ -4117,6 +4230,10 @@ PFNGLGETSTRING glGetString = nullptr;
 PFNGLENABLE glEnable = nullptr;
 PFNGLDISABLE glDisable = nullptr;
 PFNGLISENABLED glIsEnabled = nullptr;
+PFNGLFENCESYNC glFenceSync = nullptr;
+PFNGLDELETESYNC glDeleteSync = nullptr;
+PFNGLWAITSYNC glWaitSync = nullptr;
+PFNGLCLIENTWAITSYNC glClientWaitSync = nullptr;
 PFNGLMAPBUFFERRANGE glMapBufferRange = nullptr;
 PFNGLUNMAPBUFFER glUnmapBuffer = nullptr;
 PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer = nullptr;
@@ -4137,6 +4254,8 @@ PFNGLBINDBUFFERBASE glBindBufferBase = nullptr;
 PFNGLGENVERTEXARRAYS glGenVertexArrays = nullptr;
 PFNGLBINDVERTEXARRAY glBindVertexArray = nullptr;
 PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays = nullptr;
+PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v = nullptr;
+PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v = nullptr;
 PFNGLGENQUERIESEXT glGenQueriesEXT = nullptr;
 PFNGLBEGINQUERYEXT glBeginQueryEXT = nullptr;
 PFNGLENDQUERYEXT glEndQueryEXT = nullptr;
@@ -4333,6 +4452,10 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlEnable, callGlEnable);
     interpreter->registerFunction(Ids::GlDisable, callGlDisable);
     interpreter->registerFunction(Ids::GlIsEnabled, callGlIsEnabled);
+    interpreter->registerFunction(Ids::GlFenceSync, callGlFenceSync);
+    interpreter->registerFunction(Ids::GlDeleteSync, callGlDeleteSync);
+    interpreter->registerFunction(Ids::GlWaitSync, callGlWaitSync);
+    interpreter->registerFunction(Ids::GlClientWaitSync, callGlClientWaitSync);
     interpreter->registerFunction(Ids::GlMapBufferRange, callGlMapBufferRange);
     interpreter->registerFunction(Ids::GlUnmapBuffer, callGlUnmapBuffer);
     interpreter->registerFunction(Ids::GlInvalidateFramebuffer, callGlInvalidateFramebuffer);
@@ -4355,6 +4478,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGenVertexArrays, callGlGenVertexArrays);
     interpreter->registerFunction(Ids::GlBindVertexArray, callGlBindVertexArray);
     interpreter->registerFunction(Ids::GlDeleteVertexArrays, callGlDeleteVertexArrays);
+    interpreter->registerFunction(Ids::GlGetQueryObjecti64v, callGlGetQueryObjecti64v);
+    interpreter->registerFunction(Ids::GlGetQueryObjectui64v, callGlGetQueryObjectui64v);
     interpreter->registerFunction(Ids::GlGenQueriesEXT, callGlGenQueriesEXT);
     interpreter->registerFunction(Ids::GlBeginQueryEXT, callGlBeginQueryEXT);
     interpreter->registerFunction(Ids::GlEndQueryEXT, callGlEndQueryEXT);
@@ -4695,6 +4820,12 @@ void Initialize() {
     glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable", false));
     glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable", false));
     glIsEnabled = reinterpret_cast<PFNGLISENABLED>(gapic::GetGfxProcAddress("glIsEnabled", false));
+    glFenceSync = reinterpret_cast<PFNGLFENCESYNC>(gapic::GetGfxProcAddress("glFenceSync", false));
+    glDeleteSync =
+            reinterpret_cast<PFNGLDELETESYNC>(gapic::GetGfxProcAddress("glDeleteSync", false));
+    glWaitSync = reinterpret_cast<PFNGLWAITSYNC>(gapic::GetGfxProcAddress("glWaitSync", false));
+    glClientWaitSync = reinterpret_cast<PFNGLCLIENTWAITSYNC>(
+            gapic::GetGfxProcAddress("glClientWaitSync", false));
     glMapBufferRange = reinterpret_cast<PFNGLMAPBUFFERRANGE>(
             gapic::GetGfxProcAddress("glMapBufferRange", false));
     glUnmapBuffer =
@@ -4733,6 +4864,10 @@ void Initialize() {
             gapic::GetGfxProcAddress("glBindVertexArray", false));
     glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
             gapic::GetGfxProcAddress("glDeleteVertexArrays", false));
+    glGetQueryObjecti64v = reinterpret_cast<PFNGLGETQUERYOBJECTI64V>(
+            gapic::GetGfxProcAddress("glGetQueryObjecti64v", false));
+    glGetQueryObjectui64v = reinterpret_cast<PFNGLGETQUERYOBJECTUI64V>(
+            gapic::GetGfxProcAddress("glGetQueryObjectui64v", false));
     glGenQueriesEXT = reinterpret_cast<PFNGLGENQUERIESEXT>(
             gapic::GetGfxProcAddress("glGenQueriesEXT", false));
     glBeginQueryEXT = reinterpret_cast<PFNGLBEGINQUERYEXT>(

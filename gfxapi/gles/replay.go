@@ -282,9 +282,4 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	for programId := range c.Instances.Programs {
 		out.Write(id, NewGlDeleteProgram(programId))
 	}
-
-	// Delete all SyncObjects. TODO: Uncomment when added to API file.
-	// for syncObjectId := range c.Instances.SyncObjects {
-	// 	out.Write(id, NewGlDeleteSync(syncObjectId))
-	// }
 }

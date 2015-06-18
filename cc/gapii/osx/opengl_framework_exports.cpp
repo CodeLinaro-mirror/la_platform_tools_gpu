@@ -582,10 +582,6 @@ static void* real__glClientActiveTextureARB = nullptr;
 EXPORT void __attribute__((naked)) glClientActiveTextureARB() {
     asm("jmp *%%rax" : : "a"(real__glClientActiveTextureARB) : );
 }
-static void* real__glClientWaitSync = nullptr;
-EXPORT void __attribute__((naked)) glClientWaitSync() {
-    asm("jmp *%%rax" : : "a"(real__glClientWaitSync) : );
-}
 static void* real__glClipPlane = nullptr;
 EXPORT void __attribute__((naked)) glClipPlane() {
     asm("jmp *%%rax" : : "a"(real__glClipPlane) : );
@@ -950,10 +946,6 @@ static void* real__glDeleteSamplers = nullptr;
 EXPORT void __attribute__((naked)) glDeleteSamplers() {
     asm("jmp *%%rax" : : "a"(real__glDeleteSamplers) : );
 }
-static void* real__glDeleteSync = nullptr;
-EXPORT void __attribute__((naked)) glDeleteSync() {
-    asm("jmp *%%rax" : : "a"(real__glDeleteSync) : );
-}
 static void* real__glDeleteTransformFeedbacks = nullptr;
 EXPORT void __attribute__((naked)) glDeleteTransformFeedbacks() {
     asm("jmp *%%rax" : : "a"(real__glDeleteTransformFeedbacks) : );
@@ -1189,10 +1181,6 @@ EXPORT void __attribute__((naked)) glEvalPoint2() {
 static void* real__glFeedbackBuffer = nullptr;
 EXPORT void __attribute__((naked)) glFeedbackBuffer() {
     asm("jmp *%%rax" : : "a"(real__glFeedbackBuffer) : );
-}
-static void* real__glFenceSync = nullptr;
-EXPORT void __attribute__((naked)) glFenceSync() {
-    asm("jmp *%%rax" : : "a"(real__glFenceSync) : );
 }
 static void* real__glFinalCombinerInputNV = nullptr;
 EXPORT void __attribute__((naked)) glFinalCombinerInputNV() {
@@ -1718,10 +1706,6 @@ static void* real__glGetQueryIndexediv = nullptr;
 EXPORT void __attribute__((naked)) glGetQueryIndexediv() {
     asm("jmp *%%rax" : : "a"(real__glGetQueryIndexediv) : );
 }
-static void* real__glGetQueryObjecti64v = nullptr;
-EXPORT void __attribute__((naked)) glGetQueryObjecti64v() {
-    asm("jmp *%%rax" : : "a"(real__glGetQueryObjecti64v) : );
-}
 static void* real__glGetQueryObjectiv = nullptr;
 EXPORT void __attribute__((naked)) glGetQueryObjectiv() {
     asm("jmp *%%rax" : : "a"(real__glGetQueryObjectiv) : );
@@ -1729,10 +1713,6 @@ EXPORT void __attribute__((naked)) glGetQueryObjectiv() {
 static void* real__glGetQueryObjectivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetQueryObjectivARB() {
     asm("jmp *%%rax" : : "a"(real__glGetQueryObjectivARB) : );
-}
-static void* real__glGetQueryObjectui64v = nullptr;
-EXPORT void __attribute__((naked)) glGetQueryObjectui64v() {
-    asm("jmp *%%rax" : : "a"(real__glGetQueryObjectui64v) : );
 }
 static void* real__glGetQueryObjectuivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetQueryObjectuivARB() {
@@ -4602,10 +4582,6 @@ static void* real__glViewportIndexedfv = nullptr;
 EXPORT void __attribute__((naked)) glViewportIndexedfv() {
     asm("jmp *%%rax" : : "a"(real__glViewportIndexedfv) : );
 }
-static void* real__glWaitSync = nullptr;
-EXPORT void __attribute__((naked)) glWaitSync() {
-    asm("jmp *%%rax" : : "a"(real__glWaitSync) : );
-}
 static void* real__glWeightPointerARB = nullptr;
 EXPORT void __attribute__((naked)) glWeightPointerARB() {
     asm("jmp *%%rax" : : "a"(real__glWeightPointerARB) : );
@@ -5225,7 +5201,6 @@ static void initExports() {
     real__glClearIndex = gapic::GetGfxProcAddress("glClearIndex", true);
     real__glClientActiveTexture = gapic::GetGfxProcAddress("glClientActiveTexture", true);
     real__glClientActiveTextureARB = gapic::GetGfxProcAddress("glClientActiveTextureARB", true);
-    real__glClientWaitSync = gapic::GetGfxProcAddress("glClientWaitSync", true);
     real__glClipPlane = gapic::GetGfxProcAddress("glClipPlane", true);
     real__glColor3b = gapic::GetGfxProcAddress("glColor3b", true);
     real__glColor3bv = gapic::GetGfxProcAddress("glColor3bv", true);
@@ -5317,7 +5292,6 @@ static void initExports() {
     real__glDeleteQueriesARB = gapic::GetGfxProcAddress("glDeleteQueriesARB", true);
     real__glDeleteRenderbuffersEXT = gapic::GetGfxProcAddress("glDeleteRenderbuffersEXT", true);
     real__glDeleteSamplers = gapic::GetGfxProcAddress("glDeleteSamplers", true);
-    real__glDeleteSync = gapic::GetGfxProcAddress("glDeleteSync", true);
     real__glDeleteTransformFeedbacks = gapic::GetGfxProcAddress("glDeleteTransformFeedbacks", true);
     real__glDeleteVertexArraysAPPLE = gapic::GetGfxProcAddress("glDeleteVertexArraysAPPLE", true);
     real__glDepthBoundsEXT = gapic::GetGfxProcAddress("glDepthBoundsEXT", true);
@@ -5377,7 +5351,6 @@ static void initExports() {
     real__glEvalPoint1 = gapic::GetGfxProcAddress("glEvalPoint1", true);
     real__glEvalPoint2 = gapic::GetGfxProcAddress("glEvalPoint2", true);
     real__glFeedbackBuffer = gapic::GetGfxProcAddress("glFeedbackBuffer", true);
-    real__glFenceSync = gapic::GetGfxProcAddress("glFenceSync", true);
     real__glFinalCombinerInputNV = gapic::GetGfxProcAddress("glFinalCombinerInputNV", true);
     real__glFinishFenceAPPLE = gapic::GetGfxProcAddress("glFinishFenceAPPLE", true);
     real__glFinishObjectAPPLE = gapic::GetGfxProcAddress("glFinishObjectAPPLE", true);
@@ -5509,10 +5482,8 @@ static void initExports() {
     real__glGetProgramStringARB = gapic::GetGfxProcAddress("glGetProgramStringARB", true);
     real__glGetProgramivARB = gapic::GetGfxProcAddress("glGetProgramivARB", true);
     real__glGetQueryIndexediv = gapic::GetGfxProcAddress("glGetQueryIndexediv", true);
-    real__glGetQueryObjecti64v = gapic::GetGfxProcAddress("glGetQueryObjecti64v", true);
     real__glGetQueryObjectiv = gapic::GetGfxProcAddress("glGetQueryObjectiv", true);
     real__glGetQueryObjectivARB = gapic::GetGfxProcAddress("glGetQueryObjectivARB", true);
-    real__glGetQueryObjectui64v = gapic::GetGfxProcAddress("glGetQueryObjectui64v", true);
     real__glGetQueryObjectuivARB = gapic::GetGfxProcAddress("glGetQueryObjectuivARB", true);
     real__glGetQueryivARB = gapic::GetGfxProcAddress("glGetQueryivARB", true);
     real__glGetRenderbufferParameterivEXT = gapic::GetGfxProcAddress("glGetRenderbufferParameterivEXT", true);
@@ -6230,7 +6201,6 @@ static void initExports() {
     real__glViewportArrayv = gapic::GetGfxProcAddress("glViewportArrayv", true);
     real__glViewportIndexedf = gapic::GetGfxProcAddress("glViewportIndexedf", true);
     real__glViewportIndexedfv = gapic::GetGfxProcAddress("glViewportIndexedfv", true);
-    real__glWaitSync = gapic::GetGfxProcAddress("glWaitSync", true);
     real__glWeightPointerARB = gapic::GetGfxProcAddress("glWeightPointerARB", true);
     real__glWeightbvARB = gapic::GetGfxProcAddress("glWeightbvARB", true);
     real__glWeightdvARB = gapic::GetGfxProcAddress("glWeightdvARB", true);
