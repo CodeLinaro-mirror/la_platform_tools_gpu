@@ -79,6 +79,13 @@ func (i QueryId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap boo
 	return
 }
 
+func (i SyncObject) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
+	if i != 0 {
+		key, remap = i, true
+	}
+	return
+}
+
 func (i UniformLocation) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	state := getContext(s)
 	program := state.BoundProgram

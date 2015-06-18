@@ -267,6 +267,10 @@ public:
     inline void glEnable(uint32_t capability);
     inline void glDisable(uint32_t capability);
     inline bool glIsEnabled(uint32_t capability);
+    inline uint64_t glFenceSync(uint32_t condition, uint32_t syncFlags);
+    inline void glDeleteSync(uint64_t sync);
+    inline void glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+    inline uint32_t glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
     inline void* glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
     inline void glUnmapBuffer(uint32_t target);
     inline void glInvalidateFramebuffer(uint32_t target, int32_t count, uint32_t* attachments);
@@ -296,6 +300,8 @@ public:
     inline void glGenVertexArrays(int32_t count, uint32_t* arrays);
     inline void glBindVertexArray(uint32_t array);
     inline void glDeleteVertexArrays(uint32_t count, uint32_t* arrays);
+    inline void glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value);
+    inline void glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value);
     inline void glGenQueriesEXT(int32_t count, uint32_t* queries);
     inline void glBeginQueryEXT(uint32_t target, uint32_t query);
     inline void glEndQueryEXT(uint32_t target);
@@ -5430,6 +5436,76 @@ inline bool GlesSpy::glIsEnabled(uint32_t capability) {
     return result;
 }
 
+inline uint64_t GlesSpy::glFenceSync(uint32_t condition, uint32_t syncFlags) {
+    GAPID_INFO("glFenceSync(%u, %u)\n", condition, syncFlags);
+
+    uint64_t result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.glFenceSync(condition, syncFlags);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(178);  // Type ID -- TODO: mEncoder->Id(GL_FENCE_SYNC_ID);
+    gapic::coder::gles::GlFenceSync coder(observations, condition, syncFlags, result);
+    mEncoder->Value(&coder);
+
+    return result;
+}
+
+inline void GlesSpy::glDeleteSync(uint64_t sync) {
+    GAPID_INFO("glDeleteSync(%u)\n", sync);
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        mImports.glDeleteSync(sync);
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(179);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_SYNC_ID);
+    gapic::coder::gles::GlDeleteSync coder(observations, sync);
+    mEncoder->Value(&coder);
+}
+
+inline void GlesSpy::glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
+    GAPID_INFO("glWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        mImports.glWaitSync(sync, syncFlags, timeout);
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(180);  // Type ID -- TODO: mEncoder->Id(GL_WAIT_SYNC_ID);
+    gapic::coder::gles::GlWaitSync coder(observations, sync, syncFlags, timeout);
+    mEncoder->Value(&coder);
+}
+
+inline uint32_t GlesSpy::glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout) {
+    GAPID_INFO("glClientWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+
+    uint32_t result = 0;
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        result = mImports.glClientWaitSync(sync, syncFlags, timeout);
+        break;
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(181);  // Type ID -- TODO: mEncoder->Id(GL_CLIENT_WAIT_SYNC_ID);
+    gapic::coder::gles::GlClientWaitSync coder(observations, sync, syncFlags, timeout, result);
+    mEncoder->Value(&coder);
+
+    return result;
+}
+
 inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t length,
                                        uint32_t access) {
     GAPID_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
@@ -5444,7 +5520,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(178);  // Type ID -- TODO: mEncoder->Id(GL_MAP_BUFFER_RANGE_ID);
+    mEncoder->Uint16(182);  // Type ID -- TODO: mEncoder->Id(GL_MAP_BUFFER_RANGE_ID);
     gapic::coder::gles::GlMapBufferRange coder(
             observations, target, offset, length, access,
             gapic::coder::gles::Void__P(reinterpret_cast<uintptr_t>(result), 0));
@@ -5463,7 +5539,7 @@ inline void GlesSpy::glUnmapBuffer(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(179);  // Type ID -- TODO: mEncoder->Id(GL_UNMAP_BUFFER_ID);
+    mEncoder->Uint16(183);  // Type ID -- TODO: mEncoder->Id(GL_UNMAP_BUFFER_ID);
     gapic::coder::gles::GlUnmapBuffer coder(observations, target);
     mEncoder->Value(&coder);
 }
@@ -5479,7 +5555,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(180);  // Type ID -- TODO: mEncoder->Id(GL_INVALIDATE_FRAMEBUFFER_ID);
+    mEncoder->Uint16(184);  // Type ID -- TODO: mEncoder->Id(GL_INVALIDATE_FRAMEBUFFER_ID);
     gapic::coder::gles::GlInvalidateFramebuffer coder(
             observations, target, count, gapic::coder::gles::FramebufferAttachment__P(
                                                  reinterpret_cast<uintptr_t>(attachments), 0));
@@ -5500,7 +5576,7 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
     observe(observations.mWrites);
 
     mEncoder->Uint16(
-            181);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_MULTISAMPLE_ID);
+            185);  // Type ID -- TODO: mEncoder->Id(GL_RENDERBUFFER_STORAGE_MULTISAMPLE_ID);
     gapic::coder::gles::GlRenderbufferStorageMultisample coder(observations, target, samples,
                                                                format, width, height);
     mEncoder->Value(&coder);
@@ -5520,7 +5596,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(182);  // Type ID -- TODO: mEncoder->Id(GL_BLIT_FRAMEBUFFER_ID);
+    mEncoder->Uint16(186);  // Type ID -- TODO: mEncoder->Id(GL_BLIT_FRAMEBUFFER_ID);
     gapic::coder::gles::GlBlitFramebuffer coder(observations, srcX0, srcY0, srcX1, srcY1, dstX0,
                                                 dstY0, dstX1, dstY1, mask, filter);
     mEncoder->Value(&coder);
@@ -5546,7 +5622,7 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(183);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_ID);
+    mEncoder->Uint16(187);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_ID);
     gapic::coder::gles::GlGenQueries coder(
             observations, count,
             gapic::coder::gles::QueryId__P(reinterpret_cast<uintptr_t>(queries), 0));
@@ -5563,7 +5639,7 @@ inline void GlesSpy::glBeginQuery(uint32_t target, uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(184);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_ID);
+    mEncoder->Uint16(188);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_ID);
     gapic::coder::gles::GlBeginQuery coder(observations, target, query);
     mEncoder->Value(&coder);
 }
@@ -5578,7 +5654,7 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(185);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_ID);
+    mEncoder->Uint16(189);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_ID);
     gapic::coder::gles::GlEndQuery coder(observations, target);
     mEncoder->Value(&coder);
 }
@@ -5600,7 +5676,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(186);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_ID);
+    mEncoder->Uint16(190);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_ID);
     gapic::coder::gles::GlDeleteQueries coder(
             observations, count,
             gapic::coder::gles::QueryId__P(reinterpret_cast<uintptr_t>(queries), 0));
@@ -5623,7 +5699,7 @@ inline bool GlesSpy::glIsQuery(uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(187);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_ID);
+    mEncoder->Uint16(191);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_ID);
     gapic::coder::gles::GlIsQuery coder(observations, query, result);
     mEncoder->Value(&coder);
 
@@ -5641,7 +5717,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(188);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
+    mEncoder->Uint16(192);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
     gapic::coder::gles::GlGetQueryiv coder(
             observations, target, parameter,
             gapic::coder::gles::S32__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -5659,7 +5735,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(189);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
+    mEncoder->Uint16(193);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
     gapic::coder::gles::GlGetQueryObjectuiv coder(
             observations, query, parameter,
             gapic::coder::gles::U32__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -5683,7 +5759,7 @@ inline void GlesSpy::glGetActiveUniformBlockName(uint32_t program, uint32_t unif
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(190);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCK_NAME_ID);
+    mEncoder->Uint16(194);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCK_NAME_ID);
     gapic::coder::gles::GlGetActiveUniformBlockName coder(
             observations, program, uniform_block_index, buffer_size,
             gapic::coder::gles::S32__P(reinterpret_cast<uintptr_t>(buffer_bytes_written), 0),
@@ -5705,7 +5781,7 @@ inline void GlesSpy::glGetActiveUniformBlockiv(uint32_t program, uint32_t unifor
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(191);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCKIV_ID);
+    mEncoder->Uint16(195);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_BLOCKIV_ID);
     gapic::coder::gles::GlGetActiveUniformBlockiv coder(
             observations, program, uniform_block_index, parameter_name,
             gapic::coder::gles::S32__P(reinterpret_cast<uintptr_t>(parameters), 0));
@@ -5724,7 +5800,7 @@ inline void GlesSpy::glUniformBlockBinding(uint32_t program, uint32_t uniform_bl
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(192);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_BLOCK_BINDING_ID);
+    mEncoder->Uint16(196);  // Type ID -- TODO: mEncoder->Id(GL_UNIFORM_BLOCK_BINDING_ID);
     gapic::coder::gles::GlUniformBlockBinding coder(observations, program, uniform_block_index,
                                                     uniform_block_binding);
     mEncoder->Value(&coder);
@@ -5746,7 +5822,7 @@ inline void GlesSpy::glGetActiveUniformsiv(uint32_t program, uint32_t uniform_co
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(193);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORMSIV_ID);
+    mEncoder->Uint16(197);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORMSIV_ID);
     gapic::coder::gles::GlGetActiveUniformsiv coder(
             observations, program, uniform_count,
             gapic::coder::gles::U32__P(reinterpret_cast<uintptr_t>(uniform_indices), 0),
@@ -5764,7 +5840,7 @@ inline void GlesSpy::glBindBufferBase(uint32_t target, uint32_t index, uint32_t 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(194);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_BASE_ID);
+    mEncoder->Uint16(198);  // Type ID -- TODO: mEncoder->Id(GL_BIND_BUFFER_BASE_ID);
     gapic::coder::gles::GlBindBufferBase coder(observations, target, index, buffer);
     mEncoder->Value(&coder);
 }
@@ -5790,7 +5866,7 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(195);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_ID);
+    mEncoder->Uint16(199);  // Type ID -- TODO: mEncoder->Id(GL_GEN_VERTEX_ARRAYS_ID);
     gapic::coder::gles::GlGenVertexArrays coder(
             observations, count,
             gapic::coder::gles::VertexArrayId__P(reinterpret_cast<uintptr_t>(arrays), 0));
@@ -5815,7 +5891,7 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(196);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_ID);
+    mEncoder->Uint16(200);  // Type ID -- TODO: mEncoder->Id(GL_BIND_VERTEX_ARRAY_ID);
     gapic::coder::gles::GlBindVertexArray coder(observations, array);
     mEncoder->Value(&coder);
 }
@@ -5838,10 +5914,46 @@ inline void GlesSpy::glDeleteVertexArrays(uint32_t count, uint32_t* arrays) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(197);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_ID);
+    mEncoder->Uint16(201);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_VERTEX_ARRAYS_ID);
     gapic::coder::gles::GlDeleteVertexArrays coder(
             observations, count,
             gapic::coder::gles::VertexArrayId__P(reinterpret_cast<uintptr_t>(arrays), 0));
+    mEncoder->Value(&coder);
+}
+
+inline void GlesSpy::glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value) {
+    GAPID_INFO("glGetQueryObjecti64v(%u, %u, %p)\n", query, parameter, value);
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        mImports.glGetQueryObjecti64v(query, parameter, value);
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(202);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_ID);
+    gapic::coder::gles::GlGetQueryObjecti64v coder(
+            observations, query, parameter,
+            gapic::coder::gles::S64__P(reinterpret_cast<uintptr_t>(value), 0));
+    mEncoder->Value(&coder);
+}
+
+inline void GlesSpy::glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value) {
+    GAPID_INFO("glGetQueryObjectui64v(%u, %u, %p)\n", query, parameter, value);
+
+    Observations observations;
+    do {
+        observe(observations.mReads);
+        mImports.glGetQueryObjectui64v(query, parameter, value);
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
+    } while (false);
+    observe(observations.mWrites);
+
+    mEncoder->Uint16(203);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_ID);
+    gapic::coder::gles::GlGetQueryObjectui64v coder(
+            observations, query, parameter,
+            gapic::coder::gles::U64__P(reinterpret_cast<uintptr_t>(value), 0));
     mEncoder->Value(&coder);
 }
 
@@ -5865,7 +5977,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(198);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_E_X_T_ID);
+    mEncoder->Uint16(204);  // Type ID -- TODO: mEncoder->Id(GL_GEN_QUERIES_E_X_T_ID);
     gapic::coder::gles::GlGenQueriesEXT coder(
             observations, count,
             gapic::coder::gles::QueryId__P(reinterpret_cast<uintptr_t>(queries), 0));
@@ -5882,7 +5994,7 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(199);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_E_X_T_ID);
+    mEncoder->Uint16(205);  // Type ID -- TODO: mEncoder->Id(GL_BEGIN_QUERY_E_X_T_ID);
     gapic::coder::gles::GlBeginQueryEXT coder(observations, target, query);
     mEncoder->Value(&coder);
 }
@@ -5897,7 +6009,7 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(200);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_E_X_T_ID);
+    mEncoder->Uint16(206);  // Type ID -- TODO: mEncoder->Id(GL_END_QUERY_E_X_T_ID);
     gapic::coder::gles::GlEndQueryEXT coder(observations, target);
     mEncoder->Value(&coder);
 }
@@ -5919,7 +6031,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(201);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_E_X_T_ID);
+    mEncoder->Uint16(207);  // Type ID -- TODO: mEncoder->Id(GL_DELETE_QUERIES_E_X_T_ID);
     gapic::coder::gles::GlDeleteQueriesEXT coder(
             observations, count,
             gapic::coder::gles::QueryId__P(reinterpret_cast<uintptr_t>(queries), 0));
@@ -5942,7 +6054,7 @@ inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(202);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_E_X_T_ID);
+    mEncoder->Uint16(208);  // Type ID -- TODO: mEncoder->Id(GL_IS_QUERY_E_X_T_ID);
     gapic::coder::gles::GlIsQueryEXT coder(observations, query, result);
     mEncoder->Value(&coder);
 
@@ -5959,7 +6071,7 @@ inline void GlesSpy::glQueryCounterEXT(uint32_t query, uint32_t target) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(203);  // Type ID -- TODO: mEncoder->Id(GL_QUERY_COUNTER_E_X_T_ID);
+    mEncoder->Uint16(209);  // Type ID -- TODO: mEncoder->Id(GL_QUERY_COUNTER_E_X_T_ID);
     gapic::coder::gles::GlQueryCounterEXT coder(observations, query, target);
     mEncoder->Value(&coder);
 }
@@ -5975,7 +6087,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(204);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
+    mEncoder->Uint16(210);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
     gapic::coder::gles::GlGetQueryivEXT coder(
             observations, target, parameter,
             gapic::coder::gles::S32__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -5993,7 +6105,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(205);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
+    mEncoder->Uint16(211);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
     gapic::coder::gles::GlGetQueryObjectivEXT coder(
             observations, query, parameter,
             gapic::coder::gles::S32__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -6011,7 +6123,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(206);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
+    mEncoder->Uint16(212);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
     gapic::coder::gles::GlGetQueryObjectuivEXT coder(
             observations, query, parameter,
             gapic::coder::gles::U32__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -6029,7 +6141,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(207);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
+    mEncoder->Uint16(213);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
     gapic::coder::gles::GlGetQueryObjecti64vEXT coder(
             observations, query, parameter,
             gapic::coder::gles::S64__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -6047,7 +6159,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(208);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);
+    mEncoder->Uint16(214);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);
     gapic::coder::gles::GlGetQueryObjectui64vEXT coder(
             observations, query, parameter,
             gapic::coder::gles::U64__P(reinterpret_cast<uintptr_t>(value), 0));
@@ -6065,7 +6177,7 @@ inline void GlesSpy::architecture(uint32_t pointer_alignment, uint32_t pointer_s
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(209);  // Type ID -- TODO: mEncoder->Id(ARCHITECTURE_ID);
+    mEncoder->Uint16(215);  // Type ID -- TODO: mEncoder->Id(ARCHITECTURE_ID);
     gapic::coder::gles::Architecture coder(observations, pointer_alignment, pointer_size,
                                            integer_size, little_endian);
     mEncoder->Value(&coder);
@@ -6080,7 +6192,7 @@ inline void GlesSpy::replayCreateRenderer(uint32_t id) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(210);  // Type ID -- TODO: mEncoder->Id(REPLAY_CREATE_RENDERER_ID);
+    mEncoder->Uint16(216);  // Type ID -- TODO: mEncoder->Id(REPLAY_CREATE_RENDERER_ID);
     gapic::coder::gles::ReplayCreateRenderer coder(observations, id);
     mEncoder->Value(&coder);
 }
@@ -6094,7 +6206,7 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(211);  // Type ID -- TODO: mEncoder->Id(REPLAY_BIND_RENDERER_ID);
+    mEncoder->Uint16(217);  // Type ID -- TODO: mEncoder->Id(REPLAY_BIND_RENDERER_ID);
     gapic::coder::gles::ReplayBindRenderer coder(observations, id);
     mEncoder->Value(&coder);
 }
@@ -6141,7 +6253,7 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(212);  // Type ID -- TODO: mEncoder->Id(BACKBUFFER_INFO_ID);
+    mEncoder->Uint16(218);  // Type ID -- TODO: mEncoder->Id(BACKBUFFER_INFO_ID);
     gapic::coder::gles::BackbufferInfo coder(observations, width, height, color_fmt, depth_fmt,
                                              stencil_fmt, resetViewportScissor);
     mEncoder->Value(&coder);
@@ -6156,7 +6268,7 @@ inline void GlesSpy::startTimer(uint8_t index) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(213);  // Type ID -- TODO: mEncoder->Id(START_TIMER_ID);
+    mEncoder->Uint16(219);  // Type ID -- TODO: mEncoder->Id(START_TIMER_ID);
     gapic::coder::gles::StartTimer coder(observations, index);
     mEncoder->Value(&coder);
 }
@@ -6173,7 +6285,7 @@ inline uint64_t GlesSpy::stopTimer(uint8_t index) {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(214);  // Type ID -- TODO: mEncoder->Id(STOP_TIMER_ID);
+    mEncoder->Uint16(220);  // Type ID -- TODO: mEncoder->Id(STOP_TIMER_ID);
     gapic::coder::gles::StopTimer coder(observations, index, result);
     mEncoder->Value(&coder);
 
@@ -6189,7 +6301,7 @@ inline void GlesSpy::flushPostBuffer() {
     } while (false);
     observe(observations.mWrites);
 
-    mEncoder->Uint16(215);  // Type ID -- TODO: mEncoder->Id(FLUSH_POST_BUFFER_ID);
+    mEncoder->Uint16(221);  // Type ID -- TODO: mEncoder->Id(FLUSH_POST_BUFFER_ID);
     gapic::coder::gles::FlushPostBuffer coder(observations);
     mEncoder->Value(&coder);
 }

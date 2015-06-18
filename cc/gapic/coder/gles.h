@@ -2466,6 +2466,34 @@ namespace gles {
         int32_t mStencil;
     };
 
+    class GlClientWaitSync: public Encodable {
+    public:
+        GlClientWaitSync() = default;
+        GlClientWaitSync(atom::Observations observations, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout, uint32_t Result) :
+            mobservations(observations),
+            mSync(Sync),
+            mSyncFlags(SyncFlags),
+            mTimeout(Timeout),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xea, 0x1e, 0x79, 0x45, 0x87, 0x25, 0x3c, 0x33, 0xcb, 0xc3, 0x9c, 0x40, 0x3c, 0x47, 0xdd, 0xee, 0x6a, 0x11, 0xa4, 0x5f,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint64(this->mSync);
+            e->Uint32(this->mSyncFlags);
+            e->Uint64(this->mTimeout);
+            e->Uint32(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        uint64_t mSync;
+        uint32_t mSyncFlags;
+        uint64_t mTimeout;
+        uint32_t mResult;
+    };
+
     class GlColorMask: public Encodable {
     public:
         GlColorMask() = default;
@@ -2939,6 +2967,25 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mShader;
+    };
+
+    class GlDeleteSync: public Encodable {
+    public:
+        GlDeleteSync() = default;
+        GlDeleteSync(atom::Observations observations, uint64_t Sync) :
+            mobservations(observations),
+            mSync(Sync) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x65, 0x90, 0x00, 0x50, 0x30, 0x0f, 0xb5, 0x2b, 0x84, 0x77, 0xef, 0x13, 0x40, 0x76, 0x93, 0x58, 0x9e, 0x0a, 0xd0, 0xce,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint64(this->mSync);
+        }
+
+        atom::Observations mobservations;
+        uint64_t mSync;
     };
 
     class TextureId__P: public Encodable {
@@ -3456,6 +3503,31 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mPreserveMask;
+    };
+
+    class GlFenceSync: public Encodable {
+    public:
+        GlFenceSync() = default;
+        GlFenceSync(atom::Observations observations, uint32_t Condition, uint32_t SyncFlags, uint64_t Result) :
+            mobservations(observations),
+            mCondition(Condition),
+            mSyncFlags(SyncFlags),
+            mResult(Result) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x30, 0x0f, 0xf7, 0x76, 0x20, 0x97, 0x0a, 0x1b, 0xcb, 0x08, 0xeb, 0x6f, 0x98, 0x6f, 0xfd, 0x5f, 0x88, 0x85, 0x23, 0x2f,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mCondition);
+            e->Uint32(this->mSyncFlags);
+            e->Uint64(this->mResult);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mCondition;
+        uint32_t mSyncFlags;
+        uint64_t mResult;
     };
 
     class GlFinish: public Encodable {
@@ -4335,6 +4407,31 @@ namespace gles {
         uint32_t mPool;
     };
 
+    class GlGetQueryObjecti64v: public Encodable {
+    public:
+        GlGetQueryObjecti64v() = default;
+        GlGetQueryObjecti64v(atom::Observations observations, uint32_t Query, uint32_t Parameter, S64__P Value) :
+            mobservations(observations),
+            mQuery(Query),
+            mParameter(Parameter),
+            mValue(Value) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x64, 0xaa, 0xa7, 0x71, 0xe5, 0xb1, 0x66, 0x92, 0x4b, 0xe7, 0x40, 0x95, 0x8d, 0xa8, 0xa7, 0x4f, 0x9a, 0x6b, 0xcc, 0xc8,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mQuery);
+            e->Uint32(this->mParameter);
+            e->Value(&this->mValue);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mQuery;
+        uint32_t mParameter;
+        S64__P mValue;
+    };
+
     class GlGetQueryObjecti64vEXT: public Encodable {
     public:
         GlGetQueryObjecti64vEXT() = default;
@@ -4402,6 +4499,31 @@ namespace gles {
 
         uint64_t mAddress;
         uint32_t mPool;
+    };
+
+    class GlGetQueryObjectui64v: public Encodable {
+    public:
+        GlGetQueryObjectui64v() = default;
+        GlGetQueryObjectui64v(atom::Observations observations, uint32_t Query, uint32_t Parameter, U64__P Value) :
+            mobservations(observations),
+            mQuery(Query),
+            mParameter(Parameter),
+            mValue(Value) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xcb, 0xd2, 0x0b, 0x21, 0x98, 0x10, 0x2c, 0x9c, 0x98, 0xbb, 0x71, 0x6e, 0xc2, 0x2c, 0x5b, 0x24, 0x3a, 0xc2, 0x11, 0x66,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mQuery);
+            e->Uint32(this->mParameter);
+            e->Value(&this->mValue);
+        }
+
+        atom::Observations mobservations;
+        uint32_t mQuery;
+        uint32_t mParameter;
+        U64__P mValue;
     };
 
     class GlGetQueryObjectui64vEXT: public Encodable {
@@ -6812,6 +6934,31 @@ namespace gles {
         int32_t mY;
         int32_t mWidth;
         int32_t mHeight;
+    };
+
+    class GlWaitSync: public Encodable {
+    public:
+        GlWaitSync() = default;
+        GlWaitSync(atom::Observations observations, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout) :
+            mobservations(observations),
+            mSync(Sync),
+            mSyncFlags(SyncFlags),
+            mTimeout(Timeout) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x96, 0xae, 0xf7, 0x2a, 0x78, 0xbc, 0x46, 0xe3, 0xbb, 0x46, 0x02, 0xce, 0x80, 0x2a, 0xa9, 0xed, 0x43, 0xfc, 0xb1, 0x58,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint64(this->mSync);
+            e->Uint32(this->mSyncFlags);
+            e->Uint64(this->mTimeout);
+        }
+
+        atom::Observations mobservations;
+        uint64_t mSync;
+        uint32_t mSyncFlags;
+        uint64_t mTimeout;
     };
 
     class GlXCreateContext: public Encodable {
