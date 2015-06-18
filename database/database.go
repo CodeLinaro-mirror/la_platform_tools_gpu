@@ -26,8 +26,13 @@ import (
 
 // Database is the interface to a resource store.
 type Database interface {
+	// Store adds a key value pair to the database.
+	// It is an error if the id is already mapped to an object.
 	Store(binary.ID, binary.Object, log.Logger) error
+	// Resolve attempts to resolve the final value associated with an id.
+	// It will traverse all Lazy objects, blocking until they are ready.
 	Resolve(binary.ID, log.Logger) (binary.Object, error)
+	// Containts returns true if the database has an entry for the specified id.
 	Contains(binary.ID, log.Logger) bool
 }
 
