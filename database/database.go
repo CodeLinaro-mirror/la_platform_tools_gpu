@@ -64,7 +64,6 @@ func NewInMemory(buildContext interface{}) Database {
 
 type record struct {
 	value binary.Object
-	lazy  Lazy
 	link  binary.ID
 	err   error
 	wait  chan struct{}
@@ -93,15 +92,15 @@ func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) 
 	}
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
+	return id, d.store(id, o, logger)
+}
+
+func (d *database) store(id binary.ID, o binary.Object, logger log.Logger) error {
 	_, got := d.records[id]
 	if !got {
-		if lazy, islazy := o.(Lazy); islazy {
-			d.records[id] = &record{lazy: lazy}
-		} else {
-			d.records[id] = &record{value: o}
-		}
+		d.records[id] = &record{value: o}
 	}
-	return id, nil
+	return nil
 }
 
 func (d *database) Resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
@@ -116,29 +115,39 @@ func (d *database) resolve(id binary.ID, logger log.Logger) (binary.Object, erro
 	if !got {
 		return nil, fmt.Errorf("Resource '%v' not found", id)
 	}
-	if r.value != nil {
+	if r.err != nil {
 		return r.value, r.err
 	}
-	if r.lazy == nil {
+	if r.value == nil {
 		// not a request or value, must be a link, so load it
 		return d.resolve(r.link, logger)
 	}
+	lazy, islazy := r.value.(Lazy)
+	if !islazy {
+		return r.value, r.err
+	}
+	// transform the id to get the lazy result id
+	lazyID := LazyOutputID(id)
 	if r.wait != nil {
 		// an in progress request, wait for it
-		d.mutex.Unlock()     // unlock before waiting
-		defer d.mutex.Lock() // relock after waiting
+		d.mutex.Unlock() // unlock before waiting
 		<-r.wait
-		return r.value, r.err
+		d.mutex.Lock() // relock after waiting
+		return d.resolve(lazyID, logger)
 	}
 	// must be a first time access to request
 	r.wait = make(chan struct{})
-	r.value, r.err = func() (binary.Object, error) { // func for defer scope
+	value, err := func() (binary.Object, error) { // func for defer scope
 		d.mutex.Unlock()     // don't build under the lock
 		defer d.mutex.Lock() // relock after build
-		return r.lazy.BuildLazy(d.buildContext, d, logger)
+		return lazy.BuildLazy(d.buildContext, d, logger)
 	}()
+	if err == nil {
+		err = d.store(lazyID, value, logger)
+	}
+	r.err = err
 	close(r.wait)
-	return r.value, r.err
+	return value, r.err
 }
 
 func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
