@@ -84,7 +84,7 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 }
 
 func TestClear(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
 	w, h := uint32(64), uint32(64)
@@ -118,7 +118,7 @@ func TestClear(t *testing.T) {
 }
 
 func TestDrawTriangle(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
 	a := device.Info().Architecture()
