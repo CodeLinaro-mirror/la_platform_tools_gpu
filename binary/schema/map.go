@@ -28,11 +28,19 @@ type Map struct {
 	ValueType Type   // The value type stored in the map.
 }
 
-func (m *Map) String() string {
+func (m *Map) Basename() string {
+	return fmt.Sprintf("map[%s]%s", m.KeyType.Basename(), m.ValueType.Basename())
+}
+
+func (m *Map) Typename() string {
 	if m.Alias != "" {
 		return m.Alias
 	}
-	return fmt.Sprintf("map[%s]%s", m.KeyType, m.ValueType)
+	return fmt.Sprintf("map[%s]%s", m.KeyType.Typename(), m.ValueType.Typename())
+}
+
+func (m *Map) String() string {
+	return m.Typename()
 }
 
 func (m *Map) Encode(e binary.Encoder, value interface{}) error {

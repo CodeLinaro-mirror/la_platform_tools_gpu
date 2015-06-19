@@ -27,6 +27,8 @@ type Type interface {
 	Encode(e binary.Encoder, value interface{}) error
 	Decode(d binary.Decoder) (interface{}, error)
 	Skip(d binary.Decoder) error
+	Typename() string
+	Basename() string
 }
 
 type schema interface {
