@@ -18,6 +18,9 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"os/user"
+	"path/filepath"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
@@ -128,6 +131,9 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	button := theme.CreateButton()
 	button.SetText("Capture...")
 
+	load := theme.CreateButton()
+	load.SetText("Import...")
+
 	namelbl := theme.CreateLabel()
 	namelbl.SetText("Capture name:")
 
@@ -155,6 +161,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	bottom.SetDirection(gxui.RightToLeft)
 	bottom.AddChild(button)
 	bottom.AddChild(launch)
+	bottom.AddChild(load)
 
 	layout := theme.CreateLinearLayout()
 	layout.SetDirection(gxui.BottomToTop)
@@ -205,5 +212,33 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	clickSubscription = button.OnClick(func(gxui.MouseEvent) { capture() })
 	launch.OnClick(func(ev gxui.MouseEvent) {
 		CreateLaunchAndroidDialog(theme, statusLogger, capture)
+	})
+
+	load.OnClick(func(ev gxui.MouseEvent) {
+		go func() {
+			path := name.Text()
+			if path[:2] == "~/" {
+				usr, _ := user.Current()
+				path = filepath.Join(usr.HomeDir, path[2:])
+			}
+			statusLogger.Infof("Loading %s", path)
+			data, err := ioutil.ReadFile(path)
+			if err != nil {
+				statusLogger.Infof("Failed opening file %s: %s", path, err)
+			} else if len(data) == 0 {
+				statusLogger.Infof("Zero size file %s", path)
+			} else {
+				statusLogger.Infof("Importing...")
+				id, err := appCtx.Rpc().Import(appCtx.Logger(), name.Text(), data)
+				if err != nil {
+					panic(err)
+				}
+				statusLogger.Infof("Loading...")
+				appCtx.LoadCapture(id, true)
+				theme.Driver().Call(func() {
+					window.Close()
+				})
+			}
+		}()
 	})
 }
