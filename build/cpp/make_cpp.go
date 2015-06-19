@@ -45,7 +45,7 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 	s.DependsOn(maker.DirOf(e))
 	s.DependsOn(makeEntities(source)...)
 	// This is a bit sad, but codergen does not know what its outputs are.
-	s.DependsOn("codergen")
+	s.DependsOn("code")
 	if always {
 		s.AlwaysRun()
 	}

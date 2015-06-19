@@ -21,6 +21,7 @@ import (
 	"os"
 	"runtime"
 	"sort"
+	"strings"
 )
 
 const (
@@ -40,6 +41,16 @@ func Register(f func()) {
 	prepares = append(prepares, f)
 }
 
+type stringSetFlag []string
+
+func (f *stringSetFlag) String() string    { return strings.Join(f.Strings(), ":") }
+func (f *stringSetFlag) Strings() []string { return ([]string)(*f) }
+
+func (f *stringSetFlag) Set(value string) error {
+	*f = append(*f, value)
+	return nil
+}
+
 // Run should be invoked once from main.
 // It parses the command line, builds the graph, and then performs the required
 // action.
@@ -50,6 +61,8 @@ func Run() {
 	targetOS := flag.String("os", runtime.GOOS, "Target OS.")
 	do := flag.String("do", "make", "The action to perform, one of make, show or clean.")
 	threads := flag.Int("threads", runtime.NumCPU(), "Set number of go routines to use. 0 disables parallel builds.")
+	var disables stringSetFlag
+	flag.Var(&disables, "disable", "Disable a specific node")
 	flag.Parse()
 	if *threads > 0 {
 		runtime.GOMAXPROCS(*threads)
@@ -62,6 +75,12 @@ func Run() {
 	// Build the entity graph
 	for _, f := range prepares {
 		f()
+	}
+	// Force disabled status from the command line
+	for _, d := range disables.Strings() {
+		if s := Creator(d); s != nil {
+			s.Disable()
+		}
 	}
 	// Prepare the active path
 	targets := flag.Args()
@@ -131,6 +150,10 @@ func (d dumper) dump(s *Step, seen []*Step) {
 		return
 	}
 	fmt.Printf(" [%d]", len(s.inputs))
+	if s.disabled {
+		fmt.Println(" - disabled")
+		return
+	}
 	if _, done := d[s]; done {
 		fmt.Println(" - already seen")
 		for i := range seen {
