@@ -20,7 +20,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -58,6 +57,6 @@ func (request *GetMemoryInfo) build(d database.Database, l log.Logger, out binar
 
 	res := &service.MemoryInfo{Data: data}
 	res.Current.Pack(memory.RangeList{request.Range})
-	store.CopyResource(out, res)
+	database.CopyResource(out, res)
 	return nil
 }

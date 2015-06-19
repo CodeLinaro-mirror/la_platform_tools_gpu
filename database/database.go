@@ -18,12 +18,12 @@ package database
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -111,7 +111,7 @@ func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err
 	}
 	if r.value != nil {
 		// already have a value, copy it to the out and we are done
-		store.CopyResource(out, r.value)
+		CopyResource(out, r.value)
 		return r.err
 	}
 	if r.request == nil {
@@ -123,7 +123,7 @@ func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err
 		d.mutex.Unlock()     // unlock before waiting
 		defer d.mutex.Lock() // relock after waiting
 		<-r.wait
-		store.CopyResource(out, r.value)
+		CopyResource(out, r.value)
 		return r.err
 	}
 	// must be a first time access to request
@@ -154,4 +154,11 @@ func hash(o binary.Object) binary.ID {
 		panic(err)
 	}
 	return binary.NewID(b.Bytes())
+}
+
+// CopyResource assigns the value object to the variable out points to
+func CopyResource(out interface{}, value interface{}) {
+	o := reflect.ValueOf(out).Elem()
+	v := reflect.ValueOf(value).Elem()
+	o.Set(v)
 }
