@@ -30,7 +30,7 @@ import (
 
 // build writes to out the Binary resource resulting from the given GetState request.
 func (request *GetState) build(d database.Database, l log.Logger, out binary.Object) error {
-	capture, err := LoadCapture(request.Capture, d, l)
+	capture, err := service.ResolveCapture(d, l, request.Capture)
 	if err != nil {
 		return err
 	}
