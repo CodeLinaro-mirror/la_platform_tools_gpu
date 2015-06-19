@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // CapturesHandler is an HTTP request handler that returns a HTML list of
@@ -50,7 +51,7 @@ func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 `)
 
 	for _, id := range captures {
-		capture, err := builder.LoadCapture(id, h.d, h.l)
+		capture, err := service.ResolveCapture(h.d, h.l, id)
 		if err == nil {
 			fmt.Fprintf(res, `			<a href="%s%s?%s=%s">%s</a><br/>`,
 				h.c.HttpAddress, atomsRoute, idParamName, id.ID, capture.Name)
