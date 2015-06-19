@@ -20,7 +20,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -79,6 +78,6 @@ func (request *GetTimingInfo) build(mgr *replay.Manager, db database.Database, l
 
 	// TODO: Sort timings
 
-	store.CopyResource(out, &timings)
+	database.CopyResource(out, &timings)
 	return nil
 }

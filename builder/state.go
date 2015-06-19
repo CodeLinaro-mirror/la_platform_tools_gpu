@@ -23,7 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -57,6 +56,6 @@ func (request *GetState) build(d database.Database, l log.Logger, out binary.Obj
 		return err
 	}
 
-	store.CopyResource(out, &service.Binary{Data: buf.Bytes()})
+	database.CopyResource(out, &service.Binary{Data: buf.Bytes()})
 	return nil
 }

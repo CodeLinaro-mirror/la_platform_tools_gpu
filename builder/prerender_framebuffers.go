@@ -20,7 +20,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -60,6 +59,6 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 
 	wg.Wait()
 
-	store.CopyResource(out, &service.Binary{})
+	database.CopyResource(out, &service.Binary{})
 	return nil
 }

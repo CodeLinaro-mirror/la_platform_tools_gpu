@@ -24,7 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -301,6 +300,6 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 			}
 		}
 	}
-	store.CopyResource(out, &captureFbDims)
+	database.CopyResource(out, &captureFbDims)
 	return nil
 }
