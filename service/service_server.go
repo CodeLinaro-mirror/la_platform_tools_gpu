@@ -12,6 +12,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
@@ -155,4 +156,72 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			return rpc.NewError("Unexpected RPC function: %T", call)
 		}
 	})
+}
+
+type Resolver struct {
+	Database database.Database
+}
+
+func ResolveAtomStream(ϟd database.Database, ϟl log.Logger, id AtomStreamId) (ϟout AtomStream, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveAtomStream(ϟl log.Logger, id AtomStreamId) (AtomStream, error) {
+	return ResolveAtomStream(ϟr.Database, ϟl, id)
+}
+func ResolveBinary(ϟd database.Database, ϟl log.Logger, id BinaryId) (ϟout Binary, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveBinary(ϟl log.Logger, id BinaryId) (Binary, error) {
+	return ResolveBinary(ϟr.Database, ϟl, id)
+}
+func ResolveCapture(ϟd database.Database, ϟl log.Logger, id CaptureId) (ϟout Capture, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveCapture(ϟl log.Logger, id CaptureId) (Capture, error) {
+	return ResolveCapture(ϟr.Database, ϟl, id)
+}
+func ResolveDevice(ϟd database.Database, ϟl log.Logger, id DeviceId) (ϟout Device, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveDevice(ϟl log.Logger, id DeviceId) (Device, error) {
+	return ResolveDevice(ϟr.Database, ϟl, id)
+}
+func ResolveHierarchy(ϟd database.Database, ϟl log.Logger, id HierarchyId) (ϟout Hierarchy, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveHierarchy(ϟl log.Logger, id HierarchyId) (Hierarchy, error) {
+	return ResolveHierarchy(ϟr.Database, ϟl, id)
+}
+func ResolveImageInfo(ϟd database.Database, ϟl log.Logger, id ImageInfoId) (ϟout ImageInfo, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveImageInfo(ϟl log.Logger, id ImageInfoId) (ImageInfo, error) {
+	return ResolveImageInfo(ϟr.Database, ϟl, id)
+}
+func ResolveMemoryInfo(ϟd database.Database, ϟl log.Logger, id MemoryInfoId) (ϟout MemoryInfo, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveMemoryInfo(ϟl log.Logger, id MemoryInfoId) (MemoryInfo, error) {
+	return ResolveMemoryInfo(ϟr.Database, ϟl, id)
+}
+func ResolveSchema(ϟd database.Database, ϟl log.Logger, id SchemaId) (ϟout Schema, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveSchema(ϟl log.Logger, id SchemaId) (Schema, error) {
+	return ResolveSchema(ϟr.Database, ϟl, id)
+}
+func ResolveTimingInfo(ϟd database.Database, ϟl log.Logger, id TimingInfoId) (ϟout TimingInfo, ϟerr error) {
+	ϟerr = ϟd.Load(id.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveTimingInfo(ϟl log.Logger, id TimingInfoId) (TimingInfo, error) {
+	return ResolveTimingInfo(ϟr.Database, ϟl, id)
 }
