@@ -138,7 +138,6 @@ void Encoder::String(const char* v) {
 }
 
 void Encoder::Data(const void* ptr, int32_t size) {
-    Uint32(size);
     mOutput->Write(ptr, size);
 }
 

@@ -50,6 +50,7 @@ void SpyBase::observe(std::vector<Observation>& observations) {
         if (mResources.count(id) == 0) {
             mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
             mEncoder->Id(id);
+            mEncoder->Uint32(size);
             mEncoder->Data(base, size);
             mResources.emplace(id);
         }
