@@ -12,6 +12,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
@@ -107,4 +108,16 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			return rpc.NewError("Unexpected RPC function: %T", call)
 		}
 	})
+}
+
+type Resolver struct {
+	Database database.Database
+}
+
+func ResolveResource(ϟd database.Database, ϟl log.Logger, r ResourceId) (ϟout Resource, ϟerr error) {
+	ϟerr = ϟd.Load(r.ID, ϟl, &ϟout)
+	return ϟout, ϟerr
+}
+func (ϟr Resolver) ResolveResource(ϟl log.Logger, r ResourceId) (Resource, error) {
+	return ResolveResource(ϟr.Database, ϟl, r)
 }

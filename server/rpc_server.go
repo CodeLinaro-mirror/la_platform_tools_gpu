@@ -22,7 +22,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -30,7 +29,7 @@ import (
 )
 
 type rpcServer struct {
-	Database      database.Database
+	service.Resolver
 	ReplayManager *replay.Manager
 }
 
@@ -231,60 +230,4 @@ func (s rpcServer) ReplaceAtom(
 		Data:    data,
 	}, logger)
 	return service.CaptureId{ID: id}, err
-}
-
-// ResolveAtomStream resolves the given id to a cached AtomStream or builds it on demand before returning it.
-// ResolveAtomStream and the following two-step resolution methods provide a way for the client to first check its local cache for a
-// potential match, before making a resolution request to the server, that could incur a significant bandwidth and computational cost.
-func (s rpcServer) ResolveAtomStream(logger log.Logger, id service.AtomStreamId) (r service.AtomStream, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveBinary resolves the given id to a cached Binary or builds it on demand before returning it.
-func (s rpcServer) ResolveBinary(logger log.Logger, id service.BinaryId) (r service.Binary, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveCapture resolves the given id to a cached Capture or builds it on demand before returning it.
-func (s rpcServer) ResolveCapture(logger log.Logger, id service.CaptureId) (r service.Capture, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveDevice resolves the given id to a cached Device or builds it on demand before returning it.
-func (s rpcServer) ResolveDevice(logger log.Logger, id service.DeviceId) (r service.Device, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveHierarchy resolves the given id to a cached Hierarchy or builds it on demand before returning it.
-func (s rpcServer) ResolveHierarchy(logger log.Logger, id service.HierarchyId) (r service.Hierarchy, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveImageInfo resolves the given id to a cached ImageInfo or builds it on demand before returning it.
-func (s rpcServer) ResolveImageInfo(logger log.Logger, id service.ImageInfoId) (r service.ImageInfo, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveMemoryInfo resolves the given id to a cached MemoryInfo or builds it on demand before returning it.
-func (s rpcServer) ResolveMemoryInfo(logger log.Logger, id service.MemoryInfoId) (r service.MemoryInfo, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveSchema resolves the given id to a cached Schema or builds it on demand before returning it.
-func (s rpcServer) ResolveSchema(logger log.Logger, id service.SchemaId) (r service.Schema, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
-}
-
-// ResolveTimingInfo resolves the given id to a cached TimingInfo or builds it on demand before returning it.
-func (s rpcServer) ResolveTimingInfo(logger log.Logger, id service.TimingInfoId) (r service.TimingInfo, e error) {
-	e = s.Database.Load(id.ID, logger, &r)
-	return r, e
 }

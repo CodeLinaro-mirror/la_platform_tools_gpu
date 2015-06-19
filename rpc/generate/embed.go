@@ -582,6 +582,26 @@ func (h {{$.Name}}) Valid() bool {
       }
     })
   }
+
+  type Resolver struct {
+    Database      database.Database
+  }
+
+  {{range $_, $c := $.Functions}}{{if HasPrefix $c.Name "Resolve"}}
+
+  func {{$c.Name}}(ϟd database.Database, ϟl log.Logger, {{Macro "Parameters" $c}})§
+    (ϟout {{Macro "Type" $c.Return.Type}}, ϟerr error) {
+    ϟerr = ϟd.Load({{(index $c.CallParameters 0).Name}}.ID, ϟl, &ϟout)
+		return ϟout, ϟerr
+  }
+
+  func (ϟr Resolver) {{$c.Name}}(ϟl log.Logger, {{Macro "Parameters" $c}})§
+    ({{Macro "Type" $c.Return.Type}}, error) {
+    return {{$c.Name}}(ϟr.Database, ϟl{{range $p := $c.CallParameters}}, {{$p.Name}}{{end}})
+  }
+
+  {{end}}{{end}}
+
 {{end}}
 `
 const rpc_java_tmpl_file = `rpc.java.tmpl`
