@@ -24,16 +24,17 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build writes to out the Hierarchy resource resulting from the given GetHierarchy request.
-func (request *GetHierarchy) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := service.ResolveCapture(db, logger, request.Capture)
+// BuildLazy returns the *service.Hierarchy resulting from the given
+// GetHierarchy request.
+func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	capture, err := service.ResolveCapture(d, l, r.Capture)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	root := atom.Group{
@@ -59,6 +60,5 @@ func (request *GetHierarchy) build(db database.Database, logger log.Logger, out 
 
 	hierarchy := &service.Hierarchy{}
 	hierarchy.Root.Pack(root)
-	database.CopyResource(out, hierarchy)
-	return nil
+	return hierarchy, nil
 }

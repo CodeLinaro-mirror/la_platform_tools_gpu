@@ -26,16 +26,19 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build computes and writes the output of the given GetTimingInfo request to the given out.
-func (request *GetTimingInfo) build(mgr *replay.Manager, db database.Database, logger log.Logger, out binary.Object) error {
+// BuildLazy returns the *service.TimingInfo resulting from the given GetTimingInfo
+// request.
+func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	mgr := c.(*Context).ReplayManager
+
 	ctx := &replay.Context{
-		DeviceID:  request.Device,
-		CaptureID: request.Capture,
+		DeviceID:  r.Device,
+		CaptureID: r.Capture,
 	}
 
-	capture, err := service.ResolveCapture(db, logger, request.Capture)
+	capture, err := service.ResolveCapture(d, l, r.Capture)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	apis := capture.Apis
@@ -53,7 +56,7 @@ func (request *GetTimingInfo) build(mgr *replay.Manager, db database.Database, l
 		}
 
 		go func() {
-			results <- <-query.QueryCallDurations(ctx, mgr, request.TimingMask)
+			results <- <-query.QueryCallDurations(ctx, mgr, r.TimingMask)
 		}()
 		count++
 	}
@@ -73,11 +76,10 @@ func (request *GetTimingInfo) build(mgr *replay.Manager, db database.Database, l
 	}
 
 	if len(errors) > 0 {
-		return fmt.Errorf("QueryCallDurations failed:\n%s", strings.Join(errors, "\n"))
+		return nil, fmt.Errorf("QueryCallDurations failed:\n%s", strings.Join(errors, "\n"))
 	}
 
 	// TODO: Sort timings
 
-	database.CopyResource(out, &timings)
-	return nil
+	return &timings, nil
 }

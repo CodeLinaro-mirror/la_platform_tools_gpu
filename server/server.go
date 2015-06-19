@@ -56,10 +56,10 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	fmt.Printf("Server log file created at: %s\n", config.LogfilePath)
 
 	// Initialize the resource database and replay manager for RPC requests.
-	b := builder.New()
+	b := &builder.Context{}
 	database := database.NewInMemory(b)
 	replayManager := replay.New(database, logger)
-	b.SetReplayManager(replayManager)
+	b.ReplayManager = replayManager
 
 	// Setup and run the (blocking) RPC listener on a separate goroutine.
 	rpc := &rpcServer{

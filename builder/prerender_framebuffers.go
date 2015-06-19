@@ -24,23 +24,24 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build writes to out an empty Binary resource after processing the given PrerenderFramebuffers request.
-func (request *PrerenderFramebuffers) build(db database.Database, logger log.Logger, out binary.Object) error {
+// BuildLazy renders and caches all the framebuffer color buffers in the
+// GetFramebufferDepth request, returning an empty *service.Binary.
+func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
 	renderSettings := service.RenderSettings{
-		MaxWidth:  request.Width,
-		MaxHeight: request.Height,
+		MaxWidth:  r.Width,
+		MaxHeight: r.Height,
 		Wireframe: false,
 	}
 
 	var wg sync.WaitGroup
-	for _, atomID := range request.AtomIDs {
-		id, err := db.StoreRequest(&GetFramebufferColor{
-			Capture:  request.Capture,
-			Device:   request.Device,
-			API:      request.API,
+	for _, atomID := range r.AtomIDs {
+		id, err := d.StoreRequest(&GetFramebufferColor{
+			Capture:  r.Capture,
+			Device:   r.Device,
+			API:      r.API,
 			After:    atom.ID(atomID),
 			Settings: renderSettings,
-		}, logger)
+		}, l)
 
 		if err == nil {
 			wg.Add(1)
@@ -48,9 +49,9 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 			go func() {
 				defer wg.Done()
 
-				imageInfo, err := service.ResolveImageInfo(db, logger, service.ImageInfoId{ID: id})
+				imageInfo, err := service.ResolveImageInfo(d, l, service.ImageInfoId{ID: id})
 				if err == nil {
-					service.ResolveBinary(db, logger, imageInfo.Data)
+					service.ResolveBinary(d, l, imageInfo.Data)
 				}
 			}()
 		}
@@ -58,6 +59,5 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 
 	wg.Wait()
 
-	database.CopyResource(out, &service.Binary{})
-	return nil
+	return &service.Binary{}, nil
 }

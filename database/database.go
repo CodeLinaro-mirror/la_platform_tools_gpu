@@ -38,25 +38,25 @@ type Database interface {
 }
 
 // NewInMemory builds a new in memory database.
-func NewInMemory(builder builder) Database {
+func NewInMemory(buildContext interface{}) Database {
 	return &database{
-		records: map[binary.ID]*record{},
-		builder: builder,
+		records:      map[binary.ID]*record{},
+		buildContext: buildContext,
 	}
 }
 
 type record struct {
-	value   binary.Object
-	request binary.Object
-	link    binary.ID
-	err     error
-	wait    chan struct{}
+	value binary.Object
+	lazy  Lazy
+	link  binary.ID
+	err   error
+	wait  chan struct{}
 }
 
 type database struct {
-	mutex   sync.Mutex
-	records map[binary.ID]*record
-	builder builder
+	mutex        sync.Mutex
+	records      map[binary.ID]*record
+	buildContext interface{} // The build context, user-defined.
 }
 
 func (d *database) StoreLink(to, id binary.ID, logger log.Logger) error {
@@ -78,7 +78,7 @@ func (d *database) StoreRequest(o binary.Object, logger log.Logger) (binary.ID, 
 	defer d.mutex.Unlock()
 	_, got := d.records[id]
 	if !got {
-		d.records[id] = &record{request: o}
+		d.records[id] = &record{lazy: o.(Lazy)}
 	}
 	return id, nil
 }
@@ -114,7 +114,7 @@ func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err
 		CopyResource(out, r.value)
 		return r.err
 	}
-	if r.request == nil {
+	if r.lazy == nil {
 		// not a request or value, must be a link, so load it
 		return d.load(r.link, logger, out)
 	}
@@ -131,7 +131,10 @@ func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err
 	r.err = func() error { // func for defer scope
 		d.mutex.Unlock()     // don't build under the lock
 		defer d.mutex.Lock() // relock after build
-		return d.builder.BuildResource(r.request, d, logger, out)
+
+		built, err := r.lazy.BuildLazy(d.buildContext, d, logger)
+		CopyResource(out, built)
+		return err
 	}()
 	r.value = out
 	close(r.wait)

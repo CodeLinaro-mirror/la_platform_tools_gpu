@@ -26,37 +26,37 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// build writes to out the MemoryInfo resource resulting from the given GetMemoryInfo request.
-func (request *GetMemoryInfo) build(d database.Database, l log.Logger, out binary.Object) error {
-	capture, err := service.ResolveCapture(d, l, request.Capture)
+// BuildLazy returns the *service.MemoryInfo resulting from the given
+// GetMemoryInfo request.
+func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+	capture, err := service.ResolveCapture(d, l, r.Capture)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if request.After >= atom.ID(len(atoms)) {
-		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
+	if r.After >= atom.ID(len(atoms)) {
+		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms))
 	}
 
 	s := gfxapi.NewState()
-	for i, a := range atoms[:request.After] {
+	for i, a := range atoms[:r.After] {
 		if err := a.Mutate(s, d, l); err != nil {
 			l.Warningf("Atom %d %v: %v", i, a, err)
 		}
 	}
 
 	// TODO: Pool, Stale, Unknown
-	data, err := s.Memory[memory.ApplicationPool].Slice(request.Range).Get(d, l)
+	data, err := s.Memory[memory.ApplicationPool].Slice(r.Range).Get(d, l)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	res := &service.MemoryInfo{Data: data}
-	res.Current.Pack(memory.RangeList{request.Range})
-	database.CopyResource(out, res)
-	return nil
+	res.Current.Pack(memory.RangeList{r.Range})
+	return res, nil
 }

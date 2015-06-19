@@ -17,6 +17,7 @@ package builder
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -112,10 +113,14 @@ type RenderFramebufferColor struct {
 	Wireframe bool
 }
 
-// captures records the parameters of an internal request.
-type captures struct {
+// ConvertImage is a request to decode a compressed texture.
+type ConvertImage struct {
 	binary.Generate
-	ids service.CaptureIdArray
+	Data       binary.ID
+	Width      int
+	Height     int
+	FormatFrom image.Format
+	FormatTo   image.Format
 }
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.
