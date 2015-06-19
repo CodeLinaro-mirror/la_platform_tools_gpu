@@ -16,6 +16,7 @@ package gles
 
 import (
 	"flag"
+	"fmt"
 	"image"
 	"testing"
 	"time"
@@ -60,7 +61,8 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 			}
 		}
 	case <-time.Tick(replayTimeout):
-		t.Errorf("Timeout reading ColorBuffer at %d for %s", after, name)
+		// Panic instead of erroring so we see the status of the go-routine we're waiting for.
+		panic(fmt.Errorf("Timeout reading ColorBuffer at %d for %s", after, name))
 	}
 }
 
