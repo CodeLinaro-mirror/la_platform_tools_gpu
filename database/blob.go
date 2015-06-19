@@ -28,7 +28,7 @@ type Blob struct {
 
 // StoreBlob stores the byte slice data inside a Blob to the database d.
 func StoreBlob(data []byte, d Database, l log.Logger) (binary.ID, error) {
-	return Store(d, &Blob{Data: data}, l)
+	return Store(&Blob{Data: data}, d, l)
 }
 
 // Resolve blob loads a Blob from the database, returning the byte slice.

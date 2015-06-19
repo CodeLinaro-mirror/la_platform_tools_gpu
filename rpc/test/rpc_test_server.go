@@ -18,7 +18,7 @@ import (
 )
 
 func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
-	rpc.Serve(l, r, w, mtu, func(in interface{}) (res binary.Object) {
+	rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
 		l := l.Fork().Enter(fmt.Sprintf("%v", in))
 		defer func() {
 			if err := recover(); err == nil {
@@ -33,13 +33,13 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		}()
 		switch call := in.(type) {
 		case *callAdd:
-			if res, err := server.Add(l, call.a, call.b); err == nil {
+			if res, err := server.Add(call.a, call.b, l); err == nil {
 				return &resultAdd{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callEnumToString:
-			if res, err := server.EnumToString(l, call.e); err == nil {
+			if res, err := server.EnumToString(call.e, l); err == nil {
 				return &resultEnumToString{value: res}
 			} else {
 				return rpc.NewError(err.Error())
@@ -51,7 +51,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callSetStruct:
-			if err := server.SetStruct(l, call.s); err == nil {
+			if err := server.SetStruct(call.s, l); err == nil {
 				return &resultSetStruct{}
 			} else {
 				return rpc.NewError(err.Error())
@@ -63,13 +63,13 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callUseResource:
-			if err := server.UseResource(l, call.r); err == nil {
+			if err := server.UseResource(call.r, l); err == nil {
 				return &resultUseResource{}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveResource:
-			if res, err := server.ResolveResource(l, call.r); err == nil {
+			if res, err := server.ResolveResource(call.r, l); err == nil {
 				return &resultResolveResource{value: res}
 			} else {
 				return rpc.NewError(err.Error())
@@ -114,21 +114,26 @@ type Resolver struct {
 	Database database.Database
 }
 
-func StoreResource(ϟd database.Database, ϟl log.Logger, ϟv *Resource) (ResourceId, error) {
-	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
-	return ResourceId{ID: ϟid}, ϟerr
+// StoreResource stores v into the database d, returning the ResourceId.
+func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceId, error) {
+	id, err := database.Store(v, d, l)
+	return ResourceId{ID: id}, err
 }
-func ResolveResource(ϟd database.Database, ϟl log.Logger, ϟid ResourceId) (*Resource, error) {
-	ϟout, ϟerr := ϟd.Resolve(ϟid.ID, ϟl)
-	if ϟerr != nil {
-		return nil, ϟerr
+
+// ResolveResource loads and returns the Resource stored in the database d, using id.
+func ResolveResource(id ResourceId, d database.Database, l log.Logger) (*Resource, error) {
+	out, err := d.Resolve(id.ID, l)
+	if err != nil {
+		return nil, err
 	}
-	return ϟout.(*Resource), ϟerr
+	return (out.(*Resource)), nil
 }
-func (ϟr Resolver) ResolveResource(ϟl log.Logger, r ResourceId) (Resource, error) {
-	ϟout, ϟerr := ϟr.Database.Resolve(r.ID, ϟl)
-	if ϟerr != nil {
-		return Resource{}, ϟerr
+
+// ResolveResource loads and returns the Resource stored in the resolver's database, using id.
+func (r Resolver) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
+	out, err := r.Database.Resolve(id.ID, l)
+	if err != nil {
+		return Resource{}, err
 	}
-	return *(ϟout.(*Resource)), nil
+	return *(out.(*Resource)), nil
 }

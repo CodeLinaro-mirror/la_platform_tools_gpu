@@ -121,8 +121,8 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 	})
 
 	go func() {
-		logger := appCtx.Logger().Fork().Enter("CreateCaptureList")
-		ids, err := r.GetCaptures(logger)
+		l := appCtx.Logger().Fork().Enter("CreateCaptureList")
+		ids, err := r.GetCaptures(l)
 		if err != nil {
 			return
 		}
@@ -130,7 +130,7 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 		for _, id := range ids {
 			id := id
 			go func() {
-				if info, err := r.ResolveCapture(logger, id); err == nil {
+				if info, err := r.ResolveCapture(id, l); err == nil {
 					appCtx.Run(func() {
 						captures = append(captures, &capture{id, info})
 						adapter.SetItems(captures)
@@ -169,14 +169,14 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 
 	list.OnAttach(func() {
 		go func() {
-			logger := appCtx.Logger().Fork().Enter("DeviceListUpdate")
+			l := appCtx.Logger().Fork().Enter("DeviceListUpdate")
 
 			for list.Attached() { // While the list control is visible
-				if ids, err := r.GetDevices(logger); err == nil {
+				if ids, err := r.GetDevices(l); err == nil {
 					devices := make([]*device, 0, len(ids))
 					found := -1
 					for _, id := range ids {
-						if info, err := r.ResolveDevice(logger, id); err == nil {
+						if info, err := r.ResolveDevice(id, l); err == nil {
 							devices = append(devices, &device{id, info})
 							if info.Name == wanted {
 								found = len(devices) - 1
@@ -240,16 +240,18 @@ func loadTiming(appCtx *ApplicationContext) {
 	captureID := appCtx.CaptureID()
 
 	go func() {
-		logger := appCtx.Logger().Fork().Enter("Replay: timing")
+		l := appCtx.Logger().Fork().Enter("Replay: timing")
 		appCtx.timingInfo = service.TimingInfo{}
 
-		timingInfoID, err := appCtx.rpc.GetTimingInfo(logger, deviceID, captureID,
-			service.TimingMaskTimingPerFrame|service.TimingMaskTimingPerDrawCall|service.TimingMaskTimingPerCommand)
+		mask := service.TimingMaskTimingPerFrame |
+			service.TimingMaskTimingPerDrawCall |
+			service.TimingMaskTimingPerCommand
+		timingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, mask, l)
 		if err != nil {
 			return
 		}
 
-		timingInfo, err := appCtx.rpc.ResolveTimingInfo(logger, timingInfoID)
+		timingInfo, err := appCtx.rpc.ResolveTimingInfo(timingInfoID, l)
 		if err != nil {
 			return
 		}
@@ -284,18 +286,18 @@ func DoReplay(appCtx *ApplicationContext) {
 	apiID := atom.Info.Api
 
 	go func() {
-		logger := appCtx.Logger().Fork().Enter("Replay: color-buffer")
-		imageID, err := r.GetFramebufferColor(logger, deviceID, captureID, apiID, uint64(atomID), settings)
+		l := appCtx.Logger().Fork().Enter("Replay: color-buffer")
+		imageID, err := r.GetFramebufferColor(deviceID, captureID, apiID, uint64(atomID), settings, l)
 		if err != nil {
 			return
 		}
 
-		imageInfo, err := r.ResolveImageInfo(logger, imageID)
+		imageInfo, err := r.ResolveImageInfo(imageID, l)
 		if err != nil {
 			return
 		}
 
-		imageData, err := r.ResolveBinary(logger, imageInfo.Data)
+		imageData, err := r.ResolveBinary(imageInfo.Data, l)
 		if err != nil {
 			return
 		}
@@ -323,18 +325,18 @@ func DoReplay(appCtx *ApplicationContext) {
 	}()
 
 	go func() {
-		logger := appCtx.Logger().Fork().Enter("Replay: depth-buffer")
-		imageID, err := r.GetFramebufferDepth(logger, deviceID, captureID, apiID, uint64(atomID))
+		l := appCtx.Logger().Fork().Enter("Replay: depth-buffer")
+		imageID, err := r.GetFramebufferDepth(deviceID, captureID, apiID, uint64(atomID), l)
 		if err != nil {
 			return
 		}
 
-		imageInfo, err := r.ResolveImageInfo(logger, imageID)
+		imageInfo, err := r.ResolveImageInfo(imageID, l)
 		if err != nil {
 			return
 		}
 
-		imageData, err := r.ResolveBinary(logger, imageInfo.Data)
+		imageData, err := r.ResolveBinary(imageInfo.Data, l)
 		if err != nil {
 			return
 		}

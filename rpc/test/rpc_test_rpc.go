@@ -11,13 +11,13 @@ import (
 )
 
 type RPC interface {
-	Add(l log.Logger, a uint32, b uint32) (uint32, error)
-	EnumToString(l log.Logger, e Enum) (string, error)
+	Add(a uint32, b uint32, l log.Logger) (uint32, error)
+	EnumToString(e Enum, l log.Logger) (string, error)
 	GetStruct(l log.Logger) (Struct, error)
-	SetStruct(l log.Logger, s Struct) error
+	SetStruct(s Struct, l log.Logger) error
 	GetResource(l log.Logger) (ResourceId, error)
-	UseResource(l log.Logger, r ResourceId) error
-	ResolveResource(l log.Logger, r ResourceId) (Resource, error)
+	UseResource(r ResourceId, l log.Logger) error
+	ResolveResource(r ResourceId, l log.Logger) (Resource, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
 	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)

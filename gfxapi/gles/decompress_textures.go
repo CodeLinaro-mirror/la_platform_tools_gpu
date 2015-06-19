@@ -43,13 +43,13 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
-			id, err := database.Store(d, &builder.ConvertImage{
+			id, err := database.Store(&builder.ConvertImage{
 				Data:       a.Data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
 				Width:      int(a.Width),
 				Height:     int(a.Height),
 				FormatFrom: getImageFormat(a.Format),
 				FormatTo:   image.RGBA(),
-			}, l)
+			}, d, l)
 			if err != nil {
 				panic(err)
 			}

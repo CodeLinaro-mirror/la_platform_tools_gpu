@@ -37,12 +37,12 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 		return nil, err
 	}
 
-	data, err := database.Store(d, &RenderFramebufferDepth{
+	data, err := database.Store(&RenderFramebufferDepth{
 		Capture: r.Capture,
 		Device:  r.Device,
 		API:     r.API,
 		After:   r.After,
-	}, l)
+	}, d, l)
 
 	if err != nil {
 		return nil, err

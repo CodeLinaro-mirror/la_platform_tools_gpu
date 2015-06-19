@@ -23,12 +23,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func storeAtoms(t *testing.T, atoms atom.List, db database.Database, l log.Logger) service.AtomStreamId {
+func storeAtoms(t *testing.T, atoms atom.List, d database.Database, l log.Logger) service.AtomStreamId {
 	stream, err := service.NewAtomStream(atoms)
 	if err != nil {
 		t.Fatalf("Failed to build atom stream: %v", err)
 	}
-	id, err := database.Store(db, &stream, l)
+	id, err := database.Store(&stream, d, l)
 	if err != nil {
 		t.Fatalf("Failed to store atom stream: %v", err)
 	}
@@ -37,12 +37,12 @@ func storeAtoms(t *testing.T, atoms atom.List, db database.Database, l log.Logge
 
 // StoreCapture encodes and writes the atom list to the database, returning an
 // identifier to the newly constructed and stored Capture.
-func StoreCapture(t *testing.T, atoms atom.List, db database.Database, l log.Logger) service.CaptureId {
+func StoreCapture(t *testing.T, atoms atom.List, d database.Database, l log.Logger) service.CaptureId {
 	capture := service.Capture{
 		Name:  "test-capture",
-		Atoms: storeAtoms(t, atoms, db, l),
+		Atoms: storeAtoms(t, atoms, d, l),
 	}
-	id, err := database.Store(db, &capture, l)
+	id, err := database.Store(&capture, d, l)
 	if err != nil {
 		t.Fatalf("Failed to store test capture: %v", err)
 	}
