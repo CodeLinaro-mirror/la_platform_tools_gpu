@@ -61,7 +61,7 @@ func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.
 		return nil, err
 	}
 
-	capture := original
+	capture := *original
 	capture.Atoms = newStreamId
 	return &capture, nil
 }

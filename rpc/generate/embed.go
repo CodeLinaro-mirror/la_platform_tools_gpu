@@ -594,18 +594,23 @@ func (h {{$.Name}}) Valid() bool {
   {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
   func Store{{$type}}(ϟd database.Database, ϟl log.Logger, ϟv *{{$type}}) ({{$handle}}, error) {
     ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
-		return {{$handle}}{ID:ϟid}, ϟerr
+    return {{$handle}}{ID:ϟid}, ϟerr
   }
 
-  func Resolve{{$type}}(ϟd database.Database, ϟl log.Logger, ϟid {{$handle}}) ({{$type}}, error) {
-    var ϟout {{$type}}
-    ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
-		return ϟout, ϟerr
+  func Resolve{{$type}}(ϟd database.Database, ϟl log.Logger, ϟid {{$handle}}) (*{{$type}}, error) {
+    ϟout, ϟerr := ϟd.Resolve(ϟid.ID, ϟl)
+    if ϟerr != nil {
+      return nil, ϟerr
+    }
+    return ϟout.(*{{$type}}), ϟerr
   }
 
-  func (ϟr Resolver) {{$c.Name}}(ϟl log.Logger, {{Macro "Parameters" $c}})§
-    ({{Macro "Type" $c.Return.Type}}, error) {
-    return {{$c.Name}}(ϟr.Database, ϟl{{range $p := $c.CallParameters}}, {{$p.Name}}{{end}})
+  func (ϟr Resolver) {{$c.Name}}(ϟl log.Logger, {{Macro "Parameters" $c}}) ({{$type}}, error) {
+    ϟout, ϟerr := ϟr.Database.Resolve({{(index $c.CallParameters 0).Name}}.ID, ϟl)
+    if ϟerr != nil {
+      return {{$type}}{}, ϟerr
+    }
+    return *(ϟout.(*{{$type}})), nil
   }
 
   {{end}}{{end}}{{end}}

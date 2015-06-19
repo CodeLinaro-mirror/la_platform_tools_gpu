@@ -33,10 +33,9 @@ func StoreBlob(data []byte, d Database, l log.Logger) (binary.ID, error) {
 
 // Resolve blob loads a Blob from the database, returning the byte slice.
 func ResolveBlob(id binary.ID, d Database, l log.Logger) ([]byte, error) {
-	b := Blob{}
-	err := Load(d, id, l, &b)
+	b, err := d.Resolve(id, l)
 	if err != nil {
 		return nil, err
 	}
-	return b.Data, nil
+	return b.(*Blob).Data, nil
 }

@@ -32,18 +32,14 @@ type Database interface {
 	Contains(binary.ID, log.Logger) bool
 }
 
+// Store is a helper that stores an object to the database with the id
+// calculated by the Hash function.
 func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
 	id, err := Hash(obj)
 	if err != nil {
 		return id, err
 	}
 	return id, d.Store(id, obj, l)
-}
-
-func Load(d Database, id binary.ID, l log.Logger, out binary.Object) error {
-	obj, err := d.Resolve(id, l)
-	CopyResource(out, obj)
-	return err
 }
 
 // Hash returns a unique binary.ID based on the contents of the object.
