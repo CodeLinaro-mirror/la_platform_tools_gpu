@@ -18,18 +18,14 @@ package database
 import (
 	"bytes"
 	"fmt"
-	"path/filepath"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
-	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
-
-const extension = ".capture"
 
 // Database is the interface to a resource store.
 type Database interface {
@@ -43,260 +39,119 @@ type Database interface {
 
 // Create builds a new database.
 func Create(path string, maxDataCacheSize, metaDataCompactionSize, maxDerivedCacheSize int, builder builder) Database {
-	var dataStore store.Store
-	dataStore = store.CreateUnboundedArchive(filepath.Join(path, "resource", "data"))
-	dataStore = store.CreateStoreIfNew(dataStore)
-	dataStore = store.CreateCache(maxDataCacheSize, dataStore)
-
-	var derivedStore store.Store
-	derivedStore = store.CreateUnboundedArchive(filepath.Join(path, "resource", "derived"))
-	derivedStore = store.CreateStoreIfNew(derivedStore)
-	derivedStore = store.CreateCache(maxDerivedCacheSize, derivedStore)
-
-	var metaStore store.Store
-	metaStore = store.CreateSmallArchive(filepath.Join(path, "resource", "meta"), metaDataCompactionSize)
-
 	return &database{
-		path:         path,
-		dataStore:    dataStore,
-		metaStore:    metaStore,
-		derivedStore: derivedStore,
-		pending:      make(map[binary.ID]*pending),
-		builder:      builder,
+		records: map[binary.ID]*record{},
+		builder: builder,
 	}
 }
 
-type pending struct {
-	res binary.Object
-	err error
-	wg  sync.WaitGroup
+func InMemory() Database {
+	return &database{
+		records: map[binary.ID]*record{},
+	}
+}
+
+type record struct {
+	value   binary.Object
+	request binary.Object
+	link    binary.ID
+	err     error
+	wait    chan struct{}
 }
 
 type database struct {
-	path         string
-	dataStore    store.Store
-	metaStore    store.Store
-	derivedStore store.Store
-	mutex        sync.Mutex // guards against pending
-	pending      map[binary.ID]*pending
-	builder      builder
+	mutex   sync.Mutex
+	records map[binary.ID]*record
+	builder builder
 }
 
-func (d *database) loadMetadata(id binary.ID, logger log.Logger, metadata *metadata) error {
-	logger = logger.Enter("Database.loadMetadata")
-	_, err := d.metaStore.Load(id, logger, metadata)
-	return err
-}
-
-func (d *database) loadMetadataIfExists(id binary.ID, logger log.Logger, metadata *metadata) error {
-	if d.metaStore.Contains(id) {
-		return d.loadMetadata(id, logger, metadata)
+func (d *database) StoreLink(to, id binary.ID, logger log.Logger) error {
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	_, got := d.records[id]
+	if to != id && !got {
+		d.records[id] = &record{link: to}
 	}
 	return nil
 }
 
-func (d *database) storeMetadata(id binary.ID, metadata *metadata, logger log.Logger) error {
-	logger = logger.Enter("Database.storeMetadata")
-	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := enc.Value(metadata); err != nil {
-		return err
+func (d *database) StoreRequest(o binary.Object, logger log.Logger) (binary.ID, error) {
+	id := hash(o)
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	_, got := d.records[id]
+	if !got {
+		d.records[id] = &record{request: o}
 	}
-	return d.metaStore.Store(id, metadata, buf.Bytes(), logger)
-}
-
-func (d *database) SetBuilder(b builder) {
-	d.builder = b
-}
-
-func (d *database) StoreLink(to, id binary.ID, logger log.Logger) (err error) {
-	logger = logger.Enter("Database.StoreLink")
-	if config.DebugDatabase {
-		logger.Infof("(to: %v, id: %v)", to, id)
-		defer func() { logger.Infof("↪ err: %v", err) }()
-	}
-
-	if to == id {
-		return nil // Link to itself, ignore
-	}
-
-	metadata := &metadata{}
-	d.loadMetadataIfExists(id, logger, metadata)
-	metadata.Type = metaTypeLink
-	metadata.LinkTo = to
-	return d.storeMetadata(id, metadata, logger)
-}
-
-func (d *database) store(r binary.Object, logger log.Logger, metaType metaType, storeToUse store.Store) (id binary.ID, err error) {
-	// Encode the resource
-	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := enc.Value(r); err != nil {
-		return binary.ID{}, err
-	}
-
-	// Calculate the resource hash, this is the resource id
-	data := buf.Bytes()
-	id = binary.NewID(data)
-	if err := storeToUse.Store(id, r, data, logger); err != nil {
-		return binary.ID{}, err
-	}
-
-	// Store the metadata for the resource
-	metadata := &metadata{}
-	d.loadMetadataIfExists(id, logger, metadata)
-	metadata.Type = metaType
-	metadata.LinkTo = binary.ID{}
-	if err := d.storeMetadata(id, metadata, logger); err != nil {
-		return binary.ID{}, err
-	}
-
 	return id, nil
 }
 
-func (d *database) storeDerived(r binary.Object, logger log.Logger) (id binary.ID, err error) {
-	logger = logger.Enter("Database.storeDerived")
-	if config.DebugDatabase {
-		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
+func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) {
+	id := hash(o)
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	_, got := d.records[id]
+	if !got {
+		d.records[id] = &record{value: o}
 	}
-	return d.store(r, logger, metaTypeDerived, d.derivedStore)
-}
-
-func (d *database) Store(r binary.Object, logger log.Logger) (id binary.ID, err error) {
-	logger = logger.Enter("Database.Store")
-	if config.DebugDatabase {
-		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
-	}
-	return d.store(r, logger, metaTypeData, d.dataStore)
-}
-
-func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id binary.ID, err error) {
-	logger = logger.Enter("Database.StoreRequest")
-	if config.DebugDatabase {
-		logger.Infof("(%+v)", request)
-		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
-	}
-
-	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := enc.Object(request); err != nil {
-		return binary.ID{}, err
-	}
-	requestData := buf.Bytes()
-
-	version := d.builder.Version()
-	requestId := binary.NewID(requestData, []byte{
-		byte(version),
-		byte(version >> 8),
-		byte(version >> 16),
-		byte(version >> 24),
-	})
-	metadata := &metadata{}
-	err = d.loadMetadataIfExists(requestId, logger, metadata)
-	if err == nil && metadata.Type == metaTypeLink {
-		// TODO: Check request data matches
-		if config.DebugDatabase {
-			logger.Infof("Resource already built")
-		}
-		return requestId, nil
-	}
-
-	// Store the pending state and request data in the metadata
-	metadata.Type = metaTypeLazy
-	metadata.Request = request
-	if err = d.storeMetadata(requestId, metadata, logger); err != nil {
-		return binary.ID{}, err
-	}
-
-	return requestId, nil
+	return id, nil
 }
 
 func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
-	logger = logger.Enter("Database.Load")
-	if config.DebugDatabase {
-		logger.Infof("(id: %v)", id)
-		defer func() { logger.Infof("↪ err: %v", err) }()
-	}
-
 	d.mutex.Lock()
-	if pending, found := d.pending[id]; found {
-		d.mutex.Unlock()
-		pending.wg.Wait()
-		store.CopyResource(out, pending.res)
-		return pending.err
+	defer d.mutex.Unlock()
+	return d.load(id, logger, out)
+}
+
+// load function must be called with a locked mutex
+func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
+	r, got := d.records[id]
+	if !got {
+		return fmt.Errorf("Resource '%v' not found", id)
 	}
-
-	p := &pending{}
-	p.wg.Add(1)
-	d.pending[id] = p
-	d.mutex.Unlock()
-
-	defer func() {
-		p.err = err
-		p.res = out
-		p.wg.Done()
-
-		d.mutex.Lock()
-		delete(d.pending, id)
-		d.mutex.Unlock()
+	if r.value != nil {
+		// already have a value, copy it to the out and we are done
+		store.CopyResource(out, r.value)
+		return r.err
+	}
+	if r.request == nil {
+		// not a request or value, must be a link, so load it
+		return d.load(r.link, logger, out)
+	}
+	if r.wait != nil {
+		// an in progress request, wait for it
+		d.mutex.Unlock()     // unlock before waiting
+		defer d.mutex.Lock() // relock after waiting
+		<-r.wait
+		store.CopyResource(out, r.value)
+		return r.err
+	}
+	// must be a first time access to request
+	r.wait = make(chan struct{})
+	r.err = func() error { // func for defer scope
+		d.mutex.Unlock()     // don't build under the lock
+		defer d.mutex.Lock() // relock after build
+		return d.builder.BuildResource(r.request, d, logger, out)
 	}()
-
-	metadata := &metadata{}
-	if err := d.loadMetadata(id, logger, metadata); err != nil {
-		return err
-	}
-	if config.DebugDatabase {
-		logger.Infof("Metadata: %+v", metadata)
-	}
-
-	switch metadata.Type {
-	case metaTypeLink:
-		return d.Load(metadata.LinkTo, logger, out)
-	case metaTypeLazy:
-		if config.DebugDatabase {
-			logger.Infof("Recreating resource")
-		}
-
-		// Begin building of the resource
-		if err := d.builder.BuildResource(metadata.Request, d, logger, out); err != nil {
-			return err
-		}
-
-		// Store the resource
-		resourceId, err := d.storeDerived(out, logger)
-		if err != nil {
-			return err
-		}
-
-		// Update the metadata from Lazy to Link
-		if d.StoreLink(resourceId, id, logger); err != nil {
-			return err
-		}
-
-		return nil
-	case metaTypeData:
-		_, err := d.dataStore.Load(id, logger, out)
-		return err
-	case metaTypeDerived:
-		_, err := d.derivedStore.Load(id, logger, out)
-		return err
-	default:
-		err := fmt.Errorf("Unknown metadata type %v", metadata.Type)
-		logger.Errorf("%v", err)
-		return err
-	}
+	r.value = out
+	close(r.wait)
+	return r.err
 }
 
 func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
-	logger = logger.Enter("Database.Contains")
-	if config.DebugDatabase {
-		logger.Infof("(id: %v)", id)
-		defer func() { logger.Infof("↪ %v", res) }()
-	}
-	return d.metaStore.Contains(id)
+	d.mutex.Lock()
+	defer d.mutex.Unlock()
+	_, got := d.records[id]
+	return got
 }
 
-func (d *database) Close() {
-	d.metaStore.Close()
-	d.dataStore.Close()
+func (d *database) Close() {}
+
+func hash(o binary.Object) binary.ID {
+	b := bytes.Buffer{}
+	e := cyclic.Encoder(vle.Writer(&b))
+	if err := e.Value(o); err != nil {
+		panic(err)
+	}
+	return binary.NewID(b.Bytes())
 }
