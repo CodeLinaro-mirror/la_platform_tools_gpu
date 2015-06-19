@@ -53,15 +53,15 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) (service.CaptureId, error) {
+func (s rpcServer) Import(name string, data service.U8Array, l log.Logger) (service.CaptureId, error) {
 	atoms := atom.List{}
 	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
 		if len(atoms) == 0 {
 			return service.CaptureId{}, err
 		}
-		logger.Warningf("Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
+		l.Warningf("Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
 	}
-	id, err := builder.ImportCapture(name, atoms, s.Database, logger)
+	id, err := builder.ImportCapture(name, atoms, s.Database, l)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
@@ -69,14 +69,14 @@ func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) 
 }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
-func (s rpcServer) GetCaptures(logger log.Logger) (service.CaptureIdArray, error) {
-	return builder.Captures(s.Database, logger)
+func (s rpcServer) GetCaptures(l log.Logger) (service.CaptureIdArray, error) {
+	return builder.Captures(s.Database, l)
 }
 
 // GetDevices returns the full list of replay devices avaliable to the server.
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
-func (s rpcServer) GetDevices(logger log.Logger) (service.DeviceIdArray, error) {
+func (s rpcServer) GetDevices(l log.Logger) (service.DeviceIdArray, error) {
 	devices := s.ReplayManager.Devices()
 	ids := make(service.DeviceIdArray, len(devices))
 	for i, d := range devices {
@@ -90,14 +90,14 @@ func (s rpcServer) GetDevices(logger log.Logger) (service.DeviceIdArray, error) 
 // The binary blob can be fetched with a call to ResolveBinary, and decoded
 // using the capture's schema.
 func (s rpcServer) GetState(
-	logger log.Logger,
 	captureID service.CaptureId,
-	at uint64) (service.BinaryId, error) {
+	at uint64,
+	l log.Logger) (service.BinaryId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetState{
+	id, err := database.Store(&builder.GetState{
 		Capture: captureID,
 		After:   atom.ID(at),
-	}, logger)
+	}, s.Database, l)
 	return service.BinaryId{ID: id}, err
 }
 
@@ -105,28 +105,28 @@ func (s rpcServer) GetState(
 // Currently there is only one hierarchy per capture, but this is likely to
 // change in the future.
 func (s rpcServer) GetHierarchy(
-	logger log.Logger,
-	captureID service.CaptureId) (service.HierarchyId, error) {
+	captureID service.CaptureId,
+	l log.Logger) (service.HierarchyId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetHierarchy{
+	id, err := database.Store(&builder.GetHierarchy{
 		Capture: captureID,
-	}, logger)
+	}, s.Database, l)
 	return service.HierarchyId{ID: id}, err
 }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and memory range, immediately following the atom after.
 func (s rpcServer) GetMemoryInfo(
-	logger log.Logger,
 	captureID service.CaptureId,
 	after uint64,
-	rng service.MemoryRange) (service.MemoryInfoId, error) {
+	rng service.MemoryRange,
+	l log.Logger) (service.MemoryInfoId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetMemoryInfo{
+	id, err := database.Store(&builder.GetMemoryInfo{
 		Capture: captureID,
 		After:   atom.ID(after),
 		Range:   memory.Range{Base: memory.Pointer(rng.Base), Size: rng.Size},
-	}, logger)
+	}, s.Database, l)
 	return service.MemoryInfoId{ID: id}, err
 }
 
@@ -136,20 +136,20 @@ func (s rpcServer) GetMemoryInfo(
 // to adjust maximum desired dimensions of the image, as well as applying debug
 // visualizations.
 func (s rpcServer) GetFramebufferColor(
-	logger log.Logger,
 	deviceID service.DeviceId,
 	captureID service.CaptureId,
 	apiID service.ApiId,
 	after uint64,
-	settings service.RenderSettings) (service.ImageInfoId, error) {
+	settings service.RenderSettings,
+	l log.Logger) (service.ImageInfoId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetFramebufferColor{
+	id, err := database.Store(&builder.GetFramebufferColor{
 		Device:   deviceID,
 		Capture:  captureID,
 		API:      apiID,
 		After:    atom.ID(after),
 		Settings: settings,
-	}, logger)
+	}, s.Database, l)
 	return service.ImageInfoId{ID: id}, err
 }
 
@@ -157,18 +157,18 @@ func (s rpcServer) GetFramebufferColor(
 // depth buffer for the given device, capture and graphics API immediately
 // following the atom after.
 func (s rpcServer) GetFramebufferDepth(
-	logger log.Logger,
 	deviceID service.DeviceId,
 	captureID service.CaptureId,
 	apiID service.ApiId,
-	after uint64) (service.ImageInfoId, error) {
+	after uint64,
+	l log.Logger) (service.ImageInfoId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetFramebufferDepth{
+	id, err := database.Store(&builder.GetFramebufferDepth{
 		Device:  deviceID,
 		Capture: captureID,
 		API:     apiID,
 		After:   atom.ID(after),
-	}, logger)
+	}, s.Database, l)
 	return service.ImageInfoId{ID: id}, err
 }
 
@@ -176,16 +176,16 @@ func (s rpcServer) GetFramebufferDepth(
 // capture, returning an identifier to the results.
 // This function is experimental and will change signature.
 func (s rpcServer) GetTimingInfo(
-	logger log.Logger,
 	deviceID service.DeviceId,
 	captureID service.CaptureId,
-	mask service.TimingMask) (service.TimingInfoId, error) {
+	mask service.TimingMask,
+	l log.Logger) (service.TimingInfoId, error) {
 
-	id, err := database.Store(s.Database, &builder.GetTimingInfo{
+	id, err := database.Store(&builder.GetTimingInfo{
 		Device:     deviceID,
 		Capture:    captureID,
 		TimingMask: mask,
-	}, logger)
+	}, s.Database, l)
 	return service.TimingInfoId{ID: id}, err
 }
 
@@ -197,38 +197,38 @@ func (s rpcServer) GetTimingInfo(
 // the client.
 // This function is experimental and may change signature.
 func (s rpcServer) PrerenderFramebuffers(
-	logger log.Logger,
 	deviceID service.DeviceId,
 	captureID service.CaptureId,
 	apiID service.ApiId,
 	width, height uint32,
-	atomIDs service.U64Array) (service.BinaryId, error) {
+	atomIDs service.U64Array,
+	l log.Logger) (service.BinaryId, error) {
 
-	id, err := database.Store(s.Database, &builder.PrerenderFramebuffers{
+	id, err := database.Store(&builder.PrerenderFramebuffers{
 		Device:  deviceID,
 		Capture: captureID,
 		API:     apiID,
 		Width:   width,
 		Height:  height,
 		AtomIDs: atomIDs,
-	}, logger)
+	}, s.Database, l)
 	return service.BinaryId{ID: id}, err
 }
 
 // ReplaceAtom creates and new capture based on an existing capture, but with
 // a single atom replaced.
 func (s rpcServer) ReplaceAtom(
-	logger log.Logger,
 	capture service.CaptureId,
 	atomID uint64,
 	atomType uint16,
-	data service.Binary) (service.CaptureId, error) {
+	data service.Binary,
+	l log.Logger) (service.CaptureId, error) {
 
-	id, err := database.Store(s.Database, &builder.ReplaceAtom{
+	id, err := database.Store(&builder.ReplaceAtom{
 		Capture: capture,
 		Atom:    atom.ID(atomID),
 		Type:    atom.TypeID(atomType),
 		Data:    data,
-	}, logger)
+	}, s.Database, l)
 	return service.CaptureId{ID: id}, err
 }

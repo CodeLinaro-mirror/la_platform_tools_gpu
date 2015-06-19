@@ -31,7 +31,7 @@ type Handler func(interface{}) binary.Object
 // Server implements the receiving side of a client server rpc pair.
 // It listens on the reader for calls, and dispatches them to the supplied handler.
 // Any result returned from the handler is then sent back down the writer.
-func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler) {
+func Serve(r io.Reader, w io.Writer, mtu int, l log.Logger, handler Handler) {
 	multiplexer.New(r, w, mtu, func(channel io.ReadWriteCloser) {
 		// If Close fails, multiplexer already knows, so we ignore the error
 		defer channel.Close()
@@ -46,7 +46,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		// Check the RPC header
 		var h [4]byte
 		if err := d.Data(h[:]); err != nil || h != header {
-			logger.Errorf("%v", ErrInvalidHeader)
+			l.Errorf("%v", ErrInvalidHeader)
 			e.Object(ErrInvalidHeader)
 			return
 		}
@@ -54,7 +54,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		// Decode the call
 		val, err := d.Object()
 		if err != nil {
-			logger.Errorf("Error decoding call: %v", err)
+			l.Errorf("Error decoding call: %v", err)
 			e.Object(NewError("Failed to decode call. Reason: %v", err))
 			return
 		}
@@ -64,7 +64,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 
 		// Encode the call result
 		if err := e.Object(res); err != nil {
-			logger.Errorf("Error encoding result for %T: %v", val, err)
+			l.Errorf("Error encoding result for %T: %v", val, err)
 			e.Object(NewError("Failed to encode call result. Reason: %v", err))
 			return
 		}

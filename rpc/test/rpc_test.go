@@ -46,72 +46,73 @@ type server struct {
 	err   error
 }
 
-func (s *server) Add(logger log.Logger, a uint32, b uint32) (uint32, error) {
+func (s *server) Add(a uint32, b uint32, l log.Logger) (uint32, error) {
 	s.calls = append(s.calls, fmt.Sprintf("Add(%d, %d)", a, b))
 	return a + b, s.err
 }
 
-func (s *server) EnumToString(logger log.Logger, e Enum) (string, error) {
+func (s *server) EnumToString(e Enum, l log.Logger) (string, error) {
 	s.calls = append(s.calls, fmt.Sprintf("EnumToString(%v)", e))
 	return e.String(), s.err
 }
 
-func (s *server) GetStruct(logger log.Logger) (Struct, error) {
+func (s *server) GetStruct(l log.Logger) (Struct, error) {
 	s.calls = append(s.calls, "GetStruct()")
 	return testStruct, s.err
 }
 
-func (s *server) SetStruct(logger log.Logger, str Struct) error {
+func (s *server) SetStruct(str Struct, l log.Logger) error {
 	s.calls = append(s.calls, fmt.Sprintf("SetStruct(%v)", str))
 	return s.err
 }
 
-func (s *server) GetResource(logger log.Logger) (ResourceId, error) {
+func (s *server) GetResource(l log.Logger) (ResourceId, error) {
 	s.calls = append(s.calls, "GetResource()")
 	return testResourceId, s.err
 }
 
-func (s *server) ResolveResource(logger log.Logger, id ResourceId) (Resource, error) {
+func (s *server) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
 	s.calls = append(s.calls, fmt.Sprintf("ResolveResource(%v)", id))
 	return testResource, s.err
 }
 
-func (s *server) UseResource(logger log.Logger, r ResourceId) error {
+func (s *server) UseResource(r ResourceId, l log.Logger) error {
 	s.calls = append(s.calls, fmt.Sprintf("UseResource(%v)", r))
 	return s.err
 }
 
-func (s *server) GetSingleListNode(logger log.Logger) (*ListNode, error) {
+func (s *server) GetSingleListNode(l log.Logger) (*ListNode, error) {
 	s.calls = append(s.calls, "GetSingleListNode()")
 	return testSingleListNode, s.err
 }
 
-func (s *server) GetListNodeChain(logger log.Logger) (*ListNode, error) {
+func (s *server) GetListNodeChain(l log.Logger) (*ListNode, error) {
 	s.calls = append(s.calls, "GetListNodeChain()")
 	return testListNodeChain, s.err
 }
 
-func (s *server) GetListNodeChainArray(logger log.Logger) (ListNodePtrArray, error) {
+func (s *server) GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error) {
 	s.calls = append(s.calls, "GetListNodeChainArray()")
 	return testListNodeChainArray, s.err
 }
 
-func (s *server) GetBase(logger log.Logger) (Base, error) {
+func (s *server) GetBase(l log.Logger) (Base, error) {
 	s.calls = append(s.calls, "GetBase()")
 	return testBase, s.err
 }
 
-func (s *server) GetDerived(logger log.Logger) (Base, error) {
+func (s *server) GetDerived(l log.Logger) (Base, error) {
 	s.calls = append(s.calls, "GetDerived()")
 	return testDerived, s.err
 }
 
-func create() (RPC, *server) {
+func create(t *testing.T) (RPC, *server) {
+	l := log.Testing(t).Enter("Server")
 	mtu := 64
 	s2c, c2s := ringbuffer.New(64), ringbuffer.New(64)
 	server := &server{}
 	client := CreateClient(s2c, c2s, mtu)
-	BindServer(c2s, s2c, mtu, log.Nop{}, server)
+	BindServer(c2s, s2c, mtu, l, server)
 	return client, server
 }
 
@@ -137,74 +138,74 @@ func verifyResult(t *testing.T, expected interface{}, got interface{}) {
 }
 
 func TestInitialConditions(t *testing.T) {
-	_, server := create()
+	_, server := create(t)
 	verifyCalls(t, server, nil)
 }
 
 func TestCallAdd(t *testing.T) {
-	client, server := create()
-	res, err := client.Add(log.Nop{}, 1, 2)
+	client, server := create(t)
+	res, err := client.Add(1, 2, log.Testing(t))
 	verifyCalls(t, server, err, "Add(1, 2)")
 	verifyResult(t, uint32(3), res)
 }
 
 func TestCallEnumToString(t *testing.T) {
-	client, server := create()
-	res, err := client.EnumToString(log.Nop{}, EnumOne)
+	client, server := create(t)
+	res, err := client.EnumToString(EnumOne, log.Testing(t))
 	verifyCalls(t, server, err, fmt.Sprintf("EnumToString(%v)", EnumOne))
 	verifyResult(t, "One", res)
 }
 
 func TestCallGetStruct(t *testing.T) {
-	client, server := create()
-	res, err := client.GetStruct(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetStruct(log.Testing(t))
 	verifyCalls(t, server, err, "GetStruct()")
 	verifyResult(t, testStruct, res)
 }
 
 func TestCallSetStruct(t *testing.T) {
-	client, server := create()
-	client.SetStruct(log.Nop{}, testStruct)
+	client, server := create(t)
+	client.SetStruct(testStruct, log.Testing(t))
 	verifyCalls(t, server, nil, fmt.Sprintf("SetStruct(%v)", testStruct))
 }
 
 func TestCallGetResource(t *testing.T) {
-	client, server := create()
-	res, err := client.GetResource(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetResource(log.Testing(t))
 	verifyCalls(t, server, err, "GetResource()")
 	verifyResult(t, testResourceId, res)
 }
 
 func TestCallResolveResource(t *testing.T) {
-	client, server := create()
-	res, err := client.ResolveResource(log.Nop{}, testResourceId)
+	client, server := create(t)
+	res, err := client.ResolveResource(testResourceId, log.Testing(t))
 	verifyCalls(t, server, err, fmt.Sprintf("ResolveResource(%v)", testResourceId))
 	verifyResult(t, testResource, res)
 }
 
 func TestCallUseResource(t *testing.T) {
-	client, server := create()
-	client.UseResource(log.Nop{}, testResourceId)
+	client, server := create(t)
+	client.UseResource(testResourceId, log.Testing(t))
 	verifyCalls(t, server, nil, fmt.Sprintf("UseResource(%v)", testResourceId))
 }
 
 func TestCallGetSingleListNode(t *testing.T) {
-	client, server := create()
-	res, err := client.GetSingleListNode(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetSingleListNode(log.Testing(t))
 	verifyCalls(t, server, err, "GetSingleListNode()")
 	verifyResult(t, testSingleListNode, res)
 }
 
 func TestCallGetListNodeChain(t *testing.T) {
-	client, server := create()
-	res, err := client.GetListNodeChain(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetListNodeChain(log.Testing(t))
 	verifyCalls(t, server, err, "GetListNodeChain()")
 	verifyResult(t, testListNodeChain, res)
 }
 
 func TestCallGetListNodeChainArray(t *testing.T) {
-	client, server := create()
-	res, err := client.GetListNodeChainArray(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetListNodeChainArray(log.Testing(t))
 	verifyCalls(t, server, err, "GetListNodeChainArray()")
 	verifyResult(t, testListNodeChainArray, res)
 	if !reflect.DeepEqual(res[0], res[1]) || !reflect.DeepEqual(res[1], res[2]) {
@@ -213,15 +214,15 @@ func TestCallGetListNodeChainArray(t *testing.T) {
 }
 
 func TestCallGetBase(t *testing.T) {
-	client, server := create()
-	res, err := client.GetBase(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetBase(log.Testing(t))
 	verifyCalls(t, server, err, "GetBase()")
 	verifyResult(t, testBase, res)
 }
 
 func TestCallGetDerived(t *testing.T) {
-	client, server := create()
-	res, err := client.GetDerived(log.Nop{})
+	client, server := create(t)
+	res, err := client.GetDerived(log.Testing(t))
 	verifyCalls(t, server, err, "GetDerived()")
 	verifyResult(t, testDerived, res)
 }

@@ -98,23 +98,24 @@
   {{AssertType $ "Function"}}
 
   {{Macro "VerifyInterfaceReturnTypeIsRef" $}}
-  {{$.Name}}(l log.Logger, {{Macro "Parameters" $}})§
+  {{$.Name}}({{Macro "ParametersAndLogger" $}})§
     ({{if not (IsVoid $.Return.Type)}}{{Macro "Type" $.Return.Type}}, {{end}}error)
 {{end}}
 
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a comma-separated list of command parameters (name followed by type).
+  Emits a comma-separated list of command parameters (name followed by type)
+  followed by a log.Logger parameter.
 -------------------------------------------------------------------------------
 */}}
-{{define "Parameters"}}
+{{define "ParametersAndLogger"}}
   {{AssertType $ "Function"}}
 
   {{range $i, $p := $.CallParameters}}
-    {{if $i}},{{end}}§
-    {{Macro "Parameter" "Parameter" $p "Command" $}}§
+    {{Macro "Parameter" "Parameter" $p "Command" $}}, §
   {{end}}
+  l log.Logger
 {{end}}
 
 
@@ -490,7 +491,7 @@ func (h {{$.Name}}) Valid() bool {
   // Client compliance
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      func (c client) {{$c.Name}}(l log.Logger, {{Macro "Parameters" $c}}) (res {{Macro "Type" $c.Return.Type}}, err error) {
+      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Macro "Type" $c.Return.Type}}, err error) {
         var val interface{}
         if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
           res = val.(*{{Macro "ResultName" $c}}).value
@@ -500,7 +501,7 @@ func (h {{$.Name}}) Valid() bool {
         return
       }
     {{else}}
-      func (c client) {{$c.Name}}(l log.Logger, {{Macro "Parameters" $c}}) error {
+      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) error {
         _, err := c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} })
         return err
       }
@@ -532,7 +533,7 @@ func (h {{$.Name}}) Valid() bool {
   )
 
   func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
-    rpc.Serve(l, r, w, mtu, func(in interface{}) (res binary.Object) {
+    rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
       l := l.Fork().Enter(fmt.Sprintf("%v", in))
       defer func() {
         if err := recover(); err == nil {
@@ -550,13 +551,13 @@ func (h {{$.Name}}) Valid() bool {
         {{range $i, $c := $.Functions}}
           case *{{Macro "CallName" $c}}:
             {{if not (IsVoid $c.Return.Type)}}
-              if res, err := server.{{$c.Name}}(l{{range $p := $c.CallParameters}}, call.{{$p.Name}}{{end}}); err == nil {
+              if res, err := server.{{$c.Name}}({{range $p := $c.CallParameters}}call.{{$p.Name}}, {{end}}l); err == nil {
                 return &{{Macro "ResultName" $c}}{ value:res }
               } else {
                 return rpc.NewError(err.Error())
               }
             {{else}}
-              if err := server.{{$c.Name}}(l{{range $p := $c.CallParameters}}, call.{{$p.Name}}{{end}}); err == nil {
+              if err := server.{{$c.Name}}({{range $p := $c.CallParameters}}call.{{$p.Name}}, {{end}}l); err == nil {
                 return &{{Macro "ResultName" $c}}{}
               } else {
                 return rpc.NewError(err.Error())
@@ -574,31 +575,36 @@ func (h {{$.Name}}) Valid() bool {
   }
 
   {{range $_, $c := $.Functions}}
-  {{if not (IsVoid $c.Return.Type)}}
-  {{$type := Macro "Type" $c.Return.Type}}
-  {{if eq $c.Name (print "Resolve" $type)}}
-  {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
-  func Store{{$type}}(ϟd database.Database, ϟl log.Logger, ϟv *{{$type}}) ({{$handle}}, error) {
-    ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
-    return {{$handle}}{ID:ϟid}, ϟerr
-  }
+    {{if not (IsVoid $c.Return.Type)}}
+      {{$type := Macro "Type" $c.Return.Type}}
+      {{if eq $c.Name (print "Resolve" $type)}}
+        {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
 
-  func Resolve{{$type}}(ϟd database.Database, ϟl log.Logger, ϟid {{$handle}}) (*{{$type}}, error) {
-    ϟout, ϟerr := ϟd.Resolve(ϟid.ID, ϟl)
-    if ϟerr != nil {
-      return nil, ϟerr
-    }
-    return ϟout.(*{{$type}}), ϟerr
-  }
+        // Store{{$type}} stores v into the database d, returning the {{$handle}}.
+        func Store{{$type}}(v *{{$type}}, d database.Database, l log.Logger) ({{$handle}}, error) {
+          id, err := database.Store(v, d, l)
+          return {{$handle}}{ID: id}, err
+        }
 
-  func (ϟr Resolver) {{$c.Name}}(ϟl log.Logger, {{Macro "Parameters" $c}}) ({{$type}}, error) {
-    ϟout, ϟerr := ϟr.Database.Resolve({{(index $c.CallParameters 0).Name}}.ID, ϟl)
-    if ϟerr != nil {
-      return {{$type}}{}, ϟerr
-    }
-    return *(ϟout.(*{{$type}})), nil
-  }
+        // Resolve{{$type}} loads and returns the {{$type}} stored in the database d, using id.
+        func Resolve{{$type}}(id {{$handle}}, d database.Database, l log.Logger) (*{{$type}}, error) {
+          out, err := d.Resolve(id.ID, l)
+          if err != nil {
+            return nil, err
+          }
+          return (out.(*{{$type}})), nil
+        }
 
-  {{end}}{{end}}{{end}}
+        // Resolve{{$type}} loads and returns the {{$type}} stored in the resolver's database, using id.
+        func (r Resolver) Resolve{{$type}}(id {{$handle}}, l log.Logger) ({{$type}}, error) {
+          out, err := r.Database.Resolve(id.ID, l)
+          if err != nil {
+            return {{$type}}{}, err
+          }
+          return *(out.(*{{$type}})), nil
+        }
+      {{end}}
+    {{end}}
+  {{end}}
 
 {{end}}

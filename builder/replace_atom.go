@@ -26,7 +26,7 @@ import (
 
 // BuildLazy returns a new *service.Capture, with a single atom replaced.
 func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
-	original, err := service.ResolveCapture(d, l, request.Capture)
+	original, err := service.ResolveCapture(request.Capture, d, l)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.
 		return nil, err
 	}
 
-	newStreamId, err := service.StoreAtomStream(d, l, &newStream)
+	newStreamId, err := service.StoreAtomStream(&newStream, d, l)
 	if err != nil {
 		return nil, err
 	}

@@ -38,7 +38,7 @@ type Database interface {
 
 // Store is a helper that stores an object to the database with the id
 // calculated by the Hash function.
-func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
+func Store(obj binary.Object, d Database, l log.Logger) (binary.ID, error) {
 	id, err := Hash(obj)
 	if err != nil {
 		return id, err

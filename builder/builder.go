@@ -102,13 +102,13 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		return service.CaptureId{}, err
 	}
 
-	streamID, err := service.StoreAtomStream(d, l, &stream)
+	streamID, err := service.StoreAtomStream(&stream, d, l)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
 
 	schema := schema.Schema()
-	schemaID, err := service.StoreSchema(d, l, &schema)
+	schemaID, err := service.StoreSchema(&schema, d, l)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
@@ -132,7 +132,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		Schema: schemaID,
 	}
 
-	captureID, err := service.StoreCapture(d, l, capture)
+	captureID, err := service.StoreCapture(capture, d, l)
 	if err != nil {
 		return service.CaptureId{}, err
 	}
@@ -148,7 +148,7 @@ func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, 
 }
 
 func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.Logger) (atom.List, error) {
-	stream, err := service.ResolveAtomStream(db, logger, streamID)
+	stream, err := service.ResolveAtomStream(streamID, db, logger)
 	if err != nil {
 		return atom.List{}, err
 	}
@@ -166,7 +166,7 @@ func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.L
 // capture, which will be cached to the database for subsequent calls,
 // regardless of the given atom.
 func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, d database.Database, l log.Logger) (width, height uint32, err error) {
-	id, err := database.Store(d, &getCaptureFramebufferDimensions{Capture: captureID}, l)
+	id, err := database.Store(&getCaptureFramebufferDimensions{Capture: captureID}, d, l)
 	if err != nil {
 		return 0, 0, err
 	}
@@ -212,7 +212,7 @@ func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d datab
 			panic(fmt.Errorf("Panic at atom %d: %v", id, err))
 		}
 	}()
-	capture, err := service.ResolveCapture(d, l, request.Capture)
+	capture, err := service.ResolveCapture(request.Capture, d, l)
 	if err != nil {
 		return nil, err
 	}

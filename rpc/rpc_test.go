@@ -39,11 +39,12 @@ type response struct {
 	data string
 }
 
-func create() Client {
+func create(t *testing.T) Client {
+	l := log.Testing(t)
 	pass := make(chan string, 1)
 	sr, cw := io.Pipe()
 	cr, sw := io.Pipe()
-	Serve(log.Nop{}, sr, sw, mtu, func(call interface{}) binary.Object {
+	Serve(sr, sw, mtu, l, func(call interface{}) binary.Object {
 		switch o := call.(type) {
 		case *request:
 			pass <- o.data
@@ -82,12 +83,12 @@ func delayRequest(t *testing.T, c Client, send string, expect string) {
 }
 
 func TestSimpleRpc(t *testing.T) {
-	c := create()
+	c := create(t)
 	simpleRequest(t, c, "hello")
 }
 
 func TestInterleavedRpc(t *testing.T) {
-	c := create()
+	c := create(t)
 	done := make(chan struct{})
 	go func() {
 		delayRequest(t, c, "hello", "goodbye")

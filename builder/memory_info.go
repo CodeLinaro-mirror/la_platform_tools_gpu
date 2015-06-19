@@ -29,7 +29,7 @@ import (
 // BuildLazy returns the *service.MemoryInfo resulting from the given
 // GetMemoryInfo request.
 func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
-	capture, err := service.ResolveCapture(d, l, r.Capture)
+	capture, err := service.ResolveCapture(r.Capture, d, l)
 	if err != nil {
 		return nil, err
 	}
