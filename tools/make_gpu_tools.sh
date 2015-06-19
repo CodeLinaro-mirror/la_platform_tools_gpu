@@ -91,7 +91,7 @@ fi
 # Kill any existing replay daemon before running tests.
 killall replayd || true
 
-go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true cc test
+go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true --disable=code cc
 
 # Kill any existing replay daemon before running tests.
 killall replayd || true
@@ -111,7 +111,7 @@ fi
 killall replayd || true
 
 if [ $crosscompile_windows -eq 1 ]; then
-  go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true -targetos=windows replayd
+  go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -verbose=true -targetos=windows --disable=code replayd
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
   go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-x64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/gapis
 fi
