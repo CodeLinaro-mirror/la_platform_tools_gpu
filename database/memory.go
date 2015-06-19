@@ -16,9 +16,11 @@ package database
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -42,20 +44,27 @@ type memory struct {
 	buildContext interface{} // The build context, user-defined.
 }
 
+// Implements Database
 func (d *memory) Store(id binary.ID, o binary.Object, logger log.Logger) error {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 	return d.store(id, o, logger)
 }
 
+// store function must be called with a locked mutex
 func (d *memory) store(id binary.ID, o binary.Object, logger log.Logger) error {
-	_, got := d.records[id]
+	r, got := d.records[id]
 	if !got {
 		d.records[id] = &record{value: o}
+	} else if config.DebugDatabaseVerify {
+		if !reflect.DeepEqual(o, r.value) {
+			return fmt.Errorf("Duplicate object id %v", id)
+		}
 	}
 	return nil
 }
 
+// Implements Database
 func (d *memory) Resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
@@ -99,6 +108,7 @@ func (d *memory) resolve(id binary.ID, logger log.Logger) (binary.Object, error)
 	return value, r.err
 }
 
+// Implements Database
 func (d *memory) Contains(id binary.ID, logger log.Logger) (res bool) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
