@@ -207,27 +207,27 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 		return
 	}
 
-	logger := c.logger.Fork().Enter("LoadCapture")
-	logger.Infof("(capture: %v)", captureID)
+	l := c.logger.Fork().Enter("LoadCapture")
+	l.Infof("(capture: %v)", captureID)
 
 	go func() {
 		var err error
 
-		capture, err := c.rpc.ResolveCapture(logger, captureID)
+		capture, err := c.rpc.ResolveCapture(captureID, l)
 		if err != nil {
-			logger.Errorf("Error resolving capture: %v", err)
+			l.Errorf("Error resolving capture: %v", err)
 			return
 		}
 
-		atoms, err := c.rpc.ResolveAtomStream(logger, capture.Atoms)
+		atoms, err := c.rpc.ResolveAtomStream(capture.Atoms, l)
 		if err != nil {
-			logger.Errorf("Error resolving capture: %v", err)
+			l.Errorf("Error resolving capture: %v", err)
 			return
 		}
 
-		s, err := c.rpc.ResolveSchema(logger, capture.Schema)
+		s, err := c.rpc.ResolveSchema(capture.Schema, l)
 		if err != nil {
-			logger.Errorf("Error resolving capture: %v", err)
+			l.Errorf("Error resolving capture: %v", err)
 			return
 		}
 
@@ -247,22 +247,22 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			}
 			c.onAtomsUpdated.Fire()
 			c.RequestReplay()
-			logger.Infof("Capture '%s' loaded: %d atoms", c.capture.GetName(), len(atoms))
+			l.Infof("Capture '%s' loaded: %d atoms", c.capture.GetName(), len(atoms))
 		})
 	}()
 }
 
 func (c *ApplicationContext) LoadHierarchy() {
 	captureID := c.captureID
-	logger := c.logger.Fork().Enter("LoadHierarchy")
-	logger.Infof("(capture: %v)", captureID)
+	l := c.logger.Fork().Enter("LoadHierarchy")
+	l.Infof("(capture: %v)", captureID)
 
 	go func() {
-		hierarchy, err := c.rpc.GetHierarchy(logger, captureID)
+		hierarchy, err := c.rpc.GetHierarchy(captureID, l)
 		if err != nil {
 			return
 		}
-		root, err := c.rpc.ResolveHierarchy(logger, hierarchy)
+		root, err := c.rpc.ResolveHierarchy(hierarchy, l)
 		if err != nil {
 			return
 		}
@@ -270,7 +270,7 @@ func (c *ApplicationContext) LoadHierarchy() {
 			c.hierarchy = atom.Group{}
 			root.Root.Unpack(&c.hierarchy)
 			c.onHierarchyUpdated.Fire()
-			logger.Infof("Hierarchy loaded")
+			l.Infof("Hierarchy loaded")
 		})
 	}()
 }
@@ -323,8 +323,8 @@ func isClosed(c <-chan struct{}) bool {
 }
 
 func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight uint32, callback ImageCallback) chan<- struct{} {
-	logger := c.logger.Fork().Enter("RequestThumbnail")
-	logger.Infof("(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
+	l := c.logger.Fork().Enter("RequestThumbnail")
+	l.Infof("(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
 
 	cancel := make(chan struct{})
 	device := c.selectedDevice
@@ -336,42 +336,42 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 	}
 
 	if !device.Valid() {
-		logger.Warningf("No device selected")
+		l.Warningf("No device selected")
 		return nil
 	}
 
 	apiID := c.atoms[after].Info.Api
 
 	go func() {
-		imageID, err := c.rpc.GetFramebufferColor(logger, device, captureID, apiID, uint64(after), settings)
+		imageID, err := c.rpc.GetFramebufferColor(device, captureID, apiID, uint64(after), settings, l)
 		if err != nil {
 			return
 		}
 		if isClosed(cancel) {
-			logger.Infof("Request cancelled")
+			l.Infof("Request cancelled")
 			return
 		}
 
-		imageInfo, err := c.rpc.ResolveImageInfo(logger, imageID)
+		imageInfo, err := c.rpc.ResolveImageInfo(imageID, l)
 		if err != nil {
 			return
 		}
 		if isClosed(cancel) {
-			logger.Infof("Request cancelled")
+			l.Infof("Request cancelled")
 			return
 		}
 
-		logger.Infof("Image info resolved")
-		imageData, err := c.rpc.ResolveBinary(logger, imageInfo.Data)
+		l.Infof("Image info resolved")
+		imageData, err := c.rpc.ResolveBinary(imageInfo.Data, l)
 		if err != nil {
 			return
 		}
 		if isClosed(cancel) {
-			logger.Infof("Request cancelled")
+			l.Infof("Request cancelled")
 			return
 		}
 
-		logger.Infof("Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
+		l.Infof("Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
 		if imageInfo.Width > 0 && imageInfo.Height > 0 {
 			img := image.NewRGBA(image.Rect(0, 0, int(imageInfo.Width), int(imageInfo.Height)))
 			img.Pix = []byte(imageData.Data)
@@ -389,29 +389,29 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 type MemoryCallback func(service.MemoryInfo)
 
 func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, size uint64, callback MemoryCallback) chan<- struct{} {
-	logger := c.logger.Fork().Enter("RequestMemory")
-	logger.Infof("(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
+	l := c.logger.Fork().Enter("RequestMemory")
+	l.Infof("(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
 
 	cancel := make(chan struct{})
 	captureID := c.captureID
 	if c.captureID.Valid() {
 		go func() {
 			rng := service.MemoryRange{Base: uint64(base), Size: size}
-			id, err := c.rpc.GetMemoryInfo(logger, captureID, uint64(after), rng)
+			id, err := c.rpc.GetMemoryInfo(captureID, uint64(after), rng, l)
 			if err != nil {
 				return
 			}
 			if isClosed(cancel) {
-				logger.Infof("Request cancelled")
+				l.Infof("Request cancelled")
 				return
 			}
 
-			info, err := c.rpc.ResolveMemoryInfo(logger, id)
+			info, err := c.rpc.ResolveMemoryInfo(id, l)
 			if err != nil {
 				return
 			}
 			if isClosed(cancel) {
-				logger.Infof("Request cancelled")
+				l.Infof("Request cancelled")
 				return
 			}
 
@@ -424,6 +424,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, s
 }
 
 func (c *ApplicationContext) ReplaceAtom(a schema.Atom, id atom.ID) {
+	l := c.logger.Enter("ReplaceAtom")
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
 	err := a.Pack(enc)
@@ -433,7 +434,7 @@ func (c *ApplicationContext) ReplaceAtom(a schema.Atom, id atom.ID) {
 	b := service.Binary{
 		Data: buf.Bytes(),
 	}
-	capture, err := c.rpc.ReplaceAtom(c.logger, c.captureID, uint64(id), a.Info.Type, b)
+	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a.Info.Type, b, l)
 	if err != nil {
 		panic(err)
 	}

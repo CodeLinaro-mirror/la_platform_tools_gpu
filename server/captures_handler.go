@@ -51,7 +51,7 @@ func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 `)
 
 	for _, id := range captures {
-		capture, err := service.ResolveCapture(h.d, h.l, id)
+		capture, err := service.ResolveCapture(id, h.d, h.l)
 		if err == nil {
 			fmt.Fprintf(res, `			<a href="%s%s?%s=%s">%s</a><br/>`,
 				h.c.HttpAddress, atomsRoute, idParamName, id.ID, capture.Name)

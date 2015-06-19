@@ -35,13 +35,13 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 
 	var wg sync.WaitGroup
 	for _, atomID := range r.AtomIDs {
-		id, err := database.Store(d, &GetFramebufferColor{
+		id, err := database.Store(&GetFramebufferColor{
 			Capture:  r.Capture,
 			Device:   r.Device,
 			API:      r.API,
 			After:    atom.ID(atomID),
 			Settings: renderSettings,
-		}, l)
+		}, d, l)
 
 		if err == nil {
 			wg.Add(1)
@@ -49,9 +49,9 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 			go func() {
 				defer wg.Done()
 
-				imageInfo, err := service.ResolveImageInfo(d, l, service.ImageInfoId{ID: id})
+				imageInfo, err := service.ResolveImageInfo(service.ImageInfoId{ID: id}, d, l)
 				if err == nil {
-					service.ResolveBinary(d, l, imageInfo.Data)
+					service.ResolveBinary(imageInfo.Data, d, l)
 				}
 			}()
 		}

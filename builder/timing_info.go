@@ -36,7 +36,7 @@ func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 		CaptureID: r.Capture,
 	}
 
-	capture, err := service.ResolveCapture(d, l, r.Capture)
+	capture, err := service.ResolveCapture(r.Capture, d, l)
 	if err != nil {
 		return nil, err
 	}

@@ -71,12 +71,12 @@ func (b *batcher) run() {
 }
 
 func (b *batcher) send(requests []Request) (err error) {
-	c, err := service.ResolveCapture(b.database, b.logger, b.context.CaptureID)
+	c, err := service.ResolveCapture(b.context.CaptureID, b.database, b.logger)
 	if err != nil {
 		return fmt.Errorf("Failed to load capture (%s): %v", b.context.CaptureID, err)
 	}
 
-	stream, err := service.ResolveAtomStream(b.database, b.logger, c.Atoms)
+	stream, err := service.ResolveAtomStream(c.Atoms, b.database, b.logger)
 	if err != nil {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}

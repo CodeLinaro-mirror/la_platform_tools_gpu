@@ -21,7 +21,7 @@ func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
 }
 
 // Client compliance
-func (c client) Add(l log.Logger, a uint32, b uint32) (res uint32, err error) {
+func (c client) Add(a uint32, b uint32, l log.Logger) (res uint32, err error) {
 	var val interface{}
 	if val, err = c.Send(&callAdd{a: a, b: b}); err == nil {
 		res = val.(*resultAdd).value
@@ -31,7 +31,7 @@ func (c client) Add(l log.Logger, a uint32, b uint32) (res uint32, err error) {
 	return
 }
 
-func (c client) EnumToString(l log.Logger, e Enum) (res string, err error) {
+func (c client) EnumToString(e Enum, l log.Logger) (res string, err error) {
 	var val interface{}
 	if val, err = c.Send(&callEnumToString{e: e}); err == nil {
 		res = val.(*resultEnumToString).value
@@ -51,7 +51,7 @@ func (c client) GetStruct(l log.Logger) (res Struct, err error) {
 	return
 }
 
-func (c client) SetStruct(l log.Logger, s Struct) error {
+func (c client) SetStruct(s Struct, l log.Logger) error {
 	_, err := c.Send(&callSetStruct{s: s})
 	return err
 }
@@ -66,12 +66,12 @@ func (c client) GetResource(l log.Logger) (res ResourceId, err error) {
 	return
 }
 
-func (c client) UseResource(l log.Logger, r ResourceId) error {
+func (c client) UseResource(r ResourceId, l log.Logger) error {
 	_, err := c.Send(&callUseResource{r: r})
 	return err
 }
 
-func (c client) ResolveResource(l log.Logger, r ResourceId) (res Resource, err error) {
+func (c client) ResolveResource(r ResourceId, l log.Logger) (res Resource, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveResource{r: r}); err == nil {
 		res = val.(*resultResolveResource).value

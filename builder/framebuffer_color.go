@@ -38,7 +38,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 	}
 	imgWidth, imgHeight := uniformScale(fbWidth, fbHeight, r.Settings.MaxWidth, r.Settings.MaxHeight)
 
-	data, err := database.Store(d, &RenderFramebufferColor{
+	data, err := database.Store(&RenderFramebufferColor{
 		Capture:   r.Capture,
 		Device:    r.Device,
 		API:       r.API,
@@ -46,7 +46,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 		Width:     imgWidth,
 		Height:    imgHeight,
 		Wireframe: r.Settings.Wireframe,
-	}, l)
+	}, d, l)
 
 	if err != nil {
 		return nil, err
