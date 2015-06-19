@@ -19,21 +19,21 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-// blob is an encodable wrapper for a byte array, used for storing raw data
+// Blob is an encodable wrapper for a byte array, used for storing raw data
 // in databases.
-type blob struct {
+type Blob struct {
 	binary.Generate
 	Data []byte
 }
 
 // StoreBlob stores the byte slice data inside a Blob to the database d.
 func StoreBlob(data []byte, d Database, l log.Logger) (binary.ID, error) {
-	return d.Store(&blob{Data: data}, l)
+	return d.Store(&Blob{Data: data}, l)
 }
 
 // Resolve blob loads a Blob from the database, returning the byte slice.
 func ResolveBlob(id binary.ID, d Database, l log.Logger) ([]byte, error) {
-	b := blob{}
+	b := Blob{}
 	err := d.Load(id, l, &b)
 	if err != nil {
 		return nil, err

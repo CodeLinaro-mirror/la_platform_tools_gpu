@@ -12,19 +12,19 @@ import (
 )
 
 func init() {
-	registry.Add((*blob)(nil).Class())
+	registry.Add((*Blob)(nil).Class())
 }
 
 var (
-	binaryIDblob = binary.ID{0x38, 0x16, 0x87, 0x7a, 0x38, 0x4f, 0xaf, 0x5d, 0x34, 0xf4, 0xeb, 0x7e, 0x3f, 0x26, 0x23, 0x3d, 0x6f, 0xd8, 0x32, 0x62}
+	binaryIDBlob = binary.ID{0x24, 0x5b, 0x08, 0x7c, 0xe3, 0xaf, 0x7f, 0x90, 0xa7, 0x25, 0xf4, 0x0a, 0x65, 0x0e, 0x33, 0xbf, 0x3a, 0x6d, 0x11, 0x58}
 )
 
-type binaryClassblob struct{}
+type binaryClassBlob struct{}
 
-func (*blob) Class() binary.Class {
-	return (*binaryClassblob)(nil)
+func (*Blob) Class() binary.Class {
+	return (*binaryClassBlob)(nil)
 }
-func doEncodeblob(e binary.Encoder, o *blob) error {
+func doEncodeBlob(e binary.Encoder, o *Blob) error {
 	if err := e.Uint32(uint32(len(o.Data))); err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func doEncodeblob(e binary.Encoder, o *blob) error {
 	}
 	return nil
 }
-func doDecodeblob(d binary.Decoder, o *blob) error {
+func doDecodeBlob(d binary.Decoder, o *Blob) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -44,7 +44,7 @@ func doDecodeblob(d binary.Decoder, o *blob) error {
 	}
 	return nil
 }
-func doSkipblob(d binary.Decoder) error {
+func doSkipBlob(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -54,24 +54,24 @@ func doSkipblob(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassblob) ID() binary.ID      { return binaryIDblob }
-func (*binaryClassblob) New() binary.Object { return &blob{} }
-func (*binaryClassblob) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeblob(e, obj.(*blob))
+func (*binaryClassBlob) ID() binary.ID      { return binaryIDBlob }
+func (*binaryClassBlob) New() binary.Object { return &Blob{} }
+func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBlob(e, obj.(*Blob))
 }
-func (*binaryClassblob) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &blob{}
-	return obj, doDecodeblob(d, obj)
+func (*binaryClassBlob) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Blob{}
+	return obj, doDecodeBlob(d, obj)
 }
-func (*binaryClassblob) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeblob(d, obj.(*blob))
+func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBlob(d, obj.(*Blob))
 }
-func (*binaryClassblob) Skip(d binary.Decoder) error { return doSkipblob(d) }
-func (*binaryClassblob) Schema() *schema.Class       { return schemablob }
+func (*binaryClassBlob) Skip(d binary.Decoder) error { return doSkipBlob(d) }
+func (*binaryClassBlob) Schema() *schema.Class       { return schemaBlob }
 
-var schemablob = &schema.Class{
-	TypeID: binaryIDblob,
-	Name:   "blob",
+var schemaBlob = &schema.Class{
+	TypeID: binaryIDBlob,
+	Name:   "Blob",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
