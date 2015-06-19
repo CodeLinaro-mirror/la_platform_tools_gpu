@@ -51,6 +51,14 @@ type Pointer struct {
 	Type Type // The pointed to type.
 }
 
+func (s *Struct) Basename() string {
+	return s.Name
+}
+
+func (s *Struct) Typename() string {
+	return s.Name
+}
+
 func (s *Struct) String() string {
 	return s.Name
 }
@@ -67,6 +75,14 @@ func (s *Struct) Decode(d binary.Decoder) (interface{}, error) {
 func (s *Struct) Skip(d binary.Decoder) error {
 	o := &Object{class: Lookup(s.ID)}
 	return d.SkipValue(o)
+}
+
+func (i *Interface) Basename() string {
+	return i.Name
+}
+
+func (i *Interface) Typename() string {
+	return i.Name
 }
 
 func (i *Interface) String() string {
@@ -93,8 +109,16 @@ func (i *Interface) Skip(d binary.Decoder) error {
 	return err
 }
 
+func (p *Pointer) Basename() string {
+	return fmt.Sprintf("*%s", p.Type.Basename())
+}
+
+func (p *Pointer) Typename() string {
+	return fmt.Sprintf("*%s", p.Type.Typename())
+}
+
 func (p *Pointer) String() string {
-	return fmt.Sprintf("*%s", p.Type)
+	return p.Typename()
 }
 
 func (p *Pointer) Encode(e binary.Encoder, value interface{}) error {
