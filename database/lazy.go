@@ -15,6 +15,8 @@
 package database
 
 import (
+	"bytes"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -32,4 +34,14 @@ type Lazy interface {
 	// BuildLazy constructs and returns the lazily-built object.
 	// c is the build context that was passed to the database constructor.
 	BuildLazy(c interface{}, d Database, l log.Logger) (binary.Object, error)
+}
+
+// LazyOutputID returns the identifier of a LazyOutput object given the
+// identifier of the Lazy. The database will not contain the LazyObject with the
+// returned identifier until it is built.
+func LazyOutputID(in binary.ID) binary.ID {
+	b := bytes.Buffer{}
+	b.WriteString("lazy:")
+	b.WriteString(in.String())
+	return binary.NewID(b.Bytes())
 }
