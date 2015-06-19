@@ -25,7 +25,6 @@ import (
 	. "android.googlesource.com/platform/tools/gpu/maker"
 )
 
-var noapic = flag.Bool("noapic", false, "Disable apic code generation")
 var targetOS = flag.String("targetos", HostOS, "target OS to build")
 
 func main() { Run() }
@@ -126,7 +125,7 @@ func init() {
 		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
 		Creator(Apps.Gapis).DependsOn("code")
 		Apps.Gapid = GoInstall(GPURoot + "/_experimental/client/gapid")
-		Creator(Apps.Gapid).DependsOn("codergen")
+		Creator(Apps.Gapid).DependsOn("code")
 		List("apps").DependsStruct(Apps)
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
@@ -167,10 +166,6 @@ func RpcApi(language string, path string, api Entity) *Step {
 }
 
 func Apic(path string, api string, template string) {
-	if *noapic {
-		List("apic").DependsOn(Tools.Apic)
-		return
-	}
 	dst := Dir(path)
 	a := File(api)
 	t := File(template)
