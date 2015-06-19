@@ -169,7 +169,7 @@ func Hash(o binary.Object) (binary.ID, error) {
 	id := binary.ID{}
 	h := sha1.New()
 	e := cyclic.Encoder(vle.Writer(h))
-	if err := e.Value(o); err != nil {
+	if err := e.Object(o); err != nil {
 		return id, err
 	}
 	copy(id[:], h.Sum(nil))
