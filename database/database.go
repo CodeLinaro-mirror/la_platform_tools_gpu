@@ -37,17 +37,11 @@ type Database interface {
 	Close()
 }
 
-// Create builds a new database.
-func Create(path string, maxDataCacheSize, metaDataCompactionSize, maxDerivedCacheSize int, builder builder) Database {
+// NewInMemory builds a new in memory database.
+func NewInMemory(builder builder) Database {
 	return &database{
 		records: map[binary.ID]*record{},
 		builder: builder,
-	}
-}
-
-func InMemory() Database {
-	return &database{
-		records: map[binary.ID]*record{},
 	}
 }
 

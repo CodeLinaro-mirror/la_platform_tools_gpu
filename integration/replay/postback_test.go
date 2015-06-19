@@ -29,7 +29,7 @@ import (
 )
 
 func doReplay(t *testing.T, f func(*builder.Builder)) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)

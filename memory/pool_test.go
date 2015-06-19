@@ -144,7 +144,7 @@ func TestMemoryBlobWriteReadScattered(t *testing.T) {
 //   └────┴────┴────┴────┴────┴────┴────┴────╚════╝────┴────┴────┘
 //
 func TestMemoryResourceWriteReadScattered(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	resA, _ := database.StoreBlob([]byte{10, 11, 12}, d, l)
 	resB, _ := database.StoreBlob([]byte{20, 21, 22, 23}, d, l)
 	resC, _ := database.StoreBlob([]byte{30, 31}, d, l)

@@ -135,7 +135,7 @@ func max(a, b int) int {
 }
 
 func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -156,7 +156,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 }
 
 func TestOperationsOpCall_Clone(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -185,7 +185,7 @@ func TestOperationsOpCall_Clone(t *testing.T) {
 }
 
 func TestOperationsOpCall_Make(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -208,7 +208,7 @@ func TestOperationsOpCall_Make(t *testing.T) {
 }
 
 func TestOperationsOpCall_Copy(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -237,7 +237,7 @@ func TestOperationsOpCall_Copy(t *testing.T) {
 }
 
 func TestOperationsOpCall_CharSliceToString(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -266,7 +266,7 @@ func TestOperationsOpCall_CharSliceToString(t *testing.T) {
 }
 
 func TestOperationsOpCall_CharPtrToString(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -295,7 +295,7 @@ func TestOperationsOpCall_CharPtrToString(t *testing.T) {
 }
 
 func TestOperationsOpCall_Unknowns(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -331,7 +331,7 @@ func TestOperationsOpCall_Unknowns(t *testing.T) {
 }
 
 func TestOperationsOpCall_SingleInputArg(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -409,7 +409,7 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 }
 
 func TestOperationsOpCall_3_Strings(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -437,7 +437,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 }
 
 func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 8,
 		PointerSize:      4,
@@ -491,7 +491,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 }
 
 func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -556,7 +556,7 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 }
 
 func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -679,7 +679,7 @@ func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
 }
 
 func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 16,
 		PointerSize:      4,
@@ -716,7 +716,7 @@ func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
 }
 
 func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -789,7 +789,7 @@ func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
 }
 
 func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 16,
 		PointerSize:      4,
@@ -813,7 +813,7 @@ func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
 }
 
 func TestOperationsOpCall_ReturnValue(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -870,7 +870,7 @@ func TestOperationsOpCall_ReturnValue(t *testing.T) {
 }
 
 func TestOperationsOpCall_3Remapped(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -903,7 +903,7 @@ func TestOperationsOpCall_3Remapped(t *testing.T) {
 }
 
 func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -959,7 +959,7 @@ func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
 }
 
 func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -1007,7 +1007,7 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 }
 
 func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
@@ -1055,7 +1055,7 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 }
 
 func TestOperationsOpCall_Remapped(t *testing.T) {
-	d, l := database.InMemory(), log.Testing(t)
+	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
 		PointerSize:      4,
