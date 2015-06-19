@@ -31,7 +31,7 @@ import (
 type Database interface {
 	StoreLink(to, id binary.ID, logger log.Logger) error
 	Store(binary.Object, log.Logger) (binary.ID, error)
-	Load(binary.ID, log.Logger, binary.Object) error
+	Resolve(binary.ID, log.Logger) (binary.Object, error)
 	Contains(binary.ID, log.Logger) bool
 	Close()
 }
@@ -49,7 +49,9 @@ func Store(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
 }
 
 func Load(d Database, id binary.ID, l log.Logger, out binary.Object) error {
-	return d.Load(id, l, out)
+	obj, err := d.Resolve(id, l)
+	CopyResource(out, obj)
+	return err
 }
 
 // NewInMemory builds a new in memory database.
@@ -102,48 +104,41 @@ func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) 
 	return id, nil
 }
 
-func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
+func (d *database) Resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
-	return d.load(id, logger, out)
+	return d.resolve(id, logger)
 }
 
 // load function must be called with a locked mutex
-func (d *database) load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
+func (d *database) resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
 	r, got := d.records[id]
 	if !got {
-		return fmt.Errorf("Resource '%v' not found", id)
+		return nil, fmt.Errorf("Resource '%v' not found", id)
 	}
 	if r.value != nil {
-		// already have a value, copy it to the out and we are done
-		CopyResource(out, r.value)
-		return r.err
+		return r.value, r.err
 	}
 	if r.lazy == nil {
 		// not a request or value, must be a link, so load it
-		return d.load(r.link, logger, out)
+		return d.resolve(r.link, logger)
 	}
 	if r.wait != nil {
 		// an in progress request, wait for it
 		d.mutex.Unlock()     // unlock before waiting
 		defer d.mutex.Lock() // relock after waiting
 		<-r.wait
-		CopyResource(out, r.value)
-		return r.err
+		return r.value, r.err
 	}
 	// must be a first time access to request
 	r.wait = make(chan struct{})
-	r.err = func() error { // func for defer scope
+	r.value, r.err = func() (binary.Object, error) { // func for defer scope
 		d.mutex.Unlock()     // don't build under the lock
 		defer d.mutex.Lock() // relock after build
-
-		built, err := r.lazy.BuildLazy(d.buildContext, d, logger)
-		CopyResource(out, built)
-		return err
+		return r.lazy.BuildLazy(d.buildContext, d, logger)
 	}()
-	r.value = out
 	close(r.wait)
-	return r.err
+	return r.value, r.err
 }
 
 func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
