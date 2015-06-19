@@ -29,15 +29,10 @@ import (
 
 // Database is the interface to a resource store.
 type Database interface {
-	StoreLink(to, id binary.ID, logger log.Logger) error
 	Store(binary.Object, log.Logger) (binary.ID, error)
 	Resolve(binary.ID, log.Logger) (binary.Object, error)
 	Contains(binary.ID, log.Logger) bool
 	Close()
-}
-
-func StoreLink(d Database, to, id binary.ID, l log.Logger) error {
-	return d.StoreLink(to, id, l)
 }
 
 func StoreRequest(d Database, obj binary.Object, l log.Logger) (binary.ID, error) {
@@ -64,7 +59,6 @@ func NewInMemory(buildContext interface{}) Database {
 
 type record struct {
 	value binary.Object
-	link  binary.ID
 	err   error
 	wait  chan struct{}
 }
@@ -73,16 +67,6 @@ type database struct {
 	mutex        sync.Mutex
 	records      map[binary.ID]*record
 	buildContext interface{} // The build context, user-defined.
-}
-
-func (d *database) StoreLink(to, id binary.ID, logger log.Logger) error {
-	d.mutex.Lock()
-	defer d.mutex.Unlock()
-	_, got := d.records[id]
-	if to != id && !got {
-		d.records[id] = &record{link: to}
-	}
-	return nil
 }
 
 func (d *database) Store(o binary.Object, logger log.Logger) (binary.ID, error) {
@@ -117,10 +101,6 @@ func (d *database) resolve(id binary.ID, logger log.Logger) (binary.Object, erro
 	}
 	if r.err != nil {
 		return r.value, r.err
-	}
-	if r.value == nil {
-		// not a request or value, must be a link, so load it
-		return d.resolve(r.link, logger)
 	}
 	lazy, islazy := r.value.(Lazy)
 	if !islazy {

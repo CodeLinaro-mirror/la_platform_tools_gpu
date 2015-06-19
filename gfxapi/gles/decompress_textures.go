@@ -15,13 +15,10 @@
 package gles
 
 import (
-	"bytes"
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/image"
@@ -30,7 +27,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// uncompressTextures returns an atom transform that replaces all
+// decompressTextures returns an atom transform that replaces all
 // GlCompressedTexImage2D atoms with glTexImage2D atoms for the compressed
 // texture formats:
 //   GL_ATC_RGB_AMD
@@ -39,34 +36,27 @@ import (
 func decompressTextures(capture service.CaptureId, d database.Database, l log.Logger) atom.Transformer {
 	l = l.Enter("decompressTextures")
 	s := gfxapi.NewState()
-	return atom.Transform("DecompressTextures", func(id atom.ID, a atom.Atom, out atom.Writer) {
+	return atom.Transform("DecompressTextures", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s, d, l); err != nil {
 			l.Errorf("%v", err)
 		}
 
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
-			resourceID := calcTextureID(capture, id, a)
-			data, err := database.ResolveBlob(resourceID, d, l)
+			id, err := database.Store(d, &builder.ConvertImage{
+				Data:       a.Data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
+				Width:      int(a.Width),
+				Height:     int(a.Height),
+				FormatFrom: getImageFormat(a.Format),
+				FormatTo:   image.RGBA(),
+			}, l)
 			if err != nil {
-				decompressed, err := decompress(d, l, a, s.Memory[memory.ApplicationPool])
-				if err != nil {
-					panic(err)
-				}
-				data = decompressed
-				decompressedID, err := database.StoreBlob(data, d, l)
-				if err != nil {
-					panic(err)
-				}
-				err = database.StoreLink(d, decompressedID, resourceID, l)
-				if err != nil {
-					panic(err)
-				}
+				panic(err)
 			}
 
-			address := memory.Pointer(0xF000000000000000)
-
-			out.Write(id, NewGlTexImage2D(
+			address := memory.Tmp.Base
+			size := a.Width * a.Height * 4
+			out.Write(i, NewGlTexImage2D(
 				a.Target,
 				a.Level,
 				TexelFormat_GL_RGBA,
@@ -76,36 +66,22 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 				TexelFormat_GL_RGBA,
 				TexelType_GL_UNSIGNED_BYTE,
 				address,
-			).AddRead(address.Range(uint64(len(data))), resourceID))
+			).AddRead(address.Range(uint64(size)), id))
 
 		default:
-			out.Write(id, a)
+			out.Write(i, a)
 		}
 	})
 }
 
-func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID {
-	buf := &bytes.Buffer{}
-	e := cyclic.Encoder(vle.Writer(buf))
-	e.Value(&capture)
-	e.Uint64(uint64(id))
-	e.Value(a)
-	return binary.NewID(buf.Bytes())
-}
-
-func decompress(d database.Database, l log.Logger, a *GlCompressedTexImage2D, m *memory.Pool) ([]byte, error) {
-	compressedSize := uint64(a.ImageSize)
-	compressed, err := m.Slice(memory.Range{Base: a.Data.Address, Size: compressedSize}).Get(d, l)
-	if err != nil {
-		panic(err)
-	}
-	switch a.Format {
+func getImageFormat(f CompressedTexelFormat) image.Format {
+	switch f {
 	case CompressedTexelFormat_GL_ATC_RGB_AMD:
-		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ATC_RGB_AMD(), image.RGBA())
+		return image.ATC_RGB_AMD()
 	case CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
-		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ATC_RGBA_EXPLICIT_ALPHA_AMD(), image.RGBA())
+		return image.ATC_RGBA_EXPLICIT_ALPHA_AMD()
 	case CompressedTexelFormat_GL_ETC1_RGB8_OES:
-		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ETC1_RGB8_OES(), image.RGBA())
+		return image.ETC1_RGB8_OES()
 	}
-	return nil, fmt.Errorf("Unsupported input format: %s", a.Format.String())
+	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
 }
