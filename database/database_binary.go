@@ -13,12 +13,10 @@ import (
 
 func init() {
 	registry.Add((*blob)(nil).Class())
-	registry.Add((*metadata)(nil).Class())
 }
 
 var (
-	binaryIDblob     = binary.ID{0x38, 0x16, 0x87, 0x7a, 0x38, 0x4f, 0xaf, 0x5d, 0x34, 0xf4, 0xeb, 0x7e, 0x3f, 0x26, 0x23, 0x3d, 0x6f, 0xd8, 0x32, 0x62}
-	binaryIDmetadata = binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}
+	binaryIDblob = binary.ID{0x38, 0x16, 0x87, 0x7a, 0x38, 0x4f, 0xaf, 0x5d, 0x34, 0xf4, 0xeb, 0x7e, 0x3f, 0x26, 0x23, 0x3d, 0x6f, 0xd8, 0x32, 0x62}
 )
 
 type binaryClassblob struct{}
@@ -76,83 +74,5 @@ var schemablob = &schema.Class{
 	Name:   "blob",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
-	},
-}
-
-type binaryClassmetadata struct{}
-
-func (*metadata) Class() binary.Class {
-	return (*binaryClassmetadata)(nil)
-}
-func doEncodemetadata(e binary.Encoder, o *metadata) error {
-	if err := e.Int32(int32(o.Type)); err != nil {
-		return err
-	}
-	if err := e.ID(o.LinkTo); err != nil {
-		return err
-	}
-	if o.Request != nil {
-		if err := e.Object(o.Request); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodemetadata(d binary.Decoder, o *metadata) error {
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Type = metaType(obj)
-	}
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.LinkTo = binary.ID(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Request = obj.(binary.Object)
-	} else {
-		o.Request = nil
-	}
-	return nil
-}
-func doSkipmetadata(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassmetadata) ID() binary.ID      { return binaryIDmetadata }
-func (*binaryClassmetadata) New() binary.Object { return &metadata{} }
-func (*binaryClassmetadata) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodemetadata(e, obj.(*metadata))
-}
-func (*binaryClassmetadata) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &metadata{}
-	return obj, doDecodemetadata(d, obj)
-}
-func (*binaryClassmetadata) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodemetadata(d, obj.(*metadata))
-}
-func (*binaryClassmetadata) Skip(d binary.Decoder) error { return doSkipmetadata(d) }
-func (*binaryClassmetadata) Schema() *schema.Class       { return schemametadata }
-
-var schemametadata = &schema.Class{
-	TypeID: binaryIDmetadata,
-	Name:   "metadata",
-	Fields: []schema.Field{
-		{Declared: "Type", Type: &schema.Primitive{Name: "metaType", Method: schema.Int32}},
-		{Declared: "LinkTo", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-		{Declared: "Request", Type: &schema.Interface{Name: "binary.Object"}},
 	},
 }
