@@ -22,6 +22,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -93,7 +94,7 @@ func (s rpcServer) GetState(
 	captureID service.CaptureId,
 	at uint64) (service.BinaryId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetState{
+	id, err := database.StoreRequest(s.Database, &builder.GetState{
 		Capture: captureID,
 		After:   atom.ID(at),
 	}, logger)
@@ -107,7 +108,7 @@ func (s rpcServer) GetHierarchy(
 	logger log.Logger,
 	captureID service.CaptureId) (service.HierarchyId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetHierarchy{
+	id, err := database.StoreRequest(s.Database, &builder.GetHierarchy{
 		Capture: captureID,
 	}, logger)
 	return service.HierarchyId{ID: id}, err
@@ -121,7 +122,7 @@ func (s rpcServer) GetMemoryInfo(
 	after uint64,
 	rng service.MemoryRange) (service.MemoryInfoId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetMemoryInfo{
+	id, err := database.StoreRequest(s.Database, &builder.GetMemoryInfo{
 		Capture: captureID,
 		After:   atom.ID(after),
 		Range:   memory.Range{Base: memory.Pointer(rng.Base), Size: rng.Size},
@@ -142,7 +143,7 @@ func (s rpcServer) GetFramebufferColor(
 	after uint64,
 	settings service.RenderSettings) (service.ImageInfoId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetFramebufferColor{
+	id, err := database.StoreRequest(s.Database, &builder.GetFramebufferColor{
 		Device:   deviceID,
 		Capture:  captureID,
 		API:      apiID,
@@ -162,7 +163,7 @@ func (s rpcServer) GetFramebufferDepth(
 	apiID service.ApiId,
 	after uint64) (service.ImageInfoId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetFramebufferDepth{
+	id, err := database.StoreRequest(s.Database, &builder.GetFramebufferDepth{
 		Device:  deviceID,
 		Capture: captureID,
 		API:     apiID,
@@ -180,7 +181,7 @@ func (s rpcServer) GetTimingInfo(
 	captureID service.CaptureId,
 	mask service.TimingMask) (service.TimingInfoId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.GetTimingInfo{
+	id, err := database.StoreRequest(s.Database, &builder.GetTimingInfo{
 		Device:     deviceID,
 		Capture:    captureID,
 		TimingMask: mask,
@@ -203,7 +204,7 @@ func (s rpcServer) PrerenderFramebuffers(
 	width, height uint32,
 	atomIDs service.U64Array) (service.BinaryId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.PrerenderFramebuffers{
+	id, err := database.StoreRequest(s.Database, &builder.PrerenderFramebuffers{
 		Device:  deviceID,
 		Capture: captureID,
 		API:     apiID,
@@ -223,7 +224,7 @@ func (s rpcServer) ReplaceAtom(
 	atomType uint16,
 	data service.Binary) (service.CaptureId, error) {
 
-	id, err := s.Database.StoreRequest(&builder.ReplaceAtom{
+	id, err := database.StoreRequest(s.Database, &builder.ReplaceAtom{
 		Capture: capture,
 		Atom:    atom.ID(atomID),
 		Type:    atom.TypeID(atomType),

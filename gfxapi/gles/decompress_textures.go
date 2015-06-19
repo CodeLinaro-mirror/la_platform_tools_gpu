@@ -58,7 +58,7 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 				if err != nil {
 					panic(err)
 				}
-				err = d.StoreLink(decompressedID, resourceID, l)
+				err = database.StoreLink(d, decompressedID, resourceID, l)
 				if err != nil {
 					panic(err)
 				}

@@ -71,7 +71,7 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 	}}}
 
 	if err := loadDeviceConfig(d, db, m.logger); err == nil {
-		id, err := db.Store(d.device, log.Nop{})
+		id, err := database.Store(db, d.device, log.Nop{})
 		if err != nil {
 			panic(err)
 		}
@@ -92,7 +92,7 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 	}}}
 
 	if err := loadDeviceConfig(d, db, m.logger); err == nil {
-		id, err := db.Store(d.device, log.Nop{})
+		id, err := database.Store(db, d.device, log.Nop{})
 		if err != nil {
 			panic(err)
 		}

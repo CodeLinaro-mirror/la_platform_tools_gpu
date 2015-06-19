@@ -115,12 +115,12 @@ type Resolver struct {
 }
 
 func StoreResource(ϟd database.Database, ϟl log.Logger, ϟv *Resource) (ResourceId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return ResourceId{ID: ϟid}, ϟerr
 }
 func ResolveResource(ϟd database.Database, ϟl log.Logger, ϟid ResourceId) (Resource, error) {
 	var ϟout Resource
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveResource(ϟl log.Logger, r ResourceId) (Resource, error) {

@@ -163,108 +163,108 @@ type Resolver struct {
 }
 
 func StoreAtomStream(ϟd database.Database, ϟl log.Logger, ϟv *AtomStream) (AtomStreamId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return AtomStreamId{ID: ϟid}, ϟerr
 }
 func ResolveAtomStream(ϟd database.Database, ϟl log.Logger, ϟid AtomStreamId) (AtomStream, error) {
 	var ϟout AtomStream
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveAtomStream(ϟl log.Logger, id AtomStreamId) (AtomStream, error) {
 	return ResolveAtomStream(ϟr.Database, ϟl, id)
 }
 func StoreBinary(ϟd database.Database, ϟl log.Logger, ϟv *Binary) (BinaryId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return BinaryId{ID: ϟid}, ϟerr
 }
 func ResolveBinary(ϟd database.Database, ϟl log.Logger, ϟid BinaryId) (Binary, error) {
 	var ϟout Binary
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveBinary(ϟl log.Logger, id BinaryId) (Binary, error) {
 	return ResolveBinary(ϟr.Database, ϟl, id)
 }
 func StoreCapture(ϟd database.Database, ϟl log.Logger, ϟv *Capture) (CaptureId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return CaptureId{ID: ϟid}, ϟerr
 }
 func ResolveCapture(ϟd database.Database, ϟl log.Logger, ϟid CaptureId) (Capture, error) {
 	var ϟout Capture
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveCapture(ϟl log.Logger, id CaptureId) (Capture, error) {
 	return ResolveCapture(ϟr.Database, ϟl, id)
 }
 func StoreDevice(ϟd database.Database, ϟl log.Logger, ϟv *Device) (DeviceId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return DeviceId{ID: ϟid}, ϟerr
 }
 func ResolveDevice(ϟd database.Database, ϟl log.Logger, ϟid DeviceId) (Device, error) {
 	var ϟout Device
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveDevice(ϟl log.Logger, id DeviceId) (Device, error) {
 	return ResolveDevice(ϟr.Database, ϟl, id)
 }
 func StoreHierarchy(ϟd database.Database, ϟl log.Logger, ϟv *Hierarchy) (HierarchyId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return HierarchyId{ID: ϟid}, ϟerr
 }
 func ResolveHierarchy(ϟd database.Database, ϟl log.Logger, ϟid HierarchyId) (Hierarchy, error) {
 	var ϟout Hierarchy
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveHierarchy(ϟl log.Logger, id HierarchyId) (Hierarchy, error) {
 	return ResolveHierarchy(ϟr.Database, ϟl, id)
 }
 func StoreImageInfo(ϟd database.Database, ϟl log.Logger, ϟv *ImageInfo) (ImageInfoId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return ImageInfoId{ID: ϟid}, ϟerr
 }
 func ResolveImageInfo(ϟd database.Database, ϟl log.Logger, ϟid ImageInfoId) (ImageInfo, error) {
 	var ϟout ImageInfo
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveImageInfo(ϟl log.Logger, id ImageInfoId) (ImageInfo, error) {
 	return ResolveImageInfo(ϟr.Database, ϟl, id)
 }
 func StoreMemoryInfo(ϟd database.Database, ϟl log.Logger, ϟv *MemoryInfo) (MemoryInfoId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return MemoryInfoId{ID: ϟid}, ϟerr
 }
 func ResolveMemoryInfo(ϟd database.Database, ϟl log.Logger, ϟid MemoryInfoId) (MemoryInfo, error) {
 	var ϟout MemoryInfo
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveMemoryInfo(ϟl log.Logger, id MemoryInfoId) (MemoryInfo, error) {
 	return ResolveMemoryInfo(ϟr.Database, ϟl, id)
 }
 func StoreSchema(ϟd database.Database, ϟl log.Logger, ϟv *Schema) (SchemaId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return SchemaId{ID: ϟid}, ϟerr
 }
 func ResolveSchema(ϟd database.Database, ϟl log.Logger, ϟid SchemaId) (Schema, error) {
 	var ϟout Schema
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveSchema(ϟl log.Logger, id SchemaId) (Schema, error) {
 	return ResolveSchema(ϟr.Database, ϟl, id)
 }
 func StoreTimingInfo(ϟd database.Database, ϟl log.Logger, ϟv *TimingInfo) (TimingInfoId, error) {
-	ϟid, ϟerr := ϟd.Store(ϟv, ϟl)
+	ϟid, ϟerr := database.Store(ϟd, ϟv, ϟl)
 	return TimingInfoId{ID: ϟid}, ϟerr
 }
 func ResolveTimingInfo(ϟd database.Database, ϟl log.Logger, ϟid TimingInfoId) (TimingInfo, error) {
 	var ϟout TimingInfo
-	ϟerr := ϟd.Load(ϟid.ID, ϟl, &ϟout)
+	ϟerr := database.Load(ϟd, ϟid.ID, ϟl, &ϟout)
 	return ϟout, ϟerr
 }
 func (ϟr Resolver) ResolveTimingInfo(ϟl log.Logger, id TimingInfoId) (TimingInfo, error) {

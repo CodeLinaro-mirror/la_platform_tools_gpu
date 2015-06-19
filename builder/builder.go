@@ -166,13 +166,13 @@ func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.L
 // capture, which will be cached to the database for subsequent calls,
 // regardless of the given atom.
 func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, d database.Database, l log.Logger) (width, height uint32, err error) {
-	id, err := d.Store(&getCaptureFramebufferDimensions{Capture: captureID}, l)
+	id, err := database.Store(d, &getCaptureFramebufferDimensions{Capture: captureID}, l)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	var captureFbDims *captureFramebufferDimensions
-	if err := d.Load(id, l, captureFbDims); err != nil {
+	if err := database.Load(d, id, l, captureFbDims); err != nil {
 		return 0, 0, err
 	}
 

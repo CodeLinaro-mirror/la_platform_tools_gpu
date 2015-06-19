@@ -28,13 +28,13 @@ type Blob struct {
 
 // StoreBlob stores the byte slice data inside a Blob to the database d.
 func StoreBlob(data []byte, d Database, l log.Logger) (binary.ID, error) {
-	return d.Store(&Blob{Data: data}, l)
+	return Store(d, &Blob{Data: data}, l)
 }
 
 // Resolve blob loads a Blob from the database, returning the byte slice.
 func ResolveBlob(id binary.ID, d Database, l log.Logger) ([]byte, error) {
 	b := Blob{}
-	err := d.Load(id, l, &b)
+	err := Load(d, id, l, &b)
 	if err != nil {
 		return nil, err
 	}
