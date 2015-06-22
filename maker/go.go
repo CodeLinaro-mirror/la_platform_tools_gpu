@@ -39,6 +39,7 @@ func GoInstall(module string) Entity {
 func GoTest(module string) Entity {
 	test := Virtual("")
 	GoCommand("test", module).Creates(test)
+	List("go_test").DependsOn(test)
 	return test
 }
 

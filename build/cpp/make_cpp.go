@@ -49,7 +49,9 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 	if always {
 		s.AlwaysRun()
 	}
-	maker.List(name).DependsOn(e)
+	if name != "" {
+		maker.List("cc:" + name).DependsOn(e)
+	}
 	maker.List("cc").DependsOn(e)
 	return s
 }
@@ -82,7 +84,7 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 			// skip any objects which have existing build steps
 			continue
 		}
-		s := makeStep(cfg.Name, object, build.Files(source), env.ForceBuild,
+		s := makeStep("", object, build.Files(source), env.ForceBuild,
 			func(*maker.Step) error {
 				env.Logger = env.Logger.Enter(object.Name())
 				env.Logger.Enter("C++.Compile")
@@ -118,7 +120,7 @@ func MakeStaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) 
 		output = output.ChangeExt(*cfg.OutputExt)
 	}
 
-	makeStep(cfg.Name, output, objects, env.ForceBuild,
+	makeStep("", output, objects, env.ForceBuild,
 		func(*maker.Step) error {
 			env.Logger = logger(env, cfg.Name).Enter("C++.StaticLibrary")
 			return cfg.Toolchain.Archiver(objects, output, cfg, env)
@@ -196,9 +198,9 @@ func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) bui
 func MakeRunTest(test build.File, cfg Config) {
 	// We only run tests on the host OS.
 	if cfg.OS == maker.HostOS {
-		phony := maker.Virtual("")
+		phony := maker.Virtual("cc:" + test.Name() + ":run")
 		maker.Command(makeEntity(test)).Creates(phony)
-		maker.List("test").DependsOn(phony)
+		maker.List("cc_test").DependsOn(phony)
 	}
 }
 
