@@ -48,10 +48,10 @@ namespace atom {
         }
         virtual void Encode(Encoder* e) const {
             e->String(this->mName);
-            e->Value(&this->mRange);
+            e->Value(this->mRange);
             e->Uint32(this->mSubGroups.size());
             for (int i = 0; i < this->mSubGroups.size(); i++) {
-                e->Value(&this->mSubGroups[i]);
+                e->Value(this->mSubGroups[i]);
             }
         }
 
@@ -71,7 +71,7 @@ namespace atom {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mRange);
+            e->Value(this->mRange);
             e->Id(this->mID);
         }
 
@@ -92,11 +92,11 @@ namespace atom {
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mReads.size());
             for (int i = 0; i < this->mReads.size(); i++) {
-                e->Value(&this->mReads[i]);
+                e->Value(this->mReads[i]);
             }
             e->Uint32(this->mWrites.size());
             for (int i = 0; i < this->mWrites.size(); i++) {
-                e->Value(&this->mWrites[i]);
+                e->Value(this->mWrites[i]);
             }
         }
 

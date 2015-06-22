@@ -153,8 +153,8 @@ void Encoder::Id(const gapic::Id& id) {
     }
 }
 
-void Encoder::Value(const Encodable* obj) {
-    obj->Encode(this);
+void Encoder::Value(const Encodable& obj) {
+    obj.Encode(this);
 }
 
 void Encoder::Variant(const Encodable* obj) {
@@ -163,7 +163,7 @@ void Encoder::Variant(const Encodable* obj) {
         return;
     }
     Id(obj->Id());
-    Value(obj);
+    Value(*obj);
 }
 
 void Encoder::Object(const Encodable* obj) {

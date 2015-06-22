@@ -57,7 +57,7 @@ public:
     void Data(const void* ptr, int32_t size);
     void Id(const gapic::Id&);
 
-    void Value(const Encodable* obj);
+    void Value(const Encodable& obj);
     void Variant(const Encodable* obj);
     void Object(const Encodable* obj);
 

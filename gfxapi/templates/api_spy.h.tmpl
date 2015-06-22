@@ -120,7 +120,7 @@
 */}}
 {{define "C++.CoderArgument"}}
   {{AssertType $ "Parameter"}}
-  
+
   {{if IsPointer (Underlying $.Type)}}
     gapic::coder::{{Global "API"}}::{{Template "C++.TypeName" $.Type}}(reinterpret_cast<uintptr_t>({{$.Name}}), 0)
   {{else}}{{$.Name}}{{end}}
@@ -165,7 +165,7 @@
 ¶
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Macro "C++.CoderArguments" $}});
-    mEncoder->Value(&coder);
+    mEncoder->Value(coder);
 
     {{if not (IsVoid $.Return.Type)}}¶
       return result;
