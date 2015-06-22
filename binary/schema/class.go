@@ -32,7 +32,7 @@ type Field struct {
 	Type     Type   // The type stored in the field.
 }
 
-func (f *Field) Name() string {
+func (f Field) Name() string {
 	if f.Declared == "" {
 		return f.Type.String()
 	}

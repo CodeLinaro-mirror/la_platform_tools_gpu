@@ -7,8 +7,6 @@
 #ifndef GAPIC_CODER_GLES_H
 #define GAPIC_CODER_GLES_H
 
-#include <vector>
-
 namespace gapic {
 
 class Encodable;

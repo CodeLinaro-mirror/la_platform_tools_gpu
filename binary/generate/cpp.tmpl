@@ -30,8 +30,8 @@
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
-{{define "Cpp.Type.Slice"}}std::vector<{{Call "Cpp.Type" .ValueType}}>{{end}}
-{{define "Cpp.Type.Stream"}}std::vector<{{Call "Cpp.Type" .ValueType}}>{{end}}
+{{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
+{{define "Cpp.Type.Stream"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
 
 {{define "Cpp.Method#ID"}}Id{{end}}
@@ -75,8 +75,6 @@
 {{define "Cpp.File"}}{{$.Copyright}}
 #ifndef GAPIC_CODER_{{.Package | Upper}}_H
 #define GAPIC_CODER_{{.Package | Upper}}_H
-
-#include <vector>
 
 namespace gapic {
 

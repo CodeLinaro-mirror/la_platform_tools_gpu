@@ -40,9 +40,10 @@ void SpyBase::write(const void* base, uint64_t size) {
     }
 }
 
-void SpyBase::observe(std::vector<Observation>& observations) {
-    observations.clear();
-    observations.reserve(mPendingObservations.count());
+void SpyBase::observe(gapic::Array<Observation>& observations) {
+    std::vector<Observation>& v = observations.vector();
+    v.clear();
+    v.reserve(mPendingObservations.count());
     for (auto p : mPendingObservations) {
         const void* base = reinterpret_cast<const void*>(p.start);
         uint64_t size = p.end - p.start;
@@ -54,7 +55,7 @@ void SpyBase::observe(std::vector<Observation>& observations) {
             mEncoder->Data(base, size);
             mResources.emplace(id);
         }
-        observations.push_back(Observation(Range(p.start, size), id));
+        v.push_back(Observation(Range(p.start, size), id));
     }
     mPendingObservations.clear();
 }
