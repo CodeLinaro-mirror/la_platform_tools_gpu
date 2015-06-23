@@ -123,7 +123,11 @@ func init() {
 		Creator(Tools.Gapit).DependsOn("cc:spy")
 		List("runtime").DependsOn(Apps.Gapir, "cc:spy")
 		Creator(gotest).DependsOn("code", "runtime")
-		List("test").DependsOn("go_test", "cc_test")
+		if *targetOS == HostOS {
+			List("test").DependsOn("go_test", "cc_test")
+		} else {
+			List("test").DependsOn("go_test")
+		}
 		// The main binary rules
 		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
 		Creator(Apps.Gapis).DependsOn("code")
