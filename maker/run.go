@@ -57,11 +57,9 @@ func (f *stringSetFlag) Set(value string) error {
 func Run() {
 	// Get the configuration
 	verbose := flag.Int("v", 1, "Verbose mode")
-	targetArch := flag.String("arch", runtime.GOARCH, "Target architecture.")
-	targetOS := flag.String("os", runtime.GOOS, "Target OS.")
 	do := flag.String("do", "make", "The action to perform, one of make, show or clean.")
-	threads := flag.Int("threads", runtime.NumCPU(), "Set number of go routines to use. 0 disables parallel builds.")
 	early := flag.Bool("early", false, "Stops the build at the first error, also disables parallel builds.")
+	threads := flag.Int("threads", runtime.NumCPU(), "Set number of OS threads to use. 0 disables parallel builds.")
 	var disables stringSetFlag
 	flag.Var(&disables, "disable", "Disable a specific node")
 	flag.Parse()
@@ -75,8 +73,6 @@ func Run() {
 		Config.DisableParallel = true
 	}
 	Config.Verbose = *verbose
-	Config.TargetArchitecture = *targetArch
-	Config.TargetOS = *targetOS
 	// Build the entity graph
 	for _, f := range prepares {
 		f()
@@ -118,7 +114,7 @@ func Run() {
 		meta.start()
 		<-meta.done
 		if Errors.Failed() {
-			fmt.Printf("Failed:%s\n", Errors.First())
+			fmt.Printf("Failed: %s\n", Errors.Last())
 			os.Exit(1)
 		} else {
 			fmt.Printf("Succeeded\n")

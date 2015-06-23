@@ -25,10 +25,6 @@ var (
 	Config struct {
 		// Verbose enables increased logging output.
 		Verbose int
-		// TargetArchitecture is the architecture to build binaries for.
-		TargetArchitecture string
-		// TargetOS is the OS to build for.
-		TargetOS string
 		// DisableParallel turns of all parallel build support.
 		DisableParallel bool
 		// StopOnError makes the system quit faster once an error has been found.
@@ -40,8 +36,6 @@ var (
 		Root string
 		// The dependancy cache directory
 		Deps string
-		// The application data directory.
-		Data string
 		// The application binary directory.
 		Bin string
 	}
@@ -61,7 +55,6 @@ func init() {
 	root := GoPath[0]
 	Paths.Root = root
 	Paths.Deps = Path(root, "deps")
-	Paths.Data = Path(root, "data")
 	Paths.Bin = Path(root, "bin")
 	EnvVars["PATH"] = []string{Paths.Bin}
 	goTool = FindTool("go")

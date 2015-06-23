@@ -16,7 +16,6 @@ package maker
 
 import (
 	"fmt"
-	"log"
 	"sync"
 )
 
@@ -38,15 +37,15 @@ var (
 
 // Add a new error to the error list.
 // The method is concurrent safe.
-func (errs *errors) Add(s *Step, err error) {
+func (errs *errors) Add(s *Step, err error) errorEntry {
+	entry := errorEntry{s, err}
 	errs.mu.Lock()
 	defer errs.mu.Unlock()
-	entry := errorEntry{s, err}
-	log.Printf("Error: %s", entry)
 	errs.list = append(errs.list, entry)
 	if s != nil && s.err == nil {
 		s.err = err
 	}
+	return entry
 }
 
 // Returns true if the system has a registered error, and is thus in a failure
@@ -60,9 +59,28 @@ func (errs *errors) Failed() bool {
 func (errs *errors) First() errorEntry {
 	errs.mu.Lock()
 	defer errs.mu.Unlock()
+
+	for _, e := range errs.list {
+		if e.step.String() != "" {
+			return e
+		}
+	}
+
 	return errs.list[0]
 }
 
+// Returns the first error that was regisetered.
+// This method is concurrent safe.
+func (errs *errors) Last() errorEntry {
+	errs.mu.Lock()
+	defer errs.mu.Unlock()
+
+	return errs.list[len(errs.list)-1]
+}
+
 func (e errorEntry) String() string {
+	if e.step.String() == "" {
+		return fmt.Sprintf("%s", e.err)
+	}
 	return fmt.Sprintf("%s:%s", e.step, e.err)
 }
