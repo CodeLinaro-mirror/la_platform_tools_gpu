@@ -34,11 +34,55 @@ var (
 	spyport = flag.Int("i", 9286, "gapii TCP port to connect to")
 )
 
-type launchItem struct {
-	*adb.Action
+type launchNode struct {
+	text   string
+	items  []*launchNode
+	action *adb.Action
 }
 
-func (i launchItem) String() string { return fmt.Sprintf("%s/%s", i.Package.Name, i.Activity) }
+func (n *launchNode) String() string {
+	return n.text
+}
+
+func (n *launchNode) Count() int {
+	return len(n.items)
+}
+
+func (n *launchNode) NodeAt(index int) gxui.TreeNode {
+	return n.items[index]
+}
+
+func (n *launchNode) ItemAt(index int) gxui.AdapterItem {
+	return n.items[index]
+}
+
+func (n *launchNode) ItemIndex(item gxui.AdapterItem) int {
+	find, ok := item.(*launchNode)
+	if !ok {
+		return -1
+	}
+	for i, test := range n.items {
+		if test == find || test.ItemIndex(item) >= 0 {
+			return i
+		}
+	}
+	return -1
+}
+
+func (n *launchNode) Create(theme gxui.Theme, index int) gxui.Control {
+	label := theme.CreateLabel()
+	label.SetText(n.items[index].text)
+	return label
+}
+
+type launchAdapter struct {
+	gxui.AdapterBase
+	launchNode
+}
+
+func (a *launchAdapter) Size(t gxui.Theme) math.Size {
+	return math.Size{W: math.MaxSize.W, H: 18}
+}
 
 func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, capture func()) {
 	driver := theme.Driver()
@@ -55,22 +99,13 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, captur
 	deviceList.SetAdapter(deviceAdapter)
 	deviceList.SetBubbleOverlay(overlay)
 
-	packageList := theme.CreateList()
+	packageList := theme.CreateTree()
 
 	deviceList.OnSelectionChanged(func(sel gxui.AdapterItem) {
 		device := sel.(*adb.Device)
-		adapter := gxui.CreateDefaultAdapter()
-		adapter.SetSize(math.Size{W: math.MaxSize.W, H: 16})
-		packageList.SetAdapter(adapter)
-		go func() (err error) {
-			defer func() {
-				if err != nil {
-					driver.Call(func() { adapter.SetItems(err) })
-				}
-			}()
-
-			items := []launchItem{}
-			err = device.Root()
+		go func() error {
+			adapter := &launchAdapter{}
+			err := device.Root()
 			switch err {
 			case nil:
 			case adb.ErrDeviceNotRooted:
@@ -83,28 +118,39 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, captur
 				return fmt.Errorf(fmt.Sprintf("Could not get list of installed packages: %v", err))
 			}
 			for _, pkg := range packages {
+				var pkgNode *launchNode
 				for _, action := range pkg.Actions {
 					if action.Name == "android.intent.action.MAIN" {
-						driver.CallSync(func() {
-							items = append(items, launchItem{action})
-							adapter.SetItems(items)
+						if pkgNode == nil {
+							pkgNode = &launchNode{
+								text: pkg.Name,
+							}
+							adapter.items = append(adapter.items, pkgNode)
+						}
+						pkgNode.items = append(pkgNode.items, &launchNode{
+							text:   action.Activity,
+							action: action,
 						})
 					}
 				}
 			}
+			driver.CallSync(func() {
+				packageList.SetAdapter(adapter)
+			})
 			return nil
 		}()
 	})
 
 	packageList.OnDoubleClick(func(gxui.MouseEvent) {
 		if sel := packageList.Selected(); sel != nil {
-			if item, ok := sel.(launchItem); ok {
-				go func() {
-					driver.Call(window.Close)
-					gapii.AdbStart(statusLogger, item.Action, adb.TCPPort(*spyport))
-
-					capture()
-				}()
+			if item, ok := sel.(*launchNode); ok {
+				if item.action != nil {
+					go func() {
+						driver.Call(window.Close)
+						gapii.AdbStart(statusLogger, item.action, adb.TCPPort(*spyport))
+						capture()
+					}()
+				}
 			}
 		}
 	})
