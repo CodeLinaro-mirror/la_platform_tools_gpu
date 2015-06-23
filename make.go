@@ -111,7 +111,7 @@ func init() {
 		//
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
-		Apps.Gapir = Virtual("gapir")
+		Apps.Gapir = Virtual("cc:replayd")
 		cctargets := []string{*targetOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
@@ -119,8 +119,11 @@ func init() {
 		cc.Graph(cctargets)
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
-		Creator(gotest).DependsOn("code", Apps.Gapir)
-		List("test").DependsOn(gotest)
+		// Runtime dependencies
+		Creator(Tools.Gapit).DependsOn("cc:spy")
+		List("runtime").DependsOn(Apps.Gapir, "cc:spy")
+		Creator(gotest).DependsOn("code", "runtime")
+		List("test").DependsOn("go_test", "cc_test")
 		// The main binary rules
 		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
 		Creator(Apps.Gapis).DependsOn("code")
@@ -129,7 +132,7 @@ func init() {
 		List("apps").DependsStruct(Apps)
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
-		Command(Apps.Gapid, "--gxuidebug").Creates(Virtual("gapid")).DependsOn(Apps.Gapis, Apps.Gapir)
+		Command(Apps.Gapid, "--gxuidebug").Creates(Virtual("gapid")).DependsOn(Apps.Gapis, "runtime")
 		// Utilties
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
 		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
