@@ -7,6 +7,17 @@ package service
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
+// Call GetSchema
+type callGetSchema struct {
+	binary.Generate
+}
+
+// Result GetSchema
+type resultGetSchema struct {
+	binary.Generate
+	value ClassPtrArray
+}
+
 // Call Import
 type callImport struct {
 	binary.Generate

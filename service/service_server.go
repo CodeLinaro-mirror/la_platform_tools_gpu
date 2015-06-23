@@ -32,6 +32,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		}()
 		switch call := in.(type) {
+		case *callGetSchema:
+			if res, err := server.GetSchema(l); err == nil {
+				return &resultGetSchema{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callImport:
 			if res, err := server.Import(call.name, call.Data, l); err == nil {
 				return &resultImport{value: res}
