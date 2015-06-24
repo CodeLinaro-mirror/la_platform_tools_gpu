@@ -158,6 +158,17 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	return appCtx, nil
 }
 
+func (c *ApplicationContext) UpdateSchema() {
+	go func() {
+		classes, err := c.rpc.GetSchema(c.logger)
+		if err != nil {
+			c.logger.Errorf("Error resolving schema: %v", err)
+			return
+		}
+		c.logger.Infof("Schema with %d classes", len(classes))
+	}()
+}
+
 func (c *ApplicationContext) Run(f func()) {
 	c.theme.Driver().Call(f)
 }

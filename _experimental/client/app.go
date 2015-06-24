@@ -425,6 +425,8 @@ func (a app) main(driver gxui.Driver) {
 	appCtx.OnAtomsUpdated(func() { loadTiming(appCtx) })
 	appCtx.OnRequestReplay(func() { DoReplay(appCtx) })
 	appCtx.OnAtomSelected(appCtx.LoadState)
+
+	appCtx.UpdateSchema()
 }
 
 func Run(config Config) {
