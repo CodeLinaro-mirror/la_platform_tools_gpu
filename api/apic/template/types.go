@@ -199,40 +199,58 @@ func baseType(v interface{}) reflect.Type {
 	return ty
 }
 
-func isTypeTest(t reflect.Type) func(v interface{}) bool {
-	return func(v interface{}) bool {
-		ty := baseType(v)
-		if ty == nil {
+func singleTypeTest(test reflect.Type, against reflect.Type) bool {
+	if test == nil {
+		if against == nil {
+			return true
+		}
+		return false
+	}
+	if against == nil {
+		return false
+	}
+	return test.AssignableTo(against)
+}
+
+func doTypeTest(v interface{}, against ...reflect.Type) bool {
+	test := reflect.TypeOf(v)
+	for {
+		for _, t := range against {
+			if singleTypeTest(test, t) {
+				return true
+			}
+		}
+		if test != nil && test.Kind() == reflect.Ptr {
+			test = test.Elem()
+		} else {
 			return false
 		}
-		return ty.AssignableTo(t)
+	}
+}
+
+func isTypeTest(t reflect.Type) func(v interface{}) bool {
+	return func(v interface{}) bool {
+		return doTypeTest(v, t)
 	}
 }
 
 // Asserts that the type of v is in the list of expected types
 func (*Functions) AssertType(v interface{}, expected ...string) (string, error) {
-	got := baseType(v)
-	matched := 0
-	for _, e := range expected {
-		if e == "nil" {
-			if v == nil {
-				matched++
+	types := make([]reflect.Type, len(expected))
+	for i, e := range expected {
+		if e != "nil" {
+			et, found := nodeTypes[e]
+			if !found {
+				return "", fmt.Errorf("%s is not a valid type", e)
 			}
-			continue
-		}
-		et, found := nodeTypes[e]
-		if !found {
-			return "", fmt.Errorf("%s is not a valid type", e)
-		}
-		if got != nil && got.AssignableTo(et) {
-			matched++
+			types[i] = et
 		}
 	}
-	if matched > 0 {
+	if doTypeTest(v, types...) {
 		return "", nil
 	}
 
-	msg := fmt.Sprintf("Type assertion. Got: %s, Expected: ", got)
+	msg := fmt.Sprintf("Type assertion. Got: %T, Expected: ", v)
 	if c := len(expected); c > 1 {
 		msg += strings.Join(expected[:c-1], ", ")
 		msg += " or " + expected[c-1]
