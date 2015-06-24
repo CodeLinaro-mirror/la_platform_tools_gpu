@@ -61,12 +61,17 @@ func Run() {
 	targetOS := flag.String("os", runtime.GOOS, "Target OS.")
 	do := flag.String("do", "make", "The action to perform, one of make, show or clean.")
 	threads := flag.Int("threads", runtime.NumCPU(), "Set number of go routines to use. 0 disables parallel builds.")
+	early := flag.Bool("early", false, "Stops the build at the first error, also disables parallel builds.")
 	var disables stringSetFlag
 	flag.Var(&disables, "disable", "Disable a specific node")
 	flag.Parse()
 	if *threads > 0 {
 		runtime.GOMAXPROCS(*threads)
 	} else {
+		Config.DisableParallel = true
+	}
+	if *early {
+		Config.StopOnError = true
 		Config.DisableParallel = true
 	}
 	Config.Verbose = *verbose
