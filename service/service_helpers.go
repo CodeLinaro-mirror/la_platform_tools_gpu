@@ -303,38 +303,35 @@ func CreateDevice(
 	PointerSize uint8,
 	PointerAlignment uint8,
 	MaxMemorySize uint64,
-	RequiresShaderPatching bool,
 	Extensions string,
 	Renderer string,
 	Vendor string,
 	Version string,
 ) *Device {
 	return &Device{
-		Name:                   Name,
-		Model:                  Model,
-		OS:                     OS,
-		PointerSize:            PointerSize,
-		PointerAlignment:       PointerAlignment,
-		MaxMemorySize:          MaxMemorySize,
-		RequiresShaderPatching: RequiresShaderPatching,
-		Extensions:             Extensions,
-		Renderer:               Renderer,
-		Vendor:                 Vendor,
-		Version:                Version,
+		Name:             Name,
+		Model:            Model,
+		OS:               OS,
+		PointerSize:      PointerSize,
+		PointerAlignment: PointerAlignment,
+		MaxMemorySize:    MaxMemorySize,
+		Extensions:       Extensions,
+		Renderer:         Renderer,
+		Vendor:           Vendor,
+		Version:          Version,
 	}
 }
 
-func (c *Device) GetName() string                 { return c.Name }
-func (c *Device) GetModel() string                { return c.Model }
-func (c *Device) GetOS() string                   { return c.OS }
-func (c *Device) GetPointerSize() uint8           { return c.PointerSize }
-func (c *Device) GetPointerAlignment() uint8      { return c.PointerAlignment }
-func (c *Device) GetMaxMemorySize() uint64        { return c.MaxMemorySize }
-func (c *Device) GetRequiresShaderPatching() bool { return c.RequiresShaderPatching }
-func (c *Device) GetExtensions() string           { return c.Extensions }
-func (c *Device) GetRenderer() string             { return c.Renderer }
-func (c *Device) GetVendor() string               { return c.Vendor }
-func (c *Device) GetVersion() string              { return c.Version }
+func (c *Device) GetName() string            { return c.Name }
+func (c *Device) GetModel() string           { return c.Model }
+func (c *Device) GetOS() string              { return c.OS }
+func (c *Device) GetPointerSize() uint8      { return c.PointerSize }
+func (c *Device) GetPointerAlignment() uint8 { return c.PointerAlignment }
+func (c *Device) GetMaxMemorySize() uint64   { return c.MaxMemorySize }
+func (c *Device) GetExtensions() string      { return c.Extensions }
+func (c *Device) GetRenderer() string        { return c.Renderer }
+func (c *Device) GetVendor() string          { return c.Vendor }
+func (c *Device) GetVersion() string         { return c.Version }
 
 func CreateCapture(
 	Name string,

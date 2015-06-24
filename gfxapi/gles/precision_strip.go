@@ -24,12 +24,18 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // precisionStrip returns a transform that removes all precision specifiers from
-// shader programs.
-func precisionStrip(d database.Database, l log.Logger) atom.Transformer {
+// shader programs if the device target doesn't support them.
+func precisionStrip(device *service.Device, d database.Database, l log.Logger) atom.Transformer {
 	s := gfxapi.NewState()
+	if v, err := ParseVersion(device.Version); err == nil {
+		if v.IsES {
+			return nil
+		}
+	}
 	return atom.Transform("PrecisionStrip", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		a.Mutate(s, d, l)
 		if cmd, ok := a.(*GlShaderSource); ok {

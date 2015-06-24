@@ -28601,13 +28601,97 @@ func (v *CompressedTexelFormat_AMD_compressed_ATC_texture) Parse(s string) error
 	return fmt.Errorf("%s not in CompressedTexelFormat_AMD_compressed_ATC_texture", s)
 }
 
-const _CompressedTexelFormat_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OES"
+const _CompressedTexelFormat_EXT_texture_compression_dxt1_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXT"
+
+var _CompressedTexelFormat_EXT_texture_compression_dxt1_map = map[CompressedTexelFormat_EXT_texture_compression_dxt1]string{
+	33776: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31],
+	33777: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63],
+}
+
+func (v CompressedTexelFormat_EXT_texture_compression_dxt1) String() string {
+	if s, ok := _CompressedTexelFormat_EXT_texture_compression_dxt1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_EXT_texture_compression_dxt1(%d)", v)
+}
+
+func (v *CompressedTexelFormat_EXT_texture_compression_dxt1) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_EXT_texture_compression_dxt1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_EXT_texture_compression_dxt1", s)
+}
+
+const _CompressedTexelFormat_EXT_texture_compression_s3tc_name = "GL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXT"
+
+var _CompressedTexelFormat_EXT_texture_compression_s3tc_map = map[CompressedTexelFormat_EXT_texture_compression_s3tc]string{
+	33778: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32],
+	33779: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64],
+}
+
+func (v CompressedTexelFormat_EXT_texture_compression_s3tc) String() string {
+	if s, ok := _CompressedTexelFormat_EXT_texture_compression_s3tc_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_EXT_texture_compression_s3tc(%d)", v)
+}
+
+func (v *CompressedTexelFormat_EXT_texture_compression_s3tc) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_EXT_texture_compression_s3tc_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_EXT_texture_compression_s3tc", s)
+}
+
+const _CompressedTexelFormat_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
 var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{
-	34798: _CompressedTexelFormat_name[0:34],
-	35986: _CompressedTexelFormat_name[34:48],
-	35987: _CompressedTexelFormat_name[48:78],
-	36196: _CompressedTexelFormat_name[78:94],
+	33776: _CompressedTexelFormat_name[0:31],
+	33777: _CompressedTexelFormat_name[31:63],
+	33778: _CompressedTexelFormat_name[63:95],
+	33779: _CompressedTexelFormat_name[95:127],
+	34798: _CompressedTexelFormat_name[127:161],
+	35952: _CompressedTexelFormat_name[161:193],
+	35953: _CompressedTexelFormat_name[193:232],
+	35954: _CompressedTexelFormat_name[232:270],
+	35955: _CompressedTexelFormat_name[270:315],
+	35986: _CompressedTexelFormat_name[315:329],
+	35987: _CompressedTexelFormat_name[329:359],
+	36196: _CompressedTexelFormat_name[359:375],
+	37808: _CompressedTexelFormat_name[375:406],
+	37809: _CompressedTexelFormat_name[406:437],
+	37810: _CompressedTexelFormat_name[437:468],
+	37811: _CompressedTexelFormat_name[468:499],
+	37812: _CompressedTexelFormat_name[499:530],
+	37813: _CompressedTexelFormat_name[530:561],
+	37814: _CompressedTexelFormat_name[561:592],
+	37815: _CompressedTexelFormat_name[592:623],
+	37816: _CompressedTexelFormat_name[623:655],
+	37817: _CompressedTexelFormat_name[655:687],
+	37818: _CompressedTexelFormat_name[687:719],
+	37819: _CompressedTexelFormat_name[719:752],
+	37820: _CompressedTexelFormat_name[752:785],
+	37821: _CompressedTexelFormat_name[785:818],
+	37840: _CompressedTexelFormat_name[818:857],
+	37841: _CompressedTexelFormat_name[857:896],
+	37842: _CompressedTexelFormat_name[896:935],
+	37843: _CompressedTexelFormat_name[935:974],
+	37844: _CompressedTexelFormat_name[974:1013],
+	37845: _CompressedTexelFormat_name[1013:1052],
+	37846: _CompressedTexelFormat_name[1052:1091],
+	37847: _CompressedTexelFormat_name[1091:1130],
+	37848: _CompressedTexelFormat_name[1130:1170],
+	37849: _CompressedTexelFormat_name[1170:1210],
+	37850: _CompressedTexelFormat_name[1210:1250],
+	37851: _CompressedTexelFormat_name[1250:1291],
+	37852: _CompressedTexelFormat_name[1291:1332],
+	37853: _CompressedTexelFormat_name[1332:1373],
 }
 
 func (v CompressedTexelFormat) String() string {
@@ -28625,6 +28709,82 @@ func (v *CompressedTexelFormat) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in CompressedTexelFormat", s)
+}
+
+const _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name = "GL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
+
+var _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map = map[CompressedTexelFormat_KHR_texture_compression_astc_ldr]string{
+	37808: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31],
+	37809: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62],
+	37810: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93],
+	37811: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124],
+	37812: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155],
+	37813: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186],
+	37814: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217],
+	37815: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248],
+	37816: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280],
+	37817: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312],
+	37818: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344],
+	37819: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377],
+	37820: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410],
+	37821: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443],
+	37840: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482],
+	37841: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521],
+	37842: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560],
+	37843: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599],
+	37844: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638],
+	37845: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677],
+	37846: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716],
+	37847: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755],
+	37848: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795],
+	37849: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835],
+	37850: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875],
+	37851: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916],
+	37852: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957],
+	37853: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998],
+}
+
+func (v CompressedTexelFormat_KHR_texture_compression_astc_ldr) String() string {
+	if s, ok := _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_KHR_texture_compression_astc_ldr(%d)", v)
+}
+
+func (v *CompressedTexelFormat_KHR_texture_compression_astc_ldr) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_KHR_texture_compression_astc_ldr", s)
+}
+
+const _CompressedTexelFormat_NV_texture_compression_latc_name = "GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV"
+
+var _CompressedTexelFormat_NV_texture_compression_latc_map = map[CompressedTexelFormat_NV_texture_compression_latc]string{
+	35952: _CompressedTexelFormat_NV_texture_compression_latc_name[0:32],
+	35953: _CompressedTexelFormat_NV_texture_compression_latc_name[32:71],
+	35954: _CompressedTexelFormat_NV_texture_compression_latc_name[71:109],
+	35955: _CompressedTexelFormat_NV_texture_compression_latc_name[109:154],
+}
+
+func (v CompressedTexelFormat_NV_texture_compression_latc) String() string {
+	if s, ok := _CompressedTexelFormat_NV_texture_compression_latc_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_NV_texture_compression_latc(%d)", v)
+}
+
+func (v *CompressedTexelFormat_NV_texture_compression_latc) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_NV_texture_compression_latc_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_NV_texture_compression_latc", s)
 }
 
 const _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name = "GL_ETC1_RGB8_OES"
@@ -29125,7 +29285,7 @@ func (v *ImageTargetTexture_OES_EGL_image_external) Parse(s string) error {
 	return fmt.Errorf("%s not in ImageTargetTexture_OES_EGL_image_external", s)
 }
 
-const _ImageTexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_DEPTH24_STENCIL8GL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
+const _ImageTexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_DEPTH_STENCILGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_DEPTH24_STENCIL8GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGERGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
 var _ImageTexelFormat_map = map[ImageTexelFormat]string{
 	6402:  _ImageTexelFormat_name[0:18],
@@ -29138,15 +29298,51 @@ var _ImageTexelFormat_map = map[ImageTexelFormat]string{
 	33189: _ImageTexelFormat_name[75:95],
 	33319: _ImageTexelFormat_name[95:100],
 	33320: _ImageTexelFormat_name[100:113],
-	34041: _ImageTexelFormat_name[113:129],
-	34798: _ImageTexelFormat_name[129:163],
-	35056: _ImageTexelFormat_name[163:182],
-	35986: _ImageTexelFormat_name[182:196],
-	35987: _ImageTexelFormat_name[196:226],
-	36196: _ImageTexelFormat_name[226:242],
-	36244: _ImageTexelFormat_name[242:256],
-	36248: _ImageTexelFormat_name[256:270],
-	36249: _ImageTexelFormat_name[270:285],
+	33776: _ImageTexelFormat_name[113:144],
+	33777: _ImageTexelFormat_name[144:176],
+	33778: _ImageTexelFormat_name[176:208],
+	33779: _ImageTexelFormat_name[208:240],
+	34041: _ImageTexelFormat_name[240:256],
+	34798: _ImageTexelFormat_name[256:290],
+	35056: _ImageTexelFormat_name[290:309],
+	35952: _ImageTexelFormat_name[309:341],
+	35953: _ImageTexelFormat_name[341:380],
+	35954: _ImageTexelFormat_name[380:418],
+	35955: _ImageTexelFormat_name[418:463],
+	35986: _ImageTexelFormat_name[463:477],
+	35987: _ImageTexelFormat_name[477:507],
+	36196: _ImageTexelFormat_name[507:523],
+	36244: _ImageTexelFormat_name[523:537],
+	36248: _ImageTexelFormat_name[537:551],
+	36249: _ImageTexelFormat_name[551:566],
+	37808: _ImageTexelFormat_name[566:597],
+	37809: _ImageTexelFormat_name[597:628],
+	37810: _ImageTexelFormat_name[628:659],
+	37811: _ImageTexelFormat_name[659:690],
+	37812: _ImageTexelFormat_name[690:721],
+	37813: _ImageTexelFormat_name[721:752],
+	37814: _ImageTexelFormat_name[752:783],
+	37815: _ImageTexelFormat_name[783:814],
+	37816: _ImageTexelFormat_name[814:846],
+	37817: _ImageTexelFormat_name[846:878],
+	37818: _ImageTexelFormat_name[878:910],
+	37819: _ImageTexelFormat_name[910:943],
+	37820: _ImageTexelFormat_name[943:976],
+	37821: _ImageTexelFormat_name[976:1009],
+	37840: _ImageTexelFormat_name[1009:1048],
+	37841: _ImageTexelFormat_name[1048:1087],
+	37842: _ImageTexelFormat_name[1087:1126],
+	37843: _ImageTexelFormat_name[1126:1165],
+	37844: _ImageTexelFormat_name[1165:1204],
+	37845: _ImageTexelFormat_name[1204:1243],
+	37846: _ImageTexelFormat_name[1243:1282],
+	37847: _ImageTexelFormat_name[1282:1321],
+	37848: _ImageTexelFormat_name[1321:1361],
+	37849: _ImageTexelFormat_name[1361:1401],
+	37850: _ImageTexelFormat_name[1401:1441],
+	37851: _ImageTexelFormat_name[1441:1482],
+	37852: _ImageTexelFormat_name[1482:1523],
+	37853: _ImageTexelFormat_name[1523:1564],
 }
 
 func (v ImageTexelFormat) String() string {
@@ -30779,10 +30975,10 @@ func (v *TilePreserveMaskQCOM) Parse(s string) error {
 	return fmt.Errorf("%s not in TilePreserveMaskQCOM", s)
 }
 
-const _Type_ARB_half_float_vertex_name = "GL_ARB_half_float_vertex"
+const _Type_ARB_half_float_vertex_name = "GL_HALF_FLOAT_ARB"
 
 var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{
-	5131: _Type_ARB_half_float_vertex_name[0:24],
+	5131: _Type_ARB_half_float_vertex_name[0:17],
 }
 
 func (v Type_ARB_half_float_vertex) String() string {
@@ -30855,7 +31051,7 @@ func (v *UniformBlockParameter) Parse(s string) error {
 	return fmt.Errorf("%s not in UniformBlockParameter", s)
 }
 
-const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_ARB_half_float_vertexGL_FIXEDGL_HALF_FLOAT_OES"
+const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_HALF_FLOAT_ARBGL_FIXEDGL_HALF_FLOAT_OES"
 
 var _VertexAttribType_map = map[VertexAttribType]string{
 	5120:  _VertexAttribType_name[0:7],
@@ -30863,9 +31059,9 @@ var _VertexAttribType_map = map[VertexAttribType]string{
 	5122:  _VertexAttribType_name[23:31],
 	5123:  _VertexAttribType_name[31:48],
 	5126:  _VertexAttribType_name[48:56],
-	5131:  _VertexAttribType_name[56:80],
-	5132:  _VertexAttribType_name[80:88],
-	36193: _VertexAttribType_name[88:105],
+	5131:  _VertexAttribType_name[56:73],
+	5132:  _VertexAttribType_name[73:81],
+	36193: _VertexAttribType_name[81:98],
 }
 
 func (v VertexAttribType) String() string {

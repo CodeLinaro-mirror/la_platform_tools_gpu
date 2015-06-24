@@ -154,11 +154,7 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 		} else {
 			return err
 		}
-
 		td.OS = os.String()
-		// TODO: RequiresShaderPatching should be replaced with explicit tests made
-		// by each of the gfxapis for extensions they require.
-		td.RequiresShaderPatching = !os.IsAndroid()
 
 		if td.Extensions, err = dec.String(); err != nil {
 			return err

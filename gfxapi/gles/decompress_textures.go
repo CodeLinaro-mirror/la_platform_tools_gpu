@@ -16,6 +16,7 @@ package gles
 
 import (
 	"fmt"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/builder"
@@ -27,15 +28,15 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// decompressTextures returns an atom transform that replaces all
-// GlCompressedTexImage2D atoms with glTexImage2D atoms for the compressed
-// texture formats:
+// decompressTextures returns an atom transform that replaces GlCompressedTexImage2D atoms with
+// GlTexImage2D atoms if unsupported by the target device, for the following compressed texture formats:
 //   GL_ATC_RGB_AMD
 //   GL_ATC_RGBA_EXPLICIT_ALPHA_AMD
 //   GL_ETC1_RGB8_OES
-func decompressTextures(capture service.CaptureId, d database.Database, l log.Logger) atom.Transformer {
+func decompressTextures(device *service.Device, capture service.CaptureId, d database.Database, l log.Logger) atom.Transformer {
 	l = l.Enter("decompressTextures")
 	s := gfxapi.NewState()
+	supportedFormats := getCompressedFormats(device)
 	return atom.Transform("DecompressTextures", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s, d, l); err != nil {
 			l.Errorf("%v", err)
@@ -43,6 +44,12 @@ func decompressTextures(capture service.CaptureId, d database.Database, l log.Lo
 
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
+			// No-op if the compressed texture format is supported by the target device
+			if _, supported := supportedFormats[a.Format]; supported {
+				out.Write(i, a)
+				return
+			}
+
 			id, err := database.Store(&builder.ConvertImage{
 				Data:       a.Data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
 				Width:      int(a.Width),
@@ -84,4 +91,83 @@ func getImageFormat(f CompressedTexelFormat) image.Format {
 		return image.ETC1_RGB8_OES()
 	}
 	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
+}
+
+// getCompressedFormats returns the set of supported compressed texture formats for a given device
+func getCompressedFormats(device *service.Device) map[CompressedTexelFormat]struct{} {
+	ret := map[CompressedTexelFormat]struct{}{}
+	for _, extension := range strings.Split(device.Extensions, " ") {
+		for _, format := range getExtensionFormats(extension) {
+			ret[format] = struct{}{}
+		}
+	}
+	return ret
+}
+
+// getExtensionFormats returns the list of compressed texture formats enabled by a given extension
+func getExtensionFormats(extension string) []CompressedTexelFormat {
+	switch extension {
+	case "GL_AMD_compressed_ATC_texture":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_ATC_RGB_AMD,
+			CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD,
+			CompressedTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD,
+		}
+	case "GL_OES_compressed_ETC1_RGB8_texture":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_ETC1_RGB8_OES,
+		}
+	case "GL_EXT_texture_compression_dxt1":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+		}
+	case "GL_EXT_texture_compression_s3tc", "GL_NV_texture_compression_s3tc":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
+		}
+	case "GL_KHR_texture_compression_astc_ldr":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR,
+			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR,
+		}
+	case "GL_EXT_texture_compression_latc", "GL_NV_texture_compression_latc":
+		return []CompressedTexelFormat{
+			CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV,
+			CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV,
+			CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV,
+			CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV,
+		}
+	default:
+		return []CompressedTexelFormat{}
+	}
 }

@@ -15,6 +15,9 @@
 package service
 
 import (
+	"fmt"
+	"regexp"
+
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/device"
 )
@@ -27,4 +30,11 @@ func (d Device) Architecture() device.Architecture {
 		IntegerSize:      int(d.PointerSize), // TODO: Resolve
 		ByteOrder:        endian.Little,      // TODO: Resolve
 	}
+}
+
+func (d Device) HasExtension(extension string) bool {
+	if re, err := regexp.Compile(fmt.Sprintf(`\b%s\b`, extension)); err == nil {
+		return re.MatchString(d.Extensions)
+	}
+	return false
 }
