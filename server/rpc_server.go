@@ -19,7 +19,10 @@ import (
 	"net"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
@@ -55,7 +58,12 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
 func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
-	return nil, nil
+	classes := make(service.ClassPtrArray, 0, registry.Global.Count())
+	registry.Global.Visit(func(id binary.ID, _ binary.Class) {
+		class := schema.Lookup(id)
+		classes = append(classes, class)
+	})
+	return classes, nil
 }
 
 // Import imports capture data emitted by the graphics spy, returning the new

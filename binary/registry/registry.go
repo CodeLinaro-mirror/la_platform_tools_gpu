@@ -70,3 +70,27 @@ func (n Namespace) Lookup(id binary.ID) binary.Class {
 	}
 	return nil
 }
+
+// Count returns the number of entries reachable through this namespace.
+// Because it sums the counts of the namespaces it depends on, this may be
+// more than the number of unique keys.
+func (n Namespace) Count() int {
+	size := len(n.classes)
+	if n.parent != nil {
+		size += n.parent.Count()
+	}
+	return size
+}
+
+// Visit invokes the visitor for every id and class pair reachable through this
+// namespace.
+// The visitor maybe be called with the same id more than once if it is present
+// in multiple namespaces.
+func (n Namespace) Visit(visitor func(binary.ID, binary.Class)) {
+	for id, c := range n.classes {
+		visitor(id, c)
+	}
+	if n.parent != nil {
+		n.parent.Visit(visitor)
+	}
+}
