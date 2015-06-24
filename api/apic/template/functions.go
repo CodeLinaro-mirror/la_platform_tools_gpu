@@ -111,7 +111,7 @@ func trace(name string, f interface{}) func(values ...interface{}) (interface{},
 			case string:
 				fmt.Printf(" %q", v)
 			case semantic.Type:
-				fmt.Printf(" [%s]", v.Typename())
+				fmt.Printf(" [%s]", v.Name())
 			default:
 				fmt.Printf(" <%T>", v)
 			}
@@ -278,7 +278,7 @@ func (f *Functions) Node(prefix string, node interface{}, arguments ...interface
 	if node != nil && err == nil {
 		args["Type"] = ty
 		try = append(try,
-			prefix+"#"+ty.Typename(),
+			prefix+"#"+ty.Name(),
 			prefix+"."+nodename(ty),
 		)
 	}

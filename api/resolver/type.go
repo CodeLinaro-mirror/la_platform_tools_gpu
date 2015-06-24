@@ -100,7 +100,7 @@ func getSimpleType(ctx *context, in *ast.Identifier) semantic.Type {
 		return semantic.VoidType
 	}
 	ctx.mappings[in] = out
-	if a, ok := out.(*Alias); ok {
+	if a, ok := out.(*semantic.Alias); ok {
 		if a.To == nil {
 			a.To = type_(ctx, a.AST.To)
 		}
@@ -110,9 +110,9 @@ func getSimpleType(ctx *context, in *ast.Identifier) semantic.Type {
 }
 
 func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
-	name := fmt.Sprintf("%s%s%s%s", strings.Title(kt.Typename()), TypeInfix, vt.Typename(), MapSuffix)
+	name := fmt.Sprintf("%s%s%s%s", strings.Title(kt.Name()), TypeInfix, vt.Name(), MapSuffix)
 	for _, m := range ctx.api.Maps {
-		if m.Name == name {
+		if m.Name() == name {
 			if !equal(kt, m.KeyType) {
 				ctx.icef(at, "Map %s found with non matching key, got %s expected %s", name, typename(m.KeyType), typename(kt))
 			}
@@ -124,10 +124,9 @@ func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
 		}
 	}
 	out := &semantic.Map{
-		Name:      name,
+		Named:     semantic.Named(name),
 		KeyType:   kt,
 		ValueType: vt,
-		Members:   semantic.Members{},
 	}
 	ctx.api.Maps = append(ctx.api.Maps, out)
 	ctx.mappings[at] = out
@@ -135,9 +134,9 @@ func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
 }
 
 func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32) *semantic.StaticArray {
-	name := fmt.Sprintf("%s%s%d%s", strings.Title(of.Typename()), TypeInfix, size, ArraySuffix)
+	name := fmt.Sprintf("%s%s%d%s", strings.Title(of.Name()), TypeInfix, size, ArraySuffix)
 	for _, a := range ctx.api.StaticArrays {
-		if a.Name == name {
+		if a.Name() == name {
 			if !equal(a.ValueType, of) {
 				ctx.icef(at, "Static array %s found with non matching value, got %s expected %s",
 					a.Name, typename(a.ValueType), typename(of))
@@ -147,7 +146,7 @@ func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32
 		}
 	}
 	out := &semantic.StaticArray{
-		Name:      name,
+		Named:     semantic.Named(name),
 		ValueType: of,
 		Size:      size,
 	}
@@ -157,9 +156,9 @@ func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32
 }
 
 func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference {
-	name := strings.Title(to.Typename()) + RefSuffix
+	name := strings.Title(to.Name()) + RefSuffix
 	for _, p := range ctx.api.References {
-		if p.Name == name {
+		if p.Name() == name {
 			if !equal(to, p.To) {
 				ctx.icef(at, "ref %s found with non matching value, got %s expected %s", name, typename(p.To), typename(to))
 			}
@@ -168,8 +167,8 @@ func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference
 		}
 	}
 	out := &semantic.Reference{
-		Name: name,
-		To:   to,
+		Named: semantic.Named(name),
+		To:    to,
 	}
 	ctx.api.References = append(ctx.api.References, out)
 	ctx.mappings[at] = out
@@ -177,13 +176,13 @@ func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference
 }
 
 func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) *semantic.Pointer {
-	name := strings.Title(to.Typename())
+	name := strings.Title(to.Name())
 	if constant {
 		name += ConstSuffix
 	}
 	name += PointerSuffix
 	for _, p := range ctx.api.Pointers {
-		if p.Name == name {
+		if p.Name() == name {
 			if !equal(to, p.To) {
 				ctx.icef(at, "Pointer %s found with non matching value, got %s expected %s", name, typename(p.To), typename(to))
 			}
@@ -192,7 +191,7 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) 
 		}
 	}
 	out := &semantic.Pointer{
-		Name:  name,
+		Named: semantic.Named(name),
 		To:    to,
 		Const: constant,
 	}
@@ -205,9 +204,9 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) 
 }
 
 func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
-	name := strings.Title(to.Typename()) + SliceSuffix
+	name := strings.Title(to.Name()) + SliceSuffix
 	for _, s := range ctx.api.Slices {
-		if s.Name == name {
+		if s.Name() == name {
 			if !equal(to, s.To) {
 				ctx.icef(at, "Slice %s found with non matching value, got %s expected %s", name, typename(s.To), typename(to))
 			}
@@ -216,8 +215,8 @@ func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
 		}
 	}
 	out := &semantic.Slice{
-		Name: name,
-		To:   to,
+		Named: semantic.Named(name),
+		To:    to,
 	}
 	ctx.api.Slices = append(ctx.api.Slices, out)
 	ctx.mappings[at] = out
@@ -228,10 +227,6 @@ func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
 }
 
 func enum(ctx *context, out *semantic.Enum) {
-	if len(out.AllEntries) > 0 {
-		// Already resolved.
-		return
-	}
 	in := out.AST
 	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
@@ -244,13 +239,11 @@ func enum(ctx *context, out *semantic.Enum) {
 		}
 		entry := &semantic.EnumEntry{
 			AST:   e,
-			Enum:  out,
-			Name:  e.Name.Value,
+			Named: semantic.Named(e.Name.Value),
 			Docs:  findDocumentation(e.CST),
 			Value: uint32(v),
 		}
 		out.Entries = append(out.Entries, entry)
-		out.AllEntries = append(out.AllEntries, entry)
 		ctx.mappings[e] = entry
 	}
 	for _, extends := range in.Extends {
@@ -259,19 +252,27 @@ func enum(ctx *context, out *semantic.Enum) {
 			ctx.errorf(extends, "non enum entry %s in extension list", typename(t))
 		} else {
 			out.Extends = append(out.Extends, e)
-			enum(ctx, e)
-			for _, entry := range e.AllEntries {
-				copy := *entry
-				copy.Enum = out
-				out.AllEntries = append(out.AllEntries, &copy)
-			}
 			ctx.mappings[extends] = e
 		}
 	}
-	for _, entry := range out.AllEntries {
-		ctx.add(entry.Name, entry)
-	}
 	ctx.mappings[in] = out
+}
+
+func enumEntries(ctx *context, out, scan *semantic.Enum) {
+	for _, e := range scan.Entries {
+		if out != scan {
+			e = &semantic.EnumEntry{
+				AST:   e.AST,
+				Named: e.Named,
+				Value: e.Value,
+			}
+		}
+		semantic.Add(out, e)
+		ctx.addNamed(e)
+	}
+	for _, extends := range scan.Extends {
+		enumEntries(ctx, out, extends)
+	}
 }
 
 func class(ctx *context, out *semantic.Class) {
@@ -292,18 +293,18 @@ func class(ctx *context, out *semantic.Class) {
 	for i, f := range in.Fields {
 		field := field(ctx, f, out)
 		out.Fields[i] = field
-		out.Members[field.Name] = field
 	}
 	ctx.mappings[in] = out
 }
 
 func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
-	out := &semantic.Field{AST: in, Name: in.Name.Value, Class: class}
+	out := &semantic.Field{AST: in, Named: semantic.Named(in.Name.Value)}
+	semantic.Add(class, out)
 	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
 	if isVoid(out.Type) {
-		ctx.errorf(in, "void typed field %s on class %s", out.Name, out.Class.Name)
+		ctx.errorf(in, "void typed field %s on class %s", out.Name(), class.Name())
 	}
 	if in.Default != nil {
 		ctx.with(out.Type, func() {
@@ -346,6 +347,6 @@ func typename(t semantic.Type) string {
 	case *semantic.StaticArray:
 		return fmt.Sprintf("%s[%d]", typename(t.ValueType), t.Size)
 	default:
-		return t.Typename()
+		return t.Name()
 	}
 }

@@ -500,7 +500,7 @@
   {{else if IsNumericValue     $}}{{Macro "Go.Type" $}}({{$}})
   {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "Go.Read" $.Expression}})
   {{else if IsStringValue      $}}{{printf "%q" $}}
-  {{else if IsEnumEntry        $}}{{$.Enum.Name}}_{{$.Name}}
+  {{else if IsEnumEntry        $}}{{$.Owner.Name}}_{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
   {{else if IsBitTest          $}}(({{Macro "Go.Read" $.Bits}}) & ({{Macro "Go.Read" $.Bitfield}}) != 0)
   {{else if IsBinaryOp         $}}({{Macro "Go.Read" $.LHS}}) {{$.Operator}} ({{Macro "Go.Read" $.RHS}})

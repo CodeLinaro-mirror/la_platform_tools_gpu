@@ -663,7 +663,7 @@
   {{     if IsBoolValue    $}}{{$}}
   {{else if IsNumericValue $}}{{$}}
   {{else if IsStringValue  $}}{{$}}
-  {{else if IsEnumEntry    $}}{{$.Enum.Name}}_{{$.Name}}
+  {{else if IsEnumEntry    $}}{{$.Owner.Name}}_{{$.Name}}
   {{else if IsCast         $}}{{Macro "Default" $.Object}}
   {{else}}{{Error "macro Default called with unsupported type: %T" $}}
   {{end}}

@@ -34,8 +34,8 @@ type context struct {
 }
 
 type scope struct {
+	semantic.Symbols
 	outer     *scope
-	entries   map[string][]semantic.Node
 	inferType semantic.Type
 	block     *[]semantic.Node
 }
@@ -82,28 +82,42 @@ func (ctx *context) with(t semantic.Type, action func()) {
 	ctx.scope = &scope{
 		outer:     ctx.scope,
 		block:     ctx.scope.block,
-		entries:   map[string][]semantic.Node{},
 		inferType: t,
 	}
 	defer func() { ctx.scope = original }()
 	action()
 }
 
-// add binds a name to a specific value within the current and nested scopes.
+// addNamed binds a named node within the current and nested scopes.
+func (ctx *context) addNamed(value semantic.NamedNode) {
+	ctx.scope.AddNamed(value)
+}
+
+// alias maps a name to a node without the node knowing the name.
 func (ctx *context) add(name string, value semantic.Node) {
-	list, _ := ctx.scope.entries[name]
-	ctx.scope.entries[name] = append(list, value)
+	ctx.scope.Add(name, value)
+}
+
+// addMembers adds all the members of owner directly to the curent scope.
+func (ctx *context) addMembers(owner semantic.Owner) {
+	owner.VisitMembers(func(m semantic.Owned) {
+		ctx.scope.AddNamed(m)
+	})
+}
+
+// addSymbols adds all the entries of symbols directly to the curent scope.
+func (ctx *context) addSymbols(symbols *semantic.Symbols) {
+	symbols.Visit(func(name string, node semantic.Node) {
+		ctx.scope.Add(name, node)
+	})
 }
 
 // find searches the scope stack for a bindings that matches the name.
 func (ctx *context) find(name string) []semantic.Node {
-	if ctx.scope == nil {
-		return nil
-	}
-	result, _ := ctx.scope.entries[name]
-	for search := ctx.scope.outer; search != nil; search = search.outer {
-		list, ok := search.entries[name]
-		if ok && len(list) > 0 {
+	result := []semantic.Node{}
+	for search := ctx.scope; search != nil; search = search.outer {
+		list := search.FindAll(name)
+		if len(list) > 0 {
 			result = append(result, list...)
 		}
 	}
@@ -118,7 +132,7 @@ func (ctx *context) disambiguate(matches []semantic.Node) []semantic.Node {
 	if len(matches) <= 1 {
 		return matches
 	}
-	var enum *semantic.Enum
+	var enum semantic.Owner
 	for test := ctx.scope; test != nil; test = test.outer {
 		if test.inferType != nil {
 			if e, ok := test.inferType.(*semantic.Enum); ok {
@@ -134,7 +148,7 @@ func (ctx *context) disambiguate(matches []semantic.Node) []semantic.Node {
 	var res *semantic.EnumEntry
 	for _, m := range matches {
 		if ev, ok := m.(*semantic.EnumEntry); ok {
-			if enum == ev.Enum {
+			if enum == ev.Owner() {
 				// We found a disambiguation match
 				res = ev
 			}
@@ -172,9 +186,9 @@ func (ctx *context) get(at ast.Node, name string) semantic.Node {
 			}
 			switch t := m.(type) {
 			case *semantic.EnumEntry:
-				possibilities += fmt.Sprintf("%s.%s", t.Enum.Name, t.Name)
+				possibilities += fmt.Sprintf("%s.%s", t.Owner().Name(), t.Name())
 			case *semantic.Parameter:
-				possibilities += fmt.Sprintf("parameter %q", t.Name)
+				possibilities += fmt.Sprintf("parameter %q", t.Name())
 			case semantic.Type:
 				possibilities += fmt.Sprintf("type %q [%T]", typename(t), t)
 			default:
@@ -187,7 +201,7 @@ func (ctx *context) get(at ast.Node, name string) semantic.Node {
 }
 
 func (ctx *context) addType(t semantic.Type) {
-	name := t.Typename()
+	name := t.Name()
 	if _, present := ctx.types[name]; present {
 		ctx.errorf(t, "Duplicate type %s", name)
 	}

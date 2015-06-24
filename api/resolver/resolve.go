@@ -32,13 +32,11 @@ type ASTToSemantic map[ast.Node]semantic.Node
 // are undefined.
 // If there are semantic problems with the ast, Resolve will return the set of
 // errors it finds, and the returned graph may be incomplete/invalid.
-func Resolve(includes []*ast.API, imports map[string]*semantic.API, mappings ASTToSemantic) (*semantic.API, parse.ErrorList) {
+func Resolve(includes []*ast.API, symbols *semantic.Symbols, mappings ASTToSemantic) (*semantic.API, parse.ErrorList) {
 	ctx := &context{
-		api: &semantic.API{
-			Members: semantic.Members{},
-		},
+		api:      &semantic.API{},
 		types:    map[string]semantic.Type{},
-		scope:    &scope{entries: map[string][]semantic.Node{}},
+		scope:    &scope{},
 		mappings: mappings,
 	}
 	func() {
@@ -48,8 +46,8 @@ func Resolve(includes []*ast.API, imports map[string]*semantic.API, mappings AST
 				panic(err)
 			}
 		}()
-		for name, i := range imports {
-			ctx.api.Members[name] = i
+		if symbols != nil {
+			ctx.addSymbols(symbols)
 		}
 		// Register all the built in symbols
 		for _, t := range semantic.BuiltinTypes {

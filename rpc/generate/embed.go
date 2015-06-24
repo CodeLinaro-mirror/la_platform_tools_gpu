@@ -1299,7 +1299,7 @@ const rpc_common_go_tmpl = `{{/*
   {{else if IsAny                  $}}interface{}
   {{else if IsMap                  $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsClass                $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
-  {{else if IsPointer              $}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Typename}}
+  {{else if IsPointer              $}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Name}}
   {{else if IsEnum                 $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsBool                 $}}bool
   {{else if IsS8                   $}}int8

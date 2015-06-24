@@ -20,6 +20,8 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 
 // API is the root of the ASG, and holds a fully resolved api.
 type API struct {
+	members
+	Named
 	Enums        []*Enum        // the set of enums
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
@@ -33,12 +35,24 @@ type API struct {
 	Slices       []*Slice       // the pointer types used
 	References   []*Reference   // the reference types used
 	Signatures   []*Signature   // the function signature types used
-	Members                     // a map of name to member for top level symbols
+}
+
+// Import wraps an API with it's imported name.
+type Import struct {
+	owned
+	noMembers
+	Named     // the full type name
+	API   API // the API being imported
+}
+
+// Implement the Owner interface delegating member lookup to the imported API
+func (i Import) Member(name string) Owned {
+	return i.API.Member(name)
 }
 
 type Annotation struct {
 	AST       *ast.Annotation // the underlying syntax node this was built from
-	Name      string          // the name of the annotation
+	Named                     // the name of the annotation
 	Arguments []Expression    // the arguments to the annotation
 }
 
@@ -56,7 +70,7 @@ type Annotations []*Annotation
 // GetAnnotation implements the Annotated interface for the Annotations type.
 func (a Annotations) GetAnnotation(name string) *Annotation {
 	for _, entry := range a {
-		if entry.Name == name {
+		if entry.Name() == name {
 			return entry
 		}
 	}
@@ -65,10 +79,11 @@ func (a Annotations) GetAnnotation(name string) *Annotation {
 
 // Global represents a global variable.
 type Global struct {
+	owned
 	AST         *ast.Field // the underlying syntax node this was built from
 	Annotations            // the annotations applied to this global
 	Type        Type       // the type the global stores
-	Name        string     // the name of the global
+	Named                  // the name of the global
 	Default     Expression // the initial value of the global
 }
 

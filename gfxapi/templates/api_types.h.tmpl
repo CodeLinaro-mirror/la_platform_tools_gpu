@@ -126,6 +126,21 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits enum entry declarations as a number of uint32_t constants.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareEnumEntries"}}
+  {{AssertType $ "Enum"}}
+
+  {{range $entry := $.Entries}}
+  static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
+  {{end}}
+  {{range $p := $.Extends}}{{Macro "DeclareEnumEntries" $p}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits an enum declaration as a number of uint32_t constants in a namespace.
 -------------------------------------------------------------------------------
 */}}
@@ -133,9 +148,7 @@
   {{AssertType $ "Enum"}}
 
   namespace {{Macro "C++.EnumName" $}} {
-    {{range $entry := $.AllEntries}}
-      static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
-    {{end}}
+    {{Macro "DeclareEnumEntries" $}}
   }
 {{end}}
 

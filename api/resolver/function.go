@@ -26,6 +26,7 @@ type macroStub struct {
 	function *semantic.Function
 }
 
+func (m *macroStub) Name() string                  { return m.function.Name() }
 func (m *macroStub) ExpressionType() semantic.Type { return m.function.Signature }
 
 func functionSignature(ctx *context, out *semantic.Function) {
@@ -52,7 +53,7 @@ func functionSignature(ctx *context, out *semantic.Function) {
 		} else {
 			out.Return = outp
 			if !isVoid(outp.ExpressionType()) {
-				out.Return.Name = "result"
+				out.Return.Named = semantic.Named("result")
 				out.FullParameters = append(out.FullParameters, outp)
 			}
 		}
@@ -67,7 +68,7 @@ func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *seman
 		Function: owner,
 	}
 	if in.Name != nil {
-		out.Name = in.Name.Value
+		out.Named = semantic.Named(in.Name.Value)
 	}
 	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
@@ -78,11 +79,13 @@ func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *seman
 
 func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 	in := out.AST
-	out.Owner = owner
+	if owner != nil {
+		semantic.Add(owner, out)
+	}
 	if in.Block != nil {
 		ctx.with(semantic.VoidType, func() {
 			for _, p := range out.FullParameters {
-				ctx.add(p.Name, p)
+				ctx.addNamed(p)
 			}
 			if out.This != nil {
 				ctx.add(string(ast.KeywordThis), out.This)
@@ -107,16 +110,16 @@ func method(ctx *context, out *semantic.Function) {
 			ctx.errorf(out.AST, "expected this as a reference to a class, got %s[%T]", typename(t.To), t.To)
 		} else {
 			class.Methods = append(class.Methods, out)
-			class.Members[out.Name] = out
+			semantic.Add(class, out)
 			functionBody(ctx, class, out)
 		}
 	case *semantic.Pseudonym:
 		t.Methods = append(t.Methods, out)
-		t.Members[out.Name] = out
+		semantic.Add(t, out)
 		functionBody(ctx, t, out)
 	case *semantic.Class:
 		t.Methods = append(t.Methods, out)
-		t.Members[out.Name] = out
+		semantic.Add(t, out)
 		functionBody(ctx, t, out)
 	default:
 		ctx.errorf(out.AST, "invalid type for this , got %s[%T]", typename(t), t)
@@ -127,15 +130,15 @@ func method(ctx *context, out *semantic.Function) {
 func getSignature(ctx *context, at ast.Node, r semantic.Type, args []semantic.Type) *semantic.Signature {
 	buffer := bytes.Buffer{}
 	buffer.WriteString("fun_")
-	buffer.WriteString(r.Typename())
+	buffer.WriteString(r.Name())
 	buffer.WriteString("_")
 	for _, a := range args {
 		buffer.WriteString("_")
-		buffer.WriteString(a.Typename())
+		buffer.WriteString(a.Name())
 	}
 	name := buffer.String()
 	for _, s := range ctx.api.Signatures {
-		if s.Name == name {
+		if s.Name() == name {
 			if !equal(r, s.Return) {
 				ctx.icef(at, "Signature %s found with non matching return type, got %s expected %s", name, typename(s.Return), typename(r))
 			}
@@ -151,7 +154,7 @@ func getSignature(ctx *context, at ast.Node, r semantic.Type, args []semantic.Ty
 		}
 	}
 	out := &semantic.Signature{
-		Name:      name,
+		Named:     semantic.Named(name),
 		Return:    r,
 		Arguments: args,
 	}

@@ -39,7 +39,7 @@ type Choice struct {
 type Local struct {
 	Declaration *DeclareLocal // the statement that created the local
 	Type        Type          // the type of the storage
-	Name        string        // the identifier that will resolve to this local
+	Named                     // the identifier that will resolve to this local
 	Value       Expression    // the expression the local was assigned on creation
 }
 

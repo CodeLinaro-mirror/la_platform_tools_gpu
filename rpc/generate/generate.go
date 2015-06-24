@@ -66,18 +66,18 @@ func fromType(from semantic.Type) schema.Type {
 	}
 	switch from := from.(type) {
 	case *semantic.Enum:
-		return &schema.Primitive{Name: from.Typename(), Method: schema.Int32}
+		return &schema.Primitive{Name: from.Name(), Method: schema.Int32}
 	case *semantic.Pointer:
 		return &schema.Pointer{Type: fromType(from.To)}
 	case *semantic.Slice:
 		return &schema.Slice{ValueType: fromType(from.To)}
 	case *semantic.Class:
 		if from.GetAnnotation("Interface") != nil {
-			return &schema.Interface{Name: from.Typename()}
+			return &schema.Interface{Name: from.Name()}
 		}
-		return &schema.Struct{Name: from.Typename()}
+		return &schema.Struct{Name: from.Name()}
 	default:
-		return &schema.Struct{Name: from.Typename()}
+		return &schema.Struct{Name: from.Name()}
 	}
 }
 
@@ -87,7 +87,7 @@ func addFields(s *binary.Struct, c *semantic.Class) {
 	}
 	for _, decl := range c.Fields {
 		f := schema.Field{
-			Declared: decl.Name,
+			Declared: decl.Name(),
 			Type:     fromType(decl.Type),
 		}
 		s.Fields = append(s.Fields, f)
