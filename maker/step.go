@@ -243,7 +243,7 @@ func (s *Step) shouldRun() bool {
 }
 
 func (s *Step) run() {
-	if s.action == nil {
+	if s.action == nil || (Config.StopOnError && Errors.Failed()) {
 		return
 	}
 	if err := s.action(s); err != nil {

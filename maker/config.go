@@ -31,6 +31,8 @@ var (
 		TargetOS string
 		// DisableParallel turns of all parallel build support.
 		DisableParallel bool
+		// StopOnError makes the system quit faster once an error has been found.
+		StopOnError bool
 	}
 	// Paths holds the set of path roots for the build.
 	Paths struct {
