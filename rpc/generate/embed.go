@@ -1288,7 +1288,7 @@ const rpc_common_go_tmpl = `{{/*
 {{define "Type#f64"      }}float64{{end}}
 {{define "Type#string"   }}string{{end}}
 {{define "Type.Slice"    }}{{template "NameFixup" .Type.Name}}{{end}}
-{{define "Type.Class"    }}{{.Type.Name}}{{end}}
+{{define "Type.Class"    }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
 {{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
 {{define "Type.Enum"     }}{{.Type.Name}}{{end}}
 {{define "Type.Pointer"  }}{{if not (GetAnnotation $.Type.To "Interface")}}*{{end}}{{Node "Type" .Type.To}}{{end}}
