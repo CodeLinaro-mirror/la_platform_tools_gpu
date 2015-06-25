@@ -36,27 +36,27 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»}{{end}}
 
 {{define "Cpp.Encoder"}}»»virtual void Encode(Encoder* e) const {
-{{range .Fields}}»»»{{Encode (print "this->m" .Name) .Type}}
+{{range .Fields}}»»»{{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}
 {{end}}»»}{{end}}
 
-{{define "Cpp.EncodePrimitive"}}e->{{CppMethod .Type}}({{.Name}});{{end}}
-{{define "Cpp.EncodeStruct"}}e->Value(&{{.Name}});{{end}}
-{{define "Cpp.EncodePointer"}}e->object({{.Name}});{{end}}
-{{define "Cpp.EncodeInterface"}}e->object({{.Name}});{{end}}
+{{define "Cpp.Encode.Primitive"}}e->{{CppMethod .Type}}({{.Name}});{{end}}
+{{define "Cpp.Encode.Struct"}}e->Value(&{{.Name}});{{end}}
+{{define "Cpp.Encode.Pointer"}}e->object({{.Name}});{{end}}
+{{define "Cpp.Encode.Interface"}}e->object({{.Name}});{{end}}
 
-{{define "Cpp.EncodeSlice"}}e->Uint32({{.Name}}.size());
+{{define "Cpp.Encode.Slice"}}e->Uint32({{.Name}}.size());
 »»»for (int i = 0; i < {{.Name}}.size(); i++) {
-»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.EncodeArray"}}
+{{define "Cpp.Encode.Array"}}
 »»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.EncodeStream"}}{{end}}
+{{define "Cpp.Encode.Stream"}}{{end}}
 
-{{define "Cpp.EncodeMap"}}{{end}}
+{{define "Cpp.Encode.Map"}}{{end}}
 
 {{define "Cpp.File"}}{{$.Copyright}}
 #ifndef GAPIC_CODER_{{.Package | Upper}}_H
@@ -115,15 +115,15 @@ func (*{{.Name}}) Class() binary.Class {
 	return (*binaryClass{{.Name}})(nil)
 }
 func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Encode (print "o." .Name) .Type}}
+	{{range .Fields}}{{Call "Go.Encode" (Var .Type "o." .Name)}}
 {{end}} return nil
 }
 func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Decode (print "o." .Name) .Type}}
+	{{range .Fields}}{{Call "Go.Decode" (Var .Type "o." .Name)}}
 {{end}} return nil
 }
 func doSkip{{.Name}}(d binary.Decoder) error {
-	{{range .Fields}}{{Skip (print "_." .Name) .Type}}
+	{{range .Fields}}{{Call "Go.Skip" .Type}}
 {{end}} return nil
 }
 func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
@@ -137,21 +137,21 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 	TypeID: {{.IDName}},
 	Name: "{{.Name}}",
 	Fields: []{{SchemaPrefix}}Field{
-		{{range .Fields}}{ Declared:"{{.Name}}", Type:{{Schema .Type}} },
+		{{range .Fields}}{ Declared:"{{.Name}}", Type:{{Call "Go.Schema" .Type}} },
 	{{end}} },
 }
 {{end}}
 
-{{define "Go.EncodePrimitive"}}{{/*
+{{define "Go.Encode.Primitive"}}{{/*
 */}}{{if eq .Type.Native .Type.Name}}{{/*
 */}}if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{/*
 */}}{{else}}{{/*
 */}}if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{/*
 */}}{{end}}{{end}}
 
-{{define "Go.EncodeStruct"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Encode.Struct"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
 
-{{define "Go.EncodePointer"}} if {{.Name}} != nil {
+{{define "Go.Encode.Pointer"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
 				return err
 			}
@@ -159,7 +159,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			return err
 		} {{end}}
 
-{{define "Go.EncodeInterface"}} if {{.Name}} != nil {
+{{define "Go.Encode.Interface"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
 				return err
 			}
@@ -167,19 +167,25 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			return err
 		} {{end}}
 
-{{define "Go.EncodeSlice"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
-			return err
-		}
-		{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := e.Data({{.Name}}); err != nil { return err} {{else}}{{/*
-		*/}} for i := range {{.Name}} {
-			{{Encode (print .Name "[i]") .Type.ValueType}}
-		}{{end}} {{end}}
+{{define "Go.Encode_Length"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
+	return err
+} {{end}}
 
-{{define "Go.EncodeArray"}} for i := range {{.Name}} {
-			{{Encode (print .Name "[i]") .Type.ValueType}}
+{{define "Go.Encode#[]uint8"}} {{template "Go.Encode_Length" $}}
+		if err := e.Data({{.Name}}); err != nil {
+			return err
+		} {{end}}
+
+{{define "Go.Encode.Slice"}} {{template "Go.Encode_Length" $}}
+		for i := range {{.Name}} {
+			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
 		}{{end}}
 
-{{define "Go.EncodeStream"}}for _, o := range {{.Name}} {
+{{define "Go.Encode.Array"}} for i := range {{.Name}} {
+			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+		}{{end}}
+
+{{define "Go.Encode.Stream"}}for _, o := range {{.Name}} {
 			if err := e.Object(o); err != nil {
 				return err
 			}
@@ -188,23 +194,21 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			return err
 		}{{end}}
 
-{{define "Go.EncodeMap"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
-			return err
-		}
+{{define "Go.Encode.Map"}} {{template "Go.Encode_Length" $}}
 		for k, v := range {{.Name}} {
-			{{Encode "k" .Type.KeyType}}
-			{{Encode "v" .Type.ValueType}}
+			{{Call "Go.Encode" (Var .Type.KeyType "k")}}
+			{{Call "Go.Encode" (Var .Type.ValueType "v")}}
 		} {{end}}
 
-{{define "Go.DecodePrimitive"}} if obj, err := d.{{.Type.Method}}(); err != nil {
+{{define "Go.Decode.Primitive"}} if obj, err := d.{{.Type.Method}}(); err != nil {
 			return err
 		} else {
 			{{.Name}} = {{.Type.Name}}(obj)
 		} {{end}}
 
-{{define "Go.DecodeStruct"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Decode.Struct"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
 
-{{define "Go.DecodePointer"}} if obj, err := d.Object(); err != nil {
+{{define "Go.Decode.Pointer"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
 			{{.Name}} = obj.({{.Type}})
@@ -212,7 +216,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "Go.DecodeInterface"}} if obj, err := d.Object(); err != nil {
+{{define "Go.Decode.Interface"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
 			{{.Name}} = obj.({{.Type.Name}})
@@ -220,21 +224,28 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "Go.DecodeSlice"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.Decode_Length"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
-			{{.Name}} = make({{.Type}}, count)
-			{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Data({{.Name}}); err != nil { return err} {{else}}{{/*
-			*/}} for i := range {{.Name}} {
-				{{Decode (print .Name "[i]") .Type.ValueType}}
-			}{{end}}
+			{{.Name}} = make({{.Type}}, count) {{end}}
+
+{{define "Go.Decode#[]uint8"}} {{template "Go.Decode_Length" $}}
+			if err := d.Data({{.Name}}); err != nil {
+				return err
+			}
 		} {{end}}
 
-{{define "Go.DecodeArray"}} for i := range {{.Name}} {
-				{{Decode (print .Name "[i]") .Type.ValueType}}
+{{define "Go.Decode.Slice"}} {{template "Go.Decode_Length" $}}
+			for i := range {{.Name}} {
+				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+			}
+		} {{end}}
+
+{{define "Go.Decode.Array"}} for i := range {{.Name}} {
+				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
 			}{{end}}
 
-{{define "Go.DecodeStream"}}for {
+{{define "Go.Decode.Stream"}}for {
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if _, end := obj.(*objects.Terminator); end {
@@ -244,7 +255,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			}
 		} {{end}}
 
-{{define "Go.DecodeMap"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.Decode.Map"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type}}, count)
@@ -252,36 +263,36 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			for i := uint32(0); i < count; i++ {
 				var k {{.Type.KeyType}}
 				var v {{.Type.ValueType}}
-				{{Decode "k" .Type.KeyType}}
-				{{Decode "v" .Type.ValueType}}
+				{{Call "Go.Decode" (Var .Type.KeyType "k")}}
+				{{Call "Go.Decode" (Var .Type.ValueType "v")}}
 				m[k] = v
 			}
 		} {{end}}
 
-{{define "Go.SkipPrimitive"}}{{if .Type.Method.Skippable}}if err := d.Skip{{.Type.Method}}(); err != nil {
+{{define "Go.Skip.Primitive"}}{{if .Method.Skippable}}if err := d.Skip{{.Method}}(); err != nil {
 	return err
-} {{else}}if _,err := d.{{.Type.Method}}(); err != nil {
+} {{else}}if _,err := d.{{.Method}}(); err != nil {
 		return err
 } {{end}} {{end}}
-{{define "Go.SkipStruct"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
-{{define "Go.SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "Go.SkipInterface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "Go.Skip.Struct"}} if err := d.SkipValue((*{{.Name}})(nil)); err != nil { return err } {{end}}
+{{define "Go.Skip.Pointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "Go.Skip.Interface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 
-{{define "Go.SkipSlice"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.Skip.Slice"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
-			{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Skip(count); err != nil { return err} {{else}}{{/*
+			{{$vt := print .ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Skip(count); err != nil { return err} {{else}}{{/*
 			*/}} for i := uint32(0); i < count; i++ {
-				{{Skip (print .Name "[i]") .Type.ValueType}}
+			{{Call "Go.Skip" .ValueType}}
 			}{{end}}
 		} {{end}}
 
-{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Size}}; i++ {
-			{{Skip (print .Name "[i]") .Type.ValueType}}
+{{define "Go.Skip.Array"}}for i := uint32(0); i < {{.Size}}; i++ {
+			{{Call "Go.Skip" .ValueType}}
 		}{{end}}
 
 
-{{define "Go.SkipStream"}}for {
+{{define "Go.Skip.Stream"}}for {
 			if id, err := d.SkipObject(); err != nil {
 				return err
 			} else if id == objects.TerminatorID {
@@ -289,23 +300,23 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			}
 		} {{end}}
 
-{{define "Go.SkipMap"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.Skip.Map"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			for i := uint32(0); i < count; i++ {
-				{{Skip "k" .Type.KeyType}}
-				{{Skip "v" .Type.ValueType}}
+				{{Call "Go.Skip" .KeyType}}
+				{{Call "Go.Skip" .ValueType}}
 			}
 		} {{end}}
 
-{{define "Go.SchemaPrimitive"}}&{{SchemaPrefix}}Primitive{ Name: "{{.Name}}", Method: {{SchemaPrefix}}{{.Method}} }{{end}}
-{{define "Go.SchemaStruct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}"}{{end}}
-{{define "Go.SchemaPointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Schema .Type}} }{{end}}
-{{define "Go.SchemaInterface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
-{{define "Go.SchemaSlice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}} }{{end}}
-{{define "Go.SchemaArray"}}&{{SchemaPrefix}}Array{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}}, Size: {{.Size}} }{{end}}
-{{define "Go.SchemaStream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}} }{{end}}
-{{define "Go.SchemaMap"}}&{{SchemaPrefix}}Map{Alias: "{{.Alias}}", KeyType: {{Schema .KeyType}}, ValueType: {{Schema .ValueType}} }{{end}}
+{{define "Go.Schema.Primitive"}}&{{SchemaPrefix}}Primitive{ Name: "{{.Name}}", Method: {{SchemaPrefix}}{{.Method}} }{{end}}
+{{define "Go.Schema.Struct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Pointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
+{{define "Go.Schema.Interface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Slice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Array"}}&{{SchemaPrefix}}Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
+{{define "Go.Schema.Stream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Map"}}&{{SchemaPrefix}}Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 
 {{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
 const _{{$name}}_name = "{{range .Values}}{{.Name}}{{end}}"
@@ -380,50 +391,50 @@ const java_tmpl = `{{/*
 
 {{define "Java.Encoder"}}
 »public static void encode(Encoder e, {{JavaClass .Name}} o) throws IOException {
-{{range .Fields}}»»{{Encode (print "o." (JavaFieldName .Name)) .Type}}
+{{range .Fields}}»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
-{{define "Java.EncodePrimitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
-{{define "Java.EncodeStruct"}}{{.Name}}.encode(e);{{end}}
-{{define "Java.EncodePointer"}}e.object({{.Name}});{{end}}
-{{define "Java.EncodeInterface"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
 
-{{define "Java.EncodeSlice"}}e.int32({{.Name}}.length);
+{{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.EncodeArray"}}
+{{define "Java.Encode.Array"}}
 »»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.EncodeStream"}}TODO: Java stream handling{{end}}
+{{define "Java.Encode.Stream"}}TODO: Java stream handling{{end}}
 
-{{define "Java.EncodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
 »public static void decode(Decoder d, {{JavaClass .Name}} o) throws IOException {
-{{range .Fields}}»»{{Decode (print "o." (JavaFieldName .Name)) .Type}}
+{{range .Fields}}»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
-{{define "Java.DecodePrimitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
-{{define "Java.DecodeStruct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "Java.DecodePointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
-{{define "Java.DecodeInterface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.Decode.Pointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Interface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
 
-{{define "Java.DecodeSlice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
+{{define "Java.Decode.Slice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{Decode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
+{{define "Java.Decode.Array"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
 »»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Decode (print .Name "[i]") .Type.ValueType}}
+»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.DecodeMap"}}TODO: Java map handling{{end}}
-{{define "Java.DecodeStream"}}TODO: Java stream handling{{end}}
+{{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
+{{define "Java.Decode.Stream"}}TODO: Java stream handling{{end}}
 
 {{define "Java.File"}}{{$.Copyright}}package {{.Package}};
 

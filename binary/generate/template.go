@@ -31,7 +31,6 @@ type functions struct {
 	templates *template.Template
 	funcs     template.FuncMap
 	active    *template.Template
-	prefix    string
 	schema    string
 	writer    io.Writer
 	File      *File
@@ -77,14 +76,34 @@ func newFunctions() *functions {
 	return f
 }
 
-func (f *functions) getTemplate(action string, t schema.Type) *template.Template {
-	kind := reflect.TypeOf(t).Elem().Name()
-	name := fmt.Sprint(f.prefix, action, kind)
-	result := f.templates.Lookup(name)
-	if result == nil {
-		panic(fmt.Errorf("Could not find template %s", name))
+func (f *functions) getTemplate(prefix string, t interface{}) (*template.Template, error) {
+	try := []string{}
+
+	switch t := t.(type) {
+	case schema.Type:
+		try = append(try, fmt.Sprint(prefix, "#", t.Typename()))
+		if t.Typename() != t.Basename() {
+			try = append(try, fmt.Sprint(prefix, "#", t.Basename()))
+		}
+	case *variable:
+		return f.getTemplate(prefix, t.Type)
+	case string:
+		try = append(try, prefix+t)
+	default:
+		return nil, fmt.Errorf("Invalid call dispatch type %T", t)
 	}
-	return result
+	try = append(try,
+		// using the reflected typename
+		fmt.Sprint(prefix, ".", reflect.TypeOf(t).Elem().Name()),
+		// default case is just the prefix
+		prefix,
+	)
+	for _, name := range try {
+		if tmpl := f.templates.Lookup(name); tmpl != nil {
+			return tmpl, nil
+		}
+	}
+	return nil, fmt.Errorf(`Cannot find templates "%s"`, strings.Join(try, `","`))
 }
 
 func (f *functions) execute(name string, w io.Writer, data interface{}) error {
@@ -100,25 +119,24 @@ func (f *functions) execute(name string, w io.Writer, data interface{}) error {
 	return t.Execute(w, data)
 }
 
-type field struct {
+type variable struct {
 	Name string
 	Type interface{}
 }
 
-func (f *functions) Encode(name string, t schema.Type) (string, error) {
-	return "", f.getTemplate("Encode", t).Execute(f.writer, field{name, t})
+func (f *functions) Var(t schema.Type, args ...interface{}) *variable {
+	return &variable{
+		Name: fmt.Sprint(args...),
+		Type: t,
+	}
 }
 
-func (f *functions) Decode(name string, t schema.Type) (string, error) {
-	return "", f.getTemplate("Decode", t).Execute(f.writer, field{name, t})
-}
-
-func (f *functions) Skip(name string, t schema.Type) (string, error) {
-	return "", f.getTemplate("Skip", t).Execute(f.writer, field{name, t})
-}
-
-func (f *functions) Schema(t schema.Type) (string, error) {
-	return "", f.getTemplate("Schema", t).Execute(f.writer, t)
+func (f *functions) Call(prefix string, arg interface{}) (string, error) {
+	tmpl, err := f.getTemplate(prefix, arg)
+	if err != nil {
+		return "", err
+	}
+	return "", tmpl.Execute(f.writer, arg)
 }
 
 func (f *functions) SchemaPrefix() string {
