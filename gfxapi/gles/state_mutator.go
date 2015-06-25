@@ -3143,7 +3143,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 						return uint32(4)
 					case VertexAttribType_GL_FLOAT:
 						return uint32(4)
-					case VertexAttribType_GL_ARB_half_float_vertex:
+					case VertexAttribType_GL_HALF_FLOAT_ARB:
 						return uint32(2)
 					case VertexAttribType_GL_HALF_FLOAT_OES:
 						return uint32(2)
@@ -3200,7 +3200,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 						return uint32(4)
 					case VertexAttribType_GL_FLOAT:
 						return uint32(4)
-					case VertexAttribType_GL_ARB_half_float_vertex:
+					case VertexAttribType_GL_HALF_FLOAT_ARB:
 						return uint32(2)
 					case VertexAttribType_GL_HALF_FLOAT_OES:
 						return uint32(2)
@@ -3281,7 +3281,7 @@ func (ϟa *GlDrawArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 					return uint32(4)
 				case VertexAttribType_GL_FLOAT:
 					return uint32(4)
-				case VertexAttribType_GL_ARB_half_float_vertex:
+				case VertexAttribType_GL_HALF_FLOAT_ARB:
 					return uint32(2)
 				case VertexAttribType_GL_HALF_FLOAT_OES:
 					return uint32(2)

@@ -15653,7 +15653,7 @@ const (
 type Type_ARB_half_float_vertex uint32
 
 const (
-	Type_ARB_half_float_vertex_GL_ARB_half_float_vertex = Type_ARB_half_float_vertex(5131)
+	Type_ARB_half_float_vertex_GL_HALF_FLOAT_ARB = Type_ARB_half_float_vertex(5131)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15686,6 +15686,74 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
+// enum CompressedTexelFormat_EXT_texture_compression_dxt1
+////////////////////////////////////////////////////////////////////////////////
+type CompressedTexelFormat_EXT_texture_compression_dxt1 uint32
+
+const (
+	CompressedTexelFormat_EXT_texture_compression_dxt1_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = CompressedTexelFormat_EXT_texture_compression_dxt1(33776)
+	CompressedTexelFormat_EXT_texture_compression_dxt1_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = CompressedTexelFormat_EXT_texture_compression_dxt1(33777)
+)
+
+////////////////////////////////////////////////////////////////////////////////
+// enum CompressedTexelFormat_EXT_texture_compression_s3tc
+////////////////////////////////////////////////////////////////////////////////
+type CompressedTexelFormat_EXT_texture_compression_s3tc uint32
+
+const (
+	CompressedTexelFormat_EXT_texture_compression_s3tc_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = CompressedTexelFormat_EXT_texture_compression_s3tc(33778)
+	CompressedTexelFormat_EXT_texture_compression_s3tc_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = CompressedTexelFormat_EXT_texture_compression_s3tc(33779)
+)
+
+////////////////////////////////////////////////////////////////////////////////
+// enum CompressedTexelFormat_KHR_texture_compression_astc_ldr
+////////////////////////////////////////////////////////////////////////////////
+type CompressedTexelFormat_KHR_texture_compression_astc_ldr uint32
+
+const (
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37808)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37809)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37810)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37811)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37812)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37813)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37814)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37815)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37816)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37817)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37818)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37819)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37820)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37821)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37840)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37841)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37842)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37843)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37844)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37845)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37846)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37847)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37848)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37849)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37850)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37851)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37852)
+	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37853)
+)
+
+////////////////////////////////////////////////////////////////////////////////
+// enum CompressedTexelFormat_NV_texture_compression_latc
+////////////////////////////////////////////////////////////////////////////////
+type CompressedTexelFormat_NV_texture_compression_latc uint32
+
+const (
+	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_LUMINANCE_LATC1_NV              = CompressedTexelFormat_NV_texture_compression_latc(35952)
+	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = CompressedTexelFormat_NV_texture_compression_latc(35953)
+	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = CompressedTexelFormat_NV_texture_compression_latc(35954)
+	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = CompressedTexelFormat_NV_texture_compression_latc(35955)
+)
+
+////////////////////////////////////////////////////////////////////////////////
 // enum CompressedTexelFormat
 ////////////////////////////////////////////////////////////////////////////////
 type CompressedTexelFormat uint32
@@ -15702,6 +15770,58 @@ const (
 	CompressedTexelFormat_GL_ATC_RGB_AMD                     = CompressedTexelFormat(35986)
 	CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = CompressedTexelFormat(35987)
 	CompressedTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = CompressedTexelFormat(34798)
+)
+
+// CompressedTexelFormat_EXT_texture_compression_dxt1
+const (
+	CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = CompressedTexelFormat(33776)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = CompressedTexelFormat(33777)
+)
+
+// CompressedTexelFormat_EXT_texture_compression_s3tc
+const (
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = CompressedTexelFormat(33778)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = CompressedTexelFormat(33779)
+)
+
+// CompressedTexelFormat_KHR_texture_compression_astc_ldr
+const (
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = CompressedTexelFormat(37808)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = CompressedTexelFormat(37809)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = CompressedTexelFormat(37810)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = CompressedTexelFormat(37811)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = CompressedTexelFormat(37812)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = CompressedTexelFormat(37813)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = CompressedTexelFormat(37814)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = CompressedTexelFormat(37815)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = CompressedTexelFormat(37816)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = CompressedTexelFormat(37817)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = CompressedTexelFormat(37818)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = CompressedTexelFormat(37819)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = CompressedTexelFormat(37820)
+	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = CompressedTexelFormat(37821)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = CompressedTexelFormat(37840)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = CompressedTexelFormat(37841)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = CompressedTexelFormat(37842)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = CompressedTexelFormat(37843)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = CompressedTexelFormat(37844)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = CompressedTexelFormat(37845)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = CompressedTexelFormat(37846)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = CompressedTexelFormat(37847)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = CompressedTexelFormat(37848)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = CompressedTexelFormat(37849)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = CompressedTexelFormat(37850)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = CompressedTexelFormat(37851)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = CompressedTexelFormat(37852)
+	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = CompressedTexelFormat(37853)
+)
+
+// CompressedTexelFormat_NV_texture_compression_latc
+const (
+	CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV              = CompressedTexelFormat(35952)
+	CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = CompressedTexelFormat(35953)
+	CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = CompressedTexelFormat(35954)
+	CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = CompressedTexelFormat(35955)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15754,6 +15874,58 @@ const (
 	ImageTexelFormat_GL_ATC_RGB_AMD                     = ImageTexelFormat(35986)
 	ImageTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = ImageTexelFormat(35987)
 	ImageTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = ImageTexelFormat(34798)
+)
+
+// CompressedTexelFormat_EXT_texture_compression_dxt1
+const (
+	ImageTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = ImageTexelFormat(33776)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = ImageTexelFormat(33777)
+)
+
+// CompressedTexelFormat_EXT_texture_compression_s3tc
+const (
+	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = ImageTexelFormat(33778)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = ImageTexelFormat(33779)
+)
+
+// CompressedTexelFormat_KHR_texture_compression_astc_ldr
+const (
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = ImageTexelFormat(37808)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = ImageTexelFormat(37809)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = ImageTexelFormat(37810)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = ImageTexelFormat(37811)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = ImageTexelFormat(37812)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = ImageTexelFormat(37813)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = ImageTexelFormat(37814)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = ImageTexelFormat(37815)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = ImageTexelFormat(37816)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = ImageTexelFormat(37817)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = ImageTexelFormat(37818)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = ImageTexelFormat(37819)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = ImageTexelFormat(37820)
+	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = ImageTexelFormat(37821)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = ImageTexelFormat(37840)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = ImageTexelFormat(37841)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = ImageTexelFormat(37842)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = ImageTexelFormat(37843)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = ImageTexelFormat(37844)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = ImageTexelFormat(37845)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = ImageTexelFormat(37846)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = ImageTexelFormat(37847)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = ImageTexelFormat(37848)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = ImageTexelFormat(37849)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = ImageTexelFormat(37850)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = ImageTexelFormat(37851)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = ImageTexelFormat(37852)
+	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = ImageTexelFormat(37853)
+)
+
+// CompressedTexelFormat_NV_texture_compression_latc
+const (
+	ImageTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV              = ImageTexelFormat(35952)
+	ImageTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = ImageTexelFormat(35953)
+	ImageTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = ImageTexelFormat(35954)
+	ImageTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = ImageTexelFormat(35955)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -16304,7 +16476,7 @@ const (
 
 // Type_ARB_half_float_vertex
 const (
-	VertexAttribType_GL_ARB_half_float_vertex = VertexAttribType(5131)
+	VertexAttribType_GL_HALF_FLOAT_ARB = VertexAttribType(5131)
 )
 
 ////////////////////////////////////////////////////////////////////////////////

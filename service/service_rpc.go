@@ -216,17 +216,16 @@ type TypeInfo interface {
 // Class Device
 type Device struct {
 	binary.Generate
-	Name                   string
-	Model                  string
-	OS                     string
-	PointerSize            uint8
-	PointerAlignment       uint8
-	MaxMemorySize          uint64
-	RequiresShaderPatching bool
-	Extensions             string
-	Renderer               string
-	Vendor                 string
-	Version                string
+	Name             string
+	Model            string
+	OS               string
+	PointerSize      uint8
+	PointerAlignment uint8
+	MaxMemorySize    uint64
+	Extensions       string
+	Renderer         string
+	Vendor           string
+	Version          string
 }
 
 // Class Capture

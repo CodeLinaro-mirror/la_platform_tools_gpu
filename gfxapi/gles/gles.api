@@ -32,7 +32,7 @@ macro u32 vertexAttribTypeSize(VertexAttribType t) {
     case GL_UNSIGNED_SHORT:        2
     case GL_FIXED:                 4
     case GL_FLOAT:                 4
-    case GL_ARB_half_float_vertex: 2
+    case GL_HALF_FLOAT_ARB:        2
     case GL_HALF_FLOAT_OES:        2
   }
 }

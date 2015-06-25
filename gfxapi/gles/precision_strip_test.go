@@ -27,7 +27,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
+
+// glDevice represents a target device requiring precision strip
+var glDevice = &service.Device{Version: "OpenGL 3.0"}
 
 type mockWriter struct {
 	atoms []atom.Atom
@@ -63,7 +67,7 @@ func runTest(t *testing.T, src string, expected string) {
 	}
 
 	mw := &mockWriter{}
-	ps := precisionStrip(d, l)
+	ps := precisionStrip(glDevice, d, l)
 	for _, a := range in {
 		ps.Transform(atom.NoID, a, mw)
 	}
@@ -148,7 +152,7 @@ func TestStripConversion(t *testing.T) {
 
 func TestStripPassthrough(t *testing.T) {
 	d, l := database.Database(nil), log.Testing(t)
-	s := precisionStrip(d, l)
+	s := precisionStrip(glDevice, d, l)
 	mw := &mockWriter{}
 	a := &GlGetError{}
 

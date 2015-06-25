@@ -4737,7 +4737,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                         /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
                         /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FIXED))) ? (4) :
                         /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                        /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
                         /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
                     uint32_t l_elsize = l_vertexAttribTypeSize_115_result * l_arr->mSize;
@@ -4777,7 +4777,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                         /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
                         /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FIXED))) ? (4) :
                         /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                        /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
                         /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
                     uint32_t l_elsize = l_vertexAttribTypeSize_117_result * l_arr->mSize;
@@ -4842,7 +4842,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
                     /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
                     /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FIXED))) ? (4) :
                     /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                    /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                    /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
                     /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                     /* default: */ 0 /* clang-format on */;
                 uint32_t l_elsize = l_vertexAttribTypeSize_121_result * l_arr->mSize;

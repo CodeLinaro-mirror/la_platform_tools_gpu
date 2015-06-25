@@ -32,9 +32,13 @@ func (l Transforms) Transform(atoms List, out Writer) {
 }
 
 // Add is a convenience function for appending the list of Transformers t to the
-// end of the Transforms list.
+// end of the Transforms list, after filtering out nil Transformers.
 func (l *Transforms) Add(t ...Transformer) {
-	*l = append(*l, t...)
+	for _, tr := range t {
+		if tr != nil {
+			*l = append(*l, tr)
+		}
+	}
 }
 
 // Transform is a helper for building simple Transformers that are implemented
