@@ -88,6 +88,22 @@ func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ
 ```
 Index returns a Boolᵖ to the i'th element in this Boolˢ.
 
+#### func (Boolˢ) OnRead
+
+```go
+func (s Boolˢ) OnRead(ϟs *gfxapi.State) Boolˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Boolˢ) OnWrite
+
+```go
+func (s Boolˢ) OnWrite(ϟs *gfxapi.State) Boolˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Boolˢ) Range
 
 ```go
@@ -127,10 +143,10 @@ String returns a string description of the Boolˢ slice.
 #### func (Boolˢ) Write
 
 ```go
-func (dst Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64
+func (s Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Boolᵖ
 
@@ -163,6 +179,22 @@ func (*Boolᵖ) Class() binary.Class
 func (p Boolᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Boolᵖ points to.
+
+#### func (Boolᵖ) OnRead
+
+```go
+func (p Boolᵖ) OnRead(ϟs *gfxapi.State) Boolᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Boolᵖ) OnWrite
+
+```go
+func (p Boolᵖ) OnWrite(ϟs *gfxapi.State) Boolᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Boolᵖ) Read
 
@@ -276,6 +308,22 @@ func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ
 ```
 Index returns a Charᵖ to the i'th element in this Charˢ.
 
+#### func (Charˢ) OnRead
+
+```go
+func (s Charˢ) OnRead(ϟs *gfxapi.State) Charˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Charˢ) OnWrite
+
+```go
+func (s Charˢ) OnWrite(ϟs *gfxapi.State) Charˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Charˢ) Range
 
 ```go
@@ -315,10 +363,10 @@ String returns a string description of the Charˢ slice.
 #### func (Charˢ) Write
 
 ```go
-func (dst Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64
+func (s Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Charᵖ
 
@@ -351,6 +399,22 @@ func (*Charᵖ) Class() binary.Class
 func (p Charᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Charᵖ points to.
+
+#### func (Charᵖ) OnRead
+
+```go
+func (p Charᵖ) OnRead(ϟs *gfxapi.State) Charᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᵖ) OnWrite
+
+```go
+func (p Charᵖ) OnWrite(ϟs *gfxapi.State) Charᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Charᵖ) Read
 
@@ -465,6 +529,22 @@ func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ
 ```
 Index returns a Charᵖᵖ to the i'th element in this Charᵖˢ.
 
+#### func (Charᵖˢ) OnRead
+
+```go
+func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Charᵖˢ) OnWrite
+
+```go
+func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Charᵖˢ) Range
 
 ```go
@@ -504,10 +584,10 @@ String returns a string description of the Charᵖˢ slice.
 #### func (Charᵖˢ) Write
 
 ```go
-func (dst Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64
+func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Charᵖᵖ
 
@@ -546,6 +626,22 @@ func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
 
+#### func (Charᵖᵖ) OnRead
+
+```go
+func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᵖᵖ) OnWrite
+
+```go
+func (p Charᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (Charᵖᵖ) Read
 
 ```go
@@ -578,7 +674,7 @@ Write writes value to the Charᵖ element at the pointer.
 
 ```go
 type CmdBool struct {
-	binary.Generate
+	binary.Generate `display:"cmd_bool"`
 
 	Result bool
 }
@@ -662,7 +758,7 @@ func (c *CmdBool) TypeID() atom.TypeID
 
 ```go
 type CmdCharptrToString struct {
-	binary.Generate
+	binary.Generate `display:"cmd_charptr_to_string"`
 
 	S Charᵖ
 }
@@ -748,7 +844,7 @@ func (c *CmdCharptrToString) TypeID() atom.TypeID
 
 ```go
 type CmdCharsliceToString struct {
-	binary.Generate
+	binary.Generate `display:"cmd_charslice_to_string"`
 
 	S   Charᵖ
 	Len uint32
@@ -835,7 +931,7 @@ func (c *CmdCharsliceToString) TypeID() atom.TypeID
 
 ```go
 type CmdClone struct {
-	binary.Generate
+	binary.Generate `display:"cmd_clone"`
 
 	Src U8ᵖ
 	Cnt uint32
@@ -920,7 +1016,7 @@ func (c *CmdClone) TypeID() atom.TypeID
 
 ```go
 type CmdCopy struct {
-	binary.Generate
+	binary.Generate `display:"cmd_copy"`
 
 	Src U8ᵖ
 	Cnt uint32
@@ -1005,7 +1101,7 @@ func (c *CmdCopy) TypeID() atom.TypeID
 
 ```go
 type CmdF32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_f32"`
 
 	Result float32
 }
@@ -1089,7 +1185,7 @@ func (c *CmdF32) TypeID() atom.TypeID
 
 ```go
 type CmdF64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_f64"`
 
 	Result float64
 }
@@ -1173,7 +1269,7 @@ func (c *CmdF64) TypeID() atom.TypeID
 
 ```go
 type CmdMake struct {
-	binary.Generate
+	binary.Generate `display:"cmd_make"`
 
 	Cnt uint32
 }
@@ -1257,7 +1353,7 @@ func (c *CmdMake) TypeID() atom.TypeID
 
 ```go
 type CmdPointer struct {
-	binary.Generate
+	binary.Generate `display:"cmd_pointer"`
 
 	Result Voidᵖ
 }
@@ -1341,7 +1437,7 @@ func (c *CmdPointer) TypeID() atom.TypeID
 
 ```go
 type CmdRemapped struct {
-	binary.Generate
+	binary.Generate `display:"cmd_remapped"`
 
 	Result remapped
 }
@@ -1425,7 +1521,7 @@ func (c *CmdRemapped) TypeID() atom.TypeID
 
 ```go
 type CmdS16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_s16"`
 
 	Result int16
 }
@@ -1509,7 +1605,7 @@ func (c *CmdS16) TypeID() atom.TypeID
 
 ```go
 type CmdS32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_s32"`
 
 	Result int32
 }
@@ -1593,7 +1689,7 @@ func (c *CmdS32) TypeID() atom.TypeID
 
 ```go
 type CmdS64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_s64"`
 
 	Result int64
 }
@@ -1677,7 +1773,7 @@ func (c *CmdS64) TypeID() atom.TypeID
 
 ```go
 type CmdS8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_s8"`
 
 	Result int8
 }
@@ -1761,7 +1857,7 @@ func (c *CmdS8) TypeID() atom.TypeID
 
 ```go
 type CmdSliceCasts struct {
-	binary.Generate
+	binary.Generate `display:"cmd_slice_casts"`
 
 	S U16ᵖ
 	L uint32
@@ -1846,7 +1942,7 @@ func (c *CmdSliceCasts) TypeID() atom.TypeID
 
 ```go
 type CmdString struct {
-	binary.Generate
+	binary.Generate `display:"cmd_string"`
 
 	Result string
 }
@@ -1930,7 +2026,7 @@ func (c *CmdString) TypeID() atom.TypeID
 
 ```go
 type CmdU16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_u16"`
 
 	Result uint16
 }
@@ -2014,7 +2110,7 @@ func (c *CmdU16) TypeID() atom.TypeID
 
 ```go
 type CmdU32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_u32"`
 
 	Result uint32
 }
@@ -2098,7 +2194,7 @@ func (c *CmdU32) TypeID() atom.TypeID
 
 ```go
 type CmdU64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_u64"`
 
 	Result uint64
 }
@@ -2182,7 +2278,7 @@ func (c *CmdU64) TypeID() atom.TypeID
 
 ```go
 type CmdU8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_u8"`
 
 	Result uint8
 }
@@ -2266,7 +2362,7 @@ func (c *CmdU8) TypeID() atom.TypeID
 
 ```go
 type CmdUnknownRet struct {
-	binary.Generate
+	binary.Generate `display:"cmd_unknown_ret"`
 
 	Result int64
 }
@@ -2350,7 +2446,7 @@ func (c *CmdUnknownRet) TypeID() atom.TypeID
 
 ```go
 type CmdUnknownWritePtr struct {
-	binary.Generate
+	binary.Generate `display:"cmd_unknown_write_ptr"`
 
 	P Intᵖ
 }
@@ -2436,7 +2532,7 @@ func (c *CmdUnknownWritePtr) TypeID() atom.TypeID
 
 ```go
 type CmdUnknownWriteSlice struct {
-	binary.Generate
+	binary.Generate `display:"cmd_unknown_write_slice"`
 
 	A Intᵖ
 }
@@ -2522,7 +2618,7 @@ func (c *CmdUnknownWriteSlice) TypeID() atom.TypeID
 
 ```go
 type CmdVoid struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void"`
 }
 ```
 
@@ -2604,7 +2700,7 @@ func (c *CmdVoid) TypeID() atom.TypeID
 
 ```go
 type CmdVoid3InArrays struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_3_in_arrays"`
 
 	A U8ᵖ
 	B U32ᵖ
@@ -2690,7 +2786,7 @@ func (c *CmdVoid3InArrays) TypeID() atom.TypeID
 
 ```go
 type CmdVoid3Remapped struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_3_remapped"`
 
 	A remapped
 	B remapped
@@ -2776,7 +2872,7 @@ func (c *CmdVoid3Remapped) TypeID() atom.TypeID
 
 ```go
 type CmdVoid3Strings struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_3_strings"`
 
 	A string
 	B string
@@ -2862,7 +2958,7 @@ func (c *CmdVoid3Strings) TypeID() atom.TypeID
 
 ```go
 type CmdVoidBool struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_bool"`
 
 	A bool
 }
@@ -2946,7 +3042,7 @@ func (c *CmdVoidBool) TypeID() atom.TypeID
 
 ```go
 type CmdVoidF32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_f32"`
 
 	A float32
 }
@@ -3030,7 +3126,7 @@ func (c *CmdVoidF32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidF64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_f64"`
 
 	A float64
 }
@@ -3114,7 +3210,7 @@ func (c *CmdVoidF64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidInArrayOfPointers struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_in_array_of_pointers"`
 
 	A     Charᵖᵖ
 	Count int32
@@ -3201,7 +3297,7 @@ func (c *CmdVoidInArrayOfPointers) TypeID() atom.TypeID
 
 ```go
 type CmdVoidInArrayOfRemapped struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_in_array_of_remapped"`
 
 	A Remappedᵖ
 }
@@ -3287,7 +3383,7 @@ func (c *CmdVoidInArrayOfRemapped) TypeID() atom.TypeID
 
 ```go
 type CmdVoidOutArrayOfRemapped struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_out_array_of_remapped"`
 
 	A Remappedᵖ
 }
@@ -3373,7 +3469,7 @@ func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID
 
 ```go
 type CmdVoidOutArrayOfUnknownRemapped struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_out_array_of_unknown_remapped"`
 
 	A Remappedᵖ
 }
@@ -3459,7 +3555,7 @@ func (c *CmdVoidOutArrayOfUnknownRemapped) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadBool struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_bool"`
 
 	A Boolᵖ
 }
@@ -3543,7 +3639,7 @@ func (c *CmdVoidReadBool) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadF32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_f32"`
 
 	A F32ᵖ
 }
@@ -3627,7 +3723,7 @@ func (c *CmdVoidReadF32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadF64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_f64"`
 
 	A F64ᵖ
 }
@@ -3711,7 +3807,7 @@ func (c *CmdVoidReadF64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadPtrs struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_ptrs"`
 
 	A F32ᵖ
 	B U16ᵖ
@@ -3797,7 +3893,7 @@ func (c *CmdVoidReadPtrs) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadS16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_s16"`
 
 	A S16ᵖ
 }
@@ -3881,7 +3977,7 @@ func (c *CmdVoidReadS16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadS32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_s32"`
 
 	A S32ᵖ
 }
@@ -3965,7 +4061,7 @@ func (c *CmdVoidReadS32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadS64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_s64"`
 
 	A S64ᵖ
 }
@@ -4049,7 +4145,7 @@ func (c *CmdVoidReadS64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadS8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_s8"`
 
 	A S8ᵖ
 }
@@ -4133,7 +4229,7 @@ func (c *CmdVoidReadS8) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadU16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_u16"`
 
 	A U16ᵖ
 }
@@ -4217,7 +4313,7 @@ func (c *CmdVoidReadU16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadU32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_u32"`
 
 	A U32ᵖ
 }
@@ -4301,7 +4397,7 @@ func (c *CmdVoidReadU32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadU64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_u64"`
 
 	A U64ᵖ
 }
@@ -4385,7 +4481,7 @@ func (c *CmdVoidReadU64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidReadU8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_read_u8"`
 
 	A U8ᵖ
 }
@@ -4469,7 +4565,7 @@ func (c *CmdVoidReadU8) TypeID() atom.TypeID
 
 ```go
 type CmdVoidS16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_s16"`
 
 	A int16
 }
@@ -4553,7 +4649,7 @@ func (c *CmdVoidS16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidS32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_s32"`
 
 	A int32
 }
@@ -4637,7 +4733,7 @@ func (c *CmdVoidS32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidS64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_s64"`
 
 	A int64
 }
@@ -4721,7 +4817,7 @@ func (c *CmdVoidS64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidS8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_s8"`
 
 	A int8
 }
@@ -4805,7 +4901,7 @@ func (c *CmdVoidS8) TypeID() atom.TypeID
 
 ```go
 type CmdVoidString struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_string"`
 
 	A string
 }
@@ -4889,7 +4985,7 @@ func (c *CmdVoidString) TypeID() atom.TypeID
 
 ```go
 type CmdVoidU16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_u16"`
 
 	A uint16
 }
@@ -4973,7 +5069,7 @@ func (c *CmdVoidU16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidU32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_u32"`
 
 	A uint32
 }
@@ -5057,7 +5153,7 @@ func (c *CmdVoidU32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidU64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_u64"`
 
 	A uint64
 }
@@ -5141,7 +5237,7 @@ func (c *CmdVoidU64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidU8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_u8"`
 
 	A uint8
 }
@@ -5225,7 +5321,7 @@ func (c *CmdVoidU8) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteBool struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_bool"`
 
 	A Boolᵖ
 }
@@ -5309,7 +5405,7 @@ func (c *CmdVoidWriteBool) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteF32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_f32"`
 
 	A F32ᵖ
 }
@@ -5393,7 +5489,7 @@ func (c *CmdVoidWriteF32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteF64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_f64"`
 
 	A F64ᵖ
 }
@@ -5477,7 +5573,7 @@ func (c *CmdVoidWriteF64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWritePtrs struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_ptrs"`
 
 	A F32ᵖ
 	B U16ᵖ
@@ -5563,7 +5659,7 @@ func (c *CmdVoidWritePtrs) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteS16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_s16"`
 
 	A S16ᵖ
 }
@@ -5647,7 +5743,7 @@ func (c *CmdVoidWriteS16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteS32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_s32"`
 
 	A S32ᵖ
 }
@@ -5731,7 +5827,7 @@ func (c *CmdVoidWriteS32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteS64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_s64"`
 
 	A S64ᵖ
 }
@@ -5815,7 +5911,7 @@ func (c *CmdVoidWriteS64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteS8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_s8"`
 
 	A S8ᵖ
 }
@@ -5899,7 +5995,7 @@ func (c *CmdVoidWriteS8) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteU16 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_u16"`
 
 	A U16ᵖ
 }
@@ -5983,7 +6079,7 @@ func (c *CmdVoidWriteU16) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteU32 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_u32"`
 
 	A U32ᵖ
 }
@@ -6067,7 +6163,7 @@ func (c *CmdVoidWriteU32) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteU64 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_u64"`
 
 	A U64ᵖ
 }
@@ -6151,7 +6247,7 @@ func (c *CmdVoidWriteU64) TypeID() atom.TypeID
 
 ```go
 type CmdVoidWriteU8 struct {
-	binary.Generate
+	binary.Generate `display:"cmd_void_write_u8"`
 
 	A U8ᵖ
 }
@@ -6307,6 +6403,22 @@ func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ
 ```
 Index returns a F32ᵖ to the i'th element in this F32ˢ.
 
+#### func (F32ˢ) OnRead
+
+```go
+func (s F32ˢ) OnRead(ϟs *gfxapi.State) F32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (F32ˢ) OnWrite
+
+```go
+func (s F32ˢ) OnWrite(ϟs *gfxapi.State) F32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (F32ˢ) Range
 
 ```go
@@ -6346,10 +6458,10 @@ String returns a string description of the F32ˢ slice.
 #### func (F32ˢ) Write
 
 ```go
-func (dst F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64
+func (s F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type F32ᵖ
 
@@ -6382,6 +6494,22 @@ func (*F32ᵖ) Class() binary.Class
 func (p F32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that F32ᵖ points to.
+
+#### func (F32ᵖ) OnRead
+
+```go
+func (p F32ᵖ) OnRead(ϟs *gfxapi.State) F32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (F32ᵖ) OnWrite
+
+```go
+func (p F32ᵖ) OnWrite(ϟs *gfxapi.State) F32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (F32ᵖ) Read
 
@@ -6487,6 +6615,22 @@ func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ
 ```
 Index returns a F64ᵖ to the i'th element in this F64ˢ.
 
+#### func (F64ˢ) OnRead
+
+```go
+func (s F64ˢ) OnRead(ϟs *gfxapi.State) F64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (F64ˢ) OnWrite
+
+```go
+func (s F64ˢ) OnWrite(ϟs *gfxapi.State) F64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (F64ˢ) Range
 
 ```go
@@ -6526,10 +6670,10 @@ String returns a string description of the F64ˢ slice.
 #### func (F64ˢ) Write
 
 ```go
-func (dst F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64
+func (s F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type F64ᵖ
 
@@ -6562,6 +6706,22 @@ func (*F64ᵖ) Class() binary.Class
 func (p F64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that F64ᵖ points to.
+
+#### func (F64ᵖ) OnRead
+
+```go
+func (p F64ᵖ) OnRead(ϟs *gfxapi.State) F64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (F64ᵖ) OnWrite
+
+```go
+func (p F64ᵖ) OnWrite(ϟs *gfxapi.State) F64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (F64ᵖ) Read
 
@@ -6750,6 +6910,22 @@ func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ
 ```
 Index returns a Intᵖ to the i'th element in this Intˢ.
 
+#### func (Intˢ) OnRead
+
+```go
+func (s Intˢ) OnRead(ϟs *gfxapi.State) Intˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Intˢ) OnWrite
+
+```go
+func (s Intˢ) OnWrite(ϟs *gfxapi.State) Intˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Intˢ) Range
 
 ```go
@@ -6789,10 +6965,10 @@ String returns a string description of the Intˢ slice.
 #### func (Intˢ) Write
 
 ```go
-func (dst Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64
+func (s Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Intᵖ
 
@@ -6825,6 +7001,22 @@ func (*Intᵖ) Class() binary.Class
 func (p Intᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Intᵖ points to.
+
+#### func (Intᵖ) OnRead
+
+```go
+func (p Intᵖ) OnRead(ϟs *gfxapi.State) Intᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Intᵖ) OnWrite
+
+```go
+func (p Intᵖ) OnWrite(ϟs *gfxapi.State) Intᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Intᵖ) Read
 
@@ -6930,6 +7122,22 @@ func (s Remappedˢ) Index(i uint64, ϟs *gfxapi.State) Remappedᵖ
 ```
 Index returns a Remappedᵖ to the i'th element in this Remappedˢ.
 
+#### func (Remappedˢ) OnRead
+
+```go
+func (s Remappedˢ) OnRead(ϟs *gfxapi.State) Remappedˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Remappedˢ) OnWrite
+
+```go
+func (s Remappedˢ) OnWrite(ϟs *gfxapi.State) Remappedˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Remappedˢ) Range
 
 ```go
@@ -6969,10 +7177,10 @@ String returns a string description of the Remappedˢ slice.
 #### func (Remappedˢ) Write
 
 ```go
-func (dst Remappedˢ) Write(src []remapped, ϟs *gfxapi.State) uint64
+func (s Remappedˢ) Write(src []remapped, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Remappedᵖ
 
@@ -7005,6 +7213,22 @@ func (*Remappedᵖ) Class() binary.Class
 func (p Remappedᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Remappedᵖ points to.
+
+#### func (Remappedᵖ) OnRead
+
+```go
+func (p Remappedᵖ) OnRead(ϟs *gfxapi.State) Remappedᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Remappedᵖ) OnWrite
+
+```go
+func (p Remappedᵖ) OnWrite(ϟs *gfxapi.State) Remappedᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Remappedᵖ) Read
 
@@ -7110,6 +7334,22 @@ func (s S16ˢ) Index(i uint64, ϟs *gfxapi.State) S16ᵖ
 ```
 Index returns a S16ᵖ to the i'th element in this S16ˢ.
 
+#### func (S16ˢ) OnRead
+
+```go
+func (s S16ˢ) OnRead(ϟs *gfxapi.State) S16ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S16ˢ) OnWrite
+
+```go
+func (s S16ˢ) OnWrite(ϟs *gfxapi.State) S16ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S16ˢ) Range
 
 ```go
@@ -7149,10 +7389,10 @@ String returns a string description of the S16ˢ slice.
 #### func (S16ˢ) Write
 
 ```go
-func (dst S16ˢ) Write(src []int16, ϟs *gfxapi.State) uint64
+func (s S16ˢ) Write(src []int16, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S16ᵖ
 
@@ -7185,6 +7425,22 @@ func (*S16ᵖ) Class() binary.Class
 func (p S16ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S16ᵖ points to.
+
+#### func (S16ᵖ) OnRead
+
+```go
+func (p S16ᵖ) OnRead(ϟs *gfxapi.State) S16ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S16ᵖ) OnWrite
+
+```go
+func (p S16ᵖ) OnWrite(ϟs *gfxapi.State) S16ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S16ᵖ) Read
 
@@ -7290,6 +7546,22 @@ func (s S32ˢ) Index(i uint64, ϟs *gfxapi.State) S32ᵖ
 ```
 Index returns a S32ᵖ to the i'th element in this S32ˢ.
 
+#### func (S32ˢ) OnRead
+
+```go
+func (s S32ˢ) OnRead(ϟs *gfxapi.State) S32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S32ˢ) OnWrite
+
+```go
+func (s S32ˢ) OnWrite(ϟs *gfxapi.State) S32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S32ˢ) Range
 
 ```go
@@ -7329,10 +7601,10 @@ String returns a string description of the S32ˢ slice.
 #### func (S32ˢ) Write
 
 ```go
-func (dst S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64
+func (s S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S32ᵖ
 
@@ -7365,6 +7637,22 @@ func (*S32ᵖ) Class() binary.Class
 func (p S32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S32ᵖ points to.
+
+#### func (S32ᵖ) OnRead
+
+```go
+func (p S32ᵖ) OnRead(ϟs *gfxapi.State) S32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S32ᵖ) OnWrite
+
+```go
+func (p S32ᵖ) OnWrite(ϟs *gfxapi.State) S32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S32ᵖ) Read
 
@@ -7470,6 +7758,22 @@ func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ
 ```
 Index returns a S64ᵖ to the i'th element in this S64ˢ.
 
+#### func (S64ˢ) OnRead
+
+```go
+func (s S64ˢ) OnRead(ϟs *gfxapi.State) S64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S64ˢ) OnWrite
+
+```go
+func (s S64ˢ) OnWrite(ϟs *gfxapi.State) S64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S64ˢ) Range
 
 ```go
@@ -7509,10 +7813,10 @@ String returns a string description of the S64ˢ slice.
 #### func (S64ˢ) Write
 
 ```go
-func (dst S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64
+func (s S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S64ᵖ
 
@@ -7545,6 +7849,22 @@ func (*S64ᵖ) Class() binary.Class
 func (p S64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S64ᵖ points to.
+
+#### func (S64ᵖ) OnRead
+
+```go
+func (p S64ᵖ) OnRead(ϟs *gfxapi.State) S64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S64ᵖ) OnWrite
+
+```go
+func (p S64ᵖ) OnWrite(ϟs *gfxapi.State) S64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S64ᵖ) Read
 
@@ -7650,6 +7970,22 @@ func (s S8ˢ) Index(i uint64, ϟs *gfxapi.State) S8ᵖ
 ```
 Index returns a S8ᵖ to the i'th element in this S8ˢ.
 
+#### func (S8ˢ) OnRead
+
+```go
+func (s S8ˢ) OnRead(ϟs *gfxapi.State) S8ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S8ˢ) OnWrite
+
+```go
+func (s S8ˢ) OnWrite(ϟs *gfxapi.State) S8ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S8ˢ) Range
 
 ```go
@@ -7689,10 +8025,10 @@ String returns a string description of the S8ˢ slice.
 #### func (S8ˢ) Write
 
 ```go
-func (dst S8ˢ) Write(src []int8, ϟs *gfxapi.State) uint64
+func (s S8ˢ) Write(src []int8, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S8ᵖ
 
@@ -7725,6 +8061,22 @@ func (*S8ᵖ) Class() binary.Class
 func (p S8ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S8ᵖ points to.
+
+#### func (S8ᵖ) OnRead
+
+```go
+func (p S8ᵖ) OnRead(ϟs *gfxapi.State) S8ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S8ᵖ) OnWrite
+
+```go
+func (p S8ᵖ) OnWrite(ϟs *gfxapi.State) S8ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S8ᵖ) Read
 
@@ -7913,6 +8265,22 @@ func (s U16ˢ) Index(i uint64, ϟs *gfxapi.State) U16ᵖ
 ```
 Index returns a U16ᵖ to the i'th element in this U16ˢ.
 
+#### func (U16ˢ) OnRead
+
+```go
+func (s U16ˢ) OnRead(ϟs *gfxapi.State) U16ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U16ˢ) OnWrite
+
+```go
+func (s U16ˢ) OnWrite(ϟs *gfxapi.State) U16ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U16ˢ) Range
 
 ```go
@@ -7952,10 +8320,10 @@ String returns a string description of the U16ˢ slice.
 #### func (U16ˢ) Write
 
 ```go
-func (dst U16ˢ) Write(src []uint16, ϟs *gfxapi.State) uint64
+func (s U16ˢ) Write(src []uint16, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U16ᵖ
 
@@ -7988,6 +8356,22 @@ func (*U16ᵖ) Class() binary.Class
 func (p U16ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U16ᵖ points to.
+
+#### func (U16ᵖ) OnRead
+
+```go
+func (p U16ᵖ) OnRead(ϟs *gfxapi.State) U16ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U16ᵖ) OnWrite
+
+```go
+func (p U16ᵖ) OnWrite(ϟs *gfxapi.State) U16ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U16ᵖ) Read
 
@@ -8093,6 +8477,22 @@ func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ
 ```
 Index returns a U32ᵖ to the i'th element in this U32ˢ.
 
+#### func (U32ˢ) OnRead
+
+```go
+func (s U32ˢ) OnRead(ϟs *gfxapi.State) U32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U32ˢ) OnWrite
+
+```go
+func (s U32ˢ) OnWrite(ϟs *gfxapi.State) U32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U32ˢ) Range
 
 ```go
@@ -8132,10 +8532,10 @@ String returns a string description of the U32ˢ slice.
 #### func (U32ˢ) Write
 
 ```go
-func (dst U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64
+func (s U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U32ᵖ
 
@@ -8168,6 +8568,22 @@ func (*U32ᵖ) Class() binary.Class
 func (p U32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U32ᵖ points to.
+
+#### func (U32ᵖ) OnRead
+
+```go
+func (p U32ᵖ) OnRead(ϟs *gfxapi.State) U32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U32ᵖ) OnWrite
+
+```go
+func (p U32ᵖ) OnWrite(ϟs *gfxapi.State) U32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U32ᵖ) Read
 
@@ -8273,6 +8689,22 @@ func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ
 ```
 Index returns a U64ᵖ to the i'th element in this U64ˢ.
 
+#### func (U64ˢ) OnRead
+
+```go
+func (s U64ˢ) OnRead(ϟs *gfxapi.State) U64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U64ˢ) OnWrite
+
+```go
+func (s U64ˢ) OnWrite(ϟs *gfxapi.State) U64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U64ˢ) Range
 
 ```go
@@ -8312,10 +8744,10 @@ String returns a string description of the U64ˢ slice.
 #### func (U64ˢ) Write
 
 ```go
-func (dst U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64
+func (s U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U64ᵖ
 
@@ -8348,6 +8780,22 @@ func (*U64ᵖ) Class() binary.Class
 func (p U64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U64ᵖ points to.
+
+#### func (U64ᵖ) OnRead
+
+```go
+func (p U64ᵖ) OnRead(ϟs *gfxapi.State) U64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U64ᵖ) OnWrite
+
+```go
+func (p U64ᵖ) OnWrite(ϟs *gfxapi.State) U64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U64ᵖ) Read
 
@@ -8453,6 +8901,22 @@ func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ
 ```
 Index returns a U8ᵖ to the i'th element in this U8ˢ.
 
+#### func (U8ˢ) OnRead
+
+```go
+func (s U8ˢ) OnRead(ϟs *gfxapi.State) U8ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U8ˢ) OnWrite
+
+```go
+func (s U8ˢ) OnWrite(ϟs *gfxapi.State) U8ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U8ˢ) Range
 
 ```go
@@ -8492,10 +8956,10 @@ String returns a string description of the U8ˢ slice.
 #### func (U8ˢ) Write
 
 ```go
-func (dst U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64
+func (s U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U8ᵖ
 
@@ -8528,6 +8992,22 @@ func (*U8ᵖ) Class() binary.Class
 func (p U8ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U8ᵖ points to.
+
+#### func (U8ᵖ) OnRead
+
+```go
+func (p U8ᵖ) OnRead(ϟs *gfxapi.State) U8ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U8ᵖ) OnWrite
+
+```go
+func (p U8ᵖ) OnWrite(ϟs *gfxapi.State) U8ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U8ᵖ) Read
 
@@ -8616,6 +9096,22 @@ func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ
 ```
 Index returns a Voidᵖ to the i'th element in this Voidˢ.
 
+#### func (Voidˢ) OnRead
+
+```go
+func (s Voidˢ) OnRead(ϟs *gfxapi.State) Voidˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Voidˢ) OnWrite
+
+```go
+func (s Voidˢ) OnWrite(ϟs *gfxapi.State) Voidˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Voidˢ) Range
 
 ```go
@@ -8676,6 +9172,22 @@ func (*Voidᵖ) Class() binary.Class
 func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Voidᵖ points to.
+
+#### func (Voidᵖ) OnRead
+
+```go
+func (p Voidᵖ) OnRead(ϟs *gfxapi.State) Voidᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Voidᵖ) OnWrite
+
+```go
+func (p Voidᵖ) OnWrite(ϟs *gfxapi.State) Voidᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Voidᵖ) Slice
 

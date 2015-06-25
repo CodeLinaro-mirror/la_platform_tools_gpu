@@ -42,3 +42,7 @@ func (s nullSlice) Slice(r Range) Slice {
 	}
 	return nullSlice(r.Size)
 }
+
+func (s nullSlice) ValidRanges() RangeList {
+	return RangeList{}
+}

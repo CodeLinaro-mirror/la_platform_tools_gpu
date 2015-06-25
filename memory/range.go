@@ -67,7 +67,7 @@ func (i Range) Overlaps(other Range) bool {
 	return s < e
 }
 
-// Intersect returns the Range that is common between this Range and other.
+// Intersect returns the range that is common between this Range and other.
 // If the two memory ranges do not intersect, then this function panics.
 func (i Range) Intersect(other Range) Range {
 	a, b := i.Span(), other.Span()
@@ -76,6 +76,15 @@ func (i Range) Intersect(other Range) Range {
 		panic(fmt.Errorf("Intervals %v and %v do not intersect", i, other))
 	}
 	return Range{Base: Pointer(s), Size: e - s}
+}
+
+// Window returns the intersection of i and win, with the origin (0) address
+// at win.Base.
+// If the two memory ranges do not intersect, then this function panics.
+func (i Range) Window(win Range) Range {
+	r := i.Intersect(win)
+	r.Base -= win.Base
+	return r
 }
 
 // First returns a Pointer to the first byte in the Range.

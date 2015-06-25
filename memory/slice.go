@@ -39,4 +39,8 @@ type Slice interface {
 	// Attempting to slice outside the range of this Slice will result in a
 	// panic.
 	Slice(r Range) Slice
+
+	// ValidRanges returns the list of slice-relative memory ranges that contain
+	// valid (non-zero) data that can be read with Get.
+	ValidRanges() RangeList
 }

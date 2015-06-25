@@ -22,6 +22,31 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 ImportCapture builds a new capture containing atoms, stores it into db and
 returns the new capture identifier.
 
+#### type BuildReport
+
+```go
+type BuildReport struct {
+	binary.Generate
+	Atoms service.AtomStreamId
+}
+```
+
+BuildReport generates a service.Report for the given capture.
+
+#### func (*BuildReport) BuildLazy
+
+```go
+func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+```
+BuildLazy writes to out the schema.Report resource resulting from the given
+ResolveReport request.
+
+#### func (*BuildReport) Class
+
+```go
+func (*BuildReport) Class() binary.Class
+```
+
 #### type Context
 
 ```go

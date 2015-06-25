@@ -8,7 +8,7 @@
 ```go
 var (
 	// Global is the default global Namespace object.
-	Global = NewNamespace(nil)
+	Global = NewNamespace()
 )
 ```
 
@@ -39,9 +39,9 @@ Namespace represents a mapping of type identifiers to their Class.
 #### func  NewNamespace
 
 ```go
-func NewNamespace(parent *Namespace) *Namespace
+func NewNamespace(fallbacks ...*Namespace) *Namespace
 ```
-NewNamespace creates a new namespace layered on top of the specified parent.
+NewNamespace creates a new namespace layered on top of the specified fallback.
 
 #### func (Namespace) Add
 
@@ -70,8 +70,8 @@ match, it will return nil.
 #### func (Namespace) Visit
 
 ```go
-func (n Namespace) Visit(visitor func(binary.ID, binary.Class))
+func (n Namespace) Visit(visitor func(binary.Class))
 ```
-Visit invokes the visitor for every id and class pair reachable through this
+Visit invokes the visitor for every class object reachable through this
 namespace. The visitor maybe be called with the same id more than once if it is
 present in multiple namespaces.

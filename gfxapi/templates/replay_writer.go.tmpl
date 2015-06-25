@@ -252,9 +252,9 @@
 */}}
 {{define "Statement"}}
   {{if IsRead $}}
-    {{Macro "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Macro "Go.Statement.Default" $}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsWrite $}}
-    {{Macro "Go.Read" $.Slice}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Macro "Go.Statement.Default" $}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsCopy $}}
     {{Error "Copy statement found outside of a Fence"}}
   {{else if IsSliceAssign $}}
@@ -318,7 +318,7 @@
   {{/* Perform the fenced statement */}}
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}}
-      ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+      ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{else}}
       {{Macro "Go.Statement" $.Statement}}
     {{end}}
