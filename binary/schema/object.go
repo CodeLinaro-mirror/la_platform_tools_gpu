@@ -68,12 +68,26 @@ func (s *Struct) Encode(e binary.Encoder, value interface{}) error {
 }
 
 func (s *Struct) Decode(d binary.Decoder) (interface{}, error) {
-	o := &Object{class: Lookup(s.ID)}
+	class := d.Lookup(s.ID)
+	if class == nil {
+		return nil, fmt.Errorf("Unknown type id %v for %s", s.ID, s)
+	}
+	o := class.New()
+	if o == nil {
+		return nil, fmt.Errorf("Nil object built by class for %s : %T", s, class)
+	}
 	return o, d.Value(o)
 }
 
 func (s *Struct) Skip(d binary.Decoder) error {
-	o := &Object{class: Lookup(s.ID)}
+	class := d.Lookup(s.ID)
+	if class == nil {
+		return fmt.Errorf("Unknown type id %v for %s", s.ID, s)
+	}
+	o := class.New()
+	if o == nil {
+		return fmt.Errorf("Nil object built by class for %s : %T", s, class)
+	}
 	return d.SkipValue(o)
 }
 
