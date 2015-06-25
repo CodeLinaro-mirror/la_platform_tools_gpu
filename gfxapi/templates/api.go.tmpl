@@ -507,7 +507,7 @@
   {{template "Go.CommentHeader" $name}}
 
   type {{$name}} struct {
-    binary.Generate
+    binary.Generate `display:"{{$.Command.Name}}"`
     observations atom.Observations
     {{range $p := $.Command.FullParameters}}
       {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
