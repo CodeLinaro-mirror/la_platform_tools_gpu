@@ -59,9 +59,11 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 // This includes all the types included in or referenced from the atom stream.
 func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
 	classes := make(service.ClassPtrArray, 0, registry.Global.Count())
-	registry.Global.Visit(func(id binary.ID, _ binary.Class) {
-		class := schema.Lookup(id)
-		classes = append(classes, class)
+	registry.Global.Visit(func(c binary.Class) {
+		class := schema.Lookup(c.ID())
+		if class != nil {
+			classes = append(classes, class)
+		}
 	})
 	return classes, nil
 }
