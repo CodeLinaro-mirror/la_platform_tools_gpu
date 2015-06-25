@@ -73,6 +73,9 @@ func apiNames(ctx *context, in *ast.API) {
 }
 
 func resolve(ctx *context) {
+	if ctx.api.Imported != nil {
+		ctx.addSymbols(ctx.api.Imported)
+	}
 	ctx.addMembers(ctx.api)
 	// First resolve enum entries
 	for _, e := range ctx.api.Enums {

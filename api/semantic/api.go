@@ -35,14 +35,15 @@ type API struct {
 	Slices       []*Slice       // the pointer types used
 	References   []*Reference   // the reference types used
 	Signatures   []*Signature   // the function signature types used
+	Imported     *Symbols       // the symbols imported into this api
 }
 
 // Import wraps an API with it's imported name.
 type Import struct {
 	owned
 	noMembers
-	Named     // the full type name
-	API   API // the API being imported
+	Named      // the full type name
+	API   *API // the API being imported
 }
 
 // Implement the Owner interface delegating member lookup to the imported API

@@ -34,7 +34,9 @@ type ASTToSemantic map[ast.Node]semantic.Node
 // errors it finds, and the returned graph may be incomplete/invalid.
 func Resolve(includes []*ast.API, symbols *semantic.Symbols, mappings ASTToSemantic) (*semantic.API, parse.ErrorList) {
 	ctx := &context{
-		api:      &semantic.API{},
+		api: &semantic.API{
+			Imported: symbols,
+		},
 		types:    map[string]semantic.Type{},
 		scope:    &scope{},
 		mappings: mappings,
@@ -46,9 +48,6 @@ func Resolve(includes []*ast.API, symbols *semantic.Symbols, mappings ASTToSeman
 				panic(err)
 			}
 		}()
-		if symbols != nil {
-			ctx.addSymbols(symbols)
-		}
 		// Register all the built in symbols
 		for _, t := range semantic.BuiltinTypes {
 			ctx.addType(t)
