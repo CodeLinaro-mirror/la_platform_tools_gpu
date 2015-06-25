@@ -113,7 +113,7 @@ func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*
 		list[i] = includes[name]
 	}
 	// Resolve all the imports
-	imports := map[string]*semantic.API{}
+	imports := &semantic.Symbols{}
 	importPaths := map[string]string{}
 	for _, api := range list {
 		for _, i := range api.Imports {
@@ -136,7 +136,7 @@ func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*
 			if len(errs) > 0 {
 				return nil, errs
 			}
-			imports[i.Name.Value] = api
+			imports.Add(i.Name.Value, api)
 			importPaths[i.Name.Value] = path
 		}
 	}

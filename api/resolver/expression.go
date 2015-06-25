@@ -122,7 +122,7 @@ func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semant
 	if !isVoid(target.Function.Return.Type) {
 		params = params[0 : len(params)-1]
 	}
-	out.Arguments = callArguments(ctx, in, in.Arguments, params, target.Function.Name)
+	out.Arguments = callArguments(ctx, in, in.Arguments, params, target.Function.Name())
 	out.Type = out.Target.Function.Return.Type
 	ctx.mappings[in] = out
 	return out
@@ -134,10 +134,10 @@ func macroCall(ctx *context, in *ast.Call, stub *macroStub) semantic.Expression 
 		return invalid{}
 	}
 	// generate a globally unique naming prefix to prevent symbol collisions
-	prefix := fmt.Sprintf("%s_%v_", stub.function.Name, ctx.uid())
+	prefix := fmt.Sprintf("%s_%v_", stub.Name(), ctx.uid())
 	params := stub.function.CallParameters()
 	var result *semantic.DeclareLocal
-	args := callArguments(ctx, in, in.Arguments, params, stub.function.Name)
+	args := callArguments(ctx, in, in.Arguments, params, stub.function.Name())
 	// switch scopes back to the one the macro was declared in to prevent symbol leak
 	callScope := ctx.scope
 	ctx.scope = stub.scope
@@ -153,11 +153,11 @@ func macroCall(ctx *context, in *ast.Call, stub *macroStub) semantic.Expression 
 			if args[i] == nil {
 				continue // will have already errored
 			}
-			l := addLocal(ctx, nil, p.Name, args[i])
+			l := addLocal(ctx, nil, p.Name(), args[i])
 			// set the unique name after symbol table injection
 			// this means that the lookups inside the macro match the local correctly
 			// but the semantic graph as a globally unique name
-			l.Local.Name = prefix + l.Local.Name
+			l.Local.Named = semantic.Named(prefix + l.Local.Name())
 			ctx.addStatement(l)
 		}
 		// evaluate the macro body in place

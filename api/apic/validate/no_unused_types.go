@@ -132,7 +132,7 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 	errors := []error{}
 	for t, used := range used {
 		if !used {
-			e := err(apiName, tokens[t], "%s declared but never used", t.Typename())
+			e := err(apiName, tokens[t], "%s declared but never used", t.Name())
 			errors = append(errors, e)
 		}
 	}

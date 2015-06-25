@@ -20,9 +20,7 @@ import "fmt"
 func Visit(node Node, visitor func(Node)) {
 	switch n := node.(type) {
 	case *API:
-		for _, c := range n.Members {
-			visitor(c)
-		}
+		(*Symbols)(&n.members).Visit(func(_ string, n Node) { visitor(n) })
 	case *ArrayAssign:
 		visitor(n.To)
 		visitor(n.Value)

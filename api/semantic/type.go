@@ -19,9 +19,8 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 // Type is the interface to any object that can act as a type to the api
 // langauge.
 type Type interface {
-	Node
-	Typename() string        // returns the full name of the type, must be unique
-	Member(Name string) Node // looks up a member by name from a type
+	Owner
+	isType() // private type tagging method
 }
 
 // Expression represents anything that can act as an expression in the api
@@ -32,42 +31,29 @@ type Expression interface {
 	ExpressionType() Type // returns the expression value type.
 }
 
-// Members wraps a map and implements part of the Type interface.
-// It is used as a mixin helper.
-type Members map[string]Node
-
-// Member returns the entry in the map that matches name, or nil if none does.
-func (t Members) Member(name string) Node {
-	m, ok := t[name]
-	if !ok {
-		return nil
-	}
-	return m
-}
-
 // Class represents an api class construct.
 type Class struct {
+	owned
+	members
 	AST         *ast.Class  // the underlying syntax node this was built from
 	Annotations             // the annotations applied to this class
-	Name        string      // the name of the class
+	Named                   // implement Child
 	Docs        []string    // the documentation for the class
 	Extends     []*Class    // the classes this extends
 	ExtendedBy  []*Class    // the classes that declared they extended this class
 	Fields      []*Field    // the set of fields the class declares
 	Methods     []*Function // the set of functions associated with the class
-	Members                 // the name->member map, to implement Type
 }
 
-// Implements Type to return the class name as the type name
-func (t Class) Typename() string { return t.Name }
+func (*Class) isType() {}
 
 // Field represents a field entry in a class.
 type Field struct {
+	owned
 	AST         *ast.Field // the underlying syntax node this was built from
 	Annotations            // the annotations applied to this field
-	Class       *Class     // the class this field belongs to
 	Type        Type       // the type the field stores
-	Name        string     // the name of the field
+	Named                  // the name of the field
 	Docs        []string   // the documentation for the field
 	Default     Expression // the default value of the field
 }
@@ -101,83 +87,101 @@ type FieldInitializer struct {
 
 // Enum represents the api enum construct.
 type Enum struct {
+	owned
+	members
+	resolved    bool
 	AST         *ast.Enum    // the underlying syntax node this was built from
 	Annotations              // the annotations applied to this enum
-	Name        string       // the type name of the enum
+	Named                    // the type name of the enum
 	Docs        []string     // the documentation for the enum
 	IsBitfield  bool         // whether this enum is actually a bitfield
 	Extends     []*Enum      // the enums this enum extends
 	Entries     []*EnumEntry // the entries of this enum
-	AllEntries  []*EnumEntry // the flattened list of all entries including inherited ones
 }
 
-// Implements Type to return the enum name as the type name
-func (t Enum) Typename() string { return t.Name }
-
-// Implements Type returning the matching enum entry if there is one.
-func (t Enum) Member(name string) Node {
-	for _, e := range t.AllEntries {
-		if e.Name == name {
-			return e
-		}
-	}
-	return nil
-}
+func (*Enum) isType() {}
 
 // EnumEntry represents a single entry in an Enum.
 type EnumEntry struct {
+	owned
 	AST   *ast.EnumEntry // the underlying syntax node this was built from
-	Enum  *Enum          // the enum this entry belongs to
-	Name  string         // the name of this entry
+	Named                // the name of this entry
 	Docs  []string       // the documentation for the enum entry
 	Value uint32         // the value this entry represents
 }
 
 // ExpressionType implements Expression returning the enum type.
 func (e *EnumEntry) ExpressionType() Type {
-	if e.Enum != nil {
-		return e.Enum
-	} else {
-		return nil
-	}
+	t, _ := e.Owner().(Type)
+	return t
 }
 
 // Pseudonym represents the type construct.
 // It acts as a type in it's own right that can carry methods, but is defined
 // in terms of another type.
 type Pseudonym struct {
+	owned
+	members     Symbols
 	AST         *ast.Pseudonym // the underlying syntax node this was built from
 	Annotations                // the annotations applied to this pseudonym
-	Name        string         // the type name
+	Named                      // the type name
 	Docs        []string       // the documentation for the pseudonym
 	To          Type           // the underlying type
 	Methods     []*Function    // the methods added directly to the pseudonym
-	Members                    // the direct members
 }
 
-// Implements Type to return the type name
-func (t Pseudonym) Typename() string { return t.Name }
+func (*Pseudonym) isType() {}
 
 // Implements Type returning the direct member if it has it, otherwise
 // delegating the lookup to the underlying type.
-func (t Pseudonym) Member(name string) Node {
-	m := t.Members.Member(name)
-	if m == nil {
-		m = t.To.Member(name)
+func (t *Pseudonym) Member(name string) Owned {
+	n, err := t.members.Find(name)
+	if err != nil {
+		// TODO: propagate errors from this function
+		return nil
 	}
-	return m
+	if n != nil {
+		return n.(Owned)
+	}
+	return t.To.Member(name)
 }
+
+func (t *Pseudonym) addMember(child Owned) {
+	t.members.AddNamed(child)
+}
+
+func (t *Pseudonym) VisitMembers(visitor func(Owned)) {
+	t.members.sort()
+	for _, e := range t.members.entries {
+		visitor(e.node.(Owned))
+	}
+	t.To.VisitMembers(visitor)
+}
+
+// Alias is used as a temporary type holder during type resolution.
+// It is not present in the final semantic tree returned, but may be present
+// in the AST -> semantic map.
+type Alias struct {
+	owned
+	noMembers
+	AST *ast.Alias
+	Named
+	To Type
+}
+
+func (*Alias) isType() {}
 
 // StaticArray represents a multi-dimensional fixed size array type, of the
 // form T[8]
 type StaticArray struct {
-	Name      string // the full type name
+	owned
+	noMembers
+	Named            // the full type name
 	ValueType Type   // the storage type of the elements
 	Size      uint32 // the dimension of the array
 }
 
-func (t StaticArray) Typename() string        { return t.Name }
-func (t StaticArray) Member(name string) Node { return nil }
+func (*StaticArray) isType() {}
 
 // ArrayInitializer represents an expression that creates a new StaticArray
 // instance using a value list, of the form T(v0, v1, v2)
@@ -195,59 +199,76 @@ func (c *ArrayInitializer) ExpressionType() Type {
 // Map represents an api map type declaration, of the form
 // map!(KeyType, ValueType)
 type Map struct {
-	Name      string // the full type name
-	KeyType   Type   // the type used as an indexing key
-	ValueType Type   // the type stored in the map
-	Members          // holds the map built-in methods
+	owned
+	members
+	Named          // the full type name
+	KeyType   Type // the type used as an indexing key
+	ValueType Type // the type stored in the map
 }
 
-func (t Map) Typename() string { return t.Name }
+func (*Map) isType() {}
 
 // Pointer represents an api pointer type declaration, of the form To*
 type Pointer struct {
-	Name  string // the full type name
+	owned
+	noAddMembers
+	Named        // the full type name
 	To    Type   // the type this is a pointer to
 	Const bool   // wether the pointer was declared with the const attribute
 	Slice *Slice // The complementary slice type for this pointer.
 }
 
-func (t Pointer) Typename() string { return t.Name }
-func (t Pointer) Member(name string) Node {
+func (*Pointer) isType() {}
+
+func (t *Pointer) Member(name string) Owned {
 	return t.To.Member(name)
+}
+
+func (t *Pointer) VisitMembers(visitor func(Owned)) {
+	t.To.VisitMembers(visitor)
 }
 
 // Slice represents an api slice type declaration, of the form To[]
 type Slice struct {
-	Name    string   // the full type name
+	owned
+	noMembers
+	Named            // the full type name
 	To      Type     // The type this is a slice of
 	Pointer *Pointer // The complementary pointer type for this slice.
 }
 
-func (t Slice) Typename() string        { return t.Name }
-func (t Slice) Member(name string) Node { return nil }
+func (*Slice) isType() {}
 
 // Reference represents an api reference type declaration, of the form
 // ref!To
 type Reference struct {
-	Name string // the full type name
-	To   Type   // the type this is a reference to
+	owned
+	noAddMembers
+	Named      // the full type name
+	To    Type // the type this is a reference to
 }
 
-func (t Reference) Typename() string { return t.Name }
-func (t Reference) Member(name string) Node {
+func (*Reference) isType() {}
+
+func (t *Reference) Member(name string) Owned {
 	return t.To.Member(name)
+}
+
+func (t *Reference) VisitMembers(visitor func(Owned)) {
+	t.To.VisitMembers(visitor)
 }
 
 // Builtin represents one of the primitive types.
 type Builtin struct {
-	Name string // the primitive type name
+	owned
+	noMembers
+	Named // the primitive type name
 }
 
-func (t Builtin) Typename() string        { return t.Name }
-func (t Builtin) Member(name string) Node { return nil }
+func (*Builtin) isType() {}
 
 func builtin(name string) *Builtin {
-	b := &Builtin{Name: name}
+	b := &Builtin{Named: Named(name)}
 	BuiltinTypes = append(BuiltinTypes, b)
 	return b
 }

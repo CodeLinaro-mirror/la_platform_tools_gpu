@@ -24,61 +24,63 @@ import (
 func apiNames(ctx *context, in *ast.API) {
 	// Build and register the high level semantic objects
 	for _, e := range in.Enums {
-		n := &semantic.Enum{AST: e, Name: e.Name.Value}
+		n := &semantic.Enum{AST: e, Named: semantic.Named(e.Name.Value)}
 		ctx.api.Enums = append(ctx.api.Enums, n)
-		ctx.api.Members[n.Name] = n
+		semantic.Add(ctx.api, n)
 		ctx.addType(n)
 	}
 	for _, c := range in.Classes {
-		n := &semantic.Class{AST: c, Name: c.Name.Value, Members: semantic.Members{}}
+		n := &semantic.Class{AST: c, Named: semantic.Named(c.Name.Value)}
 		ctx.api.Classes = append(ctx.api.Classes, n)
-		ctx.api.Members[n.Name] = n
+		semantic.Add(ctx.api, n)
 		ctx.addType(n)
 	}
 	for _, p := range in.Pseudonyms {
-		n := &semantic.Pseudonym{AST: p, Name: p.Name.Value, Members: semantic.Members{}}
+		n := &semantic.Pseudonym{AST: p, Named: semantic.Named(p.Name.Value)}
 		ctx.api.Pseudonyms = append(ctx.api.Pseudonyms, n)
-		ctx.api.Members[n.Name] = n
+		semantic.Add(ctx.api, n)
 		ctx.addType(n)
 	}
 	for _, m := range in.Macros {
 		stub := &macroStub{}
 		ctx.macros = append(ctx.macros, stub)
-		stub.function = &semantic.Function{AST: m, Name: m.Name.Value}
-		ctx.add(stub.function.Name, stub)
+		stub.function = &semantic.Function{AST: m, Named: semantic.Named(m.Name.Value)}
+		ctx.addNamed(stub)
 	}
 	for _, e := range in.Externs {
-		n := &semantic.Function{AST: e, Name: e.Name.Value}
+		n := &semantic.Function{AST: e, Named: semantic.Named(e.Name.Value)}
 		ctx.api.Externs = append(ctx.api.Externs, n)
-		ctx.api.Members[n.Name] = n
+		semantic.Add(ctx.api, n)
 	}
 	for _, m := range in.Commands {
-		f := &semantic.Function{AST: m, Name: m.Name.Value}
+		f := &semantic.Function{AST: m, Named: semantic.Named(m.Name.Value)}
 		if !m.Parameters[0].This {
 			ctx.api.Functions = append(ctx.api.Functions, f)
-			ctx.api.Members[f.Name] = f
+			semantic.Add(ctx.api, f)
 		} else {
 			ctx.api.Methods = append(ctx.api.Methods, f)
 		}
 	}
 	for _, f := range in.Fields {
-		n := &semantic.Global{AST: f, Name: f.Name.Value}
+		n := &semantic.Global{AST: f, Named: semantic.Named(f.Name.Value)}
 		ctx.api.Globals = append(ctx.api.Globals, n)
-		ctx.api.Members[n.Name] = n
+		semantic.Add(ctx.api, n)
 	}
 	// Add all the alias remaps
 	for _, a := range in.Aliases {
-		ctx.addType(&Alias{AST: a, Name: a.Name.Value})
+		ctx.addType(&semantic.Alias{AST: a, Named: semantic.Named(a.Name.Value)})
 	}
 }
 
 func resolve(ctx *context) {
-	for name, member := range ctx.api.Members {
-		ctx.add(name, member)
-	}
-	// Now resolve all the references
+	ctx.addMembers(ctx.api)
+	// First resolve enum entries
 	for _, e := range ctx.api.Enums {
 		enum(ctx, e)
+	}
+	// Now build collapsed enum lists
+	for _, e := range ctx.api.Enums {
+		enumEntries(ctx, e, e)
 	}
 	for _, g := range ctx.api.Globals {
 		global(ctx, g)
@@ -114,7 +116,7 @@ func annotations(ctx *context, in ast.Annotations) semantic.Annotations {
 	}
 	out := semantic.Annotations{}
 	for _, a := range in {
-		entry := &semantic.Annotation{AST: a, Name: a.Name.Value}
+		entry := &semantic.Annotation{AST: a, Named: semantic.Named(a.Name.Value)}
 		for _, arg := range a.Arguments {
 			entry.Arguments = append(entry.Arguments, expression(ctx, arg))
 		}
@@ -143,28 +145,16 @@ func global(ctx *context, out *semantic.Global) {
 	ctx.mappings[in] = out
 }
 
-// Alias is used as a temporary type holder during type resolution.
-// It is not present in the final semantic tree returned, but may be present
-// in the AST -> semantic map.
-type Alias struct {
-	AST  *ast.Alias
-	Name string
-	To   semantic.Type
-}
-
-func (t Alias) Typename() string                 { return t.Name }
-func (t Alias) Member(name string) semantic.Node { return nil }
-
 // slicesByName is used to sort the slice list by name for generated code stability
 type slicesByName []*semantic.Slice
 
 func (a slicesByName) Len() int           { return len(a) }
 func (a slicesByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a slicesByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
+func (a slicesByName) Less(i, j int) bool { return a[i].Name() < a[j].Name() }
 
 // mapsByName is used to sort the map list by name for generated code stability
 type mapsByName []*semantic.Map
 
 func (a mapsByName) Len() int           { return len(a) }
 func (a mapsByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a mapsByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
+func (a mapsByName) Less(i, j int) bool { return a[i].Name() < a[j].Name() }

@@ -18,11 +18,11 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 
 // Function represents function like objects in the semantic graph.
 type Function struct {
+	owned
 	AST            *ast.Function // the underlying syntax node this was built from
 	Annotations                  // the annotations applied to the function
-	Name           string        // the name of the function
+	Named                        // the name of the function
 	Docs           []string      // the documentation for the function
-	Owner          Type          // the owner of the function
 	Return         *Parameter    // the return parameter
 	This           *Parameter    // the this parameter, missing for non method functions
 	FullParameters []*Parameter  // all the parameters, including This at the start if valid, and Return at the end if not void
@@ -44,7 +44,7 @@ type Parameter struct {
 	AST         *ast.Parameter // the underlying syntax node this was built from
 	Annotations                // the annotations applied to the parameter
 	Function    *Function      // the function this parameter belongs to
-	Name        string         // the name of the parameter
+	Named                      // the name of the parameter
 	Docs        []string       // the documentation for the parameter
 	Type        Type           // the type of the parameter
 }
@@ -95,10 +95,11 @@ func (c *Call) ExpressionType() Type { return c.Type }
 
 // Signature represents a callable type signature
 type Signature struct {
-	Name      string // the full type name
+	owned
+	noMembers
+	Named            // the full type name
 	Return    Type   // the return type of the callable
 	Arguments []Type // the required callable arguments
 }
 
-func (t Signature) Typename() string      { return t.Name }
-func (Signature) Member(name string) Node { return nil }
+func (*Signature) isType() {}

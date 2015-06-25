@@ -20,7 +20,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
-	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
 func TestStaticArrays(t *testing.T) {
@@ -65,7 +64,7 @@ cmd void foo() { a := A(1,2,3) i := a[3] }`,
 			t.Errorf("Testing '%s' - Unexpected parse errors: %v", test.name, errs)
 			continue
 		}
-		_, errs = Resolve([]*ast.API{astAPI}, map[string]*semantic.API{}, ASTToSemantic{})
+		_, errs = Resolve([]*ast.API{astAPI}, nil, ASTToSemantic{})
 		matched := len(errs) == len(test.errors)
 		if matched {
 			for i, err := range errs {

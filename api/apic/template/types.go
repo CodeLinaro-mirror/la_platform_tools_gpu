@@ -117,7 +117,7 @@ func init() {
 func initNodeTypes(f *Functions) {
 	for _, b := range semantic.BuiltinTypes {
 		b := b
-		name := "Is" + strings.Title(b.Name)
+		name := "Is" + strings.Title(b.Name())
 		f.funcs[name] = func(t semantic.Type) bool {
 			return t == b
 		}

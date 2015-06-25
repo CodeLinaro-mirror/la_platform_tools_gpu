@@ -127,14 +127,14 @@ func addLocal(ctx *context, in *ast.DeclareLocal, name string, value semantic.Ex
 	out := &semantic.DeclareLocal{AST: in}
 	out.Local = &semantic.Local{
 		Declaration: out,
-		Name:        name,
+		Named:       semantic.Named(name),
 		Value:       value,
 		Type:        value.ExpressionType(),
 	}
 	if isVoid(out.Local.Type) {
 		ctx.errorf(in, "void in local declaration")
 	}
-	ctx.add(out.Local.Name, out.Local)
+	ctx.addNamed(out.Local)
 	ctx.mappings[in] = out
 	return out
 }
@@ -194,7 +194,7 @@ func case_(ctx *context, in *ast.Case, vt semantic.Type) *semantic.Case {
 }
 
 func iteration(ctx *context, in *ast.Iteration) *semantic.Iteration {
-	v := &semantic.Local{Name: in.Variable.Value}
+	v := &semantic.Local{Named: semantic.Named(in.Variable.Value)}
 	ctx.mappings[in.Variable] = v
 	out := &semantic.Iteration{AST: in, Iterator: v}
 	out.Iterable = expression(ctx, in.Iterable)
@@ -205,7 +205,7 @@ func iteration(ctx *context, in *ast.Iteration) *semantic.Iteration {
 	}
 	v.Type = out.Iterable.ExpressionType()
 	ctx.with(semantic.VoidType, func() {
-		ctx.add(v.Name, v)
+		ctx.addNamed(v)
 		out.Block = block(ctx, in.Block, out)
 	})
 	ctx.mappings[in] = out

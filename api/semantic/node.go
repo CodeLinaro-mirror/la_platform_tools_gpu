@@ -16,3 +16,74 @@ package semantic
 
 // Node represents any semantic-tree node type.
 type Node interface{}
+
+// NamedNode represents any semantic-tree node that carries a name.
+type NamedNode interface {
+	Node
+	Name() string // Returns the partial name of the object.
+}
+
+// Owned is the interface to an object with a unique name and an owner.
+type Owned interface {
+	NamedNode
+	Owner() Owner   // Returns the owner of this node.
+	setOwner(Owner) // hidden method that sets the owner of a child
+}
+
+// Owner is the interface for an object that has named members.
+type Owner interface {
+	NamedNode
+	Member(string) Owned      // looks up a member by name from an owner
+	VisitMembers(func(Owned)) // invokes the supplied function once for each member
+	addMember(Owned)          // hidden method that adds a child to an owner
+}
+
+// Add connects an Owned to its Owner.
+func Add(p Owner, c Owned) {
+	p.addMember(c)
+	c.setOwner(p)
+}
+
+// Named is mixed in to implement the Name method of NamedNode.
+type Named string
+
+func (n Named) Name() string { return string(n) }
+
+type owned struct {
+	owner Owner
+}
+
+func (o *owned) Owner() Owner         { return o.owner }
+func (o *owned) setOwner(owner Owner) { o.owner = owner }
+
+type members Symbols
+
+func (m *members) Member(name string) Owned {
+	n, err := (*Symbols)(m).Find(name)
+	if err != nil {
+		// TODO: propagate errors from this function
+		return nil
+	}
+	o, _ := n.(Owned)
+	return o
+}
+
+func (m *members) addMember(child Owned) {
+	(*Symbols)(m).AddNamed(child)
+}
+
+func (m *members) VisitMembers(visitor func(Owned)) {
+	(*Symbols)(m).sort()
+	for _, e := range (*Symbols)(m).entries {
+		visitor(e.node.(Owned))
+	}
+}
+
+type noAddMembers struct{}
+
+func (noAddMembers) addMember(Owned) { panic("Not allowed members") }
+
+type noMembers struct{ noAddMembers }
+
+func (noMembers) Member(string) Owned      { return nil }
+func (noMembers) VisitMembers(func(Owned)) {}

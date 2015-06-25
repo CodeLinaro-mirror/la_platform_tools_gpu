@@ -23,9 +23,9 @@
   {{AssertType $ "Function"}}
 
   {{if $p := Global "prefix"}}
-    {{$p}}{{if $.Owner}}{{Title $.Owner.Typename}}{{end}}{{Title $.Name}}
+    {{$p}}{{if $.Owner.Name}}{{Title $.Owner.Name}}{{end}}{{Title $.Name}}
   {{else}}
-    {{if $.Owner}}{{$.Owner.Typename}}{{Title $.Name}}
+    {{if $.Owner.Name}}{{$.Owner.Name}}{{Title $.Name}}
     {{else}}{{$.Name}}
     {{end}}
   {{end}}
