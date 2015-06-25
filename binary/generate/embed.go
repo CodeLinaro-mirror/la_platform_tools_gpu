@@ -338,7 +338,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 		} {{end}}
 
 {{define "Go.Schema.Primitive"}}&{{SchemaPrefix}}Primitive{ Name: "{{.Name}}", Method: {{SchemaPrefix}}{{.Method}} }{{end}}
-{{define "Go.Schema.Struct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Struct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
 {{define "Go.Schema.Pointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
 {{define "Go.Schema.Interface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Slice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
