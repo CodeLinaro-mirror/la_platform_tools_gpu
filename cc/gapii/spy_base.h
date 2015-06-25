@@ -70,10 +70,6 @@ protected:
     template <typename T>
     inline void write(const Slice<T>& dst, uint64_t i, const T& value);
 
-    // writes an array-value to i'th element in the slice dst.
-    template <typename T, size_t N>
-    inline void write(const Slice<T[N]>& dst, uint64_t i, const T(&value)[N]);
-
     // copy copies N elements from src to dst, where N is the smaller of src.count() and
     // dst.count().
     // copy observes the sub-slice of src as a read operation.
@@ -118,6 +114,19 @@ protected:
     EncoderSPtr mEncoder;       // The output stream encoder.
 
 private:
+    // writes a value to i'th element in the slice dst.
+    // To disambiguate the overloads of write_, void* is used as a dummy last parameter so that the
+    // T[N] overload is preferred (but not an option for non-array T types).
+    template <typename T>
+    inline void write_(const Slice<T>& dst, uint64_t i, const T& value, void*);
+
+    // writes an array-value to i'th element in the slice dst.
+    // To disambiguate the overloads of write_, int is used as a dummy last parameter so that the
+    // T[N] overload is preferred (but not an option for non-array T types).
+    template <typename T, size_t N>
+    inline void write_(const Slice<T[N]>& dst, uint64_t i, const T(&value)[N], int);
+
+
     // The list of pending reads or writes observations that are yet to be made.
     gapic::IntervalList<uintptr_t> mPendingObservations;
 
@@ -150,6 +159,11 @@ inline void SpyBase::write(const Slice<T>& slice) {
 
 template<typename T>
 inline void SpyBase::write(const Slice<T>& dst, uint64_t index, const T& value) {
+    write_(dst, index, value, 0);
+}
+
+template<typename T>
+inline void SpyBase::write_(const Slice<T>& dst, uint64_t index, const T& value, void*) {
     if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
         dst[index] = value;
     } else {
@@ -158,7 +172,7 @@ inline void SpyBase::write(const Slice<T>& dst, uint64_t index, const T& value) 
 }
 
 template <typename T, size_t N>
-inline void SpyBase::write(const Slice<T[N]>& dst, uint64_t index, const T(&value)[N]) {
+inline void SpyBase::write_(const Slice<T[N]>& dst, uint64_t index, const T(&value)[N], int) {
     if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
         for (size_t i = 0; i < N; i++) {
             dst[index][i] = value[i];
