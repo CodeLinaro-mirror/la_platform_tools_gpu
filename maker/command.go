@@ -57,7 +57,11 @@ func Command(binary Entity, args ...string) *Step {
 				log.Printf("• %s", v)
 			}
 		}
-		return cmd.Run()
+		err := cmd.Run()
+		if err != nil {
+			return fmt.Errorf("Command: \"%v %v\" %v", binary, strings.Join(cmd.Args, " "), err)
+		}
+		return nil
 	}).DependsOn(binary)
 }
 

@@ -149,7 +149,7 @@ func (s *Step) AlwaysRun() *Step {
 	return s
 }
 
-// String returns the name of the first output if present, for debugging.
+// String returns the name of the first output if present, for logging.
 func (s *Step) String() string {
 	if len(s.outputs) > 0 {
 		return s.outputs[0].Name()
@@ -212,7 +212,11 @@ func (s *Step) updateInputs() {
 	for _, dep := range deps {
 		<-dep.done
 		if dep.err != nil && s.err == nil {
-			s.err = fmt.Errorf("failed in %s", dep)
+			if dep.String() != "" {
+				Errors.Add(s, fmt.Errorf("%v in %s", dep.err, dep))
+			} else {
+				Errors.Add(s, dep.err)
+			}
 		}
 	}
 }
@@ -247,7 +251,7 @@ func (s *Step) run() {
 		return
 	}
 	if err := s.action(s); err != nil {
-		Errors.Add(s, err)
+		log.Printf("Error: %s", Errors.Add(s, err))
 	}
 	// Mark all our ouptuts as potentially updated
 	for _, e := range s.outputs {
