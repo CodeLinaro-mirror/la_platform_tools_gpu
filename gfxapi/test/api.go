@@ -2612,10 +2612,10 @@ func (s Voidˢ) String() string {
 // CmdClone
 ////////////////////////////////////////////////////////////////////////////////
 type CmdClone struct {
-	binary.Generate
-	observations atom.Observations
-	Src          U8ᵖ
-	Cnt          uint32
+	binary.Generate `display:"cmd_clone"`
+	observations    atom.Observations
+	Src             U8ᵖ
+	Cnt             uint32
 }
 
 func (a *CmdClone) String() string {
@@ -2646,9 +2646,9 @@ func (a *CmdClone) Observations() *atom.Observations { return &a.observations }
 // CmdMake
 ////////////////////////////////////////////////////////////////////////////////
 type CmdMake struct {
-	binary.Generate
-	observations atom.Observations
-	Cnt          uint32
+	binary.Generate `display:"cmd_make"`
+	observations    atom.Observations
+	Cnt             uint32
 }
 
 func (a *CmdMake) String() string {
@@ -2679,10 +2679,10 @@ func (a *CmdMake) Observations() *atom.Observations { return &a.observations }
 // CmdCopy
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCopy struct {
-	binary.Generate
-	observations atom.Observations
-	Src          U8ᵖ
-	Cnt          uint32
+	binary.Generate `display:"cmd_copy"`
+	observations    atom.Observations
+	Src             U8ᵖ
+	Cnt             uint32
 }
 
 func (a *CmdCopy) String() string {
@@ -2713,10 +2713,10 @@ func (a *CmdCopy) Observations() *atom.Observations { return &a.observations }
 // CmdCharsliceToString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCharsliceToString struct {
-	binary.Generate
-	observations atom.Observations
-	S            Charᵖ
-	Len          uint32
+	binary.Generate `display:"cmd_charslice_to_string"`
+	observations    atom.Observations
+	S               Charᵖ
+	Len             uint32
 }
 
 func (a *CmdCharsliceToString) String() string {
@@ -2747,9 +2747,9 @@ func (a *CmdCharsliceToString) Observations() *atom.Observations { return &a.obs
 // CmdCharptrToString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCharptrToString struct {
-	binary.Generate
-	observations atom.Observations
-	S            Charᵖ
+	binary.Generate `display:"cmd_charptr_to_string"`
+	observations    atom.Observations
+	S               Charᵖ
 }
 
 func (a *CmdCharptrToString) String() string {
@@ -2780,10 +2780,10 @@ func (a *CmdCharptrToString) Observations() *atom.Observations { return &a.obser
 // CmdSliceCasts
 ////////////////////////////////////////////////////////////////////////////////
 type CmdSliceCasts struct {
-	binary.Generate
-	observations atom.Observations
-	S            U16ᵖ
-	L            uint32
+	binary.Generate `display:"cmd_slice_casts"`
+	observations    atom.Observations
+	S               U16ᵖ
+	L               uint32
 }
 
 func (a *CmdSliceCasts) String() string {
@@ -2814,8 +2814,8 @@ func (a *CmdSliceCasts) Observations() *atom.Observations { return &a.observatio
 // CmdVoid
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid struct {
-	binary.Generate
-	observations atom.Observations
+	binary.Generate `display:"cmd_void"`
+	observations    atom.Observations
 }
 
 func (a *CmdVoid) String() string {
@@ -2846,9 +2846,9 @@ func (a *CmdVoid) Observations() *atom.Observations { return &a.observations }
 // CmdUnknownRet
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownRet struct {
-	binary.Generate
-	observations atom.Observations
-	Result       int64
+	binary.Generate `display:"cmd_unknown_ret"`
+	observations    atom.Observations
+	Result          int64
 }
 
 func (a *CmdUnknownRet) String() string {
@@ -2879,9 +2879,9 @@ func (a *CmdUnknownRet) Observations() *atom.Observations { return &a.observatio
 // CmdUnknownWritePtr
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownWritePtr struct {
-	binary.Generate
-	observations atom.Observations
-	P            Intᵖ
+	binary.Generate `display:"cmd_unknown_write_ptr"`
+	observations    atom.Observations
+	P               Intᵖ
 }
 
 func (a *CmdUnknownWritePtr) String() string {
@@ -2912,9 +2912,9 @@ func (a *CmdUnknownWritePtr) Observations() *atom.Observations { return &a.obser
 // CmdUnknownWriteSlice
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownWriteSlice struct {
-	binary.Generate
-	observations atom.Observations
-	A            Intᵖ
+	binary.Generate `display:"cmd_unknown_write_slice"`
+	observations    atom.Observations
+	A               Intᵖ
 }
 
 func (a *CmdUnknownWriteSlice) String() string {
@@ -2945,9 +2945,9 @@ func (a *CmdUnknownWriteSlice) Observations() *atom.Observations { return &a.obs
 // CmdVoidU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            uint8
+	binary.Generate `display:"cmd_void_u8"`
+	observations    atom.Observations
+	A               uint8
 }
 
 func (a *CmdVoidU8) String() string {
@@ -2978,9 +2978,9 @@ func (a *CmdVoidU8) Observations() *atom.Observations { return &a.observations }
 // CmdVoidS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            int8
+	binary.Generate `display:"cmd_void_s8"`
+	observations    atom.Observations
+	A               int8
 }
 
 func (a *CmdVoidS8) String() string {
@@ -3011,9 +3011,9 @@ func (a *CmdVoidS8) Observations() *atom.Observations { return &a.observations }
 // CmdVoidU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            uint16
+	binary.Generate `display:"cmd_void_u16"`
+	observations    atom.Observations
+	A               uint16
 }
 
 func (a *CmdVoidU16) String() string {
@@ -3044,9 +3044,9 @@ func (a *CmdVoidU16) Observations() *atom.Observations { return &a.observations 
 // CmdVoidS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            int16
+	binary.Generate `display:"cmd_void_s16"`
+	observations    atom.Observations
+	A               int16
 }
 
 func (a *CmdVoidS16) String() string {
@@ -3077,9 +3077,9 @@ func (a *CmdVoidS16) Observations() *atom.Observations { return &a.observations 
 // CmdVoidF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            float32
+	binary.Generate `display:"cmd_void_f32"`
+	observations    atom.Observations
+	A               float32
 }
 
 func (a *CmdVoidF32) String() string {
@@ -3110,9 +3110,9 @@ func (a *CmdVoidF32) Observations() *atom.Observations { return &a.observations 
 // CmdVoidU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            uint32
+	binary.Generate `display:"cmd_void_u32"`
+	observations    atom.Observations
+	A               uint32
 }
 
 func (a *CmdVoidU32) String() string {
@@ -3143,9 +3143,9 @@ func (a *CmdVoidU32) Observations() *atom.Observations { return &a.observations 
 // CmdVoidS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            int32
+	binary.Generate `display:"cmd_void_s32"`
+	observations    atom.Observations
+	A               int32
 }
 
 func (a *CmdVoidS32) String() string {
@@ -3176,9 +3176,9 @@ func (a *CmdVoidS32) Observations() *atom.Observations { return &a.observations 
 // CmdVoidF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            float64
+	binary.Generate `display:"cmd_void_f64"`
+	observations    atom.Observations
+	A               float64
 }
 
 func (a *CmdVoidF64) String() string {
@@ -3209,9 +3209,9 @@ func (a *CmdVoidF64) Observations() *atom.Observations { return &a.observations 
 // CmdVoidU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            uint64
+	binary.Generate `display:"cmd_void_u64"`
+	observations    atom.Observations
+	A               uint64
 }
 
 func (a *CmdVoidU64) String() string {
@@ -3242,9 +3242,9 @@ func (a *CmdVoidU64) Observations() *atom.Observations { return &a.observations 
 // CmdVoidS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            int64
+	binary.Generate `display:"cmd_void_s64"`
+	observations    atom.Observations
+	A               int64
 }
 
 func (a *CmdVoidS64) String() string {
@@ -3275,9 +3275,9 @@ func (a *CmdVoidS64) Observations() *atom.Observations { return &a.observations 
 // CmdVoidBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidBool struct {
-	binary.Generate
-	observations atom.Observations
-	A            bool
+	binary.Generate `display:"cmd_void_bool"`
+	observations    atom.Observations
+	A               bool
 }
 
 func (a *CmdVoidBool) String() string {
@@ -3308,9 +3308,9 @@ func (a *CmdVoidBool) Observations() *atom.Observations { return &a.observations
 // CmdVoidString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidString struct {
-	binary.Generate
-	observations atom.Observations
-	A            string
+	binary.Generate `display:"cmd_void_string"`
+	observations    atom.Observations
+	A               string
 }
 
 func (a *CmdVoidString) String() string {
@@ -3341,11 +3341,11 @@ func (a *CmdVoidString) Observations() *atom.Observations { return &a.observatio
 // CmdVoid3Strings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Strings struct {
-	binary.Generate
-	observations atom.Observations
-	A            string
-	B            string
-	C            string
+	binary.Generate `display:"cmd_void_3_strings"`
+	observations    atom.Observations
+	A               string
+	B               string
+	C               string
 }
 
 func (a *CmdVoid3Strings) String() string {
@@ -3376,11 +3376,11 @@ func (a *CmdVoid3Strings) Observations() *atom.Observations { return &a.observat
 // CmdVoid3InArrays
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3InArrays struct {
-	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
-	B            U32ᵖ
-	C            Intᵖ
+	binary.Generate `display:"cmd_void_3_in_arrays"`
+	observations    atom.Observations
+	A               U8ᵖ
+	B               U32ᵖ
+	C               Intᵖ
 }
 
 func (a *CmdVoid3InArrays) String() string {
@@ -3411,10 +3411,10 @@ func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observa
 // CmdVoidInArrayOfPointers
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidInArrayOfPointers struct {
-	binary.Generate
-	observations atom.Observations
-	A            Charᵖᵖ
-	Count        int32
+	binary.Generate `display:"cmd_void_in_array_of_pointers"`
+	observations    atom.Observations
+	A               Charᵖᵖ
+	Count           int32
 }
 
 func (a *CmdVoidInArrayOfPointers) String() string {
@@ -3445,9 +3445,9 @@ func (a *CmdVoidInArrayOfPointers) Observations() *atom.Observations { return &a
 // CmdVoidReadU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
+	binary.Generate `display:"cmd_void_read_u8"`
+	observations    atom.Observations
+	A               U8ᵖ
 }
 
 func (a *CmdVoidReadU8) String() string {
@@ -3478,9 +3478,9 @@ func (a *CmdVoidReadU8) Observations() *atom.Observations { return &a.observatio
 // CmdVoidReadS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S8ᵖ
+	binary.Generate `display:"cmd_void_read_s8"`
+	observations    atom.Observations
+	A               S8ᵖ
 }
 
 func (a *CmdVoidReadS8) String() string {
@@ -3511,9 +3511,9 @@ func (a *CmdVoidReadS8) Observations() *atom.Observations { return &a.observatio
 // CmdVoidReadU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U16ᵖ
+	binary.Generate `display:"cmd_void_read_u16"`
+	observations    atom.Observations
+	A               U16ᵖ
 }
 
 func (a *CmdVoidReadU16) String() string {
@@ -3544,9 +3544,9 @@ func (a *CmdVoidReadU16) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S16ᵖ
+	binary.Generate `display:"cmd_void_read_s16"`
+	observations    atom.Observations
+	A               S16ᵖ
 }
 
 func (a *CmdVoidReadS16) String() string {
@@ -3577,9 +3577,9 @@ func (a *CmdVoidReadS16) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadF32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
+	binary.Generate `display:"cmd_void_read_f32"`
+	observations    atom.Observations
+	A               F32ᵖ
 }
 
 func (a *CmdVoidReadF32) String() string {
@@ -3610,9 +3610,9 @@ func (a *CmdVoidReadF32) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U32ᵖ
+	binary.Generate `display:"cmd_void_read_u32"`
+	observations    atom.Observations
+	A               U32ᵖ
 }
 
 func (a *CmdVoidReadU32) String() string {
@@ -3643,9 +3643,9 @@ func (a *CmdVoidReadU32) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S32ᵖ
+	binary.Generate `display:"cmd_void_read_s32"`
+	observations    atom.Observations
+	A               S32ᵖ
 }
 
 func (a *CmdVoidReadS32) String() string {
@@ -3676,9 +3676,9 @@ func (a *CmdVoidReadS32) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadF64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            F64ᵖ
+	binary.Generate `display:"cmd_void_read_f64"`
+	observations    atom.Observations
+	A               F64ᵖ
 }
 
 func (a *CmdVoidReadF64) String() string {
@@ -3709,9 +3709,9 @@ func (a *CmdVoidReadF64) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U64ᵖ
+	binary.Generate `display:"cmd_void_read_u64"`
+	observations    atom.Observations
+	A               U64ᵖ
 }
 
 func (a *CmdVoidReadU64) String() string {
@@ -3742,9 +3742,9 @@ func (a *CmdVoidReadU64) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S64ᵖ
+	binary.Generate `display:"cmd_void_read_s64"`
+	observations    atom.Observations
+	A               S64ᵖ
 }
 
 func (a *CmdVoidReadS64) String() string {
@@ -3775,9 +3775,9 @@ func (a *CmdVoidReadS64) Observations() *atom.Observations { return &a.observati
 // CmdVoidReadBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadBool struct {
-	binary.Generate
-	observations atom.Observations
-	A            Boolᵖ
+	binary.Generate `display:"cmd_void_read_bool"`
+	observations    atom.Observations
+	A               Boolᵖ
 }
 
 func (a *CmdVoidReadBool) String() string {
@@ -3808,11 +3808,11 @@ func (a *CmdVoidReadBool) Observations() *atom.Observations { return &a.observat
 // CmdVoidReadPtrs
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadPtrs struct {
-	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
-	B            U16ᵖ
-	C            Boolᵖ
+	binary.Generate `display:"cmd_void_read_ptrs"`
+	observations    atom.Observations
+	A               F32ᵖ
+	B               U16ᵖ
+	C               Boolᵖ
 }
 
 func (a *CmdVoidReadPtrs) String() string {
@@ -3843,9 +3843,9 @@ func (a *CmdVoidReadPtrs) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
+	binary.Generate `display:"cmd_void_write_u8"`
+	observations    atom.Observations
+	A               U8ᵖ
 }
 
 func (a *CmdVoidWriteU8) String() string {
@@ -3876,9 +3876,9 @@ func (a *CmdVoidWriteU8) Observations() *atom.Observations { return &a.observati
 // CmdVoidWriteS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS8 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S8ᵖ
+	binary.Generate `display:"cmd_void_write_s8"`
+	observations    atom.Observations
+	A               S8ᵖ
 }
 
 func (a *CmdVoidWriteS8) String() string {
@@ -3909,9 +3909,9 @@ func (a *CmdVoidWriteS8) Observations() *atom.Observations { return &a.observati
 // CmdVoidWriteU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U16ᵖ
+	binary.Generate `display:"cmd_void_write_u16"`
+	observations    atom.Observations
+	A               U16ᵖ
 }
 
 func (a *CmdVoidWriteU16) String() string {
@@ -3942,9 +3942,9 @@ func (a *CmdVoidWriteU16) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS16 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S16ᵖ
+	binary.Generate `display:"cmd_void_write_s16"`
+	observations    atom.Observations
+	A               S16ᵖ
 }
 
 func (a *CmdVoidWriteS16) String() string {
@@ -3975,9 +3975,9 @@ func (a *CmdVoidWriteS16) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteF32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
+	binary.Generate `display:"cmd_void_write_f32"`
+	observations    atom.Observations
+	A               F32ᵖ
 }
 
 func (a *CmdVoidWriteF32) String() string {
@@ -4008,9 +4008,9 @@ func (a *CmdVoidWriteF32) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U32ᵖ
+	binary.Generate `display:"cmd_void_write_u32"`
+	observations    atom.Observations
+	A               U32ᵖ
 }
 
 func (a *CmdVoidWriteU32) String() string {
@@ -4041,9 +4041,9 @@ func (a *CmdVoidWriteU32) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS32 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S32ᵖ
+	binary.Generate `display:"cmd_void_write_s32"`
+	observations    atom.Observations
+	A               S32ᵖ
 }
 
 func (a *CmdVoidWriteS32) String() string {
@@ -4074,9 +4074,9 @@ func (a *CmdVoidWriteS32) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteF64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            F64ᵖ
+	binary.Generate `display:"cmd_void_write_f64"`
+	observations    atom.Observations
+	A               F64ᵖ
 }
 
 func (a *CmdVoidWriteF64) String() string {
@@ -4107,9 +4107,9 @@ func (a *CmdVoidWriteF64) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            U64ᵖ
+	binary.Generate `display:"cmd_void_write_u64"`
+	observations    atom.Observations
+	A               U64ᵖ
 }
 
 func (a *CmdVoidWriteU64) String() string {
@@ -4140,9 +4140,9 @@ func (a *CmdVoidWriteU64) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS64 struct {
-	binary.Generate
-	observations atom.Observations
-	A            S64ᵖ
+	binary.Generate `display:"cmd_void_write_s64"`
+	observations    atom.Observations
+	A               S64ᵖ
 }
 
 func (a *CmdVoidWriteS64) String() string {
@@ -4173,9 +4173,9 @@ func (a *CmdVoidWriteS64) Observations() *atom.Observations { return &a.observat
 // CmdVoidWriteBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteBool struct {
-	binary.Generate
-	observations atom.Observations
-	A            Boolᵖ
+	binary.Generate `display:"cmd_void_write_bool"`
+	observations    atom.Observations
+	A               Boolᵖ
 }
 
 func (a *CmdVoidWriteBool) String() string {
@@ -4206,11 +4206,11 @@ func (a *CmdVoidWriteBool) Observations() *atom.Observations { return &a.observa
 // CmdVoidWritePtrs
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWritePtrs struct {
-	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
-	B            U16ᵖ
-	C            Boolᵖ
+	binary.Generate `display:"cmd_void_write_ptrs"`
+	observations    atom.Observations
+	A               F32ᵖ
+	B               U16ᵖ
+	C               Boolᵖ
 }
 
 func (a *CmdVoidWritePtrs) String() string {
@@ -4241,9 +4241,9 @@ func (a *CmdVoidWritePtrs) Observations() *atom.Observations { return &a.observa
 // CmdU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU8 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       uint8
+	binary.Generate `display:"cmd_u8"`
+	observations    atom.Observations
+	Result          uint8
 }
 
 func (a *CmdU8) String() string {
@@ -4274,9 +4274,9 @@ func (a *CmdU8) Observations() *atom.Observations { return &a.observations }
 // CmdS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS8 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       int8
+	binary.Generate `display:"cmd_s8"`
+	observations    atom.Observations
+	Result          int8
 }
 
 func (a *CmdS8) String() string {
@@ -4307,9 +4307,9 @@ func (a *CmdS8) Observations() *atom.Observations { return &a.observations }
 // CmdU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU16 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       uint16
+	binary.Generate `display:"cmd_u16"`
+	observations    atom.Observations
+	Result          uint16
 }
 
 func (a *CmdU16) String() string {
@@ -4340,9 +4340,9 @@ func (a *CmdU16) Observations() *atom.Observations { return &a.observations }
 // CmdS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS16 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       int16
+	binary.Generate `display:"cmd_s16"`
+	observations    atom.Observations
+	Result          int16
 }
 
 func (a *CmdS16) String() string {
@@ -4373,9 +4373,9 @@ func (a *CmdS16) Observations() *atom.Observations { return &a.observations }
 // CmdF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF32 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       float32
+	binary.Generate `display:"cmd_f32"`
+	observations    atom.Observations
+	Result          float32
 }
 
 func (a *CmdF32) String() string {
@@ -4406,9 +4406,9 @@ func (a *CmdF32) Observations() *atom.Observations { return &a.observations }
 // CmdU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU32 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       uint32
+	binary.Generate `display:"cmd_u32"`
+	observations    atom.Observations
+	Result          uint32
 }
 
 func (a *CmdU32) String() string {
@@ -4439,9 +4439,9 @@ func (a *CmdU32) Observations() *atom.Observations { return &a.observations }
 // CmdS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS32 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       int32
+	binary.Generate `display:"cmd_s32"`
+	observations    atom.Observations
+	Result          int32
 }
 
 func (a *CmdS32) String() string {
@@ -4472,9 +4472,9 @@ func (a *CmdS32) Observations() *atom.Observations { return &a.observations }
 // CmdF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF64 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       float64
+	binary.Generate `display:"cmd_f64"`
+	observations    atom.Observations
+	Result          float64
 }
 
 func (a *CmdF64) String() string {
@@ -4505,9 +4505,9 @@ func (a *CmdF64) Observations() *atom.Observations { return &a.observations }
 // CmdU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU64 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       uint64
+	binary.Generate `display:"cmd_u64"`
+	observations    atom.Observations
+	Result          uint64
 }
 
 func (a *CmdU64) String() string {
@@ -4538,9 +4538,9 @@ func (a *CmdU64) Observations() *atom.Observations { return &a.observations }
 // CmdS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS64 struct {
-	binary.Generate
-	observations atom.Observations
-	Result       int64
+	binary.Generate `display:"cmd_s64"`
+	observations    atom.Observations
+	Result          int64
 }
 
 func (a *CmdS64) String() string {
@@ -4571,9 +4571,9 @@ func (a *CmdS64) Observations() *atom.Observations { return &a.observations }
 // CmdBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdBool struct {
-	binary.Generate
-	observations atom.Observations
-	Result       bool
+	binary.Generate `display:"cmd_bool"`
+	observations    atom.Observations
+	Result          bool
 }
 
 func (a *CmdBool) String() string {
@@ -4604,9 +4604,9 @@ func (a *CmdBool) Observations() *atom.Observations { return &a.observations }
 // CmdString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdString struct {
-	binary.Generate
-	observations atom.Observations
-	Result       string
+	binary.Generate `display:"cmd_string"`
+	observations    atom.Observations
+	Result          string
 }
 
 func (a *CmdString) String() string {
@@ -4637,9 +4637,9 @@ func (a *CmdString) Observations() *atom.Observations { return &a.observations }
 // CmdPointer
 ////////////////////////////////////////////////////////////////////////////////
 type CmdPointer struct {
-	binary.Generate
-	observations atom.Observations
-	Result       Voidᵖ
+	binary.Generate `display:"cmd_pointer"`
+	observations    atom.Observations
+	Result          Voidᵖ
 }
 
 func (a *CmdPointer) String() string {
@@ -4670,11 +4670,11 @@ func (a *CmdPointer) Observations() *atom.Observations { return &a.observations 
 // CmdVoid3Remapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Remapped struct {
-	binary.Generate
-	observations atom.Observations
-	A            remapped
-	B            remapped
-	C            remapped
+	binary.Generate `display:"cmd_void_3_remapped"`
+	observations    atom.Observations
+	A               remapped
+	B               remapped
+	C               remapped
 }
 
 func (a *CmdVoid3Remapped) String() string {
@@ -4705,9 +4705,9 @@ func (a *CmdVoid3Remapped) Observations() *atom.Observations { return &a.observa
 // CmdVoidInArrayOfRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidInArrayOfRemapped struct {
-	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	binary.Generate `display:"cmd_void_in_array_of_remapped"`
+	observations    atom.Observations
+	A               Remappedᵖ
 }
 
 func (a *CmdVoidInArrayOfRemapped) String() string {
@@ -4738,9 +4738,9 @@ func (a *CmdVoidInArrayOfRemapped) Observations() *atom.Observations { return &a
 // CmdVoidOutArrayOfRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutArrayOfRemapped struct {
-	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	binary.Generate `display:"cmd_void_out_array_of_remapped"`
+	observations    atom.Observations
+	A               Remappedᵖ
 }
 
 func (a *CmdVoidOutArrayOfRemapped) String() string {
@@ -4771,9 +4771,9 @@ func (a *CmdVoidOutArrayOfRemapped) Observations() *atom.Observations { return &
 // CmdVoidOutArrayOfUnknownRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutArrayOfUnknownRemapped struct {
-	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	binary.Generate `display:"cmd_void_out_array_of_unknown_remapped"`
+	observations    atom.Observations
+	A               Remappedᵖ
 }
 
 func (a *CmdVoidOutArrayOfUnknownRemapped) String() string {
@@ -4804,9 +4804,9 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) Observations() *atom.Observations { r
 // CmdRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdRemapped struct {
-	binary.Generate
-	observations atom.Observations
-	Result       remapped
+	binary.Generate `display:"cmd_remapped"`
+	observations    atom.Observations
+	Result          remapped
 }
 
 func (a *CmdRemapped) String() string {
