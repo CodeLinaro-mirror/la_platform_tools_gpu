@@ -30,7 +30,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mPointerAlignment);
             e->Uint32(this->mPointerSize);
             e->Uint32(this->mIntegerSize);
@@ -60,7 +60,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
             e->Uint32(this->mColorFmt);
@@ -130,7 +130,7 @@ namespace gles {
             e->Uint32(this->mDstAlphaBlendFactor);
             e->Uint32(this->mBlendEquationRgb);
             e->Uint32(this->mBlendEquationAlpha);
-            e->Value(&this->mBlendColor);
+            e->Value(this->mBlendColor);
         }
 
         uint64_t mCreatedAt;
@@ -178,7 +178,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -213,7 +213,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -233,7 +233,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            e->Value(&this->mData);
+            e->Value(this->mData);
             e->Int32(this->mSize);
             e->Uint32(this->mUsage);
         }
@@ -273,7 +273,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -327,7 +327,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -385,10 +385,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mPix);
-            e->Value(&this->mShare);
-            e->Value(&this->mCtx);
+            e->Value(this->mobservations);
+            e->Value(this->mPix);
+            e->Value(this->mShare);
+            e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
 
@@ -411,8 +411,8 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mCtx);
+            e->Value(this->mobservations);
+            e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
 
@@ -493,11 +493,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mCtx);
-            e->Value(&this->mCid);
-            e->Value(&this->mWid);
-            e->Value(&this->mSid);
+            e->Value(this->mobservations);
+            e->Value(this->mCtx);
+            e->Value(this->mCid);
+            e->Value(this->mWid);
+            e->Value(this->mSid);
             e->Int64(this->mResult);
         }
 
@@ -521,8 +521,8 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mCtx);
+            e->Value(this->mobservations);
+            e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
 
@@ -560,7 +560,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -600,11 +600,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mCid);
+            e->Value(this->mobservations);
+            e->Value(this->mCid);
             e->Int32(this->mWid);
             e->Int32(this->mSid);
-            e->Value(&this->mBounds);
+            e->Value(this->mBounds);
             e->Int64(this->mResult);
         }
 
@@ -626,7 +626,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -642,7 +642,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -658,7 +658,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -693,7 +693,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -732,7 +732,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            e->Value(&this->mClearColor);
+            e->Value(this->mClearColor);
             e->Float32(this->mClearDepth);
             e->Int32(this->mClearStencil);
         }
@@ -809,8 +809,8 @@ namespace gles {
             e->Bool(this->mColorMaskBlue);
             e->Bool(this->mColorMaskAlpha);
             
-            e->Value(&this->mViewport);
-            e->Value(&this->mScissor);
+            e->Value(this->mViewport);
+            e->Value(this->mScissor);
             e->Uint32(this->mFrontFace);
             e->Uint32(this->mCullFace);
             e->Float32(this->mLineWidth);
@@ -884,7 +884,7 @@ namespace gles {
             e->Bool(this->mNormalized);
             e->Int32(this->mStride);
             e->Uint32(this->mBuffer);
-            e->Value(&this->mPointer);
+            e->Value(this->mPointer);
         }
 
         uint64_t mCreatedAt;
@@ -914,7 +914,7 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
-            e->Value(&this->mData);
+            e->Value(this->mData);
             e->Uint32(this->mFormat);
         }
 
@@ -943,7 +943,7 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
-            e->Value(&this->mData);
+            e->Value(this->mData);
             e->Uint32(this->mSize);
             e->Uint32(this->mFormat);
         }
@@ -1094,10 +1094,10 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            e->Value(&this->mBinary);
+            e->Value(this->mBinary);
             e->Bool(this->mCompiled);
             e->Bool(this->mDeletable);
-            e->Value(&this->mInfoLog);
+            e->Value(this->mInfoLog);
             e->String(this->mSource);
             e->Uint32(this->mType);
         }
@@ -1125,7 +1125,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            e->Value(&this->mName);
+            e->Value(this->mName);
             e->Int32(this->mVectorCount);
             e->Uint32(this->mType);
         }
@@ -1152,7 +1152,7 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
             e->String(this->mName);
             e->Uint32(this->mType);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         uint64_t mCreatedAt;
@@ -1181,11 +1181,11 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
             
             e->Bool(this->mLinked);
-            e->Value(&this->mBinary);
+            e->Value(this->mBinary);
             
             
             
-            e->Value(&this->mInfoLog);
+            e->Value(this->mInfoLog);
         }
 
         uint64_t mCreatedAt;
@@ -1298,9 +1298,9 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
             e->Uint32(this->mIdentifier);
-            e->Value(&this->mBlending);
-            e->Value(&this->mRasterizing);
-            e->Value(&this->mClearing);
+            e->Value(this->mBlending);
+            e->Value(this->mRasterizing);
+            e->Value(this->mClearing);
             
             
             
@@ -1312,7 +1312,7 @@ namespace gles {
             
             e->Uint32(this->mGenerateMipmapHint);
             
-            e->Value(&this->mInstances);
+            e->Value(this->mInstances);
         }
 
         uint64_t mCreatedAt;
@@ -1344,7 +1344,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1455,7 +1455,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1495,12 +1495,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mConfig);
-            e->Value(&this->mShareContext);
-            e->Value(&this->mAttribList);
-            e->Value(&this->mResult);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mConfig);
+            e->Value(this->mShareContext);
+            e->Value(this->mAttribList);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -1525,10 +1525,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDpy);
-            e->Value(&this->mMajor);
-            e->Value(&this->mMinor);
+            e->Value(this->mobservations);
+            e->Value(this->mDpy);
+            e->Value(this->mMajor);
+            e->Value(this->mMinor);
             e->Int64(this->mResult);
         }
 
@@ -1554,11 +1554,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mDraw);
-            e->Value(&this->mRead);
-            e->Value(&this->mContext);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mDraw);
+            e->Value(this->mRead);
+            e->Value(this->mContext);
             e->Int64(this->mResult);
         }
 
@@ -1585,11 +1585,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mSurface);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mSurface);
             e->Int64(this->mAttribute);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
             e->Int64(this->mResult);
         }
 
@@ -1633,9 +1633,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mSurface);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mSurface);
             e->Int64(this->mResult);
         }
 
@@ -1712,7 +1712,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1747,7 +1747,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1763,7 +1763,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
         }
 
         atom::Observations mobservations;
@@ -1779,7 +1779,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1814,7 +1814,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -1888,7 +1888,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mUnit);
         }
 
@@ -1908,7 +1908,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
@@ -1930,7 +1930,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
@@ -1952,7 +1952,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
@@ -1975,7 +1975,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mLocation);
             e->String(this->mName);
@@ -1999,7 +1999,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mBuffer);
         }
@@ -2022,7 +2022,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
             e->Uint32(this->mBuffer);
@@ -2046,7 +2046,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mFramebuffer);
         }
@@ -2068,7 +2068,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mRenderbuffer);
         }
@@ -2090,7 +2090,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mTexture);
         }
@@ -2111,7 +2111,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mArray);
         }
 
@@ -2130,7 +2130,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mArray);
         }
 
@@ -2152,7 +2152,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mRed);
             e->Float32(this->mGreen);
             e->Float32(this->mBlue);
@@ -2177,7 +2177,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mEquation);
         }
 
@@ -2197,7 +2197,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mRgb);
             e->Uint32(this->mAlpha);
         }
@@ -2219,7 +2219,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mSrcFactor);
             e->Uint32(this->mDstFactor);
         }
@@ -2243,7 +2243,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mSrcFactorRgb);
             e->Uint32(this->mDstFactorRgb);
             e->Uint32(this->mSrcFactorAlpha);
@@ -2277,7 +2277,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mSrcX0);
             e->Int32(this->mSrcY0);
             e->Int32(this->mSrcX1);
@@ -2317,10 +2317,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mSize);
-            e->Value(&this->mData);
+            e->Value(this->mData);
             e->Uint32(this->mUsage);
         }
 
@@ -2345,11 +2345,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mOffset);
             e->Int32(this->mSize);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -2371,7 +2371,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mResult);
         }
@@ -2392,7 +2392,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mMask);
         }
 
@@ -2414,7 +2414,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mR);
             e->Float32(this->mG);
             e->Float32(this->mB);
@@ -2439,7 +2439,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mDepth);
         }
 
@@ -2458,7 +2458,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mStencil);
         }
 
@@ -2480,7 +2480,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint64(this->mSync);
             e->Uint32(this->mSyncFlags);
             e->Uint64(this->mTimeout);
@@ -2508,7 +2508,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Bool(this->mRed);
             e->Bool(this->mGreen);
             e->Bool(this->mBlue);
@@ -2533,7 +2533,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
         }
 
@@ -2578,7 +2578,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Uint32(this->mFormat);
@@ -2586,7 +2586,7 @@ namespace gles {
             e->Int32(this->mHeight);
             e->Int32(this->mBorder);
             e->Int32(this->mImageSize);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -2619,7 +2619,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Int32(this->mXoffset);
@@ -2628,7 +2628,7 @@ namespace gles {
             e->Int32(this->mHeight);
             e->Uint32(this->mFormat);
             e->Int32(this->mImageSize);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -2661,7 +2661,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Uint32(this->mFormat);
@@ -2701,7 +2701,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Int32(this->mXoffset);
@@ -2734,7 +2734,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
 
@@ -2754,7 +2754,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mType);
             e->Uint32(this->mResult);
         }
@@ -2775,7 +2775,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mMode);
         }
 
@@ -2795,9 +2795,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mBuffers);
+            e->Value(this->mBuffers);
         }
 
         atom::Observations mobservations;
@@ -2817,9 +2817,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mFramebuffers);
+            e->Value(this->mFramebuffers);
         }
 
         atom::Observations mobservations;
@@ -2838,7 +2838,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
 
@@ -2877,9 +2877,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mQueries);
+            e->Value(this->mQueries);
         }
 
         atom::Observations mobservations;
@@ -2899,9 +2899,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mQueries);
+            e->Value(this->mQueries);
         }
 
         atom::Observations mobservations;
@@ -2940,9 +2940,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mRenderbuffers);
+            e->Value(this->mRenderbuffers);
         }
 
         atom::Observations mobservations;
@@ -2961,7 +2961,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
         }
 
@@ -2980,7 +2980,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint64(this->mSync);
         }
 
@@ -3019,9 +3019,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mTextures);
+            e->Value(this->mTextures);
         }
 
         atom::Observations mobservations;
@@ -3060,9 +3060,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mCount);
-            e->Value(&this->mArrays);
+            e->Value(this->mArrays);
         }
 
         atom::Observations mobservations;
@@ -3082,9 +3082,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mArrays);
+            e->Value(this->mArrays);
         }
 
         atom::Observations mobservations;
@@ -3103,7 +3103,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFunction);
         }
 
@@ -3122,7 +3122,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Bool(this->mEnabled);
         }
 
@@ -3142,7 +3142,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mNear);
             e->Float32(this->mFar);
         }
@@ -3164,7 +3164,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
@@ -3185,7 +3185,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mCapability);
         }
 
@@ -3204,7 +3204,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mType);
         }
 
@@ -3223,7 +3223,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
         }
 
@@ -3244,10 +3244,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mNumAttachments);
-            e->Value(&this->mAttachments);
+            e->Value(this->mAttachments);
         }
 
         atom::Observations mobservations;
@@ -3269,7 +3269,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mDrawMode);
             e->Int32(this->mFirstIndex);
             e->Int32(this->mIndexCount);
@@ -3314,11 +3314,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mDrawMode);
             e->Int32(this->mElementCount);
             e->Uint32(this->mIndicesType);
-            e->Value(&this->mIndices);
+            e->Value(this->mIndices);
         }
 
         atom::Observations mobservations;
@@ -3340,9 +3340,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
-            e->Value(&this->mImage);
+            e->Value(this->mImage);
         }
 
         atom::Observations mobservations;
@@ -3381,9 +3381,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
-            e->Value(&this->mImage);
+            e->Value(this->mImage);
         }
 
         atom::Observations mobservations;
@@ -3402,7 +3402,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mCapability);
         }
 
@@ -3421,7 +3421,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mType);
         }
 
@@ -3440,7 +3440,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
         }
 
@@ -3459,7 +3459,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
 
@@ -3478,7 +3478,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
 
@@ -3497,7 +3497,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mPreserveMask);
         }
 
@@ -3518,7 +3518,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mCondition);
             e->Uint32(this->mSyncFlags);
             e->Uint64(this->mResult);
@@ -3540,7 +3540,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
         }
 
         atom::Observations mobservations;
@@ -3556,7 +3556,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
         }
 
         atom::Observations mobservations;
@@ -3576,7 +3576,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFramebufferTarget);
             e->Uint32(this->mFramebufferAttachment);
             e->Uint32(this->mRenderbufferTarget);
@@ -3605,7 +3605,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFramebufferTarget);
             e->Uint32(this->mFramebufferAttachment);
             e->Uint32(this->mTextureTarget);
@@ -3632,7 +3632,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mOrientation);
         }
 
@@ -3652,9 +3652,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mBuffers);
+            e->Value(this->mBuffers);
         }
 
         atom::Observations mobservations;
@@ -3674,9 +3674,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mFramebuffers);
+            e->Value(this->mFramebuffers);
         }
 
         atom::Observations mobservations;
@@ -3696,9 +3696,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mQueries);
+            e->Value(this->mQueries);
         }
 
         atom::Observations mobservations;
@@ -3718,9 +3718,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mQueries);
+            e->Value(this->mQueries);
         }
 
         atom::Observations mobservations;
@@ -3740,9 +3740,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mRenderbuffers);
+            e->Value(this->mRenderbuffers);
         }
 
         atom::Observations mobservations;
@@ -3762,9 +3762,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mTextures);
+            e->Value(this->mTextures);
         }
 
         atom::Observations mobservations;
@@ -3784,9 +3784,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mArrays);
+            e->Value(this->mArrays);
         }
 
         atom::Observations mobservations;
@@ -3806,9 +3806,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mArrays);
+            e->Value(this->mArrays);
         }
 
         atom::Observations mobservations;
@@ -3827,7 +3827,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
 
@@ -3890,14 +3890,14 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mLocation);
             e->Int32(this->mBufferSize);
-            e->Value(&this->mBufferBytesWritten);
-            e->Value(&this->mVectorCount);
-            e->Value(&this->mType);
-            e->Value(&this->mName);
+            e->Value(this->mBufferBytesWritten);
+            e->Value(this->mVectorCount);
+            e->Value(this->mType);
+            e->Value(this->mName);
         }
 
         atom::Observations mobservations;
@@ -3946,14 +3946,14 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mLocation);
             e->Int32(this->mBufferSize);
-            e->Value(&this->mBufferBytesWritten);
-            e->Value(&this->mVectorCount);
-            e->Value(&this->mType);
-            e->Value(&this->mName);
+            e->Value(this->mBufferBytesWritten);
+            e->Value(this->mVectorCount);
+            e->Value(this->mType);
+            e->Value(this->mName);
         }
 
         atom::Observations mobservations;
@@ -3981,12 +3981,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mUniformBlockIndex);
             e->Int32(this->mBufferSize);
-            e->Value(&this->mBufferBytesWritten);
-            e->Value(&this->mName);
+            e->Value(this->mBufferBytesWritten);
+            e->Value(this->mName);
         }
 
         atom::Observations mobservations;
@@ -4011,11 +4011,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mUniformBlockIndex);
             e->Uint32(this->mParameterName);
-            e->Value(&this->mParameters);
+            e->Value(this->mParameters);
         }
 
         atom::Observations mobservations;
@@ -4059,12 +4059,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mUniformCount);
-            e->Value(&this->mUniformIndices);
+            e->Value(this->mUniformIndices);
             e->Uint32(this->mParameterName);
-            e->Value(&this->mParameters);
+            e->Value(this->mParameters);
         }
 
         atom::Observations mobservations;
@@ -4108,11 +4108,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mBufferLength);
-            e->Value(&this->mShadersLengthWritten);
-            e->Value(&this->mShaders);
+            e->Value(this->mShadersLengthWritten);
+            e->Value(this->mShaders);
         }
 
         atom::Observations mobservations;
@@ -4135,7 +4135,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->String(this->mName);
             e->Int32(this->mResult);
@@ -4159,9 +4159,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mParam);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4182,10 +4182,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4205,7 +4205,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
 
@@ -4225,9 +4225,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mParam);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4249,11 +4249,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFramebufferTarget);
             e->Uint32(this->mAttachment);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4274,7 +4274,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
 
@@ -4294,9 +4294,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mParam);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4319,12 +4319,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mBufferSize);
-            e->Value(&this->mBytesWritten);
-            e->Value(&this->mBinaryFormat);
-            e->Value(&this->mBinary);
+            e->Value(this->mBytesWritten);
+            e->Value(this->mBinaryFormat);
+            e->Value(this->mBinary);
         }
 
         atom::Observations mobservations;
@@ -4349,11 +4349,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mBufferLength);
-            e->Value(&this->mStringLengthWritten);
-            e->Value(&this->mInfo);
+            e->Value(this->mStringLengthWritten);
+            e->Value(this->mInfo);
         }
 
         atom::Observations mobservations;
@@ -4376,10 +4376,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4420,10 +4420,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4445,10 +4445,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4470,10 +4470,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4514,10 +4514,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4539,10 +4539,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4564,10 +4564,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4589,10 +4589,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4614,10 +4614,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4639,10 +4639,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4664,10 +4664,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4690,11 +4690,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
             e->Int32(this->mBufferLength);
-            e->Value(&this->mStringLengthWritten);
-            e->Value(&this->mInfo);
+            e->Value(this->mStringLengthWritten);
+            e->Value(this->mInfo);
         }
 
         atom::Observations mobservations;
@@ -4718,11 +4718,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShaderType);
             e->Uint32(this->mPrecisionType);
-            e->Value(&this->mRange);
-            e->Value(&this->mPrecision);
+            e->Value(this->mRange);
+            e->Value(this->mPrecision);
         }
 
         atom::Observations mobservations;
@@ -4746,11 +4746,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
             e->Int32(this->mBufferLength);
-            e->Value(&this->mStringLengthWritten);
-            e->Value(&this->mSource);
+            e->Value(this->mStringLengthWritten);
+            e->Value(this->mSource);
         }
 
         atom::Observations mobservations;
@@ -4773,10 +4773,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -4797,9 +4797,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mParam);
-            e->Value(&this->mResult);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -4820,10 +4820,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4845,10 +4845,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4870,7 +4870,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->String(this->mName);
             e->Int32(this->mResult);
@@ -4895,10 +4895,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mLocation);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4920,10 +4920,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Int32(this->mLocation);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -4944,7 +4944,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mMode);
         }
@@ -4966,9 +4966,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLength);
-            e->Value(&this->mMarker);
+            e->Value(this->mMarker);
         }
 
         atom::Observations mobservations;
@@ -4989,10 +4989,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mCount);
-            e->Value(&this->mAttachments);
+            e->Value(this->mAttachments);
         }
 
         atom::Observations mobservations;
@@ -5013,7 +5013,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mBuffer);
             e->Bool(this->mResult);
         }
@@ -5035,7 +5035,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mCapability);
             e->Bool(this->mResult);
         }
@@ -5057,7 +5057,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFramebuffer);
             e->Bool(this->mResult);
         }
@@ -5079,7 +5079,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Bool(this->mResult);
         }
@@ -5101,7 +5101,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Bool(this->mResult);
         }
@@ -5123,7 +5123,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Bool(this->mResult);
         }
@@ -5145,7 +5145,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mRenderbuffer);
             e->Bool(this->mResult);
         }
@@ -5167,7 +5167,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
             e->Bool(this->mResult);
         }
@@ -5189,7 +5189,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTexture);
             e->Bool(this->mResult);
         }
@@ -5211,7 +5211,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mArray);
             e->Bool(this->mResult);
         }
@@ -5232,7 +5232,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mWidth);
         }
 
@@ -5251,7 +5251,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
 
@@ -5274,12 +5274,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mOffset);
             e->Int32(this->mLength);
             e->Uint32(this->mAccess);
-            e->Value(&this->mResult);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -5302,7 +5302,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mParameter);
             e->Int32(this->mValue);
         }
@@ -5324,7 +5324,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mScaleFactor);
             e->Float32(this->mUnits);
         }
@@ -5344,7 +5344,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
         }
 
         atom::Observations mobservations;
@@ -5364,10 +5364,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mBinaryFormat);
-            e->Value(&this->mBinary);
+            e->Value(this->mBinary);
             e->Int32(this->mBinarySize);
         }
 
@@ -5390,9 +5390,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLength);
-            e->Value(&this->mMarker);
+            e->Value(this->mMarker);
         }
 
         atom::Observations mobservations;
@@ -5412,7 +5412,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mQuery);
             e->Uint32(this->mTarget);
         }
@@ -5439,14 +5439,14 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mX);
             e->Int32(this->mY);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
             e->Uint32(this->mFormat);
             e->Uint32(this->mType);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -5469,7 +5469,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
         }
 
         atom::Observations mobservations;
@@ -5489,7 +5489,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mFormat);
             e->Int32(this->mWidth);
@@ -5518,7 +5518,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mSamples);
             e->Uint32(this->mFormat);
@@ -5546,7 +5546,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Float32(this->mValue);
             e->Bool(this->mInvert);
         }
@@ -5570,7 +5570,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mX);
             e->Int32(this->mY);
             e->Int32(this->mWidth);
@@ -5599,11 +5599,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mCount);
-            e->Value(&this->mShaders);
+            e->Value(this->mShaders);
             e->Uint32(this->mBinaryFormat);
-            e->Value(&this->mBinary);
+            e->Value(this->mBinary);
             e->Int32(this->mBinarySize);
         }
 
@@ -5629,11 +5629,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mShader);
             e->Int32(this->mCount);
-            e->Value(&this->mSource);
-            e->Value(&this->mLength);
+            e->Value(this->mSource);
+            e->Value(this->mLength);
         }
 
         atom::Observations mobservations;
@@ -5658,7 +5658,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mX);
             e->Int32(this->mY);
             e->Int32(this->mWidth);
@@ -5688,7 +5688,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFace);
             e->Uint32(this->mFunction);
             e->Int32(this->mReferenceValue);
@@ -5713,7 +5713,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mMask);
         }
 
@@ -5733,7 +5733,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFace);
             e->Uint32(this->mMask);
         }
@@ -5757,7 +5757,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mFace);
             e->Uint32(this->mStencilFail);
             e->Uint32(this->mStencilPassDepthFail);
@@ -5790,7 +5790,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Uint32(this->mInternalFormat);
@@ -5799,7 +5799,7 @@ namespace gles {
             e->Int32(this->mBorder);
             e->Uint32(this->mFormat);
             e->Uint32(this->mType);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -5827,7 +5827,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
             e->Float32(this->mValue);
@@ -5852,7 +5852,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Uint32(this->mParameter);
             e->Int32(this->mValue);
@@ -5878,7 +5878,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
             e->Uint32(this->mFormat);
@@ -5907,7 +5907,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
             e->Uint32(this->mFormat);
@@ -5939,7 +5939,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
             e->Uint32(this->mFormat);
@@ -5976,7 +5976,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevel);
             e->Int32(this->mXoffset);
@@ -5985,7 +5985,7 @@ namespace gles {
             e->Int32(this->mHeight);
             e->Uint32(this->mFormat);
             e->Uint32(this->mType);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -6015,7 +6015,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTexture);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
@@ -6047,7 +6047,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTexture);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
@@ -6082,7 +6082,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTexture);
             e->Uint32(this->mTarget);
             e->Int32(this->mLevels);
@@ -6114,7 +6114,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue);
         }
@@ -6137,10 +6137,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6161,7 +6161,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mValue);
         }
@@ -6184,10 +6184,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6209,7 +6209,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6234,10 +6234,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6259,7 +6259,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mValue0);
             e->Int32(this->mValue1);
@@ -6284,10 +6284,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6310,7 +6310,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6337,10 +6337,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6363,7 +6363,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mValue0);
             e->Int32(this->mValue1);
@@ -6390,10 +6390,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6417,7 +6417,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6446,10 +6446,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6473,7 +6473,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mValue0);
             e->Int32(this->mValue1);
@@ -6502,10 +6502,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6527,7 +6527,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
             e->Uint32(this->mUniformBlockIndex);
             e->Uint32(this->mUniformBlockBinding);
@@ -6553,11 +6553,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
             e->Bool(this->mTranspose);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6581,11 +6581,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
             e->Bool(this->mTranspose);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6609,11 +6609,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mCount);
             e->Bool(this->mTranspose);
-            e->Value(&this->mValues);
+            e->Value(this->mValues);
         }
 
         atom::Observations mobservations;
@@ -6634,7 +6634,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
 
@@ -6653,7 +6653,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
 
@@ -6672,7 +6672,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
 
@@ -6692,7 +6692,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
         }
@@ -6714,9 +6714,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -6737,7 +6737,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6761,9 +6761,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -6785,7 +6785,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6811,9 +6811,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -6836,7 +6836,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Float32(this->mValue0);
             e->Float32(this->mValue1);
@@ -6864,9 +6864,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
         }
 
         atom::Observations mobservations;
@@ -6890,13 +6890,13 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mLocation);
             e->Int32(this->mSize);
             e->Uint32(this->mType);
             e->Bool(this->mNormalized);
             e->Int32(this->mStride);
-            e->Value(&this->mData);
+            e->Value(this->mData);
         }
 
         atom::Observations mobservations;
@@ -6922,7 +6922,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Int32(this->mX);
             e->Int32(this->mY);
             e->Int32(this->mWidth);
@@ -6949,7 +6949,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint64(this->mSync);
             e->Uint32(this->mSyncFlags);
             e->Uint64(this->mTimeout);
@@ -6976,12 +6976,12 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDpy);
-            e->Value(&this->mVis);
-            e->Value(&this->mShareList);
+            e->Value(this->mobservations);
+            e->Value(this->mDpy);
+            e->Value(this->mVis);
+            e->Value(this->mShareList);
             e->Bool(this->mDirect);
-            e->Value(&this->mResult);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -7008,13 +7008,13 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mFbconfig);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mFbconfig);
             e->Uint32(this->mType);
-            e->Value(&this->mShared);
+            e->Value(this->mShared);
             e->Bool(this->mDirect);
-            e->Value(&this->mResult);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -7041,11 +7041,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mDraw);
-            e->Value(&this->mRead);
-            e->Value(&this->mCtx);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mDraw);
+            e->Value(this->mRead);
+            e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
 
@@ -7071,10 +7071,10 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mDrawable);
-            e->Value(&this->mCtx);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mDrawable);
+            e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
 
@@ -7119,11 +7119,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mDraw);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mDraw);
             e->Int64(this->mAttribute);
-            e->Value(&this->mValue);
+            e->Value(this->mValue);
             e->Int64(this->mResult);
         }
 
@@ -7147,9 +7147,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mDisplay);
-            e->Value(&this->mDrawable);
+            e->Value(this->mobservations);
+            e->Value(this->mDisplay);
+            e->Value(this->mDrawable);
         }
 
         atom::Observations mobservations;
@@ -7239,7 +7239,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7276,7 +7276,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 2; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -7293,7 +7293,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7349,7 +7349,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 3; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -7366,7 +7366,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7422,7 +7422,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 4; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -7439,7 +7439,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7474,7 +7474,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7490,7 +7490,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7507,7 +7507,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mId);
         }
 
@@ -7526,7 +7526,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint32(this->mId);
         }
 
@@ -7601,7 +7601,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7617,7 +7617,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7633,7 +7633,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7649,7 +7649,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7665,7 +7665,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7682,7 +7682,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint8(this->mIndex);
         }
 
@@ -7702,7 +7702,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
+            e->Value(this->mobservations);
             e->Uint8(this->mIndex);
             e->Uint64(this->mResult);
         }
@@ -7722,7 +7722,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7738,7 +7738,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7754,7 +7754,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7791,7 +7791,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 2; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -7808,7 +7808,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7862,7 +7862,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7899,7 +7899,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 3; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -7916,7 +7916,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -7970,7 +7970,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -8007,7 +8007,7 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             
             for (int i = 0; i < 4; i++) {
-                e->Value(&this->mElements[i]);
+                e->Value(this->mElements[i]);
             }
         }
 
@@ -8024,7 +8024,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -8078,7 +8078,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -8113,7 +8113,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -8129,7 +8129,7 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mSliceInfo);
+            e->Value(this->mSliceInfo);
         }
 
         SliceInfo mSliceInfo;
@@ -8147,9 +8147,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mHdc);
-            e->Value(&this->mResult);
+            e->Value(this->mobservations);
+            e->Value(this->mHdc);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -8171,11 +8171,11 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mHdc);
-            e->Value(&this->mHShareContext);
-            e->Value(&this->mAttribList);
-            e->Value(&this->mResult);
+            e->Value(this->mobservations);
+            e->Value(this->mHdc);
+            e->Value(this->mHShareContext);
+            e->Value(this->mAttribList);
+            e->Value(this->mResult);
         }
 
         atom::Observations mobservations;
@@ -8198,9 +8198,9 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mHdc);
-            e->Value(&this->mHglrc);
+            e->Value(this->mobservations);
+            e->Value(this->mHdc);
+            e->Value(this->mHglrc);
             e->Int64(this->mResult);
         }
 
@@ -8221,8 +8221,8 @@ namespace gles {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(&this->mobservations);
-            e->Value(&this->mHdc);
+            e->Value(this->mobservations);
+            e->Value(this->mHdc);
         }
 
         atom::Observations mobservations;

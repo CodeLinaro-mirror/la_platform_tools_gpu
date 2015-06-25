@@ -65,7 +65,7 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}»»}{{end}}
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
-{{define "Cpp.Encode.Struct"}}e->Value(&{{.Name}});{{end}}
+{{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->object({{.Name}});{{end}}
 
