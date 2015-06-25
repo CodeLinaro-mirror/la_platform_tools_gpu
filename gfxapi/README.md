@@ -4,19 +4,6 @@
 
 Package gfxapi exposes the shared behavior of all graphics api's.
 
-Copyright (C) 2015 The Android Open Source Project
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-CONDITIONS OF ANY KIND, either express or implied. See the License for the
-specific language governing permissions and limitations under the License.
-
 ## Usage
 
 #### func  Register
@@ -68,6 +55,18 @@ const (
 )
 ```
 
+#### func (*FramebufferAttachment) Parse
+
+```go
+func (v *FramebufferAttachment) Parse(s string) error
+```
+
+#### func (FramebufferAttachment) String
+
+```go
+func (v FramebufferAttachment) String() string
+```
+
 #### type ID
 
 ```go
@@ -89,8 +88,15 @@ Valid returns true if the id is not the default zero value.
 type State struct {
 	binary.Object
 
+	// Architecture holds information about the device architecture that was used
+	// to create the capture.
+	Architecture device.Architecture
+
 	// Memory holds the memory state of the application.
-	Memory memory.Memory
+	Memory map[memory.PoolID]*memory.Pool
+
+	// NextPoolID hold the identifier of the next Pool to be created.
+	NextPoolID memory.PoolID
 
 	// APIs holds the per-API context states.
 	APIs map[API]interface{}
@@ -98,3 +104,31 @@ type State struct {
 ```
 
 State represents the graphics state across all contexts.
+
+#### func  NewState
+
+```go
+func NewState() *State
+```
+
+#### func (State) MemoryDecoder
+
+```go
+func (st State) MemoryDecoder(s memory.Slice, d database.Database, l log.Logger) binary.Decoder
+```
+MemoryDecoder returns a flat decoder backed by an endian reader that uses the
+byte-order of the capture device to decode from the slice s.
+
+#### func (State) MemoryEncoder
+
+```go
+func (st State) MemoryEncoder(p *memory.Pool, rng memory.Range) binary.Encoder
+```
+MemoryEncoder returns a flat encoder backed by an endian reader that uses the
+byte-order of the capture device to encode to the pool p, for the range rng.
+
+#### func (State) String
+
+```go
+func (s State) String() string
+```

@@ -64,10 +64,16 @@ const (
 )
 ```
 
+#### func (*Kind) Parse
+
+```go
+func (v *Kind) Parse(s string) error
+```
+
 #### func (Kind) String
 
 ```go
-func (i Kind) String() string
+func (v Kind) String() string
 ```
 
 #### type Logger
@@ -76,15 +82,15 @@ func (i Kind) String() string
 type Logger interface {
 	// Info writes an information message to the logger. These message types are intented to be used
 	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
-	Info(msg string, args ...interface{})
+	Infof(msg string, args ...interface{})
 
 	// Warning writes a warning message to the logger. This is intented to be used for unexpected but
 	// non-critical events. Arguments are handled in the manner of fmt.Printf.
-	Warning(msg string, args ...interface{})
+	Warningf(msg string, args ...interface{})
 
 	// Error writes an error message to the logger. This is intented to be used for unexpected and
 	// critical error events. Arguments are handled in the manner of fmt.Printf.
-	Error(msg string, args ...interface{})
+	Errorf(msg string, args ...interface{})
 
 	// Enter creates a new logger scoped within the existing logger. This can be used to produce
 	// hierarchical log messages.
@@ -132,9 +138,16 @@ Std returns a Logger that writes to stdout and stderr.
 #### func  Testing
 
 ```go
-func Testing(t *testing.T) Logger
+func Testing(t delegate) Logger
 ```
 Testing returns a Logger that writes to t's log methods.
+
+#### func  Writer
+
+```go
+func Writer(info, warn, err io.Writer, done func()) Logger
+```
+Writer returns a Logger that writes to the supplied streams.
 
 #### type Nop
 
@@ -159,10 +172,10 @@ func (Nop) Enter(name string) Logger
 ```
 Enter returns the same Nop implementation of Logger
 
-#### func (Nop) Error
+#### func (Nop) Errorf
 
 ```go
-func (Nop) Error(msg string, args ...interface{})
+func (Nop) Errorf(msg string, args ...interface{})
 ```
 Error does nothing
 
@@ -180,17 +193,17 @@ func (Nop) Fork() Logger
 ```
 Fork returns the same Nop implementation of Logger
 
-#### func (Nop) Info
+#### func (Nop) Infof
 
 ```go
-func (Nop) Info(msg string, args ...interface{})
+func (Nop) Infof(msg string, args ...interface{})
 ```
 Info does nothing
 
-#### func (Nop) Warning
+#### func (Nop) Warningf
 
 ```go
-func (Nop) Warning(msg string, args ...interface{})
+func (Nop) Warningf(msg string, args ...interface{})
 ```
 Warning does nothing
 
@@ -225,10 +238,10 @@ func (s *Splitter) Enter(name string) Logger
 ```
 Enter will call Enter with the same argument on all logs passed to Add.
 
-#### func (*Splitter) Error
+#### func (*Splitter) Errorf
 
 ```go
-func (s *Splitter) Error(msg string, args ...interface{})
+func (s *Splitter) Errorf(msg string, args ...interface{})
 ```
 Error will call Error with the same arguments on all logs passed to Add.
 
@@ -246,16 +259,16 @@ func (s *Splitter) Fork() Logger
 ```
 Fork will call Fork on all logs passed to Add.
 
-#### func (*Splitter) Info
+#### func (*Splitter) Infof
 
 ```go
-func (s *Splitter) Info(msg string, args ...interface{})
+func (s *Splitter) Infof(msg string, args ...interface{})
 ```
 Info will call Info with the same arguments on all logs passed to Add.
 
-#### func (*Splitter) Warning
+#### func (*Splitter) Warningf
 
 ```go
-func (s *Splitter) Warning(msg string, args ...interface{})
+func (s *Splitter) Warningf(msg string, args ...interface{})
 ```
 Warning will call Warning with the same arguments on all logs passed to Add.

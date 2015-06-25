@@ -50,6 +50,15 @@ func (n Namespace) Add(class binary.Class)
 ```
 Add a new type to the Namespace.
 
+#### func (Namespace) Count
+
+```go
+func (n Namespace) Count() int
+```
+Count returns the number of entries reachable through this namespace. Because it
+sums the counts of the namespaces it depends on, this may be more than the
+number of unique keys.
+
 #### func (Namespace) Lookup
 
 ```go
@@ -57,3 +66,12 @@ func (n Namespace) Lookup(id binary.ID) binary.Class
 ```
 Lookup looks up a Class by the given type id in the Namespace. If there is no
 match, it will return nil.
+
+#### func (Namespace) Visit
+
+```go
+func (n Namespace) Visit(visitor func(binary.ID, binary.Class))
+```
+Visit invokes the visitor for every id and class pair reachable through this
+namespace. The visitor maybe be called with the same id more than once if it is
+present in multiple namespaces.

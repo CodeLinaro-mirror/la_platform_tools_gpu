@@ -44,7 +44,7 @@ func (h ApiId) Valid() bool
 type ApiIdArray []ApiId
 ```
 
-Array ApiIdArray
+Array ApiIdˢ
 
 #### func (ApiIdArray) Format
 
@@ -97,7 +97,7 @@ func (c *ApiSchema) GetState() StructInfo
 type ApiSchemaArray []ApiSchema
 ```
 
-Array ApiSchemaArray
+Array ApiSchemaˢ
 
 #### func (ApiSchemaArray) Format
 
@@ -219,7 +219,7 @@ Unpack unpacks the RPC-friendly AtomGroup structure into the atom Group o.
 type AtomGroupArray []AtomGroup
 ```
 
-Array AtomGroupArray
+Array AtomGroupˢ
 
 #### func (AtomGroupArray) Format
 
@@ -320,7 +320,7 @@ func (c *AtomInfo) GetType() uint16
 type AtomInfoArray []AtomInfo
 ```
 
-Array AtomInfoArray
+Array AtomInfoˢ
 
 #### func (AtomInfoArray) Format
 
@@ -434,7 +434,7 @@ func (c *AtomRangeTimer) GetToAtomId() uint64
 type AtomRangeTimerArray []AtomRangeTimer
 ```
 
-Array AtomRangeTimerArray
+Array AtomRangeTimerˢ
 
 #### func (AtomRangeTimerArray) Format
 
@@ -468,6 +468,14 @@ func NewAtomStream(list atom.List) (AtomStream, error)
 ```
 NewAtomStream creates a fully-encoded AtomStream from the atom list.
 
+#### func  ResolveAtomStream
+
+```go
+func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (*AtomStream, error)
+```
+ResolveAtomStream loads and returns the AtomStream stored in the database d,
+using id.
+
 #### func (*AtomStream) Class
 
 ```go
@@ -497,6 +505,13 @@ type AtomStreamId struct {
 ```
 
 Handle AtomStreamId
+
+#### func  StoreAtomStream
+
+```go
+func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStreamId, error)
+```
+StoreAtomStream stores v into the database d, returning the AtomStreamId.
 
 #### func (*AtomStreamId) Class
 
@@ -555,7 +570,7 @@ func (c *AtomTimer) GetNanoseconds() uint64
 type AtomTimerArray []AtomTimer
 ```
 
-Array AtomTimerArray
+Array AtomTimerˢ
 
 #### func (AtomTimerArray) Format
 
@@ -582,6 +597,13 @@ func CreateBinary(
 ) *Binary
 ```
 
+#### func  ResolveBinary
+
+```go
+func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (*Binary, error)
+```
+ResolveBinary loads and returns the Binary stored in the database d, using id.
+
 #### func (*Binary) Class
 
 ```go
@@ -604,6 +626,13 @@ type BinaryId struct {
 ```
 
 Handle BinaryId
+
+#### func  StoreBinary
+
+```go
+func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error)
+```
+StoreBinary stores v into the database d, returning the BinaryId.
 
 #### func (*BinaryId) Class
 
@@ -641,6 +670,13 @@ func CreateCapture(
 	Schema SchemaId,
 ) *Capture
 ```
+
+#### func  ResolveCapture
+
+```go
+func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (*Capture, error)
+```
+ResolveCapture loads and returns the Capture stored in the database d, using id.
 
 #### func (*Capture) Class
 
@@ -683,6 +719,13 @@ type CaptureId struct {
 
 Handle CaptureId
 
+#### func  StoreCapture
+
+```go
+func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, error)
+```
+StoreCapture stores v into the database d, returning the CaptureId.
+
 #### func (*CaptureId) Class
 
 ```go
@@ -701,12 +744,26 @@ func (h CaptureId) Valid() bool
 type CaptureIdArray []CaptureId
 ```
 
-Array CaptureIdArray
+Array CaptureIdˢ
 
 #### func (CaptureIdArray) Format
 
 ```go
 func (a CaptureIdArray) Format(f fmt.State, c rune)
+```
+
+#### type ClassArray
+
+```go
+type ClassArray []schema.Class
+```
+
+Array Classˢ
+
+#### func (ClassArray) Format
+
+```go
+func (a ClassArray) Format(f fmt.State, c rune)
 ```
 
 #### type ClassInfo
@@ -716,8 +773,8 @@ type ClassInfo struct {
 	binary.Generate
 	Name    string
 	Kind    TypeKind
-	Fields  FieldInfoArray
-	Extends ClassInfoArray
+	Fields  FieldInfoPtrArray
+	Extends ClassInfoPtrArray
 }
 ```
 
@@ -729,8 +786,8 @@ Class ClassInfo
 func CreateClassInfo(
 	Name string,
 	Kind TypeKind,
-	Fields FieldInfoArray,
-	Extends ClassInfoArray,
+	Fields FieldInfoPtrArray,
+	Extends ClassInfoPtrArray,
 ) *ClassInfo
 ```
 
@@ -743,13 +800,13 @@ func (*ClassInfo) Class() binary.Class
 #### func (*ClassInfo) GetExtends
 
 ```go
-func (c *ClassInfo) GetExtends() ClassInfoArray
+func (c *ClassInfo) GetExtends() ClassInfoPtrArray
 ```
 
 #### func (*ClassInfo) GetFields
 
 ```go
-func (c *ClassInfo) GetFields() FieldInfoArray
+func (c *ClassInfo) GetFields() FieldInfoPtrArray
 ```
 
 #### func (*ClassInfo) GetKind
@@ -767,10 +824,10 @@ func (c *ClassInfo) GetName() string
 #### type ClassInfoArray
 
 ```go
-type ClassInfoArray []*ClassInfo
+type ClassInfoArray []ClassInfo
 ```
 
-Array ClassInfoRefArray
+Array ClassInfoˢ
 
 #### func (ClassInfoArray) Format
 
@@ -778,18 +835,49 @@ Array ClassInfoRefArray
 func (a ClassInfoArray) Format(f fmt.State, c rune)
 ```
 
+#### type ClassInfoPtrArray
+
+```go
+type ClassInfoPtrArray []*ClassInfo
+```
+
+Array ClassInfoᵖˢ
+
+#### func (ClassInfoPtrArray) Format
+
+```go
+func (a ClassInfoPtrArray) Format(f fmt.State, c rune)
+```
+
+#### type ClassPtrArray
+
+```go
+type ClassPtrArray []*schema.Class
+```
+
+Array Classᵖˢ
+
+#### func (ClassPtrArray) Format
+
+```go
+func (a ClassPtrArray) Format(f fmt.State, c rune)
+```
+
 #### type Device
 
 ```go
 type Device struct {
 	binary.Generate
-	Name                   string
-	Model                  string
-	OS                     string
-	PointerSize            uint8
-	PointerAlignment       uint8
-	MaxMemorySize          uint64
-	RequiresShaderPatching bool
+	Name             string
+	Model            string
+	OS               string
+	PointerSize      uint8
+	PointerAlignment uint8
+	MaxMemorySize    uint64
+	Extensions       string
+	Renderer         string
+	Vendor           string
+	Version          string
 }
 ```
 
@@ -805,14 +893,37 @@ func CreateDevice(
 	PointerSize uint8,
 	PointerAlignment uint8,
 	MaxMemorySize uint64,
-	RequiresShaderPatching bool,
+	Extensions string,
+	Renderer string,
+	Vendor string,
+	Version string,
 ) *Device
 ```
+
+#### func  ResolveDevice
+
+```go
+func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (*Device, error)
+```
+ResolveDevice loads and returns the Device stored in the database d, using id.
+
+#### func (Device) Architecture
+
+```go
+func (d Device) Architecture() device.Architecture
+```
+Architecture return's the device's architecture.
 
 #### func (*Device) Class
 
 ```go
 func (*Device) Class() binary.Class
+```
+
+#### func (*Device) GetExtensions
+
+```go
+func (c *Device) GetExtensions() string
 ```
 
 #### func (*Device) GetMaxMemorySize
@@ -851,10 +962,28 @@ func (c *Device) GetPointerAlignment() uint8
 func (c *Device) GetPointerSize() uint8
 ```
 
-#### func (*Device) GetRequiresShaderPatching
+#### func (*Device) GetRenderer
 
 ```go
-func (c *Device) GetRequiresShaderPatching() bool
+func (c *Device) GetRenderer() string
+```
+
+#### func (*Device) GetVendor
+
+```go
+func (c *Device) GetVendor() string
+```
+
+#### func (*Device) GetVersion
+
+```go
+func (c *Device) GetVersion() string
+```
+
+#### func (Device) HasExtension
+
+```go
+func (d Device) HasExtension(extension string) bool
 ```
 
 #### type DeviceId
@@ -867,6 +996,13 @@ type DeviceId struct {
 ```
 
 Handle DeviceId
+
+#### func  StoreDevice
+
+```go
+func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceId, error)
+```
+StoreDevice stores v into the database d, returning the DeviceId.
 
 #### func (*DeviceId) Class
 
@@ -886,7 +1022,7 @@ func (h DeviceId) Valid() bool
 type DeviceIdArray []DeviceId
 ```
 
-Array DeviceIdArray
+Array DeviceIdˢ
 
 #### func (DeviceIdArray) Format
 
@@ -933,13 +1069,19 @@ func (c *EnumEntry) GetName() string
 func (c *EnumEntry) GetValue() uint32
 ```
 
+#### func (EnumEntry) String
+
+```go
+func (e EnumEntry) String() string
+```
+
 #### type EnumEntryArray
 
 ```go
 type EnumEntryArray []EnumEntry
 ```
 
-Array EnumEntryArray
+Array EnumEntryˢ
 
 #### func (EnumEntryArray) Format
 
@@ -955,7 +1097,7 @@ type EnumInfo struct {
 	Name    string
 	Kind    TypeKind
 	Entries EnumEntryArray
-	Extends EnumInfoArray
+	Extends EnumInfoPtrArray
 }
 ```
 
@@ -968,7 +1110,7 @@ func CreateEnumInfo(
 	Name string,
 	Kind TypeKind,
 	Entries EnumEntryArray,
-	Extends EnumInfoArray,
+	Extends EnumInfoPtrArray,
 ) *EnumInfo
 ```
 
@@ -987,7 +1129,7 @@ func (c *EnumInfo) GetEntries() EnumEntryArray
 #### func (*EnumInfo) GetExtends
 
 ```go
-func (c *EnumInfo) GetExtends() EnumInfoArray
+func (c *EnumInfo) GetExtends() EnumInfoPtrArray
 ```
 
 #### func (*EnumInfo) GetKind
@@ -1005,15 +1147,29 @@ func (c *EnumInfo) GetName() string
 #### type EnumInfoArray
 
 ```go
-type EnumInfoArray []*EnumInfo
+type EnumInfoArray []EnumInfo
 ```
 
-Array EnumInfoRefArray
+Array EnumInfoˢ
 
 #### func (EnumInfoArray) Format
 
 ```go
 func (a EnumInfoArray) Format(f fmt.State, c rune)
+```
+
+#### type EnumInfoPtrArray
+
+```go
+type EnumInfoPtrArray []*EnumInfo
+```
+
+Array EnumInfoᵖˢ
+
+#### func (EnumInfoPtrArray) Format
+
+```go
+func (a EnumInfoPtrArray) Format(f fmt.State, c rune)
 ```
 
 #### type FieldInfo
@@ -1058,15 +1214,29 @@ func (c *FieldInfo) GetType() TypeInfo
 #### type FieldInfoArray
 
 ```go
-type FieldInfoArray []*FieldInfo
+type FieldInfoArray []FieldInfo
 ```
 
-Array FieldInfoRefArray
+Array FieldInfoˢ
 
 #### func (FieldInfoArray) Format
 
 ```go
 func (a FieldInfoArray) Format(f fmt.State, c rune)
+```
+
+#### type FieldInfoPtrArray
+
+```go
+type FieldInfoPtrArray []*FieldInfo
+```
+
+Array FieldInfoᵖˢ
+
+#### func (FieldInfoPtrArray) Format
+
+```go
+func (a FieldInfoPtrArray) Format(f fmt.State, c rune)
 ```
 
 #### type Hierarchy
@@ -1087,6 +1257,14 @@ func CreateHierarchy(
 	Root AtomGroup,
 ) *Hierarchy
 ```
+
+#### func  ResolveHierarchy
+
+```go
+func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (*Hierarchy, error)
+```
+ResolveHierarchy loads and returns the Hierarchy stored in the database d, using
+id.
 
 #### func (*Hierarchy) Class
 
@@ -1110,6 +1288,13 @@ type HierarchyId struct {
 ```
 
 Handle HierarchyId
+
+#### func  StoreHierarchy
+
+```go
+func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyId, error)
+```
+StoreHierarchy stores v into the database d, returning the HierarchyId.
 
 #### func (*HierarchyId) Class
 
@@ -1150,10 +1335,16 @@ func (i ImageFormat) IsFloat32() bool
 func (i ImageFormat) IsRGBA8() bool
 ```
 
+#### func (*ImageFormat) Parse
+
+```go
+func (v *ImageFormat) Parse(s string) error
+```
+
 #### func (ImageFormat) String
 
 ```go
-func (i ImageFormat) String() string
+func (v ImageFormat) String() string
 ```
 
 #### type ImageInfo
@@ -1180,6 +1371,14 @@ func CreateImageInfo(
 	Data BinaryId,
 ) *ImageInfo
 ```
+
+#### func  ResolveImageInfo
+
+```go
+func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (*ImageInfo, error)
+```
+ResolveImageInfo loads and returns the ImageInfo stored in the database d, using
+id.
 
 #### func (*ImageInfo) Class
 
@@ -1221,6 +1420,13 @@ type ImageInfoId struct {
 ```
 
 Handle ImageInfoId
+
+#### func  StoreImageInfo
+
+```go
+func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoId, error)
+```
+StoreImageInfo stores v into the database d, returning the ImageInfoId.
 
 #### func (*ImageInfoId) Class
 
@@ -1314,6 +1520,14 @@ func CreateMemoryInfo(
 ) *MemoryInfo
 ```
 
+#### func  ResolveMemoryInfo
+
+```go
+func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (*MemoryInfo, error)
+```
+ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d,
+using id.
+
 #### func (*MemoryInfo) Class
 
 ```go
@@ -1354,6 +1568,13 @@ type MemoryInfoId struct {
 ```
 
 Handle MemoryInfoId
+
+#### func  StoreMemoryInfo
+
+```go
+func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryInfoId, error)
+```
+StoreMemoryInfo stores v into the database d, returning the MemoryInfoId.
 
 #### func (*MemoryInfoId) Class
 
@@ -1426,7 +1647,7 @@ Unpack unpacks the RPC-friendly MemoryRange structure into the memory Range o.
 type MemoryRangeArray []MemoryRange
 ```
 
-Array MemoryRangeArray
+Array MemoryRangeˢ
 
 #### func (MemoryRangeArray) Format
 
@@ -1503,7 +1724,7 @@ func (c *ParameterInfo) GetType() TypeInfo
 type ParameterInfoArray []ParameterInfo
 ```
 
-Array ParameterInfoArray
+Array ParameterInfoˢ
 
 #### func (ParameterInfoArray) Format
 
@@ -1515,26 +1736,27 @@ func (a ParameterInfoArray) Format(f fmt.State, c rune)
 
 ```go
 type RPC interface {
-	Import(l log.Logger, name string, Data U8Array) (CaptureId, error)
+	GetSchema(l log.Logger) (ClassPtrArray, error)
+	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
-	GetState(l log.Logger, capture CaptureId, after uint64) (BinaryId, error)
-	GetHierarchy(l log.Logger, capture CaptureId) (HierarchyId, error)
-	GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng MemoryRange) (MemoryInfoId, error)
-	GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings) (ImageInfoId, error)
-	GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64) (ImageInfoId, error)
-	GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, mask TimingMask) (TimingInfoId, error)
-	PrerenderFramebuffers(l log.Logger, device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array) (BinaryId, error)
-	ReplaceAtom(l log.Logger, capture CaptureId, atomId uint64, atomType uint16, data Binary) (CaptureId, error)
-	ResolveAtomStream(l log.Logger, id AtomStreamId) (AtomStream, error)
-	ResolveBinary(l log.Logger, id BinaryId) (Binary, error)
-	ResolveCapture(l log.Logger, id CaptureId) (Capture, error)
-	ResolveDevice(l log.Logger, id DeviceId) (Device, error)
-	ResolveHierarchy(l log.Logger, id HierarchyId) (Hierarchy, error)
-	ResolveImageInfo(l log.Logger, id ImageInfoId) (ImageInfo, error)
-	ResolveMemoryInfo(l log.Logger, id MemoryInfoId) (MemoryInfo, error)
-	ResolveSchema(l log.Logger, id SchemaId) (Schema, error)
-	ResolveTimingInfo(l log.Logger, id TimingInfoId) (TimingInfo, error)
+	GetState(capture CaptureId, after uint64, l log.Logger) (BinaryId, error)
+	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
+	GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (MemoryInfoId, error)
+	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
+	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
+	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
+	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array, l log.Logger) (BinaryId, error)
+	ReplaceAtom(capture CaptureId, atomId uint64, atomType uint16, data Binary, l log.Logger) (CaptureId, error)
+	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
+	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
+	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
+	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
+	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
+	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
+	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
+	ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
+	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 ```
 
@@ -1592,6 +1814,87 @@ func (c *RenderSettings) GetMaxWidth() uint32
 func (c *RenderSettings) GetWireframe() bool
 ```
 
+#### type Resolver
+
+```go
+type Resolver struct {
+	Database database.Database
+}
+```
+
+
+#### func (Resolver) ResolveAtomStream
+
+```go
+func (r Resolver) ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
+```
+ResolveAtomStream loads and returns the AtomStream stored in the resolver's
+database, using id.
+
+#### func (Resolver) ResolveBinary
+
+```go
+func (r Resolver) ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
+```
+ResolveBinary loads and returns the Binary stored in the resolver's database,
+using id.
+
+#### func (Resolver) ResolveCapture
+
+```go
+func (r Resolver) ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
+```
+ResolveCapture loads and returns the Capture stored in the resolver's database,
+using id.
+
+#### func (Resolver) ResolveDevice
+
+```go
+func (r Resolver) ResolveDevice(id DeviceId, l log.Logger) (Device, error)
+```
+ResolveDevice loads and returns the Device stored in the resolver's database,
+using id.
+
+#### func (Resolver) ResolveHierarchy
+
+```go
+func (r Resolver) ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
+```
+ResolveHierarchy loads and returns the Hierarchy stored in the resolver's
+database, using id.
+
+#### func (Resolver) ResolveImageInfo
+
+```go
+func (r Resolver) ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
+```
+ResolveImageInfo loads and returns the ImageInfo stored in the resolver's
+database, using id.
+
+#### func (Resolver) ResolveMemoryInfo
+
+```go
+func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
+```
+ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's
+database, using id.
+
+#### func (Resolver) ResolveSchema
+
+```go
+func (r Resolver) ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
+```
+ResolveSchema loads and returns the Schema stored in the resolver's database,
+using id.
+
+#### func (Resolver) ResolveTimingInfo
+
+```go
+func (r Resolver) ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
+```
+ResolveTimingInfo loads and returns the TimingInfo stored in the resolver's
+database, using id.
+
 #### type Schema
 
 ```go
@@ -1612,6 +1915,13 @@ func CreateSchema(
 	Apis ApiSchemaArray,
 ) *Schema
 ```
+
+#### func  ResolveSchema
+
+```go
+func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (*Schema, error)
+```
+ResolveSchema loads and returns the Schema stored in the database d, using id.
 
 #### func (*Schema) Class
 
@@ -1641,6 +1951,13 @@ type SchemaId struct {
 ```
 
 Handle SchemaId
+
+#### func  StoreSchema
+
+```go
+func StoreSchema(v *Schema, d database.Database, l log.Logger) (SchemaId, error)
+```
+StoreSchema stores v into the database d, returning the SchemaId.
 
 #### func (*SchemaId) Class
 
@@ -1755,7 +2072,7 @@ type StructInfo struct {
 	binary.Generate
 	Name   string
 	Kind   TypeKind
-	Fields FieldInfoArray
+	Fields FieldInfoPtrArray
 }
 ```
 
@@ -1767,7 +2084,7 @@ Class StructInfo
 func CreateStructInfo(
 	Name string,
 	Kind TypeKind,
-	Fields FieldInfoArray,
+	Fields FieldInfoPtrArray,
 ) *StructInfo
 ```
 
@@ -1780,7 +2097,7 @@ func (*StructInfo) Class() binary.Class
 #### func (*StructInfo) GetFields
 
 ```go
-func (c *StructInfo) GetFields() FieldInfoArray
+func (c *StructInfo) GetFields() FieldInfoPtrArray
 ```
 
 #### func (*StructInfo) GetKind
@@ -1818,6 +2135,14 @@ func CreateTimingInfo(
 ) *TimingInfo
 ```
 
+#### func  ResolveTimingInfo
+
+```go
+func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (*TimingInfo, error)
+```
+ResolveTimingInfo loads and returns the TimingInfo stored in the database d,
+using id.
+
 #### func (*TimingInfo) Class
 
 ```go
@@ -1852,6 +2177,13 @@ type TimingInfoId struct {
 ```
 
 Handle TimingInfoId
+
+#### func  StoreTimingInfo
+
+```go
+func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingInfoId, error)
+```
+StoreTimingInfo stores v into the database d, returning the TimingInfoId.
 
 #### func (*TimingInfoId) Class
 
@@ -1899,10 +2231,16 @@ func (i TimingMask) IsTimingPerDrawCall() bool
 func (i TimingMask) IsTimingPerFrame() bool
 ```
 
+#### func (*TimingMask) Parse
+
+```go
+func (v *TimingMask) Parse(s string) error
+```
+
 #### func (TimingMask) String
 
 ```go
-func (i TimingMask) String() string
+func (v TimingMask) String() string
 ```
 
 #### type TypeInfo
@@ -1916,6 +2254,20 @@ type TypeInfo interface {
 ```
 
 Interface TypeInfo
+
+#### type TypeInfoArray
+
+```go
+type TypeInfoArray []TypeInfo
+```
+
+Array TypeInfoˢ
+
+#### func (TypeInfoArray) Format
+
+```go
+func (a TypeInfoArray) Format(f fmt.State, c rune)
+```
 
 #### type TypeKind
 
@@ -2084,10 +2436,16 @@ func (i TypeKind) IsU64() bool
 func (i TypeKind) IsU8() bool
 ```
 
+#### func (*TypeKind) Parse
+
+```go
+func (v *TypeKind) Parse(s string) error
+```
+
 #### func (TypeKind) String
 
 ```go
-func (i TypeKind) String() string
+func (v TypeKind) String() string
 ```
 
 #### type U64Array
@@ -2096,7 +2454,7 @@ func (i TypeKind) String() string
 type U64Array []uint64
 ```
 
-Array U64Array
+Array U64ˢ
 
 #### func (U64Array) Format
 
@@ -2110,7 +2468,7 @@ func (a U64Array) Format(f fmt.State, c rune)
 type U8Array []uint8
 ```
 
-Array U8Array
+Array U8ˢ
 
 #### func (U8Array) Format
 

@@ -7,92 +7,34 @@ observed in the capture.
 
 ## Usage
 
-#### type Data
-
 ```go
-type Data interface {
-	Get(db database.Database, logger log.Logger) ([]byte, error)
-	Size() uint64
+var Tmp = Range{
+	Base: 0x00000000ff000000,
+	Size: 0x0000000000ffffff,
 }
 ```
 
-Data is the interface for a data source that can be resolved to a byte slice
-with Get.
-
-Size returns the number of bytes that would be returned by calling Get.
-
-#### type DataSliceWriter
+#### func  Reader
 
 ```go
-type DataSliceWriter interface {
-	Data
-	Slice(r Range) DataSliceWriter
-	Write(d Data)
-}
+func Reader(s Slice, d database.Database, l log.Logger) io.Reader
 ```
+Reader returns a binary reader for the specified Slice.
 
-DataSliceWriter is similar to DataSlicer, but also has the Write method for
-modifying the data that the DataSliceWriter refers to.
-
-Write will replace the data in this DataSliceWriter with d. If d is shorter in
-length than the slice, then only the range [0, d.Size()-1] bytes will be
-replaced. A sliced DataSliceWriter shares the same data from which it was sliced
-- i.e. any mutations to a DataSliceWriter will also affect the Data it was
-sliced from.
-
-#### type DataSlicer
+#### func  Write
 
 ```go
-type DataSlicer interface {
-	Data
-	Slice(r Range) DataSlicer
-}
+func Write(w binary.Writer, arch device.Architecture, v interface{}) error
 ```
+Write writes the value v to the writer w. If v is an array or slice, then each
+of the elements will be written, sequentially.
 
-DataSlicer extends the Data interface with aditional support for slicing.
-
-Slice returns a new DataSlicer referencing a subset range of the data. The range
-r is relative to the base of the DataSlicer. For example a slice of [0, 4] would
-return a DataSlicer referencing the first 5 bytes of this DataSlicer. Attempting
-to slice outside the range of this DataSlicer will result in a panic.
-
-#### func  ResourceData
+#### func  Writer
 
 ```go
-func ResourceData(resId binary.ID, size uint64) DataSlicer
+func Writer(p *Pool, rng Range) io.Writer
 ```
-ResourceData returns a DataSlicer that wraps a resource. resId is the identifier
-of the resource and size is the size in bytes of the resource.
-
-#### type Memory
-
-```go
-type Memory struct {
-	binary.Generate `disable:"true"`
-}
-```
-
-Memory represents an unbounded and isolated memory space. Memory can be used to
-represent the application address space, or hidden GPU memory.
-
-Memory can be sliced into smaller regions which can be read or written to. All
-writes to Memory or its slices do not actually perform binary data copies, but
-instead all writes are stored as lightweight records. Only when a Memory slice
-has Get called will any resolving, loading or copying of binary data occur.
-
-#### func (*Memory) Slice
-
-```go
-func (m *Memory) Slice(rng Range) DataSliceWriter
-```
-Slice returns a DataSliceWriter referencing the subset of the Memory range.
-
-#### func (*Memory) Write
-
-```go
-func (m *Memory) Write(d Data)
-```
-Write copies d to the Memory slice [0, d.Size()-1].
+Writer returns a binary writer for the specified memory pool and range.
 
 #### type Pointer
 
@@ -101,6 +43,96 @@ type Pointer uint64
 ```
 
 Pointer is the type representing a memory pointer.
+
+#### func (Pointer) Offset
+
+```go
+func (p Pointer) Offset(n uint64) Pointer
+```
+Offset returns the pointer offset by n bytes.
+
+#### func (Pointer) Range
+
+```go
+func (p Pointer) Range(s uint64) Range
+```
+Range returns a Range of size s with the base of this pointer.
+
+#### func (Pointer) String
+
+```go
+func (p Pointer) String() string
+```
+
+#### type Pool
+
+```go
+type Pool struct {
+	binary.Generate `disable:"true"`
+}
+```
+
+Pool represents an unbounded and isolated memory space. Pool can be used to
+represent the application address space, or hidden GPU Pool.
+
+Pool can be sliced into smaller regions which can be read or written to. All
+writes to Pool or its slices do not actually perform binary data copies, but
+instead all writes are stored as lightweight records. Only when a Pool slice has
+Get called will any resolving, loading or copying of binary data occur.
+
+#### func (*Pool) At
+
+```go
+func (m *Pool) At(p Pointer) Slice
+```
+At returns an unbounded Slice starting at p.
+
+#### func (*Pool) Slice
+
+```go
+func (m *Pool) Slice(rng Range) Slice
+```
+Slice returns a Slice referencing the subset of the Pool range.
+
+#### func (*Pool) String
+
+```go
+func (m *Pool) String() string
+```
+String returns the full history of writes performed to this pool.
+
+#### func (*Pool) Write
+
+```go
+func (m *Pool) Write(dst Pointer, src Slice)
+```
+Write copies the slice src to dst.
+
+#### type PoolID
+
+```go
+type PoolID uint32
+```
+
+PoolID is an indentifier of a Pool.
+
+```go
+const ApplicationPool PoolID = 0
+```
+ApplicationPool is the PoolID of Pool representing the application's memory
+address space.
+
+#### func (*PoolID) Parse
+
+```go
+func (v *PoolID) Parse(s string) error
+```
+
+#### func (PoolID) String
+
+```go
+func (v PoolID) String() string
+```
 
 #### type Range
 
@@ -126,6 +158,13 @@ func (*Range) Class() binary.Class
 func (i Range) Contains(p Pointer) bool
 ```
 Contains returns true if the pointer p is within the Range.
+
+#### func (Range) End
+
+```go
+func (i Range) End() Pointer
+```
+End returns a Pointer to one byte beyond the end of the Range.
 
 #### func (Range) Expand
 
@@ -155,6 +194,13 @@ two memory ranges do not intersect, then this function panics.
 func (i Range) Last() Pointer
 ```
 Last returns a Pointer to the last byte in the Range.
+
+#### func (Range) Overlaps
+
+```go
+func (i Range) Overlaps(other Range) bool
+```
+Overlaps returns true if other overlaps this memory range.
 
 #### func (Range) Span
 
@@ -210,3 +256,51 @@ Resize resizes the RangeList to the specified length.
 func (l *RangeList) SetSpan(index int, span interval.U64Span)
 ```
 SetSpan adjusts the range of the span with the specified index in the RangeList.
+
+#### type Slice
+
+```go
+type Slice interface {
+	// Get resolves all the bytes representing the slice.
+	Get(d database.Database, l log.Logger) ([]byte, error)
+
+	// ResourceID returns the identifier of the resource representing the slice,
+	// creating a new resource if it isn't already backed by one.
+	ResourceID(d database.Database, l log.Logger) (binary.ID, error)
+
+	// Size returns the number of bytes that would be returned by calling Get.
+	Size() uint64
+
+	// Slice returns a new Slice referencing a subset range of the data.
+	// The range r is relative to the base of the Slice. For example a slice of
+	// [0, 4] would return a Slice referencing the first 5 bytes of this Slice.
+	// Attempting to slice outside the range of this Slice will result in a
+	// panic.
+	Slice(r Range) Slice
+}
+```
+
+Slice is the interface for a data source that can be resolved to a byte slice
+with Get, or 'sliced' to a subset of the data source.
+
+#### func  Blob
+
+```go
+func Blob(data []byte) Slice
+```
+Blob returns a read-only Slice that wraps data.
+
+#### func  Data
+
+```go
+func Data(arch device.Architecture, data ...interface{}) Slice
+```
+Data returns a read-only Slice that contains the encoding of data.
+
+#### func  Resource
+
+```go
+func Resource(resId binary.ID, size uint64) Slice
+```
+Resource returns a Slice that wraps a resource stored in the database. resId is
+the identifier of the data and size is the size in bytes of the data.

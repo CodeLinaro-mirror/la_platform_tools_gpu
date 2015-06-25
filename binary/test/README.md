@@ -6,6 +6,13 @@
 ## Usage
 
 ```go
+var (
+	TypeAID = binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}
+	TypeBID = binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}
+)
+```
+
+```go
 var BadObject = &BadType{data: "BadObject"}
 ```
 
@@ -56,6 +63,27 @@ type BadType struct {
 ```
 
 
+#### type Bytes
+
+```go
+type Bytes struct {
+	Data []byte
+}
+```
+
+
+#### func (Bytes) Add
+
+```go
+func (b Bytes) Add(data ...byte) Bytes
+```
+
+#### func (Bytes) ID
+
+```go
+func (b Bytes) ID(id binary.ID) Bytes
+```
+
 #### type Entry
 
 ```go
@@ -71,7 +99,7 @@ type Entry struct {
 
 ```go
 type TypeA struct {
-	binary.Generate
+	binary.Generate `id:"TypeAID"`
 }
 ```
 
@@ -86,7 +114,7 @@ func (*TypeA) Class() binary.Class
 
 ```go
 type TypeB struct {
-	binary.Generate
+	binary.Generate `id:"TypeBID"`
 }
 ```
 

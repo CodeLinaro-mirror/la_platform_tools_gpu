@@ -11,6 +11,15 @@ const NoID = ^ID(0)
 ```
 NoID is used when you have to pass an ID, but don't have one to use.
 
+#### func  Data
+
+```go
+func Data(a device.Architecture, d database.Database, l log.Logger, at memory.Pointer, v ...interface{}) (memory.Range, binary.ID)
+```
+Data encodes and stores the value v to the database d, returning the memory
+range and new resource identifier. Data can be used to as a helper to AddRead
+and AddWrite methods on atoms.
+
 #### func  Register
 
 ```go
@@ -34,8 +43,11 @@ type Atom interface {
 	// Flags returns the flags of the atom.
 	Flags() Flags
 
+	// Observations returns all the memory observations made by the atom.
+	Observations() *Observations
+
 	// Mutate mutates the State using the atom.
-	Mutate(*gfxapi.State) error
+	Mutate(*gfxapi.State, database.Database, log.Logger) error
 }
 ```
 
@@ -84,6 +96,18 @@ IsDrawCall returns true if the atom is a draw call.
 func (f Flags) IsEndOfFrame() bool
 ```
 IsEndOfFrame returns true if the atom represents the end of a frame.
+
+#### func (*Flags) Parse
+
+```go
+func (v *Flags) Parse(s string) error
+```
+
+#### func (Flags) String
+
+```go
+func (v Flags) String() string
+```
 
 #### type Group
 
@@ -150,18 +174,18 @@ Count returns the number of immediate items this group contains.
 ```go
 func (g Group) Index(index uint64) (baseAtomID ID, subgroup *Group)
 ```
-Index returns the item with the specified index. If the item refers directly to
-an atom identifier then the atom identifier is returned in baseAtomID and
-subgroup is assigned nil. If the item is a sub-group then baseAtomID is returned
-as the lowest atom identifier found in the sub-group and subgroup is assigned
-the sub-group pointer.
+Index returns the item at the specified index. If the item refers directly to an
+atom identifier then the atom identifier is returned in baseAtomID and subgroup
+is assigned nil. If the item is a sub-group then baseAtomID is returned as the
+lowest atom identifier found in the sub-group and subgroup is assigned the
+sub-group pointer.
 
 #### func (Group) IndexOf
 
 ```go
 func (g Group) IndexOf(atomID ID) uint64
 ```
-IndexOf returns the item index that refers directly to, or contains the given
+IndexOf returns the item index that ID refers directly to, or contains the given
 atom identifer.
 
 #### func (*Group) Insert
@@ -261,6 +285,18 @@ type ID uint64
 
 ID is the index of an atom in an atom stream.
 
+#### func (*ID) Parse
+
+```go
+func (v *ID) Parse(s string) error
+```
+
+#### func (ID) String
+
+```go
+func (v ID) String() string
+```
+
 #### type IDSet
 
 ```go
@@ -303,9 +339,10 @@ List is a list of atoms.
 #### func (*List) Add
 
 ```go
-func (l *List) Add(a Atom)
+func (l *List) Add(a ...Atom) ID
 ```
-Add adds a to the end of the atom list.
+Add appends a to the end of the atom list, returning the id of the last added
+atom.
 
 #### func (*List) AddAt
 
@@ -347,20 +384,12 @@ WriteTo writes all atoms in the list to w, terminating with a single EOS atom.
 ```go
 type Observation struct {
 	binary.Generate
-	Range      memory.Range // The memory range that was observed.
-	ResourceID binary.ID    // The resource identifier holding the memory that was observed.
+	Range memory.Range // Memory range that was observed.
+	ID    binary.ID    // The resource identifier of the observed data.
 }
 ```
 
-Observation is an Atom describing a region of application space memory that was
-observed at capture time.
-
-#### func (*Observation) API
-
-```go
-func (a *Observation) API() gfxapi.API
-```
-Atom compliance
+Observation represents a single read or write observation made by an atom.
 
 #### func (*Observation) Class
 
@@ -368,28 +397,49 @@ Atom compliance
 func (*Observation) Class() binary.Class
 ```
 
-#### func (*Observation) Flags
+#### func (Observation) String
 
 ```go
-func (a *Observation) Flags() Flags
+func (o Observation) String() string
 ```
 
-#### func (*Observation) Mutate
+#### type Observations
 
 ```go
-func (a *Observation) Mutate(s *gfxapi.State) error
+type Observations struct {
+	binary.Generate
+	Reads  []Observation
+	Writes []Observation
+}
 ```
 
-#### func (*Observation) String
+Observations is a collection of reads and write observations performed by an
+atom.
+
+#### func (Observations) ApplyReads
 
 ```go
-func (a *Observation) String() string
+func (o Observations) ApplyReads(p *memory.Pool)
+```
+ApplyReads applies all the observed reads to memory pool p.
+
+#### func (Observations) ApplyWrites
+
+```go
+func (o Observations) ApplyWrites(p *memory.Pool)
+```
+ApplyReads applies all the observed writes to the memory pool p.
+
+#### func (*Observations) Class
+
+```go
+func (*Observations) Class() binary.Class
 ```
 
-#### func (*Observation) TypeID
+#### func (Observations) String
 
 ```go
-func (a *Observation) TypeID() TypeID
+func (o Observations) String() string
 ```
 
 #### type Range
@@ -514,14 +564,14 @@ SetSpan sets the atom identifier span for the group at index in the list.
 ```go
 type Resource struct {
 	binary.Generate
-	ResourceID binary.ID // The resource identifier holding the memory that was observed.
-	Data       []byte    // The resource data
+	ID   binary.ID // The resource identifier holding the memory that was observed.
+	Data []byte    // The resource data
 }
 ```
 
-Resource is an Atom that embeds a blob of memory into the stream. These atoms
-are typically only used for .gfxtrace files as they are stripped from the stream
-on import and placed into the database.
+Resource is an Atom that embeds a blob of memory into the atom stream. These
+atoms are typically only used for .gfxtrace files as they are stripped from the
+stream on import and their resources are placed into the database.
 
 #### func (*Resource) API
 
@@ -545,7 +595,13 @@ func (a *Resource) Flags() Flags
 #### func (*Resource) Mutate
 
 ```go
-func (a *Resource) Mutate(s *gfxapi.State) error
+func (a *Resource) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error
+```
+
+#### func (*Resource) Observations
+
+```go
+func (a *Resource) Observations() *Observations
 ```
 
 #### func (*Resource) String
@@ -598,7 +654,7 @@ Transforms is a list of Transformer objects.
 func (l *Transforms) Add(t ...Transformer)
 ```
 Add is a convenience function for appending the list of Transformers t to the
-end of the Transforms list.
+end of the Transforms list, after filtering out nil Transformers.
 
 #### func (Transforms) Transform
 
@@ -624,11 +680,19 @@ const TypeIDEos TypeID = 0xffff
 TypeIDEos is used as a special end of stream marker.
 
 ```go
-const TypeIDObservation TypeID = 0xfffe
+const TypeIDResource TypeID = 0xfffd
 ```
 
+#### func (*TypeID) Parse
+
 ```go
-const TypeIDResource TypeID = 0xfffd
+func (v *TypeID) Parse(s string) error
+```
+
+#### func (TypeID) String
+
+```go
+func (v TypeID) String() string
 ```
 
 #### type TypeInfo

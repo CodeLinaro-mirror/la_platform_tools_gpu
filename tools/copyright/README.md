@@ -7,6 +7,7 @@
 
 ```go
 var (
+	External  = []*regexp.Regexp{}
 	Generated = []*regexp.Regexp{}
 	Normal    = []*regexp.Regexp{}
 )
@@ -16,6 +17,12 @@ var (
 
 ```go
 func Build(name string, i Info) string
+```
+
+#### func  MatchExternal
+
+```go
+func MatchExternal(file []byte) int
 ```
 
 #### func  MatchGenerated

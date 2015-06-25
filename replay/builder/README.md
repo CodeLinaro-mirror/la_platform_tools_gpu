@@ -27,11 +27,10 @@ functions and posting back data.
 #### func  New
 
 ```go
-func New(ptrSize, ptrAlignment int, byteOrder endian.ByteOrder) *Builder
+func New(architecture device.Architecture) *Builder
 ```
-New returns a newly constructed Builder configured to replay on a target
-architecture that has a pointer size of ptrSize bytes and and alignment of
-ptrAlignment bytes, with byte ordering that matches byteOrder.
+New returns a newly constructed Builder configured to replay on a target with
+the specified Architecture.
 
 #### func (*Builder) AllocateMemory
 
@@ -64,6 +63,13 @@ each of the allocated chunks and the size of the entire allocation. The
 allocation block will be freed on the next call to EndAtom, upon which reading
 or writing to this memory will result in undefined behavior.
 
+#### func (*Builder) Architecture
+
+```go
+func (b *Builder) Architecture() device.Architecture
+```
+Architecture returns the architecture for the target replay device.
+
 #### func (*Builder) BeginAtom
 
 ```go
@@ -89,25 +95,15 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 Build compiles the replay instructions, returning a Payload that can be sent to
 the replay virtual-machine and a ResponseDecoder for interpreting the responses.
 
-#### func (*Builder) CallNoPush
+#### func (*Builder) Call
 
 ```go
-func (b *Builder) CallNoPush(f FunctionInfo)
+func (b *Builder) Call(f FunctionInfo)
 ```
-CallNoPush will invoke the function f, popping all parameter values previously
-pushed to the stack with Push, starting with the first parameter. Unlike
-CallPush the return value of the function will not be pushed on to the stack and
-functions with void return types are accepted.
-
-#### func (*Builder) CallPush
-
-```go
-func (b *Builder) CallPush(f FunctionInfo)
-```
-CallPush will invoke the function f, popping all parameter values previously
-pushed to the stack with Push, starting with the first parameter. After invoking
-the function the return value of the function will be pushed on to the stack. If
-f has a void return type then CallPush will panic.
+Call will invoke the function f, popping all parameter values previously pushed
+to the stack with Push, starting with the first parameter. If f has a non-void
+return type, after invoking the function the return value of the function will
+be pushed on to the stack.
 
 #### func (*Builder) Clone
 
@@ -117,6 +113,14 @@ func (b *Builder) Clone(index int)
 Clone makes a copy of the n-th element from the top of the stack and pushes the
 copy to the top of the stack.
 
+#### func (*Builder) CommitAtom
+
+```go
+func (b *Builder) CommitAtom()
+```
+CommitAtom should be called after emitting the commands to replay a single atom.
+CommitAtom frees all temporary allocated memory and clears the stack.
+
 #### func (*Builder) Copy
 
 ```go
@@ -124,15 +128,6 @@ func (b *Builder) Copy(size uint64)
 ```
 Copy pops the target address and then the source address from the top of the
 stack, and then copies Count bytes from source to target.
-
-#### func (*Builder) EndAtom
-
-```go
-func (b *Builder) EndAtom()
-```
-EndAtom should be called after emitting the commands to replay a single atom.
-EndAtom frees all allocated temporary memory, and asserts the stack should be
-empty.
 
 #### func (*Builder) Load
 
@@ -142,29 +137,12 @@ func (b *Builder) Load(ty protocol.Type, addr value.Pointer)
 Load loads the value of type ty from addr and then pushes the loaded value to
 the top of the stack.
 
-#### func (*Builder) Observation
+#### func (*Builder) MapMemory
 
 ```go
-func (b *Builder) Observation(rng memory.Range, resourceID binary.ID)
+func (b *Builder) MapMemory(rng memory.Range)
 ```
-Observation fills the memory range in capture address-space rng with the data of
-resourceID.
-
-#### func (*Builder) PointerAlignment
-
-```go
-func (b *Builder) PointerAlignment() int
-```
-PointerAlignment returns the required alignment of a pointer in bytes for the
-replay target architecture.
-
-#### func (*Builder) PointerSize
-
-```go
-func (b *Builder) PointerSize() int
-```
-PointerSize returns the size of a pointer in bytes for the target replay
-architecture.
+MapMemory adds rng as a memory range that needs allocating for replay.
 
 #### func (*Builder) Pop
 
@@ -176,7 +154,7 @@ Pop removes the top count values from the top of the stack.
 #### func (*Builder) Post
 
 ```go
-func (b *Builder) Post(addr value.Pointer, size uint64, id atom.ID, d PostDecoder)
+func (b *Builder) Post(addr value.Pointer, size uint64, p Postback)
 ```
 Post posts size bytes from addr to the decoder d. The decoder d must consume all
 size bytes before returning; failure to do this will corrupt all subsequent
@@ -188,6 +166,15 @@ postbacks.
 func (b *Builder) Push(val value.Value)
 ```
 Push pushes val to the top of the stack.
+
+#### func (*Builder) RevertAtom
+
+```go
+func (b *Builder) RevertAtom(err error)
+```
+RevertAtom reverts all the instructions since the last call to BeginAtom. Any
+postbacks issued since the last call to BeginAtom will be called with the error
+err and a nil decoder.
 
 #### func (*Builder) Store
 
@@ -214,6 +201,14 @@ func (b *Builder) String(s string) value.Pointer
 String returns a pointer to a block of memory in the constant address-space
 holding the string s. The string will be stored with a null-terminating byte.
 
+#### func (*Builder) Write
+
+```go
+func (b *Builder) Write(rng memory.Range, resourceID binary.ID)
+```
+Write fills the memory range in capture address-space rng with the data of
+resourceID.
+
 #### type FunctionInfo
 
 ```go
@@ -227,34 +222,24 @@ type FunctionInfo struct {
 FunctionInfo holds the information about a function that can be called by the
 replay virtual-machine.
 
-#### type PostDecoder
-
-```go
-type PostDecoder func(binary.Decoder) (interface{}, error)
-```
-
-PostDecoder decodes a single atom's postback, returning the postback data or an
-error. The PostDecoder must decode all the data that was issued in the Post call
-before returning.
-
 #### type Postback
 
 ```go
-type Postback struct {
-	ID    atom.ID     // The associated atom for this Postback.
-	Data  interface{} // The postback data. Nil if Error is non-nil.
-	Error error       // Error raised decoding the postback, or nil if there was no error.
-}
+type Postback func(d binary.Decoder, err error) error
 ```
 
-Postback holds the information for a single atom's postback data.
+Postback decodes a single atom's postback, returning and carrying over errors.
+The Postback must decode all the data that was issued in the Post call before
+returning. If err is nil, then d is the Decoder to the postback data. If d is
+nil, then a previous postback failed to decode before decoding could begin for
+this postback and err holds the error.
 
 #### type ResponseDecoder
 
 ```go
-type ResponseDecoder func(r io.Reader) <-chan Postback
+type ResponseDecoder func(r io.Reader, err error)
 ```
 
-ResponseDecoder decodes all postback responses from the replay virtual machine,
-writing each to the returned chan. The chan will be closed once all postbacks
-have been read, or after the first Postback with a non-nil Error.
+ResponseDecoder decodes all postback responses from the replay virtual machine.
+If err is nil, then r is the Reader to the sequential postback data. If r is
+nil, then the postback data was absent or corrupted and err holds the error.

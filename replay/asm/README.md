@@ -7,6 +7,15 @@ machine.
 
 ## Usage
 
+#### func  Check
+
+```go
+func Check(t *testing.T, got []Instruction, expected []Instruction) (matched bool)
+```
+Check is a test helper function that checks the list of got instructions matches
+those in expected. If any differences are found then these are logged to t, and
+the test fails.
+
 #### type Call
 
 ```go

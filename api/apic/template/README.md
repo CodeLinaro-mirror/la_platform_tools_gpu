@@ -23,30 +23,34 @@ var (
 		semantic.Float64Value(1.0),
 
 		semantic.API{},
-		semantic.ArrayIndex{},
-		semantic.Array{},
+		semantic.ArrayAssign{},
+		semantic.ArrayInitializer{},
 		semantic.Assert{},
 		semantic.Assign{},
 		semantic.BinaryOp{},
 		semantic.BitTest{},
 		semantic.Branch{},
-		semantic.Buffer{},
 		semantic.Builtin{},
 		semantic.Call{},
 		semantic.Cast{},
 		semantic.Choice{},
 		semantic.ClassInitializer{},
 		semantic.Class{},
+		semantic.Clone{},
 		semantic.Copy{},
+		semantic.Create{},
 		semantic.DeclareLocal{},
 		semantic.EnumEntry{},
 		semantic.Enum{},
+		semantic.Fence{},
 		semantic.Field{},
 		semantic.Function{},
 		semantic.Global{},
+		semantic.Ignore{},
 		semantic.Iteration{},
 		semantic.Length{},
 		semantic.Local{},
+		semantic.Make{},
 		semantic.MapAssign{},
 		semantic.MapContains{},
 		semantic.MapIndex{},
@@ -56,14 +60,23 @@ var (
 		semantic.Null{},
 		semantic.Observed{},
 		semantic.Parameter{},
+		semantic.PointerRange{},
 		semantic.Pointer{},
 		semantic.Pseudonym{},
+		semantic.Read{},
+		semantic.Reference{},
 		semantic.Return{},
 		semantic.Select{},
+		semantic.SliceAssign{},
+		semantic.SliceIndex{},
+		semantic.SliceRange{},
+		semantic.Slice{},
+		semantic.Slice{},
 		semantic.StaticArray{},
 		semantic.Switch{},
 		semantic.UnaryOp{},
 		semantic.Unknown{},
+		semantic.Write{},
 
 		(*semantic.Annotated)(nil),
 		(*semantic.Expression)(nil),
@@ -99,6 +112,34 @@ func (f *Functions) AllCommands(api interface{}) ([]interface{}, error)
 ```
 AllCommands returns a list of all cmd entries for a given API, regardless of
 whether they are free functions, class methods or pseudonym methods.
+
+#### func (*Functions) Args
+
+```go
+func (f *Functions) Args(arguments ...interface{}) (interface{}, error)
+```
+Args builds a template argument object from a list of arguments. If no arguments
+are passed then the result will be nil. If a single argument is passed then the
+result will be the value of that argument. If the first argument is a map, it is
+assumed to be a base argument set to be augmented. Remaining arguments must come
+in name-value pairs. For example:
+
+    {{define "SingleParameterMacro"}}
+        $ is: {{$}}
+    {{end}}
+
+    {{define "MultipleParameterMacro"}}
+        $.ArgA is: {{$.ArgA}}, $.ArgB is: {{$.ArgB}}
+    {{end}}
+
+    {{template "SingleParameterMacro" (Args)}}
+    {{/* Returns "$ is: nil" */}}
+
+    {{template "SingleParameterMacro" (Args 42)}}
+    {{/* Returns "$ is: 42" */}}
+
+    {{template "MultipleParameterMacro" (Args "ArgA" 4 "ArgB" 2)}}
+    {{/* Returns "$.ArgA is: 4, $.ArgB is: 2" */}}
 
 #### func (*Functions) AssertType
 
@@ -163,15 +204,6 @@ GetAnnotation finds and returns the annotation on ty with the specified name. If
 the annotation cannot be found, or ty does not support annotations then
 GetAnnotation returns nil.
 
-#### func (*Functions) GetArrayParamCount
-
-```go
-func (*Functions) GetArrayParamCount(param *semantic.Parameter) interface{}
-```
-GetArrayParamCount returns the inferred array size for param as a semantic
-expression. If the array size cannot be inferred, then GetArrayParamCount
-returns nil.
-
 #### func (*Functions) Global
 
 ```go
@@ -197,6 +229,13 @@ func (*Functions) HasMore(i int, l interface{}) bool
 ```
 HasMore returns true if the i'th indexed item in l is not the last.
 
+#### func (Functions) HasPrefix
+
+```go
+func (Functions) HasPrefix(s string, prefix string) bool
+```
+HasPrefix tests whether the string s begins with prefix.
+
 #### func (*Functions) Include
 
 ```go
@@ -220,12 +259,19 @@ func (f *Functions) IsNil(v interface{}) bool
 ```
 IsNil returns true if v is nil.
 
+#### func (*Functions) IsNumericType
+
+```go
+func (*Functions) IsNumericType(t interface{}) bool
+```
+Returns true if t is one of the primitive numeric types.
+
 #### func (*Functions) IsNumericValue
 
 ```go
 func (*Functions) IsNumericValue(v interface{}) bool
 ```
-Returns true if v is one of the primitive numeric types.
+Returns true if v is one of the primitive numeric value types.
 
 #### func (*Functions) Join
 
@@ -265,27 +311,38 @@ Lower lower-cases all letters of each string segment.
 func (f *Functions) Macro(name string, arguments ...interface{}) (string, error)
 ```
 Macro invokes the template macro with the specified name and returns the
-template output as a string. If no arguments are passed then $ will be nil for
-the called macro. If a single argument is passed then $ will be the value of
-that argument. If more than one argument is passed then arguments is used as
-name-value pairs, where name is a field on $. For example:
+template output as a string. See Args for how the arguments are processed.
 
-    {{define "SingleParameterMacro"}}
-        $ is: {{$}}
-    {{end}}
+#### func (*Functions) Node
 
-    {{define "MultipleParameterMacro"}}
-        $.ArgA is: {{$.ArgA}}, $.ArgB is: {{$.ArgB}}
-    {{end}}
+```go
+func (f *Functions) Node(prefix string, node interface{}, arguments ...interface{}) (string, error)
+```
+Node dispatches to the template that matches the node best, writing the result
+to the current output writer. If the node is a Type or Expression then the type
+semantic.Type name is tried, then the class of type (the name of the semantic
+class that represents the type). The actual name of the node type is then tried,
+and if none of those matches, the "Default" template is used if present. If no
+possible template could be matched, and error is generated. eg: {{Node
+"TypeName" $}} where $ is a boolean and expression would try
 
-    {{Macro "SingleParameterMacro"}}
-    {{/* Returns "$ is: nil" */}}
+    "TypeName#Bool"
+    "TypeName.Builtin"
+    "TypeName.BinaryOp"
+    "TypeName_Default"
 
-    {{Macro "SingleParameterMacro" 42}}
-    {{/* Returns "$ is: 42" */}}
+See Args for how the arguments are processed, in addition the Node arg will be
+added in and have the value of node, and if the node had a type discovered, the
+Type arg will be added in as well.
 
-    {{Macro "MultipleParameterMacro" "ArgA" 4 "ArgB" 2}}
-    {{/* Returns "$.ArgA is: 4, $.ArgB is: 2" */}}
+#### func (*Functions) PackageOf
+
+```go
+func (f *Functions) PackageOf(v semantic.Node) string
+```
+PackageOf walks the ownership hierarchy to find the API that the supplied object
+belongs to. If it is not the api being processed, then the import name of the
+api is returned.
 
 #### func (*Functions) Reflow
 
@@ -307,6 +364,14 @@ Replace any occurance of old with new in the string segments.
 func (*Functions) Reverse(in interface{}) interface{}
 ```
 Reverse returns a new list with all the elements of in reversed.
+
+#### func (*Functions) SNode
+
+```go
+func (f *Functions) SNode(prefix string, node interface{}, arguments ...interface{}) (string, error)
+```
+SNode dispatches to the template that matches the node best, capturing the
+result and returning it. See Node for the dispatch rules used.
 
 #### func (*Functions) SortBy
 
@@ -353,6 +418,14 @@ Strings returns the arguments as a string list.
 func (*Functions) Tail(start int, array interface{}) interface{}
 ```
 Tail returns a slice of the list from start to len(array).
+
+#### func (*Functions) Template
+
+```go
+func (f *Functions) Template(name string, arguments ...interface{}) (string, error)
+```
+Template invokes the template with the specified name writing the output to the
+current output writer. See Args for how the arguments are processed.
 
 #### func (Functions) Title
 

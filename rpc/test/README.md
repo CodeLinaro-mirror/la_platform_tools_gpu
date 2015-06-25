@@ -22,6 +22,20 @@ type Base interface {
 
 Interface Base
 
+#### type BaseArray
+
+```go
+type BaseArray []Base
+```
+
+Array Baseˢ
+
+#### func (BaseArray) Format
+
+```go
+func (a BaseArray) Format(f fmt.State, c rune)
+```
+
 #### type Derived
 
 ```go
@@ -95,10 +109,16 @@ func (i Enum) IsThree() bool
 func (i Enum) IsTwo() bool
 ```
 
+#### func (*Enum) Parse
+
+```go
+func (v *Enum) Parse(s string) error
+```
+
 #### func (Enum) String
 
 ```go
-func (i Enum) String() string
+func (v Enum) String() string
 ```
 
 #### type ListNode
@@ -143,10 +163,10 @@ func (c *ListNode) GetNext() *ListNode
 #### type ListNodeArray
 
 ```go
-type ListNodeArray []*ListNode
+type ListNodeArray []ListNode
 ```
 
-Array ListNodeRefArray
+Array ListNodeˢ
 
 #### func (ListNodeArray) Format
 
@@ -154,20 +174,34 @@ Array ListNodeRefArray
 func (a ListNodeArray) Format(f fmt.State, c rune)
 ```
 
+#### type ListNodePtrArray
+
+```go
+type ListNodePtrArray []*ListNode
+```
+
+Array ListNodeᵖˢ
+
+#### func (ListNodePtrArray) Format
+
+```go
+func (a ListNodePtrArray) Format(f fmt.State, c rune)
+```
+
 #### type RPC
 
 ```go
 type RPC interface {
-	Add(l log.Logger, a uint32, b uint32) (uint32, error)
-	EnumToString(l log.Logger, e Enum) (string, error)
+	Add(a uint32, b uint32, l log.Logger) (uint32, error)
+	EnumToString(e Enum, l log.Logger) (string, error)
 	GetStruct(l log.Logger) (Struct, error)
-	SetStruct(l log.Logger, s Struct) error
+	SetStruct(s Struct, l log.Logger) error
 	GetResource(l log.Logger) (ResourceId, error)
-	UseResource(l log.Logger, r ResourceId) error
-	ResolveResource(l log.Logger, r ResourceId) (Resource, error)
+	UseResource(r ResourceId, l log.Logger) error
+	ResolveResource(r ResourceId, l log.Logger) (Resource, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
-	GetListNodeChainArray(l log.Logger) (ListNodeArray, error)
+	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
 	GetBase(l log.Logger) (Base, error)
 	GetDerived(l log.Logger) (Base, error)
 }
@@ -179,6 +213,23 @@ type RPC interface {
 ```go
 func CreateClient(r io.Reader, w io.Writer, mtu int) RPC
 ```
+
+#### type Resolver
+
+```go
+type Resolver struct {
+	Database database.Database
+}
+```
+
+
+#### func (Resolver) ResolveResource
+
+```go
+func (r Resolver) ResolveResource(id ResourceId, l log.Logger) (Resource, error)
+```
+ResolveResource loads and returns the Resource stored in the resolver's
+database, using id.
 
 #### type Resource
 
@@ -202,6 +253,14 @@ func CreateResource(
 	String string,
 ) *Resource
 ```
+
+#### func  ResolveResource
+
+```go
+func ResolveResource(id ResourceId, d database.Database, l log.Logger) (*Resource, error)
+```
+ResolveResource loads and returns the Resource stored in the database d, using
+id.
 
 #### func (*Resource) Class
 
@@ -237,6 +296,13 @@ type ResourceId struct {
 ```
 
 Handle ResourceId
+
+#### func  StoreResource
+
+```go
+func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceId, error)
+```
+StoreResource stores v into the database d, returning the ResourceId.
 
 #### func (*ResourceId) Class
 

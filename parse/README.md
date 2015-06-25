@@ -136,6 +136,12 @@ ErrorList is a convenience type for managing lists of errors.
 func (l *ErrorList) Add(r *Reader, at Fragment, message string, args ...interface{})
 ```
 
+#### func (ErrorList) Error
+
+```go
+func (errs ErrorList) Error() string
+```
+
 #### type Fragment
 
 ```go
@@ -266,6 +272,18 @@ const (
 	// the dot and the exponent sign are all optional.
 	Scientific
 )
+```
+
+#### func (*NumberKind) Parse
+
+```go
+func (v *NumberKind) Parse(s string) error
+```
+
+#### func (NumberKind) String
+
+```go
+func (v NumberKind) String() string
 ```
 
 #### type Parser
@@ -496,6 +514,18 @@ const (
 	// comment association.
 	SkipSuffix
 )
+```
+
+#### func (*SkipMode) Parse
+
+```go
+func (v *SkipMode) Parse(s string) error
+```
+
+#### func (SkipMode) String
+
+```go
+func (v SkipMode) String() string
 ```
 
 #### type Token

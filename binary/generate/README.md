@@ -33,30 +33,19 @@ type Directory struct {
 ```
 
 
-#### type Field
-
-```go
-type Field struct {
-	// Name is the true field name.
-	Name      string // The name the field was given.
-	Type      *Type  // A description of the type of the field.
-	Anonymous bool   // Whether the field was anonymous.
-}
-```
-
-Field holds a description of a single Struct member.
-
 #### type File
 
 ```go
 type File struct {
-	Generated string
-	Package   string
-	Import    string
-	IsTest    bool
-	Path      string
-	Structs   []*Struct
-	Imports   Imports
+	Copyright  string
+	Package    string
+	Import     string
+	IsTest     bool
+	Path       string
+	Directives map[string]string
+	Structs    []*Struct
+	Constants  schema.Constants
+	Imports    Imports
 	Style
 }
 ```
@@ -75,6 +64,13 @@ type Generator struct {
 ```go
 func NewGenerator() *Generator
 ```
+
+#### func (*Generator) CppFile
+
+```go
+func (g *Generator) CppFile(file *File) ([]byte, error)
+```
+CppFile generates the all the cpp code for a file with a set of structs.
 
 #### func (*Generator) GoFile
 
@@ -96,50 +92,6 @@ JavaFile generates the all the java code for a file with a set of structs.
 type Imports map[string]struct{}
 ```
 
-
-#### type Kind
-
-```go
-type Kind int
-```
-
-Kind describes the basic nature of a type.
-
-```go
-const (
-	// Native is the kind for primitive types with corresponding direct methods on
-	// Encoder and Decoder
-	Native Kind = iota
-	// Remap is the kind for a type declared as alias to a primitive type.
-	// For example: type U32 uint32.
-	Remap
-	// Codeable is the kind for a direct in place struct.
-	Codeable
-	// Pointer is the kind for a pointer to a struct type. If the struct instance
-	// has equality (==) with a previously encoded object, then this struct will
-	// be encoded as a reference to the first encoded object.
-	Pointer
-	// Array is the kind for an in place slice, with a dynamic length.
-	Array
-	// StaticArray is the kind for an in place array, with a fixed length.
-	StaticArray
-	// Stream is the kind for an in place slice, with a Terminator.
-	Stream
-	// Interface is the kind for an object boxed in an binary.Object interface
-	// (or superset of). If the object has equality (==) with a previously
-	// encoded object, then this object may be encoded as a reference to the
-	// first encoded object.
-	Interface
-	// Map is the kind for a key value map.
-	Map
-)
-```
-
-#### func (Kind) String
-
-```go
-func (i Kind) String() string
-```
 
 #### type Loader
 
@@ -211,8 +163,10 @@ must be considered separately because otherwise you can get import cycles.
 
 ```go
 type Source struct {
-	Filename string      // The filename for this source
-	Content  interface{} // The content of this source, see ParseFiles for details.
+	Filename   string            // The filename for this source
+	Content    interface{}       // The content of this source, see ParseFiles for details.
+	AST        *ast.File         // The parsed syntax tree
+	Directives map[string]string // the set of comment overrides
 }
 ```
 
@@ -222,12 +176,9 @@ Source holds a file a filename content pair as consumed by go/parser.ParseFile.
 
 ```go
 type Struct struct {
-	Name      string    // The simple name of the type.
-	IDName    string    // The name to give the ID of the type.
-	Package   string    // The package name the struct belongs to.
-	Fields    []Field   // Descriptions of the fields of the struct.
-	Signature string    // The full string type signature of the Struct.
-	ID        binary.ID // The unique type identifier for the Struct.
+	schema.Class
+	IDName    string // The name to give the ID of the type.
+	Signature string // The full string type signature of the Struct.
 }
 ```
 
@@ -260,21 +211,3 @@ type Style struct {
 	Indent       string
 }
 ```
-
-
-#### type Type
-
-```go
-type Type struct {
-	Name       string // The name of the type.
-	Native     string // The go native name of the type.
-	Kind       Kind   // The types basic Kind.
-	KeyType    *Type  // If the type is a Map, holds the key type.
-	SubType    *Type  // If the type is an Array, Map, Pointer or StaticArray, holds the element type.
-	Length     int    // If the type is a StaticArray, holds the fixed array size.
-	Method     string // The encode/decode method to use.
-	SkipMethod string // The skip method to use.
-}
-```
-
-Type is used to describe fields of a struct.

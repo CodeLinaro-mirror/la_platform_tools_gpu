@@ -26,6 +26,36 @@ const IDSize = 20
 ```
 IDSize is the size of an ID.
 
+#### func  ReadInt
+
+```go
+func ReadInt(r Reader, bits int) (int64, error)
+```
+ReadInt reads a signed integer of either 8, 16, 32 or 64 bits from r, returning
+the result as a int64.
+
+#### func  ReadUint
+
+```go
+func ReadUint(r Reader, bits int) (uint64, error)
+```
+ReadUint reads an unsigned integer of either 8, 16, 32 or 64 bits from r,
+returning the result as a uint64.
+
+#### func  WriteInt
+
+```go
+func WriteInt(w Writer, bits int, v int64) error
+```
+WriteInt writes the signed integer v of either 8, 16, 32 or 64 bits to w.
+
+#### func  WriteUint
+
+```go
+func WriteUint(w Writer, bits int, v uint64) error
+```
+WriteUint writes the unsigned integer v of either 8, 16, 32 or 64 bits to w.
+
 #### type BitStream
 
 ```go
@@ -79,6 +109,9 @@ type Class interface {
 	// no two classes generate the same ID, and any change to the types name or
 	// fields causes it's id to change.
 	ID() ID
+
+	// New can be used to build a new default initialized instance of the type.
+	New() Object
 
 	// Encode writes the supplied object to the supplied Encoder.
 	// The object must be a type the Class understands, the implementation is
@@ -305,7 +338,7 @@ Object is the interface to any class that wants to be encoded/decoded.
 
 ```go
 type Reader interface {
-	// Data writes the data bytes in their entirety.
+	// Data reads the data bytes in their entirety.
 	Data([]byte) error
 	// Skip jumps past count bytes.
 	Skip(count uint32) error

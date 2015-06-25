@@ -57,6 +57,18 @@ type ConnectionType uint8
 ConnectionType is sent from the server to the replay system to define the type
 of connection.
 
+#### func (*ConnectionType) Parse
+
+```go
+func (v *ConnectionType) Parse(s string) error
+```
+
+#### func (ConnectionType) String
+
+```go
+func (v ConnectionType) String() string
+```
+
 #### type MessageType
 
 ```go
@@ -64,6 +76,18 @@ type MessageType uint8
 ```
 
 MessageType defines the packet type sent from the replay system to the server.
+
+#### func (*MessageType) Parse
+
+```go
+func (v *MessageType) Parse(s string) error
+```
+
+#### func (MessageType) String
+
+```go
+func (v MessageType) String() string
+```
 
 #### type Opcode
 
@@ -149,6 +173,12 @@ const (
 )
 ```
 
+#### func (*Type) Parse
+
+```go
+func (v *Type) Parse(s string) error
+```
+
 #### func (Type) Size
 
 ```go
@@ -160,6 +190,5 @@ a pointer for the target architecture.
 #### func (Type) String
 
 ```go
-func (t Type) String() string
+func (v Type) String() string
 ```
-String returns the human-readable name of the type.
