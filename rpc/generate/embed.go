@@ -687,7 +687,7 @@ const rpc_java_tmpl = `{{/*
   {{AssertType $ "Type"}}
 
   {{if GetAnnotation $ "handle"}}{{Macro "QualifiedName" $}}
-  {{else if IsSlice       $}}{{Macro "Type" $.ValueType}}[]
+  {{else if IsSlice       $}}{{Macro "Type" $.To}}[]
   {{else if IsMap         $}}{{Macro "QualifiedName" $}}
   {{else if IsClass       $}}{{Macro "QualifiedName" $}}
   {{else if IsPointer     $}}{{Macro "QualifiedName" $.To}}
