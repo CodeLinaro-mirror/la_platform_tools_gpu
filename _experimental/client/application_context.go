@@ -27,6 +27,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -75,6 +76,8 @@ type ApplicationContext struct {
 	depthBuffer         gxui.Texture
 	timingInfo          service.TimingInfo
 	timingPerCommand    map[uint64]uint64
+	namespace           *registry.Namespace // The namespace to use in coders
+	schemaNamespace     *registry.Namespace // The namespace that holds the schema classes
 }
 
 func connectServer(config Config) (net.Conn, error) {
@@ -155,6 +158,9 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		onTimingInfoUpdated: gxui.CreateEvent(func() {}),
 		selectedAtomID:      InvalidAtomID,
 	}
+	appCtx.schemaNamespace = registry.NewNamespace()
+	// make the decoder namespace try the global namespace before the schema one
+	appCtx.namespace = registry.NewNamespace(registry.Global, appCtx.schemaNamespace)
 	return appCtx, nil
 }
 
@@ -166,6 +172,9 @@ func (c *ApplicationContext) UpdateSchema() {
 			return
 		}
 		c.logger.Infof("Schema with %d classes", len(classes))
+		for _, class := range classes {
+			c.schemaNamespace.Add(class)
+		}
 	}()
 }
 
@@ -305,7 +314,7 @@ func (c *ApplicationContext) LoadState() {
 			c.Run(func() {
 				_ = bin
 				c.state = schema.Struct{Fields: []schema.Field{
-					schema.Field{Info: &service.FieldInfo{Name: "FIXME b/19835606"}},
+				schema.Field{Info: &service.FieldInfo{Name: "FIXME b/19835606"}},
 				}}
 				state, err := schema.ReadType(c.schema.State, binary.IntvDecoder(bytes.NewBuffer(bin.Data)))
 				if err != nil {

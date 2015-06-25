@@ -22,20 +22,20 @@ import (
 
 // Namespace represents a mapping of type identifiers to their Class.
 type Namespace struct {
-	parent  *Namespace
-	classes map[binary.ID]binary.Class
+	fallbacks []*Namespace
+	classes   map[binary.ID]binary.Class
 }
 
 var (
 	// Global is the default global Namespace object.
-	Global = NewNamespace(nil)
+	Global = NewNamespace()
 )
 
-// NewNamespace creates a new namespace layered on top of the specified parent.
-func NewNamespace(parent *Namespace) *Namespace {
+// NewNamespace creates a new namespace layered on top of the specified fallback.
+func NewNamespace(fallbacks ...*Namespace) *Namespace {
 	return &Namespace{
-		parent:  parent,
-		classes: map[binary.ID]binary.Class{},
+		fallbacks: fallbacks,
+		classes:   map[binary.ID]binary.Class{},
 	}
 }
 
@@ -65,8 +65,10 @@ func (n Namespace) Lookup(id binary.ID) binary.Class {
 	if class, found := n.classes[id]; found {
 		return class
 	}
-	if n.parent != nil {
-		return n.parent.Lookup(id)
+	for _, f := range n.fallbacks {
+		if class := f.Lookup(id); class != nil {
+			return class
+		}
 	}
 	return nil
 }
@@ -76,21 +78,21 @@ func (n Namespace) Lookup(id binary.ID) binary.Class {
 // more than the number of unique keys.
 func (n Namespace) Count() int {
 	size := len(n.classes)
-	if n.parent != nil {
-		size += n.parent.Count()
+	for _, f := range n.fallbacks {
+		size += f.Count()
 	}
 	return size
 }
 
-// Visit invokes the visitor for every id and class pair reachable through this
+// Visit invokes the visitor for every class object reachable through this
 // namespace.
 // The visitor maybe be called with the same id more than once if it is present
 // in multiple namespaces.
-func (n Namespace) Visit(visitor func(binary.ID, binary.Class)) {
-	for id, c := range n.classes {
-		visitor(id, c)
+func (n Namespace) Visit(visitor func(binary.Class)) {
+	for _, c := range n.classes {
+		visitor(c)
 	}
-	if n.parent != nil {
-		n.parent.Visit(visitor)
+	for _, f := range n.fallbacks {
+		f.Visit(visitor)
 	}
 }
