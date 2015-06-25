@@ -52,7 +52,7 @@ protected:
 
     // observe observes all the pending memory observations, returning the list of observations made.
     // The list of pending memory observations is cleared on returning.
-    void observe(std::vector<Observation>& observations);
+    void observe(gapic::Array<Observation>& observations);
 
     // read observes the memory for the given slice as a read operation.
     template <typename T>

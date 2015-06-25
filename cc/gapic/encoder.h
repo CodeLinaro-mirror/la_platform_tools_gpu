@@ -18,10 +18,12 @@
 #define GAPIC_ENCODER_H
 
 #include "id.h"
+#include "assert.h"
 
 #include <memory>
 #include <stdint.h>
 #include <unordered_map>
+#include <vector>
 
 namespace gapic {
 
@@ -33,6 +35,21 @@ class Encodable {
 public:
     virtual void Encode(Encoder* to) const = 0;
     virtual const gapic::Id& Id() const = 0;
+};
+
+template<class T>
+class Array {
+public:
+    inline Array() : mData(nullptr), mSize(0) {}
+    inline Array(const T* data, uint32_t size) : mData(data), mSize(size) {}
+    inline const T* data() const { return mData != nullptr ? mData : mVector.data(); }
+    inline uint32_t size() const { return mData != nullptr ? mSize : mVector.size(); }
+    inline const T& operator[](uint32_t index) const { GAPID_ASSERT(index < mSize); return data()[index]; }
+    inline std::vector<T>& vector() { GAPID_ASSERT(mData == nullptr); return mVector; }
+private:
+    std::vector<T> mVector;
+    const T* mData;
+    uint32_t mSize;
 };
 
 // Encoder provides methods for encoding values to the provided StreamWriter

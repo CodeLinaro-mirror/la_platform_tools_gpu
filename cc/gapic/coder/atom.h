@@ -7,8 +7,6 @@
 #ifndef GAPIC_CODER_ATOM_H
 #define GAPIC_CODER_ATOM_H
 
-#include <vector>
-
 namespace gapic {
 
 class Encodable;
@@ -38,7 +36,7 @@ namespace atom {
     class Group: public Encodable {
     public:
         Group() = default;
-        Group(char* Name, Range Range, std::vector<Group> SubGroups) :
+        Group(char* Name, Range Range, Array<Group> SubGroups) :
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
@@ -57,7 +55,7 @@ namespace atom {
 
         char* mName;
         Range mRange;
-        std::vector<Group> mSubGroups;
+        Array<Group> mSubGroups;
     };
 
     class Observation: public Encodable {
@@ -82,7 +80,7 @@ namespace atom {
     class Observations: public Encodable {
     public:
         Observations() = default;
-        Observations(std::vector<Observation> Reads, std::vector<Observation> Writes) :
+        Observations(Array<Observation> Reads, Array<Observation> Writes) :
             mReads(Reads),
             mWrites(Writes) {}
         virtual const gapic::Id& Id() const {
@@ -100,14 +98,14 @@ namespace atom {
             }
         }
 
-        std::vector<Observation> mReads;
-        std::vector<Observation> mWrites;
+        Array<Observation> mReads;
+        Array<Observation> mWrites;
     };
 
     class Resource: public Encodable {
     public:
         Resource() = default;
-        Resource(gapic::Id ID, std::vector<uint8_t> Data) :
+        Resource(gapic::Id ID, Array<uint8_t> Data) :
             mID(ID),
             mData(Data) {}
         virtual const gapic::Id& Id() const {
@@ -121,7 +119,7 @@ namespace atom {
         }
 
         gapic::Id mID;
-        std::vector<uint8_t> mData;
+        Array<uint8_t> mData;
     };
 
 
