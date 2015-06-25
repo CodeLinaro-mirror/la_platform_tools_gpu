@@ -229,7 +229,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 		go func() {
 			buf := &bytes.Buffer{}
-			count, _ := gapii.Capture(statusLogger, *spyport, buf, stop)
+			count, err := gapii.Capture(statusLogger, *spyport, buf, stop)
 			if count > 0 {
 				data := buf.Bytes()
 				statusLogger.Infof("Importing...")
@@ -245,6 +245,9 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 					window.Close()
 				})
 			} else {
+				if err != nil {
+					statusLogger.Errorf("%T %s", err, err.Error())
+				}
 				theme.Driver().Call(func() {
 					button.SetText("Close")
 					button.OnClick(func(gxui.MouseEvent) {
