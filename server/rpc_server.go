@@ -51,6 +51,13 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 
 // Compliance with the service.RPC interface.
 
+// The GetSchema returns the type and constant schema descriptions for all
+// objects used in the api.
+// This includes all the types included in or referenced from the atom stream.
+func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
+	return nil, nil
+}
+
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
 func (s rpcServer) Import(name string, data service.U8Array, l log.Logger) (service.CaptureId, error) {

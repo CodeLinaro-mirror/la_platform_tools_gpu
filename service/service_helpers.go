@@ -7,6 +7,12 @@ package service
 
 import "fmt"
 
+func (c callGetSchema) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetSchema()")
+}
+func (r resultGetSchema) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callImport) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Import(name: %v, Data: %v)",
 		c.name, c.Data,
@@ -221,6 +227,12 @@ func (a ClassInfoArray) Format(f fmt.State, c rune) {
 }
 func (a ClassInfoPtrArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ClassInfoᵖˢ", len(a))
+}
+func (a ClassArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]Classˢ", len(a))
+}
+func (a ClassPtrArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]Classᵖˢ", len(a))
 }
 func (a DeviceIdArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]DeviceIdˢ", len(a))

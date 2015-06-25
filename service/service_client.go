@@ -21,6 +21,16 @@ func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
 }
 
 // Client compliance
+func (c client) GetSchema(l log.Logger) (res ClassPtrArray, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetSchema{}); err == nil {
+		res = val.(*resultGetSchema).value
+	} else {
+		l.Errorf("RPC GetSchema failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) Import(name string, Data U8Array, l log.Logger) (res CaptureId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import schema "schema.api"
+
 @handle type string ApiId
 @handle type string AtomStreamId
 @handle type string BinaryId
@@ -22,6 +24,11 @@
 @handle type string MemoryInfoId
 @handle type string SchemaId
 @handle type string TimingInfoId
+
+// The GetSchema returns the type and constant schema descriptions for all
+// objects used in the api.
+// This includes all the types included in or referenced from the atom stream.
+cmd schema.Class*[] GetSchema() { return ?}
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.

@@ -7,10 +7,12 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 type RPC interface {
+	GetSchema(l log.Logger) (ClassPtrArray, error)
 	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
@@ -119,6 +121,12 @@ type ClassInfoArray []ClassInfo
 
 // Array ClassInfoᵖˢ
 type ClassInfoPtrArray []*ClassInfo
+
+// Array Classˢ
+type ClassArray []schema.Class
+
+// Array Classᵖˢ
+type ClassPtrArray []*schema.Class
 
 // Array DeviceIdˢ
 type DeviceIdArray []DeviceId

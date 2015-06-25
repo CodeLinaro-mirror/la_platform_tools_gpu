@@ -57,6 +57,7 @@ func init() {
 	registry.Add((*callGetFramebufferDepth)(nil).Class())
 	registry.Add((*callGetHierarchy)(nil).Class())
 	registry.Add((*callGetMemoryInfo)(nil).Class())
+	registry.Add((*callGetSchema)(nil).Class())
 	registry.Add((*callGetState)(nil).Class())
 	registry.Add((*callGetTimingInfo)(nil).Class())
 	registry.Add((*callImport)(nil).Class())
@@ -77,6 +78,7 @@ func init() {
 	registry.Add((*resultGetFramebufferDepth)(nil).Class())
 	registry.Add((*resultGetHierarchy)(nil).Class())
 	registry.Add((*resultGetMemoryInfo)(nil).Class())
+	registry.Add((*resultGetSchema)(nil).Class())
 	registry.Add((*resultGetState)(nil).Class())
 	registry.Add((*resultGetTimingInfo)(nil).Class())
 	registry.Add((*resultImport)(nil).Class())
@@ -137,6 +139,7 @@ var (
 	binaryIDcallGetFramebufferDepth     = binary.ID{0xdd, 0x68, 0xbd, 0xbc, 0x24, 0x0a, 0x1a, 0x1c, 0xa5, 0xa6, 0xfc, 0xe2, 0x64, 0x38, 0xac, 0x67, 0xa6, 0x86, 0x64, 0x5f}
 	binaryIDcallGetHierarchy            = binary.ID{0xbf, 0x39, 0x53, 0xd4, 0xc3, 0xac, 0x61, 0x0a, 0xce, 0x6c, 0x72, 0x04, 0x39, 0xcd, 0x5f, 0xe5, 0x92, 0xd5, 0xf6, 0xa6}
 	binaryIDcallGetMemoryInfo           = binary.ID{0x89, 0xa1, 0x6f, 0x75, 0x3d, 0x07, 0xb5, 0x9f, 0x0e, 0x20, 0xad, 0x27, 0xfd, 0xe8, 0x16, 0x50, 0x59, 0x24, 0x16, 0xb3}
+	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetState                = binary.ID{0xc3, 0xb2, 0x0b, 0xb8, 0x8b, 0xc7, 0x79, 0xcd, 0x06, 0xc3, 0x16, 0xef, 0x18, 0x3a, 0x96, 0x37, 0xf9, 0xad, 0x28, 0xb3}
 	binaryIDcallGetTimingInfo           = binary.ID{0xb1, 0x32, 0x24, 0x67, 0x2e, 0xb9, 0x1f, 0x2f, 0x72, 0xf3, 0x6b, 0x00, 0x23, 0x1f, 0xd4, 0x1a, 0x57, 0x59, 0x22, 0x29}
 	binaryIDcallImport                  = binary.ID{0x35, 0x11, 0x23, 0xbb, 0xa5, 0x10, 0x7a, 0x10, 0x7d, 0x46, 0x1d, 0x0b, 0xfc, 0x3c, 0x4e, 0x20, 0x68, 0x41, 0x1e, 0xb5}
@@ -157,6 +160,7 @@ var (
 	binaryIDresultGetFramebufferDepth   = binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}
 	binaryIDresultGetHierarchy          = binary.ID{0xff, 0x28, 0xe0, 0x58, 0x97, 0xa9, 0x5e, 0x1b, 0x62, 0xe1, 0xa0, 0xef, 0x05, 0xea, 0x3e, 0x62, 0x5d, 0x17, 0xaa, 0x47}
 	binaryIDresultGetMemoryInfo         = binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}
+	binaryIDresultGetSchema             = binary.ID{0x37, 0x2b, 0x50, 0x71, 0xb3, 0xd2, 0xb9, 0x05, 0x80, 0x14, 0xb3, 0x34, 0x9e, 0x40, 0x96, 0x81, 0x44, 0x1e, 0x30, 0xdc}
 	binaryIDresultGetState              = binary.ID{0xa0, 0x1e, 0x40, 0x20, 0xd1, 0x4d, 0xc6, 0x19, 0xf4, 0xcb, 0x10, 0xce, 0x81, 0x09, 0x89, 0xdf, 0xad, 0x63, 0xf6, 0xee}
 	binaryIDresultGetTimingInfo         = binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}
 	binaryIDresultImport                = binary.ID{0x1e, 0x86, 0x40, 0xb0, 0xc2, 0xb8, 0xa5, 0xa1, 0xf3, 0xc8, 0x51, 0x29, 0x87, 0x4d, 0x0c, 0xd9, 0x49, 0xd8, 0xbe, 0xed}
@@ -3365,6 +3369,41 @@ var schemacallGetMemoryInfo = &schema.Class{
 	},
 }
 
+type binaryClasscallGetSchema struct{}
+
+func (*callGetSchema) Class() binary.Class {
+	return (*binaryClasscallGetSchema)(nil)
+}
+func doEncodecallGetSchema(e binary.Encoder, o *callGetSchema) error {
+	return nil
+}
+func doDecodecallGetSchema(d binary.Decoder, o *callGetSchema) error {
+	return nil
+}
+func doSkipcallGetSchema(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClasscallGetSchema) ID() binary.ID      { return binaryIDcallGetSchema }
+func (*binaryClasscallGetSchema) New() binary.Object { return &callGetSchema{} }
+func (*binaryClasscallGetSchema) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecallGetSchema(e, obj.(*callGetSchema))
+}
+func (*binaryClasscallGetSchema) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &callGetSchema{}
+	return obj, doDecodecallGetSchema(d, obj)
+}
+func (*binaryClasscallGetSchema) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecallGetSchema(d, obj.(*callGetSchema))
+}
+func (*binaryClasscallGetSchema) Skip(d binary.Decoder) error { return doSkipcallGetSchema(d) }
+func (*binaryClasscallGetSchema) Schema() *schema.Class       { return schemacallGetSchema }
+
+var schemacallGetSchema = &schema.Class{
+	TypeID: binaryIDcallGetSchema,
+	Name:   "callGetSchema",
+	Fields: []schema.Field{},
+}
+
 type binaryClasscallGetState struct{}
 
 func (*callGetState) Class() binary.Class {
@@ -4508,6 +4547,78 @@ var schemaresultGetMemoryInfo = &schema.Class{
 	Name:   "resultGetMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId"}},
+	},
+}
+
+type binaryClassresultGetSchema struct{}
+
+func (*resultGetSchema) Class() binary.Class {
+	return (*binaryClassresultGetSchema)(nil)
+}
+func doEncoderesultGetSchema(e binary.Encoder, o *resultGetSchema) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if o.value[i] != nil {
+			if err := e.Object(o.value[i]); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecoderesultGetSchema(d binary.Decoder, o *resultGetSchema) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make(ClassPtrArray, count)
+		for i := range o.value {
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				o.value[i] = obj.(*schema.Class)
+			} else {
+				o.value[i] = nil
+			}
+		}
+	}
+	return nil
+}
+func doSkipresultGetSchema(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassresultGetSchema) ID() binary.ID      { return binaryIDresultGetSchema }
+func (*binaryClassresultGetSchema) New() binary.Object { return &resultGetSchema{} }
+func (*binaryClassresultGetSchema) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderesultGetSchema(e, obj.(*resultGetSchema))
+}
+func (*binaryClassresultGetSchema) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &resultGetSchema{}
+	return obj, doDecoderesultGetSchema(d, obj)
+}
+func (*binaryClassresultGetSchema) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderesultGetSchema(d, obj.(*resultGetSchema))
+}
+func (*binaryClassresultGetSchema) Skip(d binary.Decoder) error { return doSkipresultGetSchema(d) }
+func (*binaryClassresultGetSchema) Schema() *schema.Class       { return schemaresultGetSchema }
+
+var schemaresultGetSchema = &schema.Class{
+	TypeID: binaryIDresultGetSchema,
+	Name:   "resultGetSchema",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "ClassPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class"}}}},
 	},
 }
 
