@@ -89,15 +89,19 @@ func (f *functions) getTemplate(prefix string, t interface{}) (*template.Templat
 		return f.getTemplate(prefix, t.Type)
 	case string:
 		try = append(try, prefix+t)
+	case schema.Method:
+		try = append(try, fmt.Sprint(prefix, "#", t.String()))
 	default:
 		return nil, fmt.Errorf("Invalid call dispatch type %T", t)
 	}
-	try = append(try,
-		// using the reflected typename
-		fmt.Sprint(prefix, ".", reflect.TypeOf(t).Elem().Name()),
-		// default case is just the prefix
-		prefix,
-	)
+	r := reflect.TypeOf(t)
+	// using the reflected typename
+	try = append(try, fmt.Sprint(prefix, ".", r.Name()))
+	if r.Kind() == reflect.Ptr {
+		try = append(try, fmt.Sprint(prefix, ".", r.Elem().Name()))
+	}
+	// default case is just the prefix
+	try = append(try, prefix)
 	for _, name := range try {
 		if tmpl := f.templates.Lookup(name); tmpl != nil {
 			return tmpl, nil
