@@ -27,6 +27,7 @@ type RPC interface {
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
+	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
@@ -79,6 +80,12 @@ type ImageInfoId struct {
 
 // Handle MemoryInfoId
 type MemoryInfoId struct {
+	binary.Generate
+	ID binary.ID
+}
+
+// Handle ReportId
+type ReportId struct {
 	binary.Generate
 	ID binary.ID
 }
@@ -152,6 +159,9 @@ type MemoryRangeArray []MemoryRange
 // Array ParameterInfoˢ
 type ParameterInfoArray []ParameterInfo
 
+// Array ReportItemˢ
+type ReportItemArray []ReportItem
+
 // Array TypeInfoˢ
 type TypeInfoArray []TypeInfo
 
@@ -160,6 +170,20 @@ type U64Array []uint64
 
 // Array U8ˢ
 type U8Array []uint8
+
+// Enum Severity
+type Severity int
+
+const (
+	SeverityEmergency     Severity = 0
+	SeverityAlert         Severity = 1
+	SeverityCritical      Severity = 2
+	SeverityError         Severity = 3
+	SeverityWarning       Severity = 4
+	SeverityNotice        Severity = 5
+	SeverityInformational Severity = 6
+	SeverityDebug         Severity = 7
+)
 
 // Enum ImageFormat
 type ImageFormat int
@@ -233,8 +257,23 @@ type Capture struct {
 	binary.Generate
 	Name   string
 	Atoms  AtomStreamId
+	Report ReportId
 	Apis   ApiIdArray
 	Schema SchemaId
+}
+
+// Class Report
+type Report struct {
+	binary.Generate
+	Items ReportItemArray
+}
+
+// Class ReportItem
+type ReportItem struct {
+	binary.Generate
+	Severity Severity
+	Message  string
+	Atom     uint64
 }
 
 // Class Binary
