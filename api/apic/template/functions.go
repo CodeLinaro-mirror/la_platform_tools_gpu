@@ -252,25 +252,11 @@ func nodename(node interface{}) string {
 	return nt.Name()
 }
 
-// Node dispatches to the template that matches the node best.
-// if the node is a Type or Expression then the type semantic.Type name is tried,
-// then the class of type (the name of the semantic class that represents the type).
-// The actual name of the node type is then tried, and if none of those matches,
-// the "Default" template is used if present.
-// If no possible template could be matched, and error is generated.
-// eg: {{Node "TypeName" $}} where $ is a boolean and expression would try
-//   "TypeName#Bool"
-//   "TypeName.Builtin"
-//   "TypeName.BinaryOp"
-//   "TypeName_Default"
-// See Args for how the arguments are processed, in addition the Node arg will
-// be added in and have the value of node, and if the node had a type
-// discovered, the Type arg will be added in as well.
-func (f *Functions) Node(prefix string, node interface{}, arguments ...interface{}) (string, error) {
+func (f *Functions) node(writer io.Writer, prefix string, node interface{}, arguments ...interface{}) error {
 	// Collect the arguments to the template
 	args, err := f.buildArgs(arguments...)
 	if err != nil {
-		return "", err
+		return err
 	}
 	args["Node"] = node
 	try := make([]string, 0, 4)
@@ -288,8 +274,36 @@ func (f *Functions) Node(prefix string, node interface{}, arguments ...interface
 	try = append(try, prefix+"_Default")
 	for _, name := range try {
 		if tmpl := f.templates.Lookup(name); tmpl != nil {
-			return "", f.execute(tmpl, nil, args)
+			return f.execute(tmpl, writer, args)
 		}
 	}
-	return "", fmt.Errorf(`Cannot find templates "%s"`, strings.Join(try, `","`))
+	return fmt.Errorf(`Cannot find templates "%s"`, strings.Join(try, `","`))
+}
+
+// Node dispatches to the template that matches the node best, writing the
+// result to the current output writer.
+// If the node is a Type or Expression then the type semantic.Type name is tried,
+// then the class of type (the name of the semantic class that represents the type).
+// The actual name of the node type is then tried, and if none of those matches,
+// the "Default" template is used if present.
+// If no possible template could be matched, and error is generated.
+// eg: {{Node "TypeName" $}} where $ is a boolean and expression would try
+//   "TypeName#Bool"
+//   "TypeName.Builtin"
+//   "TypeName.BinaryOp"
+//   "TypeName_Default"
+// See Args for how the arguments are processed, in addition the Node arg will
+// be added in and have the value of node, and if the node had a type
+// discovered, the Type arg will be added in as well.
+func (f *Functions) Node(prefix string, node interface{}, arguments ...interface{}) (string, error) {
+	return "", f.node(nil, prefix, node, arguments...)
+}
+
+// SNode dispatches to the template that matches the node best, capturing the
+// result and returning it.
+// See Node for the dispatch rules used.
+func (f *Functions) SNode(prefix string, node interface{}, arguments ...interface{}) (string, error) {
+	buf := &bytes.Buffer{}
+	err := f.node(buf, prefix, node, arguments...)
+	return strings.TrimSpace(buf.String()), err
 }

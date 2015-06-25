@@ -14,7 +14,6 @@
  * limitations under the License.
  */}}
 
-{{Global "module" ""}}
 {{Include "rpc_common_go.tmpl"}}
 {{$api := Global "API"}}
 {{$ | Macro "Rpc" "role" "" "api" | GoFmt | Write (print $api "_rpc.go")}}
@@ -99,7 +98,7 @@
 
   {{Macro "VerifyInterfaceReturnTypeIsRef" $}}
   {{$.Name}}({{Macro "ParametersAndLogger" $}})§
-    ({{if not (IsVoid $.Return.Type)}}{{Macro "Type" $.Return.Type}}, {{end}}error)
+    ({{if not (IsVoid $.Return.Type)}}{{Node "Type" $.Return}}, {{end}}error)
 {{end}}
 
 
@@ -141,7 +140,7 @@
   {{AssertType $.Command "Function"}}
   {{Macro "VerifyInterfaceParameterIsRef" "Parameter" $.Parameter "Command" $.Command}}
 
-  {{$.Parameter.Name}} {{Macro "Type" (TypeOf $.Parameter)}}
+  {{$.Parameter.Name}} {{Node "Type" $.Parameter}}
 {{end}}
 
 
@@ -187,7 +186,7 @@
 {{define "DeclareInterfaceFieldAccessor"}}
   {{AssertType $.Field "Field"}}
 
-  Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}}
+  Get{{$.Field.Name}}() {{Node "Type" $.Field}}
 {{end}}
 
 
@@ -199,7 +198,7 @@
 {{define "DeclareClassField"}}
   {{AssertType $.Field "Field"}}
 
-  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}}
+  {{$.Field.Name}} {{Node "Type" $.Field}}
 {{end}}
 
 
@@ -211,7 +210,7 @@
 {{define "CreateClassParameter"}}
   {{AssertType $.Field "Field"}}
 
-  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}},
+  {{$.Field.Name}} {{Node "Type" $.Field}},
 {{end}}
 
 
@@ -236,7 +235,7 @@
   {{AssertType $.Field "Field"}}
   {{AssertType $.Impl  "Class"}}
 
-  func (c *{{$.Impl.Name}}) Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}} { return c.{{$.Field.Name}} }
+  func (c *{{$.Impl.Name}}) Get{{$.Field.Name}}() {{Node "Type" $.Field}} { return c.{{$.Field.Name}} }
 {{end}}
 
 
@@ -325,7 +324,7 @@ func (h {{$.Name}}) Valid() bool {
   {{AssertType $ "Slice"}}
 
   // Array {{$.Name}}
-  type {{Macro "Type" $}} []{{Macro "Type" $.To}}
+  type {{Node "Type" $}} []{{Node "Type" $.To}}
 {{end}}
 
 {{define "ArrayExtra"}}
@@ -335,7 +334,7 @@ func (h {{$.Name}}) Valid() bool {
 {{define "ArrayHelpers"}}
   {{AssertType $ "Slice"}}
 
-  func (a {{Macro "Type" $}}) Format(f fmt.State, c rune) {
+  func (a {{Node "Type" $}}) Format(f fmt.State, c rune) {
     fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
   }
 {{end}}
@@ -412,7 +411,7 @@ func (h {{$.Name}}) Valid() bool {
   type {{Macro "CallName" $}} struct {
     binary.Generate
     {{range $i, $p := $.CallParameters}}
-      {{$p.Name}} {{Macro "Type" (TypeOf $p)}}
+      {{$p.Name}} {{Node "Type" (TypeOf $p)}}
     {{end}}
   }
 {{end}}
@@ -444,7 +443,7 @@ func (h {{$.Name}}) Valid() bool {
   type {{Macro "ResultName" $}} struct {
     binary.Generate
     {{if not (IsVoid $.Return.Type)}}
-      value {{Macro "Type" $.Return.Type}}
+      value {{Node "Type" $.Return.Type}}
     {{end}}
   }
 {{end}}
@@ -491,7 +490,7 @@ func (h {{$.Name}}) Valid() bool {
   // Client compliance
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Macro "Type" $c.Return.Type}}, err error) {
+      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Node "Type" $c.Return}}, err error) {
         var val interface{}
         if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
           res = val.(*{{Macro "ResultName" $c}}).value
@@ -576,9 +575,9 @@ func (h {{$.Name}}) Valid() bool {
 
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      {{$type := Macro "Type" $c.Return.Type}}
+      {{$type := SNode "Type" $c.Return}}
       {{if eq $c.Name (print "Resolve" $type)}}
-        {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
+        {{$handle := SNode "Type" (index $c.CallParameters 0)}}
 
         // Store{{$type}} stores v into the database d, returning the {{$handle}}.
         func Store{{$type}}(v *{{$type}}, d database.Database, l log.Logger) ({{$handle}}, error) {

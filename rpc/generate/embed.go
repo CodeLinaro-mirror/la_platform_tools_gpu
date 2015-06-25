@@ -28,7 +28,6 @@ const rpc_go_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{Global "module" ""}}
 {{Include "rpc_common_go.tmpl"}}
 {{$api := Global "API"}}
 {{$ | Macro "Rpc" "role" "" "api" | GoFmt | Write (print $api "_rpc.go")}}
@@ -113,7 +112,7 @@ const rpc_go_tmpl = `{{/*
 
   {{Macro "VerifyInterfaceReturnTypeIsRef" $}}
   {{$.Name}}({{Macro "ParametersAndLogger" $}})§
-    ({{if not (IsVoid $.Return.Type)}}{{Macro "Type" $.Return.Type}}, {{end}}error)
+    ({{if not (IsVoid $.Return.Type)}}{{Node "Type" $.Return}}, {{end}}error)
 {{end}}
 
 
@@ -155,7 +154,7 @@ const rpc_go_tmpl = `{{/*
   {{AssertType $.Command "Function"}}
   {{Macro "VerifyInterfaceParameterIsRef" "Parameter" $.Parameter "Command" $.Command}}
 
-  {{$.Parameter.Name}} {{Macro "Type" (TypeOf $.Parameter)}}
+  {{$.Parameter.Name}} {{Node "Type" $.Parameter}}
 {{end}}
 
 
@@ -201,7 +200,7 @@ const rpc_go_tmpl = `{{/*
 {{define "DeclareInterfaceFieldAccessor"}}
   {{AssertType $.Field "Field"}}
 
-  Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}}
+  Get{{$.Field.Name}}() {{Node "Type" $.Field}}
 {{end}}
 
 
@@ -213,7 +212,7 @@ const rpc_go_tmpl = `{{/*
 {{define "DeclareClassField"}}
   {{AssertType $.Field "Field"}}
 
-  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}}
+  {{$.Field.Name}} {{Node "Type" $.Field}}
 {{end}}
 
 
@@ -225,7 +224,7 @@ const rpc_go_tmpl = `{{/*
 {{define "CreateClassParameter"}}
   {{AssertType $.Field "Field"}}
 
-  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}},
+  {{$.Field.Name}} {{Node "Type" $.Field}},
 {{end}}
 
 
@@ -250,7 +249,7 @@ const rpc_go_tmpl = `{{/*
   {{AssertType $.Field "Field"}}
   {{AssertType $.Impl  "Class"}}
 
-  func (c *{{$.Impl.Name}}) Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}} { return c.{{$.Field.Name}} }
+  func (c *{{$.Impl.Name}}) Get{{$.Field.Name}}() {{Node "Type" $.Field}} { return c.{{$.Field.Name}} }
 {{end}}
 
 
@@ -339,7 +338,7 @@ func (h {{$.Name}}) Valid() bool {
   {{AssertType $ "Slice"}}
 
   // Array {{$.Name}}
-  type {{Macro "Type" $}} []{{Macro "Type" $.To}}
+  type {{Node "Type" $}} []{{Node "Type" $.To}}
 {{end}}
 
 {{define "ArrayExtra"}}
@@ -349,7 +348,7 @@ func (h {{$.Name}}) Valid() bool {
 {{define "ArrayHelpers"}}
   {{AssertType $ "Slice"}}
 
-  func (a {{Macro "Type" $}}) Format(f fmt.State, c rune) {
+  func (a {{Node "Type" $}}) Format(f fmt.State, c rune) {
     fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
   }
 {{end}}
@@ -426,7 +425,7 @@ func (h {{$.Name}}) Valid() bool {
   type {{Macro "CallName" $}} struct {
     binary.Generate
     {{range $i, $p := $.CallParameters}}
-      {{$p.Name}} {{Macro "Type" (TypeOf $p)}}
+      {{$p.Name}} {{Node "Type" (TypeOf $p)}}
     {{end}}
   }
 {{end}}
@@ -458,7 +457,7 @@ func (h {{$.Name}}) Valid() bool {
   type {{Macro "ResultName" $}} struct {
     binary.Generate
     {{if not (IsVoid $.Return.Type)}}
-      value {{Macro "Type" $.Return.Type}}
+      value {{Node "Type" $.Return.Type}}
     {{end}}
   }
 {{end}}
@@ -505,7 +504,7 @@ func (h {{$.Name}}) Valid() bool {
   // Client compliance
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Macro "Type" $c.Return.Type}}, err error) {
+      func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Node "Type" $c.Return}}, err error) {
         var val interface{}
         if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
           res = val.(*{{Macro "ResultName" $c}}).value
@@ -590,9 +589,9 @@ func (h {{$.Name}}) Valid() bool {
 
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      {{$type := Macro "Type" $c.Return.Type}}
+      {{$type := SNode "Type" $c.Return}}
       {{if eq $c.Name (print "Resolve" $type)}}
-        {{$handle := Macro "Type" (index $c.CallParameters 0).Type}}
+        {{$handle := SNode "Type" (index $c.CallParameters 0)}}
 
         // Store{{$type}} stores v into the database d, returning the {{$handle}}.
         func Store{{$type}}(v *{{$type}}, d database.Database, l log.Logger) ({{$handle}}, error) {
@@ -1217,21 +1216,6 @@ const rpc_common_go_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{/*
--------------------------------------------------------------------------------
-  Emits the fully qualified name (prefixed with the package) of the specified
-  type or variable.
-
-  Single argument:
-    The name to fully qualify
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.RPC.QualifiedName"}}
-  {{AssertType $ "string"}}
-
-  {{Global "module"}}{{$}}
-{{end}}
-
 
 {{/*
 -------------------------------------------------------------------------------
@@ -1291,55 +1275,31 @@ const rpc_common_go_tmpl = `{{/*
   Emits the go type for the provided AST type.
 -------------------------------------------------------------------------------
 */}}
-{{define "Type"}}
-  {{AssertType $ "Type"}}
-
-  {{     if IsSlice                $}}{{Macro "ArrayType" $.To}}
-  {{else if GetAnnotation $ "handle"}}{{Macro "Go.RPC.QualifiedName" $.Name}}
-  {{else if IsAny                  $}}interface{}
-  {{else if IsMap                  $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
-  {{else if IsClass                $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
-  {{else if IsPointer              $}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Name}}
-  {{else if IsEnum                 $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
-  {{else if IsBool                 $}}bool
-  {{else if IsS8                   $}}int8
-  {{else if IsU8                   $}}uint8
-  {{else if IsS16                  $}}int16
-  {{else if IsU16                  $}}uint16
-  {{else if IsS32                  $}}int32
-  {{else if IsU32                  $}}uint32
-  {{else if IsF32                  $}}float32
-  {{else if IsS64                  $}}int64
-  {{else if IsU64                  $}}uint64
-  {{else if IsF64                  $}}float64
-  {{else if IsString               $}}string
-  {{else}}{{Error "macro Type called with unsupported type: %v (%T)" $.Name $.Detail}}
-  {{end}}
-{{end}}
+{{define "Type#bool"     }}bool{{end}}
+{{define "Type#s8"       }}int8{{end}}
+{{define "Type#u8"       }}uint8{{end}}
+{{define "Type#s16"      }}int16{{end}}
+{{define "Type#u16"      }}uint16{{end}}
+{{define "Type#s32"      }}int32{{end}}
+{{define "Type#u32"      }}uint32{{end}}
+{{define "Type#f32"      }}float32{{end}}
+{{define "Type#s64"      }}int64{{end}}
+{{define "Type#u64"      }}uint64{{end}}
+{{define "Type#f64"      }}float64{{end}}
+{{define "Type#string"   }}string{{end}}
+{{define "Type.Slice"    }}{{template "NameFixup" .Type.Name}}{{end}}
+{{define "Type.Class"    }}{{.Type.Name}}{{end}}
+{{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
+{{define "Type.Enum"     }}{{.Type.Name}}{{end}}
+{{define "Type.Pointer"  }}{{if not (GetAnnotation $.Type.To "Interface")}}*{{end}}{{Node "Type" .Type.To}}{{end}}
 
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the go type for the provided AST type.
+  Substitute the special characters in api typenames.
 -------------------------------------------------------------------------------
 */}}
-{{define "ArrayType"}}
-  {{     if IsBool    $}}{{Macro "Go.RPC.QualifiedName" "BoolArray"}}
-  {{else if IsS8      $}}{{Macro "Go.RPC.QualifiedName" "S8Array"}}
-  {{else if IsU8      $}}{{Macro "Go.RPC.QualifiedName" "U8Array"}}
-  {{else if IsS16     $}}{{Macro "Go.RPC.QualifiedName" "S16Array"}}
-  {{else if IsU16     $}}{{Macro "Go.RPC.QualifiedName" "U16Array"}}
-  {{else if IsS32     $}}{{Macro "Go.RPC.QualifiedName" "I32Array"}}
-  {{else if IsU32     $}}{{Macro "Go.RPC.QualifiedName" "U32Array"}}
-  {{else if IsF32     $}}{{Macro "Go.RPC.QualifiedName" "F32Array"}}
-  {{else if IsS64     $}}{{Macro "Go.RPC.QualifiedName" "S64Array"}}
-  {{else if IsU64     $}}{{Macro "Go.RPC.QualifiedName" "U64Array"}}
-  {{else if IsF64     $}}{{Macro "Go.RPC.QualifiedName" "F64Array"}}
-  {{else if IsString  $}}{{Macro "Go.RPC.QualifiedName" "StringArray"}}
-  {{else if IsPointer $}}{{Macro "Type" $.To}}PtrArray
-  {{else                }}{{Macro "Type" $}}Array
-  {{end}}
-{{end}}
+{{define "NameFixup"}}{{$ | Replace "ˢ" "Array" | Replace "ᵖ" "Ptr" }}{{end}}
 
 
 {{/*
