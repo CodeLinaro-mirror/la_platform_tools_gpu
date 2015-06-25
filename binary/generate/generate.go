@@ -100,8 +100,11 @@ func (t tag) Flag(name string) bool {
 // fields of that struct to the Struct information.
 func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
 	t := n.Type().Underlying().(*types.Struct)
-	s := &Struct{Class: schema.Class{Name: n.Name()}}
-	s.Package = pkg.Name()
+	s := &Struct{Class: schema.Class{
+		Name:    n.Name(),
+		Display: n.Name(),
+		Package: pkg.Name(),
+	}}
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
@@ -111,6 +114,10 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 			!tag.Flag("disable") {
 			tagged = true
 			s.IDName = tag.Get("id")
+			display := tag.Get("display")
+			if display != "" {
+				s.Display = display
+			}
 			continue
 		}
 		f := schema.Field{}

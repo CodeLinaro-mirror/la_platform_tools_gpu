@@ -161,7 +161,9 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 func (*binaryClass{{.Name}}) Schema() *{{SchemaPrefix}}Class { return schema{{.Name}} }
 var schema{{.Name}} = &{{SchemaPrefix}}Class{
 	TypeID: {{.IDName}},
+	Package: "{{.Package}}",
 	Name: "{{.Name}}",
+	Display: "{{.Display}}",
 	Fields: []{{SchemaPrefix}}Field{
 		{{range .Fields}}{ Declared:"{{.Name}}", Type:{{Call "Go.Schema" .Type}} },
 	{{end}} },
