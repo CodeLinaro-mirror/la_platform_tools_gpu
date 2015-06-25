@@ -64,8 +64,10 @@ func (*binaryClassdelay) Skip(d binary.Decoder) error { return doSkipdelay(d) }
 func (*binaryClassdelay) Schema() *schema.Class       { return schemadelay }
 
 var schemadelay = &schema.Class{
-	TypeID: binaryIDdelay,
-	Name:   "delay",
+	TypeID:  binaryIDdelay,
+	Package: "rpc",
+	Name:    "delay",
+	Display: "delay",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -112,8 +114,10 @@ func (*binaryClassrequest) Skip(d binary.Decoder) error { return doSkiprequest(d
 func (*binaryClassrequest) Schema() *schema.Class       { return schemarequest }
 
 var schemarequest = &schema.Class{
-	TypeID: binaryIDrequest,
-	Name:   "request",
+	TypeID:  binaryIDrequest,
+	Package: "rpc",
+	Name:    "request",
+	Display: "request",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -160,8 +164,10 @@ func (*binaryClassresponse) Skip(d binary.Decoder) error { return doSkipresponse
 func (*binaryClassresponse) Schema() *schema.Class       { return schemaresponse }
 
 var schemaresponse = &schema.Class{
-	TypeID: binaryIDresponse,
-	Name:   "response",
+	TypeID:  binaryIDresponse,
+	Package: "rpc",
+	Name:    "response",
+	Display: "response",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},

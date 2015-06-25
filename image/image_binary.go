@@ -73,9 +73,11 @@ func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *schema.Class {
 }
 
 var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &schema.Class{
-	TypeID: binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
-	Name:   "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
+	Package: "image",
+	Name:    "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
+	Display: "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtATC_RGB_AMD struct{}
@@ -108,9 +110,11 @@ func (*binaryClassfmtATC_RGB_AMD) Skip(d binary.Decoder) error { return doSkipfm
 func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Class       { return schemafmtATC_RGB_AMD }
 
 var schemafmtATC_RGB_AMD = &schema.Class{
-	TypeID: binaryIDfmtATC_RGB_AMD,
-	Name:   "fmtATC_RGB_AMD",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtATC_RGB_AMD,
+	Package: "image",
+	Name:    "fmtATC_RGB_AMD",
+	Display: "fmtATC_RGB_AMD",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtAlpha struct{}
@@ -143,9 +147,11 @@ func (*binaryClassfmtAlpha) Skip(d binary.Decoder) error { return doSkipfmtAlpha
 func (*binaryClassfmtAlpha) Schema() *schema.Class       { return schemafmtAlpha }
 
 var schemafmtAlpha = &schema.Class{
-	TypeID: binaryIDfmtAlpha,
-	Name:   "fmtAlpha",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtAlpha,
+	Package: "image",
+	Name:    "fmtAlpha",
+	Display: "fmtAlpha",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtETC1_RGB8_OES struct{}
@@ -178,9 +184,11 @@ func (*binaryClassfmtETC1_RGB8_OES) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Class       { return schemafmtETC1_RGB8_OES }
 
 var schemafmtETC1_RGB8_OES = &schema.Class{
-	TypeID: binaryIDfmtETC1_RGB8_OES,
-	Name:   "fmtETC1_RGB8_OES",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtETC1_RGB8_OES,
+	Package: "image",
+	Name:    "fmtETC1_RGB8_OES",
+	Display: "fmtETC1_RGB8_OES",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtLuminance struct{}
@@ -213,9 +221,11 @@ func (*binaryClassfmtLuminance) Skip(d binary.Decoder) error { return doSkipfmtL
 func (*binaryClassfmtLuminance) Schema() *schema.Class       { return schemafmtLuminance }
 
 var schemafmtLuminance = &schema.Class{
-	TypeID: binaryIDfmtLuminance,
-	Name:   "fmtLuminance",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtLuminance,
+	Package: "image",
+	Name:    "fmtLuminance",
+	Display: "fmtLuminance",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtLuminanceAlpha struct{}
@@ -248,9 +258,11 @@ func (*binaryClassfmtLuminanceAlpha) Skip(d binary.Decoder) error { return doSki
 func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Class       { return schemafmtLuminanceAlpha }
 
 var schemafmtLuminanceAlpha = &schema.Class{
-	TypeID: binaryIDfmtLuminanceAlpha,
-	Name:   "fmtLuminanceAlpha",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtLuminanceAlpha,
+	Package: "image",
+	Name:    "fmtLuminanceAlpha",
+	Display: "fmtLuminanceAlpha",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtPNG struct{}
@@ -283,9 +295,11 @@ func (*binaryClassfmtPNG) Skip(d binary.Decoder) error { return doSkipfmtPNG(d) 
 func (*binaryClassfmtPNG) Schema() *schema.Class       { return schemafmtPNG }
 
 var schemafmtPNG = &schema.Class{
-	TypeID: binaryIDfmtPNG,
-	Name:   "fmtPNG",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtPNG,
+	Package: "image",
+	Name:    "fmtPNG",
+	Display: "fmtPNG",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtRGB struct{}
@@ -318,9 +332,11 @@ func (*binaryClassfmtRGB) Skip(d binary.Decoder) error { return doSkipfmtRGB(d) 
 func (*binaryClassfmtRGB) Schema() *schema.Class       { return schemafmtRGB }
 
 var schemafmtRGB = &schema.Class{
-	TypeID: binaryIDfmtRGB,
-	Name:   "fmtRGB",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtRGB,
+	Package: "image",
+	Name:    "fmtRGB",
+	Display: "fmtRGB",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassfmtRGBA struct{}
@@ -353,7 +369,9 @@ func (*binaryClassfmtRGBA) Skip(d binary.Decoder) error { return doSkipfmtRGBA(d
 func (*binaryClassfmtRGBA) Schema() *schema.Class       { return schemafmtRGBA }
 
 var schemafmtRGBA = &schema.Class{
-	TypeID: binaryIDfmtRGBA,
-	Name:   "fmtRGBA",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDfmtRGBA,
+	Package: "image",
+	Name:    "fmtRGBA",
+	Display: "fmtRGBA",
+	Fields:  []schema.Field{},
 }

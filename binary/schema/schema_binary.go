@@ -42,7 +42,7 @@ func init() {
 var (
 	binaryIDArray           = binary.ID{0x7a, 0x88, 0x3e, 0x09, 0xeb, 0xc7, 0x5c, 0x2c, 0x69, 0xc2, 0x9b, 0x9d, 0x3c, 0x5d, 0xdb, 0xe4, 0x3f, 0xc0, 0x7e, 0xc6}
 	binaryIDField           = binary.ID{0x8c, 0x54, 0x3d, 0x98, 0xc3, 0x7e, 0x38, 0xa8, 0xaa, 0x56, 0xbc, 0x84, 0x27, 0x49, 0x5d, 0x42, 0xdd, 0x21, 0x24, 0xf8}
-	binaryIDClass           = binary.ID{0x12, 0xd4, 0x1f, 0xe8, 0x69, 0x20, 0xd6, 0xdc, 0xb6, 0x19, 0xa0, 0xd7, 0xde, 0x7e, 0x2f, 0x7e, 0xcd, 0xd0, 0x33, 0xa1}
+	binaryIDClass           = binary.ID{0x96, 0x34, 0xde, 0x25, 0x91, 0x23, 0xb0, 0x1c, 0x30, 0xe6, 0x1a, 0xaf, 0x65, 0xc5, 0xe8, 0xf2, 0xbf, 0x45, 0xb2, 0xd5}
 	binaryIDInt16Constant   = binary.ID{0x54, 0xbe, 0x53, 0xa9, 0x57, 0x51, 0xb6, 0x72, 0x2b, 0x3f, 0x1a, 0x3a, 0x29, 0xd8, 0x34, 0xec, 0xdd, 0xcf, 0x16, 0x10}
 	binaryIDInt16Constants  = binary.ID{0xda, 0xb0, 0xd4, 0x7c, 0xc2, 0x65, 0x3b, 0x38, 0xf4, 0x62, 0x43, 0x8a, 0x88, 0x0c, 0xc3, 0x05, 0xc0, 0xb4, 0xd9, 0x7b}
 	binaryIDInt32Constant   = binary.ID{0xff, 0xdc, 0x4d, 0xf9, 0x55, 0xc5, 0xe5, 0xce, 0xce, 0x46, 0x2b, 0xaa, 0xe7, 0xa9, 0x16, 0xad, 0x17, 0xfc, 0x3d, 0x9f}
@@ -137,8 +137,10 @@ func (*binaryClassArray) Skip(d binary.Decoder) error { return doSkipArray(d) }
 func (*binaryClassArray) Schema() *Class              { return schemaArray }
 
 var schemaArray = &Class{
-	TypeID: binaryIDArray,
-	Name:   "Array",
+	TypeID:  binaryIDArray,
+	Package: "schema",
+	Name:    "Array",
+	Display: "Array",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -204,8 +206,10 @@ func (*binaryClassField) Skip(d binary.Decoder) error { return doSkipField(d) }
 func (*binaryClassField) Schema() *Class              { return schemaField }
 
 var schemaField = &Class{
-	TypeID: binaryIDField,
-	Name:   "Field",
+	TypeID:  binaryIDField,
+	Package: "schema",
+	Name:    "Field",
+	Display: "Field",
 	Fields: []Field{
 		{Declared: "Declared", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
@@ -225,6 +229,9 @@ func doEncodeClass(e binary.Encoder, o *Class) error {
 		return err
 	}
 	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.String(o.Display); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Fields))); err != nil {
@@ -253,6 +260,11 @@ func doDecodeClass(d binary.Decoder, o *Class) error {
 	} else {
 		o.Name = string(obj)
 	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Display = string(obj)
+	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -267,6 +279,9 @@ func doDecodeClass(d binary.Decoder, o *Class) error {
 }
 func doSkipClass(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
@@ -302,12 +317,15 @@ func (*binaryClassClass) Skip(d binary.Decoder) error { return doSkipClass(d) }
 func (*binaryClassClass) Schema() *Class              { return schemaClass }
 
 var schemaClass = &Class{
-	TypeID: binaryIDClass,
-	Name:   "Class",
+	TypeID:  binaryIDClass,
+	Package: "schema",
+	Name:    "Class",
+	Display: "Class",
 	Fields: []Field{
 		{Declared: "TypeID", Type: &Primitive{Name: "binary.ID", Method: ID}},
 		{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		{Declared: "Display", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field"}}},
 	},
 }
@@ -364,8 +382,10 @@ func (*binaryClassInt16Constant) Skip(d binary.Decoder) error { return doSkipInt
 func (*binaryClassInt16Constant) Schema() *Class              { return schemaInt16Constant }
 
 var schemaInt16Constant = &Class{
-	TypeID: binaryIDInt16Constant,
-	Name:   "Int16Constant",
+	TypeID:  binaryIDInt16Constant,
+	Package: "schema",
+	Name:    "Int16Constant",
+	Display: "Int16Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int16", Method: Int16}},
@@ -446,8 +466,10 @@ func (*binaryClassInt16Constants) Skip(d binary.Decoder) error { return doSkipIn
 func (*binaryClassInt16Constants) Schema() *Class              { return schemaInt16Constants }
 
 var schemaInt16Constants = &Class{
-	TypeID: binaryIDInt16Constants,
-	Name:   "Int16Constants",
+	TypeID:  binaryIDInt16Constants,
+	Package: "schema",
+	Name:    "Int16Constants",
+	Display: "Int16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant"}}},
@@ -506,8 +528,10 @@ func (*binaryClassInt32Constant) Skip(d binary.Decoder) error { return doSkipInt
 func (*binaryClassInt32Constant) Schema() *Class              { return schemaInt32Constant }
 
 var schemaInt32Constant = &Class{
-	TypeID: binaryIDInt32Constant,
-	Name:   "Int32Constant",
+	TypeID:  binaryIDInt32Constant,
+	Package: "schema",
+	Name:    "Int32Constant",
+	Display: "Int32Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int32", Method: Int32}},
@@ -588,8 +612,10 @@ func (*binaryClassInt32Constants) Skip(d binary.Decoder) error { return doSkipIn
 func (*binaryClassInt32Constants) Schema() *Class              { return schemaInt32Constants }
 
 var schemaInt32Constants = &Class{
-	TypeID: binaryIDInt32Constants,
-	Name:   "Int32Constants",
+	TypeID:  binaryIDInt32Constants,
+	Package: "schema",
+	Name:    "Int32Constants",
+	Display: "Int32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant"}}},
@@ -648,8 +674,10 @@ func (*binaryClassInt64Constant) Skip(d binary.Decoder) error { return doSkipInt
 func (*binaryClassInt64Constant) Schema() *Class              { return schemaInt64Constant }
 
 var schemaInt64Constant = &Class{
-	TypeID: binaryIDInt64Constant,
-	Name:   "Int64Constant",
+	TypeID:  binaryIDInt64Constant,
+	Package: "schema",
+	Name:    "Int64Constant",
+	Display: "Int64Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int64", Method: Int64}},
@@ -730,8 +758,10 @@ func (*binaryClassInt64Constants) Skip(d binary.Decoder) error { return doSkipIn
 func (*binaryClassInt64Constants) Schema() *Class              { return schemaInt64Constants }
 
 var schemaInt64Constants = &Class{
-	TypeID: binaryIDInt64Constants,
-	Name:   "Int64Constants",
+	TypeID:  binaryIDInt64Constants,
+	Package: "schema",
+	Name:    "Int64Constants",
+	Display: "Int64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant"}}},
@@ -790,8 +820,10 @@ func (*binaryClassInt8Constant) Skip(d binary.Decoder) error { return doSkipInt8
 func (*binaryClassInt8Constant) Schema() *Class              { return schemaInt8Constant }
 
 var schemaInt8Constant = &Class{
-	TypeID: binaryIDInt8Constant,
-	Name:   "Int8Constant",
+	TypeID:  binaryIDInt8Constant,
+	Package: "schema",
+	Name:    "Int8Constant",
+	Display: "Int8Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int8", Method: Int8}},
@@ -872,8 +904,10 @@ func (*binaryClassInt8Constants) Skip(d binary.Decoder) error { return doSkipInt
 func (*binaryClassInt8Constants) Schema() *Class              { return schemaInt8Constants }
 
 var schemaInt8Constants = &Class{
-	TypeID: binaryIDInt8Constants,
-	Name:   "Int8Constants",
+	TypeID:  binaryIDInt8Constants,
+	Package: "schema",
+	Name:    "Int8Constants",
+	Display: "Int8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant"}}},
@@ -921,8 +955,10 @@ func (*binaryClassInterface) Skip(d binary.Decoder) error { return doSkipInterfa
 func (*binaryClassInterface) Schema() *Class              { return schemaInterface }
 
 var schemaInterface = &Class{
-	TypeID: binaryIDInterface,
-	Name:   "Interface",
+	TypeID:  binaryIDInterface,
+	Package: "schema",
+	Name:    "Interface",
+	Display: "Interface",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 	},
@@ -1003,8 +1039,10 @@ func (*binaryClassMap) Skip(d binary.Decoder) error { return doSkipMap(d) }
 func (*binaryClassMap) Schema() *Class              { return schemaMap }
 
 var schemaMap = &Class{
-	TypeID: binaryIDMap,
-	Name:   "Map",
+	TypeID:  binaryIDMap,
+	Package: "schema",
+	Name:    "Map",
+	Display: "Map",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "KeyType", Type: &Interface{Name: "Type"}},
@@ -1059,8 +1097,10 @@ func (*binaryClassPointer) Skip(d binary.Decoder) error { return doSkipPointer(d
 func (*binaryClassPointer) Schema() *Class              { return schemaPointer }
 
 var schemaPointer = &Class{
-	TypeID: binaryIDPointer,
-	Name:   "Pointer",
+	TypeID:  binaryIDPointer,
+	Package: "schema",
+	Name:    "Pointer",
+	Display: "Pointer",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 	},
@@ -1118,8 +1158,10 @@ func (*binaryClassPrimitive) Skip(d binary.Decoder) error { return doSkipPrimiti
 func (*binaryClassPrimitive) Schema() *Class              { return schemaPrimitive }
 
 var schemaPrimitive = &Class{
-	TypeID: binaryIDPrimitive,
-	Name:   "Primitive",
+	TypeID:  binaryIDPrimitive,
+	Package: "schema",
+	Name:    "Primitive",
+	Display: "Primitive",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Method", Type: &Primitive{Name: "Method", Method: Int32}},
@@ -1184,8 +1226,10 @@ func (*binaryClassSlice) Skip(d binary.Decoder) error { return doSkipSlice(d) }
 func (*binaryClassSlice) Schema() *Class              { return schemaSlice }
 
 var schemaSlice = &Class{
-	TypeID: binaryIDSlice,
-	Name:   "Slice",
+	TypeID:  binaryIDSlice,
+	Package: "schema",
+	Name:    "Slice",
+	Display: "Slice",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -1250,8 +1294,10 @@ func (*binaryClassStream) Skip(d binary.Decoder) error { return doSkipStream(d) 
 func (*binaryClassStream) Schema() *Class              { return schemaStream }
 
 var schemaStream = &Class{
-	TypeID: binaryIDStream,
-	Name:   "Stream",
+	TypeID:  binaryIDStream,
+	Package: "schema",
+	Name:    "Stream",
+	Display: "Stream",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -1310,8 +1356,10 @@ func (*binaryClassStruct) Skip(d binary.Decoder) error { return doSkipStruct(d) 
 func (*binaryClassStruct) Schema() *Class              { return schemaStruct }
 
 var schemaStruct = &Class{
-	TypeID: binaryIDStruct,
-	Name:   "Struct",
+	TypeID:  binaryIDStruct,
+	Package: "schema",
+	Name:    "Struct",
+	Display: "Struct",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ID", Type: &Primitive{Name: "binary.ID", Method: ID}},
@@ -1370,8 +1418,10 @@ func (*binaryClassUint16Constant) Skip(d binary.Decoder) error { return doSkipUi
 func (*binaryClassUint16Constant) Schema() *Class              { return schemaUint16Constant }
 
 var schemaUint16Constant = &Class{
-	TypeID: binaryIDUint16Constant,
-	Name:   "Uint16Constant",
+	TypeID:  binaryIDUint16Constant,
+	Package: "schema",
+	Name:    "Uint16Constant",
+	Display: "Uint16Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint16", Method: Uint16}},
@@ -1452,8 +1502,10 @@ func (*binaryClassUint16Constants) Skip(d binary.Decoder) error { return doSkipU
 func (*binaryClassUint16Constants) Schema() *Class              { return schemaUint16Constants }
 
 var schemaUint16Constants = &Class{
-	TypeID: binaryIDUint16Constants,
-	Name:   "Uint16Constants",
+	TypeID:  binaryIDUint16Constants,
+	Package: "schema",
+	Name:    "Uint16Constants",
+	Display: "Uint16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant"}}},
@@ -1512,8 +1564,10 @@ func (*binaryClassUint32Constant) Skip(d binary.Decoder) error { return doSkipUi
 func (*binaryClassUint32Constant) Schema() *Class              { return schemaUint32Constant }
 
 var schemaUint32Constant = &Class{
-	TypeID: binaryIDUint32Constant,
-	Name:   "Uint32Constant",
+	TypeID:  binaryIDUint32Constant,
+	Package: "schema",
+	Name:    "Uint32Constant",
+	Display: "Uint32Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint32", Method: Uint32}},
@@ -1594,8 +1648,10 @@ func (*binaryClassUint32Constants) Skip(d binary.Decoder) error { return doSkipU
 func (*binaryClassUint32Constants) Schema() *Class              { return schemaUint32Constants }
 
 var schemaUint32Constants = &Class{
-	TypeID: binaryIDUint32Constants,
-	Name:   "Uint32Constants",
+	TypeID:  binaryIDUint32Constants,
+	Package: "schema",
+	Name:    "Uint32Constants",
+	Display: "Uint32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant"}}},
@@ -1654,8 +1710,10 @@ func (*binaryClassUint64Constant) Skip(d binary.Decoder) error { return doSkipUi
 func (*binaryClassUint64Constant) Schema() *Class              { return schemaUint64Constant }
 
 var schemaUint64Constant = &Class{
-	TypeID: binaryIDUint64Constant,
-	Name:   "Uint64Constant",
+	TypeID:  binaryIDUint64Constant,
+	Package: "schema",
+	Name:    "Uint64Constant",
+	Display: "Uint64Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint64", Method: Uint64}},
@@ -1736,8 +1794,10 @@ func (*binaryClassUint64Constants) Skip(d binary.Decoder) error { return doSkipU
 func (*binaryClassUint64Constants) Schema() *Class              { return schemaUint64Constants }
 
 var schemaUint64Constants = &Class{
-	TypeID: binaryIDUint64Constants,
-	Name:   "Uint64Constants",
+	TypeID:  binaryIDUint64Constants,
+	Package: "schema",
+	Name:    "Uint64Constants",
+	Display: "Uint64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant"}}},
@@ -1796,8 +1856,10 @@ func (*binaryClassUint8Constant) Skip(d binary.Decoder) error { return doSkipUin
 func (*binaryClassUint8Constant) Schema() *Class              { return schemaUint8Constant }
 
 var schemaUint8Constant = &Class{
-	TypeID: binaryIDUint8Constant,
-	Name:   "Uint8Constant",
+	TypeID:  binaryIDUint8Constant,
+	Package: "schema",
+	Name:    "Uint8Constant",
+	Display: "Uint8Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint8", Method: Uint8}},
@@ -1878,8 +1940,10 @@ func (*binaryClassUint8Constants) Skip(d binary.Decoder) error { return doSkipUi
 func (*binaryClassUint8Constants) Schema() *Class              { return schemaUint8Constants }
 
 var schemaUint8Constants = &Class{
-	TypeID: binaryIDUint8Constants,
-	Name:   "Uint8Constants",
+	TypeID:  binaryIDUint8Constants,
+	Package: "schema",
+	Name:    "Uint8Constants",
+	Display: "Uint8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant"}}},

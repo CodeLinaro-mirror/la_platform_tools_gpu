@@ -75,8 +75,10 @@ func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipReso
 func (*binaryClassResourceInfo) Schema() *schema.Class       { return schemaResourceInfo }
 
 var schemaResourceInfo = &schema.Class{
-	TypeID: binaryIDResourceInfo,
-	Name:   "ResourceInfo",
+	TypeID:  binaryIDResourceInfo,
+	Package: "protocol",
+	Name:    "ResourceInfo",
+	Display: "ResourceInfo",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -204,8 +206,10 @@ func (*binaryClassPayload) Skip(d binary.Decoder) error { return doSkipPayload(d
 func (*binaryClassPayload) Schema() *schema.Class       { return schemaPayload }
 
 var schemaPayload = &schema.Class{
-	TypeID: binaryIDPayload,
-	Name:   "Payload",
+	TypeID:  binaryIDPayload,
+	Package: "protocol",
+	Name:    "Payload",
+	Display: "Payload",
 	Fields: []schema.Field{
 		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},

@@ -129,8 +129,10 @@ func (*binaryClassDerived) Skip(d binary.Decoder) error { return doSkipDerived(d
 func (*binaryClassDerived) Schema() *schema.Class       { return schemaDerived }
 
 var schemaDerived = &schema.Class{
-	TypeID: binaryIDDerived,
-	Name:   "Derived",
+	TypeID:  binaryIDDerived,
+	Package: "test",
+	Name:    "Derived",
+	Display: "Derived",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
@@ -195,8 +197,10 @@ func (*binaryClassListNode) Skip(d binary.Decoder) error { return doSkipListNode
 func (*binaryClassListNode) Schema() *schema.Class       { return schemaListNode }
 
 var schemaListNode = &schema.Class{
-	TypeID: binaryIDListNode,
-	Name:   "ListNode",
+	TypeID:  binaryIDListNode,
+	Package: "test",
+	Name:    "ListNode",
+	Display: "ListNode",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
@@ -266,8 +270,10 @@ func (*binaryClassResource) Skip(d binary.Decoder) error { return doSkipResource
 func (*binaryClassResource) Schema() *schema.Class       { return schemaResource }
 
 var schemaResource = &schema.Class{
-	TypeID: binaryIDResource,
-	Name:   "Resource",
+	TypeID:  binaryIDResource,
+	Package: "test",
+	Name:    "Resource",
+	Display: "Resource",
 	Fields: []schema.Field{
 		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -316,8 +322,10 @@ func (*binaryClassResourceId) Skip(d binary.Decoder) error { return doSkipResour
 func (*binaryClassResourceId) Schema() *schema.Class       { return schemaResourceId }
 
 var schemaResourceId = &schema.Class{
-	TypeID: binaryIDResourceId,
-	Name:   "ResourceId",
+	TypeID:  binaryIDResourceId,
+	Package: "test",
+	Name:    "ResourceId",
+	Display: "ResourceId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -386,8 +394,10 @@ func (*binaryClassStruct) Skip(d binary.Decoder) error { return doSkipStruct(d) 
 func (*binaryClassStruct) Schema() *schema.Class       { return schemaStruct }
 
 var schemaStruct = &schema.Class{
-	TypeID: binaryIDStruct,
-	Name:   "Struct",
+	TypeID:  binaryIDStruct,
+	Package: "test",
+	Name:    "Struct",
+	Display: "Struct",
 	Fields: []schema.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -447,8 +457,10 @@ func (*binaryClasscallAdd) Skip(d binary.Decoder) error { return doSkipcallAdd(d
 func (*binaryClasscallAdd) Schema() *schema.Class       { return schemacallAdd }
 
 var schemacallAdd = &schema.Class{
-	TypeID: binaryIDcallAdd,
-	Name:   "callAdd",
+	TypeID:  binaryIDcallAdd,
+	Package: "test",
+	Name:    "callAdd",
+	Display: "callAdd",
 	Fields: []schema.Field{
 		{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -496,8 +508,10 @@ func (*binaryClasscallEnumToString) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClasscallEnumToString) Schema() *schema.Class       { return schemacallEnumToString }
 
 var schemacallEnumToString = &schema.Class{
-	TypeID: binaryIDcallEnumToString,
-	Name:   "callEnumToString",
+	TypeID:  binaryIDcallEnumToString,
+	Package: "test",
+	Name:    "callEnumToString",
+	Display: "callEnumToString",
 	Fields: []schema.Field{
 		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
@@ -533,9 +547,11 @@ func (*binaryClasscallGetBase) Skip(d binary.Decoder) error { return doSkipcallG
 func (*binaryClasscallGetBase) Schema() *schema.Class       { return schemacallGetBase }
 
 var schemacallGetBase = &schema.Class{
-	TypeID: binaryIDcallGetBase,
-	Name:   "callGetBase",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetBase,
+	Package: "test",
+	Name:    "callGetBase",
+	Display: "callGetBase",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetDerived struct{}
@@ -568,9 +584,11 @@ func (*binaryClasscallGetDerived) Skip(d binary.Decoder) error { return doSkipca
 func (*binaryClasscallGetDerived) Schema() *schema.Class       { return schemacallGetDerived }
 
 var schemacallGetDerived = &schema.Class{
-	TypeID: binaryIDcallGetDerived,
-	Name:   "callGetDerived",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetDerived,
+	Package: "test",
+	Name:    "callGetDerived",
+	Display: "callGetDerived",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetListNodeChain struct{}
@@ -605,9 +623,11 @@ func (*binaryClasscallGetListNodeChain) Skip(d binary.Decoder) error {
 func (*binaryClasscallGetListNodeChain) Schema() *schema.Class { return schemacallGetListNodeChain }
 
 var schemacallGetListNodeChain = &schema.Class{
-	TypeID: binaryIDcallGetListNodeChain,
-	Name:   "callGetListNodeChain",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetListNodeChain,
+	Package: "test",
+	Name:    "callGetListNodeChain",
+	Display: "callGetListNodeChain",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetListNodeChainArray struct{}
@@ -644,9 +664,11 @@ func (*binaryClasscallGetListNodeChainArray) Schema() *schema.Class {
 }
 
 var schemacallGetListNodeChainArray = &schema.Class{
-	TypeID: binaryIDcallGetListNodeChainArray,
-	Name:   "callGetListNodeChainArray",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetListNodeChainArray,
+	Package: "test",
+	Name:    "callGetListNodeChainArray",
+	Display: "callGetListNodeChainArray",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetResource struct{}
@@ -679,9 +701,11 @@ func (*binaryClasscallGetResource) Skip(d binary.Decoder) error { return doSkipc
 func (*binaryClasscallGetResource) Schema() *schema.Class       { return schemacallGetResource }
 
 var schemacallGetResource = &schema.Class{
-	TypeID: binaryIDcallGetResource,
-	Name:   "callGetResource",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetResource,
+	Package: "test",
+	Name:    "callGetResource",
+	Display: "callGetResource",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetSingleListNode struct{}
@@ -716,9 +740,11 @@ func (*binaryClasscallGetSingleListNode) Skip(d binary.Decoder) error {
 func (*binaryClasscallGetSingleListNode) Schema() *schema.Class { return schemacallGetSingleListNode }
 
 var schemacallGetSingleListNode = &schema.Class{
-	TypeID: binaryIDcallGetSingleListNode,
-	Name:   "callGetSingleListNode",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetSingleListNode,
+	Package: "test",
+	Name:    "callGetSingleListNode",
+	Display: "callGetSingleListNode",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetStruct struct{}
@@ -751,9 +777,11 @@ func (*binaryClasscallGetStruct) Skip(d binary.Decoder) error { return doSkipcal
 func (*binaryClasscallGetStruct) Schema() *schema.Class       { return schemacallGetStruct }
 
 var schemacallGetStruct = &schema.Class{
-	TypeID: binaryIDcallGetStruct,
-	Name:   "callGetStruct",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetStruct,
+	Package: "test",
+	Name:    "callGetStruct",
+	Display: "callGetStruct",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallResolveResource struct{}
@@ -797,8 +825,10 @@ func (*binaryClasscallResolveResource) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveResource) Schema() *schema.Class { return schemacallResolveResource }
 
 var schemacallResolveResource = &schema.Class{
-	TypeID: binaryIDcallResolveResource,
-	Name:   "callResolveResource",
+	TypeID:  binaryIDcallResolveResource,
+	Package: "test",
+	Name:    "callResolveResource",
+	Display: "callResolveResource",
 	Fields: []schema.Field{
 		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
 	},
@@ -843,8 +873,10 @@ func (*binaryClasscallSetStruct) Skip(d binary.Decoder) error { return doSkipcal
 func (*binaryClasscallSetStruct) Schema() *schema.Class       { return schemacallSetStruct }
 
 var schemacallSetStruct = &schema.Class{
-	TypeID: binaryIDcallSetStruct,
-	Name:   "callSetStruct",
+	TypeID:  binaryIDcallSetStruct,
+	Package: "test",
+	Name:    "callSetStruct",
+	Display: "callSetStruct",
 	Fields: []schema.Field{
 		{Declared: "s", Type: &schema.Struct{Name: "Struct"}},
 	},
@@ -889,8 +921,10 @@ func (*binaryClasscallUseResource) Skip(d binary.Decoder) error { return doSkipc
 func (*binaryClasscallUseResource) Schema() *schema.Class       { return schemacallUseResource }
 
 var schemacallUseResource = &schema.Class{
-	TypeID: binaryIDcallUseResource,
-	Name:   "callUseResource",
+	TypeID:  binaryIDcallUseResource,
+	Package: "test",
+	Name:    "callUseResource",
+	Display: "callUseResource",
 	Fields: []schema.Field{
 		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
 	},
@@ -937,8 +971,10 @@ func (*binaryClassresultAdd) Skip(d binary.Decoder) error { return doSkipresultA
 func (*binaryClassresultAdd) Schema() *schema.Class       { return schemaresultAdd }
 
 var schemaresultAdd = &schema.Class{
-	TypeID: binaryIDresultAdd,
-	Name:   "resultAdd",
+	TypeID:  binaryIDresultAdd,
+	Package: "test",
+	Name:    "resultAdd",
+	Display: "resultAdd",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -985,8 +1021,10 @@ func (*binaryClassresultEnumToString) Skip(d binary.Decoder) error { return doSk
 func (*binaryClassresultEnumToString) Schema() *schema.Class       { return schemaresultEnumToString }
 
 var schemaresultEnumToString = &schema.Class{
-	TypeID: binaryIDresultEnumToString,
-	Name:   "resultEnumToString",
+	TypeID:  binaryIDresultEnumToString,
+	Package: "test",
+	Name:    "resultEnumToString",
+	Display: "resultEnumToString",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -1039,8 +1077,10 @@ func (*binaryClassresultGetBase) Skip(d binary.Decoder) error { return doSkipres
 func (*binaryClassresultGetBase) Schema() *schema.Class       { return schemaresultGetBase }
 
 var schemaresultGetBase = &schema.Class{
-	TypeID: binaryIDresultGetBase,
-	Name:   "resultGetBase",
+	TypeID:  binaryIDresultGetBase,
+	Package: "test",
+	Name:    "resultGetBase",
+	Display: "resultGetBase",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
 	},
@@ -1093,8 +1133,10 @@ func (*binaryClassresultGetDerived) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassresultGetDerived) Schema() *schema.Class       { return schemaresultGetDerived }
 
 var schemaresultGetDerived = &schema.Class{
-	TypeID: binaryIDresultGetDerived,
-	Name:   "resultGetDerived",
+	TypeID:  binaryIDresultGetDerived,
+	Package: "test",
+	Name:    "resultGetDerived",
+	Display: "resultGetDerived",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
 	},
@@ -1149,8 +1191,10 @@ func (*binaryClassresultGetListNodeChain) Skip(d binary.Decoder) error {
 func (*binaryClassresultGetListNodeChain) Schema() *schema.Class { return schemaresultGetListNodeChain }
 
 var schemaresultGetListNodeChain = &schema.Class{
-	TypeID: binaryIDresultGetListNodeChain,
-	Name:   "resultGetListNodeChain",
+	TypeID:  binaryIDresultGetListNodeChain,
+	Package: "test",
+	Name:    "resultGetListNodeChain",
+	Display: "resultGetListNodeChain",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
 	},
@@ -1229,8 +1273,10 @@ func (*binaryClassresultGetListNodeChainArray) Schema() *schema.Class {
 }
 
 var schemaresultGetListNodeChainArray = &schema.Class{
-	TypeID: binaryIDresultGetListNodeChainArray,
-	Name:   "resultGetListNodeChainArray",
+	TypeID:  binaryIDresultGetListNodeChainArray,
+	Package: "test",
+	Name:    "resultGetListNodeChainArray",
+	Display: "resultGetListNodeChainArray",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "ListNodePtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}}},
 	},
@@ -1275,8 +1321,10 @@ func (*binaryClassresultGetResource) Skip(d binary.Decoder) error { return doSki
 func (*binaryClassresultGetResource) Schema() *schema.Class       { return schemaresultGetResource }
 
 var schemaresultGetResource = &schema.Class{
-	TypeID: binaryIDresultGetResource,
-	Name:   "resultGetResource",
+	TypeID:  binaryIDresultGetResource,
+	Package: "test",
+	Name:    "resultGetResource",
+	Display: "resultGetResource",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "ResourceId"}},
 	},
@@ -1333,8 +1381,10 @@ func (*binaryClassresultGetSingleListNode) Schema() *schema.Class {
 }
 
 var schemaresultGetSingleListNode = &schema.Class{
-	TypeID: binaryIDresultGetSingleListNode,
-	Name:   "resultGetSingleListNode",
+	TypeID:  binaryIDresultGetSingleListNode,
+	Package: "test",
+	Name:    "resultGetSingleListNode",
+	Display: "resultGetSingleListNode",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
 	},
@@ -1379,8 +1429,10 @@ func (*binaryClassresultGetStruct) Skip(d binary.Decoder) error { return doSkipr
 func (*binaryClassresultGetStruct) Schema() *schema.Class       { return schemaresultGetStruct }
 
 var schemaresultGetStruct = &schema.Class{
-	TypeID: binaryIDresultGetStruct,
-	Name:   "resultGetStruct",
+	TypeID:  binaryIDresultGetStruct,
+	Package: "test",
+	Name:    "resultGetStruct",
+	Display: "resultGetStruct",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Struct"}},
 	},
@@ -1427,8 +1479,10 @@ func (*binaryClassresultResolveResource) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveResource) Schema() *schema.Class { return schemaresultResolveResource }
 
 var schemaresultResolveResource = &schema.Class{
-	TypeID: binaryIDresultResolveResource,
-	Name:   "resultResolveResource",
+	TypeID:  binaryIDresultResolveResource,
+	Package: "test",
+	Name:    "resultResolveResource",
+	Display: "resultResolveResource",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Resource"}},
 	},
@@ -1464,9 +1518,11 @@ func (*binaryClassresultSetStruct) Skip(d binary.Decoder) error { return doSkipr
 func (*binaryClassresultSetStruct) Schema() *schema.Class       { return schemaresultSetStruct }
 
 var schemaresultSetStruct = &schema.Class{
-	TypeID: binaryIDresultSetStruct,
-	Name:   "resultSetStruct",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDresultSetStruct,
+	Package: "test",
+	Name:    "resultSetStruct",
+	Display: "resultSetStruct",
+	Fields:  []schema.Field{},
 }
 
 type binaryClassresultUseResource struct{}
@@ -1499,9 +1555,11 @@ func (*binaryClassresultUseResource) Skip(d binary.Decoder) error { return doSki
 func (*binaryClassresultUseResource) Schema() *schema.Class       { return schemaresultUseResource }
 
 var schemaresultUseResource = &schema.Class{
-	TypeID: binaryIDresultUseResource,
-	Name:   "resultUseResource",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDresultUseResource,
+	Package: "test",
+	Name:    "resultUseResource",
+	Display: "resultUseResource",
+	Fields:  []schema.Field{},
 }
 
 const _Enum_name = "OneTwoThree"

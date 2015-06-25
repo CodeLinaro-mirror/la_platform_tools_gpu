@@ -64,8 +64,10 @@ func (*binaryClassmsgCloseChannel) Skip(d binary.Decoder) error { return doSkipm
 func (*binaryClassmsgCloseChannel) Schema() *schema.Class       { return schemamsgCloseChannel }
 
 var schemamsgCloseChannel = &schema.Class{
-	TypeID: binaryIDmsgCloseChannel,
-	Name:   "msgCloseChannel",
+	TypeID:  binaryIDmsgCloseChannel,
+	Package: "multiplexer",
+	Name:    "msgCloseChannel",
+	Display: "msgCloseChannel",
 	Fields: []schema.Field{
 		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
@@ -133,8 +135,10 @@ func (*binaryClassmsgData) Skip(d binary.Decoder) error { return doSkipmsgData(d
 func (*binaryClassmsgData) Schema() *schema.Class       { return schemamsgData }
 
 var schemamsgData = &schema.Class{
-	TypeID: binaryIDmsgData,
-	Name:   "msgData",
+	TypeID:  binaryIDmsgData,
+	Package: "multiplexer",
+	Name:    "msgData",
+	Display: "msgData",
 	Fields: []schema.Field{
 		{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 		{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
@@ -182,8 +186,10 @@ func (*binaryClassmsgOpenChannel) Skip(d binary.Decoder) error { return doSkipms
 func (*binaryClassmsgOpenChannel) Schema() *schema.Class       { return schemamsgOpenChannel }
 
 var schemamsgOpenChannel = &schema.Class{
-	TypeID: binaryIDmsgOpenChannel,
-	Name:   "msgOpenChannel",
+	TypeID:  binaryIDmsgOpenChannel,
+	Package: "multiplexer",
+	Name:    "msgOpenChannel",
+	Display: "msgOpenChannel",
 	Fields: []schema.Field{
 		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
