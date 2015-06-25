@@ -70,8 +70,10 @@ func (*binaryClassBlob) Skip(d binary.Decoder) error { return doSkipBlob(d) }
 func (*binaryClassBlob) Schema() *schema.Class       { return schemaBlob }
 
 var schemaBlob = &schema.Class{
-	TypeID: binaryIDBlob,
-	Name:   "Blob",
+	TypeID:  binaryIDBlob,
+	Package: "database",
+	Name:    "Blob",
+	Display: "Blob",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},

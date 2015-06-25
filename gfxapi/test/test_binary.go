@@ -301,8 +301,10 @@ func (*binaryClassSliceInfo) Skip(d binary.Decoder) error { return doSkipSliceIn
 func (*binaryClassSliceInfo) Schema() *schema.Class       { return schemaSliceInfo }
 
 var schemaSliceInfo = &schema.Class{
-	TypeID: binaryIDSliceInfo,
-	Name:   "SliceInfo",
+	TypeID:  binaryIDSliceInfo,
+	Package: "test",
+	Name:    "SliceInfo",
+	Display: "SliceInfo",
 	Fields: []schema.Field{
 		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
@@ -350,8 +352,10 @@ func (*binaryClassBoolˢ) Skip(d binary.Decoder) error { return doSkipBoolˢ(d) 
 func (*binaryClassBoolˢ) Schema() *schema.Class       { return schemaBoolˢ }
 
 var schemaBoolˢ = &schema.Class{
-	TypeID: binaryIDBoolˢ,
-	Name:   "Boolˢ",
+	TypeID:  binaryIDBoolˢ,
+	Package: "test",
+	Name:    "Boolˢ",
+	Display: "Boolˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -409,8 +413,10 @@ func (*binaryClassBoolᵖ) Skip(d binary.Decoder) error { return doSkipBoolᵖ(d
 func (*binaryClassBoolᵖ) Schema() *schema.Class       { return schemaBoolᵖ }
 
 var schemaBoolᵖ = &schema.Class{
-	TypeID: binaryIDBoolᵖ,
-	Name:   "Boolᵖ",
+	TypeID:  binaryIDBoolᵖ,
+	Package: "test",
+	Name:    "Boolᵖ",
+	Display: "Boolᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -456,8 +462,10 @@ func (*binaryClassCharˢ) Skip(d binary.Decoder) error { return doSkipCharˢ(d) 
 func (*binaryClassCharˢ) Schema() *schema.Class       { return schemaCharˢ }
 
 var schemaCharˢ = &schema.Class{
-	TypeID: binaryIDCharˢ,
-	Name:   "Charˢ",
+	TypeID:  binaryIDCharˢ,
+	Package: "test",
+	Name:    "Charˢ",
+	Display: "Charˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -515,8 +523,10 @@ func (*binaryClassCharᵖ) Skip(d binary.Decoder) error { return doSkipCharᵖ(d
 func (*binaryClassCharᵖ) Schema() *schema.Class       { return schemaCharᵖ }
 
 var schemaCharᵖ = &schema.Class{
-	TypeID: binaryIDCharᵖ,
-	Name:   "Charᵖ",
+	TypeID:  binaryIDCharᵖ,
+	Package: "test",
+	Name:    "Charᵖ",
+	Display: "Charᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -562,8 +572,10 @@ func (*binaryClassCharᵖˢ) Skip(d binary.Decoder) error { return doSkipCharᵖ
 func (*binaryClassCharᵖˢ) Schema() *schema.Class       { return schemaCharᵖˢ }
 
 var schemaCharᵖˢ = &schema.Class{
-	TypeID: binaryIDCharᵖˢ,
-	Name:   "Charᵖˢ",
+	TypeID:  binaryIDCharᵖˢ,
+	Package: "test",
+	Name:    "Charᵖˢ",
+	Display: "Charᵖˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -621,8 +633,10 @@ func (*binaryClassCharᵖᵖ) Skip(d binary.Decoder) error { return doSkipChar�
 func (*binaryClassCharᵖᵖ) Schema() *schema.Class       { return schemaCharᵖᵖ }
 
 var schemaCharᵖᵖ = &schema.Class{
-	TypeID: binaryIDCharᵖᵖ,
-	Name:   "Charᵖᵖ",
+	TypeID:  binaryIDCharᵖᵖ,
+	Package: "test",
+	Name:    "Charᵖᵖ",
+	Display: "Charᵖᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -679,8 +693,10 @@ func (*binaryClassCmdBool) Skip(d binary.Decoder) error { return doSkipCmdBool(d
 func (*binaryClassCmdBool) Schema() *schema.Class       { return schemaCmdBool }
 
 var schemaCmdBool = &schema.Class{
-	TypeID: binaryIDCmdBool,
-	Name:   "CmdBool",
+	TypeID:  binaryIDCmdBool,
+	Package: "test",
+	Name:    "CmdBool",
+	Display: "cmd_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -735,8 +751,10 @@ func (*binaryClassCmdCharptrToString) Skip(d binary.Decoder) error { return doSk
 func (*binaryClassCmdCharptrToString) Schema() *schema.Class       { return schemaCmdCharptrToString }
 
 var schemaCmdCharptrToString = &schema.Class{
-	TypeID: binaryIDCmdCharptrToString,
-	Name:   "CmdCharptrToString",
+	TypeID:  binaryIDCmdCharptrToString,
+	Package: "test",
+	Name:    "CmdCharptrToString",
+	Display: "cmd_charptr_to_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
@@ -804,8 +822,10 @@ func (*binaryClassCmdCharsliceToString) Skip(d binary.Decoder) error {
 func (*binaryClassCmdCharsliceToString) Schema() *schema.Class { return schemaCmdCharsliceToString }
 
 var schemaCmdCharsliceToString = &schema.Class{
-	TypeID: binaryIDCmdCharsliceToString,
-	Name:   "CmdCharsliceToString",
+	TypeID:  binaryIDCmdCharsliceToString,
+	Package: "test",
+	Name:    "CmdCharsliceToString",
+	Display: "cmd_charslice_to_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
@@ -865,8 +885,10 @@ func (*binaryClassU8ᵖ) Skip(d binary.Decoder) error { return doSkipU8ᵖ(d) }
 func (*binaryClassU8ᵖ) Schema() *schema.Class       { return schemaU8ᵖ }
 
 var schemaU8ᵖ = &schema.Class{
-	TypeID: binaryIDU8ᵖ,
-	Name:   "U8ᵖ",
+	TypeID:  binaryIDU8ᵖ,
+	Package: "test",
+	Name:    "U8ᵖ",
+	Display: "U8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -932,8 +954,10 @@ func (*binaryClassCmdClone) Skip(d binary.Decoder) error { return doSkipCmdClone
 func (*binaryClassCmdClone) Schema() *schema.Class       { return schemaCmdClone }
 
 var schemaCmdClone = &schema.Class{
-	TypeID: binaryIDCmdClone,
-	Name:   "CmdClone",
+	TypeID:  binaryIDCmdClone,
+	Package: "test",
+	Name:    "CmdClone",
+	Display: "cmd_clone",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
@@ -1000,8 +1024,10 @@ func (*binaryClassCmdCopy) Skip(d binary.Decoder) error { return doSkipCmdCopy(d
 func (*binaryClassCmdCopy) Schema() *schema.Class       { return schemaCmdCopy }
 
 var schemaCmdCopy = &schema.Class{
-	TypeID: binaryIDCmdCopy,
-	Name:   "CmdCopy",
+	TypeID:  binaryIDCmdCopy,
+	Package: "test",
+	Name:    "CmdCopy",
+	Display: "cmd_copy",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
@@ -1059,8 +1085,10 @@ func (*binaryClassCmdF32) Skip(d binary.Decoder) error { return doSkipCmdF32(d) 
 func (*binaryClassCmdF32) Schema() *schema.Class       { return schemaCmdF32 }
 
 var schemaCmdF32 = &schema.Class{
-	TypeID: binaryIDCmdF32,
-	Name:   "CmdF32",
+	TypeID:  binaryIDCmdF32,
+	Package: "test",
+	Name:    "CmdF32",
+	Display: "cmd_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -1117,8 +1145,10 @@ func (*binaryClassCmdF64) Skip(d binary.Decoder) error { return doSkipCmdF64(d) 
 func (*binaryClassCmdF64) Schema() *schema.Class       { return schemaCmdF64 }
 
 var schemaCmdF64 = &schema.Class{
-	TypeID: binaryIDCmdF64,
-	Name:   "CmdF64",
+	TypeID:  binaryIDCmdF64,
+	Package: "test",
+	Name:    "CmdF64",
+	Display: "cmd_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
@@ -1175,8 +1205,10 @@ func (*binaryClassCmdMake) Skip(d binary.Decoder) error { return doSkipCmdMake(d
 func (*binaryClassCmdMake) Schema() *schema.Class       { return schemaCmdMake }
 
 var schemaCmdMake = &schema.Class{
-	TypeID: binaryIDCmdMake,
-	Name:   "CmdMake",
+	TypeID:  binaryIDCmdMake,
+	Package: "test",
+	Name:    "CmdMake",
+	Display: "cmd_make",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1235,8 +1267,10 @@ func (*binaryClassVoidᵖ) Skip(d binary.Decoder) error { return doSkipVoidᵖ(d
 func (*binaryClassVoidᵖ) Schema() *schema.Class       { return schemaVoidᵖ }
 
 var schemaVoidᵖ = &schema.Class{
-	TypeID: binaryIDVoidᵖ,
-	Name:   "Voidᵖ",
+	TypeID:  binaryIDVoidᵖ,
+	Package: "test",
+	Name:    "Voidᵖ",
+	Display: "Voidᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -1291,8 +1325,10 @@ func (*binaryClassCmdPointer) Skip(d binary.Decoder) error { return doSkipCmdPoi
 func (*binaryClassCmdPointer) Schema() *schema.Class       { return schemaCmdPointer }
 
 var schemaCmdPointer = &schema.Class{
-	TypeID: binaryIDCmdPointer,
-	Name:   "CmdPointer",
+	TypeID:  binaryIDCmdPointer,
+	Package: "test",
+	Name:    "CmdPointer",
+	Display: "cmd_pointer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
@@ -1349,8 +1385,10 @@ func (*binaryClassCmdRemapped) Skip(d binary.Decoder) error { return doSkipCmdRe
 func (*binaryClassCmdRemapped) Schema() *schema.Class       { return schemaCmdRemapped }
 
 var schemaCmdRemapped = &schema.Class{
-	TypeID: binaryIDCmdRemapped,
-	Name:   "CmdRemapped",
+	TypeID:  binaryIDCmdRemapped,
+	Package: "test",
+	Name:    "CmdRemapped",
+	Display: "cmd_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -1407,8 +1445,10 @@ func (*binaryClassCmdS16) Skip(d binary.Decoder) error { return doSkipCmdS16(d) 
 func (*binaryClassCmdS16) Schema() *schema.Class       { return schemaCmdS16 }
 
 var schemaCmdS16 = &schema.Class{
-	TypeID: binaryIDCmdS16,
-	Name:   "CmdS16",
+	TypeID:  binaryIDCmdS16,
+	Package: "test",
+	Name:    "CmdS16",
+	Display: "cmd_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
@@ -1465,8 +1505,10 @@ func (*binaryClassCmdS32) Skip(d binary.Decoder) error { return doSkipCmdS32(d) 
 func (*binaryClassCmdS32) Schema() *schema.Class       { return schemaCmdS32 }
 
 var schemaCmdS32 = &schema.Class{
-	TypeID: binaryIDCmdS32,
-	Name:   "CmdS32",
+	TypeID:  binaryIDCmdS32,
+	Package: "test",
+	Name:    "CmdS32",
+	Display: "cmd_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -1523,8 +1565,10 @@ func (*binaryClassCmdS64) Skip(d binary.Decoder) error { return doSkipCmdS64(d) 
 func (*binaryClassCmdS64) Schema() *schema.Class       { return schemaCmdS64 }
 
 var schemaCmdS64 = &schema.Class{
-	TypeID: binaryIDCmdS64,
-	Name:   "CmdS64",
+	TypeID:  binaryIDCmdS64,
+	Package: "test",
+	Name:    "CmdS64",
+	Display: "cmd_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -1581,8 +1625,10 @@ func (*binaryClassCmdS8) Skip(d binary.Decoder) error { return doSkipCmdS8(d) }
 func (*binaryClassCmdS8) Schema() *schema.Class       { return schemaCmdS8 }
 
 var schemaCmdS8 = &schema.Class{
-	TypeID: binaryIDCmdS8,
-	Name:   "CmdS8",
+	TypeID:  binaryIDCmdS8,
+	Package: "test",
+	Name:    "CmdS8",
+	Display: "cmd_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
@@ -1641,8 +1687,10 @@ func (*binaryClassU16ᵖ) Skip(d binary.Decoder) error { return doSkipU16ᵖ(d) 
 func (*binaryClassU16ᵖ) Schema() *schema.Class       { return schemaU16ᵖ }
 
 var schemaU16ᵖ = &schema.Class{
-	TypeID: binaryIDU16ᵖ,
-	Name:   "U16ᵖ",
+	TypeID:  binaryIDU16ᵖ,
+	Package: "test",
+	Name:    "U16ᵖ",
+	Display: "U16ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -1708,8 +1756,10 @@ func (*binaryClassCmdSliceCasts) Skip(d binary.Decoder) error { return doSkipCmd
 func (*binaryClassCmdSliceCasts) Schema() *schema.Class       { return schemaCmdSliceCasts }
 
 var schemaCmdSliceCasts = &schema.Class{
-	TypeID: binaryIDCmdSliceCasts,
-	Name:   "CmdSliceCasts",
+	TypeID:  binaryIDCmdSliceCasts,
+	Package: "test",
+	Name:    "CmdSliceCasts",
+	Display: "cmd_slice_casts",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "S", Type: &schema.Struct{Name: "U16ᵖ"}},
@@ -1767,8 +1817,10 @@ func (*binaryClassCmdString) Skip(d binary.Decoder) error { return doSkipCmdStri
 func (*binaryClassCmdString) Schema() *schema.Class       { return schemaCmdString }
 
 var schemaCmdString = &schema.Class{
-	TypeID: binaryIDCmdString,
-	Name:   "CmdString",
+	TypeID:  binaryIDCmdString,
+	Package: "test",
+	Name:    "CmdString",
+	Display: "cmd_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -1825,8 +1877,10 @@ func (*binaryClassCmdU16) Skip(d binary.Decoder) error { return doSkipCmdU16(d) 
 func (*binaryClassCmdU16) Schema() *schema.Class       { return schemaCmdU16 }
 
 var schemaCmdU16 = &schema.Class{
-	TypeID: binaryIDCmdU16,
-	Name:   "CmdU16",
+	TypeID:  binaryIDCmdU16,
+	Package: "test",
+	Name:    "CmdU16",
+	Display: "cmd_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -1883,8 +1937,10 @@ func (*binaryClassCmdU32) Skip(d binary.Decoder) error { return doSkipCmdU32(d) 
 func (*binaryClassCmdU32) Schema() *schema.Class       { return schemaCmdU32 }
 
 var schemaCmdU32 = &schema.Class{
-	TypeID: binaryIDCmdU32,
-	Name:   "CmdU32",
+	TypeID:  binaryIDCmdU32,
+	Package: "test",
+	Name:    "CmdU32",
+	Display: "cmd_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1941,8 +1997,10 @@ func (*binaryClassCmdU64) Skip(d binary.Decoder) error { return doSkipCmdU64(d) 
 func (*binaryClassCmdU64) Schema() *schema.Class       { return schemaCmdU64 }
 
 var schemaCmdU64 = &schema.Class{
-	TypeID: binaryIDCmdU64,
-	Name:   "CmdU64",
+	TypeID:  binaryIDCmdU64,
+	Package: "test",
+	Name:    "CmdU64",
+	Display: "cmd_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -1999,8 +2057,10 @@ func (*binaryClassCmdU8) Skip(d binary.Decoder) error { return doSkipCmdU8(d) }
 func (*binaryClassCmdU8) Schema() *schema.Class       { return schemaCmdU8 }
 
 var schemaCmdU8 = &schema.Class{
-	TypeID: binaryIDCmdU8,
-	Name:   "CmdU8",
+	TypeID:  binaryIDCmdU8,
+	Package: "test",
+	Name:    "CmdU8",
+	Display: "cmd_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -2057,8 +2117,10 @@ func (*binaryClassCmdUnknownRet) Skip(d binary.Decoder) error { return doSkipCmd
 func (*binaryClassCmdUnknownRet) Schema() *schema.Class       { return schemaCmdUnknownRet }
 
 var schemaCmdUnknownRet = &schema.Class{
-	TypeID: binaryIDCmdUnknownRet,
-	Name:   "CmdUnknownRet",
+	TypeID:  binaryIDCmdUnknownRet,
+	Package: "test",
+	Name:    "CmdUnknownRet",
+	Display: "cmd_unknown_ret",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -2117,8 +2179,10 @@ func (*binaryClassIntᵖ) Skip(d binary.Decoder) error { return doSkipIntᵖ(d) 
 func (*binaryClassIntᵖ) Schema() *schema.Class       { return schemaIntᵖ }
 
 var schemaIntᵖ = &schema.Class{
-	TypeID: binaryIDIntᵖ,
-	Name:   "Intᵖ",
+	TypeID:  binaryIDIntᵖ,
+	Package: "test",
+	Name:    "Intᵖ",
+	Display: "Intᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -2173,8 +2237,10 @@ func (*binaryClassCmdUnknownWritePtr) Skip(d binary.Decoder) error { return doSk
 func (*binaryClassCmdUnknownWritePtr) Schema() *schema.Class       { return schemaCmdUnknownWritePtr }
 
 var schemaCmdUnknownWritePtr = &schema.Class{
-	TypeID: binaryIDCmdUnknownWritePtr,
-	Name:   "CmdUnknownWritePtr",
+	TypeID:  binaryIDCmdUnknownWritePtr,
+	Package: "test",
+	Name:    "CmdUnknownWritePtr",
+	Display: "cmd_unknown_write_ptr",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "P", Type: &schema.Struct{Name: "Intᵖ"}},
@@ -2231,8 +2297,10 @@ func (*binaryClassCmdUnknownWriteSlice) Skip(d binary.Decoder) error {
 func (*binaryClassCmdUnknownWriteSlice) Schema() *schema.Class { return schemaCmdUnknownWriteSlice }
 
 var schemaCmdUnknownWriteSlice = &schema.Class{
-	TypeID: binaryIDCmdUnknownWriteSlice,
-	Name:   "CmdUnknownWriteSlice",
+	TypeID:  binaryIDCmdUnknownWriteSlice,
+	Package: "test",
+	Name:    "CmdUnknownWriteSlice",
+	Display: "cmd_unknown_write_slice",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Intᵖ"}},
@@ -2278,8 +2346,10 @@ func (*binaryClassCmdVoid) Skip(d binary.Decoder) error { return doSkipCmdVoid(d
 func (*binaryClassCmdVoid) Schema() *schema.Class       { return schemaCmdVoid }
 
 var schemaCmdVoid = &schema.Class{
-	TypeID: binaryIDCmdVoid,
-	Name:   "CmdVoid",
+	TypeID:  binaryIDCmdVoid,
+	Package: "test",
+	Name:    "CmdVoid",
+	Display: "cmd_void",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
@@ -2337,8 +2407,10 @@ func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) 
 func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
 
 var schemaU32ᵖ = &schema.Class{
-	TypeID: binaryIDU32ᵖ,
-	Name:   "U32ᵖ",
+	TypeID:  binaryIDU32ᵖ,
+	Package: "test",
+	Name:    "U32ᵖ",
+	Display: "U32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -2411,8 +2483,10 @@ func (*binaryClassCmdVoid3InArrays) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassCmdVoid3InArrays) Schema() *schema.Class       { return schemaCmdVoid3InArrays }
 
 var schemaCmdVoid3InArrays = &schema.Class{
-	TypeID: binaryIDCmdVoid3InArrays,
-	Name:   "CmdVoid3InArrays",
+	TypeID:  binaryIDCmdVoid3InArrays,
+	Package: "test",
+	Name:    "CmdVoid3InArrays",
+	Display: "cmd_void_3_in_arrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
@@ -2493,8 +2567,10 @@ func (*binaryClassCmdVoid3Remapped) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassCmdVoid3Remapped) Schema() *schema.Class       { return schemaCmdVoid3Remapped }
 
 var schemaCmdVoid3Remapped = &schema.Class{
-	TypeID: binaryIDCmdVoid3Remapped,
-	Name:   "CmdVoid3Remapped",
+	TypeID:  binaryIDCmdVoid3Remapped,
+	Package: "test",
+	Name:    "CmdVoid3Remapped",
+	Display: "cmd_void_3_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -2575,8 +2651,10 @@ func (*binaryClassCmdVoid3Strings) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoid3Strings) Schema() *schema.Class       { return schemaCmdVoid3Strings }
 
 var schemaCmdVoid3Strings = &schema.Class{
-	TypeID: binaryIDCmdVoid3Strings,
-	Name:   "CmdVoid3Strings",
+	TypeID:  binaryIDCmdVoid3Strings,
+	Package: "test",
+	Name:    "CmdVoid3Strings",
+	Display: "cmd_void_3_strings",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -2635,8 +2713,10 @@ func (*binaryClassCmdVoidBool) Skip(d binary.Decoder) error { return doSkipCmdVo
 func (*binaryClassCmdVoidBool) Schema() *schema.Class       { return schemaCmdVoidBool }
 
 var schemaCmdVoidBool = &schema.Class{
-	TypeID: binaryIDCmdVoidBool,
-	Name:   "CmdVoidBool",
+	TypeID:  binaryIDCmdVoidBool,
+	Package: "test",
+	Name:    "CmdVoidBool",
+	Display: "cmd_void_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -2693,8 +2773,10 @@ func (*binaryClassCmdVoidF32) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidF32) Schema() *schema.Class       { return schemaCmdVoidF32 }
 
 var schemaCmdVoidF32 = &schema.Class{
-	TypeID: binaryIDCmdVoidF32,
-	Name:   "CmdVoidF32",
+	TypeID:  binaryIDCmdVoidF32,
+	Package: "test",
+	Name:    "CmdVoidF32",
+	Display: "cmd_void_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -2751,8 +2833,10 @@ func (*binaryClassCmdVoidF64) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidF64) Schema() *schema.Class       { return schemaCmdVoidF64 }
 
 var schemaCmdVoidF64 = &schema.Class{
-	TypeID: binaryIDCmdVoidF64,
-	Name:   "CmdVoidF64",
+	TypeID:  binaryIDCmdVoidF64,
+	Package: "test",
+	Name:    "CmdVoidF64",
+	Display: "cmd_void_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
@@ -2822,8 +2906,10 @@ func (*binaryClassCmdVoidInArrayOfPointers) Schema() *schema.Class {
 }
 
 var schemaCmdVoidInArrayOfPointers = &schema.Class{
-	TypeID: binaryIDCmdVoidInArrayOfPointers,
-	Name:   "CmdVoidInArrayOfPointers",
+	TypeID:  binaryIDCmdVoidInArrayOfPointers,
+	Package: "test",
+	Name:    "CmdVoidInArrayOfPointers",
+	Display: "cmd_void_in_array_of_pointers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Charᵖᵖ"}},
@@ -2883,8 +2969,10 @@ func (*binaryClassRemappedᵖ) Skip(d binary.Decoder) error { return doSkipRemap
 func (*binaryClassRemappedᵖ) Schema() *schema.Class       { return schemaRemappedᵖ }
 
 var schemaRemappedᵖ = &schema.Class{
-	TypeID: binaryIDRemappedᵖ,
-	Name:   "Remappedᵖ",
+	TypeID:  binaryIDRemappedᵖ,
+	Package: "test",
+	Name:    "Remappedᵖ",
+	Display: "Remappedᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -2943,8 +3031,10 @@ func (*binaryClassCmdVoidInArrayOfRemapped) Schema() *schema.Class {
 }
 
 var schemaCmdVoidInArrayOfRemapped = &schema.Class{
-	TypeID: binaryIDCmdVoidInArrayOfRemapped,
-	Name:   "CmdVoidInArrayOfRemapped",
+	TypeID:  binaryIDCmdVoidInArrayOfRemapped,
+	Package: "test",
+	Name:    "CmdVoidInArrayOfRemapped",
+	Display: "cmd_void_in_array_of_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
@@ -3003,8 +3093,10 @@ func (*binaryClassCmdVoidOutArrayOfRemapped) Schema() *schema.Class {
 }
 
 var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
-	TypeID: binaryIDCmdVoidOutArrayOfRemapped,
-	Name:   "CmdVoidOutArrayOfRemapped",
+	TypeID:  binaryIDCmdVoidOutArrayOfRemapped,
+	Package: "test",
+	Name:    "CmdVoidOutArrayOfRemapped",
+	Display: "cmd_void_out_array_of_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
@@ -3067,8 +3159,10 @@ func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Schema() *schema.Class {
 }
 
 var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Class{
-	TypeID: binaryIDCmdVoidOutArrayOfUnknownRemapped,
-	Name:   "CmdVoidOutArrayOfUnknownRemapped",
+	TypeID:  binaryIDCmdVoidOutArrayOfUnknownRemapped,
+	Package: "test",
+	Name:    "CmdVoidOutArrayOfUnknownRemapped",
+	Display: "cmd_void_out_array_of_unknown_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
@@ -3123,8 +3217,10 @@ func (*binaryClassCmdVoidReadBool) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidReadBool) Schema() *schema.Class       { return schemaCmdVoidReadBool }
 
 var schemaCmdVoidReadBool = &schema.Class{
-	TypeID: binaryIDCmdVoidReadBool,
-	Name:   "CmdVoidReadBool",
+	TypeID:  binaryIDCmdVoidReadBool,
+	Package: "test",
+	Name:    "CmdVoidReadBool",
+	Display: "cmd_void_read_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
@@ -3183,8 +3279,10 @@ func (*binaryClassF32ᵖ) Skip(d binary.Decoder) error { return doSkipF32ᵖ(d) 
 func (*binaryClassF32ᵖ) Schema() *schema.Class       { return schemaF32ᵖ }
 
 var schemaF32ᵖ = &schema.Class{
-	TypeID: binaryIDF32ᵖ,
-	Name:   "F32ᵖ",
+	TypeID:  binaryIDF32ᵖ,
+	Package: "test",
+	Name:    "F32ᵖ",
+	Display: "F32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3239,8 +3337,10 @@ func (*binaryClassCmdVoidReadF32) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadF32) Schema() *schema.Class       { return schemaCmdVoidReadF32 }
 
 var schemaCmdVoidReadF32 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadF32,
-	Name:   "CmdVoidReadF32",
+	TypeID:  binaryIDCmdVoidReadF32,
+	Package: "test",
+	Name:    "CmdVoidReadF32",
+	Display: "cmd_void_read_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
@@ -3299,8 +3399,10 @@ func (*binaryClassF64ᵖ) Skip(d binary.Decoder) error { return doSkipF64ᵖ(d) 
 func (*binaryClassF64ᵖ) Schema() *schema.Class       { return schemaF64ᵖ }
 
 var schemaF64ᵖ = &schema.Class{
-	TypeID: binaryIDF64ᵖ,
-	Name:   "F64ᵖ",
+	TypeID:  binaryIDF64ᵖ,
+	Package: "test",
+	Name:    "F64ᵖ",
+	Display: "F64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3355,8 +3457,10 @@ func (*binaryClassCmdVoidReadF64) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadF64) Schema() *schema.Class       { return schemaCmdVoidReadF64 }
 
 var schemaCmdVoidReadF64 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadF64,
-	Name:   "CmdVoidReadF64",
+	TypeID:  binaryIDCmdVoidReadF64,
+	Package: "test",
+	Name:    "CmdVoidReadF64",
+	Display: "cmd_void_read_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
@@ -3429,8 +3533,10 @@ func (*binaryClassCmdVoidReadPtrs) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidReadPtrs) Schema() *schema.Class       { return schemaCmdVoidReadPtrs }
 
 var schemaCmdVoidReadPtrs = &schema.Class{
-	TypeID: binaryIDCmdVoidReadPtrs,
-	Name:   "CmdVoidReadPtrs",
+	TypeID:  binaryIDCmdVoidReadPtrs,
+	Package: "test",
+	Name:    "CmdVoidReadPtrs",
+	Display: "cmd_void_read_ptrs",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
@@ -3491,8 +3597,10 @@ func (*binaryClassS16ᵖ) Skip(d binary.Decoder) error { return doSkipS16ᵖ(d) 
 func (*binaryClassS16ᵖ) Schema() *schema.Class       { return schemaS16ᵖ }
 
 var schemaS16ᵖ = &schema.Class{
-	TypeID: binaryIDS16ᵖ,
-	Name:   "S16ᵖ",
+	TypeID:  binaryIDS16ᵖ,
+	Package: "test",
+	Name:    "S16ᵖ",
+	Display: "S16ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3547,8 +3655,10 @@ func (*binaryClassCmdVoidReadS16) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadS16) Schema() *schema.Class       { return schemaCmdVoidReadS16 }
 
 var schemaCmdVoidReadS16 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadS16,
-	Name:   "CmdVoidReadS16",
+	TypeID:  binaryIDCmdVoidReadS16,
+	Package: "test",
+	Name:    "CmdVoidReadS16",
+	Display: "cmd_void_read_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
@@ -3607,8 +3717,10 @@ func (*binaryClassS32ᵖ) Skip(d binary.Decoder) error { return doSkipS32ᵖ(d) 
 func (*binaryClassS32ᵖ) Schema() *schema.Class       { return schemaS32ᵖ }
 
 var schemaS32ᵖ = &schema.Class{
-	TypeID: binaryIDS32ᵖ,
-	Name:   "S32ᵖ",
+	TypeID:  binaryIDS32ᵖ,
+	Package: "test",
+	Name:    "S32ᵖ",
+	Display: "S32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3663,8 +3775,10 @@ func (*binaryClassCmdVoidReadS32) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadS32) Schema() *schema.Class       { return schemaCmdVoidReadS32 }
 
 var schemaCmdVoidReadS32 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadS32,
-	Name:   "CmdVoidReadS32",
+	TypeID:  binaryIDCmdVoidReadS32,
+	Package: "test",
+	Name:    "CmdVoidReadS32",
+	Display: "cmd_void_read_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
@@ -3723,8 +3837,10 @@ func (*binaryClassS64ᵖ) Skip(d binary.Decoder) error { return doSkipS64ᵖ(d) 
 func (*binaryClassS64ᵖ) Schema() *schema.Class       { return schemaS64ᵖ }
 
 var schemaS64ᵖ = &schema.Class{
-	TypeID: binaryIDS64ᵖ,
-	Name:   "S64ᵖ",
+	TypeID:  binaryIDS64ᵖ,
+	Package: "test",
+	Name:    "S64ᵖ",
+	Display: "S64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3779,8 +3895,10 @@ func (*binaryClassCmdVoidReadS64) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadS64) Schema() *schema.Class       { return schemaCmdVoidReadS64 }
 
 var schemaCmdVoidReadS64 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadS64,
-	Name:   "CmdVoidReadS64",
+	TypeID:  binaryIDCmdVoidReadS64,
+	Package: "test",
+	Name:    "CmdVoidReadS64",
+	Display: "cmd_void_read_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
@@ -3839,8 +3957,10 @@ func (*binaryClassS8ᵖ) Skip(d binary.Decoder) error { return doSkipS8ᵖ(d) }
 func (*binaryClassS8ᵖ) Schema() *schema.Class       { return schemaS8ᵖ }
 
 var schemaS8ᵖ = &schema.Class{
-	TypeID: binaryIDS8ᵖ,
-	Name:   "S8ᵖ",
+	TypeID:  binaryIDS8ᵖ,
+	Package: "test",
+	Name:    "S8ᵖ",
+	Display: "S8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -3895,8 +4015,10 @@ func (*binaryClassCmdVoidReadS8) Skip(d binary.Decoder) error { return doSkipCmd
 func (*binaryClassCmdVoidReadS8) Schema() *schema.Class       { return schemaCmdVoidReadS8 }
 
 var schemaCmdVoidReadS8 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadS8,
-	Name:   "CmdVoidReadS8",
+	TypeID:  binaryIDCmdVoidReadS8,
+	Package: "test",
+	Name:    "CmdVoidReadS8",
+	Display: "cmd_void_read_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
@@ -3951,8 +4073,10 @@ func (*binaryClassCmdVoidReadU16) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadU16) Schema() *schema.Class       { return schemaCmdVoidReadU16 }
 
 var schemaCmdVoidReadU16 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadU16,
-	Name:   "CmdVoidReadU16",
+	TypeID:  binaryIDCmdVoidReadU16,
+	Package: "test",
+	Name:    "CmdVoidReadU16",
+	Display: "cmd_void_read_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
@@ -4007,8 +4131,10 @@ func (*binaryClassCmdVoidReadU32) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadU32) Schema() *schema.Class       { return schemaCmdVoidReadU32 }
 
 var schemaCmdVoidReadU32 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadU32,
-	Name:   "CmdVoidReadU32",
+	TypeID:  binaryIDCmdVoidReadU32,
+	Package: "test",
+	Name:    "CmdVoidReadU32",
+	Display: "cmd_void_read_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
@@ -4067,8 +4193,10 @@ func (*binaryClassU64ᵖ) Skip(d binary.Decoder) error { return doSkipU64ᵖ(d) 
 func (*binaryClassU64ᵖ) Schema() *schema.Class       { return schemaU64ᵖ }
 
 var schemaU64ᵖ = &schema.Class{
-	TypeID: binaryIDU64ᵖ,
-	Name:   "U64ᵖ",
+	TypeID:  binaryIDU64ᵖ,
+	Package: "test",
+	Name:    "U64ᵖ",
+	Display: "U64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -4123,8 +4251,10 @@ func (*binaryClassCmdVoidReadU64) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidReadU64) Schema() *schema.Class       { return schemaCmdVoidReadU64 }
 
 var schemaCmdVoidReadU64 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadU64,
-	Name:   "CmdVoidReadU64",
+	TypeID:  binaryIDCmdVoidReadU64,
+	Package: "test",
+	Name:    "CmdVoidReadU64",
+	Display: "cmd_void_read_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
@@ -4179,8 +4309,10 @@ func (*binaryClassCmdVoidReadU8) Skip(d binary.Decoder) error { return doSkipCmd
 func (*binaryClassCmdVoidReadU8) Schema() *schema.Class       { return schemaCmdVoidReadU8 }
 
 var schemaCmdVoidReadU8 = &schema.Class{
-	TypeID: binaryIDCmdVoidReadU8,
-	Name:   "CmdVoidReadU8",
+	TypeID:  binaryIDCmdVoidReadU8,
+	Package: "test",
+	Name:    "CmdVoidReadU8",
+	Display: "cmd_void_read_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
@@ -4237,8 +4369,10 @@ func (*binaryClassCmdVoidS16) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidS16) Schema() *schema.Class       { return schemaCmdVoidS16 }
 
 var schemaCmdVoidS16 = &schema.Class{
-	TypeID: binaryIDCmdVoidS16,
-	Name:   "CmdVoidS16",
+	TypeID:  binaryIDCmdVoidS16,
+	Package: "test",
+	Name:    "CmdVoidS16",
+	Display: "cmd_void_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
@@ -4295,8 +4429,10 @@ func (*binaryClassCmdVoidS32) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidS32) Schema() *schema.Class       { return schemaCmdVoidS32 }
 
 var schemaCmdVoidS32 = &schema.Class{
-	TypeID: binaryIDCmdVoidS32,
-	Name:   "CmdVoidS32",
+	TypeID:  binaryIDCmdVoidS32,
+	Package: "test",
+	Name:    "CmdVoidS32",
+	Display: "cmd_void_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -4353,8 +4489,10 @@ func (*binaryClassCmdVoidS64) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidS64) Schema() *schema.Class       { return schemaCmdVoidS64 }
 
 var schemaCmdVoidS64 = &schema.Class{
-	TypeID: binaryIDCmdVoidS64,
-	Name:   "CmdVoidS64",
+	TypeID:  binaryIDCmdVoidS64,
+	Package: "test",
+	Name:    "CmdVoidS64",
+	Display: "cmd_void_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -4411,8 +4549,10 @@ func (*binaryClassCmdVoidS8) Skip(d binary.Decoder) error { return doSkipCmdVoid
 func (*binaryClassCmdVoidS8) Schema() *schema.Class       { return schemaCmdVoidS8 }
 
 var schemaCmdVoidS8 = &schema.Class{
-	TypeID: binaryIDCmdVoidS8,
-	Name:   "CmdVoidS8",
+	TypeID:  binaryIDCmdVoidS8,
+	Package: "test",
+	Name:    "CmdVoidS8",
+	Display: "cmd_void_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
@@ -4469,8 +4609,10 @@ func (*binaryClassCmdVoidString) Skip(d binary.Decoder) error { return doSkipCmd
 func (*binaryClassCmdVoidString) Schema() *schema.Class       { return schemaCmdVoidString }
 
 var schemaCmdVoidString = &schema.Class{
-	TypeID: binaryIDCmdVoidString,
-	Name:   "CmdVoidString",
+	TypeID:  binaryIDCmdVoidString,
+	Package: "test",
+	Name:    "CmdVoidString",
+	Display: "cmd_void_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -4527,8 +4669,10 @@ func (*binaryClassCmdVoidU16) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidU16) Schema() *schema.Class       { return schemaCmdVoidU16 }
 
 var schemaCmdVoidU16 = &schema.Class{
-	TypeID: binaryIDCmdVoidU16,
-	Name:   "CmdVoidU16",
+	TypeID:  binaryIDCmdVoidU16,
+	Package: "test",
+	Name:    "CmdVoidU16",
+	Display: "cmd_void_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -4585,8 +4729,10 @@ func (*binaryClassCmdVoidU32) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidU32) Schema() *schema.Class       { return schemaCmdVoidU32 }
 
 var schemaCmdVoidU32 = &schema.Class{
-	TypeID: binaryIDCmdVoidU32,
-	Name:   "CmdVoidU32",
+	TypeID:  binaryIDCmdVoidU32,
+	Package: "test",
+	Name:    "CmdVoidU32",
+	Display: "cmd_void_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -4643,8 +4789,10 @@ func (*binaryClassCmdVoidU64) Skip(d binary.Decoder) error { return doSkipCmdVoi
 func (*binaryClassCmdVoidU64) Schema() *schema.Class       { return schemaCmdVoidU64 }
 
 var schemaCmdVoidU64 = &schema.Class{
-	TypeID: binaryIDCmdVoidU64,
-	Name:   "CmdVoidU64",
+	TypeID:  binaryIDCmdVoidU64,
+	Package: "test",
+	Name:    "CmdVoidU64",
+	Display: "cmd_void_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -4701,8 +4849,10 @@ func (*binaryClassCmdVoidU8) Skip(d binary.Decoder) error { return doSkipCmdVoid
 func (*binaryClassCmdVoidU8) Schema() *schema.Class       { return schemaCmdVoidU8 }
 
 var schemaCmdVoidU8 = &schema.Class{
-	TypeID: binaryIDCmdVoidU8,
-	Name:   "CmdVoidU8",
+	TypeID:  binaryIDCmdVoidU8,
+	Package: "test",
+	Name:    "CmdVoidU8",
+	Display: "cmd_void_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -4757,8 +4907,10 @@ func (*binaryClassCmdVoidWriteBool) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassCmdVoidWriteBool) Schema() *schema.Class       { return schemaCmdVoidWriteBool }
 
 var schemaCmdVoidWriteBool = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteBool,
-	Name:   "CmdVoidWriteBool",
+	TypeID:  binaryIDCmdVoidWriteBool,
+	Package: "test",
+	Name:    "CmdVoidWriteBool",
+	Display: "cmd_void_write_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
@@ -4813,8 +4965,10 @@ func (*binaryClassCmdVoidWriteF32) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteF32) Schema() *schema.Class       { return schemaCmdVoidWriteF32 }
 
 var schemaCmdVoidWriteF32 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteF32,
-	Name:   "CmdVoidWriteF32",
+	TypeID:  binaryIDCmdVoidWriteF32,
+	Package: "test",
+	Name:    "CmdVoidWriteF32",
+	Display: "cmd_void_write_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
@@ -4869,8 +5023,10 @@ func (*binaryClassCmdVoidWriteF64) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteF64) Schema() *schema.Class       { return schemaCmdVoidWriteF64 }
 
 var schemaCmdVoidWriteF64 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteF64,
-	Name:   "CmdVoidWriteF64",
+	TypeID:  binaryIDCmdVoidWriteF64,
+	Package: "test",
+	Name:    "CmdVoidWriteF64",
+	Display: "cmd_void_write_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
@@ -4943,8 +5099,10 @@ func (*binaryClassCmdVoidWritePtrs) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassCmdVoidWritePtrs) Schema() *schema.Class       { return schemaCmdVoidWritePtrs }
 
 var schemaCmdVoidWritePtrs = &schema.Class{
-	TypeID: binaryIDCmdVoidWritePtrs,
-	Name:   "CmdVoidWritePtrs",
+	TypeID:  binaryIDCmdVoidWritePtrs,
+	Package: "test",
+	Name:    "CmdVoidWritePtrs",
+	Display: "cmd_void_write_ptrs",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
@@ -5001,8 +5159,10 @@ func (*binaryClassCmdVoidWriteS16) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteS16) Schema() *schema.Class       { return schemaCmdVoidWriteS16 }
 
 var schemaCmdVoidWriteS16 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteS16,
-	Name:   "CmdVoidWriteS16",
+	TypeID:  binaryIDCmdVoidWriteS16,
+	Package: "test",
+	Name:    "CmdVoidWriteS16",
+	Display: "cmd_void_write_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
@@ -5057,8 +5217,10 @@ func (*binaryClassCmdVoidWriteS32) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteS32) Schema() *schema.Class       { return schemaCmdVoidWriteS32 }
 
 var schemaCmdVoidWriteS32 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteS32,
-	Name:   "CmdVoidWriteS32",
+	TypeID:  binaryIDCmdVoidWriteS32,
+	Package: "test",
+	Name:    "CmdVoidWriteS32",
+	Display: "cmd_void_write_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
@@ -5113,8 +5275,10 @@ func (*binaryClassCmdVoidWriteS64) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteS64) Schema() *schema.Class       { return schemaCmdVoidWriteS64 }
 
 var schemaCmdVoidWriteS64 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteS64,
-	Name:   "CmdVoidWriteS64",
+	TypeID:  binaryIDCmdVoidWriteS64,
+	Package: "test",
+	Name:    "CmdVoidWriteS64",
+	Display: "cmd_void_write_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
@@ -5169,8 +5333,10 @@ func (*binaryClassCmdVoidWriteS8) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidWriteS8) Schema() *schema.Class       { return schemaCmdVoidWriteS8 }
 
 var schemaCmdVoidWriteS8 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteS8,
-	Name:   "CmdVoidWriteS8",
+	TypeID:  binaryIDCmdVoidWriteS8,
+	Package: "test",
+	Name:    "CmdVoidWriteS8",
+	Display: "cmd_void_write_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
@@ -5225,8 +5391,10 @@ func (*binaryClassCmdVoidWriteU16) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteU16) Schema() *schema.Class       { return schemaCmdVoidWriteU16 }
 
 var schemaCmdVoidWriteU16 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteU16,
-	Name:   "CmdVoidWriteU16",
+	TypeID:  binaryIDCmdVoidWriteU16,
+	Package: "test",
+	Name:    "CmdVoidWriteU16",
+	Display: "cmd_void_write_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
@@ -5281,8 +5449,10 @@ func (*binaryClassCmdVoidWriteU32) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteU32) Schema() *schema.Class       { return schemaCmdVoidWriteU32 }
 
 var schemaCmdVoidWriteU32 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteU32,
-	Name:   "CmdVoidWriteU32",
+	TypeID:  binaryIDCmdVoidWriteU32,
+	Package: "test",
+	Name:    "CmdVoidWriteU32",
+	Display: "cmd_void_write_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
@@ -5337,8 +5507,10 @@ func (*binaryClassCmdVoidWriteU64) Skip(d binary.Decoder) error { return doSkipC
 func (*binaryClassCmdVoidWriteU64) Schema() *schema.Class       { return schemaCmdVoidWriteU64 }
 
 var schemaCmdVoidWriteU64 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteU64,
-	Name:   "CmdVoidWriteU64",
+	TypeID:  binaryIDCmdVoidWriteU64,
+	Package: "test",
+	Name:    "CmdVoidWriteU64",
+	Display: "cmd_void_write_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
@@ -5393,8 +5565,10 @@ func (*binaryClassCmdVoidWriteU8) Skip(d binary.Decoder) error { return doSkipCm
 func (*binaryClassCmdVoidWriteU8) Schema() *schema.Class       { return schemaCmdVoidWriteU8 }
 
 var schemaCmdVoidWriteU8 = &schema.Class{
-	TypeID: binaryIDCmdVoidWriteU8,
-	Name:   "CmdVoidWriteU8",
+	TypeID:  binaryIDCmdVoidWriteU8,
+	Package: "test",
+	Name:    "CmdVoidWriteU8",
+	Display: "cmd_void_write_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
@@ -5440,8 +5614,10 @@ func (*binaryClassF32ˢ) Skip(d binary.Decoder) error { return doSkipF32ˢ(d) }
 func (*binaryClassF32ˢ) Schema() *schema.Class       { return schemaF32ˢ }
 
 var schemaF32ˢ = &schema.Class{
-	TypeID: binaryIDF32ˢ,
-	Name:   "F32ˢ",
+	TypeID:  binaryIDF32ˢ,
+	Package: "test",
+	Name:    "F32ˢ",
+	Display: "F32ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5486,8 +5662,10 @@ func (*binaryClassF64ˢ) Skip(d binary.Decoder) error { return doSkipF64ˢ(d) }
 func (*binaryClassF64ˢ) Schema() *schema.Class       { return schemaF64ˢ }
 
 var schemaF64ˢ = &schema.Class{
-	TypeID: binaryIDF64ˢ,
-	Name:   "F64ˢ",
+	TypeID:  binaryIDF64ˢ,
+	Package: "test",
+	Name:    "F64ˢ",
+	Display: "F64ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5532,8 +5710,10 @@ func (*binaryClassU8ˢ) Skip(d binary.Decoder) error { return doSkipU8ˢ(d) }
 func (*binaryClassU8ˢ) Schema() *schema.Class       { return schemaU8ˢ }
 
 var schemaU8ˢ = &schema.Class{
-	TypeID: binaryIDU8ˢ,
-	Name:   "U8ˢ",
+	TypeID:  binaryIDU8ˢ,
+	Package: "test",
+	Name:    "U8ˢ",
+	Display: "U8ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5578,8 +5758,10 @@ func (*binaryClassU16ˢ) Skip(d binary.Decoder) error { return doSkipU16ˢ(d) }
 func (*binaryClassU16ˢ) Schema() *schema.Class       { return schemaU16ˢ }
 
 var schemaU16ˢ = &schema.Class{
-	TypeID: binaryIDU16ˢ,
-	Name:   "U16ˢ",
+	TypeID:  binaryIDU16ˢ,
+	Package: "test",
+	Name:    "U16ˢ",
+	Display: "U16ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5624,8 +5806,10 @@ func (*binaryClassU32ˢ) Skip(d binary.Decoder) error { return doSkipU32ˢ(d) }
 func (*binaryClassU32ˢ) Schema() *schema.Class       { return schemaU32ˢ }
 
 var schemaU32ˢ = &schema.Class{
-	TypeID: binaryIDU32ˢ,
-	Name:   "U32ˢ",
+	TypeID:  binaryIDU32ˢ,
+	Package: "test",
+	Name:    "U32ˢ",
+	Display: "U32ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5670,8 +5854,10 @@ func (*binaryClassIntˢ) Skip(d binary.Decoder) error { return doSkipIntˢ(d) }
 func (*binaryClassIntˢ) Schema() *schema.Class       { return schemaIntˢ }
 
 var schemaIntˢ = &schema.Class{
-	TypeID: binaryIDIntˢ,
-	Name:   "Intˢ",
+	TypeID:  binaryIDIntˢ,
+	Package: "test",
+	Name:    "Intˢ",
+	Display: "Intˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5754,8 +5940,10 @@ func (*binaryClassGlobals) Skip(d binary.Decoder) error { return doSkipGlobals(d
 func (*binaryClassGlobals) Schema() *schema.Class       { return schemaGlobals }
 
 var schemaGlobals = &schema.Class{
-	TypeID: binaryIDGlobals,
-	Name:   "Globals",
+	TypeID:  binaryIDGlobals,
+	Package: "test",
+	Name:    "Globals",
+	Display: "Globals",
 	Fields: []schema.Field{
 		{Declared: "U8s", Type: &schema.Struct{Name: "U8ˢ"}},
 		{Declared: "U16s", Type: &schema.Struct{Name: "U16ˢ"}},
@@ -5806,8 +5994,10 @@ func (*binaryClassImported) Skip(d binary.Decoder) error { return doSkipImported
 func (*binaryClassImported) Schema() *schema.Class       { return schemaImported }
 
 var schemaImported = &schema.Class{
-	TypeID: binaryIDImported,
-	Name:   "Imported",
+	TypeID:  binaryIDImported,
+	Package: "test",
+	Name:    "Imported",
+	Display: "Imported",
 	Fields: []schema.Field{
 		{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -5865,8 +6055,10 @@ func (*binaryClassIncluded) Skip(d binary.Decoder) error { return doSkipIncluded
 func (*binaryClassIncluded) Schema() *schema.Class       { return schemaIncluded }
 
 var schemaIncluded = &schema.Class{
-	TypeID: binaryIDIncluded,
-	Name:   "Included",
+	TypeID:  binaryIDIncluded,
+	Package: "test",
+	Name:    "Included",
+	Display: "Included",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "S", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -5912,8 +6104,10 @@ func (*binaryClassRemappedˢ) Skip(d binary.Decoder) error { return doSkipRemapp
 func (*binaryClassRemappedˢ) Schema() *schema.Class       { return schemaRemappedˢ }
 
 var schemaRemappedˢ = &schema.Class{
-	TypeID: binaryIDRemappedˢ,
-	Name:   "Remappedˢ",
+	TypeID:  binaryIDRemappedˢ,
+	Package: "test",
+	Name:    "Remappedˢ",
+	Display: "Remappedˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -5958,8 +6152,10 @@ func (*binaryClassS16ˢ) Skip(d binary.Decoder) error { return doSkipS16ˢ(d) }
 func (*binaryClassS16ˢ) Schema() *schema.Class       { return schemaS16ˢ }
 
 var schemaS16ˢ = &schema.Class{
-	TypeID: binaryIDS16ˢ,
-	Name:   "S16ˢ",
+	TypeID:  binaryIDS16ˢ,
+	Package: "test",
+	Name:    "S16ˢ",
+	Display: "S16ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -6004,8 +6200,10 @@ func (*binaryClassS32ˢ) Skip(d binary.Decoder) error { return doSkipS32ˢ(d) }
 func (*binaryClassS32ˢ) Schema() *schema.Class       { return schemaS32ˢ }
 
 var schemaS32ˢ = &schema.Class{
-	TypeID: binaryIDS32ˢ,
-	Name:   "S32ˢ",
+	TypeID:  binaryIDS32ˢ,
+	Package: "test",
+	Name:    "S32ˢ",
+	Display: "S32ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -6050,8 +6248,10 @@ func (*binaryClassS64ˢ) Skip(d binary.Decoder) error { return doSkipS64ˢ(d) }
 func (*binaryClassS64ˢ) Schema() *schema.Class       { return schemaS64ˢ }
 
 var schemaS64ˢ = &schema.Class{
-	TypeID: binaryIDS64ˢ,
-	Name:   "S64ˢ",
+	TypeID:  binaryIDS64ˢ,
+	Package: "test",
+	Name:    "S64ˢ",
+	Display: "S64ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -6096,8 +6296,10 @@ func (*binaryClassS8ˢ) Skip(d binary.Decoder) error { return doSkipS8ˢ(d) }
 func (*binaryClassS8ˢ) Schema() *schema.Class       { return schemaS8ˢ }
 
 var schemaS8ˢ = &schema.Class{
-	TypeID: binaryIDS8ˢ,
-	Name:   "S8ˢ",
+	TypeID:  binaryIDS8ˢ,
+	Package: "test",
+	Name:    "S8ˢ",
+	Display: "S8ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -6162,8 +6364,10 @@ func (*binaryClassTester) Skip(d binary.Decoder) error { return doSkipTester(d) 
 func (*binaryClassTester) Schema() *schema.Class       { return schemaTester }
 
 var schemaTester = &schema.Class{
-	TypeID: binaryIDTester,
-	Name:   "Tester",
+	TypeID:  binaryIDTester,
+	Package: "test",
+	Name:    "Tester",
+	Display: "Tester",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "A", Type: &schema.Struct{Name: "Imported"}},
@@ -6210,8 +6414,10 @@ func (*binaryClassU64ˢ) Skip(d binary.Decoder) error { return doSkipU64ˢ(d) }
 func (*binaryClassU64ˢ) Schema() *schema.Class       { return schemaU64ˢ }
 
 var schemaU64ˢ = &schema.Class{
-	TypeID: binaryIDU64ˢ,
-	Name:   "U64ˢ",
+	TypeID:  binaryIDU64ˢ,
+	Package: "test",
+	Name:    "U64ˢ",
+	Display: "U64ˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},
@@ -6256,8 +6462,10 @@ func (*binaryClassVoidˢ) Skip(d binary.Decoder) error { return doSkipVoidˢ(d) 
 func (*binaryClassVoidˢ) Schema() *schema.Class       { return schemaVoidˢ }
 
 var schemaVoidˢ = &schema.Class{
-	TypeID: binaryIDVoidˢ,
-	Name:   "Voidˢ",
+	TypeID:  binaryIDVoidˢ,
+	Package: "test",
+	Name:    "Voidˢ",
+	Display: "Voidˢ",
 	Fields: []schema.Field{
 		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
 	},

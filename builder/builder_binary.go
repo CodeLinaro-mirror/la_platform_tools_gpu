@@ -146,8 +146,10 @@ func (*binaryClassConvertImage) Skip(d binary.Decoder) error { return doSkipConv
 func (*binaryClassConvertImage) Schema() *schema.Class       { return schemaConvertImage }
 
 var schemaConvertImage = &schema.Class{
-	TypeID: binaryIDConvertImage,
-	Name:   "ConvertImage",
+	TypeID:  binaryIDConvertImage,
+	Package: "builder",
+	Name:    "ConvertImage",
+	Display: "ConvertImage",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
@@ -236,8 +238,10 @@ func (*binaryClassGetFramebufferColor) Skip(d binary.Decoder) error {
 func (*binaryClassGetFramebufferColor) Schema() *schema.Class { return schemaGetFramebufferColor }
 
 var schemaGetFramebufferColor = &schema.Class{
-	TypeID: binaryIDGetFramebufferColor,
-	Name:   "GetFramebufferColor",
+	TypeID:  binaryIDGetFramebufferColor,
+	Package: "builder",
+	Name:    "GetFramebufferColor",
+	Display: "GetFramebufferColor",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -317,8 +321,10 @@ func (*binaryClassGetFramebufferDepth) Skip(d binary.Decoder) error {
 func (*binaryClassGetFramebufferDepth) Schema() *schema.Class { return schemaGetFramebufferDepth }
 
 var schemaGetFramebufferDepth = &schema.Class{
-	TypeID: binaryIDGetFramebufferDepth,
-	Name:   "GetFramebufferDepth",
+	TypeID:  binaryIDGetFramebufferDepth,
+	Package: "builder",
+	Name:    "GetFramebufferDepth",
+	Display: "GetFramebufferDepth",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -366,8 +372,10 @@ func (*binaryClassGetHierarchy) Skip(d binary.Decoder) error { return doSkipGetH
 func (*binaryClassGetHierarchy) Schema() *schema.Class       { return schemaGetHierarchy }
 
 var schemaGetHierarchy = &schema.Class{
-	TypeID: binaryIDGetHierarchy,
-	Name:   "GetHierarchy",
+	TypeID:  binaryIDGetHierarchy,
+	Package: "builder",
+	Name:    "GetHierarchy",
+	Display: "GetHierarchy",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
 	},
@@ -432,8 +440,10 @@ func (*binaryClassGetMemoryInfo) Skip(d binary.Decoder) error { return doSkipGet
 func (*binaryClassGetMemoryInfo) Schema() *schema.Class       { return schemaGetMemoryInfo }
 
 var schemaGetMemoryInfo = &schema.Class{
-	TypeID: binaryIDGetMemoryInfo,
-	Name:   "GetMemoryInfo",
+	TypeID:  binaryIDGetMemoryInfo,
+	Package: "builder",
+	Name:    "GetMemoryInfo",
+	Display: "GetMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
@@ -491,8 +501,10 @@ func (*binaryClassGetState) Skip(d binary.Decoder) error { return doSkipGetState
 func (*binaryClassGetState) Schema() *schema.Class       { return schemaGetState }
 
 var schemaGetState = &schema.Class{
-	TypeID: binaryIDGetState,
-	Name:   "GetState",
+	TypeID:  binaryIDGetState,
+	Package: "builder",
+	Name:    "GetState",
+	Display: "GetState",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
@@ -558,8 +570,10 @@ func (*binaryClassGetTimingInfo) Skip(d binary.Decoder) error { return doSkipGet
 func (*binaryClassGetTimingInfo) Schema() *schema.Class       { return schemaGetTimingInfo }
 
 var schemaGetTimingInfo = &schema.Class{
-	TypeID: binaryIDGetTimingInfo,
-	Name:   "GetTimingInfo",
+	TypeID:  binaryIDGetTimingInfo,
+	Package: "builder",
+	Name:    "GetTimingInfo",
+	Display: "GetTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -677,8 +691,10 @@ func (*binaryClassPrerenderFramebuffers) Skip(d binary.Decoder) error {
 func (*binaryClassPrerenderFramebuffers) Schema() *schema.Class { return schemaPrerenderFramebuffers }
 
 var schemaPrerenderFramebuffers = &schema.Class{
-	TypeID: binaryIDPrerenderFramebuffers,
-	Name:   "PrerenderFramebuffers",
+	TypeID:  binaryIDPrerenderFramebuffers,
+	Package: "builder",
+	Name:    "PrerenderFramebuffers",
+	Display: "PrerenderFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -792,8 +808,10 @@ func (*binaryClassRenderFramebufferColor) Skip(d binary.Decoder) error {
 func (*binaryClassRenderFramebufferColor) Schema() *schema.Class { return schemaRenderFramebufferColor }
 
 var schemaRenderFramebufferColor = &schema.Class{
-	TypeID: binaryIDRenderFramebufferColor,
-	Name:   "RenderFramebufferColor",
+	TypeID:  binaryIDRenderFramebufferColor,
+	Package: "builder",
+	Name:    "RenderFramebufferColor",
+	Display: "RenderFramebufferColor",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -897,8 +915,10 @@ func (*binaryClassRenderFramebufferDepth) Skip(d binary.Decoder) error {
 func (*binaryClassRenderFramebufferDepth) Schema() *schema.Class { return schemaRenderFramebufferDepth }
 
 var schemaRenderFramebufferDepth = &schema.Class{
-	TypeID: binaryIDRenderFramebufferDepth,
-	Name:   "RenderFramebufferDepth",
+	TypeID:  binaryIDRenderFramebufferDepth,
+	Package: "builder",
+	Name:    "RenderFramebufferDepth",
+	Display: "RenderFramebufferDepth",
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
@@ -979,8 +999,10 @@ func (*binaryClassReplaceAtom) Skip(d binary.Decoder) error { return doSkipRepla
 func (*binaryClassReplaceAtom) Schema() *schema.Class       { return schemaReplaceAtom }
 
 var schemaReplaceAtom = &schema.Class{
-	TypeID: binaryIDReplaceAtom,
-	Name:   "ReplaceAtom",
+	TypeID:  binaryIDReplaceAtom,
+	Package: "builder",
+	Name:    "ReplaceAtom",
+	Display: "ReplaceAtom",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
 		{Declared: "Atom", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
@@ -1056,8 +1078,10 @@ func (*binaryClassatomFramebufferDimensions) Schema() *schema.Class {
 }
 
 var schemaatomFramebufferDimensions = &schema.Class{
-	TypeID: binaryIDatomFramebufferDimensions,
-	Name:   "atomFramebufferDimensions",
+	TypeID:  binaryIDatomFramebufferDimensions,
+	Package: "builder",
+	Name:    "atomFramebufferDimensions",
+	Display: "atomFramebufferDimensions",
 	Fields: []schema.Field{
 		{Declared: "From", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1130,8 +1154,10 @@ func (*binaryClasscaptureFramebufferDimensions) Schema() *schema.Class {
 }
 
 var schemacaptureFramebufferDimensions = &schema.Class{
-	TypeID: binaryIDcaptureFramebufferDimensions,
-	Name:   "captureFramebufferDimensions",
+	TypeID:  binaryIDcaptureFramebufferDimensions,
+	Package: "builder",
+	Name:    "captureFramebufferDimensions",
+	Display: "captureFramebufferDimensions",
 	Fields: []schema.Field{
 		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions"}}},
 	},
@@ -1184,8 +1210,10 @@ func (*binaryClassgetCaptureFramebufferDimensions) Schema() *schema.Class {
 }
 
 var schemagetCaptureFramebufferDimensions = &schema.Class{
-	TypeID: binaryIDgetCaptureFramebufferDimensions,
-	Name:   "getCaptureFramebufferDimensions",
+	TypeID:  binaryIDgetCaptureFramebufferDimensions,
+	Package: "builder",
+	Name:    "getCaptureFramebufferDimensions",
+	Display: "getCaptureFramebufferDimensions",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
 	},

@@ -76,8 +76,10 @@ func (*binaryClassAtomA) Skip(d binary.Decoder) error { return doSkipAtomA(d) }
 func (*binaryClassAtomA) Schema() *schema.Class       { return schemaAtomA }
 
 var schemaAtomA = &schema.Class{
-	TypeID: AtomAID,
-	Name:   "AtomA",
+	TypeID:  AtomAID,
+	Package: "test",
+	Name:    "AtomA",
+	Display: "AtomA",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "AtomFlags", Type: &schema.Primitive{Name: "atom.Flags", Method: schema.Uint32}},
@@ -136,8 +138,10 @@ func (*binaryClassAtomB) Skip(d binary.Decoder) error { return doSkipAtomB(d) }
 func (*binaryClassAtomB) Schema() *schema.Class       { return schemaAtomB }
 
 var schemaAtomB = &schema.Class{
-	TypeID: AtomBID,
-	Name:   "AtomB",
+	TypeID:  AtomBID,
+	Package: "test",
+	Name:    "AtomB",
+	Display: "AtomB",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -185,8 +189,10 @@ func (*binaryClassAtomC) Skip(d binary.Decoder) error { return doSkipAtomC(d) }
 func (*binaryClassAtomC) Schema() *schema.Class       { return schemaAtomC }
 
 var schemaAtomC = &schema.Class{
-	TypeID: AtomCID,
-	Name:   "AtomC",
+	TypeID:  AtomCID,
+	Package: "test",
+	Name:    "AtomC",
+	Display: "AtomC",
 	Fields: []schema.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
