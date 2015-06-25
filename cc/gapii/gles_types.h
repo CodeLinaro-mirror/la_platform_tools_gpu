@@ -143,7 +143,7 @@ static const uint32_t GL_STENCIL_INDEX8 = 36168;
 }
 
 namespace Type_ARB_half_float_vertex {
-static const uint32_t GL_ARB_half_float_vertex = 5131;
+static const uint32_t GL_HALF_FLOAT_ARB = 5131;
 }
 
 namespace Type_OES_vertex_half_float {
@@ -160,11 +160,95 @@ static const uint32_t GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 35987;
 static const uint32_t GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = 34798;
 }
 
+namespace CompressedTexelFormat_EXT_texture_compression_dxt1 {
+static const uint32_t GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777;
+}
+
+namespace CompressedTexelFormat_EXT_texture_compression_s3tc {
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
+}
+
+namespace CompressedTexelFormat_KHR_texture_compression_astc_ldr {
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 37809;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 37810;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x5_KHR = 37811;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x6_KHR = 37812;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x5_KHR = 37813;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x6_KHR = 37814;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x5_KHR = 37816;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x6_KHR = 37817;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x8_KHR = 37818;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x10_KHR = 37819;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x10_KHR = 37820;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x12_KHR = 37821;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR = 37840;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR = 37841;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR = 37842;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR = 37843;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR = 37844;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR = 37845;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR = 37846;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR = 37847;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR = 37848;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR = 37849;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR = 37850;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 37851;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 37852;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 37853;
+}
+
+namespace CompressedTexelFormat_NV_texture_compression_latc {
+static const uint32_t GL_COMPRESSED_LUMINANCE_LATC1_NV = 35952;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV = 35953;
+static const uint32_t GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV = 35954;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = 35955;
+}
+
 namespace CompressedTexelFormat {
 static const uint32_t GL_ETC1_RGB8_OES = 36196;
 static const uint32_t GL_ATC_RGB_AMD = 35986;
 static const uint32_t GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 35987;
 static const uint32_t GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = 34798;
+static const uint32_t GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 37809;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 37810;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x5_KHR = 37811;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x6_KHR = 37812;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x5_KHR = 37813;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x6_KHR = 37814;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x5_KHR = 37816;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x6_KHR = 37817;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x8_KHR = 37818;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x10_KHR = 37819;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x10_KHR = 37820;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x12_KHR = 37821;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR = 37840;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR = 37841;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR = 37842;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR = 37843;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR = 37844;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR = 37845;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR = 37846;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR = 37847;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR = 37848;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR = 37849;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR = 37850;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 37851;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 37852;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 37853;
+static const uint32_t GL_COMPRESSED_LUMINANCE_LATC1_NV = 35952;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV = 35953;
+static const uint32_t GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV = 35954;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = 35955;
 }
 
 namespace ImageTexelFormat {
@@ -187,6 +271,42 @@ static const uint32_t GL_ETC1_RGB8_OES = 36196;
 static const uint32_t GL_ATC_RGB_AMD = 35986;
 static const uint32_t GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 35987;
 static const uint32_t GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = 34798;
+static const uint32_t GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778;
+static const uint32_t GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 37809;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 37810;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x5_KHR = 37811;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_6x6_KHR = 37812;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x5_KHR = 37813;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x6_KHR = 37814;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 37815;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x5_KHR = 37816;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x6_KHR = 37817;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x8_KHR = 37818;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_10x10_KHR = 37819;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x10_KHR = 37820;
+static const uint32_t GL_COMPRESSED_RGBA_ASTC_12x12_KHR = 37821;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR = 37840;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR = 37841;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR = 37842;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR = 37843;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR = 37844;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR = 37845;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR = 37846;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR = 37847;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR = 37848;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR = 37849;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR = 37850;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 37851;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 37852;
+static const uint32_t GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 37853;
+static const uint32_t GL_COMPRESSED_LUMINANCE_LATC1_NV = 35952;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV = 35953;
+static const uint32_t GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV = 35954;
+static const uint32_t GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = 35955;
 }
 
 namespace TexelType {
@@ -559,7 +679,7 @@ static const uint32_t GL_SHORT = 5122;
 static const uint32_t GL_UNSIGNED_BYTE = 5121;
 static const uint32_t GL_UNSIGNED_SHORT = 5123;
 static const uint32_t GL_HALF_FLOAT_OES = 36193;
-static const uint32_t GL_ARB_half_float_vertex = 5131;
+static const uint32_t GL_HALF_FLOAT_ARB = 5131;
 }
 
 namespace ShaderAttribType {

@@ -132,7 +132,6 @@ class Device {
   u8     PointerSize      // Size in bytes of a pointer on the device's architecture.
   u8     PointerAlignment // Alignment in bytes of a pointer on the device's architecture.
   u64    MaxMemorySize    // The total amount of contiguous memory pre-allocated for replay.
-  bool   RequiresShaderPatching // HACK. Will be removed.
   string Extensions       // Renderer extensions list. e.g. "GL_KHR_debug GL_EXT_sRGB [...]".
   string Renderer         // Renderer name. e.g. "Adreno (TM) 320".
   string Vendor           // Renderer vendor name. e.g. "Qualcomm".

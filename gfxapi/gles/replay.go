@@ -116,14 +116,11 @@ func (a api) ReplayTransforms(
 
 	transforms.Add(injector)
 
-	// TODO: These features should be testing capabilites returned by extensions.
-	if device.RequiresShaderPatching {
-		transforms.Add(
-			precisionStrip(db, logger),
-			halfFloatOESToHalfFloatARB(),
-			decompressTextures(ctx.CaptureID, db, logger),
-		)
-	}
+	// Device-dependent transforms.
+	transforms.Add(
+		decompressTextures(device, ctx.CaptureID, db, logger),
+		precisionStrip(device, db, logger),
+		halfFloatOESToHalfFloatARB(device))
 
 	if c, ok := config.(drawConfig); ok && c.wireframe {
 		transforms.Add(wireframe(db, logger))
@@ -169,19 +166,22 @@ func (a api) QueryCallDurations(ctx *replay.Context, mgr *replay.Manager, mask s
 	return out
 }
 
-// halfFloatOESToHalfFloatARB returns a transform that converts all
-// vertex streams declared of type GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB.
-func halfFloatOESToHalfFloatARB() atom.Transformer {
-	// https://www.opengl.org/registry/specs/ARB/half_float_pixel.txt
-	const GL_HALF_FLOAT_ARB = 0x140B
-
+// halfFloatOESToHalfFloatARB returns a transform that converts all vertex streams
+// declared of type GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB, if unsupported by the target device.
+func halfFloatOESToHalfFloatARB(device *service.Device) atom.Transformer {
+	if v, err := ParseVersion(device.Version); err == nil {
+		if v.IsES && device.HasExtension("GL_OES_vertex_half_float") {
+			return nil
+		}
+	}
+	// TODO: fallback to full GL_FLOAT unpacking if GL_ARB_half_float_vertex isn't supported.
 	return atom.Transform("HalfFloatOESToHalfFloatARB", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
 			cmd.Type == VertexAttribType_GL_HALF_FLOAT_OES {
 			out.Write(id, &GlVertexAttribPointer{
 				Location:   cmd.Location,
 				Size:       cmd.Size,
-				Type:       GL_HALF_FLOAT_ARB,
+				Type:       VertexAttribType_GL_HALF_FLOAT_ARB,
 				Normalized: cmd.Normalized,
 				Stride:     cmd.Stride,
 				Data:       cmd.Data,
