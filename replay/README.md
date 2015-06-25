@@ -16,13 +16,18 @@ for disabling the cache for tests.
 #### func  Replay
 
 ```go
-func Replay(id atom.ID, a atom.Atom, s *gfxapi.State, b *builder.Builder, postback bool)
+func Replay(
+	i atom.ID,
+	a atom.Atom,
+	s *gfxapi.State,
+	d database.Database,
+	l log.Logger,
+	b *builder.Builder) error
 ```
 Replay issues replay operations to the replay builder b for the given atom a
-with identifier id, and graphics API state s. If replaying the Atom will have an
+with identifier i, and graphics API state s. If replaying the Atom will have an
 effect on the graphics driver state, then the call to Replay will also apply the
-corresponding changes to the state s. If postback is true then the replay
-instructions should include postback of all outputs of the Atom.
+corresponding changes to the state s.
 
 #### type CallTiming
 
@@ -60,6 +65,58 @@ type Context struct {
 Context describes the source capture and replay target information used for
 issuing a replay request.
 
+#### type Custom
+
+```go
+type Custom func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
+```
+
+Custom is an atom issuing custom replay operations to the replay builder b upon
+Replay().
+
+#### func (Custom) API
+
+```go
+func (Custom) API() gfxapi.API
+```
+atom.Atom compliance
+
+#### func (Custom) Class
+
+```go
+func (Custom) Class() binary.Class
+```
+
+#### func (Custom) Flags
+
+```go
+func (Custom) Flags() atom.Flags
+```
+
+#### func (Custom) Mutate
+
+```go
+func (Custom) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error
+```
+
+#### func (Custom) Observations
+
+```go
+func (Custom) Observations() *atom.Observations
+```
+
+#### func (Custom) Replay
+
+```go
+func (c Custom) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
+```
+
+#### func (Custom) TypeID
+
+```go
+func (Custom) TypeID() atom.TypeID
+```
+
 #### type Device
 
 ```go
@@ -70,8 +127,6 @@ type Device interface {
 	Info() *service.Device
 	// Connect opens a connection to the replay device.
 	Connect() (io.ReadWriteCloser, error)
-	// ByteOrder returns a byte ordering object for the replay device.
-	ByteOrder() endian.ByteOrder
 }
 ```
 
@@ -90,7 +145,6 @@ type Generator interface {
 		ctx Context,
 		cfg Config,
 		requests []Request,
-		postback Postback,
 		device *service.Device,
 		db database.Database,
 		logger log.Logger) atom.Transforms
@@ -124,7 +178,7 @@ discovered devices.
 #### func  New
 
 ```go
-func New(db database.Database, l log.Logger) *Manager
+func New(d database.Database, l log.Logger) *Manager
 ```
 New returns a new Manager instance using the database db and logger l.
 
@@ -145,27 +199,6 @@ using the capture described by ctx. Replay is asynchronous, and the replay may
 take some considerable time before it is executed. Replay requests made with
 configs that have equality (==) will likely be batched into the same replay
 pass.
-
-#### type Postback
-
-```go
-type Postback func(handler PostbackHandler) atom.ID
-```
-
-Postback registers handler to be called with the postback data for the atom with
-the returned identifier. The returned atom identifier is unique, enforcing at
-most one postback handler per atom.
-
-#### type PostbackHandler
-
-```go
-type PostbackHandler func(data interface{}, err error)
-```
-
-PostbackHandler is a callback for an atom's postback data. If the postback was
-successful then data holds the postback data, and err is nil. If the postback
-failed to decode or was missing then data will be nil and err will be the error
-raised.
 
 #### type QueryCallDurations
 
@@ -205,12 +238,10 @@ content of the depth buffer at a particular point in a capture.
 ```go
 type Replayer interface {
 	// Replay issues replay operations to the replay builder b for the given atom
-	// with identifier id, and graphics API state s. If the replay action will
+	// with identifier i, and graphics API state s. If the replay action will
 	// have an effect on the graphics driver state, then the call to Replay should
-	// also apply the corresponding changes to the state s. If postback is true
-	// then the replay instructions should include postback of all outputs of the
-	// action.
-	Replay(id atom.ID, s *gfxapi.State, b *builder.Builder, postback bool)
+	// also apply the corresponding changes to the state s.
+	Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
 }
 ```
 

@@ -18,7 +18,7 @@ formed rpc header.
 #### func  Serve
 
 ```go
-func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler)
+func Serve(r io.Reader, w io.Writer, mtu int, l log.Logger, handler Handler)
 ```
 Server implements the receiving side of a client server rpc pair. It listens on
 the reader for calls, and dispatches them to the supplied handler. Any result

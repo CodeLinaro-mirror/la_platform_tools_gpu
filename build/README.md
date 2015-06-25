@@ -7,30 +7,6 @@ Package build contains types and variables used for creating builds.
 ## Usage
 
 ```go
-const HostExecutableExtension = ""
-```
-
-```go
-const HostExecutableExtension = ""
-```
-
-```go
-const HostExecutableExtension = ".exe"
-```
-
-```go
-const HostOS = "linux"
-```
-
-```go
-const HostOS = "osx"
-```
-
-```go
-const HostOS = "windows"
-```
-
-```go
 var RepoRoot = func() Root {
 	gopaths := filepath.SplitList(os.Getenv("GOPATH"))
 	for _, gopath := range gopaths {
@@ -104,13 +80,6 @@ func (f File) CopyTo(dst File) error
 ```
 CopyTo copied this File to dst, replacing any existing file at dst.
 
-#### func (File) Delete
-
-```go
-func (f File) Delete() error
-```
-Delete deletes the File.
-
 #### func (File) Dir
 
 ```go
@@ -161,13 +130,6 @@ Glob returns a FileSet of all files matching any of the specified patterns.
 func (f File) Join(ext ...string) File
 ```
 Join returns a File formed from joining this File with ext.
-
-#### func (File) LastModified
-
-```go
-func (f File) LastModified() time.Time
-```
-LastModified returns the time the file was last modified.
 
 #### func (File) LookPath
 
@@ -243,20 +205,6 @@ func (fs FileSet) Filter(patterns ...string) FileSet
 ```
 Filter returns the list of files in this FileSet that matches any pattern in
 patterns.
-
-#### func (FileSet) LastModified
-
-```go
-func (fs FileSet) LastModified() time.Time
-```
-LastModified returns the most recent time any of the files were modified.
-
-#### func (FileSet) Remove
-
-```go
-func (fs FileSet) Remove(files ...File) FileSet
-```
-Remove returns a new FileSet with files removed from this FileSet.
 
 #### type Root
 

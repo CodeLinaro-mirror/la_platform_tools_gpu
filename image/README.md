@@ -40,6 +40,8 @@ converted image data is returned, otherwise an error is returned.
 
 ```go
 type Format interface {
+	binary.Object
+
 	Check(data []byte, width, height int) error
 }
 ```

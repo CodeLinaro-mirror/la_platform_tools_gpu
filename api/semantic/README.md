@@ -38,28 +38,87 @@ var (
 var BuiltinTypes []*Builtin
 ```
 
+#### func  Add
+
+```go
+func Add(p Owner, c Owned)
+```
+Add connects an Owned to its Owner.
+
+#### func  Visit
+
+```go
+func Visit(node Node, visitor func(Node))
+```
+Visit invokes visitor for all the children of the supplied node.
+
 #### type API
 
 ```go
 type API struct {
-	AST          *ast.API       // the underlying syntax node this was built from
+	Named
 	Enums        []*Enum        // the set of enums
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
 	Externs      []*Function    // the external function references
 	Functions    []*Function    // the global functions
+	Methods      []*Function    // the method functions
 	Globals      []*Global      // the global variables
-	Arrays       []*Array       // the array types used
 	StaticArrays []*StaticArray // the fixed size array types used
 	Maps         []*Map         // the map types used
 	Pointers     []*Pointer     // the pointer types used
-	Buffers      []*Buffer      // the buffer types used
+	Slices       []*Slice       // the pointer types used
+	References   []*Reference   // the reference types used
 	Signatures   []*Signature   // the function signature types used
-	Members                     // a map of name to member for top level symbols
+	Imported     *Symbols       // the symbols imported into this api
 }
 ```
 
 API is the root of the ASG, and holds a fully resolved api.
+
+#### func (*API) Member
+
+```go
+func (m *API) Member(name string) Owned
+```
+
+#### func (*API) VisitMembers
+
+```go
+func (m *API) VisitMembers(visitor func(Owned))
+```
+
+#### type Alias
+
+```go
+type Alias struct {
+	AST *ast.Alias
+	Named
+	To Type
+}
+```
+
+Alias is used as a temporary type holder during type resolution. It is not
+present in the final semantic tree returned, but may be present in the AST ->
+semantic map.
+
+#### func (Alias) Member
+
+```go
+func (Alias) Member(string) Owned
+```
+
+#### func (*Alias) Owner
+
+```go
+func (o *Alias) Owner() Owner
+```
+
+#### func (Alias) VisitMembers
+
+```go
+func (Alias) VisitMembers(func(Owned))
+```
 
 #### type Annotated
 
@@ -77,7 +136,7 @@ Annotated is the common interface to objects that can carry annotations.
 ```go
 type Annotation struct {
 	AST       *ast.Annotation // the underlying syntax node this was built from
-	Name      string          // the name of the annotation
+	Named                     // the name of the annotation
 	Arguments []Expression    // the arguments to the annotation
 }
 ```
@@ -99,60 +158,77 @@ func (a Annotations) GetAnnotation(name string) *Annotation
 ```
 GetAnnotation implements the Annotated interface for the Annotations type.
 
-#### type Array
+#### type ArrayAssign
 
 ```go
-type Array struct {
-	Name      string // the full name of the array type
-	ValueType Type   // the value type stored in the array
+type ArrayAssign struct {
+	AST      *ast.Assign // the underlying syntax node this was built from
+	To       *ArrayIndex // the array index to assign to
+	Operator string      // the assignment operator being applied
+	Value    Expression  // the value to set in the array
 }
 ```
 
-Array represents an array type declaration.
-
-#### func (Array) Member
-
-```go
-func (t Array) Member(name string) Node
-```
-
-#### func (Array) Typename
-
-```go
-func (t Array) Typename() string
-```
+ArrayAssign represents assigning to a static-array index expression.
 
 #### type ArrayIndex
 
 ```go
 type ArrayIndex struct {
-	AST       *ast.Index // the underlying syntax node this was built from
-	ValueType Type       // the value type of the array being indexed
-	Array     Expression // the expression that returns the array to be indexed
-	Index     Expression // the index to use on the array
+	AST   *ast.Index   // the underlying syntax node this was built from
+	Type  *StaticArray // the array type
+	Array Expression   // the expression that returns the array to be indexed
+	Index Expression   // the index to use on the array
 }
 ```
 
-ArrayIndex represents using the indexing operator on an array type.
+ArrayIndex represents using the indexing operator on a static-array type.
 
 #### func (*ArrayIndex) ExpressionType
 
 ```go
 func (i *ArrayIndex) ExpressionType() Type
 ```
-ExpressionType implements Expression returning the value type of the array.
+ExpressionType implements Expression. It returns the element type of the array.
+
+#### type ArrayInitializer
+
+```go
+type ArrayInitializer struct {
+	AST    *ast.Call    // the underlying syntax node this was built from
+	Array  Type         // the array type to initialize (may be aliased)
+	Values []Expression // the list of element values
+}
+```
+
+ArrayInitializer represents an expression that creates a new StaticArray
+instance using a value list, of the form T(v0, v1, v2)
+
+#### func (*ArrayInitializer) ExpressionType
+
+```go
+func (c *ArrayInitializer) ExpressionType() Type
+```
+ExpressionType implements Expression returning the class type being initialized.
 
 #### type Assert
 
 ```go
 type Assert struct {
-	AST       *ast.Assert // the underlying syntax node this was built from
-	Condition Expression  // the condition is being asserted must be true
+	AST       *ast.Call  // the underlying syntax node this was built from
+	Condition Expression // the condition is being asserted must be true
 }
 ```
 
 Assert represents a runtime assertion. Assertions are also used to infer
 required behavior from the expressions.
+
+#### func (*Assert) ExpressionType
+
+```go
+func (a *Assert) ExpressionType() Type
+```
+ExpressionType implements Expression
 
 #### type Assign
 
@@ -251,36 +327,11 @@ type Branch struct {
 Branch represents the basic conditional execution statement. If Condition is
 true we use the True block, otherwise the False block.
 
-#### type Buffer
-
-```go
-type Buffer struct {
-	Name      string // the full type name
-	To        Type   // the type this is a pointer to
-	Array     bool   // points to multiple elements, rather than one
-	FakeArray *Array // TODO:Remove - Hold a fake array for now as a schema compatibility measure
-}
-```
-
-Buffer represents a state pointer type declaration.
-
-#### func (Buffer) Member
-
-```go
-func (t Buffer) Member(name string) Node
-```
-
-#### func (Buffer) Typename
-
-```go
-func (t Buffer) Typename() string
-```
-
 #### type Builtin
 
 ```go
 type Builtin struct {
-	Name string // the primitive type name
+	Named // the primitive type name
 }
 ```
 
@@ -289,13 +340,19 @@ Builtin represents one of the primitive types.
 #### func (Builtin) Member
 
 ```go
-func (t Builtin) Member(name string) Node
+func (Builtin) Member(string) Owned
 ```
 
-#### func (Builtin) Typename
+#### func (*Builtin) Owner
 
 ```go
-func (t Builtin) Typename() string
+func (o *Builtin) Owner() Owner
+```
+
+#### func (Builtin) VisitMembers
+
+```go
+func (Builtin) VisitMembers(func(Owned))
 ```
 
 #### type Call
@@ -355,21 +412,20 @@ Case represents a possible choice in a switch.
 
 ```go
 type Cast struct {
-	AST    *ast.Cast  // the underlying syntax node this was built from
-	Object Expression // the actual expression being wrapped
-	Type   Type       // the type to coerce the expression to
+	AST    *ast.Call  // the underlying syntax node this was built from
+	Object Expression // the expression to cast the result of
+	Type   Type       // the type to cast to
 }
 ```
 
-Cast represents a type coercion expression. It reports it's type as the one
-specified, rather than the expression it wraps.
+Cast represents a type reinterpret expresssion.
 
 #### func (*Cast) ExpressionType
 
 ```go
 func (c *Cast) ExpressionType() Type
 ```
-ExpressionType implements Expression returning the type being cast to.
+ExpressionType implements Expression
 
 #### type Choice
 
@@ -389,32 +445,42 @@ Choice represents a possible choice in a select
 type Class struct {
 	AST         *ast.Class  // the underlying syntax node this was built from
 	Annotations             // the annotations applied to this class
-	Name        string      // the name of the class
+	Named                   // implement Child
 	Docs        []string    // the documentation for the class
 	Extends     []*Class    // the classes this extends
 	ExtendedBy  []*Class    // the classes that declared they extended this class
 	Fields      []*Field    // the set of fields the class declares
 	Methods     []*Function // the set of functions associated with the class
-	Members                 // the name->member map, to implement Type
 }
 ```
 
 Class represents an api class construct.
 
-#### func (Class) Typename
+#### func (*Class) Member
 
 ```go
-func (t Class) Typename() string
+func (m *Class) Member(name string) Owned
 ```
-Implements Type to return the class name as the type name
+
+#### func (*Class) Owner
+
+```go
+func (o *Class) Owner() Owner
+```
+
+#### func (*Class) VisitMembers
+
+```go
+func (m *Class) VisitMembers(visitor func(Owned))
+```
 
 #### type ClassInitializer
 
 ```go
 type ClassInitializer struct {
-	AST    *ast.ClassInitializer // the underlying syntax node this was built from
-	Class  *Class                // the class to initialize
-	Fields []*FieldInitializer   // the set of field assignments
+	AST    *ast.Call           // the underlying syntax node this was built from
+	Class  *Class              // the class to initialize
+	Fields []*FieldInitializer // the set of field assignments
 }
 ```
 
@@ -428,19 +494,62 @@ func (c *ClassInitializer) ExpressionType() Type
 ```
 ExpressionType implements Expression returning the class type being initialized.
 
+#### type Clone
+
+```go
+type Clone struct {
+	AST   *ast.Call // the underlying syntax node this was built from
+	Slice Expression
+	Type  *Slice
+}
+```
+
+Clone represents a call to make.
+
+#### func (*Clone) ExpressionType
+
+```go
+func (m *Clone) ExpressionType() Type
+```
+ExpressionType implements Expression
+
 #### type Copy
 
 ```go
 type Copy struct {
-	AST *ast.Assign // the underlying syntax node this was built from
-	Dst *Slice      // the slice to copy to
-	Src *Slice      // the slice to copy from
+	AST *ast.Call // the underlying syntax node this was built from
+	Src Expression
+	Dst Expression
 }
 ```
 
-Copy is the special form of assign that copies data between slices. One of LHS
-or RHS may be missing, and if both are present the upper bound on one may be
-inferred from the other.
+Copy represents a call to make.
+
+#### func (*Copy) ExpressionType
+
+```go
+func (*Copy) ExpressionType() Type
+```
+ExpressionType implements Expression
+
+#### type Create
+
+```go
+type Create struct {
+	AST         *ast.Call // the underlying syntax node this was built from
+	Type        *Reference
+	Initializer *ClassInitializer
+}
+```
+
+Create represents a call to new on a class type.
+
+#### func (*Create) ExpressionType
+
+```go
+func (n *Create) ExpressionType() Type
+```
+ExpressionType implements Expression
 
 #### type DeclareLocal
 
@@ -460,38 +569,40 @@ be modified after declaration.
 type Enum struct {
 	AST         *ast.Enum    // the underlying syntax node this was built from
 	Annotations              // the annotations applied to this enum
-	Name        string       // the type name of the enum
+	Named                    // the type name of the enum
 	Docs        []string     // the documentation for the enum
 	IsBitfield  bool         // whether this enum is actually a bitfield
 	Extends     []*Enum      // the enums this enum extends
 	Entries     []*EnumEntry // the entries of this enum
-	AllEntries  []*EnumEntry // the flattened list of all entries including inherited ones
 }
 ```
 
 Enum represents the api enum construct.
 
-#### func (Enum) Member
+#### func (*Enum) Member
 
 ```go
-func (t Enum) Member(name string) Node
+func (m *Enum) Member(name string) Owned
 ```
-Implements Type returning the matching enum entry if there is one.
 
-#### func (Enum) Typename
+#### func (*Enum) Owner
 
 ```go
-func (t Enum) Typename() string
+func (o *Enum) Owner() Owner
 ```
-Implements Type to return the enum name as the type name
+
+#### func (*Enum) VisitMembers
+
+```go
+func (m *Enum) VisitMembers(visitor func(Owned))
+```
 
 #### type EnumEntry
 
 ```go
 type EnumEntry struct {
 	AST   *ast.EnumEntry // the underlying syntax node this was built from
-	Enum  *Enum          // the enum this entry belongs to
-	Name  string         // the name of this entry
+	Named                // the name of this entry
 	Docs  []string       // the documentation for the enum entry
 	Value uint32         // the value this entry represents
 }
@@ -506,6 +617,12 @@ func (e *EnumEntry) ExpressionType() Type
 ```
 ExpressionType implements Expression returning the enum type.
 
+#### func (*EnumEntry) Owner
+
+```go
+func (o *EnumEntry) Owner() Owner
+```
+
 #### type Expression
 
 ```go
@@ -519,15 +636,33 @@ Expression represents anything that can act as an expression in the api
 language, it must be able to correctly report the type of value it would return
 if executed.
 
+#### type Fence
+
+```go
+type Fence struct {
+	Statement Node
+}
+```
+
+Fence is a marker to indicate the point between all statements to be executed
+before (pre-fence) the call to the API function and all statements to be
+executed after (post-fence) the call to the API function.
+
+The Statement member is the first statement that is classified as post-fence,
+but may be nil if the fence is being added at the end of a function that has no
+post operations.
+
+Note that some statements are classified as both pre-fence and post-fence, and
+require logic to be executed either side of the API function call.
+
 #### type Field
 
 ```go
 type Field struct {
 	AST         *ast.Field // the underlying syntax node this was built from
 	Annotations            // the annotations applied to this field
-	Class       *Class     // the class this field belongs to
 	Type        Type       // the type the field stores
-	Name        string     // the name of the field
+	Named                  // the name of the field
 	Docs        []string   // the documentation for the field
 	Default     Expression // the default value of the field
 }
@@ -542,13 +677,19 @@ func (f *Field) ExpressionType() Type
 ```
 Implements Expression to return the type stored in the field.
 
+#### func (*Field) Owner
+
+```go
+func (o *Field) Owner() Owner
+```
+
 #### type FieldInitializer
 
 ```go
 type FieldInitializer struct {
-	AST   *ast.FieldInitializer // the underlying syntax node this was built from
-	Field *Field                // the field to assign to
-	Value Expression            // the value to assign
+	AST   ast.Node   // the underlying syntax node this was built from
+	Field *Field     // the field to assign to
+	Value Expression // the value to assign
 }
 ```
 
@@ -592,13 +733,11 @@ ExpressionType implements Expression with a type of Float64Type
 type Function struct {
 	AST            *ast.Function // the underlying syntax node this was built from
 	Annotations                  // the annotations applied to the function
-	Name           string        // the name of the function
+	Named                        // the name of the function
 	Docs           []string      // the documentation for the function
-	Owner          Type          // the owner of the function
 	Return         *Parameter    // the return parameter
 	This           *Parameter    // the this parameter, missing for non method functions
 	FullParameters []*Parameter  // all the parameters, including This at the start if valid, and Return at the end if not void
-	Outputs        []*Parameter  // only the output parameters
 	Block          *Block        // the body of the function, missing for externs
 	Signature      *Signature    // the type signature of the function
 }
@@ -614,6 +753,12 @@ func (f *Function) CallParameters() []*Parameter
 CallParameters returns the full set of parameters with the return value filtered
 out.
 
+#### func (*Function) Owner
+
+```go
+func (o *Function) Owner() Owner
+```
+
 #### type Global
 
 ```go
@@ -621,7 +766,7 @@ type Global struct {
 	AST         *ast.Field // the underlying syntax node this was built from
 	Annotations            // the annotations applied to this global
 	Type        Type       // the type the global stores
-	Name        string     // the name of the global
+	Named                  // the name of the global
 	Default     Expression // the initial value of the global
 }
 ```
@@ -634,6 +779,12 @@ Global represents a global variable.
 func (g *Global) ExpressionType() Type
 ```
 Implements Expression to return the type stored in the global.
+
+#### func (*Global) Owner
+
+```go
+func (o *Global) Owner() Owner
+```
 
 #### type Ignore
 
@@ -651,6 +802,36 @@ Ignore represents an _ expression.
 func (i Ignore) ExpressionType() Type
 ```
 ExpressionType implements Expression.
+
+#### type Import
+
+```go
+type Import struct {
+	Named      // the full type name
+	API   *API // the API being imported
+}
+```
+
+Import wraps an API with it's imported name.
+
+#### func (Import) Member
+
+```go
+func (i Import) Member(name string) Owned
+```
+Implement the Owner interface delegating member lookup to the imported API
+
+#### func (*Import) Owner
+
+```go
+func (o *Import) Owner() Owner
+```
+
+#### func (Import) VisitMembers
+
+```go
+func (Import) VisitMembers(func(Owned))
+```
 
 #### type Int16Value
 
@@ -734,19 +915,20 @@ from Iterable in turn, and run Block for each one.
 
 ```go
 type Length struct {
-	AST    *ast.Length // the underlying syntax node this was built from
-	Object Expression  // the object go get the length of
-	Type   Type        // the resolved type of the length operation
+	AST    *ast.Call  // the underlying syntax node this was built from
+	Object Expression // the object go get the length of
+	Type   Type       // the resolved type of the length operation
 }
 ```
 
-Represents a length of object expression. Object must be of either Array, Map or
-string type. The length expression is allowed to be of any numeric type
+Length represents a length of object expression. Object must be of either
+pointer, slice, map or string type. The length expression is allowed to be of
+any numeric type
 
-#### func (Length) ExpressionType
+#### func (*Length) ExpressionType
 
 ```go
-func (l Length) ExpressionType() Type
+func (l *Length) ExpressionType() Type
 ```
 ExpressionType implements Expression
 
@@ -756,7 +938,7 @@ ExpressionType implements Expression
 type Local struct {
 	Declaration *DeclareLocal // the statement that created the local
 	Type        Type          // the type of the storage
-	Name        string        // the identifier that will resolve to this local
+	Named                     // the identifier that will resolve to this local
 	Value       Expression    // the expression the local was assigned on creation
 }
 ```
@@ -771,23 +953,53 @@ func (l *Local) ExpressionType() Type
 ```
 ExpressionType implements Expression
 
+#### type Make
+
+```go
+type Make struct {
+	AST  *ast.Call // the underlying syntax node this was built from
+	Type *Slice
+	Size Expression
+}
+```
+
+Make represents a call to make.
+
+#### func (*Make) ExpressionType
+
+```go
+func (m *Make) ExpressionType() Type
+```
+ExpressionType implements Expression
+
 #### type Map
 
 ```go
 type Map struct {
-	Name      string // the full type name
-	KeyType   Type   // the type used as an indexing key
-	ValueType Type   // the type stored in the map
-	Members          // holds the map built-in methods
+	Named          // the full type name
+	KeyType   Type // the type used as an indexing key
+	ValueType Type // the type stored in the map
 }
 ```
 
-Map represents an api map type declaration.
+Map represents an api map type declaration, of the form map!(KeyType, ValueType)
 
-#### func (Map) Typename
+#### func (*Map) Member
 
 ```go
-func (t Map) Typename() string
+func (m *Map) Member(name string) Owned
+```
+
+#### func (*Map) Owner
+
+```go
+func (o *Map) Owner() Owner
+```
+
+#### func (*Map) VisitMembers
+
+```go
+func (m *Map) VisitMembers(visitor func(Owned))
 ```
 
 #### type MapAssign
@@ -826,10 +1038,10 @@ ExpressionType implements Expression
 
 ```go
 type MapIndex struct {
-	AST       *ast.Index // the underlying syntax node this was built from
-	ValueType Type       // the value type of the array being indexed
-	Map       Expression // the expression that returns the map to be indexed
-	Index     Expression // the index to use on the map
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Map       // the value type of the map being indexed
+	Map   Expression // the expression that returns the map to be indexed
+	Index Expression // the index to use on the map
 }
 ```
 
@@ -861,41 +1073,48 @@ func (m *Member) ExpressionType() Type
 ```
 ExpressionType implements Expression returning the type of the field.
 
-#### type Members
+#### type Named
 
 ```go
-type Members map[string]Node
+type Named string
 ```
 
-Members wraps a map and implements part of the Type interface. It is used as a
-mixin helper.
+Named is mixed in to implement the Name method of NamedNode.
 
-#### func (Members) Member
+#### func (Named) Name
 
 ```go
-func (t Members) Member(name string) Node
+func (n Named) Name() string
 ```
-Member returns the entry in the map that matches name, or nil if none does.
+
+#### type NamedNode
+
+```go
+type NamedNode interface {
+	Node
+	Name() string // Returns the partial name of the object.
+}
+```
+
+NamedNode represents any semantic-tree node that carries a name.
 
 #### type New
 
 ```go
 type New struct {
-	AST         *ast.New          // the underlying syntax node this was built from
-	Initializer *ClassInitializer // The initialization for the new instance
-	Type        Type              // The pointer type returned from the new
+	AST  *ast.Call // the underlying syntax node this was built from
+	Type *Reference
 }
 ```
 
-New represents an expression that allocates a new class instance.
+New represents a call to new.
 
 #### func (*New) ExpressionType
 
 ```go
 func (n *New) ExpressionType() Type
 ```
-ExpressionType implements Expression returning a pointer to the class type being
-initialized.
+ExpressionType implements Expression
 
 #### type Node
 
@@ -942,6 +1161,31 @@ func (e *Observed) ExpressionType() Type
 ```
 ExpressionType implements Expression for observed parameter lookup.
 
+#### type Owned
+
+```go
+type Owned interface {
+	NamedNode
+	Owner() Owner // Returns the owner of this node.
+	// contains filtered or unexported methods
+}
+```
+
+Owned is the interface to an object with a unique name and an owner.
+
+#### type Owner
+
+```go
+type Owner interface {
+	NamedNode
+	Member(string) Owned      // looks up a member by name from an owner
+	VisitMembers(func(Owned)) // invokes the supplied function once for each member
+	// contains filtered or unexported methods
+}
+```
+
+Owner is the interface for an object that has named members.
+
 #### type Parameter
 
 ```go
@@ -949,10 +1193,8 @@ type Parameter struct {
 	AST         *ast.Parameter // the underlying syntax node this was built from
 	Annotations                // the annotations applied to the parameter
 	Function    *Function      // the function this parameter belongs to
-	Name        string         // the name of the parameter
+	Named                      // the name of the parameter
 	Docs        []string       // the documentation for the parameter
-	Input       bool           // true if the parameter is an input
-	Output      bool           // true if the parameter is an output
 	Type        Type           // the type of the parameter
 }
 ```
@@ -977,25 +1219,54 @@ IsThis returns true if this parameter is the This parameter of it's function.
 
 ```go
 type Pointer struct {
-	Name  string // the full type name
+	Named        // the full type name
 	To    Type   // the type this is a pointer to
-	Array bool   // points to multiple elements, rather than one
+	Const bool   // wether the pointer was declared with the const attribute
+	Slice *Slice // The complementary slice type for this pointer.
 }
 ```
 
-Pointer represents an api pointer type declaration.
+Pointer represents an api pointer type declaration, of the form To*
 
-#### func (Pointer) Member
-
-```go
-func (t Pointer) Member(name string) Node
-```
-
-#### func (Pointer) Typename
+#### func (*Pointer) Member
 
 ```go
-func (t Pointer) Typename() string
+func (t *Pointer) Member(name string) Owned
 ```
+
+#### func (*Pointer) Owner
+
+```go
+func (o *Pointer) Owner() Owner
+```
+
+#### func (*Pointer) VisitMembers
+
+```go
+func (t *Pointer) VisitMembers(visitor func(Owned))
+```
+
+#### type PointerRange
+
+```go
+type PointerRange struct {
+	AST     *ast.Index // the underlying syntax node this was built from
+	Type    *Slice     // the slice type returned.
+	Pointer Expression // the expression that returns the pointer to be indexed
+	Range   *BinaryOp  // the range to use on the slice
+}
+```
+
+PointerRange represents using the indexing operator on a pointer type with a
+range expression.
+
+#### func (*PointerRange) ExpressionType
+
+```go
+func (i *PointerRange) ExpressionType() Type
+```
+ExpressionType implements Expression. It returns the same slice type being
+sliced.
 
 #### type Pseudonym
 
@@ -1003,31 +1274,82 @@ func (t Pointer) Typename() string
 type Pseudonym struct {
 	AST         *ast.Pseudonym // the underlying syntax node this was built from
 	Annotations                // the annotations applied to this pseudonym
-	Name        string         // the type name
+	Named                      // the type name
 	Docs        []string       // the documentation for the pseudonym
 	To          Type           // the underlying type
 	Methods     []*Function    // the methods added directly to the pseudonym
-	Members                    // the direct members
 }
 ```
 
 Pseudonym represents the type construct. It acts as a type in it's own right
 that can carry methods, but is defined in terms of another type.
 
-#### func (Pseudonym) Member
+#### func (*Pseudonym) Member
 
 ```go
-func (t Pseudonym) Member(name string) Node
+func (t *Pseudonym) Member(name string) Owned
 ```
 Implements Type returning the direct member if it has it, otherwise delegating
 the lookup to the underlying type.
 
-#### func (Pseudonym) Typename
+#### func (*Pseudonym) Owner
 
 ```go
-func (t Pseudonym) Typename() string
+func (o *Pseudonym) Owner() Owner
 ```
-Implements Type to return the type name
+
+#### func (*Pseudonym) VisitMembers
+
+```go
+func (t *Pseudonym) VisitMembers(visitor func(Owned))
+```
+
+#### type Read
+
+```go
+type Read struct {
+	AST   *ast.Call // the underlying syntax node this was built from
+	Slice Expression
+}
+```
+
+Read represents a call to make.
+
+#### func (*Read) ExpressionType
+
+```go
+func (*Read) ExpressionType() Type
+```
+ExpressionType implements Expression
+
+#### type Reference
+
+```go
+type Reference struct {
+	Named      // the full type name
+	To    Type // the type this is a reference to
+}
+```
+
+Reference represents an api reference type declaration, of the form ref!To
+
+#### func (*Reference) Member
+
+```go
+func (t *Reference) Member(name string) Owned
+```
+
+#### func (*Reference) Owner
+
+```go
+func (o *Reference) Owner() Owner
+```
+
+#### func (*Reference) VisitMembers
+
+```go
+func (t *Reference) VisitMembers(visitor func(Owned))
+```
 
 #### type Return
 
@@ -1065,7 +1387,7 @@ ExpressionType implements Expression with the unified type of the choices
 
 ```go
 type Signature struct {
-	Name      string // the full type name
+	Named            // the full type name
 	Return    Type   // the return type of the callable
 	Arguments []Type // the required callable arguments
 }
@@ -1076,58 +1398,135 @@ Signature represents a callable type signature
 #### func (Signature) Member
 
 ```go
-func (Signature) Member(name string) Node
+func (Signature) Member(string) Owned
 ```
 
-#### func (Signature) Typename
+#### func (*Signature) Owner
 
 ```go
-func (t Signature) Typename() string
+func (o *Signature) Owner() Owner
+```
+
+#### func (Signature) VisitMembers
+
+```go
+func (Signature) VisitMembers(func(Owned))
 ```
 
 #### type Slice
 
 ```go
 type Slice struct {
-	AST   *ast.Index // the underlying syntax node this was built from
-	Array Expression // the expression that returns the array to be indexed
-	Lower Expression // the inclusive lower bound to slice at
-	Upper Expression // the non-inclusive upper bound to slice at
+	Named            // the full type name
+	To      Type     // The type this is a slice of
+	Pointer *Pointer // The complementary pointer type for this slice.
 }
 ```
 
-Slice represents using the slicing operator on an array type.
+Slice represents an api slice type declaration, of the form To[]
 
-#### func (*Slice) ExpressionType
+#### func (Slice) Member
 
 ```go
-func (i *Slice) ExpressionType() Type
+func (Slice) Member(string) Owned
 ```
-ExpressionType implements Expression. It returns VoidType as slices are only
-valid in Copy assignments.
+
+#### func (*Slice) Owner
+
+```go
+func (o *Slice) Owner() Owner
+```
+
+#### func (Slice) VisitMembers
+
+```go
+func (Slice) VisitMembers(func(Owned))
+```
+
+#### type SliceAssign
+
+```go
+type SliceAssign struct {
+	AST      *ast.Assign // the underlying syntax node this was built from
+	To       *SliceIndex // the slice index to assign to
+	Operator string      // the assignment operator being applied
+	Value    Expression  // the value to set in the slice
+}
+```
+
+SliceAssign represents assigning to a slice index expression.
+
+#### type SliceIndex
+
+```go
+type SliceIndex struct {
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Slice     // the slice type
+	Slice Expression // the expression that returns the slice to be indexed
+	Index Expression // the index to use on the slice
+}
+```
+
+SliceIndex represents using the indexing operator on a slice type.
+
+#### func (*SliceIndex) ExpressionType
+
+```go
+func (i *SliceIndex) ExpressionType() Type
+```
+ExpressionType implements Expression. It returns the value type of the slice.
+
+#### type SliceRange
+
+```go
+type SliceRange struct {
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Slice     // the slice type
+	Slice Expression // the expression that returns the slice to be indexed
+	Range *BinaryOp  // the range to use on the slice
+}
+```
+
+SliceRange represents using the indexing operator on a slice type with a range
+expression.
+
+#### func (*SliceRange) ExpressionType
+
+```go
+func (i *SliceRange) ExpressionType() Type
+```
+ExpressionType implements Expression. It returns the same slice type being
+sliced.
 
 #### type StaticArray
 
 ```go
 type StaticArray struct {
-	Name      string // the full type name
+	Named            // the full type name
 	ValueType Type   // the storage type of the elements
 	Size      uint32 // the dimension of the array
 }
 ```
 
-StaticArray represents a multi-dimensional fixed size array type.
+StaticArray represents a multi-dimensional fixed size array type, of the form
+T[8]
 
 #### func (StaticArray) Member
 
 ```go
-func (t StaticArray) Member(name string) Node
+func (StaticArray) Member(string) Owned
 ```
 
-#### func (StaticArray) Typename
+#### func (*StaticArray) Owner
 
 ```go
-func (t StaticArray) Typename() string
+func (o *StaticArray) Owner() Owner
+```
+
+#### func (StaticArray) VisitMembers
+
+```go
+func (StaticArray) VisitMembers(func(Owned))
 ```
 
 #### type StringValue
@@ -1158,13 +1557,53 @@ type Switch struct {
 
 Switch represents a resolved ast.Switch statement.
 
+#### type Symbols
+
+```go
+type Symbols struct {
+}
+```
+
+Symbols is an object with named members and no other functionality.
+
+#### func (*Symbols) Add
+
+```go
+func (s *Symbols) Add(name string, entry Node)
+```
+Add inserts a node into the symbol space with the specified name.
+
+#### func (*Symbols) AddNamed
+
+```go
+func (s *Symbols) AddNamed(entry NamedNode)
+```
+Add inserts a named node into the symbol space.
+
+#### func (*Symbols) Find
+
+```go
+func (s *Symbols) Find(name string) (Node, error)
+```
+
+#### func (*Symbols) FindAll
+
+```go
+func (s *Symbols) FindAll(name string) []Node
+```
+
+#### func (*Symbols) Visit
+
+```go
+func (s *Symbols) Visit(visitor func(string, Node))
+```
+
 #### type Type
 
 ```go
 type Type interface {
-	Node
-	Typename() string        // returns the full name of the type, must be unique
-	Member(Name string) Node // looks up a member by name from a type
+	Owner
+	// contains filtered or unexported methods
 }
 ```
 
@@ -1276,3 +1715,21 @@ func (u Unknown) ExpressionType() Type
 ExpressionType implements Expression with the inferred type of the unknown. If
 the unknown could not be inferred, it will be of type "any" so allow expressions
 using it to resolve anyway.
+
+#### type Write
+
+```go
+type Write struct {
+	AST   *ast.Call // the underlying syntax node this was built from
+	Slice Expression
+}
+```
+
+Write represents a call to make.
+
+#### func (*Write) ExpressionType
+
+```go
+func (*Write) ExpressionType() Type
+```
+ExpressionType implements Expression

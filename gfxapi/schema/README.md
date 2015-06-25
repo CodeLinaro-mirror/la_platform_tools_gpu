@@ -26,7 +26,7 @@ var ID = service.CreateSimpleInfo("id", service.TypeKindID)
 ```
 
 ```go
-var Int = service.CreateSimpleInfo("int", service.TypeKindS8)
+var Int = service.CreateSimpleInfo("int", service.TypeKindS64)
 ```
 
 ```go
@@ -74,7 +74,7 @@ var U8 = service.CreateSimpleInfo("u8", service.TypeKindU8)
 ```
 
 ```go
-var Uint = service.CreateSimpleInfo("uint", service.TypeKindU8)
+var Uint = service.CreateSimpleInfo("uint", service.TypeKindU64)
 ```
 
 #### func  RegisterAPI

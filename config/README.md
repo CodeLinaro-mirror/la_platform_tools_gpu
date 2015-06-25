@@ -10,8 +10,9 @@ Package config contains a list of build configuration flags.
 const (
 	DebugAtom           = false
 	DebugDatabase       = false
-	DebugDatabaseStores = false
+	DebugDatabaseVerify = false
 	DebugReplay         = false
 	DebugReplayBuilder  = false
+	DebugRPCCalls       = false
 )
 ```
