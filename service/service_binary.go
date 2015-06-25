@@ -218,8 +218,10 @@ func (*binaryClassApiId) Skip(d binary.Decoder) error { return doSkipApiId(d) }
 func (*binaryClassApiId) Schema() *schema.Class       { return schemaApiId }
 
 var schemaApiId = &schema.Class{
-	TypeID: binaryIDApiId,
-	Name:   "ApiId",
+	TypeID:  binaryIDApiId,
+	Package: "service",
+	Name:    "ApiId",
+	Display: "ApiId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -283,8 +285,10 @@ func (*binaryClassFieldInfo) Skip(d binary.Decoder) error { return doSkipFieldIn
 func (*binaryClassFieldInfo) Schema() *schema.Class       { return schemaFieldInfo }
 
 var schemaFieldInfo = &schema.Class{
-	TypeID: binaryIDFieldInfo,
-	Name:   "FieldInfo",
+	TypeID:  binaryIDFieldInfo,
+	Package: "service",
+	Name:    "FieldInfo",
+	Display: "FieldInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
@@ -378,8 +382,10 @@ func (*binaryClassStructInfo) Skip(d binary.Decoder) error { return doSkipStruct
 func (*binaryClassStructInfo) Schema() *schema.Class       { return schemaStructInfo }
 
 var schemaStructInfo = &schema.Class{
-	TypeID: binaryIDStructInfo,
-	Name:   "StructInfo",
+	TypeID:  binaryIDStructInfo,
+	Package: "service",
+	Name:    "StructInfo",
+	Display: "StructInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -435,8 +441,10 @@ func (*binaryClassApiSchema) Skip(d binary.Decoder) error { return doSkipApiSche
 func (*binaryClassApiSchema) Schema() *schema.Class       { return schemaApiSchema }
 
 var schemaApiSchema = &schema.Class{
-	TypeID: binaryIDApiSchema,
-	Name:   "ApiSchema",
+	TypeID:  binaryIDApiSchema,
+	Package: "service",
+	Name:    "ApiSchema",
+	Display: "ApiSchema",
 	Fields: []schema.Field{
 		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
 		{Declared: "State", Type: &schema.Struct{Name: "StructInfo"}},
@@ -512,8 +520,10 @@ func (*binaryClassArrayInfo) Skip(d binary.Decoder) error { return doSkipArrayIn
 func (*binaryClassArrayInfo) Schema() *schema.Class       { return schemaArrayInfo }
 
 var schemaArrayInfo = &schema.Class{
-	TypeID: binaryIDArrayInfo,
-	Name:   "ArrayInfo",
+	TypeID:  binaryIDArrayInfo,
+	Package: "service",
+	Name:    "ArrayInfo",
+	Display: "ArrayInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -573,8 +583,10 @@ func (*binaryClassAtomRange) Skip(d binary.Decoder) error { return doSkipAtomRan
 func (*binaryClassAtomRange) Schema() *schema.Class       { return schemaAtomRange }
 
 var schemaAtomRange = &schema.Class{
-	TypeID: binaryIDAtomRange,
-	Name:   "AtomRange",
+	TypeID:  binaryIDAtomRange,
+	Package: "service",
+	Name:    "AtomRange",
+	Display: "AtomRange",
 	Fields: []schema.Field{
 		{Declared: "First", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -658,8 +670,10 @@ func (*binaryClassAtomGroup) Skip(d binary.Decoder) error { return doSkipAtomGro
 func (*binaryClassAtomGroup) Schema() *schema.Class       { return schemaAtomGroup }
 
 var schemaAtomGroup = &schema.Class{
-	TypeID: binaryIDAtomGroup,
-	Name:   "AtomGroup",
+	TypeID:  binaryIDAtomGroup,
+	Package: "service",
+	Name:    "AtomGroup",
+	Display: "AtomGroup",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange"}},
@@ -736,8 +750,10 @@ func (*binaryClassParameterInfo) Skip(d binary.Decoder) error { return doSkipPar
 func (*binaryClassParameterInfo) Schema() *schema.Class       { return schemaParameterInfo }
 
 var schemaParameterInfo = &schema.Class{
-	TypeID: binaryIDParameterInfo,
-	Name:   "ParameterInfo",
+	TypeID:  binaryIDParameterInfo,
+	Package: "service",
+	Name:    "ParameterInfo",
+	Display: "ParameterInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Interface{Name: "TypeInfo"}},
@@ -877,8 +893,10 @@ func (*binaryClassAtomInfo) Skip(d binary.Decoder) error { return doSkipAtomInfo
 func (*binaryClassAtomInfo) Schema() *schema.Class       { return schemaAtomInfo }
 
 var schemaAtomInfo = &schema.Class{
-	TypeID: binaryIDAtomInfo,
-	Name:   "AtomInfo",
+	TypeID:  binaryIDAtomInfo,
+	Package: "service",
+	Name:    "AtomInfo",
+	Display: "AtomInfo",
 	Fields: []schema.Field{
 		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -954,8 +972,10 @@ func (*binaryClassAtomRangeTimer) Skip(d binary.Decoder) error { return doSkipAt
 func (*binaryClassAtomRangeTimer) Schema() *schema.Class       { return schemaAtomRangeTimer }
 
 var schemaAtomRangeTimer = &schema.Class{
-	TypeID: binaryIDAtomRangeTimer,
-	Name:   "AtomRangeTimer",
+	TypeID:  binaryIDAtomRangeTimer,
+	Package: "service",
+	Name:    "AtomRangeTimer",
+	Display: "AtomRangeTimer",
 	Fields: []schema.Field{
 		{Declared: "FromAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "ToAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -1014,8 +1034,10 @@ func (*binaryClassAtomStream) Skip(d binary.Decoder) error { return doSkipAtomSt
 func (*binaryClassAtomStream) Schema() *schema.Class       { return schemaAtomStream }
 
 var schemaAtomStream = &schema.Class{
-	TypeID: binaryIDAtomStream,
-	Name:   "AtomStream",
+	TypeID:  binaryIDAtomStream,
+	Package: "service",
+	Name:    "AtomStream",
+	Display: "AtomStream",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
@@ -1062,8 +1084,10 @@ func (*binaryClassAtomStreamId) Skip(d binary.Decoder) error { return doSkipAtom
 func (*binaryClassAtomStreamId) Schema() *schema.Class       { return schemaAtomStreamId }
 
 var schemaAtomStreamId = &schema.Class{
-	TypeID: binaryIDAtomStreamId,
-	Name:   "AtomStreamId",
+	TypeID:  binaryIDAtomStreamId,
+	Package: "service",
+	Name:    "AtomStreamId",
+	Display: "AtomStreamId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -1121,8 +1145,10 @@ func (*binaryClassAtomTimer) Skip(d binary.Decoder) error { return doSkipAtomTim
 func (*binaryClassAtomTimer) Schema() *schema.Class       { return schemaAtomTimer }
 
 var schemaAtomTimer = &schema.Class{
-	TypeID: binaryIDAtomTimer,
-	Name:   "AtomTimer",
+	TypeID:  binaryIDAtomTimer,
+	Package: "service",
+	Name:    "AtomTimer",
+	Display: "AtomTimer",
 	Fields: []schema.Field{
 		{Declared: "AtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -1180,8 +1206,10 @@ func (*binaryClassBinary) Skip(d binary.Decoder) error { return doSkipBinary(d) 
 func (*binaryClassBinary) Schema() *schema.Class       { return schemaBinary }
 
 var schemaBinary = &schema.Class{
-	TypeID: binaryIDBinary,
-	Name:   "Binary",
+	TypeID:  binaryIDBinary,
+	Package: "service",
+	Name:    "Binary",
+	Display: "Binary",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
@@ -1228,8 +1256,10 @@ func (*binaryClassBinaryId) Skip(d binary.Decoder) error { return doSkipBinaryId
 func (*binaryClassBinaryId) Schema() *schema.Class       { return schemaBinaryId }
 
 var schemaBinaryId = &schema.Class{
-	TypeID: binaryIDBinaryId,
-	Name:   "BinaryId",
+	TypeID:  binaryIDBinaryId,
+	Package: "service",
+	Name:    "BinaryId",
+	Display: "BinaryId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -1276,8 +1306,10 @@ func (*binaryClassSchemaId) Skip(d binary.Decoder) error { return doSkipSchemaId
 func (*binaryClassSchemaId) Schema() *schema.Class       { return schemaSchemaId }
 
 var schemaSchemaId = &schema.Class{
-	TypeID: binaryIDSchemaId,
-	Name:   "SchemaId",
+	TypeID:  binaryIDSchemaId,
+	Package: "service",
+	Name:    "SchemaId",
+	Display: "SchemaId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -1369,8 +1401,10 @@ func (*binaryClassCapture) Skip(d binary.Decoder) error { return doSkipCapture(d
 func (*binaryClassCapture) Schema() *schema.Class       { return schemaCapture }
 
 var schemaCapture = &schema.Class{
-	TypeID: binaryIDCapture,
-	Name:   "Capture",
+	TypeID:  binaryIDCapture,
+	Package: "service",
+	Name:    "Capture",
+	Display: "Capture",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId"}},
@@ -1420,8 +1454,10 @@ func (*binaryClassCaptureId) Skip(d binary.Decoder) error { return doSkipCapture
 func (*binaryClassCaptureId) Schema() *schema.Class       { return schemaCaptureId }
 
 var schemaCaptureId = &schema.Class{
-	TypeID: binaryIDCaptureId,
-	Name:   "CaptureId",
+	TypeID:  binaryIDCaptureId,
+	Package: "service",
+	Name:    "CaptureId",
+	Display: "CaptureId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -1549,8 +1585,10 @@ func (*binaryClassClassInfo) Skip(d binary.Decoder) error { return doSkipClassIn
 func (*binaryClassClassInfo) Schema() *schema.Class       { return schemaClassInfo }
 
 var schemaClassInfo = &schema.Class{
-	TypeID: binaryIDClassInfo,
-	Name:   "ClassInfo",
+	TypeID:  binaryIDClassInfo,
+	Package: "service",
+	Name:    "ClassInfo",
+	Display: "ClassInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -1699,8 +1737,10 @@ func (*binaryClassDevice) Skip(d binary.Decoder) error { return doSkipDevice(d) 
 func (*binaryClassDevice) Schema() *schema.Class       { return schemaDevice }
 
 var schemaDevice = &schema.Class{
-	TypeID: binaryIDDevice,
-	Name:   "Device",
+	TypeID:  binaryIDDevice,
+	Package: "service",
+	Name:    "Device",
+	Display: "Device",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Model", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -1756,8 +1796,10 @@ func (*binaryClassDeviceId) Skip(d binary.Decoder) error { return doSkipDeviceId
 func (*binaryClassDeviceId) Schema() *schema.Class       { return schemaDeviceId }
 
 var schemaDeviceId = &schema.Class{
-	TypeID: binaryIDDeviceId,
-	Name:   "DeviceId",
+	TypeID:  binaryIDDeviceId,
+	Package: "service",
+	Name:    "DeviceId",
+	Display: "DeviceId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -1815,8 +1857,10 @@ func (*binaryClassEnumEntry) Skip(d binary.Decoder) error { return doSkipEnumEnt
 func (*binaryClassEnumEntry) Schema() *schema.Class       { return schemaEnumEntry }
 
 var schemaEnumEntry = &schema.Class{
-	TypeID: binaryIDEnumEntry,
-	Name:   "EnumEntry",
+	TypeID:  binaryIDEnumEntry,
+	Package: "service",
+	Name:    "EnumEntry",
+	Display: "EnumEntry",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1937,8 +1981,10 @@ func (*binaryClassEnumInfo) Skip(d binary.Decoder) error { return doSkipEnumInfo
 func (*binaryClassEnumInfo) Schema() *schema.Class       { return schemaEnumInfo }
 
 var schemaEnumInfo = &schema.Class{
-	TypeID: binaryIDEnumInfo,
-	Name:   "EnumInfo",
+	TypeID:  binaryIDEnumInfo,
+	Package: "service",
+	Name:    "EnumInfo",
+	Display: "EnumInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -1986,8 +2032,10 @@ func (*binaryClassHierarchy) Skip(d binary.Decoder) error { return doSkipHierarc
 func (*binaryClassHierarchy) Schema() *schema.Class       { return schemaHierarchy }
 
 var schemaHierarchy = &schema.Class{
-	TypeID: binaryIDHierarchy,
-	Name:   "Hierarchy",
+	TypeID:  binaryIDHierarchy,
+	Package: "service",
+	Name:    "Hierarchy",
+	Display: "Hierarchy",
 	Fields: []schema.Field{
 		{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup"}},
 	},
@@ -2034,8 +2082,10 @@ func (*binaryClassHierarchyId) Skip(d binary.Decoder) error { return doSkipHiera
 func (*binaryClassHierarchyId) Schema() *schema.Class       { return schemaHierarchyId }
 
 var schemaHierarchyId = &schema.Class{
-	TypeID: binaryIDHierarchyId,
-	Name:   "HierarchyId",
+	TypeID:  binaryIDHierarchyId,
+	Package: "service",
+	Name:    "HierarchyId",
+	Display: "HierarchyId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -2113,8 +2163,10 @@ func (*binaryClassImageInfo) Skip(d binary.Decoder) error { return doSkipImageIn
 func (*binaryClassImageInfo) Schema() *schema.Class       { return schemaImageInfo }
 
 var schemaImageInfo = &schema.Class{
-	TypeID: binaryIDImageInfo,
-	Name:   "ImageInfo",
+	TypeID:  binaryIDImageInfo,
+	Package: "service",
+	Name:    "ImageInfo",
+	Display: "ImageInfo",
 	Fields: []schema.Field{
 		{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -2164,8 +2216,10 @@ func (*binaryClassImageInfoId) Skip(d binary.Decoder) error { return doSkipImage
 func (*binaryClassImageInfoId) Schema() *schema.Class       { return schemaImageInfoId }
 
 var schemaImageInfoId = &schema.Class{
-	TypeID: binaryIDImageInfoId,
-	Name:   "ImageInfoId",
+	TypeID:  binaryIDImageInfoId,
+	Package: "service",
+	Name:    "ImageInfoId",
+	Display: "ImageInfoId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -2257,8 +2311,10 @@ func (*binaryClassMapInfo) Skip(d binary.Decoder) error { return doSkipMapInfo(d
 func (*binaryClassMapInfo) Schema() *schema.Class       { return schemaMapInfo }
 
 var schemaMapInfo = &schema.Class{
-	TypeID: binaryIDMapInfo,
-	Name:   "MapInfo",
+	TypeID:  binaryIDMapInfo,
+	Package: "service",
+	Name:    "MapInfo",
+	Display: "MapInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -2319,8 +2375,10 @@ func (*binaryClassMemoryRange) Skip(d binary.Decoder) error { return doSkipMemor
 func (*binaryClassMemoryRange) Schema() *schema.Class       { return schemaMemoryRange }
 
 var schemaMemoryRange = &schema.Class{
-	TypeID: binaryIDMemoryRange,
-	Name:   "MemoryRange",
+	TypeID:  binaryIDMemoryRange,
+	Package: "service",
+	Name:    "MemoryRange",
+	Display: "MemoryRange",
 	Fields: []schema.Field{
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -2459,8 +2517,10 @@ func (*binaryClassMemoryInfo) Skip(d binary.Decoder) error { return doSkipMemory
 func (*binaryClassMemoryInfo) Schema() *schema.Class       { return schemaMemoryInfo }
 
 var schemaMemoryInfo = &schema.Class{
-	TypeID: binaryIDMemoryInfo,
-	Name:   "MemoryInfo",
+	TypeID:  binaryIDMemoryInfo,
+	Package: "service",
+	Name:    "MemoryInfo",
+	Display: "MemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 		{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
@@ -2510,8 +2570,10 @@ func (*binaryClassMemoryInfoId) Skip(d binary.Decoder) error { return doSkipMemo
 func (*binaryClassMemoryInfoId) Schema() *schema.Class       { return schemaMemoryInfoId }
 
 var schemaMemoryInfoId = &schema.Class{
-	TypeID: binaryIDMemoryInfoId,
-	Name:   "MemoryInfoId",
+	TypeID:  binaryIDMemoryInfoId,
+	Package: "service",
+	Name:    "MemoryInfoId",
+	Display: "MemoryInfoId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -2580,8 +2642,10 @@ func (*binaryClassRenderSettings) Skip(d binary.Decoder) error { return doSkipRe
 func (*binaryClassRenderSettings) Schema() *schema.Class       { return schemaRenderSettings }
 
 var schemaRenderSettings = &schema.Class{
-	TypeID: binaryIDRenderSettings,
-	Name:   "RenderSettings",
+	TypeID:  binaryIDRenderSettings,
+	Package: "service",
+	Name:    "RenderSettings",
+	Display: "RenderSettings",
 	Fields: []schema.Field{
 		{Declared: "MaxWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "MaxHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -2673,8 +2737,10 @@ func (*binaryClassSchema) Skip(d binary.Decoder) error { return doSkipSchema(d) 
 func (*binaryClassSchema) Schema() *schema.Class       { return schemaSchema }
 
 var schemaSchema = &schema.Class{
-	TypeID: binaryIDSchema,
-	Name:   "Schema",
+	TypeID:  binaryIDSchema,
+	Package: "service",
+	Name:    "Schema",
+	Display: "Schema",
 	Fields: []schema.Field{
 		{Declared: "Atoms", Type: &schema.Slice{Alias: "AtomInfoArray", ValueType: &schema.Struct{Name: "AtomInfo"}}},
 		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiSchemaArray", ValueType: &schema.Struct{Name: "ApiSchema"}}},
@@ -2733,8 +2799,10 @@ func (*binaryClassSimpleInfo) Skip(d binary.Decoder) error { return doSkipSimple
 func (*binaryClassSimpleInfo) Schema() *schema.Class       { return schemaSimpleInfo }
 
 var schemaSimpleInfo = &schema.Class{
-	TypeID: binaryIDSimpleInfo,
-	Name:   "SimpleInfo",
+	TypeID:  binaryIDSimpleInfo,
+	Package: "service",
+	Name:    "SimpleInfo",
+	Display: "SimpleInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -2821,8 +2889,10 @@ func (*binaryClassStaticArrayInfo) Skip(d binary.Decoder) error { return doSkipS
 func (*binaryClassStaticArrayInfo) Schema() *schema.Class       { return schemaStaticArrayInfo }
 
 var schemaStaticArrayInfo = &schema.Class{
-	TypeID: binaryIDStaticArrayInfo,
-	Name:   "StaticArrayInfo",
+	TypeID:  binaryIDStaticArrayInfo,
+	Package: "service",
+	Name:    "StaticArrayInfo",
+	Display: "StaticArrayInfo",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
@@ -2942,8 +3012,10 @@ func (*binaryClassTimingInfo) Skip(d binary.Decoder) error { return doSkipTiming
 func (*binaryClassTimingInfo) Schema() *schema.Class       { return schemaTimingInfo }
 
 var schemaTimingInfo = &schema.Class{
-	TypeID: binaryIDTimingInfo,
-	Name:   "TimingInfo",
+	TypeID:  binaryIDTimingInfo,
+	Package: "service",
+	Name:    "TimingInfo",
+	Display: "TimingInfo",
 	Fields: []schema.Field{
 		{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer"}}},
 		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
@@ -2992,8 +3064,10 @@ func (*binaryClassTimingInfoId) Skip(d binary.Decoder) error { return doSkipTimi
 func (*binaryClassTimingInfoId) Schema() *schema.Class       { return schemaTimingInfoId }
 
 var schemaTimingInfoId = &schema.Class{
-	TypeID: binaryIDTimingInfoId,
-	Name:   "TimingInfoId",
+	TypeID:  binaryIDTimingInfoId,
+	Package: "service",
+	Name:    "TimingInfoId",
+	Display: "TimingInfoId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -3029,9 +3103,11 @@ func (*binaryClasscallGetCaptures) Skip(d binary.Decoder) error { return doSkipc
 func (*binaryClasscallGetCaptures) Schema() *schema.Class       { return schemacallGetCaptures }
 
 var schemacallGetCaptures = &schema.Class{
-	TypeID: binaryIDcallGetCaptures,
-	Name:   "callGetCaptures",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetCaptures,
+	Package: "service",
+	Name:    "callGetCaptures",
+	Display: "callGetCaptures",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetDevices struct{}
@@ -3064,9 +3140,11 @@ func (*binaryClasscallGetDevices) Skip(d binary.Decoder) error { return doSkipca
 func (*binaryClasscallGetDevices) Schema() *schema.Class       { return schemacallGetDevices }
 
 var schemacallGetDevices = &schema.Class{
-	TypeID: binaryIDcallGetDevices,
-	Name:   "callGetDevices",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetDevices,
+	Package: "service",
+	Name:    "callGetDevices",
+	Display: "callGetDevices",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetFramebufferColor struct{}
@@ -3150,8 +3228,10 @@ func (*binaryClasscallGetFramebufferColor) Schema() *schema.Class {
 }
 
 var schemacallGetFramebufferColor = &schema.Class{
-	TypeID: binaryIDcallGetFramebufferColor,
-	Name:   "callGetFramebufferColor",
+	TypeID:  binaryIDcallGetFramebufferColor,
+	Package: "service",
+	Name:    "callGetFramebufferColor",
+	Display: "callGetFramebufferColor",
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
@@ -3233,8 +3313,10 @@ func (*binaryClasscallGetFramebufferDepth) Schema() *schema.Class {
 }
 
 var schemacallGetFramebufferDepth = &schema.Class{
-	TypeID: binaryIDcallGetFramebufferDepth,
-	Name:   "callGetFramebufferDepth",
+	TypeID:  binaryIDcallGetFramebufferDepth,
+	Package: "service",
+	Name:    "callGetFramebufferDepth",
+	Display: "callGetFramebufferDepth",
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
@@ -3282,8 +3364,10 @@ func (*binaryClasscallGetHierarchy) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClasscallGetHierarchy) Schema() *schema.Class       { return schemacallGetHierarchy }
 
 var schemacallGetHierarchy = &schema.Class{
-	TypeID: binaryIDcallGetHierarchy,
-	Name:   "callGetHierarchy",
+	TypeID:  binaryIDcallGetHierarchy,
+	Package: "service",
+	Name:    "callGetHierarchy",
+	Display: "callGetHierarchy",
 	Fields: []schema.Field{
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
 	},
@@ -3348,8 +3432,10 @@ func (*binaryClasscallGetMemoryInfo) Skip(d binary.Decoder) error { return doSki
 func (*binaryClasscallGetMemoryInfo) Schema() *schema.Class       { return schemacallGetMemoryInfo }
 
 var schemacallGetMemoryInfo = &schema.Class{
-	TypeID: binaryIDcallGetMemoryInfo,
-	Name:   "callGetMemoryInfo",
+	TypeID:  binaryIDcallGetMemoryInfo,
+	Package: "service",
+	Name:    "callGetMemoryInfo",
+	Display: "callGetMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -3387,9 +3473,11 @@ func (*binaryClasscallGetSchema) Skip(d binary.Decoder) error { return doSkipcal
 func (*binaryClasscallGetSchema) Schema() *schema.Class       { return schemacallGetSchema }
 
 var schemacallGetSchema = &schema.Class{
-	TypeID: binaryIDcallGetSchema,
-	Name:   "callGetSchema",
-	Fields: []schema.Field{},
+	TypeID:  binaryIDcallGetSchema,
+	Package: "service",
+	Name:    "callGetSchema",
+	Display: "callGetSchema",
+	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetState struct{}
@@ -3442,8 +3530,10 @@ func (*binaryClasscallGetState) Skip(d binary.Decoder) error { return doSkipcall
 func (*binaryClasscallGetState) Schema() *schema.Class       { return schemacallGetState }
 
 var schemacallGetState = &schema.Class{
-	TypeID: binaryIDcallGetState,
-	Name:   "callGetState",
+	TypeID:  binaryIDcallGetState,
+	Package: "service",
+	Name:    "callGetState",
+	Display: "callGetState",
 	Fields: []schema.Field{
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -3509,8 +3599,10 @@ func (*binaryClasscallGetTimingInfo) Skip(d binary.Decoder) error { return doSki
 func (*binaryClasscallGetTimingInfo) Schema() *schema.Class       { return schemacallGetTimingInfo }
 
 var schemacallGetTimingInfo = &schema.Class{
-	TypeID: binaryIDcallGetTimingInfo,
-	Name:   "callGetTimingInfo",
+	TypeID:  binaryIDcallGetTimingInfo,
+	Package: "service",
+	Name:    "callGetTimingInfo",
+	Display: "callGetTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
@@ -3580,8 +3672,10 @@ func (*binaryClasscallImport) Skip(d binary.Decoder) error { return doSkipcallIm
 func (*binaryClasscallImport) Schema() *schema.Class       { return schemacallImport }
 
 var schemacallImport = &schema.Class{
-	TypeID: binaryIDcallImport,
-	Name:   "callImport",
+	TypeID:  binaryIDcallImport,
+	Package: "service",
+	Name:    "callImport",
+	Display: "callImport",
 	Fields: []schema.Field{
 		{Declared: "name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
@@ -3700,8 +3794,10 @@ func (*binaryClasscallPrerenderFramebuffers) Schema() *schema.Class {
 }
 
 var schemacallPrerenderFramebuffers = &schema.Class{
-	TypeID: binaryIDcallPrerenderFramebuffers,
-	Name:   "callPrerenderFramebuffers",
+	TypeID:  binaryIDcallPrerenderFramebuffers,
+	Package: "service",
+	Name:    "callPrerenderFramebuffers",
+	Display: "callPrerenderFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
@@ -3782,8 +3878,10 @@ func (*binaryClasscallReplaceAtom) Skip(d binary.Decoder) error { return doSkipc
 func (*binaryClasscallReplaceAtom) Schema() *schema.Class       { return schemacallReplaceAtom }
 
 var schemacallReplaceAtom = &schema.Class{
-	TypeID: binaryIDcallReplaceAtom,
-	Name:   "callReplaceAtom",
+	TypeID:  binaryIDcallReplaceAtom,
+	Package: "service",
+	Name:    "callReplaceAtom",
+	Display: "callReplaceAtom",
 	Fields: []schema.Field{
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
 		{Declared: "atomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -3833,8 +3931,10 @@ func (*binaryClasscallResolveAtomStream) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveAtomStream) Schema() *schema.Class { return schemacallResolveAtomStream }
 
 var schemacallResolveAtomStream = &schema.Class{
-	TypeID: binaryIDcallResolveAtomStream,
-	Name:   "callResolveAtomStream",
+	TypeID:  binaryIDcallResolveAtomStream,
+	Package: "service",
+	Name:    "callResolveAtomStream",
+	Display: "callResolveAtomStream",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId"}},
 	},
@@ -3879,8 +3979,10 @@ func (*binaryClasscallResolveBinary) Skip(d binary.Decoder) error { return doSki
 func (*binaryClasscallResolveBinary) Schema() *schema.Class       { return schemacallResolveBinary }
 
 var schemacallResolveBinary = &schema.Class{
-	TypeID: binaryIDcallResolveBinary,
-	Name:   "callResolveBinary",
+	TypeID:  binaryIDcallResolveBinary,
+	Package: "service",
+	Name:    "callResolveBinary",
+	Display: "callResolveBinary",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "BinaryId"}},
 	},
@@ -3925,8 +4027,10 @@ func (*binaryClasscallResolveCapture) Skip(d binary.Decoder) error { return doSk
 func (*binaryClasscallResolveCapture) Schema() *schema.Class       { return schemacallResolveCapture }
 
 var schemacallResolveCapture = &schema.Class{
-	TypeID: binaryIDcallResolveCapture,
-	Name:   "callResolveCapture",
+	TypeID:  binaryIDcallResolveCapture,
+	Package: "service",
+	Name:    "callResolveCapture",
+	Display: "callResolveCapture",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "CaptureId"}},
 	},
@@ -3971,8 +4075,10 @@ func (*binaryClasscallResolveDevice) Skip(d binary.Decoder) error { return doSki
 func (*binaryClasscallResolveDevice) Schema() *schema.Class       { return schemacallResolveDevice }
 
 var schemacallResolveDevice = &schema.Class{
-	TypeID: binaryIDcallResolveDevice,
-	Name:   "callResolveDevice",
+	TypeID:  binaryIDcallResolveDevice,
+	Package: "service",
+	Name:    "callResolveDevice",
+	Display: "callResolveDevice",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "DeviceId"}},
 	},
@@ -4019,8 +4125,10 @@ func (*binaryClasscallResolveHierarchy) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveHierarchy) Schema() *schema.Class { return schemacallResolveHierarchy }
 
 var schemacallResolveHierarchy = &schema.Class{
-	TypeID: binaryIDcallResolveHierarchy,
-	Name:   "callResolveHierarchy",
+	TypeID:  binaryIDcallResolveHierarchy,
+	Package: "service",
+	Name:    "callResolveHierarchy",
+	Display: "callResolveHierarchy",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "HierarchyId"}},
 	},
@@ -4067,8 +4175,10 @@ func (*binaryClasscallResolveImageInfo) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveImageInfo) Schema() *schema.Class { return schemacallResolveImageInfo }
 
 var schemacallResolveImageInfo = &schema.Class{
-	TypeID: binaryIDcallResolveImageInfo,
-	Name:   "callResolveImageInfo",
+	TypeID:  binaryIDcallResolveImageInfo,
+	Package: "service",
+	Name:    "callResolveImageInfo",
+	Display: "callResolveImageInfo",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
@@ -4115,8 +4225,10 @@ func (*binaryClasscallResolveMemoryInfo) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveMemoryInfo) Schema() *schema.Class { return schemacallResolveMemoryInfo }
 
 var schemacallResolveMemoryInfo = &schema.Class{
-	TypeID: binaryIDcallResolveMemoryInfo,
-	Name:   "callResolveMemoryInfo",
+	TypeID:  binaryIDcallResolveMemoryInfo,
+	Package: "service",
+	Name:    "callResolveMemoryInfo",
+	Display: "callResolveMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId"}},
 	},
@@ -4161,8 +4273,10 @@ func (*binaryClasscallResolveSchema) Skip(d binary.Decoder) error { return doSki
 func (*binaryClasscallResolveSchema) Schema() *schema.Class       { return schemacallResolveSchema }
 
 var schemacallResolveSchema = &schema.Class{
-	TypeID: binaryIDcallResolveSchema,
-	Name:   "callResolveSchema",
+	TypeID:  binaryIDcallResolveSchema,
+	Package: "service",
+	Name:    "callResolveSchema",
+	Display: "callResolveSchema",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "SchemaId"}},
 	},
@@ -4209,8 +4323,10 @@ func (*binaryClasscallResolveTimingInfo) Skip(d binary.Decoder) error {
 func (*binaryClasscallResolveTimingInfo) Schema() *schema.Class { return schemacallResolveTimingInfo }
 
 var schemacallResolveTimingInfo = &schema.Class{
-	TypeID: binaryIDcallResolveTimingInfo,
-	Name:   "callResolveTimingInfo",
+	TypeID:  binaryIDcallResolveTimingInfo,
+	Package: "service",
+	Name:    "callResolveTimingInfo",
+	Display: "callResolveTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId"}},
 	},
@@ -4273,8 +4389,10 @@ func (*binaryClassresultGetCaptures) Skip(d binary.Decoder) error { return doSki
 func (*binaryClassresultGetCaptures) Schema() *schema.Class       { return schemaresultGetCaptures }
 
 var schemaresultGetCaptures = &schema.Class{
-	TypeID: binaryIDresultGetCaptures,
-	Name:   "resultGetCaptures",
+	TypeID:  binaryIDresultGetCaptures,
+	Package: "service",
+	Name:    "resultGetCaptures",
+	Display: "resultGetCaptures",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId"}}},
 	},
@@ -4337,8 +4455,10 @@ func (*binaryClassresultGetDevices) Skip(d binary.Decoder) error { return doSkip
 func (*binaryClassresultGetDevices) Schema() *schema.Class       { return schemaresultGetDevices }
 
 var schemaresultGetDevices = &schema.Class{
-	TypeID: binaryIDresultGetDevices,
-	Name:   "resultGetDevices",
+	TypeID:  binaryIDresultGetDevices,
+	Package: "service",
+	Name:    "resultGetDevices",
+	Display: "resultGetDevices",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId"}}},
 	},
@@ -4387,8 +4507,10 @@ func (*binaryClassresultGetFramebufferColor) Schema() *schema.Class {
 }
 
 var schemaresultGetFramebufferColor = &schema.Class{
-	TypeID: binaryIDresultGetFramebufferColor,
-	Name:   "resultGetFramebufferColor",
+	TypeID:  binaryIDresultGetFramebufferColor,
+	Package: "service",
+	Name:    "resultGetFramebufferColor",
+	Display: "resultGetFramebufferColor",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
@@ -4437,8 +4559,10 @@ func (*binaryClassresultGetFramebufferDepth) Schema() *schema.Class {
 }
 
 var schemaresultGetFramebufferDepth = &schema.Class{
-	TypeID: binaryIDresultGetFramebufferDepth,
-	Name:   "resultGetFramebufferDepth",
+	TypeID:  binaryIDresultGetFramebufferDepth,
+	Package: "service",
+	Name:    "resultGetFramebufferDepth",
+	Display: "resultGetFramebufferDepth",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
 	},
@@ -4483,8 +4607,10 @@ func (*binaryClassresultGetHierarchy) Skip(d binary.Decoder) error { return doSk
 func (*binaryClassresultGetHierarchy) Schema() *schema.Class       { return schemaresultGetHierarchy }
 
 var schemaresultGetHierarchy = &schema.Class{
-	TypeID: binaryIDresultGetHierarchy,
-	Name:   "resultGetHierarchy",
+	TypeID:  binaryIDresultGetHierarchy,
+	Package: "service",
+	Name:    "resultGetHierarchy",
+	Display: "resultGetHierarchy",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "HierarchyId"}},
 	},
@@ -4531,8 +4657,10 @@ func (*binaryClassresultGetMemoryInfo) Skip(d binary.Decoder) error {
 func (*binaryClassresultGetMemoryInfo) Schema() *schema.Class { return schemaresultGetMemoryInfo }
 
 var schemaresultGetMemoryInfo = &schema.Class{
-	TypeID: binaryIDresultGetMemoryInfo,
-	Name:   "resultGetMemoryInfo",
+	TypeID:  binaryIDresultGetMemoryInfo,
+	Package: "service",
+	Name:    "resultGetMemoryInfo",
+	Display: "resultGetMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId"}},
 	},
@@ -4603,8 +4731,10 @@ func (*binaryClassresultGetSchema) Skip(d binary.Decoder) error { return doSkipr
 func (*binaryClassresultGetSchema) Schema() *schema.Class       { return schemaresultGetSchema }
 
 var schemaresultGetSchema = &schema.Class{
-	TypeID: binaryIDresultGetSchema,
-	Name:   "resultGetSchema",
+	TypeID:  binaryIDresultGetSchema,
+	Package: "service",
+	Name:    "resultGetSchema",
+	Display: "resultGetSchema",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "ClassPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class"}}}},
 	},
@@ -4649,8 +4779,10 @@ func (*binaryClassresultGetState) Skip(d binary.Decoder) error { return doSkipre
 func (*binaryClassresultGetState) Schema() *schema.Class       { return schemaresultGetState }
 
 var schemaresultGetState = &schema.Class{
-	TypeID: binaryIDresultGetState,
-	Name:   "resultGetState",
+	TypeID:  binaryIDresultGetState,
+	Package: "service",
+	Name:    "resultGetState",
+	Display: "resultGetState",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
 	},
@@ -4697,8 +4829,10 @@ func (*binaryClassresultGetTimingInfo) Skip(d binary.Decoder) error {
 func (*binaryClassresultGetTimingInfo) Schema() *schema.Class { return schemaresultGetTimingInfo }
 
 var schemaresultGetTimingInfo = &schema.Class{
-	TypeID: binaryIDresultGetTimingInfo,
-	Name:   "resultGetTimingInfo",
+	TypeID:  binaryIDresultGetTimingInfo,
+	Package: "service",
+	Name:    "resultGetTimingInfo",
+	Display: "resultGetTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId"}},
 	},
@@ -4743,8 +4877,10 @@ func (*binaryClassresultImport) Skip(d binary.Decoder) error { return doSkipresu
 func (*binaryClassresultImport) Schema() *schema.Class       { return schemaresultImport }
 
 var schemaresultImport = &schema.Class{
-	TypeID: binaryIDresultImport,
-	Name:   "resultImport",
+	TypeID:  binaryIDresultImport,
+	Package: "service",
+	Name:    "resultImport",
+	Display: "resultImport",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
 	},
@@ -4797,8 +4933,10 @@ func (*binaryClassresultPrerenderFramebuffers) Schema() *schema.Class {
 }
 
 var schemaresultPrerenderFramebuffers = &schema.Class{
-	TypeID: binaryIDresultPrerenderFramebuffers,
-	Name:   "resultPrerenderFramebuffers",
+	TypeID:  binaryIDresultPrerenderFramebuffers,
+	Package: "service",
+	Name:    "resultPrerenderFramebuffers",
+	Display: "resultPrerenderFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
 	},
@@ -4843,8 +4981,10 @@ func (*binaryClassresultReplaceAtom) Skip(d binary.Decoder) error { return doSki
 func (*binaryClassresultReplaceAtom) Schema() *schema.Class       { return schemaresultReplaceAtom }
 
 var schemaresultReplaceAtom = &schema.Class{
-	TypeID: binaryIDresultReplaceAtom,
-	Name:   "resultReplaceAtom",
+	TypeID:  binaryIDresultReplaceAtom,
+	Package: "service",
+	Name:    "resultReplaceAtom",
+	Display: "resultReplaceAtom",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
 	},
@@ -4893,8 +5033,10 @@ func (*binaryClassresultResolveAtomStream) Schema() *schema.Class {
 }
 
 var schemaresultResolveAtomStream = &schema.Class{
-	TypeID: binaryIDresultResolveAtomStream,
-	Name:   "resultResolveAtomStream",
+	TypeID:  binaryIDresultResolveAtomStream,
+	Package: "service",
+	Name:    "resultResolveAtomStream",
+	Display: "resultResolveAtomStream",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "AtomStream"}},
 	},
@@ -4941,8 +5083,10 @@ func (*binaryClassresultResolveBinary) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveBinary) Schema() *schema.Class { return schemaresultResolveBinary }
 
 var schemaresultResolveBinary = &schema.Class{
-	TypeID: binaryIDresultResolveBinary,
-	Name:   "resultResolveBinary",
+	TypeID:  binaryIDresultResolveBinary,
+	Package: "service",
+	Name:    "resultResolveBinary",
+	Display: "resultResolveBinary",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Binary"}},
 	},
@@ -4989,8 +5133,10 @@ func (*binaryClassresultResolveCapture) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveCapture) Schema() *schema.Class { return schemaresultResolveCapture }
 
 var schemaresultResolveCapture = &schema.Class{
-	TypeID: binaryIDresultResolveCapture,
-	Name:   "resultResolveCapture",
+	TypeID:  binaryIDresultResolveCapture,
+	Package: "service",
+	Name:    "resultResolveCapture",
+	Display: "resultResolveCapture",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Capture"}},
 	},
@@ -5037,8 +5183,10 @@ func (*binaryClassresultResolveDevice) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveDevice) Schema() *schema.Class { return schemaresultResolveDevice }
 
 var schemaresultResolveDevice = &schema.Class{
-	TypeID: binaryIDresultResolveDevice,
-	Name:   "resultResolveDevice",
+	TypeID:  binaryIDresultResolveDevice,
+	Package: "service",
+	Name:    "resultResolveDevice",
+	Display: "resultResolveDevice",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Device"}},
 	},
@@ -5085,8 +5233,10 @@ func (*binaryClassresultResolveHierarchy) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveHierarchy) Schema() *schema.Class { return schemaresultResolveHierarchy }
 
 var schemaresultResolveHierarchy = &schema.Class{
-	TypeID: binaryIDresultResolveHierarchy,
-	Name:   "resultResolveHierarchy",
+	TypeID:  binaryIDresultResolveHierarchy,
+	Package: "service",
+	Name:    "resultResolveHierarchy",
+	Display: "resultResolveHierarchy",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Hierarchy"}},
 	},
@@ -5133,8 +5283,10 @@ func (*binaryClassresultResolveImageInfo) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveImageInfo) Schema() *schema.Class { return schemaresultResolveImageInfo }
 
 var schemaresultResolveImageInfo = &schema.Class{
-	TypeID: binaryIDresultResolveImageInfo,
-	Name:   "resultResolveImageInfo",
+	TypeID:  binaryIDresultResolveImageInfo,
+	Package: "service",
+	Name:    "resultResolveImageInfo",
+	Display: "resultResolveImageInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "ImageInfo"}},
 	},
@@ -5183,8 +5335,10 @@ func (*binaryClassresultResolveMemoryInfo) Schema() *schema.Class {
 }
 
 var schemaresultResolveMemoryInfo = &schema.Class{
-	TypeID: binaryIDresultResolveMemoryInfo,
-	Name:   "resultResolveMemoryInfo",
+	TypeID:  binaryIDresultResolveMemoryInfo,
+	Package: "service",
+	Name:    "resultResolveMemoryInfo",
+	Display: "resultResolveMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo"}},
 	},
@@ -5231,8 +5385,10 @@ func (*binaryClassresultResolveSchema) Skip(d binary.Decoder) error {
 func (*binaryClassresultResolveSchema) Schema() *schema.Class { return schemaresultResolveSchema }
 
 var schemaresultResolveSchema = &schema.Class{
-	TypeID: binaryIDresultResolveSchema,
-	Name:   "resultResolveSchema",
+	TypeID:  binaryIDresultResolveSchema,
+	Package: "service",
+	Name:    "resultResolveSchema",
+	Display: "resultResolveSchema",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Schema"}},
 	},
@@ -5281,8 +5437,10 @@ func (*binaryClassresultResolveTimingInfo) Schema() *schema.Class {
 }
 
 var schemaresultResolveTimingInfo = &schema.Class{
-	TypeID: binaryIDresultResolveTimingInfo,
-	Name:   "resultResolveTimingInfo",
+	TypeID:  binaryIDresultResolveTimingInfo,
+	Package: "service",
+	Name:    "resultResolveTimingInfo",
+	Display: "resultResolveTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "TimingInfo"}},
 	},

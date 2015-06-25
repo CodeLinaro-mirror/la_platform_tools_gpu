@@ -62,8 +62,10 @@ func (*binaryClassTypeA) Skip(d binary.Decoder) error { return doSkipTypeA(d) }
 func (*binaryClassTypeA) Schema() *schema.Class       { return schemaTypeA }
 
 var schemaTypeA = &schema.Class{
-	TypeID: TypeAID,
-	Name:   "TypeA",
+	TypeID:  TypeAID,
+	Package: "test",
+	Name:    "TypeA",
+	Display: "TypeA",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -110,8 +112,10 @@ func (*binaryClassTypeB) Skip(d binary.Decoder) error { return doSkipTypeB(d) }
 func (*binaryClassTypeB) Schema() *schema.Class       { return schemaTypeB }
 
 var schemaTypeB = &schema.Class{
-	TypeID: TypeBID,
-	Name:   "TypeB",
+	TypeID:  TypeBID,
+	Package: "test",
+	Name:    "TypeB",
+	Display: "TypeB",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},

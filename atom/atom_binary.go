@@ -82,8 +82,10 @@ func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
 func (*binaryClassRange) Schema() *schema.Class       { return schemaRange }
 
 var schemaRange = &schema.Class{
-	TypeID: binaryIDRange,
-	Name:   "Range",
+	TypeID:  binaryIDRange,
+	Package: "atom",
+	Name:    "Range",
+	Display: "Range",
 	Fields: []schema.Field{
 		{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
 		{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
@@ -167,8 +169,10 @@ func (*binaryClassGroup) Skip(d binary.Decoder) error { return doSkipGroup(d) }
 func (*binaryClassGroup) Schema() *schema.Class       { return schemaGroup }
 
 var schemaGroup = &schema.Class{
-	TypeID: binaryIDGroup,
-	Name:   "Group",
+	TypeID:  binaryIDGroup,
+	Package: "atom",
+	Name:    "Group",
+	Display: "Group",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "Range"}},
@@ -226,8 +230,10 @@ func (*binaryClassObservation) Skip(d binary.Decoder) error { return doSkipObser
 func (*binaryClassObservation) Schema() *schema.Class       { return schemaObservation }
 
 var schemaObservation = &schema.Class{
-	TypeID: binaryIDObservation,
-	Name:   "Observation",
+	TypeID:  binaryIDObservation,
+	Package: "atom",
+	Name:    "Observation",
+	Display: "Observation",
 	Fields: []schema.Field{
 		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
@@ -318,8 +324,10 @@ func (*binaryClassObservations) Skip(d binary.Decoder) error { return doSkipObse
 func (*binaryClassObservations) Schema() *schema.Class       { return schemaObservations }
 
 var schemaObservations = &schema.Class{
-	TypeID: binaryIDObservations,
-	Name:   "Observations",
+	TypeID:  binaryIDObservations,
+	Package: "atom",
+	Name:    "Observations",
+	Display: "Observations",
 	Fields: []schema.Field{
 		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
 		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
@@ -388,8 +396,10 @@ func (*binaryClassResource) Skip(d binary.Decoder) error { return doSkipResource
 func (*binaryClassResource) Schema() *schema.Class       { return schemaResource }
 
 var schemaResource = &schema.Class{
-	TypeID: binaryIDResource,
-	Name:   "Resource",
+	TypeID:  binaryIDResource,
+	Package: "atom",
+	Name:    "Resource",
+	Display: "Resource",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},

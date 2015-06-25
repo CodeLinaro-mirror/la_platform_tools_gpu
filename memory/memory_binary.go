@@ -73,8 +73,10 @@ func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
 func (*binaryClassRange) Schema() *schema.Class       { return schemaRange }
 
 var schemaRange = &schema.Class{
-	TypeID: binaryIDRange,
-	Name:   "Range",
+	TypeID:  binaryIDRange,
+	Package: "memory",
+	Name:    "Range",
+	Display: "Range",
 	Fields: []schema.Field{
 		{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},

@@ -60,8 +60,10 @@ func (*binaryClassError) Skip(d binary.Decoder) error { return doSkipError(d) }
 func (*binaryClassError) Schema() *schema.Class       { return schemaError }
 
 var schemaError = &schema.Class{
-	TypeID: binaryIDError,
-	Name:   "Error",
+	TypeID:  binaryIDError,
+	Package: "rpc",
+	Name:    "Error",
+	Display: "Error",
 	Fields: []schema.Field{
 		{Declared: "message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
