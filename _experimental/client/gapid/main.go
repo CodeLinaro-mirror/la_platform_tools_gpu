@@ -22,8 +22,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/_experimental/client"
+	"android.googlesource.com/platform/tools/gpu/atexit"
 )
 
 var (
@@ -62,6 +62,9 @@ func run() error {
 		GXUIDebug:      *gxuiDebug,
 		InitialCapture: *capture,
 		ReplayDevice:   *replayDevice,
+	}
+	if config.InitialCapture == "" {
+		config.InitialCapture = os.Getenv("LOAD_CAPTURE")
 	}
 	client.Run(config)
 	return nil

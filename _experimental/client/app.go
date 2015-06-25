@@ -134,9 +134,6 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 					appCtx.Run(func() {
 						captures = append(captures, &capture{id, info})
 						adapter.SetItems(captures)
-						if list.Selected() == nil && info.Name == appCtx.InitialCapture {
-							list.Select(captures[len(captures)-1])
-						}
 					})
 				}
 			}()
@@ -427,6 +424,10 @@ func (a app) main(driver gxui.Driver) {
 	appCtx.OnAtomSelected(appCtx.LoadState)
 
 	appCtx.UpdateSchema()
+
+	if appCtx.InitialCapture != "" {
+		ImportCapture(appCtx, appCtx.InitialCapture, appCtx.logger)
+	}
 }
 
 func Run(config Config) {

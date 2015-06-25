@@ -262,29 +262,32 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 	load.OnClick(func(ev gxui.MouseEvent) {
 		go func() {
-			path := name.Text()
-			if path[:2] == "~/" {
-				usr, _ := user.Current()
-				path = filepath.Join(usr.HomeDir, path[2:])
-			}
-			statusLogger.Infof("Loading %s", path)
-			data, err := ioutil.ReadFile(path)
-			if err != nil {
-				statusLogger.Infof("Failed opening file %s: %s", path, err)
-			} else if len(data) == 0 {
-				statusLogger.Infof("Zero size file %s", path)
-			} else {
-				statusLogger.Infof("Importing...")
-				id, err := appCtx.Rpc().Import(name.Text(), data, appCtx.Logger())
-				if err != nil {
-					panic(err)
-				}
-				statusLogger.Infof("Loading...")
-				appCtx.LoadCapture(id, true)
-				theme.Driver().Call(func() {
-					window.Close()
-				})
-			}
+			ImportCapture(appCtx, name.Text(), statusLogger)
+			theme.Driver().Call(func() {
+				window.Close()
+			})
 		}()
 	})
+}
+
+func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Logger) {
+	if path[:2] == "~/" {
+		usr, _ := user.Current()
+		path = filepath.Join(usr.HomeDir, path[2:])
+	}
+	statusLogger.Infof("Loading %s", path)
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		statusLogger.Infof("Failed opening file %s: %s", path, err)
+	} else if len(data) == 0 {
+		statusLogger.Infof("Zero size file %s", path)
+	} else {
+		statusLogger.Infof("Importing...")
+		id, err := appCtx.Rpc().Import(path, data, appCtx.Logger())
+		if err != nil {
+			panic(err)
+		}
+		statusLogger.Infof("Loading...")
+		appCtx.LoadCapture(id, true)
+	}
 }
