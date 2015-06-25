@@ -10,7 +10,7 @@ syntax trees.
 #### func  Parse
 
 ```go
-func Parse(data string) (*ast.API, []parse.Error)
+func Parse(data string) (*ast.API, parse.ErrorList)
 ```
 Parse takes a string containing a complete api description and returns the
 abstract syntax tree representation of it. If the string is not syntactically

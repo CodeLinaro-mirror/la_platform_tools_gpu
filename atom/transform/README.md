@@ -56,7 +56,7 @@ func (t *Injector) Flush(out atom.Writer)
 #### func (*Injector) Inject
 
 ```go
-func (t *Injector) Inject(after atom.ID, id atom.ID, a atom.Atom)
+func (t *Injector) Inject(after atom.ID, a atom.Atom)
 ```
 Inject emits the atom a with identifier id after the atom with identifier after.
 

@@ -18,13 +18,21 @@ const AtomIDB = atom.TypeID(2)
 const AtomIDC = atom.TypeID(3)
 ```
 
+```go
+var (
+	AtomAID = binary.ID{0x38, 0x1e, 0xef, 0x73, 0x50, 0xa0, 0x48, 0x6d, 0xa3, 0x1d, 0x8e, 0xb6, 0x5e, 0x47, 0xb7, 0xbf, 0x7b, 0xc8, 0x06, 0x33}
+	AtomBID = binary.ID{0x32, 0x6a, 0x98, 0x0f, 0x59, 0xd2, 0x52, 0x34, 0x9c, 0xc2, 0x75, 0x25, 0x62, 0xb8, 0xb3, 0x0b, 0x48, 0x54, 0x3c, 0x85}
+	AtomCID = binary.ID{0x02, 0x32, 0xdd, 0xd7, 0x4d, 0x7e, 0xbf, 0x43, 0x41, 0x47, 0xbb, 0xcb, 0xd8, 0xed, 0xd4, 0xd8, 0xb4, 0x42, 0xf9, 0xd5}
+)
+```
+
 #### type AtomA
 
 ```go
 type AtomA struct {
-	binary.Generate
-	ID        atom.ID
-	AtomFlags atom.Flags
+	binary.Generate `id:"AtomAID"`
+	ID              atom.ID
+	AtomFlags       atom.Flags
 }
 ```
 
@@ -50,7 +58,13 @@ func (a *AtomA) Flags() atom.Flags
 #### func (*AtomA) Mutate
 
 ```go
-func (a *AtomA) Mutate(*gfxapi.State) error
+func (a *AtomA) Mutate(*gfxapi.State, database.Database, log.Logger) error
+```
+
+#### func (*AtomA) Observations
+
+```go
+func (a *AtomA) Observations() *atom.Observations
 ```
 
 #### func (*AtomA) TypeID
@@ -63,9 +77,9 @@ func (a *AtomA) TypeID() atom.TypeID
 
 ```go
 type AtomB struct {
-	binary.Generate
-	ID   atom.ID
-	Bool bool
+	binary.Generate `id:"AtomBID"`
+	ID              atom.ID
+	Bool            bool
 }
 ```
 
@@ -91,7 +105,13 @@ func (a *AtomB) Flags() atom.Flags
 #### func (*AtomB) Mutate
 
 ```go
-func (a *AtomB) Mutate(*gfxapi.State) error
+func (a *AtomB) Mutate(*gfxapi.State, database.Database, log.Logger) error
+```
+
+#### func (*AtomB) Observations
+
+```go
+func (a *AtomB) Observations() *atom.Observations
 ```
 
 #### func (*AtomB) TypeID
@@ -104,8 +124,8 @@ func (a *AtomB) TypeID() atom.TypeID
 
 ```go
 type AtomC struct {
-	binary.Generate
-	String string
+	binary.Generate `id:"AtomCID"`
+	String          string
 }
 ```
 
@@ -131,7 +151,13 @@ func (a *AtomC) Flags() atom.Flags
 #### func (*AtomC) Mutate
 
 ```go
-func (a *AtomC) Mutate(*gfxapi.State) error
+func (a *AtomC) Mutate(*gfxapi.State, database.Database, log.Logger) error
+```
+
+#### func (*AtomC) Observations
+
+```go
+func (a *AtomC) Observations() *atom.Observations
 ```
 
 #### func (*AtomC) TypeID

@@ -22,10 +22,10 @@ func Filter(prefix string) (result []*Command)
 Filter returns the filtered list of commands who's names match the specified
 prefix.
 
-#### func  Log
+#### func  Logf
 
 ```go
-func Log(message string, args ...interface{})
+func Logf(message string, args ...interface{})
 ```
 Log prints message with the formatting args to stdout.
 

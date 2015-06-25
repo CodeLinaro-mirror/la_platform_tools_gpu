@@ -13,29 +13,21 @@ const (
 	// meaning.
 	KeywordAPI       = "api"
 	KeywordAlias     = "alias"
-	KeywordArray     = "array"
-	KeywordAs        = "as"
-	KeywordAssert    = "assert"
 	KeywordBitfield  = "bitfield"
-	KeywordBuffer    = "buffer"
 	KeywordCase      = "case"
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
+	KeywordConst     = "const"
 	KeywordElse      = "else"
 	KeywordEnum      = "enum"
 	KeywordExtern    = "extern"
 	KeywordFalse     = "false"
 	KeywordFor       = "for"
 	KeywordIf        = "if"
+	KeywordImport    = "import"
 	KeywordIn        = "in"
-	KeywordInout     = "inout"
-	KeywordLength    = "len"
 	KeywordMacro     = "macro"
-	KeywordMap       = "map"
-	KeywordNew       = "new"
 	KeywordNull      = "null"
-	KeywordOut       = "out"
-	KeywordPointer   = "ptr"
 	KeywordReturn    = "return"
 	KeywordPseudonym = "type"
 	KeywordSwitch    = "switch"
@@ -57,8 +49,6 @@ const (
 	OpListStart     = "("
 	OpListSeparator = ","
 	OpListEnd       = ")"
-	OpMetaStart     = "<"
-	OpMetaEnd       = ">"
 	OpAssign        = "="
 	OpAssignPlus    = "+="
 	OpAssignMinus   = "-="
@@ -83,6 +73,7 @@ const (
 	OpRange         = ".."
 	OpNot           = "!"
 	OpIn            = "in"
+	OpGeneric       = "!"
 )
 ```
 
@@ -106,6 +97,7 @@ var (
 ```go
 type API struct {
 	CST        *parse.Branch // underlying parse structure for this node
+	Imports    []*Import     // api files imported with the "import" keyword
 	Macros     []*Function   // functions declared with the "macro" keyword
 	Externs    []*Function   // functions declared with the "extern" keyword
 	Commands   []*Function   // functions declared with the "cmd" keyword
@@ -172,25 +164,6 @@ type Annotations []*Annotation
 
 Annotations represents the set of Annotation objects that apply to another AST
 node.
-
-#### type Assert
-
-```go
-type Assert struct {
-	CST       *parse.Branch // underlying parse structure for this node.
-	Condition Node          // the condition to check, should be true
-}
-```
-
-Assert represents the «"assert" condition» statement. Used mostly to express the
-pre-conditions of api commands, such as acceptable values for parameters that
-cannot be expressed in the type system.
-
-#### func (Assert) Fragment
-
-```go
-func (t Assert) Fragment() parse.Fragment
-```
 
 #### type Assign
 
@@ -326,24 +299,6 @@ statement value will be compared against.
 func (t Case) Fragment() parse.Fragment
 ```
 
-#### type Cast
-
-```go
-type Cast struct {
-	CST    *parse.Branch // underlying parse structure for this node
-	Object Node          // the value to force the type of
-	Type   Node          // the type it should be coerced to
-}
-```
-
-Cast represents a type coercion expression, of the form «expression "as" type»
-
-#### func (Cast) Fragment
-
-```go
-func (t Cast) Fragment() parse.Fragment
-```
-
 #### type Class
 
 ```go
@@ -363,25 +318,6 @@ extension_list { fields }»
 
 ```go
 func (t Class) Fragment() parse.Fragment
-```
-
-#### type ClassInitializer
-
-```go
-type ClassInitializer struct {
-	CST    *parse.Branch       // underlying parse structure for this node
-	Class  *Identifier         // the name of the class instantiate
-	Fields []*FieldInitializer // the initializers for the class fields
-}
-```
-
-ClassInitializer represents a class literal declaration, of the form «name {
-field_initializers }»
-
-#### func (ClassInitializer) Fragment
-
-```go
-func (t ClassInitializer) Fragment() parse.Fragment
 ```
 
 #### type DeclareLocal
@@ -465,25 +401,6 @@ expression»
 func (t Field) Fragment() parse.Fragment
 ```
 
-#### type FieldInitializer
-
-```go
-type FieldInitializer struct {
-	CST   *parse.Branch // underlying parse structure for this node
-	Name  *Identifier   // the name of the field
-	Value Node          // the value the field should be given
-}
-```
-
-FieldInitializer is used as part of a ClassInitializer to specify the value a
-single field should have.
-
-#### func (FieldInitializer) Fragment
-
-```go
-func (t FieldInitializer) Fragment() parse.Fragment
-```
-
 #### type Function
 
 ```go
@@ -506,23 +423,23 @@ parameters is a comma separated list and body is an optional block.
 func (t Function) Fragment() parse.Fragment
 ```
 
-#### type GenericType
+#### type Generic
 
 ```go
-type GenericType struct {
-	CST     *parse.Branch // underlying parse structure for this node
-	Generic *Identifier   // the generic identifier.
-	Args    []Node        // the type arguments to the generic.
+type Generic struct {
+	CST       *parse.Branch // underlying parse structure for this node
+	Name      *Identifier   // the generic identifier.
+	Arguments []Node        // the type arguments to the generic.
 }
 ```
 
-GenericType represents a generic type declaration, which looks like
-«"array|map|buffer"<type {, type}>»
+Generic represents a identifier modified by type arguments. It looks like:
+«identifier ! ( arg | <arg {, arg} )>»
 
-#### func (GenericType) Fragment
+#### func (Generic) Fragment
 
 ```go
-func (t GenericType) Fragment() parse.Fragment
+func (t Generic) Fragment() parse.Fragment
 ```
 
 #### type Group
@@ -558,6 +475,43 @@ Identifier holds a parsed identifier in the parse tree.
 
 ```go
 func (t Identifier) Fragment() parse.Fragment
+```
+
+#### type Import
+
+```go
+type Import struct {
+	CST         *parse.Branch // underlying parse structure for this node
+	Annotations Annotations   // the annotations applied to the import
+	Name        *Identifier   // the name to import an api file as
+	Path        *String       // the relative path to the api file
+}
+```
+
+Import is the AST node that represents «import name "path"» constructs
+
+#### func (Import) Fragment
+
+```go
+func (t Import) Fragment() parse.Fragment
+```
+
+#### type Imported
+
+```go
+type Imported struct {
+	CST  *parse.Branch // underlying parse structure for this node
+	From *Identifier   // the import this name is from
+	Name *Identifier   // the name being imported
+}
+```
+
+Imported represents an imported type name.
+
+#### func (Imported) Fragment
+
+```go
+func (t Imported) Fragment() parse.Fragment
 ```
 
 #### type Index
@@ -632,24 +586,6 @@ Iteration represents a «"for" variable "in" iterable { block }» structure.
 func (t Iteration) Fragment() parse.Fragment
 ```
 
-#### type Length
-
-```go
-type Length struct {
-	CST    *parse.Branch // underlying parse structure for this node.
-	Object Node          // the object to query the length of
-}
-```
-
-Length represents the «"len"(value)» construct, were value should be an
-expresssion that returns an object of array, string or map type.
-
-#### func (Length) Fragment
-
-```go
-func (t Length) Fragment() parse.Fragment
-```
-
 #### type Member
 
 ```go
@@ -669,23 +605,22 @@ form «object.name» where object is an expression.
 func (t Member) Fragment() parse.Fragment
 ```
 
-#### type New
+#### type NamedArg
 
 ```go
-type New struct {
-	CST              *parse.Branch // underlying parse structure for this node
-	ClassInitializer *ClassInitializer
+type NamedArg struct {
+	CST   *parse.Branch // underlying parse structure for this node
+	Name  *Identifier   // the name of the parameter this value is for
+	Value Node          // the value to use for that parameter
 }
 ```
 
-New represents an expression that allocates a new class instance and returns a
-pointer to it. It takes a class initializer to specify both the type and the
-initial value for the instance.
+NamedArg represents a «name = value» expressionas a function argument.
 
-#### func (New) Fragment
+#### func (NamedArg) Fragment
 
 ```go
-func (t New) Fragment() parse.Fragment
+func (t NamedArg) Fragment() parse.Fragment
 ```
 
 #### type Node
@@ -739,8 +674,6 @@ func (t Number) Fragment() parse.Fragment
 type Parameter struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to this parameter
-	Input       bool          // true if the parameter is an input
-	Output      bool          // true if the parameters is an output
 	This        bool          // true if the parameter is the this pointer of a method
 	Type        Node          // the type of the parameter
 	Name        *Identifier   // the name the parameter as exposed to the body
@@ -760,8 +693,9 @@ func (t Parameter) Fragment() parse.Fragment
 
 ```go
 type PointerType struct {
-	CST *parse.Branch // underlying parse structure for this node
-	To  Node          // the underlying type this pointer points to
+	CST   *parse.Branch // underlying parse structure for this node
+	To    Node          // the underlying type this pointer points to
+	Const bool          // wether the pointer type has the const modifier applied
 }
 ```
 

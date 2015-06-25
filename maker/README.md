@@ -16,6 +16,10 @@ const (
 ```
 
 ```go
+const GoPkgResources = "go_packages"
+```
+
+```go
 const HostExecutableExtension = ""
 ```
 
@@ -45,12 +49,10 @@ var (
 	Config struct {
 		// Verbose enables increased logging output.
 		Verbose int
-		// TargetArchitecture is the architecture to build binaries for.
-		TargetArchitecture string
-		// TargetOS is the OS to build for.
-		TargetOS string
 		// DisableParallel turns of all parallel build support.
 		DisableParallel bool
+		// StopOnError makes the system quit faster once an error has been found.
+		StopOnError bool
 	}
 	// Paths holds the set of path roots for the build.
 	Paths struct {
@@ -58,8 +60,6 @@ var (
 		Root string
 		// The dependancy cache directory
 		Deps string
-		// The application data directory.
-		Data string
 		// The application binary directory.
 		Bin string
 	}
@@ -355,6 +355,13 @@ func Creator(of interface{}) *Step
 Creator looks up the step that builds an entity. The entity will be looked up
 using EntityOf.
 
+#### func  GoCommand
+
+```go
+func GoCommand(args ...string) *Step
+```
+GoCommand runs "go" with the specified arguments.
+
 #### func  GoRun
 
 ```go
@@ -378,6 +385,14 @@ want to be updated together.
 func NewStep(a func(*Step) error) *Step
 ```
 NewStep creates and returns a new step that runs the supplied action.
+
+#### func (*Step) Access
+
+```go
+func (s *Step) Access(v ...string) *Step
+```
+Access adds the supplied shared resource names to the list of resources accessed
+by this step.
 
 #### func (*Step) AlwaysRun
 
@@ -412,6 +427,13 @@ DependsStruct adds all the fields of the supplied struct as input dependacies of
 the step. It is an error if the struct has any fields that are not public fields
 of types that implement Entity.
 
+#### func (*Step) Disable
+
+```go
+func (s *Step) Disable() *Step
+```
+Disable marks a step as disabled, so it will not run.
+
 #### func (*Step) HasInput
 
 ```go
@@ -433,7 +455,7 @@ outputs.
 ```go
 func (s *Step) String() string
 ```
-String returns the name of the first output if present, for debugging.
+String returns the name of the first output if present, for logging.
 
 #### func (*Step) UseDepsFile
 
