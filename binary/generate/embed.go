@@ -44,6 +44,9 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Pointer"}}e->object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->object({{.Name}});{{end}}
 
+{{define "Cpp.Encode#[]uint8"}}e->Uint32({{.Name}}.size());
+»»»e->Data({{.Name}}.data(), {{.Name}}.size());{{end}}
+
 {{define "Cpp.Encode.Slice"}}e->Uint32({{.Name}}.size());
 »»»for (int i = 0; i < {{.Name}}.size(); i++) {
 »»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}

@@ -117,9 +117,7 @@ namespace atom {
         virtual void Encode(Encoder* e) const {
             e->Id(this->mID);
             e->Uint32(this->mData.size());
-            for (int i = 0; i < this->mData.size(); i++) {
-                e->Uint8(this->mData[i]);
-            }
+            e->Data(this->mData.data(), this->mData.size());
         }
 
         gapic::Id mID;
