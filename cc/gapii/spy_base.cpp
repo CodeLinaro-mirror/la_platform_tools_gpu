@@ -45,17 +45,15 @@ void SpyBase::observe(gapic::Array<Observation>& observations) {
     v.clear();
     v.reserve(mPendingObservations.count());
     for (auto p : mPendingObservations) {
-        const void* base = reinterpret_cast<const void*>(p.start);
-        uint64_t size = p.end - p.start;
-        gapic::Id id = gapic::Id::Hash(base, size);
+        gapic::Array<uint8_t> array(reinterpret_cast<uint8_t*>(p.start), p.end - p.start);
+        gapic::Id id = gapic::Id::Hash(array.data(), array.size());
         if (mResources.count(id) == 0) {
             mEncoder->Uint16(0xfffd);  // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
-            mEncoder->Id(id);
-            mEncoder->Uint32(size);
-            mEncoder->Data(base, size);
+            gapic::coder::atom::Resource resource(id, array);
+            mEncoder->Value(resource);
             mResources.emplace(id);
         }
-        v.push_back(Observation(Range(p.start, size), id));
+        v.push_back(Observation(Range(p.start, array.size()), id));
     }
     mPendingObservations.clear();
 }
