@@ -26,8 +26,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -251,8 +253,24 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			return
 		}
 
+		atomMap := schema.AtomMap{}
+		for _, a := range s.Atoms {
+			name := a.Name
+			var match binary.Class
+			c.schemaNamespace.Visit(func(class binary.Class) {
+				if class.(*bschema.Class).Display == name {
+					match = class
+				}
+			})
+			if match == nil {
+				l.Errorf("No binary schema entry for %s", name)
+				return
+			}
+			atomMap[a.Type] = match
+		}
+
 		c.Run(func() {
-			atoms, err := schema.DecodeAtoms(atoms, s)
+			atoms, err := schema.DecodeAtoms(atoms, s, atomMap)
 			if err != nil {
 				panic(err)
 			}
