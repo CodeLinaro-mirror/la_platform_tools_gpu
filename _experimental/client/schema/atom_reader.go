@@ -19,13 +19,16 @@ import (
 	"fmt"
 	"sort"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+type AtomMap map[uint16]binary.Class
+
 // DecodeAtoms decodes all atoms from the AtomStream stream.
-func DecodeAtoms(stream service.AtomStream, schema service.Schema) ([]Atom, error) {
+func DecodeAtoms(stream service.AtomStream, schema service.Schema, atomMap AtomMap) ([]Atom, error) {
 	d := cyclic.Decoder(vle.Reader(bytes.NewReader(stream.Data)))
 	// Read all the atoms from the stream
 	atoms := []Atom{}
@@ -48,6 +51,11 @@ func DecodeAtoms(stream service.AtomStream, schema service.Schema) ([]Atom, erro
 		atomInfo := schema.Atoms[idx]
 		if atomInfo.Type != ty {
 			return nil, fmt.Errorf("(%d) Atom type 0x%x not found in schema!", i, ty)
+		}
+
+		_, classFound := atomMap[ty]
+		if !classFound {
+			return nil, fmt.Errorf("(%d) Atom type 0x%x not found in decoder map!", i, ty)
 		}
 
 		atom, err := UnpackAtom(d, atomInfo)
