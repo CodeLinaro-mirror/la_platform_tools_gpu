@@ -72,6 +72,7 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 		)
 
 		var (
+			origProgramID            = c.BoundProgram
 			origRenderbufferID       = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
 			origReadFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
 			origDrawFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
@@ -104,9 +105,10 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 		undoList := []atom.Atom{}
 		for _, cap := range []Capability{
 			Capability_GL_BLEND,
-			Capability_GL_DEPTH_TEST,
-			Capability_GL_STENCIL_TEST,
 			Capability_GL_CULL_FACE,
+			Capability_GL_DEPTH_TEST,
+			Capability_GL_SCISSOR_TEST,
+			Capability_GL_STENCIL_TEST,
 		} {
 			capability := cap
 			if c.Capabilities[capability] {
@@ -195,6 +197,12 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
 			NewGlDeleteFramebuffers(1, memory.Tmp.Base).
 				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
+
+			// Restore program state.
+			NewGlUseProgram(origProgramID),
+			NewGlDeleteProgram(programID),
+			NewGlDeleteShader(vertexShaderID),
+			NewGlDeleteShader(fragmentShaderID),
 		)
 
 		return nil
@@ -260,10 +268,15 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 }
 
 func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32, img chan<- replay.Image) {
-	origPackAlignment := getContext(s).PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
+	ctx := getContext(s)
+	origPackAlignment := ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
 		NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1).Replay(i, s, d, l, b)
 		defer NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment).Replay(i, s, d, l, b)
+	}
+	if origPackBuffer, ok := ctx.BoundBuffers[BufferTarget_GL_PIXEL_PACK_BUFFER]; ok && origPackBuffer != 0 {
+		NewGlBindBuffer(BufferTarget_GL_PIXEL_PACK_BUFFER, 0).Replay(i, s, d, l, b)
+		defer NewGlBindBuffer(BufferTarget_GL_PIXEL_PACK_BUFFER, origPackBuffer).Replay(i, s, d, l, b)
 	}
 
 	imageSize := uint64(width * height * 4)
