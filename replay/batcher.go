@@ -107,12 +107,22 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	builder := builder.New(architecture)
 
-	transforms.Transform(atoms, &adapter{
-		state:   gfxapi.NewState(),
-		db:      b.database,
-		logger:  b.logger,
-		builder: builder,
-	})
+	if err := func() (err interface{}) {
+		// Prevent panics from causing GAPIS to fall over.
+		// This is temporary, as atoms should return errors instead of causing
+		// runtime panics.
+		defer func() { err = recover() }()
+		transforms.Transform(atoms, &adapter{
+			state:   gfxapi.NewState(),
+			db:      b.database,
+			logger:  b.logger,
+			builder: builder,
+		})
+		return
+	}(); err != nil {
+		b.logger.Errorf("Panic raised while transforming atoms for replay: %v", err)
+		return fmt.Errorf("%v", err)
+	}
 
 	if config.DebugReplay {
 		b.logger.Infof("Building payload...")

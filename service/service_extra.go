@@ -205,6 +205,18 @@ type resultResolveCapture struct {
 	value Capture
 }
 
+// Call ResolveReport
+type callResolveReport struct {
+	binary.Generate
+	id ReportId
+}
+
+// Result ResolveReport
+type resultResolveReport struct {
+	binary.Generate
+	value Report
+}
+
 // Call ResolveDevice
 type callResolveDevice struct {
 	binary.Generate

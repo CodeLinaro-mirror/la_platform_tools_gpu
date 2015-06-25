@@ -121,6 +121,14 @@ func (c callResolveCapture) Format(f fmt.State, r rune) {
 func (r resultResolveCapture) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callResolveReport) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "ResolveReport(id: %v)",
+		c.id,
+	)
+}
+func (r resultResolveReport) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callResolveDevice) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveDevice(id: %v)",
 		c.id,
@@ -194,6 +202,9 @@ func (h ImageInfoId) Valid() bool {
 func (h MemoryInfoId) Valid() bool {
 	return h.ID.Valid()
 }
+func (h ReportId) Valid() bool {
+	return h.ID.Valid()
+}
 func (h SchemaId) Valid() bool {
 	return h.ID.Valid()
 }
@@ -258,6 +269,9 @@ func (a MemoryRangeArray) Format(f fmt.State, c rune) {
 func (a ParameterInfoArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ParameterInfoˢ", len(a))
 }
+func (a ReportItemArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]ReportItemˢ", len(a))
+}
 func (a TypeInfoArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]TypeInfoˢ", len(a))
 }
@@ -268,6 +282,14 @@ func (a U8Array) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]U8ˢ", len(a))
 }
 
+func (i Severity) IsEmergency() bool           { return i == SeverityEmergency }
+func (i Severity) IsAlert() bool               { return i == SeverityAlert }
+func (i Severity) IsCritical() bool            { return i == SeverityCritical }
+func (i Severity) IsError() bool               { return i == SeverityError }
+func (i Severity) IsWarning() bool             { return i == SeverityWarning }
+func (i Severity) IsNotice() bool              { return i == SeverityNotice }
+func (i Severity) IsInformational() bool       { return i == SeverityInformational }
+func (i Severity) IsDebug() bool               { return i == SeverityDebug }
 func (i ImageFormat) IsRGBA8() bool            { return i == ImageFormatRGBA8 }
 func (i ImageFormat) IsFloat32() bool          { return i == ImageFormatFloat32 }
 func (i TimingMask) IsTimingPerCommand() bool  { return i == TimingMaskTimingPerCommand }
@@ -336,12 +358,14 @@ func (c *Device) GetVersion() string         { return c.Version }
 func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
+	Report ReportId,
 	Apis ApiIdArray,
 	Schema SchemaId,
 ) *Capture {
 	return &Capture{
 		Name:   Name,
 		Atoms:  Atoms,
+		Report: Report,
 		Apis:   Apis,
 		Schema: Schema,
 	}
@@ -349,8 +373,35 @@ func CreateCapture(
 
 func (c *Capture) GetName() string        { return c.Name }
 func (c *Capture) GetAtoms() AtomStreamId { return c.Atoms }
+func (c *Capture) GetReport() ReportId    { return c.Report }
 func (c *Capture) GetApis() ApiIdArray    { return c.Apis }
 func (c *Capture) GetSchema() SchemaId    { return c.Schema }
+
+func CreateReport(
+	Items ReportItemArray,
+) *Report {
+	return &Report{
+		Items: Items,
+	}
+}
+
+func (c *Report) GetItems() ReportItemArray { return c.Items }
+
+func CreateReportItem(
+	Severity Severity,
+	Message string,
+	Atom uint64,
+) *ReportItem {
+	return &ReportItem{
+		Severity: Severity,
+		Message:  Message,
+		Atom:     Atom,
+	}
+}
+
+func (c *ReportItem) GetSeverity() Severity { return c.Severity }
+func (c *ReportItem) GetMessage() string    { return c.Message }
+func (c *ReportItem) GetAtom() uint64       { return c.Atom }
 
 func CreateBinary(
 	Data U8Array,
