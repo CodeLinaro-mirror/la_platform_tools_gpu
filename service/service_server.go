@@ -122,6 +122,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callResolveReport:
+			if res, err := server.ResolveReport(call.id, l); err == nil {
+				return &resultResolveReport{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callResolveDevice:
 			if res, err := server.ResolveDevice(call.id, l); err == nil {
 				return &resultResolveDevice{value: res}
@@ -238,6 +244,30 @@ func (r Resolver) ResolveCapture(id CaptureId, l log.Logger) (Capture, error) {
 		return Capture{}, err
 	}
 	return *(out.(*Capture)), nil
+}
+
+// StoreReport stores v into the database d, returning the ReportId.
+func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error) {
+	id, err := database.Store(v, d, l)
+	return ReportId{ID: id}, err
+}
+
+// ResolveReport loads and returns the Report stored in the database d, using id.
+func ResolveReport(id ReportId, d database.Database, l log.Logger) (*Report, error) {
+	out, err := d.Resolve(id.ID, l)
+	if err != nil {
+		return nil, err
+	}
+	return (out.(*Report)), nil
+}
+
+// ResolveReport loads and returns the Report stored in the resolver's database, using id.
+func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
+	out, err := r.Database.Resolve(id.ID, l)
+	if err != nil {
+		return Report{}, err
+	}
+	return *(out.(*Report)), nil
 }
 
 // StoreDevice stores v into the database d, returning the DeviceId.

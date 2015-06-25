@@ -171,6 +171,16 @@ func (c client) ResolveCapture(id CaptureId, l log.Logger) (res Capture, err err
 	return
 }
 
+func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error) {
+	var val interface{}
+	if val, err = c.Send(&callResolveReport{id: id}); err == nil {
+		res = val.(*resultResolveReport).value
+	} else {
+		l.Errorf("RPC ResolveReport failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) ResolveDevice(id DeviceId, l log.Logger) (res Device, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveDevice{id: id}); err == nil {

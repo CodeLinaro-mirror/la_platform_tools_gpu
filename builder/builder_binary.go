@@ -16,6 +16,7 @@ import (
 )
 
 func init() {
+	registry.Add((*BuildReport)(nil).Class())
 	registry.Add((*ConvertImage)(nil).Class())
 	registry.Add((*GetFramebufferColor)(nil).Class())
 	registry.Add((*GetFramebufferDepth)(nil).Class())
@@ -33,6 +34,7 @@ func init() {
 }
 
 var (
+	binaryIDBuildReport                     = binary.ID{0xe8, 0xae, 0x2a, 0xe0, 0x20, 0xd0, 0xc1, 0x44, 0x33, 0x78, 0x81, 0x4e, 0x84, 0xda, 0x0e, 0xcc, 0x27, 0x89, 0xc6, 0xb5}
 	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
 	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
 	binaryIDGetFramebufferDepth             = binary.ID{0x59, 0xd2, 0x23, 0x3c, 0xfd, 0xdc, 0xbf, 0x12, 0xf5, 0xe3, 0xff, 0x94, 0x6c, 0x8a, 0xb8, 0x86, 0xba, 0x9d, 0xb6, 0x55}
@@ -48,6 +50,54 @@ var (
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
 	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x92, 0xe3, 0x84, 0xf0, 0x3e, 0x83, 0x2c, 0x83, 0xc0, 0x22, 0x15, 0xad, 0x75, 0x9b, 0x02, 0xdc, 0x1f, 0x4e, 0x49, 0x4c}
 )
+
+type binaryClassBuildReport struct{}
+
+func (*BuildReport) Class() binary.Class {
+	return (*binaryClassBuildReport)(nil)
+}
+func doEncodeBuildReport(e binary.Encoder, o *BuildReport) error {
+	if err := e.Value(&o.Atoms); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeBuildReport(d binary.Decoder, o *BuildReport) error {
+	if err := d.Value(&o.Atoms); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipBuildReport(d binary.Decoder) error {
+	if err := d.SkipValue((*service.AtomStreamId)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassBuildReport) ID() binary.ID      { return binaryIDBuildReport }
+func (*binaryClassBuildReport) New() binary.Object { return &BuildReport{} }
+func (*binaryClassBuildReport) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBuildReport(e, obj.(*BuildReport))
+}
+func (*binaryClassBuildReport) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &BuildReport{}
+	return obj, doDecodeBuildReport(d, obj)
+}
+func (*binaryClassBuildReport) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBuildReport(d, obj.(*BuildReport))
+}
+func (*binaryClassBuildReport) Skip(d binary.Decoder) error { return doSkipBuildReport(d) }
+func (*binaryClassBuildReport) Schema() *schema.Class       { return schemaBuildReport }
+
+var schemaBuildReport = &schema.Class{
+	TypeID:  binaryIDBuildReport,
+	Package: "builder",
+	Name:    "BuildReport",
+	Display: "BuildReport",
+	Fields: []schema.Field{
+		{Declared: "Atoms", Type: &schema.Struct{Name: "service.AtomStreamId"}},
+	},
+}
 
 type binaryClassConvertImage struct{}
 

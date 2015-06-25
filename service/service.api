@@ -22,6 +22,7 @@ import schema "schema.api"
 @handle type string HierarchyId
 @handle type string ImageInfoId
 @handle type string MemoryInfoId
+@handle type string ReportId
 @handle type string SchemaId
 @handle type string TimingInfoId
 
@@ -117,6 +118,7 @@ cmd CaptureId ReplaceAtom(CaptureId capture,
 cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
 cmd Binary             ResolveBinary(BinaryId id) { return ? }
 cmd Capture            ResolveCapture(CaptureId id) { return ? }
+cmd Report             ResolveReport(ReportId id) { return ? }
 cmd Device             ResolveDevice(DeviceId id) { return ? }
 cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
 cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
@@ -141,9 +143,32 @@ class Device {
 // Capture describes single capture file held by the server.
 class Capture {
   string              Name     // Name given to the capture. e.g. "KittyWorld"
-  AtomStreamId        Atoms    // The identifier to the stream of atoms in this capture.
+  AtomStreamId        Atoms    // The identifier of the stream of atoms in this capture.
+  ReportId            Report   // The identifier of the report of the capture.
   ApiId[]             Apis     // List of graphics APIs used by this capture.
   SchemaId            Schema   // The schema used to decode types in this capture.
+}
+
+// Report describes all warnings and errors found by a capture.
+class Report {
+  ReportItem[] Items
+}
+
+enum Severity {
+  Emergency     = 0, // Errors that indicate a failure of the server, no further data should be trusted.
+  Alert         = 1, // Errors that indicate a failure of the server, possibly recoverable.
+  Critical      = 2, // Errors so severe that no further analysis or replay can be performed beyond this point.
+  Error         = 3, // Errors describing problems that should be fixed. Likely to result in undefined behavior.
+  Warning       = 4, // Warnings describe issues that might affect performance or compatibility, but could be ignored.
+  Notice        = 5, // Normal but significant condition message.
+  Informational = 6, // Informational messages, safe to ignore.
+  Debug         = 7, // Verbose, debug-level messages.
+}
+
+class ReportItem {
+  Severity Severity // The severity of the report item.
+  string   Message  // The message for the item.
+  u64      Atom     // The index of the atom the item refers to.
 }
 
 // Binary holds a blob of data.

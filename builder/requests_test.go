@@ -23,6 +23,7 @@ import (
 func TestLazyInterfaceCompliance(t *testing.T) {
 	// Interface compliance tests
 	_ = []database.Lazy{
+		(*BuildReport)(nil),
 		(*ConvertImage)(nil),
 		(*GetFramebufferColor)(nil),
 		(*GetFramebufferDepth)(nil),

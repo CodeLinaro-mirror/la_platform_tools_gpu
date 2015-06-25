@@ -20,6 +20,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -56,12 +57,29 @@ func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.
 		return nil, err
 	}
 
-	newStreamId, err := service.StoreAtomStream(&newStream, d, l)
+	streamID, err := service.StoreAtomStream(&newStream, d, l)
 	if err != nil {
 		return nil, err
 	}
 
-	capture := *original
-	capture.Atoms = newStreamId
-	return &capture, nil
+	schema := schema.Schema()
+	schemaID, err := service.StoreSchema(&schema, d, l)
+	if err != nil {
+		return nil, err
+	}
+
+	reportID, err := getBuildReport(streamID, d, l)
+	if err != nil {
+		return nil, err
+	}
+
+	capture := &service.Capture{
+		Apis:   original.Apis,
+		Name:   original.Name + "*",
+		Atoms:  streamID,
+		Schema: schemaID,
+		Report: reportID,
+	}
+
+	return capture, nil
 }
