@@ -18,7 +18,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
@@ -59,8 +59,10 @@ func createControls(appCtx *ApplicationContext, name string, value interface{}) 
 		addButton(fmt.Sprintf("0x%.8x", ty)).OnClick(func(gxui.MouseEvent) {
 			appCtx.SelectAddress(ty)
 		})
-	case schema.EnumValue:
-		addLabel(fmt.Sprintf("%v", ty))
+	/*
+		case schema.EnumValue:
+			addLabel(fmt.Sprintf("%v", ty))
+	*/
 	case string, int, uint, int32, uint32, int16, uint16, int8, uint8, float32, float64, bool:
 		// TODO: Click to select object
 		// obj := state.LookupId(ty)
@@ -83,33 +85,34 @@ func (i *StateAdapterItem) Init(appCtx *ApplicationContext, key string, value in
 	i.appCtx = appCtx
 	i.key = key
 	i.value = value
-
-	switch ty := value.(type) {
-	case schema.Struct:
-		for _, f := range ty.Fields {
-			child := &StateAdapterItem{}
-			child.Init(appCtx, f.Info.Name, f.Value)
-			i.children = append(i.children, child)
+	/*
+		switch ty := value.(type) {
+		case schema.Struct:
+			for _, f := range ty.Fields {
+				child := &StateAdapterItem{}
+				child.Init(appCtx, f.Info.Name, f.Value)
+				i.children = append(i.children, child)
+			}
+		case schema.Class:
+			for _, f := range ty.Fields {
+				child := &StateAdapterItem{}
+				child.Init(appCtx, f.Info.Name, f.Value)
+				i.children = append(i.children, child)
+			}
+		case schema.Array:
+			for k, e := range ty.Elements {
+				child := &StateAdapterItem{}
+				child.Init(appCtx, fmt.Sprintf("%d", k), e)
+				i.children = append(i.children, child)
+			}
+		case schema.Map:
+			for _, e := range ty.Elements {
+				child := &StateAdapterItem{}
+				child.Init(appCtx, fmt.Sprintf("%v", e.Key), e.Value)
+				i.children = append(i.children, child)
+			}
 		}
-	case schema.Class:
-		for _, f := range ty.Fields {
-			child := &StateAdapterItem{}
-			child.Init(appCtx, f.Info.Name, f.Value)
-			i.children = append(i.children, child)
-		}
-	case schema.Array:
-		for k, e := range ty.Elements {
-			child := &StateAdapterItem{}
-			child.Init(appCtx, fmt.Sprintf("%d", k), e)
-			i.children = append(i.children, child)
-		}
-	case schema.Map:
-		for _, e := range ty.Elements {
-			child := &StateAdapterItem{}
-			child.Init(appCtx, fmt.Sprintf("%v", e.Key), e.Value)
-			i.children = append(i.children, child)
-		}
-	}
+	*/
 }
 
 func (i *StateAdapterItem) Count() int {

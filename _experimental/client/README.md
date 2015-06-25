@@ -116,6 +116,12 @@ func CreateMemoryPanelReinterpretButtons(
 func CreateProfilerPanel(appCtx *ApplicationContext) gxui.Control
 ```
 
+#### func  CreateReportPanel
+
+```go
+func CreateReportPanel(appCtx *ApplicationContext) gxui.Control
+```
+
 #### func  CreateStatePanel
 
 ```go
@@ -138,6 +144,12 @@ func CreateWireframeButton(appCtx *ApplicationContext) gxui.Button
 
 ```go
 func DoReplay(appCtx *ApplicationContext)
+```
+
+#### func  ImportCapture
+
+```go
+func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Logger)
 ```
 
 #### func  Run
@@ -201,7 +213,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 #### func (*ApplicationContext) Atoms
 
 ```go
-func (c *ApplicationContext) Atoms() []schema.Atom
+func (c *ApplicationContext) Atoms() []Atom
 ```
 
 #### func (*ApplicationContext) Capture
@@ -221,6 +233,13 @@ func (c *ApplicationContext) CaptureID() service.CaptureId
 ```go
 func (c *ApplicationContext) ColorBuffer() gxui.Texture
 ```
+
+#### func (*ApplicationContext) DecodeAtoms
+
+```go
+func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Schema) ([]Atom, error)
+```
+DecodeAtoms decodes all atoms from the AtomStream stream.
 
 #### func (*ApplicationContext) DepthBuffer
 
@@ -250,6 +269,12 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 
 ```go
 func (c *ApplicationContext) LoadHierarchy()
+```
+
+#### func (*ApplicationContext) LoadReport
+
+```go
+func (c *ApplicationContext) LoadReport()
 ```
 
 #### func (*ApplicationContext) LoadState
@@ -312,6 +337,12 @@ func (c *ApplicationContext) OnHierarchyUpdated(f func()) gxui.EventSubscription
 func (c *ApplicationContext) OnObjectSelected(f func()) gxui.EventSubscription
 ```
 
+#### func (*ApplicationContext) OnReportUpdated
+
+```go
+func (c *ApplicationContext) OnReportUpdated(f func()) gxui.EventSubscription
+```
+
 #### func (*ApplicationContext) OnRequestReplay
 
 ```go
@@ -339,7 +370,7 @@ func (c *ApplicationContext) OnWireframeChanged(f func()) gxui.EventSubscription
 #### func (*ApplicationContext) ReplaceAtom
 
 ```go
-func (c *ApplicationContext) ReplaceAtom(a schema.Atom, id atom.ID)
+func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID)
 ```
 
 #### func (*ApplicationContext) RequestMemory
@@ -413,6 +444,7 @@ func (c *ApplicationContext) SelectedAddress() memory.Pointer
 ```go
 func (c *ApplicationContext) SelectedAtomID() atom.ID
 ```
+func (c *ApplicationContext) State() schema.Struct { return c.state }
 
 #### func (*ApplicationContext) SelectedDevice
 
@@ -430,12 +462,6 @@ func (c *ApplicationContext) SelectedObject() interface{}
 
 ```go
 func (c *ApplicationContext) SetWireframe(value bool)
-```
-
-#### func (*ApplicationContext) State
-
-```go
-func (c *ApplicationContext) State() schema.Struct
 ```
 
 #### func (*ApplicationContext) Theme
@@ -466,6 +492,74 @@ func (c *ApplicationContext) UpdateSchema()
 
 ```go
 func (c *ApplicationContext) Wireframe() bool
+```
+
+#### type Atom
+
+```go
+type Atom struct {
+}
+```
+
+
+#### func (*Atom) Api
+
+```go
+func (a *Atom) Api() service.ApiId
+```
+
+#### func (*Atom) DisplayName
+
+```go
+func (a *Atom) DisplayName() string
+```
+
+#### func (*Atom) DocumentationUrl
+
+```go
+func (a *Atom) DocumentationUrl() string
+```
+
+#### func (*Atom) Field
+
+```go
+func (a *Atom) Field(index int) (schema.Field, interface{})
+```
+
+#### func (*Atom) FieldCount
+
+```go
+func (a *Atom) FieldCount() int
+```
+
+#### func (*Atom) IsCommand
+
+```go
+func (a *Atom) IsCommand() bool
+```
+
+#### func (*Atom) IsDrawCall
+
+```go
+func (a *Atom) IsDrawCall() bool
+```
+
+#### func (*Atom) IsEndOfFrame
+
+```go
+func (a *Atom) IsEndOfFrame() bool
+```
+
+#### func (*Atom) Observations
+
+```go
+func (a *Atom) Observations() *atom.Observations
+```
+
+#### func (*Atom) SetField
+
+```go
+func (a *Atom) SetField(index int, value interface{})
 ```
 
 #### type CommandAdapter
@@ -689,7 +783,7 @@ func (a *FilmStripAdapter) ItemIndex(item gxui.AdapterItem) int
 #### func (*FilmStripAdapter) SetAtoms
 
 ```go
-func (a *FilmStripAdapter) SetAtoms(atoms []schema.Atom)
+func (a *FilmStripAdapter) SetAtoms(atoms []Atom)
 ```
 
 #### func (*FilmStripAdapter) Size
@@ -999,6 +1093,45 @@ func (v RGBA8888) Read(data []byte) gxui.Color
 
 ```go
 func (v RGBA8888) SizeBytes() int
+```
+
+#### type ReportAdapter
+
+```go
+type ReportAdapter struct {
+	gxui.AdapterBase
+}
+```
+
+
+#### func (*ReportAdapter) Count
+
+```go
+func (a *ReportAdapter) Count() int
+```
+
+#### func (*ReportAdapter) Create
+
+```go
+func (a *ReportAdapter) Create(t gxui.Theme, index int) gxui.Control
+```
+
+#### func (*ReportAdapter) ItemAt
+
+```go
+func (a *ReportAdapter) ItemAt(index int) gxui.AdapterItem
+```
+
+#### func (*ReportAdapter) ItemIndex
+
+```go
+func (a *ReportAdapter) ItemIndex(item gxui.AdapterItem) int
+```
+
+#### func (*ReportAdapter) Size
+
+```go
+func (a *ReportAdapter) Size(theme gxui.Theme) math.Size
 ```
 
 #### type S16
