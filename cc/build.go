@@ -183,25 +183,25 @@ func (t Target) Build(env build.Environment) {
 	// dynamic-library.
 	// Investigate linker flags to use build.Files(gapiiLib, gapicLib)
 	spyInputs := gapiiSource.Append(gapicLib)
-	cpp.MakeDynamicLibrary(spyInputs, t.Spy, env)
+	cpp.MakeDynamicLibrary("spy", spyInputs, t.Spy, env)
 
 	// Build replayd from the gapir static library and Main.cpp.
 	replaydSource := build.Files(ReplaydRoot.Join("main.cpp"))
 	replaydInputs := replaydSource.Append(gapirLib, gapicLib)
-	replayd := cpp.MakeExecutable(replaydInputs, t.Replayd, env)
+	replayd := cpp.MakeExecutable("replayd", replaydInputs, t.Replayd, env)
 
 	// Build tests.
 	gapicTestSource := GapicRoot.Glob(t.SourceFiles...).
 		Append(GapicRoot.Join(t.Gapic.OS).Glob(t.SourceFiles...)...).
 		Filter("*_test.cpp")
 	gapicTestInputs := gapicTestSource.Append(gtestLib, gmockLib, gapicLib)
-	gapicTest := cpp.MakeExecutable(gapicTestInputs, t.GapicTests, env)
+	gapicTest := cpp.MakeExecutable("gapic-tests", gapicTestInputs, t.GapicTests, env)
 
 	gapirTestSource := GapirRoot.Glob(t.SourceFiles...).
 		Append(GapirRoot.Join(t.Gapir.OS).Glob(t.SourceFiles...)...).
 		Filter("*_test.cpp")
 	gapirTestInputs := gapirTestSource.Append(gtestLib, gmockLib, gapirLib, gapicLib)
-	gapirTest := cpp.MakeExecutable(gapirTestInputs, t.GapirTests, env)
+	gapirTest := cpp.MakeExecutable("gapir-tests", gapirTestInputs, t.GapirTests, env)
 
 	if t.Replayd.OS == maker.HostOS {
 		cpp.MakeRunTest(gapicTest, t.GapicTests)
