@@ -326,7 +326,7 @@ var schemaClass = &Class{
 		{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Display", Type: &Primitive{Name: "string", Method: String}},
-		{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field"}}},
+		{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field", ID: (*Field)(nil).Class().ID()}}},
 	},
 }
 
@@ -472,7 +472,7 @@ var schemaInt16Constants = &Class{
 	Display: "Int16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant", ID: (*Int16Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -618,7 +618,7 @@ var schemaInt32Constants = &Class{
 	Display: "Int32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant", ID: (*Int32Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -764,7 +764,7 @@ var schemaInt64Constants = &Class{
 	Display: "Int64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant", ID: (*Int64Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -910,7 +910,7 @@ var schemaInt8Constants = &Class{
 	Display: "Int8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant", ID: (*Int8Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -1508,7 +1508,7 @@ var schemaUint16Constants = &Class{
 	Display: "Uint16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant", ID: (*Uint16Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -1654,7 +1654,7 @@ var schemaUint32Constants = &Class{
 	Display: "Uint32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant", ID: (*Uint32Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -1800,7 +1800,7 @@ var schemaUint64Constants = &Class{
 	Display: "Uint64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant", ID: (*Uint64Constant)(nil).Class().ID()}}},
 	},
 }
 
@@ -1946,6 +1946,6 @@ var schemaUint8Constants = &Class{
 	Display: "Uint8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
-		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant"}}},
+		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant", ID: (*Uint8Constant)(nil).Class().ID()}}},
 	},
 }
