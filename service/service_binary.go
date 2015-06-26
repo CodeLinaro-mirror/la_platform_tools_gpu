@@ -399,7 +399,7 @@ var schemaStructInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
+		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo", ID: (*FieldInfo)(nil).Class().ID()}}}},
 	},
 }
 
@@ -456,8 +456,8 @@ var schemaApiSchema = &schema.Class{
 	Name:    "ApiSchema",
 	Display: "ApiSchema",
 	Fields: []schema.Field{
-		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
-		{Declared: "State", Type: &schema.Struct{Name: "StructInfo"}},
+		{Declared: "Api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
+		{Declared: "State", Type: &schema.Struct{Name: "StructInfo", ID: (*StructInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -686,8 +686,8 @@ var schemaAtomGroup = &schema.Class{
 	Display: "AtomGroup",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange"}},
-		{Declared: "SubGroups", Type: &schema.Slice{Alias: "AtomGroupArray", ValueType: &schema.Struct{Name: "AtomGroup"}}},
+		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange", ID: (*AtomRange)(nil).Class().ID()}},
+		{Declared: "SubGroups", Type: &schema.Slice{Alias: "AtomGroupArray", ValueType: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}}},
 	},
 }
 
@@ -908,10 +908,10 @@ var schemaAtomInfo = &schema.Class{
 	Name:    "AtomInfo",
 	Display: "AtomInfo",
 	Fields: []schema.Field{
-		{Declared: "Api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "Api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Parameters", Type: &schema.Slice{Alias: "ParameterInfoArray", ValueType: &schema.Struct{Name: "ParameterInfo"}}},
+		{Declared: "Parameters", Type: &schema.Slice{Alias: "ParameterInfoArray", ValueType: &schema.Struct{Name: "ParameterInfo", ID: (*ParameterInfo)(nil).Class().ID()}}},
 		{Declared: "IsCommand", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "IsDrawCall", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "IsEndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -1476,10 +1476,10 @@ var schemaCapture = &schema.Class{
 	Display: "Capture",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId"}},
-		{Declared: "Report", Type: &schema.Struct{Name: "ReportId"}},
-		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiIdArray", ValueType: &schema.Struct{Name: "ApiId"}}},
-		{Declared: "Schema", Type: &schema.Struct{Name: "SchemaId"}},
+		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
+		{Declared: "Report", Type: &schema.Struct{Name: "ReportId", ID: (*ReportId)(nil).Class().ID()}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiIdArray", ValueType: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}}},
+		{Declared: "Schema", Type: &schema.Struct{Name: "SchemaId", ID: (*SchemaId)(nil).Class().ID()}},
 	},
 }
 
@@ -1662,8 +1662,8 @@ var schemaClassInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo"}}}},
-		{Declared: "Extends", Type: &schema.Slice{Alias: "ClassInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ClassInfo"}}}},
+		{Declared: "Fields", Type: &schema.Slice{Alias: "FieldInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "FieldInfo", ID: (*FieldInfo)(nil).Class().ID()}}}},
+		{Declared: "Extends", Type: &schema.Slice{Alias: "ClassInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ClassInfo", ID: (*ClassInfo)(nil).Class().ID()}}}},
 	},
 }
 
@@ -2058,8 +2058,8 @@ var schemaEnumInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TypeKind", Method: schema.Int32}},
-		{Declared: "Entries", Type: &schema.Slice{Alias: "EnumEntryArray", ValueType: &schema.Struct{Name: "EnumEntry"}}},
-		{Declared: "Extends", Type: &schema.Slice{Alias: "EnumInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "EnumInfo"}}}},
+		{Declared: "Entries", Type: &schema.Slice{Alias: "EnumEntryArray", ValueType: &schema.Struct{Name: "EnumEntry", ID: (*EnumEntry)(nil).Class().ID()}}},
+		{Declared: "Extends", Type: &schema.Slice{Alias: "EnumInfoPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "EnumInfo", ID: (*EnumInfo)(nil).Class().ID()}}}},
 	},
 }
 
@@ -2107,7 +2107,7 @@ var schemaHierarchy = &schema.Class{
 	Name:    "Hierarchy",
 	Display: "Hierarchy",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup"}},
+		{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}},
 	},
 }
 
@@ -2241,7 +2241,7 @@ var schemaImageInfo = &schema.Class{
 		{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "Data", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
 	},
 }
 
@@ -2593,9 +2593,9 @@ var schemaMemoryInfo = &schema.Class{
 	Display: "MemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
-		{Declared: "Current", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
-		{Declared: "Unknown", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange"}}},
+		{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Current", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Unknown", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
 	},
 }
 
@@ -2859,7 +2859,7 @@ var schemaReport = &schema.Class{
 	Name:    "Report",
 	Display: "Report",
 	Fields: []schema.Field{
-		{Declared: "Items", Type: &schema.Slice{Alias: "ReportItemArray", ValueType: &schema.Struct{Name: "ReportItem"}}},
+		{Declared: "Items", Type: &schema.Slice{Alias: "ReportItemArray", ValueType: &schema.Struct{Name: "ReportItem", ID: (*ReportItem)(nil).Class().ID()}}},
 	},
 }
 
@@ -2952,8 +2952,8 @@ var schemaSchema = &schema.Class{
 	Name:    "Schema",
 	Display: "Schema",
 	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Slice{Alias: "AtomInfoArray", ValueType: &schema.Struct{Name: "AtomInfo"}}},
-		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiSchemaArray", ValueType: &schema.Struct{Name: "ApiSchema"}}},
+		{Declared: "Atoms", Type: &schema.Slice{Alias: "AtomInfoArray", ValueType: &schema.Struct{Name: "AtomInfo", ID: (*AtomInfo)(nil).Class().ID()}}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiSchemaArray", ValueType: &schema.Struct{Name: "ApiSchema", ID: (*ApiSchema)(nil).Class().ID()}}},
 	},
 }
 
@@ -3227,9 +3227,9 @@ var schemaTimingInfo = &schema.Class{
 	Name:    "TimingInfo",
 	Display: "TimingInfo",
 	Fields: []schema.Field{
-		{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer"}}},
-		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
-		{Declared: "PerFrame", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer"}}},
+		{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer", ID: (*AtomTimer)(nil).Class().ID()}}},
+		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
+		{Declared: "PerFrame", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
 	},
 }
 
@@ -3443,11 +3443,11 @@ var schemacallGetFramebufferColor = &schema.Class{
 	Name:    "callGetFramebufferColor",
 	Display: "callGetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "settings", Type: &schema.Struct{Name: "RenderSettings"}},
+		{Declared: "settings", Type: &schema.Struct{Name: "RenderSettings", ID: (*RenderSettings)(nil).Class().ID()}},
 	},
 }
 
@@ -3528,9 +3528,9 @@ var schemacallGetFramebufferDepth = &schema.Class{
 	Name:    "callGetFramebufferDepth",
 	Display: "callGetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -3579,7 +3579,7 @@ var schemacallGetHierarchy = &schema.Class{
 	Name:    "callGetHierarchy",
 	Display: "callGetHierarchy",
 	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 	},
 }
 
@@ -3647,9 +3647,9 @@ var schemacallGetMemoryInfo = &schema.Class{
 	Name:    "callGetMemoryInfo",
 	Display: "callGetMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "rng", Type: &schema.Struct{Name: "MemoryRange"}},
+		{Declared: "rng", Type: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}},
 	},
 }
 
@@ -3745,7 +3745,7 @@ var schemacallGetState = &schema.Class{
 	Name:    "callGetState",
 	Display: "callGetState",
 	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -3814,8 +3814,8 @@ var schemacallGetTimingInfo = &schema.Class{
 	Name:    "callGetTimingInfo",
 	Display: "callGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 		{Declared: "mask", Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32}},
 	},
 }
@@ -4009,9 +4009,9 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 	Name:    "callPrerenderFramebuffers",
 	Display: "callPrerenderFramebuffers",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Struct{Name: "DeviceId"}},
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
-		{Declared: "api", Type: &schema.Struct{Name: "ApiId"}},
+		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
 		{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "atomIds", Type: &schema.Slice{Alias: "U64Array", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
@@ -4093,10 +4093,10 @@ var schemacallReplaceAtom = &schema.Class{
 	Name:    "callReplaceAtom",
 	Display: "callReplaceAtom",
 	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 		{Declared: "atomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "atomType", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
-		{Declared: "data", Type: &schema.Struct{Name: "Binary"}},
+		{Declared: "data", Type: &schema.Struct{Name: "Binary", ID: (*Binary)(nil).Class().ID()}},
 	},
 }
 
@@ -4146,7 +4146,7 @@ var schemacallResolveAtomStream = &schema.Class{
 	Name:    "callResolveAtomStream",
 	Display: "callResolveAtomStream",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
 	},
 }
 
@@ -4194,7 +4194,7 @@ var schemacallResolveBinary = &schema.Class{
 	Name:    "callResolveBinary",
 	Display: "callResolveBinary",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
 	},
 }
 
@@ -4242,7 +4242,7 @@ var schemacallResolveCapture = &schema.Class{
 	Name:    "callResolveCapture",
 	Display: "callResolveCapture",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 	},
 }
 
@@ -4290,7 +4290,7 @@ var schemacallResolveDevice = &schema.Class{
 	Name:    "callResolveDevice",
 	Display: "callResolveDevice",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "DeviceId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
 	},
 }
 
@@ -4340,7 +4340,7 @@ var schemacallResolveHierarchy = &schema.Class{
 	Name:    "callResolveHierarchy",
 	Display: "callResolveHierarchy",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "HierarchyId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "HierarchyId", ID: (*HierarchyId)(nil).Class().ID()}},
 	},
 }
 
@@ -4390,7 +4390,7 @@ var schemacallResolveImageInfo = &schema.Class{
 	Name:    "callResolveImageInfo",
 	Display: "callResolveImageInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4440,7 +4440,7 @@ var schemacallResolveMemoryInfo = &schema.Class{
 	Name:    "callResolveMemoryInfo",
 	Display: "callResolveMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId", ID: (*MemoryInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4488,7 +4488,7 @@ var schemacallResolveReport = &schema.Class{
 	Name:    "callResolveReport",
 	Display: "callResolveReport",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "ReportId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "ReportId", ID: (*ReportId)(nil).Class().ID()}},
 	},
 }
 
@@ -4536,7 +4536,7 @@ var schemacallResolveSchema = &schema.Class{
 	Name:    "callResolveSchema",
 	Display: "callResolveSchema",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "SchemaId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "SchemaId", ID: (*SchemaId)(nil).Class().ID()}},
 	},
 }
 
@@ -4586,7 +4586,7 @@ var schemacallResolveTimingInfo = &schema.Class{
 	Name:    "callResolveTimingInfo",
 	Display: "callResolveTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId"}},
+		{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId", ID: (*TimingInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4652,7 +4652,7 @@ var schemaresultGetCaptures = &schema.Class{
 	Name:    "resultGetCaptures",
 	Display: "resultGetCaptures",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId"}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}}},
 	},
 }
 
@@ -4718,7 +4718,7 @@ var schemaresultGetDevices = &schema.Class{
 	Name:    "resultGetDevices",
 	Display: "resultGetDevices",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId"}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}}},
 	},
 }
 
@@ -4770,7 +4770,7 @@ var schemaresultGetFramebufferColor = &schema.Class{
 	Name:    "resultGetFramebufferColor",
 	Display: "resultGetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4822,7 +4822,7 @@ var schemaresultGetFramebufferDepth = &schema.Class{
 	Name:    "resultGetFramebufferDepth",
 	Display: "resultGetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4870,7 +4870,7 @@ var schemaresultGetHierarchy = &schema.Class{
 	Name:    "resultGetHierarchy",
 	Display: "resultGetHierarchy",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "HierarchyId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "HierarchyId", ID: (*HierarchyId)(nil).Class().ID()}},
 	},
 }
 
@@ -4920,7 +4920,7 @@ var schemaresultGetMemoryInfo = &schema.Class{
 	Name:    "resultGetMemoryInfo",
 	Display: "resultGetMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId", ID: (*MemoryInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -4994,7 +4994,7 @@ var schemaresultGetSchema = &schema.Class{
 	Name:    "resultGetSchema",
 	Display: "resultGetSchema",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "ClassPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class"}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "ClassPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class", ID: (*schema.Class)(nil).Class().ID()}}}},
 	},
 }
 
@@ -5042,7 +5042,7 @@ var schemaresultGetState = &schema.Class{
 	Name:    "resultGetState",
 	Display: "resultGetState",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
 	},
 }
 
@@ -5092,7 +5092,7 @@ var schemaresultGetTimingInfo = &schema.Class{
 	Name:    "resultGetTimingInfo",
 	Display: "resultGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId", ID: (*TimingInfoId)(nil).Class().ID()}},
 	},
 }
 
@@ -5140,7 +5140,7 @@ var schemaresultImport = &schema.Class{
 	Name:    "resultImport",
 	Display: "resultImport",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 	},
 }
 
@@ -5196,7 +5196,7 @@ var schemaresultPrerenderFramebuffers = &schema.Class{
 	Name:    "resultPrerenderFramebuffers",
 	Display: "resultPrerenderFramebuffers",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "BinaryId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
 	},
 }
 
@@ -5244,7 +5244,7 @@ var schemaresultReplaceAtom = &schema.Class{
 	Name:    "resultReplaceAtom",
 	Display: "resultReplaceAtom",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "CaptureId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 	},
 }
 
@@ -5296,7 +5296,7 @@ var schemaresultResolveAtomStream = &schema.Class{
 	Name:    "resultResolveAtomStream",
 	Display: "resultResolveAtomStream",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "AtomStream"}},
+		{Declared: "value", Type: &schema.Struct{Name: "AtomStream", ID: (*AtomStream)(nil).Class().ID()}},
 	},
 }
 
@@ -5346,7 +5346,7 @@ var schemaresultResolveBinary = &schema.Class{
 	Name:    "resultResolveBinary",
 	Display: "resultResolveBinary",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Binary"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Binary", ID: (*Binary)(nil).Class().ID()}},
 	},
 }
 
@@ -5396,7 +5396,7 @@ var schemaresultResolveCapture = &schema.Class{
 	Name:    "resultResolveCapture",
 	Display: "resultResolveCapture",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Capture"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}},
 	},
 }
 
@@ -5446,7 +5446,7 @@ var schemaresultResolveDevice = &schema.Class{
 	Name:    "resultResolveDevice",
 	Display: "resultResolveDevice",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Device"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Device", ID: (*Device)(nil).Class().ID()}},
 	},
 }
 
@@ -5496,7 +5496,7 @@ var schemaresultResolveHierarchy = &schema.Class{
 	Name:    "resultResolveHierarchy",
 	Display: "resultResolveHierarchy",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Hierarchy"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Hierarchy", ID: (*Hierarchy)(nil).Class().ID()}},
 	},
 }
 
@@ -5546,7 +5546,7 @@ var schemaresultResolveImageInfo = &schema.Class{
 	Name:    "resultResolveImageInfo",
 	Display: "resultResolveImageInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ImageInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ImageInfo", ID: (*ImageInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5598,7 +5598,7 @@ var schemaresultResolveMemoryInfo = &schema.Class{
 	Name:    "resultResolveMemoryInfo",
 	Display: "resultResolveMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo", ID: (*MemoryInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5648,7 +5648,7 @@ var schemaresultResolveReport = &schema.Class{
 	Name:    "resultResolveReport",
 	Display: "resultResolveReport",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Report"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Report", ID: (*Report)(nil).Class().ID()}},
 	},
 }
 
@@ -5698,7 +5698,7 @@ var schemaresultResolveSchema = &schema.Class{
 	Name:    "resultResolveSchema",
 	Display: "resultResolveSchema",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Schema"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Schema", ID: (*Schema)(nil).Class().ID()}},
 	},
 }
 
@@ -5750,7 +5750,7 @@ var schemaresultResolveTimingInfo = &schema.Class{
 	Name:    "resultResolveTimingInfo",
 	Display: "resultResolveTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "TimingInfo"}},
+		{Declared: "value", Type: &schema.Struct{Name: "TimingInfo", ID: (*TimingInfo)(nil).Class().ID()}},
 	},
 }
 

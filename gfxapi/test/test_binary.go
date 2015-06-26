@@ -357,7 +357,7 @@ var schemaBoolˢ = &schema.Class{
 	Name:    "Boolˢ",
 	Display: "Boolˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -467,7 +467,7 @@ var schemaCharˢ = &schema.Class{
 	Name:    "Charˢ",
 	Display: "Charˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -577,7 +577,7 @@ var schemaCharᵖˢ = &schema.Class{
 	Name:    "Charᵖˢ",
 	Display: "Charᵖˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -698,7 +698,7 @@ var schemaCmdBool = &schema.Class{
 	Name:    "CmdBool",
 	Display: "cmd_bool",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -756,8 +756,8 @@ var schemaCmdCharptrToString = &schema.Class{
 	Name:    "CmdCharptrToString",
 	Display: "cmd_charptr_to_string",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -827,8 +827,8 @@ var schemaCmdCharsliceToString = &schema.Class{
 	Name:    "CmdCharsliceToString",
 	Display: "cmd_charslice_to_string",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
 		{Declared: "Len", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -959,8 +959,8 @@ var schemaCmdClone = &schema.Class{
 	Name:    "CmdClone",
 	Display: "cmd_clone",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1029,8 +1029,8 @@ var schemaCmdCopy = &schema.Class{
 	Name:    "CmdCopy",
 	Display: "cmd_copy",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1090,7 +1090,7 @@ var schemaCmdF32 = &schema.Class{
 	Name:    "CmdF32",
 	Display: "cmd_f32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -1150,7 +1150,7 @@ var schemaCmdF64 = &schema.Class{
 	Name:    "CmdF64",
 	Display: "cmd_f64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -1210,7 +1210,7 @@ var schemaCmdMake = &schema.Class{
 	Name:    "CmdMake",
 	Display: "cmd_make",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1330,8 +1330,8 @@ var schemaCmdPointer = &schema.Class{
 	Name:    "CmdPointer",
 	Display: "cmd_pointer",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -1390,7 +1390,7 @@ var schemaCmdRemapped = &schema.Class{
 	Name:    "CmdRemapped",
 	Display: "cmd_remapped",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 	},
 }
@@ -1450,7 +1450,7 @@ var schemaCmdS16 = &schema.Class{
 	Name:    "CmdS16",
 	Display: "cmd_s16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -1510,7 +1510,7 @@ var schemaCmdS32 = &schema.Class{
 	Name:    "CmdS32",
 	Display: "cmd_s32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -1570,7 +1570,7 @@ var schemaCmdS64 = &schema.Class{
 	Name:    "CmdS64",
 	Display: "cmd_s64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -1630,7 +1630,7 @@ var schemaCmdS8 = &schema.Class{
 	Name:    "CmdS8",
 	Display: "cmd_s8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -1761,8 +1761,8 @@ var schemaCmdSliceCasts = &schema.Class{
 	Name:    "CmdSliceCasts",
 	Display: "cmd_slice_casts",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "S", Type: &schema.Struct{Name: "U16ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "S", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
 		{Declared: "L", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1822,7 +1822,7 @@ var schemaCmdString = &schema.Class{
 	Name:    "CmdString",
 	Display: "cmd_string",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -1882,7 +1882,7 @@ var schemaCmdU16 = &schema.Class{
 	Name:    "CmdU16",
 	Display: "cmd_u16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -1942,7 +1942,7 @@ var schemaCmdU32 = &schema.Class{
 	Name:    "CmdU32",
 	Display: "cmd_u32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -2002,7 +2002,7 @@ var schemaCmdU64 = &schema.Class{
 	Name:    "CmdU64",
 	Display: "cmd_u64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -2062,7 +2062,7 @@ var schemaCmdU8 = &schema.Class{
 	Name:    "CmdU8",
 	Display: "cmd_u8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -2122,7 +2122,7 @@ var schemaCmdUnknownRet = &schema.Class{
 	Name:    "CmdUnknownRet",
 	Display: "cmd_unknown_ret",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2242,8 +2242,8 @@ var schemaCmdUnknownWritePtr = &schema.Class{
 	Name:    "CmdUnknownWritePtr",
 	Display: "cmd_unknown_write_ptr",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "P", Type: &schema.Struct{Name: "Intᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "P", Type: &schema.Struct{Name: "Intᵖ", ID: (*Intᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -2302,8 +2302,8 @@ var schemaCmdUnknownWriteSlice = &schema.Class{
 	Name:    "CmdUnknownWriteSlice",
 	Display: "cmd_unknown_write_slice",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Intᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Intᵖ", ID: (*Intᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -2351,7 +2351,7 @@ var schemaCmdVoid = &schema.Class{
 	Name:    "CmdVoid",
 	Display: "cmd_void",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
 }
 
@@ -2488,10 +2488,10 @@ var schemaCmdVoid3InArrays = &schema.Class{
 	Name:    "CmdVoid3InArrays",
 	Display: "cmd_void_3_in_arrays",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
-		{Declared: "B", Type: &schema.Struct{Name: "U32ᵖ"}},
-		{Declared: "C", Type: &schema.Struct{Name: "Intᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
+		{Declared: "B", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
+		{Declared: "C", Type: &schema.Struct{Name: "Intᵖ", ID: (*Intᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -2572,7 +2572,7 @@ var schemaCmdVoid3Remapped = &schema.Class{
 	Name:    "CmdVoid3Remapped",
 	Display: "cmd_void_3_remapped",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -2656,7 +2656,7 @@ var schemaCmdVoid3Strings = &schema.Class{
 	Name:    "CmdVoid3Strings",
 	Display: "cmd_void_3_strings",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -2718,7 +2718,7 @@ var schemaCmdVoidBool = &schema.Class{
 	Name:    "CmdVoidBool",
 	Display: "cmd_void_bool",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -2778,7 +2778,7 @@ var schemaCmdVoidF32 = &schema.Class{
 	Name:    "CmdVoidF32",
 	Display: "cmd_void_f32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -2838,7 +2838,7 @@ var schemaCmdVoidF64 = &schema.Class{
 	Name:    "CmdVoidF64",
 	Display: "cmd_void_f64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -2911,8 +2911,8 @@ var schemaCmdVoidInArrayOfPointers = &schema.Class{
 	Name:    "CmdVoidInArrayOfPointers",
 	Display: "cmd_void_in_array_of_pointers",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Charᵖᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Charᵖᵖ", ID: (*Charᵖᵖ)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -3036,8 +3036,8 @@ var schemaCmdVoidInArrayOfRemapped = &schema.Class{
 	Name:    "CmdVoidInArrayOfRemapped",
 	Display: "cmd_void_in_array_of_remapped",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3098,8 +3098,8 @@ var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
 	Name:    "CmdVoidOutArrayOfRemapped",
 	Display: "cmd_void_out_array_of_remapped",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3164,8 +3164,8 @@ var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Class{
 	Name:    "CmdVoidOutArrayOfUnknownRemapped",
 	Display: "cmd_void_out_array_of_unknown_remapped",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3222,8 +3222,8 @@ var schemaCmdVoidReadBool = &schema.Class{
 	Name:    "CmdVoidReadBool",
 	Display: "cmd_void_read_bool",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3342,8 +3342,8 @@ var schemaCmdVoidReadF32 = &schema.Class{
 	Name:    "CmdVoidReadF32",
 	Display: "cmd_void_read_f32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3462,8 +3462,8 @@ var schemaCmdVoidReadF64 = &schema.Class{
 	Name:    "CmdVoidReadF64",
 	Display: "cmd_void_read_f64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ", ID: (*F64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3538,10 +3538,10 @@ var schemaCmdVoidReadPtrs = &schema.Class{
 	Name:    "CmdVoidReadPtrs",
 	Display: "cmd_void_read_ptrs",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
-		{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ"}},
-		{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
+		{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
+		{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3660,8 +3660,8 @@ var schemaCmdVoidReadS16 = &schema.Class{
 	Name:    "CmdVoidReadS16",
 	Display: "cmd_void_read_s16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ", ID: (*S16ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3780,8 +3780,8 @@ var schemaCmdVoidReadS32 = &schema.Class{
 	Name:    "CmdVoidReadS32",
 	Display: "cmd_void_read_s32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -3900,8 +3900,8 @@ var schemaCmdVoidReadS64 = &schema.Class{
 	Name:    "CmdVoidReadS64",
 	Display: "cmd_void_read_s64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4020,8 +4020,8 @@ var schemaCmdVoidReadS8 = &schema.Class{
 	Name:    "CmdVoidReadS8",
 	Display: "cmd_void_read_s8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ", ID: (*S8ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4078,8 +4078,8 @@ var schemaCmdVoidReadU16 = &schema.Class{
 	Name:    "CmdVoidReadU16",
 	Display: "cmd_void_read_u16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4136,8 +4136,8 @@ var schemaCmdVoidReadU32 = &schema.Class{
 	Name:    "CmdVoidReadU32",
 	Display: "cmd_void_read_u32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4256,8 +4256,8 @@ var schemaCmdVoidReadU64 = &schema.Class{
 	Name:    "CmdVoidReadU64",
 	Display: "cmd_void_read_u64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4314,8 +4314,8 @@ var schemaCmdVoidReadU8 = &schema.Class{
 	Name:    "CmdVoidReadU8",
 	Display: "cmd_void_read_u8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4374,7 +4374,7 @@ var schemaCmdVoidS16 = &schema.Class{
 	Name:    "CmdVoidS16",
 	Display: "cmd_void_s16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -4434,7 +4434,7 @@ var schemaCmdVoidS32 = &schema.Class{
 	Name:    "CmdVoidS32",
 	Display: "cmd_void_s32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -4494,7 +4494,7 @@ var schemaCmdVoidS64 = &schema.Class{
 	Name:    "CmdVoidS64",
 	Display: "cmd_void_s64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -4554,7 +4554,7 @@ var schemaCmdVoidS8 = &schema.Class{
 	Name:    "CmdVoidS8",
 	Display: "cmd_void_s8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -4614,7 +4614,7 @@ var schemaCmdVoidString = &schema.Class{
 	Name:    "CmdVoidString",
 	Display: "cmd_void_string",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -4674,7 +4674,7 @@ var schemaCmdVoidU16 = &schema.Class{
 	Name:    "CmdVoidU16",
 	Display: "cmd_void_u16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -4734,7 +4734,7 @@ var schemaCmdVoidU32 = &schema.Class{
 	Name:    "CmdVoidU32",
 	Display: "cmd_void_u32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -4794,7 +4794,7 @@ var schemaCmdVoidU64 = &schema.Class{
 	Name:    "CmdVoidU64",
 	Display: "cmd_void_u64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -4854,7 +4854,7 @@ var schemaCmdVoidU8 = &schema.Class{
 	Name:    "CmdVoidU8",
 	Display: "cmd_void_u8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -4912,8 +4912,8 @@ var schemaCmdVoidWriteBool = &schema.Class{
 	Name:    "CmdVoidWriteBool",
 	Display: "cmd_void_write_bool",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -4970,8 +4970,8 @@ var schemaCmdVoidWriteF32 = &schema.Class{
 	Name:    "CmdVoidWriteF32",
 	Display: "cmd_void_write_f32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5028,8 +5028,8 @@ var schemaCmdVoidWriteF64 = &schema.Class{
 	Name:    "CmdVoidWriteF64",
 	Display: "cmd_void_write_f64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ", ID: (*F64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5104,10 +5104,10 @@ var schemaCmdVoidWritePtrs = &schema.Class{
 	Name:    "CmdVoidWritePtrs",
 	Display: "cmd_void_write_ptrs",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
-		{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ"}},
-		{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
+		{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
+		{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5164,8 +5164,8 @@ var schemaCmdVoidWriteS16 = &schema.Class{
 	Name:    "CmdVoidWriteS16",
 	Display: "cmd_void_write_s16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ", ID: (*S16ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5222,8 +5222,8 @@ var schemaCmdVoidWriteS32 = &schema.Class{
 	Name:    "CmdVoidWriteS32",
 	Display: "cmd_void_write_s32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5280,8 +5280,8 @@ var schemaCmdVoidWriteS64 = &schema.Class{
 	Name:    "CmdVoidWriteS64",
 	Display: "cmd_void_write_s64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5338,8 +5338,8 @@ var schemaCmdVoidWriteS8 = &schema.Class{
 	Name:    "CmdVoidWriteS8",
 	Display: "cmd_void_write_s8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ", ID: (*S8ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5396,8 +5396,8 @@ var schemaCmdVoidWriteU16 = &schema.Class{
 	Name:    "CmdVoidWriteU16",
 	Display: "cmd_void_write_u16",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5454,8 +5454,8 @@ var schemaCmdVoidWriteU32 = &schema.Class{
 	Name:    "CmdVoidWriteU32",
 	Display: "cmd_void_write_u32",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5512,8 +5512,8 @@ var schemaCmdVoidWriteU64 = &schema.Class{
 	Name:    "CmdVoidWriteU64",
 	Display: "cmd_void_write_u64",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5570,8 +5570,8 @@ var schemaCmdVoidWriteU8 = &schema.Class{
 	Name:    "CmdVoidWriteU8",
 	Display: "cmd_void_write_u8",
 	Fields: []schema.Field{
-		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -5619,7 +5619,7 @@ var schemaF32ˢ = &schema.Class{
 	Name:    "F32ˢ",
 	Display: "F32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5667,7 +5667,7 @@ var schemaF64ˢ = &schema.Class{
 	Name:    "F64ˢ",
 	Display: "F64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5715,7 +5715,7 @@ var schemaU8ˢ = &schema.Class{
 	Name:    "U8ˢ",
 	Display: "U8ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5763,7 +5763,7 @@ var schemaU16ˢ = &schema.Class{
 	Name:    "U16ˢ",
 	Display: "U16ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5811,7 +5811,7 @@ var schemaU32ˢ = &schema.Class{
 	Name:    "U32ˢ",
 	Display: "U32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5859,7 +5859,7 @@ var schemaIntˢ = &schema.Class{
 	Name:    "Intˢ",
 	Display: "Intˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5945,10 +5945,10 @@ var schemaGlobals = &schema.Class{
 	Name:    "Globals",
 	Display: "Globals",
 	Fields: []schema.Field{
-		{Declared: "U8s", Type: &schema.Struct{Name: "U8ˢ"}},
-		{Declared: "U16s", Type: &schema.Struct{Name: "U16ˢ"}},
-		{Declared: "U32s", Type: &schema.Struct{Name: "U32ˢ"}},
-		{Declared: "Ints", Type: &schema.Struct{Name: "Intˢ"}},
+		{Declared: "U8s", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
+		{Declared: "U16s", Type: &schema.Struct{Name: "U16ˢ", ID: (*U16ˢ)(nil).Class().ID()}},
+		{Declared: "U32s", Type: &schema.Struct{Name: "U32ˢ", ID: (*U32ˢ)(nil).Class().ID()}},
+		{Declared: "Ints", Type: &schema.Struct{Name: "Intˢ", ID: (*Intˢ)(nil).Class().ID()}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -6109,7 +6109,7 @@ var schemaRemappedˢ = &schema.Class{
 	Name:    "Remappedˢ",
 	Display: "Remappedˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6157,7 +6157,7 @@ var schemaS16ˢ = &schema.Class{
 	Name:    "S16ˢ",
 	Display: "S16ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6205,7 +6205,7 @@ var schemaS32ˢ = &schema.Class{
 	Name:    "S32ˢ",
 	Display: "S32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6253,7 +6253,7 @@ var schemaS64ˢ = &schema.Class{
 	Name:    "S64ˢ",
 	Display: "S64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6301,7 +6301,7 @@ var schemaS8ˢ = &schema.Class{
 	Name:    "S8ˢ",
 	Display: "S8ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6370,8 +6370,8 @@ var schemaTester = &schema.Class{
 	Display: "Tester",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "A", Type: &schema.Struct{Name: "Imported"}},
-		{Declared: "B", Type: &schema.Struct{Name: "Included"}},
+		{Declared: "A", Type: &schema.Struct{Name: "Imported", ID: (*Imported)(nil).Class().ID()}},
+		{Declared: "B", Type: &schema.Struct{Name: "Included", ID: (*Included)(nil).Class().ID()}},
 	},
 }
 
@@ -6419,7 +6419,7 @@ var schemaU64ˢ = &schema.Class{
 	Name:    "U64ˢ",
 	Display: "U64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6467,6 +6467,6 @@ var schemaVoidˢ = &schema.Class{
 	Name:    "Voidˢ",
 	Display: "Voidˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo"}},
+		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }

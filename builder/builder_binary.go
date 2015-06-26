@@ -95,7 +95,7 @@ var schemaBuildReport = &schema.Class{
 	Name:    "BuildReport",
 	Display: "BuildReport",
 	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Struct{Name: "service.AtomStreamId"}},
+		{Declared: "Atoms", Type: &schema.Struct{Name: "service.AtomStreamId", ID: (*service.AtomStreamId)(nil).Class().ID()}},
 	},
 }
 
@@ -293,11 +293,11 @@ var schemaGetFramebufferColor = &schema.Class{
 	Name:    "GetFramebufferColor",
 	Display: "GetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Settings", Type: &schema.Struct{Name: "service.RenderSettings"}},
+		{Declared: "Settings", Type: &schema.Struct{Name: "service.RenderSettings", ID: (*service.RenderSettings)(nil).Class().ID()}},
 	},
 }
 
@@ -376,9 +376,9 @@ var schemaGetFramebufferDepth = &schema.Class{
 	Name:    "GetFramebufferDepth",
 	Display: "GetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
 }
@@ -427,7 +427,7 @@ var schemaGetHierarchy = &schema.Class{
 	Name:    "GetHierarchy",
 	Display: "GetHierarchy",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 	},
 }
 
@@ -495,9 +495,9 @@ var schemaGetMemoryInfo = &schema.Class{
 	Name:    "GetMemoryInfo",
 	Display: "GetMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
+		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
 	},
 }
 
@@ -556,7 +556,7 @@ var schemaGetState = &schema.Class{
 	Name:    "GetState",
 	Display: "GetState",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
 }
@@ -625,8 +625,8 @@ var schemaGetTimingInfo = &schema.Class{
 	Name:    "GetTimingInfo",
 	Display: "GetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 		{Declared: "TimingMask", Type: &schema.Primitive{Name: "service.TimingMask", Method: schema.Int32}},
 	},
 }
@@ -746,9 +746,9 @@ var schemaPrerenderFramebuffers = &schema.Class{
 	Name:    "PrerenderFramebuffers",
 	Display: "PrerenderFramebuffers",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "AtomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -863,9 +863,9 @@ var schemaRenderFramebufferColor = &schema.Class{
 	Name:    "RenderFramebufferColor",
 	Display: "RenderFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -970,9 +970,9 @@ var schemaRenderFramebufferDepth = &schema.Class{
 	Name:    "RenderFramebufferDepth",
 	Display: "RenderFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "FramebufferWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FramebufferHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1054,10 +1054,10 @@ var schemaReplaceAtom = &schema.Class{
 	Name:    "ReplaceAtom",
 	Display: "ReplaceAtom",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 		{Declared: "Atom", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "atom.TypeID", Method: schema.Uint16}},
-		{Declared: "Data", Type: &schema.Struct{Name: "service.Binary"}},
+		{Declared: "Data", Type: &schema.Struct{Name: "service.Binary", ID: (*service.Binary)(nil).Class().ID()}},
 	},
 }
 
@@ -1209,7 +1209,7 @@ var schemacaptureFramebufferDimensions = &schema.Class{
 	Name:    "captureFramebufferDimensions",
 	Display: "captureFramebufferDimensions",
 	Fields: []schema.Field{
-		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions"}}},
+		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions", ID: (*atomFramebufferDimensions)(nil).Class().ID()}}},
 	},
 }
 
@@ -1265,6 +1265,6 @@ var schemagetCaptureFramebufferDimensions = &schema.Class{
 	Name:    "getCaptureFramebufferDimensions",
 	Display: "getCaptureFramebufferDimensions",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 	},
 }
