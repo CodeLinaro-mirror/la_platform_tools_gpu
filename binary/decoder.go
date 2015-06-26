@@ -38,4 +38,6 @@ type Decoder interface {
 	Object() (Object, error)
 	// SkipObject must skip the same data that a call to Object would read.
 	SkipObject() (ID, error)
+	// Lookup the class that would be used to encode an id in this encoder.
+	Lookup(ID) Class
 }
