@@ -34,6 +34,7 @@ var (
 func ExecAt(wd string, verbose int, path string, args ...string) error {
 	before := time.Now()
 	cmd := exec.Command(path, args...)
+	cmd.Env = getEnvVars()
 	cmd.Dir = wd
 
 	if verbose > 0 {
