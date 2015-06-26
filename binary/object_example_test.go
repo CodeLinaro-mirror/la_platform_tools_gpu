@@ -67,7 +67,7 @@ func (*ExampleClass) Skip(d binary.Decoder) error {
 }
 
 func init() {
-	registry.Add((*ExampleObject)(nil).Class())
+	registry.Global.Add((*ExampleObject)(nil).Class())
 }
 
 // This example shows how to write a type with custom encode and decode
