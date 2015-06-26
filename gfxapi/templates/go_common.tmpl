@@ -312,8 +312,8 @@
   {{else if IsReturn       $}}{{Macro "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsIteration    $}}{{Macro "Go.Iteration" $}}
   {{else if IsCall         $}}{{Macro "Go.Call" $}}
-  {{else if IsRead         $}}
-  {{else if IsWrite        $}}
+  {{else if IsRead         $}}{{Macro "Go.Read" $.Slice}}.OnRead(ϟs)
+  {{else if IsWrite        $}}{{Macro "Go.Read" $.Slice}}.OnWrite(ϟs)
   {{else if IsFence        $}}{{Macro "Go.Fence" $}}
   {{else if IsBranch       $}}{{Macro "Go.Branch" $}}
   {{else if IsSwitch       $}}{{Macro "Go.Switch" $}}

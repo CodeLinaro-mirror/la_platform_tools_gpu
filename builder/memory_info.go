@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -44,19 +45,36 @@ func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 	}
 
 	s := gfxapi.NewState()
-	for i, a := range atoms[:r.After] {
-		if err := a.Mutate(s, d, l); err != nil {
-			l.Warningf("Atom %d %v: %v", i, a, err)
-		}
+	pool := s.Memory[memory.ApplicationPool]
+
+	for _, a := range atoms[:r.After] {
+		a.Mutate(s, d, l)
 	}
 
-	// TODO: Pool, Stale, Unknown
-	data, err := s.Memory[memory.ApplicationPool].Slice(r.Range).Get(d, l)
+	var reads, writes memory.RangeList
+	pool.OnRead = func(rng memory.Range) {
+		if rng.Overlaps(r.Range) {
+			interval.Merge(&reads, rng.Window(r.Range).Span(), false)
+		}
+	}
+	pool.OnWrite = func(rng memory.Range) {
+		if rng.Overlaps(r.Range) {
+			interval.Merge(&writes, rng.Window(r.Range).Span(), false)
+		}
+	}
+	atoms[r.After].Mutate(s, d, l)
+
+	slice := pool.Slice(r.Range)
+	data, err := slice.Get(d, l)
 	if err != nil {
 		return nil, err
 	}
 
+	observed := slice.ValidRanges()
+
 	res := &service.MemoryInfo{Data: data}
-	res.Current.Pack(memory.RangeList{r.Range})
+	res.Reads.Pack(reads)
+	res.Writes.Pack(writes)
+	res.Observed.Pack(observed)
 	return res, nil
 }

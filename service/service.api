@@ -203,12 +203,12 @@ class AtomRange {
 }
 
 // MemoryInfo describes the state of a range of memory at a specific point in
-// the atom stream. This structure is likely to change in the future.
+// the atom stream.
 class MemoryInfo {
-  u8[]           Data    // The memory values for the span.
-  MemoryRange[]  Stale   // The data ranges that have been observed but not current.
-  MemoryRange[]  Current // The data ranges that were written to just before the observation.
-  MemoryRange[]  Unknown // The data ranges that have never been observed.
+  u8[]           Data     // The memory values for the span.
+  MemoryRange[]  Reads    // The Data-relative ranges that were read-from at the specified atom.
+  MemoryRange[]  Writes   // The Data-relative ranges that were written-to at the specified atom.
+  MemoryRange[]  Observed // The Data-relative ranges that have been observed.
 }
 
 // MemoryRange describes a range of memory.

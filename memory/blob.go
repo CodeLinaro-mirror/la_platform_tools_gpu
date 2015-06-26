@@ -38,12 +38,16 @@ func (r blob) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
 	return r.id, nil
 }
 
+func (r blob) Size() uint64 {
+	return uint64(len(r.data))
+}
+
 func (r blob) Slice(rng Range) Slice {
 	return Blob(r.data[rng.First() : rng.Last()+1])
 }
 
-func (r blob) Size() uint64 {
-	return uint64(len(r.data))
+func (r blob) ValidRanges() RangeList {
+	return RangeList{Range{Size: r.Size()}}
 }
 
 func (r blob) String() string {

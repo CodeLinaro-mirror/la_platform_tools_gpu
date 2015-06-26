@@ -464,22 +464,22 @@ func (c *AtomRange) GetCount() uint64 { return c.Count }
 
 func CreateMemoryInfo(
 	Data U8Array,
-	Stale MemoryRangeArray,
-	Current MemoryRangeArray,
-	Unknown MemoryRangeArray,
+	Reads MemoryRangeArray,
+	Writes MemoryRangeArray,
+	Observed MemoryRangeArray,
 ) *MemoryInfo {
 	return &MemoryInfo{
-		Data:    Data,
-		Stale:   Stale,
-		Current: Current,
-		Unknown: Unknown,
+		Data:     Data,
+		Reads:    Reads,
+		Writes:   Writes,
+		Observed: Observed,
 	}
 }
 
-func (c *MemoryInfo) GetData() U8Array             { return c.Data }
-func (c *MemoryInfo) GetStale() MemoryRangeArray   { return c.Stale }
-func (c *MemoryInfo) GetCurrent() MemoryRangeArray { return c.Current }
-func (c *MemoryInfo) GetUnknown() MemoryRangeArray { return c.Unknown }
+func (c *MemoryInfo) GetData() U8Array              { return c.Data }
+func (c *MemoryInfo) GetReads() MemoryRangeArray    { return c.Reads }
+func (c *MemoryInfo) GetWrites() MemoryRangeArray   { return c.Writes }
+func (c *MemoryInfo) GetObserved() MemoryRangeArray { return c.Observed }
 
 func CreateMemoryRange(
 	Base uint64,

@@ -46,16 +46,20 @@ func (r resource) Get(d database.Database, l log.Logger) ([]byte, error) {
 	return data, nil
 }
 
-func (r resource) Slice(rng Range) Slice {
-	return newResourceSlice(r, rng)
-}
-
 func (r resource) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
 	return r.resId, nil
 }
 
 func (r resource) Size() uint64 {
 	return r.size
+}
+
+func (r resource) Slice(rng Range) Slice {
+	return newResourceSlice(r, rng)
+}
+
+func (r resource) ValidRanges() RangeList {
+	return RangeList{Range{Size: r.Size()}}
 }
 
 func (r resource) String() string {
@@ -86,12 +90,16 @@ func (s resourceSlice) ResourceID(d database.Database, l log.Logger) (binary.ID,
 	panic("resourceSlice.ResourceID currently not implemented")
 }
 
+func (s resourceSlice) Size() uint64 {
+	return s.rng.Size
+}
+
 func (s resourceSlice) Slice(rng Range) Slice {
 	return newResourceSlice(s.src, rng)
 }
 
-func (s resourceSlice) Size() uint64 {
-	return s.rng.Size
+func (s resourceSlice) ValidRanges() RangeList {
+	panic("resourceSlice.ValidRanges currently not implemented")
 }
 
 func (s resourceSlice) String() string {

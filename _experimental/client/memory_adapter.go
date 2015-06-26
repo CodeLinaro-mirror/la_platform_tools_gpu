@@ -91,24 +91,27 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 	var cancel chan<- struct{}
 	ll.OnAttach(func() {
 		cancel = a.appCtx.RequestMemory(a.commandID, base, uint64(a.bytesPerLine), func(info service.MemoryInfo) {
-			var current, stale memory.RangeList
-			info.Current.Unpack(&current)
-			info.Stale.Unpack(&stale)
+			var reads, writes, observed memory.RangeList
+			info.Reads.Unpack(&reads)
+			info.Writes.Unpack(&writes)
+			info.Observed.Unpack(&observed)
 
-			addr := base
+			offset := uint64(0)
 			data := info.Data
 			dataType := a.dataType
 			dataTypeSize := dataType.SizeBytes()
 			for len(data) >= dataTypeSize {
 				switch {
-				case interval.Contains(&current, uint64(addr)):
-					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", MEMORY_COLOR, true))
-				case interval.Contains(&stale, uint64(addr)):
+				case interval.Contains(&writes, offset):
+					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR, true))
+				case interval.Contains(&reads, offset):
+					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", READ_MEMORY_COLOR, true))
+				case interval.Contains(&observed, offset):
 					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR, true))
 				default:
 					ll.AddChild(CreateLabel(t, dataType.Unknown()+" ", STALE_MEMORY_COLOR, true))
 				}
-				addr += memory.Pointer(dataTypeSize)
+				offset += uint64(dataTypeSize)
 				data = data[dataTypeSize:]
 			}
 		})
