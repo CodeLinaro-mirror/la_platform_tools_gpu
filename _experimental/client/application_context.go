@@ -32,6 +32,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
+	"github.com/google/gxui/gxfont"
 )
 
 const mtu = 1024
@@ -43,6 +44,7 @@ var (
 type ApplicationContext struct {
 	Config
 	theme               gxui.Theme
+	monospace           gxui.Font
 	logger              *log.Splitter
 	rpc                 service.RPC
 	captureID           service.CaptureId
@@ -136,9 +138,12 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	}
 	rpc := service.CreateClient(rpcSocket, rpcSocket, mtu)
 
+	monospace, _ := theme.Driver().CreateFont(gxfont.Monospace, 12)
+
 	appCtx := &ApplicationContext{
 		Config:              config,
 		theme:               theme,
+		monospace:           monospace,
 		logger:              &log.Splitter{},
 		rpc:                 rpc,
 		dropDownOverlay:     dropDownOverlay,
