@@ -31,6 +31,9 @@ import (
 // used for disabling the cache for tests.
 var DisableLocalDeviceCache = false
 
+// LocalReplayBinary is the full path to the local binary.
+var LocalReplayBinary = replayd
+
 // deviceOS is an enumerator of operating systems that the replay target may be
 // running on.
 type deviceOS uint8
@@ -102,7 +105,7 @@ func (localDevice) Connect() (io.ReadWriteCloser, error) {
 	endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
 	conn, err := net.Dial("tcp", endpoint)
 	if err != nil {
-		if err := spawnChild(replayd); err != nil {
+		if err := spawnChild(LocalReplayBinary); err != nil {
 			return nil, err
 		}
 		for i := 0; i < 10; i++ {

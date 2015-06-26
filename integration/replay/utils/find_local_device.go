@@ -15,6 +15,8 @@
 package utils
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 	"time"
 
@@ -29,6 +31,7 @@ const localDeviceName = "Local machine" // TODO: Remove hard-coded string.
 // host cannot be found then the test fails and nil is returned.
 func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
 	replay.DisableLocalDeviceCache = true // disable disk-cache
+	replay.LocalReplayBinary = filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.LocalReplayBinary))
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {
 			info := d.Info()
