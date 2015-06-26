@@ -51,9 +51,8 @@ func init() {
 	}
 
 	// Fallback to searching on PATH.
-	if p, err := exec.LookPath("adb"); err != nil {
-		p, err = filepath.Abs(p)
-		if err == nil {
+	if p, err := exec.LookPath("adb"); err == nil {
+		if p, err = filepath.Abs(p); err == nil {
 			adb = p
 		}
 	}
