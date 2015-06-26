@@ -19,7 +19,6 @@ import (
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -37,10 +36,10 @@ func CreateFilmStripAdapter(appCtx *ApplicationContext) *FilmStripAdapter {
 	return &FilmStripAdapter{appCtx: appCtx}
 }
 
-func (a *FilmStripAdapter) SetAtoms(atoms []schema.Atom) {
+func (a *FilmStripAdapter) SetAtoms(atoms []Atom) {
 	a.frames = []atom.ID{}
 	for i, t := range atoms {
-		if t.Info.IsEndOfFrame {
+		if t.IsEndOfFrame() {
 			a.frames = append(a.frames, atom.ID(i))
 		}
 	}
