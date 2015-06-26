@@ -69,6 +69,7 @@ type Class struct {
 	TypeID  binary.ID // The unique type identifier for the Object.
 	Package string    // The package that declared the struct.
 	Name    string    // The simple name of the Object.
+	Display string    // The display name of the Object.
 	Fields  []Field   // Descriptions of the fields of the Object.
 }
 ```
@@ -549,6 +550,7 @@ func (m Method) String() string
 
 ```go
 type Object struct {
+	Type   *Class
 	Fields []interface{}
 }
 ```

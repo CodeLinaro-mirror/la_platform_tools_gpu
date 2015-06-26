@@ -653,6 +653,7 @@ type Capture struct {
 	binary.Generate
 	Name   string
 	Atoms  AtomStreamId
+	Report ReportId
 	Apis   ApiIdArray
 	Schema SchemaId
 }
@@ -666,6 +667,7 @@ Class Capture
 func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
+	Report ReportId,
 	Apis ApiIdArray,
 	Schema SchemaId,
 ) *Capture
@@ -700,6 +702,12 @@ func (c *Capture) GetAtoms() AtomStreamId
 
 ```go
 func (c *Capture) GetName() string
+```
+
+#### func (*Capture) GetReport
+
+```go
+func (c *Capture) GetReport() ReportId
 ```
 
 #### func (*Capture) GetSchema
@@ -1751,6 +1759,7 @@ type RPC interface {
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
+	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
@@ -1812,6 +1821,135 @@ func (c *RenderSettings) GetMaxWidth() uint32
 
 ```go
 func (c *RenderSettings) GetWireframe() bool
+```
+
+#### type Report
+
+```go
+type Report struct {
+	binary.Generate
+	Items ReportItemArray
+}
+```
+
+Class Report
+
+#### func  CreateReport
+
+```go
+func CreateReport(
+	Items ReportItemArray,
+) *Report
+```
+
+#### func  ResolveReport
+
+```go
+func ResolveReport(id ReportId, d database.Database, l log.Logger) (*Report, error)
+```
+ResolveReport loads and returns the Report stored in the database d, using id.
+
+#### func (*Report) Class
+
+```go
+func (*Report) Class() binary.Class
+```
+
+#### func (*Report) GetItems
+
+```go
+func (c *Report) GetItems() ReportItemArray
+```
+
+#### type ReportId
+
+```go
+type ReportId struct {
+	binary.Generate
+	ID binary.ID
+}
+```
+
+Handle ReportId
+
+#### func  StoreReport
+
+```go
+func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error)
+```
+StoreReport stores v into the database d, returning the ReportId.
+
+#### func (*ReportId) Class
+
+```go
+func (*ReportId) Class() binary.Class
+```
+
+#### func (ReportId) Valid
+
+```go
+func (h ReportId) Valid() bool
+```
+
+#### type ReportItem
+
+```go
+type ReportItem struct {
+	binary.Generate
+	Severity Severity
+	Message  string
+	Atom     uint64
+}
+```
+
+Class ReportItem
+
+#### func  CreateReportItem
+
+```go
+func CreateReportItem(
+	Severity Severity,
+	Message string,
+	Atom uint64,
+) *ReportItem
+```
+
+#### func (*ReportItem) Class
+
+```go
+func (*ReportItem) Class() binary.Class
+```
+
+#### func (*ReportItem) GetAtom
+
+```go
+func (c *ReportItem) GetAtom() uint64
+```
+
+#### func (*ReportItem) GetMessage
+
+```go
+func (c *ReportItem) GetMessage() string
+```
+
+#### func (*ReportItem) GetSeverity
+
+```go
+func (c *ReportItem) GetSeverity() Severity
+```
+
+#### type ReportItemArray
+
+```go
+type ReportItemArray []ReportItem
+```
+
+Array ReportItemˢ
+
+#### func (ReportItemArray) Format
+
+```go
+func (a ReportItemArray) Format(f fmt.State, c rune)
 ```
 
 #### type Resolver
@@ -1878,6 +2016,14 @@ func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, 
 ```
 ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's
 database, using id.
+
+#### func (Resolver) ResolveReport
+
+```go
+func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error)
+```
+ResolveReport loads and returns the Report stored in the resolver's database,
+using id.
 
 #### func (Resolver) ResolveSchema
 
@@ -1969,6 +2115,87 @@ func (*SchemaId) Class() binary.Class
 
 ```go
 func (h SchemaId) Valid() bool
+```
+
+#### type Severity
+
+```go
+type Severity int
+```
+
+Enum Severity
+
+```go
+const (
+	SeverityEmergency     Severity = 0
+	SeverityAlert         Severity = 1
+	SeverityCritical      Severity = 2
+	SeverityError         Severity = 3
+	SeverityWarning       Severity = 4
+	SeverityNotice        Severity = 5
+	SeverityInformational Severity = 6
+	SeverityDebug         Severity = 7
+)
+```
+
+#### func (Severity) IsAlert
+
+```go
+func (i Severity) IsAlert() bool
+```
+
+#### func (Severity) IsCritical
+
+```go
+func (i Severity) IsCritical() bool
+```
+
+#### func (Severity) IsDebug
+
+```go
+func (i Severity) IsDebug() bool
+```
+
+#### func (Severity) IsEmergency
+
+```go
+func (i Severity) IsEmergency() bool
+```
+
+#### func (Severity) IsError
+
+```go
+func (i Severity) IsError() bool
+```
+
+#### func (Severity) IsInformational
+
+```go
+func (i Severity) IsInformational() bool
+```
+
+#### func (Severity) IsNotice
+
+```go
+func (i Severity) IsNotice() bool
+```
+
+#### func (Severity) IsWarning
+
+```go
+func (i Severity) IsWarning() bool
+```
+
+#### func (*Severity) Parse
+
+```go
+func (v *Severity) Parse(s string) error
+```
+
+#### func (Severity) String
+
+```go
+func (v Severity) String() string
 ```
 
 #### type SimpleInfo
