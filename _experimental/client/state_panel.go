@@ -23,7 +23,7 @@ func CreateStatePanel(appCtx *ApplicationContext) gxui.Control {
 	tree := theme.CreateTree()
 
 	appCtx.OnStateUpdated(func() {
-		tree.SetAdapter(CreateStateAdapter(appCtx, appCtx.State()))
+		//tree.SetAdapter(CreateStateAdapter(appCtx, appCtx.State()))
 	})
 
 	return tree

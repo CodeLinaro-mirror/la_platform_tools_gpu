@@ -281,7 +281,7 @@ func DoReplay(appCtx *ApplicationContext) {
 	}
 
 	atom := appCtx.Atoms()[atomID]
-	apiID := atom.Info.Api
+	apiID := atom.Api()
 
 	go func() {
 		l := appCtx.Logger().Fork().Enter("Replay: color-buffer")

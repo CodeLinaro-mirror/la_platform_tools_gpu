@@ -31,7 +31,7 @@ func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
 	appCtx.OnAtomSelected(func() {
 		ll.RemoveAll()
 		atom := appCtx.Atoms()[appCtx.SelectedAtomID()]
-		docs := atom.Info.DocumentationUrl
+		docs := atom.DocumentationUrl()
 		loadHtml(theme, docs, ll)
 	})
 	sl := theme.CreateScrollLayout()
