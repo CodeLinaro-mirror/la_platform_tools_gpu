@@ -26,7 +26,7 @@ var (
 )
 
 func init() {
-	registry.Add(NilClass)
+	registry.Global.Add(NilClass)
 }
 
 func (class *binaryClassNil) ID() binary.ID                                { return binary.ID{} }

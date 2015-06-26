@@ -12,10 +12,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
+var Namespace = registry.NewNamespace()
+
 func init() {
-	registry.Add((*AtomA)(nil).Class())
-	registry.Add((*AtomB)(nil).Class())
-	registry.Add((*AtomC)(nil).Class())
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*AtomA)(nil).Class())
+	Namespace.Add((*AtomB)(nil).Class())
+	Namespace.Add((*AtomC)(nil).Class())
 }
 
 var (

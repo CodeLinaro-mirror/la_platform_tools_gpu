@@ -6,6 +6,10 @@ Package test is the integration test suite for the api compiler and templates.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  API
 
 ```go

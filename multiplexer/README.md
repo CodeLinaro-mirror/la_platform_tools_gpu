@@ -11,6 +11,10 @@ binary data-stream.
 var ErrChannelClosed = errors.New("Channel closed")
 ```
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### type Multiplexer
 
 ```go
