@@ -91,6 +91,7 @@ func (d *decoder) SkipVariant() (binary.ID, error) {
 	}
 }
 
-func (e *encoder) Object(obj binary.Object) error { return e.Variant(obj) }
-func (d *decoder) Object() (binary.Object, error) { return d.Variant() }
-func (d *decoder) SkipObject() (binary.ID, error) { return d.SkipVariant() }
+func (e *encoder) Object(obj binary.Object) error   { return e.Variant(obj) }
+func (d *decoder) Object() (binary.Object, error)   { return d.Variant() }
+func (d *decoder) SkipObject() (binary.ID, error)   { return d.SkipVariant() }
+func (d *decoder) Lookup(id binary.ID) binary.Class { return d.Namespace.Lookup(id) }

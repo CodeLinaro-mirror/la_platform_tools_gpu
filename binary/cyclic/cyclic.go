@@ -183,3 +183,7 @@ func (d *decoder) SkipObject() (binary.ID, error) {
 	}
 	return d.SkipVariant()
 }
+
+func (d *decoder) Lookup(id binary.ID) binary.Class {
+	return d.Namespace.Lookup(id)
+}
