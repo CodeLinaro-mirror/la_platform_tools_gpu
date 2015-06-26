@@ -50,28 +50,30 @@ var osToSystem = map[string]string{
 // Toolchain for building an Android executable env, without being packaged into an
 // APK (user-debug only).
 var EXE = &cpp.Toolchain{
-	Compiler:  compile,
-	Archiver:  archive,
-	DllLinker: linkSo,
-	ExeLinker: linkExe,
-	DepsFor:   depsFor,
-	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
-	ExeName:   func(cfg cpp.Config) string { return cfg.Name },
-	ObjExt:    func(cfg cpp.Config) string { return ".o" },
+	Compiler:   compile,
+	Archiver:   archive,
+	DllLinker:  linkSo,
+	ExeLinker:  linkExe,
+	DepsFor:    depsFor,
+	DepFileFor: depFileFor,
+	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:    func(cfg cpp.Config) string { return cfg.Name },
+	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
 
 // Toolchain for building an Android APK.
 var APK = &cpp.Toolchain{
-	Compiler:  compile,
-	Archiver:  archive,
-	DllLinker: linkSo,
-	ExeLinker: linkApk,
-	DepsFor:   depsFor,
-	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
-	ExeName:   func(cfg cpp.Config) string { return cfg.Name + ".apk" },
-	ObjExt:    func(cfg cpp.Config) string { return ".o" },
+	Compiler:   compile,
+	Archiver:   archive,
+	DllLinker:  linkSo,
+	ExeLinker:  linkApk,
+	DepsFor:    depsFor,
+	DepFileFor: depFileFor,
+	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:    func(cfg cpp.Config) string { return cfg.Name + ".apk" },
+	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
 
 type tools struct {
@@ -258,18 +260,23 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	// Create an intermediate directory to hold the files going into the apk.
 	log("Creating APK files")
 	root := build.File(cpp.IntermediatePath(output, "", cfg, env).Dir())
-	root.MkdirAll()
 
 	// Emit the intermetiate files and .so:
 	//    root/AndroidManifest.xml
 	//    root/values/strings.xml
 	//    root/lib/<abi>/libxxx.so
 	manifest := root.Join("AndroidManifest.xml")
-	ioutil.WriteFile(manifest.Absolute(), androidManifest(cfg), 0666)
+	manifest.MkdirAll()
+
+	if err := ioutil.WriteFile(manifest.Absolute(), androidManifest(cfg), 0666); err != nil {
+		return fmt.Errorf("Failed to build AndroidManifest.xml: %v", err)
+	}
 	res := root.Join("res")
 	strings := res.Join("values", "strings.xml")
 	strings.MkdirAll()
-	ioutil.WriteFile(strings.Absolute(), stringsXml(cfg.Name), 0666)
+	if err := ioutil.WriteFile(strings.Absolute(), stringsXml(cfg.Name), 0666); err != nil {
+		return fmt.Errorf("Failed to build strings.xml: %v", err)
+	}
 	so := root.Join("lib", ndkArchToTarget[cfg.Architecture].abi, "lib"+cfg.Name+".so")
 	so.MkdirAll()
 	if err := linkSo(inputs, so, cfg, env); err != nil {

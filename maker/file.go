@@ -100,9 +100,6 @@ func (f *file) Name() string { return f.abs }
 // String returns the Name of the file.
 func (f *file) String() string { return f.abs }
 
-// Exists returns true if the file could be statted.
-func (f *file) Exists() bool { return f.stat != nil }
-
 // Timestamp returns the last modified time reported by the file system.
 func (f *file) Timestamp() time.Time {
 	if f.stat == nil {

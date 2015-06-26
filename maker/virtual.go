@@ -66,9 +66,6 @@ func (l *virtual) Name() string { return l.name }
 // String returns the Name of the virtual for debugging.
 func (l *virtual) String() string { return l.name }
 
-// Exists returns false, virtual entities never exist.
-func (l *virtual) Exists() bool { return false }
-
 // Timestamp return the zero time, virtual entitis are not modified.
 func (l *virtual) Timestamp() time.Time { return time.Time{} }
 

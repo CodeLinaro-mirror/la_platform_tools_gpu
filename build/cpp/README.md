@@ -39,7 +39,7 @@ the host OS.
 #### func  MakeDynamicLibrary
 
 ```go
-func MakeDynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) build.File
+func MakeDynamicLibrary(name string, inputs build.FileSet, cfg Config, env build.Environment) build.File
 ```
 Add make steps to construct a dynamic library. The inputs can be a combination
 of source files, object files and / or library files. Source file inputs will
@@ -49,7 +49,7 @@ a dependency on the linker.
 #### func  MakeExecutable
 
 ```go
-func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) build.File
+func MakeExecutable(name string, inputs build.FileSet, cfg Config, env build.Environment) build.File
 ```
 Add make steps to construct an executable. The inputs can be a combination of
 source files, object files and / or library files. Source file inputs will
@@ -138,15 +138,16 @@ OptimisationLevel is an enumerator of optimisation levels to use by a toolchain.
 
 ```go
 type Toolchain struct {
-	Compiler  sisotool            // Tool used to compile source to object files.
-	Archiver  misotool            // Tool used to package object files into archives.
-	DllLinker misotool            // Tool used to link objects and packages into dynamic libraries.
-	ExeLinker misotool            // Tool used to link objects and packages into executables.
-	DepsFor   depsFor             // Returns the list of dependencies for the given file.
-	LibName   func(Config) string // Returns the name of the emitted static library file.
-	DllName   func(Config) string // Returns the name of the emitted dynamic library file.
-	ExeName   func(Config) string // Returns the name of the emitted executable.
-	ObjExt    func(Config) string // Extension used for object files.
+	Compiler   sisotool            // Tool used to compile source to object files.
+	Archiver   misotool            // Tool used to package object files into archives.
+	DllLinker  misotool            // Tool used to link objects and packages into dynamic libraries.
+	ExeLinker  misotool            // Tool used to link objects and packages into executables.
+	DepFileFor depFileFor          // Returns the name of the dependency file
+	DepsFor    depsFor             // Returns the list of dependencies for the given file.
+	LibName    func(Config) string // Returns the name of the emitted static library file.
+	DllName    func(Config) string // Returns the name of the emitted dynamic library file.
+	ExeName    func(Config) string // Returns the name of the emitted executable.
+	ObjExt     func(Config) string // Extension used for object files.
 }
 ```
 
