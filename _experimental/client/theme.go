@@ -42,3 +42,9 @@ func CreateLabel(t gxui.Theme, s string, c gxui.Color, active bool) gxui.Label {
 	l.SetMargin(math.Spacing{})
 	return l
 }
+
+func CreateMonospaceLabel(appCtx *ApplicationContext, s string, c gxui.Color, active bool) gxui.Label {
+	l := CreateLabel(appCtx.theme, s, c, active)
+	l.SetFont(appCtx.monospace)
+	return l
+}
