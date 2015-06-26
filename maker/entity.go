@@ -26,8 +26,6 @@ type Entity interface {
 	// If Name is the empty string, the entity does not appear in the main entity
 	// list and cannot be looked up.
 	Name() string
-	// Exists returns true if the entity currently exists.
-	Exists() bool
 	// Timestamp returns the last modified time of the entity, or the zero time if
 	// not available.
 	Timestamp() time.Time

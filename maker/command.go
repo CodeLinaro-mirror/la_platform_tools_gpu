@@ -15,13 +15,13 @@
 package maker
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 var (
@@ -29,39 +29,48 @@ var (
 	EnvVars = map[string][]string{}
 )
 
+// ExecAt executes "path" with the specified arguments with the working
+// directory set to "wd".
+func ExecAt(wd string, verbose int, path string, args ...string) error {
+	before := time.Now()
+	cmd := exec.Command(path, args...)
+	cmd.Dir = wd
+
+	if verbose > 0 {
+		log.Printf("-> %s", strings.Join(cmd.Args, " "))
+	}
+	if verbose > 1 {
+		log.Printf("Working directory: %v", cmd.Dir)
+		log.Printf("Environment:")
+		for _, v := range cmd.Env {
+			log.Printf("• %s", v)
+		}
+	}
+
+	output, err := cmd.CombinedOutput()
+	duration := time.Now().Sub(before)
+	switch {
+	case err != nil:
+		err = fmt.Errorf("Command: \"%v\" %v", strings.Join(cmd.Args, " "), err)
+		log.Printf("\n\n%s\n%v", string(output), err)
+		return err
+	case verbose > 1:
+		if msg := string(output); msg != "" {
+			log.Printf("\n%s\n--- %s %v succeeded ---", msg, path, duration)
+		} else {
+			log.Printf("%s %v succeeded", path, duration)
+		}
+	}
+	return nil
+}
+
 // Command builds and returns a new Step that runs the specified external binary
 // with the supplied arguments. The newly created Step will be made to depend on
 // the binary.
 func Command(binary Entity, args ...string) *Step {
 	wd := Paths.Root
 	return NewStep(func(step *Step) error {
-		cmd := exec.Command(binary.Name(), args...)
-		var output bytes.Buffer
-		if Config.Verbose > 1 {
-			cmd.Stdout = &output
-			cmd.Stderr = &output
-		} else {
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-		}
-
-		cmd.Env = getEnvVars()
-		cmd.Dir = wd
-		if Config.Verbose > 0 {
-			log.Printf("-> %s", strings.Join(cmd.Args, " "))
-		}
-		if Config.Verbose > 1 {
-			log.Printf("Working directory: %v", cmd.Dir)
-			log.Printf("Environment:")
-			for _, v := range cmd.Env {
-				log.Printf("• %s", v)
-			}
-		}
-		err := cmd.Run()
-		if err != nil {
-			return fmt.Errorf("Command: \"%v %v\" %v", binary, strings.Join(cmd.Args, " "), err)
-		}
-		return nil
+		return ExecAt(wd, Config.Verbose, binary.Name(), args...)
 	}).DependsOn(binary)
 }
 

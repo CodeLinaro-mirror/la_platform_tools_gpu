@@ -15,12 +15,13 @@
 package build
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
+
+	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
 // File represents the path to a file or directory.
@@ -169,11 +170,9 @@ func (f File) Exec(env Environment, args ...string) error {
 // ExecAt executes this File with the specified arguments with the working
 // directory set to wd.
 func (f File) ExecAt(env Environment, wd File, args ...string) error {
-	logger := env.Logger.Enter("Exec")
-
 	var path string
 	if f.Exists() {
-		path = string(f)
+		path = f.Absolute()
 	} else {
 		var err error
 		path, err = exec.LookPath(string(f))
@@ -181,30 +180,11 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 			return err
 		}
 	}
+	verbose := 0
 	if env.Verbose {
-		logger.Infof("%s %v", path, args)
+		verbose = 1
 	}
-
-	cmd := exec.Command(path, args...)
-	cmd.Dir = string(wd)
-	buffer := &bytes.Buffer{}
-	cmd.Stdout = buffer
-	cmd.Stderr = buffer
-	err := cmd.Run()
-	switch {
-	case err != nil:
-		logger.Errorf("\n\n%s\n--- %s failed: %v ---", string(buffer.Bytes()), f.Name(), err)
-		logger.Errorf("Failed command: %v %v", path, args)
-		logger.Flush()
-
-	case env.Verbose:
-		if msg := string(buffer.Bytes()); msg != "" {
-			logger.Infof("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
-		} else {
-			logger.Infof("%s succeeded", f.Name())
-		}
-	}
-	return err
+	return maker.ExecAt(wd.Absolute(), verbose, path, args...)
 }
 
 // LookPath looks for the file f on the system PATH, returning the absolute
