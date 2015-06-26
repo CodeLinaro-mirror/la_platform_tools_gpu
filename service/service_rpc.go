@@ -312,10 +312,10 @@ type AtomRange struct {
 // Class MemoryInfo
 type MemoryInfo struct {
 	binary.Generate
-	Data    U8Array
-	Stale   MemoryRangeArray
-	Current MemoryRangeArray
-	Unknown MemoryRangeArray
+	Data     U8Array
+	Reads    MemoryRangeArray
+	Writes   MemoryRangeArray
+	Observed MemoryRangeArray
 }
 
 // Class MemoryRange

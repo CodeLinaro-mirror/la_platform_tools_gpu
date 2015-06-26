@@ -384,7 +384,7 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	l := int32(ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
 	ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Binary.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Binary.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = l
 	return nil
 }
@@ -454,7 +454,7 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	if (ϟa.Length) > (int32(0)) {
 		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	} else {
-		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())
@@ -471,7 +471,7 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	if (ϟa.Length) > (int32(0)) {
 		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	} else {
-		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())
@@ -930,7 +930,7 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = l
 	return nil
 }
@@ -957,7 +957,7 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = l
 	return nil
 }
@@ -1912,7 +1912,7 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib1fv)
@@ -1925,7 +1925,7 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(2), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(2), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib2fv)
@@ -1938,7 +1938,7 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(3), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(3), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib3fv)
@@ -1951,7 +1951,7 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Value.Slice(uint64(0), uint64(4), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Value.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Value.value())
 	ϟb.Call(funcInfoGlVertexAttrib4fv)
@@ -1970,7 +1970,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟb.Push(ϟa.Precision.value())
 	ϟb.Call(funcInfoGlGetShaderPrecisionFormat)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Range.Slice(uint64(0), uint64(2), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Range.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
@@ -2594,7 +2594,7 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟb.Push(ϟa.Data.value())
 	ϟb.Call(funcInfoGlReadPixels)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Data.Slice(uint64(uint32(0)), uint64(externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), TexelFormat(ϟa.Format), ϟa.Type)), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Data.Slice(uint64(uint32(0)), uint64(externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), TexelFormat(ϟa.Format), ϟa.Type)), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -2952,7 +2952,7 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Data.Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Data.Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.S32(ϟa.Offset))
 	ϟb.Push(value.S32(ϟa.Size))
@@ -3180,7 +3180,7 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Info.value())
 	ϟb.Call(funcInfoGlGetShaderInfoLog)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _ = context, GetContext_87_result, ctx, s, min_88_a, min_88_b, min_88_result, l
 	return nil
@@ -3222,7 +3222,7 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Source.value())
 	ϟb.Call(funcInfoGlGetShaderSource)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _ = context, GetContext_89_result, ctx, s, min_90_a, min_90_b, min_90_result, l
 	return nil
@@ -3465,7 +3465,7 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟb.Push(ϟa.Info.value())
 	ϟb.Call(funcInfoGlGetProgramInfoLog)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
 	_, _, _, _, _, _, _, _ = context, GetContext_98_result, ctx, p, min_99_a, min_99_b, min_99_result, l
 	return nil
@@ -3915,7 +3915,7 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 				}() // u32
 				for v := uint32(ReadVertexArrays_114_first_index); v < (ReadVertexArrays_114_last_index)+(uint32(1)); v++ {
 					offset := (elstride) * (v) // u32
-					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 					_ = offset
 				}
 				_, _, _, _ = vertexAttribTypeSize_115_t, vertexAttribTypeSize_115_result, elsize, elstride
@@ -3973,7 +3973,7 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 				}() // u32
 				for v := uint32(ReadVertexArrays_116_first_index); v < (ReadVertexArrays_116_last_index)+(uint32(1)); v++ {
 					offset := (elstride) * (v) // u32
-					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 					_ = offset
 				}
 				_, _, _, _ = vertexAttribTypeSize_117_t, vertexAttribTypeSize_117_result, elsize, elstride
@@ -3995,7 +3995,7 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 				return result
 			}
 		}() // u32
-		index_data.Slice(uint64(uint32(0)), uint64((uint32(ϟa.ElementCount))*(IndexSize_118_result)), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+		index_data.Slice(uint64(uint32(0)), uint64((uint32(ϟa.ElementCount))*(IndexSize_118_result)), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		_, _, _, _, _, _, _, _ = index_data, first, last, ReadVertexArrays_116_ctx, ReadVertexArrays_116_first_index, ReadVertexArrays_116_last_index, IndexSize_118_indices_type, IndexSize_118_result
 	}
 	ϟb.Push(value.U32(ϟa.DrawMode))
@@ -4063,7 +4063,7 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 			}() // u32
 			for v := uint32(ReadVertexArrays_120_first_index); v < (ReadVertexArrays_120_last_index)+(uint32(1)); v++ {
 				offset := (elstride) * (v) // u32
-				arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+				arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 				_ = offset
 			}
 			_, _, _, _ = vertexAttribTypeSize_121_t, vertexAttribTypeSize_121_result, elsize, elstride
@@ -4711,7 +4711,7 @@ func (ϟa *GlGetActiveUniformBlockName) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	_ = l
 	return nil
 }
@@ -4757,7 +4757,7 @@ func (ϟa *GlGetActiveUniformsiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.UniformIndices.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.UniformIndices.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
@@ -4769,7 +4769,7 @@ func (ϟa *GlGetActiveUniformsiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Parameters.value())
 	ϟb.Call(funcInfoGlGetActiveUniformsiv)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Parameters.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.Parameters.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 

@@ -35,6 +35,8 @@ import (
 type Pool struct {
 	binary.Generate `disable:"true"`
 	writes          []write
+	OnRead          func(Range)
+	OnWrite         func(Range)
 }
 
 // PoolID is an indentifier of a Pool.
@@ -130,6 +132,26 @@ func (m poolSlice) Slice(rng Range) Slice {
 	}
 	rng.Base += m.rng.Base
 	return poolSlice{m.pool, rng, len(m.pool.writes)}
+}
+
+func (m poolSlice) ValidRanges() RangeList {
+	// build a list of unknown ranges
+	unknown := RangeList{m.rng}
+	for i := m.at - 1; i >= 0 && len(unknown) > 0; i-- {
+		w := m.pool.writes[i]
+		interval.Remove(&unknown, w.dst.Span())
+	}
+	// invert the unknowns to a list of knowns
+	knowns := RangeList{m.rng}
+	for _, u := range unknown {
+		interval.Remove(&knowns, u.Span())
+	}
+	// return slice-relative addresses
+	valid := make(RangeList, len(knowns))
+	for i, k := range knowns {
+		valid[i] = Range{Base: k.Base - m.rng.Base, Size: k.Size}
+	}
+	return valid
 }
 
 func (m poolSlice) Size() uint64 {

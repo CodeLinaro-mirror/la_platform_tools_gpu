@@ -205,6 +205,22 @@
     }
   {{end}}
 
+  // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+  func (p {{$ptr_ty}}) OnRead(ϟs *gfxapi.State) {{$ptr_ty}} {
+    if f := ϟs.Memory[p.Pool].OnRead; f != nil {
+      f(p.Address.Range(p.ElementSize(ϟs)))
+    }
+    return p
+  }
+
+  // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+  func (p {{$ptr_ty}}) OnWrite(ϟs *gfxapi.State) {{$ptr_ty}} {
+    if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
+      f(p.Address.Range(p.ElementSize(ϟs)))
+    }
+    return p
+  }
+
   {{if $el_is_char}}
     // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
     // If incNullTerm is true then the null-terminator is included in the slice.
@@ -285,6 +301,7 @@
 
   // Clone returns a copy of the {{$slice_ty}} in a new memory pool.
   func (s {{$slice_ty}}) Clone(ϟs *gfxapi.State) {{$slice_ty}} {
+    s.OnRead(ϟs)
     pool := &memory.Pool{}
     pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
     id := ϟs.NextPoolID
@@ -345,6 +362,7 @@
     // Read reads and returns all the {{$el_ty}} elements in this {{$slice_ty}}.
     func (s {{$slice_ty}}) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []{{$el_ty}} {
       d, res := s.Decoder(ϟs, ϟd, ϟl), make([]{{$el_ty}}, s.Count)
+      s.OnRead(ϟs)
       for i := range res {
         {{if $el_is_ptr}}
           if s.Pool == memory.ApplicationPool {
@@ -359,18 +377,17 @@
         {{if $el_is_ptr}} } {{end}}
       }
       return res
-
     }
 
     // Write copies elements from src to this slice. The number of elements copied is returned
-    // which is the minimum of dst.Count and src.Count.
-    func (dst {{$slice_ty}}) Write(src []{{$el_ty}}, ϟs *gfxapi.State) uint64 {
-      count := min(dst.Count, uint64(len(src)))
-      dst = dst.Slice(0, count, ϟs)
-      e := dst.Encoder(ϟs)
+    // which is the minimum of s.Count and len(src).
+    func (s {{$slice_ty}}) Write(src []{{$el_ty}}, ϟs *gfxapi.State) uint64 {
+      count := min(s.Count, uint64(len(src)))
+      s = s.Slice(0, count, ϟs)
+      e := s.Encoder(ϟs)
       for i := uint64(0); i < count; i++ {
         {{if $el_is_ptr}}
-          if dst.Pool == memory.ApplicationPool {
+          if s.Pool == memory.ApplicationPool {
             if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, uint64(src[i].Address)); err != nil {
               panic(err)
             }
@@ -379,6 +396,7 @@
           {{Macro "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
         {{if $el_is_ptr}} } {{end}}
       }
+      s.OnWrite(ϟs)
       return count
     }
 
@@ -390,14 +408,32 @@
       dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
     {{if $el_is_ptr}}
       if (dst.Pool == memory.ApplicationPool) != (src.Pool == memory.ApplicationPool) {
-        dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs)
+        dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> {{$ptr_ty}}
       } else {
     {{end}}
+      src.OnRead(ϟs)
       ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+      dst.OnWrite(ϟs)
     {{if $el_is_ptr}} } {{end}}
       return dst, src
     }
   {{end}}
+
+  // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+  func (s {{$slice_ty}}) OnRead(ϟs *gfxapi.State) {{$slice_ty}} {
+    if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+      f(s.Range(ϟs))
+    }
+    return s
+  }
+
+  // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+  func (s {{$slice_ty}}) OnWrite(ϟs *gfxapi.State) {{$slice_ty}} {
+    if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+      f(s.Range(ϟs))
+    }
+    return s
+  }
 
   // Index returns a {{$ptr_ty}} to the i'th element in this {{$slice_ty}}.
   func (s {{$slice_ty}}) Index(i uint64, ϟs *gfxapi.State) {{$ptr_ty}} {

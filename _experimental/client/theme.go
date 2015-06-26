@@ -26,7 +26,8 @@ var (
 	MEMORY_OBSERVATION_COLOR gxui.Color = gxui.ColorFromHex(0xFFA1CF8A)
 	INACTIVE_COLOR           gxui.Color = gxui.ColorFromHex(0xFF505050)
 	CONSTANT_COLOR           gxui.Color = gxui.ColorFromHex(0xFFDDB7FF)
-	MEMORY_COLOR             gxui.Color = gxui.ColorFromHex(0xFFFFE8BB)
+	READ_MEMORY_COLOR        gxui.Color = gxui.Green
+	WRITE_MEMORY_COLOR       gxui.Color = gxui.Red
 	STALE_MEMORY_COLOR       gxui.Color = gxui.ColorFromHex(0xFF8A7753)
 )
 

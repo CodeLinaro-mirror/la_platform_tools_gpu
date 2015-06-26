@@ -139,7 +139,7 @@ func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdCopy)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -386,8 +386,8 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(10), ϟs)
-	ϟa.B.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.C.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.B.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.C.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟdst, ϟsrc := ϟc.U8s.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
 	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.A.value())
@@ -395,7 +395,7 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.C.value())
 	ϟb.Call(funcInfoCmdVoid3InArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -885,7 +885,7 @@ func (ϟa *CmdVoidInArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(5), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidInArrayOfRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -900,7 +900,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidOutArrayOfRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(5), ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 

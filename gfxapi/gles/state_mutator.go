@@ -730,6 +730,7 @@ func (ϟa *CGSGetSurfaceBounds) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Bounds.Slice(uint64(0), uint64(4), ϟs).OnWrite(ϟs)
 	ϟa.Result = ϟa.Result
 	return nil
 }
@@ -773,6 +774,7 @@ func (ϟa *GlGetProgramBinaryOES) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	l := int32(ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)) // s32
 	ϟa.BytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
 	ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.BinaryFormat.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
+	ϟa.Binary.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs)
 	_ = l
 	return nil
 }
@@ -811,6 +813,7 @@ func (ϟa *GlInsertEventMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	if (ϟa.Length) > (int32(0)) {
 		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 	} else {
+		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -822,6 +825,7 @@ func (ϟa *GlPushGroupMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	if (ϟa.Length) > (int32(0)) {
 		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 	} else {
+		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -1105,6 +1109,7 @@ func (ϟa *GlGetActiveAttrib) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs)
 	_ = l
 	return nil
 }
@@ -1117,6 +1122,7 @@ func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs)
 	_ = l
 	return nil
 }
@@ -1742,6 +1748,7 @@ func (ϟa *GlVertexAttrib1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1749,6 +1756,7 @@ func (ϟa *GlVertexAttrib2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Value.Slice(uint64(0), uint64(2), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1756,6 +1764,7 @@ func (ϟa *GlVertexAttrib3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Value.Slice(uint64(0), uint64(3), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1763,6 +1772,7 @@ func (ϟa *GlVertexAttrib4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Value.Slice(uint64(0), uint64(4), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -1771,6 +1781,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Mutate(ϟs *gfxapi.State, ϟd database.Da
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Range.Slice(uint64(0), uint64(2), ϟs).OnWrite(ϟs)
 	ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.Precision.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	return nil
 }
@@ -2220,6 +2231,7 @@ func (ϟa *GlReadPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Data.Slice(uint64(uint32(0)), uint64(externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), TexelFormat(ϟa.Format), ϟa.Type)), ϟs).OnWrite(ϟs)
 	return nil
 }
 func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -2486,6 +2498,7 @@ func (ϟa *GlBufferSubData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Data.Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -3168,6 +3181,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 				}() // u32
 				for v := uint32(ReadVertexArrays_114_first_index); v < (ReadVertexArrays_114_last_index)+(uint32(1)); v++ {
 					offset := (elstride) * (v) // u32
+					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs)
 					_ = offset
 				}
 				_, _, _, _ = vertexAttribTypeSize_115_t, vertexAttribTypeSize_115_result, elsize, elstride
@@ -3225,6 +3239,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 				}() // u32
 				for v := uint32(ReadVertexArrays_116_first_index); v < (ReadVertexArrays_116_last_index)+(uint32(1)); v++ {
 					offset := (elstride) * (v) // u32
+					arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs)
 					_ = offset
 				}
 				_, _, _, _ = vertexAttribTypeSize_117_t, vertexAttribTypeSize_117_result, elsize, elstride
@@ -3246,6 +3261,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 				return result
 			}
 		}() // u32
+		index_data.Slice(uint64(uint32(0)), uint64((uint32(ϟa.ElementCount))*(IndexSize_118_result)), ϟs).OnRead(ϟs)
 		_, _, _, _, _, _, _, _ = index_data, first, last, ReadVertexArrays_116_ctx, ReadVertexArrays_116_first_index, ReadVertexArrays_116_last_index, IndexSize_118_indices_type, IndexSize_118_result
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -3306,6 +3322,7 @@ func (ϟa *GlDrawArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 			}() // u32
 			for v := uint32(ReadVertexArrays_120_first_index); v < (ReadVertexArrays_120_last_index)+(uint32(1)); v++ {
 				offset := (elstride) * (v) // u32
+				arr.Pointer.Slice(uint64(offset), uint64((offset)+(elsize)), ϟs).OnRead(ϟs)
 				_ = offset
 			}
 			_, _, _, _ = vertexAttribTypeSize_121_t, vertexAttribTypeSize_121_result, elsize, elstride
@@ -3779,6 +3796,7 @@ func (ϟa *GlGetActiveUniformBlockName) Mutate(ϟs *gfxapi.State, ϟd database.D
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)) // s32
 	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(l, ϟs)
+	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs)
 	_ = l
 	return nil
 }
@@ -3801,7 +3819,9 @@ func (ϟa *GlGetActiveUniformsiv) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.UniformIndices.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Parameters.Slice(uint64(uint32(0)), uint64(ϟa.UniformCount), ϟs).OnWrite(ϟs)
 	return nil
 }
 func (ϟa *GlBindBufferBase) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
