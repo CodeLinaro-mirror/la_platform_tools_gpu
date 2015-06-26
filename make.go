@@ -18,9 +18,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"android.googlesource.com/platform/tools/gpu/cc"
 	. "android.googlesource.com/platform/tools/gpu/maker"
@@ -32,6 +34,10 @@ func main() { Run() }
 
 const (
 	GPURoot = "android.googlesource.com/platform/tools/gpu"
+	// Request to send to replayd to have it shutdown. Note we do not use the
+	// value in replay/protocol/connection_type.go to avoid introducing a
+	// dependency on the code we are trying to build.
+	ReplaydShutdownRequest = 2
 )
 
 var (
@@ -112,12 +118,13 @@ func init() {
 		//
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
-		Apps.Gapir = Virtual("cc:replayd")
 		cctargets := []string{*targetOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
 			cctargets = append(cctargets, []string{"android-arm", "android-arm64"}...)
 		}
 		cc.Graph(cctargets)
+		Apps.Gapir = Virtual("cc:replayd")
+		Creator(Apps.Gapir).DependsOn(ShutdownReplayd())
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
 		// Runtime dependencies
@@ -221,4 +228,30 @@ func MarkdownDocs(docs *Step) {
 		}
 		docs.DependsOn(out)
 	}
+}
+
+func ShutdownReplayd() Entity {
+	e := Virtual("shutdownreplayd")
+	NewStep(func(*Step) error {
+		endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
+		for i := 0; i < 10; i++ {
+			conn, err := net.Dial("tcp", endpoint)
+			if err != nil {
+				// Assume this means there is no replayd
+				return nil
+			}
+			defer conn.Close()
+			msg := []byte{ReplaydShutdownRequest}
+			n, err := conn.Write(msg)
+			if err != nil {
+				return fmt.Errorf("Failed to send shutdown request to Replayd %v", err)
+			}
+			if n != len(msg) {
+				return fmt.Errorf("Failed to send shutdown request to Replayd (only sent %v bytes", n)
+			}
+			time.Sleep(100 * time.Millisecond)
+		}
+		return fmt.Errorf("Replayd at %v did not die", endpoint)
+	}).Creates(e)
+	return e
 }
