@@ -212,6 +212,8 @@ func (ϟa *CmdVoid3InArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(10), ϟs)
+	ϟa.B.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs)
+	ϟa.C.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
 	return nil
@@ -552,6 +554,7 @@ func (ϟa *CmdVoidInArrayOfRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnRead(ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
@@ -560,6 +563,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnWrite(ϟs)
 	return nil
 }
 func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {

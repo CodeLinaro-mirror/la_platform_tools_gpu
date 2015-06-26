@@ -69,6 +69,9 @@ func (p Pointer) String() string
 ```go
 type Pool struct {
 	binary.Generate `disable:"true"`
+
+	OnRead  func(Range)
+	OnWrite func(Range)
 }
 ```
 
@@ -185,7 +188,7 @@ First returns a Pointer to the first byte in the Range.
 ```go
 func (i Range) Intersect(other Range) Range
 ```
-Intersect returns the Range that is common between this Range and other. If the
+Intersect returns the range that is common between this Range and other. If the
 two memory ranges do not intersect, then this function panics.
 
 #### func (Range) Last
@@ -214,6 +217,14 @@ Span returns the Range as a U64Span.
 ```go
 func (i Range) String() string
 ```
+
+#### func (Range) Window
+
+```go
+func (i Range) Window(win Range) Range
+```
+Window returns the intersection of i and win, with the origin (0) address at
+win.Base. If the two memory ranges do not intersect, then this function panics.
 
 #### type RangeList
 
@@ -277,6 +288,10 @@ type Slice interface {
 	// Attempting to slice outside the range of this Slice will result in a
 	// panic.
 	Slice(r Range) Slice
+
+	// ValidRanges returns the list of slice-relative memory ranges that contain
+	// valid (non-zero) data that can be read with Get.
+	ValidRanges() RangeList
 }
 ```
 

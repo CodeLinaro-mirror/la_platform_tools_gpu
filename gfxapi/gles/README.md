@@ -1445,7 +1445,7 @@ fragment shaders. The returned program is not linked.
 
 ```go
 type Architecture struct {
-	binary.Generate
+	binary.Generate `display:"architecture"`
 
 	PointerAlignment uint32
 	PointerSize      uint32
@@ -1637,7 +1637,7 @@ type BOOL int64
 
 ```go
 type BackbufferInfo struct {
-	binary.Generate
+	binary.Generate `display:"backbufferInfo"`
 
 	Width                int32
 	Height               int32
@@ -1909,6 +1909,22 @@ func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ
 ```
 Index returns a Boolᵖ to the i'th element in this Boolˢ.
 
+#### func (Boolˢ) OnRead
+
+```go
+func (s Boolˢ) OnRead(ϟs *gfxapi.State) Boolˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Boolˢ) OnWrite
+
+```go
+func (s Boolˢ) OnWrite(ϟs *gfxapi.State) Boolˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Boolˢ) Range
 
 ```go
@@ -1948,10 +1964,10 @@ String returns a string description of the Boolˢ slice.
 #### func (Boolˢ) Write
 
 ```go
-func (dst Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64
+func (s Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Boolᵖ
 
@@ -1984,6 +2000,22 @@ func (*Boolᵖ) Class() binary.Class
 func (p Boolᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Boolᵖ points to.
+
+#### func (Boolᵖ) OnRead
+
+```go
+func (p Boolᵖ) OnRead(ϟs *gfxapi.State) Boolᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Boolᵖ) OnWrite
+
+```go
+func (p Boolᵖ) OnWrite(ϟs *gfxapi.State) Boolᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Boolᵖ) Read
 
@@ -2080,6 +2112,22 @@ func (p BufferDataPointer) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that BufferDataPointer
 points to.
+
+#### func (BufferDataPointer) OnRead
+
+```go
+func (p BufferDataPointer) OnRead(ϟs *gfxapi.State) BufferDataPointer
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (BufferDataPointer) OnWrite
+
+```go
+func (p BufferDataPointer) OnWrite(ϟs *gfxapi.State) BufferDataPointer
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (BufferDataPointer) Slice
 
@@ -2209,6 +2257,22 @@ func (s BufferIdˢ) Index(i uint64, ϟs *gfxapi.State) BufferIdᵖ
 ```
 Index returns a BufferIdᵖ to the i'th element in this BufferIdˢ.
 
+#### func (BufferIdˢ) OnRead
+
+```go
+func (s BufferIdˢ) OnRead(ϟs *gfxapi.State) BufferIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (BufferIdˢ) OnWrite
+
+```go
+func (s BufferIdˢ) OnWrite(ϟs *gfxapi.State) BufferIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (BufferIdˢ) Range
 
 ```go
@@ -2248,10 +2312,10 @@ String returns a string description of the BufferIdˢ slice.
 #### func (BufferIdˢ) Write
 
 ```go
-func (dst BufferIdˢ) Write(src []BufferId, ϟs *gfxapi.State) uint64
+func (s BufferIdˢ) Write(src []BufferId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type BufferIdᵖ
 
@@ -2284,6 +2348,22 @@ func (*BufferIdᵖ) Class() binary.Class
 func (p BufferIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that BufferIdᵖ points to.
+
+#### func (BufferIdᵖ) OnRead
+
+```go
+func (p BufferIdᵖ) OnRead(ϟs *gfxapi.State) BufferIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (BufferIdᵖ) OnWrite
+
+```go
+func (p BufferIdᵖ) OnWrite(ϟs *gfxapi.State) BufferIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (BufferIdᵖ) Read
 
@@ -2444,6 +2524,22 @@ func (p CGLContextObj) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that CGLContextObj points
 to.
 
+#### func (CGLContextObj) OnRead
+
+```go
+func (p CGLContextObj) OnRead(ϟs *gfxapi.State) CGLContextObj
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGLContextObj) OnWrite
+
+```go
+func (p CGLContextObj) OnWrite(ϟs *gfxapi.State) CGLContextObj
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (CGLContextObj) Slice
 
 ```go
@@ -2566,6 +2662,22 @@ func (s CGLContextObjˢ) Index(i uint64, ϟs *gfxapi.State) CGLContextObjᵖ
 ```
 Index returns a CGLContextObjᵖ to the i'th element in this CGLContextObjˢ.
 
+#### func (CGLContextObjˢ) OnRead
+
+```go
+func (s CGLContextObjˢ) OnRead(ϟs *gfxapi.State) CGLContextObjˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (CGLContextObjˢ) OnWrite
+
+```go
+func (s CGLContextObjˢ) OnWrite(ϟs *gfxapi.State) CGLContextObjˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (CGLContextObjˢ) Range
 
 ```go
@@ -2605,10 +2717,10 @@ String returns a string description of the CGLContextObjˢ slice.
 #### func (CGLContextObjˢ) Write
 
 ```go
-func (dst CGLContextObjˢ) Write(src []CGLContextObj, ϟs *gfxapi.State) uint64
+func (s CGLContextObjˢ) Write(src []CGLContextObj, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type CGLContextObjᵖ
 
@@ -2649,6 +2761,22 @@ func (p CGLContextObjᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that CGLContextObjᵖ points
 to.
 
+#### func (CGLContextObjᵖ) OnRead
+
+```go
+func (p CGLContextObjᵖ) OnRead(ϟs *gfxapi.State) CGLContextObjᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGLContextObjᵖ) OnWrite
+
+```go
+func (p CGLContextObjᵖ) OnWrite(ϟs *gfxapi.State) CGLContextObjᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (CGLContextObjᵖ) Read
 
 ```go
@@ -2681,7 +2809,7 @@ Write writes value to the CGLContextObj element at the pointer.
 
 ```go
 type CGLCreateContext struct {
-	binary.Generate
+	binary.Generate `display:"CGLCreateContext"`
 
 	Pix    CGLPixelFormatObj
 	Share  CGLContextObj
@@ -2775,7 +2903,7 @@ type CGLError int64
 
 ```go
 type CGLFlushDrawable struct {
-	binary.Generate
+	binary.Generate `display:"CGLFlushDrawable"`
 
 	Ctx    CGLContextObj
 	Result CGLError
@@ -2854,7 +2982,7 @@ func (c *CGLFlushDrawable) TypeID() atom.TypeID
 
 ```go
 type CGLGetSurface struct {
-	binary.Generate
+	binary.Generate `display:"CGLGetSurface"`
 
 	Ctx    CGLContextObj
 	Cid    CGSConnectionIDᵖ
@@ -2966,6 +3094,22 @@ func (p CGLPixelFormatObj) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that CGLPixelFormatObj
 points to.
 
+#### func (CGLPixelFormatObj) OnRead
+
+```go
+func (p CGLPixelFormatObj) OnRead(ϟs *gfxapi.State) CGLPixelFormatObj
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGLPixelFormatObj) OnWrite
+
+```go
+func (p CGLPixelFormatObj) OnWrite(ϟs *gfxapi.State) CGLPixelFormatObj
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (CGLPixelFormatObj) Slice
 
 ```go
@@ -2984,7 +3128,7 @@ String returns a string description of the CGLPixelFormatObj pointer.
 
 ```go
 type CGLSetCurrentContext struct {
-	binary.Generate
+	binary.Generate `display:"CGLSetCurrentContext"`
 
 	Ctx    CGLContextObj
 	Result CGLError
@@ -3101,6 +3245,22 @@ func (p CGSConnectionID) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that CGSConnectionID points
 to.
 
+#### func (CGSConnectionID) OnRead
+
+```go
+func (p CGSConnectionID) OnRead(ϟs *gfxapi.State) CGSConnectionID
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGSConnectionID) OnWrite
+
+```go
+func (p CGSConnectionID) OnWrite(ϟs *gfxapi.State) CGSConnectionID
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (CGSConnectionID) Slice
 
 ```go
@@ -3193,6 +3353,22 @@ func (s CGSConnectionIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSConnectionIDᵖ
 ```
 Index returns a CGSConnectionIDᵖ to the i'th element in this CGSConnectionIDˢ.
 
+#### func (CGSConnectionIDˢ) OnRead
+
+```go
+func (s CGSConnectionIDˢ) OnRead(ϟs *gfxapi.State) CGSConnectionIDˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (CGSConnectionIDˢ) OnWrite
+
+```go
+func (s CGSConnectionIDˢ) OnWrite(ϟs *gfxapi.State) CGSConnectionIDˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (CGSConnectionIDˢ) Range
 
 ```go
@@ -3233,10 +3409,10 @@ String returns a string description of the CGSConnectionIDˢ slice.
 #### func (CGSConnectionIDˢ) Write
 
 ```go
-func (dst CGSConnectionIDˢ) Write(src []CGSConnectionID, ϟs *gfxapi.State) uint64
+func (s CGSConnectionIDˢ) Write(src []CGSConnectionID, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type CGSConnectionIDᵖ
 
@@ -3277,6 +3453,22 @@ func (p CGSConnectionIDᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that CGSConnectionIDᵖ points
 to.
 
+#### func (CGSConnectionIDᵖ) OnRead
+
+```go
+func (p CGSConnectionIDᵖ) OnRead(ϟs *gfxapi.State) CGSConnectionIDᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGSConnectionIDᵖ) OnWrite
+
+```go
+func (p CGSConnectionIDᵖ) OnWrite(ϟs *gfxapi.State) CGSConnectionIDᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (CGSConnectionIDᵖ) Read
 
 ```go
@@ -3310,7 +3502,7 @@ Write writes value to the CGSConnectionID element at the pointer.
 
 ```go
 type CGSGetSurfaceBounds struct {
-	binary.Generate
+	binary.Generate `display:"CGSGetSurfaceBounds"`
 
 	Cid    CGSConnectionID
 	Wid    CGSWindowID
@@ -3474,6 +3666,22 @@ func (s CGSSurfaceIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSSurfaceIDᵖ
 ```
 Index returns a CGSSurfaceIDᵖ to the i'th element in this CGSSurfaceIDˢ.
 
+#### func (CGSSurfaceIDˢ) OnRead
+
+```go
+func (s CGSSurfaceIDˢ) OnRead(ϟs *gfxapi.State) CGSSurfaceIDˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (CGSSurfaceIDˢ) OnWrite
+
+```go
+func (s CGSSurfaceIDˢ) OnWrite(ϟs *gfxapi.State) CGSSurfaceIDˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (CGSSurfaceIDˢ) Range
 
 ```go
@@ -3513,10 +3721,10 @@ String returns a string description of the CGSSurfaceIDˢ slice.
 #### func (CGSSurfaceIDˢ) Write
 
 ```go
-func (dst CGSSurfaceIDˢ) Write(src []CGSSurfaceID, ϟs *gfxapi.State) uint64
+func (s CGSSurfaceIDˢ) Write(src []CGSSurfaceID, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type CGSSurfaceIDᵖ
 
@@ -3551,6 +3759,22 @@ func (p CGSSurfaceIDᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that CGSSurfaceIDᵖ points
 to.
+
+#### func (CGSSurfaceIDᵖ) OnRead
+
+```go
+func (p CGSSurfaceIDᵖ) OnRead(ϟs *gfxapi.State) CGSSurfaceIDᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGSSurfaceIDᵖ) OnWrite
+
+```go
+func (p CGSSurfaceIDᵖ) OnWrite(ϟs *gfxapi.State) CGSSurfaceIDᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (CGSSurfaceIDᵖ) Read
 
@@ -3663,6 +3887,22 @@ func (s CGSWindowIDˢ) Index(i uint64, ϟs *gfxapi.State) CGSWindowIDᵖ
 ```
 Index returns a CGSWindowIDᵖ to the i'th element in this CGSWindowIDˢ.
 
+#### func (CGSWindowIDˢ) OnRead
+
+```go
+func (s CGSWindowIDˢ) OnRead(ϟs *gfxapi.State) CGSWindowIDˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (CGSWindowIDˢ) OnWrite
+
+```go
+func (s CGSWindowIDˢ) OnWrite(ϟs *gfxapi.State) CGSWindowIDˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (CGSWindowIDˢ) Range
 
 ```go
@@ -3702,10 +3942,10 @@ String returns a string description of the CGSWindowIDˢ slice.
 #### func (CGSWindowIDˢ) Write
 
 ```go
-func (dst CGSWindowIDˢ) Write(src []CGSWindowID, ϟs *gfxapi.State) uint64
+func (s CGSWindowIDˢ) Write(src []CGSWindowID, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type CGSWindowIDᵖ
 
@@ -3739,6 +3979,22 @@ func (*CGSWindowIDᵖ) Class() binary.Class
 func (p CGSWindowIDᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that CGSWindowIDᵖ points to.
+
+#### func (CGSWindowIDᵖ) OnRead
+
+```go
+func (p CGSWindowIDᵖ) OnRead(ϟs *gfxapi.State) CGSWindowIDᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (CGSWindowIDᵖ) OnWrite
+
+```go
+func (p CGSWindowIDᵖ) OnWrite(ϟs *gfxapi.State) CGSWindowIDᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (CGSWindowIDᵖ) Read
 
@@ -3905,6 +4161,22 @@ func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ
 ```
 Index returns a Charᵖ to the i'th element in this Charˢ.
 
+#### func (Charˢ) OnRead
+
+```go
+func (s Charˢ) OnRead(ϟs *gfxapi.State) Charˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Charˢ) OnWrite
+
+```go
+func (s Charˢ) OnWrite(ϟs *gfxapi.State) Charˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Charˢ) Range
 
 ```go
@@ -3944,10 +4216,10 @@ String returns a string description of the Charˢ slice.
 #### func (Charˢ) Write
 
 ```go
-func (dst Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64
+func (s Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Charᵖ
 
@@ -3980,6 +4252,22 @@ func (*Charᵖ) Class() binary.Class
 func (p Charᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Charᵖ points to.
+
+#### func (Charᵖ) OnRead
+
+```go
+func (p Charᵖ) OnRead(ϟs *gfxapi.State) Charᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᵖ) OnWrite
+
+```go
+func (p Charᵖ) OnWrite(ϟs *gfxapi.State) Charᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Charᵖ) Read
 
@@ -4094,6 +4382,22 @@ func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ
 ```
 Index returns a Charᵖᵖ to the i'th element in this Charᵖˢ.
 
+#### func (Charᵖˢ) OnRead
+
+```go
+func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Charᵖˢ) OnWrite
+
+```go
+func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Charᵖˢ) Range
 
 ```go
@@ -4133,10 +4437,10 @@ String returns a string description of the Charᵖˢ slice.
 #### func (Charᵖˢ) Write
 
 ```go
-func (dst Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64
+func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Charᵖᵖ
 
@@ -4174,6 +4478,22 @@ func (*Charᵖᵖ) Class() binary.Class
 func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
+
+#### func (Charᵖᵖ) OnRead
+
+```go
+func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᵖᵖ) OnWrite
+
+```go
+func (p Charᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Charᵖᵖ) Read
 
@@ -4717,6 +5037,22 @@ func (s DiscardFramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) Disca
 Index returns a DiscardFramebufferAttachmentᵖ to the i'th element in this
 DiscardFramebufferAttachmentˢ.
 
+#### func (DiscardFramebufferAttachmentˢ) OnRead
+
+```go
+func (s DiscardFramebufferAttachmentˢ) OnRead(ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (DiscardFramebufferAttachmentˢ) OnWrite
+
+```go
+func (s DiscardFramebufferAttachmentˢ) OnWrite(ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (DiscardFramebufferAttachmentˢ) Range
 
 ```go
@@ -4758,10 +5094,10 @@ String returns a string description of the DiscardFramebufferAttachmentˢ slice.
 #### func (DiscardFramebufferAttachmentˢ) Write
 
 ```go
-func (dst DiscardFramebufferAttachmentˢ) Write(src []DiscardFramebufferAttachment, ϟs *gfxapi.State) uint64
+func (s DiscardFramebufferAttachmentˢ) Write(src []DiscardFramebufferAttachment, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type DiscardFramebufferAttachmentᵖ
 
@@ -4797,6 +5133,22 @@ func (p DiscardFramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that
 DiscardFramebufferAttachmentᵖ points to.
+
+#### func (DiscardFramebufferAttachmentᵖ) OnRead
+
+```go
+func (p DiscardFramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) DiscardFramebufferAttachmentᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (DiscardFramebufferAttachmentᵖ) OnWrite
+
+```go
+func (p DiscardFramebufferAttachmentᵖ) OnWrite(ϟs *gfxapi.State) DiscardFramebufferAttachmentᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (DiscardFramebufferAttachmentᵖ) Read
 
@@ -4889,6 +5241,22 @@ func (p EGLConfig) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that EGLConfig points to.
 
+#### func (EGLConfig) OnRead
+
+```go
+func (p EGLConfig) OnRead(ϟs *gfxapi.State) EGLConfig
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (EGLConfig) OnWrite
+
+```go
+func (p EGLConfig) OnWrite(ϟs *gfxapi.State) EGLConfig
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (EGLConfig) Slice
 
 ```go
@@ -4934,6 +5302,22 @@ func (*EGLContext) Class() binary.Class
 func (p EGLContext) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that EGLContext points to.
+
+#### func (EGLContext) OnRead
+
+```go
+func (p EGLContext) OnRead(ϟs *gfxapi.State) EGLContext
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (EGLContext) OnWrite
+
+```go
+func (p EGLContext) OnWrite(ϟs *gfxapi.State) EGLContext
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (EGLContext) Slice
 
@@ -5012,6 +5396,22 @@ func (p EGLDisplay) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that EGLDisplay points to.
 
+#### func (EGLDisplay) OnRead
+
+```go
+func (p EGLDisplay) OnRead(ϟs *gfxapi.State) EGLDisplay
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (EGLDisplay) OnWrite
+
+```go
+func (p EGLDisplay) OnWrite(ϟs *gfxapi.State) EGLDisplay
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (EGLDisplay) Slice
 
 ```go
@@ -5057,6 +5457,22 @@ func (*EGLSurface) Class() binary.Class
 func (p EGLSurface) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that EGLSurface points to.
+
+#### func (EGLSurface) OnRead
+
+```go
+func (p EGLSurface) OnRead(ϟs *gfxapi.State) EGLSurface
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (EGLSurface) OnWrite
+
+```go
+func (p EGLSurface) OnWrite(ϟs *gfxapi.State) EGLSurface
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (EGLSurface) Slice
 
@@ -5155,6 +5571,22 @@ func (s EGLintˢ) Index(i uint64, ϟs *gfxapi.State) EGLintᵖ
 ```
 Index returns a EGLintᵖ to the i'th element in this EGLintˢ.
 
+#### func (EGLintˢ) OnRead
+
+```go
+func (s EGLintˢ) OnRead(ϟs *gfxapi.State) EGLintˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (EGLintˢ) OnWrite
+
+```go
+func (s EGLintˢ) OnWrite(ϟs *gfxapi.State) EGLintˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (EGLintˢ) Range
 
 ```go
@@ -5194,10 +5626,10 @@ String returns a string description of the EGLintˢ slice.
 #### func (EGLintˢ) Write
 
 ```go
-func (dst EGLintˢ) Write(src []EGLint, ϟs *gfxapi.State) uint64
+func (s EGLintˢ) Write(src []EGLint, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type EGLintᵖ
 
@@ -5231,6 +5663,22 @@ func (p EGLintᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that EGLintᵖ points to.
 
+#### func (EGLintᵖ) OnRead
+
+```go
+func (p EGLintᵖ) OnRead(ϟs *gfxapi.State) EGLintᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (EGLintᵖ) OnWrite
+
+```go
+func (p EGLintᵖ) OnWrite(ϟs *gfxapi.State) EGLintᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (EGLintᵖ) Read
 
 ```go
@@ -5263,7 +5711,7 @@ Write writes value to the EGLint element at the pointer.
 
 ```go
 type EglCreateContext struct {
-	binary.Generate
+	binary.Generate `display:"eglCreateContext"`
 
 	Display      EGLDisplay
 	Config       EGLConfig
@@ -5351,7 +5799,7 @@ func (c *EglCreateContext) TypeID() atom.TypeID
 
 ```go
 type EglInitialize struct {
-	binary.Generate
+	binary.Generate `display:"eglInitialize"`
 
 	Dpy    EGLDisplay
 	Major  EGLintᵖ
@@ -5432,7 +5880,7 @@ func (c *EglInitialize) TypeID() atom.TypeID
 
 ```go
 type EglMakeCurrent struct {
-	binary.Generate
+	binary.Generate `display:"eglMakeCurrent"`
 
 	Display EGLDisplay
 	Draw    EGLSurface
@@ -5520,7 +5968,7 @@ func (c *EglMakeCurrent) TypeID() atom.TypeID
 
 ```go
 type EglQuerySurface struct {
-	binary.Generate
+	binary.Generate `display:"eglQuerySurface"`
 
 	Display   EGLDisplay
 	Surface   EGLSurface
@@ -5602,7 +6050,7 @@ func (c *EglQuerySurface) TypeID() atom.TypeID
 
 ```go
 type EglSwapBuffers struct {
-	binary.Generate
+	binary.Generate `display:"eglSwapBuffers"`
 
 	Display EGLDisplay
 	Surface Voidᵖ
@@ -5824,6 +6272,22 @@ func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ
 ```
 Index returns a F32ᵖ to the i'th element in this F32ˢ.
 
+#### func (F32ˢ) OnRead
+
+```go
+func (s F32ˢ) OnRead(ϟs *gfxapi.State) F32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (F32ˢ) OnWrite
+
+```go
+func (s F32ˢ) OnWrite(ϟs *gfxapi.State) F32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (F32ˢ) Range
 
 ```go
@@ -5863,10 +6327,10 @@ String returns a string description of the F32ˢ slice.
 #### func (F32ˢ) Write
 
 ```go
-func (dst F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64
+func (s F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type F32ᵖ
 
@@ -5899,6 +6363,22 @@ func (*F32ᵖ) Class() binary.Class
 func (p F32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that F32ᵖ points to.
+
+#### func (F32ᵖ) OnRead
+
+```go
+func (p F32ᵖ) OnRead(ϟs *gfxapi.State) F32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (F32ᵖ) OnWrite
+
+```go
+func (p F32ᵖ) OnWrite(ϟs *gfxapi.State) F32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (F32ᵖ) Read
 
@@ -6004,6 +6484,22 @@ func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ
 ```
 Index returns a F64ᵖ to the i'th element in this F64ˢ.
 
+#### func (F64ˢ) OnRead
+
+```go
+func (s F64ˢ) OnRead(ϟs *gfxapi.State) F64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (F64ˢ) OnWrite
+
+```go
+func (s F64ˢ) OnWrite(ϟs *gfxapi.State) F64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (F64ˢ) Range
 
 ```go
@@ -6043,10 +6539,10 @@ String returns a string description of the F64ˢ slice.
 #### func (F64ˢ) Write
 
 ```go
-func (dst F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64
+func (s F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type F64ᵖ
 
@@ -6079,6 +6575,22 @@ func (*F64ᵖ) Class() binary.Class
 func (p F64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that F64ᵖ points to.
+
+#### func (F64ᵖ) OnRead
+
+```go
+func (p F64ᵖ) OnRead(ϟs *gfxapi.State) F64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (F64ᵖ) OnWrite
+
+```go
+func (p F64ᵖ) OnWrite(ϟs *gfxapi.State) F64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (F64ᵖ) Read
 
@@ -6187,7 +6699,7 @@ func (v FaceOrientation) String() string
 
 ```go
 type FlushPostBuffer struct {
-	binary.Generate
+	binary.Generate `display:"flushPostBuffer"`
 }
 ```
 
@@ -6509,6 +7021,22 @@ func (s FramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferA
 Index returns a FramebufferAttachmentᵖ to the i'th element in this
 FramebufferAttachmentˢ.
 
+#### func (FramebufferAttachmentˢ) OnRead
+
+```go
+func (s FramebufferAttachmentˢ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (FramebufferAttachmentˢ) OnWrite
+
+```go
+func (s FramebufferAttachmentˢ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (FramebufferAttachmentˢ) Range
 
 ```go
@@ -6550,10 +7078,10 @@ String returns a string description of the FramebufferAttachmentˢ slice.
 #### func (FramebufferAttachmentˢ) Write
 
 ```go
-func (dst FramebufferAttachmentˢ) Write(src []FramebufferAttachment, ϟs *gfxapi.State) uint64
+func (s FramebufferAttachmentˢ) Write(src []FramebufferAttachment, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type FramebufferAttachmentᵖ
 
@@ -6588,6 +7116,22 @@ func (p FramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that FramebufferAttachmentᵖ
 points to.
+
+#### func (FramebufferAttachmentᵖ) OnRead
+
+```go
+func (p FramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferAttachmentᵖ) OnWrite
+
+```go
+func (p FramebufferAttachmentᵖ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (FramebufferAttachmentᵖ) Read
 
@@ -6733,6 +7277,22 @@ func (s FramebufferIdˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferIdᵖ
 ```
 Index returns a FramebufferIdᵖ to the i'th element in this FramebufferIdˢ.
 
+#### func (FramebufferIdˢ) OnRead
+
+```go
+func (s FramebufferIdˢ) OnRead(ϟs *gfxapi.State) FramebufferIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (FramebufferIdˢ) OnWrite
+
+```go
+func (s FramebufferIdˢ) OnWrite(ϟs *gfxapi.State) FramebufferIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (FramebufferIdˢ) Range
 
 ```go
@@ -6772,10 +7332,10 @@ String returns a string description of the FramebufferIdˢ slice.
 #### func (FramebufferIdˢ) Write
 
 ```go
-func (dst FramebufferIdˢ) Write(src []FramebufferId, ϟs *gfxapi.State) uint64
+func (s FramebufferIdˢ) Write(src []FramebufferId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type FramebufferIdᵖ
 
@@ -6810,6 +7370,22 @@ func (p FramebufferIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that FramebufferIdᵖ points
 to.
+
+#### func (FramebufferIdᵖ) OnRead
+
+```go
+func (p FramebufferIdᵖ) OnRead(ϟs *gfxapi.State) FramebufferIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferIdᵖ) OnWrite
+
+```go
+func (p FramebufferIdᵖ) OnWrite(ϟs *gfxapi.State) FramebufferIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (FramebufferIdᵖ) Read
 
@@ -6990,6 +7566,22 @@ func (p GLXContext) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that GLXContext points to.
 
+#### func (GLXContext) OnRead
+
+```go
+func (p GLXContext) OnRead(ϟs *gfxapi.State) GLXContext
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (GLXContext) OnWrite
+
+```go
+func (p GLXContext) OnWrite(ϟs *gfxapi.State) GLXContext
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (GLXContext) Slice
 
 ```go
@@ -7068,6 +7660,22 @@ func (p GLXDrawable) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that GLXDrawable points to.
 
+#### func (GLXDrawable) OnRead
+
+```go
+func (p GLXDrawable) OnRead(ϟs *gfxapi.State) GLXDrawable
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (GLXDrawable) OnWrite
+
+```go
+func (p GLXDrawable) OnWrite(ϟs *gfxapi.State) GLXDrawable
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (GLXDrawable) Slice
 
 ```go
@@ -7086,7 +7694,7 @@ String returns a string description of the GLXDrawable pointer.
 
 ```go
 type GlActiveTexture struct {
-	binary.Generate
+	binary.Generate `display:"glActiveTexture"`
 
 	Unit TextureUnit
 }
@@ -7170,7 +7778,7 @@ func (c *GlActiveTexture) TypeID() atom.TypeID
 
 ```go
 type GlAttachShader struct {
-	binary.Generate
+	binary.Generate `display:"glAttachShader"`
 
 	Program ProgramId
 	Shader  ShaderId
@@ -7255,7 +7863,7 @@ func (c *GlAttachShader) TypeID() atom.TypeID
 
 ```go
 type GlBeginQuery struct {
-	binary.Generate
+	binary.Generate `display:"glBeginQuery"`
 
 	Target QueryTarget
 	Query  QueryId
@@ -7340,7 +7948,7 @@ func (c *GlBeginQuery) TypeID() atom.TypeID
 
 ```go
 type GlBeginQueryEXT struct {
-	binary.Generate
+	binary.Generate `display:"glBeginQueryEXT"`
 
 	Target QueryTarget
 	Query  QueryId
@@ -7425,7 +8033,7 @@ func (c *GlBeginQueryEXT) TypeID() atom.TypeID
 
 ```go
 type GlBindAttribLocation struct {
-	binary.Generate
+	binary.Generate `display:"glBindAttribLocation"`
 
 	Program  ProgramId
 	Location AttributeLocation
@@ -7513,7 +8121,7 @@ func (c *GlBindAttribLocation) TypeID() atom.TypeID
 
 ```go
 type GlBindBuffer struct {
-	binary.Generate
+	binary.Generate `display:"glBindBuffer"`
 
 	Target BufferTarget
 	Buffer BufferId
@@ -7598,7 +8206,7 @@ func (c *GlBindBuffer) TypeID() atom.TypeID
 
 ```go
 type GlBindBufferBase struct {
-	binary.Generate
+	binary.Generate `display:"glBindBufferBase"`
 
 	Target IndexedBufferTarget
 	Index  uint32
@@ -7684,7 +8292,7 @@ func (c *GlBindBufferBase) TypeID() atom.TypeID
 
 ```go
 type GlBindFramebuffer struct {
-	binary.Generate
+	binary.Generate `display:"glBindFramebuffer"`
 
 	Target      FramebufferTarget
 	Framebuffer FramebufferId
@@ -7769,7 +8377,7 @@ func (c *GlBindFramebuffer) TypeID() atom.TypeID
 
 ```go
 type GlBindRenderbuffer struct {
-	binary.Generate
+	binary.Generate `display:"glBindRenderbuffer"`
 
 	Target       RenderbufferTarget
 	Renderbuffer RenderbufferId
@@ -7856,7 +8464,7 @@ func (c *GlBindRenderbuffer) TypeID() atom.TypeID
 
 ```go
 type GlBindTexture struct {
-	binary.Generate
+	binary.Generate `display:"glBindTexture"`
 
 	Target  TextureTarget
 	Texture TextureId
@@ -7941,7 +8549,7 @@ func (c *GlBindTexture) TypeID() atom.TypeID
 
 ```go
 type GlBindVertexArray struct {
-	binary.Generate
+	binary.Generate `display:"glBindVertexArray"`
 
 	Array VertexArrayId
 }
@@ -8025,7 +8633,7 @@ func (c *GlBindVertexArray) TypeID() atom.TypeID
 
 ```go
 type GlBindVertexArrayOES struct {
-	binary.Generate
+	binary.Generate `display:"glBindVertexArrayOES"`
 
 	Array VertexArrayId
 }
@@ -8111,7 +8719,7 @@ func (c *GlBindVertexArrayOES) TypeID() atom.TypeID
 
 ```go
 type GlBlendColor struct {
-	binary.Generate
+	binary.Generate `display:"glBlendColor"`
 
 	Red   float32
 	Green float32
@@ -8198,7 +8806,7 @@ func (c *GlBlendColor) TypeID() atom.TypeID
 
 ```go
 type GlBlendEquation struct {
-	binary.Generate
+	binary.Generate `display:"glBlendEquation"`
 
 	Equation BlendEquation
 }
@@ -8282,7 +8890,7 @@ func (c *GlBlendEquation) TypeID() atom.TypeID
 
 ```go
 type GlBlendEquationSeparate struct {
-	binary.Generate
+	binary.Generate `display:"glBlendEquationSeparate"`
 
 	Rgb   BlendEquation
 	Alpha BlendEquation
@@ -8369,7 +8977,7 @@ func (c *GlBlendEquationSeparate) TypeID() atom.TypeID
 
 ```go
 type GlBlendFunc struct {
-	binary.Generate
+	binary.Generate `display:"glBlendFunc"`
 
 	SrcFactor BlendFactor
 	DstFactor BlendFactor
@@ -8454,7 +9062,7 @@ func (c *GlBlendFunc) TypeID() atom.TypeID
 
 ```go
 type GlBlendFuncSeparate struct {
-	binary.Generate
+	binary.Generate `display:"glBlendFuncSeparate"`
 
 	SrcFactorRgb   BlendFactor
 	DstFactorRgb   BlendFactor
@@ -8543,7 +9151,7 @@ func (c *GlBlendFuncSeparate) TypeID() atom.TypeID
 
 ```go
 type GlBlitFramebuffer struct {
-	binary.Generate
+	binary.Generate `display:"glBlitFramebuffer"`
 
 	SrcX0  int32
 	SrcY0  int32
@@ -8636,7 +9244,7 @@ func (c *GlBlitFramebuffer) TypeID() atom.TypeID
 
 ```go
 type GlBufferData struct {
-	binary.Generate
+	binary.Generate `display:"glBufferData"`
 
 	Target BufferTarget
 	Size   int32
@@ -8723,7 +9331,7 @@ func (c *GlBufferData) TypeID() atom.TypeID
 
 ```go
 type GlBufferSubData struct {
-	binary.Generate
+	binary.Generate `display:"glBufferSubData"`
 
 	Target BufferTarget
 	Offset int32
@@ -8810,7 +9418,7 @@ func (c *GlBufferSubData) TypeID() atom.TypeID
 
 ```go
 type GlCheckFramebufferStatus struct {
-	binary.Generate
+	binary.Generate `display:"glCheckFramebufferStatus"`
 
 	Target FramebufferTarget
 	Result FramebufferStatus
@@ -8897,7 +9505,7 @@ func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID
 
 ```go
 type GlClear struct {
-	binary.Generate
+	binary.Generate `display:"glClear"`
 
 	Mask ClearMask
 }
@@ -8981,7 +9589,7 @@ func (c *GlClear) TypeID() atom.TypeID
 
 ```go
 type GlClearColor struct {
-	binary.Generate
+	binary.Generate `display:"glClearColor"`
 
 	R float32
 	G float32
@@ -9068,7 +9676,7 @@ func (c *GlClearColor) TypeID() atom.TypeID
 
 ```go
 type GlClearDepthf struct {
-	binary.Generate
+	binary.Generate `display:"glClearDepthf"`
 
 	Depth float32
 }
@@ -9152,7 +9760,7 @@ func (c *GlClearDepthf) TypeID() atom.TypeID
 
 ```go
 type GlClearStencil struct {
-	binary.Generate
+	binary.Generate `display:"glClearStencil"`
 
 	Stencil int32
 }
@@ -9236,7 +9844,7 @@ func (c *GlClearStencil) TypeID() atom.TypeID
 
 ```go
 type GlClientWaitSync struct {
-	binary.Generate
+	binary.Generate `display:"glClientWaitSync"`
 
 	Sync      SyncObject
 	SyncFlags SyncFlags
@@ -9323,7 +9931,7 @@ func (c *GlClientWaitSync) TypeID() atom.TypeID
 
 ```go
 type GlColorMask struct {
-	binary.Generate
+	binary.Generate `display:"glColorMask"`
 
 	Red   bool
 	Green bool
@@ -9410,7 +10018,7 @@ func (c *GlColorMask) TypeID() atom.TypeID
 
 ```go
 type GlCompileShader struct {
-	binary.Generate
+	binary.Generate `display:"glCompileShader"`
 
 	Shader ShaderId
 }
@@ -9494,7 +10102,7 @@ func (c *GlCompileShader) TypeID() atom.TypeID
 
 ```go
 type GlCompressedTexImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glCompressedTexImage2D"`
 
 	Target    TextureImageTarget
 	Level     int32
@@ -9587,7 +10195,7 @@ func (c *GlCompressedTexImage2D) TypeID() atom.TypeID
 
 ```go
 type GlCompressedTexSubImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glCompressedTexSubImage2D"`
 
 	Target    TextureImageTarget
 	Level     int32
@@ -9681,7 +10289,7 @@ func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID
 
 ```go
 type GlCopyTexImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glCopyTexImage2D"`
 
 	Target TextureImageTarget
 	Level  int32
@@ -9772,7 +10380,7 @@ func (c *GlCopyTexImage2D) TypeID() atom.TypeID
 
 ```go
 type GlCopyTexSubImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glCopyTexSubImage2D"`
 
 	Target  TextureImageTarget
 	Level   int32
@@ -9865,7 +10473,7 @@ func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID
 
 ```go
 type GlCreateProgram struct {
-	binary.Generate
+	binary.Generate `display:"glCreateProgram"`
 
 	Result ProgramId
 }
@@ -9949,7 +10557,7 @@ func (c *GlCreateProgram) TypeID() atom.TypeID
 
 ```go
 type GlCreateShader struct {
-	binary.Generate
+	binary.Generate `display:"glCreateShader"`
 
 	Type   ShaderType
 	Result ShaderId
@@ -10034,7 +10642,7 @@ func (c *GlCreateShader) TypeID() atom.TypeID
 
 ```go
 type GlCullFace struct {
-	binary.Generate
+	binary.Generate `display:"glCullFace"`
 
 	Mode FaceMode
 }
@@ -10118,7 +10726,7 @@ func (c *GlCullFace) TypeID() atom.TypeID
 
 ```go
 type GlDeleteBuffers struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteBuffers"`
 
 	Count   int32
 	Buffers BufferIdᵖ
@@ -10203,7 +10811,7 @@ func (c *GlDeleteBuffers) TypeID() atom.TypeID
 
 ```go
 type GlDeleteFramebuffers struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteFramebuffers"`
 
 	Count        int32
 	Framebuffers FramebufferIdᵖ
@@ -10290,7 +10898,7 @@ func (c *GlDeleteFramebuffers) TypeID() atom.TypeID
 
 ```go
 type GlDeleteProgram struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteProgram"`
 
 	Program ProgramId
 }
@@ -10374,7 +10982,7 @@ func (c *GlDeleteProgram) TypeID() atom.TypeID
 
 ```go
 type GlDeleteQueries struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteQueries"`
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -10459,7 +11067,7 @@ func (c *GlDeleteQueries) TypeID() atom.TypeID
 
 ```go
 type GlDeleteQueriesEXT struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteQueriesEXT"`
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -10546,7 +11154,7 @@ func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID
 
 ```go
 type GlDeleteRenderbuffers struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteRenderbuffers"`
 
 	Count         int32
 	Renderbuffers RenderbufferIdᵖ
@@ -10633,7 +11241,7 @@ func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID
 
 ```go
 type GlDeleteShader struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteShader"`
 
 	Shader ShaderId
 }
@@ -10717,7 +11325,7 @@ func (c *GlDeleteShader) TypeID() atom.TypeID
 
 ```go
 type GlDeleteSync struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteSync"`
 
 	Sync SyncObject
 }
@@ -10801,7 +11409,7 @@ func (c *GlDeleteSync) TypeID() atom.TypeID
 
 ```go
 type GlDeleteTextures struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteTextures"`
 
 	Count    int32
 	Textures TextureIdᵖ
@@ -10886,7 +11494,7 @@ func (c *GlDeleteTextures) TypeID() atom.TypeID
 
 ```go
 type GlDeleteVertexArrays struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteVertexArrays"`
 
 	Count  uint32
 	Arrays VertexArrayIdᵖ
@@ -10973,7 +11581,7 @@ func (c *GlDeleteVertexArrays) TypeID() atom.TypeID
 
 ```go
 type GlDeleteVertexArraysOES struct {
-	binary.Generate
+	binary.Generate `display:"glDeleteVertexArraysOES"`
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -11060,7 +11668,7 @@ func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID
 
 ```go
 type GlDepthFunc struct {
-	binary.Generate
+	binary.Generate `display:"glDepthFunc"`
 
 	Function TestFunction
 }
@@ -11144,7 +11752,7 @@ func (c *GlDepthFunc) TypeID() atom.TypeID
 
 ```go
 type GlDepthMask struct {
-	binary.Generate
+	binary.Generate `display:"glDepthMask"`
 
 	Enabled bool
 }
@@ -11228,7 +11836,7 @@ func (c *GlDepthMask) TypeID() atom.TypeID
 
 ```go
 type GlDepthRangef struct {
-	binary.Generate
+	binary.Generate `display:"glDepthRangef"`
 
 	Near float32
 	Far  float32
@@ -11313,7 +11921,7 @@ func (c *GlDepthRangef) TypeID() atom.TypeID
 
 ```go
 type GlDetachShader struct {
-	binary.Generate
+	binary.Generate `display:"glDetachShader"`
 
 	Program ProgramId
 	Shader  ShaderId
@@ -11398,7 +12006,7 @@ func (c *GlDetachShader) TypeID() atom.TypeID
 
 ```go
 type GlDisable struct {
-	binary.Generate
+	binary.Generate `display:"glDisable"`
 
 	Capability Capability
 }
@@ -11482,7 +12090,7 @@ func (c *GlDisable) TypeID() atom.TypeID
 
 ```go
 type GlDisableClientState struct {
-	binary.Generate
+	binary.Generate `display:"glDisableClientState"`
 
 	Type ArrayType
 }
@@ -11568,7 +12176,7 @@ func (c *GlDisableClientState) TypeID() atom.TypeID
 
 ```go
 type GlDisableVertexAttribArray struct {
-	binary.Generate
+	binary.Generate `display:"glDisableVertexAttribArray"`
 
 	Location AttributeLocation
 }
@@ -11654,7 +12262,7 @@ func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID
 
 ```go
 type GlDiscardFramebufferEXT struct {
-	binary.Generate
+	binary.Generate `display:"glDiscardFramebufferEXT"`
 
 	Target         FramebufferTarget
 	NumAttachments int32
@@ -11742,7 +12350,7 @@ func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID
 
 ```go
 type GlDrawArrays struct {
-	binary.Generate
+	binary.Generate `display:"glDrawArrays"`
 
 	DrawMode   DrawMode
 	FirstIndex int32
@@ -11828,7 +12436,7 @@ func (c *GlDrawArrays) TypeID() atom.TypeID
 
 ```go
 type GlDrawElements struct {
-	binary.Generate
+	binary.Generate `display:"glDrawElements"`
 
 	DrawMode     DrawMode
 	ElementCount int32
@@ -11915,7 +12523,7 @@ func (c *GlDrawElements) TypeID() atom.TypeID
 
 ```go
 type GlEGLImageTargetRenderbufferStorageOES struct {
-	binary.Generate
+	binary.Generate `display:"glEGLImageTargetRenderbufferStorageOES"`
 
 	Target ImageTargetRenderbufferStorage
 	Image  TexturePointer
@@ -12002,7 +12610,7 @@ func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID
 
 ```go
 type GlEGLImageTargetTexture2DOES struct {
-	binary.Generate
+	binary.Generate `display:"glEGLImageTargetTexture2DOES"`
 
 	Target ImageTargetTexture
 	Image  ImageOES
@@ -12089,7 +12697,7 @@ func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID
 
 ```go
 type GlEnable struct {
-	binary.Generate
+	binary.Generate `display:"glEnable"`
 
 	Capability Capability
 }
@@ -12173,7 +12781,7 @@ func (c *GlEnable) TypeID() atom.TypeID
 
 ```go
 type GlEnableClientState struct {
-	binary.Generate
+	binary.Generate `display:"glEnableClientState"`
 
 	Type ArrayType
 }
@@ -12259,7 +12867,7 @@ func (c *GlEnableClientState) TypeID() atom.TypeID
 
 ```go
 type GlEnableVertexAttribArray struct {
-	binary.Generate
+	binary.Generate `display:"glEnableVertexAttribArray"`
 
 	Location AttributeLocation
 }
@@ -12345,7 +12953,7 @@ func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID
 
 ```go
 type GlEndQuery struct {
-	binary.Generate
+	binary.Generate `display:"glEndQuery"`
 
 	Target QueryTarget
 }
@@ -12429,7 +13037,7 @@ func (c *GlEndQuery) TypeID() atom.TypeID
 
 ```go
 type GlEndQueryEXT struct {
-	binary.Generate
+	binary.Generate `display:"glEndQueryEXT"`
 
 	Target QueryTarget
 }
@@ -12513,7 +13121,7 @@ func (c *GlEndQueryEXT) TypeID() atom.TypeID
 
 ```go
 type GlEndTilingQCOM struct {
-	binary.Generate
+	binary.Generate `display:"glEndTilingQCOM"`
 
 	PreserveMask TilePreserveMaskQCOM
 }
@@ -12597,7 +13205,7 @@ func (c *GlEndTilingQCOM) TypeID() atom.TypeID
 
 ```go
 type GlFenceSync struct {
-	binary.Generate
+	binary.Generate `display:"glFenceSync"`
 
 	Condition SyncCondition
 	SyncFlags SyncFlags
@@ -12683,7 +13291,7 @@ func (c *GlFenceSync) TypeID() atom.TypeID
 
 ```go
 type GlFinish struct {
-	binary.Generate
+	binary.Generate `display:"glFinish"`
 }
 ```
 
@@ -12765,7 +13373,7 @@ func (c *GlFinish) TypeID() atom.TypeID
 
 ```go
 type GlFlush struct {
-	binary.Generate
+	binary.Generate `display:"glFlush"`
 }
 ```
 
@@ -12847,7 +13455,7 @@ func (c *GlFlush) TypeID() atom.TypeID
 
 ```go
 type GlFramebufferRenderbuffer struct {
-	binary.Generate
+	binary.Generate `display:"glFramebufferRenderbuffer"`
 
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -12936,7 +13544,7 @@ func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID
 
 ```go
 type GlFramebufferTexture2D struct {
-	binary.Generate
+	binary.Generate `display:"glFramebufferTexture2D"`
 
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -13026,7 +13634,7 @@ func (c *GlFramebufferTexture2D) TypeID() atom.TypeID
 
 ```go
 type GlFrontFace struct {
-	binary.Generate
+	binary.Generate `display:"glFrontFace"`
 
 	Orientation FaceOrientation
 }
@@ -13110,7 +13718,7 @@ func (c *GlFrontFace) TypeID() atom.TypeID
 
 ```go
 type GlGenBuffers struct {
-	binary.Generate
+	binary.Generate `display:"glGenBuffers"`
 
 	Count   int32
 	Buffers BufferIdᵖ
@@ -13195,7 +13803,7 @@ func (c *GlGenBuffers) TypeID() atom.TypeID
 
 ```go
 type GlGenFramebuffers struct {
-	binary.Generate
+	binary.Generate `display:"glGenFramebuffers"`
 
 	Count        int32
 	Framebuffers FramebufferIdᵖ
@@ -13280,7 +13888,7 @@ func (c *GlGenFramebuffers) TypeID() atom.TypeID
 
 ```go
 type GlGenQueries struct {
-	binary.Generate
+	binary.Generate `display:"glGenQueries"`
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -13365,7 +13973,7 @@ func (c *GlGenQueries) TypeID() atom.TypeID
 
 ```go
 type GlGenQueriesEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGenQueriesEXT"`
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -13450,7 +14058,7 @@ func (c *GlGenQueriesEXT) TypeID() atom.TypeID
 
 ```go
 type GlGenRenderbuffers struct {
-	binary.Generate
+	binary.Generate `display:"glGenRenderbuffers"`
 
 	Count         int32
 	Renderbuffers RenderbufferIdᵖ
@@ -13537,7 +14145,7 @@ func (c *GlGenRenderbuffers) TypeID() atom.TypeID
 
 ```go
 type GlGenTextures struct {
-	binary.Generate
+	binary.Generate `display:"glGenTextures"`
 
 	Count    int32
 	Textures TextureIdᵖ
@@ -13622,7 +14230,7 @@ func (c *GlGenTextures) TypeID() atom.TypeID
 
 ```go
 type GlGenVertexArrays struct {
-	binary.Generate
+	binary.Generate `display:"glGenVertexArrays"`
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -13707,7 +14315,7 @@ func (c *GlGenVertexArrays) TypeID() atom.TypeID
 
 ```go
 type GlGenVertexArraysOES struct {
-	binary.Generate
+	binary.Generate `display:"glGenVertexArraysOES"`
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -13794,7 +14402,7 @@ func (c *GlGenVertexArraysOES) TypeID() atom.TypeID
 
 ```go
 type GlGenerateMipmap struct {
-	binary.Generate
+	binary.Generate `display:"glGenerateMipmap"`
 
 	Target TextureImageTarget
 }
@@ -13878,7 +14486,7 @@ func (c *GlGenerateMipmap) TypeID() atom.TypeID
 
 ```go
 type GlGetActiveAttrib struct {
-	binary.Generate
+	binary.Generate `display:"glGetActiveAttrib"`
 
 	Program            ProgramId
 	Location           AttributeLocation
@@ -13968,7 +14576,7 @@ func (c *GlGetActiveAttrib) TypeID() atom.TypeID
 
 ```go
 type GlGetActiveUniform struct {
-	binary.Generate
+	binary.Generate `display:"glGetActiveUniform"`
 
 	Program            ProgramId
 	Location           int32
@@ -14060,7 +14668,7 @@ func (c *GlGetActiveUniform) TypeID() atom.TypeID
 
 ```go
 type GlGetActiveUniformBlockName struct {
-	binary.Generate
+	binary.Generate `display:"glGetActiveUniformBlockName"`
 
 	Program            ProgramId
 	UniformBlockIndex  uint32
@@ -14150,7 +14758,7 @@ func (c *GlGetActiveUniformBlockName) TypeID() atom.TypeID
 
 ```go
 type GlGetActiveUniformBlockiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetActiveUniformBlockiv"`
 
 	Program           ProgramId
 	UniformBlockIndex uint32
@@ -14239,7 +14847,7 @@ func (c *GlGetActiveUniformBlockiv) TypeID() atom.TypeID
 
 ```go
 type GlGetActiveUniformsiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetActiveUniformsiv"`
 
 	Program        ProgramId
 	UniformCount   uint32
@@ -14329,7 +14937,7 @@ func (c *GlGetActiveUniformsiv) TypeID() atom.TypeID
 
 ```go
 type GlGetAttachedShaders struct {
-	binary.Generate
+	binary.Generate `display:"glGetAttachedShaders"`
 
 	Program              ProgramId
 	BufferLength         int32
@@ -14418,7 +15026,7 @@ func (c *GlGetAttachedShaders) TypeID() atom.TypeID
 
 ```go
 type GlGetAttribLocation struct {
-	binary.Generate
+	binary.Generate `display:"glGetAttribLocation"`
 
 	Program ProgramId
 	Name    string
@@ -14514,7 +15122,7 @@ func (c *GlGetAttribLocation) TypeID() atom.TypeID
 
 ```go
 type GlGetBooleanv struct {
-	binary.Generate
+	binary.Generate `display:"glGetBooleanv"`
 
 	Param  StateVariable
 	Values Boolᵖ
@@ -14599,7 +15207,7 @@ func (c *GlGetBooleanv) TypeID() atom.TypeID
 
 ```go
 type GlGetBufferParameteriv struct {
-	binary.Generate
+	binary.Generate `display:"glGetBufferParameteriv"`
 
 	Target    BufferTarget
 	Parameter BufferParameter
@@ -14687,7 +15295,7 @@ func (c *GlGetBufferParameteriv) TypeID() atom.TypeID
 
 ```go
 type GlGetError struct {
-	binary.Generate
+	binary.Generate `display:"glGetError"`
 
 	Result Error
 }
@@ -14771,7 +15379,7 @@ func (c *GlGetError) TypeID() atom.TypeID
 
 ```go
 type GlGetFloatv struct {
-	binary.Generate
+	binary.Generate `display:"glGetFloatv"`
 
 	Param  StateVariable
 	Values F32ᵖ
@@ -14856,7 +15464,7 @@ func (c *GlGetFloatv) TypeID() atom.TypeID
 
 ```go
 type GlGetFramebufferAttachmentParameteriv struct {
-	binary.Generate
+	binary.Generate `display:"glGetFramebufferAttachmentParameteriv"`
 
 	FramebufferTarget FramebufferTarget
 	Attachment        FramebufferAttachment
@@ -14945,7 +15553,7 @@ func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID
 
 ```go
 type GlGetGraphicsResetStatusEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetGraphicsResetStatusEXT"`
 
 	Result ResetStatus
 }
@@ -15031,7 +15639,7 @@ func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetIntegerv struct {
-	binary.Generate
+	binary.Generate `display:"glGetIntegerv"`
 
 	Param  StateVariable
 	Values S32ᵖ
@@ -15116,7 +15724,7 @@ func (c *GlGetIntegerv) TypeID() atom.TypeID
 
 ```go
 type GlGetProgramBinaryOES struct {
-	binary.Generate
+	binary.Generate `display:"glGetProgramBinaryOES"`
 
 	Program      ProgramId
 	BufferSize   int32
@@ -15206,7 +15814,7 @@ func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID
 
 ```go
 type GlGetProgramInfoLog struct {
-	binary.Generate
+	binary.Generate `display:"glGetProgramInfoLog"`
 
 	Program             ProgramId
 	BufferLength        int32
@@ -15295,7 +15903,7 @@ func (c *GlGetProgramInfoLog) TypeID() atom.TypeID
 
 ```go
 type GlGetProgramiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetProgramiv"`
 
 	Program   ProgramId
 	Parameter ProgramParameter
@@ -15381,7 +15989,7 @@ func (c *GlGetProgramiv) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjecti64v struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjecti64v"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15469,7 +16077,7 @@ func (c *GlGetQueryObjecti64v) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjecti64vEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjecti64vEXT"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15557,7 +16165,7 @@ func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjectivEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjectivEXT"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15645,7 +16253,7 @@ func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjectui64v struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjectui64v"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15733,7 +16341,7 @@ func (c *GlGetQueryObjectui64v) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjectui64vEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjectui64vEXT"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15821,7 +16429,7 @@ func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjectuiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjectuiv"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15909,7 +16517,7 @@ func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryObjectuivEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryObjectuivEXT"`
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15997,7 +16605,7 @@ func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryiv"`
 
 	Target    QueryTarget
 	Parameter QueryParameter
@@ -16083,7 +16691,7 @@ func (c *GlGetQueryiv) TypeID() atom.TypeID
 
 ```go
 type GlGetQueryivEXT struct {
-	binary.Generate
+	binary.Generate `display:"glGetQueryivEXT"`
 
 	Target    QueryTarget
 	Parameter QueryParameter
@@ -16169,7 +16777,7 @@ func (c *GlGetQueryivEXT) TypeID() atom.TypeID
 
 ```go
 type GlGetRenderbufferParameteriv struct {
-	binary.Generate
+	binary.Generate `display:"glGetRenderbufferParameteriv"`
 
 	Target    RenderbufferTarget
 	Parameter RenderbufferParameter
@@ -16257,7 +16865,7 @@ func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID
 
 ```go
 type GlGetShaderInfoLog struct {
-	binary.Generate
+	binary.Generate `display:"glGetShaderInfoLog"`
 
 	Shader              ShaderId
 	BufferLength        int32
@@ -16346,7 +16954,7 @@ func (c *GlGetShaderInfoLog) TypeID() atom.TypeID
 
 ```go
 type GlGetShaderPrecisionFormat struct {
-	binary.Generate
+	binary.Generate `display:"glGetShaderPrecisionFormat"`
 
 	ShaderType    ShaderType
 	PrecisionType PrecisionType
@@ -16435,7 +17043,7 @@ func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID
 
 ```go
 type GlGetShaderSource struct {
-	binary.Generate
+	binary.Generate `display:"glGetShaderSource"`
 
 	Shader              ShaderId
 	BufferLength        int32
@@ -16522,7 +17130,7 @@ func (c *GlGetShaderSource) TypeID() atom.TypeID
 
 ```go
 type GlGetShaderiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetShaderiv"`
 
 	Shader    ShaderId
 	Parameter ShaderParameter
@@ -16608,7 +17216,7 @@ func (c *GlGetShaderiv) TypeID() atom.TypeID
 
 ```go
 type GlGetString struct {
-	binary.Generate
+	binary.Generate `display:"glGetString"`
 
 	Param  StringConstant
 	Result Charᵖ
@@ -16693,7 +17301,7 @@ func (c *GlGetString) TypeID() atom.TypeID
 
 ```go
 type GlGetTexParameterfv struct {
-	binary.Generate
+	binary.Generate `display:"glGetTexParameterfv"`
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -16781,7 +17389,7 @@ func (c *GlGetTexParameterfv) TypeID() atom.TypeID
 
 ```go
 type GlGetTexParameteriv struct {
-	binary.Generate
+	binary.Generate `display:"glGetTexParameteriv"`
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -16869,7 +17477,7 @@ func (c *GlGetTexParameteriv) TypeID() atom.TypeID
 
 ```go
 type GlGetUniformLocation struct {
-	binary.Generate
+	binary.Generate `display:"glGetUniformLocation"`
 
 	Program ProgramId
 	Name    string
@@ -16957,7 +17565,7 @@ func (c *GlGetUniformLocation) TypeID() atom.TypeID
 
 ```go
 type GlGetUniformfv struct {
-	binary.Generate
+	binary.Generate `display:"glGetUniformfv"`
 
 	Program  ProgramId
 	Location UniformLocation
@@ -17043,7 +17651,7 @@ func (c *GlGetUniformfv) TypeID() atom.TypeID
 
 ```go
 type GlGetUniformiv struct {
-	binary.Generate
+	binary.Generate `display:"glGetUniformiv"`
 
 	Program  ProgramId
 	Location UniformLocation
@@ -17129,7 +17737,7 @@ func (c *GlGetUniformiv) TypeID() atom.TypeID
 
 ```go
 type GlHint struct {
-	binary.Generate
+	binary.Generate `display:"glHint"`
 
 	Target HintTarget
 	Mode   HintMode
@@ -17214,7 +17822,7 @@ func (c *GlHint) TypeID() atom.TypeID
 
 ```go
 type GlInsertEventMarkerEXT struct {
-	binary.Generate
+	binary.Generate `display:"glInsertEventMarkerEXT"`
 
 	Length int32
 	Marker Charᵖ
@@ -17301,7 +17909,7 @@ func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID
 
 ```go
 type GlInvalidateFramebuffer struct {
-	binary.Generate
+	binary.Generate `display:"glInvalidateFramebuffer"`
 
 	Target      FramebufferTarget
 	Count       int32
@@ -17389,7 +17997,7 @@ func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID
 
 ```go
 type GlIsBuffer struct {
-	binary.Generate
+	binary.Generate `display:"glIsBuffer"`
 
 	Buffer BufferId
 	Result bool
@@ -17474,7 +18082,7 @@ func (c *GlIsBuffer) TypeID() atom.TypeID
 
 ```go
 type GlIsEnabled struct {
-	binary.Generate
+	binary.Generate `display:"glIsEnabled"`
 
 	Capability Capability
 	Result     bool
@@ -17559,7 +18167,7 @@ func (c *GlIsEnabled) TypeID() atom.TypeID
 
 ```go
 type GlIsFramebuffer struct {
-	binary.Generate
+	binary.Generate `display:"glIsFramebuffer"`
 
 	Framebuffer FramebufferId
 	Result      bool
@@ -17644,7 +18252,7 @@ func (c *GlIsFramebuffer) TypeID() atom.TypeID
 
 ```go
 type GlIsProgram struct {
-	binary.Generate
+	binary.Generate `display:"glIsProgram"`
 
 	Program ProgramId
 	Result  bool
@@ -17729,7 +18337,7 @@ func (c *GlIsProgram) TypeID() atom.TypeID
 
 ```go
 type GlIsQuery struct {
-	binary.Generate
+	binary.Generate `display:"glIsQuery"`
 
 	Query  QueryId
 	Result bool
@@ -17814,7 +18422,7 @@ func (c *GlIsQuery) TypeID() atom.TypeID
 
 ```go
 type GlIsQueryEXT struct {
-	binary.Generate
+	binary.Generate `display:"glIsQueryEXT"`
 
 	Query  QueryId
 	Result bool
@@ -17899,7 +18507,7 @@ func (c *GlIsQueryEXT) TypeID() atom.TypeID
 
 ```go
 type GlIsRenderbuffer struct {
-	binary.Generate
+	binary.Generate `display:"glIsRenderbuffer"`
 
 	Renderbuffer RenderbufferId
 	Result       bool
@@ -17984,7 +18592,7 @@ func (c *GlIsRenderbuffer) TypeID() atom.TypeID
 
 ```go
 type GlIsShader struct {
-	binary.Generate
+	binary.Generate `display:"glIsShader"`
 
 	Shader ShaderId
 	Result bool
@@ -18069,7 +18677,7 @@ func (c *GlIsShader) TypeID() atom.TypeID
 
 ```go
 type GlIsTexture struct {
-	binary.Generate
+	binary.Generate `display:"glIsTexture"`
 
 	Texture TextureId
 	Result  bool
@@ -18154,7 +18762,7 @@ func (c *GlIsTexture) TypeID() atom.TypeID
 
 ```go
 type GlIsVertexArrayOES struct {
-	binary.Generate
+	binary.Generate `display:"glIsVertexArrayOES"`
 
 	Array  VertexArrayId
 	Result bool
@@ -18241,7 +18849,7 @@ func (c *GlIsVertexArrayOES) TypeID() atom.TypeID
 
 ```go
 type GlLineWidth struct {
-	binary.Generate
+	binary.Generate `display:"glLineWidth"`
 
 	Width float32
 }
@@ -18325,7 +18933,7 @@ func (c *GlLineWidth) TypeID() atom.TypeID
 
 ```go
 type GlLinkProgram struct {
-	binary.Generate
+	binary.Generate `display:"glLinkProgram"`
 
 	Program ProgramId
 }
@@ -18409,7 +19017,7 @@ func (c *GlLinkProgram) TypeID() atom.TypeID
 
 ```go
 type GlMapBufferRange struct {
-	binary.Generate
+	binary.Generate `display:"glMapBufferRange"`
 
 	Target BufferTarget
 	Offset int32
@@ -18497,7 +19105,7 @@ func (c *GlMapBufferRange) TypeID() atom.TypeID
 
 ```go
 type GlPixelStorei struct {
-	binary.Generate
+	binary.Generate `display:"glPixelStorei"`
 
 	Parameter PixelStoreParameter
 	Value     int32
@@ -18582,7 +19190,7 @@ func (c *GlPixelStorei) TypeID() atom.TypeID
 
 ```go
 type GlPolygonOffset struct {
-	binary.Generate
+	binary.Generate `display:"glPolygonOffset"`
 
 	ScaleFactor float32
 	Units       float32
@@ -18667,7 +19275,7 @@ func (c *GlPolygonOffset) TypeID() atom.TypeID
 
 ```go
 type GlPopGroupMarkerEXT struct {
-	binary.Generate
+	binary.Generate `display:"glPopGroupMarkerEXT"`
 }
 ```
 
@@ -18751,7 +19359,7 @@ func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID
 
 ```go
 type GlProgramBinaryOES struct {
-	binary.Generate
+	binary.Generate `display:"glProgramBinaryOES"`
 
 	Program      ProgramId
 	BinaryFormat uint32
@@ -18840,7 +19448,7 @@ func (c *GlProgramBinaryOES) TypeID() atom.TypeID
 
 ```go
 type GlPushGroupMarkerEXT struct {
-	binary.Generate
+	binary.Generate `display:"glPushGroupMarkerEXT"`
 
 	Length int32
 	Marker Charᵖ
@@ -18927,7 +19535,7 @@ func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID
 
 ```go
 type GlQueryCounterEXT struct {
-	binary.Generate
+	binary.Generate `display:"glQueryCounterEXT"`
 
 	Query  QueryId
 	Target QueryTarget
@@ -19012,7 +19620,7 @@ func (c *GlQueryCounterEXT) TypeID() atom.TypeID
 
 ```go
 type GlReadPixels struct {
-	binary.Generate
+	binary.Generate `display:"glReadPixels"`
 
 	X      int32
 	Y      int32
@@ -19102,7 +19710,7 @@ func (c *GlReadPixels) TypeID() atom.TypeID
 
 ```go
 type GlReleaseShaderCompiler struct {
-	binary.Generate
+	binary.Generate `display:"glReleaseShaderCompiler"`
 }
 ```
 
@@ -19186,7 +19794,7 @@ func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID
 
 ```go
 type GlRenderbufferStorage struct {
-	binary.Generate
+	binary.Generate `display:"glRenderbufferStorage"`
 
 	Target RenderbufferTarget
 	Format RenderbufferFormat
@@ -19275,7 +19883,7 @@ func (c *GlRenderbufferStorage) TypeID() atom.TypeID
 
 ```go
 type GlRenderbufferStorageMultisample struct {
-	binary.Generate
+	binary.Generate `display:"glRenderbufferStorageMultisample"`
 
 	Target  RenderbufferTarget
 	Samples int32
@@ -19365,7 +19973,7 @@ func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID
 
 ```go
 type GlSampleCoverage struct {
-	binary.Generate
+	binary.Generate `display:"glSampleCoverage"`
 
 	Value  float32
 	Invert bool
@@ -19450,7 +20058,7 @@ func (c *GlSampleCoverage) TypeID() atom.TypeID
 
 ```go
 type GlScissor struct {
-	binary.Generate
+	binary.Generate `display:"glScissor"`
 
 	X      int32
 	Y      int32
@@ -19537,7 +20145,7 @@ func (c *GlScissor) TypeID() atom.TypeID
 
 ```go
 type GlShaderBinary struct {
-	binary.Generate
+	binary.Generate `display:"glShaderBinary"`
 
 	Count        int32
 	Shaders      ShaderIdᵖ
@@ -19625,7 +20233,7 @@ func (c *GlShaderBinary) TypeID() atom.TypeID
 
 ```go
 type GlShaderSource struct {
-	binary.Generate
+	binary.Generate `display:"glShaderSource"`
 
 	Shader ShaderId
 	Count  int32
@@ -19712,7 +20320,7 @@ func (c *GlShaderSource) TypeID() atom.TypeID
 
 ```go
 type GlStartTilingQCOM struct {
-	binary.Generate
+	binary.Generate `display:"glStartTilingQCOM"`
 
 	X            int32
 	Y            int32
@@ -19800,7 +20408,7 @@ func (c *GlStartTilingQCOM) TypeID() atom.TypeID
 
 ```go
 type GlStencilFuncSeparate struct {
-	binary.Generate
+	binary.Generate `display:"glStencilFuncSeparate"`
 
 	Face           FaceMode
 	Function       TestFunction
@@ -19889,7 +20497,7 @@ func (c *GlStencilFuncSeparate) TypeID() atom.TypeID
 
 ```go
 type GlStencilMask struct {
-	binary.Generate
+	binary.Generate `display:"glStencilMask"`
 
 	Mask uint32
 }
@@ -19973,7 +20581,7 @@ func (c *GlStencilMask) TypeID() atom.TypeID
 
 ```go
 type GlStencilMaskSeparate struct {
-	binary.Generate
+	binary.Generate `display:"glStencilMaskSeparate"`
 
 	Face FaceMode
 	Mask uint32
@@ -20060,7 +20668,7 @@ func (c *GlStencilMaskSeparate) TypeID() atom.TypeID
 
 ```go
 type GlStencilOpSeparate struct {
-	binary.Generate
+	binary.Generate `display:"glStencilOpSeparate"`
 
 	Face                 FaceMode
 	StencilFail          StencilAction
@@ -20149,7 +20757,7 @@ func (c *GlStencilOpSeparate) TypeID() atom.TypeID
 
 ```go
 type GlTexImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glTexImage2D"`
 
 	Target         TextureImageTarget
 	Level          int32
@@ -20241,7 +20849,7 @@ func (c *GlTexImage2D) TypeID() atom.TypeID
 
 ```go
 type GlTexParameterf struct {
-	binary.Generate
+	binary.Generate `display:"glTexParameterf"`
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -20327,7 +20935,7 @@ func (c *GlTexParameterf) TypeID() atom.TypeID
 
 ```go
 type GlTexParameteri struct {
-	binary.Generate
+	binary.Generate `display:"glTexParameteri"`
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -20413,7 +21021,7 @@ func (c *GlTexParameteri) TypeID() atom.TypeID
 
 ```go
 type GlTexStorage1DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTexStorage1DEXT"`
 
 	Target TextureTarget
 	Levels int32
@@ -20500,7 +21108,7 @@ func (c *GlTexStorage1DEXT) TypeID() atom.TypeID
 
 ```go
 type GlTexStorage2DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTexStorage2DEXT"`
 
 	Target TextureTarget
 	Levels int32
@@ -20588,7 +21196,7 @@ func (c *GlTexStorage2DEXT) TypeID() atom.TypeID
 
 ```go
 type GlTexStorage3DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTexStorage3DEXT"`
 
 	Target TextureTarget
 	Levels int32
@@ -20677,7 +21285,7 @@ func (c *GlTexStorage3DEXT) TypeID() atom.TypeID
 
 ```go
 type GlTexSubImage2D struct {
-	binary.Generate
+	binary.Generate `display:"glTexSubImage2D"`
 
 	Target  TextureImageTarget
 	Level   int32
@@ -20769,7 +21377,7 @@ func (c *GlTexSubImage2D) TypeID() atom.TypeID
 
 ```go
 type GlTextureStorage1DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTextureStorage1DEXT"`
 
 	Texture TextureId
 	Target  TextureTarget
@@ -20859,7 +21467,7 @@ func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID
 
 ```go
 type GlTextureStorage2DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTextureStorage2DEXT"`
 
 	Texture TextureId
 	Target  TextureTarget
@@ -20950,7 +21558,7 @@ func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID
 
 ```go
 type GlTextureStorage3DEXT struct {
-	binary.Generate
+	binary.Generate `display:"glTextureStorage3DEXT"`
 
 	Texture TextureId
 	Target  TextureTarget
@@ -21042,7 +21650,7 @@ func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID
 
 ```go
 type GlUniform1f struct {
-	binary.Generate
+	binary.Generate `display:"glUniform1f"`
 
 	Location UniformLocation
 	Value    float32
@@ -21127,7 +21735,7 @@ func (c *GlUniform1f) TypeID() atom.TypeID
 
 ```go
 type GlUniform1fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform1fv"`
 
 	Location UniformLocation
 	Count    int32
@@ -21213,7 +21821,7 @@ func (c *GlUniform1fv) TypeID() atom.TypeID
 
 ```go
 type GlUniform1i struct {
-	binary.Generate
+	binary.Generate `display:"glUniform1i"`
 
 	Location UniformLocation
 	Value    int32
@@ -21298,7 +21906,7 @@ func (c *GlUniform1i) TypeID() atom.TypeID
 
 ```go
 type GlUniform1iv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform1iv"`
 
 	Location UniformLocation
 	Count    int32
@@ -21384,7 +21992,7 @@ func (c *GlUniform1iv) TypeID() atom.TypeID
 
 ```go
 type GlUniform2f struct {
-	binary.Generate
+	binary.Generate `display:"glUniform2f"`
 
 	Location UniformLocation
 	Value0   float32
@@ -21470,7 +22078,7 @@ func (c *GlUniform2f) TypeID() atom.TypeID
 
 ```go
 type GlUniform2fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform2fv"`
 
 	Location UniformLocation
 	Count    int32
@@ -21556,7 +22164,7 @@ func (c *GlUniform2fv) TypeID() atom.TypeID
 
 ```go
 type GlUniform2i struct {
-	binary.Generate
+	binary.Generate `display:"glUniform2i"`
 
 	Location UniformLocation
 	Value0   int32
@@ -21642,7 +22250,7 @@ func (c *GlUniform2i) TypeID() atom.TypeID
 
 ```go
 type GlUniform2iv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform2iv"`
 
 	Location UniformLocation
 	Count    int32
@@ -21728,7 +22336,7 @@ func (c *GlUniform2iv) TypeID() atom.TypeID
 
 ```go
 type GlUniform3f struct {
-	binary.Generate
+	binary.Generate `display:"glUniform3f"`
 
 	Location UniformLocation
 	Value0   float32
@@ -21815,7 +22423,7 @@ func (c *GlUniform3f) TypeID() atom.TypeID
 
 ```go
 type GlUniform3fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform3fv"`
 
 	Location UniformLocation
 	Count    int32
@@ -21901,7 +22509,7 @@ func (c *GlUniform3fv) TypeID() atom.TypeID
 
 ```go
 type GlUniform3i struct {
-	binary.Generate
+	binary.Generate `display:"glUniform3i"`
 
 	Location UniformLocation
 	Value0   int32
@@ -21988,7 +22596,7 @@ func (c *GlUniform3i) TypeID() atom.TypeID
 
 ```go
 type GlUniform3iv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform3iv"`
 
 	Location UniformLocation
 	Count    int32
@@ -22074,7 +22682,7 @@ func (c *GlUniform3iv) TypeID() atom.TypeID
 
 ```go
 type GlUniform4f struct {
-	binary.Generate
+	binary.Generate `display:"glUniform4f"`
 
 	Location UniformLocation
 	Value0   float32
@@ -22162,7 +22770,7 @@ func (c *GlUniform4f) TypeID() atom.TypeID
 
 ```go
 type GlUniform4fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform4fv"`
 
 	Location UniformLocation
 	Count    int32
@@ -22248,7 +22856,7 @@ func (c *GlUniform4fv) TypeID() atom.TypeID
 
 ```go
 type GlUniform4i struct {
-	binary.Generate
+	binary.Generate `display:"glUniform4i"`
 
 	Location UniformLocation
 	Value0   int32
@@ -22336,7 +22944,7 @@ func (c *GlUniform4i) TypeID() atom.TypeID
 
 ```go
 type GlUniform4iv struct {
-	binary.Generate
+	binary.Generate `display:"glUniform4iv"`
 
 	Location UniformLocation
 	Count    int32
@@ -22422,7 +23030,7 @@ func (c *GlUniform4iv) TypeID() atom.TypeID
 
 ```go
 type GlUniformBlockBinding struct {
-	binary.Generate
+	binary.Generate `display:"glUniformBlockBinding"`
 
 	Program             ProgramId
 	UniformBlockIndex   uint32
@@ -22510,7 +23118,7 @@ func (c *GlUniformBlockBinding) TypeID() atom.TypeID
 
 ```go
 type GlUniformMatrix2fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniformMatrix2fv"`
 
 	Location  UniformLocation
 	Count     int32
@@ -22599,7 +23207,7 @@ func (c *GlUniformMatrix2fv) TypeID() atom.TypeID
 
 ```go
 type GlUniformMatrix3fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniformMatrix3fv"`
 
 	Location  UniformLocation
 	Count     int32
@@ -22688,7 +23296,7 @@ func (c *GlUniformMatrix3fv) TypeID() atom.TypeID
 
 ```go
 type GlUniformMatrix4fv struct {
-	binary.Generate
+	binary.Generate `display:"glUniformMatrix4fv"`
 
 	Location  UniformLocation
 	Count     int32
@@ -22777,7 +23385,7 @@ func (c *GlUniformMatrix4fv) TypeID() atom.TypeID
 
 ```go
 type GlUnmapBuffer struct {
-	binary.Generate
+	binary.Generate `display:"glUnmapBuffer"`
 
 	Target BufferTarget
 }
@@ -22861,7 +23469,7 @@ func (c *GlUnmapBuffer) TypeID() atom.TypeID
 
 ```go
 type GlUseProgram struct {
-	binary.Generate
+	binary.Generate `display:"glUseProgram"`
 
 	Program ProgramId
 }
@@ -22945,7 +23553,7 @@ func (c *GlUseProgram) TypeID() atom.TypeID
 
 ```go
 type GlValidateProgram struct {
-	binary.Generate
+	binary.Generate `display:"glValidateProgram"`
 
 	Program ProgramId
 }
@@ -23029,7 +23637,7 @@ func (c *GlValidateProgram) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib1f struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib1f"`
 
 	Location AttributeLocation
 	Value0   float32
@@ -23114,7 +23722,7 @@ func (c *GlVertexAttrib1f) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib1fv struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib1fv"`
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -23199,7 +23807,7 @@ func (c *GlVertexAttrib1fv) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib2f struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib2f"`
 
 	Location AttributeLocation
 	Value0   float32
@@ -23285,7 +23893,7 @@ func (c *GlVertexAttrib2f) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib2fv struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib2fv"`
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -23370,7 +23978,7 @@ func (c *GlVertexAttrib2fv) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib3f struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib3f"`
 
 	Location AttributeLocation
 	Value0   float32
@@ -23457,7 +24065,7 @@ func (c *GlVertexAttrib3f) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib3fv struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib3fv"`
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -23542,7 +24150,7 @@ func (c *GlVertexAttrib3fv) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib4f struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib4f"`
 
 	Location AttributeLocation
 	Value0   float32
@@ -23630,7 +24238,7 @@ func (c *GlVertexAttrib4f) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttrib4fv struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttrib4fv"`
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -23715,7 +24323,7 @@ func (c *GlVertexAttrib4fv) TypeID() atom.TypeID
 
 ```go
 type GlVertexAttribPointer struct {
-	binary.Generate
+	binary.Generate `display:"glVertexAttribPointer"`
 
 	Location   AttributeLocation
 	Size       int32
@@ -23806,7 +24414,7 @@ func (c *GlVertexAttribPointer) TypeID() atom.TypeID
 
 ```go
 type GlViewport struct {
-	binary.Generate
+	binary.Generate `display:"glViewport"`
 
 	X      int32
 	Y      int32
@@ -23893,7 +24501,7 @@ func (c *GlViewport) TypeID() atom.TypeID
 
 ```go
 type GlWaitSync struct {
-	binary.Generate
+	binary.Generate `display:"glWaitSync"`
 
 	Sync      SyncObject
 	SyncFlags SyncFlags
@@ -23979,7 +24587,7 @@ func (c *GlWaitSync) TypeID() atom.TypeID
 
 ```go
 type GlXCreateContext struct {
-	binary.Generate
+	binary.Generate `display:"glXCreateContext"`
 
 	Dpy       Voidᵖ
 	Vis       Voidᵖ
@@ -24067,7 +24675,7 @@ func (c *GlXCreateContext) TypeID() atom.TypeID
 
 ```go
 type GlXCreateNewContext struct {
-	binary.Generate
+	binary.Generate `display:"glXCreateNewContext"`
 
 	Display  Voidᵖ
 	Fbconfig Voidᵖ
@@ -24158,7 +24766,7 @@ func (c *GlXCreateNewContext) TypeID() atom.TypeID
 
 ```go
 type GlXMakeContextCurrent struct {
-	binary.Generate
+	binary.Generate `display:"glXMakeContextCurrent"`
 
 	Display Voidᵖ
 	Draw    GLXDrawable
@@ -24248,7 +24856,7 @@ func (c *GlXMakeContextCurrent) TypeID() atom.TypeID
 
 ```go
 type GlXMakeCurrent struct {
-	binary.Generate
+	binary.Generate `display:"glXMakeCurrent"`
 
 	Display  Voidᵖ
 	Drawable GLXDrawable
@@ -24329,7 +24937,7 @@ func (c *GlXMakeCurrent) TypeID() atom.TypeID
 
 ```go
 type GlXQueryDrawable struct {
-	binary.Generate
+	binary.Generate `display:"glXQueryDrawable"`
 
 	Display   Voidᵖ
 	Draw      GLXDrawable
@@ -24411,7 +25019,7 @@ func (c *GlXQueryDrawable) TypeID() atom.TypeID
 
 ```go
 type GlXSwapBuffers struct {
-	binary.Generate
+	binary.Generate `display:"glXSwapBuffers"`
 
 	Display  Voidᵖ
 	Drawable GLXDrawable
@@ -24549,6 +25157,22 @@ func (p HDC) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that HDC points to.
 
+#### func (HDC) OnRead
+
+```go
+func (p HDC) OnRead(ϟs *gfxapi.State) HDC
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (HDC) OnWrite
+
+```go
+func (p HDC) OnWrite(ϟs *gfxapi.State) HDC
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (HDC) Slice
 
 ```go
@@ -24594,6 +25218,22 @@ func (*HGLRC) Class() binary.Class
 func (p HGLRC) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that HGLRC points to.
+
+#### func (HGLRC) OnRead
+
+```go
+func (p HGLRC) OnRead(ϟs *gfxapi.State) HGLRC
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (HGLRC) OnWrite
+
+```go
+func (p HGLRC) OnWrite(ϟs *gfxapi.State) HGLRC
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (HGLRC) Slice
 
@@ -24751,6 +25391,22 @@ func (*ImageOES) Class() binary.Class
 func (p ImageOES) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that ImageOES points to.
+
+#### func (ImageOES) OnRead
+
+```go
+func (p ImageOES) OnRead(ϟs *gfxapi.State) ImageOES
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (ImageOES) OnWrite
+
+```go
+func (p ImageOES) OnWrite(ϟs *gfxapi.State) ImageOES
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (ImageOES) Slice
 
@@ -24932,6 +25588,22 @@ func (p IndicesPointer) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that IndicesPointer points
 to.
 
+#### func (IndicesPointer) OnRead
+
+```go
+func (p IndicesPointer) OnRead(ϟs *gfxapi.State) IndicesPointer
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (IndicesPointer) OnWrite
+
+```go
+func (p IndicesPointer) OnWrite(ϟs *gfxapi.State) IndicesPointer
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (IndicesPointer) Slice
 
 ```go
@@ -25044,6 +25716,22 @@ func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ
 ```
 Index returns a Intᵖ to the i'th element in this Intˢ.
 
+#### func (Intˢ) OnRead
+
+```go
+func (s Intˢ) OnRead(ϟs *gfxapi.State) Intˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Intˢ) OnWrite
+
+```go
+func (s Intˢ) OnWrite(ϟs *gfxapi.State) Intˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Intˢ) Range
 
 ```go
@@ -25083,10 +25771,10 @@ String returns a string description of the Intˢ slice.
 #### func (Intˢ) Write
 
 ```go
-func (dst Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64
+func (s Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Intᵖ
 
@@ -25119,6 +25807,22 @@ func (*Intᵖ) Class() binary.Class
 func (p Intᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Intᵖ points to.
+
+#### func (Intᵖ) OnRead
+
+```go
+func (p Intᵖ) OnRead(ϟs *gfxapi.State) Intᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Intᵖ) OnWrite
+
+```go
+func (p Intᵖ) OnWrite(ϟs *gfxapi.State) Intᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Intᵖ) Read
 
@@ -25265,6 +25969,22 @@ func (s Mat2fˢ) Index(i uint64, ϟs *gfxapi.State) Mat2fᵖ
 ```
 Index returns a Mat2fᵖ to the i'th element in this Mat2fˢ.
 
+#### func (Mat2fˢ) OnRead
+
+```go
+func (s Mat2fˢ) OnRead(ϟs *gfxapi.State) Mat2fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Mat2fˢ) OnWrite
+
+```go
+func (s Mat2fˢ) OnWrite(ϟs *gfxapi.State) Mat2fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Mat2fˢ) Range
 
 ```go
@@ -25304,10 +26024,10 @@ String returns a string description of the Mat2fˢ slice.
 #### func (Mat2fˢ) Write
 
 ```go
-func (dst Mat2fˢ) Write(src []Mat2f, ϟs *gfxapi.State) uint64
+func (s Mat2fˢ) Write(src []Mat2f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Mat2fᵖ
 
@@ -25340,6 +26060,22 @@ func (*Mat2fᵖ) Class() binary.Class
 func (p Mat2fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Mat2fᵖ points to.
+
+#### func (Mat2fᵖ) OnRead
+
+```go
+func (p Mat2fᵖ) OnRead(ϟs *gfxapi.State) Mat2fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Mat2fᵖ) OnWrite
+
+```go
+func (p Mat2fᵖ) OnWrite(ϟs *gfxapi.State) Mat2fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Mat2fᵖ) Read
 
@@ -25464,6 +26200,22 @@ func (s Mat3fˢ) Index(i uint64, ϟs *gfxapi.State) Mat3fᵖ
 ```
 Index returns a Mat3fᵖ to the i'th element in this Mat3fˢ.
 
+#### func (Mat3fˢ) OnRead
+
+```go
+func (s Mat3fˢ) OnRead(ϟs *gfxapi.State) Mat3fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Mat3fˢ) OnWrite
+
+```go
+func (s Mat3fˢ) OnWrite(ϟs *gfxapi.State) Mat3fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Mat3fˢ) Range
 
 ```go
@@ -25503,10 +26255,10 @@ String returns a string description of the Mat3fˢ slice.
 #### func (Mat3fˢ) Write
 
 ```go
-func (dst Mat3fˢ) Write(src []Mat3f, ϟs *gfxapi.State) uint64
+func (s Mat3fˢ) Write(src []Mat3f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Mat3fᵖ
 
@@ -25539,6 +26291,22 @@ func (*Mat3fᵖ) Class() binary.Class
 func (p Mat3fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Mat3fᵖ points to.
+
+#### func (Mat3fᵖ) OnRead
+
+```go
+func (p Mat3fᵖ) OnRead(ϟs *gfxapi.State) Mat3fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Mat3fᵖ) OnWrite
+
+```go
+func (p Mat3fᵖ) OnWrite(ϟs *gfxapi.State) Mat3fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Mat3fᵖ) Read
 
@@ -25663,6 +26431,22 @@ func (s Mat4fˢ) Index(i uint64, ϟs *gfxapi.State) Mat4fᵖ
 ```
 Index returns a Mat4fᵖ to the i'th element in this Mat4fˢ.
 
+#### func (Mat4fˢ) OnRead
+
+```go
+func (s Mat4fˢ) OnRead(ϟs *gfxapi.State) Mat4fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Mat4fˢ) OnWrite
+
+```go
+func (s Mat4fˢ) OnWrite(ϟs *gfxapi.State) Mat4fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Mat4fˢ) Range
 
 ```go
@@ -25702,10 +26486,10 @@ String returns a string description of the Mat4fˢ slice.
 #### func (Mat4fˢ) Write
 
 ```go
-func (dst Mat4fˢ) Write(src []Mat4f, ϟs *gfxapi.State) uint64
+func (s Mat4fˢ) Write(src []Mat4f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Mat4fᵖ
 
@@ -25738,6 +26522,22 @@ func (*Mat4fᵖ) Class() binary.Class
 func (p Mat4fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Mat4fᵖ points to.
+
+#### func (Mat4fᵖ) OnRead
+
+```go
+func (p Mat4fᵖ) OnRead(ϟs *gfxapi.State) Mat4fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Mat4fᵖ) OnWrite
+
+```go
+func (p Mat4fᵖ) OnWrite(ϟs *gfxapi.State) Mat4fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Mat4fᵖ) Read
 
@@ -26124,6 +26924,22 @@ func (s QueryIdˢ) Index(i uint64, ϟs *gfxapi.State) QueryIdᵖ
 ```
 Index returns a QueryIdᵖ to the i'th element in this QueryIdˢ.
 
+#### func (QueryIdˢ) OnRead
+
+```go
+func (s QueryIdˢ) OnRead(ϟs *gfxapi.State) QueryIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (QueryIdˢ) OnWrite
+
+```go
+func (s QueryIdˢ) OnWrite(ϟs *gfxapi.State) QueryIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (QueryIdˢ) Range
 
 ```go
@@ -26163,10 +26979,10 @@ String returns a string description of the QueryIdˢ slice.
 #### func (QueryIdˢ) Write
 
 ```go
-func (dst QueryIdˢ) Write(src []QueryId, ϟs *gfxapi.State) uint64
+func (s QueryIdˢ) Write(src []QueryId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type QueryIdᵖ
 
@@ -26199,6 +27015,22 @@ func (*QueryIdᵖ) Class() binary.Class
 func (p QueryIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that QueryIdᵖ points to.
+
+#### func (QueryIdᵖ) OnRead
+
+```go
+func (p QueryIdᵖ) OnRead(ϟs *gfxapi.State) QueryIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (QueryIdᵖ) OnWrite
+
+```go
+func (p QueryIdᵖ) OnWrite(ϟs *gfxapi.State) QueryIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (QueryIdᵖ) Read
 
@@ -26670,6 +27502,22 @@ func (s RenderbufferIdˢ) Index(i uint64, ϟs *gfxapi.State) RenderbufferIdᵖ
 ```
 Index returns a RenderbufferIdᵖ to the i'th element in this RenderbufferIdˢ.
 
+#### func (RenderbufferIdˢ) OnRead
+
+```go
+func (s RenderbufferIdˢ) OnRead(ϟs *gfxapi.State) RenderbufferIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (RenderbufferIdˢ) OnWrite
+
+```go
+func (s RenderbufferIdˢ) OnWrite(ϟs *gfxapi.State) RenderbufferIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (RenderbufferIdˢ) Range
 
 ```go
@@ -26709,10 +27557,10 @@ String returns a string description of the RenderbufferIdˢ slice.
 #### func (RenderbufferIdˢ) Write
 
 ```go
-func (dst RenderbufferIdˢ) Write(src []RenderbufferId, ϟs *gfxapi.State) uint64
+func (s RenderbufferIdˢ) Write(src []RenderbufferId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type RenderbufferIdᵖ
 
@@ -26747,6 +27595,22 @@ func (p RenderbufferIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that RenderbufferIdᵖ points
 to.
+
+#### func (RenderbufferIdᵖ) OnRead
+
+```go
+func (p RenderbufferIdᵖ) OnRead(ϟs *gfxapi.State) RenderbufferIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (RenderbufferIdᵖ) OnWrite
+
+```go
+func (p RenderbufferIdᵖ) OnWrite(ϟs *gfxapi.State) RenderbufferIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (RenderbufferIdᵖ) Read
 
@@ -26856,7 +27720,7 @@ func (m RenderbufferTargetːRenderbufferIdᵐ) Range() []RenderbufferId
 
 ```go
 type ReplayBindRenderer struct {
-	binary.Generate
+	binary.Generate `display:"replayBindRenderer"`
 
 	Id uint32
 }
@@ -26942,7 +27806,7 @@ func (c *ReplayBindRenderer) TypeID() atom.TypeID
 
 ```go
 type ReplayCreateRenderer struct {
-	binary.Generate
+	binary.Generate `display:"replayCreateRenderer"`
 
 	Id uint32
 }
@@ -27263,6 +28127,22 @@ func (s S32ˢ) Index(i uint64, ϟs *gfxapi.State) S32ᵖ
 ```
 Index returns a S32ᵖ to the i'th element in this S32ˢ.
 
+#### func (S32ˢ) OnRead
+
+```go
+func (s S32ˢ) OnRead(ϟs *gfxapi.State) S32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S32ˢ) OnWrite
+
+```go
+func (s S32ˢ) OnWrite(ϟs *gfxapi.State) S32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S32ˢ) Range
 
 ```go
@@ -27302,10 +28182,10 @@ String returns a string description of the S32ˢ slice.
 #### func (S32ˢ) Write
 
 ```go
-func (dst S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64
+func (s S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S32ᵖ
 
@@ -27338,6 +28218,22 @@ func (*S32ᵖ) Class() binary.Class
 func (p S32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S32ᵖ points to.
+
+#### func (S32ᵖ) OnRead
+
+```go
+func (p S32ᵖ) OnRead(ϟs *gfxapi.State) S32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S32ᵖ) OnWrite
+
+```go
+func (p S32ᵖ) OnWrite(ϟs *gfxapi.State) S32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S32ᵖ) Read
 
@@ -27443,6 +28339,22 @@ func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ
 ```
 Index returns a S64ᵖ to the i'th element in this S64ˢ.
 
+#### func (S64ˢ) OnRead
+
+```go
+func (s S64ˢ) OnRead(ϟs *gfxapi.State) S64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (S64ˢ) OnWrite
+
+```go
+func (s S64ˢ) OnWrite(ϟs *gfxapi.State) S64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (S64ˢ) Range
 
 ```go
@@ -27482,10 +28394,10 @@ String returns a string description of the S64ˢ slice.
 #### func (S64ˢ) Write
 
 ```go
-func (dst S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64
+func (s S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type S64ᵖ
 
@@ -27518,6 +28430,22 @@ func (*S64ᵖ) Class() binary.Class
 func (p S64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that S64ᵖ points to.
+
+#### func (S64ᵖ) OnRead
+
+```go
+func (p S64ᵖ) OnRead(ϟs *gfxapi.State) S64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S64ᵖ) OnWrite
+
+```go
+func (p S64ᵖ) OnWrite(ϟs *gfxapi.State) S64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (S64ᵖ) Read
 
@@ -27684,6 +28612,22 @@ func (s ShaderAttribTypeˢ) Index(i uint64, ϟs *gfxapi.State) ShaderAttribType�
 ```
 Index returns a ShaderAttribTypeᵖ to the i'th element in this ShaderAttribTypeˢ.
 
+#### func (ShaderAttribTypeˢ) OnRead
+
+```go
+func (s ShaderAttribTypeˢ) OnRead(ϟs *gfxapi.State) ShaderAttribTypeˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (ShaderAttribTypeˢ) OnWrite
+
+```go
+func (s ShaderAttribTypeˢ) OnWrite(ϟs *gfxapi.State) ShaderAttribTypeˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (ShaderAttribTypeˢ) Range
 
 ```go
@@ -27725,10 +28669,10 @@ String returns a string description of the ShaderAttribTypeˢ slice.
 #### func (ShaderAttribTypeˢ) Write
 
 ```go
-func (dst ShaderAttribTypeˢ) Write(src []ShaderAttribType, ϟs *gfxapi.State) uint64
+func (s ShaderAttribTypeˢ) Write(src []ShaderAttribType, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type ShaderAttribTypeᵖ
 
@@ -27763,6 +28707,22 @@ func (p ShaderAttribTypeᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that ShaderAttribTypeᵖ
 points to.
+
+#### func (ShaderAttribTypeᵖ) OnRead
+
+```go
+func (p ShaderAttribTypeᵖ) OnRead(ϟs *gfxapi.State) ShaderAttribTypeᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (ShaderAttribTypeᵖ) OnWrite
+
+```go
+func (p ShaderAttribTypeᵖ) OnWrite(ϟs *gfxapi.State) ShaderAttribTypeᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (ShaderAttribTypeᵖ) Read
 
@@ -27907,6 +28867,22 @@ func (s ShaderIdˢ) Index(i uint64, ϟs *gfxapi.State) ShaderIdᵖ
 ```
 Index returns a ShaderIdᵖ to the i'th element in this ShaderIdˢ.
 
+#### func (ShaderIdˢ) OnRead
+
+```go
+func (s ShaderIdˢ) OnRead(ϟs *gfxapi.State) ShaderIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (ShaderIdˢ) OnWrite
+
+```go
+func (s ShaderIdˢ) OnWrite(ϟs *gfxapi.State) ShaderIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (ShaderIdˢ) Range
 
 ```go
@@ -27946,10 +28922,10 @@ String returns a string description of the ShaderIdˢ slice.
 #### func (ShaderIdˢ) Write
 
 ```go
-func (dst ShaderIdˢ) Write(src []ShaderId, ϟs *gfxapi.State) uint64
+func (s ShaderIdˢ) Write(src []ShaderId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type ShaderIdᵖ
 
@@ -27982,6 +28958,22 @@ func (*ShaderIdᵖ) Class() binary.Class
 func (p ShaderIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that ShaderIdᵖ points to.
+
+#### func (ShaderIdᵖ) OnRead
+
+```go
+func (p ShaderIdᵖ) OnRead(ϟs *gfxapi.State) ShaderIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (ShaderIdᵖ) OnWrite
+
+```go
+func (p ShaderIdᵖ) OnWrite(ϟs *gfxapi.State) ShaderIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (ShaderIdᵖ) Read
 
@@ -28187,6 +29179,22 @@ func (s ShaderUniformTypeˢ) Index(i uint64, ϟs *gfxapi.State) ShaderUniformTyp
 Index returns a ShaderUniformTypeᵖ to the i'th element in this
 ShaderUniformTypeˢ.
 
+#### func (ShaderUniformTypeˢ) OnRead
+
+```go
+func (s ShaderUniformTypeˢ) OnRead(ϟs *gfxapi.State) ShaderUniformTypeˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (ShaderUniformTypeˢ) OnWrite
+
+```go
+func (s ShaderUniformTypeˢ) OnWrite(ϟs *gfxapi.State) ShaderUniformTypeˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (ShaderUniformTypeˢ) Range
 
 ```go
@@ -28228,10 +29236,10 @@ String returns a string description of the ShaderUniformTypeˢ slice.
 #### func (ShaderUniformTypeˢ) Write
 
 ```go
-func (dst ShaderUniformTypeˢ) Write(src []ShaderUniformType, ϟs *gfxapi.State) uint64
+func (s ShaderUniformTypeˢ) Write(src []ShaderUniformType, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type ShaderUniformTypeᵖ
 
@@ -28266,6 +29274,22 @@ func (p ShaderUniformTypeᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that ShaderUniformTypeᵖ
 points to.
+
+#### func (ShaderUniformTypeᵖ) OnRead
+
+```go
+func (p ShaderUniformTypeᵖ) OnRead(ϟs *gfxapi.State) ShaderUniformTypeᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (ShaderUniformTypeᵖ) OnWrite
+
+```go
+func (p ShaderUniformTypeᵖ) OnWrite(ϟs *gfxapi.State) ShaderUniformTypeᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (ShaderUniformTypeᵖ) Read
 
@@ -28340,7 +29364,7 @@ Info returns the SliceInfo. It is used to conform to the Slice interface.
 
 ```go
 type StartTimer struct {
-	binary.Generate
+	binary.Generate `display:"startTimer"`
 
 	Index uint8
 }
@@ -28566,7 +29590,7 @@ func (v StencilAction) String() string
 
 ```go
 type StopTimer struct {
-	binary.Generate
+	binary.Generate `display:"stopTimer"`
 
 	Index  uint8
 	Result uint64
@@ -29085,6 +30109,22 @@ func (s TextureIdˢ) Index(i uint64, ϟs *gfxapi.State) TextureIdᵖ
 ```
 Index returns a TextureIdᵖ to the i'th element in this TextureIdˢ.
 
+#### func (TextureIdˢ) OnRead
+
+```go
+func (s TextureIdˢ) OnRead(ϟs *gfxapi.State) TextureIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (TextureIdˢ) OnWrite
+
+```go
+func (s TextureIdˢ) OnWrite(ϟs *gfxapi.State) TextureIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (TextureIdˢ) Range
 
 ```go
@@ -29124,10 +30164,10 @@ String returns a string description of the TextureIdˢ slice.
 #### func (TextureIdˢ) Write
 
 ```go
-func (dst TextureIdˢ) Write(src []TextureId, ϟs *gfxapi.State) uint64
+func (s TextureIdˢ) Write(src []TextureId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type TextureIdᵖ
 
@@ -29160,6 +30200,22 @@ func (*TextureIdᵖ) Class() binary.Class
 func (p TextureIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that TextureIdᵖ points to.
+
+#### func (TextureIdᵖ) OnRead
+
+```go
+func (p TextureIdᵖ) OnRead(ϟs *gfxapi.State) TextureIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (TextureIdᵖ) OnWrite
+
+```go
+func (p TextureIdᵖ) OnWrite(ϟs *gfxapi.State) TextureIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (TextureIdᵖ) Read
 
@@ -29376,6 +30432,22 @@ func (p TexturePointer) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that TexturePointer points
 to.
+
+#### func (TexturePointer) OnRead
+
+```go
+func (p TexturePointer) OnRead(ϟs *gfxapi.State) TexturePointer
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (TexturePointer) OnWrite
+
+```go
+func (p TexturePointer) OnWrite(ϟs *gfxapi.State) TexturePointer
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (TexturePointer) Slice
 
@@ -29765,6 +30837,22 @@ func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ
 ```
 Index returns a U32ᵖ to the i'th element in this U32ˢ.
 
+#### func (U32ˢ) OnRead
+
+```go
+func (s U32ˢ) OnRead(ϟs *gfxapi.State) U32ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U32ˢ) OnWrite
+
+```go
+func (s U32ˢ) OnWrite(ϟs *gfxapi.State) U32ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U32ˢ) Range
 
 ```go
@@ -29804,10 +30892,10 @@ String returns a string description of the U32ˢ slice.
 #### func (U32ˢ) Write
 
 ```go
-func (dst U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64
+func (s U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U32ᵖ
 
@@ -29840,6 +30928,22 @@ func (*U32ᵖ) Class() binary.Class
 func (p U32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U32ᵖ points to.
+
+#### func (U32ᵖ) OnRead
+
+```go
+func (p U32ᵖ) OnRead(ϟs *gfxapi.State) U32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U32ᵖ) OnWrite
+
+```go
+func (p U32ᵖ) OnWrite(ϟs *gfxapi.State) U32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U32ᵖ) Read
 
@@ -29945,6 +31049,22 @@ func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ
 ```
 Index returns a U64ᵖ to the i'th element in this U64ˢ.
 
+#### func (U64ˢ) OnRead
+
+```go
+func (s U64ˢ) OnRead(ϟs *gfxapi.State) U64ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U64ˢ) OnWrite
+
+```go
+func (s U64ˢ) OnWrite(ϟs *gfxapi.State) U64ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U64ˢ) Range
 
 ```go
@@ -29984,10 +31104,10 @@ String returns a string description of the U64ˢ slice.
 #### func (U64ˢ) Write
 
 ```go
-func (dst U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64
+func (s U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U64ᵖ
 
@@ -30020,6 +31140,22 @@ func (*U64ᵖ) Class() binary.Class
 func (p U64ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U64ᵖ points to.
+
+#### func (U64ᵖ) OnRead
+
+```go
+func (p U64ᵖ) OnRead(ϟs *gfxapi.State) U64ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U64ᵖ) OnWrite
+
+```go
+func (p U64ᵖ) OnWrite(ϟs *gfxapi.State) U64ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U64ᵖ) Read
 
@@ -30125,6 +31261,22 @@ func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ
 ```
 Index returns a U8ᵖ to the i'th element in this U8ˢ.
 
+#### func (U8ˢ) OnRead
+
+```go
+func (s U8ˢ) OnRead(ϟs *gfxapi.State) U8ˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (U8ˢ) OnWrite
+
+```go
+func (s U8ˢ) OnWrite(ϟs *gfxapi.State) U8ˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (U8ˢ) Range
 
 ```go
@@ -30164,10 +31316,10 @@ String returns a string description of the U8ˢ slice.
 #### func (U8ˢ) Write
 
 ```go
-func (dst U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64
+func (s U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type U8ᵖ
 
@@ -30200,6 +31352,22 @@ func (*U8ᵖ) Class() binary.Class
 func (p U8ᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that U8ᵖ points to.
+
+#### func (U8ᵖ) OnRead
+
+```go
+func (p U8ᵖ) OnRead(ϟs *gfxapi.State) U8ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (U8ᵖ) OnWrite
+
+```go
+func (p U8ᵖ) OnWrite(ϟs *gfxapi.State) U8ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (U8ᵖ) Read
 
@@ -30434,6 +31602,22 @@ func (s Vec2fˢ) Index(i uint64, ϟs *gfxapi.State) Vec2fᵖ
 ```
 Index returns a Vec2fᵖ to the i'th element in this Vec2fˢ.
 
+#### func (Vec2fˢ) OnRead
+
+```go
+func (s Vec2fˢ) OnRead(ϟs *gfxapi.State) Vec2fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec2fˢ) OnWrite
+
+```go
+func (s Vec2fˢ) OnWrite(ϟs *gfxapi.State) Vec2fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec2fˢ) Range
 
 ```go
@@ -30473,10 +31657,10 @@ String returns a string description of the Vec2fˢ slice.
 #### func (Vec2fˢ) Write
 
 ```go
-func (dst Vec2fˢ) Write(src []Vec2f, ϟs *gfxapi.State) uint64
+func (s Vec2fˢ) Write(src []Vec2f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec2fᵖ
 
@@ -30509,6 +31693,22 @@ func (*Vec2fᵖ) Class() binary.Class
 func (p Vec2fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec2fᵖ points to.
+
+#### func (Vec2fᵖ) OnRead
+
+```go
+func (p Vec2fᵖ) OnRead(ϟs *gfxapi.State) Vec2fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec2fᵖ) OnWrite
+
+```go
+func (p Vec2fᵖ) OnWrite(ϟs *gfxapi.State) Vec2fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec2fᵖ) Read
 
@@ -30633,6 +31833,22 @@ func (s Vec2iˢ) Index(i uint64, ϟs *gfxapi.State) Vec2iᵖ
 ```
 Index returns a Vec2iᵖ to the i'th element in this Vec2iˢ.
 
+#### func (Vec2iˢ) OnRead
+
+```go
+func (s Vec2iˢ) OnRead(ϟs *gfxapi.State) Vec2iˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec2iˢ) OnWrite
+
+```go
+func (s Vec2iˢ) OnWrite(ϟs *gfxapi.State) Vec2iˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec2iˢ) Range
 
 ```go
@@ -30672,10 +31888,10 @@ String returns a string description of the Vec2iˢ slice.
 #### func (Vec2iˢ) Write
 
 ```go
-func (dst Vec2iˢ) Write(src []Vec2i, ϟs *gfxapi.State) uint64
+func (s Vec2iˢ) Write(src []Vec2i, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec2iᵖ
 
@@ -30708,6 +31924,22 @@ func (*Vec2iᵖ) Class() binary.Class
 func (p Vec2iᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec2iᵖ points to.
+
+#### func (Vec2iᵖ) OnRead
+
+```go
+func (p Vec2iᵖ) OnRead(ϟs *gfxapi.State) Vec2iᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec2iᵖ) OnWrite
+
+```go
+func (p Vec2iᵖ) OnWrite(ϟs *gfxapi.State) Vec2iᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec2iᵖ) Read
 
@@ -30848,6 +32080,22 @@ func (s Vec3fˢ) Index(i uint64, ϟs *gfxapi.State) Vec3fᵖ
 ```
 Index returns a Vec3fᵖ to the i'th element in this Vec3fˢ.
 
+#### func (Vec3fˢ) OnRead
+
+```go
+func (s Vec3fˢ) OnRead(ϟs *gfxapi.State) Vec3fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec3fˢ) OnWrite
+
+```go
+func (s Vec3fˢ) OnWrite(ϟs *gfxapi.State) Vec3fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec3fˢ) Range
 
 ```go
@@ -30887,10 +32135,10 @@ String returns a string description of the Vec3fˢ slice.
 #### func (Vec3fˢ) Write
 
 ```go
-func (dst Vec3fˢ) Write(src []Vec3f, ϟs *gfxapi.State) uint64
+func (s Vec3fˢ) Write(src []Vec3f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec3fᵖ
 
@@ -30923,6 +32171,22 @@ func (*Vec3fᵖ) Class() binary.Class
 func (p Vec3fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec3fᵖ points to.
+
+#### func (Vec3fᵖ) OnRead
+
+```go
+func (p Vec3fᵖ) OnRead(ϟs *gfxapi.State) Vec3fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec3fᵖ) OnWrite
+
+```go
+func (p Vec3fᵖ) OnWrite(ϟs *gfxapi.State) Vec3fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec3fᵖ) Read
 
@@ -31047,6 +32311,22 @@ func (s Vec3iˢ) Index(i uint64, ϟs *gfxapi.State) Vec3iᵖ
 ```
 Index returns a Vec3iᵖ to the i'th element in this Vec3iˢ.
 
+#### func (Vec3iˢ) OnRead
+
+```go
+func (s Vec3iˢ) OnRead(ϟs *gfxapi.State) Vec3iˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec3iˢ) OnWrite
+
+```go
+func (s Vec3iˢ) OnWrite(ϟs *gfxapi.State) Vec3iˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec3iˢ) Range
 
 ```go
@@ -31086,10 +32366,10 @@ String returns a string description of the Vec3iˢ slice.
 #### func (Vec3iˢ) Write
 
 ```go
-func (dst Vec3iˢ) Write(src []Vec3i, ϟs *gfxapi.State) uint64
+func (s Vec3iˢ) Write(src []Vec3i, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec3iᵖ
 
@@ -31122,6 +32402,22 @@ func (*Vec3iᵖ) Class() binary.Class
 func (p Vec3iᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec3iᵖ points to.
+
+#### func (Vec3iᵖ) OnRead
+
+```go
+func (p Vec3iᵖ) OnRead(ϟs *gfxapi.State) Vec3iᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec3iᵖ) OnWrite
+
+```go
+func (p Vec3iᵖ) OnWrite(ϟs *gfxapi.State) Vec3iᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec3iᵖ) Read
 
@@ -31262,6 +32558,22 @@ func (s Vec4fˢ) Index(i uint64, ϟs *gfxapi.State) Vec4fᵖ
 ```
 Index returns a Vec4fᵖ to the i'th element in this Vec4fˢ.
 
+#### func (Vec4fˢ) OnRead
+
+```go
+func (s Vec4fˢ) OnRead(ϟs *gfxapi.State) Vec4fˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec4fˢ) OnWrite
+
+```go
+func (s Vec4fˢ) OnWrite(ϟs *gfxapi.State) Vec4fˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec4fˢ) Range
 
 ```go
@@ -31301,10 +32613,10 @@ String returns a string description of the Vec4fˢ slice.
 #### func (Vec4fˢ) Write
 
 ```go
-func (dst Vec4fˢ) Write(src []Vec4f, ϟs *gfxapi.State) uint64
+func (s Vec4fˢ) Write(src []Vec4f, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec4fᵖ
 
@@ -31337,6 +32649,22 @@ func (*Vec4fᵖ) Class() binary.Class
 func (p Vec4fᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec4fᵖ points to.
+
+#### func (Vec4fᵖ) OnRead
+
+```go
+func (p Vec4fᵖ) OnRead(ϟs *gfxapi.State) Vec4fᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec4fᵖ) OnWrite
+
+```go
+func (p Vec4fᵖ) OnWrite(ϟs *gfxapi.State) Vec4fᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec4fᵖ) Read
 
@@ -31461,6 +32789,22 @@ func (s Vec4iˢ) Index(i uint64, ϟs *gfxapi.State) Vec4iᵖ
 ```
 Index returns a Vec4iᵖ to the i'th element in this Vec4iˢ.
 
+#### func (Vec4iˢ) OnRead
+
+```go
+func (s Vec4iˢ) OnRead(ϟs *gfxapi.State) Vec4iˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Vec4iˢ) OnWrite
+
+```go
+func (s Vec4iˢ) OnWrite(ϟs *gfxapi.State) Vec4iˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Vec4iˢ) Range
 
 ```go
@@ -31500,10 +32844,10 @@ String returns a string description of the Vec4iˢ slice.
 #### func (Vec4iˢ) Write
 
 ```go
-func (dst Vec4iˢ) Write(src []Vec4i, ϟs *gfxapi.State) uint64
+func (s Vec4iˢ) Write(src []Vec4i, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type Vec4iᵖ
 
@@ -31536,6 +32880,22 @@ func (*Vec4iᵖ) Class() binary.Class
 func (p Vec4iᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Vec4iᵖ points to.
+
+#### func (Vec4iᵖ) OnRead
+
+```go
+func (p Vec4iᵖ) OnRead(ϟs *gfxapi.State) Vec4iᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Vec4iᵖ) OnWrite
+
+```go
+func (p Vec4iᵖ) OnWrite(ϟs *gfxapi.State) Vec4iᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (Vec4iᵖ) Read
 
@@ -31732,6 +33092,22 @@ func (s VertexArrayIdˢ) Index(i uint64, ϟs *gfxapi.State) VertexArrayIdᵖ
 ```
 Index returns a VertexArrayIdᵖ to the i'th element in this VertexArrayIdˢ.
 
+#### func (VertexArrayIdˢ) OnRead
+
+```go
+func (s VertexArrayIdˢ) OnRead(ϟs *gfxapi.State) VertexArrayIdˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (VertexArrayIdˢ) OnWrite
+
+```go
+func (s VertexArrayIdˢ) OnWrite(ϟs *gfxapi.State) VertexArrayIdˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (VertexArrayIdˢ) Range
 
 ```go
@@ -31771,10 +33147,10 @@ String returns a string description of the VertexArrayIdˢ slice.
 #### func (VertexArrayIdˢ) Write
 
 ```go
-func (dst VertexArrayIdˢ) Write(src []VertexArrayId, ϟs *gfxapi.State) uint64
+func (s VertexArrayIdˢ) Write(src []VertexArrayId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of dst.Count and src.Count.
+returned which is the minimum of s.Count and len(src).
 
 #### type VertexArrayIdᵖ
 
@@ -31809,6 +33185,22 @@ func (p VertexArrayIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that VertexArrayIdᵖ points
 to.
+
+#### func (VertexArrayIdᵖ) OnRead
+
+```go
+func (p VertexArrayIdᵖ) OnRead(ϟs *gfxapi.State) VertexArrayIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (VertexArrayIdᵖ) OnWrite
+
+```go
+func (p VertexArrayIdᵖ) OnWrite(ϟs *gfxapi.State) VertexArrayIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
 
 #### func (VertexArrayIdᵖ) Read
 
@@ -31972,6 +33364,22 @@ func (p VertexPointer) ElementSize(ϟs *gfxapi.State) uint64
 ElementSize returns the size in bytes of an element that VertexPointer points
 to.
 
+#### func (VertexPointer) OnRead
+
+```go
+func (p VertexPointer) OnRead(ϟs *gfxapi.State) VertexPointer
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (VertexPointer) OnWrite
+
+```go
+func (p VertexPointer) OnWrite(ϟs *gfxapi.State) VertexPointer
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (VertexPointer) Slice
 
 ```go
@@ -32045,6 +33453,22 @@ func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ
 ```
 Index returns a Voidᵖ to the i'th element in this Voidˢ.
 
+#### func (Voidˢ) OnRead
+
+```go
+func (s Voidˢ) OnRead(ϟs *gfxapi.State) Voidˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Voidˢ) OnWrite
+
+```go
+func (s Voidˢ) OnWrite(ϟs *gfxapi.State) Voidˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
 #### func (Voidˢ) Range
 
 ```go
@@ -32106,6 +33530,22 @@ func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
 ElementSize returns the size in bytes of an element that Voidᵖ points to.
 
+#### func (Voidᵖ) OnRead
+
+```go
+func (p Voidᵖ) OnRead(ϟs *gfxapi.State) Voidᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Voidᵖ) OnWrite
+
+```go
+func (p Voidᵖ) OnWrite(ϟs *gfxapi.State) Voidᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
 #### func (Voidᵖ) Slice
 
 ```go
@@ -32124,7 +33564,7 @@ String returns a string description of the Voidᵖ pointer.
 
 ```go
 type WglCreateContext struct {
-	binary.Generate
+	binary.Generate `display:"wglCreateContext"`
 
 	Hdc    HDC
 	Result HGLRC
@@ -32209,7 +33649,7 @@ func (c *WglCreateContext) TypeID() atom.TypeID
 
 ```go
 type WglCreateContextAttribsARB struct {
-	binary.Generate
+	binary.Generate `display:"wglCreateContextAttribsARB"`
 
 	Hdc           HDC
 	HShareContext HGLRC
@@ -32298,7 +33738,7 @@ func (c *WglCreateContextAttribsARB) TypeID() atom.TypeID
 
 ```go
 type WglMakeCurrent struct {
-	binary.Generate
+	binary.Generate `display:"wglMakeCurrent"`
 
 	Hdc    HDC
 	Hglrc  HGLRC
@@ -32384,7 +33824,7 @@ func (c *WglMakeCurrent) TypeID() atom.TypeID
 
 ```go
 type WglSwapBuffers struct {
-	binary.Generate
+	binary.Generate `display:"wglSwapBuffers"`
 
 	Hdc HDC
 }

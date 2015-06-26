@@ -131,7 +131,7 @@ var (
 	binaryIDImageInfoId                 = binary.ID{0xb1, 0x03, 0x2c, 0x17, 0x12, 0xab, 0x40, 0x23, 0x1d, 0x01, 0xb9, 0x4b, 0x9b, 0x8c, 0x9d, 0x5a, 0x19, 0x45, 0xaf, 0x70}
 	binaryIDMapInfo                     = binary.ID{0xf3, 0x40, 0x60, 0x02, 0x47, 0x89, 0x04, 0x5e, 0x0c, 0x8f, 0xd3, 0x9d, 0xa9, 0xd7, 0x19, 0x8b, 0xd0, 0x88, 0xd8, 0xdf}
 	binaryIDMemoryRange                 = binary.ID{0xfa, 0xc5, 0x84, 0x24, 0x6c, 0x1b, 0x47, 0x0e, 0xe5, 0xdb, 0x67, 0x29, 0xd8, 0xb1, 0x81, 0x3b, 0xfe, 0x53, 0x3a, 0x9d}
-	binaryIDMemoryInfo                  = binary.ID{0xfa, 0x6e, 0x9e, 0xc9, 0xe4, 0x44, 0x62, 0x53, 0xa0, 0x69, 0xe7, 0x64, 0x3b, 0x30, 0xc1, 0xaa, 0xfd, 0x73, 0xb1, 0x93}
+	binaryIDMemoryInfo                  = binary.ID{0x3a, 0x32, 0x08, 0xed, 0x31, 0x12, 0x40, 0x27, 0x3d, 0xf8, 0xfe, 0xc1, 0x96, 0x80, 0xbf, 0xba, 0x0c, 0xc9, 0xc9, 0xa3}
 	binaryIDMemoryInfoId                = binary.ID{0x84, 0x64, 0x1a, 0xae, 0xde, 0x19, 0x1a, 0xa3, 0xae, 0xc7, 0x31, 0x9f, 0x5e, 0x46, 0xa0, 0x51, 0x54, 0xc5, 0x46, 0x15}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
 	binaryIDReportItem                  = binary.ID{0x85, 0x03, 0xdb, 0x94, 0x41, 0x27, 0x21, 0x23, 0xcc, 0x45, 0x1d, 0xae, 0xef, 0xff, 0xeb, 0x26, 0xc9, 0xf6, 0xa6, 0x20}
@@ -2467,27 +2467,27 @@ func doEncodeMemoryInfo(e binary.Encoder, o *MemoryInfo) error {
 	if err := e.Data(o.Data); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.Stale))); err != nil {
+	if err := e.Uint32(uint32(len(o.Reads))); err != nil {
 		return err
 	}
-	for i := range o.Stale {
-		if err := e.Value(&o.Stale[i]); err != nil {
+	for i := range o.Reads {
+		if err := e.Value(&o.Reads[i]); err != nil {
 			return err
 		}
 	}
-	if err := e.Uint32(uint32(len(o.Current))); err != nil {
+	if err := e.Uint32(uint32(len(o.Writes))); err != nil {
 		return err
 	}
-	for i := range o.Current {
-		if err := e.Value(&o.Current[i]); err != nil {
+	for i := range o.Writes {
+		if err := e.Value(&o.Writes[i]); err != nil {
 			return err
 		}
 	}
-	if err := e.Uint32(uint32(len(o.Unknown))); err != nil {
+	if err := e.Uint32(uint32(len(o.Observed))); err != nil {
 		return err
 	}
-	for i := range o.Unknown {
-		if err := e.Value(&o.Unknown[i]); err != nil {
+	for i := range o.Observed {
+		if err := e.Value(&o.Observed[i]); err != nil {
 			return err
 		}
 	}
@@ -2505,9 +2505,9 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Stale = make(MemoryRangeArray, count)
-		for i := range o.Stale {
-			if err := d.Value(&o.Stale[i]); err != nil {
+		o.Reads = make(MemoryRangeArray, count)
+		for i := range o.Reads {
+			if err := d.Value(&o.Reads[i]); err != nil {
 				return err
 			}
 		}
@@ -2515,9 +2515,9 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Current = make(MemoryRangeArray, count)
-		for i := range o.Current {
-			if err := d.Value(&o.Current[i]); err != nil {
+		o.Writes = make(MemoryRangeArray, count)
+		for i := range o.Writes {
+			if err := d.Value(&o.Writes[i]); err != nil {
 				return err
 			}
 		}
@@ -2525,9 +2525,9 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Unknown = make(MemoryRangeArray, count)
-		for i := range o.Unknown {
-			if err := d.Value(&o.Unknown[i]); err != nil {
+		o.Observed = make(MemoryRangeArray, count)
+		for i := range o.Observed {
+			if err := d.Value(&o.Observed[i]); err != nil {
 				return err
 			}
 		}
@@ -2593,9 +2593,9 @@ var schemaMemoryInfo = &schema.Class{
 	Display: "MemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		{Declared: "Stale", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
-		{Declared: "Current", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
-		{Declared: "Unknown", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Reads", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Writes", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Observed", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
 	},
 }
 
