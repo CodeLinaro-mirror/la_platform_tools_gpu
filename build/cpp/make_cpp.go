@@ -198,6 +198,7 @@ func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) bui
 func MakeRunTest(test build.File, cfg Config) {
 	// We only run tests on the host OS.
 	if cfg.OS == maker.HostOS {
+		cfg.Defines["LOG_LEVEL"] = "0" // Disable all log messages except for GAPID_FATAL.
 		phony := maker.Virtual("cc:" + test.Name() + ":run")
 		maker.Command(makeEntity(test)).Creates(phony)
 		maker.List("cc_test").DependsOn(phony)
