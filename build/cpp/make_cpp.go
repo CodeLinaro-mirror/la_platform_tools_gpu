@@ -98,6 +98,10 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 		}
 		deps, valid := depsFor(object, cfg, env)
 		if !valid {
+			depFileFor := cfg.Toolchain.DepFileFor
+			if depFileFor != nil {
+				s.DependsOn(maker.DirOf(depFileFor(object, cfg, env).Absolute()))
+			}
 			s.AlwaysRun()
 			continue
 		}
@@ -133,7 +137,7 @@ func MakeStaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) 
 // Source file inputs will generate compilation steps.
 // Returns the output library name.
 // Note we do not get a dependency on the linker.
-func MakeDynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) build.File {
+func MakeDynamicLibrary(name string, inputs build.FileSet, cfg Config, env build.Environment) build.File {
 	objects := MakeCompile(inputs.Filter(sourcePatterns...), cfg, env)
 	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
 	libs := inputs.Filter("*" + cfg.Toolchain.LibExt(cfg))
@@ -153,7 +157,7 @@ func MakeDynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment)
 	}
 
 	deps := libs.Append(objects...)
-	makeStep(cfg.Name, output, deps, env.ForceBuild,
+	makeStep(name, output, deps, env.ForceBuild,
 		func(*maker.Step) error {
 			env.Logger = logger(env, cfg.Name).Enter("C++.DynamicLibrary")
 			return cfg.Toolchain.DllLinker(objects, output, cfg, env)
@@ -165,7 +169,7 @@ func MakeDynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment)
 // of source files, object files and / or library files. Source file inputs
 // will generate compilation steps. Returns the output library name.
 // Note we do not get a dependency on the linker.
-func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) build.File {
+func MakeExecutable(name string, inputs build.FileSet, cfg Config, env build.Environment) build.File {
 	objects := MakeCompile(inputs.Filter(sourcePatterns...), cfg, env)
 	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
 	libs := inputs.Filter("*" + cfg.Toolchain.LibExt(cfg))
@@ -185,7 +189,7 @@ func MakeExecutable(inputs build.FileSet, cfg Config, env build.Environment) bui
 	}
 
 	deps := libs.Append(objects...)
-	makeStep(cfg.Name, output, deps, env.ForceBuild,
+	makeStep(name, output, deps, env.ForceBuild,
 		func(*maker.Step) error {
 			env.Logger = logger(env, cfg.Name).Enter("C++.Executable")
 			return cfg.Toolchain.ExeLinker(objects, output, cfg, env)

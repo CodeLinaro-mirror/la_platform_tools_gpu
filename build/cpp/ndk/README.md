@@ -9,30 +9,32 @@ libraries.
 
 ```go
 var APK = &cpp.Toolchain{
-	Compiler:  compile,
-	Archiver:  archive,
-	DllLinker: linkSo,
-	ExeLinker: linkApk,
-	DepsFor:   depsFor,
-	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
-	ExeName:   func(cfg cpp.Config) string { return cfg.Name + ".apk" },
-	ObjExt:    func(cfg cpp.Config) string { return ".o" },
+	Compiler:   compile,
+	Archiver:   archive,
+	DllLinker:  linkSo,
+	ExeLinker:  linkApk,
+	DepsFor:    depsFor,
+	DepFileFor: depFileFor,
+	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:    func(cfg cpp.Config) string { return cfg.Name + ".apk" },
+	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
 ```
 Toolchain for building an Android APK.
 
 ```go
 var EXE = &cpp.Toolchain{
-	Compiler:  compile,
-	Archiver:  archive,
-	DllLinker: linkSo,
-	ExeLinker: linkExe,
-	DepsFor:   depsFor,
-	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
-	ExeName:   func(cfg cpp.Config) string { return cfg.Name },
-	ObjExt:    func(cfg cpp.Config) string { return ".o" },
+	Compiler:   compile,
+	Archiver:   archive,
+	DllLinker:  linkSo,
+	ExeLinker:  linkExe,
+	DepsFor:    depsFor,
+	DepFileFor: depFileFor,
+	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:    func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:    func(cfg cpp.Config) string { return cfg.Name },
+	ObjExt:     func(cfg cpp.Config) string { return ".o" },
 }
 ```
 Toolchain for building an Android executable env, without being packaged into an

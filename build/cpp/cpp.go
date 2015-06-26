@@ -23,6 +23,7 @@ import (
 type misotool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
 type sisotool func(input build.File, output build.File, cfg Config, env build.Environment) error
 type depsFor func(output build.File, cfg Config, env build.Environment) (deps build.FileSet, valid bool)
+type depFileFor func(output build.File, cfg Config, env build.Environment) build.File
 
 // OptimisationLevel is an enumerator of optimisation levels to use by a toolchain.
 type OptimizationLevel int
@@ -34,15 +35,16 @@ const (
 
 // Toolchain is a collection of tools used to build objects, libraries and programs.
 type Toolchain struct {
-	Compiler  sisotool            // Tool used to compile source to object files.
-	Archiver  misotool            // Tool used to package object files into archives.
-	DllLinker misotool            // Tool used to link objects and packages into dynamic libraries.
-	ExeLinker misotool            // Tool used to link objects and packages into executables.
-	DepsFor   depsFor             // Returns the list of dependencies for the given file.
-	LibName   func(Config) string // Returns the name of the emitted static library file.
-	DllName   func(Config) string // Returns the name of the emitted dynamic library file.
-	ExeName   func(Config) string // Returns the name of the emitted executable.
-	ObjExt    func(Config) string // Extension used for object files.
+	Compiler   sisotool            // Tool used to compile source to object files.
+	Archiver   misotool            // Tool used to package object files into archives.
+	DllLinker  misotool            // Tool used to link objects and packages into dynamic libraries.
+	ExeLinker  misotool            // Tool used to link objects and packages into executables.
+	DepFileFor depFileFor          // Returns the name of the dependency file
+	DepsFor    depsFor             // Returns the list of dependencies for the given file.
+	LibName    func(Config) string // Returns the name of the emitted static library file.
+	DllName    func(Config) string // Returns the name of the emitted dynamic library file.
+	ExeName    func(Config) string // Returns the name of the emitted executable.
+	ObjExt     func(Config) string // Extension used for object files.
 }
 
 func (t Toolchain) LibExt(cfg Config) string {
@@ -128,6 +130,5 @@ func IntermediatePath(source build.File, ext string, cfg Config, env build.Envir
 	rel := source.RelativeTo(root.Path)
 	rel = strings.Replace(rel, "..", "__", -1) // prevent leaking outside of the Intermediates directory
 	out := env.Intermediates.Join(Triplet(cfg), root.Name, rel).ChangeExt(ext)
-	out.MkdirAll()
 	return out
 }
