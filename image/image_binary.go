@@ -11,16 +11,19 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
+var Namespace = registry.NewNamespace()
+
 func init() {
-	registry.Add((*fmtATC_RGBA_EXPLICIT_ALPHA_AMD)(nil).Class())
-	registry.Add((*fmtATC_RGB_AMD)(nil).Class())
-	registry.Add((*fmtAlpha)(nil).Class())
-	registry.Add((*fmtETC1_RGB8_OES)(nil).Class())
-	registry.Add((*fmtLuminance)(nil).Class())
-	registry.Add((*fmtLuminanceAlpha)(nil).Class())
-	registry.Add((*fmtPNG)(nil).Class())
-	registry.Add((*fmtRGB)(nil).Class())
-	registry.Add((*fmtRGBA)(nil).Class())
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*fmtATC_RGBA_EXPLICIT_ALPHA_AMD)(nil).Class())
+	Namespace.Add((*fmtATC_RGB_AMD)(nil).Class())
+	Namespace.Add((*fmtAlpha)(nil).Class())
+	Namespace.Add((*fmtETC1_RGB8_OES)(nil).Class())
+	Namespace.Add((*fmtLuminance)(nil).Class())
+	Namespace.Add((*fmtLuminanceAlpha)(nil).Class())
+	Namespace.Add((*fmtPNG)(nil).Class())
+	Namespace.Add((*fmtRGB)(nil).Class())
+	Namespace.Add((*fmtRGBA)(nil).Class())
 }
 
 var (

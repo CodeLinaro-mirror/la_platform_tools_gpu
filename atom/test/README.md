@@ -26,6 +26,10 @@ var (
 )
 ```
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### type AtomA
 
 ```go
