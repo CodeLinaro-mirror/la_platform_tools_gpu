@@ -221,7 +221,9 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 		stop := make(chan struct{})
 
 		clickSubscription.Unlisten()
-		button.SetText("Stop")
+		theme.Driver().Call(func() {
+			button.SetText("Stop")
+		})
 		clickSubscription = button.OnClick(func(gxui.MouseEvent) {
 			clickSubscription.Unlisten()
 			close(stop)
@@ -241,9 +243,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 				statusLogger.Infof("Loading...")
 				appCtx.LoadCapture(id, true)
 
-				theme.Driver().Call(func() {
-					window.Close()
-				})
+				theme.Driver().Call(window.Close)
 			} else {
 				if err != nil {
 					statusLogger.Errorf("%T %s", err, err.Error())
