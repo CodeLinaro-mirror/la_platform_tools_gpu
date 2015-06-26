@@ -23,13 +23,10 @@ import (
 	"os/exec"
 	"time"
 
-	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -67,10 +64,9 @@ type ApplicationContext struct {
 	onStateUpdated      gxui.Event
 	onTimingInfoUpdated gxui.Event
 	schema              service.Schema
-	atoms               []schema.Atom
+	atoms               []Atom
 	hierarchy           atom.Group
 	report              service.Report
-	state               schema.Struct
 	selectedAtomID      atom.ID
 	selectedAddress     memory.Pointer
 	selectedObject      interface{}
@@ -256,24 +252,8 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			return
 		}
 
-		atomMap := schema.AtomMap{}
-		for _, a := range s.Atoms {
-			name := a.Name
-			var match binary.Class
-			c.schemaNamespace.Visit(func(class binary.Class) {
-				if class.(*bschema.Class).Display == name {
-					match = class
-				}
-			})
-			if match == nil {
-				l.Errorf("No binary schema entry for %s", name)
-				return
-			}
-			atomMap[a.Type] = match
-		}
-
 		c.Run(func() {
-			atoms, err := schema.DecodeAtoms(atoms, s, atomMap)
+			atoms, err := c.DecodeAtoms(atoms, s)
 			if err != nil {
 				panic(err)
 			}
@@ -399,7 +379,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 		return nil
 	}
 
-	apiID := c.atoms[after].Info.Api
+	apiID := c.atoms[after].Api()
 
 	go func() {
 		imageID, err := c.rpc.GetFramebufferColor(device, captureID, apiID, uint64(after), settings, l)
@@ -482,18 +462,18 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, s
 	return cancel
 }
 
-func (c *ApplicationContext) ReplaceAtom(a schema.Atom, id atom.ID) {
+func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID) {
 	l := c.logger.Enter("ReplaceAtom")
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	err := a.Pack(enc)
+	err := enc.Value(a.object)
 	if err != nil {
 		panic(err)
 	}
 	b := service.Binary{
 		Data: buf.Bytes(),
 	}
-	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a.Info.Type, b, l)
+	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a.info.Type, b, l)
 	if err != nil {
 		panic(err)
 	}
@@ -507,18 +487,19 @@ func (c *ApplicationContext) DropDownOverlay() gxui.BubbleOverlay        { retur
 func (c *ApplicationContext) ToolTipOverlay() gxui.BubbleOverlay         { return c.toolTipOverlay }
 func (c *ApplicationContext) ToolTipController() *gxui.ToolTipController { return c.toolTipController }
 func (c *ApplicationContext) Schema() service.Schema                     { return c.schema }
-func (c *ApplicationContext) Atoms() []schema.Atom                       { return c.atoms }
+func (c *ApplicationContext) Atoms() []Atom                              { return c.atoms }
 func (c *ApplicationContext) Hierarchy() atom.Group                      { return c.hierarchy }
-func (c *ApplicationContext) State() schema.Struct                       { return c.state }
-func (c *ApplicationContext) SelectedAtomID() atom.ID                    { return c.selectedAtomID }
-func (c *ApplicationContext) SelectedAddress() memory.Pointer            { return c.selectedAddress }
-func (c *ApplicationContext) SelectedObject() interface{}                { return c.selectedObject }
-func (c *ApplicationContext) SelectedDevice() service.DeviceId           { return c.selectedDevice }
-func (c *ApplicationContext) Wireframe() bool                            { return c.wireframe }
-func (c *ApplicationContext) ColorBuffer() gxui.Texture                  { return c.colorBuffer }
-func (c *ApplicationContext) DepthBuffer() gxui.Texture                  { return c.depthBuffer }
-func (c *ApplicationContext) CaptureID() service.CaptureId               { return c.captureID }
-func (c *ApplicationContext) Capture() service.Capture                   { return c.capture }
+
+//func (c *ApplicationContext) State() schema.Struct                       { return c.state }
+func (c *ApplicationContext) SelectedAtomID() atom.ID          { return c.selectedAtomID }
+func (c *ApplicationContext) SelectedAddress() memory.Pointer  { return c.selectedAddress }
+func (c *ApplicationContext) SelectedObject() interface{}      { return c.selectedObject }
+func (c *ApplicationContext) SelectedDevice() service.DeviceId { return c.selectedDevice }
+func (c *ApplicationContext) Wireframe() bool                  { return c.wireframe }
+func (c *ApplicationContext) ColorBuffer() gxui.Texture        { return c.colorBuffer }
+func (c *ApplicationContext) DepthBuffer() gxui.Texture        { return c.depthBuffer }
+func (c *ApplicationContext) CaptureID() service.CaptureId     { return c.captureID }
+func (c *ApplicationContext) Capture() service.Capture         { return c.capture }
 
 func (c *ApplicationContext) OnAtomSelected(f func()) gxui.EventSubscription {
 	return c.onAtomSelected.Listen(f)
