@@ -259,9 +259,11 @@ func loadTiming(appCtx *ApplicationContext) {
 			timingPerCommand[t.AtomId] = t.Nanoseconds
 		}
 
-		appCtx.timingInfo = timingInfo
-		appCtx.timingPerCommand = timingPerCommand
-		appCtx.onTimingInfoUpdated.Fire()
+		appCtx.Run(func() {
+			appCtx.timingInfo = timingInfo
+			appCtx.timingPerCommand = timingPerCommand
+			appCtx.onTimingInfoUpdated.Fire()
+		})
 	}()
 }
 
