@@ -22,14 +22,14 @@ import (
 
 // Object is an instance of a Class.
 type Object struct {
-	class  *Class
+	Type   *Class
 	Fields []interface{}
 }
 
 // Class implements binary.Object using the schema system to do the encoding and
 // decoding of fields.
 func (o *Object) Class() binary.Class {
-	return o.class
+	return o.Type
 }
 
 // Struct is the Type descriptor for an binary.Object typed value.
