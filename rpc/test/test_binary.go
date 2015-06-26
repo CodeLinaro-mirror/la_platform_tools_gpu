@@ -203,7 +203,7 @@ var schemaListNode = &schema.Class{
 	Display: "ListNode",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
 	},
 }
 
@@ -830,7 +830,7 @@ var schemacallResolveResource = &schema.Class{
 	Name:    "callResolveResource",
 	Display: "callResolveResource",
 	Fields: []schema.Field{
-		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
 }
 
@@ -878,7 +878,7 @@ var schemacallSetStruct = &schema.Class{
 	Name:    "callSetStruct",
 	Display: "callSetStruct",
 	Fields: []schema.Field{
-		{Declared: "s", Type: &schema.Struct{Name: "Struct"}},
+		{Declared: "s", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
 	},
 }
 
@@ -926,7 +926,7 @@ var schemacallUseResource = &schema.Class{
 	Name:    "callUseResource",
 	Display: "callUseResource",
 	Fields: []schema.Field{
-		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
 }
 
@@ -1196,7 +1196,7 @@ var schemaresultGetListNodeChain = &schema.Class{
 	Name:    "resultGetListNodeChain",
 	Display: "resultGetListNodeChain",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
 	},
 }
 
@@ -1278,7 +1278,7 @@ var schemaresultGetListNodeChainArray = &schema.Class{
 	Name:    "resultGetListNodeChainArray",
 	Display: "resultGetListNodeChainArray",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "ListNodePtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "ListNodePtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}}},
 	},
 }
 
@@ -1326,7 +1326,7 @@ var schemaresultGetResource = &schema.Class{
 	Name:    "resultGetResource",
 	Display: "resultGetResource",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
 }
 
@@ -1386,7 +1386,7 @@ var schemaresultGetSingleListNode = &schema.Class{
 	Name:    "resultGetSingleListNode",
 	Display: "resultGetSingleListNode",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
 	},
 }
 
@@ -1434,7 +1434,7 @@ var schemaresultGetStruct = &schema.Class{
 	Name:    "resultGetStruct",
 	Display: "resultGetStruct",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Struct"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
 	},
 }
 
@@ -1484,7 +1484,7 @@ var schemaresultResolveResource = &schema.Class{
 	Name:    "resultResolveResource",
 	Display: "resultResolveResource",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Resource"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Resource", ID: (*Resource)(nil).Class().ID()}},
 	},
 }
 
