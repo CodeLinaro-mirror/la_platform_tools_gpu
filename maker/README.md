@@ -133,6 +133,14 @@ func EntityHook(f func(e Entity))
 EntityHook registers a function that is invoked when a new entity is added to
 the system.
 
+#### func  ExecAt
+
+```go
+func ExecAt(wd string, verbose int, path string, args ...string) error
+```
+ExecAt executes "path" with the specified arguments with the working directory
+set to "wd".
+
 #### func  File
 
 ```go
@@ -258,8 +266,6 @@ type Entity interface {
 	// If Name is the empty string, the entity does not appear in the main entity
 	// list and cannot be looked up.
 	Name() string
-	// Exists returns true if the entity currently exists.
-	Exists() bool
 	// Timestamp returns the last modified time of the entity, or the zero time if
 	// not available.
 	Timestamp() time.Time

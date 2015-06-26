@@ -8,12 +8,13 @@ Package gcc contains C++ toolchains for building with gcc.
 
 ```go
 var GCC = &cpp.Toolchain{
-	Compiler:  compile,
-	Archiver:  archive,
-	DllLinker: linkDll,
-	ExeLinker: linkExe,
-	DepsFor:   depsFor,
-	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	Compiler:   compile,
+	Archiver:   archive,
+	DllLinker:  linkDll,
+	ExeLinker:  linkExe,
+	DepsFor:    depsFor,
+	DepFileFor: depFileFor,
+	LibName:    func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	DllName: func(cfg cpp.Config) string {
 		switch cfg.OS {
 		case "windows":
