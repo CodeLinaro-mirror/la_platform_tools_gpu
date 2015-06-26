@@ -26,6 +26,12 @@ type ApiId struct {
 
 Handle ApiId
 
+#### func (*ApiId) Class
+
+```go
+func (*ApiId) Class() binary.Class
+```
+
 #### func (ApiId) Valid
 
 ```go
@@ -65,6 +71,12 @@ func CreateApiSchema(
 	Api ApiId,
 	State StructInfo,
 ) *ApiSchema
+```
+
+#### func (*ApiSchema) Class
+
+```go
+func (*ApiSchema) Class() binary.Class
 ```
 
 #### func (*ApiSchema) GetApi
@@ -116,6 +128,12 @@ func CreateArrayInfo(
 ) *ArrayInfo
 ```
 
+#### func (*ArrayInfo) Class
+
+```go
+func (*ArrayInfo) Class() binary.Class
+```
+
 #### func (*ArrayInfo) GetElementType
 
 ```go
@@ -155,6 +173,12 @@ func CreateAtomGroup(
 	Range AtomRange,
 	SubGroups AtomGroupArray,
 ) *AtomGroup
+```
+
+#### func (*AtomGroup) Class
+
+```go
+func (*AtomGroup) Class() binary.Class
 ```
 
 #### func (*AtomGroup) GetName
@@ -234,6 +258,12 @@ func CreateAtomInfo(
 	IsEndOfFrame bool,
 	DocumentationUrl string,
 ) *AtomInfo
+```
+
+#### func (*AtomInfo) Class
+
+```go
+func (*AtomInfo) Class() binary.Class
 ```
 
 #### func (*AtomInfo) GetApi
@@ -319,6 +349,12 @@ func CreateAtomRange(
 ) *AtomRange
 ```
 
+#### func (*AtomRange) Class
+
+```go
+func (*AtomRange) Class() binary.Class
+```
+
 #### func (*AtomRange) GetCount
 
 ```go
@@ -366,6 +402,12 @@ func CreateAtomRangeTimer(
 	ToAtomId uint64,
 	Nanoseconds uint64,
 ) *AtomRangeTimer
+```
+
+#### func (*AtomRangeTimer) Class
+
+```go
+func (*AtomRangeTimer) Class() binary.Class
 ```
 
 #### func (*AtomRangeTimer) GetFromAtomId
@@ -434,6 +476,12 @@ func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (*Ato
 ResolveAtomStream loads and returns the AtomStream stored in the database d,
 using id.
 
+#### func (*AtomStream) Class
+
+```go
+func (*AtomStream) Class() binary.Class
+```
+
 #### func (*AtomStream) GetData
 
 ```go
@@ -465,6 +513,12 @@ func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStre
 ```
 StoreAtomStream stores v into the database d, returning the AtomStreamId.
 
+#### func (*AtomStreamId) Class
+
+```go
+func (*AtomStreamId) Class() binary.Class
+```
+
 #### func (AtomStreamId) Valid
 
 ```go
@@ -490,6 +544,12 @@ func CreateAtomTimer(
 	AtomId uint64,
 	Nanoseconds uint64,
 ) *AtomTimer
+```
+
+#### func (*AtomTimer) Class
+
+```go
+func (*AtomTimer) Class() binary.Class
 ```
 
 #### func (*AtomTimer) GetAtomId
@@ -544,6 +604,12 @@ func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (*Binary, err
 ```
 ResolveBinary loads and returns the Binary stored in the database d, using id.
 
+#### func (*Binary) Class
+
+```go
+func (*Binary) Class() binary.Class
+```
+
 #### func (*Binary) GetData
 
 ```go
@@ -567,6 +633,12 @@ Handle BinaryId
 func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error)
 ```
 StoreBinary stores v into the database d, returning the BinaryId.
+
+#### func (*BinaryId) Class
+
+```go
+func (*BinaryId) Class() binary.Class
+```
 
 #### func (BinaryId) Valid
 
@@ -607,6 +679,12 @@ func CreateCapture(
 func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (*Capture, error)
 ```
 ResolveCapture loads and returns the Capture stored in the database d, using id.
+
+#### func (*Capture) Class
+
+```go
+func (*Capture) Class() binary.Class
+```
 
 #### func (*Capture) GetApis
 
@@ -655,6 +733,12 @@ Handle CaptureId
 func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, error)
 ```
 StoreCapture stores v into the database d, returning the CaptureId.
+
+#### func (*CaptureId) Class
+
+```go
+func (*CaptureId) Class() binary.Class
+```
 
 #### func (CaptureId) Valid
 
@@ -713,6 +797,12 @@ func CreateClassInfo(
 	Fields FieldInfoPtrArray,
 	Extends ClassInfoPtrArray,
 ) *ClassInfo
+```
+
+#### func (*ClassInfo) Class
+
+```go
+func (*ClassInfo) Class() binary.Class
 ```
 
 #### func (*ClassInfo) GetExtends
@@ -832,6 +922,12 @@ func (d Device) Architecture() device.Architecture
 ```
 Architecture return's the device's architecture.
 
+#### func (*Device) Class
+
+```go
+func (*Device) Class() binary.Class
+```
+
 #### func (*Device) GetExtensions
 
 ```go
@@ -916,6 +1012,12 @@ func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceId, error)
 ```
 StoreDevice stores v into the database d, returning the DeviceId.
 
+#### func (*DeviceId) Class
+
+```go
+func (*DeviceId) Class() binary.Class
+```
+
 #### func (DeviceId) Valid
 
 ```go
@@ -955,6 +1057,12 @@ func CreateEnumEntry(
 	Name string,
 	Value uint32,
 ) *EnumEntry
+```
+
+#### func (*EnumEntry) Class
+
+```go
+func (*EnumEntry) Class() binary.Class
 ```
 
 #### func (*EnumEntry) GetName
@@ -1012,6 +1120,12 @@ func CreateEnumInfo(
 	Entries EnumEntryArray,
 	Extends EnumInfoPtrArray,
 ) *EnumInfo
+```
+
+#### func (*EnumInfo) Class
+
+```go
+func (*EnumInfo) Class() binary.Class
 ```
 
 #### func (*EnumInfo) GetEntries
@@ -1087,6 +1201,12 @@ func CreateFieldInfo(
 ) *FieldInfo
 ```
 
+#### func (*FieldInfo) Class
+
+```go
+func (*FieldInfo) Class() binary.Class
+```
+
 #### func (*FieldInfo) GetName
 
 ```go
@@ -1154,6 +1274,12 @@ func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (*Hiera
 ResolveHierarchy loads and returns the Hierarchy stored in the database d, using
 id.
 
+#### func (*Hierarchy) Class
+
+```go
+func (*Hierarchy) Class() binary.Class
+```
+
 #### func (*Hierarchy) GetRoot
 
 ```go
@@ -1177,6 +1303,12 @@ Handle HierarchyId
 func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyId, error)
 ```
 StoreHierarchy stores v into the database d, returning the HierarchyId.
+
+#### func (*HierarchyId) Class
+
+```go
+func (*HierarchyId) Class() binary.Class
+```
 
 #### func (HierarchyId) Valid
 
@@ -1211,6 +1343,18 @@ func (i ImageFormat) IsFloat32() bool
 func (i ImageFormat) IsRGBA8() bool
 ```
 
+#### func (*ImageFormat) Parse
+
+```go
+func (v *ImageFormat) Parse(s string) error
+```
+
+#### func (ImageFormat) String
+
+```go
+func (v ImageFormat) String() string
+```
+
 #### type ImageInfo
 
 ```go
@@ -1243,6 +1387,12 @@ func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (*Image
 ```
 ResolveImageInfo loads and returns the ImageInfo stored in the database d, using
 id.
+
+#### func (*ImageInfo) Class
+
+```go
+func (*ImageInfo) Class() binary.Class
+```
 
 #### func (*ImageInfo) GetData
 
@@ -1286,6 +1436,12 @@ func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoI
 ```
 StoreImageInfo stores v into the database d, returning the ImageInfoId.
 
+#### func (*ImageInfoId) Class
+
+```go
+func (*ImageInfoId) Class() binary.Class
+```
+
 #### func (ImageInfoId) Valid
 
 ```go
@@ -1315,6 +1471,12 @@ func CreateMapInfo(
 	KeyType TypeInfo,
 	ValueType TypeInfo,
 ) *MapInfo
+```
+
+#### func (*MapInfo) Class
+
+```go
+func (*MapInfo) Class() binary.Class
 ```
 
 #### func (*MapInfo) GetKeyType
@@ -1374,6 +1536,12 @@ func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (*Mem
 ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d,
 using id.
 
+#### func (*MemoryInfo) Class
+
+```go
+func (*MemoryInfo) Class() binary.Class
+```
+
 #### func (*MemoryInfo) GetData
 
 ```go
@@ -1416,6 +1584,12 @@ func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryIn
 ```
 StoreMemoryInfo stores v into the database d, returning the MemoryInfoId.
 
+#### func (*MemoryInfoId) Class
+
+```go
+func (*MemoryInfoId) Class() binary.Class
+```
+
 #### func (MemoryInfoId) Valid
 
 ```go
@@ -1441,6 +1615,12 @@ func CreateMemoryRange(
 	Base uint64,
 	Size uint64,
 ) *MemoryRange
+```
+
+#### func (*MemoryRange) Class
+
+```go
+func (*MemoryRange) Class() binary.Class
 ```
 
 #### func (*MemoryRange) GetBase
@@ -1520,6 +1700,12 @@ func CreateParameterInfo(
 	Type TypeInfo,
 	Out bool,
 ) *ParameterInfo
+```
+
+#### func (*ParameterInfo) Class
+
+```go
+func (*ParameterInfo) Class() binary.Class
 ```
 
 #### func (*ParameterInfo) GetName
@@ -1613,6 +1799,12 @@ func CreateRenderSettings(
 ) *RenderSettings
 ```
 
+#### func (*RenderSettings) Class
+
+```go
+func (*RenderSettings) Class() binary.Class
+```
+
 #### func (*RenderSettings) GetMaxHeight
 
 ```go
@@ -1657,6 +1849,12 @@ func ResolveReport(id ReportId, d database.Database, l log.Logger) (*Report, err
 ```
 ResolveReport loads and returns the Report stored in the database d, using id.
 
+#### func (*Report) Class
+
+```go
+func (*Report) Class() binary.Class
+```
+
 #### func (*Report) GetItems
 
 ```go
@@ -1680,6 +1878,12 @@ Handle ReportId
 func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error)
 ```
 StoreReport stores v into the database d, returning the ReportId.
+
+#### func (*ReportId) Class
+
+```go
+func (*ReportId) Class() binary.Class
+```
 
 #### func (ReportId) Valid
 
@@ -1708,6 +1912,12 @@ func CreateReportItem(
 	Message string,
 	Atom uint64,
 ) *ReportItem
+```
+
+#### func (*ReportItem) Class
+
+```go
+func (*ReportItem) Class() binary.Class
 ```
 
 #### func (*ReportItem) GetAtom
@@ -1859,6 +2069,12 @@ func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (*Schema, err
 ```
 ResolveSchema loads and returns the Schema stored in the database d, using id.
 
+#### func (*Schema) Class
+
+```go
+func (*Schema) Class() binary.Class
+```
+
 #### func (*Schema) GetApis
 
 ```go
@@ -1888,6 +2104,12 @@ Handle SchemaId
 func StoreSchema(v *Schema, d database.Database, l log.Logger) (SchemaId, error)
 ```
 StoreSchema stores v into the database d, returning the SchemaId.
+
+#### func (*SchemaId) Class
+
+```go
+func (*SchemaId) Class() binary.Class
+```
 
 #### func (SchemaId) Valid
 
@@ -1964,6 +2186,18 @@ func (i Severity) IsNotice() bool
 func (i Severity) IsWarning() bool
 ```
 
+#### func (*Severity) Parse
+
+```go
+func (v *Severity) Parse(s string) error
+```
+
+#### func (Severity) String
+
+```go
+func (v Severity) String() string
+```
+
 #### type SimpleInfo
 
 ```go
@@ -1983,6 +2217,12 @@ func CreateSimpleInfo(
 	Name string,
 	Kind TypeKind,
 ) *SimpleInfo
+```
+
+#### func (*SimpleInfo) Class
+
+```go
+func (*SimpleInfo) Class() binary.Class
 ```
 
 #### func (*SimpleInfo) GetKind
@@ -2020,6 +2260,12 @@ func CreateStaticArrayInfo(
 	ElementType TypeInfo,
 	Size uint32,
 ) *StaticArrayInfo
+```
+
+#### func (*StaticArrayInfo) Class
+
+```go
+func (*StaticArrayInfo) Class() binary.Class
 ```
 
 #### func (*StaticArrayInfo) GetElementType
@@ -2067,6 +2313,12 @@ func CreateStructInfo(
 	Kind TypeKind,
 	Fields FieldInfoPtrArray,
 ) *StructInfo
+```
+
+#### func (*StructInfo) Class
+
+```go
+func (*StructInfo) Class() binary.Class
 ```
 
 #### func (*StructInfo) GetFields
@@ -2118,6 +2370,12 @@ func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (*Tim
 ResolveTimingInfo loads and returns the TimingInfo stored in the database d,
 using id.
 
+#### func (*TimingInfo) Class
+
+```go
+func (*TimingInfo) Class() binary.Class
+```
+
 #### func (*TimingInfo) GetPerCommand
 
 ```go
@@ -2153,6 +2411,12 @@ Handle TimingInfoId
 func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingInfoId, error)
 ```
 StoreTimingInfo stores v into the database d, returning the TimingInfoId.
+
+#### func (*TimingInfoId) Class
+
+```go
+func (*TimingInfoId) Class() binary.Class
+```
 
 #### func (TimingInfoId) Valid
 
@@ -2192,6 +2456,18 @@ func (i TimingMask) IsTimingPerDrawCall() bool
 
 ```go
 func (i TimingMask) IsTimingPerFrame() bool
+```
+
+#### func (*TimingMask) Parse
+
+```go
+func (v *TimingMask) Parse(s string) error
+```
+
+#### func (TimingMask) String
+
+```go
+func (v TimingMask) String() string
 ```
 
 #### type TypeInfo
@@ -2385,6 +2661,18 @@ func (i TypeKind) IsU64() bool
 
 ```go
 func (i TypeKind) IsU8() bool
+```
+
+#### func (*TypeKind) Parse
+
+```go
+func (v *TypeKind) Parse(s string) error
+```
+
+#### func (TypeKind) String
+
+```go
+func (v TypeKind) String() string
 ```
 
 #### type U64Array
