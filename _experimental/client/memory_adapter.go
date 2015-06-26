@@ -103,13 +103,13 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 			for len(data) >= dataTypeSize {
 				switch {
 				case interval.Contains(&writes, offset):
-					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR, true))
+					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR, true))
 				case interval.Contains(&reads, offset):
-					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", READ_MEMORY_COLOR, true))
+					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", READ_MEMORY_COLOR, true))
 				case interval.Contains(&observed, offset):
-					ll.AddChild(CreateLabel(t, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR, true))
+					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR, true))
 				default:
-					ll.AddChild(CreateLabel(t, dataType.Unknown()+" ", STALE_MEMORY_COLOR, true))
+					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Unknown()+" ", STALE_MEMORY_COLOR, true))
 				}
 				offset += uint64(dataTypeSize)
 				data = data[dataTypeSize:]
