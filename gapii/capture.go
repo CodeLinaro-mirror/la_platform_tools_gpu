@@ -62,7 +62,7 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 	}
 	conn, err := net.Dial("tcp", fmt.Sprintf("localhost:%d", port))
 	if err != nil {
-		return 0, err
+		return 0, nil // Treat failure-to-connect as target-not-ready instead of an error.
 	}
 	defer conn.Close()
 	var count, nextSize siSize
@@ -114,7 +114,6 @@ func Capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 		// ADB has an annoying tendancy to insta-close forwarded sockets when
 		// there's no application waiting for the connection. Treat this as
 		// another waiting-for-connection case.
-		logger.Infof("Pausing...")
 		select {
 		case <-stop:
 			logger.Infof("Aborted.")
