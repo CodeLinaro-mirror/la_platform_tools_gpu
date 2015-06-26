@@ -16,7 +16,7 @@
 
 {{define "Go.ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
 
-{{define "Go.Init"}} registry.Add((*{{.Name}})(nil).Class()){{end}}
+{{define "Go.Init"}} Namespace.Add((*{{.Name}})(nil).Class()){{end}}
 
 {{define "Go.Class"}} type binaryClass{{.Name}} struct{}
 func (*{{.Name}}) Class() binary.Class {
@@ -263,8 +263,10 @@ import (
 	{{range $imp, $v := .Imports}}"{{$imp}}"
 {{end}})
 
-{{if len .Structs}}func init() {
-	{{range .Structs}}{{template "Go.Init" .}}
+{{if len .Structs}}{{if not .IsTest}}var Namespace = registry.NewNamespace(){{end}}
+func init() {
+	{{if not .IsTest}}registry.Global.AddFallbacks(Namespace)
+	{{end}}{{range .Structs}}{{template "Go.Init" .}}
 	{{end}} }
 
 var (

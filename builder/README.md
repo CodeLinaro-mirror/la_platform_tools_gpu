@@ -7,6 +7,10 @@ in the database, optionally depending on replay outputs.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  Captures
 
 ```go

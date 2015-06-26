@@ -17,6 +17,10 @@ var BadObject = &BadType{data: "BadObject"}
 ```
 
 ```go
+var Namespace = registry.NewNamespace()
+```
+
+```go
 var ObjectA = &TypeA{data: "ObjectA"}
 ```
 

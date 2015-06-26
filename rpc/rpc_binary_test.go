@@ -7,14 +7,13 @@ package rpc
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
-	registry.Add((*delay)(nil).Class())
-	registry.Add((*request)(nil).Class())
-	registry.Add((*response)(nil).Class())
+	Namespace.Add((*delay)(nil).Class())
+	Namespace.Add((*request)(nil).Class())
+	Namespace.Add((*response)(nil).Class())
 }
 
 var (

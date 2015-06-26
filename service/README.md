@@ -9,6 +9,10 @@ It is not the actual implementation of the service functionality.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  BindServer
 
 ```go

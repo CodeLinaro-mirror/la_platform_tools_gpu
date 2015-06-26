@@ -11,10 +11,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
+var Namespace = registry.NewNamespace()
+
 func init() {
-	registry.Add((*msgCloseChannel)(nil).Class())
-	registry.Add((*msgData)(nil).Class())
-	registry.Add((*msgOpenChannel)(nil).Class())
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*msgCloseChannel)(nil).Class())
+	Namespace.Add((*msgData)(nil).Class())
+	Namespace.Add((*msgOpenChannel)(nil).Class())
 }
 
 var (

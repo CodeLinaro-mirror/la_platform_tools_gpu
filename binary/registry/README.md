@@ -12,21 +12,6 @@ var (
 )
 ```
 
-#### func  Add
-
-```go
-func Add(class binary.Class)
-```
-Add a new type to the global Namespace.
-
-#### func  Lookup
-
-```go
-func Lookup(id binary.ID) binary.Class
-```
-Lookup looks up a Class by the given type id. If there is no match, it will
-return nil.
-
 #### type Namespace
 
 ```go
@@ -43,26 +28,33 @@ func NewNamespace(fallbacks ...*Namespace) *Namespace
 ```
 NewNamespace creates a new namespace layered on top of the specified fallback.
 
-#### func (Namespace) Add
+#### func (*Namespace) Add
 
 ```go
-func (n Namespace) Add(class binary.Class)
+func (n *Namespace) Add(class binary.Class)
 ```
 Add a new type to the Namespace.
 
-#### func (Namespace) Count
+#### func (*Namespace) AddFallbacks
 
 ```go
-func (n Namespace) Count() int
+func (n *Namespace) AddFallbacks(fallbacks ...*Namespace)
+```
+AddFallbacks appends new Namespaces to the fallback list of this Namespace.
+
+#### func (*Namespace) Count
+
+```go
+func (n *Namespace) Count() int
 ```
 Count returns the number of entries reachable through this namespace. Because it
 sums the counts of the namespaces it depends on, this may be more than the
 number of unique keys.
 
-#### func (Namespace) Lookup
+#### func (*Namespace) Lookup
 
 ```go
-func (n Namespace) Lookup(id binary.ID) binary.Class
+func (n *Namespace) Lookup(id binary.ID) binary.Class
 ```
 Lookup looks up a Class by the given type id in the Namespace. If there is no
 match, it will return nil.

@@ -14,12 +14,15 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
+var Namespace = registry.NewNamespace()
+
 func init() {
-	registry.Add((*Range)(nil).Class())
-	registry.Add((*Group)(nil).Class())
-	registry.Add((*Observation)(nil).Class())
-	registry.Add((*Observations)(nil).Class())
-	registry.Add((*Resource)(nil).Class())
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*Range)(nil).Class())
+	Namespace.Add((*Group)(nil).Class())
+	Namespace.Add((*Observation)(nil).Class())
+	Namespace.Add((*Observations)(nil).Class())
+	Namespace.Add((*Resource)(nil).Class())
 }
 
 var (

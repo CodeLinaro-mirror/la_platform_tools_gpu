@@ -6,6 +6,10 @@ Package image provides functions for converting between various image formats.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  Convert
 
 ```go

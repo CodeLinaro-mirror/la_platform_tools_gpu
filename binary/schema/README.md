@@ -6,6 +6,10 @@ Package schema implements rtti for the binary system.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### type Array
 
 ```go

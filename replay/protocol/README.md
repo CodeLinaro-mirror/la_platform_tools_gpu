@@ -48,6 +48,10 @@ const (
 )
 ```
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### type ConnectionType
 
 ```go
