@@ -43,7 +43,7 @@ func (c *Class) ID() binary.ID {
 	return c.TypeID
 }
 
-func (c *Class) New() binary.Object { return &Object{class: c} }
+func (c *Class) New() binary.Object { return &Object{Type: c} }
 
 func (c *Class) Encode(e binary.Encoder, object binary.Object) error {
 	o := object.(*Object)
@@ -67,7 +67,7 @@ func (c *Class) doDecode(d binary.Decoder, o *Object) error {
 }
 
 func (c *Class) Decode(d binary.Decoder) (binary.Object, error) {
-	o := &Object{class: c}
+	o := &Object{Type: c}
 	return o, c.doDecode(d, o)
 }
 
