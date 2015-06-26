@@ -15,6 +15,10 @@ var ErrInvalidHeader = NewError("Invalid RPC header")
 ErrInvalidHeader is returned when either client or server detects an incorrectly
 formed rpc header.
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  Serve
 
 ```go

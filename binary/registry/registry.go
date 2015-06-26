@@ -39,13 +39,8 @@ func NewNamespace(fallbacks ...*Namespace) *Namespace {
 	}
 }
 
-// Add a new type to the global Namespace.
-func Add(class binary.Class) {
-	Global.Add(class)
-}
-
 // Add a new type to the Namespace.
-func (n Namespace) Add(class binary.Class) {
+func (n *Namespace) Add(class binary.Class) {
 	id := class.ID()
 	if old, found := n.classes[id]; found {
 		panic(fmt.Errorf("Id %x for %s already as type %s", id, class, old))
@@ -53,15 +48,14 @@ func (n Namespace) Add(class binary.Class) {
 	n.classes[id] = class
 }
 
-// Lookup looks up a Class by the given type id.
-// If there is no match, it will return nil.
-func Lookup(id binary.ID) binary.Class {
-	return Global.Lookup(id)
+// AddFallbacks appends new Namespaces to the fallback list of this Namespace.
+func (n *Namespace) AddFallbacks(fallbacks ...*Namespace) {
+	n.fallbacks = append(n.fallbacks, fallbacks...)
 }
 
 // Lookup looks up a Class by the given type id in the Namespace.
 // If there is no match, it will return nil.
-func (n Namespace) Lookup(id binary.ID) binary.Class {
+func (n *Namespace) Lookup(id binary.ID) binary.Class {
 	if class, found := n.classes[id]; found {
 		return class
 	}
@@ -76,7 +70,7 @@ func (n Namespace) Lookup(id binary.ID) binary.Class {
 // Count returns the number of entries reachable through this namespace.
 // Because it sums the counts of the namespaces it depends on, this may be
 // more than the number of unique keys.
-func (n Namespace) Count() int {
+func (n *Namespace) Count() int {
 	size := len(n.classes)
 	for _, f := range n.fallbacks {
 		size += f.Count()

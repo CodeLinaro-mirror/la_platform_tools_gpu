@@ -5,6 +5,10 @@
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  BindServer
 
 ```go

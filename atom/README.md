@@ -11,6 +11,10 @@ const NoID = ^ID(0)
 ```
 NoID is used when you have to pass an ID, but don't have one to use.
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  Data
 
 ```go

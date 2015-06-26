@@ -24,7 +24,7 @@ import (
 type Terminator struct{}
 
 func init() {
-	registry.Add((*Terminator)(nil).Class())
+	registry.Global.Add((*Terminator)(nil).Class())
 }
 
 var (

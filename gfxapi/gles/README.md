@@ -1425,6 +1425,10 @@ const (
 ```
 Type_OES_vertex_half_float
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  API
 
 ```go

@@ -8,6 +8,10 @@ observed in the capture.
 ## Usage
 
 ```go
+var Namespace = registry.NewNamespace()
+```
+
+```go
 var Tmp = Range{
 	Base: 0x00000000ff000000,
 	Size: 0x0000000000ffffff,
