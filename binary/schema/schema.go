@@ -38,7 +38,7 @@ type schema interface {
 // Lookup looks up a Class by the given type id.
 // If there is no match, it will return nil.
 func Lookup(id binary.ID) *Class {
-	s, ok := registry.Lookup(id).(schema)
+	s, ok := registry.Global.Lookup(id).(schema)
 	if ok {
 		return s.Schema()
 	}

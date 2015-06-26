@@ -15,22 +15,25 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+var Namespace = registry.NewNamespace()
+
 func init() {
-	registry.Add((*BuildReport)(nil).Class())
-	registry.Add((*ConvertImage)(nil).Class())
-	registry.Add((*GetFramebufferColor)(nil).Class())
-	registry.Add((*GetFramebufferDepth)(nil).Class())
-	registry.Add((*GetHierarchy)(nil).Class())
-	registry.Add((*GetMemoryInfo)(nil).Class())
-	registry.Add((*GetState)(nil).Class())
-	registry.Add((*GetTimingInfo)(nil).Class())
-	registry.Add((*PrerenderFramebuffers)(nil).Class())
-	registry.Add((*RenderFramebufferColor)(nil).Class())
-	registry.Add((*RenderFramebufferDepth)(nil).Class())
-	registry.Add((*ReplaceAtom)(nil).Class())
-	registry.Add((*atomFramebufferDimensions)(nil).Class())
-	registry.Add((*captureFramebufferDimensions)(nil).Class())
-	registry.Add((*getCaptureFramebufferDimensions)(nil).Class())
+	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*BuildReport)(nil).Class())
+	Namespace.Add((*ConvertImage)(nil).Class())
+	Namespace.Add((*GetFramebufferColor)(nil).Class())
+	Namespace.Add((*GetFramebufferDepth)(nil).Class())
+	Namespace.Add((*GetHierarchy)(nil).Class())
+	Namespace.Add((*GetMemoryInfo)(nil).Class())
+	Namespace.Add((*GetState)(nil).Class())
+	Namespace.Add((*GetTimingInfo)(nil).Class())
+	Namespace.Add((*PrerenderFramebuffers)(nil).Class())
+	Namespace.Add((*RenderFramebufferColor)(nil).Class())
+	Namespace.Add((*RenderFramebufferDepth)(nil).Class())
+	Namespace.Add((*ReplaceAtom)(nil).Class())
+	Namespace.Add((*atomFramebufferDimensions)(nil).Class())
+	Namespace.Add((*captureFramebufferDimensions)(nil).Class())
+	Namespace.Add((*getCaptureFramebufferDimensions)(nil).Class())
 }
 
 var (

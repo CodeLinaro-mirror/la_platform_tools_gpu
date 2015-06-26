@@ -6,6 +6,10 @@ Package database implements the persistence layer for the gpu debugger tools.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### func  Hash
 
 ```go
