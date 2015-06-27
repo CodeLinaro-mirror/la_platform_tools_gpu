@@ -24,7 +24,7 @@ const fmtString = "#%.4d %v: %s%s"
 
 // Entry is a single Info, Warning or Error message written to the chan passed to Channel.
 type Entry struct {
-	Kind      Kind      // The Entry kind
+	Severity  Severity  // The Entry severity
 	Message   string    // The message text
 	Scope     string    // The scope of the message
 	Context   uint32    // The context identifier for the message
@@ -36,20 +36,11 @@ func (e *Entry) String() string {
 	h, m, s := e.Timestamp.Clock()
 	return fmt.Sprintf(fmtTimestamp+fmtString+"\n",
 		h, m, s, e.Timestamp.Nanosecond()/1000000,
-		e.Context, e.Kind, e.Scope, e.Message)
+		e.Context, e.Severity, e.Scope, e.Message)
 }
 
 // StringNoTimestamp String returns the string representation of the entry without the timestamp.
 func (e *Entry) StringNoTimestamp() string {
 	return fmt.Sprintf(fmtString+"\n",
-		e.Context, e.Kind, e.Scope, e.Message)
+		e.Context, e.Severity, e.Scope, e.Message)
 }
-
-// Kind defines an entry's message kind - either Info, Warning or Error.
-type Kind int
-
-const (
-	Info Kind = iota
-	Warning
-	Error
-)

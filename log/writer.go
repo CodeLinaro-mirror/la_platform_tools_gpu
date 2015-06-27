@@ -42,13 +42,11 @@ func Writer(info, warn, err io.Writer, done func()) Logger {
 		for t := range out {
 			switch t := t.(type) {
 			case Entry:
-				switch t.Kind {
-				case Info:
-					io.WriteString(info, t.String())
-				case Warning:
-					io.WriteString(warn, t.String())
-				case Error:
+				switch {
+				case t.Severity <= Error:
 					io.WriteString(err, t.String())
+				case t.Severity <= Warning:
+					io.WriteString(warn, t.String())
 				default:
 					io.WriteString(info, t.String())
 				}

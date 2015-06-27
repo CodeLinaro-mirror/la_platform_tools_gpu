@@ -111,6 +111,12 @@ func CreateMemoryPanelReinterpretButtons(
 	imgAdapter *MemoryImageAdapter) gxui.Control
 ```
 
+#### func  CreateMonospaceLabel
+
+```go
+func CreateMonospaceLabel(appCtx *ApplicationContext, s string, c gxui.Color, active bool) gxui.Label
+```
+
 #### func  CreateProfilerPanel
 
 ```go
