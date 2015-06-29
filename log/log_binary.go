@@ -7,27 +7,32 @@ package log
 
 import "fmt"
 
-const _Kind_name = "InfoWarningError"
+const _Severity_name = "EmergencyAlertCriticalErrorWarningNoticeInfoDebug"
 
-var _Kind_map = map[Kind]string{
-	0: _Kind_name[0:4],
-	1: _Kind_name[4:11],
-	2: _Kind_name[11:16],
+var _Severity_map = map[Severity]string{
+	0: _Severity_name[0:9],
+	1: _Severity_name[9:14],
+	2: _Severity_name[14:22],
+	3: _Severity_name[22:27],
+	4: _Severity_name[27:34],
+	5: _Severity_name[34:40],
+	6: _Severity_name[40:44],
+	7: _Severity_name[44:49],
 }
 
-func (v Kind) String() string {
-	if s, ok := _Kind_map[v]; ok {
+func (v Severity) String() string {
+	if s, ok := _Severity_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Kind(%d)", v)
+	return fmt.Sprintf("Severity(%d)", v)
 }
 
-func (v *Kind) Parse(s string) error {
-	for k, t := range _Kind_map {
+func (v *Severity) Parse(s string) error {
+	for k, t := range _Severity_map {
 		if s == t {
 			*v = k
 			return nil
 		}
 	}
-	return fmt.Errorf("%s not in Kind", s)
+	return fmt.Errorf("%s not in Severity", s)
 }

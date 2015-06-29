@@ -57,6 +57,15 @@ func (s *Splitter) Errorf(msg string, args ...interface{}) {
 	}
 }
 
+// Logf will call Logf with the same arguments on all logs passed to Add.
+func (s *Splitter) Log(severity Severity, msg string, args ...interface{}) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	for _, l := range s.listeners {
+		l.Log(severity, msg, args...)
+	}
+}
+
 // Enter will call Enter with the same argument on all logs passed to Add.
 func (s *Splitter) Enter(name string) Logger {
 	n := Splitter{}

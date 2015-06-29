@@ -46,7 +46,7 @@ type channel struct {
 
 func (c *channel) Infof(msg string, args ...interface{}) {
 	c.out <- Entry{
-		Kind:      Info,
+		Severity:  Info,
 		Message:   fmt.Sprintf(msg, args...),
 		Scope:     c.scope,
 		Context:   c.uid,
@@ -56,7 +56,7 @@ func (c *channel) Infof(msg string, args ...interface{}) {
 
 func (c *channel) Warningf(msg string, args ...interface{}) {
 	c.out <- Entry{
-		Kind:      Warning,
+		Severity:  Warning,
 		Message:   fmt.Sprintf(msg, args...),
 		Scope:     c.scope,
 		Context:   c.uid,
@@ -66,7 +66,17 @@ func (c *channel) Warningf(msg string, args ...interface{}) {
 
 func (c *channel) Errorf(msg string, args ...interface{}) {
 	c.out <- Entry{
-		Kind:      Error,
+		Severity:  Error,
+		Message:   fmt.Sprintf(msg, args...),
+		Scope:     c.scope,
+		Context:   c.uid,
+		Timestamp: time.Now(),
+	}
+}
+
+func (c *channel) Log(severity Severity, msg string, args ...interface{}) {
+	c.out <- Entry{
+		Severity:  severity,
 		Message:   fmt.Sprintf(msg, args...),
 		Scope:     c.scope,
 		Context:   c.uid,

@@ -26,10 +26,9 @@ func Testing(t delegate) Logger {
 		for o := range out {
 			switch o := o.(type) {
 			case Entry:
-				switch o.Kind {
-				case Error:
+				if o.Severity <= Error {
 					t.Error(o.String())
-				case Warning, Info:
+				} else {
 					t.Log(o.String())
 				}
 
