@@ -23,7 +23,7 @@ type Class struct {
 	Package string    // The package that declared the struct.
 	Name    string    // The simple name of the Object.
 	Display string    // The display name of the Object.
-	Fields  []Field   // Descriptions of the fields of the Object.
+	Fields  FieldList // Descriptions of the fields of the Object.
 }
 
 // Field represents a name/type pair for a field in an Object.
@@ -33,12 +33,27 @@ type Field struct {
 	Type     Type   // The type stored in the field.
 }
 
+// FieldList is a slice of fields.
+type FieldList []Field
+
 func (f Field) Name() string {
 	if f.Declared == "" {
 		return f.Type.String()
 	}
 	return f.Declared
 }
+
+// Find searches the field list of the field with the specified name, returning
+// the index of the field if found, otherwise -1.
+func (l FieldList) Find(name string) int {
+	for i, f := range l {
+		if f.Name() == name {
+			return i
+		}
+	}
+	return -1
+}
+
 func (c *Class) ID() binary.ID {
 	return c.TypeID
 }
