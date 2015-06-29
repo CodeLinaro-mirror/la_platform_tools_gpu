@@ -24,14 +24,6 @@ Data encodes and stores the value v to the database d, returning the memory
 range and new resource identifier. Data can be used to as a helper to AddRead
 and AddWrite methods on atoms.
 
-#### func  Register
-
-```go
-func Register(ty TypeInfo)
-```
-Register registers the atom type ty with the atom registry. If another atom is
-already registered with the same type identifer then Register will panic.
-
 #### type Atom
 
 ```go
@@ -40,9 +32,6 @@ type Atom interface {
 
 	// API returns the graphics API this atom belongs to.
 	API() gfxapi.API
-
-	// TypeID returns the identifier of this atom's type.
-	TypeID() TypeID
 
 	// Flags returns the flags of the atom.
 	Flags() Flags
@@ -63,14 +52,6 @@ or state at the time of capture.
 Each implementation of Atom should have a unique and stable TypeID to ensure
 binary compatibility with old capture formats. Any change to the Atom's binary
 format should also result in a new TypeID.
-
-#### func  New
-
-```go
-func New(id TypeID) (Atom, error)
-```
-New builds a new instance of the atom with type identifier id. The type must
-have previously been registered with Register.
 
 #### type Flags
 
@@ -614,12 +595,6 @@ func (a *Resource) Observations() *Observations
 func (a *Resource) String() string
 ```
 
-#### func (*Resource) TypeID
-
-```go
-func (a *Resource) TypeID() TypeID
-```
-
 #### type Transformer
 
 ```go
@@ -667,50 +642,6 @@ func (l Transforms) Transform(atoms List, out Writer)
 ```
 Transform sequentially transforms the atoms by each of the transformers in the
 list, before writing the final output to the output atom Writer.
-
-#### type TypeID
-
-```go
-type TypeID uint16
-```
-
-TypeID is an atom type identifier. Each implementation of the Atom interface
-must have a unique type idenitifier. Any changes to the binary format of an atom
-must result in a new type identifier to maintain binary compatability.
-
-```go
-const TypeIDEos TypeID = 0xffff
-```
-TypeIDEos is used as a special end of stream marker.
-
-```go
-const TypeIDResource TypeID = 0xfffd
-```
-
-#### func (*TypeID) Parse
-
-```go
-func (v *TypeID) Parse(s string) error
-```
-
-#### func (TypeID) String
-
-```go
-func (v TypeID) String() string
-```
-
-#### type TypeInfo
-
-```go
-type TypeInfo struct {
-	ID   TypeID      // The type identifier for the atom.
-	New  func() Atom // The function for creating new instances of the atom type.
-	Name string      // The name of the atom.
-	Docs string      // The URL to the atom's documentation.
-}
-```
-
-TypeInfo is the type information for a single Atom implementation.
 
 #### type Writer
 

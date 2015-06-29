@@ -1520,12 +1520,6 @@ func (a *Architecture) Observations() *atom.Observations
 func (a *Architecture) String() string
 ```
 
-#### func (*Architecture) TypeID
-
-```go
-func (c *Architecture) TypeID() atom.TypeID
-```
-
 #### type ArrayType
 
 ```go
@@ -1718,12 +1712,6 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *BackbufferInfo) String() string
-```
-
-#### func (*BackbufferInfo) TypeID
-
-```go
-func (c *BackbufferInfo) TypeID() atom.TypeID
 ```
 
 #### type BaseTexelFormat
@@ -2890,12 +2878,6 @@ func (ω *CGLCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 func (a *CGLCreateContext) String() string
 ```
 
-#### func (*CGLCreateContext) TypeID
-
-```go
-func (c *CGLCreateContext) TypeID() atom.TypeID
-```
-
 #### type CGLError
 
 ```go
@@ -2976,12 +2958,6 @@ func (a *CGLFlushDrawable) Observations() *atom.Observations
 func (a *CGLFlushDrawable) String() string
 ```
 
-#### func (*CGLFlushDrawable) TypeID
-
-```go
-func (c *CGLFlushDrawable) TypeID() atom.TypeID
-```
-
 #### type CGLGetSurface
 
 ```go
@@ -3056,12 +3032,6 @@ func (a *CGLGetSurface) Observations() *atom.Observations
 
 ```go
 func (a *CGLGetSurface) String() string
-```
-
-#### func (*CGLGetSurface) TypeID
-
-```go
-func (c *CGLGetSurface) TypeID() atom.TypeID
 ```
 
 #### type CGLPixelFormatObj
@@ -3207,12 +3177,6 @@ func (ω *CGLSetCurrentContext) Replay(i atom.ID, s *gfxapi.State, d database.Da
 
 ```go
 func (a *CGLSetCurrentContext) String() string
-```
-
-#### func (*CGLSetCurrentContext) TypeID
-
-```go
-func (c *CGLSetCurrentContext) TypeID() atom.TypeID
 ```
 
 #### type CGSConnectionID
@@ -3578,12 +3542,6 @@ func (a *CGSGetSurfaceBounds) Observations() *atom.Observations
 
 ```go
 func (a *CGSGetSurfaceBounds) String() string
-```
-
-#### func (*CGSGetSurfaceBounds) TypeID
-
-```go
-func (c *CGSGetSurfaceBounds) TypeID() atom.TypeID
 ```
 
 #### type CGSSurfaceID
@@ -5793,12 +5751,6 @@ func (ω *EglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 func (a *EglCreateContext) String() string
 ```
 
-#### func (*EglCreateContext) TypeID
-
-```go
-func (c *EglCreateContext) TypeID() atom.TypeID
-```
-
 #### type EglInitialize
 
 ```go
@@ -5872,12 +5824,6 @@ func (a *EglInitialize) Observations() *atom.Observations
 
 ```go
 func (a *EglInitialize) String() string
-```
-
-#### func (*EglInitialize) TypeID
-
-```go
-func (c *EglInitialize) TypeID() atom.TypeID
 ```
 
 #### type EglMakeCurrent
@@ -5962,12 +5908,6 @@ func (ω *EglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database
 func (a *EglMakeCurrent) String() string
 ```
 
-#### func (*EglMakeCurrent) TypeID
-
-```go
-func (c *EglMakeCurrent) TypeID() atom.TypeID
-```
-
 #### type EglQuerySurface
 
 ```go
@@ -6044,12 +5984,6 @@ func (a *EglQuerySurface) Observations() *atom.Observations
 func (a *EglQuerySurface) String() string
 ```
 
-#### func (*EglQuerySurface) TypeID
-
-```go
-func (c *EglQuerySurface) TypeID() atom.TypeID
-```
-
 #### type EglSwapBuffers
 
 ```go
@@ -6122,12 +6056,6 @@ func (a *EglSwapBuffers) Observations() *atom.Observations
 
 ```go
 func (a *EglSwapBuffers) String() string
-```
-
-#### func (*EglSwapBuffers) TypeID
-
-```go
-func (c *EglSwapBuffers) TypeID() atom.TypeID
 ```
 
 #### type Error
@@ -6773,12 +6701,6 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *FlushPostBuffer) String() string
-```
-
-#### func (*FlushPostBuffer) TypeID
-
-```go
-func (c *FlushPostBuffer) TypeID() atom.TypeID
 ```
 
 #### type Framebuffer
@@ -7772,12 +7694,6 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlActiveTexture) String() string
 ```
 
-#### func (*GlActiveTexture) TypeID
-
-```go
-func (c *GlActiveTexture) TypeID() atom.TypeID
-```
-
 #### type GlAttachShader
 
 ```go
@@ -7855,12 +7771,6 @@ func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlAttachShader) String() string
-```
-
-#### func (*GlAttachShader) TypeID
-
-```go
-func (c *GlAttachShader) TypeID() atom.TypeID
 ```
 
 #### type GlBeginQuery
@@ -7942,12 +7852,6 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlBeginQuery) String() string
 ```
 
-#### func (*GlBeginQuery) TypeID
-
-```go
-func (c *GlBeginQuery) TypeID() atom.TypeID
-```
-
 #### type GlBeginQueryEXT
 
 ```go
@@ -8025,12 +7929,6 @@ func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlBeginQueryEXT) String() string
-```
-
-#### func (*GlBeginQueryEXT) TypeID
-
-```go
-func (c *GlBeginQueryEXT) TypeID() atom.TypeID
 ```
 
 #### type GlBindAttribLocation
@@ -8115,12 +8013,6 @@ func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlBindAttribLocation) String() string
 ```
 
-#### func (*GlBindAttribLocation) TypeID
-
-```go
-func (c *GlBindAttribLocation) TypeID() atom.TypeID
-```
-
 #### type GlBindBuffer
 
 ```go
@@ -8198,12 +8090,6 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlBindBuffer) String() string
-```
-
-#### func (*GlBindBuffer) TypeID
-
-```go
-func (c *GlBindBuffer) TypeID() atom.TypeID
 ```
 
 #### type GlBindBufferBase
@@ -8286,12 +8172,6 @@ func (ϟa *GlBindBufferBase) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlBindBufferBase) String() string
 ```
 
-#### func (*GlBindBufferBase) TypeID
-
-```go
-func (c *GlBindBufferBase) TypeID() atom.TypeID
-```
-
 #### type GlBindFramebuffer
 
 ```go
@@ -8369,12 +8249,6 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlBindFramebuffer) String() string
-```
-
-#### func (*GlBindFramebuffer) TypeID
-
-```go
-func (c *GlBindFramebuffer) TypeID() atom.TypeID
 ```
 
 #### type GlBindRenderbuffer
@@ -8458,12 +8332,6 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlBindRenderbuffer) String() string
 ```
 
-#### func (*GlBindRenderbuffer) TypeID
-
-```go
-func (c *GlBindRenderbuffer) TypeID() atom.TypeID
-```
-
 #### type GlBindTexture
 
 ```go
@@ -8541,12 +8409,6 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlBindTexture) String() string
-```
-
-#### func (*GlBindTexture) TypeID
-
-```go
-func (c *GlBindTexture) TypeID() atom.TypeID
 ```
 
 #### type GlBindVertexArray
@@ -8627,12 +8489,6 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (a *GlBindVertexArray) String() string
 ```
 
-#### func (*GlBindVertexArray) TypeID
-
-```go
-func (c *GlBindVertexArray) TypeID() atom.TypeID
-```
-
 #### type GlBindVertexArrayOES
 
 ```go
@@ -8711,12 +8567,6 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 
 ```go
 func (a *GlBindVertexArrayOES) String() string
-```
-
-#### func (*GlBindVertexArrayOES) TypeID
-
-```go
-func (c *GlBindVertexArrayOES) TypeID() atom.TypeID
 ```
 
 #### type GlBlendColor
@@ -8800,12 +8650,6 @@ func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlBlendColor) String() string
 ```
 
-#### func (*GlBlendColor) TypeID
-
-```go
-func (c *GlBlendColor) TypeID() atom.TypeID
-```
-
 #### type GlBlendEquation
 
 ```go
@@ -8882,12 +8726,6 @@ func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlBlendEquation) String() string
-```
-
-#### func (*GlBlendEquation) TypeID
-
-```go
-func (c *GlBlendEquation) TypeID() atom.TypeID
 ```
 
 #### type GlBlendEquationSeparate
@@ -8971,12 +8809,6 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (a *GlBlendEquationSeparate) String() string
 ```
 
-#### func (*GlBlendEquationSeparate) TypeID
-
-```go
-func (c *GlBlendEquationSeparate) TypeID() atom.TypeID
-```
-
 #### type GlBlendFunc
 
 ```go
@@ -9054,12 +8886,6 @@ func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlBlendFunc) String() string
-```
-
-#### func (*GlBlendFunc) TypeID
-
-```go
-func (c *GlBlendFunc) TypeID() atom.TypeID
 ```
 
 #### type GlBlendFuncSeparate
@@ -9143,12 +8969,6 @@ func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 
 ```go
 func (a *GlBlendFuncSeparate) String() string
-```
-
-#### func (*GlBlendFuncSeparate) TypeID
-
-```go
-func (c *GlBlendFuncSeparate) TypeID() atom.TypeID
 ```
 
 #### type GlBlitFramebuffer
@@ -9238,12 +9058,6 @@ func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (a *GlBlitFramebuffer) String() string
 ```
 
-#### func (*GlBlitFramebuffer) TypeID
-
-```go
-func (c *GlBlitFramebuffer) TypeID() atom.TypeID
-```
-
 #### type GlBufferData
 
 ```go
@@ -9323,12 +9137,6 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlBufferData) String() string
-```
-
-#### func (*GlBufferData) TypeID
-
-```go
-func (c *GlBufferData) TypeID() atom.TypeID
 ```
 
 #### type GlBufferSubData
@@ -9412,12 +9220,6 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlBufferSubData) String() string
 ```
 
-#### func (*GlBufferSubData) TypeID
-
-```go
-func (c *GlBufferSubData) TypeID() atom.TypeID
-```
-
 #### type GlCheckFramebufferStatus
 
 ```go
@@ -9499,12 +9301,6 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (a *GlCheckFramebufferStatus) String() string
 ```
 
-#### func (*GlCheckFramebufferStatus) TypeID
-
-```go
-func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID
-```
-
 #### type GlClear
 
 ```go
@@ -9581,12 +9377,6 @@ func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 
 ```go
 func (a *GlClear) String() string
-```
-
-#### func (*GlClear) TypeID
-
-```go
-func (c *GlClear) TypeID() atom.TypeID
 ```
 
 #### type GlClearColor
@@ -9670,12 +9460,6 @@ func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlClearColor) String() string
 ```
 
-#### func (*GlClearColor) TypeID
-
-```go
-func (c *GlClearColor) TypeID() atom.TypeID
-```
-
 #### type GlClearDepthf
 
 ```go
@@ -9754,12 +9538,6 @@ func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *GlClearDepthf) String() string
 ```
 
-#### func (*GlClearDepthf) TypeID
-
-```go
-func (c *GlClearDepthf) TypeID() atom.TypeID
-```
-
 #### type GlClearStencil
 
 ```go
@@ -9836,12 +9614,6 @@ func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlClearStencil) String() string
-```
-
-#### func (*GlClearStencil) TypeID
-
-```go
-func (c *GlClearStencil) TypeID() atom.TypeID
 ```
 
 #### type GlClientWaitSync
@@ -9925,12 +9697,6 @@ func (ϟa *GlClientWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlClientWaitSync) String() string
 ```
 
-#### func (*GlClientWaitSync) TypeID
-
-```go
-func (c *GlClientWaitSync) TypeID() atom.TypeID
-```
-
 #### type GlColorMask
 
 ```go
@@ -10012,12 +9778,6 @@ func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlColorMask) String() string
 ```
 
-#### func (*GlColorMask) TypeID
-
-```go
-func (c *GlColorMask) TypeID() atom.TypeID
-```
-
 #### type GlCompileShader
 
 ```go
@@ -10094,12 +9854,6 @@ func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlCompileShader) String() string
-```
-
-#### func (*GlCompileShader) TypeID
-
-```go
-func (c *GlCompileShader) TypeID() atom.TypeID
 ```
 
 #### type GlCompressedTexImage2D
@@ -10187,12 +9941,6 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 
 ```go
 func (a *GlCompressedTexImage2D) String() string
-```
-
-#### func (*GlCompressedTexImage2D) TypeID
-
-```go
-func (c *GlCompressedTexImage2D) TypeID() atom.TypeID
 ```
 
 #### type GlCompressedTexSubImage2D
@@ -10283,12 +10031,6 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (a *GlCompressedTexSubImage2D) String() string
 ```
 
-#### func (*GlCompressedTexSubImage2D) TypeID
-
-```go
-func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID
-```
-
 #### type GlCopyTexImage2D
 
 ```go
@@ -10372,12 +10114,6 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *GlCopyTexImage2D) String() string
-```
-
-#### func (*GlCopyTexImage2D) TypeID
-
-```go
-func (c *GlCopyTexImage2D) TypeID() atom.TypeID
 ```
 
 #### type GlCopyTexSubImage2D
@@ -10467,12 +10203,6 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (a *GlCopyTexSubImage2D) String() string
 ```
 
-#### func (*GlCopyTexSubImage2D) TypeID
-
-```go
-func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID
-```
-
 #### type GlCreateProgram
 
 ```go
@@ -10549,12 +10279,6 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlCreateProgram) String() string
-```
-
-#### func (*GlCreateProgram) TypeID
-
-```go
-func (c *GlCreateProgram) TypeID() atom.TypeID
 ```
 
 #### type GlCreateShader
@@ -10636,12 +10360,6 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *GlCreateShader) String() string
 ```
 
-#### func (*GlCreateShader) TypeID
-
-```go
-func (c *GlCreateShader) TypeID() atom.TypeID
-```
-
 #### type GlCullFace
 
 ```go
@@ -10718,12 +10436,6 @@ func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *GlCullFace) String() string
-```
-
-#### func (*GlCullFace) TypeID
-
-```go
-func (c *GlCullFace) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteBuffers
@@ -10803,12 +10515,6 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlDeleteBuffers) String() string
-```
-
-#### func (*GlDeleteBuffers) TypeID
-
-```go
-func (c *GlDeleteBuffers) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteFramebuffers
@@ -10892,12 +10598,6 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlDeleteFramebuffers) String() string
 ```
 
-#### func (*GlDeleteFramebuffers) TypeID
-
-```go
-func (c *GlDeleteFramebuffers) TypeID() atom.TypeID
-```
-
 #### type GlDeleteProgram
 
 ```go
@@ -10974,12 +10674,6 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlDeleteProgram) String() string
-```
-
-#### func (*GlDeleteProgram) TypeID
-
-```go
-func (c *GlDeleteProgram) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteQueries
@@ -11059,12 +10753,6 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlDeleteQueries) String() string
-```
-
-#### func (*GlDeleteQueries) TypeID
-
-```go
-func (c *GlDeleteQueries) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteQueriesEXT
@@ -11148,12 +10836,6 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlDeleteQueriesEXT) String() string
 ```
 
-#### func (*GlDeleteQueriesEXT) TypeID
-
-```go
-func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID
-```
-
 #### type GlDeleteRenderbuffers
 
 ```go
@@ -11235,12 +10917,6 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlDeleteRenderbuffers) String() string
 ```
 
-#### func (*GlDeleteRenderbuffers) TypeID
-
-```go
-func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID
-```
-
 #### type GlDeleteShader
 
 ```go
@@ -11317,12 +10993,6 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlDeleteShader) String() string
-```
-
-#### func (*GlDeleteShader) TypeID
-
-```go
-func (c *GlDeleteShader) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteSync
@@ -11403,12 +11073,6 @@ func (ϟa *GlDeleteSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlDeleteSync) String() string
 ```
 
-#### func (*GlDeleteSync) TypeID
-
-```go
-func (c *GlDeleteSync) TypeID() atom.TypeID
-```
-
 #### type GlDeleteTextures
 
 ```go
@@ -11486,12 +11150,6 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *GlDeleteTextures) String() string
-```
-
-#### func (*GlDeleteTextures) TypeID
-
-```go
-func (c *GlDeleteTextures) TypeID() atom.TypeID
 ```
 
 #### type GlDeleteVertexArrays
@@ -11575,12 +11233,6 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlDeleteVertexArrays) String() string
 ```
 
-#### func (*GlDeleteVertexArrays) TypeID
-
-```go
-func (c *GlDeleteVertexArrays) TypeID() atom.TypeID
-```
-
 #### type GlDeleteVertexArraysOES
 
 ```go
@@ -11662,12 +11314,6 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (a *GlDeleteVertexArraysOES) String() string
 ```
 
-#### func (*GlDeleteVertexArraysOES) TypeID
-
-```go
-func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID
-```
-
 #### type GlDepthFunc
 
 ```go
@@ -11746,12 +11392,6 @@ func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlDepthFunc) String() string
 ```
 
-#### func (*GlDepthFunc) TypeID
-
-```go
-func (c *GlDepthFunc) TypeID() atom.TypeID
-```
-
 #### type GlDepthMask
 
 ```go
@@ -11828,12 +11468,6 @@ func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlDepthMask) String() string
-```
-
-#### func (*GlDepthMask) TypeID
-
-```go
-func (c *GlDepthMask) TypeID() atom.TypeID
 ```
 
 #### type GlDepthRangef
@@ -11915,12 +11549,6 @@ func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *GlDepthRangef) String() string
 ```
 
-#### func (*GlDepthRangef) TypeID
-
-```go
-func (c *GlDepthRangef) TypeID() atom.TypeID
-```
-
 #### type GlDetachShader
 
 ```go
@@ -12000,12 +11628,6 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *GlDetachShader) String() string
 ```
 
-#### func (*GlDetachShader) TypeID
-
-```go
-func (c *GlDetachShader) TypeID() atom.TypeID
-```
-
 #### type GlDisable
 
 ```go
@@ -12082,12 +11704,6 @@ func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *GlDisable) String() string
-```
-
-#### func (*GlDisable) TypeID
-
-```go
-func (c *GlDisable) TypeID() atom.TypeID
 ```
 
 #### type GlDisableClientState
@@ -12170,12 +11786,6 @@ func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlDisableClientState) String() string
 ```
 
-#### func (*GlDisableClientState) TypeID
-
-```go
-func (c *GlDisableClientState) TypeID() atom.TypeID
-```
-
 #### type GlDisableVertexAttribArray
 
 ```go
@@ -12254,12 +11864,6 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 
 ```go
 func (a *GlDisableVertexAttribArray) String() string
-```
-
-#### func (*GlDisableVertexAttribArray) TypeID
-
-```go
-func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID
 ```
 
 #### type GlDiscardFramebufferEXT
@@ -12344,12 +11948,6 @@ func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (a *GlDiscardFramebufferEXT) String() string
 ```
 
-#### func (*GlDiscardFramebufferEXT) TypeID
-
-```go
-func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID
-```
-
 #### type GlDrawArrays
 
 ```go
@@ -12428,12 +12026,6 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlDrawArrays) String() string
-```
-
-#### func (*GlDrawArrays) TypeID
-
-```go
-func (c *GlDrawArrays) TypeID() atom.TypeID
 ```
 
 #### type GlDrawElements
@@ -12517,12 +12109,6 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *GlDrawElements) String() string
 ```
 
-#### func (*GlDrawElements) TypeID
-
-```go
-func (c *GlDrawElements) TypeID() atom.TypeID
-```
-
 #### type GlEGLImageTargetRenderbufferStorageOES
 
 ```go
@@ -12602,12 +12188,6 @@ func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxa
 
 ```go
 func (a *GlEGLImageTargetRenderbufferStorageOES) String() string
-```
-
-#### func (*GlEGLImageTargetRenderbufferStorageOES) TypeID
-
-```go
-func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID
 ```
 
 #### type GlEGLImageTargetTexture2DOES
@@ -12691,12 +12271,6 @@ func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (a *GlEGLImageTargetTexture2DOES) String() string
 ```
 
-#### func (*GlEGLImageTargetTexture2DOES) TypeID
-
-```go
-func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID
-```
-
 #### type GlEnable
 
 ```go
@@ -12773,12 +12347,6 @@ func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 
 ```go
 func (a *GlEnable) String() string
-```
-
-#### func (*GlEnable) TypeID
-
-```go
-func (c *GlEnable) TypeID() atom.TypeID
 ```
 
 #### type GlEnableClientState
@@ -12861,12 +12429,6 @@ func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (a *GlEnableClientState) String() string
 ```
 
-#### func (*GlEnableClientState) TypeID
-
-```go
-func (c *GlEnableClientState) TypeID() atom.TypeID
-```
-
 #### type GlEnableVertexAttribArray
 
 ```go
@@ -12947,12 +12509,6 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (a *GlEnableVertexAttribArray) String() string
 ```
 
-#### func (*GlEnableVertexAttribArray) TypeID
-
-```go
-func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID
-```
-
 #### type GlEndQuery
 
 ```go
@@ -13029,12 +12585,6 @@ func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *GlEndQuery) String() string
-```
-
-#### func (*GlEndQuery) TypeID
-
-```go
-func (c *GlEndQuery) TypeID() atom.TypeID
 ```
 
 #### type GlEndQueryEXT
@@ -13115,12 +12665,6 @@ func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *GlEndQueryEXT) String() string
 ```
 
-#### func (*GlEndQueryEXT) TypeID
-
-```go
-func (c *GlEndQueryEXT) TypeID() atom.TypeID
-```
-
 #### type GlEndTilingQCOM
 
 ```go
@@ -13197,12 +12741,6 @@ func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlEndTilingQCOM) String() string
-```
-
-#### func (*GlEndTilingQCOM) TypeID
-
-```go
-func (c *GlEndTilingQCOM) TypeID() atom.TypeID
 ```
 
 #### type GlFenceSync
@@ -13285,12 +12823,6 @@ func (ϟa *GlFenceSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlFenceSync) String() string
 ```
 
-#### func (*GlFenceSync) TypeID
-
-```go
-func (c *GlFenceSync) TypeID() atom.TypeID
-```
-
 #### type GlFinish
 
 ```go
@@ -13367,12 +12899,6 @@ func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 func (a *GlFinish) String() string
 ```
 
-#### func (*GlFinish) TypeID
-
-```go
-func (c *GlFinish) TypeID() atom.TypeID
-```
-
 #### type GlFlush
 
 ```go
@@ -13447,12 +12973,6 @@ func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 
 ```go
 func (a *GlFlush) String() string
-```
-
-#### func (*GlFlush) TypeID
-
-```go
-func (c *GlFlush) TypeID() atom.TypeID
 ```
 
 #### type GlFramebufferRenderbuffer
@@ -13536,12 +13056,6 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 
 ```go
 func (a *GlFramebufferRenderbuffer) String() string
-```
-
-#### func (*GlFramebufferRenderbuffer) TypeID
-
-```go
-func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID
 ```
 
 #### type GlFramebufferTexture2D
@@ -13628,12 +13142,6 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (a *GlFramebufferTexture2D) String() string
 ```
 
-#### func (*GlFramebufferTexture2D) TypeID
-
-```go
-func (c *GlFramebufferTexture2D) TypeID() atom.TypeID
-```
-
 #### type GlFrontFace
 
 ```go
@@ -13710,12 +13218,6 @@ func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlFrontFace) String() string
-```
-
-#### func (*GlFrontFace) TypeID
-
-```go
-func (c *GlFrontFace) TypeID() atom.TypeID
 ```
 
 #### type GlGenBuffers
@@ -13797,12 +13299,6 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlGenBuffers) String() string
 ```
 
-#### func (*GlGenBuffers) TypeID
-
-```go
-func (c *GlGenBuffers) TypeID() atom.TypeID
-```
-
 #### type GlGenFramebuffers
 
 ```go
@@ -13880,12 +13376,6 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlGenFramebuffers) String() string
-```
-
-#### func (*GlGenFramebuffers) TypeID
-
-```go
-func (c *GlGenFramebuffers) TypeID() atom.TypeID
 ```
 
 #### type GlGenQueries
@@ -13967,12 +13457,6 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlGenQueries) String() string
 ```
 
-#### func (*GlGenQueries) TypeID
-
-```go
-func (c *GlGenQueries) TypeID() atom.TypeID
-```
-
 #### type GlGenQueriesEXT
 
 ```go
@@ -14050,12 +13534,6 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlGenQueriesEXT) String() string
-```
-
-#### func (*GlGenQueriesEXT) TypeID
-
-```go
-func (c *GlGenQueriesEXT) TypeID() atom.TypeID
 ```
 
 #### type GlGenRenderbuffers
@@ -14139,12 +13617,6 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlGenRenderbuffers) String() string
 ```
 
-#### func (*GlGenRenderbuffers) TypeID
-
-```go
-func (c *GlGenRenderbuffers) TypeID() atom.TypeID
-```
-
 #### type GlGenTextures
 
 ```go
@@ -14224,12 +13696,6 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *GlGenTextures) String() string
 ```
 
-#### func (*GlGenTextures) TypeID
-
-```go
-func (c *GlGenTextures) TypeID() atom.TypeID
-```
-
 #### type GlGenVertexArrays
 
 ```go
@@ -14307,12 +13773,6 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlGenVertexArrays) String() string
-```
-
-#### func (*GlGenVertexArrays) TypeID
-
-```go
-func (c *GlGenVertexArrays) TypeID() atom.TypeID
 ```
 
 #### type GlGenVertexArraysOES
@@ -14396,12 +13856,6 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlGenVertexArraysOES) String() string
 ```
 
-#### func (*GlGenVertexArraysOES) TypeID
-
-```go
-func (c *GlGenVertexArraysOES) TypeID() atom.TypeID
-```
-
 #### type GlGenerateMipmap
 
 ```go
@@ -14478,12 +13932,6 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *GlGenerateMipmap) String() string
-```
-
-#### func (*GlGenerateMipmap) TypeID
-
-```go
-func (c *GlGenerateMipmap) TypeID() atom.TypeID
 ```
 
 #### type GlGetActiveAttrib
@@ -14568,12 +14016,6 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlGetActiveAttrib) String() string
-```
-
-#### func (*GlGetActiveAttrib) TypeID
-
-```go
-func (c *GlGetActiveAttrib) TypeID() atom.TypeID
 ```
 
 #### type GlGetActiveUniform
@@ -14662,12 +14104,6 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlGetActiveUniform) String() string
 ```
 
-#### func (*GlGetActiveUniform) TypeID
-
-```go
-func (c *GlGetActiveUniform) TypeID() atom.TypeID
-```
-
 #### type GlGetActiveUniformBlockName
 
 ```go
@@ -14752,12 +14188,6 @@ func (ϟa *GlGetActiveUniformBlockName) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (a *GlGetActiveUniformBlockName) String() string
 ```
 
-#### func (*GlGetActiveUniformBlockName) TypeID
-
-```go
-func (c *GlGetActiveUniformBlockName) TypeID() atom.TypeID
-```
-
 #### type GlGetActiveUniformBlockiv
 
 ```go
@@ -14839,12 +14269,6 @@ func (ϟa *GlGetActiveUniformBlockiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 
 ```go
 func (a *GlGetActiveUniformBlockiv) String() string
-```
-
-#### func (*GlGetActiveUniformBlockiv) TypeID
-
-```go
-func (c *GlGetActiveUniformBlockiv) TypeID() atom.TypeID
 ```
 
 #### type GlGetActiveUniformsiv
@@ -14931,12 +14355,6 @@ func (ϟa *GlGetActiveUniformsiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlGetActiveUniformsiv) String() string
 ```
 
-#### func (*GlGetActiveUniformsiv) TypeID
-
-```go
-func (c *GlGetActiveUniformsiv) TypeID() atom.TypeID
-```
-
 #### type GlGetAttachedShaders
 
 ```go
@@ -15018,12 +14436,6 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 
 ```go
 func (a *GlGetAttachedShaders) String() string
-```
-
-#### func (*GlGetAttachedShaders) TypeID
-
-```go
-func (c *GlGetAttachedShaders) TypeID() atom.TypeID
 ```
 
 #### type GlGetAttribLocation
@@ -15116,12 +14528,6 @@ for every call to glGetAttribLocation!
 func (a *GlGetAttribLocation) String() string
 ```
 
-#### func (*GlGetAttribLocation) TypeID
-
-```go
-func (c *GlGetAttribLocation) TypeID() atom.TypeID
-```
-
 #### type GlGetBooleanv
 
 ```go
@@ -15199,12 +14605,6 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlGetBooleanv) String() string
-```
-
-#### func (*GlGetBooleanv) TypeID
-
-```go
-func (c *GlGetBooleanv) TypeID() atom.TypeID
 ```
 
 #### type GlGetBufferParameteriv
@@ -15289,12 +14689,6 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (a *GlGetBufferParameteriv) String() string
 ```
 
-#### func (*GlGetBufferParameteriv) TypeID
-
-```go
-func (c *GlGetBufferParameteriv) TypeID() atom.TypeID
-```
-
 #### type GlGetError
 
 ```go
@@ -15371,12 +14765,6 @@ func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *GlGetError) String() string
-```
-
-#### func (*GlGetError) TypeID
-
-```go
-func (c *GlGetError) TypeID() atom.TypeID
 ```
 
 #### type GlGetFloatv
@@ -15456,12 +14844,6 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlGetFloatv) String() string
-```
-
-#### func (*GlGetFloatv) TypeID
-
-```go
-func (c *GlGetFloatv) TypeID() atom.TypeID
 ```
 
 #### type GlGetFramebufferAttachmentParameteriv
@@ -15547,12 +14929,6 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *gfxap
 func (a *GlGetFramebufferAttachmentParameteriv) String() string
 ```
 
-#### func (*GlGetFramebufferAttachmentParameteriv) TypeID
-
-```go
-func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID
-```
-
 #### type GlGetGraphicsResetStatusEXT
 
 ```go
@@ -15633,12 +15009,6 @@ func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (a *GlGetGraphicsResetStatusEXT) String() string
 ```
 
-#### func (*GlGetGraphicsResetStatusEXT) TypeID
-
-```go
-func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID
-```
-
 #### type GlGetIntegerv
 
 ```go
@@ -15716,12 +15086,6 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlGetIntegerv) String() string
-```
-
-#### func (*GlGetIntegerv) TypeID
-
-```go
-func (c *GlGetIntegerv) TypeID() atom.TypeID
 ```
 
 #### type GlGetProgramBinaryOES
@@ -15808,12 +15172,6 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlGetProgramBinaryOES) String() string
 ```
 
-#### func (*GlGetProgramBinaryOES) TypeID
-
-```go
-func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID
-```
-
 #### type GlGetProgramInfoLog
 
 ```go
@@ -15897,12 +15255,6 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (a *GlGetProgramInfoLog) String() string
 ```
 
-#### func (*GlGetProgramInfoLog) TypeID
-
-```go
-func (c *GlGetProgramInfoLog) TypeID() atom.TypeID
-```
-
 #### type GlGetProgramiv
 
 ```go
@@ -15981,12 +15333,6 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlGetProgramiv) String() string
-```
-
-#### func (*GlGetProgramiv) TypeID
-
-```go
-func (c *GlGetProgramiv) TypeID() atom.TypeID
 ```
 
 #### type GlGetQueryObjecti64v
@@ -16071,12 +15417,6 @@ func (ϟa *GlGetQueryObjecti64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlGetQueryObjecti64v) String() string
 ```
 
-#### func (*GlGetQueryObjecti64v) TypeID
-
-```go
-func (c *GlGetQueryObjecti64v) TypeID() atom.TypeID
-```
-
 #### type GlGetQueryObjecti64vEXT
 
 ```go
@@ -16157,12 +15497,6 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 
 ```go
 func (a *GlGetQueryObjecti64vEXT) String() string
-```
-
-#### func (*GlGetQueryObjecti64vEXT) TypeID
-
-```go
-func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID
 ```
 
 #### type GlGetQueryObjectivEXT
@@ -16247,12 +15581,6 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlGetQueryObjectivEXT) String() string
 ```
 
-#### func (*GlGetQueryObjectivEXT) TypeID
-
-```go
-func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID
-```
-
 #### type GlGetQueryObjectui64v
 
 ```go
@@ -16333,12 +15661,6 @@ func (ϟa *GlGetQueryObjectui64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 
 ```go
 func (a *GlGetQueryObjectui64v) String() string
-```
-
-#### func (*GlGetQueryObjectui64v) TypeID
-
-```go
-func (c *GlGetQueryObjectui64v) TypeID() atom.TypeID
 ```
 
 #### type GlGetQueryObjectui64vEXT
@@ -16423,12 +15745,6 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (a *GlGetQueryObjectui64vEXT) String() string
 ```
 
-#### func (*GlGetQueryObjectui64vEXT) TypeID
-
-```go
-func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID
-```
-
 #### type GlGetQueryObjectuiv
 
 ```go
@@ -16509,12 +15825,6 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 
 ```go
 func (a *GlGetQueryObjectuiv) String() string
-```
-
-#### func (*GlGetQueryObjectuiv) TypeID
-
-```go
-func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID
 ```
 
 #### type GlGetQueryObjectuivEXT
@@ -16599,12 +15909,6 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (a *GlGetQueryObjectuivEXT) String() string
 ```
 
-#### func (*GlGetQueryObjectuivEXT) TypeID
-
-```go
-func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID
-```
-
 #### type GlGetQueryiv
 
 ```go
@@ -16683,12 +15987,6 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlGetQueryiv) String() string
-```
-
-#### func (*GlGetQueryiv) TypeID
-
-```go
-func (c *GlGetQueryiv) TypeID() atom.TypeID
 ```
 
 #### type GlGetQueryivEXT
@@ -16771,12 +16069,6 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlGetQueryivEXT) String() string
 ```
 
-#### func (*GlGetQueryivEXT) TypeID
-
-```go
-func (c *GlGetQueryivEXT) TypeID() atom.TypeID
-```
-
 #### type GlGetRenderbufferParameteriv
 
 ```go
@@ -16857,12 +16149,6 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 
 ```go
 func (a *GlGetRenderbufferParameteriv) String() string
-```
-
-#### func (*GlGetRenderbufferParameteriv) TypeID
-
-```go
-func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID
 ```
 
 #### type GlGetShaderInfoLog
@@ -16948,12 +16234,6 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlGetShaderInfoLog) String() string
 ```
 
-#### func (*GlGetShaderInfoLog) TypeID
-
-```go
-func (c *GlGetShaderInfoLog) TypeID() atom.TypeID
-```
-
 #### type GlGetShaderPrecisionFormat
 
 ```go
@@ -17037,12 +16317,6 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 func (a *GlGetShaderPrecisionFormat) String() string
 ```
 
-#### func (*GlGetShaderPrecisionFormat) TypeID
-
-```go
-func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID
-```
-
 #### type GlGetShaderSource
 
 ```go
@@ -17122,12 +16396,6 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlGetShaderSource) String() string
-```
-
-#### func (*GlGetShaderSource) TypeID
-
-```go
-func (c *GlGetShaderSource) TypeID() atom.TypeID
 ```
 
 #### type GlGetShaderiv
@@ -17210,12 +16478,6 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *GlGetShaderiv) String() string
 ```
 
-#### func (*GlGetShaderiv) TypeID
-
-```go
-func (c *GlGetShaderiv) TypeID() atom.TypeID
-```
-
 #### type GlGetString
 
 ```go
@@ -17293,12 +16555,6 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlGetString) String() string
-```
-
-#### func (*GlGetString) TypeID
-
-```go
-func (c *GlGetString) TypeID() atom.TypeID
 ```
 
 #### type GlGetTexParameterfv
@@ -17383,12 +16639,6 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (a *GlGetTexParameterfv) String() string
 ```
 
-#### func (*GlGetTexParameterfv) TypeID
-
-```go
-func (c *GlGetTexParameterfv) TypeID() atom.TypeID
-```
-
 #### type GlGetTexParameteriv
 
 ```go
@@ -17469,12 +16719,6 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 
 ```go
 func (a *GlGetTexParameteriv) String() string
-```
-
-#### func (*GlGetTexParameteriv) TypeID
-
-```go
-func (c *GlGetTexParameteriv) TypeID() atom.TypeID
 ```
 
 #### type GlGetUniformLocation
@@ -17559,12 +16803,6 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlGetUniformLocation) String() string
 ```
 
-#### func (*GlGetUniformLocation) TypeID
-
-```go
-func (c *GlGetUniformLocation) TypeID() atom.TypeID
-```
-
 #### type GlGetUniformfv
 
 ```go
@@ -17643,12 +16881,6 @@ func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlGetUniformfv) String() string
-```
-
-#### func (*GlGetUniformfv) TypeID
-
-```go
-func (c *GlGetUniformfv) TypeID() atom.TypeID
 ```
 
 #### type GlGetUniformiv
@@ -17731,12 +16963,6 @@ func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *GlGetUniformiv) String() string
 ```
 
-#### func (*GlGetUniformiv) TypeID
-
-```go
-func (c *GlGetUniformiv) TypeID() atom.TypeID
-```
-
 #### type GlHint
 
 ```go
@@ -17814,12 +17040,6 @@ func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 
 ```go
 func (a *GlHint) String() string
-```
-
-#### func (*GlHint) TypeID
-
-```go
-func (c *GlHint) TypeID() atom.TypeID
 ```
 
 #### type GlInsertEventMarkerEXT
@@ -17901,12 +17121,6 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 
 ```go
 func (a *GlInsertEventMarkerEXT) String() string
-```
-
-#### func (*GlInsertEventMarkerEXT) TypeID
-
-```go
-func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID
 ```
 
 #### type GlInvalidateFramebuffer
@@ -17991,12 +17205,6 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (a *GlInvalidateFramebuffer) String() string
 ```
 
-#### func (*GlInvalidateFramebuffer) TypeID
-
-```go
-func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID
-```
-
 #### type GlIsBuffer
 
 ```go
@@ -18074,12 +17282,6 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *GlIsBuffer) String() string
-```
-
-#### func (*GlIsBuffer) TypeID
-
-```go
-func (c *GlIsBuffer) TypeID() atom.TypeID
 ```
 
 #### type GlIsEnabled
@@ -18161,12 +17363,6 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlIsEnabled) String() string
 ```
 
-#### func (*GlIsEnabled) TypeID
-
-```go
-func (c *GlIsEnabled) TypeID() atom.TypeID
-```
-
 #### type GlIsFramebuffer
 
 ```go
@@ -18244,12 +17440,6 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlIsFramebuffer) String() string
-```
-
-#### func (*GlIsFramebuffer) TypeID
-
-```go
-func (c *GlIsFramebuffer) TypeID() atom.TypeID
 ```
 
 #### type GlIsProgram
@@ -18331,12 +17521,6 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlIsProgram) String() string
 ```
 
-#### func (*GlIsProgram) TypeID
-
-```go
-func (c *GlIsProgram) TypeID() atom.TypeID
-```
-
 #### type GlIsQuery
 
 ```go
@@ -18414,12 +17598,6 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *GlIsQuery) String() string
-```
-
-#### func (*GlIsQuery) TypeID
-
-```go
-func (c *GlIsQuery) TypeID() atom.TypeID
 ```
 
 #### type GlIsQueryEXT
@@ -18501,12 +17679,6 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlIsQueryEXT) String() string
 ```
 
-#### func (*GlIsQueryEXT) TypeID
-
-```go
-func (c *GlIsQueryEXT) TypeID() atom.TypeID
-```
-
 #### type GlIsRenderbuffer
 
 ```go
@@ -18584,12 +17756,6 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *GlIsRenderbuffer) String() string
-```
-
-#### func (*GlIsRenderbuffer) TypeID
-
-```go
-func (c *GlIsRenderbuffer) TypeID() atom.TypeID
 ```
 
 #### type GlIsShader
@@ -18671,12 +17837,6 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *GlIsShader) String() string
 ```
 
-#### func (*GlIsShader) TypeID
-
-```go
-func (c *GlIsShader) TypeID() atom.TypeID
-```
-
 #### type GlIsTexture
 
 ```go
@@ -18754,12 +17914,6 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlIsTexture) String() string
-```
-
-#### func (*GlIsTexture) TypeID
-
-```go
-func (c *GlIsTexture) TypeID() atom.TypeID
 ```
 
 #### type GlIsVertexArrayOES
@@ -18843,12 +17997,6 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlIsVertexArrayOES) String() string
 ```
 
-#### func (*GlIsVertexArrayOES) TypeID
-
-```go
-func (c *GlIsVertexArrayOES) TypeID() atom.TypeID
-```
-
 #### type GlLineWidth
 
 ```go
@@ -18927,12 +18075,6 @@ func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlLineWidth) String() string
 ```
 
-#### func (*GlLineWidth) TypeID
-
-```go
-func (c *GlLineWidth) TypeID() atom.TypeID
-```
-
 #### type GlLinkProgram
 
 ```go
@@ -19009,12 +18151,6 @@ func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlLinkProgram) String() string
-```
-
-#### func (*GlLinkProgram) TypeID
-
-```go
-func (c *GlLinkProgram) TypeID() atom.TypeID
 ```
 
 #### type GlMapBufferRange
@@ -19099,12 +18235,6 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlMapBufferRange) String() string
 ```
 
-#### func (*GlMapBufferRange) TypeID
-
-```go
-func (c *GlMapBufferRange) TypeID() atom.TypeID
-```
-
 #### type GlPixelStorei
 
 ```go
@@ -19182,12 +18312,6 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlPixelStorei) String() string
-```
-
-#### func (*GlPixelStorei) TypeID
-
-```go
-func (c *GlPixelStorei) TypeID() atom.TypeID
 ```
 
 #### type GlPolygonOffset
@@ -19269,12 +18393,6 @@ func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlPolygonOffset) String() string
 ```
 
-#### func (*GlPolygonOffset) TypeID
-
-```go
-func (c *GlPolygonOffset) TypeID() atom.TypeID
-```
-
 #### type GlPopGroupMarkerEXT
 
 ```go
@@ -19351,12 +18469,6 @@ func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 
 ```go
 func (a *GlPopGroupMarkerEXT) String() string
-```
-
-#### func (*GlPopGroupMarkerEXT) TypeID
-
-```go
-func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID
 ```
 
 #### type GlProgramBinaryOES
@@ -19442,12 +18554,6 @@ func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlProgramBinaryOES) String() string
 ```
 
-#### func (*GlProgramBinaryOES) TypeID
-
-```go
-func (c *GlProgramBinaryOES) TypeID() atom.TypeID
-```
-
 #### type GlPushGroupMarkerEXT
 
 ```go
@@ -19529,12 +18635,6 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *GlPushGroupMarkerEXT) String() string
 ```
 
-#### func (*GlPushGroupMarkerEXT) TypeID
-
-```go
-func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID
-```
-
 #### type GlQueryCounterEXT
 
 ```go
@@ -19612,12 +18712,6 @@ func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlQueryCounterEXT) String() string
-```
-
-#### func (*GlQueryCounterEXT) TypeID
-
-```go
-func (c *GlQueryCounterEXT) TypeID() atom.TypeID
 ```
 
 #### type GlReadPixels
@@ -19704,12 +18798,6 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlReadPixels) String() string
 ```
 
-#### func (*GlReadPixels) TypeID
-
-```go
-func (c *GlReadPixels) TypeID() atom.TypeID
-```
-
 #### type GlReleaseShaderCompiler
 
 ```go
@@ -19786,12 +18874,6 @@ func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 
 ```go
 func (a *GlReleaseShaderCompiler) String() string
-```
-
-#### func (*GlReleaseShaderCompiler) TypeID
-
-```go
-func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID
 ```
 
 #### type GlRenderbufferStorage
@@ -19875,12 +18957,6 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 
 ```go
 func (a *GlRenderbufferStorage) String() string
-```
-
-#### func (*GlRenderbufferStorage) TypeID
-
-```go
-func (c *GlRenderbufferStorage) TypeID() atom.TypeID
 ```
 
 #### type GlRenderbufferStorageMultisample
@@ -19967,12 +19043,6 @@ func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 func (a *GlRenderbufferStorageMultisample) String() string
 ```
 
-#### func (*GlRenderbufferStorageMultisample) TypeID
-
-```go
-func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID
-```
-
 #### type GlSampleCoverage
 
 ```go
@@ -20050,12 +19120,6 @@ func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *GlSampleCoverage) String() string
-```
-
-#### func (*GlSampleCoverage) TypeID
-
-```go
-func (c *GlSampleCoverage) TypeID() atom.TypeID
 ```
 
 #### type GlScissor
@@ -20137,12 +19201,6 @@ func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *GlScissor) String() string
-```
-
-#### func (*GlScissor) TypeID
-
-```go
-func (c *GlScissor) TypeID() atom.TypeID
 ```
 
 #### type GlShaderBinary
@@ -20227,12 +19285,6 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *GlShaderBinary) String() string
 ```
 
-#### func (*GlShaderBinary) TypeID
-
-```go
-func (c *GlShaderBinary) TypeID() atom.TypeID
-```
-
 #### type GlShaderSource
 
 ```go
@@ -20312,12 +19364,6 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *GlShaderSource) String() string
-```
-
-#### func (*GlShaderSource) TypeID
-
-```go
-func (c *GlShaderSource) TypeID() atom.TypeID
 ```
 
 #### type GlStartTilingQCOM
@@ -20400,12 +19446,6 @@ func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlStartTilingQCOM) String() string
-```
-
-#### func (*GlStartTilingQCOM) TypeID
-
-```go
-func (c *GlStartTilingQCOM) TypeID() atom.TypeID
 ```
 
 #### type GlStencilFuncSeparate
@@ -20491,12 +19531,6 @@ func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlStencilFuncSeparate) String() string
 ```
 
-#### func (*GlStencilFuncSeparate) TypeID
-
-```go
-func (c *GlStencilFuncSeparate) TypeID() atom.TypeID
-```
-
 #### type GlStencilMask
 
 ```go
@@ -20573,12 +19607,6 @@ func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlStencilMask) String() string
-```
-
-#### func (*GlStencilMask) TypeID
-
-```go
-func (c *GlStencilMask) TypeID() atom.TypeID
 ```
 
 #### type GlStencilMaskSeparate
@@ -20662,12 +19690,6 @@ func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlStencilMaskSeparate) String() string
 ```
 
-#### func (*GlStencilMaskSeparate) TypeID
-
-```go
-func (c *GlStencilMaskSeparate) TypeID() atom.TypeID
-```
-
 #### type GlStencilOpSeparate
 
 ```go
@@ -20749,12 +19771,6 @@ func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 
 ```go
 func (a *GlStencilOpSeparate) String() string
-```
-
-#### func (*GlStencilOpSeparate) TypeID
-
-```go
-func (c *GlStencilOpSeparate) TypeID() atom.TypeID
 ```
 
 #### type GlTexImage2D
@@ -20843,12 +19859,6 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlTexImage2D) String() string
 ```
 
-#### func (*GlTexImage2D) TypeID
-
-```go
-func (c *GlTexImage2D) TypeID() atom.TypeID
-```
-
 #### type GlTexParameterf
 
 ```go
@@ -20927,12 +19937,6 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *GlTexParameterf) String() string
-```
-
-#### func (*GlTexParameterf) TypeID
-
-```go
-func (c *GlTexParameterf) TypeID() atom.TypeID
 ```
 
 #### type GlTexParameteri
@@ -21015,12 +20019,6 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlTexParameteri) String() string
 ```
 
-#### func (*GlTexParameteri) TypeID
-
-```go
-func (c *GlTexParameteri) TypeID() atom.TypeID
-```
-
 #### type GlTexStorage1DEXT
 
 ```go
@@ -21100,12 +20098,6 @@ func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlTexStorage1DEXT) String() string
-```
-
-#### func (*GlTexStorage1DEXT) TypeID
-
-```go
-func (c *GlTexStorage1DEXT) TypeID() atom.TypeID
 ```
 
 #### type GlTexStorage2DEXT
@@ -21190,12 +20182,6 @@ func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (a *GlTexStorage2DEXT) String() string
 ```
 
-#### func (*GlTexStorage2DEXT) TypeID
-
-```go
-func (c *GlTexStorage2DEXT) TypeID() atom.TypeID
-```
-
 #### type GlTexStorage3DEXT
 
 ```go
@@ -21277,12 +20263,6 @@ func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlTexStorage3DEXT) String() string
-```
-
-#### func (*GlTexStorage3DEXT) TypeID
-
-```go
-func (c *GlTexStorage3DEXT) TypeID() atom.TypeID
 ```
 
 #### type GlTexSubImage2D
@@ -21371,12 +20351,6 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *GlTexSubImage2D) String() string
 ```
 
-#### func (*GlTexSubImage2D) TypeID
-
-```go
-func (c *GlTexSubImage2D) TypeID() atom.TypeID
-```
-
 #### type GlTextureStorage1DEXT
 
 ```go
@@ -21459,12 +20433,6 @@ func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 
 ```go
 func (a *GlTextureStorage1DEXT) String() string
-```
-
-#### func (*GlTextureStorage1DEXT) TypeID
-
-```go
-func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID
 ```
 
 #### type GlTextureStorage2DEXT
@@ -21550,12 +20518,6 @@ func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 
 ```go
 func (a *GlTextureStorage2DEXT) String() string
-```
-
-#### func (*GlTextureStorage2DEXT) TypeID
-
-```go
-func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID
 ```
 
 #### type GlTextureStorage3DEXT
@@ -21644,12 +20606,6 @@ func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlTextureStorage3DEXT) String() string
 ```
 
-#### func (*GlTextureStorage3DEXT) TypeID
-
-```go
-func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID
-```
-
 #### type GlUniform1f
 
 ```go
@@ -21727,12 +20683,6 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlUniform1f) String() string
-```
-
-#### func (*GlUniform1f) TypeID
-
-```go
-func (c *GlUniform1f) TypeID() atom.TypeID
 ```
 
 #### type GlUniform1fv
@@ -21815,12 +20765,6 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlUniform1fv) String() string
 ```
 
-#### func (*GlUniform1fv) TypeID
-
-```go
-func (c *GlUniform1fv) TypeID() atom.TypeID
-```
-
 #### type GlUniform1i
 
 ```go
@@ -21898,12 +20842,6 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlUniform1i) String() string
-```
-
-#### func (*GlUniform1i) TypeID
-
-```go
-func (c *GlUniform1i) TypeID() atom.TypeID
 ```
 
 #### type GlUniform1iv
@@ -21986,12 +20924,6 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlUniform1iv) String() string
 ```
 
-#### func (*GlUniform1iv) TypeID
-
-```go
-func (c *GlUniform1iv) TypeID() atom.TypeID
-```
-
 #### type GlUniform2f
 
 ```go
@@ -22070,12 +21002,6 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *GlUniform2f) String() string
-```
-
-#### func (*GlUniform2f) TypeID
-
-```go
-func (c *GlUniform2f) TypeID() atom.TypeID
 ```
 
 #### type GlUniform2fv
@@ -22158,12 +21084,6 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlUniform2fv) String() string
 ```
 
-#### func (*GlUniform2fv) TypeID
-
-```go
-func (c *GlUniform2fv) TypeID() atom.TypeID
-```
-
 #### type GlUniform2i
 
 ```go
@@ -22244,12 +21164,6 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlUniform2i) String() string
 ```
 
-#### func (*GlUniform2i) TypeID
-
-```go
-func (c *GlUniform2i) TypeID() atom.TypeID
-```
-
 #### type GlUniform2iv
 
 ```go
@@ -22328,12 +21242,6 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlUniform2iv) String() string
-```
-
-#### func (*GlUniform2iv) TypeID
-
-```go
-func (c *GlUniform2iv) TypeID() atom.TypeID
 ```
 
 #### type GlUniform3f
@@ -22417,12 +21325,6 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlUniform3f) String() string
 ```
 
-#### func (*GlUniform3f) TypeID
-
-```go
-func (c *GlUniform3f) TypeID() atom.TypeID
-```
-
 #### type GlUniform3fv
 
 ```go
@@ -22501,12 +21403,6 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlUniform3fv) String() string
-```
-
-#### func (*GlUniform3fv) TypeID
-
-```go
-func (c *GlUniform3fv) TypeID() atom.TypeID
 ```
 
 #### type GlUniform3i
@@ -22590,12 +21486,6 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlUniform3i) String() string
 ```
 
-#### func (*GlUniform3i) TypeID
-
-```go
-func (c *GlUniform3i) TypeID() atom.TypeID
-```
-
 #### type GlUniform3iv
 
 ```go
@@ -22674,12 +21564,6 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlUniform3iv) String() string
-```
-
-#### func (*GlUniform3iv) TypeID
-
-```go
-func (c *GlUniform3iv) TypeID() atom.TypeID
 ```
 
 #### type GlUniform4f
@@ -22764,12 +21648,6 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlUniform4f) String() string
 ```
 
-#### func (*GlUniform4f) TypeID
-
-```go
-func (c *GlUniform4f) TypeID() atom.TypeID
-```
-
 #### type GlUniform4fv
 
 ```go
@@ -22848,12 +21726,6 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlUniform4fv) String() string
-```
-
-#### func (*GlUniform4fv) TypeID
-
-```go
-func (c *GlUniform4fv) TypeID() atom.TypeID
 ```
 
 #### type GlUniform4i
@@ -22938,12 +21810,6 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 func (a *GlUniform4i) String() string
 ```
 
-#### func (*GlUniform4i) TypeID
-
-```go
-func (c *GlUniform4i) TypeID() atom.TypeID
-```
-
 #### type GlUniform4iv
 
 ```go
@@ -23022,12 +21888,6 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 
 ```go
 func (a *GlUniform4iv) String() string
-```
-
-#### func (*GlUniform4iv) TypeID
-
-```go
-func (c *GlUniform4iv) TypeID() atom.TypeID
 ```
 
 #### type GlUniformBlockBinding
@@ -23110,12 +21970,6 @@ func (ϟa *GlUniformBlockBinding) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 
 ```go
 func (a *GlUniformBlockBinding) String() string
-```
-
-#### func (*GlUniformBlockBinding) TypeID
-
-```go
-func (c *GlUniformBlockBinding) TypeID() atom.TypeID
 ```
 
 #### type GlUniformMatrix2fv
@@ -23201,12 +22055,6 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlUniformMatrix2fv) String() string
 ```
 
-#### func (*GlUniformMatrix2fv) TypeID
-
-```go
-func (c *GlUniformMatrix2fv) TypeID() atom.TypeID
-```
-
 #### type GlUniformMatrix3fv
 
 ```go
@@ -23288,12 +22136,6 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 
 ```go
 func (a *GlUniformMatrix3fv) String() string
-```
-
-#### func (*GlUniformMatrix3fv) TypeID
-
-```go
-func (c *GlUniformMatrix3fv) TypeID() atom.TypeID
 ```
 
 #### type GlUniformMatrix4fv
@@ -23379,12 +22221,6 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *GlUniformMatrix4fv) String() string
 ```
 
-#### func (*GlUniformMatrix4fv) TypeID
-
-```go
-func (c *GlUniformMatrix4fv) TypeID() atom.TypeID
-```
-
 #### type GlUnmapBuffer
 
 ```go
@@ -23461,12 +22297,6 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *GlUnmapBuffer) String() string
-```
-
-#### func (*GlUnmapBuffer) TypeID
-
-```go
-func (c *GlUnmapBuffer) TypeID() atom.TypeID
 ```
 
 #### type GlUseProgram
@@ -23547,12 +22377,6 @@ func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (a *GlUseProgram) String() string
 ```
 
-#### func (*GlUseProgram) TypeID
-
-```go
-func (c *GlUseProgram) TypeID() atom.TypeID
-```
-
 #### type GlValidateProgram
 
 ```go
@@ -23629,12 +22453,6 @@ func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlValidateProgram) String() string
-```
-
-#### func (*GlValidateProgram) TypeID
-
-```go
-func (c *GlValidateProgram) TypeID() atom.TypeID
 ```
 
 #### type GlVertexAttrib1f
@@ -23716,12 +22534,6 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlVertexAttrib1f) String() string
 ```
 
-#### func (*GlVertexAttrib1f) TypeID
-
-```go
-func (c *GlVertexAttrib1f) TypeID() atom.TypeID
-```
-
 #### type GlVertexAttrib1fv
 
 ```go
@@ -23799,12 +22611,6 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlVertexAttrib1fv) String() string
-```
-
-#### func (*GlVertexAttrib1fv) TypeID
-
-```go
-func (c *GlVertexAttrib1fv) TypeID() atom.TypeID
 ```
 
 #### type GlVertexAttrib2f
@@ -23887,12 +22693,6 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlVertexAttrib2f) String() string
 ```
 
-#### func (*GlVertexAttrib2f) TypeID
-
-```go
-func (c *GlVertexAttrib2f) TypeID() atom.TypeID
-```
-
 #### type GlVertexAttrib2fv
 
 ```go
@@ -23970,12 +22770,6 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlVertexAttrib2fv) String() string
-```
-
-#### func (*GlVertexAttrib2fv) TypeID
-
-```go
-func (c *GlVertexAttrib2fv) TypeID() atom.TypeID
 ```
 
 #### type GlVertexAttrib3f
@@ -24059,12 +22853,6 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlVertexAttrib3f) String() string
 ```
 
-#### func (*GlVertexAttrib3f) TypeID
-
-```go
-func (c *GlVertexAttrib3f) TypeID() atom.TypeID
-```
-
 #### type GlVertexAttrib3fv
 
 ```go
@@ -24142,12 +22930,6 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlVertexAttrib3fv) String() string
-```
-
-#### func (*GlVertexAttrib3fv) TypeID
-
-```go
-func (c *GlVertexAttrib3fv) TypeID() atom.TypeID
 ```
 
 #### type GlVertexAttrib4f
@@ -24232,12 +23014,6 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *GlVertexAttrib4f) String() string
 ```
 
-#### func (*GlVertexAttrib4f) TypeID
-
-```go
-func (c *GlVertexAttrib4f) TypeID() atom.TypeID
-```
-
 #### type GlVertexAttrib4fv
 
 ```go
@@ -24315,12 +23091,6 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 
 ```go
 func (a *GlVertexAttrib4fv) String() string
-```
-
-#### func (*GlVertexAttrib4fv) TypeID
-
-```go
-func (c *GlVertexAttrib4fv) TypeID() atom.TypeID
 ```
 
 #### type GlVertexAttribPointer
@@ -24408,12 +23178,6 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (a *GlVertexAttribPointer) String() string
 ```
 
-#### func (*GlVertexAttribPointer) TypeID
-
-```go
-func (c *GlVertexAttribPointer) TypeID() atom.TypeID
-```
-
 #### type GlViewport
 
 ```go
@@ -24493,12 +23257,6 @@ func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *GlViewport) String() string
-```
-
-#### func (*GlViewport) TypeID
-
-```go
-func (c *GlViewport) TypeID() atom.TypeID
 ```
 
 #### type GlWaitSync
@@ -24581,12 +23339,6 @@ func (ϟa *GlWaitSync) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *GlWaitSync) String() string
 ```
 
-#### func (*GlWaitSync) TypeID
-
-```go
-func (c *GlWaitSync) TypeID() atom.TypeID
-```
-
 #### type GlXCreateContext
 
 ```go
@@ -24667,12 +23419,6 @@ func (ω *GlXCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 
 ```go
 func (a *GlXCreateContext) String() string
-```
-
-#### func (*GlXCreateContext) TypeID
-
-```go
-func (c *GlXCreateContext) TypeID() atom.TypeID
 ```
 
 #### type GlXCreateNewContext
@@ -24760,12 +23506,6 @@ func (ω *GlXCreateNewContext) Replay(i atom.ID, s *gfxapi.State, d database.Dat
 func (a *GlXCreateNewContext) String() string
 ```
 
-#### func (*GlXCreateNewContext) TypeID
-
-```go
-func (c *GlXCreateNewContext) TypeID() atom.TypeID
-```
-
 #### type GlXMakeContextCurrent
 
 ```go
@@ -24850,12 +23590,6 @@ func (ω *GlXMakeContextCurrent) Replay(i atom.ID, s *gfxapi.State, d database.D
 func (a *GlXMakeContextCurrent) String() string
 ```
 
-#### func (*GlXMakeContextCurrent) TypeID
-
-```go
-func (c *GlXMakeContextCurrent) TypeID() atom.TypeID
-```
-
 #### type GlXMakeCurrent
 
 ```go
@@ -24929,12 +23663,6 @@ func (a *GlXMakeCurrent) Observations() *atom.Observations
 
 ```go
 func (a *GlXMakeCurrent) String() string
-```
-
-#### func (*GlXMakeCurrent) TypeID
-
-```go
-func (c *GlXMakeCurrent) TypeID() atom.TypeID
 ```
 
 #### type GlXQueryDrawable
@@ -25013,12 +23741,6 @@ func (a *GlXQueryDrawable) Observations() *atom.Observations
 func (a *GlXQueryDrawable) String() string
 ```
 
-#### func (*GlXQueryDrawable) TypeID
-
-```go
-func (c *GlXQueryDrawable) TypeID() atom.TypeID
-```
-
 #### type GlXSwapBuffers
 
 ```go
@@ -25090,12 +23812,6 @@ func (a *GlXSwapBuffers) Observations() *atom.Observations
 
 ```go
 func (a *GlXSwapBuffers) String() string
-```
-
-#### func (*GlXSwapBuffers) TypeID
-
-```go
-func (c *GlXSwapBuffers) TypeID() atom.TypeID
 ```
 
 #### type Globals
@@ -27800,12 +26516,6 @@ func (ϟa *ReplayBindRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *ReplayBindRenderer) String() string
 ```
 
-#### func (*ReplayBindRenderer) TypeID
-
-```go
-func (c *ReplayBindRenderer) TypeID() atom.TypeID
-```
-
 #### type ReplayCreateRenderer
 
 ```go
@@ -27884,12 +26594,6 @@ func (ϟa *ReplayCreateRenderer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 
 ```go
 func (a *ReplayCreateRenderer) String() string
-```
-
-#### func (*ReplayCreateRenderer) TypeID
-
-```go
-func (c *ReplayCreateRenderer) TypeID() atom.TypeID
 ```
 
 #### type ResetStatus
@@ -29442,12 +28146,6 @@ func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *StartTimer) String() string
 ```
 
-#### func (*StartTimer) TypeID
-
-```go
-func (c *StartTimer) TypeID() atom.TypeID
-```
-
 #### type State
 
 ```go
@@ -29667,12 +28365,6 @@ func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *StopTimer) String() string
-```
-
-#### func (*StopTimer) TypeID
-
-```go
-func (c *StopTimer) TypeID() atom.TypeID
 ```
 
 #### type StringConstant
@@ -33643,12 +32335,6 @@ func (ω *WglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 func (a *WglCreateContext) String() string
 ```
 
-#### func (*WglCreateContext) TypeID
-
-```go
-func (c *WglCreateContext) TypeID() atom.TypeID
-```
-
 #### type WglCreateContextAttribsARB
 
 ```go
@@ -33732,12 +32418,6 @@ func (ω *WglCreateContextAttribsARB) Replay(i atom.ID, s *gfxapi.State, d datab
 func (a *WglCreateContextAttribsARB) String() string
 ```
 
-#### func (*WglCreateContextAttribsARB) TypeID
-
-```go
-func (c *WglCreateContextAttribsARB) TypeID() atom.TypeID
-```
-
 #### type WglMakeCurrent
 
 ```go
@@ -33818,12 +32498,6 @@ func (ω *WglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database
 func (a *WglMakeCurrent) String() string
 ```
 
-#### func (*WglMakeCurrent) TypeID
-
-```go
-func (c *WglMakeCurrent) TypeID() atom.TypeID
-```
-
 #### type WglSwapBuffers
 
 ```go
@@ -33894,10 +32568,4 @@ func (a *WglSwapBuffers) Observations() *atom.Observations
 
 ```go
 func (a *WglSwapBuffers) String() string
-```
-
-#### func (*WglSwapBuffers) TypeID
-
-```go
-func (c *WglSwapBuffers) TypeID() atom.TypeID
 ```

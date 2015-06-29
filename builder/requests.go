@@ -67,7 +67,6 @@ type ReplaceAtom struct {
 	binary.Generate
 	Capture service.CaptureId
 	Atom    atom.ID
-	Type    atom.TypeID
 	Data    service.Binary
 }
 
