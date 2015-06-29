@@ -174,10 +174,10 @@ func (c *ApplicationContext) UpdateSchema() {
 	go func() {
 		classes, err := c.rpc.GetSchema(c.logger)
 		if err != nil {
-			log.Errorf(c.logger,"Error resolving schema: %v", err)
+			log.Errorf(c.logger, "Error resolving schema: %v", err)
 			return
 		}
-		log.Infof(c.logger,"Schema with %d classes", len(classes))
+		log.Infof(c.logger, "Schema with %d classes", len(classes))
 		for _, class := range classes {
 			c.schemaNamespace.Add(class)
 		}
@@ -190,7 +190,7 @@ func (c *ApplicationContext) Run(f func()) {
 
 func (c *ApplicationContext) SelectAtom(id atom.ID) {
 	if c.selectedAtomID != id {
-		log.Infof(c.logger,"SelectAtom(%v)", id)
+		log.Infof(c.logger, "SelectAtom(%v)", id)
 		c.selectedAtomID = id
 		c.onAtomSelected.Fire()
 	}
@@ -198,7 +198,7 @@ func (c *ApplicationContext) SelectAtom(id atom.ID) {
 
 func (c *ApplicationContext) SelectAddress(address memory.Pointer) {
 	if c.selectedAddress != address {
-		log.Infof(c.logger,"SelectAddress(%v)", address)
+		log.Infof(c.logger, "SelectAddress(%v)", address)
 		c.selectedAddress = address
 		c.onAddressSelected.Fire()
 	}
@@ -206,7 +206,7 @@ func (c *ApplicationContext) SelectAddress(address memory.Pointer) {
 
 func (c *ApplicationContext) SelectObject(object interface{}) {
 	if c.selectedObject != object {
-		log.Infof(c.logger,"SelectObject(%v)", object)
+		log.Infof(c.logger, "SelectObject(%v)", object)
 		c.selectedObject = object
 		c.onObjectSelected.Fire()
 	}
@@ -214,7 +214,7 @@ func (c *ApplicationContext) SelectObject(object interface{}) {
 
 func (c *ApplicationContext) SelectDevice(device service.DeviceId) {
 	if c.selectedDevice != device {
-		log.Infof(c.logger,"SelectDevice(%v)", device)
+		log.Infof(c.logger, "SelectDevice(%v)", device)
 		c.selectedDevice = device
 		c.onDeviceSelected.Fire()
 	}
@@ -222,7 +222,7 @@ func (c *ApplicationContext) SelectDevice(device service.DeviceId) {
 
 func (c *ApplicationContext) SetWireframe(value bool) {
 	if c.wireframe != value {
-		log.Infof(c.logger,"SetWireframe(%v)", value)
+		log.Infof(c.logger, "SetWireframe(%v)", value)
 		c.wireframe = value
 		c.onWireframeChanged.Fire()
 	}
@@ -234,26 +234,26 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 	}
 
 	l := c.logger.Fork().Enter("LoadCapture")
-	log.Infof(l,"(capture: %v)", captureID)
+	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
 		var err error
 
 		capture, err := c.rpc.ResolveCapture(captureID, l)
 		if err != nil {
-			log.Errorf(l,"Error resolving capture: %v", err)
+			log.Errorf(l, "Error resolving capture: %v", err)
 			return
 		}
 
 		atoms, err := c.rpc.ResolveAtomStream(capture.Atoms, l)
 		if err != nil {
-			log.Errorf(l,"Error resolving capture: %v", err)
+			log.Errorf(l, "Error resolving capture: %v", err)
 			return
 		}
 
 		s, err := c.rpc.ResolveSchema(capture.Schema, l)
 		if err != nil {
-			log.Errorf(l,"Error resolving capture: %v", err)
+			log.Errorf(l, "Error resolving capture: %v", err)
 			return
 		}
 
@@ -273,7 +273,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			}
 			c.onAtomsUpdated.Fire()
 			c.RequestReplay()
-			log.Infof(l,"Capture '%s' loaded: %d atoms", c.capture.GetName(), len(atoms))
+			log.Infof(l, "Capture '%s' loaded: %d atoms", c.capture.GetName(), len(atoms))
 		})
 	}()
 }
@@ -281,7 +281,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 func (c *ApplicationContext) LoadHierarchy() {
 	captureID := c.captureID
 	l := c.logger.Fork().Enter("LoadHierarchy")
-	log.Infof(l,"(capture: %v)", captureID)
+	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
 		hierarchy, err := c.rpc.GetHierarchy(captureID, l)
@@ -296,7 +296,7 @@ func (c *ApplicationContext) LoadHierarchy() {
 			c.hierarchy = atom.Group{}
 			root.Root.Unpack(&c.hierarchy)
 			c.onHierarchyUpdated.Fire()
-			log.Infof(l,"Hierarchy loaded")
+			log.Infof(l, "Hierarchy loaded")
 		})
 	}()
 }
@@ -304,7 +304,7 @@ func (c *ApplicationContext) LoadHierarchy() {
 func (c *ApplicationContext) LoadReport() {
 	captureID := c.captureID
 	l := c.logger.Fork().Enter("LoadReport")
-	log.Infof(l,"(capture: %v)", captureID)
+	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
 		report, err := c.rpc.ResolveReport(c.capture.Report, l)
@@ -314,7 +314,7 @@ func (c *ApplicationContext) LoadReport() {
 		c.Run(func() {
 			c.report = report
 			c.onReportUpdated.Fire()
-			log.Infof(l,"Report loaded")
+			log.Infof(l, "Report loaded")
 		})
 	}()
 }
@@ -368,7 +368,7 @@ func isClosed(c <-chan struct{}) bool {
 
 func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight uint32, callback ImageCallback) chan<- struct{} {
 	l := c.logger.Fork().Enter("RequestThumbnail")
-	log.Infof(l,"(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
+	log.Infof(l, "(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
 
 	cancel := make(chan struct{})
 	device := c.selectedDevice
@@ -380,7 +380,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 	}
 
 	if !device.Valid() {
-		log.Warningf(l,"No device selected")
+		log.Warningf(l, "No device selected")
 		return nil
 	}
 
@@ -392,7 +392,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 			return
 		}
 		if isClosed(cancel) {
-			log.Infof(l,"Request cancelled")
+			log.Infof(l, "Request cancelled")
 			return
 		}
 
@@ -401,21 +401,21 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 			return
 		}
 		if isClosed(cancel) {
-			log.Infof(l,"Request cancelled")
+			log.Infof(l, "Request cancelled")
 			return
 		}
 
-		log.Infof(l,"Image info resolved")
+		log.Infof(l, "Image info resolved")
 		imageData, err := c.rpc.ResolveBinary(imageInfo.Data, l)
 		if err != nil {
 			return
 		}
 		if isClosed(cancel) {
-			log.Infof(l,"Request cancelled")
+			log.Infof(l, "Request cancelled")
 			return
 		}
 
-		log.Infof(l,"Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
+		log.Infof(l, "Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
 		if imageInfo.Width > 0 && imageInfo.Height > 0 {
 			img := image.NewRGBA(image.Rect(0, 0, int(imageInfo.Width), int(imageInfo.Height)))
 			img.Pix = []byte(imageData.Data)
@@ -434,7 +434,7 @@ type MemoryCallback func(service.MemoryInfo)
 
 func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, size uint64, callback MemoryCallback) chan<- struct{} {
 	l := c.logger.Fork().Enter("RequestMemory")
-	log.Infof(l,"(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
+	log.Infof(l, "(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
 
 	cancel := make(chan struct{})
 	captureID := c.captureID
@@ -446,7 +446,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, s
 				return
 			}
 			if isClosed(cancel) {
-				log.Infof(l,"Request cancelled")
+				log.Infof(l, "Request cancelled")
 				return
 			}
 
@@ -455,7 +455,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, s
 				return
 			}
 			if isClosed(cancel) {
-				log.Infof(l,"Request cancelled")
+				log.Infof(l, "Request cancelled")
 				return
 			}
 
