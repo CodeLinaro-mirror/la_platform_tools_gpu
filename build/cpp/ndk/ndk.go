@@ -23,6 +23,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
@@ -252,13 +253,8 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	log := func(msg string, args ...interface{}) {}
-	if env.Verbose {
-		log = env.Logger.Infof
-	}
-
 	// Create an intermediate directory to hold the files going into the apk.
-	log("Creating APK files")
+	log.Debugf(env.Logger, "Creating APK files")
 	root := build.File(cpp.IntermediatePath(output, "", cfg, env).Dir())
 
 	// Emit the intermetiate files and .so:
@@ -286,7 +282,7 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	unaligned := root.Join(cfg.Name + "-unaligned.apk")
 
 	// Build the apk, unsigned. This pulls in AndroidManifest.xml and strings.xml
-	log("Building unsigned APK")
+	log.Debugf(env.Logger, "Building unsigned APK")
 	if err := paths.AAPT.Exec(env,
 		"package", "-v", "-f",
 		"-M", manifest.Absolute(),
@@ -296,13 +292,13 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	log("Adding .so to APK")
+	log.Debugf(env.Logger, "Adding .so to APK")
 	if err := paths.AAPT.ExecAt(env, root,
 		"add", "-f", unaligned.Absolute(), so.RelativeTo(root)); err != nil {
 		return err
 	}
 
-	log("Signing APK")
+	log.Debugf(env.Logger, "Signing APK")
 	if err := paths.Jarsigner.Exec(env,
 		"-verbose",
 		"-keystore", env.Keystore.Absolute(),
@@ -312,14 +308,14 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	log("Zip-aligning APK")
+	log.Debugf(env.Logger, "Zip-aligning APK")
 	if err := paths.Zipalign.Exec(env,
 		"-v", "-f", "4",
 		unaligned.Absolute(), output.Absolute()); err != nil {
 		return err
 	}
 
-	log("Done")
+	log.Debugf(env.Logger, "Done")
 	return nil
 }
 

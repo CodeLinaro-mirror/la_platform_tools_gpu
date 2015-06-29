@@ -103,7 +103,7 @@ func run(targetNames []string, logger log.Logger) int {
 			for t := range buildTargets {
 				available = append(available, t)
 			}
-			logger.Errorf("Unknown target '%s'. Available targets: %v", targetName, available)
+			log.Errorf(logger, "Unknown target '%s'. Available targets: %v", targetName, available)
 			return 1
 		}
 	}

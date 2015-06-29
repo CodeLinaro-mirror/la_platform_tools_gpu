@@ -35,8 +35,8 @@ func TestLogAdapterAddNoOverflow(t *testing.T) {
 	l := CreateLogAdapter(10, callOnUI)
 	test.AssertEquals(t, 0, l.Count())
 
-	l.Logger().Infof("I %v", 0)
-	l.Logger().Warningf("W %v", 1)
+	log.Infof(l.Logger(),"I %v", 0)
+	log.Warningf(l.Logger(),"W %v", 1)
 	l.Logger().Errorf("E %v", 2)
 	l.Logger().Flush()
 
@@ -54,8 +54,8 @@ func TestLogAdapterAddNoOverflow(t *testing.T) {
 
 func TestLogAdapterClearThenAddNoOverflow(t *testing.T) {
 	l := CreateLogAdapter(10, callOnUI)
-	l.Logger().Infof("OLD I")
-	l.Logger().Warningf("OLD W")
+	log.Infof(l.Logger(),"OLD I")
+	log.Warningf(l.Logger(),"OLD W")
 	l.Logger().Errorf("OLD E")
 	l.Logger().Flush()
 
@@ -63,8 +63,8 @@ func TestLogAdapterClearThenAddNoOverflow(t *testing.T) {
 
 	test.AssertEquals(t, 0, l.Count())
 
-	l.Logger().Infof("I %v", 0)
-	l.Logger().Warningf("W %v", 1)
+	log.Infof(l.Logger(),"I %v", 0)
+	log.Warningf(l.Logger(),"W %v", 1)
 	l.Logger().Errorf("E %v", 2)
 	l.Logger().Flush()
 
@@ -75,14 +75,14 @@ func TestLogAdapterClearThenAddNoOverflow(t *testing.T) {
 
 func TestLogAdapterAddOverflow(t *testing.T) {
 	l := CreateLogAdapter(5, callOnUI)
-	l.Logger().Infof("I %v", 0)
-	l.Logger().Warningf("W %v", 1)
+	log.Infof(l.Logger(),"I %v", 0)
+	log.Warningf(l.Logger(),"W %v", 1)
 	l.Logger().Errorf("E %v", 2)
-	l.Logger().Infof("I %v", 3)
-	l.Logger().Warningf("W %v", 4)
+	log.Infof(l.Logger(),"I %v", 3)
+	log.Warningf(l.Logger(),"W %v", 4)
 	l.Logger().Errorf("E %v", 5)
-	l.Logger().Infof("I %v", 6)
-	l.Logger().Warningf("W %v", 7)
+	log.Infof(l.Logger(),"I %v", 6)
+	log.Warningf(l.Logger(),"W %v", 7)
 	l.Logger().Errorf("E %v", 8)
 	l.Logger().Flush()
 
@@ -107,11 +107,11 @@ func TestLogAdapterAddOverflow(t *testing.T) {
 func TestLogAdapterClearThenTestAddOverflow(t *testing.T) {
 	l := CreateLogAdapter(5, callOnUI)
 
-	l.Logger().Infof("OLD I")
-	l.Logger().Warningf("OLD W")
+	log.Infof(l.Logger(),"OLD I")
+	log.Warningf(l.Logger(),"OLD W")
 	l.Logger().Errorf("OLD E")
-	l.Logger().Infof("OLD I")
-	l.Logger().Warningf("OLD W")
+	log.Infof(l.Logger(),"OLD I")
+	log.Warningf(l.Logger(),"OLD W")
 	l.Logger().Errorf("OLD E")
 	l.Logger().Flush()
 
@@ -119,14 +119,14 @@ func TestLogAdapterClearThenTestAddOverflow(t *testing.T) {
 
 	test.AssertEquals(t, 0, l.Count())
 
-	l.Logger().Infof("I %v", 0)
-	l.Logger().Warningf("W %v", 1)
+	log.Infof(l.Logger(),"I %v", 0)
+	log.Warningf(l.Logger(),"W %v", 1)
 	l.Logger().Errorf("E %v", 2)
-	l.Logger().Infof("I %v", 3)
-	l.Logger().Warningf("W %v", 4)
+	log.Infof(l.Logger(),"I %v", 3)
+	log.Warningf(l.Logger(),"W %v", 4)
 	l.Logger().Errorf("E %v", 5)
-	l.Logger().Infof("I %v", 6)
-	l.Logger().Warningf("W %v", 7)
+	log.Infof(l.Logger(),"I %v", 6)
+	log.Warningf(l.Logger(),"W %v", 7)
 	l.Logger().Errorf("E %v", 8)
 	l.Logger().Flush()
 

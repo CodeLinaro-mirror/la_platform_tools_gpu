@@ -78,7 +78,7 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 
 	img := <-query.QueryDepthBuffer(ctx, mgr, r.After)
 	if img.Error != nil {
-		l.Errorf("%v", img.Error)
+		log.Errorf(l, "%v", img.Error)
 		return nil, img.Error
 	}
 

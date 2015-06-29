@@ -234,19 +234,19 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 			count, err := gapii.Capture(statusLogger, *spyport, buf, stop)
 			if count > 0 {
 				data := buf.Bytes()
-				statusLogger.Infof("Importing...")
+				log.Infof(statusLogger,"Importing...")
 				id, err := appCtx.Rpc().Import(name.Text(), data, appCtx.Logger())
 				if err != nil {
 					panic(err)
 				}
 
-				statusLogger.Infof("Loading...")
+				log.Infof(statusLogger,"Loading...")
 				appCtx.LoadCapture(id, true)
 
 				theme.Driver().Call(window.Close)
 			} else {
 				if err != nil {
-					statusLogger.Errorf("%T %s", err, err.Error())
+					log.Errorf(statusLogger,"%T %s", err, err.Error())
 				}
 				theme.Driver().Call(func() {
 					button.SetText("Close")
@@ -278,19 +278,19 @@ func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Log
 		usr, _ := user.Current()
 		path = filepath.Join(usr.HomeDir, path[2:])
 	}
-	statusLogger.Infof("Loading %s", path)
+	log.Infof(statusLogger,"Loading %s", path)
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		statusLogger.Infof("Failed opening file %s: %s", path, err)
+		log.Infof(statusLogger,"Failed opening file %s: %s", path, err)
 	} else if len(data) == 0 {
-		statusLogger.Infof("Zero size file %s", path)
+		log.Infof(statusLogger,"Zero size file %s", path)
 	} else {
-		statusLogger.Infof("Importing...")
+		log.Infof(statusLogger,"Importing...")
 		id, err := appCtx.Rpc().Import(path, data, appCtx.Logger())
 		if err != nil {
 			panic(err)
 		}
-		statusLogger.Infof("Loading...")
+		log.Infof(statusLogger,"Loading...")
 		appCtx.LoadCapture(id, true)
 	}
 }

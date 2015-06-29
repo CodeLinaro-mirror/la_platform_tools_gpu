@@ -241,13 +241,13 @@ func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d datab
 	for i, a := range atoms {
 		id = atom.ID(i)
 		if err := a.Mutate(s, d, l); err != nil {
-			l.Warningf("Atom %d %v: %v", i, a, err)
+			log.Warningf(l, "Atom %d %v: %v", i, a, err)
 		}
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
 			api := a.API()
 			width, height, err := api.GetFramebufferAttachmentSize(s, gfxapi.FramebufferAttachmentColor)
 			if err != nil {
-				l.Warningf("GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
+				log.Warningf(l, "GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {

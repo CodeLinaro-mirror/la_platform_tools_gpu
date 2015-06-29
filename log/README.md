@@ -142,17 +142,6 @@ Interface declares the methods for an object that accepts logging messages.
 ```go
 type Logger interface {
 	Interface
-	// Info writes an information message to the logger. These message types are intented to be used
-	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
-	Infof(msg string, args ...interface{})
-
-	// Warning writes a warning message to the logger. This is intented to be used for unexpected but
-	// non-critical events. Arguments are handled in the manner of fmt.Printf.
-	Warningf(msg string, args ...interface{})
-
-	// Error writes an error message to the logger. This is intented to be used for unexpected and
-	// critical error events. Arguments are handled in the manner of fmt.Printf.
-	Errorf(msg string, args ...interface{})
 
 	// Enter creates a new logger scoped within the existing logger. This can be used to produce
 	// hierarchical log messages.
@@ -234,13 +223,6 @@ func (Nop) Enter(name string) Logger
 ```
 Enter returns the same Nop implementation of Logger
 
-#### func (Nop) Errorf
-
-```go
-func (Nop) Errorf(msg string, args ...interface{})
-```
-Error does nothing
-
 #### func (Nop) Flush
 
 ```go
@@ -255,26 +237,12 @@ func (Nop) Fork() Logger
 ```
 Fork returns the same Nop implementation of Logger
 
-#### func (Nop) Infof
-
-```go
-func (Nop) Infof(msg string, args ...interface{})
-```
-Info does nothing
-
 #### func (Nop) Log
 
 ```go
 func (Nop) Log(s Severity, msg string, args ...interface{})
 ```
 Log does nothing
-
-#### func (Nop) Warningf
-
-```go
-func (Nop) Warningf(msg string, args ...interface{})
-```
-Warning does nothing
 
 #### type Severity
 
@@ -349,13 +317,6 @@ func (s *Splitter) Enter(name string) Logger
 ```
 Enter will call Enter with the same argument on all logs passed to Add.
 
-#### func (*Splitter) Errorf
-
-```go
-func (s *Splitter) Errorf(msg string, args ...interface{})
-```
-Error will call Error with the same arguments on all logs passed to Add.
-
 #### func (*Splitter) Flush
 
 ```go
@@ -370,23 +331,9 @@ func (s *Splitter) Fork() Logger
 ```
 Fork will call Fork on all logs passed to Add.
 
-#### func (*Splitter) Infof
-
-```go
-func (s *Splitter) Infof(msg string, args ...interface{})
-```
-Info will call Info with the same arguments on all logs passed to Add.
-
 #### func (*Splitter) Log
 
 ```go
 func (s *Splitter) Log(severity Severity, msg string, args ...interface{})
 ```
 Logf will call Logf with the same arguments on all logs passed to Add.
-
-#### func (*Splitter) Warningf
-
-```go
-func (s *Splitter) Warningf(msg string, args ...interface{})
-```
-Warning will call Warning with the same arguments on all logs passed to Add.
