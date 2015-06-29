@@ -90,8 +90,8 @@ func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callReplaceAtom) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ReplaceAtom(capture: %v, atomId: %v, atomType: %v, data: %v)",
-		c.capture, c.atomId, c.atomType, c.data,
+	fmt.Fprintf(f, "ReplaceAtom(capture: %v, atomId: %v, data: %v)",
+		c.capture, c.atomId, c.data,
 	)
 }
 func (r resultReplaceAtom) Format(f fmt.State, c rune) {

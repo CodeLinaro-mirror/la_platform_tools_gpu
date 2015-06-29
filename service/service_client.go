@@ -131,9 +131,9 @@ func (c client) PrerenderFramebuffers(device DeviceId, capture CaptureId, api Ap
 	return
 }
 
-func (c client) ReplaceAtom(capture CaptureId, atomId uint64, atomType uint16, data Binary, l log.Logger) (res CaptureId, err error) {
+func (c client) ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (res CaptureId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callReplaceAtom{capture: capture, atomId: atomId, atomType: atomType, data: data}); err == nil {
+	if val, err = c.Send(&callReplaceAtom{capture: capture, atomId: atomId, data: data}); err == nil {
 		res = val.(*resultReplaceAtom).value
 	} else {
 		log.Errorf(l, "RPC ReplaceAtom failed with error: %v", err)

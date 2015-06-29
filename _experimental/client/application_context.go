@@ -478,7 +478,7 @@ func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID) {
 	b := service.Binary{
 		Data: buf.Bytes(),
 	}
-	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a.info.Type, b, l)
+	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), b, l)
 	if err != nil {
 		panic(err)
 	}
