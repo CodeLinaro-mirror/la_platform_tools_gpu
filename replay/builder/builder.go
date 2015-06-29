@@ -438,7 +438,7 @@ func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
 	logger = logger.Enter("Build")
 	if config.DebugReplayBuilder {
-		logger.Infof("Instruction count: %d", len(b.instructions))
+		log.Infof(logger, "Instruction count: %d", len(b.instructions))
 	}
 
 	vml := b.layoutVolatileMemory(logger)
@@ -467,11 +467,11 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 	}
 
 	if config.DebugReplayBuilder {
-		logger.Infof("Stack size:           0x%x", payload.StackSize)
-		logger.Infof("Volatile memory size: 0x%x", payload.VolatileMemorySize)
-		logger.Infof("Constant memory size: 0x%x", len(payload.Constants))
-		logger.Infof("Opcodes size:         0x%x", len(payload.Opcodes))
-		logger.Infof("Resource count:         %d", len(payload.Resources))
+		log.Infof(logger, "Stack size:           0x%x", payload.StackSize)
+		log.Infof(logger, "Volatile memory size: 0x%x", payload.VolatileMemorySize)
+		log.Infof(logger, "Constant memory size: 0x%x", len(payload.Constants))
+		log.Infof(logger, "Opcodes size:         0x%x", len(payload.Opcodes))
+		log.Infof(logger, "Resource count:         %d", len(payload.Resources))
 	}
 
 	// TODO: check that each Postback consumes its expected number of bytes.
@@ -524,12 +524,12 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 	}
 
 	if config.DebugReplayBuilder {
-		logger.Infof("Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
-		logger.Infof("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-		logger.Infof("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
-		logger.Infof("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
+		log.Infof(logger, "Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
+		log.Infof(logger, "  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
+		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
+		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
 		for _, m := range b.mappedMemory {
-			logger.Infof("    Block:   %v", m)
+			log.Infof(logger, "    Block:   %v", m)
 		}
 	}
 

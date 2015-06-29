@@ -67,13 +67,13 @@ func run() error {
 	default:
 		return fmt.Errorf("Failed to restart ADB as root: %v", err)
 	}
-	logger.Infof("Device is rooted")
+	log.Infof(logger, "Device is rooted")
 	a, err := getAction(logger, d, *activity)
 	if err != nil {
 		return err
 	}
 
-	logger.Infof("Creating file %s", *output)
+	log.Infof(logger, "Creating file %s", *output)
 	os.MkdirAll(filepath.Dir(*output), 0755)
 	file, err := os.Create(*output)
 	if err != nil {
@@ -107,9 +107,9 @@ func getDevice(logger log.Logger, pattern string) (*adb.Device, error) {
 		return nil, fmt.Errorf("No devices found")
 	}
 	if *verbose {
-		logger.Infof("Device list:")
+		log.Infof(logger, "Device list:")
 		for _, test := range devices {
-			logger.Infof("    %s", test.Serial)
+			log.Infof(logger, "    %s", test.Serial)
 		}
 	}
 	matchingDevices := []*adb.Device{}
@@ -133,7 +133,7 @@ func getDevice(logger log.Logger, pattern string) (*adb.Device, error) {
 		}
 		return nil, fmt.Errorf("Multiple devices matching %q found", pattern)
 	}
-	logger.Infof("Tracing on %s", matchingDevices[0])
+	log.Infof(logger, "Tracing on %s", matchingDevices[0])
 	return matchingDevices[0], nil
 }
 
@@ -164,7 +164,7 @@ func getAction(logger log.Logger, d *adb.Device, pattern string) (*adb.Action, e
 		}
 		return nil, fmt.Errorf("Multiple actions matching %q found", pattern)
 	}
-	logger.Infof("Action %s", matchingActions[0])
+	log.Infof(logger, "Action %s", matchingActions[0])
 	return matchingActions[0], nil
 }
 

@@ -82,7 +82,7 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 
 	img := <-query.QueryColorBuffer(ctx, mgr, r.After, r.Width, r.Height, r.Wireframe)
 	if img.Error != nil {
-		l.Errorf("%v", img.Error)
+		log.Errorf(l, "%v", img.Error)
 		return nil, img.Error
 	}
 

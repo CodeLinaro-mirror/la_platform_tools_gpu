@@ -18,15 +18,6 @@ package log
 // Enter and Fork both return Nops.
 type Nop struct{}
 
-// Info does nothing
-func (Nop) Infof(msg string, args ...interface{}) {}
-
-// Warning does nothing
-func (Nop) Warningf(msg string, args ...interface{}) {}
-
-// Error does nothing
-func (Nop) Errorf(msg string, args ...interface{}) {}
-
 // Log does nothing
 func (Nop) Log(s Severity, msg string, args ...interface{}) {}
 

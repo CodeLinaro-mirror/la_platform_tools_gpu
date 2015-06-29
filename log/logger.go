@@ -17,17 +17,6 @@ package log
 // Logger is the interface for types that implement a hierarchical message logger.
 type Logger interface {
 	Interface
-	// Info writes an information message to the logger. These message types are intented to be used
-	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
-	Infof(msg string, args ...interface{})
-
-	// Warning writes a warning message to the logger. This is intented to be used for unexpected but
-	// non-critical events. Arguments are handled in the manner of fmt.Printf.
-	Warningf(msg string, args ...interface{})
-
-	// Error writes an error message to the logger. This is intented to be used for unexpected and
-	// critical error events. Arguments are handled in the manner of fmt.Printf.
-	Errorf(msg string, args ...interface{})
 
 	// Enter creates a new logger scoped within the existing logger. This can be used to produce
 	// hierarchical log messages.

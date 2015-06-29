@@ -23,11 +23,11 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		defer func() {
 			if err := recover(); err == nil {
 				if config.DebugRPCCalls {
-					l.Infof("returned: %v", res)
+					log.Infof(l, "returned: %v", res)
 				}
 			} else {
 				msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-				l.Errorf(msg)
+				log.Errorf(l, msg)
 				res = rpc.NewError(msg)
 			}
 		}()

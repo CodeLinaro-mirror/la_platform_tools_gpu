@@ -26,7 +26,7 @@ func (c client) Add(a uint32, b uint32, l log.Logger) (res uint32, err error) {
 	if val, err = c.Send(&callAdd{a: a, b: b}); err == nil {
 		res = val.(*resultAdd).value
 	} else {
-		l.Errorf("RPC Add failed with error: %v", err)
+		log.Errorf(l, "RPC Add failed with error: %v", err)
 	}
 	return
 }
@@ -36,7 +36,7 @@ func (c client) EnumToString(e Enum, l log.Logger) (res string, err error) {
 	if val, err = c.Send(&callEnumToString{e: e}); err == nil {
 		res = val.(*resultEnumToString).value
 	} else {
-		l.Errorf("RPC EnumToString failed with error: %v", err)
+		log.Errorf(l, "RPC EnumToString failed with error: %v", err)
 	}
 	return
 }
@@ -46,7 +46,7 @@ func (c client) GetStruct(l log.Logger) (res Struct, err error) {
 	if val, err = c.Send(&callGetStruct{}); err == nil {
 		res = val.(*resultGetStruct).value
 	} else {
-		l.Errorf("RPC GetStruct failed with error: %v", err)
+		log.Errorf(l, "RPC GetStruct failed with error: %v", err)
 	}
 	return
 }
@@ -61,7 +61,7 @@ func (c client) GetResource(l log.Logger) (res ResourceId, err error) {
 	if val, err = c.Send(&callGetResource{}); err == nil {
 		res = val.(*resultGetResource).value
 	} else {
-		l.Errorf("RPC GetResource failed with error: %v", err)
+		log.Errorf(l, "RPC GetResource failed with error: %v", err)
 	}
 	return
 }
@@ -76,7 +76,7 @@ func (c client) ResolveResource(r ResourceId, l log.Logger) (res Resource, err e
 	if val, err = c.Send(&callResolveResource{r: r}); err == nil {
 		res = val.(*resultResolveResource).value
 	} else {
-		l.Errorf("RPC ResolveResource failed with error: %v", err)
+		log.Errorf(l, "RPC ResolveResource failed with error: %v", err)
 	}
 	return
 }
@@ -86,7 +86,7 @@ func (c client) GetSingleListNode(l log.Logger) (res *ListNode, err error) {
 	if val, err = c.Send(&callGetSingleListNode{}); err == nil {
 		res = val.(*resultGetSingleListNode).value
 	} else {
-		l.Errorf("RPC GetSingleListNode failed with error: %v", err)
+		log.Errorf(l, "RPC GetSingleListNode failed with error: %v", err)
 	}
 	return
 }
@@ -96,7 +96,7 @@ func (c client) GetListNodeChain(l log.Logger) (res *ListNode, err error) {
 	if val, err = c.Send(&callGetListNodeChain{}); err == nil {
 		res = val.(*resultGetListNodeChain).value
 	} else {
-		l.Errorf("RPC GetListNodeChain failed with error: %v", err)
+		log.Errorf(l, "RPC GetListNodeChain failed with error: %v", err)
 	}
 	return
 }
@@ -106,7 +106,7 @@ func (c client) GetListNodeChainArray(l log.Logger) (res ListNodePtrArray, err e
 	if val, err = c.Send(&callGetListNodeChainArray{}); err == nil {
 		res = val.(*resultGetListNodeChainArray).value
 	} else {
-		l.Errorf("RPC GetListNodeChainArray failed with error: %v", err)
+		log.Errorf(l, "RPC GetListNodeChainArray failed with error: %v", err)
 	}
 	return
 }
@@ -116,7 +116,7 @@ func (c client) GetBase(l log.Logger) (res Base, err error) {
 	if val, err = c.Send(&callGetBase{}); err == nil {
 		res = val.(*resultGetBase).value
 	} else {
-		l.Errorf("RPC GetBase failed with error: %v", err)
+		log.Errorf(l, "RPC GetBase failed with error: %v", err)
 	}
 	return
 }
@@ -126,7 +126,7 @@ func (c client) GetDerived(l log.Logger) (res Base, err error) {
 	if val, err = c.Send(&callGetDerived{}); err == nil {
 		res = val.(*resultGetDerived).value
 	} else {
-		l.Errorf("RPC GetDerived failed with error: %v", err)
+		log.Errorf(l, "RPC GetDerived failed with error: %v", err)
 	}
 	return
 }

@@ -27,7 +27,7 @@ type Trace struct {
 }
 
 func (t Trace) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
-	t.Logger.Infof("%v %#v", id, a, a)
+	log.Infof(t.Logger, "%v %#v", id, a, a)
 	out.Write(id, a)
 }
 
