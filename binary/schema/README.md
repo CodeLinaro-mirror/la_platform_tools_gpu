@@ -74,7 +74,7 @@ type Class struct {
 	Package string    // The package that declared the struct.
 	Name    string    // The simple name of the Object.
 	Display string    // The display name of the Object.
-	Fields  []Field   // Descriptions of the fields of the Object.
+	Fields  FieldList // Descriptions of the fields of the Object.
 }
 ```
 
@@ -160,6 +160,22 @@ func (*Field) Class() binary.Class
 ```go
 func (f Field) Name() string
 ```
+
+#### type FieldList
+
+```go
+type FieldList []Field
+```
+
+FieldList is a slice of fields.
+
+#### func (FieldList) Find
+
+```go
+func (l FieldList) Find(name string) int
+```
+Find searches the field list of the field with the specified name, returning the
+index of the field if found, otherwise -1.
 
 #### type Int16Constant
 
