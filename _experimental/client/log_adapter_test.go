@@ -26,115 +26,122 @@ func callOnUI(f func()) bool {
 	return true
 }
 
-func checkEntry(t *testing.T, expectedMessage string, expectedKind log.Kind, actual log.Entry) {
+func checkEntry(t *testing.T, expectedMessage string, expectedSeverity log.Severity, actual log.Entry) {
 	test.AssertEquals(t, expectedMessage, actual.Message)
-	test.AssertEquals(t, expectedKind, actual.Kind)
+	test.AssertEquals(t, expectedSeverity, actual.Severity)
 }
 
 func TestLogAdapterAddNoOverflow(t *testing.T) {
-	l := CreateLogAdapter(10, callOnUI)
-	test.AssertEquals(t, 0, l.Count())
+	a := CreateLogAdapter(10, callOnUI)
+	l := a.Logger()
 
-	log.Infof(l.Logger(), "I %v", 0)
-	log.Warningf(l.Logger(), "W %v", 1)
-	l.Logger().Errorf("E %v", 2)
-	l.Logger().Flush()
+	test.AssertEquals(t, 0, a.Count())
 
-	test.AssertEquals(t, 3, l.Count())
+	log.Infof(l, "I %v", 0)
+	log.Warningf(l, "W %v", 1)
+	log.Errorf(l, "E %v", 2)
+	l.Flush()
 
-	checkEntry(t, "I 0", log.Info, l.Entry(0))
-	test.AssertEquals(t, 0, l.ItemIndex(0))
+	test.AssertEquals(t, 3, a.Count())
 
-	checkEntry(t, "W 1", log.Warning, l.Entry(1))
-	test.AssertEquals(t, 1, l.ItemIndex(1))
+	checkEntry(t, "I 0", log.Info, a.Entry(0))
+	test.AssertEquals(t, 0, a.ItemIndex(0))
 
-	checkEntry(t, "E 2", log.Error, l.Entry(2))
-	test.AssertEquals(t, 2, l.ItemIndex(2))
+	checkEntry(t, "W 1", log.Warning, a.Entry(1))
+	test.AssertEquals(t, 1, a.ItemIndex(1))
+
+	checkEntry(t, "E 2", log.Error, a.Entry(2))
+	test.AssertEquals(t, 2, a.ItemIndex(2))
 }
 
 func TestLogAdapterClearThenAddNoOverflow(t *testing.T) {
-	l := CreateLogAdapter(10, callOnUI)
-	log.Infof(l.Logger(), "OLD I")
-	log.Warningf(l.Logger(), "OLD W")
-	l.Logger().Errorf("OLD E")
-	l.Logger().Flush()
+	a := CreateLogAdapter(10, callOnUI)
+	l := a.Logger()
 
-	l.Clear()
+	log.Infof(l, "OLD I")
+	log.Warningf(l, "OLD W")
+	log.Errorf(l, "OLD E")
+	l.Flush()
 
-	test.AssertEquals(t, 0, l.Count())
+	a.Clear()
 
-	log.Infof(l.Logger(), "I %v", 0)
-	log.Warningf(l.Logger(), "W %v", 1)
-	l.Logger().Errorf("E %v", 2)
-	l.Logger().Flush()
+	test.AssertEquals(t, 0, a.Count())
 
-	checkEntry(t, "I 0", log.Info, l.Entry(0))
-	checkEntry(t, "W 1", log.Warning, l.Entry(1))
-	checkEntry(t, "E 2", log.Error, l.Entry(2))
+	log.Infof(l, "I %v", 0)
+	log.Warningf(l, "W %v", 1)
+	log.Errorf(l, "E %v", 2)
+	l.Flush()
+
+	checkEntry(t, "I 0", log.Info, a.Entry(0))
+	checkEntry(t, "W 1", log.Warning, a.Entry(1))
+	checkEntry(t, "E 2", log.Error, a.Entry(2))
 }
 
 func TestLogAdapterAddOverflow(t *testing.T) {
-	l := CreateLogAdapter(5, callOnUI)
-	log.Infof(l.Logger(), "I %v", 0)
-	log.Warningf(l.Logger(), "W %v", 1)
-	l.Logger().Errorf("E %v", 2)
-	log.Infof(l.Logger(), "I %v", 3)
-	log.Warningf(l.Logger(), "W %v", 4)
-	l.Logger().Errorf("E %v", 5)
-	log.Infof(l.Logger(), "I %v", 6)
-	log.Warningf(l.Logger(), "W %v", 7)
-	l.Logger().Errorf("E %v", 8)
-	l.Logger().Flush()
+	a := CreateLogAdapter(5, callOnUI)
+	l := a.Logger()
 
-	test.AssertEquals(t, 5, l.Count())
+	log.Infof(l, "I %v", 0)
+	log.Warningf(l, "W %v", 1)
+	log.Errorf(l, "E %v", 2)
+	log.Infof(l, "I %v", 3)
+	log.Warningf(l, "W %v", 4)
+	log.Errorf(l, "E %v", 5)
+	log.Infof(l, "I %v", 6)
+	log.Warningf(l, "W %v", 7)
+	log.Errorf(l, "E %v", 8)
+	l.Flush()
 
-	checkEntry(t, "W 4", log.Warning, l.Entry(0))
-	test.AssertEquals(t, 0, l.ItemIndex(4))
+	test.AssertEquals(t, 5, a.Count())
 
-	checkEntry(t, "E 5", log.Error, l.Entry(1))
-	test.AssertEquals(t, 1, l.ItemIndex(5))
+	checkEntry(t, "W 4", log.Warning, a.Entry(0))
+	test.AssertEquals(t, 0, a.ItemIndex(4))
 
-	checkEntry(t, "I 6", log.Info, l.Entry(2))
-	test.AssertEquals(t, 2, l.ItemIndex(6))
+	checkEntry(t, "E 5", log.Error, a.Entry(1))
+	test.AssertEquals(t, 1, a.ItemIndex(5))
 
-	checkEntry(t, "W 7", log.Warning, l.Entry(3))
-	test.AssertEquals(t, 3, l.ItemIndex(7))
+	checkEntry(t, "I 6", log.Info, a.Entry(2))
+	test.AssertEquals(t, 2, a.ItemIndex(6))
 
-	checkEntry(t, "E 8", log.Error, l.Entry(4))
-	test.AssertEquals(t, 4, l.ItemIndex(8))
+	checkEntry(t, "W 7", log.Warning, a.Entry(3))
+	test.AssertEquals(t, 3, a.ItemIndex(7))
+
+	checkEntry(t, "E 8", log.Error, a.Entry(4))
+	test.AssertEquals(t, 4, a.ItemIndex(8))
 }
 
 func TestLogAdapterClearThenTestAddOverflow(t *testing.T) {
-	l := CreateLogAdapter(5, callOnUI)
+	a := CreateLogAdapter(5, callOnUI)
+	l := a.Logger()
 
-	log.Infof(l.Logger(), "OLD I")
-	log.Warningf(l.Logger(), "OLD W")
-	l.Logger().Errorf("OLD E")
-	log.Infof(l.Logger(), "OLD I")
-	log.Warningf(l.Logger(), "OLD W")
-	l.Logger().Errorf("OLD E")
-	l.Logger().Flush()
+	log.Infof(l, "OLD I")
+	log.Warningf(l, "OLD W")
+	log.Errorf(l, "OLD E")
+	log.Infof(l, "OLD I")
+	log.Warningf(l, "OLD W")
+	log.Errorf(l, "OLD E")
+	l.Flush()
 
-	l.Clear()
+	a.Clear()
 
-	test.AssertEquals(t, 0, l.Count())
+	test.AssertEquals(t, 0, a.Count())
 
-	log.Infof(l.Logger(), "I %v", 0)
-	log.Warningf(l.Logger(), "W %v", 1)
-	l.Logger().Errorf("E %v", 2)
-	log.Infof(l.Logger(), "I %v", 3)
-	log.Warningf(l.Logger(), "W %v", 4)
-	l.Logger().Errorf("E %v", 5)
-	log.Infof(l.Logger(), "I %v", 6)
-	log.Warningf(l.Logger(), "W %v", 7)
-	l.Logger().Errorf("E %v", 8)
-	l.Logger().Flush()
+	log.Infof(l, "I %v", 0)
+	log.Warningf(l, "W %v", 1)
+	log.Errorf(l, "E %v", 2)
+	log.Infof(l, "I %v", 3)
+	log.Warningf(l, "W %v", 4)
+	log.Errorf(l, "E %v", 5)
+	log.Infof(l, "I %v", 6)
+	log.Warningf(l, "W %v", 7)
+	log.Errorf(l, "E %v", 8)
+	l.Flush()
 
-	test.AssertEquals(t, 5, l.Count())
+	test.AssertEquals(t, 5, a.Count())
 
-	checkEntry(t, "W 4", log.Warning, l.Entry(0))
-	checkEntry(t, "E 5", log.Error, l.Entry(1))
-	checkEntry(t, "I 6", log.Info, l.Entry(2))
-	checkEntry(t, "W 7", log.Warning, l.Entry(3))
-	checkEntry(t, "E 8", log.Error, l.Entry(4))
+	checkEntry(t, "W 4", log.Warning, a.Entry(0))
+	checkEntry(t, "E 5", log.Error, a.Entry(1))
+	checkEntry(t, "I 6", log.Info, a.Entry(2))
+	checkEntry(t, "W 7", log.Warning, a.Entry(3))
+	checkEntry(t, "E 8", log.Error, a.Entry(4))
 }
