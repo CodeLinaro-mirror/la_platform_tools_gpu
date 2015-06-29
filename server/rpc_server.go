@@ -26,6 +26,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -59,7 +60,7 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 // This includes all the types included in or referenced from the atom stream.
 func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
 	classes := make(service.ClassPtrArray, 0, registry.Global.Count())
-	registry.Global.Visit(func(c binary.Class) {
+	all.GraphicsNamespace.Visit(func(c binary.Class) {
 		class := schema.Lookup(c.ID())
 		if class != nil {
 			classes = append(classes, class)

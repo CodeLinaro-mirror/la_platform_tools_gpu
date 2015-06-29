@@ -15,4 +15,13 @@
 // Package all is used to import all known gfxapi APIs for their side effects.
 package all
 
-import _ "android.googlesource.com/platform/tools/gpu/gfxapi/gles"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
+)
+
+var GraphicsNamespace = registry.NewNamespace()
+
+func init() {
+	GraphicsNamespace.AddFallbacks(gles.Namespace)
+}

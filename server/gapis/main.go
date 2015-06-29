@@ -24,9 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/server"
 )
 
-// Register known graphics APIs.
-import _ "android.googlesource.com/platform/tools/gpu/gfxapi/all"
-
 var (
 	http        = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
 	rpc         = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
