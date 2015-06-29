@@ -20,6 +20,7 @@ import (
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/objects"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -66,6 +67,73 @@ func (a *Atom) SetField(index int, value interface{}) {
 	a.object.Fields[index] = value
 }
 
+func (a Atom) Class() binary.Class {
+	return a.object.Class()
+}
+
+type AtomClass struct {
+	base         *schema.Class
+	meta         *atom.Metadata
+	observations int
+}
+
+var observationsId = (*atom.Observations)(nil).Class().ID()
+
+func NewAtomClass(base *schema.Class, meta *atom.Metadata) *AtomClass {
+	class := &AtomClass{base: base, meta: meta, observations: -1}
+	// Find the observations, if present
+	for i, f := range base.Fields {
+		if s, ok := f.Type.(*schema.Struct); ok {
+			if s.ID == observationsId {
+				class.observations = i
+				break
+			}
+		}
+	}
+	return class
+}
+
+func (c *AtomClass) ID() binary.ID {
+	return c.base.ID()
+}
+
+func (c *AtomClass) New() binary.Object {
+	return &Atom{object: c.base.New().(*schema.Object)}
+}
+
+func (c *AtomClass) Encode(e binary.Encoder, object binary.Object) error {
+	a := object.(*Atom)
+	return c.base.Encode(e, a.object)
+}
+
+func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
+	a := Atom{}
+	o, err := c.base.Decode(d)
+	if err != nil {
+		return a, err
+	}
+	a.object = o.(*schema.Object)
+	a.meta = c.meta
+	if c.observations >= 0 {
+		if c.observations >= len(a.object.Fields) {
+			return a, fmt.Errorf("Missing Observations field in %s", c.base.Name)
+		}
+		value := a.object.Fields[c.observations]
+		if observations, ok := value.(*atom.Observations); !ok {
+			return a, fmt.Errorf("Observations field is of type %T in %s", value, c.base.Name)
+		} else {
+			a.observations = observations
+		}
+	}
+	return a, nil
+}
+
+func (c *AtomClass) DecodeTo(d binary.Decoder, object binary.Object) error {
+	return c.base.DecodeTo(d, object)
+}
+
+func (c *AtomClass) Skip(d binary.Decoder) error { return c.base.Skip(d) }
+
 // DecodeAtoms decodes all atoms from the AtomStream stream.
 func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream) ([]Atom, error) {
 	d := cyclic.Decoder(vle.Reader(bytes.NewReader(stream.Data)))
@@ -81,24 +149,8 @@ func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream) ([]Atom, err
 			return nil, fmt.Errorf("(%d) Error decoding atom: %v", i, err)
 		}
 		switch value := value.(type) {
-		case *schema.Object:
-			i = len(atoms)
-			atoms = append(atoms, Atom{
-				object: value,
-			})
-			a := &atoms[i]
-			// Find the observations, if present
-			for _, f := range a.object.Fields {
-				if o, ok := f.(*atom.Observations); ok {
-					a.observations = o
-					break
-				}
-			}
-			// Find the atom metadata, if present
-			a.meta = atom.FindMetadata(a.object.Type)
-			if a.meta == nil {
-				return nil, fmt.Errorf("(%d) Atom was missing metadata", i)
-			}
+		case Atom:
+			atoms = append(atoms, value)
 		case *objects.Terminator:
 			break
 		default:
