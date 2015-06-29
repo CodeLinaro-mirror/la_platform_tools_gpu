@@ -16,6 +16,8 @@ package client
 
 import (
 	"fmt"
+	"reflect"
+	"strconv"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -80,6 +82,68 @@ func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, 
 	return tb
 }
 
+func createIntField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+	_, v := a.Field(argIdx)
+	ty := reflect.TypeOf(v)
+	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+		if i, err := strconv.ParseInt(s, 0, ty.Bits()); err == nil {
+			v := reflect.New(ty).Elem()
+			v.SetInt(i)
+			return v.Interface(), true
+		} else {
+			return nil, false
+		}
+	}, func(v interface{}) {
+		a.SetField(argIdx, v)
+		appCtx.ReplaceAtom(a, id)
+	})
+}
+
+func createUintField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+	_, v := a.Field(argIdx)
+	ty := reflect.TypeOf(v)
+	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+		if i, err := strconv.ParseUint(s, 0, ty.Bits()); err == nil {
+			v := reflect.New(ty).Elem()
+			v.SetUint(i)
+			return v.Interface(), true
+		} else {
+			return nil, false
+		}
+	}, func(v interface{}) {
+		a.SetField(argIdx, v)
+		appCtx.ReplaceAtom(a, id)
+	})
+}
+
+func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+	_, v := a.Field(argIdx)
+	ty := reflect.TypeOf(v)
+	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+		if i, err := strconv.ParseFloat(s, ty.Bits()); err == nil {
+			v := reflect.New(ty).Elem()
+			v.SetFloat(i)
+			return v.Interface(), true
+		} else {
+			return nil, false
+		}
+	}, func(v interface{}) {
+		a.SetField(argIdx, v)
+		appCtx.ReplaceAtom(a, id)
+	})
+}
+
+func asPointer(p *schema.Object) (memory.Pointer, bool) {
+	// TODO: Pool should probably go into memory.Pointer, so this hackery can be removed.
+	addrIdx := p.Type.Fields.Find("Address")
+	poolIdx := p.Type.Fields.Find("Pool")
+	if addrIdx >= 0 && poolIdx >= 0 {
+		v, ok := p.Fields[addrIdx].(uint64)
+		return memory.Pointer(v), ok
+	}
+	return 0, false
+}
+
 func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	a := appCtx.Atoms()[id]
 	active := true
@@ -118,21 +182,22 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 			}
 			var c gxui.Control
 			switch ty := info.Type.(type) {
-			case *schema.Pointer:
-				v := v.(memory.Pointer)
-				b := t.CreateButton()
-				b.SetMargin(math.Spacing{})
-				//b.SetPadding(math.Spacing{})
-				b.AddChild(CreateLabel(t, v.String(), CONSTANT_COLOR, active))
-				b.OnClick(func(gxui.MouseEvent) {
-					appCtx.SelectAddress(v)
-				})
-				c = b
 			case *schema.Struct:
-				if _, ok := v.(*atom.Observations); ok {
-					//don't display observations as a parameter
-					continue
+				switch v := v.(type) {
+				case *schema.Object:
+					if p, ok := asPointer(v); ok {
+						b := t.CreateButton()
+						b.SetMargin(math.Spacing{})
+						//b.SetPadding(math.Spacing{})
+						b.AddChild(CreateLabel(t, p.String(), CONSTANT_COLOR, active))
+						b.OnClick(func(gxui.MouseEvent) { appCtx.SelectAddress(p) })
+						c = b
+					}
+
+				case *atom.Observations:
+					continue //don't display observations as a parameter
 				}
+
 			case *schema.Primitive:
 				switch ty.Method {
 				case schema.Bool:
@@ -140,6 +205,15 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 						a.SetField(argIdx, v)
 						appCtx.ReplaceAtom(a, id)
 					})
+
+				case schema.Int8, schema.Int16, schema.Int32, schema.Int64:
+					c = createIntField(t, a, argIdx, appCtx, id)
+
+				case schema.Uint8, schema.Uint16, schema.Uint32, schema.Uint64:
+					c = createUintField(t, a, argIdx, appCtx, id)
+
+				case schema.Float32, schema.Float64:
+					c = createFloatField(t, a, argIdx, appCtx, id)
 				}
 			}
 			if c == nil {
@@ -153,95 +227,8 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 				return l
 			})
 		}
-		/*
-				case service.TypeKindEnum:
-					enum := p.Type.(*service.EnumInfo)
-					entries := schema.AllEnumEntries(enum)
-					value := v.(schema.EnumValue)
-					selected := service.EnumEntry{Name: value.String(), Value: value.Value}
-					l := createEnumList(t, appCtx, entries, selected, active, func(item gxui.AdapterItem) {
-						entry := item.(service.EnumEntry)
-						a.Arguments[argIdx] = schema.EnumValue{Type: value.Type, Value: entry.Value}
-						appCtx.ReplaceAtom(a, id)
-					})
-					c = l
-				case service.TypeKindS32:
-					c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
-						if i, err := strconv.ParseInt(s, 0, 32); err == nil {
-							return int32(i), true
-						} else {
-							return nil, false
-						}
-					}, func(v interface{}) {
-						a.Arguments[argIdx] = v.(int32)
-						appCtx.ReplaceAtom(a, id)
-					})
-				case service.TypeKindS64:
-					c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
-						if i, err := strconv.ParseInt(s, 0, 64); err == nil {
-							return int64(i), true
-						} else {
-							return nil, false
-						}
-					}, func(v interface{}) {
-						a.Arguments[argIdx] = v.(int64)
-						appCtx.ReplaceAtom(a, id)
-					})
-				case service.TypeKindU32:
-					c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
-						if i, err := strconv.ParseUint(s, 0, 32); err == nil {
-							return uint32(i), true
-						} else {
-							return nil, false
-						}
-					}, func(v interface{}) {
-						a.Arguments[argIdx] = v.(uint32)
-						appCtx.ReplaceAtom(a, id)
-					})
-				case service.TypeKindU64:
-					c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
-						if i, err := strconv.ParseUint(s, 0, 64); err == nil {
-							return uint64(i), true
-						} else {
-							return nil, false
-						}
-					}, func(v interface{}) {
-						a.Arguments[argIdx] = v.(uint64)
-						appCtx.ReplaceAtom(a, id)
-					})
-				case service.TypeKindF32:
-					c = createTextbox(t, appCtx, v, active, func(s string) (interface{}, bool) {
-						if f, err := strconv.ParseFloat(s, 32); err == nil {
-							return float32(f), true
-						} else {
-							return nil, false
-						}
-					}, func(v interface{}) {
-						a.Arguments[argIdx] = v.(float32)
-						appCtx.ReplaceAtom(a, id)
-					})
-				default:
-					c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
-				}
 
-				ll.AddChild(c)
-
-				pName := p.Name
-				appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
-					l := t.CreateLabel()
-					l.SetText(pName)
-					return l
-				})
-			}
-		*/
 		ll.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
-
-		/* TODO: Return value
-		res := ty.ReturnValue()
-		if res != nil {
-			ll.AddChild(CreateLabel(t, fmt.Sprintf(" → %v", res.Value()), CONSTANT_COLOR, active))
-		}
-		*/
 	}
 	return ll
 }
