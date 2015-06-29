@@ -22,6 +22,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/test"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/objects"
+	bt "android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
@@ -30,20 +32,25 @@ var testList = atom.List{
 	&test.AtomB{Bool: true},
 	&test.AtomC{String: "Pizza"},
 }
-var testData = []byte{
-	0x01, // Atom 0: Type
-	0x00, // Atom 0: ID
+
+var testData = bt.Bytes{}.Add(
+	0x03, // Atom 0: object sid + encoded
+	0x03, // Atom 0: type sid + encoded
+).ID(test.AtomAID).Add(
+	0x00, // Atom 0: Id
 	0x00, // Atom 0: Flags
-
-	0x02, // Atom 1: Type
-	0x00, // Atom 1: ID
+	0x05, // Atom 1: object sid + encoded
+	0x05, // Atom 1: sid + encoded
+).ID(test.AtomBID).Add(
+	0x00, // Atom 1: Id
 	0x01, // Atom 1: Bool
-
-	0x03,                          // Atom 2: Type
+	0x07, // Atom 2: object sid + encoded
+	0x07, // Atom 2: sid + encoded
+).ID(test.AtomCID).Add(
 	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: String
-
-	0xc0, 0xff, 0xff, // EOS
-}
+	0x09, // Terminator: object sid + encoded
+	0x09, // Terminator: sid + encoded
+).ID(objects.TerminatorID).Data
 
 func TestAtomListEncode(t *testing.T) {
 	buf := &bytes.Buffer{}

@@ -23,12 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-const TypeIDResource TypeID = 0xfffd
-
-func init() {
-	Register(TypeInfo{ID: TypeIDResource, New: func() Atom { return &Resource{} }})
-}
-
 // Resource is an Atom that embeds a blob of memory into the atom stream. These
 // atoms are typically only used for .gfxtrace files as they are stripped from
 // the stream on import and their resources are placed into the database.
@@ -44,7 +38,6 @@ func (a *Resource) String() string {
 
 // Atom compliance
 func (a *Resource) API() gfxapi.API                                                 { return nil }
-func (a *Resource) TypeID() TypeID                                                  { return TypeIDResource }
 func (a *Resource) Flags() Flags                                                    { return 0 }
 func (a *Resource) Observations() *Observations                                     { return &Observations{} }
 func (a *Resource) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error { return nil }
