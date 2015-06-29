@@ -15,8 +15,8 @@
 package client
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/_experimental/client/charts"
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
