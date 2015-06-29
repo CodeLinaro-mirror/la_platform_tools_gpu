@@ -245,7 +245,6 @@ func (s rpcServer) ReplaceAtom(
 	id, err := database.Store(&builder.ReplaceAtom{
 		Capture: capture,
 		Atom:    atom.ID(atomID),
-		Type:    atom.TypeID(atomType),
 		Data:    data,
 	}, s.Database, l)
 	return service.CaptureId{ID: id}, err

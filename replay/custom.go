@@ -21,7 +21,6 @@ func (c Custom) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Lo
 
 // atom.Atom compliance
 func (Custom) API() gfxapi.API                                                 { return nil }
-func (Custom) TypeID() atom.TypeID                                             { return 0 }
 func (Custom) Flags() atom.Flags                                               { return 0 }
 func (Custom) Observations() *atom.Observations                                { return &atom.Observations{} }
 func (Custom) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error { return nil }

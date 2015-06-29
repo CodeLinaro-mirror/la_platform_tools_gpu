@@ -56,9 +56,7 @@
   «public:»
     inline void init(std::shared_ptr<gapic::Encoder> encoder);
 ¶
-    {{range $f := AllCommands $}}
-      {{Macro "MethodDefinitions" $f}}
-    {{end}}
+    {{ForEach (AllCommands $) "MethodDefinitions" | JoinWith "\n"}}
 ¶
   «protected:»
     {{Macro "ApiClassnames.Imports"}} mImports;
@@ -77,10 +75,7 @@
     mImports.Resolve();
   }
 ¶
-  {{range $i, $f := AllCommands $}}
-    {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
-    {{Macro "MethodImplementation" $f}}¶
-  {{end}}
+  {{ForEach (AllCommands $) "MethodImplementation" | JoinWith "\n¶"}}
 ¶
   »} // namespace gapii
 ¶
@@ -163,9 +158,8 @@
     } while(false);
     observe(observations.mWrites);
 ¶
-    mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Macro "C++.CoderArguments" $}});
-    mEncoder->Value(coder);
+    mEncoder->Object(&coder);
 
     {{if not (IsVoid $.Return.Type)}}¶
       return result;

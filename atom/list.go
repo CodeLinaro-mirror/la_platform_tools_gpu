@@ -14,12 +14,7 @@
 
 package atom
 
-import (
-	"fmt"
-
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/config"
-)
+import "android.googlesource.com/platform/tools/gpu/binary"
 
 // List is a list of atoms.
 type List []Atom
@@ -53,59 +48,20 @@ func (l *List) AddAt(a Atom, id ID) {
 	(*l)[id] = a
 }
 
+type stream struct {
+	binary.Generate
+	Atoms []Atom `stream:"true"`
+}
+
 // Encode encodes the atom list using the specified encoder.
 func (l *List) Encode(e binary.Encoder) error {
-	for _, atom := range *l {
-		if err := e.Uint16(uint16(atom.TypeID())); err != nil {
-			return err
-		}
-		if err := e.Value(atom); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint16(uint16(TypeIDEos)); err != nil {
-		return err
-	}
-	return nil
+	return e.Value(&stream{Atoms: *l})
 }
 
 // Encode decodes the atom list using the specified encoder.
 func (l *List) Decode(d binary.Decoder) error {
-	*l = List{}
-	if config.DebugAtom {
-		fmt.Printf("atom.List.Decode:\n")
-	}
-	for true {
-		if config.DebugAtom {
-			fmt.Printf("(%d) ", len(*l))
-		}
-		typeID, err := d.Uint16()
-		if err != nil {
-			return err
-		}
-		if config.DebugAtom {
-			fmt.Printf("type-id: 0x%x ", typeID)
-		}
-		if TypeID(typeID) == TypeIDEos {
-			break
-		}
-		atom, err := New(TypeID(typeID))
-		if err != nil {
-			return err
-		}
-		if config.DebugAtom {
-			fmt.Printf("type: %T ", atom)
-		}
-		if err := d.Value(atom); err != nil {
-			if config.DebugAtom {
-				fmt.Printf("-- errored: %v\n", err)
-			}
-			return err
-		}
-		if config.DebugAtom {
-			fmt.Printf("-- decoded\n")
-		}
-		(*l) = append(*l, atom)
-	}
-	return nil
+	s := stream{}
+	err := d.Value(&s)
+	*l = s.Atoms
+	return err
 }

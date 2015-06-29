@@ -17,10 +17,12 @@ package client
 import (
 	"bytes"
 	"fmt"
+	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/objects"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -76,14 +78,9 @@ func (a *Atom) SetField(index int, value interface{}) {
 	a.object.Fields[index] = value
 }
 
-type atomMeta struct {
-	Info  *service.AtomInfo
-	Class binary.Class
-}
-
 // DecodeAtoms decodes all atoms from the AtomStream stream.
 func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Schema) ([]Atom, error) {
-	atomMap := map[uint16]atomMeta{}
+	atomMap := map[binary.Class]*service.AtomInfo{}
 	for i := range s.Atoms {
 		a := &s.Atoms[i]
 		name := a.Name
@@ -96,7 +93,7 @@ func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Sc
 		if match == nil {
 			return nil, fmt.Errorf("No binary schema entry for %s", name)
 		}
-		atomMap[a.Type] = atomMeta{Info: a, Class: match}
+		atomMap[match] = a
 	}
 
 	d := cyclic.Decoder(vle.Reader(bytes.NewReader(stream.Data)))
@@ -104,33 +101,25 @@ func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Sc
 	// Read all the atoms from the stream
 	atoms := []Atom{}
 	for i := 0; true; i++ {
-		ty, err := d.Uint16()
+		value, err := d.Object()
 		if err != nil {
-			return nil, fmt.Errorf("(%d) Error reading atom's type: %v", i, err)
-		}
-		if ty == 0xffff { // EOS
-			break
-		}
-
-		meta, found := atomMap[ty]
-		if !found {
-			return nil, fmt.Errorf("(%d) Atom type 0x%x not found in decoder map!", i, ty)
-		}
-
-		value, err := meta.Class.Decode(d)
-		if err != nil {
+			if err == io.EOF {
+				break
+			}
 			return nil, fmt.Errorf("(%d) Error decoding atom: %v", i, err)
 		}
-
-		obj, ok := value.(*schema.Object)
-		if !ok {
-			return nil, fmt.Errorf("Atom was not decoded by schema")
+		switch value := value.(type) {
+		case *schema.Object:
+			info, _ := atomMap[value.Class()]
+			atoms = append(atoms, Atom{
+				info:   info,
+				object: value,
+			})
+		case *objects.Terminator:
+			break
+		default:
+			return nil, fmt.Errorf("Atom was not decoded by schema, %T", value)
 		}
-
-		atoms = append(atoms, Atom{
-			info:   meta.Info,
-			object: obj,
-		})
 	}
 	return atoms, nil
 }

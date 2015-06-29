@@ -41,17 +41,17 @@ func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.
 		return nil, fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
 	}
 
-	atom, err := atom.New(request.Type)
+	o, err := decode(request.Data.Data)
 	if err != nil {
 		return nil, err
 	}
-
-	if err := decode(request.Data.Data, atom); err != nil {
-		return nil, err
+	a, ok := o.(atom.Atom)
+	if !ok {
+		return nil, fmt.Errorf("Atom (%d) was not an atom, got %T.", request.Atom, o)
 	}
 
 	atoms = atoms.Clone()
-	atoms[request.Atom] = atom
+	atoms[request.Atom] = a
 	newStream, err := service.NewAtomStream(atoms)
 	if err != nil {
 		return nil, err
