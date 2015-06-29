@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package log provides a hierarchical logger interface and implementations of the interface.
 package log
 
 // Logger is the interface for types that implement a hierarchical message logger.
 type Logger interface {
+	Interface
 	// Info writes an information message to the logger. These message types are intented to be used
 	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
 	Infof(msg string, args ...interface{})

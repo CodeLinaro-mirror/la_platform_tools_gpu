@@ -98,11 +98,10 @@ func (a *LogAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	entry := a.Entry(index)
 	l := theme.CreateLabel()
 	l.SetText(entry.String())
-	switch entry.Kind {
-	case log.Warning:
-		l.SetColor(gxui.Yellow)
-	case log.Error:
+	if entry.Severity <= log.Error {
 		l.SetColor(gxui.Red)
+	} else {
+		l.SetColor(gxui.Yellow)
 	}
 	return l
 }
