@@ -378,6 +378,14 @@ type Metadata struct {
 Metadata is the meta information about an atom type that is added to the binary
 schema class for the atom.
 
+#### func  FindMetadata
+
+```go
+func FindMetadata(class *schema.Class) *Metadata
+```
+Finds the atom metadata for the given schema class. Returns nil if the class was
+not for an atom.
+
 #### func (*Metadata) Class
 
 ```go
