@@ -27,6 +27,9 @@ func (Nop) Warningf(msg string, args ...interface{}) {}
 // Error does nothing
 func (Nop) Errorf(msg string, args ...interface{}) {}
 
+// Log does nothing
+func (Nop) Log(s Severity, msg string, args ...interface{}) {}
+
 // Enter returns the same Nop implementation of Logger
 func (Nop) Enter(name string) Logger { return Nop{} }
 

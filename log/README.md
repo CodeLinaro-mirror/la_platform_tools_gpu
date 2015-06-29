@@ -7,11 +7,88 @@ interface.
 
 ## Usage
 
+#### func  Alertf
+
+```go
+func Alertf(l Interface, msg string, args ...interface{})
+```
+Alertf calls l.Log with the Alert severity.
+
+#### func  Criticalf
+
+```go
+func Criticalf(l Interface, msg string, args ...interface{})
+```
+Criticalf calls l.Log with the Critical severity.
+
+#### func  Debugf
+
+```go
+func Debugf(l Interface, msg string, args ...interface{})
+```
+Debugf calls l.Log with the Debug severity.
+
+#### func  E
+
+```go
+func E(l Interface, msg string, args ...interface{})
+```
+E calls l.Log with the Error severity.
+
+#### func  Emergencyf
+
+```go
+func Emergencyf(l Interface, msg string, args ...interface{})
+```
+Emergencyf calls l.Log with the Emergency severity.
+
+#### func  Errorf
+
+```go
+func Errorf(l Interface, msg string, args ...interface{})
+```
+Errorf calls l.Log with the Error severity.
+
+#### func  I
+
+```go
+func I(l Interface, msg string, args ...interface{})
+```
+I calls l.Log with the Info severity.
+
+#### func  Infof
+
+```go
+func Infof(l Interface, msg string, args ...interface{})
+```
+Infof calls l.Log with the Info severity.
+
+#### func  Noticef
+
+```go
+func Noticef(l Interface, msg string, args ...interface{})
+```
+Noticef calls l.Log with the Notice severity.
+
+#### func  W
+
+```go
+func W(l Interface, msg string, args ...interface{})
+```
+W calls l.Log with the Warning severity.
+
+#### func  Warningf
+
+```go
+func Warningf(l Interface, msg string, args ...interface{})
+```
+Warningf calls l.Log with the Warning severity.
+
 #### type Entry
 
 ```go
 type Entry struct {
-	Kind      Kind      // The Entry kind
+	Severity  Severity  // The Entry severity
 	Message   string    // The message text
 	Scope     string    // The scope of the message
 	Context   uint32    // The context identifier for the message
@@ -48,38 +125,23 @@ channel passed to Channel whenever Flush() is called. On receiving a
 FlushRequest, any pending messages should be flushed and the FlushRequest should
 be closed.
 
-#### type Kind
+#### type Interface
 
 ```go
-type Kind int
+type Interface interface {
+	// Log writes an error message to the logger with the specified severity.
+	// Arguments are handled in the manner of fmt.Printf.
+	Log(severity Severity, msg string, args ...interface{})
+}
 ```
 
-Kind defines an entry's message kind - either Info, Warning or Error.
-
-```go
-const (
-	Info Kind = iota
-	Warning
-	Error
-)
-```
-
-#### func (*Kind) Parse
-
-```go
-func (v *Kind) Parse(s string) error
-```
-
-#### func (Kind) String
-
-```go
-func (v Kind) String() string
-```
+Interface declares the methods for an object that accepts logging messages.
 
 #### type Logger
 
 ```go
 type Logger interface {
+	Interface
 	// Info writes an information message to the logger. These message types are intented to be used
 	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
 	Infof(msg string, args ...interface{})
@@ -200,12 +262,61 @@ func (Nop) Infof(msg string, args ...interface{})
 ```
 Info does nothing
 
+#### func (Nop) Log
+
+```go
+func (Nop) Log(s Severity, msg string, args ...interface{})
+```
+Log does nothing
+
 #### func (Nop) Warningf
 
 ```go
 func (Nop) Warningf(msg string, args ...interface{})
 ```
 Warning does nothing
+
+#### type Severity
+
+```go
+type Severity int
+```
+
+Severity defines the severity of a logging message. The levels match the ones
+defined in rfc5424 for syslog.
+
+```go
+const (
+	// Emergency indicates the system is unusable, no further data should be trusted.
+	Emergency Severity = 0
+	// Alert indicates action must be taken immediately.
+	Alert Severity = 1
+	// Critical indicates errors severe enough to terminate processing.
+	Critical Severity = 2
+	// Error indicates non terminal failure conditions that may have an effect on results.
+	Error Severity = 3
+	// Warning indicates issues that might affect performance or compatibility, but could be ignored.
+	Warning Severity = 4
+	// Notice indicates normal but significant conditions.
+	Notice Severity = 5
+	// Info indicates minor informational messages that should generally be ignored.
+	Info Severity = 6
+	// Debug indicates verbose debug-level messages.
+	Debug Severity = 7
+)
+```
+
+#### func (*Severity) Parse
+
+```go
+func (v *Severity) Parse(s string) error
+```
+
+#### func (Severity) String
+
+```go
+func (v Severity) String() string
+```
 
 #### type Splitter
 
@@ -265,6 +376,13 @@ Fork will call Fork on all logs passed to Add.
 func (s *Splitter) Infof(msg string, args ...interface{})
 ```
 Info will call Info with the same arguments on all logs passed to Add.
+
+#### func (*Splitter) Log
+
+```go
+func (s *Splitter) Log(severity Severity, msg string, args ...interface{})
+```
+Logf will call Logf with the same arguments on all logs passed to Add.
 
 #### func (*Splitter) Warningf
 
