@@ -222,11 +222,12 @@ var schemaPayload = &schema.Class{
 	},
 }
 
-const _ConnectionType_name = "DeviceInfoReplay"
+const _ConnectionType_name = "DeviceInfoReplayShutdown"
 
 var _ConnectionType_map = map[ConnectionType]string{
 	0: _ConnectionType_name[0:10],
 	1: _ConnectionType_name[10:16],
+	2: _ConnectionType_name[16:24],
 }
 
 func (v ConnectionType) String() string {
