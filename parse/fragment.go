@@ -55,5 +55,5 @@ func (n *fragment) WriteTo(w io.Writer) error {
 }
 
 func NewFragment(token Token) Fragment {
-    return &fragment{token}
+	return &fragment{token}
 }

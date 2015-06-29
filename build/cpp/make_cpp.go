@@ -59,7 +59,7 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 func logger(env build.Environment, name string) log.Logger {
 	rootLogger := env.Logger
 	if env.Verbose {
-		rootLogger.Infof("Building %s", name)
+		log.Infof(rootLogger, "Building %s", name)
 	}
 	return rootLogger.Enter(name)
 }
@@ -216,9 +216,9 @@ func MakeCopy(src build.File, dest build.File, cfg Config, env build.Environment
 	if cfg.OS == maker.HostOS {
 		makeStep(cfg.Name, dest, build.Files(src), env.ForceBuild,
 			func(*maker.Step) error {
-				logger.Infof("Copying %s -> %s", src, dest)
+				log.Infof(logger, "Copying %s -> %s", src, dest)
 				if err := src.CopyTo(dest); err != nil {
-					logger.Errorf("Copy failed: %v", err)
+					log.Errorf(logger, "Copy failed: %v", err)
 					// Error delibrately suppressed
 				}
 				return nil

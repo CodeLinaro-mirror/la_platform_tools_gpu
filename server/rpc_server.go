@@ -77,7 +77,7 @@ func (s rpcServer) Import(name string, data service.U8Array, l log.Logger) (serv
 		if len(atoms) == 0 {
 			return service.CaptureId{}, err
 		}
-		l.Warningf("Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
+		log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
 	}
 	id, err := builder.ImportCapture(name, atoms, s.Database, l)
 	if err != nil {
