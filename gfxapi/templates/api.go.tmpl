@@ -73,14 +73,6 @@
 
   func init() {
     gfxapi.Register(API())
-    {{range $i, $c := AllCommands $}}
-      atom.Register(atom.TypeInfo{
-        Name: "{{Macro "CmdName" $c}}",
-        Docs: "{{$c.Docs}}",
-        ID: {{$i}},
-        New: func() atom.Atom { return &{{Macro "Go.CmdName" $c}}{} },
-      })
-    {{end}}
   }
 
   func min(a, b uint64) uint64 {
@@ -581,7 +573,6 @@
   }
 
   func (c *{{$name}}) API() gfxapi.API { return api{} }
-  func (c *{{$name}}) TypeID() atom.TypeID { return {{$.Index}} }
   func (c *{{$name}}) Flags() atom.Flags { return 0 §
       {{if GetAnnotation $.Command "DrawCall"}} | atom.DrawCall §{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}} | atom.EndOfFrame §{{end}}

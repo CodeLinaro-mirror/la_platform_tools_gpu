@@ -3226,7 +3226,6 @@ func (a *CmdClone) AddWrite(rng memory.Range, id binary.ID) *CmdClone {
 	return a
 }
 func (c *CmdClone) API() gfxapi.API                  { return api{} }
-func (c *CmdClone) TypeID() atom.TypeID              { return 0 }
 func (c *CmdClone) Flags() atom.Flags                { return 0 }
 func (a *CmdClone) Observations() *atom.Observations { return &a.observations }
 
@@ -3259,7 +3258,6 @@ func (a *CmdMake) AddWrite(rng memory.Range, id binary.ID) *CmdMake {
 	return a
 }
 func (c *CmdMake) API() gfxapi.API                  { return api{} }
-func (c *CmdMake) TypeID() atom.TypeID              { return 1 }
 func (c *CmdMake) Flags() atom.Flags                { return 0 }
 func (a *CmdMake) Observations() *atom.Observations { return &a.observations }
 
@@ -3293,7 +3291,6 @@ func (a *CmdCopy) AddWrite(rng memory.Range, id binary.ID) *CmdCopy {
 	return a
 }
 func (c *CmdCopy) API() gfxapi.API                  { return api{} }
-func (c *CmdCopy) TypeID() atom.TypeID              { return 2 }
 func (c *CmdCopy) Flags() atom.Flags                { return 0 }
 func (a *CmdCopy) Observations() *atom.Observations { return &a.observations }
 
@@ -3327,7 +3324,6 @@ func (a *CmdCharsliceToString) AddWrite(rng memory.Range, id binary.ID) *CmdChar
 	return a
 }
 func (c *CmdCharsliceToString) API() gfxapi.API                  { return api{} }
-func (c *CmdCharsliceToString) TypeID() atom.TypeID              { return 3 }
 func (c *CmdCharsliceToString) Flags() atom.Flags                { return 0 }
 func (a *CmdCharsliceToString) Observations() *atom.Observations { return &a.observations }
 
@@ -3360,7 +3356,6 @@ func (a *CmdCharptrToString) AddWrite(rng memory.Range, id binary.ID) *CmdCharpt
 	return a
 }
 func (c *CmdCharptrToString) API() gfxapi.API                  { return api{} }
-func (c *CmdCharptrToString) TypeID() atom.TypeID              { return 4 }
 func (c *CmdCharptrToString) Flags() atom.Flags                { return 0 }
 func (a *CmdCharptrToString) Observations() *atom.Observations { return &a.observations }
 
@@ -3394,7 +3389,6 @@ func (a *CmdSliceCasts) AddWrite(rng memory.Range, id binary.ID) *CmdSliceCasts 
 	return a
 }
 func (c *CmdSliceCasts) API() gfxapi.API                  { return api{} }
-func (c *CmdSliceCasts) TypeID() atom.TypeID              { return 5 }
 func (c *CmdSliceCasts) Flags() atom.Flags                { return 0 }
 func (a *CmdSliceCasts) Observations() *atom.Observations { return &a.observations }
 
@@ -3426,7 +3420,6 @@ func (a *CmdVoid) AddWrite(rng memory.Range, id binary.ID) *CmdVoid {
 	return a
 }
 func (c *CmdVoid) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid) TypeID() atom.TypeID              { return 6 }
 func (c *CmdVoid) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid) Observations() *atom.Observations { return &a.observations }
 
@@ -3459,7 +3452,6 @@ func (a *CmdUnknownRet) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownRet 
 	return a
 }
 func (c *CmdUnknownRet) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownRet) TypeID() atom.TypeID              { return 7 }
 func (c *CmdUnknownRet) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownRet) Observations() *atom.Observations { return &a.observations }
 
@@ -3492,7 +3484,6 @@ func (a *CmdUnknownWritePtr) AddWrite(rng memory.Range, id binary.ID) *CmdUnknow
 	return a
 }
 func (c *CmdUnknownWritePtr) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownWritePtr) TypeID() atom.TypeID              { return 8 }
 func (c *CmdUnknownWritePtr) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWritePtr) Observations() *atom.Observations { return &a.observations }
 
@@ -3525,7 +3516,6 @@ func (a *CmdUnknownWriteSlice) AddWrite(rng memory.Range, id binary.ID) *CmdUnkn
 	return a
 }
 func (c *CmdUnknownWriteSlice) API() gfxapi.API                  { return api{} }
-func (c *CmdUnknownWriteSlice) TypeID() atom.TypeID              { return 9 }
 func (c *CmdUnknownWriteSlice) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWriteSlice) Observations() *atom.Observations { return &a.observations }
 
@@ -3558,7 +3548,6 @@ func (a *CmdVoidU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU8 {
 	return a
 }
 func (c *CmdVoidU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU8) TypeID() atom.TypeID              { return 10 }
 func (c *CmdVoidU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU8) Observations() *atom.Observations { return &a.observations }
 
@@ -3591,7 +3580,6 @@ func (a *CmdVoidS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS8 {
 	return a
 }
 func (c *CmdVoidS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS8) TypeID() atom.TypeID              { return 11 }
 func (c *CmdVoidS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS8) Observations() *atom.Observations { return &a.observations }
 
@@ -3624,7 +3612,6 @@ func (a *CmdVoidU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU16 {
 	return a
 }
 func (c *CmdVoidU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU16) TypeID() atom.TypeID              { return 12 }
 func (c *CmdVoidU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU16) Observations() *atom.Observations { return &a.observations }
 
@@ -3657,7 +3644,6 @@ func (a *CmdVoidS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS16 {
 	return a
 }
 func (c *CmdVoidS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS16) TypeID() atom.TypeID              { return 13 }
 func (c *CmdVoidS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS16) Observations() *atom.Observations { return &a.observations }
 
@@ -3690,7 +3676,6 @@ func (a *CmdVoidF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF32 {
 	return a
 }
 func (c *CmdVoidF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidF32) TypeID() atom.TypeID              { return 14 }
 func (c *CmdVoidF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF32) Observations() *atom.Observations { return &a.observations }
 
@@ -3723,7 +3708,6 @@ func (a *CmdVoidU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU32 {
 	return a
 }
 func (c *CmdVoidU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU32) TypeID() atom.TypeID              { return 15 }
 func (c *CmdVoidU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU32) Observations() *atom.Observations { return &a.observations }
 
@@ -3756,7 +3740,6 @@ func (a *CmdVoidS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS32 {
 	return a
 }
 func (c *CmdVoidS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS32) TypeID() atom.TypeID              { return 16 }
 func (c *CmdVoidS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS32) Observations() *atom.Observations { return &a.observations }
 
@@ -3789,7 +3772,6 @@ func (a *CmdVoidF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF64 {
 	return a
 }
 func (c *CmdVoidF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidF64) TypeID() atom.TypeID              { return 17 }
 func (c *CmdVoidF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF64) Observations() *atom.Observations { return &a.observations }
 
@@ -3822,7 +3804,6 @@ func (a *CmdVoidU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU64 {
 	return a
 }
 func (c *CmdVoidU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidU64) TypeID() atom.TypeID              { return 18 }
 func (c *CmdVoidU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU64) Observations() *atom.Observations { return &a.observations }
 
@@ -3855,7 +3836,6 @@ func (a *CmdVoidS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS64 {
 	return a
 }
 func (c *CmdVoidS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidS64) TypeID() atom.TypeID              { return 19 }
 func (c *CmdVoidS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS64) Observations() *atom.Observations { return &a.observations }
 
@@ -3888,7 +3868,6 @@ func (a *CmdVoidBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidBool {
 	return a
 }
 func (c *CmdVoidBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidBool) TypeID() atom.TypeID              { return 20 }
 func (c *CmdVoidBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidBool) Observations() *atom.Observations { return &a.observations }
 
@@ -3921,7 +3900,6 @@ func (a *CmdVoidString) AddWrite(rng memory.Range, id binary.ID) *CmdVoidString 
 	return a
 }
 func (c *CmdVoidString) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidString) TypeID() atom.TypeID              { return 21 }
 func (c *CmdVoidString) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidString) Observations() *atom.Observations { return &a.observations }
 
@@ -3956,7 +3934,6 @@ func (a *CmdVoid3Strings) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Stri
 	return a
 }
 func (c *CmdVoid3Strings) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3Strings) TypeID() atom.TypeID              { return 22 }
 func (c *CmdVoid3Strings) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Strings) Observations() *atom.Observations { return &a.observations }
 
@@ -3991,7 +3968,6 @@ func (a *CmdVoid3InArrays) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3InA
 	return a
 }
 func (c *CmdVoid3InArrays) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3InArrays) TypeID() atom.TypeID              { return 23 }
 func (c *CmdVoid3InArrays) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -4025,7 +4001,6 @@ func (a *CmdVoidInArrayOfPointers) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	return a
 }
 func (c *CmdVoidInArrayOfPointers) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidInArrayOfPointers) TypeID() atom.TypeID              { return 24 }
 func (c *CmdVoidInArrayOfPointers) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfPointers) Observations() *atom.Observations { return &a.observations }
 
@@ -4058,7 +4033,6 @@ func (a *CmdVoidReadU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU8 
 	return a
 }
 func (c *CmdVoidReadU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU8) TypeID() atom.TypeID              { return 25 }
 func (c *CmdVoidReadU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4091,7 +4065,6 @@ func (a *CmdVoidReadS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS8 
 	return a
 }
 func (c *CmdVoidReadS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS8) TypeID() atom.TypeID              { return 26 }
 func (c *CmdVoidReadS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4124,7 +4097,6 @@ func (a *CmdVoidReadU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU1
 	return a
 }
 func (c *CmdVoidReadU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU16) TypeID() atom.TypeID              { return 27 }
 func (c *CmdVoidReadU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4157,7 +4129,6 @@ func (a *CmdVoidReadS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS1
 	return a
 }
 func (c *CmdVoidReadS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS16) TypeID() atom.TypeID              { return 28 }
 func (c *CmdVoidReadS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4190,7 +4161,6 @@ func (a *CmdVoidReadF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF3
 	return a
 }
 func (c *CmdVoidReadF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadF32) TypeID() atom.TypeID              { return 29 }
 func (c *CmdVoidReadF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4223,7 +4193,6 @@ func (a *CmdVoidReadU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU3
 	return a
 }
 func (c *CmdVoidReadU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU32) TypeID() atom.TypeID              { return 30 }
 func (c *CmdVoidReadU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4256,7 +4225,6 @@ func (a *CmdVoidReadS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS3
 	return a
 }
 func (c *CmdVoidReadS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS32) TypeID() atom.TypeID              { return 31 }
 func (c *CmdVoidReadS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4289,7 +4257,6 @@ func (a *CmdVoidReadF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF6
 	return a
 }
 func (c *CmdVoidReadF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadF64) TypeID() atom.TypeID              { return 32 }
 func (c *CmdVoidReadF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4322,7 +4289,6 @@ func (a *CmdVoidReadU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU6
 	return a
 }
 func (c *CmdVoidReadU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadU64) TypeID() atom.TypeID              { return 33 }
 func (c *CmdVoidReadU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4355,7 +4321,6 @@ func (a *CmdVoidReadS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS6
 	return a
 }
 func (c *CmdVoidReadS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadS64) TypeID() atom.TypeID              { return 34 }
 func (c *CmdVoidReadS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4388,7 +4353,6 @@ func (a *CmdVoidReadBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadB
 	return a
 }
 func (c *CmdVoidReadBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadBool) TypeID() atom.TypeID              { return 35 }
 func (c *CmdVoidReadBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4423,7 +4387,6 @@ func (a *CmdVoidReadPtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadP
 	return a
 }
 func (c *CmdVoidReadPtrs) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidReadPtrs) TypeID() atom.TypeID              { return 36 }
 func (c *CmdVoidReadPtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadPtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -4456,7 +4419,6 @@ func (a *CmdVoidWriteU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU
 	return a
 }
 func (c *CmdVoidWriteU8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU8) TypeID() atom.TypeID              { return 37 }
 func (c *CmdVoidWriteU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4489,7 +4451,6 @@ func (a *CmdVoidWriteS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS
 	return a
 }
 func (c *CmdVoidWriteS8) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS8) TypeID() atom.TypeID              { return 38 }
 func (c *CmdVoidWriteS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4522,7 +4483,6 @@ func (a *CmdVoidWriteU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU16) TypeID() atom.TypeID              { return 39 }
 func (c *CmdVoidWriteU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4555,7 +4515,6 @@ func (a *CmdVoidWriteS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS16) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS16) TypeID() atom.TypeID              { return 40 }
 func (c *CmdVoidWriteS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4588,7 +4547,6 @@ func (a *CmdVoidWriteF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteF32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteF32) TypeID() atom.TypeID              { return 41 }
 func (c *CmdVoidWriteF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4621,7 +4579,6 @@ func (a *CmdVoidWriteU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU32) TypeID() atom.TypeID              { return 42 }
 func (c *CmdVoidWriteU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4654,7 +4611,6 @@ func (a *CmdVoidWriteS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS32) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS32) TypeID() atom.TypeID              { return 43 }
 func (c *CmdVoidWriteS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4687,7 +4643,6 @@ func (a *CmdVoidWriteF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteF64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteF64) TypeID() atom.TypeID              { return 44 }
 func (c *CmdVoidWriteF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4720,7 +4675,6 @@ func (a *CmdVoidWriteU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteU64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteU64) TypeID() atom.TypeID              { return 45 }
 func (c *CmdVoidWriteU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4753,7 +4707,6 @@ func (a *CmdVoidWriteS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	return a
 }
 func (c *CmdVoidWriteS64) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteS64) TypeID() atom.TypeID              { return 46 }
 func (c *CmdVoidWriteS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4786,7 +4739,6 @@ func (a *CmdVoidWriteBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	return a
 }
 func (c *CmdVoidWriteBool) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWriteBool) TypeID() atom.TypeID              { return 47 }
 func (c *CmdVoidWriteBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4821,7 +4773,6 @@ func (a *CmdVoidWritePtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	return a
 }
 func (c *CmdVoidWritePtrs) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidWritePtrs) TypeID() atom.TypeID              { return 48 }
 func (c *CmdVoidWritePtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWritePtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -4854,7 +4805,6 @@ func (a *CmdU8) AddWrite(rng memory.Range, id binary.ID) *CmdU8 {
 	return a
 }
 func (c *CmdU8) API() gfxapi.API                  { return api{} }
-func (c *CmdU8) TypeID() atom.TypeID              { return 49 }
 func (c *CmdU8) Flags() atom.Flags                { return 0 }
 func (a *CmdU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4887,7 +4837,6 @@ func (a *CmdS8) AddWrite(rng memory.Range, id binary.ID) *CmdS8 {
 	return a
 }
 func (c *CmdS8) API() gfxapi.API                  { return api{} }
-func (c *CmdS8) TypeID() atom.TypeID              { return 50 }
 func (c *CmdS8) Flags() atom.Flags                { return 0 }
 func (a *CmdS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4920,7 +4869,6 @@ func (a *CmdU16) AddWrite(rng memory.Range, id binary.ID) *CmdU16 {
 	return a
 }
 func (c *CmdU16) API() gfxapi.API                  { return api{} }
-func (c *CmdU16) TypeID() atom.TypeID              { return 51 }
 func (c *CmdU16) Flags() atom.Flags                { return 0 }
 func (a *CmdU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4953,7 +4901,6 @@ func (a *CmdS16) AddWrite(rng memory.Range, id binary.ID) *CmdS16 {
 	return a
 }
 func (c *CmdS16) API() gfxapi.API                  { return api{} }
-func (c *CmdS16) TypeID() atom.TypeID              { return 52 }
 func (c *CmdS16) Flags() atom.Flags                { return 0 }
 func (a *CmdS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4986,7 +4933,6 @@ func (a *CmdF32) AddWrite(rng memory.Range, id binary.ID) *CmdF32 {
 	return a
 }
 func (c *CmdF32) API() gfxapi.API                  { return api{} }
-func (c *CmdF32) TypeID() atom.TypeID              { return 53 }
 func (c *CmdF32) Flags() atom.Flags                { return 0 }
 func (a *CmdF32) Observations() *atom.Observations { return &a.observations }
 
@@ -5019,7 +4965,6 @@ func (a *CmdU32) AddWrite(rng memory.Range, id binary.ID) *CmdU32 {
 	return a
 }
 func (c *CmdU32) API() gfxapi.API                  { return api{} }
-func (c *CmdU32) TypeID() atom.TypeID              { return 54 }
 func (c *CmdU32) Flags() atom.Flags                { return 0 }
 func (a *CmdU32) Observations() *atom.Observations { return &a.observations }
 
@@ -5052,7 +4997,6 @@ func (a *CmdS32) AddWrite(rng memory.Range, id binary.ID) *CmdS32 {
 	return a
 }
 func (c *CmdS32) API() gfxapi.API                  { return api{} }
-func (c *CmdS32) TypeID() atom.TypeID              { return 55 }
 func (c *CmdS32) Flags() atom.Flags                { return 0 }
 func (a *CmdS32) Observations() *atom.Observations { return &a.observations }
 
@@ -5085,7 +5029,6 @@ func (a *CmdF64) AddWrite(rng memory.Range, id binary.ID) *CmdF64 {
 	return a
 }
 func (c *CmdF64) API() gfxapi.API                  { return api{} }
-func (c *CmdF64) TypeID() atom.TypeID              { return 56 }
 func (c *CmdF64) Flags() atom.Flags                { return 0 }
 func (a *CmdF64) Observations() *atom.Observations { return &a.observations }
 
@@ -5118,7 +5061,6 @@ func (a *CmdU64) AddWrite(rng memory.Range, id binary.ID) *CmdU64 {
 	return a
 }
 func (c *CmdU64) API() gfxapi.API                  { return api{} }
-func (c *CmdU64) TypeID() atom.TypeID              { return 57 }
 func (c *CmdU64) Flags() atom.Flags                { return 0 }
 func (a *CmdU64) Observations() *atom.Observations { return &a.observations }
 
@@ -5151,7 +5093,6 @@ func (a *CmdS64) AddWrite(rng memory.Range, id binary.ID) *CmdS64 {
 	return a
 }
 func (c *CmdS64) API() gfxapi.API                  { return api{} }
-func (c *CmdS64) TypeID() atom.TypeID              { return 58 }
 func (c *CmdS64) Flags() atom.Flags                { return 0 }
 func (a *CmdS64) Observations() *atom.Observations { return &a.observations }
 
@@ -5184,7 +5125,6 @@ func (a *CmdBool) AddWrite(rng memory.Range, id binary.ID) *CmdBool {
 	return a
 }
 func (c *CmdBool) API() gfxapi.API                  { return api{} }
-func (c *CmdBool) TypeID() atom.TypeID              { return 59 }
 func (c *CmdBool) Flags() atom.Flags                { return 0 }
 func (a *CmdBool) Observations() *atom.Observations { return &a.observations }
 
@@ -5217,7 +5157,6 @@ func (a *CmdString) AddWrite(rng memory.Range, id binary.ID) *CmdString {
 	return a
 }
 func (c *CmdString) API() gfxapi.API                  { return api{} }
-func (c *CmdString) TypeID() atom.TypeID              { return 60 }
 func (c *CmdString) Flags() atom.Flags                { return 0 }
 func (a *CmdString) Observations() *atom.Observations { return &a.observations }
 
@@ -5250,7 +5189,6 @@ func (a *CmdPointer) AddWrite(rng memory.Range, id binary.ID) *CmdPointer {
 	return a
 }
 func (c *CmdPointer) API() gfxapi.API                  { return api{} }
-func (c *CmdPointer) TypeID() atom.TypeID              { return 61 }
 func (c *CmdPointer) Flags() atom.Flags                { return 0 }
 func (a *CmdPointer) Observations() *atom.Observations { return &a.observations }
 
@@ -5285,7 +5223,6 @@ func (a *CmdVoid3Remapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Rem
 	return a
 }
 func (c *CmdVoid3Remapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoid3Remapped) TypeID() atom.TypeID              { return 62 }
 func (c *CmdVoid3Remapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Remapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5318,7 +5255,6 @@ func (a *CmdVoidInArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	return a
 }
 func (c *CmdVoidInArrayOfRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidInArrayOfRemapped) TypeID() atom.TypeID              { return 63 }
 func (c *CmdVoidInArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5351,7 +5287,6 @@ func (a *CmdVoidOutArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cm
 	return a
 }
 func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID              { return 64 }
 func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5384,7 +5319,6 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) AddWrite(rng memory.Range, id binary.
 	return a
 }
 func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdVoidOutArrayOfUnknownRemapped) TypeID() atom.TypeID              { return 65 }
 func (c *CmdVoidOutArrayOfUnknownRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfUnknownRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5417,7 +5351,6 @@ func (a *CmdRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdRemapped {
 	return a
 }
 func (c *CmdRemapped) API() gfxapi.API                  { return api{} }
-func (c *CmdRemapped) TypeID() atom.TypeID              { return 66 }
 func (c *CmdRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5687,408 +5620,6 @@ func API() gfxapi.API {
 }
 func init() {
 	gfxapi.Register(API())
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_clone",
-		Docs: "[]",
-		ID:   0,
-		New:  func() atom.Atom { return &CmdClone{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_make",
-		Docs: "[]",
-		ID:   1,
-		New:  func() atom.Atom { return &CmdMake{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_copy",
-		Docs: "[]",
-		ID:   2,
-		New:  func() atom.Atom { return &CmdCopy{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_charslice_to_string",
-		Docs: "[]",
-		ID:   3,
-		New:  func() atom.Atom { return &CmdCharsliceToString{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_charptr_to_string",
-		Docs: "[]",
-		ID:   4,
-		New:  func() atom.Atom { return &CmdCharptrToString{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_slice_casts",
-		Docs: "[]",
-		ID:   5,
-		New:  func() atom.Atom { return &CmdSliceCasts{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void",
-		Docs: "[]",
-		ID:   6,
-		New:  func() atom.Atom { return &CmdVoid{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_unknown_ret",
-		Docs: "[]",
-		ID:   7,
-		New:  func() atom.Atom { return &CmdUnknownRet{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_unknown_write_ptr",
-		Docs: "[]",
-		ID:   8,
-		New:  func() atom.Atom { return &CmdUnknownWritePtr{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_unknown_write_slice",
-		Docs: "[]",
-		ID:   9,
-		New:  func() atom.Atom { return &CmdUnknownWriteSlice{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_u8",
-		Docs: "[]",
-		ID:   10,
-		New:  func() atom.Atom { return &CmdVoidU8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_s8",
-		Docs: "[]",
-		ID:   11,
-		New:  func() atom.Atom { return &CmdVoidS8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_u16",
-		Docs: "[]",
-		ID:   12,
-		New:  func() atom.Atom { return &CmdVoidU16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_s16",
-		Docs: "[]",
-		ID:   13,
-		New:  func() atom.Atom { return &CmdVoidS16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_f32",
-		Docs: "[]",
-		ID:   14,
-		New:  func() atom.Atom { return &CmdVoidF32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_u32",
-		Docs: "[]",
-		ID:   15,
-		New:  func() atom.Atom { return &CmdVoidU32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_s32",
-		Docs: "[]",
-		ID:   16,
-		New:  func() atom.Atom { return &CmdVoidS32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_f64",
-		Docs: "[]",
-		ID:   17,
-		New:  func() atom.Atom { return &CmdVoidF64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_u64",
-		Docs: "[]",
-		ID:   18,
-		New:  func() atom.Atom { return &CmdVoidU64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_s64",
-		Docs: "[]",
-		ID:   19,
-		New:  func() atom.Atom { return &CmdVoidS64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_bool",
-		Docs: "[]",
-		ID:   20,
-		New:  func() atom.Atom { return &CmdVoidBool{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_string",
-		Docs: "[]",
-		ID:   21,
-		New:  func() atom.Atom { return &CmdVoidString{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_3_strings",
-		Docs: "[]",
-		ID:   22,
-		New:  func() atom.Atom { return &CmdVoid3Strings{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_3_in_arrays",
-		Docs: "[]",
-		ID:   23,
-		New:  func() atom.Atom { return &CmdVoid3InArrays{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_in_array_of_pointers",
-		Docs: "[]",
-		ID:   24,
-		New:  func() atom.Atom { return &CmdVoidInArrayOfPointers{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_u8",
-		Docs: "[]",
-		ID:   25,
-		New:  func() atom.Atom { return &CmdVoidReadU8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_s8",
-		Docs: "[]",
-		ID:   26,
-		New:  func() atom.Atom { return &CmdVoidReadS8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_u16",
-		Docs: "[]",
-		ID:   27,
-		New:  func() atom.Atom { return &CmdVoidReadU16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_s16",
-		Docs: "[]",
-		ID:   28,
-		New:  func() atom.Atom { return &CmdVoidReadS16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_f32",
-		Docs: "[]",
-		ID:   29,
-		New:  func() atom.Atom { return &CmdVoidReadF32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_u32",
-		Docs: "[]",
-		ID:   30,
-		New:  func() atom.Atom { return &CmdVoidReadU32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_s32",
-		Docs: "[]",
-		ID:   31,
-		New:  func() atom.Atom { return &CmdVoidReadS32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_f64",
-		Docs: "[]",
-		ID:   32,
-		New:  func() atom.Atom { return &CmdVoidReadF64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_u64",
-		Docs: "[]",
-		ID:   33,
-		New:  func() atom.Atom { return &CmdVoidReadU64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_s64",
-		Docs: "[]",
-		ID:   34,
-		New:  func() atom.Atom { return &CmdVoidReadS64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_bool",
-		Docs: "[]",
-		ID:   35,
-		New:  func() atom.Atom { return &CmdVoidReadBool{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_read_ptrs",
-		Docs: "[]",
-		ID:   36,
-		New:  func() atom.Atom { return &CmdVoidReadPtrs{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_u8",
-		Docs: "[]",
-		ID:   37,
-		New:  func() atom.Atom { return &CmdVoidWriteU8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_s8",
-		Docs: "[]",
-		ID:   38,
-		New:  func() atom.Atom { return &CmdVoidWriteS8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_u16",
-		Docs: "[]",
-		ID:   39,
-		New:  func() atom.Atom { return &CmdVoidWriteU16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_s16",
-		Docs: "[]",
-		ID:   40,
-		New:  func() atom.Atom { return &CmdVoidWriteS16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_f32",
-		Docs: "[]",
-		ID:   41,
-		New:  func() atom.Atom { return &CmdVoidWriteF32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_u32",
-		Docs: "[]",
-		ID:   42,
-		New:  func() atom.Atom { return &CmdVoidWriteU32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_s32",
-		Docs: "[]",
-		ID:   43,
-		New:  func() atom.Atom { return &CmdVoidWriteS32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_f64",
-		Docs: "[]",
-		ID:   44,
-		New:  func() atom.Atom { return &CmdVoidWriteF64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_u64",
-		Docs: "[]",
-		ID:   45,
-		New:  func() atom.Atom { return &CmdVoidWriteU64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_s64",
-		Docs: "[]",
-		ID:   46,
-		New:  func() atom.Atom { return &CmdVoidWriteS64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_bool",
-		Docs: "[]",
-		ID:   47,
-		New:  func() atom.Atom { return &CmdVoidWriteBool{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_write_ptrs",
-		Docs: "[]",
-		ID:   48,
-		New:  func() atom.Atom { return &CmdVoidWritePtrs{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_u8",
-		Docs: "[]",
-		ID:   49,
-		New:  func() atom.Atom { return &CmdU8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_s8",
-		Docs: "[]",
-		ID:   50,
-		New:  func() atom.Atom { return &CmdS8{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_u16",
-		Docs: "[]",
-		ID:   51,
-		New:  func() atom.Atom { return &CmdU16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_s16",
-		Docs: "[]",
-		ID:   52,
-		New:  func() atom.Atom { return &CmdS16{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_f32",
-		Docs: "[]",
-		ID:   53,
-		New:  func() atom.Atom { return &CmdF32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_u32",
-		Docs: "[]",
-		ID:   54,
-		New:  func() atom.Atom { return &CmdU32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_s32",
-		Docs: "[]",
-		ID:   55,
-		New:  func() atom.Atom { return &CmdS32{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_f64",
-		Docs: "[]",
-		ID:   56,
-		New:  func() atom.Atom { return &CmdF64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_u64",
-		Docs: "[]",
-		ID:   57,
-		New:  func() atom.Atom { return &CmdU64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_s64",
-		Docs: "[]",
-		ID:   58,
-		New:  func() atom.Atom { return &CmdS64{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_bool",
-		Docs: "[]",
-		ID:   59,
-		New:  func() atom.Atom { return &CmdBool{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_string",
-		Docs: "[]",
-		ID:   60,
-		New:  func() atom.Atom { return &CmdString{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_pointer",
-		Docs: "[]",
-		ID:   61,
-		New:  func() atom.Atom { return &CmdPointer{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_3_remapped",
-		Docs: "[]",
-		ID:   62,
-		New:  func() atom.Atom { return &CmdVoid3Remapped{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_in_array_of_remapped",
-		Docs: "[]",
-		ID:   63,
-		New:  func() atom.Atom { return &CmdVoidInArrayOfRemapped{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_out_array_of_remapped",
-		Docs: "[]",
-		ID:   64,
-		New:  func() atom.Atom { return &CmdVoidOutArrayOfRemapped{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_void_out_array_of_unknown_remapped",
-		Docs: "[]",
-		ID:   65,
-		New:  func() atom.Atom { return &CmdVoidOutArrayOfUnknownRemapped{} },
-	})
-	atom.Register(atom.TypeInfo{
-		Name: "cmd_remapped",
-		Docs: "[]",
-		ID:   66,
-		New:  func() atom.Atom { return &CmdRemapped{} },
-	})
 }
 func min(a, b uint64) uint64 {
 	if a < b {

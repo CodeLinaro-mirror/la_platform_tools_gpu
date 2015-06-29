@@ -116,12 +116,6 @@ func (Custom) Observations() *atom.Observations
 func (c Custom) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
 ```
 
-#### func (Custom) TypeID
-
-```go
-func (Custom) TypeID() atom.TypeID
-```
-
 #### type Device
 
 ```go
