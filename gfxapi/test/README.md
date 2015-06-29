@@ -752,12 +752,6 @@ func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 func (a *CmdBool) String() string
 ```
 
-#### func (*CmdBool) TypeID
-
-```go
-func (c *CmdBool) TypeID() atom.TypeID
-```
-
 #### type CmdCharptrToString
 
 ```go
@@ -836,12 +830,6 @@ func (ϟa *CmdCharptrToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 
 ```go
 func (a *CmdCharptrToString) String() string
-```
-
-#### func (*CmdCharptrToString) TypeID
-
-```go
-func (c *CmdCharptrToString) TypeID() atom.TypeID
 ```
 
 #### type CmdCharsliceToString
@@ -925,12 +913,6 @@ func (ϟa *CmdCharsliceToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *CmdCharsliceToString) String() string
 ```
 
-#### func (*CmdCharsliceToString) TypeID
-
-```go
-func (c *CmdCharsliceToString) TypeID() atom.TypeID
-```
-
 #### type CmdClone
 
 ```go
@@ -1008,12 +990,6 @@ func (ϟa *CmdClone) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 
 ```go
 func (a *CmdClone) String() string
-```
-
-#### func (*CmdClone) TypeID
-
-```go
-func (c *CmdClone) TypeID() atom.TypeID
 ```
 
 #### type CmdCopy
@@ -1095,12 +1071,6 @@ func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 func (a *CmdCopy) String() string
 ```
 
-#### func (*CmdCopy) TypeID
-
-```go
-func (c *CmdCopy) TypeID() atom.TypeID
-```
-
 #### type CmdF32
 
 ```go
@@ -1177,12 +1147,6 @@ func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 
 ```go
 func (a *CmdF32) String() string
-```
-
-#### func (*CmdF32) TypeID
-
-```go
-func (c *CmdF32) TypeID() atom.TypeID
 ```
 
 #### type CmdF64
@@ -1263,12 +1227,6 @@ func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 func (a *CmdF64) String() string
 ```
 
-#### func (*CmdF64) TypeID
-
-```go
-func (c *CmdF64) TypeID() atom.TypeID
-```
-
 #### type CmdMake
 
 ```go
@@ -1345,12 +1303,6 @@ func (ϟa *CmdMake) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 
 ```go
 func (a *CmdMake) String() string
-```
-
-#### func (*CmdMake) TypeID
-
-```go
-func (c *CmdMake) TypeID() atom.TypeID
 ```
 
 #### type CmdPointer
@@ -1431,12 +1383,6 @@ func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *CmdPointer) String() string
 ```
 
-#### func (*CmdPointer) TypeID
-
-```go
-func (c *CmdPointer) TypeID() atom.TypeID
-```
-
 #### type CmdRemapped
 
 ```go
@@ -1513,12 +1459,6 @@ func (ϟa *CmdRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *CmdRemapped) String() string
-```
-
-#### func (*CmdRemapped) TypeID
-
-```go
-func (c *CmdRemapped) TypeID() atom.TypeID
 ```
 
 #### type CmdS16
@@ -1599,12 +1539,6 @@ func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 func (a *CmdS16) String() string
 ```
 
-#### func (*CmdS16) TypeID
-
-```go
-func (c *CmdS16) TypeID() atom.TypeID
-```
-
 #### type CmdS32
 
 ```go
@@ -1681,12 +1615,6 @@ func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 
 ```go
 func (a *CmdS32) String() string
-```
-
-#### func (*CmdS32) TypeID
-
-```go
-func (c *CmdS32) TypeID() atom.TypeID
 ```
 
 #### type CmdS64
@@ -1767,12 +1695,6 @@ func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 func (a *CmdS64) String() string
 ```
 
-#### func (*CmdS64) TypeID
-
-```go
-func (c *CmdS64) TypeID() atom.TypeID
-```
-
 #### type CmdS8
 
 ```go
@@ -1849,12 +1771,6 @@ func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, 
 
 ```go
 func (a *CmdS8) String() string
-```
-
-#### func (*CmdS8) TypeID
-
-```go
-func (c *CmdS8) TypeID() atom.TypeID
 ```
 
 #### type CmdSliceCasts
@@ -1936,12 +1852,6 @@ func (ϟa *CmdSliceCasts) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *CmdSliceCasts) String() string
 ```
 
-#### func (*CmdSliceCasts) TypeID
-
-```go
-func (c *CmdSliceCasts) TypeID() atom.TypeID
-```
-
 #### type CmdString
 
 ```go
@@ -2018,12 +1928,6 @@ func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *CmdString) String() string
-```
-
-#### func (*CmdString) TypeID
-
-```go
-func (c *CmdString) TypeID() atom.TypeID
 ```
 
 #### type CmdU16
@@ -2104,12 +2008,6 @@ func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 func (a *CmdU16) String() string
 ```
 
-#### func (*CmdU16) TypeID
-
-```go
-func (c *CmdU16) TypeID() atom.TypeID
-```
-
 #### type CmdU32
 
 ```go
@@ -2186,12 +2084,6 @@ func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 
 ```go
 func (a *CmdU32) String() string
-```
-
-#### func (*CmdU32) TypeID
-
-```go
-func (c *CmdU32) TypeID() atom.TypeID
 ```
 
 #### type CmdU64
@@ -2272,12 +2164,6 @@ func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 func (a *CmdU64) String() string
 ```
 
-#### func (*CmdU64) TypeID
-
-```go
-func (c *CmdU64) TypeID() atom.TypeID
-```
-
 #### type CmdU8
 
 ```go
@@ -2356,12 +2242,6 @@ func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, 
 func (a *CmdU8) String() string
 ```
 
-#### func (*CmdU8) TypeID
-
-```go
-func (c *CmdU8) TypeID() atom.TypeID
-```
-
 #### type CmdUnknownRet
 
 ```go
@@ -2438,12 +2318,6 @@ func (ϟa *CmdUnknownRet) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *CmdUnknownRet) String() string
-```
-
-#### func (*CmdUnknownRet) TypeID
-
-```go
-func (c *CmdUnknownRet) TypeID() atom.TypeID
 ```
 
 #### type CmdUnknownWritePtr
@@ -2526,12 +2400,6 @@ func (ϟa *CmdUnknownWritePtr) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (a *CmdUnknownWritePtr) String() string
 ```
 
-#### func (*CmdUnknownWritePtr) TypeID
-
-```go
-func (c *CmdUnknownWritePtr) TypeID() atom.TypeID
-```
-
 #### type CmdUnknownWriteSlice
 
 ```go
@@ -2612,12 +2480,6 @@ func (ϟa *CmdUnknownWriteSlice) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (a *CmdUnknownWriteSlice) String() string
 ```
 
-#### func (*CmdUnknownWriteSlice) TypeID
-
-```go
-func (c *CmdUnknownWriteSlice) TypeID() atom.TypeID
-```
-
 #### type CmdVoid
 
 ```go
@@ -2692,12 +2554,6 @@ func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 
 ```go
 func (a *CmdVoid) String() string
-```
-
-#### func (*CmdVoid) TypeID
-
-```go
-func (c *CmdVoid) TypeID() atom.TypeID
 ```
 
 #### type CmdVoid3InArrays
@@ -2780,12 +2636,6 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *CmdVoid3InArrays) String() string
 ```
 
-#### func (*CmdVoid3InArrays) TypeID
-
-```go
-func (c *CmdVoid3InArrays) TypeID() atom.TypeID
-```
-
 #### type CmdVoid3Remapped
 
 ```go
@@ -2864,12 +2714,6 @@ func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 
 ```go
 func (a *CmdVoid3Remapped) String() string
-```
-
-#### func (*CmdVoid3Remapped) TypeID
-
-```go
-func (c *CmdVoid3Remapped) TypeID() atom.TypeID
 ```
 
 #### type CmdVoid3Strings
@@ -2952,12 +2796,6 @@ func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoid3Strings) String() string
 ```
 
-#### func (*CmdVoid3Strings) TypeID
-
-```go
-func (c *CmdVoid3Strings) TypeID() atom.TypeID
-```
-
 #### type CmdVoidBool
 
 ```go
@@ -3034,12 +2872,6 @@ func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 
 ```go
 func (a *CmdVoidBool) String() string
-```
-
-#### func (*CmdVoidBool) TypeID
-
-```go
-func (c *CmdVoidBool) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidF32
@@ -3120,12 +2952,6 @@ func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *CmdVoidF32) String() string
 ```
 
-#### func (*CmdVoidF32) TypeID
-
-```go
-func (c *CmdVoidF32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidF64
 
 ```go
@@ -3202,12 +3028,6 @@ func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *CmdVoidF64) String() string
-```
-
-#### func (*CmdVoidF64) TypeID
-
-```go
-func (c *CmdVoidF64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidInArrayOfPointers
@@ -3291,12 +3111,6 @@ func (ϟa *CmdVoidInArrayOfPointers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (a *CmdVoidInArrayOfPointers) String() string
 ```
 
-#### func (*CmdVoidInArrayOfPointers) TypeID
-
-```go
-func (c *CmdVoidInArrayOfPointers) TypeID() atom.TypeID
-```
-
 #### type CmdVoidInArrayOfRemapped
 
 ```go
@@ -3375,12 +3189,6 @@ func (ϟa *CmdVoidInArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 
 ```go
 func (a *CmdVoidInArrayOfRemapped) String() string
-```
-
-#### func (*CmdVoidInArrayOfRemapped) TypeID
-
-```go
-func (c *CmdVoidInArrayOfRemapped) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidOutArrayOfRemapped
@@ -3463,12 +3271,6 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (a *CmdVoidOutArrayOfRemapped) String() string
 ```
 
-#### func (*CmdVoidOutArrayOfRemapped) TypeID
-
-```go
-func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID
-```
-
 #### type CmdVoidOutArrayOfUnknownRemapped
 
 ```go
@@ -3549,12 +3351,6 @@ func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 func (a *CmdVoidOutArrayOfUnknownRemapped) String() string
 ```
 
-#### func (*CmdVoidOutArrayOfUnknownRemapped) TypeID
-
-```go
-func (c *CmdVoidOutArrayOfUnknownRemapped) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadBool
 
 ```go
@@ -3631,12 +3427,6 @@ func (ϟa *CmdVoidReadBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *CmdVoidReadBool) String() string
-```
-
-#### func (*CmdVoidReadBool) TypeID
-
-```go
-func (c *CmdVoidReadBool) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadF32
@@ -3717,12 +3507,6 @@ func (ϟa *CmdVoidReadF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *CmdVoidReadF32) String() string
 ```
 
-#### func (*CmdVoidReadF32) TypeID
-
-```go
-func (c *CmdVoidReadF32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadF64
 
 ```go
@@ -3799,12 +3583,6 @@ func (ϟa *CmdVoidReadF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidReadF64) String() string
-```
-
-#### func (*CmdVoidReadF64) TypeID
-
-```go
-func (c *CmdVoidReadF64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadPtrs
@@ -3887,12 +3665,6 @@ func (ϟa *CmdVoidReadPtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoidReadPtrs) String() string
 ```
 
-#### func (*CmdVoidReadPtrs) TypeID
-
-```go
-func (c *CmdVoidReadPtrs) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadS16
 
 ```go
@@ -3969,12 +3741,6 @@ func (ϟa *CmdVoidReadS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidReadS16) String() string
-```
-
-#### func (*CmdVoidReadS16) TypeID
-
-```go
-func (c *CmdVoidReadS16) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadS32
@@ -4055,12 +3821,6 @@ func (ϟa *CmdVoidReadS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *CmdVoidReadS32) String() string
 ```
 
-#### func (*CmdVoidReadS32) TypeID
-
-```go
-func (c *CmdVoidReadS32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadS64
 
 ```go
@@ -4137,12 +3897,6 @@ func (ϟa *CmdVoidReadS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidReadS64) String() string
-```
-
-#### func (*CmdVoidReadS64) TypeID
-
-```go
-func (c *CmdVoidReadS64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadS8
@@ -4223,12 +3977,6 @@ func (ϟa *CmdVoidReadS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *CmdVoidReadS8) String() string
 ```
 
-#### func (*CmdVoidReadS8) TypeID
-
-```go
-func (c *CmdVoidReadS8) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadU16
 
 ```go
@@ -4305,12 +4053,6 @@ func (ϟa *CmdVoidReadU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidReadU16) String() string
-```
-
-#### func (*CmdVoidReadU16) TypeID
-
-```go
-func (c *CmdVoidReadU16) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadU32
@@ -4391,12 +4133,6 @@ func (ϟa *CmdVoidReadU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *CmdVoidReadU32) String() string
 ```
 
-#### func (*CmdVoidReadU32) TypeID
-
-```go
-func (c *CmdVoidReadU32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidReadU64
 
 ```go
@@ -4473,12 +4209,6 @@ func (ϟa *CmdVoidReadU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidReadU64) String() string
-```
-
-#### func (*CmdVoidReadU64) TypeID
-
-```go
-func (c *CmdVoidReadU64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidReadU8
@@ -4559,12 +4289,6 @@ func (ϟa *CmdVoidReadU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (a *CmdVoidReadU8) String() string
 ```
 
-#### func (*CmdVoidReadU8) TypeID
-
-```go
-func (c *CmdVoidReadU8) TypeID() atom.TypeID
-```
-
 #### type CmdVoidS16
 
 ```go
@@ -4641,12 +4365,6 @@ func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *CmdVoidS16) String() string
-```
-
-#### func (*CmdVoidS16) TypeID
-
-```go
-func (c *CmdVoidS16) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidS32
@@ -4727,12 +4445,6 @@ func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *CmdVoidS32) String() string
 ```
 
-#### func (*CmdVoidS32) TypeID
-
-```go
-func (c *CmdVoidS32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidS64
 
 ```go
@@ -4809,12 +4521,6 @@ func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *CmdVoidS64) String() string
-```
-
-#### func (*CmdVoidS64) TypeID
-
-```go
-func (c *CmdVoidS64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidS8
@@ -4895,12 +4601,6 @@ func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 func (a *CmdVoidS8) String() string
 ```
 
-#### func (*CmdVoidS8) TypeID
-
-```go
-func (c *CmdVoidS8) TypeID() atom.TypeID
-```
-
 #### type CmdVoidString
 
 ```go
@@ -4977,12 +4677,6 @@ func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 
 ```go
 func (a *CmdVoidString) String() string
-```
-
-#### func (*CmdVoidString) TypeID
-
-```go
-func (c *CmdVoidString) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidU16
@@ -5063,12 +4757,6 @@ func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *CmdVoidU16) String() string
 ```
 
-#### func (*CmdVoidU16) TypeID
-
-```go
-func (c *CmdVoidU16) TypeID() atom.TypeID
-```
-
 #### type CmdVoidU32
 
 ```go
@@ -5145,12 +4833,6 @@ func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 
 ```go
 func (a *CmdVoidU32) String() string
-```
-
-#### func (*CmdVoidU32) TypeID
-
-```go
-func (c *CmdVoidU32) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidU64
@@ -5231,12 +4913,6 @@ func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (a *CmdVoidU64) String() string
 ```
 
-#### func (*CmdVoidU64) TypeID
-
-```go
-func (c *CmdVoidU64) TypeID() atom.TypeID
-```
-
 #### type CmdVoidU8
 
 ```go
@@ -5313,12 +4989,6 @@ func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 
 ```go
 func (a *CmdVoidU8) String() string
-```
-
-#### func (*CmdVoidU8) TypeID
-
-```go
-func (c *CmdVoidU8) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidWriteBool
@@ -5399,12 +5069,6 @@ func (ϟa *CmdVoidWriteBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *CmdVoidWriteBool) String() string
 ```
 
-#### func (*CmdVoidWriteBool) TypeID
-
-```go
-func (c *CmdVoidWriteBool) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteF32
 
 ```go
@@ -5483,12 +5147,6 @@ func (ϟa *CmdVoidWriteF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoidWriteF32) String() string
 ```
 
-#### func (*CmdVoidWriteF32) TypeID
-
-```go
-func (c *CmdVoidWriteF32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteF64
 
 ```go
@@ -5565,12 +5223,6 @@ func (ϟa *CmdVoidWriteF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *CmdVoidWriteF64) String() string
-```
-
-#### func (*CmdVoidWriteF64) TypeID
-
-```go
-func (c *CmdVoidWriteF64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidWritePtrs
@@ -5653,12 +5305,6 @@ func (ϟa *CmdVoidWritePtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (a *CmdVoidWritePtrs) String() string
 ```
 
-#### func (*CmdVoidWritePtrs) TypeID
-
-```go
-func (c *CmdVoidWritePtrs) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteS16
 
 ```go
@@ -5735,12 +5381,6 @@ func (ϟa *CmdVoidWriteS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *CmdVoidWriteS16) String() string
-```
-
-#### func (*CmdVoidWriteS16) TypeID
-
-```go
-func (c *CmdVoidWriteS16) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidWriteS32
@@ -5821,12 +5461,6 @@ func (ϟa *CmdVoidWriteS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoidWriteS32) String() string
 ```
 
-#### func (*CmdVoidWriteS32) TypeID
-
-```go
-func (c *CmdVoidWriteS32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteS64
 
 ```go
@@ -5903,12 +5537,6 @@ func (ϟa *CmdVoidWriteS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *CmdVoidWriteS64) String() string
-```
-
-#### func (*CmdVoidWriteS64) TypeID
-
-```go
-func (c *CmdVoidWriteS64) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidWriteS8
@@ -5989,12 +5617,6 @@ func (ϟa *CmdVoidWriteS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (a *CmdVoidWriteS8) String() string
 ```
 
-#### func (*CmdVoidWriteS8) TypeID
-
-```go
-func (c *CmdVoidWriteS8) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteU16
 
 ```go
@@ -6071,12 +5693,6 @@ func (ϟa *CmdVoidWriteU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 
 ```go
 func (a *CmdVoidWriteU16) String() string
-```
-
-#### func (*CmdVoidWriteU16) TypeID
-
-```go
-func (c *CmdVoidWriteU16) TypeID() atom.TypeID
 ```
 
 #### type CmdVoidWriteU32
@@ -6157,12 +5773,6 @@ func (ϟa *CmdVoidWriteU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoidWriteU32) String() string
 ```
 
-#### func (*CmdVoidWriteU32) TypeID
-
-```go
-func (c *CmdVoidWriteU32) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteU64
 
 ```go
@@ -6241,12 +5851,6 @@ func (ϟa *CmdVoidWriteU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (a *CmdVoidWriteU64) String() string
 ```
 
-#### func (*CmdVoidWriteU64) TypeID
-
-```go
-func (c *CmdVoidWriteU64) TypeID() atom.TypeID
-```
-
 #### type CmdVoidWriteU8
 
 ```go
@@ -6323,12 +5927,6 @@ func (ϟa *CmdVoidWriteU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 
 ```go
 func (a *CmdVoidWriteU8) String() string
-```
-
-#### func (*CmdVoidWriteU8) TypeID
-
-```go
-func (c *CmdVoidWriteU8) TypeID() atom.TypeID
 ```
 
 #### type F32ˢ

@@ -38,9 +38,6 @@ type Atom interface {
 	// API returns the graphics API this atom belongs to.
 	API() gfxapi.API
 
-	// TypeID returns the identifier of this atom's type.
-	TypeID() TypeID
-
 	// Flags returns the flags of the atom.
 	Flags() Flags
 

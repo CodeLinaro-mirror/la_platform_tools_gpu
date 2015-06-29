@@ -7,18 +7,6 @@ Package test provides testing helpers for the atom package.
 ## Usage
 
 ```go
-const AtomIDA = atom.TypeID(1)
-```
-
-```go
-const AtomIDB = atom.TypeID(2)
-```
-
-```go
-const AtomIDC = atom.TypeID(3)
-```
-
-```go
 var (
 	AtomAID = binary.ID{0x38, 0x1e, 0xef, 0x73, 0x50, 0xa0, 0x48, 0x6d, 0xa3, 0x1d, 0x8e, 0xb6, 0x5e, 0x47, 0xb7, 0xbf, 0x7b, 0xc8, 0x06, 0x33}
 	AtomBID = binary.ID{0x32, 0x6a, 0x98, 0x0f, 0x59, 0xd2, 0x52, 0x34, 0x9c, 0xc2, 0x75, 0x25, 0x62, 0xb8, 0xb3, 0x0b, 0x48, 0x54, 0x3c, 0x85}
@@ -71,12 +59,6 @@ func (a *AtomA) Mutate(*gfxapi.State, database.Database, log.Logger) error
 func (a *AtomA) Observations() *atom.Observations
 ```
 
-#### func (*AtomA) TypeID
-
-```go
-func (a *AtomA) TypeID() atom.TypeID
-```
-
 #### type AtomB
 
 ```go
@@ -118,12 +100,6 @@ func (a *AtomB) Mutate(*gfxapi.State, database.Database, log.Logger) error
 func (a *AtomB) Observations() *atom.Observations
 ```
 
-#### func (*AtomB) TypeID
-
-```go
-func (a *AtomB) TypeID() atom.TypeID
-```
-
 #### type AtomC
 
 ```go
@@ -162,10 +138,4 @@ func (a *AtomC) Mutate(*gfxapi.State, database.Database, log.Logger) error
 
 ```go
 func (a *AtomC) Observations() *atom.Observations
-```
-
-#### func (*AtomC) TypeID
-
-```go
-func (a *AtomC) TypeID() atom.TypeID
 ```
