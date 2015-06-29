@@ -13,6 +13,11 @@ DisableLocalDeviceCache can be used to disable the disk-cache for the local
 device. If true, it is passed as a flag to replayd on spawning. This can be used
 for disabling the cache for tests.
 
+```go
+var LocalReplayBinary = replayd
+```
+LocalReplayBinary is the full path to the local binary.
+
 #### func  Replay
 
 ```go
