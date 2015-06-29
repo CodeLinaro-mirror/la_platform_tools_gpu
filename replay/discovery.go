@@ -81,7 +81,7 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 		defer m.Unlock()
 		m.devices[d.id] = d
 	} else {
-		m.logger.Infof("Failed to communicate with Android device '%s': %v", d.Info().Name, err)
+		log.Infof(m.logger, "Failed to communicate with Android device '%s': %v", d.Info().Name, err)
 	}
 }
 
@@ -102,7 +102,7 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 		defer m.Unlock()
 		m.devices[d.id] = d
 	} else {
-		m.logger.Warningf("Failed to communicate with local device '%s': %v", d.Info().Name, err)
+		log.Warningf(m.logger, "Failed to communicate with local device '%s': %v", d.Info().Name, err)
 	}
 }
 

@@ -70,7 +70,7 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 	nextTime := startTime
 	for {
 		if closed(stop) {
-			logger.Infof("Stop: %v", count)
+			log.Infof(logger, "Stop: %v", count)
 			break
 		}
 		now := time.Now()
@@ -78,13 +78,13 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 		n, err := io.CopyN(w, conn, 1024*64)
 		count += siSize(n)
 		if err == io.EOF {
-			logger.Infof("EOF: %v", count)
+			log.Infof(logger, "EOF: %v", count)
 			break
 		}
 		if err != nil {
 			err, isnet := err.(net.Error)
 			if !isnet || (!err.Temporary() && !err.Timeout()) {
-				logger.Infof("Connection error: %v", err)
+				log.Infof(logger, "Connection error: %v", err)
 				return int64(count), err
 			}
 		}
@@ -92,7 +92,7 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 			nextSize = count + sizeGap
 			nextTime = now.Add(timeGap)
 			delta := time.Duration(int64(now.Sub(startTime)/time.Millisecond)) * time.Millisecond
-			logger.Infof("Capturing: %v in %v", count, delta)
+			log.Infof(logger, "Capturing: %v in %v", count, delta)
 		}
 	}
 	return int64(count), nil
@@ -102,7 +102,7 @@ func capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 // delivered.
 // It copies the capture into the supplied writer.
 func Capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int64, error) {
-	logger.Infof("Waiting for connection to localhost:%d...", port)
+	log.Infof(logger, "Waiting for connection to localhost:%d...", port)
 	for {
 		count, err := capture(logger, port, w, stop)
 		if err != nil {
@@ -116,10 +116,10 @@ func Capture(logger log.Logger, port int, w io.Writer, stop chan struct{}) (int6
 		// another waiting-for-connection case.
 		select {
 		case <-stop:
-			logger.Infof("Aborted.")
+			log.Infof(logger, "Aborted.")
 			return 0, nil
 		case <-time.After(500 * time.Millisecond):
-			logger.Infof("Retry...")
+			log.Infof(logger, "Retry...")
 		}
 	}
 }

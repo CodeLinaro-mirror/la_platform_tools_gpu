@@ -39,7 +39,7 @@ func decompressTextures(device *service.Device, capture service.CaptureId, d dat
 	supportedFormats := getCompressedFormats(device)
 	return atom.Transform("DecompressTextures", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s, d, l); err != nil {
-			l.Errorf("%v", err)
+			log.Errorf(l, "%v", err)
 		}
 
 		switch a := a.(type) {

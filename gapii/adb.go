@@ -57,63 +57,63 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port) error {
 	d := p.Device
 	enforced, err := d.SELinuxEnforcing()
 	if err != nil {
-		l.Errorf("Failed detecting se linux enforcing state: %s", err)
+		log.Errorf(l, "Failed detecting se linux enforcing state: %s", err)
 		return err
 	}
 	if enforced {
-		l.Infof("Disabling SELinux enforcing")
+		log.Infof(l, "Disabling SELinux enforcing")
 		err := d.SetSELinuxEnforcing(false)
 		if err != nil {
-			l.Errorf("Failed disabling se linux enforcing: %s", err)
+			log.Errorf(l, "Failed disabling se linux enforcing: %s", err)
 			return err
 		}
 		defer func() {
-			l.Infof("Re-enabling SELinux enforcing")
+			log.Infof(l, "Re-enabling SELinux enforcing")
 			err := d.SetSELinuxEnforcing(false)
 			if err != nil {
-				l.Errorf("Failed re-enabling se linux enforcing: %s", err)
+				log.Errorf(l, "Failed re-enabling se linux enforcing: %s", err)
 			}
 		}()
 	}
 
 	gapiiPath, err := getSoPath(a)
 	if err != nil {
-		l.Errorf("Failed finding gapii: %s", err)
+		log.Errorf(l, "Failed finding gapii: %s", err)
 		return err
 	}
-	l.Infof("Pushing %s to %s", gapiiPath, preloadPath)
+	log.Infof(l, "Pushing %s to %s", gapiiPath, preloadPath)
 	err = d.Push(gapiiPath, preloadPath)
 	if err != nil {
-		l.Errorf("Failed pushing %s to %s: %s", gapiiPath, preloadPath, err)
+		log.Errorf(l, "Failed pushing %s to %s: %s", gapiiPath, preloadPath, err)
 		return err
 	}
 
-	l.Infof("Setting LD_PRELOAD on %s", p.Name)
+	log.Infof(l, "Setting LD_PRELOAD on %s", p.Name)
 	err = p.SetWrapProperties("LD_PRELOAD=" + preloadPath)
 	if err != nil {
-		l.Errorf("Failed setting LD_PRELOAD: %s", err)
+		log.Errorf(l, "Failed setting LD_PRELOAD: %s", err)
 		return err
 	}
 	defer func() {
-		l.Infof("Clearing LD_PRELOAD on %s", p.Name)
+		log.Infof(l, "Clearing LD_PRELOAD on %s", p.Name)
 		err := p.SetWrapProperties("")
 		if err != nil {
-			l.Errorf("Failed clearing LD_PRELOAD: %s", err)
+			log.Errorf(l, "Failed clearing LD_PRELOAD: %s", err)
 			return
 		}
 	}()
 
-	l.Infof("Forwarding port %v", spyport)
+	log.Infof(l, "Forwarding port %v", spyport)
 	err = d.Forward(spyport, adb.NamedAbstractSocket("gfxspy"))
 	if err != nil {
-		l.Errorf("Failed setting up port forwarding: %s", err)
+		log.Errorf(l, "Failed setting up port forwarding: %s", err)
 		return err
 	}
 
-	l.Infof("Starting activity %s/%s", p.Name, a.Activity)
+	log.Infof(l, "Starting activity %s/%s", p.Name, a.Activity)
 	d.StartActivity(*a)
 	if err != nil {
-		l.Errorf("Failed starting %s/%s: %s", p.Name, a.Activity, err)
+		log.Errorf(l, "Failed starting %s/%s: %s", p.Name, a.Activity, err)
 		return err
 	}
 	return nil

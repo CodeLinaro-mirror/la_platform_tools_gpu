@@ -495,7 +495,7 @@ func (h {{$.Name}}) Valid() bool {
         if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
           res = val.(*{{Macro "ResultName" $c}}).value
         } else {
-          l.Errorf("RPC {{$c.Name}} failed with error: %v", err)
+          log.Errorf(l, "RPC {{$c.Name}} failed with error: %v", err)
         }
         return
       }
@@ -537,11 +537,11 @@ func (h {{$.Name}}) Valid() bool {
       defer func() {
         if err := recover(); err == nil {
           if config.DebugRPCCalls {
-            l.Infof("returned: %v", res)
+            log.Infof(l, "returned: %v", res)
           }
         } else {
           msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-          l.Errorf(msg)
+          log.Errorf(l, msg)
           res = rpc.NewError(msg)
         }
       }()

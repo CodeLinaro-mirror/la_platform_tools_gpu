@@ -30,33 +30,6 @@ func (s *Splitter) Add(l Logger) {
 	s.mutex.Unlock()
 }
 
-// Info will call Info with the same arguments on all logs passed to Add.
-func (s *Splitter) Infof(msg string, args ...interface{}) {
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-	for _, l := range s.listeners {
-		l.Infof(msg, args...)
-	}
-}
-
-// Warning will call Warning with the same arguments on all logs passed to Add.
-func (s *Splitter) Warningf(msg string, args ...interface{}) {
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-	for _, l := range s.listeners {
-		l.Warningf(msg, args...)
-	}
-}
-
-// Error will call Error with the same arguments on all logs passed to Add.
-func (s *Splitter) Errorf(msg string, args ...interface{}) {
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-	for _, l := range s.listeners {
-		l.Errorf(msg, args...)
-	}
-}
-
 // Logf will call Logf with the same arguments on all logs passed to Add.
 func (s *Splitter) Log(severity Severity, msg string, args ...interface{}) {
 	s.mutex.Lock()
