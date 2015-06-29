@@ -43,8 +43,9 @@ public:
     std::unique_ptr<ServerConnection> acceptConnection();
 
     enum ConnectionType {
-        DEVICE_INFO    = 0,
-        REPLAY_REQUEST = 1,
+        DEVICE_INFO      = 0,
+        REPLAY_REQUEST   = 1,
+        SHUTDOWN_REQUEST = 2,
     };
 
 private:

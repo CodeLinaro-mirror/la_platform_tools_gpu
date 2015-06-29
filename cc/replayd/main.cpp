@@ -79,6 +79,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
     while (true) {
         std::unique_ptr<ServerConnection> acceptedConn(listener.acceptConnection());
         if (!acceptedConn) {
+            GAPID_INFO("Shutting down");
             break;
         }
 
