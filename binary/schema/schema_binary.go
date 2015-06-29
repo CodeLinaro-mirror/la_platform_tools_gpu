@@ -45,7 +45,7 @@ func init() {
 var (
 	binaryIDArray           = binary.ID{0x7a, 0x88, 0x3e, 0x09, 0xeb, 0xc7, 0x5c, 0x2c, 0x69, 0xc2, 0x9b, 0x9d, 0x3c, 0x5d, 0xdb, 0xe4, 0x3f, 0xc0, 0x7e, 0xc6}
 	binaryIDField           = binary.ID{0x8c, 0x54, 0x3d, 0x98, 0xc3, 0x7e, 0x38, 0xa8, 0xaa, 0x56, 0xbc, 0x84, 0x27, 0x49, 0x5d, 0x42, 0xdd, 0x21, 0x24, 0xf8}
-	binaryIDClass           = binary.ID{0x3d, 0xe2, 0xd5, 0xa0, 0x60, 0xad, 0x78, 0x33, 0x15, 0xc1, 0x75, 0x81, 0x62, 0xa3, 0x26, 0x98, 0x07, 0x1b, 0x81, 0x10}
+	binaryIDClass           = binary.ID{0x9c, 0x0f, 0x79, 0x16, 0xd5, 0xbb, 0x09, 0xbe, 0x83, 0xd3, 0x90, 0xa9, 0x58, 0x6d, 0xad, 0x88, 0xa2, 0xd9, 0x98, 0x50}
 	binaryIDInt16Constant   = binary.ID{0x54, 0xbe, 0x53, 0xa9, 0x57, 0x51, 0xb6, 0x72, 0x2b, 0x3f, 0x1a, 0x3a, 0x29, 0xd8, 0x34, 0xec, 0xdd, 0xcf, 0x16, 0x10}
 	binaryIDInt16Constants  = binary.ID{0xda, 0xb0, 0xd4, 0x7c, 0xc2, 0x65, 0x3b, 0x38, 0xf4, 0x62, 0x43, 0x8a, 0x88, 0x0c, 0xc3, 0x05, 0xc0, 0xb4, 0xd9, 0x7b}
 	binaryIDInt32Constant   = binary.ID{0xff, 0xdc, 0x4d, 0xf9, 0x55, 0xc5, 0xe5, 0xce, 0xce, 0x46, 0x2b, 0xaa, 0xe7, 0xa9, 0x16, 0xad, 0x17, 0xfc, 0x3d, 0x9f}
@@ -245,6 +245,18 @@ func doEncodeClass(e binary.Encoder, o *Class) error {
 			return err
 		}
 	}
+	if err := e.Uint32(uint32(len(o.Metadata))); err != nil {
+		return err
+	}
+	for i := range o.Metadata {
+		if o.Metadata[i] != nil {
+			if err := e.Object(o.Metadata[i]); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 func doDecodeClass(d binary.Decoder, o *Class) error {
@@ -278,6 +290,20 @@ func doDecodeClass(d binary.Decoder, o *Class) error {
 			}
 		}
 	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Metadata = make([]binary.Object, count)
+		for i := range o.Metadata {
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				o.Metadata[i] = obj.(binary.Object)
+			} else {
+				o.Metadata[i] = nil
+			}
+		}
+	}
 	return nil
 }
 func doSkipClass(d binary.Decoder) error {
@@ -298,6 +324,15 @@ func doSkipClass(d binary.Decoder) error {
 	} else {
 		for i := uint32(0); i < count; i++ {
 			if err := d.SkipValue((*Field)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -330,6 +365,7 @@ var schemaClass = &Class{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Display", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Fields", Type: &Slice{Alias: "FieldList", ValueType: &Struct{Name: "Field", ID: (*Field)(nil).Class().ID()}}},
+		{Declared: "Metadata", Type: &Slice{Alias: "", ValueType: &Interface{Name: "binary.Object"}}},
 	},
 }
 
