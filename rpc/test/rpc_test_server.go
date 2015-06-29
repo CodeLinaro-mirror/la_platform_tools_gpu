@@ -121,19 +121,14 @@ func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceId, 
 }
 
 // ResolveResource loads and returns the Resource stored in the database d, using id.
-func ResolveResource(id ResourceId, d database.Database, l log.Logger) (*Resource, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveResource(id ResourceId, d database.Database, l log.Logger) (res Resource, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Resource))
 	}
-	return (out.(*Resource)), nil
+	return res, err
 }
 
 // ResolveResource loads and returns the Resource stored in the resolver's database, using id.
 func (r Resolver) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Resource{}, err
-	}
-	return *(out.(*Resource)), nil
+	return ResolveResource(id, r.Database, l)
 }

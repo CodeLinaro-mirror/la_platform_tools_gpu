@@ -73,6 +73,7 @@
   Emits the go type for the provided AST type.
 -------------------------------------------------------------------------------
 */}}
+{{define "Type#any"      }}interface{}{{end}}
 {{define "Type#bool"     }}bool{{end}}
 {{define "Type#s8"       }}int8{{end}}
 {{define "Type#u8"       }}uint8{{end}}
@@ -90,6 +91,18 @@
 {{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
 {{define "Type.Enum"     }}{{.Type.Name}}{{end}}
 {{define "Type.Pointer"  }}{{if not (GetAnnotation $.Type.To "Interface")}}*{{end}}{{Node "Type" .Type.To}}{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the reference type for the provided AST type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Reference"}}
+  {{if not (IsType $)}}{{Macro "Reference" (TypeOf $)}}
+  {{else             }}{{if not (Underlying $ | IsAny)}}*{{end}}{{Node "Type" $}}
+  {{end}}
+{{end}}
 
 
 {{/*

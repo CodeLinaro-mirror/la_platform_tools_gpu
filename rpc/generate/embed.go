@@ -48,6 +48,8 @@ const rpc_go_tmpl = `{{/*
   {{range $_, $h := $.api.Pseudonyms}}
     {{if GetAnnotation $h "handle"}}
       {{Macro (print "Handle" $.role) $h}}
+    {{else}}
+      {{Macro (print "Pseudonym" $.role) $h}}
     {{end}}
   {{end}}
 ¶
@@ -308,7 +310,7 @@ const rpc_go_tmpl = `{{/*
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the encoder of a handle.
+  Emits the definition of a handle.
 -------------------------------------------------------------------------------
 */}}
 {{define "Handle"}}
@@ -327,6 +329,21 @@ func (h {{$.Name}}) Valid() bool {
   return h.ID.Valid()
 }
 {{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the definition of a pseudonym (typedef).
+-------------------------------------------------------------------------------
+*/}}
+{{define "Pseudonym"}}
+  {{AssertType $ "Pseudonym"}}
+
+  type {{$.Name}} {{Node "Type" $.To}}
+{{end}}
+
+{{define "PseudonymExtra"}}{{end}}
+{{define "PseudonymHelpers"}}{{end}}
 
 
 {{/*
@@ -489,16 +506,32 @@ func (h {{$.Name}}) Valid() bool {
   import (
     "io"
 
+    "android.googlesource.com/platform/tools/gpu/binary/registry"
     "android.googlesource.com/platform/tools/gpu/log"
+    "android.googlesource.com/platform/tools/gpu/multiplexer"
     "android.googlesource.com/platform/tools/gpu/rpc"
   )
 
-  type client struct {
-    rpc.Client
+  // Client is the client interface for RPC calls.
+  type Client interface {
+    // Client exposes all the RPC interface methods.
+    RPC
+
+    // Multiplexer returns the multiplexer used for communication to the server.
+    Multiplexer() *multiplexer.Multiplexer
+
+    // Namespace returns the custom namespace used for decoding responses from the
+    // server, or nil if no custom namespace has been specified.
+    Namespace() *registry.Namespace
   }
 
-  func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
-    return client{rpc.NewClient(r, w, mtu)}
+  type client struct { rpc.Client }
+
+  // NewClient creates a new rpc client object that uses the multiplexer m for
+  // communication the namespace n for decoding objects. If n is nil then the
+  // global namespace is used.
+  func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
+    return client{rpc.NewClient(m, n)}
   }
 
   // Client compliance
@@ -584,37 +617,37 @@ func (h {{$.Name}}) Valid() bool {
   }
 
   type Resolver struct {
-    Database      database.Database
+    Database database.Database
   }
 
   {{range $_, $c := $.Functions}}
     {{if not (IsVoid $c.Return.Type)}}
-      {{$type := SNode "Type" $c.Return}}
+      {{$type  := SNode "Type" $c.Return}}
+      {{$refty := Macro "Reference" $c.Return}}
       {{if eq $c.Name (print "Resolve" $type)}}
         {{$handle := SNode "Type" (index $c.CallParameters 0)}}
 
         // Store{{$type}} stores v into the database d, returning the {{$handle}}.
-        func Store{{$type}}(v *{{$type}}, d database.Database, l log.Logger) ({{$handle}}, error) {
+        func Store{{$type}}(v {{$refty}}, d database.Database, l log.Logger) ({{$handle}}, error) {
           id, err := database.Store(v, d, l)
           return {{$handle}}{ID: id}, err
         }
 
         // Resolve{{$type}} loads and returns the {{$type}} stored in the database d, using id.
-        func Resolve{{$type}}(id {{$handle}}, d database.Database, l log.Logger) (*{{$type}}, error) {
-          out, err := d.Resolve(id.ID, l)
-          if err != nil {
-            return nil, err
+        func Resolve{{$type}}(id {{$handle}}, d database.Database, l log.Logger) (res {{$type}}, err error) {
+          if out, err := d.Resolve(id.ID, l); err == nil {
+            {{if eq $type $refty}}
+              res = (out.({{$refty}}))
+            {{else}}
+              res = *(out.({{$refty}}))
+            {{end}}
           }
-          return (out.(*{{$type}})), nil
+          return res, err
         }
 
         // Resolve{{$type}} loads and returns the {{$type}} stored in the resolver's database, using id.
         func (r Resolver) Resolve{{$type}}(id {{$handle}}, l log.Logger) ({{$type}}, error) {
-          out, err := r.Database.Resolve(id.ID, l)
-          if err != nil {
-            return {{$type}}{}, err
-          }
-          return *(out.(*{{$type}})), nil
+          return Resolve{{$type}}(id, r.Database, l)
         }
       {{end}}
     {{end}}
@@ -1275,6 +1308,7 @@ const rpc_common_go_tmpl = `{{/*
   Emits the go type for the provided AST type.
 -------------------------------------------------------------------------------
 */}}
+{{define "Type#any"      }}interface{}{{end}}
 {{define "Type#bool"     }}bool{{end}}
 {{define "Type#s8"       }}int8{{end}}
 {{define "Type#u8"       }}uint8{{end}}
@@ -1292,6 +1326,18 @@ const rpc_common_go_tmpl = `{{/*
 {{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
 {{define "Type.Enum"     }}{{.Type.Name}}{{end}}
 {{define "Type.Pointer"  }}{{if not (GetAnnotation $.Type.To "Interface")}}*{{end}}{{Node "Type" .Type.To}}{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the reference type for the provided AST type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Reference"}}
+  {{if not (IsType $)}}{{Macro "Reference" (TypeOf $)}}
+  {{else             }}{{if not (Underlying $ | IsAny)}}*{{end}}{{Node "Type" $}}
+  {{end}}
+{{end}}
 
 
 {{/*

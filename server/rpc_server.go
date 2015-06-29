@@ -109,14 +109,16 @@ func (s rpcServer) GetDevices(l log.Logger) (service.DeviceIdArray, error) {
 // using the capture's schema.
 func (s rpcServer) GetState(
 	captureID service.CaptureId,
+	api service.ApiId,
 	at uint64,
-	l log.Logger) (service.BinaryId, error) {
+	l log.Logger) (service.StateId, error) {
 
 	id, err := database.Store(&builder.GetState{
 		Capture: captureID,
+		API:     api,
 		After:   atom.ID(at),
 	}, s.Database, l)
-	return service.BinaryId{ID: id}, err
+	return service.StateId{ID: id}, err
 }
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture.

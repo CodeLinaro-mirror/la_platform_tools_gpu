@@ -47,24 +47,26 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	var capture *service.Capture
+	var capture service.Capture
 
 	if id := req.URL.Query().Get(idParamName); id != "" {
 		for _, cid := range captures {
 			if strings.EqualFold(cid.ID.String(), id) {
-				capture, _ = service.ResolveCapture(cid, h, logger)
+				capture, err = service.ResolveCapture(cid, h, logger)
 				break
 			}
 		}
 	} else if name := req.URL.Query().Get(nameParamName); name != "" {
 		for _, id := range captures {
-			capture, err := service.ResolveCapture(id, h, logger)
-			if err == nil {
-				if strings.EqualFold(capture.Name, name) {
-					break
-				}
+			capture, err = service.ResolveCapture(id, h, logger)
+			if strings.EqualFold(capture.Name, name) {
+				break
 			}
 		}
+	}
+
+	if err != nil {
+		panic(err)
 	}
 
 	if capture.Name == "" {

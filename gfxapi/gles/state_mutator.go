@@ -7,6 +7,7 @@ package gles
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -19,7 +20,7 @@ func getState(s *gfxapi.State) *State {
 		return state
 	} else {
 		if s.APIs == nil {
-			s.APIs = make(map[gfxapi.API]interface{})
+			s.APIs = make(map[gfxapi.API]binary.Object)
 		}
 		state = &State{}
 		state.Init()

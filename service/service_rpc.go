@@ -16,7 +16,7 @@ type RPC interface {
 	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
-	GetState(capture CaptureId, after uint64, l log.Logger) (BinaryId, error)
+	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
 	GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
@@ -27,12 +27,13 @@ type RPC interface {
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
-	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
+	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
+	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 
@@ -96,11 +97,18 @@ type SchemaId struct {
 	ID binary.ID
 }
 
+// Handle StateId
+type StateId struct {
+	binary.Generate
+	ID binary.ID
+}
+
 // Handle TimingInfoId
 type TimingInfoId struct {
 	binary.Generate
 	ID binary.ID
 }
+type State interface{}
 
 // Array ApiIdˢ
 type ApiIdArray []ApiId
@@ -375,8 +383,7 @@ type Schema struct {
 // Class ApiSchema
 type ApiSchema struct {
 	binary.Generate
-	Api   ApiId
-	State StructInfo
+	Api ApiId
 }
 
 // Class ArrayInfo
