@@ -35,12 +35,17 @@ type schema interface {
 	Schema() *Class
 }
 
-// Lookup looks up a Class by the given type id.
-// If there is no match, it will return nil.
-func Lookup(id binary.ID) *Class {
-	s, ok := registry.Global.Lookup(id).(schema)
+// Returns the schema class for a binary class, if it has one.
+func Of(class binary.Class) *Class {
+	s, ok := class.(schema)
 	if ok {
 		return s.Schema()
 	}
 	return nil
+}
+
+// Lookup looks up a Class by the given type id.
+// If there is no match, it will return nil.
+func Lookup(id binary.ID) *Class {
+	return Of(registry.Global.Lookup(id))
 }
