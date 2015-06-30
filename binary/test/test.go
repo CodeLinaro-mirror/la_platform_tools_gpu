@@ -21,6 +21,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/objects"
+	"android.googlesource.com/platform/tools/gpu/binary/pod"
 )
 
 type TypeA struct {
@@ -44,7 +45,7 @@ var BadObject = &BadType{Data: "BadObject"}
 
 type Entry struct {
 	Name   string
-	Values []binary.Object
+	Values []interface{}
 	Data   []byte
 }
 
@@ -58,7 +59,7 @@ Got:      %# x`, entry.Name, entry.Data, got.Bytes())
 
 func EncodeValue(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer) {
 	for i, o := range entry.Values {
-		if err := e.Value(o); err != nil {
+		if err := e.Value(pod.Wrap(o)); err != nil {
 			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
 		}
 	}
@@ -112,8 +113,8 @@ func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Rea
 	reader.Seek(0, 0)
 	for i, v := range entry.Values {
 		var ty binary.Class = objects.NilClass
-		if v != nil {
-			ty = v.Class()
+		if obj := pod.Wrap(v); obj != nil {
+			ty = obj.Class()
 		}
 		if id, err := d.SkipObject(); err != nil {
 			t.Errorf("%v[%v] SkipObject gave unexpected error: %v", entry.Name, i, err)
