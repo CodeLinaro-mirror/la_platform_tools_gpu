@@ -37,10 +37,6 @@ func (a *Atom) IsEndOfFrame() bool {
 	return a.info.IsEndOfFrame
 }
 
-func (a *Atom) IsCommand() bool {
-	return a.info.IsCommand
-}
-
 func (a *Atom) IsDrawCall() bool {
 	return a.info.IsDrawCall
 }

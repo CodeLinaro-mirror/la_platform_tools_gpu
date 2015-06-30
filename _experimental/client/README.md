@@ -539,12 +539,6 @@ func (a *Atom) Field(index int) (schema.Field, interface{})
 func (a *Atom) FieldCount() int
 ```
 
-#### func (*Atom) IsCommand
-
-```go
-func (a *Atom) IsCommand() bool
-```
-
 #### func (*Atom) IsDrawCall
 
 ```go
