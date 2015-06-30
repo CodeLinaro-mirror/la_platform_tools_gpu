@@ -6,18 +6,29 @@
 package test
 
 import (
-	"io"
-
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
 
-type client struct {
-	rpc.Client
+// Client is the client interface for RPC calls.
+type Client interface {
+	// Client exposes all the RPC interface methods.
+	RPC
+	// Multiplexer returns the multiplexer used for communication to the server.
+	Multiplexer() *multiplexer.Multiplexer
+	// Namespace returns the custom namespace used for decoding responses from the
+	// server, or nil if no custom namespace has been specified.
+	Namespace() *registry.Namespace
 }
+type client struct{ rpc.Client }
 
-func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
-	return client{rpc.NewClient(r, w, mtu)}
+// NewClient creates a new rpc client object that uses the multiplexer m for
+// communication the namespace n for decoding objects. If n is nil then the
+// global namespace is used.
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
+	return client{rpc.NewClient(m, n)}
 }
 
 // Client compliance

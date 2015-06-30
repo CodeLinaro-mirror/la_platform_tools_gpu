@@ -40,6 +40,31 @@ Array Baseˢ
 func (a BaseArray) Format(f fmt.State, c rune)
 ```
 
+#### type Client
+
+```go
+type Client interface {
+	// Client exposes all the RPC interface methods.
+	RPC
+	// Multiplexer returns the multiplexer used for communication to the server.
+	Multiplexer() *multiplexer.Multiplexer
+	// Namespace returns the custom namespace used for decoding responses from the
+	// server, or nil if no custom namespace has been specified.
+	Namespace() *registry.Namespace
+}
+```
+
+Client is the client interface for RPC calls.
+
+#### func  NewClient
+
+```go
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client
+```
+NewClient creates a new rpc client object that uses the multiplexer m for
+communication the namespace n for decoding objects. If n is nil then the global
+namespace is used.
+
 #### type Derived
 
 ```go
@@ -212,12 +237,6 @@ type RPC interface {
 ```
 
 
-#### func  CreateClient
-
-```go
-func CreateClient(r io.Reader, w io.Writer, mtu int) RPC
-```
-
 #### type Resolver
 
 ```go
@@ -261,7 +280,7 @@ func CreateResource(
 #### func  ResolveResource
 
 ```go
-func ResolveResource(id ResourceId, d database.Database, l log.Logger) (*Resource, error)
+func ResolveResource(id ResourceId, d database.Database, l log.Logger) (res Resource, err error)
 ```
 ResolveResource loads and returns the Resource stored in the database d, using
 id.

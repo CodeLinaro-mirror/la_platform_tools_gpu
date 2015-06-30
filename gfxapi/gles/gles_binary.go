@@ -343,6 +343,7 @@ func init() {
 	Namespace.Add((*ShaderIdˢ)(nil).Class())
 	Namespace.Add((*ShaderUniformTypeˢ)(nil).Class())
 	Namespace.Add((*StartTimer)(nil).Class())
+	Namespace.Add((*State)(nil).Class())
 	Namespace.Add((*StopTimer)(nil).Class())
 	Namespace.Add((*TextureIdˢ)(nil).Class())
 	Namespace.Add((*U32ˢ)(nil).Class())
@@ -699,6 +700,7 @@ var (
 	binaryIDShaderIdˢ                              = binary.ID{0x45, 0x01, 0xd6, 0x03, 0x00, 0x91, 0x9a, 0x24, 0xe3, 0x7e, 0x26, 0x7e, 0x7d, 0xda, 0xf1, 0x06, 0x42, 0x59, 0x3e, 0x03}
 	binaryIDShaderUniformTypeˢ                     = binary.ID{0x99, 0x72, 0xc7, 0xc6, 0x1f, 0xed, 0x46, 0x4b, 0xbd, 0xe8, 0xf5, 0x96, 0x30, 0x3a, 0x1a, 0xa1, 0xc9, 0xd4, 0x8c, 0x0e}
 	binaryIDStartTimer                             = binary.ID{0x23, 0x7b, 0x88, 0x65, 0x96, 0xf3, 0x0d, 0x5d, 0x50, 0x56, 0xad, 0x18, 0xc8, 0x0a, 0xe8, 0x57, 0xa0, 0x21, 0x1c, 0x9b}
+	binaryIDState                                  = binary.ID{0x0d, 0x66, 0xef, 0x23, 0x0c, 0x81, 0xc8, 0x53, 0xd7, 0xb4, 0xb5, 0x0f, 0xcf, 0xf7, 0xc5, 0x56, 0xec, 0x4f, 0x27, 0x68}
 	binaryIDStopTimer                              = binary.ID{0xe8, 0x9f, 0x7c, 0xb1, 0xa4, 0xf8, 0x37, 0x81, 0x6b, 0x01, 0x71, 0x0e, 0xbc, 0xf2, 0x92, 0xd2, 0x39, 0x2e, 0xca, 0x5f}
 	binaryIDTextureIdˢ                             = binary.ID{0x4a, 0xe8, 0xe0, 0x14, 0x09, 0x7c, 0x25, 0x10, 0x88, 0xb0, 0xf9, 0x39, 0x88, 0xd0, 0x7d, 0x81, 0xc6, 0xb6, 0xed, 0x2f}
 	binaryIDU32ˢ                                   = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
@@ -27287,6 +27289,66 @@ var schemaStartTimer = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassState struct{}
+
+func (*State) Class() binary.Class {
+	return (*binaryClassState)(nil)
+}
+func doEncodeState(e binary.Encoder, o *State) error {
+	if err := e.Value(&o.Globals); err != nil {
+		return err
+	}
+	if err := e.Bool(o.ValidateOutput); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeState(d binary.Decoder, o *State) error {
+	if err := d.Value(&o.Globals); err != nil {
+		return err
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.ValidateOutput = bool(obj)
+	}
+	return nil
+}
+func doSkipState(d binary.Decoder) error {
+	if err := d.SkipValue((*Globals)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassState) ID() binary.ID      { return binaryIDState }
+func (*binaryClassState) New() binary.Object { return &State{} }
+func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeState(e, obj.(*State))
+}
+func (*binaryClassState) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &State{}
+	return obj, doDecodeState(d, obj)
+}
+func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeState(d, obj.(*State))
+}
+func (*binaryClassState) Skip(d binary.Decoder) error { return doSkipState(d) }
+func (*binaryClassState) Schema() *schema.Class       { return schemaState }
+
+var schemaState = &schema.Class{
+	TypeID:  binaryIDState,
+	Package: "gles",
+	Name:    "State",
+	Display: "State",
+	Fields: []schema.Field{
+		{Declared: "Globals", Type: &schema.Struct{Name: "Globals", ID: (*Globals)(nil).Class().ID()}},
+		{Declared: "ValidateOutput", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 

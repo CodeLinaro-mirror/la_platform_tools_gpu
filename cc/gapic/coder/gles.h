@@ -7688,6 +7688,25 @@ namespace gles {
         uint8_t mIndex;
     };
 
+    class State: public Encodable {
+    public:
+        State() = default;
+        State(Globals Globals, bool ValidateOutput) :
+            mGlobals(Globals),
+            mValidateOutput(ValidateOutput) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x0d, 0x66, 0xef, 0x23, 0x0c, 0x81, 0xc8, 0x53, 0xd7, 0xb4, 0xb5, 0x0f, 0xcf, 0xf7, 0xc5, 0x56, 0xec, 0x4f, 0x27, 0x68,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mGlobals);
+            e->Bool(this->mValidateOutput);
+        }
+
+        Globals mGlobals;
+        bool mValidateOutput;
+    };
+
     class StopTimer: public Encodable {
     public:
         StopTimer() = default;

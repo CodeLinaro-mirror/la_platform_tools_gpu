@@ -40,17 +40,31 @@ Client implements the sending side of a client-server rpc pair.
 #### func  NewClient
 
 ```go
-func NewClient(r io.Reader, w io.Writer, mtu int) Client
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client
 ```
-NewClient creates a new rpc client object that sends messages down the writer,
-and waits for responses on the reader. The client supports multiple in-flight
-rpc calls. The chunk size used for multiplexing the calls for fairness is
-specified by mtu.
+NewClient creates a new rpc client object that uses the multiplexer m for
+communication the namespace n for decoding objects. If n is nil then the global
+namespace is used.
+
+#### func (Client) Multiplexer
+
+```go
+func (c Client) Multiplexer() *multiplexer.Multiplexer
+```
+Multiplexer returns the multiplexer used for communication to the server.
+
+#### func (Client) Namespace
+
+```go
+func (c Client) Namespace() *registry.Namespace
+```
+Namespace returns the custom namespace used for decoding responses from the
+server, or nil if no custom namespace has been specified.
 
 #### func (Client) Send
 
 ```go
-func (b Client) Send(call binary.Object) (interface{}, error)
+func (c Client) Send(call binary.Object) (interface{}, error)
 ```
 Send encodes an rpc call and sends it to the server. It blocks until a reply is
 received or an error indicating there will be no reply occurs. This method is

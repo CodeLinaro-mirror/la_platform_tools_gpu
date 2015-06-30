@@ -77,13 +77,6 @@ var U8 = service.CreateSimpleInfo("u8", service.TypeKindU8)
 var Uint = service.CreateSimpleInfo("uint", service.TypeKindU64)
 ```
 
-#### func  RegisterAPI
-
-```go
-func RegisterAPI(api gfxapi.API, state service.StructInfo)
-```
-RegisterAtom registers the graphics API api with the schema.
-
 #### func  RegisterAtom
 
 ```go

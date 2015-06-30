@@ -42,7 +42,7 @@ type State struct {
 	NextPoolID memory.PoolID
 
 	// APIs holds the per-API context states.
-	APIs map[API]interface{}
+	APIs map[API]binary.Object
 }
 
 func (s State) String() string {

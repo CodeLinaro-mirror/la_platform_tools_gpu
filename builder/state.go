@@ -32,6 +32,11 @@ func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (
 		return nil, err
 	}
 
+	api := gfxapi.Find(gfxapi.ID(r.API.ID))
+	if api == nil {
+		return nil, fmt.Errorf("Unknown graphics API '%v'", r.API.ID)
+	}
+
 	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
 		return nil, err
@@ -48,10 +53,10 @@ func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (
 		}
 	}
 
-	data, err := encode(s)
-	if err != nil {
-		return nil, err
+	res, found := s.APIs[api]
+	if !found {
+		return nil, fmt.Errorf("No state for API '%v'", api.Name())
 	}
 
-	return &service.Binary{Data: data}, nil
+	return res, nil
 }

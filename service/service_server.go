@@ -57,7 +57,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetState:
-			if res, err := server.GetState(call.capture, call.after, l); err == nil {
+			if res, err := server.GetState(call.capture, call.api, call.after, l); err == nil {
 				return &resultGetState{value: res}
 			} else {
 				return rpc.NewError(err.Error())
@@ -122,12 +122,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callResolveReport:
-			if res, err := server.ResolveReport(call.id, l); err == nil {
-				return &resultResolveReport{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callResolveDevice:
 			if res, err := server.ResolveDevice(call.id, l); err == nil {
 				return &resultResolveDevice{value: res}
@@ -152,9 +146,21 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callResolveReport:
+			if res, err := server.ResolveReport(call.id, l); err == nil {
+				return &resultResolveReport{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callResolveSchema:
 			if res, err := server.ResolveSchema(call.id, l); err == nil {
 				return &resultResolveSchema{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callResolveState:
+			if res, err := server.ResolveState(call.id, l); err == nil {
+				return &resultResolveState{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -181,21 +187,16 @@ func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStre
 }
 
 // ResolveAtomStream loads and returns the AtomStream stored in the database d, using id.
-func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (*AtomStream, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (res AtomStream, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*AtomStream))
 	}
-	return (out.(*AtomStream)), nil
+	return res, err
 }
 
 // ResolveAtomStream loads and returns the AtomStream stored in the resolver's database, using id.
 func (r Resolver) ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return AtomStream{}, err
-	}
-	return *(out.(*AtomStream)), nil
+	return ResolveAtomStream(id, r.Database, l)
 }
 
 // StoreBinary stores v into the database d, returning the BinaryId.
@@ -205,21 +206,16 @@ func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error)
 }
 
 // ResolveBinary loads and returns the Binary stored in the database d, using id.
-func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (*Binary, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (res Binary, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Binary))
 	}
-	return (out.(*Binary)), nil
+	return res, err
 }
 
 // ResolveBinary loads and returns the Binary stored in the resolver's database, using id.
 func (r Resolver) ResolveBinary(id BinaryId, l log.Logger) (Binary, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Binary{}, err
-	}
-	return *(out.(*Binary)), nil
+	return ResolveBinary(id, r.Database, l)
 }
 
 // StoreCapture stores v into the database d, returning the CaptureId.
@@ -229,45 +225,16 @@ func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, err
 }
 
 // ResolveCapture loads and returns the Capture stored in the database d, using id.
-func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (*Capture, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (res Capture, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Capture))
 	}
-	return (out.(*Capture)), nil
+	return res, err
 }
 
 // ResolveCapture loads and returns the Capture stored in the resolver's database, using id.
 func (r Resolver) ResolveCapture(id CaptureId, l log.Logger) (Capture, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Capture{}, err
-	}
-	return *(out.(*Capture)), nil
-}
-
-// StoreReport stores v into the database d, returning the ReportId.
-func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error) {
-	id, err := database.Store(v, d, l)
-	return ReportId{ID: id}, err
-}
-
-// ResolveReport loads and returns the Report stored in the database d, using id.
-func ResolveReport(id ReportId, d database.Database, l log.Logger) (*Report, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
-	}
-	return (out.(*Report)), nil
-}
-
-// ResolveReport loads and returns the Report stored in the resolver's database, using id.
-func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Report{}, err
-	}
-	return *(out.(*Report)), nil
+	return ResolveCapture(id, r.Database, l)
 }
 
 // StoreDevice stores v into the database d, returning the DeviceId.
@@ -277,21 +244,16 @@ func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceId, error)
 }
 
 // ResolveDevice loads and returns the Device stored in the database d, using id.
-func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (*Device, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (res Device, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Device))
 	}
-	return (out.(*Device)), nil
+	return res, err
 }
 
 // ResolveDevice loads and returns the Device stored in the resolver's database, using id.
 func (r Resolver) ResolveDevice(id DeviceId, l log.Logger) (Device, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Device{}, err
-	}
-	return *(out.(*Device)), nil
+	return ResolveDevice(id, r.Database, l)
 }
 
 // StoreHierarchy stores v into the database d, returning the HierarchyId.
@@ -301,21 +263,16 @@ func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyI
 }
 
 // ResolveHierarchy loads and returns the Hierarchy stored in the database d, using id.
-func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (*Hierarchy, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (res Hierarchy, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Hierarchy))
 	}
-	return (out.(*Hierarchy)), nil
+	return res, err
 }
 
 // ResolveHierarchy loads and returns the Hierarchy stored in the resolver's database, using id.
 func (r Resolver) ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Hierarchy{}, err
-	}
-	return *(out.(*Hierarchy)), nil
+	return ResolveHierarchy(id, r.Database, l)
 }
 
 // StoreImageInfo stores v into the database d, returning the ImageInfoId.
@@ -325,21 +282,16 @@ func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoI
 }
 
 // ResolveImageInfo loads and returns the ImageInfo stored in the database d, using id.
-func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (*ImageInfo, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (res ImageInfo, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*ImageInfo))
 	}
-	return (out.(*ImageInfo)), nil
+	return res, err
 }
 
 // ResolveImageInfo loads and returns the ImageInfo stored in the resolver's database, using id.
 func (r Resolver) ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return ImageInfo{}, err
-	}
-	return *(out.(*ImageInfo)), nil
+	return ResolveImageInfo(id, r.Database, l)
 }
 
 // StoreMemoryInfo stores v into the database d, returning the MemoryInfoId.
@@ -349,21 +301,35 @@ func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryIn
 }
 
 // ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d, using id.
-func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (*MemoryInfo, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (res MemoryInfo, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*MemoryInfo))
 	}
-	return (out.(*MemoryInfo)), nil
+	return res, err
 }
 
 // ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's database, using id.
 func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return MemoryInfo{}, err
+	return ResolveMemoryInfo(id, r.Database, l)
+}
+
+// StoreReport stores v into the database d, returning the ReportId.
+func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error) {
+	id, err := database.Store(v, d, l)
+	return ReportId{ID: id}, err
+}
+
+// ResolveReport loads and returns the Report stored in the database d, using id.
+func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Report))
 	}
-	return *(out.(*MemoryInfo)), nil
+	return res, err
+}
+
+// ResolveReport loads and returns the Report stored in the resolver's database, using id.
+func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
+	return ResolveReport(id, r.Database, l)
 }
 
 // StoreSchema stores v into the database d, returning the SchemaId.
@@ -373,21 +339,35 @@ func StoreSchema(v *Schema, d database.Database, l log.Logger) (SchemaId, error)
 }
 
 // ResolveSchema loads and returns the Schema stored in the database d, using id.
-func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (*Schema, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (res Schema, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*Schema))
 	}
-	return (out.(*Schema)), nil
+	return res, err
 }
 
 // ResolveSchema loads and returns the Schema stored in the resolver's database, using id.
 func (r Resolver) ResolveSchema(id SchemaId, l log.Logger) (Schema, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return Schema{}, err
+	return ResolveSchema(id, r.Database, l)
+}
+
+// StoreState stores v into the database d, returning the StateId.
+func StoreState(v State, d database.Database, l log.Logger) (StateId, error) {
+	id, err := database.Store(v, d, l)
+	return StateId{ID: id}, err
+}
+
+// ResolveState loads and returns the State stored in the database d, using id.
+func ResolveState(id StateId, d database.Database, l log.Logger) (res State, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = (out.(State))
 	}
-	return *(out.(*Schema)), nil
+	return res, err
+}
+
+// ResolveState loads and returns the State stored in the resolver's database, using id.
+func (r Resolver) ResolveState(id StateId, l log.Logger) (State, error) {
+	return ResolveState(id, r.Database, l)
 }
 
 // StoreTimingInfo stores v into the database d, returning the TimingInfoId.
@@ -397,19 +377,14 @@ func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingIn
 }
 
 // ResolveTimingInfo loads and returns the TimingInfo stored in the database d, using id.
-func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (*TimingInfo, error) {
-	out, err := d.Resolve(id.ID, l)
-	if err != nil {
-		return nil, err
+func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (res TimingInfo, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*TimingInfo))
 	}
-	return (out.(*TimingInfo)), nil
+	return res, err
 }
 
 // ResolveTimingInfo loads and returns the TimingInfo stored in the resolver's database, using id.
 func (r Resolver) ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error) {
-	out, err := r.Database.Resolve(id.ID, l)
-	if err != nil {
-		return TimingInfo{}, err
-	}
-	return *(out.(*TimingInfo)), nil
+	return ResolveTimingInfo(id, r.Database, l)
 }

@@ -61,8 +61,7 @@ func (a ApiIdArray) Format(f fmt.State, c rune)
 ```go
 type ApiSchema struct {
 	binary.Generate
-	Api   ApiId
-	State StructInfo
+	Api ApiId
 }
 ```
 
@@ -73,7 +72,6 @@ Class ApiSchema
 ```go
 func CreateApiSchema(
 	Api ApiId,
-	State StructInfo,
 ) *ApiSchema
 ```
 
@@ -87,12 +85,6 @@ func (*ApiSchema) Class() binary.Class
 
 ```go
 func (c *ApiSchema) GetApi() ApiId
-```
-
-#### func (*ApiSchema) GetState
-
-```go
-func (c *ApiSchema) GetState() StructInfo
 ```
 
 #### type ApiSchemaArray
@@ -475,7 +467,7 @@ NewAtomStream creates a fully-encoded AtomStream from the atom list.
 #### func  ResolveAtomStream
 
 ```go
-func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (*AtomStream, error)
+func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (res AtomStream, err error)
 ```
 ResolveAtomStream loads and returns the AtomStream stored in the database d,
 using id.
@@ -604,7 +596,7 @@ func CreateBinary(
 #### func  ResolveBinary
 
 ```go
-func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (*Binary, error)
+func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (res Binary, err error)
 ```
 ResolveBinary loads and returns the Binary stored in the database d, using id.
 
@@ -680,7 +672,7 @@ func CreateCapture(
 #### func  ResolveCapture
 
 ```go
-func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (*Capture, error)
+func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (res Capture, err error)
 ```
 ResolveCapture loads and returns the Capture stored in the database d, using id.
 
@@ -875,6 +867,31 @@ Array Classᵖˢ
 func (a ClassPtrArray) Format(f fmt.State, c rune)
 ```
 
+#### type Client
+
+```go
+type Client interface {
+	// Client exposes all the RPC interface methods.
+	RPC
+	// Multiplexer returns the multiplexer used for communication to the server.
+	Multiplexer() *multiplexer.Multiplexer
+	// Namespace returns the custom namespace used for decoding responses from the
+	// server, or nil if no custom namespace has been specified.
+	Namespace() *registry.Namespace
+}
+```
+
+Client is the client interface for RPC calls.
+
+#### func  NewClient
+
+```go
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client
+```
+NewClient creates a new rpc client object that uses the multiplexer m for
+communication the namespace n for decoding objects. If n is nil then the global
+namespace is used.
+
 #### type Device
 
 ```go
@@ -915,7 +932,7 @@ func CreateDevice(
 #### func  ResolveDevice
 
 ```go
-func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (*Device, error)
+func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (res Device, err error)
 ```
 ResolveDevice loads and returns the Device stored in the database d, using id.
 
@@ -1273,7 +1290,7 @@ func CreateHierarchy(
 #### func  ResolveHierarchy
 
 ```go
-func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (*Hierarchy, error)
+func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (res Hierarchy, err error)
 ```
 ResolveHierarchy loads and returns the Hierarchy stored in the database d, using
 id.
@@ -1387,7 +1404,7 @@ func CreateImageInfo(
 #### func  ResolveImageInfo
 
 ```go
-func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (*ImageInfo, error)
+func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (res ImageInfo, err error)
 ```
 ResolveImageInfo loads and returns the ImageInfo stored in the database d, using
 id.
@@ -1535,7 +1552,7 @@ func CreateMemoryInfo(
 #### func  ResolveMemoryInfo
 
 ```go
-func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (*MemoryInfo, error)
+func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (res MemoryInfo, err error)
 ```
 ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d,
 using id.
@@ -1752,7 +1769,7 @@ type RPC interface {
 	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
-	GetState(capture CaptureId, after uint64, l log.Logger) (BinaryId, error)
+	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
 	GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
@@ -1763,22 +1780,17 @@ type RPC interface {
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
-	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
+	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
+	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 ```
 
-
-#### func  CreateClient
-
-```go
-func CreateClient(r io.Reader, w io.Writer, mtu int) RPC
-```
 
 #### type RenderSettings
 
@@ -1849,7 +1861,7 @@ func CreateReport(
 #### func  ResolveReport
 
 ```go
-func ResolveReport(id ReportId, d database.Database, l log.Logger) (*Report, error)
+func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, err error)
 ```
 ResolveReport loads and returns the Report stored in the database d, using id.
 
@@ -2037,6 +2049,14 @@ func (r Resolver) ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
 ResolveSchema loads and returns the Schema stored in the resolver's database,
 using id.
 
+#### func (Resolver) ResolveState
+
+```go
+func (r Resolver) ResolveState(id StateId, l log.Logger) (State, error)
+```
+ResolveState loads and returns the State stored in the resolver's database,
+using id.
+
 #### func (Resolver) ResolveTimingInfo
 
 ```go
@@ -2069,7 +2089,7 @@ func CreateSchema(
 #### func  ResolveSchema
 
 ```go
-func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (*Schema, error)
+func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (res Schema, err error)
 ```
 ResolveSchema loads and returns the Schema stored in the database d, using id.
 
@@ -2241,6 +2261,50 @@ func (c *SimpleInfo) GetKind() TypeKind
 func (c *SimpleInfo) GetName() string
 ```
 
+#### type State
+
+```go
+type State interface{}
+```
+
+
+#### func  ResolveState
+
+```go
+func ResolveState(id StateId, d database.Database, l log.Logger) (res State, err error)
+```
+ResolveState loads and returns the State stored in the database d, using id.
+
+#### type StateId
+
+```go
+type StateId struct {
+	binary.Generate
+	ID binary.ID
+}
+```
+
+Handle StateId
+
+#### func  StoreState
+
+```go
+func StoreState(v State, d database.Database, l log.Logger) (StateId, error)
+```
+StoreState stores v into the database d, returning the StateId.
+
+#### func (*StateId) Class
+
+```go
+func (*StateId) Class() binary.Class
+```
+
+#### func (StateId) Valid
+
+```go
+func (h StateId) Valid() bool
+```
+
 #### type StaticArrayInfo
 
 ```go
@@ -2369,7 +2433,7 @@ func CreateTimingInfo(
 #### func  ResolveTimingInfo
 
 ```go
-func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (*TimingInfo, error)
+func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (res TimingInfo, err error)
 ```
 ResolveTimingInfo loads and returns the TimingInfo stored in the database d,
 using id.

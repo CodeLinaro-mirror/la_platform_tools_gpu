@@ -16,10 +16,10 @@ package rpc
 
 import (
 	"bufio"
-	"io"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 )
@@ -27,33 +27,49 @@ import (
 // Client implements the sending side of a client-server rpc pair.
 type Client struct {
 	m *multiplexer.Multiplexer
+	n *registry.Namespace
 }
 
-// NewClient creates a new rpc client object that sends messages down the
-// writer, and waits for responses on the reader.
-// The client supports multiple in-flight rpc calls.
-// The chunk size used for multiplexing the calls for fairness is specified by mtu.
-func NewClient(r io.Reader, w io.Writer, mtu int) Client {
+// NewClient creates a new rpc client object that uses the multiplexer m for
+// communication the namespace n for decoding objects. If n is nil then the
+// global namespace is used.
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
 	return Client{
-		m: multiplexer.New(r, w, mtu, nil),
+		m: m,
+		n: n,
 	}
+}
+
+// Multiplexer returns the multiplexer used for communication to the server.
+func (c Client) Multiplexer() *multiplexer.Multiplexer {
+	return c.m
+}
+
+// Namespace returns the custom namespace used for decoding responses from the
+// server, or nil if no custom namespace has been specified.
+func (c Client) Namespace() *registry.Namespace {
+	return c.n
 }
 
 // Send encodes an rpc call and sends it to the server.
 // It blocks until a reply is received or an error indicating there will be no
 // reply occurs.
 // This method is safe for concurrent use.
-func (b Client) Send(call binary.Object) (interface{}, error) {
-	channel, err := b.m.OpenChannel()
+func (c Client) Send(call binary.Object) (interface{}, error) {
+	channel, err := c.m.OpenChannel()
 	if err != nil {
 		return nil, err
 	}
 	// We can ignore channel close failures if we already have a complete response
 	defer channel.Close()
 
-	w := bufio.NewWriterSize(channel, b.m.MTU())
+	w := bufio.NewWriterSize(channel, c.m.MTU())
 	d := cyclic.Decoder(vle.Reader(channel))
 	e := cyclic.Encoder(vle.Writer(w))
+
+	if c.n != nil {
+		d.Namespace = c.n // Use custom decoding namespace.
+	}
 
 	// Write the RPC header
 	if err := e.Data(header[:]); err != nil {
