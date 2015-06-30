@@ -132,7 +132,7 @@ namespace atom {
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
         Array<gapic::Encodable*> mAtoms;
