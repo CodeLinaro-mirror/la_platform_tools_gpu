@@ -50,7 +50,7 @@ func (f File) RelativeTo(base File) string {
 func (f File) Absolute() string {
 	abs, err := filepath.Abs(string(f))
 	if err != nil {
-		panic(err)
+		panic(fmt.Errorf("filepath.Abs(%s) returned error: %v", f, err))
 	}
 	return abs
 }
@@ -164,35 +164,36 @@ func (f File) CopyTo(dst File) error {
 
 // Exec executes this File with the specified arguments.
 func (f File) Exec(env Environment, args ...string) error {
-	return f.ExecAt(env, "", args...)
+	path, err := f.LookPath()
+	if err != nil {
+		return err
+	}
+	return f.ExecAt(env, File(path.Dir()), args...)
 }
 
 // ExecAt executes this File with the specified arguments with the working
 // directory set to wd.
 func (f File) ExecAt(env Environment, wd File, args ...string) error {
-	var path string
-	if f.Exists() {
-		path = f.Absolute()
-	} else {
-		var err error
-		path, err = exec.LookPath(string(f))
-		if err != nil {
-			return err
-		}
+	if !wd.Exists() {
+		return fmt.Errorf("The working directory '%s' does not exist", wd)
+	}
+	path, err := f.LookPath()
+	if err != nil {
+		return err
 	}
 	verbose := 0
 	if env.Verbose {
 		verbose = 1
 	}
-	return maker.ExecAt(wd.Absolute(), verbose, path, args...)
+	return maker.ExecAt(wd.Absolute(), verbose, path.Absolute(), args...)
 }
 
-// LookPath looks for the file f on the system PATH, returning the absolute
-// path to the file if found, otherwise an empty File.
-func (f File) LookPath() File {
-	if path, err := exec.LookPath(string(f)); err == nil {
-		return File(path)
+// LookPath returns the path to f, searching the system PATHs.
+func (f File) LookPath() (File, error) {
+	if f.Exists() {
+		return f, nil
 	} else {
-		return ""
+		path, err := exec.LookPath(string(f))
+		return File(path), err
 	}
 }
