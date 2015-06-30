@@ -18,6 +18,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/pod"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
@@ -25,9 +26,14 @@ import (
 func Encoder(writer binary.Writer) binary.Encoder {
 	return &encoder{
 		Writer:  writer,
-		objects: map[binary.Object]uint32{},
+		objects: map[interface{}]uint32{},
 		ids:     map[binary.ID]uint32{},
 	}
+}
+
+type ref struct {
+	v interface{}
+	o binary.Object
 }
 
 // Decoder creates a binary.Decoder that reads from the provided binary.Reader.
@@ -35,21 +41,21 @@ func Decoder(reader binary.Reader) *decoder {
 	return &decoder{
 		Reader:    reader,
 		Namespace: registry.Global,
-		objects:   map[uint32]binary.Object{},
+		objects:   map[uint32]ref{},
 		ids:       map[uint32]binary.ID{},
 	}
 }
 
 type encoder struct {
 	binary.Writer
-	objects map[binary.Object]uint32
+	objects map[interface{}]uint32
 	ids     map[binary.ID]uint32
 }
 
 type decoder struct {
 	binary.Reader
 	Namespace *registry.Namespace
-	objects   map[uint32]binary.Object
+	objects   map[uint32]ref
 	ids       map[uint32]binary.ID
 }
 
@@ -98,9 +104,13 @@ func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode
 func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
 func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
 
-func (e *encoder) Variant(obj binary.Object) error {
-	if obj == nil {
+func (e *encoder) Variant(v interface{}) error {
+	if v == nil {
 		return e.ID(binary.ID{})
+	}
+	obj := pod.Wrap(v)
+	if obj == nil {
+		return binary.ErrNotEncodable{Value: v}
 	}
 	class := obj.Class()
 	if err := e.ID(class.ID()); err != nil {
@@ -109,14 +119,20 @@ func (e *encoder) Variant(obj binary.Object) error {
 	return class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (binary.Object, error) {
+func (d *decoder) variant() (interface{}, binary.Object, error) {
 	if id, err := d.ID(); err != nil {
-		return nil, err
+		return nil, nil, err
 	} else if class := d.Namespace.Lookup(id); class == nil {
-		return nil, fmt.Errorf("Unknown type id %v", id)
+		return nil, nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		return class.Decode(d)
+		obj, err := class.Decode(d)
+		return pod.Unwrap(obj), obj, err
 	}
+}
+
+func (d *decoder) Variant() (interface{}, error) {
+	v, _, e := d.variant()
+	return v, e
 }
 
 func (d *decoder) SkipVariant() (binary.ID, error) {
@@ -129,56 +145,60 @@ func (d *decoder) SkipVariant() (binary.ID, error) {
 	}
 }
 
-func (e *encoder) Object(obj binary.Object) error {
-	if obj == nil {
+func (e *encoder) Object(v interface{}) error {
+	if v == nil {
 		return e.Uint32(0)
 	}
-	if sid, found := e.objects[obj]; found {
+	obj := pod.Wrap(v)
+	if obj == nil {
+		return binary.ErrNotEncodable{Value: v}
+	}
+	if sid, found := e.objects[v]; found {
 		return e.Uint32(sid << 1)
 	} else {
 		sid = uint32(len(e.objects)) + 1
-		e.objects[obj] = sid
+		e.objects[v] = sid
 		if err := e.Uint32((sid << 1) | 1); err != nil {
 			return err
 		}
-		return e.Variant(obj)
+		return e.Variant(v)
 	}
 }
 
-func (d *decoder) Object() (binary.Object, error) {
-	v, err := d.Uint32()
-	if err != nil || v == 0 {
+func (d *decoder) Object() (interface{}, error) {
+	i, err := d.Uint32()
+	if err != nil || i == 0 {
 		return nil, err
 	}
-	sid := v >> 1
-	decode := (v & 1) != 0
-	o, found := d.objects[sid]
+	sid := i >> 1
+	decode := (i & 1) != 0
+	r, found := d.objects[sid]
 	switch {
 	case found && decode:
 		_, err := d.SkipVariant()
-		return o, err
+		return r.v, err
 	case decode:
-		o, err = d.Variant()
-		d.objects[sid] = o
-		return o, err
+		v, o, e := d.variant()
+		d.objects[sid] = ref{v, o}
+		return v, e
 	case found:
-		return o, nil
+		return r.v, nil
 	default:
 		return nil, fmt.Errorf("Unknown object sid %v", sid)
 	}
 }
 
 func (d *decoder) SkipObject() (binary.ID, error) {
-	if v, err := d.Uint32(); err != nil {
+	if i, err := d.Uint32(); err != nil {
 		return binary.ID{}, err
-	} else if (v & 1) == 0 {
-		sid := v >> 1
+	} else if (i & 1) == 0 {
+		sid := i >> 1
 		if sid == 0 {
 			return binary.ID{}, nil
-		} else if obj, found := d.objects[sid]; !found {
+		} else if r, found := d.objects[sid]; !found {
 			return binary.ID{}, fmt.Errorf("Unknown object sid %v", sid)
 		} else {
-			return obj.Class().ID(), nil
+			return r.o.Class().ID(), nil
 		}
 	}
 	return d.SkipVariant()
