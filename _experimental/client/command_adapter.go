@@ -152,84 +152,81 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 	ll.SetDirection(gxui.LeftToRight)
 	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.6d ", id), LINE_NUMBER_COLOR, active))
 
-	switch {
-	case a.IsCommand():
-		if active {
-			//appCtx.OnTimingInfoUpdated(func() {
-			timeLbl := t.CreateLabel()
-			milliseconds := float64(appCtx.timingPerCommand[uint64(id)]) / 1000000.
-			timeLbl.SetText(fmt.Sprintf("%6.3f ms ", milliseconds))
-			if milliseconds >= 1. {
-				timeLbl.SetColor(gxui.ColorFromHex(0xFFFC19 + 0xFF<<24))
-			}
-			if milliseconds >= 5. {
-				timeLbl.SetColor(gxui.ColorFromHex(0xD21212 + 0xFF<<24))
-			}
-			ll.AddChild(timeLbl)
-			//})
+	if active {
+		//appCtx.OnTimingInfoUpdated(func() {
+		timeLbl := t.CreateLabel()
+		milliseconds := float64(appCtx.timingPerCommand[uint64(id)]) / 1000000.
+		timeLbl.SetText(fmt.Sprintf("%6.3f ms ", milliseconds))
+		if milliseconds >= 1. {
+			timeLbl.SetColor(gxui.ColorFromHex(0xFFFC19 + 0xFF<<24))
 		}
-
-		nameLbl := CreateLabel(t, a.DisplayName(), COMMAND_COLOR, active)
-		ll.AddChild(nameLbl)
-
-		ll.AddChild(CreateLabel(t, "(", CODE_COLOR, active))
-		needcomma := false
-		for i := 0; i < a.FieldCount(); i++ {
-			argIdx := i // capture for closures
-			info, v := a.Field(argIdx)
-			if needcomma {
-				ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
-			}
-			var c gxui.Control
-			switch ty := info.Type.(type) {
-			case *schema.Struct:
-				switch v := v.(type) {
-				case *schema.Object:
-					if p, ok := asPointer(v); ok {
-						b := t.CreateButton()
-						b.SetMargin(math.Spacing{})
-						//b.SetPadding(math.Spacing{})
-						b.AddChild(CreateLabel(t, p.String(), CONSTANT_COLOR, active))
-						b.OnClick(func(gxui.MouseEvent) { appCtx.SelectAddress(p) })
-						c = b
-					}
-
-				case *atom.Observations:
-					continue //don't display observations as a parameter
-				}
-
-			case *schema.Primitive:
-				switch ty.Method {
-				case schema.Bool:
-					c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
-						a.SetField(argIdx, v)
-						appCtx.ReplaceAtom(a, id)
-					})
-
-				case schema.Int8, schema.Int16, schema.Int32, schema.Int64:
-					c = createIntField(t, a, argIdx, appCtx, id)
-
-				case schema.Uint8, schema.Uint16, schema.Uint32, schema.Uint64:
-					c = createUintField(t, a, argIdx, appCtx, id)
-
-				case schema.Float32, schema.Float64:
-					c = createFloatField(t, a, argIdx, appCtx, id)
-				}
-			}
-			if c == nil {
-				c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
-			}
-			ll.AddChild(c)
-			needcomma = true
-			appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
-				l := t.CreateLabel()
-				l.SetText(fmt.Sprintf("%s:%s (%T)", info.Type.Typename(), info.Name(), info.Type))
-				return l
-			})
+		if milliseconds >= 5. {
+			timeLbl.SetColor(gxui.ColorFromHex(0xD21212 + 0xFF<<24))
 		}
-
-		ll.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
+		ll.AddChild(timeLbl)
+		//})
 	}
+
+	nameLbl := CreateLabel(t, a.DisplayName(), COMMAND_COLOR, active)
+	ll.AddChild(nameLbl)
+
+	ll.AddChild(CreateLabel(t, "(", CODE_COLOR, active))
+	needcomma := false
+	for i := 0; i < a.FieldCount(); i++ {
+		argIdx := i // capture for closures
+		info, v := a.Field(argIdx)
+		if needcomma {
+			ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
+		}
+		var c gxui.Control
+		switch ty := info.Type.(type) {
+		case *schema.Struct:
+			switch v := v.(type) {
+			case *schema.Object:
+				if p, ok := asPointer(v); ok {
+					b := t.CreateButton()
+					b.SetMargin(math.Spacing{})
+					//b.SetPadding(math.Spacing{})
+					b.AddChild(CreateLabel(t, p.String(), CONSTANT_COLOR, active))
+					b.OnClick(func(gxui.MouseEvent) { appCtx.SelectAddress(p) })
+					c = b
+				}
+
+			case *atom.Observations:
+				continue //don't display observations as a parameter
+			}
+
+		case *schema.Primitive:
+			switch ty.Method {
+			case schema.Bool:
+				c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
+					a.SetField(argIdx, v)
+					appCtx.ReplaceAtom(a, id)
+				})
+
+			case schema.Int8, schema.Int16, schema.Int32, schema.Int64:
+				c = createIntField(t, a, argIdx, appCtx, id)
+
+			case schema.Uint8, schema.Uint16, schema.Uint32, schema.Uint64:
+				c = createUintField(t, a, argIdx, appCtx, id)
+
+			case schema.Float32, schema.Float64:
+				c = createFloatField(t, a, argIdx, appCtx, id)
+			}
+		}
+		if c == nil {
+			c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
+		}
+		ll.AddChild(c)
+		needcomma = true
+		appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
+			l := t.CreateLabel()
+			l.SetText(fmt.Sprintf("%s:%s (%T)", info.Type.Typename(), info.Name(), info.Type))
+			return l
+		})
+	}
+
+	ll.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
 	return ll
 }
 
