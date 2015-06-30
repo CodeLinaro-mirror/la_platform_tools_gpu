@@ -15,10 +15,12 @@
 package binary_test
 
 import (
+	"fmt"
 	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 
 	"math/rand"
@@ -56,38 +58,50 @@ func (b *buffer) Rewind() {
 func prepare(a interface{}) (binary.Encoder, binary.Decoder, *buffer) {
 	rand.Seed(1)
 	s := reflect.ValueOf(a)
-	maxSize := 0
+	size := 0
 	for i := 0; i < s.Len(); i++ {
 		e := s.Index(i)
 		switch e.Kind() {
 		case reflect.Int8:
 			e.SetInt(rand.Int63())
-			maxSize = 2
+			size += 2
 		case reflect.Uint8:
 			e.SetUint(uint64(rand.Int63()))
-			maxSize = 2
+			size += 2
 		case reflect.Int16:
 			e.SetInt(rand.Int63())
-			maxSize = 3
+			size += 3
 		case reflect.Uint16:
 			e.SetUint(uint64(rand.Int63()))
-			maxSize = 3
+			size += 3
 		case reflect.Int32:
 			e.SetInt(rand.Int63())
-			maxSize = 5
+			size += 5
 		case reflect.Uint32:
 			e.SetUint(uint64(rand.Int63()))
-			maxSize = 5
+			size += 5
 		case reflect.Int64:
 			e.SetInt(int64((uint64(rand.Uint32()) << 32) | uint64(rand.Uint32())))
-			maxSize = 9
+			size += 9
 		case reflect.Uint64:
 			e.SetUint((uint64(rand.Uint32()) << 32) | uint64(rand.Uint32()))
-			maxSize = 9
+			size += 9
+		case reflect.Interface: // binary.Object
+			var v binary.Object
+			switch rand.Uint32() & 0x3 {
+			case 0:
+				v = &test.TypeA{Data: fmt.Sprintf("%d", rand.Uint32()&0xfff)}
+			case 1:
+				v = &test.TypeB{Data: fmt.Sprintf("%d", rand.Uint32()&0xfff)}
+			}
+			if v != nil {
+				e.Set(reflect.ValueOf(v))
+			}
+			size += 20 // high-estimate guess
 		}
 	}
 	// build a big enough buffer, and wrap it in coders
-	buf := &buffer{data: make([]byte, 0, s.Len()*maxSize)}
+	buf := &buffer{data: make([]byte, 0, size)}
 	e := cyclic.Encoder(vle.Writer(buf))
 	d := cyclic.Decoder(vle.Reader(buf))
 	return e, d, buf
@@ -236,6 +250,33 @@ func BenchmarkDecodeUint64(b *testing.B) {
 		buf.Rewind()
 		for _ = range values {
 			d.Uint64()
+		}
+	}
+}
+
+func BenchmarkEncodeObject(b *testing.B) {
+	values := make([]binary.Object, count)
+	e, _, buf := prepare(values)
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		buf.Reset()
+		for _, v := range values {
+			e.Object(v)
+		}
+	}
+}
+
+func BenchmarkDecodeObject(b *testing.B) {
+	values := make([]binary.Object, count)
+	e, d, buf := prepare(values)
+	for _, v := range values {
+		e.Object(v)
+	}
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		buf.Rewind()
+		for _ = range values {
+			d.Object()
 		}
 	}
 }
