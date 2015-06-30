@@ -23,7 +23,6 @@ import schema "schema.api"
 @handle type string ImageInfoId
 @handle type string MemoryInfoId
 @handle type string ReportId
-@handle type string SchemaId
 @handle type string StateId
 @handle type string TimingInfoId
 
@@ -122,7 +121,6 @@ cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
 cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
 cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
 cmd Report             ResolveReport(ReportId id) { return ? }
-cmd Schema             ResolveSchema(SchemaId id) { return ? }
 cmd State              ResolveState(StateId id) { return ? }
 cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
@@ -146,7 +144,6 @@ class Capture {
   AtomStreamId        Atoms    // The identifier of the stream of atoms in this capture.
   ReportId            Report   // The identifier of the report of the capture.
   ApiId[]             Apis     // List of graphics APIs used by this capture.
-  SchemaId            Schema   // The schema used to decode types in this capture.
 }
 
 // State describes the graphics driver state for a single graphics API at a
@@ -180,8 +177,7 @@ class Binary {
   u8[] Data
 }
 
-// AtomStream holds a stream of atoms in binary form. The atoms can be unpacked
-// using the capture's schema.
+// AtomStream holds a stream of atoms in binary form.
 class AtomStream {
   u8[] Data // Encoded atom stream.
 }
@@ -274,118 +270,3 @@ class RenderSettings {
   u32  MaxHeight // The desired minimum height of the image. The returned image may be larger than this.
   bool Wireframe // True if the all geometry should be rendered as wireframe.
 }
-
-// The Schema describes all the array, map, enum, struct, class, atom and state
-// types stored within the AtomStream and state. Clients use the Schema to know
-// how to interpret these types.
-class Schema {
-  AtomInfo[]  Atoms // The schema description of all atoms in all APIs.
-  ApiSchema[] Apis  // The per-API schema descriptions.
-}
-
-// ApiSchema describes the schema used by a single graphics API.
-class ApiSchema {
-  ApiId Api // The API identifier.
-}
-
-// TypeKind is the exhaustive list of all types supported by the schema.
-enum TypeKind {
-  // Primative types
-  Bool               =  0,
-  S8                 =  1,
-  U8                 =  2,
-  S16                =  3,
-  U16                =  4,
-  S32                =  5,
-  U32                =  6,
-  F32                =  7,
-  S64                =  8,
-  U64                =  9,
-  F64                = 10,
-  String             = 11,
-  Enum               = 12,
-  // Complex types
-  Struct             = 14,
-  Class              = 15,
-  Array              = 16,
-  StaticArray        = 17,
-  Map                = 18,
-  Pointer            = 19,
-  Memory             = 20, // Currently unimplemented.
-  Any                = 21, // Will be removed.
-  ID                 = 22,
-}
-
-// TypeInfo is the base of all schema defined types.
-@Interface class TypeInfo {
-  string   Name // The name of the type.
-  TypeKind Kind // The kind of the type.
-}
-
-// ArrayInfo describes an array instantiation.
-class ArrayInfo : TypeInfo {
-  TypeInfo* ElementType // The array's element type.
-}
-
-// StaticArrayInfo describes a static array instantiation.
-class StaticArrayInfo : TypeInfo {
-  TypeInfo*  ElementType // The array's element type.
-  u32        Size        // The array's size.
-}
-
-// MapInfo describes a map instantiation.
-class MapInfo : TypeInfo {
-  TypeInfo* KeyType   // The map's key type.
-  TypeInfo* ValueType // The map's value type.
-}
-
-// EnumInfo describes an enum type.
-class EnumInfo : TypeInfo {
-  EnumEntry[]  Entries // The list of enum entries.
-  EnumInfo*[]  Extends // The list of enums this enum extends from. Will be removed.
-}
-
-// EnumEntry describes a single name-value entry in an enum.
-class EnumEntry {
-  string Name  // The name of the enum entry.
-  u32    Value // The value of the enum entry. May be extended to u64.
-}
-
-// StructInfo describes the body of a single struct type.
-class StructInfo : TypeInfo {
-  FieldInfo*[] Fields // The list of fields in the struct.
-}
-
-// ClassInfo describes the body of a single class type.
-class ClassInfo : TypeInfo {
-  FieldInfo*[] Fields  // The list of fields in the class.
-  ClassInfo*[] Extends // The list of classes this enum classes from. Likely to be removed.
-}
-
-// FieldInfo describes a single field entry in a class or struct.
-class FieldInfo {
-  string    Name // The name of the field.
-  TypeInfo* Type // The type of the field.
-}
-
-// AtomInfo describes a single Atom type.
-class AtomInfo {
-  ApiId                 Api               // The graphics API that this Atom belongs to.
-  u16                   Type              // The atom's unique type identifier.
-  string                Name              // The name of the atom.
-  ParameterInfo[]       Parameters        // The list of atom parameters.
-  bool                  IsCommand         // True if the atom represents an API command.
-  bool                  IsDrawCall        // True if the atom represents a draw call.
-  bool                  IsEndOfFrame      // True if the atom represents the end of a frame.
-  string                DocumentationUrl  // The URL to the atom's documentation.
-}
-
-// ParameterInfo describes a single Atom parameter.
-class ParameterInfo {
-  string        Name // Name of the parameter.
-  TypeInfo*     Type // Type of the parameter.
-  bool          Out  // True if the parameter is an output.
-}
-
-// SimpleInfo is used for all primative types.
-class SimpleInfo : TypeInfo {}

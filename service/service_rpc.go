@@ -32,7 +32,6 @@ type RPC interface {
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveReport(id ReportId, l log.Logger) (Report, error)
-	ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
 	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
@@ -91,12 +90,6 @@ type ReportId struct {
 	ID binary.ID
 }
 
-// Handle SchemaId
-type SchemaId struct {
-	binary.Generate
-	ID binary.ID
-}
-
 // Handle StateId
 type StateId struct {
 	binary.Generate
@@ -113,14 +106,8 @@ type State interface{}
 // Array ApiIdˢ
 type ApiIdArray []ApiId
 
-// Array ApiSchemaˢ
-type ApiSchemaArray []ApiSchema
-
 // Array AtomGroupˢ
 type AtomGroupArray []AtomGroup
-
-// Array AtomInfoˢ
-type AtomInfoArray []AtomInfo
 
 // Array AtomRangeTimerˢ
 type AtomRangeTimerArray []AtomRangeTimer
@@ -131,12 +118,6 @@ type AtomTimerArray []AtomTimer
 // Array CaptureIdˢ
 type CaptureIdArray []CaptureId
 
-// Array ClassInfoˢ
-type ClassInfoArray []ClassInfo
-
-// Array ClassInfoᵖˢ
-type ClassInfoPtrArray []*ClassInfo
-
 // Array Classˢ
 type ClassArray []schema.Class
 
@@ -146,32 +127,11 @@ type ClassPtrArray []*schema.Class
 // Array DeviceIdˢ
 type DeviceIdArray []DeviceId
 
-// Array EnumEntryˢ
-type EnumEntryArray []EnumEntry
-
-// Array EnumInfoˢ
-type EnumInfoArray []EnumInfo
-
-// Array EnumInfoᵖˢ
-type EnumInfoPtrArray []*EnumInfo
-
-// Array FieldInfoˢ
-type FieldInfoArray []FieldInfo
-
-// Array FieldInfoᵖˢ
-type FieldInfoPtrArray []*FieldInfo
-
 // Array MemoryRangeˢ
 type MemoryRangeArray []MemoryRange
 
-// Array ParameterInfoˢ
-type ParameterInfoArray []ParameterInfo
-
 // Array ReportItemˢ
 type ReportItemArray []ReportItem
-
-// Array TypeInfoˢ
-type TypeInfoArray []TypeInfo
 
 // Array U64ˢ
 type U64Array []uint64
@@ -210,41 +170,6 @@ const (
 	TimingMaskTimingPerFrame    TimingMask = 4
 )
 
-// Enum TypeKind
-type TypeKind int
-
-const (
-	TypeKindBool        TypeKind = 0
-	TypeKindS8          TypeKind = 1
-	TypeKindU8          TypeKind = 2
-	TypeKindS16         TypeKind = 3
-	TypeKindU16         TypeKind = 4
-	TypeKindS32         TypeKind = 5
-	TypeKindU32         TypeKind = 6
-	TypeKindF32         TypeKind = 7
-	TypeKindS64         TypeKind = 8
-	TypeKindU64         TypeKind = 9
-	TypeKindF64         TypeKind = 10
-	TypeKindString      TypeKind = 11
-	TypeKindEnum        TypeKind = 12
-	TypeKindStruct      TypeKind = 14
-	TypeKindClass       TypeKind = 15
-	TypeKindArray       TypeKind = 16
-	TypeKindStaticArray TypeKind = 17
-	TypeKindMap         TypeKind = 18
-	TypeKindPointer     TypeKind = 19
-	TypeKindMemory      TypeKind = 20
-	TypeKindAny         TypeKind = 21
-	TypeKindID          TypeKind = 22
-)
-
-// Interface TypeInfo
-type TypeInfo interface {
-	binary.Object
-	GetName() string
-	GetKind() TypeKind
-}
-
 // Class Device
 type Device struct {
 	binary.Generate
@@ -267,7 +192,6 @@ type Capture struct {
 	Atoms  AtomStreamId
 	Report ReportId
 	Apis   ApiIdArray
-	Schema SchemaId
 }
 
 // Class Report
@@ -371,111 +295,4 @@ type RenderSettings struct {
 	MaxWidth  uint32
 	MaxHeight uint32
 	Wireframe bool
-}
-
-// Class Schema
-type Schema struct {
-	binary.Generate
-	Atoms AtomInfoArray
-	Apis  ApiSchemaArray
-}
-
-// Class ApiSchema
-type ApiSchema struct {
-	binary.Generate
-	Api ApiId
-}
-
-// Class ArrayInfo
-type ArrayInfo struct {
-	binary.Generate
-	Name        string
-	Kind        TypeKind
-	ElementType TypeInfo
-}
-
-// Class StaticArrayInfo
-type StaticArrayInfo struct {
-	binary.Generate
-	Name        string
-	Kind        TypeKind
-	ElementType TypeInfo
-	Size        uint32
-}
-
-// Class MapInfo
-type MapInfo struct {
-	binary.Generate
-	Name      string
-	Kind      TypeKind
-	KeyType   TypeInfo
-	ValueType TypeInfo
-}
-
-// Class EnumInfo
-type EnumInfo struct {
-	binary.Generate
-	Name    string
-	Kind    TypeKind
-	Entries EnumEntryArray
-	Extends EnumInfoPtrArray
-}
-
-// Class EnumEntry
-type EnumEntry struct {
-	binary.Generate
-	Name  string
-	Value uint32
-}
-
-// Class StructInfo
-type StructInfo struct {
-	binary.Generate
-	Name   string
-	Kind   TypeKind
-	Fields FieldInfoPtrArray
-}
-
-// Class ClassInfo
-type ClassInfo struct {
-	binary.Generate
-	Name    string
-	Kind    TypeKind
-	Fields  FieldInfoPtrArray
-	Extends ClassInfoPtrArray
-}
-
-// Class FieldInfo
-type FieldInfo struct {
-	binary.Generate
-	Name string
-	Type TypeInfo
-}
-
-// Class AtomInfo
-type AtomInfo struct {
-	binary.Generate
-	Api              ApiId
-	Type             uint16
-	Name             string
-	Parameters       ParameterInfoArray
-	IsCommand        bool
-	IsDrawCall       bool
-	IsEndOfFrame     bool
-	DocumentationUrl string
-}
-
-// Class ParameterInfo
-type ParameterInfo struct {
-	binary.Generate
-	Name string
-	Type TypeInfo
-	Out  bool
-}
-
-// Class SimpleInfo
-type SimpleInfo struct {
-	binary.Generate
-	Name string
-	Kind TypeKind
 }
