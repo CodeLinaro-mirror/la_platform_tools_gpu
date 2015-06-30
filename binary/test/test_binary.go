@@ -20,8 +20,8 @@ func init() {
 }
 
 var (
-	TypeAID = binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}
-	TypeBID = binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}
+	TypeAID = binary.ID{0x29, 0x0a, 0x4b, 0x25, 0x7d, 0x55, 0xab, 0x2b, 0x8f, 0x03, 0x32, 0x53, 0x7f, 0xd8, 0x66, 0x69, 0xbc, 0x77, 0x07, 0x98}
+	TypeBID = binary.ID{0x04, 0x84, 0xdf, 0x7d, 0x88, 0x25, 0xef, 0x43, 0xf7, 0x71, 0x3c, 0x5c, 0x03, 0x2b, 0xe0, 0xfd, 0x42, 0x1f, 0x6e, 0x87}
 )
 
 type binaryClassTypeA struct{}
@@ -30,7 +30,7 @@ func (*TypeA) Class() binary.Class {
 	return (*binaryClassTypeA)(nil)
 }
 func doEncodeTypeA(e binary.Encoder, o *TypeA) error {
-	if err := e.String(o.data); err != nil {
+	if err := e.String(o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -39,7 +39,7 @@ func doDecodeTypeA(d binary.Decoder, o *TypeA) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
-		o.data = string(obj)
+		o.Data = string(obj)
 	}
 	return nil
 }
@@ -70,7 +70,7 @@ var schemaTypeA = &schema.Class{
 	Name:    "TypeA",
 	Display: "TypeA",
 	Fields: []schema.Field{
-		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -80,7 +80,7 @@ func (*TypeB) Class() binary.Class {
 	return (*binaryClassTypeB)(nil)
 }
 func doEncodeTypeB(e binary.Encoder, o *TypeB) error {
-	if err := e.String(o.data); err != nil {
+	if err := e.String(o.Data); err != nil {
 		return err
 	}
 	return nil
@@ -89,7 +89,7 @@ func doDecodeTypeB(d binary.Decoder, o *TypeB) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
-		o.data = string(obj)
+		o.Data = string(obj)
 	}
 	return nil
 }
@@ -120,6 +120,6 @@ var schemaTypeB = &schema.Class{
 	Name:    "TypeB",
 	Display: "TypeB",
 	Fields: []schema.Field{
-		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
