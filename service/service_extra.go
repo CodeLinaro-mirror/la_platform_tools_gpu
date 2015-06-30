@@ -157,10 +157,9 @@ type resultPrerenderFramebuffers struct {
 // Call ReplaceAtom
 type callReplaceAtom struct {
 	binary.Generate
-	capture  CaptureId
-	atomId   uint64
-	atomType uint16
-	data     Binary
+	capture CaptureId
+	atomId  uint64
+	data    Binary
 }
 
 // Result ReplaceAtom
