@@ -111,7 +111,6 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
 // a single atom replaced.
 cmd CaptureId ReplaceAtom(CaptureId capture,
                           u64       atomId,
-                          u16       atomType,
                           Binary    data)
 { return ? }
 

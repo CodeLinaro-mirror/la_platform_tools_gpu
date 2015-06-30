@@ -238,7 +238,6 @@ func (s rpcServer) PrerenderFramebuffers(
 func (s rpcServer) ReplaceAtom(
 	capture service.CaptureId,
 	atomID uint64,
-	atomType uint16,
 	data service.Binary,
 	l log.Logger) (service.CaptureId, error) {
 
