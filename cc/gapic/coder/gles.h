@@ -806,7 +806,7 @@ namespace gles {
             e->Bool(this->mColorMaskGreen);
             e->Bool(this->mColorMaskBlue);
             e->Bool(this->mColorMaskAlpha);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Value(this->mViewport);
             e->Value(this->mScissor);
             e->Uint32(this->mFrontFace);
@@ -966,7 +966,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
         uint64_t mCreatedAt;
@@ -999,8 +999,8 @@ namespace gles {
             e->Uint64(this->mCreatedAt);
             e->Uint32(this->mKind);
             e->Uint32(this->mFormat);
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Uint32(this->mMagFilter);
             e->Uint32(this->mMinFilter);
             e->Uint32(this->mWrapS);
@@ -1068,7 +1068,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
         uint64_t mCreatedAt;
@@ -1177,12 +1177,12 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Bool(this->mLinked);
             e->Value(this->mBinary);
-            
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Value(this->mInfoLog);
         }
 
@@ -1247,14 +1247,14 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mCreatedAt);
-            
-            
-            
-            
-            
-            
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
         uint64_t mCreatedAt;
@@ -1299,17 +1299,17 @@ namespace gles {
             e->Value(this->mBlending);
             e->Value(this->mRasterizing);
             e->Value(this->mClearing);
-            
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Uint32(this->mBoundProgram);
             e->Uint32(this->mBoundVertexArray);
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Uint32(this->mActiveTextureUnit);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Uint32(this->mGenerateMipmapHint);
-            
+            GAPID_FATAL("C++ stream encoding not supported");
             e->Value(this->mInstances);
         }
 
@@ -7192,11 +7192,11 @@ namespace gles {
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mNextContextID);
             e->Uint32(this->mCurrentThread);
-            
-            
-            
-            
-            
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
         uint32_t mNextContextID;

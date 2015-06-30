@@ -66,8 +66,8 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
 {{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
-{{define "Cpp.Encode.Pointer"}}e->object({{.Name}});{{end}}
-{{define "Cpp.Encode.Interface"}}e->object({{.Name}});{{end}}
+{{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
+{{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 
 {{define "Cpp.Encode#[]uint8"}}e->Uint32({{.Name}}.size());
 »»»e->Data({{.Name}}.data(), {{.Name}}.size());{{end}}
@@ -82,9 +82,9 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.Encode.Stream"}}{{end}}
+{{define "Cpp.Encode.Stream"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
 
-{{define "Cpp.Encode.Map"}}{{end}}
+{{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
 
 {{define "Cpp.File"}}{{$.Copyright}}
 #ifndef GAPIC_CODER_{{.Package | Upper}}_H
