@@ -13,7 +13,7 @@ var (
 ```
 
 ```go
-var BadObject = &BadType{data: "BadObject"}
+var BadObject = &BadType{Data: "BadObject"}
 ```
 
 ```go
@@ -21,11 +21,11 @@ var Namespace = registry.NewNamespace()
 ```
 
 ```go
-var ObjectA = &TypeA{data: "ObjectA"}
+var ObjectA = &TypeA{Data: "ObjectA"}
 ```
 
 ```go
-var ObjectB = &TypeB{data: "ObjectB"}
+var ObjectB = &TypeB{Data: "ObjectB"}
 ```
 
 #### func  DecodeObject
@@ -63,6 +63,7 @@ func VerifyData(t *testing.T, entry Entry, got *bytes.Buffer)
 ```go
 type BadType struct {
 	binary.Generate `disable:"true"`
+	Data            string
 }
 ```
 
@@ -104,6 +105,7 @@ type Entry struct {
 ```go
 type TypeA struct {
 	binary.Generate `id:"TypeAID"`
+	Data            string
 }
 ```
 
@@ -119,6 +121,7 @@ func (*TypeA) Class() binary.Class
 ```go
 type TypeB struct {
 	binary.Generate `id:"TypeBID"`
+	Data            string
 }
 ```
 

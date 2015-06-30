@@ -25,22 +25,22 @@ import (
 
 type TypeA struct {
 	binary.Generate `id:"TypeAID"`
-	data            string
+	Data            string
 }
 
 type TypeB struct {
 	binary.Generate `id:"TypeBID"`
-	data            string
+	Data            string
 }
 
 type BadType struct {
 	binary.Generate `disable:"true"`
-	data            string
+	Data            string
 }
 
-var ObjectA = &TypeA{data: "ObjectA"}
-var ObjectB = &TypeB{data: "ObjectB"}
-var BadObject = &BadType{data: "BadObject"}
+var ObjectA = &TypeA{Data: "ObjectA"}
+var ObjectB = &TypeB{Data: "ObjectB"}
+var BadObject = &BadType{Data: "BadObject"}
 
 type Entry struct {
 	Name   string
