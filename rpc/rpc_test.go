@@ -20,6 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/multiplexer"
 )
 
 const mtu = 1024
@@ -55,7 +56,7 @@ func create(t *testing.T) Client {
 			return NewError("Invalid call type %T", o)
 		}
 	})
-	return NewClient(cr, cw, mtu)
+	return NewClient(multiplexer.New(cr, cw, mtu, nil), nil)
 }
 
 func simpleRequest(t *testing.T, c Client, v string) {

@@ -34,8 +34,8 @@ func (r resultGetDevices) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetState) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetState(capture: %v, after: %v)",
-		c.capture, c.after,
+	fmt.Fprintf(f, "GetState(capture: %v, api: %v, after: %v)",
+		c.capture, c.api, c.after,
 	)
 }
 func (r resultGetState) Format(f fmt.State, c rune) {
@@ -121,14 +121,6 @@ func (c callResolveCapture) Format(f fmt.State, r rune) {
 func (r resultResolveCapture) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveReport) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveReport(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveReport) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveDevice) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveDevice(id: %v)",
 		c.id,
@@ -161,12 +153,28 @@ func (c callResolveMemoryInfo) Format(f fmt.State, r rune) {
 func (r resultResolveMemoryInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callResolveReport) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "ResolveReport(id: %v)",
+		c.id,
+	)
+}
+func (r resultResolveReport) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callResolveSchema) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveSchema(id: %v)",
 		c.id,
 	)
 }
 func (r resultResolveSchema) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callResolveState) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "ResolveState(id: %v)",
+		c.id,
+	)
+}
+func (r resultResolveState) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callResolveTimingInfo) Format(f fmt.State, r rune) {
@@ -206,6 +214,9 @@ func (h ReportId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h SchemaId) Valid() bool {
+	return h.ID.Valid()
+}
+func (h StateId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h TimingInfoId) Valid() bool {
@@ -589,16 +600,13 @@ func (c *Schema) GetApis() ApiSchemaArray { return c.Apis }
 
 func CreateApiSchema(
 	Api ApiId,
-	State StructInfo,
 ) *ApiSchema {
 	return &ApiSchema{
-		Api:   Api,
-		State: State,
+		Api: Api,
 	}
 }
 
-func (c *ApiSchema) GetApi() ApiId        { return c.Api }
-func (c *ApiSchema) GetState() StructInfo { return c.State }
+func (c *ApiSchema) GetApi() ApiId { return c.Api }
 
 func CreateArrayInfo(
 	Name string,

@@ -1160,32 +1160,6 @@ func init() {
 		IsEndOfFrame:     false,
 		DocumentationUrl: "[]",
 	})
-	schema.RegisterAPI(api{}, service.StructInfo{
-		Name: "state",
-		Kind: service.TypeKindStruct,
-		Fields: service.FieldInfoPtrArray{
-			&service.FieldInfo{
-				Name: "u8s",
-				Type: schema.Int, /* TODO: Slice */
-			},
-			&service.FieldInfo{
-				Name: "u16s",
-				Type: schema.Int, /* TODO: Slice */
-			},
-			&service.FieldInfo{
-				Name: "u32s",
-				Type: schema.Int, /* TODO: Slice */
-			},
-			&service.FieldInfo{
-				Name: "ints",
-				Type: schema.Int, /* TODO: Slice */
-			},
-			&service.FieldInfo{
-				Name: "str",
-				Type: schema.String,
-			},
-		},
-	})
 }
 
 type schemaBuilder struct {

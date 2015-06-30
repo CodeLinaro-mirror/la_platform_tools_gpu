@@ -22,6 +22,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/ringbuffer"
 )
 
@@ -106,12 +107,12 @@ func (s *server) GetDerived(l log.Logger) (Base, error) {
 	return testDerived, s.err
 }
 
-func create(t *testing.T) (RPC, *server) {
+func create(t *testing.T) (Client, *server) {
 	l := log.Testing(t).Enter("Server")
 	mtu := 64
 	s2c, c2s := ringbuffer.New(64), ringbuffer.New(64)
 	server := &server{}
-	client := CreateClient(s2c, c2s, mtu)
+	client := NewClient(multiplexer.New(s2c, c2s, mtu, nil), nil)
 	BindServer(c2s, s2c, mtu, l, server)
 	return client, server
 }

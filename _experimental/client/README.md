@@ -1287,16 +1287,16 @@ func (v S8) Unknown() string
 
 ```go
 type StateAdapter struct {
-	StateAdapterItem
+	StateAdapterNode
 	gxui.AdapterBase
 }
 ```
 
 
-#### func  CreateStateAdapter
+#### func  NewStateAdapter
 
 ```go
-func CreateStateAdapter(appCtx *ApplicationContext, state schema.Struct) *StateAdapter
+func NewStateAdapter(appCtx *ApplicationContext) *StateAdapter
 ```
 
 #### func (*StateAdapter) Size
@@ -1305,48 +1305,67 @@ func CreateStateAdapter(appCtx *ApplicationContext, state schema.Struct) *StateA
 func (r *StateAdapter) Size(theme gxui.Theme) math.Size
 ```
 
-#### type StateAdapterItem
+#### type StateAdapterNode
 
 ```go
-type StateAdapterItem struct {
+type StateAdapterNode struct {
 }
 ```
 
 
-#### func (*StateAdapterItem) Count
+#### func (*StateAdapterNode) Count
 
 ```go
-func (i *StateAdapterItem) Count() int
+func (n *StateAdapterNode) Count() int
 ```
 
-#### func (*StateAdapterItem) Create
+#### func (*StateAdapterNode) Create
 
 ```go
-func (i *StateAdapterItem) Create(t gxui.Theme, index int) gxui.Control
+func (n *StateAdapterNode) Create(t gxui.Theme, index int) gxui.Control
 ```
 
-#### func (*StateAdapterItem) Init
+#### func (*StateAdapterNode) ItemAt
 
 ```go
-func (i *StateAdapterItem) Init(appCtx *ApplicationContext, key string, value interface{})
+func (n *StateAdapterNode) ItemAt(index int) gxui.AdapterItem
 ```
 
-#### func (*StateAdapterItem) ItemAt
+#### func (*StateAdapterNode) ItemIndex
 
 ```go
-func (i *StateAdapterItem) ItemAt(index int) gxui.AdapterItem
+func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int
 ```
 
-#### func (*StateAdapterItem) ItemIndex
+#### func (*StateAdapterNode) NodeAt
 
 ```go
-func (i *StateAdapterItem) ItemIndex(item gxui.AdapterItem) int
+func (n *StateAdapterNode) NodeAt(index int) gxui.TreeNode
 ```
 
-#### func (*StateAdapterItem) NodeAt
+#### type StateAdapterNodeList
 
 ```go
-func (i *StateAdapterItem) NodeAt(index int) gxui.TreeNode
+type StateAdapterNodeList []*StateAdapterNode
+```
+
+
+#### func (StateAdapterNodeList) Len
+
+```go
+func (l StateAdapterNodeList) Len() int
+```
+
+#### func (StateAdapterNodeList) Less
+
+```go
+func (l StateAdapterNodeList) Less(a, b int) bool
+```
+
+#### func (StateAdapterNodeList) Swap
+
+```go
+func (l StateAdapterNodeList) Swap(a, b int)
 ```
 
 #### type TimingData

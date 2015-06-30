@@ -6,18 +6,29 @@
 package service
 
 import (
-	"io"
-
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
 
-type client struct {
-	rpc.Client
+// Client is the client interface for RPC calls.
+type Client interface {
+	// Client exposes all the RPC interface methods.
+	RPC
+	// Multiplexer returns the multiplexer used for communication to the server.
+	Multiplexer() *multiplexer.Multiplexer
+	// Namespace returns the custom namespace used for decoding responses from the
+	// server, or nil if no custom namespace has been specified.
+	Namespace() *registry.Namespace
 }
+type client struct{ rpc.Client }
 
-func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
-	return client{rpc.NewClient(r, w, mtu)}
+// NewClient creates a new rpc client object that uses the multiplexer m for
+// communication the namespace n for decoding objects. If n is nil then the
+// global namespace is used.
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
+	return client{rpc.NewClient(m, n)}
 }
 
 // Client compliance
@@ -61,9 +72,9 @@ func (c client) GetDevices(l log.Logger) (res DeviceIdArray, err error) {
 	return
 }
 
-func (c client) GetState(capture CaptureId, after uint64, l log.Logger) (res BinaryId, err error) {
+func (c client) GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (res StateId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetState{capture: capture, after: after}); err == nil {
+	if val, err = c.Send(&callGetState{capture: capture, api: api, after: after}); err == nil {
 		res = val.(*resultGetState).value
 	} else {
 		log.Errorf(l, "RPC GetState failed with error: %v", err)
@@ -171,16 +182,6 @@ func (c client) ResolveCapture(id CaptureId, l log.Logger) (res Capture, err err
 	return
 }
 
-func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveReport{id: id}); err == nil {
-		res = val.(*resultResolveReport).value
-	} else {
-		log.Errorf(l, "RPC ResolveReport failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) ResolveDevice(id DeviceId, l log.Logger) (res Device, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveDevice{id: id}); err == nil {
@@ -221,12 +222,32 @@ func (c client) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (res MemoryInfo
 	return
 }
 
+func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error) {
+	var val interface{}
+	if val, err = c.Send(&callResolveReport{id: id}); err == nil {
+		res = val.(*resultResolveReport).value
+	} else {
+		log.Errorf(l, "RPC ResolveReport failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) ResolveSchema(id SchemaId, l log.Logger) (res Schema, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveSchema{id: id}); err == nil {
 		res = val.(*resultResolveSchema).value
 	} else {
 		log.Errorf(l, "RPC ResolveSchema failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) ResolveState(id StateId, l log.Logger) (res State, err error) {
+	var val interface{}
+	if val, err = c.Send(&callResolveState{id: id}); err == nil {
+		res = val.(*resultResolveState).value
+	} else {
+		log.Errorf(l, "RPC ResolveState failed with error: %v", err)
 	}
 	return
 }
