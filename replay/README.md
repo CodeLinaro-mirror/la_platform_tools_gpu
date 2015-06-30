@@ -7,16 +7,19 @@ Package replay is used to issue replay requests to replay devices.
 ## Usage
 
 ```go
-var DisableLocalDeviceCache = false
+const Replayd = "replayd"
 ```
-DisableLocalDeviceCache can be used to disable the disk-cache for the local
-device. If true, it is passed as a flag to replayd on spawning. This can be used
-for disabling the cache for tests.
 
 ```go
-var LocalReplayBinary = replayd
+const Replayd = "replayd.exe"
 ```
-LocalReplayBinary is the full path to the local binary.
+
+#### func  ConfigureLocalReplayDevice
+
+```go
+func ConfigureLocalReplayDevice(disableCache bool, binary string, port int)
+```
+Allow adjusting the settings for replayd.
 
 #### func  Replay
 
