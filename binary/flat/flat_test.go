@@ -19,6 +19,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/pod"
 	"android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
@@ -27,7 +28,7 @@ func TestValue(t *testing.T) {
 	for _, entry := range []test.Entry{
 		{
 			Name:   "One",
-			Values: []binary.Object{test.ObjectA},
+			Values: []interface{}{test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -35,7 +36,7 @@ func TestValue(t *testing.T) {
 		},
 		{
 			Name:   "Repeat",
-			Values: []binary.Object{test.ObjectA, test.ObjectA},
+			Values: []interface{}{test.ObjectA, test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -45,7 +46,7 @@ func TestValue(t *testing.T) {
 		},
 		{
 			Name:   "Many",
-			Values: []binary.Object{test.ObjectA, test.ObjectB, test.ObjectA},
+			Values: []interface{}{test.ObjectA, test.ObjectB, test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -67,12 +68,12 @@ func TestObject(t *testing.T) {
 	for _, entry := range []test.Entry{
 		{
 			Name:   "Nil",
-			Values: []binary.Object{nil},
+			Values: []interface{}{nil},
 			Data:   test.Bytes{}.ID(binary.ID{}).Data,
 		},
 		{
 			Name:   "One",
-			Values: []binary.Object{test.ObjectA},
+			Values: []interface{}{test.ObjectA},
 			Data: test.Bytes{}.ID(test.TypeAID).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -80,7 +81,7 @@ func TestObject(t *testing.T) {
 		},
 		{
 			Name:   "Repeat",
-			Values: []binary.Object{test.ObjectA, test.ObjectA},
+			Values: []interface{}{test.ObjectA, test.ObjectA},
 			Data: test.Bytes{}.ID(test.TypeAID).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -91,7 +92,7 @@ func TestObject(t *testing.T) {
 		},
 		{
 			Name:   "Many",
-			Values: []binary.Object{test.ObjectA, test.ObjectB, test.ObjectA, nil},
+			Values: []interface{}{test.ObjectA, test.ObjectB, test.ObjectA, nil},
 			Data: test.Bytes{}.ID(test.TypeAID).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -102,6 +103,16 @@ func TestObject(t *testing.T) {
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
 			).ID(binary.ID{}).Data,
+		},
+		{
+			Name:   "POD",
+			Values: []interface{}{true, int8(0x1), uint32(0x10), true, int8(0x1)},
+			Data: test.Bytes{}.ID((*pod.Bool)(nil).Class().ID()).Add(0x01).
+				ID((*pod.Int8)(nil).Class().ID()).Add(0x01).
+				ID((*pod.Uint32)(nil).Class().ID()).Add(0x10).
+				ID((*pod.Bool)(nil).Class().ID()).Add(0x01).
+				ID((*pod.Int8)(nil).Class().ID()).Add(0x01).
+				Data,
 		},
 	} {
 		b := &bytes.Buffer{}
