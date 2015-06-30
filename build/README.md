@@ -134,10 +134,9 @@ Join returns a File formed from joining this File with ext.
 #### func (File) LookPath
 
 ```go
-func (f File) LookPath() File
+func (f File) LookPath() (File, error)
 ```
-LookPath looks for the file f on the system PATH, returning the absolute path to
-the file if found, otherwise an empty File.
+LookPath returns the path to f, searching the system PATHs.
 
 #### func (File) Matches
 
