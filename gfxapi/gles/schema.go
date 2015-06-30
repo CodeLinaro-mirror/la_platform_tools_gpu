@@ -5746,40 +5746,6 @@ func init() {
 		IsEndOfFrame:     false,
 		DocumentationUrl: "[]",
 	})
-	schema.RegisterAPI(api{}, service.StructInfo{
-		Name: "state",
-		Kind: service.TypeKindStruct,
-		Fields: service.FieldInfoPtrArray{
-			&service.FieldInfo{
-				Name: "NextContextID",
-				Type: schema.U32,
-			},
-			&service.FieldInfo{
-				Name: "CurrentThread",
-				Type: schema.U32,
-			},
-			&service.FieldInfo{
-				Name: "Contexts",
-				Type: s.getMapInfo(27),
-			},
-			&service.FieldInfo{
-				Name: "EGLContexts",
-				Type: s.getMapInfo(6),
-			},
-			&service.FieldInfo{
-				Name: "GLXContexts",
-				Type: s.getMapInfo(11),
-			},
-			&service.FieldInfo{
-				Name: "WGLContexts",
-				Type: s.getMapInfo(12),
-			},
-			&service.FieldInfo{
-				Name: "CGLContexts",
-				Type: s.getMapInfo(3),
-			},
-		},
-	})
 }
 
 type schemaBuilder struct {

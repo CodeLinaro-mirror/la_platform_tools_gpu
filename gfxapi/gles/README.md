@@ -28150,11 +28150,18 @@ func (a *StartTimer) String() string
 
 ```go
 type State struct {
+	binary.Generate
 	Globals
 	ValidateOutput bool
 }
 ```
 
+
+#### func (*State) Class
+
+```go
+func (*State) Class() binary.Class
+```
 
 #### type StateVariable
 

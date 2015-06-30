@@ -27,9 +27,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
 	"github.com/google/gxui/gxfont"
@@ -46,7 +48,7 @@ type ApplicationContext struct {
 	theme               gxui.Theme
 	monospace           gxui.Font
 	logger              *log.Splitter
-	rpc                 service.RPC
+	rpc                 service.Client
 	captureID           service.CaptureId
 	capture             service.Capture
 	dropDownOverlay     gxui.BubbleOverlay
@@ -67,6 +69,7 @@ type ApplicationContext struct {
 	onTimingInfoUpdated gxui.Event
 	schema              service.Schema
 	atoms               []Atom
+	state               *schema.Object
 	hierarchy           atom.Group
 	report              service.Report
 	selectedAtomID      atom.ID
@@ -136,7 +139,9 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	if err != nil {
 		return nil, err
 	}
-	rpc := service.CreateClient(rpcSocket, rpcSocket, mtu)
+	// Start the client with the global namespace. This will be replaced when
+	// the schema has been fetched from the server.
+	rpc := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, mtu, nil), nil)
 
 	monospace, _ := theme.Driver().CreateFont(gxfont.Monospace, 12)
 
@@ -181,6 +186,8 @@ func (c *ApplicationContext) UpdateSchema() {
 		for _, class := range classes {
 			c.schemaNamespace.Add(class)
 		}
+		// Replace the current RPC
+		c.rpc = service.NewClient(c.rpc.Multiplexer(), c.namespace)
 	}()
 }
 
@@ -320,35 +327,27 @@ func (c *ApplicationContext) LoadReport() {
 }
 
 func (c *ApplicationContext) LoadState() {
-	/*
-		captureID := c.captureID
-		after := c.selectedAtomID
-		logger := c.logger.Fork().Enter("LoadState")
-		log.Errorf(logger,"(capture: %v, after: %v)", captureID, after)
+	captureID := c.captureID
+	after := c.selectedAtomID
+	apiID := c.atoms[after].Api()
+	l := c.logger.Fork().Enter("LoadState")
 
-		go func() {
-			id, err := c.rpc.GetState(logger, captureID, uint64(after))
-			if err != nil {
-				return
-			}
-			bin, err := c.rpc.ResolveBinary(logger, id)
-			if err != nil {
-				return
-			}
-			c.Run(func() {
-				_ = bin
-				c.state = schema.Struct{Fields: []schema.Field{
-				schema.Field{Info: &service.FieldInfo{Name: "FIXME b/19835606"}},
-				}}
-				state, err := schema.ReadType(c.schema.State, binary.IntvDecoder(bytes.NewBuffer(bin.Data)))
-				if err != nil {
-					panic(err)
-				}
-				c.state = state.(schema.Struct)
-				c.onStateUpdated.Fire()
-			})
-		}()
-	*/
+	go func() {
+		id, err := c.rpc.GetState(captureID, apiID, uint64(after), l)
+		if err != nil {
+			log.E(l, "%v", err)
+			return
+		}
+		state, err := c.rpc.ResolveState(id, l)
+		if err != nil {
+			log.E(l, "%v", err)
+			return
+		}
+		c.Run(func() {
+			c.state = state.(*schema.Object)
+			c.onStateUpdated.Fire()
+		})
+	}()
 }
 
 func (c *ApplicationContext) RequestReplay() {

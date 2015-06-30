@@ -24,12 +24,13 @@ import schema "schema.api"
 @handle type string MemoryInfoId
 @handle type string ReportId
 @handle type string SchemaId
+@handle type string StateId
 @handle type string TimingInfoId
 
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
-cmd schema.Class*[] GetSchema() { return ?}
+cmd schema.Class*[] GetSchema() { return ? }
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
@@ -44,11 +45,10 @@ cmd CaptureId[] GetCaptures() { return ? }
 // This list may change over time, as devices are connected and disconnected.
 cmd DeviceId[] GetDevices() { return ? }
 
-// GetState returns an identifier to a binary blob containing the graphics state
-// immediately following the atom after.
-// The binary blob can be fetched with a call to ResolveBinary, and decoded
-// using the capture's schema.
-cmd BinaryId GetState(CaptureId capture, u64 after)
+// GetState returns an identifier to a state object containing the graphics
+// state for the specified API immediately following the atom after.
+// The state object can be fetched with a call to ResolveState.
+cmd StateId GetState(CaptureId capture, ApiId api, u64 after)
 { return ? }
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture.
@@ -117,12 +117,13 @@ cmd CaptureId ReplaceAtom(CaptureId capture,
 cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
 cmd Binary             ResolveBinary(BinaryId id) { return ? }
 cmd Capture            ResolveCapture(CaptureId id) { return ? }
-cmd Report             ResolveReport(ReportId id) { return ? }
 cmd Device             ResolveDevice(DeviceId id) { return ? }
 cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
 cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
 cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
+cmd Report             ResolveReport(ReportId id) { return ? }
 cmd Schema             ResolveSchema(SchemaId id) { return ? }
+cmd State              ResolveState(StateId id) { return ? }
 cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
 // Device describes replay target avaliable to the server.
@@ -147,6 +148,10 @@ class Capture {
   ApiId[]             Apis     // List of graphics APIs used by this capture.
   SchemaId            Schema   // The schema used to decode types in this capture.
 }
+
+// State describes the graphics driver state for a single graphics API at a
+// single point in the atom stream.
+type any State
 
 // Report describes all warnings and errors found by a capture.
 class Report {
@@ -280,8 +285,7 @@ class Schema {
 
 // ApiSchema describes the schema used by a single graphics API.
 class ApiSchema {
-  ApiId      Api   // The API identifier.
-  StructInfo State // The state layout.
+  ApiId Api // The API identifier.
 }
 
 // TypeKind is the exhaustive list of all types supported by the schema.

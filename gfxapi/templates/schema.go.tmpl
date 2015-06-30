@@ -41,13 +41,6 @@
     {{range $i, $c := AllCommands $}}
       schema.RegisterAtom({{Macro "Command" "Command" $c "Index" $i}})
     {{end}}
-    schema.RegisterAPI(api{}, service.StructInfo{
-      Name:   "state",
-      Kind:   service.TypeKindStruct,
-      Fields: service.FieldInfoPtrArray{
-        {{Macro "Globals" $}}
-      },
-    })
   }
 
   type schemaBuilder struct {

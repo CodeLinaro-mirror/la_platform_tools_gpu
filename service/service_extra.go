@@ -57,13 +57,14 @@ type resultGetDevices struct {
 type callGetState struct {
 	binary.Generate
 	capture CaptureId
+	api     ApiId
 	after   uint64
 }
 
 // Result GetState
 type resultGetState struct {
 	binary.Generate
-	value BinaryId
+	value StateId
 }
 
 // Call GetHierarchy
@@ -204,18 +205,6 @@ type resultResolveCapture struct {
 	value Capture
 }
 
-// Call ResolveReport
-type callResolveReport struct {
-	binary.Generate
-	id ReportId
-}
-
-// Result ResolveReport
-type resultResolveReport struct {
-	binary.Generate
-	value Report
-}
-
 // Call ResolveDevice
 type callResolveDevice struct {
 	binary.Generate
@@ -264,6 +253,18 @@ type resultResolveMemoryInfo struct {
 	value MemoryInfo
 }
 
+// Call ResolveReport
+type callResolveReport struct {
+	binary.Generate
+	id ReportId
+}
+
+// Result ResolveReport
+type resultResolveReport struct {
+	binary.Generate
+	value Report
+}
+
 // Call ResolveSchema
 type callResolveSchema struct {
 	binary.Generate
@@ -274,6 +275,18 @@ type callResolveSchema struct {
 type resultResolveSchema struct {
 	binary.Generate
 	value Schema
+}
+
+// Call ResolveState
+type callResolveState struct {
+	binary.Generate
+	id StateId
+}
+
+// Result ResolveState
+type resultResolveState struct {
+	binary.Generate
+	value State
 }
 
 // Call ResolveTimingInfo

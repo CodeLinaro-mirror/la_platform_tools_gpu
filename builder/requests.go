@@ -26,6 +26,7 @@ import (
 type GetState struct {
 	binary.Generate
 	Capture service.CaptureId
+	API     service.ApiId
 	After   atom.ID
 }
 
