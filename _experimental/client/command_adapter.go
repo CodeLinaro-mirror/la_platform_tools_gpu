@@ -241,7 +241,7 @@ func createAtomGroupControls(t gxui.Theme, appCtx *ApplicationContext, g atom.Gr
 
 	atomID := g.Range.Last()
 	atom := appCtx.Atoms()[atomID]
-	if atom.IsDrawCall() || atom.IsEndOfFrame() {
+	if atom.Flags().IsDrawCall() || atom.Flags().IsEndOfFrame() {
 		var cancel chan<- struct{}
 		cancelThumbnail := func() {
 			if cancel != nil {
