@@ -5,11 +5,483 @@
 package test
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+func init() {
+	sc_CmdClone := bschema.Of((*CmdClone)(nil).Class())
+	sc_CmdClone.Metadata = append(sc_CmdClone.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdMake := bschema.Of((*CmdMake)(nil).Class())
+	sc_CmdMake.Metadata = append(sc_CmdMake.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdCopy := bschema.Of((*CmdCopy)(nil).Class())
+	sc_CmdCopy.Metadata = append(sc_CmdCopy.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdCharsliceToString := bschema.Of((*CmdCharsliceToString)(nil).Class())
+	sc_CmdCharsliceToString.Metadata = append(sc_CmdCharsliceToString.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdCharptrToString := bschema.Of((*CmdCharptrToString)(nil).Class())
+	sc_CmdCharptrToString.Metadata = append(sc_CmdCharptrToString.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdSliceCasts := bschema.Of((*CmdSliceCasts)(nil).Class())
+	sc_CmdSliceCasts.Metadata = append(sc_CmdSliceCasts.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoid := bschema.Of((*CmdVoid)(nil).Class())
+	sc_CmdVoid.Metadata = append(sc_CmdVoid.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdUnknownRet := bschema.Of((*CmdUnknownRet)(nil).Class())
+	sc_CmdUnknownRet.Metadata = append(sc_CmdUnknownRet.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdUnknownWritePtr := bschema.Of((*CmdUnknownWritePtr)(nil).Class())
+	sc_CmdUnknownWritePtr.Metadata = append(sc_CmdUnknownWritePtr.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdUnknownWriteSlice := bschema.Of((*CmdUnknownWriteSlice)(nil).Class())
+	sc_CmdUnknownWriteSlice.Metadata = append(sc_CmdUnknownWriteSlice.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidU8 := bschema.Of((*CmdVoidU8)(nil).Class())
+	sc_CmdVoidU8.Metadata = append(sc_CmdVoidU8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidS8 := bschema.Of((*CmdVoidS8)(nil).Class())
+	sc_CmdVoidS8.Metadata = append(sc_CmdVoidS8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidU16 := bschema.Of((*CmdVoidU16)(nil).Class())
+	sc_CmdVoidU16.Metadata = append(sc_CmdVoidU16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidS16 := bschema.Of((*CmdVoidS16)(nil).Class())
+	sc_CmdVoidS16.Metadata = append(sc_CmdVoidS16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidF32 := bschema.Of((*CmdVoidF32)(nil).Class())
+	sc_CmdVoidF32.Metadata = append(sc_CmdVoidF32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidU32 := bschema.Of((*CmdVoidU32)(nil).Class())
+	sc_CmdVoidU32.Metadata = append(sc_CmdVoidU32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidS32 := bschema.Of((*CmdVoidS32)(nil).Class())
+	sc_CmdVoidS32.Metadata = append(sc_CmdVoidS32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidF64 := bschema.Of((*CmdVoidF64)(nil).Class())
+	sc_CmdVoidF64.Metadata = append(sc_CmdVoidF64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidU64 := bschema.Of((*CmdVoidU64)(nil).Class())
+	sc_CmdVoidU64.Metadata = append(sc_CmdVoidU64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidS64 := bschema.Of((*CmdVoidS64)(nil).Class())
+	sc_CmdVoidS64.Metadata = append(sc_CmdVoidS64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidBool := bschema.Of((*CmdVoidBool)(nil).Class())
+	sc_CmdVoidBool.Metadata = append(sc_CmdVoidBool.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidString := bschema.Of((*CmdVoidString)(nil).Class())
+	sc_CmdVoidString.Metadata = append(sc_CmdVoidString.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoid3Strings := bschema.Of((*CmdVoid3Strings)(nil).Class())
+	sc_CmdVoid3Strings.Metadata = append(sc_CmdVoid3Strings.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoid3InArrays := bschema.Of((*CmdVoid3InArrays)(nil).Class())
+	sc_CmdVoid3InArrays.Metadata = append(sc_CmdVoid3InArrays.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidInArrayOfPointers := bschema.Of((*CmdVoidInArrayOfPointers)(nil).Class())
+	sc_CmdVoidInArrayOfPointers.Metadata = append(sc_CmdVoidInArrayOfPointers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadU8 := bschema.Of((*CmdVoidReadU8)(nil).Class())
+	sc_CmdVoidReadU8.Metadata = append(sc_CmdVoidReadU8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadS8 := bschema.Of((*CmdVoidReadS8)(nil).Class())
+	sc_CmdVoidReadS8.Metadata = append(sc_CmdVoidReadS8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadU16 := bschema.Of((*CmdVoidReadU16)(nil).Class())
+	sc_CmdVoidReadU16.Metadata = append(sc_CmdVoidReadU16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadS16 := bschema.Of((*CmdVoidReadS16)(nil).Class())
+	sc_CmdVoidReadS16.Metadata = append(sc_CmdVoidReadS16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadF32 := bschema.Of((*CmdVoidReadF32)(nil).Class())
+	sc_CmdVoidReadF32.Metadata = append(sc_CmdVoidReadF32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadU32 := bschema.Of((*CmdVoidReadU32)(nil).Class())
+	sc_CmdVoidReadU32.Metadata = append(sc_CmdVoidReadU32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadS32 := bschema.Of((*CmdVoidReadS32)(nil).Class())
+	sc_CmdVoidReadS32.Metadata = append(sc_CmdVoidReadS32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadF64 := bschema.Of((*CmdVoidReadF64)(nil).Class())
+	sc_CmdVoidReadF64.Metadata = append(sc_CmdVoidReadF64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadU64 := bschema.Of((*CmdVoidReadU64)(nil).Class())
+	sc_CmdVoidReadU64.Metadata = append(sc_CmdVoidReadU64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadS64 := bschema.Of((*CmdVoidReadS64)(nil).Class())
+	sc_CmdVoidReadS64.Metadata = append(sc_CmdVoidReadS64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadBool := bschema.Of((*CmdVoidReadBool)(nil).Class())
+	sc_CmdVoidReadBool.Metadata = append(sc_CmdVoidReadBool.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidReadPtrs := bschema.Of((*CmdVoidReadPtrs)(nil).Class())
+	sc_CmdVoidReadPtrs.Metadata = append(sc_CmdVoidReadPtrs.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteU8 := bschema.Of((*CmdVoidWriteU8)(nil).Class())
+	sc_CmdVoidWriteU8.Metadata = append(sc_CmdVoidWriteU8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteS8 := bschema.Of((*CmdVoidWriteS8)(nil).Class())
+	sc_CmdVoidWriteS8.Metadata = append(sc_CmdVoidWriteS8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteU16 := bschema.Of((*CmdVoidWriteU16)(nil).Class())
+	sc_CmdVoidWriteU16.Metadata = append(sc_CmdVoidWriteU16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteS16 := bschema.Of((*CmdVoidWriteS16)(nil).Class())
+	sc_CmdVoidWriteS16.Metadata = append(sc_CmdVoidWriteS16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteF32 := bschema.Of((*CmdVoidWriteF32)(nil).Class())
+	sc_CmdVoidWriteF32.Metadata = append(sc_CmdVoidWriteF32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteU32 := bschema.Of((*CmdVoidWriteU32)(nil).Class())
+	sc_CmdVoidWriteU32.Metadata = append(sc_CmdVoidWriteU32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteS32 := bschema.Of((*CmdVoidWriteS32)(nil).Class())
+	sc_CmdVoidWriteS32.Metadata = append(sc_CmdVoidWriteS32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteF64 := bschema.Of((*CmdVoidWriteF64)(nil).Class())
+	sc_CmdVoidWriteF64.Metadata = append(sc_CmdVoidWriteF64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteU64 := bschema.Of((*CmdVoidWriteU64)(nil).Class())
+	sc_CmdVoidWriteU64.Metadata = append(sc_CmdVoidWriteU64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteS64 := bschema.Of((*CmdVoidWriteS64)(nil).Class())
+	sc_CmdVoidWriteS64.Metadata = append(sc_CmdVoidWriteS64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWriteBool := bschema.Of((*CmdVoidWriteBool)(nil).Class())
+	sc_CmdVoidWriteBool.Metadata = append(sc_CmdVoidWriteBool.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidWritePtrs := bschema.Of((*CmdVoidWritePtrs)(nil).Class())
+	sc_CmdVoidWritePtrs.Metadata = append(sc_CmdVoidWritePtrs.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdU8 := bschema.Of((*CmdU8)(nil).Class())
+	sc_CmdU8.Metadata = append(sc_CmdU8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdS8 := bschema.Of((*CmdS8)(nil).Class())
+	sc_CmdS8.Metadata = append(sc_CmdS8.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdU16 := bschema.Of((*CmdU16)(nil).Class())
+	sc_CmdU16.Metadata = append(sc_CmdU16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdS16 := bschema.Of((*CmdS16)(nil).Class())
+	sc_CmdS16.Metadata = append(sc_CmdS16.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdF32 := bschema.Of((*CmdF32)(nil).Class())
+	sc_CmdF32.Metadata = append(sc_CmdF32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdU32 := bschema.Of((*CmdU32)(nil).Class())
+	sc_CmdU32.Metadata = append(sc_CmdU32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdS32 := bschema.Of((*CmdS32)(nil).Class())
+	sc_CmdS32.Metadata = append(sc_CmdS32.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdF64 := bschema.Of((*CmdF64)(nil).Class())
+	sc_CmdF64.Metadata = append(sc_CmdF64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdU64 := bschema.Of((*CmdU64)(nil).Class())
+	sc_CmdU64.Metadata = append(sc_CmdU64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdS64 := bschema.Of((*CmdS64)(nil).Class())
+	sc_CmdS64.Metadata = append(sc_CmdS64.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdBool := bschema.Of((*CmdBool)(nil).Class())
+	sc_CmdBool.Metadata = append(sc_CmdBool.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdString := bschema.Of((*CmdString)(nil).Class())
+	sc_CmdString.Metadata = append(sc_CmdString.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdPointer := bschema.Of((*CmdPointer)(nil).Class())
+	sc_CmdPointer.Metadata = append(sc_CmdPointer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoid3Remapped := bschema.Of((*CmdVoid3Remapped)(nil).Class())
+	sc_CmdVoid3Remapped.Metadata = append(sc_CmdVoid3Remapped.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidInArrayOfRemapped := bschema.Of((*CmdVoidInArrayOfRemapped)(nil).Class())
+	sc_CmdVoidInArrayOfRemapped.Metadata = append(sc_CmdVoidInArrayOfRemapped.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidOutArrayOfRemapped := bschema.Of((*CmdVoidOutArrayOfRemapped)(nil).Class())
+	sc_CmdVoidOutArrayOfRemapped.Metadata = append(sc_CmdVoidOutArrayOfRemapped.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdVoidOutArrayOfUnknownRemapped := bschema.Of((*CmdVoidOutArrayOfUnknownRemapped)(nil).Class())
+	sc_CmdVoidOutArrayOfUnknownRemapped.Metadata = append(sc_CmdVoidOutArrayOfUnknownRemapped.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CmdRemapped := bschema.Of((*CmdRemapped)(nil).Class())
+	sc_CmdRemapped.Metadata = append(sc_CmdRemapped.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+}
 func init() {
 	s := schemaBuilder{
 		staticArrays: make(map[int]*service.StaticArrayInfo),
