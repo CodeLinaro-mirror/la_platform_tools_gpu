@@ -9,10 +9,6 @@ It is not the actual implementation of the service functionality.
 
 ## Usage
 
-```go
-var Namespace = registry.NewNamespace()
-```
-
 #### func  BindServer
 
 ```go
@@ -29,12 +25,6 @@ type ApiId struct {
 ```
 
 Handle ApiId
-
-#### func (*ApiId) Class
-
-```go
-func (*ApiId) Class() binary.Class
-```
 
 #### func (ApiId) Valid
 
@@ -54,98 +44,6 @@ Array ApiIdˢ
 
 ```go
 func (a ApiIdArray) Format(f fmt.State, c rune)
-```
-
-#### type ApiSchema
-
-```go
-type ApiSchema struct {
-	binary.Generate
-	Api ApiId
-}
-```
-
-Class ApiSchema
-
-#### func  CreateApiSchema
-
-```go
-func CreateApiSchema(
-	Api ApiId,
-) *ApiSchema
-```
-
-#### func (*ApiSchema) Class
-
-```go
-func (*ApiSchema) Class() binary.Class
-```
-
-#### func (*ApiSchema) GetApi
-
-```go
-func (c *ApiSchema) GetApi() ApiId
-```
-
-#### type ApiSchemaArray
-
-```go
-type ApiSchemaArray []ApiSchema
-```
-
-Array ApiSchemaˢ
-
-#### func (ApiSchemaArray) Format
-
-```go
-func (a ApiSchemaArray) Format(f fmt.State, c rune)
-```
-
-#### type ArrayInfo
-
-```go
-type ArrayInfo struct {
-	binary.Generate
-	Name        string
-	Kind        TypeKind
-	ElementType TypeInfo
-}
-```
-
-Class ArrayInfo
-
-#### func  CreateArrayInfo
-
-```go
-func CreateArrayInfo(
-	Name string,
-	Kind TypeKind,
-	ElementType TypeInfo,
-) *ArrayInfo
-```
-
-#### func (*ArrayInfo) Class
-
-```go
-func (*ArrayInfo) Class() binary.Class
-```
-
-#### func (*ArrayInfo) GetElementType
-
-```go
-func (c *ArrayInfo) GetElementType() TypeInfo
-```
-
-#### func (*ArrayInfo) GetKind
-
-```go
-func (c *ArrayInfo) GetKind() TypeKind
-```
-
-#### func (*ArrayInfo) GetName
-
-```go
-func (c *ArrayInfo) GetName() string
 ```
 
 #### type AtomGroup
@@ -169,12 +67,6 @@ func CreateAtomGroup(
 	Range AtomRange,
 	SubGroups AtomGroupArray,
 ) *AtomGroup
-```
-
-#### func (*AtomGroup) Class
-
-```go
-func (*AtomGroup) Class() binary.Class
 ```
 
 #### func (*AtomGroup) GetName
@@ -223,107 +115,6 @@ Array AtomGroupˢ
 func (a AtomGroupArray) Format(f fmt.State, c rune)
 ```
 
-#### type AtomInfo
-
-```go
-type AtomInfo struct {
-	binary.Generate
-	Api              ApiId
-	Type             uint16
-	Name             string
-	Parameters       ParameterInfoArray
-	IsCommand        bool
-	IsDrawCall       bool
-	IsEndOfFrame     bool
-	DocumentationUrl string
-}
-```
-
-Class AtomInfo
-
-#### func  CreateAtomInfo
-
-```go
-func CreateAtomInfo(
-	Api ApiId,
-	Type uint16,
-	Name string,
-	Parameters ParameterInfoArray,
-	IsCommand bool,
-	IsDrawCall bool,
-	IsEndOfFrame bool,
-	DocumentationUrl string,
-) *AtomInfo
-```
-
-#### func (*AtomInfo) Class
-
-```go
-func (*AtomInfo) Class() binary.Class
-```
-
-#### func (*AtomInfo) GetApi
-
-```go
-func (c *AtomInfo) GetApi() ApiId
-```
-
-#### func (*AtomInfo) GetDocumentationUrl
-
-```go
-func (c *AtomInfo) GetDocumentationUrl() string
-```
-
-#### func (*AtomInfo) GetIsCommand
-
-```go
-func (c *AtomInfo) GetIsCommand() bool
-```
-
-#### func (*AtomInfo) GetIsDrawCall
-
-```go
-func (c *AtomInfo) GetIsDrawCall() bool
-```
-
-#### func (*AtomInfo) GetIsEndOfFrame
-
-```go
-func (c *AtomInfo) GetIsEndOfFrame() bool
-```
-
-#### func (*AtomInfo) GetName
-
-```go
-func (c *AtomInfo) GetName() string
-```
-
-#### func (*AtomInfo) GetParameters
-
-```go
-func (c *AtomInfo) GetParameters() ParameterInfoArray
-```
-
-#### func (*AtomInfo) GetType
-
-```go
-func (c *AtomInfo) GetType() uint16
-```
-
-#### type AtomInfoArray
-
-```go
-type AtomInfoArray []AtomInfo
-```
-
-Array AtomInfoˢ
-
-#### func (AtomInfoArray) Format
-
-```go
-func (a AtomInfoArray) Format(f fmt.State, c rune)
-```
-
 #### type AtomRange
 
 ```go
@@ -343,12 +134,6 @@ func CreateAtomRange(
 	First uint64,
 	Count uint64,
 ) *AtomRange
-```
-
-#### func (*AtomRange) Class
-
-```go
-func (*AtomRange) Class() binary.Class
 ```
 
 #### func (*AtomRange) GetCount
@@ -398,12 +183,6 @@ func CreateAtomRangeTimer(
 	ToAtomId uint64,
 	Nanoseconds uint64,
 ) *AtomRangeTimer
-```
-
-#### func (*AtomRangeTimer) Class
-
-```go
-func (*AtomRangeTimer) Class() binary.Class
 ```
 
 #### func (*AtomRangeTimer) GetFromAtomId
@@ -472,12 +251,6 @@ func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (res 
 ResolveAtomStream loads and returns the AtomStream stored in the database d,
 using id.
 
-#### func (*AtomStream) Class
-
-```go
-func (*AtomStream) Class() binary.Class
-```
-
 #### func (*AtomStream) GetData
 
 ```go
@@ -509,12 +282,6 @@ func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStre
 ```
 StoreAtomStream stores v into the database d, returning the AtomStreamId.
 
-#### func (*AtomStreamId) Class
-
-```go
-func (*AtomStreamId) Class() binary.Class
-```
-
 #### func (AtomStreamId) Valid
 
 ```go
@@ -540,12 +307,6 @@ func CreateAtomTimer(
 	AtomId uint64,
 	Nanoseconds uint64,
 ) *AtomTimer
-```
-
-#### func (*AtomTimer) Class
-
-```go
-func (*AtomTimer) Class() binary.Class
 ```
 
 #### func (*AtomTimer) GetAtomId
@@ -600,12 +361,6 @@ func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (res Binary, 
 ```
 ResolveBinary loads and returns the Binary stored in the database d, using id.
 
-#### func (*Binary) Class
-
-```go
-func (*Binary) Class() binary.Class
-```
-
 #### func (*Binary) GetData
 
 ```go
@@ -630,12 +385,6 @@ func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error)
 ```
 StoreBinary stores v into the database d, returning the BinaryId.
 
-#### func (*BinaryId) Class
-
-```go
-func (*BinaryId) Class() binary.Class
-```
-
 #### func (BinaryId) Valid
 
 ```go
@@ -651,7 +400,6 @@ type Capture struct {
 	Atoms  AtomStreamId
 	Report ReportId
 	Apis   ApiIdArray
-	Schema SchemaId
 }
 ```
 
@@ -665,7 +413,6 @@ func CreateCapture(
 	Atoms AtomStreamId,
 	Report ReportId,
 	Apis ApiIdArray,
-	Schema SchemaId,
 ) *Capture
 ```
 
@@ -675,12 +422,6 @@ func CreateCapture(
 func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (res Capture, err error)
 ```
 ResolveCapture loads and returns the Capture stored in the database d, using id.
-
-#### func (*Capture) Class
-
-```go
-func (*Capture) Class() binary.Class
-```
 
 #### func (*Capture) GetApis
 
@@ -706,12 +447,6 @@ func (c *Capture) GetName() string
 func (c *Capture) GetReport() ReportId
 ```
 
-#### func (*Capture) GetSchema
-
-```go
-func (c *Capture) GetSchema() SchemaId
-```
-
 #### type CaptureId
 
 ```go
@@ -729,12 +464,6 @@ Handle CaptureId
 func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, error)
 ```
 StoreCapture stores v into the database d, returning the CaptureId.
-
-#### func (*CaptureId) Class
-
-```go
-func (*CaptureId) Class() binary.Class
-```
 
 #### func (CaptureId) Valid
 
@@ -768,89 +497,6 @@ Array Classˢ
 
 ```go
 func (a ClassArray) Format(f fmt.State, c rune)
-```
-
-#### type ClassInfo
-
-```go
-type ClassInfo struct {
-	binary.Generate
-	Name    string
-	Kind    TypeKind
-	Fields  FieldInfoPtrArray
-	Extends ClassInfoPtrArray
-}
-```
-
-Class ClassInfo
-
-#### func  CreateClassInfo
-
-```go
-func CreateClassInfo(
-	Name string,
-	Kind TypeKind,
-	Fields FieldInfoPtrArray,
-	Extends ClassInfoPtrArray,
-) *ClassInfo
-```
-
-#### func (*ClassInfo) Class
-
-```go
-func (*ClassInfo) Class() binary.Class
-```
-
-#### func (*ClassInfo) GetExtends
-
-```go
-func (c *ClassInfo) GetExtends() ClassInfoPtrArray
-```
-
-#### func (*ClassInfo) GetFields
-
-```go
-func (c *ClassInfo) GetFields() FieldInfoPtrArray
-```
-
-#### func (*ClassInfo) GetKind
-
-```go
-func (c *ClassInfo) GetKind() TypeKind
-```
-
-#### func (*ClassInfo) GetName
-
-```go
-func (c *ClassInfo) GetName() string
-```
-
-#### type ClassInfoArray
-
-```go
-type ClassInfoArray []ClassInfo
-```
-
-Array ClassInfoˢ
-
-#### func (ClassInfoArray) Format
-
-```go
-func (a ClassInfoArray) Format(f fmt.State, c rune)
-```
-
-#### type ClassInfoPtrArray
-
-```go
-type ClassInfoPtrArray []*ClassInfo
-```
-
-Array ClassInfoᵖˢ
-
-#### func (ClassInfoPtrArray) Format
-
-```go
-func (a ClassInfoPtrArray) Format(f fmt.State, c rune)
 ```
 
 #### type ClassPtrArray
@@ -943,12 +589,6 @@ func (d Device) Architecture() device.Architecture
 ```
 Architecture return's the device's architecture.
 
-#### func (*Device) Class
-
-```go
-func (*Device) Class() binary.Class
-```
-
 #### func (*Device) GetExtensions
 
 ```go
@@ -1033,12 +673,6 @@ func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceId, error)
 ```
 StoreDevice stores v into the database d, returning the DeviceId.
 
-#### func (*DeviceId) Class
-
-```go
-func (*DeviceId) Class() binary.Class
-```
-
 #### func (DeviceId) Valid
 
 ```go
@@ -1057,215 +691,6 @@ Array DeviceIdˢ
 
 ```go
 func (a DeviceIdArray) Format(f fmt.State, c rune)
-```
-
-#### type EnumEntry
-
-```go
-type EnumEntry struct {
-	binary.Generate
-	Name  string
-	Value uint32
-}
-```
-
-Class EnumEntry
-
-#### func  CreateEnumEntry
-
-```go
-func CreateEnumEntry(
-	Name string,
-	Value uint32,
-) *EnumEntry
-```
-
-#### func (*EnumEntry) Class
-
-```go
-func (*EnumEntry) Class() binary.Class
-```
-
-#### func (*EnumEntry) GetName
-
-```go
-func (c *EnumEntry) GetName() string
-```
-
-#### func (*EnumEntry) GetValue
-
-```go
-func (c *EnumEntry) GetValue() uint32
-```
-
-#### func (EnumEntry) String
-
-```go
-func (e EnumEntry) String() string
-```
-
-#### type EnumEntryArray
-
-```go
-type EnumEntryArray []EnumEntry
-```
-
-Array EnumEntryˢ
-
-#### func (EnumEntryArray) Format
-
-```go
-func (a EnumEntryArray) Format(f fmt.State, c rune)
-```
-
-#### type EnumInfo
-
-```go
-type EnumInfo struct {
-	binary.Generate
-	Name    string
-	Kind    TypeKind
-	Entries EnumEntryArray
-	Extends EnumInfoPtrArray
-}
-```
-
-Class EnumInfo
-
-#### func  CreateEnumInfo
-
-```go
-func CreateEnumInfo(
-	Name string,
-	Kind TypeKind,
-	Entries EnumEntryArray,
-	Extends EnumInfoPtrArray,
-) *EnumInfo
-```
-
-#### func (*EnumInfo) Class
-
-```go
-func (*EnumInfo) Class() binary.Class
-```
-
-#### func (*EnumInfo) GetEntries
-
-```go
-func (c *EnumInfo) GetEntries() EnumEntryArray
-```
-
-#### func (*EnumInfo) GetExtends
-
-```go
-func (c *EnumInfo) GetExtends() EnumInfoPtrArray
-```
-
-#### func (*EnumInfo) GetKind
-
-```go
-func (c *EnumInfo) GetKind() TypeKind
-```
-
-#### func (*EnumInfo) GetName
-
-```go
-func (c *EnumInfo) GetName() string
-```
-
-#### type EnumInfoArray
-
-```go
-type EnumInfoArray []EnumInfo
-```
-
-Array EnumInfoˢ
-
-#### func (EnumInfoArray) Format
-
-```go
-func (a EnumInfoArray) Format(f fmt.State, c rune)
-```
-
-#### type EnumInfoPtrArray
-
-```go
-type EnumInfoPtrArray []*EnumInfo
-```
-
-Array EnumInfoᵖˢ
-
-#### func (EnumInfoPtrArray) Format
-
-```go
-func (a EnumInfoPtrArray) Format(f fmt.State, c rune)
-```
-
-#### type FieldInfo
-
-```go
-type FieldInfo struct {
-	binary.Generate
-	Name string
-	Type TypeInfo
-}
-```
-
-Class FieldInfo
-
-#### func  CreateFieldInfo
-
-```go
-func CreateFieldInfo(
-	Name string,
-	Type TypeInfo,
-) *FieldInfo
-```
-
-#### func (*FieldInfo) Class
-
-```go
-func (*FieldInfo) Class() binary.Class
-```
-
-#### func (*FieldInfo) GetName
-
-```go
-func (c *FieldInfo) GetName() string
-```
-
-#### func (*FieldInfo) GetType
-
-```go
-func (c *FieldInfo) GetType() TypeInfo
-```
-
-#### type FieldInfoArray
-
-```go
-type FieldInfoArray []FieldInfo
-```
-
-Array FieldInfoˢ
-
-#### func (FieldInfoArray) Format
-
-```go
-func (a FieldInfoArray) Format(f fmt.State, c rune)
-```
-
-#### type FieldInfoPtrArray
-
-```go
-type FieldInfoPtrArray []*FieldInfo
-```
-
-Array FieldInfoᵖˢ
-
-#### func (FieldInfoPtrArray) Format
-
-```go
-func (a FieldInfoPtrArray) Format(f fmt.State, c rune)
 ```
 
 #### type Hierarchy
@@ -1295,12 +720,6 @@ func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (res Hi
 ResolveHierarchy loads and returns the Hierarchy stored in the database d, using
 id.
 
-#### func (*Hierarchy) Class
-
-```go
-func (*Hierarchy) Class() binary.Class
-```
-
 #### func (*Hierarchy) GetRoot
 
 ```go
@@ -1324,12 +743,6 @@ Handle HierarchyId
 func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyId, error)
 ```
 StoreHierarchy stores v into the database d, returning the HierarchyId.
-
-#### func (*HierarchyId) Class
-
-```go
-func (*HierarchyId) Class() binary.Class
-```
 
 #### func (HierarchyId) Valid
 
@@ -1364,18 +777,6 @@ func (i ImageFormat) IsFloat32() bool
 func (i ImageFormat) IsRGBA8() bool
 ```
 
-#### func (*ImageFormat) Parse
-
-```go
-func (v *ImageFormat) Parse(s string) error
-```
-
-#### func (ImageFormat) String
-
-```go
-func (v ImageFormat) String() string
-```
-
 #### type ImageInfo
 
 ```go
@@ -1408,12 +809,6 @@ func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (res Im
 ```
 ResolveImageInfo loads and returns the ImageInfo stored in the database d, using
 id.
-
-#### func (*ImageInfo) Class
-
-```go
-func (*ImageInfo) Class() binary.Class
-```
 
 #### func (*ImageInfo) GetData
 
@@ -1457,71 +852,10 @@ func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoI
 ```
 StoreImageInfo stores v into the database d, returning the ImageInfoId.
 
-#### func (*ImageInfoId) Class
-
-```go
-func (*ImageInfoId) Class() binary.Class
-```
-
 #### func (ImageInfoId) Valid
 
 ```go
 func (h ImageInfoId) Valid() bool
-```
-
-#### type MapInfo
-
-```go
-type MapInfo struct {
-	binary.Generate
-	Name      string
-	Kind      TypeKind
-	KeyType   TypeInfo
-	ValueType TypeInfo
-}
-```
-
-Class MapInfo
-
-#### func  CreateMapInfo
-
-```go
-func CreateMapInfo(
-	Name string,
-	Kind TypeKind,
-	KeyType TypeInfo,
-	ValueType TypeInfo,
-) *MapInfo
-```
-
-#### func (*MapInfo) Class
-
-```go
-func (*MapInfo) Class() binary.Class
-```
-
-#### func (*MapInfo) GetKeyType
-
-```go
-func (c *MapInfo) GetKeyType() TypeInfo
-```
-
-#### func (*MapInfo) GetKind
-
-```go
-func (c *MapInfo) GetKind() TypeKind
-```
-
-#### func (*MapInfo) GetName
-
-```go
-func (c *MapInfo) GetName() string
-```
-
-#### func (*MapInfo) GetValueType
-
-```go
-func (c *MapInfo) GetValueType() TypeInfo
 ```
 
 #### type MemoryInfo
@@ -1556,12 +890,6 @@ func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (res 
 ```
 ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d,
 using id.
-
-#### func (*MemoryInfo) Class
-
-```go
-func (*MemoryInfo) Class() binary.Class
-```
 
 #### func (*MemoryInfo) GetData
 
@@ -1605,12 +933,6 @@ func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryIn
 ```
 StoreMemoryInfo stores v into the database d, returning the MemoryInfoId.
 
-#### func (*MemoryInfoId) Class
-
-```go
-func (*MemoryInfoId) Class() binary.Class
-```
-
 #### func (MemoryInfoId) Valid
 
 ```go
@@ -1636,12 +958,6 @@ func CreateMemoryRange(
 	Base uint64,
 	Size uint64,
 ) *MemoryRange
-```
-
-#### func (*MemoryRange) Class
-
-```go
-func (*MemoryRange) Class() binary.Class
 ```
 
 #### func (*MemoryRange) GetBase
@@ -1700,67 +1016,6 @@ func (l MemoryRangeArray) Unpack(o *memory.RangeList)
 Unpack unpacks the RPC-friendly MemoryRangeArray structure into the memory
 RangeList o.
 
-#### type ParameterInfo
-
-```go
-type ParameterInfo struct {
-	binary.Generate
-	Name string
-	Type TypeInfo
-	Out  bool
-}
-```
-
-Class ParameterInfo
-
-#### func  CreateParameterInfo
-
-```go
-func CreateParameterInfo(
-	Name string,
-	Type TypeInfo,
-	Out bool,
-) *ParameterInfo
-```
-
-#### func (*ParameterInfo) Class
-
-```go
-func (*ParameterInfo) Class() binary.Class
-```
-
-#### func (*ParameterInfo) GetName
-
-```go
-func (c *ParameterInfo) GetName() string
-```
-
-#### func (*ParameterInfo) GetOut
-
-```go
-func (c *ParameterInfo) GetOut() bool
-```
-
-#### func (*ParameterInfo) GetType
-
-```go
-func (c *ParameterInfo) GetType() TypeInfo
-```
-
-#### type ParameterInfoArray
-
-```go
-type ParameterInfoArray []ParameterInfo
-```
-
-Array ParameterInfoˢ
-
-#### func (ParameterInfoArray) Format
-
-```go
-func (a ParameterInfoArray) Format(f fmt.State, c rune)
-```
-
 #### type RPC
 
 ```go
@@ -1785,7 +1040,6 @@ type RPC interface {
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveReport(id ReportId, l log.Logger) (Report, error)
-	ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
 	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
@@ -1813,12 +1067,6 @@ func CreateRenderSettings(
 	MaxHeight uint32,
 	Wireframe bool,
 ) *RenderSettings
-```
-
-#### func (*RenderSettings) Class
-
-```go
-func (*RenderSettings) Class() binary.Class
 ```
 
 #### func (*RenderSettings) GetMaxHeight
@@ -1865,12 +1113,6 @@ func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, 
 ```
 ResolveReport loads and returns the Report stored in the database d, using id.
 
-#### func (*Report) Class
-
-```go
-func (*Report) Class() binary.Class
-```
-
 #### func (*Report) GetItems
 
 ```go
@@ -1894,12 +1136,6 @@ Handle ReportId
 func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error)
 ```
 StoreReport stores v into the database d, returning the ReportId.
-
-#### func (*ReportId) Class
-
-```go
-func (*ReportId) Class() binary.Class
-```
 
 #### func (ReportId) Valid
 
@@ -1928,12 +1164,6 @@ func CreateReportItem(
 	Message string,
 	Atom uint64,
 ) *ReportItem
-```
-
-#### func (*ReportItem) Class
-
-```go
-func (*ReportItem) Class() binary.Class
 ```
 
 #### func (*ReportItem) GetAtom
@@ -2041,14 +1271,6 @@ func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error)
 ResolveReport loads and returns the Report stored in the resolver's database,
 using id.
 
-#### func (Resolver) ResolveSchema
-
-```go
-func (r Resolver) ResolveSchema(id SchemaId, l log.Logger) (Schema, error)
-```
-ResolveSchema loads and returns the Schema stored in the resolver's database,
-using id.
-
 #### func (Resolver) ResolveState
 
 ```go
@@ -2064,82 +1286,6 @@ func (r Resolver) ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, 
 ```
 ResolveTimingInfo loads and returns the TimingInfo stored in the resolver's
 database, using id.
-
-#### type Schema
-
-```go
-type Schema struct {
-	binary.Generate
-	Atoms AtomInfoArray
-	Apis  ApiSchemaArray
-}
-```
-
-Class Schema
-
-#### func  CreateSchema
-
-```go
-func CreateSchema(
-	Atoms AtomInfoArray,
-	Apis ApiSchemaArray,
-) *Schema
-```
-
-#### func  ResolveSchema
-
-```go
-func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (res Schema, err error)
-```
-ResolveSchema loads and returns the Schema stored in the database d, using id.
-
-#### func (*Schema) Class
-
-```go
-func (*Schema) Class() binary.Class
-```
-
-#### func (*Schema) GetApis
-
-```go
-func (c *Schema) GetApis() ApiSchemaArray
-```
-
-#### func (*Schema) GetAtoms
-
-```go
-func (c *Schema) GetAtoms() AtomInfoArray
-```
-
-#### type SchemaId
-
-```go
-type SchemaId struct {
-	binary.Generate
-	ID binary.ID
-}
-```
-
-Handle SchemaId
-
-#### func  StoreSchema
-
-```go
-func StoreSchema(v *Schema, d database.Database, l log.Logger) (SchemaId, error)
-```
-StoreSchema stores v into the database d, returning the SchemaId.
-
-#### func (*SchemaId) Class
-
-```go
-func (*SchemaId) Class() binary.Class
-```
-
-#### func (SchemaId) Valid
-
-```go
-func (h SchemaId) Valid() bool
-```
 
 #### type Severity
 
@@ -2210,57 +1356,6 @@ func (i Severity) IsNotice() bool
 func (i Severity) IsWarning() bool
 ```
 
-#### func (*Severity) Parse
-
-```go
-func (v *Severity) Parse(s string) error
-```
-
-#### func (Severity) String
-
-```go
-func (v Severity) String() string
-```
-
-#### type SimpleInfo
-
-```go
-type SimpleInfo struct {
-	binary.Generate
-	Name string
-	Kind TypeKind
-}
-```
-
-Class SimpleInfo
-
-#### func  CreateSimpleInfo
-
-```go
-func CreateSimpleInfo(
-	Name string,
-	Kind TypeKind,
-) *SimpleInfo
-```
-
-#### func (*SimpleInfo) Class
-
-```go
-func (*SimpleInfo) Class() binary.Class
-```
-
-#### func (*SimpleInfo) GetKind
-
-```go
-func (c *SimpleInfo) GetKind() TypeKind
-```
-
-#### func (*SimpleInfo) GetName
-
-```go
-func (c *SimpleInfo) GetName() string
-```
-
 #### type State
 
 ```go
@@ -2293,118 +1388,10 @@ func StoreState(v State, d database.Database, l log.Logger) (StateId, error)
 ```
 StoreState stores v into the database d, returning the StateId.
 
-#### func (*StateId) Class
-
-```go
-func (*StateId) Class() binary.Class
-```
-
 #### func (StateId) Valid
 
 ```go
 func (h StateId) Valid() bool
-```
-
-#### type StaticArrayInfo
-
-```go
-type StaticArrayInfo struct {
-	binary.Generate
-	Name        string
-	Kind        TypeKind
-	ElementType TypeInfo
-	Size        uint32
-}
-```
-
-Class StaticArrayInfo
-
-#### func  CreateStaticArrayInfo
-
-```go
-func CreateStaticArrayInfo(
-	Name string,
-	Kind TypeKind,
-	ElementType TypeInfo,
-	Size uint32,
-) *StaticArrayInfo
-```
-
-#### func (*StaticArrayInfo) Class
-
-```go
-func (*StaticArrayInfo) Class() binary.Class
-```
-
-#### func (*StaticArrayInfo) GetElementType
-
-```go
-func (c *StaticArrayInfo) GetElementType() TypeInfo
-```
-
-#### func (*StaticArrayInfo) GetKind
-
-```go
-func (c *StaticArrayInfo) GetKind() TypeKind
-```
-
-#### func (*StaticArrayInfo) GetName
-
-```go
-func (c *StaticArrayInfo) GetName() string
-```
-
-#### func (*StaticArrayInfo) GetSize
-
-```go
-func (c *StaticArrayInfo) GetSize() uint32
-```
-
-#### type StructInfo
-
-```go
-type StructInfo struct {
-	binary.Generate
-	Name   string
-	Kind   TypeKind
-	Fields FieldInfoPtrArray
-}
-```
-
-Class StructInfo
-
-#### func  CreateStructInfo
-
-```go
-func CreateStructInfo(
-	Name string,
-	Kind TypeKind,
-	Fields FieldInfoPtrArray,
-) *StructInfo
-```
-
-#### func (*StructInfo) Class
-
-```go
-func (*StructInfo) Class() binary.Class
-```
-
-#### func (*StructInfo) GetFields
-
-```go
-func (c *StructInfo) GetFields() FieldInfoPtrArray
-```
-
-#### func (*StructInfo) GetKind
-
-```go
-func (c *StructInfo) GetKind() TypeKind
-```
-
-#### func (*StructInfo) GetName
-
-```go
-func (c *StructInfo) GetName() string
 ```
 
 #### type TimingInfo
@@ -2437,12 +1424,6 @@ func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (res 
 ```
 ResolveTimingInfo loads and returns the TimingInfo stored in the database d,
 using id.
-
-#### func (*TimingInfo) Class
-
-```go
-func (*TimingInfo) Class() binary.Class
-```
 
 #### func (*TimingInfo) GetPerCommand
 
@@ -2479,12 +1460,6 @@ Handle TimingInfoId
 func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingInfoId, error)
 ```
 StoreTimingInfo stores v into the database d, returning the TimingInfoId.
-
-#### func (*TimingInfoId) Class
-
-```go
-func (*TimingInfoId) Class() binary.Class
-```
 
 #### func (TimingInfoId) Valid
 
@@ -2524,223 +1499,6 @@ func (i TimingMask) IsTimingPerDrawCall() bool
 
 ```go
 func (i TimingMask) IsTimingPerFrame() bool
-```
-
-#### func (*TimingMask) Parse
-
-```go
-func (v *TimingMask) Parse(s string) error
-```
-
-#### func (TimingMask) String
-
-```go
-func (v TimingMask) String() string
-```
-
-#### type TypeInfo
-
-```go
-type TypeInfo interface {
-	binary.Object
-	GetName() string
-	GetKind() TypeKind
-}
-```
-
-Interface TypeInfo
-
-#### type TypeInfoArray
-
-```go
-type TypeInfoArray []TypeInfo
-```
-
-Array TypeInfoˢ
-
-#### func (TypeInfoArray) Format
-
-```go
-func (a TypeInfoArray) Format(f fmt.State, c rune)
-```
-
-#### type TypeKind
-
-```go
-type TypeKind int
-```
-
-Enum TypeKind
-
-```go
-const (
-	TypeKindBool        TypeKind = 0
-	TypeKindS8          TypeKind = 1
-	TypeKindU8          TypeKind = 2
-	TypeKindS16         TypeKind = 3
-	TypeKindU16         TypeKind = 4
-	TypeKindS32         TypeKind = 5
-	TypeKindU32         TypeKind = 6
-	TypeKindF32         TypeKind = 7
-	TypeKindS64         TypeKind = 8
-	TypeKindU64         TypeKind = 9
-	TypeKindF64         TypeKind = 10
-	TypeKindString      TypeKind = 11
-	TypeKindEnum        TypeKind = 12
-	TypeKindStruct      TypeKind = 14
-	TypeKindClass       TypeKind = 15
-	TypeKindArray       TypeKind = 16
-	TypeKindStaticArray TypeKind = 17
-	TypeKindMap         TypeKind = 18
-	TypeKindPointer     TypeKind = 19
-	TypeKindMemory      TypeKind = 20
-	TypeKindAny         TypeKind = 21
-	TypeKindID          TypeKind = 22
-)
-```
-
-#### func (TypeKind) IsAny
-
-```go
-func (i TypeKind) IsAny() bool
-```
-
-#### func (TypeKind) IsArray
-
-```go
-func (i TypeKind) IsArray() bool
-```
-
-#### func (TypeKind) IsBool
-
-```go
-func (i TypeKind) IsBool() bool
-```
-
-#### func (TypeKind) IsClass
-
-```go
-func (i TypeKind) IsClass() bool
-```
-
-#### func (TypeKind) IsEnum
-
-```go
-func (i TypeKind) IsEnum() bool
-```
-
-#### func (TypeKind) IsF32
-
-```go
-func (i TypeKind) IsF32() bool
-```
-
-#### func (TypeKind) IsF64
-
-```go
-func (i TypeKind) IsF64() bool
-```
-
-#### func (TypeKind) IsID
-
-```go
-func (i TypeKind) IsID() bool
-```
-
-#### func (TypeKind) IsMap
-
-```go
-func (i TypeKind) IsMap() bool
-```
-
-#### func (TypeKind) IsMemory
-
-```go
-func (i TypeKind) IsMemory() bool
-```
-
-#### func (TypeKind) IsPointer
-
-```go
-func (i TypeKind) IsPointer() bool
-```
-
-#### func (TypeKind) IsS16
-
-```go
-func (i TypeKind) IsS16() bool
-```
-
-#### func (TypeKind) IsS32
-
-```go
-func (i TypeKind) IsS32() bool
-```
-
-#### func (TypeKind) IsS64
-
-```go
-func (i TypeKind) IsS64() bool
-```
-
-#### func (TypeKind) IsS8
-
-```go
-func (i TypeKind) IsS8() bool
-```
-
-#### func (TypeKind) IsStaticArray
-
-```go
-func (i TypeKind) IsStaticArray() bool
-```
-
-#### func (TypeKind) IsString
-
-```go
-func (i TypeKind) IsString() bool
-```
-
-#### func (TypeKind) IsStruct
-
-```go
-func (i TypeKind) IsStruct() bool
-```
-
-#### func (TypeKind) IsU16
-
-```go
-func (i TypeKind) IsU16() bool
-```
-
-#### func (TypeKind) IsU32
-
-```go
-func (i TypeKind) IsU32() bool
-```
-
-#### func (TypeKind) IsU64
-
-```go
-func (i TypeKind) IsU64() bool
-```
-
-#### func (TypeKind) IsU8
-
-```go
-func (i TypeKind) IsU8() bool
-```
-
-#### func (*TypeKind) Parse
-
-```go
-func (v *TypeKind) Parse(s string) error
-```
-
-#### func (TypeKind) String
-
-```go
-func (v TypeKind) String() string
 ```
 
 #### type U64Array

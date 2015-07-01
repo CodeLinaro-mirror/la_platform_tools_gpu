@@ -161,14 +161,6 @@ func (c callResolveReport) Format(f fmt.State, r rune) {
 func (r resultResolveReport) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveSchema) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveSchema(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveSchema) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveState) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveState(id: %v)",
 		c.id,
@@ -213,9 +205,6 @@ func (h MemoryInfoId) Valid() bool {
 func (h ReportId) Valid() bool {
 	return h.ID.Valid()
 }
-func (h SchemaId) Valid() bool {
-	return h.ID.Valid()
-}
 func (h StateId) Valid() bool {
 	return h.ID.Valid()
 }
@@ -226,14 +215,8 @@ func (h TimingInfoId) Valid() bool {
 func (a ApiIdArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ApiIdˢ", len(a))
 }
-func (a ApiSchemaArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiSchemaˢ", len(a))
-}
 func (a AtomGroupArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]AtomGroupˢ", len(a))
-}
-func (a AtomInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomInfoˢ", len(a))
 }
 func (a AtomRangeTimerArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]AtomRangeTimerˢ", len(a))
@@ -244,12 +227,6 @@ func (a AtomTimerArray) Format(f fmt.State, c rune) {
 func (a CaptureIdArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]CaptureIdˢ", len(a))
 }
-func (a ClassInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ClassInfoˢ", len(a))
-}
-func (a ClassInfoPtrArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ClassInfoᵖˢ", len(a))
-}
 func (a ClassArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]Classˢ", len(a))
 }
@@ -259,32 +236,11 @@ func (a ClassPtrArray) Format(f fmt.State, c rune) {
 func (a DeviceIdArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]DeviceIdˢ", len(a))
 }
-func (a EnumEntryArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumEntryˢ", len(a))
-}
-func (a EnumInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumInfoˢ", len(a))
-}
-func (a EnumInfoPtrArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumInfoᵖˢ", len(a))
-}
-func (a FieldInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]FieldInfoˢ", len(a))
-}
-func (a FieldInfoPtrArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]FieldInfoᵖˢ", len(a))
-}
 func (a MemoryRangeArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]MemoryRangeˢ", len(a))
 }
-func (a ParameterInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ParameterInfoˢ", len(a))
-}
 func (a ReportItemArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ReportItemˢ", len(a))
-}
-func (a TypeInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]TypeInfoˢ", len(a))
 }
 func (a U64Array) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]U64ˢ", len(a))
@@ -306,28 +262,6 @@ func (i ImageFormat) IsFloat32() bool          { return i == ImageFormatFloat32 
 func (i TimingMask) IsTimingPerCommand() bool  { return i == TimingMaskTimingPerCommand }
 func (i TimingMask) IsTimingPerDrawCall() bool { return i == TimingMaskTimingPerDrawCall }
 func (i TimingMask) IsTimingPerFrame() bool    { return i == TimingMaskTimingPerFrame }
-func (i TypeKind) IsBool() bool                { return i == TypeKindBool }
-func (i TypeKind) IsS8() bool                  { return i == TypeKindS8 }
-func (i TypeKind) IsU8() bool                  { return i == TypeKindU8 }
-func (i TypeKind) IsS16() bool                 { return i == TypeKindS16 }
-func (i TypeKind) IsU16() bool                 { return i == TypeKindU16 }
-func (i TypeKind) IsS32() bool                 { return i == TypeKindS32 }
-func (i TypeKind) IsU32() bool                 { return i == TypeKindU32 }
-func (i TypeKind) IsF32() bool                 { return i == TypeKindF32 }
-func (i TypeKind) IsS64() bool                 { return i == TypeKindS64 }
-func (i TypeKind) IsU64() bool                 { return i == TypeKindU64 }
-func (i TypeKind) IsF64() bool                 { return i == TypeKindF64 }
-func (i TypeKind) IsString() bool              { return i == TypeKindString }
-func (i TypeKind) IsEnum() bool                { return i == TypeKindEnum }
-func (i TypeKind) IsStruct() bool              { return i == TypeKindStruct }
-func (i TypeKind) IsClass() bool               { return i == TypeKindClass }
-func (i TypeKind) IsArray() bool               { return i == TypeKindArray }
-func (i TypeKind) IsStaticArray() bool         { return i == TypeKindStaticArray }
-func (i TypeKind) IsMap() bool                 { return i == TypeKindMap }
-func (i TypeKind) IsPointer() bool             { return i == TypeKindPointer }
-func (i TypeKind) IsMemory() bool              { return i == TypeKindMemory }
-func (i TypeKind) IsAny() bool                 { return i == TypeKindAny }
-func (i TypeKind) IsID() bool                  { return i == TypeKindID }
 
 func CreateDevice(
 	Name string,
@@ -371,14 +305,12 @@ func CreateCapture(
 	Atoms AtomStreamId,
 	Report ReportId,
 	Apis ApiIdArray,
-	Schema SchemaId,
 ) *Capture {
 	return &Capture{
 		Name:   Name,
 		Atoms:  Atoms,
 		Report: Report,
 		Apis:   Apis,
-		Schema: Schema,
 	}
 }
 
@@ -386,7 +318,6 @@ func (c *Capture) GetName() string        { return c.Name }
 func (c *Capture) GetAtoms() AtomStreamId { return c.Atoms }
 func (c *Capture) GetReport() ReportId    { return c.Report }
 func (c *Capture) GetApis() ApiIdArray    { return c.Apis }
-func (c *Capture) GetSchema() SchemaId    { return c.Schema }
 
 func CreateReport(
 	Items ReportItemArray,
@@ -584,220 +515,3 @@ func CreateRenderSettings(
 func (c *RenderSettings) GetMaxWidth() uint32  { return c.MaxWidth }
 func (c *RenderSettings) GetMaxHeight() uint32 { return c.MaxHeight }
 func (c *RenderSettings) GetWireframe() bool   { return c.Wireframe }
-
-func CreateSchema(
-	Atoms AtomInfoArray,
-	Apis ApiSchemaArray,
-) *Schema {
-	return &Schema{
-		Atoms: Atoms,
-		Apis:  Apis,
-	}
-}
-
-func (c *Schema) GetAtoms() AtomInfoArray { return c.Atoms }
-func (c *Schema) GetApis() ApiSchemaArray { return c.Apis }
-
-func CreateApiSchema(
-	Api ApiId,
-) *ApiSchema {
-	return &ApiSchema{
-		Api: Api,
-	}
-}
-
-func (c *ApiSchema) GetApi() ApiId { return c.Api }
-
-func CreateArrayInfo(
-	Name string,
-	Kind TypeKind,
-	ElementType TypeInfo,
-) *ArrayInfo {
-	return &ArrayInfo{
-		Name:        Name,
-		Kind:        Kind,
-		ElementType: ElementType,
-	}
-}
-
-func (c *ArrayInfo) GetName() string          { return c.Name }
-func (c *ArrayInfo) GetKind() TypeKind        { return c.Kind }
-func (c *ArrayInfo) GetElementType() TypeInfo { return c.ElementType }
-
-func CreateStaticArrayInfo(
-	Name string,
-	Kind TypeKind,
-	ElementType TypeInfo,
-	Size uint32,
-) *StaticArrayInfo {
-	return &StaticArrayInfo{
-		Name:        Name,
-		Kind:        Kind,
-		ElementType: ElementType,
-		Size:        Size,
-	}
-}
-
-func (c *StaticArrayInfo) GetName() string          { return c.Name }
-func (c *StaticArrayInfo) GetKind() TypeKind        { return c.Kind }
-func (c *StaticArrayInfo) GetElementType() TypeInfo { return c.ElementType }
-func (c *StaticArrayInfo) GetSize() uint32          { return c.Size }
-
-func CreateMapInfo(
-	Name string,
-	Kind TypeKind,
-	KeyType TypeInfo,
-	ValueType TypeInfo,
-) *MapInfo {
-	return &MapInfo{
-		Name:      Name,
-		Kind:      Kind,
-		KeyType:   KeyType,
-		ValueType: ValueType,
-	}
-}
-
-func (c *MapInfo) GetName() string        { return c.Name }
-func (c *MapInfo) GetKind() TypeKind      { return c.Kind }
-func (c *MapInfo) GetKeyType() TypeInfo   { return c.KeyType }
-func (c *MapInfo) GetValueType() TypeInfo { return c.ValueType }
-
-func CreateEnumInfo(
-	Name string,
-	Kind TypeKind,
-	Entries EnumEntryArray,
-	Extends EnumInfoPtrArray,
-) *EnumInfo {
-	return &EnumInfo{
-		Name:    Name,
-		Kind:    Kind,
-		Entries: Entries,
-		Extends: Extends,
-	}
-}
-
-func (c *EnumInfo) GetName() string              { return c.Name }
-func (c *EnumInfo) GetKind() TypeKind            { return c.Kind }
-func (c *EnumInfo) GetEntries() EnumEntryArray   { return c.Entries }
-func (c *EnumInfo) GetExtends() EnumInfoPtrArray { return c.Extends }
-
-func CreateEnumEntry(
-	Name string,
-	Value uint32,
-) *EnumEntry {
-	return &EnumEntry{
-		Name:  Name,
-		Value: Value,
-	}
-}
-
-func (c *EnumEntry) GetName() string  { return c.Name }
-func (c *EnumEntry) GetValue() uint32 { return c.Value }
-
-func CreateStructInfo(
-	Name string,
-	Kind TypeKind,
-	Fields FieldInfoPtrArray,
-) *StructInfo {
-	return &StructInfo{
-		Name:   Name,
-		Kind:   Kind,
-		Fields: Fields,
-	}
-}
-
-func (c *StructInfo) GetName() string              { return c.Name }
-func (c *StructInfo) GetKind() TypeKind            { return c.Kind }
-func (c *StructInfo) GetFields() FieldInfoPtrArray { return c.Fields }
-
-func CreateClassInfo(
-	Name string,
-	Kind TypeKind,
-	Fields FieldInfoPtrArray,
-	Extends ClassInfoPtrArray,
-) *ClassInfo {
-	return &ClassInfo{
-		Name:    Name,
-		Kind:    Kind,
-		Fields:  Fields,
-		Extends: Extends,
-	}
-}
-
-func (c *ClassInfo) GetName() string               { return c.Name }
-func (c *ClassInfo) GetKind() TypeKind             { return c.Kind }
-func (c *ClassInfo) GetFields() FieldInfoPtrArray  { return c.Fields }
-func (c *ClassInfo) GetExtends() ClassInfoPtrArray { return c.Extends }
-
-func CreateFieldInfo(
-	Name string,
-	Type TypeInfo,
-) *FieldInfo {
-	return &FieldInfo{
-		Name: Name,
-		Type: Type,
-	}
-}
-
-func (c *FieldInfo) GetName() string   { return c.Name }
-func (c *FieldInfo) GetType() TypeInfo { return c.Type }
-
-func CreateAtomInfo(
-	Api ApiId,
-	Type uint16,
-	Name string,
-	Parameters ParameterInfoArray,
-	IsCommand bool,
-	IsDrawCall bool,
-	IsEndOfFrame bool,
-	DocumentationUrl string,
-) *AtomInfo {
-	return &AtomInfo{
-		Api:              Api,
-		Type:             Type,
-		Name:             Name,
-		Parameters:       Parameters,
-		IsCommand:        IsCommand,
-		IsDrawCall:       IsDrawCall,
-		IsEndOfFrame:     IsEndOfFrame,
-		DocumentationUrl: DocumentationUrl,
-	}
-}
-
-func (c *AtomInfo) GetApi() ApiId                     { return c.Api }
-func (c *AtomInfo) GetType() uint16                   { return c.Type }
-func (c *AtomInfo) GetName() string                   { return c.Name }
-func (c *AtomInfo) GetParameters() ParameterInfoArray { return c.Parameters }
-func (c *AtomInfo) GetIsCommand() bool                { return c.IsCommand }
-func (c *AtomInfo) GetIsDrawCall() bool               { return c.IsDrawCall }
-func (c *AtomInfo) GetIsEndOfFrame() bool             { return c.IsEndOfFrame }
-func (c *AtomInfo) GetDocumentationUrl() string       { return c.DocumentationUrl }
-
-func CreateParameterInfo(
-	Name string,
-	Type TypeInfo,
-	Out bool,
-) *ParameterInfo {
-	return &ParameterInfo{
-		Name: Name,
-		Type: Type,
-		Out:  Out,
-	}
-}
-
-func (c *ParameterInfo) GetName() string   { return c.Name }
-func (c *ParameterInfo) GetType() TypeInfo { return c.Type }
-func (c *ParameterInfo) GetOut() bool      { return c.Out }
-
-func CreateSimpleInfo(
-	Name string,
-	Kind TypeKind,
-) *SimpleInfo {
-	return &SimpleInfo{
-		Name: Name,
-		Kind: Kind,
-	}
-}
-
-func (c *SimpleInfo) GetName() string   { return c.Name }
-func (c *SimpleInfo) GetKind() TypeKind { return c.Kind }

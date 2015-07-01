@@ -38,7 +38,6 @@ type Config struct {
 const (
 	atomsRoute    = "/atoms/"
 	capturesRoute = "/captures/"
-	schemaRoute   = "/schema/"
 
 	mtu = 1024
 )
@@ -76,6 +75,5 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	// Setup and run the (blocking) HTTP listener.
 	http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{database}))
 	http.Handle(capturesRoute, http.StripPrefix(capturesRoute, capturesHandler{database, logger, config}))
-	http.Handle(schemaRoute, http.StripPrefix(schemaRoute, http.HandlerFunc(schemaHandler)))
 	http.ListenAndServe(config.HttpAddress, nil)
 }
