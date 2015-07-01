@@ -5,11 +5,1568 @@
 package gles
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+func init() {
+	sc_EglInitialize := bschema.Of((*EglInitialize)(nil).Class())
+	sc_EglInitialize.Metadata = append(sc_EglInitialize.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml]",
+	})
+
+	sc_EglCreateContext := bschema.Of((*EglCreateContext)(nil).Class())
+	sc_EglCreateContext.Metadata = append(sc_EglCreateContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml]",
+	})
+
+	sc_EglMakeCurrent := bschema.Of((*EglMakeCurrent)(nil).Class())
+	sc_EglMakeCurrent.Metadata = append(sc_EglMakeCurrent.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml]",
+	})
+
+	sc_EglSwapBuffers := bschema.Of((*EglSwapBuffers)(nil).Class())
+	sc_EglSwapBuffers.Metadata = append(sc_EglSwapBuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.EndOfFrame,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml]",
+	})
+
+	sc_EglQuerySurface := bschema.Of((*EglQuerySurface)(nil).Class())
+	sc_EglQuerySurface.Metadata = append(sc_EglQuerySurface.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXCreateContext := bschema.Of((*GlXCreateContext)(nil).Class())
+	sc_GlXCreateContext.Metadata = append(sc_GlXCreateContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXCreateNewContext := bschema.Of((*GlXCreateNewContext)(nil).Class())
+	sc_GlXCreateNewContext.Metadata = append(sc_GlXCreateNewContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXMakeContextCurrent := bschema.Of((*GlXMakeContextCurrent)(nil).Class())
+	sc_GlXMakeContextCurrent.Metadata = append(sc_GlXMakeContextCurrent.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXMakeCurrent := bschema.Of((*GlXMakeCurrent)(nil).Class())
+	sc_GlXMakeCurrent.Metadata = append(sc_GlXMakeCurrent.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXSwapBuffers := bschema.Of((*GlXSwapBuffers)(nil).Class())
+	sc_GlXSwapBuffers.Metadata = append(sc_GlXSwapBuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.EndOfFrame,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlXQueryDrawable := bschema.Of((*GlXQueryDrawable)(nil).Class())
+	sc_GlXQueryDrawable.Metadata = append(sc_GlXQueryDrawable.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_WglCreateContext := bschema.Of((*WglCreateContext)(nil).Class())
+	sc_WglCreateContext.Metadata = append(sc_WglCreateContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx]",
+	})
+
+	sc_WglCreateContextAttribsARB := bschema.Of((*WglCreateContextAttribsARB)(nil).Class())
+	sc_WglCreateContextAttribsARB.Metadata = append(sc_WglCreateContextAttribsARB.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt]",
+	})
+
+	sc_WglMakeCurrent := bschema.Of((*WglMakeCurrent)(nil).Class())
+	sc_WglMakeCurrent.Metadata = append(sc_WglMakeCurrent.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx]",
+	})
+
+	sc_WglSwapBuffers := bschema.Of((*WglSwapBuffers)(nil).Class())
+	sc_WglSwapBuffers.Metadata = append(sc_WglSwapBuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.EndOfFrame,
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)]",
+	})
+
+	sc_CGLCreateContext := bschema.Of((*CGLCreateContext)(nil).Class())
+	sc_CGLCreateContext.Metadata = append(sc_CGLCreateContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext]",
+	})
+
+	sc_CGLSetCurrentContext := bschema.Of((*CGLSetCurrentContext)(nil).Class())
+	sc_CGLSetCurrentContext.Metadata = append(sc_CGLSetCurrentContext.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CGLGetSurface := bschema.Of((*CGLGetSurface)(nil).Class())
+	sc_CGLGetSurface.Metadata = append(sc_CGLGetSurface.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CGSGetSurfaceBounds := bschema.Of((*CGSGetSurfaceBounds)(nil).Class())
+	sc_CGSGetSurfaceBounds.Metadata = append(sc_CGSGetSurfaceBounds.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_CGLFlushDrawable := bschema.Of((*CGLFlushDrawable)(nil).Class())
+	sc_CGLFlushDrawable.Metadata = append(sc_CGLFlushDrawable.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.EndOfFrame,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlEnableClientState := bschema.Of((*GlEnableClientState)(nil).Class())
+	sc_GlEnableClientState.Metadata = append(sc_GlEnableClientState.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
+	})
+
+	sc_GlDisableClientState := bschema.Of((*GlDisableClientState)(nil).Class())
+	sc_GlDisableClientState.Metadata = append(sc_GlDisableClientState.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
+	})
+
+	sc_GlGetProgramBinaryOES := bschema.Of((*GlGetProgramBinaryOES)(nil).Class())
+	sc_GlGetProgramBinaryOES.Metadata = append(sc_GlGetProgramBinaryOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
+	})
+
+	sc_GlProgramBinaryOES := bschema.Of((*GlProgramBinaryOES)(nil).Class())
+	sc_GlProgramBinaryOES.Metadata = append(sc_GlProgramBinaryOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
+	})
+
+	sc_GlStartTilingQCOM := bschema.Of((*GlStartTilingQCOM)(nil).Class())
+	sc_GlStartTilingQCOM.Metadata = append(sc_GlStartTilingQCOM.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
+	})
+
+	sc_GlEndTilingQCOM := bschema.Of((*GlEndTilingQCOM)(nil).Class())
+	sc_GlEndTilingQCOM.Metadata = append(sc_GlEndTilingQCOM.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
+	})
+
+	sc_GlDiscardFramebufferEXT := bschema.Of((*GlDiscardFramebufferEXT)(nil).Class())
+	sc_GlDiscardFramebufferEXT.Metadata = append(sc_GlDiscardFramebufferEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt]",
+	})
+
+	sc_GlInsertEventMarkerEXT := bschema.Of((*GlInsertEventMarkerEXT)(nil).Class())
+	sc_GlInsertEventMarkerEXT.Metadata = append(sc_GlInsertEventMarkerEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+
+	sc_GlPushGroupMarkerEXT := bschema.Of((*GlPushGroupMarkerEXT)(nil).Class())
+	sc_GlPushGroupMarkerEXT.Metadata = append(sc_GlPushGroupMarkerEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+
+	sc_GlPopGroupMarkerEXT := bschema.Of((*GlPopGroupMarkerEXT)(nil).Class())
+	sc_GlPopGroupMarkerEXT.Metadata = append(sc_GlPopGroupMarkerEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+
+	sc_GlTexStorage1DEXT := bschema.Of((*GlTexStorage1DEXT)(nil).Class())
+	sc_GlTexStorage1DEXT.Metadata = append(sc_GlTexStorage1DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlTexStorage2DEXT := bschema.Of((*GlTexStorage2DEXT)(nil).Class())
+	sc_GlTexStorage2DEXT.Metadata = append(sc_GlTexStorage2DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlTexStorage3DEXT := bschema.Of((*GlTexStorage3DEXT)(nil).Class())
+	sc_GlTexStorage3DEXT.Metadata = append(sc_GlTexStorage3DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlTextureStorage1DEXT := bschema.Of((*GlTextureStorage1DEXT)(nil).Class())
+	sc_GlTextureStorage1DEXT.Metadata = append(sc_GlTextureStorage1DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlTextureStorage2DEXT := bschema.Of((*GlTextureStorage2DEXT)(nil).Class())
+	sc_GlTextureStorage2DEXT.Metadata = append(sc_GlTextureStorage2DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlTextureStorage3DEXT := bschema.Of((*GlTextureStorage3DEXT)(nil).Class())
+	sc_GlTextureStorage3DEXT.Metadata = append(sc_GlTextureStorage3DEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+
+	sc_GlGenVertexArraysOES := bschema.Of((*GlGenVertexArraysOES)(nil).Class())
+	sc_GlGenVertexArraysOES.Metadata = append(sc_GlGenVertexArraysOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+
+	sc_GlBindVertexArrayOES := bschema.Of((*GlBindVertexArrayOES)(nil).Class())
+	sc_GlBindVertexArrayOES.Metadata = append(sc_GlBindVertexArrayOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+
+	sc_GlDeleteVertexArraysOES := bschema.Of((*GlDeleteVertexArraysOES)(nil).Class())
+	sc_GlDeleteVertexArraysOES.Metadata = append(sc_GlDeleteVertexArraysOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+
+	sc_GlIsVertexArrayOES := bschema.Of((*GlIsVertexArrayOES)(nil).Class())
+	sc_GlIsVertexArrayOES.Metadata = append(sc_GlIsVertexArrayOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+
+	sc_GlEGLImageTargetTexture2DOES := bschema.Of((*GlEGLImageTargetTexture2DOES)(nil).Class())
+	sc_GlEGLImageTargetTexture2DOES.Metadata = append(sc_GlEGLImageTargetTexture2DOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
+	})
+
+	sc_GlEGLImageTargetRenderbufferStorageOES := bschema.Of((*GlEGLImageTargetRenderbufferStorageOES)(nil).Class())
+	sc_GlEGLImageTargetRenderbufferStorageOES.Metadata = append(sc_GlEGLImageTargetRenderbufferStorageOES.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
+	})
+
+	sc_GlGetGraphicsResetStatusEXT := bschema.Of((*GlGetGraphicsResetStatusEXT)(nil).Class())
+	sc_GlGetGraphicsResetStatusEXT.Metadata = append(sc_GlGetGraphicsResetStatusEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt]",
+	})
+
+	sc_GlBindAttribLocation := bschema.Of((*GlBindAttribLocation)(nil).Class())
+	sc_GlBindAttribLocation.Metadata = append(sc_GlBindAttribLocation.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml]",
+	})
+
+	sc_GlBlendFunc := bschema.Of((*GlBlendFunc)(nil).Class())
+	sc_GlBlendFunc.Metadata = append(sc_GlBlendFunc.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml]",
+	})
+
+	sc_GlBlendFuncSeparate := bschema.Of((*GlBlendFuncSeparate)(nil).Class())
+	sc_GlBlendFuncSeparate.Metadata = append(sc_GlBlendFuncSeparate.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml]",
+	})
+
+	sc_GlBlendEquation := bschema.Of((*GlBlendEquation)(nil).Class())
+	sc_GlBlendEquation.Metadata = append(sc_GlBlendEquation.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml]",
+	})
+
+	sc_GlBlendEquationSeparate := bschema.Of((*GlBlendEquationSeparate)(nil).Class())
+	sc_GlBlendEquationSeparate.Metadata = append(sc_GlBlendEquationSeparate.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml]",
+	})
+
+	sc_GlBlendColor := bschema.Of((*GlBlendColor)(nil).Class())
+	sc_GlBlendColor.Metadata = append(sc_GlBlendColor.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml]",
+	})
+
+	sc_GlEnableVertexAttribArray := bschema.Of((*GlEnableVertexAttribArray)(nil).Class())
+	sc_GlEnableVertexAttribArray.Metadata = append(sc_GlEnableVertexAttribArray.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml]",
+	})
+
+	sc_GlDisableVertexAttribArray := bschema.Of((*GlDisableVertexAttribArray)(nil).Class())
+	sc_GlDisableVertexAttribArray.Metadata = append(sc_GlDisableVertexAttribArray.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml]",
+	})
+
+	sc_GlVertexAttribPointer := bschema.Of((*GlVertexAttribPointer)(nil).Class())
+	sc_GlVertexAttribPointer.Metadata = append(sc_GlVertexAttribPointer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml]",
+	})
+
+	sc_GlGetActiveAttrib := bschema.Of((*GlGetActiveAttrib)(nil).Class())
+	sc_GlGetActiveAttrib.Metadata = append(sc_GlGetActiveAttrib.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml]",
+	})
+
+	sc_GlGetActiveUniform := bschema.Of((*GlGetActiveUniform)(nil).Class())
+	sc_GlGetActiveUniform.Metadata = append(sc_GlGetActiveUniform.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml]",
+	})
+
+	sc_GlGetError := bschema.Of((*GlGetError)(nil).Class())
+	sc_GlGetError.Metadata = append(sc_GlGetError.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml]",
+	})
+
+	sc_GlGetProgramiv := bschema.Of((*GlGetProgramiv)(nil).Class())
+	sc_GlGetProgramiv.Metadata = append(sc_GlGetProgramiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
+	})
+
+	sc_GlGetShaderiv := bschema.Of((*GlGetShaderiv)(nil).Class())
+	sc_GlGetShaderiv.Metadata = append(sc_GlGetShaderiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml]",
+	})
+
+	sc_GlGetUniformLocation := bschema.Of((*GlGetUniformLocation)(nil).Class())
+	sc_GlGetUniformLocation.Metadata = append(sc_GlGetUniformLocation.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml]",
+	})
+
+	sc_GlGetAttribLocation := bschema.Of((*GlGetAttribLocation)(nil).Class())
+	sc_GlGetAttribLocation.Metadata = append(sc_GlGetAttribLocation.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml]",
+	})
+
+	sc_GlPixelStorei := bschema.Of((*GlPixelStorei)(nil).Class())
+	sc_GlPixelStorei.Metadata = append(sc_GlPixelStorei.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml]",
+	})
+
+	sc_GlTexParameteri := bschema.Of((*GlTexParameteri)(nil).Class())
+	sc_GlTexParameteri.Metadata = append(sc_GlTexParameteri.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
+	})
+
+	sc_GlTexParameterf := bschema.Of((*GlTexParameterf)(nil).Class())
+	sc_GlTexParameterf.Metadata = append(sc_GlTexParameterf.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
+	})
+
+	sc_GlGetTexParameteriv := bschema.Of((*GlGetTexParameteriv)(nil).Class())
+	sc_GlGetTexParameteriv.Metadata = append(sc_GlGetTexParameteriv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
+	})
+
+	sc_GlGetTexParameterfv := bschema.Of((*GlGetTexParameterfv)(nil).Class())
+	sc_GlGetTexParameterfv.Metadata = append(sc_GlGetTexParameterfv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
+	})
+
+	sc_GlUniform1i := bschema.Of((*GlUniform1i)(nil).Class())
+	sc_GlUniform1i.Metadata = append(sc_GlUniform1i.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform2i := bschema.Of((*GlUniform2i)(nil).Class())
+	sc_GlUniform2i.Metadata = append(sc_GlUniform2i.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform3i := bschema.Of((*GlUniform3i)(nil).Class())
+	sc_GlUniform3i.Metadata = append(sc_GlUniform3i.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform4i := bschema.Of((*GlUniform4i)(nil).Class())
+	sc_GlUniform4i.Metadata = append(sc_GlUniform4i.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform1iv := bschema.Of((*GlUniform1iv)(nil).Class())
+	sc_GlUniform1iv.Metadata = append(sc_GlUniform1iv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform2iv := bschema.Of((*GlUniform2iv)(nil).Class())
+	sc_GlUniform2iv.Metadata = append(sc_GlUniform2iv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform3iv := bschema.Of((*GlUniform3iv)(nil).Class())
+	sc_GlUniform3iv.Metadata = append(sc_GlUniform3iv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform4iv := bschema.Of((*GlUniform4iv)(nil).Class())
+	sc_GlUniform4iv.Metadata = append(sc_GlUniform4iv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform1f := bschema.Of((*GlUniform1f)(nil).Class())
+	sc_GlUniform1f.Metadata = append(sc_GlUniform1f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform2f := bschema.Of((*GlUniform2f)(nil).Class())
+	sc_GlUniform2f.Metadata = append(sc_GlUniform2f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform3f := bschema.Of((*GlUniform3f)(nil).Class())
+	sc_GlUniform3f.Metadata = append(sc_GlUniform3f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform4f := bschema.Of((*GlUniform4f)(nil).Class())
+	sc_GlUniform4f.Metadata = append(sc_GlUniform4f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform1fv := bschema.Of((*GlUniform1fv)(nil).Class())
+	sc_GlUniform1fv.Metadata = append(sc_GlUniform1fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform2fv := bschema.Of((*GlUniform2fv)(nil).Class())
+	sc_GlUniform2fv.Metadata = append(sc_GlUniform2fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform3fv := bschema.Of((*GlUniform3fv)(nil).Class())
+	sc_GlUniform3fv.Metadata = append(sc_GlUniform3fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniform4fv := bschema.Of((*GlUniform4fv)(nil).Class())
+	sc_GlUniform4fv.Metadata = append(sc_GlUniform4fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniformMatrix2fv := bschema.Of((*GlUniformMatrix2fv)(nil).Class())
+	sc_GlUniformMatrix2fv.Metadata = append(sc_GlUniformMatrix2fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniformMatrix3fv := bschema.Of((*GlUniformMatrix3fv)(nil).Class())
+	sc_GlUniformMatrix3fv.Metadata = append(sc_GlUniformMatrix3fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlUniformMatrix4fv := bschema.Of((*GlUniformMatrix4fv)(nil).Class())
+	sc_GlUniformMatrix4fv.Metadata = append(sc_GlUniformMatrix4fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+
+	sc_GlGetUniformfv := bschema.Of((*GlGetUniformfv)(nil).Class())
+	sc_GlGetUniformfv.Metadata = append(sc_GlGetUniformfv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
+	})
+
+	sc_GlGetUniformiv := bschema.Of((*GlGetUniformiv)(nil).Class())
+	sc_GlGetUniformiv.Metadata = append(sc_GlGetUniformiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
+	})
+
+	sc_GlVertexAttrib1f := bschema.Of((*GlVertexAttrib1f)(nil).Class())
+	sc_GlVertexAttrib1f.Metadata = append(sc_GlVertexAttrib1f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib2f := bschema.Of((*GlVertexAttrib2f)(nil).Class())
+	sc_GlVertexAttrib2f.Metadata = append(sc_GlVertexAttrib2f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib3f := bschema.Of((*GlVertexAttrib3f)(nil).Class())
+	sc_GlVertexAttrib3f.Metadata = append(sc_GlVertexAttrib3f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib4f := bschema.Of((*GlVertexAttrib4f)(nil).Class())
+	sc_GlVertexAttrib4f.Metadata = append(sc_GlVertexAttrib4f.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib1fv := bschema.Of((*GlVertexAttrib1fv)(nil).Class())
+	sc_GlVertexAttrib1fv.Metadata = append(sc_GlVertexAttrib1fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib2fv := bschema.Of((*GlVertexAttrib2fv)(nil).Class())
+	sc_GlVertexAttrib2fv.Metadata = append(sc_GlVertexAttrib2fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib3fv := bschema.Of((*GlVertexAttrib3fv)(nil).Class())
+	sc_GlVertexAttrib3fv.Metadata = append(sc_GlVertexAttrib3fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlVertexAttrib4fv := bschema.Of((*GlVertexAttrib4fv)(nil).Class())
+	sc_GlVertexAttrib4fv.Metadata = append(sc_GlVertexAttrib4fv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+
+	sc_GlGetShaderPrecisionFormat := bschema.Of((*GlGetShaderPrecisionFormat)(nil).Class())
+	sc_GlGetShaderPrecisionFormat.Metadata = append(sc_GlGetShaderPrecisionFormat.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml]",
+	})
+
+	sc_GlDepthMask := bschema.Of((*GlDepthMask)(nil).Class())
+	sc_GlDepthMask.Metadata = append(sc_GlDepthMask.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml]",
+	})
+
+	sc_GlDepthFunc := bschema.Of((*GlDepthFunc)(nil).Class())
+	sc_GlDepthFunc.Metadata = append(sc_GlDepthFunc.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml]",
+	})
+
+	sc_GlDepthRangef := bschema.Of((*GlDepthRangef)(nil).Class())
+	sc_GlDepthRangef.Metadata = append(sc_GlDepthRangef.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml]",
+	})
+
+	sc_GlColorMask := bschema.Of((*GlColorMask)(nil).Class())
+	sc_GlColorMask.Metadata = append(sc_GlColorMask.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml]",
+	})
+
+	sc_GlStencilMask := bschema.Of((*GlStencilMask)(nil).Class())
+	sc_GlStencilMask.Metadata = append(sc_GlStencilMask.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml]",
+	})
+
+	sc_GlStencilMaskSeparate := bschema.Of((*GlStencilMaskSeparate)(nil).Class())
+	sc_GlStencilMaskSeparate.Metadata = append(sc_GlStencilMaskSeparate.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml]",
+	})
+
+	sc_GlStencilFuncSeparate := bschema.Of((*GlStencilFuncSeparate)(nil).Class())
+	sc_GlStencilFuncSeparate.Metadata = append(sc_GlStencilFuncSeparate.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml]",
+	})
+
+	sc_GlStencilOpSeparate := bschema.Of((*GlStencilOpSeparate)(nil).Class())
+	sc_GlStencilOpSeparate.Metadata = append(sc_GlStencilOpSeparate.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml]",
+	})
+
+	sc_GlFrontFace := bschema.Of((*GlFrontFace)(nil).Class())
+	sc_GlFrontFace.Metadata = append(sc_GlFrontFace.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml]",
+	})
+
+	sc_GlViewport := bschema.Of((*GlViewport)(nil).Class())
+	sc_GlViewport.Metadata = append(sc_GlViewport.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml]",
+	})
+
+	sc_GlScissor := bschema.Of((*GlScissor)(nil).Class())
+	sc_GlScissor.Metadata = append(sc_GlScissor.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml]",
+	})
+
+	sc_GlActiveTexture := bschema.Of((*GlActiveTexture)(nil).Class())
+	sc_GlActiveTexture.Metadata = append(sc_GlActiveTexture.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml]",
+	})
+
+	sc_GlGenTextures := bschema.Of((*GlGenTextures)(nil).Class())
+	sc_GlGenTextures.Metadata = append(sc_GlGenTextures.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml]",
+	})
+
+	sc_GlDeleteTextures := bschema.Of((*GlDeleteTextures)(nil).Class())
+	sc_GlDeleteTextures.Metadata = append(sc_GlDeleteTextures.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml]",
+	})
+
+	sc_GlIsTexture := bschema.Of((*GlIsTexture)(nil).Class())
+	sc_GlIsTexture.Metadata = append(sc_GlIsTexture.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml]",
+	})
+
+	sc_GlBindTexture := bschema.Of((*GlBindTexture)(nil).Class())
+	sc_GlBindTexture.Metadata = append(sc_GlBindTexture.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml]",
+	})
+
+	sc_GlTexImage2D := bschema.Of((*GlTexImage2D)(nil).Class())
+	sc_GlTexImage2D.Metadata = append(sc_GlTexImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml]",
+	})
+
+	sc_GlTexSubImage2D := bschema.Of((*GlTexSubImage2D)(nil).Class())
+	sc_GlTexSubImage2D.Metadata = append(sc_GlTexSubImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml]",
+	})
+
+	sc_GlCopyTexImage2D := bschema.Of((*GlCopyTexImage2D)(nil).Class())
+	sc_GlCopyTexImage2D.Metadata = append(sc_GlCopyTexImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml]",
+	})
+
+	sc_GlCopyTexSubImage2D := bschema.Of((*GlCopyTexSubImage2D)(nil).Class())
+	sc_GlCopyTexSubImage2D.Metadata = append(sc_GlCopyTexSubImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml]",
+	})
+
+	sc_GlCompressedTexImage2D := bschema.Of((*GlCompressedTexImage2D)(nil).Class())
+	sc_GlCompressedTexImage2D.Metadata = append(sc_GlCompressedTexImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml]",
+	})
+
+	sc_GlCompressedTexSubImage2D := bschema.Of((*GlCompressedTexSubImage2D)(nil).Class())
+	sc_GlCompressedTexSubImage2D.Metadata = append(sc_GlCompressedTexSubImage2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml]",
+	})
+
+	sc_GlGenerateMipmap := bschema.Of((*GlGenerateMipmap)(nil).Class())
+	sc_GlGenerateMipmap.Metadata = append(sc_GlGenerateMipmap.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml]",
+	})
+
+	sc_GlReadPixels := bschema.Of((*GlReadPixels)(nil).Class())
+	sc_GlReadPixels.Metadata = append(sc_GlReadPixels.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml]",
+	})
+
+	sc_GlGenFramebuffers := bschema.Of((*GlGenFramebuffers)(nil).Class())
+	sc_GlGenFramebuffers.Metadata = append(sc_GlGenFramebuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml]",
+	})
+
+	sc_GlBindFramebuffer := bschema.Of((*GlBindFramebuffer)(nil).Class())
+	sc_GlBindFramebuffer.Metadata = append(sc_GlBindFramebuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml]",
+	})
+
+	sc_GlCheckFramebufferStatus := bschema.Of((*GlCheckFramebufferStatus)(nil).Class())
+	sc_GlCheckFramebufferStatus.Metadata = append(sc_GlCheckFramebufferStatus.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml]",
+	})
+
+	sc_GlDeleteFramebuffers := bschema.Of((*GlDeleteFramebuffers)(nil).Class())
+	sc_GlDeleteFramebuffers.Metadata = append(sc_GlDeleteFramebuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml]",
+	})
+
+	sc_GlIsFramebuffer := bschema.Of((*GlIsFramebuffer)(nil).Class())
+	sc_GlIsFramebuffer.Metadata = append(sc_GlIsFramebuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml]",
+	})
+
+	sc_GlGenRenderbuffers := bschema.Of((*GlGenRenderbuffers)(nil).Class())
+	sc_GlGenRenderbuffers.Metadata = append(sc_GlGenRenderbuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml]",
+	})
+
+	sc_GlBindRenderbuffer := bschema.Of((*GlBindRenderbuffer)(nil).Class())
+	sc_GlBindRenderbuffer.Metadata = append(sc_GlBindRenderbuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml]",
+	})
+
+	sc_GlRenderbufferStorage := bschema.Of((*GlRenderbufferStorage)(nil).Class())
+	sc_GlRenderbufferStorage.Metadata = append(sc_GlRenderbufferStorage.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml]",
+	})
+
+	sc_GlDeleteRenderbuffers := bschema.Of((*GlDeleteRenderbuffers)(nil).Class())
+	sc_GlDeleteRenderbuffers.Metadata = append(sc_GlDeleteRenderbuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml]",
+	})
+
+	sc_GlIsRenderbuffer := bschema.Of((*GlIsRenderbuffer)(nil).Class())
+	sc_GlIsRenderbuffer.Metadata = append(sc_GlIsRenderbuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml]",
+	})
+
+	sc_GlGetRenderbufferParameteriv := bschema.Of((*GlGetRenderbufferParameteriv)(nil).Class())
+	sc_GlGetRenderbufferParameteriv.Metadata = append(sc_GlGetRenderbufferParameteriv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml]",
+	})
+
+	sc_GlGenBuffers := bschema.Of((*GlGenBuffers)(nil).Class())
+	sc_GlGenBuffers.Metadata = append(sc_GlGenBuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml]",
+	})
+
+	sc_GlBindBuffer := bschema.Of((*GlBindBuffer)(nil).Class())
+	sc_GlBindBuffer.Metadata = append(sc_GlBindBuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml]",
+	})
+
+	sc_GlBufferData := bschema.Of((*GlBufferData)(nil).Class())
+	sc_GlBufferData.Metadata = append(sc_GlBufferData.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml]",
+	})
+
+	sc_GlBufferSubData := bschema.Of((*GlBufferSubData)(nil).Class())
+	sc_GlBufferSubData.Metadata = append(sc_GlBufferSubData.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml]",
+	})
+
+	sc_GlDeleteBuffers := bschema.Of((*GlDeleteBuffers)(nil).Class())
+	sc_GlDeleteBuffers.Metadata = append(sc_GlDeleteBuffers.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml]",
+	})
+
+	sc_GlIsBuffer := bschema.Of((*GlIsBuffer)(nil).Class())
+	sc_GlIsBuffer.Metadata = append(sc_GlIsBuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml]",
+	})
+
+	sc_GlGetBufferParameteriv := bschema.Of((*GlGetBufferParameteriv)(nil).Class())
+	sc_GlGetBufferParameteriv.Metadata = append(sc_GlGetBufferParameteriv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml]",
+	})
+
+	sc_GlCreateShader := bschema.Of((*GlCreateShader)(nil).Class())
+	sc_GlCreateShader.Metadata = append(sc_GlCreateShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml]",
+	})
+
+	sc_GlDeleteShader := bschema.Of((*GlDeleteShader)(nil).Class())
+	sc_GlDeleteShader.Metadata = append(sc_GlDeleteShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml]",
+	})
+
+	sc_GlShaderSource := bschema.Of((*GlShaderSource)(nil).Class())
+	sc_GlShaderSource.Metadata = append(sc_GlShaderSource.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml]",
+	})
+
+	sc_GlShaderBinary := bschema.Of((*GlShaderBinary)(nil).Class())
+	sc_GlShaderBinary.Metadata = append(sc_GlShaderBinary.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml]",
+	})
+
+	sc_GlGetShaderInfoLog := bschema.Of((*GlGetShaderInfoLog)(nil).Class())
+	sc_GlGetShaderInfoLog.Metadata = append(sc_GlGetShaderInfoLog.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml]",
+	})
+
+	sc_GlGetShaderSource := bschema.Of((*GlGetShaderSource)(nil).Class())
+	sc_GlGetShaderSource.Metadata = append(sc_GlGetShaderSource.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml]",
+	})
+
+	sc_GlReleaseShaderCompiler := bschema.Of((*GlReleaseShaderCompiler)(nil).Class())
+	sc_GlReleaseShaderCompiler.Metadata = append(sc_GlReleaseShaderCompiler.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml]",
+	})
+
+	sc_GlCompileShader := bschema.Of((*GlCompileShader)(nil).Class())
+	sc_GlCompileShader.Metadata = append(sc_GlCompileShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml]",
+	})
+
+	sc_GlIsShader := bschema.Of((*GlIsShader)(nil).Class())
+	sc_GlIsShader.Metadata = append(sc_GlIsShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml]",
+	})
+
+	sc_GlCreateProgram := bschema.Of((*GlCreateProgram)(nil).Class())
+	sc_GlCreateProgram.Metadata = append(sc_GlCreateProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml]",
+	})
+
+	sc_GlDeleteProgram := bschema.Of((*GlDeleteProgram)(nil).Class())
+	sc_GlDeleteProgram.Metadata = append(sc_GlDeleteProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml]",
+	})
+
+	sc_GlAttachShader := bschema.Of((*GlAttachShader)(nil).Class())
+	sc_GlAttachShader.Metadata = append(sc_GlAttachShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml]",
+	})
+
+	sc_GlDetachShader := bschema.Of((*GlDetachShader)(nil).Class())
+	sc_GlDetachShader.Metadata = append(sc_GlDetachShader.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml]",
+	})
+
+	sc_GlGetAttachedShaders := bschema.Of((*GlGetAttachedShaders)(nil).Class())
+	sc_GlGetAttachedShaders.Metadata = append(sc_GlGetAttachedShaders.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml]",
+	})
+
+	sc_GlLinkProgram := bschema.Of((*GlLinkProgram)(nil).Class())
+	sc_GlLinkProgram.Metadata = append(sc_GlLinkProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml]",
+	})
+
+	sc_GlGetProgramInfoLog := bschema.Of((*GlGetProgramInfoLog)(nil).Class())
+	sc_GlGetProgramInfoLog.Metadata = append(sc_GlGetProgramInfoLog.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml]",
+	})
+
+	sc_GlUseProgram := bschema.Of((*GlUseProgram)(nil).Class())
+	sc_GlUseProgram.Metadata = append(sc_GlUseProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml]",
+	})
+
+	sc_GlIsProgram := bschema.Of((*GlIsProgram)(nil).Class())
+	sc_GlIsProgram.Metadata = append(sc_GlIsProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml]",
+	})
+
+	sc_GlValidateProgram := bschema.Of((*GlValidateProgram)(nil).Class())
+	sc_GlValidateProgram.Metadata = append(sc_GlValidateProgram.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml]",
+	})
+
+	sc_GlClearColor := bschema.Of((*GlClearColor)(nil).Class())
+	sc_GlClearColor.Metadata = append(sc_GlClearColor.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml]",
+	})
+
+	sc_GlClearDepthf := bschema.Of((*GlClearDepthf)(nil).Class())
+	sc_GlClearDepthf.Metadata = append(sc_GlClearDepthf.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml]",
+	})
+
+	sc_GlClearStencil := bschema.Of((*GlClearStencil)(nil).Class())
+	sc_GlClearStencil.Metadata = append(sc_GlClearStencil.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml]",
+	})
+
+	sc_GlClear := bschema.Of((*GlClear)(nil).Class())
+	sc_GlClear.Metadata = append(sc_GlClear.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml]",
+	})
+
+	sc_GlCullFace := bschema.Of((*GlCullFace)(nil).Class())
+	sc_GlCullFace.Metadata = append(sc_GlCullFace.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml]",
+	})
+
+	sc_GlPolygonOffset := bschema.Of((*GlPolygonOffset)(nil).Class())
+	sc_GlPolygonOffset.Metadata = append(sc_GlPolygonOffset.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml]",
+	})
+
+	sc_GlLineWidth := bschema.Of((*GlLineWidth)(nil).Class())
+	sc_GlLineWidth.Metadata = append(sc_GlLineWidth.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml]",
+	})
+
+	sc_GlSampleCoverage := bschema.Of((*GlSampleCoverage)(nil).Class())
+	sc_GlSampleCoverage.Metadata = append(sc_GlSampleCoverage.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml]",
+	})
+
+	sc_GlHint := bschema.Of((*GlHint)(nil).Class())
+	sc_GlHint.Metadata = append(sc_GlHint.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml]",
+	})
+
+	sc_GlFramebufferRenderbuffer := bschema.Of((*GlFramebufferRenderbuffer)(nil).Class())
+	sc_GlFramebufferRenderbuffer.Metadata = append(sc_GlFramebufferRenderbuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml]",
+	})
+
+	sc_GlFramebufferTexture2D := bschema.Of((*GlFramebufferTexture2D)(nil).Class())
+	sc_GlFramebufferTexture2D.Metadata = append(sc_GlFramebufferTexture2D.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml]",
+	})
+
+	sc_GlGetFramebufferAttachmentParameteriv := bschema.Of((*GlGetFramebufferAttachmentParameteriv)(nil).Class())
+	sc_GlGetFramebufferAttachmentParameteriv.Metadata = append(sc_GlGetFramebufferAttachmentParameteriv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml]",
+	})
+
+	sc_GlDrawElements := bschema.Of((*GlDrawElements)(nil).Class())
+	sc_GlDrawElements.Metadata = append(sc_GlDrawElements.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.DrawCall,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml]",
+	})
+
+	sc_GlDrawArrays := bschema.Of((*GlDrawArrays)(nil).Class())
+	sc_GlDrawArrays.Metadata = append(sc_GlDrawArrays.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0 | atom.DrawCall,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml]",
+	})
+
+	sc_GlFlush := bschema.Of((*GlFlush)(nil).Class())
+	sc_GlFlush.Metadata = append(sc_GlFlush.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml]",
+	})
+
+	sc_GlFinish := bschema.Of((*GlFinish)(nil).Class())
+	sc_GlFinish.Metadata = append(sc_GlFinish.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml]",
+	})
+
+	sc_GlGetBooleanv := bschema.Of((*GlGetBooleanv)(nil).Class())
+	sc_GlGetBooleanv.Metadata = append(sc_GlGetBooleanv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+
+	sc_GlGetFloatv := bschema.Of((*GlGetFloatv)(nil).Class())
+	sc_GlGetFloatv.Metadata = append(sc_GlGetFloatv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+
+	sc_GlGetIntegerv := bschema.Of((*GlGetIntegerv)(nil).Class())
+	sc_GlGetIntegerv.Metadata = append(sc_GlGetIntegerv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+
+	sc_GlGetString := bschema.Of((*GlGetString)(nil).Class())
+	sc_GlGetString.Metadata = append(sc_GlGetString.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml]",
+	})
+
+	sc_GlEnable := bschema.Of((*GlEnable)(nil).Class())
+	sc_GlEnable.Metadata = append(sc_GlEnable.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml]",
+	})
+
+	sc_GlDisable := bschema.Of((*GlDisable)(nil).Class())
+	sc_GlDisable.Metadata = append(sc_GlDisable.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml]",
+	})
+
+	sc_GlIsEnabled := bschema.Of((*GlIsEnabled)(nil).Class())
+	sc_GlIsEnabled.Metadata = append(sc_GlIsEnabled.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml]",
+	})
+
+	sc_GlFenceSync := bschema.Of((*GlFenceSync)(nil).Class())
+	sc_GlFenceSync.Metadata = append(sc_GlFenceSync.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glFenceSync.xhtml]",
+	})
+
+	sc_GlDeleteSync := bschema.Of((*GlDeleteSync)(nil).Class())
+	sc_GlDeleteSync.Metadata = append(sc_GlDeleteSync.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteSync.xhtml]",
+	})
+
+	sc_GlWaitSync := bschema.Of((*GlWaitSync)(nil).Class())
+	sc_GlWaitSync.Metadata = append(sc_GlWaitSync.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glWaitSync.xhtml]",
+	})
+
+	sc_GlClientWaitSync := bschema.Of((*GlClientWaitSync)(nil).Class())
+	sc_GlClientWaitSync.Metadata = append(sc_GlClientWaitSync.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glClientWaitSync.xhtml]",
+	})
+
+	sc_GlMapBufferRange := bschema.Of((*GlMapBufferRange)(nil).Class())
+	sc_GlMapBufferRange.Metadata = append(sc_GlMapBufferRange.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
+	})
+
+	sc_GlUnmapBuffer := bschema.Of((*GlUnmapBuffer)(nil).Class())
+	sc_GlUnmapBuffer.Metadata = append(sc_GlUnmapBuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
+	})
+
+	sc_GlInvalidateFramebuffer := bschema.Of((*GlInvalidateFramebuffer)(nil).Class())
+	sc_GlInvalidateFramebuffer.Metadata = append(sc_GlInvalidateFramebuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml]",
+	})
+
+	sc_GlRenderbufferStorageMultisample := bschema.Of((*GlRenderbufferStorageMultisample)(nil).Class())
+	sc_GlRenderbufferStorageMultisample.Metadata = append(sc_GlRenderbufferStorageMultisample.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt]",
+	})
+
+	sc_GlBlitFramebuffer := bschema.Of((*GlBlitFramebuffer)(nil).Class())
+	sc_GlBlitFramebuffer.Metadata = append(sc_GlBlitFramebuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml]",
+	})
+
+	sc_GlGenQueries := bschema.Of((*GlGenQueries)(nil).Class())
+	sc_GlGenQueries.Metadata = append(sc_GlGenQueries.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml]",
+	})
+
+	sc_GlBeginQuery := bschema.Of((*GlBeginQuery)(nil).Class())
+	sc_GlBeginQuery.Metadata = append(sc_GlBeginQuery.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml]",
+	})
+
+	sc_GlEndQuery := bschema.Of((*GlEndQuery)(nil).Class())
+	sc_GlEndQuery.Metadata = append(sc_GlEndQuery.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml]",
+	})
+
+	sc_GlDeleteQueries := bschema.Of((*GlDeleteQueries)(nil).Class())
+	sc_GlDeleteQueries.Metadata = append(sc_GlDeleteQueries.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml]",
+	})
+
+	sc_GlIsQuery := bschema.Of((*GlIsQuery)(nil).Class())
+	sc_GlIsQuery.Metadata = append(sc_GlIsQuery.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml]",
+	})
+
+	sc_GlGetQueryiv := bschema.Of((*GlGetQueryiv)(nil).Class())
+	sc_GlGetQueryiv.Metadata = append(sc_GlGetQueryiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml]",
+	})
+
+	sc_GlGetQueryObjectuiv := bschema.Of((*GlGetQueryObjectuiv)(nil).Class())
+	sc_GlGetQueryObjectuiv.Metadata = append(sc_GlGetQueryObjectuiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml]",
+	})
+
+	sc_GlGetActiveUniformBlockName := bschema.Of((*GlGetActiveUniformBlockName)(nil).Class())
+	sc_GlGetActiveUniformBlockName.Metadata = append(sc_GlGetActiveUniformBlockName.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockName.xhtml]",
+	})
+
+	sc_GlGetActiveUniformBlockiv := bschema.Of((*GlGetActiveUniformBlockiv)(nil).Class())
+	sc_GlGetActiveUniformBlockiv.Metadata = append(sc_GlGetActiveUniformBlockiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformBlockiv.xhtml]",
+	})
+
+	sc_GlUniformBlockBinding := bschema.Of((*GlUniformBlockBinding)(nil).Class())
+	sc_GlUniformBlockBinding.Metadata = append(sc_GlUniformBlockBinding.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glUniformBlockBinding.xhtml]",
+	})
+
+	sc_GlGetActiveUniformsiv := bschema.Of((*GlGetActiveUniformsiv)(nil).Class())
+	sc_GlGetActiveUniformsiv.Metadata = append(sc_GlGetActiveUniformsiv.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetActiveUniformsiv.xhtml]",
+	})
+
+	sc_GlBindBufferBase := bschema.Of((*GlBindBufferBase)(nil).Class())
+	sc_GlBindBufferBase.Metadata = append(sc_GlBindBufferBase.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml]",
+	})
+
+	sc_GlGenVertexArrays := bschema.Of((*GlGenVertexArrays)(nil).Class())
+	sc_GlGenVertexArrays.Metadata = append(sc_GlGenVertexArrays.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenVertexArrays.xhtml]",
+	})
+
+	sc_GlBindVertexArray := bschema.Of((*GlBindVertexArray)(nil).Class())
+	sc_GlBindVertexArray.Metadata = append(sc_GlBindVertexArray.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml]",
+	})
+
+	sc_GlDeleteVertexArrays := bschema.Of((*GlDeleteVertexArrays)(nil).Class())
+	sc_GlDeleteVertexArrays.Metadata = append(sc_GlDeleteVertexArrays.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml]",
+	})
+
+	sc_GlGetQueryObjecti64v := bschema.Of((*GlGetQueryObjecti64v)(nil).Class())
+	sc_GlGetQueryObjecti64v.Metadata = append(sc_GlGetQueryObjecti64v.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetQueryObjectui64v := bschema.Of((*GlGetQueryObjectui64v)(nil).Class())
+	sc_GlGetQueryObjectui64v.Metadata = append(sc_GlGetQueryObjectui64v.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGenQueriesEXT := bschema.Of((*GlGenQueriesEXT)(nil).Class())
+	sc_GlGenQueriesEXT.Metadata = append(sc_GlGenQueriesEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlBeginQueryEXT := bschema.Of((*GlBeginQueryEXT)(nil).Class())
+	sc_GlBeginQueryEXT.Metadata = append(sc_GlBeginQueryEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlEndQueryEXT := bschema.Of((*GlEndQueryEXT)(nil).Class())
+	sc_GlEndQueryEXT.Metadata = append(sc_GlEndQueryEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlDeleteQueriesEXT := bschema.Of((*GlDeleteQueriesEXT)(nil).Class())
+	sc_GlDeleteQueriesEXT.Metadata = append(sc_GlDeleteQueriesEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlIsQueryEXT := bschema.Of((*GlIsQueryEXT)(nil).Class())
+	sc_GlIsQueryEXT.Metadata = append(sc_GlIsQueryEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlQueryCounterEXT := bschema.Of((*GlQueryCounterEXT)(nil).Class())
+	sc_GlQueryCounterEXT.Metadata = append(sc_GlQueryCounterEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlGetQueryivEXT := bschema.Of((*GlGetQueryivEXT)(nil).Class())
+	sc_GlGetQueryivEXT.Metadata = append(sc_GlGetQueryivEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlGetQueryObjectivEXT := bschema.Of((*GlGetQueryObjectivEXT)(nil).Class())
+	sc_GlGetQueryObjectivEXT.Metadata = append(sc_GlGetQueryObjectivEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlGetQueryObjectuivEXT := bschema.Of((*GlGetQueryObjectuivEXT)(nil).Class())
+	sc_GlGetQueryObjectuivEXT.Metadata = append(sc_GlGetQueryObjectuivEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlGetQueryObjecti64vEXT := bschema.Of((*GlGetQueryObjecti64vEXT)(nil).Class())
+	sc_GlGetQueryObjecti64vEXT.Metadata = append(sc_GlGetQueryObjecti64vEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_GlGetQueryObjectui64vEXT := bschema.Of((*GlGetQueryObjectui64vEXT)(nil).Class())
+	sc_GlGetQueryObjectui64vEXT.Metadata = append(sc_GlGetQueryObjectui64vEXT.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+
+	sc_Architecture := bschema.Of((*Architecture)(nil).Class())
+	sc_Architecture.Metadata = append(sc_Architecture.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_ReplayCreateRenderer := bschema.Of((*ReplayCreateRenderer)(nil).Class())
+	sc_ReplayCreateRenderer.Metadata = append(sc_ReplayCreateRenderer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_ReplayBindRenderer := bschema.Of((*ReplayBindRenderer)(nil).Class())
+	sc_ReplayBindRenderer.Metadata = append(sc_ReplayBindRenderer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_BackbufferInfo := bschema.Of((*BackbufferInfo)(nil).Class())
+	sc_BackbufferInfo.Metadata = append(sc_BackbufferInfo.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_StartTimer := bschema.Of((*StartTimer)(nil).Class())
+	sc_StartTimer.Metadata = append(sc_StartTimer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_StopTimer := bschema.Of((*StopTimer)(nil).Class())
+	sc_StopTimer.Metadata = append(sc_StopTimer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
+	sc_FlushPostBuffer := bschema.Of((*FlushPostBuffer)(nil).Class())
+	sc_FlushPostBuffer.Metadata = append(sc_FlushPostBuffer.Metadata, &atom.Metadata{
+		Api:              binary.ID(apiID),
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+}
 func init() {
 	s := schemaBuilder{
 		staticArrays: make(map[int]*service.StaticArrayInfo),

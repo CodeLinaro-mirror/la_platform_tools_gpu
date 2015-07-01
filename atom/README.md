@@ -364,6 +364,26 @@ func (l *List) WriteTo(w Writer)
 ```
 WriteTo writes all atoms in the list to w, terminating with a single EOS atom.
 
+#### type Metadata
+
+```go
+type Metadata struct {
+	binary.Generate
+	Api              binary.ID // The api this atom belongs to.
+	Flags            Flags     // The atom flags for this type.
+	DocumentationUrl string    // A url for documentation about this atom.
+}
+```
+
+Metadata is the meta information about an atom type that is added to the binary
+schema class for the atom.
+
+#### func (*Metadata) Class
+
+```go
+func (*Metadata) Class() binary.Class
+```
+
 #### type Observation
 
 ```go
