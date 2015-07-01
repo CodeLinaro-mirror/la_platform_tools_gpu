@@ -171,9 +171,6 @@
   {{AssertType $.Class "Class"}}
   {{AssertType $.Macro "string"}}
 
-  {{range $_, $e := $.Class.Extends}}
-    {{Macro "TraverseFields" "Impl" $.Impl "Class" $e "Macro" $.Macro}}
-  {{end}}
   {{range $_, $f := $.Class.Fields}}
     {{Macro $.Macro "Impl" $.Impl "Class" $.Class "Field" $f}}
   {{end}}
@@ -252,9 +249,7 @@
   {{$iname := $.Name}}
   // Interface {{$.Name}}
   type {{$iname}} interface {
-    {{if eq (len $.Extends) 0}}
-      binary.Object
-    {{end}}
+    binary.Object
     {{Macro "AllFields" "Class" $ "Macro" "DeclareInterfaceFieldAccessor"}}
   }
 {{end}}

@@ -19,7 +19,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// { annotation } 'class' identifer [ : identifier { ',' identifer} ] '{' { field } '}'
+// { annotation } 'class' identifer '{' { field } '}'
 func class(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Class {
 	if !peekKeyword(ast.KeywordClass, p) {
 		return nil
@@ -30,15 +30,6 @@ func class(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Class {
 		c.CST = cst
 		requireKeyword(ast.KeywordClass, p, cst)
 		c.Name = requireIdentifier(p, cst)
-		if operator(ast.OpExtends, p, cst) {
-			for !peekOperator(ast.OpBlockStart, p) {
-				if len(c.Extends) > 0 {
-					requireOperator(ast.OpListSeparator, p, cst)
-				}
-				extend := requireIdentifier(p, cst)
-				c.Extends = append(c.Extends, extend)
-			}
-		}
 		requireOperator(ast.OpBlockStart, p, cst)
 		for !operator(ast.OpBlockEnd, p, cst) {
 			c.Fields = append(c.Fields, requireField(p, cst, nil))

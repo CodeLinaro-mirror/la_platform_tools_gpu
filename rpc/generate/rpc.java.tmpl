@@ -108,9 +108,6 @@
   {{AssertType $.Class   "Class"}}  {{/* the class holding the fields to traverse */}}
   {{AssertType $.Macro   "string"}} {{/* the macro to invoke */}}
 
-  {{range $_, $e := $.Class.Extends}}
-    {{Macro "TraverseFields" "Derived" true "Class" $e "Macro" $.Macro}}
-  {{end}}
   {{range $_, $f := $.Class.Fields}}
     {{Macro $.Macro "Derived" $.Derived "Class" $.Class "Field" $f}}
   {{end}}
@@ -348,10 +345,7 @@
 {{define "ClassImplements"}}
   {{AssertType $ "Class"}}
 
-  implements §
-  {{if len $.Extends}}{{(index $.Extends 0).Name}}§
-  {{else}} BinaryObject§
-  {{end}}
+  implements BinaryObject§
 {{end}}
 
 
@@ -457,8 +451,7 @@
   {{template "CopyrightHeader"}}
   package {{Global "package"}};
 ¶
-  {{if not (len $.Extends)}}import com.android.tools.rpclib.binary.BinaryObject;
-  {{end}}
+  import com.android.tools.rpclib.binary.BinaryObject;
   import com.android.tools.rpclib.binary.Decoder;
   import com.android.tools.rpclib.binary.Encoder;
   import com.android.tools.rpclib.binary.ObjectTypeID;

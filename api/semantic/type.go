@@ -39,8 +39,6 @@ type Class struct {
 	Annotations             // the annotations applied to this class
 	Named                   // implement Child
 	Docs        []string    // the documentation for the class
-	Extends     []*Class    // the classes this extends
-	ExtendedBy  []*Class    // the classes that declared they extended this class
 	Fields      []*Field    // the set of fields the class declares
 	Methods     []*Function // the set of functions associated with the class
 }

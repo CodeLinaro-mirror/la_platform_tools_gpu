@@ -606,9 +606,6 @@
     }
 
     func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
-    {{range $c := $.Extends}}
-      {{Macro "ClassImpl" "Class" $c "Impl" $.Name}}
-    {{end}}
   {{end}}
 {{end}}
 
@@ -625,9 +622,6 @@
     Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
     Set{{Title $v.Name}}({{Macro "Go.Type" $type}})
   {{end}}
-  {{range $c := $.Extends}}
-    {{Macro "ClassInterface" $c}}
-  {{end}}
 {{end}}
 
 
@@ -640,10 +634,6 @@
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
     {{Title $v.Name}} {{Macro "Go.Type" $v}}
-  {{end}}
-  {{range $c := $.Extends}}
-    // {{$c.Name}}
-    {{Macro "ClassFields" $c}}
   {{end}}
 {{end}}
 
@@ -658,10 +648,6 @@
   {{AssertType $.Name "string"}}
   {{range $v := $.Type.Fields}}
     {{Macro "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
-  {{end}}
-  {{range $c := $.Extends}}
-    // {{$c.Name}}
-    {{Macro "FieldsInit" "Type" $c "Name" $.Name}}
   {{end}}
 {{end}}
 
@@ -710,9 +696,6 @@
     {{$FType := Macro "Go.Type" $type}}
     func (i *{{$.Impl}}) Get{{$v.Name}}() {{$FType}} { return i.{{$v.Name}} }
     func (i *{{$.Impl}}) Set{{$v.Name}}(v {{$FType}}) { i.{{$v.Name}} = v }
-  {{end}}
-  {{range $c := $.Class.Extends}}
-    {{Macro "ClassImpl" "Class" $c "Impl" $.Impl}}
   {{end}}
 {{end}}
 
