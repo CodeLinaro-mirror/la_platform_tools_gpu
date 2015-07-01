@@ -33,7 +33,7 @@ func (l *RangeList) GetSpan(index int) interval.U64Span {
 // RangeList.
 func (l *RangeList) SetSpan(index int, span interval.U64Span) {
 	(*l)[index] = Range{
-		Base: Pointer(span.Start),
+		Base: span.Start,
 		Size: span.End - span.Start,
 	}
 }

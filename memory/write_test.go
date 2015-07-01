@@ -34,7 +34,7 @@ func TestWrite(t *testing.T) {
 		uint8(0x12), int8(0x12),
 		uint16(0x1234), int16(0x1234),
 		uint32(0x12345678), int32(0x12345678),
-		Pointer(0x87654321),
+		Pointer{Address: 0x87654321},
 		[]uint8{0x10, 0x20, 0x30},
 		"hello",
 	}

@@ -14,21 +14,32 @@
 
 package memory
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
+
+// Nullptr is a zero-address pointer in the application pool.
+var Nullptr = Pointer{Pool: ApplicationPool}
 
 // Pointer is the type representing a memory pointer.
-type Pointer uint64
+type Pointer struct {
+	binary.Generate
+	Address uint64 // The memory address.
+	Pool    PoolID // The memory pool.
+}
 
 // Offset returns the pointer offset by n bytes.
 func (p Pointer) Offset(n uint64) Pointer {
-	return p + Pointer(n)
+	return Pointer{Address: p.Address + n, Pool: p.Pool}
 }
 
 // Range returns a Range of size s with the base of this pointer.
 func (p Pointer) Range(s uint64) Range {
-	return Range{Base: p, Size: s}
+	return Range{Base: p.Address, Size: s}
 }
 
 func (p Pointer) String() string {
-	return fmt.Sprintf("0x%.16x", uint64(p))
+	return fmt.Sprintf("0x%.16x@%d", uint64(p.Address), p.Pool)
 }

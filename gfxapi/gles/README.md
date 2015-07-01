@@ -1966,8 +1966,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Boolᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -1976,7 +1975,7 @@ Boolᵖ is a pointer to a bool element.
 #### func  NewBoolᵖ
 
 ```go
-func NewBoolᵖ(addr memory.Pointer) Boolᵖ
+func NewBoolᵖ(addr uint64) Boolᵖ
 ```
 NewBoolᵖ returns a Boolᵖ that points to addr in the application pool.
 
@@ -2022,13 +2021,6 @@ Read reads and returns the bool element at the pointer.
 func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ
 ```
 Slice returns a new Boolˢ from the pointer using start and end indices.
-
-#### func (Boolᵖ) String
-
-```go
-func (p Boolᵖ) String() string
-```
-String returns a string description of the Boolᵖ pointer.
 
 #### func (Boolᵖ) Write
 
@@ -2076,8 +2068,7 @@ func (c *Buffer) Init()
 ```go
 type BufferDataPointer struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -2086,7 +2077,7 @@ BufferDataPointer is a pointer to a void element.
 #### func  NewBufferDataPointer
 
 ```go
-func NewBufferDataPointer(addr memory.Pointer) BufferDataPointer
+func NewBufferDataPointer(addr uint64) BufferDataPointer
 ```
 NewBufferDataPointer returns a BufferDataPointer that points to addr in the
 application pool.
@@ -2127,13 +2118,6 @@ chained.
 func (p BufferDataPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (BufferDataPointer) String
-
-```go
-func (p BufferDataPointer) String() string
-```
-String returns a string description of the BufferDataPointer pointer.
 
 #### type BufferId
 
@@ -2314,8 +2298,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type BufferIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -2324,7 +2307,7 @@ BufferIdᵖ is a pointer to a BufferId element.
 #### func  NewBufferIdᵖ
 
 ```go
-func NewBufferIdᵖ(addr memory.Pointer) BufferIdᵖ
+func NewBufferIdᵖ(addr uint64) BufferIdᵖ
 ```
 NewBufferIdᵖ returns a BufferIdᵖ that points to addr in the application pool.
 
@@ -2370,13 +2353,6 @@ Read reads and returns the BufferId element at the pointer.
 func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ
 ```
 Slice returns a new BufferIdˢ from the pointer using start and end indices.
-
-#### func (BufferIdᵖ) String
-
-```go
-func (p BufferIdᵖ) String() string
-```
-String returns a string description of the BufferIdᵖ pointer.
 
 #### func (BufferIdᵖ) Write
 
@@ -2487,8 +2463,7 @@ func (v BufferUsage) String() string
 ```go
 type CGLContextObj struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -2497,7 +2472,7 @@ CGLContextObj is a pointer to a void element.
 #### func  NewCGLContextObj
 
 ```go
-func NewCGLContextObj(addr memory.Pointer) CGLContextObj
+func NewCGLContextObj(addr uint64) CGLContextObj
 ```
 NewCGLContextObj returns a CGLContextObj that points to addr in the application
 pool.
@@ -2538,13 +2513,6 @@ chained.
 func (p CGLContextObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (CGLContextObj) String
-
-```go
-func (p CGLContextObj) String() string
-```
-String returns a string description of the CGLContextObj pointer.
 
 #### type CGLContextObjːContextʳᵐ
 
@@ -2719,22 +2687,21 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type CGLContextObjᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
 CGLContextObjᵖ is a pointer to a CGLContextObj element. Note: Pointers are
 stored differently between the application pool and internal pools.
 
-    * The application pool stores pointers as an address an architecture-dependant size.
+    * The application pool stores pointers as an address of an architecture-dependant size.
     * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
       pool identifier.
 
 #### func  NewCGLContextObjᵖ
 
 ```go
-func NewCGLContextObjᵖ(addr memory.Pointer) CGLContextObjᵖ
+func NewCGLContextObjᵖ(addr uint64) CGLContextObjᵖ
 ```
 NewCGLContextObjᵖ returns a CGLContextObjᵖ that points to addr in the
 application pool.
@@ -2782,13 +2749,6 @@ Read reads and returns the CGLContextObj element at the pointer.
 func (p CGLContextObjᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGLContextObjˢ
 ```
 Slice returns a new CGLContextObjˢ from the pointer using start and end indices.
-
-#### func (CGLContextObjᵖ) String
-
-```go
-func (p CGLContextObjᵖ) String() string
-```
-String returns a string description of the CGLContextObjᵖ pointer.
 
 #### func (CGLContextObjᵖ) Write
 
@@ -3039,8 +2999,7 @@ func (a *CGLGetSurface) String() string
 ```go
 type CGLPixelFormatObj struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -3049,7 +3008,7 @@ CGLPixelFormatObj is a pointer to a void element.
 #### func  NewCGLPixelFormatObj
 
 ```go
-func NewCGLPixelFormatObj(addr memory.Pointer) CGLPixelFormatObj
+func NewCGLPixelFormatObj(addr uint64) CGLPixelFormatObj
 ```
 NewCGLPixelFormatObj returns a CGLPixelFormatObj that points to addr in the
 application pool.
@@ -3090,13 +3049,6 @@ chained.
 func (p CGLPixelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (CGLPixelFormatObj) String
-
-```go
-func (p CGLPixelFormatObj) String() string
-```
-String returns a string description of the CGLPixelFormatObj pointer.
 
 #### type CGLSetCurrentContext
 
@@ -3184,8 +3136,7 @@ func (a *CGLSetCurrentContext) String() string
 ```go
 type CGSConnectionID struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -3194,7 +3145,7 @@ CGSConnectionID is a pointer to a void element.
 #### func  NewCGSConnectionID
 
 ```go
-func NewCGSConnectionID(addr memory.Pointer) CGSConnectionID
+func NewCGSConnectionID(addr uint64) CGSConnectionID
 ```
 NewCGSConnectionID returns a CGSConnectionID that points to addr in the
 application pool.
@@ -3235,13 +3186,6 @@ chained.
 func (p CGSConnectionID) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (CGSConnectionID) String
-
-```go
-func (p CGSConnectionID) String() string
-```
-String returns a string description of the CGSConnectionID pointer.
 
 #### type CGSConnectionIDˢ
 
@@ -3387,22 +3331,21 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type CGSConnectionIDᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
 CGSConnectionIDᵖ is a pointer to a CGSConnectionID element. Note: Pointers are
 stored differently between the application pool and internal pools.
 
-    * The application pool stores pointers as an address an architecture-dependant size.
+    * The application pool stores pointers as an address of an architecture-dependant size.
     * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
       pool identifier.
 
 #### func  NewCGSConnectionIDᵖ
 
 ```go
-func NewCGSConnectionIDᵖ(addr memory.Pointer) CGSConnectionIDᵖ
+func NewCGSConnectionIDᵖ(addr uint64) CGSConnectionIDᵖ
 ```
 NewCGSConnectionIDᵖ returns a CGSConnectionIDᵖ that points to addr in the
 application pool.
@@ -3451,13 +3394,6 @@ func (p CGSConnectionIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSConne
 ```
 Slice returns a new CGSConnectionIDˢ from the pointer using start and end
 indices.
-
-#### func (CGSConnectionIDᵖ) String
-
-```go
-func (p CGSConnectionIDᵖ) String() string
-```
-String returns a string description of the CGSConnectionIDᵖ pointer.
 
 #### func (CGSConnectionIDᵖ) Write
 
@@ -3693,8 +3629,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type CGSSurfaceIDᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -3703,7 +3638,7 @@ CGSSurfaceIDᵖ is a pointer to a CGSSurfaceID element.
 #### func  NewCGSSurfaceIDᵖ
 
 ```go
-func NewCGSSurfaceIDᵖ(addr memory.Pointer) CGSSurfaceIDᵖ
+func NewCGSSurfaceIDᵖ(addr uint64) CGSSurfaceIDᵖ
 ```
 NewCGSSurfaceIDᵖ returns a CGSSurfaceIDᵖ that points to addr in the application
 pool.
@@ -3751,13 +3686,6 @@ Read reads and returns the CGSSurfaceID element at the pointer.
 func (p CGSSurfaceIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSSurfaceIDˢ
 ```
 Slice returns a new CGSSurfaceIDˢ from the pointer using start and end indices.
-
-#### func (CGSSurfaceIDᵖ) String
-
-```go
-func (p CGSSurfaceIDᵖ) String() string
-```
-String returns a string description of the CGSSurfaceIDᵖ pointer.
 
 #### func (CGSSurfaceIDᵖ) Write
 
@@ -3914,8 +3842,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type CGSWindowIDᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -3924,7 +3851,7 @@ CGSWindowIDᵖ is a pointer to a CGSWindowID element.
 #### func  NewCGSWindowIDᵖ
 
 ```go
-func NewCGSWindowIDᵖ(addr memory.Pointer) CGSWindowIDᵖ
+func NewCGSWindowIDᵖ(addr uint64) CGSWindowIDᵖ
 ```
 NewCGSWindowIDᵖ returns a CGSWindowIDᵖ that points to addr in the application
 pool.
@@ -3971,13 +3898,6 @@ Read reads and returns the CGSWindowID element at the pointer.
 func (p CGSWindowIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSWindowIDˢ
 ```
 Slice returns a new CGSWindowIDˢ from the pointer using start and end indices.
-
-#### func (CGSWindowIDᵖ) String
-
-```go
-func (p CGSWindowIDᵖ) String() string
-```
-String returns a string description of the CGSWindowIDᵖ pointer.
 
 #### func (CGSWindowIDᵖ) Write
 
@@ -4188,8 +4108,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Charᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -4198,7 +4117,7 @@ Charᵖ is a pointer to a byte element.
 #### func  NewCharᵖ
 
 ```go
-func NewCharᵖ(addr memory.Pointer) Charᵖ
+func NewCharᵖ(addr uint64) Charᵖ
 ```
 NewCharᵖ returns a Charᵖ that points to addr in the application pool.
 
@@ -4244,13 +4163,6 @@ Read reads and returns the byte element at the pointer.
 func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ
 ```
 Slice returns a new Charˢ from the pointer using start and end indices.
-
-#### func (Charᵖ) String
-
-```go
-func (p Charᵖ) String() string
-```
-String returns a string description of the Charᵖ pointer.
 
 #### func (Charᵖ) StringSlice
 
@@ -4409,22 +4321,21 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Charᵖᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
 Charᵖᵖ is a pointer to a Charᵖ element. Note: Pointers are stored differently
 between the application pool and internal pools.
 
-    * The application pool stores pointers as an address an architecture-dependant size.
+    * The application pool stores pointers as an address of an architecture-dependant size.
     * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
       pool identifier.
 
 #### func  NewCharᵖᵖ
 
 ```go
-func NewCharᵖᵖ(addr memory.Pointer) Charᵖᵖ
+func NewCharᵖᵖ(addr uint64) Charᵖᵖ
 ```
 NewCharᵖᵖ returns a Charᵖᵖ that points to addr in the application pool.
 
@@ -4470,13 +4381,6 @@ Read reads and returns the Charᵖ element at the pointer.
 func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ
 ```
 Slice returns a new Charᵖˢ from the pointer using start and end indices.
-
-#### func (Charᵖᵖ) String
-
-```go
-func (p Charᵖᵖ) String() string
-```
-String returns a string description of the Charᵖᵖ pointer.
 
 #### func (Charᵖᵖ) Write
 
@@ -5066,8 +4970,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type DiscardFramebufferAttachmentᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5077,7 +4980,7 @@ element.
 #### func  NewDiscardFramebufferAttachmentᵖ
 
 ```go
-func NewDiscardFramebufferAttachmentᵖ(addr memory.Pointer) DiscardFramebufferAttachmentᵖ
+func NewDiscardFramebufferAttachmentᵖ(addr uint64) DiscardFramebufferAttachmentᵖ
 ```
 NewDiscardFramebufferAttachmentᵖ returns a DiscardFramebufferAttachmentᵖ that
 points to addr in the application pool.
@@ -5127,14 +5030,6 @@ func (p DiscardFramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.St
 Slice returns a new DiscardFramebufferAttachmentˢ from the pointer using start
 and end indices.
 
-#### func (DiscardFramebufferAttachmentᵖ) String
-
-```go
-func (p DiscardFramebufferAttachmentᵖ) String() string
-```
-String returns a string description of the DiscardFramebufferAttachmentᵖ
-pointer.
-
 #### func (DiscardFramebufferAttachmentᵖ) Write
 
 ```go
@@ -5176,8 +5071,7 @@ type EGLBoolean int64
 ```go
 type EGLConfig struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5186,7 +5080,7 @@ EGLConfig is a pointer to a void element.
 #### func  NewEGLConfig
 
 ```go
-func NewEGLConfig(addr memory.Pointer) EGLConfig
+func NewEGLConfig(addr uint64) EGLConfig
 ```
 NewEGLConfig returns a EGLConfig that points to addr in the application pool.
 
@@ -5226,20 +5120,12 @@ func (p EGLConfig) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
 
-#### func (EGLConfig) String
-
-```go
-func (p EGLConfig) String() string
-```
-String returns a string description of the EGLConfig pointer.
-
 #### type EGLContext
 
 ```go
 type EGLContext struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5248,7 +5134,7 @@ EGLContext is a pointer to a void element.
 #### func  NewEGLContext
 
 ```go
-func NewEGLContext(addr memory.Pointer) EGLContext
+func NewEGLContext(addr uint64) EGLContext
 ```
 NewEGLContext returns a EGLContext that points to addr in the application pool.
 
@@ -5288,13 +5174,6 @@ func (p EGLContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
 
-#### func (EGLContext) String
-
-```go
-func (p EGLContext) String() string
-```
-String returns a string description of the EGLContext pointer.
-
 #### type EGLContextːContextʳᵐ
 
 ```go
@@ -5331,8 +5210,7 @@ func (m EGLContextːContextʳᵐ) Range() [](*Context)
 ```go
 type EGLDisplay struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5341,7 +5219,7 @@ EGLDisplay is a pointer to a void element.
 #### func  NewEGLDisplay
 
 ```go
-func NewEGLDisplay(addr memory.Pointer) EGLDisplay
+func NewEGLDisplay(addr uint64) EGLDisplay
 ```
 NewEGLDisplay returns a EGLDisplay that points to addr in the application pool.
 
@@ -5381,20 +5259,12 @@ func (p EGLDisplay) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
 
-#### func (EGLDisplay) String
-
-```go
-func (p EGLDisplay) String() string
-```
-String returns a string description of the EGLDisplay pointer.
-
 #### type EGLSurface
 
 ```go
 type EGLSurface struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5403,7 +5273,7 @@ EGLSurface is a pointer to a void element.
 #### func  NewEGLSurface
 
 ```go
-func NewEGLSurface(addr memory.Pointer) EGLSurface
+func NewEGLSurface(addr uint64) EGLSurface
 ```
 NewEGLSurface returns a EGLSurface that points to addr in the application pool.
 
@@ -5442,13 +5312,6 @@ chained.
 func (p EGLSurface) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (EGLSurface) String
-
-```go
-func (p EGLSurface) String() string
-```
-String returns a string description of the EGLSurface pointer.
 
 #### type EGLint
 
@@ -5598,8 +5461,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type EGLintᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -5608,7 +5470,7 @@ EGLintᵖ is a pointer to a EGLint element.
 #### func  NewEGLintᵖ
 
 ```go
-func NewEGLintᵖ(addr memory.Pointer) EGLintᵖ
+func NewEGLintᵖ(addr uint64) EGLintᵖ
 ```
 NewEGLintᵖ returns a EGLintᵖ that points to addr in the application pool.
 
@@ -5654,13 +5516,6 @@ Read reads and returns the EGLint element at the pointer.
 func (p EGLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) EGLintˢ
 ```
 Slice returns a new EGLintˢ from the pointer using start and end indices.
-
-#### func (EGLintᵖ) String
-
-```go
-func (p EGLintᵖ) String() string
-```
-String returns a string description of the EGLintᵖ pointer.
 
 #### func (EGLintᵖ) Write
 
@@ -6269,8 +6124,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type F32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -6279,7 +6133,7 @@ F32ᵖ is a pointer to a float32 element.
 #### func  NewF32ᵖ
 
 ```go
-func NewF32ᵖ(addr memory.Pointer) F32ᵖ
+func NewF32ᵖ(addr uint64) F32ᵖ
 ```
 NewF32ᵖ returns a F32ᵖ that points to addr in the application pool.
 
@@ -6325,13 +6179,6 @@ Read reads and returns the float32 element at the pointer.
 func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ
 ```
 Slice returns a new F32ˢ from the pointer using start and end indices.
-
-#### func (F32ᵖ) String
-
-```go
-func (p F32ᵖ) String() string
-```
-String returns a string description of the F32ᵖ pointer.
 
 #### func (F32ᵖ) Write
 
@@ -6481,8 +6328,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type F64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -6491,7 +6337,7 @@ F64ᵖ is a pointer to a float64 element.
 #### func  NewF64ᵖ
 
 ```go
-func NewF64ᵖ(addr memory.Pointer) F64ᵖ
+func NewF64ᵖ(addr uint64) F64ᵖ
 ```
 NewF64ᵖ returns a F64ᵖ that points to addr in the application pool.
 
@@ -6537,13 +6383,6 @@ Read reads and returns the float64 element at the pointer.
 func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ
 ```
 Slice returns a new F64ˢ from the pointer using start and end indices.
-
-#### func (F64ᵖ) String
-
-```go
-func (p F64ᵖ) String() string
-```
-String returns a string description of the F64ᵖ pointer.
 
 #### func (F64ᵖ) Write
 
@@ -7014,8 +6853,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type FramebufferAttachmentᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -7024,7 +6862,7 @@ FramebufferAttachmentᵖ is a pointer to a FramebufferAttachment element.
 #### func  NewFramebufferAttachmentᵖ
 
 ```go
-func NewFramebufferAttachmentᵖ(addr memory.Pointer) FramebufferAttachmentᵖ
+func NewFramebufferAttachmentᵖ(addr uint64) FramebufferAttachmentᵖ
 ```
 NewFramebufferAttachmentᵖ returns a FramebufferAttachmentᵖ that points to addr
 in the application pool.
@@ -7073,13 +6911,6 @@ func (p FramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Fr
 ```
 Slice returns a new FramebufferAttachmentˢ from the pointer using start and end
 indices.
-
-#### func (FramebufferAttachmentᵖ) String
-
-```go
-func (p FramebufferAttachmentᵖ) String() string
-```
-String returns a string description of the FramebufferAttachmentᵖ pointer.
 
 #### func (FramebufferAttachmentᵖ) Write
 
@@ -7268,8 +7099,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type FramebufferIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -7278,7 +7108,7 @@ FramebufferIdᵖ is a pointer to a FramebufferId element.
 #### func  NewFramebufferIdᵖ
 
 ```go
-func NewFramebufferIdᵖ(addr memory.Pointer) FramebufferIdᵖ
+func NewFramebufferIdᵖ(addr uint64) FramebufferIdᵖ
 ```
 NewFramebufferIdᵖ returns a FramebufferIdᵖ that points to addr in the
 application pool.
@@ -7326,13 +7156,6 @@ Read reads and returns the FramebufferId element at the pointer.
 func (p FramebufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferIdˢ
 ```
 Slice returns a new FramebufferIdˢ from the pointer using start and end indices.
-
-#### func (FramebufferIdᵖ) String
-
-```go
-func (p FramebufferIdᵖ) String() string
-```
-String returns a string description of the FramebufferIdᵖ pointer.
 
 #### func (FramebufferIdᵖ) Write
 
@@ -7465,8 +7288,7 @@ func (m FramebufferTargetːFramebufferIdᵐ) Range() []FramebufferId
 ```go
 type GLXContext struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -7475,7 +7297,7 @@ GLXContext is a pointer to a void element.
 #### func  NewGLXContext
 
 ```go
-func NewGLXContext(addr memory.Pointer) GLXContext
+func NewGLXContext(addr uint64) GLXContext
 ```
 NewGLXContext returns a GLXContext that points to addr in the application pool.
 
@@ -7515,13 +7337,6 @@ func (p GLXContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
 
-#### func (GLXContext) String
-
-```go
-func (p GLXContext) String() string
-```
-String returns a string description of the GLXContext pointer.
-
 #### type GLXContextːContextʳᵐ
 
 ```go
@@ -7558,8 +7373,7 @@ func (m GLXContextːContextʳᵐ) Range() [](*Context)
 ```go
 type GLXDrawable struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -7568,7 +7382,7 @@ GLXDrawable is a pointer to a void element.
 #### func  NewGLXDrawable
 
 ```go
-func NewGLXDrawable(addr memory.Pointer) GLXDrawable
+func NewGLXDrawable(addr uint64) GLXDrawable
 ```
 NewGLXDrawable returns a GLXDrawable that points to addr in the application
 pool.
@@ -7608,13 +7422,6 @@ chained.
 func (p GLXDrawable) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (GLXDrawable) String
-
-```go
-func (p GLXDrawable) String() string
-```
-String returns a string description of the GLXDrawable pointer.
 
 #### type GlActiveTexture
 
@@ -23850,8 +23657,7 @@ func (g *Globals) Init()
 ```go
 type HDC struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -23860,7 +23666,7 @@ HDC is a pointer to a void element.
 #### func  NewHDC
 
 ```go
-func NewHDC(addr memory.Pointer) HDC
+func NewHDC(addr uint64) HDC
 ```
 NewHDC returns a HDC that points to addr in the application pool.
 
@@ -23900,20 +23706,12 @@ func (p HDC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
 
-#### func (HDC) String
-
-```go
-func (p HDC) String() string
-```
-String returns a string description of the HDC pointer.
-
 #### type HGLRC
 
 ```go
 type HGLRC struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -23922,7 +23720,7 @@ HGLRC is a pointer to a void element.
 #### func  NewHGLRC
 
 ```go
-func NewHGLRC(addr memory.Pointer) HGLRC
+func NewHGLRC(addr uint64) HGLRC
 ```
 NewHGLRC returns a HGLRC that points to addr in the application pool.
 
@@ -23961,13 +23759,6 @@ chained.
 func (p HGLRC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (HGLRC) String
-
-```go
-func (p HGLRC) String() string
-```
-String returns a string description of the HGLRC pointer.
 
 #### type HGLRCːContextʳᵐ
 
@@ -24085,8 +23876,7 @@ func (c *Image) Init()
 ```go
 type ImageOES struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -24095,7 +23885,7 @@ ImageOES is a pointer to a void element.
 #### func  NewImageOES
 
 ```go
-func NewImageOES(addr memory.Pointer) ImageOES
+func NewImageOES(addr uint64) ImageOES
 ```
 NewImageOES returns a ImageOES that points to addr in the application pool.
 
@@ -24134,13 +23924,6 @@ chained.
 func (p ImageOES) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (ImageOES) String
-
-```go
-func (p ImageOES) String() string
-```
-String returns a string description of the ImageOES pointer.
 
 #### type ImageTargetRenderbufferStorage
 
@@ -24279,8 +24062,7 @@ func (v IndexedBufferTarget) String() string
 ```go
 type IndicesPointer struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -24289,7 +24071,7 @@ IndicesPointer is a pointer to a void element.
 #### func  NewIndicesPointer
 
 ```go
-func NewIndicesPointer(addr memory.Pointer) IndicesPointer
+func NewIndicesPointer(addr uint64) IndicesPointer
 ```
 NewIndicesPointer returns a IndicesPointer that points to addr in the
 application pool.
@@ -24330,13 +24112,6 @@ chained.
 func (p IndicesPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (IndicesPointer) String
-
-```go
-func (p IndicesPointer) String() string
-```
-String returns a string description of the IndicesPointer pointer.
 
 #### type IndicesType
 
@@ -24501,8 +24276,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Intᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -24511,7 +24285,7 @@ Intᵖ is a pointer to a int64 element.
 #### func  NewIntᵖ
 
 ```go
-func NewIntᵖ(addr memory.Pointer) Intᵖ
+func NewIntᵖ(addr uint64) Intᵖ
 ```
 NewIntᵖ returns a Intᵖ that points to addr in the application pool.
 
@@ -24557,13 +24331,6 @@ Read reads and returns the int64 element at the pointer.
 func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ
 ```
 Slice returns a new Intˢ from the pointer using start and end indices.
-
-#### func (Intᵖ) String
-
-```go
-func (p Intᵖ) String() string
-```
-String returns a string description of the Intᵖ pointer.
 
 #### func (Intᵖ) Write
 
@@ -24754,8 +24521,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Mat2fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -24764,7 +24530,7 @@ Mat2fᵖ is a pointer to a Mat2f element.
 #### func  NewMat2fᵖ
 
 ```go
-func NewMat2fᵖ(addr memory.Pointer) Mat2fᵖ
+func NewMat2fᵖ(addr uint64) Mat2fᵖ
 ```
 NewMat2fᵖ returns a Mat2fᵖ that points to addr in the application pool.
 
@@ -24810,13 +24576,6 @@ Read reads and returns the Mat2f element at the pointer.
 func (p Mat2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ
 ```
 Slice returns a new Mat2fˢ from the pointer using start and end indices.
-
-#### func (Mat2fᵖ) String
-
-```go
-func (p Mat2fᵖ) String() string
-```
-String returns a string description of the Mat2fᵖ pointer.
 
 #### func (Mat2fᵖ) Write
 
@@ -24985,8 +24744,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Mat3fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -24995,7 +24753,7 @@ Mat3fᵖ is a pointer to a Mat3f element.
 #### func  NewMat3fᵖ
 
 ```go
-func NewMat3fᵖ(addr memory.Pointer) Mat3fᵖ
+func NewMat3fᵖ(addr uint64) Mat3fᵖ
 ```
 NewMat3fᵖ returns a Mat3fᵖ that points to addr in the application pool.
 
@@ -25041,13 +24799,6 @@ Read reads and returns the Mat3f element at the pointer.
 func (p Mat3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ
 ```
 Slice returns a new Mat3fˢ from the pointer using start and end indices.
-
-#### func (Mat3fᵖ) String
-
-```go
-func (p Mat3fᵖ) String() string
-```
-String returns a string description of the Mat3fᵖ pointer.
 
 #### func (Mat3fᵖ) Write
 
@@ -25216,8 +24967,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Mat4fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -25226,7 +24976,7 @@ Mat4fᵖ is a pointer to a Mat4f element.
 #### func  NewMat4fᵖ
 
 ```go
-func NewMat4fᵖ(addr memory.Pointer) Mat4fᵖ
+func NewMat4fᵖ(addr uint64) Mat4fᵖ
 ```
 NewMat4fᵖ returns a Mat4fᵖ that points to addr in the application pool.
 
@@ -25272,13 +25022,6 @@ Read reads and returns the Mat4f element at the pointer.
 func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ
 ```
 Slice returns a new Mat4fˢ from the pointer using start and end indices.
-
-#### func (Mat4fᵖ) String
-
-```go
-func (p Mat4fᵖ) String() string
-```
-String returns a string description of the Mat4fᵖ pointer.
 
 #### func (Mat4fᵖ) Write
 
@@ -25709,8 +25452,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type QueryIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -25719,7 +25461,7 @@ QueryIdᵖ is a pointer to a QueryId element.
 #### func  NewQueryIdᵖ
 
 ```go
-func NewQueryIdᵖ(addr memory.Pointer) QueryIdᵖ
+func NewQueryIdᵖ(addr uint64) QueryIdᵖ
 ```
 NewQueryIdᵖ returns a QueryIdᵖ that points to addr in the application pool.
 
@@ -25765,13 +25507,6 @@ Read reads and returns the QueryId element at the pointer.
 func (p QueryIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ
 ```
 Slice returns a new QueryIdˢ from the pointer using start and end indices.
-
-#### func (QueryIdᵖ) String
-
-```go
-func (p QueryIdᵖ) String() string
-```
-String returns a string description of the QueryIdᵖ pointer.
 
 #### func (QueryIdᵖ) Write
 
@@ -26287,8 +26022,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type RenderbufferIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -26297,7 +26031,7 @@ RenderbufferIdᵖ is a pointer to a RenderbufferId element.
 #### func  NewRenderbufferIdᵖ
 
 ```go
-func NewRenderbufferIdᵖ(addr memory.Pointer) RenderbufferIdᵖ
+func NewRenderbufferIdᵖ(addr uint64) RenderbufferIdᵖ
 ```
 NewRenderbufferIdᵖ returns a RenderbufferIdᵖ that points to addr in the
 application pool.
@@ -26346,13 +26080,6 @@ func (p RenderbufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Renderbuf
 ```
 Slice returns a new RenderbufferIdˢ from the pointer using start and end
 indices.
-
-#### func (RenderbufferIdᵖ) String
-
-```go
-func (p RenderbufferIdᵖ) String() string
-```
-String returns a string description of the RenderbufferIdᵖ pointer.
 
 #### func (RenderbufferIdᵖ) Write
 
@@ -26900,8 +26627,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type S32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -26910,7 +26636,7 @@ S32ᵖ is a pointer to a int32 element.
 #### func  NewS32ᵖ
 
 ```go
-func NewS32ᵖ(addr memory.Pointer) S32ᵖ
+func NewS32ᵖ(addr uint64) S32ᵖ
 ```
 NewS32ᵖ returns a S32ᵖ that points to addr in the application pool.
 
@@ -26956,13 +26682,6 @@ Read reads and returns the int32 element at the pointer.
 func (p S32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ
 ```
 Slice returns a new S32ˢ from the pointer using start and end indices.
-
-#### func (S32ᵖ) String
-
-```go
-func (p S32ᵖ) String() string
-```
-String returns a string description of the S32ᵖ pointer.
 
 #### func (S32ᵖ) Write
 
@@ -27112,8 +26831,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type S64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -27122,7 +26840,7 @@ S64ᵖ is a pointer to a int64 element.
 #### func  NewS64ᵖ
 
 ```go
-func NewS64ᵖ(addr memory.Pointer) S64ᵖ
+func NewS64ᵖ(addr uint64) S64ᵖ
 ```
 NewS64ᵖ returns a S64ᵖ that points to addr in the application pool.
 
@@ -27168,13 +26886,6 @@ Read reads and returns the int64 element at the pointer.
 func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ
 ```
 Slice returns a new S64ˢ from the pointer using start and end indices.
-
-#### func (S64ᵖ) String
-
-```go
-func (p S64ᵖ) String() string
-```
-String returns a string description of the S64ᵖ pointer.
 
 #### func (S64ᵖ) Write
 
@@ -27387,8 +27098,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type ShaderAttribTypeᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -27397,7 +27107,7 @@ ShaderAttribTypeᵖ is a pointer to a ShaderAttribType element.
 #### func  NewShaderAttribTypeᵖ
 
 ```go
-func NewShaderAttribTypeᵖ(addr memory.Pointer) ShaderAttribTypeᵖ
+func NewShaderAttribTypeᵖ(addr uint64) ShaderAttribTypeᵖ
 ```
 NewShaderAttribTypeᵖ returns a ShaderAttribTypeᵖ that points to addr in the
 application pool.
@@ -27446,13 +27156,6 @@ func (p ShaderAttribTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderA
 ```
 Slice returns a new ShaderAttribTypeˢ from the pointer using start and end
 indices.
-
-#### func (ShaderAttribTypeᵖ) String
-
-```go
-func (p ShaderAttribTypeᵖ) String() string
-```
-String returns a string description of the ShaderAttribTypeᵖ pointer.
 
 #### func (ShaderAttribTypeᵖ) Write
 
@@ -27640,8 +27343,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type ShaderIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -27650,7 +27352,7 @@ ShaderIdᵖ is a pointer to a ShaderId element.
 #### func  NewShaderIdᵖ
 
 ```go
-func NewShaderIdᵖ(addr memory.Pointer) ShaderIdᵖ
+func NewShaderIdᵖ(addr uint64) ShaderIdᵖ
 ```
 NewShaderIdᵖ returns a ShaderIdᵖ that points to addr in the application pool.
 
@@ -27696,13 +27398,6 @@ Read reads and returns the ShaderId element at the pointer.
 func (p ShaderIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ
 ```
 Slice returns a new ShaderIdˢ from the pointer using start and end indices.
-
-#### func (ShaderIdᵖ) String
-
-```go
-func (p ShaderIdᵖ) String() string
-```
-String returns a string description of the ShaderIdᵖ pointer.
 
 #### func (ShaderIdᵖ) Write
 
@@ -27954,8 +27649,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type ShaderUniformTypeᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -27964,7 +27658,7 @@ ShaderUniformTypeᵖ is a pointer to a ShaderUniformType element.
 #### func  NewShaderUniformTypeᵖ
 
 ```go
-func NewShaderUniformTypeᵖ(addr memory.Pointer) ShaderUniformTypeᵖ
+func NewShaderUniformTypeᵖ(addr uint64) ShaderUniformTypeᵖ
 ```
 NewShaderUniformTypeᵖ returns a ShaderUniformTypeᵖ that points to addr in the
 application pool.
@@ -28014,13 +27708,6 @@ func (p ShaderUniformTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Shader
 Slice returns a new ShaderUniformTypeˢ from the pointer using start and end
 indices.
 
-#### func (ShaderUniformTypeᵖ) String
-
-```go
-func (p ShaderUniformTypeᵖ) String() string
-```
-String returns a string description of the ShaderUniformTypeᵖ pointer.
-
 #### func (ShaderUniformTypeᵖ) Write
 
 ```go
@@ -28047,9 +27734,8 @@ Slice is the interface implemented by all slice types
 type SliceInfo struct {
 	binary.Generate
 	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
+	Base  uint64         // Address of first element.
 	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
 }
 ```
 
@@ -28877,8 +28563,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type TextureIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -28887,7 +28572,7 @@ TextureIdᵖ is a pointer to a TextureId element.
 #### func  NewTextureIdᵖ
 
 ```go
-func NewTextureIdᵖ(addr memory.Pointer) TextureIdᵖ
+func NewTextureIdᵖ(addr uint64) TextureIdᵖ
 ```
 NewTextureIdᵖ returns a TextureIdᵖ that points to addr in the application pool.
 
@@ -28933,13 +28618,6 @@ Read reads and returns the TextureId element at the pointer.
 func (p TextureIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ
 ```
 Slice returns a new TextureIdˢ from the pointer using start and end indices.
-
-#### func (TextureIdᵖ) String
-
-```go
-func (p TextureIdᵖ) String() string
-```
-String returns a string description of the TextureIdᵖ pointer.
 
 #### func (TextureIdᵖ) Write
 
@@ -29107,8 +28785,7 @@ func (v TextureParameter_WrapMode) String() string
 ```go
 type TexturePointer struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -29117,7 +28794,7 @@ TexturePointer is a pointer to a void element.
 #### func  NewTexturePointer
 
 ```go
-func NewTexturePointer(addr memory.Pointer) TexturePointer
+func NewTexturePointer(addr uint64) TexturePointer
 ```
 NewTexturePointer returns a TexturePointer that points to addr in the
 application pool.
@@ -29158,13 +28835,6 @@ chained.
 func (p TexturePointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (TexturePointer) String
-
-```go
-func (p TexturePointer) String() string
-```
-String returns a string description of the TexturePointer pointer.
 
 #### type TextureTarget
 
@@ -29605,8 +29275,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type U32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -29615,7 +29284,7 @@ U32ᵖ is a pointer to a uint32 element.
 #### func  NewU32ᵖ
 
 ```go
-func NewU32ᵖ(addr memory.Pointer) U32ᵖ
+func NewU32ᵖ(addr uint64) U32ᵖ
 ```
 NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
 
@@ -29661,13 +29330,6 @@ Read reads and returns the uint32 element at the pointer.
 func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ
 ```
 Slice returns a new U32ˢ from the pointer using start and end indices.
-
-#### func (U32ᵖ) String
-
-```go
-func (p U32ᵖ) String() string
-```
-String returns a string description of the U32ᵖ pointer.
 
 #### func (U32ᵖ) Write
 
@@ -29817,8 +29479,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type U64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -29827,7 +29488,7 @@ U64ᵖ is a pointer to a uint64 element.
 #### func  NewU64ᵖ
 
 ```go
-func NewU64ᵖ(addr memory.Pointer) U64ᵖ
+func NewU64ᵖ(addr uint64) U64ᵖ
 ```
 NewU64ᵖ returns a U64ᵖ that points to addr in the application pool.
 
@@ -29873,13 +29534,6 @@ Read reads and returns the uint64 element at the pointer.
 func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ
 ```
 Slice returns a new U64ˢ from the pointer using start and end indices.
-
-#### func (U64ᵖ) String
-
-```go
-func (p U64ᵖ) String() string
-```
-String returns a string description of the U64ᵖ pointer.
 
 #### func (U64ᵖ) Write
 
@@ -30029,8 +29683,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type U8ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -30039,7 +29692,7 @@ U8ᵖ is a pointer to a uint8 element.
 #### func  NewU8ᵖ
 
 ```go
-func NewU8ᵖ(addr memory.Pointer) U8ᵖ
+func NewU8ᵖ(addr uint64) U8ᵖ
 ```
 NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
 
@@ -30085,13 +29738,6 @@ Read reads and returns the uint8 element at the pointer.
 func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ
 ```
 Slice returns a new U8ˢ from the pointer using start and end indices.
-
-#### func (U8ᵖ) String
-
-```go
-func (p U8ᵖ) String() string
-```
-String returns a string description of the U8ᵖ pointer.
 
 #### func (U8ᵖ) Write
 
@@ -30370,8 +30016,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec2fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -30380,7 +30025,7 @@ Vec2fᵖ is a pointer to a Vec2f element.
 #### func  NewVec2fᵖ
 
 ```go
-func NewVec2fᵖ(addr memory.Pointer) Vec2fᵖ
+func NewVec2fᵖ(addr uint64) Vec2fᵖ
 ```
 NewVec2fᵖ returns a Vec2fᵖ that points to addr in the application pool.
 
@@ -30426,13 +30071,6 @@ Read reads and returns the Vec2f element at the pointer.
 func (p Vec2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2fˢ
 ```
 Slice returns a new Vec2fˢ from the pointer using start and end indices.
-
-#### func (Vec2fᵖ) String
-
-```go
-func (p Vec2fᵖ) String() string
-```
-String returns a string description of the Vec2fᵖ pointer.
 
 #### func (Vec2fᵖ) Write
 
@@ -30601,8 +30239,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec2iᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -30611,7 +30248,7 @@ Vec2iᵖ is a pointer to a Vec2i element.
 #### func  NewVec2iᵖ
 
 ```go
-func NewVec2iᵖ(addr memory.Pointer) Vec2iᵖ
+func NewVec2iᵖ(addr uint64) Vec2iᵖ
 ```
 NewVec2iᵖ returns a Vec2iᵖ that points to addr in the application pool.
 
@@ -30657,13 +30294,6 @@ Read reads and returns the Vec2i element at the pointer.
 func (p Vec2iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ
 ```
 Slice returns a new Vec2iˢ from the pointer using start and end indices.
-
-#### func (Vec2iᵖ) String
-
-```go
-func (p Vec2iᵖ) String() string
-```
-String returns a string description of the Vec2iᵖ pointer.
 
 #### func (Vec2iᵖ) Write
 
@@ -30848,8 +30478,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec3fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -30858,7 +30487,7 @@ Vec3fᵖ is a pointer to a Vec3f element.
 #### func  NewVec3fᵖ
 
 ```go
-func NewVec3fᵖ(addr memory.Pointer) Vec3fᵖ
+func NewVec3fᵖ(addr uint64) Vec3fᵖ
 ```
 NewVec3fᵖ returns a Vec3fᵖ that points to addr in the application pool.
 
@@ -30904,13 +30533,6 @@ Read reads and returns the Vec3f element at the pointer.
 func (p Vec3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3fˢ
 ```
 Slice returns a new Vec3fˢ from the pointer using start and end indices.
-
-#### func (Vec3fᵖ) String
-
-```go
-func (p Vec3fᵖ) String() string
-```
-String returns a string description of the Vec3fᵖ pointer.
 
 #### func (Vec3fᵖ) Write
 
@@ -31079,8 +30701,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec3iᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -31089,7 +30710,7 @@ Vec3iᵖ is a pointer to a Vec3i element.
 #### func  NewVec3iᵖ
 
 ```go
-func NewVec3iᵖ(addr memory.Pointer) Vec3iᵖ
+func NewVec3iᵖ(addr uint64) Vec3iᵖ
 ```
 NewVec3iᵖ returns a Vec3iᵖ that points to addr in the application pool.
 
@@ -31135,13 +30756,6 @@ Read reads and returns the Vec3i element at the pointer.
 func (p Vec3iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ
 ```
 Slice returns a new Vec3iˢ from the pointer using start and end indices.
-
-#### func (Vec3iᵖ) String
-
-```go
-func (p Vec3iᵖ) String() string
-```
-String returns a string description of the Vec3iᵖ pointer.
 
 #### func (Vec3iᵖ) Write
 
@@ -31326,8 +30940,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec4fᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -31336,7 +30949,7 @@ Vec4fᵖ is a pointer to a Vec4f element.
 #### func  NewVec4fᵖ
 
 ```go
-func NewVec4fᵖ(addr memory.Pointer) Vec4fᵖ
+func NewVec4fᵖ(addr uint64) Vec4fᵖ
 ```
 NewVec4fᵖ returns a Vec4fᵖ that points to addr in the application pool.
 
@@ -31382,13 +30995,6 @@ Read reads and returns the Vec4f element at the pointer.
 func (p Vec4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4fˢ
 ```
 Slice returns a new Vec4fˢ from the pointer using start and end indices.
-
-#### func (Vec4fᵖ) String
-
-```go
-func (p Vec4fᵖ) String() string
-```
-String returns a string description of the Vec4fᵖ pointer.
 
 #### func (Vec4fᵖ) Write
 
@@ -31557,8 +31163,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type Vec4iᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -31567,7 +31172,7 @@ Vec4iᵖ is a pointer to a Vec4i element.
 #### func  NewVec4iᵖ
 
 ```go
-func NewVec4iᵖ(addr memory.Pointer) Vec4iᵖ
+func NewVec4iᵖ(addr uint64) Vec4iᵖ
 ```
 NewVec4iᵖ returns a Vec4iᵖ that points to addr in the application pool.
 
@@ -31613,13 +31218,6 @@ Read reads and returns the Vec4i element at the pointer.
 func (p Vec4iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ
 ```
 Slice returns a new Vec4iˢ from the pointer using start and end indices.
-
-#### func (Vec4iᵖ) String
-
-```go
-func (p Vec4iᵖ) String() string
-```
-String returns a string description of the Vec4iᵖ pointer.
 
 #### func (Vec4iᵖ) Write
 
@@ -31860,8 +31458,7 @@ returned which is the minimum of s.Count and len(src).
 ```go
 type VertexArrayIdᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -31870,7 +31467,7 @@ VertexArrayIdᵖ is a pointer to a VertexArrayId element.
 #### func  NewVertexArrayIdᵖ
 
 ```go
-func NewVertexArrayIdᵖ(addr memory.Pointer) VertexArrayIdᵖ
+func NewVertexArrayIdᵖ(addr uint64) VertexArrayIdᵖ
 ```
 NewVertexArrayIdᵖ returns a VertexArrayIdᵖ that points to addr in the
 application pool.
@@ -31918,13 +31515,6 @@ Read reads and returns the VertexArrayId element at the pointer.
 func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ
 ```
 Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
-
-#### func (VertexArrayIdᵖ) String
-
-```go
-func (p VertexArrayIdᵖ) String() string
-```
-String returns a string description of the VertexArrayIdᵖ pointer.
 
 #### func (VertexArrayIdᵖ) Write
 
@@ -32038,8 +31628,7 @@ func (a VertexAttributeArray) String() string
 ```go
 type VertexPointer struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -32048,7 +31637,7 @@ VertexPointer is a pointer to a void element.
 #### func  NewVertexPointer
 
 ```go
-func NewVertexPointer(addr memory.Pointer) VertexPointer
+func NewVertexPointer(addr uint64) VertexPointer
 ```
 NewVertexPointer returns a VertexPointer that points to addr in the application
 pool.
@@ -32089,13 +31678,6 @@ chained.
 func (p VertexPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (VertexPointer) String
-
-```go
-func (p VertexPointer) String() string
-```
-String returns a string description of the VertexPointer pointer.
 
 #### type Voidˢ
 
@@ -32206,8 +31788,7 @@ String returns a string description of the Voidˢ slice.
 ```go
 type Voidᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 ```
 
@@ -32216,7 +31797,7 @@ Voidᵖ is a pointer to a void element.
 #### func  NewVoidᵖ
 
 ```go
-func NewVoidᵖ(addr memory.Pointer) Voidᵖ
+func NewVoidᵖ(addr uint64) Voidᵖ
 ```
 NewVoidᵖ returns a Voidᵖ that points to addr in the application pool.
 
@@ -32255,13 +31836,6 @@ chained.
 func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
 ```
 Slice returns a new Voidˢ from the pointer using start and end indices.
-
-#### func (Voidᵖ) String
-
-```go
-func (p Voidᵖ) String() string
-```
-String returns a string description of the Voidᵖ pointer.
 
 #### type WglCreateContext
 

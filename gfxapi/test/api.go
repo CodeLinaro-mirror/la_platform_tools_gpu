@@ -20,13 +20,12 @@ type remapped uint32
 // U8ᵖ is a pointer to a uint8 element.
 type U8ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
-func NewU8ᵖ(addr memory.Pointer) U8ᵖ {
-	return U8ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewU8ᵖ(addr uint64) U8ᵖ {
+	return U8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that U8ᵖ points to.
@@ -46,16 +45,16 @@ func (p U8ᵖ) Write(value uint8, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p U8ᵖ) OnRead(ϟs *gfxapi.State) U8ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p U8ᵖ) OnWrite(ϟs *gfxapi.State) U8ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -65,24 +64,18 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U8ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the U8ᵖ pointer.
-func (p U8ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U16ᵖ is a pointer to a uint16 element.
 type U16ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewU16ᵖ returns a U16ᵖ that points to addr in the application pool.
-func NewU16ᵖ(addr memory.Pointer) U16ᵖ {
-	return U16ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewU16ᵖ(addr uint64) U16ᵖ {
+	return U16ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that U16ᵖ points to.
@@ -102,16 +95,16 @@ func (p U16ᵖ) Write(value uint16, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p U16ᵖ) OnRead(ϟs *gfxapi.State) U16ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p U16ᵖ) OnWrite(ϟs *gfxapi.State) U16ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -121,24 +114,18 @@ func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U16ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the U16ᵖ pointer.
-func (p U16ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return U16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U32ᵖ is a pointer to a uint32 element.
 type U32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewU32ᵖ returns a U32ᵖ that points to addr in the application pool.
-func NewU32ᵖ(addr memory.Pointer) U32ᵖ {
-	return U32ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewU32ᵖ(addr uint64) U32ᵖ {
+	return U32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that U32ᵖ points to.
@@ -158,16 +145,16 @@ func (p U32ᵖ) Write(value uint32, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p U32ᵖ) OnRead(ϟs *gfxapi.State) U32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p U32ᵖ) OnWrite(ϟs *gfxapi.State) U32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -177,24 +164,18 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the U32ᵖ pointer.
-func (p U32ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Intᵖ is a pointer to a int64 element.
 type Intᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewIntᵖ returns a Intᵖ that points to addr in the application pool.
-func NewIntᵖ(addr memory.Pointer) Intᵖ {
-	return Intᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewIntᵖ(addr uint64) Intᵖ {
+	return Intᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Intᵖ points to.
@@ -214,16 +195,16 @@ func (p Intᵖ) Write(value int64, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Intᵖ) OnRead(ϟs *gfxapi.State) Intᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Intᵖ) OnWrite(ϟs *gfxapi.State) Intᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -233,24 +214,18 @@ func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Intˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Intᵖ pointer.
-func (p Intᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Intˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Charᵖ is a pointer to a byte element.
 type Charᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewCharᵖ returns a Charᵖ that points to addr in the application pool.
-func NewCharᵖ(addr memory.Pointer) Charᵖ {
-	return Charᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewCharᵖ(addr uint64) Charᵖ {
+	return Charᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Charᵖ points to.
@@ -270,16 +245,16 @@ func (p Charᵖ) Write(value byte, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Charᵖ) OnRead(ϟs *gfxapi.State) Charᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Charᵖ) OnWrite(ϟs *gfxapi.State) Charᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -287,7 +262,7 @@ func (p Charᵖ) OnWrite(ϟs *gfxapi.State) Charᵖ {
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
 // If incNullTerm is true then the null-terminator is included in the slice.
 func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
-	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
 	for {
 		if b, _ := d.Uint8(); b == 0 {
 			if incNullTerm {
@@ -305,33 +280,27 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Charᵖ pointer.
-func (p Charᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Charᵖᵖ is a pointer to a Charᵖ element.
 // Note: Pointers are stored differently between the application pool and internal pools.
-//  * The application pool stores pointers as an address an architecture-dependant size.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
 //  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
 //    pool identifier.
 type Charᵖᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewCharᵖᵖ returns a Charᵖᵖ that points to addr in the application pool.
-func NewCharᵖᵖ(addr memory.Pointer) Charᵖᵖ {
-	return Charᵖᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewCharᵖᵖ(addr uint64) Charᵖᵖ {
+	return Charᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
 func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pool == memory.ApplicationPool {
+	if p.Pointer.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -350,16 +319,16 @@ func (p Charᵖᵖ) Write(value Charᵖ, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Charᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -369,24 +338,18 @@ func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Charᵖᵖ pointer.
-func (p Charᵖᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // S8ᵖ is a pointer to a int8 element.
 type S8ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewS8ᵖ returns a S8ᵖ that points to addr in the application pool.
-func NewS8ᵖ(addr memory.Pointer) S8ᵖ {
-	return S8ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewS8ᵖ(addr uint64) S8ᵖ {
+	return S8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that S8ᵖ points to.
@@ -406,16 +369,16 @@ func (p S8ᵖ) Write(value int8, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p S8ᵖ) OnRead(ϟs *gfxapi.State) S8ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p S8ᵖ) OnWrite(ϟs *gfxapi.State) S8ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -425,24 +388,18 @@ func (p S8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S8ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the S8ᵖ pointer.
-func (p S8ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return S8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // S16ᵖ is a pointer to a int16 element.
 type S16ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewS16ᵖ returns a S16ᵖ that points to addr in the application pool.
-func NewS16ᵖ(addr memory.Pointer) S16ᵖ {
-	return S16ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewS16ᵖ(addr uint64) S16ᵖ {
+	return S16ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that S16ᵖ points to.
@@ -462,16 +419,16 @@ func (p S16ᵖ) Write(value int16, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p S16ᵖ) OnRead(ϟs *gfxapi.State) S16ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p S16ᵖ) OnWrite(ϟs *gfxapi.State) S16ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -481,24 +438,18 @@ func (p S16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S16ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the S16ᵖ pointer.
-func (p S16ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return S16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // F32ᵖ is a pointer to a float32 element.
 type F32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewF32ᵖ returns a F32ᵖ that points to addr in the application pool.
-func NewF32ᵖ(addr memory.Pointer) F32ᵖ {
-	return F32ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewF32ᵖ(addr uint64) F32ᵖ {
+	return F32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that F32ᵖ points to.
@@ -518,16 +469,16 @@ func (p F32ᵖ) Write(value float32, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p F32ᵖ) OnRead(ϟs *gfxapi.State) F32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p F32ᵖ) OnWrite(ϟs *gfxapi.State) F32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -537,24 +488,18 @@ func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the F32ᵖ pointer.
-func (p F32ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return F32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // S32ᵖ is a pointer to a int32 element.
 type S32ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewS32ᵖ returns a S32ᵖ that points to addr in the application pool.
-func NewS32ᵖ(addr memory.Pointer) S32ᵖ {
-	return S32ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewS32ᵖ(addr uint64) S32ᵖ {
+	return S32ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that S32ᵖ points to.
@@ -574,16 +519,16 @@ func (p S32ᵖ) Write(value int32, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p S32ᵖ) OnRead(ϟs *gfxapi.State) S32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p S32ᵖ) OnWrite(ϟs *gfxapi.State) S32ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -593,24 +538,18 @@ func (p S32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S32ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the S32ᵖ pointer.
-func (p S32ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return S32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // F64ᵖ is a pointer to a float64 element.
 type F64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewF64ᵖ returns a F64ᵖ that points to addr in the application pool.
-func NewF64ᵖ(addr memory.Pointer) F64ᵖ {
-	return F64ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewF64ᵖ(addr uint64) F64ᵖ {
+	return F64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that F64ᵖ points to.
@@ -630,16 +569,16 @@ func (p F64ᵖ) Write(value float64, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p F64ᵖ) OnRead(ϟs *gfxapi.State) F64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p F64ᵖ) OnWrite(ϟs *gfxapi.State) F64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -649,24 +588,18 @@ func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return F64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the F64ᵖ pointer.
-func (p F64ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return F64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U64ᵖ is a pointer to a uint64 element.
 type U64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewU64ᵖ returns a U64ᵖ that points to addr in the application pool.
-func NewU64ᵖ(addr memory.Pointer) U64ᵖ {
-	return U64ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewU64ᵖ(addr uint64) U64ᵖ {
+	return U64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that U64ᵖ points to.
@@ -686,16 +619,16 @@ func (p U64ᵖ) Write(value uint64, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p U64ᵖ) OnRead(ϟs *gfxapi.State) U64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p U64ᵖ) OnWrite(ϟs *gfxapi.State) U64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -705,24 +638,18 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return U64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the U64ᵖ pointer.
-func (p U64ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // S64ᵖ is a pointer to a int64 element.
 type S64ᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewS64ᵖ returns a S64ᵖ that points to addr in the application pool.
-func NewS64ᵖ(addr memory.Pointer) S64ᵖ {
-	return S64ᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewS64ᵖ(addr uint64) S64ᵖ {
+	return S64ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that S64ᵖ points to.
@@ -742,16 +669,16 @@ func (p S64ᵖ) Write(value int64, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p S64ᵖ) OnRead(ϟs *gfxapi.State) S64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p S64ᵖ) OnWrite(ϟs *gfxapi.State) S64ᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -761,24 +688,18 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return S64ˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the S64ᵖ pointer.
-func (p S64ᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return S64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Boolᵖ is a pointer to a bool element.
 type Boolᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewBoolᵖ returns a Boolᵖ that points to addr in the application pool.
-func NewBoolᵖ(addr memory.Pointer) Boolᵖ {
-	return Boolᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewBoolᵖ(addr uint64) Boolᵖ {
+	return Boolᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Boolᵖ points to.
@@ -798,16 +719,16 @@ func (p Boolᵖ) Write(value bool, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Boolᵖ) OnRead(ϟs *gfxapi.State) Boolᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Boolᵖ) OnWrite(ϟs *gfxapi.State) Boolᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -817,24 +738,18 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Boolˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Boolᵖ pointer.
-func (p Boolᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Boolˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Voidᵖ is a pointer to a void element.
 type Voidᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewVoidᵖ returns a Voidᵖ that points to addr in the application pool.
-func NewVoidᵖ(addr memory.Pointer) Voidᵖ {
-	return Voidᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewVoidᵖ(addr uint64) Voidᵖ {
+	return Voidᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Voidᵖ points to.
@@ -844,16 +759,16 @@ func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Voidᵖ) OnRead(ϟs *gfxapi.State) Voidᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Voidᵖ) OnWrite(ϟs *gfxapi.State) Voidᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -863,24 +778,18 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Voidᵖ pointer.
-func (p Voidᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Remappedᵖ is a pointer to a remapped element.
 type Remappedᵖ struct {
 	binary.Generate
-	Address memory.Pointer
-	Pool    memory.PoolID
+	memory.Pointer
 }
 
 // NewRemappedᵖ returns a Remappedᵖ that points to addr in the application pool.
-func NewRemappedᵖ(addr memory.Pointer) Remappedᵖ {
-	return Remappedᵖ{Address: addr, Pool: memory.ApplicationPool}
+func NewRemappedᵖ(addr uint64) Remappedᵖ {
+	return Remappedᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
 // ElementSize returns the size in bytes of an element that Remappedᵖ points to.
@@ -900,16 +809,16 @@ func (p Remappedᵖ) Write(value remapped, ϟs *gfxapi.State) {
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
 func (p Remappedᵖ) OnRead(ϟs *gfxapi.State) Remappedᵖ {
-	if f := ϟs.Memory[p.Pool].OnRead; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
 func (p Remappedᵖ) OnWrite(ϟs *gfxapi.State) Remappedᵖ {
-	if f := ϟs.Memory[p.Pool].OnWrite; f != nil {
-		f(p.Address.Range(p.ElementSize(ϟs)))
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
@@ -919,12 +828,7 @@ func (p Remappedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Remappedˢ{SliceInfo: SliceInfo{Root: p.Address, Base: p.Address.Offset(start * p.ElementSize(ϟs)), Count: end - start, Pool: p.Pool}}
-}
-
-// String returns a string description of the Remappedᵖ pointer.
-func (p Remappedᵖ) String() string {
-	return fmt.Sprintf("%v@%v", p.Address, p.Pool)
+	return Remappedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // Boolˢ is a slice of bool.
@@ -938,18 +842,18 @@ func MakeBoolˢ(count uint64, ϟs *gfxapi.State) Boolˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Boolˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Boolˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Boolˢ in a new memory pool.
 func (s Boolˢ) Clone(ϟs *gfxapi.State) Boolˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Boolˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Boolˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -960,13 +864,13 @@ func (s Boolˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Boolˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Boolˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -975,12 +879,12 @@ func (s Boolˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 
 // Decoder returns a memory decoder for the slice.
 func (s Boolˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Boolˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsBoolˢ returns s cast to a Boolˢ.
@@ -1028,14 +932,14 @@ func (dst Boolˢ) Copy(src Boolˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Boolˢ) OnRead(ϟs *gfxapi.State) Boolˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1043,7 +947,7 @@ func (s Boolˢ) OnRead(ϟs *gfxapi.State) Boolˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Boolˢ) OnWrite(ϟs *gfxapi.State) Boolˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1051,7 +955,7 @@ func (s Boolˢ) OnWrite(ϟs *gfxapi.State) Boolˢ {
 
 // Index returns a Boolᵖ to the i'th element in this Boolˢ.
 func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ {
-	return Boolᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Boolᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Boolˢ using start and end indices.
@@ -1062,12 +966,12 @@ func (s Boolˢ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Boolˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Boolˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Boolˢ slice.
 func (s Boolˢ) String() string {
-	return fmt.Sprintf("bool(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("bool(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Charˢ is a slice of byte.
@@ -1084,7 +988,7 @@ func MakeCharˢFromString(str string, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	return Charˢ{SliceInfo: SliceInfo{Count: uint64(len(str)), Pool: id}}
+	return Charˢ{SliceInfo: SliceInfo{Count: uint64(len(str)), Root: memory.Pointer{Pool: id}}}
 }
 
 // MakeCharˢ returns a Charˢ backed by a new memory pool.
@@ -1092,18 +996,18 @@ func MakeCharˢ(count uint64, ϟs *gfxapi.State) Charˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Charˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Charˢ in a new memory pool.
 func (s Charˢ) Clone(ϟs *gfxapi.State) Charˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Charˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1114,13 +1018,13 @@ func (s Charˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Charˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Charˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1129,12 +1033,12 @@ func (s Charˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 
 // Decoder returns a memory decoder for the slice.
 func (s Charˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Charˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsCharˢ returns s cast to a Charˢ.
@@ -1182,14 +1086,14 @@ func (dst Charˢ) Copy(src Charˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Charˢ) OnRead(ϟs *gfxapi.State) Charˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1197,7 +1101,7 @@ func (s Charˢ) OnRead(ϟs *gfxapi.State) Charˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Charˢ) OnWrite(ϟs *gfxapi.State) Charˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1205,7 +1109,7 @@ func (s Charˢ) OnWrite(ϟs *gfxapi.State) Charˢ {
 
 // Index returns a Charᵖ to the i'th element in this Charˢ.
 func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ {
-	return Charᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Charᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Charˢ using start and end indices.
@@ -1216,12 +1120,12 @@ func (s Charˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Charˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Charˢ slice.
 func (s Charˢ) String() string {
-	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Charᵖˢ is a slice of Charᵖ.
@@ -1235,24 +1139,24 @@ func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Charᵖˢ in a new memory pool.
 func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
 // ElementSize returns the size in bytes of an element that Charᵖˢ points to.
 func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if s.Pool == memory.ApplicationPool {
+	if s.Root.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
 		return 12
@@ -1261,13 +1165,13 @@ func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Charᵖˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1276,12 +1180,12 @@ func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 
 // Decoder returns a memory decoder for the slice.
 func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsCharᵖˢ returns s cast to a Charᵖˢ.
@@ -1298,12 +1202,12 @@ func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᵖ, s.Count)
 	s.OnRead(ϟs)
 	for i := range res {
-		if s.Pool == memory.ApplicationPool {
+		if s.Root.Pool == memory.ApplicationPool {
 			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
 			if err != nil {
 				panic(err)
 			}
-			res[i] = NewCharᵖ(memory.Pointer(ptr))
+			res[i] = NewCharᵖ(ptr)
 		} else {
 			if err := d.Value(&res[i]); err != nil {
 				panic(err)
@@ -1320,8 +1224,8 @@ func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
 	for i := uint64(0); i < count; i++ {
-		if s.Pool == memory.ApplicationPool {
-			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, uint64(src[i].Address)); err != nil {
+		if s.Root.Pool == memory.ApplicationPool {
+			if err := binary.WriteUint(e, ϟs.Architecture.PointerSize*8, src[i].Address); err != nil {
 				panic(err)
 			}
 		} else {
@@ -1340,11 +1244,11 @@ func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
 func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᵖˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	if (dst.Pool == memory.ApplicationPool) != (src.Pool == memory.ApplicationPool) {
+	if (dst.Root.Pool == memory.ApplicationPool) != (src.Root.Pool == memory.ApplicationPool) {
 		dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> Charᵖᵖ
 	} else {
 		src.OnRead(ϟs)
-		ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+		ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 		dst.OnWrite(ϟs)
 	}
 	return dst, src
@@ -1352,7 +1256,7 @@ func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Databas
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1360,7 +1264,7 @@ func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1368,7 +1272,7 @@ func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ {
 
 // Index returns a Charᵖᵖ to the i'th element in this Charᵖˢ.
 func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ {
-	return Charᵖᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Charᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Charᵖˢ using start and end indices.
@@ -1379,12 +1283,12 @@ func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Charᵖˢ slice.
 func (s Charᵖˢ) String() string {
-	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // F32ˢ is a slice of float32.
@@ -1398,18 +1302,18 @@ func MakeF32ˢ(count uint64, ϟs *gfxapi.State) F32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return F32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return F32ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the F32ˢ in a new memory pool.
 func (s F32ˢ) Clone(ϟs *gfxapi.State) F32ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := F32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := F32ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1420,13 +1324,13 @@ func (s F32ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s F32ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s F32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1435,12 +1339,12 @@ func (s F32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s F32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s F32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsF32ˢ returns s cast to a F32ˢ.
@@ -1488,14 +1392,14 @@ func (dst F32ˢ) Copy(src F32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s F32ˢ) OnRead(ϟs *gfxapi.State) F32ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1503,7 +1407,7 @@ func (s F32ˢ) OnRead(ϟs *gfxapi.State) F32ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s F32ˢ) OnWrite(ϟs *gfxapi.State) F32ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1511,7 +1415,7 @@ func (s F32ˢ) OnWrite(ϟs *gfxapi.State) F32ˢ {
 
 // Index returns a F32ᵖ to the i'th element in this F32ˢ.
 func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ {
-	return F32ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return F32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the F32ˢ using start and end indices.
@@ -1522,12 +1426,12 @@ func (s F32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return F32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return F32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the F32ˢ slice.
 func (s F32ˢ) String() string {
-	return fmt.Sprintf("float32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("float32(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // F64ˢ is a slice of float64.
@@ -1541,18 +1445,18 @@ func MakeF64ˢ(count uint64, ϟs *gfxapi.State) F64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return F64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return F64ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the F64ˢ in a new memory pool.
 func (s F64ˢ) Clone(ϟs *gfxapi.State) F64ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := F64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := F64ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1563,13 +1467,13 @@ func (s F64ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s F64ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s F64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1578,12 +1482,12 @@ func (s F64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s F64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s F64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsF64ˢ returns s cast to a F64ˢ.
@@ -1631,14 +1535,14 @@ func (dst F64ˢ) Copy(src F64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s F64ˢ) OnRead(ϟs *gfxapi.State) F64ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1646,7 +1550,7 @@ func (s F64ˢ) OnRead(ϟs *gfxapi.State) F64ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s F64ˢ) OnWrite(ϟs *gfxapi.State) F64ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1654,7 +1558,7 @@ func (s F64ˢ) OnWrite(ϟs *gfxapi.State) F64ˢ {
 
 // Index returns a F64ᵖ to the i'th element in this F64ˢ.
 func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ {
-	return F64ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return F64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the F64ˢ using start and end indices.
@@ -1665,12 +1569,12 @@ func (s F64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return F64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return F64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the F64ˢ slice.
 func (s F64ˢ) String() string {
-	return fmt.Sprintf("float64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("float64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Intˢ is a slice of int64.
@@ -1684,18 +1588,18 @@ func MakeIntˢ(count uint64, ϟs *gfxapi.State) Intˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Intˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Intˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Intˢ in a new memory pool.
 func (s Intˢ) Clone(ϟs *gfxapi.State) Intˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Intˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Intˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1706,13 +1610,13 @@ func (s Intˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Intˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Intˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1721,12 +1625,12 @@ func (s Intˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s Intˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Intˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsIntˢ returns s cast to a Intˢ.
@@ -1774,14 +1678,14 @@ func (dst Intˢ) Copy(src Intˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Intˢ) OnRead(ϟs *gfxapi.State) Intˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1789,7 +1693,7 @@ func (s Intˢ) OnRead(ϟs *gfxapi.State) Intˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Intˢ) OnWrite(ϟs *gfxapi.State) Intˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1797,7 +1701,7 @@ func (s Intˢ) OnWrite(ϟs *gfxapi.State) Intˢ {
 
 // Index returns a Intᵖ to the i'th element in this Intˢ.
 func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ {
-	return Intᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Intᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Intˢ using start and end indices.
@@ -1808,12 +1712,12 @@ func (s Intˢ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Intˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Intˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Intˢ slice.
 func (s Intˢ) String() string {
-	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Remappedˢ is a slice of remapped.
@@ -1827,18 +1731,18 @@ func MakeRemappedˢ(count uint64, ϟs *gfxapi.State) Remappedˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Remappedˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Remappedˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Remappedˢ in a new memory pool.
 func (s Remappedˢ) Clone(ϟs *gfxapi.State) Remappedˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Remappedˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Remappedˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1849,13 +1753,13 @@ func (s Remappedˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Remappedˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Remappedˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -1864,12 +1768,12 @@ func (s Remappedˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 
 // Decoder returns a memory decoder for the slice.
 func (s Remappedˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Remappedˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsRemappedˢ returns s cast to a Remappedˢ.
@@ -1917,14 +1821,14 @@ func (dst Remappedˢ) Copy(src Remappedˢ, ϟs *gfxapi.State, ϟd database.Datab
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Remappedˢ) OnRead(ϟs *gfxapi.State) Remappedˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1932,7 +1836,7 @@ func (s Remappedˢ) OnRead(ϟs *gfxapi.State) Remappedˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Remappedˢ) OnWrite(ϟs *gfxapi.State) Remappedˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -1940,7 +1844,7 @@ func (s Remappedˢ) OnWrite(ϟs *gfxapi.State) Remappedˢ {
 
 // Index returns a Remappedᵖ to the i'th element in this Remappedˢ.
 func (s Remappedˢ) Index(i uint64, ϟs *gfxapi.State) Remappedᵖ {
-	return Remappedᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Remappedᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Remappedˢ using start and end indices.
@@ -1951,12 +1855,12 @@ func (s Remappedˢ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Remappedˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Remappedˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Remappedˢ slice.
 func (s Remappedˢ) String() string {
-	return fmt.Sprintf("remapped(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("remapped(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // S16ˢ is a slice of int16.
@@ -1970,18 +1874,18 @@ func MakeS16ˢ(count uint64, ϟs *gfxapi.State) S16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S16ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return S16ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the S16ˢ in a new memory pool.
 func (s S16ˢ) Clone(ϟs *gfxapi.State) S16ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S16ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := S16ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -1992,13 +1896,13 @@ func (s S16ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s S16ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s S16ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2007,12 +1911,12 @@ func (s S16ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s S16ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s S16ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsS16ˢ returns s cast to a S16ˢ.
@@ -2060,14 +1964,14 @@ func (dst S16ˢ) Copy(src S16ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s S16ˢ) OnRead(ϟs *gfxapi.State) S16ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2075,7 +1979,7 @@ func (s S16ˢ) OnRead(ϟs *gfxapi.State) S16ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s S16ˢ) OnWrite(ϟs *gfxapi.State) S16ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2083,7 +1987,7 @@ func (s S16ˢ) OnWrite(ϟs *gfxapi.State) S16ˢ {
 
 // Index returns a S16ᵖ to the i'th element in this S16ˢ.
 func (s S16ˢ) Index(i uint64, ϟs *gfxapi.State) S16ᵖ {
-	return S16ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return S16ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the S16ˢ using start and end indices.
@@ -2094,12 +1998,12 @@ func (s S16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return S16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the S16ˢ slice.
 func (s S16ˢ) String() string {
-	return fmt.Sprintf("int16(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("int16(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // S32ˢ is a slice of int32.
@@ -2113,18 +2017,18 @@ func MakeS32ˢ(count uint64, ϟs *gfxapi.State) S32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return S32ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the S32ˢ in a new memory pool.
 func (s S32ˢ) Clone(ϟs *gfxapi.State) S32ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := S32ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2135,13 +2039,13 @@ func (s S32ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s S32ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s S32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2150,12 +2054,12 @@ func (s S32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s S32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s S32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsS32ˢ returns s cast to a S32ˢ.
@@ -2203,14 +2107,14 @@ func (dst S32ˢ) Copy(src S32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s S32ˢ) OnRead(ϟs *gfxapi.State) S32ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2218,7 +2122,7 @@ func (s S32ˢ) OnRead(ϟs *gfxapi.State) S32ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s S32ˢ) OnWrite(ϟs *gfxapi.State) S32ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2226,7 +2130,7 @@ func (s S32ˢ) OnWrite(ϟs *gfxapi.State) S32ˢ {
 
 // Index returns a S32ᵖ to the i'th element in this S32ˢ.
 func (s S32ˢ) Index(i uint64, ϟs *gfxapi.State) S32ᵖ {
-	return S32ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return S32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the S32ˢ using start and end indices.
@@ -2237,12 +2141,12 @@ func (s S32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return S32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the S32ˢ slice.
 func (s S32ˢ) String() string {
-	return fmt.Sprintf("int32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("int32(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // S64ˢ is a slice of int64.
@@ -2256,18 +2160,18 @@ func MakeS64ˢ(count uint64, ϟs *gfxapi.State) S64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return S64ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the S64ˢ in a new memory pool.
 func (s S64ˢ) Clone(ϟs *gfxapi.State) S64ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := S64ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2278,13 +2182,13 @@ func (s S64ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s S64ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s S64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2293,12 +2197,12 @@ func (s S64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s S64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s S64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsS64ˢ returns s cast to a S64ˢ.
@@ -2346,14 +2250,14 @@ func (dst S64ˢ) Copy(src S64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s S64ˢ) OnRead(ϟs *gfxapi.State) S64ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2361,7 +2265,7 @@ func (s S64ˢ) OnRead(ϟs *gfxapi.State) S64ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s S64ˢ) OnWrite(ϟs *gfxapi.State) S64ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2369,7 +2273,7 @@ func (s S64ˢ) OnWrite(ϟs *gfxapi.State) S64ˢ {
 
 // Index returns a S64ᵖ to the i'th element in this S64ˢ.
 func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ {
-	return S64ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return S64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the S64ˢ using start and end indices.
@@ -2380,12 +2284,12 @@ func (s S64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return S64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the S64ˢ slice.
 func (s S64ˢ) String() string {
-	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // S8ˢ is a slice of int8.
@@ -2399,18 +2303,18 @@ func MakeS8ˢ(count uint64, ϟs *gfxapi.State) S8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return S8ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return S8ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the S8ˢ in a new memory pool.
 func (s S8ˢ) Clone(ϟs *gfxapi.State) S8ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := S8ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := S8ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2421,13 +2325,13 @@ func (s S8ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s S8ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s S8ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2436,12 +2340,12 @@ func (s S8ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logge
 
 // Decoder returns a memory decoder for the slice.
 func (s S8ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s S8ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsS8ˢ returns s cast to a S8ˢ.
@@ -2489,14 +2393,14 @@ func (dst S8ˢ) Copy(src S8ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s S8ˢ) OnRead(ϟs *gfxapi.State) S8ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2504,7 +2408,7 @@ func (s S8ˢ) OnRead(ϟs *gfxapi.State) S8ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s S8ˢ) OnWrite(ϟs *gfxapi.State) S8ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2512,7 +2416,7 @@ func (s S8ˢ) OnWrite(ϟs *gfxapi.State) S8ˢ {
 
 // Index returns a S8ᵖ to the i'th element in this S8ˢ.
 func (s S8ˢ) Index(i uint64, ϟs *gfxapi.State) S8ᵖ {
-	return S8ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return S8ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the S8ˢ using start and end indices.
@@ -2523,12 +2427,12 @@ func (s S8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return S8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return S8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the S8ˢ slice.
 func (s S8ˢ) String() string {
-	return fmt.Sprintf("int8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("int8(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // U16ˢ is a slice of uint16.
@@ -2542,18 +2446,18 @@ func MakeU16ˢ(count uint64, ϟs *gfxapi.State) U16ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U16ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return U16ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the U16ˢ in a new memory pool.
 func (s U16ˢ) Clone(ϟs *gfxapi.State) U16ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U16ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := U16ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2564,13 +2468,13 @@ func (s U16ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s U16ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s U16ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2579,12 +2483,12 @@ func (s U16ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s U16ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s U16ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsU16ˢ returns s cast to a U16ˢ.
@@ -2632,14 +2536,14 @@ func (dst U16ˢ) Copy(src U16ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s U16ˢ) OnRead(ϟs *gfxapi.State) U16ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2647,7 +2551,7 @@ func (s U16ˢ) OnRead(ϟs *gfxapi.State) U16ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s U16ˢ) OnWrite(ϟs *gfxapi.State) U16ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2655,7 +2559,7 @@ func (s U16ˢ) OnWrite(ϟs *gfxapi.State) U16ˢ {
 
 // Index returns a U16ᵖ to the i'th element in this U16ˢ.
 func (s U16ˢ) Index(i uint64, ϟs *gfxapi.State) U16ᵖ {
-	return U16ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return U16ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the U16ˢ using start and end indices.
@@ -2666,12 +2570,12 @@ func (s U16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return U16ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the U16ˢ slice.
 func (s U16ˢ) String() string {
-	return fmt.Sprintf("uint16(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("uint16(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // U32ˢ is a slice of uint32.
@@ -2685,18 +2589,18 @@ func MakeU32ˢ(count uint64, ϟs *gfxapi.State) U32ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U32ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return U32ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the U32ˢ in a new memory pool.
 func (s U32ˢ) Clone(ϟs *gfxapi.State) U32ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U32ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := U32ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2707,13 +2611,13 @@ func (s U32ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s U32ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s U32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2722,12 +2626,12 @@ func (s U32ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s U32ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s U32ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsU32ˢ returns s cast to a U32ˢ.
@@ -2775,14 +2679,14 @@ func (dst U32ˢ) Copy(src U32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s U32ˢ) OnRead(ϟs *gfxapi.State) U32ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2790,7 +2694,7 @@ func (s U32ˢ) OnRead(ϟs *gfxapi.State) U32ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s U32ˢ) OnWrite(ϟs *gfxapi.State) U32ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2798,7 +2702,7 @@ func (s U32ˢ) OnWrite(ϟs *gfxapi.State) U32ˢ {
 
 // Index returns a U32ᵖ to the i'th element in this U32ˢ.
 func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ {
-	return U32ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return U32ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the U32ˢ using start and end indices.
@@ -2809,12 +2713,12 @@ func (s U32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return U32ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the U32ˢ slice.
 func (s U32ˢ) String() string {
-	return fmt.Sprintf("uint32(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("uint32(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // U64ˢ is a slice of uint64.
@@ -2828,18 +2732,18 @@ func MakeU64ˢ(count uint64, ϟs *gfxapi.State) U64ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U64ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return U64ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the U64ˢ in a new memory pool.
 func (s U64ˢ) Clone(ϟs *gfxapi.State) U64ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U64ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := U64ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2850,13 +2754,13 @@ func (s U64ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s U64ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s U64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -2865,12 +2769,12 @@ func (s U64ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logg
 
 // Decoder returns a memory decoder for the slice.
 func (s U64ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s U64ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsU64ˢ returns s cast to a U64ˢ.
@@ -2918,14 +2822,14 @@ func (dst U64ˢ) Copy(src U64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s U64ˢ) OnRead(ϟs *gfxapi.State) U64ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2933,7 +2837,7 @@ func (s U64ˢ) OnRead(ϟs *gfxapi.State) U64ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s U64ˢ) OnWrite(ϟs *gfxapi.State) U64ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -2941,7 +2845,7 @@ func (s U64ˢ) OnWrite(ϟs *gfxapi.State) U64ˢ {
 
 // Index returns a U64ᵖ to the i'th element in this U64ˢ.
 func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ {
-	return U64ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return U64ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the U64ˢ using start and end indices.
@@ -2952,12 +2856,12 @@ func (s U64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return U64ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the U64ˢ slice.
 func (s U64ˢ) String() string {
-	return fmt.Sprintf("uint64(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("uint64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // U8ˢ is a slice of uint8.
@@ -2971,18 +2875,18 @@ func MakeU8ˢ(count uint64, ϟs *gfxapi.State) U8ˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return U8ˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return U8ˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the U8ˢ in a new memory pool.
 func (s U8ˢ) Clone(ϟs *gfxapi.State) U8ˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := U8ˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := U8ˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -2993,13 +2897,13 @@ func (s U8ˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s U8ˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s U8ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -3008,12 +2912,12 @@ func (s U8ˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logge
 
 // Decoder returns a memory decoder for the slice.
 func (s U8ˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s U8ˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // AsU8ˢ returns s cast to a U8ˢ.
@@ -3061,14 +2965,14 @@ func (dst U8ˢ) Copy(src U8ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	src.OnRead(ϟs)
-	ϟs.Memory[dst.Pool].Write(dst.Base, ϟs.Memory[src.Pool].Slice(src.Range(ϟs)))
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
 	dst.OnWrite(ϟs)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s U8ˢ) OnRead(ϟs *gfxapi.State) U8ˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -3076,7 +2980,7 @@ func (s U8ˢ) OnRead(ϟs *gfxapi.State) U8ˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s U8ˢ) OnWrite(ϟs *gfxapi.State) U8ˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -3084,7 +2988,7 @@ func (s U8ˢ) OnWrite(ϟs *gfxapi.State) U8ˢ {
 
 // Index returns a U8ᵖ to the i'th element in this U8ˢ.
 func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ {
-	return U8ᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return U8ᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the U8ˢ using start and end indices.
@@ -3095,12 +2999,12 @@ func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return U8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return U8ˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the U8ˢ slice.
 func (s U8ˢ) String() string {
-	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("uint8(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Voidˢ is a slice of void.
@@ -3114,18 +3018,18 @@ func MakeVoidˢ(count uint64, ϟs *gfxapi.State) Voidˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Voidˢ{SliceInfo: SliceInfo{Count: count, Pool: id}}
+	return Voidˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
 // Clone returns a copy of the Voidˢ in a new memory pool.
 func (s Voidˢ) Clone(ϟs *gfxapi.State) Voidˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Pool].Slice(s.Range(ϟs)))
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Voidˢ{SliceInfo: SliceInfo{Count: s.Count, Pool: id}}
+	dst := Voidˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
@@ -3136,13 +3040,13 @@ func (s Voidˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 
 // Range returns the memory range this slice represents in the underlying pool.
 func (s Voidˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return s.Base.Range(s.Count * s.ElementSize(ϟs))
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
 func (s Voidˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
 	}
@@ -3151,17 +3055,17 @@ func (s Voidˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 
 // Decoder returns a memory decoder for the slice.
 func (s Voidˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
 func (s Voidˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Pool], s.Range(ϟs))
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
 func (s Voidˢ) OnRead(ϟs *gfxapi.State) Voidˢ {
-	if f := ϟs.Memory[s.Pool].OnRead; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -3169,7 +3073,7 @@ func (s Voidˢ) OnRead(ϟs *gfxapi.State) Voidˢ {
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
 func (s Voidˢ) OnWrite(ϟs *gfxapi.State) Voidˢ {
-	if f := ϟs.Memory[s.Pool].OnWrite; f != nil {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
@@ -3177,7 +3081,7 @@ func (s Voidˢ) OnWrite(ϟs *gfxapi.State) Voidˢ {
 
 // Index returns a Voidᵖ to the i'th element in this Voidˢ.
 func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ {
-	return Voidᵖ{Address: s.Base.Offset(i * s.ElementSize(ϟs)), Pool: s.Pool}
+	return Voidᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
 // Slice returns a sub-slice from the Voidˢ using start and end indices.
@@ -3188,12 +3092,12 @@ func (s Voidˢ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Voidˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base.Offset(start * s.ElementSize(ϟs)), Count: end - start, Pool: s.Pool}}
+	return Voidˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
 // String returns a string description of the Voidˢ slice.
 func (s Voidˢ) String() string {
-	return fmt.Sprintf("void(%v@%v)[%d]", s.Base, s.Pool, s.Count)
+	return fmt.Sprintf("void(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -5398,22 +5302,22 @@ type Globals struct {
 func (g *Globals) Init() {
 }
 func NewCmdClone(Src memory.Pointer, Cnt uint32) *CmdClone {
-	return &CmdClone{Src: NewU8ᵖ(Src), Cnt: Cnt}
+	return &CmdClone{Src: U8ᵖ{Pointer: Src}, Cnt: Cnt}
 }
 func NewCmdMake(Cnt uint32) *CmdMake {
 	return &CmdMake{Cnt: Cnt}
 }
 func NewCmdCopy(Src memory.Pointer, Cnt uint32) *CmdCopy {
-	return &CmdCopy{Src: NewU8ᵖ(Src), Cnt: Cnt}
+	return &CmdCopy{Src: U8ᵖ{Pointer: Src}, Cnt: Cnt}
 }
 func NewCmdCharsliceToString(S memory.Pointer, Len uint32) *CmdCharsliceToString {
-	return &CmdCharsliceToString{S: NewCharᵖ(S), Len: Len}
+	return &CmdCharsliceToString{S: Charᵖ{Pointer: S}, Len: Len}
 }
 func NewCmdCharptrToString(S memory.Pointer) *CmdCharptrToString {
-	return &CmdCharptrToString{S: NewCharᵖ(S)}
+	return &CmdCharptrToString{S: Charᵖ{Pointer: S}}
 }
 func NewCmdSliceCasts(S memory.Pointer, L uint32) *CmdSliceCasts {
-	return &CmdSliceCasts{S: NewU16ᵖ(S), L: L}
+	return &CmdSliceCasts{S: U16ᵖ{Pointer: S}, L: L}
 }
 func NewCmdVoid() *CmdVoid {
 	return &CmdVoid{}
@@ -5422,10 +5326,10 @@ func NewCmdUnknownRet(Result int64) *CmdUnknownRet {
 	return &CmdUnknownRet{Result: Result}
 }
 func NewCmdUnknownWritePtr(P memory.Pointer) *CmdUnknownWritePtr {
-	return &CmdUnknownWritePtr{P: NewIntᵖ(P)}
+	return &CmdUnknownWritePtr{P: Intᵖ{Pointer: P}}
 }
 func NewCmdUnknownWriteSlice(A memory.Pointer) *CmdUnknownWriteSlice {
-	return &CmdUnknownWriteSlice{A: NewIntᵖ(A)}
+	return &CmdUnknownWriteSlice{A: Intᵖ{Pointer: A}}
 }
 func NewCmdVoidU8(A uint8) *CmdVoidU8 {
 	return &CmdVoidU8{A: A}
@@ -5467,82 +5371,82 @@ func NewCmdVoid3Strings(A string, B string, C string) *CmdVoid3Strings {
 	return &CmdVoid3Strings{A: A, B: B, C: C}
 }
 func NewCmdVoid3InArrays(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoid3InArrays {
-	return &CmdVoid3InArrays{A: NewU8ᵖ(A), B: NewU32ᵖ(B), C: NewIntᵖ(C)}
+	return &CmdVoid3InArrays{A: U8ᵖ{Pointer: A}, B: U32ᵖ{Pointer: B}, C: Intᵖ{Pointer: C}}
 }
 func NewCmdVoidInArrayOfPointers(A memory.Pointer, Count int32) *CmdVoidInArrayOfPointers {
-	return &CmdVoidInArrayOfPointers{A: NewCharᵖᵖ(A), Count: Count}
+	return &CmdVoidInArrayOfPointers{A: Charᵖᵖ{Pointer: A}, Count: Count}
 }
 func NewCmdVoidReadU8(A memory.Pointer) *CmdVoidReadU8 {
-	return &CmdVoidReadU8{A: NewU8ᵖ(A)}
+	return &CmdVoidReadU8{A: U8ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadS8(A memory.Pointer) *CmdVoidReadS8 {
-	return &CmdVoidReadS8{A: NewS8ᵖ(A)}
+	return &CmdVoidReadS8{A: S8ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadU16(A memory.Pointer) *CmdVoidReadU16 {
-	return &CmdVoidReadU16{A: NewU16ᵖ(A)}
+	return &CmdVoidReadU16{A: U16ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadS16(A memory.Pointer) *CmdVoidReadS16 {
-	return &CmdVoidReadS16{A: NewS16ᵖ(A)}
+	return &CmdVoidReadS16{A: S16ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadF32(A memory.Pointer) *CmdVoidReadF32 {
-	return &CmdVoidReadF32{A: NewF32ᵖ(A)}
+	return &CmdVoidReadF32{A: F32ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadU32(A memory.Pointer) *CmdVoidReadU32 {
-	return &CmdVoidReadU32{A: NewU32ᵖ(A)}
+	return &CmdVoidReadU32{A: U32ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadS32(A memory.Pointer) *CmdVoidReadS32 {
-	return &CmdVoidReadS32{A: NewS32ᵖ(A)}
+	return &CmdVoidReadS32{A: S32ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadF64(A memory.Pointer) *CmdVoidReadF64 {
-	return &CmdVoidReadF64{A: NewF64ᵖ(A)}
+	return &CmdVoidReadF64{A: F64ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadU64(A memory.Pointer) *CmdVoidReadU64 {
-	return &CmdVoidReadU64{A: NewU64ᵖ(A)}
+	return &CmdVoidReadU64{A: U64ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadS64(A memory.Pointer) *CmdVoidReadS64 {
-	return &CmdVoidReadS64{A: NewS64ᵖ(A)}
+	return &CmdVoidReadS64{A: S64ᵖ{Pointer: A}}
 }
 func NewCmdVoidReadBool(A memory.Pointer) *CmdVoidReadBool {
-	return &CmdVoidReadBool{A: NewBoolᵖ(A)}
+	return &CmdVoidReadBool{A: Boolᵖ{Pointer: A}}
 }
 func NewCmdVoidReadPtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoidReadPtrs {
-	return &CmdVoidReadPtrs{A: NewF32ᵖ(A), B: NewU16ᵖ(B), C: NewBoolᵖ(C)}
+	return &CmdVoidReadPtrs{A: F32ᵖ{Pointer: A}, B: U16ᵖ{Pointer: B}, C: Boolᵖ{Pointer: C}}
 }
 func NewCmdVoidWriteU8(A memory.Pointer) *CmdVoidWriteU8 {
-	return &CmdVoidWriteU8{A: NewU8ᵖ(A)}
+	return &CmdVoidWriteU8{A: U8ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteS8(A memory.Pointer) *CmdVoidWriteS8 {
-	return &CmdVoidWriteS8{A: NewS8ᵖ(A)}
+	return &CmdVoidWriteS8{A: S8ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteU16(A memory.Pointer) *CmdVoidWriteU16 {
-	return &CmdVoidWriteU16{A: NewU16ᵖ(A)}
+	return &CmdVoidWriteU16{A: U16ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteS16(A memory.Pointer) *CmdVoidWriteS16 {
-	return &CmdVoidWriteS16{A: NewS16ᵖ(A)}
+	return &CmdVoidWriteS16{A: S16ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteF32(A memory.Pointer) *CmdVoidWriteF32 {
-	return &CmdVoidWriteF32{A: NewF32ᵖ(A)}
+	return &CmdVoidWriteF32{A: F32ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteU32(A memory.Pointer) *CmdVoidWriteU32 {
-	return &CmdVoidWriteU32{A: NewU32ᵖ(A)}
+	return &CmdVoidWriteU32{A: U32ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteS32(A memory.Pointer) *CmdVoidWriteS32 {
-	return &CmdVoidWriteS32{A: NewS32ᵖ(A)}
+	return &CmdVoidWriteS32{A: S32ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteF64(A memory.Pointer) *CmdVoidWriteF64 {
-	return &CmdVoidWriteF64{A: NewF64ᵖ(A)}
+	return &CmdVoidWriteF64{A: F64ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteU64(A memory.Pointer) *CmdVoidWriteU64 {
-	return &CmdVoidWriteU64{A: NewU64ᵖ(A)}
+	return &CmdVoidWriteU64{A: U64ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteS64(A memory.Pointer) *CmdVoidWriteS64 {
-	return &CmdVoidWriteS64{A: NewS64ᵖ(A)}
+	return &CmdVoidWriteS64{A: S64ᵖ{Pointer: A}}
 }
 func NewCmdVoidWriteBool(A memory.Pointer) *CmdVoidWriteBool {
-	return &CmdVoidWriteBool{A: NewBoolᵖ(A)}
+	return &CmdVoidWriteBool{A: Boolᵖ{Pointer: A}}
 }
 func NewCmdVoidWritePtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoidWritePtrs {
-	return &CmdVoidWritePtrs{A: NewF32ᵖ(A), B: NewU16ᵖ(B), C: NewBoolᵖ(C)}
+	return &CmdVoidWritePtrs{A: F32ᵖ{Pointer: A}, B: U16ᵖ{Pointer: B}, C: Boolᵖ{Pointer: C}}
 }
 func NewCmdU8(Result uint8) *CmdU8 {
 	return &CmdU8{Result: Result}
@@ -5581,19 +5485,19 @@ func NewCmdString(Result string) *CmdString {
 	return &CmdString{Result: Result}
 }
 func NewCmdPointer(Result memory.Pointer) *CmdPointer {
-	return &CmdPointer{Result: NewVoidᵖ(Result)}
+	return &CmdPointer{Result: Voidᵖ{Pointer: Result}}
 }
 func NewCmdVoid3Remapped(A remapped, B remapped, C remapped) *CmdVoid3Remapped {
 	return &CmdVoid3Remapped{A: A, B: B, C: C}
 }
 func NewCmdVoidInArrayOfRemapped(A memory.Pointer) *CmdVoidInArrayOfRemapped {
-	return &CmdVoidInArrayOfRemapped{A: NewRemappedᵖ(A)}
+	return &CmdVoidInArrayOfRemapped{A: Remappedᵖ{Pointer: A}}
 }
 func NewCmdVoidOutArrayOfRemapped(A memory.Pointer) *CmdVoidOutArrayOfRemapped {
-	return &CmdVoidOutArrayOfRemapped{A: NewRemappedᵖ(A)}
+	return &CmdVoidOutArrayOfRemapped{A: Remappedᵖ{Pointer: A}}
 }
 func NewCmdVoidOutArrayOfUnknownRemapped(A memory.Pointer) *CmdVoidOutArrayOfUnknownRemapped {
-	return &CmdVoidOutArrayOfUnknownRemapped{A: NewRemappedᵖ(A)}
+	return &CmdVoidOutArrayOfUnknownRemapped{A: Remappedᵖ{Pointer: A}}
 }
 func NewCmdRemapped(Result remapped) *CmdRemapped {
 	return &CmdRemapped{Result: Result}
@@ -5633,9 +5537,8 @@ func min(a, b uint64) uint64 {
 type SliceInfo struct {
 	binary.Generate
 	Root  memory.Pointer // Original pointer this slice derives from.
-	Base  memory.Pointer // Address of first element.
+	Base  uint64         // Address of first element.
 	Count uint64         // Number of elements in the slice.
-	Pool  memory.PoolID  // Pool that holds the element data.
 }
 
 // Info returns the SliceInfo. It is used to conform to the Slice interface.

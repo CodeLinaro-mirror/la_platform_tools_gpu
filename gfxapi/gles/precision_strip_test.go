@@ -41,6 +41,10 @@ func (m *mockWriter) Write(id atom.ID, a atom.Atom) {
 	m.atoms = append(m.atoms, a)
 }
 
+func p(addr uint64) memory.Pointer {
+	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
+}
+
 func runTest(t *testing.T, src string, expected string) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
@@ -57,13 +61,13 @@ func runTest(t *testing.T, src string, expected string) {
 	}
 
 	in := []atom.Atom{
-		NewEglCreateContext(0, 0, 0, 0, 0),
-		NewEglMakeCurrent(0, 0, 0, 0, 0),
+		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
+		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
 		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, 0x10),
-		NewGlShaderSource(0x10, 1, 0x100000, 0x100010).
-			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
-			AddRead(atom.Data(a, d, l, 0x100010, int32(len(src)))).
-			AddRead(atom.Data(a, d, l, 0x100020, src)),
+		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
+			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
+			AddRead(atom.Data(a, d, l, p(0x100010), int32(len(src)))).
+			AddRead(atom.Data(a, d, l, p(0x100020), src)),
 	}
 
 	mw := &mockWriter{}

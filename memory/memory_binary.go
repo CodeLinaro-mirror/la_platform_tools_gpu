@@ -17,12 +17,76 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*Pointer)(nil).Class())
 	Namespace.Add((*Range)(nil).Class())
 }
 
 var (
-	binaryIDRange = binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}
+	binaryIDPointer = binary.ID{0x32, 0x91, 0x20, 0x2c, 0x71, 0x1c, 0x99, 0xd3, 0xde, 0xad, 0xd6, 0xab, 0xac, 0x67, 0x78, 0xad, 0xfd, 0xb5, 0x05, 0xf9}
+	binaryIDRange   = binary.ID{0x4d, 0x08, 0x43, 0xb3, 0xb7, 0x7d, 0x8c, 0x7b, 0x5f, 0x7f, 0x54, 0xb7, 0x7b, 0xa3, 0xd6, 0x55, 0x77, 0x01, 0x52, 0x2c}
 )
+
+type binaryClassPointer struct{}
+
+func (*Pointer) Class() binary.Class {
+	return (*binaryClassPointer)(nil)
+}
+func doEncodePointer(e binary.Encoder, o *Pointer) error {
+	if err := e.Uint64(o.Address); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodePointer(d binary.Decoder, o *Pointer) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = PoolID(obj)
+	}
+	return nil
+}
+func doSkipPointer(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassPointer) ID() binary.ID      { return binaryIDPointer }
+func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
+func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodePointer(e, obj.(*Pointer))
+}
+func (*binaryClassPointer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Pointer{}
+	return obj, doDecodePointer(d, obj)
+}
+func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodePointer(d, obj.(*Pointer))
+}
+func (*binaryClassPointer) Skip(d binary.Decoder) error { return doSkipPointer(d) }
+func (*binaryClassPointer) Schema() *schema.Class       { return schemaPointer }
+
+var schemaPointer = &schema.Class{
+	TypeID:  binaryIDPointer,
+	Package: "memory",
+	Name:    "Pointer",
+	Display: "Pointer",
+	Fields: []schema.Field{
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassRange struct{}
 
@@ -30,7 +94,7 @@ func (*Range) Class() binary.Class {
 	return (*binaryClassRange)(nil)
 }
 func doEncodeRange(e binary.Encoder, o *Range) error {
-	if err := e.Uint64(uint64(o.Base)); err != nil {
+	if err := e.Uint64(o.Base); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Size); err != nil {
@@ -42,7 +106,7 @@ func doDecodeRange(d binary.Decoder, o *Range) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Base = Pointer(obj)
+		o.Base = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -81,7 +145,7 @@ var schemaRange = &schema.Class{
 	Name:    "Range",
 	Display: "Range",
 	Fields: []schema.Field{
-		{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }

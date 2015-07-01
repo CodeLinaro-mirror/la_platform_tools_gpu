@@ -15,6 +15,8 @@
 package client
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -27,8 +29,8 @@ type MemoryAdapter struct {
 	gxui.AdapterBase
 	appCtx       *ApplicationContext
 	commandID    atom.ID
-	baseAddress  memory.Pointer
-	bytesPerLine int
+	baseAddress  uint64
+	bytesPerLine uint64
 	dataType     DataType
 }
 
@@ -40,15 +42,15 @@ func CreateMemoryAdapter(appCtx *ApplicationContext) *MemoryAdapter {
 	}
 }
 
-func (a *MemoryAdapter) IndexOfAddress(addr memory.Pointer) int {
-	return int(addr/memory.Pointer(a.bytesPerLine) - a.baseAddress)
+func (a *MemoryAdapter) IndexOfAddress(addr uint64) int {
+	return int(addr/a.bytesPerLine - a.baseAddress)
 }
 
-func (a *MemoryAdapter) AddressAtIndex(index int) memory.Pointer {
-	return a.baseAddress + memory.Pointer(index*a.bytesPerLine)
+func (a *MemoryAdapter) AddressAtIndex(index int) uint64 {
+	return a.baseAddress + uint64(index)*a.bytesPerLine
 }
 
-func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress memory.Pointer) {
+func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress uint64) {
 	if atomID != InvalidAtomID {
 		a.commandID = atomID
 	}
@@ -78,7 +80,7 @@ func (a *MemoryAdapter) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (a *MemoryAdapter) ItemIndex(item gxui.AdapterItem) int {
-	addr := item.(memory.Pointer)
+	addr := item.(uint64)
 	return a.IndexOfAddress(addr)
 }
 
@@ -86,11 +88,11 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 	ll := t.CreateLinearLayout()
 	ll.SetDirection(gxui.LeftToRight)
 	base := a.AddressAtIndex(index)
-	ll.AddChild(CreateLabel(t, base.String(), LINE_NUMBER_COLOR, true))
+	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
 
 	var cancel chan<- struct{}
 	ll.OnAttach(func() {
-		cancel = a.appCtx.RequestMemory(a.commandID, base, uint64(a.bytesPerLine), func(info service.MemoryInfo) {
+		cancel = a.appCtx.RequestMemory(a.commandID, base, a.bytesPerLine, func(info service.MemoryInfo) {
 			var reads, writes, observed memory.RangeList
 			info.Reads.Unpack(&reads)
 			info.Writes.Unpack(&writes)

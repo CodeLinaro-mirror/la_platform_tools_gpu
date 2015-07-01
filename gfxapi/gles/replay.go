@@ -225,8 +225,8 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(renderbuffers) > 0 {
 		out.Write(id,
-			NewGlDeleteRenderbuffers(int32(len(renderbuffers)), memory.Tmp.Base).
-				AddRead(atom.Data(a, d, l, memory.Tmp.Base, renderbuffers)))
+			NewGlDeleteRenderbuffers(int32(len(renderbuffers)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, renderbuffers)))
 	}
 
 	// Delete all Textures.
@@ -236,8 +236,8 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(textures) > 0 {
 		out.Write(id,
-			NewGlDeleteTextures(int32(len(textures)), memory.Tmp.Base).
-				AddRead(atom.Data(a, d, l, memory.Tmp.Base, textures)))
+			NewGlDeleteTextures(int32(len(textures)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, textures)))
 	}
 
 	// Delete all Framebuffers.
@@ -247,8 +247,8 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(framebuffers) > 0 {
 		out.Write(id,
-			NewGlDeleteFramebuffers(int32(len(framebuffers)), memory.Tmp.Base).
-				AddRead(atom.Data(a, d, l, memory.Tmp.Base, framebuffers)))
+			NewGlDeleteFramebuffers(int32(len(framebuffers)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, framebuffers)))
 	}
 
 	// Delete all Buffers.
@@ -258,8 +258,8 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(buffers) > 0 {
 		out.Write(id,
-			NewGlDeleteBuffers(int32(len(buffers)), memory.Tmp.Base).
-				AddRead(atom.Data(a, d, l, memory.Tmp.Base, buffers)))
+			NewGlDeleteBuffers(int32(len(buffers)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, buffers)))
 	}
 
 	// Delete all VertexArrays.
@@ -269,8 +269,8 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(vertexArrays) > 0 {
 		out.Write(id,
-			NewGlDeleteVertexArraysOES(int32(len(vertexArrays)), memory.Tmp.Base).
-				AddRead(atom.Data(a, d, l, memory.Tmp.Base, vertexArrays)))
+			NewGlDeleteVertexArraysOES(int32(len(vertexArrays)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, vertexArrays)))
 	}
 
 	// Delete all Shaders.

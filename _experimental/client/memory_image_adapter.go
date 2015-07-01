@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
@@ -31,8 +30,8 @@ type MemoryImageAdapter struct {
 	gxui.AdapterBase
 	appCtx        *ApplicationContext
 	commandID     atom.ID
-	baseAddress   memory.Pointer
-	pixelsPerLine int
+	baseAddress   uint64
+	pixelsPerLine uint64
 	pixelType     PixelType
 }
 
@@ -44,17 +43,17 @@ func CreateMemoryImageAdapter(appCtx *ApplicationContext) *MemoryImageAdapter {
 	}
 }
 
-func (a *MemoryImageAdapter) IndexOfAddress(addr memory.Pointer) int {
-	return int(addr/memory.Pointer(a.pixelsPerLine) - a.baseAddress)
+func (a *MemoryImageAdapter) IndexOfAddress(addr uint64) int {
+	return int(addr/a.pixelsPerLine - a.baseAddress)
 }
 
-func (a *MemoryImageAdapter) AddressAtIndex(index int) memory.Pointer {
-	bytesPerPixel := a.pixelType.SizeBytes()
+func (a *MemoryImageAdapter) AddressAtIndex(index int) uint64 {
+	bytesPerPixel := uint64(a.pixelType.SizeBytes())
 	bytesPerLine := a.pixelsPerLine * bytesPerPixel
-	return a.baseAddress + memory.Pointer(index*bytesPerLine)
+	return a.baseAddress + uint64(index)*bytesPerLine
 }
 
-func (a *MemoryImageAdapter) SetData(atomID atom.ID, baseAddress memory.Pointer) {
+func (a *MemoryImageAdapter) SetData(atomID atom.ID, baseAddress uint64) {
 	if atomID != InvalidAtomID {
 		a.commandID = atomID
 	}
@@ -84,12 +83,12 @@ func (a *MemoryImageAdapter) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (a *MemoryImageAdapter) ItemIndex(item gxui.AdapterItem) int {
-	addr := item.(memory.Pointer)
+	addr := item.(uint64)
 	return a.IndexOfAddress(addr)
 }
 
 func (a *MemoryImageAdapter) Create(t gxui.Theme, index int) gxui.Control {
-	bytesPerPixel := a.pixelType.SizeBytes()
+	bytesPerPixel := uint64(a.pixelType.SizeBytes())
 	bytesPerLine := a.pixelsPerLine * bytesPerPixel
 	base := a.AddressAtIndex(index)
 
@@ -99,17 +98,17 @@ func (a *MemoryImageAdapter) Create(t gxui.Theme, index int) gxui.Control {
 
 	var cancel chan<- struct{}
 	ll.OnAttach(func() {
-		cancel = a.appCtx.RequestMemory(a.commandID, base, uint64(bytesPerLine), func(info service.MemoryInfo) {
+		cancel = a.appCtx.RequestMemory(a.commandID, base, bytesPerLine, func(info service.MemoryInfo) {
 			addr := base
 			data := info.Data
 			pixelSizeDips := a.Size(t).H
-			for len(data) >= bytesPerPixel {
+			for uint64(len(data)) >= bytesPerPixel {
 				color := a.pixelType.Read(data)
 				img := t.CreateImage()
 				img.SetExplicitSize(math.Size{W: pixelSizeDips, H: pixelSizeDips})
 				img.SetBackgroundBrush(gxui.Brush{Color: color})
 				ll.AddChild(img)
-				addr += memory.Pointer(bytesPerPixel)
+				addr += bytesPerPixel
 				data = data[bytesPerPixel:]
 			}
 		})

@@ -56,7 +56,7 @@ type ApplicationContext struct {
 	toolTipController   *gxui.ToolTipController
 	onAtomSelected      gxui.Event
 	onObjectSelected    gxui.Event
-	onAddressSelected   gxui.Event
+	onPointerSelected   gxui.Event
 	onColorBufferUpdate gxui.Event
 	onDepthBufferUpdate gxui.Event
 	onRequestReplay     gxui.Event
@@ -72,7 +72,7 @@ type ApplicationContext struct {
 	hierarchy           atom.Group
 	report              service.Report
 	selectedAtomID      atom.ID
-	selectedAddress     memory.Pointer
+	selectedPointer     memory.Pointer
 	selectedObject      interface{}
 	selectedDevice      service.DeviceId
 	wireframe           bool
@@ -155,7 +155,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		toolTipController:   gxui.CreateToolTipController(toolTipOverlay, theme.Driver()),
 		onAtomSelected:      gxui.CreateEvent(func() {}),
 		onObjectSelected:    gxui.CreateEvent(func() {}),
-		onAddressSelected:   gxui.CreateEvent(func() {}),
+		onPointerSelected:   gxui.CreateEvent(func() {}),
 		onColorBufferUpdate: gxui.CreateEvent(func() {}),
 		onDepthBufferUpdate: gxui.CreateEvent(func() {}),
 		onRequestReplay:     gxui.CreateEvent(func() {}),
@@ -202,11 +202,11 @@ func (c *ApplicationContext) SelectAtom(id atom.ID) {
 	}
 }
 
-func (c *ApplicationContext) SelectAddress(address memory.Pointer) {
-	if c.selectedAddress != address {
-		log.Infof(c.logger, "SelectAddress(%v)", address)
-		c.selectedAddress = address
-		c.onAddressSelected.Fire()
+func (c *ApplicationContext) SelectPointer(ptr memory.Pointer) {
+	if c.selectedPointer != ptr {
+		log.Infof(c.logger, "SelectPointer(%v)", ptr)
+		c.selectedPointer = ptr
+		c.onPointerSelected.Fire()
 	}
 }
 
@@ -267,7 +267,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			c.atoms = atoms
 			if resetSelected {
 				c.selectedAtomID = InvalidAtomID
-				c.selectedAddress = 0
+				c.selectedPointer = memory.Pointer{}
 				c.selectedObject = nil
 			}
 			c.onAtomsUpdated.Fire()
@@ -423,7 +423,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 
 type MemoryCallback func(service.MemoryInfo)
 
-func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, size uint64, callback MemoryCallback) chan<- struct{} {
+func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint64, callback MemoryCallback) chan<- struct{} {
 	l := c.logger.Fork().Enter("RequestMemory")
 	log.Infof(l, "(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
 
@@ -431,7 +431,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, s
 	captureID := c.captureID
 	if c.captureID.Valid() {
 		go func() {
-			rng := service.MemoryRange{Base: uint64(base), Size: size}
+			rng := service.MemoryRange{Base: base, Size: size}
 			id, err := c.rpc.GetMemoryInfo(captureID, uint64(after), rng, l)
 			if err != nil {
 				return
@@ -487,7 +487,7 @@ func (c *ApplicationContext) Hierarchy() atom.Group                      { retur
 
 //func (c *ApplicationContext) State() schema.Struct                       { return c.state }
 func (c *ApplicationContext) SelectedAtomID() atom.ID          { return c.selectedAtomID }
-func (c *ApplicationContext) SelectedAddress() memory.Pointer  { return c.selectedAddress }
+func (c *ApplicationContext) SelectedPointer() memory.Pointer  { return c.selectedPointer }
 func (c *ApplicationContext) SelectedObject() interface{}      { return c.selectedObject }
 func (c *ApplicationContext) SelectedDevice() service.DeviceId { return c.selectedDevice }
 func (c *ApplicationContext) Wireframe() bool                  { return c.wireframe }
@@ -504,8 +504,8 @@ func (c *ApplicationContext) OnObjectSelected(f func()) gxui.EventSubscription {
 	return c.onObjectSelected.Listen(f)
 }
 
-func (c *ApplicationContext) OnAddressSelected(f func()) gxui.EventSubscription {
-	return c.onAddressSelected.Listen(f)
+func (c *ApplicationContext) OnPointerSelected(f func()) gxui.EventSubscription {
+	return c.onPointerSelected.Listen(f)
 }
 
 func (c *ApplicationContext) OnColorBufferUpdate(f func()) gxui.EventSubscription {
