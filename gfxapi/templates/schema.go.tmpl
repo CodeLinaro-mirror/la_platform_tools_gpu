@@ -24,9 +24,15 @@
 
   import (
     "android.googlesource.com/platform/tools/gpu/atom"
+    "android.googlesource.com/platform/tools/gpu/binary"
+    bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
     "android.googlesource.com/platform/tools/gpu/gfxapi/schema"
     "android.googlesource.com/platform/tools/gpu/service"
   )
+
+  func init() {
+    {{ForEach (AllCommands $) "Atom" | JoinWith "\n¶"}}
+  }
 
   func init() {
     s := schemaBuilder{
@@ -55,6 +61,25 @@
   {{Macro "GetInfo" "Type" "Enum"        "Map" "enums"        "List" $.Enums       }}
   {{Macro "GetInfo" "Type" "Class"       "Map" "classes"      "List" $.Classes     }}
 
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified Atom.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Atom"}}
+  {{AssertType $ "Function"}}
+  sc_{{Macro "Go.CmdName" $}} := bschema.Of((*{{Macro "Go.CmdName" $}})(nil).Class())
+  sc_{{Macro "Go.CmdName" $}}.Metadata = append(sc_{{Macro "Go.CmdName" $}}.Metadata, &atom.Metadata{
+    Api: binary.ID(apiID),
+    Flags: 0§
+    {{if GetAnnotation $ "DrawCall"}} | atom.DrawCall §{{end}}
+    {{if GetAnnotation $ "EndOfFrame"}} | atom.EndOfFrame §{{end}}
+    ,
+    DocumentationUrl: "{{$.Docs}}",
+  })
 {{end}}
 
 

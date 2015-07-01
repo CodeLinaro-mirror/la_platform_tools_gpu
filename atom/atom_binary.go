@@ -21,6 +21,7 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Range)(nil).Class())
 	Namespace.Add((*Group)(nil).Class())
+	Namespace.Add((*Metadata)(nil).Class())
 	Namespace.Add((*Observation)(nil).Class())
 	Namespace.Add((*Observations)(nil).Class())
 	Namespace.Add((*Resource)(nil).Class())
@@ -30,6 +31,7 @@ func init() {
 var (
 	binaryIDRange        = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
 	binaryIDGroup        = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
+	binaryIDMetadata     = binary.ID{0xc7, 0xfa, 0xce, 0x34, 0xb2, 0x08, 0x05, 0xa4, 0x74, 0xef, 0xd6, 0x20, 0x87, 0x57, 0xa8, 0x1e, 0x56, 0x01, 0x8b, 0x55}
 	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
 	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
 	binaryIDResource     = binary.ID{0xdd, 0xe2, 0x00, 0x18, 0x25, 0x45, 0x71, 0xb9, 0xdb, 0x6f, 0xed, 0x39, 0xdd, 0x8e, 0x71, 0x4b, 0xf6, 0x76, 0x26, 0xce}
@@ -183,6 +185,80 @@ var schemaGroup = &schema.Class{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "Range", ID: (*Range)(nil).Class().ID()}},
 		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Name: "Group", ID: (*Group)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassMetadata struct{}
+
+func (*Metadata) Class() binary.Class {
+	return (*binaryClassMetadata)(nil)
+}
+func doEncodeMetadata(e binary.Encoder, o *Metadata) error {
+	if err := e.ID(o.Api); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Flags)); err != nil {
+		return err
+	}
+	if err := e.String(o.DocumentationUrl); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMetadata(d binary.Decoder, o *Metadata) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.Api = binary.ID(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Flags = Flags(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.DocumentationUrl = string(obj)
+	}
+	return nil
+}
+func doSkipMetadata(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMetadata) ID() binary.ID      { return binaryIDMetadata }
+func (*binaryClassMetadata) New() binary.Object { return &Metadata{} }
+func (*binaryClassMetadata) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMetadata(e, obj.(*Metadata))
+}
+func (*binaryClassMetadata) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Metadata{}
+	return obj, doDecodeMetadata(d, obj)
+}
+func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMetadata(d, obj.(*Metadata))
+}
+func (*binaryClassMetadata) Skip(d binary.Decoder) error { return doSkipMetadata(d) }
+func (*binaryClassMetadata) Schema() *schema.Class       { return schemaMetadata }
+
+var schemaMetadata = &schema.Class{
+	TypeID:  binaryIDMetadata,
+	Package: "atom",
+	Name:    "Metadata",
+	Display: "Metadata",
+	Fields: []schema.Field{
+		{Declared: "Api", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Flags", Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32}},
+		{Declared: "DocumentationUrl", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
