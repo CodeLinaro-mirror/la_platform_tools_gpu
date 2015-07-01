@@ -19,47 +19,17 @@
 {{$ | Macro "schema.go" | GoFmt | Write "schema.go"}}
 
 {{define "schema.go"}}
-  {{Global "api" $}}
   {{template "Go.GeneratedHeader" (Global "OutputDir")}}
 
   import (
     "android.googlesource.com/platform/tools/gpu/atom"
     "android.googlesource.com/platform/tools/gpu/binary"
-    bschema "android.googlesource.com/platform/tools/gpu/binary/schema"
-    "android.googlesource.com/platform/tools/gpu/gfxapi/schema"
-    "android.googlesource.com/platform/tools/gpu/service"
+    "android.googlesource.com/platform/tools/gpu/binary/schema"
   )
 
   func init() {
     {{ForEach (AllCommands $) "Atom" | JoinWith "\n¶"}}
   }
-
-  func init() {
-    s := schemaBuilder{
-      staticArrays: make(map[int]*service.StaticArrayInfo),
-      maps:         make(map[int]*service.MapInfo),
-      enums:        make(map[int]*service.EnumInfo),
-      structs:      make(map[int]*service.StructInfo),
-      classes:      make(map[int]*service.ClassInfo),
-    }
-    _ = s
-
-    {{range $i, $c := AllCommands $}}
-      schema.RegisterAtom({{Macro "Command" "Command" $c "Index" $i}})
-    {{end}}
-  }
-
-  type schemaBuilder struct {
-    staticArrays map[int]*service.StaticArrayInfo
-    maps         map[int]*service.MapInfo
-    enums        map[int]*service.EnumInfo
-    structs      map[int]*service.StructInfo
-    classes      map[int]*service.ClassInfo
-  }
-  {{Macro "GetInfo" "Type" "StaticArray" "Map" "staticArrays" "List" $.StaticArrays}}
-  {{Macro "GetInfo" "Type" "Map"         "Map" "maps"         "List" $.Maps        }}
-  {{Macro "GetInfo" "Type" "Enum"        "Map" "enums"        "List" $.Enums       }}
-  {{Macro "GetInfo" "Type" "Class"       "Map" "classes"      "List" $.Classes     }}
 
 {{end}}
 
@@ -71,7 +41,7 @@
 */}}
 {{define "Atom"}}
   {{AssertType $ "Function"}}
-  sc_{{Macro "Go.CmdName" $}} := bschema.Of((*{{Macro "Go.CmdName" $}})(nil).Class())
+  sc_{{Macro "Go.CmdName" $}} := schema.Of((*{{Macro "Go.CmdName" $}})(nil).Class())
   sc_{{Macro "Go.CmdName" $}}.Metadata = append(sc_{{Macro "Go.CmdName" $}}.Metadata, &atom.Metadata{
     Api: binary.ID(apiID),
     Flags: 0§
@@ -80,229 +50,4 @@
     ,
     DocumentationUrl: "{{$.Docs}}",
   })
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the logic for retrieving information for the specified items list.
--------------------------------------------------------------------------------
-*/}}
-{{define "GetInfo"}}
-  {{AssertType $.Type "string"}}
-
-  func (s schemaBuilder) get{{$.Type}}Info(id int) *service.{{$.Type}}Info {
-    e, f := s.{{$.Map}}[id]
-    if f {
-      return e
-    }
-    switch id {
-      {{range $id, $e := $.List}}
-        case {{$id}}:
-          e = {{Macro $.Type $e}}
-      {{end}}
-    }
-    s.{{$.Map}}[id] = e
-    return e
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified array.
--------------------------------------------------------------------------------
-*/}}
-{{define "Array"}}
-  {{AssertType $ "Array"}}
-
-  service.CreateArrayInfo("{{$.Name}}", service.TypeKindArray, {{Macro "TypeInfo" $.ValueType}})
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified static array.
--------------------------------------------------------------------------------
-*/}}
-{{define "StaticArray"}}
-  {{AssertType $ "StaticArray"}}
-
-  service.CreateStaticArrayInfo("{{$.Name}}", service.TypeKindStaticArray, {{Macro "TypeInfo" $.ValueType}}, {{$.Size}})
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified map.
--------------------------------------------------------------------------------
-*/}}
-{{define "Map"}}
-  {{AssertType $ "Map"}}
-
-  service.CreateMapInfo("{{$.Name}}", service.TypeKindMap, {{Macro "TypeInfo" $.KeyType}}, {{Macro "TypeInfo" $.ValueType}})
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified enum.
--------------------------------------------------------------------------------
-*/}}
-{{define "Enum"}}
-  {{AssertType $ "Enum"}}
-
-  {{$api := Global "api"}}
-  service.CreateEnumInfo(
-    "{{$.Name}}",
-    service.TypeKindEnum,
-    []service.EnumEntry{
-      {{range $v := $.Entries}}
-        service.EnumEntry{
-          Name:  "{{$v.Name}}",
-          Value: {{$v.Value}},
-        },
-      {{end}}
-    },
-    service.EnumInfoPtrArray {
-      {{range $v := $.Extends}}
-        s.getEnumInfo({{IndexOf $api.Enums $v}}),
-      {{end}}
-    },
-  )
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified class.
--------------------------------------------------------------------------------
-*/}}
-{{define "Class"}}
-  {{AssertType $ "Class"}}
-
-  {{$api := Global "api"}}
-  service.CreateClassInfo(
-    "{{$.Name}}",
-    service.TypeKindClass,
-    service.FieldInfoPtrArray{
-      {{Macro "Fields" $}}
-    },
-    service.ClassInfoPtrArray {
-      {{range $v := $.Extends}}
-        s.getClassInfo({{IndexOf $api.Classes $v}}),
-      {{end}}
-    },
-  )
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for all global variables of the specified API.
--------------------------------------------------------------------------------
-*/}}
-{{define "Globals"}}
-  {{AssertType $ "API"}}
-
-  {{range $g := $.Globals}}
-    &service.FieldInfo{
-      Name: "{{$g.Name}}",
-      Type: {{Macro "TypeInfo" (TypeOf $g)}},
-    },
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for all fields of the specified class.
--------------------------------------------------------------------------------
-*/}}
-{{define "Fields"}}
-  {{AssertType $ "Class"}}
-
-  {{range $f := $.Fields}}
-    &service.FieldInfo{
-      Name: "{{$f.Name}}",
-      Type: {{Macro "TypeInfo" (TypeOf $f)}},
-    },
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for the specified command.
--------------------------------------------------------------------------------
-*/}}
-{{define "Command"}}
-  {{AssertType $.Command "Function"}}
-
-  service.AtomInfo{
-    Api:        service.ApiId{ID: binary.ID(apiID)},
-    Type:       {{$.Index}},
-    Name:       "{{Macro "CmdName" $.Command}}",
-    Parameters: []service.ParameterInfo{
-      {{range $p := $.Command.FullParameters}}
-        service.ParameterInfo{
-          Name: "{{$p.Name}}",
-          Type: {{Macro "TypeInfo" (TypeOf $p)}},
-          Out:  {{if eq $p.Name "result"}}true{{else}}false{{end}},
-        },
-      {{end}}
-    },
-    IsCommand:        true,
-    IsDrawCall:       {{if GetAnnotation $.Command "DrawCall"}}true{{else}}false{{end}},
-    IsEndOfFrame:     {{if GetAnnotation $.Command "EndOfFrame"}}true{{else}}false{{end}},
-    DocumentationUrl: "{{$.Command.Docs}}",
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits information for manually declared atoms.
--------------------------------------------------------------------------------
-*/}}
-{{define "FixedAtoms"}}
-  service.AtomInfo{
-    Type: uint16(atom.TypeIDEos),
-    Name: "EndOfStream",
-  },
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits logic to get the information for the given item.
--------------------------------------------------------------------------------
-*/}}
-{{define "TypeInfo"}}§
-  {{$api := Global "api"}}
-  {{     if IsPseudonym     $}}{{Macro "TypeInfo" $.To}}
-  {{else if IsSlice         $}}schema.Int /* TODO: Slice */
-  {{else if IsStaticArray   $}}s.getStaticArrayInfo({{IndexOf $api.StaticArrays $}})
-  {{else if IsMap           $}}s.getMapInfo({{IndexOf $api.Maps $}})
-  {{else if IsEnum          $}}s.getEnumInfo({{IndexOf $api.Enums $}})
-  {{else if IsClass         $}}s.getClassInfo({{IndexOf $api.Classes $}})
-  {{else if IsPointer       $}}schema.Pointer
-  {{else if IsReference     $}}schema.Int /* TODO: Reference */
-  {{else if IsBool          $}}schema.Bool
-  {{else if IsInt           $}}schema.Int
-  {{else if IsUint          $}}schema.Uint
-  {{else if IsS8            $}}schema.S8
-  {{else if IsU8            $}}schema.U8
-  {{else if IsS16           $}}schema.S16
-  {{else if IsU16           $}}schema.U16
-  {{else if IsS32           $}}schema.S32
-  {{else if IsU32           $}}schema.U32
-  {{else if IsF32           $}}schema.Float
-  {{else if IsS64           $}}schema.S64
-  {{else if IsU64           $}}schema.U64
-  {{else if IsF64           $}}schema.Double
-  {{else if IsString        $}}schema.String
-  {{else if IsAny           $}}schema.Any
-  {{else}}{{Error "macro TypeInfo called with unsupported type: %v" $.Name}}
-  {{end}}
 {{end}}

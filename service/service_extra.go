@@ -265,18 +265,6 @@ type resultResolveReport struct {
 	value Report
 }
 
-// Call ResolveSchema
-type callResolveSchema struct {
-	binary.Generate
-	id SchemaId
-}
-
-// Result ResolveSchema
-type resultResolveSchema struct {
-	binary.Generate
-	value Schema
-}
-
 // Call ResolveState
 type callResolveState struct {
 	binary.Generate
