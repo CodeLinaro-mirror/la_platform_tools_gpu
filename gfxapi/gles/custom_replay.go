@@ -105,38 +105,38 @@ func (i UniformLocation) remap(a atom.Atom, s *gfxapi.State) (key interface{}, r
 
 func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	if getContext(s).BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER] != 0 {
-		return value.AbsolutePointer(i.Address)
+		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
-		return value.RemappedPointer(i.Address)
+		return value.RemappedPointer(i.Pointer.Address)
 	}
 }
 
 func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	if getContext(s).BoundBuffers[BufferTarget_GL_ARRAY_BUFFER] != 0 {
-		return value.AbsolutePointer(i.Address)
+		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
-		return value.RemappedPointer(i.Address)
+		return value.RemappedPointer(i.Pointer.Address)
 	}
 }
 
 func (i TexturePointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if i.Address == 0 {
-		return value.AbsolutePointer(i.Address)
+	if i.Pointer.Address == 0 {
+		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
-		return value.RemappedPointer(i.Address)
+		return value.RemappedPointer(i.Pointer.Address)
 	}
 }
 
 func (i BufferDataPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if i.Address == 0 {
-		return value.AbsolutePointer(i.Address)
+	if i.Pointer.Address == 0 {
+		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
-		return value.RemappedPointer(i.Address)
+		return value.RemappedPointer(i.Pointer.Address)
 	}
 }
 
 func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	return value.AbsolutePointer(i.Address)
+	return value.AbsolutePointer(i.Pointer.Address)
 }
 
 // AttributeLocations cannot be remapped like UniformLocations as the VertexAttributeArrays are
@@ -161,7 +161,7 @@ func (ω *EglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 
 func (ω *EglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	if ω.Context.Address == 0 {
+	if ω.Context.Pointer.Address == 0 {
 		return nil
 	}
 	ctxID := uint32(getState(s).EGLContexts[ω.Context].Identifier)
@@ -182,7 +182,7 @@ func (ω *WglCreateContextAttribsARB) Replay(i atom.ID, s *gfxapi.State, d datab
 
 func (ω *WglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	if ω.Hglrc.Address == 0 {
+	if ω.Hglrc.Pointer.Address == 0 {
 		return nil
 	}
 	ctxID := uint32(getState(s).WGLContexts[ω.Hglrc].Identifier)
@@ -197,7 +197,7 @@ func (ω *CGLCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Databa
 
 func (ω *CGLSetCurrentContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	if ω.Ctx.Address == 0 {
+	if ω.Ctx.Pointer.Address == 0 {
 		return nil
 	}
 	ctxID := uint32(getState(s).CGLContexts[ω.Ctx].Identifier)
@@ -218,7 +218,7 @@ func (ω *GlXCreateNewContext) Replay(i atom.ID, s *gfxapi.State, d database.Dat
 
 func (ω *GlXMakeContextCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	if ω.Ctx.Address == 0 {
+	if ω.Ctx.Pointer.Address == 0 {
 		return nil
 	}
 	ctxID := uint32(getState(s).GLXContexts[ω.Ctx].Identifier)

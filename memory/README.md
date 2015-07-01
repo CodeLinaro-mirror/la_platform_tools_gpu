@@ -12,9 +12,14 @@ var Namespace = registry.NewNamespace()
 ```
 
 ```go
-var Tmp = Range{
-	Base: 0x00000000ff000000,
-	Size: 0x0000000000ffffff,
+var Nullptr = Pointer{Pool: ApplicationPool}
+```
+Nullptr is a zero-address pointer in the application pool.
+
+```go
+var Tmp = Pointer{
+	Address: 0x00000000ff000000,
+	Pool:    ApplicationPool,
 }
 ```
 
@@ -43,10 +48,20 @@ Writer returns a binary writer for the specified memory pool and range.
 #### type Pointer
 
 ```go
-type Pointer uint64
+type Pointer struct {
+	binary.Generate
+	Address uint64 // The memory address.
+	Pool    PoolID // The memory pool.
+}
 ```
 
 Pointer is the type representing a memory pointer.
+
+#### func (*Pointer) Class
+
+```go
+func (*Pointer) Class() binary.Class
+```
 
 #### func (Pointer) Offset
 
@@ -90,7 +105,7 @@ Get called will any resolving, loading or copying of binary data occur.
 #### func (*Pool) At
 
 ```go
-func (m *Pool) At(p Pointer) Slice
+func (m *Pool) At(addr uint64) Slice
 ```
 At returns an unbounded Slice starting at p.
 
@@ -111,9 +126,9 @@ String returns the full history of writes performed to this pool.
 #### func (*Pool) Write
 
 ```go
-func (m *Pool) Write(dst Pointer, src Slice)
+func (m *Pool) Write(dst uint64, src Slice)
 ```
-Write copies the slice src to dst.
+Write copies the slice src to the address dst.
 
 #### type PoolID
 
@@ -146,8 +161,8 @@ func (v PoolID) String() string
 ```go
 type Range struct {
 	binary.Generate
-	Base Pointer // A pointer to the first byte in the memory range.
-	Size uint64  // The size in bytes of the memory range.
+	Base uint64 // The address of the first byte in the memory range.
+	Size uint64 // The size in bytes of the memory range.
 }
 ```
 
@@ -162,30 +177,30 @@ func (*Range) Class() binary.Class
 #### func (Range) Contains
 
 ```go
-func (i Range) Contains(p Pointer) bool
+func (i Range) Contains(addr uint64) bool
 ```
-Contains returns true if the pointer p is within the Range.
+Contains returns true if the address addr is within the Range.
 
 #### func (Range) End
 
 ```go
-func (i Range) End() Pointer
+func (i Range) End() uint64
 ```
-End returns a Pointer to one byte beyond the end of the Range.
+End returns the address of one byte beyond the end of the Range.
 
 #### func (Range) Expand
 
 ```go
-func (i Range) Expand(p Pointer) Range
+func (i Range) Expand(addr uint64) Range
 ```
-Expand returns a new Range that is grown to include the pointer p.
+Expand returns a new Range that is grown to include the address addr.
 
 #### func (Range) First
 
 ```go
-func (i Range) First() Pointer
+func (i Range) First() uint64
 ```
-First returns a Pointer to the first byte in the Range.
+First returns the address of the first byte in the Range.
 
 #### func (Range) Intersect
 
@@ -198,9 +213,9 @@ two memory ranges do not intersect, then this function panics.
 #### func (Range) Last
 
 ```go
-func (i Range) Last() Pointer
+func (i Range) Last() uint64
 ```
-Last returns a Pointer to the last byte in the Range.
+Last returns the address of the last byte in the Range.
 
 #### func (Range) Overlaps
 

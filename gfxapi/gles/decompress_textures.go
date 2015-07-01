@@ -61,7 +61,6 @@ func decompressTextures(device *service.Device, capture service.CaptureId, d dat
 				panic(err)
 			}
 
-			address := memory.Tmp.Base
 			size := a.Width * a.Height * 4
 			out.Write(i, NewGlTexImage2D(
 				a.Target,
@@ -72,8 +71,8 @@ func decompressTextures(device *service.Device, capture service.CaptureId, d dat
 				a.Border,
 				TexelFormat_GL_RGBA,
 				TexelType_GL_UNSIGNED_BYTE,
-				address,
-			).AddRead(address.Range(uint64(size)), id))
+				memory.Tmp,
+			).AddRead(memory.Tmp.Range(uint64(size)), id))
 
 		default:
 			out.Write(i, a)

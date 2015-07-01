@@ -35,6 +35,10 @@ const replayTimeout = time.Second * 5
 
 var generateReferenceImages = flag.Bool("generate", false, "generate reference images")
 
+func p(addr uint64) memory.Pointer {
+	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
+}
+
 func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID) {
 	select {
 	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, false):
@@ -67,19 +71,19 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 }
 
 func initContext(a device.Architecture, d database.Database, l log.Logger, width, height uint32) atom.List {
-	eglDisplay := memory.Pointer(0x1000)
-	eglConfig := memory.Pointer(0x2000)
-	eglShareContext := memory.Pointer(0)
+	eglDisplay := p(0x1000)
+	eglConfig := p(0x2000)
+	eglShareContext := memory.Nullptr
 	eglAttribList := []gles.EGLint{0}
-	eglSurface := memory.Pointer(0x3000)
-	eglContext := memory.Pointer(0x5000)
+	eglSurface := p(0x3000)
+	eglContext := p(0x5000)
 	eglTrue := gles.EGLBoolean(1)
 	color := gles.RenderbufferFormat_GL_RGB565
 	depth := gles.RenderbufferFormat_GL_DEPTH_COMPONENT16
 	stencil := gles.RenderbufferFormat_GL_STENCIL_INDEX8
 	return atom.List{
-		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, 0x1000000, eglContext).
-			AddRead(atom.Data(a, d, l, 0x1000000, eglAttribList)),
+		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
+			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
 		gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */),
 	}
@@ -155,8 +159,8 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(program),
 		gles.NewGlGetAttribLocation(program, "position", position),
 		gles.NewGlEnableVertexAttribArray(position),
-		gles.NewGlVertexAttribPointer(position, 2, gles.VertexAttribType_GL_FLOAT, false, 0, 0x100000).
-			AddRead(atom.Data(a, d, l, 0x100000, vertices)),
+		gles.NewGlVertexAttribPointer(position, 2, gles.VertexAttribType_GL_FLOAT, false, 0, p(0x100000)).
+			AddRead(atom.Data(a, d, l, p(0x100000), vertices)),
 		gles.NewGlDrawArrays(gles.DrawMode_GL_TRIANGLES, 0, 3),
 	)
 

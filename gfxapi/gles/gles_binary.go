@@ -380,39 +380,39 @@ var (
 	binaryIDBackbufferInfo                         = binary.ID{0x44, 0xeb, 0x57, 0x06, 0xf9, 0xfd, 0x06, 0xab, 0xc2, 0xa7, 0xdc, 0xa2, 0xba, 0xd0, 0xe3, 0x8f, 0x76, 0x7c, 0x81, 0x0f}
 	binaryIDColor                                  = binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}
 	binaryIDBlendState                             = binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}
-	binaryIDSliceInfo                              = binary.ID{0x8f, 0xcd, 0x2e, 0xfa, 0xbc, 0x4e, 0xc3, 0x2d, 0x4b, 0x9a, 0x07, 0x47, 0x8c, 0x80, 0x3d, 0x7f, 0xda, 0x5b, 0x6a, 0xad}
+	binaryIDSliceInfo                              = binary.ID{0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9}
 	binaryIDBoolˢ                                  = binary.ID{0xf9, 0x44, 0xf2, 0x44, 0xbb, 0x78, 0x01, 0x7e, 0x56, 0xa1, 0x2f, 0x0d, 0x73, 0x9c, 0xa1, 0x77, 0x23, 0x5d, 0x47, 0xa8}
-	binaryIDBoolᵖ                                  = binary.ID{0x99, 0x14, 0xff, 0xcd, 0xe4, 0x5a, 0xa6, 0x40, 0x28, 0xce, 0x7f, 0x59, 0x66, 0x8e, 0x03, 0x31, 0x08, 0x3e, 0x1b, 0x8a}
+	binaryIDBoolᵖ                                  = binary.ID{0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24}
 	binaryIDU8ˢ                                    = binary.ID{0xf7, 0xd9, 0x83, 0x86, 0x77, 0xcc, 0x52, 0xb0, 0x80, 0x2f, 0xfc, 0x47, 0xa5, 0x91, 0x72, 0xd9, 0x3b, 0xcd, 0x65, 0x01}
 	binaryIDBuffer                                 = binary.ID{0xcb, 0x13, 0xd8, 0x5c, 0x1e, 0x96, 0x94, 0x10, 0x35, 0x50, 0xc5, 0x56, 0x64, 0xc7, 0xa6, 0x9e, 0x0c, 0xe2, 0x7d, 0x9e}
-	binaryIDBufferDataPointer                      = binary.ID{0xec, 0x9b, 0x06, 0x05, 0x8b, 0x40, 0x9b, 0x3e, 0x3b, 0xf2, 0x28, 0x02, 0x1d, 0x73, 0xbb, 0xf2, 0x75, 0x70, 0x0e, 0x69}
+	binaryIDBufferDataPointer                      = binary.ID{0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b}
 	binaryIDBufferIdˢ                              = binary.ID{0xfc, 0xf6, 0xb4, 0xce, 0x3b, 0x26, 0x76, 0xbb, 0xcc, 0x8f, 0x7e, 0xb8, 0x5c, 0xd5, 0x83, 0x62, 0x52, 0x48, 0x48, 0x78}
-	binaryIDBufferIdᵖ                              = binary.ID{0x4e, 0x93, 0x7a, 0x49, 0x93, 0xb1, 0x5e, 0x9f, 0x01, 0x00, 0x5f, 0xa1, 0x77, 0xff, 0x03, 0x71, 0x93, 0x81, 0x7a, 0x22}
-	binaryIDCGLContextObj                          = binary.ID{0xab, 0x86, 0x6f, 0x74, 0x93, 0x88, 0x54, 0x0f, 0x24, 0x0f, 0x0b, 0xc0, 0x3c, 0x31, 0x13, 0xf7, 0x84, 0x0b, 0xc2, 0x53}
+	binaryIDBufferIdᵖ                              = binary.ID{0xdd, 0x87, 0xfa, 0xe3, 0xdf, 0x7b, 0x94, 0x84, 0xf3, 0x9b, 0xcb, 0xce, 0x6b, 0xbd, 0x3c, 0x5e, 0x9d, 0x78, 0xe5, 0x6d}
+	binaryIDCGLContextObj                          = binary.ID{0xa6, 0xab, 0x7a, 0x4b, 0x0e, 0xf6, 0x54, 0x78, 0xf8, 0xa3, 0xda, 0x81, 0xd5, 0xc8, 0x50, 0x96, 0xea, 0x6f, 0x2d, 0x7e}
 	binaryIDCGLContextObjˢ                         = binary.ID{0x3e, 0xaa, 0x5d, 0xd6, 0xa9, 0x30, 0xaf, 0x07, 0xac, 0xa4, 0xc1, 0xd6, 0x41, 0xd6, 0x15, 0x75, 0x99, 0xf2, 0xcb, 0x9f}
-	binaryIDCGLContextObjᵖ                         = binary.ID{0xa5, 0xae, 0x0c, 0xd1, 0xe4, 0x8a, 0xce, 0xaa, 0x58, 0x17, 0x44, 0x03, 0x19, 0xcc, 0xf2, 0xea, 0x50, 0x88, 0x53, 0xb9}
-	binaryIDCGLPixelFormatObj                      = binary.ID{0x81, 0x5b, 0xcb, 0x83, 0x09, 0xbc, 0x3d, 0x7e, 0x40, 0x9c, 0xdd, 0x21, 0x56, 0xa3, 0x69, 0xef, 0x28, 0xea, 0x84, 0x41}
+	binaryIDCGLContextObjᵖ                         = binary.ID{0x9b, 0xbe, 0x32, 0x83, 0x89, 0x68, 0x87, 0x69, 0x22, 0xa0, 0xcf, 0xd6, 0x63, 0xeb, 0x8f, 0xfb, 0x81, 0x2f, 0x4b, 0x56}
+	binaryIDCGLPixelFormatObj                      = binary.ID{0x49, 0x1d, 0x13, 0xc7, 0x27, 0x10, 0xfb, 0xe6, 0xd2, 0xe9, 0x64, 0x94, 0xae, 0xe7, 0x39, 0x7b, 0x78, 0xed, 0x89, 0x2f}
 	binaryIDCGLCreateContext                       = binary.ID{0x87, 0xeb, 0x7f, 0x5e, 0x46, 0xd1, 0x7c, 0xf4, 0x3c, 0x36, 0x44, 0x4b, 0x60, 0x5d, 0xaf, 0xc5, 0x43, 0xc5, 0x2c, 0x61}
 	binaryIDCGLFlushDrawable                       = binary.ID{0x66, 0xb7, 0x6a, 0xa6, 0xc2, 0x2a, 0xab, 0x8e, 0xda, 0x18, 0x0e, 0x76, 0x78, 0xc5, 0xf3, 0xe5, 0xce, 0x2f, 0x91, 0x54}
-	binaryIDCGSConnectionIDᵖ                       = binary.ID{0x38, 0x8c, 0x60, 0xcd, 0x8b, 0x2b, 0x18, 0xa7, 0x29, 0x99, 0xbf, 0x46, 0x8d, 0xfb, 0xc0, 0x3d, 0xe9, 0x9a, 0xd5, 0x48}
-	binaryIDCGSWindowIDᵖ                           = binary.ID{0xbf, 0x73, 0x42, 0x2f, 0xcd, 0xec, 0xa9, 0x1e, 0x11, 0x55, 0x2d, 0x08, 0x00, 0xd1, 0x37, 0x01, 0x08, 0xc6, 0x5d, 0x24}
-	binaryIDCGSSurfaceIDᵖ                          = binary.ID{0x19, 0x36, 0xee, 0x80, 0x3a, 0xe1, 0x89, 0x37, 0xcf, 0xe1, 0x30, 0xfa, 0xde, 0x0e, 0xff, 0x1a, 0x4c, 0x08, 0x08, 0x51}
+	binaryIDCGSConnectionIDᵖ                       = binary.ID{0x56, 0x76, 0x11, 0xe9, 0x30, 0xc9, 0x2c, 0x5e, 0xa4, 0xe8, 0x77, 0x74, 0xff, 0x8f, 0xd0, 0x10, 0xfe, 0x07, 0xbc, 0xe9}
+	binaryIDCGSWindowIDᵖ                           = binary.ID{0xad, 0x99, 0x13, 0x23, 0x11, 0xd0, 0xbb, 0x78, 0x00, 0x65, 0x72, 0xa7, 0x8f, 0xf1, 0x60, 0xab, 0x6a, 0xc0, 0x26, 0xe8}
+	binaryIDCGSSurfaceIDᵖ                          = binary.ID{0x53, 0xa8, 0xa4, 0x0a, 0x4c, 0xf6, 0x2a, 0xe8, 0xfa, 0xb9, 0x5e, 0x78, 0x2b, 0x17, 0x84, 0x22, 0x02, 0xa7, 0x07, 0x0a}
 	binaryIDCGLGetSurface                          = binary.ID{0x74, 0xdc, 0x8d, 0x31, 0x83, 0x7c, 0x92, 0x53, 0x8b, 0xbe, 0x2b, 0x76, 0x07, 0xa2, 0xaf, 0x98, 0x27, 0x26, 0xd2, 0x16}
 	binaryIDCGLSetCurrentContext                   = binary.ID{0x88, 0xc1, 0x83, 0x0a, 0xe8, 0x2c, 0x03, 0xa0, 0x88, 0x20, 0xb9, 0x75, 0xfd, 0xb0, 0x14, 0xca, 0xbd, 0x78, 0x2d, 0x6f}
-	binaryIDCGSConnectionID                        = binary.ID{0x44, 0x54, 0x8b, 0xc2, 0x8e, 0x89, 0xcb, 0x34, 0x5f, 0xc6, 0x32, 0x5f, 0xd8, 0x3f, 0x4f, 0x0b, 0x38, 0x21, 0xf7, 0xa2}
+	binaryIDCGSConnectionID                        = binary.ID{0x21, 0xcd, 0x03, 0x5f, 0x8b, 0x45, 0xa5, 0x23, 0x39, 0x4e, 0xcd, 0x5e, 0x2a, 0xc3, 0xbc, 0xa3, 0x00, 0x61, 0xce, 0x9a}
 	binaryIDCGSConnectionIDˢ                       = binary.ID{0xb8, 0x92, 0xdf, 0x8c, 0xe0, 0x7b, 0x48, 0xa0, 0x2e, 0x72, 0x45, 0x2b, 0x8e, 0x08, 0xbf, 0x3a, 0x9b, 0x4f, 0x5d, 0x2f}
-	binaryIDF64ᵖ                                   = binary.ID{0xf2, 0xcc, 0xdb, 0xcc, 0xed, 0x7e, 0x95, 0x7d, 0xf8, 0xdc, 0xe8, 0xbc, 0x49, 0xbf, 0xdd, 0x12, 0xd9, 0xf2, 0xd8, 0x55}
+	binaryIDF64ᵖ                                   = binary.ID{0x72, 0xdd, 0xe6, 0x80, 0x3a, 0x16, 0x82, 0xd3, 0x04, 0x9b, 0x5e, 0x5d, 0x7d, 0x72, 0x99, 0x82, 0x3a, 0x24, 0x28, 0xe0}
 	binaryIDCGSGetSurfaceBounds                    = binary.ID{0xc3, 0x59, 0xf1, 0x88, 0xb4, 0x83, 0x28, 0xd2, 0x24, 0x88, 0xdf, 0xf5, 0xb5, 0x59, 0x80, 0xdd, 0x77, 0x5e, 0xfa, 0xd7}
 	binaryIDCGSSurfaceIDˢ                          = binary.ID{0xf2, 0xbd, 0x74, 0x6c, 0x45, 0x68, 0xbc, 0x71, 0x0c, 0x0d, 0xc4, 0x8d, 0x7b, 0xc9, 0x40, 0x1b, 0xbe, 0xb9, 0xf5, 0xed}
 	binaryIDCGSWindowIDˢ                           = binary.ID{0x88, 0x07, 0x63, 0x00, 0x36, 0x4d, 0x91, 0x9e, 0x1a, 0x10, 0x78, 0x10, 0xde, 0x80, 0xd8, 0x30, 0x03, 0x4e, 0x64, 0x7a}
 	binaryIDCharˢ                                  = binary.ID{0x70, 0x6d, 0x95, 0x73, 0x2e, 0xce, 0x6e, 0x8c, 0xc5, 0x05, 0x19, 0x07, 0x10, 0xbd, 0x46, 0x47, 0x9e, 0x83, 0x55, 0x5c}
-	binaryIDCharᵖ                                  = binary.ID{0x67, 0xe3, 0xfd, 0x6e, 0x09, 0x7e, 0xa7, 0x65, 0x7f, 0x40, 0x8d, 0xd4, 0x35, 0x40, 0xcc, 0x38, 0x25, 0x23, 0x66, 0xdf}
+	binaryIDCharᵖ                                  = binary.ID{0xac, 0x44, 0x67, 0xfc, 0xf8, 0x14, 0x79, 0xb0, 0x1e, 0xd5, 0xf7, 0xb0, 0xbb, 0xcb, 0x2b, 0x24, 0x88, 0xf4, 0x59, 0xc7}
 	binaryIDCharᵖˢ                                 = binary.ID{0x5e, 0x23, 0xd9, 0xba, 0xac, 0xf5, 0x87, 0x07, 0xb1, 0xef, 0x52, 0x7a, 0x95, 0xfb, 0x13, 0xec, 0x0b, 0x2e, 0x61, 0xf7}
-	binaryIDCharᵖᵖ                                 = binary.ID{0x1f, 0x0a, 0x07, 0xb4, 0xda, 0x1f, 0xda, 0x6d, 0x01, 0xbb, 0xd6, 0x9b, 0x33, 0xf9, 0x9c, 0x19, 0xa8, 0x14, 0x5b, 0x5e}
+	binaryIDCharᵖᵖ                                 = binary.ID{0x3e, 0x4b, 0x7b, 0x0f, 0x18, 0x84, 0x97, 0xb1, 0xa9, 0xb4, 0xc2, 0x88, 0x58, 0x25, 0x77, 0x91, 0x28, 0xfb, 0x25, 0x46}
 	binaryIDClearState                             = binary.ID{0xd3, 0xbe, 0x8f, 0x85, 0x49, 0x55, 0xe3, 0x17, 0x03, 0xb1, 0x02, 0x1c, 0xe0, 0x2d, 0x25, 0x8c, 0x17, 0x53, 0xc5, 0x62}
 	binaryIDRect                                   = binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}
 	binaryIDRasterizerState                        = binary.ID{0x51, 0x6b, 0x55, 0xed, 0xe3, 0x43, 0x1c, 0xe8, 0x28, 0x3f, 0x1d, 0xeb, 0x3b, 0x37, 0x21, 0x9f, 0x89, 0xbc, 0xdb, 0x28}
-	binaryIDVertexPointer                          = binary.ID{0xbb, 0xd9, 0x9d, 0xbc, 0x5d, 0xd2, 0xa9, 0x87, 0x68, 0x91, 0xd2, 0xd2, 0xc2, 0xc9, 0x9d, 0xf6, 0xdd, 0xe2, 0x3c, 0x6c}
+	binaryIDVertexPointer                          = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
 	binaryIDVertexAttributeArray                   = binary.ID{0xa4, 0x7d, 0x5e, 0xd9, 0x3b, 0x4e, 0x4e, 0xc2, 0xc4, 0x2b, 0x81, 0xe9, 0xc8, 0x56, 0xf6, 0xf9, 0x63, 0x47, 0xca, 0x11}
 	binaryIDRenderbuffer                           = binary.ID{0x84, 0x68, 0xd5, 0xd8, 0xde, 0xfc, 0xbd, 0x62, 0xda, 0xc3, 0x55, 0x74, 0xbf, 0xc5, 0x6c, 0xe8, 0xa5, 0xa3, 0xe7, 0x70}
 	binaryIDImage                                  = binary.ID{0x0a, 0x10, 0xd1, 0xf9, 0x89, 0x9f, 0x2a, 0xa6, 0xd6, 0xbf, 0x08, 0x1a, 0xf9, 0x7c, 0xb7, 0xa1, 0x48, 0xa1, 0xd8, 0xea}
@@ -429,32 +429,32 @@ var (
 	binaryIDObjects                                = binary.ID{0x8a, 0x05, 0xaa, 0xf5, 0xa8, 0x57, 0xb0, 0xf1, 0x13, 0x48, 0x39, 0x76, 0xec, 0x1e, 0x47, 0x0b, 0x6c, 0x3b, 0xf6, 0xe0}
 	binaryIDContext                                = binary.ID{0xc6, 0x81, 0x84, 0x13, 0x02, 0x9b, 0x76, 0x8b, 0x5b, 0x09, 0x10, 0xe4, 0x96, 0x22, 0xb2, 0x60, 0x14, 0xbd, 0x65, 0x01}
 	binaryIDDiscardFramebufferAttachmentˢ          = binary.ID{0xae, 0xbe, 0xc1, 0x3d, 0xe7, 0xac, 0x54, 0x61, 0xb0, 0x38, 0xe0, 0xab, 0x04, 0x96, 0x6c, 0x77, 0x78, 0x29, 0x2f, 0xdf}
-	binaryIDDiscardFramebufferAttachmentᵖ          = binary.ID{0x23, 0xd9, 0x67, 0x4f, 0x82, 0x7e, 0x62, 0x8d, 0x54, 0xc3, 0xec, 0x98, 0xc5, 0x3e, 0xba, 0xf5, 0xa6, 0x3f, 0x52, 0x1f}
-	binaryIDEGLConfig                              = binary.ID{0x2a, 0xd8, 0x24, 0x8e, 0x95, 0xb5, 0x5d, 0x86, 0xe8, 0x84, 0x21, 0x3a, 0x2c, 0xee, 0xfd, 0x90, 0xd2, 0xab, 0xd8, 0x5c}
-	binaryIDEGLContext                             = binary.ID{0x29, 0x18, 0x4c, 0xdb, 0x8b, 0xf5, 0xcf, 0xcc, 0xfc, 0xf8, 0x62, 0x25, 0x1f, 0xf1, 0x45, 0x0e, 0x20, 0x23, 0xce, 0x8e}
-	binaryIDEGLDisplay                             = binary.ID{0x85, 0x54, 0x9a, 0x82, 0x0b, 0x08, 0xcc, 0x4c, 0x6b, 0x1c, 0xcc, 0x0e, 0x85, 0x09, 0x68, 0x5c, 0x93, 0x51, 0x24, 0x5e}
-	binaryIDEGLSurface                             = binary.ID{0x6b, 0xba, 0xab, 0x4f, 0xa1, 0xaa, 0x01, 0xdb, 0x61, 0xe3, 0xbb, 0x84, 0xf5, 0x1b, 0xf6, 0x39, 0xda, 0x3c, 0xf7, 0xb8}
+	binaryIDDiscardFramebufferAttachmentᵖ          = binary.ID{0x6d, 0x1c, 0x44, 0xa8, 0x5c, 0xba, 0x63, 0x54, 0xbe, 0x8e, 0xbe, 0x16, 0x40, 0x3f, 0xbe, 0xdb, 0xd7, 0xc0, 0x82, 0xb5}
+	binaryIDEGLConfig                              = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
+	binaryIDEGLContext                             = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
+	binaryIDEGLDisplay                             = binary.ID{0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10}
+	binaryIDEGLSurface                             = binary.ID{0x59, 0x9b, 0x7a, 0xba, 0x22, 0x2a, 0xf1, 0x39, 0x66, 0x60, 0x82, 0x26, 0x3c, 0xd3, 0xb7, 0x72, 0x7e, 0x29, 0x27, 0xd0}
 	binaryIDEGLintˢ                                = binary.ID{0x48, 0xe6, 0xdc, 0x7e, 0x40, 0x50, 0x12, 0x29, 0xe0, 0xa8, 0x99, 0x7f, 0x32, 0x4e, 0x0f, 0x9b, 0x1b, 0xa6, 0xd1, 0x64}
-	binaryIDEGLintᵖ                                = binary.ID{0xcf, 0x1c, 0x9b, 0x06, 0x5a, 0x46, 0x2e, 0x61, 0x7d, 0xe6, 0x2e, 0x95, 0x4e, 0xfb, 0xb4, 0x41, 0x15, 0xf6, 0x9e, 0x0d}
+	binaryIDEGLintᵖ                                = binary.ID{0x53, 0x08, 0x3d, 0x08, 0x80, 0xbd, 0xb8, 0x5b, 0xa6, 0x15, 0xbb, 0x5c, 0x03, 0xa1, 0xcd, 0x6a, 0x98, 0xd4, 0x7d, 0x25}
 	binaryIDEglCreateContext                       = binary.ID{0xac, 0x3a, 0xa8, 0x3a, 0x28, 0xf3, 0x5a, 0xea, 0x3c, 0x91, 0x79, 0xd2, 0x7b, 0xc6, 0xf8, 0xb6, 0xd4, 0x07, 0x2b, 0x88}
 	binaryIDEglInitialize                          = binary.ID{0xa3, 0x4b, 0x10, 0xac, 0xe3, 0x34, 0x97, 0x4e, 0x72, 0xe2, 0x44, 0xc6, 0x21, 0x4b, 0x03, 0x0a, 0x2b, 0x01, 0x6e, 0xae}
 	binaryIDEglMakeCurrent                         = binary.ID{0x11, 0xbc, 0xee, 0xf3, 0x15, 0x6b, 0x3c, 0x40, 0x07, 0x40, 0x4c, 0xb3, 0x12, 0x2d, 0x98, 0x0c, 0xd1, 0xf0, 0xb1, 0x1e}
 	binaryIDEglQuerySurface                        = binary.ID{0x14, 0x6c, 0x8d, 0x6c, 0x45, 0xd9, 0xcd, 0xde, 0xde, 0xd0, 0x12, 0xea, 0x3f, 0x95, 0xeb, 0x43, 0xc6, 0x33, 0x40, 0x22}
-	binaryIDVoidᵖ                                  = binary.ID{0xa7, 0x86, 0xcc, 0x23, 0x0b, 0x73, 0x10, 0x9d, 0xda, 0xc6, 0x41, 0xcb, 0xf7, 0xe4, 0x97, 0x87, 0x01, 0x69, 0xc2, 0x2e}
+	binaryIDVoidᵖ                                  = binary.ID{0xf5, 0x56, 0xe8, 0x83, 0x38, 0x05, 0x76, 0x2e, 0x30, 0xd0, 0x53, 0x86, 0x4e, 0x09, 0x56, 0xef, 0x44, 0xc8, 0xce, 0xef}
 	binaryIDEglSwapBuffers                         = binary.ID{0x57, 0x1f, 0xe4, 0x1b, 0x20, 0xa1, 0x87, 0x17, 0x6c, 0x31, 0x05, 0x59, 0x10, 0x83, 0xb5, 0x3a, 0xb0, 0xa9, 0x3c, 0x39}
 	binaryIDF32ː2ᵃ                                 = binary.ID{0x5a, 0xac, 0xd4, 0xc3, 0x89, 0x9b, 0x74, 0x64, 0x55, 0x84, 0xbe, 0xec, 0xad, 0x58, 0x5d, 0xd0, 0x38, 0xf6, 0x3d, 0xdb}
 	binaryIDF32ː3ᵃ                                 = binary.ID{0x12, 0xc6, 0x38, 0xb8, 0x8c, 0x94, 0x33, 0xbc, 0xc5, 0x10, 0x2d, 0x3d, 0x61, 0xb3, 0xc1, 0x98, 0xaa, 0xda, 0x27, 0x86}
 	binaryIDF32ː4ᵃ                                 = binary.ID{0xb4, 0x29, 0x60, 0xf4, 0x43, 0x6b, 0xf8, 0xd9, 0xe8, 0x53, 0x77, 0x94, 0x87, 0x34, 0xbb, 0x38, 0x7b, 0x6f, 0x8c, 0x0b}
 	binaryIDF32ˢ                                   = binary.ID{0x80, 0xa1, 0x30, 0xea, 0x1b, 0x77, 0xd4, 0x58, 0x3c, 0xac, 0xef, 0x6d, 0xd4, 0xc8, 0x16, 0xdc, 0x5f, 0xd6, 0x7b, 0xee}
-	binaryIDF32ᵖ                                   = binary.ID{0x25, 0x42, 0x8d, 0x14, 0xfa, 0x29, 0xc8, 0xad, 0xe4, 0x75, 0x2b, 0xfa, 0xf4, 0x35, 0x5b, 0x12, 0x23, 0x97, 0x38, 0x77}
+	binaryIDF32ᵖ                                   = binary.ID{0xad, 0x4f, 0xbe, 0xc7, 0x2f, 0xaa, 0x43, 0x22, 0x03, 0xf7, 0x2a, 0xcb, 0xe1, 0x40, 0xc2, 0x9a, 0x7f, 0xae, 0x22, 0xd3}
 	binaryIDF64ˢ                                   = binary.ID{0x6a, 0xef, 0x25, 0x73, 0x5b, 0x6a, 0x6b, 0x8e, 0xcd, 0x9c, 0x2f, 0x95, 0x76, 0x64, 0x3d, 0x9d, 0x20, 0x0f, 0x94, 0x39}
 	binaryIDFlushPostBuffer                        = binary.ID{0x26, 0x4e, 0x20, 0xbb, 0xf9, 0x53, 0x75, 0xcd, 0x08, 0x98, 0x6d, 0x82, 0x25, 0x7d, 0xb5, 0xb6, 0x1e, 0xbb, 0xe1, 0xbf}
 	binaryIDFramebufferAttachmentˢ                 = binary.ID{0x96, 0x6f, 0x1f, 0xa4, 0x3c, 0xa5, 0xd5, 0x57, 0xcd, 0xaf, 0xae, 0x97, 0x82, 0xbc, 0xda, 0xeb, 0xae, 0x2c, 0x93, 0xfc}
-	binaryIDFramebufferAttachmentᵖ                 = binary.ID{0xc1, 0xc1, 0xe5, 0xa2, 0x3a, 0x14, 0xc7, 0x83, 0xf8, 0x0a, 0xf2, 0xc9, 0x7e, 0x42, 0x47, 0x17, 0x34, 0x93, 0x1a, 0x91}
+	binaryIDFramebufferAttachmentᵖ                 = binary.ID{0x1a, 0x5e, 0x91, 0xc8, 0x94, 0x7c, 0x32, 0x00, 0x6b, 0xe6, 0x9a, 0xb5, 0x4d, 0xd0, 0x33, 0x12, 0x00, 0x60, 0x34, 0x6d}
 	binaryIDFramebufferIdˢ                         = binary.ID{0xf9, 0xf6, 0x67, 0x3a, 0x17, 0x5d, 0xd4, 0x54, 0x8c, 0xa7, 0x85, 0xc0, 0x9c, 0xa3, 0x75, 0x13, 0x6f, 0x10, 0xdd, 0x79}
-	binaryIDFramebufferIdᵖ                         = binary.ID{0x5a, 0x4f, 0x87, 0xa7, 0xe2, 0xf7, 0x6e, 0xe8, 0x7f, 0xf1, 0x5e, 0x27, 0x8c, 0x71, 0xbc, 0x66, 0x3c, 0xa5, 0x82, 0xce}
-	binaryIDGLXContext                             = binary.ID{0x07, 0xef, 0xcc, 0x57, 0xc6, 0x16, 0xf2, 0x83, 0x9d, 0x0f, 0x7c, 0x71, 0xe8, 0xa6, 0xda, 0x1e, 0x45, 0xf1, 0xce, 0xfe}
-	binaryIDGLXDrawable                            = binary.ID{0x43, 0x88, 0x91, 0x75, 0x90, 0x61, 0xe4, 0xc9, 0x61, 0xd0, 0x6d, 0xdb, 0x12, 0xae, 0xe1, 0xcb, 0x87, 0x07, 0xb3, 0x05}
+	binaryIDFramebufferIdᵖ                         = binary.ID{0xa8, 0x8f, 0xf4, 0xfd, 0x2d, 0xaa, 0xd4, 0x59, 0x93, 0x48, 0xe6, 0xd8, 0x5d, 0x6b, 0xe8, 0x99, 0x72, 0xfa, 0xac, 0xec}
+	binaryIDGLXContext                             = binary.ID{0xf7, 0x65, 0x8c, 0x4a, 0x4f, 0xdf, 0x00, 0xcc, 0xb8, 0x97, 0x64, 0x1a, 0xfd, 0x6c, 0x55, 0x30, 0x4a, 0x0f, 0x1e, 0x25}
+	binaryIDGLXDrawable                            = binary.ID{0xe8, 0x9a, 0x82, 0x65, 0x61, 0x45, 0x3f, 0x8b, 0x8b, 0x50, 0xeb, 0x6a, 0x04, 0x78, 0x5c, 0xdc, 0x6b, 0xb5, 0xdc, 0x63}
 	binaryIDGlActiveTexture                        = binary.ID{0x86, 0x43, 0x07, 0xe6, 0xb5, 0x8c, 0x5b, 0x40, 0xd6, 0x5b, 0x88, 0x2a, 0x03, 0x47, 0x22, 0x92, 0x84, 0xd6, 0xd1, 0x71}
 	binaryIDGlAttachShader                         = binary.ID{0x25, 0x23, 0xee, 0xce, 0x3c, 0x37, 0xb6, 0x03, 0x61, 0xc4, 0xb6, 0xbf, 0x06, 0x38, 0xb9, 0x7f, 0x78, 0x85, 0xee, 0x77}
 	binaryIDGlBeginQuery                           = binary.ID{0x42, 0xe9, 0xe3, 0x0b, 0x3b, 0x9a, 0x1f, 0x86, 0x6f, 0x95, 0xc8, 0x3a, 0x15, 0x06, 0xb2, 0x84, 0x6a, 0x95, 0xd2, 0xf4}
@@ -483,7 +483,7 @@ var (
 	binaryIDGlClientWaitSync                       = binary.ID{0xea, 0x1e, 0x79, 0x45, 0x87, 0x25, 0x3c, 0x33, 0xcb, 0xc3, 0x9c, 0x40, 0x3c, 0x47, 0xdd, 0xee, 0x6a, 0x11, 0xa4, 0x5f}
 	binaryIDGlColorMask                            = binary.ID{0x0b, 0x72, 0x03, 0xf6, 0x51, 0x6a, 0xe3, 0xca, 0x0c, 0x5d, 0x08, 0x46, 0xf6, 0x8b, 0x71, 0xdf, 0x67, 0xe5, 0xae, 0xf9}
 	binaryIDGlCompileShader                        = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
-	binaryIDTexturePointer                         = binary.ID{0xb6, 0x31, 0x39, 0xfa, 0x37, 0x1c, 0x57, 0x16, 0x83, 0x12, 0x2a, 0xe9, 0x1c, 0xa8, 0x0f, 0x9d, 0xaf, 0xcf, 0xb3, 0xa3}
+	binaryIDTexturePointer                         = binary.ID{0x34, 0x65, 0x45, 0xf1, 0x2d, 0xda, 0x70, 0xcb, 0x48, 0xb2, 0x29, 0x9b, 0xb3, 0x7f, 0xe4, 0xa6, 0x96, 0xb2, 0x64, 0xe7}
 	binaryIDGlCompressedTexImage2D                 = binary.ID{0x88, 0x11, 0xf4, 0x37, 0xd8, 0xc0, 0xe3, 0x49, 0xc1, 0xc3, 0xdd, 0xcf, 0x50, 0xbf, 0xda, 0x61, 0xfb, 0xb4, 0x85, 0x1c}
 	binaryIDGlCompressedTexSubImage2D              = binary.ID{0x4c, 0xe3, 0x8f, 0x52, 0x17, 0x8b, 0x87, 0xa1, 0x2f, 0xd4, 0x8c, 0xb6, 0xc9, 0xbe, 0x9e, 0xe3, 0x0a, 0xb5, 0xc6, 0x77}
 	binaryIDGlCopyTexImage2D                       = binary.ID{0x47, 0x75, 0x3a, 0x4b, 0x07, 0x67, 0x51, 0x2b, 0x76, 0xd3, 0xab, 0x41, 0x5d, 0xa3, 0x7a, 0xa6, 0x90, 0x28, 0x7f, 0xc3}
@@ -494,16 +494,16 @@ var (
 	binaryIDGlDeleteBuffers                        = binary.ID{0x8f, 0xe2, 0xcc, 0x25, 0x5b, 0xe5, 0xab, 0xa7, 0x6b, 0x93, 0x97, 0x50, 0xd3, 0x52, 0xd4, 0x71, 0x2d, 0x14, 0xb1, 0xc8}
 	binaryIDGlDeleteFramebuffers                   = binary.ID{0x0c, 0x58, 0x2e, 0x54, 0x3d, 0x02, 0x09, 0xe4, 0xbc, 0x40, 0x03, 0x55, 0x92, 0x74, 0x8c, 0xab, 0x0b, 0x29, 0x12, 0x09}
 	binaryIDGlDeleteProgram                        = binary.ID{0x3d, 0x9f, 0xd2, 0xe3, 0xa2, 0x70, 0x3d, 0x38, 0x17, 0x8a, 0x71, 0xca, 0xbe, 0xb4, 0x8c, 0x97, 0x00, 0x75, 0x9f, 0x2f}
-	binaryIDQueryIdᵖ                               = binary.ID{0xbc, 0x1f, 0x91, 0x31, 0xab, 0x23, 0x97, 0xbd, 0x24, 0x4b, 0x69, 0x3f, 0xb9, 0x40, 0xf4, 0xb4, 0xb3, 0x93, 0x43, 0x33}
+	binaryIDQueryIdᵖ                               = binary.ID{0xeb, 0x17, 0x82, 0xad, 0x2a, 0x8d, 0x90, 0x53, 0x42, 0x82, 0x61, 0x49, 0x70, 0xb2, 0xde, 0x5e, 0x4a, 0xce, 0x10, 0x9a}
 	binaryIDGlDeleteQueries                        = binary.ID{0xef, 0x66, 0xdb, 0x46, 0x91, 0x9a, 0x79, 0x40, 0x07, 0x4b, 0x18, 0x38, 0x4c, 0x3f, 0x5f, 0x36, 0x65, 0x6b, 0x86, 0x6f}
 	binaryIDGlDeleteQueriesEXT                     = binary.ID{0xc1, 0xba, 0x04, 0x28, 0x00, 0x4f, 0x7f, 0x73, 0xae, 0x18, 0x11, 0x19, 0x70, 0xd0, 0xe4, 0xc9, 0x2e, 0x01, 0x80, 0xfa}
-	binaryIDRenderbufferIdᵖ                        = binary.ID{0x18, 0xae, 0x51, 0x0d, 0xb7, 0xf3, 0xf8, 0xe7, 0x47, 0x3f, 0x5d, 0x29, 0xf8, 0x43, 0x60, 0xe2, 0x5a, 0x2d, 0xa6, 0x9b}
+	binaryIDRenderbufferIdᵖ                        = binary.ID{0x27, 0x87, 0x17, 0xca, 0xd8, 0x49, 0x08, 0x71, 0xe9, 0xc6, 0x9c, 0x0e, 0x51, 0x5a, 0x23, 0x8c, 0xc5, 0x2a, 0xdd, 0x2e}
 	binaryIDGlDeleteRenderbuffers                  = binary.ID{0xc7, 0x91, 0x63, 0x48, 0xf4, 0xe3, 0xea, 0x86, 0x4b, 0x3c, 0x40, 0x44, 0x6c, 0x5d, 0x8c, 0x87, 0xb9, 0x7d, 0x26, 0x4b}
 	binaryIDGlDeleteShader                         = binary.ID{0x11, 0xd1, 0xa7, 0x92, 0xf4, 0x7b, 0x74, 0x2a, 0xac, 0x29, 0x4f, 0x42, 0x17, 0x9c, 0x3e, 0xb9, 0x03, 0x8d, 0xbd, 0xe7}
 	binaryIDGlDeleteSync                           = binary.ID{0x65, 0x90, 0x00, 0x50, 0x30, 0x0f, 0xb5, 0x2b, 0x84, 0x77, 0xef, 0x13, 0x40, 0x76, 0x93, 0x58, 0x9e, 0x0a, 0xd0, 0xce}
-	binaryIDTextureIdᵖ                             = binary.ID{0x99, 0x6c, 0x61, 0x83, 0x7a, 0xc0, 0x86, 0x16, 0x1a, 0x93, 0x45, 0x97, 0x32, 0x66, 0x80, 0x91, 0xd1, 0x87, 0xd1, 0x8e}
+	binaryIDTextureIdᵖ                             = binary.ID{0x6c, 0x3c, 0x90, 0x11, 0x71, 0x98, 0x36, 0xdd, 0xc8, 0x9c, 0x08, 0xf7, 0x80, 0x31, 0x56, 0x36, 0x6e, 0xd7, 0x68, 0x6b}
 	binaryIDGlDeleteTextures                       = binary.ID{0x8e, 0x87, 0xbe, 0x83, 0xfc, 0x68, 0xab, 0x65, 0x39, 0x6d, 0x29, 0xe8, 0x91, 0x0a, 0xb4, 0x3b, 0x72, 0x6b, 0x87, 0xdc}
-	binaryIDVertexArrayIdᵖ                         = binary.ID{0xfb, 0x13, 0x6e, 0xf5, 0x8d, 0x52, 0xf5, 0xb2, 0xb5, 0x02, 0x1f, 0x10, 0x15, 0x84, 0x51, 0xb2, 0xc6, 0x8b, 0xc5, 0x5f}
+	binaryIDVertexArrayIdᵖ                         = binary.ID{0x06, 0x33, 0x83, 0xad, 0xcf, 0x1c, 0x8f, 0x00, 0x5d, 0x52, 0x0a, 0xc4, 0x29, 0xca, 0xe3, 0x06, 0x6a, 0x5e, 0x71, 0x5f}
 	binaryIDGlDeleteVertexArrays                   = binary.ID{0xf1, 0xb1, 0xd2, 0x4e, 0x22, 0xf5, 0x6b, 0x07, 0xf7, 0x2b, 0x4d, 0xa2, 0xe1, 0x7f, 0x9d, 0xf0, 0xeb, 0x79, 0xa9, 0x07}
 	binaryIDGlDeleteVertexArraysOES                = binary.ID{0xb6, 0xb4, 0x59, 0xf8, 0x46, 0x00, 0x47, 0x2c, 0x12, 0xa7, 0x1a, 0xfe, 0xee, 0xd4, 0xa6, 0x1a, 0xfc, 0x47, 0xef, 0x0c}
 	binaryIDGlDepthFunc                            = binary.ID{0xa7, 0x7e, 0x09, 0x94, 0x5c, 0x20, 0x03, 0xac, 0x59, 0x2f, 0xe6, 0xfd, 0x3e, 0xcc, 0x20, 0x33, 0xa8, 0x09, 0xce, 0x0b}
@@ -515,10 +515,10 @@ var (
 	binaryIDGlDisableVertexAttribArray             = binary.ID{0x0e, 0x71, 0x56, 0x6a, 0x0a, 0x8d, 0xc7, 0x6b, 0x76, 0x8f, 0x05, 0xca, 0xeb, 0x95, 0x01, 0x46, 0x44, 0xf6, 0xf3, 0x52}
 	binaryIDGlDiscardFramebufferEXT                = binary.ID{0x70, 0xae, 0x75, 0x3e, 0x8d, 0x47, 0xfa, 0xcd, 0x76, 0x68, 0xa1, 0x25, 0x90, 0x55, 0xb0, 0xd5, 0x30, 0x09, 0x62, 0x27}
 	binaryIDGlDrawArrays                           = binary.ID{0x7f, 0xea, 0xee, 0x65, 0x7d, 0xf9, 0x1f, 0x13, 0xae, 0x78, 0x1b, 0x1c, 0xbb, 0x29, 0x62, 0xe6, 0x6a, 0xd4, 0x67, 0x8f}
-	binaryIDIndicesPointer                         = binary.ID{0x76, 0x75, 0x96, 0xf7, 0x8e, 0x48, 0x4e, 0x8b, 0x35, 0x9b, 0x75, 0x1f, 0xb2, 0x5a, 0x50, 0xb7, 0x2e, 0x2f, 0xa9, 0xe2}
+	binaryIDIndicesPointer                         = binary.ID{0x7e, 0xb8, 0x8d, 0x27, 0x89, 0x30, 0x52, 0x1b, 0x7e, 0x06, 0x18, 0xa0, 0x43, 0x8e, 0x88, 0xaa, 0x0c, 0xe6, 0x72, 0x10}
 	binaryIDGlDrawElements                         = binary.ID{0x18, 0xba, 0xb0, 0xb5, 0x2d, 0xca, 0xbb, 0x23, 0xb0, 0x0a, 0xc4, 0x9f, 0xb7, 0xd5, 0xc2, 0xa7, 0xab, 0x41, 0x6b, 0x21}
 	binaryIDGlEGLImageTargetRenderbufferStorageOES = binary.ID{0x53, 0x5e, 0x99, 0x02, 0x81, 0xd9, 0x2d, 0x36, 0xa1, 0xc6, 0x25, 0xd8, 0x3d, 0x5e, 0xa1, 0xb2, 0xfb, 0xda, 0xb4, 0x8d}
-	binaryIDImageOES                               = binary.ID{0x77, 0x91, 0xd9, 0x22, 0x22, 0x46, 0xfa, 0x9b, 0xc5, 0xf0, 0x4f, 0x9b, 0xa6, 0x73, 0xe8, 0xdf, 0x22, 0x6b, 0x06, 0x36}
+	binaryIDImageOES                               = binary.ID{0x74, 0x38, 0x47, 0x49, 0x56, 0x92, 0x04, 0x39, 0x2b, 0x43, 0xe3, 0x99, 0x13, 0xbd, 0x74, 0x9c, 0x39, 0xd4, 0x80, 0xa4}
 	binaryIDGlEGLImageTargetTexture2DOES           = binary.ID{0x56, 0x39, 0x9e, 0x74, 0x52, 0x6e, 0xa3, 0x41, 0xc9, 0xab, 0x03, 0x18, 0x30, 0x25, 0x3a, 0x08, 0x6d, 0xae, 0xe7, 0x35}
 	binaryIDGlEnable                               = binary.ID{0x48, 0xaa, 0x9b, 0x21, 0xfc, 0xc7, 0xe6, 0x29, 0xf7, 0xcf, 0xda, 0x40, 0x88, 0x59, 0x9c, 0x23, 0xb4, 0xb0, 0xfe, 0x74}
 	binaryIDGlEnableClientState                    = binary.ID{0x82, 0x27, 0xe0, 0xfe, 0xce, 0xe9, 0x44, 0xf2, 0x48, 0x00, 0xc4, 0x51, 0x95, 0x03, 0xe3, 0xe3, 0x97, 0x3e, 0x73, 0x92}
@@ -541,16 +541,16 @@ var (
 	binaryIDGlGenVertexArrays                      = binary.ID{0xd2, 0x6e, 0x78, 0x1d, 0x4f, 0x80, 0xa0, 0x4b, 0x65, 0x54, 0x54, 0x08, 0x63, 0x7c, 0x73, 0x1b, 0x70, 0xdc, 0x31, 0xb5}
 	binaryIDGlGenVertexArraysOES                   = binary.ID{0xe0, 0x5b, 0x77, 0xc1, 0x67, 0x6d, 0xa5, 0xa2, 0xc7, 0x21, 0x8c, 0x2b, 0x0c, 0xd5, 0xab, 0x25, 0x91, 0xb2, 0x4d, 0x9c}
 	binaryIDGlGenerateMipmap                       = binary.ID{0x42, 0xea, 0x5b, 0xaa, 0xcc, 0x26, 0x78, 0xf5, 0xf0, 0x10, 0x98, 0x9f, 0xa8, 0xb6, 0x7b, 0xae, 0xf8, 0xbd, 0x42, 0x3e}
-	binaryIDS32ᵖ                                   = binary.ID{0x15, 0xd8, 0xda, 0x55, 0xc7, 0x51, 0xdc, 0x13, 0x0e, 0xe6, 0xf3, 0x33, 0x66, 0x41, 0xd6, 0xf1, 0x5f, 0x02, 0x93, 0x41}
-	binaryIDShaderAttribTypeᵖ                      = binary.ID{0xae, 0xed, 0x56, 0xf7, 0xb4, 0xb8, 0x0b, 0x47, 0x04, 0xa1, 0xc2, 0x24, 0x58, 0x0d, 0x4b, 0xd2, 0xb8, 0x43, 0xac, 0x6b}
+	binaryIDS32ᵖ                                   = binary.ID{0xac, 0x84, 0x1f, 0xd1, 0xb4, 0x53, 0xd7, 0x22, 0x81, 0xfc, 0xae, 0x94, 0x33, 0xc5, 0x1b, 0xa1, 0xa8, 0xa1, 0x30, 0xd4}
+	binaryIDShaderAttribTypeᵖ                      = binary.ID{0x2e, 0xb0, 0xf4, 0x06, 0x40, 0xe7, 0x30, 0xf4, 0xea, 0x13, 0x18, 0xff, 0xf0, 0xba, 0xed, 0x70, 0x8e, 0xed, 0x13, 0x9a}
 	binaryIDGlGetActiveAttrib                      = binary.ID{0xa6, 0x71, 0x22, 0x04, 0xa2, 0x0e, 0x8a, 0x5b, 0x9e, 0x05, 0x76, 0x4a, 0x54, 0x82, 0x91, 0xce, 0xfb, 0x76, 0x4b, 0x97}
-	binaryIDShaderUniformTypeᵖ                     = binary.ID{0xec, 0x33, 0x14, 0x93, 0x2e, 0xbc, 0x9b, 0x5b, 0x66, 0x62, 0x30, 0x7a, 0x5d, 0x8f, 0x13, 0x4e, 0x2b, 0x39, 0xc9, 0x32}
+	binaryIDShaderUniformTypeᵖ                     = binary.ID{0xe6, 0xcf, 0x8f, 0x73, 0xe4, 0x9e, 0x21, 0xc2, 0x68, 0xbb, 0x56, 0xfe, 0x27, 0x04, 0x5d, 0xcd, 0xff, 0x5c, 0xa0, 0x68}
 	binaryIDGlGetActiveUniform                     = binary.ID{0x6e, 0xac, 0x3c, 0x92, 0xee, 0x19, 0x7e, 0x39, 0x44, 0x04, 0x5d, 0xec, 0xb0, 0xa2, 0xdc, 0x94, 0x6e, 0x5b, 0x05, 0x3c}
 	binaryIDGlGetActiveUniformBlockName            = binary.ID{0x8c, 0x0b, 0xa2, 0x61, 0x99, 0xb3, 0xf4, 0x5f, 0x45, 0xea, 0x15, 0xca, 0x29, 0x4b, 0x04, 0xcf, 0x25, 0xde, 0xc2, 0xbc}
 	binaryIDGlGetActiveUniformBlockiv              = binary.ID{0x61, 0xa9, 0x41, 0x52, 0x0b, 0xb2, 0x9f, 0x02, 0xcc, 0x2f, 0xf0, 0xfb, 0x75, 0x44, 0xdb, 0x1e, 0x63, 0x59, 0x96, 0x25}
-	binaryIDU32ᵖ                                   = binary.ID{0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67}
+	binaryIDU32ᵖ                                   = binary.ID{0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf}
 	binaryIDGlGetActiveUniformsiv                  = binary.ID{0xbb, 0x92, 0x01, 0x42, 0x71, 0x55, 0x77, 0x57, 0x88, 0x3b, 0x27, 0x92, 0x9c, 0x05, 0x62, 0x6f, 0x4a, 0xca, 0xfd, 0x41}
-	binaryIDShaderIdᵖ                              = binary.ID{0x08, 0x41, 0x7d, 0x5d, 0x94, 0x16, 0xc5, 0x83, 0xb1, 0x5b, 0x6b, 0x53, 0x78, 0xac, 0x10, 0xbd, 0x1e, 0x59, 0x09, 0x1d}
+	binaryIDShaderIdᵖ                              = binary.ID{0x08, 0x71, 0x0c, 0xb0, 0x87, 0xa9, 0x21, 0x1b, 0xe0, 0x32, 0x0c, 0x9f, 0x24, 0xe3, 0xfb, 0x8e, 0xd5, 0x60, 0x80, 0x1d}
 	binaryIDGlGetAttachedShaders                   = binary.ID{0xc3, 0xf9, 0x1d, 0xd0, 0xcc, 0x89, 0x4c, 0x62, 0xad, 0x92, 0x44, 0x25, 0x6d, 0x63, 0x8b, 0x92, 0x1a, 0x01, 0xeb, 0xb4}
 	binaryIDGlGetAttribLocation                    = binary.ID{0x31, 0x3d, 0x4f, 0xb6, 0x80, 0x95, 0xce, 0x6a, 0x65, 0x25, 0x0a, 0xb5, 0xff, 0x15, 0x44, 0x1d, 0x3e, 0x91, 0xc7, 0xef}
 	binaryIDGlGetBooleanv                          = binary.ID{0xbf, 0x1d, 0xb7, 0x81, 0xa0, 0x1f, 0x6b, 0x03, 0x21, 0xe3, 0x51, 0x7c, 0x73, 0x4f, 0xf9, 0x9a, 0x62, 0x0a, 0xfd, 0xa4}
@@ -563,11 +563,11 @@ var (
 	binaryIDGlGetProgramBinaryOES                  = binary.ID{0x41, 0xe1, 0x61, 0x7a, 0xa2, 0x17, 0x6f, 0x2f, 0xd4, 0xaf, 0x47, 0x68, 0xce, 0x51, 0x64, 0x3a, 0x97, 0xbb, 0xf3, 0xec}
 	binaryIDGlGetProgramInfoLog                    = binary.ID{0x7f, 0xd8, 0xe7, 0x8b, 0xf6, 0xa4, 0x9e, 0xe4, 0xcd, 0xbf, 0x72, 0x0d, 0xc9, 0xc0, 0xdc, 0xb0, 0x5e, 0x3c, 0x52, 0x21}
 	binaryIDGlGetProgramiv                         = binary.ID{0x0c, 0x30, 0x8a, 0xb8, 0x12, 0x64, 0xb2, 0x25, 0xfe, 0x4c, 0x3e, 0xaf, 0x2c, 0x0d, 0x05, 0x67, 0x8f, 0x95, 0xb2, 0x41}
-	binaryIDS64ᵖ                                   = binary.ID{0x94, 0xcc, 0x14, 0xe7, 0xe5, 0xaa, 0x45, 0x47, 0x68, 0x47, 0x60, 0x90, 0x4d, 0x40, 0x9e, 0x4e, 0xa3, 0x65, 0x3a, 0x9b}
+	binaryIDS64ᵖ                                   = binary.ID{0xe9, 0x1c, 0x9a, 0xfd, 0xd1, 0xe3, 0x35, 0x1c, 0x32, 0xfd, 0x2c, 0x3f, 0xbc, 0x25, 0xaa, 0xbd, 0xcf, 0x3e, 0x7f, 0xbb}
 	binaryIDGlGetQueryObjecti64v                   = binary.ID{0x64, 0xaa, 0xa7, 0x71, 0xe5, 0xb1, 0x66, 0x92, 0x4b, 0xe7, 0x40, 0x95, 0x8d, 0xa8, 0xa7, 0x4f, 0x9a, 0x6b, 0xcc, 0xc8}
 	binaryIDGlGetQueryObjecti64vEXT                = binary.ID{0x4d, 0xad, 0xff, 0x92, 0xcd, 0xd0, 0xac, 0xe7, 0x0e, 0x9f, 0xa7, 0x7b, 0x91, 0x31, 0xfb, 0x37, 0xea, 0x2c, 0xbd, 0x9c}
 	binaryIDGlGetQueryObjectivEXT                  = binary.ID{0x83, 0xd8, 0xfe, 0x13, 0x5b, 0xce, 0x42, 0x6f, 0x82, 0xbc, 0x0b, 0xfe, 0x33, 0xae, 0xd6, 0x73, 0x87, 0xe4, 0x95, 0xad}
-	binaryIDU64ᵖ                                   = binary.ID{0x5b, 0xb1, 0xae, 0xc9, 0xd5, 0x8f, 0x30, 0x22, 0xf4, 0x8f, 0x96, 0xf2, 0x6f, 0xb2, 0x65, 0xa7, 0xfd, 0xfb, 0xae, 0x50}
+	binaryIDU64ᵖ                                   = binary.ID{0x00, 0x08, 0x7a, 0x1a, 0x40, 0x52, 0x66, 0xee, 0xbe, 0xb5, 0x0a, 0x76, 0xc8, 0xf9, 0x4a, 0x7d, 0x20, 0xd0, 0x0b, 0x8d}
 	binaryIDGlGetQueryObjectui64v                  = binary.ID{0xcb, 0xd2, 0x0b, 0x21, 0x98, 0x10, 0x2c, 0x9c, 0x98, 0xbb, 0x71, 0x6e, 0xc2, 0x2c, 0x5b, 0x24, 0x3a, 0xc2, 0x11, 0x66}
 	binaryIDGlGetQueryObjectui64vEXT               = binary.ID{0x5d, 0x7e, 0xa2, 0xff, 0x4b, 0x0c, 0x64, 0x67, 0xbf, 0x8e, 0xe0, 0x4c, 0x78, 0xd5, 0x6c, 0xb3, 0xf9, 0xc1, 0x47, 0xe5}
 	binaryIDGlGetQueryObjectuiv                    = binary.ID{0xac, 0x6d, 0xbf, 0x24, 0x6d, 0xf4, 0xd4, 0x03, 0x1b, 0x6f, 0xfe, 0xc4, 0xa0, 0xa7, 0xf7, 0x21, 0xe9, 0x73, 0x96, 0x06}
@@ -668,25 +668,25 @@ var (
 	binaryIDGlXCreateNewContext                    = binary.ID{0x84, 0x7e, 0x5e, 0x97, 0x8c, 0x27, 0x99, 0x7b, 0x5e, 0xd5, 0x5f, 0xc8, 0xd5, 0xc1, 0x5e, 0x0c, 0x90, 0x64, 0xf7, 0x43}
 	binaryIDGlXMakeContextCurrent                  = binary.ID{0x4e, 0x6d, 0x3c, 0x63, 0x7f, 0x49, 0x79, 0x4e, 0x3d, 0xd0, 0xd9, 0x0c, 0xcf, 0x72, 0x94, 0x3f, 0x6b, 0xfd, 0x77, 0xfd}
 	binaryIDGlXMakeCurrent                         = binary.ID{0xa6, 0xaf, 0xc1, 0x6f, 0x1c, 0x9b, 0xdb, 0x26, 0x13, 0x0b, 0x75, 0xa3, 0x14, 0xb9, 0x1b, 0x58, 0x37, 0xa6, 0x23, 0xc8}
-	binaryIDIntᵖ                                   = binary.ID{0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46}
+	binaryIDIntᵖ                                   = binary.ID{0x2b, 0x06, 0x77, 0x85, 0xff, 0x02, 0x77, 0xf8, 0xbc, 0x87, 0x72, 0xeb, 0xf8, 0x53, 0x2e, 0x65, 0xd2, 0x8f, 0x69, 0x27}
 	binaryIDGlXQueryDrawable                       = binary.ID{0x17, 0xd3, 0x19, 0xa4, 0xba, 0x07, 0x32, 0xb5, 0xc2, 0x76, 0xae, 0xde, 0xfe, 0x31, 0x95, 0x07, 0x79, 0xdb, 0xd0, 0xd6}
 	binaryIDGlXSwapBuffers                         = binary.ID{0x6f, 0x6a, 0xec, 0x59, 0x43, 0x85, 0x4a, 0xf5, 0x61, 0xc7, 0xb1, 0x28, 0x6c, 0x34, 0xa5, 0xb8, 0xbd, 0x25, 0x12, 0xc2}
-	binaryIDHGLRC                                  = binary.ID{0x95, 0xfc, 0xcf, 0x7f, 0x79, 0x35, 0x44, 0x38, 0xd4, 0x4f, 0x6d, 0xad, 0xae, 0xcd, 0xf0, 0xa5, 0x4d, 0x49, 0x48, 0xc7}
+	binaryIDHGLRC                                  = binary.ID{0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1}
 	binaryIDGlobals                                = binary.ID{0x6b, 0xd7, 0xb2, 0xf9, 0x46, 0xfa, 0xb5, 0xa7, 0x8e, 0x26, 0xe5, 0x72, 0xe7, 0x8f, 0x33, 0x91, 0xb4, 0xb9, 0x49, 0x0c}
-	binaryIDHDC                                    = binary.ID{0x77, 0x14, 0x36, 0x4d, 0x67, 0xdb, 0x2d, 0xd0, 0xcc, 0x8e, 0x01, 0x72, 0xfa, 0x85, 0x42, 0x9c, 0x04, 0x31, 0x53, 0xcc}
+	binaryIDHDC                                    = binary.ID{0x9c, 0x52, 0x64, 0x9a, 0xd1, 0x46, 0x9a, 0x9a, 0xa1, 0x08, 0x15, 0x09, 0x48, 0x2d, 0xd9, 0x49, 0xf9, 0x70, 0x31, 0xd1}
 	binaryIDIntˢ                                   = binary.ID{0x81, 0xe7, 0x7a, 0x15, 0x73, 0x0c, 0x03, 0xb6, 0x9f, 0x6c, 0xec, 0x7b, 0x08, 0xf2, 0xc1, 0x20, 0x9f, 0xcd, 0x72, 0x5a}
 	binaryIDVec2f                                  = binary.ID{0x43, 0x30, 0xe0, 0xc8, 0xdc, 0x80, 0xf3, 0x61, 0xf7, 0xc9, 0x32, 0xe8, 0x58, 0x5f, 0xa0, 0xe9, 0xc3, 0xff, 0x0d, 0x21}
 	binaryIDMat2f                                  = binary.ID{0xb3, 0xca, 0x65, 0x73, 0x09, 0x4d, 0x46, 0x20, 0x2e, 0x2a, 0x3d, 0x75, 0x6b, 0x7b, 0xc3, 0xaf, 0x18, 0x79, 0xfe, 0xcb}
 	binaryIDMat2fˢ                                 = binary.ID{0xfd, 0x99, 0x6e, 0x41, 0x72, 0xbc, 0xf9, 0x44, 0xfb, 0x0c, 0x17, 0x18, 0x6e, 0x78, 0x41, 0x4a, 0xe4, 0xf9, 0x01, 0xe9}
-	binaryIDMat2fᵖ                                 = binary.ID{0xcf, 0x92, 0x77, 0xb8, 0xbc, 0x32, 0x83, 0x5d, 0xca, 0xa4, 0x88, 0xa5, 0x7b, 0x72, 0x7d, 0xe5, 0xfe, 0xf1, 0x1d, 0x01}
+	binaryIDMat2fᵖ                                 = binary.ID{0xaa, 0x78, 0xb0, 0xc3, 0xec, 0xe3, 0xcf, 0x0c, 0x6e, 0xd0, 0xaf, 0xf6, 0x7b, 0x56, 0xa1, 0x18, 0x16, 0x3e, 0xbe, 0x78}
 	binaryIDVec3f                                  = binary.ID{0xa4, 0xa3, 0x2e, 0xbb, 0x48, 0x0d, 0x4e, 0xfa, 0x22, 0xeb, 0xb4, 0x7e, 0x88, 0x10, 0xcd, 0x9d, 0xaf, 0xb4, 0xbc, 0x81}
 	binaryIDMat3f                                  = binary.ID{0x47, 0x2d, 0x69, 0x38, 0x46, 0x76, 0x50, 0xf5, 0x0b, 0x0f, 0x50, 0x2f, 0x41, 0xfb, 0x03, 0xa7, 0xd3, 0xd7, 0x38, 0x51}
 	binaryIDMat3fˢ                                 = binary.ID{0x0e, 0x3f, 0xf2, 0x97, 0xf4, 0x3f, 0x26, 0xb0, 0x40, 0x83, 0x20, 0xad, 0x0b, 0xa3, 0xce, 0xf7, 0x9b, 0xd8, 0x51, 0x10}
-	binaryIDMat3fᵖ                                 = binary.ID{0x9e, 0xf8, 0xc1, 0x91, 0x65, 0x71, 0x0a, 0x19, 0x44, 0x44, 0xa8, 0xd0, 0xb0, 0xae, 0x8a, 0x52, 0x7c, 0x08, 0xda, 0xd8}
+	binaryIDMat3fᵖ                                 = binary.ID{0xd1, 0x68, 0x7a, 0xc6, 0x58, 0xc5, 0x77, 0x79, 0x03, 0x73, 0x9e, 0x3b, 0x4c, 0xf3, 0x45, 0x83, 0xe6, 0xac, 0x4d, 0xe6}
 	binaryIDVec4f                                  = binary.ID{0x96, 0xe2, 0x6f, 0x24, 0x1a, 0xf9, 0x8f, 0xaf, 0x42, 0x52, 0xcf, 0xd5, 0x09, 0x2f, 0x40, 0x52, 0xdb, 0xc5, 0x78, 0xd5}
 	binaryIDMat4f                                  = binary.ID{0xb7, 0xf0, 0xe0, 0x8d, 0x26, 0xbd, 0x22, 0x55, 0x90, 0xcd, 0x63, 0x7d, 0x27, 0x59, 0xbd, 0xa2, 0xa3, 0x72, 0xc2, 0x95}
 	binaryIDMat4fˢ                                 = binary.ID{0xd0, 0xcc, 0x8f, 0x5c, 0xd1, 0x03, 0xe7, 0x55, 0x69, 0x29, 0xad, 0x0e, 0x5c, 0xe3, 0xd2, 0x1f, 0xb7, 0xa9, 0xf1, 0xa1}
-	binaryIDMat4fᵖ                                 = binary.ID{0x00, 0x10, 0x29, 0x45, 0xd8, 0x78, 0x44, 0x1a, 0x4c, 0x76, 0x90, 0x0e, 0x8d, 0xde, 0x05, 0x0f, 0x5a, 0x51, 0x06, 0x4c}
+	binaryIDMat4fᵖ                                 = binary.ID{0x72, 0x0c, 0xc7, 0x00, 0x98, 0x6d, 0xc2, 0x9f, 0xab, 0xc1, 0xba, 0x25, 0x74, 0x6b, 0xc6, 0x34, 0x95, 0x4a, 0x43, 0x16}
 	binaryIDQueryIdˢ                               = binary.ID{0x31, 0x42, 0xbd, 0xc9, 0x65, 0x42, 0xa6, 0x82, 0xd0, 0xba, 0x8e, 0x4f, 0x11, 0x84, 0xe4, 0xf5, 0x7a, 0xad, 0xa8, 0x88}
 	binaryIDRenderbufferIdˢ                        = binary.ID{0x8a, 0x81, 0xb2, 0x12, 0x5d, 0xf9, 0xa4, 0x6a, 0x07, 0x61, 0xd1, 0x2e, 0xff, 0x46, 0x04, 0x32, 0xf9, 0x38, 0xe5, 0xed}
 	binaryIDReplayBindRenderer                     = binary.ID{0xdb, 0xb2, 0x76, 0x5b, 0xa5, 0x3d, 0xb0, 0xef, 0x04, 0x2a, 0x03, 0xf1, 0x57, 0x07, 0x5a, 0x92, 0x20, 0xa9, 0x0a, 0x8a}
@@ -705,25 +705,25 @@ var (
 	binaryIDTextureIdˢ                             = binary.ID{0x4a, 0xe8, 0xe0, 0x14, 0x09, 0x7c, 0x25, 0x10, 0x88, 0xb0, 0xf9, 0x39, 0x88, 0xd0, 0x7d, 0x81, 0xc6, 0xb6, 0xed, 0x2f}
 	binaryIDU32ˢ                                   = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
 	binaryIDU64ˢ                                   = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
-	binaryIDU8ᵖ                                    = binary.ID{0xf6, 0x6e, 0x22, 0xf8, 0x33, 0x69, 0x05, 0xe9, 0x8b, 0xdf, 0xfa, 0x53, 0x75, 0xae, 0x80, 0xcc, 0x2c, 0x27, 0x98, 0x17}
+	binaryIDU8ᵖ                                    = binary.ID{0xc9, 0x85, 0x15, 0x54, 0xd3, 0x40, 0x31, 0x19, 0x7a, 0xab, 0xf9, 0x64, 0x72, 0x38, 0x96, 0xa9, 0x85, 0xc3, 0xbb, 0x4d}
 	binaryIDVec2fː2ᵃ                               = binary.ID{0xf3, 0xfe, 0xa2, 0xa3, 0xb6, 0xdd, 0xd4, 0x15, 0x8c, 0x00, 0x2c, 0x4d, 0x78, 0x65, 0x14, 0x70, 0xe7, 0xcb, 0x7b, 0xe7}
 	binaryIDVec2fˢ                                 = binary.ID{0x79, 0x71, 0xb9, 0xc2, 0x40, 0xfa, 0x23, 0xa9, 0x13, 0xc3, 0x59, 0x96, 0xcb, 0x6b, 0x81, 0xed, 0x4d, 0x1f, 0x31, 0x65}
-	binaryIDVec2fᵖ                                 = binary.ID{0x5e, 0xb4, 0x5d, 0x6a, 0x0d, 0x6e, 0x66, 0x4a, 0x85, 0xf0, 0x5e, 0xc1, 0x82, 0x6f, 0x53, 0xf4, 0x2c, 0x5b, 0x74, 0x28}
+	binaryIDVec2fᵖ                                 = binary.ID{0x55, 0xdc, 0xba, 0xe1, 0x45, 0x8e, 0x4f, 0xd9, 0x9f, 0x20, 0x5c, 0x36, 0x6e, 0x3a, 0xf9, 0x08, 0xa7, 0xd5, 0xbb, 0xff}
 	binaryIDVec2i                                  = binary.ID{0x1f, 0x5b, 0xbe, 0x8d, 0x37, 0x6d, 0xaa, 0x47, 0xf0, 0xe0, 0xe3, 0xc9, 0x18, 0x2d, 0x09, 0x9c, 0x7a, 0x2e, 0xb2, 0x4f}
 	binaryIDVec2iˢ                                 = binary.ID{0x6b, 0x83, 0xed, 0xc6, 0xad, 0xba, 0x33, 0x3e, 0xcd, 0x20, 0x1a, 0x3a, 0x70, 0x29, 0xa0, 0xc1, 0x65, 0xa0, 0x53, 0x5e}
-	binaryIDVec2iᵖ                                 = binary.ID{0xcc, 0xca, 0x5a, 0x47, 0xa7, 0xa9, 0x37, 0xbd, 0x32, 0x96, 0x80, 0x88, 0xd2, 0x06, 0xd3, 0x39, 0x6d, 0xc0, 0x74, 0x8b}
+	binaryIDVec2iᵖ                                 = binary.ID{0xaa, 0xd3, 0xa9, 0x60, 0x80, 0x64, 0x1c, 0xa9, 0xef, 0xdc, 0xe5, 0x54, 0x9e, 0xaa, 0x32, 0xf4, 0xc3, 0xf4, 0xb3, 0x15}
 	binaryIDVec3fː3ᵃ                               = binary.ID{0x13, 0xcd, 0x31, 0x33, 0xcd, 0xd2, 0xb7, 0xe2, 0xaa, 0xc1, 0xb9, 0x3d, 0xbb, 0x10, 0x88, 0x95, 0x1b, 0xcf, 0xd1, 0xde}
 	binaryIDVec3fˢ                                 = binary.ID{0xba, 0xc9, 0xa5, 0x3c, 0xaa, 0x62, 0xc5, 0x18, 0x36, 0xc6, 0x3c, 0xaa, 0x5c, 0x15, 0xe9, 0x37, 0x5d, 0x11, 0xf4, 0xa1}
-	binaryIDVec3fᵖ                                 = binary.ID{0xc9, 0x3f, 0xc0, 0x13, 0x49, 0x5a, 0x81, 0xe9, 0x85, 0x38, 0x36, 0xb9, 0x36, 0xca, 0x1d, 0x7e, 0xfc, 0x88, 0x4a, 0x69}
+	binaryIDVec3fᵖ                                 = binary.ID{0xed, 0xc9, 0xbf, 0x84, 0x9c, 0xa4, 0x36, 0xf4, 0x8f, 0xaa, 0xc3, 0x7c, 0xb8, 0xfe, 0x6a, 0x3e, 0x9c, 0xc6, 0xd4, 0x87}
 	binaryIDVec3i                                  = binary.ID{0x6c, 0xf3, 0x3f, 0x3d, 0xbd, 0x74, 0x0b, 0xdb, 0xcc, 0xa4, 0x89, 0x5f, 0x63, 0x28, 0x3f, 0xad, 0x88, 0x98, 0xbd, 0xd6}
 	binaryIDVec3iˢ                                 = binary.ID{0x1a, 0x46, 0x23, 0xaf, 0x7e, 0x76, 0xc7, 0x5b, 0xca, 0xbd, 0x76, 0xaa, 0xaf, 0xb3, 0xdf, 0x90, 0xc7, 0xe5, 0xa0, 0x5f}
-	binaryIDVec3iᵖ                                 = binary.ID{0x83, 0xb1, 0x09, 0x1f, 0xd2, 0x6a, 0x35, 0x38, 0x09, 0x7a, 0x85, 0x5e, 0x63, 0x38, 0xfa, 0x97, 0x63, 0xf4, 0x32, 0xa4}
+	binaryIDVec3iᵖ                                 = binary.ID{0x07, 0x78, 0x89, 0x2c, 0xfc, 0x6c, 0x17, 0xef, 0x84, 0xd5, 0x65, 0xbb, 0xc1, 0x25, 0x5c, 0xe3, 0xf8, 0xc6, 0x9c, 0x39}
 	binaryIDVec4fː4ᵃ                               = binary.ID{0x5b, 0x6d, 0xf1, 0x71, 0x8d, 0x7c, 0xc1, 0x20, 0x2b, 0x99, 0xb2, 0x24, 0xce, 0xb1, 0xf6, 0x8a, 0x90, 0xd9, 0xeb, 0x6c}
 	binaryIDVec4fˢ                                 = binary.ID{0x9e, 0xbf, 0xba, 0xe1, 0x7e, 0xae, 0xbc, 0x30, 0x0c, 0x1b, 0xdf, 0xe9, 0x03, 0x12, 0x2d, 0xa3, 0x28, 0x55, 0xc6, 0x4b}
-	binaryIDVec4fᵖ                                 = binary.ID{0x1e, 0xc6, 0x03, 0xc9, 0x2e, 0xad, 0x84, 0x5a, 0x75, 0x19, 0x6f, 0xa4, 0x5e, 0x8b, 0x7d, 0x21, 0xe1, 0x85, 0x43, 0x54}
+	binaryIDVec4fᵖ                                 = binary.ID{0xe4, 0x2d, 0x98, 0xc0, 0x13, 0x9e, 0xf8, 0xb2, 0xcc, 0x7e, 0xd1, 0x80, 0x7f, 0xa4, 0x1b, 0xf5, 0xb8, 0x58, 0x01, 0x73}
 	binaryIDVec4i                                  = binary.ID{0x89, 0x5d, 0x1c, 0x1a, 0xcf, 0x39, 0xe8, 0x21, 0x4f, 0xd4, 0x00, 0x64, 0xd6, 0xfc, 0x3e, 0x15, 0xde, 0xf2, 0xe0, 0xb0}
 	binaryIDVec4iˢ                                 = binary.ID{0xee, 0x88, 0xf0, 0x68, 0xd6, 0xb7, 0xfa, 0xda, 0xb5, 0x1a, 0x68, 0x05, 0x6d, 0xbb, 0x69, 0x97, 0x08, 0x4f, 0x37, 0xe3}
-	binaryIDVec4iᵖ                                 = binary.ID{0xdd, 0xfb, 0x4f, 0x4c, 0x20, 0x0e, 0x99, 0x02, 0x8f, 0xe2, 0x87, 0xb4, 0x86, 0xd1, 0x96, 0xa3, 0xd7, 0x6c, 0x2d, 0x94}
+	binaryIDVec4iᵖ                                 = binary.ID{0xe4, 0x08, 0x77, 0x3a, 0xc3, 0xb7, 0x95, 0x08, 0xef, 0xd4, 0xa3, 0xdb, 0x01, 0x8e, 0x39, 0x60, 0x08, 0xdf, 0xbb, 0x2a}
 	binaryIDVertexArrayIdˢ                         = binary.ID{0x33, 0x17, 0x79, 0xfd, 0x5c, 0x69, 0x07, 0xce, 0x86, 0x55, 0xd5, 0x6f, 0xde, 0x1e, 0xc6, 0xee, 0x52, 0x0a, 0xd8, 0x01}
 	binaryIDVoidˢ                                  = binary.ID{0x8e, 0x07, 0x40, 0xb5, 0x18, 0x86, 0xc9, 0x8b, 0x33, 0xd0, 0x40, 0xab, 0x75, 0xb9, 0xef, 0x2f, 0x74, 0x66, 0x0a, 0x26}
 	binaryIDWglCreateContext                       = binary.ID{0x8e, 0xe0, 0x9b, 0x8b, 0x3d, 0x3c, 0xc7, 0x22, 0x61, 0xb4, 0xee, 0xa9, 0x75, 0x75, 0xd6, 0x53, 0x0d, 0x31, 0x15, 0xcc}
@@ -1184,54 +1184,41 @@ func (*SliceInfo) Class() binary.Class {
 	return (*binaryClassSliceInfo)(nil)
 }
 func doEncodeSliceInfo(e binary.Encoder, o *SliceInfo) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
+	if err := e.Value(&o.Root); err != nil {
 		return err
 	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
+	if err := e.Uint64(o.Base); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Count); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Root); err != nil {
 		return err
-	} else {
-		o.Root = memory.Pointer(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Base = memory.Pointer(obj)
+		o.Base = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
 		o.Count = uint64(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
 	return nil
 }
 func doSkipSliceInfo(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
@@ -1257,10 +1244,9 @@ var schemaSliceInfo = &schema.Class{
 	Name:    "SliceInfo",
 	Display: "SliceInfo",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Root", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1318,32 +1304,19 @@ func (*Boolᵖ) Class() binary.Class {
 	return (*binaryClassBoolᵖ)(nil)
 }
 func doEncodeBoolᵖ(e binary.Encoder, o *Boolᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeBoolᵖ(d binary.Decoder, o *Boolᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipBoolᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1369,8 +1342,7 @@ var schemaBoolᵖ = &schema.Class{
 	Name:    "Boolᵖ",
 	Display: "Boolᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1512,32 +1484,19 @@ func (*BufferDataPointer) Class() binary.Class {
 	return (*binaryClassBufferDataPointer)(nil)
 }
 func doEncodeBufferDataPointer(e binary.Encoder, o *BufferDataPointer) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeBufferDataPointer(d binary.Decoder, o *BufferDataPointer) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipBufferDataPointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1563,8 +1522,7 @@ var schemaBufferDataPointer = &schema.Class{
 	Name:    "BufferDataPointer",
 	Display: "BufferDataPointer",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1622,32 +1580,19 @@ func (*BufferIdᵖ) Class() binary.Class {
 	return (*binaryClassBufferIdᵖ)(nil)
 }
 func doEncodeBufferIdᵖ(e binary.Encoder, o *BufferIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeBufferIdᵖ(d binary.Decoder, o *BufferIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipBufferIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1673,8 +1618,7 @@ var schemaBufferIdᵖ = &schema.Class{
 	Name:    "BufferIdᵖ",
 	Display: "BufferIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1684,32 +1628,19 @@ func (*CGLContextObj) Class() binary.Class {
 	return (*binaryClassCGLContextObj)(nil)
 }
 func doEncodeCGLContextObj(e binary.Encoder, o *CGLContextObj) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGLContextObj(d binary.Decoder, o *CGLContextObj) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGLContextObj(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1735,8 +1666,7 @@ var schemaCGLContextObj = &schema.Class{
 	Name:    "CGLContextObj",
 	Display: "CGLContextObj",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1794,32 +1724,19 @@ func (*CGLContextObjᵖ) Class() binary.Class {
 	return (*binaryClassCGLContextObjᵖ)(nil)
 }
 func doEncodeCGLContextObjᵖ(e binary.Encoder, o *CGLContextObjᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGLContextObjᵖ(d binary.Decoder, o *CGLContextObjᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGLContextObjᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1845,8 +1762,7 @@ var schemaCGLContextObjᵖ = &schema.Class{
 	Name:    "CGLContextObjᵖ",
 	Display: "CGLContextObjᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1856,32 +1772,19 @@ func (*CGLPixelFormatObj) Class() binary.Class {
 	return (*binaryClassCGLPixelFormatObj)(nil)
 }
 func doEncodeCGLPixelFormatObj(e binary.Encoder, o *CGLPixelFormatObj) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGLPixelFormatObj(d binary.Decoder, o *CGLPixelFormatObj) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGLPixelFormatObj(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1907,8 +1810,7 @@ var schemaCGLPixelFormatObj = &schema.Class{
 	Name:    "CGLPixelFormatObj",
 	Display: "CGLPixelFormatObj",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2078,32 +1980,19 @@ func (*CGSConnectionIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSConnectionIDᵖ)(nil)
 }
 func doEncodeCGSConnectionIDᵖ(e binary.Encoder, o *CGSConnectionIDᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGSConnectionIDᵖ(d binary.Decoder, o *CGSConnectionIDᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGSConnectionIDᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2129,8 +2018,7 @@ var schemaCGSConnectionIDᵖ = &schema.Class{
 	Name:    "CGSConnectionIDᵖ",
 	Display: "CGSConnectionIDᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2140,32 +2028,19 @@ func (*CGSWindowIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSWindowIDᵖ)(nil)
 }
 func doEncodeCGSWindowIDᵖ(e binary.Encoder, o *CGSWindowIDᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGSWindowIDᵖ(d binary.Decoder, o *CGSWindowIDᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGSWindowIDᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2191,8 +2066,7 @@ var schemaCGSWindowIDᵖ = &schema.Class{
 	Name:    "CGSWindowIDᵖ",
 	Display: "CGSWindowIDᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2202,32 +2076,19 @@ func (*CGSSurfaceIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSSurfaceIDᵖ)(nil)
 }
 func doEncodeCGSSurfaceIDᵖ(e binary.Encoder, o *CGSSurfaceIDᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGSSurfaceIDᵖ(d binary.Decoder, o *CGSSurfaceIDᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGSSurfaceIDᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2253,8 +2114,7 @@ var schemaCGSSurfaceIDᵖ = &schema.Class{
 	Name:    "CGSSurfaceIDᵖ",
 	Display: "CGSSurfaceIDᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2436,32 +2296,19 @@ func (*CGSConnectionID) Class() binary.Class {
 	return (*binaryClassCGSConnectionID)(nil)
 }
 func doEncodeCGSConnectionID(e binary.Encoder, o *CGSConnectionID) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCGSConnectionID(d binary.Decoder, o *CGSConnectionID) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCGSConnectionID(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2487,8 +2334,7 @@ var schemaCGSConnectionID = &schema.Class{
 	Name:    "CGSConnectionID",
 	Display: "CGSConnectionID",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2546,32 +2392,19 @@ func (*F64ᵖ) Class() binary.Class {
 	return (*binaryClassF64ᵖ)(nil)
 }
 func doEncodeF64ᵖ(e binary.Encoder, o *F64ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipF64ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2597,8 +2430,7 @@ var schemaF64ᵖ = &schema.Class{
 	Name:    "F64ᵖ",
 	Display: "F64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2858,32 +2690,19 @@ func (*Charᵖ) Class() binary.Class {
 	return (*binaryClassCharᵖ)(nil)
 }
 func doEncodeCharᵖ(e binary.Encoder, o *Charᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCharᵖ(d binary.Decoder, o *Charᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCharᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2909,8 +2728,7 @@ var schemaCharᵖ = &schema.Class{
 	Name:    "Charᵖ",
 	Display: "Charᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2968,32 +2786,19 @@ func (*Charᵖᵖ) Class() binary.Class {
 	return (*binaryClassCharᵖᵖ)(nil)
 }
 func doEncodeCharᵖᵖ(e binary.Encoder, o *Charᵖᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCharᵖᵖ(d binary.Decoder, o *Charᵖᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipCharᵖᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -3019,8 +2824,7 @@ var schemaCharᵖᵖ = &schema.Class{
 	Name:    "Charᵖᵖ",
 	Display: "Charᵖᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3507,32 +3311,19 @@ func (*VertexPointer) Class() binary.Class {
 	return (*binaryClassVertexPointer)(nil)
 }
 func doEncodeVertexPointer(e binary.Encoder, o *VertexPointer) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVertexPointer(d binary.Decoder, o *VertexPointer) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVertexPointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -3558,8 +3349,7 @@ var schemaVertexPointer = &schema.Class{
 	Name:    "VertexPointer",
 	Display: "VertexPointer",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6125,32 +5915,19 @@ func (*DiscardFramebufferAttachmentᵖ) Class() binary.Class {
 	return (*binaryClassDiscardFramebufferAttachmentᵖ)(nil)
 }
 func doEncodeDiscardFramebufferAttachmentᵖ(e binary.Encoder, o *DiscardFramebufferAttachmentᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeDiscardFramebufferAttachmentᵖ(d binary.Decoder, o *DiscardFramebufferAttachmentᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipDiscardFramebufferAttachmentᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6184,8 +5961,7 @@ var schemaDiscardFramebufferAttachmentᵖ = &schema.Class{
 	Name:    "DiscardFramebufferAttachmentᵖ",
 	Display: "DiscardFramebufferAttachmentᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6195,32 +5971,19 @@ func (*EGLConfig) Class() binary.Class {
 	return (*binaryClassEGLConfig)(nil)
 }
 func doEncodeEGLConfig(e binary.Encoder, o *EGLConfig) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEGLConfig(d binary.Decoder, o *EGLConfig) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipEGLConfig(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6246,8 +6009,7 @@ var schemaEGLConfig = &schema.Class{
 	Name:    "EGLConfig",
 	Display: "EGLConfig",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6257,32 +6019,19 @@ func (*EGLContext) Class() binary.Class {
 	return (*binaryClassEGLContext)(nil)
 }
 func doEncodeEGLContext(e binary.Encoder, o *EGLContext) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEGLContext(d binary.Decoder, o *EGLContext) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipEGLContext(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6308,8 +6057,7 @@ var schemaEGLContext = &schema.Class{
 	Name:    "EGLContext",
 	Display: "EGLContext",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6319,32 +6067,19 @@ func (*EGLDisplay) Class() binary.Class {
 	return (*binaryClassEGLDisplay)(nil)
 }
 func doEncodeEGLDisplay(e binary.Encoder, o *EGLDisplay) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEGLDisplay(d binary.Decoder, o *EGLDisplay) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipEGLDisplay(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6370,8 +6105,7 @@ var schemaEGLDisplay = &schema.Class{
 	Name:    "EGLDisplay",
 	Display: "EGLDisplay",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6381,32 +6115,19 @@ func (*EGLSurface) Class() binary.Class {
 	return (*binaryClassEGLSurface)(nil)
 }
 func doEncodeEGLSurface(e binary.Encoder, o *EGLSurface) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEGLSurface(d binary.Decoder, o *EGLSurface) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipEGLSurface(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6432,8 +6153,7 @@ var schemaEGLSurface = &schema.Class{
 	Name:    "EGLSurface",
 	Display: "EGLSurface",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6491,32 +6211,19 @@ func (*EGLintᵖ) Class() binary.Class {
 	return (*binaryClassEGLintᵖ)(nil)
 }
 func doEncodeEGLintᵖ(e binary.Encoder, o *EGLintᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEGLintᵖ(d binary.Decoder, o *EGLintᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipEGLintᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6542,8 +6249,7 @@ var schemaEGLintᵖ = &schema.Class{
 	Name:    "EGLintᵖ",
 	Display: "EGLintᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -6943,32 +6649,19 @@ func (*Voidᵖ) Class() binary.Class {
 	return (*binaryClassVoidᵖ)(nil)
 }
 func doEncodeVoidᵖ(e binary.Encoder, o *Voidᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVoidᵖ(d binary.Decoder, o *Voidᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVoidᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -6994,8 +6687,7 @@ var schemaVoidᵖ = &schema.Class{
 	Name:    "Voidᵖ",
 	Display: "Voidᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7301,32 +6993,19 @@ func (*F32ᵖ) Class() binary.Class {
 	return (*binaryClassF32ᵖ)(nil)
 }
 func doEncodeF32ᵖ(e binary.Encoder, o *F32ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeF32ᵖ(d binary.Decoder, o *F32ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipF32ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -7352,8 +7031,7 @@ var schemaF32ᵖ = &schema.Class{
 	Name:    "F32ᵖ",
 	Display: "F32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7511,32 +7189,19 @@ func (*FramebufferAttachmentᵖ) Class() binary.Class {
 	return (*binaryClassFramebufferAttachmentᵖ)(nil)
 }
 func doEncodeFramebufferAttachmentᵖ(e binary.Encoder, o *FramebufferAttachmentᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeFramebufferAttachmentᵖ(d binary.Decoder, o *FramebufferAttachmentᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipFramebufferAttachmentᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -7566,8 +7231,7 @@ var schemaFramebufferAttachmentᵖ = &schema.Class{
 	Name:    "FramebufferAttachmentᵖ",
 	Display: "FramebufferAttachmentᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7625,32 +7289,19 @@ func (*FramebufferIdᵖ) Class() binary.Class {
 	return (*binaryClassFramebufferIdᵖ)(nil)
 }
 func doEncodeFramebufferIdᵖ(e binary.Encoder, o *FramebufferIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeFramebufferIdᵖ(d binary.Decoder, o *FramebufferIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipFramebufferIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -7676,8 +7327,7 @@ var schemaFramebufferIdᵖ = &schema.Class{
 	Name:    "FramebufferIdᵖ",
 	Display: "FramebufferIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7687,32 +7337,19 @@ func (*GLXContext) Class() binary.Class {
 	return (*binaryClassGLXContext)(nil)
 }
 func doEncodeGLXContext(e binary.Encoder, o *GLXContext) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeGLXContext(d binary.Decoder, o *GLXContext) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipGLXContext(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -7738,8 +7375,7 @@ var schemaGLXContext = &schema.Class{
 	Name:    "GLXContext",
 	Display: "GLXContext",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7749,32 +7385,19 @@ func (*GLXDrawable) Class() binary.Class {
 	return (*binaryClassGLXDrawable)(nil)
 }
 func doEncodeGLXDrawable(e binary.Encoder, o *GLXDrawable) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeGLXDrawable(d binary.Decoder, o *GLXDrawable) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipGLXDrawable(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -7800,8 +7423,7 @@ var schemaGLXDrawable = &schema.Class{
 	Name:    "GLXDrawable",
 	Display: "GLXDrawable",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -10029,32 +9651,19 @@ func (*TexturePointer) Class() binary.Class {
 	return (*binaryClassTexturePointer)(nil)
 }
 func doEncodeTexturePointer(e binary.Encoder, o *TexturePointer) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeTexturePointer(d binary.Decoder, o *TexturePointer) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipTexturePointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -10080,8 +9689,7 @@ var schemaTexturePointer = &schema.Class{
 	Name:    "TexturePointer",
 	Display: "TexturePointer",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -11077,32 +10685,19 @@ func (*QueryIdᵖ) Class() binary.Class {
 	return (*binaryClassQueryIdᵖ)(nil)
 }
 func doEncodeQueryIdᵖ(e binary.Encoder, o *QueryIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeQueryIdᵖ(d binary.Decoder, o *QueryIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipQueryIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -11128,8 +10723,7 @@ var schemaQueryIdᵖ = &schema.Class{
 	Name:    "QueryIdᵖ",
 	Display: "QueryIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -11279,32 +10873,19 @@ func (*RenderbufferIdᵖ) Class() binary.Class {
 	return (*binaryClassRenderbufferIdᵖ)(nil)
 }
 func doEncodeRenderbufferIdᵖ(e binary.Encoder, o *RenderbufferIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeRenderbufferIdᵖ(d binary.Decoder, o *RenderbufferIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipRenderbufferIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -11330,8 +10911,7 @@ var schemaRenderbufferIdᵖ = &schema.Class{
 	Name:    "RenderbufferIdᵖ",
 	Display: "RenderbufferIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -11533,32 +11113,19 @@ func (*TextureIdᵖ) Class() binary.Class {
 	return (*binaryClassTextureIdᵖ)(nil)
 }
 func doEncodeTextureIdᵖ(e binary.Encoder, o *TextureIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeTextureIdᵖ(d binary.Decoder, o *TextureIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipTextureIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -11584,8 +11151,7 @@ var schemaTextureIdᵖ = &schema.Class{
 	Name:    "TextureIdᵖ",
 	Display: "TextureIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -11665,32 +11231,19 @@ func (*VertexArrayIdᵖ) Class() binary.Class {
 	return (*binaryClassVertexArrayIdᵖ)(nil)
 }
 func doEncodeVertexArrayIdᵖ(e binary.Encoder, o *VertexArrayIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVertexArrayIdᵖ(d binary.Decoder, o *VertexArrayIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVertexArrayIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -11716,8 +11269,7 @@ var schemaVertexArrayIdᵖ = &schema.Class{
 	Name:    "VertexArrayIdᵖ",
 	Display: "VertexArrayIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -12497,32 +12049,19 @@ func (*IndicesPointer) Class() binary.Class {
 	return (*binaryClassIndicesPointer)(nil)
 }
 func doEncodeIndicesPointer(e binary.Encoder, o *IndicesPointer) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeIndicesPointer(d binary.Decoder, o *IndicesPointer) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipIndicesPointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -12548,8 +12087,7 @@ var schemaIndicesPointer = &schema.Class{
 	Name:    "IndicesPointer",
 	Display: "IndicesPointer",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -12731,32 +12269,19 @@ func (*ImageOES) Class() binary.Class {
 	return (*binaryClassImageOES)(nil)
 }
 func doEncodeImageOES(e binary.Encoder, o *ImageOES) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeImageOES(d binary.Decoder, o *ImageOES) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipImageOES(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -12782,8 +12307,7 @@ var schemaImageOES = &schema.Class{
 	Name:    "ImageOES",
 	Display: "ImageOES",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -14309,32 +13833,19 @@ func (*S32ᵖ) Class() binary.Class {
 	return (*binaryClassS32ᵖ)(nil)
 }
 func doEncodeS32ᵖ(e binary.Encoder, o *S32ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS32ᵖ(d binary.Decoder, o *S32ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS32ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -14360,8 +13871,7 @@ var schemaS32ᵖ = &schema.Class{
 	Name:    "S32ᵖ",
 	Display: "S32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -14371,32 +13881,19 @@ func (*ShaderAttribTypeᵖ) Class() binary.Class {
 	return (*binaryClassShaderAttribTypeᵖ)(nil)
 }
 func doEncodeShaderAttribTypeᵖ(e binary.Encoder, o *ShaderAttribTypeᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeShaderAttribTypeᵖ(d binary.Decoder, o *ShaderAttribTypeᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipShaderAttribTypeᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -14424,8 +13921,7 @@ var schemaShaderAttribTypeᵖ = &schema.Class{
 	Name:    "ShaderAttribTypeᵖ",
 	Display: "ShaderAttribTypeᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -14559,32 +14055,19 @@ func (*ShaderUniformTypeᵖ) Class() binary.Class {
 	return (*binaryClassShaderUniformTypeᵖ)(nil)
 }
 func doEncodeShaderUniformTypeᵖ(e binary.Encoder, o *ShaderUniformTypeᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeShaderUniformTypeᵖ(d binary.Decoder, o *ShaderUniformTypeᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipShaderUniformTypeᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -14612,8 +14095,7 @@ var schemaShaderUniformTypeᵖ = &schema.Class{
 	Name:    "ShaderUniformTypeᵖ",
 	Display: "ShaderUniformTypeᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -14957,32 +14439,19 @@ func (*U32ᵖ) Class() binary.Class {
 	return (*binaryClassU32ᵖ)(nil)
 }
 func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipU32ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -15008,8 +14477,7 @@ var schemaU32ᵖ = &schema.Class{
 	Name:    "U32ᵖ",
 	Display: "U32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -15125,32 +14593,19 @@ func (*ShaderIdᵖ) Class() binary.Class {
 	return (*binaryClassShaderIdᵖ)(nil)
 }
 func doEncodeShaderIdᵖ(e binary.Encoder, o *ShaderIdᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeShaderIdᵖ(d binary.Decoder, o *ShaderIdᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipShaderIdᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -15176,8 +14631,7 @@ var schemaShaderIdᵖ = &schema.Class{
 	Name:    "ShaderIdᵖ",
 	Display: "ShaderIdᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -16171,32 +15625,19 @@ func (*S64ᵖ) Class() binary.Class {
 	return (*binaryClassS64ᵖ)(nil)
 }
 func doEncodeS64ᵖ(e binary.Encoder, o *S64ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeS64ᵖ(d binary.Decoder, o *S64ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipS64ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -16222,8 +15663,7 @@ var schemaS64ᵖ = &schema.Class{
 	Name:    "S64ᵖ",
 	Display: "S64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -16487,32 +15927,19 @@ func (*U64ᵖ) Class() binary.Class {
 	return (*binaryClassU64ᵖ)(nil)
 }
 func doEncodeU64ᵖ(e binary.Encoder, o *U64ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeU64ᵖ(d binary.Decoder, o *U64ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipU64ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -16538,8 +15965,7 @@ var schemaU64ᵖ = &schema.Class{
 	Name:    "U64ᵖ",
 	Display: "U64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -25237,32 +24663,19 @@ func (*Intᵖ) Class() binary.Class {
 	return (*binaryClassIntᵖ)(nil)
 }
 func doEncodeIntᵖ(e binary.Encoder, o *Intᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipIntᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -25288,8 +24701,7 @@ var schemaIntᵖ = &schema.Class{
 	Name:    "Intᵖ",
 	Display: "Intᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -25469,32 +24881,19 @@ func (*HGLRC) Class() binary.Class {
 	return (*binaryClassHGLRC)(nil)
 }
 func doEncodeHGLRC(e binary.Encoder, o *HGLRC) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeHGLRC(d binary.Decoder, o *HGLRC) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipHGLRC(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -25520,8 +24919,7 @@ var schemaHGLRC = &schema.Class{
 	Name:    "HGLRC",
 	Display: "HGLRC",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -25840,32 +25238,19 @@ func (*HDC) Class() binary.Class {
 	return (*binaryClassHDC)(nil)
 }
 func doEncodeHDC(e binary.Encoder, o *HDC) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeHDC(d binary.Decoder, o *HDC) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipHDC(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -25891,8 +25276,7 @@ var schemaHDC = &schema.Class{
 	Name:    "HDC",
 	Display: "HDC",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -26108,32 +25492,19 @@ func (*Mat2fᵖ) Class() binary.Class {
 	return (*binaryClassMat2fᵖ)(nil)
 }
 func doEncodeMat2fᵖ(e binary.Encoder, o *Mat2fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeMat2fᵖ(d binary.Decoder, o *Mat2fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipMat2fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -26159,8 +25530,7 @@ var schemaMat2fᵖ = &schema.Class{
 	Name:    "Mat2fᵖ",
 	Display: "Mat2fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -26328,32 +25698,19 @@ func (*Mat3fᵖ) Class() binary.Class {
 	return (*binaryClassMat3fᵖ)(nil)
 }
 func doEncodeMat3fᵖ(e binary.Encoder, o *Mat3fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeMat3fᵖ(d binary.Decoder, o *Mat3fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipMat3fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -26379,8 +25736,7 @@ var schemaMat3fᵖ = &schema.Class{
 	Name:    "Mat3fᵖ",
 	Display: "Mat3fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -26548,32 +25904,19 @@ func (*Mat4fᵖ) Class() binary.Class {
 	return (*binaryClassMat4fᵖ)(nil)
 }
 func doEncodeMat4fᵖ(e binary.Encoder, o *Mat4fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeMat4fᵖ(d binary.Decoder, o *Mat4fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipMat4fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -26599,8 +25942,7 @@ var schemaMat4fᵖ = &schema.Class{
 	Name:    "Mat4fᵖ",
 	Display: "Mat4fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -27574,32 +26916,19 @@ func (*U8ᵖ) Class() binary.Class {
 	return (*binaryClassU8ᵖ)(nil)
 }
 func doEncodeU8ᵖ(e binary.Encoder, o *U8ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipU8ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -27625,8 +26954,7 @@ var schemaU8ᵖ = &schema.Class{
 	Name:    "U8ᵖ",
 	Display: "U8ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -27738,32 +27066,19 @@ func (*Vec2fᵖ) Class() binary.Class {
 	return (*binaryClassVec2fᵖ)(nil)
 }
 func doEncodeVec2fᵖ(e binary.Encoder, o *Vec2fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec2fᵖ(d binary.Decoder, o *Vec2fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec2fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -27789,8 +27104,7 @@ var schemaVec2fᵖ = &schema.Class{
 	Name:    "Vec2fᵖ",
 	Display: "Vec2fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -27904,32 +27218,19 @@ func (*Vec2iᵖ) Class() binary.Class {
 	return (*binaryClassVec2iᵖ)(nil)
 }
 func doEncodeVec2iᵖ(e binary.Encoder, o *Vec2iᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec2iᵖ(d binary.Decoder, o *Vec2iᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec2iᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -27955,8 +27256,7 @@ var schemaVec2iᵖ = &schema.Class{
 	Name:    "Vec2iᵖ",
 	Display: "Vec2iᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -28068,32 +27368,19 @@ func (*Vec3fᵖ) Class() binary.Class {
 	return (*binaryClassVec3fᵖ)(nil)
 }
 func doEncodeVec3fᵖ(e binary.Encoder, o *Vec3fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec3fᵖ(d binary.Decoder, o *Vec3fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec3fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -28119,8 +27406,7 @@ var schemaVec3fᵖ = &schema.Class{
 	Name:    "Vec3fᵖ",
 	Display: "Vec3fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -28234,32 +27520,19 @@ func (*Vec3iᵖ) Class() binary.Class {
 	return (*binaryClassVec3iᵖ)(nil)
 }
 func doEncodeVec3iᵖ(e binary.Encoder, o *Vec3iᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec3iᵖ(d binary.Decoder, o *Vec3iᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec3iᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -28285,8 +27558,7 @@ var schemaVec3iᵖ = &schema.Class{
 	Name:    "Vec3iᵖ",
 	Display: "Vec3iᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -28398,32 +27670,19 @@ func (*Vec4fᵖ) Class() binary.Class {
 	return (*binaryClassVec4fᵖ)(nil)
 }
 func doEncodeVec4fᵖ(e binary.Encoder, o *Vec4fᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec4fᵖ(d binary.Decoder, o *Vec4fᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec4fᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -28449,8 +27708,7 @@ var schemaVec4fᵖ = &schema.Class{
 	Name:    "Vec4fᵖ",
 	Display: "Vec4fᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -28564,32 +27822,19 @@ func (*Vec4iᵖ) Class() binary.Class {
 	return (*binaryClassVec4iᵖ)(nil)
 }
 func doEncodeVec4iᵖ(e binary.Encoder, o *Vec4iᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
+	if err := e.Value(&o.Pointer); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeVec4iᵖ(d binary.Decoder, o *Vec4iᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.Pointer); err != nil {
 		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
 func doSkipVec4iᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -28615,8 +27860,7 @@ var schemaVec4iᵖ = &schema.Class{
 	Name:    "Vec4iᵖ",
 	Display: "Vec4iᵖ",
 	Fields: []schema.Field{
-		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 

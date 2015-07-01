@@ -18,14 +18,14 @@ import "android.googlesource.com/platform/tools/gpu/memory"
 
 // Pack packs the memory Range o into the RPC-friendly MemoryRange structure.
 func (r *MemoryRange) Pack(o memory.Range) {
-	r.Base = uint64(o.Base)
-	r.Size = uint64(o.Size)
+	r.Base = o.Base
+	r.Size = o.Size
 }
 
 // Unpack unpacks the RPC-friendly MemoryRange structure into the memory Range
 // o.
 func (r MemoryRange) Unpack(o *memory.Range) {
-	(*o) = memory.Range{Base: memory.Pointer(r.Base), Size: r.Size}
+	(*o) = memory.Range{Base: r.Base, Size: r.Size}
 }
 
 // Pack packs the memory RangeList o into the RPC-friendly MemoryRangeArray
