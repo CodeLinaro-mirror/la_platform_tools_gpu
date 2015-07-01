@@ -63,9 +63,6 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 			for _, f := range t.Fields {
 				markUsed(f.Type)
 			}
-			for _, e := range t.Extends {
-				markUsed(e)
-			}
 		case *semantic.Enum:
 			for _, e := range t.Extends {
 				markUsed(e)

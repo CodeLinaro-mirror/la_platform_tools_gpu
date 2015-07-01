@@ -185,9 +185,6 @@ const rpc_go_tmpl = `{{/*
   {{AssertType $.Class "Class"}}
   {{AssertType $.Macro "string"}}
 
-  {{range $_, $e := $.Class.Extends}}
-    {{Macro "TraverseFields" "Impl" $.Impl "Class" $e "Macro" $.Macro}}
-  {{end}}
   {{range $_, $f := $.Class.Fields}}
     {{Macro $.Macro "Impl" $.Impl "Class" $.Class "Field" $f}}
   {{end}}
@@ -266,9 +263,7 @@ const rpc_go_tmpl = `{{/*
   {{$iname := $.Name}}
   // Interface {{$.Name}}
   type {{$iname}} interface {
-    {{if eq (len $.Extends) 0}}
-      binary.Object
-    {{end}}
+    binary.Object
     {{Macro "AllFields" "Class" $ "Macro" "DeclareInterfaceFieldAccessor"}}
   }
 {{end}}
@@ -766,9 +761,6 @@ const rpc_java_tmpl = `{{/*
   {{AssertType $.Class   "Class"}}  {{/* the class holding the fields to traverse */}}
   {{AssertType $.Macro   "string"}} {{/* the macro to invoke */}}
 
-  {{range $_, $e := $.Class.Extends}}
-    {{Macro "TraverseFields" "Derived" true "Class" $e "Macro" $.Macro}}
-  {{end}}
   {{range $_, $f := $.Class.Fields}}
     {{Macro $.Macro "Derived" $.Derived "Class" $.Class "Field" $f}}
   {{end}}
@@ -1006,10 +998,7 @@ const rpc_java_tmpl = `{{/*
 {{define "ClassImplements"}}
   {{AssertType $ "Class"}}
 
-  implements §
-  {{if len $.Extends}}{{(index $.Extends 0).Name}}§
-  {{else}} BinaryObject§
-  {{end}}
+  implements BinaryObject§
 {{end}}
 
 
@@ -1115,8 +1104,7 @@ const rpc_java_tmpl = `{{/*
   {{template "CopyrightHeader"}}
   package {{Global "package"}};
 ¶
-  {{if not (len $.Extends)}}import com.android.tools.rpclib.binary.BinaryObject;
-  {{end}}
+  import com.android.tools.rpclib.binary.BinaryObject;
   import com.android.tools.rpclib.binary.Decoder;
   import com.android.tools.rpclib.binary.Encoder;
   import com.android.tools.rpclib.binary.ObjectTypeID;

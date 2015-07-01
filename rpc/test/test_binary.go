@@ -17,15 +17,12 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*Derived)(nil).Class())
 	Namespace.Add((*ListNode)(nil).Class())
 	Namespace.Add((*Resource)(nil).Class())
 	Namespace.Add((*ResourceId)(nil).Class())
 	Namespace.Add((*Struct)(nil).Class())
 	Namespace.Add((*callAdd)(nil).Class())
 	Namespace.Add((*callEnumToString)(nil).Class())
-	Namespace.Add((*callGetBase)(nil).Class())
-	Namespace.Add((*callGetDerived)(nil).Class())
 	Namespace.Add((*callGetListNodeChain)(nil).Class())
 	Namespace.Add((*callGetListNodeChainArray)(nil).Class())
 	Namespace.Add((*callGetResource)(nil).Class())
@@ -36,8 +33,6 @@ func init() {
 	Namespace.Add((*callUseResource)(nil).Class())
 	Namespace.Add((*resultAdd)(nil).Class())
 	Namespace.Add((*resultEnumToString)(nil).Class())
-	Namespace.Add((*resultGetBase)(nil).Class())
-	Namespace.Add((*resultGetDerived)(nil).Class())
 	Namespace.Add((*resultGetListNodeChain)(nil).Class())
 	Namespace.Add((*resultGetListNodeChainArray)(nil).Class())
 	Namespace.Add((*resultGetResource)(nil).Class())
@@ -49,15 +44,12 @@ func init() {
 }
 
 var (
-	binaryIDDerived                     = binary.ID{0x0d, 0x9c, 0x9a, 0x15, 0x97, 0x4d, 0xf4, 0xcf, 0x34, 0x4a, 0x26, 0x1b, 0xde, 0x0b, 0x5e, 0x1e, 0x08, 0x36, 0x95, 0x0a}
 	binaryIDListNode                    = binary.ID{0xd4, 0x62, 0x72, 0x4c, 0xa0, 0x8b, 0xae, 0x1b, 0xad, 0x98, 0x12, 0x6d, 0x2f, 0x95, 0x38, 0xe7, 0x74, 0x4f, 0xb7, 0x6e}
 	binaryIDResource                    = binary.ID{0x28, 0x69, 0x24, 0xfd, 0x18, 0x32, 0x76, 0xf6, 0x52, 0x91, 0xd4, 0xf3, 0x70, 0x6e, 0xc9, 0x55, 0x30, 0x59, 0x55, 0x1a}
 	binaryIDResourceId                  = binary.ID{0x90, 0xae, 0xdc, 0x2b, 0xca, 0x22, 0x65, 0x8f, 0xca, 0xff, 0x86, 0x19, 0xc6, 0x73, 0x1b, 0x71, 0x6e, 0x54, 0x99, 0xc2}
 	binaryIDStruct                      = binary.ID{0x1b, 0x23, 0x6b, 0xfa, 0x68, 0x0a, 0x1a, 0x1a, 0xa6, 0x15, 0xfe, 0x89, 0x8c, 0x05, 0x91, 0xa2, 0x92, 0x56, 0x1d, 0x58}
 	binaryIDcallAdd                     = binary.ID{0x9c, 0xb8, 0x89, 0x5a, 0x48, 0xc9, 0x85, 0x6e, 0x1d, 0x35, 0x40, 0x50, 0xa1, 0x38, 0x3b, 0x6f, 0xcb, 0xa0, 0x6c, 0xb8}
 	binaryIDcallEnumToString            = binary.ID{0x58, 0x2d, 0x2b, 0xe3, 0x41, 0xac, 0xce, 0x57, 0x0c, 0x0e, 0x45, 0x50, 0xfd, 0xab, 0xae, 0x64, 0x1b, 0xca, 0x46, 0xca}
-	binaryIDcallGetBase                 = binary.ID{0x28, 0xb4, 0x5a, 0x5f, 0xcd, 0xa2, 0xd9, 0x93, 0x1e, 0x4b, 0x49, 0x3a, 0x9b, 0x6a, 0xec, 0x7a, 0xb7, 0xb5, 0xc7, 0xf6}
-	binaryIDcallGetDerived              = binary.ID{0x72, 0x71, 0x8e, 0x2b, 0x3f, 0xa3, 0xe7, 0x7d, 0x76, 0xe3, 0x33, 0x9b, 0x63, 0xa4, 0xfc, 0x2f, 0x5b, 0xc4, 0x6b, 0x0e}
 	binaryIDcallGetListNodeChain        = binary.ID{0xe4, 0x4b, 0x9d, 0xdf, 0xeb, 0x01, 0x49, 0x16, 0x20, 0x05, 0xcc, 0x24, 0x3f, 0x13, 0xb3, 0x4d, 0x50, 0x44, 0x78, 0x51}
 	binaryIDcallGetListNodeChainArray   = binary.ID{0x6c, 0xbf, 0x17, 0x6a, 0xd0, 0x21, 0x13, 0x21, 0x81, 0xd0, 0x9c, 0x51, 0x14, 0xea, 0x88, 0x4a, 0x57, 0x7a, 0x00, 0x2a}
 	binaryIDcallGetResource             = binary.ID{0x77, 0x3f, 0xbc, 0xe2, 0x64, 0xc6, 0x25, 0xb9, 0xd3, 0x1e, 0x82, 0xa5, 0x29, 0x94, 0x99, 0x60, 0x63, 0x66, 0xde, 0x5f}
@@ -68,8 +60,6 @@ var (
 	binaryIDcallUseResource             = binary.ID{0x96, 0x12, 0x10, 0xa9, 0x67, 0xea, 0xf9, 0x3b, 0x5f, 0x44, 0xa0, 0xfe, 0xbe, 0xf9, 0x0a, 0xb6, 0xc9, 0x6c, 0x27, 0x21}
 	binaryIDresultAdd                   = binary.ID{0x1c, 0x34, 0x05, 0xbf, 0x9a, 0x3c, 0xe5, 0xce, 0x1f, 0x5c, 0x2d, 0xf9, 0xdd, 0xab, 0x33, 0xb6, 0xfa, 0xa1, 0xd5, 0x2b}
 	binaryIDresultEnumToString          = binary.ID{0x82, 0xf6, 0xd5, 0x1a, 0x4d, 0xec, 0x38, 0xa6, 0x47, 0xa2, 0x1f, 0x6c, 0xc6, 0xa8, 0x69, 0x7f, 0x28, 0x5b, 0x21, 0x2e}
-	binaryIDresultGetBase               = binary.ID{0xae, 0x6d, 0xce, 0x4d, 0xba, 0x99, 0xa9, 0xa0, 0xd6, 0x69, 0xde, 0xec, 0x6d, 0xcc, 0x10, 0xbe, 0xe0, 0x0a, 0x0d, 0x53}
-	binaryIDresultGetDerived            = binary.ID{0x33, 0x7b, 0x5c, 0xf9, 0x0e, 0x8f, 0xfd, 0x58, 0x64, 0x31, 0x0d, 0xc0, 0x32, 0x51, 0xa6, 0x82, 0xee, 0xd3, 0xfc, 0x16}
 	binaryIDresultGetListNodeChain      = binary.ID{0x8f, 0x0f, 0xb2, 0x7b, 0xbe, 0x33, 0x17, 0x99, 0x39, 0x6b, 0x64, 0x9b, 0xe5, 0x6a, 0x99, 0x14, 0x59, 0xc3, 0x6b, 0x94}
 	binaryIDresultGetListNodeChainArray = binary.ID{0xe2, 0x0a, 0xbc, 0xe8, 0x0a, 0x49, 0xe3, 0xe9, 0x6a, 0x9e, 0x01, 0x33, 0x85, 0x20, 0x80, 0xef, 0x2a, 0xc7, 0x9b, 0x51}
 	binaryIDresultGetResource           = binary.ID{0xc1, 0x36, 0x88, 0xd8, 0x61, 0xde, 0xe9, 0xe6, 0x82, 0x5b, 0xb1, 0xfb, 0x67, 0xd1, 0x11, 0x30, 0xb9, 0xcf, 0x72, 0x23}
@@ -79,68 +69,6 @@ var (
 	binaryIDresultSetStruct             = binary.ID{0x3d, 0xec, 0x2e, 0x5f, 0x2b, 0x8d, 0xd4, 0x91, 0xfe, 0x57, 0x57, 0x33, 0x8c, 0x50, 0x56, 0x14, 0xa8, 0xa0, 0x85, 0x2a}
 	binaryIDresultUseResource           = binary.ID{0x81, 0x83, 0x0d, 0xf2, 0xfa, 0x0d, 0x75, 0x4c, 0xfa, 0xee, 0x14, 0x0e, 0xe5, 0x89, 0xa4, 0x27, 0x06, 0xdb, 0xf9, 0x2e}
 )
-
-type binaryClassDerived struct{}
-
-func (*Derived) Class() binary.Class {
-	return (*binaryClassDerived)(nil)
-}
-func doEncodeDerived(e binary.Encoder, o *Derived) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Int32(int32(o.Enum)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeDerived(d binary.Decoder, o *Derived) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Enum = Enum(obj)
-	}
-	return nil
-}
-func doSkipDerived(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassDerived) ID() binary.ID      { return binaryIDDerived }
-func (*binaryClassDerived) New() binary.Object { return &Derived{} }
-func (*binaryClassDerived) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeDerived(e, obj.(*Derived))
-}
-func (*binaryClassDerived) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Derived{}
-	return obj, doDecodeDerived(d, obj)
-}
-func (*binaryClassDerived) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeDerived(d, obj.(*Derived))
-}
-func (*binaryClassDerived) Skip(d binary.Decoder) error { return doSkipDerived(d) }
-func (*binaryClassDerived) Schema() *schema.Class       { return schemaDerived }
-
-var schemaDerived = &schema.Class{
-	TypeID:  binaryIDDerived,
-	Package: "test",
-	Name:    "Derived",
-	Display: "Derived",
-	Fields: []schema.Field{
-		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
-	},
-}
 
 type binaryClassListNode struct{}
 
@@ -518,80 +446,6 @@ var schemacallEnumToString = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
-}
-
-type binaryClasscallGetBase struct{}
-
-func (*callGetBase) Class() binary.Class {
-	return (*binaryClasscallGetBase)(nil)
-}
-func doEncodecallGetBase(e binary.Encoder, o *callGetBase) error {
-	return nil
-}
-func doDecodecallGetBase(d binary.Decoder, o *callGetBase) error {
-	return nil
-}
-func doSkipcallGetBase(d binary.Decoder) error {
-	return nil
-}
-func (*binaryClasscallGetBase) ID() binary.ID      { return binaryIDcallGetBase }
-func (*binaryClasscallGetBase) New() binary.Object { return &callGetBase{} }
-func (*binaryClasscallGetBase) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallGetBase(e, obj.(*callGetBase))
-}
-func (*binaryClasscallGetBase) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callGetBase{}
-	return obj, doDecodecallGetBase(d, obj)
-}
-func (*binaryClasscallGetBase) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallGetBase(d, obj.(*callGetBase))
-}
-func (*binaryClasscallGetBase) Skip(d binary.Decoder) error { return doSkipcallGetBase(d) }
-func (*binaryClasscallGetBase) Schema() *schema.Class       { return schemacallGetBase }
-
-var schemacallGetBase = &schema.Class{
-	TypeID:  binaryIDcallGetBase,
-	Package: "test",
-	Name:    "callGetBase",
-	Display: "callGetBase",
-	Fields:  []schema.Field{},
-}
-
-type binaryClasscallGetDerived struct{}
-
-func (*callGetDerived) Class() binary.Class {
-	return (*binaryClasscallGetDerived)(nil)
-}
-func doEncodecallGetDerived(e binary.Encoder, o *callGetDerived) error {
-	return nil
-}
-func doDecodecallGetDerived(d binary.Decoder, o *callGetDerived) error {
-	return nil
-}
-func doSkipcallGetDerived(d binary.Decoder) error {
-	return nil
-}
-func (*binaryClasscallGetDerived) ID() binary.ID      { return binaryIDcallGetDerived }
-func (*binaryClasscallGetDerived) New() binary.Object { return &callGetDerived{} }
-func (*binaryClasscallGetDerived) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallGetDerived(e, obj.(*callGetDerived))
-}
-func (*binaryClasscallGetDerived) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callGetDerived{}
-	return obj, doDecodecallGetDerived(d, obj)
-}
-func (*binaryClasscallGetDerived) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallGetDerived(d, obj.(*callGetDerived))
-}
-func (*binaryClasscallGetDerived) Skip(d binary.Decoder) error { return doSkipcallGetDerived(d) }
-func (*binaryClasscallGetDerived) Schema() *schema.Class       { return schemacallGetDerived }
-
-var schemacallGetDerived = &schema.Class{
-	TypeID:  binaryIDcallGetDerived,
-	Package: "test",
-	Name:    "callGetDerived",
-	Display: "callGetDerived",
-	Fields:  []schema.Field{},
 }
 
 type binaryClasscallGetListNodeChain struct{}
@@ -1030,118 +884,6 @@ var schemaresultEnumToString = &schema.Class{
 	Display: "resultEnumToString",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassresultGetBase struct{}
-
-func (*resultGetBase) Class() binary.Class {
-	return (*binaryClassresultGetBase)(nil)
-}
-func doEncoderesultGetBase(e binary.Encoder, o *resultGetBase) error {
-	if o.value != nil {
-		if err := e.Object(o.value); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultGetBase(d binary.Decoder, o *resultGetBase) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.value = obj.(Base)
-	} else {
-		o.value = nil
-	}
-	return nil
-}
-func doSkipresultGetBase(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultGetBase) ID() binary.ID      { return binaryIDresultGetBase }
-func (*binaryClassresultGetBase) New() binary.Object { return &resultGetBase{} }
-func (*binaryClassresultGetBase) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultGetBase(e, obj.(*resultGetBase))
-}
-func (*binaryClassresultGetBase) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultGetBase{}
-	return obj, doDecoderesultGetBase(d, obj)
-}
-func (*binaryClassresultGetBase) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultGetBase(d, obj.(*resultGetBase))
-}
-func (*binaryClassresultGetBase) Skip(d binary.Decoder) error { return doSkipresultGetBase(d) }
-func (*binaryClassresultGetBase) Schema() *schema.Class       { return schemaresultGetBase }
-
-var schemaresultGetBase = &schema.Class{
-	TypeID:  binaryIDresultGetBase,
-	Package: "test",
-	Name:    "resultGetBase",
-	Display: "resultGetBase",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
-	},
-}
-
-type binaryClassresultGetDerived struct{}
-
-func (*resultGetDerived) Class() binary.Class {
-	return (*binaryClassresultGetDerived)(nil)
-}
-func doEncoderesultGetDerived(e binary.Encoder, o *resultGetDerived) error {
-	if o.value != nil {
-		if err := e.Object(o.value); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultGetDerived(d binary.Decoder, o *resultGetDerived) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.value = obj.(Base)
-	} else {
-		o.value = nil
-	}
-	return nil
-}
-func doSkipresultGetDerived(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultGetDerived) ID() binary.ID      { return binaryIDresultGetDerived }
-func (*binaryClassresultGetDerived) New() binary.Object { return &resultGetDerived{} }
-func (*binaryClassresultGetDerived) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultGetDerived(e, obj.(*resultGetDerived))
-}
-func (*binaryClassresultGetDerived) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultGetDerived{}
-	return obj, doDecoderesultGetDerived(d, obj)
-}
-func (*binaryClassresultGetDerived) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultGetDerived(d, obj.(*resultGetDerived))
-}
-func (*binaryClassresultGetDerived) Skip(d binary.Decoder) error { return doSkipresultGetDerived(d) }
-func (*binaryClassresultGetDerived) Schema() *schema.Class       { return schemaresultGetDerived }
-
-var schemaresultGetDerived = &schema.Class{
-	TypeID:  binaryIDresultGetDerived,
-	Package: "test",
-	Name:    "resultGetDerived",
-	Display: "resultGetDerived",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
 	},
 }
 

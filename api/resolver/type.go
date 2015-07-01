@@ -279,16 +279,6 @@ func class(ctx *context, out *semantic.Class) {
 	in := out.AST
 	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
-	for _, extends := range in.Extends {
-		t := ctx.findType(extends, extends.Value)
-		if c, ok := t.(*semantic.Class); !ok {
-			ctx.errorf(extends, "non class entry %s in extension list", typename(t))
-		} else {
-			out.Extends = append(out.Extends, c)
-			c.ExtendedBy = append(c.ExtendedBy, out)
-			ctx.mappings[extends] = c
-		}
-	}
 	out.Fields = make([]*semantic.Field, len(in.Fields))
 	for i, f := range in.Fields {
 		field := field(ctx, f, out)

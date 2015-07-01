@@ -77,26 +77,11 @@ func (c callGetListNodeChainArray) Format(f fmt.State, r rune) {
 func (r resultGetListNodeChainArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callGetBase) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetBase()")
-}
-func (r resultGetBase) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callGetDerived) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetDerived()")
-}
-func (r resultGetDerived) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 
 func (h ResourceId) Valid() bool {
 	return h.ID.Valid()
 }
 
-func (a BaseArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]Baseˢ", len(a))
-}
 func (a ListNodeArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ListNodeˢ", len(a))
 }
@@ -152,16 +137,3 @@ func CreateListNode(
 
 func (c *ListNode) GetName() string    { return c.Name }
 func (c *ListNode) GetNext() *ListNode { return c.Next }
-
-func CreateDerived(
-	Name string,
-	Enum Enum,
-) *Derived {
-	return &Derived{
-		Name: Name,
-		Enum: Enum,
-	}
-}
-
-func (c *Derived) GetName() string { return c.Name }
-func (c *Derived) GetEnum() Enum   { return c.Enum }
