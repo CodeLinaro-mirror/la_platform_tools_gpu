@@ -165,7 +165,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 	Name: "{{.Name}}",
 	Display: "{{.Display}}",
 	Fields: []{{SchemaPrefix}}Field{
-		{{range .Fields}}{ Declared:"{{.Name}}", Type:{{Call "Go.Schema" .Type}} },
+		{{range .Fields}}{ Declared:"{{.Declared}}", Type:{{Call "Go.Schema" .Type}} },
 	{{end}} },
 }
 {{end}}
