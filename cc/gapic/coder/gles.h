@@ -144,26 +144,23 @@ namespace gles {
     class SliceInfo: public Encodable {
     public:
         SliceInfo() = default;
-        SliceInfo(uint64_t Root, uint64_t Base, uint64_t Count, uint32_t Pool) :
+        SliceInfo(memory::Pointer Root, uint64_t Base, uint64_t Count) :
             mRoot(Root),
             mBase(Base),
-            mCount(Count),
-            mPool(Pool) {}
+            mCount(Count) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8f, 0xcd, 0x2e, 0xfa, 0xbc, 0x4e, 0xc3, 0x2d, 0x4b, 0x9a, 0x07, 0x47, 0x8c, 0x80, 0x3d, 0x7f, 0xda, 0x5b, 0x6a, 0xad,  } };
+            static gapic::Id ID{ { 0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mRoot);
+            e->Value(this->mRoot);
             e->Uint64(this->mBase);
             e->Uint64(this->mCount);
-            e->Uint32(this->mPool);
         }
 
-        uint64_t mRoot;
+        memory::Pointer mRoot;
         uint64_t mBase;
         uint64_t mCount;
-        uint32_t mPool;
     };
 
     class Bool__S: public Encodable {
@@ -185,20 +182,17 @@ namespace gles {
     class Bool__P: public Encodable {
     public:
         Bool__P() = default;
-        Bool__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Bool__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x99, 0x14, 0xff, 0xcd, 0xe4, 0x5a, 0xa6, 0x40, 0x28, 0xce, 0x7f, 0x59, 0x66, 0x8e, 0x03, 0x31, 0x08, 0x3e, 0x1b, 0x8a,  } };
+            static gapic::Id ID{ { 0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class U8__S: public Encodable {
@@ -245,20 +239,17 @@ namespace gles {
     class BufferDataPointer: public Encodable {
     public:
         BufferDataPointer() = default;
-        BufferDataPointer(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        BufferDataPointer(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xec, 0x9b, 0x06, 0x05, 0x8b, 0x40, 0x9b, 0x3e, 0x3b, 0xf2, 0x28, 0x02, 0x1d, 0x73, 0xbb, 0xf2, 0x75, 0x70, 0x0e, 0x69,  } };
+            static gapic::Id ID{ { 0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class BufferId__S: public Encodable {
@@ -280,39 +271,33 @@ namespace gles {
     class BufferId__P: public Encodable {
     public:
         BufferId__P() = default;
-        BufferId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        BufferId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x4e, 0x93, 0x7a, 0x49, 0x93, 0xb1, 0x5e, 0x9f, 0x01, 0x00, 0x5f, 0xa1, 0x77, 0xff, 0x03, 0x71, 0x93, 0x81, 0x7a, 0x22,  } };
+            static gapic::Id ID{ { 0xdd, 0x87, 0xfa, 0xe3, 0xdf, 0x7b, 0x94, 0x84, 0xf3, 0x9b, 0xcb, 0xce, 0x6b, 0xbd, 0x3c, 0x5e, 0x9d, 0x78, 0xe5, 0x6d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGLContextObj: public Encodable {
     public:
         CGLContextObj() = default;
-        CGLContextObj(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGLContextObj(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xab, 0x86, 0x6f, 0x74, 0x93, 0x88, 0x54, 0x0f, 0x24, 0x0f, 0x0b, 0xc0, 0x3c, 0x31, 0x13, 0xf7, 0x84, 0x0b, 0xc2, 0x53,  } };
+            static gapic::Id ID{ { 0xa6, 0xab, 0x7a, 0x4b, 0x0e, 0xf6, 0x54, 0x78, 0xf8, 0xa3, 0xda, 0x81, 0xd5, 0xc8, 0x50, 0x96, 0xea, 0x6f, 0x2d, 0x7e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGLContextObj__S: public Encodable {
@@ -334,39 +319,33 @@ namespace gles {
     class CGLContextObj__P: public Encodable {
     public:
         CGLContextObj__P() = default;
-        CGLContextObj__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGLContextObj__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa5, 0xae, 0x0c, 0xd1, 0xe4, 0x8a, 0xce, 0xaa, 0x58, 0x17, 0x44, 0x03, 0x19, 0xcc, 0xf2, 0xea, 0x50, 0x88, 0x53, 0xb9,  } };
+            static gapic::Id ID{ { 0x9b, 0xbe, 0x32, 0x83, 0x89, 0x68, 0x87, 0x69, 0x22, 0xa0, 0xcf, 0xd6, 0x63, 0xeb, 0x8f, 0xfb, 0x81, 0x2f, 0x4b, 0x56,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGLPixelFormatObj: public Encodable {
     public:
         CGLPixelFormatObj() = default;
-        CGLPixelFormatObj(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGLPixelFormatObj(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x81, 0x5b, 0xcb, 0x83, 0x09, 0xbc, 0x3d, 0x7e, 0x40, 0x9c, 0xdd, 0x21, 0x56, 0xa3, 0x69, 0xef, 0x28, 0xea, 0x84, 0x41,  } };
+            static gapic::Id ID{ { 0x49, 0x1d, 0x13, 0xc7, 0x27, 0x10, 0xfb, 0xe6, 0xd2, 0xe9, 0x64, 0x94, 0xae, 0xe7, 0x39, 0x7b, 0x78, 0xed, 0x89, 0x2f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGLCreateContext: public Encodable {
@@ -422,58 +401,49 @@ namespace gles {
     class CGSConnectionID__P: public Encodable {
     public:
         CGSConnectionID__P() = default;
-        CGSConnectionID__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGSConnectionID__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x38, 0x8c, 0x60, 0xcd, 0x8b, 0x2b, 0x18, 0xa7, 0x29, 0x99, 0xbf, 0x46, 0x8d, 0xfb, 0xc0, 0x3d, 0xe9, 0x9a, 0xd5, 0x48,  } };
+            static gapic::Id ID{ { 0x56, 0x76, 0x11, 0xe9, 0x30, 0xc9, 0x2c, 0x5e, 0xa4, 0xe8, 0x77, 0x74, 0xff, 0x8f, 0xd0, 0x10, 0xfe, 0x07, 0xbc, 0xe9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGSWindowID__P: public Encodable {
     public:
         CGSWindowID__P() = default;
-        CGSWindowID__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGSWindowID__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbf, 0x73, 0x42, 0x2f, 0xcd, 0xec, 0xa9, 0x1e, 0x11, 0x55, 0x2d, 0x08, 0x00, 0xd1, 0x37, 0x01, 0x08, 0xc6, 0x5d, 0x24,  } };
+            static gapic::Id ID{ { 0xad, 0x99, 0x13, 0x23, 0x11, 0xd0, 0xbb, 0x78, 0x00, 0x65, 0x72, 0xa7, 0x8f, 0xf1, 0x60, 0xab, 0x6a, 0xc0, 0x26, 0xe8,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGSSurfaceID__P: public Encodable {
     public:
         CGSSurfaceID__P() = default;
-        CGSSurfaceID__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGSSurfaceID__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x19, 0x36, 0xee, 0x80, 0x3a, 0xe1, 0x89, 0x37, 0xcf, 0xe1, 0x30, 0xfa, 0xde, 0x0e, 0xff, 0x1a, 0x4c, 0x08, 0x08, 0x51,  } };
+            static gapic::Id ID{ { 0x53, 0xa8, 0xa4, 0x0a, 0x4c, 0xf6, 0x2a, 0xe8, 0xfa, 0xb9, 0x5e, 0x78, 0x2b, 0x17, 0x84, 0x22, 0x02, 0xa7, 0x07, 0x0a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGLGetSurface: public Encodable {
@@ -532,20 +502,17 @@ namespace gles {
     class CGSConnectionID: public Encodable {
     public:
         CGSConnectionID() = default;
-        CGSConnectionID(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        CGSConnectionID(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x44, 0x54, 0x8b, 0xc2, 0x8e, 0x89, 0xcb, 0x34, 0x5f, 0xc6, 0x32, 0x5f, 0xd8, 0x3f, 0x4f, 0x0b, 0x38, 0x21, 0xf7, 0xa2,  } };
+            static gapic::Id ID{ { 0x21, 0xcd, 0x03, 0x5f, 0x8b, 0x45, 0xa5, 0x23, 0x39, 0x4e, 0xcd, 0x5e, 0x2a, 0xc3, 0xbc, 0xa3, 0x00, 0x61, 0xce, 0x9a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGSConnectionID__S: public Encodable {
@@ -567,20 +534,17 @@ namespace gles {
     class F64__P: public Encodable {
     public:
         F64__P() = default;
-        F64__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        F64__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf2, 0xcc, 0xdb, 0xcc, 0xed, 0x7e, 0x95, 0x7d, 0xf8, 0xdc, 0xe8, 0xbc, 0x49, 0xbf, 0xdd, 0x12, 0xd9, 0xf2, 0xd8, 0x55,  } };
+            static gapic::Id ID{ { 0x72, 0xdd, 0xe6, 0x80, 0x3a, 0x16, 0x82, 0xd3, 0x04, 0x9b, 0x5e, 0x5d, 0x7d, 0x72, 0x99, 0x82, 0x3a, 0x24, 0x28, 0xe0,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class CGSGetSurfaceBounds: public Encodable {
@@ -665,20 +629,17 @@ namespace gles {
     class Char__P: public Encodable {
     public:
         Char__P() = default;
-        Char__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Char__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x67, 0xe3, 0xfd, 0x6e, 0x09, 0x7e, 0xa7, 0x65, 0x7f, 0x40, 0x8d, 0xd4, 0x35, 0x40, 0xcc, 0x38, 0x25, 0x23, 0x66, 0xdf,  } };
+            static gapic::Id ID{ { 0xac, 0x44, 0x67, 0xfc, 0xf8, 0x14, 0x79, 0xb0, 0x1e, 0xd5, 0xf7, 0xb0, 0xbb, 0xcb, 0x2b, 0x24, 0x88, 0xf4, 0x59, 0xc7,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Char__P__S: public Encodable {
@@ -700,20 +661,17 @@ namespace gles {
     class Char__P__P: public Encodable {
     public:
         Char__P__P() = default;
-        Char__P__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Char__P__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x1f, 0x0a, 0x07, 0xb4, 0xda, 0x1f, 0xda, 0x6d, 0x01, 0xbb, 0xd6, 0x9b, 0x33, 0xf9, 0x9c, 0x19, 0xa8, 0x14, 0x5b, 0x5e,  } };
+            static gapic::Id ID{ { 0x3e, 0x4b, 0x7b, 0x0f, 0x18, 0x84, 0x97, 0xb1, 0xa9, 0xb4, 0xc2, 0x88, 0x58, 0x25, 0x77, 0x91, 0x28, 0xfb, 0x25, 0x46,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class ClearState: public Encodable {
@@ -842,20 +800,17 @@ namespace gles {
     class VertexPointer: public Encodable {
     public:
         VertexPointer() = default;
-        VertexPointer(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        VertexPointer(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbb, 0xd9, 0x9d, 0xbc, 0x5d, 0xd2, 0xa9, 0x87, 0x68, 0x91, 0xd2, 0xd2, 0xc2, 0xc9, 0x9d, 0xf6, 0xdd, 0xe2, 0x3c, 0x6c,  } };
+            static gapic::Id ID{ { 0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class VertexAttributeArray: public Encodable {
@@ -1351,96 +1306,81 @@ namespace gles {
     class DiscardFramebufferAttachment__P: public Encodable {
     public:
         DiscardFramebufferAttachment__P() = default;
-        DiscardFramebufferAttachment__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        DiscardFramebufferAttachment__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x23, 0xd9, 0x67, 0x4f, 0x82, 0x7e, 0x62, 0x8d, 0x54, 0xc3, 0xec, 0x98, 0xc5, 0x3e, 0xba, 0xf5, 0xa6, 0x3f, 0x52, 0x1f,  } };
+            static gapic::Id ID{ { 0x6d, 0x1c, 0x44, 0xa8, 0x5c, 0xba, 0x63, 0x54, 0xbe, 0x8e, 0xbe, 0x16, 0x40, 0x3f, 0xbe, 0xdb, 0xd7, 0xc0, 0x82, 0xb5,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EGLConfig: public Encodable {
     public:
         EGLConfig() = default;
-        EGLConfig(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        EGLConfig(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x2a, 0xd8, 0x24, 0x8e, 0x95, 0xb5, 0x5d, 0x86, 0xe8, 0x84, 0x21, 0x3a, 0x2c, 0xee, 0xfd, 0x90, 0xd2, 0xab, 0xd8, 0x5c,  } };
+            static gapic::Id ID{ { 0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EGLContext: public Encodable {
     public:
         EGLContext() = default;
-        EGLContext(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        EGLContext(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x29, 0x18, 0x4c, 0xdb, 0x8b, 0xf5, 0xcf, 0xcc, 0xfc, 0xf8, 0x62, 0x25, 0x1f, 0xf1, 0x45, 0x0e, 0x20, 0x23, 0xce, 0x8e,  } };
+            static gapic::Id ID{ { 0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EGLDisplay: public Encodable {
     public:
         EGLDisplay() = default;
-        EGLDisplay(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        EGLDisplay(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x85, 0x54, 0x9a, 0x82, 0x0b, 0x08, 0xcc, 0x4c, 0x6b, 0x1c, 0xcc, 0x0e, 0x85, 0x09, 0x68, 0x5c, 0x93, 0x51, 0x24, 0x5e,  } };
+            static gapic::Id ID{ { 0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EGLSurface: public Encodable {
     public:
         EGLSurface() = default;
-        EGLSurface(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        EGLSurface(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6b, 0xba, 0xab, 0x4f, 0xa1, 0xaa, 0x01, 0xdb, 0x61, 0xe3, 0xbb, 0x84, 0xf5, 0x1b, 0xf6, 0x39, 0xda, 0x3c, 0xf7, 0xb8,  } };
+            static gapic::Id ID{ { 0x59, 0x9b, 0x7a, 0xba, 0x22, 0x2a, 0xf1, 0x39, 0x66, 0x60, 0x82, 0x26, 0x3c, 0xd3, 0xb7, 0x72, 0x7e, 0x29, 0x27, 0xd0,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EGLint__S: public Encodable {
@@ -1462,20 +1402,17 @@ namespace gles {
     class EGLint__P: public Encodable {
     public:
         EGLint__P() = default;
-        EGLint__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        EGLint__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xcf, 0x1c, 0x9b, 0x06, 0x5a, 0x46, 0x2e, 0x61, 0x7d, 0xe6, 0x2e, 0x95, 0x4e, 0xfb, 0xb4, 0x41, 0x15, 0xf6, 0x9e, 0x0d,  } };
+            static gapic::Id ID{ { 0x53, 0x08, 0x3d, 0x08, 0x80, 0xbd, 0xb8, 0x5b, 0xa6, 0x15, 0xbb, 0x5c, 0x03, 0xa1, 0xcd, 0x6a, 0x98, 0xd4, 0x7d, 0x25,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EglCreateContext: public Encodable {
@@ -1602,20 +1539,17 @@ namespace gles {
     class Void__P: public Encodable {
     public:
         Void__P() = default;
-        Void__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Void__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa7, 0x86, 0xcc, 0x23, 0x0b, 0x73, 0x10, 0x9d, 0xda, 0xc6, 0x41, 0xcb, 0xf7, 0xe4, 0x97, 0x87, 0x01, 0x69, 0xc2, 0x2e,  } };
+            static gapic::Id ID{ { 0xf5, 0x56, 0xe8, 0x83, 0x38, 0x05, 0x76, 0x2e, 0x30, 0xd0, 0x53, 0x86, 0x4e, 0x09, 0x56, 0xef, 0x44, 0xc8, 0xce, 0xef,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class EglSwapBuffers: public Encodable {
@@ -1719,20 +1653,17 @@ namespace gles {
     class F32__P: public Encodable {
     public:
         F32__P() = default;
-        F32__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        F32__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x25, 0x42, 0x8d, 0x14, 0xfa, 0x29, 0xc8, 0xad, 0xe4, 0x75, 0x2b, 0xfa, 0xf4, 0x35, 0x5b, 0x12, 0x23, 0x97, 0x38, 0x77,  } };
+            static gapic::Id ID{ { 0xad, 0x4f, 0xbe, 0xc7, 0x2f, 0xaa, 0x43, 0x22, 0x03, 0xf7, 0x2a, 0xcb, 0xe1, 0x40, 0xc2, 0x9a, 0x7f, 0xae, 0x22, 0xd3,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class F64__S: public Encodable {
@@ -1786,20 +1717,17 @@ namespace gles {
     class FramebufferAttachment__P: public Encodable {
     public:
         FramebufferAttachment__P() = default;
-        FramebufferAttachment__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        FramebufferAttachment__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc1, 0xc1, 0xe5, 0xa2, 0x3a, 0x14, 0xc7, 0x83, 0xf8, 0x0a, 0xf2, 0xc9, 0x7e, 0x42, 0x47, 0x17, 0x34, 0x93, 0x1a, 0x91,  } };
+            static gapic::Id ID{ { 0x1a, 0x5e, 0x91, 0xc8, 0x94, 0x7c, 0x32, 0x00, 0x6b, 0xe6, 0x9a, 0xb5, 0x4d, 0xd0, 0x33, 0x12, 0x00, 0x60, 0x34, 0x6d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class FramebufferId__S: public Encodable {
@@ -1821,58 +1749,49 @@ namespace gles {
     class FramebufferId__P: public Encodable {
     public:
         FramebufferId__P() = default;
-        FramebufferId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        FramebufferId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5a, 0x4f, 0x87, 0xa7, 0xe2, 0xf7, 0x6e, 0xe8, 0x7f, 0xf1, 0x5e, 0x27, 0x8c, 0x71, 0xbc, 0x66, 0x3c, 0xa5, 0x82, 0xce,  } };
+            static gapic::Id ID{ { 0xa8, 0x8f, 0xf4, 0xfd, 0x2d, 0xaa, 0xd4, 0x59, 0x93, 0x48, 0xe6, 0xd8, 0x5d, 0x6b, 0xe8, 0x99, 0x72, 0xfa, 0xac, 0xec,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GLXContext: public Encodable {
     public:
         GLXContext() = default;
-        GLXContext(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        GLXContext(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x07, 0xef, 0xcc, 0x57, 0xc6, 0x16, 0xf2, 0x83, 0x9d, 0x0f, 0x7c, 0x71, 0xe8, 0xa6, 0xda, 0x1e, 0x45, 0xf1, 0xce, 0xfe,  } };
+            static gapic::Id ID{ { 0xf7, 0x65, 0x8c, 0x4a, 0x4f, 0xdf, 0x00, 0xcc, 0xb8, 0x97, 0x64, 0x1a, 0xfd, 0x6c, 0x55, 0x30, 0x4a, 0x0f, 0x1e, 0x25,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GLXDrawable: public Encodable {
     public:
         GLXDrawable() = default;
-        GLXDrawable(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        GLXDrawable(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x43, 0x88, 0x91, 0x75, 0x90, 0x61, 0xe4, 0xc9, 0x61, 0xd0, 0x6d, 0xdb, 0x12, 0xae, 0xe1, 0xcb, 0x87, 0x07, 0xb3, 0x05,  } };
+            static gapic::Id ID{ { 0xe8, 0x9a, 0x82, 0x65, 0x61, 0x45, 0x3f, 0x8b, 0x8b, 0x50, 0xeb, 0x6a, 0x04, 0x78, 0x5c, 0xdc, 0x6b, 0xb5, 0xdc, 0x63,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlActiveTexture: public Encodable {
@@ -2542,20 +2461,17 @@ namespace gles {
     class TexturePointer: public Encodable {
     public:
         TexturePointer() = default;
-        TexturePointer(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        TexturePointer(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xb6, 0x31, 0x39, 0xfa, 0x37, 0x1c, 0x57, 0x16, 0x83, 0x12, 0x2a, 0xe9, 0x1c, 0xa8, 0x0f, 0x9d, 0xaf, 0xcf, 0xb3, 0xa3,  } };
+            static gapic::Id ID{ { 0x34, 0x65, 0x45, 0xf1, 0x2d, 0xda, 0x70, 0xcb, 0x48, 0xb2, 0x29, 0x9b, 0xb3, 0x7f, 0xe4, 0xa6, 0x96, 0xb2, 0x64, 0xe7,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlCompressedTexImage2D: public Encodable {
@@ -2847,20 +2763,17 @@ namespace gles {
     class QueryId__P: public Encodable {
     public:
         QueryId__P() = default;
-        QueryId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        QueryId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbc, 0x1f, 0x91, 0x31, 0xab, 0x23, 0x97, 0xbd, 0x24, 0x4b, 0x69, 0x3f, 0xb9, 0x40, 0xf4, 0xb4, 0xb3, 0x93, 0x43, 0x33,  } };
+            static gapic::Id ID{ { 0xeb, 0x17, 0x82, 0xad, 0x2a, 0x8d, 0x90, 0x53, 0x42, 0x82, 0x61, 0x49, 0x70, 0xb2, 0xde, 0x5e, 0x4a, 0xce, 0x10, 0x9a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlDeleteQueries: public Encodable {
@@ -2910,20 +2823,17 @@ namespace gles {
     class RenderbufferId__P: public Encodable {
     public:
         RenderbufferId__P() = default;
-        RenderbufferId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        RenderbufferId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x18, 0xae, 0x51, 0x0d, 0xb7, 0xf3, 0xf8, 0xe7, 0x47, 0x3f, 0x5d, 0x29, 0xf8, 0x43, 0x60, 0xe2, 0x5a, 0x2d, 0xa6, 0x9b,  } };
+            static gapic::Id ID{ { 0x27, 0x87, 0x17, 0xca, 0xd8, 0x49, 0x08, 0x71, 0xe9, 0xc6, 0x9c, 0x0e, 0x51, 0x5a, 0x23, 0x8c, 0xc5, 0x2a, 0xdd, 0x2e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlDeleteRenderbuffers: public Encodable {
@@ -2989,20 +2899,17 @@ namespace gles {
     class TextureId__P: public Encodable {
     public:
         TextureId__P() = default;
-        TextureId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        TextureId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x99, 0x6c, 0x61, 0x83, 0x7a, 0xc0, 0x86, 0x16, 0x1a, 0x93, 0x45, 0x97, 0x32, 0x66, 0x80, 0x91, 0xd1, 0x87, 0xd1, 0x8e,  } };
+            static gapic::Id ID{ { 0x6c, 0x3c, 0x90, 0x11, 0x71, 0x98, 0x36, 0xdd, 0xc8, 0x9c, 0x08, 0xf7, 0x80, 0x31, 0x56, 0x36, 0x6e, 0xd7, 0x68, 0x6b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlDeleteTextures: public Encodable {
@@ -3030,20 +2937,17 @@ namespace gles {
     class VertexArrayId__P: public Encodable {
     public:
         VertexArrayId__P() = default;
-        VertexArrayId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        VertexArrayId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xfb, 0x13, 0x6e, 0xf5, 0x8d, 0x52, 0xf5, 0xb2, 0xb5, 0x02, 0x1f, 0x10, 0x15, 0x84, 0x51, 0xb2, 0xc6, 0x8b, 0xc5, 0x5f,  } };
+            static gapic::Id ID{ { 0x06, 0x33, 0x83, 0xad, 0xcf, 0x1c, 0x8f, 0x00, 0x5d, 0x52, 0x0a, 0xc4, 0x29, 0xca, 0xe3, 0x06, 0x6a, 0x5e, 0x71, 0x5f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlDeleteVertexArrays: public Encodable {
@@ -3282,20 +3186,17 @@ namespace gles {
     class IndicesPointer: public Encodable {
     public:
         IndicesPointer() = default;
-        IndicesPointer(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        IndicesPointer(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x76, 0x75, 0x96, 0xf7, 0x8e, 0x48, 0x4e, 0x8b, 0x35, 0x9b, 0x75, 0x1f, 0xb2, 0x5a, 0x50, 0xb7, 0x2e, 0x2f, 0xa9, 0xe2,  } };
+            static gapic::Id ID{ { 0x7e, 0xb8, 0x8d, 0x27, 0x89, 0x30, 0x52, 0x1b, 0x7e, 0x06, 0x18, 0xa0, 0x43, 0x8e, 0x88, 0xaa, 0x0c, 0xe6, 0x72, 0x10,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlDrawElements: public Encodable {
@@ -3351,20 +3252,17 @@ namespace gles {
     class ImageOES: public Encodable {
     public:
         ImageOES() = default;
-        ImageOES(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        ImageOES(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x77, 0x91, 0xd9, 0x22, 0x22, 0x46, 0xfa, 0x9b, 0xc5, 0xf0, 0x4f, 0x9b, 0xa6, 0x73, 0xe8, 0xdf, 0x22, 0x6b, 0x06, 0x36,  } };
+            static gapic::Id ID{ { 0x74, 0x38, 0x47, 0x49, 0x56, 0x92, 0x04, 0x39, 0x2b, 0x43, 0xe3, 0x99, 0x13, 0xbd, 0x74, 0x9c, 0x39, 0xd4, 0x80, 0xa4,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlEGLImageTargetTexture2DOES: public Encodable {
@@ -3836,39 +3734,33 @@ namespace gles {
     class S32__P: public Encodable {
     public:
         S32__P() = default;
-        S32__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        S32__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x15, 0xd8, 0xda, 0x55, 0xc7, 0x51, 0xdc, 0x13, 0x0e, 0xe6, 0xf3, 0x33, 0x66, 0x41, 0xd6, 0xf1, 0x5f, 0x02, 0x93, 0x41,  } };
+            static gapic::Id ID{ { 0xac, 0x84, 0x1f, 0xd1, 0xb4, 0x53, 0xd7, 0x22, 0x81, 0xfc, 0xae, 0x94, 0x33, 0xc5, 0x1b, 0xa1, 0xa8, 0xa1, 0x30, 0xd4,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class ShaderAttribType__P: public Encodable {
     public:
         ShaderAttribType__P() = default;
-        ShaderAttribType__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        ShaderAttribType__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xae, 0xed, 0x56, 0xf7, 0xb4, 0xb8, 0x0b, 0x47, 0x04, 0xa1, 0xc2, 0x24, 0x58, 0x0d, 0x4b, 0xd2, 0xb8, 0x43, 0xac, 0x6b,  } };
+            static gapic::Id ID{ { 0x2e, 0xb0, 0xf4, 0x06, 0x40, 0xe7, 0x30, 0xf4, 0xea, 0x13, 0x18, 0xff, 0xf0, 0xba, 0xed, 0x70, 0x8e, 0xed, 0x13, 0x9a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetActiveAttrib: public Encodable {
@@ -3911,20 +3803,17 @@ namespace gles {
     class ShaderUniformType__P: public Encodable {
     public:
         ShaderUniformType__P() = default;
-        ShaderUniformType__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        ShaderUniformType__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xec, 0x33, 0x14, 0x93, 0x2e, 0xbc, 0x9b, 0x5b, 0x66, 0x62, 0x30, 0x7a, 0x5d, 0x8f, 0x13, 0x4e, 0x2b, 0x39, 0xc9, 0x32,  } };
+            static gapic::Id ID{ { 0xe6, 0xcf, 0x8f, 0x73, 0xe4, 0x9e, 0x21, 0xc2, 0x68, 0xbb, 0x56, 0xfe, 0x27, 0x04, 0x5d, 0xcd, 0xff, 0x5c, 0xa0, 0x68,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetActiveUniform: public Encodable {
@@ -4026,20 +3915,17 @@ namespace gles {
     class U32__P: public Encodable {
     public:
         U32__P() = default;
-        U32__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        U32__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbc, 0x9f, 0x1f, 0x59, 0xba, 0xa6, 0x8d, 0xe3, 0x2f, 0x46, 0xe5, 0xf1, 0xde, 0x51, 0x77, 0x45, 0xab, 0x1f, 0xdc, 0x67,  } };
+            static gapic::Id ID{ { 0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetActiveUniformsiv: public Encodable {
@@ -4076,20 +3962,17 @@ namespace gles {
     class ShaderId__P: public Encodable {
     public:
         ShaderId__P() = default;
-        ShaderId__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        ShaderId__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x08, 0x41, 0x7d, 0x5d, 0x94, 0x16, 0xc5, 0x83, 0xb1, 0x5b, 0x6b, 0x53, 0x78, 0xac, 0x10, 0xbd, 0x1e, 0x59, 0x09, 0x1d,  } };
+            static gapic::Id ID{ { 0x08, 0x71, 0x0c, 0xb0, 0x87, 0xa9, 0x21, 0x1b, 0xe0, 0x32, 0x0c, 0x9f, 0x24, 0xe3, 0xfb, 0x8e, 0xd5, 0x60, 0x80, 0x1d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetAttachedShaders: public Encodable {
@@ -4389,20 +4272,17 @@ namespace gles {
     class S64__P: public Encodable {
     public:
         S64__P() = default;
-        S64__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        S64__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x94, 0xcc, 0x14, 0xe7, 0xe5, 0xaa, 0x45, 0x47, 0x68, 0x47, 0x60, 0x90, 0x4d, 0x40, 0x9e, 0x4e, 0xa3, 0x65, 0x3a, 0x9b,  } };
+            static gapic::Id ID{ { 0xe9, 0x1c, 0x9a, 0xfd, 0xd1, 0xe3, 0x35, 0x1c, 0x32, 0xfd, 0x2c, 0x3f, 0xbc, 0x25, 0xaa, 0xbd, 0xcf, 0x3e, 0x7f, 0xbb,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetQueryObjecti64v: public Encodable {
@@ -4483,20 +4363,17 @@ namespace gles {
     class U64__P: public Encodable {
     public:
         U64__P() = default;
-        U64__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        U64__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5b, 0xb1, 0xae, 0xc9, 0xd5, 0x8f, 0x30, 0x22, 0xf4, 0x8f, 0x96, 0xf2, 0x6f, 0xb2, 0x65, 0xa7, 0xfd, 0xfb, 0xae, 0x50,  } };
+            static gapic::Id ID{ { 0x00, 0x08, 0x7a, 0x1a, 0x40, 0x52, 0x66, 0xee, 0xbe, 0xb5, 0x0a, 0x76, 0xc8, 0xf9, 0x4a, 0x7d, 0x20, 0xd0, 0x0b, 0x8d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlGetQueryObjectui64v: public Encodable {
@@ -7086,20 +6963,17 @@ namespace gles {
     class Int__P: public Encodable {
     public:
         Int__P() = default;
-        Int__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Int__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x90, 0xa6, 0xad, 0x4c, 0xf7, 0x0c, 0x42, 0xb6, 0xb7, 0x7f, 0xa8, 0xf0, 0xf6, 0xf9, 0xa4, 0x22, 0xd0, 0x36, 0x92, 0x46,  } };
+            static gapic::Id ID{ { 0x2b, 0x06, 0x77, 0x85, 0xff, 0x02, 0x77, 0xf8, 0xbc, 0x87, 0x72, 0xeb, 0xf8, 0x53, 0x2e, 0x65, 0xd2, 0x8f, 0x69, 0x27,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class GlXQueryDrawable: public Encodable {
@@ -7158,20 +7032,17 @@ namespace gles {
     class HGLRC: public Encodable {
     public:
         HGLRC() = default;
-        HGLRC(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        HGLRC(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x95, 0xfc, 0xcf, 0x7f, 0x79, 0x35, 0x44, 0x38, 0xd4, 0x4f, 0x6d, 0xad, 0xae, 0xcd, 0xf0, 0xa5, 0x4d, 0x49, 0x48, 0xc7,  } };
+            static gapic::Id ID{ { 0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Globals: public Encodable {
@@ -7211,20 +7082,17 @@ namespace gles {
     class HDC: public Encodable {
     public:
         HDC() = default;
-        HDC(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        HDC(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x77, 0x14, 0x36, 0x4d, 0x67, 0xdb, 0x2d, 0xd0, 0xcc, 0x8e, 0x01, 0x72, 0xfa, 0x85, 0x42, 0x9c, 0x04, 0x31, 0x53, 0xcc,  } };
+            static gapic::Id ID{ { 0x9c, 0x52, 0x64, 0x9a, 0xd1, 0x46, 0x9a, 0x9a, 0xa1, 0x08, 0x15, 0x09, 0x48, 0x2d, 0xd9, 0x49, 0xf9, 0x70, 0x31, 0xd1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Int__S: public Encodable {
@@ -7300,20 +7168,17 @@ namespace gles {
     class Mat2f__P: public Encodable {
     public:
         Mat2f__P() = default;
-        Mat2f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Mat2f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xcf, 0x92, 0x77, 0xb8, 0xbc, 0x32, 0x83, 0x5d, 0xca, 0xa4, 0x88, 0xa5, 0x7b, 0x72, 0x7d, 0xe5, 0xfe, 0xf1, 0x1d, 0x01,  } };
+            static gapic::Id ID{ { 0xaa, 0x78, 0xb0, 0xc3, 0xec, 0xe3, 0xcf, 0x0c, 0x6e, 0xd0, 0xaf, 0xf6, 0x7b, 0x56, 0xa1, 0x18, 0x16, 0x3e, 0xbe, 0x78,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec3f: public Encodable {
@@ -7373,20 +7238,17 @@ namespace gles {
     class Mat3f__P: public Encodable {
     public:
         Mat3f__P() = default;
-        Mat3f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Mat3f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9e, 0xf8, 0xc1, 0x91, 0x65, 0x71, 0x0a, 0x19, 0x44, 0x44, 0xa8, 0xd0, 0xb0, 0xae, 0x8a, 0x52, 0x7c, 0x08, 0xda, 0xd8,  } };
+            static gapic::Id ID{ { 0xd1, 0x68, 0x7a, 0xc6, 0x58, 0xc5, 0x77, 0x79, 0x03, 0x73, 0x9e, 0x3b, 0x4c, 0xf3, 0x45, 0x83, 0xe6, 0xac, 0x4d, 0xe6,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec4f: public Encodable {
@@ -7446,20 +7308,17 @@ namespace gles {
     class Mat4f__P: public Encodable {
     public:
         Mat4f__P() = default;
-        Mat4f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Mat4f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x00, 0x10, 0x29, 0x45, 0xd8, 0x78, 0x44, 0x1a, 0x4c, 0x76, 0x90, 0x0e, 0x8d, 0xde, 0x05, 0x0f, 0x5a, 0x51, 0x06, 0x4c,  } };
+            static gapic::Id ID{ { 0x72, 0x0c, 0xc7, 0x00, 0x98, 0x6d, 0xc2, 0x9f, 0xab, 0xc1, 0xba, 0x25, 0x74, 0x6b, 0xc6, 0x34, 0x95, 0x4a, 0x43, 0x16,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class QueryId__S: public Encodable {
@@ -7780,20 +7639,17 @@ namespace gles {
     class U8__P: public Encodable {
     public:
         U8__P() = default;
-        U8__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        U8__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf6, 0x6e, 0x22, 0xf8, 0x33, 0x69, 0x05, 0xe9, 0x8b, 0xdf, 0xfa, 0x53, 0x75, 0xae, 0x80, 0xcc, 0x2c, 0x27, 0x98, 0x17,  } };
+            static gapic::Id ID{ { 0xc9, 0x85, 0x15, 0x54, 0xd3, 0x40, 0x31, 0x19, 0x7a, 0xab, 0xf9, 0x64, 0x72, 0x38, 0x96, 0xa9, 0x85, 0xc3, 0xbb, 0x4d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec2f__2__A: public Encodable {
@@ -7834,20 +7690,17 @@ namespace gles {
     class Vec2f__P: public Encodable {
     public:
         Vec2f__P() = default;
-        Vec2f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec2f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5e, 0xb4, 0x5d, 0x6a, 0x0d, 0x6e, 0x66, 0x4a, 0x85, 0xf0, 0x5e, 0xc1, 0x82, 0x6f, 0x53, 0xf4, 0x2c, 0x5b, 0x74, 0x28,  } };
+            static gapic::Id ID{ { 0x55, 0xdc, 0xba, 0xe1, 0x45, 0x8e, 0x4f, 0xd9, 0x9f, 0x20, 0x5c, 0x36, 0x6e, 0x3a, 0xf9, 0x08, 0xa7, 0xd5, 0xbb, 0xff,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec2i: public Encodable {
@@ -7888,20 +7741,17 @@ namespace gles {
     class Vec2i__P: public Encodable {
     public:
         Vec2i__P() = default;
-        Vec2i__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec2i__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xcc, 0xca, 0x5a, 0x47, 0xa7, 0xa9, 0x37, 0xbd, 0x32, 0x96, 0x80, 0x88, 0xd2, 0x06, 0xd3, 0x39, 0x6d, 0xc0, 0x74, 0x8b,  } };
+            static gapic::Id ID{ { 0xaa, 0xd3, 0xa9, 0x60, 0x80, 0x64, 0x1c, 0xa9, 0xef, 0xdc, 0xe5, 0x54, 0x9e, 0xaa, 0x32, 0xf4, 0xc3, 0xf4, 0xb3, 0x15,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec3f__3__A: public Encodable {
@@ -7942,20 +7792,17 @@ namespace gles {
     class Vec3f__P: public Encodable {
     public:
         Vec3f__P() = default;
-        Vec3f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec3f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc9, 0x3f, 0xc0, 0x13, 0x49, 0x5a, 0x81, 0xe9, 0x85, 0x38, 0x36, 0xb9, 0x36, 0xca, 0x1d, 0x7e, 0xfc, 0x88, 0x4a, 0x69,  } };
+            static gapic::Id ID{ { 0xed, 0xc9, 0xbf, 0x84, 0x9c, 0xa4, 0x36, 0xf4, 0x8f, 0xaa, 0xc3, 0x7c, 0xb8, 0xfe, 0x6a, 0x3e, 0x9c, 0xc6, 0xd4, 0x87,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec3i: public Encodable {
@@ -7996,20 +7843,17 @@ namespace gles {
     class Vec3i__P: public Encodable {
     public:
         Vec3i__P() = default;
-        Vec3i__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec3i__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x83, 0xb1, 0x09, 0x1f, 0xd2, 0x6a, 0x35, 0x38, 0x09, 0x7a, 0x85, 0x5e, 0x63, 0x38, 0xfa, 0x97, 0x63, 0xf4, 0x32, 0xa4,  } };
+            static gapic::Id ID{ { 0x07, 0x78, 0x89, 0x2c, 0xfc, 0x6c, 0x17, 0xef, 0x84, 0xd5, 0x65, 0xbb, 0xc1, 0x25, 0x5c, 0xe3, 0xf8, 0xc6, 0x9c, 0x39,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec4f__4__A: public Encodable {
@@ -8050,20 +7894,17 @@ namespace gles {
     class Vec4f__P: public Encodable {
     public:
         Vec4f__P() = default;
-        Vec4f__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec4f__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x1e, 0xc6, 0x03, 0xc9, 0x2e, 0xad, 0x84, 0x5a, 0x75, 0x19, 0x6f, 0xa4, 0x5e, 0x8b, 0x7d, 0x21, 0xe1, 0x85, 0x43, 0x54,  } };
+            static gapic::Id ID{ { 0xe4, 0x2d, 0x98, 0xc0, 0x13, 0x9e, 0xf8, 0xb2, 0xcc, 0x7e, 0xd1, 0x80, 0x7f, 0xa4, 0x1b, 0xf5, 0xb8, 0x58, 0x01, 0x73,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class Vec4i: public Encodable {
@@ -8104,20 +7945,17 @@ namespace gles {
     class Vec4i__P: public Encodable {
     public:
         Vec4i__P() = default;
-        Vec4i__P(uint64_t Address, uint32_t Pool) :
-            mAddress(Address),
-            mPool(Pool) {}
+        Vec4i__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xdd, 0xfb, 0x4f, 0x4c, 0x20, 0x0e, 0x99, 0x02, 0x8f, 0xe2, 0x87, 0xb4, 0x86, 0xd1, 0x96, 0xa3, 0xd7, 0x6c, 0x2d, 0x94,  } };
+            static gapic::Id ID{ { 0xe4, 0x08, 0x77, 0x3a, 0xc3, 0xb7, 0x95, 0x08, 0xef, 0xd4, 0xa3, 0xdb, 0x01, 0x8e, 0x39, 0x60, 0x08, 0xdf, 0xbb, 0x2a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mAddress);
-            e->Uint32(this->mPool);
+            e->Value(this->mPointer);
         }
 
-        uint64_t mAddress;
-        uint32_t mPool;
+        memory::Pointer mPointer;
     };
 
     class VertexArrayId__S: public Encodable {

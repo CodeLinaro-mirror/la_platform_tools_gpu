@@ -14,6 +14,25 @@ class Encoder;
 
 namespace coder {
 namespace memory {
+    class Pointer: public Encodable {
+    public:
+        Pointer() = default;
+        Pointer(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x32, 0x91, 0x20, 0x2c, 0x71, 0x1c, 0x99, 0xd3, 0xde, 0xad, 0xd6, 0xab, 0xac, 0x67, 0x78, 0xad, 0xfd, 0xb5, 0x05, 0xf9,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
+        }
+
+        uint64_t mAddress;
+        uint32_t mPool;
+    };
+
     class Range: public Encodable {
     public:
         Range() = default;
@@ -21,7 +40,7 @@ namespace memory {
             mBase(Base),
             mSize(Size) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f,  } };
+            static gapic::Id ID{ { 0x4d, 0x08, 0x43, 0xb3, 0xb7, 0x7d, 0x8c, 0x7b, 0x5f, 0x7f, 0x54, 0xb7, 0x7b, 0xa3, 0xd6, 0x55, 0x77, 0x01, 0x52, 0x2c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {

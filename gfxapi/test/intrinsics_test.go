@@ -25,6 +25,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
+func p(addr uint64) memory.Pointer {
+	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
+}
+
 func checkBytes(t *testing.T, got, expected []byte) {
 	if !bytes.Equal(got, expected) {
 		t.Errorf("Data was not as expected.\nGot:      % .2x\nExpected: % .2x", got, expected)
@@ -35,8 +39,8 @@ func TestClone(t *testing.T) {
 	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := []byte{0x54, 0x33, 0x42, 0x43, 0x46, 0x34, 0x63, 0x24, 0x14, 0x24}
 	for _, a := range []atom.Atom{
-		NewCmdClone(0x1234, 10).
-			AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)),
+		NewCmdClone(p(0x1234), 10).
+			AddRead(atom.Data(s.Architecture, d, l, p(0x1234), expected)),
 	} {
 		a.Mutate(s, d, l)
 	}
@@ -63,8 +67,8 @@ func TestCopy(t *testing.T) {
 	expected := []byte{0x54, 0x33, 0x42, 0x43, 0x46, 0x34, 0x63, 0x24, 0x14, 0x24}
 	for _, a := range []atom.Atom{
 		NewCmdMake(10),
-		NewCmdCopy(0x1234, 10).
-			AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)),
+		NewCmdCopy(p(0x1234), 10).
+			AddRead(atom.Data(s.Architecture, d, l, p(0x1234), expected)),
 	} {
 		a.Mutate(s, d, l)
 	}
@@ -75,8 +79,8 @@ func TestCopy(t *testing.T) {
 func TestCharsliceToString(t *testing.T) {
 	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := "ħęľĺő ŵōřŀď"
-	NewCmdCharsliceToString(0x1234, uint32(len(expected))).
-		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
+	NewCmdCharsliceToString(p(0x1234), uint32(len(expected))).
+		AddRead(atom.Data(s.Architecture, d, l, p(0x1234), expected)).
 		Mutate(s, d, l)
 	if got := getState(s).Str; got != expected {
 		t.Errorf("Data was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
@@ -86,8 +90,8 @@ func TestCharsliceToString(t *testing.T) {
 func TestCharptrToString(t *testing.T) {
 	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	expected := "ħęľĺő ŵōřŀď"
-	NewCmdCharptrToString(0x1234).
-		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
+	NewCmdCharptrToString(p(0x1234)).
+		AddRead(atom.Data(s.Architecture, d, l, p(0x1234), expected)).
 		Mutate(s, d, l)
 	if got := getState(s).Str; got != expected {
 		t.Errorf("Data was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
@@ -97,18 +101,17 @@ func TestCharptrToString(t *testing.T) {
 func TestSliceCasts(t *testing.T) {
 	s, d, l := gfxapi.NewState(), database.NewInMemory(nil), log.Testing(t)
 	s.Architecture.IntegerSize = 6 // non-multiple of u16
-	addr := memory.Pointer(0x1234)
-	NewCmdSliceCasts(0x1234, 10).Mutate(s, d, l)
-	if got, expected := getState(s).U8s, NewU8ᵖ(addr).Slice(0, 20, s); got != expected {
+	NewCmdSliceCasts(p(0x1234), 10).Mutate(s, d, l)
+	if got, expected := getState(s).U8s, NewU8ᵖ(0x1234).Slice(0, 20, s); got != expected {
 		t.Errorf("U16[] -> U8[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
-	if got, expected := getState(s).U16s, NewU16ᵖ(addr).Slice(0, 10, s); got != expected {
+	if got, expected := getState(s).U16s, NewU16ᵖ(0x1234).Slice(0, 10, s); got != expected {
 		t.Errorf("U16[] -> U16[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
-	if got, expected := getState(s).U32s, NewU32ᵖ(addr).Slice(0, 5, s); got != expected {
+	if got, expected := getState(s).U32s, NewU32ᵖ(0x1234).Slice(0, 5, s); got != expected {
 		t.Errorf("U16[] -> U32[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
-	if got, expected := getState(s).Ints, NewIntᵖ(addr).Slice(0, 3, s); got != expected {
+	if got, expected := getState(s).Ints, NewIntᵖ(0x1234).Slice(0, 3, s); got != expected {
 		t.Errorf("U16[] -> int[] was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
 }

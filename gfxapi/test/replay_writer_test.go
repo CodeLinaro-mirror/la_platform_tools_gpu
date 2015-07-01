@@ -57,7 +57,7 @@ func check(t *testing.T, a device.Architecture, d database.Database, l log.Logge
 	s.Architecture = a
 
 	for _, w := range test.writes {
-		s.Memory[memory.ApplicationPool].Write(w.at, w.src)
+		s.Memory[memory.ApplicationPool].Write(w.at.Address, w.src)
 	}
 
 	for i, a := range test.atoms {
@@ -164,11 +164,11 @@ func TestOperationsOpCall_Clone(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 7, 8, 9})
+	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 7, 8, 9})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdClone(0x100000, 5).AddRead(rng, id),
+			NewCmdClone(p(0x100000), 5).AddRead(rng, id),
 		},
 		expected: expected{
 			resources: []binary.ID{id},
@@ -216,11 +216,11 @@ func TestOperationsOpCall_Copy(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 7, 8, 9})
+	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 7, 8, 9})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdCopy(0x100000, 5).AddRead(rng, id),
+			NewCmdCopy(p(0x100000), 5).AddRead(rng, id),
 		},
 		expected: expected{
 			resources: []binary.ID{id},
@@ -245,11 +245,11 @@ func TestOperationsOpCall_CharSliceToString(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 0, 8, 9})
+	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 0, 8, 9})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdCharsliceToString(0x100000, 5).AddRead(rng, id),
+			NewCmdCharsliceToString(p(0x100000), 5).AddRead(rng, id),
 		},
 		expected: expected{
 			resources: []binary.ID{id},
@@ -274,12 +274,12 @@ func TestOperationsOpCall_CharPtrToString(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	_, id := atom.Data(a, d, l, 0x100000, []uint8{'g', 'o', 'o', 'd', 0})
+	_, id := atom.Data(a, d, l, p(0x100000), []uint8{'g', 'o', 'o', 'd', 0})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdCharptrToString(0x100000).
-				AddRead(atom.Data(a, d, l, 0x100000, []uint8{'g', 'o', 'o', 'd', 0, 'd', 'a', 'y'})),
+			NewCmdCharptrToString(p(0x100000)).
+				AddRead(atom.Data(a, d, l, p(0x100000), []uint8{'g', 'o', 'o', 'd', 0, 'd', 'a', 'y'})),
 		},
 		expected: expected{
 			resources: []binary.ID{id},
@@ -306,12 +306,12 @@ func TestOperationsOpCall_Unknowns(t *testing.T) {
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
 			NewCmdUnknownRet(10),
-			NewCmdUnknownWritePtr(0x200000).
-				AddRead(atom.Data(a, d, l, 0x200000, int(100))).
-				AddWrite(atom.Data(a, d, l, 0x200000, int(200))),
-			NewCmdUnknownWriteSlice(0x100000).
-				AddRead(atom.Data(a, d, l, 0x100000, []int{0, 1, 2, 3, 4})).
-				AddWrite(atom.Data(a, d, l, 0x100000, []int{5, 6, 7, 8, 9})),
+			NewCmdUnknownWritePtr(p(0x200000)).
+				AddRead(atom.Data(a, d, l, p(0x200000), int(100))).
+				AddWrite(atom.Data(a, d, l, p(0x200000), int(200))),
+			NewCmdUnknownWriteSlice(p(0x100000)).
+				AddRead(atom.Data(a, d, l, p(0x100000), []int{0, 1, 2, 3, 4})).
+				AddWrite(atom.Data(a, d, l, p(0x100000), []int{5, 6, 7, 8, 9})),
 		},
 		expected: expected{
 			opcodes: []interface{}{
@@ -445,19 +445,19 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	aRng, aID := atom.Data(a, d, l, 0x40000+5* /* sizeof(u8)  */ 1, []uint8{
+	aRng, aID := atom.Data(a, d, l, p(0x40000+5* /* sizeof(u8)  */ 1), []uint8{
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
-	bRng, bID := atom.Data(a, d, l, 0x50000+5* /* sizeof(u32) */ 4, []uint32{
+	bRng, bID := atom.Data(a, d, l, p(0x50000+5* /* sizeof(u32) */ 4), []uint32{
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
-	cRng, cID := atom.Data(a, d, l, 0x60000+5* /* sizeof(int) */ 8, []int{
+	cRng, cID := atom.Data(a, d, l, p(0x60000+5* /* sizeof(int) */ 8), []int{
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoid3InArrays(0x40000, 0x50000, 0x60000).
+			NewCmdVoid3InArrays(p(0x40000), p(0x50000), p(0x60000)).
 				AddRead(aRng, aID).
 				AddRead(bRng, bID).
 				AddRead(cRng, cID),
@@ -498,18 +498,18 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	aRng, aID := atom.Data(a, d, l, 0x100000, []uint8{10})
-	bRng, bID := atom.Data(a, d, l, 0x200000, []uint8{20})
-	cRng, cID := atom.Data(a, d, l, 0x300000, []uint8{40})
+	aRng, aID := atom.Data(a, d, l, p(0x100000), []uint8{10})
+	bRng, bID := atom.Data(a, d, l, p(0x200000), []uint8{20})
+	cRng, cID := atom.Data(a, d, l, p(0x300000), []uint8{40})
 
-	pRng, pID := atom.Data(a, d, l, 0x500000, []memory.Pointer{
-		0x300000, 0x200000, 0x100000, 0x200000, 0x300000,
+	pRng, pID := atom.Data(a, d, l, p(0x500000), []memory.Pointer{
+		p(0x300000), p(0x200000), p(0x100000), p(0x200000), p(0x300000),
 	})
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidInArrayOfPointers(0x500000, 5).
-				AddRead(aRng, aID). // 0x100000: 0x00
+			NewCmdVoidInArrayOfPointers(p(0x500000), 5).
+				AddRead(aRng, aID). // p(0x100000): 0x00
 				AddRead(bRng, bID). // 0x200000: 0x04
 				AddRead(cRng, cID). // 0x300000: 0x08
 				AddRead(pRng, pID), // 0x500000: 0x0c, 0x10, 0x14, 0x18, 0x1c
@@ -563,7 +563,7 @@ func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	p := memory.Pointer(0x100000)
+	p := memory.Pointer(p(0x100000))
 	rng1, id1 := atom.Data(a, d, l, p, []byte{
 		0x01,
 	})
@@ -686,12 +686,12 @@ func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	aRng, aID := atom.Data(a, d, l, 0x100000, float32(10))
-	bRng, bID := atom.Data(a, d, l, 0x200000, uint16(20))
-	cRng, cID := atom.Data(a, d, l, 0x300000, false)
+	aRng, aID := atom.Data(a, d, l, p(0x100000), float32(10))
+	bRng, bID := atom.Data(a, d, l, p(0x200000), uint16(20))
+	cRng, cID := atom.Data(a, d, l, p(0x300000), false)
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidReadPtrs(0x100000, 0x200000, 0x300000).
+			NewCmdVoidReadPtrs(p(0x100000), p(0x200000), p(0x300000)).
 				AddRead(aRng, aID).
 				AddRead(bRng, bID).
 				AddRead(cRng, cID),
@@ -725,28 +725,28 @@ func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
 	}
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidWriteU8(0x100000).
-				AddWrite(atom.Data(a, d, l, 0x100000, uint8(1))),
-			NewCmdVoidWriteS8(0x200000).
-				AddWrite(atom.Data(a, d, l, 0x200000, int8(1))),
-			NewCmdVoidWriteU16(0x300000).
-				AddWrite(atom.Data(a, d, l, 0x300000, uint16(1))),
-			NewCmdVoidWriteS16(0x400000).
-				AddWrite(atom.Data(a, d, l, 0x400000, int16(1))),
-			NewCmdVoidWriteF32(0x500000).
-				AddWrite(atom.Data(a, d, l, 0x500000, float32(1))),
-			NewCmdVoidWriteU32(0x600000).
-				AddWrite(atom.Data(a, d, l, 0x600000, uint32(1))),
-			NewCmdVoidWriteS32(0x700000).
-				AddWrite(atom.Data(a, d, l, 0x700000, int32(1))),
-			NewCmdVoidWriteF64(0x800000).
-				AddWrite(atom.Data(a, d, l, 0x800000, float64(1))),
-			NewCmdVoidWriteU64(0x900000).
-				AddWrite(atom.Data(a, d, l, 0x900000, uint64(1))),
-			NewCmdVoidWriteS64(0xa00000).
-				AddWrite(atom.Data(a, d, l, 0xa00000, int64(1))),
-			NewCmdVoidWriteBool(0xb00000).
-				AddWrite(atom.Data(a, d, l, 0xb00000, bool(true))),
+			NewCmdVoidWriteU8(p(0x100000)).
+				AddWrite(atom.Data(a, d, l, p(0x100000), uint8(1))),
+			NewCmdVoidWriteS8(p(0x200000)).
+				AddWrite(atom.Data(a, d, l, p(0x200000), int8(1))),
+			NewCmdVoidWriteU16(p(0x300000)).
+				AddWrite(atom.Data(a, d, l, p(0x300000), uint16(1))),
+			NewCmdVoidWriteS16(p(0x400000)).
+				AddWrite(atom.Data(a, d, l, p(0x400000), int16(1))),
+			NewCmdVoidWriteF32(p(0x500000)).
+				AddWrite(atom.Data(a, d, l, p(0x500000), float32(1))),
+			NewCmdVoidWriteU32(p(0x600000)).
+				AddWrite(atom.Data(a, d, l, p(0x600000), uint32(1))),
+			NewCmdVoidWriteS32(p(0x700000)).
+				AddWrite(atom.Data(a, d, l, p(0x700000), int32(1))),
+			NewCmdVoidWriteF64(p(0x800000)).
+				AddWrite(atom.Data(a, d, l, p(0x800000), float64(1))),
+			NewCmdVoidWriteU64(p(0x900000)).
+				AddWrite(atom.Data(a, d, l, p(0x900000), uint64(1))),
+			NewCmdVoidWriteS64(p(0xa00000)).
+				AddWrite(atom.Data(a, d, l, p(0xa00000), int64(1))),
+			NewCmdVoidWriteBool(p(0xb00000)).
+				AddWrite(atom.Data(a, d, l, p(0xb00000), bool(true))),
 		},
 		expected: expected{
 			opcodes: []interface{}{
@@ -798,7 +798,7 @@ func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
 	}
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidWritePtrs(0x100000, 0x200000, 0x300000),
+			NewCmdVoidWritePtrs(p(0x100000), p(0x200000), p(0x300000)),
 		},
 		expected: expected{
 			opcodes: []interface{}{
@@ -834,7 +834,7 @@ func TestOperationsOpCall_ReturnValue(t *testing.T) {
 			NewCmdS64(-20000),
 			NewCmdBool(true),
 			NewCmdString("hello"),
-			NewCmdPointer(0x10000),
+			NewCmdPointer(p(0x10000)),
 		},
 		expected: expected{
 			opcodes: []interface{}{
@@ -911,14 +911,14 @@ func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	rng, id := atom.Data(a, d, l, 0x100000, []remapped{10, 20, 10, 30, 20})
+	rng, id := atom.Data(a, d, l, p(0x100000), []remapped{10, 20, 10, 30, 20})
 
 	pbase := uint32(4 * 3) // parameter array base address
 	tbase := uint32(0)     // remap table base address
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidInArrayOfRemapped(0x100000).
+			NewCmdVoidInArrayOfRemapped(p(0x100000)).
 				AddRead(rng, id),
 		},
 		expected: expected{
@@ -972,8 +972,8 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidOutArrayOfRemapped(0x100000).
-				AddWrite(atom.Data(a, d, l, 0x100000, []remapped{10, 20, 10, 30, 20})),
+			NewCmdVoidOutArrayOfRemapped(p(0x100000)).
+				AddWrite(atom.Data(a, d, l, p(0x100000), []remapped{10, 20, 10, 30, 20})),
 		},
 		expected: expected{
 			opcodes: []interface{}{
@@ -1020,8 +1020,8 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 
 	check(t, a, d, l, test{
 		atoms: []atom.Atom{
-			NewCmdVoidOutArrayOfUnknownRemapped(0x100000).
-				AddWrite(atom.Data(a, d, l, 0x100000, []remapped{10, 20, 10, 30, 20})),
+			NewCmdVoidOutArrayOfUnknownRemapped(p(0x100000)).
+				AddWrite(atom.Data(a, d, l, p(0x100000), []remapped{10, 20, 10, 30, 20})),
 		},
 		expected: expected{
 			opcodes: []interface{}{

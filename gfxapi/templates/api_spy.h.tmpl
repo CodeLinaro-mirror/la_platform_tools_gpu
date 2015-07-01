@@ -117,7 +117,7 @@
   {{AssertType $ "Parameter"}}
 
   {{if IsPointer (Underlying $.Type)}}
-    gapic::coder::{{Global "API"}}::{{Template "C++.TypeName" $.Type}}(reinterpret_cast<uintptr_t>({{$.Name}}), 0)
+    gapic::coder::{{Global "API"}}::{{Template "C++.TypeName" $.Type}}(gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>({{$.Name}}), 0))
   {{else}}{{$.Name}}{{end}}
 {{end}}
 

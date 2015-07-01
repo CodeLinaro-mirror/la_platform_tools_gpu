@@ -63,11 +63,11 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 			oldIndexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
 			out.Write(id,
 				NewGlBindBuffer(BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0).
-					AddRead(memory.Tmp.Base.Range(uint64(len(wireframeData))), resID))
+					AddRead(memory.Tmp.Range(uint64(len(wireframeData))), resID))
 
 			// Draw the wire-frame
 			out.Write(id, NewGlDrawElements(
-				drawMode, int32(len(indices)), wireframeDataType, memory.Tmp.Base))
+				drawMode, int32(len(indices)), wireframeDataType, memory.Tmp))
 
 			// Rebind the old index buffer
 			out.Write(id, NewGlBindBuffer(

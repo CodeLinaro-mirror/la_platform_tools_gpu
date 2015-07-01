@@ -134,14 +134,13 @@ func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationConte
 }
 
 func asPointer(p *schema.Object) (memory.Pointer, bool) {
-	// TODO: Pool should probably go into memory.Pointer, so this hackery can be removed.
-	addrIdx := p.Type.Fields.Find("Address")
-	poolIdx := p.Type.Fields.Find("Pool")
-	if addrIdx >= 0 && poolIdx >= 0 {
-		v, ok := p.Fields[addrIdx].(uint64)
-		return memory.Pointer(v), ok
+	if len(p.Type.Fields) != 1 {
+		return memory.Pointer{}, false
 	}
-	return 0, false
+	if ptr, ok := p.Fields[0].(*memory.Pointer); ok {
+		return *ptr, true
+	}
+	return memory.Pointer{}, false
 }
 
 func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
@@ -188,7 +187,7 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 					b.SetMargin(math.Spacing{})
 					//b.SetPadding(math.Spacing{})
 					b.AddChild(CreateLabel(t, p.String(), CONSTANT_COLOR, active))
-					b.OnClick(func(gxui.MouseEvent) { appCtx.SelectAddress(p) })
+					b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(p) })
 					c = b
 				}
 
@@ -336,10 +335,11 @@ func (n observationsNode) Create(theme gxui.Theme, index int) gxui.Control {
 		c = gxui.Red
 	}
 
+	ptr := memory.Pointer{Address: r.Base, Pool: memory.ApplicationPool}
 	b := theme.CreateButton()
 	b.SetMargin(math.Spacing{})
 	b.AddChild(CreateLabel(theme, r.String(), c, true))
-	b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectAddress(r.Base) })
+	b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectPointer(ptr) })
 	return b
 }
 

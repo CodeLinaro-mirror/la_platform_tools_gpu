@@ -14,7 +14,11 @@
 
 package schema
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 // Class represents an encodable object type with a type ID.
 type Class struct {
@@ -37,9 +41,17 @@ type Field struct {
 // FieldList is a slice of fields.
 type FieldList []Field
 
+func trimPackage(n string) string {
+	i := strings.LastIndex(n, ".")
+	if i < 0 {
+		return n
+	}
+	return n[i+1:]
+}
+
 func (f Field) Name() string {
 	if f.Declared == "" {
-		return f.Type.String()
+		return trimPackage(f.Type.String())
 	}
 	return f.Declared
 }

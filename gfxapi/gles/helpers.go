@@ -27,17 +27,16 @@ import (
 func NewProgram(a device.Architecture, d database.Database, l log.Logger,
 	vertexShaderID, fragmentShaderID ShaderId, programID ProgramId,
 	vertexShaderSource, fragmentShaderSource string) []atom.Atom {
-	tmp := memory.Tmp.Base
 	return []atom.Atom{
 		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, vertexShaderID),
-		NewGlShaderSource(vertexShaderID, 1, tmp, 0).
-			AddRead(atom.Data(a, d, l, tmp, memory.Pointer(tmp+8))).
-			AddRead(atom.Data(a, d, l, tmp+8, vertexShaderSource)),
+		NewGlShaderSource(vertexShaderID, 1, memory.Tmp, memory.Nullptr).
+			AddRead(atom.Data(a, d, l, memory.Tmp, memory.Tmp.Offset(8))).
+			AddRead(atom.Data(a, d, l, memory.Tmp.Offset(8), vertexShaderSource)),
 		NewGlCompileShader(vertexShaderID),
 		NewGlCreateShader(ShaderType_GL_FRAGMENT_SHADER, fragmentShaderID),
-		NewGlShaderSource(fragmentShaderID, 1, tmp, 0).
-			AddRead(atom.Data(a, d, l, tmp, memory.Pointer(tmp+8))).
-			AddRead(atom.Data(a, d, l, tmp+8, fragmentShaderSource)),
+		NewGlShaderSource(fragmentShaderID, 1, memory.Tmp, memory.Nullptr).
+			AddRead(atom.Data(a, d, l, memory.Tmp, memory.Tmp.Offset(8))).
+			AddRead(atom.Data(a, d, l, memory.Tmp.Offset(8), fragmentShaderSource)),
 		NewGlCompileShader(fragmentShaderID),
 		NewGlCreateProgram(programID),
 		NewGlAttachShader(programID, vertexShaderID),

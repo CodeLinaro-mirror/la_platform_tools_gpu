@@ -186,7 +186,7 @@ func (a Push) Encode(r value.PointerResolver, e binary.Encoder) error
 ```go
 type Resource struct {
 	Index       uint32
-	Destination memory.Pointer
+	Destination uint64
 }
 ```
 
