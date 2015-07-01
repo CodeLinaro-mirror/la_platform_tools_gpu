@@ -27,6 +27,7 @@
 {{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
@@ -51,6 +52,7 @@
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {

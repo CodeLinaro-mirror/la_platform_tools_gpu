@@ -27,6 +27,7 @@ import (
 	"unicode"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"golang.org/x/tools/go/types"
 )
@@ -192,7 +193,11 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) sch
 	case *types.Pointer:
 		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tag, imports)}
 	case *types.Interface:
-		return &schema.Interface{Name: name}
+		if from.NumMethods() == 0 {
+			return &any.Any{}
+		} else {
+			return &schema.Interface{Name: name}
+		}
 	case *types.Slice:
 		vt := fromType(pkg, from.Elem(), "", imports)
 		if tag.Flag("stream") {

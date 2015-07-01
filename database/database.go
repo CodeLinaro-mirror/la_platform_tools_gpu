@@ -20,7 +20,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
-	"android.googlesource.com/platform/tools/gpu/binary/pod"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -29,17 +28,17 @@ import (
 type Database interface {
 	// Store adds a key value pair to the database.
 	// It is an error if the id is already mapped to an object.
-	Store(binary.ID, interface{}, log.Logger) error
+	Store(binary.ID, binary.Object, log.Logger) error
 	// Resolve attempts to resolve the final value associated with an id.
 	// It will traverse all Lazy objects, blocking until they are ready.
-	Resolve(binary.ID, log.Logger) (interface{}, error)
+	Resolve(binary.ID, log.Logger) (binary.Object, error)
 	// Containts returns true if the database has an entry for the specified id.
 	Contains(binary.ID, log.Logger) bool
 }
 
 // Store is a helper that stores an object to the database with the id
 // calculated by the Hash function.
-func Store(obj interface{}, d Database, l log.Logger) (binary.ID, error) {
+func Store(obj binary.Object, d Database, l log.Logger) (binary.ID, error) {
 	id, err := Hash(obj)
 	if err != nil {
 		return id, err
@@ -53,14 +52,10 @@ func Store(obj interface{}, d Database, l log.Logger) (binary.ID, error) {
 // will be ignorable.
 // Objects with a graph structure are allowed.
 // Only members that would be encoded using a binary.Encoder are considered.
-func Hash(v interface{}) (binary.ID, error) {
+func Hash(o binary.Object) (binary.ID, error) {
 	id := binary.ID{}
 	h := sha1.New()
 	e := cyclic.Encoder(vle.Writer(h))
-	o := pod.Wrap(v)
-	if o == nil {
-		return id, binary.ErrNotEncodable{Value: v}
-	}
 	if err := e.Object(o); err != nil {
 		return id, err
 	}
