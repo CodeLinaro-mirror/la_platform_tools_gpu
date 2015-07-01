@@ -149,7 +149,8 @@ func init() {
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
 		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
 		// Markdown documentation
-		MarkdownDocs(List("docs"))
+		docs := List("docs").DependsOn("code")
+		MarkdownDocs(docs)
 		// The default rules
 		List(Default).DependsOn("apps", "test", "docs")
 	})

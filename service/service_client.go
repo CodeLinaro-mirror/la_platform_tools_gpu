@@ -232,16 +232,6 @@ func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error)
 	return
 }
 
-func (c client) ResolveSchema(id SchemaId, l log.Logger) (res Schema, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveSchema{id: id}); err == nil {
-		res = val.(*resultResolveSchema).value
-	} else {
-		log.Errorf(l, "RPC ResolveSchema failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) ResolveState(id StateId, l log.Logger) (res State, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveState{id: id}); err == nil {

@@ -27,7 +27,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -107,12 +106,6 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		return service.CaptureId{}, err
 	}
 
-	schema := schema.Schema()
-	schemaID, err := service.StoreSchema(&schema, d, l)
-	if err != nil {
-		return service.CaptureId{}, err
-	}
-
 	// Gather all the APIs used by the capture
 	apis := map[gfxapi.API]struct{}{}
 	apiIDs := service.ApiIdArray{}
@@ -134,7 +127,6 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		Apis:   apiIDs,
 		Name:   name,
 		Atoms:  streamID,
-		Schema: schemaID,
 		Report: reportID,
 	}
 

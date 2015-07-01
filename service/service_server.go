@@ -152,12 +152,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callResolveSchema:
-			if res, err := server.ResolveSchema(call.id, l); err == nil {
-				return &resultResolveSchema{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callResolveState:
 			if res, err := server.ResolveState(call.id, l); err == nil {
 				return &resultResolveState{value: res}
@@ -330,25 +324,6 @@ func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, 
 // ResolveReport loads and returns the Report stored in the resolver's database, using id.
 func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
 	return ResolveReport(id, r.Database, l)
-}
-
-// StoreSchema stores v into the database d, returning the SchemaId.
-func StoreSchema(v *Schema, d database.Database, l log.Logger) (SchemaId, error) {
-	id, err := database.Store(v, d, l)
-	return SchemaId{ID: id}, err
-}
-
-// ResolveSchema loads and returns the Schema stored in the database d, using id.
-func ResolveSchema(id SchemaId, d database.Database, l log.Logger) (res Schema, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*Schema))
-	}
-	return res, err
-}
-
-// ResolveSchema loads and returns the Schema stored in the resolver's database, using id.
-func (r Resolver) ResolveSchema(id SchemaId, l log.Logger) (Schema, error) {
-	return ResolveSchema(id, r.Database, l)
 }
 
 // StoreState stores v into the database d, returning the StateId.
