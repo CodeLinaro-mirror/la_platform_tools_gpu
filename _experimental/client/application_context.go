@@ -67,7 +67,6 @@ type ApplicationContext struct {
 	onReportUpdated     gxui.Event
 	onStateUpdated      gxui.Event
 	onTimingInfoUpdated gxui.Event
-	schema              service.Schema
 	atoms               []Atom
 	state               *schema.Object
 	hierarchy           atom.Group
@@ -258,20 +257,13 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			return
 		}
 
-		s, err := c.rpc.ResolveSchema(capture.Schema, l)
-		if err != nil {
-			log.Errorf(l, "Error resolving capture: %v", err)
-			return
-		}
-
 		c.Run(func() {
-			atoms, err := c.DecodeAtoms(atoms, s)
+			atoms, err := c.DecodeAtoms(atoms)
 			if err != nil {
 				panic(err)
 			}
 			c.captureID = captureID
 			c.capture = capture
-			c.schema = s
 			c.atoms = atoms
 			if resetSelected {
 				c.selectedAtomID = InvalidAtomID
@@ -490,7 +482,6 @@ func (c *ApplicationContext) Rpc() service.RPC                           { retur
 func (c *ApplicationContext) DropDownOverlay() gxui.BubbleOverlay        { return c.dropDownOverlay }
 func (c *ApplicationContext) ToolTipOverlay() gxui.BubbleOverlay         { return c.toolTipOverlay }
 func (c *ApplicationContext) ToolTipController() *gxui.ToolTipController { return c.toolTipController }
-func (c *ApplicationContext) Schema() service.Schema                     { return c.schema }
 func (c *ApplicationContext) Atoms() []Atom                              { return c.atoms }
 func (c *ApplicationContext) Hierarchy() atom.Group                      { return c.hierarchy }
 

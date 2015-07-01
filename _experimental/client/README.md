@@ -244,7 +244,7 @@ func (c *ApplicationContext) ColorBuffer() gxui.Texture
 #### func (*ApplicationContext) DecodeAtoms
 
 ```go
-func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Schema) ([]Atom, error)
+func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream) ([]Atom, error)
 ```
 DecodeAtoms decodes all atoms from the AtomStream stream.
 
@@ -410,12 +410,6 @@ func (c *ApplicationContext) Rpc() service.RPC
 func (c *ApplicationContext) Run(f func())
 ```
 
-#### func (*ApplicationContext) Schema
-
-```go
-func (c *ApplicationContext) Schema() service.Schema
-```
-
 #### func (*ApplicationContext) SelectAddress
 
 ```go
@@ -539,17 +533,12 @@ func (a *Atom) Field(index int) (schema.Field, interface{})
 func (a *Atom) FieldCount() int
 ```
 
-#### func (*Atom) IsDrawCall
+#### func (*Atom) Flags
 
 ```go
-func (a *Atom) IsDrawCall() bool
+func (a *Atom) Flags() atom.Flags
 ```
-
-#### func (*Atom) IsEndOfFrame
-
-```go
-func (a *Atom) IsEndOfFrame() bool
-```
+Flags returns the flags of the atom.
 
 #### func (*Atom) Observations
 
