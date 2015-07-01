@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -276,7 +275,7 @@ func (a Strcpy) Encode(r value.PointerResolver, e binary.Encoder) error {
 // bytes and writes the resource to Destination.
 type Resource struct {
 	Index       uint32
-	Destination memory.Pointer
+	Destination uint64
 }
 
 func (a Resource) Encode(r value.PointerResolver, e binary.Encoder) error {

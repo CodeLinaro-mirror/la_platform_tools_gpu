@@ -62,12 +62,12 @@ func (m *Pool) Slice(rng Range) Slice {
 }
 
 // At returns an unbounded Slice starting at p.
-func (m *Pool) At(p Pointer) Slice {
-	return m.Slice(Range{Base: p, Size: ^uint64(0) - uint64(p)})
+func (m *Pool) At(addr uint64) Slice {
+	return m.Slice(Range{Base: addr, Size: ^uint64(0) - addr})
 }
 
-// Write copies the slice src to dst.
-func (m *Pool) Write(dst Pointer, src Slice) {
+// Write copies the slice src to the address dst.
+func (m *Pool) Write(dst uint64, src Slice) {
 	rng := Range{Base: dst, Size: src.Size()}
 	m.writes = append(m.writes, write{rng, src})
 }

@@ -44,7 +44,7 @@ func (r *reader) Read(dst []byte) (n int, err error) {
 		return 0, io.EOF
 	}
 	c := min(uint64(len(dst)), r.r)
-	src, err := r.s.Slice(Range{Base: Pointer(r.o), Size: c}).Get(r.d, r.l)
+	src, err := r.s.Slice(Range{Base: r.o, Size: c}).Get(r.d, r.l)
 	r.o += c
 	r.r -= c
 	return copy(dst, src), err

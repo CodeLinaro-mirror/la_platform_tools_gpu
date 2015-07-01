@@ -14,7 +14,7 @@
 
 package memory
 
-var Tmp = Range{ // TODO: HACKY
-	Base: 0x00000000ff000000,
-	Size: 0x0000000000ffffff,
+var Tmp = Pointer{ // TODO: HACKY
+	Address: 0x00000000ff000000,
+	Pool:    ApplicationPool,
 }

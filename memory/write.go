@@ -27,7 +27,7 @@ import (
 func Write(w binary.Writer, arch device.Architecture, v interface{}) error {
 	switch v := v.(type) {
 	case Pointer:
-		return binary.WriteUint(w, arch.PointerSize*8, uint64(v))
+		return binary.WriteUint(w, arch.PointerSize*8, v.Address)
 	}
 
 	r := reflect.ValueOf(v)

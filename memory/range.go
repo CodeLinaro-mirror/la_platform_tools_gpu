@@ -40,24 +40,24 @@ func max(a, b uint64) uint64 {
 // Range represents a region of memory.
 type Range struct {
 	binary.Generate
-	Base Pointer // A pointer to the first byte in the memory range.
-	Size uint64  // The size in bytes of the memory range.
+	Base uint64 // The address of the first byte in the memory range.
+	Size uint64 // The size in bytes of the memory range.
 }
 
-// Expand returns a new Range that is grown to include the pointer p.
-func (i Range) Expand(p Pointer) Range {
-	if i.Base > p {
-		i.Base = p
+// Expand returns a new Range that is grown to include the address addr.
+func (i Range) Expand(addr uint64) Range {
+	if i.Base > addr {
+		i.Base = addr
 	}
-	if i.Last() < p {
-		i.Size += uint64(p - i.Last())
+	if i.Last() < addr {
+		i.Size += addr - i.Last()
 	}
 	return i
 }
 
-// Contains returns true if the pointer p is within the Range.
-func (i Range) Contains(p Pointer) bool {
-	return i.First() <= p && p <= i.Last()
+// Contains returns true if the address addr is within the Range.
+func (i Range) Contains(addr uint64) bool {
+	return i.First() <= addr && addr <= i.Last()
 }
 
 // Overlaps returns true if other overlaps this memory range.
@@ -73,9 +73,9 @@ func (i Range) Intersect(other Range) Range {
 	a, b := i.Span(), other.Span()
 	s, e := max(a.Start, b.Start), min(a.End, b.End)
 	if e < s {
-		panic(fmt.Errorf("Intervals %v and %v do not intersect", i, other))
+		panic(fmt.Errorf("Ranges %v and %v do not intersect", i, other))
 	}
-	return Range{Base: Pointer(s), Size: e - s}
+	return Range{Base: s, Size: e - s}
 }
 
 // Window returns the intersection of i and win, with the origin (0) address
@@ -87,26 +87,26 @@ func (i Range) Window(win Range) Range {
 	return r
 }
 
-// First returns a Pointer to the first byte in the Range.
-func (i Range) First() Pointer {
+// First returns the address of the first byte in the Range.
+func (i Range) First() uint64 {
 	return i.Base
 }
 
-// Last returns a Pointer to the last byte in the Range.
-func (i Range) Last() Pointer {
-	return i.End() - 1
+// Last returns the address of the last byte in the Range.
+func (i Range) Last() uint64 {
+	return i.Base + i.Size - 1
 }
 
-// End returns a Pointer to one byte beyond the end of the Range.
-func (i Range) End() Pointer {
-	return i.Base + Pointer(i.Size)
+// End returns the address of one byte beyond the end of the Range.
+func (i Range) End() uint64 {
+	return i.Base + i.Size
 }
 
 // Span returns the Range as a U64Span.
 func (i Range) Span() interval.U64Span {
 	return interval.U64Span{
-		Start: uint64(i.Base),
-		End:   uint64(i.Base) + i.Size,
+		Start: i.Base,
+		End:   i.Base + i.Size,
 	}
 }
 

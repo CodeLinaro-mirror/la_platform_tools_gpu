@@ -417,7 +417,7 @@
   {{$el_is_void := IsVoid ($s.To | Underlying | Unpack)}}
 
   func (s {{$slice_ty}}) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
-    if s.Pool == memory.ApplicationPool {
+    if s.Root.Pool == memory.ApplicationPool {
       s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
       {{if (GetAnnotation $s.To "replay_remap")}}
         ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
@@ -445,8 +445,8 @@
   }
 
   func (s {{$slice_ty}}) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
-    if s.Pool == memory.ApplicationPool {
-      ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
+    if s.Root.Pool == memory.ApplicationPool {
+      ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
       {{if (GetAnnotation $s.To "replay_remap")}}
         size := s.ElementSize(ϟs)
         ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
@@ -468,9 +468,9 @@
   }
 
   func (s {{$slice_ty}}) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-    if s.Pool == memory.ApplicationPool {
+    if s.Root.Pool == memory.ApplicationPool {
       rng := s.Range(ϟs)
-      ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root)))
+      ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
     }
   }
 

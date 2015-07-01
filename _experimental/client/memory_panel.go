@@ -88,12 +88,12 @@ func CreateMemoryPanel(appCtx *ApplicationContext) gxui.Control {
 		imgAdapter.DataReplaced()
 	})
 	appCtx.OnAtomSelected(func() {
-		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedAddress()
+		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedPointer().Address
 		rawAdapter.SetData(selectedAtomID, selectedAddress)
 		imgAdapter.SetData(selectedAtomID, selectedAddress)
 	})
-	appCtx.OnAddressSelected(func() {
-		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedAddress()
+	appCtx.OnPointerSelected(func() {
+		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedPointer().Address
 		rawAdapter.SetData(selectedAtomID, selectedAddress)
 		imgAdapter.SetData(selectedAtomID, selectedAddress)
 		list.ScrollTo(selectedAddress)

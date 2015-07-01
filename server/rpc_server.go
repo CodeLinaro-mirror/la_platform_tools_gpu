@@ -145,7 +145,7 @@ func (s rpcServer) GetMemoryInfo(
 	id, err := database.Store(&builder.GetMemoryInfo{
 		Capture: captureID,
 		After:   atom.ID(after),
-		Range:   memory.Range{Base: memory.Pointer(rng.Base), Size: rng.Size},
+		Range:   memory.Range{Base: rng.Base, Size: rng.Size},
 	}, s.Database, l)
 	return service.MemoryInfoId{ID: id}, err
 }

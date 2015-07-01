@@ -296,12 +296,6 @@ func (c *ApplicationContext) LoadState()
 func (c *ApplicationContext) Logger() *log.Splitter
 ```
 
-#### func (*ApplicationContext) OnAddressSelected
-
-```go
-func (c *ApplicationContext) OnAddressSelected(f func()) gxui.EventSubscription
-```
-
 #### func (*ApplicationContext) OnAtomSelected
 
 ```go
@@ -344,6 +338,12 @@ func (c *ApplicationContext) OnHierarchyUpdated(f func()) gxui.EventSubscription
 func (c *ApplicationContext) OnObjectSelected(f func()) gxui.EventSubscription
 ```
 
+#### func (*ApplicationContext) OnPointerSelected
+
+```go
+func (c *ApplicationContext) OnPointerSelected(f func()) gxui.EventSubscription
+```
+
 #### func (*ApplicationContext) OnReportUpdated
 
 ```go
@@ -383,7 +383,7 @@ func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID)
 #### func (*ApplicationContext) RequestMemory
 
 ```go
-func (c *ApplicationContext) RequestMemory(after atom.ID, base memory.Pointer, size uint64, callback MemoryCallback) chan<- struct{}
+func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint64, callback MemoryCallback) chan<- struct{}
 ```
 
 #### func (*ApplicationContext) RequestReplay
@@ -410,12 +410,6 @@ func (c *ApplicationContext) Rpc() service.RPC
 func (c *ApplicationContext) Run(f func())
 ```
 
-#### func (*ApplicationContext) SelectAddress
-
-```go
-func (c *ApplicationContext) SelectAddress(address memory.Pointer)
-```
-
 #### func (*ApplicationContext) SelectAtom
 
 ```go
@@ -434,10 +428,10 @@ func (c *ApplicationContext) SelectDevice(device service.DeviceId)
 func (c *ApplicationContext) SelectObject(object interface{})
 ```
 
-#### func (*ApplicationContext) SelectedAddress
+#### func (*ApplicationContext) SelectPointer
 
 ```go
-func (c *ApplicationContext) SelectedAddress() memory.Pointer
+func (c *ApplicationContext) SelectPointer(ptr memory.Pointer)
 ```
 
 #### func (*ApplicationContext) SelectedAtomID
@@ -457,6 +451,12 @@ func (c *ApplicationContext) SelectedDevice() service.DeviceId
 
 ```go
 func (c *ApplicationContext) SelectedObject() interface{}
+```
+
+#### func (*ApplicationContext) SelectedPointer
+
+```go
+func (c *ApplicationContext) SelectedPointer() memory.Pointer
 ```
 
 #### func (*ApplicationContext) SetWireframe
@@ -878,7 +878,7 @@ func CreateMemoryAdapter(appCtx *ApplicationContext) *MemoryAdapter
 #### func (*MemoryAdapter) AddressAtIndex
 
 ```go
-func (a *MemoryAdapter) AddressAtIndex(index int) memory.Pointer
+func (a *MemoryAdapter) AddressAtIndex(index int) uint64
 ```
 
 #### func (*MemoryAdapter) Count
@@ -896,7 +896,7 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control
 #### func (*MemoryAdapter) IndexOfAddress
 
 ```go
-func (a *MemoryAdapter) IndexOfAddress(addr memory.Pointer) int
+func (a *MemoryAdapter) IndexOfAddress(addr uint64) int
 ```
 
 #### func (*MemoryAdapter) ItemAt
@@ -914,7 +914,7 @@ func (a *MemoryAdapter) ItemIndex(item gxui.AdapterItem) int
 #### func (*MemoryAdapter) SetData
 
 ```go
-func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress memory.Pointer)
+func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress uint64)
 ```
 
 #### func (*MemoryAdapter) SetDataType
@@ -957,7 +957,7 @@ func CreateMemoryImageAdapter(appCtx *ApplicationContext) *MemoryImageAdapter
 #### func (*MemoryImageAdapter) AddressAtIndex
 
 ```go
-func (a *MemoryImageAdapter) AddressAtIndex(index int) memory.Pointer
+func (a *MemoryImageAdapter) AddressAtIndex(index int) uint64
 ```
 
 #### func (*MemoryImageAdapter) Count
@@ -975,7 +975,7 @@ func (a *MemoryImageAdapter) Create(t gxui.Theme, index int) gxui.Control
 #### func (*MemoryImageAdapter) IndexOfAddress
 
 ```go
-func (a *MemoryImageAdapter) IndexOfAddress(addr memory.Pointer) int
+func (a *MemoryImageAdapter) IndexOfAddress(addr uint64) int
 ```
 
 #### func (*MemoryImageAdapter) ItemAt
@@ -993,7 +993,7 @@ func (a *MemoryImageAdapter) ItemIndex(item gxui.AdapterItem) int
 #### func (*MemoryImageAdapter) SetData
 
 ```go
-func (a *MemoryImageAdapter) SetData(atomID atom.ID, baseAddress memory.Pointer)
+func (a *MemoryImageAdapter) SetData(atomID atom.ID, baseAddress uint64)
 ```
 
 #### func (*MemoryImageAdapter) SetPixelType

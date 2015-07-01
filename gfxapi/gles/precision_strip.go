@@ -51,9 +51,9 @@ func precisionStrip(device *service.Device, d database.Database, l log.Logger) a
 			src := fmt.Sprint(glsl.Formatter(tree))
 
 			out.Write(i,
-				NewGlShaderSource(cmd.Shader, 1, memory.Tmp.Base, 0).
-					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+8, src)).
-					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+0, memory.Tmp.Base+8)))
+				NewGlShaderSource(cmd.Shader, 1, memory.Tmp, memory.Nullptr).
+					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Offset(8), src)).
+					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, memory.Tmp.Offset(8))))
 		} else {
 			out.Write(i, a)
 		}
