@@ -41,15 +41,11 @@ const (
 )
 
 var (
-	glespath     = Path(gpusrc, "gfxapi/gles")
 	gapirpath    = Path(gpusrc, "cc/gapir")
 	gapiipath    = Path(gpusrc, "cc/gapii")
 	gapiiwinpath = Path(gpusrc, "cc/gapii/windows")
 	gapiiosxpath = Path(gpusrc, "cc/gapii/osx")
 	cppcoder     = Path(gpusrc, "cc/gapic/coder")
-	testpath     = Path(gpusrc, "gfxapi/test")
-	glesapi      = Path(gpusrc, "gfxapi/gles/gles.api")
-	testapi      = Path(gpusrc, "gfxapi/test/gfxapi_test.api")
 	javabase     = Path(Paths.Root, "../")
 	javarpc      = Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
 	gpusrc       = GoSrcPath(GPURoot)
@@ -91,25 +87,8 @@ func init() {
 		RpcApiGo(File(gpusrc, "rpc/test/rpc_test.api"))
 		RpcApiGo(servicerpc)
 		// All the apic rules
-		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/api.go.tmpl"))
-		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/replay_writer.go.tmpl"))
-		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
-		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
-		Apic(gapirpath, glesapi, Path(gpusrc, "gfxapi/templates/gfx_api.cpp.tmpl"))
-		Apic(gapirpath, glesapi, Path(gpusrc, "gfxapi/templates/gfx_api.h.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_exports.cpp.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.cpp.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.h.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_spy.h.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_types.h.tmpl"))
-		Apic(gapiiwinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_exports.def.tmpl"))
-		Apic(gapiiwinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_resolve.cpp.tmpl"))
-		Apic(gapiiwinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_x64.asm.tmpl"))
-		Apic(gapiiosxpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl_framework_exports.cpp.tmpl"))
-		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/api.go.tmpl"))
-		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/replay_writer.go.tmpl"))
-		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
-		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
+		GfxApi("test", "gfxapi_test.api")
+		GfxApi("gles", "gles.api")
 		// The codergen rule
 		Codergen("codergen", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
 		// The java code generation rules
@@ -255,4 +234,32 @@ func ShutdownReplayd() Entity {
 		return fmt.Errorf("Replayd at %v did not die", endpoint)
 	}).Creates(e)
 	return e
+}
+
+func GfxApi(pkg string, api string) {
+	out := Path(gpusrc, "gfxapi", pkg)
+	in := Path(out, api)
+	templates := Path(gpusrc, "gfxapi", "templates")
+	istest := strings.HasSuffix(pkg, "test")
+	// go code
+	Apic(out, in, Path(templates, "api.go.tmpl"))
+	Apic(out, in, Path(templates, "replay_writer.go.tmpl"))
+	Apic(out, in, Path(templates, "schema.go.tmpl"))
+	Apic(out, in, Path(templates, "state_mutator.go.tmpl"))
+	if istest {
+		return
+	}
+	// gapir code
+	Apic(gapirpath, in, Path(templates, "gfx_api.cpp.tmpl"))
+	Apic(gapirpath, in, Path(templates, "gfx_api.h.tmpl"))
+	// gapii code
+	Apic(gapiipath, in, Path(templates, "api_exports.cpp.tmpl"))
+	Apic(gapiipath, in, Path(templates, "api_imports.cpp.tmpl"))
+	Apic(gapiipath, in, Path(templates, "api_imports.h.tmpl"))
+	Apic(gapiipath, in, Path(templates, "api_spy.h.tmpl"))
+	Apic(gapiipath, in, Path(templates, "api_types.h.tmpl"))
+	Apic(gapiiwinpath, in, Path(templates, "opengl32_exports.def.tmpl"))
+	Apic(gapiiwinpath, in, Path(templates, "opengl32_resolve.cpp.tmpl"))
+	Apic(gapiiwinpath, in, Path(templates, "opengl32_x64.asm.tmpl"))
+	Apic(gapiiosxpath, in, Path(templates, "opengl_framework_exports.cpp.tmpl"))
 }
