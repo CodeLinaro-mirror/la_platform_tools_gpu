@@ -20,7 +20,6 @@ import (
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/objects"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -29,20 +28,18 @@ import (
 )
 
 type Atom struct {
-	info   *service.AtomInfo
-	object *schema.Object
+	object       *schema.Object
+	meta         *atom.Metadata
+	observations *atom.Observations
 }
 
-func (a *Atom) IsEndOfFrame() bool {
-	return a.info.IsEndOfFrame
+// Flags returns the flags of the atom.
+func (a *Atom) Flags() atom.Flags {
+	return a.meta.Flags
 }
 
-func (a *Atom) IsDrawCall() bool {
-	return a.info.IsDrawCall
-}
-
-func (a *Atom) DocumentationUrl() string {
-	return a.info.DocumentationUrl
+func (a *Atom) Observations() *atom.Observations {
+	return a.observations
 }
 
 func (a *Atom) DisplayName() string {
@@ -50,16 +47,11 @@ func (a *Atom) DisplayName() string {
 }
 
 func (a *Atom) Api() service.ApiId {
-	return a.info.Api
+	return service.ApiId{ID: a.meta.Api}
 }
 
-func (a *Atom) Observations() *atom.Observations {
-	for _, f := range a.object.Fields {
-		if o, ok := f.(*atom.Observations); ok {
-			return o
-		}
-	}
-	return nil
+func (a *Atom) DocumentationUrl() string {
+	return a.meta.DocumentationUrl
 }
 
 func (a *Atom) FieldCount() int {
@@ -75,23 +67,7 @@ func (a *Atom) SetField(index int, value interface{}) {
 }
 
 // DecodeAtoms decodes all atoms from the AtomStream stream.
-func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Schema) ([]Atom, error) {
-	atomMap := map[binary.Class]*service.AtomInfo{}
-	for i := range s.Atoms {
-		a := &s.Atoms[i]
-		name := a.Name
-		var match binary.Class
-		c.schemaNamespace.Visit(func(class binary.Class) {
-			if class.(*schema.Class).Display == name {
-				match = class
-			}
-		})
-		if match == nil {
-			return nil, fmt.Errorf("No binary schema entry for %s", name)
-		}
-		atomMap[match] = a
-	}
-
+func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream) ([]Atom, error) {
 	d := cyclic.Decoder(vle.Reader(bytes.NewReader(stream.Data)))
 	d.Namespace = c.namespace
 	// Read all the atoms from the stream
@@ -106,15 +82,27 @@ func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream, s service.Sc
 		}
 		switch value := value.(type) {
 		case *schema.Object:
-			info, _ := atomMap[value.Class()]
+			i = len(atoms)
 			atoms = append(atoms, Atom{
-				info:   info,
 				object: value,
 			})
+			a := &atoms[i]
+			// Find the observations, if present
+			for _, f := range a.object.Fields {
+				if o, ok := f.(*atom.Observations); ok {
+					a.observations = o
+					break
+				}
+			}
+			// Find the atom metadata, if present
+			a.meta = atom.FindMetadata(a.object.Type)
+			if a.meta == nil {
+				return nil, fmt.Errorf("(%d) Atom was missing metadata", i)
+			}
 		case *objects.Terminator:
 			break
 		default:
-			return nil, fmt.Errorf("Atom was not decoded by schema, %T", value)
+			return nil, fmt.Errorf("(%d) Atom was not decoded by schema got, %T", i, value)
 		}
 	}
 	return atoms, nil

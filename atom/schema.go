@@ -14,7 +14,10 @@
 
 package atom
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
 
 // Metadata is the meta information about an atom type that is added to the
 // binary schema class for the atom.
@@ -23,4 +26,15 @@ type Metadata struct {
 	Api              binary.ID // The api this atom belongs to.
 	Flags            Flags     // The atom flags for this type.
 	DocumentationUrl string    // A url for documentation about this atom.
+}
+
+// Finds the atom metadata for the given schema class.
+// Returns nil if the class was not for an atom.
+func FindMetadata(class *schema.Class) *Metadata {
+	for _, m := range class.Metadata {
+		if meta, ok := m.(*Metadata); ok {
+			return meta
+		}
+	}
+	return nil
 }

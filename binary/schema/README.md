@@ -6,6 +6,10 @@ Package schema implements rtti for the binary system.
 
 ## Usage
 
+```go
+var Namespace = registry.NewNamespace()
+```
+
 #### type Array
 
 ```go
@@ -23,6 +27,12 @@ Array is the Type descriptor for fixed size buffers of known type.
 
 ```go
 func (a *Array) Basename() string
+```
+
+#### func (*Array) Class
+
+```go
+func (*Array) Class() binary.Class
 ```
 
 #### func (*Array) Decode
@@ -86,6 +96,12 @@ func Of(class binary.Class) *Class
 ```
 Returns the schema class for a binary class, if it has one.
 
+#### func (*Class) Class
+
+```go
+func (*Class) Class() binary.Class
+```
+
 #### func (*Class) Decode
 
 ```go
@@ -141,6 +157,12 @@ type Field struct {
 
 Field represents a name/type pair for a field in an Object.
 
+#### func (*Field) Class
+
+```go
+func (*Field) Class() binary.Class
+```
+
 #### func (Field) Name
 
 ```go
@@ -180,6 +202,12 @@ type Int16Constant struct {
 func (v Int16Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Int16Constant) Class
+
+```go
+func (*Int16Constant) Class() binary.Class
+```
+
 #### type Int16Constants
 
 ```go
@@ -190,6 +218,12 @@ type Int16Constants struct {
 }
 ```
 
+
+#### func (*Int16Constants) Class
+
+```go
+func (*Int16Constants) Class() binary.Class
+```
 
 #### func (Int16Constants) Len
 
@@ -226,6 +260,12 @@ type Int32Constant struct {
 func (v Int32Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Int32Constant) Class
+
+```go
+func (*Int32Constant) Class() binary.Class
+```
+
 #### type Int32Constants
 
 ```go
@@ -236,6 +276,12 @@ type Int32Constants struct {
 }
 ```
 
+
+#### func (*Int32Constants) Class
+
+```go
+func (*Int32Constants) Class() binary.Class
+```
 
 #### func (Int32Constants) Len
 
@@ -272,6 +318,12 @@ type Int64Constant struct {
 func (v Int64Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Int64Constant) Class
+
+```go
+func (*Int64Constant) Class() binary.Class
+```
+
 #### type Int64Constants
 
 ```go
@@ -282,6 +334,12 @@ type Int64Constants struct {
 }
 ```
 
+
+#### func (*Int64Constants) Class
+
+```go
+func (*Int64Constants) Class() binary.Class
+```
 
 #### func (Int64Constants) Len
 
@@ -318,6 +376,12 @@ type Int8Constant struct {
 func (v Int8Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Int8Constant) Class
+
+```go
+func (*Int8Constant) Class() binary.Class
+```
+
 #### type Int8Constants
 
 ```go
@@ -328,6 +392,12 @@ type Int8Constants struct {
 }
 ```
 
+
+#### func (*Int8Constants) Class
+
+```go
+func (*Int8Constants) Class() binary.Class
+```
 
 #### func (Int8Constants) Len
 
@@ -362,6 +432,12 @@ Interface is the Type descriptor for a field who's underlying type is dynamic.
 
 ```go
 func (i *Interface) Basename() string
+```
+
+#### func (*Interface) Class
+
+```go
+func (*Interface) Class() binary.Class
 ```
 
 #### func (*Interface) Decode
@@ -411,6 +487,12 @@ Map is the Type descriptor for key/value stores.
 
 ```go
 func (m *Map) Basename() string
+```
+
+#### func (*Map) Class
+
+```go
+func (*Map) Class() binary.Class
 ```
 
 #### func (*Map) Decode
@@ -528,6 +610,12 @@ Pointer is the Type descriptor for pointers.
 func (p *Pointer) Basename() string
 ```
 
+#### func (*Pointer) Class
+
+```go
+func (*Pointer) Class() binary.Class
+```
+
 #### func (*Pointer) Decode
 
 ```go
@@ -575,6 +663,12 @@ Encoder and Decoder
 
 ```go
 func (p *Primitive) Basename() string
+```
+
+#### func (*Primitive) Class
+
+```go
+func (*Primitive) Class() binary.Class
 ```
 
 #### func (*Primitive) Decode
@@ -634,6 +728,12 @@ encoded with a preceding count.
 func (s *Slice) Basename() string
 ```
 
+#### func (*Slice) Class
+
+```go
+func (*Slice) Class() binary.Class
+```
+
 #### func (*Slice) Decode
 
 ```go
@@ -684,6 +784,12 @@ count.
 func (s *Stream) Basename() string
 ```
 
+#### func (*Stream) Class
+
+```go
+func (*Stream) Class() binary.Class
+```
+
 #### func (*Stream) Decode
 
 ```go
@@ -730,6 +836,12 @@ Struct is the Type descriptor for an binary.Object typed value.
 
 ```go
 func (s *Struct) Basename() string
+```
+
+#### func (*Struct) Class
+
+```go
+func (*Struct) Class() binary.Class
 ```
 
 #### func (*Struct) Decode
@@ -795,6 +907,12 @@ type Uint16Constant struct {
 func (v Uint16Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Uint16Constant) Class
+
+```go
+func (*Uint16Constant) Class() binary.Class
+```
+
 #### type Uint16Constants
 
 ```go
@@ -805,6 +923,12 @@ type Uint16Constants struct {
 }
 ```
 
+
+#### func (*Uint16Constants) Class
+
+```go
+func (*Uint16Constants) Class() binary.Class
+```
 
 #### func (Uint16Constants) Len
 
@@ -841,6 +965,12 @@ type Uint32Constant struct {
 func (v Uint32Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Uint32Constant) Class
+
+```go
+func (*Uint32Constant) Class() binary.Class
+```
+
 #### type Uint32Constants
 
 ```go
@@ -851,6 +981,12 @@ type Uint32Constants struct {
 }
 ```
 
+
+#### func (*Uint32Constants) Class
+
+```go
+func (*Uint32Constants) Class() binary.Class
+```
 
 #### func (Uint32Constants) Len
 
@@ -887,6 +1023,12 @@ type Uint64Constant struct {
 func (v Uint64Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Uint64Constant) Class
+
+```go
+func (*Uint64Constant) Class() binary.Class
+```
+
 #### type Uint64Constants
 
 ```go
@@ -897,6 +1039,12 @@ type Uint64Constants struct {
 }
 ```
 
+
+#### func (*Uint64Constants) Class
+
+```go
+func (*Uint64Constants) Class() binary.Class
+```
 
 #### func (Uint64Constants) Len
 
@@ -933,6 +1081,12 @@ type Uint8Constant struct {
 func (v Uint8Constant) Add(c *Constants, t Type)
 ```
 
+#### func (*Uint8Constant) Class
+
+```go
+func (*Uint8Constant) Class() binary.Class
+```
+
 #### type Uint8Constants
 
 ```go
@@ -943,6 +1097,12 @@ type Uint8Constants struct {
 }
 ```
 
+
+#### func (*Uint8Constants) Class
+
+```go
+func (*Uint8Constants) Class() binary.Class
+```
 
 #### func (Uint8Constants) Len
 
