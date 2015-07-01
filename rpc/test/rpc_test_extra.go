@@ -120,25 +120,3 @@ type resultGetListNodeChainArray struct {
 	binary.Generate
 	value ListNodePtrArray
 }
-
-// Call GetBase
-type callGetBase struct {
-	binary.Generate
-}
-
-// Result GetBase
-type resultGetBase struct {
-	binary.Generate
-	value Base
-}
-
-// Call GetDerived
-type callGetDerived struct {
-	binary.Generate
-}
-
-// Result GetDerived
-type resultGetDerived struct {
-	binary.Generate
-	value Base
-}

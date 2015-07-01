@@ -92,18 +92,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callGetBase:
-			if res, err := server.GetBase(l); err == nil {
-				return &resultGetBase{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callGetDerived:
-			if res, err := server.GetDerived(l); err == nil {
-				return &resultGetDerived{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		default:
 			return rpc.NewError("Unexpected RPC function: %T", call)
 		}

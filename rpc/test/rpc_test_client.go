@@ -121,23 +121,3 @@ func (c client) GetListNodeChainArray(l log.Logger) (res ListNodePtrArray, err e
 	}
 	return
 }
-
-func (c client) GetBase(l log.Logger) (res Base, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetBase{}); err == nil {
-		res = val.(*resultGetBase).value
-	} else {
-		log.Errorf(l, "RPC GetBase failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) GetDerived(l log.Logger) (res Base, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetDerived{}); err == nil {
-		res = val.(*resultGetDerived).value
-	} else {
-		log.Errorf(l, "RPC GetDerived failed with error: %v", err)
-	}
-	return
-}

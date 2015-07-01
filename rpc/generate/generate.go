@@ -21,7 +21,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/template"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
-	binary "android.googlesource.com/platform/tools/gpu/binary/generate"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
@@ -78,19 +77,6 @@ func fromType(from semantic.Type) schema.Type {
 		return &schema.Struct{Name: from.Name()}
 	default:
 		return &schema.Struct{Name: from.Name()}
-	}
-}
-
-func addFields(s *binary.Struct, c *semantic.Class) {
-	for _, e := range c.Extends {
-		addFields(s, e)
-	}
-	for _, decl := range c.Fields {
-		f := schema.Field{
-			Declared: decl.Name(),
-			Type:     fromType(decl.Type),
-		}
-		s.Fields = append(s.Fields, f)
 	}
 }
 

@@ -90,9 +90,6 @@ func Visit(node Node, visitor func(Node)) {
 		visitor(n.Object)
 		visitor(n.Type)
 	case *Class:
-		for _, e := range n.Extends {
-			visitor(e)
-		}
 		for _, f := range n.Fields {
 			visitor(f)
 		}

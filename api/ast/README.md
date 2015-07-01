@@ -306,13 +306,11 @@ type Class struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to the class
 	Name        *Identifier   // the name of the class
-	Extends     []*Identifier // the set of class names it extends
 	Fields      []*Field      // the fields of the class
 }
 ```
 
-Class represents a class type declaration of the form «"class" name :
-extension_list { fields }»
+Class represents a class type declaration of the form «"class" name { fields }»
 
 #### func (Class) Fragment
 
