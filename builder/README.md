@@ -14,7 +14,7 @@ var Namespace = registry.NewNamespace()
 #### func  Captures
 
 ```go
-func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, error)
+func Captures(db database.Database, logger log.Logger) ([]service.CaptureId, error)
 ```
 Captures returns all the captures stored by the database by identifier.
 
