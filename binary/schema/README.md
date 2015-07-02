@@ -10,6 +10,16 @@ Package schema implements rtti for the binary system.
 var Namespace = registry.NewNamespace()
 ```
 
+#### func  Underlying
+
+```go
+func Underlying(v interface{}) interface{}
+```
+Underlying traverses the single, anonymous fields nested in v, returning the
+deepest-nested value that is not an object or does not have a single, anonymous
+field. If v is not an Object or does not have a single, anonymous field then v
+is returned.
+
 #### type Array
 
 ```go
@@ -584,6 +594,14 @@ type Object struct {
 ```
 
 Object is an instance of a Class.
+
+#### func (*Object) Base
+
+```go
+func (o *Object) Base() interface{}
+```
+Base returns the value of the single, anonymous field of o. If o does not have a
+single anonymous field, then Base returns nil.
 
 #### func (*Object) Class
 
