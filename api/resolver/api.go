@@ -70,6 +70,11 @@ func apiNames(ctx *context, in *ast.API) {
 	for _, a := range in.Aliases {
 		ctx.addType(&semantic.Alias{AST: a, Named: semantic.Named(a.Name.Value)})
 	}
+	for _, c := range in.Definitions {
+		n := &semantic.Definition{AST: c, Named: semantic.Named(c.Name.Value)}
+		ctx.api.Definitions = append(ctx.api.Definitions, n)
+		ctx.addNamed(n)
+	}
 }
 
 func resolve(ctx *context) {
@@ -84,6 +89,9 @@ func resolve(ctx *context) {
 	// Now build collapsed enum lists
 	for _, e := range ctx.api.Enums {
 		enumEntries(ctx, e, e)
+	}
+	for _, c := range ctx.api.Definitions {
+		definition(ctx, c)
 	}
 	for _, g := range ctx.api.Globals {
 		global(ctx, g)

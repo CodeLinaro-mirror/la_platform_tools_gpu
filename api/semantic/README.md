@@ -58,6 +58,7 @@ Visit invokes visitor for all the children of the supplied node.
 type API struct {
 	Named
 	Enums        []*Enum        // the set of enums
+	Definitions  []*Definition  // the set of definitions
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
 	Externs      []*Function    // the external function references
@@ -560,6 +561,67 @@ type DeclareLocal struct {
 
 DeclareLocal represents a local variable declaration statement. Variables cannot
 be modified after declaration.
+
+#### type Definition
+
+```go
+type Definition struct {
+	Named
+	AST         *ast.Definition // the underlying syntax node this was built from
+	Annotations                 // the annotations applied to this definition
+	Docs        []string        // the documentation for this definition
+	Expression  Expression      // the value of this definition, type-inferred without context
+}
+```
+
+Definition represents a named literal definition.
+
+#### func (*Definition) ExpressionType
+
+```go
+func (d *Definition) ExpressionType() Type
+```
+
+#### func (Definition) Member
+
+```go
+func (Definition) Member(string) Owned
+```
+
+#### func (Definition) VisitMembers
+
+```go
+func (Definition) VisitMembers(func(Owned))
+```
+
+#### type DefinitionUsage
+
+```go
+type DefinitionUsage struct {
+	Definition *Definition // the definition of this definition usage
+	Expression Expression  // the value of this definition, type-inferred by its usage context
+}
+```
+
+DefinitionUsage represents a named literal usage.
+
+#### func (*DefinitionUsage) ExpressionType
+
+```go
+func (d *DefinitionUsage) ExpressionType() Type
+```
+
+#### func (DefinitionUsage) Member
+
+```go
+func (DefinitionUsage) Member(string) Owned
+```
+
+#### func (DefinitionUsage) VisitMembers
+
+```go
+func (DefinitionUsage) VisitMembers(func(Owned))
+```
 
 #### type Enum
 
@@ -1500,14 +1562,14 @@ sliced.
 
 ```go
 type StaticArray struct {
-	Named            // the full type name
-	ValueType Type   // the storage type of the elements
-	Size      uint32 // the dimension of the array
+	Named                // the full type name
+	ValueType Type       // the storage type of the elements
+	Size      uint32     // the array size
+	SizeExpr  Expression // the expression representing the array size
 }
 ```
 
-StaticArray represents a multi-dimensional fixed size array type, of the form
-T[8]
+StaticArray represents a one-dimension fixed size array type, of the form T[8]
 
 #### func (StaticArray) Member
 

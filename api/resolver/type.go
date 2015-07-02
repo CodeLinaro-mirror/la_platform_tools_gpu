@@ -42,16 +42,27 @@ func type_(ctx *context, in interface{}) semantic.Type {
 		if in.Index == nil {
 			return getSliceType(ctx, in, of)
 		}
-		size := uint32(0)
+		var size uint32
+		var sizeExpr semantic.Expression
 		ctx.with(semantic.Uint32Type, func() {
 			e := expression(ctx, in.Index)
+			switch ty := e.(type) {
+			case *semantic.DefinitionUsage:
+				sizeExpr = ty.Definition
+				e = ty.Expression
+			case *semantic.EnumEntry:
+				sizeExpr = e
+				e = semantic.Uint32Value(ty.Value)
+			default:
+				sizeExpr = e
+			}
 			if n, ok := e.(semantic.Uint32Value); ok {
 				size = uint32(n)
 			} else {
 				ctx.errorf(in.Index, "Array dimension must be a constant number, got %T", e)
 			}
 		})
-		return getStaticArrayType(ctx, in, of, size)
+		return getStaticArrayType(ctx, in, of, size, sizeExpr)
 	case *ast.PointerType:
 		to := type_(ctx, in.To)
 		return getPointerType(ctx, in, to, in.Const)
@@ -133,22 +144,23 @@ func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
 	return out
 }
 
-func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32) *semantic.StaticArray {
+func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32, sizeExpr semantic.Expression) *semantic.StaticArray {
 	name := fmt.Sprintf("%s%s%d%s", strings.Title(of.Name()), TypeInfix, size, ArraySuffix)
 	for _, a := range ctx.api.StaticArrays {
 		if a.Name() == name {
 			if !equal(a.ValueType, of) {
 				ctx.icef(at, "Static array %s found with non matching value, got %s expected %s",
 					a.Name, typename(a.ValueType), typename(of))
+				ctx.mappings[at] = a
+				return a
 			}
-			ctx.mappings[at] = a
-			return a
 		}
 	}
 	out := &semantic.StaticArray{
 		Named:     semantic.Named(name),
 		ValueType: of,
 		Size:      size,
+		SizeExpr:  sizeExpr,
 	}
 	ctx.api.StaticArrays = append(ctx.api.StaticArrays, out)
 	ctx.mappings[at] = out
@@ -224,6 +236,14 @@ func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
 	out.Pointer = getPointerType(ctx, at, to, false)
 
 	return out
+}
+
+func definition(ctx *context, out *semantic.Definition) {
+	in := out.AST
+	out.Annotations = annotations(ctx, in.Annotations)
+	out.Docs = findDocumentation(in.CST)
+	out.Expression = expression(ctx, in.Expression)
+	ctx.mappings[in] = out
 }
 
 func enum(ctx *context, out *semantic.Enum) {

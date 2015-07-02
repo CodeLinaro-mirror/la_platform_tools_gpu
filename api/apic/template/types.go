@@ -60,6 +60,7 @@ var (
 		semantic.Copy{},
 		semantic.Create{},
 		semantic.DeclareLocal{},
+		semantic.Definition{},
 		semantic.EnumEntry{},
 		semantic.Enum{},
 		semantic.Fence{},
