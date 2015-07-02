@@ -8,6 +8,7 @@ package service
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -19,8 +20,6 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*ApiId)(nil).Class())
-	Namespace.Add((*AtomRange)(nil).Class())
-	Namespace.Add((*AtomGroup)(nil).Class())
 	Namespace.Add((*AtomRangeTimer)(nil).Class())
 	Namespace.Add((*AtomStream)(nil).Class())
 	Namespace.Add((*AtomStreamId)(nil).Class())
@@ -92,8 +91,6 @@ func init() {
 
 var (
 	binaryIDApiId                       = binary.ID{0x20, 0x75, 0x65, 0xf1, 0x82, 0xb1, 0xe1, 0x6a, 0xcd, 0x10, 0x7f, 0x7f, 0x04, 0xee, 0x90, 0x07, 0xa3, 0x62, 0xd1, 0x41}
-	binaryIDAtomRange                   = binary.ID{0xfa, 0xb9, 0x1d, 0x40, 0x16, 0xc4, 0x26, 0x4d, 0x40, 0x03, 0xb1, 0x72, 0xc9, 0x2f, 0x2f, 0x77, 0xde, 0xa7, 0x96, 0x4a}
-	binaryIDAtomGroup                   = binary.ID{0x7f, 0x4b, 0x66, 0xa6, 0x63, 0xce, 0x62, 0xd3, 0x7a, 0xda, 0x1e, 0xb5, 0x7f, 0xaf, 0xe6, 0x1e, 0x11, 0x89, 0xab, 0xcd}
 	binaryIDAtomRangeTimer              = binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}
 	binaryIDAtomStream                  = binary.ID{0x5b, 0x7f, 0xd8, 0x32, 0x0a, 0x94, 0x66, 0x79, 0xe2, 0x9c, 0x28, 0xce, 0x04, 0x0f, 0xd1, 0x76, 0xc1, 0x06, 0x29, 0x02}
 	binaryIDAtomStreamId                = binary.ID{0xbe, 0x90, 0x3c, 0x40, 0x28, 0xee, 0x58, 0x7e, 0xab, 0x8c, 0xde, 0x44, 0x43, 0xb3, 0x94, 0x88, 0xff, 0x6b, 0xa0, 0x12}
@@ -105,7 +102,7 @@ var (
 	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
-	binaryIDHierarchy                   = binary.ID{0x4a, 0x29, 0x6b, 0x6f, 0x37, 0xca, 0x76, 0x25, 0xbc, 0x89, 0x1a, 0xea, 0x80, 0x56, 0xa9, 0x66, 0x0e, 0x1a, 0x1a, 0x97}
+	binaryIDHierarchy                   = binary.ID{0x26, 0x8b, 0xf1, 0xcb, 0xd8, 0xc8, 0xc2, 0x60, 0x1e, 0xfa, 0x3f, 0x8e, 0xde, 0xc9, 0xe1, 0x01, 0x43, 0x9f, 0x4c, 0xff}
 	binaryIDHierarchyId                 = binary.ID{0xfd, 0x20, 0x19, 0xa0, 0xb5, 0xac, 0x49, 0xc7, 0x7d, 0x6e, 0xf8, 0x32, 0x6b, 0x78, 0x9f, 0xd7, 0x6d, 0xf0, 0x2c, 0xaf}
 	binaryIDImageInfo                   = binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}
 	binaryIDImageInfoId                 = binary.ID{0xb1, 0x03, 0x2c, 0x17, 0x12, 0xab, 0x40, 0x23, 0x1d, 0x01, 0xb9, 0x4b, 0x9b, 0x8c, 0x9d, 0x5a, 0x19, 0x45, 0xaf, 0x70}
@@ -210,156 +207,6 @@ var schemaApiId = &schema.Class{
 	Display: "ApiId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-	},
-}
-
-type binaryClassAtomRange struct{}
-
-func (*AtomRange) Class() binary.Class {
-	return (*binaryClassAtomRange)(nil)
-}
-func doEncodeAtomRange(e binary.Encoder, o *AtomRange) error {
-	if err := e.Uint64(o.First); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeAtomRange(d binary.Decoder, o *AtomRange) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.First = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	return nil
-}
-func doSkipAtomRange(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassAtomRange) ID() binary.ID      { return binaryIDAtomRange }
-func (*binaryClassAtomRange) New() binary.Object { return &AtomRange{} }
-func (*binaryClassAtomRange) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomRange(e, obj.(*AtomRange))
-}
-func (*binaryClassAtomRange) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &AtomRange{}
-	return obj, doDecodeAtomRange(d, obj)
-}
-func (*binaryClassAtomRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomRange(d, obj.(*AtomRange))
-}
-func (*binaryClassAtomRange) Skip(d binary.Decoder) error { return doSkipAtomRange(d) }
-func (*binaryClassAtomRange) Schema() *schema.Class       { return schemaAtomRange }
-
-var schemaAtomRange = &schema.Class{
-	TypeID:  binaryIDAtomRange,
-	Package: "service",
-	Name:    "AtomRange",
-	Display: "AtomRange",
-	Fields: []schema.Field{
-		{Declared: "First", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
-
-type binaryClassAtomGroup struct{}
-
-func (*AtomGroup) Class() binary.Class {
-	return (*binaryClassAtomGroup)(nil)
-}
-func doEncodeAtomGroup(e binary.Encoder, o *AtomGroup) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Range); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.SubGroups))); err != nil {
-		return err
-	}
-	for i := range o.SubGroups {
-		if err := e.Value(&o.SubGroups[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeAtomGroup(d binary.Decoder, o *AtomGroup) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if err := d.Value(&o.Range); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.SubGroups = make([]AtomGroup, count)
-		for i := range o.SubGroups {
-			if err := d.Value(&o.SubGroups[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipAtomGroup(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*AtomRange)(nil)); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*AtomGroup)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassAtomGroup) ID() binary.ID      { return binaryIDAtomGroup }
-func (*binaryClassAtomGroup) New() binary.Object { return &AtomGroup{} }
-func (*binaryClassAtomGroup) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomGroup(e, obj.(*AtomGroup))
-}
-func (*binaryClassAtomGroup) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &AtomGroup{}
-	return obj, doDecodeAtomGroup(d, obj)
-}
-func (*binaryClassAtomGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomGroup(d, obj.(*AtomGroup))
-}
-func (*binaryClassAtomGroup) Skip(d binary.Decoder) error { return doSkipAtomGroup(d) }
-func (*binaryClassAtomGroup) Schema() *schema.Class       { return schemaAtomGroup }
-
-var schemaAtomGroup = &schema.Class{
-	TypeID:  binaryIDAtomGroup,
-	Package: "service",
-	Name:    "AtomGroup",
-	Display: "AtomGroup",
-	Fields: []schema.Field{
-		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange", ID: (*AtomRange)(nil).Class().ID()}},
-		{Declared: "SubGroups", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}}},
 	},
 }
 
@@ -1143,7 +990,7 @@ func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) error {
 	return nil
 }
 func doSkipHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*AtomGroup)(nil)); err != nil {
+	if err := d.SkipValue((*atom.Group)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1169,7 +1016,7 @@ var schemaHierarchy = &schema.Class{
 	Name:    "Hierarchy",
 	Display: "Hierarchy",
 	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}},
+		{Declared: "Root", Type: &schema.Struct{Name: "atom.Group", ID: (*atom.Group)(nil).Class().ID()}},
 	},
 }
 

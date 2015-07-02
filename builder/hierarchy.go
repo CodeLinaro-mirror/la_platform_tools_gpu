@@ -58,7 +58,7 @@ func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logge
 		}
 	}
 
-	hierarchy := &service.Hierarchy{}
-	hierarchy.Root.Pack(root)
-	return hierarchy, nil
+	return &service.Hierarchy{
+		Root: root,
+	}, nil
 }

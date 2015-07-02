@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import schema "schema.api"
+import atom "atom.api"
 import memory "memory.api"
+import schema "schema.api"
 
 @handle type string ApiId
 @handle type string AtomStreamId
@@ -185,22 +186,7 @@ class AtomStream {
 
 // Hierarchy holds the root to an AtomGroup hierarchy.
 class Hierarchy {
-  AtomGroup Root
-}
-
-// AtomGroup represents a named, contiguous span of atoms with support for
-// sparse sub-groups. AtomGroups are used for expressing nested hierarchies of
-// atoms formed from frame boundaries, draw call boundaries and user markers.
-class AtomGroup {
-  string            Name      // Name of this group.
-  AtomRange         Range     // The span of atoms this group covers.
-  AtomGroup[]       SubGroups // The list of sub-groups within this group.
-}
-
-// AtomRange describes a span of atoms in an AtomStream.
-class AtomRange {
-  u64 First // The index of the first atom in the range.
-  u64 Count // The number of atoms in the range.
+  atom.Group Root
 }
 
 // MemoryInfo describes the state of a range of memory at a specific point in

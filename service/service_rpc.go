@@ -6,6 +6,7 @@
 package service
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -188,22 +189,7 @@ type AtomStream struct {
 // Class Hierarchy
 type Hierarchy struct {
 	binary.Generate
-	Root AtomGroup
-}
-
-// Class AtomGroup
-type AtomGroup struct {
-	binary.Generate
-	Name      string
-	Range     AtomRange
-	SubGroups []AtomGroup
-}
-
-// Class AtomRange
-type AtomRange struct {
-	binary.Generate
-	First uint64
-	Count uint64
+	Root atom.Group
 }
 
 // Class MemoryInfo

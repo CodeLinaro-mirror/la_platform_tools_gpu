@@ -300,8 +300,7 @@ func (c *ApplicationContext) LoadHierarchy() {
 			return
 		}
 		c.Run(func() {
-			c.hierarchy = atom.Group{}
-			root.Root.Unpack(&c.hierarchy)
+			c.hierarchy = root.Root
 			c.onHierarchyUpdated.Fire()
 			log.Infof(l, "Hierarchy loaded")
 		})

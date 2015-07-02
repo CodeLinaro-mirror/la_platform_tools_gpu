@@ -43,34 +43,3 @@ func (s AtomStream) List() (atom.List, error) {
 	}
 	return list, nil
 }
-
-// Pack packs the atom Group o into the RPC-friendly AtomGroup structure.
-func (g *AtomGroup) Pack(o atom.Group) {
-	g.Name = o.Name
-	g.Range.Pack(o.Range)
-	g.SubGroups = make([]AtomGroup, len(o.SubGroups))
-	for i := range g.SubGroups {
-		g.SubGroups[i].Pack(o.SubGroups[i])
-	}
-}
-
-// Unpack unpacks the RPC-friendly AtomGroup structure into the atom Group o.
-func (g AtomGroup) Unpack(o *atom.Group) {
-	o.Name = g.Name
-	g.Range.Unpack(&o.Range)
-	o.SubGroups = make(atom.GroupList, len(g.SubGroups))
-	for i := range o.SubGroups {
-		g.SubGroups[i].Unpack(&o.SubGroups[i])
-	}
-}
-
-// Pack packs the atom Range o into the RPC-friendly AtomRange structure.
-func (r *AtomRange) Pack(o atom.Range) {
-	r.First = uint64(o.First())
-	r.Count = uint64(o.Length())
-}
-
-// Unpack unpacks the RPC-friendly AtomRange structure into the atom Range o.
-func (r AtomRange) Unpack(o *atom.Range) {
-	(*o) = atom.Range{Start: atom.ID(r.First), End: atom.ID(r.First + r.Count)}
-}
