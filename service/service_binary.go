@@ -11,6 +11,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 var Namespace = registry.NewNamespace()
@@ -35,7 +36,6 @@ func init() {
 	Namespace.Add((*HierarchyId)(nil).Class())
 	Namespace.Add((*ImageInfo)(nil).Class())
 	Namespace.Add((*ImageInfoId)(nil).Class())
-	Namespace.Add((*MemoryRange)(nil).Class())
 	Namespace.Add((*MemoryInfo)(nil).Class())
 	Namespace.Add((*MemoryInfoId)(nil).Class())
 	Namespace.Add((*RenderSettings)(nil).Class())
@@ -93,15 +93,15 @@ func init() {
 var (
 	binaryIDApiId                       = binary.ID{0x20, 0x75, 0x65, 0xf1, 0x82, 0xb1, 0xe1, 0x6a, 0xcd, 0x10, 0x7f, 0x7f, 0x04, 0xee, 0x90, 0x07, 0xa3, 0x62, 0xd1, 0x41}
 	binaryIDAtomRange                   = binary.ID{0xfa, 0xb9, 0x1d, 0x40, 0x16, 0xc4, 0x26, 0x4d, 0x40, 0x03, 0xb1, 0x72, 0xc9, 0x2f, 0x2f, 0x77, 0xde, 0xa7, 0x96, 0x4a}
-	binaryIDAtomGroup                   = binary.ID{0x31, 0x4b, 0xc3, 0x9a, 0x0e, 0xb2, 0x00, 0x94, 0x68, 0xc7, 0xcd, 0xbe, 0x0b, 0x1a, 0x23, 0xf0, 0xf3, 0x75, 0x56, 0x1c}
+	binaryIDAtomGroup                   = binary.ID{0x7f, 0x4b, 0x66, 0xa6, 0x63, 0xce, 0x62, 0xd3, 0x7a, 0xda, 0x1e, 0xb5, 0x7f, 0xaf, 0xe6, 0x1e, 0x11, 0x89, 0xab, 0xcd}
 	binaryIDAtomRangeTimer              = binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}
-	binaryIDAtomStream                  = binary.ID{0xda, 0x04, 0xb7, 0x57, 0x79, 0xd1, 0x38, 0xd4, 0xa3, 0x75, 0x8f, 0x31, 0x43, 0x7b, 0xaf, 0x08, 0x0a, 0x6d, 0x57, 0x2c}
+	binaryIDAtomStream                  = binary.ID{0x5b, 0x7f, 0xd8, 0x32, 0x0a, 0x94, 0x66, 0x79, 0xe2, 0x9c, 0x28, 0xce, 0x04, 0x0f, 0xd1, 0x76, 0xc1, 0x06, 0x29, 0x02}
 	binaryIDAtomStreamId                = binary.ID{0xbe, 0x90, 0x3c, 0x40, 0x28, 0xee, 0x58, 0x7e, 0xab, 0x8c, 0xde, 0x44, 0x43, 0xb3, 0x94, 0x88, 0xff, 0x6b, 0xa0, 0x12}
 	binaryIDAtomTimer                   = binary.ID{0x7b, 0x64, 0x0c, 0x00, 0x25, 0xee, 0x98, 0xa3, 0x51, 0x7b, 0x1b, 0x0d, 0x98, 0x73, 0x20, 0x93, 0x12, 0x9a, 0x7d, 0xc4}
-	binaryIDBinary                      = binary.ID{0x9c, 0x60, 0xfa, 0x7c, 0xe1, 0x13, 0x87, 0x3d, 0x95, 0xc1, 0x76, 0xb8, 0x60, 0x56, 0xf7, 0x35, 0x5f, 0x98, 0x27, 0x8b}
+	binaryIDBinary                      = binary.ID{0x6b, 0xb3, 0x6c, 0x58, 0x20, 0xe5, 0x08, 0xbb, 0xa4, 0xb8, 0xdd, 0xab, 0xca, 0x65, 0xc2, 0xab, 0x98, 0xc0, 0x56, 0x37}
 	binaryIDBinaryId                    = binary.ID{0x71, 0x35, 0xf5, 0x97, 0xf9, 0x3a, 0x8a, 0x25, 0x88, 0xf6, 0x5b, 0xe6, 0x99, 0xf5, 0x1c, 0x9c, 0x97, 0xf5, 0x68, 0x3b}
 	binaryIDReportId                    = binary.ID{0xdd, 0x7a, 0xad, 0xfd, 0x05, 0xb4, 0x8f, 0x9a, 0xe6, 0xaa, 0x3c, 0xdf, 0x50, 0xa6, 0x23, 0x1e, 0x6a, 0xce, 0x2f, 0x63}
-	binaryIDCapture                     = binary.ID{0x2b, 0x42, 0xbd, 0x64, 0xd4, 0x24, 0x5c, 0xd1, 0x81, 0xf0, 0xf0, 0x83, 0x0d, 0xe0, 0x24, 0x4d, 0x21, 0x6e, 0xc7, 0x30}
+	binaryIDCapture                     = binary.ID{0x3b, 0x76, 0x57, 0xd7, 0xd8, 0x6a, 0x78, 0xd7, 0x1c, 0xdb, 0xdf, 0xde, 0xb0, 0x56, 0x83, 0xc1, 0xe2, 0x71, 0x8c, 0x7d}
 	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
@@ -109,26 +109,25 @@ var (
 	binaryIDHierarchyId                 = binary.ID{0xfd, 0x20, 0x19, 0xa0, 0xb5, 0xac, 0x49, 0xc7, 0x7d, 0x6e, 0xf8, 0x32, 0x6b, 0x78, 0x9f, 0xd7, 0x6d, 0xf0, 0x2c, 0xaf}
 	binaryIDImageInfo                   = binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}
 	binaryIDImageInfoId                 = binary.ID{0xb1, 0x03, 0x2c, 0x17, 0x12, 0xab, 0x40, 0x23, 0x1d, 0x01, 0xb9, 0x4b, 0x9b, 0x8c, 0x9d, 0x5a, 0x19, 0x45, 0xaf, 0x70}
-	binaryIDMemoryRange                 = binary.ID{0xfa, 0xc5, 0x84, 0x24, 0x6c, 0x1b, 0x47, 0x0e, 0xe5, 0xdb, 0x67, 0x29, 0xd8, 0xb1, 0x81, 0x3b, 0xfe, 0x53, 0x3a, 0x9d}
-	binaryIDMemoryInfo                  = binary.ID{0x3a, 0x32, 0x08, 0xed, 0x31, 0x12, 0x40, 0x27, 0x3d, 0xf8, 0xfe, 0xc1, 0x96, 0x80, 0xbf, 0xba, 0x0c, 0xc9, 0xc9, 0xa3}
+	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
 	binaryIDMemoryInfoId                = binary.ID{0x84, 0x64, 0x1a, 0xae, 0xde, 0x19, 0x1a, 0xa3, 0xae, 0xc7, 0x31, 0x9f, 0x5e, 0x46, 0xa0, 0x51, 0x54, 0xc5, 0x46, 0x15}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
 	binaryIDReportItem                  = binary.ID{0x85, 0x03, 0xdb, 0x94, 0x41, 0x27, 0x21, 0x23, 0xcc, 0x45, 0x1d, 0xae, 0xef, 0xff, 0xeb, 0x26, 0xc9, 0xf6, 0xa6, 0x20}
-	binaryIDReport                      = binary.ID{0xf5, 0xb8, 0xed, 0xda, 0x1f, 0x90, 0x92, 0x61, 0xc6, 0xc3, 0xcc, 0x70, 0xa5, 0x96, 0x6f, 0x6c, 0xdc, 0xce, 0xac, 0xa2}
+	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
 	binaryIDStateId                     = binary.ID{0x1f, 0xba, 0xf7, 0x1e, 0x2c, 0x7a, 0x2b, 0x93, 0xbb, 0x46, 0x0b, 0x5c, 0x82, 0xa5, 0x27, 0xdf, 0xd8, 0xe7, 0xdc, 0xb1}
-	binaryIDTimingInfo                  = binary.ID{0x19, 0xd8, 0xe7, 0xdb, 0xe7, 0xb2, 0xdc, 0x2e, 0x73, 0x08, 0xc2, 0x97, 0x2e, 0x68, 0xb9, 0x92, 0x52, 0x4a, 0x0a, 0xd7}
+	binaryIDTimingInfo                  = binary.ID{0xf8, 0xfe, 0x88, 0x50, 0x3d, 0x72, 0xb3, 0x55, 0xb0, 0x01, 0x73, 0xfe, 0x8a, 0x82, 0xbd, 0x1e, 0xb7, 0xc9, 0x5b, 0xb1}
 	binaryIDTimingInfoId                = binary.ID{0x71, 0x9c, 0x16, 0xeb, 0x4e, 0x5f, 0xa1, 0x6b, 0x71, 0x0c, 0xae, 0xbc, 0x5a, 0xe8, 0x6c, 0x29, 0x97, 0xaa, 0x52, 0x0f}
 	binaryIDcallGetCaptures             = binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
 	binaryIDcallGetFramebufferColor     = binary.ID{0x05, 0xfd, 0x78, 0xff, 0x3d, 0x76, 0x07, 0x2d, 0xee, 0x91, 0x3b, 0xf1, 0x99, 0x83, 0x1e, 0x4f, 0xaf, 0xd3, 0xca, 0x48}
 	binaryIDcallGetFramebufferDepth     = binary.ID{0xdd, 0x68, 0xbd, 0xbc, 0x24, 0x0a, 0x1a, 0x1c, 0xa5, 0xa6, 0xfc, 0xe2, 0x64, 0x38, 0xac, 0x67, 0xa6, 0x86, 0x64, 0x5f}
 	binaryIDcallGetHierarchy            = binary.ID{0xbf, 0x39, 0x53, 0xd4, 0xc3, 0xac, 0x61, 0x0a, 0xce, 0x6c, 0x72, 0x04, 0x39, 0xcd, 0x5f, 0xe5, 0x92, 0xd5, 0xf6, 0xa6}
-	binaryIDcallGetMemoryInfo           = binary.ID{0x89, 0xa1, 0x6f, 0x75, 0x3d, 0x07, 0xb5, 0x9f, 0x0e, 0x20, 0xad, 0x27, 0xfd, 0xe8, 0x16, 0x50, 0x59, 0x24, 0x16, 0xb3}
+	binaryIDcallGetMemoryInfo           = binary.ID{0x81, 0x0d, 0xda, 0xc7, 0xcf, 0xfa, 0x3b, 0x58, 0xe5, 0x0c, 0x0c, 0x2f, 0xa2, 0x87, 0x7a, 0xd3, 0x4c, 0x1b, 0x79, 0xaa}
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetState                = binary.ID{0xe1, 0xe2, 0xeb, 0x49, 0xbc, 0x60, 0x53, 0x0c, 0xd5, 0xd4, 0x3c, 0x15, 0x0e, 0x27, 0xf4, 0x8b, 0x9c, 0xbf, 0xd3, 0xd6}
 	binaryIDcallGetTimingInfo           = binary.ID{0xb1, 0x32, 0x24, 0x67, 0x2e, 0xb9, 0x1f, 0x2f, 0x72, 0xf3, 0x6b, 0x00, 0x23, 0x1f, 0xd4, 0x1a, 0x57, 0x59, 0x22, 0x29}
-	binaryIDcallImport                  = binary.ID{0x35, 0x11, 0x23, 0xbb, 0xa5, 0x10, 0x7a, 0x10, 0x7d, 0x46, 0x1d, 0x0b, 0xfc, 0x3c, 0x4e, 0x20, 0x68, 0x41, 0x1e, 0xb5}
-	binaryIDcallPrerenderFramebuffers   = binary.ID{0x2f, 0x48, 0x59, 0x5f, 0xfc, 0xbf, 0xee, 0x9f, 0xfd, 0x8a, 0x56, 0x4b, 0xab, 0x90, 0xb7, 0xab, 0xeb, 0x38, 0xd1, 0x85}
+	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
+	binaryIDcallPrerenderFramebuffers   = binary.ID{0x08, 0x3f, 0x02, 0x12, 0x24, 0x5a, 0x40, 0xd1, 0x11, 0x37, 0x09, 0x4e, 0xcf, 0x9e, 0x22, 0x92, 0xb8, 0x86, 0xbf, 0x9f}
 	binaryIDcallReplaceAtom             = binary.ID{0x03, 0x63, 0xfe, 0x64, 0x29, 0xd4, 0x97, 0xd9, 0xb2, 0x4e, 0xcb, 0x20, 0x1a, 0x46, 0xf6, 0xe6, 0x11, 0xd7, 0x96, 0x7d}
 	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
 	binaryIDcallResolveBinary           = binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}
@@ -140,13 +139,13 @@ var (
 	binaryIDcallResolveReport           = binary.ID{0xe6, 0x93, 0x8e, 0x01, 0x8f, 0x31, 0xdc, 0x32, 0x93, 0x8e, 0x5c, 0xc1, 0xb3, 0x56, 0x46, 0x57, 0x32, 0x9f, 0xa4, 0xc1}
 	binaryIDcallResolveState            = binary.ID{0x9d, 0xc7, 0x43, 0xca, 0x6b, 0x5a, 0x32, 0x68, 0x67, 0xe7, 0xac, 0x8e, 0x4a, 0xf4, 0x92, 0x65, 0x48, 0xf0, 0xd6, 0xf2}
 	binaryIDcallResolveTimingInfo       = binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}
-	binaryIDresultGetCaptures           = binary.ID{0xb0, 0x3e, 0x04, 0x4d, 0x32, 0xfd, 0x8f, 0x93, 0x5a, 0xfa, 0x30, 0x09, 0x9e, 0xb6, 0x9b, 0x5d, 0x02, 0x93, 0xe4, 0x7b}
-	binaryIDresultGetDevices            = binary.ID{0x7e, 0xc1, 0x80, 0xe3, 0x79, 0x1d, 0xea, 0x0d, 0x62, 0x02, 0x58, 0x6a, 0xeb, 0xa5, 0x24, 0x98, 0x30, 0x8e, 0x46, 0xe8}
+	binaryIDresultGetCaptures           = binary.ID{0x6e, 0x42, 0x42, 0x6b, 0x9b, 0x47, 0xf5, 0xfc, 0x53, 0x66, 0xa1, 0x5a, 0x6e, 0x5c, 0x60, 0xb3, 0x14, 0x0b, 0xf6, 0x7b}
+	binaryIDresultGetDevices            = binary.ID{0x94, 0x2a, 0xed, 0x69, 0xb7, 0x1a, 0xd3, 0xb0, 0x44, 0xab, 0x25, 0x38, 0xfc, 0x81, 0xbc, 0xd2, 0x19, 0x65, 0x1e, 0xfe}
 	binaryIDresultGetFramebufferColor   = binary.ID{0xd1, 0xf2, 0x9c, 0x48, 0xeb, 0xb0, 0x4e, 0x4e, 0x82, 0xcf, 0xac, 0xe9, 0xc6, 0x71, 0x27, 0x04, 0x57, 0x7e, 0xe4, 0x25}
 	binaryIDresultGetFramebufferDepth   = binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}
 	binaryIDresultGetHierarchy          = binary.ID{0xff, 0x28, 0xe0, 0x58, 0x97, 0xa9, 0x5e, 0x1b, 0x62, 0xe1, 0xa0, 0xef, 0x05, 0xea, 0x3e, 0x62, 0x5d, 0x17, 0xaa, 0x47}
 	binaryIDresultGetMemoryInfo         = binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}
-	binaryIDresultGetSchema             = binary.ID{0x37, 0x2b, 0x50, 0x71, 0xb3, 0xd2, 0xb9, 0x05, 0x80, 0x14, 0xb3, 0x34, 0x9e, 0x40, 0x96, 0x81, 0x44, 0x1e, 0x30, 0xdc}
+	binaryIDresultGetSchema             = binary.ID{0x4b, 0x2c, 0xcd, 0x29, 0xe6, 0x47, 0xe0, 0xec, 0xee, 0xf4, 0x24, 0x7f, 0xa2, 0xf3, 0x77, 0x38, 0x45, 0x33, 0x80, 0x0f}
 	binaryIDresultGetState              = binary.ID{0xd3, 0xea, 0xb8, 0x0e, 0x0f, 0x3b, 0x10, 0xfe, 0xe1, 0xbc, 0x3e, 0xb5, 0xcf, 0x7c, 0xbb, 0x86, 0x54, 0x08, 0x25, 0x37}
 	binaryIDresultGetTimingInfo         = binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}
 	binaryIDresultImport                = binary.ID{0x1e, 0x86, 0x40, 0xb0, 0xc2, 0xb8, 0xa5, 0xa1, 0xf3, 0xc8, 0x51, 0x29, 0x87, 0x4d, 0x0c, 0xd9, 0x49, 0xd8, 0xbe, 0xed}
@@ -310,7 +309,7 @@ func doDecodeAtomGroup(d binary.Decoder, o *AtomGroup) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SubGroups = make(AtomGroupArray, count)
+		o.SubGroups = make([]AtomGroup, count)
 		for i := range o.SubGroups {
 			if err := d.Value(&o.SubGroups[i]); err != nil {
 				return err
@@ -360,7 +359,7 @@ var schemaAtomGroup = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "AtomRange", ID: (*AtomRange)(nil).Class().ID()}},
-		{Declared: "SubGroups", Type: &schema.Slice{Alias: "AtomGroupArray", ValueType: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}}},
+		{Declared: "SubGroups", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomGroup", ID: (*AtomGroup)(nil).Class().ID()}}},
 	},
 }
 
@@ -456,7 +455,7 @@ func doDecodeAtomStream(d binary.Decoder, o *AtomStream) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Data = make(U8Array, count)
+		o.Data = make([]uint8, count)
 		if err := d.Data(o.Data); err != nil {
 			return err
 		}
@@ -494,7 +493,7 @@ var schemaAtomStream = &schema.Class{
 	Name:    "AtomStream",
 	Display: "AtomStream",
 	Fields: []schema.Field{
-		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -628,7 +627,7 @@ func doDecodeBinary(d binary.Decoder, o *Binary) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Data = make(U8Array, count)
+		o.Data = make([]uint8, count)
 		if err := d.Data(o.Data); err != nil {
 			return err
 		}
@@ -666,7 +665,7 @@ var schemaBinary = &schema.Class{
 	Name:    "Binary",
 	Display: "Binary",
 	Fields: []schema.Field{
-		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -810,7 +809,7 @@ func doDecodeCapture(d binary.Decoder, o *Capture) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Apis = make(ApiIdArray, count)
+		o.Apis = make([]ApiId, count)
 		for i := range o.Apis {
 			if err := d.Value(&o.Apis[i]); err != nil {
 				return err
@@ -864,7 +863,7 @@ var schemaCapture = &schema.Class{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
 		{Declared: "Report", Type: &schema.Struct{Name: "ReportId", ID: (*ReportId)(nil).Class().ID()}},
-		{Declared: "Apis", Type: &schema.Slice{Alias: "ApiIdArray", ValueType: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}}},
 	},
 }
 
@@ -1358,68 +1357,6 @@ var schemaImageInfoId = &schema.Class{
 	},
 }
 
-type binaryClassMemoryRange struct{}
-
-func (*MemoryRange) Class() binary.Class {
-	return (*binaryClassMemoryRange)(nil)
-}
-func doEncodeMemoryRange(e binary.Encoder, o *MemoryRange) error {
-	if err := e.Uint64(o.Base); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Size); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMemoryRange(d binary.Decoder, o *MemoryRange) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = uint64(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Size = uint64(obj)
-	}
-	return nil
-}
-func doSkipMemoryRange(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMemoryRange) ID() binary.ID      { return binaryIDMemoryRange }
-func (*binaryClassMemoryRange) New() binary.Object { return &MemoryRange{} }
-func (*binaryClassMemoryRange) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMemoryRange(e, obj.(*MemoryRange))
-}
-func (*binaryClassMemoryRange) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &MemoryRange{}
-	return obj, doDecodeMemoryRange(d, obj)
-}
-func (*binaryClassMemoryRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMemoryRange(d, obj.(*MemoryRange))
-}
-func (*binaryClassMemoryRange) Skip(d binary.Decoder) error { return doSkipMemoryRange(d) }
-func (*binaryClassMemoryRange) Schema() *schema.Class       { return schemaMemoryRange }
-
-var schemaMemoryRange = &schema.Class{
-	TypeID:  binaryIDMemoryRange,
-	Package: "service",
-	Name:    "MemoryRange",
-	Display: "MemoryRange",
-	Fields: []schema.Field{
-		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
-
 type binaryClassMemoryInfo struct{}
 
 func (*MemoryInfo) Class() binary.Class {
@@ -1462,7 +1399,7 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Data = make(U8Array, count)
+		o.Data = make([]uint8, count)
 		if err := d.Data(o.Data); err != nil {
 			return err
 		}
@@ -1470,7 +1407,7 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Reads = make(MemoryRangeArray, count)
+		o.Reads = make(memory.RangeList, count)
 		for i := range o.Reads {
 			if err := d.Value(&o.Reads[i]); err != nil {
 				return err
@@ -1480,7 +1417,7 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Writes = make(MemoryRangeArray, count)
+		o.Writes = make(memory.RangeList, count)
 		for i := range o.Writes {
 			if err := d.Value(&o.Writes[i]); err != nil {
 				return err
@@ -1490,7 +1427,7 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Observed = make(MemoryRangeArray, count)
+		o.Observed = make(memory.RangeList, count)
 		for i := range o.Observed {
 			if err := d.Value(&o.Observed[i]); err != nil {
 				return err
@@ -1511,7 +1448,7 @@ func doSkipMemoryInfo(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*MemoryRange)(nil)); err != nil {
+			if err := d.SkipValue((*memory.Range)(nil)); err != nil {
 				return err
 			}
 		}
@@ -1520,7 +1457,7 @@ func doSkipMemoryInfo(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*MemoryRange)(nil)); err != nil {
+			if err := d.SkipValue((*memory.Range)(nil)); err != nil {
 				return err
 			}
 		}
@@ -1529,7 +1466,7 @@ func doSkipMemoryInfo(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*MemoryRange)(nil)); err != nil {
+			if err := d.SkipValue((*memory.Range)(nil)); err != nil {
 				return err
 			}
 		}
@@ -1557,10 +1494,10 @@ var schemaMemoryInfo = &schema.Class{
 	Name:    "MemoryInfo",
 	Display: "MemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		{Declared: "Reads", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
-		{Declared: "Writes", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
-		{Declared: "Observed", Type: &schema.Slice{Alias: "MemoryRangeArray", ValueType: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Reads", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
+		{Declared: "Writes", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
+		{Declared: "Observed", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
 	},
 }
 
@@ -1782,7 +1719,7 @@ func doDecodeReport(d binary.Decoder, o *Report) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Items = make(ReportItemArray, count)
+		o.Items = make([]ReportItem, count)
 		for i := range o.Items {
 			if err := d.Value(&o.Items[i]); err != nil {
 				return err
@@ -1824,7 +1761,7 @@ var schemaReport = &schema.Class{
 	Name:    "Report",
 	Display: "Report",
 	Fields: []schema.Field{
-		{Declared: "Items", Type: &schema.Slice{Alias: "ReportItemArray", ValueType: &schema.Struct{Name: "ReportItem", ID: (*ReportItem)(nil).Class().ID()}}},
+		{Declared: "Items", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ReportItem", ID: (*ReportItem)(nil).Class().ID()}}},
 	},
 }
 
@@ -1914,7 +1851,7 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PerCommand = make(AtomTimerArray, count)
+		o.PerCommand = make([]AtomTimer, count)
 		for i := range o.PerCommand {
 			if err := d.Value(&o.PerCommand[i]); err != nil {
 				return err
@@ -1924,7 +1861,7 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PerDrawCall = make(AtomRangeTimerArray, count)
+		o.PerDrawCall = make([]AtomRangeTimer, count)
 		for i := range o.PerDrawCall {
 			if err := d.Value(&o.PerDrawCall[i]); err != nil {
 				return err
@@ -1934,7 +1871,7 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PerFrame = make(AtomRangeTimerArray, count)
+		o.PerFrame = make([]AtomRangeTimer, count)
 		for i := range o.PerFrame {
 			if err := d.Value(&o.PerFrame[i]); err != nil {
 				return err
@@ -1994,9 +1931,9 @@ var schemaTimingInfo = &schema.Class{
 	Name:    "TimingInfo",
 	Display: "TimingInfo",
 	Fields: []schema.Field{
-		{Declared: "PerCommand", Type: &schema.Slice{Alias: "AtomTimerArray", ValueType: &schema.Struct{Name: "AtomTimer", ID: (*AtomTimer)(nil).Class().ID()}}},
-		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
-		{Declared: "PerFrame", Type: &schema.Slice{Alias: "AtomRangeTimerArray", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
+		{Declared: "PerCommand", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomTimer", ID: (*AtomTimer)(nil).Class().ID()}}},
+		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
+		{Declared: "PerFrame", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
 	},
 }
 
@@ -2388,7 +2325,7 @@ func doSkipcallGetMemoryInfo(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*MemoryRange)(nil)); err != nil {
+	if err := d.SkipValue((*memory.Range)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2416,7 +2353,7 @@ var schemacallGetMemoryInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 		{Declared: "after", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "rng", Type: &schema.Struct{Name: "MemoryRange", ID: (*MemoryRange)(nil).Class().ID()}},
+		{Declared: "rng", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
 	},
 }
 
@@ -2623,7 +2560,7 @@ func doDecodecallImport(d binary.Decoder, o *callImport) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Data = make(U8Array, count)
+		o.Data = make([]uint8, count)
 		if err := d.Data(o.Data); err != nil {
 			return err
 		}
@@ -2665,7 +2602,7 @@ var schemacallImport = &schema.Class{
 	Display: "callImport",
 	Fields: []schema.Field{
 		{Declared: "name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Data", Type: &schema.Slice{Alias: "U8Array", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
 	},
 }
 
@@ -2723,7 +2660,7 @@ func doDecodecallPrerenderFramebuffers(d binary.Decoder, o *callPrerenderFramebu
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.atomIds = make(U64Array, count)
+		o.atomIds = make([]uint64, count)
 		for i := range o.atomIds {
 			if obj, err := d.Uint64(); err != nil {
 				return err
@@ -2791,7 +2728,7 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 		{Declared: "api", Type: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}},
 		{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "atomIds", Type: &schema.Slice{Alias: "U64Array", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		{Declared: "atomIds", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 	},
 }
 
@@ -3375,7 +3312,7 @@ func doDecoderesultGetCaptures(d binary.Decoder, o *resultGetCaptures) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.value = make(CaptureIdArray, count)
+		o.value = make([]CaptureId, count)
 		for i := range o.value {
 			if err := d.Value(&o.value[i]); err != nil {
 				return err
@@ -3417,7 +3354,7 @@ var schemaresultGetCaptures = &schema.Class{
 	Name:    "resultGetCaptures",
 	Display: "resultGetCaptures",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "CaptureIdArray", ValueType: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}}},
 	},
 }
 
@@ -3441,7 +3378,7 @@ func doDecoderesultGetDevices(d binary.Decoder, o *resultGetDevices) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.value = make(DeviceIdArray, count)
+		o.value = make([]DeviceId, count)
 		for i := range o.value {
 			if err := d.Value(&o.value[i]); err != nil {
 				return err
@@ -3483,7 +3420,7 @@ var schemaresultGetDevices = &schema.Class{
 	Name:    "resultGetDevices",
 	Display: "resultGetDevices",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "DeviceIdArray", ValueType: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}}},
 	},
 }
 
@@ -3713,7 +3650,7 @@ func doDecoderesultGetSchema(d binary.Decoder, o *resultGetSchema) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.value = make(ClassPtrArray, count)
+		o.value = make([]*schema.Class, count)
 		for i := range o.value {
 			if obj, err := d.Object(); err != nil {
 				return err
@@ -3759,7 +3696,7 @@ var schemaresultGetSchema = &schema.Class{
 	Name:    "resultGetSchema",
 	Display: "resultGetSchema",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "ClassPtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class", ID: (*schema.Class)(nil).Class().ID()}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "schema.Class", ID: (*schema.Class)(nil).Class().ID()}}}},
 	},
 }
 

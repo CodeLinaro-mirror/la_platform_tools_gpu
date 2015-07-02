@@ -5,7 +5,11 @@
 
 package service
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/memory"
+)
 
 func (c callGetSchema) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetSchema()")
@@ -212,43 +216,6 @@ func (h TimingInfoId) Valid() bool {
 	return h.ID.Valid()
 }
 
-func (a ApiIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiIdˢ", len(a))
-}
-func (a AtomGroupArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomGroupˢ", len(a))
-}
-func (a AtomRangeTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomRangeTimerˢ", len(a))
-}
-func (a AtomTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomTimerˢ", len(a))
-}
-func (a CaptureIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]CaptureIdˢ", len(a))
-}
-func (a ClassArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]Classˢ", len(a))
-}
-func (a ClassPtrArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]Classᵖˢ", len(a))
-}
-func (a DeviceIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]DeviceIdˢ", len(a))
-}
-func (a MemoryRangeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]MemoryRangeˢ", len(a))
-}
-func (a ReportItemArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ReportItemˢ", len(a))
-}
-func (a U64Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U64ˢ", len(a))
-}
-func (a U8Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U8ˢ", len(a))
-}
-
 func (i Severity) IsEmergency() bool           { return i == SeverityEmergency }
 func (i Severity) IsAlert() bool               { return i == SeverityAlert }
 func (i Severity) IsCritical() bool            { return i == SeverityCritical }
@@ -304,7 +271,7 @@ func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
 	Report ReportId,
-	Apis ApiIdArray,
+	Apis []ApiId,
 ) *Capture {
 	return &Capture{
 		Name:   Name,
@@ -317,17 +284,17 @@ func CreateCapture(
 func (c *Capture) GetName() string        { return c.Name }
 func (c *Capture) GetAtoms() AtomStreamId { return c.Atoms }
 func (c *Capture) GetReport() ReportId    { return c.Report }
-func (c *Capture) GetApis() ApiIdArray    { return c.Apis }
+func (c *Capture) GetApis() []ApiId       { return c.Apis }
 
 func CreateReport(
-	Items ReportItemArray,
+	Items []ReportItem,
 ) *Report {
 	return &Report{
 		Items: Items,
 	}
 }
 
-func (c *Report) GetItems() ReportItemArray { return c.Items }
+func (c *Report) GetItems() []ReportItem { return c.Items }
 
 func CreateReportItem(
 	Severity Severity,
@@ -346,24 +313,24 @@ func (c *ReportItem) GetMessage() string    { return c.Message }
 func (c *ReportItem) GetAtom() uint64       { return c.Atom }
 
 func CreateBinary(
-	Data U8Array,
+	Data []uint8,
 ) *Binary {
 	return &Binary{
 		Data: Data,
 	}
 }
 
-func (c *Binary) GetData() U8Array { return c.Data }
+func (c *Binary) GetData() []uint8 { return c.Data }
 
 func CreateAtomStream(
-	Data U8Array,
+	Data []uint8,
 ) *AtomStream {
 	return &AtomStream{
 		Data: Data,
 	}
 }
 
-func (c *AtomStream) GetData() U8Array { return c.Data }
+func (c *AtomStream) GetData() []uint8 { return c.Data }
 
 func CreateHierarchy(
 	Root AtomGroup,
@@ -378,7 +345,7 @@ func (c *Hierarchy) GetRoot() AtomGroup { return c.Root }
 func CreateAtomGroup(
 	Name string,
 	Range AtomRange,
-	SubGroups AtomGroupArray,
+	SubGroups []AtomGroup,
 ) *AtomGroup {
 	return &AtomGroup{
 		Name:      Name,
@@ -387,9 +354,9 @@ func CreateAtomGroup(
 	}
 }
 
-func (c *AtomGroup) GetName() string              { return c.Name }
-func (c *AtomGroup) GetRange() AtomRange          { return c.Range }
-func (c *AtomGroup) GetSubGroups() AtomGroupArray { return c.SubGroups }
+func (c *AtomGroup) GetName() string           { return c.Name }
+func (c *AtomGroup) GetRange() AtomRange       { return c.Range }
+func (c *AtomGroup) GetSubGroups() []AtomGroup { return c.SubGroups }
 
 func CreateAtomRange(
 	First uint64,
@@ -405,10 +372,10 @@ func (c *AtomRange) GetFirst() uint64 { return c.First }
 func (c *AtomRange) GetCount() uint64 { return c.Count }
 
 func CreateMemoryInfo(
-	Data U8Array,
-	Reads MemoryRangeArray,
-	Writes MemoryRangeArray,
-	Observed MemoryRangeArray,
+	Data []uint8,
+	Reads memory.RangeList,
+	Writes memory.RangeList,
+	Observed memory.RangeList,
 ) *MemoryInfo {
 	return &MemoryInfo{
 		Data:     Data,
@@ -418,23 +385,10 @@ func CreateMemoryInfo(
 	}
 }
 
-func (c *MemoryInfo) GetData() U8Array              { return c.Data }
-func (c *MemoryInfo) GetReads() MemoryRangeArray    { return c.Reads }
-func (c *MemoryInfo) GetWrites() MemoryRangeArray   { return c.Writes }
-func (c *MemoryInfo) GetObserved() MemoryRangeArray { return c.Observed }
-
-func CreateMemoryRange(
-	Base uint64,
-	Size uint64,
-) *MemoryRange {
-	return &MemoryRange{
-		Base: Base,
-		Size: Size,
-	}
-}
-
-func (c *MemoryRange) GetBase() uint64 { return c.Base }
-func (c *MemoryRange) GetSize() uint64 { return c.Size }
+func (c *MemoryInfo) GetData() []uint8              { return c.Data }
+func (c *MemoryInfo) GetReads() memory.RangeList    { return c.Reads }
+func (c *MemoryInfo) GetWrites() memory.RangeList   { return c.Writes }
+func (c *MemoryInfo) GetObserved() memory.RangeList { return c.Observed }
 
 func CreateImageInfo(
 	Format ImageFormat,
@@ -456,9 +410,9 @@ func (c *ImageInfo) GetHeight() uint32      { return c.Height }
 func (c *ImageInfo) GetData() BinaryId      { return c.Data }
 
 func CreateTimingInfo(
-	PerCommand AtomTimerArray,
-	PerDrawCall AtomRangeTimerArray,
-	PerFrame AtomRangeTimerArray,
+	PerCommand []AtomTimer,
+	PerDrawCall []AtomRangeTimer,
+	PerFrame []AtomRangeTimer,
 ) *TimingInfo {
 	return &TimingInfo{
 		PerCommand:  PerCommand,
@@ -467,9 +421,9 @@ func CreateTimingInfo(
 	}
 }
 
-func (c *TimingInfo) GetPerCommand() AtomTimerArray       { return c.PerCommand }
-func (c *TimingInfo) GetPerDrawCall() AtomRangeTimerArray { return c.PerDrawCall }
-func (c *TimingInfo) GetPerFrame() AtomRangeTimerArray    { return c.PerFrame }
+func (c *TimingInfo) GetPerCommand() []AtomTimer       { return c.PerCommand }
+func (c *TimingInfo) GetPerDrawCall() []AtomRangeTimer { return c.PerDrawCall }
+func (c *TimingInfo) GetPerFrame() []AtomRangeTimer    { return c.PerFrame }
 
 func CreateAtomTimer(
 	AtomId uint64,

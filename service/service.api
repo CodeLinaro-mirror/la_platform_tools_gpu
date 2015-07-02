@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import schema "schema.api"
+import memory "memory.api"
 
 @handle type string ApiId
 @handle type string AtomStreamId
@@ -59,7 +60,7 @@ cmd HierarchyId GetHierarchy(CaptureId capture)
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and range, immediately following the atom
 // after.
-cmd MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, MemoryRange rng)
+cmd MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, memory.Range rng)
 { return ? }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
@@ -205,16 +206,10 @@ class AtomRange {
 // MemoryInfo describes the state of a range of memory at a specific point in
 // the atom stream.
 class MemoryInfo {
-  u8[]           Data     // The memory values for the span.
-  MemoryRange[]  Reads    // The Data-relative ranges that were read-from at the specified atom.
-  MemoryRange[]  Writes   // The Data-relative ranges that were written-to at the specified atom.
-  MemoryRange[]  Observed // The Data-relative ranges that have been observed.
-}
-
-// MemoryRange describes a range of memory.
-class MemoryRange {
-  u64 Base // The pointer to the first byte in the memory range.
-  u64 Size // The size in bytes of the memory range.
+  u8[]             Data     // The memory values for the span.
+  memory.RangeList Reads    // The Data-relative ranges that were read-from at the specified atom.
+  memory.RangeList Writes   // The Data-relative ranges that were written-to at the specified atom.
+  memory.RangeList Observed // The Data-relative ranges that have been observed.
 }
 
 // ImageInfo describes an image, such as a texture or framebuffer at a specific

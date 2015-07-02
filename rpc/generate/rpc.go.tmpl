@@ -39,10 +39,6 @@
     {{end}}
   {{end}}
 ¶
-  {{range $_, $a := $.api.Slices}}
-    {{Macro (print "Array" $.role) $a}}
-  {{end}}
-¶
   {{range $_, $e := $.api.Enums}}
     {{Macro (print "Enum" $.role) $e}}
   {{end}}
@@ -325,31 +321,6 @@ func (h {{$.Name}}) Valid() bool {
 
 {{define "PseudonymExtra"}}{{end}}
 {{define "PseudonymHelpers"}}{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the definition of an array.
--------------------------------------------------------------------------------
-*/}}
-{{define "Array"}}
-  {{AssertType $ "Slice"}}
-
-  // Array {{$.Name}}
-  type {{Node "Type" $}} []{{Node "Type" $.To}}
-{{end}}
-
-{{define "ArrayExtra"}}
-  {{AssertType $ "Slice"}}
-{{end}}
-
-{{define "ArrayHelpers"}}
-  {{AssertType $ "Slice"}}
-
-  func (a {{Node "Type" $}}) Format(f fmt.State, c rune) {
-    fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
-  }
-{{end}}
 
 
 {{/*

@@ -9,20 +9,21 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 type RPC interface {
-	GetSchema(l log.Logger) (ClassPtrArray, error)
-	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
-	GetCaptures(l log.Logger) (CaptureIdArray, error)
-	GetDevices(l log.Logger) (DeviceIdArray, error)
+	GetSchema(l log.Logger) ([]*schema.Class, error)
+	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
+	GetCaptures(l log.Logger) ([]CaptureId, error)
+	GetDevices(l log.Logger) ([]DeviceId, error)
 	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
-	GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (MemoryInfoId, error)
+	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
-	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array, l log.Logger) (BinaryId, error)
+	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
@@ -103,42 +104,6 @@ type TimingInfoId struct {
 }
 type State binary.Object
 
-// Array ApiIdˢ
-type ApiIdArray []ApiId
-
-// Array AtomGroupˢ
-type AtomGroupArray []AtomGroup
-
-// Array AtomRangeTimerˢ
-type AtomRangeTimerArray []AtomRangeTimer
-
-// Array AtomTimerˢ
-type AtomTimerArray []AtomTimer
-
-// Array CaptureIdˢ
-type CaptureIdArray []CaptureId
-
-// Array Classˢ
-type ClassArray []schema.Class
-
-// Array Classᵖˢ
-type ClassPtrArray []*schema.Class
-
-// Array DeviceIdˢ
-type DeviceIdArray []DeviceId
-
-// Array MemoryRangeˢ
-type MemoryRangeArray []MemoryRange
-
-// Array ReportItemˢ
-type ReportItemArray []ReportItem
-
-// Array U64ˢ
-type U64Array []uint64
-
-// Array U8ˢ
-type U8Array []uint8
-
 // Enum Severity
 type Severity int
 
@@ -191,13 +156,13 @@ type Capture struct {
 	Name   string
 	Atoms  AtomStreamId
 	Report ReportId
-	Apis   ApiIdArray
+	Apis   []ApiId
 }
 
 // Class Report
 type Report struct {
 	binary.Generate
-	Items ReportItemArray
+	Items []ReportItem
 }
 
 // Class ReportItem
@@ -211,13 +176,13 @@ type ReportItem struct {
 // Class Binary
 type Binary struct {
 	binary.Generate
-	Data U8Array
+	Data []uint8
 }
 
 // Class AtomStream
 type AtomStream struct {
 	binary.Generate
-	Data U8Array
+	Data []uint8
 }
 
 // Class Hierarchy
@@ -231,7 +196,7 @@ type AtomGroup struct {
 	binary.Generate
 	Name      string
 	Range     AtomRange
-	SubGroups AtomGroupArray
+	SubGroups []AtomGroup
 }
 
 // Class AtomRange
@@ -244,17 +209,10 @@ type AtomRange struct {
 // Class MemoryInfo
 type MemoryInfo struct {
 	binary.Generate
-	Data     U8Array
-	Reads    MemoryRangeArray
-	Writes   MemoryRangeArray
-	Observed MemoryRangeArray
-}
-
-// Class MemoryRange
-type MemoryRange struct {
-	binary.Generate
-	Base uint64
-	Size uint64
+	Data     []uint8
+	Reads    memory.RangeList
+	Writes   memory.RangeList
+	Observed memory.RangeList
 }
 
 // Class ImageInfo
@@ -269,9 +227,9 @@ type ImageInfo struct {
 // Class TimingInfo
 type TimingInfo struct {
 	binary.Generate
-	PerCommand  AtomTimerArray
-	PerDrawCall AtomRangeTimerArray
-	PerFrame    AtomRangeTimerArray
+	PerCommand  []AtomTimer
+	PerDrawCall []AtomRangeTimer
+	PerFrame    []AtomRangeTimer
 }
 
 // Class AtomTimer

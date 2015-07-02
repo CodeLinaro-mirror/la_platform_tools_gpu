@@ -5,7 +5,11 @@
 
 package service
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/memory"
+)
 
 // Call GetSchema
 type callGetSchema struct {
@@ -15,14 +19,14 @@ type callGetSchema struct {
 // Result GetSchema
 type resultGetSchema struct {
 	binary.Generate
-	value ClassPtrArray
+	value []*schema.Class
 }
 
 // Call Import
 type callImport struct {
 	binary.Generate
 	name string
-	Data U8Array
+	Data []uint8
 }
 
 // Result Import
@@ -39,7 +43,7 @@ type callGetCaptures struct {
 // Result GetCaptures
 type resultGetCaptures struct {
 	binary.Generate
-	value CaptureIdArray
+	value []CaptureId
 }
 
 // Call GetDevices
@@ -50,7 +54,7 @@ type callGetDevices struct {
 // Result GetDevices
 type resultGetDevices struct {
 	binary.Generate
-	value DeviceIdArray
+	value []DeviceId
 }
 
 // Call GetState
@@ -84,7 +88,7 @@ type callGetMemoryInfo struct {
 	binary.Generate
 	capture CaptureId
 	after   uint64
-	rng     MemoryRange
+	rng     memory.Range
 }
 
 // Result GetMemoryInfo
@@ -146,7 +150,7 @@ type callPrerenderFramebuffers struct {
 	api     ApiId
 	width   uint32
 	height  uint32
-	atomIds U64Array
+	atomIds []uint64
 }
 
 // Result PrerenderFramebuffers

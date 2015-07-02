@@ -53,10 +53,6 @@ const rpc_go_tmpl = `{{/*
     {{end}}
   {{end}}
 ¶
-  {{range $_, $a := $.api.Slices}}
-    {{Macro (print "Array" $.role) $a}}
-  {{end}}
-¶
   {{range $_, $e := $.api.Enums}}
     {{Macro (print "Enum" $.role) $e}}
   {{end}}
@@ -339,31 +335,6 @@ func (h {{$.Name}}) Valid() bool {
 
 {{define "PseudonymExtra"}}{{end}}
 {{define "PseudonymHelpers"}}{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the definition of an array.
--------------------------------------------------------------------------------
-*/}}
-{{define "Array"}}
-  {{AssertType $ "Slice"}}
-
-  // Array {{$.Name}}
-  type {{Node "Type" $}} []{{Node "Type" $.To}}
-{{end}}
-
-{{define "ArrayExtra"}}
-  {{AssertType $ "Slice"}}
-{{end}}
-
-{{define "ArrayHelpers"}}
-  {{AssertType $ "Slice"}}
-
-  func (a {{Node "Type" $}}) Format(f fmt.State, c rune) {
-    fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
-  }
-{{end}}
 
 
 {{/*
@@ -1309,7 +1280,7 @@ const rpc_common_go_tmpl = `{{/*
 {{define "Type#u64"      }}uint64{{end}}
 {{define "Type#f64"      }}float64{{end}}
 {{define "Type#string"   }}string{{end}}
-{{define "Type.Slice"    }}{{template "NameFixup" .Type.Name}}{{end}}
+{{define "Type.Slice"    }}[]{{Node "Type" .Type.To}}{{end}}
 {{define "Type.Class"    }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
 {{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
 {{define "Type.Enum"     }}{{.Type.Name}}{{end}}
@@ -1326,14 +1297,6 @@ const rpc_common_go_tmpl = `{{/*
   {{else             }}{{if not (Underlying $ | IsAny)}}*{{end}}{{Node "Type" $}}
   {{end}}
 {{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Substitute the special characters in api typenames.
--------------------------------------------------------------------------------
-*/}}
-{{define "NameFixup"}}{{$ | Replace "ˢ" "Array" | Replace "ᵖ" "Ptr" }}{{end}}
 
 
 {{/*
