@@ -58,8 +58,8 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
-func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
-	classes := make(service.ClassPtrArray, 0, registry.Global.Count())
+func (s rpcServer) GetSchema(l log.Logger) ([]*schema.Class, error) {
+	classes := make([]*schema.Class, 0, registry.Global.Count())
 	all.GraphicsNamespace.Visit(func(c binary.Class) {
 		class := schema.Lookup(c.ID())
 		if class != nil {
@@ -71,7 +71,7 @@ func (s rpcServer) GetSchema(l log.Logger) (service.ClassPtrArray, error) {
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-func (s rpcServer) Import(name string, data service.U8Array, l log.Logger) (service.CaptureId, error) {
+func (s rpcServer) Import(name string, data []uint8, l log.Logger) (service.CaptureId, error) {
 	atoms := atom.List{}
 	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
 		if len(atoms) == 0 {
@@ -87,16 +87,16 @@ func (s rpcServer) Import(name string, data service.U8Array, l log.Logger) (serv
 }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
-func (s rpcServer) GetCaptures(l log.Logger) (service.CaptureIdArray, error) {
+func (s rpcServer) GetCaptures(l log.Logger) ([]service.CaptureId, error) {
 	return builder.Captures(s.Database, l)
 }
 
 // GetDevices returns the full list of replay devices avaliable to the server.
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
-func (s rpcServer) GetDevices(l log.Logger) (service.DeviceIdArray, error) {
+func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceId, error) {
 	devices := s.ReplayManager.Devices()
-	ids := make(service.DeviceIdArray, len(devices))
+	ids := make([]service.DeviceId, len(devices))
 	for i, d := range devices {
 		ids[i] = d.ID()
 	}
@@ -139,7 +139,7 @@ func (s rpcServer) GetHierarchy(
 func (s rpcServer) GetMemoryInfo(
 	captureID service.CaptureId,
 	after uint64,
-	rng service.MemoryRange,
+	rng memory.Range,
 	l log.Logger) (service.MemoryInfoId, error) {
 
 	id, err := database.Store(&builder.GetMemoryInfo{
@@ -221,7 +221,7 @@ func (s rpcServer) PrerenderFramebuffers(
 	captureID service.CaptureId,
 	apiID service.ApiId,
 	width, height uint32,
-	atomIDs service.U64Array,
+	atomIDs []uint64,
 	l log.Logger) (service.BinaryId, error) {
 
 	id, err := database.Store(&builder.PrerenderFramebuffers{

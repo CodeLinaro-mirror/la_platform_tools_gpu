@@ -118,5 +118,5 @@ type callGetListNodeChainArray struct {
 // Result GetListNodeChainArray
 type resultGetListNodeChainArray struct {
 	binary.Generate
-	value ListNodePtrArray
+	value []*ListNode
 }
