@@ -5288,9 +5288,9 @@ func (c *Included) Init() {
 func (c *Included) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Globals
+// State
 ////////////////////////////////////////////////////////////////////////////////
-type Globals struct {
+type State struct {
 	binary.Generate
 	U8s  U8ˢ
 	U16s U16ˢ
@@ -5299,7 +5299,7 @@ type Globals struct {
 	Str  string
 }
 
-func (g *Globals) Init() {
+func (g *State) Init() {
 }
 func NewCmdClone(Src memory.Pointer, Cnt uint32) *CmdClone {
 	return &CmdClone{Src: U8ᵖ{Pointer: Src}, Cnt: Cnt}

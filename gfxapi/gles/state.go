@@ -17,15 +17,8 @@ package gles
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
-
-type State struct {
-	binary.Generate
-	Globals
-	ValidateOutput bool
-}
 
 func getContext(s *gfxapi.State) *Context {
 	return getState(s).getContext()

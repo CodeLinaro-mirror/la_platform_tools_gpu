@@ -65,7 +65,7 @@
     {{template "Enum" $e}}
   {{end}}
 
-  {{template "Globals" $}}
+  {{template "State" $}}
 
   {{template "NewAtoms" $}}
 
@@ -746,19 +746,19 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a type declaration for holding global variables.
+  Emits a type declaration for holding the state.
 -------------------------------------------------------------------------------
 */}}
-{{define "Globals"}}
-  {{template "Go.CommentHeader" "Globals"}}
-  type Globals struct {
+{{define "State"}}
+  {{template "Go.CommentHeader" "State"}}
+  type State struct {
     binary.Generate
     {{range $g := $.Globals}}
       {{Title $g.Name}} {{Macro "Go.Type" $g}}
     {{end}}
   }
 
-  func (g *Globals) Init() {
+  func (g *State) Init() {
     {{range $g := $.Globals}}
       {{Macro "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
     {{end}}

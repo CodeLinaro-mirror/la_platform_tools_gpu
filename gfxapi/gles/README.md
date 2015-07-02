@@ -23621,37 +23621,6 @@ func (a *GlXSwapBuffers) Observations() *atom.Observations
 func (a *GlXSwapBuffers) String() string
 ```
 
-#### type Globals
-
-```go
-type Globals struct {
-	binary.Generate
-	NextContextID ContextID
-	CurrentThread ThreadID
-	Contexts      ThreadIDːContextʳᵐ
-	EGLContexts   EGLContextːContextʳᵐ
-	GLXContexts   GLXContextːContextʳᵐ
-	WGLContexts   HGLRCːContextʳᵐ
-	CGLContexts   CGLContextObjːContextʳᵐ
-}
-```
-
-//////////////////////////////////////////////////////////////////////////////
-Globals
-//////////////////////////////////////////////////////////////////////////////
-
-#### func (*Globals) Class
-
-```go
-func (*Globals) Class() binary.Class
-```
-
-#### func (*Globals) Init
-
-```go
-func (g *Globals) Init()
-```
-
 #### type HDC
 
 ```go
@@ -27837,16 +27806,30 @@ func (a *StartTimer) String() string
 ```go
 type State struct {
 	binary.Generate
-	Globals
-	ValidateOutput bool
+	NextContextID ContextID
+	CurrentThread ThreadID
+	Contexts      ThreadIDːContextʳᵐ
+	EGLContexts   EGLContextːContextʳᵐ
+	GLXContexts   GLXContextːContextʳᵐ
+	WGLContexts   HGLRCːContextʳᵐ
+	CGLContexts   CGLContextObjːContextʳᵐ
 }
 ```
 
+//////////////////////////////////////////////////////////////////////////////
+State
+//////////////////////////////////////////////////////////////////////////////
 
 #### func (*State) Class
 
 ```go
 func (*State) Class() binary.Class
+```
+
+#### func (*State) Init
+
+```go
+func (g *State) Init()
 ```
 
 #### type StateVariable

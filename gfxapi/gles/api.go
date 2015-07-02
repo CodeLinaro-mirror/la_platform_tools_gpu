@@ -18199,9 +18199,9 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
-// Globals
+// State
 ////////////////////////////////////////////////////////////////////////////////
-type Globals struct {
+type State struct {
 	binary.Generate
 	NextContextID ContextID
 	CurrentThread ThreadID
@@ -18212,7 +18212,7 @@ type Globals struct {
 	CGLContexts   CGLContextObjːContextʳᵐ
 }
 
-func (g *Globals) Init() {
+func (g *State) Init() {
 	g.Contexts = make(ThreadIDːContextʳᵐ)
 	g.EGLContexts = make(EGLContextːContextʳᵐ)
 	g.GLXContexts = make(GLXContextːContextʳᵐ)
