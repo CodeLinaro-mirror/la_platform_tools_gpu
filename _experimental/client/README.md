@@ -509,6 +509,12 @@ type Atom struct {
 func (a *Atom) Api() service.ApiId
 ```
 
+#### func (Atom) Class
+
+```go
+func (a Atom) Class() binary.Class
+```
+
 #### func (*Atom) DisplayName
 
 ```go
@@ -550,6 +556,56 @@ func (a *Atom) Observations() *atom.Observations
 
 ```go
 func (a *Atom) SetField(index int, value interface{})
+```
+
+#### type AtomClass
+
+```go
+type AtomClass struct {
+}
+```
+
+
+#### func  NewAtomClass
+
+```go
+func NewAtomClass(base *schema.Class, meta *atom.Metadata) *AtomClass
+```
+
+#### func (*AtomClass) Decode
+
+```go
+func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error)
+```
+
+#### func (*AtomClass) DecodeTo
+
+```go
+func (c *AtomClass) DecodeTo(d binary.Decoder, object binary.Object) error
+```
+
+#### func (*AtomClass) Encode
+
+```go
+func (c *AtomClass) Encode(e binary.Encoder, object binary.Object) error
+```
+
+#### func (*AtomClass) ID
+
+```go
+func (c *AtomClass) ID() binary.ID
+```
+
+#### func (*AtomClass) New
+
+```go
+func (c *AtomClass) New() binary.Object
+```
+
+#### func (*AtomClass) Skip
+
+```go
+func (c *AtomClass) Skip(d binary.Decoder) error
 ```
 
 #### type CommandAdapter
