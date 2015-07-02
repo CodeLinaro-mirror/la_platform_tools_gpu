@@ -136,34 +136,6 @@ func (c *ListNode) GetName() string
 func (c *ListNode) GetNext() *ListNode
 ```
 
-#### type ListNodeArray
-
-```go
-type ListNodeArray []ListNode
-```
-
-Array ListNodeˢ
-
-#### func (ListNodeArray) Format
-
-```go
-func (a ListNodeArray) Format(f fmt.State, c rune)
-```
-
-#### type ListNodePtrArray
-
-```go
-type ListNodePtrArray []*ListNode
-```
-
-Array ListNodeᵖˢ
-
-#### func (ListNodePtrArray) Format
-
-```go
-func (a ListNodePtrArray) Format(f fmt.State, c rune)
-```
-
 #### type RPC
 
 ```go
@@ -177,7 +149,7 @@ type RPC interface {
 	ResolveResource(r ResourceId, l log.Logger) (Resource, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
-	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
+	GetListNodeChainArray(l log.Logger) ([]*ListNode, error)
 }
 ```
 
