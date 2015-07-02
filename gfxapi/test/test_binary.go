@@ -346,7 +346,7 @@ var schemaBoolˢ = &schema.Class{
 	Name:    "Boolˢ",
 	Display: "Boolˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -394,7 +394,7 @@ var schemaBoolᵖ = &schema.Class{
 	Name:    "Boolᵖ",
 	Display: "Boolᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -442,7 +442,7 @@ var schemaCharˢ = &schema.Class{
 	Name:    "Charˢ",
 	Display: "Charˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -490,7 +490,7 @@ var schemaCharᵖ = &schema.Class{
 	Name:    "Charᵖ",
 	Display: "Charᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -538,7 +538,7 @@ var schemaCharᵖˢ = &schema.Class{
 	Name:    "Charᵖˢ",
 	Display: "Charᵖˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -586,7 +586,7 @@ var schemaCharᵖᵖ = &schema.Class{
 	Name:    "Charᵖᵖ",
 	Display: "Charᵖᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -824,7 +824,7 @@ var schemaU8ᵖ = &schema.Class{
 	Name:    "U8ᵖ",
 	Display: "U8ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1192,7 +1192,7 @@ var schemaVoidᵖ = &schema.Class{
 	Name:    "Voidᵖ",
 	Display: "Voidᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -1598,7 +1598,7 @@ var schemaU16ᵖ = &schema.Class{
 	Name:    "U16ᵖ",
 	Display: "U16ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2076,7 +2076,7 @@ var schemaIntᵖ = &schema.Class{
 	Name:    "Intᵖ",
 	Display: "Intᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2290,7 +2290,7 @@ var schemaU32ᵖ = &schema.Class{
 	Name:    "U32ᵖ",
 	Display: "U32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -2838,7 +2838,7 @@ var schemaRemappedᵖ = &schema.Class{
 	Name:    "Remappedᵖ",
 	Display: "Remappedᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3134,7 +3134,7 @@ var schemaF32ᵖ = &schema.Class{
 	Name:    "F32ᵖ",
 	Display: "F32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3240,7 +3240,7 @@ var schemaF64ᵖ = &schema.Class{
 	Name:    "F64ᵖ",
 	Display: "F64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3424,7 +3424,7 @@ var schemaS16ᵖ = &schema.Class{
 	Name:    "S16ᵖ",
 	Display: "S16ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3530,7 +3530,7 @@ var schemaS32ᵖ = &schema.Class{
 	Name:    "S32ᵖ",
 	Display: "S32ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3636,7 +3636,7 @@ var schemaS64ᵖ = &schema.Class{
 	Name:    "S64ᵖ",
 	Display: "S64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3742,7 +3742,7 @@ var schemaS8ᵖ = &schema.Class{
 	Name:    "S8ᵖ",
 	Display: "S8ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3964,7 +3964,7 @@ var schemaU64ᵖ = &schema.Class{
 	Name:    "U64ᵖ",
 	Display: "U64ᵖ",
 	Fields: []schema.Field{
-		{Declared: "Pointer", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -5384,7 +5384,7 @@ var schemaF32ˢ = &schema.Class{
 	Name:    "F32ˢ",
 	Display: "F32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5432,7 +5432,7 @@ var schemaF64ˢ = &schema.Class{
 	Name:    "F64ˢ",
 	Display: "F64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5480,7 +5480,7 @@ var schemaU8ˢ = &schema.Class{
 	Name:    "U8ˢ",
 	Display: "U8ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5528,7 +5528,7 @@ var schemaU16ˢ = &schema.Class{
 	Name:    "U16ˢ",
 	Display: "U16ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5576,7 +5576,7 @@ var schemaU32ˢ = &schema.Class{
 	Name:    "U32ˢ",
 	Display: "U32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5624,7 +5624,7 @@ var schemaIntˢ = &schema.Class{
 	Name:    "Intˢ",
 	Display: "Intˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5874,7 +5874,7 @@ var schemaRemappedˢ = &schema.Class{
 	Name:    "Remappedˢ",
 	Display: "Remappedˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5922,7 +5922,7 @@ var schemaS16ˢ = &schema.Class{
 	Name:    "S16ˢ",
 	Display: "S16ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -5970,7 +5970,7 @@ var schemaS32ˢ = &schema.Class{
 	Name:    "S32ˢ",
 	Display: "S32ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6018,7 +6018,7 @@ var schemaS64ˢ = &schema.Class{
 	Name:    "S64ˢ",
 	Display: "S64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6066,7 +6066,7 @@ var schemaS8ˢ = &schema.Class{
 	Name:    "S8ˢ",
 	Display: "S8ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6184,7 +6184,7 @@ var schemaU64ˢ = &schema.Class{
 	Name:    "U64ˢ",
 	Display: "U64ˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
 
@@ -6232,6 +6232,6 @@ var schemaVoidˢ = &schema.Class{
 	Name:    "Voidˢ",
 	Display: "Voidˢ",
 	Fields: []schema.Field{
-		{Declared: "SliceInfo", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
 }
