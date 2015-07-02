@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -26,7 +25,7 @@ import (
 )
 
 // BuildLazy returns the *service.Binary resulting from the given GetState request.
-func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	capture, err := service.ResolveCapture(r.Capture, d, l)
 	if err != nil {
 		return nil, err
