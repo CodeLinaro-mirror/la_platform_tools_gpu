@@ -72,7 +72,7 @@ var schemamsgCloseChannel = &schema.Class{
 	Name:    "msgCloseChannel",
 	Display: "msgCloseChannel",
 	Fields: []schema.Field{
-		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }
 
@@ -194,6 +194,6 @@ var schemamsgOpenChannel = &schema.Class{
 	Name:    "msgOpenChannel",
 	Display: "msgOpenChannel",
 	Fields: []schema.Field{
-		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }
