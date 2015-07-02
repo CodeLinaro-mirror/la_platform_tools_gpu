@@ -148,18 +148,16 @@ type Decoder interface {
 	// SkipValue must skip the same data that a call to Value would read.
 	// The value may be a typed nil.
 	SkipValue(Object) error
-	// Variant decodes and returns a POD value or Object from the stream.
-	// If the value in the stream is an Object, the Class in the stream must have
-	// been previously registered with binary.registry.Add.
-	Variant() (interface{}, error)
+	// Variant decodes and returns an Object from the stream. The Class in the
+	// stream must have been previously registered with binary.registry.Add.
+	Variant() (Object, error)
 	// SkipVariant must skip the same data that a call to Variant would read.
 	SkipVariant() (ID, error)
-	// Object decodes and returns a POD value or Object from the stream.
-	// Values that were encoded multiple times may be decoded and returned as a
-	// shared, single instance.
-	// If the value in the stream is an Object, the Class in the stream must have
-	// been previously registered with binary.registry.Add.
-	Object() (interface{}, error)
+	// Object decodes and returns an Object from the stream. Object instances
+	// that were encoded multiple times may be decoded and returned as a shared,
+	// single instance. The Class in the stream must have been previously
+	// registered with binary.registry.Add.
+	Object() (Object, error)
 	// SkipObject must skip the same data that a call to Object would read.
 	SkipObject() (ID, error)
 	// Lookup the class that would be used to encode an id in this encoder.
@@ -178,39 +176,17 @@ type Encoder interface {
 	ID(ID) error
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object) error
-	// Variant encodes a POD value or an Object with no sharing.
-	// If v is an Object then its type must have been previously registered with
-	// binary.registry.Add.
-	// If v is not a POD type nor a Object then ErrNotEncodable is returned.
-	Variant(v interface{}) error
-	// Object encodes a POD value or an Object, optionally encoding objects only
-	// on the first time it sees them.
-	// If v is an Object then its type must have been previously registered with
-	// binary.registry.Add.
-	// If v is not a POD type nor a Object then ErrNotEncodable is returned.
-	Object(v interface{}) error
+	// Variant encodes an Object with no sharing. The type of obj must have
+	// been previously registered with binary.registry.Add.
+	Variant(obj Object) error
+	// Object encodes an Object, optionally encoding objects only on the first
+	// time it sees them. The type of obj must have been previously registered
+	// with binary.registry.Add.
+	Object(obj Object) error
 }
 ```
 
 Encoder extends Writer with additional methods for encoding objects.
-
-#### type ErrNotEncodable
-
-```go
-type ErrNotEncodable struct {
-	Value interface{} // The value that could not be encoded.
-}
-```
-
-ErrNotEncodable is returned when a non-encodable value is passed to
-Encoder.Variant or Encoder.Object.
-
-#### func (ErrNotEncodable) Error
-
-```go
-func (e ErrNotEncodable) Error() string
-```
-Error returns the error message.
 
 #### type Float16
 

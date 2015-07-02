@@ -48,9 +48,7 @@ func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (
 
 	s := gfxapi.NewState()
 	for _, a := range atoms[:r.After] {
-		if err := a.Mutate(s, d, l); err != nil {
-			return nil, err
-		}
+		a.Mutate(s, d, l)
 	}
 
 	res, found := s.APIs[api]

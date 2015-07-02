@@ -21,15 +21,11 @@ type Encoder interface {
 	ID(ID) error
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object) error
-	// Variant encodes a POD value or an Object with no sharing.
-	// If v is an Object then its type must have been previously registered with
-	// binary.registry.Add.
-	// If v is not a POD type nor a Object then ErrNotEncodable is returned.
-	Variant(v interface{}) error
-	// Object encodes a POD value or an Object, optionally encoding objects only
-	// on the first time it sees them.
-	// If v is an Object then its type must have been previously registered with
-	// binary.registry.Add.
-	// If v is not a POD type nor a Object then ErrNotEncodable is returned.
-	Object(v interface{}) error
+	// Variant encodes an Object with no sharing. The type of obj must have
+	// been previously registered with binary.registry.Add.
+	Variant(obj Object) error
+	// Object encodes an Object, optionally encoding objects only on the first
+	// time it sees them. The type of obj must have been previously registered
+	// with binary.registry.Add.
+	Object(obj Object) error
 }

@@ -195,6 +195,19 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			return err
 		} {{end}}
 
+{{define "Go.Encode.Any"}} if {{.Name}} != nil {
+			var boxed binary.Object
+			boxed, err := any.Box({{.Name}})
+			if err != nil {
+				return err
+			}
+			if err := e.Variant(boxed); err != nil {
+				return err
+			}
+		} else if err := e.Variant(nil); err != nil {
+			return err
+		} {{end}}
+
 {{define "Go.Encode_Length"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 	return err
 } {{end}}
@@ -252,6 +265,16 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			{{.Name}} = nil
 		} {{end}}
 
+{{define "Go.Decode.Any"}} if boxed, err := d.Variant(); err != nil {
+			return err
+		} else if boxed != nil {
+			if {{.Name}}, err = any.Unbox(boxed); err != nil {
+				return err
+			}
+		} else {
+			{{.Name}} = nil
+		} {{end}}
+
 {{define "Go.Decode_Length"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
@@ -305,6 +328,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 {{define "Go.Skip.Struct"}} if err := d.SkipValue((*{{.Name}})(nil)); err != nil { return err } {{end}}
 {{define "Go.Skip.Pointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 {{define "Go.Skip.Interface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "Go.Skip.Any"}} if _, err := d.SkipVariant(); err != nil { return err } {{end}}
 
 {{define "Go.Skip.Slice"}} if count, err := d.Uint32(); err != nil {
 			return err
@@ -341,6 +365,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 {{define "Go.Schema.Struct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
 {{define "Go.Schema.Pointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
 {{define "Go.Schema.Interface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Any"}}&any.Any{}{{end}}
 {{define "Go.Schema.Slice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 {{define "Go.Schema.Array"}}&{{SchemaPrefix}}Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
 {{define "Go.Schema.Stream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
@@ -377,6 +402,7 @@ package {{.Package}}
 
 import (
 	"reflect"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	{{range $imp, $v := .Imports}}"{{$imp}}"
 {{end}})
@@ -428,6 +454,7 @@ const java_tmpl = `{{/*
 {{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
@@ -452,6 +479,7 @@ const java_tmpl = `{{/*
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {

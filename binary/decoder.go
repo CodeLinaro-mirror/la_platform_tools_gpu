@@ -26,18 +26,16 @@ type Decoder interface {
 	// SkipValue must skip the same data that a call to Value would read.
 	// The value may be a typed nil.
 	SkipValue(Object) error
-	// Variant decodes and returns a POD value or Object from the stream.
-	// If the value in the stream is an Object, the Class in the stream must have
-	// been previously registered with binary.registry.Add.
-	Variant() (interface{}, error)
+	// Variant decodes and returns an Object from the stream. The Class in the
+	// stream must have been previously registered with binary.registry.Add.
+	Variant() (Object, error)
 	// SkipVariant must skip the same data that a call to Variant would read.
 	SkipVariant() (ID, error)
-	// Object decodes and returns a POD value or Object from the stream.
-	// Values that were encoded multiple times may be decoded and returned as a
-	// shared, single instance.
-	// If the value in the stream is an Object, the Class in the stream must have
-	// been previously registered with binary.registry.Add.
-	Object() (interface{}, error)
+	// Object decodes and returns an Object from the stream. Object instances
+	// that were encoded multiple times may be decoded and returned as a shared,
+	// single instance. The Class in the stream must have been previously
+	// registered with binary.registry.Add.
+	Object() (Object, error)
 	// SkipObject must skip the same data that a call to Object would read.
 	SkipObject() (ID, error)
 	// Lookup the class that would be used to encode an id in this encoder.
