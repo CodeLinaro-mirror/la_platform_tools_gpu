@@ -112,7 +112,7 @@ func (c client) GetListNodeChain(l log.Logger) (res *ListNode, err error) {
 	return
 }
 
-func (c client) GetListNodeChainArray(l log.Logger) (res ListNodePtrArray, err error) {
+func (c client) GetListNodeChainArray(l log.Logger) (res []*ListNode, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetListNodeChainArray{}); err == nil {
 		res = val.(*resultGetListNodeChainArray).value

@@ -82,13 +82,6 @@ func (h ResourceId) Valid() bool {
 	return h.ID.Valid()
 }
 
-func (a ListNodeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ListNodeˢ", len(a))
-}
-func (a ListNodePtrArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ListNodeᵖˢ", len(a))
-}
-
 func (i Enum) IsOne() bool   { return i == EnumOne }
 func (i Enum) IsTwo() bool   { return i == EnumTwo }
 func (i Enum) IsThree() bool { return i == EnumThree }

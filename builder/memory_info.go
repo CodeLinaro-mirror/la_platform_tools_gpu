@@ -72,9 +72,10 @@ func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 
 	observed := slice.ValidRanges()
 
-	res := &service.MemoryInfo{Data: data}
-	res.Reads.Pack(reads)
-	res.Writes.Pack(writes)
-	res.Observed.Pack(observed)
-	return res, nil
+	return &service.MemoryInfo{
+		Data:     data,
+		Reads:    reads,
+		Writes:   writes,
+		Observed: observed,
+	}, nil
 }

@@ -34,7 +34,7 @@ import (
 
 // The list of captures currently imported.
 // TODO: This needs to be moved to persistent storage.
-var captures = service.CaptureIdArray{}
+var captures = []service.CaptureId{}
 
 // Context is the type that should be passed to the database constructor's
 // buildContext parameter.
@@ -108,7 +108,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 
 	// Gather all the APIs used by the capture
 	apis := map[gfxapi.API]struct{}{}
-	apiIDs := service.ApiIdArray{}
+	apiIDs := []service.ApiId{}
 	for _, a := range atoms {
 		if api := a.API(); api != nil {
 			if _, found := apis[api]; !found {
@@ -141,7 +141,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 }
 
 // Captures returns all the captures stored by the database by identifier.
-func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, error) {
+func Captures(db database.Database, logger log.Logger) ([]service.CaptureId, error) {
 	return captures, nil
 }
 

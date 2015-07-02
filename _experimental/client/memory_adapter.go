@@ -19,7 +19,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/interval"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
@@ -93,22 +92,17 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 	var cancel chan<- struct{}
 	ll.OnAttach(func() {
 		cancel = a.appCtx.RequestMemory(a.commandID, base, a.bytesPerLine, func(info service.MemoryInfo) {
-			var reads, writes, observed memory.RangeList
-			info.Reads.Unpack(&reads)
-			info.Writes.Unpack(&writes)
-			info.Observed.Unpack(&observed)
-
 			offset := uint64(0)
 			data := info.Data
 			dataType := a.dataType
 			dataTypeSize := dataType.SizeBytes()
 			for len(data) >= dataTypeSize {
 				switch {
-				case interval.Contains(&writes, offset):
+				case interval.Contains(&info.Writes, offset):
 					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR, true))
-				case interval.Contains(&reads, offset):
+				case interval.Contains(&info.Reads, offset):
 					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", READ_MEMORY_COLOR, true))
-				case interval.Contains(&observed, offset):
+				case interval.Contains(&info.Observed, offset):
 					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR, true))
 				default:
 					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Unknown()+" ", STALE_MEMORY_COLOR, true))
