@@ -144,7 +144,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			return opcode.Extend{uint32(v & mask26)}.Encode(e)
 		}
 	}
-	return fmt.Errorf("Cannot push value type %s", t.String())
+	return fmt.Errorf("Cannot push value type %s", t)
 }
 
 // Nop is a no-operation Instruction. Instructions of this type do nothing.
