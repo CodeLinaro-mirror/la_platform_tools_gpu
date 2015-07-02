@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary/pod"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/test"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
@@ -27,7 +27,7 @@ func TestValue(t *testing.T) {
 	for _, entry := range []test.Entry{
 		{
 			Name:   "One",
-			Values: []interface{}{test.ObjectA},
+			Values: []binary.Object{test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -35,7 +35,7 @@ func TestValue(t *testing.T) {
 		},
 		{
 			Name:   "Repeat",
-			Values: []interface{}{test.ObjectA, test.ObjectA},
+			Values: []binary.Object{test.ObjectA, test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -45,7 +45,7 @@ func TestValue(t *testing.T) {
 		},
 		{
 			Name:   "Many",
-			Values: []interface{}{test.ObjectA, test.ObjectB, test.ObjectA},
+			Values: []binary.Object{test.ObjectA, test.ObjectB, test.ObjectA},
 			Data: []byte{
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
@@ -67,12 +67,12 @@ func TestObject(t *testing.T) {
 	for _, entry := range []test.Entry{
 		{
 			Name:   "Nil",
-			Values: []interface{}{nil},
+			Values: []binary.Object{nil},
 			Data:   []byte{0},
 		},
 		{
 			Name:   "One",
-			Values: []interface{}{test.ObjectA},
+			Values: []binary.Object{test.ObjectA},
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
@@ -83,7 +83,7 @@ func TestObject(t *testing.T) {
 		},
 		{
 			Name:   "Repeat",
-			Values: []interface{}{test.ObjectA, test.ObjectA},
+			Values: []binary.Object{test.ObjectA, test.ObjectA},
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
@@ -96,7 +96,7 @@ func TestObject(t *testing.T) {
 		},
 		{
 			Name:   "Many",
-			Values: []interface{}{test.ObjectA, test.ObjectB, test.ObjectA, nil},
+			Values: []binary.Object{test.ObjectA, test.ObjectB, test.ObjectA, nil},
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
@@ -113,29 +113,6 @@ func TestObject(t *testing.T) {
 				0x02, // repeated object sid
 
 				0x00, // nil object sid
-			).Data,
-		},
-		{
-			Name:   "POD",
-			Values: []interface{}{true, int8(0x1), uint32(0x10), true, int8(0x1)},
-			Data: test.Bytes{}.Add(
-				0x03, // object sid + encoded
-				0x03, // type sid + encoded
-			).ID((*pod.Bool)(nil).Class().ID()).Add(
-				0x01,
-
-				0x05, // object sid + encoded
-				0x05, // type sid + encoded
-			).ID((*pod.Int8)(nil).Class().ID()).Add(
-				0x01,
-
-				0x07, // object sid + encoded
-				0x07, // type sid + encoded
-			).ID((*pod.Uint32)(nil).Class().ID()).Add(
-				0x10,
-
-				0x02, // repeated object sid
-				0x04, // repeated object sid
 			).Data,
 		},
 	} {

@@ -28,13 +28,13 @@ import (
 )
 
 type functions struct {
-	templates *template.Template
-	funcs     template.FuncMap
-	active    *template.Template
-	schema    string
-	writer    io.Writer
-	File      *File
-	counters  map[string]*counter
+	templates    *template.Template
+	funcs        template.FuncMap
+	active       *template.Template
+	schemaPrefix string
+	writer       io.Writer
+	File         *File
+	counters     map[string]*counter
 }
 
 type counter int
@@ -144,7 +144,7 @@ func (f *functions) Call(prefix string, arg interface{}) (string, error) {
 }
 
 func (f *functions) SchemaPrefix() string {
-	return f.schema
+	return f.schemaPrefix
 }
 
 func (f *functions) Lower(s interface{}) string {

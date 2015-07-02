@@ -101,7 +101,7 @@ type TimingInfoId struct {
 	binary.Generate
 	ID binary.ID
 }
-type State interface{}
+type State binary.Object
 
 // Array ApiIdˢ
 type ApiIdArray []ApiId

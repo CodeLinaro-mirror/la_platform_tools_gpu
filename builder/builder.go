@@ -42,7 +42,7 @@ type Context struct {
 	ReplayManager *replay.Manager
 }
 
-func encode(v interface{}) ([]byte, error) {
+func encode(v binary.Object) ([]byte, error) {
 	buf := &bytes.Buffer{}
 	if err := cyclic.Encoder(vle.Writer(buf)).Object(v); err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func encode(v interface{}) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func decode(data []byte) (interface{}, error) {
+func decode(data []byte) (binary.Object, error) {
 	return cyclic.Decoder(vle.Reader(bytes.NewBuffer(data))).Object()
 }
 

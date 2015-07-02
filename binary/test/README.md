@@ -94,7 +94,7 @@ func (b Bytes) ID(id binary.ID) Bytes
 ```go
 type Entry struct {
 	Name   string
-	Values []interface{}
+	Values []binary.Object
 	Data   []byte
 }
 ```
