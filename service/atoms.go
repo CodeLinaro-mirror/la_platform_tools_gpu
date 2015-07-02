@@ -31,7 +31,7 @@ func NewAtomStream(list atom.List) (AtomStream, error) {
 	}
 
 	return AtomStream{
-		Data: U8Array(buf.Bytes()),
+		Data: buf.Bytes(),
 	}, nil
 }
 
@@ -48,7 +48,7 @@ func (s AtomStream) List() (atom.List, error) {
 func (g *AtomGroup) Pack(o atom.Group) {
 	g.Name = o.Name
 	g.Range.Pack(o.Range)
-	g.SubGroups = make(AtomGroupArray, len(o.SubGroups))
+	g.SubGroups = make([]AtomGroup, len(o.SubGroups))
 	for i := range g.SubGroups {
 		g.SubGroups[i].Pack(o.SubGroups[i])
 	}

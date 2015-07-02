@@ -20,7 +20,7 @@ type RPC interface {
 	ResolveResource(r ResourceId, l log.Logger) (Resource, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
-	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
+	GetListNodeChainArray(l log.Logger) ([]*ListNode, error)
 }
 
 // Handle ResourceId
@@ -28,12 +28,6 @@ type ResourceId struct {
 	binary.Generate
 	ID binary.ID
 }
-
-// Array ListNodeˢ
-type ListNodeArray []ListNode
-
-// Array ListNodeᵖˢ
-type ListNodePtrArray []*ListNode
 
 // Enum Enum
 type Enum int

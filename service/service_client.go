@@ -7,7 +7,9 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
@@ -32,7 +34,7 @@ func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
 }
 
 // Client compliance
-func (c client) GetSchema(l log.Logger) (res ClassPtrArray, err error) {
+func (c client) GetSchema(l log.Logger) (res []*schema.Class, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetSchema{}); err == nil {
 		res = val.(*resultGetSchema).value
@@ -42,7 +44,7 @@ func (c client) GetSchema(l log.Logger) (res ClassPtrArray, err error) {
 	return
 }
 
-func (c client) Import(name string, Data U8Array, l log.Logger) (res CaptureId, err error) {
+func (c client) Import(name string, Data []uint8, l log.Logger) (res CaptureId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
 		res = val.(*resultImport).value
@@ -52,7 +54,7 @@ func (c client) Import(name string, Data U8Array, l log.Logger) (res CaptureId, 
 	return
 }
 
-func (c client) GetCaptures(l log.Logger) (res CaptureIdArray, err error) {
+func (c client) GetCaptures(l log.Logger) (res []CaptureId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetCaptures{}); err == nil {
 		res = val.(*resultGetCaptures).value
@@ -62,7 +64,7 @@ func (c client) GetCaptures(l log.Logger) (res CaptureIdArray, err error) {
 	return
 }
 
-func (c client) GetDevices(l log.Logger) (res DeviceIdArray, err error) {
+func (c client) GetDevices(l log.Logger) (res []DeviceId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetDevices{}); err == nil {
 		res = val.(*resultGetDevices).value
@@ -92,7 +94,7 @@ func (c client) GetHierarchy(capture CaptureId, l log.Logger) (res HierarchyId, 
 	return
 }
 
-func (c client) GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (res MemoryInfoId, err error) {
+func (c client) GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetMemoryInfo{capture: capture, after: after, rng: rng}); err == nil {
 		res = val.(*resultGetMemoryInfo).value
@@ -132,7 +134,7 @@ func (c client) GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMas
 	return
 }
 
-func (c client) PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array, l log.Logger) (res BinaryId, err error) {
+func (c client) PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (res BinaryId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIds: atomIds}); err == nil {
 		res = val.(*resultPrerenderFramebuffers).value
