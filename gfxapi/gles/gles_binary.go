@@ -314,9 +314,8 @@ func init() {
 	Namespace.Add((*Intᵖ)(nil).Class())
 	Namespace.Add((*GlXQueryDrawable)(nil).Class())
 	Namespace.Add((*GlXSwapBuffers)(nil).Class())
-	Namespace.Add((*HGLRC)(nil).Class())
-	Namespace.Add((*Globals)(nil).Class())
 	Namespace.Add((*HDC)(nil).Class())
+	Namespace.Add((*HGLRC)(nil).Class())
 	Namespace.Add((*Intˢ)(nil).Class())
 	Namespace.Add((*Vec2f)(nil).Class())
 	Namespace.Add((*Mat2f)(nil).Class())
@@ -671,9 +670,8 @@ var (
 	binaryIDIntᵖ                                   = binary.ID{0x2b, 0x06, 0x77, 0x85, 0xff, 0x02, 0x77, 0xf8, 0xbc, 0x87, 0x72, 0xeb, 0xf8, 0x53, 0x2e, 0x65, 0xd2, 0x8f, 0x69, 0x27}
 	binaryIDGlXQueryDrawable                       = binary.ID{0x17, 0xd3, 0x19, 0xa4, 0xba, 0x07, 0x32, 0xb5, 0xc2, 0x76, 0xae, 0xde, 0xfe, 0x31, 0x95, 0x07, 0x79, 0xdb, 0xd0, 0xd6}
 	binaryIDGlXSwapBuffers                         = binary.ID{0x6f, 0x6a, 0xec, 0x59, 0x43, 0x85, 0x4a, 0xf5, 0x61, 0xc7, 0xb1, 0x28, 0x6c, 0x34, 0xa5, 0xb8, 0xbd, 0x25, 0x12, 0xc2}
-	binaryIDHGLRC                                  = binary.ID{0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1}
-	binaryIDGlobals                                = binary.ID{0x6b, 0xd7, 0xb2, 0xf9, 0x46, 0xfa, 0xb5, 0xa7, 0x8e, 0x26, 0xe5, 0x72, 0xe7, 0x8f, 0x33, 0x91, 0xb4, 0xb9, 0x49, 0x0c}
 	binaryIDHDC                                    = binary.ID{0x9c, 0x52, 0x64, 0x9a, 0xd1, 0x46, 0x9a, 0x9a, 0xa1, 0x08, 0x15, 0x09, 0x48, 0x2d, 0xd9, 0x49, 0xf9, 0x70, 0x31, 0xd1}
+	binaryIDHGLRC                                  = binary.ID{0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1}
 	binaryIDIntˢ                                   = binary.ID{0x81, 0xe7, 0x7a, 0x15, 0x73, 0x0c, 0x03, 0xb6, 0x9f, 0x6c, 0xec, 0x7b, 0x08, 0xf2, 0xc1, 0x20, 0x9f, 0xcd, 0x72, 0x5a}
 	binaryIDVec2f                                  = binary.ID{0x43, 0x30, 0xe0, 0xc8, 0xdc, 0x80, 0xf3, 0x61, 0xf7, 0xc9, 0x32, 0xe8, 0x58, 0x5f, 0xa0, 0xe9, 0xc3, 0xff, 0x0d, 0x21}
 	binaryIDMat2f                                  = binary.ID{0xb3, 0xca, 0x65, 0x73, 0x09, 0x4d, 0x46, 0x20, 0x2e, 0x2a, 0x3d, 0x75, 0x6b, 0x7b, 0xc3, 0xaf, 0x18, 0x79, 0xfe, 0xcb}
@@ -700,7 +698,7 @@ var (
 	binaryIDShaderIdˢ                              = binary.ID{0x45, 0x01, 0xd6, 0x03, 0x00, 0x91, 0x9a, 0x24, 0xe3, 0x7e, 0x26, 0x7e, 0x7d, 0xda, 0xf1, 0x06, 0x42, 0x59, 0x3e, 0x03}
 	binaryIDShaderUniformTypeˢ                     = binary.ID{0x99, 0x72, 0xc7, 0xc6, 0x1f, 0xed, 0x46, 0x4b, 0xbd, 0xe8, 0xf5, 0x96, 0x30, 0x3a, 0x1a, 0xa1, 0xc9, 0xd4, 0x8c, 0x0e}
 	binaryIDStartTimer                             = binary.ID{0x23, 0x7b, 0x88, 0x65, 0x96, 0xf3, 0x0d, 0x5d, 0x50, 0x56, 0xad, 0x18, 0xc8, 0x0a, 0xe8, 0x57, 0xa0, 0x21, 0x1c, 0x9b}
-	binaryIDState                                  = binary.ID{0x0d, 0x66, 0xef, 0x23, 0x0c, 0x81, 0xc8, 0x53, 0xd7, 0xb4, 0xb5, 0x0f, 0xcf, 0xf7, 0xc5, 0x56, 0xec, 0x4f, 0x27, 0x68}
+	binaryIDState                                  = binary.ID{0x9a, 0x1a, 0xdb, 0xe0, 0xa0, 0x77, 0x65, 0xd3, 0x62, 0x31, 0x3f, 0xcb, 0x81, 0xbd, 0x45, 0xc3, 0x24, 0xe7, 0x94, 0x2d}
 	binaryIDStopTimer                              = binary.ID{0xe8, 0x9f, 0x7c, 0xb1, 0xa4, 0xf8, 0x37, 0x81, 0x6b, 0x01, 0x71, 0x0e, 0xbc, 0xf2, 0x92, 0xd2, 0x39, 0x2e, 0xca, 0x5f}
 	binaryIDTextureIdˢ                             = binary.ID{0x4a, 0xe8, 0xe0, 0x14, 0x09, 0x7c, 0x25, 0x10, 0x88, 0xb0, 0xf9, 0x39, 0x88, 0xd0, 0x7d, 0x81, 0xc6, 0xb6, 0xed, 0x2f}
 	binaryIDU32ˢ                                   = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
@@ -24875,363 +24873,6 @@ var schemaGlXSwapBuffers = &schema.Class{
 	},
 }
 
-type binaryClassHGLRC struct{}
-
-func (*HGLRC) Class() binary.Class {
-	return (*binaryClassHGLRC)(nil)
-}
-func doEncodeHGLRC(e binary.Encoder, o *HGLRC) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeHGLRC(d binary.Decoder, o *HGLRC) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipHGLRC(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassHGLRC) ID() binary.ID      { return binaryIDHGLRC }
-func (*binaryClassHGLRC) New() binary.Object { return &HGLRC{} }
-func (*binaryClassHGLRC) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeHGLRC(e, obj.(*HGLRC))
-}
-func (*binaryClassHGLRC) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &HGLRC{}
-	return obj, doDecodeHGLRC(d, obj)
-}
-func (*binaryClassHGLRC) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeHGLRC(d, obj.(*HGLRC))
-}
-func (*binaryClassHGLRC) Skip(d binary.Decoder) error { return doSkipHGLRC(d) }
-func (*binaryClassHGLRC) Schema() *schema.Class       { return schemaHGLRC }
-
-var schemaHGLRC = &schema.Class{
-	TypeID:  binaryIDHGLRC,
-	Package: "gles",
-	Name:    "HGLRC",
-	Display: "HGLRC",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassGlobals struct{}
-
-func (*Globals) Class() binary.Class {
-	return (*binaryClassGlobals)(nil)
-}
-func doEncodeGlobals(e binary.Encoder, o *Globals) error {
-	if err := e.Uint32(uint32(o.NextContextID)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.CurrentThread)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Contexts))); err != nil {
-		return err
-	}
-	for k, v := range o.Contexts {
-		if err := e.Uint32(uint32(k)); err != nil {
-			return err
-		}
-		if v != nil {
-			if err := e.Object(v); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.EGLContexts))); err != nil {
-		return err
-	}
-	for k, v := range o.EGLContexts {
-		if err := e.Value(&k); err != nil {
-			return err
-		}
-		if v != nil {
-			if err := e.Object(v); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.GLXContexts))); err != nil {
-		return err
-	}
-	for k, v := range o.GLXContexts {
-		if err := e.Value(&k); err != nil {
-			return err
-		}
-		if v != nil {
-			if err := e.Object(v); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.WGLContexts))); err != nil {
-		return err
-	}
-	for k, v := range o.WGLContexts {
-		if err := e.Value(&k); err != nil {
-			return err
-		}
-		if v != nil {
-			if err := e.Object(v); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.CGLContexts))); err != nil {
-		return err
-	}
-	for k, v := range o.CGLContexts {
-		if err := e.Value(&k); err != nil {
-			return err
-		}
-		if v != nil {
-			if err := e.Object(v); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeGlobals(d binary.Decoder, o *Globals) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.NextContextID = ContextID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.CurrentThread = ThreadID(obj)
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Contexts = make(ThreadIDːContextʳᵐ, count)
-		m := o.Contexts
-		for i := uint32(0); i < count; i++ {
-			var k ThreadID
-			var v *Context
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				k = ThreadID(obj)
-			}
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				v = obj.(*Context)
-			} else {
-				v = nil
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.EGLContexts = make(EGLContextːContextʳᵐ, count)
-		m := o.EGLContexts
-		for i := uint32(0); i < count; i++ {
-			var k EGLContext
-			var v *Context
-			if err := d.Value(&k); err != nil {
-				return err
-			}
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				v = obj.(*Context)
-			} else {
-				v = nil
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.GLXContexts = make(GLXContextːContextʳᵐ, count)
-		m := o.GLXContexts
-		for i := uint32(0); i < count; i++ {
-			var k GLXContext
-			var v *Context
-			if err := d.Value(&k); err != nil {
-				return err
-			}
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				v = obj.(*Context)
-			} else {
-				v = nil
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.WGLContexts = make(HGLRCːContextʳᵐ, count)
-		m := o.WGLContexts
-		for i := uint32(0); i < count; i++ {
-			var k HGLRC
-			var v *Context
-			if err := d.Value(&k); err != nil {
-				return err
-			}
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				v = obj.(*Context)
-			} else {
-				v = nil
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.CGLContexts = make(CGLContextObjːContextʳᵐ, count)
-		m := o.CGLContexts
-		for i := uint32(0); i < count; i++ {
-			var k CGLContextObj
-			var v *Context
-			if err := d.Value(&k); err != nil {
-				return err
-			}
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				v = obj.(*Context)
-			} else {
-				v = nil
-			}
-			m[k] = v
-		}
-	}
-	return nil
-}
-func doSkipGlobals(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*EGLContext)(nil)); err != nil {
-				return err
-			}
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*GLXContext)(nil)); err != nil {
-				return err
-			}
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*HGLRC)(nil)); err != nil {
-				return err
-			}
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*CGLContextObj)(nil)); err != nil {
-				return err
-			}
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassGlobals) ID() binary.ID      { return binaryIDGlobals }
-func (*binaryClassGlobals) New() binary.Object { return &Globals{} }
-func (*binaryClassGlobals) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeGlobals(e, obj.(*Globals))
-}
-func (*binaryClassGlobals) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Globals{}
-	return obj, doDecodeGlobals(d, obj)
-}
-func (*binaryClassGlobals) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeGlobals(d, obj.(*Globals))
-}
-func (*binaryClassGlobals) Skip(d binary.Decoder) error { return doSkipGlobals(d) }
-func (*binaryClassGlobals) Schema() *schema.Class       { return schemaGlobals }
-
-var schemaGlobals = &schema.Class{
-	TypeID:  binaryIDGlobals,
-	Package: "gles",
-	Name:    "Globals",
-	Display: "Globals",
-	Fields: []schema.Field{
-		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
-		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
-		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
-		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Name: "EGLContext", ID: (*EGLContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
-		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Name: "GLXContext", ID: (*GLXContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
-		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Name: "HGLRC", ID: (*HGLRC)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
-		{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Name: "CGLContextObj", ID: (*CGLContextObj)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
-	},
-}
-
 type binaryClassHDC struct{}
 
 func (*HDC) Class() binary.Class {
@@ -25275,6 +24916,54 @@ var schemaHDC = &schema.Class{
 	Package: "gles",
 	Name:    "HDC",
 	Display: "HDC",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassHGLRC struct{}
+
+func (*HGLRC) Class() binary.Class {
+	return (*binaryClassHGLRC)(nil)
+}
+func doEncodeHGLRC(e binary.Encoder, o *HGLRC) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeHGLRC(d binary.Decoder, o *HGLRC) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipHGLRC(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassHGLRC) ID() binary.ID      { return binaryIDHGLRC }
+func (*binaryClassHGLRC) New() binary.Object { return &HGLRC{} }
+func (*binaryClassHGLRC) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeHGLRC(e, obj.(*HGLRC))
+}
+func (*binaryClassHGLRC) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &HGLRC{}
+	return obj, doDecodeHGLRC(d, obj)
+}
+func (*binaryClassHGLRC) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeHGLRC(d, obj.(*HGLRC))
+}
+func (*binaryClassHGLRC) Skip(d binary.Decoder) error { return doSkipHGLRC(d) }
+func (*binaryClassHGLRC) Schema() *schema.Class       { return schemaHGLRC }
+
+var schemaHGLRC = &schema.Class{
+	TypeID:  binaryIDHGLRC,
+	Package: "gles",
+	Name:    "HGLRC",
+	Display: "HGLRC",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -26640,31 +26329,275 @@ func (*State) Class() binary.Class {
 	return (*binaryClassState)(nil)
 }
 func doEncodeState(e binary.Encoder, o *State) error {
-	if err := e.Value(&o.Globals); err != nil {
+	if err := e.Uint32(uint32(o.NextContextID)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.ValidateOutput); err != nil {
+	if err := e.Uint32(uint32(o.CurrentThread)); err != nil {
 		return err
+	}
+	if err := e.Uint32(uint32(len(o.Contexts))); err != nil {
+		return err
+	}
+	for k, v := range o.Contexts {
+		if err := e.Uint32(uint32(k)); err != nil {
+			return err
+		}
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.EGLContexts))); err != nil {
+		return err
+	}
+	for k, v := range o.EGLContexts {
+		if err := e.Value(&k); err != nil {
+			return err
+		}
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.GLXContexts))); err != nil {
+		return err
+	}
+	for k, v := range o.GLXContexts {
+		if err := e.Value(&k); err != nil {
+			return err
+		}
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.WGLContexts))); err != nil {
+		return err
+	}
+	for k, v := range o.WGLContexts {
+		if err := e.Value(&k); err != nil {
+			return err
+		}
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.CGLContexts))); err != nil {
+		return err
+	}
+	for k, v := range o.CGLContexts {
+		if err := e.Value(&k); err != nil {
+			return err
+		}
+		if v != nil {
+			if err := e.Object(v); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
 	}
 	return nil
 }
 func doDecodeState(d binary.Decoder, o *State) error {
-	if err := d.Value(&o.Globals); err != nil {
-		return err
-	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ValidateOutput = bool(obj)
+		o.NextContextID = ContextID(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.CurrentThread = ThreadID(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Contexts = make(ThreadIDːContextʳᵐ, count)
+		m := o.Contexts
+		for i := uint32(0); i < count; i++ {
+			var k ThreadID
+			var v *Context
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				k = ThreadID(obj)
+			}
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				v = obj.(*Context)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.EGLContexts = make(EGLContextːContextʳᵐ, count)
+		m := o.EGLContexts
+		for i := uint32(0); i < count; i++ {
+			var k EGLContext
+			var v *Context
+			if err := d.Value(&k); err != nil {
+				return err
+			}
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				v = obj.(*Context)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.GLXContexts = make(GLXContextːContextʳᵐ, count)
+		m := o.GLXContexts
+		for i := uint32(0); i < count; i++ {
+			var k GLXContext
+			var v *Context
+			if err := d.Value(&k); err != nil {
+				return err
+			}
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				v = obj.(*Context)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.WGLContexts = make(HGLRCːContextʳᵐ, count)
+		m := o.WGLContexts
+		for i := uint32(0); i < count; i++ {
+			var k HGLRC
+			var v *Context
+			if err := d.Value(&k); err != nil {
+				return err
+			}
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				v = obj.(*Context)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.CGLContexts = make(CGLContextObjːContextʳᵐ, count)
+		m := o.CGLContexts
+		for i := uint32(0); i < count; i++ {
+			var k CGLContextObj
+			var v *Context
+			if err := d.Value(&k); err != nil {
+				return err
+			}
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				v = obj.(*Context)
+			} else {
+				v = nil
+			}
+			m[k] = v
+		}
 	}
 	return nil
 }
 func doSkipState(d binary.Decoder) error {
-	if err := d.SkipValue((*Globals)(nil)); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint32(); err != nil {
 		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*EGLContext)(nil)); err != nil {
+				return err
+			}
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*GLXContext)(nil)); err != nil {
+				return err
+			}
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*HGLRC)(nil)); err != nil {
+				return err
+			}
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*CGLContextObj)(nil)); err != nil {
+				return err
+			}
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
 	}
 	return nil
 }
@@ -26689,8 +26622,13 @@ var schemaState = &schema.Class{
 	Name:    "State",
 	Display: "State",
 	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "Globals", ID: (*Globals)(nil).Class().ID()}},
-		{Declared: "ValidateOutput", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
+		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
+		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Name: "EGLContext", ID: (*EGLContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
+		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Name: "GLXContext", ID: (*GLXContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
+		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Name: "HGLRC", ID: (*HGLRC)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
+		{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Name: "CGLContextObj", ID: (*CGLContextObj)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
 	},
 }
 

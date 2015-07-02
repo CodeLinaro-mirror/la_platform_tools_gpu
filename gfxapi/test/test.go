@@ -23,11 +23,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-type State struct {
-	Globals
-	ValidateOutput bool
-}
-
 func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (uint32, uint32, error) {
 	return 0, 0, nil
 }

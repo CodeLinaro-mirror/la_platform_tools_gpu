@@ -7029,13 +7029,13 @@ namespace gles {
         GLXDrawable mDrawable;
     };
 
-    class HGLRC: public Encodable {
+    class HDC: public Encodable {
     public:
-        HGLRC() = default;
-        HGLRC(memory::Pointer Pointer) :
+        HDC() = default;
+        HDC(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1,  } };
+            static gapic::Id ID{ { 0x9c, 0x52, 0x64, 0x9a, 0xd1, 0x46, 0x9a, 0x9a, 0xa1, 0x08, 0x15, 0x09, 0x48, 0x2d, 0xd9, 0x49, 0xf9, 0x70, 0x31, 0xd1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7045,47 +7045,13 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
-    class Globals: public Encodable {
+    class HGLRC: public Encodable {
     public:
-        Globals() = default;
-        Globals(uint32_t NextContextID, uint32_t CurrentThread, std::unordered_map<uint32_t,Context*>* Contexts, std::unordered_map<EGLContext,Context*>* EGLContexts, std::unordered_map<GLXContext,Context*>* GLXContexts, std::unordered_map<HGLRC,Context*>* WGLContexts, std::unordered_map<CGLContextObj,Context*>* CGLContexts) :
-            mNextContextID(NextContextID),
-            mCurrentThread(CurrentThread),
-            mContexts(Contexts),
-            mEGLContexts(EGLContexts),
-            mGLXContexts(GLXContexts),
-            mWGLContexts(WGLContexts),
-            mCGLContexts(CGLContexts) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6b, 0xd7, 0xb2, 0xf9, 0x46, 0xfa, 0xb5, 0xa7, 0x8e, 0x26, 0xe5, 0x72, 0xe7, 0x8f, 0x33, 0x91, 0xb4, 0xb9, 0x49, 0x0c,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Uint32(this->mNextContextID);
-            e->Uint32(this->mCurrentThread);
-            GAPID_FATAL("C++ stream encoding not supported");
-            GAPID_FATAL("C++ stream encoding not supported");
-            GAPID_FATAL("C++ stream encoding not supported");
-            GAPID_FATAL("C++ stream encoding not supported");
-            GAPID_FATAL("C++ stream encoding not supported");
-        }
-
-        uint32_t mNextContextID;
-        uint32_t mCurrentThread;
-        std::unordered_map<uint32_t,Context*>* mContexts;
-        std::unordered_map<EGLContext,Context*>* mEGLContexts;
-        std::unordered_map<GLXContext,Context*>* mGLXContexts;
-        std::unordered_map<HGLRC,Context*>* mWGLContexts;
-        std::unordered_map<CGLContextObj,Context*>* mCGLContexts;
-    };
-
-    class HDC: public Encodable {
-    public:
-        HDC() = default;
-        HDC(memory::Pointer Pointer) :
+        HGLRC() = default;
+        HGLRC(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9c, 0x52, 0x64, 0x9a, 0xd1, 0x46, 0x9a, 0x9a, 0xa1, 0x08, 0x15, 0x09, 0x48, 0x2d, 0xd9, 0x49, 0xf9, 0x70, 0x31, 0xd1,  } };
+            static gapic::Id ID{ { 0x85, 0x70, 0xb4, 0x61, 0xd4, 0x4f, 0xbf, 0xd6, 0xc1, 0x35, 0x12, 0x3e, 0xfd, 0xca, 0x6b, 0xa8, 0x72, 0x03, 0x3e, 0xc1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7550,20 +7516,35 @@ namespace gles {
     class State: public Encodable {
     public:
         State() = default;
-        State(Globals Globals, bool ValidateOutput) :
-            mGlobals(Globals),
-            mValidateOutput(ValidateOutput) {}
+        State(uint32_t NextContextID, uint32_t CurrentThread, std::unordered_map<uint32_t,Context*>* Contexts, std::unordered_map<EGLContext,Context*>* EGLContexts, std::unordered_map<GLXContext,Context*>* GLXContexts, std::unordered_map<HGLRC,Context*>* WGLContexts, std::unordered_map<CGLContextObj,Context*>* CGLContexts) :
+            mNextContextID(NextContextID),
+            mCurrentThread(CurrentThread),
+            mContexts(Contexts),
+            mEGLContexts(EGLContexts),
+            mGLXContexts(GLXContexts),
+            mWGLContexts(WGLContexts),
+            mCGLContexts(CGLContexts) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x0d, 0x66, 0xef, 0x23, 0x0c, 0x81, 0xc8, 0x53, 0xd7, 0xb4, 0xb5, 0x0f, 0xcf, 0xf7, 0xc5, 0x56, 0xec, 0x4f, 0x27, 0x68,  } };
+            static gapic::Id ID{ { 0x9a, 0x1a, 0xdb, 0xe0, 0xa0, 0x77, 0x65, 0xd3, 0x62, 0x31, 0x3f, 0xcb, 0x81, 0xbd, 0x45, 0xc3, 0x24, 0xe7, 0x94, 0x2d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Value(this->mGlobals);
-            e->Bool(this->mValidateOutput);
+            e->Uint32(this->mNextContextID);
+            e->Uint32(this->mCurrentThread);
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
+            GAPID_FATAL("C++ stream encoding not supported");
         }
 
-        Globals mGlobals;
-        bool mValidateOutput;
+        uint32_t mNextContextID;
+        uint32_t mCurrentThread;
+        std::unordered_map<uint32_t,Context*>* mContexts;
+        std::unordered_map<EGLContext,Context*>* mEGLContexts;
+        std::unordered_map<GLXContext,Context*>* mGLXContexts;
+        std::unordered_map<HGLRC,Context*>* mWGLContexts;
+        std::unordered_map<CGLContextObj,Context*>* mCGLContexts;
     };
 
     class StopTimer: public Encodable {

@@ -6313,35 +6313,6 @@ func (p F64ᵖ) Write(value float64, ϟs *gfxapi.State)
 ```
 Write writes value to the float64 element at the pointer.
 
-#### type Globals
-
-```go
-type Globals struct {
-	binary.Generate
-	U8s  U8ˢ
-	U16s U16ˢ
-	U32s U32ˢ
-	Ints Intˢ
-	Str  string
-}
-```
-
-//////////////////////////////////////////////////////////////////////////////
-Globals
-//////////////////////////////////////////////////////////////////////////////
-
-#### func (*Globals) Class
-
-```go
-func (*Globals) Class() binary.Class
-```
-
-#### func (*Globals) Init
-
-```go
-func (g *Globals) Init()
-```
-
 #### type Imported
 
 ```go
@@ -7663,11 +7634,30 @@ Info returns the SliceInfo. It is used to conform to the Slice interface.
 
 ```go
 type State struct {
-	Globals
-	ValidateOutput bool
+	binary.Generate
+	U8s  U8ˢ
+	U16s U16ˢ
+	U32s U32ˢ
+	Ints Intˢ
+	Str  string
 }
 ```
 
+//////////////////////////////////////////////////////////////////////////////
+State
+//////////////////////////////////////////////////////////////////////////////
+
+#### func (*State) Class
+
+```go
+func (*State) Class() binary.Class
+```
+
+#### func (*State) Init
+
+```go
+func (g *State) Init()
+```
 
 #### type Tester
 
