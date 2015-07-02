@@ -42,148 +42,6 @@ func (*ApiId) Class() binary.Class
 func (h ApiId) Valid() bool
 ```
 
-#### type ApiIdArray
-
-```go
-type ApiIdArray []ApiId
-```
-
-Array ApiIdˢ
-
-#### func (ApiIdArray) Format
-
-```go
-func (a ApiIdArray) Format(f fmt.State, c rune)
-```
-
-#### type AtomGroup
-
-```go
-type AtomGroup struct {
-	binary.Generate
-	Name      string
-	Range     AtomRange
-	SubGroups AtomGroupArray
-}
-```
-
-Class AtomGroup
-
-#### func  CreateAtomGroup
-
-```go
-func CreateAtomGroup(
-	Name string,
-	Range AtomRange,
-	SubGroups AtomGroupArray,
-) *AtomGroup
-```
-
-#### func (*AtomGroup) Class
-
-```go
-func (*AtomGroup) Class() binary.Class
-```
-
-#### func (*AtomGroup) GetName
-
-```go
-func (c *AtomGroup) GetName() string
-```
-
-#### func (*AtomGroup) GetRange
-
-```go
-func (c *AtomGroup) GetRange() AtomRange
-```
-
-#### func (*AtomGroup) GetSubGroups
-
-```go
-func (c *AtomGroup) GetSubGroups() AtomGroupArray
-```
-
-#### func (*AtomGroup) Pack
-
-```go
-func (g *AtomGroup) Pack(o atom.Group)
-```
-Pack packs the atom Group o into the RPC-friendly AtomGroup structure.
-
-#### func (AtomGroup) Unpack
-
-```go
-func (g AtomGroup) Unpack(o *atom.Group)
-```
-Unpack unpacks the RPC-friendly AtomGroup structure into the atom Group o.
-
-#### type AtomGroupArray
-
-```go
-type AtomGroupArray []AtomGroup
-```
-
-Array AtomGroupˢ
-
-#### func (AtomGroupArray) Format
-
-```go
-func (a AtomGroupArray) Format(f fmt.State, c rune)
-```
-
-#### type AtomRange
-
-```go
-type AtomRange struct {
-	binary.Generate
-	First uint64
-	Count uint64
-}
-```
-
-Class AtomRange
-
-#### func  CreateAtomRange
-
-```go
-func CreateAtomRange(
-	First uint64,
-	Count uint64,
-) *AtomRange
-```
-
-#### func (*AtomRange) Class
-
-```go
-func (*AtomRange) Class() binary.Class
-```
-
-#### func (*AtomRange) GetCount
-
-```go
-func (c *AtomRange) GetCount() uint64
-```
-
-#### func (*AtomRange) GetFirst
-
-```go
-func (c *AtomRange) GetFirst() uint64
-```
-
-#### func (*AtomRange) Pack
-
-```go
-func (r *AtomRange) Pack(o atom.Range)
-```
-Pack packs the atom Range o into the RPC-friendly AtomRange structure.
-
-#### func (AtomRange) Unpack
-
-```go
-func (r AtomRange) Unpack(o *atom.Range)
-```
-Unpack unpacks the RPC-friendly AtomRange structure into the atom Range o.
-
 #### type AtomRangeTimer
 
 ```go
@@ -231,26 +89,12 @@ func (c *AtomRangeTimer) GetNanoseconds() uint64
 func (c *AtomRangeTimer) GetToAtomId() uint64
 ```
 
-#### type AtomRangeTimerArray
-
-```go
-type AtomRangeTimerArray []AtomRangeTimer
-```
-
-Array AtomRangeTimerˢ
-
-#### func (AtomRangeTimerArray) Format
-
-```go
-func (a AtomRangeTimerArray) Format(f fmt.State, c rune)
-```
-
 #### type AtomStream
 
 ```go
 type AtomStream struct {
 	binary.Generate
-	Data U8Array
+	Data []uint8
 }
 ```
 
@@ -260,7 +104,7 @@ Class AtomStream
 
 ```go
 func CreateAtomStream(
-	Data U8Array,
+	Data []uint8,
 ) *AtomStream
 ```
 
@@ -288,7 +132,7 @@ func (*AtomStream) Class() binary.Class
 #### func (*AtomStream) GetData
 
 ```go
-func (c *AtomStream) GetData() U8Array
+func (c *AtomStream) GetData() []uint8
 ```
 
 #### func (AtomStream) List
@@ -367,26 +211,12 @@ func (c *AtomTimer) GetAtomId() uint64
 func (c *AtomTimer) GetNanoseconds() uint64
 ```
 
-#### type AtomTimerArray
-
-```go
-type AtomTimerArray []AtomTimer
-```
-
-Array AtomTimerˢ
-
-#### func (AtomTimerArray) Format
-
-```go
-func (a AtomTimerArray) Format(f fmt.State, c rune)
-```
-
 #### type Binary
 
 ```go
 type Binary struct {
 	binary.Generate
-	Data U8Array
+	Data []uint8
 }
 ```
 
@@ -396,7 +226,7 @@ Class Binary
 
 ```go
 func CreateBinary(
-	Data U8Array,
+	Data []uint8,
 ) *Binary
 ```
 
@@ -416,7 +246,7 @@ func (*Binary) Class() binary.Class
 #### func (*Binary) GetData
 
 ```go
-func (c *Binary) GetData() U8Array
+func (c *Binary) GetData() []uint8
 ```
 
 #### type BinaryId
@@ -457,7 +287,7 @@ type Capture struct {
 	Name   string
 	Atoms  AtomStreamId
 	Report ReportId
-	Apis   ApiIdArray
+	Apis   []ApiId
 }
 ```
 
@@ -470,7 +300,7 @@ func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
 	Report ReportId,
-	Apis ApiIdArray,
+	Apis []ApiId,
 ) *Capture
 ```
 
@@ -490,7 +320,7 @@ func (*Capture) Class() binary.Class
 #### func (*Capture) GetApis
 
 ```go
-func (c *Capture) GetApis() ApiIdArray
+func (c *Capture) GetApis() []ApiId
 ```
 
 #### func (*Capture) GetAtoms
@@ -539,48 +369,6 @@ func (*CaptureId) Class() binary.Class
 
 ```go
 func (h CaptureId) Valid() bool
-```
-
-#### type CaptureIdArray
-
-```go
-type CaptureIdArray []CaptureId
-```
-
-Array CaptureIdˢ
-
-#### func (CaptureIdArray) Format
-
-```go
-func (a CaptureIdArray) Format(f fmt.State, c rune)
-```
-
-#### type ClassArray
-
-```go
-type ClassArray []schema.Class
-```
-
-Array Classˢ
-
-#### func (ClassArray) Format
-
-```go
-func (a ClassArray) Format(f fmt.State, c rune)
-```
-
-#### type ClassPtrArray
-
-```go
-type ClassPtrArray []*schema.Class
-```
-
-Array Classᵖˢ
-
-#### func (ClassPtrArray) Format
-
-```go
-func (a ClassPtrArray) Format(f fmt.State, c rune)
 ```
 
 #### type Client
@@ -761,26 +549,12 @@ func (*DeviceId) Class() binary.Class
 func (h DeviceId) Valid() bool
 ```
 
-#### type DeviceIdArray
-
-```go
-type DeviceIdArray []DeviceId
-```
-
-Array DeviceIdˢ
-
-#### func (DeviceIdArray) Format
-
-```go
-func (a DeviceIdArray) Format(f fmt.State, c rune)
-```
-
 #### type Hierarchy
 
 ```go
 type Hierarchy struct {
 	binary.Generate
-	Root AtomGroup
+	Root atom.Group
 }
 ```
 
@@ -790,7 +564,7 @@ Class Hierarchy
 
 ```go
 func CreateHierarchy(
-	Root AtomGroup,
+	Root atom.Group,
 ) *Hierarchy
 ```
 
@@ -811,7 +585,7 @@ func (*Hierarchy) Class() binary.Class
 #### func (*Hierarchy) GetRoot
 
 ```go
-func (c *Hierarchy) GetRoot() AtomGroup
+func (c *Hierarchy) GetRoot() atom.Group
 ```
 
 #### type HierarchyId
@@ -981,10 +755,10 @@ func (h ImageInfoId) Valid() bool
 ```go
 type MemoryInfo struct {
 	binary.Generate
-	Data     U8Array
-	Reads    MemoryRangeArray
-	Writes   MemoryRangeArray
-	Observed MemoryRangeArray
+	Data     []uint8
+	Reads    memory.RangeList
+	Writes   memory.RangeList
+	Observed memory.RangeList
 }
 ```
 
@@ -994,10 +768,10 @@ Class MemoryInfo
 
 ```go
 func CreateMemoryInfo(
-	Data U8Array,
-	Reads MemoryRangeArray,
-	Writes MemoryRangeArray,
-	Observed MemoryRangeArray,
+	Data []uint8,
+	Reads memory.RangeList,
+	Writes memory.RangeList,
+	Observed memory.RangeList,
 ) *MemoryInfo
 ```
 
@@ -1018,25 +792,25 @@ func (*MemoryInfo) Class() binary.Class
 #### func (*MemoryInfo) GetData
 
 ```go
-func (c *MemoryInfo) GetData() U8Array
+func (c *MemoryInfo) GetData() []uint8
 ```
 
 #### func (*MemoryInfo) GetObserved
 
 ```go
-func (c *MemoryInfo) GetObserved() MemoryRangeArray
+func (c *MemoryInfo) GetObserved() memory.RangeList
 ```
 
 #### func (*MemoryInfo) GetReads
 
 ```go
-func (c *MemoryInfo) GetReads() MemoryRangeArray
+func (c *MemoryInfo) GetReads() memory.RangeList
 ```
 
 #### func (*MemoryInfo) GetWrites
 
 ```go
-func (c *MemoryInfo) GetWrites() MemoryRangeArray
+func (c *MemoryInfo) GetWrites() memory.RangeList
 ```
 
 #### type MemoryInfoId
@@ -1069,104 +843,21 @@ func (*MemoryInfoId) Class() binary.Class
 func (h MemoryInfoId) Valid() bool
 ```
 
-#### type MemoryRange
-
-```go
-type MemoryRange struct {
-	binary.Generate
-	Base uint64
-	Size uint64
-}
-```
-
-Class MemoryRange
-
-#### func  CreateMemoryRange
-
-```go
-func CreateMemoryRange(
-	Base uint64,
-	Size uint64,
-) *MemoryRange
-```
-
-#### func (*MemoryRange) Class
-
-```go
-func (*MemoryRange) Class() binary.Class
-```
-
-#### func (*MemoryRange) GetBase
-
-```go
-func (c *MemoryRange) GetBase() uint64
-```
-
-#### func (*MemoryRange) GetSize
-
-```go
-func (c *MemoryRange) GetSize() uint64
-```
-
-#### func (*MemoryRange) Pack
-
-```go
-func (r *MemoryRange) Pack(o memory.Range)
-```
-Pack packs the memory Range o into the RPC-friendly MemoryRange structure.
-
-#### func (MemoryRange) Unpack
-
-```go
-func (r MemoryRange) Unpack(o *memory.Range)
-```
-Unpack unpacks the RPC-friendly MemoryRange structure into the memory Range o.
-
-#### type MemoryRangeArray
-
-```go
-type MemoryRangeArray []MemoryRange
-```
-
-Array MemoryRangeˢ
-
-#### func (MemoryRangeArray) Format
-
-```go
-func (a MemoryRangeArray) Format(f fmt.State, c rune)
-```
-
-#### func (*MemoryRangeArray) Pack
-
-```go
-func (l *MemoryRangeArray) Pack(o memory.RangeList)
-```
-Pack packs the memory RangeList o into the RPC-friendly MemoryRangeArray
-structure.
-
-#### func (MemoryRangeArray) Unpack
-
-```go
-func (l MemoryRangeArray) Unpack(o *memory.RangeList)
-```
-Unpack unpacks the RPC-friendly MemoryRangeArray structure into the memory
-RangeList o.
-
 #### type RPC
 
 ```go
 type RPC interface {
-	GetSchema(l log.Logger) (ClassPtrArray, error)
-	Import(name string, Data U8Array, l log.Logger) (CaptureId, error)
-	GetCaptures(l log.Logger) (CaptureIdArray, error)
-	GetDevices(l log.Logger) (DeviceIdArray, error)
+	GetSchema(l log.Logger) ([]*schema.Class, error)
+	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
+	GetCaptures(l log.Logger) ([]CaptureId, error)
+	GetDevices(l log.Logger) ([]DeviceId, error)
 	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
-	GetMemoryInfo(capture CaptureId, after uint64, rng MemoryRange, l log.Logger) (MemoryInfoId, error)
+	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
-	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array, l log.Logger) (BinaryId, error)
+	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
@@ -1234,7 +925,7 @@ func (c *RenderSettings) GetWireframe() bool
 ```go
 type Report struct {
 	binary.Generate
-	Items ReportItemArray
+	Items []ReportItem
 }
 ```
 
@@ -1244,7 +935,7 @@ Class Report
 
 ```go
 func CreateReport(
-	Items ReportItemArray,
+	Items []ReportItem,
 ) *Report
 ```
 
@@ -1264,7 +955,7 @@ func (*Report) Class() binary.Class
 #### func (*Report) GetItems
 
 ```go
-func (c *Report) GetItems() ReportItemArray
+func (c *Report) GetItems() []ReportItem
 ```
 
 #### type ReportId
@@ -1342,20 +1033,6 @@ func (c *ReportItem) GetMessage() string
 
 ```go
 func (c *ReportItem) GetSeverity() Severity
-```
-
-#### type ReportItemArray
-
-```go
-type ReportItemArray []ReportItem
-```
-
-Array ReportItemˢ
-
-#### func (ReportItemArray) Format
-
-```go
-func (a ReportItemArray) Format(f fmt.State, c rune)
 ```
 
 #### type Resolver
@@ -1577,9 +1254,9 @@ func (h StateId) Valid() bool
 ```go
 type TimingInfo struct {
 	binary.Generate
-	PerCommand  AtomTimerArray
-	PerDrawCall AtomRangeTimerArray
-	PerFrame    AtomRangeTimerArray
+	PerCommand  []AtomTimer
+	PerDrawCall []AtomRangeTimer
+	PerFrame    []AtomRangeTimer
 }
 ```
 
@@ -1589,9 +1266,9 @@ Class TimingInfo
 
 ```go
 func CreateTimingInfo(
-	PerCommand AtomTimerArray,
-	PerDrawCall AtomRangeTimerArray,
-	PerFrame AtomRangeTimerArray,
+	PerCommand []AtomTimer,
+	PerDrawCall []AtomRangeTimer,
+	PerFrame []AtomRangeTimer,
 ) *TimingInfo
 ```
 
@@ -1612,19 +1289,19 @@ func (*TimingInfo) Class() binary.Class
 #### func (*TimingInfo) GetPerCommand
 
 ```go
-func (c *TimingInfo) GetPerCommand() AtomTimerArray
+func (c *TimingInfo) GetPerCommand() []AtomTimer
 ```
 
 #### func (*TimingInfo) GetPerDrawCall
 
 ```go
-func (c *TimingInfo) GetPerDrawCall() AtomRangeTimerArray
+func (c *TimingInfo) GetPerDrawCall() []AtomRangeTimer
 ```
 
 #### func (*TimingInfo) GetPerFrame
 
 ```go
-func (c *TimingInfo) GetPerFrame() AtomRangeTimerArray
+func (c *TimingInfo) GetPerFrame() []AtomRangeTimer
 ```
 
 #### type TimingInfoId
@@ -1701,32 +1378,4 @@ func (v *TimingMask) Parse(s string) error
 
 ```go
 func (v TimingMask) String() string
-```
-
-#### type U64Array
-
-```go
-type U64Array []uint64
-```
-
-Array U64ˢ
-
-#### func (U64Array) Format
-
-```go
-func (a U64Array) Format(f fmt.State, c rune)
-```
-
-#### type U8Array
-
-```go
-type U8Array []uint8
-```
-
-Array U8ˢ
-
-#### func (U8Array) Format
-
-```go
-func (a U8Array) Format(f fmt.State, c rune)
 ```
