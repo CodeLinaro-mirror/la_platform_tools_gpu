@@ -38,7 +38,7 @@ const rpc_go_tmpl = `{{/*
 
 {{define "Rpc"}}
   {{template "GeneratedHeader"}}
-  {{Macro (print "Imports" $.role) $.api}}
+  {{Macro (print "RpcInterface" $.role) $.api}}
 ¶
   {{range $i, $c := $.api.Functions}}
     {{Macro (print "Call" $.role)   $c}}
@@ -71,14 +71,7 @@ const rpc_go_tmpl = `{{/*
 {{end}}
 
 
-{{define "Imports"}}
-  package {{Global "OutputDir"}};
-
-  import (
-    "android.googlesource.com/platform/tools/gpu/binary"
-    "android.googlesource.com/platform/tools/gpu/log"
-  )
-
+{{define "RpcInterface"}}
   type RPC interface {
     {{range $_, $c := $.Functions}}
       {{Macro "RpcInterfaceMethod" $c}}
@@ -86,18 +79,9 @@ const rpc_go_tmpl = `{{/*
   }
 {{end}}
 
-{{define "ImportsExtra"}}
-  package {{Global "OutputDir"}};
-{{end}}
+{{define "RpcInterfaceExtra"}}{{end}}
 
-{{define "ImportsHelpers"}}
-  package {{Global "OutputDir"}};
-
-  import (
-    "fmt"
-    "android.googlesource.com/platform/tools/gpu/binary"
-  )
-{{end}}
+{{define "RpcInterfaceHelpers"}}{{end}}
 
 
 {{/*
@@ -467,16 +451,6 @@ func (h {{$.Name}}) Valid() bool {
   {{AssertType $ "API"}}
 
   {{template "GeneratedHeader"}}
-  package {{Global "OutputDir"}};
-
-  import (
-    "io"
-
-    "android.googlesource.com/platform/tools/gpu/binary/registry"
-    "android.googlesource.com/platform/tools/gpu/log"
-    "android.googlesource.com/platform/tools/gpu/multiplexer"
-    "android.googlesource.com/platform/tools/gpu/rpc"
-  )
 
   // Client is the client interface for RPC calls.
   type Client interface {
@@ -532,17 +506,6 @@ func (h {{$.Name}}) Valid() bool {
   {{AssertType $ "API"}}
 
   {{template "GeneratedHeader"}}
-  package {{Global "OutputDir"}};
-
-  import (
-    "fmt"
-    "io"
-    "runtime/debug"
-
-    "android.googlesource.com/platform/tools/gpu/config"
-    "android.googlesource.com/platform/tools/gpu/log"
-    "android.googlesource.com/platform/tools/gpu/rpc"
-  )
 
   func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
     rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
@@ -1301,10 +1264,30 @@ const rpc_common_go_tmpl = `{{/*
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a comment stating that the file is automatically generated.
+  Emits a comment stating that the file is automatically generated, and the
+  main package an imports declaration.
 -------------------------------------------------------------------------------
 */}}
-{{define "GeneratedHeader"}}{{Copyright "generated_by" "rpcapi"}}¶{{end}}
+{{define "GeneratedHeader"}}{{Copyright "generated_by" "rpcapi"}}¶
+
+package {{Global "OutputDir"}};
+
+import (
+  "fmt"
+  "io"
+  "runtime/debug"
+
+  "android.googlesource.com/platform/tools/gpu/atom"
+  "android.googlesource.com/platform/tools/gpu/binary"
+  "android.googlesource.com/platform/tools/gpu/binary/registry"
+  "android.googlesource.com/platform/tools/gpu/binary/schema"
+  "android.googlesource.com/platform/tools/gpu/config"
+  "android.googlesource.com/platform/tools/gpu/log"
+  "android.googlesource.com/platform/tools/gpu/memory"
+  "android.googlesource.com/platform/tools/gpu/multiplexer"
+  "android.googlesource.com/platform/tools/gpu/rpc"
+)
+{{end}}
 
 
 {{/*
