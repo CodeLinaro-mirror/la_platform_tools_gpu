@@ -8,6 +8,7 @@ package service
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -333,43 +334,14 @@ func CreateAtomStream(
 func (c *AtomStream) GetData() []uint8 { return c.Data }
 
 func CreateHierarchy(
-	Root AtomGroup,
+	Root atom.Group,
 ) *Hierarchy {
 	return &Hierarchy{
 		Root: Root,
 	}
 }
 
-func (c *Hierarchy) GetRoot() AtomGroup { return c.Root }
-
-func CreateAtomGroup(
-	Name string,
-	Range AtomRange,
-	SubGroups []AtomGroup,
-) *AtomGroup {
-	return &AtomGroup{
-		Name:      Name,
-		Range:     Range,
-		SubGroups: SubGroups,
-	}
-}
-
-func (c *AtomGroup) GetName() string           { return c.Name }
-func (c *AtomGroup) GetRange() AtomRange       { return c.Range }
-func (c *AtomGroup) GetSubGroups() []AtomGroup { return c.SubGroups }
-
-func CreateAtomRange(
-	First uint64,
-	Count uint64,
-) *AtomRange {
-	return &AtomRange{
-		First: First,
-		Count: Count,
-	}
-}
-
-func (c *AtomRange) GetFirst() uint64 { return c.First }
-func (c *AtomRange) GetCount() uint64 { return c.Count }
+func (c *Hierarchy) GetRoot() atom.Group { return c.Root }
 
 func CreateMemoryInfo(
 	Data []uint8,
