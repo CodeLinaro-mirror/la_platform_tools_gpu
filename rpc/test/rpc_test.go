@@ -51,7 +51,7 @@ func (s *server) Add(a uint32, b uint32, l log.Logger) (uint32, error) {
 
 func (s *server) EnumToString(e Enum, l log.Logger) (string, error) {
 	s.calls = append(s.calls, fmt.Sprintf("EnumToString(%v)", e))
-	return e.String(), s.err
+	return fmt.Sprint(e), s.err
 }
 
 func (s *server) GetStruct(l log.Logger) (Struct, error) {
