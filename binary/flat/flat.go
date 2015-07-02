@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/pod"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
@@ -61,13 +60,9 @@ func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode
 func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
 func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
 
-func (e *encoder) Variant(v interface{}) error {
-	if v == nil {
-		return e.ID(binary.ID{})
-	}
-	obj := pod.Wrap(v)
+func (e *encoder) Variant(obj binary.Object) error {
 	if obj == nil {
-		return binary.ErrNotEncodable{Value: v}
+		return e.ID(binary.ID{})
 	}
 	class := obj.Class()
 	if err := e.ID(class.ID()); err != nil {
@@ -76,14 +71,13 @@ func (e *encoder) Variant(v interface{}) error {
 	return class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (interface{}, error) {
+func (d *decoder) Variant() (binary.Object, error) {
 	if id, err := d.ID(); err != nil {
 		return nil, err
 	} else if class := d.Namespace.Lookup(id); class == nil {
 		return nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		obj, err := class.Decode(d)
-		return pod.Unwrap(obj), err
+		return class.Decode(d)
 	}
 }
 
@@ -97,7 +91,7 @@ func (d *decoder) SkipVariant() (binary.ID, error) {
 	}
 }
 
-func (e *encoder) Object(v interface{}) error       { return e.Variant(v) }
-func (d *decoder) Object() (interface{}, error)     { return d.Variant() }
+func (e *encoder) Object(obj binary.Object) error   { return e.Variant(obj) }
+func (d *decoder) Object() (binary.Object, error)   { return d.Variant() }
 func (d *decoder) SkipObject() (binary.ID, error)   { return d.SkipVariant() }
 func (d *decoder) Lookup(id binary.ID) binary.Class { return d.Namespace.Lookup(id) }

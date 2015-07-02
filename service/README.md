@@ -1531,7 +1531,7 @@ func (v Severity) String() string
 #### type State
 
 ```go
-type State interface{}
+type State binary.Object
 ```
 
 
