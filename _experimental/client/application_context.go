@@ -182,9 +182,17 @@ func (c *ApplicationContext) UpdateSchema() {
 			return
 		}
 		log.Infof(c.logger, "Schema with %d classes", len(classes))
+		atoms := 0
 		for _, class := range classes {
-			c.schemaNamespace.Add(class)
+			// Find the atom metadata, if present
+			if meta := atom.FindMetadata(class); meta != nil {
+				atoms++
+				c.schemaNamespace.Add(NewAtomClass(class, meta))
+			} else {
+				c.schemaNamespace.Add(class)
+			}
 		}
+		log.Infof(c.logger, "Schema with %d atoms", atoms)
 		// Replace the current RPC
 		c.rpc = service.NewClient(c.rpc.Multiplexer(), c.namespace)
 	}()
