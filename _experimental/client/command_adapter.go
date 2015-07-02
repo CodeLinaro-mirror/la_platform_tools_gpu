@@ -133,16 +133,6 @@ func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationConte
 	})
 }
 
-func asPointer(p *schema.Object) (memory.Pointer, bool) {
-	if len(p.Type.Fields) != 1 {
-		return memory.Pointer{}, false
-	}
-	if ptr, ok := p.Fields[0].(*memory.Pointer); ok {
-		return *ptr, true
-	}
-	return memory.Pointer{}, false
-}
-
 func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	a := appCtx.Atoms()[id]
 	active := true
@@ -178,44 +168,38 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 			ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
 		}
 		var c gxui.Control
-		switch ty := info.Type.(type) {
-		case *schema.Struct:
-			switch v := v.(type) {
-			case *schema.Object:
-				if p, ok := asPointer(v); ok {
-					b := t.CreateButton()
-					b.SetMargin(math.Spacing{})
-					//b.SetPadding(math.Spacing{})
-					b.AddChild(CreateLabel(t, p.String(), CONSTANT_COLOR, active))
-					b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(p) })
-					c = b
-				}
 
-			case *atom.Observations:
-				continue //don't display observations as a parameter
-			}
+		switch v := schema.Underlying(v).(type) {
+		case *memory.Pointer:
+			b := t.CreateButton()
+			b.SetMargin(math.Spacing{})
+			//b.SetPadding(math.Spacing{})
+			b.AddChild(CreateLabel(t, v.String(), CONSTANT_COLOR, active))
+			b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(*v) })
+			c = b
 
-		case *schema.Primitive:
-			switch ty.Method {
-			case schema.Bool:
-				c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
-					a.SetField(argIdx, v)
-					appCtx.ReplaceAtom(a, id)
-				})
+		case *atom.Observations:
+			continue //don't display observations as a parameter
 
-			case schema.Int8, schema.Int16, schema.Int32, schema.Int64:
-				c = createIntField(t, a, argIdx, appCtx, id)
+		case bool:
+			c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
+				a.SetField(argIdx, v)
+				appCtx.ReplaceAtom(a, id)
+			})
 
-			case schema.Uint8, schema.Uint16, schema.Uint32, schema.Uint64:
-				c = createUintField(t, a, argIdx, appCtx, id)
+		case int8, int16, int32, int64:
+			c = createIntField(t, a, argIdx, appCtx, id)
 
-			case schema.Float32, schema.Float64:
-				c = createFloatField(t, a, argIdx, appCtx, id)
-			}
-		}
-		if c == nil {
+		case uint8, uint16, uint32, uint64:
+			c = createUintField(t, a, argIdx, appCtx, id)
+
+		case float32, float64:
+			c = createFloatField(t, a, argIdx, appCtx, id)
+
+		default:
 			c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
 		}
+
 		ll.AddChild(c)
 		needcomma = true
 		appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
