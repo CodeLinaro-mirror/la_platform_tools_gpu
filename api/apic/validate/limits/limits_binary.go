@@ -5,7 +5,13 @@
 
 package limits
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
+
+var ConstantValues schema.Constants
 
 const _boolLimit_name = "FalseTrueMaybe"
 
@@ -13,6 +19,17 @@ var _boolLimit_map = map[boolLimit]string{
 	0: _boolLimit_name[0:5],
 	1: _boolLimit_name[5:9],
 	2: _boolLimit_name[9:14],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "boolLimit", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _boolLimit_name[0:5], Value: int32(0)},
+			{Name: _boolLimit_name[5:9], Value: int32(1)},
+			{Name: _boolLimit_name[9:14], Value: int32(2)},
+		},
+	})
 }
 
 func (v boolLimit) String() string {
