@@ -81,6 +81,7 @@ type ApplicationContext struct {
 	timingPerCommand    map[uint64]uint64
 	namespace           *registry.Namespace // The namespace to use in coders
 	schemaNamespace     *registry.Namespace // The namespace that holds the schema classes
+	constants           map[string]schema.ConstantSet
 }
 
 func connectServer(config Config) (net.Conn, error) {
@@ -166,6 +167,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		onStateUpdated:      gxui.CreateEvent(func() {}),
 		onTimingInfoUpdated: gxui.CreateEvent(func() {}),
 		selectedAtomID:      InvalidAtomID,
+		constants:           map[string]schema.ConstantSet{},
 	}
 	appCtx.schemaNamespace = registry.NewNamespace()
 	// make the decoder namespace try the global namespace before the schema one
@@ -192,6 +194,9 @@ func (c *ApplicationContext) UpdateSchema() {
 			}
 		}
 		log.Infof(c.logger, "Schema with %d atoms", atoms)
+		for _, s := range s.Constants {
+			c.constants[s.Type.String()] = s
+		}
 		// Replace the current RPC
 		c.rpc = service.NewClient(c.rpc.Multiplexer(), c.namespace)
 	}()
