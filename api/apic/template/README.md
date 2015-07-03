@@ -148,6 +148,14 @@ func (*Functions) AssertType(v interface{}, expected ...string) (string, error)
 ```
 Asserts that the type of v is in the list of expected types
 
+#### func (*Functions) Bitpos
+
+```go
+func (*Functions) Bitpos(v uint32) int
+```
+Bitpos returns the position of the only non-zero bit of v. If none or more than
+one bits are non-zero in v, returns -1.
+
 #### func (Functions) Contains
 
 ```go
