@@ -126,7 +126,7 @@ func make_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 	ctx.with(semantic.Uint64Type, func() {
 		size = expression(ctx, in.Arguments[0])
 	})
-	size = castToU64(ctx, in.Arguments[0], size)
+	size = castTo(ctx, in.Arguments[0], size, semantic.Uint64Type)
 	out := &semantic.Make{AST: in, Type: getSliceType(ctx, in, t), Size: size}
 	ctx.mappings[in] = out
 	return out

@@ -18,6 +18,7 @@ const (
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
 	KeywordConst     = "const"
+	KeywordDefine    = "define"
 	KeywordElse      = "else"
 	KeywordEnum      = "enum"
 	KeywordExtern    = "extern"
@@ -96,16 +97,17 @@ var (
 
 ```go
 type API struct {
-	CST        *parse.Branch // underlying parse structure for this node
-	Imports    []*Import     // api files imported with the "import" keyword
-	Macros     []*Function   // functions declared with the "macro" keyword
-	Externs    []*Function   // functions declared with the "extern" keyword
-	Commands   []*Function   // functions declared with the "cmd" keyword
-	Pseudonyms []*Pseudonym  // strong type aliases declared with the "type" keyword
-	Aliases    []*Alias      // weak type aliases declared with the "alias" keyword
-	Enums      []*Enum       // enumerated types, declared with the "enum" keyword
-	Classes    []*Class      // class types, declared with the "class" keyword
-	Fields     []*Field      // variables declared at the global scope
+	CST         *parse.Branch // underlying parse structure for this node
+	Imports     []*Import     // api files imported with the "import" keyword
+	Macros      []*Function   // functions declared with the "macro" keyword
+	Externs     []*Function   // functions declared with the "extern" keyword
+	Commands    []*Function   // functions declared with the "cmd" keyword
+	Pseudonyms  []*Pseudonym  // strong type aliases declared with the "type" keyword
+	Aliases     []*Alias      // weak type aliases declared with the "alias" keyword
+	Enums       []*Enum       // enumerated types, declared with the "enum" keyword
+	Classes     []*Class      // class types, declared with the "class" keyword
+	Fields      []*Field      // variables declared at the global scope
+	Definitions []*Definition // definitions declared with the "define" keyword
 }
 ```
 
@@ -335,6 +337,25 @@ immutable local variable with the specified value and inferred type.
 
 ```go
 func (t DeclareLocal) Fragment() parse.Fragment
+```
+
+#### type Definition
+
+```go
+type Definition struct {
+	CST         *parse.Branch // underlying parse structure for this node
+	Annotations Annotations   // the annotations applied to this definition
+	Name        *Identifier   // the name of this definition
+	Expression  Node          // the expression this definition expands to
+}
+```
+
+Definition declares a new named literal, has the form «"define" name value».
+
+#### func (Definition) Fragment
+
+```go
+func (t Definition) Fragment() parse.Fragment
 ```
 
 #### type Enum

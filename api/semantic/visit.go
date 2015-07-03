@@ -105,6 +105,11 @@ func Visit(node Node, visitor func(Node)) {
 			visitor(c)
 		}
 		visitor(n.Expression)
+	case *Definition:
+		visitor(n.Expression)
+	case *DefinitionUsage:
+		visitor(n.Expression)
+		visitor(n.Definition)
 	case *DeclareLocal:
 		visitor(n.Local)
 	case *Enum:

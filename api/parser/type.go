@@ -55,6 +55,22 @@ func requireField(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.F
 	return f
 }
 
+// { annotation } 'define' identifier expression
+func definition(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Definition {
+	if !peekKeyword(ast.KeywordDefine, p) {
+		return nil
+	}
+	d := &ast.Definition{}
+	consumeAnnotations(&d.Annotations, a)
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		d.CST = cst
+		requireKeyword(ast.KeywordDefine, p, cst)
+		d.Name = requireIdentifier(p, cst)
+		d.Expression = requireExpression(p, cst)
+	})
+	return d
+}
+
 // { annotation } ( 'enum' | 'bitfield' ) [ : identifier { ',' identifer} ] '{' { identifier '=' expression [ ',' ] } '}'
 func enum(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Enum {
 	if !peekKeyword(ast.KeywordEnum, p) && !peekKeyword(ast.KeywordBitfield, p) {
