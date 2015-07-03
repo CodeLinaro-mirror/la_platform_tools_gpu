@@ -104,24 +104,6 @@ func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceId, error) {
 	return ids, nil
 }
 
-// GetState returns an identifier to a binary blob containing the graphics state
-// immediately following the atom after.
-// The binary blob can be fetched with a call to ResolveBinary, and decoded
-// using the capture's schema.
-func (s rpcServer) GetState(
-	captureID service.CaptureId,
-	api service.ApiId,
-	at uint64,
-	l log.Logger) (service.StateId, error) {
-
-	id, err := database.Store(&builder.GetState{
-		Capture: captureID,
-		API:     api,
-		After:   atom.ID(at),
-	}, s.Database, l)
-	return service.StateId{ID: id}, err
-}
-
 // GetHierarchy returns the atom hierarchy identifier for the given capture.
 // Currently there is only one hierarchy per capture, but this is likely to
 // change in the future.

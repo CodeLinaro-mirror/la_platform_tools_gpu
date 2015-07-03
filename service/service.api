@@ -26,7 +26,6 @@ import schema "schema.api"
 @handle type string ImageInfoId
 @handle type string MemoryInfoId
 @handle type string ReportId
-@handle type string StateId
 @handle type string TimingInfoId
 
 // The GetSchema returns the type and constant schema descriptions for all
@@ -46,12 +45,6 @@ cmd CaptureId[] GetCaptures() { return ? }
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
 cmd DeviceId[] GetDevices() { return ? }
-
-// GetState returns an identifier to a state object containing the graphics
-// state for the specified API immediately following the atom after.
-// The state object can be fetched with a call to ResolveState.
-cmd StateId GetState(CaptureId capture, ApiId api, u64 after)
-{ return ? }
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture.
 // Currently there is only one hierarchy per capture, but this is likely to
@@ -128,7 +121,6 @@ cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
 cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
 cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
 cmd Report             ResolveReport(ReportId id) { return ? }
-cmd State              ResolveState(StateId id) { return ? }
 cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
 // Device describes replay target avaliable to the server.
@@ -152,10 +144,6 @@ class Capture {
   ReportId            Report   // The identifier of the report of the capture.
   ApiId[]             Apis     // List of graphics APIs used by this capture.
 }
-
-// State describes the graphics driver state for a single graphics API at a
-// single point in the atom stream.
-type any State
 
 // Report describes all warnings and errors found by a capture.
 class Report {
