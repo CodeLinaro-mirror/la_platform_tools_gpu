@@ -8,7 +8,6 @@ package service
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
@@ -36,7 +35,7 @@ func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
 }
 
 // Client compliance
-func (c client) GetSchema(l log.Logger) (res []*schema.Class, err error) {
+func (c client) GetSchema(l log.Logger) (res Schema, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetSchema{}); err == nil {
 		res = val.(*resultGetSchema).value

@@ -59,15 +59,19 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
-func (s rpcServer) GetSchema(l log.Logger) ([]*schema.Class, error) {
-	classes := make([]*schema.Class, 0, registry.Global.Count())
+func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
+	result := service.Schema{}
+	result.Classes = make([]*schema.Class, 0, registry.Global.Count())
 	all.GraphicsNamespace.Visit(func(c binary.Class) {
 		class := schema.Lookup(c.ID())
 		if class != nil {
-			classes = append(classes, class)
+			result.Classes = append(result.Classes, class)
 		}
 	})
-	return classes, nil
+	all.VisitConstantSets(func(c schema.ConstantSet) {
+		result.Constants = append(result.Constants, c)
+	})
+	return result, nil
 }
 
 // Import imports capture data emitted by the graphics spy, returning the new
