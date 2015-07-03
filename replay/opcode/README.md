@@ -11,15 +11,6 @@ Documentation on each of the opcodes can be found at:
 
 ## Usage
 
-#### func  CheckDisassembly
-
-```go
-func CheckDisassembly(t *testing.T, got []interface{}, expected ...interface{})
-```
-CheckDisassembly is a test helper function that checks the list of got opcodes
-matches those in expected. If any differences are found then these are logged to
-t, and the test fails.
-
 #### func  Decode
 
 ```go
