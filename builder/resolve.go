@@ -64,7 +64,7 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 			if p.After.Index >= uint64(len(atoms)) {
 				return nil, fmt.Errorf("Atom index (%d) is out of bounds [0-%d]", p.After.Index, len(atoms)-1)
 			}
-			api := atoms[p.After.Index].API()
+			api := gfxapi.Find(atoms[p.After.Index].API())
 			s := gfxapi.NewState()
 			for _, a := range atoms[:p.After.Index] {
 				a.Mutate(s, d, l)

@@ -565,7 +565,7 @@
     return a
   }
 
-  func (c *{{$name}}) API() gfxapi.API { return api{} }
+  func (c *{{$name}}) API() gfxapi.ID { return api{}.ID() }
   func (c *{{$name}}) Flags() atom.Flags { return 0 §
       {{if GetAnnotation $.Command "DrawCall"}} | atom.DrawCall §{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}} | atom.EndOfFrame §{{end}}

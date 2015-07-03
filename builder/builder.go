@@ -107,13 +107,13 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 	}
 
 	// Gather all the APIs used by the capture
-	apis := map[gfxapi.API]struct{}{}
+	apis := map[gfxapi.ID]struct{}{}
 	apiIDs := []service.ApiId{}
 	for _, a := range atoms {
-		if api := a.API(); api != nil {
+		if api := a.API(); api.Valid() {
 			if _, found := apis[api]; !found {
 				apis[api] = struct{}{}
-				apiIDs = append(apiIDs, service.ApiId{ID: binary.ID(api.ID())})
+				apiIDs = append(apiIDs, service.ApiId{ID: binary.ID(api)})
 			}
 		}
 	}
@@ -236,7 +236,7 @@ func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d datab
 			log.Warningf(l, "Atom %d %v: %v", i, a, err)
 		}
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
-			api := a.API()
+			api := gfxapi.Find(a.API())
 			width, height, err := api.GetFramebufferAttachmentSize(s, gfxapi.FramebufferAttachmentColor)
 			if err != nil {
 				log.Warningf(l, "GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)

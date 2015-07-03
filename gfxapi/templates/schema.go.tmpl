@@ -43,7 +43,7 @@
   {{AssertType $ "Function"}}
   sc_{{Macro "Go.CmdName" $}} := schema.Of((*{{Macro "Go.CmdName" $}})(nil).Class())
   sc_{{Macro "Go.CmdName" $}}.Metadata = append(sc_{{Macro "Go.CmdName" $}}.Metadata, &atom.Metadata{
-    Api: binary.ID(apiID),
+    API: apiID,
     DisplayName: "{{Macro "CmdName" $}}",
     Flags: 0§
     {{if GetAnnotation $ "DrawCall"}} | atom.DrawCall §{{end}}
