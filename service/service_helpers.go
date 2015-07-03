@@ -38,14 +38,6 @@ func (c callGetDevices) Format(f fmt.State, r rune) {
 func (r resultGetDevices) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callGetState) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetState(capture: %v, api: %v, after: %v)",
-		c.capture, c.api, c.after,
-	)
-}
-func (r resultGetState) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callGetHierarchy) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetHierarchy(capture: %v)",
 		c.capture,
@@ -174,14 +166,6 @@ func (c callResolveReport) Format(f fmt.State, r rune) {
 func (r resultResolveReport) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveState) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveState(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveState) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveTimingInfo) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveTimingInfo(id: %v)",
 		c.id,
@@ -216,9 +200,6 @@ func (h MemoryInfoId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h ReportId) Valid() bool {
-	return h.ID.Valid()
-}
-func (h StateId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h TimingInfoId) Valid() bool {
