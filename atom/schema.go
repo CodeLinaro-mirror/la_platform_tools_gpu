@@ -30,7 +30,7 @@ type Metadata struct {
 	DocumentationUrl string    // A url for documentation about this atom.
 }
 
-// Finds the atom metadata for the given schema class.
+// FindMetadata finds the atom metadata for the given schema class.
 // Returns nil if the class was not for an atom.
 func FindMetadata(class *schema.Class) *Metadata {
 	for _, m := range class.Metadata {
@@ -39,4 +39,10 @@ func FindMetadata(class *schema.Class) *Metadata {
 		}
 	}
 	return nil
+}
+
+// Finds the atom metadata for the given atom.
+// Returns nil if the atom has no metadata.
+func MetadataOf(atom Atom) *Metadata {
+	return FindMetadata(schema.Of(atom.Class()))
 }

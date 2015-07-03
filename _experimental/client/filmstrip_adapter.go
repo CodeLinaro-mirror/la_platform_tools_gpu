@@ -36,7 +36,7 @@ func CreateFilmStripAdapter(appCtx *ApplicationContext) *FilmStripAdapter {
 	return &FilmStripAdapter{appCtx: appCtx}
 }
 
-func (a *FilmStripAdapter) SetAtoms(atoms []Atom) {
+func (a *FilmStripAdapter) SetAtoms(atoms []atom.Atom) {
 	a.frames = []atom.ID{}
 	for i, t := range atoms {
 		if t.Flags().IsEndOfFrame() {
