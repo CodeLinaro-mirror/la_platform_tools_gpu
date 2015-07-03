@@ -19,7 +19,6 @@ type RPC interface {
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
-	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
 	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
@@ -36,7 +35,6 @@ type RPC interface {
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveReport(id ReportId, l log.Logger) (Report, error)
-	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 
@@ -94,18 +92,11 @@ type ReportId struct {
 	ID binary.ID
 }
 
-// Handle StateId
-type StateId struct {
-	binary.Generate
-	ID binary.ID
-}
-
 // Handle TimingInfoId
 type TimingInfoId struct {
 	binary.Generate
 	ID binary.ID
 }
-type State interface{}
 
 // Enum Severity
 type Severity int
