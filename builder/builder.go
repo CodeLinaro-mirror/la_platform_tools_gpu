@@ -96,11 +96,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		return service.CaptureId{}, err
 	}
 
-	stream, err := service.NewAtomStream(atoms)
-	if err != nil {
-		return service.CaptureId{}, err
-	}
-
+	stream := service.AtomStream{Atoms: atoms}
 	streamID, err := service.StoreAtomStream(&stream, d, l)
 	if err != nil {
 		return service.CaptureId{}, err
@@ -155,11 +151,7 @@ func loadAtoms(streamID service.AtomStreamId, d database.Database, l log.Logger)
 	if err != nil {
 		return atom.List{}, err
 	}
-	atomList, err := stream.List()
-	if err != nil {
-		return atom.List{}, err
-	}
-	return atomList, nil
+	return stream.Atoms, nil
 }
 
 // getAtomFramebufferDimensions returns the framebuffer dimensions after a given

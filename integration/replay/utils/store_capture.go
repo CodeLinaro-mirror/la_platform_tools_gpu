@@ -24,10 +24,7 @@ import (
 )
 
 func storeAtoms(t *testing.T, atoms atom.List, d database.Database, l log.Logger) service.AtomStreamId {
-	stream, err := service.NewAtomStream(atoms)
-	if err != nil {
-		t.Fatalf("Failed to build atom stream: %v", err)
-	}
+	stream := service.AtomStream{Atoms: atoms}
 	id, err := database.Store(&stream, d, l)
 	if err != nil {
 		t.Fatalf("Failed to store atom stream: %v", err)

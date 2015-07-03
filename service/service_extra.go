@@ -6,6 +6,7 @@
 package service
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -151,7 +152,7 @@ type callReplaceAtom struct {
 	binary.Generate
 	capture CaptureId
 	atomId  uint64
-	data    Binary
+	atom    atom.Atom
 }
 
 // Result ReplaceAtom
