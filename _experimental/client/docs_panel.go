@@ -19,6 +19,7 @@ import (
 	"net/http"
 	"regexp"
 
+	gpuatom "android.googlesource.com/platform/tools/gpu/atom"
 	"github.com/google/gxui"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
@@ -30,8 +31,8 @@ func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
 	ll := theme.CreateLinearLayout()
 	appCtx.OnAtomSelected(func() {
 		ll.RemoveAll()
-		atom := appCtx.Atoms()[appCtx.SelectedAtomID()]
-		docs := atom.DocumentationUrl()
+		a := appCtx.Atoms()[appCtx.SelectedAtomID()]
+		docs := gpuatom.MetadataOf(a).DocumentationUrl
 		loadHtml(theme, docs, ll)
 	})
 	sl := theme.CreateScrollLayout()

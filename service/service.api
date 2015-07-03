@@ -106,7 +106,7 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
 // a single atom replaced.
 cmd CaptureId ReplaceAtom(CaptureId capture,
                           u64       atomId,
-                          Binary    data)
+                          atom.Atom atom)
 { return ? }
 
 // Get resolves and returns the object, value or memory with the path p.
@@ -172,9 +172,9 @@ class Binary {
   u8[] Data
 }
 
-// AtomStream holds a stream of atoms in binary form.
+// AtomStream holds a stream of atoms.
 class AtomStream {
-  u8[] Data // Encoded atom stream.
+  atom.Atom[] Atoms
 }
 
 // Hierarchy holds the root to an AtomGroup hierarchy.

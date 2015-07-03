@@ -79,14 +79,9 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	atoms, err := stream.List()
-	if err != nil {
-		panic(err)
-	}
-
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
-	for i, a := range atoms {
+	for i, a := range stream.Atoms {
 		fmt.Fprintf(res, "%.6d %s\n", i, a)
 	}
 }

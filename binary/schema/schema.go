@@ -37,8 +37,10 @@ type schema interface {
 
 // Returns the schema class for a binary class, if it has one.
 func Of(class binary.Class) *Class {
-	s, ok := class.(schema)
-	if ok {
+	if s, ok := class.(*Class); ok {
+		return s
+	}
+	if s, ok := class.(schema); ok {
 		return s.Schema()
 	}
 	return nil

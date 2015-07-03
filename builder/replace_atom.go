@@ -35,26 +35,13 @@ func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.
 		return nil, err
 	}
 
-	if request.Atom >= atom.ID(len(atoms)) {
-		return nil, fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
-	}
-
-	o, err := decode(request.Data.Data)
-	if err != nil {
-		return nil, err
-	}
-	a, ok := o.(atom.Atom)
-	if !ok {
-		return nil, fmt.Errorf("Atom (%d) was not an atom, got %T.", request.Atom, o)
+	if request.AtomID >= atom.ID(len(atoms)) {
+		return nil, fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.AtomID, len(atoms))
 	}
 
 	atoms = atoms.Clone()
-	atoms[request.Atom] = a
-	newStream, err := service.NewAtomStream(atoms)
-	if err != nil {
-		return nil, err
-	}
-
+	atoms[request.AtomID] = request.Value
+	newStream := service.AtomStream{Atoms: atoms}
 	streamID, err := service.StoreAtomStream(&newStream, d, l)
 	if err != nil {
 		return nil, err
