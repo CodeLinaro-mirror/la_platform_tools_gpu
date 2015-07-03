@@ -24,7 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// Build returns the *service.ImageInfo resulting from the given
+// BuildLazy returns the *service.ImageInfo resulting from the given
 // GetFramebufferDepth request.
 func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	if !r.API.Valid() {
