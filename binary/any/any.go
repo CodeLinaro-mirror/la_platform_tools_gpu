@@ -104,13 +104,14 @@ type int64_ struct {
 	value int64
 }
 
+type int_ struct {
+	binary.Generate
+	value int
+}
+
 type string_ struct {
 	binary.Generate
 	value string
-}
-
-type any interface {
-	unbox() interface{}
 }
 
 func (v object_) unbox() interface{}  { return v.value }
@@ -125,7 +126,97 @@ func (v int32_) unbox() interface{}   { return v.value }
 func (v float64_) unbox() interface{} { return v.value }
 func (v uint64_) unbox() interface{}  { return v.value }
 func (v int64_) unbox() interface{}   { return v.value }
+func (v int_) unbox() interface{}     { return v.value }
 func (v string_) unbox() interface{}  { return v.value }
+
+type objectSlice struct {
+	binary.Generate
+	value []binary.Object
+}
+
+type boolSlice struct {
+	binary.Generate
+	value []bool
+}
+
+type uint8Slice struct {
+	binary.Generate
+	value []uint8
+}
+
+type int8Slice struct {
+	binary.Generate
+	value []int8
+}
+
+type uint16Slice struct {
+	binary.Generate
+	value []uint16
+}
+
+type int16Slice struct {
+	binary.Generate
+	value []int16
+}
+
+type float32Slice struct {
+	binary.Generate
+	value []float32
+}
+
+type uint32Slice struct {
+	binary.Generate
+	value []uint32
+}
+
+type int32Slice struct {
+	binary.Generate
+	value []int32
+}
+
+type float64Slice struct {
+	binary.Generate
+	value []float64
+}
+
+type uint64Slice struct {
+	binary.Generate
+	value []uint64
+}
+
+type int64Slice struct {
+	binary.Generate
+	value []int64
+}
+
+type intSlice struct {
+	binary.Generate
+	value []int
+}
+
+type stringSlice struct {
+	binary.Generate
+	value []string
+}
+
+func (v objectSlice) unbox() interface{}  { return v.value }
+func (v boolSlice) unbox() interface{}    { return v.value }
+func (v uint8Slice) unbox() interface{}   { return v.value }
+func (v int8Slice) unbox() interface{}    { return v.value }
+func (v uint16Slice) unbox() interface{}  { return v.value }
+func (v int16Slice) unbox() interface{}   { return v.value }
+func (v float32Slice) unbox() interface{} { return v.value }
+func (v uint32Slice) unbox() interface{}  { return v.value }
+func (v int32Slice) unbox() interface{}   { return v.value }
+func (v float64Slice) unbox() interface{} { return v.value }
+func (v uint64Slice) unbox() interface{}  { return v.value }
+func (v int64Slice) unbox() interface{}   { return v.value }
+func (v intSlice) unbox() interface{}     { return v.value }
+func (v stringSlice) unbox() interface{}  { return v.value }
+
+type any interface {
+	unbox() interface{}
+}
 
 // Box returns v wrapped by a struct implementing binary.Object.
 // If v is not boxable then ErrUnboxable is returned.
@@ -155,8 +246,40 @@ func Box(v interface{}) (binary.Object, error) {
 		return &uint64_{value: v}, nil
 	case int64:
 		return &int64_{value: v}, nil
+	case int:
+		return &int_{value: v}, nil
 	case string:
 		return &string_{value: v}, nil
+
+	case []binary.Object:
+		return &objectSlice{value: v}, nil
+	case []bool:
+		return &boolSlice{value: v}, nil
+	case []uint8:
+		return &uint8Slice{value: v}, nil
+	case []int8:
+		return &int8Slice{value: v}, nil
+	case []uint16:
+		return &uint16Slice{value: v}, nil
+	case []int16:
+		return &int16Slice{value: v}, nil
+	case []float32:
+		return &float32Slice{value: v}, nil
+	case []uint32:
+		return &uint32Slice{value: v}, nil
+	case []int32:
+		return &int32Slice{value: v}, nil
+	case []float64:
+		return &float64Slice{value: v}, nil
+	case []uint64:
+		return &uint64Slice{value: v}, nil
+	case []int64:
+		return &int64Slice{value: v}, nil
+	case []int:
+		return &intSlice{value: v}, nil
+	case []string:
+		return &stringSlice{value: v}, nil
+
 	}
 	return nil, ErrUnboxable{Value: v}
 }
