@@ -26,9 +26,18 @@ type State struct {
 	After *Atom // The path to the atom the state immediately follows.
 }
 
+// String returns the string representation of the path.
+func (n *State) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *State) Path() string {
 	return fmt.Sprintf("State(After: %v)", n.After)
+}
+
+// Base implements the Path interface, returning the path to the atom the state
+// is after.
+func (n *State) Base() Path {
+	return n.After
 }
 
 // Field implements the Value interface.

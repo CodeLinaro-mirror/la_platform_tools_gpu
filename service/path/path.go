@@ -27,6 +27,10 @@ type Path interface {
 	// Path returns the string representation of the path.
 	// The returned string must be consistent for equal paths.
 	Path() string
+
+	// Base returns the path that this path derives from.
+	// If this path is a root, then Base returns nil.
+	Base() Path
 }
 
 // Value is the expanded Path interface for types that represent a reference to
@@ -34,11 +38,8 @@ type Path interface {
 // The value referenced by this path may be a struct, array, slice, map or POD
 // type.
 type Value interface {
-	binary.Object
-
-	// Path returns the string representation of the path.
-	// The returned string must be consistent for equal paths.
-	Path() string
+	// Value extends the Path interface.
+	Path
 
 	// Field returns the path to the field value with the specified name on the
 	// struct object represented by this path.

@@ -27,9 +27,17 @@ type ArrayIndex struct {
 	Index uint64 // The index of the element in the array.
 }
 
+// String returns the string representation of the path.
+func (n *ArrayIndex) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *ArrayIndex) Path() string {
 	return fmt.Sprintf("%v[%d]", n.Array, n.Index)
+}
+
+// Base implements the Path interface, returning the path to the array.
+func (n *ArrayIndex) Base() Path {
+	return n.Array
 }
 
 // Field implements the Value interface.
