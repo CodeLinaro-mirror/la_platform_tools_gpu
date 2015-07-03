@@ -10,6 +10,14 @@ Package path contains types that represent data references.
 var Namespace = registry.NewNamespace()
 ```
 
+#### func  Flatten
+
+```go
+func Flatten(p Path) []Path
+```
+Flatten returns the path p flattened into a list of path nodes, starting with
+the root and ending with p.
+
 #### type ArrayIndex
 
 ```go
@@ -28,6 +36,13 @@ ArrayIndex is a path that refers to a single element of an array.
 func (n *ArrayIndex) ArrayIndex(index uint64) Value
 ```
 ArrayIndex implements the Value interface.
+
+#### func (*ArrayIndex) Base
+
+```go
+func (n *ArrayIndex) Base() Path
+```
+Base implements the Path interface, returning the path to the array.
 
 #### func (*ArrayIndex) Class
 
@@ -56,6 +71,13 @@ func (n *ArrayIndex) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*ArrayIndex) String
+
+```go
+func (n *ArrayIndex) String() string
+```
+String returns the string representation of the path.
+
 #### type Atom
 
 ```go
@@ -74,6 +96,13 @@ Atom is a path that refers to a single atom in an atom list.
 func (n *Atom) ArrayIndex(index uint64) Value
 ```
 ArrayIndex implements the Value interface.
+
+#### func (*Atom) Base
+
+```go
+func (n *Atom) Base() Path
+```
+Base implements the Path interface, returning the path to the atom list.
 
 #### func (*Atom) Class
 
@@ -109,6 +138,13 @@ func (n *Atom) StateAfter() *State
 ```
 StateAfter returns the path to the state immediately following this atom.
 
+#### func (*Atom) String
+
+```go
+func (n *Atom) String() string
+```
+String returns the string representation of the path.
+
 #### type Atoms
 
 ```go
@@ -119,6 +155,13 @@ type Atoms struct {
 ```
 
 Atoms is a path that refers to the full list of atoms in a capture.
+
+#### func (*Atoms) Base
+
+```go
+func (n *Atoms) Base() Path
+```
+Base implements the Path interface, returning the path to the capture.
 
 #### func (*Atoms) Class
 
@@ -140,6 +183,13 @@ func (n *Atoms) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*Atoms) String
+
+```go
+func (n *Atoms) String() string
+```
+String returns the string representation of the path.
+
 #### type Capture
 
 ```go
@@ -158,6 +208,13 @@ func (c *Capture) Atoms() *Atoms
 ```
 Atoms returns the path to the full list of atoms in the capture.
 
+#### func (*Capture) Base
+
+```go
+func (c *Capture) Base() Path
+```
+Base implements the Path interface, returning nil as this is a root.
+
 #### func (*Capture) Class
 
 ```go
@@ -170,6 +227,13 @@ func (*Capture) Class() binary.Class
 func (c *Capture) Path() string
 ```
 Path implements the Path interface.
+
+#### func (*Capture) String
+
+```go
+func (c *Capture) String() string
+```
+String returns the string representation of the path.
 
 #### type Field
 
@@ -189,6 +253,13 @@ Field is a path that refers to a single field of a struct object.
 func (n *Field) ArrayIndex(index uint64) Value
 ```
 ArrayIndex implements the Value interface.
+
+#### func (*Field) Base
+
+```go
+func (n *Field) Base() Path
+```
+Base implements the Path interface, returning the path to the struct.
 
 #### func (*Field) Class
 
@@ -217,6 +288,13 @@ func (n *Field) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*Field) String
+
+```go
+func (n *Field) String() string
+```
+String returns the string representation of the path.
+
 #### type MapIndex
 
 ```go
@@ -235,6 +313,13 @@ MapIndex is a path that refers to a single value in a map.
 func (n *MapIndex) ArrayIndex(index uint64) Value
 ```
 ArrayIndex implements the Value interface.
+
+#### func (*MapIndex) Base
+
+```go
+func (n *MapIndex) Base() Path
+```
+Base implements the Path interface, returning the path to the map.
 
 #### func (*MapIndex) Class
 
@@ -263,6 +348,13 @@ func (n *MapIndex) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*MapIndex) String
+
+```go
+func (n *MapIndex) String() string
+```
+String returns the string representation of the path.
+
 #### type Path
 
 ```go
@@ -272,6 +364,10 @@ type Path interface {
 	// Path returns the string representation of the path.
 	// The returned string must be consistent for equal paths.
 	Path() string
+
+	// Base returns the path that this path derives from.
+	// If this path is a root, then Base returns nil.
+	Base() Path
 }
 ```
 
@@ -296,6 +392,14 @@ State is a path that refers to the driver state immediately after an atom.
 func (n *State) ArrayIndex(index uint64) Value
 ```
 ArrayIndex implements the Value interface.
+
+#### func (*State) Base
+
+```go
+func (n *State) Base() Path
+```
+Base implements the Path interface, returning the path to the atom the state is
+after.
 
 #### func (*State) Class
 
@@ -324,15 +428,19 @@ func (n *State) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*State) String
+
+```go
+func (n *State) String() string
+```
+String returns the string representation of the path.
+
 #### type Value
 
 ```go
 type Value interface {
-	binary.Object
-
-	// Path returns the string representation of the path.
-	// The returned string must be consistent for equal paths.
-	Path() string
+	// Value extends the Path interface.
+	Path
 
 	// Field returns the path to the field value with the specified name on the
 	// struct object represented by this path.

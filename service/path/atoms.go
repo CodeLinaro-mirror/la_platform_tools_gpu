@@ -26,9 +26,17 @@ type Atoms struct {
 	Capture *Capture // The path to the capture containing the atoms.
 }
 
+// String returns the string representation of the path.
+func (n *Atoms) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *Atoms) Path() string {
-	return fmt.Sprintf("%v.Atom(%d)", n.Capture, n.Index)
+	return fmt.Sprintf("%v.Atoms", n.Capture)
+}
+
+// Base implements the Path interface, returning the path to the capture.
+func (n *Atoms) Base() Path {
+	return n.Capture
 }
 
 // Index returns the path to the i'th atom in the atom list.
