@@ -253,8 +253,8 @@ var schema{{.Name}} = &schema.Class{
 {{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 
 {{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
-const _{{$name}}_name = "{{range .Values}}{{.Name}}{{end}}"
-var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Values}}
+const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
+var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Entries}}
 	{{.Value}}: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}],{{end}}
 }
 
