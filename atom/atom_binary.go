@@ -557,11 +557,23 @@ var schemastream = &schema.Class{
 	},
 }
 
+var ConstantValues schema.Constants
+
 const _Flags_name = "DrawCallEndOfFrame"
 
 var _Flags_map = map[Flags]string{
 	1: _Flags_name[0:8],
 	2: _Flags_name[8:18],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Flags_name[0:8], Value: uint32(1)},
+			{Name: _Flags_name[8:18], Value: uint32(2)},
+		},
+	})
 }
 
 func (v Flags) String() string {
@@ -585,6 +597,15 @@ const _ID_name = "NoID"
 
 var _ID_map = map[ID]string{
 	18446744073709551615: _ID_name[0:4],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ID", Method: schema.Uint64},
+		Entries: []schema.Constant{
+			{Name: _ID_name[0:4], Value: uint64(18446744073709551615)},
+		},
+	})
 }
 
 func (v ID) String() string {

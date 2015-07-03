@@ -5,7 +5,13 @@
 
 package log
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
+
+var ConstantValues schema.Constants
 
 const _Severity_name = "EmergencyAlertCriticalErrorWarningNoticeInfoDebug"
 
@@ -18,6 +24,22 @@ var _Severity_map = map[Severity]string{
 	5: _Severity_name[34:40],
 	6: _Severity_name[40:44],
 	7: _Severity_name[44:49],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Severity", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _Severity_name[0:9], Value: int32(0)},
+			{Name: _Severity_name[9:14], Value: int32(1)},
+			{Name: _Severity_name[14:22], Value: int32(2)},
+			{Name: _Severity_name[22:27], Value: int32(3)},
+			{Name: _Severity_name[27:34], Value: int32(4)},
+			{Name: _Severity_name[34:40], Value: int32(5)},
+			{Name: _Severity_name[40:44], Value: int32(6)},
+			{Name: _Severity_name[44:49], Value: int32(7)},
+		},
+	})
 }
 
 func (v Severity) String() string {

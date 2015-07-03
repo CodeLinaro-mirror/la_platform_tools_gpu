@@ -4109,11 +4109,23 @@ var schemaresultResolveTimingInfo = &schema.Class{
 	},
 }
 
+var ConstantValues schema.Constants
+
 const _ImageFormat_name = "RGBA8Float32"
 
 var _ImageFormat_map = map[ImageFormat]string{
 	0: _ImageFormat_name[0:5],
 	1: _ImageFormat_name[5:12],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _ImageFormat_name[0:5], Value: int32(0)},
+			{Name: _ImageFormat_name[5:12], Value: int32(1)},
+		},
+	})
 }
 
 func (v ImageFormat) String() string {
@@ -4146,6 +4158,22 @@ var _Severity_map = map[Severity]string{
 	7: _Severity_name[53:58],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Severity", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _Severity_name[0:9], Value: int32(0)},
+			{Name: _Severity_name[9:14], Value: int32(1)},
+			{Name: _Severity_name[14:22], Value: int32(2)},
+			{Name: _Severity_name[22:27], Value: int32(3)},
+			{Name: _Severity_name[27:34], Value: int32(4)},
+			{Name: _Severity_name[34:40], Value: int32(5)},
+			{Name: _Severity_name[40:53], Value: int32(6)},
+			{Name: _Severity_name[53:58], Value: int32(7)},
+		},
+	})
+}
+
 func (v Severity) String() string {
 	if s, ok := _Severity_map[v]; ok {
 		return s
@@ -4169,6 +4197,17 @@ var _TimingMask_map = map[TimingMask]string{
 	1: _TimingMask_name[0:16],
 	2: _TimingMask_name[16:33],
 	4: _TimingMask_name[33:47],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _TimingMask_name[0:16], Value: int32(1)},
+			{Name: _TimingMask_name[16:33], Value: int32(2)},
+			{Name: _TimingMask_name[33:47], Value: int32(4)},
+		},
+	})
 }
 
 func (v TimingMask) String() string {
