@@ -5,7 +5,13 @@
 
 package parse
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
+
+var ConstantValues schema.Constants
 
 const _NumberKind_name = "NotNumericDecimalOctalHexadecimalFloatingScientific"
 
@@ -16,6 +22,20 @@ var _NumberKind_map = map[NumberKind]string{
 	3: _NumberKind_name[22:33],
 	4: _NumberKind_name[33:41],
 	5: _NumberKind_name[41:51],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "NumberKind", Method: schema.Uint8},
+		Entries: []schema.Constant{
+			{Name: _NumberKind_name[0:10], Value: uint8(0)},
+			{Name: _NumberKind_name[10:17], Value: uint8(1)},
+			{Name: _NumberKind_name[17:22], Value: uint8(2)},
+			{Name: _NumberKind_name[22:33], Value: uint8(3)},
+			{Name: _NumberKind_name[33:41], Value: uint8(4)},
+			{Name: _NumberKind_name[41:51], Value: uint8(5)},
+		},
+	})
 }
 
 func (v NumberKind) String() string {
@@ -40,6 +60,16 @@ const _SkipMode_name = "SkipPrefixSkipSuffix"
 var _SkipMode_map = map[SkipMode]string{
 	0: _SkipMode_name[0:10],
 	1: _SkipMode_name[10:20],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "SkipMode", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _SkipMode_name[0:10], Value: int32(0)},
+			{Name: _SkipMode_name[10:20], Value: int32(1)},
+		},
+	})
 }
 
 func (v SkipMode) String() string {

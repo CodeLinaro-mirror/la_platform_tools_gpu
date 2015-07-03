@@ -5,7 +5,13 @@
 
 package gfxapi
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
+
+var ConstantValues schema.Constants
 
 const _FramebufferAttachment_name = "ColorDepthStencil"
 
@@ -13,6 +19,17 @@ var _FramebufferAttachment_map = map[FramebufferAttachment]string{
 	0: _FramebufferAttachment_name[0:5],
 	1: _FramebufferAttachment_name[5:10],
 	2: _FramebufferAttachment_name[10:17],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferAttachment_name[0:5], Value: uint32(0)},
+			{Name: _FramebufferAttachment_name[5:10], Value: uint32(1)},
+			{Name: _FramebufferAttachment_name[10:17], Value: uint32(2)},
+		},
+	})
 }
 
 func (v FramebufferAttachment) String() string {
