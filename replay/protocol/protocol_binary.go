@@ -81,7 +81,6 @@ var schemaResourceInfo = &schema.Class{
 	TypeID:  binaryIDResourceInfo,
 	Package: "protocol",
 	Name:    "ResourceInfo",
-	Display: "ResourceInfo",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -212,7 +211,6 @@ var schemaPayload = &schema.Class{
 	TypeID:  binaryIDPayload,
 	Package: "protocol",
 	Name:    "Payload",
-	Display: "Payload",
 	Fields: []schema.Field{
 		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},

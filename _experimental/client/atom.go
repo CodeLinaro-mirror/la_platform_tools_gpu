@@ -44,7 +44,7 @@ func (a *Atom) Observations() *atom.Observations {
 }
 
 func (a *Atom) DisplayName() string {
-	return a.object.Type.Display
+	return a.meta.DisplayName
 }
 
 func (a *Atom) Api() service.ApiId {

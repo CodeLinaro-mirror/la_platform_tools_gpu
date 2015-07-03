@@ -816,7 +816,6 @@ var schemaArchitecture = &schema.Class{
 	TypeID:  binaryIDArchitecture,
 	Package: "gles",
 	Name:    "Architecture",
-	Display: "architecture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -934,7 +933,6 @@ var schemaBackbufferInfo = &schema.Class{
 	TypeID:  binaryIDBackbufferInfo,
 	Package: "gles",
 	Name:    "BackbufferInfo",
-	Display: "backbufferInfo",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -1034,7 +1032,6 @@ var schemaColor = &schema.Class{
 	TypeID:  binaryIDColor,
 	Package: "gles",
 	Name:    "Color",
-	Display: "Color",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -1163,7 +1160,6 @@ var schemaBlendState = &schema.Class{
 	TypeID:  binaryIDBlendState,
 	Package: "gles",
 	Name:    "BlendState",
-	Display: "BlendState",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
@@ -1240,7 +1236,6 @@ var schemaSliceInfo = &schema.Class{
 	TypeID:  binaryIDSliceInfo,
 	Package: "gles",
 	Name:    "SliceInfo",
-	Display: "SliceInfo",
 	Fields: []schema.Field{
 		{Declared: "Root", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -1290,7 +1285,6 @@ var schemaBoolˢ = &schema.Class{
 	TypeID:  binaryIDBoolˢ,
 	Package: "gles",
 	Name:    "Boolˢ",
-	Display: "Boolˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -1338,7 +1332,6 @@ var schemaBoolᵖ = &schema.Class{
 	TypeID:  binaryIDBoolᵖ,
 	Package: "gles",
 	Name:    "Boolᵖ",
-	Display: "Boolᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1386,7 +1379,6 @@ var schemaU8ˢ = &schema.Class{
 	TypeID:  binaryIDU8ˢ,
 	Package: "gles",
 	Name:    "U8ˢ",
-	Display: "U8ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -1467,7 +1459,6 @@ var schemaBuffer = &schema.Class{
 	TypeID:  binaryIDBuffer,
 	Package: "gles",
 	Name:    "Buffer",
-	Display: "Buffer",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -1518,7 +1509,6 @@ var schemaBufferDataPointer = &schema.Class{
 	TypeID:  binaryIDBufferDataPointer,
 	Package: "gles",
 	Name:    "BufferDataPointer",
-	Display: "BufferDataPointer",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1566,7 +1556,6 @@ var schemaBufferIdˢ = &schema.Class{
 	TypeID:  binaryIDBufferIdˢ,
 	Package: "gles",
 	Name:    "BufferIdˢ",
-	Display: "BufferIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -1614,7 +1603,6 @@ var schemaBufferIdᵖ = &schema.Class{
 	TypeID:  binaryIDBufferIdᵖ,
 	Package: "gles",
 	Name:    "BufferIdᵖ",
-	Display: "BufferIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1662,7 +1650,6 @@ var schemaCGLContextObj = &schema.Class{
 	TypeID:  binaryIDCGLContextObj,
 	Package: "gles",
 	Name:    "CGLContextObj",
-	Display: "CGLContextObj",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1710,7 +1697,6 @@ var schemaCGLContextObjˢ = &schema.Class{
 	TypeID:  binaryIDCGLContextObjˢ,
 	Package: "gles",
 	Name:    "CGLContextObjˢ",
-	Display: "CGLContextObjˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -1758,7 +1744,6 @@ var schemaCGLContextObjᵖ = &schema.Class{
 	TypeID:  binaryIDCGLContextObjᵖ,
 	Package: "gles",
 	Name:    "CGLContextObjᵖ",
-	Display: "CGLContextObjᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1806,7 +1791,6 @@ var schemaCGLPixelFormatObj = &schema.Class{
 	TypeID:  binaryIDCGLPixelFormatObj,
 	Package: "gles",
 	Name:    "CGLPixelFormatObj",
-	Display: "CGLPixelFormatObj",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1892,7 +1876,6 @@ var schemaCGLCreateContext = &schema.Class{
 	TypeID:  binaryIDCGLCreateContext,
 	Package: "gles",
 	Name:    "CGLCreateContext",
-	Display: "CGLCreateContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Pix", Type: &schema.Struct{Name: "CGLPixelFormatObj", ID: (*CGLPixelFormatObj)(nil).Class().ID()}},
@@ -1964,7 +1947,6 @@ var schemaCGLFlushDrawable = &schema.Class{
 	TypeID:  binaryIDCGLFlushDrawable,
 	Package: "gles",
 	Name:    "CGLFlushDrawable",
-	Display: "CGLFlushDrawable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj", ID: (*CGLContextObj)(nil).Class().ID()}},
@@ -2014,7 +1996,6 @@ var schemaCGSConnectionIDᵖ = &schema.Class{
 	TypeID:  binaryIDCGSConnectionIDᵖ,
 	Package: "gles",
 	Name:    "CGSConnectionIDᵖ",
-	Display: "CGSConnectionIDᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2062,7 +2043,6 @@ var schemaCGSWindowIDᵖ = &schema.Class{
 	TypeID:  binaryIDCGSWindowIDᵖ,
 	Package: "gles",
 	Name:    "CGSWindowIDᵖ",
-	Display: "CGSWindowIDᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2110,7 +2090,6 @@ var schemaCGSSurfaceIDᵖ = &schema.Class{
 	TypeID:  binaryIDCGSSurfaceIDᵖ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDᵖ",
-	Display: "CGSSurfaceIDᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2205,7 +2184,6 @@ var schemaCGLGetSurface = &schema.Class{
 	TypeID:  binaryIDCGLGetSurface,
 	Package: "gles",
 	Name:    "CGLGetSurface",
-	Display: "CGLGetSurface",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj", ID: (*CGLContextObj)(nil).Class().ID()}},
@@ -2280,7 +2258,6 @@ var schemaCGLSetCurrentContext = &schema.Class{
 	TypeID:  binaryIDCGLSetCurrentContext,
 	Package: "gles",
 	Name:    "CGLSetCurrentContext",
-	Display: "CGLSetCurrentContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj", ID: (*CGLContextObj)(nil).Class().ID()}},
@@ -2330,7 +2307,6 @@ var schemaCGSConnectionID = &schema.Class{
 	TypeID:  binaryIDCGSConnectionID,
 	Package: "gles",
 	Name:    "CGSConnectionID",
-	Display: "CGSConnectionID",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2378,7 +2354,6 @@ var schemaCGSConnectionIDˢ = &schema.Class{
 	TypeID:  binaryIDCGSConnectionIDˢ,
 	Package: "gles",
 	Name:    "CGSConnectionIDˢ",
-	Display: "CGSConnectionIDˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -2426,7 +2401,6 @@ var schemaF64ᵖ = &schema.Class{
 	TypeID:  binaryIDF64ᵖ,
 	Package: "gles",
 	Name:    "F64ᵖ",
-	Display: "F64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2527,7 +2501,6 @@ var schemaCGSGetSurfaceBounds = &schema.Class{
 	TypeID:  binaryIDCGSGetSurfaceBounds,
 	Package: "gles",
 	Name:    "CGSGetSurfaceBounds",
-	Display: "CGSGetSurfaceBounds",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Cid", Type: &schema.Struct{Name: "CGSConnectionID", ID: (*CGSConnectionID)(nil).Class().ID()}},
@@ -2580,7 +2553,6 @@ var schemaCGSSurfaceIDˢ = &schema.Class{
 	TypeID:  binaryIDCGSSurfaceIDˢ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDˢ",
-	Display: "CGSSurfaceIDˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -2628,7 +2600,6 @@ var schemaCGSWindowIDˢ = &schema.Class{
 	TypeID:  binaryIDCGSWindowIDˢ,
 	Package: "gles",
 	Name:    "CGSWindowIDˢ",
-	Display: "CGSWindowIDˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -2676,7 +2647,6 @@ var schemaCharˢ = &schema.Class{
 	TypeID:  binaryIDCharˢ,
 	Package: "gles",
 	Name:    "Charˢ",
-	Display: "Charˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -2724,7 +2694,6 @@ var schemaCharᵖ = &schema.Class{
 	TypeID:  binaryIDCharᵖ,
 	Package: "gles",
 	Name:    "Charᵖ",
-	Display: "Charᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2772,7 +2741,6 @@ var schemaCharᵖˢ = &schema.Class{
 	TypeID:  binaryIDCharᵖˢ,
 	Package: "gles",
 	Name:    "Charᵖˢ",
-	Display: "Charᵖˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -2820,7 +2788,6 @@ var schemaCharᵖᵖ = &schema.Class{
 	TypeID:  binaryIDCharᵖᵖ,
 	Package: "gles",
 	Name:    "Charᵖᵖ",
-	Display: "Charᵖᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2901,7 +2868,6 @@ var schemaClearState = &schema.Class{
 	TypeID:  binaryIDClearState,
 	Package: "gles",
 	Name:    "ClearState",
-	Display: "ClearState",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "ClearColor", Type: &schema.Struct{Name: "Color", ID: (*Color)(nil).Class().ID()}},
@@ -2998,7 +2964,6 @@ var schemaRect = &schema.Class{
 	TypeID:  binaryIDRect,
 	Package: "gles",
 	Name:    "Rect",
-	Display: "Rect",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -3279,7 +3244,6 @@ var schemaRasterizerState = &schema.Class{
 	TypeID:  binaryIDRasterizerState,
 	Package: "gles",
 	Name:    "RasterizerState",
-	Display: "RasterizerState",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -3345,7 +3309,6 @@ var schemaVertexPointer = &schema.Class{
 	TypeID:  binaryIDVertexPointer,
 	Package: "gles",
 	Name:    "VertexPointer",
-	Display: "VertexPointer",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3472,7 +3435,6 @@ var schemaVertexAttributeArray = &schema.Class{
 	TypeID:  binaryIDVertexAttributeArray,
 	Package: "gles",
 	Name:    "VertexAttributeArray",
-	Display: "VertexAttributeArray",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -3571,7 +3533,6 @@ var schemaRenderbuffer = &schema.Class{
 	TypeID:  binaryIDRenderbuffer,
 	Package: "gles",
 	Name:    "Renderbuffer",
-	Display: "Renderbuffer",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -3678,7 +3639,6 @@ var schemaImage = &schema.Class{
 	TypeID:  binaryIDImage,
 	Package: "gles",
 	Name:    "Image",
-	Display: "Image",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -3775,7 +3735,6 @@ var schemaCubemapLevel = &schema.Class{
 	TypeID:  binaryIDCubemapLevel,
 	Package: "gles",
 	Name:    "CubemapLevel",
-	Display: "CubemapLevel",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Faces", Type: &schema.Map{Alias: "CubeMapImageTargetːImageᵐ", KeyType: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
@@ -4031,7 +3990,6 @@ var schemaTexture = &schema.Class{
 	TypeID:  binaryIDTexture,
 	Package: "gles",
 	Name:    "Texture",
-	Display: "Texture",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
@@ -4142,7 +4100,6 @@ var schemaFramebufferAttachmentInfo = &schema.Class{
 	TypeID:  binaryIDFramebufferAttachmentInfo,
 	Package: "gles",
 	Name:    "FramebufferAttachmentInfo",
-	Display: "FramebufferAttachmentInfo",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -4238,7 +4195,6 @@ var schemaFramebuffer = &schema.Class{
 	TypeID:  binaryIDFramebuffer,
 	Package: "gles",
 	Name:    "Framebuffer",
-	Display: "Framebuffer",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Attachments", Type: &schema.Map{Alias: "FramebufferAttachmentːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo", ID: (*FramebufferAttachmentInfo)(nil).Class().ID()}}},
@@ -4351,7 +4307,6 @@ var schemaShader = &schema.Class{
 	TypeID:  binaryIDShader,
 	Package: "gles",
 	Name:    "Shader",
-	Display: "Shader",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -4438,7 +4393,6 @@ var schemaVertexAttribute = &schema.Class{
 	TypeID:  binaryIDVertexAttribute,
 	Package: "gles",
 	Name:    "VertexAttribute",
-	Display: "VertexAttribute",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charˢ", ID: (*Charˢ)(nil).Class().ID()}},
@@ -4522,7 +4476,6 @@ var schemaUniform = &schema.Class{
 	TypeID:  binaryIDUniform,
 	Package: "gles",
 	Name:    "Uniform",
-	Display: "Uniform",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -4776,7 +4729,6 @@ var schemaProgram = &schema.Class{
 	TypeID:  binaryIDProgram,
 	Package: "gles",
 	Name:    "Program",
-	Display: "Program",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderTypeːShaderIdᵐ", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
@@ -4833,7 +4785,6 @@ var schemaVertexArray = &schema.Class{
 	TypeID:  binaryIDVertexArray,
 	Package: "gles",
 	Name:    "VertexArray",
-	Display: "VertexArray",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
@@ -4883,7 +4834,6 @@ var schemaQuery = &schema.Class{
 	TypeID:  binaryIDQuery,
 	Package: "gles",
 	Name:    "Query",
-	Display: "Query",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
@@ -5333,7 +5283,6 @@ var schemaObjects = &schema.Class{
 	TypeID:  binaryIDObjects,
 	Package: "gles",
 	Name:    "Objects",
-	Display: "Objects",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Renderbuffer", ID: (*Renderbuffer)(nil).Class().ID()}}}},
@@ -5829,7 +5778,6 @@ var schemaContext = &schema.Class{
 	TypeID:  binaryIDContext,
 	Package: "gles",
 	Name:    "Context",
-	Display: "Context",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
@@ -5901,7 +5849,6 @@ var schemaDiscardFramebufferAttachmentˢ = &schema.Class{
 	TypeID:  binaryIDDiscardFramebufferAttachmentˢ,
 	Package: "gles",
 	Name:    "DiscardFramebufferAttachmentˢ",
-	Display: "DiscardFramebufferAttachmentˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5957,7 +5904,6 @@ var schemaDiscardFramebufferAttachmentᵖ = &schema.Class{
 	TypeID:  binaryIDDiscardFramebufferAttachmentᵖ,
 	Package: "gles",
 	Name:    "DiscardFramebufferAttachmentᵖ",
-	Display: "DiscardFramebufferAttachmentᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6005,7 +5951,6 @@ var schemaEGLConfig = &schema.Class{
 	TypeID:  binaryIDEGLConfig,
 	Package: "gles",
 	Name:    "EGLConfig",
-	Display: "EGLConfig",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6053,7 +5998,6 @@ var schemaEGLContext = &schema.Class{
 	TypeID:  binaryIDEGLContext,
 	Package: "gles",
 	Name:    "EGLContext",
-	Display: "EGLContext",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6101,7 +6045,6 @@ var schemaEGLDisplay = &schema.Class{
 	TypeID:  binaryIDEGLDisplay,
 	Package: "gles",
 	Name:    "EGLDisplay",
-	Display: "EGLDisplay",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6149,7 +6092,6 @@ var schemaEGLSurface = &schema.Class{
 	TypeID:  binaryIDEGLSurface,
 	Package: "gles",
 	Name:    "EGLSurface",
-	Display: "EGLSurface",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6197,7 +6139,6 @@ var schemaEGLintˢ = &schema.Class{
 	TypeID:  binaryIDEGLintˢ,
 	Package: "gles",
 	Name:    "EGLintˢ",
-	Display: "EGLintˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -6245,7 +6186,6 @@ var schemaEGLintᵖ = &schema.Class{
 	TypeID:  binaryIDEGLintᵖ,
 	Package: "gles",
 	Name:    "EGLintᵖ",
-	Display: "EGLintᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6338,7 +6278,6 @@ var schemaEglCreateContext = &schema.Class{
 	TypeID:  binaryIDEglCreateContext,
 	Package: "gles",
 	Name:    "EglCreateContext",
-	Display: "eglCreateContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay", ID: (*EGLDisplay)(nil).Class().ID()}},
@@ -6429,7 +6368,6 @@ var schemaEglInitialize = &schema.Class{
 	TypeID:  binaryIDEglInitialize,
 	Package: "gles",
 	Name:    "EglInitialize",
-	Display: "eglInitialize",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Dpy", Type: &schema.Struct{Name: "EGLDisplay", ID: (*EGLDisplay)(nil).Class().ID()}},
@@ -6528,7 +6466,6 @@ var schemaEglMakeCurrent = &schema.Class{
 	TypeID:  binaryIDEglMakeCurrent,
 	Package: "gles",
 	Name:    "EglMakeCurrent",
-	Display: "eglMakeCurrent",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay", ID: (*EGLDisplay)(nil).Class().ID()}},
@@ -6630,7 +6567,6 @@ var schemaEglQuerySurface = &schema.Class{
 	TypeID:  binaryIDEglQuerySurface,
 	Package: "gles",
 	Name:    "EglQuerySurface",
-	Display: "eglQuerySurface",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay", ID: (*EGLDisplay)(nil).Class().ID()}},
@@ -6683,7 +6619,6 @@ var schemaVoidᵖ = &schema.Class{
 	TypeID:  binaryIDVoidᵖ,
 	Package: "gles",
 	Name:    "Voidᵖ",
-	Display: "Voidᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -6760,7 +6695,6 @@ var schemaEglSwapBuffers = &schema.Class{
 	TypeID:  binaryIDEglSwapBuffers,
 	Package: "gles",
 	Name:    "EglSwapBuffers",
-	Display: "eglSwapBuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay", ID: (*EGLDisplay)(nil).Class().ID()}},
@@ -6819,7 +6753,6 @@ var schemaF32ː2ᵃ = &schema.Class{
 	TypeID:  binaryIDF32ː2ᵃ,
 	Package: "gles",
 	Name:    "F32ː2ᵃ",
-	Display: "F32ː2ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 2}},
 	},
@@ -6875,7 +6808,6 @@ var schemaF32ː3ᵃ = &schema.Class{
 	TypeID:  binaryIDF32ː3ᵃ,
 	Package: "gles",
 	Name:    "F32ː3ᵃ",
-	Display: "F32ː3ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 3}},
 	},
@@ -6931,7 +6863,6 @@ var schemaF32ː4ᵃ = &schema.Class{
 	TypeID:  binaryIDF32ː4ᵃ,
 	Package: "gles",
 	Name:    "F32ː4ᵃ",
-	Display: "F32ː4ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 4}},
 	},
@@ -6979,7 +6910,6 @@ var schemaF32ˢ = &schema.Class{
 	TypeID:  binaryIDF32ˢ,
 	Package: "gles",
 	Name:    "F32ˢ",
-	Display: "F32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -7027,7 +6957,6 @@ var schemaF32ᵖ = &schema.Class{
 	TypeID:  binaryIDF32ᵖ,
 	Package: "gles",
 	Name:    "F32ᵖ",
-	Display: "F32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -7075,7 +7004,6 @@ var schemaF64ˢ = &schema.Class{
 	TypeID:  binaryIDF64ˢ,
 	Package: "gles",
 	Name:    "F64ˢ",
-	Display: "F64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -7123,7 +7051,6 @@ var schemaFlushPostBuffer = &schema.Class{
 	TypeID:  binaryIDFlushPostBuffer,
 	Package: "gles",
 	Name:    "FlushPostBuffer",
-	Display: "flushPostBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -7175,7 +7102,6 @@ var schemaFramebufferAttachmentˢ = &schema.Class{
 	TypeID:  binaryIDFramebufferAttachmentˢ,
 	Package: "gles",
 	Name:    "FramebufferAttachmentˢ",
-	Display: "FramebufferAttachmentˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -7227,7 +7153,6 @@ var schemaFramebufferAttachmentᵖ = &schema.Class{
 	TypeID:  binaryIDFramebufferAttachmentᵖ,
 	Package: "gles",
 	Name:    "FramebufferAttachmentᵖ",
-	Display: "FramebufferAttachmentᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -7275,7 +7200,6 @@ var schemaFramebufferIdˢ = &schema.Class{
 	TypeID:  binaryIDFramebufferIdˢ,
 	Package: "gles",
 	Name:    "FramebufferIdˢ",
-	Display: "FramebufferIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -7323,7 +7247,6 @@ var schemaFramebufferIdᵖ = &schema.Class{
 	TypeID:  binaryIDFramebufferIdᵖ,
 	Package: "gles",
 	Name:    "FramebufferIdᵖ",
-	Display: "FramebufferIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -7371,7 +7294,6 @@ var schemaGLXContext = &schema.Class{
 	TypeID:  binaryIDGLXContext,
 	Package: "gles",
 	Name:    "GLXContext",
-	Display: "GLXContext",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -7419,7 +7341,6 @@ var schemaGLXDrawable = &schema.Class{
 	TypeID:  binaryIDGLXDrawable,
 	Package: "gles",
 	Name:    "GLXDrawable",
-	Display: "GLXDrawable",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -7478,7 +7399,6 @@ var schemaGlActiveTexture = &schema.Class{
 	TypeID:  binaryIDGlActiveTexture,
 	Package: "gles",
 	Name:    "GlActiveTexture",
-	Display: "glActiveTexture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
@@ -7549,7 +7469,6 @@ var schemaGlAttachShader = &schema.Class{
 	TypeID:  binaryIDGlAttachShader,
 	Package: "gles",
 	Name:    "GlAttachShader",
-	Display: "glAttachShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -7621,7 +7540,6 @@ var schemaGlBeginQuery = &schema.Class{
 	TypeID:  binaryIDGlBeginQuery,
 	Package: "gles",
 	Name:    "GlBeginQuery",
-	Display: "glBeginQuery",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -7693,7 +7611,6 @@ var schemaGlBeginQueryEXT = &schema.Class{
 	TypeID:  binaryIDGlBeginQueryEXT,
 	Package: "gles",
 	Name:    "GlBeginQueryEXT",
-	Display: "glBeginQueryEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -7778,7 +7695,6 @@ var schemaGlBindAttribLocation = &schema.Class{
 	TypeID:  binaryIDGlBindAttribLocation,
 	Package: "gles",
 	Name:    "GlBindAttribLocation",
-	Display: "glBindAttribLocation",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -7851,7 +7767,6 @@ var schemaGlBindBuffer = &schema.Class{
 	TypeID:  binaryIDGlBindBuffer,
 	Package: "gles",
 	Name:    "GlBindBuffer",
-	Display: "glBindBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -7934,7 +7849,6 @@ var schemaGlBindBufferBase = &schema.Class{
 	TypeID:  binaryIDGlBindBufferBase,
 	Package: "gles",
 	Name:    "GlBindBufferBase",
-	Display: "glBindBufferBase",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32}},
@@ -8007,7 +7921,6 @@ var schemaGlBindFramebuffer = &schema.Class{
 	TypeID:  binaryIDGlBindFramebuffer,
 	Package: "gles",
 	Name:    "GlBindFramebuffer",
-	Display: "glBindFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -8079,7 +7992,6 @@ var schemaGlBindRenderbuffer = &schema.Class{
 	TypeID:  binaryIDGlBindRenderbuffer,
 	Package: "gles",
 	Name:    "GlBindRenderbuffer",
-	Display: "glBindRenderbuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
@@ -8151,7 +8063,6 @@ var schemaGlBindTexture = &schema.Class{
 	TypeID:  binaryIDGlBindTexture,
 	Package: "gles",
 	Name:    "GlBindTexture",
-	Display: "glBindTexture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -8212,7 +8123,6 @@ var schemaGlBindVertexArray = &schema.Class{
 	TypeID:  binaryIDGlBindVertexArray,
 	Package: "gles",
 	Name:    "GlBindVertexArray",
-	Display: "glBindVertexArray",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
@@ -8274,7 +8184,6 @@ var schemaGlBindVertexArrayOES = &schema.Class{
 	TypeID:  binaryIDGlBindVertexArrayOES,
 	Package: "gles",
 	Name:    "GlBindVertexArrayOES",
-	Display: "glBindVertexArrayOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
@@ -8367,7 +8276,6 @@ var schemaGlBlendColor = &schema.Class{
 	TypeID:  binaryIDGlBlendColor,
 	Package: "gles",
 	Name:    "GlBlendColor",
-	Display: "glBlendColor",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -8430,7 +8338,6 @@ var schemaGlBlendEquation = &schema.Class{
 	TypeID:  binaryIDGlBlendEquation,
 	Package: "gles",
 	Name:    "GlBlendEquation",
-	Display: "glBlendEquation",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Equation", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
@@ -8505,7 +8412,6 @@ var schemaGlBlendEquationSeparate = &schema.Class{
 	TypeID:  binaryIDGlBlendEquationSeparate,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparate",
-	Display: "glBlendEquationSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Rgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
@@ -8577,7 +8483,6 @@ var schemaGlBlendFunc = &schema.Class{
 	TypeID:  binaryIDGlBlendFunc,
 	Package: "gles",
 	Name:    "GlBlendFunc",
-	Display: "glBlendFunc",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
@@ -8673,7 +8578,6 @@ var schemaGlBlendFuncSeparate = &schema.Class{
 	TypeID:  binaryIDGlBlendFuncSeparate,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparate",
-	Display: "glBlendFuncSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
@@ -8835,7 +8739,6 @@ var schemaGlBlitFramebuffer = &schema.Class{
 	TypeID:  binaryIDGlBlitFramebuffer,
 	Package: "gles",
 	Name:    "GlBlitFramebuffer",
-	Display: "glBlitFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -8935,7 +8838,6 @@ var schemaGlBufferData = &schema.Class{
 	TypeID:  binaryIDGlBufferData,
 	Package: "gles",
 	Name:    "GlBufferData",
-	Display: "glBufferData",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -9029,7 +8931,6 @@ var schemaGlBufferSubData = &schema.Class{
 	TypeID:  binaryIDGlBufferSubData,
 	Package: "gles",
 	Name:    "GlBufferSubData",
-	Display: "glBufferSubData",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -9107,7 +9008,6 @@ var schemaGlCheckFramebufferStatus = &schema.Class{
 	TypeID:  binaryIDGlCheckFramebufferStatus,
 	Package: "gles",
 	Name:    "GlCheckFramebufferStatus",
-	Display: "glCheckFramebufferStatus",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -9168,7 +9068,6 @@ var schemaGlClear = &schema.Class{
 	TypeID:  binaryIDGlClear,
 	Package: "gles",
 	Name:    "GlClear",
-	Display: "glClear",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
@@ -9261,7 +9160,6 @@ var schemaGlClearColor = &schema.Class{
 	TypeID:  binaryIDGlClearColor,
 	Package: "gles",
 	Name:    "GlClearColor",
-	Display: "glClearColor",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "R", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -9324,7 +9222,6 @@ var schemaGlClearDepthf = &schema.Class{
 	TypeID:  binaryIDGlClearDepthf,
 	Package: "gles",
 	Name:    "GlClearDepthf",
-	Display: "glClearDepthf",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -9384,7 +9281,6 @@ var schemaGlClearStencil = &schema.Class{
 	TypeID:  binaryIDGlClearStencil,
 	Package: "gles",
 	Name:    "GlClearStencil",
-	Display: "glClearStencil",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Stencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -9477,7 +9373,6 @@ var schemaGlClientWaitSync = &schema.Class{
 	TypeID:  binaryIDGlClientWaitSync,
 	Package: "gles",
 	Name:    "GlClientWaitSync",
-	Display: "glClientWaitSync",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
@@ -9573,7 +9468,6 @@ var schemaGlColorMask = &schema.Class{
 	TypeID:  binaryIDGlColorMask,
 	Package: "gles",
 	Name:    "GlColorMask",
-	Display: "glColorMask",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -9636,7 +9530,6 @@ var schemaGlCompileShader = &schema.Class{
 	TypeID:  binaryIDGlCompileShader,
 	Package: "gles",
 	Name:    "GlCompileShader",
-	Display: "glCompileShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -9685,7 +9578,6 @@ var schemaTexturePointer = &schema.Class{
 	TypeID:  binaryIDTexturePointer,
 	Package: "gles",
 	Name:    "TexturePointer",
-	Display: "TexturePointer",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -9821,7 +9713,6 @@ var schemaGlCompressedTexImage2D = &schema.Class{
 	TypeID:  binaryIDGlCompressedTexImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexImage2D",
-	Display: "glCompressedTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -9978,7 +9869,6 @@ var schemaGlCompressedTexSubImage2D = &schema.Class{
 	TypeID:  binaryIDGlCompressedTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage2D",
-	Display: "glCompressedTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -10123,7 +10013,6 @@ var schemaGlCopyTexImage2D = &schema.Class{
 	TypeID:  binaryIDGlCopyTexImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexImage2D",
-	Display: "glCopyTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -10269,7 +10158,6 @@ var schemaGlCopyTexSubImage2D = &schema.Class{
 	TypeID:  binaryIDGlCopyTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage2D",
-	Display: "glCopyTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -10336,7 +10224,6 @@ var schemaGlCreateProgram = &schema.Class{
 	TypeID:  binaryIDGlCreateProgram,
 	Package: "gles",
 	Name:    "GlCreateProgram",
-	Display: "glCreateProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -10407,7 +10294,6 @@ var schemaGlCreateShader = &schema.Class{
 	TypeID:  binaryIDGlCreateShader,
 	Package: "gles",
 	Name:    "GlCreateShader",
-	Display: "glCreateShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
@@ -10468,7 +10354,6 @@ var schemaGlCullFace = &schema.Class{
 	TypeID:  binaryIDGlCullFace,
 	Package: "gles",
 	Name:    "GlCullFace",
-	Display: "glCullFace",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
@@ -10537,7 +10422,6 @@ var schemaGlDeleteBuffers = &schema.Class{
 	TypeID:  binaryIDGlDeleteBuffers,
 	Package: "gles",
 	Name:    "GlDeleteBuffers",
-	Display: "glDeleteBuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10609,7 +10493,6 @@ var schemaGlDeleteFramebuffers = &schema.Class{
 	TypeID:  binaryIDGlDeleteFramebuffers,
 	Package: "gles",
 	Name:    "GlDeleteFramebuffers",
-	Display: "glDeleteFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10670,7 +10553,6 @@ var schemaGlDeleteProgram = &schema.Class{
 	TypeID:  binaryIDGlDeleteProgram,
 	Package: "gles",
 	Name:    "GlDeleteProgram",
-	Display: "glDeleteProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -10719,7 +10601,6 @@ var schemaQueryIdᵖ = &schema.Class{
 	TypeID:  binaryIDQueryIdᵖ,
 	Package: "gles",
 	Name:    "QueryIdᵖ",
-	Display: "QueryIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -10787,7 +10668,6 @@ var schemaGlDeleteQueries = &schema.Class{
 	TypeID:  binaryIDGlDeleteQueries,
 	Package: "gles",
 	Name:    "GlDeleteQueries",
-	Display: "glDeleteQueries",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10857,7 +10737,6 @@ var schemaGlDeleteQueriesEXT = &schema.Class{
 	TypeID:  binaryIDGlDeleteQueriesEXT,
 	Package: "gles",
 	Name:    "GlDeleteQueriesEXT",
-	Display: "glDeleteQueriesEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10907,7 +10786,6 @@ var schemaRenderbufferIdᵖ = &schema.Class{
 	TypeID:  binaryIDRenderbufferIdᵖ,
 	Package: "gles",
 	Name:    "RenderbufferIdᵖ",
-	Display: "RenderbufferIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -10977,7 +10855,6 @@ var schemaGlDeleteRenderbuffers = &schema.Class{
 	TypeID:  binaryIDGlDeleteRenderbuffers,
 	Package: "gles",
 	Name:    "GlDeleteRenderbuffers",
-	Display: "glDeleteRenderbuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -11038,7 +10915,6 @@ var schemaGlDeleteShader = &schema.Class{
 	TypeID:  binaryIDGlDeleteShader,
 	Package: "gles",
 	Name:    "GlDeleteShader",
-	Display: "glDeleteShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -11098,7 +10974,6 @@ var schemaGlDeleteSync = &schema.Class{
 	TypeID:  binaryIDGlDeleteSync,
 	Package: "gles",
 	Name:    "GlDeleteSync",
-	Display: "glDeleteSync",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
@@ -11147,7 +11022,6 @@ var schemaTextureIdᵖ = &schema.Class{
 	TypeID:  binaryIDTextureIdᵖ,
 	Package: "gles",
 	Name:    "TextureIdᵖ",
-	Display: "TextureIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -11215,7 +11089,6 @@ var schemaGlDeleteTextures = &schema.Class{
 	TypeID:  binaryIDGlDeleteTextures,
 	Package: "gles",
 	Name:    "GlDeleteTextures",
-	Display: "glDeleteTextures",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -11265,7 +11138,6 @@ var schemaVertexArrayIdᵖ = &schema.Class{
 	TypeID:  binaryIDVertexArrayIdᵖ,
 	Package: "gles",
 	Name:    "VertexArrayIdᵖ",
-	Display: "VertexArrayIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -11335,7 +11207,6 @@ var schemaGlDeleteVertexArrays = &schema.Class{
 	TypeID:  binaryIDGlDeleteVertexArrays,
 	Package: "gles",
 	Name:    "GlDeleteVertexArrays",
-	Display: "glDeleteVertexArrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -11409,7 +11280,6 @@ var schemaGlDeleteVertexArraysOES = &schema.Class{
 	TypeID:  binaryIDGlDeleteVertexArraysOES,
 	Package: "gles",
 	Name:    "GlDeleteVertexArraysOES",
-	Display: "glDeleteVertexArraysOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -11470,7 +11340,6 @@ var schemaGlDepthFunc = &schema.Class{
 	TypeID:  binaryIDGlDepthFunc,
 	Package: "gles",
 	Name:    "GlDepthFunc",
-	Display: "glDepthFunc",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
@@ -11530,7 +11399,6 @@ var schemaGlDepthMask = &schema.Class{
 	TypeID:  binaryIDGlDepthMask,
 	Package: "gles",
 	Name:    "GlDepthMask",
-	Display: "glDepthMask",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -11601,7 +11469,6 @@ var schemaGlDepthRangef = &schema.Class{
 	TypeID:  binaryIDGlDepthRangef,
 	Package: "gles",
 	Name:    "GlDepthRangef",
-	Display: "glDepthRangef",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Near", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -11673,7 +11540,6 @@ var schemaGlDetachShader = &schema.Class{
 	TypeID:  binaryIDGlDetachShader,
 	Package: "gles",
 	Name:    "GlDetachShader",
-	Display: "glDetachShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -11734,7 +11600,6 @@ var schemaGlDisable = &schema.Class{
 	TypeID:  binaryIDGlDisable,
 	Package: "gles",
 	Name:    "GlDisable",
-	Display: "glDisable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
@@ -11796,7 +11661,6 @@ var schemaGlDisableClientState = &schema.Class{
 	TypeID:  binaryIDGlDisableClientState,
 	Package: "gles",
 	Name:    "GlDisableClientState",
-	Display: "glDisableClientState",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
@@ -11864,7 +11728,6 @@ var schemaGlDisableVertexAttribArray = &schema.Class{
 	TypeID:  binaryIDGlDisableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlDisableVertexAttribArray",
-	Display: "glDisableVertexAttribArray",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -11948,7 +11811,6 @@ var schemaGlDiscardFramebufferEXT = &schema.Class{
 	TypeID:  binaryIDGlDiscardFramebufferEXT,
 	Package: "gles",
 	Name:    "GlDiscardFramebufferEXT",
-	Display: "glDiscardFramebufferEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -12032,7 +11894,6 @@ var schemaGlDrawArrays = &schema.Class{
 	TypeID:  binaryIDGlDrawArrays,
 	Package: "gles",
 	Name:    "GlDrawArrays",
-	Display: "glDrawArrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
@@ -12083,7 +11944,6 @@ var schemaIndicesPointer = &schema.Class{
 	TypeID:  binaryIDIndicesPointer,
 	Package: "gles",
 	Name:    "IndicesPointer",
-	Display: "IndicesPointer",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -12173,7 +12033,6 @@ var schemaGlDrawElements = &schema.Class{
 	TypeID:  binaryIDGlDrawElements,
 	Package: "gles",
 	Name:    "GlDrawElements",
-	Display: "glDrawElements",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
@@ -12253,7 +12112,6 @@ var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Class{
 	TypeID:  binaryIDGlEGLImageTargetRenderbufferStorageOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetRenderbufferStorageOES",
-	Display: "glEGLImageTargetRenderbufferStorageOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32}},
@@ -12303,7 +12161,6 @@ var schemaImageOES = &schema.Class{
 	TypeID:  binaryIDImageOES,
 	Package: "gles",
 	Name:    "ImageOES",
-	Display: "ImageOES",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -12379,7 +12236,6 @@ var schemaGlEGLImageTargetTexture2DOES = &schema.Class{
 	TypeID:  binaryIDGlEGLImageTargetTexture2DOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetTexture2DOES",
-	Display: "glEGLImageTargetTexture2DOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32}},
@@ -12440,7 +12296,6 @@ var schemaGlEnable = &schema.Class{
 	TypeID:  binaryIDGlEnable,
 	Package: "gles",
 	Name:    "GlEnable",
-	Display: "glEnable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
@@ -12502,7 +12357,6 @@ var schemaGlEnableClientState = &schema.Class{
 	TypeID:  binaryIDGlEnableClientState,
 	Package: "gles",
 	Name:    "GlEnableClientState",
-	Display: "glEnableClientState",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
@@ -12566,7 +12420,6 @@ var schemaGlEnableVertexAttribArray = &schema.Class{
 	TypeID:  binaryIDGlEnableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlEnableVertexAttribArray",
-	Display: "glEnableVertexAttribArray",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -12626,7 +12479,6 @@ var schemaGlEndQuery = &schema.Class{
 	TypeID:  binaryIDGlEndQuery,
 	Package: "gles",
 	Name:    "GlEndQuery",
-	Display: "glEndQuery",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -12686,7 +12538,6 @@ var schemaGlEndQueryEXT = &schema.Class{
 	TypeID:  binaryIDGlEndQueryEXT,
 	Package: "gles",
 	Name:    "GlEndQueryEXT",
-	Display: "glEndQueryEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -12746,7 +12597,6 @@ var schemaGlEndTilingQCOM = &schema.Class{
 	TypeID:  binaryIDGlEndTilingQCOM,
 	Package: "gles",
 	Name:    "GlEndTilingQCOM",
-	Display: "glEndTilingQCOM",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
@@ -12828,7 +12678,6 @@ var schemaGlFenceSync = &schema.Class{
 	TypeID:  binaryIDGlFenceSync,
 	Package: "gles",
 	Name:    "GlFenceSync",
-	Display: "glFenceSync",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "SyncCondition", Method: schema.Uint32}},
@@ -12879,7 +12728,6 @@ var schemaGlFinish = &schema.Class{
 	TypeID:  binaryIDGlFinish,
 	Package: "gles",
 	Name:    "GlFinish",
-	Display: "glFinish",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -12927,7 +12775,6 @@ var schemaGlFlush = &schema.Class{
 	TypeID:  binaryIDGlFlush,
 	Package: "gles",
 	Name:    "GlFlush",
-	Display: "glFlush",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -13023,7 +12870,6 @@ var schemaGlFramebufferRenderbuffer = &schema.Class{
 	TypeID:  binaryIDGlFramebufferRenderbuffer,
 	Package: "gles",
 	Name:    "GlFramebufferRenderbuffer",
-	Display: "glFramebufferRenderbuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -13132,7 +12978,6 @@ var schemaGlFramebufferTexture2D = &schema.Class{
 	TypeID:  binaryIDGlFramebufferTexture2D,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2D",
-	Display: "glFramebufferTexture2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -13196,7 +13041,6 @@ var schemaGlFrontFace = &schema.Class{
 	TypeID:  binaryIDGlFrontFace,
 	Package: "gles",
 	Name:    "GlFrontFace",
-	Display: "glFrontFace",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Orientation", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
@@ -13265,7 +13109,6 @@ var schemaGlGenBuffers = &schema.Class{
 	TypeID:  binaryIDGlGenBuffers,
 	Package: "gles",
 	Name:    "GlGenBuffers",
-	Display: "glGenBuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13335,7 +13178,6 @@ var schemaGlGenFramebuffers = &schema.Class{
 	TypeID:  binaryIDGlGenFramebuffers,
 	Package: "gles",
 	Name:    "GlGenFramebuffers",
-	Display: "glGenFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13405,7 +13247,6 @@ var schemaGlGenQueries = &schema.Class{
 	TypeID:  binaryIDGlGenQueries,
 	Package: "gles",
 	Name:    "GlGenQueries",
-	Display: "glGenQueries",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13475,7 +13316,6 @@ var schemaGlGenQueriesEXT = &schema.Class{
 	TypeID:  binaryIDGlGenQueriesEXT,
 	Package: "gles",
 	Name:    "GlGenQueriesEXT",
-	Display: "glGenQueriesEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13545,7 +13385,6 @@ var schemaGlGenRenderbuffers = &schema.Class{
 	TypeID:  binaryIDGlGenRenderbuffers,
 	Package: "gles",
 	Name:    "GlGenRenderbuffers",
-	Display: "glGenRenderbuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13615,7 +13454,6 @@ var schemaGlGenTextures = &schema.Class{
 	TypeID:  binaryIDGlGenTextures,
 	Package: "gles",
 	Name:    "GlGenTextures",
-	Display: "glGenTextures",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13685,7 +13523,6 @@ var schemaGlGenVertexArrays = &schema.Class{
 	TypeID:  binaryIDGlGenVertexArrays,
 	Package: "gles",
 	Name:    "GlGenVertexArrays",
-	Display: "glGenVertexArrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13757,7 +13594,6 @@ var schemaGlGenVertexArraysOES = &schema.Class{
 	TypeID:  binaryIDGlGenVertexArraysOES,
 	Package: "gles",
 	Name:    "GlGenVertexArraysOES",
-	Display: "glGenVertexArraysOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -13818,7 +13654,6 @@ var schemaGlGenerateMipmap = &schema.Class{
 	TypeID:  binaryIDGlGenerateMipmap,
 	Package: "gles",
 	Name:    "GlGenerateMipmap",
-	Display: "glGenerateMipmap",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -13867,7 +13702,6 @@ var schemaS32ᵖ = &schema.Class{
 	TypeID:  binaryIDS32ᵖ,
 	Package: "gles",
 	Name:    "S32ᵖ",
-	Display: "S32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -13917,7 +13751,6 @@ var schemaShaderAttribTypeᵖ = &schema.Class{
 	TypeID:  binaryIDShaderAttribTypeᵖ,
 	Package: "gles",
 	Name:    "ShaderAttribTypeᵖ",
-	Display: "ShaderAttribTypeᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -14034,7 +13867,6 @@ var schemaGlGetActiveAttrib = &schema.Class{
 	TypeID:  binaryIDGlGetActiveAttrib,
 	Package: "gles",
 	Name:    "GlGetActiveAttrib",
-	Display: "glGetActiveAttrib",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14091,7 +13923,6 @@ var schemaShaderUniformTypeᵖ = &schema.Class{
 	TypeID:  binaryIDShaderUniformTypeᵖ,
 	Package: "gles",
 	Name:    "ShaderUniformTypeᵖ",
-	Display: "ShaderUniformTypeᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -14208,7 +14039,6 @@ var schemaGlGetActiveUniform = &schema.Class{
 	TypeID:  binaryIDGlGetActiveUniform,
 	Package: "gles",
 	Name:    "GlGetActiveUniform",
-	Display: "glGetActiveUniform",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14322,7 +14152,6 @@ var schemaGlGetActiveUniformBlockName = &schema.Class{
 	TypeID:  binaryIDGlGetActiveUniformBlockName,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockName",
-	Display: "glGetActiveUniformBlockName",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14421,7 +14250,6 @@ var schemaGlGetActiveUniformBlockiv = &schema.Class{
 	TypeID:  binaryIDGlGetActiveUniformBlockiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockiv",
-	Display: "glGetActiveUniformBlockiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14473,7 +14301,6 @@ var schemaU32ᵖ = &schema.Class{
 	TypeID:  binaryIDU32ᵖ,
 	Package: "gles",
 	Name:    "U32ᵖ",
-	Display: "U32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -14574,7 +14401,6 @@ var schemaGlGetActiveUniformsiv = &schema.Class{
 	TypeID:  binaryIDGlGetActiveUniformsiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformsiv",
-	Display: "glGetActiveUniformsiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14627,7 +14453,6 @@ var schemaShaderIdᵖ = &schema.Class{
 	TypeID:  binaryIDShaderIdᵖ,
 	Package: "gles",
 	Name:    "ShaderIdᵖ",
-	Display: "ShaderIdᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -14717,7 +14542,6 @@ var schemaGlGetAttachedShaders = &schema.Class{
 	TypeID:  binaryIDGlGetAttachedShaders,
 	Package: "gles",
 	Name:    "GlGetAttachedShaders",
-	Display: "glGetAttachedShaders",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14804,7 +14628,6 @@ var schemaGlGetAttribLocation = &schema.Class{
 	TypeID:  binaryIDGlGetAttribLocation,
 	Package: "gles",
 	Name:    "GlGetAttribLocation",
-	Display: "glGetAttribLocation",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -14875,7 +14698,6 @@ var schemaGlGetBooleanv = &schema.Class{
 	TypeID:  binaryIDGlGetBooleanv,
 	Package: "gles",
 	Name:    "GlGetBooleanv",
-	Display: "glGetBooleanv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
@@ -14958,7 +14780,6 @@ var schemaGlGetBufferParameteriv = &schema.Class{
 	TypeID:  binaryIDGlGetBufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetBufferParameteriv",
-	Display: "glGetBufferParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -15020,7 +14841,6 @@ var schemaGlGetError = &schema.Class{
 	TypeID:  binaryIDGlGetError,
 	Package: "gles",
 	Name:    "GlGetError",
-	Display: "glGetError",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "Error", Method: schema.Uint32}},
@@ -15089,7 +14909,6 @@ var schemaGlGetFloatv = &schema.Class{
 	TypeID:  binaryIDGlGetFloatv,
 	Package: "gles",
 	Name:    "GlGetFloatv",
-	Display: "glGetFloatv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
@@ -15189,7 +15008,6 @@ var schemaGlGetFramebufferAttachmentParameteriv = &schema.Class{
 	TypeID:  binaryIDGlGetFramebufferAttachmentParameteriv,
 	Package: "gles",
 	Name:    "GlGetFramebufferAttachmentParameteriv",
-	Display: "glGetFramebufferAttachmentParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -15260,7 +15078,6 @@ var schemaGlGetGraphicsResetStatusEXT = &schema.Class{
 	TypeID:  binaryIDGlGetGraphicsResetStatusEXT,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusEXT",
-	Display: "glGetGraphicsResetStatusEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32}},
@@ -15329,7 +15146,6 @@ var schemaGlGetIntegerv = &schema.Class{
 	TypeID:  binaryIDGlGetIntegerv,
 	Package: "gles",
 	Name:    "GlGetIntegerv",
-	Display: "glGetIntegerv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
@@ -15430,7 +15246,6 @@ var schemaGlGetProgramBinaryOES = &schema.Class{
 	TypeID:  binaryIDGlGetProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlGetProgramBinaryOES",
-	Display: "glGetProgramBinaryOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -15525,7 +15340,6 @@ var schemaGlGetProgramInfoLog = &schema.Class{
 	TypeID:  binaryIDGlGetProgramInfoLog,
 	Package: "gles",
 	Name:    "GlGetProgramInfoLog",
-	Display: "glGetProgramInfoLog",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -15608,7 +15422,6 @@ var schemaGlGetProgramiv = &schema.Class{
 	TypeID:  binaryIDGlGetProgramiv,
 	Package: "gles",
 	Name:    "GlGetProgramiv",
-	Display: "glGetProgramiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -15659,7 +15472,6 @@ var schemaS64ᵖ = &schema.Class{
 	TypeID:  binaryIDS64ᵖ,
 	Package: "gles",
 	Name:    "S64ᵖ",
-	Display: "S64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -15740,7 +15552,6 @@ var schemaGlGetQueryObjecti64v = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjecti64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64v",
-	Display: "glGetQueryObjecti64v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -15826,7 +15637,6 @@ var schemaGlGetQueryObjecti64vEXT = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjecti64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64vEXT",
-	Display: "glGetQueryObjecti64vEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -15910,7 +15720,6 @@ var schemaGlGetQueryObjectivEXT = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjectivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectivEXT",
-	Display: "glGetQueryObjectivEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -15961,7 +15770,6 @@ var schemaU64ᵖ = &schema.Class{
 	TypeID:  binaryIDU64ᵖ,
 	Package: "gles",
 	Name:    "U64ᵖ",
-	Display: "U64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -16042,7 +15850,6 @@ var schemaGlGetQueryObjectui64v = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjectui64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64v",
-	Display: "glGetQueryObjectui64v",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -16128,7 +15935,6 @@ var schemaGlGetQueryObjectui64vEXT = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjectui64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64vEXT",
-	Display: "glGetQueryObjectui64vEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -16212,7 +16018,6 @@ var schemaGlGetQueryObjectuiv = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjectuiv,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuiv",
-	Display: "glGetQueryObjectuiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -16296,7 +16101,6 @@ var schemaGlGetQueryObjectuivEXT = &schema.Class{
 	TypeID:  binaryIDGlGetQueryObjectuivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuivEXT",
-	Display: "glGetQueryObjectuivEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -16378,7 +16182,6 @@ var schemaGlGetQueryiv = &schema.Class{
 	TypeID:  binaryIDGlGetQueryiv,
 	Package: "gles",
 	Name:    "GlGetQueryiv",
-	Display: "glGetQueryiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -16460,7 +16263,6 @@ var schemaGlGetQueryivEXT = &schema.Class{
 	TypeID:  binaryIDGlGetQueryivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryivEXT",
-	Display: "glGetQueryivEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
@@ -16550,7 +16352,6 @@ var schemaGlGetRenderbufferParameteriv = &schema.Class{
 	TypeID:  binaryIDGlGetRenderbufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetRenderbufferParameteriv",
-	Display: "glGetRenderbufferParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
@@ -16641,7 +16442,6 @@ var schemaGlGetShaderInfoLog = &schema.Class{
 	TypeID:  binaryIDGlGetShaderInfoLog,
 	Package: "gles",
 	Name:    "GlGetShaderInfoLog",
-	Display: "glGetShaderInfoLog",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -16741,7 +16541,6 @@ var schemaGlGetShaderPrecisionFormat = &schema.Class{
 	TypeID:  binaryIDGlGetShaderPrecisionFormat,
 	Package: "gles",
 	Name:    "GlGetShaderPrecisionFormat",
-	Display: "glGetShaderPrecisionFormat",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "ShaderType", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
@@ -16833,7 +16632,6 @@ var schemaGlGetShaderSource = &schema.Class{
 	TypeID:  binaryIDGlGetShaderSource,
 	Package: "gles",
 	Name:    "GlGetShaderSource",
-	Display: "glGetShaderSource",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -16916,7 +16714,6 @@ var schemaGlGetShaderiv = &schema.Class{
 	TypeID:  binaryIDGlGetShaderiv,
 	Package: "gles",
 	Name:    "GlGetShaderiv",
-	Display: "glGetShaderiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -16987,7 +16784,6 @@ var schemaGlGetString = &schema.Class{
 	TypeID:  binaryIDGlGetString,
 	Package: "gles",
 	Name:    "GlGetString",
-	Display: "glGetString",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32}},
@@ -17070,7 +16866,6 @@ var schemaGlGetTexParameterfv = &schema.Class{
 	TypeID:  binaryIDGlGetTexParameterfv,
 	Package: "gles",
 	Name:    "GlGetTexParameterfv",
-	Display: "glGetTexParameterfv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -17154,7 +16949,6 @@ var schemaGlGetTexParameteriv = &schema.Class{
 	TypeID:  binaryIDGlGetTexParameteriv,
 	Package: "gles",
 	Name:    "GlGetTexParameteriv",
-	Display: "glGetTexParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -17240,7 +17034,6 @@ var schemaGlGetUniformLocation = &schema.Class{
 	TypeID:  binaryIDGlGetUniformLocation,
 	Package: "gles",
 	Name:    "GlGetUniformLocation",
-	Display: "glGetUniformLocation",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -17322,7 +17115,6 @@ var schemaGlGetUniformfv = &schema.Class{
 	TypeID:  binaryIDGlGetUniformfv,
 	Package: "gles",
 	Name:    "GlGetUniformfv",
-	Display: "glGetUniformfv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -17404,7 +17196,6 @@ var schemaGlGetUniformiv = &schema.Class{
 	TypeID:  binaryIDGlGetUniformiv,
 	Package: "gles",
 	Name:    "GlGetUniformiv",
-	Display: "glGetUniformiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -17477,7 +17268,6 @@ var schemaGlHint = &schema.Class{
 	TypeID:  binaryIDGlHint,
 	Package: "gles",
 	Name:    "GlHint",
-	Display: "glHint",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32}},
@@ -17549,7 +17339,6 @@ var schemaGlInsertEventMarkerEXT = &schema.Class{
 	TypeID:  binaryIDGlInsertEventMarkerEXT,
 	Package: "gles",
 	Name:    "GlInsertEventMarkerEXT",
-	Display: "glInsertEventMarkerEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -17634,7 +17423,6 @@ var schemaGlInvalidateFramebuffer = &schema.Class{
 	TypeID:  binaryIDGlInvalidateFramebuffer,
 	Package: "gles",
 	Name:    "GlInvalidateFramebuffer",
-	Display: "glInvalidateFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
@@ -17707,7 +17495,6 @@ var schemaGlIsBuffer = &schema.Class{
 	TypeID:  binaryIDGlIsBuffer,
 	Package: "gles",
 	Name:    "GlIsBuffer",
-	Display: "glIsBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -17779,7 +17566,6 @@ var schemaGlIsEnabled = &schema.Class{
 	TypeID:  binaryIDGlIsEnabled,
 	Package: "gles",
 	Name:    "GlIsEnabled",
-	Display: "glIsEnabled",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
@@ -17851,7 +17637,6 @@ var schemaGlIsFramebuffer = &schema.Class{
 	TypeID:  binaryIDGlIsFramebuffer,
 	Package: "gles",
 	Name:    "GlIsFramebuffer",
-	Display: "glIsFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
@@ -17923,7 +17708,6 @@ var schemaGlIsProgram = &schema.Class{
 	TypeID:  binaryIDGlIsProgram,
 	Package: "gles",
 	Name:    "GlIsProgram",
-	Display: "glIsProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -17995,7 +17779,6 @@ var schemaGlIsQuery = &schema.Class{
 	TypeID:  binaryIDGlIsQuery,
 	Package: "gles",
 	Name:    "GlIsQuery",
-	Display: "glIsQuery",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -18067,7 +17850,6 @@ var schemaGlIsQueryEXT = &schema.Class{
 	TypeID:  binaryIDGlIsQueryEXT,
 	Package: "gles",
 	Name:    "GlIsQueryEXT",
-	Display: "glIsQueryEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -18139,7 +17921,6 @@ var schemaGlIsRenderbuffer = &schema.Class{
 	TypeID:  binaryIDGlIsRenderbuffer,
 	Package: "gles",
 	Name:    "GlIsRenderbuffer",
-	Display: "glIsRenderbuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
@@ -18211,7 +17992,6 @@ var schemaGlIsShader = &schema.Class{
 	TypeID:  binaryIDGlIsShader,
 	Package: "gles",
 	Name:    "GlIsShader",
-	Display: "glIsShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -18283,7 +18063,6 @@ var schemaGlIsTexture = &schema.Class{
 	TypeID:  binaryIDGlIsTexture,
 	Package: "gles",
 	Name:    "GlIsTexture",
-	Display: "glIsTexture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -18355,7 +18134,6 @@ var schemaGlIsVertexArrayOES = &schema.Class{
 	TypeID:  binaryIDGlIsVertexArrayOES,
 	Package: "gles",
 	Name:    "GlIsVertexArrayOES",
-	Display: "glIsVertexArrayOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
@@ -18416,7 +18194,6 @@ var schemaGlLineWidth = &schema.Class{
 	TypeID:  binaryIDGlLineWidth,
 	Package: "gles",
 	Name:    "GlLineWidth",
-	Display: "glLineWidth",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -18476,7 +18253,6 @@ var schemaGlLinkProgram = &schema.Class{
 	TypeID:  binaryIDGlLinkProgram,
 	Package: "gles",
 	Name:    "GlLinkProgram",
-	Display: "glLinkProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -18578,7 +18354,6 @@ var schemaGlMapBufferRange = &schema.Class{
 	TypeID:  binaryIDGlMapBufferRange,
 	Package: "gles",
 	Name:    "GlMapBufferRange",
-	Display: "glMapBufferRange",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -18653,7 +18428,6 @@ var schemaGlPixelStorei = &schema.Class{
 	TypeID:  binaryIDGlPixelStorei,
 	Package: "gles",
 	Name:    "GlPixelStorei",
-	Display: "glPixelStorei",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}},
@@ -18725,7 +18499,6 @@ var schemaGlPolygonOffset = &schema.Class{
 	TypeID:  binaryIDGlPolygonOffset,
 	Package: "gles",
 	Name:    "GlPolygonOffset",
-	Display: "glPolygonOffset",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -18777,7 +18550,6 @@ var schemaGlPopGroupMarkerEXT = &schema.Class{
 	TypeID:  binaryIDGlPopGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPopGroupMarkerEXT",
-	Display: "glPopGroupMarkerEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -18867,7 +18639,6 @@ var schemaGlProgramBinaryOES = &schema.Class{
 	TypeID:  binaryIDGlProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlProgramBinaryOES",
-	Display: "glProgramBinaryOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -18941,7 +18712,6 @@ var schemaGlPushGroupMarkerEXT = &schema.Class{
 	TypeID:  binaryIDGlPushGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPushGroupMarkerEXT",
-	Display: "glPushGroupMarkerEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -19013,7 +18783,6 @@ var schemaGlQueryCounterEXT = &schema.Class{
 	TypeID:  binaryIDGlQueryCounterEXT,
 	Package: "gles",
 	Name:    "GlQueryCounterEXT",
-	Display: "glQueryCounterEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -19138,7 +18907,6 @@ var schemaGlReadPixels = &schema.Class{
 	TypeID:  binaryIDGlReadPixels,
 	Package: "gles",
 	Name:    "GlReadPixels",
-	Display: "glReadPixels",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -19197,7 +18965,6 @@ var schemaGlReleaseShaderCompiler = &schema.Class{
 	TypeID:  binaryIDGlReleaseShaderCompiler,
 	Package: "gles",
 	Name:    "GlReleaseShaderCompiler",
-	Display: "glReleaseShaderCompiler",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -19291,7 +19058,6 @@ var schemaGlRenderbufferStorage = &schema.Class{
 	TypeID:  binaryIDGlRenderbufferStorage,
 	Package: "gles",
 	Name:    "GlRenderbufferStorage",
-	Display: "glRenderbufferStorage",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
@@ -19406,7 +19172,6 @@ var schemaGlRenderbufferStorageMultisample = &schema.Class{
 	TypeID:  binaryIDGlRenderbufferStorageMultisample,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisample",
-	Display: "glRenderbufferStorageMultisample",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
@@ -19481,7 +19246,6 @@ var schemaGlSampleCoverage = &schema.Class{
 	TypeID:  binaryIDGlSampleCoverage,
 	Package: "gles",
 	Name:    "GlSampleCoverage",
-	Display: "glSampleCoverage",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -19575,7 +19339,6 @@ var schemaGlScissor = &schema.Class{
 	TypeID:  binaryIDGlScissor,
 	Package: "gles",
 	Name:    "GlScissor",
-	Display: "glScissor",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -19678,7 +19441,6 @@ var schemaGlShaderBinary = &schema.Class{
 	TypeID:  binaryIDGlShaderBinary,
 	Package: "gles",
 	Name:    "GlShaderBinary",
-	Display: "glShaderBinary",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -19771,7 +19533,6 @@ var schemaGlShaderSource = &schema.Class{
 	TypeID:  binaryIDGlShaderSource,
 	Package: "gles",
 	Name:    "GlShaderSource",
-	Display: "glShaderSource",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -19878,7 +19639,6 @@ var schemaGlStartTilingQCOM = &schema.Class{
 	TypeID:  binaryIDGlStartTilingQCOM,
 	Package: "gles",
 	Name:    "GlStartTilingQCOM",
-	Display: "glStartTilingQCOM",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -19977,7 +19737,6 @@ var schemaGlStencilFuncSeparate = &schema.Class{
 	TypeID:  binaryIDGlStencilFuncSeparate,
 	Package: "gles",
 	Name:    "GlStencilFuncSeparate",
-	Display: "glStencilFuncSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
@@ -20040,7 +19799,6 @@ var schemaGlStencilMask = &schema.Class{
 	TypeID:  binaryIDGlStencilMask,
 	Package: "gles",
 	Name:    "GlStencilMask",
-	Display: "glStencilMask",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -20113,7 +19871,6 @@ var schemaGlStencilMaskSeparate = &schema.Class{
 	TypeID:  binaryIDGlStencilMaskSeparate,
 	Package: "gles",
 	Name:    "GlStencilMaskSeparate",
-	Display: "glStencilMaskSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
@@ -20209,7 +19966,6 @@ var schemaGlStencilOpSeparate = &schema.Class{
 	TypeID:  binaryIDGlStencilOpSeparate,
 	Package: "gles",
 	Name:    "GlStencilOpSeparate",
-	Display: "glStencilOpSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
@@ -20358,7 +20114,6 @@ var schemaGlTexImage2D = &schema.Class{
 	TypeID:  binaryIDGlTexImage2D,
 	Package: "gles",
 	Name:    "GlTexImage2D",
-	Display: "glTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -20448,7 +20203,6 @@ var schemaGlTexParameterf = &schema.Class{
 	TypeID:  binaryIDGlTexParameterf,
 	Package: "gles",
 	Name:    "GlTexParameterf",
-	Display: "glTexParameterf",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -20532,7 +20286,6 @@ var schemaGlTexParameteri = &schema.Class{
 	TypeID:  binaryIDGlTexParameteri,
 	Package: "gles",
 	Name:    "GlTexParameteri",
-	Display: "glTexParameteri",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -20627,7 +20380,6 @@ var schemaGlTexStorage1DEXT = &schema.Class{
 	TypeID:  binaryIDGlTexStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage1DEXT",
-	Display: "glTexStorage1DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -20734,7 +20486,6 @@ var schemaGlTexStorage2DEXT = &schema.Class{
 	TypeID:  binaryIDGlTexStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage2DEXT",
-	Display: "glTexStorage2DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -20853,7 +20604,6 @@ var schemaGlTexStorage3DEXT = &schema.Class{
 	TypeID:  binaryIDGlTexStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage3DEXT",
-	Display: "glTexStorage3DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
@@ -21004,7 +20754,6 @@ var schemaGlTexSubImage2D = &schema.Class{
 	TypeID:  binaryIDGlTexSubImage2D,
 	Package: "gles",
 	Name:    "GlTexSubImage2D",
-	Display: "glTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
@@ -21118,7 +20867,6 @@ var schemaGlTextureStorage1DEXT = &schema.Class{
 	TypeID:  binaryIDGlTextureStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage1DEXT",
-	Display: "glTextureStorage1DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -21239,7 +20987,6 @@ var schemaGlTextureStorage2DEXT = &schema.Class{
 	TypeID:  binaryIDGlTextureStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage2DEXT",
-	Display: "glTextureStorage2DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -21372,7 +21119,6 @@ var schemaGlTextureStorage3DEXT = &schema.Class{
 	TypeID:  binaryIDGlTextureStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage3DEXT",
-	Display: "glTextureStorage3DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -21449,7 +21195,6 @@ var schemaGlUniform1f = &schema.Class{
 	TypeID:  binaryIDGlUniform1f,
 	Package: "gles",
 	Name:    "GlUniform1f",
-	Display: "glUniform1f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21530,7 +21275,6 @@ var schemaGlUniform1fv = &schema.Class{
 	TypeID:  binaryIDGlUniform1fv,
 	Package: "gles",
 	Name:    "GlUniform1fv",
-	Display: "glUniform1fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21603,7 +21347,6 @@ var schemaGlUniform1i = &schema.Class{
 	TypeID:  binaryIDGlUniform1i,
 	Package: "gles",
 	Name:    "GlUniform1i",
-	Display: "glUniform1i",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21684,7 +21427,6 @@ var schemaGlUniform1iv = &schema.Class{
 	TypeID:  binaryIDGlUniform1iv,
 	Package: "gles",
 	Name:    "GlUniform1iv",
-	Display: "glUniform1iv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21768,7 +21510,6 @@ var schemaGlUniform2f = &schema.Class{
 	TypeID:  binaryIDGlUniform2f,
 	Package: "gles",
 	Name:    "GlUniform2f",
-	Display: "glUniform2f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21850,7 +21591,6 @@ var schemaGlUniform2fv = &schema.Class{
 	TypeID:  binaryIDGlUniform2fv,
 	Package: "gles",
 	Name:    "GlUniform2fv",
-	Display: "glUniform2fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -21934,7 +21674,6 @@ var schemaGlUniform2i = &schema.Class{
 	TypeID:  binaryIDGlUniform2i,
 	Package: "gles",
 	Name:    "GlUniform2i",
-	Display: "glUniform2i",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22016,7 +21755,6 @@ var schemaGlUniform2iv = &schema.Class{
 	TypeID:  binaryIDGlUniform2iv,
 	Package: "gles",
 	Name:    "GlUniform2iv",
-	Display: "glUniform2iv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22111,7 +21849,6 @@ var schemaGlUniform3f = &schema.Class{
 	TypeID:  binaryIDGlUniform3f,
 	Package: "gles",
 	Name:    "GlUniform3f",
-	Display: "glUniform3f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22194,7 +21931,6 @@ var schemaGlUniform3fv = &schema.Class{
 	TypeID:  binaryIDGlUniform3fv,
 	Package: "gles",
 	Name:    "GlUniform3fv",
-	Display: "glUniform3fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22289,7 +22025,6 @@ var schemaGlUniform3i = &schema.Class{
 	TypeID:  binaryIDGlUniform3i,
 	Package: "gles",
 	Name:    "GlUniform3i",
-	Display: "glUniform3i",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22372,7 +22107,6 @@ var schemaGlUniform3iv = &schema.Class{
 	TypeID:  binaryIDGlUniform3iv,
 	Package: "gles",
 	Name:    "GlUniform3iv",
-	Display: "glUniform3iv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22478,7 +22212,6 @@ var schemaGlUniform4f = &schema.Class{
 	TypeID:  binaryIDGlUniform4f,
 	Package: "gles",
 	Name:    "GlUniform4f",
-	Display: "glUniform4f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22562,7 +22295,6 @@ var schemaGlUniform4fv = &schema.Class{
 	TypeID:  binaryIDGlUniform4fv,
 	Package: "gles",
 	Name:    "GlUniform4fv",
-	Display: "glUniform4fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22668,7 +22400,6 @@ var schemaGlUniform4i = &schema.Class{
 	TypeID:  binaryIDGlUniform4i,
 	Package: "gles",
 	Name:    "GlUniform4i",
-	Display: "glUniform4i",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22752,7 +22483,6 @@ var schemaGlUniform4iv = &schema.Class{
 	TypeID:  binaryIDGlUniform4iv,
 	Package: "gles",
 	Name:    "GlUniform4iv",
-	Display: "glUniform4iv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -22838,7 +22568,6 @@ var schemaGlUniformBlockBinding = &schema.Class{
 	TypeID:  binaryIDGlUniformBlockBinding,
 	Package: "gles",
 	Name:    "GlUniformBlockBinding",
-	Display: "glUniformBlockBinding",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -22931,7 +22660,6 @@ var schemaGlUniformMatrix2fv = &schema.Class{
 	TypeID:  binaryIDGlUniformMatrix2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2fv",
-	Display: "glUniformMatrix2fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -23025,7 +22753,6 @@ var schemaGlUniformMatrix3fv = &schema.Class{
 	TypeID:  binaryIDGlUniformMatrix3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3fv",
-	Display: "glUniformMatrix3fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -23119,7 +22846,6 @@ var schemaGlUniformMatrix4fv = &schema.Class{
 	TypeID:  binaryIDGlUniformMatrix4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4fv",
-	Display: "glUniformMatrix4fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -23182,7 +22908,6 @@ var schemaGlUnmapBuffer = &schema.Class{
 	TypeID:  binaryIDGlUnmapBuffer,
 	Package: "gles",
 	Name:    "GlUnmapBuffer",
-	Display: "glUnmapBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
@@ -23242,7 +22967,6 @@ var schemaGlUseProgram = &schema.Class{
 	TypeID:  binaryIDGlUseProgram,
 	Package: "gles",
 	Name:    "GlUseProgram",
-	Display: "glUseProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -23302,7 +23026,6 @@ var schemaGlValidateProgram = &schema.Class{
 	TypeID:  binaryIDGlValidateProgram,
 	Package: "gles",
 	Name:    "GlValidateProgram",
-	Display: "glValidateProgram",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -23373,7 +23096,6 @@ var schemaGlVertexAttrib1f = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib1f,
 	Package: "gles",
 	Name:    "GlVertexAttrib1f",
-	Display: "glVertexAttrib1f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23443,7 +23165,6 @@ var schemaGlVertexAttrib1fv = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib1fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib1fv",
-	Display: "glVertexAttrib1fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23526,7 +23247,6 @@ var schemaGlVertexAttrib2f = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib2f,
 	Package: "gles",
 	Name:    "GlVertexAttrib2f",
-	Display: "glVertexAttrib2f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23597,7 +23317,6 @@ var schemaGlVertexAttrib2fv = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib2fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib2fv",
-	Display: "glVertexAttrib2fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23691,7 +23410,6 @@ var schemaGlVertexAttrib3f = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib3f,
 	Package: "gles",
 	Name:    "GlVertexAttrib3f",
-	Display: "glVertexAttrib3f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23763,7 +23481,6 @@ var schemaGlVertexAttrib3fv = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib3fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib3fv",
-	Display: "glVertexAttrib3fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23868,7 +23585,6 @@ var schemaGlVertexAttrib4f = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib4f,
 	Package: "gles",
 	Name:    "GlVertexAttrib4f",
-	Display: "glVertexAttrib4f",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -23941,7 +23657,6 @@ var schemaGlVertexAttrib4fv = &schema.Class{
 	TypeID:  binaryIDGlVertexAttrib4fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib4fv",
-	Display: "glVertexAttrib4fv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -24057,7 +23772,6 @@ var schemaGlVertexAttribPointer = &schema.Class{
 	TypeID:  binaryIDGlVertexAttribPointer,
 	Package: "gles",
 	Name:    "GlVertexAttribPointer",
-	Display: "glVertexAttribPointer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
@@ -24155,7 +23869,6 @@ var schemaGlViewport = &schema.Class{
 	TypeID:  binaryIDGlViewport,
 	Package: "gles",
 	Name:    "GlViewport",
-	Display: "glViewport",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -24240,7 +23953,6 @@ var schemaGlWaitSync = &schema.Class{
 	TypeID:  binaryIDGlWaitSync,
 	Package: "gles",
 	Name:    "GlWaitSync",
-	Display: "glWaitSync",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "SyncObject", Method: schema.Uint64}},
@@ -24338,7 +24050,6 @@ var schemaGlXCreateContext = &schema.Class{
 	TypeID:  binaryIDGlXCreateContext,
 	Package: "gles",
 	Name:    "GlXCreateContext",
-	Display: "glXCreateContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Dpy", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24451,7 +24162,6 @@ var schemaGlXCreateNewContext = &schema.Class{
 	TypeID:  binaryIDGlXCreateNewContext,
 	Package: "gles",
 	Name:    "GlXCreateNewContext",
-	Display: "glXCreateNewContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24554,7 +24264,6 @@ var schemaGlXMakeContextCurrent = &schema.Class{
 	TypeID:  binaryIDGlXMakeContextCurrent,
 	Package: "gles",
 	Name:    "GlXMakeContextCurrent",
-	Display: "glXMakeContextCurrent",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24645,7 +24354,6 @@ var schemaGlXMakeCurrent = &schema.Class{
 	TypeID:  binaryIDGlXMakeCurrent,
 	Package: "gles",
 	Name:    "GlXMakeCurrent",
-	Display: "glXMakeCurrent",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24697,7 +24405,6 @@ var schemaIntᵖ = &schema.Class{
 	TypeID:  binaryIDIntᵖ,
 	Package: "gles",
 	Name:    "Intᵖ",
-	Display: "Intᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -24794,7 +24501,6 @@ var schemaGlXQueryDrawable = &schema.Class{
 	TypeID:  binaryIDGlXQueryDrawable,
 	Package: "gles",
 	Name:    "GlXQueryDrawable",
-	Display: "glXQueryDrawable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24865,7 +24571,6 @@ var schemaGlXSwapBuffers = &schema.Class{
 	TypeID:  binaryIDGlXSwapBuffers,
 	Package: "gles",
 	Name:    "GlXSwapBuffers",
-	Display: "glXSwapBuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -24915,7 +24620,6 @@ var schemaHDC = &schema.Class{
 	TypeID:  binaryIDHDC,
 	Package: "gles",
 	Name:    "HDC",
-	Display: "HDC",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -24963,7 +24667,6 @@ var schemaHGLRC = &schema.Class{
 	TypeID:  binaryIDHGLRC,
 	Package: "gles",
 	Name:    "HGLRC",
-	Display: "HGLRC",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -25011,7 +24714,6 @@ var schemaIntˢ = &schema.Class{
 	TypeID:  binaryIDIntˢ,
 	Package: "gles",
 	Name:    "Intˢ",
-	Display: "Intˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25067,7 +24769,6 @@ var schemaVec2f = &schema.Class{
 	TypeID:  binaryIDVec2f,
 	Package: "gles",
 	Name:    "Vec2f",
-	Display: "Vec2f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 2}},
 	},
@@ -25121,7 +24822,6 @@ var schemaMat2f = &schema.Class{
 	TypeID:  binaryIDMat2f,
 	Package: "gles",
 	Name:    "Mat2f",
-	Display: "Mat2f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 2}},
 	},
@@ -25169,7 +24869,6 @@ var schemaMat2fˢ = &schema.Class{
 	TypeID:  binaryIDMat2fˢ,
 	Package: "gles",
 	Name:    "Mat2fˢ",
-	Display: "Mat2fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25217,7 +24916,6 @@ var schemaMat2fᵖ = &schema.Class{
 	TypeID:  binaryIDMat2fᵖ,
 	Package: "gles",
 	Name:    "Mat2fᵖ",
-	Display: "Mat2fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -25273,7 +24971,6 @@ var schemaVec3f = &schema.Class{
 	TypeID:  binaryIDVec3f,
 	Package: "gles",
 	Name:    "Vec3f",
-	Display: "Vec3f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 3}},
 	},
@@ -25327,7 +25024,6 @@ var schemaMat3f = &schema.Class{
 	TypeID:  binaryIDMat3f,
 	Package: "gles",
 	Name:    "Mat3f",
-	Display: "Mat3f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 3}},
 	},
@@ -25375,7 +25071,6 @@ var schemaMat3fˢ = &schema.Class{
 	TypeID:  binaryIDMat3fˢ,
 	Package: "gles",
 	Name:    "Mat3fˢ",
-	Display: "Mat3fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25423,7 +25118,6 @@ var schemaMat3fᵖ = &schema.Class{
 	TypeID:  binaryIDMat3fᵖ,
 	Package: "gles",
 	Name:    "Mat3fᵖ",
-	Display: "Mat3fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -25479,7 +25173,6 @@ var schemaVec4f = &schema.Class{
 	TypeID:  binaryIDVec4f,
 	Package: "gles",
 	Name:    "Vec4f",
-	Display: "Vec4f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}, Size: 4}},
 	},
@@ -25533,7 +25226,6 @@ var schemaMat4f = &schema.Class{
 	TypeID:  binaryIDMat4f,
 	Package: "gles",
 	Name:    "Mat4f",
-	Display: "Mat4f",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 4}},
 	},
@@ -25581,7 +25273,6 @@ var schemaMat4fˢ = &schema.Class{
 	TypeID:  binaryIDMat4fˢ,
 	Package: "gles",
 	Name:    "Mat4fˢ",
-	Display: "Mat4fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25629,7 +25320,6 @@ var schemaMat4fᵖ = &schema.Class{
 	TypeID:  binaryIDMat4fᵖ,
 	Package: "gles",
 	Name:    "Mat4fᵖ",
-	Display: "Mat4fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -25677,7 +25367,6 @@ var schemaQueryIdˢ = &schema.Class{
 	TypeID:  binaryIDQueryIdˢ,
 	Package: "gles",
 	Name:    "QueryIdˢ",
-	Display: "QueryIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25725,7 +25414,6 @@ var schemaRenderbufferIdˢ = &schema.Class{
 	TypeID:  binaryIDRenderbufferIdˢ,
 	Package: "gles",
 	Name:    "RenderbufferIdˢ",
-	Display: "RenderbufferIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -25784,7 +25472,6 @@ var schemaReplayBindRenderer = &schema.Class{
 	TypeID:  binaryIDReplayBindRenderer,
 	Package: "gles",
 	Name:    "ReplayBindRenderer",
-	Display: "replayBindRenderer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -25846,7 +25533,6 @@ var schemaReplayCreateRenderer = &schema.Class{
 	TypeID:  binaryIDReplayCreateRenderer,
 	Package: "gles",
 	Name:    "ReplayCreateRenderer",
-	Display: "replayCreateRenderer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -25903,7 +25589,6 @@ var schemaS32ː2ᵃ = &schema.Class{
 	TypeID:  binaryIDS32ː2ᵃ,
 	Package: "gles",
 	Name:    "S32ː2ᵃ",
-	Display: "S32ː2ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 2}},
 	},
@@ -25959,7 +25644,6 @@ var schemaS32ː3ᵃ = &schema.Class{
 	TypeID:  binaryIDS32ː3ᵃ,
 	Package: "gles",
 	Name:    "S32ː3ᵃ",
-	Display: "S32ː3ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 3}},
 	},
@@ -26015,7 +25699,6 @@ var schemaS32ː4ᵃ = &schema.Class{
 	TypeID:  binaryIDS32ː4ᵃ,
 	Package: "gles",
 	Name:    "S32ː4ᵃ",
-	Display: "S32ː4ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 4}},
 	},
@@ -26063,7 +25746,6 @@ var schemaS32ˢ = &schema.Class{
 	TypeID:  binaryIDS32ˢ,
 	Package: "gles",
 	Name:    "S32ˢ",
-	Display: "S32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26111,7 +25793,6 @@ var schemaS64ˢ = &schema.Class{
 	TypeID:  binaryIDS64ˢ,
 	Package: "gles",
 	Name:    "S64ˢ",
-	Display: "S64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26159,7 +25840,6 @@ var schemaShaderAttribTypeˢ = &schema.Class{
 	TypeID:  binaryIDShaderAttribTypeˢ,
 	Package: "gles",
 	Name:    "ShaderAttribTypeˢ",
-	Display: "ShaderAttribTypeˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26207,7 +25887,6 @@ var schemaShaderIdˢ = &schema.Class{
 	TypeID:  binaryIDShaderIdˢ,
 	Package: "gles",
 	Name:    "ShaderIdˢ",
-	Display: "ShaderIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26257,7 +25936,6 @@ var schemaShaderUniformTypeˢ = &schema.Class{
 	TypeID:  binaryIDShaderUniformTypeˢ,
 	Package: "gles",
 	Name:    "ShaderUniformTypeˢ",
-	Display: "ShaderUniformTypeˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26316,7 +25994,6 @@ var schemaStartTimer = &schema.Class{
 	TypeID:  binaryIDStartTimer,
 	Package: "gles",
 	Name:    "StartTimer",
-	Display: "startTimer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -26620,7 +26297,6 @@ var schemaState = &schema.Class{
 	TypeID:  binaryIDState,
 	Package: "gles",
 	Name:    "State",
-	Display: "State",
 	Fields: []schema.Field{
 		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
 		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
@@ -26696,7 +26372,6 @@ var schemaStopTimer = &schema.Class{
 	TypeID:  binaryIDStopTimer,
 	Package: "gles",
 	Name:    "StopTimer",
-	Display: "stopTimer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -26746,7 +26421,6 @@ var schemaTextureIdˢ = &schema.Class{
 	TypeID:  binaryIDTextureIdˢ,
 	Package: "gles",
 	Name:    "TextureIdˢ",
-	Display: "TextureIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26794,7 +26468,6 @@ var schemaU32ˢ = &schema.Class{
 	TypeID:  binaryIDU32ˢ,
 	Package: "gles",
 	Name:    "U32ˢ",
-	Display: "U32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26842,7 +26515,6 @@ var schemaU64ˢ = &schema.Class{
 	TypeID:  binaryIDU64ˢ,
 	Package: "gles",
 	Name:    "U64ˢ",
-	Display: "U64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -26890,7 +26562,6 @@ var schemaU8ᵖ = &schema.Class{
 	TypeID:  binaryIDU8ᵖ,
 	Package: "gles",
 	Name:    "U8ᵖ",
-	Display: "U8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -26944,7 +26615,6 @@ var schemaVec2fː2ᵃ = &schema.Class{
 	TypeID:  binaryIDVec2fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː2ᵃ",
-	Display: "Vec2fː2ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec2f", ID: (*Vec2f)(nil).Class().ID()}, Size: 2}},
 	},
@@ -26992,7 +26662,6 @@ var schemaVec2fˢ = &schema.Class{
 	TypeID:  binaryIDVec2fˢ,
 	Package: "gles",
 	Name:    "Vec2fˢ",
-	Display: "Vec2fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27040,7 +26709,6 @@ var schemaVec2fᵖ = &schema.Class{
 	TypeID:  binaryIDVec2fᵖ,
 	Package: "gles",
 	Name:    "Vec2fᵖ",
-	Display: "Vec2fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27096,7 +26764,6 @@ var schemaVec2i = &schema.Class{
 	TypeID:  binaryIDVec2i,
 	Package: "gles",
 	Name:    "Vec2i",
-	Display: "Vec2i",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 2}},
 	},
@@ -27144,7 +26811,6 @@ var schemaVec2iˢ = &schema.Class{
 	TypeID:  binaryIDVec2iˢ,
 	Package: "gles",
 	Name:    "Vec2iˢ",
-	Display: "Vec2iˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27192,7 +26858,6 @@ var schemaVec2iᵖ = &schema.Class{
 	TypeID:  binaryIDVec2iᵖ,
 	Package: "gles",
 	Name:    "Vec2iᵖ",
-	Display: "Vec2iᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27246,7 +26911,6 @@ var schemaVec3fː3ᵃ = &schema.Class{
 	TypeID:  binaryIDVec3fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː3ᵃ",
-	Display: "Vec3fː3ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec3f", ID: (*Vec3f)(nil).Class().ID()}, Size: 3}},
 	},
@@ -27294,7 +26958,6 @@ var schemaVec3fˢ = &schema.Class{
 	TypeID:  binaryIDVec3fˢ,
 	Package: "gles",
 	Name:    "Vec3fˢ",
-	Display: "Vec3fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27342,7 +27005,6 @@ var schemaVec3fᵖ = &schema.Class{
 	TypeID:  binaryIDVec3fᵖ,
 	Package: "gles",
 	Name:    "Vec3fᵖ",
-	Display: "Vec3fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27398,7 +27060,6 @@ var schemaVec3i = &schema.Class{
 	TypeID:  binaryIDVec3i,
 	Package: "gles",
 	Name:    "Vec3i",
-	Display: "Vec3i",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 3}},
 	},
@@ -27446,7 +27107,6 @@ var schemaVec3iˢ = &schema.Class{
 	TypeID:  binaryIDVec3iˢ,
 	Package: "gles",
 	Name:    "Vec3iˢ",
-	Display: "Vec3iˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27494,7 +27154,6 @@ var schemaVec3iᵖ = &schema.Class{
 	TypeID:  binaryIDVec3iᵖ,
 	Package: "gles",
 	Name:    "Vec3iᵖ",
-	Display: "Vec3iᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27548,7 +27207,6 @@ var schemaVec4fː4ᵃ = &schema.Class{
 	TypeID:  binaryIDVec4fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː4ᵃ",
-	Display: "Vec4fː4ᵃ",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Name: "Vec4f", ID: (*Vec4f)(nil).Class().ID()}, Size: 4}},
 	},
@@ -27596,7 +27254,6 @@ var schemaVec4fˢ = &schema.Class{
 	TypeID:  binaryIDVec4fˢ,
 	Package: "gles",
 	Name:    "Vec4fˢ",
-	Display: "Vec4fˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27644,7 +27301,6 @@ var schemaVec4fᵖ = &schema.Class{
 	TypeID:  binaryIDVec4fᵖ,
 	Package: "gles",
 	Name:    "Vec4fᵖ",
-	Display: "Vec4fᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27700,7 +27356,6 @@ var schemaVec4i = &schema.Class{
 	TypeID:  binaryIDVec4i,
 	Package: "gles",
 	Name:    "Vec4i",
-	Display: "Vec4i",
 	Fields: []schema.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}, Size: 4}},
 	},
@@ -27748,7 +27403,6 @@ var schemaVec4iˢ = &schema.Class{
 	TypeID:  binaryIDVec4iˢ,
 	Package: "gles",
 	Name:    "Vec4iˢ",
-	Display: "Vec4iˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27796,7 +27450,6 @@ var schemaVec4iᵖ = &schema.Class{
 	TypeID:  binaryIDVec4iᵖ,
 	Package: "gles",
 	Name:    "Vec4iᵖ",
-	Display: "Vec4iᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -27844,7 +27497,6 @@ var schemaVertexArrayIdˢ = &schema.Class{
 	TypeID:  binaryIDVertexArrayIdˢ,
 	Package: "gles",
 	Name:    "VertexArrayIdˢ",
-	Display: "VertexArrayIdˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27892,7 +27544,6 @@ var schemaVoidˢ = &schema.Class{
 	TypeID:  binaryIDVoidˢ,
 	Package: "gles",
 	Name:    "Voidˢ",
-	Display: "Voidˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -27958,7 +27609,6 @@ var schemaWglCreateContext = &schema.Class{
 	TypeID:  binaryIDWglCreateContext,
 	Package: "gles",
 	Name:    "WglCreateContext",
-	Display: "wglCreateContext",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},
@@ -28052,7 +27702,6 @@ var schemaWglCreateContextAttribsARB = &schema.Class{
 	TypeID:  binaryIDWglCreateContextAttribsARB,
 	Package: "gles",
 	Name:    "WglCreateContextAttribsARB",
-	Display: "wglCreateContextAttribsARB",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},
@@ -28133,7 +27782,6 @@ var schemaWglMakeCurrent = &schema.Class{
 	TypeID:  binaryIDWglMakeCurrent,
 	Package: "gles",
 	Name:    "WglMakeCurrent",
-	Display: "wglMakeCurrent",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},
@@ -28193,7 +27841,6 @@ var schemaWglSwapBuffers = &schema.Class{
 	TypeID:  binaryIDWglSwapBuffers,
 	Package: "gles",
 	Name:    "WglSwapBuffers",
-	Display: "wglSwapBuffers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},

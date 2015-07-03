@@ -45,7 +45,7 @@ func init() {
 var (
 	binaryIDArray           = binary.ID{0x7a, 0x88, 0x3e, 0x09, 0xeb, 0xc7, 0x5c, 0x2c, 0x69, 0xc2, 0x9b, 0x9d, 0x3c, 0x5d, 0xdb, 0xe4, 0x3f, 0xc0, 0x7e, 0xc6}
 	binaryIDField           = binary.ID{0x8c, 0x54, 0x3d, 0x98, 0xc3, 0x7e, 0x38, 0xa8, 0xaa, 0x56, 0xbc, 0x84, 0x27, 0x49, 0x5d, 0x42, 0xdd, 0x21, 0x24, 0xf8}
-	binaryIDClass           = binary.ID{0x9c, 0x0f, 0x79, 0x16, 0xd5, 0xbb, 0x09, 0xbe, 0x83, 0xd3, 0x90, 0xa9, 0x58, 0x6d, 0xad, 0x88, 0xa2, 0xd9, 0x98, 0x50}
+	binaryIDClass           = binary.ID{0xa0, 0x42, 0x57, 0x78, 0x68, 0xe1, 0x62, 0x2b, 0x82, 0x3d, 0x8f, 0x0d, 0x10, 0x21, 0xc8, 0x1c, 0x4e, 0x9d, 0x72, 0xb1}
 	binaryIDInt16Constant   = binary.ID{0x54, 0xbe, 0x53, 0xa9, 0x57, 0x51, 0xb6, 0x72, 0x2b, 0x3f, 0x1a, 0x3a, 0x29, 0xd8, 0x34, 0xec, 0xdd, 0xcf, 0x16, 0x10}
 	binaryIDInt16Constants  = binary.ID{0xda, 0xb0, 0xd4, 0x7c, 0xc2, 0x65, 0x3b, 0x38, 0xf4, 0x62, 0x43, 0x8a, 0x88, 0x0c, 0xc3, 0x05, 0xc0, 0xb4, 0xd9, 0x7b}
 	binaryIDInt32Constant   = binary.ID{0xff, 0xdc, 0x4d, 0xf9, 0x55, 0xc5, 0xe5, 0xce, 0xce, 0x46, 0x2b, 0xaa, 0xe7, 0xa9, 0x16, 0xad, 0x17, 0xfc, 0x3d, 0x9f}
@@ -143,7 +143,6 @@ var schemaArray = &Class{
 	TypeID:  binaryIDArray,
 	Package: "schema",
 	Name:    "Array",
-	Display: "Array",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -212,7 +211,6 @@ var schemaField = &Class{
 	TypeID:  binaryIDField,
 	Package: "schema",
 	Name:    "Field",
-	Display: "Field",
 	Fields: []Field{
 		{Declared: "Declared", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
@@ -232,9 +230,6 @@ func doEncodeClass(e binary.Encoder, o *Class) error {
 		return err
 	}
 	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.String(o.Display); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Fields))); err != nil {
@@ -275,11 +270,6 @@ func doDecodeClass(d binary.Decoder, o *Class) error {
 	} else {
 		o.Name = string(obj)
 	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Display = string(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -308,9 +298,6 @@ func doDecodeClass(d binary.Decoder, o *Class) error {
 }
 func doSkipClass(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
@@ -358,12 +345,10 @@ var schemaClass = &Class{
 	TypeID:  binaryIDClass,
 	Package: "schema",
 	Name:    "Class",
-	Display: "Class",
 	Fields: []Field{
 		{Declared: "TypeID", Type: &Primitive{Name: "binary.ID", Method: ID}},
 		{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
-		{Declared: "Display", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Fields", Type: &Slice{Alias: "FieldList", ValueType: &Struct{Name: "Field", ID: (*Field)(nil).Class().ID()}}},
 		{Declared: "Metadata", Type: &Slice{Alias: "", ValueType: &Interface{Name: "binary.Object"}}},
 	},
@@ -424,7 +409,6 @@ var schemaInt16Constant = &Class{
 	TypeID:  binaryIDInt16Constant,
 	Package: "schema",
 	Name:    "Int16Constant",
-	Display: "Int16Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int16", Method: Int16}},
@@ -508,7 +492,6 @@ var schemaInt16Constants = &Class{
 	TypeID:  binaryIDInt16Constants,
 	Package: "schema",
 	Name:    "Int16Constants",
-	Display: "Int16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int16Constant", ID: (*Int16Constant)(nil).Class().ID()}}},
@@ -570,7 +553,6 @@ var schemaInt32Constant = &Class{
 	TypeID:  binaryIDInt32Constant,
 	Package: "schema",
 	Name:    "Int32Constant",
-	Display: "Int32Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int32", Method: Int32}},
@@ -654,7 +636,6 @@ var schemaInt32Constants = &Class{
 	TypeID:  binaryIDInt32Constants,
 	Package: "schema",
 	Name:    "Int32Constants",
-	Display: "Int32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int32Constant", ID: (*Int32Constant)(nil).Class().ID()}}},
@@ -716,7 +697,6 @@ var schemaInt64Constant = &Class{
 	TypeID:  binaryIDInt64Constant,
 	Package: "schema",
 	Name:    "Int64Constant",
-	Display: "Int64Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int64", Method: Int64}},
@@ -800,7 +780,6 @@ var schemaInt64Constants = &Class{
 	TypeID:  binaryIDInt64Constants,
 	Package: "schema",
 	Name:    "Int64Constants",
-	Display: "Int64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int64Constant", ID: (*Int64Constant)(nil).Class().ID()}}},
@@ -862,7 +841,6 @@ var schemaInt8Constant = &Class{
 	TypeID:  binaryIDInt8Constant,
 	Package: "schema",
 	Name:    "Int8Constant",
-	Display: "Int8Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "int8", Method: Int8}},
@@ -946,7 +924,6 @@ var schemaInt8Constants = &Class{
 	TypeID:  binaryIDInt8Constants,
 	Package: "schema",
 	Name:    "Int8Constants",
-	Display: "Int8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Int8Constant", ID: (*Int8Constant)(nil).Class().ID()}}},
@@ -997,7 +974,6 @@ var schemaInterface = &Class{
 	TypeID:  binaryIDInterface,
 	Package: "schema",
 	Name:    "Interface",
-	Display: "Interface",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 	},
@@ -1081,7 +1057,6 @@ var schemaMap = &Class{
 	TypeID:  binaryIDMap,
 	Package: "schema",
 	Name:    "Map",
-	Display: "Map",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "KeyType", Type: &Interface{Name: "Type"}},
@@ -1139,7 +1114,6 @@ var schemaPointer = &Class{
 	TypeID:  binaryIDPointer,
 	Package: "schema",
 	Name:    "Pointer",
-	Display: "Pointer",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 	},
@@ -1200,7 +1174,6 @@ var schemaPrimitive = &Class{
 	TypeID:  binaryIDPrimitive,
 	Package: "schema",
 	Name:    "Primitive",
-	Display: "Primitive",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Method", Type: &Primitive{Name: "Method", Method: Int32}},
@@ -1268,7 +1241,6 @@ var schemaSlice = &Class{
 	TypeID:  binaryIDSlice,
 	Package: "schema",
 	Name:    "Slice",
-	Display: "Slice",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -1336,7 +1308,6 @@ var schemaStream = &Class{
 	TypeID:  binaryIDStream,
 	Package: "schema",
 	Name:    "Stream",
-	Display: "Stream",
 	Fields: []Field{
 		{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ValueType", Type: &Interface{Name: "Type"}},
@@ -1398,7 +1369,6 @@ var schemaStruct = &Class{
 	TypeID:  binaryIDStruct,
 	Package: "schema",
 	Name:    "Struct",
-	Display: "Struct",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "ID", Type: &Primitive{Name: "binary.ID", Method: ID}},
@@ -1460,7 +1430,6 @@ var schemaUint16Constant = &Class{
 	TypeID:  binaryIDUint16Constant,
 	Package: "schema",
 	Name:    "Uint16Constant",
-	Display: "Uint16Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint16", Method: Uint16}},
@@ -1544,7 +1513,6 @@ var schemaUint16Constants = &Class{
 	TypeID:  binaryIDUint16Constants,
 	Package: "schema",
 	Name:    "Uint16Constants",
-	Display: "Uint16Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint16Constant", ID: (*Uint16Constant)(nil).Class().ID()}}},
@@ -1606,7 +1574,6 @@ var schemaUint32Constant = &Class{
 	TypeID:  binaryIDUint32Constant,
 	Package: "schema",
 	Name:    "Uint32Constant",
-	Display: "Uint32Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint32", Method: Uint32}},
@@ -1690,7 +1657,6 @@ var schemaUint32Constants = &Class{
 	TypeID:  binaryIDUint32Constants,
 	Package: "schema",
 	Name:    "Uint32Constants",
-	Display: "Uint32Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint32Constant", ID: (*Uint32Constant)(nil).Class().ID()}}},
@@ -1752,7 +1718,6 @@ var schemaUint64Constant = &Class{
 	TypeID:  binaryIDUint64Constant,
 	Package: "schema",
 	Name:    "Uint64Constant",
-	Display: "Uint64Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint64", Method: Uint64}},
@@ -1836,7 +1801,6 @@ var schemaUint64Constants = &Class{
 	TypeID:  binaryIDUint64Constants,
 	Package: "schema",
 	Name:    "Uint64Constants",
-	Display: "Uint64Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint64Constant", ID: (*Uint64Constant)(nil).Class().ID()}}},
@@ -1898,7 +1862,6 @@ var schemaUint8Constant = &Class{
 	TypeID:  binaryIDUint8Constant,
 	Package: "schema",
 	Name:    "Uint8Constant",
-	Display: "Uint8Constant",
 	Fields: []Field{
 		{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
 		{Declared: "Value", Type: &Primitive{Name: "uint8", Method: Uint8}},
@@ -1982,7 +1945,6 @@ var schemaUint8Constants = &Class{
 	TypeID:  binaryIDUint8Constants,
 	Package: "schema",
 	Name:    "Uint8Constants",
-	Display: "Uint8Constants",
 	Fields: []Field{
 		{Declared: "Type", Type: &Interface{Name: "Type"}},
 		{Declared: "Values", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Uint8Constant", ID: (*Uint8Constant)(nil).Class().ID()}}},

@@ -70,7 +70,6 @@ var schemamsgCloseChannel = &schema.Class{
 	TypeID:  binaryIDmsgCloseChannel,
 	Package: "multiplexer",
 	Name:    "msgCloseChannel",
-	Display: "msgCloseChannel",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
@@ -141,7 +140,6 @@ var schemamsgData = &schema.Class{
 	TypeID:  binaryIDmsgData,
 	Package: "multiplexer",
 	Name:    "msgData",
-	Display: "msgData",
 	Fields: []schema.Field{
 		{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 		{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
@@ -192,7 +190,6 @@ var schemamsgOpenChannel = &schema.Class{
 	TypeID:  binaryIDmsgOpenChannel,
 	Package: "multiplexer",
 	Name:    "msgOpenChannel",
-	Display: "msgOpenChannel",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},

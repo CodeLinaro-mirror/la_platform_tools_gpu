@@ -294,7 +294,6 @@ var schemaSliceInfo = &schema.Class{
 	TypeID:  binaryIDSliceInfo,
 	Package: "test",
 	Name:    "SliceInfo",
-	Display: "SliceInfo",
 	Fields: []schema.Field{
 		{Declared: "Root", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -344,7 +343,6 @@ var schemaBoolˢ = &schema.Class{
 	TypeID:  binaryIDBoolˢ,
 	Package: "test",
 	Name:    "Boolˢ",
-	Display: "Boolˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -392,7 +390,6 @@ var schemaBoolᵖ = &schema.Class{
 	TypeID:  binaryIDBoolᵖ,
 	Package: "test",
 	Name:    "Boolᵖ",
-	Display: "Boolᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -440,7 +437,6 @@ var schemaCharˢ = &schema.Class{
 	TypeID:  binaryIDCharˢ,
 	Package: "test",
 	Name:    "Charˢ",
-	Display: "Charˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -488,7 +484,6 @@ var schemaCharᵖ = &schema.Class{
 	TypeID:  binaryIDCharᵖ,
 	Package: "test",
 	Name:    "Charᵖ",
-	Display: "Charᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -536,7 +531,6 @@ var schemaCharᵖˢ = &schema.Class{
 	TypeID:  binaryIDCharᵖˢ,
 	Package: "test",
 	Name:    "Charᵖˢ",
-	Display: "Charᵖˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -584,7 +578,6 @@ var schemaCharᵖᵖ = &schema.Class{
 	TypeID:  binaryIDCharᵖᵖ,
 	Package: "test",
 	Name:    "Charᵖᵖ",
-	Display: "Charᵖᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -643,7 +636,6 @@ var schemaCmdBool = &schema.Class{
 	TypeID:  binaryIDCmdBool,
 	Package: "test",
 	Name:    "CmdBool",
-	Display: "cmd_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -701,7 +693,6 @@ var schemaCmdCharptrToString = &schema.Class{
 	TypeID:  binaryIDCmdCharptrToString,
 	Package: "test",
 	Name:    "CmdCharptrToString",
-	Display: "cmd_charptr_to_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
@@ -772,7 +763,6 @@ var schemaCmdCharsliceToString = &schema.Class{
 	TypeID:  binaryIDCmdCharsliceToString,
 	Package: "test",
 	Name:    "CmdCharsliceToString",
-	Display: "cmd_charslice_to_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "S", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
@@ -822,7 +812,6 @@ var schemaU8ᵖ = &schema.Class{
 	TypeID:  binaryIDU8ᵖ,
 	Package: "test",
 	Name:    "U8ᵖ",
-	Display: "U8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -890,7 +879,6 @@ var schemaCmdClone = &schema.Class{
 	TypeID:  binaryIDCmdClone,
 	Package: "test",
 	Name:    "CmdClone",
-	Display: "cmd_clone",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
@@ -960,7 +948,6 @@ var schemaCmdCopy = &schema.Class{
 	TypeID:  binaryIDCmdCopy,
 	Package: "test",
 	Name:    "CmdCopy",
-	Display: "cmd_copy",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
@@ -1021,7 +1008,6 @@ var schemaCmdF32 = &schema.Class{
 	TypeID:  binaryIDCmdF32,
 	Package: "test",
 	Name:    "CmdF32",
-	Display: "cmd_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -1081,7 +1067,6 @@ var schemaCmdF64 = &schema.Class{
 	TypeID:  binaryIDCmdF64,
 	Package: "test",
 	Name:    "CmdF64",
-	Display: "cmd_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
@@ -1141,7 +1126,6 @@ var schemaCmdMake = &schema.Class{
 	TypeID:  binaryIDCmdMake,
 	Package: "test",
 	Name:    "CmdMake",
-	Display: "cmd_make",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1190,7 +1174,6 @@ var schemaVoidᵖ = &schema.Class{
 	TypeID:  binaryIDVoidᵖ,
 	Package: "test",
 	Name:    "Voidᵖ",
-	Display: "Voidᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1247,7 +1230,6 @@ var schemaCmdPointer = &schema.Class{
 	TypeID:  binaryIDCmdPointer,
 	Package: "test",
 	Name:    "CmdPointer",
-	Display: "cmd_pointer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
@@ -1307,7 +1289,6 @@ var schemaCmdRemapped = &schema.Class{
 	TypeID:  binaryIDCmdRemapped,
 	Package: "test",
 	Name:    "CmdRemapped",
-	Display: "cmd_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -1367,7 +1348,6 @@ var schemaCmdS16 = &schema.Class{
 	TypeID:  binaryIDCmdS16,
 	Package: "test",
 	Name:    "CmdS16",
-	Display: "cmd_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
@@ -1427,7 +1407,6 @@ var schemaCmdS32 = &schema.Class{
 	TypeID:  binaryIDCmdS32,
 	Package: "test",
 	Name:    "CmdS32",
-	Display: "cmd_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -1487,7 +1466,6 @@ var schemaCmdS64 = &schema.Class{
 	TypeID:  binaryIDCmdS64,
 	Package: "test",
 	Name:    "CmdS64",
-	Display: "cmd_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -1547,7 +1525,6 @@ var schemaCmdS8 = &schema.Class{
 	TypeID:  binaryIDCmdS8,
 	Package: "test",
 	Name:    "CmdS8",
-	Display: "cmd_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
@@ -1596,7 +1573,6 @@ var schemaU16ᵖ = &schema.Class{
 	TypeID:  binaryIDU16ᵖ,
 	Package: "test",
 	Name:    "U16ᵖ",
-	Display: "U16ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -1664,7 +1640,6 @@ var schemaCmdSliceCasts = &schema.Class{
 	TypeID:  binaryIDCmdSliceCasts,
 	Package: "test",
 	Name:    "CmdSliceCasts",
-	Display: "cmd_slice_casts",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "S", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
@@ -1725,7 +1700,6 @@ var schemaCmdString = &schema.Class{
 	TypeID:  binaryIDCmdString,
 	Package: "test",
 	Name:    "CmdString",
-	Display: "cmd_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -1785,7 +1759,6 @@ var schemaCmdU16 = &schema.Class{
 	TypeID:  binaryIDCmdU16,
 	Package: "test",
 	Name:    "CmdU16",
-	Display: "cmd_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -1845,7 +1818,6 @@ var schemaCmdU32 = &schema.Class{
 	TypeID:  binaryIDCmdU32,
 	Package: "test",
 	Name:    "CmdU32",
-	Display: "cmd_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -1905,7 +1877,6 @@ var schemaCmdU64 = &schema.Class{
 	TypeID:  binaryIDCmdU64,
 	Package: "test",
 	Name:    "CmdU64",
-	Display: "cmd_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -1965,7 +1936,6 @@ var schemaCmdU8 = &schema.Class{
 	TypeID:  binaryIDCmdU8,
 	Package: "test",
 	Name:    "CmdU8",
-	Display: "cmd_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -2025,7 +1995,6 @@ var schemaCmdUnknownRet = &schema.Class{
 	TypeID:  binaryIDCmdUnknownRet,
 	Package: "test",
 	Name:    "CmdUnknownRet",
-	Display: "cmd_unknown_ret",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -2074,7 +2043,6 @@ var schemaIntᵖ = &schema.Class{
 	TypeID:  binaryIDIntᵖ,
 	Package: "test",
 	Name:    "Intᵖ",
-	Display: "Intᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2131,7 +2099,6 @@ var schemaCmdUnknownWritePtr = &schema.Class{
 	TypeID:  binaryIDCmdUnknownWritePtr,
 	Package: "test",
 	Name:    "CmdUnknownWritePtr",
-	Display: "cmd_unknown_write_ptr",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "P", Type: &schema.Struct{Name: "Intᵖ", ID: (*Intᵖ)(nil).Class().ID()}},
@@ -2191,7 +2158,6 @@ var schemaCmdUnknownWriteSlice = &schema.Class{
 	TypeID:  binaryIDCmdUnknownWriteSlice,
 	Package: "test",
 	Name:    "CmdUnknownWriteSlice",
-	Display: "cmd_unknown_write_slice",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Intᵖ", ID: (*Intᵖ)(nil).Class().ID()}},
@@ -2240,7 +2206,6 @@ var schemaCmdVoid = &schema.Class{
 	TypeID:  binaryIDCmdVoid,
 	Package: "test",
 	Name:    "CmdVoid",
-	Display: "cmd_void",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 	},
@@ -2288,7 +2253,6 @@ var schemaU32ᵖ = &schema.Class{
 	TypeID:  binaryIDU32ᵖ,
 	Package: "test",
 	Name:    "U32ᵖ",
-	Display: "U32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2363,7 +2327,6 @@ var schemaCmdVoid3InArrays = &schema.Class{
 	TypeID:  binaryIDCmdVoid3InArrays,
 	Package: "test",
 	Name:    "CmdVoid3InArrays",
-	Display: "cmd_void_3_in_arrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
@@ -2447,7 +2410,6 @@ var schemaCmdVoid3Remapped = &schema.Class{
 	TypeID:  binaryIDCmdVoid3Remapped,
 	Package: "test",
 	Name:    "CmdVoid3Remapped",
-	Display: "cmd_void_3_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -2531,7 +2493,6 @@ var schemaCmdVoid3Strings = &schema.Class{
 	TypeID:  binaryIDCmdVoid3Strings,
 	Package: "test",
 	Name:    "CmdVoid3Strings",
-	Display: "cmd_void_3_strings",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -2593,7 +2554,6 @@ var schemaCmdVoidBool = &schema.Class{
 	TypeID:  binaryIDCmdVoidBool,
 	Package: "test",
 	Name:    "CmdVoidBool",
-	Display: "cmd_void_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -2653,7 +2613,6 @@ var schemaCmdVoidF32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidF32,
 	Package: "test",
 	Name:    "CmdVoidF32",
-	Display: "cmd_void_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -2713,7 +2672,6 @@ var schemaCmdVoidF64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidF64,
 	Package: "test",
 	Name:    "CmdVoidF64",
-	Display: "cmd_void_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
@@ -2786,7 +2744,6 @@ var schemaCmdVoidInArrayOfPointers = &schema.Class{
 	TypeID:  binaryIDCmdVoidInArrayOfPointers,
 	Package: "test",
 	Name:    "CmdVoidInArrayOfPointers",
-	Display: "cmd_void_in_array_of_pointers",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Charᵖᵖ", ID: (*Charᵖᵖ)(nil).Class().ID()}},
@@ -2836,7 +2793,6 @@ var schemaRemappedᵖ = &schema.Class{
 	TypeID:  binaryIDRemappedᵖ,
 	Package: "test",
 	Name:    "Remappedᵖ",
-	Display: "Remappedᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -2897,7 +2853,6 @@ var schemaCmdVoidInArrayOfRemapped = &schema.Class{
 	TypeID:  binaryIDCmdVoidInArrayOfRemapped,
 	Package: "test",
 	Name:    "CmdVoidInArrayOfRemapped",
-	Display: "cmd_void_in_array_of_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
@@ -2959,7 +2914,6 @@ var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
 	TypeID:  binaryIDCmdVoidOutArrayOfRemapped,
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfRemapped",
-	Display: "cmd_void_out_array_of_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
@@ -3025,7 +2979,6 @@ var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Class{
 	TypeID:  binaryIDCmdVoidOutArrayOfUnknownRemapped,
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfUnknownRemapped",
-	Display: "cmd_void_out_array_of_unknown_remapped",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ", ID: (*Remappedᵖ)(nil).Class().ID()}},
@@ -3083,7 +3036,6 @@ var schemaCmdVoidReadBool = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadBool,
 	Package: "test",
 	Name:    "CmdVoidReadBool",
-	Display: "cmd_void_read_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
@@ -3132,7 +3084,6 @@ var schemaF32ᵖ = &schema.Class{
 	TypeID:  binaryIDF32ᵖ,
 	Package: "test",
 	Name:    "F32ᵖ",
-	Display: "F32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3189,7 +3140,6 @@ var schemaCmdVoidReadF32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadF32,
 	Package: "test",
 	Name:    "CmdVoidReadF32",
-	Display: "cmd_void_read_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
@@ -3238,7 +3188,6 @@ var schemaF64ᵖ = &schema.Class{
 	TypeID:  binaryIDF64ᵖ,
 	Package: "test",
 	Name:    "F64ᵖ",
-	Display: "F64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3295,7 +3244,6 @@ var schemaCmdVoidReadF64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadF64,
 	Package: "test",
 	Name:    "CmdVoidReadF64",
-	Display: "cmd_void_read_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ", ID: (*F64ᵖ)(nil).Class().ID()}},
@@ -3371,7 +3319,6 @@ var schemaCmdVoidReadPtrs = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadPtrs,
 	Package: "test",
 	Name:    "CmdVoidReadPtrs",
-	Display: "cmd_void_read_ptrs",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
@@ -3422,7 +3369,6 @@ var schemaS16ᵖ = &schema.Class{
 	TypeID:  binaryIDS16ᵖ,
 	Package: "test",
 	Name:    "S16ᵖ",
-	Display: "S16ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3479,7 +3425,6 @@ var schemaCmdVoidReadS16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadS16,
 	Package: "test",
 	Name:    "CmdVoidReadS16",
-	Display: "cmd_void_read_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ", ID: (*S16ᵖ)(nil).Class().ID()}},
@@ -3528,7 +3473,6 @@ var schemaS32ᵖ = &schema.Class{
 	TypeID:  binaryIDS32ᵖ,
 	Package: "test",
 	Name:    "S32ᵖ",
-	Display: "S32ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3585,7 +3529,6 @@ var schemaCmdVoidReadS32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadS32,
 	Package: "test",
 	Name:    "CmdVoidReadS32",
-	Display: "cmd_void_read_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
@@ -3634,7 +3577,6 @@ var schemaS64ᵖ = &schema.Class{
 	TypeID:  binaryIDS64ᵖ,
 	Package: "test",
 	Name:    "S64ᵖ",
-	Display: "S64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3691,7 +3633,6 @@ var schemaCmdVoidReadS64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadS64,
 	Package: "test",
 	Name:    "CmdVoidReadS64",
-	Display: "cmd_void_read_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
@@ -3740,7 +3681,6 @@ var schemaS8ᵖ = &schema.Class{
 	TypeID:  binaryIDS8ᵖ,
 	Package: "test",
 	Name:    "S8ᵖ",
-	Display: "S8ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -3797,7 +3737,6 @@ var schemaCmdVoidReadS8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadS8,
 	Package: "test",
 	Name:    "CmdVoidReadS8",
-	Display: "cmd_void_read_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ", ID: (*S8ᵖ)(nil).Class().ID()}},
@@ -3855,7 +3794,6 @@ var schemaCmdVoidReadU16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadU16,
 	Package: "test",
 	Name:    "CmdVoidReadU16",
-	Display: "cmd_void_read_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
@@ -3913,7 +3851,6 @@ var schemaCmdVoidReadU32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadU32,
 	Package: "test",
 	Name:    "CmdVoidReadU32",
-	Display: "cmd_void_read_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
@@ -3962,7 +3899,6 @@ var schemaU64ᵖ = &schema.Class{
 	TypeID:  binaryIDU64ᵖ,
 	Package: "test",
 	Name:    "U64ᵖ",
-	Display: "U64ᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -4019,7 +3955,6 @@ var schemaCmdVoidReadU64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadU64,
 	Package: "test",
 	Name:    "CmdVoidReadU64",
-	Display: "cmd_void_read_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
@@ -4077,7 +4012,6 @@ var schemaCmdVoidReadU8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidReadU8,
 	Package: "test",
 	Name:    "CmdVoidReadU8",
-	Display: "cmd_void_read_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
@@ -4137,7 +4071,6 @@ var schemaCmdVoidS16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidS16,
 	Package: "test",
 	Name:    "CmdVoidS16",
-	Display: "cmd_void_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
@@ -4197,7 +4130,6 @@ var schemaCmdVoidS32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidS32,
 	Package: "test",
 	Name:    "CmdVoidS32",
-	Display: "cmd_void_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -4257,7 +4189,6 @@ var schemaCmdVoidS64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidS64,
 	Package: "test",
 	Name:    "CmdVoidS64",
-	Display: "cmd_void_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
@@ -4317,7 +4248,6 @@ var schemaCmdVoidS8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidS8,
 	Package: "test",
 	Name:    "CmdVoidS8",
-	Display: "cmd_void_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
@@ -4377,7 +4307,6 @@ var schemaCmdVoidString = &schema.Class{
 	TypeID:  binaryIDCmdVoidString,
 	Package: "test",
 	Name:    "CmdVoidString",
-	Display: "cmd_void_string",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -4437,7 +4366,6 @@ var schemaCmdVoidU16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidU16,
 	Package: "test",
 	Name:    "CmdVoidU16",
-	Display: "cmd_void_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -4497,7 +4425,6 @@ var schemaCmdVoidU32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidU32,
 	Package: "test",
 	Name:    "CmdVoidU32",
-	Display: "cmd_void_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -4557,7 +4484,6 @@ var schemaCmdVoidU64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidU64,
 	Package: "test",
 	Name:    "CmdVoidU64",
-	Display: "cmd_void_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -4617,7 +4543,6 @@ var schemaCmdVoidU8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidU8,
 	Package: "test",
 	Name:    "CmdVoidU8",
-	Display: "cmd_void_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
@@ -4675,7 +4600,6 @@ var schemaCmdVoidWriteBool = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteBool,
 	Package: "test",
 	Name:    "CmdVoidWriteBool",
-	Display: "cmd_void_write_bool",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
@@ -4733,7 +4657,6 @@ var schemaCmdVoidWriteF32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteF32,
 	Package: "test",
 	Name:    "CmdVoidWriteF32",
-	Display: "cmd_void_write_f32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
@@ -4791,7 +4714,6 @@ var schemaCmdVoidWriteF64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteF64,
 	Package: "test",
 	Name:    "CmdVoidWriteF64",
-	Display: "cmd_void_write_f64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ", ID: (*F64ᵖ)(nil).Class().ID()}},
@@ -4867,7 +4789,6 @@ var schemaCmdVoidWritePtrs = &schema.Class{
 	TypeID:  binaryIDCmdVoidWritePtrs,
 	Package: "test",
 	Name:    "CmdVoidWritePtrs",
-	Display: "cmd_void_write_ptrs",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
@@ -4927,7 +4848,6 @@ var schemaCmdVoidWriteS16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteS16,
 	Package: "test",
 	Name:    "CmdVoidWriteS16",
-	Display: "cmd_void_write_s16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ", ID: (*S16ᵖ)(nil).Class().ID()}},
@@ -4985,7 +4905,6 @@ var schemaCmdVoidWriteS32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteS32,
 	Package: "test",
 	Name:    "CmdVoidWriteS32",
-	Display: "cmd_void_write_s32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
@@ -5043,7 +4962,6 @@ var schemaCmdVoidWriteS64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteS64,
 	Package: "test",
 	Name:    "CmdVoidWriteS64",
-	Display: "cmd_void_write_s64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
@@ -5101,7 +5019,6 @@ var schemaCmdVoidWriteS8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteS8,
 	Package: "test",
 	Name:    "CmdVoidWriteS8",
-	Display: "cmd_void_write_s8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ", ID: (*S8ᵖ)(nil).Class().ID()}},
@@ -5159,7 +5076,6 @@ var schemaCmdVoidWriteU16 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteU16,
 	Package: "test",
 	Name:    "CmdVoidWriteU16",
-	Display: "cmd_void_write_u16",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ", ID: (*U16ᵖ)(nil).Class().ID()}},
@@ -5217,7 +5133,6 @@ var schemaCmdVoidWriteU32 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteU32,
 	Package: "test",
 	Name:    "CmdVoidWriteU32",
-	Display: "cmd_void_write_u32",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
@@ -5275,7 +5190,6 @@ var schemaCmdVoidWriteU64 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteU64,
 	Package: "test",
 	Name:    "CmdVoidWriteU64",
-	Display: "cmd_void_write_u64",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
@@ -5333,7 +5247,6 @@ var schemaCmdVoidWriteU8 = &schema.Class{
 	TypeID:  binaryIDCmdVoidWriteU8,
 	Package: "test",
 	Name:    "CmdVoidWriteU8",
-	Display: "cmd_void_write_u8",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ", ID: (*U8ᵖ)(nil).Class().ID()}},
@@ -5382,7 +5295,6 @@ var schemaF32ˢ = &schema.Class{
 	TypeID:  binaryIDF32ˢ,
 	Package: "test",
 	Name:    "F32ˢ",
-	Display: "F32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5430,7 +5342,6 @@ var schemaF64ˢ = &schema.Class{
 	TypeID:  binaryIDF64ˢ,
 	Package: "test",
 	Name:    "F64ˢ",
-	Display: "F64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5480,7 +5391,6 @@ var schemaImported = &schema.Class{
 	TypeID:  binaryIDImported,
 	Package: "test",
 	Name:    "Imported",
-	Display: "Imported",
 	Fields: []schema.Field{
 		{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -5541,7 +5451,6 @@ var schemaIncluded = &schema.Class{
 	TypeID:  binaryIDIncluded,
 	Package: "test",
 	Name:    "Included",
-	Display: "Included",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "S", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -5590,7 +5499,6 @@ var schemaIntˢ = &schema.Class{
 	TypeID:  binaryIDIntˢ,
 	Package: "test",
 	Name:    "Intˢ",
-	Display: "Intˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5638,7 +5546,6 @@ var schemaRemappedˢ = &schema.Class{
 	TypeID:  binaryIDRemappedˢ,
 	Package: "test",
 	Name:    "Remappedˢ",
-	Display: "Remappedˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5686,7 +5593,6 @@ var schemaS16ˢ = &schema.Class{
 	TypeID:  binaryIDS16ˢ,
 	Package: "test",
 	Name:    "S16ˢ",
-	Display: "S16ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5734,7 +5640,6 @@ var schemaS32ˢ = &schema.Class{
 	TypeID:  binaryIDS32ˢ,
 	Package: "test",
 	Name:    "S32ˢ",
-	Display: "S32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5782,7 +5687,6 @@ var schemaS64ˢ = &schema.Class{
 	TypeID:  binaryIDS64ˢ,
 	Package: "test",
 	Name:    "S64ˢ",
-	Display: "S64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5830,7 +5734,6 @@ var schemaS8ˢ = &schema.Class{
 	TypeID:  binaryIDS8ˢ,
 	Package: "test",
 	Name:    "S8ˢ",
-	Display: "S8ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5878,7 +5781,6 @@ var schemaU8ˢ = &schema.Class{
 	TypeID:  binaryIDU8ˢ,
 	Package: "test",
 	Name:    "U8ˢ",
-	Display: "U8ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5926,7 +5828,6 @@ var schemaU16ˢ = &schema.Class{
 	TypeID:  binaryIDU16ˢ,
 	Package: "test",
 	Name:    "U16ˢ",
-	Display: "U16ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -5974,7 +5875,6 @@ var schemaU32ˢ = &schema.Class{
 	TypeID:  binaryIDU32ˢ,
 	Package: "test",
 	Name:    "U32ˢ",
-	Display: "U32ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -6060,7 +5960,6 @@ var schemaState = &schema.Class{
 	TypeID:  binaryIDState,
 	Package: "test",
 	Name:    "State",
-	Display: "State",
 	Fields: []schema.Field{
 		{Declared: "U8s", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "U16s", Type: &schema.Struct{Name: "U16ˢ", ID: (*U16ˢ)(nil).Class().ID()}},
@@ -6132,7 +6031,6 @@ var schemaTester = &schema.Class{
 	TypeID:  binaryIDTester,
 	Package: "test",
 	Name:    "Tester",
-	Display: "Tester",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "A", Type: &schema.Struct{Name: "Imported", ID: (*Imported)(nil).Class().ID()}},
@@ -6182,7 +6080,6 @@ var schemaU64ˢ = &schema.Class{
 	TypeID:  binaryIDU64ˢ,
 	Package: "test",
 	Name:    "U64ˢ",
-	Display: "U64ˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -6230,7 +6127,6 @@ var schemaVoidˢ = &schema.Class{
 	TypeID:  binaryIDVoidˢ,
 	Package: "test",
 	Name:    "Voidˢ",
-	Display: "Voidˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},

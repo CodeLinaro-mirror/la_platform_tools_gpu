@@ -81,7 +81,6 @@ var schemaAny = &schema.Class{
 	TypeID:  binaryIDAny,
 	Package: "any",
 	Name:    "Any",
-	Display: "Any",
 	Fields:  []schema.Field{},
 }
 
@@ -129,7 +128,6 @@ var schemabool_ = &schema.Class{
 	TypeID:  binaryIDbool_,
 	Package: "any",
 	Name:    "bool_",
-	Display: "bool_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
@@ -179,7 +177,6 @@ var schemafloat32_ = &schema.Class{
 	TypeID:  binaryIDfloat32_,
 	Package: "any",
 	Name:    "float32_",
-	Display: "float32_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
@@ -229,7 +226,6 @@ var schemafloat64_ = &schema.Class{
 	TypeID:  binaryIDfloat64_,
 	Package: "any",
 	Name:    "float64_",
-	Display: "float64_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
@@ -279,7 +275,6 @@ var schemaint16_ = &schema.Class{
 	TypeID:  binaryIDint16_,
 	Package: "any",
 	Name:    "int16_",
-	Display: "int16_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
@@ -329,7 +324,6 @@ var schemaint32_ = &schema.Class{
 	TypeID:  binaryIDint32_,
 	Package: "any",
 	Name:    "int32_",
-	Display: "int32_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -379,7 +373,6 @@ var schemaint64_ = &schema.Class{
 	TypeID:  binaryIDint64_,
 	Package: "any",
 	Name:    "int64_",
-	Display: "int64_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
@@ -429,7 +422,6 @@ var schemaint8_ = &schema.Class{
 	TypeID:  binaryIDint8_,
 	Package: "any",
 	Name:    "int8_",
-	Display: "int8_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
@@ -485,7 +477,6 @@ var schemaobject_ = &schema.Class{
 	TypeID:  binaryIDobject_,
 	Package: "any",
 	Name:    "object_",
-	Display: "object_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Interface{Name: "binary.Object"}},
 	},
@@ -535,7 +526,6 @@ var schemastring_ = &schema.Class{
 	TypeID:  binaryIDstring_,
 	Package: "any",
 	Name:    "string_",
-	Display: "string_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -585,7 +575,6 @@ var schemauint16_ = &schema.Class{
 	TypeID:  binaryIDuint16_,
 	Package: "any",
 	Name:    "uint16_",
-	Display: "uint16_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
@@ -635,7 +624,6 @@ var schemauint32_ = &schema.Class{
 	TypeID:  binaryIDuint32_,
 	Package: "any",
 	Name:    "uint32_",
-	Display: "uint32_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -685,7 +673,6 @@ var schemauint64_ = &schema.Class{
 	TypeID:  binaryIDuint64_,
 	Package: "any",
 	Name:    "uint64_",
-	Display: "uint64_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -735,7 +722,6 @@ var schemauint8_ = &schema.Class{
 	TypeID:  binaryIDuint8_,
 	Package: "any",
 	Name:    "uint8_",
-	Display: "uint8_",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
