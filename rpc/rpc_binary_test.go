@@ -66,7 +66,6 @@ var schemadelay = &schema.Class{
 	TypeID:  binaryIDdelay,
 	Package: "rpc",
 	Name:    "delay",
-	Display: "delay",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -116,7 +115,6 @@ var schemarequest = &schema.Class{
 	TypeID:  binaryIDrequest,
 	Package: "rpc",
 	Name:    "request",
-	Display: "request",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -166,7 +164,6 @@ var schemaresponse = &schema.Class{
 	TypeID:  binaryIDresponse,
 	Package: "rpc",
 	Name:    "response",
-	Display: "response",
 	Fields: []schema.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},

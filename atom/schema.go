@@ -24,6 +24,7 @@ import (
 type Metadata struct {
 	binary.Generate
 	Api              binary.ID // The api this atom belongs to.
+	DisplayName      string    // The display name for this atom type.
 	Flags            Flags     // The atom flags for this type.
 	DocumentationUrl string    // A url for documentation about this atom.
 }

@@ -96,7 +96,6 @@ var schemaArrayIndex = &schema.Class{
 	TypeID:  binaryIDArrayIndex,
 	Package: "path",
 	Name:    "ArrayIndex",
-	Display: "ArrayIndex",
 	Fields: []schema.Field{
 		{Declared: "Array", Type: &schema.Interface{Name: "Value"}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -147,7 +146,6 @@ var schemaCapture = &schema.Class{
 	TypeID:  binaryIDCapture,
 	Package: "path",
 	Name:    "Capture",
-	Display: "Capture",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -203,7 +201,6 @@ var schemaAtoms = &schema.Class{
 	TypeID:  binaryIDAtoms,
 	Package: "path",
 	Name:    "Atoms",
-	Display: "Atoms",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
 	},
@@ -270,7 +267,6 @@ var schemaAtom = &schema.Class{
 	TypeID:  binaryIDAtom,
 	Package: "path",
 	Name:    "Atom",
-	Display: "Atom",
 	Fields: []schema.Field{
 		{Declared: "Atoms", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atoms", ID: (*Atoms)(nil).Class().ID()}}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -338,7 +334,6 @@ var schemaField = &schema.Class{
 	TypeID:  binaryIDField,
 	Package: "path",
 	Name:    "Field",
-	Display: "Field",
 	Fields: []schema.Field{
 		{Declared: "Struct", Type: &schema.Interface{Name: "Value"}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -419,7 +414,6 @@ var schemaMapIndex = &schema.Class{
 	TypeID:  binaryIDMapIndex,
 	Package: "path",
 	Name:    "MapIndex",
-	Display: "MapIndex",
 	Fields: []schema.Field{
 		{Declared: "Map", Type: &schema.Interface{Name: "Value"}},
 		{Declared: "Key", Type: &any.Any{}},
@@ -476,7 +470,6 @@ var schemaState = &schema.Class{
 	TypeID:  binaryIDState,
 	Package: "path",
 	Name:    "State",
-	Display: "State",
 	Fields: []schema.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
 	},

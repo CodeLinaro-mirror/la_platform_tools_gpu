@@ -81,7 +81,6 @@ var schemaPointer = &schema.Class{
 	TypeID:  binaryIDPointer,
 	Package: "memory",
 	Name:    "Pointer",
-	Display: "Pointer",
 	Fields: []schema.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32}},
@@ -143,7 +142,6 @@ var schemaRange = &schema.Class{
 	TypeID:  binaryIDRange,
 	Package: "memory",
 	Name:    "Range",
-	Display: "Range",
 	Fields: []schema.Field{
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
