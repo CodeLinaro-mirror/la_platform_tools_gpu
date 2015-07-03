@@ -134,6 +134,7 @@ func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationConte
 }
 
 func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+	atomPath := appCtx.CaptureID().Path().Atoms().Index(uint64(id))
 	a := appCtx.Atoms()[id]
 	active := true
 
@@ -202,9 +203,10 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 
 		ll.AddChild(c)
 		needcomma = true
+		p := atomPath.Field(info.Name())
 		appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
 			l := t.CreateLabel()
-			l.SetText(fmt.Sprintf("%s:%s (%T)", info.Type.Typename(), info.Name(), info.Type))
+			l.SetText(p.Path())
 			return l
 		})
 	}
