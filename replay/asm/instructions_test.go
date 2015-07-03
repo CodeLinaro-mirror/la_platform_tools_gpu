@@ -20,6 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
+	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -32,7 +33,7 @@ func (testPtrResolver) TranslateRemappedPointer(ptr uint64) (protocol.Type, uint
 	return protocol.TypeVolatilePointer, ptr
 }
 
-func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
+func test(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}
 	b := flat.Encoder(endian.Writer(buf, endian.Little))
 	for _, instruction := range Instructions {
@@ -42,15 +43,15 @@ func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 				instruction, instruction, err)
 		}
 	}
-	gotOpcodes, err := opcode.Disassemble(buf, endian.Little)
+	got, err := opcode.Disassemble(buf, endian.Little)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
-	opcode.CheckDisassembly(t, gotOpcodes, expected...)
+	check.SlicesEqual(t, got, expected)
 }
 
 func TestCall(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Call{false, 0x1234},
 			Call{true, 0x5678},
@@ -61,7 +62,7 @@ func TestCall(t *testing.T) {
 }
 
 func TestPush_UnsignedNoExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.U32(0xaaaaa)}, // Repeating pattern of 1010
 			Push{value.U32(0x55555)}, // Repeating pattern of 0101
@@ -72,7 +73,7 @@ func TestPush_UnsignedNoExpand(t *testing.T) {
 }
 
 func TestPush_UnsignedOneExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.U32(0x100000)},   // One bit beyond what can fit in a PushI
 			Push{value.U32(0x4000000)},  // One bit beyond what can fit in a Extend payload
@@ -94,7 +95,7 @@ func TestPush_UnsignedOneExpand(t *testing.T) {
 }
 
 func TestPush_SignedPositiveNoExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.S32(0x2aaaa)}, // 0010101010...
 			Push{value.S32(0x55555)}, // 1010101010...
@@ -105,7 +106,7 @@ func TestPush_SignedPositiveNoExpand(t *testing.T) {
 }
 
 func TestPush_SignedPositiveOneExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.S32(0x80000)},    // One bit beyond what can fit in a PushI
 			Push{value.S32(0x4000000)},  // One bit beyond what can fit in a Extend payload
@@ -127,7 +128,7 @@ func TestPush_SignedPositiveOneExpand(t *testing.T) {
 }
 
 func TestPush_SignedNegativeNoExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.S32(-1)},
 			Push{value.S32(-0x55556)}, // Repeating pattern of 1010
@@ -140,7 +141,7 @@ func TestPush_SignedNegativeNoExpand(t *testing.T) {
 }
 
 func TestPush_SignedNegativeOneExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.S32(-0x100001)},  // One bit beyond what can fit in a PushI
 			Push{value.S32(-0x4000001)}, // One bit beyond what can fit in a Extend payload
@@ -163,7 +164,7 @@ func TestPush_SignedNegativeOneExpand(t *testing.T) {
 }
 
 func TestPush_FloatNoExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.F32(-2.0)},
 			Push{value.F32(-1.0)},
@@ -184,7 +185,7 @@ func TestPush_FloatNoExpand(t *testing.T) {
 }
 
 func TestPush_FloatOneExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.F32(-3)},
 			Push{value.F32(-1.75)},
@@ -206,7 +207,7 @@ func TestPush_FloatOneExpand(t *testing.T) {
 }
 
 func TestPush_DoubleNoExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.F64(-2.0)},
 			Push{value.F64(-1.0)},
@@ -227,7 +228,7 @@ func TestPush_DoubleNoExpand(t *testing.T) {
 }
 
 func TestPush_DoubleExpand(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Push{value.F64(-3)},
 			Push{value.F64(-1.75)},
@@ -257,7 +258,7 @@ func TestPush_DoubleExpand(t *testing.T) {
 	)
 }
 func TestPop(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Pop{10},
 		},
@@ -266,7 +267,7 @@ func TestPop(t *testing.T) {
 }
 
 func TestCopy(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Copy{100},
 		},
@@ -275,7 +276,7 @@ func TestCopy(t *testing.T) {
 }
 
 func TestClone(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Clone{100},
 		},
@@ -284,7 +285,7 @@ func TestClone(t *testing.T) {
 }
 
 func TestLoad(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Load{protocol.TypeUint16, value.ConstantPointer(0x10)},
 			Load{protocol.TypeUint16, value.ConstantPointer(0x123456)},
@@ -307,7 +308,7 @@ func TestLoad(t *testing.T) {
 }
 
 func TestStore(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Store{value.VolatilePointer(0x10)},
 			Store{value.VolatilePointer(0x4000000)},
@@ -321,7 +322,7 @@ func TestStore(t *testing.T) {
 }
 
 func TestStrcpy(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Strcpy{0x3000},
 		},
@@ -330,7 +331,7 @@ func TestStrcpy(t *testing.T) {
 }
 
 func TestResource(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Resource{10, 0x10},
 			Resource{20, 0x4050607},
@@ -345,7 +346,7 @@ func TestResource(t *testing.T) {
 }
 
 func TestPost(t *testing.T) {
-	check(t,
+	test(t,
 		[]Instruction{
 			Post{value.AbsolutePointer(0x10), 0x50},
 			Post{value.VolatilePointer(0x4050607), 0x8090a0b},
