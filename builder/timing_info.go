@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -28,7 +27,7 @@ import (
 
 // BuildLazy returns the *service.TimingInfo resulting from the given GetTimingInfo
 // request.
-func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{

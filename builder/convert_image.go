@@ -15,7 +15,6 @@
 package builder
 
 import (
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -23,7 +22,7 @@ import (
 
 // BuildLazy returns the *database.Blob holding the converted image for the
 // ConvertImage request.
-func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	data, err := database.ResolveBlob(r.Data, d, l)
 	if err != nil {
 		return nil, err

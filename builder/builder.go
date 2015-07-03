@@ -208,7 +208,7 @@ func uniformScale(width, height, maxWidth, maxHeight uint32) (w, h uint32) {
 
 // BuildLazy writes to out the captureFramebufferDimensions resource resulting
 // from the given getCaptureFramebufferDimensions request.
-func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	var id atom.ID
 	defer func() {
 		if err := recover(); err != nil {

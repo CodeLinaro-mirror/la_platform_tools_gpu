@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/interval"
@@ -29,7 +28,7 @@ import (
 
 // BuildLazy returns the *service.MemoryInfo resulting from the given
 // GetMemoryInfo request.
-func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	capture, err := service.ResolveCapture(r.Capture, d, l)
 	if err != nil {
 		return nil, err

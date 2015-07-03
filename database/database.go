@@ -19,6 +19,7 @@ import (
 	"crypto/sha1"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -26,24 +27,34 @@ import (
 
 // Database is the interface to a resource store.
 type Database interface {
-	// Store adds a key value pair to the database.
+	// Store adds a key-value pair to the database.
 	// It is an error if the id is already mapped to an object.
-	Store(binary.ID, binary.Object, log.Logger) error
+	Store(binary.ID, interface{}, log.Logger) error
 	// Resolve attempts to resolve the final value associated with an id.
 	// It will traverse all Lazy objects, blocking until they are ready.
-	Resolve(binary.ID, log.Logger) (binary.Object, error)
+	Resolve(binary.ID, log.Logger) (interface{}, error)
 	// Containts returns true if the database has an entry for the specified id.
 	Contains(binary.ID, log.Logger) bool
 }
 
-// Store is a helper that stores an object to the database with the id
-// calculated by the Hash function.
-func Store(obj binary.Object, d Database, l log.Logger) (binary.ID, error) {
-	id, err := Hash(obj)
+// Store is a helper that stores v to the database with the id calculated by
+// the Hash function.
+func Store(v interface{}, d Database, l log.Logger) (binary.ID, error) {
+	id, err := Hash(v)
 	if err != nil {
 		return id, err
 	}
-	return id, d.Store(id, obj, l)
+	return id, d.Store(id, v, l)
+}
+
+// Build stores lazy into d, and then resolves and returns the lazy-built
+// object.
+func Build(lazy Lazy, d Database, l log.Logger) (interface{}, error) {
+	id, err := Store(lazy, d, l)
+	if err != nil {
+		return nil, err
+	}
+	return d.Resolve(id, l)
 }
 
 // Hash returns a unique binary.ID based on the contents of the object.
@@ -52,10 +63,14 @@ func Store(obj binary.Object, d Database, l log.Logger) (binary.ID, error) {
 // will be ignorable.
 // Objects with a graph structure are allowed.
 // Only members that would be encoded using a binary.Encoder are considered.
-func Hash(o binary.Object) (binary.ID, error) {
+func Hash(v interface{}) (binary.ID, error) {
 	id := binary.ID{}
 	h := sha1.New()
 	e := cyclic.Encoder(vle.Writer(h))
+	o, err := any.Box(v)
+	if err != nil {
+		return id, err
+	}
 	if err := e.Object(o); err != nil {
 		return id, err
 	}
