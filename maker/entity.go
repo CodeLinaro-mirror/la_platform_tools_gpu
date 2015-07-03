@@ -16,7 +16,7 @@ package maker
 
 import (
 	"log"
-	"strings"
+	"regexp"
 	"time"
 )
 
@@ -75,28 +75,16 @@ func FindPathEntity(name string) Entity {
 }
 
 // FindEntities tries to find all entities who's names match the supplied
-// string. The string is treated as a set of characters that must occur in the
-// entities name in the same order, and all entities for which that is true are
-// returned.
-func FindEntities(match string) []Entity {
+// string. The string is treated as a case insensitive regular expression.
+func FindEntities(pattern string) []Entity {
+	re := regexp.MustCompile("(?i)" + pattern)
 	matches := []Entity{}
 	for name, e := range entities {
-		if fuzzyMatch(name, match) {
+		if re.MatchString(name) {
 			matches = append(matches, e)
 		}
 	}
 	return matches
-}
-
-func fuzzyMatch(s, match string) bool {
-	for _, r := range match {
-		i := strings.IndexRune(s, r)
-		if i < 0 {
-			return false
-		}
-		s = s[i+1:]
-	}
-	return true
 }
 
 // EntityOf tries to find an entity for the supplied value.
