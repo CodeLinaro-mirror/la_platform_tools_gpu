@@ -23,6 +23,7 @@ import (
 
 func (f *functions) CppName(n string) string {
 	n = strings.Replace(n, ".", "::", -1)
+	n = strings.Replace(n, resolver.ConstSuffix+resolver.PointerSuffix, "__CP", -1)
 	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
 	n = strings.Replace(n, resolver.SliceSuffix, "__S", -1)
 	n = strings.Replace(n, resolver.ArraySuffix, "__A", -1)
