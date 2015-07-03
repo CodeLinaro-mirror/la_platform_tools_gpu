@@ -27,9 +27,17 @@ type Field struct {
 	Name   string // The name of the field.
 }
 
+// String returns the string representation of the path.
+func (n *Field) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *Field) Path() string {
 	return fmt.Sprintf("%v.%s", n.Struct, n.Name)
+}
+
+// Base implements the Path interface, returning the path to the struct.
+func (n *Field) Base() Path {
+	return n.Struct
 }
 
 // Field implements the Value interface.

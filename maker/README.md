@@ -161,11 +161,10 @@ and returns the set of file entities that matched.
 #### func  FindEntities
 
 ```go
-func FindEntities(match string) []Entity
+func FindEntities(pattern string) []Entity
 ```
 FindEntities tries to find all entities who's names match the supplied string.
-The string is treated as a set of characters that must occur in the entities
-name in the same order, and all entities for which that is true are returned.
+The string is treated as a case insensitive regular expression.
 
 #### func  GoSrcPath
 
