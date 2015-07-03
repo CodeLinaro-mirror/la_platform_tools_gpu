@@ -3129,7 +3129,7 @@ func (a *CmdClone) AddWrite(rng memory.Range, id binary.ID) *CmdClone {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdClone) API() gfxapi.API                  { return api{} }
+func (c *CmdClone) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdClone) Flags() atom.Flags                { return 0 }
 func (a *CmdClone) Observations() *atom.Observations { return &a.observations }
 
@@ -3161,7 +3161,7 @@ func (a *CmdMake) AddWrite(rng memory.Range, id binary.ID) *CmdMake {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdMake) API() gfxapi.API                  { return api{} }
+func (c *CmdMake) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdMake) Flags() atom.Flags                { return 0 }
 func (a *CmdMake) Observations() *atom.Observations { return &a.observations }
 
@@ -3194,7 +3194,7 @@ func (a *CmdCopy) AddWrite(rng memory.Range, id binary.ID) *CmdCopy {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdCopy) API() gfxapi.API                  { return api{} }
+func (c *CmdCopy) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdCopy) Flags() atom.Flags                { return 0 }
 func (a *CmdCopy) Observations() *atom.Observations { return &a.observations }
 
@@ -3227,7 +3227,7 @@ func (a *CmdCharsliceToString) AddWrite(rng memory.Range, id binary.ID) *CmdChar
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdCharsliceToString) API() gfxapi.API                  { return api{} }
+func (c *CmdCharsliceToString) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdCharsliceToString) Flags() atom.Flags                { return 0 }
 func (a *CmdCharsliceToString) Observations() *atom.Observations { return &a.observations }
 
@@ -3259,7 +3259,7 @@ func (a *CmdCharptrToString) AddWrite(rng memory.Range, id binary.ID) *CmdCharpt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdCharptrToString) API() gfxapi.API                  { return api{} }
+func (c *CmdCharptrToString) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdCharptrToString) Flags() atom.Flags                { return 0 }
 func (a *CmdCharptrToString) Observations() *atom.Observations { return &a.observations }
 
@@ -3292,7 +3292,7 @@ func (a *CmdSliceCasts) AddWrite(rng memory.Range, id binary.ID) *CmdSliceCasts 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdSliceCasts) API() gfxapi.API                  { return api{} }
+func (c *CmdSliceCasts) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdSliceCasts) Flags() atom.Flags                { return 0 }
 func (a *CmdSliceCasts) Observations() *atom.Observations { return &a.observations }
 
@@ -3323,7 +3323,7 @@ func (a *CmdVoid) AddWrite(rng memory.Range, id binary.ID) *CmdVoid {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoid) API() gfxapi.API                  { return api{} }
+func (c *CmdVoid) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoid) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid) Observations() *atom.Observations { return &a.observations }
 
@@ -3355,7 +3355,7 @@ func (a *CmdUnknownRet) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownRet 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdUnknownRet) API() gfxapi.API                  { return api{} }
+func (c *CmdUnknownRet) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdUnknownRet) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownRet) Observations() *atom.Observations { return &a.observations }
 
@@ -3387,7 +3387,7 @@ func (a *CmdUnknownWritePtr) AddWrite(rng memory.Range, id binary.ID) *CmdUnknow
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdUnknownWritePtr) API() gfxapi.API                  { return api{} }
+func (c *CmdUnknownWritePtr) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdUnknownWritePtr) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWritePtr) Observations() *atom.Observations { return &a.observations }
 
@@ -3419,7 +3419,7 @@ func (a *CmdUnknownWriteSlice) AddWrite(rng memory.Range, id binary.ID) *CmdUnkn
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdUnknownWriteSlice) API() gfxapi.API                  { return api{} }
+func (c *CmdUnknownWriteSlice) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdUnknownWriteSlice) Flags() atom.Flags                { return 0 }
 func (a *CmdUnknownWriteSlice) Observations() *atom.Observations { return &a.observations }
 
@@ -3451,7 +3451,7 @@ func (a *CmdVoidU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU8 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidU8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidU8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU8) Observations() *atom.Observations { return &a.observations }
 
@@ -3483,7 +3483,7 @@ func (a *CmdVoidS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS8 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidS8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidS8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS8) Observations() *atom.Observations { return &a.observations }
 
@@ -3515,7 +3515,7 @@ func (a *CmdVoidU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU16 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidU16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidU16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU16) Observations() *atom.Observations { return &a.observations }
 
@@ -3547,7 +3547,7 @@ func (a *CmdVoidS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS16 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidS16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidS16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS16) Observations() *atom.Observations { return &a.observations }
 
@@ -3579,7 +3579,7 @@ func (a *CmdVoidF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidF32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidF32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF32) Observations() *atom.Observations { return &a.observations }
 
@@ -3611,7 +3611,7 @@ func (a *CmdVoidU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidU32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidU32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU32) Observations() *atom.Observations { return &a.observations }
 
@@ -3643,7 +3643,7 @@ func (a *CmdVoidS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidS32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidS32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS32) Observations() *atom.Observations { return &a.observations }
 
@@ -3675,7 +3675,7 @@ func (a *CmdVoidF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidF64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidF64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidF64) Observations() *atom.Observations { return &a.observations }
 
@@ -3707,7 +3707,7 @@ func (a *CmdVoidU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidU64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidU64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidU64) Observations() *atom.Observations { return &a.observations }
 
@@ -3739,7 +3739,7 @@ func (a *CmdVoidS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidS64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidS64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidS64) Observations() *atom.Observations { return &a.observations }
 
@@ -3771,7 +3771,7 @@ func (a *CmdVoidBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidBool {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidBool) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidBool) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidBool) Observations() *atom.Observations { return &a.observations }
 
@@ -3803,7 +3803,7 @@ func (a *CmdVoidString) AddWrite(rng memory.Range, id binary.ID) *CmdVoidString 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidString) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidString) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidString) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidString) Observations() *atom.Observations { return &a.observations }
 
@@ -3837,7 +3837,7 @@ func (a *CmdVoid3Strings) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Stri
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoid3Strings) API() gfxapi.API                  { return api{} }
+func (c *CmdVoid3Strings) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoid3Strings) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Strings) Observations() *atom.Observations { return &a.observations }
 
@@ -3871,7 +3871,7 @@ func (a *CmdVoid3InArrays) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3InA
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoid3InArrays) API() gfxapi.API                  { return api{} }
+func (c *CmdVoid3InArrays) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoid3InArrays) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -3904,7 +3904,7 @@ func (a *CmdVoidInArrayOfPointers) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidInArrayOfPointers) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidInArrayOfPointers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidInArrayOfPointers) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfPointers) Observations() *atom.Observations { return &a.observations }
 
@@ -3936,7 +3936,7 @@ func (a *CmdVoidReadU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU8 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadU8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadU8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU8) Observations() *atom.Observations { return &a.observations }
 
@@ -3968,7 +3968,7 @@ func (a *CmdVoidReadS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS8 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadS8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadS8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4000,7 +4000,7 @@ func (a *CmdVoidReadU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU1
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadU16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadU16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4032,7 +4032,7 @@ func (a *CmdVoidReadS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS1
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadS16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadS16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4064,7 +4064,7 @@ func (a *CmdVoidReadF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF3
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadF32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadF32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4096,7 +4096,7 @@ func (a *CmdVoidReadU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU3
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadU32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadU32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4128,7 +4128,7 @@ func (a *CmdVoidReadS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS3
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadS32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadS32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4160,7 +4160,7 @@ func (a *CmdVoidReadF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF6
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadF64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadF64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4192,7 +4192,7 @@ func (a *CmdVoidReadU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU6
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadU64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadU64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4224,7 +4224,7 @@ func (a *CmdVoidReadS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS6
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadS64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadS64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4256,7 +4256,7 @@ func (a *CmdVoidReadBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadB
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadBool) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadBool) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4290,7 +4290,7 @@ func (a *CmdVoidReadPtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadP
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidReadPtrs) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidReadPtrs) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidReadPtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidReadPtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -4322,7 +4322,7 @@ func (a *CmdVoidWriteU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteU8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteU8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteU8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4354,7 +4354,7 @@ func (a *CmdVoidWriteS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteS8) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteS8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteS8) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4386,7 +4386,7 @@ func (a *CmdVoidWriteU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteU16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteU16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteU16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4418,7 +4418,7 @@ func (a *CmdVoidWriteS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteS16) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteS16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteS16) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4450,7 +4450,7 @@ func (a *CmdVoidWriteF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteF32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteF32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteF32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4482,7 +4482,7 @@ func (a *CmdVoidWriteU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteU32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteU32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteU32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4514,7 +4514,7 @@ func (a *CmdVoidWriteS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteS32) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteS32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteS32) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4546,7 +4546,7 @@ func (a *CmdVoidWriteF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteF64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteF64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteF64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4578,7 +4578,7 @@ func (a *CmdVoidWriteU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteU64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteU64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteU64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4610,7 +4610,7 @@ func (a *CmdVoidWriteS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrite
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteS64) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteS64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteS64) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteS64) Observations() *atom.Observations { return &a.observations }
 
@@ -4642,7 +4642,7 @@ func (a *CmdVoidWriteBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWriteBool) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWriteBool) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWriteBool) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWriteBool) Observations() *atom.Observations { return &a.observations }
 
@@ -4676,7 +4676,7 @@ func (a *CmdVoidWritePtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWrit
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidWritePtrs) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidWritePtrs) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidWritePtrs) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidWritePtrs) Observations() *atom.Observations { return &a.observations }
 
@@ -4708,7 +4708,7 @@ func (a *CmdU8) AddWrite(rng memory.Range, id binary.ID) *CmdU8 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdU8) API() gfxapi.API                  { return api{} }
+func (c *CmdU8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdU8) Flags() atom.Flags                { return 0 }
 func (a *CmdU8) Observations() *atom.Observations { return &a.observations }
 
@@ -4740,7 +4740,7 @@ func (a *CmdS8) AddWrite(rng memory.Range, id binary.ID) *CmdS8 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdS8) API() gfxapi.API                  { return api{} }
+func (c *CmdS8) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdS8) Flags() atom.Flags                { return 0 }
 func (a *CmdS8) Observations() *atom.Observations { return &a.observations }
 
@@ -4772,7 +4772,7 @@ func (a *CmdU16) AddWrite(rng memory.Range, id binary.ID) *CmdU16 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdU16) API() gfxapi.API                  { return api{} }
+func (c *CmdU16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdU16) Flags() atom.Flags                { return 0 }
 func (a *CmdU16) Observations() *atom.Observations { return &a.observations }
 
@@ -4804,7 +4804,7 @@ func (a *CmdS16) AddWrite(rng memory.Range, id binary.ID) *CmdS16 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdS16) API() gfxapi.API                  { return api{} }
+func (c *CmdS16) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdS16) Flags() atom.Flags                { return 0 }
 func (a *CmdS16) Observations() *atom.Observations { return &a.observations }
 
@@ -4836,7 +4836,7 @@ func (a *CmdF32) AddWrite(rng memory.Range, id binary.ID) *CmdF32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdF32) API() gfxapi.API                  { return api{} }
+func (c *CmdF32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdF32) Flags() atom.Flags                { return 0 }
 func (a *CmdF32) Observations() *atom.Observations { return &a.observations }
 
@@ -4868,7 +4868,7 @@ func (a *CmdU32) AddWrite(rng memory.Range, id binary.ID) *CmdU32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdU32) API() gfxapi.API                  { return api{} }
+func (c *CmdU32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdU32) Flags() atom.Flags                { return 0 }
 func (a *CmdU32) Observations() *atom.Observations { return &a.observations }
 
@@ -4900,7 +4900,7 @@ func (a *CmdS32) AddWrite(rng memory.Range, id binary.ID) *CmdS32 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdS32) API() gfxapi.API                  { return api{} }
+func (c *CmdS32) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdS32) Flags() atom.Flags                { return 0 }
 func (a *CmdS32) Observations() *atom.Observations { return &a.observations }
 
@@ -4932,7 +4932,7 @@ func (a *CmdF64) AddWrite(rng memory.Range, id binary.ID) *CmdF64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdF64) API() gfxapi.API                  { return api{} }
+func (c *CmdF64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdF64) Flags() atom.Flags                { return 0 }
 func (a *CmdF64) Observations() *atom.Observations { return &a.observations }
 
@@ -4964,7 +4964,7 @@ func (a *CmdU64) AddWrite(rng memory.Range, id binary.ID) *CmdU64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdU64) API() gfxapi.API                  { return api{} }
+func (c *CmdU64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdU64) Flags() atom.Flags                { return 0 }
 func (a *CmdU64) Observations() *atom.Observations { return &a.observations }
 
@@ -4996,7 +4996,7 @@ func (a *CmdS64) AddWrite(rng memory.Range, id binary.ID) *CmdS64 {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdS64) API() gfxapi.API                  { return api{} }
+func (c *CmdS64) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdS64) Flags() atom.Flags                { return 0 }
 func (a *CmdS64) Observations() *atom.Observations { return &a.observations }
 
@@ -5028,7 +5028,7 @@ func (a *CmdBool) AddWrite(rng memory.Range, id binary.ID) *CmdBool {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdBool) API() gfxapi.API                  { return api{} }
+func (c *CmdBool) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdBool) Flags() atom.Flags                { return 0 }
 func (a *CmdBool) Observations() *atom.Observations { return &a.observations }
 
@@ -5060,7 +5060,7 @@ func (a *CmdString) AddWrite(rng memory.Range, id binary.ID) *CmdString {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdString) API() gfxapi.API                  { return api{} }
+func (c *CmdString) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdString) Flags() atom.Flags                { return 0 }
 func (a *CmdString) Observations() *atom.Observations { return &a.observations }
 
@@ -5092,7 +5092,7 @@ func (a *CmdPointer) AddWrite(rng memory.Range, id binary.ID) *CmdPointer {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdPointer) API() gfxapi.API                  { return api{} }
+func (c *CmdPointer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdPointer) Flags() atom.Flags                { return 0 }
 func (a *CmdPointer) Observations() *atom.Observations { return &a.observations }
 
@@ -5126,7 +5126,7 @@ func (a *CmdVoid3Remapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Rem
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoid3Remapped) API() gfxapi.API                  { return api{} }
+func (c *CmdVoid3Remapped) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoid3Remapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3Remapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5158,7 +5158,7 @@ func (a *CmdVoidInArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cmd
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidInArrayOfRemapped) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidInArrayOfRemapped) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidInArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidInArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5190,7 +5190,7 @@ func (a *CmdVoidOutArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *Cm
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5222,7 +5222,7 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) AddWrite(rng memory.Range, id binary.
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.API                  { return api{} }
+func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdVoidOutArrayOfUnknownRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdVoidOutArrayOfUnknownRemapped) Observations() *atom.Observations { return &a.observations }
 
@@ -5254,7 +5254,7 @@ func (a *CmdRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdRemapped {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdRemapped) API() gfxapi.API                  { return api{} }
+func (c *CmdRemapped) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CmdRemapped) Flags() atom.Flags                { return 0 }
 func (a *CmdRemapped) Observations() *atom.Observations { return &a.observations }
 
