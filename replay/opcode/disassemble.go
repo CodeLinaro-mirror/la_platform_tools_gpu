@@ -16,7 +16,6 @@ package opcode
 
 import (
 	"io"
-	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
@@ -37,40 +36,5 @@ func Disassemble(r io.Reader, byteOrder endian.ByteOrder) ([]interface{}, error)
 		default:
 			return nil, err
 		}
-	}
-}
-
-// CheckDisassembly is a test helper function that checks the list of got
-// opcodes matches those in expected. If any differences are found then these
-// are logged to t, and the test fails.
-func CheckDisassembly(t *testing.T, got []interface{}, expected ...interface{}) {
-	matched := len(got) == len(expected)
-	if matched {
-		for i := range got {
-			if got[i] != expected[i] {
-				matched = false
-				break
-			}
-		}
-	}
-
-	if !matched {
-		for i := 0; i < len(got) || i < len(expected); i++ {
-			var e, g interface{}
-			if i < len(expected) {
-				e = expected[i]
-			}
-			if i < len(got) {
-				g = got[i]
-			}
-
-			if e == g {
-				t.Logf("  %d: %T%+v", i, g, g)
-			} else {
-				t.Logf("* %d: %T%+v ---  EXPECTED: %T%+v", i, g, g, e, e)
-			}
-		}
-
-		t.Fail()
 	}
 }

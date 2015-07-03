@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -49,7 +50,7 @@ type test struct {
 	expected expected
 }
 
-func check(t *testing.T, a device.Architecture, d database.Database, l log.Logger, test test) {
+func (test test) check(t *testing.T, a device.Architecture, d database.Database, l log.Logger) {
 	b := builder.New(a)
 	s := gfxapi.NewState()
 
@@ -85,7 +86,7 @@ func check(t *testing.T, a device.Architecture, d database.Database, l log.Logge
 	if err != nil {
 		t.Errorf("Failed to disassemble opcodes: %v", err)
 	}
-	opcode.CheckDisassembly(t, gotOpcodes, test.expected.opcodes...)
+	check.SlicesEqual(t, gotOpcodes, test.expected.opcodes)
 
 	checkResource(t, payload.Resources, test.expected.resources)
 
@@ -142,7 +143,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoid(),
 		},
@@ -152,7 +153,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_Clone(t *testing.T) {
@@ -166,7 +167,7 @@ func TestOperationsOpCall_Clone(t *testing.T) {
 
 	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 7, 8, 9})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdClone(p(0x100000), 5).AddRead(rng, id),
 		},
@@ -181,7 +182,7 @@ func TestOperationsOpCall_Clone(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdClone.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_Make(t *testing.T) {
@@ -193,7 +194,7 @@ func TestOperationsOpCall_Make(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdMake(5),
 		},
@@ -204,7 +205,7 @@ func TestOperationsOpCall_Make(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdMake.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_Copy(t *testing.T) {
@@ -218,7 +219,7 @@ func TestOperationsOpCall_Copy(t *testing.T) {
 
 	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 7, 8, 9})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdCopy(p(0x100000), 5).AddRead(rng, id),
 		},
@@ -233,7 +234,7 @@ func TestOperationsOpCall_Copy(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCopy.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_CharSliceToString(t *testing.T) {
@@ -247,7 +248,7 @@ func TestOperationsOpCall_CharSliceToString(t *testing.T) {
 
 	rng, id := atom.Data(a, d, l, p(0x100000), []uint8{5, 6, 0, 8, 9})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdCharsliceToString(p(0x100000), 5).AddRead(rng, id),
 		},
@@ -262,7 +263,7 @@ func TestOperationsOpCall_CharSliceToString(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCharsliceToString.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_CharPtrToString(t *testing.T) {
@@ -276,7 +277,7 @@ func TestOperationsOpCall_CharPtrToString(t *testing.T) {
 
 	_, id := atom.Data(a, d, l, p(0x100000), []uint8{'g', 'o', 'o', 'd', 0})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdCharptrToString(p(0x100000)).
 				AddRead(atom.Data(a, d, l, p(0x100000), []uint8{'g', 'o', 'o', 'd', 0, 'd', 'a', 'y'})),
@@ -291,7 +292,7 @@ func TestOperationsOpCall_CharPtrToString(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCharptrToString.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_Unknowns(t *testing.T) {
@@ -303,7 +304,7 @@ func TestOperationsOpCall_Unknowns(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdUnknownRet(10),
 			NewCmdUnknownWritePtr(p(0x200000)).
@@ -327,7 +328,7 @@ func TestOperationsOpCall_Unknowns(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdUnknownWriteSlice.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_SingleInputArg(t *testing.T) {
@@ -338,7 +339,7 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidU8(20),
 			NewCmdVoidS8(-20),
@@ -405,7 +406,7 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 			},
 			constants: []byte{'h', 'e', 'l', 'l', 'o', 0},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_3_Strings(t *testing.T) {
@@ -416,7 +417,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoid3Strings("hello", "world", "hello"),
 		},
@@ -433,7 +434,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 				/* 0x08 */ 'w', 'o', 'r', 'l', 'd', 0x00,
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
@@ -455,7 +456,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoid3InArrays(p(0x40000), p(0x50000), p(0x60000)).
 				AddRead(aRng, aID).
@@ -487,7 +488,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 				opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3InArrays.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
@@ -506,7 +507,7 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 		p(0x300000), p(0x200000), p(0x100000), p(0x200000), p(0x300000),
 	})
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidInArrayOfPointers(p(0x500000), 5).
 				AddRead(aRng, aID). // p(0x100000): 0x00
@@ -552,7 +553,7 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfPointers.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
@@ -576,7 +577,7 @@ func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
 	rng8, id8 := atom.Data(a, d, l, p, []byte{
 		0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef,
 	})
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidReadBool(p).AddRead(rng1, id1),
 			NewCmdVoidReadU8(p).AddRead(rng1, id1),
@@ -675,7 +676,7 @@ func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidReadBool.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
@@ -689,7 +690,7 @@ func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
 	aRng, aID := atom.Data(a, d, l, p(0x100000), float32(10))
 	bRng, bID := atom.Data(a, d, l, p(0x200000), uint16(20))
 	cRng, cID := atom.Data(a, d, l, p(0x300000), false)
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidReadPtrs(p(0x100000), p(0x200000), p(0x300000)).
 				AddRead(aRng, aID).
@@ -712,7 +713,7 @@ func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidReadPtrs.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
@@ -723,7 +724,7 @@ func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidWriteU8(p(0x100000)).
 				AddWrite(atom.Data(a, d, l, p(0x100000), uint8(1))),
@@ -785,7 +786,7 @@ func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidWriteBool.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
@@ -796,7 +797,7 @@ func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidWritePtrs(p(0x100000), p(0x200000), p(0x300000)),
 		},
@@ -809,7 +810,7 @@ func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidWritePtrs.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_ReturnValue(t *testing.T) {
@@ -820,7 +821,7 @@ func TestOperationsOpCall_ReturnValue(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdU8(20),
 			NewCmdS8(-20),
@@ -866,7 +867,7 @@ func TestOperationsOpCall_ReturnValue(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdPointer.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_3Remapped(t *testing.T) {
@@ -877,7 +878,7 @@ func TestOperationsOpCall_3Remapped(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoid3Remapped(0x10, 0x20, 0x10),
 		},
@@ -899,7 +900,7 @@ func TestOperationsOpCall_3Remapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid3Remapped.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
@@ -916,7 +917,7 @@ func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
 	pbase := uint32(4 * 3) // parameter array base address
 	tbase := uint32(0)     // remap table base address
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidInArrayOfRemapped(p(0x100000)).
 				AddRead(rng, id),
@@ -955,7 +956,7 @@ func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfRemapped.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
@@ -970,7 +971,7 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 	pbase := uint32(4 * 3) // parameter array base address
 	tbase := uint32(0)     // remap table base address
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidOutArrayOfRemapped(p(0x100000)).
 				AddWrite(atom.Data(a, d, l, p(0x100000), []remapped{10, 20, 10, 30, 20})),
@@ -1003,7 +1004,7 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
@@ -1018,7 +1019,7 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 	pbase := uint32(4 * 3) // parameter array base address
 	tbase := uint32(0)     // remap table base address
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdVoidOutArrayOfUnknownRemapped(p(0x100000)).
 				AddWrite(atom.Data(a, d, l, p(0x100000), []remapped{10, 20, 10, 30, 20})),
@@ -1051,7 +1052,7 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
 
 func TestOperationsOpCall_Remapped(t *testing.T) {
@@ -1063,7 +1064,7 @@ func TestOperationsOpCall_Remapped(t *testing.T) {
 		ByteOrder:        endian.Little,
 	}
 
-	check(t, a, d, l, test{
+	test{
 		atoms: []atom.Atom{
 			NewCmdRemapped(200),
 			NewCmdVoid3Remapped(100, 200, 300),
@@ -1089,5 +1090,5 @@ func TestOperationsOpCall_Remapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid3Remapped.ID},
 			},
 		},
-	})
+	}.check(t, a, d, l)
 }
