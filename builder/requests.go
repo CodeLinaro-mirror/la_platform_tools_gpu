@@ -20,6 +20,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // GetState records the parameters of a service.GetState RPC request.
@@ -127,6 +128,12 @@ type ConvertImage struct {
 type BuildReport struct {
 	binary.Generate
 	Atoms service.AtomStreamId
+}
+
+// Get resolves the object, value or memory at the specified path.
+type Get struct {
+	binary.Generate
+	Path path.Path
 }
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.

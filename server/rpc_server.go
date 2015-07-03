@@ -31,6 +31,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 type rpcServer struct {
@@ -249,4 +250,9 @@ func (s rpcServer) ReplaceAtom(
 		Data:    data,
 	}, s.Database, l)
 	return service.CaptureId{ID: id}, err
+}
+
+// Get resolves and returns the object, value or memory with the path p.
+func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
+	return database.Build(&builder.Get{Path: p}, s.Database, l)
 }

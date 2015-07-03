@@ -12,6 +12,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // Client is the client interface for RPC calls.
@@ -150,6 +151,16 @@ func (c client) ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log
 		res = val.(*resultReplaceAtom).value
 	} else {
 		log.Errorf(l, "RPC ReplaceAtom failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGet{p: p}); err == nil {
+		res = val.(*resultGet).value
+	} else {
+		log.Errorf(l, "RPC Get failed with error: %v", err)
 	}
 	return
 }

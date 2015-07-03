@@ -12,7 +12,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-// Resolve resolves and returns the object with the path p.
+// Resolve resolves and returns the object, value or memory at the path p.
 func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error) {
 	cache := map[service.CaptureId]atom.List{}
 	load := func(id service.CaptureId) (atom.List, error) {
