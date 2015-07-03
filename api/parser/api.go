@@ -44,6 +44,8 @@ func requireAPI(p *parse.Parser, cst *parse.Branch) *ast.API {
 				api.Classes = append(api.Classes, c)
 			} else if c := command(p, cst, annotations); c != nil {
 				api.Commands = append(api.Commands, c)
+			} else if c := definition(p, cst, annotations); c != nil {
+				api.Definitions = append(api.Definitions, c)
 			} else {
 				api.Fields = append(api.Fields, requireField(p, cst, annotations))
 			}
