@@ -40,6 +40,11 @@ func (n *Atom) Base() Path {
 	return n.Atoms
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *Atom) Clone() Path {
+	return &Atom{Atoms: n.Atoms.Clone().(*Atoms), Index: n.Index}
+}
+
 // Field implements the Value interface.
 func (n *Atom) Field(name string) Value {
 	return &Field{Struct: n, Name: name}
