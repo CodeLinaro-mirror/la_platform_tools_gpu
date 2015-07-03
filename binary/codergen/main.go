@@ -36,7 +36,7 @@ import (
 var (
 	verbose     = flag.Bool("v", false, "verbose messages")
 	nowrite     = flag.Bool("n", false, "don't write the files")
-	forceSource = flag.Bool("s", false, "force source only")
+	forceSource = flag.Bool("s", true, "force source only")
 	golang      = flag.Bool("go", false, "generate go code")
 	java        = flag.String("java", "", "the path to generate files in")
 	cpp         = flag.String("cpp", "", "the path to generate files in")
