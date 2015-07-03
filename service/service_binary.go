@@ -10,6 +10,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -156,7 +157,7 @@ var (
 	binaryIDresultResolveImageInfo      = binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}
 	binaryIDresultResolveMemoryInfo     = binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}
 	binaryIDresultResolveReport         = binary.ID{0x39, 0xe3, 0x6a, 0xa3, 0x55, 0xfc, 0xc7, 0xda, 0x7e, 0xc9, 0x6e, 0x43, 0xbf, 0xec, 0x64, 0x1f, 0xf4, 0x43, 0x92, 0x0c}
-	binaryIDresultResolveState          = binary.ID{0xfc, 0x51, 0x2e, 0xa8, 0xff, 0x03, 0xb4, 0x5e, 0x22, 0x6a, 0xcd, 0x67, 0x72, 0x61, 0x6a, 0x00, 0x07, 0x16, 0x0f, 0x7d}
+	binaryIDresultResolveState          = binary.ID{0xfa, 0x77, 0x8d, 0x45, 0xa0, 0x03, 0xa1, 0x0c, 0x10, 0xf9, 0x65, 0x80, 0x1f, 0x2f, 0x8e, 0x86, 0x2d, 0x31, 0x92, 0xb2}
 	binaryIDresultResolveTimingInfo     = binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}
 )
 
@@ -4208,26 +4209,33 @@ func (*resultResolveState) Class() binary.Class {
 }
 func doEncoderesultResolveState(e binary.Encoder, o *resultResolveState) error {
 	if o.value != nil {
-		if err := e.Object(o.value); err != nil {
+		var boxed binary.Object
+		boxed, err := any.Box(o.value)
+		if err != nil {
 			return err
 		}
-	} else if err := e.Object(nil); err != nil {
+		if err := e.Variant(boxed); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultResolveState(d binary.Decoder, o *resultResolveState) error {
-	if obj, err := d.Object(); err != nil {
+	if boxed, err := d.Variant(); err != nil {
 		return err
-	} else if obj != nil {
-		o.value = obj.(State)
+	} else if boxed != nil {
+		if o.value, err = any.Unbox(boxed); err != nil {
+			return err
+		}
 	} else {
 		o.value = nil
 	}
 	return nil
 }
 func doSkipresultResolveState(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
+	if _, err := d.SkipVariant(); err != nil {
 		return err
 	}
 	return nil
@@ -4253,7 +4261,7 @@ var schemaresultResolveState = &schema.Class{
 	Name:    "resultResolveState",
 	Display: "resultResolveState",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Interface{Name: "State"}},
+		{Declared: "value", Type: &any.Any{}},
 	},
 }
 

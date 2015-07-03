@@ -33,7 +33,7 @@ func NewInMemory(buildContext interface{}) Database {
 }
 
 type record struct {
-	value binary.Object
+	value interface{}
 	err   error
 	wait  chan struct{}
 }
@@ -45,19 +45,19 @@ type memory struct {
 }
 
 // Implements Database
-func (d *memory) Store(id binary.ID, o binary.Object, logger log.Logger) error {
+func (d *memory) Store(id binary.ID, v interface{}, logger log.Logger) error {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
-	return d.store(id, o, logger)
+	return d.store(id, v, logger)
 }
 
 // store function must be called with a locked mutex
-func (d *memory) store(id binary.ID, o binary.Object, logger log.Logger) error {
+func (d *memory) store(id binary.ID, v interface{}, logger log.Logger) error {
 	r, got := d.records[id]
 	if !got {
-		d.records[id] = &record{value: o}
+		d.records[id] = &record{value: v}
 	} else if config.DebugDatabaseVerify {
-		if !reflect.DeepEqual(o, r.value) {
+		if !reflect.DeepEqual(v, r.value) {
 			return fmt.Errorf("Duplicate object id %v", id)
 		}
 	}
@@ -65,14 +65,14 @@ func (d *memory) store(id binary.ID, o binary.Object, logger log.Logger) error {
 }
 
 // Implements Database
-func (d *memory) Resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
+func (d *memory) Resolve(id binary.ID, logger log.Logger) (interface{}, error) {
 	d.mutex.Lock()
 	defer d.mutex.Unlock()
 	return d.resolve(id, logger)
 }
 
 // load function must be called with a locked mutex
-func (d *memory) resolve(id binary.ID, logger log.Logger) (binary.Object, error) {
+func (d *memory) resolve(id binary.ID, logger log.Logger) (interface{}, error) {
 	r, got := d.records[id]
 	if !got {
 		return nil, fmt.Errorf("Resource '%v' not found", id)
@@ -95,7 +95,7 @@ func (d *memory) resolve(id binary.ID, logger log.Logger) (binary.Object, error)
 	}
 	// must be a first time access to request
 	r.wait = make(chan struct{})
-	value, err := func() (binary.Object, error) { // func for defer scope
+	value, err := func() (interface{}, error) { // func for defer scope
 		d.mutex.Unlock()     // don't build under the lock
 		defer d.mutex.Lock() // relock after build
 		return lazy.BuildLazy(d.buildContext, d, logger)

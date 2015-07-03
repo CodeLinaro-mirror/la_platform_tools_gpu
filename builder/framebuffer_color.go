@@ -17,7 +17,6 @@ package builder
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -27,7 +26,7 @@ import (
 
 // BuildLazy returns the *service.ImageInfo resulting from the given
 // GetFramebufferColor request.
-func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	if !r.API.Valid() {
 		return nil, fmt.Errorf("API must be valid")
 	}
@@ -62,7 +61,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 
 // BuildLazy returns the *service.Binary data for the given RenderFramebufferColor
 // request.
-func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{

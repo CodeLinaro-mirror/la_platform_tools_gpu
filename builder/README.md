@@ -40,7 +40,7 @@ BuildReport generates a service.Report for the given capture.
 #### func (*BuildReport) BuildLazy
 
 ```go
-func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy writes to out the schema.Report resource resulting from the given
 ResolveReport request.
@@ -80,7 +80,7 @@ ConvertImage is a request to decode a compressed texture.
 #### func (*ConvertImage) BuildLazy
 
 ```go
-func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *database.Blob holding the converted image for the
 ConvertImage request.
@@ -110,7 +110,7 @@ request.
 #### func (*GetFramebufferColor) BuildLazy
 
 ```go
-func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.ImageInfo resulting from the given
 GetFramebufferColor request.
@@ -139,7 +139,7 @@ request.
 #### func (*GetFramebufferDepth) BuildLazy
 
 ```go
-func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 Build returns the *service.ImageInfo resulting from the given
 GetFramebufferDepth request.
@@ -164,7 +164,7 @@ GetHierarchy records the parameters of a service.GetHierarchy RPC request.
 #### func (*GetHierarchy) BuildLazy
 
 ```go
-func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.Hierarchy resulting from the given GetHierarchy
 request.
@@ -191,7 +191,7 @@ GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.
 #### func (*GetMemoryInfo) BuildLazy
 
 ```go
-func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.MemoryInfo resulting from the given GetMemoryInfo
 request.
@@ -218,7 +218,7 @@ GetState records the parameters of a service.GetState RPC request.
 #### func (*GetState) BuildLazy
 
 ```go
-func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.Binary resulting from the given GetState request.
 
@@ -244,7 +244,7 @@ GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
 #### func (*GetTimingInfo) BuildLazy
 
 ```go
-func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.TimingInfo resulting from the given GetTimingInfo
 request.
@@ -275,7 +275,7 @@ RPC request.
 #### func (*PrerenderFramebuffers) BuildLazy
 
 ```go
-func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy renders and caches all the framebuffer color buffers in the
 GetFramebufferDepth request, returning an empty *service.Binary.
@@ -307,7 +307,7 @@ RenderFramebufferColor request.
 #### func (*RenderFramebufferColor) BuildLazy
 
 ```go
-func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.Binary data for the given RenderFramebufferColor
 request.
@@ -338,7 +338,7 @@ RenderFramebufferDepth request.
 #### func (*RenderFramebufferDepth) BuildLazy
 
 ```go
-func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns the *service.Binary data for the given RenderFramebufferDepth
 request.
@@ -365,7 +365,7 @@ ReplaceAtom records the parameters of a service.ReplaceAtom RPC request.
 #### func (*ReplaceAtom) BuildLazy
 
 ```go
-func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error)
+func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
 BuildLazy returns a new *service.Capture, with a single atom replaced.
 

@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -26,7 +25,7 @@ import (
 )
 
 // BuildLazy writes to out the schema.Report resource resulting from the given ResolveReport request.
-func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	atoms, err := loadAtoms(request.Atoms, d, l)
 	if err != nil {
 		return nil, err
