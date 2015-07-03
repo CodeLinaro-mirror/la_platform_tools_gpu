@@ -75,16 +75,6 @@ func (c client) GetDevices(l log.Logger) (res []DeviceId, err error) {
 	return
 }
 
-func (c client) GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (res StateId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetState{capture: capture, api: api, after: after}); err == nil {
-		res = val.(*resultGetState).value
-	} else {
-		log.Errorf(l, "RPC GetState failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) GetHierarchy(capture CaptureId, l log.Logger) (res HierarchyId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetHierarchy{capture: capture}); err == nil {
@@ -241,16 +231,6 @@ func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error)
 		res = val.(*resultResolveReport).value
 	} else {
 		log.Errorf(l, "RPC ResolveReport failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveState(id StateId, l log.Logger) (res State, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveState{id: id}); err == nil {
-		res = val.(*resultResolveState).value
-	} else {
-		log.Errorf(l, "RPC ResolveState failed with error: %v", err)
 	}
 	return
 }

@@ -858,7 +858,6 @@ type RPC interface {
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
-	GetState(capture CaptureId, api ApiId, after uint64, l log.Logger) (StateId, error)
 	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
 	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
@@ -875,7 +874,6 @@ type RPC interface {
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveReport(id ReportId, l log.Logger) (Report, error)
-	ResolveState(id StateId, l log.Logger) (State, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 ```
@@ -1116,14 +1114,6 @@ func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error)
 ResolveReport loads and returns the Report stored in the resolver's database,
 using id.
 
-#### func (Resolver) ResolveState
-
-```go
-func (r Resolver) ResolveState(id StateId, l log.Logger) (State, error)
-```
-ResolveState loads and returns the State stored in the resolver's database,
-using id.
-
 #### func (Resolver) ResolveTimingInfo
 
 ```go
@@ -1211,50 +1201,6 @@ func (v *Severity) Parse(s string) error
 
 ```go
 func (v Severity) String() string
-```
-
-#### type State
-
-```go
-type State interface{}
-```
-
-
-#### func  ResolveState
-
-```go
-func ResolveState(id StateId, d database.Database, l log.Logger) (res State, err error)
-```
-ResolveState loads and returns the State stored in the database d, using id.
-
-#### type StateId
-
-```go
-type StateId struct {
-	binary.Generate
-	ID binary.ID
-}
-```
-
-Handle StateId
-
-#### func  StoreState
-
-```go
-func StoreState(v State, d database.Database, l log.Logger) (StateId, error)
-```
-StoreState stores v into the database d, returning the StateId.
-
-#### func (*StateId) Class
-
-```go
-func (*StateId) Class() binary.Class
-```
-
-#### func (StateId) Valid
-
-```go
-func (h StateId) Valid() bool
 ```
 
 #### type TimingInfo
