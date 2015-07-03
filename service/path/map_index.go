@@ -27,9 +27,17 @@ type MapIndex struct {
 	Key interface{} // The key to the value in the map.
 }
 
+// String returns the string representation of the path.
+func (n *MapIndex) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *MapIndex) Path() string {
 	return fmt.Sprintf("%v[%v]", n.Map, n.Key)
+}
+
+// Base implements the Path interface, returning the path to the map.
+func (n *MapIndex) Base() Path {
+	return n.Map
 }
 
 // Field implements the Value interface.
