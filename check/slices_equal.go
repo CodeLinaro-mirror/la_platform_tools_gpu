@@ -47,9 +47,9 @@ func SlicesEqual(t *testing.T, got interface{}, expected interface{}) (equal boo
 				e = ve.Index(i).Interface()
 			}
 			if e == g {
-				t.Logf("  %d: %T%+v", i, g, g)
+				t.Logf("  %d: %T %+v", i, g, g)
 			} else {
-				t.Logf("* %d: %T%+v ---  EXPECTED: %T%+v", i, g, g, e, e)
+				t.Logf("* %d: %T %+v ---  EXPECTED: %T %+v", i, g, g, e, e)
 			}
 		}
 
