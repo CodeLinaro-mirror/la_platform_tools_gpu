@@ -1267,7 +1267,7 @@ const rpc_common_go_tmpl = `{{/*
   Emits the go type for the provided AST type.
 -------------------------------------------------------------------------------
 */}}
-{{define "Type#any"      }}binary.Object{{end}}
+{{define "Type#any"      }}interface{}{{end}}
 {{define "Type#bool"     }}bool{{end}}
 {{define "Type#s8"       }}int8{{end}}
 {{define "Type#u8"       }}uint8{{end}}
