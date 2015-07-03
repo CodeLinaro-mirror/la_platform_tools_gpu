@@ -20,6 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -159,7 +160,7 @@ func TestCommitAtom(t *testing.T) {
 			ByteOrder:        endian.Little,
 		})
 		test.f(b)
-		if !asm.Check(t, b.instructions, test.expected) {
+		if !check.SlicesEqual(t, b.instructions, test.expected) {
 			t.Errorf("Test '%s' failed:", test.name)
 		}
 	}
@@ -211,7 +212,7 @@ func TestRevertAtom(t *testing.T) {
 			ByteOrder:        endian.Little,
 		})
 		test.f(b)
-		if !asm.Check(t, b.instructions, test.expected) {
+		if !check.SlicesEqual(t, b.instructions, test.expected) {
 			t.Errorf("Test '%s' failed:", test.name)
 		}
 	}
@@ -250,7 +251,7 @@ func TestRevertPostbackAtom(t *testing.T) {
 			ByteOrder:        endian.Little,
 		})
 		test.f(b)
-		if !asm.Check(t, b.instructions, test.expected) {
+		if !check.SlicesEqual(t, b.instructions, test.expected) {
 			t.Errorf("Test '%s' failed:", test.name)
 		}
 	}
