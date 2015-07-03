@@ -21,6 +21,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
+// binary: Schema = false
+
 // ErrUnboxable is returned when a non-boxable value type is passed to Box.
 type ErrUnboxable struct {
 	Value interface{} // The value that could not be encoded.

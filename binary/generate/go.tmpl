@@ -40,16 +40,16 @@ func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {
 func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
 func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
 func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
-func (*binaryClass{{.Name}}) Schema() *{{SchemaPrefix}}Class { return schema{{.Name}} }
-var schema{{.Name}} = &{{SchemaPrefix}}Class{
+{{if Directive "Schema" true}}func (*binaryClass{{.Name}}) Schema() *schema.Class { return schema{{.Name}} }
+var schema{{.Name}} = &schema.Class{
 	TypeID: {{.IDName}},
 	Package: "{{.Package}}",
 	Name: "{{.Name}}",
-	Fields: []{{SchemaPrefix}}Field{
+	Fields: []schema.Field{
 		{{range .Fields}}{ Declared:"{{.Declared}}", Type:{{Call "Go.Schema" .Type}} },
 	{{end}} },
 }
-{{end}}
+{{end}}{{end}}
 
 {{define "Go.Encode.Primitive"}}{{/*
 */}}{{if eq .Type.Native .Type.Name}}{{/*
@@ -242,15 +242,15 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			}
 		} {{end}}
 
-{{define "Go.Schema.Primitive"}}&{{SchemaPrefix}}Primitive{ Name: "{{.Name}}", Method: {{SchemaPrefix}}{{.Method}} }{{end}}
-{{define "Go.Schema.Struct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
-{{define "Go.Schema.Pointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
-{{define "Go.Schema.Interface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Primitive"}}&schema.Primitive{ Name: "{{.Name}}", Method: schema.{{.Method}} }{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
+{{define "Go.Schema.Pointer"}}&schema.Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
+{{define "Go.Schema.Interface"}}&schema.Interface{ Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
-{{define "Go.Schema.Slice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
-{{define "Go.Schema.Array"}}&{{SchemaPrefix}}Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
-{{define "Go.Schema.Stream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
-{{define "Go.Schema.Map"}}&{{SchemaPrefix}}Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
+{{define "Go.Schema.Stream"}}&schema.Stream{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 
 {{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
 const _{{$name}}_name = "{{range .Values}}{{.Name}}{{end}}"

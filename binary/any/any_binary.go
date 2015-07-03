@@ -8,7 +8,6 @@ package any
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 var Namespace = registry.NewNamespace()
@@ -75,14 +74,6 @@ func (*binaryClassAny) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAny(d, obj.(*Any))
 }
 func (*binaryClassAny) Skip(d binary.Decoder) error { return doSkipAny(d) }
-func (*binaryClassAny) Schema() *schema.Class       { return schemaAny }
-
-var schemaAny = &schema.Class{
-	TypeID:  binaryIDAny,
-	Package: "any",
-	Name:    "Any",
-	Fields:  []schema.Field{},
-}
 
 type binaryClassbool_ struct{}
 
@@ -122,16 +113,6 @@ func (*binaryClassbool_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodebool_(d, obj.(*bool_))
 }
 func (*binaryClassbool_) Skip(d binary.Decoder) error { return doSkipbool_(d) }
-func (*binaryClassbool_) Schema() *schema.Class       { return schemabool_ }
-
-var schemabool_ = &schema.Class{
-	TypeID:  binaryIDbool_,
-	Package: "any",
-	Name:    "bool_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-	},
-}
 
 type binaryClassfloat32_ struct{}
 
@@ -171,16 +152,6 @@ func (*binaryClassfloat32_) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodefloat32_(d, obj.(*float32_))
 }
 func (*binaryClassfloat32_) Skip(d binary.Decoder) error { return doSkipfloat32_(d) }
-func (*binaryClassfloat32_) Schema() *schema.Class       { return schemafloat32_ }
-
-var schemafloat32_ = &schema.Class{
-	TypeID:  binaryIDfloat32_,
-	Package: "any",
-	Name:    "float32_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-	},
-}
 
 type binaryClassfloat64_ struct{}
 
@@ -220,16 +191,6 @@ func (*binaryClassfloat64_) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodefloat64_(d, obj.(*float64_))
 }
 func (*binaryClassfloat64_) Skip(d binary.Decoder) error { return doSkipfloat64_(d) }
-func (*binaryClassfloat64_) Schema() *schema.Class       { return schemafloat64_ }
-
-var schemafloat64_ = &schema.Class{
-	TypeID:  binaryIDfloat64_,
-	Package: "any",
-	Name:    "float64_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
-	},
-}
 
 type binaryClassint16_ struct{}
 
@@ -269,16 +230,6 @@ func (*binaryClassint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint16_(d, obj.(*int16_))
 }
 func (*binaryClassint16_) Skip(d binary.Decoder) error { return doSkipint16_(d) }
-func (*binaryClassint16_) Schema() *schema.Class       { return schemaint16_ }
-
-var schemaint16_ = &schema.Class{
-	TypeID:  binaryIDint16_,
-	Package: "any",
-	Name:    "int16_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
-	},
-}
 
 type binaryClassint32_ struct{}
 
@@ -318,16 +269,6 @@ func (*binaryClassint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint32_(d, obj.(*int32_))
 }
 func (*binaryClassint32_) Skip(d binary.Decoder) error { return doSkipint32_(d) }
-func (*binaryClassint32_) Schema() *schema.Class       { return schemaint32_ }
-
-var schemaint32_ = &schema.Class{
-	TypeID:  binaryIDint32_,
-	Package: "any",
-	Name:    "int32_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
 
 type binaryClassint64_ struct{}
 
@@ -367,16 +308,6 @@ func (*binaryClassint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint64_(d, obj.(*int64_))
 }
 func (*binaryClassint64_) Skip(d binary.Decoder) error { return doSkipint64_(d) }
-func (*binaryClassint64_) Schema() *schema.Class       { return schemaint64_ }
-
-var schemaint64_ = &schema.Class{
-	TypeID:  binaryIDint64_,
-	Package: "any",
-	Name:    "int64_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
-	},
-}
 
 type binaryClassint8_ struct{}
 
@@ -416,16 +347,6 @@ func (*binaryClassint8_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint8_(d, obj.(*int8_))
 }
 func (*binaryClassint8_) Skip(d binary.Decoder) error { return doSkipint8_(d) }
-func (*binaryClassint8_) Schema() *schema.Class       { return schemaint8_ }
-
-var schemaint8_ = &schema.Class{
-	TypeID:  binaryIDint8_,
-	Package: "any",
-	Name:    "int8_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
-	},
-}
 
 type binaryClassobject_ struct{}
 
@@ -471,16 +392,6 @@ func (*binaryClassobject_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeobject_(d, obj.(*object_))
 }
 func (*binaryClassobject_) Skip(d binary.Decoder) error { return doSkipobject_(d) }
-func (*binaryClassobject_) Schema() *schema.Class       { return schemaobject_ }
-
-var schemaobject_ = &schema.Class{
-	TypeID:  binaryIDobject_,
-	Package: "any",
-	Name:    "object_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Interface{Name: "binary.Object"}},
-	},
-}
 
 type binaryClassstring_ struct{}
 
@@ -520,16 +431,6 @@ func (*binaryClassstring_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodestring_(d, obj.(*string_))
 }
 func (*binaryClassstring_) Skip(d binary.Decoder) error { return doSkipstring_(d) }
-func (*binaryClassstring_) Schema() *schema.Class       { return schemastring_ }
-
-var schemastring_ = &schema.Class{
-	TypeID:  binaryIDstring_,
-	Package: "any",
-	Name:    "string_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
 
 type binaryClassuint16_ struct{}
 
@@ -569,16 +470,6 @@ func (*binaryClassuint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint16_(d, obj.(*uint16_))
 }
 func (*binaryClassuint16_) Skip(d binary.Decoder) error { return doSkipuint16_(d) }
-func (*binaryClassuint16_) Schema() *schema.Class       { return schemauint16_ }
-
-var schemauint16_ = &schema.Class{
-	TypeID:  binaryIDuint16_,
-	Package: "any",
-	Name:    "uint16_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
-	},
-}
 
 type binaryClassuint32_ struct{}
 
@@ -618,16 +509,6 @@ func (*binaryClassuint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint32_(d, obj.(*uint32_))
 }
 func (*binaryClassuint32_) Skip(d binary.Decoder) error { return doSkipuint32_(d) }
-func (*binaryClassuint32_) Schema() *schema.Class       { return schemauint32_ }
-
-var schemauint32_ = &schema.Class{
-	TypeID:  binaryIDuint32_,
-	Package: "any",
-	Name:    "uint32_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-	},
-}
 
 type binaryClassuint64_ struct{}
 
@@ -667,16 +548,6 @@ func (*binaryClassuint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint64_(d, obj.(*uint64_))
 }
 func (*binaryClassuint64_) Skip(d binary.Decoder) error { return doSkipuint64_(d) }
-func (*binaryClassuint64_) Schema() *schema.Class       { return schemauint64_ }
-
-var schemauint64_ = &schema.Class{
-	TypeID:  binaryIDuint64_,
-	Package: "any",
-	Name:    "uint64_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
 
 type binaryClassuint8_ struct{}
 
@@ -716,13 +587,3 @@ func (*binaryClassuint8_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint8_(d, obj.(*uint8_))
 }
 func (*binaryClassuint8_) Skip(d binary.Decoder) error { return doSkipuint8_(d) }
-func (*binaryClassuint8_) Schema() *schema.Class       { return schemauint8_ }
-
-var schemauint8_ = &schema.Class{
-	TypeID:  binaryIDuint8_,
-	Package: "any",
-	Name:    "uint8_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
-	},
-}
