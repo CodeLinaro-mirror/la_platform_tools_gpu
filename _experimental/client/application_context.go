@@ -328,16 +328,11 @@ func (c *ApplicationContext) LoadReport() {
 func (c *ApplicationContext) LoadState() {
 	captureID := c.captureID
 	after := c.selectedAtomID
-	apiID := c.atoms[after].Api()
 	l := c.logger.Fork().Enter("LoadState")
 
 	go func() {
-		id, err := c.rpc.GetState(captureID, apiID, uint64(after), l)
-		if err != nil {
-			log.E(l, "%v", err)
-			return
-		}
-		state, err := c.rpc.ResolveState(id, l)
+		path := captureID.Path().Atoms().Index(uint64(after)).StateAfter()
+		state, err := c.rpc.Get(path, l)
 		if err != nil {
 			log.E(l, "%v", err)
 			return
