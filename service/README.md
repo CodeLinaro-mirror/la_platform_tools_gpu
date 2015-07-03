@@ -365,6 +365,13 @@ StoreCapture stores v into the database d, returning the CaptureId.
 func (*CaptureId) Class() binary.Class
 ```
 
+#### func (CaptureId) Path
+
+```go
+func (c CaptureId) Path() *path.Capture
+```
+Path returns a path.Capture representing the capture with this identifier.
+
 #### func (CaptureId) Valid
 
 ```go
@@ -859,6 +866,7 @@ type RPC interface {
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
+	Get(p path.Path, l log.Logger) (interface{}, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)

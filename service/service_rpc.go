@@ -11,6 +11,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 type RPC interface {
@@ -26,6 +27,7 @@ type RPC interface {
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
+	Get(p path.Path, l log.Logger) (interface{}, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
