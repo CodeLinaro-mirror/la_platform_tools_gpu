@@ -174,14 +174,14 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 
 func (c *ApplicationContext) UpdateSchema() {
 	go func() {
-		classes, err := c.rpc.GetSchema(c.logger)
+		s, err := c.rpc.GetSchema(c.logger)
 		if err != nil {
 			log.Errorf(c.logger, "Error resolving schema: %v", err)
 			return
 		}
-		log.Infof(c.logger, "Schema with %d classes", len(classes))
+		log.Infof(c.logger, "Schema with %d classes, %d constant sets", len(s.Classes), len(s.Constants))
 		atoms := 0
-		for _, class := range classes {
+		for _, class := range s.Classes {
 			// Find the atom metadata, if present
 			if meta := atom.FindMetadata(class); meta != nil {
 				atoms++

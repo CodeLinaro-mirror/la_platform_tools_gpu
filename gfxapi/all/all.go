@@ -17,6 +17,7 @@ package all
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
 )
 
@@ -24,4 +25,10 @@ var GraphicsNamespace = registry.NewNamespace()
 
 func init() {
 	GraphicsNamespace.AddFallbacks(gles.Namespace)
+}
+
+func VisitConstantSets(visitor func(schema.ConstantSet)) {
+	for _, c := range gles.ConstantValues {
+		visitor(c)
+	}
 }
