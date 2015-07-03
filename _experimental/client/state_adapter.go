@@ -20,24 +20,26 @@ import (
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
 
 const kStateAdapterNodeHeight = 18
 
-func createControls(appCtx *ApplicationContext, name string, value interface{}) gxui.Control {
+func createControls(appCtx *ApplicationContext, name string, value interface{}, path path.Path) gxui.Control {
 	theme := appCtx.Theme()
 
 	layout := theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
-	addLabel := func(format string, args ...interface{}) {
+	addLabel := func(format string, args ...interface{}) gxui.Label {
 		label := theme.CreateLabel()
 		label.SetText(fmt.Sprintf(format, args...))
 		label.SetMargin(math.ZeroSpacing)
 		label.SetMultiline(false)
 		layout.AddChild(label)
+		return label
 	}
 	//	addButton := func(format string, args ...interface{}) gxui.Button {
 	//		button := theme.CreateButton()
@@ -48,7 +50,10 @@ func createControls(appCtx *ApplicationContext, name string, value interface{}) 
 	//		return button
 	//	}
 
-	addLabel("%s: ", name)
+	label := addLabel("%s: ", name)
+	appCtx.ToolTipController().AddToolTip(label, 0.7, func(math.Point) gxui.Control {
+		return CreateLabel(appCtx.theme, path.Path(), gxui.White, true)
+	})
 
 	if value != nil {
 		addLabel(fmt.Sprintf("%v", value))
@@ -81,7 +86,7 @@ type StateAdapterNode struct {
 	appCtx   *ApplicationContext
 	name     string
 	value    interface{}
-	item     string
+	path     path.Value
 	children StateAdapterNodeList
 	parent   *StateAdapterNode
 }
@@ -92,12 +97,12 @@ func (l StateAdapterNodeList) Len() int           { return len(l) }
 func (l StateAdapterNodeList) Less(a, b int) bool { return l[a].name < l[b].name }
 func (l StateAdapterNodeList) Swap(a, b int)      { l[a], l[b] = l[b], l[a] }
 
-func (n *StateAdapterNode) add(name string, value interface{}, item string) {
+func (n *StateAdapterNode) add(name string, value interface{}, path path.Value) {
 	n.children = append(n.children, &StateAdapterNode{
 		appCtx: n.appCtx,
 		name:   name,
 		value:  value,
-		item:   item,
+		path:   path,
 		parent: n,
 	})
 }
@@ -106,7 +111,7 @@ func (n *StateAdapterNode) init() {
 	if v, ok := n.value.(*schema.Object); ok {
 		for i := range v.Fields {
 			name := v.Type.Fields[i].Declared
-			n.add(name, v.Fields[i], fmt.Sprintf("%s.%s", n.item, name))
+			n.add(name, v.Fields[i], n.path.Field(name))
 		}
 	} else {
 		v := reflect.ValueOf(n.value)
@@ -115,13 +120,14 @@ func (n *StateAdapterNode) init() {
 			for i, c := 0, v.Len(); i < c; i++ {
 				name := fmt.Sprintf("%d", i)
 				v := v.Index(i)
-				n.add(name, v.Interface(), fmt.Sprintf("%s[%s]", n.item, name))
+				n.add(name, v.Interface(), n.path.ArrayIndex(uint64(i)))
 			}
 		case reflect.Map:
 			for _, k := range v.MapKeys() {
-				name := fmt.Sprintf("%v", k.Interface())
 				v := v.MapIndex(k)
-				n.add(name, v.Interface(), fmt.Sprintf("%s[%s]", n.item, name))
+				k := k.Interface()
+				name := fmt.Sprintf("%v", k)
+				n.add(name, v.Interface(), n.path.MapIndex(k))
 			}
 			sort.Sort(n.children)
 		}
@@ -141,13 +147,13 @@ func (n *StateAdapterNode) NodeAt(index int) gxui.TreeNode {
 }
 
 func (n *StateAdapterNode) ItemAt(index int) gxui.AdapterItem {
-	return n.children[index].item
+	return n.children[index].path
 }
 
 func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
 	// Brute force search
 	for i, c := range n.children {
-		if c.item == item {
+		if c.path == item {
 			return i
 		}
 		if c.ItemIndex(item) >= 0 {
@@ -160,9 +166,9 @@ func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
 func (n *StateAdapterNode) Create(t gxui.Theme, index int) gxui.Control {
 	c := n.children[index]
 	if len(c.children) > 0 {
-		return createControls(n.appCtx, c.name, nil)
+		return createControls(n.appCtx, c.name, nil, c.path)
 	} else {
-		return createControls(n.appCtx, c.name, c.value)
+		return createControls(n.appCtx, c.name, c.value, c.path)
 	}
 }
 
@@ -179,8 +185,7 @@ func NewStateAdapter(appCtx *ApplicationContext) *StateAdapter {
 	a := &StateAdapter{
 		StateAdapterNode: StateAdapterNode{
 			appCtx: appCtx,
-			name:   "state",
-			item:   "state",
+			path:   appCtx.CaptureID().Path().Atoms().Index(uint64(appCtx.SelectedAtomID())).StateAfter(),
 			value:  appCtx.state,
 		},
 	}
