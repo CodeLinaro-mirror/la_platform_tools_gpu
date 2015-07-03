@@ -56,12 +56,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callGetState:
-			if res, err := server.GetState(call.capture, call.api, call.after, l); err == nil {
-				return &resultGetState{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callGetHierarchy:
 			if res, err := server.GetHierarchy(call.capture, l); err == nil {
 				return &resultGetHierarchy{value: res}
@@ -155,12 +149,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		case *callResolveReport:
 			if res, err := server.ResolveReport(call.id, l); err == nil {
 				return &resultResolveReport{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveState:
-			if res, err := server.ResolveState(call.id, l); err == nil {
-				return &resultResolveState{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -330,25 +318,6 @@ func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, 
 // ResolveReport loads and returns the Report stored in the resolver's database, using id.
 func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
 	return ResolveReport(id, r.Database, l)
-}
-
-// StoreState stores v into the database d, returning the StateId.
-func StoreState(v State, d database.Database, l log.Logger) (StateId, error) {
-	id, err := database.Store(v, d, l)
-	return StateId{ID: id}, err
-}
-
-// ResolveState loads and returns the State stored in the database d, using id.
-func ResolveState(id StateId, d database.Database, l log.Logger) (res State, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = (out.(State))
-	}
-	return res, err
-}
-
-// ResolveState loads and returns the State stored in the resolver's database, using id.
-func (r Resolver) ResolveState(id StateId, l log.Logger) (State, error) {
-	return ResolveState(id, r.Database, l)
 }
 
 // StoreTimingInfo stores v into the database d, returning the TimingInfoId.
