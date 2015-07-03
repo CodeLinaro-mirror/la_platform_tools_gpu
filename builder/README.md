@@ -26,6 +26,13 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 ImportCapture builds a new capture containing atoms, stores it into db and
 returns the new capture identifier.
 
+#### func  Resolve
+
+```go
+func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error)
+```
+Resolve resolves and returns the object with the path p.
+
 #### type BuildReport
 
 ```go
