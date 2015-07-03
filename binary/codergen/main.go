@@ -145,8 +145,9 @@ func output(gen *generate.Generator, file *generate.File) error {
 		return nil
 	}
 	generate.Sort(file.Structs)
-	for _, c := range file.Constants {
-		sort.Sort(c.(sort.Interface))
+	sort.Sort(&file.Constants)
+	for i := range file.Constants {
+		sort.Sort(&file.Constants[i])
 	}
 	if *golang {
 		entry := Entry{

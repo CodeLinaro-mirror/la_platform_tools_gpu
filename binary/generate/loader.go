@@ -289,52 +289,52 @@ func (l *Loader) addConst(module *Module, source *Source, c *types.Const) {
 		switch p.Method {
 		case schema.Int8:
 			v, _ := exact.Int64Val(c.Val())
-			schema.Int8Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: int8(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Uint8:
 			v, _ := exact.Uint64Val(c.Val())
-			schema.Uint8Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: uint8(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Int16:
 			v, _ := exact.Int64Val(c.Val())
-			schema.Int16Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: int16(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Uint16:
 			v, _ := exact.Uint64Val(c.Val())
-			schema.Uint16Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: uint16(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Int32:
 			v, _ := exact.Int64Val(c.Val())
-			schema.Int32Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: int32(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Uint32:
 			v, _ := exact.Uint64Val(c.Val())
-			schema.Uint32Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: uint32(v),
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Int64:
 			v, _ := exact.Int64Val(c.Val())
-			schema.Int64Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: v,
-			}.Add(&module.Output.Constants, t)
+			})
 		case schema.Uint64:
 			v, _ := exact.Uint64Val(c.Val())
-			schema.Uint64Constant{
+			module.Output.Constants.Add(t, schema.Constant{
 				Name:  name,
 				Value: v,
-			}.Add(&module.Output.Constants, t)
+			})
 		}
 	}
 }

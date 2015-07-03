@@ -7,6 +7,7 @@ package schema
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
@@ -17,14 +18,8 @@ func init() {
 	Namespace.Add((*Array)(nil).Class())
 	Namespace.Add((*Field)(nil).Class())
 	Namespace.Add((*Class)(nil).Class())
-	Namespace.Add((*Int16Constant)(nil).Class())
-	Namespace.Add((*Int16Constants)(nil).Class())
-	Namespace.Add((*Int32Constant)(nil).Class())
-	Namespace.Add((*Int32Constants)(nil).Class())
-	Namespace.Add((*Int64Constant)(nil).Class())
-	Namespace.Add((*Int64Constants)(nil).Class())
-	Namespace.Add((*Int8Constant)(nil).Class())
-	Namespace.Add((*Int8Constants)(nil).Class())
+	Namespace.Add((*Constant)(nil).Class())
+	Namespace.Add((*ConstantSet)(nil).Class())
 	Namespace.Add((*Interface)(nil).Class())
 	Namespace.Add((*Map)(nil).Class())
 	Namespace.Add((*Pointer)(nil).Class())
@@ -32,43 +27,21 @@ func init() {
 	Namespace.Add((*Slice)(nil).Class())
 	Namespace.Add((*Stream)(nil).Class())
 	Namespace.Add((*Struct)(nil).Class())
-	Namespace.Add((*Uint16Constant)(nil).Class())
-	Namespace.Add((*Uint16Constants)(nil).Class())
-	Namespace.Add((*Uint32Constant)(nil).Class())
-	Namespace.Add((*Uint32Constants)(nil).Class())
-	Namespace.Add((*Uint64Constant)(nil).Class())
-	Namespace.Add((*Uint64Constants)(nil).Class())
-	Namespace.Add((*Uint8Constant)(nil).Class())
-	Namespace.Add((*Uint8Constants)(nil).Class())
 }
 
 var (
-	binaryIDArray           = binary.ID{0x7a, 0x88, 0x3e, 0x09, 0xeb, 0xc7, 0x5c, 0x2c, 0x69, 0xc2, 0x9b, 0x9d, 0x3c, 0x5d, 0xdb, 0xe4, 0x3f, 0xc0, 0x7e, 0xc6}
-	binaryIDField           = binary.ID{0x8c, 0x54, 0x3d, 0x98, 0xc3, 0x7e, 0x38, 0xa8, 0xaa, 0x56, 0xbc, 0x84, 0x27, 0x49, 0x5d, 0x42, 0xdd, 0x21, 0x24, 0xf8}
-	binaryIDClass           = binary.ID{0xa0, 0x42, 0x57, 0x78, 0x68, 0xe1, 0x62, 0x2b, 0x82, 0x3d, 0x8f, 0x0d, 0x10, 0x21, 0xc8, 0x1c, 0x4e, 0x9d, 0x72, 0xb1}
-	binaryIDInt16Constant   = binary.ID{0x54, 0xbe, 0x53, 0xa9, 0x57, 0x51, 0xb6, 0x72, 0x2b, 0x3f, 0x1a, 0x3a, 0x29, 0xd8, 0x34, 0xec, 0xdd, 0xcf, 0x16, 0x10}
-	binaryIDInt16Constants  = binary.ID{0xda, 0xb0, 0xd4, 0x7c, 0xc2, 0x65, 0x3b, 0x38, 0xf4, 0x62, 0x43, 0x8a, 0x88, 0x0c, 0xc3, 0x05, 0xc0, 0xb4, 0xd9, 0x7b}
-	binaryIDInt32Constant   = binary.ID{0xff, 0xdc, 0x4d, 0xf9, 0x55, 0xc5, 0xe5, 0xce, 0xce, 0x46, 0x2b, 0xaa, 0xe7, 0xa9, 0x16, 0xad, 0x17, 0xfc, 0x3d, 0x9f}
-	binaryIDInt32Constants  = binary.ID{0x85, 0xab, 0xc4, 0x25, 0xea, 0xdc, 0x31, 0xf4, 0x7c, 0x99, 0xe4, 0x5a, 0x74, 0x23, 0x19, 0x72, 0xb7, 0x43, 0xdc, 0x02}
-	binaryIDInt64Constant   = binary.ID{0x9c, 0x90, 0xc5, 0xc4, 0xa1, 0x77, 0x2b, 0x27, 0x59, 0xf1, 0x76, 0x81, 0x53, 0x38, 0xe5, 0xde, 0x11, 0x30, 0xb3, 0xa5}
-	binaryIDInt64Constants  = binary.ID{0xda, 0xa9, 0xb0, 0xab, 0xc4, 0xf1, 0xe4, 0x56, 0xbb, 0x78, 0xb0, 0xc3, 0x26, 0x50, 0xd2, 0xfc, 0x6b, 0xbb, 0x61, 0x23}
-	binaryIDInt8Constant    = binary.ID{0x5a, 0x02, 0x16, 0xf6, 0x89, 0xe8, 0x79, 0x8d, 0x9a, 0x21, 0x01, 0x5f, 0xcf, 0x88, 0x2c, 0xd2, 0x9c, 0x86, 0x69, 0x02}
-	binaryIDInt8Constants   = binary.ID{0xe6, 0x5c, 0x11, 0xe8, 0xf4, 0x8e, 0x6d, 0x48, 0x0a, 0xd0, 0x7f, 0x1f, 0x85, 0x23, 0x23, 0xe1, 0xf8, 0xba, 0xef, 0xee}
-	binaryIDInterface       = binary.ID{0x5d, 0x54, 0x46, 0x31, 0xe1, 0x59, 0x8f, 0x04, 0x50, 0x67, 0xc8, 0x39, 0x99, 0x11, 0x4d, 0xa8, 0x41, 0x17, 0x88, 0x12}
-	binaryIDMap             = binary.ID{0x20, 0xcc, 0x9a, 0x52, 0xde, 0x75, 0x5f, 0x16, 0x2b, 0x34, 0x8b, 0x33, 0xce, 0x18, 0x67, 0x9d, 0x85, 0x40, 0xb3, 0x64}
-	binaryIDPointer         = binary.ID{0x13, 0xa9, 0xd3, 0x11, 0xa1, 0x8d, 0xbd, 0x5b, 0x18, 0xe7, 0x9b, 0x43, 0x3b, 0xdf, 0xc5, 0x49, 0xc8, 0xa5, 0x35, 0xcf}
-	binaryIDPrimitive       = binary.ID{0x45, 0x4d, 0x9e, 0x7d, 0xe6, 0x4f, 0x50, 0x74, 0x95, 0x13, 0x60, 0xbd, 0xea, 0x00, 0x71, 0x93, 0x9e, 0x3e, 0xc2, 0x4e}
-	binaryIDSlice           = binary.ID{0x3b, 0x75, 0xee, 0x59, 0x18, 0x1a, 0x4d, 0x74, 0x50, 0xf2, 0x50, 0x7f, 0xf9, 0x4f, 0x79, 0x99, 0x38, 0x58, 0x96, 0xd2}
-	binaryIDStream          = binary.ID{0x06, 0xcf, 0x86, 0xd5, 0x04, 0xea, 0x12, 0xb1, 0xd7, 0x79, 0x5a, 0x46, 0x29, 0x55, 0xe1, 0x10, 0xa1, 0x8f, 0x6e, 0x43}
-	binaryIDStruct          = binary.ID{0xdf, 0xe3, 0x9e, 0xf2, 0x8e, 0x9c, 0xea, 0x9b, 0x93, 0x49, 0x47, 0x76, 0xef, 0x9d, 0xe2, 0x46, 0xd9, 0x68, 0x92, 0x94}
-	binaryIDUint16Constant  = binary.ID{0x50, 0x5c, 0x84, 0xfc, 0x1b, 0x16, 0xc3, 0x68, 0xa2, 0x24, 0x7a, 0x81, 0xbf, 0xdf, 0x00, 0x3f, 0x5c, 0x30, 0x37, 0x53}
-	binaryIDUint16Constants = binary.ID{0xff, 0x06, 0xec, 0xc4, 0x38, 0xbd, 0x94, 0xf2, 0x0f, 0xf1, 0x1b, 0xf2, 0xfa, 0x34, 0x4c, 0xcd, 0xae, 0xfd, 0xbd, 0x15}
-	binaryIDUint32Constant  = binary.ID{0x4a, 0x39, 0x94, 0xb9, 0x75, 0x5c, 0xfc, 0x1c, 0x4c, 0x29, 0xae, 0x95, 0x4f, 0xf5, 0x63, 0xd3, 0x59, 0xb7, 0x1e, 0x9c}
-	binaryIDUint32Constants = binary.ID{0x48, 0xea, 0xb5, 0x4c, 0xe1, 0x07, 0xed, 0xc9, 0xa3, 0xe7, 0x74, 0x3a, 0xcd, 0x17, 0x86, 0x84, 0x39, 0x65, 0x0c, 0x12}
-	binaryIDUint64Constant  = binary.ID{0xf1, 0x11, 0x45, 0x71, 0x03, 0x79, 0xc8, 0xa0, 0x71, 0x53, 0x5c, 0x88, 0x9c, 0x73, 0x6f, 0x47, 0x93, 0x1f, 0xf7, 0x22}
-	binaryIDUint64Constants = binary.ID{0x92, 0x97, 0x09, 0xd4, 0x37, 0x4d, 0xe7, 0x76, 0x78, 0x57, 0xae, 0x69, 0x54, 0x58, 0xe3, 0xfc, 0x96, 0x70, 0xcf, 0xbf}
-	binaryIDUint8Constant   = binary.ID{0xab, 0x8a, 0x7d, 0x52, 0xe0, 0x82, 0x67, 0x79, 0x3e, 0x03, 0x6a, 0x7f, 0x29, 0x1c, 0x5b, 0x41, 0xe2, 0x3f, 0x2f, 0x84}
-	binaryIDUint8Constants  = binary.ID{0xfb, 0x61, 0x35, 0xf1, 0x24, 0x0a, 0x74, 0x6e, 0x26, 0x9f, 0x90, 0xcc, 0xab, 0x35, 0xef, 0x71, 0xca, 0x8e, 0x36, 0x8b}
+	binaryIDArray       = binary.ID{0x7a, 0x88, 0x3e, 0x09, 0xeb, 0xc7, 0x5c, 0x2c, 0x69, 0xc2, 0x9b, 0x9d, 0x3c, 0x5d, 0xdb, 0xe4, 0x3f, 0xc0, 0x7e, 0xc6}
+	binaryIDField       = binary.ID{0x8c, 0x54, 0x3d, 0x98, 0xc3, 0x7e, 0x38, 0xa8, 0xaa, 0x56, 0xbc, 0x84, 0x27, 0x49, 0x5d, 0x42, 0xdd, 0x21, 0x24, 0xf8}
+	binaryIDClass       = binary.ID{0xa0, 0x42, 0x57, 0x78, 0x68, 0xe1, 0x62, 0x2b, 0x82, 0x3d, 0x8f, 0x0d, 0x10, 0x21, 0xc8, 0x1c, 0x4e, 0x9d, 0x72, 0xb1}
+	binaryIDConstant    = binary.ID{0x59, 0x8d, 0x94, 0xa1, 0x34, 0xca, 0xee, 0xc8, 0xf0, 0x6f, 0xe9, 0xbf, 0xef, 0x7d, 0x40, 0x3a, 0x45, 0x6c, 0x01, 0xcb}
+	binaryIDConstantSet = binary.ID{0x28, 0x8f, 0x6c, 0x88, 0x31, 0xd1, 0x04, 0x52, 0xb7, 0x5a, 0x25, 0x83, 0x01, 0x4e, 0x9a, 0x7c, 0x53, 0x03, 0x32, 0x9e}
+	binaryIDInterface   = binary.ID{0x5d, 0x54, 0x46, 0x31, 0xe1, 0x59, 0x8f, 0x04, 0x50, 0x67, 0xc8, 0x39, 0x99, 0x11, 0x4d, 0xa8, 0x41, 0x17, 0x88, 0x12}
+	binaryIDMap         = binary.ID{0x20, 0xcc, 0x9a, 0x52, 0xde, 0x75, 0x5f, 0x16, 0x2b, 0x34, 0x8b, 0x33, 0xce, 0x18, 0x67, 0x9d, 0x85, 0x40, 0xb3, 0x64}
+	binaryIDPointer     = binary.ID{0x13, 0xa9, 0xd3, 0x11, 0xa1, 0x8d, 0xbd, 0x5b, 0x18, 0xe7, 0x9b, 0x43, 0x3b, 0xdf, 0xc5, 0x49, 0xc8, 0xa5, 0x35, 0xcf}
+	binaryIDPrimitive   = binary.ID{0x45, 0x4d, 0x9e, 0x7d, 0xe6, 0x4f, 0x50, 0x74, 0x95, 0x13, 0x60, 0xbd, 0xea, 0x00, 0x71, 0x93, 0x9e, 0x3e, 0xc2, 0x4e}
+	binaryIDSlice       = binary.ID{0x3b, 0x75, 0xee, 0x59, 0x18, 0x1a, 0x4d, 0x74, 0x50, 0xf2, 0x50, 0x7f, 0xf9, 0x4f, 0x79, 0x99, 0x38, 0x58, 0x96, 0xd2}
+	binaryIDStream      = binary.ID{0x06, 0xcf, 0x86, 0xd5, 0x04, 0xea, 0x12, 0xb1, 0xd7, 0x79, 0x5a, 0x46, 0x29, 0x55, 0xe1, 0x10, 0xa1, 0x8f, 0x6e, 0x43}
+	binaryIDStruct      = binary.ID{0xdf, 0xe3, 0x9e, 0xf2, 0x8e, 0x9c, 0xea, 0x9b, 0x93, 0x49, 0x47, 0x76, 0xef, 0x9d, 0xe2, 0x46, 0xd9, 0x68, 0x92, 0x94}
 )
 
 type binaryClassArray struct{}
@@ -317,62 +290,75 @@ func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassClass) Skip(d binary.Decoder) error { return doSkipClass(d) }
 
-type binaryClassInt16Constant struct{}
+type binaryClassConstant struct{}
 
-func (*Int16Constant) Class() binary.Class {
-	return (*binaryClassInt16Constant)(nil)
+func (*Constant) Class() binary.Class {
+	return (*binaryClassConstant)(nil)
 }
-func doEncodeInt16Constant(e binary.Encoder, o *Int16Constant) error {
+func doEncodeConstant(e binary.Encoder, o *Constant) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
-	if err := e.Int16(o.Value); err != nil {
+	if o.Value != nil {
+		var boxed binary.Object
+		boxed, err := any.Box(o.Value)
+		if err != nil {
+			return err
+		}
+		if err := e.Variant(boxed); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeInt16Constant(d binary.Decoder, o *Int16Constant) error {
+func doDecodeConstant(d binary.Decoder, o *Constant) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
 		o.Name = string(obj)
 	}
-	if obj, err := d.Int16(); err != nil {
+	if boxed, err := d.Variant(); err != nil {
 		return err
+	} else if boxed != nil {
+		if o.Value, err = any.Unbox(boxed); err != nil {
+			return err
+		}
 	} else {
-		o.Value = int16(obj)
+		o.Value = nil
 	}
 	return nil
 }
-func doSkipInt16Constant(d binary.Decoder) error {
+func doSkipConstant(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-	if _, err := d.Int16(); err != nil {
+	if _, err := d.SkipVariant(); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassInt16Constant) ID() binary.ID      { return binaryIDInt16Constant }
-func (*binaryClassInt16Constant) New() binary.Object { return &Int16Constant{} }
-func (*binaryClassInt16Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt16Constant(e, obj.(*Int16Constant))
+func (*binaryClassConstant) ID() binary.ID      { return binaryIDConstant }
+func (*binaryClassConstant) New() binary.Object { return &Constant{} }
+func (*binaryClassConstant) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeConstant(e, obj.(*Constant))
 }
-func (*binaryClassInt16Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int16Constant{}
-	return obj, doDecodeInt16Constant(d, obj)
+func (*binaryClassConstant) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Constant{}
+	return obj, doDecodeConstant(d, obj)
 }
-func (*binaryClassInt16Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt16Constant(d, obj.(*Int16Constant))
+func (*binaryClassConstant) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeConstant(d, obj.(*Constant))
 }
-func (*binaryClassInt16Constant) Skip(d binary.Decoder) error { return doSkipInt16Constant(d) }
+func (*binaryClassConstant) Skip(d binary.Decoder) error { return doSkipConstant(d) }
 
-type binaryClassInt16Constants struct{}
+type binaryClassConstantSet struct{}
 
-func (*Int16Constants) Class() binary.Class {
-	return (*binaryClassInt16Constants)(nil)
+func (*ConstantSet) Class() binary.Class {
+	return (*binaryClassConstantSet)(nil)
 }
-func doEncodeInt16Constants(e binary.Encoder, o *Int16Constants) error {
+func doEncodeConstantSet(e binary.Encoder, o *ConstantSet) error {
 	if o.Type != nil {
 		if err := e.Object(o.Type); err != nil {
 			return err
@@ -380,17 +366,17 @@ func doEncodeInt16Constants(e binary.Encoder, o *Int16Constants) error {
 	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
+	if err := e.Uint32(uint32(len(o.Entries))); err != nil {
 		return err
 	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
+	for i := range o.Entries {
+		if err := e.Value(&o.Entries[i]); err != nil {
 			return err
 		}
 	}
 	return nil
 }
-func doDecodeInt16Constants(d binary.Decoder, o *Int16Constants) error {
+func doDecodeConstantSet(d binary.Decoder, o *ConstantSet) error {
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -401,16 +387,16 @@ func doDecodeInt16Constants(d binary.Decoder, o *Int16Constants) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Values = make([]Int16Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
+		o.Entries = make([]Constant, count)
+		for i := range o.Entries {
+			if err := d.Value(&o.Entries[i]); err != nil {
 				return err
 			}
 		}
 	}
 	return nil
 }
-func doSkipInt16Constants(d binary.Decoder) error {
+func doSkipConstantSet(d binary.Decoder) error {
 	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
@@ -418,392 +404,26 @@ func doSkipInt16Constants(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Int16Constant)(nil)); err != nil {
+			if err := d.SkipValue((*Constant)(nil)); err != nil {
 				return err
 			}
 		}
 	}
 	return nil
 }
-func (*binaryClassInt16Constants) ID() binary.ID      { return binaryIDInt16Constants }
-func (*binaryClassInt16Constants) New() binary.Object { return &Int16Constants{} }
-func (*binaryClassInt16Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt16Constants(e, obj.(*Int16Constants))
+func (*binaryClassConstantSet) ID() binary.ID      { return binaryIDConstantSet }
+func (*binaryClassConstantSet) New() binary.Object { return &ConstantSet{} }
+func (*binaryClassConstantSet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeConstantSet(e, obj.(*ConstantSet))
 }
-func (*binaryClassInt16Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int16Constants{}
-	return obj, doDecodeInt16Constants(d, obj)
+func (*binaryClassConstantSet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ConstantSet{}
+	return obj, doDecodeConstantSet(d, obj)
 }
-func (*binaryClassInt16Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt16Constants(d, obj.(*Int16Constants))
+func (*binaryClassConstantSet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeConstantSet(d, obj.(*ConstantSet))
 }
-func (*binaryClassInt16Constants) Skip(d binary.Decoder) error { return doSkipInt16Constants(d) }
-
-type binaryClassInt32Constant struct{}
-
-func (*Int32Constant) Class() binary.Class {
-	return (*binaryClassInt32Constant)(nil)
-}
-func doEncodeInt32Constant(e binary.Encoder, o *Int32Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeInt32Constant(d binary.Decoder, o *Int32Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Value = int32(obj)
-	}
-	return nil
-}
-func doSkipInt32Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassInt32Constant) ID() binary.ID      { return binaryIDInt32Constant }
-func (*binaryClassInt32Constant) New() binary.Object { return &Int32Constant{} }
-func (*binaryClassInt32Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt32Constant(e, obj.(*Int32Constant))
-}
-func (*binaryClassInt32Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int32Constant{}
-	return obj, doDecodeInt32Constant(d, obj)
-}
-func (*binaryClassInt32Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt32Constant(d, obj.(*Int32Constant))
-}
-func (*binaryClassInt32Constant) Skip(d binary.Decoder) error { return doSkipInt32Constant(d) }
-
-type binaryClassInt32Constants struct{}
-
-func (*Int32Constants) Class() binary.Class {
-	return (*binaryClassInt32Constants)(nil)
-}
-func doEncodeInt32Constants(e binary.Encoder, o *Int32Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeInt32Constants(d binary.Decoder, o *Int32Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Int32Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipInt32Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Int32Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassInt32Constants) ID() binary.ID      { return binaryIDInt32Constants }
-func (*binaryClassInt32Constants) New() binary.Object { return &Int32Constants{} }
-func (*binaryClassInt32Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt32Constants(e, obj.(*Int32Constants))
-}
-func (*binaryClassInt32Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int32Constants{}
-	return obj, doDecodeInt32Constants(d, obj)
-}
-func (*binaryClassInt32Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt32Constants(d, obj.(*Int32Constants))
-}
-func (*binaryClassInt32Constants) Skip(d binary.Decoder) error { return doSkipInt32Constants(d) }
-
-type binaryClassInt64Constant struct{}
-
-func (*Int64Constant) Class() binary.Class {
-	return (*binaryClassInt64Constant)(nil)
-}
-func doEncodeInt64Constant(e binary.Encoder, o *Int64Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Int64(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeInt64Constant(d binary.Decoder, o *Int64Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Int64(); err != nil {
-		return err
-	} else {
-		o.Value = int64(obj)
-	}
-	return nil
-}
-func doSkipInt64Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Int64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassInt64Constant) ID() binary.ID      { return binaryIDInt64Constant }
-func (*binaryClassInt64Constant) New() binary.Object { return &Int64Constant{} }
-func (*binaryClassInt64Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt64Constant(e, obj.(*Int64Constant))
-}
-func (*binaryClassInt64Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int64Constant{}
-	return obj, doDecodeInt64Constant(d, obj)
-}
-func (*binaryClassInt64Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt64Constant(d, obj.(*Int64Constant))
-}
-func (*binaryClassInt64Constant) Skip(d binary.Decoder) error { return doSkipInt64Constant(d) }
-
-type binaryClassInt64Constants struct{}
-
-func (*Int64Constants) Class() binary.Class {
-	return (*binaryClassInt64Constants)(nil)
-}
-func doEncodeInt64Constants(e binary.Encoder, o *Int64Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeInt64Constants(d binary.Decoder, o *Int64Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Int64Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipInt64Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Int64Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassInt64Constants) ID() binary.ID      { return binaryIDInt64Constants }
-func (*binaryClassInt64Constants) New() binary.Object { return &Int64Constants{} }
-func (*binaryClassInt64Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt64Constants(e, obj.(*Int64Constants))
-}
-func (*binaryClassInt64Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int64Constants{}
-	return obj, doDecodeInt64Constants(d, obj)
-}
-func (*binaryClassInt64Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt64Constants(d, obj.(*Int64Constants))
-}
-func (*binaryClassInt64Constants) Skip(d binary.Decoder) error { return doSkipInt64Constants(d) }
-
-type binaryClassInt8Constant struct{}
-
-func (*Int8Constant) Class() binary.Class {
-	return (*binaryClassInt8Constant)(nil)
-}
-func doEncodeInt8Constant(e binary.Encoder, o *Int8Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Int8(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeInt8Constant(d binary.Decoder, o *Int8Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Int8(); err != nil {
-		return err
-	} else {
-		o.Value = int8(obj)
-	}
-	return nil
-}
-func doSkipInt8Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Int8(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassInt8Constant) ID() binary.ID      { return binaryIDInt8Constant }
-func (*binaryClassInt8Constant) New() binary.Object { return &Int8Constant{} }
-func (*binaryClassInt8Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt8Constant(e, obj.(*Int8Constant))
-}
-func (*binaryClassInt8Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int8Constant{}
-	return obj, doDecodeInt8Constant(d, obj)
-}
-func (*binaryClassInt8Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt8Constant(d, obj.(*Int8Constant))
-}
-func (*binaryClassInt8Constant) Skip(d binary.Decoder) error { return doSkipInt8Constant(d) }
-
-type binaryClassInt8Constants struct{}
-
-func (*Int8Constants) Class() binary.Class {
-	return (*binaryClassInt8Constants)(nil)
-}
-func doEncodeInt8Constants(e binary.Encoder, o *Int8Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeInt8Constants(d binary.Decoder, o *Int8Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Int8Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipInt8Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Int8Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassInt8Constants) ID() binary.ID      { return binaryIDInt8Constants }
-func (*binaryClassInt8Constants) New() binary.Object { return &Int8Constants{} }
-func (*binaryClassInt8Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeInt8Constants(e, obj.(*Int8Constants))
-}
-func (*binaryClassInt8Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Int8Constants{}
-	return obj, doDecodeInt8Constants(d, obj)
-}
-func (*binaryClassInt8Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeInt8Constants(d, obj.(*Int8Constants))
-}
-func (*binaryClassInt8Constants) Skip(d binary.Decoder) error { return doSkipInt8Constants(d) }
+func (*binaryClassConstantSet) Skip(d binary.Decoder) error { return doSkipConstantSet(d) }
 
 type binaryClassInterface struct{}
 
@@ -1173,491 +793,3 @@ func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeStruct(d, obj.(*Struct))
 }
 func (*binaryClassStruct) Skip(d binary.Decoder) error { return doSkipStruct(d) }
-
-type binaryClassUint16Constant struct{}
-
-func (*Uint16Constant) Class() binary.Class {
-	return (*binaryClassUint16Constant)(nil)
-}
-func doEncodeUint16Constant(e binary.Encoder, o *Uint16Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Uint16(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUint16Constant(d binary.Decoder, o *Uint16Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Uint16(); err != nil {
-		return err
-	} else {
-		o.Value = uint16(obj)
-	}
-	return nil
-}
-func doSkipUint16Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint16(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUint16Constant) ID() binary.ID      { return binaryIDUint16Constant }
-func (*binaryClassUint16Constant) New() binary.Object { return &Uint16Constant{} }
-func (*binaryClassUint16Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint16Constant(e, obj.(*Uint16Constant))
-}
-func (*binaryClassUint16Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint16Constant{}
-	return obj, doDecodeUint16Constant(d, obj)
-}
-func (*binaryClassUint16Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint16Constant(d, obj.(*Uint16Constant))
-}
-func (*binaryClassUint16Constant) Skip(d binary.Decoder) error { return doSkipUint16Constant(d) }
-
-type binaryClassUint16Constants struct{}
-
-func (*Uint16Constants) Class() binary.Class {
-	return (*binaryClassUint16Constants)(nil)
-}
-func doEncodeUint16Constants(e binary.Encoder, o *Uint16Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeUint16Constants(d binary.Decoder, o *Uint16Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Uint16Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipUint16Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Uint16Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassUint16Constants) ID() binary.ID      { return binaryIDUint16Constants }
-func (*binaryClassUint16Constants) New() binary.Object { return &Uint16Constants{} }
-func (*binaryClassUint16Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint16Constants(e, obj.(*Uint16Constants))
-}
-func (*binaryClassUint16Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint16Constants{}
-	return obj, doDecodeUint16Constants(d, obj)
-}
-func (*binaryClassUint16Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint16Constants(d, obj.(*Uint16Constants))
-}
-func (*binaryClassUint16Constants) Skip(d binary.Decoder) error { return doSkipUint16Constants(d) }
-
-type binaryClassUint32Constant struct{}
-
-func (*Uint32Constant) Class() binary.Class {
-	return (*binaryClassUint32Constant)(nil)
-}
-func doEncodeUint32Constant(e binary.Encoder, o *Uint32Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUint32Constant(d binary.Decoder, o *Uint32Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Value = uint32(obj)
-	}
-	return nil
-}
-func doSkipUint32Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUint32Constant) ID() binary.ID      { return binaryIDUint32Constant }
-func (*binaryClassUint32Constant) New() binary.Object { return &Uint32Constant{} }
-func (*binaryClassUint32Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint32Constant(e, obj.(*Uint32Constant))
-}
-func (*binaryClassUint32Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint32Constant{}
-	return obj, doDecodeUint32Constant(d, obj)
-}
-func (*binaryClassUint32Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint32Constant(d, obj.(*Uint32Constant))
-}
-func (*binaryClassUint32Constant) Skip(d binary.Decoder) error { return doSkipUint32Constant(d) }
-
-type binaryClassUint32Constants struct{}
-
-func (*Uint32Constants) Class() binary.Class {
-	return (*binaryClassUint32Constants)(nil)
-}
-func doEncodeUint32Constants(e binary.Encoder, o *Uint32Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeUint32Constants(d binary.Decoder, o *Uint32Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Uint32Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipUint32Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Uint32Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassUint32Constants) ID() binary.ID      { return binaryIDUint32Constants }
-func (*binaryClassUint32Constants) New() binary.Object { return &Uint32Constants{} }
-func (*binaryClassUint32Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint32Constants(e, obj.(*Uint32Constants))
-}
-func (*binaryClassUint32Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint32Constants{}
-	return obj, doDecodeUint32Constants(d, obj)
-}
-func (*binaryClassUint32Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint32Constants(d, obj.(*Uint32Constants))
-}
-func (*binaryClassUint32Constants) Skip(d binary.Decoder) error { return doSkipUint32Constants(d) }
-
-type binaryClassUint64Constant struct{}
-
-func (*Uint64Constant) Class() binary.Class {
-	return (*binaryClassUint64Constant)(nil)
-}
-func doEncodeUint64Constant(e binary.Encoder, o *Uint64Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUint64Constant(d binary.Decoder, o *Uint64Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Value = uint64(obj)
-	}
-	return nil
-}
-func doSkipUint64Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUint64Constant) ID() binary.ID      { return binaryIDUint64Constant }
-func (*binaryClassUint64Constant) New() binary.Object { return &Uint64Constant{} }
-func (*binaryClassUint64Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint64Constant(e, obj.(*Uint64Constant))
-}
-func (*binaryClassUint64Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint64Constant{}
-	return obj, doDecodeUint64Constant(d, obj)
-}
-func (*binaryClassUint64Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint64Constant(d, obj.(*Uint64Constant))
-}
-func (*binaryClassUint64Constant) Skip(d binary.Decoder) error { return doSkipUint64Constant(d) }
-
-type binaryClassUint64Constants struct{}
-
-func (*Uint64Constants) Class() binary.Class {
-	return (*binaryClassUint64Constants)(nil)
-}
-func doEncodeUint64Constants(e binary.Encoder, o *Uint64Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeUint64Constants(d binary.Decoder, o *Uint64Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Uint64Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipUint64Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Uint64Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassUint64Constants) ID() binary.ID      { return binaryIDUint64Constants }
-func (*binaryClassUint64Constants) New() binary.Object { return &Uint64Constants{} }
-func (*binaryClassUint64Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint64Constants(e, obj.(*Uint64Constants))
-}
-func (*binaryClassUint64Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint64Constants{}
-	return obj, doDecodeUint64Constants(d, obj)
-}
-func (*binaryClassUint64Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint64Constants(d, obj.(*Uint64Constants))
-}
-func (*binaryClassUint64Constants) Skip(d binary.Decoder) error { return doSkipUint64Constants(d) }
-
-type binaryClassUint8Constant struct{}
-
-func (*Uint8Constant) Class() binary.Class {
-	return (*binaryClassUint8Constant)(nil)
-}
-func doEncodeUint8Constant(e binary.Encoder, o *Uint8Constant) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Uint8(o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUint8Constant(d binary.Decoder, o *Uint8Constant) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Uint8(); err != nil {
-		return err
-	} else {
-		o.Value = uint8(obj)
-	}
-	return nil
-}
-func doSkipUint8Constant(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint8(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUint8Constant) ID() binary.ID      { return binaryIDUint8Constant }
-func (*binaryClassUint8Constant) New() binary.Object { return &Uint8Constant{} }
-func (*binaryClassUint8Constant) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint8Constant(e, obj.(*Uint8Constant))
-}
-func (*binaryClassUint8Constant) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint8Constant{}
-	return obj, doDecodeUint8Constant(d, obj)
-}
-func (*binaryClassUint8Constant) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint8Constant(d, obj.(*Uint8Constant))
-}
-func (*binaryClassUint8Constant) Skip(d binary.Decoder) error { return doSkipUint8Constant(d) }
-
-type binaryClassUint8Constants struct{}
-
-func (*Uint8Constants) Class() binary.Class {
-	return (*binaryClassUint8Constants)(nil)
-}
-func doEncodeUint8Constants(e binary.Encoder, o *Uint8Constants) error {
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Values))); err != nil {
-		return err
-	}
-	for i := range o.Values {
-		if err := e.Value(&o.Values[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeUint8Constants(d binary.Decoder, o *Uint8Constants) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(Type)
-	} else {
-		o.Type = nil
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Values = make([]Uint8Constant, count)
-		for i := range o.Values {
-			if err := d.Value(&o.Values[i]); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func doSkipUint8Constants(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*Uint8Constant)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassUint8Constants) ID() binary.ID      { return binaryIDUint8Constants }
-func (*binaryClassUint8Constants) New() binary.Object { return &Uint8Constants{} }
-func (*binaryClassUint8Constants) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUint8Constants(e, obj.(*Uint8Constants))
-}
-func (*binaryClassUint8Constants) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uint8Constants{}
-	return obj, doDecodeUint8Constants(d, obj)
-}
-func (*binaryClassUint8Constants) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUint8Constants(d, obj.(*Uint8Constants))
-}
-func (*binaryClassUint8Constants) Skip(d binary.Decoder) error { return doSkipUint8Constants(d) }
