@@ -9,6 +9,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -219,6 +220,19 @@ func (i ImageFormat) IsFloat32() bool          { return i == ImageFormatFloat32 
 func (i TimingMask) IsTimingPerCommand() bool  { return i == TimingMaskTimingPerCommand }
 func (i TimingMask) IsTimingPerDrawCall() bool { return i == TimingMaskTimingPerDrawCall }
 func (i TimingMask) IsTimingPerFrame() bool    { return i == TimingMaskTimingPerFrame }
+
+func CreateSchema(
+	Classes []*schema.Class,
+	Constants []schema.ConstantSet,
+) *Schema {
+	return &Schema{
+		Classes:   Classes,
+		Constants: Constants,
+	}
+}
+
+func (c *Schema) GetClasses() []*schema.Class        { return c.Classes }
+func (c *Schema) GetConstants() []schema.ConstantSet { return c.Constants }
 
 func CreateDevice(
 	Name string,

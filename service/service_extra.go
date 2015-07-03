@@ -8,7 +8,6 @@ package service
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -21,7 +20,7 @@ type callGetSchema struct {
 // Result GetSchema
 type resultGetSchema struct {
 	binary.Generate
-	value []*schema.Class
+	value Schema
 }
 
 // Call Import
