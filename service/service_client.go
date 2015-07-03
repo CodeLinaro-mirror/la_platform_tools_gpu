@@ -155,6 +155,16 @@ func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
 	return
 }
 
+func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
+	var val interface{}
+	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {
+		res = val.(*resultSet).value
+	} else {
+		log.Errorf(l, "RPC Set failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) ResolveAtomStream(id AtomStreamId, l log.Logger) (res AtomStream, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveAtomStream{id: id}); err == nil {

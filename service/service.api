@@ -109,8 +109,14 @@ cmd CaptureId ReplaceAtom(CaptureId capture,
                           atom.Atom atom)
 { return ? }
 
-// Get resolves and returns the object, value or memory with the path p.
+// Get resolves and returns the object, value or memory at the path p.
 cmd any Get(path.Path p)
+{ return ? }
+
+// Set creates a copy of the capture referenced by p, but with the object, value
+// or memory at p replaced with v. The path returned is identical to p, but with
+// the base changed to refer to the new capture.
+cmd path.Path Set(path.Path p, any v)
 { return ? }
 
 cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
