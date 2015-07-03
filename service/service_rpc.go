@@ -25,7 +25,7 @@ type RPC interface {
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
-	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
+	ReplaceAtom(capture CaptureId, atomId uint64, atom atom.Atom, l log.Logger) (CaptureId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
@@ -176,7 +176,7 @@ type Binary struct {
 // Class AtomStream
 type AtomStream struct {
 	binary.Generate
-	Data []uint8
+	Atoms []atom.Atom
 }
 
 // Class Hierarchy

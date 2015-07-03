@@ -15,7 +15,6 @@
 package client
 
 import (
-	"bytes"
 	"fmt"
 	"image"
 	"net"
@@ -25,10 +24,9 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
@@ -67,7 +65,7 @@ type ApplicationContext struct {
 	onReportUpdated     gxui.Event
 	onStateUpdated      gxui.Event
 	onTimingInfoUpdated gxui.Event
-	atoms               []Atom
+	atoms               []atom.Atom
 	state               *schema.Object
 	hierarchy           atom.Group
 	report              service.Report
@@ -259,20 +257,16 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			return
 		}
 
-		atoms, err := c.rpc.ResolveAtomStream(capture.Atoms, l)
+		atomStream, err := c.rpc.ResolveAtomStream(capture.Atoms, l)
 		if err != nil {
 			log.Errorf(l, "Error resolving capture: %v", err)
 			return
 		}
 
 		c.Run(func() {
-			atoms, err := c.DecodeAtoms(atoms)
-			if err != nil {
-				panic(err)
-			}
 			c.captureID = captureID
 			c.capture = capture
-			c.atoms = atoms
+			c.atoms = atomStream.Atoms
 			if resetSelected {
 				c.selectedAtomID = InvalidAtomID
 				c.selectedPointer = memory.Pointer{}
@@ -280,7 +274,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 			}
 			c.onAtomsUpdated.Fire()
 			c.RequestReplay()
-			log.Infof(l, "Capture '%s' loaded: %d atoms", c.capture.GetName(), len(atoms))
+			log.Infof(l, "Capture '%s' loaded: %d atoms", c.capture.GetName(), len(c.atoms))
 		})
 	}()
 }
@@ -377,7 +371,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 		return nil
 	}
 
-	apiID := c.atoms[after].Api()
+	apiID := service.ApiId{ID: binary.ID(c.atoms[after].API())}
 
 	go func() {
 		imageID, err := c.rpc.GetFramebufferColor(device, captureID, apiID, uint64(after), settings, l)
@@ -460,18 +454,9 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint
 	return cancel
 }
 
-func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID) {
+func (c *ApplicationContext) ReplaceAtom(a atom.Atom, id atom.ID) {
 	l := c.logger.Enter("ReplaceAtom")
-	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	err := enc.Value(a.object)
-	if err != nil {
-		panic(err)
-	}
-	b := service.Binary{
-		Data: buf.Bytes(),
-	}
-	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), b, l)
+	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a, l)
 	if err != nil {
 		panic(err)
 	}
@@ -484,7 +469,7 @@ func (c *ApplicationContext) Rpc() service.RPC                           { retur
 func (c *ApplicationContext) DropDownOverlay() gxui.BubbleOverlay        { return c.dropDownOverlay }
 func (c *ApplicationContext) ToolTipOverlay() gxui.BubbleOverlay         { return c.toolTipOverlay }
 func (c *ApplicationContext) ToolTipController() *gxui.ToolTipController { return c.toolTipController }
-func (c *ApplicationContext) Atoms() []Atom                              { return c.atoms }
+func (c *ApplicationContext) Atoms() []atom.Atom                         { return c.atoms }
 func (c *ApplicationContext) Hierarchy() atom.Group                      { return c.hierarchy }
 
 //func (c *ApplicationContext) State() schema.Struct                       { return c.state }

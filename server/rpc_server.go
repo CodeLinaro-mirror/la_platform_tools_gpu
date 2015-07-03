@@ -223,13 +223,13 @@ func (s rpcServer) PrerenderFramebuffers(
 func (s rpcServer) ReplaceAtom(
 	capture service.CaptureId,
 	atomID uint64,
-	data service.Binary,
+	value atom.Atom,
 	l log.Logger) (service.CaptureId, error) {
 
 	id, err := database.Store(&builder.ReplaceAtom{
 		Capture: capture,
-		Atom:    atom.ID(atomID),
-		Data:    data,
+		AtomID:  atom.ID(atomID),
+		Value:   value,
 	}, s.Database, l)
 	return service.CaptureId{ID: id}, err
 }

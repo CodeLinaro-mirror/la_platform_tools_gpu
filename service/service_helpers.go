@@ -87,8 +87,8 @@ func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callReplaceAtom) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ReplaceAtom(capture: %v, atomId: %v, data: %v)",
-		c.capture, c.atomId, c.data,
+	fmt.Fprintf(f, "ReplaceAtom(capture: %v, atomId: %v, atom: %v)",
+		c.capture, c.atomId, c.atom,
 	)
 }
 func (r resultReplaceAtom) Format(f fmt.State, c rune) {
@@ -313,14 +313,14 @@ func CreateBinary(
 func (c *Binary) GetData() []uint8 { return c.Data }
 
 func CreateAtomStream(
-	Data []uint8,
+	Atoms []atom.Atom,
 ) *AtomStream {
 	return &AtomStream{
-		Data: Data,
+		Atoms: Atoms,
 	}
 }
 
-func (c *AtomStream) GetData() []uint8 { return c.Data }
+func (c *AtomStream) GetAtoms() []atom.Atom { return c.Atoms }
 
 func CreateHierarchy(
 	Root atom.Group,

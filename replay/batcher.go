@@ -81,10 +81,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}
 
-	atoms, err := stream.List()
-	if err != nil {
-		return err
-	}
+	atoms := stream.Atoms
 
 	td := b.device.Info()
 

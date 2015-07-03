@@ -82,7 +82,7 @@ func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, 
 	return tb
 }
 
-func createIntField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+func createIntField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	_, v := a.Field(argIdx)
 	ty := reflect.TypeOf(v)
 	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
@@ -99,7 +99,7 @@ func createIntField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext
 	})
 }
 
-func createUintField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+func createUintField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	_, v := a.Field(argIdx)
 	ty := reflect.TypeOf(v)
 	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
@@ -116,7 +116,7 @@ func createUintField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContex
 	})
 }
 
-func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
+func createFloatField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	_, v := a.Field(argIdx)
 	ty := reflect.TypeOf(v)
 	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
@@ -135,7 +135,7 @@ func createFloatField(t gxui.Theme, a Atom, argIdx int, appCtx *ApplicationConte
 
 func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
 	atomPath := appCtx.CaptureID().Path().Atoms().Index(uint64(id))
-	a := appCtx.Atoms()[id]
+	a := appCtx.Atoms()[id].(*Atom)
 	active := true
 
 	ll := t.CreateLinearLayout()
@@ -157,7 +157,7 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 		//})
 	}
 
-	nameLbl := CreateLabel(t, a.DisplayName(), COMMAND_COLOR, active)
+	nameLbl := CreateLabel(t, atom.MetadataOf(a).DisplayName, COMMAND_COLOR, active)
 	ll.AddChild(nameLbl)
 
 	ll.AddChild(CreateLabel(t, "(", CODE_COLOR, active))

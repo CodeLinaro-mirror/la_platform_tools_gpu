@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
@@ -283,7 +284,7 @@ func DoReplay(appCtx *ApplicationContext) {
 	}
 
 	atom := appCtx.Atoms()[atomID]
-	apiID := atom.Api()
+	apiID := service.ApiId{ID: binary.ID(atom.API())}
 
 	go func() {
 		l := appCtx.Logger().Fork().Enter("Replay: color-buffer")
