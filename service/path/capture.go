@@ -26,9 +26,17 @@ type Capture struct {
 	ID binary.ID // The capture's unique identifier.
 }
 
+// String returns the string representation of the path.
+func (c *Capture) String() string { return c.Path() }
+
 // Path implements the Path interface.
 func (c *Capture) Path() string {
 	return fmt.Sprintf("Capture(%v)", c.ID)
+}
+
+// Base implements the Path interface, returning nil as this is a root.
+func (c *Capture) Base() Path {
+	return nil
 }
 
 // Atoms returns the path to the full list of atoms in the capture.

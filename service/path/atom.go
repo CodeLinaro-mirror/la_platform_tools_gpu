@@ -27,9 +27,17 @@ type Atom struct {
 	Index uint64 // The index of the atom in the array.
 }
 
+// String returns the string representation of the path.
+func (n *Atom) String() string { return n.Path() }
+
 // Path implements the Path interface.
 func (n *Atom) Path() string {
 	return fmt.Sprintf("%v[%d]", n.Atoms, n.Index)
+}
+
+// Base implements the Path interface, returning the path to the atom list.
+func (n *Atom) Base() Path {
+	return n.Atoms
 }
 
 // Field implements the Value interface.
