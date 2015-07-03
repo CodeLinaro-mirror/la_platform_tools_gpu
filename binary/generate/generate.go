@@ -103,7 +103,6 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Class: schema.Class{
 		Name:    n.Name(),
-		Display: n.Name(),
 		Package: pkg.Name(),
 	}}
 	tagged := false
@@ -115,10 +114,6 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 			!tag.Flag("disable") {
 			tagged = true
 			s.IDName = tag.Get("id")
-			display := tag.Get("display")
-			if display != "" {
-				s.Display = display
-			}
 			continue
 		}
 		f := schema.Field{}

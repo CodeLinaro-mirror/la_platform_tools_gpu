@@ -31,7 +31,7 @@ func init() {
 var (
 	binaryIDRange        = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
 	binaryIDGroup        = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
-	binaryIDMetadata     = binary.ID{0xc7, 0xfa, 0xce, 0x34, 0xb2, 0x08, 0x05, 0xa4, 0x74, 0xef, 0xd6, 0x20, 0x87, 0x57, 0xa8, 0x1e, 0x56, 0x01, 0x8b, 0x55}
+	binaryIDMetadata     = binary.ID{0x11, 0xf7, 0x6e, 0xcd, 0x84, 0x4a, 0x7f, 0xdf, 0xb8, 0xfb, 0xa3, 0xaa, 0xcf, 0x30, 0xf3, 0xdd, 0x7f, 0x15, 0x2a, 0x08}
 	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
 	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
 	binaryIDResource     = binary.ID{0xdd, 0xe2, 0x00, 0x18, 0x25, 0x45, 0x71, 0xb9, 0xdb, 0x6f, 0xed, 0x39, 0xdd, 0x8e, 0x71, 0x4b, 0xf6, 0x76, 0x26, 0xce}
@@ -93,7 +93,6 @@ var schemaRange = &schema.Class{
 	TypeID:  binaryIDRange,
 	Package: "atom",
 	Name:    "Range",
-	Display: "Range",
 	Fields: []schema.Field{
 		{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
 		{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
@@ -180,7 +179,6 @@ var schemaGroup = &schema.Class{
 	TypeID:  binaryIDGroup,
 	Package: "atom",
 	Name:    "Group",
-	Display: "Group",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "Range", ID: (*Range)(nil).Class().ID()}},
@@ -197,6 +195,9 @@ func doEncodeMetadata(e binary.Encoder, o *Metadata) error {
 	if err := e.ID(o.Api); err != nil {
 		return err
 	}
+	if err := e.String(o.DisplayName); err != nil {
+		return err
+	}
 	if err := e.Uint32(uint32(o.Flags)); err != nil {
 		return err
 	}
@@ -210,6 +211,11 @@ func doDecodeMetadata(d binary.Decoder, o *Metadata) error {
 		return err
 	} else {
 		o.Api = binary.ID(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.DisplayName = string(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -225,6 +231,9 @@ func doDecodeMetadata(d binary.Decoder, o *Metadata) error {
 }
 func doSkipMetadata(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -254,9 +263,9 @@ var schemaMetadata = &schema.Class{
 	TypeID:  binaryIDMetadata,
 	Package: "atom",
 	Name:    "Metadata",
-	Display: "Metadata",
 	Fields: []schema.Field{
 		{Declared: "Api", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "DisplayName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Flags", Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32}},
 		{Declared: "DocumentationUrl", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -315,7 +324,6 @@ var schemaObservation = &schema.Class{
 	TypeID:  binaryIDObservation,
 	Package: "atom",
 	Name:    "Observation",
-	Display: "Observation",
 	Fields: []schema.Field{
 		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
@@ -409,7 +417,6 @@ var schemaObservations = &schema.Class{
 	TypeID:  binaryIDObservations,
 	Package: "atom",
 	Name:    "Observations",
-	Display: "Observations",
 	Fields: []schema.Field{
 		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation", ID: (*Observation)(nil).Class().ID()}}},
 		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation", ID: (*Observation)(nil).Class().ID()}}},
@@ -481,7 +488,6 @@ var schemaResource = &schema.Class{
 	TypeID:  binaryIDResource,
 	Package: "atom",
 	Name:    "Resource",
-	Display: "Resource",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
@@ -545,7 +551,6 @@ var schemastream = &schema.Class{
 	TypeID:  binaryIDstream,
 	Package: "atom",
 	Name:    "stream",
-	Display: "stream",
 	Fields: []schema.Field{
 		{Declared: "Atoms", Type: &schema.Stream{Alias: "", ValueType: &schema.Interface{Name: "Atom"}}},
 	},
