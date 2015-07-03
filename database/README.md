@@ -10,10 +10,17 @@ Package database implements the persistence layer for the gpu debugger tools.
 var Namespace = registry.NewNamespace()
 ```
 
+#### func  Build
+
+```go
+func Build(lazy Lazy, d Database, l log.Logger) (interface{}, error)
+```
+Build stores lazy into d, and then resolves and returns the lazy-built object.
+
 #### func  Hash
 
 ```go
-func Hash(o binary.Object) (binary.ID, error)
+func Hash(v interface{}) (binary.ID, error)
 ```
 Hash returns a unique binary.ID based on the contents of the object. Two objects
 of identical content will return the same ID, and the probability of two objects
@@ -40,10 +47,10 @@ Resolve blob loads a Blob from the database, returning the byte slice.
 #### func  Store
 
 ```go
-func Store(obj binary.Object, d Database, l log.Logger) (binary.ID, error)
+func Store(v interface{}, d Database, l log.Logger) (binary.ID, error)
 ```
-Store is a helper that stores an object to the database with the id calculated
-by the Hash function.
+Store is a helper that stores v to the database with the id calculated by the
+Hash function.
 
 #### func  StoreBlob
 
@@ -74,12 +81,12 @@ func (*Blob) Class() binary.Class
 
 ```go
 type Database interface {
-	// Store adds a key value pair to the database.
+	// Store adds a key-value pair to the database.
 	// It is an error if the id is already mapped to an object.
-	Store(binary.ID, binary.Object, log.Logger) error
+	Store(binary.ID, interface{}, log.Logger) error
 	// Resolve attempts to resolve the final value associated with an id.
 	// It will traverse all Lazy objects, blocking until they are ready.
-	Resolve(binary.ID, log.Logger) (binary.Object, error)
+	Resolve(binary.ID, log.Logger) (interface{}, error)
 	// Containts returns true if the database has an entry for the specified id.
 	Contains(binary.ID, log.Logger) bool
 }
@@ -102,7 +109,7 @@ type Lazy interface {
 
 	// BuildLazy constructs and returns the lazily-built object.
 	// c is the build context that was passed to the database constructor.
-	BuildLazy(c interface{}, d Database, l log.Logger) (binary.Object, error)
+	BuildLazy(c interface{}, d Database, l log.Logger) (interface{}, error)
 }
 ```
 

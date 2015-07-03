@@ -18,14 +18,13 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // BuildLazy returns a new *service.Capture, with a single atom replaced.
-func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	original, err := service.ResolveCapture(request.Capture, d, l)
 	if err != nil {
 		return nil, err

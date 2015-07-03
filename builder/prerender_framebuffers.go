@@ -18,7 +18,6 @@ import (
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -26,7 +25,7 @@ import (
 
 // BuildLazy renders and caches all the framebuffer color buffers in the
 // GetFramebufferDepth request, returning an empty *service.Binary.
-func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l log.Logger) (binary.Object, error) {
+func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	renderSettings := service.RenderSettings{
 		MaxWidth:  r.Width,
 		MaxHeight: r.Height,

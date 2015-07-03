@@ -33,7 +33,7 @@ type Lazy interface {
 
 	// BuildLazy constructs and returns the lazily-built object.
 	// c is the build context that was passed to the database constructor.
-	BuildLazy(c interface{}, d Database, l log.Logger) (binary.Object, error)
+	BuildLazy(c interface{}, d Database, l log.Logger) (interface{}, error)
 }
 
 // LazyOutputID returns the identifier of a LazyOutput object given the

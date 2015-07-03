@@ -103,7 +103,7 @@ type TimingInfoId struct {
 	binary.Generate
 	ID binary.ID
 }
-type State binary.Object
+type State interface{}
 
 // Enum Severity
 type Severity int
