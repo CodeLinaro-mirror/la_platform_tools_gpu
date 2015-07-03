@@ -372,8 +372,18 @@ var schema{{.Name}} = &schema.Class{
 
 {{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
 const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
+
 var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Entries}}
 	{{.Value}}: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}],{{end}}
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: {{Call "Go.Schema" .Type}}, {{if len .Entries}}{{$c.Set 0}}
+		Entries: []schema.Constant{
+			{{range .Entries}}{Name: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}], Value: {{printf "%T" .Value}}({{.Value}})},
+		{{end}}},
+	{{end}}})
 }
 
 func (v {{$name}}) String() string {
@@ -419,9 +429,11 @@ var (
 {{range .Structs}} {{template "Go.Class" .}}
 {{end}}
 
+{{if and (Directive "Schema" true) (len .Constants)}}
+var ConstantValues schema.Constants
 {{range .Constants}}{{template "Go.Constants" .}}
 {{end}}
-{{end}}
+{{end}}{{end}}
 `
 const java_tmpl_file = `java.tmpl`
 const java_tmpl = `{{/*

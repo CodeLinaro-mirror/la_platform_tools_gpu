@@ -1283,12 +1283,25 @@ var schemaresultUseResource = &schema.Class{
 	Fields:  []schema.Field{},
 }
 
+var ConstantValues schema.Constants
+
 const _Enum_name = "OneTwoThree"
 
 var _Enum_map = map[Enum]string{
 	1: _Enum_name[0:3],
 	2: _Enum_name[3:6],
 	3: _Enum_name[6:11],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Enum", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _Enum_name[0:3], Value: int32(1)},
+			{Name: _Enum_name[3:6], Value: int32(2)},
+			{Name: _Enum_name[6:11], Value: int32(3)},
+		},
+	})
 }
 
 func (v Enum) String() string {

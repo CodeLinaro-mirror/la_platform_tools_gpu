@@ -27847,6 +27847,8 @@ var schemaWglSwapBuffers = &schema.Class{
 	},
 }
 
+var ConstantValues schema.Constants
+
 const _ArrayType_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_POINT_SIZE_ARRAY_OES"
 
 var _ArrayType_map = map[ArrayType]string{
@@ -27855,6 +27857,19 @@ var _ArrayType_map = map[ArrayType]string{
 	32886: _ArrayType_name[30:44],
 	32888: _ArrayType_name[44:66],
 	35740: _ArrayType_name[66:89],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ArrayType_name[0:15], Value: uint32(32884)},
+			{Name: _ArrayType_name[15:30], Value: uint32(32885)},
+			{Name: _ArrayType_name[30:44], Value: uint32(32886)},
+			{Name: _ArrayType_name[44:66], Value: uint32(32888)},
+			{Name: _ArrayType_name[66:89], Value: uint32(35740)},
+		},
+	})
 }
 
 func (v ArrayType) String() string {
@@ -27883,6 +27898,18 @@ var _ArrayType_GLES_1_1_map = map[ArrayType_GLES_1_1]string{
 	32888: _ArrayType_GLES_1_1_name[44:66],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ArrayType_GLES_1_1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ArrayType_GLES_1_1_name[0:15], Value: uint32(32884)},
+			{Name: _ArrayType_GLES_1_1_name[15:30], Value: uint32(32885)},
+			{Name: _ArrayType_GLES_1_1_name[30:44], Value: uint32(32886)},
+			{Name: _ArrayType_GLES_1_1_name[44:66], Value: uint32(32888)},
+		},
+	})
+}
+
 func (v ArrayType_GLES_1_1) String() string {
 	if s, ok := _ArrayType_GLES_1_1_map[v]; ok {
 		return s
@@ -27904,6 +27931,15 @@ const _ArrayType_OES_point_size_array_name = "GL_POINT_SIZE_ARRAY_OES"
 
 var _ArrayType_OES_point_size_array_map = map[ArrayType_OES_point_size_array]string{
 	35740: _ArrayType_OES_point_size_array_name[0:23],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ArrayType_OES_point_size_array", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ArrayType_OES_point_size_array_name[0:23], Value: uint32(35740)},
+		},
+	})
 }
 
 func (v ArrayType_OES_point_size_array) String() string {
@@ -27931,6 +27967,17 @@ var _BaseTexelFormat_map = map[BaseTexelFormat]string{
 	6408: _BaseTexelFormat_name[14:21],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BaseTexelFormat_name[0:8], Value: uint32(6406)},
+			{Name: _BaseTexelFormat_name[8:14], Value: uint32(6407)},
+			{Name: _BaseTexelFormat_name[14:21], Value: uint32(6408)},
+		},
+	})
+}
+
 func (v BaseTexelFormat) String() string {
 	if s, ok := _BaseTexelFormat_map[v]; ok {
 		return s
@@ -27954,6 +28001,17 @@ var _BlendEquation_map = map[BlendEquation]string{
 	32774: _BlendEquation_name[0:11],
 	32778: _BlendEquation_name[11:27],
 	32779: _BlendEquation_name[27:51],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BlendEquation_name[0:11], Value: uint32(32774)},
+			{Name: _BlendEquation_name[11:27], Value: uint32(32778)},
+			{Name: _BlendEquation_name[27:51], Value: uint32(32779)},
+		},
+	})
 }
 
 func (v BlendEquation) String() string {
@@ -27993,6 +28051,29 @@ var _BlendFactor_map = map[BlendFactor]string{
 	32772: _BlendFactor_name[231:258],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BlendFactor_name[0:7], Value: uint32(0)},
+			{Name: _BlendFactor_name[7:13], Value: uint32(1)},
+			{Name: _BlendFactor_name[13:25], Value: uint32(768)},
+			{Name: _BlendFactor_name[25:47], Value: uint32(769)},
+			{Name: _BlendFactor_name[47:59], Value: uint32(770)},
+			{Name: _BlendFactor_name[59:81], Value: uint32(771)},
+			{Name: _BlendFactor_name[81:93], Value: uint32(772)},
+			{Name: _BlendFactor_name[93:115], Value: uint32(773)},
+			{Name: _BlendFactor_name[115:127], Value: uint32(774)},
+			{Name: _BlendFactor_name[127:149], Value: uint32(775)},
+			{Name: _BlendFactor_name[149:170], Value: uint32(776)},
+			{Name: _BlendFactor_name[170:187], Value: uint32(32769)},
+			{Name: _BlendFactor_name[187:214], Value: uint32(32770)},
+			{Name: _BlendFactor_name[214:231], Value: uint32(32771)},
+			{Name: _BlendFactor_name[231:258], Value: uint32(32772)},
+		},
+	})
+}
+
 func (v BlendFactor) String() string {
 	if s, ok := _BlendFactor_map[v]; ok {
 		return s
@@ -28015,6 +28096,16 @@ const _BufferParameter_name = "GL_BUFFER_SIZEGL_BUFFER_USAGE"
 var _BufferParameter_map = map[BufferParameter]string{
 	34660: _BufferParameter_name[0:14],
 	34661: _BufferParameter_name[14:29],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BufferParameter_name[0:14], Value: uint32(34660)},
+			{Name: _BufferParameter_name[14:29], Value: uint32(34661)},
+		},
+	})
 }
 
 func (v BufferParameter) String() string {
@@ -28047,6 +28138,22 @@ var _BufferTarget_map = map[BufferTarget]string{
 	36663: _BufferTarget_name[144:164],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BufferTarget_name[0:15], Value: uint32(34962)},
+			{Name: _BufferTarget_name[15:38], Value: uint32(34963)},
+			{Name: _BufferTarget_name[38:58], Value: uint32(35051)},
+			{Name: _BufferTarget_name[58:80], Value: uint32(35052)},
+			{Name: _BufferTarget_name[80:97], Value: uint32(35345)},
+			{Name: _BufferTarget_name[97:125], Value: uint32(35982)},
+			{Name: _BufferTarget_name[125:144], Value: uint32(36662)},
+			{Name: _BufferTarget_name[144:164], Value: uint32(36663)},
+		},
+	})
+}
+
 func (v BufferTarget) String() string {
 	if s, ok := _BufferTarget_map[v]; ok {
 		return s
@@ -28070,6 +28177,17 @@ var _BufferUsage_map = map[BufferUsage]string{
 	35040: _BufferUsage_name[0:14],
 	35044: _BufferUsage_name[14:28],
 	35048: _BufferUsage_name[28:43],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _BufferUsage_name[0:14], Value: uint32(35040)},
+			{Name: _BufferUsage_name[14:28], Value: uint32(35044)},
+			{Name: _BufferUsage_name[28:43], Value: uint32(35048)},
+		},
+	})
 }
 
 func (v BufferUsage) String() string {
@@ -28108,6 +28226,28 @@ var _Capability_map = map[Capability]string{
 	35740: _Capability_name[205:228],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Capability_name[0:12], Value: uint32(2884)},
+			{Name: _Capability_name[12:25], Value: uint32(2929)},
+			{Name: _Capability_name[25:40], Value: uint32(2960)},
+			{Name: _Capability_name[40:49], Value: uint32(3024)},
+			{Name: _Capability_name[49:57], Value: uint32(3042)},
+			{Name: _Capability_name[57:72], Value: uint32(3089)},
+			{Name: _Capability_name[72:94], Value: uint32(32823)},
+			{Name: _Capability_name[94:109], Value: uint32(32884)},
+			{Name: _Capability_name[109:124], Value: uint32(32885)},
+			{Name: _Capability_name[124:138], Value: uint32(32886)},
+			{Name: _Capability_name[138:160], Value: uint32(32888)},
+			{Name: _Capability_name[160:187], Value: uint32(32926)},
+			{Name: _Capability_name[187:205], Value: uint32(32928)},
+			{Name: _Capability_name[205:228], Value: uint32(35740)},
+		},
+	})
+}
+
 func (v Capability) String() string {
 	if s, ok := _Capability_map[v]; ok {
 		return s
@@ -28131,6 +28271,17 @@ var _ClearMask_map = map[ClearMask]string{
 	256:   _ClearMask_name[0:19],
 	1024:  _ClearMask_name[19:40],
 	16384: _ClearMask_name[40:59],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ClearMask_name[0:19], Value: uint32(256)},
+			{Name: _ClearMask_name[19:40], Value: uint32(1024)},
+			{Name: _ClearMask_name[40:59], Value: uint32(16384)},
+		},
+	})
 }
 
 func (v ClearMask) String() string {
@@ -28157,6 +28308,18 @@ var _ClientWaitSyncSignal_map = map[ClientWaitSyncSignal]string{
 	37147: _ClientWaitSyncSignal_name[19:37],
 	37148: _ClientWaitSyncSignal_name[37:59],
 	37149: _ClientWaitSyncSignal_name[59:73],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ClientWaitSyncSignal", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ClientWaitSyncSignal_name[0:19], Value: uint32(37146)},
+			{Name: _ClientWaitSyncSignal_name[19:37], Value: uint32(37147)},
+			{Name: _ClientWaitSyncSignal_name[37:59], Value: uint32(37148)},
+			{Name: _ClientWaitSyncSignal_name[59:73], Value: uint32(37149)},
+		},
+	})
 }
 
 func (v ClientWaitSyncSignal) String() string {
@@ -28221,6 +28384,54 @@ var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{
 	37853: _CompressedTexelFormat_name[1332:1373],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_name[0:31], Value: uint32(33776)},
+			{Name: _CompressedTexelFormat_name[31:63], Value: uint32(33777)},
+			{Name: _CompressedTexelFormat_name[63:95], Value: uint32(33778)},
+			{Name: _CompressedTexelFormat_name[95:127], Value: uint32(33779)},
+			{Name: _CompressedTexelFormat_name[127:161], Value: uint32(34798)},
+			{Name: _CompressedTexelFormat_name[161:193], Value: uint32(35952)},
+			{Name: _CompressedTexelFormat_name[193:232], Value: uint32(35953)},
+			{Name: _CompressedTexelFormat_name[232:270], Value: uint32(35954)},
+			{Name: _CompressedTexelFormat_name[270:315], Value: uint32(35955)},
+			{Name: _CompressedTexelFormat_name[315:329], Value: uint32(35986)},
+			{Name: _CompressedTexelFormat_name[329:359], Value: uint32(35987)},
+			{Name: _CompressedTexelFormat_name[359:375], Value: uint32(36196)},
+			{Name: _CompressedTexelFormat_name[375:406], Value: uint32(37808)},
+			{Name: _CompressedTexelFormat_name[406:437], Value: uint32(37809)},
+			{Name: _CompressedTexelFormat_name[437:468], Value: uint32(37810)},
+			{Name: _CompressedTexelFormat_name[468:499], Value: uint32(37811)},
+			{Name: _CompressedTexelFormat_name[499:530], Value: uint32(37812)},
+			{Name: _CompressedTexelFormat_name[530:561], Value: uint32(37813)},
+			{Name: _CompressedTexelFormat_name[561:592], Value: uint32(37814)},
+			{Name: _CompressedTexelFormat_name[592:623], Value: uint32(37815)},
+			{Name: _CompressedTexelFormat_name[623:655], Value: uint32(37816)},
+			{Name: _CompressedTexelFormat_name[655:687], Value: uint32(37817)},
+			{Name: _CompressedTexelFormat_name[687:719], Value: uint32(37818)},
+			{Name: _CompressedTexelFormat_name[719:752], Value: uint32(37819)},
+			{Name: _CompressedTexelFormat_name[752:785], Value: uint32(37820)},
+			{Name: _CompressedTexelFormat_name[785:818], Value: uint32(37821)},
+			{Name: _CompressedTexelFormat_name[818:857], Value: uint32(37840)},
+			{Name: _CompressedTexelFormat_name[857:896], Value: uint32(37841)},
+			{Name: _CompressedTexelFormat_name[896:935], Value: uint32(37842)},
+			{Name: _CompressedTexelFormat_name[935:974], Value: uint32(37843)},
+			{Name: _CompressedTexelFormat_name[974:1013], Value: uint32(37844)},
+			{Name: _CompressedTexelFormat_name[1013:1052], Value: uint32(37845)},
+			{Name: _CompressedTexelFormat_name[1052:1091], Value: uint32(37846)},
+			{Name: _CompressedTexelFormat_name[1091:1130], Value: uint32(37847)},
+			{Name: _CompressedTexelFormat_name[1130:1170], Value: uint32(37848)},
+			{Name: _CompressedTexelFormat_name[1170:1210], Value: uint32(37849)},
+			{Name: _CompressedTexelFormat_name[1210:1250], Value: uint32(37850)},
+			{Name: _CompressedTexelFormat_name[1250:1291], Value: uint32(37851)},
+			{Name: _CompressedTexelFormat_name[1291:1332], Value: uint32(37852)},
+			{Name: _CompressedTexelFormat_name[1332:1373], Value: uint32(37853)},
+		},
+	})
+}
+
 func (v CompressedTexelFormat) String() string {
 	if s, ok := _CompressedTexelFormat_map[v]; ok {
 		return s
@@ -28244,6 +28455,17 @@ var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelF
 	34798: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34],
 	35986: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48],
 	35987: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_AMD_compressed_ATC_texture", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34], Value: uint32(34798)},
+			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48], Value: uint32(35986)},
+			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78], Value: uint32(35987)},
+		},
+	})
 }
 
 func (v CompressedTexelFormat_AMD_compressed_ATC_texture) String() string {
@@ -28270,6 +28492,16 @@ var _CompressedTexelFormat_EXT_texture_compression_dxt1_map = map[CompressedTexe
 	33777: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_dxt1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31], Value: uint32(33776)},
+			{Name: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63], Value: uint32(33777)},
+		},
+	})
+}
+
 func (v CompressedTexelFormat_EXT_texture_compression_dxt1) String() string {
 	if s, ok := _CompressedTexelFormat_EXT_texture_compression_dxt1_map[v]; ok {
 		return s
@@ -28292,6 +28524,16 @@ const _CompressedTexelFormat_EXT_texture_compression_s3tc_name = "GL_COMPRESSED_
 var _CompressedTexelFormat_EXT_texture_compression_s3tc_map = map[CompressedTexelFormat_EXT_texture_compression_s3tc]string{
 	33778: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32],
 	33779: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_s3tc", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32], Value: uint32(33778)},
+			{Name: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64], Value: uint32(33779)},
+		},
+	})
 }
 
 func (v CompressedTexelFormat_EXT_texture_compression_s3tc) String() string {
@@ -28344,6 +28586,42 @@ var _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map = map[Compressed
 	37853: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_KHR_texture_compression_astc_ldr", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31], Value: uint32(37808)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62], Value: uint32(37809)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93], Value: uint32(37810)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124], Value: uint32(37811)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155], Value: uint32(37812)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186], Value: uint32(37813)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217], Value: uint32(37814)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248], Value: uint32(37815)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280], Value: uint32(37816)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312], Value: uint32(37817)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344], Value: uint32(37818)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377], Value: uint32(37819)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410], Value: uint32(37820)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443], Value: uint32(37821)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482], Value: uint32(37840)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521], Value: uint32(37841)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560], Value: uint32(37842)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599], Value: uint32(37843)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638], Value: uint32(37844)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677], Value: uint32(37845)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716], Value: uint32(37846)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755], Value: uint32(37847)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795], Value: uint32(37848)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835], Value: uint32(37849)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875], Value: uint32(37850)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916], Value: uint32(37851)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957], Value: uint32(37852)},
+			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998], Value: uint32(37853)},
+		},
+	})
+}
+
 func (v CompressedTexelFormat_KHR_texture_compression_astc_ldr) String() string {
 	if s, ok := _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[v]; ok {
 		return s
@@ -28370,6 +28648,18 @@ var _CompressedTexelFormat_NV_texture_compression_latc_map = map[CompressedTexel
 	35955: _CompressedTexelFormat_NV_texture_compression_latc_name[109:154],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_NV_texture_compression_latc", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[0:32], Value: uint32(35952)},
+			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[32:71], Value: uint32(35953)},
+			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[71:109], Value: uint32(35954)},
+			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[109:154], Value: uint32(35955)},
+		},
+	})
+}
+
 func (v CompressedTexelFormat_NV_texture_compression_latc) String() string {
 	if s, ok := _CompressedTexelFormat_NV_texture_compression_latc_map[v]; ok {
 		return s
@@ -28391,6 +28681,15 @@ const _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name = "GL_ETC1_RG
 
 var _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map = map[CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture]string{
 	36196: _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16], Value: uint32(36196)},
+		},
+	})
 }
 
 func (v CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) String() string {
@@ -28421,6 +28720,20 @@ var _CubeMapImageTarget_map = map[CubeMapImageTarget]string{
 	34074: _CubeMapImageTarget_name[150:180],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _CubeMapImageTarget_name[0:30], Value: uint32(34069)},
+			{Name: _CubeMapImageTarget_name[30:60], Value: uint32(34070)},
+			{Name: _CubeMapImageTarget_name[60:90], Value: uint32(34071)},
+			{Name: _CubeMapImageTarget_name[90:120], Value: uint32(34072)},
+			{Name: _CubeMapImageTarget_name[120:150], Value: uint32(34073)},
+			{Name: _CubeMapImageTarget_name[150:180], Value: uint32(34074)},
+		},
+	})
+}
+
 func (v CubeMapImageTarget) String() string {
 	if s, ok := _CubeMapImageTarget_map[v]; ok {
 		return s
@@ -28444,6 +28757,17 @@ var _DiscardFramebufferAttachment_map = map[DiscardFramebufferAttachment]string{
 	6144: _DiscardFramebufferAttachment_name[0:12],
 	6145: _DiscardFramebufferAttachment_name[12:24],
 	6146: _DiscardFramebufferAttachment_name[24:38],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "DiscardFramebufferAttachment", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _DiscardFramebufferAttachment_name[0:12], Value: uint32(6144)},
+			{Name: _DiscardFramebufferAttachment_name[12:24], Value: uint32(6145)},
+			{Name: _DiscardFramebufferAttachment_name[24:38], Value: uint32(6146)},
+		},
+	})
 }
 
 func (v DiscardFramebufferAttachment) String() string {
@@ -28475,6 +28799,21 @@ var _DrawMode_map = map[DrawMode]string{
 	6: _DrawMode_name[71:86],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _DrawMode_name[0:9], Value: uint32(0)},
+			{Name: _DrawMode_name[9:17], Value: uint32(1)},
+			{Name: _DrawMode_name[17:29], Value: uint32(2)},
+			{Name: _DrawMode_name[29:42], Value: uint32(3)},
+			{Name: _DrawMode_name[42:54], Value: uint32(4)},
+			{Name: _DrawMode_name[54:71], Value: uint32(5)},
+			{Name: _DrawMode_name[71:86], Value: uint32(6)},
+		},
+	})
+}
+
 func (v DrawMode) String() string {
 	if s, ok := _DrawMode_map[v]; ok {
 		return s
@@ -28503,6 +28842,20 @@ var _Error_map = map[Error]string{
 	1286: _Error_name[78:110],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Error", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Error_name[0:11], Value: uint32(0)},
+			{Name: _Error_name[11:26], Value: uint32(1280)},
+			{Name: _Error_name[26:42], Value: uint32(1281)},
+			{Name: _Error_name[42:62], Value: uint32(1282)},
+			{Name: _Error_name[62:78], Value: uint32(1285)},
+			{Name: _Error_name[78:110], Value: uint32(1286)},
+		},
+	})
+}
+
 func (v Error) String() string {
 	if s, ok := _Error_map[v]; ok {
 		return s
@@ -28526,6 +28879,17 @@ var _FaceMode_map = map[FaceMode]string{
 	1028: _FaceMode_name[0:8],
 	1029: _FaceMode_name[8:15],
 	1032: _FaceMode_name[15:32],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FaceMode_name[0:8], Value: uint32(1028)},
+			{Name: _FaceMode_name[8:15], Value: uint32(1029)},
+			{Name: _FaceMode_name[15:32], Value: uint32(1032)},
+		},
+	})
 }
 
 func (v FaceMode) String() string {
@@ -28552,6 +28916,16 @@ var _FaceOrientation_map = map[FaceOrientation]string{
 	2305: _FaceOrientation_name[5:11],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FaceOrientation_name[0:5], Value: uint32(2304)},
+			{Name: _FaceOrientation_name[5:11], Value: uint32(2305)},
+		},
+	})
+}
+
 func (v FaceOrientation) String() string {
 	if s, ok := _FaceOrientation_map[v]; ok {
 		return s
@@ -28575,6 +28949,17 @@ var _FramebufferAttachment_map = map[FramebufferAttachment]string{
 	36064: _FramebufferAttachment_name[0:20],
 	36096: _FramebufferAttachment_name[20:39],
 	36128: _FramebufferAttachment_name[39:60],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferAttachment_name[0:20], Value: uint32(36064)},
+			{Name: _FramebufferAttachment_name[20:39], Value: uint32(36096)},
+			{Name: _FramebufferAttachment_name[39:60], Value: uint32(36128)},
+		},
+	})
 }
 
 func (v FramebufferAttachment) String() string {
@@ -28603,6 +28988,18 @@ var _FramebufferAttachmentParameter_map = map[FramebufferAttachmentParameter]str
 	36051: _FramebufferAttachmentParameter_name[113:160],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferAttachmentParameter_name[0:37], Value: uint32(36048)},
+			{Name: _FramebufferAttachmentParameter_name[37:74], Value: uint32(36049)},
+			{Name: _FramebufferAttachmentParameter_name[74:113], Value: uint32(36050)},
+			{Name: _FramebufferAttachmentParameter_name[113:160], Value: uint32(36051)},
+		},
+	})
+}
+
 func (v FramebufferAttachmentParameter) String() string {
 	if s, ok := _FramebufferAttachmentParameter_map[v]; ok {
 		return s
@@ -28626,6 +29023,17 @@ var _FramebufferAttachmentType_map = map[FramebufferAttachmentType]string{
 	0:     _FramebufferAttachmentType_name[0:7],
 	5890:  _FramebufferAttachmentType_name[7:17],
 	36161: _FramebufferAttachmentType_name[17:32],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferAttachmentType_name[0:7], Value: uint32(0)},
+			{Name: _FramebufferAttachmentType_name[7:17], Value: uint32(5890)},
+			{Name: _FramebufferAttachmentType_name[17:32], Value: uint32(36161)},
+		},
+	})
 }
 
 func (v FramebufferAttachmentType) String() string {
@@ -28655,6 +29063,19 @@ var _FramebufferStatus_map = map[FramebufferStatus]string{
 	36061: _FramebufferStatus_name[139:165],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferStatus_name[0:23], Value: uint32(36053)},
+			{Name: _FramebufferStatus_name[23:59], Value: uint32(36054)},
+			{Name: _FramebufferStatus_name[59:103], Value: uint32(36055)},
+			{Name: _FramebufferStatus_name[103:139], Value: uint32(36057)},
+			{Name: _FramebufferStatus_name[139:165], Value: uint32(36061)},
+		},
+	})
+}
+
 func (v FramebufferStatus) String() string {
 	if s, ok := _FramebufferStatus_map[v]; ok {
 		return s
@@ -28680,6 +29101,17 @@ var _FramebufferTarget_map = map[FramebufferTarget]string{
 	36160: _FramebufferTarget_name[38:52],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferTarget_name[0:19], Value: uint32(36008)},
+			{Name: _FramebufferTarget_name[19:38], Value: uint32(36009)},
+			{Name: _FramebufferTarget_name[38:52], Value: uint32(36160)},
+		},
+	})
+}
+
 func (v FramebufferTarget) String() string {
 	if s, ok := _FramebufferTarget_map[v]; ok {
 		return s
@@ -28701,6 +29133,15 @@ const _FramebufferTarget_GLES_2_0_name = "GL_FRAMEBUFFER"
 
 var _FramebufferTarget_GLES_2_0_map = map[FramebufferTarget_GLES_2_0]string{
 	36160: _FramebufferTarget_GLES_2_0_name[0:14],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_2_0", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferTarget_GLES_2_0_name[0:14], Value: uint32(36160)},
+		},
+	})
 }
 
 func (v FramebufferTarget_GLES_2_0) String() string {
@@ -28725,6 +29166,16 @@ const _FramebufferTarget_GLES_3_1_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFER
 var _FramebufferTarget_GLES_3_1_map = map[FramebufferTarget_GLES_3_1]string{
 	36008: _FramebufferTarget_GLES_3_1_name[0:19],
 	36009: _FramebufferTarget_GLES_3_1_name[19:38],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_3_1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _FramebufferTarget_GLES_3_1_name[0:19], Value: uint32(36008)},
+			{Name: _FramebufferTarget_GLES_3_1_name[19:38], Value: uint32(36009)},
+		},
+	})
 }
 
 func (v FramebufferTarget_GLES_3_1) String() string {
@@ -28752,6 +29203,17 @@ var _HintMode_map = map[HintMode]string{
 	4354: _HintMode_name[22:31],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _HintMode_name[0:12], Value: uint32(4352)},
+			{Name: _HintMode_name[12:22], Value: uint32(4353)},
+			{Name: _HintMode_name[22:31], Value: uint32(4354)},
+		},
+	})
+}
+
 func (v HintMode) String() string {
 	if s, ok := _HintMode_map[v]; ok {
 		return s
@@ -28775,6 +29237,15 @@ var _HintTarget_map = map[HintTarget]string{
 	33170: _HintTarget_name[0:23],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _HintTarget_name[0:23], Value: uint32(33170)},
+		},
+	})
+}
+
 func (v HintTarget) String() string {
 	if s, ok := _HintTarget_map[v]; ok {
 		return s
@@ -28796,6 +29267,15 @@ const _ImageTargetRenderbufferStorage_name = "GL_RENDERBUFFER_OES"
 
 var _ImageTargetRenderbufferStorage_map = map[ImageTargetRenderbufferStorage]string{
 	36161: _ImageTargetRenderbufferStorage_name[0:19],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ImageTargetRenderbufferStorage_name[0:19], Value: uint32(36161)},
+		},
+	})
 }
 
 func (v ImageTargetRenderbufferStorage) String() string {
@@ -28822,6 +29302,16 @@ var _ImageTargetTexture_map = map[ImageTargetTexture]string{
 	36197: _ImageTargetTexture_name[13:36],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ImageTargetTexture_name[0:13], Value: uint32(3553)},
+			{Name: _ImageTargetTexture_name[13:36], Value: uint32(36197)},
+		},
+	})
+}
+
 func (v ImageTargetTexture) String() string {
 	if s, ok := _ImageTargetTexture_map[v]; ok {
 		return s
@@ -28845,6 +29335,15 @@ var _ImageTargetTexture_OES_EGL_image_map = map[ImageTargetTexture_OES_EGL_image
 	3553: _ImageTargetTexture_OES_EGL_image_name[0:13],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ImageTargetTexture_OES_EGL_image_name[0:13], Value: uint32(3553)},
+		},
+	})
+}
+
 func (v ImageTargetTexture_OES_EGL_image) String() string {
 	if s, ok := _ImageTargetTexture_OES_EGL_image_map[v]; ok {
 		return s
@@ -28866,6 +29365,15 @@ const _ImageTargetTexture_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES
 
 var _ImageTargetTexture_OES_EGL_image_external_map = map[ImageTargetTexture_OES_EGL_image_external]string{
 	36197: _ImageTargetTexture_OES_EGL_image_external_name[0:23],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image_external", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ImageTargetTexture_OES_EGL_image_external_name[0:23], Value: uint32(36197)},
+		},
+	})
 }
 
 func (v ImageTargetTexture_OES_EGL_image_external) String() string {
@@ -28945,6 +29453,69 @@ var _ImageTexelFormat_map = map[ImageTexelFormat]string{
 	37853: _ImageTexelFormat_name[1523:1564],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ImageTexelFormat_name[0:18], Value: uint32(6402)},
+			{Name: _ImageTexelFormat_name[18:24], Value: uint32(6403)},
+			{Name: _ImageTexelFormat_name[24:32], Value: uint32(6406)},
+			{Name: _ImageTexelFormat_name[32:38], Value: uint32(6407)},
+			{Name: _ImageTexelFormat_name[38:45], Value: uint32(6408)},
+			{Name: _ImageTexelFormat_name[45:57], Value: uint32(6409)},
+			{Name: _ImageTexelFormat_name[57:75], Value: uint32(6410)},
+			{Name: _ImageTexelFormat_name[75:95], Value: uint32(33189)},
+			{Name: _ImageTexelFormat_name[95:100], Value: uint32(33319)},
+			{Name: _ImageTexelFormat_name[100:113], Value: uint32(33320)},
+			{Name: _ImageTexelFormat_name[113:144], Value: uint32(33776)},
+			{Name: _ImageTexelFormat_name[144:176], Value: uint32(33777)},
+			{Name: _ImageTexelFormat_name[176:208], Value: uint32(33778)},
+			{Name: _ImageTexelFormat_name[208:240], Value: uint32(33779)},
+			{Name: _ImageTexelFormat_name[240:256], Value: uint32(34041)},
+			{Name: _ImageTexelFormat_name[256:290], Value: uint32(34798)},
+			{Name: _ImageTexelFormat_name[290:309], Value: uint32(35056)},
+			{Name: _ImageTexelFormat_name[309:341], Value: uint32(35952)},
+			{Name: _ImageTexelFormat_name[341:380], Value: uint32(35953)},
+			{Name: _ImageTexelFormat_name[380:418], Value: uint32(35954)},
+			{Name: _ImageTexelFormat_name[418:463], Value: uint32(35955)},
+			{Name: _ImageTexelFormat_name[463:477], Value: uint32(35986)},
+			{Name: _ImageTexelFormat_name[477:507], Value: uint32(35987)},
+			{Name: _ImageTexelFormat_name[507:523], Value: uint32(36196)},
+			{Name: _ImageTexelFormat_name[523:537], Value: uint32(36244)},
+			{Name: _ImageTexelFormat_name[537:551], Value: uint32(36248)},
+			{Name: _ImageTexelFormat_name[551:566], Value: uint32(36249)},
+			{Name: _ImageTexelFormat_name[566:597], Value: uint32(37808)},
+			{Name: _ImageTexelFormat_name[597:628], Value: uint32(37809)},
+			{Name: _ImageTexelFormat_name[628:659], Value: uint32(37810)},
+			{Name: _ImageTexelFormat_name[659:690], Value: uint32(37811)},
+			{Name: _ImageTexelFormat_name[690:721], Value: uint32(37812)},
+			{Name: _ImageTexelFormat_name[721:752], Value: uint32(37813)},
+			{Name: _ImageTexelFormat_name[752:783], Value: uint32(37814)},
+			{Name: _ImageTexelFormat_name[783:814], Value: uint32(37815)},
+			{Name: _ImageTexelFormat_name[814:846], Value: uint32(37816)},
+			{Name: _ImageTexelFormat_name[846:878], Value: uint32(37817)},
+			{Name: _ImageTexelFormat_name[878:910], Value: uint32(37818)},
+			{Name: _ImageTexelFormat_name[910:943], Value: uint32(37819)},
+			{Name: _ImageTexelFormat_name[943:976], Value: uint32(37820)},
+			{Name: _ImageTexelFormat_name[976:1009], Value: uint32(37821)},
+			{Name: _ImageTexelFormat_name[1009:1048], Value: uint32(37840)},
+			{Name: _ImageTexelFormat_name[1048:1087], Value: uint32(37841)},
+			{Name: _ImageTexelFormat_name[1087:1126], Value: uint32(37842)},
+			{Name: _ImageTexelFormat_name[1126:1165], Value: uint32(37843)},
+			{Name: _ImageTexelFormat_name[1165:1204], Value: uint32(37844)},
+			{Name: _ImageTexelFormat_name[1204:1243], Value: uint32(37845)},
+			{Name: _ImageTexelFormat_name[1243:1282], Value: uint32(37846)},
+			{Name: _ImageTexelFormat_name[1282:1321], Value: uint32(37847)},
+			{Name: _ImageTexelFormat_name[1321:1361], Value: uint32(37848)},
+			{Name: _ImageTexelFormat_name[1361:1401], Value: uint32(37849)},
+			{Name: _ImageTexelFormat_name[1401:1441], Value: uint32(37850)},
+			{Name: _ImageTexelFormat_name[1441:1482], Value: uint32(37851)},
+			{Name: _ImageTexelFormat_name[1482:1523], Value: uint32(37852)},
+			{Name: _ImageTexelFormat_name[1523:1564], Value: uint32(37853)},
+		},
+	})
+}
+
 func (v ImageTexelFormat) String() string {
 	if s, ok := _ImageTexelFormat_map[v]; ok {
 		return s
@@ -28967,6 +29538,16 @@ const _IndexedBufferTarget_name = "GL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFER
 var _IndexedBufferTarget_map = map[IndexedBufferTarget]string{
 	35345: _IndexedBufferTarget_name[0:17],
 	35982: _IndexedBufferTarget_name[17:45],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _IndexedBufferTarget_name[0:17], Value: uint32(35345)},
+			{Name: _IndexedBufferTarget_name[17:45], Value: uint32(35982)},
+		},
+	})
 }
 
 func (v IndexedBufferTarget) String() string {
@@ -28992,6 +29573,17 @@ var _IndicesType_map = map[IndicesType]string{
 	5121: _IndicesType_name[0:16],
 	5123: _IndicesType_name[16:33],
 	5125: _IndicesType_name[33:48],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _IndicesType_name[0:16], Value: uint32(5121)},
+			{Name: _IndicesType_name[16:33], Value: uint32(5123)},
+			{Name: _IndicesType_name[33:48], Value: uint32(5125)},
+		},
+	})
 }
 
 func (v IndicesType) String() string {
@@ -29022,6 +29614,20 @@ var _MapBufferRangeAccess_map = map[MapBufferRangeAccess]string{
 	32: _MapBufferRangeAccess_name[111:136],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _MapBufferRangeAccess_name[0:15], Value: uint32(1)},
+			{Name: _MapBufferRangeAccess_name[15:31], Value: uint32(2)},
+			{Name: _MapBufferRangeAccess_name[31:58], Value: uint32(4)},
+			{Name: _MapBufferRangeAccess_name[58:86], Value: uint32(8)},
+			{Name: _MapBufferRangeAccess_name[86:111], Value: uint32(16)},
+			{Name: _MapBufferRangeAccess_name[111:136], Value: uint32(32)},
+		},
+	})
+}
+
 func (v MapBufferRangeAccess) String() string {
 	if s, ok := _MapBufferRangeAccess_map[v]; ok {
 		return s
@@ -29044,6 +29650,16 @@ const _PixelStoreParameter_name = "GL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENT"
 var _PixelStoreParameter_map = map[PixelStoreParameter]string{
 	3317: _PixelStoreParameter_name[0:19],
 	3333: _PixelStoreParameter_name[19:36],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _PixelStoreParameter_name[0:19], Value: uint32(3317)},
+			{Name: _PixelStoreParameter_name[19:36], Value: uint32(3333)},
+		},
+	})
 }
 
 func (v PixelStoreParameter) String() string {
@@ -29072,6 +29688,20 @@ var _PrecisionType_map = map[PrecisionType]string{
 	36339: _PrecisionType_name[40:50],
 	36340: _PrecisionType_name[50:63],
 	36341: _PrecisionType_name[63:74],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _PrecisionType_name[0:12], Value: uint32(36336)},
+			{Name: _PrecisionType_name[12:27], Value: uint32(36337)},
+			{Name: _PrecisionType_name[27:40], Value: uint32(36338)},
+			{Name: _PrecisionType_name[40:50], Value: uint32(36339)},
+			{Name: _PrecisionType_name[50:63], Value: uint32(36340)},
+			{Name: _PrecisionType_name[63:74], Value: uint32(36341)},
+		},
+	})
 }
 
 func (v PrecisionType) String() string {
@@ -29105,6 +29735,23 @@ var _ProgramParameter_map = map[ProgramParameter]string{
 	35722: _ProgramParameter_name[151:181],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ProgramParameter_name[0:16], Value: uint32(35712)},
+			{Name: _ProgramParameter_name[16:30], Value: uint32(35714)},
+			{Name: _ProgramParameter_name[30:48], Value: uint32(35715)},
+			{Name: _ProgramParameter_name[48:66], Value: uint32(35716)},
+			{Name: _ProgramParameter_name[66:85], Value: uint32(35717)},
+			{Name: _ProgramParameter_name[85:103], Value: uint32(35718)},
+			{Name: _ProgramParameter_name[103:131], Value: uint32(35719)},
+			{Name: _ProgramParameter_name[131:151], Value: uint32(35721)},
+			{Name: _ProgramParameter_name[151:181], Value: uint32(35722)},
+		},
+	})
+}
+
 func (v ProgramParameter) String() string {
 	if s, ok := _ProgramParameter_map[v]; ok {
 		return s
@@ -29127,6 +29774,16 @@ const _QueryObjectParameter_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
 var _QueryObjectParameter_map = map[QueryObjectParameter]string{
 	34918: _QueryObjectParameter_name[0:15],
 	34919: _QueryObjectParameter_name[15:40],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryObjectParameter_name[0:15], Value: uint32(34918)},
+			{Name: _QueryObjectParameter_name[15:40], Value: uint32(34919)},
+		},
+	})
 }
 
 func (v QueryObjectParameter) String() string {
@@ -29153,6 +29810,16 @@ var _QueryObjectParameter_GLES_3_map = map[QueryObjectParameter_GLES_3]string{
 	34919: _QueryObjectParameter_GLES_3_name[15:40],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryObjectParameter_GLES_3", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryObjectParameter_GLES_3_name[0:15], Value: uint32(34918)},
+			{Name: _QueryObjectParameter_GLES_3_name[15:40], Value: uint32(34919)},
+		},
+	})
+}
+
 func (v QueryObjectParameter_GLES_3) String() string {
 	if s, ok := _QueryObjectParameter_GLES_3_map[v]; ok {
 		return s
@@ -29175,6 +29842,16 @@ const _QueryParameter_name = "GL_QUERY_COUNTER_BITS_EXTGL_CURRENT_QUERY"
 var _QueryParameter_map = map[QueryParameter]string{
 	34916: _QueryParameter_name[0:25],
 	34917: _QueryParameter_name[25:41],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryParameter_name[0:25], Value: uint32(34916)},
+			{Name: _QueryParameter_name[25:41], Value: uint32(34917)},
+		},
+	})
 }
 
 func (v QueryParameter) String() string {
@@ -29200,6 +29877,15 @@ var _QueryParameter_EXT_disjoint_timer_query_map = map[QueryParameter_EXT_disjoi
 	34916: _QueryParameter_EXT_disjoint_timer_query_name[0:25],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryParameter_EXT_disjoint_timer_query", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryParameter_EXT_disjoint_timer_query_name[0:25], Value: uint32(34916)},
+		},
+	})
+}
+
 func (v QueryParameter_EXT_disjoint_timer_query) String() string {
 	if s, ok := _QueryParameter_EXT_disjoint_timer_query_map[v]; ok {
 		return s
@@ -29221,6 +29907,15 @@ const _QueryParameter_GLES_3_name = "GL_CURRENT_QUERY"
 
 var _QueryParameter_GLES_3_map = map[QueryParameter_GLES_3]string{
 	34917: _QueryParameter_GLES_3_name[0:16],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryParameter_GLES_3", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryParameter_GLES_3_name[0:16], Value: uint32(34917)},
+		},
+	})
 }
 
 func (v QueryParameter_GLES_3) String() string {
@@ -29250,6 +29945,19 @@ var _QueryTarget_map = map[QueryTarget]string{
 	36392: _QueryTarget_name[114:130],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryTarget_name[0:19], Value: uint32(35007)},
+			{Name: _QueryTarget_name[19:40], Value: uint32(35887)},
+			{Name: _QueryTarget_name[40:80], Value: uint32(35976)},
+			{Name: _QueryTarget_name[80:114], Value: uint32(36202)},
+			{Name: _QueryTarget_name[114:130], Value: uint32(36392)},
+		},
+	})
+}
+
 func (v QueryTarget) String() string {
 	if s, ok := _QueryTarget_map[v]; ok {
 		return s
@@ -29272,6 +29980,16 @@ const _QueryTarget_EXT_disjoint_timer_query_name = "GL_TIME_ELAPSED_EXTGL_TIMEST
 var _QueryTarget_EXT_disjoint_timer_query_map = map[QueryTarget_EXT_disjoint_timer_query]string{
 	35007: _QueryTarget_EXT_disjoint_timer_query_name[0:19],
 	36392: _QueryTarget_EXT_disjoint_timer_query_name[19:35],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryTarget_EXT_disjoint_timer_query", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryTarget_EXT_disjoint_timer_query_name[0:19], Value: uint32(35007)},
+			{Name: _QueryTarget_EXT_disjoint_timer_query_name[19:35], Value: uint32(36392)},
+		},
+	})
 }
 
 func (v QueryTarget_EXT_disjoint_timer_query) String() string {
@@ -29297,6 +30015,17 @@ var _QueryTarget_GLES_3_map = map[QueryTarget_GLES_3]string{
 	35887: _QueryTarget_GLES_3_name[0:21],
 	35976: _QueryTarget_GLES_3_name[21:61],
 	36202: _QueryTarget_GLES_3_name[61:95],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "QueryTarget_GLES_3", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _QueryTarget_GLES_3_name[0:21], Value: uint32(35887)},
+			{Name: _QueryTarget_GLES_3_name[21:61], Value: uint32(35976)},
+			{Name: _QueryTarget_GLES_3_name[61:95], Value: uint32(36202)},
+		},
+	})
 }
 
 func (v QueryTarget_GLES_3) String() string {
@@ -29325,6 +30054,20 @@ var _RenderbufferFormat_map = map[RenderbufferFormat]string{
 	33189: _RenderbufferFormat_name[26:46],
 	36168: _RenderbufferFormat_name[46:63],
 	36194: _RenderbufferFormat_name[63:72],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _RenderbufferFormat_name[0:8], Value: uint32(32854)},
+			{Name: _RenderbufferFormat_name[8:18], Value: uint32(32855)},
+			{Name: _RenderbufferFormat_name[18:26], Value: uint32(32856)},
+			{Name: _RenderbufferFormat_name[26:46], Value: uint32(33189)},
+			{Name: _RenderbufferFormat_name[46:63], Value: uint32(36168)},
+			{Name: _RenderbufferFormat_name[63:72], Value: uint32(36194)},
+		},
+	})
 }
 
 func (v RenderbufferFormat) String() string {
@@ -29358,6 +30101,23 @@ var _RenderbufferParameter_map = map[RenderbufferParameter]string{
 	36181: _RenderbufferParameter_name[201:229],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _RenderbufferParameter_name[0:21], Value: uint32(36162)},
+			{Name: _RenderbufferParameter_name[21:43], Value: uint32(36163)},
+			{Name: _RenderbufferParameter_name[43:74], Value: uint32(36164)},
+			{Name: _RenderbufferParameter_name[74:98], Value: uint32(36176)},
+			{Name: _RenderbufferParameter_name[98:124], Value: uint32(36177)},
+			{Name: _RenderbufferParameter_name[124:149], Value: uint32(36178)},
+			{Name: _RenderbufferParameter_name[149:175], Value: uint32(36179)},
+			{Name: _RenderbufferParameter_name[175:201], Value: uint32(36180)},
+			{Name: _RenderbufferParameter_name[201:229], Value: uint32(36181)},
+		},
+	})
+}
+
 func (v RenderbufferParameter) String() string {
 	if s, ok := _RenderbufferParameter_map[v]; ok {
 		return s
@@ -29379,6 +30139,15 @@ const _RenderbufferTarget_name = "GL_RENDERBUFFER"
 
 var _RenderbufferTarget_map = map[RenderbufferTarget]string{
 	36161: _RenderbufferTarget_name[0:15],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _RenderbufferTarget_name[0:15], Value: uint32(36161)},
+		},
+	})
 }
 
 func (v RenderbufferTarget) String() string {
@@ -29405,6 +30174,18 @@ var _ResetStatus_map = map[ResetStatus]string{
 	33363: _ResetStatus_name[11:38],
 	33364: _ResetStatus_name[38:67],
 	33365: _ResetStatus_name[67:95],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ResetStatus_name[0:11], Value: uint32(0)},
+			{Name: _ResetStatus_name[11:38], Value: uint32(33363)},
+			{Name: _ResetStatus_name[38:67], Value: uint32(33364)},
+			{Name: _ResetStatus_name[67:95], Value: uint32(33365)},
+		},
+	})
 }
 
 func (v ResetStatus) String() string {
@@ -29436,6 +30217,21 @@ var _ShaderAttribType_map = map[ShaderAttribType]string{
 	35676: _ShaderAttribType_name[73:86],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ShaderAttribType_name[0:8], Value: uint32(5126)},
+			{Name: _ShaderAttribType_name[8:21], Value: uint32(35664)},
+			{Name: _ShaderAttribType_name[21:34], Value: uint32(35665)},
+			{Name: _ShaderAttribType_name[34:47], Value: uint32(35666)},
+			{Name: _ShaderAttribType_name[47:60], Value: uint32(35674)},
+			{Name: _ShaderAttribType_name[60:73], Value: uint32(35675)},
+			{Name: _ShaderAttribType_name[73:86], Value: uint32(35676)},
+		},
+	})
+}
+
 func (v ShaderAttribType) String() string {
 	if s, ok := _ShaderAttribType_map[v]; ok {
 		return s
@@ -29463,6 +30259,19 @@ var _ShaderParameter_map = map[ShaderParameter]string{
 	35720: _ShaderParameter_name[65:88],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ShaderParameter_name[0:14], Value: uint32(35663)},
+			{Name: _ShaderParameter_name[14:30], Value: uint32(35712)},
+			{Name: _ShaderParameter_name[30:47], Value: uint32(35713)},
+			{Name: _ShaderParameter_name[47:65], Value: uint32(35716)},
+			{Name: _ShaderParameter_name[65:88], Value: uint32(35720)},
+		},
+	})
+}
+
 func (v ShaderParameter) String() string {
 	if s, ok := _ShaderParameter_map[v]; ok {
 		return s
@@ -29485,6 +30294,16 @@ const _ShaderType_name = "GL_FRAGMENT_SHADERGL_VERTEX_SHADER"
 var _ShaderType_map = map[ShaderType]string{
 	35632: _ShaderType_name[0:18],
 	35633: _ShaderType_name[18:34],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ShaderType_name[0:18], Value: uint32(35632)},
+			{Name: _ShaderType_name[18:34], Value: uint32(35633)},
+		},
+	})
 }
 
 func (v ShaderType) String() string {
@@ -29524,6 +30343,31 @@ var _ShaderUniformType_map = map[ShaderUniformType]string{
 	35676: _ShaderUniformType_name[155:168],
 	35678: _ShaderUniformType_name[168:181],
 	35680: _ShaderUniformType_name[181:196],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _ShaderUniformType_name[0:6], Value: uint32(5124)},
+			{Name: _ShaderUniformType_name[6:14], Value: uint32(5126)},
+			{Name: _ShaderUniformType_name[14:27], Value: uint32(35664)},
+			{Name: _ShaderUniformType_name[27:40], Value: uint32(35665)},
+			{Name: _ShaderUniformType_name[40:53], Value: uint32(35666)},
+			{Name: _ShaderUniformType_name[53:64], Value: uint32(35667)},
+			{Name: _ShaderUniformType_name[64:75], Value: uint32(35668)},
+			{Name: _ShaderUniformType_name[75:86], Value: uint32(35669)},
+			{Name: _ShaderUniformType_name[86:93], Value: uint32(35670)},
+			{Name: _ShaderUniformType_name[93:105], Value: uint32(35671)},
+			{Name: _ShaderUniformType_name[105:117], Value: uint32(35672)},
+			{Name: _ShaderUniformType_name[117:129], Value: uint32(35673)},
+			{Name: _ShaderUniformType_name[129:142], Value: uint32(35674)},
+			{Name: _ShaderUniformType_name[142:155], Value: uint32(35675)},
+			{Name: _ShaderUniformType_name[155:168], Value: uint32(35676)},
+			{Name: _ShaderUniformType_name[168:181], Value: uint32(35678)},
+			{Name: _ShaderUniformType_name[181:196], Value: uint32(35680)},
+		},
+	})
 }
 
 func (v ShaderUniformType) String() string {
@@ -29637,6 +30481,103 @@ var _StateVariable_map = map[StateVariable]string{
 	36795: _StateVariable_name[1826:1845],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StateVariable_name[0:13], Value: uint32(2849)},
+			{Name: _StateVariable_name[13:25], Value: uint32(2884)},
+			{Name: _StateVariable_name[25:42], Value: uint32(2885)},
+			{Name: _StateVariable_name[42:55], Value: uint32(2886)},
+			{Name: _StateVariable_name[55:69], Value: uint32(2928)},
+			{Name: _StateVariable_name[69:82], Value: uint32(2929)},
+			{Name: _StateVariable_name[82:100], Value: uint32(2930)},
+			{Name: _StateVariable_name[100:120], Value: uint32(2931)},
+			{Name: _StateVariable_name[120:133], Value: uint32(2932)},
+			{Name: _StateVariable_name[133:148], Value: uint32(2960)},
+			{Name: _StateVariable_name[148:170], Value: uint32(2961)},
+			{Name: _StateVariable_name[170:185], Value: uint32(2962)},
+			{Name: _StateVariable_name[185:206], Value: uint32(2963)},
+			{Name: _StateVariable_name[206:221], Value: uint32(2964)},
+			{Name: _StateVariable_name[221:247], Value: uint32(2965)},
+			{Name: _StateVariable_name[247:273], Value: uint32(2966)},
+			{Name: _StateVariable_name[273:287], Value: uint32(2967)},
+			{Name: _StateVariable_name[287:307], Value: uint32(2968)},
+			{Name: _StateVariable_name[307:318], Value: uint32(2978)},
+			{Name: _StateVariable_name[318:327], Value: uint32(3024)},
+			{Name: _StateVariable_name[327:335], Value: uint32(3042)},
+			{Name: _StateVariable_name[335:349], Value: uint32(3088)},
+			{Name: _StateVariable_name[349:364], Value: uint32(3089)},
+			{Name: _StateVariable_name[364:384], Value: uint32(3106)},
+			{Name: _StateVariable_name[384:402], Value: uint32(3107)},
+			{Name: _StateVariable_name[402:421], Value: uint32(3317)},
+			{Name: _StateVariable_name[421:438], Value: uint32(3333)},
+			{Name: _StateVariable_name[438:457], Value: uint32(3379)},
+			{Name: _StateVariable_name[457:477], Value: uint32(3386)},
+			{Name: _StateVariable_name[477:493], Value: uint32(3408)},
+			{Name: _StateVariable_name[493:504], Value: uint32(3410)},
+			{Name: _StateVariable_name[504:517], Value: uint32(3411)},
+			{Name: _StateVariable_name[517:529], Value: uint32(3412)},
+			{Name: _StateVariable_name[529:542], Value: uint32(3413)},
+			{Name: _StateVariable_name[542:555], Value: uint32(3414)},
+			{Name: _StateVariable_name[555:570], Value: uint32(3415)},
+			{Name: _StateVariable_name[570:593], Value: uint32(10752)},
+			{Name: _StateVariable_name[593:607], Value: uint32(32773)},
+			{Name: _StateVariable_name[607:628], Value: uint32(32777)},
+			{Name: _StateVariable_name[628:650], Value: uint32(32823)},
+			{Name: _StateVariable_name[650:674], Value: uint32(32824)},
+			{Name: _StateVariable_name[674:695], Value: uint32(32873)},
+			{Name: _StateVariable_name[695:722], Value: uint32(32926)},
+			{Name: _StateVariable_name[722:740], Value: uint32(32928)},
+			{Name: _StateVariable_name[740:757], Value: uint32(32936)},
+			{Name: _StateVariable_name[757:767], Value: uint32(32937)},
+			{Name: _StateVariable_name[767:791], Value: uint32(32938)},
+			{Name: _StateVariable_name[791:816], Value: uint32(32939)},
+			{Name: _StateVariable_name[816:832], Value: uint32(32968)},
+			{Name: _StateVariable_name[832:848], Value: uint32(32969)},
+			{Name: _StateVariable_name[848:866], Value: uint32(32970)},
+			{Name: _StateVariable_name[866:884], Value: uint32(32971)},
+			{Name: _StateVariable_name[884:907], Value: uint32(33170)},
+			{Name: _StateVariable_name[907:934], Value: uint32(33901)},
+			{Name: _StateVariable_name[934:961], Value: uint32(33902)},
+			{Name: _StateVariable_name[961:978], Value: uint32(34016)},
+			{Name: _StateVariable_name[978:1002], Value: uint32(34024)},
+			{Name: _StateVariable_name[1002:1035], Value: uint32(34047)},
+			{Name: _StateVariable_name[1035:1062], Value: uint32(34068)},
+			{Name: _StateVariable_name[1062:1090], Value: uint32(34076)},
+			{Name: _StateVariable_name[1090:1123], Value: uint32(34466)},
+			{Name: _StateVariable_name[1123:1152], Value: uint32(34467)},
+			{Name: _StateVariable_name[1152:1172], Value: uint32(34816)},
+			{Name: _StateVariable_name[1172:1192], Value: uint32(34817)},
+			{Name: _StateVariable_name[1192:1223], Value: uint32(34818)},
+			{Name: _StateVariable_name[1223:1254], Value: uint32(34819)},
+			{Name: _StateVariable_name[1254:1277], Value: uint32(34877)},
+			{Name: _StateVariable_name[1277:1298], Value: uint32(34921)},
+			{Name: _StateVariable_name[1298:1324], Value: uint32(34930)},
+			{Name: _StateVariable_name[1324:1347], Value: uint32(34964)},
+			{Name: _StateVariable_name[1347:1378], Value: uint32(34965)},
+			{Name: _StateVariable_name[1378:1411], Value: uint32(35660)},
+			{Name: _StateVariable_name[1411:1446], Value: uint32(35661)},
+			{Name: _StateVariable_name[1446:1464], Value: uint32(35725)},
+			{Name: _StateVariable_name[1464:1497], Value: uint32(35738)},
+			{Name: _StateVariable_name[1497:1532], Value: uint32(35739)},
+			{Name: _StateVariable_name[1532:1551], Value: uint32(36003)},
+			{Name: _StateVariable_name[1551:1577], Value: uint32(36004)},
+			{Name: _StateVariable_name[1577:1602], Value: uint32(36005)},
+			{Name: _StateVariable_name[1602:1624], Value: uint32(36006)},
+			{Name: _StateVariable_name[1624:1647], Value: uint32(36007)},
+			{Name: _StateVariable_name[1647:1674], Value: uint32(36010)},
+			{Name: _StateVariable_name[1674:1698], Value: uint32(36344)},
+			{Name: _StateVariable_name[1698:1726], Value: uint32(36345)},
+			{Name: _StateVariable_name[1726:1744], Value: uint32(36346)},
+			{Name: _StateVariable_name[1744:1773], Value: uint32(36347)},
+			{Name: _StateVariable_name[1773:1795], Value: uint32(36348)},
+			{Name: _StateVariable_name[1795:1826], Value: uint32(36349)},
+			{Name: _StateVariable_name[1826:1845], Value: uint32(36795)},
+		},
+	})
+}
+
 func (v StateVariable) String() string {
 	if s, ok := _StateVariable_map[v]; ok {
 		return s
@@ -29660,6 +30601,15 @@ var _StateVariable_EXT_disjoint_timer_query_map = map[StateVariable_EXT_disjoint
 	36795: _StateVariable_EXT_disjoint_timer_query_name[0:19],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StateVariable_EXT_disjoint_timer_query", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StateVariable_EXT_disjoint_timer_query_name[0:19], Value: uint32(36795)},
+		},
+	})
+}
+
 func (v StateVariable_EXT_disjoint_timer_query) String() string {
 	if s, ok := _StateVariable_EXT_disjoint_timer_query_map[v]; ok {
 		return s
@@ -29681,6 +30631,15 @@ const _StateVariable_EXT_texture_filter_anisotropic_name = "GL_MAX_TEXTURE_MAX_A
 
 var _StateVariable_EXT_texture_filter_anisotropic_map = map[StateVariable_EXT_texture_filter_anisotropic]string{
 	34047: _StateVariable_EXT_texture_filter_anisotropic_name[0:33],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StateVariable_EXT_texture_filter_anisotropic", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StateVariable_EXT_texture_filter_anisotropic_name[0:33], Value: uint32(34047)},
+		},
+	})
 }
 
 func (v StateVariable_EXT_texture_filter_anisotropic) String() string {
@@ -29791,6 +30750,100 @@ var _StateVariable_GLES_2_0_map = map[StateVariable_GLES_2_0]string{
 	36349: _StateVariable_GLES_2_0_name[1735:1766],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StateVariable_GLES_2_0", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StateVariable_GLES_2_0_name[0:13], Value: uint32(2849)},
+			{Name: _StateVariable_GLES_2_0_name[13:25], Value: uint32(2884)},
+			{Name: _StateVariable_GLES_2_0_name[25:42], Value: uint32(2885)},
+			{Name: _StateVariable_GLES_2_0_name[42:55], Value: uint32(2886)},
+			{Name: _StateVariable_GLES_2_0_name[55:69], Value: uint32(2928)},
+			{Name: _StateVariable_GLES_2_0_name[69:82], Value: uint32(2929)},
+			{Name: _StateVariable_GLES_2_0_name[82:100], Value: uint32(2930)},
+			{Name: _StateVariable_GLES_2_0_name[100:120], Value: uint32(2931)},
+			{Name: _StateVariable_GLES_2_0_name[120:133], Value: uint32(2932)},
+			{Name: _StateVariable_GLES_2_0_name[133:148], Value: uint32(2960)},
+			{Name: _StateVariable_GLES_2_0_name[148:170], Value: uint32(2961)},
+			{Name: _StateVariable_GLES_2_0_name[170:185], Value: uint32(2962)},
+			{Name: _StateVariable_GLES_2_0_name[185:206], Value: uint32(2963)},
+			{Name: _StateVariable_GLES_2_0_name[206:221], Value: uint32(2964)},
+			{Name: _StateVariable_GLES_2_0_name[221:247], Value: uint32(2965)},
+			{Name: _StateVariable_GLES_2_0_name[247:273], Value: uint32(2966)},
+			{Name: _StateVariable_GLES_2_0_name[273:287], Value: uint32(2967)},
+			{Name: _StateVariable_GLES_2_0_name[287:307], Value: uint32(2968)},
+			{Name: _StateVariable_GLES_2_0_name[307:318], Value: uint32(2978)},
+			{Name: _StateVariable_GLES_2_0_name[318:327], Value: uint32(3024)},
+			{Name: _StateVariable_GLES_2_0_name[327:335], Value: uint32(3042)},
+			{Name: _StateVariable_GLES_2_0_name[335:349], Value: uint32(3088)},
+			{Name: _StateVariable_GLES_2_0_name[349:364], Value: uint32(3089)},
+			{Name: _StateVariable_GLES_2_0_name[364:384], Value: uint32(3106)},
+			{Name: _StateVariable_GLES_2_0_name[384:402], Value: uint32(3107)},
+			{Name: _StateVariable_GLES_2_0_name[402:421], Value: uint32(3317)},
+			{Name: _StateVariable_GLES_2_0_name[421:438], Value: uint32(3333)},
+			{Name: _StateVariable_GLES_2_0_name[438:457], Value: uint32(3379)},
+			{Name: _StateVariable_GLES_2_0_name[457:477], Value: uint32(3386)},
+			{Name: _StateVariable_GLES_2_0_name[477:493], Value: uint32(3408)},
+			{Name: _StateVariable_GLES_2_0_name[493:504], Value: uint32(3410)},
+			{Name: _StateVariable_GLES_2_0_name[504:517], Value: uint32(3411)},
+			{Name: _StateVariable_GLES_2_0_name[517:529], Value: uint32(3412)},
+			{Name: _StateVariable_GLES_2_0_name[529:542], Value: uint32(3413)},
+			{Name: _StateVariable_GLES_2_0_name[542:555], Value: uint32(3414)},
+			{Name: _StateVariable_GLES_2_0_name[555:570], Value: uint32(3415)},
+			{Name: _StateVariable_GLES_2_0_name[570:593], Value: uint32(10752)},
+			{Name: _StateVariable_GLES_2_0_name[593:607], Value: uint32(32773)},
+			{Name: _StateVariable_GLES_2_0_name[607:628], Value: uint32(32777)},
+			{Name: _StateVariable_GLES_2_0_name[628:650], Value: uint32(32823)},
+			{Name: _StateVariable_GLES_2_0_name[650:674], Value: uint32(32824)},
+			{Name: _StateVariable_GLES_2_0_name[674:695], Value: uint32(32873)},
+			{Name: _StateVariable_GLES_2_0_name[695:722], Value: uint32(32926)},
+			{Name: _StateVariable_GLES_2_0_name[722:740], Value: uint32(32928)},
+			{Name: _StateVariable_GLES_2_0_name[740:757], Value: uint32(32936)},
+			{Name: _StateVariable_GLES_2_0_name[757:767], Value: uint32(32937)},
+			{Name: _StateVariable_GLES_2_0_name[767:791], Value: uint32(32938)},
+			{Name: _StateVariable_GLES_2_0_name[791:816], Value: uint32(32939)},
+			{Name: _StateVariable_GLES_2_0_name[816:832], Value: uint32(32968)},
+			{Name: _StateVariable_GLES_2_0_name[832:848], Value: uint32(32969)},
+			{Name: _StateVariable_GLES_2_0_name[848:866], Value: uint32(32970)},
+			{Name: _StateVariable_GLES_2_0_name[866:884], Value: uint32(32971)},
+			{Name: _StateVariable_GLES_2_0_name[884:907], Value: uint32(33170)},
+			{Name: _StateVariable_GLES_2_0_name[907:934], Value: uint32(33901)},
+			{Name: _StateVariable_GLES_2_0_name[934:961], Value: uint32(33902)},
+			{Name: _StateVariable_GLES_2_0_name[961:978], Value: uint32(34016)},
+			{Name: _StateVariable_GLES_2_0_name[978:1002], Value: uint32(34024)},
+			{Name: _StateVariable_GLES_2_0_name[1002:1029], Value: uint32(34068)},
+			{Name: _StateVariable_GLES_2_0_name[1029:1057], Value: uint32(34076)},
+			{Name: _StateVariable_GLES_2_0_name[1057:1090], Value: uint32(34466)},
+			{Name: _StateVariable_GLES_2_0_name[1090:1119], Value: uint32(34467)},
+			{Name: _StateVariable_GLES_2_0_name[1119:1139], Value: uint32(34816)},
+			{Name: _StateVariable_GLES_2_0_name[1139:1159], Value: uint32(34817)},
+			{Name: _StateVariable_GLES_2_0_name[1159:1190], Value: uint32(34818)},
+			{Name: _StateVariable_GLES_2_0_name[1190:1221], Value: uint32(34819)},
+			{Name: _StateVariable_GLES_2_0_name[1221:1244], Value: uint32(34877)},
+			{Name: _StateVariable_GLES_2_0_name[1244:1265], Value: uint32(34921)},
+			{Name: _StateVariable_GLES_2_0_name[1265:1291], Value: uint32(34930)},
+			{Name: _StateVariable_GLES_2_0_name[1291:1314], Value: uint32(34964)},
+			{Name: _StateVariable_GLES_2_0_name[1314:1345], Value: uint32(34965)},
+			{Name: _StateVariable_GLES_2_0_name[1345:1378], Value: uint32(35660)},
+			{Name: _StateVariable_GLES_2_0_name[1378:1413], Value: uint32(35661)},
+			{Name: _StateVariable_GLES_2_0_name[1413:1431], Value: uint32(35725)},
+			{Name: _StateVariable_GLES_2_0_name[1431:1464], Value: uint32(35738)},
+			{Name: _StateVariable_GLES_2_0_name[1464:1499], Value: uint32(35739)},
+			{Name: _StateVariable_GLES_2_0_name[1499:1518], Value: uint32(36003)},
+			{Name: _StateVariable_GLES_2_0_name[1518:1544], Value: uint32(36004)},
+			{Name: _StateVariable_GLES_2_0_name[1544:1569], Value: uint32(36005)},
+			{Name: _StateVariable_GLES_2_0_name[1569:1591], Value: uint32(36006)},
+			{Name: _StateVariable_GLES_2_0_name[1591:1614], Value: uint32(36007)},
+			{Name: _StateVariable_GLES_2_0_name[1614:1638], Value: uint32(36344)},
+			{Name: _StateVariable_GLES_2_0_name[1638:1666], Value: uint32(36345)},
+			{Name: _StateVariable_GLES_2_0_name[1666:1684], Value: uint32(36346)},
+			{Name: _StateVariable_GLES_2_0_name[1684:1713], Value: uint32(36347)},
+			{Name: _StateVariable_GLES_2_0_name[1713:1735], Value: uint32(36348)},
+			{Name: _StateVariable_GLES_2_0_name[1735:1766], Value: uint32(36349)},
+		},
+	})
+}
+
 func (v StateVariable_GLES_2_0) String() string {
 	if s, ok := _StateVariable_GLES_2_0_map[v]; ok {
 		return s
@@ -29812,6 +30865,15 @@ const _StateVariable_GLES_3_1_name = "GL_READ_FRAMEBUFFER_BINDING"
 
 var _StateVariable_GLES_3_1_map = map[StateVariable_GLES_3_1]string{
 	36010: _StateVariable_GLES_3_1_name[0:27],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StateVariable_GLES_3_1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StateVariable_GLES_3_1_name[0:27], Value: uint32(36010)},
+		},
+	})
 }
 
 func (v StateVariable_GLES_3_1) String() string {
@@ -29844,6 +30906,22 @@ var _StencilAction_map = map[StencilAction]string{
 	34056: _StencilAction_name[59:71],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StencilAction_name[0:7], Value: uint32(0)},
+			{Name: _StencilAction_name[7:16], Value: uint32(5386)},
+			{Name: _StencilAction_name[16:23], Value: uint32(7680)},
+			{Name: _StencilAction_name[23:33], Value: uint32(7681)},
+			{Name: _StencilAction_name[33:40], Value: uint32(7682)},
+			{Name: _StencilAction_name[40:47], Value: uint32(7683)},
+			{Name: _StencilAction_name[47:59], Value: uint32(34055)},
+			{Name: _StencilAction_name[59:71], Value: uint32(34056)},
+		},
+	})
+}
+
 func (v StencilAction) String() string {
 	if s, ok := _StencilAction_map[v]; ok {
 		return s
@@ -29870,6 +30948,18 @@ var _StringConstant_map = map[StringConstant]string{
 	7939: _StringConstant_name[30:43],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _StringConstant_name[0:9], Value: uint32(7936)},
+			{Name: _StringConstant_name[9:20], Value: uint32(7937)},
+			{Name: _StringConstant_name[20:30], Value: uint32(7938)},
+			{Name: _StringConstant_name[30:43], Value: uint32(7939)},
+		},
+	})
+}
+
 func (v StringConstant) String() string {
 	if s, ok := _StringConstant_map[v]; ok {
 		return s
@@ -29893,6 +30983,15 @@ var _SyncCondition_map = map[SyncCondition]string{
 	37143: _SyncCondition_name[0:29],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "SyncCondition", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _SyncCondition_name[0:29], Value: uint32(37143)},
+		},
+	})
+}
+
 func (v SyncCondition) String() string {
 	if s, ok := _SyncCondition_map[v]; ok {
 		return s
@@ -29914,6 +31013,15 @@ const _SyncFlags_name = "GL_SYNC_FLUSH_COMMANDS_BIT"
 
 var _SyncFlags_map = map[SyncFlags]string{
 	1: _SyncFlags_name[0:26],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "SyncFlags", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _SyncFlags_name[0:26], Value: uint32(1)},
+		},
+	})
 }
 
 func (v SyncFlags) String() string {
@@ -29946,6 +31054,22 @@ var _TestFunction_map = map[TestFunction]string{
 	519: _TestFunction_name[62:71],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TestFunction_name[0:8], Value: uint32(512)},
+			{Name: _TestFunction_name[8:15], Value: uint32(513)},
+			{Name: _TestFunction_name[15:23], Value: uint32(514)},
+			{Name: _TestFunction_name[23:32], Value: uint32(515)},
+			{Name: _TestFunction_name[32:42], Value: uint32(516)},
+			{Name: _TestFunction_name[42:53], Value: uint32(517)},
+			{Name: _TestFunction_name[53:62], Value: uint32(518)},
+			{Name: _TestFunction_name[62:71], Value: uint32(519)},
+		},
+	})
+}
+
 func (v TestFunction) String() string {
 	if s, ok := _TestFunction_map[v]; ok {
 		return s
@@ -29970,6 +31094,18 @@ var _TexelComponent_map = map[TexelComponent]string{
 	6404: _TexelComponent_name[6:14],
 	6405: _TexelComponent_name[14:21],
 	6406: _TexelComponent_name[21:29],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TexelComponent_name[0:6], Value: uint32(6403)},
+			{Name: _TexelComponent_name[6:14], Value: uint32(6404)},
+			{Name: _TexelComponent_name[14:21], Value: uint32(6405)},
+			{Name: _TexelComponent_name[21:29], Value: uint32(6406)},
+		},
+	})
 }
 
 func (v TexelComponent) String() string {
@@ -30009,6 +31145,29 @@ var _TexelFormat_map = map[TexelFormat]string{
 	36249: _TexelFormat_name[176:191],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TexelFormat_name[0:18], Value: uint32(6402)},
+			{Name: _TexelFormat_name[18:24], Value: uint32(6403)},
+			{Name: _TexelFormat_name[24:32], Value: uint32(6406)},
+			{Name: _TexelFormat_name[32:38], Value: uint32(6407)},
+			{Name: _TexelFormat_name[38:45], Value: uint32(6408)},
+			{Name: _TexelFormat_name[45:57], Value: uint32(6409)},
+			{Name: _TexelFormat_name[57:75], Value: uint32(6410)},
+			{Name: _TexelFormat_name[75:95], Value: uint32(33189)},
+			{Name: _TexelFormat_name[95:100], Value: uint32(33319)},
+			{Name: _TexelFormat_name[100:113], Value: uint32(33320)},
+			{Name: _TexelFormat_name[113:129], Value: uint32(34041)},
+			{Name: _TexelFormat_name[129:148], Value: uint32(35056)},
+			{Name: _TexelFormat_name[148:162], Value: uint32(36244)},
+			{Name: _TexelFormat_name[162:176], Value: uint32(36248)},
+			{Name: _TexelFormat_name[176:191], Value: uint32(36249)},
+		},
+	})
+}
+
 func (v TexelFormat) String() string {
 	if s, ok := _TexelFormat_map[v]; ok {
 		return s
@@ -30034,6 +31193,19 @@ var _TexelFormat_GLES_1_1_map = map[TexelFormat_GLES_1_1]string{
 	6408: _TexelFormat_GLES_1_1_name[14:21],
 	6409: _TexelFormat_GLES_1_1_name[21:33],
 	6410: _TexelFormat_GLES_1_1_name[33:51],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TexelFormat_GLES_1_1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TexelFormat_GLES_1_1_name[0:8], Value: uint32(6406)},
+			{Name: _TexelFormat_GLES_1_1_name[8:14], Value: uint32(6407)},
+			{Name: _TexelFormat_GLES_1_1_name[14:21], Value: uint32(6408)},
+			{Name: _TexelFormat_GLES_1_1_name[21:33], Value: uint32(6409)},
+			{Name: _TexelFormat_GLES_1_1_name[33:51], Value: uint32(6410)},
+		},
+	})
 }
 
 func (v TexelFormat_GLES_1_1) String() string {
@@ -30068,6 +31240,24 @@ var _TexelFormat_GLES_3_0_map = map[TexelFormat_GLES_3_0]string{
 	36249: _TexelFormat_GLES_3_0_name[125:140],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TexelFormat_GLES_3_0", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TexelFormat_GLES_3_0_name[0:18], Value: uint32(6402)},
+			{Name: _TexelFormat_GLES_3_0_name[18:24], Value: uint32(6403)},
+			{Name: _TexelFormat_GLES_3_0_name[24:44], Value: uint32(33189)},
+			{Name: _TexelFormat_GLES_3_0_name[44:49], Value: uint32(33319)},
+			{Name: _TexelFormat_GLES_3_0_name[49:62], Value: uint32(33320)},
+			{Name: _TexelFormat_GLES_3_0_name[62:78], Value: uint32(34041)},
+			{Name: _TexelFormat_GLES_3_0_name[78:97], Value: uint32(35056)},
+			{Name: _TexelFormat_GLES_3_0_name[97:111], Value: uint32(36244)},
+			{Name: _TexelFormat_GLES_3_0_name[111:125], Value: uint32(36248)},
+			{Name: _TexelFormat_GLES_3_0_name[125:140], Value: uint32(36249)},
+		},
+	})
+}
+
 func (v TexelFormat_GLES_3_0) String() string {
 	if s, ok := _TexelFormat_GLES_3_0_map[v]; ok {
 		return s
@@ -30098,6 +31288,22 @@ var _TexelType_map = map[TexelType]string{
 	34042: _TexelType_name[129:149],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TexelType_name[0:16], Value: uint32(5121)},
+			{Name: _TexelType_name[16:33], Value: uint32(5123)},
+			{Name: _TexelType_name[33:48], Value: uint32(5125)},
+			{Name: _TexelType_name[48:56], Value: uint32(5126)},
+			{Name: _TexelType_name[56:81], Value: uint32(32819)},
+			{Name: _TexelType_name[81:106], Value: uint32(32820)},
+			{Name: _TexelType_name[106:129], Value: uint32(33635)},
+			{Name: _TexelType_name[129:149], Value: uint32(34042)},
+		},
+	})
+}
+
 func (v TexelType) String() string {
 	if s, ok := _TexelType_map[v]; ok {
 		return s
@@ -30119,6 +31325,15 @@ const _Texture2DImageTarget_name = "GL_TEXTURE_2D"
 
 var _Texture2DImageTarget_map = map[Texture2DImageTarget]string{
 	3553: _Texture2DImageTarget_name[0:13],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Texture2DImageTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Texture2DImageTarget_name[0:13], Value: uint32(3553)},
+		},
+	})
 }
 
 func (v Texture2DImageTarget) String() string {
@@ -30147,6 +31362,20 @@ var _TextureFilterMode_map = map[TextureFilterMode]string{
 	9985: _TextureFilterMode_name[44:68],
 	9986: _TextureFilterMode_name[68:92],
 	9987: _TextureFilterMode_name[92:115],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureFilterMode_name[0:10], Value: uint32(9728)},
+			{Name: _TextureFilterMode_name[10:19], Value: uint32(9729)},
+			{Name: _TextureFilterMode_name[19:44], Value: uint32(9984)},
+			{Name: _TextureFilterMode_name[44:68], Value: uint32(9985)},
+			{Name: _TextureFilterMode_name[68:92], Value: uint32(9986)},
+			{Name: _TextureFilterMode_name[92:115], Value: uint32(9987)},
+		},
+	})
 }
 
 func (v TextureFilterMode) String() string {
@@ -30178,6 +31407,21 @@ var _TextureImageTarget_map = map[TextureImageTarget]string{
 	34074: _TextureImageTarget_name[163:193],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureImageTarget_name[0:13], Value: uint32(3553)},
+			{Name: _TextureImageTarget_name[13:43], Value: uint32(34069)},
+			{Name: _TextureImageTarget_name[43:73], Value: uint32(34070)},
+			{Name: _TextureImageTarget_name[73:103], Value: uint32(34071)},
+			{Name: _TextureImageTarget_name[103:133], Value: uint32(34072)},
+			{Name: _TextureImageTarget_name[133:163], Value: uint32(34073)},
+			{Name: _TextureImageTarget_name[163:193], Value: uint32(34074)},
+		},
+	})
+}
+
 func (v TextureImageTarget) String() string {
 	if s, ok := _TextureImageTarget_map[v]; ok {
 		return s
@@ -30201,6 +31445,17 @@ var _TextureKind_map = map[TextureKind]string{
 	0: _TextureKind_name[0:9],
 	1: _TextureKind_name[9:18],
 	2: _TextureKind_name[18:25],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureKind_name[0:9], Value: uint32(0)},
+			{Name: _TextureKind_name[9:18], Value: uint32(1)},
+			{Name: _TextureKind_name[18:25], Value: uint32(2)},
+		},
+	})
 }
 
 func (v TextureKind) String() string {
@@ -30234,6 +31489,23 @@ var _TextureParameter_map = map[TextureParameter]string{
 	36421: _TextureParameter_name[165:185],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureParameter_name[0:21], Value: uint32(10240)},
+			{Name: _TextureParameter_name[21:42], Value: uint32(10241)},
+			{Name: _TextureParameter_name[42:59], Value: uint32(10242)},
+			{Name: _TextureParameter_name[59:76], Value: uint32(10243)},
+			{Name: _TextureParameter_name[76:105], Value: uint32(34046)},
+			{Name: _TextureParameter_name[105:125], Value: uint32(36418)},
+			{Name: _TextureParameter_name[125:145], Value: uint32(36419)},
+			{Name: _TextureParameter_name[145:165], Value: uint32(36420)},
+			{Name: _TextureParameter_name[165:185], Value: uint32(36421)},
+		},
+	})
+}
+
 func (v TextureParameter) String() string {
 	if s, ok := _TextureParameter_map[v]; ok {
 		return s
@@ -30255,6 +31527,15 @@ const _TextureParameter_EXT_texture_filter_anisotropic_name = "GL_TEXTURE_MAX_AN
 
 var _TextureParameter_EXT_texture_filter_anisotropic_map = map[TextureParameter_EXT_texture_filter_anisotropic]string{
 	34046: _TextureParameter_EXT_texture_filter_anisotropic_name[0:29],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureParameter_EXT_texture_filter_anisotropic", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureParameter_EXT_texture_filter_anisotropic_name[0:29], Value: uint32(34046)},
+		},
+	})
 }
 
 func (v TextureParameter_EXT_texture_filter_anisotropic) String() string {
@@ -30279,6 +31560,16 @@ const _TextureParameter_FilterMode_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_F
 var _TextureParameter_FilterMode_map = map[TextureParameter_FilterMode]string{
 	10240: _TextureParameter_FilterMode_name[0:21],
 	10241: _TextureParameter_FilterMode_name[21:42],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureParameter_FilterMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureParameter_FilterMode_name[0:21], Value: uint32(10240)},
+			{Name: _TextureParameter_FilterMode_name[21:42], Value: uint32(10241)},
+		},
+	})
 }
 
 func (v TextureParameter_FilterMode) String() string {
@@ -30307,6 +31598,18 @@ var _TextureParameter_SwizzleMode_map = map[TextureParameter_SwizzleMode]string{
 	36421: _TextureParameter_SwizzleMode_name[60:80],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureParameter_SwizzleMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureParameter_SwizzleMode_name[0:20], Value: uint32(36418)},
+			{Name: _TextureParameter_SwizzleMode_name[20:40], Value: uint32(36419)},
+			{Name: _TextureParameter_SwizzleMode_name[40:60], Value: uint32(36420)},
+			{Name: _TextureParameter_SwizzleMode_name[60:80], Value: uint32(36421)},
+		},
+	})
+}
+
 func (v TextureParameter_SwizzleMode) String() string {
 	if s, ok := _TextureParameter_SwizzleMode_map[v]; ok {
 		return s
@@ -30329,6 +31632,16 @@ const _TextureParameter_WrapMode_name = "GL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_T"
 var _TextureParameter_WrapMode_map = map[TextureParameter_WrapMode]string{
 	10242: _TextureParameter_WrapMode_name[0:17],
 	10243: _TextureParameter_WrapMode_name[17:34],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureParameter_WrapMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureParameter_WrapMode_name[0:17], Value: uint32(10242)},
+			{Name: _TextureParameter_WrapMode_name[17:34], Value: uint32(10243)},
+		},
+	})
 }
 
 func (v TextureParameter_WrapMode) String() string {
@@ -30356,6 +31669,17 @@ var _TextureTarget_map = map[TextureTarget]string{
 	36197: _TextureTarget_name[32:55],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureTarget_name[0:13], Value: uint32(3553)},
+			{Name: _TextureTarget_name[13:32], Value: uint32(34067)},
+			{Name: _TextureTarget_name[32:55], Value: uint32(36197)},
+		},
+	})
+}
+
 func (v TextureTarget) String() string {
 	if s, ok := _TextureTarget_map[v]; ok {
 		return s
@@ -30377,6 +31701,15 @@ const _TextureTarget_GLES_1_1_name = "GL_TEXTURE_2D"
 
 var _TextureTarget_GLES_1_1_map = map[TextureTarget_GLES_1_1]string{
 	3553: _TextureTarget_GLES_1_1_name[0:13],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureTarget_GLES_1_1", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureTarget_GLES_1_1_name[0:13], Value: uint32(3553)},
+		},
+	})
 }
 
 func (v TextureTarget_GLES_1_1) String() string {
@@ -30402,6 +31735,15 @@ var _TextureTarget_GLES_2_0_map = map[TextureTarget_GLES_2_0]string{
 	34067: _TextureTarget_GLES_2_0_name[0:19],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureTarget_GLES_2_0", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureTarget_GLES_2_0_name[0:19], Value: uint32(34067)},
+		},
+	})
+}
+
 func (v TextureTarget_GLES_2_0) String() string {
 	if s, ok := _TextureTarget_GLES_2_0_map[v]; ok {
 		return s
@@ -30423,6 +31765,15 @@ const _TextureTarget_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
 
 var _TextureTarget_OES_EGL_image_external_map = map[TextureTarget_OES_EGL_image_external]string{
 	36197: _TextureTarget_OES_EGL_image_external_name[0:23],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureTarget_OES_EGL_image_external", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureTarget_OES_EGL_image_external_name[0:23], Value: uint32(36197)},
+		},
+	})
 }
 
 func (v TextureTarget_OES_EGL_image_external) String() string {
@@ -30479,6 +31830,46 @@ var _TextureUnit_map = map[TextureUnit]string{
 	34015: _TextureUnit_name[362:374],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureUnit_name[0:11], Value: uint32(33984)},
+			{Name: _TextureUnit_name[11:22], Value: uint32(33985)},
+			{Name: _TextureUnit_name[22:33], Value: uint32(33986)},
+			{Name: _TextureUnit_name[33:44], Value: uint32(33987)},
+			{Name: _TextureUnit_name[44:55], Value: uint32(33988)},
+			{Name: _TextureUnit_name[55:66], Value: uint32(33989)},
+			{Name: _TextureUnit_name[66:77], Value: uint32(33990)},
+			{Name: _TextureUnit_name[77:88], Value: uint32(33991)},
+			{Name: _TextureUnit_name[88:99], Value: uint32(33992)},
+			{Name: _TextureUnit_name[99:110], Value: uint32(33993)},
+			{Name: _TextureUnit_name[110:122], Value: uint32(33994)},
+			{Name: _TextureUnit_name[122:134], Value: uint32(33995)},
+			{Name: _TextureUnit_name[134:146], Value: uint32(33996)},
+			{Name: _TextureUnit_name[146:158], Value: uint32(33997)},
+			{Name: _TextureUnit_name[158:170], Value: uint32(33998)},
+			{Name: _TextureUnit_name[170:182], Value: uint32(33999)},
+			{Name: _TextureUnit_name[182:194], Value: uint32(34000)},
+			{Name: _TextureUnit_name[194:206], Value: uint32(34001)},
+			{Name: _TextureUnit_name[206:218], Value: uint32(34002)},
+			{Name: _TextureUnit_name[218:230], Value: uint32(34003)},
+			{Name: _TextureUnit_name[230:242], Value: uint32(34004)},
+			{Name: _TextureUnit_name[242:254], Value: uint32(34005)},
+			{Name: _TextureUnit_name[254:266], Value: uint32(34006)},
+			{Name: _TextureUnit_name[266:278], Value: uint32(34007)},
+			{Name: _TextureUnit_name[278:290], Value: uint32(34008)},
+			{Name: _TextureUnit_name[290:302], Value: uint32(34009)},
+			{Name: _TextureUnit_name[302:314], Value: uint32(34010)},
+			{Name: _TextureUnit_name[314:326], Value: uint32(34011)},
+			{Name: _TextureUnit_name[326:338], Value: uint32(34012)},
+			{Name: _TextureUnit_name[338:350], Value: uint32(34013)},
+			{Name: _TextureUnit_name[350:362], Value: uint32(34014)},
+			{Name: _TextureUnit_name[362:374], Value: uint32(34015)},
+		},
+	})
+}
+
 func (v TextureUnit) String() string {
 	if s, ok := _TextureUnit_map[v]; ok {
 		return s
@@ -30502,6 +31893,17 @@ var _TextureWrapMode_map = map[TextureWrapMode]string{
 	10497: _TextureWrapMode_name[0:9],
 	33071: _TextureWrapMode_name[9:25],
 	33648: _TextureWrapMode_name[25:43],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TextureWrapMode_name[0:9], Value: uint32(10497)},
+			{Name: _TextureWrapMode_name[9:25], Value: uint32(33071)},
+			{Name: _TextureWrapMode_name[25:43], Value: uint32(33648)},
+		},
+	})
 }
 
 func (v TextureWrapMode) String() string {
@@ -30558,6 +31960,46 @@ var _TilePreserveMaskQCOM_map = map[TilePreserveMaskQCOM]string{
 	2147483648: _TilePreserveMaskQCOM_name[833:864],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _TilePreserveMaskQCOM_name[0:25], Value: uint32(1)},
+			{Name: _TilePreserveMaskQCOM_name[25:50], Value: uint32(2)},
+			{Name: _TilePreserveMaskQCOM_name[50:75], Value: uint32(4)},
+			{Name: _TilePreserveMaskQCOM_name[75:100], Value: uint32(8)},
+			{Name: _TilePreserveMaskQCOM_name[100:125], Value: uint32(16)},
+			{Name: _TilePreserveMaskQCOM_name[125:150], Value: uint32(32)},
+			{Name: _TilePreserveMaskQCOM_name[150:175], Value: uint32(64)},
+			{Name: _TilePreserveMaskQCOM_name[175:200], Value: uint32(128)},
+			{Name: _TilePreserveMaskQCOM_name[200:225], Value: uint32(256)},
+			{Name: _TilePreserveMaskQCOM_name[225:250], Value: uint32(512)},
+			{Name: _TilePreserveMaskQCOM_name[250:275], Value: uint32(1024)},
+			{Name: _TilePreserveMaskQCOM_name[275:300], Value: uint32(2048)},
+			{Name: _TilePreserveMaskQCOM_name[300:325], Value: uint32(4096)},
+			{Name: _TilePreserveMaskQCOM_name[325:350], Value: uint32(8192)},
+			{Name: _TilePreserveMaskQCOM_name[350:375], Value: uint32(16384)},
+			{Name: _TilePreserveMaskQCOM_name[375:400], Value: uint32(32768)},
+			{Name: _TilePreserveMaskQCOM_name[400:427], Value: uint32(65536)},
+			{Name: _TilePreserveMaskQCOM_name[427:454], Value: uint32(131072)},
+			{Name: _TilePreserveMaskQCOM_name[454:481], Value: uint32(262144)},
+			{Name: _TilePreserveMaskQCOM_name[481:508], Value: uint32(524288)},
+			{Name: _TilePreserveMaskQCOM_name[508:535], Value: uint32(1048576)},
+			{Name: _TilePreserveMaskQCOM_name[535:562], Value: uint32(2097152)},
+			{Name: _TilePreserveMaskQCOM_name[562:589], Value: uint32(4194304)},
+			{Name: _TilePreserveMaskQCOM_name[589:616], Value: uint32(8388608)},
+			{Name: _TilePreserveMaskQCOM_name[616:647], Value: uint32(16777216)},
+			{Name: _TilePreserveMaskQCOM_name[647:678], Value: uint32(33554432)},
+			{Name: _TilePreserveMaskQCOM_name[678:709], Value: uint32(67108864)},
+			{Name: _TilePreserveMaskQCOM_name[709:740], Value: uint32(134217728)},
+			{Name: _TilePreserveMaskQCOM_name[740:771], Value: uint32(268435456)},
+			{Name: _TilePreserveMaskQCOM_name[771:802], Value: uint32(536870912)},
+			{Name: _TilePreserveMaskQCOM_name[802:833], Value: uint32(1073741824)},
+			{Name: _TilePreserveMaskQCOM_name[833:864], Value: uint32(2147483648)},
+		},
+	})
+}
+
 func (v TilePreserveMaskQCOM) String() string {
 	if s, ok := _TilePreserveMaskQCOM_map[v]; ok {
 		return s
@@ -30581,6 +32023,15 @@ var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{
 	5131: _Type_ARB_half_float_vertex_name[0:17],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Type_ARB_half_float_vertex", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Type_ARB_half_float_vertex_name[0:17], Value: uint32(5131)},
+		},
+	})
+}
+
 func (v Type_ARB_half_float_vertex) String() string {
 	if s, ok := _Type_ARB_half_float_vertex_map[v]; ok {
 		return s
@@ -30602,6 +32053,15 @@ const _Type_OES_vertex_half_float_name = "GL_HALF_FLOAT_OES"
 
 var _Type_OES_vertex_half_float_map = map[Type_OES_vertex_half_float]string{
 	36193: _Type_OES_vertex_half_float_name[0:17],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Type_OES_vertex_half_float", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Type_OES_vertex_half_float_name[0:17], Value: uint32(36193)},
+		},
+	})
 }
 
 func (v Type_OES_vertex_half_float) String() string {
@@ -30634,6 +32094,22 @@ var _UniformBlockParameter_map = map[UniformBlockParameter]string{
 	35398: _UniformBlockParameter_name[239:285],
 }
 
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _UniformBlockParameter_name[0:24], Value: uint32(35391)},
+			{Name: _UniformBlockParameter_name[24:50], Value: uint32(35392)},
+			{Name: _UniformBlockParameter_name[50:78], Value: uint32(35393)},
+			{Name: _UniformBlockParameter_name[78:110], Value: uint32(35394)},
+			{Name: _UniformBlockParameter_name[110:149], Value: uint32(35395)},
+			{Name: _UniformBlockParameter_name[149:193], Value: uint32(35396)},
+			{Name: _UniformBlockParameter_name[193:239], Value: uint32(35397)},
+			{Name: _UniformBlockParameter_name[239:285], Value: uint32(35398)},
+		},
+	})
+}
+
 func (v UniformBlockParameter) String() string {
 	if s, ok := _UniformBlockParameter_map[v]; ok {
 		return s
@@ -30662,6 +32138,22 @@ var _VertexAttribType_map = map[VertexAttribType]string{
 	5131:  _VertexAttribType_name[56:73],
 	5132:  _VertexAttribType_name[73:81],
 	36193: _VertexAttribType_name[81:98],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _VertexAttribType_name[0:7], Value: uint32(5120)},
+			{Name: _VertexAttribType_name[7:23], Value: uint32(5121)},
+			{Name: _VertexAttribType_name[23:31], Value: uint32(5122)},
+			{Name: _VertexAttribType_name[31:48], Value: uint32(5123)},
+			{Name: _VertexAttribType_name[48:56], Value: uint32(5126)},
+			{Name: _VertexAttribType_name[56:73], Value: uint32(5131)},
+			{Name: _VertexAttribType_name[73:81], Value: uint32(5132)},
+			{Name: _VertexAttribType_name[81:98], Value: uint32(36193)},
+		},
+	})
 }
 
 func (v VertexAttribType) String() string {

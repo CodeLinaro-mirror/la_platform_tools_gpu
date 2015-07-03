@@ -220,12 +220,25 @@ var schemaPayload = &schema.Class{
 	},
 }
 
+var ConstantValues schema.Constants
+
 const _ConnectionType_name = "DeviceInfoReplayShutdown"
 
 var _ConnectionType_map = map[ConnectionType]string{
 	0: _ConnectionType_name[0:10],
 	1: _ConnectionType_name[10:16],
 	2: _ConnectionType_name[16:24],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "ConnectionType", Method: schema.Uint8},
+		Entries: []schema.Constant{
+			{Name: _ConnectionType_name[0:10], Value: uint8(0)},
+			{Name: _ConnectionType_name[10:16], Value: uint8(1)},
+			{Name: _ConnectionType_name[16:24], Value: uint8(2)},
+		},
+	})
 }
 
 func (v ConnectionType) String() string {
@@ -250,6 +263,16 @@ const _MessageType_name = "GetPost"
 var _MessageType_map = map[MessageType]string{
 	0: _MessageType_name[0:3],
 	1: _MessageType_name[3:7],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "MessageType", Method: schema.Uint8},
+		Entries: []schema.Constant{
+			{Name: _MessageType_name[0:3], Value: uint8(0)},
+			{Name: _MessageType_name[3:7], Value: uint8(1)},
+		},
+	})
 }
 
 func (v MessageType) String() string {
@@ -287,6 +310,29 @@ var _Type_map = map[Type]string{
 	12:         _Type_name[72:87],
 	13:         _Type_name[87:102],
 	4294967295: _Type_name[102:106],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "Type", Method: schema.Uint32},
+		Entries: []schema.Constant{
+			{Name: _Type_name[0:4], Value: uint32(0)},
+			{Name: _Type_name[4:8], Value: uint32(1)},
+			{Name: _Type_name[8:13], Value: uint32(2)},
+			{Name: _Type_name[13:18], Value: uint32(3)},
+			{Name: _Type_name[18:23], Value: uint32(4)},
+			{Name: _Type_name[23:28], Value: uint32(5)},
+			{Name: _Type_name[28:34], Value: uint32(6)},
+			{Name: _Type_name[34:40], Value: uint32(7)},
+			{Name: _Type_name[40:46], Value: uint32(8)},
+			{Name: _Type_name[46:51], Value: uint32(9)},
+			{Name: _Type_name[51:57], Value: uint32(10)},
+			{Name: _Type_name[57:72], Value: uint32(11)},
+			{Name: _Type_name[72:87], Value: uint32(12)},
+			{Name: _Type_name[87:102], Value: uint32(13)},
+			{Name: _Type_name[102:106], Value: uint32(4294967295)},
+		},
+	})
 }
 
 func (v Type) String() string {

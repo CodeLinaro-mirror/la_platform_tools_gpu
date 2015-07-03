@@ -5,7 +5,13 @@
 
 package adb
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+)
+
+var ConstantValues schema.Constants
 
 const _DeviceState_name = "offlinedeviceunauthorized"
 
@@ -13,6 +19,17 @@ var _DeviceState_map = map[DeviceState]string{
 	0: _DeviceState_name[0:7],
 	1: _DeviceState_name[7:13],
 	2: _DeviceState_name[13:25],
+}
+
+func init() {
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "DeviceState", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _DeviceState_name[0:7], Value: int32(0)},
+			{Name: _DeviceState_name[7:13], Value: int32(1)},
+			{Name: _DeviceState_name[13:25], Value: int32(2)},
+		},
+	})
 }
 
 func (v DeviceState) String() string {
