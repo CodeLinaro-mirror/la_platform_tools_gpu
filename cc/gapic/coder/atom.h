@@ -61,21 +61,24 @@ namespace atom {
     class Metadata: public Encodable {
     public:
         Metadata() = default;
-        Metadata(gapic::Id Api, uint32_t Flags, char* DocumentationUrl) :
+        Metadata(gapic::Id Api, char* DisplayName, uint32_t Flags, char* DocumentationUrl) :
             mApi(Api),
+            mDisplayName(DisplayName),
             mFlags(Flags),
             mDocumentationUrl(DocumentationUrl) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc7, 0xfa, 0xce, 0x34, 0xb2, 0x08, 0x05, 0xa4, 0x74, 0xef, 0xd6, 0x20, 0x87, 0x57, 0xa8, 0x1e, 0x56, 0x01, 0x8b, 0x55,  } };
+            static gapic::Id ID{ { 0x11, 0xf7, 0x6e, 0xcd, 0x84, 0x4a, 0x7f, 0xdf, 0xb8, 0xfb, 0xa3, 0xaa, 0xcf, 0x30, 0xf3, 0xdd, 0x7f, 0x15, 0x2a, 0x08,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Id(this->mApi);
+            e->String(this->mDisplayName);
             e->Uint32(this->mFlags);
             e->String(this->mDocumentationUrl);
         }
 
         gapic::Id mApi;
+        char* mDisplayName;
         uint32_t mFlags;
         char* mDocumentationUrl;
     };
