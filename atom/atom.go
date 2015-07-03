@@ -35,8 +35,8 @@ import (
 type Atom interface {
 	binary.Object
 
-	// API returns the graphics API this atom belongs to.
-	API() gfxapi.API
+	// API returns the graphics API id this atom belongs to.
+	API() gfxapi.ID
 
 	// Flags returns the flags of the atom.
 	Flags() Flags

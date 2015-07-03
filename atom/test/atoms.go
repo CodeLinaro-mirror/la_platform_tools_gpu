@@ -29,7 +29,7 @@ type AtomA struct {
 	AtomFlags       atom.Flags
 }
 
-func (a *AtomA) API() gfxapi.API                                           { return nil }
+func (a *AtomA) API() gfxapi.ID                                            { return gfxapi.ID{} }
 func (a *AtomA) Flags() atom.Flags                                         { return a.AtomFlags }
 func (a *AtomA) Observations() *atom.Observations                          { return &atom.Observations{} }
 func (a *AtomA) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
@@ -40,7 +40,7 @@ type AtomB struct {
 	Bool            bool
 }
 
-func (a *AtomB) API() gfxapi.API                                           { return nil }
+func (a *AtomB) API() gfxapi.ID                                            { return gfxapi.ID{} }
 func (a *AtomB) Flags() atom.Flags                                         { return 0 }
 func (a *AtomB) Observations() *atom.Observations                          { return &atom.Observations{} }
 func (a *AtomB) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
@@ -50,7 +50,7 @@ type AtomC struct {
 	String          string
 }
 
-func (a *AtomC) API() gfxapi.API                                           { return nil }
+func (a *AtomC) API() gfxapi.ID                                            { return gfxapi.ID{} }
 func (a *AtomC) Flags() atom.Flags                                         { return 0 }
 func (a *AtomC) Observations() *atom.Observations                          { return &atom.Observations{} }
 func (a *AtomC) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
