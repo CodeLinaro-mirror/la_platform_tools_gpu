@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import atom "atom.api"
+import atom   "atom.api"
 import memory "memory.api"
+import path   "path.api"
 import schema "schema.api"
 
 @handle type string ApiId
@@ -113,6 +114,10 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
 cmd CaptureId ReplaceAtom(CaptureId capture,
                           u64       atomId,
                           Binary    data)
+{ return ? }
+
+// Get resolves and returns the object, value or memory with the path p.
+cmd any Get(path.Path p)
 { return ? }
 
 cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
