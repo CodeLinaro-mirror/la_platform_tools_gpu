@@ -83,6 +83,27 @@ type FieldInitializer struct {
 	Value Expression // the value to assign
 }
 
+// Definition represents a named literal definition.
+type Definition struct {
+	noMembers
+	Named
+	AST         *ast.Definition // the underlying syntax node this was built from
+	Annotations                 // the annotations applied to this definition
+	Docs        []string        // the documentation for this definition
+	Expression  Expression      // the value of this definition, type-inferred without context
+}
+
+func (d *Definition) ExpressionType() Type { return d.Expression.ExpressionType() }
+
+// DefinitionUsage represents a named literal usage.
+type DefinitionUsage struct {
+	noMembers
+	Definition *Definition // the definition of this definition usage
+	Expression Expression  // the value of this definition, type-inferred by its usage context
+}
+
+func (d *DefinitionUsage) ExpressionType() Type { return d.Expression.ExpressionType() }
+
 // Enum represents the api enum construct.
 type Enum struct {
 	owned
@@ -169,14 +190,14 @@ type Alias struct {
 
 func (*Alias) isType() {}
 
-// StaticArray represents a multi-dimensional fixed size array type, of the
-// form T[8]
+// StaticArray represents a one-dimension fixed size array type, of the form T[8]
 type StaticArray struct {
 	owned
 	noMembers
-	Named            // the full type name
-	ValueType Type   // the storage type of the elements
-	Size      uint32 // the dimension of the array
+	Named                // the full type name
+	ValueType Type       // the storage type of the elements
+	Size      uint32     // the array size
+	SizeExpr  Expression // the expression representing the array size
 }
 
 func (*StaticArray) isType() {}

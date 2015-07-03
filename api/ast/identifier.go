@@ -44,6 +44,7 @@ const (
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
 	KeywordConst     = "const"
+	KeywordDefine    = "define"
 	KeywordElse      = "else"
 	KeywordEnum      = "enum"
 	KeywordExtern    = "extern"

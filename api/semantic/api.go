@@ -23,6 +23,7 @@ type API struct {
 	members
 	Named
 	Enums        []*Enum        // the set of enums
+	Definitions  []*Definition  // the set of definitions
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
 	Externs      []*Function    // the external function references

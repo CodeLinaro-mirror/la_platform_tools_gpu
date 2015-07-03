@@ -35,6 +35,8 @@ func expression(ctx *context, in ast.Node) semantic.Expression {
 		return binaryOp(ctx, in)
 	case *ast.Call:
 		return call(ctx, in)
+	case *ast.Definition:
+		return expression(ctx, in.Expression)
 	case *ast.Switch:
 		return select_(ctx, in)
 	case *ast.Member:
@@ -244,15 +246,15 @@ func member(ctx *context, in *ast.Member) semantic.Expression {
 	return out
 }
 
-func castToU64(ctx *context, in ast.Node, expr semantic.Expression) semantic.Expression {
+func castTo(ctx *context, in ast.Node, expr semantic.Expression, to semantic.Type) semantic.Expression {
 	ty := expr.ExpressionType()
-	if equal(ty, semantic.Uint64Type) {
+	if equal(ty, to) {
 		return expr
 	}
-	if !castable(ty, semantic.Uint64Type) {
-		ctx.errorf(in, "cannot cast %s to u64", typename(ty))
+	if !castable(ty, to) {
+		ctx.errorf(in, "cannot cast %s to %s", typename(ty), typename(to))
 	}
-	return &semantic.Cast{Object: expr, Type: semantic.Uint64Type}
+	return &semantic.Cast{Object: expr, Type: to}
 }
 
 func index(ctx *context, in *ast.Index) semantic.Expression {
@@ -282,8 +284,8 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 		})
 		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
 			// pointer[a:b]
-			bop.LHS = castToU64(ctx, bop.AST.LHS, bop.LHS)
-			bop.RHS = castToU64(ctx, bop.AST.RHS, bop.RHS)
+			bop.LHS = castTo(ctx, bop.AST.LHS, bop.LHS, semantic.Uint64Type)
+			bop.RHS = castTo(ctx, bop.AST.RHS, bop.RHS, semantic.Uint64Type)
 			out := &semantic.PointerRange{AST: in, Pointer: object, Type: at.Slice, Range: bop}
 			ctx.mappings[in] = out
 			return out
@@ -305,14 +307,14 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 		})
 		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
 			// slice[a:b]
-			bop.LHS = castToU64(ctx, bop.AST.LHS, bop.LHS)
-			bop.RHS = castToU64(ctx, bop.AST.RHS, bop.RHS)
+			bop.LHS = castTo(ctx, bop.AST.LHS, bop.LHS, semantic.Uint64Type)
+			bop.RHS = castTo(ctx, bop.AST.RHS, bop.RHS, semantic.Uint64Type)
 			out := &semantic.SliceRange{AST: in, Slice: object, Type: at, Range: bop}
 			ctx.mappings[in] = out
 			return out
 		}
 		// slice[a]
-		index = castToU64(ctx, in, index)
+		index = castTo(ctx, in, index, semantic.Uint64Type)
 		out := &semantic.SliceIndex{AST: in, Slice: object, Type: at, Index: index}
 		ctx.mappings[in] = out
 		return out
@@ -336,6 +338,13 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 func identifier(ctx *context, in *ast.Identifier) semantic.Expression {
 	out := ctx.get(in, in.Value)
 	switch out := out.(type) {
+	case *semantic.Definition:
+		s := &semantic.DefinitionUsage{
+			Definition: out,
+			Expression: expression(ctx, out.AST),
+		}
+		ctx.mappings[in] = s
+		return s
 	case *semantic.Function:
 		s := &semantic.Callable{Function: out}
 		ctx.mappings[in] = s

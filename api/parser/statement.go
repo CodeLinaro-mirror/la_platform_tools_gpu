@@ -19,7 +19,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// '{' [ url ] { statements } '}' | { statements }
+// '{' { statements } '}'
 func requireBlock(p *parse.Parser, cst *parse.Branch) *ast.Block {
 	block := &ast.Block{}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {

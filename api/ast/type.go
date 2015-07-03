@@ -112,3 +112,13 @@ type Imported struct {
 }
 
 func (t Imported) Fragment() parse.Fragment { return t.CST }
+
+// Definition declares a new named literal, has the form «"define" name value».
+type Definition struct {
+	CST         *parse.Branch // underlying parse structure for this node
+	Annotations Annotations   // the annotations applied to this definition
+	Name        *Identifier   // the name of this definition
+	Expression  Node          // the expression this definition expands to
+}
+
+func (t Definition) Fragment() parse.Fragment { return t.CST }

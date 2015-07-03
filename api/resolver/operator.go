@@ -41,7 +41,7 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 	var lhs semantic.Expression
 	var rhs semantic.Expression
 	switch in.LHS.(type) {
-	case *ast.Number, *ast.Null:
+	case *ast.Number, *ast.Null, *ast.Definition:
 		// leave these to be inferred after the rhs is known
 	default:
 		lhs = expression(ctx, in.LHS)
