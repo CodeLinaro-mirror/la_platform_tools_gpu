@@ -79,7 +79,6 @@ var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &schema.Class{
 	TypeID:  binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
-	Display: "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
 	Fields:  []schema.Field{},
 }
 
@@ -116,7 +115,6 @@ var schemafmtATC_RGB_AMD = &schema.Class{
 	TypeID:  binaryIDfmtATC_RGB_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGB_AMD",
-	Display: "fmtATC_RGB_AMD",
 	Fields:  []schema.Field{},
 }
 
@@ -153,7 +151,6 @@ var schemafmtAlpha = &schema.Class{
 	TypeID:  binaryIDfmtAlpha,
 	Package: "image",
 	Name:    "fmtAlpha",
-	Display: "fmtAlpha",
 	Fields:  []schema.Field{},
 }
 
@@ -190,7 +187,6 @@ var schemafmtETC1_RGB8_OES = &schema.Class{
 	TypeID:  binaryIDfmtETC1_RGB8_OES,
 	Package: "image",
 	Name:    "fmtETC1_RGB8_OES",
-	Display: "fmtETC1_RGB8_OES",
 	Fields:  []schema.Field{},
 }
 
@@ -227,7 +223,6 @@ var schemafmtLuminance = &schema.Class{
 	TypeID:  binaryIDfmtLuminance,
 	Package: "image",
 	Name:    "fmtLuminance",
-	Display: "fmtLuminance",
 	Fields:  []schema.Field{},
 }
 
@@ -264,7 +259,6 @@ var schemafmtLuminanceAlpha = &schema.Class{
 	TypeID:  binaryIDfmtLuminanceAlpha,
 	Package: "image",
 	Name:    "fmtLuminanceAlpha",
-	Display: "fmtLuminanceAlpha",
 	Fields:  []schema.Field{},
 }
 
@@ -301,7 +295,6 @@ var schemafmtPNG = &schema.Class{
 	TypeID:  binaryIDfmtPNG,
 	Package: "image",
 	Name:    "fmtPNG",
-	Display: "fmtPNG",
 	Fields:  []schema.Field{},
 }
 
@@ -338,7 +331,6 @@ var schemafmtRGB = &schema.Class{
 	TypeID:  binaryIDfmtRGB,
 	Package: "image",
 	Name:    "fmtRGB",
-	Display: "fmtRGB",
 	Fields:  []schema.Field{},
 }
 
@@ -375,6 +367,5 @@ var schemafmtRGBA = &schema.Class{
 	TypeID:  binaryIDfmtRGBA,
 	Package: "image",
 	Name:    "fmtRGBA",
-	Display: "fmtRGBA",
 	Fields:  []schema.Field{},
 }

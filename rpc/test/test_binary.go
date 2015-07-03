@@ -131,7 +131,6 @@ var schemaListNode = &schema.Class{
 	TypeID:  binaryIDListNode,
 	Package: "test",
 	Name:    "ListNode",
-	Display: "ListNode",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
@@ -204,7 +203,6 @@ var schemaResource = &schema.Class{
 	TypeID:  binaryIDResource,
 	Package: "test",
 	Name:    "Resource",
-	Display: "Resource",
 	Fields: []schema.Field{
 		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -256,7 +254,6 @@ var schemaResourceId = &schema.Class{
 	TypeID:  binaryIDResourceId,
 	Package: "test",
 	Name:    "ResourceId",
-	Display: "ResourceId",
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -328,7 +325,6 @@ var schemaStruct = &schema.Class{
 	TypeID:  binaryIDStruct,
 	Package: "test",
 	Name:    "Struct",
-	Display: "Struct",
 	Fields: []schema.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -391,7 +387,6 @@ var schemacallAdd = &schema.Class{
 	TypeID:  binaryIDcallAdd,
 	Package: "test",
 	Name:    "callAdd",
-	Display: "callAdd",
 	Fields: []schema.Field{
 		{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -442,7 +437,6 @@ var schemacallEnumToString = &schema.Class{
 	TypeID:  binaryIDcallEnumToString,
 	Package: "test",
 	Name:    "callEnumToString",
-	Display: "callEnumToString",
 	Fields: []schema.Field{
 		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
@@ -483,7 +477,6 @@ var schemacallGetListNodeChain = &schema.Class{
 	TypeID:  binaryIDcallGetListNodeChain,
 	Package: "test",
 	Name:    "callGetListNodeChain",
-	Display: "callGetListNodeChain",
 	Fields:  []schema.Field{},
 }
 
@@ -524,7 +517,6 @@ var schemacallGetListNodeChainArray = &schema.Class{
 	TypeID:  binaryIDcallGetListNodeChainArray,
 	Package: "test",
 	Name:    "callGetListNodeChainArray",
-	Display: "callGetListNodeChainArray",
 	Fields:  []schema.Field{},
 }
 
@@ -561,7 +553,6 @@ var schemacallGetResource = &schema.Class{
 	TypeID:  binaryIDcallGetResource,
 	Package: "test",
 	Name:    "callGetResource",
-	Display: "callGetResource",
 	Fields:  []schema.Field{},
 }
 
@@ -600,7 +591,6 @@ var schemacallGetSingleListNode = &schema.Class{
 	TypeID:  binaryIDcallGetSingleListNode,
 	Package: "test",
 	Name:    "callGetSingleListNode",
-	Display: "callGetSingleListNode",
 	Fields:  []schema.Field{},
 }
 
@@ -637,7 +627,6 @@ var schemacallGetStruct = &schema.Class{
 	TypeID:  binaryIDcallGetStruct,
 	Package: "test",
 	Name:    "callGetStruct",
-	Display: "callGetStruct",
 	Fields:  []schema.Field{},
 }
 
@@ -685,7 +674,6 @@ var schemacallResolveResource = &schema.Class{
 	TypeID:  binaryIDcallResolveResource,
 	Package: "test",
 	Name:    "callResolveResource",
-	Display: "callResolveResource",
 	Fields: []schema.Field{
 		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
@@ -733,7 +721,6 @@ var schemacallSetStruct = &schema.Class{
 	TypeID:  binaryIDcallSetStruct,
 	Package: "test",
 	Name:    "callSetStruct",
-	Display: "callSetStruct",
 	Fields: []schema.Field{
 		{Declared: "s", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
 	},
@@ -781,7 +768,6 @@ var schemacallUseResource = &schema.Class{
 	TypeID:  binaryIDcallUseResource,
 	Package: "test",
 	Name:    "callUseResource",
-	Display: "callUseResource",
 	Fields: []schema.Field{
 		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
@@ -831,7 +817,6 @@ var schemaresultAdd = &schema.Class{
 	TypeID:  binaryIDresultAdd,
 	Package: "test",
 	Name:    "resultAdd",
-	Display: "resultAdd",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -881,7 +866,6 @@ var schemaresultEnumToString = &schema.Class{
 	TypeID:  binaryIDresultEnumToString,
 	Package: "test",
 	Name:    "resultEnumToString",
-	Display: "resultEnumToString",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -939,7 +923,6 @@ var schemaresultGetListNodeChain = &schema.Class{
 	TypeID:  binaryIDresultGetListNodeChain,
 	Package: "test",
 	Name:    "resultGetListNodeChain",
-	Display: "resultGetListNodeChain",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
 	},
@@ -1021,7 +1004,6 @@ var schemaresultGetListNodeChainArray = &schema.Class{
 	TypeID:  binaryIDresultGetListNodeChainArray,
 	Package: "test",
 	Name:    "resultGetListNodeChainArray",
-	Display: "resultGetListNodeChainArray",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}}},
 	},
@@ -1069,7 +1051,6 @@ var schemaresultGetResource = &schema.Class{
 	TypeID:  binaryIDresultGetResource,
 	Package: "test",
 	Name:    "resultGetResource",
-	Display: "resultGetResource",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
 	},
@@ -1129,7 +1110,6 @@ var schemaresultGetSingleListNode = &schema.Class{
 	TypeID:  binaryIDresultGetSingleListNode,
 	Package: "test",
 	Name:    "resultGetSingleListNode",
-	Display: "resultGetSingleListNode",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode", ID: (*ListNode)(nil).Class().ID()}}},
 	},
@@ -1177,7 +1157,6 @@ var schemaresultGetStruct = &schema.Class{
 	TypeID:  binaryIDresultGetStruct,
 	Package: "test",
 	Name:    "resultGetStruct",
-	Display: "resultGetStruct",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Struct", ID: (*Struct)(nil).Class().ID()}},
 	},
@@ -1227,7 +1206,6 @@ var schemaresultResolveResource = &schema.Class{
 	TypeID:  binaryIDresultResolveResource,
 	Package: "test",
 	Name:    "resultResolveResource",
-	Display: "resultResolveResource",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Resource", ID: (*Resource)(nil).Class().ID()}},
 	},
@@ -1266,7 +1244,6 @@ var schemaresultSetStruct = &schema.Class{
 	TypeID:  binaryIDresultSetStruct,
 	Package: "test",
 	Name:    "resultSetStruct",
-	Display: "resultSetStruct",
 	Fields:  []schema.Field{},
 }
 
@@ -1303,7 +1280,6 @@ var schemaresultUseResource = &schema.Class{
 	TypeID:  binaryIDresultUseResource,
 	Package: "test",
 	Name:    "resultUseResource",
-	Display: "resultUseResource",
 	Fields:  []schema.Field{},
 }
 

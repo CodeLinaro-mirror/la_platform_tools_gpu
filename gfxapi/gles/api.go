@@ -8533,12 +8533,12 @@ func (m VertexArrayIdːVertexArrayʳᵐ) Range() [](*VertexArray) {
 // EglInitialize
 ////////////////////////////////////////////////////////////////////////////////
 type EglInitialize struct {
-	binary.Generate `display:"eglInitialize"`
-	observations    atom.Observations
-	Dpy             EGLDisplay
-	Major           EGLintᵖ
-	Minor           EGLintᵖ
-	Result          EGLBoolean
+	binary.Generate
+	observations atom.Observations
+	Dpy          EGLDisplay
+	Major        EGLintᵖ
+	Minor        EGLintᵖ
+	Result       EGLBoolean
 }
 
 func (a *EglInitialize) String() string {
@@ -8568,13 +8568,13 @@ func (a *EglInitialize) Observations() *atom.Observations { return &a.observatio
 // EglCreateContext
 ////////////////////////////////////////////////////////////////////////////////
 type EglCreateContext struct {
-	binary.Generate `display:"eglCreateContext"`
-	observations    atom.Observations
-	Display         EGLDisplay
-	Config          EGLConfig
-	ShareContext    EGLContext
-	AttribList      EGLintᵖ
-	Result          EGLContext
+	binary.Generate
+	observations atom.Observations
+	Display      EGLDisplay
+	Config       EGLConfig
+	ShareContext EGLContext
+	AttribList   EGLintᵖ
+	Result       EGLContext
 }
 
 func (a *EglCreateContext) String() string {
@@ -8604,13 +8604,13 @@ func (a *EglCreateContext) Observations() *atom.Observations { return &a.observa
 // EglMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
 type EglMakeCurrent struct {
-	binary.Generate `display:"eglMakeCurrent"`
-	observations    atom.Observations
-	Display         EGLDisplay
-	Draw            EGLSurface
-	Read            EGLSurface
-	Context         EGLContext
-	Result          EGLBoolean
+	binary.Generate
+	observations atom.Observations
+	Display      EGLDisplay
+	Draw         EGLSurface
+	Read         EGLSurface
+	Context      EGLContext
+	Result       EGLBoolean
 }
 
 func (a *EglMakeCurrent) String() string {
@@ -8640,11 +8640,11 @@ func (a *EglMakeCurrent) Observations() *atom.Observations { return &a.observati
 // EglSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type EglSwapBuffers struct {
-	binary.Generate `display:"eglSwapBuffers"`
-	observations    atom.Observations
-	Display         EGLDisplay
-	Surface         Voidᵖ
-	Result          EGLBoolean
+	binary.Generate
+	observations atom.Observations
+	Display      EGLDisplay
+	Surface      Voidᵖ
+	Result       EGLBoolean
 }
 
 func (a *EglSwapBuffers) String() string {
@@ -8674,13 +8674,13 @@ func (a *EglSwapBuffers) Observations() *atom.Observations { return &a.observati
 // EglQuerySurface
 ////////////////////////////////////////////////////////////////////////////////
 type EglQuerySurface struct {
-	binary.Generate `display:"eglQuerySurface"`
-	observations    atom.Observations
-	Display         EGLDisplay
-	Surface         EGLSurface
-	Attribute       EGLint
-	Value           EGLintᵖ
-	Result          EGLBoolean
+	binary.Generate
+	observations atom.Observations
+	Display      EGLDisplay
+	Surface      EGLSurface
+	Attribute    EGLint
+	Value        EGLintᵖ
+	Result       EGLBoolean
 }
 
 func (a *EglQuerySurface) String() string {
@@ -8710,13 +8710,13 @@ func (a *EglQuerySurface) Observations() *atom.Observations { return &a.observat
 // GlXCreateContext
 ////////////////////////////////////////////////////////////////////////////////
 type GlXCreateContext struct {
-	binary.Generate `display:"glXCreateContext"`
-	observations    atom.Observations
-	Dpy             Voidᵖ
-	Vis             Voidᵖ
-	ShareList       GLXContext
-	Direct          bool
-	Result          GLXContext
+	binary.Generate
+	observations atom.Observations
+	Dpy          Voidᵖ
+	Vis          Voidᵖ
+	ShareList    GLXContext
+	Direct       bool
+	Result       GLXContext
 }
 
 func (a *GlXCreateContext) String() string {
@@ -8746,14 +8746,14 @@ func (a *GlXCreateContext) Observations() *atom.Observations { return &a.observa
 // GlXCreateNewContext
 ////////////////////////////////////////////////////////////////////////////////
 type GlXCreateNewContext struct {
-	binary.Generate `display:"glXCreateNewContext"`
-	observations    atom.Observations
-	Display         Voidᵖ
-	Fbconfig        Voidᵖ
-	Type            uint32
-	Shared          GLXContext
-	Direct          bool
-	Result          GLXContext
+	binary.Generate
+	observations atom.Observations
+	Display      Voidᵖ
+	Fbconfig     Voidᵖ
+	Type         uint32
+	Shared       GLXContext
+	Direct       bool
+	Result       GLXContext
 }
 
 func (a *GlXCreateNewContext) String() string {
@@ -8783,13 +8783,13 @@ func (a *GlXCreateNewContext) Observations() *atom.Observations { return &a.obse
 // GlXMakeContextCurrent
 ////////////////////////////////////////////////////////////////////////////////
 type GlXMakeContextCurrent struct {
-	binary.Generate `display:"glXMakeContextCurrent"`
-	observations    atom.Observations
-	Display         Voidᵖ
-	Draw            GLXDrawable
-	Read            GLXDrawable
-	Ctx             GLXContext
-	Result          Bool
+	binary.Generate
+	observations atom.Observations
+	Display      Voidᵖ
+	Draw         GLXDrawable
+	Read         GLXDrawable
+	Ctx          GLXContext
+	Result       Bool
 }
 
 func (a *GlXMakeContextCurrent) String() string {
@@ -8819,12 +8819,12 @@ func (a *GlXMakeContextCurrent) Observations() *atom.Observations { return &a.ob
 // GlXMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
 type GlXMakeCurrent struct {
-	binary.Generate `display:"glXMakeCurrent"`
-	observations    atom.Observations
-	Display         Voidᵖ
-	Drawable        GLXDrawable
-	Ctx             GLXContext
-	Result          Bool
+	binary.Generate
+	observations atom.Observations
+	Display      Voidᵖ
+	Drawable     GLXDrawable
+	Ctx          GLXContext
+	Result       Bool
 }
 
 func (a *GlXMakeCurrent) String() string {
@@ -8854,10 +8854,10 @@ func (a *GlXMakeCurrent) Observations() *atom.Observations { return &a.observati
 // GlXSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlXSwapBuffers struct {
-	binary.Generate `display:"glXSwapBuffers"`
-	observations    atom.Observations
-	Display         Voidᵖ
-	Drawable        GLXDrawable
+	binary.Generate
+	observations atom.Observations
+	Display      Voidᵖ
+	Drawable     GLXDrawable
 }
 
 func (a *GlXSwapBuffers) String() string {
@@ -8887,13 +8887,13 @@ func (a *GlXSwapBuffers) Observations() *atom.Observations { return &a.observati
 // GlXQueryDrawable
 ////////////////////////////////////////////////////////////////////////////////
 type GlXQueryDrawable struct {
-	binary.Generate `display:"glXQueryDrawable"`
-	observations    atom.Observations
-	Display         Voidᵖ
-	Draw            GLXDrawable
-	Attribute       int64
-	Value           Intᵖ
-	Result          int64
+	binary.Generate
+	observations atom.Observations
+	Display      Voidᵖ
+	Draw         GLXDrawable
+	Attribute    int64
+	Value        Intᵖ
+	Result       int64
 }
 
 func (a *GlXQueryDrawable) String() string {
@@ -8923,10 +8923,10 @@ func (a *GlXQueryDrawable) Observations() *atom.Observations { return &a.observa
 // WglCreateContext
 ////////////////////////////////////////////////////////////////////////////////
 type WglCreateContext struct {
-	binary.Generate `display:"wglCreateContext"`
-	observations    atom.Observations
-	Hdc             HDC
-	Result          HGLRC
+	binary.Generate
+	observations atom.Observations
+	Hdc          HDC
+	Result       HGLRC
 }
 
 func (a *WglCreateContext) String() string {
@@ -8956,12 +8956,12 @@ func (a *WglCreateContext) Observations() *atom.Observations { return &a.observa
 // WglCreateContextAttribsARB
 ////////////////////////////////////////////////////////////////////////////////
 type WglCreateContextAttribsARB struct {
-	binary.Generate `display:"wglCreateContextAttribsARB"`
-	observations    atom.Observations
-	Hdc             HDC
-	HShareContext   HGLRC
-	AttribList      Intᵖ
-	Result          HGLRC
+	binary.Generate
+	observations  atom.Observations
+	Hdc           HDC
+	HShareContext HGLRC
+	AttribList    Intᵖ
+	Result        HGLRC
 }
 
 func (a *WglCreateContextAttribsARB) String() string {
@@ -8991,11 +8991,11 @@ func (a *WglCreateContextAttribsARB) Observations() *atom.Observations { return 
 // WglMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
 type WglMakeCurrent struct {
-	binary.Generate `display:"wglMakeCurrent"`
-	observations    atom.Observations
-	Hdc             HDC
-	Hglrc           HGLRC
-	Result          BOOL
+	binary.Generate
+	observations atom.Observations
+	Hdc          HDC
+	Hglrc        HGLRC
+	Result       BOOL
 }
 
 func (a *WglMakeCurrent) String() string {
@@ -9025,9 +9025,9 @@ func (a *WglMakeCurrent) Observations() *atom.Observations { return &a.observati
 // WglSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type WglSwapBuffers struct {
-	binary.Generate `display:"wglSwapBuffers"`
-	observations    atom.Observations
-	Hdc             HDC
+	binary.Generate
+	observations atom.Observations
+	Hdc          HDC
 }
 
 func (a *WglSwapBuffers) String() string {
@@ -9057,12 +9057,12 @@ func (a *WglSwapBuffers) Observations() *atom.Observations { return &a.observati
 // CGLCreateContext
 ////////////////////////////////////////////////////////////////////////////////
 type CGLCreateContext struct {
-	binary.Generate `display:"CGLCreateContext"`
-	observations    atom.Observations
-	Pix             CGLPixelFormatObj
-	Share           CGLContextObj
-	Ctx             CGLContextObjᵖ
-	Result          CGLError
+	binary.Generate
+	observations atom.Observations
+	Pix          CGLPixelFormatObj
+	Share        CGLContextObj
+	Ctx          CGLContextObjᵖ
+	Result       CGLError
 }
 
 func (a *CGLCreateContext) String() string {
@@ -9092,10 +9092,10 @@ func (a *CGLCreateContext) Observations() *atom.Observations { return &a.observa
 // CGLSetCurrentContext
 ////////////////////////////////////////////////////////////////////////////////
 type CGLSetCurrentContext struct {
-	binary.Generate `display:"CGLSetCurrentContext"`
-	observations    atom.Observations
-	Ctx             CGLContextObj
-	Result          CGLError
+	binary.Generate
+	observations atom.Observations
+	Ctx          CGLContextObj
+	Result       CGLError
 }
 
 func (a *CGLSetCurrentContext) String() string {
@@ -9125,13 +9125,13 @@ func (a *CGLSetCurrentContext) Observations() *atom.Observations { return &a.obs
 // CGLGetSurface
 ////////////////////////////////////////////////////////////////////////////////
 type CGLGetSurface struct {
-	binary.Generate `display:"CGLGetSurface"`
-	observations    atom.Observations
-	Ctx             CGLContextObj
-	Cid             CGSConnectionIDᵖ
-	Wid             CGSWindowIDᵖ
-	Sid             CGSSurfaceIDᵖ
-	Result          int64
+	binary.Generate
+	observations atom.Observations
+	Ctx          CGLContextObj
+	Cid          CGSConnectionIDᵖ
+	Wid          CGSWindowIDᵖ
+	Sid          CGSSurfaceIDᵖ
+	Result       int64
 }
 
 func (a *CGLGetSurface) String() string {
@@ -9161,13 +9161,13 @@ func (a *CGLGetSurface) Observations() *atom.Observations { return &a.observatio
 // CGSGetSurfaceBounds
 ////////////////////////////////////////////////////////////////////////////////
 type CGSGetSurfaceBounds struct {
-	binary.Generate `display:"CGSGetSurfaceBounds"`
-	observations    atom.Observations
-	Cid             CGSConnectionID
-	Wid             CGSWindowID
-	Sid             CGSSurfaceID
-	Bounds          F64ᵖ
-	Result          int64
+	binary.Generate
+	observations atom.Observations
+	Cid          CGSConnectionID
+	Wid          CGSWindowID
+	Sid          CGSSurfaceID
+	Bounds       F64ᵖ
+	Result       int64
 }
 
 func (a *CGSGetSurfaceBounds) String() string {
@@ -9197,10 +9197,10 @@ func (a *CGSGetSurfaceBounds) Observations() *atom.Observations { return &a.obse
 // CGLFlushDrawable
 ////////////////////////////////////////////////////////////////////////////////
 type CGLFlushDrawable struct {
-	binary.Generate `display:"CGLFlushDrawable"`
-	observations    atom.Observations
-	Ctx             CGLContextObj
-	Result          CGLError
+	binary.Generate
+	observations atom.Observations
+	Ctx          CGLContextObj
+	Result       CGLError
 }
 
 func (a *CGLFlushDrawable) String() string {
@@ -9230,9 +9230,9 @@ func (a *CGLFlushDrawable) Observations() *atom.Observations { return &a.observa
 // GlEnableClientState
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnableClientState struct {
-	binary.Generate `display:"glEnableClientState"`
-	observations    atom.Observations
-	Type            ArrayType
+	binary.Generate
+	observations atom.Observations
+	Type         ArrayType
 }
 
 func (a *GlEnableClientState) String() string {
@@ -9262,9 +9262,9 @@ func (a *GlEnableClientState) Observations() *atom.Observations { return &a.obse
 // GlDisableClientState
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisableClientState struct {
-	binary.Generate `display:"glDisableClientState"`
-	observations    atom.Observations
-	Type            ArrayType
+	binary.Generate
+	observations atom.Observations
+	Type         ArrayType
 }
 
 func (a *GlDisableClientState) String() string {
@@ -9294,13 +9294,13 @@ func (a *GlDisableClientState) Observations() *atom.Observations { return &a.obs
 // GlGetProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramBinaryOES struct {
-	binary.Generate `display:"glGetProgramBinaryOES"`
-	observations    atom.Observations
-	Program         ProgramId
-	BufferSize      int32
-	BytesWritten    S32ᵖ
-	BinaryFormat    U32ᵖ
-	Binary          Voidᵖ
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	BufferSize   int32
+	BytesWritten S32ᵖ
+	BinaryFormat U32ᵖ
+	Binary       Voidᵖ
 }
 
 func (a *GlGetProgramBinaryOES) String() string {
@@ -9330,12 +9330,12 @@ func (a *GlGetProgramBinaryOES) Observations() *atom.Observations { return &a.ob
 // GlProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlProgramBinaryOES struct {
-	binary.Generate `display:"glProgramBinaryOES"`
-	observations    atom.Observations
-	Program         ProgramId
-	BinaryFormat    uint32
-	Binary          Voidᵖ
-	BinarySize      int32
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	BinaryFormat uint32
+	Binary       Voidᵖ
+	BinarySize   int32
 }
 
 func (a *GlProgramBinaryOES) String() string {
@@ -9365,13 +9365,13 @@ func (a *GlProgramBinaryOES) Observations() *atom.Observations { return &a.obser
 // GlStartTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
 type GlStartTilingQCOM struct {
-	binary.Generate `display:"glStartTilingQCOM"`
-	observations    atom.Observations
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
-	PreserveMask    TilePreserveMaskQCOM
+	binary.Generate
+	observations atom.Observations
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
+	PreserveMask TilePreserveMaskQCOM
 }
 
 func (a *GlStartTilingQCOM) String() string {
@@ -9401,9 +9401,9 @@ func (a *GlStartTilingQCOM) Observations() *atom.Observations { return &a.observ
 // GlEndTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndTilingQCOM struct {
-	binary.Generate `display:"glEndTilingQCOM"`
-	observations    atom.Observations
-	PreserveMask    TilePreserveMaskQCOM
+	binary.Generate
+	observations atom.Observations
+	PreserveMask TilePreserveMaskQCOM
 }
 
 func (a *GlEndTilingQCOM) String() string {
@@ -9433,11 +9433,11 @@ func (a *GlEndTilingQCOM) Observations() *atom.Observations { return &a.observat
 // GlDiscardFramebufferEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlDiscardFramebufferEXT struct {
-	binary.Generate `display:"glDiscardFramebufferEXT"`
-	observations    atom.Observations
-	Target          FramebufferTarget
-	NumAttachments  int32
-	Attachments     DiscardFramebufferAttachmentᵖ
+	binary.Generate
+	observations   atom.Observations
+	Target         FramebufferTarget
+	NumAttachments int32
+	Attachments    DiscardFramebufferAttachmentᵖ
 }
 
 func (a *GlDiscardFramebufferEXT) String() string {
@@ -9467,10 +9467,10 @@ func (a *GlDiscardFramebufferEXT) Observations() *atom.Observations { return &a.
 // GlInsertEventMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlInsertEventMarkerEXT struct {
-	binary.Generate `display:"glInsertEventMarkerEXT"`
-	observations    atom.Observations
-	Length          int32
-	Marker          Charᵖ
+	binary.Generate
+	observations atom.Observations
+	Length       int32
+	Marker       Charᵖ
 }
 
 func (a *GlInsertEventMarkerEXT) String() string {
@@ -9500,10 +9500,10 @@ func (a *GlInsertEventMarkerEXT) Observations() *atom.Observations { return &a.o
 // GlPushGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlPushGroupMarkerEXT struct {
-	binary.Generate `display:"glPushGroupMarkerEXT"`
-	observations    atom.Observations
-	Length          int32
-	Marker          Charᵖ
+	binary.Generate
+	observations atom.Observations
+	Length       int32
+	Marker       Charᵖ
 }
 
 func (a *GlPushGroupMarkerEXT) String() string {
@@ -9533,8 +9533,8 @@ func (a *GlPushGroupMarkerEXT) Observations() *atom.Observations { return &a.obs
 // GlPopGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlPopGroupMarkerEXT struct {
-	binary.Generate `display:"glPopGroupMarkerEXT"`
-	observations    atom.Observations
+	binary.Generate
+	observations atom.Observations
 }
 
 func (a *GlPopGroupMarkerEXT) String() string {
@@ -9564,12 +9564,12 @@ func (a *GlPopGroupMarkerEXT) Observations() *atom.Observations { return &a.obse
 // GlTexStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage1DEXT struct {
-	binary.Generate `display:"glTexStorage1DEXT"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
 }
 
 func (a *GlTexStorage1DEXT) String() string {
@@ -9599,13 +9599,13 @@ func (a *GlTexStorage1DEXT) Observations() *atom.Observations { return &a.observ
 // GlTexStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage2DEXT struct {
-	binary.Generate `display:"glTexStorage2DEXT"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
+	Height       int32
 }
 
 func (a *GlTexStorage2DEXT) String() string {
@@ -9635,14 +9635,14 @@ func (a *GlTexStorage2DEXT) Observations() *atom.Observations { return &a.observ
 // GlTexStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage3DEXT struct {
-	binary.Generate `display:"glTexStorage3DEXT"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
-	Height          int32
-	Depth           int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
+	Height       int32
+	Depth        int32
 }
 
 func (a *GlTexStorage3DEXT) String() string {
@@ -9672,13 +9672,13 @@ func (a *GlTexStorage3DEXT) Observations() *atom.Observations { return &a.observ
 // GlTextureStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage1DEXT struct {
-	binary.Generate `display:"glTextureStorage1DEXT"`
-	observations    atom.Observations
-	Texture         TextureId
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
+	binary.Generate
+	observations atom.Observations
+	Texture      TextureId
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
 }
 
 func (a *GlTextureStorage1DEXT) String() string {
@@ -9708,14 +9708,14 @@ func (a *GlTextureStorage1DEXT) Observations() *atom.Observations { return &a.ob
 // GlTextureStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage2DEXT struct {
-	binary.Generate `display:"glTextureStorage2DEXT"`
-	observations    atom.Observations
-	Texture         TextureId
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	Texture      TextureId
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
+	Height       int32
 }
 
 func (a *GlTextureStorage2DEXT) String() string {
@@ -9745,15 +9745,15 @@ func (a *GlTextureStorage2DEXT) Observations() *atom.Observations { return &a.ob
 // GlTextureStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage3DEXT struct {
-	binary.Generate `display:"glTextureStorage3DEXT"`
-	observations    atom.Observations
-	Texture         TextureId
-	Target          TextureTarget
-	Levels          int32
-	Format          TexelFormat
-	Width           int32
-	Height          int32
-	Depth           int32
+	binary.Generate
+	observations atom.Observations
+	Texture      TextureId
+	Target       TextureTarget
+	Levels       int32
+	Format       TexelFormat
+	Width        int32
+	Height       int32
+	Depth        int32
 }
 
 func (a *GlTextureStorage3DEXT) String() string {
@@ -9783,10 +9783,10 @@ func (a *GlTextureStorage3DEXT) Observations() *atom.Observations { return &a.ob
 // GlGenVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenVertexArraysOES struct {
-	binary.Generate `display:"glGenVertexArraysOES"`
-	observations    atom.Observations
-	Count           int32
-	Arrays          VertexArrayIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Arrays       VertexArrayIdᵖ
 }
 
 func (a *GlGenVertexArraysOES) String() string {
@@ -9816,9 +9816,9 @@ func (a *GlGenVertexArraysOES) Observations() *atom.Observations { return &a.obs
 // GlBindVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindVertexArrayOES struct {
-	binary.Generate `display:"glBindVertexArrayOES"`
-	observations    atom.Observations
-	Array           VertexArrayId
+	binary.Generate
+	observations atom.Observations
+	Array        VertexArrayId
 }
 
 func (a *GlBindVertexArrayOES) String() string {
@@ -9848,10 +9848,10 @@ func (a *GlBindVertexArrayOES) Observations() *atom.Observations { return &a.obs
 // GlDeleteVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteVertexArraysOES struct {
-	binary.Generate `display:"glDeleteVertexArraysOES"`
-	observations    atom.Observations
-	Count           int32
-	Arrays          VertexArrayIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Arrays       VertexArrayIdᵖ
 }
 
 func (a *GlDeleteVertexArraysOES) String() string {
@@ -9881,10 +9881,10 @@ func (a *GlDeleteVertexArraysOES) Observations() *atom.Observations { return &a.
 // GlIsVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsVertexArrayOES struct {
-	binary.Generate `display:"glIsVertexArrayOES"`
-	observations    atom.Observations
-	Array           VertexArrayId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Array        VertexArrayId
+	Result       bool
 }
 
 func (a *GlIsVertexArrayOES) String() string {
@@ -9914,10 +9914,10 @@ func (a *GlIsVertexArrayOES) Observations() *atom.Observations { return &a.obser
 // GlEGLImageTargetTexture2DOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlEGLImageTargetTexture2DOES struct {
-	binary.Generate `display:"glEGLImageTargetTexture2DOES"`
-	observations    atom.Observations
-	Target          ImageTargetTexture
-	Image           ImageOES
+	binary.Generate
+	observations atom.Observations
+	Target       ImageTargetTexture
+	Image        ImageOES
 }
 
 func (a *GlEGLImageTargetTexture2DOES) String() string {
@@ -9947,10 +9947,10 @@ func (a *GlEGLImageTargetTexture2DOES) Observations() *atom.Observations { retur
 // GlEGLImageTargetRenderbufferStorageOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlEGLImageTargetRenderbufferStorageOES struct {
-	binary.Generate `display:"glEGLImageTargetRenderbufferStorageOES"`
-	observations    atom.Observations
-	Target          ImageTargetRenderbufferStorage
-	Image           TexturePointer
+	binary.Generate
+	observations atom.Observations
+	Target       ImageTargetRenderbufferStorage
+	Image        TexturePointer
 }
 
 func (a *GlEGLImageTargetRenderbufferStorageOES) String() string {
@@ -9982,9 +9982,9 @@ func (a *GlEGLImageTargetRenderbufferStorageOES) Observations() *atom.Observatio
 // GlGetGraphicsResetStatusEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetGraphicsResetStatusEXT struct {
-	binary.Generate `display:"glGetGraphicsResetStatusEXT"`
-	observations    atom.Observations
-	Result          ResetStatus
+	binary.Generate
+	observations atom.Observations
+	Result       ResetStatus
 }
 
 func (a *GlGetGraphicsResetStatusEXT) String() string {
@@ -10014,11 +10014,11 @@ func (a *GlGetGraphicsResetStatusEXT) Observations() *atom.Observations { return
 // GlBindAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindAttribLocation struct {
-	binary.Generate `display:"glBindAttribLocation"`
-	observations    atom.Observations
-	Program         ProgramId
-	Location        AttributeLocation
-	Name            string
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Location     AttributeLocation
+	Name         string
 }
 
 func (a *GlBindAttribLocation) String() string {
@@ -10048,10 +10048,10 @@ func (a *GlBindAttribLocation) Observations() *atom.Observations { return &a.obs
 // GlBlendFunc
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendFunc struct {
-	binary.Generate `display:"glBlendFunc"`
-	observations    atom.Observations
-	SrcFactor       BlendFactor
-	DstFactor       BlendFactor
+	binary.Generate
+	observations atom.Observations
+	SrcFactor    BlendFactor
+	DstFactor    BlendFactor
 }
 
 func (a *GlBlendFunc) String() string {
@@ -10081,12 +10081,12 @@ func (a *GlBlendFunc) Observations() *atom.Observations { return &a.observations
 // GlBlendFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendFuncSeparate struct {
-	binary.Generate `display:"glBlendFuncSeparate"`
-	observations    atom.Observations
-	SrcFactorRgb    BlendFactor
-	DstFactorRgb    BlendFactor
-	SrcFactorAlpha  BlendFactor
-	DstFactorAlpha  BlendFactor
+	binary.Generate
+	observations   atom.Observations
+	SrcFactorRgb   BlendFactor
+	DstFactorRgb   BlendFactor
+	SrcFactorAlpha BlendFactor
+	DstFactorAlpha BlendFactor
 }
 
 func (a *GlBlendFuncSeparate) String() string {
@@ -10116,9 +10116,9 @@ func (a *GlBlendFuncSeparate) Observations() *atom.Observations { return &a.obse
 // GlBlendEquation
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendEquation struct {
-	binary.Generate `display:"glBlendEquation"`
-	observations    atom.Observations
-	Equation        BlendEquation
+	binary.Generate
+	observations atom.Observations
+	Equation     BlendEquation
 }
 
 func (a *GlBlendEquation) String() string {
@@ -10148,10 +10148,10 @@ func (a *GlBlendEquation) Observations() *atom.Observations { return &a.observat
 // GlBlendEquationSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendEquationSeparate struct {
-	binary.Generate `display:"glBlendEquationSeparate"`
-	observations    atom.Observations
-	Rgb             BlendEquation
-	Alpha           BlendEquation
+	binary.Generate
+	observations atom.Observations
+	Rgb          BlendEquation
+	Alpha        BlendEquation
 }
 
 func (a *GlBlendEquationSeparate) String() string {
@@ -10181,12 +10181,12 @@ func (a *GlBlendEquationSeparate) Observations() *atom.Observations { return &a.
 // GlBlendColor
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendColor struct {
-	binary.Generate `display:"glBlendColor"`
-	observations    atom.Observations
-	Red             float32
-	Green           float32
-	Blue            float32
-	Alpha           float32
+	binary.Generate
+	observations atom.Observations
+	Red          float32
+	Green        float32
+	Blue         float32
+	Alpha        float32
 }
 
 func (a *GlBlendColor) String() string {
@@ -10216,9 +10216,9 @@ func (a *GlBlendColor) Observations() *atom.Observations { return &a.observation
 // GlEnableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnableVertexAttribArray struct {
-	binary.Generate `display:"glEnableVertexAttribArray"`
-	observations    atom.Observations
-	Location        AttributeLocation
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
 }
 
 func (a *GlEnableVertexAttribArray) String() string {
@@ -10248,9 +10248,9 @@ func (a *GlEnableVertexAttribArray) Observations() *atom.Observations { return &
 // GlDisableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisableVertexAttribArray struct {
-	binary.Generate `display:"glDisableVertexAttribArray"`
-	observations    atom.Observations
-	Location        AttributeLocation
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
 }
 
 func (a *GlDisableVertexAttribArray) String() string {
@@ -10280,14 +10280,14 @@ func (a *GlDisableVertexAttribArray) Observations() *atom.Observations { return 
 // GlVertexAttribPointer
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttribPointer struct {
-	binary.Generate `display:"glVertexAttribPointer"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Size            int32
-	Type            VertexAttribType
-	Normalized      bool
-	Stride          int32
-	Data            VertexPointer
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Size         int32
+	Type         VertexAttribType
+	Normalized   bool
+	Stride       int32
+	Data         VertexPointer
 }
 
 func (a *GlVertexAttribPointer) String() string {
@@ -10317,7 +10317,7 @@ func (a *GlVertexAttribPointer) Observations() *atom.Observations { return &a.ob
 // GlGetActiveAttrib
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveAttrib struct {
-	binary.Generate    `display:"glGetActiveAttrib"`
+	binary.Generate
 	observations       atom.Observations
 	Program            ProgramId
 	Location           AttributeLocation
@@ -10355,7 +10355,7 @@ func (a *GlGetActiveAttrib) Observations() *atom.Observations { return &a.observ
 // GlGetActiveUniform
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveUniform struct {
-	binary.Generate    `display:"glGetActiveUniform"`
+	binary.Generate
 	observations       atom.Observations
 	Program            ProgramId
 	Location           int32
@@ -10393,9 +10393,9 @@ func (a *GlGetActiveUniform) Observations() *atom.Observations { return &a.obser
 // GlGetError
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetError struct {
-	binary.Generate `display:"glGetError"`
-	observations    atom.Observations
-	Result          Error
+	binary.Generate
+	observations atom.Observations
+	Result       Error
 }
 
 func (a *GlGetError) String() string {
@@ -10425,11 +10425,11 @@ func (a *GlGetError) Observations() *atom.Observations { return &a.observations 
 // GlGetProgramiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramiv struct {
-	binary.Generate `display:"glGetProgramiv"`
-	observations    atom.Observations
-	Program         ProgramId
-	Parameter       ProgramParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Parameter    ProgramParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetProgramiv) String() string {
@@ -10459,11 +10459,11 @@ func (a *GlGetProgramiv) Observations() *atom.Observations { return &a.observati
 // GlGetShaderiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderiv struct {
-	binary.Generate `display:"glGetShaderiv"`
-	observations    atom.Observations
-	Shader          ShaderId
-	Parameter       ShaderParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Shader       ShaderId
+	Parameter    ShaderParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetShaderiv) String() string {
@@ -10493,11 +10493,11 @@ func (a *GlGetShaderiv) Observations() *atom.Observations { return &a.observatio
 // GlGetUniformLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformLocation struct {
-	binary.Generate `display:"glGetUniformLocation"`
-	observations    atom.Observations
-	Program         ProgramId
-	Name            string
-	Result          UniformLocation
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Name         string
+	Result       UniformLocation
 }
 
 func (a *GlGetUniformLocation) String() string {
@@ -10527,11 +10527,11 @@ func (a *GlGetUniformLocation) Observations() *atom.Observations { return &a.obs
 // GlGetAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetAttribLocation struct {
-	binary.Generate `display:"glGetAttribLocation"`
-	observations    atom.Observations
-	Program         ProgramId
-	Name            string
-	Result          AttributeLocation
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Name         string
+	Result       AttributeLocation
 }
 
 func (a *GlGetAttribLocation) String() string {
@@ -10561,10 +10561,10 @@ func (a *GlGetAttribLocation) Observations() *atom.Observations { return &a.obse
 // GlPixelStorei
 ////////////////////////////////////////////////////////////////////////////////
 type GlPixelStorei struct {
-	binary.Generate `display:"glPixelStorei"`
-	observations    atom.Observations
-	Parameter       PixelStoreParameter
-	Value           int32
+	binary.Generate
+	observations atom.Observations
+	Parameter    PixelStoreParameter
+	Value        int32
 }
 
 func (a *GlPixelStorei) String() string {
@@ -10594,11 +10594,11 @@ func (a *GlPixelStorei) Observations() *atom.Observations { return &a.observatio
 // GlTexParameteri
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexParameteri struct {
-	binary.Generate `display:"glTexParameteri"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Parameter       TextureParameter
-	Value           int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Parameter    TextureParameter
+	Value        int32
 }
 
 func (a *GlTexParameteri) String() string {
@@ -10628,11 +10628,11 @@ func (a *GlTexParameteri) Observations() *atom.Observations { return &a.observat
 // GlTexParameterf
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexParameterf struct {
-	binary.Generate `display:"glTexParameterf"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Parameter       TextureParameter
-	Value           float32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Parameter    TextureParameter
+	Value        float32
 }
 
 func (a *GlTexParameterf) String() string {
@@ -10662,11 +10662,11 @@ func (a *GlTexParameterf) Observations() *atom.Observations { return &a.observat
 // GlGetTexParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetTexParameteriv struct {
-	binary.Generate `display:"glGetTexParameteriv"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Parameter       TextureParameter
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Parameter    TextureParameter
+	Values       S32ᵖ
 }
 
 func (a *GlGetTexParameteriv) String() string {
@@ -10696,11 +10696,11 @@ func (a *GlGetTexParameteriv) Observations() *atom.Observations { return &a.obse
 // GlGetTexParameterfv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetTexParameterfv struct {
-	binary.Generate `display:"glGetTexParameterfv"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Parameter       TextureParameter
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Parameter    TextureParameter
+	Values       F32ᵖ
 }
 
 func (a *GlGetTexParameterfv) String() string {
@@ -10730,10 +10730,10 @@ func (a *GlGetTexParameterfv) Observations() *atom.Observations { return &a.obse
 // GlUniform1i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1i struct {
-	binary.Generate `display:"glUniform1i"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value           int32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value        int32
 }
 
 func (a *GlUniform1i) String() string {
@@ -10763,11 +10763,11 @@ func (a *GlUniform1i) Observations() *atom.Observations { return &a.observations
 // GlUniform2i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2i struct {
-	binary.Generate `display:"glUniform2i"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          int32
-	Value1          int32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       int32
+	Value1       int32
 }
 
 func (a *GlUniform2i) String() string {
@@ -10797,12 +10797,12 @@ func (a *GlUniform2i) Observations() *atom.Observations { return &a.observations
 // GlUniform3i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3i struct {
-	binary.Generate `display:"glUniform3i"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          int32
-	Value1          int32
-	Value2          int32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       int32
+	Value1       int32
+	Value2       int32
 }
 
 func (a *GlUniform3i) String() string {
@@ -10832,13 +10832,13 @@ func (a *GlUniform3i) Observations() *atom.Observations { return &a.observations
 // GlUniform4i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4i struct {
-	binary.Generate `display:"glUniform4i"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          int32
-	Value1          int32
-	Value2          int32
-	Value3          int32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       int32
+	Value1       int32
+	Value2       int32
+	Value3       int32
 }
 
 func (a *GlUniform4i) String() string {
@@ -10868,11 +10868,11 @@ func (a *GlUniform4i) Observations() *atom.Observations { return &a.observations
 // GlUniform1iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1iv struct {
-	binary.Generate `display:"glUniform1iv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       S32ᵖ
 }
 
 func (a *GlUniform1iv) String() string {
@@ -10902,11 +10902,11 @@ func (a *GlUniform1iv) Observations() *atom.Observations { return &a.observation
 // GlUniform2iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2iv struct {
-	binary.Generate `display:"glUniform2iv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       S32ᵖ
 }
 
 func (a *GlUniform2iv) String() string {
@@ -10936,11 +10936,11 @@ func (a *GlUniform2iv) Observations() *atom.Observations { return &a.observation
 // GlUniform3iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3iv struct {
-	binary.Generate `display:"glUniform3iv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       S32ᵖ
 }
 
 func (a *GlUniform3iv) String() string {
@@ -10970,11 +10970,11 @@ func (a *GlUniform3iv) Observations() *atom.Observations { return &a.observation
 // GlUniform4iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4iv struct {
-	binary.Generate `display:"glUniform4iv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       S32ᵖ
 }
 
 func (a *GlUniform4iv) String() string {
@@ -11004,10 +11004,10 @@ func (a *GlUniform4iv) Observations() *atom.Observations { return &a.observation
 // GlUniform1f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1f struct {
-	binary.Generate `display:"glUniform1f"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value           float32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value        float32
 }
 
 func (a *GlUniform1f) String() string {
@@ -11037,11 +11037,11 @@ func (a *GlUniform1f) Observations() *atom.Observations { return &a.observations
 // GlUniform2f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2f struct {
-	binary.Generate `display:"glUniform2f"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          float32
-	Value1          float32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       float32
+	Value1       float32
 }
 
 func (a *GlUniform2f) String() string {
@@ -11071,12 +11071,12 @@ func (a *GlUniform2f) Observations() *atom.Observations { return &a.observations
 // GlUniform3f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3f struct {
-	binary.Generate `display:"glUniform3f"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          float32
-	Value1          float32
-	Value2          float32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       float32
+	Value1       float32
+	Value2       float32
 }
 
 func (a *GlUniform3f) String() string {
@@ -11106,13 +11106,13 @@ func (a *GlUniform3f) Observations() *atom.Observations { return &a.observations
 // GlUniform4f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4f struct {
-	binary.Generate `display:"glUniform4f"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Value0          float32
-	Value1          float32
-	Value2          float32
-	Value3          float32
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Value0       float32
+	Value1       float32
+	Value2       float32
+	Value3       float32
 }
 
 func (a *GlUniform4f) String() string {
@@ -11142,11 +11142,11 @@ func (a *GlUniform4f) Observations() *atom.Observations { return &a.observations
 // GlUniform1fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1fv struct {
-	binary.Generate `display:"glUniform1fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       F32ᵖ
 }
 
 func (a *GlUniform1fv) String() string {
@@ -11176,11 +11176,11 @@ func (a *GlUniform1fv) Observations() *atom.Observations { return &a.observation
 // GlUniform2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2fv struct {
-	binary.Generate `display:"glUniform2fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       F32ᵖ
 }
 
 func (a *GlUniform2fv) String() string {
@@ -11210,11 +11210,11 @@ func (a *GlUniform2fv) Observations() *atom.Observations { return &a.observation
 // GlUniform3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3fv struct {
-	binary.Generate `display:"glUniform3fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       F32ᵖ
 }
 
 func (a *GlUniform3fv) String() string {
@@ -11244,11 +11244,11 @@ func (a *GlUniform3fv) Observations() *atom.Observations { return &a.observation
 // GlUniform4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4fv struct {
-	binary.Generate `display:"glUniform4fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Values       F32ᵖ
 }
 
 func (a *GlUniform4fv) String() string {
@@ -11278,12 +11278,12 @@ func (a *GlUniform4fv) Observations() *atom.Observations { return &a.observation
 // GlUniformMatrix2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix2fv struct {
-	binary.Generate `display:"glUniformMatrix2fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Transpose       bool
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Transpose    bool
+	Values       F32ᵖ
 }
 
 func (a *GlUniformMatrix2fv) String() string {
@@ -11313,12 +11313,12 @@ func (a *GlUniformMatrix2fv) Observations() *atom.Observations { return &a.obser
 // GlUniformMatrix3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix3fv struct {
-	binary.Generate `display:"glUniformMatrix3fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Transpose       bool
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Transpose    bool
+	Values       F32ᵖ
 }
 
 func (a *GlUniformMatrix3fv) String() string {
@@ -11348,12 +11348,12 @@ func (a *GlUniformMatrix3fv) Observations() *atom.Observations { return &a.obser
 // GlUniformMatrix4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix4fv struct {
-	binary.Generate `display:"glUniformMatrix4fv"`
-	observations    atom.Observations
-	Location        UniformLocation
-	Count           int32
-	Transpose       bool
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     UniformLocation
+	Count        int32
+	Transpose    bool
+	Values       F32ᵖ
 }
 
 func (a *GlUniformMatrix4fv) String() string {
@@ -11383,11 +11383,11 @@ func (a *GlUniformMatrix4fv) Observations() *atom.Observations { return &a.obser
 // GlGetUniformfv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformfv struct {
-	binary.Generate `display:"glGetUniformfv"`
-	observations    atom.Observations
-	Program         ProgramId
-	Location        UniformLocation
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Location     UniformLocation
+	Values       F32ᵖ
 }
 
 func (a *GlGetUniformfv) String() string {
@@ -11417,11 +11417,11 @@ func (a *GlGetUniformfv) Observations() *atom.Observations { return &a.observati
 // GlGetUniformiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformiv struct {
-	binary.Generate `display:"glGetUniformiv"`
-	observations    atom.Observations
-	Program         ProgramId
-	Location        UniformLocation
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Location     UniformLocation
+	Values       S32ᵖ
 }
 
 func (a *GlGetUniformiv) String() string {
@@ -11451,10 +11451,10 @@ func (a *GlGetUniformiv) Observations() *atom.Observations { return &a.observati
 // GlVertexAttrib1f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib1f struct {
-	binary.Generate `display:"glVertexAttrib1f"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value0          float32
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value0       float32
 }
 
 func (a *GlVertexAttrib1f) String() string {
@@ -11484,11 +11484,11 @@ func (a *GlVertexAttrib1f) Observations() *atom.Observations { return &a.observa
 // GlVertexAttrib2f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib2f struct {
-	binary.Generate `display:"glVertexAttrib2f"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value0          float32
-	Value1          float32
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value0       float32
+	Value1       float32
 }
 
 func (a *GlVertexAttrib2f) String() string {
@@ -11518,12 +11518,12 @@ func (a *GlVertexAttrib2f) Observations() *atom.Observations { return &a.observa
 // GlVertexAttrib3f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib3f struct {
-	binary.Generate `display:"glVertexAttrib3f"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value0          float32
-	Value1          float32
-	Value2          float32
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value0       float32
+	Value1       float32
+	Value2       float32
 }
 
 func (a *GlVertexAttrib3f) String() string {
@@ -11553,13 +11553,13 @@ func (a *GlVertexAttrib3f) Observations() *atom.Observations { return &a.observa
 // GlVertexAttrib4f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib4f struct {
-	binary.Generate `display:"glVertexAttrib4f"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value0          float32
-	Value1          float32
-	Value2          float32
-	Value3          float32
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value0       float32
+	Value1       float32
+	Value2       float32
+	Value3       float32
 }
 
 func (a *GlVertexAttrib4f) String() string {
@@ -11589,10 +11589,10 @@ func (a *GlVertexAttrib4f) Observations() *atom.Observations { return &a.observa
 // GlVertexAttrib1fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib1fv struct {
-	binary.Generate `display:"glVertexAttrib1fv"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value           F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value        F32ᵖ
 }
 
 func (a *GlVertexAttrib1fv) String() string {
@@ -11622,10 +11622,10 @@ func (a *GlVertexAttrib1fv) Observations() *atom.Observations { return &a.observ
 // GlVertexAttrib2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib2fv struct {
-	binary.Generate `display:"glVertexAttrib2fv"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value           F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value        F32ᵖ
 }
 
 func (a *GlVertexAttrib2fv) String() string {
@@ -11655,10 +11655,10 @@ func (a *GlVertexAttrib2fv) Observations() *atom.Observations { return &a.observ
 // GlVertexAttrib3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib3fv struct {
-	binary.Generate `display:"glVertexAttrib3fv"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value           F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value        F32ᵖ
 }
 
 func (a *GlVertexAttrib3fv) String() string {
@@ -11688,10 +11688,10 @@ func (a *GlVertexAttrib3fv) Observations() *atom.Observations { return &a.observ
 // GlVertexAttrib4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib4fv struct {
-	binary.Generate `display:"glVertexAttrib4fv"`
-	observations    atom.Observations
-	Location        AttributeLocation
-	Value           F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Location     AttributeLocation
+	Value        F32ᵖ
 }
 
 func (a *GlVertexAttrib4fv) String() string {
@@ -11721,12 +11721,12 @@ func (a *GlVertexAttrib4fv) Observations() *atom.Observations { return &a.observ
 // GlGetShaderPrecisionFormat
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderPrecisionFormat struct {
-	binary.Generate `display:"glGetShaderPrecisionFormat"`
-	observations    atom.Observations
-	ShaderType      ShaderType
-	PrecisionType   PrecisionType
-	Range           S32ᵖ
-	Precision       S32ᵖ
+	binary.Generate
+	observations  atom.Observations
+	ShaderType    ShaderType
+	PrecisionType PrecisionType
+	Range         S32ᵖ
+	Precision     S32ᵖ
 }
 
 func (a *GlGetShaderPrecisionFormat) String() string {
@@ -11756,9 +11756,9 @@ func (a *GlGetShaderPrecisionFormat) Observations() *atom.Observations { return 
 // GlDepthMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthMask struct {
-	binary.Generate `display:"glDepthMask"`
-	observations    atom.Observations
-	Enabled         bool
+	binary.Generate
+	observations atom.Observations
+	Enabled      bool
 }
 
 func (a *GlDepthMask) String() string {
@@ -11788,9 +11788,9 @@ func (a *GlDepthMask) Observations() *atom.Observations { return &a.observations
 // GlDepthFunc
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthFunc struct {
-	binary.Generate `display:"glDepthFunc"`
-	observations    atom.Observations
-	Function        TestFunction
+	binary.Generate
+	observations atom.Observations
+	Function     TestFunction
 }
 
 func (a *GlDepthFunc) String() string {
@@ -11820,10 +11820,10 @@ func (a *GlDepthFunc) Observations() *atom.Observations { return &a.observations
 // GlDepthRangef
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthRangef struct {
-	binary.Generate `display:"glDepthRangef"`
-	observations    atom.Observations
-	Near            float32
-	Far             float32
+	binary.Generate
+	observations atom.Observations
+	Near         float32
+	Far          float32
 }
 
 func (a *GlDepthRangef) String() string {
@@ -11853,12 +11853,12 @@ func (a *GlDepthRangef) Observations() *atom.Observations { return &a.observatio
 // GlColorMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlColorMask struct {
-	binary.Generate `display:"glColorMask"`
-	observations    atom.Observations
-	Red             bool
-	Green           bool
-	Blue            bool
-	Alpha           bool
+	binary.Generate
+	observations atom.Observations
+	Red          bool
+	Green        bool
+	Blue         bool
+	Alpha        bool
 }
 
 func (a *GlColorMask) String() string {
@@ -11888,9 +11888,9 @@ func (a *GlColorMask) Observations() *atom.Observations { return &a.observations
 // GlStencilMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilMask struct {
-	binary.Generate `display:"glStencilMask"`
-	observations    atom.Observations
-	Mask            uint32
+	binary.Generate
+	observations atom.Observations
+	Mask         uint32
 }
 
 func (a *GlStencilMask) String() string {
@@ -11920,10 +11920,10 @@ func (a *GlStencilMask) Observations() *atom.Observations { return &a.observatio
 // GlStencilMaskSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilMaskSeparate struct {
-	binary.Generate `display:"glStencilMaskSeparate"`
-	observations    atom.Observations
-	Face            FaceMode
-	Mask            uint32
+	binary.Generate
+	observations atom.Observations
+	Face         FaceMode
+	Mask         uint32
 }
 
 func (a *GlStencilMaskSeparate) String() string {
@@ -11953,12 +11953,12 @@ func (a *GlStencilMaskSeparate) Observations() *atom.Observations { return &a.ob
 // GlStencilFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilFuncSeparate struct {
-	binary.Generate `display:"glStencilFuncSeparate"`
-	observations    atom.Observations
-	Face            FaceMode
-	Function        TestFunction
-	ReferenceValue  int32
-	Mask            int32
+	binary.Generate
+	observations   atom.Observations
+	Face           FaceMode
+	Function       TestFunction
+	ReferenceValue int32
+	Mask           int32
 }
 
 func (a *GlStencilFuncSeparate) String() string {
@@ -11988,7 +11988,7 @@ func (a *GlStencilFuncSeparate) Observations() *atom.Observations { return &a.ob
 // GlStencilOpSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilOpSeparate struct {
-	binary.Generate      `display:"glStencilOpSeparate"`
+	binary.Generate
 	observations         atom.Observations
 	Face                 FaceMode
 	StencilFail          StencilAction
@@ -12023,9 +12023,9 @@ func (a *GlStencilOpSeparate) Observations() *atom.Observations { return &a.obse
 // GlFrontFace
 ////////////////////////////////////////////////////////////////////////////////
 type GlFrontFace struct {
-	binary.Generate `display:"glFrontFace"`
-	observations    atom.Observations
-	Orientation     FaceOrientation
+	binary.Generate
+	observations atom.Observations
+	Orientation  FaceOrientation
 }
 
 func (a *GlFrontFace) String() string {
@@ -12055,12 +12055,12 @@ func (a *GlFrontFace) Observations() *atom.Observations { return &a.observations
 // GlViewport
 ////////////////////////////////////////////////////////////////////////////////
 type GlViewport struct {
-	binary.Generate `display:"glViewport"`
-	observations    atom.Observations
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
 }
 
 func (a *GlViewport) String() string {
@@ -12090,12 +12090,12 @@ func (a *GlViewport) Observations() *atom.Observations { return &a.observations 
 // GlScissor
 ////////////////////////////////////////////////////////////////////////////////
 type GlScissor struct {
-	binary.Generate `display:"glScissor"`
-	observations    atom.Observations
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
 }
 
 func (a *GlScissor) String() string {
@@ -12125,9 +12125,9 @@ func (a *GlScissor) Observations() *atom.Observations { return &a.observations }
 // GlActiveTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlActiveTexture struct {
-	binary.Generate `display:"glActiveTexture"`
-	observations    atom.Observations
-	Unit            TextureUnit
+	binary.Generate
+	observations atom.Observations
+	Unit         TextureUnit
 }
 
 func (a *GlActiveTexture) String() string {
@@ -12157,10 +12157,10 @@ func (a *GlActiveTexture) Observations() *atom.Observations { return &a.observat
 // GlGenTextures
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenTextures struct {
-	binary.Generate `display:"glGenTextures"`
-	observations    atom.Observations
-	Count           int32
-	Textures        TextureIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Textures     TextureIdᵖ
 }
 
 func (a *GlGenTextures) String() string {
@@ -12190,10 +12190,10 @@ func (a *GlGenTextures) Observations() *atom.Observations { return &a.observatio
 // GlDeleteTextures
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteTextures struct {
-	binary.Generate `display:"glDeleteTextures"`
-	observations    atom.Observations
-	Count           int32
-	Textures        TextureIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Textures     TextureIdᵖ
 }
 
 func (a *GlDeleteTextures) String() string {
@@ -12223,10 +12223,10 @@ func (a *GlDeleteTextures) Observations() *atom.Observations { return &a.observa
 // GlIsTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsTexture struct {
-	binary.Generate `display:"glIsTexture"`
-	observations    atom.Observations
-	Texture         TextureId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Texture      TextureId
+	Result       bool
 }
 
 func (a *GlIsTexture) String() string {
@@ -12256,10 +12256,10 @@ func (a *GlIsTexture) Observations() *atom.Observations { return &a.observations
 // GlBindTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindTexture struct {
-	binary.Generate `display:"glBindTexture"`
-	observations    atom.Observations
-	Target          TextureTarget
-	Texture         TextureId
+	binary.Generate
+	observations atom.Observations
+	Target       TextureTarget
+	Texture      TextureId
 }
 
 func (a *GlBindTexture) String() string {
@@ -12289,17 +12289,17 @@ func (a *GlBindTexture) Observations() *atom.Observations { return &a.observatio
 // GlTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexImage2D struct {
-	binary.Generate `display:"glTexImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	InternalFormat  TexelFormat
-	Width           int32
-	Height          int32
-	Border          int32
-	Format          TexelFormat
-	Type            TexelType
-	Data            TexturePointer
+	binary.Generate
+	observations   atom.Observations
+	Target         TextureImageTarget
+	Level          int32
+	InternalFormat TexelFormat
+	Width          int32
+	Height         int32
+	Border         int32
+	Format         TexelFormat
+	Type           TexelType
+	Data           TexturePointer
 }
 
 func (a *GlTexImage2D) String() string {
@@ -12329,17 +12329,17 @@ func (a *GlTexImage2D) Observations() *atom.Observations { return &a.observation
 // GlTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexSubImage2D struct {
-	binary.Generate `display:"glTexSubImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	Xoffset         int32
-	Yoffset         int32
-	Width           int32
-	Height          int32
-	Format          TexelFormat
-	Type            TexelType
-	Data            TexturePointer
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
+	Level        int32
+	Xoffset      int32
+	Yoffset      int32
+	Width        int32
+	Height       int32
+	Format       TexelFormat
+	Type         TexelType
+	Data         TexturePointer
 }
 
 func (a *GlTexSubImage2D) String() string {
@@ -12369,16 +12369,16 @@ func (a *GlTexSubImage2D) Observations() *atom.Observations { return &a.observat
 // GlCopyTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCopyTexImage2D struct {
-	binary.Generate `display:"glCopyTexImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	Format          TexelFormat
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
-	Border          int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
+	Level        int32
+	Format       TexelFormat
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
+	Border       int32
 }
 
 func (a *GlCopyTexImage2D) String() string {
@@ -12408,16 +12408,16 @@ func (a *GlCopyTexImage2D) Observations() *atom.Observations { return &a.observa
 // GlCopyTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCopyTexSubImage2D struct {
-	binary.Generate `display:"glCopyTexSubImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	Xoffset         int32
-	Yoffset         int32
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
+	Level        int32
+	Xoffset      int32
+	Yoffset      int32
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
 }
 
 func (a *GlCopyTexSubImage2D) String() string {
@@ -12447,16 +12447,16 @@ func (a *GlCopyTexSubImage2D) Observations() *atom.Observations { return &a.obse
 // GlCompressedTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompressedTexImage2D struct {
-	binary.Generate `display:"glCompressedTexImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	Format          CompressedTexelFormat
-	Width           int32
-	Height          int32
-	Border          int32
-	ImageSize       int32
-	Data            TexturePointer
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
+	Level        int32
+	Format       CompressedTexelFormat
+	Width        int32
+	Height       int32
+	Border       int32
+	ImageSize    int32
+	Data         TexturePointer
 }
 
 func (a *GlCompressedTexImage2D) String() string {
@@ -12486,17 +12486,17 @@ func (a *GlCompressedTexImage2D) Observations() *atom.Observations { return &a.o
 // GlCompressedTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompressedTexSubImage2D struct {
-	binary.Generate `display:"glCompressedTexSubImage2D"`
-	observations    atom.Observations
-	Target          TextureImageTarget
-	Level           int32
-	Xoffset         int32
-	Yoffset         int32
-	Width           int32
-	Height          int32
-	Format          CompressedTexelFormat
-	ImageSize       int32
-	Data            TexturePointer
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
+	Level        int32
+	Xoffset      int32
+	Yoffset      int32
+	Width        int32
+	Height       int32
+	Format       CompressedTexelFormat
+	ImageSize    int32
+	Data         TexturePointer
 }
 
 func (a *GlCompressedTexSubImage2D) String() string {
@@ -12526,9 +12526,9 @@ func (a *GlCompressedTexSubImage2D) Observations() *atom.Observations { return &
 // GlGenerateMipmap
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenerateMipmap struct {
-	binary.Generate `display:"glGenerateMipmap"`
-	observations    atom.Observations
-	Target          TextureImageTarget
+	binary.Generate
+	observations atom.Observations
+	Target       TextureImageTarget
 }
 
 func (a *GlGenerateMipmap) String() string {
@@ -12558,15 +12558,15 @@ func (a *GlGenerateMipmap) Observations() *atom.Observations { return &a.observa
 // GlReadPixels
 ////////////////////////////////////////////////////////////////////////////////
 type GlReadPixels struct {
-	binary.Generate `display:"glReadPixels"`
-	observations    atom.Observations
-	X               int32
-	Y               int32
-	Width           int32
-	Height          int32
-	Format          BaseTexelFormat
-	Type            TexelType
-	Data            Voidᵖ
+	binary.Generate
+	observations atom.Observations
+	X            int32
+	Y            int32
+	Width        int32
+	Height       int32
+	Format       BaseTexelFormat
+	Type         TexelType
+	Data         Voidᵖ
 }
 
 func (a *GlReadPixels) String() string {
@@ -12596,10 +12596,10 @@ func (a *GlReadPixels) Observations() *atom.Observations { return &a.observation
 // GlGenFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenFramebuffers struct {
-	binary.Generate `display:"glGenFramebuffers"`
-	observations    atom.Observations
-	Count           int32
-	Framebuffers    FramebufferIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Framebuffers FramebufferIdᵖ
 }
 
 func (a *GlGenFramebuffers) String() string {
@@ -12629,10 +12629,10 @@ func (a *GlGenFramebuffers) Observations() *atom.Observations { return &a.observ
 // GlBindFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindFramebuffer struct {
-	binary.Generate `display:"glBindFramebuffer"`
-	observations    atom.Observations
-	Target          FramebufferTarget
-	Framebuffer     FramebufferId
+	binary.Generate
+	observations atom.Observations
+	Target       FramebufferTarget
+	Framebuffer  FramebufferId
 }
 
 func (a *GlBindFramebuffer) String() string {
@@ -12662,10 +12662,10 @@ func (a *GlBindFramebuffer) Observations() *atom.Observations { return &a.observ
 // GlCheckFramebufferStatus
 ////////////////////////////////////////////////////////////////////////////////
 type GlCheckFramebufferStatus struct {
-	binary.Generate `display:"glCheckFramebufferStatus"`
-	observations    atom.Observations
-	Target          FramebufferTarget
-	Result          FramebufferStatus
+	binary.Generate
+	observations atom.Observations
+	Target       FramebufferTarget
+	Result       FramebufferStatus
 }
 
 func (a *GlCheckFramebufferStatus) String() string {
@@ -12695,10 +12695,10 @@ func (a *GlCheckFramebufferStatus) Observations() *atom.Observations { return &a
 // GlDeleteFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteFramebuffers struct {
-	binary.Generate `display:"glDeleteFramebuffers"`
-	observations    atom.Observations
-	Count           int32
-	Framebuffers    FramebufferIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Framebuffers FramebufferIdᵖ
 }
 
 func (a *GlDeleteFramebuffers) String() string {
@@ -12728,10 +12728,10 @@ func (a *GlDeleteFramebuffers) Observations() *atom.Observations { return &a.obs
 // GlIsFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsFramebuffer struct {
-	binary.Generate `display:"glIsFramebuffer"`
-	observations    atom.Observations
-	Framebuffer     FramebufferId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Framebuffer  FramebufferId
+	Result       bool
 }
 
 func (a *GlIsFramebuffer) String() string {
@@ -12761,10 +12761,10 @@ func (a *GlIsFramebuffer) Observations() *atom.Observations { return &a.observat
 // GlGenRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenRenderbuffers struct {
-	binary.Generate `display:"glGenRenderbuffers"`
-	observations    atom.Observations
-	Count           int32
-	Renderbuffers   RenderbufferIdᵖ
+	binary.Generate
+	observations  atom.Observations
+	Count         int32
+	Renderbuffers RenderbufferIdᵖ
 }
 
 func (a *GlGenRenderbuffers) String() string {
@@ -12794,10 +12794,10 @@ func (a *GlGenRenderbuffers) Observations() *atom.Observations { return &a.obser
 // GlBindRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindRenderbuffer struct {
-	binary.Generate `display:"glBindRenderbuffer"`
-	observations    atom.Observations
-	Target          RenderbufferTarget
-	Renderbuffer    RenderbufferId
+	binary.Generate
+	observations atom.Observations
+	Target       RenderbufferTarget
+	Renderbuffer RenderbufferId
 }
 
 func (a *GlBindRenderbuffer) String() string {
@@ -12827,12 +12827,12 @@ func (a *GlBindRenderbuffer) Observations() *atom.Observations { return &a.obser
 // GlRenderbufferStorage
 ////////////////////////////////////////////////////////////////////////////////
 type GlRenderbufferStorage struct {
-	binary.Generate `display:"glRenderbufferStorage"`
-	observations    atom.Observations
-	Target          RenderbufferTarget
-	Format          RenderbufferFormat
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	Target       RenderbufferTarget
+	Format       RenderbufferFormat
+	Width        int32
+	Height       int32
 }
 
 func (a *GlRenderbufferStorage) String() string {
@@ -12862,10 +12862,10 @@ func (a *GlRenderbufferStorage) Observations() *atom.Observations { return &a.ob
 // GlDeleteRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteRenderbuffers struct {
-	binary.Generate `display:"glDeleteRenderbuffers"`
-	observations    atom.Observations
-	Count           int32
-	Renderbuffers   RenderbufferIdᵖ
+	binary.Generate
+	observations  atom.Observations
+	Count         int32
+	Renderbuffers RenderbufferIdᵖ
 }
 
 func (a *GlDeleteRenderbuffers) String() string {
@@ -12895,10 +12895,10 @@ func (a *GlDeleteRenderbuffers) Observations() *atom.Observations { return &a.ob
 // GlIsRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsRenderbuffer struct {
-	binary.Generate `display:"glIsRenderbuffer"`
-	observations    atom.Observations
-	Renderbuffer    RenderbufferId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Renderbuffer RenderbufferId
+	Result       bool
 }
 
 func (a *GlIsRenderbuffer) String() string {
@@ -12928,11 +12928,11 @@ func (a *GlIsRenderbuffer) Observations() *atom.Observations { return &a.observa
 // GlGetRenderbufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetRenderbufferParameteriv struct {
-	binary.Generate `display:"glGetRenderbufferParameteriv"`
-	observations    atom.Observations
-	Target          RenderbufferTarget
-	Parameter       RenderbufferParameter
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       RenderbufferTarget
+	Parameter    RenderbufferParameter
+	Values       S32ᵖ
 }
 
 func (a *GlGetRenderbufferParameteriv) String() string {
@@ -12962,10 +12962,10 @@ func (a *GlGetRenderbufferParameteriv) Observations() *atom.Observations { retur
 // GlGenBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenBuffers struct {
-	binary.Generate `display:"glGenBuffers"`
-	observations    atom.Observations
-	Count           int32
-	Buffers         BufferIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Buffers      BufferIdᵖ
 }
 
 func (a *GlGenBuffers) String() string {
@@ -12995,10 +12995,10 @@ func (a *GlGenBuffers) Observations() *atom.Observations { return &a.observation
 // GlBindBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindBuffer struct {
-	binary.Generate `display:"glBindBuffer"`
-	observations    atom.Observations
-	Target          BufferTarget
-	Buffer          BufferId
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
+	Buffer       BufferId
 }
 
 func (a *GlBindBuffer) String() string {
@@ -13028,12 +13028,12 @@ func (a *GlBindBuffer) Observations() *atom.Observations { return &a.observation
 // GlBufferData
 ////////////////////////////////////////////////////////////////////////////////
 type GlBufferData struct {
-	binary.Generate `display:"glBufferData"`
-	observations    atom.Observations
-	Target          BufferTarget
-	Size            int32
-	Data            BufferDataPointer
-	Usage           BufferUsage
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
+	Size         int32
+	Data         BufferDataPointer
+	Usage        BufferUsage
 }
 
 func (a *GlBufferData) String() string {
@@ -13063,12 +13063,12 @@ func (a *GlBufferData) Observations() *atom.Observations { return &a.observation
 // GlBufferSubData
 ////////////////////////////////////////////////////////////////////////////////
 type GlBufferSubData struct {
-	binary.Generate `display:"glBufferSubData"`
-	observations    atom.Observations
-	Target          BufferTarget
-	Offset          int32
-	Size            int32
-	Data            Voidᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
+	Offset       int32
+	Size         int32
+	Data         Voidᵖ
 }
 
 func (a *GlBufferSubData) String() string {
@@ -13098,10 +13098,10 @@ func (a *GlBufferSubData) Observations() *atom.Observations { return &a.observat
 // GlDeleteBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteBuffers struct {
-	binary.Generate `display:"glDeleteBuffers"`
-	observations    atom.Observations
-	Count           int32
-	Buffers         BufferIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Buffers      BufferIdᵖ
 }
 
 func (a *GlDeleteBuffers) String() string {
@@ -13131,10 +13131,10 @@ func (a *GlDeleteBuffers) Observations() *atom.Observations { return &a.observat
 // GlIsBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsBuffer struct {
-	binary.Generate `display:"glIsBuffer"`
-	observations    atom.Observations
-	Buffer          BufferId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Buffer       BufferId
+	Result       bool
 }
 
 func (a *GlIsBuffer) String() string {
@@ -13164,11 +13164,11 @@ func (a *GlIsBuffer) Observations() *atom.Observations { return &a.observations 
 // GlGetBufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetBufferParameteriv struct {
-	binary.Generate `display:"glGetBufferParameteriv"`
-	observations    atom.Observations
-	Target          BufferTarget
-	Parameter       BufferParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
+	Parameter    BufferParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetBufferParameteriv) String() string {
@@ -13198,10 +13198,10 @@ func (a *GlGetBufferParameteriv) Observations() *atom.Observations { return &a.o
 // GlCreateShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlCreateShader struct {
-	binary.Generate `display:"glCreateShader"`
-	observations    atom.Observations
-	Type            ShaderType
-	Result          ShaderId
+	binary.Generate
+	observations atom.Observations
+	Type         ShaderType
+	Result       ShaderId
 }
 
 func (a *GlCreateShader) String() string {
@@ -13231,9 +13231,9 @@ func (a *GlCreateShader) Observations() *atom.Observations { return &a.observati
 // GlDeleteShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteShader struct {
-	binary.Generate `display:"glDeleteShader"`
-	observations    atom.Observations
-	Shader          ShaderId
+	binary.Generate
+	observations atom.Observations
+	Shader       ShaderId
 }
 
 func (a *GlDeleteShader) String() string {
@@ -13263,12 +13263,12 @@ func (a *GlDeleteShader) Observations() *atom.Observations { return &a.observati
 // GlShaderSource
 ////////////////////////////////////////////////////////////////////////////////
 type GlShaderSource struct {
-	binary.Generate `display:"glShaderSource"`
-	observations    atom.Observations
-	Shader          ShaderId
-	Count           int32
-	Source          Charᵖᵖ
-	Length          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Shader       ShaderId
+	Count        int32
+	Source       Charᵖᵖ
+	Length       S32ᵖ
 }
 
 func (a *GlShaderSource) String() string {
@@ -13298,13 +13298,13 @@ func (a *GlShaderSource) Observations() *atom.Observations { return &a.observati
 // GlShaderBinary
 ////////////////////////////////////////////////////////////////////////////////
 type GlShaderBinary struct {
-	binary.Generate `display:"glShaderBinary"`
-	observations    atom.Observations
-	Count           int32
-	Shaders         ShaderIdᵖ
-	BinaryFormat    uint32
-	Binary          Voidᵖ
-	BinarySize      int32
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Shaders      ShaderIdᵖ
+	BinaryFormat uint32
+	Binary       Voidᵖ
+	BinarySize   int32
 }
 
 func (a *GlShaderBinary) String() string {
@@ -13334,7 +13334,7 @@ func (a *GlShaderBinary) Observations() *atom.Observations { return &a.observati
 // GlGetShaderInfoLog
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderInfoLog struct {
-	binary.Generate     `display:"glGetShaderInfoLog"`
+	binary.Generate
 	observations        atom.Observations
 	Shader              ShaderId
 	BufferLength        int32
@@ -13369,7 +13369,7 @@ func (a *GlGetShaderInfoLog) Observations() *atom.Observations { return &a.obser
 // GlGetShaderSource
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderSource struct {
-	binary.Generate     `display:"glGetShaderSource"`
+	binary.Generate
 	observations        atom.Observations
 	Shader              ShaderId
 	BufferLength        int32
@@ -13404,8 +13404,8 @@ func (a *GlGetShaderSource) Observations() *atom.Observations { return &a.observ
 // GlReleaseShaderCompiler
 ////////////////////////////////////////////////////////////////////////////////
 type GlReleaseShaderCompiler struct {
-	binary.Generate `display:"glReleaseShaderCompiler"`
-	observations    atom.Observations
+	binary.Generate
+	observations atom.Observations
 }
 
 func (a *GlReleaseShaderCompiler) String() string {
@@ -13435,9 +13435,9 @@ func (a *GlReleaseShaderCompiler) Observations() *atom.Observations { return &a.
 // GlCompileShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompileShader struct {
-	binary.Generate `display:"glCompileShader"`
-	observations    atom.Observations
-	Shader          ShaderId
+	binary.Generate
+	observations atom.Observations
+	Shader       ShaderId
 }
 
 func (a *GlCompileShader) String() string {
@@ -13467,10 +13467,10 @@ func (a *GlCompileShader) Observations() *atom.Observations { return &a.observat
 // GlIsShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsShader struct {
-	binary.Generate `display:"glIsShader"`
-	observations    atom.Observations
-	Shader          ShaderId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Shader       ShaderId
+	Result       bool
 }
 
 func (a *GlIsShader) String() string {
@@ -13500,9 +13500,9 @@ func (a *GlIsShader) Observations() *atom.Observations { return &a.observations 
 // GlCreateProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlCreateProgram struct {
-	binary.Generate `display:"glCreateProgram"`
-	observations    atom.Observations
-	Result          ProgramId
+	binary.Generate
+	observations atom.Observations
+	Result       ProgramId
 }
 
 func (a *GlCreateProgram) String() string {
@@ -13532,9 +13532,9 @@ func (a *GlCreateProgram) Observations() *atom.Observations { return &a.observat
 // GlDeleteProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteProgram struct {
-	binary.Generate `display:"glDeleteProgram"`
-	observations    atom.Observations
-	Program         ProgramId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
 }
 
 func (a *GlDeleteProgram) String() string {
@@ -13564,10 +13564,10 @@ func (a *GlDeleteProgram) Observations() *atom.Observations { return &a.observat
 // GlAttachShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlAttachShader struct {
-	binary.Generate `display:"glAttachShader"`
-	observations    atom.Observations
-	Program         ProgramId
-	Shader          ShaderId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Shader       ShaderId
 }
 
 func (a *GlAttachShader) String() string {
@@ -13597,10 +13597,10 @@ func (a *GlAttachShader) Observations() *atom.Observations { return &a.observati
 // GlDetachShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlDetachShader struct {
-	binary.Generate `display:"glDetachShader"`
-	observations    atom.Observations
-	Program         ProgramId
-	Shader          ShaderId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Shader       ShaderId
 }
 
 func (a *GlDetachShader) String() string {
@@ -13630,7 +13630,7 @@ func (a *GlDetachShader) Observations() *atom.Observations { return &a.observati
 // GlGetAttachedShaders
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetAttachedShaders struct {
-	binary.Generate      `display:"glGetAttachedShaders"`
+	binary.Generate
 	observations         atom.Observations
 	Program              ProgramId
 	BufferLength         int32
@@ -13665,9 +13665,9 @@ func (a *GlGetAttachedShaders) Observations() *atom.Observations { return &a.obs
 // GlLinkProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlLinkProgram struct {
-	binary.Generate `display:"glLinkProgram"`
-	observations    atom.Observations
-	Program         ProgramId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
 }
 
 func (a *GlLinkProgram) String() string {
@@ -13697,7 +13697,7 @@ func (a *GlLinkProgram) Observations() *atom.Observations { return &a.observatio
 // GlGetProgramInfoLog
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramInfoLog struct {
-	binary.Generate     `display:"glGetProgramInfoLog"`
+	binary.Generate
 	observations        atom.Observations
 	Program             ProgramId
 	BufferLength        int32
@@ -13732,9 +13732,9 @@ func (a *GlGetProgramInfoLog) Observations() *atom.Observations { return &a.obse
 // GlUseProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlUseProgram struct {
-	binary.Generate `display:"glUseProgram"`
-	observations    atom.Observations
-	Program         ProgramId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
 }
 
 func (a *GlUseProgram) String() string {
@@ -13764,10 +13764,10 @@ func (a *GlUseProgram) Observations() *atom.Observations { return &a.observation
 // GlIsProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsProgram struct {
-	binary.Generate `display:"glIsProgram"`
-	observations    atom.Observations
-	Program         ProgramId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
+	Result       bool
 }
 
 func (a *GlIsProgram) String() string {
@@ -13797,9 +13797,9 @@ func (a *GlIsProgram) Observations() *atom.Observations { return &a.observations
 // GlValidateProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlValidateProgram struct {
-	binary.Generate `display:"glValidateProgram"`
-	observations    atom.Observations
-	Program         ProgramId
+	binary.Generate
+	observations atom.Observations
+	Program      ProgramId
 }
 
 func (a *GlValidateProgram) String() string {
@@ -13829,12 +13829,12 @@ func (a *GlValidateProgram) Observations() *atom.Observations { return &a.observ
 // GlClearColor
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearColor struct {
-	binary.Generate `display:"glClearColor"`
-	observations    atom.Observations
-	R               float32
-	G               float32
-	B               float32
-	A               float32
+	binary.Generate
+	observations atom.Observations
+	R            float32
+	G            float32
+	B            float32
+	A            float32
 }
 
 func (a *GlClearColor) String() string {
@@ -13864,9 +13864,9 @@ func (a *GlClearColor) Observations() *atom.Observations { return &a.observation
 // GlClearDepthf
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearDepthf struct {
-	binary.Generate `display:"glClearDepthf"`
-	observations    atom.Observations
-	Depth           float32
+	binary.Generate
+	observations atom.Observations
+	Depth        float32
 }
 
 func (a *GlClearDepthf) String() string {
@@ -13896,9 +13896,9 @@ func (a *GlClearDepthf) Observations() *atom.Observations { return &a.observatio
 // GlClearStencil
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearStencil struct {
-	binary.Generate `display:"glClearStencil"`
-	observations    atom.Observations
-	Stencil         int32
+	binary.Generate
+	observations atom.Observations
+	Stencil      int32
 }
 
 func (a *GlClearStencil) String() string {
@@ -13928,9 +13928,9 @@ func (a *GlClearStencil) Observations() *atom.Observations { return &a.observati
 // GlClear
 ////////////////////////////////////////////////////////////////////////////////
 type GlClear struct {
-	binary.Generate `display:"glClear"`
-	observations    atom.Observations
-	Mask            ClearMask
+	binary.Generate
+	observations atom.Observations
+	Mask         ClearMask
 }
 
 func (a *GlClear) String() string {
@@ -13960,9 +13960,9 @@ func (a *GlClear) Observations() *atom.Observations { return &a.observations }
 // GlCullFace
 ////////////////////////////////////////////////////////////////////////////////
 type GlCullFace struct {
-	binary.Generate `display:"glCullFace"`
-	observations    atom.Observations
-	Mode            FaceMode
+	binary.Generate
+	observations atom.Observations
+	Mode         FaceMode
 }
 
 func (a *GlCullFace) String() string {
@@ -13992,10 +13992,10 @@ func (a *GlCullFace) Observations() *atom.Observations { return &a.observations 
 // GlPolygonOffset
 ////////////////////////////////////////////////////////////////////////////////
 type GlPolygonOffset struct {
-	binary.Generate `display:"glPolygonOffset"`
-	observations    atom.Observations
-	ScaleFactor     float32
-	Units           float32
+	binary.Generate
+	observations atom.Observations
+	ScaleFactor  float32
+	Units        float32
 }
 
 func (a *GlPolygonOffset) String() string {
@@ -14025,9 +14025,9 @@ func (a *GlPolygonOffset) Observations() *atom.Observations { return &a.observat
 // GlLineWidth
 ////////////////////////////////////////////////////////////////////////////////
 type GlLineWidth struct {
-	binary.Generate `display:"glLineWidth"`
-	observations    atom.Observations
-	Width           float32
+	binary.Generate
+	observations atom.Observations
+	Width        float32
 }
 
 func (a *GlLineWidth) String() string {
@@ -14057,10 +14057,10 @@ func (a *GlLineWidth) Observations() *atom.Observations { return &a.observations
 // GlSampleCoverage
 ////////////////////////////////////////////////////////////////////////////////
 type GlSampleCoverage struct {
-	binary.Generate `display:"glSampleCoverage"`
-	observations    atom.Observations
-	Value           float32
-	Invert          bool
+	binary.Generate
+	observations atom.Observations
+	Value        float32
+	Invert       bool
 }
 
 func (a *GlSampleCoverage) String() string {
@@ -14090,10 +14090,10 @@ func (a *GlSampleCoverage) Observations() *atom.Observations { return &a.observa
 // GlHint
 ////////////////////////////////////////////////////////////////////////////////
 type GlHint struct {
-	binary.Generate `display:"glHint"`
-	observations    atom.Observations
-	Target          HintTarget
-	Mode            HintMode
+	binary.Generate
+	observations atom.Observations
+	Target       HintTarget
+	Mode         HintMode
 }
 
 func (a *GlHint) String() string {
@@ -14123,7 +14123,7 @@ func (a *GlHint) Observations() *atom.Observations { return &a.observations }
 // GlFramebufferRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlFramebufferRenderbuffer struct {
-	binary.Generate       `display:"glFramebufferRenderbuffer"`
+	binary.Generate
 	observations          atom.Observations
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -14158,7 +14158,7 @@ func (a *GlFramebufferRenderbuffer) Observations() *atom.Observations { return &
 // GlFramebufferTexture2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlFramebufferTexture2D struct {
-	binary.Generate       `display:"glFramebufferTexture2D"`
+	binary.Generate
 	observations          atom.Observations
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -14194,7 +14194,7 @@ func (a *GlFramebufferTexture2D) Observations() *atom.Observations { return &a.o
 // GlGetFramebufferAttachmentParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetFramebufferAttachmentParameteriv struct {
-	binary.Generate   `display:"glGetFramebufferAttachmentParameteriv"`
+	binary.Generate
 	observations      atom.Observations
 	FramebufferTarget FramebufferTarget
 	Attachment        FramebufferAttachment
@@ -14231,12 +14231,12 @@ func (a *GlGetFramebufferAttachmentParameteriv) Observations() *atom.Observation
 // GlDrawElements
 ////////////////////////////////////////////////////////////////////////////////
 type GlDrawElements struct {
-	binary.Generate `display:"glDrawElements"`
-	observations    atom.Observations
-	DrawMode        DrawMode
-	ElementCount    int32
-	IndicesType     IndicesType
-	Indices         IndicesPointer
+	binary.Generate
+	observations atom.Observations
+	DrawMode     DrawMode
+	ElementCount int32
+	IndicesType  IndicesType
+	Indices      IndicesPointer
 }
 
 func (a *GlDrawElements) String() string {
@@ -14266,11 +14266,11 @@ func (a *GlDrawElements) Observations() *atom.Observations { return &a.observati
 // GlDrawArrays
 ////////////////////////////////////////////////////////////////////////////////
 type GlDrawArrays struct {
-	binary.Generate `display:"glDrawArrays"`
-	observations    atom.Observations
-	DrawMode        DrawMode
-	FirstIndex      int32
-	IndexCount      int32
+	binary.Generate
+	observations atom.Observations
+	DrawMode     DrawMode
+	FirstIndex   int32
+	IndexCount   int32
 }
 
 func (a *GlDrawArrays) String() string {
@@ -14300,8 +14300,8 @@ func (a *GlDrawArrays) Observations() *atom.Observations { return &a.observation
 // GlFlush
 ////////////////////////////////////////////////////////////////////////////////
 type GlFlush struct {
-	binary.Generate `display:"glFlush"`
-	observations    atom.Observations
+	binary.Generate
+	observations atom.Observations
 }
 
 func (a *GlFlush) String() string {
@@ -14331,8 +14331,8 @@ func (a *GlFlush) Observations() *atom.Observations { return &a.observations }
 // GlFinish
 ////////////////////////////////////////////////////////////////////////////////
 type GlFinish struct {
-	binary.Generate `display:"glFinish"`
-	observations    atom.Observations
+	binary.Generate
+	observations atom.Observations
 }
 
 func (a *GlFinish) String() string {
@@ -14362,10 +14362,10 @@ func (a *GlFinish) Observations() *atom.Observations { return &a.observations }
 // GlGetBooleanv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetBooleanv struct {
-	binary.Generate `display:"glGetBooleanv"`
-	observations    atom.Observations
-	Param           StateVariable
-	Values          Boolᵖ
+	binary.Generate
+	observations atom.Observations
+	Param        StateVariable
+	Values       Boolᵖ
 }
 
 func (a *GlGetBooleanv) String() string {
@@ -14395,10 +14395,10 @@ func (a *GlGetBooleanv) Observations() *atom.Observations { return &a.observatio
 // GlGetFloatv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetFloatv struct {
-	binary.Generate `display:"glGetFloatv"`
-	observations    atom.Observations
-	Param           StateVariable
-	Values          F32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Param        StateVariable
+	Values       F32ᵖ
 }
 
 func (a *GlGetFloatv) String() string {
@@ -14428,10 +14428,10 @@ func (a *GlGetFloatv) Observations() *atom.Observations { return &a.observations
 // GlGetIntegerv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetIntegerv struct {
-	binary.Generate `display:"glGetIntegerv"`
-	observations    atom.Observations
-	Param           StateVariable
-	Values          S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Param        StateVariable
+	Values       S32ᵖ
 }
 
 func (a *GlGetIntegerv) String() string {
@@ -14461,10 +14461,10 @@ func (a *GlGetIntegerv) Observations() *atom.Observations { return &a.observatio
 // GlGetString
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetString struct {
-	binary.Generate `display:"glGetString"`
-	observations    atom.Observations
-	Param           StringConstant
-	Result          Charᵖ
+	binary.Generate
+	observations atom.Observations
+	Param        StringConstant
+	Result       Charᵖ
 }
 
 func (a *GlGetString) String() string {
@@ -14494,9 +14494,9 @@ func (a *GlGetString) Observations() *atom.Observations { return &a.observations
 // GlEnable
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnable struct {
-	binary.Generate `display:"glEnable"`
-	observations    atom.Observations
-	Capability      Capability
+	binary.Generate
+	observations atom.Observations
+	Capability   Capability
 }
 
 func (a *GlEnable) String() string {
@@ -14526,9 +14526,9 @@ func (a *GlEnable) Observations() *atom.Observations { return &a.observations }
 // GlDisable
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisable struct {
-	binary.Generate `display:"glDisable"`
-	observations    atom.Observations
-	Capability      Capability
+	binary.Generate
+	observations atom.Observations
+	Capability   Capability
 }
 
 func (a *GlDisable) String() string {
@@ -14558,10 +14558,10 @@ func (a *GlDisable) Observations() *atom.Observations { return &a.observations }
 // GlIsEnabled
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsEnabled struct {
-	binary.Generate `display:"glIsEnabled"`
-	observations    atom.Observations
-	Capability      Capability
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Capability   Capability
+	Result       bool
 }
 
 func (a *GlIsEnabled) String() string {
@@ -14591,11 +14591,11 @@ func (a *GlIsEnabled) Observations() *atom.Observations { return &a.observations
 // GlFenceSync
 ////////////////////////////////////////////////////////////////////////////////
 type GlFenceSync struct {
-	binary.Generate `display:"glFenceSync"`
-	observations    atom.Observations
-	Condition       SyncCondition
-	SyncFlags       SyncFlags
-	Result          SyncObject
+	binary.Generate
+	observations atom.Observations
+	Condition    SyncCondition
+	SyncFlags    SyncFlags
+	Result       SyncObject
 }
 
 func (a *GlFenceSync) String() string {
@@ -14625,9 +14625,9 @@ func (a *GlFenceSync) Observations() *atom.Observations { return &a.observations
 // GlDeleteSync
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteSync struct {
-	binary.Generate `display:"glDeleteSync"`
-	observations    atom.Observations
-	Sync            SyncObject
+	binary.Generate
+	observations atom.Observations
+	Sync         SyncObject
 }
 
 func (a *GlDeleteSync) String() string {
@@ -14657,11 +14657,11 @@ func (a *GlDeleteSync) Observations() *atom.Observations { return &a.observation
 // GlWaitSync
 ////////////////////////////////////////////////////////////////////////////////
 type GlWaitSync struct {
-	binary.Generate `display:"glWaitSync"`
-	observations    atom.Observations
-	Sync            SyncObject
-	SyncFlags       SyncFlags
-	Timeout         uint64
+	binary.Generate
+	observations atom.Observations
+	Sync         SyncObject
+	SyncFlags    SyncFlags
+	Timeout      uint64
 }
 
 func (a *GlWaitSync) String() string {
@@ -14691,12 +14691,12 @@ func (a *GlWaitSync) Observations() *atom.Observations { return &a.observations 
 // GlClientWaitSync
 ////////////////////////////////////////////////////////////////////////////////
 type GlClientWaitSync struct {
-	binary.Generate `display:"glClientWaitSync"`
-	observations    atom.Observations
-	Sync            SyncObject
-	SyncFlags       SyncFlags
-	Timeout         uint64
-	Result          ClientWaitSyncSignal
+	binary.Generate
+	observations atom.Observations
+	Sync         SyncObject
+	SyncFlags    SyncFlags
+	Timeout      uint64
+	Result       ClientWaitSyncSignal
 }
 
 func (a *GlClientWaitSync) String() string {
@@ -14726,13 +14726,13 @@ func (a *GlClientWaitSync) Observations() *atom.Observations { return &a.observa
 // GlMapBufferRange
 ////////////////////////////////////////////////////////////////////////////////
 type GlMapBufferRange struct {
-	binary.Generate `display:"glMapBufferRange"`
-	observations    atom.Observations
-	Target          BufferTarget
-	Offset          int32
-	Length          int32
-	Access          MapBufferRangeAccess
-	Result          Voidᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
+	Offset       int32
+	Length       int32
+	Access       MapBufferRangeAccess
+	Result       Voidᵖ
 }
 
 func (a *GlMapBufferRange) String() string {
@@ -14762,9 +14762,9 @@ func (a *GlMapBufferRange) Observations() *atom.Observations { return &a.observa
 // GlUnmapBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlUnmapBuffer struct {
-	binary.Generate `display:"glUnmapBuffer"`
-	observations    atom.Observations
-	Target          BufferTarget
+	binary.Generate
+	observations atom.Observations
+	Target       BufferTarget
 }
 
 func (a *GlUnmapBuffer) String() string {
@@ -14794,11 +14794,11 @@ func (a *GlUnmapBuffer) Observations() *atom.Observations { return &a.observatio
 // GlInvalidateFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlInvalidateFramebuffer struct {
-	binary.Generate `display:"glInvalidateFramebuffer"`
-	observations    atom.Observations
-	Target          FramebufferTarget
-	Count           int32
-	Attachments     FramebufferAttachmentᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       FramebufferTarget
+	Count        int32
+	Attachments  FramebufferAttachmentᵖ
 }
 
 func (a *GlInvalidateFramebuffer) String() string {
@@ -14828,13 +14828,13 @@ func (a *GlInvalidateFramebuffer) Observations() *atom.Observations { return &a.
 // GlRenderbufferStorageMultisample
 ////////////////////////////////////////////////////////////////////////////////
 type GlRenderbufferStorageMultisample struct {
-	binary.Generate `display:"glRenderbufferStorageMultisample"`
-	observations    atom.Observations
-	Target          RenderbufferTarget
-	Samples         int32
-	Format          RenderbufferFormat
-	Width           int32
-	Height          int32
+	binary.Generate
+	observations atom.Observations
+	Target       RenderbufferTarget
+	Samples      int32
+	Format       RenderbufferFormat
+	Width        int32
+	Height       int32
 }
 
 func (a *GlRenderbufferStorageMultisample) String() string {
@@ -14864,18 +14864,18 @@ func (a *GlRenderbufferStorageMultisample) Observations() *atom.Observations { r
 // GlBlitFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlitFramebuffer struct {
-	binary.Generate `display:"glBlitFramebuffer"`
-	observations    atom.Observations
-	SrcX0           int32
-	SrcY0           int32
-	SrcX1           int32
-	SrcY1           int32
-	DstX0           int32
-	DstY0           int32
-	DstX1           int32
-	DstY1           int32
-	Mask            ClearMask
-	Filter          TextureFilterMode
+	binary.Generate
+	observations atom.Observations
+	SrcX0        int32
+	SrcY0        int32
+	SrcX1        int32
+	SrcY1        int32
+	DstX0        int32
+	DstY0        int32
+	DstX1        int32
+	DstY1        int32
+	Mask         ClearMask
+	Filter       TextureFilterMode
 }
 
 func (a *GlBlitFramebuffer) String() string {
@@ -14905,10 +14905,10 @@ func (a *GlBlitFramebuffer) Observations() *atom.Observations { return &a.observ
 // GlGenQueries
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenQueries struct {
-	binary.Generate `display:"glGenQueries"`
-	observations    atom.Observations
-	Count           int32
-	Queries         QueryIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Queries      QueryIdᵖ
 }
 
 func (a *GlGenQueries) String() string {
@@ -14938,10 +14938,10 @@ func (a *GlGenQueries) Observations() *atom.Observations { return &a.observation
 // GlBeginQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlBeginQuery struct {
-	binary.Generate `display:"glBeginQuery"`
-	observations    atom.Observations
-	Target          QueryTarget
-	Query           QueryId
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
+	Query        QueryId
 }
 
 func (a *GlBeginQuery) String() string {
@@ -14971,9 +14971,9 @@ func (a *GlBeginQuery) Observations() *atom.Observations { return &a.observation
 // GlEndQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndQuery struct {
-	binary.Generate `display:"glEndQuery"`
-	observations    atom.Observations
-	Target          QueryTarget
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
 }
 
 func (a *GlEndQuery) String() string {
@@ -15003,10 +15003,10 @@ func (a *GlEndQuery) Observations() *atom.Observations { return &a.observations 
 // GlDeleteQueries
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteQueries struct {
-	binary.Generate `display:"glDeleteQueries"`
-	observations    atom.Observations
-	Count           int32
-	Queries         QueryIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Queries      QueryIdᵖ
 }
 
 func (a *GlDeleteQueries) String() string {
@@ -15036,10 +15036,10 @@ func (a *GlDeleteQueries) Observations() *atom.Observations { return &a.observat
 // GlIsQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsQuery struct {
-	binary.Generate `display:"glIsQuery"`
-	observations    atom.Observations
-	Query           QueryId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Result       bool
 }
 
 func (a *GlIsQuery) String() string {
@@ -15069,11 +15069,11 @@ func (a *GlIsQuery) Observations() *atom.Observations { return &a.observations }
 // GlGetQueryiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryiv struct {
-	binary.Generate `display:"glGetQueryiv"`
-	observations    atom.Observations
-	Target          QueryTarget
-	Parameter       QueryParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
+	Parameter    QueryParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetQueryiv) String() string {
@@ -15103,11 +15103,11 @@ func (a *GlGetQueryiv) Observations() *atom.Observations { return &a.observation
 // GlGetQueryObjectuiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectuiv struct {
-	binary.Generate `display:"glGetQueryObjectuiv"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           U32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        U32ᵖ
 }
 
 func (a *GlGetQueryObjectuiv) String() string {
@@ -15137,7 +15137,7 @@ func (a *GlGetQueryObjectuiv) Observations() *atom.Observations { return &a.obse
 // GlGetActiveUniformBlockName
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveUniformBlockName struct {
-	binary.Generate    `display:"glGetActiveUniformBlockName"`
+	binary.Generate
 	observations       atom.Observations
 	Program            ProgramId
 	UniformBlockIndex  uint32
@@ -15173,7 +15173,7 @@ func (a *GlGetActiveUniformBlockName) Observations() *atom.Observations { return
 // GlGetActiveUniformBlockiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveUniformBlockiv struct {
-	binary.Generate   `display:"glGetActiveUniformBlockiv"`
+	binary.Generate
 	observations      atom.Observations
 	Program           ProgramId
 	UniformBlockIndex uint32
@@ -15208,7 +15208,7 @@ func (a *GlGetActiveUniformBlockiv) Observations() *atom.Observations { return &
 // GlUniformBlockBinding
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformBlockBinding struct {
-	binary.Generate     `display:"glUniformBlockBinding"`
+	binary.Generate
 	observations        atom.Observations
 	Program             ProgramId
 	UniformBlockIndex   uint32
@@ -15242,13 +15242,13 @@ func (a *GlUniformBlockBinding) Observations() *atom.Observations { return &a.ob
 // GlGetActiveUniformsiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveUniformsiv struct {
-	binary.Generate `display:"glGetActiveUniformsiv"`
-	observations    atom.Observations
-	Program         ProgramId
-	UniformCount    uint32
-	UniformIndices  U32ᵖ
-	ParameterName   UniformBlockParameter
-	Parameters      S32ᵖ
+	binary.Generate
+	observations   atom.Observations
+	Program        ProgramId
+	UniformCount   uint32
+	UniformIndices U32ᵖ
+	ParameterName  UniformBlockParameter
+	Parameters     S32ᵖ
 }
 
 func (a *GlGetActiveUniformsiv) String() string {
@@ -15278,11 +15278,11 @@ func (a *GlGetActiveUniformsiv) Observations() *atom.Observations { return &a.ob
 // GlBindBufferBase
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindBufferBase struct {
-	binary.Generate `display:"glBindBufferBase"`
-	observations    atom.Observations
-	Target          IndexedBufferTarget
-	Index           uint32
-	Buffer          BufferId
+	binary.Generate
+	observations atom.Observations
+	Target       IndexedBufferTarget
+	Index        uint32
+	Buffer       BufferId
 }
 
 func (a *GlBindBufferBase) String() string {
@@ -15312,10 +15312,10 @@ func (a *GlBindBufferBase) Observations() *atom.Observations { return &a.observa
 // GlGenVertexArrays
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenVertexArrays struct {
-	binary.Generate `display:"glGenVertexArrays"`
-	observations    atom.Observations
-	Count           int32
-	Arrays          VertexArrayIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Arrays       VertexArrayIdᵖ
 }
 
 func (a *GlGenVertexArrays) String() string {
@@ -15345,9 +15345,9 @@ func (a *GlGenVertexArrays) Observations() *atom.Observations { return &a.observ
 // GlBindVertexArray
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindVertexArray struct {
-	binary.Generate `display:"glBindVertexArray"`
-	observations    atom.Observations
-	Array           VertexArrayId
+	binary.Generate
+	observations atom.Observations
+	Array        VertexArrayId
 }
 
 func (a *GlBindVertexArray) String() string {
@@ -15377,10 +15377,10 @@ func (a *GlBindVertexArray) Observations() *atom.Observations { return &a.observ
 // GlDeleteVertexArrays
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteVertexArrays struct {
-	binary.Generate `display:"glDeleteVertexArrays"`
-	observations    atom.Observations
-	Count           uint32
-	Arrays          VertexArrayIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        uint32
+	Arrays       VertexArrayIdᵖ
 }
 
 func (a *GlDeleteVertexArrays) String() string {
@@ -15410,11 +15410,11 @@ func (a *GlDeleteVertexArrays) Observations() *atom.Observations { return &a.obs
 // GlGetQueryObjecti64v
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjecti64v struct {
-	binary.Generate `display:"glGetQueryObjecti64v"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           S64ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        S64ᵖ
 }
 
 func (a *GlGetQueryObjecti64v) String() string {
@@ -15444,11 +15444,11 @@ func (a *GlGetQueryObjecti64v) Observations() *atom.Observations { return &a.obs
 // GlGetQueryObjectui64v
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectui64v struct {
-	binary.Generate `display:"glGetQueryObjectui64v"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           U64ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        U64ᵖ
 }
 
 func (a *GlGetQueryObjectui64v) String() string {
@@ -15478,10 +15478,10 @@ func (a *GlGetQueryObjectui64v) Observations() *atom.Observations { return &a.ob
 // GlGenQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenQueriesEXT struct {
-	binary.Generate `display:"glGenQueriesEXT"`
-	observations    atom.Observations
-	Count           int32
-	Queries         QueryIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Queries      QueryIdᵖ
 }
 
 func (a *GlGenQueriesEXT) String() string {
@@ -15511,10 +15511,10 @@ func (a *GlGenQueriesEXT) Observations() *atom.Observations { return &a.observat
 // GlBeginQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlBeginQueryEXT struct {
-	binary.Generate `display:"glBeginQueryEXT"`
-	observations    atom.Observations
-	Target          QueryTarget
-	Query           QueryId
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
+	Query        QueryId
 }
 
 func (a *GlBeginQueryEXT) String() string {
@@ -15544,9 +15544,9 @@ func (a *GlBeginQueryEXT) Observations() *atom.Observations { return &a.observat
 // GlEndQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndQueryEXT struct {
-	binary.Generate `display:"glEndQueryEXT"`
-	observations    atom.Observations
-	Target          QueryTarget
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
 }
 
 func (a *GlEndQueryEXT) String() string {
@@ -15576,10 +15576,10 @@ func (a *GlEndQueryEXT) Observations() *atom.Observations { return &a.observatio
 // GlDeleteQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteQueriesEXT struct {
-	binary.Generate `display:"glDeleteQueriesEXT"`
-	observations    atom.Observations
-	Count           int32
-	Queries         QueryIdᵖ
+	binary.Generate
+	observations atom.Observations
+	Count        int32
+	Queries      QueryIdᵖ
 }
 
 func (a *GlDeleteQueriesEXT) String() string {
@@ -15609,10 +15609,10 @@ func (a *GlDeleteQueriesEXT) Observations() *atom.Observations { return &a.obser
 // GlIsQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsQueryEXT struct {
-	binary.Generate `display:"glIsQueryEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Result          bool
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Result       bool
 }
 
 func (a *GlIsQueryEXT) String() string {
@@ -15642,10 +15642,10 @@ func (a *GlIsQueryEXT) Observations() *atom.Observations { return &a.observation
 // GlQueryCounterEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlQueryCounterEXT struct {
-	binary.Generate `display:"glQueryCounterEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Target          QueryTarget
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Target       QueryTarget
 }
 
 func (a *GlQueryCounterEXT) String() string {
@@ -15675,11 +15675,11 @@ func (a *GlQueryCounterEXT) Observations() *atom.Observations { return &a.observ
 // GlGetQueryivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryivEXT struct {
-	binary.Generate `display:"glGetQueryivEXT"`
-	observations    atom.Observations
-	Target          QueryTarget
-	Parameter       QueryParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Target       QueryTarget
+	Parameter    QueryParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetQueryivEXT) String() string {
@@ -15709,11 +15709,11 @@ func (a *GlGetQueryivEXT) Observations() *atom.Observations { return &a.observat
 // GlGetQueryObjectivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectivEXT struct {
-	binary.Generate `display:"glGetQueryObjectivEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           S32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        S32ᵖ
 }
 
 func (a *GlGetQueryObjectivEXT) String() string {
@@ -15743,11 +15743,11 @@ func (a *GlGetQueryObjectivEXT) Observations() *atom.Observations { return &a.ob
 // GlGetQueryObjectuivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectuivEXT struct {
-	binary.Generate `display:"glGetQueryObjectuivEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           U32ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        U32ᵖ
 }
 
 func (a *GlGetQueryObjectuivEXT) String() string {
@@ -15777,11 +15777,11 @@ func (a *GlGetQueryObjectuivEXT) Observations() *atom.Observations { return &a.o
 // GlGetQueryObjecti64vEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjecti64vEXT struct {
-	binary.Generate `display:"glGetQueryObjecti64vEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           S64ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        S64ᵖ
 }
 
 func (a *GlGetQueryObjecti64vEXT) String() string {
@@ -15811,11 +15811,11 @@ func (a *GlGetQueryObjecti64vEXT) Observations() *atom.Observations { return &a.
 // GlGetQueryObjectui64vEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectui64vEXT struct {
-	binary.Generate `display:"glGetQueryObjectui64vEXT"`
-	observations    atom.Observations
-	Query           QueryId
-	Parameter       QueryObjectParameter
-	Value           U64ᵖ
+	binary.Generate
+	observations atom.Observations
+	Query        QueryId
+	Parameter    QueryObjectParameter
+	Value        U64ᵖ
 }
 
 func (a *GlGetQueryObjectui64vEXT) String() string {
@@ -15845,7 +15845,7 @@ func (a *GlGetQueryObjectui64vEXT) Observations() *atom.Observations { return &a
 // Architecture
 ////////////////////////////////////////////////////////////////////////////////
 type Architecture struct {
-	binary.Generate  `display:"architecture"`
+	binary.Generate
 	observations     atom.Observations
 	PointerAlignment uint32
 	PointerSize      uint32
@@ -15880,9 +15880,9 @@ func (a *Architecture) Observations() *atom.Observations { return &a.observation
 // ReplayCreateRenderer
 ////////////////////////////////////////////////////////////////////////////////
 type ReplayCreateRenderer struct {
-	binary.Generate `display:"replayCreateRenderer"`
-	observations    atom.Observations
-	Id              uint32
+	binary.Generate
+	observations atom.Observations
+	Id           uint32
 }
 
 func (a *ReplayCreateRenderer) String() string {
@@ -15912,9 +15912,9 @@ func (a *ReplayCreateRenderer) Observations() *atom.Observations { return &a.obs
 // ReplayBindRenderer
 ////////////////////////////////////////////////////////////////////////////////
 type ReplayBindRenderer struct {
-	binary.Generate `display:"replayBindRenderer"`
-	observations    atom.Observations
-	Id              uint32
+	binary.Generate
+	observations atom.Observations
+	Id           uint32
 }
 
 func (a *ReplayBindRenderer) String() string {
@@ -15944,7 +15944,7 @@ func (a *ReplayBindRenderer) Observations() *atom.Observations { return &a.obser
 // BackbufferInfo
 ////////////////////////////////////////////////////////////////////////////////
 type BackbufferInfo struct {
-	binary.Generate      `display:"backbufferInfo"`
+	binary.Generate
 	observations         atom.Observations
 	Width                int32
 	Height               int32
@@ -15981,9 +15981,9 @@ func (a *BackbufferInfo) Observations() *atom.Observations { return &a.observati
 // StartTimer
 ////////////////////////////////////////////////////////////////////////////////
 type StartTimer struct {
-	binary.Generate `display:"startTimer"`
-	observations    atom.Observations
-	Index           uint8
+	binary.Generate
+	observations atom.Observations
+	Index        uint8
 }
 
 func (a *StartTimer) String() string {
@@ -16013,10 +16013,10 @@ func (a *StartTimer) Observations() *atom.Observations { return &a.observations 
 // StopTimer
 ////////////////////////////////////////////////////////////////////////////////
 type StopTimer struct {
-	binary.Generate `display:"stopTimer"`
-	observations    atom.Observations
-	Index           uint8
-	Result          uint64
+	binary.Generate
+	observations atom.Observations
+	Index        uint8
+	Result       uint64
 }
 
 func (a *StopTimer) String() string {
@@ -16046,8 +16046,8 @@ func (a *StopTimer) Observations() *atom.Observations { return &a.observations }
 // FlushPostBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type FlushPostBuffer struct {
-	binary.Generate `display:"flushPostBuffer"`
-	observations    atom.Observations
+	binary.Generate
+	observations atom.Observations
 }
 
 func (a *FlushPostBuffer) String() string {
