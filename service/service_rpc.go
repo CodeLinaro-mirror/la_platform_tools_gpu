@@ -15,7 +15,7 @@ import (
 )
 
 type RPC interface {
-	GetSchema(l log.Logger) ([]*schema.Class, error)
+	GetSchema(l log.Logger) (Schema, error)
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
@@ -128,6 +128,13 @@ const (
 	TimingMaskTimingPerDrawCall TimingMask = 2
 	TimingMaskTimingPerFrame    TimingMask = 4
 )
+
+// Class Schema
+type Schema struct {
+	binary.Generate
+	Classes   []*schema.Class
+	Constants []schema.ConstantSet
+}
 
 // Class Device
 type Device struct {

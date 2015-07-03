@@ -31,7 +31,7 @@ import schema "schema.api"
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
-cmd schema.Class*[] GetSchema() { return ? }
+cmd Schema GetSchema() { return ? }
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
@@ -122,6 +122,12 @@ cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
 cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
 cmd Report             ResolveReport(ReportId id) { return ? }
 cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
+
+// Schema holds all the rtti information for dynamic types in the service.
+class Schema {
+  schema.Class*[]      Classes   // The set of classes in the schema
+  schema.ConstantSet[] Constants // All the constants the schema includes
+}
 
 // Device describes replay target avaliable to the server.
 class Device {
