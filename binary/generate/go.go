@@ -22,11 +22,6 @@ import (
 
 // GoFile generates the all the go code for a file with a set of structs.
 func (g *Generator) GoFile(file *File) ([]byte, error) {
-	if file.Package == "schema" {
-		g.f.schemaPrefix = ""
-	} else {
-		g.f.schemaPrefix = "schema."
-	}
 	b := &bytes.Buffer{}
 	g.f.File = file
 	defer func() { g.f.File = nil }()
