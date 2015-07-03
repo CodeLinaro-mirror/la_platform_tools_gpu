@@ -1282,8 +1282,8 @@ const rpc_common_go_tmpl = `{{/*
 {{define "Type#string"   }}string{{end}}
 {{define "Type.Slice"    }}[]{{Node "Type" .Type.To}}{{end}}
 {{define "Type.Class"    }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
-{{define "Type.Pseudonym"}}{{.Type.Name}}{{end}}
-{{define "Type.Enum"     }}{{.Type.Name}}{{end}}
+{{define "Type.Pseudonym"}}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
+{{define "Type.Enum"     }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
 {{define "Type.Pointer"  }}{{if not (GetAnnotation $.Type.To "Interface")}}*{{end}}{{Node "Type" .Type.To}}{{end}}
 
 

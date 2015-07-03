@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // Call GetSchema
@@ -171,6 +172,18 @@ type callReplaceAtom struct {
 type resultReplaceAtom struct {
 	binary.Generate
 	value CaptureId
+}
+
+// Call Get
+type callGet struct {
+	binary.Generate
+	p path.Path
+}
+
+// Result Get
+type resultGet struct {
+	binary.Generate
+	value interface{}
 }
 
 // Call ResolveAtomStream
