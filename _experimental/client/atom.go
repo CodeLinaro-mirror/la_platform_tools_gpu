@@ -48,7 +48,7 @@ func (a *Atom) DisplayName() string {
 }
 
 func (a *Atom) Api() service.ApiId {
-	return service.ApiId{ID: a.meta.Api}
+	return service.ApiId{ID: binary.ID(a.meta.API)}
 }
 
 func (a *Atom) DocumentationUrl() string {
