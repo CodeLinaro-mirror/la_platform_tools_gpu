@@ -17,13 +17,14 @@ package atom
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
 // Metadata is the meta information about an atom type that is added to the
 // binary schema class for the atom.
 type Metadata struct {
 	binary.Generate
-	Api              binary.ID // The api this atom belongs to.
+	API              gfxapi.ID // The api this atom belongs to.
 	DisplayName      string    // The display name for this atom type.
 	Flags            Flags     // The atom flags for this type.
 	DocumentationUrl string    // A url for documentation about this atom.

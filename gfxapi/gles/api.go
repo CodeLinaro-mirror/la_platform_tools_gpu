@@ -8560,7 +8560,7 @@ func (a *EglInitialize) AddWrite(rng memory.Range, id binary.ID) *EglInitialize 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *EglInitialize) API() gfxapi.API                  { return api{} }
+func (c *EglInitialize) API() gfxapi.ID                   { return api{}.ID() }
 func (c *EglInitialize) Flags() atom.Flags                { return 0 }
 func (a *EglInitialize) Observations() *atom.Observations { return &a.observations }
 
@@ -8596,7 +8596,7 @@ func (a *EglCreateContext) AddWrite(rng memory.Range, id binary.ID) *EglCreateCo
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *EglCreateContext) API() gfxapi.API                  { return api{} }
+func (c *EglCreateContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *EglCreateContext) Flags() atom.Flags                { return 0 }
 func (a *EglCreateContext) Observations() *atom.Observations { return &a.observations }
 
@@ -8632,7 +8632,7 @@ func (a *EglMakeCurrent) AddWrite(rng memory.Range, id binary.ID) *EglMakeCurren
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *EglMakeCurrent) API() gfxapi.API                  { return api{} }
+func (c *EglMakeCurrent) API() gfxapi.ID                   { return api{}.ID() }
 func (c *EglMakeCurrent) Flags() atom.Flags                { return 0 }
 func (a *EglMakeCurrent) Observations() *atom.Observations { return &a.observations }
 
@@ -8666,7 +8666,7 @@ func (a *EglSwapBuffers) AddWrite(rng memory.Range, id binary.ID) *EglSwapBuffer
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *EglSwapBuffers) API() gfxapi.API                  { return api{} }
+func (c *EglSwapBuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *EglSwapBuffers) Flags() atom.Flags                { return 0 | atom.EndOfFrame }
 func (a *EglSwapBuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -8702,7 +8702,7 @@ func (a *EglQuerySurface) AddWrite(rng memory.Range, id binary.ID) *EglQuerySurf
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *EglQuerySurface) API() gfxapi.API                  { return api{} }
+func (c *EglQuerySurface) API() gfxapi.ID                   { return api{}.ID() }
 func (c *EglQuerySurface) Flags() atom.Flags                { return 0 }
 func (a *EglQuerySurface) Observations() *atom.Observations { return &a.observations }
 
@@ -8738,7 +8738,7 @@ func (a *GlXCreateContext) AddWrite(rng memory.Range, id binary.ID) *GlXCreateCo
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXCreateContext) API() gfxapi.API                  { return api{} }
+func (c *GlXCreateContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXCreateContext) Flags() atom.Flags                { return 0 }
 func (a *GlXCreateContext) Observations() *atom.Observations { return &a.observations }
 
@@ -8775,7 +8775,7 @@ func (a *GlXCreateNewContext) AddWrite(rng memory.Range, id binary.ID) *GlXCreat
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXCreateNewContext) API() gfxapi.API                  { return api{} }
+func (c *GlXCreateNewContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXCreateNewContext) Flags() atom.Flags                { return 0 }
 func (a *GlXCreateNewContext) Observations() *atom.Observations { return &a.observations }
 
@@ -8811,7 +8811,7 @@ func (a *GlXMakeContextCurrent) AddWrite(rng memory.Range, id binary.ID) *GlXMak
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXMakeContextCurrent) API() gfxapi.API                  { return api{} }
+func (c *GlXMakeContextCurrent) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXMakeContextCurrent) Flags() atom.Flags                { return 0 }
 func (a *GlXMakeContextCurrent) Observations() *atom.Observations { return &a.observations }
 
@@ -8846,7 +8846,7 @@ func (a *GlXMakeCurrent) AddWrite(rng memory.Range, id binary.ID) *GlXMakeCurren
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXMakeCurrent) API() gfxapi.API                  { return api{} }
+func (c *GlXMakeCurrent) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXMakeCurrent) Flags() atom.Flags                { return 0 }
 func (a *GlXMakeCurrent) Observations() *atom.Observations { return &a.observations }
 
@@ -8879,7 +8879,7 @@ func (a *GlXSwapBuffers) AddWrite(rng memory.Range, id binary.ID) *GlXSwapBuffer
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXSwapBuffers) API() gfxapi.API                  { return api{} }
+func (c *GlXSwapBuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXSwapBuffers) Flags() atom.Flags                { return 0 | atom.EndOfFrame }
 func (a *GlXSwapBuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -8915,7 +8915,7 @@ func (a *GlXQueryDrawable) AddWrite(rng memory.Range, id binary.ID) *GlXQueryDra
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlXQueryDrawable) API() gfxapi.API                  { return api{} }
+func (c *GlXQueryDrawable) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlXQueryDrawable) Flags() atom.Flags                { return 0 }
 func (a *GlXQueryDrawable) Observations() *atom.Observations { return &a.observations }
 
@@ -8948,7 +8948,7 @@ func (a *WglCreateContext) AddWrite(rng memory.Range, id binary.ID) *WglCreateCo
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *WglCreateContext) API() gfxapi.API                  { return api{} }
+func (c *WglCreateContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *WglCreateContext) Flags() atom.Flags                { return 0 }
 func (a *WglCreateContext) Observations() *atom.Observations { return &a.observations }
 
@@ -8983,7 +8983,7 @@ func (a *WglCreateContextAttribsARB) AddWrite(rng memory.Range, id binary.ID) *W
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *WglCreateContextAttribsARB) API() gfxapi.API                  { return api{} }
+func (c *WglCreateContextAttribsARB) API() gfxapi.ID                   { return api{}.ID() }
 func (c *WglCreateContextAttribsARB) Flags() atom.Flags                { return 0 }
 func (a *WglCreateContextAttribsARB) Observations() *atom.Observations { return &a.observations }
 
@@ -9017,7 +9017,7 @@ func (a *WglMakeCurrent) AddWrite(rng memory.Range, id binary.ID) *WglMakeCurren
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *WglMakeCurrent) API() gfxapi.API                  { return api{} }
+func (c *WglMakeCurrent) API() gfxapi.ID                   { return api{}.ID() }
 func (c *WglMakeCurrent) Flags() atom.Flags                { return 0 }
 func (a *WglMakeCurrent) Observations() *atom.Observations { return &a.observations }
 
@@ -9049,7 +9049,7 @@ func (a *WglSwapBuffers) AddWrite(rng memory.Range, id binary.ID) *WglSwapBuffer
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *WglSwapBuffers) API() gfxapi.API                  { return api{} }
+func (c *WglSwapBuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *WglSwapBuffers) Flags() atom.Flags                { return 0 | atom.EndOfFrame }
 func (a *WglSwapBuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -9084,7 +9084,7 @@ func (a *CGLCreateContext) AddWrite(rng memory.Range, id binary.ID) *CGLCreateCo
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CGLCreateContext) API() gfxapi.API                  { return api{} }
+func (c *CGLCreateContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CGLCreateContext) Flags() atom.Flags                { return 0 }
 func (a *CGLCreateContext) Observations() *atom.Observations { return &a.observations }
 
@@ -9117,7 +9117,7 @@ func (a *CGLSetCurrentContext) AddWrite(rng memory.Range, id binary.ID) *CGLSetC
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CGLSetCurrentContext) API() gfxapi.API                  { return api{} }
+func (c *CGLSetCurrentContext) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CGLSetCurrentContext) Flags() atom.Flags                { return 0 }
 func (a *CGLSetCurrentContext) Observations() *atom.Observations { return &a.observations }
 
@@ -9153,7 +9153,7 @@ func (a *CGLGetSurface) AddWrite(rng memory.Range, id binary.ID) *CGLGetSurface 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CGLGetSurface) API() gfxapi.API                  { return api{} }
+func (c *CGLGetSurface) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CGLGetSurface) Flags() atom.Flags                { return 0 }
 func (a *CGLGetSurface) Observations() *atom.Observations { return &a.observations }
 
@@ -9189,7 +9189,7 @@ func (a *CGSGetSurfaceBounds) AddWrite(rng memory.Range, id binary.ID) *CGSGetSu
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CGSGetSurfaceBounds) API() gfxapi.API                  { return api{} }
+func (c *CGSGetSurfaceBounds) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CGSGetSurfaceBounds) Flags() atom.Flags                { return 0 }
 func (a *CGSGetSurfaceBounds) Observations() *atom.Observations { return &a.observations }
 
@@ -9222,7 +9222,7 @@ func (a *CGLFlushDrawable) AddWrite(rng memory.Range, id binary.ID) *CGLFlushDra
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CGLFlushDrawable) API() gfxapi.API                  { return api{} }
+func (c *CGLFlushDrawable) API() gfxapi.ID                   { return api{}.ID() }
 func (c *CGLFlushDrawable) Flags() atom.Flags                { return 0 | atom.EndOfFrame }
 func (a *CGLFlushDrawable) Observations() *atom.Observations { return &a.observations }
 
@@ -9254,7 +9254,7 @@ func (a *GlEnableClientState) AddWrite(rng memory.Range, id binary.ID) *GlEnable
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEnableClientState) API() gfxapi.API                  { return api{} }
+func (c *GlEnableClientState) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEnableClientState) Flags() atom.Flags                { return 0 }
 func (a *GlEnableClientState) Observations() *atom.Observations { return &a.observations }
 
@@ -9286,7 +9286,7 @@ func (a *GlDisableClientState) AddWrite(rng memory.Range, id binary.ID) *GlDisab
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDisableClientState) API() gfxapi.API                  { return api{} }
+func (c *GlDisableClientState) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDisableClientState) Flags() atom.Flags                { return 0 }
 func (a *GlDisableClientState) Observations() *atom.Observations { return &a.observations }
 
@@ -9322,7 +9322,7 @@ func (a *GlGetProgramBinaryOES) AddWrite(rng memory.Range, id binary.ID) *GlGetP
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetProgramBinaryOES) API() gfxapi.API                  { return api{} }
+func (c *GlGetProgramBinaryOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetProgramBinaryOES) Flags() atom.Flags                { return 0 }
 func (a *GlGetProgramBinaryOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9357,7 +9357,7 @@ func (a *GlProgramBinaryOES) AddWrite(rng memory.Range, id binary.ID) *GlProgram
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlProgramBinaryOES) API() gfxapi.API                  { return api{} }
+func (c *GlProgramBinaryOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlProgramBinaryOES) Flags() atom.Flags                { return 0 }
 func (a *GlProgramBinaryOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9393,7 +9393,7 @@ func (a *GlStartTilingQCOM) AddWrite(rng memory.Range, id binary.ID) *GlStartTil
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlStartTilingQCOM) API() gfxapi.API                  { return api{} }
+func (c *GlStartTilingQCOM) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlStartTilingQCOM) Flags() atom.Flags                { return 0 }
 func (a *GlStartTilingQCOM) Observations() *atom.Observations { return &a.observations }
 
@@ -9425,7 +9425,7 @@ func (a *GlEndTilingQCOM) AddWrite(rng memory.Range, id binary.ID) *GlEndTilingQ
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEndTilingQCOM) API() gfxapi.API                  { return api{} }
+func (c *GlEndTilingQCOM) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEndTilingQCOM) Flags() atom.Flags                { return 0 }
 func (a *GlEndTilingQCOM) Observations() *atom.Observations { return &a.observations }
 
@@ -9459,7 +9459,7 @@ func (a *GlDiscardFramebufferEXT) AddWrite(rng memory.Range, id binary.ID) *GlDi
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDiscardFramebufferEXT) API() gfxapi.API                  { return api{} }
+func (c *GlDiscardFramebufferEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDiscardFramebufferEXT) Flags() atom.Flags                { return 0 }
 func (a *GlDiscardFramebufferEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9492,7 +9492,7 @@ func (a *GlInsertEventMarkerEXT) AddWrite(rng memory.Range, id binary.ID) *GlIns
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlInsertEventMarkerEXT) API() gfxapi.API                  { return api{} }
+func (c *GlInsertEventMarkerEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlInsertEventMarkerEXT) Flags() atom.Flags                { return 0 }
 func (a *GlInsertEventMarkerEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9525,7 +9525,7 @@ func (a *GlPushGroupMarkerEXT) AddWrite(rng memory.Range, id binary.ID) *GlPushG
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlPushGroupMarkerEXT) API() gfxapi.API                  { return api{} }
+func (c *GlPushGroupMarkerEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlPushGroupMarkerEXT) Flags() atom.Flags                { return 0 }
 func (a *GlPushGroupMarkerEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9556,7 +9556,7 @@ func (a *GlPopGroupMarkerEXT) AddWrite(rng memory.Range, id binary.ID) *GlPopGro
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlPopGroupMarkerEXT) API() gfxapi.API                  { return api{} }
+func (c *GlPopGroupMarkerEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlPopGroupMarkerEXT) Flags() atom.Flags                { return 0 }
 func (a *GlPopGroupMarkerEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9591,7 +9591,7 @@ func (a *GlTexStorage1DEXT) AddWrite(rng memory.Range, id binary.ID) *GlTexStora
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexStorage1DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTexStorage1DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexStorage1DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTexStorage1DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9627,7 +9627,7 @@ func (a *GlTexStorage2DEXT) AddWrite(rng memory.Range, id binary.ID) *GlTexStora
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexStorage2DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTexStorage2DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexStorage2DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTexStorage2DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9664,7 +9664,7 @@ func (a *GlTexStorage3DEXT) AddWrite(rng memory.Range, id binary.ID) *GlTexStora
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexStorage3DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTexStorage3DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexStorage3DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTexStorage3DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9700,7 +9700,7 @@ func (a *GlTextureStorage1DEXT) AddWrite(rng memory.Range, id binary.ID) *GlText
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTextureStorage1DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTextureStorage1DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTextureStorage1DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTextureStorage1DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9737,7 +9737,7 @@ func (a *GlTextureStorage2DEXT) AddWrite(rng memory.Range, id binary.ID) *GlText
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTextureStorage2DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTextureStorage2DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTextureStorage2DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTextureStorage2DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9775,7 +9775,7 @@ func (a *GlTextureStorage3DEXT) AddWrite(rng memory.Range, id binary.ID) *GlText
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTextureStorage3DEXT) API() gfxapi.API                  { return api{} }
+func (c *GlTextureStorage3DEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTextureStorage3DEXT) Flags() atom.Flags                { return 0 }
 func (a *GlTextureStorage3DEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -9808,7 +9808,7 @@ func (a *GlGenVertexArraysOES) AddWrite(rng memory.Range, id binary.ID) *GlGenVe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenVertexArraysOES) API() gfxapi.API                  { return api{} }
+func (c *GlGenVertexArraysOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenVertexArraysOES) Flags() atom.Flags                { return 0 }
 func (a *GlGenVertexArraysOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9840,7 +9840,7 @@ func (a *GlBindVertexArrayOES) AddWrite(rng memory.Range, id binary.ID) *GlBindV
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindVertexArrayOES) API() gfxapi.API                  { return api{} }
+func (c *GlBindVertexArrayOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindVertexArrayOES) Flags() atom.Flags                { return 0 }
 func (a *GlBindVertexArrayOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9873,7 +9873,7 @@ func (a *GlDeleteVertexArraysOES) AddWrite(rng memory.Range, id binary.ID) *GlDe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteVertexArraysOES) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteVertexArraysOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteVertexArraysOES) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteVertexArraysOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9906,7 +9906,7 @@ func (a *GlIsVertexArrayOES) AddWrite(rng memory.Range, id binary.ID) *GlIsVerte
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsVertexArrayOES) API() gfxapi.API                  { return api{} }
+func (c *GlIsVertexArrayOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsVertexArrayOES) Flags() atom.Flags                { return 0 }
 func (a *GlIsVertexArrayOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9939,7 +9939,7 @@ func (a *GlEGLImageTargetTexture2DOES) AddWrite(rng memory.Range, id binary.ID) 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.API                  { return api{} }
+func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEGLImageTargetTexture2DOES) Flags() atom.Flags                { return 0 }
 func (a *GlEGLImageTargetTexture2DOES) Observations() *atom.Observations { return &a.observations }
 
@@ -9972,7 +9972,7 @@ func (a *GlEGLImageTargetRenderbufferStorageOES) AddWrite(rng memory.Range, id b
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API   { return api{} }
+func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.ID    { return api{}.ID() }
 func (c *GlEGLImageTargetRenderbufferStorageOES) Flags() atom.Flags { return 0 }
 func (a *GlEGLImageTargetRenderbufferStorageOES) Observations() *atom.Observations {
 	return &a.observations
@@ -10006,7 +10006,7 @@ func (a *GlGetGraphicsResetStatusEXT) AddWrite(rng memory.Range, id binary.ID) *
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetGraphicsResetStatusEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetGraphicsResetStatusEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -10040,7 +10040,7 @@ func (a *GlBindAttribLocation) AddWrite(rng memory.Range, id binary.ID) *GlBindA
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindAttribLocation) API() gfxapi.API                  { return api{} }
+func (c *GlBindAttribLocation) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindAttribLocation) Flags() atom.Flags                { return 0 }
 func (a *GlBindAttribLocation) Observations() *atom.Observations { return &a.observations }
 
@@ -10073,7 +10073,7 @@ func (a *GlBlendFunc) AddWrite(rng memory.Range, id binary.ID) *GlBlendFunc {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlendFunc) API() gfxapi.API                  { return api{} }
+func (c *GlBlendFunc) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlendFunc) Flags() atom.Flags                { return 0 }
 func (a *GlBlendFunc) Observations() *atom.Observations { return &a.observations }
 
@@ -10108,7 +10108,7 @@ func (a *GlBlendFuncSeparate) AddWrite(rng memory.Range, id binary.ID) *GlBlendF
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlendFuncSeparate) API() gfxapi.API                  { return api{} }
+func (c *GlBlendFuncSeparate) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlendFuncSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlBlendFuncSeparate) Observations() *atom.Observations { return &a.observations }
 
@@ -10140,7 +10140,7 @@ func (a *GlBlendEquation) AddWrite(rng memory.Range, id binary.ID) *GlBlendEquat
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlendEquation) API() gfxapi.API                  { return api{} }
+func (c *GlBlendEquation) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlendEquation) Flags() atom.Flags                { return 0 }
 func (a *GlBlendEquation) Observations() *atom.Observations { return &a.observations }
 
@@ -10173,7 +10173,7 @@ func (a *GlBlendEquationSeparate) AddWrite(rng memory.Range, id binary.ID) *GlBl
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlendEquationSeparate) API() gfxapi.API                  { return api{} }
+func (c *GlBlendEquationSeparate) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlendEquationSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlBlendEquationSeparate) Observations() *atom.Observations { return &a.observations }
 
@@ -10208,7 +10208,7 @@ func (a *GlBlendColor) AddWrite(rng memory.Range, id binary.ID) *GlBlendColor {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlendColor) API() gfxapi.API                  { return api{} }
+func (c *GlBlendColor) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlendColor) Flags() atom.Flags                { return 0 }
 func (a *GlBlendColor) Observations() *atom.Observations { return &a.observations }
 
@@ -10240,7 +10240,7 @@ func (a *GlEnableVertexAttribArray) AddWrite(rng memory.Range, id binary.ID) *Gl
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEnableVertexAttribArray) API() gfxapi.API                  { return api{} }
+func (c *GlEnableVertexAttribArray) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEnableVertexAttribArray) Flags() atom.Flags                { return 0 }
 func (a *GlEnableVertexAttribArray) Observations() *atom.Observations { return &a.observations }
 
@@ -10272,7 +10272,7 @@ func (a *GlDisableVertexAttribArray) AddWrite(rng memory.Range, id binary.ID) *G
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDisableVertexAttribArray) API() gfxapi.API                  { return api{} }
+func (c *GlDisableVertexAttribArray) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDisableVertexAttribArray) Flags() atom.Flags                { return 0 }
 func (a *GlDisableVertexAttribArray) Observations() *atom.Observations { return &a.observations }
 
@@ -10309,7 +10309,7 @@ func (a *GlVertexAttribPointer) AddWrite(rng memory.Range, id binary.ID) *GlVert
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttribPointer) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttribPointer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttribPointer) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttribPointer) Observations() *atom.Observations { return &a.observations }
 
@@ -10347,7 +10347,7 @@ func (a *GlGetActiveAttrib) AddWrite(rng memory.Range, id binary.ID) *GlGetActiv
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetActiveAttrib) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveAttrib) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetActiveAttrib) Flags() atom.Flags                { return 0 }
 func (a *GlGetActiveAttrib) Observations() *atom.Observations { return &a.observations }
 
@@ -10385,7 +10385,7 @@ func (a *GlGetActiveUniform) AddWrite(rng memory.Range, id binary.ID) *GlGetActi
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetActiveUniform) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniform) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetActiveUniform) Flags() atom.Flags                { return 0 }
 func (a *GlGetActiveUniform) Observations() *atom.Observations { return &a.observations }
 
@@ -10417,7 +10417,7 @@ func (a *GlGetError) AddWrite(rng memory.Range, id binary.ID) *GlGetError {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetError) API() gfxapi.API                  { return api{} }
+func (c *GlGetError) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetError) Flags() atom.Flags                { return 0 }
 func (a *GlGetError) Observations() *atom.Observations { return &a.observations }
 
@@ -10451,7 +10451,7 @@ func (a *GlGetProgramiv) AddWrite(rng memory.Range, id binary.ID) *GlGetProgrami
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetProgramiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetProgramiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetProgramiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetProgramiv) Observations() *atom.Observations { return &a.observations }
 
@@ -10485,7 +10485,7 @@ func (a *GlGetShaderiv) AddWrite(rng memory.Range, id binary.ID) *GlGetShaderiv 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetShaderiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetShaderiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetShaderiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetShaderiv) Observations() *atom.Observations { return &a.observations }
 
@@ -10519,7 +10519,7 @@ func (a *GlGetUniformLocation) AddWrite(rng memory.Range, id binary.ID) *GlGetUn
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetUniformLocation) API() gfxapi.API                  { return api{} }
+func (c *GlGetUniformLocation) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetUniformLocation) Flags() atom.Flags                { return 0 }
 func (a *GlGetUniformLocation) Observations() *atom.Observations { return &a.observations }
 
@@ -10553,7 +10553,7 @@ func (a *GlGetAttribLocation) AddWrite(rng memory.Range, id binary.ID) *GlGetAtt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetAttribLocation) API() gfxapi.API                  { return api{} }
+func (c *GlGetAttribLocation) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetAttribLocation) Flags() atom.Flags                { return 0 }
 func (a *GlGetAttribLocation) Observations() *atom.Observations { return &a.observations }
 
@@ -10586,7 +10586,7 @@ func (a *GlPixelStorei) AddWrite(rng memory.Range, id binary.ID) *GlPixelStorei 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlPixelStorei) API() gfxapi.API                  { return api{} }
+func (c *GlPixelStorei) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlPixelStorei) Flags() atom.Flags                { return 0 }
 func (a *GlPixelStorei) Observations() *atom.Observations { return &a.observations }
 
@@ -10620,7 +10620,7 @@ func (a *GlTexParameteri) AddWrite(rng memory.Range, id binary.ID) *GlTexParamet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexParameteri) API() gfxapi.API                  { return api{} }
+func (c *GlTexParameteri) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexParameteri) Flags() atom.Flags                { return 0 }
 func (a *GlTexParameteri) Observations() *atom.Observations { return &a.observations }
 
@@ -10654,7 +10654,7 @@ func (a *GlTexParameterf) AddWrite(rng memory.Range, id binary.ID) *GlTexParamet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexParameterf) API() gfxapi.API                  { return api{} }
+func (c *GlTexParameterf) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexParameterf) Flags() atom.Flags                { return 0 }
 func (a *GlTexParameterf) Observations() *atom.Observations { return &a.observations }
 
@@ -10688,7 +10688,7 @@ func (a *GlGetTexParameteriv) AddWrite(rng memory.Range, id binary.ID) *GlGetTex
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetTexParameteriv) API() gfxapi.API                  { return api{} }
+func (c *GlGetTexParameteriv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetTexParameteriv) Flags() atom.Flags                { return 0 }
 func (a *GlGetTexParameteriv) Observations() *atom.Observations { return &a.observations }
 
@@ -10722,7 +10722,7 @@ func (a *GlGetTexParameterfv) AddWrite(rng memory.Range, id binary.ID) *GlGetTex
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetTexParameterfv) API() gfxapi.API                  { return api{} }
+func (c *GlGetTexParameterfv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetTexParameterfv) Flags() atom.Flags                { return 0 }
 func (a *GlGetTexParameterfv) Observations() *atom.Observations { return &a.observations }
 
@@ -10755,7 +10755,7 @@ func (a *GlUniform1i) AddWrite(rng memory.Range, id binary.ID) *GlUniform1i {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform1i) API() gfxapi.API                  { return api{} }
+func (c *GlUniform1i) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform1i) Flags() atom.Flags                { return 0 }
 func (a *GlUniform1i) Observations() *atom.Observations { return &a.observations }
 
@@ -10789,7 +10789,7 @@ func (a *GlUniform2i) AddWrite(rng memory.Range, id binary.ID) *GlUniform2i {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform2i) API() gfxapi.API                  { return api{} }
+func (c *GlUniform2i) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform2i) Flags() atom.Flags                { return 0 }
 func (a *GlUniform2i) Observations() *atom.Observations { return &a.observations }
 
@@ -10824,7 +10824,7 @@ func (a *GlUniform3i) AddWrite(rng memory.Range, id binary.ID) *GlUniform3i {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform3i) API() gfxapi.API                  { return api{} }
+func (c *GlUniform3i) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform3i) Flags() atom.Flags                { return 0 }
 func (a *GlUniform3i) Observations() *atom.Observations { return &a.observations }
 
@@ -10860,7 +10860,7 @@ func (a *GlUniform4i) AddWrite(rng memory.Range, id binary.ID) *GlUniform4i {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform4i) API() gfxapi.API                  { return api{} }
+func (c *GlUniform4i) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform4i) Flags() atom.Flags                { return 0 }
 func (a *GlUniform4i) Observations() *atom.Observations { return &a.observations }
 
@@ -10894,7 +10894,7 @@ func (a *GlUniform1iv) AddWrite(rng memory.Range, id binary.ID) *GlUniform1iv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform1iv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform1iv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform1iv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform1iv) Observations() *atom.Observations { return &a.observations }
 
@@ -10928,7 +10928,7 @@ func (a *GlUniform2iv) AddWrite(rng memory.Range, id binary.ID) *GlUniform2iv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform2iv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform2iv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform2iv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform2iv) Observations() *atom.Observations { return &a.observations }
 
@@ -10962,7 +10962,7 @@ func (a *GlUniform3iv) AddWrite(rng memory.Range, id binary.ID) *GlUniform3iv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform3iv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform3iv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform3iv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform3iv) Observations() *atom.Observations { return &a.observations }
 
@@ -10996,7 +10996,7 @@ func (a *GlUniform4iv) AddWrite(rng memory.Range, id binary.ID) *GlUniform4iv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform4iv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform4iv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform4iv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform4iv) Observations() *atom.Observations { return &a.observations }
 
@@ -11029,7 +11029,7 @@ func (a *GlUniform1f) AddWrite(rng memory.Range, id binary.ID) *GlUniform1f {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform1f) API() gfxapi.API                  { return api{} }
+func (c *GlUniform1f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform1f) Flags() atom.Flags                { return 0 }
 func (a *GlUniform1f) Observations() *atom.Observations { return &a.observations }
 
@@ -11063,7 +11063,7 @@ func (a *GlUniform2f) AddWrite(rng memory.Range, id binary.ID) *GlUniform2f {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform2f) API() gfxapi.API                  { return api{} }
+func (c *GlUniform2f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform2f) Flags() atom.Flags                { return 0 }
 func (a *GlUniform2f) Observations() *atom.Observations { return &a.observations }
 
@@ -11098,7 +11098,7 @@ func (a *GlUniform3f) AddWrite(rng memory.Range, id binary.ID) *GlUniform3f {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform3f) API() gfxapi.API                  { return api{} }
+func (c *GlUniform3f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform3f) Flags() atom.Flags                { return 0 }
 func (a *GlUniform3f) Observations() *atom.Observations { return &a.observations }
 
@@ -11134,7 +11134,7 @@ func (a *GlUniform4f) AddWrite(rng memory.Range, id binary.ID) *GlUniform4f {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform4f) API() gfxapi.API                  { return api{} }
+func (c *GlUniform4f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform4f) Flags() atom.Flags                { return 0 }
 func (a *GlUniform4f) Observations() *atom.Observations { return &a.observations }
 
@@ -11168,7 +11168,7 @@ func (a *GlUniform1fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform1fv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform1fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform1fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform1fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform1fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11202,7 +11202,7 @@ func (a *GlUniform2fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform2fv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform2fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform2fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform2fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform2fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11236,7 +11236,7 @@ func (a *GlUniform3fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform3fv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform3fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform3fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform3fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform3fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11270,7 +11270,7 @@ func (a *GlUniform4fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform4fv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniform4fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniform4fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniform4fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniform4fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11305,7 +11305,7 @@ func (a *GlUniformMatrix2fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniformMatrix2fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniformMatrix2fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniformMatrix2fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniformMatrix2fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11340,7 +11340,7 @@ func (a *GlUniformMatrix3fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniformMatrix3fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniformMatrix3fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniformMatrix3fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniformMatrix3fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11375,7 +11375,7 @@ func (a *GlUniformMatrix4fv) AddWrite(rng memory.Range, id binary.ID) *GlUniform
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniformMatrix4fv) API() gfxapi.API                  { return api{} }
+func (c *GlUniformMatrix4fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniformMatrix4fv) Flags() atom.Flags                { return 0 }
 func (a *GlUniformMatrix4fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11409,7 +11409,7 @@ func (a *GlGetUniformfv) AddWrite(rng memory.Range, id binary.ID) *GlGetUniformf
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetUniformfv) API() gfxapi.API                  { return api{} }
+func (c *GlGetUniformfv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetUniformfv) Flags() atom.Flags                { return 0 }
 func (a *GlGetUniformfv) Observations() *atom.Observations { return &a.observations }
 
@@ -11443,7 +11443,7 @@ func (a *GlGetUniformiv) AddWrite(rng memory.Range, id binary.ID) *GlGetUniformi
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetUniformiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetUniformiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetUniformiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetUniformiv) Observations() *atom.Observations { return &a.observations }
 
@@ -11476,7 +11476,7 @@ func (a *GlVertexAttrib1f) AddWrite(rng memory.Range, id binary.ID) *GlVertexAtt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib1f) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib1f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib1f) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib1f) Observations() *atom.Observations { return &a.observations }
 
@@ -11510,7 +11510,7 @@ func (a *GlVertexAttrib2f) AddWrite(rng memory.Range, id binary.ID) *GlVertexAtt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib2f) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib2f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib2f) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib2f) Observations() *atom.Observations { return &a.observations }
 
@@ -11545,7 +11545,7 @@ func (a *GlVertexAttrib3f) AddWrite(rng memory.Range, id binary.ID) *GlVertexAtt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib3f) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib3f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib3f) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib3f) Observations() *atom.Observations { return &a.observations }
 
@@ -11581,7 +11581,7 @@ func (a *GlVertexAttrib4f) AddWrite(rng memory.Range, id binary.ID) *GlVertexAtt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib4f) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib4f) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib4f) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib4f) Observations() *atom.Observations { return &a.observations }
 
@@ -11614,7 +11614,7 @@ func (a *GlVertexAttrib1fv) AddWrite(rng memory.Range, id binary.ID) *GlVertexAt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib1fv) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib1fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib1fv) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib1fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11647,7 +11647,7 @@ func (a *GlVertexAttrib2fv) AddWrite(rng memory.Range, id binary.ID) *GlVertexAt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib2fv) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib2fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib2fv) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib2fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11680,7 +11680,7 @@ func (a *GlVertexAttrib3fv) AddWrite(rng memory.Range, id binary.ID) *GlVertexAt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib3fv) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib3fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib3fv) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib3fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11713,7 +11713,7 @@ func (a *GlVertexAttrib4fv) AddWrite(rng memory.Range, id binary.ID) *GlVertexAt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlVertexAttrib4fv) API() gfxapi.API                  { return api{} }
+func (c *GlVertexAttrib4fv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlVertexAttrib4fv) Flags() atom.Flags                { return 0 }
 func (a *GlVertexAttrib4fv) Observations() *atom.Observations { return &a.observations }
 
@@ -11748,7 +11748,7 @@ func (a *GlGetShaderPrecisionFormat) AddWrite(rng memory.Range, id binary.ID) *G
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetShaderPrecisionFormat) API() gfxapi.API                  { return api{} }
+func (c *GlGetShaderPrecisionFormat) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetShaderPrecisionFormat) Flags() atom.Flags                { return 0 }
 func (a *GlGetShaderPrecisionFormat) Observations() *atom.Observations { return &a.observations }
 
@@ -11780,7 +11780,7 @@ func (a *GlDepthMask) AddWrite(rng memory.Range, id binary.ID) *GlDepthMask {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDepthMask) API() gfxapi.API                  { return api{} }
+func (c *GlDepthMask) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDepthMask) Flags() atom.Flags                { return 0 }
 func (a *GlDepthMask) Observations() *atom.Observations { return &a.observations }
 
@@ -11812,7 +11812,7 @@ func (a *GlDepthFunc) AddWrite(rng memory.Range, id binary.ID) *GlDepthFunc {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDepthFunc) API() gfxapi.API                  { return api{} }
+func (c *GlDepthFunc) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDepthFunc) Flags() atom.Flags                { return 0 }
 func (a *GlDepthFunc) Observations() *atom.Observations { return &a.observations }
 
@@ -11845,7 +11845,7 @@ func (a *GlDepthRangef) AddWrite(rng memory.Range, id binary.ID) *GlDepthRangef 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDepthRangef) API() gfxapi.API                  { return api{} }
+func (c *GlDepthRangef) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDepthRangef) Flags() atom.Flags                { return 0 }
 func (a *GlDepthRangef) Observations() *atom.Observations { return &a.observations }
 
@@ -11880,7 +11880,7 @@ func (a *GlColorMask) AddWrite(rng memory.Range, id binary.ID) *GlColorMask {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlColorMask) API() gfxapi.API                  { return api{} }
+func (c *GlColorMask) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlColorMask) Flags() atom.Flags                { return 0 }
 func (a *GlColorMask) Observations() *atom.Observations { return &a.observations }
 
@@ -11912,7 +11912,7 @@ func (a *GlStencilMask) AddWrite(rng memory.Range, id binary.ID) *GlStencilMask 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlStencilMask) API() gfxapi.API                  { return api{} }
+func (c *GlStencilMask) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlStencilMask) Flags() atom.Flags                { return 0 }
 func (a *GlStencilMask) Observations() *atom.Observations { return &a.observations }
 
@@ -11945,7 +11945,7 @@ func (a *GlStencilMaskSeparate) AddWrite(rng memory.Range, id binary.ID) *GlSten
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlStencilMaskSeparate) API() gfxapi.API                  { return api{} }
+func (c *GlStencilMaskSeparate) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlStencilMaskSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlStencilMaskSeparate) Observations() *atom.Observations { return &a.observations }
 
@@ -11980,7 +11980,7 @@ func (a *GlStencilFuncSeparate) AddWrite(rng memory.Range, id binary.ID) *GlSten
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlStencilFuncSeparate) API() gfxapi.API                  { return api{} }
+func (c *GlStencilFuncSeparate) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlStencilFuncSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlStencilFuncSeparate) Observations() *atom.Observations { return &a.observations }
 
@@ -12015,7 +12015,7 @@ func (a *GlStencilOpSeparate) AddWrite(rng memory.Range, id binary.ID) *GlStenci
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlStencilOpSeparate) API() gfxapi.API                  { return api{} }
+func (c *GlStencilOpSeparate) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlStencilOpSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlStencilOpSeparate) Observations() *atom.Observations { return &a.observations }
 
@@ -12047,7 +12047,7 @@ func (a *GlFrontFace) AddWrite(rng memory.Range, id binary.ID) *GlFrontFace {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFrontFace) API() gfxapi.API                  { return api{} }
+func (c *GlFrontFace) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFrontFace) Flags() atom.Flags                { return 0 }
 func (a *GlFrontFace) Observations() *atom.Observations { return &a.observations }
 
@@ -12082,7 +12082,7 @@ func (a *GlViewport) AddWrite(rng memory.Range, id binary.ID) *GlViewport {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlViewport) API() gfxapi.API                  { return api{} }
+func (c *GlViewport) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlViewport) Flags() atom.Flags                { return 0 }
 func (a *GlViewport) Observations() *atom.Observations { return &a.observations }
 
@@ -12117,7 +12117,7 @@ func (a *GlScissor) AddWrite(rng memory.Range, id binary.ID) *GlScissor {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlScissor) API() gfxapi.API                  { return api{} }
+func (c *GlScissor) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlScissor) Flags() atom.Flags                { return 0 }
 func (a *GlScissor) Observations() *atom.Observations { return &a.observations }
 
@@ -12149,7 +12149,7 @@ func (a *GlActiveTexture) AddWrite(rng memory.Range, id binary.ID) *GlActiveText
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlActiveTexture) API() gfxapi.API                  { return api{} }
+func (c *GlActiveTexture) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlActiveTexture) Flags() atom.Flags                { return 0 }
 func (a *GlActiveTexture) Observations() *atom.Observations { return &a.observations }
 
@@ -12182,7 +12182,7 @@ func (a *GlGenTextures) AddWrite(rng memory.Range, id binary.ID) *GlGenTextures 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenTextures) API() gfxapi.API                  { return api{} }
+func (c *GlGenTextures) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenTextures) Flags() atom.Flags                { return 0 }
 func (a *GlGenTextures) Observations() *atom.Observations { return &a.observations }
 
@@ -12215,7 +12215,7 @@ func (a *GlDeleteTextures) AddWrite(rng memory.Range, id binary.ID) *GlDeleteTex
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteTextures) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteTextures) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteTextures) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteTextures) Observations() *atom.Observations { return &a.observations }
 
@@ -12248,7 +12248,7 @@ func (a *GlIsTexture) AddWrite(rng memory.Range, id binary.ID) *GlIsTexture {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsTexture) API() gfxapi.API                  { return api{} }
+func (c *GlIsTexture) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsTexture) Flags() atom.Flags                { return 0 }
 func (a *GlIsTexture) Observations() *atom.Observations { return &a.observations }
 
@@ -12281,7 +12281,7 @@ func (a *GlBindTexture) AddWrite(rng memory.Range, id binary.ID) *GlBindTexture 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindTexture) API() gfxapi.API                  { return api{} }
+func (c *GlBindTexture) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindTexture) Flags() atom.Flags                { return 0 }
 func (a *GlBindTexture) Observations() *atom.Observations { return &a.observations }
 
@@ -12321,7 +12321,7 @@ func (a *GlTexImage2D) AddWrite(rng memory.Range, id binary.ID) *GlTexImage2D {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlTexImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlTexImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12361,7 +12361,7 @@ func (a *GlTexSubImage2D) AddWrite(rng memory.Range, id binary.ID) *GlTexSubImag
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlTexSubImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlTexSubImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlTexSubImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlTexSubImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12400,7 +12400,7 @@ func (a *GlCopyTexImage2D) AddWrite(rng memory.Range, id binary.ID) *GlCopyTexIm
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCopyTexImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlCopyTexImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCopyTexImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlCopyTexImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12439,7 +12439,7 @@ func (a *GlCopyTexSubImage2D) AddWrite(rng memory.Range, id binary.ID) *GlCopyTe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCopyTexSubImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlCopyTexSubImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCopyTexSubImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlCopyTexSubImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12478,7 +12478,7 @@ func (a *GlCompressedTexImage2D) AddWrite(rng memory.Range, id binary.ID) *GlCom
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCompressedTexImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlCompressedTexImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCompressedTexImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlCompressedTexImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12518,7 +12518,7 @@ func (a *GlCompressedTexSubImage2D) AddWrite(rng memory.Range, id binary.ID) *Gl
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCompressedTexSubImage2D) API() gfxapi.API                  { return api{} }
+func (c *GlCompressedTexSubImage2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCompressedTexSubImage2D) Flags() atom.Flags                { return 0 }
 func (a *GlCompressedTexSubImage2D) Observations() *atom.Observations { return &a.observations }
 
@@ -12550,7 +12550,7 @@ func (a *GlGenerateMipmap) AddWrite(rng memory.Range, id binary.ID) *GlGenerateM
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenerateMipmap) API() gfxapi.API                  { return api{} }
+func (c *GlGenerateMipmap) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenerateMipmap) Flags() atom.Flags                { return 0 }
 func (a *GlGenerateMipmap) Observations() *atom.Observations { return &a.observations }
 
@@ -12588,7 +12588,7 @@ func (a *GlReadPixels) AddWrite(rng memory.Range, id binary.ID) *GlReadPixels {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlReadPixels) API() gfxapi.API                  { return api{} }
+func (c *GlReadPixels) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlReadPixels) Flags() atom.Flags                { return 0 }
 func (a *GlReadPixels) Observations() *atom.Observations { return &a.observations }
 
@@ -12621,7 +12621,7 @@ func (a *GlGenFramebuffers) AddWrite(rng memory.Range, id binary.ID) *GlGenFrame
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenFramebuffers) API() gfxapi.API                  { return api{} }
+func (c *GlGenFramebuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenFramebuffers) Flags() atom.Flags                { return 0 }
 func (a *GlGenFramebuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -12654,7 +12654,7 @@ func (a *GlBindFramebuffer) AddWrite(rng memory.Range, id binary.ID) *GlBindFram
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindFramebuffer) API() gfxapi.API                  { return api{} }
+func (c *GlBindFramebuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindFramebuffer) Flags() atom.Flags                { return 0 }
 func (a *GlBindFramebuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -12687,7 +12687,7 @@ func (a *GlCheckFramebufferStatus) AddWrite(rng memory.Range, id binary.ID) *GlC
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCheckFramebufferStatus) API() gfxapi.API                  { return api{} }
+func (c *GlCheckFramebufferStatus) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCheckFramebufferStatus) Flags() atom.Flags                { return 0 }
 func (a *GlCheckFramebufferStatus) Observations() *atom.Observations { return &a.observations }
 
@@ -12720,7 +12720,7 @@ func (a *GlDeleteFramebuffers) AddWrite(rng memory.Range, id binary.ID) *GlDelet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteFramebuffers) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteFramebuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteFramebuffers) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteFramebuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -12753,7 +12753,7 @@ func (a *GlIsFramebuffer) AddWrite(rng memory.Range, id binary.ID) *GlIsFramebuf
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsFramebuffer) API() gfxapi.API                  { return api{} }
+func (c *GlIsFramebuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsFramebuffer) Flags() atom.Flags                { return 0 }
 func (a *GlIsFramebuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -12786,7 +12786,7 @@ func (a *GlGenRenderbuffers) AddWrite(rng memory.Range, id binary.ID) *GlGenRend
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenRenderbuffers) API() gfxapi.API                  { return api{} }
+func (c *GlGenRenderbuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenRenderbuffers) Flags() atom.Flags                { return 0 }
 func (a *GlGenRenderbuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -12819,7 +12819,7 @@ func (a *GlBindRenderbuffer) AddWrite(rng memory.Range, id binary.ID) *GlBindRen
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindRenderbuffer) API() gfxapi.API                  { return api{} }
+func (c *GlBindRenderbuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindRenderbuffer) Flags() atom.Flags                { return 0 }
 func (a *GlBindRenderbuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -12854,7 +12854,7 @@ func (a *GlRenderbufferStorage) AddWrite(rng memory.Range, id binary.ID) *GlRend
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlRenderbufferStorage) API() gfxapi.API                  { return api{} }
+func (c *GlRenderbufferStorage) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlRenderbufferStorage) Flags() atom.Flags                { return 0 }
 func (a *GlRenderbufferStorage) Observations() *atom.Observations { return &a.observations }
 
@@ -12887,7 +12887,7 @@ func (a *GlDeleteRenderbuffers) AddWrite(rng memory.Range, id binary.ID) *GlDele
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteRenderbuffers) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteRenderbuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteRenderbuffers) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteRenderbuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -12920,7 +12920,7 @@ func (a *GlIsRenderbuffer) AddWrite(rng memory.Range, id binary.ID) *GlIsRenderb
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsRenderbuffer) API() gfxapi.API                  { return api{} }
+func (c *GlIsRenderbuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsRenderbuffer) Flags() atom.Flags                { return 0 }
 func (a *GlIsRenderbuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -12954,7 +12954,7 @@ func (a *GlGetRenderbufferParameteriv) AddWrite(rng memory.Range, id binary.ID) 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetRenderbufferParameteriv) API() gfxapi.API                  { return api{} }
+func (c *GlGetRenderbufferParameteriv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetRenderbufferParameteriv) Flags() atom.Flags                { return 0 }
 func (a *GlGetRenderbufferParameteriv) Observations() *atom.Observations { return &a.observations }
 
@@ -12987,7 +12987,7 @@ func (a *GlGenBuffers) AddWrite(rng memory.Range, id binary.ID) *GlGenBuffers {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenBuffers) API() gfxapi.API                  { return api{} }
+func (c *GlGenBuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenBuffers) Flags() atom.Flags                { return 0 }
 func (a *GlGenBuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -13020,7 +13020,7 @@ func (a *GlBindBuffer) AddWrite(rng memory.Range, id binary.ID) *GlBindBuffer {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindBuffer) API() gfxapi.API                  { return api{} }
+func (c *GlBindBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindBuffer) Flags() atom.Flags                { return 0 }
 func (a *GlBindBuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -13055,7 +13055,7 @@ func (a *GlBufferData) AddWrite(rng memory.Range, id binary.ID) *GlBufferData {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBufferData) API() gfxapi.API                  { return api{} }
+func (c *GlBufferData) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBufferData) Flags() atom.Flags                { return 0 }
 func (a *GlBufferData) Observations() *atom.Observations { return &a.observations }
 
@@ -13090,7 +13090,7 @@ func (a *GlBufferSubData) AddWrite(rng memory.Range, id binary.ID) *GlBufferSubD
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBufferSubData) API() gfxapi.API                  { return api{} }
+func (c *GlBufferSubData) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBufferSubData) Flags() atom.Flags                { return 0 }
 func (a *GlBufferSubData) Observations() *atom.Observations { return &a.observations }
 
@@ -13123,7 +13123,7 @@ func (a *GlDeleteBuffers) AddWrite(rng memory.Range, id binary.ID) *GlDeleteBuff
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteBuffers) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteBuffers) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteBuffers) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteBuffers) Observations() *atom.Observations { return &a.observations }
 
@@ -13156,7 +13156,7 @@ func (a *GlIsBuffer) AddWrite(rng memory.Range, id binary.ID) *GlIsBuffer {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsBuffer) API() gfxapi.API                  { return api{} }
+func (c *GlIsBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsBuffer) Flags() atom.Flags                { return 0 }
 func (a *GlIsBuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -13190,7 +13190,7 @@ func (a *GlGetBufferParameteriv) AddWrite(rng memory.Range, id binary.ID) *GlGet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetBufferParameteriv) API() gfxapi.API                  { return api{} }
+func (c *GlGetBufferParameteriv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetBufferParameteriv) Flags() atom.Flags                { return 0 }
 func (a *GlGetBufferParameteriv) Observations() *atom.Observations { return &a.observations }
 
@@ -13223,7 +13223,7 @@ func (a *GlCreateShader) AddWrite(rng memory.Range, id binary.ID) *GlCreateShade
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCreateShader) API() gfxapi.API                  { return api{} }
+func (c *GlCreateShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCreateShader) Flags() atom.Flags                { return 0 }
 func (a *GlCreateShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13255,7 +13255,7 @@ func (a *GlDeleteShader) AddWrite(rng memory.Range, id binary.ID) *GlDeleteShade
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteShader) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteShader) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13290,7 +13290,7 @@ func (a *GlShaderSource) AddWrite(rng memory.Range, id binary.ID) *GlShaderSourc
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlShaderSource) API() gfxapi.API                  { return api{} }
+func (c *GlShaderSource) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlShaderSource) Flags() atom.Flags                { return 0 }
 func (a *GlShaderSource) Observations() *atom.Observations { return &a.observations }
 
@@ -13326,7 +13326,7 @@ func (a *GlShaderBinary) AddWrite(rng memory.Range, id binary.ID) *GlShaderBinar
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlShaderBinary) API() gfxapi.API                  { return api{} }
+func (c *GlShaderBinary) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlShaderBinary) Flags() atom.Flags                { return 0 }
 func (a *GlShaderBinary) Observations() *atom.Observations { return &a.observations }
 
@@ -13361,7 +13361,7 @@ func (a *GlGetShaderInfoLog) AddWrite(rng memory.Range, id binary.ID) *GlGetShad
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetShaderInfoLog) API() gfxapi.API                  { return api{} }
+func (c *GlGetShaderInfoLog) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetShaderInfoLog) Flags() atom.Flags                { return 0 }
 func (a *GlGetShaderInfoLog) Observations() *atom.Observations { return &a.observations }
 
@@ -13396,7 +13396,7 @@ func (a *GlGetShaderSource) AddWrite(rng memory.Range, id binary.ID) *GlGetShade
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetShaderSource) API() gfxapi.API                  { return api{} }
+func (c *GlGetShaderSource) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetShaderSource) Flags() atom.Flags                { return 0 }
 func (a *GlGetShaderSource) Observations() *atom.Observations { return &a.observations }
 
@@ -13427,7 +13427,7 @@ func (a *GlReleaseShaderCompiler) AddWrite(rng memory.Range, id binary.ID) *GlRe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlReleaseShaderCompiler) API() gfxapi.API                  { return api{} }
+func (c *GlReleaseShaderCompiler) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlReleaseShaderCompiler) Flags() atom.Flags                { return 0 }
 func (a *GlReleaseShaderCompiler) Observations() *atom.Observations { return &a.observations }
 
@@ -13459,7 +13459,7 @@ func (a *GlCompileShader) AddWrite(rng memory.Range, id binary.ID) *GlCompileSha
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCompileShader) API() gfxapi.API                  { return api{} }
+func (c *GlCompileShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCompileShader) Flags() atom.Flags                { return 0 }
 func (a *GlCompileShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13492,7 +13492,7 @@ func (a *GlIsShader) AddWrite(rng memory.Range, id binary.ID) *GlIsShader {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsShader) API() gfxapi.API                  { return api{} }
+func (c *GlIsShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsShader) Flags() atom.Flags                { return 0 }
 func (a *GlIsShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13524,7 +13524,7 @@ func (a *GlCreateProgram) AddWrite(rng memory.Range, id binary.ID) *GlCreateProg
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCreateProgram) API() gfxapi.API                  { return api{} }
+func (c *GlCreateProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCreateProgram) Flags() atom.Flags                { return 0 }
 func (a *GlCreateProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13556,7 +13556,7 @@ func (a *GlDeleteProgram) AddWrite(rng memory.Range, id binary.ID) *GlDeleteProg
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteProgram) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteProgram) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13589,7 +13589,7 @@ func (a *GlAttachShader) AddWrite(rng memory.Range, id binary.ID) *GlAttachShade
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlAttachShader) API() gfxapi.API                  { return api{} }
+func (c *GlAttachShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlAttachShader) Flags() atom.Flags                { return 0 }
 func (a *GlAttachShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13622,7 +13622,7 @@ func (a *GlDetachShader) AddWrite(rng memory.Range, id binary.ID) *GlDetachShade
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDetachShader) API() gfxapi.API                  { return api{} }
+func (c *GlDetachShader) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDetachShader) Flags() atom.Flags                { return 0 }
 func (a *GlDetachShader) Observations() *atom.Observations { return &a.observations }
 
@@ -13657,7 +13657,7 @@ func (a *GlGetAttachedShaders) AddWrite(rng memory.Range, id binary.ID) *GlGetAt
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetAttachedShaders) API() gfxapi.API                  { return api{} }
+func (c *GlGetAttachedShaders) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetAttachedShaders) Flags() atom.Flags                { return 0 }
 func (a *GlGetAttachedShaders) Observations() *atom.Observations { return &a.observations }
 
@@ -13689,7 +13689,7 @@ func (a *GlLinkProgram) AddWrite(rng memory.Range, id binary.ID) *GlLinkProgram 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlLinkProgram) API() gfxapi.API                  { return api{} }
+func (c *GlLinkProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlLinkProgram) Flags() atom.Flags                { return 0 }
 func (a *GlLinkProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13724,7 +13724,7 @@ func (a *GlGetProgramInfoLog) AddWrite(rng memory.Range, id binary.ID) *GlGetPro
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetProgramInfoLog) API() gfxapi.API                  { return api{} }
+func (c *GlGetProgramInfoLog) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetProgramInfoLog) Flags() atom.Flags                { return 0 }
 func (a *GlGetProgramInfoLog) Observations() *atom.Observations { return &a.observations }
 
@@ -13756,7 +13756,7 @@ func (a *GlUseProgram) AddWrite(rng memory.Range, id binary.ID) *GlUseProgram {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUseProgram) API() gfxapi.API                  { return api{} }
+func (c *GlUseProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUseProgram) Flags() atom.Flags                { return 0 }
 func (a *GlUseProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13789,7 +13789,7 @@ func (a *GlIsProgram) AddWrite(rng memory.Range, id binary.ID) *GlIsProgram {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsProgram) API() gfxapi.API                  { return api{} }
+func (c *GlIsProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsProgram) Flags() atom.Flags                { return 0 }
 func (a *GlIsProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13821,7 +13821,7 @@ func (a *GlValidateProgram) AddWrite(rng memory.Range, id binary.ID) *GlValidate
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlValidateProgram) API() gfxapi.API                  { return api{} }
+func (c *GlValidateProgram) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlValidateProgram) Flags() atom.Flags                { return 0 }
 func (a *GlValidateProgram) Observations() *atom.Observations { return &a.observations }
 
@@ -13856,7 +13856,7 @@ func (a *GlClearColor) AddWrite(rng memory.Range, id binary.ID) *GlClearColor {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlClearColor) API() gfxapi.API                  { return api{} }
+func (c *GlClearColor) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlClearColor) Flags() atom.Flags                { return 0 }
 func (a *GlClearColor) Observations() *atom.Observations { return &a.observations }
 
@@ -13888,7 +13888,7 @@ func (a *GlClearDepthf) AddWrite(rng memory.Range, id binary.ID) *GlClearDepthf 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlClearDepthf) API() gfxapi.API                  { return api{} }
+func (c *GlClearDepthf) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlClearDepthf) Flags() atom.Flags                { return 0 }
 func (a *GlClearDepthf) Observations() *atom.Observations { return &a.observations }
 
@@ -13920,7 +13920,7 @@ func (a *GlClearStencil) AddWrite(rng memory.Range, id binary.ID) *GlClearStenci
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlClearStencil) API() gfxapi.API                  { return api{} }
+func (c *GlClearStencil) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlClearStencil) Flags() atom.Flags                { return 0 }
 func (a *GlClearStencil) Observations() *atom.Observations { return &a.observations }
 
@@ -13952,7 +13952,7 @@ func (a *GlClear) AddWrite(rng memory.Range, id binary.ID) *GlClear {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlClear) API() gfxapi.API                  { return api{} }
+func (c *GlClear) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlClear) Flags() atom.Flags                { return 0 }
 func (a *GlClear) Observations() *atom.Observations { return &a.observations }
 
@@ -13984,7 +13984,7 @@ func (a *GlCullFace) AddWrite(rng memory.Range, id binary.ID) *GlCullFace {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlCullFace) API() gfxapi.API                  { return api{} }
+func (c *GlCullFace) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlCullFace) Flags() atom.Flags                { return 0 }
 func (a *GlCullFace) Observations() *atom.Observations { return &a.observations }
 
@@ -14017,7 +14017,7 @@ func (a *GlPolygonOffset) AddWrite(rng memory.Range, id binary.ID) *GlPolygonOff
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlPolygonOffset) API() gfxapi.API                  { return api{} }
+func (c *GlPolygonOffset) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlPolygonOffset) Flags() atom.Flags                { return 0 }
 func (a *GlPolygonOffset) Observations() *atom.Observations { return &a.observations }
 
@@ -14049,7 +14049,7 @@ func (a *GlLineWidth) AddWrite(rng memory.Range, id binary.ID) *GlLineWidth {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlLineWidth) API() gfxapi.API                  { return api{} }
+func (c *GlLineWidth) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlLineWidth) Flags() atom.Flags                { return 0 }
 func (a *GlLineWidth) Observations() *atom.Observations { return &a.observations }
 
@@ -14082,7 +14082,7 @@ func (a *GlSampleCoverage) AddWrite(rng memory.Range, id binary.ID) *GlSampleCov
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlSampleCoverage) API() gfxapi.API                  { return api{} }
+func (c *GlSampleCoverage) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlSampleCoverage) Flags() atom.Flags                { return 0 }
 func (a *GlSampleCoverage) Observations() *atom.Observations { return &a.observations }
 
@@ -14115,7 +14115,7 @@ func (a *GlHint) AddWrite(rng memory.Range, id binary.ID) *GlHint {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlHint) API() gfxapi.API                  { return api{} }
+func (c *GlHint) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlHint) Flags() atom.Flags                { return 0 }
 func (a *GlHint) Observations() *atom.Observations { return &a.observations }
 
@@ -14150,7 +14150,7 @@ func (a *GlFramebufferRenderbuffer) AddWrite(rng memory.Range, id binary.ID) *Gl
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFramebufferRenderbuffer) API() gfxapi.API                  { return api{} }
+func (c *GlFramebufferRenderbuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFramebufferRenderbuffer) Flags() atom.Flags                { return 0 }
 func (a *GlFramebufferRenderbuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -14186,7 +14186,7 @@ func (a *GlFramebufferTexture2D) AddWrite(rng memory.Range, id binary.ID) *GlFra
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFramebufferTexture2D) API() gfxapi.API                  { return api{} }
+func (c *GlFramebufferTexture2D) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFramebufferTexture2D) Flags() atom.Flags                { return 0 }
 func (a *GlFramebufferTexture2D) Observations() *atom.Observations { return &a.observations }
 
@@ -14221,7 +14221,7 @@ func (a *GlGetFramebufferAttachmentParameteriv) AddWrite(rng memory.Range, id bi
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.API   { return api{} }
+func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.ID    { return api{}.ID() }
 func (c *GlGetFramebufferAttachmentParameteriv) Flags() atom.Flags { return 0 }
 func (a *GlGetFramebufferAttachmentParameteriv) Observations() *atom.Observations {
 	return &a.observations
@@ -14258,7 +14258,7 @@ func (a *GlDrawElements) AddWrite(rng memory.Range, id binary.ID) *GlDrawElement
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDrawElements) API() gfxapi.API                  { return api{} }
+func (c *GlDrawElements) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDrawElements) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawElements) Observations() *atom.Observations { return &a.observations }
 
@@ -14292,7 +14292,7 @@ func (a *GlDrawArrays) AddWrite(rng memory.Range, id binary.ID) *GlDrawArrays {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDrawArrays) API() gfxapi.API                  { return api{} }
+func (c *GlDrawArrays) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDrawArrays) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -14323,7 +14323,7 @@ func (a *GlFlush) AddWrite(rng memory.Range, id binary.ID) *GlFlush {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFlush) API() gfxapi.API                  { return api{} }
+func (c *GlFlush) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFlush) Flags() atom.Flags                { return 0 }
 func (a *GlFlush) Observations() *atom.Observations { return &a.observations }
 
@@ -14354,7 +14354,7 @@ func (a *GlFinish) AddWrite(rng memory.Range, id binary.ID) *GlFinish {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFinish) API() gfxapi.API                  { return api{} }
+func (c *GlFinish) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFinish) Flags() atom.Flags                { return 0 }
 func (a *GlFinish) Observations() *atom.Observations { return &a.observations }
 
@@ -14387,7 +14387,7 @@ func (a *GlGetBooleanv) AddWrite(rng memory.Range, id binary.ID) *GlGetBooleanv 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetBooleanv) API() gfxapi.API                  { return api{} }
+func (c *GlGetBooleanv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetBooleanv) Flags() atom.Flags                { return 0 }
 func (a *GlGetBooleanv) Observations() *atom.Observations { return &a.observations }
 
@@ -14420,7 +14420,7 @@ func (a *GlGetFloatv) AddWrite(rng memory.Range, id binary.ID) *GlGetFloatv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetFloatv) API() gfxapi.API                  { return api{} }
+func (c *GlGetFloatv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetFloatv) Flags() atom.Flags                { return 0 }
 func (a *GlGetFloatv) Observations() *atom.Observations { return &a.observations }
 
@@ -14453,7 +14453,7 @@ func (a *GlGetIntegerv) AddWrite(rng memory.Range, id binary.ID) *GlGetIntegerv 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetIntegerv) API() gfxapi.API                  { return api{} }
+func (c *GlGetIntegerv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetIntegerv) Flags() atom.Flags                { return 0 }
 func (a *GlGetIntegerv) Observations() *atom.Observations { return &a.observations }
 
@@ -14486,7 +14486,7 @@ func (a *GlGetString) AddWrite(rng memory.Range, id binary.ID) *GlGetString {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetString) API() gfxapi.API                  { return api{} }
+func (c *GlGetString) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetString) Flags() atom.Flags                { return 0 }
 func (a *GlGetString) Observations() *atom.Observations { return &a.observations }
 
@@ -14518,7 +14518,7 @@ func (a *GlEnable) AddWrite(rng memory.Range, id binary.ID) *GlEnable {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEnable) API() gfxapi.API                  { return api{} }
+func (c *GlEnable) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEnable) Flags() atom.Flags                { return 0 }
 func (a *GlEnable) Observations() *atom.Observations { return &a.observations }
 
@@ -14550,7 +14550,7 @@ func (a *GlDisable) AddWrite(rng memory.Range, id binary.ID) *GlDisable {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDisable) API() gfxapi.API                  { return api{} }
+func (c *GlDisable) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDisable) Flags() atom.Flags                { return 0 }
 func (a *GlDisable) Observations() *atom.Observations { return &a.observations }
 
@@ -14583,7 +14583,7 @@ func (a *GlIsEnabled) AddWrite(rng memory.Range, id binary.ID) *GlIsEnabled {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsEnabled) API() gfxapi.API                  { return api{} }
+func (c *GlIsEnabled) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsEnabled) Flags() atom.Flags                { return 0 }
 func (a *GlIsEnabled) Observations() *atom.Observations { return &a.observations }
 
@@ -14617,7 +14617,7 @@ func (a *GlFenceSync) AddWrite(rng memory.Range, id binary.ID) *GlFenceSync {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlFenceSync) API() gfxapi.API                  { return api{} }
+func (c *GlFenceSync) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlFenceSync) Flags() atom.Flags                { return 0 }
 func (a *GlFenceSync) Observations() *atom.Observations { return &a.observations }
 
@@ -14649,7 +14649,7 @@ func (a *GlDeleteSync) AddWrite(rng memory.Range, id binary.ID) *GlDeleteSync {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteSync) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteSync) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteSync) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteSync) Observations() *atom.Observations { return &a.observations }
 
@@ -14683,7 +14683,7 @@ func (a *GlWaitSync) AddWrite(rng memory.Range, id binary.ID) *GlWaitSync {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlWaitSync) API() gfxapi.API                  { return api{} }
+func (c *GlWaitSync) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlWaitSync) Flags() atom.Flags                { return 0 }
 func (a *GlWaitSync) Observations() *atom.Observations { return &a.observations }
 
@@ -14718,7 +14718,7 @@ func (a *GlClientWaitSync) AddWrite(rng memory.Range, id binary.ID) *GlClientWai
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlClientWaitSync) API() gfxapi.API                  { return api{} }
+func (c *GlClientWaitSync) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlClientWaitSync) Flags() atom.Flags                { return 0 }
 func (a *GlClientWaitSync) Observations() *atom.Observations { return &a.observations }
 
@@ -14754,7 +14754,7 @@ func (a *GlMapBufferRange) AddWrite(rng memory.Range, id binary.ID) *GlMapBuffer
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlMapBufferRange) API() gfxapi.API                  { return api{} }
+func (c *GlMapBufferRange) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlMapBufferRange) Flags() atom.Flags                { return 0 }
 func (a *GlMapBufferRange) Observations() *atom.Observations { return &a.observations }
 
@@ -14786,7 +14786,7 @@ func (a *GlUnmapBuffer) AddWrite(rng memory.Range, id binary.ID) *GlUnmapBuffer 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUnmapBuffer) API() gfxapi.API                  { return api{} }
+func (c *GlUnmapBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUnmapBuffer) Flags() atom.Flags                { return 0 }
 func (a *GlUnmapBuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -14820,7 +14820,7 @@ func (a *GlInvalidateFramebuffer) AddWrite(rng memory.Range, id binary.ID) *GlIn
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlInvalidateFramebuffer) API() gfxapi.API                  { return api{} }
+func (c *GlInvalidateFramebuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlInvalidateFramebuffer) Flags() atom.Flags                { return 0 }
 func (a *GlInvalidateFramebuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -14856,7 +14856,7 @@ func (a *GlRenderbufferStorageMultisample) AddWrite(rng memory.Range, id binary.
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlRenderbufferStorageMultisample) API() gfxapi.API                  { return api{} }
+func (c *GlRenderbufferStorageMultisample) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlRenderbufferStorageMultisample) Flags() atom.Flags                { return 0 }
 func (a *GlRenderbufferStorageMultisample) Observations() *atom.Observations { return &a.observations }
 
@@ -14897,7 +14897,7 @@ func (a *GlBlitFramebuffer) AddWrite(rng memory.Range, id binary.ID) *GlBlitFram
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBlitFramebuffer) API() gfxapi.API                  { return api{} }
+func (c *GlBlitFramebuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBlitFramebuffer) Flags() atom.Flags                { return 0 }
 func (a *GlBlitFramebuffer) Observations() *atom.Observations { return &a.observations }
 
@@ -14930,7 +14930,7 @@ func (a *GlGenQueries) AddWrite(rng memory.Range, id binary.ID) *GlGenQueries {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenQueries) API() gfxapi.API                  { return api{} }
+func (c *GlGenQueries) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenQueries) Flags() atom.Flags                { return 0 }
 func (a *GlGenQueries) Observations() *atom.Observations { return &a.observations }
 
@@ -14963,7 +14963,7 @@ func (a *GlBeginQuery) AddWrite(rng memory.Range, id binary.ID) *GlBeginQuery {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBeginQuery) API() gfxapi.API                  { return api{} }
+func (c *GlBeginQuery) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBeginQuery) Flags() atom.Flags                { return 0 }
 func (a *GlBeginQuery) Observations() *atom.Observations { return &a.observations }
 
@@ -14995,7 +14995,7 @@ func (a *GlEndQuery) AddWrite(rng memory.Range, id binary.ID) *GlEndQuery {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEndQuery) API() gfxapi.API                  { return api{} }
+func (c *GlEndQuery) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEndQuery) Flags() atom.Flags                { return 0 }
 func (a *GlEndQuery) Observations() *atom.Observations { return &a.observations }
 
@@ -15028,7 +15028,7 @@ func (a *GlDeleteQueries) AddWrite(rng memory.Range, id binary.ID) *GlDeleteQuer
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteQueries) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteQueries) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteQueries) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteQueries) Observations() *atom.Observations { return &a.observations }
 
@@ -15061,7 +15061,7 @@ func (a *GlIsQuery) AddWrite(rng memory.Range, id binary.ID) *GlIsQuery {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsQuery) API() gfxapi.API                  { return api{} }
+func (c *GlIsQuery) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsQuery) Flags() atom.Flags                { return 0 }
 func (a *GlIsQuery) Observations() *atom.Observations { return &a.observations }
 
@@ -15095,7 +15095,7 @@ func (a *GlGetQueryiv) AddWrite(rng memory.Range, id binary.ID) *GlGetQueryiv {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryiv) Observations() *atom.Observations { return &a.observations }
 
@@ -15129,7 +15129,7 @@ func (a *GlGetQueryObjectuiv) AddWrite(rng memory.Range, id binary.ID) *GlGetQue
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjectuiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjectuiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjectuiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectuiv) Observations() *atom.Observations { return &a.observations }
 
@@ -15165,7 +15165,7 @@ func (a *GlGetActiveUniformBlockName) AddWrite(rng memory.Range, id binary.ID) *
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetActiveUniformBlockName) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformBlockName) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetActiveUniformBlockName) Flags() atom.Flags                { return 0 }
 func (a *GlGetActiveUniformBlockName) Observations() *atom.Observations { return &a.observations }
 
@@ -15200,7 +15200,7 @@ func (a *GlGetActiveUniformBlockiv) AddWrite(rng memory.Range, id binary.ID) *Gl
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetActiveUniformBlockiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformBlockiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetActiveUniformBlockiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetActiveUniformBlockiv) Observations() *atom.Observations { return &a.observations }
 
@@ -15234,7 +15234,7 @@ func (a *GlUniformBlockBinding) AddWrite(rng memory.Range, id binary.ID) *GlUnif
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlUniformBlockBinding) API() gfxapi.API                  { return api{} }
+func (c *GlUniformBlockBinding) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlUniformBlockBinding) Flags() atom.Flags                { return 0 }
 func (a *GlUniformBlockBinding) Observations() *atom.Observations { return &a.observations }
 
@@ -15270,7 +15270,7 @@ func (a *GlGetActiveUniformsiv) AddWrite(rng memory.Range, id binary.ID) *GlGetA
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetActiveUniformsiv) API() gfxapi.API                  { return api{} }
+func (c *GlGetActiveUniformsiv) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetActiveUniformsiv) Flags() atom.Flags                { return 0 }
 func (a *GlGetActiveUniformsiv) Observations() *atom.Observations { return &a.observations }
 
@@ -15304,7 +15304,7 @@ func (a *GlBindBufferBase) AddWrite(rng memory.Range, id binary.ID) *GlBindBuffe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindBufferBase) API() gfxapi.API                  { return api{} }
+func (c *GlBindBufferBase) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindBufferBase) Flags() atom.Flags                { return 0 }
 func (a *GlBindBufferBase) Observations() *atom.Observations { return &a.observations }
 
@@ -15337,7 +15337,7 @@ func (a *GlGenVertexArrays) AddWrite(rng memory.Range, id binary.ID) *GlGenVerte
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenVertexArrays) API() gfxapi.API                  { return api{} }
+func (c *GlGenVertexArrays) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenVertexArrays) Flags() atom.Flags                { return 0 }
 func (a *GlGenVertexArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -15369,7 +15369,7 @@ func (a *GlBindVertexArray) AddWrite(rng memory.Range, id binary.ID) *GlBindVert
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBindVertexArray) API() gfxapi.API                  { return api{} }
+func (c *GlBindVertexArray) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBindVertexArray) Flags() atom.Flags                { return 0 }
 func (a *GlBindVertexArray) Observations() *atom.Observations { return &a.observations }
 
@@ -15402,7 +15402,7 @@ func (a *GlDeleteVertexArrays) AddWrite(rng memory.Range, id binary.ID) *GlDelet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteVertexArrays) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteVertexArrays) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteVertexArrays) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteVertexArrays) Observations() *atom.Observations { return &a.observations }
 
@@ -15436,7 +15436,7 @@ func (a *GlGetQueryObjecti64v) AddWrite(rng memory.Range, id binary.ID) *GlGetQu
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjecti64v) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjecti64v) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjecti64v) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjecti64v) Observations() *atom.Observations { return &a.observations }
 
@@ -15470,7 +15470,7 @@ func (a *GlGetQueryObjectui64v) AddWrite(rng memory.Range, id binary.ID) *GlGetQ
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjectui64v) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjectui64v) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjectui64v) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectui64v) Observations() *atom.Observations { return &a.observations }
 
@@ -15503,7 +15503,7 @@ func (a *GlGenQueriesEXT) AddWrite(rng memory.Range, id binary.ID) *GlGenQueries
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGenQueriesEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGenQueriesEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGenQueriesEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGenQueriesEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15536,7 +15536,7 @@ func (a *GlBeginQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlBeginQuery
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlBeginQueryEXT) API() gfxapi.API                  { return api{} }
+func (c *GlBeginQueryEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlBeginQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlBeginQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15568,7 +15568,7 @@ func (a *GlEndQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlEndQueryEXT 
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlEndQueryEXT) API() gfxapi.API                  { return api{} }
+func (c *GlEndQueryEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlEndQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlEndQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15601,7 +15601,7 @@ func (a *GlDeleteQueriesEXT) AddWrite(rng memory.Range, id binary.ID) *GlDeleteQ
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlDeleteQueriesEXT) API() gfxapi.API                  { return api{} }
+func (c *GlDeleteQueriesEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlDeleteQueriesEXT) Flags() atom.Flags                { return 0 }
 func (a *GlDeleteQueriesEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15634,7 +15634,7 @@ func (a *GlIsQueryEXT) AddWrite(rng memory.Range, id binary.ID) *GlIsQueryEXT {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlIsQueryEXT) API() gfxapi.API                  { return api{} }
+func (c *GlIsQueryEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlIsQueryEXT) Flags() atom.Flags                { return 0 }
 func (a *GlIsQueryEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15667,7 +15667,7 @@ func (a *GlQueryCounterEXT) AddWrite(rng memory.Range, id binary.ID) *GlQueryCou
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlQueryCounterEXT) API() gfxapi.API                  { return api{} }
+func (c *GlQueryCounterEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlQueryCounterEXT) Flags() atom.Flags                { return 0 }
 func (a *GlQueryCounterEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15701,7 +15701,7 @@ func (a *GlGetQueryivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetQueryiv
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryivEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryivEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15735,7 +15735,7 @@ func (a *GlGetQueryObjectivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGetQ
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjectivEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjectivEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjectivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15769,7 +15769,7 @@ func (a *GlGetQueryObjectuivEXT) AddWrite(rng memory.Range, id binary.ID) *GlGet
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjectuivEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjectuivEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectuivEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15803,7 +15803,7 @@ func (a *GlGetQueryObjecti64vEXT) AddWrite(rng memory.Range, id binary.ID) *GlGe
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjecti64vEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjecti64vEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjecti64vEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15837,7 +15837,7 @@ func (a *GlGetQueryObjectui64vEXT) AddWrite(rng memory.Range, id binary.ID) *GlG
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *GlGetQueryObjectui64vEXT) API() gfxapi.API                  { return api{} }
+func (c *GlGetQueryObjectui64vEXT) API() gfxapi.ID                   { return api{}.ID() }
 func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectui64vEXT) Observations() *atom.Observations { return &a.observations }
 
@@ -15872,7 +15872,7 @@ func (a *Architecture) AddWrite(rng memory.Range, id binary.ID) *Architecture {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *Architecture) API() gfxapi.API                  { return api{} }
+func (c *Architecture) API() gfxapi.ID                   { return api{}.ID() }
 func (c *Architecture) Flags() atom.Flags                { return 0 }
 func (a *Architecture) Observations() *atom.Observations { return &a.observations }
 
@@ -15904,7 +15904,7 @@ func (a *ReplayCreateRenderer) AddWrite(rng memory.Range, id binary.ID) *ReplayC
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *ReplayCreateRenderer) API() gfxapi.API                  { return api{} }
+func (c *ReplayCreateRenderer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *ReplayCreateRenderer) Flags() atom.Flags                { return 0 }
 func (a *ReplayCreateRenderer) Observations() *atom.Observations { return &a.observations }
 
@@ -15936,7 +15936,7 @@ func (a *ReplayBindRenderer) AddWrite(rng memory.Range, id binary.ID) *ReplayBin
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *ReplayBindRenderer) API() gfxapi.API                  { return api{} }
+func (c *ReplayBindRenderer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *ReplayBindRenderer) Flags() atom.Flags                { return 0 }
 func (a *ReplayBindRenderer) Observations() *atom.Observations { return &a.observations }
 
@@ -15973,7 +15973,7 @@ func (a *BackbufferInfo) AddWrite(rng memory.Range, id binary.ID) *BackbufferInf
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *BackbufferInfo) API() gfxapi.API                  { return api{} }
+func (c *BackbufferInfo) API() gfxapi.ID                   { return api{}.ID() }
 func (c *BackbufferInfo) Flags() atom.Flags                { return 0 }
 func (a *BackbufferInfo) Observations() *atom.Observations { return &a.observations }
 
@@ -16005,7 +16005,7 @@ func (a *StartTimer) AddWrite(rng memory.Range, id binary.ID) *StartTimer {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *StartTimer) API() gfxapi.API                  { return api{} }
+func (c *StartTimer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *StartTimer) Flags() atom.Flags                { return 0 }
 func (a *StartTimer) Observations() *atom.Observations { return &a.observations }
 
@@ -16038,7 +16038,7 @@ func (a *StopTimer) AddWrite(rng memory.Range, id binary.ID) *StopTimer {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *StopTimer) API() gfxapi.API                  { return api{} }
+func (c *StopTimer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *StopTimer) Flags() atom.Flags                { return 0 }
 func (a *StopTimer) Observations() *atom.Observations { return &a.observations }
 
@@ -16069,7 +16069,7 @@ func (a *FlushPostBuffer) AddWrite(rng memory.Range, id binary.ID) *FlushPostBuf
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *FlushPostBuffer) API() gfxapi.API                  { return api{} }
+func (c *FlushPostBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *FlushPostBuffer) Flags() atom.Flags                { return 0 }
 func (a *FlushPostBuffer) Observations() *atom.Observations { return &a.observations }
 
