@@ -31,7 +31,7 @@ returns the new capture identifier.
 ```go
 func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error)
 ```
-Resolve resolves and returns the object with the path p.
+Resolve resolves and returns the object, value or memory at the path p.
 
 #### type BuildReport
 
@@ -96,6 +96,31 @@ ConvertImage request.
 
 ```go
 func (*ConvertImage) Class() binary.Class
+```
+
+#### type Get
+
+```go
+type Get struct {
+	binary.Generate
+	Path path.Path
+}
+```
+
+Get resolves the object, value or memory at the specified path.
+
+#### func (*Get) BuildLazy
+
+```go
+func (request *Get) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
+```
+BuildLazy resolves and returns the object, value or memory at the requested
+path.
+
+#### func (*Get) Class
+
+```go
+func (*Get) Class() binary.Class
 ```
 
 #### type GetFramebufferColor

@@ -104,6 +104,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callGet:
+			if res, err := server.Get(call.p, l); err == nil {
+				return &resultGet{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callResolveAtomStream:
 			if res, err := server.ResolveAtomStream(call.id, l); err == nil {
 				return &resultResolveAtomStream{value: res}

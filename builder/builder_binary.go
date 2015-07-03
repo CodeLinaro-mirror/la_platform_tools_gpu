@@ -13,6 +13,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 var Namespace = registry.NewNamespace()
@@ -21,6 +22,7 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*BuildReport)(nil).Class())
 	Namespace.Add((*ConvertImage)(nil).Class())
+	Namespace.Add((*Get)(nil).Class())
 	Namespace.Add((*GetFramebufferColor)(nil).Class())
 	Namespace.Add((*GetFramebufferDepth)(nil).Class())
 	Namespace.Add((*GetHierarchy)(nil).Class())
@@ -39,6 +41,7 @@ func init() {
 var (
 	binaryIDBuildReport                     = binary.ID{0xe8, 0xae, 0x2a, 0xe0, 0x20, 0xd0, 0xc1, 0x44, 0x33, 0x78, 0x81, 0x4e, 0x84, 0xda, 0x0e, 0xcc, 0x27, 0x89, 0xc6, 0xb5}
 	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
+	binaryIDGet                             = binary.ID{0x82, 0xb2, 0x02, 0xb1, 0xbc, 0x47, 0xaa, 0x54, 0xed, 0xd7, 0xad, 0x46, 0x6e, 0x1d, 0xa3, 0x41, 0x16, 0x54, 0xd9, 0x15}
 	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
 	binaryIDGetFramebufferDepth             = binary.ID{0x59, 0xd2, 0x23, 0x3c, 0xfd, 0xdc, 0xbf, 0x12, 0xf5, 0xe3, 0xff, 0x94, 0x6c, 0x8a, 0xb8, 0x86, 0xba, 0x9d, 0xb6, 0x55}
 	binaryIDGetHierarchy                    = binary.ID{0x58, 0xc3, 0xc8, 0x77, 0xcf, 0x3d, 0xd5, 0x5f, 0xba, 0x3f, 0x2c, 0xa9, 0x7e, 0x16, 0xdf, 0x52, 0x5b, 0xbb, 0x65, 0x8b}
@@ -209,6 +212,62 @@ var schemaConvertImage = &schema.Class{
 		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 		{Declared: "FormatFrom", Type: &schema.Interface{Name: "image.Format"}},
 		{Declared: "FormatTo", Type: &schema.Interface{Name: "image.Format"}},
+	},
+}
+
+type binaryClassGet struct{}
+
+func (*Get) Class() binary.Class {
+	return (*binaryClassGet)(nil)
+}
+func doEncodeGet(e binary.Encoder, o *Get) error {
+	if o.Path != nil {
+		if err := e.Object(o.Path); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGet(d binary.Decoder, o *Get) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Path = obj.(path.Path)
+	} else {
+		o.Path = nil
+	}
+	return nil
+}
+func doSkipGet(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGet) ID() binary.ID      { return binaryIDGet }
+func (*binaryClassGet) New() binary.Object { return &Get{} }
+func (*binaryClassGet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGet(e, obj.(*Get))
+}
+func (*binaryClassGet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Get{}
+	return obj, doDecodeGet(d, obj)
+}
+func (*binaryClassGet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGet(d, obj.(*Get))
+}
+func (*binaryClassGet) Skip(d binary.Decoder) error { return doSkipGet(d) }
+func (*binaryClassGet) Schema() *schema.Class       { return schemaGet }
+
+var schemaGet = &schema.Class{
+	TypeID:  binaryIDGet,
+	Package: "builder",
+	Name:    "Get",
+	Display: "Get",
+	Fields: []schema.Field{
+		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
 	},
 }
 
