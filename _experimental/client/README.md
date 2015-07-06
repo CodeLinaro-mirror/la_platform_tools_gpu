@@ -588,6 +588,12 @@ func (c *AtomClass) ID() binary.ID
 func (c *AtomClass) New() binary.Object
 ```
 
+#### func (*AtomClass) Schema
+
+```go
+func (c *AtomClass) Schema() *schema.Class
+```
+
 #### func (*AtomClass) Skip
 
 ```go

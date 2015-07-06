@@ -306,12 +306,12 @@ func (c *ApplicationContext) LoadReport() {
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
-		report, err := c.rpc.ResolveReport(c.capture.Report, l)
+		report, err := c.rpc.Get(c.captureID.Path().Report(), l)
 		if err != nil {
 			return
 		}
 		c.Run(func() {
-			c.report = report
+			c.report = *report.(*service.Report)
 			c.onReportUpdated.Fire()
 			log.Infof(l, "Report loaded")
 		})
