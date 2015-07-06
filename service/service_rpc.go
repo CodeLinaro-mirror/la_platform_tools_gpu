@@ -28,7 +28,7 @@ type RPC interface {
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
-	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
+	ResolveBinary(id BinaryId, l log.Logger) ([]uint8, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
@@ -171,12 +171,6 @@ type ReportItem struct {
 	Severity Severity
 	Message  string
 	Atom     uint64
-}
-
-// Class Binary
-type Binary struct {
-	binary.Generate
-	Data []uint8
 }
 
 // Class AtomStream

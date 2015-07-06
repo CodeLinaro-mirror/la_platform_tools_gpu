@@ -50,7 +50,7 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 
 				imageInfo, err := service.ResolveImageInfo(service.ImageInfoId{ID: id}, d, l)
 				if err == nil {
-					service.ResolveBinary(imageInfo.Data, d, l)
+					d.Resolve(imageInfo.Data.ID, l)
 				}
 			}()
 		}
@@ -58,5 +58,5 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 
 	wg.Wait()
 
-	return &service.Binary{}, nil
+	return nil, nil
 }

@@ -164,7 +164,7 @@ func (c client) ResolveAtomStream(id AtomStreamId, l log.Logger) (res AtomStream
 	return
 }
 
-func (c client) ResolveBinary(id BinaryId, l log.Logger) (res Binary, err error) {
+func (c client) ResolveBinary(id BinaryId, l log.Logger) (res []uint8, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveBinary{id: id}); err == nil {
 		res = val.(*resultResolveBinary).value

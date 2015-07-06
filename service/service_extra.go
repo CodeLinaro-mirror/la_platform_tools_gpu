@@ -191,7 +191,7 @@ type callResolveBinary struct {
 // Result ResolveBinary
 type resultResolveBinary struct {
 	binary.Generate
-	value Binary
+	value []uint8
 }
 
 // Call ResolveCapture
