@@ -146,12 +146,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callResolveReport:
-			if res, err := server.ResolveReport(call.id, l); err == nil {
-				return &resultResolveReport{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callResolveTimingInfo:
 			if res, err := server.ResolveTimingInfo(call.id, l); err == nil {
 				return &resultResolveTimingInfo{value: res}
@@ -299,25 +293,6 @@ func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (res 
 // ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's database, using id.
 func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error) {
 	return ResolveMemoryInfo(id, r.Database, l)
-}
-
-// StoreReport stores v into the database d, returning the ReportId.
-func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error) {
-	id, err := database.Store(v, d, l)
-	return ReportId{ID: id}, err
-}
-
-// ResolveReport loads and returns the Report stored in the database d, using id.
-func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*Report))
-	}
-	return res, err
-}
-
-// ResolveReport loads and returns the Report stored in the resolver's database, using id.
-func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error) {
-	return ResolveReport(id, r.Database, l)
 }
 
 // StoreTimingInfo stores v into the database d, returning the TimingInfoId.

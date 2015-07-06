@@ -254,18 +254,6 @@ type resultResolveMemoryInfo struct {
 	value MemoryInfo
 }
 
-// Call ResolveReport
-type callResolveReport struct {
-	binary.Generate
-	id ReportId
-}
-
-// Result ResolveReport
-type resultResolveReport struct {
-	binary.Generate
-	value Report
-}
-
 // Call ResolveTimingInfo
 type callResolveTimingInfo struct {
 	binary.Generate

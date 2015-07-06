@@ -63,7 +63,6 @@ func init() {
 	Namespace.Add((*callResolveHierarchy)(nil).Class())
 	Namespace.Add((*callResolveImageInfo)(nil).Class())
 	Namespace.Add((*callResolveMemoryInfo)(nil).Class())
-	Namespace.Add((*callResolveReport)(nil).Class())
 	Namespace.Add((*callResolveTimingInfo)(nil).Class())
 	Namespace.Add((*callSet)(nil).Class())
 	Namespace.Add((*resultGet)(nil).Class())
@@ -84,7 +83,6 @@ func init() {
 	Namespace.Add((*resultResolveHierarchy)(nil).Class())
 	Namespace.Add((*resultResolveImageInfo)(nil).Class())
 	Namespace.Add((*resultResolveMemoryInfo)(nil).Class())
-	Namespace.Add((*resultResolveReport)(nil).Class())
 	Namespace.Add((*resultResolveTimingInfo)(nil).Class())
 	Namespace.Add((*resultSet)(nil).Class())
 }
@@ -132,7 +130,6 @@ var (
 	binaryIDcallResolveHierarchy        = binary.ID{0x39, 0x2a, 0x9f, 0x44, 0xfe, 0x2c, 0x0f, 0xd8, 0xc5, 0x44, 0x58, 0x51, 0x94, 0x6a, 0x95, 0xa4, 0x22, 0x90, 0x34, 0x36}
 	binaryIDcallResolveImageInfo        = binary.ID{0x4e, 0x51, 0x41, 0x13, 0x68, 0x6f, 0x58, 0x5a, 0xed, 0xe0, 0x0a, 0x05, 0x0d, 0x01, 0x9d, 0x28, 0x9c, 0x21, 0x8c, 0xbb}
 	binaryIDcallResolveMemoryInfo       = binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}
-	binaryIDcallResolveReport           = binary.ID{0xe6, 0x93, 0x8e, 0x01, 0x8f, 0x31, 0xdc, 0x32, 0x93, 0x8e, 0x5c, 0xc1, 0xb3, 0x56, 0x46, 0x57, 0x32, 0x9f, 0xa4, 0xc1}
 	binaryIDcallResolveTimingInfo       = binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}
 	binaryIDcallSet                     = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
 	binaryIDresultGet                   = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
@@ -153,7 +150,6 @@ var (
 	binaryIDresultResolveHierarchy      = binary.ID{0x60, 0xf3, 0x21, 0x98, 0x1b, 0x86, 0x98, 0x38, 0x8c, 0x1e, 0x33, 0x3c, 0x06, 0x9d, 0x67, 0x2a, 0x05, 0x50, 0xef, 0xfc}
 	binaryIDresultResolveImageInfo      = binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}
 	binaryIDresultResolveMemoryInfo     = binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}
-	binaryIDresultResolveReport         = binary.ID{0x39, 0xe3, 0x6a, 0xa3, 0x55, 0xfc, 0xc7, 0xda, 0x7e, 0xc9, 0x6e, 0x43, 0xbf, 0xec, 0x64, 0x1f, 0xf4, 0x43, 0x92, 0x0c}
 	binaryIDresultResolveTimingInfo     = binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}
 	binaryIDresultSet                   = binary.ID{0x86, 0x91, 0xf0, 0x3f, 0xf8, 0x37, 0xf5, 0x8d, 0x70, 0xeb, 0xc0, 0x87, 0x00, 0x9e, 0x42, 0xd4, 0x8e, 0x89, 0xc3, 0xdb}
 )
@@ -2931,53 +2927,6 @@ var schemacallResolveMemoryInfo = &schema.Class{
 	},
 }
 
-type binaryClasscallResolveReport struct{}
-
-func (*callResolveReport) Class() binary.Class {
-	return (*binaryClasscallResolveReport)(nil)
-}
-func doEncodecallResolveReport(e binary.Encoder, o *callResolveReport) error {
-	if err := e.Value(&o.id); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallResolveReport(d binary.Decoder, o *callResolveReport) error {
-	if err := d.Value(&o.id); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipcallResolveReport(d binary.Decoder) error {
-	if err := d.SkipValue((*ReportId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallResolveReport) ID() binary.ID      { return binaryIDcallResolveReport }
-func (*binaryClasscallResolveReport) New() binary.Object { return &callResolveReport{} }
-func (*binaryClasscallResolveReport) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallResolveReport(e, obj.(*callResolveReport))
-}
-func (*binaryClasscallResolveReport) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callResolveReport{}
-	return obj, doDecodecallResolveReport(d, obj)
-}
-func (*binaryClasscallResolveReport) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallResolveReport(d, obj.(*callResolveReport))
-}
-func (*binaryClasscallResolveReport) Skip(d binary.Decoder) error { return doSkipcallResolveReport(d) }
-func (*binaryClasscallResolveReport) Schema() *schema.Class       { return schemacallResolveReport }
-
-var schemacallResolveReport = &schema.Class{
-	TypeID:  binaryIDcallResolveReport,
-	Package: "service",
-	Name:    "callResolveReport",
-	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "ReportId", ID: (*ReportId)(nil).Class().ID()}},
-	},
-}
-
 type binaryClasscallResolveTimingInfo struct{}
 
 func (*callResolveTimingInfo) Class() binary.Class {
@@ -4039,55 +3988,6 @@ var schemaresultResolveMemoryInfo = &schema.Class{
 	Name:    "resultResolveMemoryInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfo", ID: (*MemoryInfo)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassresultResolveReport struct{}
-
-func (*resultResolveReport) Class() binary.Class {
-	return (*binaryClassresultResolveReport)(nil)
-}
-func doEncoderesultResolveReport(e binary.Encoder, o *resultResolveReport) error {
-	if err := e.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultResolveReport(d binary.Decoder, o *resultResolveReport) error {
-	if err := d.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipresultResolveReport(d binary.Decoder) error {
-	if err := d.SkipValue((*Report)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultResolveReport) ID() binary.ID      { return binaryIDresultResolveReport }
-func (*binaryClassresultResolveReport) New() binary.Object { return &resultResolveReport{} }
-func (*binaryClassresultResolveReport) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultResolveReport(e, obj.(*resultResolveReport))
-}
-func (*binaryClassresultResolveReport) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultResolveReport{}
-	return obj, doDecoderesultResolveReport(d, obj)
-}
-func (*binaryClassresultResolveReport) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultResolveReport(d, obj.(*resultResolveReport))
-}
-func (*binaryClassresultResolveReport) Skip(d binary.Decoder) error {
-	return doSkipresultResolveReport(d)
-}
-func (*binaryClassresultResolveReport) Schema() *schema.Class { return schemaresultResolveReport }
-
-var schemaresultResolveReport = &schema.Class{
-	TypeID:  binaryIDresultResolveReport,
-	Package: "service",
-	Name:    "resultResolveReport",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Report", ID: (*Report)(nil).Class().ID()}},
 	},
 }
 

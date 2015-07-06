@@ -224,16 +224,6 @@ func (c client) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (res MemoryInfo
 	return
 }
 
-func (c client) ResolveReport(id ReportId, l log.Logger) (res Report, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveReport{id: id}); err == nil {
-		res = val.(*resultResolveReport).value
-	} else {
-		log.Errorf(l, "RPC ResolveReport failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) ResolveTimingInfo(id TimingInfoId, l log.Logger) (res TimingInfo, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveTimingInfo{id: id}); err == nil {
