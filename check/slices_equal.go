@@ -24,13 +24,26 @@ import (
 // If any differences are found then these are logged to t, the test fails and
 // false is returned.
 func SlicesEqual(t *testing.T, got interface{}, expected interface{}) (equal bool) {
+	return slicesEqual(t, got, expected, func(a, b interface{}) bool { return a == b })
+}
+
+// SlicesDeepEqual checks the array or slice of got matches expected using a
+// deep-equal comparison.
+// If the arrays or slices are equal then true is returned.
+// If any differences are found then these are logged to t, the test fails and
+// false is returned.
+func SlicesDeepEqual(t *testing.T, got interface{}, expected interface{}) (equal bool) {
+	return slicesEqual(t, got, expected, reflect.DeepEqual)
+}
+
+func slicesEqual(t *testing.T, got interface{}, expected interface{}, same func(a, b interface{}) bool) (equal bool) {
 	vg, ve := reflect.ValueOf(got), reflect.ValueOf(expected)
 	cg, ce := vg.Len(), ve.Len()
 	equal = cg == ce
 	if equal {
 		for i := 0; i < cg; i++ {
 			g, e := vg.Index(i).Interface(), ve.Index(i).Interface()
-			if g != e {
+			if !same(g, e) {
 				equal = false
 				break
 			}
@@ -40,13 +53,14 @@ func SlicesEqual(t *testing.T, got interface{}, expected interface{}) (equal boo
 	if !equal {
 		for i := 0; i < cg || i < ce; i++ {
 			var g, e interface{}
+			g, e = "<missing>", "<missing>"
 			if i < cg {
 				g = vg.Index(i).Interface()
 			}
 			if i < ce {
 				e = ve.Index(i).Interface()
 			}
-			if e == g {
+			if same(g, e) {
 				t.Logf("  %d: %T %+v", i, g, g)
 			} else {
 				t.Logf("* %d: %T %+v ---  EXPECTED: %T %+v", i, g, g, e, e)
