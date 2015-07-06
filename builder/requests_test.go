@@ -34,7 +34,6 @@ func TestLazyInterfaceCompliance(t *testing.T) {
 		(*PrerenderFramebuffers)(nil),
 		(*RenderFramebufferColor)(nil),
 		(*RenderFramebufferDepth)(nil),
-		(*ReplaceAtom)(nil),
 
 		(*getCaptureFramebufferDimensions)(nil),
 	}

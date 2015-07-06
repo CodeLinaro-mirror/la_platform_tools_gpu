@@ -6,7 +6,6 @@
 package service
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -131,16 +130,6 @@ func (c client) PrerenderFramebuffers(device DeviceId, capture CaptureId, api Ap
 		res = val.(*resultPrerenderFramebuffers).value
 	} else {
 		log.Errorf(l, "RPC PrerenderFramebuffers failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ReplaceAtom(capture CaptureId, atomId uint64, atom atom.Atom, l log.Logger) (res CaptureId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callReplaceAtom{capture: capture, atomId: atomId, atom: atom}); err == nil {
-		res = val.(*resultReplaceAtom).value
-	} else {
-		log.Errorf(l, "RPC ReplaceAtom failed with error: %v", err)
 	}
 	return
 }
