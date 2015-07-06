@@ -2324,7 +2324,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(Voidᵖ{})) {
+		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 			}
@@ -2347,7 +2347,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(Voidᵖ{})) {
+		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 			}
@@ -2400,7 +2400,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
@@ -2419,7 +2419,7 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
@@ -2504,7 +2504,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
@@ -2523,7 +2523,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
@@ -2924,14 +2924,14 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	id := ctx.BoundBuffers.Get(ϟa.Target)        // BufferId
 	b := ctx.Instances.Buffers.Get(id)           // Bufferʳ
 	b.Data = func() (result U8ˢ) {
-		switch (ϟa.Data) != (BufferDataPointer(Voidᵖ{})) {
+		switch (ϟa.Data) != (BufferDataPointer(Voidᶜᵖ{})) {
 		case true:
 			return U8ᵖ(ϟa.Data).Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
 		case false:
 			return MakeU8ˢ(uint64(ϟa.Size), ϟs)
 		default:
 			// TODO: better unmatched handling
-			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (ϟa.Data) != (BufferDataPointer(Voidᵖ{})), ϟa))
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (ϟa.Data) != (BufferDataPointer(Voidᶜᵖ{})), ϟa))
 			return result
 		}
 	}()
@@ -2956,7 +2956,7 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.S32(ϟa.Offset))
 	ϟb.Push(value.S32(ϟa.Size))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlBufferSubData)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -3091,7 +3091,7 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	sources := ϟa.Source.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
+	sources := ϟa.Source.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᶜᵖˢ
 	lengths := ϟa.Length.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // S32ˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                       // Contextʳ
 	GetContext_86_result := context                                    // Contextʳ
@@ -3099,14 +3099,14 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)                          // Shaderʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		str := func() (result string) {
-			switch ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))) {
+			switch ((ϟa.Length) == (S32ᶜᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))) {
 			case true:
 				return strings.TrimRight(string(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 			case false:
 				return string(sources.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(int32(0)), uint64(lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 			default:
 				// TODO: better unmatched handling
-				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))), ϟa))
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᶜᵖ{})) || ((lengths.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)) < (int32(0))), ϟa))
 				return result
 			}
 		}() // string
@@ -5190,6 +5190,13 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
+func (p Voidᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p Voidᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
@@ -5444,6 +5451,25 @@ func (p VertexArrayIdᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p VertexArrayIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p VertexArrayIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexArrayId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p VertexArrayIdᶜᵖ) replayWrite(value VertexArrayId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p VertexArrayIdᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p ShaderAttribTypeᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderAttribType {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -5476,6 +5502,25 @@ func (p ShaderUniformTypeᵖ) replayWrite(value ShaderUniformType, ϟa atom.Atom
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p ShaderUniformTypeᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p F32ᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float32 {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p F32ᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float32 {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p F32ᶜᵖ) replayWrite(value float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p F32ᶜᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -5672,6 +5717,25 @@ func (p Mat4fᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p S32ᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int32 {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p S32ᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int32 {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p S32ᶜᵖ) replayWrite(value int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p S32ᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p TextureIdᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) TextureId {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -5685,6 +5749,25 @@ func (p TextureIdᵖ) replayWrite(value TextureId, ϟa atom.Atom, ϟs *gfxapi.St
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p TextureIdᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p TextureIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) TextureId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p TextureIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) TextureId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p TextureIdᶜᵖ) replayWrite(value TextureId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p TextureIdᶜᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -5710,6 +5793,25 @@ func (p FramebufferIdᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p FramebufferIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p FramebufferIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p FramebufferIdᶜᵖ) replayWrite(value FramebufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p FramebufferIdᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p RenderbufferIdᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferId {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -5723,6 +5825,25 @@ func (p RenderbufferIdᵖ) replayWrite(value RenderbufferId, ϟa atom.Atom, ϟs 
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p RenderbufferIdᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p RenderbufferIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p RenderbufferIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) RenderbufferId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p RenderbufferIdᶜᵖ) replayWrite(value RenderbufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p RenderbufferIdᶜᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -5748,19 +5869,95 @@ func (p BufferIdᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p Charᵖᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+func (p BufferIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) BufferId {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p Charᵖᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+func (p BufferIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) BufferId {
 	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
 }
-func (p Charᵖᵖ) replayWrite(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (p BufferIdᶜᵖ) replayWrite(value BufferId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	p.Write(value, ϟs)
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
-func (p Charᵖᵖ) value() value.Pointer {
+func (p BufferIdᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Charᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Charᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Charᶜᵖᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖᶜᵖ) replayWrite(value Charᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Charᶜᵖᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Charᶜᵖᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p Charᶜᵖᵖ) replayWrite(value Charᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p Charᶜᵖᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p ShaderIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p ShaderIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) ShaderId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p ShaderIdᶜᵖ) replayWrite(value ShaderId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p ShaderIdᶜᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -5805,6 +6002,25 @@ func (p Boolᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p FramebufferAttachmentᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferAttachment {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p FramebufferAttachmentᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferAttachment {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p FramebufferAttachmentᶜᵖ) replayWrite(value FramebufferAttachment, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p FramebufferAttachmentᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p FramebufferAttachmentᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) FramebufferAttachment {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -5837,6 +6053,25 @@ func (p QueryIdᵖ) replayWrite(value QueryId, ϟa atom.Atom, ϟs *gfxapi.State,
 	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p QueryIdᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p QueryIdᶜᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) QueryId {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p QueryIdᶜᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) QueryId {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p QueryIdᶜᵖ) replayWrite(value QueryId, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p QueryIdᶜᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
@@ -6075,7 +6310,7 @@ func (s Charˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return s.Read(ϟs, ϟd, ϟl)
 }
-func (s Charᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᶜᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	if s.Root.Pool == memory.ApplicationPool {
 		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
@@ -6087,19 +6322,19 @@ func (s Charᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 	}
 	return s
 }
-func (s Charᵖˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᶜᵖˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	if s.Root.Pool == memory.ApplicationPool {
 		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 	}
 	return s
 }
-func (s Charᵖˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+func (s Charᶜᵖˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	if s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
 		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 }
-func (s Charᵖˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᵖ {
+func (s Charᶜᵖˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᶜᵖ {
 	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return s.Read(ϟs, ϟd, ϟl)
 }

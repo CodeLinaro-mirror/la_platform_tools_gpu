@@ -348,10 +348,10 @@ class ClearState {
 
 type s32 AttributeLocation
 
-@replay_custom_value type void* IndicesPointer
-@replay_custom_value type void* VertexPointer
-@replay_custom_value type void* TexturePointer
-@replay_custom_value type void* BufferDataPointer
+@replay_custom_value type const void* IndicesPointer
+@replay_custom_value type const void* VertexPointer
+@replay_custom_value type const void* TexturePointer
+@replay_custom_value type const void* BufferDataPointer
 
 @internal
 class Objects {
@@ -776,7 +776,7 @@ cmd void glBindVertexArrayOES(VertexArrayId array) {
 }
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
-cmd void glDeleteVertexArraysOES(s32 count, VertexArrayId* arrays) {
+cmd void glDeleteVertexArraysOES(s32 count, const VertexArrayId* arrays) {
     ctx := GetContext()
     a := arrays[0:count]
     for i in (0 .. count) {
@@ -1060,7 +1060,7 @@ cmd void glGetTexParameteriv(TextureTarget    target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
 cmd void glGetTexParameterfv(TextureTarget    target,
                              TextureParameter parameter,
-                             f32*             values) {
+                             const f32*       values) {
     ctx := GetContext()
     id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
     t  := ctx.Instances.Textures[id]
@@ -1218,7 +1218,7 @@ cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform1fv(UniformLocation location, s32 count, f32* values) {
+cmd void glUniform1fv(UniformLocation location, s32 count, const f32* values) {
     ctx := GetContext()
     v := values[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1229,7 +1229,7 @@ cmd void glUniform1fv(UniformLocation location, s32 count, f32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform2fv(UniformLocation location, s32 count, f32* values) {
+cmd void glUniform2fv(UniformLocation location, s32 count, const f32* values) {
     ctx := GetContext()
     v := as!Vec2f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1240,7 +1240,7 @@ cmd void glUniform2fv(UniformLocation location, s32 count, f32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform3fv(UniformLocation location, s32 count, f32* values) {
+cmd void glUniform3fv(UniformLocation location, s32 count, const f32* values) {
     ctx := GetContext()
     v := as!Vec3f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1251,7 +1251,7 @@ cmd void glUniform3fv(UniformLocation location, s32 count, f32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniform4fv(UniformLocation location, s32 count, f32* values) {
+cmd void glUniform4fv(UniformLocation location, s32 count, const f32* values) {
     ctx := GetContext()
     v := as!Vec4f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1262,7 +1262,7 @@ cmd void glUniform4fv(UniformLocation location, s32 count, f32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, f32* values) {
+cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, const f32* values) {
     ctx := GetContext()
     v := as!Mat2f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1273,7 +1273,7 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, f32* values) {
+cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, const f32* values) {
     ctx := GetContext()
     v := as!Mat3f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1284,7 +1284,7 @@ cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
-cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, f32* values) {
+cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, const f32* values) {
     ctx := GetContext()
     v := as!Mat4f*(values)[0:count]
     program := ctx.Instances.Programs[ctx.BoundProgram]
@@ -1294,13 +1294,13 @@ cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
-cmd void glGetUniformfv(ProgramId program, UniformLocation location, f32* values) {
+cmd void glGetUniformfv(ProgramId program, UniformLocation location, const f32* values) {
     // p := Instances.Programs[program]
     // uniform := p.Uniforms[location]
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
-cmd void glGetUniformiv(ProgramId program, UniformLocation location, s32* values) {
+cmd void glGetUniformiv(ProgramId program, UniformLocation location, const s32* values) {
     // p := Instances.Programs[program]
     // uniform := p.Uniforms[location]
 }
@@ -1322,22 +1322,22 @@ cmd void glVertexAttrib4f(AttributeLocation location, f32 value0, f32 value1, f3
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
-cmd void glVertexAttrib1fv(AttributeLocation location, f32* value) {
+cmd void glVertexAttrib1fv(AttributeLocation location, const f32* value) {
     read(value[0:1])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
-cmd void glVertexAttrib2fv(AttributeLocation location, f32* value) {
+cmd void glVertexAttrib2fv(AttributeLocation location, const f32* value) {
     read(value[0:2])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
-cmd void glVertexAttrib3fv(AttributeLocation location, f32* value) {
+cmd void glVertexAttrib3fv(AttributeLocation location, const f32* value) {
     read(value[0:3])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
-cmd void glVertexAttrib4fv(AttributeLocation location, f32* value) {
+cmd void glVertexAttrib4fv(AttributeLocation location, const f32* value) {
     read(value[0:4])
 }
 
@@ -1448,7 +1448,7 @@ cmd void glGenTextures(s32 count, TextureId* textures) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml
-cmd void glDeleteTextures(s32 count, TextureId* textures) {
+cmd void glDeleteTextures(s32 count, const TextureId* textures) {
     t := textures[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1720,7 +1720,7 @@ cmd FramebufferStatus glCheckFramebufferStatus(FramebufferTarget target) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml
-cmd void glDeleteFramebuffers(s32 count, FramebufferId* framebuffers) {
+cmd void glDeleteFramebuffers(s32 count, const FramebufferId* framebuffers) {
     f := framebuffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1768,7 +1768,7 @@ cmd void glRenderbufferStorage(RenderbufferTarget target,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml
-cmd void glDeleteRenderbuffers(s32 count, RenderbufferId* renderbuffers) {
+cmd void glDeleteRenderbuffers(s32 count, const RenderbufferId* renderbuffers) {
     r := renderbuffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1837,13 +1837,13 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml
-cmd void glBufferSubData(BufferTarget target, s32 offset, s32 size, void* data) {
+cmd void glBufferSubData(BufferTarget target, s32 offset, s32 size, BufferDataPointer data) {
     read(data[0:size])
     // TODO: Assignment to subset
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml
-cmd void glDeleteBuffers(s32 count, BufferId* buffers) {
+cmd void glDeleteBuffers(s32 count, const BufferId* buffers) {
     b := buffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1890,7 +1890,7 @@ cmd void glDeleteShader(ShaderId shader) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml
-cmd void glShaderSource(ShaderId shader, s32 count, char** source, s32* length) {
+cmd void glShaderSource(ShaderId shader, s32 count, const char* const* source, const s32* length) {
     sources := source[0:count]
     lengths := length[0:count]
     ctx := GetContext()
@@ -1908,9 +1908,9 @@ cmd void glShaderSource(ShaderId shader, s32 count, char** source, s32* length) 
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml
 cmd void glShaderBinary(s32             count,
-                        ShaderId*       shaders,
+                        const ShaderId* shaders,
                         u32             binary_format,
-                        void*           binary,
+                        const void*     binary,
                         s32             binary_size) {
     for i in (0 .. count) {
         // TODO: shaders[i].Binary = ?
@@ -2543,7 +2543,7 @@ cmd void glGetIntegerv(StateVariable param, s32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml
-cmd char* glGetString(StringConstant param) {
+cmd const char* glGetString(StringConstant param) {
     return null
 }
 
@@ -2617,9 +2617,9 @@ cmd void glUnmapBuffer(BufferTarget target) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml
-cmd void glInvalidateFramebuffer(FramebufferTarget       target,
-                                 s32                     count,
-                                 FramebufferAttachment*  attachments) {
+cmd void glInvalidateFramebuffer(FramebufferTarget            target,
+                                 s32                          count,
+                                 const FramebufferAttachment* attachments) {
 }
 
 ///http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt
@@ -2663,7 +2663,7 @@ cmd void glEndQuery(QueryTarget target) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml
-cmd void glDeleteQueries(s32 count, QueryId* queries) {
+cmd void glDeleteQueries(s32 count, const QueryId* queries) {
     q := queries[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -2751,7 +2751,7 @@ cmd void glBindVertexArray(VertexArrayId array) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml
-cmd void glDeleteVertexArrays(u32 count, VertexArrayId* arrays) {
+cmd void glDeleteVertexArrays(u32 count, const VertexArrayId* arrays) {
     ctx := GetContext()
     a := arrays[0:count]
     for i in (0 .. count) {
@@ -2789,7 +2789,7 @@ cmd void glEndQueryEXT(QueryTarget target) {
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glDeleteQueriesEXT(s32 count, QueryId* queries) {
+cmd void glDeleteQueriesEXT(s32 count, const QueryId* queries) {
     q := queries[0:count]
     ctx := GetContext()
     for i in (0 .. count) {

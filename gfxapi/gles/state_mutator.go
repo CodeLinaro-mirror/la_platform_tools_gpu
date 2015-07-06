@@ -2043,7 +2043,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(Voidᵖ{})) {
+		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 			}
@@ -2066,7 +2066,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(Voidᵖ{})) {
+		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 			}
@@ -2107,7 +2107,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
@@ -2126,7 +2126,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
@@ -2177,7 +2177,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
@@ -2196,7 +2196,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
@@ -2478,14 +2478,14 @@ func (ϟa *GlBufferData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	id := ctx.BoundBuffers.Get(ϟa.Target)        // BufferId
 	b := ctx.Instances.Buffers.Get(id)           // Bufferʳ
 	b.Data = func() (result U8ˢ) {
-		switch (ϟa.Data) != (BufferDataPointer(Voidᵖ{})) {
+		switch (ϟa.Data) != (BufferDataPointer(Voidᶜᵖ{})) {
 		case true:
 			return U8ᵖ(ϟa.Data).Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).Clone(ϟs)
 		case false:
 			return MakeU8ˢ(uint64(ϟa.Size), ϟs)
 		default:
 			// TODO: better unmatched handling
-			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (ϟa.Data) != (BufferDataPointer(Voidᵖ{})), ϟa))
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (ϟa.Data) != (BufferDataPointer(Voidᶜᵖ{})), ϟa))
 			return result
 		}
 	}()
@@ -2593,7 +2593,7 @@ func (ϟa *GlShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	sources := ϟa.Source.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
+	sources := ϟa.Source.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᶜᵖˢ
 	lengths := ϟa.Length.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // S32ˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                       // Contextʳ
 	GetContext_86_result := context                                    // Contextʳ
@@ -2601,14 +2601,14 @@ func (ϟa *GlShaderSource) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)                          // Shaderʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		str := func() (result string) {
-			switch ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))) {
+			switch ((ϟa.Length) == (S32ᶜᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))) {
 			case true:
 				return string(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 			case false:
 				return string(sources.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).Slice(uint64(int32(0)), uint64(lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)), ϟs).Read(ϟs, ϟd, ϟl))
 			default:
 				// TODO: better unmatched handling
-				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))), ϟa))
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ((ϟa.Length) == (S32ᶜᵖ{})) || ((lengths.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) < (int32(0))), ϟa))
 				return result
 			}
 		}() // string
@@ -3606,7 +3606,7 @@ func (ϟa *GlGetString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = Charᵖ{}
+	ϟa.Result = Charᶜᵖ{}
 	return nil
 }
 func (ϟa *GlEnable) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
