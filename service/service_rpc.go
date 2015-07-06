@@ -34,7 +34,6 @@ type RPC interface {
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
-	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 

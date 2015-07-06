@@ -870,7 +870,6 @@ type RPC interface {
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
-	ResolveReport(id ReportId, l log.Logger) (Report, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 ```
@@ -942,13 +941,6 @@ func CreateReport(
 ) *Report
 ```
 
-#### func  ResolveReport
-
-```go
-func ResolveReport(id ReportId, d database.Database, l log.Logger) (res Report, err error)
-```
-ResolveReport loads and returns the Report stored in the database d, using id.
-
 #### func (*Report) Class
 
 ```go
@@ -971,13 +963,6 @@ type ReportId struct {
 ```
 
 Handle ReportId
-
-#### func  StoreReport
-
-```go
-func StoreReport(v *Report, d database.Database, l log.Logger) (ReportId, error)
-```
-StoreReport stores v into the database d, returning the ReportId.
 
 #### func (*ReportId) Class
 
@@ -1102,14 +1087,6 @@ func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, 
 ```
 ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's
 database, using id.
-
-#### func (Resolver) ResolveReport
-
-```go
-func (r Resolver) ResolveReport(id ReportId, l log.Logger) (Report, error)
-```
-ResolveReport loads and returns the Report stored in the resolver's database,
-using id.
 
 #### func (Resolver) ResolveTimingInfo
 
