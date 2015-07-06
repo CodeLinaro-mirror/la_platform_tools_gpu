@@ -32,7 +32,7 @@ type AtomA struct {
 #### func (*AtomA) API
 
 ```go
-func (a *AtomA) API() gfxapi.API
+func (a *AtomA) API() gfxapi.ID
 ```
 
 #### func (*AtomA) Class
@@ -73,7 +73,7 @@ type AtomB struct {
 #### func (*AtomB) API
 
 ```go
-func (a *AtomB) API() gfxapi.API
+func (a *AtomB) API() gfxapi.ID
 ```
 
 #### func (*AtomB) Class
@@ -113,7 +113,7 @@ type AtomC struct {
 #### func (*AtomC) API
 
 ```go
-func (a *AtomC) API() gfxapi.API
+func (a *AtomC) API() gfxapi.ID
 ```
 
 #### func (*AtomC) Class

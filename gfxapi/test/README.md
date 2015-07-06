@@ -654,7 +654,7 @@ Write writes value to the Charᵖ element at the pointer.
 
 ```go
 type CmdBool struct {
-	binary.Generate `display:"cmd_bool"`
+	binary.Generate
 
 	Result bool
 }
@@ -673,7 +673,7 @@ func NewCmdBool(Result bool) *CmdBool
 #### func (*CmdBool) API
 
 ```go
-func (c *CmdBool) API() gfxapi.API
+func (c *CmdBool) API() gfxapi.ID
 ```
 
 #### func (*CmdBool) AddRead
@@ -732,7 +732,7 @@ func (a *CmdBool) String() string
 
 ```go
 type CmdCharptrToString struct {
-	binary.Generate `display:"cmd_charptr_to_string"`
+	binary.Generate
 
 	S Charᵖ
 }
@@ -751,7 +751,7 @@ func NewCmdCharptrToString(S memory.Pointer) *CmdCharptrToString
 #### func (*CmdCharptrToString) API
 
 ```go
-func (c *CmdCharptrToString) API() gfxapi.API
+func (c *CmdCharptrToString) API() gfxapi.ID
 ```
 
 #### func (*CmdCharptrToString) AddRead
@@ -812,7 +812,7 @@ func (a *CmdCharptrToString) String() string
 
 ```go
 type CmdCharsliceToString struct {
-	binary.Generate `display:"cmd_charslice_to_string"`
+	binary.Generate
 
 	S   Charᵖ
 	Len uint32
@@ -832,7 +832,7 @@ func NewCmdCharsliceToString(S memory.Pointer, Len uint32) *CmdCharsliceToString
 #### func (*CmdCharsliceToString) API
 
 ```go
-func (c *CmdCharsliceToString) API() gfxapi.API
+func (c *CmdCharsliceToString) API() gfxapi.ID
 ```
 
 #### func (*CmdCharsliceToString) AddRead
@@ -893,7 +893,7 @@ func (a *CmdCharsliceToString) String() string
 
 ```go
 type CmdClone struct {
-	binary.Generate `display:"cmd_clone"`
+	binary.Generate
 
 	Src U8ᵖ
 	Cnt uint32
@@ -913,7 +913,7 @@ func NewCmdClone(Src memory.Pointer, Cnt uint32) *CmdClone
 #### func (*CmdClone) API
 
 ```go
-func (c *CmdClone) API() gfxapi.API
+func (c *CmdClone) API() gfxapi.ID
 ```
 
 #### func (*CmdClone) AddRead
@@ -972,7 +972,7 @@ func (a *CmdClone) String() string
 
 ```go
 type CmdCopy struct {
-	binary.Generate `display:"cmd_copy"`
+	binary.Generate
 
 	Src U8ᵖ
 	Cnt uint32
@@ -992,7 +992,7 @@ func NewCmdCopy(Src memory.Pointer, Cnt uint32) *CmdCopy
 #### func (*CmdCopy) API
 
 ```go
-func (c *CmdCopy) API() gfxapi.API
+func (c *CmdCopy) API() gfxapi.ID
 ```
 
 #### func (*CmdCopy) AddRead
@@ -1051,7 +1051,7 @@ func (a *CmdCopy) String() string
 
 ```go
 type CmdF32 struct {
-	binary.Generate `display:"cmd_f32"`
+	binary.Generate
 
 	Result float32
 }
@@ -1070,7 +1070,7 @@ func NewCmdF32(Result float32) *CmdF32
 #### func (*CmdF32) API
 
 ```go
-func (c *CmdF32) API() gfxapi.API
+func (c *CmdF32) API() gfxapi.ID
 ```
 
 #### func (*CmdF32) AddRead
@@ -1129,7 +1129,7 @@ func (a *CmdF32) String() string
 
 ```go
 type CmdF64 struct {
-	binary.Generate `display:"cmd_f64"`
+	binary.Generate
 
 	Result float64
 }
@@ -1148,7 +1148,7 @@ func NewCmdF64(Result float64) *CmdF64
 #### func (*CmdF64) API
 
 ```go
-func (c *CmdF64) API() gfxapi.API
+func (c *CmdF64) API() gfxapi.ID
 ```
 
 #### func (*CmdF64) AddRead
@@ -1207,7 +1207,7 @@ func (a *CmdF64) String() string
 
 ```go
 type CmdMake struct {
-	binary.Generate `display:"cmd_make"`
+	binary.Generate
 
 	Cnt uint32
 }
@@ -1226,7 +1226,7 @@ func NewCmdMake(Cnt uint32) *CmdMake
 #### func (*CmdMake) API
 
 ```go
-func (c *CmdMake) API() gfxapi.API
+func (c *CmdMake) API() gfxapi.ID
 ```
 
 #### func (*CmdMake) AddRead
@@ -1285,7 +1285,7 @@ func (a *CmdMake) String() string
 
 ```go
 type CmdPointer struct {
-	binary.Generate `display:"cmd_pointer"`
+	binary.Generate
 
 	Result Voidᵖ
 }
@@ -1304,7 +1304,7 @@ func NewCmdPointer(Result memory.Pointer) *CmdPointer
 #### func (*CmdPointer) API
 
 ```go
-func (c *CmdPointer) API() gfxapi.API
+func (c *CmdPointer) API() gfxapi.ID
 ```
 
 #### func (*CmdPointer) AddRead
@@ -1363,7 +1363,7 @@ func (a *CmdPointer) String() string
 
 ```go
 type CmdRemapped struct {
-	binary.Generate `display:"cmd_remapped"`
+	binary.Generate
 
 	Result remapped
 }
@@ -1382,7 +1382,7 @@ func NewCmdRemapped(Result remapped) *CmdRemapped
 #### func (*CmdRemapped) API
 
 ```go
-func (c *CmdRemapped) API() gfxapi.API
+func (c *CmdRemapped) API() gfxapi.ID
 ```
 
 #### func (*CmdRemapped) AddRead
@@ -1441,7 +1441,7 @@ func (a *CmdRemapped) String() string
 
 ```go
 type CmdS16 struct {
-	binary.Generate `display:"cmd_s16"`
+	binary.Generate
 
 	Result int16
 }
@@ -1460,7 +1460,7 @@ func NewCmdS16(Result int16) *CmdS16
 #### func (*CmdS16) API
 
 ```go
-func (c *CmdS16) API() gfxapi.API
+func (c *CmdS16) API() gfxapi.ID
 ```
 
 #### func (*CmdS16) AddRead
@@ -1519,7 +1519,7 @@ func (a *CmdS16) String() string
 
 ```go
 type CmdS32 struct {
-	binary.Generate `display:"cmd_s32"`
+	binary.Generate
 
 	Result int32
 }
@@ -1538,7 +1538,7 @@ func NewCmdS32(Result int32) *CmdS32
 #### func (*CmdS32) API
 
 ```go
-func (c *CmdS32) API() gfxapi.API
+func (c *CmdS32) API() gfxapi.ID
 ```
 
 #### func (*CmdS32) AddRead
@@ -1597,7 +1597,7 @@ func (a *CmdS32) String() string
 
 ```go
 type CmdS64 struct {
-	binary.Generate `display:"cmd_s64"`
+	binary.Generate
 
 	Result int64
 }
@@ -1616,7 +1616,7 @@ func NewCmdS64(Result int64) *CmdS64
 #### func (*CmdS64) API
 
 ```go
-func (c *CmdS64) API() gfxapi.API
+func (c *CmdS64) API() gfxapi.ID
 ```
 
 #### func (*CmdS64) AddRead
@@ -1675,7 +1675,7 @@ func (a *CmdS64) String() string
 
 ```go
 type CmdS8 struct {
-	binary.Generate `display:"cmd_s8"`
+	binary.Generate
 
 	Result int8
 }
@@ -1694,7 +1694,7 @@ func NewCmdS8(Result int8) *CmdS8
 #### func (*CmdS8) API
 
 ```go
-func (c *CmdS8) API() gfxapi.API
+func (c *CmdS8) API() gfxapi.ID
 ```
 
 #### func (*CmdS8) AddRead
@@ -1753,7 +1753,7 @@ func (a *CmdS8) String() string
 
 ```go
 type CmdSliceCasts struct {
-	binary.Generate `display:"cmd_slice_casts"`
+	binary.Generate
 
 	S U16ᵖ
 	L uint32
@@ -1773,7 +1773,7 @@ func NewCmdSliceCasts(S memory.Pointer, L uint32) *CmdSliceCasts
 #### func (*CmdSliceCasts) API
 
 ```go
-func (c *CmdSliceCasts) API() gfxapi.API
+func (c *CmdSliceCasts) API() gfxapi.ID
 ```
 
 #### func (*CmdSliceCasts) AddRead
@@ -1832,7 +1832,7 @@ func (a *CmdSliceCasts) String() string
 
 ```go
 type CmdString struct {
-	binary.Generate `display:"cmd_string"`
+	binary.Generate
 
 	Result string
 }
@@ -1851,7 +1851,7 @@ func NewCmdString(Result string) *CmdString
 #### func (*CmdString) API
 
 ```go
-func (c *CmdString) API() gfxapi.API
+func (c *CmdString) API() gfxapi.ID
 ```
 
 #### func (*CmdString) AddRead
@@ -1910,7 +1910,7 @@ func (a *CmdString) String() string
 
 ```go
 type CmdU16 struct {
-	binary.Generate `display:"cmd_u16"`
+	binary.Generate
 
 	Result uint16
 }
@@ -1929,7 +1929,7 @@ func NewCmdU16(Result uint16) *CmdU16
 #### func (*CmdU16) API
 
 ```go
-func (c *CmdU16) API() gfxapi.API
+func (c *CmdU16) API() gfxapi.ID
 ```
 
 #### func (*CmdU16) AddRead
@@ -1988,7 +1988,7 @@ func (a *CmdU16) String() string
 
 ```go
 type CmdU32 struct {
-	binary.Generate `display:"cmd_u32"`
+	binary.Generate
 
 	Result uint32
 }
@@ -2007,7 +2007,7 @@ func NewCmdU32(Result uint32) *CmdU32
 #### func (*CmdU32) API
 
 ```go
-func (c *CmdU32) API() gfxapi.API
+func (c *CmdU32) API() gfxapi.ID
 ```
 
 #### func (*CmdU32) AddRead
@@ -2066,7 +2066,7 @@ func (a *CmdU32) String() string
 
 ```go
 type CmdU64 struct {
-	binary.Generate `display:"cmd_u64"`
+	binary.Generate
 
 	Result uint64
 }
@@ -2085,7 +2085,7 @@ func NewCmdU64(Result uint64) *CmdU64
 #### func (*CmdU64) API
 
 ```go
-func (c *CmdU64) API() gfxapi.API
+func (c *CmdU64) API() gfxapi.ID
 ```
 
 #### func (*CmdU64) AddRead
@@ -2144,7 +2144,7 @@ func (a *CmdU64) String() string
 
 ```go
 type CmdU8 struct {
-	binary.Generate `display:"cmd_u8"`
+	binary.Generate
 
 	Result uint8
 }
@@ -2163,7 +2163,7 @@ func NewCmdU8(Result uint8) *CmdU8
 #### func (*CmdU8) API
 
 ```go
-func (c *CmdU8) API() gfxapi.API
+func (c *CmdU8) API() gfxapi.ID
 ```
 
 #### func (*CmdU8) AddRead
@@ -2222,7 +2222,7 @@ func (a *CmdU8) String() string
 
 ```go
 type CmdUnknownRet struct {
-	binary.Generate `display:"cmd_unknown_ret"`
+	binary.Generate
 
 	Result int64
 }
@@ -2241,7 +2241,7 @@ func NewCmdUnknownRet(Result int64) *CmdUnknownRet
 #### func (*CmdUnknownRet) API
 
 ```go
-func (c *CmdUnknownRet) API() gfxapi.API
+func (c *CmdUnknownRet) API() gfxapi.ID
 ```
 
 #### func (*CmdUnknownRet) AddRead
@@ -2300,7 +2300,7 @@ func (a *CmdUnknownRet) String() string
 
 ```go
 type CmdUnknownWritePtr struct {
-	binary.Generate `display:"cmd_unknown_write_ptr"`
+	binary.Generate
 
 	P Intᵖ
 }
@@ -2319,7 +2319,7 @@ func NewCmdUnknownWritePtr(P memory.Pointer) *CmdUnknownWritePtr
 #### func (*CmdUnknownWritePtr) API
 
 ```go
-func (c *CmdUnknownWritePtr) API() gfxapi.API
+func (c *CmdUnknownWritePtr) API() gfxapi.ID
 ```
 
 #### func (*CmdUnknownWritePtr) AddRead
@@ -2380,7 +2380,7 @@ func (a *CmdUnknownWritePtr) String() string
 
 ```go
 type CmdUnknownWriteSlice struct {
-	binary.Generate `display:"cmd_unknown_write_slice"`
+	binary.Generate
 
 	A Intᵖ
 }
@@ -2399,7 +2399,7 @@ func NewCmdUnknownWriteSlice(A memory.Pointer) *CmdUnknownWriteSlice
 #### func (*CmdUnknownWriteSlice) API
 
 ```go
-func (c *CmdUnknownWriteSlice) API() gfxapi.API
+func (c *CmdUnknownWriteSlice) API() gfxapi.ID
 ```
 
 #### func (*CmdUnknownWriteSlice) AddRead
@@ -2460,7 +2460,7 @@ func (a *CmdUnknownWriteSlice) String() string
 
 ```go
 type CmdVoid struct {
-	binary.Generate `display:"cmd_void"`
+	binary.Generate
 }
 ```
 
@@ -2477,7 +2477,7 @@ func NewCmdVoid() *CmdVoid
 #### func (*CmdVoid) API
 
 ```go
-func (c *CmdVoid) API() gfxapi.API
+func (c *CmdVoid) API() gfxapi.ID
 ```
 
 #### func (*CmdVoid) AddRead
@@ -2536,7 +2536,7 @@ func (a *CmdVoid) String() string
 
 ```go
 type CmdVoid3InArrays struct {
-	binary.Generate `display:"cmd_void_3_in_arrays"`
+	binary.Generate
 
 	A U8ᵖ
 	B U32ᵖ
@@ -2557,7 +2557,7 @@ func NewCmdVoid3InArrays(A memory.Pointer, B memory.Pointer, C memory.Pointer) *
 #### func (*CmdVoid3InArrays) API
 
 ```go
-func (c *CmdVoid3InArrays) API() gfxapi.API
+func (c *CmdVoid3InArrays) API() gfxapi.ID
 ```
 
 #### func (*CmdVoid3InArrays) AddRead
@@ -2616,7 +2616,7 @@ func (a *CmdVoid3InArrays) String() string
 
 ```go
 type CmdVoid3Remapped struct {
-	binary.Generate `display:"cmd_void_3_remapped"`
+	binary.Generate
 
 	A remapped
 	B remapped
@@ -2637,7 +2637,7 @@ func NewCmdVoid3Remapped(A remapped, B remapped, C remapped) *CmdVoid3Remapped
 #### func (*CmdVoid3Remapped) API
 
 ```go
-func (c *CmdVoid3Remapped) API() gfxapi.API
+func (c *CmdVoid3Remapped) API() gfxapi.ID
 ```
 
 #### func (*CmdVoid3Remapped) AddRead
@@ -2696,7 +2696,7 @@ func (a *CmdVoid3Remapped) String() string
 
 ```go
 type CmdVoid3Strings struct {
-	binary.Generate `display:"cmd_void_3_strings"`
+	binary.Generate
 
 	A string
 	B string
@@ -2717,7 +2717,7 @@ func NewCmdVoid3Strings(A string, B string, C string) *CmdVoid3Strings
 #### func (*CmdVoid3Strings) API
 
 ```go
-func (c *CmdVoid3Strings) API() gfxapi.API
+func (c *CmdVoid3Strings) API() gfxapi.ID
 ```
 
 #### func (*CmdVoid3Strings) AddRead
@@ -2776,7 +2776,7 @@ func (a *CmdVoid3Strings) String() string
 
 ```go
 type CmdVoidBool struct {
-	binary.Generate `display:"cmd_void_bool"`
+	binary.Generate
 
 	A bool
 }
@@ -2795,7 +2795,7 @@ func NewCmdVoidBool(A bool) *CmdVoidBool
 #### func (*CmdVoidBool) API
 
 ```go
-func (c *CmdVoidBool) API() gfxapi.API
+func (c *CmdVoidBool) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidBool) AddRead
@@ -2854,7 +2854,7 @@ func (a *CmdVoidBool) String() string
 
 ```go
 type CmdVoidF32 struct {
-	binary.Generate `display:"cmd_void_f32"`
+	binary.Generate
 
 	A float32
 }
@@ -2873,7 +2873,7 @@ func NewCmdVoidF32(A float32) *CmdVoidF32
 #### func (*CmdVoidF32) API
 
 ```go
-func (c *CmdVoidF32) API() gfxapi.API
+func (c *CmdVoidF32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidF32) AddRead
@@ -2932,7 +2932,7 @@ func (a *CmdVoidF32) String() string
 
 ```go
 type CmdVoidF64 struct {
-	binary.Generate `display:"cmd_void_f64"`
+	binary.Generate
 
 	A float64
 }
@@ -2951,7 +2951,7 @@ func NewCmdVoidF64(A float64) *CmdVoidF64
 #### func (*CmdVoidF64) API
 
 ```go
-func (c *CmdVoidF64) API() gfxapi.API
+func (c *CmdVoidF64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidF64) AddRead
@@ -3010,7 +3010,7 @@ func (a *CmdVoidF64) String() string
 
 ```go
 type CmdVoidInArrayOfPointers struct {
-	binary.Generate `display:"cmd_void_in_array_of_pointers"`
+	binary.Generate
 
 	A     Charᵖᵖ
 	Count int32
@@ -3030,7 +3030,7 @@ func NewCmdVoidInArrayOfPointers(A memory.Pointer, Count int32) *CmdVoidInArrayO
 #### func (*CmdVoidInArrayOfPointers) API
 
 ```go
-func (c *CmdVoidInArrayOfPointers) API() gfxapi.API
+func (c *CmdVoidInArrayOfPointers) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidInArrayOfPointers) AddRead
@@ -3091,7 +3091,7 @@ func (a *CmdVoidInArrayOfPointers) String() string
 
 ```go
 type CmdVoidInArrayOfRemapped struct {
-	binary.Generate `display:"cmd_void_in_array_of_remapped"`
+	binary.Generate
 
 	A Remappedᵖ
 }
@@ -3110,7 +3110,7 @@ func NewCmdVoidInArrayOfRemapped(A memory.Pointer) *CmdVoidInArrayOfRemapped
 #### func (*CmdVoidInArrayOfRemapped) API
 
 ```go
-func (c *CmdVoidInArrayOfRemapped) API() gfxapi.API
+func (c *CmdVoidInArrayOfRemapped) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidInArrayOfRemapped) AddRead
@@ -3171,7 +3171,7 @@ func (a *CmdVoidInArrayOfRemapped) String() string
 
 ```go
 type CmdVoidOutArrayOfRemapped struct {
-	binary.Generate `display:"cmd_void_out_array_of_remapped"`
+	binary.Generate
 
 	A Remappedᵖ
 }
@@ -3190,7 +3190,7 @@ func NewCmdVoidOutArrayOfRemapped(A memory.Pointer) *CmdVoidOutArrayOfRemapped
 #### func (*CmdVoidOutArrayOfRemapped) API
 
 ```go
-func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API
+func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidOutArrayOfRemapped) AddRead
@@ -3251,7 +3251,7 @@ func (a *CmdVoidOutArrayOfRemapped) String() string
 
 ```go
 type CmdVoidOutArrayOfUnknownRemapped struct {
-	binary.Generate `display:"cmd_void_out_array_of_unknown_remapped"`
+	binary.Generate
 
 	A Remappedᵖ
 }
@@ -3270,7 +3270,7 @@ func NewCmdVoidOutArrayOfUnknownRemapped(A memory.Pointer) *CmdVoidOutArrayOfUnk
 #### func (*CmdVoidOutArrayOfUnknownRemapped) API
 
 ```go
-func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.API
+func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidOutArrayOfUnknownRemapped) AddRead
@@ -3331,7 +3331,7 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) String() string
 
 ```go
 type CmdVoidReadBool struct {
-	binary.Generate `display:"cmd_void_read_bool"`
+	binary.Generate
 
 	A Boolᵖ
 }
@@ -3350,7 +3350,7 @@ func NewCmdVoidReadBool(A memory.Pointer) *CmdVoidReadBool
 #### func (*CmdVoidReadBool) API
 
 ```go
-func (c *CmdVoidReadBool) API() gfxapi.API
+func (c *CmdVoidReadBool) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadBool) AddRead
@@ -3409,7 +3409,7 @@ func (a *CmdVoidReadBool) String() string
 
 ```go
 type CmdVoidReadF32 struct {
-	binary.Generate `display:"cmd_void_read_f32"`
+	binary.Generate
 
 	A F32ᵖ
 }
@@ -3428,7 +3428,7 @@ func NewCmdVoidReadF32(A memory.Pointer) *CmdVoidReadF32
 #### func (*CmdVoidReadF32) API
 
 ```go
-func (c *CmdVoidReadF32) API() gfxapi.API
+func (c *CmdVoidReadF32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadF32) AddRead
@@ -3487,7 +3487,7 @@ func (a *CmdVoidReadF32) String() string
 
 ```go
 type CmdVoidReadF64 struct {
-	binary.Generate `display:"cmd_void_read_f64"`
+	binary.Generate
 
 	A F64ᵖ
 }
@@ -3506,7 +3506,7 @@ func NewCmdVoidReadF64(A memory.Pointer) *CmdVoidReadF64
 #### func (*CmdVoidReadF64) API
 
 ```go
-func (c *CmdVoidReadF64) API() gfxapi.API
+func (c *CmdVoidReadF64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadF64) AddRead
@@ -3565,7 +3565,7 @@ func (a *CmdVoidReadF64) String() string
 
 ```go
 type CmdVoidReadPtrs struct {
-	binary.Generate `display:"cmd_void_read_ptrs"`
+	binary.Generate
 
 	A F32ᵖ
 	B U16ᵖ
@@ -3586,7 +3586,7 @@ func NewCmdVoidReadPtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *C
 #### func (*CmdVoidReadPtrs) API
 
 ```go
-func (c *CmdVoidReadPtrs) API() gfxapi.API
+func (c *CmdVoidReadPtrs) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadPtrs) AddRead
@@ -3645,7 +3645,7 @@ func (a *CmdVoidReadPtrs) String() string
 
 ```go
 type CmdVoidReadS16 struct {
-	binary.Generate `display:"cmd_void_read_s16"`
+	binary.Generate
 
 	A S16ᵖ
 }
@@ -3664,7 +3664,7 @@ func NewCmdVoidReadS16(A memory.Pointer) *CmdVoidReadS16
 #### func (*CmdVoidReadS16) API
 
 ```go
-func (c *CmdVoidReadS16) API() gfxapi.API
+func (c *CmdVoidReadS16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadS16) AddRead
@@ -3723,7 +3723,7 @@ func (a *CmdVoidReadS16) String() string
 
 ```go
 type CmdVoidReadS32 struct {
-	binary.Generate `display:"cmd_void_read_s32"`
+	binary.Generate
 
 	A S32ᵖ
 }
@@ -3742,7 +3742,7 @@ func NewCmdVoidReadS32(A memory.Pointer) *CmdVoidReadS32
 #### func (*CmdVoidReadS32) API
 
 ```go
-func (c *CmdVoidReadS32) API() gfxapi.API
+func (c *CmdVoidReadS32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadS32) AddRead
@@ -3801,7 +3801,7 @@ func (a *CmdVoidReadS32) String() string
 
 ```go
 type CmdVoidReadS64 struct {
-	binary.Generate `display:"cmd_void_read_s64"`
+	binary.Generate
 
 	A S64ᵖ
 }
@@ -3820,7 +3820,7 @@ func NewCmdVoidReadS64(A memory.Pointer) *CmdVoidReadS64
 #### func (*CmdVoidReadS64) API
 
 ```go
-func (c *CmdVoidReadS64) API() gfxapi.API
+func (c *CmdVoidReadS64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadS64) AddRead
@@ -3879,7 +3879,7 @@ func (a *CmdVoidReadS64) String() string
 
 ```go
 type CmdVoidReadS8 struct {
-	binary.Generate `display:"cmd_void_read_s8"`
+	binary.Generate
 
 	A S8ᵖ
 }
@@ -3898,7 +3898,7 @@ func NewCmdVoidReadS8(A memory.Pointer) *CmdVoidReadS8
 #### func (*CmdVoidReadS8) API
 
 ```go
-func (c *CmdVoidReadS8) API() gfxapi.API
+func (c *CmdVoidReadS8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadS8) AddRead
@@ -3957,7 +3957,7 @@ func (a *CmdVoidReadS8) String() string
 
 ```go
 type CmdVoidReadU16 struct {
-	binary.Generate `display:"cmd_void_read_u16"`
+	binary.Generate
 
 	A U16ᵖ
 }
@@ -3976,7 +3976,7 @@ func NewCmdVoidReadU16(A memory.Pointer) *CmdVoidReadU16
 #### func (*CmdVoidReadU16) API
 
 ```go
-func (c *CmdVoidReadU16) API() gfxapi.API
+func (c *CmdVoidReadU16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadU16) AddRead
@@ -4035,7 +4035,7 @@ func (a *CmdVoidReadU16) String() string
 
 ```go
 type CmdVoidReadU32 struct {
-	binary.Generate `display:"cmd_void_read_u32"`
+	binary.Generate
 
 	A U32ᵖ
 }
@@ -4054,7 +4054,7 @@ func NewCmdVoidReadU32(A memory.Pointer) *CmdVoidReadU32
 #### func (*CmdVoidReadU32) API
 
 ```go
-func (c *CmdVoidReadU32) API() gfxapi.API
+func (c *CmdVoidReadU32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadU32) AddRead
@@ -4113,7 +4113,7 @@ func (a *CmdVoidReadU32) String() string
 
 ```go
 type CmdVoidReadU64 struct {
-	binary.Generate `display:"cmd_void_read_u64"`
+	binary.Generate
 
 	A U64ᵖ
 }
@@ -4132,7 +4132,7 @@ func NewCmdVoidReadU64(A memory.Pointer) *CmdVoidReadU64
 #### func (*CmdVoidReadU64) API
 
 ```go
-func (c *CmdVoidReadU64) API() gfxapi.API
+func (c *CmdVoidReadU64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadU64) AddRead
@@ -4191,7 +4191,7 @@ func (a *CmdVoidReadU64) String() string
 
 ```go
 type CmdVoidReadU8 struct {
-	binary.Generate `display:"cmd_void_read_u8"`
+	binary.Generate
 
 	A U8ᵖ
 }
@@ -4210,7 +4210,7 @@ func NewCmdVoidReadU8(A memory.Pointer) *CmdVoidReadU8
 #### func (*CmdVoidReadU8) API
 
 ```go
-func (c *CmdVoidReadU8) API() gfxapi.API
+func (c *CmdVoidReadU8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidReadU8) AddRead
@@ -4269,7 +4269,7 @@ func (a *CmdVoidReadU8) String() string
 
 ```go
 type CmdVoidS16 struct {
-	binary.Generate `display:"cmd_void_s16"`
+	binary.Generate
 
 	A int16
 }
@@ -4288,7 +4288,7 @@ func NewCmdVoidS16(A int16) *CmdVoidS16
 #### func (*CmdVoidS16) API
 
 ```go
-func (c *CmdVoidS16) API() gfxapi.API
+func (c *CmdVoidS16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidS16) AddRead
@@ -4347,7 +4347,7 @@ func (a *CmdVoidS16) String() string
 
 ```go
 type CmdVoidS32 struct {
-	binary.Generate `display:"cmd_void_s32"`
+	binary.Generate
 
 	A int32
 }
@@ -4366,7 +4366,7 @@ func NewCmdVoidS32(A int32) *CmdVoidS32
 #### func (*CmdVoidS32) API
 
 ```go
-func (c *CmdVoidS32) API() gfxapi.API
+func (c *CmdVoidS32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidS32) AddRead
@@ -4425,7 +4425,7 @@ func (a *CmdVoidS32) String() string
 
 ```go
 type CmdVoidS64 struct {
-	binary.Generate `display:"cmd_void_s64"`
+	binary.Generate
 
 	A int64
 }
@@ -4444,7 +4444,7 @@ func NewCmdVoidS64(A int64) *CmdVoidS64
 #### func (*CmdVoidS64) API
 
 ```go
-func (c *CmdVoidS64) API() gfxapi.API
+func (c *CmdVoidS64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidS64) AddRead
@@ -4503,7 +4503,7 @@ func (a *CmdVoidS64) String() string
 
 ```go
 type CmdVoidS8 struct {
-	binary.Generate `display:"cmd_void_s8"`
+	binary.Generate
 
 	A int8
 }
@@ -4522,7 +4522,7 @@ func NewCmdVoidS8(A int8) *CmdVoidS8
 #### func (*CmdVoidS8) API
 
 ```go
-func (c *CmdVoidS8) API() gfxapi.API
+func (c *CmdVoidS8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidS8) AddRead
@@ -4581,7 +4581,7 @@ func (a *CmdVoidS8) String() string
 
 ```go
 type CmdVoidString struct {
-	binary.Generate `display:"cmd_void_string"`
+	binary.Generate
 
 	A string
 }
@@ -4600,7 +4600,7 @@ func NewCmdVoidString(A string) *CmdVoidString
 #### func (*CmdVoidString) API
 
 ```go
-func (c *CmdVoidString) API() gfxapi.API
+func (c *CmdVoidString) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidString) AddRead
@@ -4659,7 +4659,7 @@ func (a *CmdVoidString) String() string
 
 ```go
 type CmdVoidU16 struct {
-	binary.Generate `display:"cmd_void_u16"`
+	binary.Generate
 
 	A uint16
 }
@@ -4678,7 +4678,7 @@ func NewCmdVoidU16(A uint16) *CmdVoidU16
 #### func (*CmdVoidU16) API
 
 ```go
-func (c *CmdVoidU16) API() gfxapi.API
+func (c *CmdVoidU16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidU16) AddRead
@@ -4737,7 +4737,7 @@ func (a *CmdVoidU16) String() string
 
 ```go
 type CmdVoidU32 struct {
-	binary.Generate `display:"cmd_void_u32"`
+	binary.Generate
 
 	A uint32
 }
@@ -4756,7 +4756,7 @@ func NewCmdVoidU32(A uint32) *CmdVoidU32
 #### func (*CmdVoidU32) API
 
 ```go
-func (c *CmdVoidU32) API() gfxapi.API
+func (c *CmdVoidU32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidU32) AddRead
@@ -4815,7 +4815,7 @@ func (a *CmdVoidU32) String() string
 
 ```go
 type CmdVoidU64 struct {
-	binary.Generate `display:"cmd_void_u64"`
+	binary.Generate
 
 	A uint64
 }
@@ -4834,7 +4834,7 @@ func NewCmdVoidU64(A uint64) *CmdVoidU64
 #### func (*CmdVoidU64) API
 
 ```go
-func (c *CmdVoidU64) API() gfxapi.API
+func (c *CmdVoidU64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidU64) AddRead
@@ -4893,7 +4893,7 @@ func (a *CmdVoidU64) String() string
 
 ```go
 type CmdVoidU8 struct {
-	binary.Generate `display:"cmd_void_u8"`
+	binary.Generate
 
 	A uint8
 }
@@ -4912,7 +4912,7 @@ func NewCmdVoidU8(A uint8) *CmdVoidU8
 #### func (*CmdVoidU8) API
 
 ```go
-func (c *CmdVoidU8) API() gfxapi.API
+func (c *CmdVoidU8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidU8) AddRead
@@ -4971,7 +4971,7 @@ func (a *CmdVoidU8) String() string
 
 ```go
 type CmdVoidWriteBool struct {
-	binary.Generate `display:"cmd_void_write_bool"`
+	binary.Generate
 
 	A Boolᵖ
 }
@@ -4990,7 +4990,7 @@ func NewCmdVoidWriteBool(A memory.Pointer) *CmdVoidWriteBool
 #### func (*CmdVoidWriteBool) API
 
 ```go
-func (c *CmdVoidWriteBool) API() gfxapi.API
+func (c *CmdVoidWriteBool) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteBool) AddRead
@@ -5049,7 +5049,7 @@ func (a *CmdVoidWriteBool) String() string
 
 ```go
 type CmdVoidWriteF32 struct {
-	binary.Generate `display:"cmd_void_write_f32"`
+	binary.Generate
 
 	A F32ᵖ
 }
@@ -5068,7 +5068,7 @@ func NewCmdVoidWriteF32(A memory.Pointer) *CmdVoidWriteF32
 #### func (*CmdVoidWriteF32) API
 
 ```go
-func (c *CmdVoidWriteF32) API() gfxapi.API
+func (c *CmdVoidWriteF32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteF32) AddRead
@@ -5127,7 +5127,7 @@ func (a *CmdVoidWriteF32) String() string
 
 ```go
 type CmdVoidWriteF64 struct {
-	binary.Generate `display:"cmd_void_write_f64"`
+	binary.Generate
 
 	A F64ᵖ
 }
@@ -5146,7 +5146,7 @@ func NewCmdVoidWriteF64(A memory.Pointer) *CmdVoidWriteF64
 #### func (*CmdVoidWriteF64) API
 
 ```go
-func (c *CmdVoidWriteF64) API() gfxapi.API
+func (c *CmdVoidWriteF64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteF64) AddRead
@@ -5205,7 +5205,7 @@ func (a *CmdVoidWriteF64) String() string
 
 ```go
 type CmdVoidWritePtrs struct {
-	binary.Generate `display:"cmd_void_write_ptrs"`
+	binary.Generate
 
 	A F32ᵖ
 	B U16ᵖ
@@ -5226,7 +5226,7 @@ func NewCmdVoidWritePtrs(A memory.Pointer, B memory.Pointer, C memory.Pointer) *
 #### func (*CmdVoidWritePtrs) API
 
 ```go
-func (c *CmdVoidWritePtrs) API() gfxapi.API
+func (c *CmdVoidWritePtrs) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWritePtrs) AddRead
@@ -5285,7 +5285,7 @@ func (a *CmdVoidWritePtrs) String() string
 
 ```go
 type CmdVoidWriteS16 struct {
-	binary.Generate `display:"cmd_void_write_s16"`
+	binary.Generate
 
 	A S16ᵖ
 }
@@ -5304,7 +5304,7 @@ func NewCmdVoidWriteS16(A memory.Pointer) *CmdVoidWriteS16
 #### func (*CmdVoidWriteS16) API
 
 ```go
-func (c *CmdVoidWriteS16) API() gfxapi.API
+func (c *CmdVoidWriteS16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteS16) AddRead
@@ -5363,7 +5363,7 @@ func (a *CmdVoidWriteS16) String() string
 
 ```go
 type CmdVoidWriteS32 struct {
-	binary.Generate `display:"cmd_void_write_s32"`
+	binary.Generate
 
 	A S32ᵖ
 }
@@ -5382,7 +5382,7 @@ func NewCmdVoidWriteS32(A memory.Pointer) *CmdVoidWriteS32
 #### func (*CmdVoidWriteS32) API
 
 ```go
-func (c *CmdVoidWriteS32) API() gfxapi.API
+func (c *CmdVoidWriteS32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteS32) AddRead
@@ -5441,7 +5441,7 @@ func (a *CmdVoidWriteS32) String() string
 
 ```go
 type CmdVoidWriteS64 struct {
-	binary.Generate `display:"cmd_void_write_s64"`
+	binary.Generate
 
 	A S64ᵖ
 }
@@ -5460,7 +5460,7 @@ func NewCmdVoidWriteS64(A memory.Pointer) *CmdVoidWriteS64
 #### func (*CmdVoidWriteS64) API
 
 ```go
-func (c *CmdVoidWriteS64) API() gfxapi.API
+func (c *CmdVoidWriteS64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteS64) AddRead
@@ -5519,7 +5519,7 @@ func (a *CmdVoidWriteS64) String() string
 
 ```go
 type CmdVoidWriteS8 struct {
-	binary.Generate `display:"cmd_void_write_s8"`
+	binary.Generate
 
 	A S8ᵖ
 }
@@ -5538,7 +5538,7 @@ func NewCmdVoidWriteS8(A memory.Pointer) *CmdVoidWriteS8
 #### func (*CmdVoidWriteS8) API
 
 ```go
-func (c *CmdVoidWriteS8) API() gfxapi.API
+func (c *CmdVoidWriteS8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteS8) AddRead
@@ -5597,7 +5597,7 @@ func (a *CmdVoidWriteS8) String() string
 
 ```go
 type CmdVoidWriteU16 struct {
-	binary.Generate `display:"cmd_void_write_u16"`
+	binary.Generate
 
 	A U16ᵖ
 }
@@ -5616,7 +5616,7 @@ func NewCmdVoidWriteU16(A memory.Pointer) *CmdVoidWriteU16
 #### func (*CmdVoidWriteU16) API
 
 ```go
-func (c *CmdVoidWriteU16) API() gfxapi.API
+func (c *CmdVoidWriteU16) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteU16) AddRead
@@ -5675,7 +5675,7 @@ func (a *CmdVoidWriteU16) String() string
 
 ```go
 type CmdVoidWriteU32 struct {
-	binary.Generate `display:"cmd_void_write_u32"`
+	binary.Generate
 
 	A U32ᵖ
 }
@@ -5694,7 +5694,7 @@ func NewCmdVoidWriteU32(A memory.Pointer) *CmdVoidWriteU32
 #### func (*CmdVoidWriteU32) API
 
 ```go
-func (c *CmdVoidWriteU32) API() gfxapi.API
+func (c *CmdVoidWriteU32) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteU32) AddRead
@@ -5753,7 +5753,7 @@ func (a *CmdVoidWriteU32) String() string
 
 ```go
 type CmdVoidWriteU64 struct {
-	binary.Generate `display:"cmd_void_write_u64"`
+	binary.Generate
 
 	A U64ᵖ
 }
@@ -5772,7 +5772,7 @@ func NewCmdVoidWriteU64(A memory.Pointer) *CmdVoidWriteU64
 #### func (*CmdVoidWriteU64) API
 
 ```go
-func (c *CmdVoidWriteU64) API() gfxapi.API
+func (c *CmdVoidWriteU64) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteU64) AddRead
@@ -5831,7 +5831,7 @@ func (a *CmdVoidWriteU64) String() string
 
 ```go
 type CmdVoidWriteU8 struct {
-	binary.Generate `display:"cmd_void_write_u8"`
+	binary.Generate
 
 	A U8ᵖ
 }
@@ -5850,7 +5850,7 @@ func NewCmdVoidWriteU8(A memory.Pointer) *CmdVoidWriteU8
 #### func (*CmdVoidWriteU8) API
 
 ```go
-func (c *CmdVoidWriteU8) API() gfxapi.API
+func (c *CmdVoidWriteU8) API() gfxapi.ID
 ```
 
 #### func (*CmdVoidWriteU8) AddRead

@@ -83,7 +83,6 @@ type Class struct {
 	TypeID   binary.ID       // The unique type identifier for the Object.
 	Package  string          // The package that declared the struct.
 	Name     string          // The simple name of the Object.
-	Display  string          // The display name of the Object.
 	Fields   FieldList       // Descriptions of the fields of the Object.
 	Metadata []binary.Object // The metadata for the class.
 }
@@ -148,12 +147,88 @@ func (c *Class) New() binary.Object
 func (c *Class) Skip(d binary.Decoder) error
 ```
 
+#### type Constant
+
+```go
+type Constant struct {
+	binary.Generate
+	Name  string
+	Value interface{}
+}
+```
+
+
+#### func (*Constant) Class
+
+```go
+func (*Constant) Class() binary.Class
+```
+
+#### type ConstantSet
+
+```go
+type ConstantSet struct {
+	binary.Generate
+	Type    Type       // The type of the constant.
+	Entries []Constant // The constant values
+}
+```
+
+
+#### func (*ConstantSet) Class
+
+```go
+func (*ConstantSet) Class() binary.Class
+```
+
+#### func (*ConstantSet) Len
+
+```go
+func (s *ConstantSet) Len() int
+```
+
+#### func (*ConstantSet) Less
+
+```go
+func (s *ConstantSet) Less(i, j int) bool
+```
+
+#### func (*ConstantSet) Swap
+
+```go
+func (s *ConstantSet) Swap(i, j int)
+```
+
 #### type Constants
 
 ```go
-type Constants []interface{}
+type Constants []ConstantSet
 ```
 
+
+#### func (*Constants) Add
+
+```go
+func (c *Constants) Add(t Type, v Constant)
+```
+
+#### func (Constants) Len
+
+```go
+func (c Constants) Len() int
+```
+
+#### func (Constants) Less
+
+```go
+func (c Constants) Less(i, j int) bool
+```
+
+#### func (Constants) Swap
+
+```go
+func (c Constants) Swap(i, j int)
+```
 
 #### type Field
 
@@ -194,238 +269,6 @@ func (l FieldList) Find(name string) int
 ```
 Find searches the field list of the field with the specified name, returning the
 index of the field if found, otherwise -1.
-
-#### type Int16Constant
-
-```go
-type Int16Constant struct {
-	binary.Generate
-	Name  string
-	Value int16
-}
-```
-
-
-#### func (Int16Constant) Add
-
-```go
-func (v Int16Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Int16Constant) Class
-
-```go
-func (*Int16Constant) Class() binary.Class
-```
-
-#### type Int16Constants
-
-```go
-type Int16Constants struct {
-	binary.Generate
-	Type   Type            // The type of the constant.
-	Values []Int16Constant // The constant values
-}
-```
-
-
-#### func (*Int16Constants) Class
-
-```go
-func (*Int16Constants) Class() binary.Class
-```
-
-#### func (Int16Constants) Len
-
-```go
-func (s Int16Constants) Len() int
-```
-
-#### func (Int16Constants) Less
-
-```go
-func (s Int16Constants) Less(i, j int) bool
-```
-
-#### func (Int16Constants) Swap
-
-```go
-func (s Int16Constants) Swap(i, j int)
-```
-
-#### type Int32Constant
-
-```go
-type Int32Constant struct {
-	binary.Generate
-	Name  string
-	Value int32
-}
-```
-
-
-#### func (Int32Constant) Add
-
-```go
-func (v Int32Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Int32Constant) Class
-
-```go
-func (*Int32Constant) Class() binary.Class
-```
-
-#### type Int32Constants
-
-```go
-type Int32Constants struct {
-	binary.Generate
-	Type   Type            // The type of the constant.
-	Values []Int32Constant // The constant values
-}
-```
-
-
-#### func (*Int32Constants) Class
-
-```go
-func (*Int32Constants) Class() binary.Class
-```
-
-#### func (Int32Constants) Len
-
-```go
-func (s Int32Constants) Len() int
-```
-
-#### func (Int32Constants) Less
-
-```go
-func (s Int32Constants) Less(i, j int) bool
-```
-
-#### func (Int32Constants) Swap
-
-```go
-func (s Int32Constants) Swap(i, j int)
-```
-
-#### type Int64Constant
-
-```go
-type Int64Constant struct {
-	binary.Generate
-	Name  string
-	Value int64
-}
-```
-
-
-#### func (Int64Constant) Add
-
-```go
-func (v Int64Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Int64Constant) Class
-
-```go
-func (*Int64Constant) Class() binary.Class
-```
-
-#### type Int64Constants
-
-```go
-type Int64Constants struct {
-	binary.Generate
-	Type   Type            // The type of the constant.
-	Values []Int64Constant // The constant values
-}
-```
-
-
-#### func (*Int64Constants) Class
-
-```go
-func (*Int64Constants) Class() binary.Class
-```
-
-#### func (Int64Constants) Len
-
-```go
-func (s Int64Constants) Len() int
-```
-
-#### func (Int64Constants) Less
-
-```go
-func (s Int64Constants) Less(i, j int) bool
-```
-
-#### func (Int64Constants) Swap
-
-```go
-func (s Int64Constants) Swap(i, j int)
-```
-
-#### type Int8Constant
-
-```go
-type Int8Constant struct {
-	binary.Generate
-	Name  string
-	Value int8
-}
-```
-
-
-#### func (Int8Constant) Add
-
-```go
-func (v Int8Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Int8Constant) Class
-
-```go
-func (*Int8Constant) Class() binary.Class
-```
-
-#### type Int8Constants
-
-```go
-type Int8Constants struct {
-	binary.Generate
-	Type   Type           // The type of the constant.
-	Values []Int8Constant // The constant values
-}
-```
-
-
-#### func (*Int8Constants) Class
-
-```go
-func (*Int8Constants) Class() binary.Class
-```
-
-#### func (Int8Constants) Len
-
-```go
-func (s Int8Constants) Len() int
-```
-
-#### func (Int8Constants) Less
-
-```go
-func (s Int8Constants) Less(i, j int) bool
-```
-
-#### func (Int8Constants) Swap
-
-```go
-func (s Int8Constants) Swap(i, j int)
-```
 
 #### type Interface
 
@@ -907,235 +750,3 @@ type Type interface {
 ```
 
 Type represents the common iterface to all type objects in the schema.
-
-#### type Uint16Constant
-
-```go
-type Uint16Constant struct {
-	binary.Generate
-	Name  string
-	Value uint16
-}
-```
-
-
-#### func (Uint16Constant) Add
-
-```go
-func (v Uint16Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Uint16Constant) Class
-
-```go
-func (*Uint16Constant) Class() binary.Class
-```
-
-#### type Uint16Constants
-
-```go
-type Uint16Constants struct {
-	binary.Generate
-	Type   Type             // The type of the constant.
-	Values []Uint16Constant // The constant values
-}
-```
-
-
-#### func (*Uint16Constants) Class
-
-```go
-func (*Uint16Constants) Class() binary.Class
-```
-
-#### func (Uint16Constants) Len
-
-```go
-func (s Uint16Constants) Len() int
-```
-
-#### func (Uint16Constants) Less
-
-```go
-func (s Uint16Constants) Less(i, j int) bool
-```
-
-#### func (Uint16Constants) Swap
-
-```go
-func (s Uint16Constants) Swap(i, j int)
-```
-
-#### type Uint32Constant
-
-```go
-type Uint32Constant struct {
-	binary.Generate
-	Name  string
-	Value uint32
-}
-```
-
-
-#### func (Uint32Constant) Add
-
-```go
-func (v Uint32Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Uint32Constant) Class
-
-```go
-func (*Uint32Constant) Class() binary.Class
-```
-
-#### type Uint32Constants
-
-```go
-type Uint32Constants struct {
-	binary.Generate
-	Type   Type             // The type of the constant.
-	Values []Uint32Constant // The constant values
-}
-```
-
-
-#### func (*Uint32Constants) Class
-
-```go
-func (*Uint32Constants) Class() binary.Class
-```
-
-#### func (Uint32Constants) Len
-
-```go
-func (s Uint32Constants) Len() int
-```
-
-#### func (Uint32Constants) Less
-
-```go
-func (s Uint32Constants) Less(i, j int) bool
-```
-
-#### func (Uint32Constants) Swap
-
-```go
-func (s Uint32Constants) Swap(i, j int)
-```
-
-#### type Uint64Constant
-
-```go
-type Uint64Constant struct {
-	binary.Generate
-	Name  string
-	Value uint64
-}
-```
-
-
-#### func (Uint64Constant) Add
-
-```go
-func (v Uint64Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Uint64Constant) Class
-
-```go
-func (*Uint64Constant) Class() binary.Class
-```
-
-#### type Uint64Constants
-
-```go
-type Uint64Constants struct {
-	binary.Generate
-	Type   Type             // The type of the constant.
-	Values []Uint64Constant // The constant values
-}
-```
-
-
-#### func (*Uint64Constants) Class
-
-```go
-func (*Uint64Constants) Class() binary.Class
-```
-
-#### func (Uint64Constants) Len
-
-```go
-func (s Uint64Constants) Len() int
-```
-
-#### func (Uint64Constants) Less
-
-```go
-func (s Uint64Constants) Less(i, j int) bool
-```
-
-#### func (Uint64Constants) Swap
-
-```go
-func (s Uint64Constants) Swap(i, j int)
-```
-
-#### type Uint8Constant
-
-```go
-type Uint8Constant struct {
-	binary.Generate
-	Name  string
-	Value uint8
-}
-```
-
-
-#### func (Uint8Constant) Add
-
-```go
-func (v Uint8Constant) Add(c *Constants, t Type)
-```
-
-#### func (*Uint8Constant) Class
-
-```go
-func (*Uint8Constant) Class() binary.Class
-```
-
-#### type Uint8Constants
-
-```go
-type Uint8Constants struct {
-	binary.Generate
-	Type   Type            // The type of the constant.
-	Values []Uint8Constant // The constant values
-}
-```
-
-
-#### func (*Uint8Constants) Class
-
-```go
-func (*Uint8Constants) Class() binary.Class
-```
-
-#### func (Uint8Constants) Len
-
-```go
-func (s Uint8Constants) Len() int
-```
-
-#### func (Uint8Constants) Less
-
-```go
-func (s Uint8Constants) Less(i, j int) bool
-```
-
-#### func (Uint8Constants) Swap
-
-```go
-func (s Uint8Constants) Swap(i, j int)
-```
