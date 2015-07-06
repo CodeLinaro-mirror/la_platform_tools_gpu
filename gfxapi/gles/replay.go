@@ -114,7 +114,9 @@ func (a api) ReplayTransforms(
 		transforms.Add(earlyTerminator, skipDrawCalls)
 	}
 
-	transforms.Add(injector)
+	transforms.Add(
+		injector,
+		remapAttributes())
 
 	// Device-dependent transforms.
 	transforms.Add(
