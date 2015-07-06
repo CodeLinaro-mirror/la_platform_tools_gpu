@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-cmd u32                   Add(u32 a, u32 b)             { return ? }
-cmd string                EnumToString(Enum e)          { return ? }
-cmd Struct                GetStruct()                   { return ? }
-cmd void                  SetStruct(Struct s)           {}
-cmd ResourceId            GetResource()                 { return ? }
-cmd void                  UseResource(ResourceId r)     {}
-cmd Resource              ResolveResource(ResourceId r) { return ? }
-cmd ListNode*             GetSingleListNode()           { return ? }
-cmd ListNode*             GetListNodeChain()            { return ? }
-cmd ListNode*[]           GetListNodeChainArray()       { return ? }
+extern u32          Add(u32 a, u32 b)
+extern string       EnumToString(Enum e)
+extern Struct       GetStruct()
+extern void         SetStruct(Struct s)
+extern ResourceId   GetResource()
+extern void         UseResource(ResourceId r)
+extern Resource     ResolveResource(ResourceId r)
+extern ListNode*    GetSingleListNode()
+extern ListNode*    GetListNodeChain()
+extern ListNode*[]  GetListNodeChainArray()
 
 @handle type string ResourceId
 class Resource {
