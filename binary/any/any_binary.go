@@ -15,36 +15,66 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Any)(nil).Class())
+	Namespace.Add((*boolSlice)(nil).Class())
 	Namespace.Add((*bool_)(nil).Class())
+	Namespace.Add((*float32Slice)(nil).Class())
 	Namespace.Add((*float32_)(nil).Class())
+	Namespace.Add((*float64Slice)(nil).Class())
 	Namespace.Add((*float64_)(nil).Class())
+	Namespace.Add((*int16Slice)(nil).Class())
 	Namespace.Add((*int16_)(nil).Class())
+	Namespace.Add((*int32Slice)(nil).Class())
 	Namespace.Add((*int32_)(nil).Class())
+	Namespace.Add((*int64Slice)(nil).Class())
 	Namespace.Add((*int64_)(nil).Class())
+	Namespace.Add((*int8Slice)(nil).Class())
 	Namespace.Add((*int8_)(nil).Class())
+	Namespace.Add((*intSlice)(nil).Class())
+	Namespace.Add((*int_)(nil).Class())
+	Namespace.Add((*objectSlice)(nil).Class())
 	Namespace.Add((*object_)(nil).Class())
+	Namespace.Add((*stringSlice)(nil).Class())
 	Namespace.Add((*string_)(nil).Class())
+	Namespace.Add((*uint16Slice)(nil).Class())
 	Namespace.Add((*uint16_)(nil).Class())
+	Namespace.Add((*uint32Slice)(nil).Class())
 	Namespace.Add((*uint32_)(nil).Class())
+	Namespace.Add((*uint64Slice)(nil).Class())
 	Namespace.Add((*uint64_)(nil).Class())
+	Namespace.Add((*uint8Slice)(nil).Class())
 	Namespace.Add((*uint8_)(nil).Class())
 }
 
 var (
-	binaryIDAny      = binary.ID{0xcc, 0x59, 0x22, 0xb9, 0x17, 0x6d, 0x7e, 0xc2, 0xd1, 0x0b, 0xe9, 0x39, 0x1c, 0x5f, 0x03, 0x38, 0xbc, 0x25, 0xc3, 0xda}
-	binaryIDbool_    = binary.ID{0xd9, 0xf9, 0x39, 0xae, 0x53, 0xf7, 0x4a, 0x48, 0x9a, 0x2d, 0x0c, 0x3a, 0x77, 0x87, 0xdd, 0x8b, 0x27, 0xc5, 0xe9, 0xf3}
-	binaryIDfloat32_ = binary.ID{0x92, 0xd0, 0x79, 0x88, 0xc4, 0x08, 0x80, 0x91, 0x1b, 0xa1, 0x50, 0xc7, 0x02, 0x31, 0x02, 0x5b, 0xa5, 0x2a, 0xa5, 0x1d}
-	binaryIDfloat64_ = binary.ID{0x97, 0x1d, 0x82, 0x7a, 0xcb, 0xb1, 0xe4, 0x4f, 0xde, 0x82, 0x1e, 0xb9, 0x64, 0xb6, 0x93, 0x68, 0x7b, 0xcc, 0x7e, 0x88}
-	binaryIDint16_   = binary.ID{0x22, 0x32, 0x62, 0x5e, 0x17, 0x32, 0xe5, 0xd3, 0x84, 0x62, 0x8a, 0xed, 0xc2, 0xbd, 0xec, 0x0e, 0xe5, 0x36, 0xc3, 0xc2}
-	binaryIDint32_   = binary.ID{0xa0, 0xb2, 0x50, 0x1d, 0x1b, 0xe2, 0x7d, 0x2d, 0x25, 0x58, 0x72, 0x1e, 0x47, 0xf3, 0xad, 0x1f, 0x89, 0xbb, 0x7f, 0xc2}
-	binaryIDint64_   = binary.ID{0x4e, 0xc4, 0x4b, 0xab, 0x8a, 0x10, 0xd9, 0x07, 0xbc, 0x1e, 0x49, 0x71, 0x2e, 0xfb, 0x2c, 0x66, 0xd7, 0x26, 0x5b, 0x6a}
-	binaryIDint8_    = binary.ID{0x27, 0xc1, 0xbb, 0xc5, 0x79, 0xf5, 0xb1, 0x53, 0x1c, 0xe1, 0x69, 0x16, 0x5b, 0xf4, 0xa7, 0x6f, 0x08, 0x31, 0x9a, 0x92}
-	binaryIDobject_  = binary.ID{0x78, 0x88, 0x65, 0x5c, 0x00, 0x65, 0xb2, 0x78, 0x39, 0x44, 0x2a, 0x7b, 0x34, 0x1a, 0x9b, 0x66, 0xb2, 0x63, 0x21, 0x04}
-	binaryIDstring_  = binary.ID{0x90, 0xd0, 0x28, 0x32, 0xe7, 0x72, 0x3d, 0x10, 0x91, 0x28, 0x8a, 0xda, 0x22, 0x37, 0xe0, 0xf5, 0xff, 0x70, 0xfb, 0x8b}
-	binaryIDuint16_  = binary.ID{0x27, 0x82, 0x82, 0xfc, 0x9b, 0x85, 0xb1, 0x4c, 0x25, 0x76, 0x81, 0x7b, 0x73, 0xf9, 0x3a, 0x49, 0x5d, 0xa6, 0x4f, 0x6a}
-	binaryIDuint32_  = binary.ID{0x6c, 0x71, 0x27, 0x1c, 0x6a, 0xdf, 0xf2, 0x89, 0x67, 0x7f, 0xea, 0xbe, 0x14, 0xa4, 0xbf, 0xed, 0x45, 0x12, 0x8c, 0x35}
-	binaryIDuint64_  = binary.ID{0x53, 0x85, 0x81, 0xf6, 0x16, 0x96, 0x17, 0x79, 0x5c, 0xc4, 0x08, 0x19, 0x42, 0xeb, 0x81, 0xae, 0x8b, 0xf8, 0x9e, 0xe1}
-	binaryIDuint8_   = binary.ID{0xdb, 0x01, 0x67, 0x61, 0x0d, 0xd1, 0x1e, 0xef, 0x2f, 0xca, 0x58, 0x3f, 0xc8, 0xdb, 0x2e, 0x17, 0x79, 0x86, 0x98, 0x5f}
+	binaryIDAny          = binary.ID{0xcc, 0x59, 0x22, 0xb9, 0x17, 0x6d, 0x7e, 0xc2, 0xd1, 0x0b, 0xe9, 0x39, 0x1c, 0x5f, 0x03, 0x38, 0xbc, 0x25, 0xc3, 0xda}
+	binaryIDboolSlice    = binary.ID{0xe6, 0xff, 0xf7, 0x4d, 0xb6, 0x6a, 0x7b, 0x06, 0x08, 0xff, 0x1f, 0xf7, 0xed, 0xbf, 0x5d, 0x4e, 0x44, 0x56, 0xbd, 0xf5}
+	binaryIDbool_        = binary.ID{0xd9, 0xf9, 0x39, 0xae, 0x53, 0xf7, 0x4a, 0x48, 0x9a, 0x2d, 0x0c, 0x3a, 0x77, 0x87, 0xdd, 0x8b, 0x27, 0xc5, 0xe9, 0xf3}
+	binaryIDfloat32Slice = binary.ID{0xd4, 0x07, 0x88, 0x92, 0xed, 0x57, 0x6c, 0x21, 0x2f, 0xed, 0xb7, 0x7c, 0x76, 0x28, 0x4b, 0xdc, 0x8e, 0xb6, 0x1d, 0x59}
+	binaryIDfloat32_     = binary.ID{0x92, 0xd0, 0x79, 0x88, 0xc4, 0x08, 0x80, 0x91, 0x1b, 0xa1, 0x50, 0xc7, 0x02, 0x31, 0x02, 0x5b, 0xa5, 0x2a, 0xa5, 0x1d}
+	binaryIDfloat64Slice = binary.ID{0x4e, 0xb5, 0x15, 0xdd, 0x55, 0xb8, 0xe5, 0x84, 0x1c, 0x35, 0x01, 0xdc, 0xde, 0xde, 0xda, 0xac, 0xa6, 0xb8, 0xa5, 0xbb}
+	binaryIDfloat64_     = binary.ID{0x97, 0x1d, 0x82, 0x7a, 0xcb, 0xb1, 0xe4, 0x4f, 0xde, 0x82, 0x1e, 0xb9, 0x64, 0xb6, 0x93, 0x68, 0x7b, 0xcc, 0x7e, 0x88}
+	binaryIDint16Slice   = binary.ID{0x2e, 0x01, 0xc1, 0xc5, 0x4a, 0x2f, 0x37, 0xa6, 0x3e, 0xcc, 0xce, 0x10, 0xf9, 0xc6, 0x54, 0xe5, 0x32, 0x92, 0x6f, 0xc1}
+	binaryIDint16_       = binary.ID{0x22, 0x32, 0x62, 0x5e, 0x17, 0x32, 0xe5, 0xd3, 0x84, 0x62, 0x8a, 0xed, 0xc2, 0xbd, 0xec, 0x0e, 0xe5, 0x36, 0xc3, 0xc2}
+	binaryIDint32Slice   = binary.ID{0x4a, 0x0d, 0xbd, 0xba, 0x29, 0xd9, 0x11, 0xb0, 0xf5, 0x6c, 0x9f, 0xe3, 0xd9, 0x64, 0x67, 0xdf, 0x5b, 0x2b, 0x2e, 0x79}
+	binaryIDint32_       = binary.ID{0xa0, 0xb2, 0x50, 0x1d, 0x1b, 0xe2, 0x7d, 0x2d, 0x25, 0x58, 0x72, 0x1e, 0x47, 0xf3, 0xad, 0x1f, 0x89, 0xbb, 0x7f, 0xc2}
+	binaryIDint64Slice   = binary.ID{0x56, 0x9b, 0xcd, 0x4a, 0x64, 0xb3, 0x7f, 0xca, 0xeb, 0x8e, 0x40, 0x80, 0x79, 0x27, 0xe1, 0x98, 0x63, 0xc1, 0x2e, 0xd2}
+	binaryIDint64_       = binary.ID{0x4e, 0xc4, 0x4b, 0xab, 0x8a, 0x10, 0xd9, 0x07, 0xbc, 0x1e, 0x49, 0x71, 0x2e, 0xfb, 0x2c, 0x66, 0xd7, 0x26, 0x5b, 0x6a}
+	binaryIDint8Slice    = binary.ID{0x68, 0x94, 0xad, 0x21, 0xdb, 0x99, 0x60, 0x2c, 0x1f, 0x26, 0xd4, 0x9b, 0x60, 0xaf, 0x62, 0xef, 0x16, 0xd9, 0xbc, 0x78}
+	binaryIDint8_        = binary.ID{0x27, 0xc1, 0xbb, 0xc5, 0x79, 0xf5, 0xb1, 0x53, 0x1c, 0xe1, 0x69, 0x16, 0x5b, 0xf4, 0xa7, 0x6f, 0x08, 0x31, 0x9a, 0x92}
+	binaryIDintSlice     = binary.ID{0x71, 0x09, 0xc7, 0xb8, 0x57, 0xba, 0x0f, 0xde, 0x6e, 0xbf, 0xe6, 0xb1, 0xdc, 0xd3, 0xb4, 0xb1, 0x09, 0x3a, 0x75, 0x10}
+	binaryIDint_         = binary.ID{0x1a, 0x80, 0xc2, 0x67, 0x91, 0xb4, 0xf3, 0xbf, 0xc2, 0xd3, 0x45, 0xae, 0xa6, 0x56, 0x06, 0x9e, 0xb7, 0xc2, 0xb8, 0x66}
+	binaryIDobjectSlice  = binary.ID{0x8c, 0xa4, 0x81, 0x27, 0x4e, 0x04, 0xde, 0x93, 0xf5, 0xb2, 0x31, 0x22, 0xe9, 0x8b, 0x5d, 0x01, 0x63, 0x83, 0xf4, 0x2f}
+	binaryIDobject_      = binary.ID{0x78, 0x88, 0x65, 0x5c, 0x00, 0x65, 0xb2, 0x78, 0x39, 0x44, 0x2a, 0x7b, 0x34, 0x1a, 0x9b, 0x66, 0xb2, 0x63, 0x21, 0x04}
+	binaryIDstringSlice  = binary.ID{0x29, 0x57, 0xe5, 0x9c, 0xec, 0x2e, 0xeb, 0x01, 0x25, 0xb3, 0x2b, 0x09, 0x55, 0x5d, 0x51, 0xa8, 0x51, 0x77, 0xeb, 0x35}
+	binaryIDstring_      = binary.ID{0x90, 0xd0, 0x28, 0x32, 0xe7, 0x72, 0x3d, 0x10, 0x91, 0x28, 0x8a, 0xda, 0x22, 0x37, 0xe0, 0xf5, 0xff, 0x70, 0xfb, 0x8b}
+	binaryIDuint16Slice  = binary.ID{0x6a, 0x6f, 0x2c, 0xcb, 0x4f, 0xa4, 0x14, 0x4e, 0x85, 0xec, 0x90, 0x29, 0x6f, 0x3a, 0x82, 0x32, 0xaa, 0x47, 0x12, 0x36}
+	binaryIDuint16_      = binary.ID{0x27, 0x82, 0x82, 0xfc, 0x9b, 0x85, 0xb1, 0x4c, 0x25, 0x76, 0x81, 0x7b, 0x73, 0xf9, 0x3a, 0x49, 0x5d, 0xa6, 0x4f, 0x6a}
+	binaryIDuint32Slice  = binary.ID{0xef, 0x33, 0xac, 0x6d, 0x70, 0x40, 0x1b, 0xaf, 0xcc, 0xd0, 0xae, 0xdd, 0x0f, 0xa3, 0xcf, 0xe4, 0xcc, 0xf5, 0xde, 0x5b}
+	binaryIDuint32_      = binary.ID{0x6c, 0x71, 0x27, 0x1c, 0x6a, 0xdf, 0xf2, 0x89, 0x67, 0x7f, 0xea, 0xbe, 0x14, 0xa4, 0xbf, 0xed, 0x45, 0x12, 0x8c, 0x35}
+	binaryIDuint64Slice  = binary.ID{0xc2, 0xfa, 0x92, 0x6a, 0xe1, 0xed, 0x55, 0xc9, 0x54, 0xea, 0x12, 0xb6, 0xb9, 0x67, 0x2d, 0x3e, 0x8d, 0x1c, 0x41, 0x85}
+	binaryIDuint64_      = binary.ID{0x53, 0x85, 0x81, 0xf6, 0x16, 0x96, 0x17, 0x79, 0x5c, 0xc4, 0x08, 0x19, 0x42, 0xeb, 0x81, 0xae, 0x8b, 0xf8, 0x9e, 0xe1}
+	binaryIDuint8Slice   = binary.ID{0x38, 0x9f, 0xd0, 0xb2, 0x1f, 0x95, 0x04, 0x46, 0xa0, 0x90, 0x05, 0x05, 0x62, 0xeb, 0xbd, 0x88, 0x53, 0x45, 0x1c, 0x90}
+	binaryIDuint8_       = binary.ID{0xdb, 0x01, 0x67, 0x61, 0x0d, 0xd1, 0x1e, 0xef, 0x2f, 0xca, 0x58, 0x3f, 0xc8, 0xdb, 0x2e, 0x17, 0x79, 0x86, 0x98, 0x5f}
 )
 
 type binaryClassAny struct{}
@@ -74,6 +104,73 @@ func (*binaryClassAny) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAny(d, obj.(*Any))
 }
 func (*binaryClassAny) Skip(d binary.Decoder) error { return doSkipAny(d) }
+
+type binaryClassboolSlice struct{}
+
+func (*boolSlice) Class() binary.Class {
+	return (*binaryClassboolSlice)(nil)
+}
+func doEncodeboolSlice(e binary.Encoder, o *boolSlice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Bool(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeboolSlice(d binary.Decoder, o *boolSlice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]bool, count)
+		for i := range o.value {
+			if obj, err := d.Bool(); err != nil {
+				return err
+			} else {
+				o.value[i] = bool(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipboolSlice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Bool(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassboolSlice) ID() binary.ID      { return binaryIDboolSlice }
+func (*binaryClassboolSlice) New() binary.Object { return &boolSlice{} }
+func (*binaryClassboolSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeboolSlice(e, obj.(*boolSlice))
+}
+func (*binaryClassboolSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &boolSlice{}
+	return obj, doDecodeboolSlice(d, obj)
+}
+func (*binaryClassboolSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeboolSlice(d, obj.(*boolSlice))
+}
+func (*binaryClassboolSlice) Skip(d binary.Decoder) error { return doSkipboolSlice(d) }
+func (*binaryClassboolSlice) Schema() *schema.Class       { return schemaboolSlice }
+
+var schemaboolSlice = &schema.Class{
+	TypeID:  binaryIDboolSlice,
+	Package: "any",
+	Name:    "boolSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+	},
+}
 
 type binaryClassbool_ struct{}
 
@@ -114,6 +211,73 @@ func (*binaryClassbool_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassbool_) Skip(d binary.Decoder) error { return doSkipbool_(d) }
 
+type binaryClassfloat32Slice struct{}
+
+func (*float32Slice) Class() binary.Class {
+	return (*binaryClassfloat32Slice)(nil)
+}
+func doEncodefloat32Slice(e binary.Encoder, o *float32Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Float32(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]float32, count)
+		for i := range o.value {
+			if obj, err := d.Float32(); err != nil {
+				return err
+			} else {
+				o.value[i] = float32(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipfloat32Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Float32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassfloat32Slice) ID() binary.ID      { return binaryIDfloat32Slice }
+func (*binaryClassfloat32Slice) New() binary.Object { return &float32Slice{} }
+func (*binaryClassfloat32Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodefloat32Slice(e, obj.(*float32Slice))
+}
+func (*binaryClassfloat32Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &float32Slice{}
+	return obj, doDecodefloat32Slice(d, obj)
+}
+func (*binaryClassfloat32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodefloat32Slice(d, obj.(*float32Slice))
+}
+func (*binaryClassfloat32Slice) Skip(d binary.Decoder) error { return doSkipfloat32Slice(d) }
+func (*binaryClassfloat32Slice) Schema() *schema.Class       { return schemafloat32Slice }
+
+var schemafloat32Slice = &schema.Class{
+	TypeID:  binaryIDfloat32Slice,
+	Package: "any",
+	Name:    "float32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
+
 type binaryClassfloat32_ struct{}
 
 func (*float32_) Class() binary.Class {
@@ -152,6 +316,73 @@ func (*binaryClassfloat32_) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodefloat32_(d, obj.(*float32_))
 }
 func (*binaryClassfloat32_) Skip(d binary.Decoder) error { return doSkipfloat32_(d) }
+
+type binaryClassfloat64Slice struct{}
+
+func (*float64Slice) Class() binary.Class {
+	return (*binaryClassfloat64Slice)(nil)
+}
+func doEncodefloat64Slice(e binary.Encoder, o *float64Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Float64(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]float64, count)
+		for i := range o.value {
+			if obj, err := d.Float64(); err != nil {
+				return err
+			} else {
+				o.value[i] = float64(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipfloat64Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Float64(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassfloat64Slice) ID() binary.ID      { return binaryIDfloat64Slice }
+func (*binaryClassfloat64Slice) New() binary.Object { return &float64Slice{} }
+func (*binaryClassfloat64Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodefloat64Slice(e, obj.(*float64Slice))
+}
+func (*binaryClassfloat64Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &float64Slice{}
+	return obj, doDecodefloat64Slice(d, obj)
+}
+func (*binaryClassfloat64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodefloat64Slice(d, obj.(*float64Slice))
+}
+func (*binaryClassfloat64Slice) Skip(d binary.Decoder) error { return doSkipfloat64Slice(d) }
+func (*binaryClassfloat64Slice) Schema() *schema.Class       { return schemafloat64Slice }
+
+var schemafloat64Slice = &schema.Class{
+	TypeID:  binaryIDfloat64Slice,
+	Package: "any",
+	Name:    "float64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float64", Method: schema.Float64}}},
+	},
+}
 
 type binaryClassfloat64_ struct{}
 
@@ -192,6 +423,73 @@ func (*binaryClassfloat64_) DecodeTo(d binary.Decoder, obj binary.Object) error 
 }
 func (*binaryClassfloat64_) Skip(d binary.Decoder) error { return doSkipfloat64_(d) }
 
+type binaryClassint16Slice struct{}
+
+func (*int16Slice) Class() binary.Class {
+	return (*binaryClassint16Slice)(nil)
+}
+func doEncodeint16Slice(e binary.Encoder, o *int16Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Int16(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeint16Slice(d binary.Decoder, o *int16Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]int16, count)
+		for i := range o.value {
+			if obj, err := d.Int16(); err != nil {
+				return err
+			} else {
+				o.value[i] = int16(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipint16Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int16(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassint16Slice) ID() binary.ID      { return binaryIDint16Slice }
+func (*binaryClassint16Slice) New() binary.Object { return &int16Slice{} }
+func (*binaryClassint16Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeint16Slice(e, obj.(*int16Slice))
+}
+func (*binaryClassint16Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &int16Slice{}
+	return obj, doDecodeint16Slice(d, obj)
+}
+func (*binaryClassint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeint16Slice(d, obj.(*int16Slice))
+}
+func (*binaryClassint16Slice) Skip(d binary.Decoder) error { return doSkipint16Slice(d) }
+func (*binaryClassint16Slice) Schema() *schema.Class       { return schemaint16Slice }
+
+var schemaint16Slice = &schema.Class{
+	TypeID:  binaryIDint16Slice,
+	Package: "any",
+	Name:    "int16Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int16", Method: schema.Int16}}},
+	},
+}
+
 type binaryClassint16_ struct{}
 
 func (*int16_) Class() binary.Class {
@@ -230,6 +528,73 @@ func (*binaryClassint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint16_(d, obj.(*int16_))
 }
 func (*binaryClassint16_) Skip(d binary.Decoder) error { return doSkipint16_(d) }
+
+type binaryClassint32Slice struct{}
+
+func (*int32Slice) Class() binary.Class {
+	return (*binaryClassint32Slice)(nil)
+}
+func doEncodeint32Slice(e binary.Encoder, o *int32Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Int32(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeint32Slice(d binary.Decoder, o *int32Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]int32, count)
+		for i := range o.value {
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				o.value[i] = int32(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipint32Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassint32Slice) ID() binary.ID      { return binaryIDint32Slice }
+func (*binaryClassint32Slice) New() binary.Object { return &int32Slice{} }
+func (*binaryClassint32Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeint32Slice(e, obj.(*int32Slice))
+}
+func (*binaryClassint32Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &int32Slice{}
+	return obj, doDecodeint32Slice(d, obj)
+}
+func (*binaryClassint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeint32Slice(d, obj.(*int32Slice))
+}
+func (*binaryClassint32Slice) Skip(d binary.Decoder) error { return doSkipint32Slice(d) }
+func (*binaryClassint32Slice) Schema() *schema.Class       { return schemaint32Slice }
+
+var schemaint32Slice = &schema.Class{
+	TypeID:  binaryIDint32Slice,
+	Package: "any",
+	Name:    "int32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassint32_ struct{}
 
@@ -270,6 +635,73 @@ func (*binaryClassint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassint32_) Skip(d binary.Decoder) error { return doSkipint32_(d) }
 
+type binaryClassint64Slice struct{}
+
+func (*int64Slice) Class() binary.Class {
+	return (*binaryClassint64Slice)(nil)
+}
+func doEncodeint64Slice(e binary.Encoder, o *int64Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Int64(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeint64Slice(d binary.Decoder, o *int64Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]int64, count)
+		for i := range o.value {
+			if obj, err := d.Int64(); err != nil {
+				return err
+			} else {
+				o.value[i] = int64(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipint64Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int64(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassint64Slice) ID() binary.ID      { return binaryIDint64Slice }
+func (*binaryClassint64Slice) New() binary.Object { return &int64Slice{} }
+func (*binaryClassint64Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeint64Slice(e, obj.(*int64Slice))
+}
+func (*binaryClassint64Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &int64Slice{}
+	return obj, doDecodeint64Slice(d, obj)
+}
+func (*binaryClassint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeint64Slice(d, obj.(*int64Slice))
+}
+func (*binaryClassint64Slice) Skip(d binary.Decoder) error { return doSkipint64Slice(d) }
+func (*binaryClassint64Slice) Schema() *schema.Class       { return schemaint64Slice }
+
+var schemaint64Slice = &schema.Class{
+	TypeID:  binaryIDint64Slice,
+	Package: "any",
+	Name:    "int64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int64", Method: schema.Int64}}},
+	},
+}
+
 type binaryClassint64_ struct{}
 
 func (*int64_) Class() binary.Class {
@@ -309,6 +741,73 @@ func (*binaryClassint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassint64_) Skip(d binary.Decoder) error { return doSkipint64_(d) }
 
+type binaryClassint8Slice struct{}
+
+func (*int8Slice) Class() binary.Class {
+	return (*binaryClassint8Slice)(nil)
+}
+func doEncodeint8Slice(e binary.Encoder, o *int8Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Int8(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeint8Slice(d binary.Decoder, o *int8Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]int8, count)
+		for i := range o.value {
+			if obj, err := d.Int8(); err != nil {
+				return err
+			} else {
+				o.value[i] = int8(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipint8Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int8(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassint8Slice) ID() binary.ID      { return binaryIDint8Slice }
+func (*binaryClassint8Slice) New() binary.Object { return &int8Slice{} }
+func (*binaryClassint8Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeint8Slice(e, obj.(*int8Slice))
+}
+func (*binaryClassint8Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &int8Slice{}
+	return obj, doDecodeint8Slice(d, obj)
+}
+func (*binaryClassint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeint8Slice(d, obj.(*int8Slice))
+}
+func (*binaryClassint8Slice) Skip(d binary.Decoder) error { return doSkipint8Slice(d) }
+func (*binaryClassint8Slice) Schema() *schema.Class       { return schemaint8Slice }
+
+var schemaint8Slice = &schema.Class{
+	TypeID:  binaryIDint8Slice,
+	Package: "any",
+	Name:    "int8Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int8", Method: schema.Int8}}},
+	},
+}
+
 type binaryClassint8_ struct{}
 
 func (*int8_) Class() binary.Class {
@@ -347,6 +846,195 @@ func (*binaryClassint8_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint8_(d, obj.(*int8_))
 }
 func (*binaryClassint8_) Skip(d binary.Decoder) error { return doSkipint8_(d) }
+
+type binaryClassintSlice struct{}
+
+func (*intSlice) Class() binary.Class {
+	return (*binaryClassintSlice)(nil)
+}
+func doEncodeintSlice(e binary.Encoder, o *intSlice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Int32(int32(o.value[i])); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeintSlice(d binary.Decoder, o *intSlice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]int, count)
+		for i := range o.value {
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				o.value[i] = int(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipintSlice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassintSlice) ID() binary.ID      { return binaryIDintSlice }
+func (*binaryClassintSlice) New() binary.Object { return &intSlice{} }
+func (*binaryClassintSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeintSlice(e, obj.(*intSlice))
+}
+func (*binaryClassintSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &intSlice{}
+	return obj, doDecodeintSlice(d, obj)
+}
+func (*binaryClassintSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeintSlice(d, obj.(*intSlice))
+}
+func (*binaryClassintSlice) Skip(d binary.Decoder) error { return doSkipintSlice(d) }
+func (*binaryClassintSlice) Schema() *schema.Class       { return schemaintSlice }
+
+var schemaintSlice = &schema.Class{
+	TypeID:  binaryIDintSlice,
+	Package: "any",
+	Name:    "intSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}}},
+	},
+}
+
+type binaryClassint_ struct{}
+
+func (*int_) Class() binary.Class {
+	return (*binaryClassint_)(nil)
+}
+func doEncodeint_(e binary.Encoder, o *int_) error {
+	if err := e.Int32(int32(o.value)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeint_(d binary.Decoder, o *int_) error {
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.value = int(obj)
+	}
+	return nil
+}
+func doSkipint_(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassint_) ID() binary.ID      { return binaryIDint_ }
+func (*binaryClassint_) New() binary.Object { return &int_{} }
+func (*binaryClassint_) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeint_(e, obj.(*int_))
+}
+func (*binaryClassint_) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &int_{}
+	return obj, doDecodeint_(d, obj)
+}
+func (*binaryClassint_) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeint_(d, obj.(*int_))
+}
+func (*binaryClassint_) Skip(d binary.Decoder) error { return doSkipint_(d) }
+func (*binaryClassint_) Schema() *schema.Class       { return schemaint_ }
+
+var schemaint_ = &schema.Class{
+	TypeID:  binaryIDint_,
+	Package: "any",
+	Name:    "int_",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+	},
+}
+
+type binaryClassobjectSlice struct{}
+
+func (*objectSlice) Class() binary.Class {
+	return (*binaryClassobjectSlice)(nil)
+}
+func doEncodeobjectSlice(e binary.Encoder, o *objectSlice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if o.value[i] != nil {
+			if err := e.Object(o.value[i]); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]binary.Object, count)
+		for i := range o.value {
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				o.value[i] = obj.(binary.Object)
+			} else {
+				o.value[i] = nil
+			}
+		}
+	}
+	return nil
+}
+func doSkipobjectSlice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassobjectSlice) ID() binary.ID      { return binaryIDobjectSlice }
+func (*binaryClassobjectSlice) New() binary.Object { return &objectSlice{} }
+func (*binaryClassobjectSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeobjectSlice(e, obj.(*objectSlice))
+}
+func (*binaryClassobjectSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &objectSlice{}
+	return obj, doDecodeobjectSlice(d, obj)
+}
+func (*binaryClassobjectSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeobjectSlice(d, obj.(*objectSlice))
+}
+func (*binaryClassobjectSlice) Skip(d binary.Decoder) error { return doSkipobjectSlice(d) }
+func (*binaryClassobjectSlice) Schema() *schema.Class       { return schemaobjectSlice }
+
+var schemaobjectSlice = &schema.Class{
+	TypeID:  binaryIDobjectSlice,
+	Package: "any",
+	Name:    "objectSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "binary.Object"}}},
+	},
+}
 
 type binaryClassobject_ struct{}
 
@@ -393,6 +1081,73 @@ func (*binaryClassobject_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassobject_) Skip(d binary.Decoder) error { return doSkipobject_(d) }
 
+type binaryClassstringSlice struct{}
+
+func (*stringSlice) Class() binary.Class {
+	return (*binaryClassstringSlice)(nil)
+}
+func doEncodestringSlice(e binary.Encoder, o *stringSlice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.String(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodestringSlice(d binary.Decoder, o *stringSlice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]string, count)
+		for i := range o.value {
+			if obj, err := d.String(); err != nil {
+				return err
+			} else {
+				o.value[i] = string(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipstringSlice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipString(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassstringSlice) ID() binary.ID      { return binaryIDstringSlice }
+func (*binaryClassstringSlice) New() binary.Object { return &stringSlice{} }
+func (*binaryClassstringSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodestringSlice(e, obj.(*stringSlice))
+}
+func (*binaryClassstringSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &stringSlice{}
+	return obj, doDecodestringSlice(d, obj)
+}
+func (*binaryClassstringSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodestringSlice(d, obj.(*stringSlice))
+}
+func (*binaryClassstringSlice) Skip(d binary.Decoder) error { return doSkipstringSlice(d) }
+func (*binaryClassstringSlice) Schema() *schema.Class       { return schemastringSlice }
+
+var schemastringSlice = &schema.Class{
+	TypeID:  binaryIDstringSlice,
+	Package: "any",
+	Name:    "stringSlice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+	},
+}
+
 type binaryClassstring_ struct{}
 
 func (*string_) Class() binary.Class {
@@ -431,6 +1186,73 @@ func (*binaryClassstring_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodestring_(d, obj.(*string_))
 }
 func (*binaryClassstring_) Skip(d binary.Decoder) error { return doSkipstring_(d) }
+
+type binaryClassuint16Slice struct{}
+
+func (*uint16Slice) Class() binary.Class {
+	return (*binaryClassuint16Slice)(nil)
+}
+func doEncodeuint16Slice(e binary.Encoder, o *uint16Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Uint16(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]uint16, count)
+		for i := range o.value {
+			if obj, err := d.Uint16(); err != nil {
+				return err
+			} else {
+				o.value[i] = uint16(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipuint16Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint16(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassuint16Slice) ID() binary.ID      { return binaryIDuint16Slice }
+func (*binaryClassuint16Slice) New() binary.Object { return &uint16Slice{} }
+func (*binaryClassuint16Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeuint16Slice(e, obj.(*uint16Slice))
+}
+func (*binaryClassuint16Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &uint16Slice{}
+	return obj, doDecodeuint16Slice(d, obj)
+}
+func (*binaryClassuint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeuint16Slice(d, obj.(*uint16Slice))
+}
+func (*binaryClassuint16Slice) Skip(d binary.Decoder) error { return doSkipuint16Slice(d) }
+func (*binaryClassuint16Slice) Schema() *schema.Class       { return schemauint16Slice }
+
+var schemauint16Slice = &schema.Class{
+	TypeID:  binaryIDuint16Slice,
+	Package: "any",
+	Name:    "uint16Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint16", Method: schema.Uint16}}},
+	},
+}
 
 type binaryClassuint16_ struct{}
 
@@ -471,6 +1293,73 @@ func (*binaryClassuint16_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassuint16_) Skip(d binary.Decoder) error { return doSkipuint16_(d) }
 
+type binaryClassuint32Slice struct{}
+
+func (*uint32Slice) Class() binary.Class {
+	return (*binaryClassuint32Slice)(nil)
+}
+func doEncodeuint32Slice(e binary.Encoder, o *uint32Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Uint32(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]uint32, count)
+		for i := range o.value {
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				o.value[i] = uint32(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipuint32Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassuint32Slice) ID() binary.ID      { return binaryIDuint32Slice }
+func (*binaryClassuint32Slice) New() binary.Object { return &uint32Slice{} }
+func (*binaryClassuint32Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeuint32Slice(e, obj.(*uint32Slice))
+}
+func (*binaryClassuint32Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &uint32Slice{}
+	return obj, doDecodeuint32Slice(d, obj)
+}
+func (*binaryClassuint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeuint32Slice(d, obj.(*uint32Slice))
+}
+func (*binaryClassuint32Slice) Skip(d binary.Decoder) error { return doSkipuint32Slice(d) }
+func (*binaryClassuint32Slice) Schema() *schema.Class       { return schemauint32Slice }
+
+var schemauint32Slice = &schema.Class{
+	TypeID:  binaryIDuint32Slice,
+	Package: "any",
+	Name:    "uint32Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+	},
+}
+
 type binaryClassuint32_ struct{}
 
 func (*uint32_) Class() binary.Class {
@@ -510,6 +1399,73 @@ func (*binaryClassuint32_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassuint32_) Skip(d binary.Decoder) error { return doSkipuint32_(d) }
 
+type binaryClassuint64Slice struct{}
+
+func (*uint64Slice) Class() binary.Class {
+	return (*binaryClassuint64Slice)(nil)
+}
+func doEncodeuint64Slice(e binary.Encoder, o *uint64Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	for i := range o.value {
+		if err := e.Uint64(o.value[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]uint64, count)
+		for i := range o.value {
+			if obj, err := d.Uint64(); err != nil {
+				return err
+			} else {
+				o.value[i] = uint64(obj)
+			}
+		}
+	}
+	return nil
+}
+func doSkipuint64Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint64(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassuint64Slice) ID() binary.ID      { return binaryIDuint64Slice }
+func (*binaryClassuint64Slice) New() binary.Object { return &uint64Slice{} }
+func (*binaryClassuint64Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeuint64Slice(e, obj.(*uint64Slice))
+}
+func (*binaryClassuint64Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &uint64Slice{}
+	return obj, doDecodeuint64Slice(d, obj)
+}
+func (*binaryClassuint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeuint64Slice(d, obj.(*uint64Slice))
+}
+func (*binaryClassuint64Slice) Skip(d binary.Decoder) error { return doSkipuint64Slice(d) }
+func (*binaryClassuint64Slice) Schema() *schema.Class       { return schemauint64Slice }
+
+var schemauint64Slice = &schema.Class{
+	TypeID:  binaryIDuint64Slice,
+	Package: "any",
+	Name:    "uint64Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+	},
+}
+
 type binaryClassuint64_ struct{}
 
 func (*uint64_) Class() binary.Class {
@@ -548,6 +1504,65 @@ func (*binaryClassuint64_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeuint64_(d, obj.(*uint64_))
 }
 func (*binaryClassuint64_) Skip(d binary.Decoder) error { return doSkipuint64_(d) }
+
+type binaryClassuint8Slice struct{}
+
+func (*uint8Slice) Class() binary.Class {
+	return (*binaryClassuint8Slice)(nil)
+}
+func doEncodeuint8Slice(e binary.Encoder, o *uint8Slice) error {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
+		return err
+	}
+	if err := e.Data(o.value); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeuint8Slice(d binary.Decoder, o *uint8Slice) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.value = make([]uint8, count)
+		if err := d.Data(o.value); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doSkipuint8Slice(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func (*binaryClassuint8Slice) ID() binary.ID      { return binaryIDuint8Slice }
+func (*binaryClassuint8Slice) New() binary.Object { return &uint8Slice{} }
+func (*binaryClassuint8Slice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeuint8Slice(e, obj.(*uint8Slice))
+}
+func (*binaryClassuint8Slice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &uint8Slice{}
+	return obj, doDecodeuint8Slice(d, obj)
+}
+func (*binaryClassuint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeuint8Slice(d, obj.(*uint8Slice))
+}
+func (*binaryClassuint8Slice) Skip(d binary.Decoder) error { return doSkipuint8Slice(d) }
+func (*binaryClassuint8Slice) Schema() *schema.Class       { return schemauint8Slice }
+
+var schemauint8Slice = &schema.Class{
+	TypeID:  binaryIDuint8Slice,
+	Package: "any",
+	Name:    "uint8Slice",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+	},
+}
 
 type binaryClassuint8_ struct{}
 
