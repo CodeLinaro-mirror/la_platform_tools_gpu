@@ -130,10 +130,19 @@ type BuildReport struct {
 	Atoms service.AtomStreamId
 }
 
-// Get resolves the object, value or memory at the specified path.
+// Get resolves the object, value or memory at Path.
 type Get struct {
 	binary.Generate
 	Path path.Path
+}
+
+// Set creates a copy of the capture referenced by Path, but with the object,
+// value or memory at p replaced with v. The path returned is identical to Path,
+// but with the base changed to refer to the new capture.
+type Set struct {
+	binary.Generate
+	Path  path.Path
+	Value interface{}
 }
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.

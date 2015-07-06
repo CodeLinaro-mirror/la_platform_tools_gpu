@@ -107,7 +107,7 @@ type Get struct {
 }
 ```
 
-Get resolves the object, value or memory at the specified path.
+Get resolves the object, value or memory at Path.
 
 #### func (*Get) BuildLazy
 
@@ -405,4 +405,33 @@ BuildLazy returns a new *service.Capture, with a single atom replaced.
 
 ```go
 func (*ReplaceAtom) Class() binary.Class
+```
+
+#### type Set
+
+```go
+type Set struct {
+	binary.Generate
+	Path  path.Path
+	Value interface{}
+}
+```
+
+Set creates a copy of the capture referenced by Path, but with the object, value
+or memory at p replaced with v. The path returned is identical to Path, but with
+the base changed to refer to the new capture.
+
+#### func (*Set) BuildLazy
+
+```go
+func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
+```
+BuildLazy creates a copy of the capture referenced by the request's path, but
+with the object, value or memory at p replaced with v. The path returned is
+identical to p, but with the base changed to refer to the new capture.
+
+#### func (*Set) Class
+
+```go
+func (*Set) Class() binary.Class
 ```

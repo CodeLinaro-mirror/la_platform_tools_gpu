@@ -238,7 +238,18 @@ func (s rpcServer) ReplaceAtom(
 	return service.CaptureId{ID: id}, err
 }
 
-// Get resolves and returns the object, value or memory with the path p.
+// Get resolves and returns the object, value or memory at the path p.
 func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
 	return database.Build(&builder.Get{Path: p}, s.Database, l)
+}
+
+// Set creates a copy of the capture referenced by p, but with the object, value
+// or memory at p replaced with v. The path returned is identical to p, but with
+// the base changed to refer to the new capture.
+func (s rpcServer) Set(p path.Path, v interface{}, l log.Logger) (path.Path, error) {
+	res, err := database.Build(&builder.Set{Path: p, Value: v}, s.Database, l)
+	if err != nil {
+		return nil, nil
+	}
+	return res.(path.Path), nil
 }
