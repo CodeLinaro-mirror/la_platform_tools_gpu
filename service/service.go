@@ -24,6 +24,7 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
 
+// Clone returns a new AtomStream holding a shallow-copy of the Atoms slice.
 func (s *AtomStream) Clone() *AtomStream {
 	atoms := make([]atom.Atom, len(s.Atoms))
 	copy(atoms, s.Atoms)
