@@ -97,7 +97,9 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			for s.Kind() == reflect.Ptr {
 				s = s.Elem() // Deref
 			}
-			s.FieldByName(p.Name).Set(reflect.ValueOf(v[i]))
+			if err := assign(s.FieldByName(p.Name), reflect.ValueOf(v[i])); err != nil {
+				return nil, err
+			}
 			v[i-1] = obj.Interface()
 
 		case *path.ArrayIndex:
@@ -105,7 +107,9 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			if err != nil {
 				return nil, err
 			}
-			a.Index(int(p.Index)).Set(reflect.ValueOf(v[i]))
+			if err := assign(a.Index(int(p.Index)), reflect.ValueOf(v[i])); err != nil {
+				return nil, err
+			}
 			v[i-1] = a.Interface()
 
 		case *path.MapIndex:
@@ -113,7 +117,9 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			if err != nil {
 				return nil, err
 			}
-			m.MapIndex(reflect.ValueOf(p.Key)).Set(reflect.ValueOf(v[i]))
+			if err := assign(m.MapIndex(reflect.ValueOf(p.Key)), reflect.ValueOf(v[i])); err != nil {
+				return nil, err
+			}
 			v[i-1] = m.Interface()
 
 		default:
@@ -150,4 +156,25 @@ func shallowCopy(dst, src reflect.Value) error {
 		dst.Set(src)
 	}
 	return nil
+}
+
+func assign(dst, src reflect.Value) error {
+	if !dst.CanSet() {
+		return fmt.Errorf("Value is unassignable")
+	}
+
+	dstTy, srcTy := dst.Type(), src.Type()
+
+	switch {
+	case srcTy.AssignableTo(dstTy):
+		dst.Set(src)
+		return nil
+
+	case srcTy.ConvertibleTo(dstTy):
+		dst.Set(src.Convert(dstTy))
+		return nil
+
+	default:
+		return fmt.Errorf("Cannot assign type %T to type %T", srcTy.Name(), dstTy.Name())
+	}
 }
