@@ -20,31 +20,26 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-// Atoms is a path that refers to the full list of atoms in a capture.
-type Atoms struct {
+// Report is a path that refers to a capture's report.
+type Report struct {
 	binary.Generate
 	Capture *Capture // The path to the capture containing the atoms.
 }
 
 // String returns the string representation of the path.
-func (n *Atoms) String() string { return n.Path() }
+func (n *Report) String() string { return n.Path() }
 
 // Path implements the Path interface.
-func (n *Atoms) Path() string {
-	return fmt.Sprintf("%v.Atoms", n.Capture)
+func (n *Report) Path() string {
+	return fmt.Sprintf("%v.Report", n.Capture)
 }
 
-// Base implements the Path interface, returning the path to the atoms.
-func (n *Atoms) Base() Path {
+// Base implements the Path interface, returning the path to the report.
+func (n *Report) Base() Path {
 	return n.Capture
 }
 
 // Clone implements the Path interface, returning a deep-copy of this path.
-func (n *Atoms) Clone() Path {
-	return &Atoms{Capture: n.Capture.Clone().(*Capture)}
-}
-
-// Index returns the path to the i'th atom in the atom list.
-func (n *Atoms) Index(i uint64) *Atom {
-	return &Atom{Atoms: n, Index: i}
+func (n *Report) Clone() Path {
+	return &Report{Capture: n.Capture.Clone().(*Capture)}
 }

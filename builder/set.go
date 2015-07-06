@@ -74,6 +74,9 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			capture.Report = reportID
 			v[i-1] = capture
 
+		case *path.Report:
+			return nil, fmt.Errorf("Reports are immutable")
+
 		case *path.Atom:
 			if v[i] == nil {
 				return nil, fmt.Errorf("Atom cannot be nil")
