@@ -34,7 +34,7 @@ func Data(a device.Architecture, d database.Database, l log.Logger, at memory.Po
 	if err := memory.Write(w, a, v); err != nil {
 		panic(err)
 	}
-	id, err := database.StoreBlob(buf.Bytes(), d, l)
+	id, err := database.Store(buf.Bytes(), d, l)
 	if err != nil {
 		panic(err)
 	}

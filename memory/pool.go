@@ -123,7 +123,7 @@ func (m poolSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, err
 	if err != nil {
 		return binary.ID{}, err
 	}
-	return database.StoreBlob(bytes, d, l)
+	return database.Store(bytes, d, l)
 }
 
 func (m poolSlice) Slice(rng Range) Slice {

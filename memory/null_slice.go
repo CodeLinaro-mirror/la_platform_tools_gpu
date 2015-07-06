@@ -29,7 +29,7 @@ func (s nullSlice) Get(database.Database, log.Logger) ([]byte, error) {
 }
 
 func (s nullSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
-	return database.StoreBlob(make([]byte, s), d, l)
+	return database.Store(make([]byte, s), d, l)
 }
 
 func (s nullSlice) Size() uint64 {
