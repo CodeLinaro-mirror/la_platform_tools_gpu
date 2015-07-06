@@ -103,6 +103,14 @@ func (c callGet) Format(f fmt.State, r rune) {
 func (r resultGet) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callSet) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Set(p: %v, v: %v)",
+		c.p, c.v,
+	)
+}
+func (r resultSet) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callResolveAtomStream) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveAtomStream(id: %v)",
 		c.id,

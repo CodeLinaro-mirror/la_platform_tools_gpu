@@ -8,6 +8,7 @@ package builder
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/image"
@@ -33,6 +34,7 @@ func init() {
 	Namespace.Add((*RenderFramebufferColor)(nil).Class())
 	Namespace.Add((*RenderFramebufferDepth)(nil).Class())
 	Namespace.Add((*ReplaceAtom)(nil).Class())
+	Namespace.Add((*Set)(nil).Class())
 	Namespace.Add((*atomFramebufferDimensions)(nil).Class())
 	Namespace.Add((*captureFramebufferDimensions)(nil).Class())
 	Namespace.Add((*getCaptureFramebufferDimensions)(nil).Class())
@@ -52,6 +54,7 @@ var (
 	binaryIDRenderFramebufferColor          = binary.ID{0xc2, 0x1c, 0x41, 0xbf, 0x83, 0x9e, 0xd9, 0xdd, 0x8f, 0x52, 0x56, 0xc2, 0xba, 0xaa, 0xd2, 0xed, 0x23, 0xc2, 0xd2, 0x86}
 	binaryIDRenderFramebufferDepth          = binary.ID{0xa9, 0x18, 0x0d, 0x72, 0xb6, 0x3d, 0xe5, 0x46, 0xaf, 0x7a, 0x63, 0xe4, 0x25, 0xa6, 0x80, 0xa8, 0x3b, 0x2c, 0x2b, 0x7d}
 	binaryIDReplaceAtom                     = binary.ID{0xd0, 0x37, 0xcb, 0x94, 0x28, 0x3d, 0x8f, 0x17, 0xfc, 0x8a, 0x1b, 0xad, 0x79, 0xb5, 0xc6, 0x49, 0xfe, 0xc8, 0x73, 0x39}
+	binaryIDSet                             = binary.ID{0x3e, 0x3e, 0xf7, 0x61, 0xd5, 0x5c, 0x3a, 0x76, 0xc6, 0x39, 0x17, 0x5e, 0x37, 0x26, 0x78, 0xaf, 0xdf, 0x83, 0x9f, 0x4e}
 	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
 	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x92, 0xe3, 0x84, 0xf0, 0x3e, 0x83, 0x2c, 0x83, 0xc0, 0x22, 0x15, 0xad, 0x75, 0x9b, 0x02, 0xdc, 0x1f, 0x4e, 0x49, 0x4c}
@@ -1113,6 +1116,86 @@ var schemaReplaceAtom = &schema.Class{
 		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
 		{Declared: "AtomID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Value", Type: &schema.Interface{Name: "atom.Atom"}},
+	},
+}
+
+type binaryClassSet struct{}
+
+func (*Set) Class() binary.Class {
+	return (*binaryClassSet)(nil)
+}
+func doEncodeSet(e binary.Encoder, o *Set) error {
+	if o.Path != nil {
+		if err := e.Object(o.Path); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if o.Value != nil {
+		var boxed binary.Object
+		boxed, err := any.Box(o.Value)
+		if err != nil {
+			return err
+		}
+		if err := e.Variant(boxed); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeSet(d binary.Decoder, o *Set) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Path = obj.(path.Path)
+	} else {
+		o.Path = nil
+	}
+	if boxed, err := d.Variant(); err != nil {
+		return err
+	} else if boxed != nil {
+		if o.Value, err = any.Unbox(boxed); err != nil {
+			return err
+		}
+	} else {
+		o.Value = nil
+	}
+	return nil
+}
+func doSkipSet(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.SkipVariant(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassSet) ID() binary.ID      { return binaryIDSet }
+func (*binaryClassSet) New() binary.Object { return &Set{} }
+func (*binaryClassSet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeSet(e, obj.(*Set))
+}
+func (*binaryClassSet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Set{}
+	return obj, doDecodeSet(d, obj)
+}
+func (*binaryClassSet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeSet(d, obj.(*Set))
+}
+func (*binaryClassSet) Skip(d binary.Decoder) error { return doSkipSet(d) }
+func (*binaryClassSet) Schema() *schema.Class       { return schemaSet }
+
+var schemaSet = &schema.Class{
+	TypeID:  binaryIDSet,
+	Package: "builder",
+	Name:    "Set",
+	Fields: []schema.Field{
+		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
+		{Declared: "Value", Type: &any.Any{}},
 	},
 }
 

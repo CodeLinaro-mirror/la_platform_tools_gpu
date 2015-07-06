@@ -66,6 +66,7 @@ func init() {
 	Namespace.Add((*callResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*callResolveReport)(nil).Class())
 	Namespace.Add((*callResolveTimingInfo)(nil).Class())
+	Namespace.Add((*callSet)(nil).Class())
 	Namespace.Add((*resultGet)(nil).Class())
 	Namespace.Add((*resultGetCaptures)(nil).Class())
 	Namespace.Add((*resultGetDevices)(nil).Class())
@@ -87,6 +88,7 @@ func init() {
 	Namespace.Add((*resultResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*resultResolveReport)(nil).Class())
 	Namespace.Add((*resultResolveTimingInfo)(nil).Class())
+	Namespace.Add((*resultSet)(nil).Class())
 }
 
 var (
@@ -135,6 +137,7 @@ var (
 	binaryIDcallResolveMemoryInfo       = binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}
 	binaryIDcallResolveReport           = binary.ID{0xe6, 0x93, 0x8e, 0x01, 0x8f, 0x31, 0xdc, 0x32, 0x93, 0x8e, 0x5c, 0xc1, 0xb3, 0x56, 0x46, 0x57, 0x32, 0x9f, 0xa4, 0xc1}
 	binaryIDcallResolveTimingInfo       = binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}
+	binaryIDcallSet                     = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
 	binaryIDresultGet                   = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
 	binaryIDresultGetCaptures           = binary.ID{0x6e, 0x42, 0x42, 0x6b, 0x9b, 0x47, 0xf5, 0xfc, 0x53, 0x66, 0xa1, 0x5a, 0x6e, 0x5c, 0x60, 0xb3, 0x14, 0x0b, 0xf6, 0x7b}
 	binaryIDresultGetDevices            = binary.ID{0x94, 0x2a, 0xed, 0x69, 0xb7, 0x1a, 0xd3, 0xb0, 0x44, 0xab, 0x25, 0x38, 0xfc, 0x81, 0xbc, 0xd2, 0x19, 0x65, 0x1e, 0xfe}
@@ -156,6 +159,7 @@ var (
 	binaryIDresultResolveMemoryInfo     = binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}
 	binaryIDresultResolveReport         = binary.ID{0x39, 0xe3, 0x6a, 0xa3, 0x55, 0xfc, 0xc7, 0xda, 0x7e, 0xc9, 0x6e, 0x43, 0xbf, 0xec, 0x64, 0x1f, 0xf4, 0x43, 0x92, 0x0c}
 	binaryIDresultResolveTimingInfo     = binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}
+	binaryIDresultSet                   = binary.ID{0x86, 0x91, 0xf0, 0x3f, 0xf8, 0x37, 0xf5, 0x8d, 0x70, 0xeb, 0xc0, 0x87, 0x00, 0x9e, 0x42, 0xd4, 0x8e, 0x89, 0xc3, 0xdb}
 )
 
 type binaryClassApiId struct{}
@@ -3104,6 +3108,86 @@ var schemacallResolveTimingInfo = &schema.Class{
 	},
 }
 
+type binaryClasscallSet struct{}
+
+func (*callSet) Class() binary.Class {
+	return (*binaryClasscallSet)(nil)
+}
+func doEncodecallSet(e binary.Encoder, o *callSet) error {
+	if o.p != nil {
+		if err := e.Object(o.p); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if o.v != nil {
+		var boxed binary.Object
+		boxed, err := any.Box(o.v)
+		if err != nil {
+			return err
+		}
+		if err := e.Variant(boxed); err != nil {
+			return err
+		}
+	} else if err := e.Variant(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodecallSet(d binary.Decoder, o *callSet) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.p = obj.(path.Path)
+	} else {
+		o.p = nil
+	}
+	if boxed, err := d.Variant(); err != nil {
+		return err
+	} else if boxed != nil {
+		if o.v, err = any.Unbox(boxed); err != nil {
+			return err
+		}
+	} else {
+		o.v = nil
+	}
+	return nil
+}
+func doSkipcallSet(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.SkipVariant(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClasscallSet) ID() binary.ID      { return binaryIDcallSet }
+func (*binaryClasscallSet) New() binary.Object { return &callSet{} }
+func (*binaryClasscallSet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecallSet(e, obj.(*callSet))
+}
+func (*binaryClasscallSet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &callSet{}
+	return obj, doDecodecallSet(d, obj)
+}
+func (*binaryClasscallSet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecallSet(d, obj.(*callSet))
+}
+func (*binaryClasscallSet) Skip(d binary.Decoder) error { return doSkipcallSet(d) }
+func (*binaryClasscallSet) Schema() *schema.Class       { return schemacallSet }
+
+var schemacallSet = &schema.Class{
+	TypeID:  binaryIDcallSet,
+	Package: "service",
+	Name:    "callSet",
+	Fields: []schema.Field{
+		{Declared: "p", Type: &schema.Interface{Name: "path.Path"}},
+		{Declared: "v", Type: &any.Any{}},
+	},
+}
+
 type binaryClassresultGet struct{}
 
 func (*resultGet) Class() binary.Class {
@@ -4183,6 +4267,61 @@ var schemaresultResolveTimingInfo = &schema.Class{
 	Name:    "resultResolveTimingInfo",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "TimingInfo", ID: (*TimingInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassresultSet struct{}
+
+func (*resultSet) Class() binary.Class {
+	return (*binaryClassresultSet)(nil)
+}
+func doEncoderesultSet(e binary.Encoder, o *resultSet) error {
+	if o.value != nil {
+		if err := e.Object(o.value); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecoderesultSet(d binary.Decoder, o *resultSet) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.value = obj.(path.Path)
+	} else {
+		o.value = nil
+	}
+	return nil
+}
+func doSkipresultSet(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassresultSet) ID() binary.ID      { return binaryIDresultSet }
+func (*binaryClassresultSet) New() binary.Object { return &resultSet{} }
+func (*binaryClassresultSet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderesultSet(e, obj.(*resultSet))
+}
+func (*binaryClassresultSet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &resultSet{}
+	return obj, doDecoderesultSet(d, obj)
+}
+func (*binaryClassresultSet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderesultSet(d, obj.(*resultSet))
+}
+func (*binaryClassresultSet) Skip(d binary.Decoder) error { return doSkipresultSet(d) }
+func (*binaryClassresultSet) Schema() *schema.Class       { return schemaresultSet }
+
+var schemaresultSet = &schema.Class{
+	TypeID:  binaryIDresultSet,
+	Package: "service",
+	Name:    "resultSet",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Interface{Name: "path.Path"}},
 	},
 }
 
