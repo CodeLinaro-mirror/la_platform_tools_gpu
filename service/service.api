@@ -102,13 +102,6 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
                                    u64[]      atomIds)
 { return ? }
 
-// ReplaceAtom creates and new capture based on an existing capture, but with
-// a single atom replaced.
-cmd CaptureId ReplaceAtom(CaptureId capture,
-                          u64       atomId,
-                          atom.Atom atom)
-{ return ? }
-
 // Get resolves and returns the object, value or memory at the path p.
 cmd any Get(path.Path p)
 { return ? }

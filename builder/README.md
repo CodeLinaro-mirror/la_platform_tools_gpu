@@ -381,32 +381,6 @@ request.
 func (*RenderFramebufferDepth) Class() binary.Class
 ```
 
-#### type ReplaceAtom
-
-```go
-type ReplaceAtom struct {
-	binary.Generate
-	Capture service.CaptureId
-	AtomID  atom.ID
-	Value   atom.Atom
-}
-```
-
-ReplaceAtom records the parameters of a service.ReplaceAtom RPC request.
-
-#### func (*ReplaceAtom) BuildLazy
-
-```go
-func (request *ReplaceAtom) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
-```
-BuildLazy returns a new *service.Capture, with a single atom replaced.
-
-#### func (*ReplaceAtom) Class
-
-```go
-func (*ReplaceAtom) Class() binary.Class
-```
-
 #### type Set
 
 ```go
