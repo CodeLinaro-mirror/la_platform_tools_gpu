@@ -39,6 +39,11 @@ func (c *Capture) Base() Path {
 	return nil
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (c *Capture) Clone() Path {
+	return &Capture{ID: c.ID}
+}
+
 // Atoms returns the path to the full list of atoms in the capture.
 func (c *Capture) Atoms() *Atoms {
 	return &Atoms{Capture: c}

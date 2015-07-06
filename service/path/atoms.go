@@ -39,6 +39,11 @@ func (n *Atoms) Base() Path {
 	return n.Capture
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *Atoms) Clone() Path {
+	return &Atoms{Capture: n.Capture.Clone().(*Capture)}
+}
+
 // Index returns the path to the i'th atom in the atom list.
 func (n *Atoms) Index(i uint64) *Atom {
 	return &Atom{Atoms: n, Index: i}

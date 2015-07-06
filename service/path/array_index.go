@@ -40,6 +40,11 @@ func (n *ArrayIndex) Base() Path {
 	return n.Array
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *ArrayIndex) Clone() Path {
+	return &ArrayIndex{Array: n.Array.Clone().(Value), Index: n.Index}
+}
+
 // Field implements the Value interface.
 func (n *ArrayIndex) Field(name string) Value {
 	return &Field{Struct: n, Name: name}
