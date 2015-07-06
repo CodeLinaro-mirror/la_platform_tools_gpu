@@ -14,6 +14,10 @@ const (
 )
 ```
 
+```go
+var ConstantValues schema.Constants
+```
+
 #### type Limits
 
 ```go

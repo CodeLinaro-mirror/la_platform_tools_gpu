@@ -10,6 +10,10 @@ It is not the actual implementation of the service functionality.
 ## Usage
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var Namespace = registry.NewNamespace()
 ```
 
@@ -94,7 +98,7 @@ func (c *AtomRangeTimer) GetToAtomId() uint64
 ```go
 type AtomStream struct {
 	binary.Generate
-	Data []uint8
+	Atoms []atom.Atom
 }
 ```
 
@@ -104,16 +108,9 @@ Class AtomStream
 
 ```go
 func CreateAtomStream(
-	Data []uint8,
+	Atoms []atom.Atom,
 ) *AtomStream
 ```
-
-#### func  NewAtomStream
-
-```go
-func NewAtomStream(list atom.List) (AtomStream, error)
-```
-NewAtomStream creates a fully-encoded AtomStream from the atom list.
 
 #### func  ResolveAtomStream
 
@@ -129,18 +126,11 @@ using id.
 func (*AtomStream) Class() binary.Class
 ```
 
-#### func (*AtomStream) GetData
+#### func (*AtomStream) GetAtoms
 
 ```go
-func (c *AtomStream) GetData() []uint8
+func (c *AtomStream) GetAtoms() []atom.Atom
 ```
-
-#### func (AtomStream) List
-
-```go
-func (s AtomStream) List() (atom.List, error)
-```
-List decodes and returns the AtomStream decoded to an atom list.
 
 #### type AtomStreamId
 
@@ -854,7 +844,7 @@ func (h MemoryInfoId) Valid() bool
 
 ```go
 type RPC interface {
-	GetSchema(l log.Logger) ([]*schema.Class, error)
+	GetSchema(l log.Logger) (Schema, error)
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
@@ -864,7 +854,7 @@ type RPC interface {
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
-	ReplaceAtom(capture CaptureId, atomId uint64, data Binary, l log.Logger) (CaptureId, error)
+	ReplaceAtom(capture CaptureId, atomId uint64, atom atom.Atom, l log.Logger) (CaptureId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
@@ -1121,6 +1111,45 @@ func (r Resolver) ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, 
 ```
 ResolveTimingInfo loads and returns the TimingInfo stored in the resolver's
 database, using id.
+
+#### type Schema
+
+```go
+type Schema struct {
+	binary.Generate
+	Classes   []*schema.Class
+	Constants []schema.ConstantSet
+}
+```
+
+Class Schema
+
+#### func  CreateSchema
+
+```go
+func CreateSchema(
+	Classes []*schema.Class,
+	Constants []schema.ConstantSet,
+) *Schema
+```
+
+#### func (*Schema) Class
+
+```go
+func (*Schema) Class() binary.Class
+```
+
+#### func (*Schema) GetClasses
+
+```go
+func (c *Schema) GetClasses() []*schema.Class
+```
+
+#### func (*Schema) GetConstants
+
+```go
+func (c *Schema) GetConstants() []schema.ConstantSet
+```
 
 #### type Severity
 

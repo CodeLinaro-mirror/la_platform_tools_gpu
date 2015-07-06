@@ -51,6 +51,10 @@ const (
 ```
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var Namespace = registry.NewNamespace()
 ```
 
