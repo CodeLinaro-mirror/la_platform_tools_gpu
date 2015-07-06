@@ -690,6 +690,46 @@ func (p ImageOES) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 
 type SyncObject uint64
 
+// Voidᶜᵖ is a pointer to a void element.
+type Voidᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVoidᶜᵖ returns a Voidᶜᵖ that points to addr in the application pool.
+func NewVoidᶜᵖ(addr uint64) Voidᶜᵖ {
+	return Voidᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Voidᶜᵖ points to.
+func (p Voidᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Voidᶜᵖ) OnRead(ϟs *gfxapi.State) Voidᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Voidᶜᵖ) OnWrite(ϟs *gfxapi.State) Voidᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new Voidˢ from the pointer using start and end indices.
+func (p Voidᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // Voidᵖ is a pointer to a void element.
 type Voidᵖ struct {
 	binary.Generate
@@ -1412,6 +1452,56 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
+type VertexArrayIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVertexArrayIdᶜᵖ returns a VertexArrayIdᶜᵖ that points to addr in the application pool.
+func NewVertexArrayIdᶜᵖ(addr uint64) VertexArrayIdᶜᵖ {
+	return VertexArrayIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that VertexArrayIdᶜᵖ points to.
+func (p VertexArrayIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the VertexArrayId element at the pointer.
+func (p VertexArrayIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) VertexArrayId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the VertexArrayId element at the pointer.
+func (p VertexArrayIdᶜᵖ) Write(value VertexArrayId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]VertexArrayId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p VertexArrayIdᶜᵖ) OnRead(ϟs *gfxapi.State) VertexArrayIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p VertexArrayIdᶜᵖ) OnWrite(ϟs *gfxapi.State) VertexArrayIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
+func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // ShaderAttribTypeᵖ is a pointer to a ShaderAttribType element.
 type ShaderAttribTypeᵖ struct {
 	binary.Generate
@@ -1510,6 +1600,56 @@ func (p ShaderUniformTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Shader
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// F32ᶜᵖ is a pointer to a float32 element.
+type F32ᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewF32ᶜᵖ returns a F32ᶜᵖ that points to addr in the application pool.
+func NewF32ᶜᵖ(addr uint64) F32ᶜᵖ {
+	return F32ᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that F32ᶜᵖ points to.
+func (p F32ᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the float32 element at the pointer.
+func (p F32ᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) float32 {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the float32 element at the pointer.
+func (p F32ᶜᵖ) Write(value float32, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]float32{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p F32ᶜᵖ) OnRead(ϟs *gfxapi.State) F32ᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p F32ᶜᵖ) OnWrite(ϟs *gfxapi.State) F32ᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new F32ˢ from the pointer using start and end indices.
+func (p F32ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return F32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // F32ᵖ is a pointer to a float32 element.
@@ -2012,6 +2152,56 @@ func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
 	return Mat4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// S32ᶜᵖ is a pointer to a int32 element.
+type S32ᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewS32ᶜᵖ returns a S32ᶜᵖ that points to addr in the application pool.
+func NewS32ᶜᵖ(addr uint64) S32ᶜᵖ {
+	return S32ᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that S32ᶜᵖ points to.
+func (p S32ᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the int32 element at the pointer.
+func (p S32ᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int32 {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the int32 element at the pointer.
+func (p S32ᶜᵖ) Write(value int32, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]int32{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p S32ᶜᵖ) OnRead(ϟs *gfxapi.State) S32ᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p S32ᶜᵖ) OnWrite(ϟs *gfxapi.State) S32ᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new S32ˢ from the pointer using start and end indices.
+func (p S32ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return S32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // TextureIdᵖ is a pointer to a TextureId element.
 type TextureIdᵖ struct {
 	binary.Generate
@@ -2056,6 +2246,56 @@ func (p TextureIdᵖ) OnWrite(ϟs *gfxapi.State) TextureIdᵖ {
 
 // Slice returns a new TextureIdˢ from the pointer using start and end indices.
 func (p TextureIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// TextureIdᶜᵖ is a pointer to a TextureId element.
+type TextureIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewTextureIdᶜᵖ returns a TextureIdᶜᵖ that points to addr in the application pool.
+func NewTextureIdᶜᵖ(addr uint64) TextureIdᶜᵖ {
+	return TextureIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that TextureIdᶜᵖ points to.
+func (p TextureIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the TextureId element at the pointer.
+func (p TextureIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) TextureId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the TextureId element at the pointer.
+func (p TextureIdᶜᵖ) Write(value TextureId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]TextureId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p TextureIdᶜᵖ) OnRead(ϟs *gfxapi.State) TextureIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p TextureIdᶜᵖ) OnWrite(ϟs *gfxapi.State) TextureIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new TextureIdˢ from the pointer using start and end indices.
+func (p TextureIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
@@ -2112,6 +2352,56 @@ func (p FramebufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffe
 	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
+type FramebufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewFramebufferIdᶜᵖ returns a FramebufferIdᶜᵖ that points to addr in the application pool.
+func NewFramebufferIdᶜᵖ(addr uint64) FramebufferIdᶜᵖ {
+	return FramebufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that FramebufferIdᶜᵖ points to.
+func (p FramebufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the FramebufferId element at the pointer.
+func (p FramebufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the FramebufferId element at the pointer.
+func (p FramebufferIdᶜᵖ) Write(value FramebufferId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]FramebufferId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p FramebufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) FramebufferIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p FramebufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) FramebufferIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new FramebufferIdˢ from the pointer using start and end indices.
+func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // RenderbufferIdᵖ is a pointer to a RenderbufferId element.
 type RenderbufferIdᵖ struct {
 	binary.Generate
@@ -2156,6 +2446,56 @@ func (p RenderbufferIdᵖ) OnWrite(ϟs *gfxapi.State) RenderbufferIdᵖ {
 
 // Slice returns a new RenderbufferIdˢ from the pointer using start and end indices.
 func (p RenderbufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) RenderbufferIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
+type RenderbufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewRenderbufferIdᶜᵖ returns a RenderbufferIdᶜᵖ that points to addr in the application pool.
+func NewRenderbufferIdᶜᵖ(addr uint64) RenderbufferIdᶜᵖ {
+	return RenderbufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that RenderbufferIdᶜᵖ points to.
+func (p RenderbufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the RenderbufferId element at the pointer.
+func (p RenderbufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) RenderbufferId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the RenderbufferId element at the pointer.
+func (p RenderbufferIdᶜᵖ) Write(value RenderbufferId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]RenderbufferId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p RenderbufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) RenderbufferIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p RenderbufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) RenderbufferIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new RenderbufferIdˢ from the pointer using start and end indices.
+func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) RenderbufferIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
@@ -2212,42 +2552,34 @@ func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// Charᵖᵖ is a pointer to a Charᵖ element.
-// Note: Pointers are stored differently between the application pool and internal pools.
-//  * The application pool stores pointers as an address of an architecture-dependant size.
-//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
-//    pool identifier.
-type Charᵖᵖ struct {
+// BufferIdᶜᵖ is a pointer to a BufferId element.
+type BufferIdᶜᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewCharᵖᵖ returns a Charᵖᵖ that points to addr in the application pool.
-func NewCharᵖᵖ(addr uint64) Charᵖᵖ {
-	return Charᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewBufferIdᶜᵖ returns a BufferIdᶜᵖ that points to addr in the application pool.
+func NewBufferIdᶜᵖ(addr uint64) BufferIdᶜᵖ {
+	return BufferIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
-func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	if p.Pointer.Pool == memory.ApplicationPool {
-		return uint64(ϟs.Architecture.PointerSize)
-	} else {
-		return 12
-	}
+// ElementSize returns the size in bytes of an element that BufferIdᶜᵖ points to.
+func (p BufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
 }
 
-// Read reads and returns the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᵖ {
+// Read reads and returns the BufferId element at the pointer.
+func (p BufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) BufferId {
 	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
 }
 
-// Write writes value to the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Write(value Charᵖ, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]Charᵖ{value}, ϟs)
+// Write writes value to the BufferId element at the pointer.
+func (p BufferIdᶜᵖ) Write(value BufferId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]BufferId{value}, ϟs)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ {
+func (p BufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) BufferIdᶜᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
@@ -2255,19 +2587,251 @@ func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ {
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᵖ {
+func (p BufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) BufferIdᶜᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
-// Slice returns a new Charᵖˢ from the pointer using start and end indices.
-func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
+// Slice returns a new BufferIdˢ from the pointer using start and end indices.
+func (p BufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Charᶜᵖ is a pointer to a byte element.
+type Charᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewCharᶜᵖ returns a Charᶜᵖ that points to addr in the application pool.
+func NewCharᶜᵖ(addr uint64) Charᶜᵖ {
+	return Charᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Charᶜᵖ points to.
+func (p Charᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// Read reads and returns the byte element at the pointer.
+func (p Charᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) byte {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the byte element at the pointer.
+func (p Charᶜᵖ) Write(value byte, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]byte{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Charᶜᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Charᶜᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+// If incNullTerm is true then the null-terminator is included in the slice.
+func (p Charᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		if b, _ := d.Uint8(); b == 0 {
+			if incNullTerm {
+				return p.Slice(0, i+1, ϟs)
+			} else {
+				return p.Slice(0, i, ϟs)
+			}
+		}
+		i++
+	}
+}
+
+// Slice returns a new Charˢ from the pointer using start and end indices.
+func (p Charᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Charᶜᵖᶜᵖ is a pointer to a Charᶜᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type Charᶜᵖᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewCharᶜᵖᶜᵖ returns a Charᶜᵖᶜᵖ that points to addr in the application pool.
+func NewCharᶜᵖᶜᵖ(addr uint64) Charᶜᵖᶜᵖ {
+	return Charᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Charᶜᵖᶜᵖ points to.
+func (p Charᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	if p.Pointer.Pool == memory.ApplicationPool {
+		return uint64(ϟs.Architecture.PointerSize)
+	} else {
+		return 12
+	}
+}
+
+// Read reads and returns the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᶜᵖ {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᶜᵖ) Write(value Charᶜᵖ, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Charᶜᵖ{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Charᶜᵖᶜᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Charᶜᵖᶜᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
+func (p Charᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Charᶜᵖᵖ is a pointer to a Charᶜᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type Charᶜᵖᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewCharᶜᵖᵖ returns a Charᶜᵖᵖ that points to addr in the application pool.
+func NewCharᶜᵖᵖ(addr uint64) Charᶜᵖᵖ {
+	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Charᶜᵖᵖ points to.
+func (p Charᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	if p.Pointer.Pool == memory.ApplicationPool {
+		return uint64(ϟs.Architecture.PointerSize)
+	} else {
+		return 12
+	}
+}
+
+// Read reads and returns the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᶜᵖ {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᵖ) Write(value Charᶜᵖ, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]Charᶜᵖ{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Charᶜᵖᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Charᶜᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
+func (p Charᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// ShaderIdᶜᵖ is a pointer to a ShaderId element.
+type ShaderIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewShaderIdᶜᵖ returns a ShaderIdᶜᵖ that points to addr in the application pool.
+func NewShaderIdᶜᵖ(addr uint64) ShaderIdᶜᵖ {
+	return ShaderIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that ShaderIdᶜᵖ points to.
+func (p ShaderIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the ShaderId element at the pointer.
+func (p ShaderIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) ShaderId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the ShaderId element at the pointer.
+func (p ShaderIdᶜᵖ) Write(value ShaderId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]ShaderId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p ShaderIdᶜᵖ) OnRead(ϟs *gfxapi.State) ShaderIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p ShaderIdᶜᵖ) OnWrite(ϟs *gfxapi.State) ShaderIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new ShaderIdˢ from the pointer using start and end indices.
+func (p ShaderIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // ShaderIdᵖ is a pointer to a ShaderId element.
@@ -2370,6 +2934,56 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	return Boolˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// FramebufferAttachmentᶜᵖ is a pointer to a FramebufferAttachment element.
+type FramebufferAttachmentᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewFramebufferAttachmentᶜᵖ returns a FramebufferAttachmentᶜᵖ that points to addr in the application pool.
+func NewFramebufferAttachmentᶜᵖ(addr uint64) FramebufferAttachmentᶜᵖ {
+	return FramebufferAttachmentᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that FramebufferAttachmentᶜᵖ points to.
+func (p FramebufferAttachmentᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the FramebufferAttachment element at the pointer.
+func (p FramebufferAttachmentᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferAttachment {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the FramebufferAttachment element at the pointer.
+func (p FramebufferAttachmentᶜᵖ) Write(value FramebufferAttachment, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]FramebufferAttachment{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p FramebufferAttachmentᶜᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p FramebufferAttachmentᶜᵖ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new FramebufferAttachmentˢ from the pointer using start and end indices.
+func (p FramebufferAttachmentᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // FramebufferAttachmentᵖ is a pointer to a FramebufferAttachment element.
 type FramebufferAttachmentᵖ struct {
 	binary.Generate
@@ -2464,6 +3078,56 @@ func (p QueryIdᵖ) OnWrite(ϟs *gfxapi.State) QueryIdᵖ {
 
 // Slice returns a new QueryIdˢ from the pointer using start and end indices.
 func (p QueryIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// QueryIdᶜᵖ is a pointer to a QueryId element.
+type QueryIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewQueryIdᶜᵖ returns a QueryIdᶜᵖ that points to addr in the application pool.
+func NewQueryIdᶜᵖ(addr uint64) QueryIdᶜᵖ {
+	return QueryIdᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that QueryIdᶜᵖ points to.
+func (p QueryIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the QueryId element at the pointer.
+func (p QueryIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) QueryId {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the QueryId element at the pointer.
+func (p QueryIdᶜᵖ) Write(value QueryId, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]QueryId{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p QueryIdᶜᵖ) OnRead(ϟs *gfxapi.State) QueryIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p QueryIdᶜᵖ) OnWrite(ϟs *gfxapi.State) QueryIdᶜᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new QueryIdˢ from the pointer using start and end indices.
+func (p QueryIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
@@ -3659,34 +4323,34 @@ func (s Charˢ) String() string {
 	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
-// Charᵖˢ is a slice of Charᵖ.
-type Charᵖˢ struct {
+// Charᶜᵖˢ is a slice of Charᶜᵖ.
+type Charᶜᵖˢ struct {
 	binary.Generate
 	SliceInfo
 }
 
-// MakeCharᵖˢ returns a Charᵖˢ backed by a new memory pool.
-func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
+// MakeCharᶜᵖˢ returns a Charᶜᵖˢ backed by a new memory pool.
+func MakeCharᶜᵖˢ(count uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
-// Clone returns a copy of the Charᵖˢ in a new memory pool.
-func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ {
+// Clone returns a copy of the Charᶜᵖˢ in a new memory pool.
+func (s Charᶜᵖˢ) Clone(ϟs *gfxapi.State) Charᶜᵖˢ {
 	s.OnRead(ϟs)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	dst := Charᶜᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
-// ElementSize returns the size in bytes of an element that Charᵖˢ points to.
-func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that Charᶜᵖˢ points to.
+func (s Charᶜᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 	if s.Root.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
@@ -3695,13 +4359,13 @@ func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Range returns the memory range this slice represents in the underlying pool.
-func (s Charᵖˢ) Range(ϟs *gfxapi.State) memory.Range {
+func (s Charᶜᵖˢ) Range(ϟs *gfxapi.State) memory.Range {
 	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
-func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+func (s Charᶜᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
 	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
@@ -3710,27 +4374,27 @@ func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 }
 
 // Decoder returns a memory decoder for the slice.
-func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+func (s Charᶜᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
 	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
-func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+func (s Charᶜᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
-// AsCharᵖˢ returns s cast to a Charᵖˢ.
+// AsCharᶜᵖˢ returns s cast to a Charᶜᵖˢ.
 // The returned slice length will be calculated so that the returned slice is
 // no longer (in bytes) than s.
-func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ {
-	out := Charᵖˢ{SliceInfo: s.Info()}
+func AsCharᶜᵖˢ(s Slice, ϟs *gfxapi.State) Charᶜᵖˢ {
+	out := Charᶜᵖˢ{SliceInfo: s.Info()}
 	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
 	return out
 }
 
-// Read reads and returns all the Charᵖ elements in this Charᵖˢ.
-func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Charᵖ {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᵖ, s.Count)
+// Read reads and returns all the Charᶜᵖ elements in this Charᶜᵖˢ.
+func (s Charᶜᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Charᶜᵖ {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᶜᵖ, s.Count)
 	s.OnRead(ϟs)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
@@ -3738,7 +4402,7 @@ func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 			if err != nil {
 				panic(err)
 			}
-			res[i] = NewCharᵖ(ptr)
+			res[i] = NewCharᶜᵖ(ptr)
 		} else {
 			if err := d.Value(&res[i]); err != nil {
 				panic(err)
@@ -3750,7 +4414,7 @@ func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
+func (s Charᶜᵖˢ) Write(src []Charᶜᵖ, ϟs *gfxapi.State) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -3772,11 +4436,11 @@ func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᵖˢ) {
+func (dst Charᶜᵖˢ) Copy(src Charᶜᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᶜᵖˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	if (dst.Root.Pool == memory.ApplicationPool) != (src.Root.Pool == memory.ApplicationPool) {
-		dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> Charᵖᵖ
+		dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> Charᶜᵖᵖ
 	} else {
 		src.OnRead(ϟs)
 		ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
@@ -3786,7 +4450,7 @@ func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Databas
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ {
+func (s Charᶜᵖˢ) OnRead(ϟs *gfxapi.State) Charᶜᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
@@ -3794,32 +4458,32 @@ func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ {
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ {
+func (s Charᶜᵖˢ) OnWrite(ϟs *gfxapi.State) Charᶜᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
 	return s
 }
 
-// Index returns a Charᵖᵖ to the i'th element in this Charᵖˢ.
-func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ {
-	return Charᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+// Index returns a Charᶜᵖᵖ to the i'th element in this Charᶜᵖˢ.
+func (s Charᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᶜᵖᵖ {
+	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
-// Slice returns a sub-slice from the Charᵖˢ using start and end indices.
-func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
+// Slice returns a sub-slice from the Charᶜᵖˢ using start and end indices.
+func (s Charᶜᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
 	if start >= end {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
-// String returns a string description of the Charᵖˢ slice.
-func (s Charᵖˢ) String() string {
-	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+// String returns a string description of the Charᶜᵖˢ slice.
+func (s Charᶜᵖˢ) String() string {
+	return fmt.Sprintf("Charᶜᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // DiscardFramebufferAttachmentˢ is a slice of DiscardFramebufferAttachment.
@@ -9851,7 +10515,7 @@ type GlDeleteVertexArraysOES struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Arrays       VertexArrayIdᵖ
+	Arrays       VertexArrayIdᶜᵖ
 }
 
 func (a *GlDeleteVertexArraysOES) String() string {
@@ -10700,7 +11364,7 @@ type GlGetTexParameterfv struct {
 	observations atom.Observations
 	Target       TextureTarget
 	Parameter    TextureParameter
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlGetTexParameterfv) String() string {
@@ -11146,7 +11810,7 @@ type GlUniform1fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniform1fv) String() string {
@@ -11180,7 +11844,7 @@ type GlUniform2fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniform2fv) String() string {
@@ -11214,7 +11878,7 @@ type GlUniform3fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniform3fv) String() string {
@@ -11248,7 +11912,7 @@ type GlUniform4fv struct {
 	observations atom.Observations
 	Location     UniformLocation
 	Count        int32
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniform4fv) String() string {
@@ -11283,7 +11947,7 @@ type GlUniformMatrix2fv struct {
 	Location     UniformLocation
 	Count        int32
 	Transpose    bool
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniformMatrix2fv) String() string {
@@ -11318,7 +11982,7 @@ type GlUniformMatrix3fv struct {
 	Location     UniformLocation
 	Count        int32
 	Transpose    bool
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniformMatrix3fv) String() string {
@@ -11353,7 +12017,7 @@ type GlUniformMatrix4fv struct {
 	Location     UniformLocation
 	Count        int32
 	Transpose    bool
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlUniformMatrix4fv) String() string {
@@ -11387,7 +12051,7 @@ type GlGetUniformfv struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	Values       F32ᵖ
+	Values       F32ᶜᵖ
 }
 
 func (a *GlGetUniformfv) String() string {
@@ -11421,7 +12085,7 @@ type GlGetUniformiv struct {
 	observations atom.Observations
 	Program      ProgramId
 	Location     UniformLocation
-	Values       S32ᵖ
+	Values       S32ᶜᵖ
 }
 
 func (a *GlGetUniformiv) String() string {
@@ -11592,7 +12256,7 @@ type GlVertexAttrib1fv struct {
 	binary.Generate
 	observations atom.Observations
 	Location     AttributeLocation
-	Value        F32ᵖ
+	Value        F32ᶜᵖ
 }
 
 func (a *GlVertexAttrib1fv) String() string {
@@ -11625,7 +12289,7 @@ type GlVertexAttrib2fv struct {
 	binary.Generate
 	observations atom.Observations
 	Location     AttributeLocation
-	Value        F32ᵖ
+	Value        F32ᶜᵖ
 }
 
 func (a *GlVertexAttrib2fv) String() string {
@@ -11658,7 +12322,7 @@ type GlVertexAttrib3fv struct {
 	binary.Generate
 	observations atom.Observations
 	Location     AttributeLocation
-	Value        F32ᵖ
+	Value        F32ᶜᵖ
 }
 
 func (a *GlVertexAttrib3fv) String() string {
@@ -11691,7 +12355,7 @@ type GlVertexAttrib4fv struct {
 	binary.Generate
 	observations atom.Observations
 	Location     AttributeLocation
-	Value        F32ᵖ
+	Value        F32ᶜᵖ
 }
 
 func (a *GlVertexAttrib4fv) String() string {
@@ -12193,7 +12857,7 @@ type GlDeleteTextures struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Textures     TextureIdᵖ
+	Textures     TextureIdᶜᵖ
 }
 
 func (a *GlDeleteTextures) String() string {
@@ -12698,7 +13362,7 @@ type GlDeleteFramebuffers struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Framebuffers FramebufferIdᵖ
+	Framebuffers FramebufferIdᶜᵖ
 }
 
 func (a *GlDeleteFramebuffers) String() string {
@@ -12865,7 +13529,7 @@ type GlDeleteRenderbuffers struct {
 	binary.Generate
 	observations  atom.Observations
 	Count         int32
-	Renderbuffers RenderbufferIdᵖ
+	Renderbuffers RenderbufferIdᶜᵖ
 }
 
 func (a *GlDeleteRenderbuffers) String() string {
@@ -13068,7 +13732,7 @@ type GlBufferSubData struct {
 	Target       BufferTarget
 	Offset       int32
 	Size         int32
-	Data         Voidᵖ
+	Data         BufferDataPointer
 }
 
 func (a *GlBufferSubData) String() string {
@@ -13101,7 +13765,7 @@ type GlDeleteBuffers struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Buffers      BufferIdᵖ
+	Buffers      BufferIdᶜᵖ
 }
 
 func (a *GlDeleteBuffers) String() string {
@@ -13267,8 +13931,8 @@ type GlShaderSource struct {
 	observations atom.Observations
 	Shader       ShaderId
 	Count        int32
-	Source       Charᵖᵖ
-	Length       S32ᵖ
+	Source       Charᶜᵖᶜᵖ
+	Length       S32ᶜᵖ
 }
 
 func (a *GlShaderSource) String() string {
@@ -13301,9 +13965,9 @@ type GlShaderBinary struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Shaders      ShaderIdᵖ
+	Shaders      ShaderIdᶜᵖ
 	BinaryFormat uint32
-	Binary       Voidᵖ
+	Binary       Voidᶜᵖ
 	BinarySize   int32
 }
 
@@ -14464,7 +15128,7 @@ type GlGetString struct {
 	binary.Generate
 	observations atom.Observations
 	Param        StringConstant
-	Result       Charᵖ
+	Result       Charᶜᵖ
 }
 
 func (a *GlGetString) String() string {
@@ -14798,7 +15462,7 @@ type GlInvalidateFramebuffer struct {
 	observations atom.Observations
 	Target       FramebufferTarget
 	Count        int32
-	Attachments  FramebufferAttachmentᵖ
+	Attachments  FramebufferAttachmentᶜᵖ
 }
 
 func (a *GlInvalidateFramebuffer) String() string {
@@ -15006,7 +15670,7 @@ type GlDeleteQueries struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Queries      QueryIdᵖ
+	Queries      QueryIdᶜᵖ
 }
 
 func (a *GlDeleteQueries) String() string {
@@ -15380,7 +16044,7 @@ type GlDeleteVertexArrays struct {
 	binary.Generate
 	observations atom.Observations
 	Count        uint32
-	Arrays       VertexArrayIdᵖ
+	Arrays       VertexArrayIdᶜᵖ
 }
 
 func (a *GlDeleteVertexArrays) String() string {
@@ -15579,7 +16243,7 @@ type GlDeleteQueriesEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Count        int32
-	Queries      QueryIdᵖ
+	Queries      QueryIdᶜᵖ
 }
 
 func (a *GlDeleteQueriesEXT) String() string {
@@ -18334,7 +18998,7 @@ func NewGlBindVertexArrayOES(Array VertexArrayId) *GlBindVertexArrayOES {
 	return &GlBindVertexArrayOES{Array: Array}
 }
 func NewGlDeleteVertexArraysOES(Count int32, Arrays memory.Pointer) *GlDeleteVertexArraysOES {
-	return &GlDeleteVertexArraysOES{Count: Count, Arrays: VertexArrayIdᵖ{Pointer: Arrays}}
+	return &GlDeleteVertexArraysOES{Count: Count, Arrays: VertexArrayIdᶜᵖ{Pointer: Arrays}}
 }
 func NewGlIsVertexArrayOES(Array VertexArrayId, Result bool) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{Array: Array, Result: Result}
@@ -18409,7 +19073,7 @@ func NewGlGetTexParameteriv(Target TextureTarget, Parameter TextureParameter, Va
 	return &GlGetTexParameteriv{Target: Target, Parameter: Parameter, Values: S32ᵖ{Pointer: Values}}
 }
 func NewGlGetTexParameterfv(Target TextureTarget, Parameter TextureParameter, Values memory.Pointer) *GlGetTexParameterfv {
-	return &GlGetTexParameterfv{Target: Target, Parameter: Parameter, Values: F32ᵖ{Pointer: Values}}
+	return &GlGetTexParameterfv{Target: Target, Parameter: Parameter, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform1i(Location UniformLocation, Value int32) *GlUniform1i {
 	return &GlUniform1i{Location: Location, Value: Value}
@@ -18448,31 +19112,31 @@ func NewGlUniform4f(Location UniformLocation, Value0 float32, Value1 float32, Va
 	return &GlUniform4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlUniform1fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform1fv {
-	return &GlUniform1fv{Location: Location, Count: Count, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniform1fv{Location: Location, Count: Count, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform2fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform2fv {
-	return &GlUniform2fv{Location: Location, Count: Count, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniform2fv{Location: Location, Count: Count, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform3fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform3fv {
-	return &GlUniform3fv{Location: Location, Count: Count, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniform3fv{Location: Location, Count: Count, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform4fv(Location UniformLocation, Count int32, Values memory.Pointer) *GlUniform4fv {
-	return &GlUniform4fv{Location: Location, Count: Count, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniform4fv{Location: Location, Count: Count, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformMatrix2fv(Location UniformLocation, Count int32, Transpose bool, Values memory.Pointer) *GlUniformMatrix2fv {
-	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniformMatrix2fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformMatrix3fv(Location UniformLocation, Count int32, Transpose bool, Values memory.Pointer) *GlUniformMatrix3fv {
-	return &GlUniformMatrix3fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniformMatrix3fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniformMatrix4fv(Location UniformLocation, Count int32, Transpose bool, Values memory.Pointer) *GlUniformMatrix4fv {
-	return &GlUniformMatrix4fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᵖ{Pointer: Values}}
+	return &GlUniformMatrix4fv{Location: Location, Count: Count, Transpose: Transpose, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlGetUniformfv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformfv {
-	return &GlGetUniformfv{Program: Program, Location: Location, Values: F32ᵖ{Pointer: Values}}
+	return &GlGetUniformfv{Program: Program, Location: Location, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlGetUniformiv(Program ProgramId, Location UniformLocation, Values memory.Pointer) *GlGetUniformiv {
-	return &GlGetUniformiv{Program: Program, Location: Location, Values: S32ᵖ{Pointer: Values}}
+	return &GlGetUniformiv{Program: Program, Location: Location, Values: S32ᶜᵖ{Pointer: Values}}
 }
 func NewGlVertexAttrib1f(Location AttributeLocation, Value0 float32) *GlVertexAttrib1f {
 	return &GlVertexAttrib1f{Location: Location, Value0: Value0}
@@ -18487,16 +19151,16 @@ func NewGlVertexAttrib4f(Location AttributeLocation, Value0 float32, Value1 floa
 	return &GlVertexAttrib4f{Location: Location, Value0: Value0, Value1: Value1, Value2: Value2, Value3: Value3}
 }
 func NewGlVertexAttrib1fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib1fv {
-	return &GlVertexAttrib1fv{Location: Location, Value: F32ᵖ{Pointer: Value}}
+	return &GlVertexAttrib1fv{Location: Location, Value: F32ᶜᵖ{Pointer: Value}}
 }
 func NewGlVertexAttrib2fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib2fv {
-	return &GlVertexAttrib2fv{Location: Location, Value: F32ᵖ{Pointer: Value}}
+	return &GlVertexAttrib2fv{Location: Location, Value: F32ᶜᵖ{Pointer: Value}}
 }
 func NewGlVertexAttrib3fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib3fv {
-	return &GlVertexAttrib3fv{Location: Location, Value: F32ᵖ{Pointer: Value}}
+	return &GlVertexAttrib3fv{Location: Location, Value: F32ᶜᵖ{Pointer: Value}}
 }
 func NewGlVertexAttrib4fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib4fv {
-	return &GlVertexAttrib4fv{Location: Location, Value: F32ᵖ{Pointer: Value}}
+	return &GlVertexAttrib4fv{Location: Location, Value: F32ᶜᵖ{Pointer: Value}}
 }
 func NewGlGetShaderPrecisionFormat(Shader_type ShaderType, Precision_type PrecisionType, Range memory.Pointer, Precision memory.Pointer) *GlGetShaderPrecisionFormat {
 	return &GlGetShaderPrecisionFormat{ShaderType: Shader_type, PrecisionType: Precision_type, Range: S32ᵖ{Pointer: Range}, Precision: S32ᵖ{Pointer: Precision}}
@@ -18541,7 +19205,7 @@ func NewGlGenTextures(Count int32, Textures memory.Pointer) *GlGenTextures {
 	return &GlGenTextures{Count: Count, Textures: TextureIdᵖ{Pointer: Textures}}
 }
 func NewGlDeleteTextures(Count int32, Textures memory.Pointer) *GlDeleteTextures {
-	return &GlDeleteTextures{Count: Count, Textures: TextureIdᵖ{Pointer: Textures}}
+	return &GlDeleteTextures{Count: Count, Textures: TextureIdᶜᵖ{Pointer: Textures}}
 }
 func NewGlIsTexture(Texture TextureId, Result bool) *GlIsTexture {
 	return &GlIsTexture{Texture: Texture, Result: Result}
@@ -18583,7 +19247,7 @@ func NewGlCheckFramebufferStatus(Target FramebufferTarget, Result FramebufferSta
 	return &GlCheckFramebufferStatus{Target: Target, Result: Result}
 }
 func NewGlDeleteFramebuffers(Count int32, Framebuffers memory.Pointer) *GlDeleteFramebuffers {
-	return &GlDeleteFramebuffers{Count: Count, Framebuffers: FramebufferIdᵖ{Pointer: Framebuffers}}
+	return &GlDeleteFramebuffers{Count: Count, Framebuffers: FramebufferIdᶜᵖ{Pointer: Framebuffers}}
 }
 func NewGlIsFramebuffer(Framebuffer FramebufferId, Result bool) *GlIsFramebuffer {
 	return &GlIsFramebuffer{Framebuffer: Framebuffer, Result: Result}
@@ -18598,7 +19262,7 @@ func NewGlRenderbufferStorage(Target RenderbufferTarget, Format RenderbufferForm
 	return &GlRenderbufferStorage{Target: Target, Format: Format, Width: Width, Height: Height}
 }
 func NewGlDeleteRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlDeleteRenderbuffers {
-	return &GlDeleteRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᵖ{Pointer: Renderbuffers}}
+	return &GlDeleteRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᶜᵖ{Pointer: Renderbuffers}}
 }
 func NewGlIsRenderbuffer(Renderbuffer RenderbufferId, Result bool) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{Renderbuffer: Renderbuffer, Result: Result}
@@ -18616,10 +19280,10 @@ func NewGlBufferData(Target BufferTarget, Size int32, Data memory.Pointer, Usage
 	return &GlBufferData{Target: Target, Size: Size, Data: BufferDataPointer{Pointer: Data}, Usage: Usage}
 }
 func NewGlBufferSubData(Target BufferTarget, Offset int32, Size int32, Data memory.Pointer) *GlBufferSubData {
-	return &GlBufferSubData{Target: Target, Offset: Offset, Size: Size, Data: Voidᵖ{Pointer: Data}}
+	return &GlBufferSubData{Target: Target, Offset: Offset, Size: Size, Data: BufferDataPointer{Pointer: Data}}
 }
 func NewGlDeleteBuffers(Count int32, Buffers memory.Pointer) *GlDeleteBuffers {
-	return &GlDeleteBuffers{Count: Count, Buffers: BufferIdᵖ{Pointer: Buffers}}
+	return &GlDeleteBuffers{Count: Count, Buffers: BufferIdᶜᵖ{Pointer: Buffers}}
 }
 func NewGlIsBuffer(Buffer BufferId, Result bool) *GlIsBuffer {
 	return &GlIsBuffer{Buffer: Buffer, Result: Result}
@@ -18634,10 +19298,10 @@ func NewGlDeleteShader(Shader ShaderId) *GlDeleteShader {
 	return &GlDeleteShader{Shader: Shader}
 }
 func NewGlShaderSource(Shader ShaderId, Count int32, Source memory.Pointer, Length memory.Pointer) *GlShaderSource {
-	return &GlShaderSource{Shader: Shader, Count: Count, Source: Charᵖᵖ{Pointer: Source}, Length: S32ᵖ{Pointer: Length}}
+	return &GlShaderSource{Shader: Shader, Count: Count, Source: Charᶜᵖᶜᵖ{Pointer: Source}, Length: S32ᶜᵖ{Pointer: Length}}
 }
 func NewGlShaderBinary(Count int32, Shaders memory.Pointer, Binary_format uint32, Binary memory.Pointer, Binary_size int32) *GlShaderBinary {
-	return &GlShaderBinary{Count: Count, Shaders: ShaderIdᵖ{Pointer: Shaders}, BinaryFormat: Binary_format, Binary: Voidᵖ{Pointer: Binary}, BinarySize: Binary_size}
+	return &GlShaderBinary{Count: Count, Shaders: ShaderIdᶜᵖ{Pointer: Shaders}, BinaryFormat: Binary_format, Binary: Voidᶜᵖ{Pointer: Binary}, BinarySize: Binary_size}
 }
 func NewGlGetShaderInfoLog(Shader ShaderId, Buffer_length int32, String_length_written memory.Pointer, Info memory.Pointer) *GlGetShaderInfoLog {
 	return &GlGetShaderInfoLog{Shader: Shader, BufferLength: Buffer_length, StringLengthWritten: S32ᵖ{Pointer: String_length_written}, Info: Charᵖ{Pointer: Info}}
@@ -18742,7 +19406,7 @@ func NewGlGetIntegerv(Param StateVariable, Values memory.Pointer) *GlGetIntegerv
 	return &GlGetIntegerv{Param: Param, Values: S32ᵖ{Pointer: Values}}
 }
 func NewGlGetString(Param StringConstant, Result memory.Pointer) *GlGetString {
-	return &GlGetString{Param: Param, Result: Charᵖ{Pointer: Result}}
+	return &GlGetString{Param: Param, Result: Charᶜᵖ{Pointer: Result}}
 }
 func NewGlEnable(Capability Capability) *GlEnable {
 	return &GlEnable{Capability: Capability}
@@ -18772,7 +19436,7 @@ func NewGlUnmapBuffer(Target BufferTarget) *GlUnmapBuffer {
 	return &GlUnmapBuffer{Target: Target}
 }
 func NewGlInvalidateFramebuffer(Target FramebufferTarget, Count int32, Attachments memory.Pointer) *GlInvalidateFramebuffer {
-	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: FramebufferAttachmentᵖ{Pointer: Attachments}}
+	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: FramebufferAttachmentᶜᵖ{Pointer: Attachments}}
 }
 func NewGlRenderbufferStorageMultisample(Target RenderbufferTarget, Samples int32, Format RenderbufferFormat, Width int32, Height int32) *GlRenderbufferStorageMultisample {
 	return &GlRenderbufferStorageMultisample{Target: Target, Samples: Samples, Format: Format, Width: Width, Height: Height}
@@ -18790,7 +19454,7 @@ func NewGlEndQuery(Target QueryTarget) *GlEndQuery {
 	return &GlEndQuery{Target: Target}
 }
 func NewGlDeleteQueries(Count int32, Queries memory.Pointer) *GlDeleteQueries {
-	return &GlDeleteQueries{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
+	return &GlDeleteQueries{Count: Count, Queries: QueryIdᶜᵖ{Pointer: Queries}}
 }
 func NewGlIsQuery(Query QueryId, Result bool) *GlIsQuery {
 	return &GlIsQuery{Query: Query, Result: Result}
@@ -18823,7 +19487,7 @@ func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray {
 	return &GlBindVertexArray{Array: Array}
 }
 func NewGlDeleteVertexArrays(Count uint32, Arrays memory.Pointer) *GlDeleteVertexArrays {
-	return &GlDeleteVertexArrays{Count: Count, Arrays: VertexArrayIdᵖ{Pointer: Arrays}}
+	return &GlDeleteVertexArrays{Count: Count, Arrays: VertexArrayIdᶜᵖ{Pointer: Arrays}}
 }
 func NewGlGetQueryObjecti64v(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjecti64v {
 	return &GlGetQueryObjecti64v{Query: Query, Parameter: Parameter, Value: S64ᵖ{Pointer: Value}}
@@ -18841,7 +19505,7 @@ func NewGlEndQueryEXT(Target QueryTarget) *GlEndQueryEXT {
 	return &GlEndQueryEXT{Target: Target}
 }
 func NewGlDeleteQueriesEXT(Count int32, Queries memory.Pointer) *GlDeleteQueriesEXT {
-	return &GlDeleteQueriesEXT{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
+	return &GlDeleteQueriesEXT{Count: Count, Queries: QueryIdᶜᵖ{Pointer: Queries}}
 }
 func NewGlIsQueryEXT(Query QueryId, Result bool) *GlIsQueryEXT {
 	return &GlIsQueryEXT{Query: Query, Result: Result}

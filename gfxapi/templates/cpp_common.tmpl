@@ -92,7 +92,7 @@
   {{else if IsString      $}}String
   {{else if IsReference   $}}{{Macro "C++.TypeName" $.To}}__R
   {{else if IsSlice       $}}{{Macro "C++.TypeName" $.To}}__S
-  {{else if IsPointer     $}}{{Macro "C++.TypeName" $.To}}__P
+  {{else if IsPointer     $}}{{Macro "C++.TypeName" $.To}}__{{if $.Const}}C{{end}}P
   {{else}}{{Error "C++.TypeName passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
 {{end}}
