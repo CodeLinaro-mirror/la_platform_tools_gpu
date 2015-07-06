@@ -103,7 +103,7 @@ func init() {
 		}
 		cc.Graph(cctargets)
 		Apps.Gapir = Virtual("cc:replayd")
-		Creator(Apps.Gapir).DependsOn(ShutdownReplayd())
+		Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
 		// Runtime dependencies
