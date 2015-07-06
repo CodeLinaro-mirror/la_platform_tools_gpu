@@ -172,6 +172,19 @@ type resultGet struct {
 	value interface{}
 }
 
+// Call Set
+type callSet struct {
+	binary.Generate
+	p path.Path
+	v interface{}
+}
+
+// Result Set
+type resultSet struct {
+	binary.Generate
+	value path.Path
+}
+
 // Call ResolveAtomStream
 type callResolveAtomStream struct {
 	binary.Generate

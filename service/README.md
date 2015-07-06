@@ -126,6 +126,12 @@ using id.
 func (*AtomStream) Class() binary.Class
 ```
 
+#### func (*AtomStream) Clone
+
+```go
+func (s *AtomStream) Clone() *AtomStream
+```
+
 #### func (*AtomStream) GetAtoms
 
 ```go
@@ -856,6 +862,7 @@ type RPC interface {
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	ReplaceAtom(capture CaptureId, atomId uint64, atom atom.Atom, l log.Logger) (CaptureId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
+	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
