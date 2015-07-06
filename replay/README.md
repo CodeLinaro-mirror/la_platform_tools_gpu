@@ -82,7 +82,7 @@ Replay().
 #### func (Custom) API
 
 ```go
-func (Custom) API() gfxapi.API
+func (Custom) API() gfxapi.ID
 ```
 atom.Atom compliance
 
