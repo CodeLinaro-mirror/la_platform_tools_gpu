@@ -7,6 +7,10 @@ Package adb provides an interface to the Android Debug Bridge.
 ## Usage
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var ErrADBNotFound = errors.New("ADB command not found on PATH")
 ```
 ErrADBNotFound is returned when the ADB executable is not found.
