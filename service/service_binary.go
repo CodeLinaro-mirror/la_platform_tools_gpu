@@ -118,7 +118,7 @@ var (
 	binaryIDcallGetHierarchy            = binary.ID{0xbf, 0x39, 0x53, 0xd4, 0xc3, 0xac, 0x61, 0x0a, 0xce, 0x6c, 0x72, 0x04, 0x39, 0xcd, 0x5f, 0xe5, 0x92, 0xd5, 0xf6, 0xa6}
 	binaryIDcallGetMemoryInfo           = binary.ID{0x81, 0x0d, 0xda, 0xc7, 0xcf, 0xfa, 0x3b, 0x58, 0xe5, 0x0c, 0x0c, 0x2f, 0xa2, 0x87, 0x7a, 0xd3, 0x4c, 0x1b, 0x79, 0xaa}
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
-	binaryIDcallGetTimingInfo           = binary.ID{0xb1, 0x32, 0x24, 0x67, 0x2e, 0xb9, 0x1f, 0x2f, 0x72, 0xf3, 0x6b, 0x00, 0x23, 0x1f, 0xd4, 0x1a, 0x57, 0x59, 0x22, 0x29}
+	binaryIDcallGetTimingInfo           = binary.ID{0x3b, 0x23, 0x58, 0xe4, 0x55, 0xf0, 0x74, 0x6a, 0xc6, 0x9b, 0xfb, 0xb4, 0xc2, 0x6c, 0x15, 0x21, 0x55, 0x77, 0x49, 0x1f}
 	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
 	binaryIDcallPrerenderFramebuffers   = binary.ID{0x08, 0x3f, 0x02, 0x12, 0x24, 0x5a, 0x40, 0xd1, 0x11, 0x37, 0x09, 0x4e, 0xcf, 0x9e, 0x22, 0x92, 0xb8, 0x86, 0xbf, 0x9f}
 	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
@@ -2276,7 +2276,7 @@ func doEncodecallGetTimingInfo(e binary.Encoder, o *callGetTimingInfo) error {
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.mask)); err != nil {
+	if err := e.Int32(int32(o.flags)); err != nil {
 		return err
 	}
 	return nil
@@ -2291,7 +2291,7 @@ func doDecodecallGetTimingInfo(d binary.Decoder, o *callGetTimingInfo) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.mask = TimingMask(obj)
+		o.flags = TimingFlags(obj)
 	}
 	return nil
 }
@@ -2329,7 +2329,7 @@ var schemacallGetTimingInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
 		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
-		{Declared: "mask", Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32}},
+		{Declared: "flags", Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32}},
 	},
 }
 
@@ -4130,38 +4130,42 @@ func (v *Severity) Parse(s string) error {
 	return fmt.Errorf("%s not in Severity", s)
 }
 
-const _TimingMask_name = "TimingPerCommandTimingPerDrawCallTimingPerFrame"
+const _TimingFlags_name = "TimingCPUTimingGPUTimingPerCommandTimingPerDrawCallTimingPerFrame"
 
-var _TimingMask_map = map[TimingMask]string{
-	1: _TimingMask_name[0:16],
-	2: _TimingMask_name[16:33],
-	4: _TimingMask_name[33:47],
+var _TimingFlags_map = map[TimingFlags]string{
+	0: _TimingFlags_name[0:9],
+	1: _TimingFlags_name[9:18],
+	2: _TimingFlags_name[18:34],
+	4: _TimingFlags_name[34:51],
+	8: _TimingFlags_name[51:65],
 }
 
 func init() {
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TimingMask", Method: schema.Int32},
+		Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _TimingMask_name[0:16], Value: int32(1)},
-			{Name: _TimingMask_name[16:33], Value: int32(2)},
-			{Name: _TimingMask_name[33:47], Value: int32(4)},
+			{Name: _TimingFlags_name[0:9], Value: int32(0)},
+			{Name: _TimingFlags_name[9:18], Value: int32(1)},
+			{Name: _TimingFlags_name[18:34], Value: int32(2)},
+			{Name: _TimingFlags_name[34:51], Value: int32(4)},
+			{Name: _TimingFlags_name[51:65], Value: int32(8)},
 		},
 	})
 }
 
-func (v TimingMask) String() string {
-	if s, ok := _TimingMask_map[v]; ok {
+func (v TimingFlags) String() string {
+	if s, ok := _TimingFlags_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TimingMask(%d)", v)
+	return fmt.Sprintf("TimingFlags(%d)", v)
 }
 
-func (v *TimingMask) Parse(s string) error {
-	for k, t := range _TimingMask_map {
+func (v *TimingFlags) Parse(s string) error {
+	for k, t := range _TimingFlags_map {
 		if s == t {
 			*v = k
 			return nil
 		}
 	}
-	return fmt.Errorf("%s not in TimingMask", s)
+	return fmt.Errorf("%s not in TimingFlags", s)
 }

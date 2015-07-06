@@ -34,7 +34,7 @@ type QueryDepthBuffer interface {
 // QueryCallDurations is the interface implemented by types that can time the
 // duration of each call in a capture.
 type QueryCallDurations interface {
-	QueryCallDurations(ctx *Context, mgr *Manager, mask service.TimingMask) <-chan CallTiming
+	QueryCallDurations(ctx *Context, mgr *Manager, flags service.TimingFlags) <-chan CallTiming
 }
 
 // CallTiming represents the call timing information for a replay.

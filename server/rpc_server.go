@@ -185,13 +185,13 @@ func (s rpcServer) GetFramebufferDepth(
 func (s rpcServer) GetTimingInfo(
 	deviceID service.DeviceId,
 	captureID service.CaptureId,
-	mask service.TimingMask,
+	flags service.TimingFlags,
 	l log.Logger) (service.TimingInfoId, error) {
 
 	id, err := database.Store(&builder.GetTimingInfo{
-		Device:     deviceID,
-		Capture:    captureID,
-		TimingMask: mask,
+		Device:  deviceID,
+		Capture: captureID,
+		Flags:   flags,
 	}, s.Database, l)
 	return service.TimingInfoId{ID: id}, err
 }

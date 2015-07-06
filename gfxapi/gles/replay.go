@@ -60,8 +60,8 @@ type depthBufferRequest struct {
 
 // timeCallsRequest requests a postback of atom timing information.
 type timeCallsRequest struct {
-	out  chan replay.CallTiming
-	mask service.TimingMask
+	out   chan replay.CallTiming
+	flags service.TimingFlags
 }
 
 func (a api) ReplayTransforms(
@@ -99,13 +99,7 @@ func (a api) ReplayTransforms(
 
 		case timeCallsRequest:
 			profiling = true
-			transforms.Add(&timingInfoTransform{
-				out:          req.out,
-				perCommand:   (req.mask & service.TimingMaskTimingPerCommand) != 0,
-				perDrawCall:  (req.mask & service.TimingMaskTimingPerDrawCall) != 0,
-				perFrame:     (req.mask & service.TimingMaskTimingPerFrame) != 0,
-				timerStartId: make(map[uint8]atom.ID),
-			})
+			transforms.Add(timingInfo(req.flags, req.out))
 		}
 	}
 
@@ -158,10 +152,10 @@ func (a api) QueryDepthBuffer(ctx *replay.Context, mgr *replay.Manager, after at
 	return out
 }
 
-func (a api) QueryCallDurations(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan replay.CallTiming {
+func (a api) QueryCallDurations(ctx *replay.Context, mgr *replay.Manager, flags service.TimingFlags) <-chan replay.CallTiming {
 	out := make(chan replay.CallTiming, 1)
 	c := uniqueConfig()
-	r := timeCallsRequest{mask: mask, out: out}
+	r := timeCallsRequest{flags: flags, out: out}
 	if err := mgr.Replay(ctx, c, r, a); err != nil {
 		out <- replay.CallTiming{Error: err}
 	}

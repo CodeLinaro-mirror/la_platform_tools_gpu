@@ -78,9 +78,9 @@ extern ImageInfoId GetFramebufferDepth(DeviceId  device,
 // GetTimingInfo performs timings of the given capture on the given device,
 // returning an identifier to the results.
 // This function is experimental and will change signature.
-extern TimingInfoId GetTimingInfo(DeviceId   device,
-                                  CaptureId  capture,
-                                  TimingMask mask)
+extern TimingInfoId GetTimingInfo(DeviceId    device,
+                                  CaptureId   capture,
+                                  TimingFlags flags)
 
 // PrerenderFramebuffers renders the framebuffer contents after each of the
 // given atoms of interest in the given capture on the given device for the
@@ -197,12 +197,14 @@ enum ImageFormat {
   Float32 = 1,
 }
 
-// TimingMask is a bitfield describing what should be timed.
+// TimingFlags is a bitfield describing what should be timed.
 // This is experimental and will change in the near future.
-bitfield TimingMask {
-  TimingPerCommand  = 0x1, // Time individual commands.
-  TimingPerDrawCall = 0x2, // Time each draw call.
-  TimingPerFrame    = 0x4, // Time each frame.
+bitfield TimingFlags {
+  TimingCPU          = 0x0000, // Time using CPU timers (default).
+  TimingGPU          = 0x0001, // Time using GPU timers
+  TimingPerCommand   = 0x0002, // Time individual commands.
+  TimingPerDrawCall  = 0x0004, // Time each draw call.
+  TimingPerFrame     = 0x0008, // Time each frame.
 }
 
 // TimingInfo holds the results of a resolved GetTimingInfo request.
