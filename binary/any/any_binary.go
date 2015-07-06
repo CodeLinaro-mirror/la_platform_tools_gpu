@@ -161,16 +161,6 @@ func (*binaryClassboolSlice) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeboolSlice(d, obj.(*boolSlice))
 }
 func (*binaryClassboolSlice) Skip(d binary.Decoder) error { return doSkipboolSlice(d) }
-func (*binaryClassboolSlice) Schema() *schema.Class       { return schemaboolSlice }
-
-var schemaboolSlice = &schema.Class{
-	TypeID:  binaryIDboolSlice,
-	Package: "any",
-	Name:    "boolSlice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
-	},
-}
 
 type binaryClassbool_ struct{}
 
@@ -267,16 +257,6 @@ func (*binaryClassfloat32Slice) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodefloat32Slice(d, obj.(*float32Slice))
 }
 func (*binaryClassfloat32Slice) Skip(d binary.Decoder) error { return doSkipfloat32Slice(d) }
-func (*binaryClassfloat32Slice) Schema() *schema.Class       { return schemafloat32Slice }
-
-var schemafloat32Slice = &schema.Class{
-	TypeID:  binaryIDfloat32Slice,
-	Package: "any",
-	Name:    "float32Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
-	},
-}
 
 type binaryClassfloat32_ struct{}
 
@@ -373,16 +353,6 @@ func (*binaryClassfloat64Slice) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodefloat64Slice(d, obj.(*float64Slice))
 }
 func (*binaryClassfloat64Slice) Skip(d binary.Decoder) error { return doSkipfloat64Slice(d) }
-func (*binaryClassfloat64Slice) Schema() *schema.Class       { return schemafloat64Slice }
-
-var schemafloat64Slice = &schema.Class{
-	TypeID:  binaryIDfloat64Slice,
-	Package: "any",
-	Name:    "float64Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "float64", Method: schema.Float64}}},
-	},
-}
 
 type binaryClassfloat64_ struct{}
 
@@ -479,16 +449,6 @@ func (*binaryClassint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeint16Slice(d, obj.(*int16Slice))
 }
 func (*binaryClassint16Slice) Skip(d binary.Decoder) error { return doSkipint16Slice(d) }
-func (*binaryClassint16Slice) Schema() *schema.Class       { return schemaint16Slice }
-
-var schemaint16Slice = &schema.Class{
-	TypeID:  binaryIDint16Slice,
-	Package: "any",
-	Name:    "int16Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int16", Method: schema.Int16}}},
-	},
-}
 
 type binaryClassint16_ struct{}
 
@@ -585,16 +545,6 @@ func (*binaryClassint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeint32Slice(d, obj.(*int32Slice))
 }
 func (*binaryClassint32Slice) Skip(d binary.Decoder) error { return doSkipint32Slice(d) }
-func (*binaryClassint32Slice) Schema() *schema.Class       { return schemaint32Slice }
-
-var schemaint32Slice = &schema.Class{
-	TypeID:  binaryIDint32Slice,
-	Package: "any",
-	Name:    "int32Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
-	},
-}
 
 type binaryClassint32_ struct{}
 
@@ -691,16 +641,6 @@ func (*binaryClassint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeint64Slice(d, obj.(*int64Slice))
 }
 func (*binaryClassint64Slice) Skip(d binary.Decoder) error { return doSkipint64Slice(d) }
-func (*binaryClassint64Slice) Schema() *schema.Class       { return schemaint64Slice }
-
-var schemaint64Slice = &schema.Class{
-	TypeID:  binaryIDint64Slice,
-	Package: "any",
-	Name:    "int64Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int64", Method: schema.Int64}}},
-	},
-}
 
 type binaryClassint64_ struct{}
 
@@ -797,16 +737,6 @@ func (*binaryClassint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeint8Slice(d, obj.(*int8Slice))
 }
 func (*binaryClassint8Slice) Skip(d binary.Decoder) error { return doSkipint8Slice(d) }
-func (*binaryClassint8Slice) Schema() *schema.Class       { return schemaint8Slice }
-
-var schemaint8Slice = &schema.Class{
-	TypeID:  binaryIDint8Slice,
-	Package: "any",
-	Name:    "int8Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int8", Method: schema.Int8}}},
-	},
-}
 
 type binaryClassint8_ struct{}
 
@@ -903,16 +833,6 @@ func (*binaryClassintSlice) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeintSlice(d, obj.(*intSlice))
 }
 func (*binaryClassintSlice) Skip(d binary.Decoder) error { return doSkipintSlice(d) }
-func (*binaryClassintSlice) Schema() *schema.Class       { return schemaintSlice }
-
-var schemaintSlice = &schema.Class{
-	TypeID:  binaryIDintSlice,
-	Package: "any",
-	Name:    "intSlice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}}},
-	},
-}
 
 type binaryClassint_ struct{}
 
@@ -952,16 +872,6 @@ func (*binaryClassint_) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeint_(d, obj.(*int_))
 }
 func (*binaryClassint_) Skip(d binary.Decoder) error { return doSkipint_(d) }
-func (*binaryClassint_) Schema() *schema.Class       { return schemaint_ }
-
-var schemaint_ = &schema.Class{
-	TypeID:  binaryIDint_,
-	Package: "any",
-	Name:    "int_",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
-	},
-}
 
 type binaryClassobjectSlice struct{}
 
@@ -1025,16 +935,6 @@ func (*binaryClassobjectSlice) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeobjectSlice(d, obj.(*objectSlice))
 }
 func (*binaryClassobjectSlice) Skip(d binary.Decoder) error { return doSkipobjectSlice(d) }
-func (*binaryClassobjectSlice) Schema() *schema.Class       { return schemaobjectSlice }
-
-var schemaobjectSlice = &schema.Class{
-	TypeID:  binaryIDobjectSlice,
-	Package: "any",
-	Name:    "objectSlice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "binary.Object"}}},
-	},
-}
 
 type binaryClassobject_ struct{}
 
@@ -1137,16 +1037,6 @@ func (*binaryClassstringSlice) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodestringSlice(d, obj.(*stringSlice))
 }
 func (*binaryClassstringSlice) Skip(d binary.Decoder) error { return doSkipstringSlice(d) }
-func (*binaryClassstringSlice) Schema() *schema.Class       { return schemastringSlice }
-
-var schemastringSlice = &schema.Class{
-	TypeID:  binaryIDstringSlice,
-	Package: "any",
-	Name:    "stringSlice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
-	},
-}
 
 type binaryClassstring_ struct{}
 
@@ -1243,16 +1133,6 @@ func (*binaryClassuint16Slice) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeuint16Slice(d, obj.(*uint16Slice))
 }
 func (*binaryClassuint16Slice) Skip(d binary.Decoder) error { return doSkipuint16Slice(d) }
-func (*binaryClassuint16Slice) Schema() *schema.Class       { return schemauint16Slice }
-
-var schemauint16Slice = &schema.Class{
-	TypeID:  binaryIDuint16Slice,
-	Package: "any",
-	Name:    "uint16Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint16", Method: schema.Uint16}}},
-	},
-}
 
 type binaryClassuint16_ struct{}
 
@@ -1349,16 +1229,6 @@ func (*binaryClassuint32Slice) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeuint32Slice(d, obj.(*uint32Slice))
 }
 func (*binaryClassuint32Slice) Skip(d binary.Decoder) error { return doSkipuint32Slice(d) }
-func (*binaryClassuint32Slice) Schema() *schema.Class       { return schemauint32Slice }
-
-var schemauint32Slice = &schema.Class{
-	TypeID:  binaryIDuint32Slice,
-	Package: "any",
-	Name:    "uint32Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
-	},
-}
 
 type binaryClassuint32_ struct{}
 
@@ -1455,16 +1325,6 @@ func (*binaryClassuint64Slice) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeuint64Slice(d, obj.(*uint64Slice))
 }
 func (*binaryClassuint64Slice) Skip(d binary.Decoder) error { return doSkipuint64Slice(d) }
-func (*binaryClassuint64Slice) Schema() *schema.Class       { return schemauint64Slice }
-
-var schemauint64Slice = &schema.Class{
-	TypeID:  binaryIDuint64Slice,
-	Package: "any",
-	Name:    "uint64Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
-	},
-}
 
 type binaryClassuint64_ struct{}
 
@@ -1553,16 +1413,6 @@ func (*binaryClassuint8Slice) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeuint8Slice(d, obj.(*uint8Slice))
 }
 func (*binaryClassuint8Slice) Skip(d binary.Decoder) error { return doSkipuint8Slice(d) }
-func (*binaryClassuint8Slice) Schema() *schema.Class       { return schemauint8Slice }
-
-var schemauint8Slice = &schema.Class{
-	TypeID:  binaryIDuint8Slice,
-	Package: "any",
-	Name:    "uint8Slice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-	},
-}
 
 type binaryClassuint8_ struct{}
 
