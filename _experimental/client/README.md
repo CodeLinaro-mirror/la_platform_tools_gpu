@@ -235,6 +235,12 @@ func (c *ApplicationContext) Capture() service.Capture
 func (c *ApplicationContext) CaptureID() service.CaptureId
 ```
 
+#### func (*ApplicationContext) Change
+
+```go
+func (c *ApplicationContext) Change(p path.Path, v interface{})
+```
+
 #### func (*ApplicationContext) ColorBuffer
 
 ```go
@@ -365,12 +371,6 @@ func (c *ApplicationContext) OnTimingInfoUpdated(f func()) gxui.EventSubscriptio
 
 ```go
 func (c *ApplicationContext) OnWireframeChanged(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) ReplaceAtom
-
-```go
-func (c *ApplicationContext) ReplaceAtom(a atom.Atom, id atom.ID)
 ```
 
 #### func (*ApplicationContext) RequestMemory

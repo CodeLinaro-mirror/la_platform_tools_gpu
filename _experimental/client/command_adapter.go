@@ -22,6 +22,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -50,7 +51,7 @@ func createEnumList(t gxui.Theme, appCtx *ApplicationContext, values interface{}
 	return l
 }
 
-func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, active bool, parse parser, commit committer) gxui.TextBox {
+func createTextbox(t gxui.Theme, value interface{}, active bool, parse parser, commit committer) gxui.TextBox {
 	newvalue := value
 	tb := t.CreateTextBox()
 	tb.SetMargin(math.Spacing{})
@@ -82,10 +83,9 @@ func createTextbox(t gxui.Theme, appCtx *ApplicationContext, value interface{}, 
 	return tb
 }
 
-func createIntField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
-	_, v := a.Field(argIdx)
+func createIntField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
 	ty := reflect.TypeOf(v)
-	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
 		if i, err := strconv.ParseInt(s, 0, ty.Bits()); err == nil {
 			v := reflect.New(ty).Elem()
 			v.SetInt(i)
@@ -94,15 +94,13 @@ func createIntField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContex
 			return nil, false
 		}
 	}, func(v interface{}) {
-		a.SetField(argIdx, v)
-		appCtx.ReplaceAtom(a, id)
+		appCtx.Change(p, v)
 	})
 }
 
-func createUintField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
-	_, v := a.Field(argIdx)
+func createUintField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
 	ty := reflect.TypeOf(v)
-	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
 		if i, err := strconv.ParseUint(s, 0, ty.Bits()); err == nil {
 			v := reflect.New(ty).Elem()
 			v.SetUint(i)
@@ -111,15 +109,13 @@ func createUintField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationConte
 			return nil, false
 		}
 	}, func(v interface{}) {
-		a.SetField(argIdx, v)
-		appCtx.ReplaceAtom(a, id)
+		appCtx.Change(p, v)
 	})
 }
 
-func createFloatField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationContext, id atom.ID) gxui.Control {
-	_, v := a.Field(argIdx)
+func createFloatField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
 	ty := reflect.TypeOf(v)
-	return createTextbox(t, appCtx, v, true, func(s string) (interface{}, bool) {
+	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
 		if i, err := strconv.ParseFloat(s, ty.Bits()); err == nil {
 			v := reflect.New(ty).Elem()
 			v.SetFloat(i)
@@ -128,8 +124,7 @@ func createFloatField(t gxui.Theme, a *Atom, argIdx int, appCtx *ApplicationCont
 			return nil, false
 		}
 	}, func(v interface{}) {
-		a.SetField(argIdx, v)
-		appCtx.ReplaceAtom(a, id)
+		appCtx.Change(p, v)
 	})
 }
 
@@ -165,6 +160,7 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 	for i := 0; i < a.FieldCount(); i++ {
 		argIdx := i // capture for closures
 		info, v := a.Field(argIdx)
+		p := atomPath.Field(info.Name())
 		if needcomma {
 			ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
 		}
@@ -184,18 +180,17 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 
 		case bool:
 			c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
-				a.SetField(argIdx, v)
-				appCtx.ReplaceAtom(a, id)
+				appCtx.Change(p, v)
 			})
 
 		case int8, int16, int32, int64:
-			c = createIntField(t, a, argIdx, appCtx, id)
+			c = createIntField(t, appCtx, p, v)
 
 		case uint8, uint16, uint32, uint64:
-			c = createUintField(t, a, argIdx, appCtx, id)
+			c = createUintField(t, appCtx, p, v)
 
 		case float32, float64:
-			c = createFloatField(t, a, argIdx, appCtx, id)
+			c = createFloatField(t, appCtx, p, v)
 
 		default:
 			c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
@@ -203,7 +198,6 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 
 		ll.AddChild(c)
 		needcomma = true
-		p := atomPath.Field(info.Name())
 		appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
 			l := t.CreateLabel()
 			l.SetText(p.Path())
