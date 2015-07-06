@@ -6,7 +6,6 @@
 package service
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -144,20 +143,6 @@ type callPrerenderFramebuffers struct {
 type resultPrerenderFramebuffers struct {
 	binary.Generate
 	value BinaryId
-}
-
-// Call ReplaceAtom
-type callReplaceAtom struct {
-	binary.Generate
-	capture CaptureId
-	atomId  uint64
-	atom    atom.Atom
-}
-
-// Result ReplaceAtom
-type resultReplaceAtom struct {
-	binary.Generate
-	value CaptureId
 }
 
 // Call Get

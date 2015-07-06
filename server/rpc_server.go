@@ -222,22 +222,6 @@ func (s rpcServer) PrerenderFramebuffers(
 	return service.BinaryId{ID: id}, err
 }
 
-// ReplaceAtom creates and new capture based on an existing capture, but with
-// a single atom replaced.
-func (s rpcServer) ReplaceAtom(
-	capture service.CaptureId,
-	atomID uint64,
-	value atom.Atom,
-	l log.Logger) (service.CaptureId, error) {
-
-	id, err := database.Store(&builder.ReplaceAtom{
-		Capture: capture,
-		AtomID:  atom.ID(atomID),
-		Value:   value,
-	}, s.Database, l)
-	return service.CaptureId{ID: id}, err
-}
-
 // Get resolves and returns the object, value or memory at the path p.
 func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
 	return database.Build(&builder.Get{Path: p}, s.Database, l)

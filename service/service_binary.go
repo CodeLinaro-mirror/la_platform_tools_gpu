@@ -56,7 +56,6 @@ func init() {
 	Namespace.Add((*callGetTimingInfo)(nil).Class())
 	Namespace.Add((*callImport)(nil).Class())
 	Namespace.Add((*callPrerenderFramebuffers)(nil).Class())
-	Namespace.Add((*callReplaceAtom)(nil).Class())
 	Namespace.Add((*callResolveAtomStream)(nil).Class())
 	Namespace.Add((*callResolveBinary)(nil).Class())
 	Namespace.Add((*callResolveCapture)(nil).Class())
@@ -78,7 +77,6 @@ func init() {
 	Namespace.Add((*resultGetTimingInfo)(nil).Class())
 	Namespace.Add((*resultImport)(nil).Class())
 	Namespace.Add((*resultPrerenderFramebuffers)(nil).Class())
-	Namespace.Add((*resultReplaceAtom)(nil).Class())
 	Namespace.Add((*resultResolveAtomStream)(nil).Class())
 	Namespace.Add((*resultResolveBinary)(nil).Class())
 	Namespace.Add((*resultResolveCapture)(nil).Class())
@@ -127,7 +125,6 @@ var (
 	binaryIDcallGetTimingInfo           = binary.ID{0xb1, 0x32, 0x24, 0x67, 0x2e, 0xb9, 0x1f, 0x2f, 0x72, 0xf3, 0x6b, 0x00, 0x23, 0x1f, 0xd4, 0x1a, 0x57, 0x59, 0x22, 0x29}
 	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
 	binaryIDcallPrerenderFramebuffers   = binary.ID{0x08, 0x3f, 0x02, 0x12, 0x24, 0x5a, 0x40, 0xd1, 0x11, 0x37, 0x09, 0x4e, 0xcf, 0x9e, 0x22, 0x92, 0xb8, 0x86, 0xbf, 0x9f}
-	binaryIDcallReplaceAtom             = binary.ID{0xce, 0xee, 0xe9, 0xc7, 0xfd, 0xdd, 0x73, 0x2c, 0x2b, 0x11, 0x40, 0x40, 0x7c, 0x52, 0x6d, 0xf4, 0xe8, 0x5f, 0x0f, 0x60}
 	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
 	binaryIDcallResolveBinary           = binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}
 	binaryIDcallResolveCapture          = binary.ID{0x4e, 0x6e, 0x5b, 0x49, 0x61, 0xef, 0xfc, 0x3c, 0x4a, 0xf8, 0xf6, 0xae, 0xc0, 0xca, 0xa1, 0x67, 0x17, 0x73, 0xff, 0xf8}
@@ -149,7 +146,6 @@ var (
 	binaryIDresultGetTimingInfo         = binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}
 	binaryIDresultImport                = binary.ID{0x1e, 0x86, 0x40, 0xb0, 0xc2, 0xb8, 0xa5, 0xa1, 0xf3, 0xc8, 0x51, 0x29, 0x87, 0x4d, 0x0c, 0xd9, 0x49, 0xd8, 0xbe, 0xed}
 	binaryIDresultPrerenderFramebuffers = binary.ID{0xc2, 0x9e, 0x11, 0x61, 0x22, 0xcb, 0xd8, 0xfc, 0x6c, 0x5c, 0xb9, 0x0f, 0x07, 0x81, 0x67, 0xc9, 0x2e, 0x1f, 0x2f, 0xf8}
-	binaryIDresultReplaceAtom           = binary.ID{0x52, 0x62, 0xe6, 0x27, 0x54, 0x4e, 0x8e, 0x8f, 0x1e, 0x9f, 0x5e, 0xf5, 0x8d, 0x64, 0x38, 0x99, 0xb4, 0x57, 0xef, 0xff}
 	binaryIDresultResolveAtomStream     = binary.ID{0x05, 0xb9, 0x98, 0x3d, 0x6f, 0x5f, 0xc0, 0x23, 0xb2, 0xe1, 0x2e, 0x55, 0xf4, 0x37, 0x71, 0xe6, 0xd3, 0x98, 0xbf, 0x52}
 	binaryIDresultResolveBinary         = binary.ID{0xbf, 0xbd, 0x77, 0xf6, 0xc1, 0x13, 0x8c, 0xfe, 0x38, 0xd5, 0x30, 0x3c, 0x58, 0xc8, 0x67, 0xbf, 0x17, 0xce, 0x71, 0xe9}
 	binaryIDresultResolveCapture        = binary.ID{0xb3, 0x47, 0xd0, 0x3f, 0x28, 0x63, 0xfe, 0xa4, 0x32, 0xc6, 0xf0, 0x2c, 0xec, 0x6d, 0x33, 0x8a, 0xb2, 0x38, 0xf7, 0x37}
@@ -2598,83 +2594,6 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 	},
 }
 
-type binaryClasscallReplaceAtom struct{}
-
-func (*callReplaceAtom) Class() binary.Class {
-	return (*binaryClasscallReplaceAtom)(nil)
-}
-func doEncodecallReplaceAtom(e binary.Encoder, o *callReplaceAtom) error {
-	if err := e.Value(&o.capture); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.atomId); err != nil {
-		return err
-	}
-	if o.atom != nil {
-		if err := e.Object(o.atom); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallReplaceAtom(d binary.Decoder, o *callReplaceAtom) error {
-	if err := d.Value(&o.capture); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.atomId = uint64(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.atom = obj.(atom.Atom)
-	} else {
-		o.atom = nil
-	}
-	return nil
-}
-func doSkipcallReplaceAtom(d binary.Decoder) error {
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallReplaceAtom) ID() binary.ID      { return binaryIDcallReplaceAtom }
-func (*binaryClasscallReplaceAtom) New() binary.Object { return &callReplaceAtom{} }
-func (*binaryClasscallReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallReplaceAtom(e, obj.(*callReplaceAtom))
-}
-func (*binaryClasscallReplaceAtom) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callReplaceAtom{}
-	return obj, doDecodecallReplaceAtom(d, obj)
-}
-func (*binaryClasscallReplaceAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallReplaceAtom(d, obj.(*callReplaceAtom))
-}
-func (*binaryClasscallReplaceAtom) Skip(d binary.Decoder) error { return doSkipcallReplaceAtom(d) }
-func (*binaryClasscallReplaceAtom) Schema() *schema.Class       { return schemacallReplaceAtom }
-
-var schemacallReplaceAtom = &schema.Class{
-	TypeID:  binaryIDcallReplaceAtom,
-	Package: "service",
-	Name:    "callReplaceAtom",
-	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
-		{Declared: "atomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "atom", Type: &schema.Interface{Name: "atom.Atom"}},
-	},
-}
-
 type binaryClasscallResolveAtomStream struct{}
 
 func (*callResolveAtomStream) Class() binary.Class {
@@ -3773,53 +3692,6 @@ var schemaresultPrerenderFramebuffers = &schema.Class{
 	Name:    "resultPrerenderFramebuffers",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassresultReplaceAtom struct{}
-
-func (*resultReplaceAtom) Class() binary.Class {
-	return (*binaryClassresultReplaceAtom)(nil)
-}
-func doEncoderesultReplaceAtom(e binary.Encoder, o *resultReplaceAtom) error {
-	if err := e.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultReplaceAtom(d binary.Decoder, o *resultReplaceAtom) error {
-	if err := d.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipresultReplaceAtom(d binary.Decoder) error {
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultReplaceAtom) ID() binary.ID      { return binaryIDresultReplaceAtom }
-func (*binaryClassresultReplaceAtom) New() binary.Object { return &resultReplaceAtom{} }
-func (*binaryClassresultReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultReplaceAtom(e, obj.(*resultReplaceAtom))
-}
-func (*binaryClassresultReplaceAtom) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultReplaceAtom{}
-	return obj, doDecoderesultReplaceAtom(d, obj)
-}
-func (*binaryClassresultReplaceAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultReplaceAtom(d, obj.(*resultReplaceAtom))
-}
-func (*binaryClassresultReplaceAtom) Skip(d binary.Decoder) error { return doSkipresultReplaceAtom(d) }
-func (*binaryClassresultReplaceAtom) Schema() *schema.Class       { return schemaresultReplaceAtom }
-
-var schemaresultReplaceAtom = &schema.Class{
-	TypeID:  binaryIDresultReplaceAtom,
-	Package: "service",
-	Name:    "resultReplaceAtom",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
 	},
 }
 
