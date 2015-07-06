@@ -21,14 +21,16 @@ import (
 	"runtime"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
+	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/server"
 )
 
 var (
-	http        = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
-	rpc         = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
-	dataPath    = flag.String("data", "data", "Path to the server's data folder")
-	logfilePath = flag.String("logfile", filepath.Join("logs", "server.log"), "Path to the server's logfile")
+	http            = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
+	rpc             = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
+	dataPath        = flag.String("data", "data", "Path to the server's data folder")
+	logfilePath     = flag.String("logfile", filepath.Join("logs", "server.log"), "Path to the server's logfile")
+	localDevicePort = flag.Int("local_replayd_port", 9284, "Port number of the \"replayd\" running on the local device")
 )
 
 func main() {
@@ -42,6 +44,9 @@ func main() {
 
 	dataAbsPath, _ := filepath.Abs(*dataPath)
 	logfileAbsPath, _ := filepath.Abs(*logfilePath)
+
+	replay.ConfigureLocalReplayDevice(false, // disable disk-cache
+		replay.Replayd, *localDevicePort)
 
 	server.Run(server.Config{
 		HttpAddress: *http,

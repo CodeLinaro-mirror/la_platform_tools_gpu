@@ -111,15 +111,23 @@ int main(int argc, char* argv[]) {
     GAPID_LOGGER_INIT("logs/replay.log");
 
     bool useCache = true;
+    const char* portStr = "9284";
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--nocache") == 0) {
             printf("Disabling cache\n");
             useCache = false;
         }
+        if (strcmp(argv[i], "--port") == 0) {
+            if (i + 1 >= argc) {
+                fprintf(stderr, "Usage: --port <port_num>");
+                exit(1);
+            }
+            portStr = argv[i + 1];
+        }
     }
     const char* cachePath = useCache ? ("data" PATH_DELIMITER_STR "ccache") : nullptr;
     MemoryManager memoryManager(memorySizes);
-    listenConnections("9284", cachePath, &memoryManager);
+    listenConnections(portStr, cachePath, &memoryManager);
     return EXIT_SUCCESS;
 }
 
