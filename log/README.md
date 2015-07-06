@@ -7,6 +7,10 @@ interface.
 
 ## Usage
 
+```go
+var ConstantValues schema.Constants
+```
+
 #### func  Alertf
 
 ```go

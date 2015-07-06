@@ -8,6 +8,10 @@ observed in the capture.
 ## Usage
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var Namespace = registry.NewNamespace()
 ```
 

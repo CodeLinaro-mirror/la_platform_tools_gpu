@@ -6,6 +6,10 @@ Package gfxapi exposes the shared behavior of all graphics api's.
 
 ## Usage
 
+```go
+var ConstantValues schema.Constants
+```
+
 #### func  Register
 
 ```go

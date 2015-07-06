@@ -12,6 +12,10 @@ const NoID = ^ID(0)
 NoID is used when you have to pass an ID, but don't have one to use.
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var Namespace = registry.NewNamespace()
 ```
 
@@ -30,8 +34,8 @@ and AddWrite methods on atoms.
 type Atom interface {
 	binary.Object
 
-	// API returns the graphics API this atom belongs to.
-	API() gfxapi.API
+	// API returns the graphics API id this atom belongs to.
+	API() gfxapi.ID
 
 	// Flags returns the flags of the atom.
 	Flags() Flags
@@ -369,7 +373,8 @@ WriteTo writes all atoms in the list to w, terminating with a single EOS atom.
 ```go
 type Metadata struct {
 	binary.Generate
-	Api              binary.ID // The api this atom belongs to.
+	API              gfxapi.ID // The api this atom belongs to.
+	DisplayName      string    // The display name for this atom type.
 	Flags            Flags     // The atom flags for this type.
 	DocumentationUrl string    // A url for documentation about this atom.
 }
@@ -383,8 +388,16 @@ schema class for the atom.
 ```go
 func FindMetadata(class *schema.Class) *Metadata
 ```
-Finds the atom metadata for the given schema class. Returns nil if the class was
-not for an atom.
+FindMetadata finds the atom metadata for the given schema class. Returns nil if
+the class was not for an atom.
+
+#### func  MetadataOf
+
+```go
+func MetadataOf(atom Atom) *Metadata
+```
+Finds the atom metadata for the given atom. Returns nil if the atom has no
+metadata.
 
 #### func (*Metadata) Class
 
@@ -589,7 +602,7 @@ stream on import and their resources are placed into the database.
 #### func (*Resource) API
 
 ```go
-func (a *Resource) API() gfxapi.API
+func (a *Resource) API() gfxapi.ID
 ```
 Atom compliance
 

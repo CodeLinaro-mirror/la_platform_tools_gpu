@@ -27,6 +27,10 @@ var (
 )
 ```
 
+```go
+var ConstantValues schema.Constants
+```
+
 #### func  Parse
 
 ```go

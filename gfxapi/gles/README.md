@@ -1426,6 +1426,10 @@ const (
 Type_OES_vertex_half_float
 
 ```go
+var ConstantValues schema.Constants
+```
+
+```go
 var Namespace = registry.NewNamespace()
 ```
 
@@ -1449,7 +1453,7 @@ fragment shaders. The returned program is not linked.
 
 ```go
 type Architecture struct {
-	binary.Generate `display:"architecture"`
+	binary.Generate
 
 	PointerAlignment uint32
 	PointerSize      uint32
@@ -1471,7 +1475,7 @@ func NewArchitecture(Pointer_alignment uint32, Pointer_size uint32, Integer_size
 #### func (*Architecture) API
 
 ```go
-func (c *Architecture) API() gfxapi.API
+func (c *Architecture) API() gfxapi.ID
 ```
 
 #### func (*Architecture) AddRead
@@ -1635,7 +1639,7 @@ type BOOL int64
 
 ```go
 type BackbufferInfo struct {
-	binary.Generate `display:"backbufferInfo"`
+	binary.Generate
 
 	Width                int32
 	Height               int32
@@ -1659,7 +1663,7 @@ func NewBackbufferInfo(Width int32, Height int32, Color_fmt RenderbufferFormat, 
 #### func (*BackbufferInfo) API
 
 ```go
-func (c *BackbufferInfo) API() gfxapi.API
+func (c *BackbufferInfo) API() gfxapi.ID
 ```
 
 #### func (*BackbufferInfo) AddRead
@@ -2761,7 +2765,7 @@ Write writes value to the CGLContextObj element at the pointer.
 
 ```go
 type CGLCreateContext struct {
-	binary.Generate `display:"CGLCreateContext"`
+	binary.Generate
 
 	Pix    CGLPixelFormatObj
 	Share  CGLContextObj
@@ -2783,7 +2787,7 @@ func NewCGLCreateContext(Pix memory.Pointer, Share memory.Pointer, Ctx memory.Po
 #### func (*CGLCreateContext) API
 
 ```go
-func (c *CGLCreateContext) API() gfxapi.API
+func (c *CGLCreateContext) API() gfxapi.ID
 ```
 
 #### func (*CGLCreateContext) AddRead
@@ -2849,7 +2853,7 @@ type CGLError int64
 
 ```go
 type CGLFlushDrawable struct {
-	binary.Generate `display:"CGLFlushDrawable"`
+	binary.Generate
 
 	Ctx    CGLContextObj
 	Result CGLError
@@ -2869,7 +2873,7 @@ func NewCGLFlushDrawable(Ctx memory.Pointer, Result CGLError) *CGLFlushDrawable
 #### func (*CGLFlushDrawable) API
 
 ```go
-func (c *CGLFlushDrawable) API() gfxapi.API
+func (c *CGLFlushDrawable) API() gfxapi.ID
 ```
 
 #### func (*CGLFlushDrawable) AddRead
@@ -2922,7 +2926,7 @@ func (a *CGLFlushDrawable) String() string
 
 ```go
 type CGLGetSurface struct {
-	binary.Generate `display:"CGLGetSurface"`
+	binary.Generate
 
 	Ctx    CGLContextObj
 	Cid    CGSConnectionIDᵖ
@@ -2945,7 +2949,7 @@ func NewCGLGetSurface(Ctx memory.Pointer, Cid memory.Pointer, Wid memory.Pointer
 #### func (*CGLGetSurface) API
 
 ```go
-func (c *CGLGetSurface) API() gfxapi.API
+func (c *CGLGetSurface) API() gfxapi.ID
 ```
 
 #### func (*CGLGetSurface) AddRead
@@ -3054,7 +3058,7 @@ Slice returns a new Voidˢ from the pointer using start and end indices.
 
 ```go
 type CGLSetCurrentContext struct {
-	binary.Generate `display:"CGLSetCurrentContext"`
+	binary.Generate
 
 	Ctx    CGLContextObj
 	Result CGLError
@@ -3074,7 +3078,7 @@ func NewCGLSetCurrentContext(Ctx memory.Pointer, Result CGLError) *CGLSetCurrent
 #### func (*CGLSetCurrentContext) API
 
 ```go
-func (c *CGLSetCurrentContext) API() gfxapi.API
+func (c *CGLSetCurrentContext) API() gfxapi.ID
 ```
 
 #### func (*CGLSetCurrentContext) AddRead
@@ -3406,7 +3410,7 @@ Write writes value to the CGSConnectionID element at the pointer.
 
 ```go
 type CGSGetSurfaceBounds struct {
-	binary.Generate `display:"CGSGetSurfaceBounds"`
+	binary.Generate
 
 	Cid    CGSConnectionID
 	Wid    CGSWindowID
@@ -3429,7 +3433,7 @@ func NewCGSGetSurfaceBounds(Cid memory.Pointer, Wid CGSWindowID, Sid CGSSurfaceI
 #### func (*CGSGetSurfaceBounds) API
 
 ```go
-func (c *CGSGetSurfaceBounds) API() gfxapi.API
+func (c *CGSGetSurfaceBounds) API() gfxapi.ID
 ```
 
 #### func (*CGSGetSurfaceBounds) AddRead
@@ -5528,7 +5532,7 @@ Write writes value to the EGLint element at the pointer.
 
 ```go
 type EglCreateContext struct {
-	binary.Generate `display:"eglCreateContext"`
+	binary.Generate
 
 	Display      EGLDisplay
 	Config       EGLConfig
@@ -5551,7 +5555,7 @@ func NewEglCreateContext(Display memory.Pointer, Config memory.Pointer, Share_co
 #### func (*EglCreateContext) API
 
 ```go
-func (c *EglCreateContext) API() gfxapi.API
+func (c *EglCreateContext) API() gfxapi.ID
 ```
 
 #### func (*EglCreateContext) AddRead
@@ -5610,7 +5614,7 @@ func (a *EglCreateContext) String() string
 
 ```go
 type EglInitialize struct {
-	binary.Generate `display:"eglInitialize"`
+	binary.Generate
 
 	Dpy    EGLDisplay
 	Major  EGLintᵖ
@@ -5632,7 +5636,7 @@ func NewEglInitialize(Dpy memory.Pointer, Major memory.Pointer, Minor memory.Poi
 #### func (*EglInitialize) API
 
 ```go
-func (c *EglInitialize) API() gfxapi.API
+func (c *EglInitialize) API() gfxapi.ID
 ```
 
 #### func (*EglInitialize) AddRead
@@ -5685,7 +5689,7 @@ func (a *EglInitialize) String() string
 
 ```go
 type EglMakeCurrent struct {
-	binary.Generate `display:"eglMakeCurrent"`
+	binary.Generate
 
 	Display EGLDisplay
 	Draw    EGLSurface
@@ -5708,7 +5712,7 @@ func NewEglMakeCurrent(Display memory.Pointer, Draw memory.Pointer, Read memory.
 #### func (*EglMakeCurrent) API
 
 ```go
-func (c *EglMakeCurrent) API() gfxapi.API
+func (c *EglMakeCurrent) API() gfxapi.ID
 ```
 
 #### func (*EglMakeCurrent) AddRead
@@ -5767,7 +5771,7 @@ func (a *EglMakeCurrent) String() string
 
 ```go
 type EglQuerySurface struct {
-	binary.Generate `display:"eglQuerySurface"`
+	binary.Generate
 
 	Display   EGLDisplay
 	Surface   EGLSurface
@@ -5790,7 +5794,7 @@ func NewEglQuerySurface(Display memory.Pointer, Surface memory.Pointer, Attribut
 #### func (*EglQuerySurface) API
 
 ```go
-func (c *EglQuerySurface) API() gfxapi.API
+func (c *EglQuerySurface) API() gfxapi.ID
 ```
 
 #### func (*EglQuerySurface) AddRead
@@ -5843,7 +5847,7 @@ func (a *EglQuerySurface) String() string
 
 ```go
 type EglSwapBuffers struct {
-	binary.Generate `display:"eglSwapBuffers"`
+	binary.Generate
 
 	Display EGLDisplay
 	Surface Voidᵖ
@@ -5864,7 +5868,7 @@ func NewEglSwapBuffers(Display memory.Pointer, Surface memory.Pointer, Result EG
 #### func (*EglSwapBuffers) API
 
 ```go
-func (c *EglSwapBuffers) API() gfxapi.API
+func (c *EglSwapBuffers) API() gfxapi.ID
 ```
 
 #### func (*EglSwapBuffers) AddRead
@@ -6470,7 +6474,7 @@ func (v FaceOrientation) String() string
 
 ```go
 type FlushPostBuffer struct {
-	binary.Generate `display:"flushPostBuffer"`
+	binary.Generate
 }
 ```
 
@@ -6487,7 +6491,7 @@ func NewFlushPostBuffer() *FlushPostBuffer
 #### func (*FlushPostBuffer) API
 
 ```go
-func (c *FlushPostBuffer) API() gfxapi.API
+func (c *FlushPostBuffer) API() gfxapi.ID
 ```
 
 #### func (*FlushPostBuffer) AddRead
@@ -7427,7 +7431,7 @@ Slice returns a new Voidˢ from the pointer using start and end indices.
 
 ```go
 type GlActiveTexture struct {
-	binary.Generate `display:"glActiveTexture"`
+	binary.Generate
 
 	Unit TextureUnit
 }
@@ -7446,7 +7450,7 @@ func NewGlActiveTexture(Unit TextureUnit) *GlActiveTexture
 #### func (*GlActiveTexture) API
 
 ```go
-func (c *GlActiveTexture) API() gfxapi.API
+func (c *GlActiveTexture) API() gfxapi.ID
 ```
 
 #### func (*GlActiveTexture) AddRead
@@ -7505,7 +7509,7 @@ func (a *GlActiveTexture) String() string
 
 ```go
 type GlAttachShader struct {
-	binary.Generate `display:"glAttachShader"`
+	binary.Generate
 
 	Program ProgramId
 	Shader  ShaderId
@@ -7525,7 +7529,7 @@ func NewGlAttachShader(Program ProgramId, Shader ShaderId) *GlAttachShader
 #### func (*GlAttachShader) API
 
 ```go
-func (c *GlAttachShader) API() gfxapi.API
+func (c *GlAttachShader) API() gfxapi.ID
 ```
 
 #### func (*GlAttachShader) AddRead
@@ -7584,7 +7588,7 @@ func (a *GlAttachShader) String() string
 
 ```go
 type GlBeginQuery struct {
-	binary.Generate `display:"glBeginQuery"`
+	binary.Generate
 
 	Target QueryTarget
 	Query  QueryId
@@ -7604,7 +7608,7 @@ func NewGlBeginQuery(Target QueryTarget, Query QueryId) *GlBeginQuery
 #### func (*GlBeginQuery) API
 
 ```go
-func (c *GlBeginQuery) API() gfxapi.API
+func (c *GlBeginQuery) API() gfxapi.ID
 ```
 
 #### func (*GlBeginQuery) AddRead
@@ -7663,7 +7667,7 @@ func (a *GlBeginQuery) String() string
 
 ```go
 type GlBeginQueryEXT struct {
-	binary.Generate `display:"glBeginQueryEXT"`
+	binary.Generate
 
 	Target QueryTarget
 	Query  QueryId
@@ -7683,7 +7687,7 @@ func NewGlBeginQueryEXT(Target QueryTarget, Query QueryId) *GlBeginQueryEXT
 #### func (*GlBeginQueryEXT) API
 
 ```go
-func (c *GlBeginQueryEXT) API() gfxapi.API
+func (c *GlBeginQueryEXT) API() gfxapi.ID
 ```
 
 #### func (*GlBeginQueryEXT) AddRead
@@ -7742,7 +7746,7 @@ func (a *GlBeginQueryEXT) String() string
 
 ```go
 type GlBindAttribLocation struct {
-	binary.Generate `display:"glBindAttribLocation"`
+	binary.Generate
 
 	Program  ProgramId
 	Location AttributeLocation
@@ -7763,7 +7767,7 @@ func NewGlBindAttribLocation(Program ProgramId, Location AttributeLocation, Name
 #### func (*GlBindAttribLocation) API
 
 ```go
-func (c *GlBindAttribLocation) API() gfxapi.API
+func (c *GlBindAttribLocation) API() gfxapi.ID
 ```
 
 #### func (*GlBindAttribLocation) AddRead
@@ -7824,7 +7828,7 @@ func (a *GlBindAttribLocation) String() string
 
 ```go
 type GlBindBuffer struct {
-	binary.Generate `display:"glBindBuffer"`
+	binary.Generate
 
 	Target BufferTarget
 	Buffer BufferId
@@ -7844,7 +7848,7 @@ func NewGlBindBuffer(Target BufferTarget, Buffer BufferId) *GlBindBuffer
 #### func (*GlBindBuffer) API
 
 ```go
-func (c *GlBindBuffer) API() gfxapi.API
+func (c *GlBindBuffer) API() gfxapi.ID
 ```
 
 #### func (*GlBindBuffer) AddRead
@@ -7903,7 +7907,7 @@ func (a *GlBindBuffer) String() string
 
 ```go
 type GlBindBufferBase struct {
-	binary.Generate `display:"glBindBufferBase"`
+	binary.Generate
 
 	Target IndexedBufferTarget
 	Index  uint32
@@ -7924,7 +7928,7 @@ func NewGlBindBufferBase(Target IndexedBufferTarget, Index uint32, Buffer Buffer
 #### func (*GlBindBufferBase) API
 
 ```go
-func (c *GlBindBufferBase) API() gfxapi.API
+func (c *GlBindBufferBase) API() gfxapi.ID
 ```
 
 #### func (*GlBindBufferBase) AddRead
@@ -7983,7 +7987,7 @@ func (a *GlBindBufferBase) String() string
 
 ```go
 type GlBindFramebuffer struct {
-	binary.Generate `display:"glBindFramebuffer"`
+	binary.Generate
 
 	Target      FramebufferTarget
 	Framebuffer FramebufferId
@@ -8003,7 +8007,7 @@ func NewGlBindFramebuffer(Target FramebufferTarget, Framebuffer FramebufferId) *
 #### func (*GlBindFramebuffer) API
 
 ```go
-func (c *GlBindFramebuffer) API() gfxapi.API
+func (c *GlBindFramebuffer) API() gfxapi.ID
 ```
 
 #### func (*GlBindFramebuffer) AddRead
@@ -8062,7 +8066,7 @@ func (a *GlBindFramebuffer) String() string
 
 ```go
 type GlBindRenderbuffer struct {
-	binary.Generate `display:"glBindRenderbuffer"`
+	binary.Generate
 
 	Target       RenderbufferTarget
 	Renderbuffer RenderbufferId
@@ -8082,7 +8086,7 @@ func NewGlBindRenderbuffer(Target RenderbufferTarget, Renderbuffer RenderbufferI
 #### func (*GlBindRenderbuffer) API
 
 ```go
-func (c *GlBindRenderbuffer) API() gfxapi.API
+func (c *GlBindRenderbuffer) API() gfxapi.ID
 ```
 
 #### func (*GlBindRenderbuffer) AddRead
@@ -8143,7 +8147,7 @@ func (a *GlBindRenderbuffer) String() string
 
 ```go
 type GlBindTexture struct {
-	binary.Generate `display:"glBindTexture"`
+	binary.Generate
 
 	Target  TextureTarget
 	Texture TextureId
@@ -8163,7 +8167,7 @@ func NewGlBindTexture(Target TextureTarget, Texture TextureId) *GlBindTexture
 #### func (*GlBindTexture) API
 
 ```go
-func (c *GlBindTexture) API() gfxapi.API
+func (c *GlBindTexture) API() gfxapi.ID
 ```
 
 #### func (*GlBindTexture) AddRead
@@ -8222,7 +8226,7 @@ func (a *GlBindTexture) String() string
 
 ```go
 type GlBindVertexArray struct {
-	binary.Generate `display:"glBindVertexArray"`
+	binary.Generate
 
 	Array VertexArrayId
 }
@@ -8241,7 +8245,7 @@ func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray
 #### func (*GlBindVertexArray) API
 
 ```go
-func (c *GlBindVertexArray) API() gfxapi.API
+func (c *GlBindVertexArray) API() gfxapi.ID
 ```
 
 #### func (*GlBindVertexArray) AddRead
@@ -8300,7 +8304,7 @@ func (a *GlBindVertexArray) String() string
 
 ```go
 type GlBindVertexArrayOES struct {
-	binary.Generate `display:"glBindVertexArrayOES"`
+	binary.Generate
 
 	Array VertexArrayId
 }
@@ -8319,7 +8323,7 @@ func NewGlBindVertexArrayOES(Array VertexArrayId) *GlBindVertexArrayOES
 #### func (*GlBindVertexArrayOES) API
 
 ```go
-func (c *GlBindVertexArrayOES) API() gfxapi.API
+func (c *GlBindVertexArrayOES) API() gfxapi.ID
 ```
 
 #### func (*GlBindVertexArrayOES) AddRead
@@ -8380,7 +8384,7 @@ func (a *GlBindVertexArrayOES) String() string
 
 ```go
 type GlBlendColor struct {
-	binary.Generate `display:"glBlendColor"`
+	binary.Generate
 
 	Red   float32
 	Green float32
@@ -8402,7 +8406,7 @@ func NewGlBlendColor(Red float32, Green float32, Blue float32, Alpha float32) *G
 #### func (*GlBlendColor) API
 
 ```go
-func (c *GlBlendColor) API() gfxapi.API
+func (c *GlBlendColor) API() gfxapi.ID
 ```
 
 #### func (*GlBlendColor) AddRead
@@ -8461,7 +8465,7 @@ func (a *GlBlendColor) String() string
 
 ```go
 type GlBlendEquation struct {
-	binary.Generate `display:"glBlendEquation"`
+	binary.Generate
 
 	Equation BlendEquation
 }
@@ -8480,7 +8484,7 @@ func NewGlBlendEquation(Equation BlendEquation) *GlBlendEquation
 #### func (*GlBlendEquation) API
 
 ```go
-func (c *GlBlendEquation) API() gfxapi.API
+func (c *GlBlendEquation) API() gfxapi.ID
 ```
 
 #### func (*GlBlendEquation) AddRead
@@ -8539,7 +8543,7 @@ func (a *GlBlendEquation) String() string
 
 ```go
 type GlBlendEquationSeparate struct {
-	binary.Generate `display:"glBlendEquationSeparate"`
+	binary.Generate
 
 	Rgb   BlendEquation
 	Alpha BlendEquation
@@ -8559,7 +8563,7 @@ func NewGlBlendEquationSeparate(Rgb BlendEquation, Alpha BlendEquation) *GlBlend
 #### func (*GlBlendEquationSeparate) API
 
 ```go
-func (c *GlBlendEquationSeparate) API() gfxapi.API
+func (c *GlBlendEquationSeparate) API() gfxapi.ID
 ```
 
 #### func (*GlBlendEquationSeparate) AddRead
@@ -8620,7 +8624,7 @@ func (a *GlBlendEquationSeparate) String() string
 
 ```go
 type GlBlendFunc struct {
-	binary.Generate `display:"glBlendFunc"`
+	binary.Generate
 
 	SrcFactor BlendFactor
 	DstFactor BlendFactor
@@ -8640,7 +8644,7 @@ func NewGlBlendFunc(Src_factor BlendFactor, Dst_factor BlendFactor) *GlBlendFunc
 #### func (*GlBlendFunc) API
 
 ```go
-func (c *GlBlendFunc) API() gfxapi.API
+func (c *GlBlendFunc) API() gfxapi.ID
 ```
 
 #### func (*GlBlendFunc) AddRead
@@ -8699,7 +8703,7 @@ func (a *GlBlendFunc) String() string
 
 ```go
 type GlBlendFuncSeparate struct {
-	binary.Generate `display:"glBlendFuncSeparate"`
+	binary.Generate
 
 	SrcFactorRgb   BlendFactor
 	DstFactorRgb   BlendFactor
@@ -8721,7 +8725,7 @@ func NewGlBlendFuncSeparate(Src_factor_rgb BlendFactor, Dst_factor_rgb BlendFact
 #### func (*GlBlendFuncSeparate) API
 
 ```go
-func (c *GlBlendFuncSeparate) API() gfxapi.API
+func (c *GlBlendFuncSeparate) API() gfxapi.ID
 ```
 
 #### func (*GlBlendFuncSeparate) AddRead
@@ -8782,7 +8786,7 @@ func (a *GlBlendFuncSeparate) String() string
 
 ```go
 type GlBlitFramebuffer struct {
-	binary.Generate `display:"glBlitFramebuffer"`
+	binary.Generate
 
 	SrcX0  int32
 	SrcY0  int32
@@ -8810,7 +8814,7 @@ func NewGlBlitFramebuffer(SrcX0 int32, SrcY0 int32, SrcX1 int32, SrcY1 int32, Ds
 #### func (*GlBlitFramebuffer) API
 
 ```go
-func (c *GlBlitFramebuffer) API() gfxapi.API
+func (c *GlBlitFramebuffer) API() gfxapi.ID
 ```
 
 #### func (*GlBlitFramebuffer) AddRead
@@ -8869,7 +8873,7 @@ func (a *GlBlitFramebuffer) String() string
 
 ```go
 type GlBufferData struct {
-	binary.Generate `display:"glBufferData"`
+	binary.Generate
 
 	Target BufferTarget
 	Size   int32
@@ -8891,7 +8895,7 @@ func NewGlBufferData(Target BufferTarget, Size int32, Data memory.Pointer, Usage
 #### func (*GlBufferData) API
 
 ```go
-func (c *GlBufferData) API() gfxapi.API
+func (c *GlBufferData) API() gfxapi.ID
 ```
 
 #### func (*GlBufferData) AddRead
@@ -8950,7 +8954,7 @@ func (a *GlBufferData) String() string
 
 ```go
 type GlBufferSubData struct {
-	binary.Generate `display:"glBufferSubData"`
+	binary.Generate
 
 	Target BufferTarget
 	Offset int32
@@ -8972,7 +8976,7 @@ func NewGlBufferSubData(Target BufferTarget, Offset int32, Size int32, Data memo
 #### func (*GlBufferSubData) API
 
 ```go
-func (c *GlBufferSubData) API() gfxapi.API
+func (c *GlBufferSubData) API() gfxapi.ID
 ```
 
 #### func (*GlBufferSubData) AddRead
@@ -9031,7 +9035,7 @@ func (a *GlBufferSubData) String() string
 
 ```go
 type GlCheckFramebufferStatus struct {
-	binary.Generate `display:"glCheckFramebufferStatus"`
+	binary.Generate
 
 	Target FramebufferTarget
 	Result FramebufferStatus
@@ -9051,7 +9055,7 @@ func NewGlCheckFramebufferStatus(Target FramebufferTarget, Result FramebufferSta
 #### func (*GlCheckFramebufferStatus) API
 
 ```go
-func (c *GlCheckFramebufferStatus) API() gfxapi.API
+func (c *GlCheckFramebufferStatus) API() gfxapi.ID
 ```
 
 #### func (*GlCheckFramebufferStatus) AddRead
@@ -9112,7 +9116,7 @@ func (a *GlCheckFramebufferStatus) String() string
 
 ```go
 type GlClear struct {
-	binary.Generate `display:"glClear"`
+	binary.Generate
 
 	Mask ClearMask
 }
@@ -9131,7 +9135,7 @@ func NewGlClear(Mask ClearMask) *GlClear
 #### func (*GlClear) API
 
 ```go
-func (c *GlClear) API() gfxapi.API
+func (c *GlClear) API() gfxapi.ID
 ```
 
 #### func (*GlClear) AddRead
@@ -9190,7 +9194,7 @@ func (a *GlClear) String() string
 
 ```go
 type GlClearColor struct {
-	binary.Generate `display:"glClearColor"`
+	binary.Generate
 
 	R float32
 	G float32
@@ -9212,7 +9216,7 @@ func NewGlClearColor(R float32, G float32, B float32, A float32) *GlClearColor
 #### func (*GlClearColor) API
 
 ```go
-func (c *GlClearColor) API() gfxapi.API
+func (c *GlClearColor) API() gfxapi.ID
 ```
 
 #### func (*GlClearColor) AddRead
@@ -9271,7 +9275,7 @@ func (a *GlClearColor) String() string
 
 ```go
 type GlClearDepthf struct {
-	binary.Generate `display:"glClearDepthf"`
+	binary.Generate
 
 	Depth float32
 }
@@ -9290,7 +9294,7 @@ func NewGlClearDepthf(Depth float32) *GlClearDepthf
 #### func (*GlClearDepthf) API
 
 ```go
-func (c *GlClearDepthf) API() gfxapi.API
+func (c *GlClearDepthf) API() gfxapi.ID
 ```
 
 #### func (*GlClearDepthf) AddRead
@@ -9349,7 +9353,7 @@ func (a *GlClearDepthf) String() string
 
 ```go
 type GlClearStencil struct {
-	binary.Generate `display:"glClearStencil"`
+	binary.Generate
 
 	Stencil int32
 }
@@ -9368,7 +9372,7 @@ func NewGlClearStencil(Stencil int32) *GlClearStencil
 #### func (*GlClearStencil) API
 
 ```go
-func (c *GlClearStencil) API() gfxapi.API
+func (c *GlClearStencil) API() gfxapi.ID
 ```
 
 #### func (*GlClearStencil) AddRead
@@ -9427,7 +9431,7 @@ func (a *GlClearStencil) String() string
 
 ```go
 type GlClientWaitSync struct {
-	binary.Generate `display:"glClientWaitSync"`
+	binary.Generate
 
 	Sync      SyncObject
 	SyncFlags SyncFlags
@@ -9449,7 +9453,7 @@ func NewGlClientWaitSync(Sync SyncObject, SyncFlags SyncFlags, Timeout uint64, R
 #### func (*GlClientWaitSync) API
 
 ```go
-func (c *GlClientWaitSync) API() gfxapi.API
+func (c *GlClientWaitSync) API() gfxapi.ID
 ```
 
 #### func (*GlClientWaitSync) AddRead
@@ -9508,7 +9512,7 @@ func (a *GlClientWaitSync) String() string
 
 ```go
 type GlColorMask struct {
-	binary.Generate `display:"glColorMask"`
+	binary.Generate
 
 	Red   bool
 	Green bool
@@ -9530,7 +9534,7 @@ func NewGlColorMask(Red bool, Green bool, Blue bool, Alpha bool) *GlColorMask
 #### func (*GlColorMask) API
 
 ```go
-func (c *GlColorMask) API() gfxapi.API
+func (c *GlColorMask) API() gfxapi.ID
 ```
 
 #### func (*GlColorMask) AddRead
@@ -9589,7 +9593,7 @@ func (a *GlColorMask) String() string
 
 ```go
 type GlCompileShader struct {
-	binary.Generate `display:"glCompileShader"`
+	binary.Generate
 
 	Shader ShaderId
 }
@@ -9608,7 +9612,7 @@ func NewGlCompileShader(Shader ShaderId) *GlCompileShader
 #### func (*GlCompileShader) API
 
 ```go
-func (c *GlCompileShader) API() gfxapi.API
+func (c *GlCompileShader) API() gfxapi.ID
 ```
 
 #### func (*GlCompileShader) AddRead
@@ -9667,7 +9671,7 @@ func (a *GlCompileShader) String() string
 
 ```go
 type GlCompressedTexImage2D struct {
-	binary.Generate `display:"glCompressedTexImage2D"`
+	binary.Generate
 
 	Target    TextureImageTarget
 	Level     int32
@@ -9693,7 +9697,7 @@ func NewGlCompressedTexImage2D(Target TextureImageTarget, Level int32, Format Co
 #### func (*GlCompressedTexImage2D) API
 
 ```go
-func (c *GlCompressedTexImage2D) API() gfxapi.API
+func (c *GlCompressedTexImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlCompressedTexImage2D) AddRead
@@ -9754,7 +9758,7 @@ func (a *GlCompressedTexImage2D) String() string
 
 ```go
 type GlCompressedTexSubImage2D struct {
-	binary.Generate `display:"glCompressedTexSubImage2D"`
+	binary.Generate
 
 	Target    TextureImageTarget
 	Level     int32
@@ -9781,7 +9785,7 @@ func NewGlCompressedTexSubImage2D(Target TextureImageTarget, Level int32, Xoffse
 #### func (*GlCompressedTexSubImage2D) API
 
 ```go
-func (c *GlCompressedTexSubImage2D) API() gfxapi.API
+func (c *GlCompressedTexSubImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlCompressedTexSubImage2D) AddRead
@@ -9842,7 +9846,7 @@ func (a *GlCompressedTexSubImage2D) String() string
 
 ```go
 type GlCopyTexImage2D struct {
-	binary.Generate `display:"glCopyTexImage2D"`
+	binary.Generate
 
 	Target TextureImageTarget
 	Level  int32
@@ -9868,7 +9872,7 @@ func NewGlCopyTexImage2D(Target TextureImageTarget, Level int32, Format TexelFor
 #### func (*GlCopyTexImage2D) API
 
 ```go
-func (c *GlCopyTexImage2D) API() gfxapi.API
+func (c *GlCopyTexImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlCopyTexImage2D) AddRead
@@ -9927,7 +9931,7 @@ func (a *GlCopyTexImage2D) String() string
 
 ```go
 type GlCopyTexSubImage2D struct {
-	binary.Generate `display:"glCopyTexSubImage2D"`
+	binary.Generate
 
 	Target  TextureImageTarget
 	Level   int32
@@ -9953,7 +9957,7 @@ func NewGlCopyTexSubImage2D(Target TextureImageTarget, Level int32, Xoffset int3
 #### func (*GlCopyTexSubImage2D) API
 
 ```go
-func (c *GlCopyTexSubImage2D) API() gfxapi.API
+func (c *GlCopyTexSubImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlCopyTexSubImage2D) AddRead
@@ -10014,7 +10018,7 @@ func (a *GlCopyTexSubImage2D) String() string
 
 ```go
 type GlCreateProgram struct {
-	binary.Generate `display:"glCreateProgram"`
+	binary.Generate
 
 	Result ProgramId
 }
@@ -10033,7 +10037,7 @@ func NewGlCreateProgram(Result ProgramId) *GlCreateProgram
 #### func (*GlCreateProgram) API
 
 ```go
-func (c *GlCreateProgram) API() gfxapi.API
+func (c *GlCreateProgram) API() gfxapi.ID
 ```
 
 #### func (*GlCreateProgram) AddRead
@@ -10092,7 +10096,7 @@ func (a *GlCreateProgram) String() string
 
 ```go
 type GlCreateShader struct {
-	binary.Generate `display:"glCreateShader"`
+	binary.Generate
 
 	Type   ShaderType
 	Result ShaderId
@@ -10112,7 +10116,7 @@ func NewGlCreateShader(Type ShaderType, Result ShaderId) *GlCreateShader
 #### func (*GlCreateShader) API
 
 ```go
-func (c *GlCreateShader) API() gfxapi.API
+func (c *GlCreateShader) API() gfxapi.ID
 ```
 
 #### func (*GlCreateShader) AddRead
@@ -10171,7 +10175,7 @@ func (a *GlCreateShader) String() string
 
 ```go
 type GlCullFace struct {
-	binary.Generate `display:"glCullFace"`
+	binary.Generate
 
 	Mode FaceMode
 }
@@ -10190,7 +10194,7 @@ func NewGlCullFace(Mode FaceMode) *GlCullFace
 #### func (*GlCullFace) API
 
 ```go
-func (c *GlCullFace) API() gfxapi.API
+func (c *GlCullFace) API() gfxapi.ID
 ```
 
 #### func (*GlCullFace) AddRead
@@ -10249,7 +10253,7 @@ func (a *GlCullFace) String() string
 
 ```go
 type GlDeleteBuffers struct {
-	binary.Generate `display:"glDeleteBuffers"`
+	binary.Generate
 
 	Count   int32
 	Buffers BufferIdᵖ
@@ -10269,7 +10273,7 @@ func NewGlDeleteBuffers(Count int32, Buffers memory.Pointer) *GlDeleteBuffers
 #### func (*GlDeleteBuffers) API
 
 ```go
-func (c *GlDeleteBuffers) API() gfxapi.API
+func (c *GlDeleteBuffers) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteBuffers) AddRead
@@ -10328,7 +10332,7 @@ func (a *GlDeleteBuffers) String() string
 
 ```go
 type GlDeleteFramebuffers struct {
-	binary.Generate `display:"glDeleteFramebuffers"`
+	binary.Generate
 
 	Count        int32
 	Framebuffers FramebufferIdᵖ
@@ -10348,7 +10352,7 @@ func NewGlDeleteFramebuffers(Count int32, Framebuffers memory.Pointer) *GlDelete
 #### func (*GlDeleteFramebuffers) API
 
 ```go
-func (c *GlDeleteFramebuffers) API() gfxapi.API
+func (c *GlDeleteFramebuffers) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteFramebuffers) AddRead
@@ -10409,7 +10413,7 @@ func (a *GlDeleteFramebuffers) String() string
 
 ```go
 type GlDeleteProgram struct {
-	binary.Generate `display:"glDeleteProgram"`
+	binary.Generate
 
 	Program ProgramId
 }
@@ -10428,7 +10432,7 @@ func NewGlDeleteProgram(Program ProgramId) *GlDeleteProgram
 #### func (*GlDeleteProgram) API
 
 ```go
-func (c *GlDeleteProgram) API() gfxapi.API
+func (c *GlDeleteProgram) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteProgram) AddRead
@@ -10487,7 +10491,7 @@ func (a *GlDeleteProgram) String() string
 
 ```go
 type GlDeleteQueries struct {
-	binary.Generate `display:"glDeleteQueries"`
+	binary.Generate
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -10507,7 +10511,7 @@ func NewGlDeleteQueries(Count int32, Queries memory.Pointer) *GlDeleteQueries
 #### func (*GlDeleteQueries) API
 
 ```go
-func (c *GlDeleteQueries) API() gfxapi.API
+func (c *GlDeleteQueries) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteQueries) AddRead
@@ -10566,7 +10570,7 @@ func (a *GlDeleteQueries) String() string
 
 ```go
 type GlDeleteQueriesEXT struct {
-	binary.Generate `display:"glDeleteQueriesEXT"`
+	binary.Generate
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -10586,7 +10590,7 @@ func NewGlDeleteQueriesEXT(Count int32, Queries memory.Pointer) *GlDeleteQueries
 #### func (*GlDeleteQueriesEXT) API
 
 ```go
-func (c *GlDeleteQueriesEXT) API() gfxapi.API
+func (c *GlDeleteQueriesEXT) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteQueriesEXT) AddRead
@@ -10647,7 +10651,7 @@ func (a *GlDeleteQueriesEXT) String() string
 
 ```go
 type GlDeleteRenderbuffers struct {
-	binary.Generate `display:"glDeleteRenderbuffers"`
+	binary.Generate
 
 	Count         int32
 	Renderbuffers RenderbufferIdᵖ
@@ -10667,7 +10671,7 @@ func NewGlDeleteRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlDele
 #### func (*GlDeleteRenderbuffers) API
 
 ```go
-func (c *GlDeleteRenderbuffers) API() gfxapi.API
+func (c *GlDeleteRenderbuffers) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteRenderbuffers) AddRead
@@ -10728,7 +10732,7 @@ func (a *GlDeleteRenderbuffers) String() string
 
 ```go
 type GlDeleteShader struct {
-	binary.Generate `display:"glDeleteShader"`
+	binary.Generate
 
 	Shader ShaderId
 }
@@ -10747,7 +10751,7 @@ func NewGlDeleteShader(Shader ShaderId) *GlDeleteShader
 #### func (*GlDeleteShader) API
 
 ```go
-func (c *GlDeleteShader) API() gfxapi.API
+func (c *GlDeleteShader) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteShader) AddRead
@@ -10806,7 +10810,7 @@ func (a *GlDeleteShader) String() string
 
 ```go
 type GlDeleteSync struct {
-	binary.Generate `display:"glDeleteSync"`
+	binary.Generate
 
 	Sync SyncObject
 }
@@ -10825,7 +10829,7 @@ func NewGlDeleteSync(Sync SyncObject) *GlDeleteSync
 #### func (*GlDeleteSync) API
 
 ```go
-func (c *GlDeleteSync) API() gfxapi.API
+func (c *GlDeleteSync) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteSync) AddRead
@@ -10884,7 +10888,7 @@ func (a *GlDeleteSync) String() string
 
 ```go
 type GlDeleteTextures struct {
-	binary.Generate `display:"glDeleteTextures"`
+	binary.Generate
 
 	Count    int32
 	Textures TextureIdᵖ
@@ -10904,7 +10908,7 @@ func NewGlDeleteTextures(Count int32, Textures memory.Pointer) *GlDeleteTextures
 #### func (*GlDeleteTextures) API
 
 ```go
-func (c *GlDeleteTextures) API() gfxapi.API
+func (c *GlDeleteTextures) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteTextures) AddRead
@@ -10963,7 +10967,7 @@ func (a *GlDeleteTextures) String() string
 
 ```go
 type GlDeleteVertexArrays struct {
-	binary.Generate `display:"glDeleteVertexArrays"`
+	binary.Generate
 
 	Count  uint32
 	Arrays VertexArrayIdᵖ
@@ -10983,7 +10987,7 @@ func NewGlDeleteVertexArrays(Count uint32, Arrays memory.Pointer) *GlDeleteVerte
 #### func (*GlDeleteVertexArrays) API
 
 ```go
-func (c *GlDeleteVertexArrays) API() gfxapi.API
+func (c *GlDeleteVertexArrays) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteVertexArrays) AddRead
@@ -11044,7 +11048,7 @@ func (a *GlDeleteVertexArrays) String() string
 
 ```go
 type GlDeleteVertexArraysOES struct {
-	binary.Generate `display:"glDeleteVertexArraysOES"`
+	binary.Generate
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -11064,7 +11068,7 @@ func NewGlDeleteVertexArraysOES(Count int32, Arrays memory.Pointer) *GlDeleteVer
 #### func (*GlDeleteVertexArraysOES) API
 
 ```go
-func (c *GlDeleteVertexArraysOES) API() gfxapi.API
+func (c *GlDeleteVertexArraysOES) API() gfxapi.ID
 ```
 
 #### func (*GlDeleteVertexArraysOES) AddRead
@@ -11125,7 +11129,7 @@ func (a *GlDeleteVertexArraysOES) String() string
 
 ```go
 type GlDepthFunc struct {
-	binary.Generate `display:"glDepthFunc"`
+	binary.Generate
 
 	Function TestFunction
 }
@@ -11144,7 +11148,7 @@ func NewGlDepthFunc(Function TestFunction) *GlDepthFunc
 #### func (*GlDepthFunc) API
 
 ```go
-func (c *GlDepthFunc) API() gfxapi.API
+func (c *GlDepthFunc) API() gfxapi.ID
 ```
 
 #### func (*GlDepthFunc) AddRead
@@ -11203,7 +11207,7 @@ func (a *GlDepthFunc) String() string
 
 ```go
 type GlDepthMask struct {
-	binary.Generate `display:"glDepthMask"`
+	binary.Generate
 
 	Enabled bool
 }
@@ -11222,7 +11226,7 @@ func NewGlDepthMask(Enabled bool) *GlDepthMask
 #### func (*GlDepthMask) API
 
 ```go
-func (c *GlDepthMask) API() gfxapi.API
+func (c *GlDepthMask) API() gfxapi.ID
 ```
 
 #### func (*GlDepthMask) AddRead
@@ -11281,7 +11285,7 @@ func (a *GlDepthMask) String() string
 
 ```go
 type GlDepthRangef struct {
-	binary.Generate `display:"glDepthRangef"`
+	binary.Generate
 
 	Near float32
 	Far  float32
@@ -11301,7 +11305,7 @@ func NewGlDepthRangef(Near float32, Far float32) *GlDepthRangef
 #### func (*GlDepthRangef) API
 
 ```go
-func (c *GlDepthRangef) API() gfxapi.API
+func (c *GlDepthRangef) API() gfxapi.ID
 ```
 
 #### func (*GlDepthRangef) AddRead
@@ -11360,7 +11364,7 @@ func (a *GlDepthRangef) String() string
 
 ```go
 type GlDetachShader struct {
-	binary.Generate `display:"glDetachShader"`
+	binary.Generate
 
 	Program ProgramId
 	Shader  ShaderId
@@ -11380,7 +11384,7 @@ func NewGlDetachShader(Program ProgramId, Shader ShaderId) *GlDetachShader
 #### func (*GlDetachShader) API
 
 ```go
-func (c *GlDetachShader) API() gfxapi.API
+func (c *GlDetachShader) API() gfxapi.ID
 ```
 
 #### func (*GlDetachShader) AddRead
@@ -11439,7 +11443,7 @@ func (a *GlDetachShader) String() string
 
 ```go
 type GlDisable struct {
-	binary.Generate `display:"glDisable"`
+	binary.Generate
 
 	Capability Capability
 }
@@ -11458,7 +11462,7 @@ func NewGlDisable(Capability Capability) *GlDisable
 #### func (*GlDisable) API
 
 ```go
-func (c *GlDisable) API() gfxapi.API
+func (c *GlDisable) API() gfxapi.ID
 ```
 
 #### func (*GlDisable) AddRead
@@ -11517,7 +11521,7 @@ func (a *GlDisable) String() string
 
 ```go
 type GlDisableClientState struct {
-	binary.Generate `display:"glDisableClientState"`
+	binary.Generate
 
 	Type ArrayType
 }
@@ -11536,7 +11540,7 @@ func NewGlDisableClientState(Type ArrayType) *GlDisableClientState
 #### func (*GlDisableClientState) API
 
 ```go
-func (c *GlDisableClientState) API() gfxapi.API
+func (c *GlDisableClientState) API() gfxapi.ID
 ```
 
 #### func (*GlDisableClientState) AddRead
@@ -11597,7 +11601,7 @@ func (a *GlDisableClientState) String() string
 
 ```go
 type GlDisableVertexAttribArray struct {
-	binary.Generate `display:"glDisableVertexAttribArray"`
+	binary.Generate
 
 	Location AttributeLocation
 }
@@ -11616,7 +11620,7 @@ func NewGlDisableVertexAttribArray(Location AttributeLocation) *GlDisableVertexA
 #### func (*GlDisableVertexAttribArray) API
 
 ```go
-func (c *GlDisableVertexAttribArray) API() gfxapi.API
+func (c *GlDisableVertexAttribArray) API() gfxapi.ID
 ```
 
 #### func (*GlDisableVertexAttribArray) AddRead
@@ -11677,7 +11681,7 @@ func (a *GlDisableVertexAttribArray) String() string
 
 ```go
 type GlDiscardFramebufferEXT struct {
-	binary.Generate `display:"glDiscardFramebufferEXT"`
+	binary.Generate
 
 	Target         FramebufferTarget
 	NumAttachments int32
@@ -11698,7 +11702,7 @@ func NewGlDiscardFramebufferEXT(Target FramebufferTarget, NumAttachments int32, 
 #### func (*GlDiscardFramebufferEXT) API
 
 ```go
-func (c *GlDiscardFramebufferEXT) API() gfxapi.API
+func (c *GlDiscardFramebufferEXT) API() gfxapi.ID
 ```
 
 #### func (*GlDiscardFramebufferEXT) AddRead
@@ -11759,7 +11763,7 @@ func (a *GlDiscardFramebufferEXT) String() string
 
 ```go
 type GlDrawArrays struct {
-	binary.Generate `display:"glDrawArrays"`
+	binary.Generate
 
 	DrawMode   DrawMode
 	FirstIndex int32
@@ -11780,7 +11784,7 @@ func NewGlDrawArrays(Draw_mode DrawMode, First_index int32, Index_count int32) *
 #### func (*GlDrawArrays) API
 
 ```go
-func (c *GlDrawArrays) API() gfxapi.API
+func (c *GlDrawArrays) API() gfxapi.ID
 ```
 
 #### func (*GlDrawArrays) AddRead
@@ -11839,7 +11843,7 @@ func (a *GlDrawArrays) String() string
 
 ```go
 type GlDrawElements struct {
-	binary.Generate `display:"glDrawElements"`
+	binary.Generate
 
 	DrawMode     DrawMode
 	ElementCount int32
@@ -11861,7 +11865,7 @@ func NewGlDrawElements(Draw_mode DrawMode, Element_count int32, Indices_type Ind
 #### func (*GlDrawElements) API
 
 ```go
-func (c *GlDrawElements) API() gfxapi.API
+func (c *GlDrawElements) API() gfxapi.ID
 ```
 
 #### func (*GlDrawElements) AddRead
@@ -11920,7 +11924,7 @@ func (a *GlDrawElements) String() string
 
 ```go
 type GlEGLImageTargetRenderbufferStorageOES struct {
-	binary.Generate `display:"glEGLImageTargetRenderbufferStorageOES"`
+	binary.Generate
 
 	Target ImageTargetRenderbufferStorage
 	Image  TexturePointer
@@ -11940,7 +11944,7 @@ func NewGlEGLImageTargetRenderbufferStorageOES(Target ImageTargetRenderbufferSto
 #### func (*GlEGLImageTargetRenderbufferStorageOES) API
 
 ```go
-func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API
+func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.ID
 ```
 
 #### func (*GlEGLImageTargetRenderbufferStorageOES) AddRead
@@ -12001,7 +12005,7 @@ func (a *GlEGLImageTargetRenderbufferStorageOES) String() string
 
 ```go
 type GlEGLImageTargetTexture2DOES struct {
-	binary.Generate `display:"glEGLImageTargetTexture2DOES"`
+	binary.Generate
 
 	Target ImageTargetTexture
 	Image  ImageOES
@@ -12021,7 +12025,7 @@ func NewGlEGLImageTargetTexture2DOES(Target ImageTargetTexture, Image memory.Poi
 #### func (*GlEGLImageTargetTexture2DOES) API
 
 ```go
-func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.API
+func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.ID
 ```
 
 #### func (*GlEGLImageTargetTexture2DOES) AddRead
@@ -12082,7 +12086,7 @@ func (a *GlEGLImageTargetTexture2DOES) String() string
 
 ```go
 type GlEnable struct {
-	binary.Generate `display:"glEnable"`
+	binary.Generate
 
 	Capability Capability
 }
@@ -12101,7 +12105,7 @@ func NewGlEnable(Capability Capability) *GlEnable
 #### func (*GlEnable) API
 
 ```go
-func (c *GlEnable) API() gfxapi.API
+func (c *GlEnable) API() gfxapi.ID
 ```
 
 #### func (*GlEnable) AddRead
@@ -12160,7 +12164,7 @@ func (a *GlEnable) String() string
 
 ```go
 type GlEnableClientState struct {
-	binary.Generate `display:"glEnableClientState"`
+	binary.Generate
 
 	Type ArrayType
 }
@@ -12179,7 +12183,7 @@ func NewGlEnableClientState(Type ArrayType) *GlEnableClientState
 #### func (*GlEnableClientState) API
 
 ```go
-func (c *GlEnableClientState) API() gfxapi.API
+func (c *GlEnableClientState) API() gfxapi.ID
 ```
 
 #### func (*GlEnableClientState) AddRead
@@ -12240,7 +12244,7 @@ func (a *GlEnableClientState) String() string
 
 ```go
 type GlEnableVertexAttribArray struct {
-	binary.Generate `display:"glEnableVertexAttribArray"`
+	binary.Generate
 
 	Location AttributeLocation
 }
@@ -12259,7 +12263,7 @@ func NewGlEnableVertexAttribArray(Location AttributeLocation) *GlEnableVertexAtt
 #### func (*GlEnableVertexAttribArray) API
 
 ```go
-func (c *GlEnableVertexAttribArray) API() gfxapi.API
+func (c *GlEnableVertexAttribArray) API() gfxapi.ID
 ```
 
 #### func (*GlEnableVertexAttribArray) AddRead
@@ -12320,7 +12324,7 @@ func (a *GlEnableVertexAttribArray) String() string
 
 ```go
 type GlEndQuery struct {
-	binary.Generate `display:"glEndQuery"`
+	binary.Generate
 
 	Target QueryTarget
 }
@@ -12339,7 +12343,7 @@ func NewGlEndQuery(Target QueryTarget) *GlEndQuery
 #### func (*GlEndQuery) API
 
 ```go
-func (c *GlEndQuery) API() gfxapi.API
+func (c *GlEndQuery) API() gfxapi.ID
 ```
 
 #### func (*GlEndQuery) AddRead
@@ -12398,7 +12402,7 @@ func (a *GlEndQuery) String() string
 
 ```go
 type GlEndQueryEXT struct {
-	binary.Generate `display:"glEndQueryEXT"`
+	binary.Generate
 
 	Target QueryTarget
 }
@@ -12417,7 +12421,7 @@ func NewGlEndQueryEXT(Target QueryTarget) *GlEndQueryEXT
 #### func (*GlEndQueryEXT) API
 
 ```go
-func (c *GlEndQueryEXT) API() gfxapi.API
+func (c *GlEndQueryEXT) API() gfxapi.ID
 ```
 
 #### func (*GlEndQueryEXT) AddRead
@@ -12476,7 +12480,7 @@ func (a *GlEndQueryEXT) String() string
 
 ```go
 type GlEndTilingQCOM struct {
-	binary.Generate `display:"glEndTilingQCOM"`
+	binary.Generate
 
 	PreserveMask TilePreserveMaskQCOM
 }
@@ -12495,7 +12499,7 @@ func NewGlEndTilingQCOM(Preserve_mask TilePreserveMaskQCOM) *GlEndTilingQCOM
 #### func (*GlEndTilingQCOM) API
 
 ```go
-func (c *GlEndTilingQCOM) API() gfxapi.API
+func (c *GlEndTilingQCOM) API() gfxapi.ID
 ```
 
 #### func (*GlEndTilingQCOM) AddRead
@@ -12554,7 +12558,7 @@ func (a *GlEndTilingQCOM) String() string
 
 ```go
 type GlFenceSync struct {
-	binary.Generate `display:"glFenceSync"`
+	binary.Generate
 
 	Condition SyncCondition
 	SyncFlags SyncFlags
@@ -12575,7 +12579,7 @@ func NewGlFenceSync(Condition SyncCondition, SyncFlags SyncFlags, Result SyncObj
 #### func (*GlFenceSync) API
 
 ```go
-func (c *GlFenceSync) API() gfxapi.API
+func (c *GlFenceSync) API() gfxapi.ID
 ```
 
 #### func (*GlFenceSync) AddRead
@@ -12634,7 +12638,7 @@ func (a *GlFenceSync) String() string
 
 ```go
 type GlFinish struct {
-	binary.Generate `display:"glFinish"`
+	binary.Generate
 }
 ```
 
@@ -12651,7 +12655,7 @@ func NewGlFinish() *GlFinish
 #### func (*GlFinish) API
 
 ```go
-func (c *GlFinish) API() gfxapi.API
+func (c *GlFinish) API() gfxapi.ID
 ```
 
 #### func (*GlFinish) AddRead
@@ -12710,7 +12714,7 @@ func (a *GlFinish) String() string
 
 ```go
 type GlFlush struct {
-	binary.Generate `display:"glFlush"`
+	binary.Generate
 }
 ```
 
@@ -12727,7 +12731,7 @@ func NewGlFlush() *GlFlush
 #### func (*GlFlush) API
 
 ```go
-func (c *GlFlush) API() gfxapi.API
+func (c *GlFlush) API() gfxapi.ID
 ```
 
 #### func (*GlFlush) AddRead
@@ -12786,7 +12790,7 @@ func (a *GlFlush) String() string
 
 ```go
 type GlFramebufferRenderbuffer struct {
-	binary.Generate `display:"glFramebufferRenderbuffer"`
+	binary.Generate
 
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -12808,7 +12812,7 @@ func NewGlFramebufferRenderbuffer(Framebuffer_target FramebufferTarget, Framebuf
 #### func (*GlFramebufferRenderbuffer) API
 
 ```go
-func (c *GlFramebufferRenderbuffer) API() gfxapi.API
+func (c *GlFramebufferRenderbuffer) API() gfxapi.ID
 ```
 
 #### func (*GlFramebufferRenderbuffer) AddRead
@@ -12869,7 +12873,7 @@ func (a *GlFramebufferRenderbuffer) String() string
 
 ```go
 type GlFramebufferTexture2D struct {
-	binary.Generate `display:"glFramebufferTexture2D"`
+	binary.Generate
 
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
@@ -12892,7 +12896,7 @@ func NewGlFramebufferTexture2D(Framebuffer_target FramebufferTarget, Framebuffer
 #### func (*GlFramebufferTexture2D) API
 
 ```go
-func (c *GlFramebufferTexture2D) API() gfxapi.API
+func (c *GlFramebufferTexture2D) API() gfxapi.ID
 ```
 
 #### func (*GlFramebufferTexture2D) AddRead
@@ -12953,7 +12957,7 @@ func (a *GlFramebufferTexture2D) String() string
 
 ```go
 type GlFrontFace struct {
-	binary.Generate `display:"glFrontFace"`
+	binary.Generate
 
 	Orientation FaceOrientation
 }
@@ -12972,7 +12976,7 @@ func NewGlFrontFace(Orientation FaceOrientation) *GlFrontFace
 #### func (*GlFrontFace) API
 
 ```go
-func (c *GlFrontFace) API() gfxapi.API
+func (c *GlFrontFace) API() gfxapi.ID
 ```
 
 #### func (*GlFrontFace) AddRead
@@ -13031,7 +13035,7 @@ func (a *GlFrontFace) String() string
 
 ```go
 type GlGenBuffers struct {
-	binary.Generate `display:"glGenBuffers"`
+	binary.Generate
 
 	Count   int32
 	Buffers BufferIdᵖ
@@ -13051,7 +13055,7 @@ func NewGlGenBuffers(Count int32, Buffers memory.Pointer) *GlGenBuffers
 #### func (*GlGenBuffers) API
 
 ```go
-func (c *GlGenBuffers) API() gfxapi.API
+func (c *GlGenBuffers) API() gfxapi.ID
 ```
 
 #### func (*GlGenBuffers) AddRead
@@ -13110,7 +13114,7 @@ func (a *GlGenBuffers) String() string
 
 ```go
 type GlGenFramebuffers struct {
-	binary.Generate `display:"glGenFramebuffers"`
+	binary.Generate
 
 	Count        int32
 	Framebuffers FramebufferIdᵖ
@@ -13130,7 +13134,7 @@ func NewGlGenFramebuffers(Count int32, Framebuffers memory.Pointer) *GlGenFrameb
 #### func (*GlGenFramebuffers) API
 
 ```go
-func (c *GlGenFramebuffers) API() gfxapi.API
+func (c *GlGenFramebuffers) API() gfxapi.ID
 ```
 
 #### func (*GlGenFramebuffers) AddRead
@@ -13189,7 +13193,7 @@ func (a *GlGenFramebuffers) String() string
 
 ```go
 type GlGenQueries struct {
-	binary.Generate `display:"glGenQueries"`
+	binary.Generate
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -13209,7 +13213,7 @@ func NewGlGenQueries(Count int32, Queries memory.Pointer) *GlGenQueries
 #### func (*GlGenQueries) API
 
 ```go
-func (c *GlGenQueries) API() gfxapi.API
+func (c *GlGenQueries) API() gfxapi.ID
 ```
 
 #### func (*GlGenQueries) AddRead
@@ -13268,7 +13272,7 @@ func (a *GlGenQueries) String() string
 
 ```go
 type GlGenQueriesEXT struct {
-	binary.Generate `display:"glGenQueriesEXT"`
+	binary.Generate
 
 	Count   int32
 	Queries QueryIdᵖ
@@ -13288,7 +13292,7 @@ func NewGlGenQueriesEXT(Count int32, Queries memory.Pointer) *GlGenQueriesEXT
 #### func (*GlGenQueriesEXT) API
 
 ```go
-func (c *GlGenQueriesEXT) API() gfxapi.API
+func (c *GlGenQueriesEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGenQueriesEXT) AddRead
@@ -13347,7 +13351,7 @@ func (a *GlGenQueriesEXT) String() string
 
 ```go
 type GlGenRenderbuffers struct {
-	binary.Generate `display:"glGenRenderbuffers"`
+	binary.Generate
 
 	Count         int32
 	Renderbuffers RenderbufferIdᵖ
@@ -13367,7 +13371,7 @@ func NewGlGenRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlGenRend
 #### func (*GlGenRenderbuffers) API
 
 ```go
-func (c *GlGenRenderbuffers) API() gfxapi.API
+func (c *GlGenRenderbuffers) API() gfxapi.ID
 ```
 
 #### func (*GlGenRenderbuffers) AddRead
@@ -13428,7 +13432,7 @@ func (a *GlGenRenderbuffers) String() string
 
 ```go
 type GlGenTextures struct {
-	binary.Generate `display:"glGenTextures"`
+	binary.Generate
 
 	Count    int32
 	Textures TextureIdᵖ
@@ -13448,7 +13452,7 @@ func NewGlGenTextures(Count int32, Textures memory.Pointer) *GlGenTextures
 #### func (*GlGenTextures) API
 
 ```go
-func (c *GlGenTextures) API() gfxapi.API
+func (c *GlGenTextures) API() gfxapi.ID
 ```
 
 #### func (*GlGenTextures) AddRead
@@ -13507,7 +13511,7 @@ func (a *GlGenTextures) String() string
 
 ```go
 type GlGenVertexArrays struct {
-	binary.Generate `display:"glGenVertexArrays"`
+	binary.Generate
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -13527,7 +13531,7 @@ func NewGlGenVertexArrays(Count int32, Arrays memory.Pointer) *GlGenVertexArrays
 #### func (*GlGenVertexArrays) API
 
 ```go
-func (c *GlGenVertexArrays) API() gfxapi.API
+func (c *GlGenVertexArrays) API() gfxapi.ID
 ```
 
 #### func (*GlGenVertexArrays) AddRead
@@ -13586,7 +13590,7 @@ func (a *GlGenVertexArrays) String() string
 
 ```go
 type GlGenVertexArraysOES struct {
-	binary.Generate `display:"glGenVertexArraysOES"`
+	binary.Generate
 
 	Count  int32
 	Arrays VertexArrayIdᵖ
@@ -13606,7 +13610,7 @@ func NewGlGenVertexArraysOES(Count int32, Arrays memory.Pointer) *GlGenVertexArr
 #### func (*GlGenVertexArraysOES) API
 
 ```go
-func (c *GlGenVertexArraysOES) API() gfxapi.API
+func (c *GlGenVertexArraysOES) API() gfxapi.ID
 ```
 
 #### func (*GlGenVertexArraysOES) AddRead
@@ -13667,7 +13671,7 @@ func (a *GlGenVertexArraysOES) String() string
 
 ```go
 type GlGenerateMipmap struct {
-	binary.Generate `display:"glGenerateMipmap"`
+	binary.Generate
 
 	Target TextureImageTarget
 }
@@ -13686,7 +13690,7 @@ func NewGlGenerateMipmap(Target TextureImageTarget) *GlGenerateMipmap
 #### func (*GlGenerateMipmap) API
 
 ```go
-func (c *GlGenerateMipmap) API() gfxapi.API
+func (c *GlGenerateMipmap) API() gfxapi.ID
 ```
 
 #### func (*GlGenerateMipmap) AddRead
@@ -13745,7 +13749,7 @@ func (a *GlGenerateMipmap) String() string
 
 ```go
 type GlGetActiveAttrib struct {
-	binary.Generate `display:"glGetActiveAttrib"`
+	binary.Generate
 
 	Program            ProgramId
 	Location           AttributeLocation
@@ -13770,7 +13774,7 @@ func NewGlGetActiveAttrib(Program ProgramId, Location AttributeLocation, Buffer_
 #### func (*GlGetActiveAttrib) API
 
 ```go
-func (c *GlGetActiveAttrib) API() gfxapi.API
+func (c *GlGetActiveAttrib) API() gfxapi.ID
 ```
 
 #### func (*GlGetActiveAttrib) AddRead
@@ -13829,7 +13833,7 @@ func (a *GlGetActiveAttrib) String() string
 
 ```go
 type GlGetActiveUniform struct {
-	binary.Generate `display:"glGetActiveUniform"`
+	binary.Generate
 
 	Program            ProgramId
 	Location           int32
@@ -13854,7 +13858,7 @@ func NewGlGetActiveUniform(Program ProgramId, Location int32, Buffer_size int32,
 #### func (*GlGetActiveUniform) API
 
 ```go
-func (c *GlGetActiveUniform) API() gfxapi.API
+func (c *GlGetActiveUniform) API() gfxapi.ID
 ```
 
 #### func (*GlGetActiveUniform) AddRead
@@ -13915,7 +13919,7 @@ func (a *GlGetActiveUniform) String() string
 
 ```go
 type GlGetActiveUniformBlockName struct {
-	binary.Generate `display:"glGetActiveUniformBlockName"`
+	binary.Generate
 
 	Program            ProgramId
 	UniformBlockIndex  uint32
@@ -13938,7 +13942,7 @@ func NewGlGetActiveUniformBlockName(Program ProgramId, Uniform_block_index uint3
 #### func (*GlGetActiveUniformBlockName) API
 
 ```go
-func (c *GlGetActiveUniformBlockName) API() gfxapi.API
+func (c *GlGetActiveUniformBlockName) API() gfxapi.ID
 ```
 
 #### func (*GlGetActiveUniformBlockName) AddRead
@@ -13999,7 +14003,7 @@ func (a *GlGetActiveUniformBlockName) String() string
 
 ```go
 type GlGetActiveUniformBlockiv struct {
-	binary.Generate `display:"glGetActiveUniformBlockiv"`
+	binary.Generate
 
 	Program           ProgramId
 	UniformBlockIndex uint32
@@ -14021,7 +14025,7 @@ func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index uint32,
 #### func (*GlGetActiveUniformBlockiv) API
 
 ```go
-func (c *GlGetActiveUniformBlockiv) API() gfxapi.API
+func (c *GlGetActiveUniformBlockiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetActiveUniformBlockiv) AddRead
@@ -14082,7 +14086,7 @@ func (a *GlGetActiveUniformBlockiv) String() string
 
 ```go
 type GlGetActiveUniformsiv struct {
-	binary.Generate `display:"glGetActiveUniformsiv"`
+	binary.Generate
 
 	Program        ProgramId
 	UniformCount   uint32
@@ -14105,7 +14109,7 @@ func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count uint32, Uniform_i
 #### func (*GlGetActiveUniformsiv) API
 
 ```go
-func (c *GlGetActiveUniformsiv) API() gfxapi.API
+func (c *GlGetActiveUniformsiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetActiveUniformsiv) AddRead
@@ -14166,7 +14170,7 @@ func (a *GlGetActiveUniformsiv) String() string
 
 ```go
 type GlGetAttachedShaders struct {
-	binary.Generate `display:"glGetAttachedShaders"`
+	binary.Generate
 
 	Program              ProgramId
 	BufferLength         int32
@@ -14188,7 +14192,7 @@ func NewGlGetAttachedShaders(Program ProgramId, Buffer_length int32, Shaders_len
 #### func (*GlGetAttachedShaders) API
 
 ```go
-func (c *GlGetAttachedShaders) API() gfxapi.API
+func (c *GlGetAttachedShaders) API() gfxapi.ID
 ```
 
 #### func (*GlGetAttachedShaders) AddRead
@@ -14249,7 +14253,7 @@ func (a *GlGetAttachedShaders) String() string
 
 ```go
 type GlGetAttribLocation struct {
-	binary.Generate `display:"glGetAttribLocation"`
+	binary.Generate
 
 	Program ProgramId
 	Name    string
@@ -14270,7 +14274,7 @@ func NewGlGetAttribLocation(Program ProgramId, Name string, Result AttributeLoca
 #### func (*GlGetAttribLocation) API
 
 ```go
-func (c *GlGetAttribLocation) API() gfxapi.API
+func (c *GlGetAttribLocation) API() gfxapi.ID
 ```
 
 #### func (*GlGetAttribLocation) AddRead
@@ -14339,7 +14343,7 @@ func (a *GlGetAttribLocation) String() string
 
 ```go
 type GlGetBooleanv struct {
-	binary.Generate `display:"glGetBooleanv"`
+	binary.Generate
 
 	Param  StateVariable
 	Values Boolᵖ
@@ -14359,7 +14363,7 @@ func NewGlGetBooleanv(Param StateVariable, Values memory.Pointer) *GlGetBooleanv
 #### func (*GlGetBooleanv) API
 
 ```go
-func (c *GlGetBooleanv) API() gfxapi.API
+func (c *GlGetBooleanv) API() gfxapi.ID
 ```
 
 #### func (*GlGetBooleanv) AddRead
@@ -14418,7 +14422,7 @@ func (a *GlGetBooleanv) String() string
 
 ```go
 type GlGetBufferParameteriv struct {
-	binary.Generate `display:"glGetBufferParameteriv"`
+	binary.Generate
 
 	Target    BufferTarget
 	Parameter BufferParameter
@@ -14439,7 +14443,7 @@ func NewGlGetBufferParameteriv(Target BufferTarget, Parameter BufferParameter, V
 #### func (*GlGetBufferParameteriv) API
 
 ```go
-func (c *GlGetBufferParameteriv) API() gfxapi.API
+func (c *GlGetBufferParameteriv) API() gfxapi.ID
 ```
 
 #### func (*GlGetBufferParameteriv) AddRead
@@ -14500,7 +14504,7 @@ func (a *GlGetBufferParameteriv) String() string
 
 ```go
 type GlGetError struct {
-	binary.Generate `display:"glGetError"`
+	binary.Generate
 
 	Result Error
 }
@@ -14519,7 +14523,7 @@ func NewGlGetError(Result Error) *GlGetError
 #### func (*GlGetError) API
 
 ```go
-func (c *GlGetError) API() gfxapi.API
+func (c *GlGetError) API() gfxapi.ID
 ```
 
 #### func (*GlGetError) AddRead
@@ -14578,7 +14582,7 @@ func (a *GlGetError) String() string
 
 ```go
 type GlGetFloatv struct {
-	binary.Generate `display:"glGetFloatv"`
+	binary.Generate
 
 	Param  StateVariable
 	Values F32ᵖ
@@ -14598,7 +14602,7 @@ func NewGlGetFloatv(Param StateVariable, Values memory.Pointer) *GlGetFloatv
 #### func (*GlGetFloatv) API
 
 ```go
-func (c *GlGetFloatv) API() gfxapi.API
+func (c *GlGetFloatv) API() gfxapi.ID
 ```
 
 #### func (*GlGetFloatv) AddRead
@@ -14657,7 +14661,7 @@ func (a *GlGetFloatv) String() string
 
 ```go
 type GlGetFramebufferAttachmentParameteriv struct {
-	binary.Generate `display:"glGetFramebufferAttachmentParameteriv"`
+	binary.Generate
 
 	FramebufferTarget FramebufferTarget
 	Attachment        FramebufferAttachment
@@ -14679,7 +14683,7 @@ func NewGlGetFramebufferAttachmentParameteriv(Framebuffer_target FramebufferTarg
 #### func (*GlGetFramebufferAttachmentParameteriv) API
 
 ```go
-func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.API
+func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.ID
 ```
 
 #### func (*GlGetFramebufferAttachmentParameteriv) AddRead
@@ -14740,7 +14744,7 @@ func (a *GlGetFramebufferAttachmentParameteriv) String() string
 
 ```go
 type GlGetGraphicsResetStatusEXT struct {
-	binary.Generate `display:"glGetGraphicsResetStatusEXT"`
+	binary.Generate
 
 	Result ResetStatus
 }
@@ -14759,7 +14763,7 @@ func NewGlGetGraphicsResetStatusEXT(Result ResetStatus) *GlGetGraphicsResetStatu
 #### func (*GlGetGraphicsResetStatusEXT) API
 
 ```go
-func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.API
+func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetGraphicsResetStatusEXT) AddRead
@@ -14820,7 +14824,7 @@ func (a *GlGetGraphicsResetStatusEXT) String() string
 
 ```go
 type GlGetIntegerv struct {
-	binary.Generate `display:"glGetIntegerv"`
+	binary.Generate
 
 	Param  StateVariable
 	Values S32ᵖ
@@ -14840,7 +14844,7 @@ func NewGlGetIntegerv(Param StateVariable, Values memory.Pointer) *GlGetIntegerv
 #### func (*GlGetIntegerv) API
 
 ```go
-func (c *GlGetIntegerv) API() gfxapi.API
+func (c *GlGetIntegerv) API() gfxapi.ID
 ```
 
 #### func (*GlGetIntegerv) AddRead
@@ -14899,7 +14903,7 @@ func (a *GlGetIntegerv) String() string
 
 ```go
 type GlGetProgramBinaryOES struct {
-	binary.Generate `display:"glGetProgramBinaryOES"`
+	binary.Generate
 
 	Program      ProgramId
 	BufferSize   int32
@@ -14922,7 +14926,7 @@ func NewGlGetProgramBinaryOES(Program ProgramId, Buffer_size int32, Bytes_writte
 #### func (*GlGetProgramBinaryOES) API
 
 ```go
-func (c *GlGetProgramBinaryOES) API() gfxapi.API
+func (c *GlGetProgramBinaryOES) API() gfxapi.ID
 ```
 
 #### func (*GlGetProgramBinaryOES) AddRead
@@ -14983,7 +14987,7 @@ func (a *GlGetProgramBinaryOES) String() string
 
 ```go
 type GlGetProgramInfoLog struct {
-	binary.Generate `display:"glGetProgramInfoLog"`
+	binary.Generate
 
 	Program             ProgramId
 	BufferLength        int32
@@ -15005,7 +15009,7 @@ func NewGlGetProgramInfoLog(Program ProgramId, Buffer_length int32, String_lengt
 #### func (*GlGetProgramInfoLog) API
 
 ```go
-func (c *GlGetProgramInfoLog) API() gfxapi.API
+func (c *GlGetProgramInfoLog) API() gfxapi.ID
 ```
 
 #### func (*GlGetProgramInfoLog) AddRead
@@ -15066,7 +15070,7 @@ func (a *GlGetProgramInfoLog) String() string
 
 ```go
 type GlGetProgramiv struct {
-	binary.Generate `display:"glGetProgramiv"`
+	binary.Generate
 
 	Program   ProgramId
 	Parameter ProgramParameter
@@ -15087,7 +15091,7 @@ func NewGlGetProgramiv(Program ProgramId, Parameter ProgramParameter, Value memo
 #### func (*GlGetProgramiv) API
 
 ```go
-func (c *GlGetProgramiv) API() gfxapi.API
+func (c *GlGetProgramiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetProgramiv) AddRead
@@ -15146,7 +15150,7 @@ func (a *GlGetProgramiv) String() string
 
 ```go
 type GlGetQueryObjecti64v struct {
-	binary.Generate `display:"glGetQueryObjecti64v"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15167,7 +15171,7 @@ func NewGlGetQueryObjecti64v(Query QueryId, Parameter QueryObjectParameter, Valu
 #### func (*GlGetQueryObjecti64v) API
 
 ```go
-func (c *GlGetQueryObjecti64v) API() gfxapi.API
+func (c *GlGetQueryObjecti64v) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjecti64v) AddRead
@@ -15228,7 +15232,7 @@ func (a *GlGetQueryObjecti64v) String() string
 
 ```go
 type GlGetQueryObjecti64vEXT struct {
-	binary.Generate `display:"glGetQueryObjecti64vEXT"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15249,7 +15253,7 @@ func NewGlGetQueryObjecti64vEXT(Query QueryId, Parameter QueryObjectParameter, V
 #### func (*GlGetQueryObjecti64vEXT) API
 
 ```go
-func (c *GlGetQueryObjecti64vEXT) API() gfxapi.API
+func (c *GlGetQueryObjecti64vEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjecti64vEXT) AddRead
@@ -15310,7 +15314,7 @@ func (a *GlGetQueryObjecti64vEXT) String() string
 
 ```go
 type GlGetQueryObjectivEXT struct {
-	binary.Generate `display:"glGetQueryObjectivEXT"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15331,7 +15335,7 @@ func NewGlGetQueryObjectivEXT(Query QueryId, Parameter QueryObjectParameter, Val
 #### func (*GlGetQueryObjectivEXT) API
 
 ```go
-func (c *GlGetQueryObjectivEXT) API() gfxapi.API
+func (c *GlGetQueryObjectivEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjectivEXT) AddRead
@@ -15392,7 +15396,7 @@ func (a *GlGetQueryObjectivEXT) String() string
 
 ```go
 type GlGetQueryObjectui64v struct {
-	binary.Generate `display:"glGetQueryObjectui64v"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15413,7 +15417,7 @@ func NewGlGetQueryObjectui64v(Query QueryId, Parameter QueryObjectParameter, Val
 #### func (*GlGetQueryObjectui64v) API
 
 ```go
-func (c *GlGetQueryObjectui64v) API() gfxapi.API
+func (c *GlGetQueryObjectui64v) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjectui64v) AddRead
@@ -15474,7 +15478,7 @@ func (a *GlGetQueryObjectui64v) String() string
 
 ```go
 type GlGetQueryObjectui64vEXT struct {
-	binary.Generate `display:"glGetQueryObjectui64vEXT"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15495,7 +15499,7 @@ func NewGlGetQueryObjectui64vEXT(Query QueryId, Parameter QueryObjectParameter, 
 #### func (*GlGetQueryObjectui64vEXT) API
 
 ```go
-func (c *GlGetQueryObjectui64vEXT) API() gfxapi.API
+func (c *GlGetQueryObjectui64vEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjectui64vEXT) AddRead
@@ -15556,7 +15560,7 @@ func (a *GlGetQueryObjectui64vEXT) String() string
 
 ```go
 type GlGetQueryObjectuiv struct {
-	binary.Generate `display:"glGetQueryObjectuiv"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15577,7 +15581,7 @@ func NewGlGetQueryObjectuiv(Query QueryId, Parameter QueryObjectParameter, Value
 #### func (*GlGetQueryObjectuiv) API
 
 ```go
-func (c *GlGetQueryObjectuiv) API() gfxapi.API
+func (c *GlGetQueryObjectuiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjectuiv) AddRead
@@ -15638,7 +15642,7 @@ func (a *GlGetQueryObjectuiv) String() string
 
 ```go
 type GlGetQueryObjectuivEXT struct {
-	binary.Generate `display:"glGetQueryObjectuivEXT"`
+	binary.Generate
 
 	Query     QueryId
 	Parameter QueryObjectParameter
@@ -15659,7 +15663,7 @@ func NewGlGetQueryObjectuivEXT(Query QueryId, Parameter QueryObjectParameter, Va
 #### func (*GlGetQueryObjectuivEXT) API
 
 ```go
-func (c *GlGetQueryObjectuivEXT) API() gfxapi.API
+func (c *GlGetQueryObjectuivEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryObjectuivEXT) AddRead
@@ -15720,7 +15724,7 @@ func (a *GlGetQueryObjectuivEXT) String() string
 
 ```go
 type GlGetQueryiv struct {
-	binary.Generate `display:"glGetQueryiv"`
+	binary.Generate
 
 	Target    QueryTarget
 	Parameter QueryParameter
@@ -15741,7 +15745,7 @@ func NewGlGetQueryiv(Target QueryTarget, Parameter QueryParameter, Value memory.
 #### func (*GlGetQueryiv) API
 
 ```go
-func (c *GlGetQueryiv) API() gfxapi.API
+func (c *GlGetQueryiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryiv) AddRead
@@ -15800,7 +15804,7 @@ func (a *GlGetQueryiv) String() string
 
 ```go
 type GlGetQueryivEXT struct {
-	binary.Generate `display:"glGetQueryivEXT"`
+	binary.Generate
 
 	Target    QueryTarget
 	Parameter QueryParameter
@@ -15821,7 +15825,7 @@ func NewGlGetQueryivEXT(Target QueryTarget, Parameter QueryParameter, Value memo
 #### func (*GlGetQueryivEXT) API
 
 ```go
-func (c *GlGetQueryivEXT) API() gfxapi.API
+func (c *GlGetQueryivEXT) API() gfxapi.ID
 ```
 
 #### func (*GlGetQueryivEXT) AddRead
@@ -15880,7 +15884,7 @@ func (a *GlGetQueryivEXT) String() string
 
 ```go
 type GlGetRenderbufferParameteriv struct {
-	binary.Generate `display:"glGetRenderbufferParameteriv"`
+	binary.Generate
 
 	Target    RenderbufferTarget
 	Parameter RenderbufferParameter
@@ -15901,7 +15905,7 @@ func NewGlGetRenderbufferParameteriv(Target RenderbufferTarget, Parameter Render
 #### func (*GlGetRenderbufferParameteriv) API
 
 ```go
-func (c *GlGetRenderbufferParameteriv) API() gfxapi.API
+func (c *GlGetRenderbufferParameteriv) API() gfxapi.ID
 ```
 
 #### func (*GlGetRenderbufferParameteriv) AddRead
@@ -15962,7 +15966,7 @@ func (a *GlGetRenderbufferParameteriv) String() string
 
 ```go
 type GlGetShaderInfoLog struct {
-	binary.Generate `display:"glGetShaderInfoLog"`
+	binary.Generate
 
 	Shader              ShaderId
 	BufferLength        int32
@@ -15984,7 +15988,7 @@ func NewGlGetShaderInfoLog(Shader ShaderId, Buffer_length int32, String_length_w
 #### func (*GlGetShaderInfoLog) API
 
 ```go
-func (c *GlGetShaderInfoLog) API() gfxapi.API
+func (c *GlGetShaderInfoLog) API() gfxapi.ID
 ```
 
 #### func (*GlGetShaderInfoLog) AddRead
@@ -16045,7 +16049,7 @@ func (a *GlGetShaderInfoLog) String() string
 
 ```go
 type GlGetShaderPrecisionFormat struct {
-	binary.Generate `display:"glGetShaderPrecisionFormat"`
+	binary.Generate
 
 	ShaderType    ShaderType
 	PrecisionType PrecisionType
@@ -16067,7 +16071,7 @@ func NewGlGetShaderPrecisionFormat(Shader_type ShaderType, Precision_type Precis
 #### func (*GlGetShaderPrecisionFormat) API
 
 ```go
-func (c *GlGetShaderPrecisionFormat) API() gfxapi.API
+func (c *GlGetShaderPrecisionFormat) API() gfxapi.ID
 ```
 
 #### func (*GlGetShaderPrecisionFormat) AddRead
@@ -16128,7 +16132,7 @@ func (a *GlGetShaderPrecisionFormat) String() string
 
 ```go
 type GlGetShaderSource struct {
-	binary.Generate `display:"glGetShaderSource"`
+	binary.Generate
 
 	Shader              ShaderId
 	BufferLength        int32
@@ -16150,7 +16154,7 @@ func NewGlGetShaderSource(Shader ShaderId, Buffer_length int32, String_length_wr
 #### func (*GlGetShaderSource) API
 
 ```go
-func (c *GlGetShaderSource) API() gfxapi.API
+func (c *GlGetShaderSource) API() gfxapi.ID
 ```
 
 #### func (*GlGetShaderSource) AddRead
@@ -16209,7 +16213,7 @@ func (a *GlGetShaderSource) String() string
 
 ```go
 type GlGetShaderiv struct {
-	binary.Generate `display:"glGetShaderiv"`
+	binary.Generate
 
 	Shader    ShaderId
 	Parameter ShaderParameter
@@ -16230,7 +16234,7 @@ func NewGlGetShaderiv(Shader ShaderId, Parameter ShaderParameter, Value memory.P
 #### func (*GlGetShaderiv) API
 
 ```go
-func (c *GlGetShaderiv) API() gfxapi.API
+func (c *GlGetShaderiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetShaderiv) AddRead
@@ -16289,7 +16293,7 @@ func (a *GlGetShaderiv) String() string
 
 ```go
 type GlGetString struct {
-	binary.Generate `display:"glGetString"`
+	binary.Generate
 
 	Param  StringConstant
 	Result Charᵖ
@@ -16309,7 +16313,7 @@ func NewGlGetString(Param StringConstant, Result memory.Pointer) *GlGetString
 #### func (*GlGetString) API
 
 ```go
-func (c *GlGetString) API() gfxapi.API
+func (c *GlGetString) API() gfxapi.ID
 ```
 
 #### func (*GlGetString) AddRead
@@ -16368,7 +16372,7 @@ func (a *GlGetString) String() string
 
 ```go
 type GlGetTexParameterfv struct {
-	binary.Generate `display:"glGetTexParameterfv"`
+	binary.Generate
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -16389,7 +16393,7 @@ func NewGlGetTexParameterfv(Target TextureTarget, Parameter TextureParameter, Va
 #### func (*GlGetTexParameterfv) API
 
 ```go
-func (c *GlGetTexParameterfv) API() gfxapi.API
+func (c *GlGetTexParameterfv) API() gfxapi.ID
 ```
 
 #### func (*GlGetTexParameterfv) AddRead
@@ -16450,7 +16454,7 @@ func (a *GlGetTexParameterfv) String() string
 
 ```go
 type GlGetTexParameteriv struct {
-	binary.Generate `display:"glGetTexParameteriv"`
+	binary.Generate
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -16471,7 +16475,7 @@ func NewGlGetTexParameteriv(Target TextureTarget, Parameter TextureParameter, Va
 #### func (*GlGetTexParameteriv) API
 
 ```go
-func (c *GlGetTexParameteriv) API() gfxapi.API
+func (c *GlGetTexParameteriv) API() gfxapi.ID
 ```
 
 #### func (*GlGetTexParameteriv) AddRead
@@ -16532,7 +16536,7 @@ func (a *GlGetTexParameteriv) String() string
 
 ```go
 type GlGetUniformLocation struct {
-	binary.Generate `display:"glGetUniformLocation"`
+	binary.Generate
 
 	Program ProgramId
 	Name    string
@@ -16553,7 +16557,7 @@ func NewGlGetUniformLocation(Program ProgramId, Name string, Result UniformLocat
 #### func (*GlGetUniformLocation) API
 
 ```go
-func (c *GlGetUniformLocation) API() gfxapi.API
+func (c *GlGetUniformLocation) API() gfxapi.ID
 ```
 
 #### func (*GlGetUniformLocation) AddRead
@@ -16614,7 +16618,7 @@ func (a *GlGetUniformLocation) String() string
 
 ```go
 type GlGetUniformfv struct {
-	binary.Generate `display:"glGetUniformfv"`
+	binary.Generate
 
 	Program  ProgramId
 	Location UniformLocation
@@ -16635,7 +16639,7 @@ func NewGlGetUniformfv(Program ProgramId, Location UniformLocation, Values memor
 #### func (*GlGetUniformfv) API
 
 ```go
-func (c *GlGetUniformfv) API() gfxapi.API
+func (c *GlGetUniformfv) API() gfxapi.ID
 ```
 
 #### func (*GlGetUniformfv) AddRead
@@ -16694,7 +16698,7 @@ func (a *GlGetUniformfv) String() string
 
 ```go
 type GlGetUniformiv struct {
-	binary.Generate `display:"glGetUniformiv"`
+	binary.Generate
 
 	Program  ProgramId
 	Location UniformLocation
@@ -16715,7 +16719,7 @@ func NewGlGetUniformiv(Program ProgramId, Location UniformLocation, Values memor
 #### func (*GlGetUniformiv) API
 
 ```go
-func (c *GlGetUniformiv) API() gfxapi.API
+func (c *GlGetUniformiv) API() gfxapi.ID
 ```
 
 #### func (*GlGetUniformiv) AddRead
@@ -16774,7 +16778,7 @@ func (a *GlGetUniformiv) String() string
 
 ```go
 type GlHint struct {
-	binary.Generate `display:"glHint"`
+	binary.Generate
 
 	Target HintTarget
 	Mode   HintMode
@@ -16794,7 +16798,7 @@ func NewGlHint(Target HintTarget, Mode HintMode) *GlHint
 #### func (*GlHint) API
 
 ```go
-func (c *GlHint) API() gfxapi.API
+func (c *GlHint) API() gfxapi.ID
 ```
 
 #### func (*GlHint) AddRead
@@ -16853,7 +16857,7 @@ func (a *GlHint) String() string
 
 ```go
 type GlInsertEventMarkerEXT struct {
-	binary.Generate `display:"glInsertEventMarkerEXT"`
+	binary.Generate
 
 	Length int32
 	Marker Charᵖ
@@ -16873,7 +16877,7 @@ func NewGlInsertEventMarkerEXT(Length int32, Marker memory.Pointer) *GlInsertEve
 #### func (*GlInsertEventMarkerEXT) API
 
 ```go
-func (c *GlInsertEventMarkerEXT) API() gfxapi.API
+func (c *GlInsertEventMarkerEXT) API() gfxapi.ID
 ```
 
 #### func (*GlInsertEventMarkerEXT) AddRead
@@ -16934,7 +16938,7 @@ func (a *GlInsertEventMarkerEXT) String() string
 
 ```go
 type GlInvalidateFramebuffer struct {
-	binary.Generate `display:"glInvalidateFramebuffer"`
+	binary.Generate
 
 	Target      FramebufferTarget
 	Count       int32
@@ -16955,7 +16959,7 @@ func NewGlInvalidateFramebuffer(Target FramebufferTarget, Count int32, Attachmen
 #### func (*GlInvalidateFramebuffer) API
 
 ```go
-func (c *GlInvalidateFramebuffer) API() gfxapi.API
+func (c *GlInvalidateFramebuffer) API() gfxapi.ID
 ```
 
 #### func (*GlInvalidateFramebuffer) AddRead
@@ -17016,7 +17020,7 @@ func (a *GlInvalidateFramebuffer) String() string
 
 ```go
 type GlIsBuffer struct {
-	binary.Generate `display:"glIsBuffer"`
+	binary.Generate
 
 	Buffer BufferId
 	Result bool
@@ -17036,7 +17040,7 @@ func NewGlIsBuffer(Buffer BufferId, Result bool) *GlIsBuffer
 #### func (*GlIsBuffer) API
 
 ```go
-func (c *GlIsBuffer) API() gfxapi.API
+func (c *GlIsBuffer) API() gfxapi.ID
 ```
 
 #### func (*GlIsBuffer) AddRead
@@ -17095,7 +17099,7 @@ func (a *GlIsBuffer) String() string
 
 ```go
 type GlIsEnabled struct {
-	binary.Generate `display:"glIsEnabled"`
+	binary.Generate
 
 	Capability Capability
 	Result     bool
@@ -17115,7 +17119,7 @@ func NewGlIsEnabled(Capability Capability, Result bool) *GlIsEnabled
 #### func (*GlIsEnabled) API
 
 ```go
-func (c *GlIsEnabled) API() gfxapi.API
+func (c *GlIsEnabled) API() gfxapi.ID
 ```
 
 #### func (*GlIsEnabled) AddRead
@@ -17174,7 +17178,7 @@ func (a *GlIsEnabled) String() string
 
 ```go
 type GlIsFramebuffer struct {
-	binary.Generate `display:"glIsFramebuffer"`
+	binary.Generate
 
 	Framebuffer FramebufferId
 	Result      bool
@@ -17194,7 +17198,7 @@ func NewGlIsFramebuffer(Framebuffer FramebufferId, Result bool) *GlIsFramebuffer
 #### func (*GlIsFramebuffer) API
 
 ```go
-func (c *GlIsFramebuffer) API() gfxapi.API
+func (c *GlIsFramebuffer) API() gfxapi.ID
 ```
 
 #### func (*GlIsFramebuffer) AddRead
@@ -17253,7 +17257,7 @@ func (a *GlIsFramebuffer) String() string
 
 ```go
 type GlIsProgram struct {
-	binary.Generate `display:"glIsProgram"`
+	binary.Generate
 
 	Program ProgramId
 	Result  bool
@@ -17273,7 +17277,7 @@ func NewGlIsProgram(Program ProgramId, Result bool) *GlIsProgram
 #### func (*GlIsProgram) API
 
 ```go
-func (c *GlIsProgram) API() gfxapi.API
+func (c *GlIsProgram) API() gfxapi.ID
 ```
 
 #### func (*GlIsProgram) AddRead
@@ -17332,7 +17336,7 @@ func (a *GlIsProgram) String() string
 
 ```go
 type GlIsQuery struct {
-	binary.Generate `display:"glIsQuery"`
+	binary.Generate
 
 	Query  QueryId
 	Result bool
@@ -17352,7 +17356,7 @@ func NewGlIsQuery(Query QueryId, Result bool) *GlIsQuery
 #### func (*GlIsQuery) API
 
 ```go
-func (c *GlIsQuery) API() gfxapi.API
+func (c *GlIsQuery) API() gfxapi.ID
 ```
 
 #### func (*GlIsQuery) AddRead
@@ -17411,7 +17415,7 @@ func (a *GlIsQuery) String() string
 
 ```go
 type GlIsQueryEXT struct {
-	binary.Generate `display:"glIsQueryEXT"`
+	binary.Generate
 
 	Query  QueryId
 	Result bool
@@ -17431,7 +17435,7 @@ func NewGlIsQueryEXT(Query QueryId, Result bool) *GlIsQueryEXT
 #### func (*GlIsQueryEXT) API
 
 ```go
-func (c *GlIsQueryEXT) API() gfxapi.API
+func (c *GlIsQueryEXT) API() gfxapi.ID
 ```
 
 #### func (*GlIsQueryEXT) AddRead
@@ -17490,7 +17494,7 @@ func (a *GlIsQueryEXT) String() string
 
 ```go
 type GlIsRenderbuffer struct {
-	binary.Generate `display:"glIsRenderbuffer"`
+	binary.Generate
 
 	Renderbuffer RenderbufferId
 	Result       bool
@@ -17510,7 +17514,7 @@ func NewGlIsRenderbuffer(Renderbuffer RenderbufferId, Result bool) *GlIsRenderbu
 #### func (*GlIsRenderbuffer) API
 
 ```go
-func (c *GlIsRenderbuffer) API() gfxapi.API
+func (c *GlIsRenderbuffer) API() gfxapi.ID
 ```
 
 #### func (*GlIsRenderbuffer) AddRead
@@ -17569,7 +17573,7 @@ func (a *GlIsRenderbuffer) String() string
 
 ```go
 type GlIsShader struct {
-	binary.Generate `display:"glIsShader"`
+	binary.Generate
 
 	Shader ShaderId
 	Result bool
@@ -17589,7 +17593,7 @@ func NewGlIsShader(Shader ShaderId, Result bool) *GlIsShader
 #### func (*GlIsShader) API
 
 ```go
-func (c *GlIsShader) API() gfxapi.API
+func (c *GlIsShader) API() gfxapi.ID
 ```
 
 #### func (*GlIsShader) AddRead
@@ -17648,7 +17652,7 @@ func (a *GlIsShader) String() string
 
 ```go
 type GlIsTexture struct {
-	binary.Generate `display:"glIsTexture"`
+	binary.Generate
 
 	Texture TextureId
 	Result  bool
@@ -17668,7 +17672,7 @@ func NewGlIsTexture(Texture TextureId, Result bool) *GlIsTexture
 #### func (*GlIsTexture) API
 
 ```go
-func (c *GlIsTexture) API() gfxapi.API
+func (c *GlIsTexture) API() gfxapi.ID
 ```
 
 #### func (*GlIsTexture) AddRead
@@ -17727,7 +17731,7 @@ func (a *GlIsTexture) String() string
 
 ```go
 type GlIsVertexArrayOES struct {
-	binary.Generate `display:"glIsVertexArrayOES"`
+	binary.Generate
 
 	Array  VertexArrayId
 	Result bool
@@ -17747,7 +17751,7 @@ func NewGlIsVertexArrayOES(Array VertexArrayId, Result bool) *GlIsVertexArrayOES
 #### func (*GlIsVertexArrayOES) API
 
 ```go
-func (c *GlIsVertexArrayOES) API() gfxapi.API
+func (c *GlIsVertexArrayOES) API() gfxapi.ID
 ```
 
 #### func (*GlIsVertexArrayOES) AddRead
@@ -17808,7 +17812,7 @@ func (a *GlIsVertexArrayOES) String() string
 
 ```go
 type GlLineWidth struct {
-	binary.Generate `display:"glLineWidth"`
+	binary.Generate
 
 	Width float32
 }
@@ -17827,7 +17831,7 @@ func NewGlLineWidth(Width float32) *GlLineWidth
 #### func (*GlLineWidth) API
 
 ```go
-func (c *GlLineWidth) API() gfxapi.API
+func (c *GlLineWidth) API() gfxapi.ID
 ```
 
 #### func (*GlLineWidth) AddRead
@@ -17886,7 +17890,7 @@ func (a *GlLineWidth) String() string
 
 ```go
 type GlLinkProgram struct {
-	binary.Generate `display:"glLinkProgram"`
+	binary.Generate
 
 	Program ProgramId
 }
@@ -17905,7 +17909,7 @@ func NewGlLinkProgram(Program ProgramId) *GlLinkProgram
 #### func (*GlLinkProgram) API
 
 ```go
-func (c *GlLinkProgram) API() gfxapi.API
+func (c *GlLinkProgram) API() gfxapi.ID
 ```
 
 #### func (*GlLinkProgram) AddRead
@@ -17964,7 +17968,7 @@ func (a *GlLinkProgram) String() string
 
 ```go
 type GlMapBufferRange struct {
-	binary.Generate `display:"glMapBufferRange"`
+	binary.Generate
 
 	Target BufferTarget
 	Offset int32
@@ -17987,7 +17991,7 @@ func NewGlMapBufferRange(Target BufferTarget, Offset int32, Length int32, Access
 #### func (*GlMapBufferRange) API
 
 ```go
-func (c *GlMapBufferRange) API() gfxapi.API
+func (c *GlMapBufferRange) API() gfxapi.ID
 ```
 
 #### func (*GlMapBufferRange) AddRead
@@ -18046,7 +18050,7 @@ func (a *GlMapBufferRange) String() string
 
 ```go
 type GlPixelStorei struct {
-	binary.Generate `display:"glPixelStorei"`
+	binary.Generate
 
 	Parameter PixelStoreParameter
 	Value     int32
@@ -18066,7 +18070,7 @@ func NewGlPixelStorei(Parameter PixelStoreParameter, Value int32) *GlPixelStorei
 #### func (*GlPixelStorei) API
 
 ```go
-func (c *GlPixelStorei) API() gfxapi.API
+func (c *GlPixelStorei) API() gfxapi.ID
 ```
 
 #### func (*GlPixelStorei) AddRead
@@ -18125,7 +18129,7 @@ func (a *GlPixelStorei) String() string
 
 ```go
 type GlPolygonOffset struct {
-	binary.Generate `display:"glPolygonOffset"`
+	binary.Generate
 
 	ScaleFactor float32
 	Units       float32
@@ -18145,7 +18149,7 @@ func NewGlPolygonOffset(Scale_factor float32, Units float32) *GlPolygonOffset
 #### func (*GlPolygonOffset) API
 
 ```go
-func (c *GlPolygonOffset) API() gfxapi.API
+func (c *GlPolygonOffset) API() gfxapi.ID
 ```
 
 #### func (*GlPolygonOffset) AddRead
@@ -18204,7 +18208,7 @@ func (a *GlPolygonOffset) String() string
 
 ```go
 type GlPopGroupMarkerEXT struct {
-	binary.Generate `display:"glPopGroupMarkerEXT"`
+	binary.Generate
 }
 ```
 
@@ -18221,7 +18225,7 @@ func NewGlPopGroupMarkerEXT() *GlPopGroupMarkerEXT
 #### func (*GlPopGroupMarkerEXT) API
 
 ```go
-func (c *GlPopGroupMarkerEXT) API() gfxapi.API
+func (c *GlPopGroupMarkerEXT) API() gfxapi.ID
 ```
 
 #### func (*GlPopGroupMarkerEXT) AddRead
@@ -18282,7 +18286,7 @@ func (a *GlPopGroupMarkerEXT) String() string
 
 ```go
 type GlProgramBinaryOES struct {
-	binary.Generate `display:"glProgramBinaryOES"`
+	binary.Generate
 
 	Program      ProgramId
 	BinaryFormat uint32
@@ -18304,7 +18308,7 @@ func NewGlProgramBinaryOES(Program ProgramId, Binary_format uint32, Binary memor
 #### func (*GlProgramBinaryOES) API
 
 ```go
-func (c *GlProgramBinaryOES) API() gfxapi.API
+func (c *GlProgramBinaryOES) API() gfxapi.ID
 ```
 
 #### func (*GlProgramBinaryOES) AddRead
@@ -18365,7 +18369,7 @@ func (a *GlProgramBinaryOES) String() string
 
 ```go
 type GlPushGroupMarkerEXT struct {
-	binary.Generate `display:"glPushGroupMarkerEXT"`
+	binary.Generate
 
 	Length int32
 	Marker Charᵖ
@@ -18385,7 +18389,7 @@ func NewGlPushGroupMarkerEXT(Length int32, Marker memory.Pointer) *GlPushGroupMa
 #### func (*GlPushGroupMarkerEXT) API
 
 ```go
-func (c *GlPushGroupMarkerEXT) API() gfxapi.API
+func (c *GlPushGroupMarkerEXT) API() gfxapi.ID
 ```
 
 #### func (*GlPushGroupMarkerEXT) AddRead
@@ -18446,7 +18450,7 @@ func (a *GlPushGroupMarkerEXT) String() string
 
 ```go
 type GlQueryCounterEXT struct {
-	binary.Generate `display:"glQueryCounterEXT"`
+	binary.Generate
 
 	Query  QueryId
 	Target QueryTarget
@@ -18466,7 +18470,7 @@ func NewGlQueryCounterEXT(Query QueryId, Target QueryTarget) *GlQueryCounterEXT
 #### func (*GlQueryCounterEXT) API
 
 ```go
-func (c *GlQueryCounterEXT) API() gfxapi.API
+func (c *GlQueryCounterEXT) API() gfxapi.ID
 ```
 
 #### func (*GlQueryCounterEXT) AddRead
@@ -18525,7 +18529,7 @@ func (a *GlQueryCounterEXT) String() string
 
 ```go
 type GlReadPixels struct {
-	binary.Generate `display:"glReadPixels"`
+	binary.Generate
 
 	X      int32
 	Y      int32
@@ -18550,7 +18554,7 @@ func NewGlReadPixels(X int32, Y int32, Width int32, Height int32, Format BaseTex
 #### func (*GlReadPixels) API
 
 ```go
-func (c *GlReadPixels) API() gfxapi.API
+func (c *GlReadPixels) API() gfxapi.ID
 ```
 
 #### func (*GlReadPixels) AddRead
@@ -18609,7 +18613,7 @@ func (a *GlReadPixels) String() string
 
 ```go
 type GlReleaseShaderCompiler struct {
-	binary.Generate `display:"glReleaseShaderCompiler"`
+	binary.Generate
 }
 ```
 
@@ -18626,7 +18630,7 @@ func NewGlReleaseShaderCompiler() *GlReleaseShaderCompiler
 #### func (*GlReleaseShaderCompiler) API
 
 ```go
-func (c *GlReleaseShaderCompiler) API() gfxapi.API
+func (c *GlReleaseShaderCompiler) API() gfxapi.ID
 ```
 
 #### func (*GlReleaseShaderCompiler) AddRead
@@ -18687,7 +18691,7 @@ func (a *GlReleaseShaderCompiler) String() string
 
 ```go
 type GlRenderbufferStorage struct {
-	binary.Generate `display:"glRenderbufferStorage"`
+	binary.Generate
 
 	Target RenderbufferTarget
 	Format RenderbufferFormat
@@ -18709,7 +18713,7 @@ func NewGlRenderbufferStorage(Target RenderbufferTarget, Format RenderbufferForm
 #### func (*GlRenderbufferStorage) API
 
 ```go
-func (c *GlRenderbufferStorage) API() gfxapi.API
+func (c *GlRenderbufferStorage) API() gfxapi.ID
 ```
 
 #### func (*GlRenderbufferStorage) AddRead
@@ -18770,7 +18774,7 @@ func (a *GlRenderbufferStorage) String() string
 
 ```go
 type GlRenderbufferStorageMultisample struct {
-	binary.Generate `display:"glRenderbufferStorageMultisample"`
+	binary.Generate
 
 	Target  RenderbufferTarget
 	Samples int32
@@ -18793,7 +18797,7 @@ func NewGlRenderbufferStorageMultisample(Target RenderbufferTarget, Samples int3
 #### func (*GlRenderbufferStorageMultisample) API
 
 ```go
-func (c *GlRenderbufferStorageMultisample) API() gfxapi.API
+func (c *GlRenderbufferStorageMultisample) API() gfxapi.ID
 ```
 
 #### func (*GlRenderbufferStorageMultisample) AddRead
@@ -18854,7 +18858,7 @@ func (a *GlRenderbufferStorageMultisample) String() string
 
 ```go
 type GlSampleCoverage struct {
-	binary.Generate `display:"glSampleCoverage"`
+	binary.Generate
 
 	Value  float32
 	Invert bool
@@ -18874,7 +18878,7 @@ func NewGlSampleCoverage(Value float32, Invert bool) *GlSampleCoverage
 #### func (*GlSampleCoverage) API
 
 ```go
-func (c *GlSampleCoverage) API() gfxapi.API
+func (c *GlSampleCoverage) API() gfxapi.ID
 ```
 
 #### func (*GlSampleCoverage) AddRead
@@ -18933,7 +18937,7 @@ func (a *GlSampleCoverage) String() string
 
 ```go
 type GlScissor struct {
-	binary.Generate `display:"glScissor"`
+	binary.Generate
 
 	X      int32
 	Y      int32
@@ -18955,7 +18959,7 @@ func NewGlScissor(X int32, Y int32, Width int32, Height int32) *GlScissor
 #### func (*GlScissor) API
 
 ```go
-func (c *GlScissor) API() gfxapi.API
+func (c *GlScissor) API() gfxapi.ID
 ```
 
 #### func (*GlScissor) AddRead
@@ -19014,7 +19018,7 @@ func (a *GlScissor) String() string
 
 ```go
 type GlShaderBinary struct {
-	binary.Generate `display:"glShaderBinary"`
+	binary.Generate
 
 	Count        int32
 	Shaders      ShaderIdᵖ
@@ -19037,7 +19041,7 @@ func NewGlShaderBinary(Count int32, Shaders memory.Pointer, Binary_format uint32
 #### func (*GlShaderBinary) API
 
 ```go
-func (c *GlShaderBinary) API() gfxapi.API
+func (c *GlShaderBinary) API() gfxapi.ID
 ```
 
 #### func (*GlShaderBinary) AddRead
@@ -19096,7 +19100,7 @@ func (a *GlShaderBinary) String() string
 
 ```go
 type GlShaderSource struct {
-	binary.Generate `display:"glShaderSource"`
+	binary.Generate
 
 	Shader ShaderId
 	Count  int32
@@ -19118,7 +19122,7 @@ func NewGlShaderSource(Shader ShaderId, Count int32, Source memory.Pointer, Leng
 #### func (*GlShaderSource) API
 
 ```go
-func (c *GlShaderSource) API() gfxapi.API
+func (c *GlShaderSource) API() gfxapi.ID
 ```
 
 #### func (*GlShaderSource) AddRead
@@ -19177,7 +19181,7 @@ func (a *GlShaderSource) String() string
 
 ```go
 type GlStartTilingQCOM struct {
-	binary.Generate `display:"glStartTilingQCOM"`
+	binary.Generate
 
 	X            int32
 	Y            int32
@@ -19200,7 +19204,7 @@ func NewGlStartTilingQCOM(X int32, Y int32, Width int32, Height int32, PreserveM
 #### func (*GlStartTilingQCOM) API
 
 ```go
-func (c *GlStartTilingQCOM) API() gfxapi.API
+func (c *GlStartTilingQCOM) API() gfxapi.ID
 ```
 
 #### func (*GlStartTilingQCOM) AddRead
@@ -19259,7 +19263,7 @@ func (a *GlStartTilingQCOM) String() string
 
 ```go
 type GlStencilFuncSeparate struct {
-	binary.Generate `display:"glStencilFuncSeparate"`
+	binary.Generate
 
 	Face           FaceMode
 	Function       TestFunction
@@ -19281,7 +19285,7 @@ func NewGlStencilFuncSeparate(Face FaceMode, Function TestFunction, Reference_va
 #### func (*GlStencilFuncSeparate) API
 
 ```go
-func (c *GlStencilFuncSeparate) API() gfxapi.API
+func (c *GlStencilFuncSeparate) API() gfxapi.ID
 ```
 
 #### func (*GlStencilFuncSeparate) AddRead
@@ -19342,7 +19346,7 @@ func (a *GlStencilFuncSeparate) String() string
 
 ```go
 type GlStencilMask struct {
-	binary.Generate `display:"glStencilMask"`
+	binary.Generate
 
 	Mask uint32
 }
@@ -19361,7 +19365,7 @@ func NewGlStencilMask(Mask uint32) *GlStencilMask
 #### func (*GlStencilMask) API
 
 ```go
-func (c *GlStencilMask) API() gfxapi.API
+func (c *GlStencilMask) API() gfxapi.ID
 ```
 
 #### func (*GlStencilMask) AddRead
@@ -19420,7 +19424,7 @@ func (a *GlStencilMask) String() string
 
 ```go
 type GlStencilMaskSeparate struct {
-	binary.Generate `display:"glStencilMaskSeparate"`
+	binary.Generate
 
 	Face FaceMode
 	Mask uint32
@@ -19440,7 +19444,7 @@ func NewGlStencilMaskSeparate(Face FaceMode, Mask uint32) *GlStencilMaskSeparate
 #### func (*GlStencilMaskSeparate) API
 
 ```go
-func (c *GlStencilMaskSeparate) API() gfxapi.API
+func (c *GlStencilMaskSeparate) API() gfxapi.ID
 ```
 
 #### func (*GlStencilMaskSeparate) AddRead
@@ -19501,7 +19505,7 @@ func (a *GlStencilMaskSeparate) String() string
 
 ```go
 type GlStencilOpSeparate struct {
-	binary.Generate `display:"glStencilOpSeparate"`
+	binary.Generate
 
 	Face                 FaceMode
 	StencilFail          StencilAction
@@ -19523,7 +19527,7 @@ func NewGlStencilOpSeparate(Face FaceMode, Stencil_fail StencilAction, Stencil_p
 #### func (*GlStencilOpSeparate) API
 
 ```go
-func (c *GlStencilOpSeparate) API() gfxapi.API
+func (c *GlStencilOpSeparate) API() gfxapi.ID
 ```
 
 #### func (*GlStencilOpSeparate) AddRead
@@ -19584,7 +19588,7 @@ func (a *GlStencilOpSeparate) String() string
 
 ```go
 type GlTexImage2D struct {
-	binary.Generate `display:"glTexImage2D"`
+	binary.Generate
 
 	Target         TextureImageTarget
 	Level          int32
@@ -19611,7 +19615,7 @@ func NewGlTexImage2D(Target TextureImageTarget, Level int32, Internal_format Tex
 #### func (*GlTexImage2D) API
 
 ```go
-func (c *GlTexImage2D) API() gfxapi.API
+func (c *GlTexImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlTexImage2D) AddRead
@@ -19670,7 +19674,7 @@ func (a *GlTexImage2D) String() string
 
 ```go
 type GlTexParameterf struct {
-	binary.Generate `display:"glTexParameterf"`
+	binary.Generate
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -19691,7 +19695,7 @@ func NewGlTexParameterf(Target TextureTarget, Parameter TextureParameter, Value 
 #### func (*GlTexParameterf) API
 
 ```go
-func (c *GlTexParameterf) API() gfxapi.API
+func (c *GlTexParameterf) API() gfxapi.ID
 ```
 
 #### func (*GlTexParameterf) AddRead
@@ -19750,7 +19754,7 @@ func (a *GlTexParameterf) String() string
 
 ```go
 type GlTexParameteri struct {
-	binary.Generate `display:"glTexParameteri"`
+	binary.Generate
 
 	Target    TextureTarget
 	Parameter TextureParameter
@@ -19771,7 +19775,7 @@ func NewGlTexParameteri(Target TextureTarget, Parameter TextureParameter, Value 
 #### func (*GlTexParameteri) API
 
 ```go
-func (c *GlTexParameteri) API() gfxapi.API
+func (c *GlTexParameteri) API() gfxapi.ID
 ```
 
 #### func (*GlTexParameteri) AddRead
@@ -19830,7 +19834,7 @@ func (a *GlTexParameteri) String() string
 
 ```go
 type GlTexStorage1DEXT struct {
-	binary.Generate `display:"glTexStorage1DEXT"`
+	binary.Generate
 
 	Target TextureTarget
 	Levels int32
@@ -19852,7 +19856,7 @@ func NewGlTexStorage1DEXT(Target TextureTarget, Levels int32, Format TexelFormat
 #### func (*GlTexStorage1DEXT) API
 
 ```go
-func (c *GlTexStorage1DEXT) API() gfxapi.API
+func (c *GlTexStorage1DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTexStorage1DEXT) AddRead
@@ -19911,7 +19915,7 @@ func (a *GlTexStorage1DEXT) String() string
 
 ```go
 type GlTexStorage2DEXT struct {
-	binary.Generate `display:"glTexStorage2DEXT"`
+	binary.Generate
 
 	Target TextureTarget
 	Levels int32
@@ -19934,7 +19938,7 @@ func NewGlTexStorage2DEXT(Target TextureTarget, Levels int32, Format TexelFormat
 #### func (*GlTexStorage2DEXT) API
 
 ```go
-func (c *GlTexStorage2DEXT) API() gfxapi.API
+func (c *GlTexStorage2DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTexStorage2DEXT) AddRead
@@ -19993,7 +19997,7 @@ func (a *GlTexStorage2DEXT) String() string
 
 ```go
 type GlTexStorage3DEXT struct {
-	binary.Generate `display:"glTexStorage3DEXT"`
+	binary.Generate
 
 	Target TextureTarget
 	Levels int32
@@ -20017,7 +20021,7 @@ func NewGlTexStorage3DEXT(Target TextureTarget, Levels int32, Format TexelFormat
 #### func (*GlTexStorage3DEXT) API
 
 ```go
-func (c *GlTexStorage3DEXT) API() gfxapi.API
+func (c *GlTexStorage3DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTexStorage3DEXT) AddRead
@@ -20076,7 +20080,7 @@ func (a *GlTexStorage3DEXT) String() string
 
 ```go
 type GlTexSubImage2D struct {
-	binary.Generate `display:"glTexSubImage2D"`
+	binary.Generate
 
 	Target  TextureImageTarget
 	Level   int32
@@ -20103,7 +20107,7 @@ func NewGlTexSubImage2D(Target TextureImageTarget, Level int32, Xoffset int32, Y
 #### func (*GlTexSubImage2D) API
 
 ```go
-func (c *GlTexSubImage2D) API() gfxapi.API
+func (c *GlTexSubImage2D) API() gfxapi.ID
 ```
 
 #### func (*GlTexSubImage2D) AddRead
@@ -20162,7 +20166,7 @@ func (a *GlTexSubImage2D) String() string
 
 ```go
 type GlTextureStorage1DEXT struct {
-	binary.Generate `display:"glTextureStorage1DEXT"`
+	binary.Generate
 
 	Texture TextureId
 	Target  TextureTarget
@@ -20185,7 +20189,7 @@ func NewGlTextureStorage1DEXT(Texture TextureId, Target TextureTarget, Levels in
 #### func (*GlTextureStorage1DEXT) API
 
 ```go
-func (c *GlTextureStorage1DEXT) API() gfxapi.API
+func (c *GlTextureStorage1DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTextureStorage1DEXT) AddRead
@@ -20246,7 +20250,7 @@ func (a *GlTextureStorage1DEXT) String() string
 
 ```go
 type GlTextureStorage2DEXT struct {
-	binary.Generate `display:"glTextureStorage2DEXT"`
+	binary.Generate
 
 	Texture TextureId
 	Target  TextureTarget
@@ -20270,7 +20274,7 @@ func NewGlTextureStorage2DEXT(Texture TextureId, Target TextureTarget, Levels in
 #### func (*GlTextureStorage2DEXT) API
 
 ```go
-func (c *GlTextureStorage2DEXT) API() gfxapi.API
+func (c *GlTextureStorage2DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTextureStorage2DEXT) AddRead
@@ -20331,7 +20335,7 @@ func (a *GlTextureStorage2DEXT) String() string
 
 ```go
 type GlTextureStorage3DEXT struct {
-	binary.Generate `display:"glTextureStorage3DEXT"`
+	binary.Generate
 
 	Texture TextureId
 	Target  TextureTarget
@@ -20356,7 +20360,7 @@ func NewGlTextureStorage3DEXT(Texture TextureId, Target TextureTarget, Levels in
 #### func (*GlTextureStorage3DEXT) API
 
 ```go
-func (c *GlTextureStorage3DEXT) API() gfxapi.API
+func (c *GlTextureStorage3DEXT) API() gfxapi.ID
 ```
 
 #### func (*GlTextureStorage3DEXT) AddRead
@@ -20417,7 +20421,7 @@ func (a *GlTextureStorage3DEXT) String() string
 
 ```go
 type GlUniform1f struct {
-	binary.Generate `display:"glUniform1f"`
+	binary.Generate
 
 	Location UniformLocation
 	Value    float32
@@ -20437,7 +20441,7 @@ func NewGlUniform1f(Location UniformLocation, Value float32) *GlUniform1f
 #### func (*GlUniform1f) API
 
 ```go
-func (c *GlUniform1f) API() gfxapi.API
+func (c *GlUniform1f) API() gfxapi.ID
 ```
 
 #### func (*GlUniform1f) AddRead
@@ -20496,7 +20500,7 @@ func (a *GlUniform1f) String() string
 
 ```go
 type GlUniform1fv struct {
-	binary.Generate `display:"glUniform1fv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -20517,7 +20521,7 @@ func NewGlUniform1fv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform1fv) API
 
 ```go
-func (c *GlUniform1fv) API() gfxapi.API
+func (c *GlUniform1fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform1fv) AddRead
@@ -20576,7 +20580,7 @@ func (a *GlUniform1fv) String() string
 
 ```go
 type GlUniform1i struct {
-	binary.Generate `display:"glUniform1i"`
+	binary.Generate
 
 	Location UniformLocation
 	Value    int32
@@ -20596,7 +20600,7 @@ func NewGlUniform1i(Location UniformLocation, Value int32) *GlUniform1i
 #### func (*GlUniform1i) API
 
 ```go
-func (c *GlUniform1i) API() gfxapi.API
+func (c *GlUniform1i) API() gfxapi.ID
 ```
 
 #### func (*GlUniform1i) AddRead
@@ -20655,7 +20659,7 @@ func (a *GlUniform1i) String() string
 
 ```go
 type GlUniform1iv struct {
-	binary.Generate `display:"glUniform1iv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -20676,7 +20680,7 @@ func NewGlUniform1iv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform1iv) API
 
 ```go
-func (c *GlUniform1iv) API() gfxapi.API
+func (c *GlUniform1iv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform1iv) AddRead
@@ -20735,7 +20739,7 @@ func (a *GlUniform1iv) String() string
 
 ```go
 type GlUniform2f struct {
-	binary.Generate `display:"glUniform2f"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   float32
@@ -20756,7 +20760,7 @@ func NewGlUniform2f(Location UniformLocation, Value0 float32, Value1 float32) *G
 #### func (*GlUniform2f) API
 
 ```go
-func (c *GlUniform2f) API() gfxapi.API
+func (c *GlUniform2f) API() gfxapi.ID
 ```
 
 #### func (*GlUniform2f) AddRead
@@ -20815,7 +20819,7 @@ func (a *GlUniform2f) String() string
 
 ```go
 type GlUniform2fv struct {
-	binary.Generate `display:"glUniform2fv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -20836,7 +20840,7 @@ func NewGlUniform2fv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform2fv) API
 
 ```go
-func (c *GlUniform2fv) API() gfxapi.API
+func (c *GlUniform2fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform2fv) AddRead
@@ -20895,7 +20899,7 @@ func (a *GlUniform2fv) String() string
 
 ```go
 type GlUniform2i struct {
-	binary.Generate `display:"glUniform2i"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   int32
@@ -20916,7 +20920,7 @@ func NewGlUniform2i(Location UniformLocation, Value0 int32, Value1 int32) *GlUni
 #### func (*GlUniform2i) API
 
 ```go
-func (c *GlUniform2i) API() gfxapi.API
+func (c *GlUniform2i) API() gfxapi.ID
 ```
 
 #### func (*GlUniform2i) AddRead
@@ -20975,7 +20979,7 @@ func (a *GlUniform2i) String() string
 
 ```go
 type GlUniform2iv struct {
-	binary.Generate `display:"glUniform2iv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -20996,7 +21000,7 @@ func NewGlUniform2iv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform2iv) API
 
 ```go
-func (c *GlUniform2iv) API() gfxapi.API
+func (c *GlUniform2iv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform2iv) AddRead
@@ -21055,7 +21059,7 @@ func (a *GlUniform2iv) String() string
 
 ```go
 type GlUniform3f struct {
-	binary.Generate `display:"glUniform3f"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   float32
@@ -21077,7 +21081,7 @@ func NewGlUniform3f(Location UniformLocation, Value0 float32, Value1 float32, Va
 #### func (*GlUniform3f) API
 
 ```go
-func (c *GlUniform3f) API() gfxapi.API
+func (c *GlUniform3f) API() gfxapi.ID
 ```
 
 #### func (*GlUniform3f) AddRead
@@ -21136,7 +21140,7 @@ func (a *GlUniform3f) String() string
 
 ```go
 type GlUniform3fv struct {
-	binary.Generate `display:"glUniform3fv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -21157,7 +21161,7 @@ func NewGlUniform3fv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform3fv) API
 
 ```go
-func (c *GlUniform3fv) API() gfxapi.API
+func (c *GlUniform3fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform3fv) AddRead
@@ -21216,7 +21220,7 @@ func (a *GlUniform3fv) String() string
 
 ```go
 type GlUniform3i struct {
-	binary.Generate `display:"glUniform3i"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   int32
@@ -21238,7 +21242,7 @@ func NewGlUniform3i(Location UniformLocation, Value0 int32, Value1 int32, Value2
 #### func (*GlUniform3i) API
 
 ```go
-func (c *GlUniform3i) API() gfxapi.API
+func (c *GlUniform3i) API() gfxapi.ID
 ```
 
 #### func (*GlUniform3i) AddRead
@@ -21297,7 +21301,7 @@ func (a *GlUniform3i) String() string
 
 ```go
 type GlUniform3iv struct {
-	binary.Generate `display:"glUniform3iv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -21318,7 +21322,7 @@ func NewGlUniform3iv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform3iv) API
 
 ```go
-func (c *GlUniform3iv) API() gfxapi.API
+func (c *GlUniform3iv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform3iv) AddRead
@@ -21377,7 +21381,7 @@ func (a *GlUniform3iv) String() string
 
 ```go
 type GlUniform4f struct {
-	binary.Generate `display:"glUniform4f"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   float32
@@ -21400,7 +21404,7 @@ func NewGlUniform4f(Location UniformLocation, Value0 float32, Value1 float32, Va
 #### func (*GlUniform4f) API
 
 ```go
-func (c *GlUniform4f) API() gfxapi.API
+func (c *GlUniform4f) API() gfxapi.ID
 ```
 
 #### func (*GlUniform4f) AddRead
@@ -21459,7 +21463,7 @@ func (a *GlUniform4f) String() string
 
 ```go
 type GlUniform4fv struct {
-	binary.Generate `display:"glUniform4fv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -21480,7 +21484,7 @@ func NewGlUniform4fv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform4fv) API
 
 ```go
-func (c *GlUniform4fv) API() gfxapi.API
+func (c *GlUniform4fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform4fv) AddRead
@@ -21539,7 +21543,7 @@ func (a *GlUniform4fv) String() string
 
 ```go
 type GlUniform4i struct {
-	binary.Generate `display:"glUniform4i"`
+	binary.Generate
 
 	Location UniformLocation
 	Value0   int32
@@ -21562,7 +21566,7 @@ func NewGlUniform4i(Location UniformLocation, Value0 int32, Value1 int32, Value2
 #### func (*GlUniform4i) API
 
 ```go
-func (c *GlUniform4i) API() gfxapi.API
+func (c *GlUniform4i) API() gfxapi.ID
 ```
 
 #### func (*GlUniform4i) AddRead
@@ -21621,7 +21625,7 @@ func (a *GlUniform4i) String() string
 
 ```go
 type GlUniform4iv struct {
-	binary.Generate `display:"glUniform4iv"`
+	binary.Generate
 
 	Location UniformLocation
 	Count    int32
@@ -21642,7 +21646,7 @@ func NewGlUniform4iv(Location UniformLocation, Count int32, Values memory.Pointe
 #### func (*GlUniform4iv) API
 
 ```go
-func (c *GlUniform4iv) API() gfxapi.API
+func (c *GlUniform4iv) API() gfxapi.ID
 ```
 
 #### func (*GlUniform4iv) AddRead
@@ -21701,7 +21705,7 @@ func (a *GlUniform4iv) String() string
 
 ```go
 type GlUniformBlockBinding struct {
-	binary.Generate `display:"glUniformBlockBinding"`
+	binary.Generate
 
 	Program             ProgramId
 	UniformBlockIndex   uint32
@@ -21722,7 +21726,7 @@ func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index uint32, Uni
 #### func (*GlUniformBlockBinding) API
 
 ```go
-func (c *GlUniformBlockBinding) API() gfxapi.API
+func (c *GlUniformBlockBinding) API() gfxapi.ID
 ```
 
 #### func (*GlUniformBlockBinding) AddRead
@@ -21783,7 +21787,7 @@ func (a *GlUniformBlockBinding) String() string
 
 ```go
 type GlUniformMatrix2fv struct {
-	binary.Generate `display:"glUniformMatrix2fv"`
+	binary.Generate
 
 	Location  UniformLocation
 	Count     int32
@@ -21805,7 +21809,7 @@ func NewGlUniformMatrix2fv(Location UniformLocation, Count int32, Transpose bool
 #### func (*GlUniformMatrix2fv) API
 
 ```go
-func (c *GlUniformMatrix2fv) API() gfxapi.API
+func (c *GlUniformMatrix2fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniformMatrix2fv) AddRead
@@ -21866,7 +21870,7 @@ func (a *GlUniformMatrix2fv) String() string
 
 ```go
 type GlUniformMatrix3fv struct {
-	binary.Generate `display:"glUniformMatrix3fv"`
+	binary.Generate
 
 	Location  UniformLocation
 	Count     int32
@@ -21888,7 +21892,7 @@ func NewGlUniformMatrix3fv(Location UniformLocation, Count int32, Transpose bool
 #### func (*GlUniformMatrix3fv) API
 
 ```go
-func (c *GlUniformMatrix3fv) API() gfxapi.API
+func (c *GlUniformMatrix3fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniformMatrix3fv) AddRead
@@ -21949,7 +21953,7 @@ func (a *GlUniformMatrix3fv) String() string
 
 ```go
 type GlUniformMatrix4fv struct {
-	binary.Generate `display:"glUniformMatrix4fv"`
+	binary.Generate
 
 	Location  UniformLocation
 	Count     int32
@@ -21971,7 +21975,7 @@ func NewGlUniformMatrix4fv(Location UniformLocation, Count int32, Transpose bool
 #### func (*GlUniformMatrix4fv) API
 
 ```go
-func (c *GlUniformMatrix4fv) API() gfxapi.API
+func (c *GlUniformMatrix4fv) API() gfxapi.ID
 ```
 
 #### func (*GlUniformMatrix4fv) AddRead
@@ -22032,7 +22036,7 @@ func (a *GlUniformMatrix4fv) String() string
 
 ```go
 type GlUnmapBuffer struct {
-	binary.Generate `display:"glUnmapBuffer"`
+	binary.Generate
 
 	Target BufferTarget
 }
@@ -22051,7 +22055,7 @@ func NewGlUnmapBuffer(Target BufferTarget) *GlUnmapBuffer
 #### func (*GlUnmapBuffer) API
 
 ```go
-func (c *GlUnmapBuffer) API() gfxapi.API
+func (c *GlUnmapBuffer) API() gfxapi.ID
 ```
 
 #### func (*GlUnmapBuffer) AddRead
@@ -22110,7 +22114,7 @@ func (a *GlUnmapBuffer) String() string
 
 ```go
 type GlUseProgram struct {
-	binary.Generate `display:"glUseProgram"`
+	binary.Generate
 
 	Program ProgramId
 }
@@ -22129,7 +22133,7 @@ func NewGlUseProgram(Program ProgramId) *GlUseProgram
 #### func (*GlUseProgram) API
 
 ```go
-func (c *GlUseProgram) API() gfxapi.API
+func (c *GlUseProgram) API() gfxapi.ID
 ```
 
 #### func (*GlUseProgram) AddRead
@@ -22188,7 +22192,7 @@ func (a *GlUseProgram) String() string
 
 ```go
 type GlValidateProgram struct {
-	binary.Generate `display:"glValidateProgram"`
+	binary.Generate
 
 	Program ProgramId
 }
@@ -22207,7 +22211,7 @@ func NewGlValidateProgram(Program ProgramId) *GlValidateProgram
 #### func (*GlValidateProgram) API
 
 ```go
-func (c *GlValidateProgram) API() gfxapi.API
+func (c *GlValidateProgram) API() gfxapi.ID
 ```
 
 #### func (*GlValidateProgram) AddRead
@@ -22266,7 +22270,7 @@ func (a *GlValidateProgram) String() string
 
 ```go
 type GlVertexAttrib1f struct {
-	binary.Generate `display:"glVertexAttrib1f"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value0   float32
@@ -22286,7 +22290,7 @@ func NewGlVertexAttrib1f(Location AttributeLocation, Value0 float32) *GlVertexAt
 #### func (*GlVertexAttrib1f) API
 
 ```go
-func (c *GlVertexAttrib1f) API() gfxapi.API
+func (c *GlVertexAttrib1f) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib1f) AddRead
@@ -22345,7 +22349,7 @@ func (a *GlVertexAttrib1f) String() string
 
 ```go
 type GlVertexAttrib1fv struct {
-	binary.Generate `display:"glVertexAttrib1fv"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -22365,7 +22369,7 @@ func NewGlVertexAttrib1fv(Location AttributeLocation, Value memory.Pointer) *GlV
 #### func (*GlVertexAttrib1fv) API
 
 ```go
-func (c *GlVertexAttrib1fv) API() gfxapi.API
+func (c *GlVertexAttrib1fv) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib1fv) AddRead
@@ -22424,7 +22428,7 @@ func (a *GlVertexAttrib1fv) String() string
 
 ```go
 type GlVertexAttrib2f struct {
-	binary.Generate `display:"glVertexAttrib2f"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value0   float32
@@ -22445,7 +22449,7 @@ func NewGlVertexAttrib2f(Location AttributeLocation, Value0 float32, Value1 floa
 #### func (*GlVertexAttrib2f) API
 
 ```go
-func (c *GlVertexAttrib2f) API() gfxapi.API
+func (c *GlVertexAttrib2f) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib2f) AddRead
@@ -22504,7 +22508,7 @@ func (a *GlVertexAttrib2f) String() string
 
 ```go
 type GlVertexAttrib2fv struct {
-	binary.Generate `display:"glVertexAttrib2fv"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -22524,7 +22528,7 @@ func NewGlVertexAttrib2fv(Location AttributeLocation, Value memory.Pointer) *GlV
 #### func (*GlVertexAttrib2fv) API
 
 ```go
-func (c *GlVertexAttrib2fv) API() gfxapi.API
+func (c *GlVertexAttrib2fv) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib2fv) AddRead
@@ -22583,7 +22587,7 @@ func (a *GlVertexAttrib2fv) String() string
 
 ```go
 type GlVertexAttrib3f struct {
-	binary.Generate `display:"glVertexAttrib3f"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value0   float32
@@ -22605,7 +22609,7 @@ func NewGlVertexAttrib3f(Location AttributeLocation, Value0 float32, Value1 floa
 #### func (*GlVertexAttrib3f) API
 
 ```go
-func (c *GlVertexAttrib3f) API() gfxapi.API
+func (c *GlVertexAttrib3f) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib3f) AddRead
@@ -22664,7 +22668,7 @@ func (a *GlVertexAttrib3f) String() string
 
 ```go
 type GlVertexAttrib3fv struct {
-	binary.Generate `display:"glVertexAttrib3fv"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -22684,7 +22688,7 @@ func NewGlVertexAttrib3fv(Location AttributeLocation, Value memory.Pointer) *GlV
 #### func (*GlVertexAttrib3fv) API
 
 ```go
-func (c *GlVertexAttrib3fv) API() gfxapi.API
+func (c *GlVertexAttrib3fv) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib3fv) AddRead
@@ -22743,7 +22747,7 @@ func (a *GlVertexAttrib3fv) String() string
 
 ```go
 type GlVertexAttrib4f struct {
-	binary.Generate `display:"glVertexAttrib4f"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value0   float32
@@ -22766,7 +22770,7 @@ func NewGlVertexAttrib4f(Location AttributeLocation, Value0 float32, Value1 floa
 #### func (*GlVertexAttrib4f) API
 
 ```go
-func (c *GlVertexAttrib4f) API() gfxapi.API
+func (c *GlVertexAttrib4f) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib4f) AddRead
@@ -22825,7 +22829,7 @@ func (a *GlVertexAttrib4f) String() string
 
 ```go
 type GlVertexAttrib4fv struct {
-	binary.Generate `display:"glVertexAttrib4fv"`
+	binary.Generate
 
 	Location AttributeLocation
 	Value    F32ᵖ
@@ -22845,7 +22849,7 @@ func NewGlVertexAttrib4fv(Location AttributeLocation, Value memory.Pointer) *GlV
 #### func (*GlVertexAttrib4fv) API
 
 ```go
-func (c *GlVertexAttrib4fv) API() gfxapi.API
+func (c *GlVertexAttrib4fv) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttrib4fv) AddRead
@@ -22904,7 +22908,7 @@ func (a *GlVertexAttrib4fv) String() string
 
 ```go
 type GlVertexAttribPointer struct {
-	binary.Generate `display:"glVertexAttribPointer"`
+	binary.Generate
 
 	Location   AttributeLocation
 	Size       int32
@@ -22928,7 +22932,7 @@ func NewGlVertexAttribPointer(Location AttributeLocation, Size int32, Type Verte
 #### func (*GlVertexAttribPointer) API
 
 ```go
-func (c *GlVertexAttribPointer) API() gfxapi.API
+func (c *GlVertexAttribPointer) API() gfxapi.ID
 ```
 
 #### func (*GlVertexAttribPointer) AddRead
@@ -22989,7 +22993,7 @@ func (a *GlVertexAttribPointer) String() string
 
 ```go
 type GlViewport struct {
-	binary.Generate `display:"glViewport"`
+	binary.Generate
 
 	X      int32
 	Y      int32
@@ -23011,7 +23015,7 @@ func NewGlViewport(X int32, Y int32, Width int32, Height int32) *GlViewport
 #### func (*GlViewport) API
 
 ```go
-func (c *GlViewport) API() gfxapi.API
+func (c *GlViewport) API() gfxapi.ID
 ```
 
 #### func (*GlViewport) AddRead
@@ -23070,7 +23074,7 @@ func (a *GlViewport) String() string
 
 ```go
 type GlWaitSync struct {
-	binary.Generate `display:"glWaitSync"`
+	binary.Generate
 
 	Sync      SyncObject
 	SyncFlags SyncFlags
@@ -23091,7 +23095,7 @@ func NewGlWaitSync(Sync SyncObject, SyncFlags SyncFlags, Timeout uint64) *GlWait
 #### func (*GlWaitSync) API
 
 ```go
-func (c *GlWaitSync) API() gfxapi.API
+func (c *GlWaitSync) API() gfxapi.ID
 ```
 
 #### func (*GlWaitSync) AddRead
@@ -23150,7 +23154,7 @@ func (a *GlWaitSync) String() string
 
 ```go
 type GlXCreateContext struct {
-	binary.Generate `display:"glXCreateContext"`
+	binary.Generate
 
 	Dpy       Voidᵖ
 	Vis       Voidᵖ
@@ -23173,7 +23177,7 @@ func NewGlXCreateContext(Dpy memory.Pointer, Vis memory.Pointer, ShareList memor
 #### func (*GlXCreateContext) API
 
 ```go
-func (c *GlXCreateContext) API() gfxapi.API
+func (c *GlXCreateContext) API() gfxapi.ID
 ```
 
 #### func (*GlXCreateContext) AddRead
@@ -23232,7 +23236,7 @@ func (a *GlXCreateContext) String() string
 
 ```go
 type GlXCreateNewContext struct {
-	binary.Generate `display:"glXCreateNewContext"`
+	binary.Generate
 
 	Display  Voidᵖ
 	Fbconfig Voidᵖ
@@ -23256,7 +23260,7 @@ func NewGlXCreateNewContext(Display memory.Pointer, Fbconfig memory.Pointer, Typ
 #### func (*GlXCreateNewContext) API
 
 ```go
-func (c *GlXCreateNewContext) API() gfxapi.API
+func (c *GlXCreateNewContext) API() gfxapi.ID
 ```
 
 #### func (*GlXCreateNewContext) AddRead
@@ -23317,7 +23321,7 @@ func (a *GlXCreateNewContext) String() string
 
 ```go
 type GlXMakeContextCurrent struct {
-	binary.Generate `display:"glXMakeContextCurrent"`
+	binary.Generate
 
 	Display Voidᵖ
 	Draw    GLXDrawable
@@ -23340,7 +23344,7 @@ func NewGlXMakeContextCurrent(Display memory.Pointer, Draw memory.Pointer, Read 
 #### func (*GlXMakeContextCurrent) API
 
 ```go
-func (c *GlXMakeContextCurrent) API() gfxapi.API
+func (c *GlXMakeContextCurrent) API() gfxapi.ID
 ```
 
 #### func (*GlXMakeContextCurrent) AddRead
@@ -23401,7 +23405,7 @@ func (a *GlXMakeContextCurrent) String() string
 
 ```go
 type GlXMakeCurrent struct {
-	binary.Generate `display:"glXMakeCurrent"`
+	binary.Generate
 
 	Display  Voidᵖ
 	Drawable GLXDrawable
@@ -23423,7 +23427,7 @@ func NewGlXMakeCurrent(Display memory.Pointer, Drawable memory.Pointer, Ctx memo
 #### func (*GlXMakeCurrent) API
 
 ```go
-func (c *GlXMakeCurrent) API() gfxapi.API
+func (c *GlXMakeCurrent) API() gfxapi.ID
 ```
 
 #### func (*GlXMakeCurrent) AddRead
@@ -23476,7 +23480,7 @@ func (a *GlXMakeCurrent) String() string
 
 ```go
 type GlXQueryDrawable struct {
-	binary.Generate `display:"glXQueryDrawable"`
+	binary.Generate
 
 	Display   Voidᵖ
 	Draw      GLXDrawable
@@ -23499,7 +23503,7 @@ func NewGlXQueryDrawable(Display memory.Pointer, Draw memory.Pointer, Attribute 
 #### func (*GlXQueryDrawable) API
 
 ```go
-func (c *GlXQueryDrawable) API() gfxapi.API
+func (c *GlXQueryDrawable) API() gfxapi.ID
 ```
 
 #### func (*GlXQueryDrawable) AddRead
@@ -23552,7 +23556,7 @@ func (a *GlXQueryDrawable) String() string
 
 ```go
 type GlXSwapBuffers struct {
-	binary.Generate `display:"glXSwapBuffers"`
+	binary.Generate
 
 	Display  Voidᵖ
 	Drawable GLXDrawable
@@ -23572,7 +23576,7 @@ func NewGlXSwapBuffers(Display memory.Pointer, Drawable memory.Pointer) *GlXSwap
 #### func (*GlXSwapBuffers) API
 
 ```go
-func (c *GlXSwapBuffers) API() gfxapi.API
+func (c *GlXSwapBuffers) API() gfxapi.ID
 ```
 
 #### func (*GlXSwapBuffers) AddRead
@@ -26136,7 +26140,7 @@ func (m RenderbufferTargetːRenderbufferIdᵐ) Range() []RenderbufferId
 
 ```go
 type ReplayBindRenderer struct {
-	binary.Generate `display:"replayBindRenderer"`
+	binary.Generate
 
 	Id uint32
 }
@@ -26155,7 +26159,7 @@ func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer
 #### func (*ReplayBindRenderer) API
 
 ```go
-func (c *ReplayBindRenderer) API() gfxapi.API
+func (c *ReplayBindRenderer) API() gfxapi.ID
 ```
 
 #### func (*ReplayBindRenderer) AddRead
@@ -26216,7 +26220,7 @@ func (a *ReplayBindRenderer) String() string
 
 ```go
 type ReplayCreateRenderer struct {
-	binary.Generate `display:"replayCreateRenderer"`
+	binary.Generate
 
 	Id uint32
 }
@@ -26235,7 +26239,7 @@ func NewReplayCreateRenderer(Id uint32) *ReplayCreateRenderer
 #### func (*ReplayCreateRenderer) API
 
 ```go
-func (c *ReplayCreateRenderer) API() gfxapi.API
+func (c *ReplayCreateRenderer) API() gfxapi.ID
 ```
 
 #### func (*ReplayCreateRenderer) AddRead
@@ -27727,7 +27731,7 @@ Info returns the SliceInfo. It is used to conform to the Slice interface.
 
 ```go
 type StartTimer struct {
-	binary.Generate `display:"startTimer"`
+	binary.Generate
 
 	Index uint8
 }
@@ -27746,7 +27750,7 @@ func NewStartTimer(Index uint8) *StartTimer
 #### func (*StartTimer) API
 
 ```go
-func (c *StartTimer) API() gfxapi.API
+func (c *StartTimer) API() gfxapi.ID
 ```
 
 #### func (*StartTimer) AddRead
@@ -27968,7 +27972,7 @@ func (v StencilAction) String() string
 
 ```go
 type StopTimer struct {
-	binary.Generate `display:"stopTimer"`
+	binary.Generate
 
 	Index  uint8
 	Result uint64
@@ -27988,7 +27992,7 @@ func NewStopTimer(Index uint8, Result uint64) *StopTimer
 #### func (*StopTimer) API
 
 ```go
-func (c *StopTimer) API() gfxapi.API
+func (c *StopTimer) API() gfxapi.ID
 ```
 
 #### func (*StopTimer) AddRead
@@ -31824,7 +31828,7 @@ Slice returns a new Voidˢ from the pointer using start and end indices.
 
 ```go
 type WglCreateContext struct {
-	binary.Generate `display:"wglCreateContext"`
+	binary.Generate
 
 	Hdc    HDC
 	Result HGLRC
@@ -31844,7 +31848,7 @@ func NewWglCreateContext(Hdc memory.Pointer, Result memory.Pointer) *WglCreateCo
 #### func (*WglCreateContext) API
 
 ```go
-func (c *WglCreateContext) API() gfxapi.API
+func (c *WglCreateContext) API() gfxapi.ID
 ```
 
 #### func (*WglCreateContext) AddRead
@@ -31903,7 +31907,7 @@ func (a *WglCreateContext) String() string
 
 ```go
 type WglCreateContextAttribsARB struct {
-	binary.Generate `display:"wglCreateContextAttribsARB"`
+	binary.Generate
 
 	Hdc           HDC
 	HShareContext HGLRC
@@ -31925,7 +31929,7 @@ func NewWglCreateContextAttribsARB(Hdc memory.Pointer, HShareContext memory.Poin
 #### func (*WglCreateContextAttribsARB) API
 
 ```go
-func (c *WglCreateContextAttribsARB) API() gfxapi.API
+func (c *WglCreateContextAttribsARB) API() gfxapi.ID
 ```
 
 #### func (*WglCreateContextAttribsARB) AddRead
@@ -31986,7 +31990,7 @@ func (a *WglCreateContextAttribsARB) String() string
 
 ```go
 type WglMakeCurrent struct {
-	binary.Generate `display:"wglMakeCurrent"`
+	binary.Generate
 
 	Hdc    HDC
 	Hglrc  HGLRC
@@ -32007,7 +32011,7 @@ func NewWglMakeCurrent(Hdc memory.Pointer, Hglrc memory.Pointer, Result BOOL) *W
 #### func (*WglMakeCurrent) API
 
 ```go
-func (c *WglMakeCurrent) API() gfxapi.API
+func (c *WglMakeCurrent) API() gfxapi.ID
 ```
 
 #### func (*WglMakeCurrent) AddRead
@@ -32066,7 +32070,7 @@ func (a *WglMakeCurrent) String() string
 
 ```go
 type WglSwapBuffers struct {
-	binary.Generate `display:"wglSwapBuffers"`
+	binary.Generate
 
 	Hdc HDC
 }
@@ -32085,7 +32089,7 @@ func NewWglSwapBuffers(Hdc memory.Pointer) *WglSwapBuffers
 #### func (*WglSwapBuffers) API
 
 ```go
-func (c *WglSwapBuffers) API() gfxapi.API
+func (c *WglSwapBuffers) API() gfxapi.ID
 ```
 
 #### func (*WglSwapBuffers) AddRead

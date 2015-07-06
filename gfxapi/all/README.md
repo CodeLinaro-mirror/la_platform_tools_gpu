@@ -9,3 +9,9 @@ Package all is used to import all known gfxapi APIs for their side effects.
 ```go
 var GraphicsNamespace = registry.NewNamespace()
 ```
+
+#### func  VisitConstantSets
+
+```go
+func VisitConstantSets(visitor func(schema.ConstantSet))
+```

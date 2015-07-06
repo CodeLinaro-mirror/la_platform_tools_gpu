@@ -173,7 +173,7 @@ request.
 ```go
 func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
-Build returns the *service.ImageInfo resulting from the given
+BuildLazy returns the *service.ImageInfo resulting from the given
 GetFramebufferDepth request.
 
 #### func (*GetFramebufferDepth) Class
@@ -387,8 +387,8 @@ func (*RenderFramebufferDepth) Class() binary.Class
 type ReplaceAtom struct {
 	binary.Generate
 	Capture service.CaptureId
-	Atom    atom.ID
-	Data    service.Binary
+	AtomID  atom.ID
+	Value   atom.Atom
 }
 ```
 
