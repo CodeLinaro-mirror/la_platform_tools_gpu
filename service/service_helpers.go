@@ -159,14 +159,6 @@ func (c callResolveMemoryInfo) Format(f fmt.State, r rune) {
 func (r resultResolveMemoryInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveReport) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveReport(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveReport) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveTimingInfo) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveTimingInfo(id: %v)",
 		c.id,
