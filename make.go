@@ -213,25 +213,30 @@ func MarkdownDocs(docs *Step) {
 func ShutdownReplayd() Entity {
 	e := Virtual("shutdownreplayd")
 	NewStep(func(*Step) error {
-		endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
-		for i := 0; i < 10; i++ {
-			conn, err := net.Dial("tcp", endpoint)
-			if err != nil {
-				// Assume this means there is no replayd
-				return nil
+		for _, endpoint := range []string{"localhost:9284", "localhost:9286"} {
+			const maxRetries = 10
+			for i := 0; i < maxRetries; i++ {
+				conn, err := net.Dial("tcp", endpoint)
+				if err != nil {
+					// Assume this means there is no replayd
+					break
+				}
+				defer conn.Close()
+				msg := []byte{ReplaydShutdownRequest}
+				n, err := conn.Write(msg)
+				if err != nil {
+					return fmt.Errorf("Failed to send shutdown request to Replayd %v", err)
+				}
+				if n != len(msg) {
+					return fmt.Errorf("Failed to send shutdown request to Replayd (only sent %v bytes", n)
+				}
+				if i == maxRetries-1 {
+					return fmt.Errorf("Replayd at %v did not die", endpoint)
+				}
+				time.Sleep(100 * time.Millisecond)
 			}
-			defer conn.Close()
-			msg := []byte{ReplaydShutdownRequest}
-			n, err := conn.Write(msg)
-			if err != nil {
-				return fmt.Errorf("Failed to send shutdown request to Replayd %v", err)
-			}
-			if n != len(msg) {
-				return fmt.Errorf("Failed to send shutdown request to Replayd (only sent %v bytes", n)
-			}
-			time.Sleep(100 * time.Millisecond)
 		}
-		return fmt.Errorf("Replayd at %v did not die", endpoint)
+		return nil
 	}).Creates(e)
 	return e
 }

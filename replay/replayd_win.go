@@ -16,4 +16,4 @@
 
 package replay
 
-const replayd = "replayd.exe"
+const Replayd = "replayd.exe"
