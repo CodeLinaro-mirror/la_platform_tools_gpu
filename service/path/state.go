@@ -40,6 +40,11 @@ func (n *State) Base() Path {
 	return n.After
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *State) Clone() Path {
+	return &State{After: n.After.Clone().(*Atom)}
+}
+
 // Field implements the Value interface.
 func (n *State) Field(name string) Value {
 	return &Field{Struct: n, Name: name}

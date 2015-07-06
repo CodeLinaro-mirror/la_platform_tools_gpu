@@ -50,6 +50,13 @@ Base implements the Path interface, returning the path to the array.
 func (*ArrayIndex) Class() binary.Class
 ```
 
+#### func (*ArrayIndex) Clone
+
+```go
+func (n *ArrayIndex) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
 #### func (*ArrayIndex) Field
 
 ```go
@@ -110,6 +117,13 @@ Base implements the Path interface, returning the path to the atom list.
 func (*Atom) Class() binary.Class
 ```
 
+#### func (*Atom) Clone
+
+```go
+func (n *Atom) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
 #### func (*Atom) Field
 
 ```go
@@ -169,6 +183,13 @@ Base implements the Path interface, returning the path to the capture.
 func (*Atoms) Class() binary.Class
 ```
 
+#### func (*Atoms) Clone
+
+```go
+func (n *Atoms) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
 #### func (*Atoms) Index
 
 ```go
@@ -221,6 +242,13 @@ Base implements the Path interface, returning nil as this is a root.
 func (*Capture) Class() binary.Class
 ```
 
+#### func (*Capture) Clone
+
+```go
+func (c *Capture) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
 #### func (*Capture) Path
 
 ```go
@@ -266,6 +294,13 @@ Base implements the Path interface, returning the path to the struct.
 ```go
 func (*Field) Class() binary.Class
 ```
+
+#### func (*Field) Clone
+
+```go
+func (n *Field) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
 
 #### func (*Field) Field
 
@@ -327,6 +362,13 @@ Base implements the Path interface, returning the path to the map.
 func (*MapIndex) Class() binary.Class
 ```
 
+#### func (*MapIndex) Clone
+
+```go
+func (n *MapIndex) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
 #### func (*MapIndex) Field
 
 ```go
@@ -368,6 +410,9 @@ type Path interface {
 	// Base returns the path that this path derives from.
 	// If this path is a root, then Base returns nil.
 	Base() Path
+
+	// Clone returns a deep-copy of the path.
+	Clone() Path
 }
 ```
 
@@ -406,6 +451,13 @@ after.
 ```go
 func (*State) Class() binary.Class
 ```
+
+#### func (*State) Clone
+
+```go
+func (n *State) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
 
 #### func (*State) Field
 
