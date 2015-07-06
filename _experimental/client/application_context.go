@@ -31,6 +31,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 	"github.com/google/gxui/gxfont"
 )
@@ -454,13 +455,23 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint
 	return cancel
 }
 
-func (c *ApplicationContext) ReplaceAtom(a atom.Atom, id atom.ID) {
-	l := c.logger.Enter("ReplaceAtom")
-	capture, err := c.rpc.ReplaceAtom(c.captureID, uint64(id), a, l)
+func (c *ApplicationContext) Change(p path.Path, v interface{}) {
+	l := c.logger.Enter("Change")
+	log.I(l, "%v -> %v", p, v)
+	p, err := c.rpc.Set(p, v, l)
 	if err != nil {
 		panic(err)
 	}
-	c.LoadCapture(capture, false)
+
+	for _, p := range path.Flatten(p) {
+		switch p := p.(type) {
+		case *path.Capture:
+			c.LoadCapture(service.CaptureId{ID: p.ID}, false)
+
+		case *path.Atom:
+			c.SelectAtom(atom.ID(p.Index))
+		}
+	}
 }
 
 func (c *ApplicationContext) Theme() gxui.Theme                          { return c.theme }
