@@ -27,18 +27,18 @@ import (
 
 type Atom struct {
 	object       *schema.Object
-	meta         *atom.Metadata
+	class        *AtomClass
 	observations *atom.Observations
 }
 
 var _ atom.Atom = &Atom{} // Verify that Atom implements atom.Atom.
 
 func (a *Atom) API() gfxapi.ID {
-	return a.meta.API
+	return a.class.meta.API
 }
 
 func (a *Atom) Flags() atom.Flags {
-	return a.meta.Flags
+	return a.class.meta.Flags
 }
 
 func (a *Atom) Observations() *atom.Observations {
@@ -62,7 +62,7 @@ func (a *Atom) SetField(index int, value interface{}) {
 }
 
 func (a *Atom) Class() binary.Class {
-	return a.object.Class()
+	return a.class
 }
 
 type AtomClass struct {
@@ -87,12 +87,16 @@ func NewAtomClass(base *schema.Class, meta *atom.Metadata) *AtomClass {
 	return class
 }
 
+func (c *AtomClass) Schema() *schema.Class {
+	return c.base
+}
+
 func (c *AtomClass) ID() binary.ID {
 	return c.base.ID()
 }
 
 func (c *AtomClass) New() binary.Object {
-	return &Atom{object: c.base.New().(*schema.Object)}
+	return &Atom{class: c, object: c.base.New().(*schema.Object)}
 }
 
 func (c *AtomClass) Encode(e binary.Encoder, object binary.Object) error {
@@ -101,13 +105,12 @@ func (c *AtomClass) Encode(e binary.Encoder, object binary.Object) error {
 }
 
 func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
-	a := &Atom{}
+	a := &Atom{class: c}
 	o, err := c.base.Decode(d)
 	if err != nil {
 		return a, err
 	}
 	a.object = o.(*schema.Object)
-	a.meta = c.meta
 	if c.observations >= 0 {
 		if c.observations >= len(a.object.Fields) {
 			return a, fmt.Errorf("Missing Observations field in %s", c.base.Name)
