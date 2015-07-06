@@ -14,56 +14,35 @@ import (
 
 // Resolve resolves and returns the object, value or memory at the path p.
 func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error) {
-	cache := map[service.CaptureId]atom.List{}
-	load := func(id service.CaptureId) (atom.List, error) {
-		atoms, found := cache[id]
-		if found {
-			return atoms, nil
-		}
-		capture, err := service.ResolveCapture(id, d, l)
-		if err != nil {
-			return nil, err
-		}
+	n := path.Flatten(p)
+	v := make([]interface{}, len(n))
 
-		if atoms, err = loadAtoms(capture.Atoms, d, l); err != nil {
-			return nil, err
-		}
-
-		cache[id] = atoms
-		return atoms, nil
-	}
-
-	var resolve func(interface{}) (interface{}, error)
-
-	resolve = func(p interface{}) (interface{}, error) {
+	for i, p := range n {
 		switch p := p.(type) {
-		case *path.Atoms:
-			atoms, err := load(service.CaptureId{ID: p.Capture.ID})
+		case *path.Capture:
+			capture, err := service.ResolveCapture(service.CaptureId{ID: p.ID}, d, l)
 			if err != nil {
 				return nil, err
 			}
-			return atoms, err
+			v[i] = capture
+
+		case *path.Atoms:
+			capture := v[i-1].(service.Capture)
+			atoms, err := loadAtoms(capture.Atoms, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = atoms
 
 		case *path.Atom:
-			a, err := resolve(p.Atoms)
-			if err != nil {
-				return nil, err
-			}
-			atoms := a.(atom.List)
+			atoms := v[i-1].(atom.List)
 			if p.Index >= uint64(len(atoms)) {
 				return nil, fmt.Errorf("Atom index (%d) is out of bounds [0-%d]", p.Index, len(atoms)-1)
 			}
-			return atoms[p.Index], err
+			v[i] = atoms[p.Index]
 
 		case *path.State:
-			a, err := resolve(p.After.Atoms)
-			if err != nil {
-				return nil, err
-			}
-			atoms := a.(atom.List)
-			if p.After.Index >= uint64(len(atoms)) {
-				return nil, fmt.Errorf("Atom index (%d) is out of bounds [0-%d]", p.After.Index, len(atoms)-1)
-			}
+			atoms := v[i-2].(atom.List)
 			api := gfxapi.Find(atoms[p.After.Index].API())
 			s := gfxapi.NewState()
 			for _, a := range atoms[:p.After.Index] {
@@ -73,58 +52,42 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 			if !found {
 				return nil, fmt.Errorf("No state for API '%v'", api.Name())
 			}
-			return res, nil
+			v[i] = res
 
 		case *path.Field:
-			o, err := resolve(p.Struct)
-			if err != nil {
-				return nil, err
-			}
-			v := reflect.ValueOf(o)
-			switch v.Kind() {
+			s := reflect.ValueOf(v[i-1])
+			switch s.Kind() {
 			case reflect.Struct:
-				return v.FieldByName(p.Name).Interface(), nil
+				v[i] = s.FieldByName(p.Name).Interface()
 
 			default:
-				return nil, fmt.Errorf("Cannot access fields of type type %T", o)
+				return nil, fmt.Errorf("Cannot access fields of type %T", v)
 			}
 
 		case *path.ArrayIndex:
-			o, err := resolve(p.Array)
-			if err != nil {
-				return nil, err
-			}
-			v := reflect.ValueOf(o)
-			switch v.Kind() {
+			a := reflect.ValueOf(v[i-1])
+			switch a.Kind() {
 			case reflect.Array, reflect.Slice, reflect.String:
-				return v.Index(int(p.Index)).Interface(), nil
+				v[i] = a.Index(int(p.Index)).Interface()
 
 			default:
-				return nil, fmt.Errorf("Cannot array-index type %T", o)
+				return nil, fmt.Errorf("Cannot array-index type %T", v)
 			}
 
 		case *path.MapIndex:
-			o, err := resolve(p.Map)
-			if err != nil {
-				return nil, err
-			}
-			k, err := resolve(p.Key)
-			if err != nil {
-				return nil, err
-			}
-			v := reflect.ValueOf(o)
-			switch v.Kind() {
+			m := reflect.ValueOf(v[i-1])
+			switch m.Kind() {
 			case reflect.Map:
-				return v.MapIndex(reflect.ValueOf(k)).Interface(), nil
+				v[i] = m.MapIndex(reflect.ValueOf(p.Key)).Interface()
 
 			default:
-				return nil, fmt.Errorf("Cannot map-index type %T", o)
+				return nil, fmt.Errorf("Cannot map-index type %T", v)
 			}
 
 		default:
-			return p, nil
+			return nil, fmt.Errorf("Unknown path type %T", p)
 		}
 	}
 
-	return resolve(p)
+	return v[len(v)-1], nil
 }
