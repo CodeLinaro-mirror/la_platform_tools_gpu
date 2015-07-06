@@ -25,6 +25,7 @@ func TestLazyInterfaceCompliance(t *testing.T) {
 	_ = []database.Lazy{
 		(*BuildReport)(nil),
 		(*ConvertImage)(nil),
+		(*Get)(nil),
 		(*GetFramebufferColor)(nil),
 		(*GetFramebufferDepth)(nil),
 		(*GetHierarchy)(nil),
@@ -34,6 +35,7 @@ func TestLazyInterfaceCompliance(t *testing.T) {
 		(*PrerenderFramebuffers)(nil),
 		(*RenderFramebufferColor)(nil),
 		(*RenderFramebufferDepth)(nil),
+		(*Set)(nil),
 
 		(*getCaptureFramebufferDimensions)(nil),
 	}
