@@ -131,6 +131,7 @@ func (*AtomStream) Class() binary.Class
 ```go
 func (s *AtomStream) Clone() *AtomStream
 ```
+Clone returns a new AtomStream holding a shallow-copy of the Atoms slice.
 
 #### func (*AtomStream) GetAtoms
 
