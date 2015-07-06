@@ -64,14 +64,6 @@ type GetFramebufferDepth struct {
 	After   atom.ID
 }
 
-// ReplaceAtom records the parameters of a service.ReplaceAtom RPC request.
-type ReplaceAtom struct {
-	binary.Generate
-	Capture service.CaptureId
-	AtomID  atom.ID
-	Value   atom.Atom
-}
-
 // GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
 type GetTimingInfo struct {
 	binary.Generate

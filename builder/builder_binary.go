@@ -33,7 +33,6 @@ func init() {
 	Namespace.Add((*PrerenderFramebuffers)(nil).Class())
 	Namespace.Add((*RenderFramebufferColor)(nil).Class())
 	Namespace.Add((*RenderFramebufferDepth)(nil).Class())
-	Namespace.Add((*ReplaceAtom)(nil).Class())
 	Namespace.Add((*Set)(nil).Class())
 	Namespace.Add((*atomFramebufferDimensions)(nil).Class())
 	Namespace.Add((*captureFramebufferDimensions)(nil).Class())
@@ -53,7 +52,6 @@ var (
 	binaryIDPrerenderFramebuffers           = binary.ID{0x3c, 0xf2, 0xf2, 0xa2, 0x16, 0xa8, 0xe1, 0xe2, 0x7f, 0x51, 0xb8, 0xbb, 0xaa, 0x36, 0x11, 0x8d, 0x00, 0xb6, 0xf6, 0x79}
 	binaryIDRenderFramebufferColor          = binary.ID{0xc2, 0x1c, 0x41, 0xbf, 0x83, 0x9e, 0xd9, 0xdd, 0x8f, 0x52, 0x56, 0xc2, 0xba, 0xaa, 0xd2, 0xed, 0x23, 0xc2, 0xd2, 0x86}
 	binaryIDRenderFramebufferDepth          = binary.ID{0xa9, 0x18, 0x0d, 0x72, 0xb6, 0x3d, 0xe5, 0x46, 0xaf, 0x7a, 0x63, 0xe4, 0x25, 0xa6, 0x80, 0xa8, 0x3b, 0x2c, 0x2b, 0x7d}
-	binaryIDReplaceAtom                     = binary.ID{0xd0, 0x37, 0xcb, 0x94, 0x28, 0x3d, 0x8f, 0x17, 0xfc, 0x8a, 0x1b, 0xad, 0x79, 0xb5, 0xc6, 0x49, 0xfe, 0xc8, 0x73, 0x39}
 	binaryIDSet                             = binary.ID{0x3e, 0x3e, 0xf7, 0x61, 0xd5, 0x5c, 0x3a, 0x76, 0xc6, 0x39, 0x17, 0x5e, 0x37, 0x26, 0x78, 0xaf, 0xdf, 0x83, 0x9f, 0x4e}
 	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
@@ -1039,83 +1037,6 @@ var schemaRenderFramebufferDepth = &schema.Class{
 		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "FramebufferWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FramebufferHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-	},
-}
-
-type binaryClassReplaceAtom struct{}
-
-func (*ReplaceAtom) Class() binary.Class {
-	return (*binaryClassReplaceAtom)(nil)
-}
-func doEncodeReplaceAtom(e binary.Encoder, o *ReplaceAtom) error {
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.AtomID)); err != nil {
-		return err
-	}
-	if o.Value != nil {
-		if err := e.Object(o.Value); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeReplaceAtom(d binary.Decoder, o *ReplaceAtom) error {
-	if err := d.Value(&o.Capture); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.AtomID = atom.ID(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Value = obj.(atom.Atom)
-	} else {
-		o.Value = nil
-	}
-	return nil
-}
-func doSkipReplaceAtom(d binary.Decoder) error {
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassReplaceAtom) ID() binary.ID      { return binaryIDReplaceAtom }
-func (*binaryClassReplaceAtom) New() binary.Object { return &ReplaceAtom{} }
-func (*binaryClassReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeReplaceAtom(e, obj.(*ReplaceAtom))
-}
-func (*binaryClassReplaceAtom) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ReplaceAtom{}
-	return obj, doDecodeReplaceAtom(d, obj)
-}
-func (*binaryClassReplaceAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeReplaceAtom(d, obj.(*ReplaceAtom))
-}
-func (*binaryClassReplaceAtom) Skip(d binary.Decoder) error { return doSkipReplaceAtom(d) }
-func (*binaryClassReplaceAtom) Schema() *schema.Class       { return schemaReplaceAtom }
-
-var schemaReplaceAtom = &schema.Class{
-	TypeID:  binaryIDReplaceAtom,
-	Package: "builder",
-	Name:    "ReplaceAtom",
-	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "AtomID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Value", Type: &schema.Interface{Name: "atom.Atom"}},
 	},
 }
 
