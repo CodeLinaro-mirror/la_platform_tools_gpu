@@ -220,7 +220,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 #### func (*ApplicationContext) Atoms
 
 ```go
-func (c *ApplicationContext) Atoms() []Atom
+func (c *ApplicationContext) Atoms() []atom.Atom
 ```
 
 #### func (*ApplicationContext) Capture
@@ -240,13 +240,6 @@ func (c *ApplicationContext) CaptureID() service.CaptureId
 ```go
 func (c *ApplicationContext) ColorBuffer() gxui.Texture
 ```
-
-#### func (*ApplicationContext) DecodeAtoms
-
-```go
-func (c *ApplicationContext) DecodeAtoms(stream service.AtomStream) ([]Atom, error)
-```
-DecodeAtoms decodes all atoms from the AtomStream stream.
 
 #### func (*ApplicationContext) DepthBuffer
 
@@ -377,7 +370,7 @@ func (c *ApplicationContext) OnWireframeChanged(f func()) gxui.EventSubscription
 #### func (*ApplicationContext) ReplaceAtom
 
 ```go
-func (c *ApplicationContext) ReplaceAtom(a Atom, id atom.ID)
+func (c *ApplicationContext) ReplaceAtom(a atom.Atom, id atom.ID)
 ```
 
 #### func (*ApplicationContext) RequestMemory
@@ -503,28 +496,16 @@ type Atom struct {
 ```
 
 
-#### func (*Atom) Api
+#### func (*Atom) API
 
 ```go
-func (a *Atom) Api() service.ApiId
+func (a *Atom) API() gfxapi.ID
 ```
 
-#### func (Atom) Class
+#### func (*Atom) Class
 
 ```go
-func (a Atom) Class() binary.Class
-```
-
-#### func (*Atom) DisplayName
-
-```go
-func (a *Atom) DisplayName() string
-```
-
-#### func (*Atom) DocumentationUrl
-
-```go
-func (a *Atom) DocumentationUrl() string
+func (a *Atom) Class() binary.Class
 ```
 
 #### func (*Atom) Field
@@ -544,7 +525,12 @@ func (a *Atom) FieldCount() int
 ```go
 func (a *Atom) Flags() atom.Flags
 ```
-Flags returns the flags of the atom.
+
+#### func (*Atom) Mutate
+
+```go
+func (*Atom) Mutate(*gfxapi.State, database.Database, log.Logger) error
+```
 
 #### func (*Atom) Observations
 
@@ -829,7 +815,7 @@ func (a *FilmStripAdapter) ItemIndex(item gxui.AdapterItem) int
 #### func (*FilmStripAdapter) SetAtoms
 
 ```go
-func (a *FilmStripAdapter) SetAtoms(atoms []Atom)
+func (a *FilmStripAdapter) SetAtoms(atoms []atom.Atom)
 ```
 
 #### func (*FilmStripAdapter) Size
