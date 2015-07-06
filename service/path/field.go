@@ -40,6 +40,11 @@ func (n *Field) Base() Path {
 	return n.Struct
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *Field) Clone() Path {
+	return &Field{Struct: n.Struct.Clone().(Value), Name: n.Name}
+}
+
 // Field implements the Value interface.
 func (n *Field) Field(name string) Value {
 	return &Field{Struct: n, Name: name}

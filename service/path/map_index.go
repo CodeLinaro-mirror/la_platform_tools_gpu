@@ -40,6 +40,11 @@ func (n *MapIndex) Base() Path {
 	return n.Map
 }
 
+// Clone implements the Path interface, returning a deep-copy of this path.
+func (n *MapIndex) Clone() Path {
+	return &MapIndex{Map: n.Map.Clone().(Value), Key: n.Key}
+}
+
 // Field implements the Value interface.
 func (n *MapIndex) Field(name string) Value {
 	return &Field{Struct: n, Name: name}

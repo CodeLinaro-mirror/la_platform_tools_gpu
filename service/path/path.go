@@ -31,6 +31,9 @@ type Path interface {
 	// Base returns the path that this path derives from.
 	// If this path is a root, then Base returns nil.
 	Base() Path
+
+	// Clone returns a deep-copy of the path.
+	Clone() Path
 }
 
 // Value is the expanded Path interface for types that represent a reference to
