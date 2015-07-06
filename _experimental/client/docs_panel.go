@@ -15,14 +15,14 @@
 package client
 
 import (
-	"io"
-	"net/http"
-	"regexp"
+	// "io"
+	// "net/http"
+	// "regexp"
 
-	gpuatom "android.googlesource.com/platform/tools/gpu/atom"
+	//	gpuatom "android.googlesource.com/platform/tools/gpu/atom"
 	"github.com/google/gxui"
-	"golang.org/x/net/html"
-	"golang.org/x/net/html/atom"
+	//	"golang.org/x/net/html"
+	//	"golang.org/x/net/html/atom"
 )
 
 func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
@@ -30,16 +30,19 @@ func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
 
 	ll := theme.CreateLinearLayout()
 	appCtx.OnAtomSelected(func() {
-		ll.RemoveAll()
-		a := appCtx.Atoms()[appCtx.SelectedAtomID()]
-		docs := gpuatom.MetadataOf(a).DocumentationUrl
-		loadHtml(theme, docs, ll)
+		/*
+			ll.RemoveAll()
+			a := appCtx.Atoms()[appCtx.SelectedAtomID()]
+			docs := gpuatom.MetadataOf(a).DocumentationUrl
+			loadHtml(theme, docs, ll)
+		*/
 	})
 	sl := theme.CreateScrollLayout()
 	sl.SetChild(ll)
 	return sl
 }
 
+/*
 var duplicateWhitespaceRegExp = regexp.MustCompile("[ \t\r\n\f]+")
 
 func parseHtml(r io.Reader, t gxui.Theme, c gxui.Container) {
@@ -105,3 +108,4 @@ func loadHtml(t gxui.Theme, url string, c gxui.Container) {
 		}
 	}()
 }
+*/
