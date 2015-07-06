@@ -48,3 +48,8 @@ func (c *Capture) Clone() Path {
 func (c *Capture) Atoms() *Atoms {
 	return &Atoms{Capture: c}
 }
+
+// Report returns the path to the capture's report.
+func (c *Capture) Report() Path {
+	return &Report{Capture: c}
+}
