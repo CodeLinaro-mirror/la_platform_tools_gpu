@@ -250,24 +250,22 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
-		var err error
-
-		capture, err := c.rpc.ResolveCapture(captureID, l)
+		capture, err := c.rpc.Get(captureID.Path(), l)
 		if err != nil {
-			log.Errorf(l, "Error resolving capture: %v", err)
+			log.Errorf(l, "Error getting capture: %v", err)
 			return
 		}
 
-		atomStream, err := c.rpc.ResolveAtomStream(capture.Atoms, l)
+		stream, err := c.rpc.Get(captureID.Path().Atoms(), l)
 		if err != nil {
-			log.Errorf(l, "Error resolving capture: %v", err)
+			log.Errorf(l, "Error getting atom stream: %v", err)
 			return
 		}
 
 		c.Run(func() {
 			c.captureID = captureID
-			c.capture = capture
-			c.atoms = atomStream.Atoms
+			c.capture = *capture.(*service.Capture)
+			c.atoms = stream.(*service.AtomStream).Atoms
 			if resetSelected {
 				c.selectedAtomID = InvalidAtomID
 				c.selectedPointer = memory.Pointer{}
