@@ -213,7 +213,7 @@ func MarkdownDocs(docs *Step) {
 func ShutdownReplayd() Entity {
 	e := Virtual("shutdownreplayd")
 	NewStep(func(*Step) error {
-		for _, endpoint := range []string{"localhost:9284", "localhost:9286"} {
+		for _, endpoint := range []string{"localhost:9283", "localhost:9284"} {
 			const maxRetries = 10
 			for i := 0; i < maxRetries; i++ {
 				conn, err := net.Dial("tcp", endpoint)
