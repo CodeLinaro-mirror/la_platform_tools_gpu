@@ -32,7 +32,7 @@ const localDeviceName = "Local machine" // TODO: Remove hard-coded string.
 func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
 	replay.ConfigureLocalReplayDevice(true, // disable disk-cache
 		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.Replayd)),
-		9286)
+		9283)
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {
 			info := d.Info()
