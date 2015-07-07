@@ -71,6 +71,7 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 	}
 	var traverseExpression func(e semantic.Expression)
 	traverseExpression = func(e semantic.Expression) {
+		markUsed(e.ExpressionType())
 		switch e := e.(type) {
 		case *semantic.UnaryOp:
 			traverseExpression(e.Expression)
@@ -78,7 +79,11 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 			traverseExpression(e.LHS)
 			traverseExpression(e.RHS)
 		case *semantic.ClassInitializer:
-			markUsed(e.Class)
+			for _, f := range e.Fields {
+				traverseExpression(f.Value)
+			}
+		case *semantic.Cast:
+			traverseExpression(e.Object)
 			// TODO: Insert more expression cases
 		}
 	}
@@ -94,6 +99,27 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 			for _, a := range s.Arguments {
 				traverseExpression(a)
 			}
+		case *semantic.Branch:
+			traverseStatement(s.True)
+			traverseStatement(s.False)
+			traverseExpression(s.Condition)
+		case *semantic.Switch:
+			traverseExpression(s.Value)
+			for _, c := range s.Cases {
+				traverseStatement(c.Block)
+			}
+		case *semantic.Block:
+			for _, st := range s.Statements {
+				traverseStatement(st)
+			}
+		case *semantic.Iteration:
+			traverseExpression(s.Iterable)
+			traverseStatement(s.Block)
+		case *semantic.SliceAssign:
+			traverseExpression(s.Value)
+			traverseExpression(s.To)
+		case *semantic.Return:
+			traverseExpression(s.Value)
 			// TODO: Insert more statement cases
 		}
 	}
@@ -102,9 +128,7 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 		for _, p := range f.FullParameters {
 			markUsed(p.Type)
 		}
-		for _, s := range f.Block.Statements {
-			traverseStatement(s)
-		}
+		traverseStatement(f.Block)
 	}
 
 	// Traverse the API finding all used types
