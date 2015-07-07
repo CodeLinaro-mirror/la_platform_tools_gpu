@@ -21,7 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 )
 
-func (f *functions) CppName(n string) string {
+func (t *Templates) CppName(n string) string {
 	n = strings.Replace(n, ".", "::", -1)
 	n = strings.Replace(n, resolver.ConstSuffix+resolver.PointerSuffix, "__CP", -1)
 	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
@@ -32,13 +32,13 @@ func (f *functions) CppName(n string) string {
 }
 
 // CppFile generates the all the cpp code for a file with a set of structs.
-func (g *Generator) CppFile(file *File) ([]byte, error) {
+func (t *Templates) CppFile(file *File) ([]byte, error) {
 	f := *file
 	if f.Indent == "" {
 		f.Indent = "    "
 	}
 	b := &bytes.Buffer{}
-	if err := g.f.execute("Cpp.File", b, &f); err != nil {
+	if err := t.execute("Cpp.File", b, &f); err != nil {
 		return nil, err
 	}
 	s := b.String()
