@@ -984,7 +984,6 @@ cmd UniformLocation glGetUniformLocation(ProgramId program, string name) {
     return ?
 }
 
-@replay_custom // Translates to glBindAttribLocation
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml
 cmd AttributeLocation glGetAttribLocation(ProgramId program, string name) {
     return ?
