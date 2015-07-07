@@ -31,61 +31,56 @@ import schema "schema.api"
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.
 // This includes all the types included in or referenced from the atom stream.
-cmd Schema GetSchema() { return ? }
+extern Schema GetSchema()
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-cmd CaptureId Import(string name, u8[] Data) { return ? }
+extern CaptureId Import(string name, u8[] Data)
 
 // GetCaptures returns the full list of capture identifiers avaliable on the
 // server.
-cmd CaptureId[] GetCaptures() { return ? }
+extern CaptureId[] GetCaptures()
 
 // GetDevices returns the full list of replay devices avaliable to the server.
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
-cmd DeviceId[] GetDevices() { return ? }
+extern DeviceId[] GetDevices()
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture.
 // Currently there is only one hierarchy per capture, but this is likely to
 // change in the future.
-cmd HierarchyId GetHierarchy(CaptureId capture)
-{ return ? }
+extern HierarchyId GetHierarchy(CaptureId capture)
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and range, immediately following the atom
 // after.
-cmd MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, memory.Range rng)
-{ return ? }
+extern MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, memory.Range rng)
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
 // color buffer for the given device, capture and graphics API immediately
 // following the atom after. The provided RenderSettings structure can be used
 // to adjust maximum desired dimensions of the image, as well as applying debug
 // visualizations.
-cmd ImageInfoId GetFramebufferColor(DeviceId       device,
-                                    CaptureId      capture,
-                                    ApiId          api,
-                                    u64            after,
-                                    RenderSettings settings)
-{ return ? }
+extern ImageInfoId GetFramebufferColor(DeviceId       device,
+                                       CaptureId      capture,
+                                       ApiId          api,
+                                       u64            after,
+                                       RenderSettings settings)
 
 // GetFramebufferDepth returns the ImageInfo identifier describing the bound
 // depth buffer for the given device, capture and graphics API immediately
 // following the atom after.
-cmd ImageInfoId GetFramebufferDepth(DeviceId  device,
-                                    CaptureId capture,
-                                    ApiId     api,
-                                    u64       after)
-{ return ? }
+extern ImageInfoId GetFramebufferDepth(DeviceId  device,
+                                       CaptureId capture,
+                                       ApiId     api,
+                                       u64       after)
 
 // GetTimingInfo performs timings of the given capture on the given device,
 // returning an identifier to the results.
 // This function is experimental and will change signature.
-cmd TimingInfoId GetTimingInfo(DeviceId   device,
-                               CaptureId  capture,
-                               TimingMask mask)
-{ return ? }
+extern TimingInfoId GetTimingInfo(DeviceId   device,
+                                  CaptureId  capture,
+                                  TimingMask mask)
 
 // PrerenderFramebuffers renders the framebuffer contents after each of the
 // given atoms of interest in the given capture on the given device for the
@@ -94,32 +89,29 @@ cmd TimingInfoId GetTimingInfo(DeviceId   device,
 // return any data, as it is used to pre-populate the cache of framebuffer
 // thumbnails that later get queried by the client. This function is
 // experimental and may change signature.
-cmd BinaryId PrerenderFramebuffers(DeviceId   device,
-                                   CaptureId  capture,
-                                   ApiId      api,
-                                   u32        width,
-                                   u32        height,
-                                   u64[]      atomIds)
-{ return ? }
+extern BinaryId PrerenderFramebuffers(DeviceId   device,
+                                      CaptureId  capture,
+                                      ApiId      api,
+                                      u32        width,
+                                      u32        height,
+                                      u64[]      atomIds)
 
 // Get resolves and returns the object, value or memory at the path p.
-cmd any Get(path.Path p)
-{ return ? }
+extern any Get(path.Path p)
 
 // Set creates a copy of the capture referenced by p, but with the object, value
 // or memory at p replaced with v. The path returned is identical to p, but with
 // the base changed to refer to the new capture.
-cmd path.Path Set(path.Path p, any v)
-{ return ? }
+extern path.Path Set(path.Path p, any v)
 
-cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
-cmd Binary             ResolveBinary(BinaryId id) { return ? }
-cmd Capture            ResolveCapture(CaptureId id) { return ? }
-cmd Device             ResolveDevice(DeviceId id) { return ? }
-cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
-cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
-cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
-cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
+extern AtomStream         ResolveAtomStream(AtomStreamId id)
+extern Binary             ResolveBinary(BinaryId id)
+extern Capture            ResolveCapture(CaptureId id)
+extern Device             ResolveDevice(DeviceId id)
+extern Hierarchy          ResolveHierarchy(HierarchyId id)
+extern ImageInfo          ResolveImageInfo(ImageInfoId id)
+extern MemoryInfo         ResolveMemoryInfo(MemoryInfoId id)
+extern TimingInfo         ResolveTimingInfo(TimingInfoId id)
 
 // Schema holds all the rtti information for dynamic types in the service.
 class Schema {
