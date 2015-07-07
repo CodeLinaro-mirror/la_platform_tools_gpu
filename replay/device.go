@@ -29,10 +29,20 @@ import (
 // DisableLocalDeviceCache can be used to disable the disk-cache for the local
 // device. If true, it is passed as a flag to replayd on spawning. This can be
 // used for disabling the cache for tests.
-var DisableLocalDeviceCache = false
+var disableLocalDeviceCache = false
 
-// LocalReplayBinary is the full path to the local binary.
-var LocalReplayBinary = replayd
+// localReplayBinary is the full path to the local binary.
+var localReplayBinary = Replayd
+
+// Port number of the "replayd" running on the local device
+var localDevicePort = 9284
+
+// Allow adjusting the settings for replayd.
+func ConfigureLocalReplayDevice(disableCache bool, binary string, port int) {
+	disableLocalDeviceCache = disableCache
+	localReplayBinary = binary
+	localDevicePort = port
+}
 
 // deviceOS is an enumerator of operating systems that the replay target may be
 // running on.
@@ -102,10 +112,10 @@ func (androidDevice) Connect() (io.ReadWriteCloser, error) {
 }
 
 func (localDevice) Connect() (io.ReadWriteCloser, error) {
-	endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
+	endpoint := fmt.Sprintf("localhost:%d", localDevicePort)
 	conn, err := net.Dial("tcp", endpoint)
 	if err != nil {
-		if err := spawnChild(LocalReplayBinary); err != nil {
+		if err := spawnChild(localReplayBinary); err != nil {
 			return nil, err
 		}
 		for i := 0; i < 10; i++ {
@@ -129,9 +139,11 @@ func spawnChild(path string) error {
 		return err
 	}
 	args := []string{path}
-	if DisableLocalDeviceCache {
+	if disableLocalDeviceCache {
 		args = append(args, "--nocache")
 	}
+	args = append(args, "--port")
+	args = append(args, fmt.Sprintf("%d", localDevicePort))
 	proc, err := os.StartProcess(path, args, &os.ProcAttr{
 		Files: []*os.File{null, null, null},
 	})
