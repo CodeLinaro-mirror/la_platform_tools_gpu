@@ -22,6 +22,7 @@ func init() {
 	Namespace.Add((*Atom)(nil).Class())
 	Namespace.Add((*Field)(nil).Class())
 	Namespace.Add((*MapIndex)(nil).Class())
+	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
 }
 
@@ -32,6 +33,7 @@ var (
 	binaryIDAtom       = binary.ID{0x58, 0x11, 0xbe, 0x6d, 0xfc, 0xe2, 0xe0, 0x12, 0x6c, 0x42, 0x55, 0x2d, 0xf3, 0x5e, 0x11, 0x1a, 0xc1, 0x6b, 0xfe, 0x3b}
 	binaryIDField      = binary.ID{0xd0, 0x6a, 0xce, 0x53, 0xcf, 0xc3, 0x4c, 0x2a, 0x51, 0xa7, 0xaf, 0xf1, 0xb5, 0x91, 0x67, 0xdd, 0xe0, 0x21, 0x7b, 0x02}
 	binaryIDMapIndex   = binary.ID{0xf1, 0xfd, 0x8e, 0x5c, 0x70, 0x49, 0x7f, 0xbd, 0x40, 0xbc, 0x54, 0x04, 0xff, 0x46, 0x76, 0xec, 0x4c, 0x4c, 0xc0, 0x01}
+	binaryIDReport     = binary.ID{0xc3, 0x15, 0x30, 0x12, 0xb4, 0xa6, 0x7e, 0x71, 0x3a, 0xa3, 0xec, 0xb5, 0x93, 0x21, 0xf6, 0x2f, 0xd2, 0xf1, 0x4f, 0xa9}
 	binaryIDState      = binary.ID{0xf1, 0xa4, 0x19, 0x51, 0x01, 0xc4, 0xe2, 0x90, 0xc2, 0xca, 0x28, 0x00, 0x17, 0x08, 0x72, 0xb9, 0x46, 0x3a, 0xd1, 0x7b}
 )
 
@@ -417,6 +419,61 @@ var schemaMapIndex = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Map", Type: &schema.Interface{Name: "Value"}},
 		{Declared: "Key", Type: &any.Any{}},
+	},
+}
+
+type binaryClassReport struct{}
+
+func (*Report) Class() binary.Class {
+	return (*binaryClassReport)(nil)
+}
+func doEncodeReport(e binary.Encoder, o *Report) error {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeReport(d binary.Decoder, o *Report) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Capture = obj.(*Capture)
+	} else {
+		o.Capture = nil
+	}
+	return nil
+}
+func doSkipReport(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassReport) ID() binary.ID      { return binaryIDReport }
+func (*binaryClassReport) New() binary.Object { return &Report{} }
+func (*binaryClassReport) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeReport(e, obj.(*Report))
+}
+func (*binaryClassReport) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Report{}
+	return obj, doDecodeReport(d, obj)
+}
+func (*binaryClassReport) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeReport(d, obj.(*Report))
+}
+func (*binaryClassReport) Skip(d binary.Decoder) error { return doSkipReport(d) }
+func (*binaryClassReport) Schema() *schema.Class       { return schemaReport }
+
+var schemaReport = &schema.Class{
+	TypeID:  binaryIDReport,
+	Package: "path",
+	Name:    "Report",
+	Fields: []schema.Field{
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
 	},
 }
 

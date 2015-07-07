@@ -39,6 +39,14 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			v[i] = &service.AtomStream{Atoms: atoms}
 
+		case *path.Report:
+			capture := v[i-1].(*service.Capture)
+			report, err := service.ResolveReport(capture.Report, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = &report
+
 		case *path.Atom:
 			atoms := v[i-1].(*service.AtomStream).Atoms
 			if p.Index >= uint64(len(atoms)) {

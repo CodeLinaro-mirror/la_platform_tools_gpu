@@ -175,7 +175,7 @@ Atoms is a path that refers to the full list of atoms in a capture.
 ```go
 func (n *Atoms) Base() Path
 ```
-Base implements the Path interface, returning the path to the capture.
+Base implements the Path interface, returning the path to the atoms.
 
 #### func (*Atoms) Class
 
@@ -255,6 +255,13 @@ Clone implements the Path interface, returning a deep-copy of this path.
 func (c *Capture) Path() string
 ```
 Path implements the Path interface.
+
+#### func (*Capture) Report
+
+```go
+func (c *Capture) Report() Path
+```
+Report returns the path to the capture's report.
 
 #### func (*Capture) String
 
@@ -419,6 +426,51 @@ type Path interface {
 Path is the interface for types that represent a reference to a capture, atom
 list, single atom, memory, state or sub-object. A path can be passed between
 client and server using RPCs in order to describe some data in a capture.
+
+#### type Report
+
+```go
+type Report struct {
+	binary.Generate
+	Capture *Capture // The path to the capture containing the atoms.
+}
+```
+
+Report is a path that refers to a capture's report.
+
+#### func (*Report) Base
+
+```go
+func (n *Report) Base() Path
+```
+Base implements the Path interface, returning the path to the report.
+
+#### func (*Report) Class
+
+```go
+func (*Report) Class() binary.Class
+```
+
+#### func (*Report) Clone
+
+```go
+func (n *Report) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
+#### func (*Report) Path
+
+```go
+func (n *Report) Path() string
+```
+Path implements the Path interface.
+
+#### func (*Report) String
+
+```go
+func (n *Report) String() string
+```
+String returns the string representation of the path.
 
 #### type State
 
