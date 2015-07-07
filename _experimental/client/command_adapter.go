@@ -83,7 +83,27 @@ func createTextbox(t gxui.Theme, value interface{}, active bool, parse parser, c
 	return tb
 }
 
-func createIntField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
+func findConstants(t schema.Type, appCtx *ApplicationContext) schema.ConstantSet {
+	set, _ := appCtx.constants[t.String()]
+	return set
+}
+
+func findConstant(s schema.ConstantSet, v interface{}) schema.Constant {
+	for _, entry := range s.Entries {
+		if entry.Value == v {
+			return entry
+		}
+	}
+	return schema.Constant{}
+}
+
+func createIntField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}, s schema.ConstantSet) gxui.Control {
+	if len(s.Entries) > 0 {
+		c := findConstant(s, v)
+		return createEnumList(t, appCtx, s.Entries, c, true, func(v gxui.AdapterItem) {
+			appCtx.Change(p, v.(schema.Constant).Value)
+		})
+	}
 	ty := reflect.TypeOf(v)
 	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
 		if i, err := strconv.ParseInt(s, 0, ty.Bits()); err == nil {
@@ -98,7 +118,13 @@ func createIntField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v int
 	})
 }
 
-func createUintField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
+func createUintField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}, s schema.ConstantSet) gxui.Control {
+	if len(s.Entries) > 0 {
+		c := findConstant(s, v)
+		return createEnumList(t, appCtx, s.Entries, c, true, func(v gxui.AdapterItem) {
+			appCtx.Change(p, v.(schema.Constant).Value)
+		})
+	}
 	ty := reflect.TypeOf(v)
 	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
 		if i, err := strconv.ParseUint(s, 0, ty.Bits()); err == nil {
@@ -160,6 +186,7 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 	for i := 0; i < a.FieldCount(); i++ {
 		argIdx := i // capture for closures
 		info, v := a.Field(argIdx)
+		constants := findConstants(info.Type, appCtx)
 		p := atomPath.Field(info.Name())
 		if needcomma {
 			ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
@@ -184,10 +211,10 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 			})
 
 		case int8, int16, int32, int64:
-			c = createIntField(t, appCtx, p, v)
+			c = createIntField(t, appCtx, p, v, constants)
 
 		case uint8, uint16, uint32, uint64:
-			c = createUintField(t, appCtx, p, v)
+			c = createUintField(t, appCtx, p, v, constants)
 
 		case float32, float64:
 			c = createFloatField(t, appCtx, p, v)
