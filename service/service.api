@@ -119,7 +119,6 @@ cmd Device             ResolveDevice(DeviceId id) { return ? }
 cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
 cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
 cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
-cmd Report             ResolveReport(ReportId id) { return ? }
 cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
 // Schema holds all the rtti information for dynamic types in the service.

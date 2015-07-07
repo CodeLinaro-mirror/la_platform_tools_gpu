@@ -33,19 +33,19 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)
-			atoms, err := loadAtoms(capture.Atoms, d, l)
+			atoms, err := d.Resolve(capture.Atoms.ID, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = &service.AtomStream{Atoms: atoms}
+			v[i] = atoms.(*service.AtomStream)
 
 		case *path.Report:
 			capture := v[i-1].(*service.Capture)
-			report, err := service.ResolveReport(capture.Report, d, l)
+			report, err := d.Resolve(capture.Report.ID, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = &report
+			v[i] = report.(*service.Report)
 
 		case *path.Atom:
 			atoms := v[i-1].(*service.AtomStream).Atoms
