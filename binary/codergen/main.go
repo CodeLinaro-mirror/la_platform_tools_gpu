@@ -160,7 +160,8 @@ func output(t *generate.Templates, file *generate.File) error {
 	javaPackage, doJava := file.Directives["java.package"]
 	if *java != "" && !file.IsTest && doJava {
 		gen := generate.NewJava(file)
-		gen.Package = javaPackage
+		gen.BasePackage = javaPackage
+		gen.RelativePackage = file.Name
 		source, _ := file.Directives["java.source"]
 		indent, _ := file.Directives["java.indent"]
 		gen.MemberPrefix, _ = file.Directives["java.member_prefix"]
@@ -174,9 +175,12 @@ func output(t *generate.Templates, file *generate.File) error {
 			gen.Indent = "    "
 		}
 		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
-		out := filepath.Join(*java, source, pkgPath, "ObjectFactory.java")
-		if err := Generate(gen, t, out); err != nil {
-			return err
+		for _, s := range file.Structs {
+			out := filepath.Join(*java, source, pkgPath, file.Name, s.Name+".java")
+			gen.Struct = s
+			if err := Generate(gen, t, out); err != nil {
+				return err
+			}
 		}
 	}
 	cppNamespace, doCpp := file.Directives["cpp"]
