@@ -14749,16 +14749,8 @@ func (a *GlGetAttribLocation) Observations() *atom.Observations
 #### func (*GlGetAttribLocation) Replay
 
 ```go
-func (ω *GlGetAttribLocation) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error
+func (ϟa *GlGetAttribLocation) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error
 ```
-AttributeLocations cannot be remapped like UniformLocations as the
-VertexAttributeArrays are shared between different programs. Instead, simply
-force the location to match what was recorded in the capture using
-glBindAttribLocation. TODO: This implementation currently calls glLinkProgram
-for every call to glGetAttribLocation!
-
-    This is obviously not ideal, and we should be doing this once at glLinkProgram once the
-    spy emits location hinting information.
 
 #### func (*GlGetAttribLocation) String
 
