@@ -40,7 +40,7 @@ const rpc_go_tmpl = `{{/*
   {{template "GeneratedHeader"}}
   {{Macro (print "RpcInterface" $.role) $.api}}
 ¶
-  {{range $i, $c := $.api.Functions}}
+  {{range $i, $c := $.api.Externs}}
     {{Macro (print "Call" $.role)   $c}}
     {{Macro (print "Result" $.role) $c}}
   {{end}}
@@ -73,7 +73,7 @@ const rpc_go_tmpl = `{{/*
 
 {{define "RpcInterface"}}
   type RPC interface {
-    {{range $_, $c := $.Functions}}
+    {{range $_, $c := $.Externs}}
       {{Macro "RpcInterfaceMethod" $c}}
     {{end}}
   }
@@ -475,7 +475,7 @@ func (h {{$.Name}}) Valid() bool {
   }
 
   // Client compliance
-  {{range $_, $c := $.Functions}}
+  {{range $_, $c := $.Externs}}
     {{if not (IsVoid $c.Return.Type)}}
       func (c client) {{$c.Name}}({{Macro "ParametersAndLogger" $c}}) (res {{Node "Type" $c.Return}}, err error) {
         var val interface{}
@@ -523,7 +523,7 @@ func (h {{$.Name}}) Valid() bool {
       }()
 
       switch call := in.(type) {
-        {{range $i, $c := $.Functions}}
+        {{range $i, $c := $.Externs}}
           case *{{Macro "CallName" $c}}:
             {{if not (IsVoid $c.Return.Type)}}
               if res, err := server.{{$c.Name}}({{range $p := $c.CallParameters}}call.{{$p.Name}}, {{end}}l); err == nil {
@@ -549,7 +549,7 @@ func (h {{$.Name}}) Valid() bool {
     Database database.Database
   }
 
-  {{range $_, $c := $.Functions}}
+  {{range $_, $c := $.Externs}}
     {{if not (IsVoid $c.Return.Type)}}
       {{$type  := SNode "Type" $c.Return}}
       {{$refty := Macro "Reference" $c.Return}}
