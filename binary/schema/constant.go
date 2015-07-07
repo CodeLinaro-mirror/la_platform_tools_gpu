@@ -69,3 +69,5 @@ func (s *ConstantSet) Less(i, j int) bool {
 	}
 	return fmt.Sprint(s.Entries[i].Value) < fmt.Sprint(s.Entries[j].Value)
 }
+
+func (c Constant) String() string { return c.Name }
