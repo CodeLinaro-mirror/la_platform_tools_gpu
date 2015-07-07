@@ -14,29 +14,27 @@
 
 package generate
 
-import (
-	"bytes"
+import "golang.org/x/tools/imports"
 
-	"golang.org/x/tools/imports"
-)
+type Go struct {
+	*File
+	Copyright string
+}
 
-// GoFile generates the all the go code for a file with a set of structs.
-func (t *Templates) GoFile(file *File) ([]byte, error) {
-	b := &bytes.Buffer{}
-	t.File = file
-	defer func() { t.File = nil }()
-	if err := t.execute("Go.File", b, file); err != nil {
-		return nil, err
-	}
-	options := &imports.Options{
-		TabWidth:  8,
-		TabIndent: true,
-		Comments:  true,
-		Fragment:  true,
-	}
-	result, err := imports.Process("", b.Bytes(), options)
-	if err != nil {
-		return b.Bytes(), nil
-	}
-	return result, nil
+func NewGo(file *File) *Go { return &Go{File: file} }
+
+func (file *Go) Run(t *Templates, out string) (bool, error) {
+	return t.generate(file.File, "Go.File", file, out, func(b []byte) []byte {
+		options := &imports.Options{
+			TabWidth:  8,
+			TabIndent: true,
+			Comments:  true,
+			Fragment:  true,
+		}
+		if result, err := imports.Process("", b, options); err != nil {
+			return b
+		} else {
+			return result
+		}
+	})
 }

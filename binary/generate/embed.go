@@ -86,9 +86,10 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
 
+{{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
 {{define "Cpp.File"}}{{$.Copyright}}
-#ifndef GAPIC_CODER_{{.Package | Upper}}_H
-#define GAPIC_CODER_{{.Package | Upper}}_H
+#ifndef {{template "HeaderGuard" .}}
+#define {{template "HeaderGuard" .}}
 
 namespace gapic {
 
@@ -96,7 +97,7 @@ class Encodable;
 class Encoder;
 
 namespace coder {
-namespace {{.Package}} {
+namespace {{.Namespace}} {
 {{range .Structs}}»class {{.Name | CppName}}: public Encodable {
 »public:
 {{template "Cpp.Constructor" .}}
@@ -108,11 +109,11 @@ namespace {{.Package}} {
 
 {{end}}
 
-} // namespace {{.Package}}
+} // namespace {{.Namespace}}
 } // namespace coder
 } // namespace gapic
 
-#endif // GAPIC_CODER_{{.Package | Upper}}_H
+#endif // {{template "HeaderGuard" .}}
 {{end}}
 `
 const go_tmpl_file = `go.tmpl`
@@ -407,7 +408,7 @@ func (v *{{$name}}) Parse(s string) error {
 {{define "Go.File"}}
 {{$.Copyright}}
 
-package {{.Package}}
+package {{.Name}}
 
 import (
 	"reflect"

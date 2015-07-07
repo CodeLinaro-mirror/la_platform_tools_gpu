@@ -15,8 +15,10 @@
 package generate
 
 import (
+	"bytes"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"reflect"
 	"strconv"
 	"strings"
@@ -73,6 +75,27 @@ func NewTemplates() *Templates {
 	template.Must(f.templates.New("java.tmpl").Parse(string(java_tmpl)))
 	template.Must(f.templates.New("cpp.tmpl").Parse(string(cpp_tmpl)))
 	return f
+}
+
+type PostProcess func([]byte) []byte
+
+func (t *Templates) generate(f *File, name string, arg interface{}, out string, post PostProcess) (bool, error) {
+	t.File = f
+	defer func() { t.File = nil }()
+
+	b := &bytes.Buffer{}
+	if err := t.execute(name, b, arg); err != nil {
+		return false, err
+	}
+	data := post(b.Bytes())
+	current, err := ioutil.ReadFile(out)
+	if err == nil && bytes.Equal(data, current) {
+		return false, nil
+	}
+	if out == "" {
+		return false, nil
+	}
+	return true, ioutil.WriteFile(out, data, 0666)
 }
 
 func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Template, error) {
