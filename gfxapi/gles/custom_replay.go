@@ -139,20 +139,6 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.
 	return value.AbsolutePointer(i.Pointer.Address)
 }
 
-// AttributeLocations cannot be remapped like UniformLocations as the VertexAttributeArrays are
-// shared between different programs. Instead, simply force the location to match what was recorded
-// in the capture using glBindAttribLocation.
-// TODO: This implementation currently calls glLinkProgram for every call to glGetAttribLocation!
-//       This is obviously not ideal, and we should be doing this once at glLinkProgram once the
-//       spy emits location hinting information.
-func (ω *GlGetAttribLocation) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-	if ω.Result >= 0 {
-		NewGlBindAttribLocation(ω.Program, ω.Result, ω.Name).Replay(i, s, d, l, b)
-		NewGlLinkProgram(ω.Program).Replay(i, s, d, l, b)
-	}
-	return nil
-}
-
 func (ω *EglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
 	ctxID := uint32(getState(s).EGLContexts[ω.Result].Identifier)
