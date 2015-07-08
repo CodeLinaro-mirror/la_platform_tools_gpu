@@ -24,6 +24,9 @@ import (
 
 // Add steps to the "maker" build system for compiling, linking of c++.
 
+// Target for generating generated code
+const code = "code"
+
 var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
 
 func makeEntity(f build.File) maker.Entity {
@@ -45,7 +48,7 @@ func makeStep(name string, output build.File, source build.FileSet, always bool,
 	s.DependsOn(maker.DirOf(e))
 	s.DependsOn(makeEntities(source)...)
 	// This is a bit sad, but codergen does not know what its outputs are.
-	s.DependsOn("code")
+	s.DependsOn(code)
 	if always {
 		s.AlwaysRun()
 	}
@@ -93,6 +96,7 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 		depsFor := cfg.Toolchain.DepsFor
 		if depsFor == nil {
 			// If the toolchain can't check dependencies, then we have to build
+			s.DependsOn(code)
 			s.AlwaysRun()
 			continue
 		}
@@ -102,10 +106,20 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 			if depFileFor != nil {
 				s.DependsOn(maker.DirOf(depFileFor(object, cfg, env).Absolute()))
 			}
+			s.DependsOn(code)
 			s.AlwaysRun()
 			continue
 		}
-		s.DependsOn(makeEntities(deps)...)
+		entities := makeEntities(deps)
+		for _, dep := range entities {
+			e := maker.EntityOf(dep)
+			if e != nil && e.Timestamp().IsZero() {
+				// If any dependencies are missing then do code generation
+				s.DependsOn(code)
+				break
+			}
+		}
+		s.DependsOn(entities...)
 	}
 	return objects
 }
