@@ -43,3 +43,14 @@ func (n *Report) Base() Path {
 func (n *Report) Clone() Path {
 	return &Report{Capture: n.Capture.Clone().(*Capture)}
 }
+
+// Validate implements the Path interface.
+func (n *Report) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("Report is nil")
+	case n.Capture == nil:
+		return fmt.Errorf("Report.Capture is nil")
+	}
+	return n.Capture.Validate()
+}

@@ -45,6 +45,19 @@ func (n *Field) Clone() Path {
 	return &Field{Struct: n.Struct.Clone(), Name: n.Name}
 }
 
+// Validate implements the Path interface.
+func (n *Field) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("Field is nil")
+	case n.Struct == nil:
+		return fmt.Errorf("Field.Struct is nil")
+	case n.Name == "":
+		return fmt.Errorf("Field.Name is empty")
+	}
+	return n.Struct.Validate()
+}
+
 // Field returns the path to the field value with the specified name on the
 // struct object represented by this path.
 // The represented value type must be of type struct, otherwise the returned

@@ -45,6 +45,17 @@ func (n *Atom) Clone() Path {
 	return &Atom{Atoms: n.Atoms.Clone().(*Atoms), Index: n.Index}
 }
 
+// Validate implements the Path interface.
+func (n *Atom) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("Atom is nil")
+	case n.Atoms == nil:
+		return fmt.Errorf("Atom.Atoms is nil")
+	}
+	return n.Atoms.Validate()
+}
+
 // Field returns the path to the field value with the specified name on the
 // atom represented by this path.
 func (n *Atom) Field(name string) *Field {

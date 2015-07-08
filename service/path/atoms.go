@@ -44,6 +44,17 @@ func (n *Atoms) Clone() Path {
 	return &Atoms{Capture: n.Capture.Clone().(*Capture)}
 }
 
+// Validate implements the Path interface.
+func (n *Atoms) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("Atoms is nil")
+	case n.Capture == nil:
+		return fmt.Errorf("Atoms.Capture is nil")
+	}
+	return n.Capture.Validate()
+}
+
 // Index returns the path to the i'th atom in the atom list.
 func (n *Atoms) Index(i uint64) *Atom {
 	return &Atom{Atoms: n, Index: i}
