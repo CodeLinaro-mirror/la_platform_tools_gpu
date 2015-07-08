@@ -57,6 +57,8 @@ const (
 	OpMinus         = "-"
 	OpMultiply      = "*"
 	OpDivide        = "/"
+	OpBitwiseAnd    = "&"
+	OpBitwiseOr     = "|"
 	OpRange         = ".."
 	OpNot           = "!"
 	OpIn            = "in"
@@ -125,6 +127,8 @@ func init() {
 		OpMinus,
 		OpMultiply,
 		OpDivide,
+		OpBitwiseAnd,
+		OpBitwiseOr,
 		OpRange,
 		OpIn,
 	} {

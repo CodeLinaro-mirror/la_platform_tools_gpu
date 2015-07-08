@@ -100,6 +100,12 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 			ctx.errorf(in, "rhs of %s is %s not boolean", in.Operator, typename(rt))
 		}
 		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
+	case ast.OpBitwiseAnd, ast.OpBitwiseOr:
+		_, ltEnum := ctx.findType(in, typename(lt)).(*semantic.Enum)
+		if !((ltEnum || isNumber(lt)) && equal(lt, rt)) {
+			ctx.errorf(in, "incompatible types for bitwise maths %s %s %s", typename(lt), in.Operator, typename(rt))
+		}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	case ast.OpPlus, ast.OpMinus, ast.OpMultiply, ast.OpDivide:
 		if !equal(lt, rt) {
 			ctx.errorf(in, "incompatible types for maths %s %s %s", typename(lt), in.Operator, typename(rt))
