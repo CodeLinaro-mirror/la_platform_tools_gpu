@@ -219,9 +219,8 @@ func (*GetHierarchy) Class() binary.Class
 ```go
 type GetMemoryInfo struct {
 	binary.Generate
-	Capture service.CaptureId
-	After   atom.ID
-	Range   memory.Range
+	After *path.Atom
+	Range memory.Range
 }
 ```
 

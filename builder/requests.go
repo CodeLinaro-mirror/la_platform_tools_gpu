@@ -40,9 +40,8 @@ type GetHierarchy struct {
 // GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.
 type GetMemoryInfo struct {
 	binary.Generate
-	Capture service.CaptureId
-	After   atom.ID
-	Range   memory.Range
+	After *path.Atom
+	Range memory.Range
 }
 
 // GetFramebufferColor records the parameters of a service.GetFramebufferColor RPC request.

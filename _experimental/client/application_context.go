@@ -428,7 +428,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint
 	if c.captureID.Valid() {
 		go func() {
 			rng := memory.Range{Base: base, Size: size}
-			id, err := c.rpc.GetMemoryInfo(captureID, uint64(after), rng, l)
+			id, err := c.rpc.GetMemoryInfo(captureID.Path().Atoms().Index(uint64(after)), rng, l)
 			if err != nil {
 				return
 			}

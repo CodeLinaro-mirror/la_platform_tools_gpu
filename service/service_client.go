@@ -74,9 +74,9 @@ func (c client) GetDevices(l log.Logger) (res []DeviceId, err error) {
 	return
 }
 
-func (c client) GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
+func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetMemoryInfo{capture: capture, after: after, rng: rng}); err == nil {
+	if val, err = c.Send(&callGetMemoryInfo{after: after, rng: rng}); err == nil {
 		res = val.(*resultGetMemoryInfo).value
 	} else {
 		log.Errorf(l, "RPC GetMemoryInfo failed with error: %v", err)

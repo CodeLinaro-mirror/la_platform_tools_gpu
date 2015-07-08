@@ -47,7 +47,7 @@ extern DeviceId[] GetDevices()
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and range, immediately following the atom
 // after.
-extern MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, memory.Range rng)
+extern MemoryInfoId GetMemoryInfo(path.Atom* after, memory.Range rng)
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
 // color buffer for the given device, capture and graphics API immediately
