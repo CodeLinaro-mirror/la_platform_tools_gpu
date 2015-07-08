@@ -224,6 +224,9 @@ func (s rpcServer) PrerenderFramebuffers(
 
 // Get resolves and returns the object, value or memory at the path p.
 func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
+	if err := p.Validate(); err != nil {
+		return nil, err
+	}
 	return database.Build(&builder.Get{Path: p}, s.Database, l)
 }
 
@@ -231,9 +234,12 @@ func (s rpcServer) Get(p path.Path, l log.Logger) (interface{}, error) {
 // or memory at p replaced with v. The path returned is identical to p, but with
 // the base changed to refer to the new capture.
 func (s rpcServer) Set(p path.Path, v interface{}, l log.Logger) (path.Path, error) {
+	if err := p.Validate(); err != nil {
+		return nil, err
+	}
 	res, err := database.Build(&builder.Set{Path: p, Value: v}, s.Database, l)
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 	return res.(path.Path), nil
 }

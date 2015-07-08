@@ -39,6 +39,10 @@ type Path interface {
 
 	// Clone returns a deep-copy of the path.
 	Clone() Path
+
+	// Validate checks the path for correctness, returning an error if any
+	// issues are found.
+	Validate() error
 }
 
 // Value is the expanded Path interface for types that represent a reference to

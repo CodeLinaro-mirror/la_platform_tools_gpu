@@ -45,6 +45,17 @@ func (n *ArrayIndex) Clone() Path {
 	return &ArrayIndex{Array: n.Array.Clone(), Index: n.Index}
 }
 
+// Validate implements the Path interface.
+func (n *ArrayIndex) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("ArrayIndex is nil")
+	case n.Array == nil:
+		return fmt.Errorf("ArrayIndex.Array is nil")
+	}
+	return n.Array.Validate()
+}
+
 // Field returns the path to the field value with the specified name on the
 // struct object represented by this path.
 // The represented value type must be of type struct, otherwise the returned
