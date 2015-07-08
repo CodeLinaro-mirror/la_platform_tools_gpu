@@ -255,9 +255,7 @@ func (*GetMemoryInfo) Class() binary.Class
 ```go
 type GetState struct {
 	binary.Generate
-	Capture service.CaptureId
-	API     service.ApiId
-	After   atom.ID
+	After *path.Atom
 }
 ```
 

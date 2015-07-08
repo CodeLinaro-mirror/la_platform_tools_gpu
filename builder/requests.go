@@ -26,9 +26,7 @@ import (
 // GetState records the parameters of a service.GetState RPC request.
 type GetState struct {
 	binary.Generate
-	Capture service.CaptureId
-	API     service.ApiId
-	After   atom.ID
+	After *path.Atom
 }
 
 // GetHierarchy records the parameters of a service.GetHierarchy RPC request.

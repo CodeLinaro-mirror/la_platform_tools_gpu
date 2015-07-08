@@ -47,7 +47,7 @@ var (
 	binaryIDGetFramebufferDepth             = binary.ID{0xa7, 0x03, 0x08, 0x3d, 0x42, 0xbc, 0x22, 0x83, 0x51, 0x9f, 0xc0, 0x5f, 0xa6, 0xa2, 0x1e, 0xa7, 0x5e, 0xd6, 0xc8, 0x03}
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
 	binaryIDGetMemoryInfo                   = binary.ID{0xf0, 0x9e, 0x21, 0x69, 0x43, 0xaf, 0xf8, 0xdb, 0x59, 0x80, 0xa0, 0x33, 0x66, 0xda, 0xd9, 0xae, 0xdf, 0x5a, 0x0a, 0x10}
-	binaryIDGetState                        = binary.ID{0xe4, 0x56, 0xeb, 0x40, 0x7b, 0x2d, 0x6e, 0xc6, 0xb4, 0x8b, 0x8f, 0x00, 0x1f, 0xdb, 0xb2, 0x6f, 0xea, 0x28, 0x5a, 0x80}
+	binaryIDGetState                        = binary.ID{0x40, 0xfb, 0x42, 0x18, 0xf5, 0x5c, 0xff, 0x11, 0x85, 0x82, 0xaf, 0xf4, 0x6d, 0xc5, 0xde, 0x19, 0x0b, 0x41, 0xba, 0x38}
 	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
 	binaryIDPrerenderFramebuffers           = binary.ID{0xa2, 0x94, 0x36, 0x9d, 0xcb, 0x28, 0x7f, 0x54, 0xee, 0xb1, 0xac, 0x44, 0xe7, 0x45, 0x02, 0x19, 0x3a, 0x84, 0xe8, 0x5b}
 	binaryIDRenderFramebufferColor          = binary.ID{0xd0, 0x7e, 0x58, 0xd4, 0xf5, 0xd8, 0x9f, 0x1d, 0xe4, 0xb5, 0xfe, 0x9d, 0xe6, 0x9c, 0xe4, 0x5c, 0xef, 0x0b, 0xfc, 0x71}
@@ -563,39 +563,27 @@ func (*GetState) Class() binary.Class {
 	return (*binaryClassGetState)(nil)
 }
 func doEncodeGetState(e binary.Encoder, o *GetState) error {
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Value(&o.API); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeGetState(d binary.Decoder, o *GetState) error {
-	if err := d.Value(&o.Capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if err := d.Value(&o.API); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
 	} else {
-		o.After = atom.ID(obj)
+		o.After = nil
 	}
 	return nil
 }
 func doSkipGetState(d binary.Decoder) error {
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -620,9 +608,7 @@ var schemaGetState = &schema.Class{
 	Package: "builder",
 	Name:    "GetState",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 	},
 }
 
