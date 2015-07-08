@@ -20,6 +20,7 @@ import (
 	"image/color"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
@@ -238,29 +239,50 @@ func loadTiming(appCtx *ApplicationContext) {
 	deviceID := appCtx.SelectedDevice()
 	captureID := appCtx.CaptureID()
 
+	appCtx.Run(func() { appCtx.timingInfo = service.TimingInfo{} })
+
 	go func() {
-		l := appCtx.Logger().Fork().Enter("Replay: timing")
-		appCtx.timingInfo = service.TimingInfo{}
+		timingInfo := service.TimingInfo{}
+		timingPerCommand := map[uint64]uint64{}
+		wg := sync.WaitGroup{}
+		wg.Add(2)
 
-		flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand | service.TimingFlagsTimingPerFrame
-		timingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
-		if err != nil {
-			return
-		}
+		go func() {
+			l := appCtx.Logger().Fork().Enter("Replay: CPU command timing")
+			flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand
+			cpuCommandTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
+			if err != nil {
+				return
+			}
+			cpuCommandTimingInfo, err := appCtx.rpc.ResolveTimingInfo(cpuCommandTimingInfoID, l)
+			if err != nil {
+				return
+			}
+			for _, t := range cpuCommandTimingInfo.PerCommand {
+				timingPerCommand[t.AtomId] = t.Nanoseconds
+			}
+			wg.Done()
+		}()
 
-		timingInfo, err := appCtx.rpc.ResolveTimingInfo(timingInfoID, l)
-		if err != nil {
-			return
-		}
+		go func() {
+			l := appCtx.Logger().Fork().Enter("Replay: GPU frame timing")
+			flags := service.TimingFlagsTimingGPU | service.TimingFlagsTimingPerFrame
+			gpuFrameTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
+			if err != nil {
+				return
+			}
+			gpuFrameTimingInfo, err := appCtx.rpc.ResolveTimingInfo(gpuFrameTimingInfoID, l)
+			if err != nil {
+				return
+			}
+			timingInfo = gpuFrameTimingInfo
+			wg.Done()
+		}()
 
-		timingPerCommand := make(map[uint64]uint64)
-		for _, t := range timingInfo.PerCommand {
-			timingPerCommand[t.AtomId] = t.Nanoseconds
-		}
-
+		wg.Wait()
 		appCtx.Run(func() {
-			appCtx.timingInfo = timingInfo
 			appCtx.timingPerCommand = timingPerCommand
+			appCtx.timingInfo = timingInfo
 			appCtx.onTimingInfoUpdated.Fire()
 		})
 	}()
