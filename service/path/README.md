@@ -30,6 +30,14 @@ type ArrayIndex struct {
 
 ArrayIndex is a path that refers to a single element of an array.
 
+#### func  FindArrayIndex
+
+```go
+func FindArrayIndex(p Path) *ArrayIndex
+```
+FindArrayIndex returns the first ArrayIndex found traversing the path p. If no
+Atom was found, then nil is returned.
+
 #### func (*ArrayIndex) ArrayIndex
 
 ```go
@@ -84,6 +92,15 @@ func (n *ArrayIndex) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*ArrayIndex) Slice
+
+```go
+func (n *ArrayIndex) Slice(start, end uint64) *Slice
+```
+Slice returns the path to the sliced subset of this array or slice represented
+by this path. The represented value type must be of type array or slice,
+otherwise the returned path is invalid.
+
 #### func (*ArrayIndex) String
 
 ```go
@@ -109,6 +126,14 @@ type Atom struct {
 ```
 
 Atom is a path that refers to a single atom in an atom list.
+
+#### func  FindAtom
+
+```go
+func FindAtom(p Path) *Atom
+```
+FindAtom returns the first Atom found traversing the path p. If no Atom was
+found, then nil is returned.
 
 #### func (*Atom) Base
 
@@ -177,6 +202,14 @@ type Atoms struct {
 
 Atoms is a path that refers to the full list of atoms in a capture.
 
+#### func  FindAtoms
+
+```go
+func FindAtoms(p Path) *Atoms
+```
+FindAtoms returns the first Atoms found traversing the path p. If no Atoms was
+found, then nil is returned.
+
 #### func (*Atoms) Base
 
 ```go
@@ -211,6 +244,13 @@ func (n *Atoms) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*Atoms) Slice
+
+```go
+func (n *Atoms) Slice(start, end uint64) *Slice
+```
+Slice returns the path to the sliced subset of the atom list.
+
 #### func (*Atoms) String
 
 ```go
@@ -235,6 +275,14 @@ type Capture struct {
 ```
 
 Capture is a path that refers to a capture.
+
+#### func  FindCapture
+
+```go
+func FindCapture(p Path) *Capture
+```
+FindCapture returns the first Capture found traversing the path p. If no Capture
+was found, then nil is returned.
 
 #### func (*Capture) Atoms
 
@@ -303,6 +351,14 @@ type Field struct {
 
 Field is a path that refers to a single field of a struct object.
 
+#### func  FindField
+
+```go
+func FindField(p Path) *Field
+```
+FindField returns the first Field found traversing the path p. If no Atom was
+found, then nil is returned.
+
 #### func (*Field) ArrayIndex
 
 ```go
@@ -356,6 +412,15 @@ otherwise the returned path is invalid.
 func (n *Field) Path() string
 ```
 Path implements the Path interface.
+
+#### func (*Field) Slice
+
+```go
+func (n *Field) Slice(start, end uint64) *Slice
+```
+Slice returns the path to the sliced subset of this array or slice represented
+by this path. The represented value type must be of type array or slice,
+otherwise the returned path is invalid.
 
 #### func (*Field) String
 
@@ -436,6 +501,15 @@ otherwise the returned path is invalid.
 func (n *MapIndex) Path() string
 ```
 Path implements the Path interface.
+
+#### func (*MapIndex) Slice
+
+```go
+func (n *MapIndex) Slice(start, end uint64) *Slice
+```
+Slice returns the path to the sliced subset of this array or slice represented
+by this path. The represented value type must be of type array or slice,
+otherwise the returned path is invalid.
 
 #### func (*MapIndex) String
 
@@ -530,6 +604,83 @@ func (n *Report) Validate() error
 ```
 Validate implements the Path interface.
 
+#### type Slice
+
+```go
+type Slice struct {
+	binary.Generate
+	Array Path // The path to the array.
+	Start uint64
+	End   uint64
+}
+```
+
+Slice is a path that refers to a subset of the elements in an array.
+
+#### func  FindAtomSlice
+
+```go
+func FindAtomSlice(p Path) (*Slice, *Atoms)
+```
+FindAtomSlice returns the first slice of Atoms found traversing the path p. If
+no Atoms was found, then nil is returned.
+
+#### func  FindSlice
+
+```go
+func FindSlice(p Path) *Slice
+```
+FindSlice returns the first Slice found traversing the path p. If no Slice was
+found, then nil is returned.
+
+#### func (*Slice) Base
+
+```go
+func (n *Slice) Base() Path
+```
+Base implements the Path interface, returning the path to the array.
+
+#### func (*Slice) Class
+
+```go
+func (*Slice) Class() binary.Class
+```
+
+#### func (*Slice) Clone
+
+```go
+func (n *Slice) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
+#### func (*Slice) Index
+
+```go
+func (n *Slice) Index(i uint64) Path
+```
+Index returns the path to the i'th element in the slice.
+
+#### func (*Slice) Path
+
+```go
+func (n *Slice) Path() string
+```
+Path implements the Path interface.
+
+#### func (*Slice) String
+
+```go
+func (n *Slice) String() string
+```
+String returns the string representation of the path.
+
+#### func (*Slice) Validate
+
+```go
+func (n *Slice) Validate() error
+```
+Validate implements the Path interface.
+
 #### type State
 
 ```go
@@ -596,6 +747,15 @@ func (n *State) Path() string
 ```
 Path implements the Path interface.
 
+#### func (*State) Slice
+
+```go
+func (n *State) Slice(start, end uint64) *Slice
+```
+Slice returns the path to the sliced subset of this array or slice represented
+by this path. The represented value type must be of type array or slice,
+otherwise the returned path is invalid.
+
 #### func (*State) String
 
 ```go
@@ -622,6 +782,12 @@ type Value interface {
 	// The represented value type must be of type struct, otherwise the returned
 	// path is invalid.
 	Field(name string) *Field
+
+	// Slice returns the path to the sliced subset of this array or slice
+	// represented by this path.
+	// The represented value type must be of type array or slice, otherwise the
+	// returned path is invalid.
+	Slice(start, end uint64) *Slice
 
 	// ArrayIndex returns the path to the i'th element on the array or slice
 	// represented by this path.
