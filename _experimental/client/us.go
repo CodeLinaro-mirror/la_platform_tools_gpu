@@ -42,7 +42,7 @@ var thresholdColorOver = gxui.Color{R: 1.0, G: 0.2, B: 0.2, A: 1}
 
 const thresholdNearPercent = 90 // Considered 'near' at 90% threshold value
 
-func (μs μs) ThesholdColor(target μs) gxui.Color {
+func (μs μs) ThresholdColor(target μs) gxui.Color {
 	if μs > target {
 		return thresholdColorOver
 	} else {
