@@ -40,7 +40,7 @@ func init() {
 }
 
 var (
-	binaryIDBuildReport                     = binary.ID{0xe8, 0xae, 0x2a, 0xe0, 0x20, 0xd0, 0xc1, 0x44, 0x33, 0x78, 0x81, 0x4e, 0x84, 0xda, 0x0e, 0xcc, 0x27, 0x89, 0xc6, 0xb5}
+	binaryIDBuildReport                     = binary.ID{0x0d, 0xe5, 0xe5, 0x3d, 0xda, 0x87, 0xb3, 0x58, 0x27, 0x4f, 0x23, 0xcc, 0xfa, 0xa3, 0xd8, 0xd0, 0xda, 0x69, 0x46, 0x9c}
 	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
 	binaryIDGet                             = binary.ID{0x82, 0xb2, 0x02, 0xb1, 0xbc, 0x47, 0xaa, 0x54, 0xed, 0xd7, 0xad, 0x46, 0x6e, 0x1d, 0xa3, 0x41, 0x16, 0x54, 0xd9, 0x15}
 	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
@@ -64,19 +64,27 @@ func (*BuildReport) Class() binary.Class {
 	return (*binaryClassBuildReport)(nil)
 }
 func doEncodeBuildReport(e binary.Encoder, o *BuildReport) error {
-	if err := e.Value(&o.Atoms); err != nil {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeBuildReport(d binary.Decoder, o *BuildReport) error {
-	if err := d.Value(&o.Atoms); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Capture = obj.(*path.Capture)
+	} else {
+		o.Capture = nil
 	}
 	return nil
 }
 func doSkipBuildReport(d binary.Decoder) error {
-	if err := d.SkipValue((*service.AtomStreamId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -101,7 +109,7 @@ var schemaBuildReport = &schema.Class{
 	Package: "builder",
 	Name:    "BuildReport",
 	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Struct{Name: "service.AtomStreamId", ID: (*service.AtomStreamId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 	},
 }
 

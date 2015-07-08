@@ -24,7 +24,6 @@ import schema "schema.api"
 @handle type string DeviceId
 @handle type string ImageInfoId
 @handle type string MemoryInfoId
-@handle type string ReportId
 @handle type string TimingInfoId
 
 // The GetSchema returns the type and constant schema descriptions for all
@@ -128,10 +127,9 @@ class Device {
 
 // Capture describes single capture file held by the server.
 class Capture {
-  string              Name     // Name given to the capture. e.g. "KittyWorld"
-  AtomStreamId        Atoms    // The identifier of the stream of atoms in this capture.
-  ReportId            Report   // The identifier of the report of the capture.
-  ApiId[]             Apis     // List of graphics APIs used by this capture.
+  string       Name  // Name given to the capture. e.g. "KittyWorld"
+  AtomStreamId Atoms // The identifier of the stream of atoms in this capture.
+  ApiId[]      Apis  // List of graphics APIs used by this capture.
 }
 
 // Report describes all warnings and errors found by a capture.
