@@ -66,7 +66,7 @@ func (d TimingData) BarBrush(bar int, stack int, highlighted bool) gxui.Brush {
 	if highlighted {
 		return gxui.CreateBrush(d.BarBrush(bar, stack, false).Color.MulRGB(1.5).Saturate())
 	}
-	return gxui.CreateBrush(μs(d.Values(bar)[0]).ThesholdColor(targetFrameTime))
+	return gxui.CreateBrush(μs(d.Values(bar)[0]).ThresholdColor(targetFrameTime))
 }
 
 func (d TimingData) LabelBackgroundBrush(bar int, stack int) gxui.Brush {
