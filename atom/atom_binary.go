@@ -9,7 +9,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/objects"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -26,7 +25,6 @@ func init() {
 	Namespace.Add((*Observation)(nil).Class())
 	Namespace.Add((*Observations)(nil).Class())
 	Namespace.Add((*Resource)(nil).Class())
-	Namespace.Add((*stream)(nil).Class())
 }
 
 var (
@@ -36,7 +34,6 @@ var (
 	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
 	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
 	binaryIDResource     = binary.ID{0xdd, 0xe2, 0x00, 0x18, 0x25, 0x45, 0x71, 0xb9, 0xdb, 0x6f, 0xed, 0x39, 0xdd, 0x8e, 0x71, 0x4b, 0xf6, 0x76, 0x26, 0xce}
-	binaryIDstream       = binary.ID{0x78, 0x2e, 0xd9, 0x57, 0x1c, 0xfe, 0x13, 0x7a, 0x6f, 0x37, 0xbb, 0x76, 0xcf, 0x52, 0x77, 0x9d, 0x97, 0xc9, 0x3c, 0x13}
 )
 
 type binaryClassRange struct{}
@@ -492,68 +489,6 @@ var schemaResource = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
-	},
-}
-
-type binaryClassstream struct{}
-
-func (*stream) Class() binary.Class {
-	return (*binaryClassstream)(nil)
-}
-func doEncodestream(e binary.Encoder, o *stream) error {
-	for _, o := range o.Atoms {
-		if err := e.Object(o); err != nil {
-			return err
-		}
-	}
-	if err := e.Object((*objects.Terminator)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodestream(d binary.Decoder, o *stream) error {
-	for {
-		if obj, err := d.Object(); err != nil {
-			return err
-		} else if _, end := obj.(*objects.Terminator); end {
-			break
-		} else {
-			o.Atoms = append(o.Atoms, obj.(Atom))
-		}
-	}
-	return nil
-}
-func doSkipstream(d binary.Decoder) error {
-	for {
-		if id, err := d.SkipObject(); err != nil {
-			return err
-		} else if id == objects.TerminatorID {
-			break
-		}
-	}
-	return nil
-}
-func (*binaryClassstream) ID() binary.ID      { return binaryIDstream }
-func (*binaryClassstream) New() binary.Object { return &stream{} }
-func (*binaryClassstream) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodestream(e, obj.(*stream))
-}
-func (*binaryClassstream) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &stream{}
-	return obj, doDecodestream(d, obj)
-}
-func (*binaryClassstream) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodestream(d, obj.(*stream))
-}
-func (*binaryClassstream) Skip(d binary.Decoder) error { return doSkipstream(d) }
-func (*binaryClassstream) Schema() *schema.Class       { return schemastream }
-
-var schemastream = &schema.Class{
-	TypeID:  binaryIDstream,
-	Package: "atom",
-	Name:    "stream",
-	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Stream{Alias: "", ValueType: &schema.Interface{Name: "Atom"}}},
 	},
 }
 

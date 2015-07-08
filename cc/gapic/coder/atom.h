@@ -147,22 +147,6 @@ namespace atom {
         Array<uint8_t> mData;
     };
 
-    class stream: public Encodable {
-    public:
-        stream() = default;
-        stream(Array<gapic::Encodable*> Atoms) :
-            mAtoms(Atoms) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x78, 0x2e, 0xd9, 0x57, 0x1c, 0xfe, 0x13, 0x7a, 0x6f, 0x37, 0xbb, 0x76, 0xcf, 0x52, 0x77, 0x9d, 0x97, 0xc9, 0x3c, 0x13,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            GAPID_FATAL("C++ stream encoding not supported");
-        }
-
-        Array<gapic::Encodable*> mAtoms;
-    };
-
 
 
 } // namespace atom
