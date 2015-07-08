@@ -87,3 +87,15 @@ func (n *ArrayIndex) ArrayIndex(index uint64) *ArrayIndex {
 func (n *ArrayIndex) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
+
+// FindArrayIndex returns the first ArrayIndex found traversing the path p.
+// If no Atom was found, then nil is returned.
+func FindArrayIndex(p Path) *ArrayIndex {
+	for p != nil {
+		if p, ok := p.(*ArrayIndex); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}
