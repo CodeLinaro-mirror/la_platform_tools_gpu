@@ -66,3 +66,15 @@ func (n *Atom) Field(name string) *Field {
 func (n *Atom) StateAfter() *State {
 	return &State{After: n}
 }
+
+// FindAtom returns the first Atom found traversing the path p.
+// If no Atom was found, then nil is returned.
+func FindAtom(p Path) *Atom {
+	for p != nil {
+		if p, ok := p.(*Atom); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}
