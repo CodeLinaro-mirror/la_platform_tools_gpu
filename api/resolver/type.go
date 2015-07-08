@@ -181,7 +181,7 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) 
 	}
 	name += PointerSuffix
 	for _, p := range ctx.api.Pointers {
-		if equal(to, p.To) {
+		if equal(to, p.To) && constant == p.Const {
 			ctx.mappings[at] = p
 			return p
 		}
