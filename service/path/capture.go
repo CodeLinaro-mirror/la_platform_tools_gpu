@@ -64,3 +64,15 @@ func (c *Capture) Atoms() *Atoms {
 func (c *Capture) Report() *Report {
 	return &Report{Capture: c}
 }
+
+// FindCapture returns the first Capture found traversing the path p.
+// If no Capture was found, then nil is returned.
+func FindCapture(p Path) *Capture {
+	for p != nil {
+		if p, ok := p.(*Capture); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}

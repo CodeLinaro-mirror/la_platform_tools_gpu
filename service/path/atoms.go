@@ -64,3 +64,31 @@ func (n *Atoms) Index(i uint64) *Atom {
 func (n *Atoms) Slice(start, end uint64) *Slice {
 	return &Slice{Array: n, Start: start, End: end}
 }
+
+// FindAtoms returns the first Atoms found traversing the path p.
+// If no Atoms was found, then nil is returned.
+func FindAtoms(p Path) *Atoms {
+	for p != nil {
+		if p, ok := p.(*Atoms); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}
+
+// FindAtomSlice returns the first slice of Atoms found traversing the path p.
+// If no Atoms was found, then nil is returned.
+func FindAtomSlice(p Path) (*Slice, *Atoms) {
+	for p != nil {
+		s := FindSlice(p)
+		if s == nil {
+			break
+		}
+		if a, ok := s.Array.(*Atoms); ok {
+			return s, a
+		}
+		p = s.Base()
+	}
+	return nil, nil
+}
