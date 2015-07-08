@@ -23,7 +23,7 @@ import (
 // MapIndex is a path that refers to a single value in a map.
 type MapIndex struct {
 	binary.Generate
-	Map Value       // The path to the map containing the value.
+	Map Path        // The path to the map containing the value.
 	Key interface{} // The key to the value in the map.
 }
 
@@ -42,20 +42,29 @@ func (n *MapIndex) Base() Path {
 
 // Clone implements the Path interface, returning a deep-copy of this path.
 func (n *MapIndex) Clone() Path {
-	return &MapIndex{Map: n.Map.Clone().(Value), Key: n.Key}
+	return &MapIndex{Map: n.Map.Clone(), Key: n.Key}
 }
 
-// Field implements the Value interface.
-func (n *MapIndex) Field(name string) Value {
+// Field returns the path to the field value with the specified name on the
+// struct object represented by this path.
+// The represented value type must be of type struct, otherwise the returned
+// path is invalid.
+func (n *MapIndex) Field(name string) *Field {
 	return &Field{Struct: n, Name: name}
 }
 
-// ArrayIndex implements the Value interface.
-func (n *MapIndex) ArrayIndex(index uint64) Value {
+// ArrayIndex returns the path to the i'th element on the array or slice
+// represented by this path.
+// The represented value type must be of type array or slice, otherwise the
+// returned path is invalid.
+func (n *MapIndex) ArrayIndex(index uint64) *ArrayIndex {
 	return &ArrayIndex{Array: n, Index: index}
 }
 
-// MapIndex implements the Value interface.
-func (n *MapIndex) MapIndex(key interface{}) Value {
+// MapIndex returns the path to the map element with key k on the map object
+// represented by this path.
+// The represented value type must be of type map, otherwise the returned path
+// is invalid.
+func (n *MapIndex) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
