@@ -208,44 +208,6 @@ func (c *AtomTimer) GetAtomId() uint64
 func (c *AtomTimer) GetNanoseconds() uint64
 ```
 
-#### type Binary
-
-```go
-type Binary struct {
-	binary.Generate
-	Data []uint8
-}
-```
-
-Class Binary
-
-#### func  CreateBinary
-
-```go
-func CreateBinary(
-	Data []uint8,
-) *Binary
-```
-
-#### func  ResolveBinary
-
-```go
-func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (res Binary, err error)
-```
-ResolveBinary loads and returns the Binary stored in the database d, using id.
-
-#### func (*Binary) Class
-
-```go
-func (*Binary) Class() binary.Class
-```
-
-#### func (*Binary) GetData
-
-```go
-func (c *Binary) GetData() []uint8
-```
-
 #### type BinaryId
 
 ```go
@@ -256,13 +218,6 @@ type BinaryId struct {
 ```
 
 Handle BinaryId
-
-#### func  StoreBinary
-
-```go
-func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error)
-```
-StoreBinary stores v into the database d, returning the BinaryId.
 
 #### func (*BinaryId) Class
 
@@ -864,7 +819,7 @@ type RPC interface {
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
-	ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
+	ResolveBinary(id BinaryId, l log.Logger) ([]uint8, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
@@ -1039,14 +994,6 @@ func (r Resolver) ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, 
 ```
 ResolveAtomStream loads and returns the AtomStream stored in the resolver's
 database, using id.
-
-#### func (Resolver) ResolveBinary
-
-```go
-func (r Resolver) ResolveBinary(id BinaryId, l log.Logger) (Binary, error)
-```
-ResolveBinary loads and returns the Binary stored in the resolver's database,
-using id.
 
 #### func (Resolver) ResolveCapture
 

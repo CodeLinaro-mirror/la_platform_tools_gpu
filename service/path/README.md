@@ -23,7 +23,7 @@ the root and ending with p.
 ```go
 type ArrayIndex struct {
 	binary.Generate
-	Array Value  // The path to the array.
+	Array Path   // The path to the array.
 	Index uint64 // The index of the element in the array.
 }
 ```
@@ -33,9 +33,11 @@ ArrayIndex is a path that refers to a single element of an array.
 #### func (*ArrayIndex) ArrayIndex
 
 ```go
-func (n *ArrayIndex) ArrayIndex(index uint64) Value
+func (n *ArrayIndex) ArrayIndex(index uint64) *ArrayIndex
 ```
-ArrayIndex implements the Value interface.
+ArrayIndex returns the path to the i'th element on the array or slice
+represented by this path. The represented value type must be of type array or
+slice, otherwise the returned path is invalid.
 
 #### func (*ArrayIndex) Base
 
@@ -60,16 +62,20 @@ Clone implements the Path interface, returning a deep-copy of this path.
 #### func (*ArrayIndex) Field
 
 ```go
-func (n *ArrayIndex) Field(name string) Value
+func (n *ArrayIndex) Field(name string) *Field
 ```
-Field implements the Value interface.
+Field returns the path to the field value with the specified name on the struct
+object represented by this path. The represented value type must be of type
+struct, otherwise the returned path is invalid.
 
 #### func (*ArrayIndex) MapIndex
 
 ```go
-func (n *ArrayIndex) MapIndex(key interface{}) Value
+func (n *ArrayIndex) MapIndex(key interface{}) *MapIndex
 ```
-MapIndex implements the Value interface.
+MapIndex returns the path to the map element with key k on the map object
+represented by this path. The represented value type must be of type map,
+otherwise the returned path is invalid.
 
 #### func (*ArrayIndex) Path
 
@@ -85,6 +91,13 @@ func (n *ArrayIndex) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*ArrayIndex) Validate
+
+```go
+func (n *ArrayIndex) Validate() error
+```
+Validate implements the Path interface.
+
 #### type Atom
 
 ```go
@@ -96,13 +109,6 @@ type Atom struct {
 ```
 
 Atom is a path that refers to a single atom in an atom list.
-
-#### func (*Atom) ArrayIndex
-
-```go
-func (n *Atom) ArrayIndex(index uint64) Value
-```
-ArrayIndex implements the Value interface.
 
 #### func (*Atom) Base
 
@@ -127,16 +133,10 @@ Clone implements the Path interface, returning a deep-copy of this path.
 #### func (*Atom) Field
 
 ```go
-func (n *Atom) Field(name string) Value
+func (n *Atom) Field(name string) *Field
 ```
-Field implements the Value interface.
-
-#### func (*Atom) MapIndex
-
-```go
-func (n *Atom) MapIndex(key interface{}) Value
-```
-MapIndex implements the Value interface.
+Field returns the path to the field value with the specified name on the atom
+represented by this path.
 
 #### func (*Atom) Path
 
@@ -158,6 +158,13 @@ StateAfter returns the path to the state immediately following this atom.
 func (n *Atom) String() string
 ```
 String returns the string representation of the path.
+
+#### func (*Atom) Validate
+
+```go
+func (n *Atom) Validate() error
+```
+Validate implements the Path interface.
 
 #### type Atoms
 
@@ -211,6 +218,13 @@ func (n *Atoms) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*Atoms) Validate
+
+```go
+func (n *Atoms) Validate() error
+```
+Validate implements the Path interface.
+
 #### type Capture
 
 ```go
@@ -259,7 +273,7 @@ Path implements the Path interface.
 #### func (*Capture) Report
 
 ```go
-func (c *Capture) Report() Path
+func (c *Capture) Report() *Report
 ```
 Report returns the path to the capture's report.
 
@@ -270,12 +284,19 @@ func (c *Capture) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*Capture) Validate
+
+```go
+func (c *Capture) Validate() error
+```
+Validate implements the Path interface.
+
 #### type Field
 
 ```go
 type Field struct {
 	binary.Generate
-	Struct Value  // The path to the structure holding the field.
+	Struct Path   // The path to the structure holding the field.
 	Name   string // The name of the field.
 }
 ```
@@ -285,9 +306,11 @@ Field is a path that refers to a single field of a struct object.
 #### func (*Field) ArrayIndex
 
 ```go
-func (n *Field) ArrayIndex(index uint64) Value
+func (n *Field) ArrayIndex(index uint64) *ArrayIndex
 ```
-ArrayIndex implements the Value interface.
+ArrayIndex returns the path to the i'th element on the array or slice
+represented by this path. The represented value type must be of type array or
+slice, otherwise the returned path is invalid.
 
 #### func (*Field) Base
 
@@ -312,16 +335,20 @@ Clone implements the Path interface, returning a deep-copy of this path.
 #### func (*Field) Field
 
 ```go
-func (n *Field) Field(name string) Value
+func (n *Field) Field(name string) *Field
 ```
-Field implements the Value interface.
+Field returns the path to the field value with the specified name on the struct
+object represented by this path. The represented value type must be of type
+struct, otherwise the returned path is invalid.
 
 #### func (*Field) MapIndex
 
 ```go
-func (n *Field) MapIndex(key interface{}) Value
+func (n *Field) MapIndex(key interface{}) *MapIndex
 ```
-MapIndex implements the Value interface.
+MapIndex returns the path to the map element with key k on the map object
+represented by this path. The represented value type must be of type map,
+otherwise the returned path is invalid.
 
 #### func (*Field) Path
 
@@ -337,12 +364,19 @@ func (n *Field) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*Field) Validate
+
+```go
+func (n *Field) Validate() error
+```
+Validate implements the Path interface.
+
 #### type MapIndex
 
 ```go
 type MapIndex struct {
 	binary.Generate
-	Map Value       // The path to the map containing the value.
+	Map Path        // The path to the map containing the value.
 	Key interface{} // The key to the value in the map.
 }
 ```
@@ -352,9 +386,11 @@ MapIndex is a path that refers to a single value in a map.
 #### func (*MapIndex) ArrayIndex
 
 ```go
-func (n *MapIndex) ArrayIndex(index uint64) Value
+func (n *MapIndex) ArrayIndex(index uint64) *ArrayIndex
 ```
-ArrayIndex implements the Value interface.
+ArrayIndex returns the path to the i'th element on the array or slice
+represented by this path. The represented value type must be of type array or
+slice, otherwise the returned path is invalid.
 
 #### func (*MapIndex) Base
 
@@ -379,16 +415,20 @@ Clone implements the Path interface, returning a deep-copy of this path.
 #### func (*MapIndex) Field
 
 ```go
-func (n *MapIndex) Field(name string) Value
+func (n *MapIndex) Field(name string) *Field
 ```
-Field implements the Value interface.
+Field returns the path to the field value with the specified name on the struct
+object represented by this path. The represented value type must be of type
+struct, otherwise the returned path is invalid.
 
 #### func (*MapIndex) MapIndex
 
 ```go
-func (n *MapIndex) MapIndex(key interface{}) Value
+func (n *MapIndex) MapIndex(key interface{}) *MapIndex
 ```
-MapIndex implements the Value interface.
+MapIndex returns the path to the map element with key k on the map object
+represented by this path. The represented value type must be of type map,
+otherwise the returned path is invalid.
 
 #### func (*MapIndex) Path
 
@@ -403,6 +443,13 @@ Path implements the Path interface.
 func (n *MapIndex) String() string
 ```
 String returns the string representation of the path.
+
+#### func (*MapIndex) Validate
+
+```go
+func (n *MapIndex) Validate() error
+```
+Validate implements the Path interface.
 
 #### type Path
 
@@ -420,6 +467,10 @@ type Path interface {
 
 	// Clone returns a deep-copy of the path.
 	Clone() Path
+
+	// Validate checks the path for correctness, returning an error if any
+	// issues are found.
+	Validate() error
 }
 ```
 
@@ -432,7 +483,7 @@ client and server using RPCs in order to describe some data in a capture.
 ```go
 type Report struct {
 	binary.Generate
-	Capture *Capture // The path to the capture containing the atoms.
+	Capture *Capture // The path to the capture containing the report.
 }
 ```
 
@@ -472,6 +523,13 @@ func (n *Report) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*Report) Validate
+
+```go
+func (n *Report) Validate() error
+```
+Validate implements the Path interface.
+
 #### type State
 
 ```go
@@ -486,9 +544,11 @@ State is a path that refers to the driver state immediately after an atom.
 #### func (*State) ArrayIndex
 
 ```go
-func (n *State) ArrayIndex(index uint64) Value
+func (n *State) ArrayIndex(index uint64) *ArrayIndex
 ```
-ArrayIndex implements the Value interface.
+ArrayIndex returns the path to the i'th element on the array or slice
+represented by this path. The represented value type must be of type array or
+slice, otherwise the returned path is invalid.
 
 #### func (*State) Base
 
@@ -514,16 +574,20 @@ Clone implements the Path interface, returning a deep-copy of this path.
 #### func (*State) Field
 
 ```go
-func (n *State) Field(name string) Value
+func (n *State) Field(name string) *Field
 ```
-Field implements the Value interface.
+Field returns the path to the field value with the specified name on the struct
+object represented by this path. The represented value type must be of type
+struct, otherwise the returned path is invalid.
 
 #### func (*State) MapIndex
 
 ```go
-func (n *State) MapIndex(key interface{}) Value
+func (n *State) MapIndex(key interface{}) *MapIndex
 ```
-MapIndex implements the Value interface.
+MapIndex returns the path to the map element with key k on the map object
+represented by this path. The represented value type must be of type map,
+otherwise the returned path is invalid.
 
 #### func (*State) Path
 
@@ -539,6 +603,13 @@ func (n *State) String() string
 ```
 String returns the string representation of the path.
 
+#### func (*State) Validate
+
+```go
+func (n *State) Validate() error
+```
+Validate implements the Path interface.
+
 #### type Value
 
 ```go
@@ -550,19 +621,19 @@ type Value interface {
 	// struct object represented by this path.
 	// The represented value type must be of type struct, otherwise the returned
 	// path is invalid.
-	Field(name string) Value
+	Field(name string) *Field
 
-	// ArrayIndex returns the path to the i'th array element on the array object
+	// ArrayIndex returns the path to the i'th element on the array or slice
 	// represented by this path.
 	// The represented value type must be of type array or slice, otherwise the
 	// returned path is invalid.
-	ArrayIndex(i uint64) Value
+	ArrayIndex(i uint64) *ArrayIndex
 
 	// MapIndex returns the path to the map element with key k on the map object
 	// represented by this path.
 	// The represented value type must be of type map, otherwise the returned path
 	// is invalid.
-	MapIndex(k interface{}) Value
+	MapIndex(k interface{}) *MapIndex
 }
 ```
 
