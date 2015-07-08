@@ -57,18 +57,6 @@ type resultGetDevices struct {
 	value []DeviceId
 }
 
-// Call GetHierarchy
-type callGetHierarchy struct {
-	binary.Generate
-	capture CaptureId
-}
-
-// Result GetHierarchy
-type resultGetHierarchy struct {
-	binary.Generate
-	value HierarchyId
-}
-
 // Call GetMemoryInfo
 type callGetMemoryInfo struct {
 	binary.Generate
@@ -216,18 +204,6 @@ type callResolveDevice struct {
 type resultResolveDevice struct {
 	binary.Generate
 	value Device
-}
-
-// Call ResolveHierarchy
-type callResolveHierarchy struct {
-	binary.Generate
-	id HierarchyId
-}
-
-// Result ResolveHierarchy
-type resultResolveHierarchy struct {
-	binary.Generate
-	value Hierarchy
 }
 
 // Call ResolveImageInfo

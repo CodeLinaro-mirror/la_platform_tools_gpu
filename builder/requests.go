@@ -34,7 +34,7 @@ type GetState struct {
 // GetHierarchy records the parameters of a service.GetHierarchy RPC request.
 type GetHierarchy struct {
 	binary.Generate
-	Capture service.CaptureId
+	Capture *path.Capture
 }
 
 // GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.

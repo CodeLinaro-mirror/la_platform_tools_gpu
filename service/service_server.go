@@ -56,12 +56,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callGetHierarchy:
-			if res, err := server.GetHierarchy(call.capture, l); err == nil {
-				return &resultGetHierarchy{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callGetMemoryInfo:
 			if res, err := server.GetMemoryInfo(call.capture, call.after, call.rng, l); err == nil {
 				return &resultGetMemoryInfo{value: res}
@@ -125,12 +119,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		case *callResolveDevice:
 			if res, err := server.ResolveDevice(call.id, l); err == nil {
 				return &resultResolveDevice{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveHierarchy:
-			if res, err := server.ResolveHierarchy(call.id, l); err == nil {
-				return &resultResolveHierarchy{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -217,25 +205,6 @@ func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (res Device, 
 // ResolveDevice loads and returns the Device stored in the resolver's database, using id.
 func (r Resolver) ResolveDevice(id DeviceId, l log.Logger) (Device, error) {
 	return ResolveDevice(id, r.Database, l)
-}
-
-// StoreHierarchy stores v into the database d, returning the HierarchyId.
-func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyId, error) {
-	id, err := database.Store(v, d, l)
-	return HierarchyId{ID: id}, err
-}
-
-// ResolveHierarchy loads and returns the Hierarchy stored in the database d, using id.
-func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (res Hierarchy, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*Hierarchy))
-	}
-	return res, err
-}
-
-// ResolveHierarchy loads and returns the Hierarchy stored in the resolver's database, using id.
-func (r Resolver) ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error) {
-	return ResolveHierarchy(id, r.Database, l)
 }
 
 // StoreImageInfo stores v into the database d, returning the ImageInfoId.

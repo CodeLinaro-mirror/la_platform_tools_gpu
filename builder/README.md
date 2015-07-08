@@ -33,6 +33,13 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 ```
 Resolve resolves and returns the object, value or memory at the path p.
 
+#### func  ResolveAtoms
+
+```go
+func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error)
+```
+ResolveAtoms resolves and returns the atom list from the path p.
+
 #### type BuildReport
 
 ```go
@@ -187,7 +194,7 @@ func (*GetFramebufferDepth) Class() binary.Class
 ```go
 type GetHierarchy struct {
 	binary.Generate
-	Capture service.CaptureId
+	Capture *path.Capture
 }
 ```
 

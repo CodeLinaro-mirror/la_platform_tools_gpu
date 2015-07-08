@@ -527,14 +527,6 @@ func CreateHierarchy(
 ) *Hierarchy
 ```
 
-#### func  ResolveHierarchy
-
-```go
-func ResolveHierarchy(id HierarchyId, d database.Database, l log.Logger) (res Hierarchy, err error)
-```
-ResolveHierarchy loads and returns the Hierarchy stored in the database d, using
-id.
-
 #### func (*Hierarchy) Class
 
 ```go
@@ -545,36 +537,6 @@ func (*Hierarchy) Class() binary.Class
 
 ```go
 func (c *Hierarchy) GetRoot() atom.Group
-```
-
-#### type HierarchyId
-
-```go
-type HierarchyId struct {
-	binary.Generate
-	ID binary.ID
-}
-```
-
-Handle HierarchyId
-
-#### func  StoreHierarchy
-
-```go
-func StoreHierarchy(v *Hierarchy, d database.Database, l log.Logger) (HierarchyId, error)
-```
-StoreHierarchy stores v into the database d, returning the HierarchyId.
-
-#### func (*HierarchyId) Class
-
-```go
-func (*HierarchyId) Class() binary.Class
-```
-
-#### func (HierarchyId) Valid
-
-```go
-func (h HierarchyId) Valid() bool
 ```
 
 #### type ImageFormat
@@ -810,7 +772,6 @@ type RPC interface {
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
-	GetHierarchy(capture CaptureId, l log.Logger) (HierarchyId, error)
 	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
@@ -822,7 +783,6 @@ type RPC interface {
 	ResolveBinary(id BinaryId, l log.Logger) ([]uint8, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
 	ResolveDevice(id DeviceId, l log.Logger) (Device, error)
-	ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
@@ -1010,14 +970,6 @@ func (r Resolver) ResolveDevice(id DeviceId, l log.Logger) (Device, error)
 ```
 ResolveDevice loads and returns the Device stored in the resolver's database,
 using id.
-
-#### func (Resolver) ResolveHierarchy
-
-```go
-func (r Resolver) ResolveHierarchy(id HierarchyId, l log.Logger) (Hierarchy, error)
-```
-ResolveHierarchy loads and returns the Hierarchy stored in the resolver's
-database, using id.
 
 #### func (Resolver) ResolveImageInfo
 
