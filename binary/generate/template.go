@@ -27,7 +27,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
-type functions struct {
+type Templates struct {
 	templates *template.Template
 	funcs     template.FuncMap
 	active    *template.Template
@@ -52,8 +52,8 @@ func (c *counter) String() string {
 	return fmt.Sprint(*c)
 }
 
-func newFunctions() *functions {
-	f := &functions{
+func NewTemplates() *Templates {
+	f := &Templates{
 		templates: template.New("FunctionHolder"),
 		funcs:     template.FuncMap{},
 		counters:  map[string]*counter{},
@@ -75,25 +75,25 @@ func newFunctions() *functions {
 	return f
 }
 
-func (f *functions) getTemplate(prefix string, t interface{}) (*template.Template, error) {
+func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Template, error) {
 	try := []string{}
 
-	switch t := t.(type) {
+	switch node := node.(type) {
 	case schema.Type:
-		try = append(try, fmt.Sprint(prefix, "#", t.Typename()))
-		if t.Typename() != t.Basename() {
-			try = append(try, fmt.Sprint(prefix, "#", t.Basename()))
+		try = append(try, fmt.Sprint(prefix, "#", node.Typename()))
+		if node.Typename() != node.Basename() {
+			try = append(try, fmt.Sprint(prefix, "#", node.Basename()))
 		}
 	case *variable:
-		return f.getTemplate(prefix, t.Type)
+		return t.getTemplate(prefix, node.Type)
 	case string:
-		try = append(try, prefix+t)
+		try = append(try, prefix+node)
 	case schema.Method:
-		try = append(try, fmt.Sprint(prefix, "#", t.String()))
+		try = append(try, fmt.Sprint(prefix, "#", node.String()))
 	default:
-		return nil, fmt.Errorf("Invalid call dispatch type %T", t)
+		return nil, fmt.Errorf("Invalid call dispatch type %T", node)
 	}
-	r := reflect.TypeOf(t)
+	r := reflect.TypeOf(node)
 	// using the reflected typename
 	try = append(try, fmt.Sprint(prefix, ".", r.Name()))
 	if r.Kind() == reflect.Ptr {
@@ -102,24 +102,24 @@ func (f *functions) getTemplate(prefix string, t interface{}) (*template.Templat
 	// default case is just the prefix
 	try = append(try, prefix)
 	for _, name := range try {
-		if tmpl := f.templates.Lookup(name); tmpl != nil {
+		if tmpl := t.templates.Lookup(name); tmpl != nil {
 			return tmpl, nil
 		}
 	}
 	return nil, fmt.Errorf(`Cannot find templates "%s"`, strings.Join(try, `","`))
 }
 
-func (f *functions) execute(name string, w io.Writer, data interface{}) error {
-	oldw := f.writer
+func (t *Templates) execute(name string, w io.Writer, data interface{}) error {
+	oldw := t.writer
 	if w != nil {
-		f.writer = w
+		t.writer = w
 	}
-	defer func() { f.writer = oldw }()
-	t := f.templates.Lookup(name)
-	if t == nil {
+	defer func() { t.writer = oldw }()
+	tmpl := t.templates.Lookup(name)
+	if tmpl == nil {
 		return fmt.Errorf("Cannot find template %s", name)
 	}
-	return t.Execute(w, data)
+	return tmpl.Execute(w, data)
 }
 
 type variable struct {
@@ -127,35 +127,35 @@ type variable struct {
 	Type interface{}
 }
 
-func (f *functions) Var(t schema.Type, args ...interface{}) *variable {
+func (*Templates) Var(t schema.Type, args ...interface{}) *variable {
 	return &variable{
 		Name: fmt.Sprint(args...),
 		Type: t,
 	}
 }
 
-func (f *functions) Call(prefix string, arg interface{}) (string, error) {
-	tmpl, err := f.getTemplate(prefix, arg)
+func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
+	tmpl, err := t.getTemplate(prefix, arg)
 	if err != nil {
 		return "", err
 	}
-	return "", tmpl.Execute(f.writer, arg)
+	return "", tmpl.Execute(t.writer, arg)
 }
 
-func (f *functions) Lower(s interface{}) string {
+func (*Templates) Lower(s interface{}) string {
 	return strings.ToLower(fmt.Sprint(s))
 }
 
-func (f *functions) Upper(s interface{}) string {
+func (*Templates) Upper(s interface{}) string {
 	return strings.ToUpper(fmt.Sprint(s))
 }
 
-func (f *functions) ToS8(val byte) string {
+func (*Templates) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
 }
 
-func (f *functions) Directive(name string, notset interface{}) interface{} {
-	d, ok := f.File.Directives[name]
+func (t *Templates) Directive(name string, notset interface{}) interface{} {
+	d, ok := t.File.Directives[name]
 	if !ok {
 		return notset
 	}
@@ -168,11 +168,11 @@ func (f *functions) Directive(name string, notset interface{}) interface{} {
 	return d
 }
 
-func (f *functions) Counter(name string) *counter {
-	c, ok := f.counters[name]
+func (t *Templates) Counter(name string) *counter {
+	c, ok := t.counters[name]
 	if !ok {
 		c = new(counter)
-		f.counters[name] = c
+		t.counters[name] = c
 	}
 	return c
 }

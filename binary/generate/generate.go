@@ -38,16 +38,6 @@ const (
 	memberPrefix = "∍"
 )
 
-type Generator struct {
-	f *functions
-}
-
-func NewGenerator() *Generator {
-	return &Generator{
-		f: newFunctions(),
-	}
-}
-
 type Style struct {
 	ClassPrefix  string
 	MemberPrefix string
