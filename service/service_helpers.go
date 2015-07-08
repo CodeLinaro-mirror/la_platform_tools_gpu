@@ -39,14 +39,6 @@ func (c callGetDevices) Format(f fmt.State, r rune) {
 func (r resultGetDevices) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callGetHierarchy) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetHierarchy(capture: %v)",
-		c.capture,
-	)
-}
-func (r resultGetHierarchy) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetMemoryInfo(capture: %v, after: %v, rng: %v)",
 		c.capture, c.after, c.rng,
@@ -135,14 +127,6 @@ func (c callResolveDevice) Format(f fmt.State, r rune) {
 func (r resultResolveDevice) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveHierarchy) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveHierarchy(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveHierarchy) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveImageInfo) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveImageInfo(id: %v)",
 		c.id,
@@ -181,9 +165,6 @@ func (h CaptureId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h DeviceId) Valid() bool {
-	return h.ID.Valid()
-}
-func (h HierarchyId) Valid() bool {
 	return h.ID.Valid()
 }
 func (h ImageInfoId) Valid() bool {
