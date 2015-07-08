@@ -774,7 +774,7 @@ type RPC interface {
 	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (ImageInfoId, error)
-	GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (TimingInfoId, error)
+	GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
