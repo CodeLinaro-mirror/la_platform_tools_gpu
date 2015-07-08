@@ -47,6 +47,11 @@ func Store(v interface{}, d Database, l log.Logger) (binary.ID, error) {
 	return id, d.Store(id, v, l)
 }
 
+// Resolve is a helper that resolves id from the database.
+func Resolve(id binary.ID, d Database, l log.Logger) (interface{}, error) {
+	return d.Resolve(id, l)
+}
+
 // Build stores lazy into d, and then resolves and returns the lazy-built
 // object.
 func Build(lazy Lazy, d Database, l log.Logger) (interface{}, error) {

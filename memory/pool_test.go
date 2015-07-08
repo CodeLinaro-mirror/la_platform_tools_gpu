@@ -145,11 +145,11 @@ func TestMemoryBlobWriteReadScattered(t *testing.T) {
 //
 func TestMemoryResourceWriteReadScattered(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
-	resA, _ := database.StoreBlob([]byte{10, 11, 12}, d, l)
-	resB, _ := database.StoreBlob([]byte{20, 21, 22, 23}, d, l)
-	resC, _ := database.StoreBlob([]byte{30, 31}, d, l)
-	resD, _ := database.StoreBlob([]byte{40, 41, 42}, d, l)
-	resE, _ := database.StoreBlob([]byte{50}, d, l)
+	resA, _ := database.Store([]byte{10, 11, 12}, d, l)
+	resB, _ := database.Store([]byte{20, 21, 22, 23}, d, l)
+	resC, _ := database.Store([]byte{30, 31}, d, l)
+	resD, _ := database.Store([]byte{40, 41, 42}, d, l)
+	resE, _ := database.Store([]byte{50}, d, l)
 	p := Pool{}
 	p.Write(1, Resource(resA, 3))
 	p.Write(7, Resource(resB, 4))
