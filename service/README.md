@@ -764,7 +764,7 @@ type RPC interface {
 	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
-	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
+	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (TimingInfoId, error)

@@ -57,7 +57,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetMemoryInfo:
-			if res, err := server.GetMemoryInfo(call.capture, call.after, call.rng, l); err == nil {
+			if res, err := server.GetMemoryInfo(call.after, call.rng, l); err == nil {
 				return &resultGetMemoryInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
