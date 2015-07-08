@@ -15,11 +15,17 @@
 package generate
 
 import (
-	"bytes"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 )
+
+type Cpp struct {
+	*File
+	Namespace string
+	Copyright string
+	Indent    string
+}
 
 func (t *Templates) CppName(n string) string {
 	n = strings.Replace(n, ".", "::", -1)
@@ -31,17 +37,9 @@ func (t *Templates) CppName(n string) string {
 	return n
 }
 
-// CppFile generates the all the cpp code for a file with a set of structs.
-func (t *Templates) CppFile(file *File) ([]byte, error) {
-	f := *file
-	if f.Indent == "" {
-		f.Indent = "    "
-	}
-	b := &bytes.Buffer{}
-	if err := t.execute("Cpp.File", b, &f); err != nil {
-		return nil, err
-	}
-	s := b.String()
-	s = strings.Replace(s, indent, f.Indent, -1)
-	return []byte(s), nil
+func NewCpp(file *File) *Cpp { return &Cpp{File: file, Indent: "    "} }
+func (file *Cpp) Run(t *Templates, out string) (bool, error) {
+	return t.generate(file.File, "Cpp.File", file, out, func(b []byte) []byte {
+		return []byte(strings.Replace(string(b), indent, file.Indent, -1))
+	})
 }

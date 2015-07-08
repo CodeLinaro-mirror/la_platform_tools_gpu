@@ -17,11 +17,9 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"go/build"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -46,12 +44,6 @@ const usage = `codergen: A tool to generate coders for go structs.
 Usage: codergen [--go] [--java=file] <args>...
   -help: show this help message
 `
-
-type Entry struct {
-	Output    string
-	File      generate.File
-	Generator func(*generate.File) ([]byte, error)
-}
 
 func scan(entry string, loader *generate.Loader) error {
 	base := strings.TrimSuffix(entry, "...")
@@ -150,91 +142,83 @@ func output(t *generate.Templates, file *generate.File) error {
 		sort.Sort(&file.Constants[i])
 	}
 	if *golang {
-		entry := Entry{
-			File:      *file,
-			Output:    file.Package + "_binary.go",
-			Generator: t.GoFile,
-		}
-		entry.File.Copyright = copyright.Build(
+		gen := generate.NewGo(file)
+		gen.Copyright = copyright.Build(
 			"generated_by", copyright.Info{
 				Tool: "codergen -go",
 				Year: "2015",
 			})
+		out := file.Name + "_binary.go"
 		if file.IsTest {
-			entry.Output = file.Package + "_binary_test.go"
+			out = file.Name + "_binary_test.go"
 		}
-		entry.Output = path.Join(file.Path, entry.Output)
-		if err := entry.Generate(); err != nil {
+		out = path.Join(file.Path, out)
+		if err := Generate(gen, t, out); err != nil {
 			return err
 		}
 	}
 	javaPackage, doJava := file.Directives["java.package"]
 	if *java != "" && !file.IsTest && doJava {
+		gen := generate.NewJava(file)
+		gen.Package = javaPackage
 		source, _ := file.Directives["java.source"]
 		indent, _ := file.Directives["java.indent"]
-		member, _ := file.Directives["java.member_prefix"]
-		class, _ := file.Directives["java.class_prefix"]
-		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
-		entry := Entry{
-			File:      *file,
-			Output:    filepath.Join(*java, source, pkgPath, "ObjectFactory.java"),
-			Generator: t.JavaFile,
-		}
-		entry.File.Copyright = copyright.Build(
+		gen.MemberPrefix, _ = file.Directives["java.member_prefix"]
+		gen.ClassPrefix, _ = file.Directives["java.class_prefix"]
+		gen.Copyright = copyright.Build(
 			"generated_aosp_java", copyright.Info{
 				Year: "2015",
 			})
-		entry.File.Package = javaPackage
-		entry.File.Indent = strings.Trim(indent, `"`)
-		if entry.File.Indent == "" {
-			entry.File.Indent = "    "
+		gen.Indent = strings.Trim(indent, `"`)
+		if gen.Indent == "" {
+			gen.Indent = "    "
 		}
-		entry.File.MemberPrefix = member
-		entry.File.ClassPrefix = class
-		if err := entry.Generate(); err != nil {
+		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
+		out := filepath.Join(*java, source, pkgPath, "ObjectFactory.java")
+		if err := Generate(gen, t, out); err != nil {
 			return err
 		}
 	}
 	cppNamespace, doCpp := file.Directives["cpp"]
 	if *cpp != "" && !file.IsTest && doCpp {
-		entry := Entry{
-			File:      *file,
-			Output:    filepath.Join(*cpp, cppNamespace+".h"),
-			Generator: t.CppFile,
-		}
-		entry.File.Package = cppNamespace
-		entry.File.Copyright = copyright.Build(
+		gen := generate.NewCpp(file)
+		gen.Namespace = cppNamespace
+		gen.Copyright = copyright.Build(
 			"generated_by", copyright.Info{
 				Tool: fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp)),
 				Year: "2015",
 			})
-		if err := entry.Generate(); err != nil {
+		out := filepath.Join(*cpp, cppNamespace+".h")
+		if err := Generate(gen, t, out); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func (e *Entry) Generate() error {
-	result, err := e.Generator(&e.File)
+type generator interface {
+	Run(t *generate.Templates, out string) (bool, error)
+}
+
+func Generate(g generator, t *generate.Templates, path string) error {
+	out := path
+	if *nowrite {
+		out = ""
+	}
+	changed, err := g.Run(t, out)
 	if err != nil {
 		return err
 	}
-	current, err := ioutil.ReadFile(e.Output)
-	if err == nil && bytes.Equal(result, current) {
-		if *verbose {
-			fmt.Printf("No change for %s\n", e.Output)
+	if changed {
+		if *nowrite {
+			fmt.Printf("Not writing %s\n", path)
+		} else {
+			fmt.Printf("Generated %s\n", path)
 		}
-		return nil
+	} else if *verbose {
+		fmt.Printf("No change for %s\n", path)
 	}
-	if *nowrite {
-		fmt.Printf("Not writing %s\n", e.Output)
-		return nil
-	}
-	if *verbose {
-		fmt.Printf("Generate %s\n", e.Output)
-	}
-	return ioutil.WriteFile(e.Output, result, 0666)
+	return nil
 }
 
 func main() {
