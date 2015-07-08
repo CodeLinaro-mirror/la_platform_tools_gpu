@@ -15,7 +15,6 @@
 package generate
 
 import (
-	"bytes"
 	"fmt"
 	"strings"
 	"unicode"
@@ -85,16 +84,22 @@ func (*Templates) JavaClass(name string) string {
 	return classPrefix + name
 }
 
-// JavaFile generates the all the java code for a file with a set of structs.
-func (t *Templates) JavaFile(file *File) ([]byte, error) {
-	f := *file
-	b := &bytes.Buffer{}
-	if err := t.execute("Java.File", b, &f); err != nil {
-		return nil, err
-	}
-	s := b.String()
-	s = strings.Replace(s, indent, f.Indent, -1)
-	s = strings.Replace(s, memberPrefix, f.MemberPrefix, -1)
-	s = strings.Replace(s, classPrefix, f.ClassPrefix, -1)
-	return []byte(s), nil
+type Java struct {
+	*File
+	Package      string
+	Copyright    string
+	Indent       string
+	MemberPrefix string
+	ClassPrefix  string
+}
+
+func NewJava(file *File) *Java { return &Java{File: file} }
+func (file *Java) Run(t *Templates, out string) (bool, error) {
+	return t.generate(file.File, "Java.File", file, out, func(b []byte) []byte {
+		s := string(b)
+		s = strings.Replace(s, indent, file.Indent, -1)
+		s = strings.Replace(s, memberPrefix, file.MemberPrefix, -1)
+		s = strings.Replace(s, classPrefix, file.ClassPrefix, -1)
+		return []byte(s)
+	})
 }

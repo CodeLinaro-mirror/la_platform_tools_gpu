@@ -226,7 +226,7 @@ func (l *Loader) typeCheck(dir *Directory, module *Module) error {
 
 func (l *Loader) scan(dir *Directory, module *Module, isTest bool) error {
 	module.Output = &File{
-		Package:    dir.Name,
+		Name:       dir.Name,
 		Path:       dir.Dir,
 		Import:     dir.ImportPath,
 		Imports:    make(map[string]struct{}),
