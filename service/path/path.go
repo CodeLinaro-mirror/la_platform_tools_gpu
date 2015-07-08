@@ -17,6 +17,11 @@ package path
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace
+// binary: java.indent = "  "
+// binary: java.member_prefix = my
+
 // Path is the interface for types that represent a reference to a capture,
 // atom list, single atom, memory, state or sub-object. A path can be
 // passed between client and server using RPCs in order to describe some data
