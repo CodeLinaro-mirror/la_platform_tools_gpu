@@ -453,12 +453,28 @@ const java_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Java.Enum"}}{{.Name}}Enum{{end}}
-{{define "Java.ID"}}{{JavaID .Name}}ID{{end}}
-{{define "Java.IDBytes"}}{{JavaID .Name}}IDBytes{{end}}
+ {{define "Java.Type#bool"}}boolean{{end}}
+ {{define "Java.Type#int8"}}byte{{end}}
+ {{define "Java.Type#uint8"}}byte{{end}}
+ {{define "Java.Type#int16"}}short{{end}}
+ {{define "Java.Type#uint16"}}short{{end}}
+ {{define "Java.Type#int32"}}int{{end}}
+ {{define "Java.Type#uint32"}}int{{end}}
+ {{define "Java.Type#int64"}}long{{end}}
+ {{define "Java.Type#uint64"}}long{{end}}
+ {{define "Java.Type#float32"}}float{{end}}
+ {{define "Java.Type#float64"}}double{{end}}
+ {{define "Java.Type#string"}}char*{{end}}
+ {{define "Java.Type#binary.ID"}}gapic::Id{{end}}
+ {{define "Java.Type.Struct"}}{{.Name | CppName}}{{end}}
+ {{define "Java.Type.Interface"}}BinaryObject{{end}}
+ {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
+ {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
+ {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
+
 
 {{define "Java.Encoder"}}
-»public static void encode(Encoder e, {{JavaClass .Name}} o) throws IOException {
+»public static void encode(Encoder e, {{.Name}} o) throws IOException {
 {{range .Fields}}»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
@@ -483,22 +499,22 @@ const java_tmpl = `{{/*
 {{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
-»public static void decode(Decoder d, {{JavaClass .Name}} o) throws IOException {
+»public static void decode(Decoder d, {{.Name}} o) throws IOException {
 {{range .Fields}}»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»}{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "Java.Decode.Pointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
-{{define "Java.Decode.Interface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
+{{define "Java.Decode.Interface"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Any"}}// TODO: Java any handling{{end}}
 
-{{define "Java.Decode.Slice"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[d.int32()];
-»»for (int i = 0; i < {{.Name}}.length; i++) {
+{{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
+»»for (int i = 0; i <{{.Name}}.length; i++) {
 »»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.Decode.Array"}}{{.Name}} = new {{JavaStorage .Type.ValueType}}[{{.Type.Size}}];
+{{define "Java.Decode.Array"}}{{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];
 »»for (int i = 0; i < {{.Type.Size}}; i++) {
 »»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
@@ -506,7 +522,7 @@ const java_tmpl = `{{/*
 {{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
 {{define "Java.Decode.Stream"}}TODO: Java stream handling{{end}}
 
-{{define "Java.File"}}{{$.Copyright}}package {{.Package}};
+{{define "Java.File"}}{{$.Copyright}}package {{.BasePackage}}.{{.RelativePackage}};
 
 import com.android.tools.rpclib.binary.BinaryObject;
 import com.android.tools.rpclib.binary.BinaryObjectCreator;
@@ -515,24 +531,17 @@ import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.ObjectTypeID;
 import java.io.IOException;
 
-class ObjectFactory {
-»public enum Entries implements BinaryObjectCreator {{"{"}}{{range .Structs}}
-»»{{template "Java.Enum" .}} {
-»»»@Override public BinaryObject create() {
-»»»»return new {{JavaClass .Name}}();
-»»»}
-»»},{{end}}
+class {{.Struct.Name}} {
+»public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
+»public static ObjectTypeID ID = new ObjectTypeID(IDBytes);
+»public enum Class {
+»»INSTANCE;
+{{template "Java.Encoder" .Struct}}
+{{template "Java.Decoder" .Struct}}
 »}
-{{range .Structs}}
-»public static byte[] {{template "Java.IDBytes" .}} = { {{range .ID}}{{ToS8 .}}, {{end}}{{"}"}};{{end}}
-{{range .Structs}}
-»public static ObjectTypeID {{template "Java.ID" .}} = new ObjectTypeID({{template "Java.IDBytes" .}});{{end}}
-
-»static {{"{"}}{{range .Structs}}
-»»ObjectTypeID.register({{template "Java.ID" .}}, Entries.{{template "Java.Enum" .}});{{end}}
-»}{{range .Structs}}
-{{template "Java.Encoder" .}}
-{{template "Java.Decoder" .}}{{end}}
+»static {
+»»ObjectTypeID.register(ID, Class.INSTANCE);
+»}
 }
 {{end}}
 `
