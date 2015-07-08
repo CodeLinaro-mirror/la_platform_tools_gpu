@@ -31,7 +31,6 @@
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
-{{define "Cpp.Type.Stream"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
 
 {{define "Cpp.Method#ID"}}Id{{end}}
@@ -68,9 +67,7 @@
 »»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.Encode.Stream"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
-
-{{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
+{{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
 {{define "Cpp.File"}}{{$.Copyright}}

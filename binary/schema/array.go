@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/objects"
 )
 
 // Array is the Type descriptor for fixed size buffers of known type.
@@ -35,15 +34,6 @@ type Slice struct {
 	binary.Generate
 	Alias     string // The alias this array type was given, if present
 	ValueType Type   // The value type stored in the slice.
-}
-
-// Stream is the Type descriptor for dynamically sized streams of a known type,
-// where the stream is terminated with a speical token rather than prefixed by a
-// count.
-type Stream struct {
-	binary.Generate
-	Alias     string // The alias this array type was given, if present
-	ValueType Type   // The value type stored in the stream.
 }
 
 func (a *Array) Basename() string {
@@ -137,54 +127,6 @@ func (s *Slice) Skip(d binary.Decoder) error {
 	for i := uint32(0); i < size; i++ {
 		if err := s.ValueType.Skip(d); err != nil {
 			return err
-		}
-	}
-	return nil
-}
-
-func (s *Stream) Basename() string {
-	return fmt.Sprintf("[]%s", s.ValueType.Basename())
-}
-
-func (s *Stream) Typename() string {
-	if s.Alias != "" {
-		return s.Alias
-	}
-	return fmt.Sprintf("[]%s", s.ValueType.Typename())
-}
-
-func (s *Stream) String() string {
-	return s.Typename()
-}
-
-func (s *Stream) Encode(e binary.Encoder, value interface{}) error {
-	v := value.([]interface{})
-	for i := range v {
-		s.ValueType.Encode(e, v[i])
-	}
-	return e.Object((*objects.Terminator)(nil))
-}
-
-func (s *Stream) Decode(d binary.Decoder) (interface{}, error) {
-	v := []interface{}{}
-	for {
-		if obj, err := d.Object(); err != nil {
-			return v, err
-		} else if _, end := obj.(*objects.Terminator); end {
-			break
-		} else {
-			v = append(v, obj)
-		}
-	}
-	return v, nil
-}
-
-func (s *Stream) Skip(d binary.Decoder) error {
-	for {
-		if id, err := d.SkipObject(); err != nil {
-			return err
-		} else if id == objects.TerminatorID {
-			break
 		}
 	}
 	return nil

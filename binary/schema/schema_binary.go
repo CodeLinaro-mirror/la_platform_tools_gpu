@@ -25,7 +25,6 @@ func init() {
 	Namespace.Add((*Pointer)(nil).Class())
 	Namespace.Add((*Primitive)(nil).Class())
 	Namespace.Add((*Slice)(nil).Class())
-	Namespace.Add((*Stream)(nil).Class())
 	Namespace.Add((*Struct)(nil).Class())
 }
 
@@ -40,7 +39,6 @@ var (
 	binaryIDPointer     = binary.ID{0x13, 0xa9, 0xd3, 0x11, 0xa1, 0x8d, 0xbd, 0x5b, 0x18, 0xe7, 0x9b, 0x43, 0x3b, 0xdf, 0xc5, 0x49, 0xc8, 0xa5, 0x35, 0xcf}
 	binaryIDPrimitive   = binary.ID{0x45, 0x4d, 0x9e, 0x7d, 0xe6, 0x4f, 0x50, 0x74, 0x95, 0x13, 0x60, 0xbd, 0xea, 0x00, 0x71, 0x93, 0x9e, 0x3e, 0xc2, 0x4e}
 	binaryIDSlice       = binary.ID{0x3b, 0x75, 0xee, 0x59, 0x18, 0x1a, 0x4d, 0x74, 0x50, 0xf2, 0x50, 0x7f, 0xf9, 0x4f, 0x79, 0x99, 0x38, 0x58, 0x96, 0xd2}
-	binaryIDStream      = binary.ID{0x06, 0xcf, 0x86, 0xd5, 0x04, 0xea, 0x12, 0xb1, 0xd7, 0x79, 0x5a, 0x46, 0x29, 0x55, 0xe1, 0x10, 0xa1, 0x8f, 0x6e, 0x43}
 	binaryIDStruct      = binary.ID{0xdf, 0xe3, 0x9e, 0xf2, 0x8e, 0x9c, 0xea, 0x9b, 0x93, 0x49, 0x47, 0x76, 0xef, 0x9d, 0xe2, 0x46, 0xd9, 0x68, 0x92, 0x94}
 )
 
@@ -687,62 +685,6 @@ func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeSlice(d, obj.(*Slice))
 }
 func (*binaryClassSlice) Skip(d binary.Decoder) error { return doSkipSlice(d) }
-
-type binaryClassStream struct{}
-
-func (*Stream) Class() binary.Class {
-	return (*binaryClassStream)(nil)
-}
-func doEncodeStream(e binary.Encoder, o *Stream) error {
-	if err := e.String(o.Alias); err != nil {
-		return err
-	}
-	if o.ValueType != nil {
-		if err := e.Object(o.ValueType); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeStream(d binary.Decoder, o *Stream) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Alias = string(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.ValueType = obj.(Type)
-	} else {
-		o.ValueType = nil
-	}
-	return nil
-}
-func doSkipStream(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassStream) ID() binary.ID      { return binaryIDStream }
-func (*binaryClassStream) New() binary.Object { return &Stream{} }
-func (*binaryClassStream) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeStream(e, obj.(*Stream))
-}
-func (*binaryClassStream) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Stream{}
-	return obj, doDecodeStream(d, obj)
-}
-func (*binaryClassStream) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeStream(d, obj.(*Stream))
-}
-func (*binaryClassStream) Skip(d binary.Decoder) error { return doSkipStream(d) }
 
 type binaryClassStruct struct{}
 
