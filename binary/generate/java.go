@@ -15,27 +15,9 @@
 package generate
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 	"unicode/utf8"
-
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
-)
-
-var (
-	javaTypeMap = map[string]string{
-		"int8":    "byte",
-		"uint8":   "byte",
-		"int16":   "short",
-		"uint16":  "short",
-		"int32":   "int",
-		"uint32":  "int",
-		"int64":   "long",
-		"uint64":  "long",
-		"float32": "float",
-		"float64": "double",
-	}
 )
 
 func (*Templates) JavaFieldName(s string) string {
@@ -43,54 +25,15 @@ func (*Templates) JavaFieldName(s string) string {
 	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
-func (t *Templates) JavaStorage(ty schema.Type) string {
-	switch ty := ty.(type) {
-	case *schema.Primitive:
-		name := ty.Name
-		if result, ok := javaTypeMap[name]; ok {
-			return result
-		}
-		return name
-	case *schema.Struct:
-		return ty.Name
-	case *schema.Interface:
-		return ty.Name
-	case *schema.Pointer:
-		return t.JavaStorage(ty.Type)
-	case *schema.Array:
-		panic(fmt.Errorf("Array types not handled"))
-	case *schema.Slice:
-		panic(fmt.Errorf("Slice types not handled"))
-	case *schema.Stream:
-		panic(fmt.Errorf("Stream types not handled"))
-	case *schema.Map:
-		panic(fmt.Errorf("Map types not handled"))
-	default:
-		panic(fmt.Errorf("Unknown value type %T", ty))
-	}
-}
-
-func (*Templates) JavaID(name string) string {
-	return classPrefix + name
-}
-
-func (*Templates) JavaClass(name string) string {
-	if strings.HasPrefix(name, "call") {
-		return "Commands." + classPrefix + name[4:] + ".Call"
-	}
-	if strings.HasPrefix(name, "result") {
-		return "Commands." + classPrefix + name[6:] + ".Result"
-	}
-	return classPrefix + name
-}
-
 type Java struct {
 	*File
-	Package      string
-	Copyright    string
-	Indent       string
-	MemberPrefix string
-	ClassPrefix  string
+	Struct          *Struct
+	BasePackage     string
+	RelativePackage string
+	Copyright       string
+	Indent          string
+	MemberPrefix    string
+	ClassPrefix     string
 }
 
 func NewJava(file *File) *Java { return &Java{File: file} }

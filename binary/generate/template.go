@@ -19,6 +19,8 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"reflect"
 	"strconv"
 	"strings"
@@ -94,6 +96,10 @@ func (t *Templates) generate(f *File, name string, arg interface{}, out string, 
 	}
 	if out == "" {
 		return false, nil
+	}
+	dir, _ := filepath.Split(out)
+	if len(dir) > 0 {
+		os.MkdirAll(dir, os.ModePerm)
 	}
 	return true, ioutil.WriteFile(out, data, 0666)
 }
