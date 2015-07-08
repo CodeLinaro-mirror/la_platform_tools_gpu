@@ -44,6 +44,17 @@ func (c *Capture) Clone() Path {
 	return &Capture{ID: c.ID}
 }
 
+// Validate implements the Path interface.
+func (c *Capture) Validate() error {
+	switch {
+	case c == nil:
+		return fmt.Errorf("Capture is nil")
+	case !c.ID.Valid():
+		return fmt.Errorf("Capture.ID is invalid")
+	}
+	return nil
+}
+
 // Atoms returns the path to the full list of atoms in the capture.
 func (c *Capture) Atoms() *Atoms {
 	return &Atoms{Capture: c}

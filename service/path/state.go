@@ -45,6 +45,17 @@ func (n *State) Clone() Path {
 	return &State{After: n.After.Clone().(*Atom)}
 }
 
+// Validate implements the Path interface.
+func (n *State) Validate() error {
+	switch {
+	case n == nil:
+		return fmt.Errorf("State is nil")
+	case n.After == nil:
+		return fmt.Errorf("State.After is nil")
+	}
+	return n.After.Validate()
+}
+
 // Field returns the path to the field value with the specified name on the
 // struct object represented by this path.
 // The represented value type must be of type struct, otherwise the returned
