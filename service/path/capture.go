@@ -50,6 +50,6 @@ func (c *Capture) Atoms() *Atoms {
 }
 
 // Report returns the path to the capture's report.
-func (c *Capture) Report() Path {
+func (c *Capture) Report() *Report {
 	return &Report{Capture: c}
 }

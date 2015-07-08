@@ -45,17 +45,26 @@ func (n *State) Clone() Path {
 	return &State{After: n.After.Clone().(*Atom)}
 }
 
-// Field implements the Value interface.
-func (n *State) Field(name string) Value {
+// Field returns the path to the field value with the specified name on the
+// struct object represented by this path.
+// The represented value type must be of type struct, otherwise the returned
+// path is invalid.
+func (n *State) Field(name string) *Field {
 	return &Field{Struct: n, Name: name}
 }
 
-// ArrayIndex implements the Value interface.
-func (n *State) ArrayIndex(index uint64) Value {
+// ArrayIndex returns the path to the i'th element on the array or slice
+// represented by this path.
+// The represented value type must be of type array or slice, otherwise the
+// returned path is invalid.
+func (n *State) ArrayIndex(index uint64) *ArrayIndex {
 	return &ArrayIndex{Array: n, Index: index}
 }
 
-// MapIndex implements the Value interface.
-func (n *State) MapIndex(key interface{}) Value {
+// MapIndex returns the path to the map element with key k on the map object
+// represented by this path.
+// The represented value type must be of type map, otherwise the returned path
+// is invalid.
+func (n *State) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
