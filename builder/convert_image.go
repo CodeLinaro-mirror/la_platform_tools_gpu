@@ -20,18 +20,18 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-// BuildLazy returns the *database.Blob holding the converted image for the
+// BuildLazy returns the byte array holding the converted image for the
 // ConvertImage request.
 func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	data, err := database.ResolveBlob(r.Data, d, l)
+	data, err := database.Resolve(r.Data, d, l)
 	if err != nil {
 		return nil, err
 	}
 
-	data, err = image.Convert(data, r.Width, r.Height, r.FormatFrom, r.FormatTo)
+	data, err = image.Convert(data.([]byte), r.Width, r.Height, r.FormatFrom, r.FormatTo)
 	if err != nil {
 		return nil, err
 	}
 
-	return &database.Blob{Data: data}, nil
+	return data, nil
 }
