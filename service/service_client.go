@@ -84,9 +84,9 @@ func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) 
 	return
 }
 
-func (c client) GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (res ImageInfoId, err error) {
+func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (res ImageInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetFramebufferColor{device: device, capture: capture, api: api, after: after, settings: settings}); err == nil {
+	if val, err = c.Send(&callGetFramebufferColor{device: device, after: after, settings: settings}); err == nil {
 		res = val.(*resultGetFramebufferColor).value
 	} else {
 		log.Errorf(l, "RPC GetFramebufferColor failed with error: %v", err)
@@ -94,9 +94,9 @@ func (c client) GetFramebufferColor(device DeviceId, capture CaptureId, api ApiI
 	return
 }
 
-func (c client) GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (res ImageInfoId, err error) {
+func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (res ImageInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetFramebufferDepth{device: device, capture: capture, api: api, after: after}); err == nil {
+	if val, err = c.Send(&callGetFramebufferDepth{device: device, after: after}); err == nil {
 		res = val.(*resultGetFramebufferDepth).value
 	} else {
 		log.Errorf(l, "RPC GetFramebufferDepth failed with error: %v", err)
@@ -114,7 +114,7 @@ func (c client) GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFl
 	return
 }
 
-func (c client) PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (res BinaryId, err error) {
+func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (res BinaryId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIds: atomIds}); err == nil {
 		res = val.(*resultPrerenderFramebuffers).value

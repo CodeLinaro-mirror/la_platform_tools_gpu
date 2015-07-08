@@ -20,3 +20,8 @@ import "android.googlesource.com/platform/tools/gpu/service/path"
 func (c CaptureId) Path() *path.Capture {
 	return &path.Capture{ID: c.ID}
 }
+
+// Path returns a path.Device representing the device with this identifier.
+func (c DeviceId) Path() *path.Device {
+	return &path.Device{ID: c.ID}
+}
