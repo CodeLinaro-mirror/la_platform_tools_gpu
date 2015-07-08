@@ -89,3 +89,15 @@ func (n *Field) ArrayIndex(index uint64) *ArrayIndex {
 func (n *Field) MapIndex(key interface{}) *MapIndex {
 	return &MapIndex{Map: n, Key: key}
 }
+
+// FindField returns the first Field found traversing the path p.
+// If no Atom was found, then nil is returned.
+func FindField(p Path) *Field {
+	for p != nil {
+		if p, ok := p.(*Field); ok {
+			return p
+		}
+		p = p.Base()
+	}
+	return nil
+}
