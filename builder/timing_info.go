@@ -55,7 +55,7 @@ func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 		}
 
 		go func() {
-			results <- <-query.QueryCallDurations(ctx, mgr, r.TimingMask)
+			results <- <-query.QueryCallDurations(ctx, mgr, r.Flags)
 		}()
 		count++
 	}

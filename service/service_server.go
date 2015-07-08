@@ -81,7 +81,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetTimingInfo:
-			if res, err := server.GetTimingInfo(call.device, call.capture, call.mask, l); err == nil {
+			if res, err := server.GetTimingInfo(call.device, call.capture, call.flags, l); err == nil {
 				return &resultGetTimingInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
