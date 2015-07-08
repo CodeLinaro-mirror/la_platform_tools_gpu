@@ -14,8 +14,6 @@
 
 package atom
 
-import "android.googlesource.com/platform/tools/gpu/binary"
-
 // List is a list of atoms.
 type List []Atom
 
@@ -46,22 +44,4 @@ func (l *List) AddAt(a Atom, id ID) {
 	*l = append(*l, nil)
 	copy((*l)[id+1:], (*l)[id:])
 	(*l)[id] = a
-}
-
-type stream struct {
-	binary.Generate
-	Atoms []Atom `stream:"true"`
-}
-
-// Encode encodes the atom list using the specified encoder.
-func (l *List) Encode(e binary.Encoder) error {
-	return e.Value(&stream{Atoms: *l})
-}
-
-// Encode decodes the atom list using the specified encoder.
-func (l *List) Decode(d binary.Decoder) error {
-	s := stream{}
-	err := d.Value(&s)
-	*l = s.Atoms
-	return err
 }
