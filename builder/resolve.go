@@ -21,7 +21,6 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 	return v[len(v)-1], nil
 }
 
-
 // ResolveAtoms resolves and returns the atom list from the path p.
 func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error) {
 	if res, err := Resolve(p, d, l); err == nil {
@@ -30,6 +29,7 @@ func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom
 		return nil, err
 	}
 }
+
 func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]interface{}, error) {
 	v := make([]interface{}, len(paths))
 	for i, p := range paths {
@@ -40,6 +40,13 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 				return nil, err
 			}
 			v[i] = &capture
+
+		case *path.Device:
+			device, err := service.ResolveDevice(service.DeviceId{ID: p.ID}, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = &device
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)

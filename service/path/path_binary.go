@@ -20,6 +20,7 @@ func init() {
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Atoms)(nil).Class())
 	Namespace.Add((*Atom)(nil).Class())
+	Namespace.Add((*Device)(nil).Class())
 	Namespace.Add((*Field)(nil).Class())
 	Namespace.Add((*Hierarchy)(nil).Class())
 	Namespace.Add((*MapIndex)(nil).Class())
@@ -33,6 +34,7 @@ var (
 	binaryIDCapture    = binary.ID{0x0e, 0x9b, 0xe3, 0x62, 0x7b, 0x67, 0x5b, 0xe0, 0x44, 0x7b, 0x7b, 0x21, 0xa1, 0x50, 0x6d, 0x1b, 0xfb, 0xc7, 0x47, 0xe6}
 	binaryIDAtoms      = binary.ID{0x17, 0x6b, 0x7c, 0x08, 0xc2, 0x36, 0x2c, 0xe3, 0x1b, 0x17, 0xd5, 0x3a, 0x0a, 0x98, 0x5b, 0x76, 0xc5, 0x1d, 0x01, 0xa7}
 	binaryIDAtom       = binary.ID{0x58, 0x11, 0xbe, 0x6d, 0xfc, 0xe2, 0xe0, 0x12, 0x6c, 0x42, 0x55, 0x2d, 0xf3, 0x5e, 0x11, 0x1a, 0xc1, 0x6b, 0xfe, 0x3b}
+	binaryIDDevice     = binary.ID{0xe6, 0xca, 0x6e, 0x0d, 0xa7, 0xca, 0xb0, 0xcb, 0xd5, 0x9e, 0x18, 0xa1, 0xcb, 0x83, 0xc8, 0x93, 0xef, 0xec, 0x12, 0xc0}
 	binaryIDField      = binary.ID{0xd2, 0x4f, 0x7f, 0x64, 0xec, 0x81, 0x92, 0x06, 0x6c, 0x25, 0x60, 0xfa, 0x5a, 0x0b, 0x9c, 0x6e, 0x73, 0xf7, 0x4b, 0x4c}
 	binaryIDHierarchy  = binary.ID{0x9f, 0x69, 0x5b, 0x87, 0x7f, 0x8b, 0x5c, 0xa3, 0xaa, 0x9d, 0xb4, 0x6e, 0xa9, 0x39, 0x2f, 0xd5, 0x77, 0x92, 0x8a, 0xad}
 	binaryIDMapIndex   = binary.ID{0x0d, 0x46, 0x56, 0xf3, 0x1d, 0xba, 0xf9, 0xd8, 0x5e, 0xcf, 0xcc, 0x0e, 0x84, 0x93, 0x38, 0x5b, 0xbb, 0xd2, 0xec, 0xde}
@@ -276,6 +278,55 @@ var schemaAtom = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Atoms", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atoms", ID: (*Atoms)(nil).Class().ID()}}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
+
+type binaryClassDevice struct{}
+
+func (*Device) Class() binary.Class {
+	return (*binaryClassDevice)(nil)
+}
+func doEncodeDevice(e binary.Encoder, o *Device) error {
+	if err := e.ID(o.ID); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeDevice(d binary.Decoder, o *Device) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipDevice(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassDevice) ID() binary.ID      { return binaryIDDevice }
+func (*binaryClassDevice) New() binary.Object { return &Device{} }
+func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeDevice(e, obj.(*Device))
+}
+func (*binaryClassDevice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Device{}
+	return obj, doDecodeDevice(d, obj)
+}
+func (*binaryClassDevice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeDevice(d, obj.(*Device))
+}
+func (*binaryClassDevice) Skip(d binary.Decoder) error { return doSkipDevice(d) }
+func (*binaryClassDevice) Schema() *schema.Class       { return schemaDevice }
+
+var schemaDevice = &schema.Class{
+	TypeID:  binaryIDDevice,
+	Package: "path",
+	Name:    "Device",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
