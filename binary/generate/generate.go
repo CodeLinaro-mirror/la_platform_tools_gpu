@@ -38,17 +38,10 @@ const (
 	memberPrefix = "∍"
 )
 
-type Style struct {
-	ClassPrefix  string
-	MemberPrefix string
-	Indent       string
-}
-
 type Imports map[string]struct{}
 
 type File struct {
-	Copyright  string
-	Package    string
+	Name       string
 	Import     string
 	IsTest     bool
 	Path       string
@@ -56,7 +49,6 @@ type File struct {
 	Structs    []*Struct
 	Constants  schema.Constants
 	Imports    Imports
-	Style
 }
 
 // Struct is a description of an encodable struct.
