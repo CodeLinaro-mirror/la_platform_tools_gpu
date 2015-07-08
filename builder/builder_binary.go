@@ -48,7 +48,7 @@ var (
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
 	binaryIDGetMemoryInfo                   = binary.ID{0xf0, 0x9e, 0x21, 0x69, 0x43, 0xaf, 0xf8, 0xdb, 0x59, 0x80, 0xa0, 0x33, 0x66, 0xda, 0xd9, 0xae, 0xdf, 0x5a, 0x0a, 0x10}
 	binaryIDGetState                        = binary.ID{0xe4, 0x56, 0xeb, 0x40, 0x7b, 0x2d, 0x6e, 0xc6, 0xb4, 0x8b, 0x8f, 0x00, 0x1f, 0xdb, 0xb2, 0x6f, 0xea, 0x28, 0x5a, 0x80}
-	binaryIDGetTimingInfo                   = binary.ID{0x5c, 0x6c, 0xbc, 0xb3, 0x96, 0x1a, 0xbc, 0x36, 0x47, 0x08, 0x2f, 0x6c, 0x34, 0x93, 0xfc, 0x4b, 0x62, 0xea, 0xa3, 0xc2}
+	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
 	binaryIDPrerenderFramebuffers           = binary.ID{0xa2, 0x94, 0x36, 0x9d, 0xcb, 0x28, 0x7f, 0x54, 0xee, 0xb1, 0xac, 0x44, 0xe7, 0x45, 0x02, 0x19, 0x3a, 0x84, 0xe8, 0x5b}
 	binaryIDRenderFramebufferColor          = binary.ID{0xd0, 0x7e, 0x58, 0xd4, 0xf5, 0xd8, 0x9f, 0x1d, 0xe4, 0xb5, 0xfe, 0x9d, 0xe6, 0x9c, 0xe4, 0x5c, 0xef, 0x0b, 0xfc, 0x71}
 	binaryIDRenderFramebufferDepth          = binary.ID{0x92, 0xb5, 0x88, 0x2a, 0x1a, 0x6f, 0xa1, 0x3c, 0xff, 0x7a, 0x90, 0xb3, 0x21, 0xa9, 0xe0, 0x67, 0xf4, 0x2c, 0x9e, 0x82}
@@ -632,10 +632,18 @@ func (*GetTimingInfo) Class() binary.Class {
 	return (*binaryClassGetTimingInfo)(nil)
 }
 func doEncodeGetTimingInfo(e binary.Encoder, o *GetTimingInfo) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.Flags)); err != nil {
@@ -644,11 +652,19 @@ func doEncodeGetTimingInfo(e binary.Encoder, o *GetTimingInfo) error {
 	return nil
 }
 func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
+	} else {
+		o.Device = nil
 	}
-	if err := d.Value(&o.Capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Capture = obj.(*path.Capture)
+	} else {
+		o.Capture = nil
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -658,10 +674,10 @@ func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) error {
 	return nil
 }
 func doSkipGetTimingInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -689,8 +705,8 @@ var schemaGetTimingInfo = &schema.Class{
 	Package: "builder",
 	Name:    "GetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 		{Declared: "Flags", Type: &schema.Primitive{Name: "service.TimingFlags", Method: schema.Int32}},
 	},
 }

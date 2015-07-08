@@ -65,9 +65,9 @@ extern ImageInfoId GetFramebufferDepth(path.Device* device,
 // GetTimingInfo performs timings of the given capture on the given device,
 // returning an identifier to the results.
 // This function is experimental and will change signature.
-extern TimingInfoId GetTimingInfo(DeviceId    device,
-                                  CaptureId   capture,
-                                  TimingFlags flags)
+extern TimingInfoId GetTimingInfo(path.Device*  device,
+                                  path.Capture* capture,
+                                  TimingFlags   flags)
 
 // PrerenderFramebuffers renders the framebuffer contents after each of the
 // given atoms of interest in the given capture on the given device for the

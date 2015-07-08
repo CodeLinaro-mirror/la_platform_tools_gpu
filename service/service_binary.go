@@ -109,7 +109,7 @@ var (
 	binaryIDcallGetFramebufferDepth     = binary.ID{0x96, 0x26, 0xb8, 0x24, 0x39, 0x5b, 0xc4, 0x53, 0xd4, 0xfd, 0x0d, 0xa3, 0x54, 0xbc, 0xfa, 0x78, 0xaf, 0xd2, 0xf6, 0x9d}
 	binaryIDcallGetMemoryInfo           = binary.ID{0x8b, 0x23, 0xd7, 0xa0, 0x04, 0x26, 0x5a, 0x0a, 0x1d, 0xa9, 0xb3, 0x14, 0x32, 0x79, 0x7c, 0x0e, 0x82, 0x93, 0x3c, 0x83}
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
-	binaryIDcallGetTimingInfo           = binary.ID{0x3b, 0x23, 0x58, 0xe4, 0x55, 0xf0, 0x74, 0x6a, 0xc6, 0x9b, 0xfb, 0xb4, 0xc2, 0x6c, 0x15, 0x21, 0x55, 0x77, 0x49, 0x1f}
+	binaryIDcallGetTimingInfo           = binary.ID{0x00, 0xed, 0x86, 0x08, 0xac, 0xd7, 0xd9, 0x7d, 0x3f, 0xf4, 0x38, 0xf4, 0xb3, 0xde, 0xc8, 0x9b, 0xd6, 0xc9, 0xc2, 0xb0}
 	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
 	binaryIDcallPrerenderFramebuffers   = binary.ID{0x93, 0x15, 0x52, 0x63, 0x96, 0x8d, 0xb2, 0xd8, 0x50, 0xc8, 0x70, 0x21, 0xf5, 0x19, 0x96, 0x38, 0x9c, 0x37, 0x2e, 0xa2}
 	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
@@ -2087,10 +2087,18 @@ func (*callGetTimingInfo) Class() binary.Class {
 	return (*binaryClasscallGetTimingInfo)(nil)
 }
 func doEncodecallGetTimingInfo(e binary.Encoder, o *callGetTimingInfo) error {
-	if err := e.Value(&o.device); err != nil {
+	if o.device != nil {
+		if err := e.Object(o.device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.capture); err != nil {
+	if o.capture != nil {
+		if err := e.Object(o.capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.flags)); err != nil {
@@ -2099,11 +2107,19 @@ func doEncodecallGetTimingInfo(e binary.Encoder, o *callGetTimingInfo) error {
 	return nil
 }
 func doDecodecallGetTimingInfo(d binary.Decoder, o *callGetTimingInfo) error {
-	if err := d.Value(&o.device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.device = obj.(*path.Device)
+	} else {
+		o.device = nil
 	}
-	if err := d.Value(&o.capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.capture = obj.(*path.Capture)
+	} else {
+		o.capture = nil
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -2113,10 +2129,10 @@ func doDecodecallGetTimingInfo(d binary.Decoder, o *callGetTimingInfo) error {
 	return nil
 }
 func doSkipcallGetTimingInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -2144,8 +2160,8 @@ var schemacallGetTimingInfo = &schema.Class{
 	Package: "service",
 	Name:    "callGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "device", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 		{Declared: "flags", Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32}},
 	},
 }
