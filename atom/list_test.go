@@ -15,65 +15,17 @@
 package atom_test
 
 import (
-	"bytes"
 	"reflect"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/test"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
-	"android.googlesource.com/platform/tools/gpu/binary/objects"
-	bt "android.googlesource.com/platform/tools/gpu/binary/test"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 var testList = atom.List{
 	&test.AtomA{},
 	&test.AtomB{Bool: true},
 	&test.AtomC{String: "Pizza"},
-}
-
-var testData = bt.Bytes{}.Add(
-	0x03, // Atom 0: object sid + encoded
-	0x03, // Atom 0: type sid + encoded
-).ID(test.AtomAID).Add(
-	0x00, // Atom 0: Id
-	0x00, // Atom 0: Flags
-	0x05, // Atom 1: object sid + encoded
-	0x05, // Atom 1: sid + encoded
-).ID(test.AtomBID).Add(
-	0x00, // Atom 1: Id
-	0x01, // Atom 1: Bool
-	0x07, // Atom 2: object sid + encoded
-	0x07, // Atom 2: sid + encoded
-).ID(test.AtomCID).Add(
-	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: String
-	0x09, // Terminator: object sid + encoded
-	0x09, // Terminator: sid + encoded
-).ID(objects.TerminatorID).Data
-
-func TestAtomListEncode(t *testing.T) {
-	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	err := testList.Encode(enc)
-	if err != nil {
-		t.Errorf("Encode returned unexpected error: %v", err)
-	}
-	got := buf.Bytes()
-	if !bytes.Equal(testData, got) {
-		t.Errorf("Encoded data was not as expected.\nExpected: % x\nGot:      % x", testData, got)
-	}
-}
-
-func TestAtomListDecode(t *testing.T) {
-	list := atom.List{}
-	err := list.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(testData))))
-	if err != nil {
-		t.Errorf("Decode returned unexpected error: %v", err)
-	}
-	if !reflect.DeepEqual(testList, list) {
-		t.Errorf("Decoded list was not as expected.\nExpected: %#v\nGot:      %#v", testList, list)
-	}
 }
 
 type writeRecord struct {

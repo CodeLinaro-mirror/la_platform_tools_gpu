@@ -16,6 +16,7 @@ package server
 
 import (
 	"bytes"
+	"io"
 	"net"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -77,12 +78,20 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
 func (s rpcServer) Import(name string, data []uint8, l log.Logger) (service.CaptureId, error) {
-	atoms := atom.List{}
-	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
-		if len(atoms) == 0 {
-			return service.CaptureId{}, err
+	atoms := []atom.Atom{}
+	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
+	for {
+		if obj, err := d.Object(); err != nil {
+			if err != io.EOF {
+				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
+			}
+			break
+		} else {
+			atoms = append(atoms, obj.(atom.Atom))
 		}
-		log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
+	}
+	if len(atoms) == 0 {
+		return service.CaptureId{}, nil
 	}
 	id, err := builder.ImportCapture(name, atoms, s.Database, l)
 	if err != nil {
