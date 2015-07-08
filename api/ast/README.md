@@ -71,6 +71,8 @@ const (
 	OpMinus         = "-"
 	OpMultiply      = "*"
 	OpDivide        = "/"
+	OpBitwiseAnd    = "&"
+	OpBitwiseOr     = "|"
 	OpRange         = ".."
 	OpNot           = "!"
 	OpIn            = "in"

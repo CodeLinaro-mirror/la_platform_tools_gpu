@@ -284,22 +284,6 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
-    class BufferId__CP: public Encodable {
-    public:
-        BufferId__CP() = default;
-        BufferId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd9, 0x59, 0x3a, 0xd1, 0xe3, 0x0d, 0x2d, 0x5f, 0x0e, 0x00, 0x47, 0x8b, 0x45, 0x32, 0xa1, 0xb5, 0x13, 0x61, 0xee, 0xc7,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class CGLContextObj: public Encodable {
     public:
         CGLContextObj() = default;
@@ -658,29 +642,13 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
-    class Char__CP: public Encodable {
+    class Char__P__S: public Encodable {
     public:
-        Char__CP() = default;
-        Char__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x2e, 0xef, 0xb8, 0xbf, 0x40, 0x55, 0x00, 0x64, 0x5c, 0x15, 0x06, 0x9e, 0xe1, 0xe7, 0x11, 0x1c, 0x44, 0x8b, 0xbb, 0x0e,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
-    class Char__CP__S: public Encodable {
-    public:
-        Char__CP__S() = default;
-        Char__CP__S(SliceInfo SliceInfo) :
+        Char__P__S() = default;
+        Char__P__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7a, 0x7a, 0x13, 0x34, 0x19, 0x2a, 0xf5, 0x79, 0xb5, 0xb9, 0x4b, 0x9d, 0x15, 0xe0, 0x3f, 0x89, 0x76, 0x05, 0x04, 0x1a,  } };
+            static gapic::Id ID{ { 0x5e, 0x23, 0xd9, 0xba, 0xac, 0xf5, 0x87, 0x07, 0xb1, 0xef, 0x52, 0x7a, 0x95, 0xfb, 0x13, 0xec, 0x0b, 0x2e, 0x61, 0xf7,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -690,29 +658,13 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
-    class Char__CP__P: public Encodable {
+    class Char__P__CP: public Encodable {
     public:
-        Char__CP__P() = default;
-        Char__CP__P(memory::Pointer Pointer) :
+        Char__P__CP() = default;
+        Char__P__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x80, 0x86, 0x18, 0xa5, 0x6b, 0xb5, 0x77, 0xe0, 0x87, 0x70, 0xbe, 0x1d, 0xb3, 0x51, 0x70, 0x7b, 0x63, 0xf7, 0x66, 0x0a,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
-    class Char__CP__CP: public Encodable {
-    public:
-        Char__CP__CP() = default;
-        Char__CP__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xee, 0x02, 0x3f, 0x29, 0xac, 0x36, 0xe2, 0xdd, 0xb9, 0x07, 0xbf, 0xb2, 0x3c, 0xac, 0x09, 0x03, 0x21, 0xa9, 0x00, 0x5f,  } };
+            static gapic::Id ID{ { 0xe2, 0x24, 0x12, 0x87, 0xfc, 0xfa, 0x86, 0x1a, 0x82, 0xea, 0x33, 0x57, 0x6d, 0x88, 0x63, 0x74, 0x04, 0x98, 0xa5, 0x7e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1584,13 +1536,13 @@ namespace gles {
         int64_t mResult;
     };
 
-    class Void__P: public Encodable {
+    class Void__CP: public Encodable {
     public:
-        Void__P() = default;
-        Void__P(memory::Pointer Pointer) :
+        Void__CP() = default;
+        Void__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf5, 0x56, 0xe8, 0x83, 0x38, 0x05, 0x76, 0x2e, 0x30, 0xd0, 0x53, 0x86, 0x4e, 0x09, 0x56, 0xef, 0x44, 0xc8, 0xce, 0xef,  } };
+            static gapic::Id ID{ { 0x39, 0xf4, 0x9d, 0x8a, 0x00, 0x6a, 0x81, 0x37, 0x87, 0x17, 0xac, 0x25, 0x1d, 0xd9, 0x72, 0xb4, 0x88, 0x19, 0x6c, 0x13,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1603,13 +1555,13 @@ namespace gles {
     class EglSwapBuffers: public Encodable {
     public:
         EglSwapBuffers() = default;
-        EglSwapBuffers(atom::Observations observations, EGLDisplay Display, Void__P Surface, int64_t Result) :
+        EglSwapBuffers(atom::Observations observations, EGLDisplay Display, Void__CP Surface, int64_t Result) :
             mobservations(observations),
             mDisplay(Display),
             mSurface(Surface),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x57, 0x1f, 0xe4, 0x1b, 0x20, 0xa1, 0x87, 0x17, 0x6c, 0x31, 0x05, 0x59, 0x10, 0x83, 0xb5, 0x3a, 0xb0, 0xa9, 0x3c, 0x39,  } };
+            static gapic::Id ID{ { 0xcd, 0x37, 0x00, 0x3c, 0x2b, 0x1d, 0x42, 0xcf, 0x59, 0xc3, 0x3f, 0x61, 0xb0, 0xe2, 0x4c, 0xe5, 0x9e, 0xdb, 0x14, 0xab,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1621,7 +1573,7 @@ namespace gles {
 
         atom::Observations mobservations;
         EGLDisplay mDisplay;
-        Void__P mSurface;
+        Void__CP mSurface;
         int64_t mResult;
     };
 
@@ -1698,22 +1650,6 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
-    class F32__P: public Encodable {
-    public:
-        F32__P() = default;
-        F32__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xad, 0x4f, 0xbe, 0xc7, 0x2f, 0xaa, 0x43, 0x22, 0x03, 0xf7, 0x2a, 0xcb, 0xe1, 0x40, 0xc2, 0x9a, 0x7f, 0xae, 0x22, 0xd3,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class F32__CP: public Encodable {
     public:
         F32__CP() = default;
@@ -1778,22 +1714,6 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
-    class FramebufferAttachment__P: public Encodable {
-    public:
-        FramebufferAttachment__P() = default;
-        FramebufferAttachment__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x1a, 0x5e, 0x91, 0xc8, 0x94, 0x7c, 0x32, 0x00, 0x6b, 0xe6, 0x9a, 0xb5, 0x4d, 0xd0, 0x33, 0x12, 0x00, 0x60, 0x34, 0x6d,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class FramebufferAttachment__CP: public Encodable {
     public:
         FramebufferAttachment__CP() = default;
@@ -1833,22 +1753,6 @@ namespace gles {
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
             static gapic::Id ID{ { 0xa8, 0x8f, 0xf4, 0xfd, 0x2d, 0xaa, 0xd4, 0x59, 0x93, 0x48, 0xe6, 0xd8, 0x5d, 0x6b, 0xe8, 0x99, 0x72, 0xfa, 0xac, 0xec,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
-    class FramebufferId__CP: public Encodable {
-    public:
-        FramebufferId__CP() = default;
-        FramebufferId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8c, 0xa3, 0xf6, 0xdf, 0xc9, 0x8e, 0x08, 0xea, 0x92, 0x56, 0x02, 0x6e, 0x96, 0x2c, 0x3c, 0xdc, 0x63, 0x7b, 0x3b, 0x50,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2796,12 +2700,12 @@ namespace gles {
     class GlDeleteBuffers: public Encodable {
     public:
         GlDeleteBuffers() = default;
-        GlDeleteBuffers(atom::Observations observations, int32_t Count, BufferId__CP Buffers) :
+        GlDeleteBuffers(atom::Observations observations, int32_t Count, BufferId__P Buffers) :
             mobservations(observations),
             mCount(Count),
             mBuffers(Buffers) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xca, 0xca, 0x15, 0xc4, 0x58, 0x31, 0xc2, 0x68, 0x53, 0x5e, 0x32, 0x8e, 0x2e, 0x2a, 0xd5, 0xcf, 0x8c, 0x17, 0xae, 0x9b,  } };
+            static gapic::Id ID{ { 0x8f, 0xe2, 0xcc, 0x25, 0x5b, 0xe5, 0xab, 0xa7, 0x6b, 0x93, 0x97, 0x50, 0xd3, 0x52, 0xd4, 0x71, 0x2d, 0x14, 0xb1, 0xc8,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2812,18 +2716,18 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        BufferId__CP mBuffers;
+        BufferId__P mBuffers;
     };
 
     class GlDeleteFramebuffers: public Encodable {
     public:
         GlDeleteFramebuffers() = default;
-        GlDeleteFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__CP Framebuffers) :
+        GlDeleteFramebuffers(atom::Observations observations, int32_t Count, FramebufferId__P Framebuffers) :
             mobservations(observations),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x20, 0xf9, 0xa2, 0xd4, 0x33, 0x28, 0xdc, 0x8e, 0xbc, 0x00, 0x5a, 0x99, 0xa4, 0x13, 0xce, 0x1a, 0x45, 0x90, 0x49, 0x8c,  } };
+            static gapic::Id ID{ { 0x0c, 0x58, 0x2e, 0x54, 0x3d, 0x02, 0x09, 0xe4, 0xbc, 0x40, 0x03, 0x55, 0x92, 0x74, 0x8c, 0xab, 0x0b, 0x29, 0x12, 0x09,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2834,7 +2738,7 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        FramebufferId__CP mFramebuffers;
+        FramebufferId__P mFramebuffers;
     };
 
     class GlDeleteProgram: public Encodable {
@@ -2856,13 +2760,13 @@ namespace gles {
         uint32_t mProgram;
     };
 
-    class QueryId__CP: public Encodable {
+    class QueryId__P: public Encodable {
     public:
-        QueryId__CP() = default;
-        QueryId__CP(memory::Pointer Pointer) :
+        QueryId__P() = default;
+        QueryId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x64, 0x17, 0xe9, 0xaf, 0xe7, 0x7b, 0xd7, 0xf0, 0x34, 0xd2, 0x9e, 0xf1, 0x28, 0xfe, 0x14, 0x86, 0x26, 0x11, 0xc5, 0x3d,  } };
+            static gapic::Id ID{ { 0xeb, 0x17, 0x82, 0xad, 0x2a, 0x8d, 0x90, 0x53, 0x42, 0x82, 0x61, 0x49, 0x70, 0xb2, 0xde, 0x5e, 0x4a, 0xce, 0x10, 0x9a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2875,12 +2779,12 @@ namespace gles {
     class GlDeleteQueries: public Encodable {
     public:
         GlDeleteQueries() = default;
-        GlDeleteQueries(atom::Observations observations, int32_t Count, QueryId__CP Queries) :
+        GlDeleteQueries(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x06, 0x03, 0xdb, 0x99, 0x84, 0x05, 0xc6, 0x48, 0xec, 0xab, 0xdc, 0x35, 0xe8, 0x7b, 0xf7, 0x4d, 0x9b, 0xa8, 0x19, 0x54,  } };
+            static gapic::Id ID{ { 0xef, 0x66, 0xdb, 0x46, 0x91, 0x9a, 0x79, 0x40, 0x07, 0x4b, 0x18, 0x38, 0x4c, 0x3f, 0x5f, 0x36, 0x65, 0x6b, 0x86, 0x6f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2891,18 +2795,18 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        QueryId__CP mQueries;
+        QueryId__P mQueries;
     };
 
     class GlDeleteQueriesEXT: public Encodable {
     public:
         GlDeleteQueriesEXT() = default;
-        GlDeleteQueriesEXT(atom::Observations observations, int32_t Count, QueryId__CP Queries) :
+        GlDeleteQueriesEXT(atom::Observations observations, int32_t Count, QueryId__P Queries) :
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8c, 0x5b, 0xaf, 0xff, 0x08, 0x37, 0x43, 0x7e, 0xad, 0x45, 0xd3, 0x3d, 0x8e, 0x30, 0x7e, 0x6d, 0xe8, 0x30, 0xe0, 0x8a,  } };
+            static gapic::Id ID{ { 0xc1, 0xba, 0x04, 0x28, 0x00, 0x4f, 0x7f, 0x73, 0xae, 0x18, 0x11, 0x19, 0x70, 0xd0, 0xe4, 0xc9, 0x2e, 0x01, 0x80, 0xfa,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2913,16 +2817,16 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        QueryId__CP mQueries;
+        QueryId__P mQueries;
     };
 
-    class RenderbufferId__CP: public Encodable {
+    class RenderbufferId__P: public Encodable {
     public:
-        RenderbufferId__CP() = default;
-        RenderbufferId__CP(memory::Pointer Pointer) :
+        RenderbufferId__P() = default;
+        RenderbufferId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8b, 0x29, 0xe6, 0x5c, 0xdc, 0xee, 0x14, 0x3d, 0x3b, 0x65, 0xd8, 0xdc, 0x4b, 0x61, 0x39, 0x38, 0x8d, 0xbb, 0x2d, 0x10,  } };
+            static gapic::Id ID{ { 0x27, 0x87, 0x17, 0xca, 0xd8, 0x49, 0x08, 0x71, 0xe9, 0xc6, 0x9c, 0x0e, 0x51, 0x5a, 0x23, 0x8c, 0xc5, 0x2a, 0xdd, 0x2e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2935,12 +2839,12 @@ namespace gles {
     class GlDeleteRenderbuffers: public Encodable {
     public:
         GlDeleteRenderbuffers() = default;
-        GlDeleteRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__CP Renderbuffers) :
+        GlDeleteRenderbuffers(atom::Observations observations, int32_t Count, RenderbufferId__P Renderbuffers) :
             mobservations(observations),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x27, 0xdd, 0x64, 0xbe, 0x08, 0x13, 0xf4, 0x4c, 0x60, 0x73, 0x38, 0x14, 0xa3, 0xef, 0x38, 0x5b, 0xcf, 0x09, 0xd9, 0xb0,  } };
+            static gapic::Id ID{ { 0xc7, 0x91, 0x63, 0x48, 0xf4, 0xe3, 0xea, 0x86, 0x4b, 0x3c, 0x40, 0x44, 0x6c, 0x5d, 0x8c, 0x87, 0xb9, 0x7d, 0x26, 0x4b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -2951,7 +2855,7 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        RenderbufferId__CP mRenderbuffers;
+        RenderbufferId__P mRenderbuffers;
     };
 
     class GlDeleteShader: public Encodable {
@@ -2992,13 +2896,13 @@ namespace gles {
         uint64_t mSync;
     };
 
-    class TextureId__CP: public Encodable {
+    class TextureId__P: public Encodable {
     public:
-        TextureId__CP() = default;
-        TextureId__CP(memory::Pointer Pointer) :
+        TextureId__P() = default;
+        TextureId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x90, 0x1b, 0x3e, 0xde, 0xc7, 0xbd, 0xcf, 0x9c, 0x02, 0x13, 0xc3, 0x13, 0x48, 0x1d, 0xa5, 0x17, 0xc2, 0xb3, 0x04, 0x24,  } };
+            static gapic::Id ID{ { 0x6c, 0x3c, 0x90, 0x11, 0x71, 0x98, 0x36, 0xdd, 0xc8, 0x9c, 0x08, 0xf7, 0x80, 0x31, 0x56, 0x36, 0x6e, 0xd7, 0x68, 0x6b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3011,12 +2915,12 @@ namespace gles {
     class GlDeleteTextures: public Encodable {
     public:
         GlDeleteTextures() = default;
-        GlDeleteTextures(atom::Observations observations, int32_t Count, TextureId__CP Textures) :
+        GlDeleteTextures(atom::Observations observations, int32_t Count, TextureId__P Textures) :
             mobservations(observations),
             mCount(Count),
             mTextures(Textures) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xb7, 0xa2, 0x7c, 0x69, 0x6c, 0x48, 0x0c, 0xf3, 0xf7, 0xc7, 0x3a, 0xc4, 0x27, 0x0b, 0xf7, 0xfb, 0xd5, 0x98, 0x75, 0x74,  } };
+            static gapic::Id ID{ { 0x8e, 0x87, 0xbe, 0x83, 0xfc, 0x68, 0xab, 0x65, 0x39, 0x6d, 0x29, 0xe8, 0x91, 0x0a, 0xb4, 0x3b, 0x72, 0x6b, 0x87, 0xdc,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3027,16 +2931,16 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        TextureId__CP mTextures;
+        TextureId__P mTextures;
     };
 
-    class VertexArrayId__CP: public Encodable {
+    class VertexArrayId__P: public Encodable {
     public:
-        VertexArrayId__CP() = default;
-        VertexArrayId__CP(memory::Pointer Pointer) :
+        VertexArrayId__P() = default;
+        VertexArrayId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xff, 0x46, 0x4e, 0xb5, 0x6a, 0xae, 0xa6, 0x74, 0x6e, 0x2e, 0x3c, 0x2e, 0x8b, 0x0a, 0x0d, 0xde, 0x56, 0xdd, 0x2a, 0x13,  } };
+            static gapic::Id ID{ { 0x06, 0x33, 0x83, 0xad, 0xcf, 0x1c, 0x8f, 0x00, 0x5d, 0x52, 0x0a, 0xc4, 0x29, 0xca, 0xe3, 0x06, 0x6a, 0x5e, 0x71, 0x5f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3049,12 +2953,12 @@ namespace gles {
     class GlDeleteVertexArrays: public Encodable {
     public:
         GlDeleteVertexArrays() = default;
-        GlDeleteVertexArrays(atom::Observations observations, uint32_t Count, VertexArrayId__CP Arrays) :
+        GlDeleteVertexArrays(atom::Observations observations, uint32_t Count, VertexArrayId__P Arrays) :
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe9, 0xeb, 0x4b, 0xa7, 0xf5, 0xbe, 0x2c, 0xdd, 0x93, 0x0c, 0xe8, 0x52, 0xda, 0xbd, 0x6c, 0x8a, 0x14, 0xe8, 0x84, 0x5e,  } };
+            static gapic::Id ID{ { 0xf1, 0xb1, 0xd2, 0x4e, 0x22, 0xf5, 0x6b, 0x07, 0xf7, 0x2b, 0x4d, 0xa2, 0xe1, 0x7f, 0x9d, 0xf0, 0xeb, 0x79, 0xa9, 0x07,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3065,18 +2969,18 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mCount;
-        VertexArrayId__CP mArrays;
+        VertexArrayId__P mArrays;
     };
 
     class GlDeleteVertexArraysOES: public Encodable {
     public:
         GlDeleteVertexArraysOES() = default;
-        GlDeleteVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__CP Arrays) :
+        GlDeleteVertexArraysOES(atom::Observations observations, int32_t Count, VertexArrayId__P Arrays) :
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x74, 0xf6, 0xd1, 0x4e, 0xcb, 0x6c, 0x3e, 0x9c, 0x2d, 0xef, 0xa8, 0x65, 0x75, 0x19, 0x4a, 0x2b, 0x56, 0x66, 0x35, 0x59,  } };
+            static gapic::Id ID{ { 0xb6, 0xb4, 0x59, 0xf8, 0x46, 0x00, 0x47, 0x2c, 0x12, 0xa7, 0x1a, 0xfe, 0xee, 0xd4, 0xa6, 0x1a, 0xfc, 0x47, 0xef, 0x0c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3087,7 +2991,7 @@ namespace gles {
 
         atom::Observations mobservations;
         int32_t mCount;
-        VertexArrayId__CP mArrays;
+        VertexArrayId__P mArrays;
     };
 
     class GlDepthFunc: public Encodable {
@@ -3676,22 +3580,6 @@ namespace gles {
         FramebufferId__P mFramebuffers;
     };
 
-    class QueryId__P: public Encodable {
-    public:
-        QueryId__P() = default;
-        QueryId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xeb, 0x17, 0x82, 0xad, 0x2a, 0x8d, 0x90, 0x53, 0x42, 0x82, 0x61, 0x49, 0x70, 0xb2, 0xde, 0x5e, 0x4a, 0xce, 0x10, 0x9a,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class GlGenQueries: public Encodable {
     public:
         GlGenQueries() = default;
@@ -3736,22 +3624,6 @@ namespace gles {
         QueryId__P mQueries;
     };
 
-    class RenderbufferId__P: public Encodable {
-    public:
-        RenderbufferId__P() = default;
-        RenderbufferId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x27, 0x87, 0x17, 0xca, 0xd8, 0x49, 0x08, 0x71, 0xe9, 0xc6, 0x9c, 0x0e, 0x51, 0x5a, 0x23, 0x8c, 0xc5, 0x2a, 0xdd, 0x2e,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class GlGenRenderbuffers: public Encodable {
     public:
         GlGenRenderbuffers() = default;
@@ -3774,22 +3646,6 @@ namespace gles {
         RenderbufferId__P mRenderbuffers;
     };
 
-    class TextureId__P: public Encodable {
-    public:
-        TextureId__P() = default;
-        TextureId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6c, 0x3c, 0x90, 0x11, 0x71, 0x98, 0x36, 0xdd, 0xc8, 0x9c, 0x08, 0xf7, 0x80, 0x31, 0x56, 0x36, 0x6e, 0xd7, 0x68, 0x6b,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class GlGenTextures: public Encodable {
     public:
         GlGenTextures() = default;
@@ -3810,22 +3666,6 @@ namespace gles {
         atom::Observations mobservations;
         int32_t mCount;
         TextureId__P mTextures;
-    };
-
-    class VertexArrayId__P: public Encodable {
-    public:
-        VertexArrayId__P() = default;
-        VertexArrayId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x06, 0x33, 0x83, 0xad, 0xcf, 0x1c, 0x8f, 0x00, 0x5d, 0x52, 0x0a, 0xc4, 0x29, 0xca, 0xe3, 0x06, 0x6a, 0x5e, 0x71, 0x5f,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
     };
 
     class GlGenVertexArrays: public Encodable {
@@ -4119,13 +3959,13 @@ namespace gles {
         S32__P mParameters;
     };
 
-    class ShaderId__P: public Encodable {
+    class ShaderId__CP: public Encodable {
     public:
-        ShaderId__P() = default;
-        ShaderId__P(memory::Pointer Pointer) :
+        ShaderId__CP() = default;
+        ShaderId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x08, 0x71, 0x0c, 0xb0, 0x87, 0xa9, 0x21, 0x1b, 0xe0, 0x32, 0x0c, 0x9f, 0x24, 0xe3, 0xfb, 0x8e, 0xd5, 0x60, 0x80, 0x1d,  } };
+            static gapic::Id ID{ { 0xa8, 0xd0, 0xe6, 0x52, 0xb7, 0x1b, 0xa4, 0xd0, 0xa9, 0x83, 0x04, 0x34, 0x15, 0x15, 0x04, 0x58, 0x1f, 0x94, 0x75, 0x23,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4138,14 +3978,14 @@ namespace gles {
     class GlGetAttachedShaders: public Encodable {
     public:
         GlGetAttachedShaders() = default;
-        GlGetAttachedShaders(atom::Observations observations, uint32_t Program, int32_t BufferLength, S32__P ShadersLengthWritten, ShaderId__P Shaders) :
+        GlGetAttachedShaders(atom::Observations observations, uint32_t Program, int32_t BufferLength, S32__P ShadersLengthWritten, ShaderId__CP Shaders) :
             mobservations(observations),
             mProgram(Program),
             mBufferLength(BufferLength),
             mShadersLengthWritten(ShadersLengthWritten),
             mShaders(Shaders) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc3, 0xf9, 0x1d, 0xd0, 0xcc, 0x89, 0x4c, 0x62, 0xad, 0x92, 0x44, 0x25, 0x6d, 0x63, 0x8b, 0x92, 0x1a, 0x01, 0xeb, 0xb4,  } };
+            static gapic::Id ID{ { 0x25, 0xcb, 0x99, 0x07, 0xf8, 0x2b, 0x85, 0x66, 0x3d, 0xf3, 0xdf, 0xb4, 0xd0, 0x01, 0x59, 0xd8, 0x17, 0x38, 0x0c, 0x5b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4160,7 +4000,7 @@ namespace gles {
         uint32_t mProgram;
         int32_t mBufferLength;
         S32__P mShadersLengthWritten;
-        ShaderId__P mShaders;
+        ShaderId__CP mShaders;
     };
 
     class GlGetAttribLocation: public Encodable {
@@ -4257,12 +4097,12 @@ namespace gles {
     class GlGetFloatv: public Encodable {
     public:
         GlGetFloatv() = default;
-        GlGetFloatv(atom::Observations observations, uint32_t Param, F32__P Values) :
+        GlGetFloatv(atom::Observations observations, uint32_t Param, F32__CP Values) :
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x3b, 0xdb, 0xfd, 0xab, 0xa4, 0xad, 0x98, 0xf5, 0x0d, 0x91, 0xdb, 0xe3, 0x45, 0xe3, 0x71, 0xf1, 0x6e, 0xd1, 0x59, 0x11,  } };
+            static gapic::Id ID{ { 0xa6, 0xd0, 0xb1, 0xb9, 0x8a, 0x99, 0x49, 0x9e, 0x3e, 0xd1, 0xef, 0x3f, 0x82, 0xae, 0x26, 0xd3, 0x2c, 0x68, 0x34, 0xe1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4273,7 +4113,7 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mParam;
-        F32__P mValues;
+        F32__CP mValues;
     };
 
     class GlGetFramebufferAttachmentParameteriv: public Encodable {
@@ -4348,7 +4188,7 @@ namespace gles {
     class GlGetProgramBinaryOES: public Encodable {
     public:
         GlGetProgramBinaryOES() = default;
-        GlGetProgramBinaryOES(atom::Observations observations, uint32_t Program, int32_t BufferSize, S32__P BytesWritten, U32__P BinaryFormat, Void__P Binary) :
+        GlGetProgramBinaryOES(atom::Observations observations, uint32_t Program, int32_t BufferSize, S32__P BytesWritten, U32__P BinaryFormat, Void__CP Binary) :
             mobservations(observations),
             mProgram(Program),
             mBufferSize(BufferSize),
@@ -4356,7 +4196,7 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x41, 0xe1, 0x61, 0x7a, 0xa2, 0x17, 0x6f, 0x2f, 0xd4, 0xaf, 0x47, 0x68, 0xce, 0x51, 0x64, 0x3a, 0x97, 0xbb, 0xf3, 0xec,  } };
+            static gapic::Id ID{ { 0x27, 0xd8, 0xa1, 0xc4, 0x49, 0x4a, 0x9a, 0xf9, 0x08, 0xa3, 0x08, 0xba, 0x2e, 0x98, 0x0c, 0xbf, 0x38, 0x4f, 0x1b, 0xf4,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4373,7 +4213,7 @@ namespace gles {
         int32_t mBufferSize;
         S32__P mBytesWritten;
         U32__P mBinaryFormat;
-        Void__P mBinary;
+        Void__CP mBinary;
     };
 
     class GlGetProgramInfoLog: public Encodable {
@@ -4823,12 +4663,12 @@ namespace gles {
     class GlGetString: public Encodable {
     public:
         GlGetString() = default;
-        GlGetString(atom::Observations observations, uint32_t Param, Char__CP Result) :
+        GlGetString(atom::Observations observations, uint32_t Param, Char__P Result) :
             mobservations(observations),
             mParam(Param),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x34, 0xd2, 0x3d, 0x5f, 0xc4, 0x6e, 0x47, 0xee, 0x9c, 0x37, 0xee, 0x7c, 0x92, 0x80, 0x2d, 0x19, 0xdf, 0xbf, 0x2c, 0x06,  } };
+            static gapic::Id ID{ { 0x2e, 0xd5, 0x44, 0x37, 0x45, 0x75, 0x0f, 0x8e, 0xd8, 0xf4, 0x41, 0x59, 0x1e, 0xfc, 0x28, 0x21, 0xa8, 0x8d, 0x44, 0x3a,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4839,7 +4679,7 @@ namespace gles {
 
         atom::Observations mobservations;
         uint32_t mParam;
-        Char__CP mResult;
+        Char__P mResult;
     };
 
     class GlGetTexParameterfv: public Encodable {
@@ -4942,32 +4782,16 @@ namespace gles {
         F32__CP mValues;
     };
 
-    class S32__CP: public Encodable {
-    public:
-        S32__CP() = default;
-        S32__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe5, 0x75, 0xbd, 0x22, 0xa3, 0xcc, 0x6c, 0xc6, 0xf4, 0x71, 0x96, 0xdf, 0xf5, 0xa6, 0x9f, 0x89, 0xc5, 0x79, 0x3a, 0x7a,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class GlGetUniformiv: public Encodable {
     public:
         GlGetUniformiv() = default;
-        GlGetUniformiv(atom::Observations observations, uint32_t Program, int32_t Location, S32__CP Values) :
+        GlGetUniformiv(atom::Observations observations, uint32_t Program, int32_t Location, S32__P Values) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x47, 0xad, 0xe1, 0x62, 0x21, 0xc2, 0xec, 0xf6, 0x68, 0x2c, 0x75, 0xa7, 0x63, 0x3d, 0x82, 0xde, 0xa3, 0x23, 0x92, 0xdb,  } };
+            static gapic::Id ID{ { 0xc8, 0x25, 0x82, 0x99, 0x0a, 0x7f, 0x6c, 0x55, 0x72, 0xd0, 0x79, 0xf9, 0xf7, 0xf3, 0x84, 0xb8, 0xdf, 0x96, 0x8f, 0xef,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -4980,7 +4804,7 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
-        S32__CP mValues;
+        S32__P mValues;
     };
 
     class GlHint: public Encodable {
@@ -5313,7 +5137,7 @@ namespace gles {
     class GlMapBufferRange: public Encodable {
     public:
         GlMapBufferRange() = default;
-        GlMapBufferRange(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
+        GlMapBufferRange(atom::Observations observations, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__CP Result) :
             mobservations(observations),
             mTarget(Target),
             mOffset(Offset),
@@ -5321,7 +5145,7 @@ namespace gles {
             mAccess(Access),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc0, 0x75, 0x4f, 0x53, 0xa9, 0x4a, 0x24, 0x26, 0x84, 0x2f, 0xfb, 0xf0, 0x64, 0xd3, 0xae, 0xb9, 0x5b, 0xe4, 0xc7, 0xd5,  } };
+            static gapic::Id ID{ { 0x91, 0x39, 0x73, 0x10, 0xec, 0x54, 0x1f, 0x12, 0x49, 0x7a, 0x82, 0xbe, 0xe1, 0x6f, 0x4c, 0x3e, 0xc1, 0x8f, 0x01, 0xdf,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -5338,7 +5162,7 @@ namespace gles {
         int32_t mOffset;
         int32_t mLength;
         uint32_t mAccess;
-        Void__P mResult;
+        Void__CP mResult;
     };
 
     class GlPixelStorei: public Encodable {
@@ -5404,14 +5228,14 @@ namespace gles {
     class GlProgramBinaryOES: public Encodable {
     public:
         GlProgramBinaryOES() = default;
-        GlProgramBinaryOES(atom::Observations observations, uint32_t Program, uint32_t BinaryFormat, Void__P Binary, int32_t BinarySize) :
+        GlProgramBinaryOES(atom::Observations observations, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
             mobservations(observations),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
             mBinarySize(BinarySize) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc6, 0x5f, 0x91, 0x9e, 0x1e, 0xfe, 0x8c, 0xfb, 0xdd, 0x3c, 0x9b, 0x02, 0xc6, 0x13, 0xab, 0x58, 0x36, 0xa0, 0xe3, 0x30,  } };
+            static gapic::Id ID{ { 0xa5, 0x3a, 0x9f, 0x23, 0xe1, 0x21, 0xf4, 0x71, 0xce, 0x71, 0x46, 0x99, 0xdc, 0x89, 0x55, 0x7f, 0x31, 0xc4, 0x9a, 0x95,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -5425,7 +5249,7 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mBinaryFormat;
-        Void__P mBinary;
+        Void__CP mBinary;
         int32_t mBinarySize;
     };
 
@@ -5476,7 +5300,7 @@ namespace gles {
     class GlReadPixels: public Encodable {
     public:
         GlReadPixels() = default;
-        GlReadPixels(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__P Data) :
+        GlReadPixels(atom::Observations observations, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__CP Data) :
             mobservations(observations),
             mX(X),
             mY(Y),
@@ -5486,7 +5310,7 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbe, 0x23, 0x91, 0x78, 0x3a, 0xe3, 0xb5, 0x9c, 0xe3, 0x88, 0x3a, 0x59, 0xe5, 0x90, 0x43, 0xb3, 0x79, 0x6b, 0xc3, 0x86,  } };
+            static gapic::Id ID{ { 0x13, 0x6c, 0x2d, 0xc6, 0x9f, 0xdc, 0x91, 0xaf, 0xef, 0x70, 0x72, 0xb0, 0x6f, 0x96, 0x0a, 0x2a, 0x25, 0x43, 0xe5, 0x46,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -5507,7 +5331,7 @@ namespace gles {
         int32_t mHeight;
         uint32_t mFormat;
         uint32_t mType;
-        Void__P mData;
+        Void__CP mData;
     };
 
     class GlReleaseShaderCompiler: public Encodable {
@@ -5635,38 +5459,6 @@ namespace gles {
         int32_t mHeight;
     };
 
-    class ShaderId__CP: public Encodable {
-    public:
-        ShaderId__CP() = default;
-        ShaderId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa8, 0xd0, 0xe6, 0x52, 0xb7, 0x1b, 0xa4, 0xd0, 0xa9, 0x83, 0x04, 0x34, 0x15, 0x15, 0x04, 0x58, 0x1f, 0x94, 0x75, 0x23,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
-    class Void__CP: public Encodable {
-    public:
-        Void__CP() = default;
-        Void__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x39, 0xf4, 0x9d, 0x8a, 0x00, 0x6a, 0x81, 0x37, 0x87, 0x17, 0xac, 0x25, 0x1d, 0xd9, 0x72, 0xb4, 0x88, 0x19, 0x6c, 0x13,  } };
-            return ID;
-        }
-        virtual void Encode(Encoder* e) const {
-            e->Value(this->mPointer);
-        }
-
-        memory::Pointer mPointer;
-    };
-
     class GlShaderBinary: public Encodable {
     public:
         GlShaderBinary() = default;
@@ -5701,14 +5493,14 @@ namespace gles {
     class GlShaderSource: public Encodable {
     public:
         GlShaderSource() = default;
-        GlShaderSource(atom::Observations observations, uint32_t Shader, int32_t Count, Char__CP__CP Source, S32__CP Length) :
+        GlShaderSource(atom::Observations observations, uint32_t Shader, int32_t Count, Char__P__CP Source, S32__P Length) :
             mobservations(observations),
             mShader(Shader),
             mCount(Count),
             mSource(Source),
             mLength(Length) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc9, 0xbb, 0xdb, 0x99, 0x2a, 0xd6, 0x09, 0xe9, 0xcd, 0x6c, 0x72, 0xdc, 0x87, 0x5a, 0x47, 0x9f, 0xb9, 0x09, 0xb1, 0x3f,  } };
+            static gapic::Id ID{ { 0x74, 0x37, 0x30, 0x5c, 0x0c, 0x09, 0x51, 0x8e, 0xae, 0x30, 0xe8, 0xb2, 0xad, 0xf7, 0x9c, 0xf3, 0xd9, 0xa8, 0x36, 0x58,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -5722,8 +5514,8 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mShader;
         int32_t mCount;
-        Char__CP__CP mSource;
-        S32__CP mLength;
+        Char__P__CP mSource;
+        S32__P mLength;
     };
 
     class GlStartTilingQCOM: public Encodable {
@@ -7047,7 +6839,7 @@ namespace gles {
     class GlXCreateContext: public Encodable {
     public:
         GlXCreateContext() = default;
-        GlXCreateContext(atom::Observations observations, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
+        GlXCreateContext(atom::Observations observations, Void__CP Dpy, Void__CP Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
             mobservations(observations),
             mDpy(Dpy),
             mVis(Vis),
@@ -7055,7 +6847,7 @@ namespace gles {
             mDirect(Direct),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x69, 0xd6, 0x87, 0x67, 0x9c, 0x50, 0x4f, 0xe6, 0x49, 0x6b, 0x1a, 0x51, 0x2f, 0xd7, 0x22, 0x72, 0x8e, 0x01, 0xda, 0x6e,  } };
+            static gapic::Id ID{ { 0x8b, 0xd2, 0xa5, 0x53, 0xe0, 0x77, 0x1c, 0xc4, 0x20, 0xa7, 0x49, 0xad, 0x18, 0x94, 0x65, 0xa7, 0x8b, 0x20, 0x76, 0x08,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7068,8 +6860,8 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDpy;
-        Void__P mVis;
+        Void__CP mDpy;
+        Void__CP mVis;
         GLXContext mShareList;
         bool mDirect;
         GLXContext mResult;
@@ -7078,7 +6870,7 @@ namespace gles {
     class GlXCreateNewContext: public Encodable {
     public:
         GlXCreateNewContext() = default;
-        GlXCreateNewContext(atom::Observations observations, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
+        GlXCreateNewContext(atom::Observations observations, Void__CP Display, Void__CP Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
             mobservations(observations),
             mDisplay(Display),
             mFbconfig(Fbconfig),
@@ -7087,7 +6879,7 @@ namespace gles {
             mDirect(Direct),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x84, 0x7e, 0x5e, 0x97, 0x8c, 0x27, 0x99, 0x7b, 0x5e, 0xd5, 0x5f, 0xc8, 0xd5, 0xc1, 0x5e, 0x0c, 0x90, 0x64, 0xf7, 0x43,  } };
+            static gapic::Id ID{ { 0x07, 0x4a, 0x6d, 0xd7, 0x21, 0x17, 0x1f, 0x74, 0xb6, 0xc1, 0x4e, 0x70, 0x2c, 0xff, 0xaa, 0x57, 0x59, 0xcc, 0xf4, 0xe0,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7101,8 +6893,8 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDisplay;
-        Void__P mFbconfig;
+        Void__CP mDisplay;
+        Void__CP mFbconfig;
         uint32_t mType;
         GLXContext mShared;
         bool mDirect;
@@ -7112,7 +6904,7 @@ namespace gles {
     class GlXMakeContextCurrent: public Encodable {
     public:
         GlXMakeContextCurrent() = default;
-        GlXMakeContextCurrent(atom::Observations observations, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
+        GlXMakeContextCurrent(atom::Observations observations, Void__CP Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
             mobservations(observations),
             mDisplay(Display),
             mDraw(Draw),
@@ -7120,7 +6912,7 @@ namespace gles {
             mCtx(Ctx),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x4e, 0x6d, 0x3c, 0x63, 0x7f, 0x49, 0x79, 0x4e, 0x3d, 0xd0, 0xd9, 0x0c, 0xcf, 0x72, 0x94, 0x3f, 0x6b, 0xfd, 0x77, 0xfd,  } };
+            static gapic::Id ID{ { 0x2a, 0x58, 0x3b, 0x2d, 0x78, 0x24, 0x84, 0x84, 0xef, 0x6d, 0xf6, 0xcf, 0xe8, 0x2a, 0xd5, 0xde, 0x9d, 0xaa, 0x31, 0xad,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7133,7 +6925,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDisplay;
+        Void__CP mDisplay;
         GLXDrawable mDraw;
         GLXDrawable mRead;
         GLXContext mCtx;
@@ -7143,14 +6935,14 @@ namespace gles {
     class GlXMakeCurrent: public Encodable {
     public:
         GlXMakeCurrent() = default;
-        GlXMakeCurrent(atom::Observations observations, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
+        GlXMakeCurrent(atom::Observations observations, Void__CP Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
             mobservations(observations),
             mDisplay(Display),
             mDrawable(Drawable),
             mCtx(Ctx),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa6, 0xaf, 0xc1, 0x6f, 0x1c, 0x9b, 0xdb, 0x26, 0x13, 0x0b, 0x75, 0xa3, 0x14, 0xb9, 0x1b, 0x58, 0x37, 0xa6, 0x23, 0xc8,  } };
+            static gapic::Id ID{ { 0xf1, 0x6c, 0xb6, 0xc2, 0x1c, 0x65, 0x09, 0xeb, 0x75, 0xc1, 0x8d, 0xbd, 0xa1, 0xfc, 0x60, 0xee, 0x5f, 0xed, 0x74, 0x8c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7162,7 +6954,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDisplay;
+        Void__CP mDisplay;
         GLXDrawable mDrawable;
         GLXContext mCtx;
         int64_t mResult;
@@ -7187,7 +6979,7 @@ namespace gles {
     class GlXQueryDrawable: public Encodable {
     public:
         GlXQueryDrawable() = default;
-        GlXQueryDrawable(atom::Observations observations, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
+        GlXQueryDrawable(atom::Observations observations, Void__CP Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
             mobservations(observations),
             mDisplay(Display),
             mDraw(Draw),
@@ -7195,7 +6987,7 @@ namespace gles {
             mValue(Value),
             mResult(Result) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x17, 0xd3, 0x19, 0xa4, 0xba, 0x07, 0x32, 0xb5, 0xc2, 0x76, 0xae, 0xde, 0xfe, 0x31, 0x95, 0x07, 0x79, 0xdb, 0xd0, 0xd6,  } };
+            static gapic::Id ID{ { 0xd5, 0x06, 0xcc, 0xdc, 0x2a, 0xf5, 0x81, 0x0c, 0xce, 0xbe, 0x8e, 0xcd, 0xf6, 0xbd, 0x6a, 0xcd, 0xa5, 0x91, 0x3f, 0x66,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7208,7 +7000,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDisplay;
+        Void__CP mDisplay;
         GLXDrawable mDraw;
         int64_t mAttribute;
         Int__P mValue;
@@ -7218,12 +7010,12 @@ namespace gles {
     class GlXSwapBuffers: public Encodable {
     public:
         GlXSwapBuffers() = default;
-        GlXSwapBuffers(atom::Observations observations, Void__P Display, GLXDrawable Drawable) :
+        GlXSwapBuffers(atom::Observations observations, Void__CP Display, GLXDrawable Drawable) :
             mobservations(observations),
             mDisplay(Display),
             mDrawable(Drawable) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6f, 0x6a, 0xec, 0x59, 0x43, 0x85, 0x4a, 0xf5, 0x61, 0xc7, 0xb1, 0x28, 0x6c, 0x34, 0xa5, 0xb8, 0xbd, 0x25, 0x12, 0xc2,  } };
+            static gapic::Id ID{ { 0xc5, 0x76, 0x9c, 0xcc, 0xde, 0x08, 0x11, 0x0d, 0xc2, 0xb9, 0x47, 0x50, 0xaf, 0x96, 0xb7, 0xfb, 0x8f, 0x60, 0x14, 0x6d,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -7233,7 +7025,7 @@ namespace gles {
         }
 
         atom::Observations mobservations;
-        Void__P mDisplay;
+        Void__CP mDisplay;
         GLXDrawable mDrawable;
     };
 
