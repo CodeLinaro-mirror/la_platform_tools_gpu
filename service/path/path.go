@@ -53,17 +53,17 @@ type Value interface {
 	// struct object represented by this path.
 	// The represented value type must be of type struct, otherwise the returned
 	// path is invalid.
-	Field(name string) Value
+	Field(name string) *Field
 
-	// ArrayIndex returns the path to the i'th array element on the array object
+	// ArrayIndex returns the path to the i'th element on the array or slice
 	// represented by this path.
 	// The represented value type must be of type array or slice, otherwise the
 	// returned path is invalid.
-	ArrayIndex(i uint64) Value
+	ArrayIndex(i uint64) *ArrayIndex
 
 	// MapIndex returns the path to the map element with key k on the map object
 	// represented by this path.
 	// The represented value type must be of type map, otherwise the returned path
 	// is invalid.
-	MapIndex(k interface{}) Value
+	MapIndex(k interface{}) *MapIndex
 }
