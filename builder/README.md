@@ -281,8 +281,8 @@ func (*GetState) Class() binary.Class
 ```go
 type GetTimingInfo struct {
 	binary.Generate
-	Device  service.DeviceId
-	Capture service.CaptureId
+	Device  *path.Device
+	Capture *path.Capture
 	Flags   service.TimingFlags
 }
 ```

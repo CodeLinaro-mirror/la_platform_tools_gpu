@@ -104,7 +104,7 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 	return
 }
 
-func (c client) GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (res TimingInfoId, err error) {
+func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (res TimingInfoId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, flags: flags}); err == nil {
 		res = val.(*resultGetTimingInfo).value

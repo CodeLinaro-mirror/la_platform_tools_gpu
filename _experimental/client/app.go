@@ -249,7 +249,7 @@ func loadTiming(appCtx *ApplicationContext) {
 		go func() {
 			l := appCtx.Logger().Fork().Enter("Replay: CPU command timing")
 			flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand
-			cpuCommandTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
+			cpuCommandTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
 			if err != nil {
 				return
 			}
@@ -266,7 +266,7 @@ func loadTiming(appCtx *ApplicationContext) {
 		go func() {
 			l := appCtx.Logger().Fork().Enter("Replay: GPU frame timing")
 			flags := service.TimingFlagsTimingGPU | service.TimingFlagsTimingPerFrame
-			gpuFrameTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
+			gpuFrameTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
 			if err != nil {
 				return
 			}
