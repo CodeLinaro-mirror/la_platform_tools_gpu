@@ -59,6 +59,12 @@ type Value interface {
 	// path is invalid.
 	Field(name string) *Field
 
+	// Slice returns the path to the sliced subset of this array or slice
+	// represented by this path.
+	// The represented value type must be of type array or slice, otherwise the
+	// returned path is invalid.
+	Slice(start, end uint64) *Slice
+
 	// ArrayIndex returns the path to the i'th element on the array or slice
 	// represented by this path.
 	// The represented value type must be of type array or slice, otherwise the

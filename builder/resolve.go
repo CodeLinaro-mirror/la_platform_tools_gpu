@@ -111,6 +111,20 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 					a.Type(), paths[i-1].Path())
 			}
 
+		case *path.Slice:
+			a := reflect.ValueOf(v[i-1])
+			switch a.Kind() {
+			case reflect.Array, reflect.Slice, reflect.String:
+				if int(p.Start) >= a.Len() || int(p.End) > a.Len() {
+					return nil, fmt.Errorf("Slice at %s is out of bounds [0-%d]", p.Path(), a.Len()-1)
+				}
+				v[i] = a.Slice(int(p.Start), int(p.End)).Interface()
+
+			default:
+				return nil, fmt.Errorf("Type %v at %s is not an array, slice or string",
+					a.Type(), paths[i-1].Path())
+			}
+
 		case *path.MapIndex:
 			m := reflect.ValueOf(v[i-1])
 			switch m.Kind() {
