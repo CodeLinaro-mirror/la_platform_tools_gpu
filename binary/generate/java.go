@@ -39,25 +39,25 @@ var (
 	}
 )
 
-func (f *functions) JavaFieldName(s string) string {
+func (*Templates) JavaFieldName(s string) string {
 	r, n := utf8.DecodeRuneInString(s)
 	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
-func (f *functions) JavaStorage(t schema.Type) string {
-	switch t := t.(type) {
+func (t *Templates) JavaStorage(ty schema.Type) string {
+	switch ty := ty.(type) {
 	case *schema.Primitive:
-		name := t.Name
+		name := ty.Name
 		if result, ok := javaTypeMap[name]; ok {
 			return result
 		}
 		return name
 	case *schema.Struct:
-		return t.Name
+		return ty.Name
 	case *schema.Interface:
-		return t.Name
+		return ty.Name
 	case *schema.Pointer:
-		return f.JavaStorage(t.Type)
+		return t.JavaStorage(ty.Type)
 	case *schema.Array:
 		panic(fmt.Errorf("Array types not handled"))
 	case *schema.Slice:
@@ -67,15 +67,15 @@ func (f *functions) JavaStorage(t schema.Type) string {
 	case *schema.Map:
 		panic(fmt.Errorf("Map types not handled"))
 	default:
-		panic(fmt.Errorf("Unknown value type %T", t))
+		panic(fmt.Errorf("Unknown value type %T", ty))
 	}
 }
 
-func (f *functions) JavaID(name string) string {
+func (*Templates) JavaID(name string) string {
 	return classPrefix + name
 }
 
-func (f *functions) JavaClass(name string) string {
+func (*Templates) JavaClass(name string) string {
 	if strings.HasPrefix(name, "call") {
 		return "Commands." + classPrefix + name[4:] + ".Call"
 	}
@@ -86,10 +86,10 @@ func (f *functions) JavaClass(name string) string {
 }
 
 // JavaFile generates the all the java code for a file with a set of structs.
-func (g *Generator) JavaFile(file *File) ([]byte, error) {
+func (t *Templates) JavaFile(file *File) ([]byte, error) {
 	f := *file
 	b := &bytes.Buffer{}
-	if err := g.f.execute("Java.File", b, &f); err != nil {
+	if err := t.execute("Java.File", b, &f); err != nil {
 		return nil, err
 	}
 	s := b.String()
