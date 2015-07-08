@@ -216,7 +216,7 @@ func Generate(g generator, t *generate.Templates, path string) error {
 	if changed {
 		if *nowrite {
 			fmt.Printf("Not writing %s\n", path)
-		} else {
+		} else if *verbose {
 			fmt.Printf("Generated %s\n", path)
 		}
 	} else if *verbose {
