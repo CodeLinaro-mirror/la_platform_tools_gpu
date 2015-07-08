@@ -311,6 +311,13 @@ func (c *Capture) Clone() Path
 ```
 Clone implements the Path interface, returning a deep-copy of this path.
 
+#### func (*Capture) Hierarchy
+
+```go
+func (c *Capture) Hierarchy() *Hierarchy
+```
+Hierarchy returns the path to the capture's hierarchy.
+
 #### func (*Capture) Path
 
 ```go
@@ -433,6 +440,58 @@ String returns the string representation of the path.
 
 ```go
 func (n *Field) Validate() error
+```
+Validate implements the Path interface.
+
+#### type Hierarchy
+
+```go
+type Hierarchy struct {
+	binary.Generate
+	Capture *Capture // The path to the capture containing the hierarchy.
+}
+```
+
+Hierarchy is a path that refers to a capture's hierarchy.
+
+#### func (*Hierarchy) Base
+
+```go
+func (n *Hierarchy) Base() Path
+```
+Base implements the Path interface, returning the path to the hierarchy.
+
+#### func (*Hierarchy) Class
+
+```go
+func (*Hierarchy) Class() binary.Class
+```
+
+#### func (*Hierarchy) Clone
+
+```go
+func (n *Hierarchy) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
+#### func (*Hierarchy) Path
+
+```go
+func (n *Hierarchy) Path() string
+```
+Path implements the Path interface.
+
+#### func (*Hierarchy) String
+
+```go
+func (n *Hierarchy) String() string
+```
+String returns the string representation of the path.
+
+#### func (*Hierarchy) Validate
+
+```go
+func (n *Hierarchy) Validate() error
 ```
 Validate implements the Path interface.
 
