@@ -21,6 +21,7 @@ func init() {
 	Namespace.Add((*Atoms)(nil).Class())
 	Namespace.Add((*Atom)(nil).Class())
 	Namespace.Add((*Field)(nil).Class())
+	Namespace.Add((*Hierarchy)(nil).Class())
 	Namespace.Add((*MapIndex)(nil).Class())
 	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*Slice)(nil).Class())
@@ -33,6 +34,7 @@ var (
 	binaryIDAtoms      = binary.ID{0x17, 0x6b, 0x7c, 0x08, 0xc2, 0x36, 0x2c, 0xe3, 0x1b, 0x17, 0xd5, 0x3a, 0x0a, 0x98, 0x5b, 0x76, 0xc5, 0x1d, 0x01, 0xa7}
 	binaryIDAtom       = binary.ID{0x58, 0x11, 0xbe, 0x6d, 0xfc, 0xe2, 0xe0, 0x12, 0x6c, 0x42, 0x55, 0x2d, 0xf3, 0x5e, 0x11, 0x1a, 0xc1, 0x6b, 0xfe, 0x3b}
 	binaryIDField      = binary.ID{0xd2, 0x4f, 0x7f, 0x64, 0xec, 0x81, 0x92, 0x06, 0x6c, 0x25, 0x60, 0xfa, 0x5a, 0x0b, 0x9c, 0x6e, 0x73, 0xf7, 0x4b, 0x4c}
+	binaryIDHierarchy  = binary.ID{0x9f, 0x69, 0x5b, 0x87, 0x7f, 0x8b, 0x5c, 0xa3, 0xaa, 0x9d, 0xb4, 0x6e, 0xa9, 0x39, 0x2f, 0xd5, 0x77, 0x92, 0x8a, 0xad}
 	binaryIDMapIndex   = binary.ID{0x0d, 0x46, 0x56, 0xf3, 0x1d, 0xba, 0xf9, 0xd8, 0x5e, 0xcf, 0xcc, 0x0e, 0x84, 0x93, 0x38, 0x5b, 0xbb, 0xd2, 0xec, 0xde}
 	binaryIDReport     = binary.ID{0xc3, 0x15, 0x30, 0x12, 0xb4, 0xa6, 0x7e, 0x71, 0x3a, 0xa3, 0xec, 0xb5, 0x93, 0x21, 0xf6, 0x2f, 0xd2, 0xf1, 0x4f, 0xa9}
 	binaryIDSlice      = binary.ID{0xd2, 0x2a, 0x0c, 0x1e, 0x91, 0x2e, 0x6b, 0x8d, 0xc1, 0xde, 0x05, 0xf2, 0x17, 0x1e, 0xf4, 0x42, 0x3b, 0x12, 0xd9, 0x76}
@@ -341,6 +343,61 @@ var schemaField = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Struct", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
+type binaryClassHierarchy struct{}
+
+func (*Hierarchy) Class() binary.Class {
+	return (*binaryClassHierarchy)(nil)
+}
+func doEncodeHierarchy(e binary.Encoder, o *Hierarchy) error {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Capture = obj.(*Capture)
+	} else {
+		o.Capture = nil
+	}
+	return nil
+}
+func doSkipHierarchy(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassHierarchy) ID() binary.ID      { return binaryIDHierarchy }
+func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
+func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeHierarchy(e, obj.(*Hierarchy))
+}
+func (*binaryClassHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Hierarchy{}
+	return obj, doDecodeHierarchy(d, obj)
+}
+func (*binaryClassHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeHierarchy(d, obj.(*Hierarchy))
+}
+func (*binaryClassHierarchy) Skip(d binary.Decoder) error { return doSkipHierarchy(d) }
+func (*binaryClassHierarchy) Schema() *schema.Class       { return schemaHierarchy }
+
+var schemaHierarchy = &schema.Class{
+	TypeID:  binaryIDHierarchy,
+	Package: "path",
+	Name:    "Hierarchy",
+	Fields: []schema.Field{
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
 	},
 }
 
