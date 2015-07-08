@@ -23,6 +23,7 @@ func init() {
 	Namespace.Add((*Field)(nil).Class())
 	Namespace.Add((*MapIndex)(nil).Class())
 	Namespace.Add((*Report)(nil).Class())
+	Namespace.Add((*Slice)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
 }
 
@@ -34,6 +35,7 @@ var (
 	binaryIDField      = binary.ID{0xd2, 0x4f, 0x7f, 0x64, 0xec, 0x81, 0x92, 0x06, 0x6c, 0x25, 0x60, 0xfa, 0x5a, 0x0b, 0x9c, 0x6e, 0x73, 0xf7, 0x4b, 0x4c}
 	binaryIDMapIndex   = binary.ID{0x0d, 0x46, 0x56, 0xf3, 0x1d, 0xba, 0xf9, 0xd8, 0x5e, 0xcf, 0xcc, 0x0e, 0x84, 0x93, 0x38, 0x5b, 0xbb, 0xd2, 0xec, 0xde}
 	binaryIDReport     = binary.ID{0xc3, 0x15, 0x30, 0x12, 0xb4, 0xa6, 0x7e, 0x71, 0x3a, 0xa3, 0xec, 0xb5, 0x93, 0x21, 0xf6, 0x2f, 0xd2, 0xf1, 0x4f, 0xa9}
+	binaryIDSlice      = binary.ID{0xd2, 0x2a, 0x0c, 0x1e, 0x91, 0x2e, 0x6b, 0x8d, 0xc1, 0xde, 0x05, 0xf2, 0x17, 0x1e, 0xf4, 0x42, 0x3b, 0x12, 0xd9, 0x76}
 	binaryIDState      = binary.ID{0xf1, 0xa4, 0x19, 0x51, 0x01, 0xc4, 0xe2, 0x90, 0xc2, 0xca, 0x28, 0x00, 0x17, 0x08, 0x72, 0xb9, 0x46, 0x3a, 0xd1, 0x7b}
 )
 
@@ -474,6 +476,85 @@ var schemaReport = &schema.Class{
 	Name:    "Report",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "Capture", ID: (*Capture)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassSlice struct{}
+
+func (*Slice) Class() binary.Class {
+	return (*binaryClassSlice)(nil)
+}
+func doEncodeSlice(e binary.Encoder, o *Slice) error {
+	if o.Array != nil {
+		if err := e.Object(o.Array); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Start); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.End); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeSlice(d binary.Decoder, o *Slice) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Array = obj.(Path)
+	} else {
+		o.Array = nil
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Start = uint64(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.End = uint64(obj)
+	}
+	return nil
+}
+func doSkipSlice(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassSlice) ID() binary.ID      { return binaryIDSlice }
+func (*binaryClassSlice) New() binary.Object { return &Slice{} }
+func (*binaryClassSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeSlice(e, obj.(*Slice))
+}
+func (*binaryClassSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Slice{}
+	return obj, doDecodeSlice(d, obj)
+}
+func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeSlice(d, obj.(*Slice))
+}
+func (*binaryClassSlice) Skip(d binary.Decoder) error { return doSkipSlice(d) }
+func (*binaryClassSlice) Schema() *schema.Class       { return schemaSlice }
+
+var schemaSlice = &schema.Class{
+	TypeID:  binaryIDSlice,
+	Package: "path",
+	Name:    "Slice",
+	Fields: []schema.Field{
+		{Declared: "Array", Type: &schema.Interface{Name: "Path"}},
+		{Declared: "Start", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "End", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 

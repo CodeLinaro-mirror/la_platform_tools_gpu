@@ -59,3 +59,8 @@ func (n *Atoms) Validate() error {
 func (n *Atoms) Index(i uint64) *Atom {
 	return &Atom{Atoms: n, Index: i}
 }
+
+// Slice returns the path to the sliced subset of the atom list.
+func (n *Atoms) Slice(start, end uint64) *Slice {
+	return &Slice{Array: n, Start: start, End: end}
+}
