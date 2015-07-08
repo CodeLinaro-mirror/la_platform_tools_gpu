@@ -27,6 +27,7 @@
  {{define "Java.Type#float64"}}double{{end}}
  {{define "Java.Type#string"}}char*{{end}}
  {{define "Java.Type#binary.ID"}}gapic::Id{{end}}
+ {{define "Java.Type.Any"}}Object{{end}}
  {{define "Java.Type.Struct"}}{{.Name | CppName}}{{end}}
  {{define "Java.Type.Interface"}}BinaryObject{{end}}
  {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
@@ -35,9 +36,9 @@
 
 
 {{define "Java.Encoder"}}
-»public static void encode(Encoder e, {{.Name}} o) throws IOException {
-{{range .Fields}}»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
-{{end}}»}{{end}}
+»»public static void encode(Encoder e, {{.Name}} o) throws IOException {
+{{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
+{{end}}»»}{{end}}
 
 {{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
 {{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
@@ -46,21 +47,21 @@
 {{define "Java.Encode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
-»»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»}{{end}}
+»»»for (int i = 0; i < {{.Name}}.length; i++) {
+»»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
+»»»}{{end}}
 
 {{define "Java.Encode.Array"}}
-»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»}{{end}}
+»»»for (int i = 0; i < {{.Type.Size}}; i++) {
+»»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
+»»»}{{end}}
 
 {{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
-»public static void decode(Decoder d, {{.Name}} o) throws IOException {
-{{range .Fields}}»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
-{{end}}»}{{end}}
+»»public static void decode(Decoder d, {{.Name}} o) throws IOException {
+{{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
+{{end}}»»}{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
@@ -69,18 +70,32 @@
 {{define "Java.Decode.Any"}}// TODO: Java any handling{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
-»»for (int i = 0; i <{{.Name}}.length; i++) {
-»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
-»»}{{end}}
+»»»for (int i = 0; i <{{.Name}}.length; i++) {
+»»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
+»»»}{{end}}
 
 {{define "Java.Decode.Array"}}{{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];
-»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
-»»}{{end}}
+»»»for (int i = 0; i < {{.Type.Size}}; i++) {
+»»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
+»»»}{{end}}
 
 {{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
 
-{{define "Java.File"}}{{$.Copyright}}package {{.BasePackage}}.{{.RelativePackage}};
+{{define "Java.Field"}}»{{Call "Java.Type" .Type}} {{JavaFieldName .Name}};
+{{end}}
+
+{{define "Java.Accessors"}}
+»public {{Call "Java.Type" .Type}} get{{.Name}}() {
+»»return {{JavaFieldName .Name}};
+»}
+
+»public void set{{.Name}}({{Call "Java.Type" .Type}} v) {
+»»{{JavaFieldName .Name}} = v;
+»}
+{{end}}
+
+{{define "Java.File"}}{{$.Copyright}}
+package {{.BasePackage}}.{{.RelativePackage}};
 
 import com.android.tools.rpclib.binary.BinaryObject;
 import com.android.tools.rpclib.binary.BinaryObjectCreator;
@@ -89,7 +104,17 @@ import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.ObjectTypeID;
 import java.io.IOException;
 
-class {{.Struct.Name}} {
+public final class {{.Struct.Name}} implements BinaryObject {
+{{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
+  // Constructs a default-initialized {@link {{.Struct.Name}}}.
+  public {{.Struct.Name}}() {
+  }
+
+  // Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
+  public {{.Struct.Name}}(Decoder d) throws IOException {
+    //TODO: decode(d);
+  }
+{{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
 »public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
 »public static ObjectTypeID ID = new ObjectTypeID(IDBytes);
 »public enum Class {
@@ -100,5 +125,6 @@ class {{.Struct.Name}} {
 »static {
 »»ObjectTypeID.register(ID, Class.INSTANCE);
 »}
+{{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
 }
 {{end}}
