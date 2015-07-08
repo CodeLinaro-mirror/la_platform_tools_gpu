@@ -105,7 +105,7 @@ extern any Get(path.Path p)
 extern path.Path Set(path.Path p, any v)
 
 extern AtomStream         ResolveAtomStream(AtomStreamId id)
-extern Binary             ResolveBinary(BinaryId id)
+extern u8[]               ResolveBinary(BinaryId id)
 extern Capture            ResolveCapture(CaptureId id)
 extern Device             ResolveDevice(DeviceId id)
 extern Hierarchy          ResolveHierarchy(HierarchyId id)
@@ -161,11 +161,6 @@ class ReportItem {
   Severity Severity // The severity of the report item.
   string   Message  // The message for the item.
   u64      Atom     // The index of the atom the item refers to.
-}
-
-// Binary holds a blob of data.
-class Binary {
-  u8[] Data
 }
 
 // AtomStream holds a stream of atoms.

@@ -308,16 +308,6 @@ func (c *ReportItem) GetSeverity() Severity { return c.Severity }
 func (c *ReportItem) GetMessage() string    { return c.Message }
 func (c *ReportItem) GetAtom() uint64       { return c.Atom }
 
-func CreateBinary(
-	Data []uint8,
-) *Binary {
-	return &Binary{
-		Data: Data,
-	}
-}
-
-func (c *Binary) GetData() []uint8 { return c.Data }
-
 func CreateAtomStream(
 	Atoms []atom.Atom,
 ) *AtomStream {
