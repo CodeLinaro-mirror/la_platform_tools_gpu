@@ -289,16 +289,12 @@ func (c *ApplicationContext) LoadHierarchy() {
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
-		hierarchy, err := c.rpc.GetHierarchy(captureID, l)
-		if err != nil {
-			return
-		}
-		root, err := c.rpc.ResolveHierarchy(hierarchy, l)
+		hierarchy, err := c.rpc.Get(captureID.Path().Hierarchy(), l)
 		if err != nil {
 			return
 		}
 		c.Run(func() {
-			c.hierarchy = root.Root
+			c.hierarchy = hierarchy.(*service.Hierarchy).Root
 			c.onHierarchyUpdated.Fire()
 			log.Infof(l, "Hierarchy loaded")
 		})
