@@ -17,7 +17,6 @@ package builder
 import (
 	"sync"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -32,13 +31,12 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 		Wireframe: false,
 	}
 
+	p := r.Capture.Atoms()
 	var wg sync.WaitGroup
 	for _, atomID := range r.AtomIDs {
 		id, err := database.Store(&GetFramebufferColor{
-			Capture:  r.Capture,
 			Device:   r.Device,
-			API:      r.API,
-			After:    atom.ID(atomID),
+			After:    p.Index(atomID),
 			Settings: renderSettings,
 		}, d, l)
 

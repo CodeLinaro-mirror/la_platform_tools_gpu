@@ -24,7 +24,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -371,10 +370,9 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 		return nil
 	}
 
-	apiID := service.ApiId{ID: binary.ID(c.atoms[after].API())}
-
 	go func() {
-		imageID, err := c.rpc.GetFramebufferColor(device, captureID, apiID, uint64(after), settings, l)
+		p := captureID.Path().Atoms().Index(uint64(after))
+		imageID, err := c.rpc.GetFramebufferColor(device.Path(), p, settings, l)
 		if err != nil {
 			return
 		}

@@ -24,7 +24,6 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
@@ -303,12 +302,10 @@ func DoReplay(appCtx *ApplicationContext) {
 		return
 	}
 
-	atom := appCtx.Atoms()[atomID]
-	apiID := service.ApiId{ID: binary.ID(atom.API())}
-
 	go func() {
 		l := appCtx.Logger().Fork().Enter("Replay: color-buffer")
-		imageID, err := r.GetFramebufferColor(deviceID, captureID, apiID, uint64(atomID), settings, l)
+		p := captureID.Path().Atoms().Index(uint64(atomID))
+		imageID, err := r.GetFramebufferColor(deviceID.Path(), p, settings, l)
 		if err != nil {
 			return
 		}
@@ -347,7 +344,8 @@ func DoReplay(appCtx *ApplicationContext) {
 
 	go func() {
 		l := appCtx.Logger().Fork().Enter("Replay: depth-buffer")
-		imageID, err := r.GetFramebufferDepth(deviceID, captureID, apiID, uint64(atomID), l)
+		p := captureID.Path().Atoms().Index(uint64(atomID))
+		imageID, err := r.GetFramebufferDepth(deviceID.Path(), p, l)
 		if err != nil {
 			return
 		}

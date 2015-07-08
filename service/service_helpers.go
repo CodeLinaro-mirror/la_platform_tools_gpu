@@ -48,16 +48,16 @@ func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetFramebufferColor) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetFramebufferColor(device: %v, capture: %v, api: %v, after: %v, settings: %v)",
-		c.device, c.capture, c.api, c.after, c.settings,
+	fmt.Fprintf(f, "GetFramebufferColor(device: %v, after: %v, settings: %v)",
+		c.device, c.after, c.settings,
 	)
 }
 func (r resultGetFramebufferColor) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetFramebufferDepth) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetFramebufferDepth(device: %v, capture: %v, api: %v, after: %v)",
-		c.device, c.capture, c.api, c.after,
+	fmt.Fprintf(f, "GetFramebufferDepth(device: %v, after: %v)",
+		c.device, c.after,
 	)
 }
 func (r resultGetFramebufferDepth) Format(f fmt.State, c rune) {
