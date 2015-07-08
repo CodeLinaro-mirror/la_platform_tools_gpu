@@ -47,6 +47,14 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			v[i] = report.(*service.Report)
 
+		case *path.Hierarchy:
+			captureID := service.CaptureId{ID: p.Capture.ID}
+			hierarchy, err := database.Build(&GetHierarchy{Capture: captureID}, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = hierarchy.(*service.Hierarchy)
+
 		case *path.Atom:
 			atoms := v[i-1].(*service.AtomStream).Atoms
 			if p.Index >= uint64(len(atoms)) {

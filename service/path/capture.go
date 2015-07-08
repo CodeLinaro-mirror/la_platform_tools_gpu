@@ -65,6 +65,11 @@ func (c *Capture) Report() *Report {
 	return &Report{Capture: c}
 }
 
+// Hierarchy returns the path to the capture's hierarchy.
+func (c *Capture) Hierarchy() *Hierarchy {
+	return &Hierarchy{Capture: c}
+}
+
 // FindCapture returns the first Capture found traversing the path p.
 // If no Capture was found, then nil is returned.
 func FindCapture(p Path) *Capture {
