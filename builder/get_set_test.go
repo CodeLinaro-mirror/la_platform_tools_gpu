@@ -80,7 +80,7 @@ func TestGet(t *testing.T) {
 		Map: map[string]string{"cat": "meow", "dog": "woof"},
 	}
 	atomB := &testAtom{
-		Str: "xxx",
+		Str: "xyz",
 		Sli: []bool{false, true, false},
 		Any: &testStruct{Str: "www"},
 		Map: map[string]string{"bird": "tweet", "fox": "?"},
@@ -95,12 +95,14 @@ func TestGet(t *testing.T) {
 		err  error
 	}{
 		{p.Atoms().Index(1), atoms[1], nil},
-		{p.Atoms().Index(1).Field("Str"), "xxx", nil},
+		{p.Atoms().Index(1).Field("Str"), "xyz", nil},
 		{p.Atoms().Index(1).Field("Sli"), []bool{false, true, false}, nil},
 		{p.Atoms().Index(1).Field("Any"), &testStruct{Str: "www"}, nil},
 		{p.Atoms().Index(0).Field("Ptr"), &testStruct{Str: "ccc", Ptr: &testStruct{Str: "ddd"}}, nil},
 		{p.Atoms().Index(1).Field("Sli").ArrayIndex(1), true, nil},
-		{p.Atoms().Index(1).Field("Str").ArrayIndex(1), byte('x'), nil},
+		{p.Atoms().Index(1).Field("Sli").Slice(1, 3), []bool{true, false}, nil},
+		{p.Atoms().Index(1).Field("Str").ArrayIndex(1), byte('y'), nil},
+		{p.Atoms().Index(1).Field("Str").Slice(1, 3), "yz", nil},
 		{p.Atoms().Index(1).Field("Map").MapIndex("bird"), "tweet", nil},
 
 		// Test invalid paths
@@ -118,6 +120,8 @@ func TestGet(t *testing.T) {
 			"Type []bool at Capture(%v).Atoms[1].Sli is not a struct", p.ID)},
 		{p.Atoms().Index(1).Field("Sli").ArrayIndex(4), nil, fmt.Errorf(
 			"Index at Capture(%v).Atoms[1].Sli[4] is out of bounds [0-2]", p.ID)},
+		{p.Atoms().Index(1).Field("Sli").Slice(2, 4), nil, fmt.Errorf(
+			"Slice at Capture(%v).Atoms[1].Sli[2:4] is out of bounds [0-2]", p.ID)},
 		{p.Atoms().Index(1).Field("Str").ArrayIndex(4), nil, fmt.Errorf(
 			"Index at Capture(%v).Atoms[1].Str[4] is out of bounds [0-2]", p.ID)},
 		{p.Atoms().Index(1).Field("Ptr").ArrayIndex(4), nil, fmt.Errorf(

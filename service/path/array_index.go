@@ -64,6 +64,14 @@ func (n *ArrayIndex) Field(name string) *Field {
 	return &Field{Struct: n, Name: name}
 }
 
+// Slice returns the path to the sliced subset of this array or slice
+// represented by this path.
+// The represented value type must be of type array or slice, otherwise the
+// returned path is invalid.
+func (n *ArrayIndex) Slice(start, end uint64) *Slice {
+	return &Slice{Array: n, Start: start, End: end}
+}
+
 // ArrayIndex returns the path to the i'th element on the array or slice
 // represented by this path.
 // The represented value type must be of type array or slice, otherwise the
