@@ -89,7 +89,7 @@ ConvertImage is a request to decode a compressed texture.
 ```go
 func (r *ConvertImage) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error)
 ```
-BuildLazy returns the *database.Blob holding the converted image for the
+BuildLazy returns the byte array holding the converted image for the
 ConvertImage request.
 
 #### func (*ConvertImage) Class

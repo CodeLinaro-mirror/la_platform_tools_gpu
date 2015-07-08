@@ -164,6 +164,12 @@ type Constant struct {
 func (*Constant) Class() binary.Class
 ```
 
+#### func (Constant) String
+
+```go
+func (c Constant) String() string
+```
+
 #### type ConstantSet
 
 ```go
