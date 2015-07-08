@@ -184,14 +184,20 @@ func (s rpcServer) GetFramebufferDepth(
 // capture, returning an identifier to the results.
 // This function is experimental and will change signature.
 func (s rpcServer) GetTimingInfo(
-	deviceID service.DeviceId,
-	captureID service.CaptureId,
+	device *path.Device,
+	capture *path.Capture,
 	flags service.TimingFlags,
 	l log.Logger) (service.TimingInfoId, error) {
 
+	if err := device.Validate(); err != nil {
+		return service.TimingInfoId{}, err
+	}
+	if err := capture.Validate(); err != nil {
+		return service.TimingInfoId{}, err
+	}
 	id, err := database.Store(&builder.GetTimingInfo{
-		Device:  deviceID,
-		Capture: captureID,
+		Device:  device,
+		Capture: capture,
 		Flags:   flags,
 	}, s.Database, l)
 	return service.TimingInfoId{ID: id}, err

@@ -100,8 +100,8 @@ type resultGetFramebufferDepth struct {
 // Call GetTimingInfo
 type callGetTimingInfo struct {
 	binary.Generate
-	device  DeviceId
-	capture CaptureId
+	device  *path.Device
+	capture *path.Capture
 	flags   TimingFlags
 }
 

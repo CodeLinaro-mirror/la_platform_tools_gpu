@@ -2365,6 +2365,74 @@ func (p BufferIdᵖ) Write(value BufferId, ϟs *gfxapi.State)
 ```
 Write writes value to the BufferId element at the pointer.
 
+#### type BufferIdᶜᵖ
+
+```go
+type BufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+BufferIdᶜᵖ is a pointer to a BufferId element.
+
+#### func  NewBufferIdᶜᵖ
+
+```go
+func NewBufferIdᶜᵖ(addr uint64) BufferIdᶜᵖ
+```
+NewBufferIdᶜᵖ returns a BufferIdᶜᵖ that points to addr in the application pool.
+
+#### func (*BufferIdᶜᵖ) Class
+
+```go
+func (*BufferIdᶜᵖ) Class() binary.Class
+```
+
+#### func (BufferIdᶜᵖ) ElementSize
+
+```go
+func (p BufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that BufferIdᶜᵖ points to.
+
+#### func (BufferIdᶜᵖ) OnRead
+
+```go
+func (p BufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) BufferIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (BufferIdᶜᵖ) OnWrite
+
+```go
+func (p BufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) BufferIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (BufferIdᶜᵖ) Read
+
+```go
+func (p BufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) BufferId
+```
+Read reads and returns the BufferId element at the pointer.
+
+#### func (BufferIdᶜᵖ) Slice
+
+```go
+func (p BufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ
+```
+Slice returns a new BufferIdˢ from the pointer using start and end indices.
+
+#### func (BufferIdᶜᵖ) Write
+
+```go
+func (p BufferIdᶜᵖ) Write(value BufferId, ϟs *gfxapi.State)
+```
+Write writes value to the BufferId element at the pointer.
+
 #### type BufferParameter
 
 ```go
@@ -4184,214 +4252,364 @@ func (p Charᵖ) Write(value byte, ϟs *gfxapi.State)
 ```
 Write writes value to the byte element at the pointer.
 
-#### type Charᵖˢ
+#### type Charᶜᵖ
 
 ```go
-type Charᵖˢ struct {
-	binary.Generate
-	SliceInfo
-}
-```
-
-Charᵖˢ is a slice of Charᵖ.
-
-#### func  AsCharᵖˢ
-
-```go
-func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ
-```
-AsCharᵖˢ returns s cast to a Charᵖˢ. The returned slice length will be
-calculated so that the returned slice is no longer (in bytes) than s.
-
-#### func  MakeCharᵖˢ
-
-```go
-func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ
-```
-MakeCharᵖˢ returns a Charᵖˢ backed by a new memory pool.
-
-#### func (*Charᵖˢ) Class
-
-```go
-func (*Charᵖˢ) Class() binary.Class
-```
-
-#### func (Charᵖˢ) Clone
-
-```go
-func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ
-```
-Clone returns a copy of the Charᵖˢ in a new memory pool.
-
-#### func (Charᵖˢ) Copy
-
-```go
-func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᵖˢ)
-```
-Copy copies elements from src to this slice. The number of elements copied is
-the minimum of dst.Count and src.Count. The slices of this and dst to the copied
-elements is returned.
-
-#### func (Charᵖˢ) Decoder
-
-```go
-func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder
-```
-Decoder returns a memory decoder for the slice.
-
-#### func (Charᵖˢ) ElementSize
-
-```go
-func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64
-```
-ElementSize returns the size in bytes of an element that Charᵖˢ points to.
-
-#### func (Charᵖˢ) Encoder
-
-```go
-func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder
-```
-Encoder returns a memory encoder for the slice.
-
-#### func (Charᵖˢ) Index
-
-```go
-func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᶜᵖ
-```
-Index returns a Charᵖᶜᵖ to the i'th element in this Charᵖˢ.
-
-#### func (Charᵖˢ) OnRead
-
-```go
-func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ
-```
-OnRead calls the backing pool's OnRead callback. s is returned so calls can be
-chained.
-
-#### func (Charᵖˢ) OnWrite
-
-```go
-func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ
-```
-OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
-chained.
-
-#### func (Charᵖˢ) Range
-
-```go
-func (s Charᵖˢ) Range(ϟs *gfxapi.State) memory.Range
-```
-Range returns the memory range this slice represents in the underlying pool.
-
-#### func (Charᵖˢ) Read
-
-```go
-func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Charᵖ
-```
-Read reads and returns all the Charᵖ elements in this Charᵖˢ.
-
-#### func (Charᵖˢ) ResourceID
-
-```go
-func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID
-```
-ResourceID returns an identifier to a resource representing the data of this
-slice.
-
-#### func (Charᵖˢ) Slice
-
-```go
-func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ
-```
-Slice returns a sub-slice from the Charᵖˢ using start and end indices.
-
-#### func (Charᵖˢ) String
-
-```go
-func (s Charᵖˢ) String() string
-```
-String returns a string description of the Charᵖˢ slice.
-
-#### func (Charᵖˢ) Write
-
-```go
-func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64
-```
-Write copies elements from src to this slice. The number of elements copied is
-returned which is the minimum of s.Count and len(src).
-
-#### type Charᵖᶜᵖ
-
-```go
-type Charᵖᶜᵖ struct {
+type Charᶜᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 ```
 
-Charᵖᶜᵖ is a pointer to a Charᵖ element. Note: Pointers are stored differently
+Charᶜᵖ is a pointer to a byte element.
+
+#### func  NewCharᶜᵖ
+
+```go
+func NewCharᶜᵖ(addr uint64) Charᶜᵖ
+```
+NewCharᶜᵖ returns a Charᶜᵖ that points to addr in the application pool.
+
+#### func (*Charᶜᵖ) Class
+
+```go
+func (*Charᶜᵖ) Class() binary.Class
+```
+
+#### func (Charᶜᵖ) ElementSize
+
+```go
+func (p Charᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that Charᶜᵖ points to.
+
+#### func (Charᶜᵖ) OnRead
+
+```go
+func (p Charᶜᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᶜᵖ) OnWrite
+
+```go
+func (p Charᶜᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (Charᶜᵖ) Read
+
+```go
+func (p Charᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) byte
+```
+Read reads and returns the byte element at the pointer.
+
+#### func (Charᶜᵖ) Slice
+
+```go
+func (p Charᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ
+```
+Slice returns a new Charˢ from the pointer using start and end indices.
+
+#### func (Charᶜᵖ) StringSlice
+
+```go
+func (p Charᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ
+```
+StringSlice returns a slice starting at p and ending at the first 0 byte
+null-terminator. If incNullTerm is true then the null-terminator is included in
+the slice.
+
+#### func (Charᶜᵖ) Write
+
+```go
+func (p Charᶜᵖ) Write(value byte, ϟs *gfxapi.State)
+```
+Write writes value to the byte element at the pointer.
+
+#### type Charᶜᵖˢ
+
+```go
+type Charᶜᵖˢ struct {
+	binary.Generate
+	SliceInfo
+}
+```
+
+Charᶜᵖˢ is a slice of Charᶜᵖ.
+
+#### func  AsCharᶜᵖˢ
+
+```go
+func AsCharᶜᵖˢ(s Slice, ϟs *gfxapi.State) Charᶜᵖˢ
+```
+AsCharᶜᵖˢ returns s cast to a Charᶜᵖˢ. The returned slice length will be
+calculated so that the returned slice is no longer (in bytes) than s.
+
+#### func  MakeCharᶜᵖˢ
+
+```go
+func MakeCharᶜᵖˢ(count uint64, ϟs *gfxapi.State) Charᶜᵖˢ
+```
+MakeCharᶜᵖˢ returns a Charᶜᵖˢ backed by a new memory pool.
+
+#### func (*Charᶜᵖˢ) Class
+
+```go
+func (*Charᶜᵖˢ) Class() binary.Class
+```
+
+#### func (Charᶜᵖˢ) Clone
+
+```go
+func (s Charᶜᵖˢ) Clone(ϟs *gfxapi.State) Charᶜᵖˢ
+```
+Clone returns a copy of the Charᶜᵖˢ in a new memory pool.
+
+#### func (Charᶜᵖˢ) Copy
+
+```go
+func (dst Charᶜᵖˢ) Copy(src Charᶜᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᶜᵖˢ)
+```
+Copy copies elements from src to this slice. The number of elements copied is
+the minimum of dst.Count and src.Count. The slices of this and dst to the copied
+elements is returned.
+
+#### func (Charᶜᵖˢ) Decoder
+
+```go
+func (s Charᶜᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder
+```
+Decoder returns a memory decoder for the slice.
+
+#### func (Charᶜᵖˢ) ElementSize
+
+```go
+func (s Charᶜᵖˢ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that Charᶜᵖˢ points to.
+
+#### func (Charᶜᵖˢ) Encoder
+
+```go
+func (s Charᶜᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder
+```
+Encoder returns a memory encoder for the slice.
+
+#### func (Charᶜᵖˢ) Index
+
+```go
+func (s Charᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᶜᵖᵖ
+```
+Index returns a Charᶜᵖᵖ to the i'th element in this Charᶜᵖˢ.
+
+#### func (Charᶜᵖˢ) OnRead
+
+```go
+func (s Charᶜᵖˢ) OnRead(ϟs *gfxapi.State) Charᶜᵖˢ
+```
+OnRead calls the backing pool's OnRead callback. s is returned so calls can be
+chained.
+
+#### func (Charᶜᵖˢ) OnWrite
+
+```go
+func (s Charᶜᵖˢ) OnWrite(ϟs *gfxapi.State) Charᶜᵖˢ
+```
+OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be
+chained.
+
+#### func (Charᶜᵖˢ) Range
+
+```go
+func (s Charᶜᵖˢ) Range(ϟs *gfxapi.State) memory.Range
+```
+Range returns the memory range this slice represents in the underlying pool.
+
+#### func (Charᶜᵖˢ) Read
+
+```go
+func (s Charᶜᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Charᶜᵖ
+```
+Read reads and returns all the Charᶜᵖ elements in this Charᶜᵖˢ.
+
+#### func (Charᶜᵖˢ) ResourceID
+
+```go
+func (s Charᶜᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID
+```
+ResourceID returns an identifier to a resource representing the data of this
+slice.
+
+#### func (Charᶜᵖˢ) Slice
+
+```go
+func (s Charᶜᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ
+```
+Slice returns a sub-slice from the Charᶜᵖˢ using start and end indices.
+
+#### func (Charᶜᵖˢ) String
+
+```go
+func (s Charᶜᵖˢ) String() string
+```
+String returns a string description of the Charᶜᵖˢ slice.
+
+#### func (Charᶜᵖˢ) Write
+
+```go
+func (s Charᶜᵖˢ) Write(src []Charᶜᵖ, ϟs *gfxapi.State) uint64
+```
+Write copies elements from src to this slice. The number of elements copied is
+returned which is the minimum of s.Count and len(src).
+
+#### type Charᶜᵖᵖ
+
+```go
+type Charᶜᵖᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+Charᶜᵖᵖ is a pointer to a Charᶜᵖ element. Note: Pointers are stored differently
 between the application pool and internal pools.
 
     * The application pool stores pointers as an address of an architecture-dependant size.
     * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
       pool identifier.
 
-#### func  NewCharᵖᶜᵖ
+#### func  NewCharᶜᵖᵖ
 
 ```go
-func NewCharᵖᶜᵖ(addr uint64) Charᵖᶜᵖ
+func NewCharᶜᵖᵖ(addr uint64) Charᶜᵖᵖ
 ```
-NewCharᵖᶜᵖ returns a Charᵖᶜᵖ that points to addr in the application pool.
+NewCharᶜᵖᵖ returns a Charᶜᵖᵖ that points to addr in the application pool.
 
-#### func (*Charᵖᶜᵖ) Class
+#### func (*Charᶜᵖᵖ) Class
 
 ```go
-func (*Charᵖᶜᵖ) Class() binary.Class
+func (*Charᶜᵖᵖ) Class() binary.Class
 ```
 
-#### func (Charᵖᶜᵖ) ElementSize
+#### func (Charᶜᵖᵖ) ElementSize
 
 ```go
-func (p Charᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+func (p Charᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64
 ```
-ElementSize returns the size in bytes of an element that Charᵖᶜᵖ points to.
+ElementSize returns the size in bytes of an element that Charᶜᵖᵖ points to.
 
-#### func (Charᵖᶜᵖ) OnRead
+#### func (Charᶜᵖᵖ) OnRead
 
 ```go
-func (p Charᵖᶜᵖ) OnRead(ϟs *gfxapi.State) Charᵖᶜᵖ
+func (p Charᶜᵖᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖᵖ
 ```
 OnRead calls the backing pool's OnRead callback. p is returned so calls can be
 chained.
 
-#### func (Charᵖᶜᵖ) OnWrite
+#### func (Charᶜᵖᵖ) OnWrite
 
 ```go
-func (p Charᵖᶜᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᶜᵖ
+func (p Charᶜᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖᵖ
 ```
 OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
 chained.
 
-#### func (Charᵖᶜᵖ) Read
+#### func (Charᶜᵖᵖ) Read
 
 ```go
-func (p Charᵖᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᵖ
+func (p Charᶜᵖᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᶜᵖ
 ```
-Read reads and returns the Charᵖ element at the pointer.
+Read reads and returns the Charᶜᵖ element at the pointer.
 
-#### func (Charᵖᶜᵖ) Slice
+#### func (Charᶜᵖᵖ) Slice
 
 ```go
-func (p Charᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ
+func (p Charᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ
 ```
-Slice returns a new Charᵖˢ from the pointer using start and end indices.
+Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
 
-#### func (Charᵖᶜᵖ) Write
+#### func (Charᶜᵖᵖ) Write
 
 ```go
-func (p Charᵖᶜᵖ) Write(value Charᵖ, ϟs *gfxapi.State)
+func (p Charᶜᵖᵖ) Write(value Charᶜᵖ, ϟs *gfxapi.State)
 ```
-Write writes value to the Charᵖ element at the pointer.
+Write writes value to the Charᶜᵖ element at the pointer.
+
+#### type Charᶜᵖᶜᵖ
+
+```go
+type Charᶜᵖᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+Charᶜᵖᶜᵖ is a pointer to a Charᶜᵖ element. Note: Pointers are stored differently
+between the application pool and internal pools.
+
+    * The application pool stores pointers as an address of an architecture-dependant size.
+    * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+      pool identifier.
+
+#### func  NewCharᶜᵖᶜᵖ
+
+```go
+func NewCharᶜᵖᶜᵖ(addr uint64) Charᶜᵖᶜᵖ
+```
+NewCharᶜᵖᶜᵖ returns a Charᶜᵖᶜᵖ that points to addr in the application pool.
+
+#### func (*Charᶜᵖᶜᵖ) Class
+
+```go
+func (*Charᶜᵖᶜᵖ) Class() binary.Class
+```
+
+#### func (Charᶜᵖᶜᵖ) ElementSize
+
+```go
+func (p Charᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that Charᶜᵖᶜᵖ points to.
+
+#### func (Charᶜᵖᶜᵖ) OnRead
+
+```go
+func (p Charᶜᵖᶜᵖ) OnRead(ϟs *gfxapi.State) Charᶜᵖᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Charᶜᵖᶜᵖ) OnWrite
+
+```go
+func (p Charᶜᵖᶜᵖ) OnWrite(ϟs *gfxapi.State) Charᶜᵖᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (Charᶜᵖᶜᵖ) Read
+
+```go
+func (p Charᶜᵖᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᶜᵖ
+```
+Read reads and returns the Charᶜᵖ element at the pointer.
+
+#### func (Charᶜᵖᶜᵖ) Slice
+
+```go
+func (p Charᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ
+```
+Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
+
+#### func (Charᶜᵖᶜᵖ) Write
+
+```go
+func (p Charᶜᵖᶜᵖ) Write(value Charᶜᵖ, ϟs *gfxapi.State)
+```
+Write writes value to the Charᶜᵖ element at the pointer.
 
 #### type ClearMask
 
@@ -5850,7 +6068,7 @@ type EglSwapBuffers struct {
 	binary.Generate
 
 	Display EGLDisplay
-	Surface Voidᶜᵖ
+	Surface Voidᵖ
 	Result  EGLBoolean
 }
 ```
@@ -6059,9 +6277,9 @@ Encoder returns a memory encoder for the slice.
 #### func (F32ˢ) Index
 
 ```go
-func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᶜᵖ
+func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ
 ```
-Index returns a F32ᶜᵖ to the i'th element in this F32ˢ.
+Index returns a F32ᵖ to the i'th element in this F32ˢ.
 
 #### func (F32ˢ) OnRead
 
@@ -6122,6 +6340,74 @@ func (s F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
 returned which is the minimum of s.Count and len(src).
+
+#### type F32ᵖ
+
+```go
+type F32ᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+F32ᵖ is a pointer to a float32 element.
+
+#### func  NewF32ᵖ
+
+```go
+func NewF32ᵖ(addr uint64) F32ᵖ
+```
+NewF32ᵖ returns a F32ᵖ that points to addr in the application pool.
+
+#### func (*F32ᵖ) Class
+
+```go
+func (*F32ᵖ) Class() binary.Class
+```
+
+#### func (F32ᵖ) ElementSize
+
+```go
+func (p F32ᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that F32ᵖ points to.
+
+#### func (F32ᵖ) OnRead
+
+```go
+func (p F32ᵖ) OnRead(ϟs *gfxapi.State) F32ᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (F32ᵖ) OnWrite
+
+```go
+func (p F32ᵖ) OnWrite(ϟs *gfxapi.State) F32ᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (F32ᵖ) Read
+
+```go
+func (p F32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) float32
+```
+Read reads and returns the float32 element at the pointer.
+
+#### func (F32ᵖ) Slice
+
+```go
+func (p F32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ
+```
+Slice returns a new F32ˢ from the pointer using start and end indices.
+
+#### func (F32ᵖ) Write
+
+```go
+func (p F32ᵖ) Write(value float32, ϟs *gfxapi.State)
+```
+Write writes value to the float32 element at the pointer.
 
 #### type F32ᶜᵖ
 
@@ -6785,9 +7071,9 @@ Encoder returns a memory encoder for the slice.
 #### func (FramebufferAttachmentˢ) Index
 
 ```go
-func (s FramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferAttachmentᶜᵖ
+func (s FramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferAttachmentᵖ
 ```
-Index returns a FramebufferAttachmentᶜᵖ to the i'th element in this
+Index returns a FramebufferAttachmentᵖ to the i'th element in this
 FramebufferAttachmentˢ.
 
 #### func (FramebufferAttachmentˢ) OnRead
@@ -6851,6 +7137,77 @@ func (s FramebufferAttachmentˢ) Write(src []FramebufferAttachment, ϟs *gfxapi.
 ```
 Write copies elements from src to this slice. The number of elements copied is
 returned which is the minimum of s.Count and len(src).
+
+#### type FramebufferAttachmentᵖ
+
+```go
+type FramebufferAttachmentᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+FramebufferAttachmentᵖ is a pointer to a FramebufferAttachment element.
+
+#### func  NewFramebufferAttachmentᵖ
+
+```go
+func NewFramebufferAttachmentᵖ(addr uint64) FramebufferAttachmentᵖ
+```
+NewFramebufferAttachmentᵖ returns a FramebufferAttachmentᵖ that points to addr
+in the application pool.
+
+#### func (*FramebufferAttachmentᵖ) Class
+
+```go
+func (*FramebufferAttachmentᵖ) Class() binary.Class
+```
+
+#### func (FramebufferAttachmentᵖ) ElementSize
+
+```go
+func (p FramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that FramebufferAttachmentᵖ
+points to.
+
+#### func (FramebufferAttachmentᵖ) OnRead
+
+```go
+func (p FramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferAttachmentᵖ) OnWrite
+
+```go
+func (p FramebufferAttachmentᵖ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferAttachmentᵖ) Read
+
+```go
+func (p FramebufferAttachmentᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferAttachment
+```
+Read reads and returns the FramebufferAttachment element at the pointer.
+
+#### func (FramebufferAttachmentᵖ) Slice
+
+```go
+func (p FramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ
+```
+Slice returns a new FramebufferAttachmentˢ from the pointer using start and end
+indices.
+
+#### func (FramebufferAttachmentᵖ) Write
+
+```go
+func (p FramebufferAttachmentᵖ) Write(value FramebufferAttachment, ϟs *gfxapi.State)
+```
+Write writes value to the FramebufferAttachment element at the pointer.
 
 #### type FramebufferAttachmentᶜᵖ
 
@@ -7165,6 +7522,76 @@ Slice returns a new FramebufferIdˢ from the pointer using start and end indices
 
 ```go
 func (p FramebufferIdᵖ) Write(value FramebufferId, ϟs *gfxapi.State)
+```
+Write writes value to the FramebufferId element at the pointer.
+
+#### type FramebufferIdᶜᵖ
+
+```go
+type FramebufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
+
+#### func  NewFramebufferIdᶜᵖ
+
+```go
+func NewFramebufferIdᶜᵖ(addr uint64) FramebufferIdᶜᵖ
+```
+NewFramebufferIdᶜᵖ returns a FramebufferIdᶜᵖ that points to addr in the
+application pool.
+
+#### func (*FramebufferIdᶜᵖ) Class
+
+```go
+func (*FramebufferIdᶜᵖ) Class() binary.Class
+```
+
+#### func (FramebufferIdᶜᵖ) ElementSize
+
+```go
+func (p FramebufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that FramebufferIdᶜᵖ points
+to.
+
+#### func (FramebufferIdᶜᵖ) OnRead
+
+```go
+func (p FramebufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) FramebufferIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferIdᶜᵖ) OnWrite
+
+```go
+func (p FramebufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) FramebufferIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (FramebufferIdᶜᵖ) Read
+
+```go
+func (p FramebufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferId
+```
+Read reads and returns the FramebufferId element at the pointer.
+
+#### func (FramebufferIdᶜᵖ) Slice
+
+```go
+func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferIdˢ
+```
+Slice returns a new FramebufferIdˢ from the pointer using start and end indices.
+
+#### func (FramebufferIdᶜᵖ) Write
+
+```go
+func (p FramebufferIdᶜᵖ) Write(value FramebufferId, ϟs *gfxapi.State)
 ```
 Write writes value to the FramebufferId element at the pointer.
 
@@ -10256,7 +10683,7 @@ type GlDeleteBuffers struct {
 	binary.Generate
 
 	Count   int32
-	Buffers BufferIdᵖ
+	Buffers BufferIdᶜᵖ
 }
 ```
 
@@ -10335,7 +10762,7 @@ type GlDeleteFramebuffers struct {
 	binary.Generate
 
 	Count        int32
-	Framebuffers FramebufferIdᵖ
+	Framebuffers FramebufferIdᶜᵖ
 }
 ```
 
@@ -10494,7 +10921,7 @@ type GlDeleteQueries struct {
 	binary.Generate
 
 	Count   int32
-	Queries QueryIdᵖ
+	Queries QueryIdᶜᵖ
 }
 ```
 
@@ -10573,7 +11000,7 @@ type GlDeleteQueriesEXT struct {
 	binary.Generate
 
 	Count   int32
-	Queries QueryIdᵖ
+	Queries QueryIdᶜᵖ
 }
 ```
 
@@ -10654,7 +11081,7 @@ type GlDeleteRenderbuffers struct {
 	binary.Generate
 
 	Count         int32
-	Renderbuffers RenderbufferIdᵖ
+	Renderbuffers RenderbufferIdᶜᵖ
 }
 ```
 
@@ -10891,7 +11318,7 @@ type GlDeleteTextures struct {
 	binary.Generate
 
 	Count    int32
-	Textures TextureIdᵖ
+	Textures TextureIdᶜᵖ
 }
 ```
 
@@ -10970,7 +11397,7 @@ type GlDeleteVertexArrays struct {
 	binary.Generate
 
 	Count  uint32
-	Arrays VertexArrayIdᵖ
+	Arrays VertexArrayIdᶜᵖ
 }
 ```
 
@@ -11051,7 +11478,7 @@ type GlDeleteVertexArraysOES struct {
 	binary.Generate
 
 	Count  int32
-	Arrays VertexArrayIdᵖ
+	Arrays VertexArrayIdᶜᵖ
 }
 ```
 
@@ -14175,7 +14602,7 @@ type GlGetAttachedShaders struct {
 	Program              ProgramId
 	BufferLength         int32
 	ShadersLengthWritten S32ᵖ
-	Shaders              ShaderIdᶜᵖ
+	Shaders              ShaderIdᵖ
 }
 ```
 
@@ -14577,7 +15004,7 @@ type GlGetFloatv struct {
 	binary.Generate
 
 	Param  StateVariable
-	Values F32ᶜᵖ
+	Values F32ᵖ
 }
 ```
 
@@ -14901,7 +15328,7 @@ type GlGetProgramBinaryOES struct {
 	BufferSize   int32
 	BytesWritten S32ᵖ
 	BinaryFormat U32ᵖ
-	Binary       Voidᶜᵖ
+	Binary       Voidᵖ
 }
 ```
 
@@ -16288,7 +16715,7 @@ type GlGetString struct {
 	binary.Generate
 
 	Param  StringConstant
-	Result Charᵖ
+	Result Charᶜᵖ
 }
 ```
 
@@ -16694,7 +17121,7 @@ type GlGetUniformiv struct {
 
 	Program  ProgramId
 	Location UniformLocation
-	Values   S32ᵖ
+	Values   S32ᶜᵖ
 }
 ```
 
@@ -17966,7 +18393,7 @@ type GlMapBufferRange struct {
 	Offset int32
 	Length int32
 	Access MapBufferRangeAccess
-	Result Voidᶜᵖ
+	Result Voidᵖ
 }
 ```
 
@@ -18282,7 +18709,7 @@ type GlProgramBinaryOES struct {
 
 	Program      ProgramId
 	BinaryFormat uint32
-	Binary       Voidᶜᵖ
+	Binary       Voidᵖ
 	BinarySize   int32
 }
 ```
@@ -18529,7 +18956,7 @@ type GlReadPixels struct {
 	Height int32
 	Format BaseTexelFormat
 	Type   TexelType
-	Data   Voidᶜᵖ
+	Data   Voidᵖ
 }
 ```
 
@@ -19096,8 +19523,8 @@ type GlShaderSource struct {
 
 	Shader ShaderId
 	Count  int32
-	Source Charᵖᶜᵖ
-	Length S32ᵖ
+	Source Charᶜᵖᶜᵖ
+	Length S32ᶜᵖ
 }
 ```
 
@@ -23148,8 +23575,8 @@ func (a *GlWaitSync) String() string
 type GlXCreateContext struct {
 	binary.Generate
 
-	Dpy       Voidᶜᵖ
-	Vis       Voidᶜᵖ
+	Dpy       Voidᵖ
+	Vis       Voidᵖ
 	ShareList GLXContext
 	Direct    bool
 	Result    GLXContext
@@ -23230,8 +23657,8 @@ func (a *GlXCreateContext) String() string
 type GlXCreateNewContext struct {
 	binary.Generate
 
-	Display  Voidᶜᵖ
-	Fbconfig Voidᶜᵖ
+	Display  Voidᵖ
+	Fbconfig Voidᵖ
 	Type     uint32
 	Shared   GLXContext
 	Direct   bool
@@ -23315,7 +23742,7 @@ func (a *GlXCreateNewContext) String() string
 type GlXMakeContextCurrent struct {
 	binary.Generate
 
-	Display Voidᶜᵖ
+	Display Voidᵖ
 	Draw    GLXDrawable
 	Read    GLXDrawable
 	Ctx     GLXContext
@@ -23399,7 +23826,7 @@ func (a *GlXMakeContextCurrent) String() string
 type GlXMakeCurrent struct {
 	binary.Generate
 
-	Display  Voidᶜᵖ
+	Display  Voidᵖ
 	Drawable GLXDrawable
 	Ctx      GLXContext
 	Result   Bool
@@ -23474,7 +23901,7 @@ func (a *GlXMakeCurrent) String() string
 type GlXQueryDrawable struct {
 	binary.Generate
 
-	Display   Voidᶜᵖ
+	Display   Voidᵖ
 	Draw      GLXDrawable
 	Attribute int64
 	Value     Intᵖ
@@ -23550,7 +23977,7 @@ func (a *GlXQueryDrawable) String() string
 type GlXSwapBuffers struct {
 	binary.Generate
 
-	Display  Voidᶜᵖ
+	Display  Voidᵖ
 	Drawable GLXDrawable
 }
 ```
@@ -25480,6 +25907,74 @@ func (p QueryIdᵖ) Write(value QueryId, ϟs *gfxapi.State)
 ```
 Write writes value to the QueryId element at the pointer.
 
+#### type QueryIdᶜᵖ
+
+```go
+type QueryIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+QueryIdᶜᵖ is a pointer to a QueryId element.
+
+#### func  NewQueryIdᶜᵖ
+
+```go
+func NewQueryIdᶜᵖ(addr uint64) QueryIdᶜᵖ
+```
+NewQueryIdᶜᵖ returns a QueryIdᶜᵖ that points to addr in the application pool.
+
+#### func (*QueryIdᶜᵖ) Class
+
+```go
+func (*QueryIdᶜᵖ) Class() binary.Class
+```
+
+#### func (QueryIdᶜᵖ) ElementSize
+
+```go
+func (p QueryIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that QueryIdᶜᵖ points to.
+
+#### func (QueryIdᶜᵖ) OnRead
+
+```go
+func (p QueryIdᶜᵖ) OnRead(ϟs *gfxapi.State) QueryIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (QueryIdᶜᵖ) OnWrite
+
+```go
+func (p QueryIdᶜᵖ) OnWrite(ϟs *gfxapi.State) QueryIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (QueryIdᶜᵖ) Read
+
+```go
+func (p QueryIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) QueryId
+```
+Read reads and returns the QueryId element at the pointer.
+
+#### func (QueryIdᶜᵖ) Slice
+
+```go
+func (p QueryIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ
+```
+Slice returns a new QueryIdˢ from the pointer using start and end indices.
+
+#### func (QueryIdᶜᵖ) Write
+
+```go
+func (p QueryIdᶜᵖ) Write(value QueryId, ϟs *gfxapi.State)
+```
+Write writes value to the QueryId element at the pointer.
+
 #### type QueryObjectParameter
 
 ```go
@@ -26050,6 +26545,77 @@ indices.
 
 ```go
 func (p RenderbufferIdᵖ) Write(value RenderbufferId, ϟs *gfxapi.State)
+```
+Write writes value to the RenderbufferId element at the pointer.
+
+#### type RenderbufferIdᶜᵖ
+
+```go
+type RenderbufferIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
+
+#### func  NewRenderbufferIdᶜᵖ
+
+```go
+func NewRenderbufferIdᶜᵖ(addr uint64) RenderbufferIdᶜᵖ
+```
+NewRenderbufferIdᶜᵖ returns a RenderbufferIdᶜᵖ that points to addr in the
+application pool.
+
+#### func (*RenderbufferIdᶜᵖ) Class
+
+```go
+func (*RenderbufferIdᶜᵖ) Class() binary.Class
+```
+
+#### func (RenderbufferIdᶜᵖ) ElementSize
+
+```go
+func (p RenderbufferIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that RenderbufferIdᶜᵖ points
+to.
+
+#### func (RenderbufferIdᶜᵖ) OnRead
+
+```go
+func (p RenderbufferIdᶜᵖ) OnRead(ϟs *gfxapi.State) RenderbufferIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (RenderbufferIdᶜᵖ) OnWrite
+
+```go
+func (p RenderbufferIdᶜᵖ) OnWrite(ϟs *gfxapi.State) RenderbufferIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (RenderbufferIdᶜᵖ) Read
+
+```go
+func (p RenderbufferIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) RenderbufferId
+```
+Read reads and returns the RenderbufferId element at the pointer.
+
+#### func (RenderbufferIdᶜᵖ) Slice
+
+```go
+func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) RenderbufferIdˢ
+```
+Slice returns a new RenderbufferIdˢ from the pointer using start and end
+indices.
+
+#### func (RenderbufferIdᶜᵖ) Write
+
+```go
+func (p RenderbufferIdᶜᵖ) Write(value RenderbufferId, ϟs *gfxapi.State)
 ```
 Write writes value to the RenderbufferId element at the pointer.
 
@@ -26655,6 +27221,74 @@ func (p S32ᵖ) Write(value int32, ϟs *gfxapi.State)
 ```
 Write writes value to the int32 element at the pointer.
 
+#### type S32ᶜᵖ
+
+```go
+type S32ᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+S32ᶜᵖ is a pointer to a int32 element.
+
+#### func  NewS32ᶜᵖ
+
+```go
+func NewS32ᶜᵖ(addr uint64) S32ᶜᵖ
+```
+NewS32ᶜᵖ returns a S32ᶜᵖ that points to addr in the application pool.
+
+#### func (*S32ᶜᵖ) Class
+
+```go
+func (*S32ᶜᵖ) Class() binary.Class
+```
+
+#### func (S32ᶜᵖ) ElementSize
+
+```go
+func (p S32ᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that S32ᶜᵖ points to.
+
+#### func (S32ᶜᵖ) OnRead
+
+```go
+func (p S32ᶜᵖ) OnRead(ϟs *gfxapi.State) S32ᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (S32ᶜᵖ) OnWrite
+
+```go
+func (p S32ᶜᵖ) OnWrite(ϟs *gfxapi.State) S32ᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (S32ᶜᵖ) Read
+
+```go
+func (p S32ᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int32
+```
+Read reads and returns the int32 element at the pointer.
+
+#### func (S32ᶜᵖ) Slice
+
+```go
+func (p S32ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ
+```
+Slice returns a new S32ˢ from the pointer using start and end indices.
+
+#### func (S32ᶜᵖ) Write
+
+```go
+func (p S32ᶜᵖ) Write(value int32, ϟs *gfxapi.State)
+```
+Write writes value to the int32 element at the pointer.
+
 #### type S64ˢ
 
 ```go
@@ -27239,9 +27873,9 @@ Encoder returns a memory encoder for the slice.
 #### func (ShaderIdˢ) Index
 
 ```go
-func (s ShaderIdˢ) Index(i uint64, ϟs *gfxapi.State) ShaderIdᶜᵖ
+func (s ShaderIdˢ) Index(i uint64, ϟs *gfxapi.State) ShaderIdᵖ
 ```
-Index returns a ShaderIdᶜᵖ to the i'th element in this ShaderIdˢ.
+Index returns a ShaderIdᵖ to the i'th element in this ShaderIdˢ.
 
 #### func (ShaderIdˢ) OnRead
 
@@ -27302,6 +27936,74 @@ func (s ShaderIdˢ) Write(src []ShaderId, ϟs *gfxapi.State) uint64
 ```
 Write copies elements from src to this slice. The number of elements copied is
 returned which is the minimum of s.Count and len(src).
+
+#### type ShaderIdᵖ
+
+```go
+type ShaderIdᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+ShaderIdᵖ is a pointer to a ShaderId element.
+
+#### func  NewShaderIdᵖ
+
+```go
+func NewShaderIdᵖ(addr uint64) ShaderIdᵖ
+```
+NewShaderIdᵖ returns a ShaderIdᵖ that points to addr in the application pool.
+
+#### func (*ShaderIdᵖ) Class
+
+```go
+func (*ShaderIdᵖ) Class() binary.Class
+```
+
+#### func (ShaderIdᵖ) ElementSize
+
+```go
+func (p ShaderIdᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that ShaderIdᵖ points to.
+
+#### func (ShaderIdᵖ) OnRead
+
+```go
+func (p ShaderIdᵖ) OnRead(ϟs *gfxapi.State) ShaderIdᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (ShaderIdᵖ) OnWrite
+
+```go
+func (p ShaderIdᵖ) OnWrite(ϟs *gfxapi.State) ShaderIdᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (ShaderIdᵖ) Read
+
+```go
+func (p ShaderIdᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) ShaderId
+```
+Read reads and returns the ShaderId element at the pointer.
+
+#### func (ShaderIdᵖ) Slice
+
+```go
+func (p ShaderIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ
+```
+Slice returns a new ShaderIdˢ from the pointer using start and end indices.
+
+#### func (ShaderIdᵖ) Write
+
+```go
+func (p ShaderIdᵖ) Write(value ShaderId, ϟs *gfxapi.State)
+```
+Write writes value to the ShaderId element at the pointer.
 
 #### type ShaderIdᶜᵖ
 
@@ -28602,6 +29304,75 @@ Slice returns a new TextureIdˢ from the pointer using start and end indices.
 
 ```go
 func (p TextureIdᵖ) Write(value TextureId, ϟs *gfxapi.State)
+```
+Write writes value to the TextureId element at the pointer.
+
+#### type TextureIdᶜᵖ
+
+```go
+type TextureIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+TextureIdᶜᵖ is a pointer to a TextureId element.
+
+#### func  NewTextureIdᶜᵖ
+
+```go
+func NewTextureIdᶜᵖ(addr uint64) TextureIdᶜᵖ
+```
+NewTextureIdᶜᵖ returns a TextureIdᶜᵖ that points to addr in the application
+pool.
+
+#### func (*TextureIdᶜᵖ) Class
+
+```go
+func (*TextureIdᶜᵖ) Class() binary.Class
+```
+
+#### func (TextureIdᶜᵖ) ElementSize
+
+```go
+func (p TextureIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that TextureIdᶜᵖ points to.
+
+#### func (TextureIdᶜᵖ) OnRead
+
+```go
+func (p TextureIdᶜᵖ) OnRead(ϟs *gfxapi.State) TextureIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (TextureIdᶜᵖ) OnWrite
+
+```go
+func (p TextureIdᶜᵖ) OnWrite(ϟs *gfxapi.State) TextureIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (TextureIdᶜᵖ) Read
+
+```go
+func (p TextureIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) TextureId
+```
+Read reads and returns the TextureId element at the pointer.
+
+#### func (TextureIdᶜᵖ) Slice
+
+```go
+func (p TextureIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ
+```
+Slice returns a new TextureIdˢ from the pointer using start and end indices.
+
+#### func (TextureIdᶜᵖ) Write
+
+```go
+func (p TextureIdᶜᵖ) Write(value TextureId, ϟs *gfxapi.State)
 ```
 Write writes value to the TextureId element at the pointer.
 
@@ -31502,6 +32273,76 @@ func (p VertexArrayIdᵖ) Write(value VertexArrayId, ϟs *gfxapi.State)
 ```
 Write writes value to the VertexArrayId element at the pointer.
 
+#### type VertexArrayIdᶜᵖ
+
+```go
+type VertexArrayIdᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
+
+#### func  NewVertexArrayIdᶜᵖ
+
+```go
+func NewVertexArrayIdᶜᵖ(addr uint64) VertexArrayIdᶜᵖ
+```
+NewVertexArrayIdᶜᵖ returns a VertexArrayIdᶜᵖ that points to addr in the
+application pool.
+
+#### func (*VertexArrayIdᶜᵖ) Class
+
+```go
+func (*VertexArrayIdᶜᵖ) Class() binary.Class
+```
+
+#### func (VertexArrayIdᶜᵖ) ElementSize
+
+```go
+func (p VertexArrayIdᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that VertexArrayIdᶜᵖ points
+to.
+
+#### func (VertexArrayIdᶜᵖ) OnRead
+
+```go
+func (p VertexArrayIdᶜᵖ) OnRead(ϟs *gfxapi.State) VertexArrayIdᶜᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (VertexArrayIdᶜᵖ) OnWrite
+
+```go
+func (p VertexArrayIdᶜᵖ) OnWrite(ϟs *gfxapi.State) VertexArrayIdᶜᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (VertexArrayIdᶜᵖ) Read
+
+```go
+func (p VertexArrayIdᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) VertexArrayId
+```
+Read reads and returns the VertexArrayId element at the pointer.
+
+#### func (VertexArrayIdᶜᵖ) Slice
+
+```go
+func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArrayIdˢ
+```
+Slice returns a new VertexArrayIdˢ from the pointer using start and end indices.
+
+#### func (VertexArrayIdᶜᵖ) Write
+
+```go
+func (p VertexArrayIdᶜᵖ) Write(value VertexArrayId, ϟs *gfxapi.State)
+```
+Write writes value to the VertexArrayId element at the pointer.
+
 #### type VertexAttribType
 
 ```go
@@ -31713,9 +32554,9 @@ Encoder returns a memory encoder for the slice.
 #### func (Voidˢ) Index
 
 ```go
-func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᶜᵖ
+func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ
 ```
-Index returns a Voidᶜᵖ to the i'th element in this Voidˢ.
+Index returns a Voidᵖ to the i'th element in this Voidˢ.
 
 #### func (Voidˢ) OnRead
 
@@ -31761,6 +32602,60 @@ Slice returns a sub-slice from the Voidˢ using start and end indices.
 func (s Voidˢ) String() string
 ```
 String returns a string description of the Voidˢ slice.
+
+#### type Voidᵖ
+
+```go
+type Voidᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+```
+
+Voidᵖ is a pointer to a void element.
+
+#### func  NewVoidᵖ
+
+```go
+func NewVoidᵖ(addr uint64) Voidᵖ
+```
+NewVoidᵖ returns a Voidᵖ that points to addr in the application pool.
+
+#### func (*Voidᵖ) Class
+
+```go
+func (*Voidᵖ) Class() binary.Class
+```
+
+#### func (Voidᵖ) ElementSize
+
+```go
+func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64
+```
+ElementSize returns the size in bytes of an element that Voidᵖ points to.
+
+#### func (Voidᵖ) OnRead
+
+```go
+func (p Voidᵖ) OnRead(ϟs *gfxapi.State) Voidᵖ
+```
+OnRead calls the backing pool's OnRead callback. p is returned so calls can be
+chained.
+
+#### func (Voidᵖ) OnWrite
+
+```go
+func (p Voidᵖ) OnWrite(ϟs *gfxapi.State) Voidᵖ
+```
+OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be
+chained.
+
+#### func (Voidᵖ) Slice
+
+```go
+func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ
+```
+Slice returns a new Voidˢ from the pointer using start and end indices.
 
 #### type Voidᶜᵖ
 
