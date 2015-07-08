@@ -63,15 +63,9 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 				return nil, err
 			}
 
-			reportID, err := getBuildReport(streamID, d, l)
-			if err != nil {
-				return nil, err
-			}
-
 			capture := v[i-1].(*service.Capture)
 			capture.Name = capture.Name + "*"
 			capture.Atoms = streamID
-			capture.Report = reportID
 			v[i-1] = capture
 
 		case *path.Report:

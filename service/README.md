@@ -236,10 +236,9 @@ func (h BinaryId) Valid() bool
 ```go
 type Capture struct {
 	binary.Generate
-	Name   string
-	Atoms  AtomStreamId
-	Report ReportId
-	Apis   []ApiId
+	Name  string
+	Atoms AtomStreamId
+	Apis  []ApiId
 }
 ```
 
@@ -251,7 +250,6 @@ Class Capture
 func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
-	Report ReportId,
 	Apis []ApiId,
 ) *Capture
 ```
@@ -285,12 +283,6 @@ func (c *Capture) GetAtoms() AtomStreamId
 
 ```go
 func (c *Capture) GetName() string
-```
-
-#### func (*Capture) GetReport
-
-```go
-func (c *Capture) GetReport() ReportId
 ```
 
 #### type CaptureId
@@ -866,29 +858,6 @@ func (*Report) Class() binary.Class
 
 ```go
 func (c *Report) GetItems() []ReportItem
-```
-
-#### type ReportId
-
-```go
-type ReportId struct {
-	binary.Generate
-	ID binary.ID
-}
-```
-
-Handle ReportId
-
-#### func (*ReportId) Class
-
-```go
-func (*ReportId) Class() binary.Class
-```
-
-#### func (ReportId) Valid
-
-```go
-func (h ReportId) Valid() bool
 ```
 
 #### type ReportItem

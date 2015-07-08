@@ -27,7 +27,6 @@ func init() {
 	Namespace.Add((*AtomStreamId)(nil).Class())
 	Namespace.Add((*AtomTimer)(nil).Class())
 	Namespace.Add((*BinaryId)(nil).Class())
-	Namespace.Add((*ReportId)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*CaptureId)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
@@ -88,8 +87,7 @@ var (
 	binaryIDAtomStreamId                = binary.ID{0xbe, 0x90, 0x3c, 0x40, 0x28, 0xee, 0x58, 0x7e, 0xab, 0x8c, 0xde, 0x44, 0x43, 0xb3, 0x94, 0x88, 0xff, 0x6b, 0xa0, 0x12}
 	binaryIDAtomTimer                   = binary.ID{0x7b, 0x64, 0x0c, 0x00, 0x25, 0xee, 0x98, 0xa3, 0x51, 0x7b, 0x1b, 0x0d, 0x98, 0x73, 0x20, 0x93, 0x12, 0x9a, 0x7d, 0xc4}
 	binaryIDBinaryId                    = binary.ID{0x71, 0x35, 0xf5, 0x97, 0xf9, 0x3a, 0x8a, 0x25, 0x88, 0xf6, 0x5b, 0xe6, 0x99, 0xf5, 0x1c, 0x9c, 0x97, 0xf5, 0x68, 0x3b}
-	binaryIDReportId                    = binary.ID{0xdd, 0x7a, 0xad, 0xfd, 0x05, 0xb4, 0x8f, 0x9a, 0xe6, 0xaa, 0x3c, 0xdf, 0x50, 0xa6, 0x23, 0x1e, 0x6a, 0xce, 0x2f, 0x63}
-	binaryIDCapture                     = binary.ID{0x3b, 0x76, 0x57, 0xd7, 0xd8, 0x6a, 0x78, 0xd7, 0x1c, 0xdb, 0xdf, 0xde, 0xb0, 0x56, 0x83, 0xc1, 0xe2, 0x71, 0x8c, 0x7d}
+	binaryIDCapture                     = binary.ID{0x06, 0xc4, 0xee, 0x21, 0xc8, 0x29, 0x86, 0x7c, 0xd0, 0xa8, 0xa4, 0x67, 0xc6, 0x00, 0xee, 0x07, 0x93, 0x0d, 0xa7, 0xf1}
 	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
@@ -496,55 +494,6 @@ var schemaBinaryId = &schema.Class{
 	},
 }
 
-type binaryClassReportId struct{}
-
-func (*ReportId) Class() binary.Class {
-	return (*binaryClassReportId)(nil)
-}
-func doEncodeReportId(e binary.Encoder, o *ReportId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeReportId(d binary.Decoder, o *ReportId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipReportId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassReportId) ID() binary.ID      { return binaryIDReportId }
-func (*binaryClassReportId) New() binary.Object { return &ReportId{} }
-func (*binaryClassReportId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeReportId(e, obj.(*ReportId))
-}
-func (*binaryClassReportId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ReportId{}
-	return obj, doDecodeReportId(d, obj)
-}
-func (*binaryClassReportId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeReportId(d, obj.(*ReportId))
-}
-func (*binaryClassReportId) Skip(d binary.Decoder) error { return doSkipReportId(d) }
-func (*binaryClassReportId) Schema() *schema.Class       { return schemaReportId }
-
-var schemaReportId = &schema.Class{
-	TypeID:  binaryIDReportId,
-	Package: "service",
-	Name:    "ReportId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-	},
-}
-
 type binaryClassCapture struct{}
 
 func (*Capture) Class() binary.Class {
@@ -555,9 +504,6 @@ func doEncodeCapture(e binary.Encoder, o *Capture) error {
 		return err
 	}
 	if err := e.Value(&o.Atoms); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Report); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Apis))); err != nil {
@@ -579,9 +525,6 @@ func doDecodeCapture(d binary.Decoder, o *Capture) error {
 	if err := d.Value(&o.Atoms); err != nil {
 		return err
 	}
-	if err := d.Value(&o.Report); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -599,9 +542,6 @@ func doSkipCapture(d binary.Decoder) error {
 		return err
 	}
 	if err := d.SkipValue((*AtomStreamId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*ReportId)(nil)); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -637,7 +577,6 @@ var schemaCapture = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
-		{Declared: "Report", Type: &schema.Struct{Name: "ReportId", ID: (*ReportId)(nil).Class().ID()}},
 		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ApiId", ID: (*ApiId)(nil).Class().ID()}}},
 	},
 }

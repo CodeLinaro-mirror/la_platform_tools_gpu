@@ -77,12 +77,6 @@ type MemoryInfoId struct {
 	ID binary.ID
 }
 
-// Handle ReportId
-type ReportId struct {
-	binary.Generate
-	ID binary.ID
-}
-
 // Handle TimingInfoId
 type TimingInfoId struct {
 	binary.Generate
@@ -147,10 +141,9 @@ type Device struct {
 // Class Capture
 type Capture struct {
 	binary.Generate
-	Name   string
-	Atoms  AtomStreamId
-	Report ReportId
-	Apis   []ApiId
+	Name  string
+	Atoms AtomStreamId
+	Apis  []ApiId
 }
 
 // Class Report
