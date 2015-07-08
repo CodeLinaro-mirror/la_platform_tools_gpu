@@ -17,7 +17,6 @@ package builder
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/interval"
@@ -29,24 +28,19 @@ import (
 // BuildLazy returns the *service.MemoryInfo resulting from the given
 // GetMemoryInfo request.
 func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	capture, err := service.ResolveCapture(r.Capture, d, l)
+	atoms, err := ResolveAtoms(r.After.Atoms, d, l)
 	if err != nil {
 		return nil, err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, d, l)
-	if err != nil {
-		return nil, err
-	}
-
-	if r.After >= atom.ID(len(atoms)) {
-		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms))
+	if r.After.Index >= uint64(len(atoms)) {
+		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms)-1)
 	}
 
 	s := gfxapi.NewState()
 	pool := s.Memory[memory.ApplicationPool]
 
-	for _, a := range atoms[:r.After] {
+	for _, a := range atoms[:r.After.Index] {
 		a.Mutate(s, d, l)
 	}
 
@@ -61,7 +55,7 @@ func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 			interval.Merge(&writes, rng.Window(r.Range).Span(), false)
 		}
 	}
-	atoms[r.After].Mutate(s, d, l)
+	atoms[r.After.Index].Mutate(s, d, l)
 
 	slice := pool.Slice(r.Range)
 	data, err := slice.Get(d, l)

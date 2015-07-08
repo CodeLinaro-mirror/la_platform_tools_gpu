@@ -46,7 +46,7 @@ var (
 	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
 	binaryIDGetFramebufferDepth             = binary.ID{0x59, 0xd2, 0x23, 0x3c, 0xfd, 0xdc, 0xbf, 0x12, 0xf5, 0xe3, 0xff, 0x94, 0x6c, 0x8a, 0xb8, 0x86, 0xba, 0x9d, 0xb6, 0x55}
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
-	binaryIDGetMemoryInfo                   = binary.ID{0x22, 0xa8, 0x99, 0x68, 0xab, 0xd1, 0x15, 0x03, 0xc1, 0xa8, 0x64, 0x09, 0xc6, 0x32, 0xe0, 0xbe, 0x47, 0xdd, 0x4e, 0xfc}
+	binaryIDGetMemoryInfo                   = binary.ID{0xf0, 0x9e, 0x21, 0x69, 0x43, 0xaf, 0xf8, 0xdb, 0x59, 0x80, 0xa0, 0x33, 0x66, 0xda, 0xd9, 0xae, 0xdf, 0x5a, 0x0a, 0x10}
 	binaryIDGetState                        = binary.ID{0xe4, 0x56, 0xeb, 0x40, 0x7b, 0x2d, 0x6e, 0xc6, 0xb4, 0x8b, 0x8f, 0x00, 0x1f, 0xdb, 0xb2, 0x6f, 0xea, 0x28, 0x5a, 0x80}
 	binaryIDGetTimingInfo                   = binary.ID{0x5c, 0x6c, 0xbc, 0xb3, 0x96, 0x1a, 0xbc, 0x36, 0x47, 0x08, 0x2f, 0x6c, 0x34, 0x93, 0xfc, 0x4b, 0x62, 0xea, 0xa3, 0xc2}
 	binaryIDPrerenderFramebuffers           = binary.ID{0x3c, 0xf2, 0xf2, 0xa2, 0x16, 0xa8, 0xe1, 0xe2, 0x7f, 0x51, 0xb8, 0xbb, 0xaa, 0x36, 0x11, 0x8d, 0x00, 0xb6, 0xf6, 0x79}
@@ -510,10 +510,11 @@ func (*GetMemoryInfo) Class() binary.Class {
 	return (*binaryClassGetMemoryInfo)(nil)
 }
 func doEncodeGetMemoryInfo(e binary.Encoder, o *GetMemoryInfo) error {
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Range); err != nil {
@@ -522,13 +523,12 @@ func doEncodeGetMemoryInfo(e binary.Encoder, o *GetMemoryInfo) error {
 	return nil
 }
 func doDecodeGetMemoryInfo(d binary.Decoder, o *GetMemoryInfo) error {
-	if err := d.Value(&o.Capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
 	} else {
-		o.After = atom.ID(obj)
+		o.After = nil
 	}
 	if err := d.Value(&o.Range); err != nil {
 		return err
@@ -536,10 +536,7 @@ func doDecodeGetMemoryInfo(d binary.Decoder, o *GetMemoryInfo) error {
 	return nil
 }
 func doSkipGetMemoryInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*memory.Range)(nil)); err != nil {
@@ -567,8 +564,7 @@ var schemaGetMemoryInfo = &schema.Class{
 	Package: "builder",
 	Name:    "GetMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
 	},
 }

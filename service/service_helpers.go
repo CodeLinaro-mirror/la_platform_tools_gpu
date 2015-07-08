@@ -40,8 +40,8 @@ func (r resultGetDevices) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetMemoryInfo(capture: %v, after: %v, rng: %v)",
-		c.capture, c.after, c.rng,
+	fmt.Fprintf(f, "GetMemoryInfo(after: %v, rng: %v)",
+		c.after, c.rng,
 	)
 }
 func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
