@@ -23,7 +23,7 @@ import (
 // Report is a path that refers to a capture's report.
 type Report struct {
 	binary.Generate
-	Capture *Capture // The path to the capture containing the atoms.
+	Capture *Capture // The path to the capture containing the report.
 }
 
 // String returns the string representation of the path.

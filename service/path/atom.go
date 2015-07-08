@@ -45,19 +45,10 @@ func (n *Atom) Clone() Path {
 	return &Atom{Atoms: n.Atoms.Clone().(*Atoms), Index: n.Index}
 }
 
-// Field implements the Value interface.
-func (n *Atom) Field(name string) Value {
+// Field returns the path to the field value with the specified name on the
+// atom represented by this path.
+func (n *Atom) Field(name string) *Field {
 	return &Field{Struct: n, Name: name}
-}
-
-// ArrayIndex implements the Value interface.
-func (n *Atom) ArrayIndex(index uint64) Value {
-	return &ArrayIndex{Array: n, Index: index}
-}
-
-// MapIndex implements the Value interface.
-func (n *Atom) MapIndex(key interface{}) Value {
-	return &MapIndex{Map: n, Key: key}
 }
 
 // StateAfter returns the path to the state immediately following this atom.
