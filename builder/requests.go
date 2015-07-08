@@ -119,7 +119,7 @@ type ConvertImage struct {
 // BuildReport generates a service.Report for the given capture.
 type BuildReport struct {
 	binary.Generate
-	Atoms service.AtomStreamId
+	Capture *path.Capture
 }
 
 // Get resolves the object, value or memory at Path.

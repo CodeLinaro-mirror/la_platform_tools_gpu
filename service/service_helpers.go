@@ -173,9 +173,6 @@ func (h ImageInfoId) Valid() bool {
 func (h MemoryInfoId) Valid() bool {
 	return h.ID.Valid()
 }
-func (h ReportId) Valid() bool {
-	return h.ID.Valid()
-}
 func (h TimingInfoId) Valid() bool {
 	return h.ID.Valid()
 }
@@ -249,20 +246,17 @@ func (c *Device) GetVersion() string         { return c.Version }
 func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
-	Report ReportId,
 	Apis []ApiId,
 ) *Capture {
 	return &Capture{
-		Name:   Name,
-		Atoms:  Atoms,
-		Report: Report,
-		Apis:   Apis,
+		Name:  Name,
+		Atoms: Atoms,
+		Apis:  Apis,
 	}
 }
 
 func (c *Capture) GetName() string        { return c.Name }
 func (c *Capture) GetAtoms() AtomStreamId { return c.Atoms }
-func (c *Capture) GetReport() ReportId    { return c.Report }
 func (c *Capture) GetApis() []ApiId       { return c.Apis }
 
 func CreateReport(

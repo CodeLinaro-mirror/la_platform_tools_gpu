@@ -114,16 +114,10 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		}
 	}
 
-	reportID, err := getBuildReport(streamID, d, l)
-	if err != nil {
-		return service.CaptureId{}, err
-	}
-
 	capture := &service.Capture{
-		Apis:   apiIDs,
-		Name:   name,
-		Atoms:  streamID,
-		Report: reportID,
+		Apis:  apiIDs,
+		Name:  name,
+		Atoms: streamID,
 	}
 
 	captureID, err := service.StoreCapture(capture, d, l)
@@ -139,11 +133,6 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 // Captures returns all the captures stored by the database by identifier.
 func Captures(db database.Database, logger log.Logger) ([]service.CaptureId, error) {
 	return captures, nil
-}
-
-func getBuildReport(streamID service.AtomStreamId, d database.Database, l log.Logger) (service.ReportId, error) {
-	reportID, err := database.Store(&BuildReport{Atoms: streamID}, d, l)
-	return service.ReportId{ID: reportID}, err
 }
 
 func loadAtoms(streamID service.AtomStreamId, d database.Database, l log.Logger) (atom.List, error) {

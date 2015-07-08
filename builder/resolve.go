@@ -50,8 +50,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = atoms.(*service.AtomStream)
 
 		case *path.Report:
-			capture := v[i-1].(*service.Capture)
-			report, err := d.Resolve(capture.Report.ID, l)
+			report, err := database.Build(&BuildReport{Capture: p.Capture}, d, l)
 			if err != nil {
 				return nil, err
 			}
