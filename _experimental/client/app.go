@@ -242,10 +242,8 @@ func loadTiming(appCtx *ApplicationContext) {
 		l := appCtx.Logger().Fork().Enter("Replay: timing")
 		appCtx.timingInfo = service.TimingInfo{}
 
-		mask := service.TimingMaskTimingPerFrame |
-			service.TimingMaskTimingPerDrawCall |
-			service.TimingMaskTimingPerCommand
-		timingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, mask, l)
+		flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand | service.TimingFlagsTimingPerFrame
+		timingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID, captureID, flags, l)
 		if err != nil {
 			return
 		}

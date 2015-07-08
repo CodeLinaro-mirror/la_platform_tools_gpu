@@ -206,7 +206,7 @@ pass.
 
 ```go
 type QueryCallDurations interface {
-	QueryCallDurations(ctx *Context, mgr *Manager, mask service.TimingMask) <-chan CallTiming
+	QueryCallDurations(ctx *Context, mgr *Manager, flags service.TimingFlags) <-chan CallTiming
 }
 ```
 

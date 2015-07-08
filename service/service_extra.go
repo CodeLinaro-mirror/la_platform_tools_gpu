@@ -119,7 +119,7 @@ type callGetTimingInfo struct {
 	binary.Generate
 	device  DeviceId
 	capture CaptureId
-	mask    TimingMask
+	flags   TimingFlags
 }
 
 // Result GetTimingInfo

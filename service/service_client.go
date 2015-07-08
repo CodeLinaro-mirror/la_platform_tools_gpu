@@ -114,9 +114,9 @@ func (c client) GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiI
 	return
 }
 
-func (c client) GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (res TimingInfoId, err error) {
+func (c client) GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (res TimingInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, mask: mask}); err == nil {
+	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, flags: flags}); err == nil {
 		res = val.(*resultGetTimingInfo).value
 	} else {
 		log.Errorf(l, "RPC GetTimingInfo failed with error: %v", err)

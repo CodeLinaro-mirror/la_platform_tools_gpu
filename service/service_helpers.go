@@ -72,8 +72,8 @@ func (r resultGetFramebufferDepth) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetTimingInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetTimingInfo(device: %v, capture: %v, mask: %v)",
-		c.device, c.capture, c.mask,
+	fmt.Fprintf(f, "GetTimingInfo(device: %v, capture: %v, flags: %v)",
+		c.device, c.capture, c.flags,
 	)
 }
 func (r resultGetTimingInfo) Format(f fmt.State, c rune) {
@@ -199,19 +199,21 @@ func (h TimingInfoId) Valid() bool {
 	return h.ID.Valid()
 }
 
-func (i Severity) IsEmergency() bool           { return i == SeverityEmergency }
-func (i Severity) IsAlert() bool               { return i == SeverityAlert }
-func (i Severity) IsCritical() bool            { return i == SeverityCritical }
-func (i Severity) IsError() bool               { return i == SeverityError }
-func (i Severity) IsWarning() bool             { return i == SeverityWarning }
-func (i Severity) IsNotice() bool              { return i == SeverityNotice }
-func (i Severity) IsInformational() bool       { return i == SeverityInformational }
-func (i Severity) IsDebug() bool               { return i == SeverityDebug }
-func (i ImageFormat) IsRGBA8() bool            { return i == ImageFormatRGBA8 }
-func (i ImageFormat) IsFloat32() bool          { return i == ImageFormatFloat32 }
-func (i TimingMask) IsTimingPerCommand() bool  { return i == TimingMaskTimingPerCommand }
-func (i TimingMask) IsTimingPerDrawCall() bool { return i == TimingMaskTimingPerDrawCall }
-func (i TimingMask) IsTimingPerFrame() bool    { return i == TimingMaskTimingPerFrame }
+func (i Severity) IsEmergency() bool            { return i == SeverityEmergency }
+func (i Severity) IsAlert() bool                { return i == SeverityAlert }
+func (i Severity) IsCritical() bool             { return i == SeverityCritical }
+func (i Severity) IsError() bool                { return i == SeverityError }
+func (i Severity) IsWarning() bool              { return i == SeverityWarning }
+func (i Severity) IsNotice() bool               { return i == SeverityNotice }
+func (i Severity) IsInformational() bool        { return i == SeverityInformational }
+func (i Severity) IsDebug() bool                { return i == SeverityDebug }
+func (i ImageFormat) IsRGBA8() bool             { return i == ImageFormatRGBA8 }
+func (i ImageFormat) IsFloat32() bool           { return i == ImageFormatFloat32 }
+func (i TimingFlags) IsTimingCPU() bool         { return i == TimingFlagsTimingCPU }
+func (i TimingFlags) IsTimingGPU() bool         { return i == TimingFlagsTimingGPU }
+func (i TimingFlags) IsTimingPerCommand() bool  { return i == TimingFlagsTimingPerCommand }
+func (i TimingFlags) IsTimingPerDrawCall() bool { return i == TimingFlagsTimingPerDrawCall }
+func (i TimingFlags) IsTimingPerFrame() bool    { return i == TimingFlagsTimingPerFrame }
 
 func CreateSchema(
 	Classes []*schema.Class,

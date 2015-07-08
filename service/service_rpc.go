@@ -23,7 +23,7 @@ type RPC interface {
 	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
-	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
+	GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
@@ -119,13 +119,15 @@ const (
 	ImageFormatFloat32 ImageFormat = 1
 )
 
-// Enum TimingMask
-type TimingMask int
+// Enum TimingFlags
+type TimingFlags int
 
 const (
-	TimingMaskTimingPerCommand  TimingMask = 1
-	TimingMaskTimingPerDrawCall TimingMask = 2
-	TimingMaskTimingPerFrame    TimingMask = 4
+	TimingFlagsTimingCPU         TimingFlags = 0
+	TimingFlagsTimingGPU         TimingFlags = 1
+	TimingFlagsTimingPerCommand  TimingFlags = 2
+	TimingFlagsTimingPerDrawCall TimingFlags = 4
+	TimingFlagsTimingPerFrame    TimingFlags = 8
 )
 
 // Class Schema
