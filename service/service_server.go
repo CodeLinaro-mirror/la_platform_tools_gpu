@@ -181,25 +181,6 @@ func (r Resolver) ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, 
 	return ResolveAtomStream(id, r.Database, l)
 }
 
-// StoreBinary stores v into the database d, returning the BinaryId.
-func StoreBinary(v *Binary, d database.Database, l log.Logger) (BinaryId, error) {
-	id, err := database.Store(v, d, l)
-	return BinaryId{ID: id}, err
-}
-
-// ResolveBinary loads and returns the Binary stored in the database d, using id.
-func ResolveBinary(id BinaryId, d database.Database, l log.Logger) (res Binary, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*Binary))
-	}
-	return res, err
-}
-
-// ResolveBinary loads and returns the Binary stored in the resolver's database, using id.
-func (r Resolver) ResolveBinary(id BinaryId, l log.Logger) (Binary, error) {
-	return ResolveBinary(id, r.Database, l)
-}
-
 // StoreCapture stores v into the database d, returning the CaptureId.
 func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, error) {
 	id, err := database.Store(v, d, l)

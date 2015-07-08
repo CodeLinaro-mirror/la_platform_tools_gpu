@@ -81,5 +81,5 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 		return nil, img.Error
 	}
 
-	return &service.Binary{Data: img.Data}, nil
+	return img.Data, nil
 }
