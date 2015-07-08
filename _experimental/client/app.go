@@ -308,7 +308,7 @@ func DoReplay(appCtx *ApplicationContext) {
 		var img *image.RGBA
 		if width > 0 && height > 0 {
 			img = image.NewRGBA(image.Rect(0, 0, width, height))
-			img.Pix = []byte(imageData.Data)
+			img.Pix = imageData
 		}
 
 		appCtx.Run(func() {
@@ -342,7 +342,7 @@ func DoReplay(appCtx *ApplicationContext) {
 			return
 		}
 
-		buffer := imageData.Data
+		buffer := imageData
 
 		width, height := int(imageInfo.Width), int(imageInfo.Height)
 

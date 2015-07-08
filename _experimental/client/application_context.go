@@ -409,7 +409,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 		log.Infof(l, "Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
 		if imageInfo.Width > 0 && imageInfo.Height > 0 {
 			img := image.NewRGBA(image.Rect(0, 0, int(imageInfo.Width), int(imageInfo.Height)))
-			img.Pix = []byte(imageData.Data)
+			img.Pix = imageData
 			c.Run(func() {
 				tex := c.theme.Driver().CreateTexture(img, 1)
 				tex.SetFlipY(true)

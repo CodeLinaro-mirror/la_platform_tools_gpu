@@ -237,3 +237,11 @@ func (s rpcServer) Set(p path.Path, v interface{}, l log.Logger) (path.Path, err
 	}
 	return res.(path.Path), nil
 }
+
+// ResolveBinary resolves and returns the byte array associated with id.
+func (s rpcServer) ResolveBinary(id service.BinaryId, l log.Logger) (res []uint8, err error) {
+	if out, err := s.Database.Resolve(id.ID, l); err == nil {
+		res = out.([]uint8)
+	}
+	return res, err
+}
