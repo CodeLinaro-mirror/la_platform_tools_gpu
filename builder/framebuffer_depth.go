@@ -17,6 +17,7 @@ package builder
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -27,20 +28,14 @@ import (
 // BuildLazy returns the *service.ImageInfo resulting from the given
 // GetFramebufferDepth request.
 func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	if !r.API.Valid() {
-		return nil, fmt.Errorf("API must be valid")
-	}
-
-	fbWidth, fbHeight, err := getAtomFramebufferDimensions(r.Capture, r.After, d, l)
+	fbWidth, fbHeight, err := getAtomFramebufferDimensions(r.After, d, l)
 	if err != nil {
 		return nil, err
 	}
 
 	data, err := database.Store(&RenderFramebufferDepth{
-		Capture: r.Capture,
-		Device:  r.Device,
-		API:     r.API,
-		After:   r.After,
+		Device: r.Device,
+		After:  r.After,
 	}, d, l)
 
 	if err != nil {
@@ -61,13 +56,19 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		DeviceID:  r.Device,
-		CaptureID: r.Capture,
+		DeviceID:  service.DeviceId{ID: r.Device.ID},
+		CaptureID: service.CaptureId{ID: r.After.Atoms.Capture.ID},
 	}
 
-	api := gfxapi.Find(gfxapi.ID(r.API.ID))
+	after, err := ResolveAtom(r.After, d, l)
+	if err != nil {
+		return nil, err
+	}
+
+	apiID := after.API()
+	api := gfxapi.Find(apiID)
 	if api == nil {
-		return nil, fmt.Errorf("Unknown graphics API '%v'", r.API.ID)
+		return nil, fmt.Errorf("Unknown graphics API '%v'", apiID)
 	}
 
 	query, ok := api.(replay.QueryDepthBuffer)
@@ -75,7 +76,7 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 		return nil, fmt.Errorf("The graphics API %s does not support reading depth buffers", api.Name())
 	}
 
-	img := <-query.QueryDepthBuffer(ctx, mgr, r.After)
+	img := <-query.QueryDepthBuffer(ctx, mgr, atom.ID(r.After.Index))
 	if img.Error != nil {
 		log.Errorf(l, "%v", img.Error)
 		return nil, img.Error

@@ -30,6 +30,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // The list of captures currently imported.
@@ -149,21 +150,14 @@ func loadAtoms(streamID service.AtomStreamId, d database.Database, l log.Logger)
 // will trigger a computation of the dimensions for all atoms of this
 // capture, which will be cached to the database for subsequent calls,
 // regardless of the given atom.
-func getAtomFramebufferDimensions(captureID service.CaptureId, after atom.ID, d database.Database, l log.Logger) (width, height uint32, err error) {
-	id, err := database.Store(&getCaptureFramebufferDimensions{Capture: captureID}, d, l)
+func getAtomFramebufferDimensions(after *path.Atom, d database.Database, l log.Logger) (width, height uint32, err error) {
+	obj, err := database.Build(&getCaptureFramebufferDimensions{Capture: after.Atoms.Capture}, d, l)
 	if err != nil {
 		return 0, 0, err
 	}
-
-	var captureFbDims *captureFramebufferDimensions
-	if obj, err := d.Resolve(id, l); err == nil {
-		captureFbDims = obj.(*captureFramebufferDimensions)
-	} else {
-		return 0, 0, err
-	}
-
+	captureFbDims := obj.(*captureFramebufferDimensions)
 	idx := sort.Search(len(captureFbDims.Dimensions), func(x int) bool {
-		return captureFbDims.Dimensions[x].From > after
+		return uint64(captureFbDims.Dimensions[x].From) > after.Index
 	}) - 1
 
 	if idx < 0 {
@@ -196,12 +190,8 @@ func (request *getCaptureFramebufferDimensions) BuildLazy(c interface{}, d datab
 			panic(fmt.Errorf("Panic at atom %d: %v", id, err))
 		}
 	}()
-	capture, err := service.ResolveCapture(request.Capture, d, l)
-	if err != nil {
-		return nil, err
-	}
 
-	atoms, err := loadAtoms(capture.Atoms, d, l)
+	atoms, err := ResolveAtoms(request.Capture.Atoms(), d, l)
 	if err != nil {
 		return nil, err
 	}

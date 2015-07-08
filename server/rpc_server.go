@@ -140,18 +140,20 @@ func (s rpcServer) GetMemoryInfo(
 // to adjust maximum desired dimensions of the image, as well as applying debug
 // visualizations.
 func (s rpcServer) GetFramebufferColor(
-	deviceID service.DeviceId,
-	captureID service.CaptureId,
-	apiID service.ApiId,
-	after uint64,
+	device *path.Device,
+	after *path.Atom,
 	settings service.RenderSettings,
 	l log.Logger) (service.ImageInfoId, error) {
 
+	if err := device.Validate(); err != nil {
+		return service.ImageInfoId{}, err
+	}
+	if err := after.Validate(); err != nil {
+		return service.ImageInfoId{}, err
+	}
 	id, err := database.Store(&builder.GetFramebufferColor{
-		Device:   deviceID,
-		Capture:  captureID,
-		API:      apiID,
-		After:    atom.ID(after),
+		Device:   device,
+		After:    after,
 		Settings: settings,
 	}, s.Database, l)
 	return service.ImageInfoId{ID: id}, err
@@ -161,17 +163,19 @@ func (s rpcServer) GetFramebufferColor(
 // depth buffer for the given device, capture and graphics API immediately
 // following the atom after.
 func (s rpcServer) GetFramebufferDepth(
-	deviceID service.DeviceId,
-	captureID service.CaptureId,
-	apiID service.ApiId,
-	after uint64,
+	device *path.Device,
+	after *path.Atom,
 	l log.Logger) (service.ImageInfoId, error) {
 
+	if err := device.Validate(); err != nil {
+		return service.ImageInfoId{}, err
+	}
+	if err := after.Validate(); err != nil {
+		return service.ImageInfoId{}, err
+	}
 	id, err := database.Store(&builder.GetFramebufferDepth{
-		Device:  deviceID,
-		Capture: captureID,
-		API:     apiID,
-		After:   atom.ID(after),
+		Device: device,
+		After:  after,
 	}, s.Database, l)
 	return service.ImageInfoId{ID: id}, err
 }
@@ -201,16 +205,22 @@ func (s rpcServer) GetTimingInfo(
 // the client.
 // This function is experimental and may change signature.
 func (s rpcServer) PrerenderFramebuffers(
-	deviceID service.DeviceId,
-	captureID service.CaptureId,
+	device *path.Device,
+	capture *path.Capture,
 	apiID service.ApiId,
 	width, height uint32,
 	atomIDs []uint64,
 	l log.Logger) (service.BinaryId, error) {
 
+	if err := device.Validate(); err != nil {
+		return service.BinaryId{}, err
+	}
+	if err := capture.Validate(); err != nil {
+		return service.BinaryId{}, err
+	}
 	id, err := database.Store(&builder.PrerenderFramebuffers{
-		Device:  deviceID,
-		Capture: captureID,
+		Device:  device,
+		Capture: capture,
 		API:     apiID,
 		Width:   width,
 		Height:  height,

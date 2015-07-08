@@ -47,20 +47,16 @@ type GetMemoryInfo struct {
 // GetFramebufferColor records the parameters of a service.GetFramebufferColor RPC request.
 type GetFramebufferColor struct {
 	binary.Generate
-	Device   service.DeviceId
-	Capture  service.CaptureId
-	API      service.ApiId
-	After    atom.ID
+	Device   *path.Device
+	After    *path.Atom
 	Settings service.RenderSettings
 }
 
 // GetFramebufferDepth records the parameters of a service.GetFramebufferDepth RPC request.
 type GetFramebufferDepth struct {
 	binary.Generate
-	Device  service.DeviceId
-	Capture service.CaptureId
-	API     service.ApiId
-	After   atom.ID
+	Device *path.Device
+	After  *path.Atom
 }
 
 // GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
@@ -74,8 +70,8 @@ type GetTimingInfo struct {
 // PrerenderFramebuffers records the parameters of a service.PrerenderFramebuffers RPC request.
 type PrerenderFramebuffers struct {
 	binary.Generate
-	Device  service.DeviceId
-	Capture service.CaptureId
+	Device  *path.Device
+	Capture *path.Capture
 	API     service.ApiId
 	AtomIDs []uint64
 	Width   uint32
@@ -85,10 +81,8 @@ type PrerenderFramebuffers struct {
 // RenderFramebufferDepth records the parameters of an internal RenderFramebufferDepth request.
 type RenderFramebufferDepth struct {
 	binary.Generate
-	Device            service.DeviceId
-	Capture           service.CaptureId
-	API               service.ApiId
-	After             atom.ID
+	Device            *path.Device
+	After             *path.Atom
 	FramebufferWidth  uint32
 	FramebufferHeight uint32
 }
@@ -96,10 +90,8 @@ type RenderFramebufferDepth struct {
 // RenderFramebufferColor records the parameters of an internal RenderFramebufferColor request.
 type RenderFramebufferColor struct {
 	binary.Generate
-	Device    service.DeviceId
-	Capture   service.CaptureId
-	API       service.ApiId
-	After     atom.ID
+	Device    *path.Device
+	After     *path.Atom
 	Width     uint32
 	Height    uint32
 	Wireframe bool
@@ -139,7 +131,7 @@ type Set struct {
 // getCaptureFramebufferDimensions records the parameters of an internal request.
 type getCaptureFramebufferDimensions struct {
 	binary.Generate
-	Capture service.CaptureId
+	Capture *path.Capture
 }
 
 // atomFramebufferDimensions records the parameters of an internal resource for getCaptureFramebufferDimensions.

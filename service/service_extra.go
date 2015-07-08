@@ -73,10 +73,8 @@ type resultGetMemoryInfo struct {
 // Call GetFramebufferColor
 type callGetFramebufferColor struct {
 	binary.Generate
-	device   DeviceId
-	capture  CaptureId
-	api      ApiId
-	after    uint64
+	device   *path.Device
+	after    *path.Atom
 	settings RenderSettings
 }
 
@@ -89,10 +87,8 @@ type resultGetFramebufferColor struct {
 // Call GetFramebufferDepth
 type callGetFramebufferDepth struct {
 	binary.Generate
-	device  DeviceId
-	capture CaptureId
-	api     ApiId
-	after   uint64
+	device *path.Device
+	after  *path.Atom
 }
 
 // Result GetFramebufferDepth
@@ -118,8 +114,8 @@ type resultGetTimingInfo struct {
 // Call PrerenderFramebuffers
 type callPrerenderFramebuffers struct {
 	binary.Generate
-	device  DeviceId
-	capture CaptureId
+	device  *path.Device
+	capture *path.Capture
 	api     ApiId
 	width   uint32
 	height  uint32
