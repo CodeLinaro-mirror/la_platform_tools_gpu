@@ -25,8 +25,8 @@ import (
 )
 
 // BuildLazy writes to out the schema.Report resource resulting from the given ResolveReport request.
-func (request *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	atoms, err := loadAtoms(request.Atoms, d, l)
+func (r *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
+	atoms, err := ResolveAtoms(r.Capture.Atoms(), d, l)
 	if err != nil {
 		return nil, err
 	}
