@@ -118,18 +118,18 @@ func run() error {
 	if *verbose {
 		fmt.Printf("Generating\n")
 	}
-	gen := generate.NewGenerator()
+	t := generate.NewTemplates()
 	for _, dir := range loader.Directories {
 		if !dir.Scan {
 			continue
 		}
 		if dir.Module.Output != nil {
-			if err := output(gen, dir.Module.Output); err != nil {
+			if err := output(t, dir.Module.Output); err != nil {
 				return err
 			}
 		}
 		if dir.Test.Output != nil {
-			if err := output(gen, dir.Test.Output); err != nil {
+			if err := output(t, dir.Test.Output); err != nil {
 				return err
 			}
 		}
@@ -137,7 +137,7 @@ func run() error {
 	return nil
 }
 
-func output(gen *generate.Generator, file *generate.File) error {
+func output(t *generate.Templates, file *generate.File) error {
 	if len(file.Structs) == 0 && len(file.Constants) == 0 {
 		return nil
 	}
@@ -153,7 +153,7 @@ func output(gen *generate.Generator, file *generate.File) error {
 		entry := Entry{
 			File:      *file,
 			Output:    file.Package + "_binary.go",
-			Generator: gen.GoFile,
+			Generator: t.GoFile,
 		}
 		entry.File.Copyright = copyright.Build(
 			"generated_by", copyright.Info{
@@ -178,7 +178,7 @@ func output(gen *generate.Generator, file *generate.File) error {
 		entry := Entry{
 			File:      *file,
 			Output:    filepath.Join(*java, source, pkgPath, "ObjectFactory.java"),
-			Generator: gen.JavaFile,
+			Generator: t.JavaFile,
 		}
 		entry.File.Copyright = copyright.Build(
 			"generated_aosp_java", copyright.Info{
@@ -200,7 +200,7 @@ func output(gen *generate.Generator, file *generate.File) error {
 		entry := Entry{
 			File:      *file,
 			Output:    filepath.Join(*cpp, cppNamespace+".h"),
-			Generator: gen.CppFile,
+			Generator: t.CppFile,
 		}
 		entry.File.Package = cppNamespace
 		entry.File.Copyright = copyright.Build(
