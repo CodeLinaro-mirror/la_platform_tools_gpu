@@ -99,7 +99,7 @@ func (a api) ReplayTransforms(
 
 		case timeCallsRequest:
 			profiling = true
-			transforms.Add(timingInfo(req.flags, req.out))
+			transforms.Add(timingInfo(req.flags, req.out, device, db, logger))
 		}
 	}
 
