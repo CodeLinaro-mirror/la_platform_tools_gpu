@@ -67,9 +67,9 @@ type GetFramebufferDepth struct {
 // GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
 type GetTimingInfo struct {
 	binary.Generate
-	Device     service.DeviceId
-	Capture    service.CaptureId
-	TimingMask service.TimingMask
+	Device  service.DeviceId
+	Capture service.CaptureId
+	Flags   service.TimingFlags
 }
 
 // PrerenderFramebuffers records the parameters of a service.PrerenderFramebuffers RPC request.

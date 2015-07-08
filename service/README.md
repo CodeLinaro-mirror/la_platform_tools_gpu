@@ -814,7 +814,7 @@ type RPC interface {
 	GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
-	GetTimingInfo(device DeviceId, capture CaptureId, mask TimingMask, l log.Logger) (TimingInfoId, error)
+	GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (TimingInfoId, error)
 	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
@@ -1163,6 +1163,66 @@ func (v *Severity) Parse(s string) error
 func (v Severity) String() string
 ```
 
+#### type TimingFlags
+
+```go
+type TimingFlags int
+```
+
+Enum TimingFlags
+
+```go
+const (
+	TimingFlagsTimingCPU         TimingFlags = 0
+	TimingFlagsTimingGPU         TimingFlags = 1
+	TimingFlagsTimingPerCommand  TimingFlags = 2
+	TimingFlagsTimingPerDrawCall TimingFlags = 4
+	TimingFlagsTimingPerFrame    TimingFlags = 8
+)
+```
+
+#### func (TimingFlags) IsTimingCPU
+
+```go
+func (i TimingFlags) IsTimingCPU() bool
+```
+
+#### func (TimingFlags) IsTimingGPU
+
+```go
+func (i TimingFlags) IsTimingGPU() bool
+```
+
+#### func (TimingFlags) IsTimingPerCommand
+
+```go
+func (i TimingFlags) IsTimingPerCommand() bool
+```
+
+#### func (TimingFlags) IsTimingPerDrawCall
+
+```go
+func (i TimingFlags) IsTimingPerDrawCall() bool
+```
+
+#### func (TimingFlags) IsTimingPerFrame
+
+```go
+func (i TimingFlags) IsTimingPerFrame() bool
+```
+
+#### func (*TimingFlags) Parse
+
+```go
+func (v *TimingFlags) Parse(s string) error
+```
+
+#### func (TimingFlags) String
+
+```go
+func (v TimingFlags) String() string
+```
+
 #### type TimingInfo
 
 ```go
@@ -1246,50 +1306,4 @@ func (*TimingInfoId) Class() binary.Class
 
 ```go
 func (h TimingInfoId) Valid() bool
-```
-
-#### type TimingMask
-
-```go
-type TimingMask int
-```
-
-Enum TimingMask
-
-```go
-const (
-	TimingMaskTimingPerCommand  TimingMask = 1
-	TimingMaskTimingPerDrawCall TimingMask = 2
-	TimingMaskTimingPerFrame    TimingMask = 4
-)
-```
-
-#### func (TimingMask) IsTimingPerCommand
-
-```go
-func (i TimingMask) IsTimingPerCommand() bool
-```
-
-#### func (TimingMask) IsTimingPerDrawCall
-
-```go
-func (i TimingMask) IsTimingPerDrawCall() bool
-```
-
-#### func (TimingMask) IsTimingPerFrame
-
-```go
-func (i TimingMask) IsTimingPerFrame() bool
-```
-
-#### func (*TimingMask) Parse
-
-```go
-func (v *TimingMask) Parse(s string) error
-```
-
-#### func (TimingMask) String
-
-```go
-func (v TimingMask) String() string
 ```
