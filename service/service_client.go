@@ -74,16 +74,6 @@ func (c client) GetDevices(l log.Logger) (res []DeviceId, err error) {
 	return
 }
 
-func (c client) GetHierarchy(capture CaptureId, l log.Logger) (res HierarchyId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetHierarchy{capture: capture}); err == nil {
-		res = val.(*resultGetHierarchy).value
-	} else {
-		log.Errorf(l, "RPC GetHierarchy failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) GetMemoryInfo(capture CaptureId, after uint64, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetMemoryInfo{capture: capture, after: after, rng: rng}); err == nil {
@@ -190,16 +180,6 @@ func (c client) ResolveDevice(id DeviceId, l log.Logger) (res Device, err error)
 		res = val.(*resultResolveDevice).value
 	} else {
 		log.Errorf(l, "RPC ResolveDevice failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveHierarchy(id HierarchyId, l log.Logger) (res Hierarchy, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveHierarchy{id: id}); err == nil {
-		res = val.(*resultResolveHierarchy).value
-	} else {
-		log.Errorf(l, "RPC ResolveHierarchy failed with error: %v", err)
 	}
 	return
 }

@@ -22,7 +22,6 @@ import schema "schema.api"
 @handle type string BinaryId
 @handle type string CaptureId
 @handle type string DeviceId
-@handle type string HierarchyId
 @handle type string ImageInfoId
 @handle type string MemoryInfoId
 @handle type string ReportId
@@ -45,11 +44,6 @@ extern CaptureId[] GetCaptures()
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
 extern DeviceId[] GetDevices()
-
-// GetHierarchy returns the atom hierarchy identifier for the given capture.
-// Currently there is only one hierarchy per capture, but this is likely to
-// change in the future.
-extern HierarchyId GetHierarchy(CaptureId capture)
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and range, immediately following the atom
@@ -108,7 +102,6 @@ extern AtomStream         ResolveAtomStream(AtomStreamId id)
 extern u8[]               ResolveBinary(BinaryId id)
 extern Capture            ResolveCapture(CaptureId id)
 extern Device             ResolveDevice(DeviceId id)
-extern Hierarchy          ResolveHierarchy(HierarchyId id)
 extern ImageInfo          ResolveImageInfo(ImageInfoId id)
 extern MemoryInfo         ResolveMemoryInfo(MemoryInfoId id)
 extern TimingInfo         ResolveTimingInfo(TimingInfoId id)

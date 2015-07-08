@@ -33,7 +33,6 @@ func init() {
 	Namespace.Add((*Device)(nil).Class())
 	Namespace.Add((*DeviceId)(nil).Class())
 	Namespace.Add((*Hierarchy)(nil).Class())
-	Namespace.Add((*HierarchyId)(nil).Class())
 	Namespace.Add((*ImageInfo)(nil).Class())
 	Namespace.Add((*ImageInfoId)(nil).Class())
 	Namespace.Add((*MemoryInfo)(nil).Class())
@@ -49,7 +48,6 @@ func init() {
 	Namespace.Add((*callGetDevices)(nil).Class())
 	Namespace.Add((*callGetFramebufferColor)(nil).Class())
 	Namespace.Add((*callGetFramebufferDepth)(nil).Class())
-	Namespace.Add((*callGetHierarchy)(nil).Class())
 	Namespace.Add((*callGetMemoryInfo)(nil).Class())
 	Namespace.Add((*callGetSchema)(nil).Class())
 	Namespace.Add((*callGetTimingInfo)(nil).Class())
@@ -59,7 +57,6 @@ func init() {
 	Namespace.Add((*callResolveBinary)(nil).Class())
 	Namespace.Add((*callResolveCapture)(nil).Class())
 	Namespace.Add((*callResolveDevice)(nil).Class())
-	Namespace.Add((*callResolveHierarchy)(nil).Class())
 	Namespace.Add((*callResolveImageInfo)(nil).Class())
 	Namespace.Add((*callResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*callResolveTimingInfo)(nil).Class())
@@ -69,7 +66,6 @@ func init() {
 	Namespace.Add((*resultGetDevices)(nil).Class())
 	Namespace.Add((*resultGetFramebufferColor)(nil).Class())
 	Namespace.Add((*resultGetFramebufferDepth)(nil).Class())
-	Namespace.Add((*resultGetHierarchy)(nil).Class())
 	Namespace.Add((*resultGetMemoryInfo)(nil).Class())
 	Namespace.Add((*resultGetSchema)(nil).Class())
 	Namespace.Add((*resultGetTimingInfo)(nil).Class())
@@ -79,7 +75,6 @@ func init() {
 	Namespace.Add((*resultResolveBinary)(nil).Class())
 	Namespace.Add((*resultResolveCapture)(nil).Class())
 	Namespace.Add((*resultResolveDevice)(nil).Class())
-	Namespace.Add((*resultResolveHierarchy)(nil).Class())
 	Namespace.Add((*resultResolveImageInfo)(nil).Class())
 	Namespace.Add((*resultResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*resultResolveTimingInfo)(nil).Class())
@@ -99,7 +94,6 @@ var (
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
 	binaryIDHierarchy                   = binary.ID{0x26, 0x8b, 0xf1, 0xcb, 0xd8, 0xc8, 0xc2, 0x60, 0x1e, 0xfa, 0x3f, 0x8e, 0xde, 0xc9, 0xe1, 0x01, 0x43, 0x9f, 0x4c, 0xff}
-	binaryIDHierarchyId                 = binary.ID{0xfd, 0x20, 0x19, 0xa0, 0xb5, 0xac, 0x49, 0xc7, 0x7d, 0x6e, 0xf8, 0x32, 0x6b, 0x78, 0x9f, 0xd7, 0x6d, 0xf0, 0x2c, 0xaf}
 	binaryIDImageInfo                   = binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}
 	binaryIDImageInfoId                 = binary.ID{0xb1, 0x03, 0x2c, 0x17, 0x12, 0xab, 0x40, 0x23, 0x1d, 0x01, 0xb9, 0x4b, 0x9b, 0x8c, 0x9d, 0x5a, 0x19, 0x45, 0xaf, 0x70}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
@@ -115,7 +109,6 @@ var (
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
 	binaryIDcallGetFramebufferColor     = binary.ID{0x05, 0xfd, 0x78, 0xff, 0x3d, 0x76, 0x07, 0x2d, 0xee, 0x91, 0x3b, 0xf1, 0x99, 0x83, 0x1e, 0x4f, 0xaf, 0xd3, 0xca, 0x48}
 	binaryIDcallGetFramebufferDepth     = binary.ID{0xdd, 0x68, 0xbd, 0xbc, 0x24, 0x0a, 0x1a, 0x1c, 0xa5, 0xa6, 0xfc, 0xe2, 0x64, 0x38, 0xac, 0x67, 0xa6, 0x86, 0x64, 0x5f}
-	binaryIDcallGetHierarchy            = binary.ID{0xbf, 0x39, 0x53, 0xd4, 0xc3, 0xac, 0x61, 0x0a, 0xce, 0x6c, 0x72, 0x04, 0x39, 0xcd, 0x5f, 0xe5, 0x92, 0xd5, 0xf6, 0xa6}
 	binaryIDcallGetMemoryInfo           = binary.ID{0x81, 0x0d, 0xda, 0xc7, 0xcf, 0xfa, 0x3b, 0x58, 0xe5, 0x0c, 0x0c, 0x2f, 0xa2, 0x87, 0x7a, 0xd3, 0x4c, 0x1b, 0x79, 0xaa}
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetTimingInfo           = binary.ID{0x3b, 0x23, 0x58, 0xe4, 0x55, 0xf0, 0x74, 0x6a, 0xc6, 0x9b, 0xfb, 0xb4, 0xc2, 0x6c, 0x15, 0x21, 0x55, 0x77, 0x49, 0x1f}
@@ -125,7 +118,6 @@ var (
 	binaryIDcallResolveBinary           = binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}
 	binaryIDcallResolveCapture          = binary.ID{0x4e, 0x6e, 0x5b, 0x49, 0x61, 0xef, 0xfc, 0x3c, 0x4a, 0xf8, 0xf6, 0xae, 0xc0, 0xca, 0xa1, 0x67, 0x17, 0x73, 0xff, 0xf8}
 	binaryIDcallResolveDevice           = binary.ID{0x86, 0x54, 0x88, 0xf5, 0x8f, 0x3e, 0x97, 0x57, 0xe2, 0x98, 0x19, 0x7e, 0x67, 0x25, 0xfb, 0xa2, 0x75, 0xeb, 0x30, 0x0a}
-	binaryIDcallResolveHierarchy        = binary.ID{0x39, 0x2a, 0x9f, 0x44, 0xfe, 0x2c, 0x0f, 0xd8, 0xc5, 0x44, 0x58, 0x51, 0x94, 0x6a, 0x95, 0xa4, 0x22, 0x90, 0x34, 0x36}
 	binaryIDcallResolveImageInfo        = binary.ID{0x4e, 0x51, 0x41, 0x13, 0x68, 0x6f, 0x58, 0x5a, 0xed, 0xe0, 0x0a, 0x05, 0x0d, 0x01, 0x9d, 0x28, 0x9c, 0x21, 0x8c, 0xbb}
 	binaryIDcallResolveMemoryInfo       = binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}
 	binaryIDcallResolveTimingInfo       = binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}
@@ -135,7 +127,6 @@ var (
 	binaryIDresultGetDevices            = binary.ID{0x94, 0x2a, 0xed, 0x69, 0xb7, 0x1a, 0xd3, 0xb0, 0x44, 0xab, 0x25, 0x38, 0xfc, 0x81, 0xbc, 0xd2, 0x19, 0x65, 0x1e, 0xfe}
 	binaryIDresultGetFramebufferColor   = binary.ID{0xd1, 0xf2, 0x9c, 0x48, 0xeb, 0xb0, 0x4e, 0x4e, 0x82, 0xcf, 0xac, 0xe9, 0xc6, 0x71, 0x27, 0x04, 0x57, 0x7e, 0xe4, 0x25}
 	binaryIDresultGetFramebufferDepth   = binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}
-	binaryIDresultGetHierarchy          = binary.ID{0xff, 0x28, 0xe0, 0x58, 0x97, 0xa9, 0x5e, 0x1b, 0x62, 0xe1, 0xa0, 0xef, 0x05, 0xea, 0x3e, 0x62, 0x5d, 0x17, 0xaa, 0x47}
 	binaryIDresultGetMemoryInfo         = binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}
 	binaryIDresultGetSchema             = binary.ID{0xd0, 0x54, 0xb1, 0x58, 0x23, 0xd7, 0x0d, 0x2b, 0x65, 0xee, 0xcc, 0x2a, 0xb8, 0x12, 0x27, 0x6c, 0x8f, 0xcd, 0x75, 0x8a}
 	binaryIDresultGetTimingInfo         = binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}
@@ -145,7 +136,6 @@ var (
 	binaryIDresultResolveBinary         = binary.ID{0xa4, 0x6a, 0xe4, 0xfe, 0x13, 0x16, 0xb3, 0x2a, 0x70, 0x6e, 0x71, 0xea, 0x47, 0xf0, 0x4c, 0xe6, 0x47, 0xc9, 0xb0, 0x42}
 	binaryIDresultResolveCapture        = binary.ID{0xb3, 0x47, 0xd0, 0x3f, 0x28, 0x63, 0xfe, 0xa4, 0x32, 0xc6, 0xf0, 0x2c, 0xec, 0x6d, 0x33, 0x8a, 0xb2, 0x38, 0xf7, 0x37}
 	binaryIDresultResolveDevice         = binary.ID{0x7f, 0xd2, 0x9f, 0x67, 0xe3, 0xbe, 0x0e, 0x46, 0x07, 0xdf, 0x8f, 0x6e, 0x6e, 0x85, 0x6d, 0x26, 0xcf, 0xd1, 0xa6, 0xa3}
-	binaryIDresultResolveHierarchy      = binary.ID{0x60, 0xf3, 0x21, 0x98, 0x1b, 0x86, 0x98, 0x38, 0x8c, 0x1e, 0x33, 0x3c, 0x06, 0x9d, 0x67, 0x2a, 0x05, 0x50, 0xef, 0xfc}
 	binaryIDresultResolveImageInfo      = binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}
 	binaryIDresultResolveMemoryInfo     = binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}
 	binaryIDresultResolveTimingInfo     = binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}
@@ -951,55 +941,6 @@ var schemaHierarchy = &schema.Class{
 	Name:    "Hierarchy",
 	Fields: []schema.Field{
 		{Declared: "Root", Type: &schema.Struct{Name: "atom.Group", ID: (*atom.Group)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassHierarchyId struct{}
-
-func (*HierarchyId) Class() binary.Class {
-	return (*binaryClassHierarchyId)(nil)
-}
-func doEncodeHierarchyId(e binary.Encoder, o *HierarchyId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeHierarchyId(d binary.Decoder, o *HierarchyId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipHierarchyId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassHierarchyId) ID() binary.ID      { return binaryIDHierarchyId }
-func (*binaryClassHierarchyId) New() binary.Object { return &HierarchyId{} }
-func (*binaryClassHierarchyId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeHierarchyId(e, obj.(*HierarchyId))
-}
-func (*binaryClassHierarchyId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &HierarchyId{}
-	return obj, doDecodeHierarchyId(d, obj)
-}
-func (*binaryClassHierarchyId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeHierarchyId(d, obj.(*HierarchyId))
-}
-func (*binaryClassHierarchyId) Skip(d binary.Decoder) error { return doSkipHierarchyId(d) }
-func (*binaryClassHierarchyId) Schema() *schema.Class       { return schemaHierarchyId }
-
-var schemaHierarchyId = &schema.Class{
-	TypeID:  binaryIDHierarchyId,
-	Package: "service",
-	Name:    "HierarchyId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -2112,53 +2053,6 @@ var schemacallGetFramebufferDepth = &schema.Class{
 	},
 }
 
-type binaryClasscallGetHierarchy struct{}
-
-func (*callGetHierarchy) Class() binary.Class {
-	return (*binaryClasscallGetHierarchy)(nil)
-}
-func doEncodecallGetHierarchy(e binary.Encoder, o *callGetHierarchy) error {
-	if err := e.Value(&o.capture); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallGetHierarchy(d binary.Decoder, o *callGetHierarchy) error {
-	if err := d.Value(&o.capture); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipcallGetHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallGetHierarchy) ID() binary.ID      { return binaryIDcallGetHierarchy }
-func (*binaryClasscallGetHierarchy) New() binary.Object { return &callGetHierarchy{} }
-func (*binaryClasscallGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallGetHierarchy(e, obj.(*callGetHierarchy))
-}
-func (*binaryClasscallGetHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callGetHierarchy{}
-	return obj, doDecodecallGetHierarchy(d, obj)
-}
-func (*binaryClasscallGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallGetHierarchy(d, obj.(*callGetHierarchy))
-}
-func (*binaryClasscallGetHierarchy) Skip(d binary.Decoder) error { return doSkipcallGetHierarchy(d) }
-func (*binaryClasscallGetHierarchy) Schema() *schema.Class       { return schemacallGetHierarchy }
-
-var schemacallGetHierarchy = &schema.Class{
-	TypeID:  binaryIDcallGetHierarchy,
-	Package: "service",
-	Name:    "callGetHierarchy",
-	Fields: []schema.Field{
-		{Declared: "capture", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
-	},
-}
-
 type binaryClasscallGetMemoryInfo struct{}
 
 func (*callGetMemoryInfo) Class() binary.Class {
@@ -2719,55 +2613,6 @@ var schemacallResolveDevice = &schema.Class{
 	},
 }
 
-type binaryClasscallResolveHierarchy struct{}
-
-func (*callResolveHierarchy) Class() binary.Class {
-	return (*binaryClasscallResolveHierarchy)(nil)
-}
-func doEncodecallResolveHierarchy(e binary.Encoder, o *callResolveHierarchy) error {
-	if err := e.Value(&o.id); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallResolveHierarchy(d binary.Decoder, o *callResolveHierarchy) error {
-	if err := d.Value(&o.id); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipcallResolveHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*HierarchyId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallResolveHierarchy) ID() binary.ID      { return binaryIDcallResolveHierarchy }
-func (*binaryClasscallResolveHierarchy) New() binary.Object { return &callResolveHierarchy{} }
-func (*binaryClasscallResolveHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallResolveHierarchy(e, obj.(*callResolveHierarchy))
-}
-func (*binaryClasscallResolveHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callResolveHierarchy{}
-	return obj, doDecodecallResolveHierarchy(d, obj)
-}
-func (*binaryClasscallResolveHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallResolveHierarchy(d, obj.(*callResolveHierarchy))
-}
-func (*binaryClasscallResolveHierarchy) Skip(d binary.Decoder) error {
-	return doSkipcallResolveHierarchy(d)
-}
-func (*binaryClasscallResolveHierarchy) Schema() *schema.Class { return schemacallResolveHierarchy }
-
-var schemacallResolveHierarchy = &schema.Class{
-	TypeID:  binaryIDcallResolveHierarchy,
-	Package: "service",
-	Name:    "callResolveHierarchy",
-	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "HierarchyId", ID: (*HierarchyId)(nil).Class().ID()}},
-	},
-}
-
 type binaryClasscallResolveImageInfo struct{}
 
 func (*callResolveImageInfo) Class() binary.Class {
@@ -3289,53 +3134,6 @@ var schemaresultGetFramebufferDepth = &schema.Class{
 	},
 }
 
-type binaryClassresultGetHierarchy struct{}
-
-func (*resultGetHierarchy) Class() binary.Class {
-	return (*binaryClassresultGetHierarchy)(nil)
-}
-func doEncoderesultGetHierarchy(e binary.Encoder, o *resultGetHierarchy) error {
-	if err := e.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultGetHierarchy(d binary.Decoder, o *resultGetHierarchy) error {
-	if err := d.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipresultGetHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*HierarchyId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultGetHierarchy) ID() binary.ID      { return binaryIDresultGetHierarchy }
-func (*binaryClassresultGetHierarchy) New() binary.Object { return &resultGetHierarchy{} }
-func (*binaryClassresultGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultGetHierarchy(e, obj.(*resultGetHierarchy))
-}
-func (*binaryClassresultGetHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultGetHierarchy{}
-	return obj, doDecoderesultGetHierarchy(d, obj)
-}
-func (*binaryClassresultGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultGetHierarchy(d, obj.(*resultGetHierarchy))
-}
-func (*binaryClassresultGetHierarchy) Skip(d binary.Decoder) error { return doSkipresultGetHierarchy(d) }
-func (*binaryClassresultGetHierarchy) Schema() *schema.Class       { return schemaresultGetHierarchy }
-
-var schemaresultGetHierarchy = &schema.Class{
-	TypeID:  binaryIDresultGetHierarchy,
-	Package: "service",
-	Name:    "resultGetHierarchy",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "HierarchyId", ID: (*HierarchyId)(nil).Class().ID()}},
-	},
-}
-
 type binaryClassresultGetMemoryInfo struct{}
 
 func (*resultGetMemoryInfo) Class() binary.Class {
@@ -3790,55 +3588,6 @@ var schemaresultResolveDevice = &schema.Class{
 	Name:    "resultResolveDevice",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Struct{Name: "Device", ID: (*Device)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassresultResolveHierarchy struct{}
-
-func (*resultResolveHierarchy) Class() binary.Class {
-	return (*binaryClassresultResolveHierarchy)(nil)
-}
-func doEncoderesultResolveHierarchy(e binary.Encoder, o *resultResolveHierarchy) error {
-	if err := e.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultResolveHierarchy(d binary.Decoder, o *resultResolveHierarchy) error {
-	if err := d.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipresultResolveHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*Hierarchy)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultResolveHierarchy) ID() binary.ID      { return binaryIDresultResolveHierarchy }
-func (*binaryClassresultResolveHierarchy) New() binary.Object { return &resultResolveHierarchy{} }
-func (*binaryClassresultResolveHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultResolveHierarchy(e, obj.(*resultResolveHierarchy))
-}
-func (*binaryClassresultResolveHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultResolveHierarchy{}
-	return obj, doDecoderesultResolveHierarchy(d, obj)
-}
-func (*binaryClassresultResolveHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultResolveHierarchy(d, obj.(*resultResolveHierarchy))
-}
-func (*binaryClassresultResolveHierarchy) Skip(d binary.Decoder) error {
-	return doSkipresultResolveHierarchy(d)
-}
-func (*binaryClassresultResolveHierarchy) Schema() *schema.Class { return schemaresultResolveHierarchy }
-
-var schemaresultResolveHierarchy = &schema.Class{
-	TypeID:  binaryIDresultResolveHierarchy,
-	Package: "service",
-	Name:    "resultResolveHierarchy",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Hierarchy", ID: (*Hierarchy)(nil).Class().ID()}},
 	},
 }
 

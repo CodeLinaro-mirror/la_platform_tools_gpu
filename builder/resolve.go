@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -20,6 +21,15 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 	return v[len(v)-1], nil
 }
 
+
+// ResolveAtoms resolves and returns the atom list from the path p.
+func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error) {
+	if res, err := Resolve(p, d, l); err == nil {
+		return res.(*service.AtomStream).Atoms, nil
+	} else {
+		return nil, err
+	}
+}
 func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]interface{}, error) {
 	v := make([]interface{}, len(paths))
 	for i, p := range paths {
@@ -48,8 +58,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = report.(*service.Report)
 
 		case *path.Hierarchy:
-			captureID := service.CaptureId{ID: p.Capture.ID}
-			hierarchy, err := database.Build(&GetHierarchy{Capture: captureID}, d, l)
+			hierarchy, err := database.Build(&GetHierarchy{Capture: p.Capture}, d, l)
 			if err != nil {
 				return nil, err
 			}

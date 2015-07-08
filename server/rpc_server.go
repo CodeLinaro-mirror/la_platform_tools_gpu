@@ -108,19 +108,6 @@ func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceId, error) {
 	return ids, nil
 }
 
-// GetHierarchy returns the atom hierarchy identifier for the given capture.
-// Currently there is only one hierarchy per capture, but this is likely to
-// change in the future.
-func (s rpcServer) GetHierarchy(
-	captureID service.CaptureId,
-	l log.Logger) (service.HierarchyId, error) {
-
-	id, err := database.Store(&builder.GetHierarchy{
-		Capture: captureID,
-	}, s.Database, l)
-	return service.HierarchyId{ID: id}, err
-}
-
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and memory range, immediately following the atom after.
 func (s rpcServer) GetMemoryInfo(

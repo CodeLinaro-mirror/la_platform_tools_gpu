@@ -26,12 +26,7 @@ import (
 // BuildLazy returns the *service.Hierarchy resulting from the given
 // GetHierarchy request.
 func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	capture, err := service.ResolveCapture(r.Capture, d, l)
-	if err != nil {
-		return nil, err
-	}
-
-	atoms, err := loadAtoms(capture.Atoms, d, l)
+	atoms, err := ResolveAtoms(r.Capture.Atoms(), d, l)
 	if err != nil {
 		return nil, err
 	}
