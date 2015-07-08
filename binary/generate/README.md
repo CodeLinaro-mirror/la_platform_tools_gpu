@@ -19,6 +19,30 @@ Sort is used to ensure stable ordering of Struct slices. This is to ensure
 automatically generated code has minimum diffs. The sort order is by Struct
 name, but guarantees dependencies occur first.
 
+#### type Cpp
+
+```go
+type Cpp struct {
+	*File
+	Namespace string
+	Copyright string
+	Indent    string
+}
+```
+
+
+#### func  NewCpp
+
+```go
+func NewCpp(file *File) *Cpp
+```
+
+#### func (*Cpp) Run
+
+```go
+func (file *Cpp) Run(t *Templates, out string) (bool, error)
+```
+
 #### type Directory
 
 ```go
@@ -37,8 +61,7 @@ type Directory struct {
 
 ```go
 type File struct {
-	Copyright  string
-	Package    string
+	Name       string
 	Import     string
 	IsTest     bool
 	Path       string
@@ -46,45 +69,31 @@ type File struct {
 	Structs    []*Struct
 	Constants  schema.Constants
 	Imports    Imports
-	Style
 }
 ```
 
 
-#### type Generator
+#### type Go
 
 ```go
-type Generator struct {
+type Go struct {
+	*File
+	Copyright string
 }
 ```
 
 
-#### func  NewGenerator
+#### func  NewGo
 
 ```go
-func NewGenerator() *Generator
+func NewGo(file *File) *Go
 ```
 
-#### func (*Generator) CppFile
+#### func (*Go) Run
 
 ```go
-func (g *Generator) CppFile(file *File) ([]byte, error)
+func (file *Go) Run(t *Templates, out string) (bool, error)
 ```
-CppFile generates the all the cpp code for a file with a set of structs.
-
-#### func (*Generator) GoFile
-
-```go
-func (g *Generator) GoFile(file *File) ([]byte, error)
-```
-GoFile generates the all the go code for a file with a set of structs.
-
-#### func (*Generator) JavaFile
-
-```go
-func (g *Generator) JavaFile(file *File) ([]byte, error)
-```
-JavaFile generates the all the java code for a file with a set of structs.
 
 #### type Imports
 
@@ -92,6 +101,34 @@ JavaFile generates the all the java code for a file with a set of structs.
 type Imports map[string]struct{}
 ```
 
+
+#### type Java
+
+```go
+type Java struct {
+	*File
+	Struct          *Struct
+	BasePackage     string
+	RelativePackage string
+	Copyright       string
+	Indent          string
+	MemberPrefix    string
+	ClassPrefix     string
+}
+```
+
+
+#### func  NewJava
+
+```go
+func NewJava(file *File) *Java
+```
+
+#### func (*Java) Run
+
+```go
+func (file *Java) Run(t *Templates, out string) (bool, error)
+```
 
 #### type Loader
 
@@ -159,6 +196,13 @@ directory has one module that represents the files that are considered when the
 directory is imported, and a second one that also includes the test files. They
 must be considered separately because otherwise you can get import cycles.
 
+#### type PostProcess
+
+```go
+type PostProcess func([]byte) []byte
+```
+
+
 #### type Source
 
 ```go
@@ -202,12 +246,71 @@ func (s *Struct) UpdateID()
 ```
 UpdateID recalculates the struct ID from the current signature.
 
-#### type Style
+#### type Templates
 
 ```go
-type Style struct {
-	ClassPrefix  string
-	MemberPrefix string
-	Indent       string
+type Templates struct {
+	File *File
 }
+```
+
+
+#### func  NewTemplates
+
+```go
+func NewTemplates() *Templates
+```
+
+#### func (*Templates) Call
+
+```go
+func (t *Templates) Call(prefix string, arg interface{}) (string, error)
+```
+
+#### func (*Templates) Counter
+
+```go
+func (t *Templates) Counter(name string) *counter
+```
+
+#### func (*Templates) CppName
+
+```go
+func (t *Templates) CppName(n string) string
+```
+
+#### func (*Templates) Directive
+
+```go
+func (t *Templates) Directive(name string, notset interface{}) interface{}
+```
+
+#### func (*Templates) JavaFieldName
+
+```go
+func (*Templates) JavaFieldName(s string) string
+```
+
+#### func (*Templates) Lower
+
+```go
+func (*Templates) Lower(s interface{}) string
+```
+
+#### func (*Templates) ToS8
+
+```go
+func (*Templates) ToS8(val byte) string
+```
+
+#### func (*Templates) Upper
+
+```go
+func (*Templates) Upper(s interface{}) string
+```
+
+#### func (*Templates) Var
+
+```go
+func (*Templates) Var(t schema.Type, args ...interface{}) *variable
 ```
