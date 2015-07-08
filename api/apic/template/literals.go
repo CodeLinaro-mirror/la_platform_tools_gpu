@@ -28,3 +28,23 @@ func (*Functions) Bitpos(v uint32) int {
 	}
 	return deBruijnBitPositionSequence[v&-v*0x077CB531>>27]
 }
+
+// AsSigned returns a signed reinterpretation of v of the same size if
+// v an unsigned integer, or v if v a signed integer, otherwise nil.
+func (*Functions) AsSigned(v interface{}) interface{} {
+	switch v := v.(type) {
+	case uint:
+		return int(v)
+	case uint8:
+		return int8(v)
+	case uint16:
+		return int16(v)
+	case uint32:
+		return int32(v)
+	case uint64:
+		return int64(v)
+	case int, int8, int16, int32, int64:
+		return v
+	}
+	return nil
+}
