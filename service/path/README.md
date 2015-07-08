@@ -346,6 +346,66 @@ func (c *Capture) Validate() error
 ```
 Validate implements the Path interface.
 
+#### type Device
+
+```go
+type Device struct {
+	binary.Generate
+	ID binary.ID // The device's unique identifier.
+}
+```
+
+Device is a path that refers to a device.
+
+#### func  FindDevice
+
+```go
+func FindDevice(p Path) *Device
+```
+FindDevice returns the first Device found traversing the path p. If no Device
+was found, then nil is returned.
+
+#### func (*Device) Base
+
+```go
+func (c *Device) Base() Path
+```
+Base implements the Path interface, returning nil as this is a root.
+
+#### func (*Device) Class
+
+```go
+func (*Device) Class() binary.Class
+```
+
+#### func (*Device) Clone
+
+```go
+func (c *Device) Clone() Path
+```
+Clone implements the Path interface, returning a deep-copy of this path.
+
+#### func (*Device) Path
+
+```go
+func (c *Device) Path() string
+```
+Path implements the Path interface.
+
+#### func (*Device) String
+
+```go
+func (c *Device) String() string
+```
+String returns the string representation of the path.
+
+#### func (*Device) Validate
+
+```go
+func (c *Device) Validate() error
+```
+Validate implements the Path interface.
+
 #### type Field
 
 ```go
