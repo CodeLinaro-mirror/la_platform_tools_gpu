@@ -26,7 +26,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func timingInfo(flags service.TimingFlags, out chan<- replay.CallTiming) atom.Transformer {
+func timingInfo(flags service.TimingFlags, out chan<- replay.CallTiming, device *service.Device, db database.Database, logger log.Logger) atom.Transformer {
+	if flags&service.TimingFlagsTimingGPU != 0 {
+		return timingInfoGpu(flags, out, device, db, logger)
+	}
 	return &timingInfoCpuTransform{
 		out:          out,
 		perCommand:   flags&service.TimingFlagsTimingPerCommand != 0,
@@ -122,14 +125,14 @@ func (t *timingInfoCpuTransform) Transform(id atom.ID, a atom.Atom, out atom.Wri
 
 	out.Write(id, a)
 
-	flags := a.Flags()
+	atomFlags := a.Flags()
 	if t.perCommand {
 		t.stopTimer(id, commandThreadTimer, service.TimingFlagsTimingPerCommand, out)
 	}
-	if t.perDrawCall && (flags.IsDrawCall() || flags.IsEndOfFrame()) {
+	if t.perDrawCall && (atomFlags.IsDrawCall() || atomFlags.IsEndOfFrame()) {
 		t.stopTimer(id, drawCallThreadTimer, service.TimingFlagsTimingPerDrawCall, out)
 	}
-	if t.perFrame && (flags.IsEndOfFrame()) {
+	if t.perFrame && atomFlags.IsEndOfFrame() {
 		t.stopTimer(id, frameThreadTimer, service.TimingFlagsTimingPerFrame, out)
 	}
 }
