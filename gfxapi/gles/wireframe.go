@@ -54,7 +54,7 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 
 			// Store the wire-frame data to a temporary address.
 			wireframeData, wireframeDataType := encodeIndices(indices)
-			resID, err := database.StoreBlob(wireframeData, d, l)
+			resID, err := database.Store(wireframeData, d, l)
 			if err != nil {
 				panic(err)
 			}

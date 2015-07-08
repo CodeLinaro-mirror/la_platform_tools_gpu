@@ -72,7 +72,7 @@ func (r executor) execute() error {
 	data := buf.Bytes()
 
 	// Store the payload to the database
-	id, err := database.StoreBlob(data, r.database, r.logger)
+	id, err := database.Store(data, r.database, r.logger)
 	if err != nil {
 		return err
 	}
@@ -170,11 +170,11 @@ func (r executor) handleGetData() error {
 	}
 
 	for _, rid := range resourceIDs {
-		data, err := database.ResolveBlob(rid, r.database, logger)
+		data, err := database.Resolve(rid, r.database, logger)
 		if err != nil {
 			return err
 		}
-		if _, err := r.connection.Write(data); err != nil {
+		if _, err := r.connection.Write(data.([]byte)); err != nil {
 			return err
 		}
 	}
