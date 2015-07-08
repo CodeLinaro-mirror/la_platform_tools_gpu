@@ -33,12 +33,26 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 ```
 Resolve resolves and returns the object, value or memory at the path p.
 
+#### func  ResolveAtom
+
+```go
+func ResolveAtom(p *path.Atom, d database.Database, l log.Logger) (atom.Atom, error)
+```
+ResolveAtom resolves and returns the atom from the path p.
+
 #### func  ResolveAtoms
 
 ```go
 func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error)
 ```
 ResolveAtoms resolves and returns the atom list from the path p.
+
+#### func  ResolveCapture
+
+```go
+func ResolveCapture(p *path.Capture, d database.Database, l log.Logger) (service.Capture, error)
+```
+ResolveCapture resolves and returns the capture from the path p.
 
 #### type BuildReport
 
@@ -135,10 +149,8 @@ func (*Get) Class() binary.Class
 ```go
 type GetFramebufferColor struct {
 	binary.Generate
-	Device   service.DeviceId
-	Capture  service.CaptureId
-	API      service.ApiId
-	After    atom.ID
+	Device   *path.Device
+	After    *path.Atom
 	Settings service.RenderSettings
 }
 ```
@@ -165,10 +177,8 @@ func (*GetFramebufferColor) Class() binary.Class
 ```go
 type GetFramebufferDepth struct {
 	binary.Generate
-	Device  service.DeviceId
-	Capture service.CaptureId
-	API     service.ApiId
-	After   atom.ID
+	Device *path.Device
+	After  *path.Atom
 }
 ```
 
@@ -298,8 +308,8 @@ func (*GetTimingInfo) Class() binary.Class
 ```go
 type PrerenderFramebuffers struct {
 	binary.Generate
-	Device  service.DeviceId
-	Capture service.CaptureId
+	Device  *path.Device
+	Capture *path.Capture
 	API     service.ApiId
 	AtomIDs []uint64
 	Width   uint32
@@ -329,10 +339,8 @@ func (*PrerenderFramebuffers) Class() binary.Class
 ```go
 type RenderFramebufferColor struct {
 	binary.Generate
-	Device    service.DeviceId
-	Capture   service.CaptureId
-	API       service.ApiId
-	After     atom.ID
+	Device    *path.Device
+	After     *path.Atom
 	Width     uint32
 	Height    uint32
 	Wireframe bool
@@ -361,10 +369,8 @@ func (*RenderFramebufferColor) Class() binary.Class
 ```go
 type RenderFramebufferDepth struct {
 	binary.Generate
-	Device            service.DeviceId
-	Capture           service.CaptureId
-	API               service.ApiId
-	After             atom.ID
+	Device            *path.Device
+	After             *path.Atom
 	FramebufferWidth  uint32
 	FramebufferHeight uint32
 }

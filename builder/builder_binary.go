@@ -43,19 +43,19 @@ var (
 	binaryIDBuildReport                     = binary.ID{0x0d, 0xe5, 0xe5, 0x3d, 0xda, 0x87, 0xb3, 0x58, 0x27, 0x4f, 0x23, 0xcc, 0xfa, 0xa3, 0xd8, 0xd0, 0xda, 0x69, 0x46, 0x9c}
 	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
 	binaryIDGet                             = binary.ID{0x82, 0xb2, 0x02, 0xb1, 0xbc, 0x47, 0xaa, 0x54, 0xed, 0xd7, 0xad, 0x46, 0x6e, 0x1d, 0xa3, 0x41, 0x16, 0x54, 0xd9, 0x15}
-	binaryIDGetFramebufferColor             = binary.ID{0x0e, 0xb7, 0x51, 0x0b, 0xcb, 0xab, 0x3f, 0x68, 0x29, 0x23, 0xe4, 0xfd, 0x33, 0xb3, 0xf1, 0xf4, 0x9d, 0xd0, 0xa4, 0x8e}
-	binaryIDGetFramebufferDepth             = binary.ID{0x59, 0xd2, 0x23, 0x3c, 0xfd, 0xdc, 0xbf, 0x12, 0xf5, 0xe3, 0xff, 0x94, 0x6c, 0x8a, 0xb8, 0x86, 0xba, 0x9d, 0xb6, 0x55}
+	binaryIDGetFramebufferColor             = binary.ID{0x1a, 0xcc, 0x5f, 0x4b, 0xe4, 0x22, 0xd7, 0x61, 0x00, 0xc8, 0xd8, 0x41, 0x30, 0xeb, 0xfe, 0x59, 0x7d, 0x4c, 0xbe, 0x9f}
+	binaryIDGetFramebufferDepth             = binary.ID{0xa7, 0x03, 0x08, 0x3d, 0x42, 0xbc, 0x22, 0x83, 0x51, 0x9f, 0xc0, 0x5f, 0xa6, 0xa2, 0x1e, 0xa7, 0x5e, 0xd6, 0xc8, 0x03}
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
 	binaryIDGetMemoryInfo                   = binary.ID{0xf0, 0x9e, 0x21, 0x69, 0x43, 0xaf, 0xf8, 0xdb, 0x59, 0x80, 0xa0, 0x33, 0x66, 0xda, 0xd9, 0xae, 0xdf, 0x5a, 0x0a, 0x10}
 	binaryIDGetState                        = binary.ID{0xe4, 0x56, 0xeb, 0x40, 0x7b, 0x2d, 0x6e, 0xc6, 0xb4, 0x8b, 0x8f, 0x00, 0x1f, 0xdb, 0xb2, 0x6f, 0xea, 0x28, 0x5a, 0x80}
 	binaryIDGetTimingInfo                   = binary.ID{0x5c, 0x6c, 0xbc, 0xb3, 0x96, 0x1a, 0xbc, 0x36, 0x47, 0x08, 0x2f, 0x6c, 0x34, 0x93, 0xfc, 0x4b, 0x62, 0xea, 0xa3, 0xc2}
-	binaryIDPrerenderFramebuffers           = binary.ID{0x3c, 0xf2, 0xf2, 0xa2, 0x16, 0xa8, 0xe1, 0xe2, 0x7f, 0x51, 0xb8, 0xbb, 0xaa, 0x36, 0x11, 0x8d, 0x00, 0xb6, 0xf6, 0x79}
-	binaryIDRenderFramebufferColor          = binary.ID{0xc2, 0x1c, 0x41, 0xbf, 0x83, 0x9e, 0xd9, 0xdd, 0x8f, 0x52, 0x56, 0xc2, 0xba, 0xaa, 0xd2, 0xed, 0x23, 0xc2, 0xd2, 0x86}
-	binaryIDRenderFramebufferDepth          = binary.ID{0xa9, 0x18, 0x0d, 0x72, 0xb6, 0x3d, 0xe5, 0x46, 0xaf, 0x7a, 0x63, 0xe4, 0x25, 0xa6, 0x80, 0xa8, 0x3b, 0x2c, 0x2b, 0x7d}
+	binaryIDPrerenderFramebuffers           = binary.ID{0xa2, 0x94, 0x36, 0x9d, 0xcb, 0x28, 0x7f, 0x54, 0xee, 0xb1, 0xac, 0x44, 0xe7, 0x45, 0x02, 0x19, 0x3a, 0x84, 0xe8, 0x5b}
+	binaryIDRenderFramebufferColor          = binary.ID{0xd0, 0x7e, 0x58, 0xd4, 0xf5, 0xd8, 0x9f, 0x1d, 0xe4, 0xb5, 0xfe, 0x9d, 0xe6, 0x9c, 0xe4, 0x5c, 0xef, 0x0b, 0xfc, 0x71}
+	binaryIDRenderFramebufferDepth          = binary.ID{0x92, 0xb5, 0x88, 0x2a, 0x1a, 0x6f, 0xa1, 0x3c, 0xff, 0x7a, 0x90, 0xb3, 0x21, 0xa9, 0xe0, 0x67, 0xf4, 0x2c, 0x9e, 0x82}
 	binaryIDSet                             = binary.ID{0x3e, 0x3e, 0xf7, 0x61, 0xd5, 0x5c, 0x3a, 0x76, 0xc6, 0x39, 0x17, 0x5e, 0x37, 0x26, 0x78, 0xaf, 0xdf, 0x83, 0x9f, 0x4e}
 	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
-	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x92, 0xe3, 0x84, 0xf0, 0x3e, 0x83, 0x2c, 0x83, 0xc0, 0x22, 0x15, 0xad, 0x75, 0x9b, 0x02, 0xdc, 0x1f, 0x4e, 0x49, 0x4c}
+	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x27, 0x96, 0x78, 0xb6, 0x8e, 0x91, 0x8f, 0x13, 0x09, 0x07, 0xb7, 0x09, 0x0d, 0x2b, 0xc2, 0xf7, 0xc9, 0xa5, 0x7d, 0x08}
 )
 
 type binaryClassBuildReport struct{}
@@ -283,16 +283,18 @@ func (*GetFramebufferColor) Class() binary.Class {
 	return (*binaryClassGetFramebufferColor)(nil)
 }
 func doEncodeGetFramebufferColor(e binary.Encoder, o *GetFramebufferColor) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Value(&o.API); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Value(&o.Settings); err != nil {
@@ -301,19 +303,19 @@ func doEncodeGetFramebufferColor(e binary.Encoder, o *GetFramebufferColor) error
 	return nil
 }
 func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if err := d.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := d.Value(&o.API); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
 	} else {
-		o.After = atom.ID(obj)
+		o.Device = nil
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
+	} else {
+		o.After = nil
 	}
 	if err := d.Value(&o.Settings); err != nil {
 		return err
@@ -321,16 +323,10 @@ func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) error
 	return nil
 }
 func doSkipGetFramebufferColor(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*service.RenderSettings)(nil)); err != nil {
@@ -360,10 +356,8 @@ var schemaGetFramebufferColor = &schema.Class{
 	Package: "builder",
 	Name:    "GetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 		{Declared: "Settings", Type: &schema.Struct{Name: "service.RenderSettings", ID: (*service.RenderSettings)(nil).Class().ID()}},
 	},
 }
@@ -374,48 +368,44 @@ func (*GetFramebufferDepth) Class() binary.Class {
 	return (*binaryClassGetFramebufferDepth)(nil)
 }
 func doEncodeGetFramebufferDepth(e binary.Encoder, o *GetFramebufferDepth) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Value(&o.API); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeGetFramebufferDepth(d binary.Decoder, o *GetFramebufferDepth) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if err := d.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := d.Value(&o.API); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
 	} else {
-		o.After = atom.ID(obj)
+		o.Device = nil
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
+	} else {
+		o.After = nil
 	}
 	return nil
 }
 func doSkipGetFramebufferDepth(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -442,10 +432,8 @@ var schemaGetFramebufferDepth = &schema.Class{
 	Package: "builder",
 	Name:    "GetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 	},
 }
 
@@ -713,10 +701,18 @@ func (*PrerenderFramebuffers) Class() binary.Class {
 	return (*binaryClassPrerenderFramebuffers)(nil)
 }
 func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Value(&o.API); err != nil {
@@ -739,11 +735,19 @@ func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) e
 	return nil
 }
 func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
+	} else {
+		o.Device = nil
 	}
-	if err := d.Value(&o.Capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Capture = obj.(*path.Capture)
+	} else {
+		o.Capture = nil
 	}
 	if err := d.Value(&o.API); err != nil {
 		return err
@@ -773,10 +777,10 @@ func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) e
 	return nil
 }
 func doSkipPrerenderFramebuffers(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
@@ -821,8 +825,8 @@ var schemaPrerenderFramebuffers = &schema.Class{
 	Package: "builder",
 	Name:    "PrerenderFramebuffers",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
 		{Declared: "AtomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -836,16 +840,18 @@ func (*RenderFramebufferColor) Class() binary.Class {
 	return (*binaryClassRenderFramebufferColor)(nil)
 }
 func doEncodeRenderFramebufferColor(e binary.Encoder, o *RenderFramebufferColor) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Value(&o.API); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Uint32(o.Width); err != nil {
@@ -860,19 +866,19 @@ func doEncodeRenderFramebufferColor(e binary.Encoder, o *RenderFramebufferColor)
 	return nil
 }
 func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if err := d.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := d.Value(&o.API); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
 	} else {
-		o.After = atom.ID(obj)
+		o.Device = nil
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
+	} else {
+		o.After = nil
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -892,16 +898,10 @@ func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor)
 	return nil
 }
 func doSkipRenderFramebufferColor(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -937,10 +937,8 @@ var schemaRenderFramebufferColor = &schema.Class{
 	Package: "builder",
 	Name:    "RenderFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Wireframe", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -953,16 +951,18 @@ func (*RenderFramebufferDepth) Class() binary.Class {
 	return (*binaryClassRenderFramebufferDepth)(nil)
 }
 func doEncodeRenderFramebufferDepth(e binary.Encoder, o *RenderFramebufferDepth) error {
-	if err := e.Value(&o.Device); err != nil {
+	if o.Device != nil {
+		if err := e.Object(o.Device); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := e.Value(&o.API); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.After)); err != nil {
+	if o.After != nil {
+		if err := e.Object(o.After); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Uint32(o.FramebufferWidth); err != nil {
@@ -974,19 +974,19 @@ func doEncodeRenderFramebufferDepth(e binary.Encoder, o *RenderFramebufferDepth)
 	return nil
 }
 func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth) error {
-	if err := d.Value(&o.Device); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
-	}
-	if err := d.Value(&o.Capture); err != nil {
-		return err
-	}
-	if err := d.Value(&o.API); err != nil {
-		return err
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
+	} else if obj != nil {
+		o.Device = obj.(*path.Device)
 	} else {
-		o.After = atom.ID(obj)
+		o.Device = nil
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.After = obj.(*path.Atom)
+	} else {
+		o.After = nil
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -1001,16 +1001,10 @@ func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth)
 	return nil
 }
 func doSkipRenderFramebufferDepth(d binary.Decoder) error {
-	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -1043,10 +1037,8 @@ var schemaRenderFramebufferDepth = &schema.Class{
 	Package: "builder",
 	Name:    "RenderFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId", ID: (*service.DeviceId)(nil).Class().ID()}},
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
-		{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
+		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
 		{Declared: "FramebufferWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FramebufferHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -1288,19 +1280,27 @@ func (*getCaptureFramebufferDimensions) Class() binary.Class {
 	return (*binaryClassgetCaptureFramebufferDimensions)(nil)
 }
 func doEncodegetCaptureFramebufferDimensions(e binary.Encoder, o *getCaptureFramebufferDimensions) error {
-	if err := e.Value(&o.Capture); err != nil {
+	if o.Capture != nil {
+		if err := e.Object(o.Capture); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodegetCaptureFramebufferDimensions(d binary.Decoder, o *getCaptureFramebufferDimensions) error {
-	if err := d.Value(&o.Capture); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Capture = obj.(*path.Capture)
+	} else {
+		o.Capture = nil
 	}
 	return nil
 }
 func doSkipgetCaptureFramebufferDimensions(d binary.Decoder) error {
-	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -1333,6 +1333,6 @@ var schemagetCaptureFramebufferDimensions = &schema.Class{
 	Package: "builder",
 	Name:    "getCaptureFramebufferDimensions",
 	Fields: []schema.Field{
-		{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId", ID: (*service.CaptureId)(nil).Class().ID()}},
+		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 	},
 }

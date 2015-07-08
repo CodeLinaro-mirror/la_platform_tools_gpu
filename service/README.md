@@ -494,6 +494,13 @@ StoreDevice stores v into the database d, returning the DeviceId.
 func (*DeviceId) Class() binary.Class
 ```
 
+#### func (DeviceId) Path
+
+```go
+func (c DeviceId) Path() *path.Device
+```
+Path returns a path.Device representing the device with this identifier.
+
 #### func (DeviceId) Valid
 
 ```go
@@ -765,10 +772,10 @@ type RPC interface {
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
 	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoId, error)
-	GetFramebufferColor(device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings, l log.Logger) (ImageInfoId, error)
-	GetFramebufferDepth(device DeviceId, capture CaptureId, api ApiId, after uint64, l log.Logger) (ImageInfoId, error)
+	GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (ImageInfoId, error)
+	GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (ImageInfoId, error)
 	GetTimingInfo(device DeviceId, capture CaptureId, flags TimingFlags, l log.Logger) (TimingInfoId, error)
-	PrerenderFramebuffers(device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
+	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
 	Get(p path.Path, l log.Logger) (interface{}, error)
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)

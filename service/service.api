@@ -50,23 +50,17 @@ extern DeviceId[] GetDevices()
 extern MemoryInfoId GetMemoryInfo(path.Atom* after, memory.Range rng)
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
-// color buffer for the given device, capture and graphics API immediately
-// following the atom after. The provided RenderSettings structure can be used
-// to adjust maximum desired dimensions of the image, as well as applying debug
-// visualizations.
-extern ImageInfoId GetFramebufferColor(DeviceId       device,
-                                       CaptureId      capture,
-                                       ApiId          api,
-                                       u64            after,
+// color buffer for the given device, immediately following the atom after.
+// The provided RenderSettings structure can be used to adjust maximum desired
+// dimensions of the image, as well as applying debug visualizations.
+extern ImageInfoId GetFramebufferColor(path.Device*   device,
+                                       path.Atom*     after,
                                        RenderSettings settings)
 
 // GetFramebufferDepth returns the ImageInfo identifier describing the bound
-// depth buffer for the given device, capture and graphics API immediately
-// following the atom after.
-extern ImageInfoId GetFramebufferDepth(DeviceId  device,
-                                       CaptureId capture,
-                                       ApiId     api,
-                                       u64       after)
+// depth buffer for the given device, immediately following the atom after.
+extern ImageInfoId GetFramebufferDepth(path.Device* device,
+                                       path.Atom*   after)
 
 // GetTimingInfo performs timings of the given capture on the given device,
 // returning an identifier to the results.
@@ -82,12 +76,12 @@ extern TimingInfoId GetTimingInfo(DeviceId    device,
 // return any data, as it is used to pre-populate the cache of framebuffer
 // thumbnails that later get queried by the client. This function is
 // experimental and may change signature.
-extern BinaryId PrerenderFramebuffers(DeviceId   device,
-                                      CaptureId  capture,
-                                      ApiId      api,
-                                      u32        width,
-                                      u32        height,
-                                      u64[]      atomIds)
+extern BinaryId PrerenderFramebuffers(path.Device*  device,
+                                      path.Capture* capture,
+                                      ApiId         api,
+                                      u32           width,
+                                      u32           height,
+                                      u64[]         atomIds)
 
 // Get resolves and returns the object, value or memory at the path p.
 extern any Get(path.Path p)

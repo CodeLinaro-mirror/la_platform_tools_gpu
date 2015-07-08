@@ -63,13 +63,13 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferColor:
-			if res, err := server.GetFramebufferColor(call.device, call.capture, call.api, call.after, call.settings, l); err == nil {
+			if res, err := server.GetFramebufferColor(call.device, call.after, call.settings, l); err == nil {
 				return &resultGetFramebufferColor{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferDepth:
-			if res, err := server.GetFramebufferDepth(call.device, call.capture, call.api, call.after, l); err == nil {
+			if res, err := server.GetFramebufferDepth(call.device, call.after, l); err == nil {
 				return &resultGetFramebufferDepth{value: res}
 			} else {
 				return rpc.NewError(err.Error())

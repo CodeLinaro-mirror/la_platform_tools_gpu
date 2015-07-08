@@ -21,10 +21,28 @@ func Resolve(p path.Path, d database.Database, l log.Logger) (interface{}, error
 	return v[len(v)-1], nil
 }
 
+// ResolveCapture resolves and returns the capture from the path p.
+func ResolveCapture(p *path.Capture, d database.Database, l log.Logger) (service.Capture, error) {
+	if res, err := Resolve(p, d, l); err == nil {
+		return *res.(*service.Capture), nil
+	} else {
+		return service.Capture{}, err
+	}
+}
+
 // ResolveAtoms resolves and returns the atom list from the path p.
 func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error) {
 	if res, err := Resolve(p, d, l); err == nil {
 		return res.(*service.AtomStream).Atoms, nil
+	} else {
+		return nil, err
+	}
+}
+
+// ResolveAtom resolves and returns the atom from the path p.
+func ResolveAtom(p *path.Atom, d database.Database, l log.Logger) (atom.Atom, error) {
+	if res, err := Resolve(p, d, l); err == nil {
+		return res.(atom.Atom), nil
 	} else {
 		return nil, err
 	}
