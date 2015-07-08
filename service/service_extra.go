@@ -60,9 +60,8 @@ type resultGetDevices struct {
 // Call GetMemoryInfo
 type callGetMemoryInfo struct {
 	binary.Generate
-	capture CaptureId
-	after   uint64
-	rng     memory.Range
+	after *path.Atom
+	rng   memory.Range
 }
 
 // Result GetMemoryInfo

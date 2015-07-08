@@ -111,15 +111,16 @@ func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceId, error) {
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture and memory range, immediately following the atom after.
 func (s rpcServer) GetMemoryInfo(
-	captureID service.CaptureId,
-	after uint64,
+	after *path.Atom,
 	rng memory.Range,
 	l log.Logger) (service.MemoryInfoId, error) {
 
+	if err := after.Validate(); err != nil {
+		return service.MemoryInfoId{}, err
+	}
 	id, err := database.Store(&builder.GetMemoryInfo{
-		Capture: captureID,
-		After:   atom.ID(after),
-		Range:   memory.Range{Base: rng.Base, Size: rng.Size},
+		After: after,
+		Range: memory.Range{Base: rng.Base, Size: rng.Size},
 	}, s.Database, l)
 	return service.MemoryInfoId{ID: id}, err
 }
