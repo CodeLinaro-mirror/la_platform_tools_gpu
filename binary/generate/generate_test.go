@@ -20,8 +20,10 @@ import (
 	"log"
 	"path/filepath"
 	"reflect"
+	"strings"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
@@ -104,6 +106,46 @@ func TestDisable(t *testing.T) {
 	}
 }
 
+func TestInterfaceVsAny(t *testing.T) {
+	source := `
+		type S struct {
+			binary.Generate
+
+			any0 interface{}
+			any1 interface{ F() }
+			any2 interface{ anyB; F2() }
+			any3 anyA
+			any4 anyB
+			any5 anyC
+
+			obj0 interface{ binary.Object }
+			obj1 interface{ binary.Object; F() }
+			obj2 interface{ objB; F3() }
+			obj3 objA
+			obj4 objB
+			obj5 objC
+		}
+
+		type anyA interface{}
+		type anyB interface{ F() }
+		type anyC interface{ anyB; F2() }
+		type objA interface{ binary.Object }
+		type objB interface{ binary.Object; F() }
+		type objC interface{ objB; F3() }
+`
+
+	s := parseStruct(t, "S", source)
+	for _, f := range s.Fields {
+		_, isAny := f.Type.(*any.Any)
+		_, isInt := f.Type.(*schema.Interface)
+		if strings.HasPrefix(f.Name(), "any") && !isAny {
+			t.Errorf("Field '%s' has unexpected type %T", f.Name(), f.Type)
+		}
+		if strings.HasPrefix(f.Name(), "obj") && !isInt {
+			t.Errorf("Field '%s' has unexpected type %T", f.Name(), f.Type)
+		}
+	}
+}
 func TestStableID(t *testing.T) {
 	source := "type MyStruct struct {binary.Generate}"
 	a := parseStruct(t, "MyStruct", source)
