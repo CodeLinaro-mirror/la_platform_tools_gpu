@@ -17,36 +17,32 @@ package builder
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // BuildLazy returns the *service.Binary resulting from the given GetState request.
 func (r *GetState) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	capture, err := service.ResolveCapture(r.Capture, d, l)
+	atoms, err := ResolveAtoms(r.After.Atoms, d, l)
 	if err != nil {
 		return nil, err
 	}
 
-	api := gfxapi.Find(gfxapi.ID(r.API.ID))
+	if r.After.Index >= uint64(len(atoms)) {
+		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms)-1)
+	}
+
+	atom := atoms[r.After.Index]
+
+	apiID := atom.API()
+	api := gfxapi.Find(apiID)
 	if api == nil {
-		return nil, fmt.Errorf("Unknown graphics API '%v'", r.API.ID)
-	}
-
-	atoms, err := loadAtoms(capture.Atoms, d, l)
-	if err != nil {
-		return nil, err
-	}
-
-	if r.After >= atom.ID(len(atoms)) {
-		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms))
+		return nil, fmt.Errorf("Unknown graphics API '%v'", apiID)
 	}
 
 	s := gfxapi.NewState()
-	for _, a := range atoms[:r.After] {
+	for _, a := range atoms[:r.After.Index] {
 		a.Mutate(s, d, l)
 	}
 
