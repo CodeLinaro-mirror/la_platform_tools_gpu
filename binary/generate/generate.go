@@ -197,9 +197,6 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports, bin
 		}
 	case *types.Slice:
 		vt := fromType(pkg, from.Elem(), "", imports, binObj)
-		if tag.Flag("stream") {
-			return &schema.Stream{Alias: alias, ValueType: vt}
-		}
 		return &schema.Slice{Alias: alias, ValueType: vt}
 	case *types.Array:
 		length := uint32(from.Len())
@@ -241,8 +238,6 @@ func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i 
 	case *schema.Array:
 		i = walkType(t.ValueType, byname, structs, i)
 	case *schema.Slice:
-		i = walkType(t.ValueType, byname, structs, i)
-	case *schema.Stream:
 		i = walkType(t.ValueType, byname, structs, i)
 	case *schema.Map:
 		i = walkType(t.KeyType, byname, structs, i)
