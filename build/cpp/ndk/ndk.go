@@ -138,7 +138,7 @@ func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.
 }
 
 func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.Compile")
+	env.Logger = log.Enter(env.Logger, "NDK.Compile")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -172,7 +172,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.Archive")
+	env.Logger = log.Enter(env.Logger, "NDK.Archive")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -189,7 +189,7 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.LinkSo")
+	env.Logger = log.Enter(env.Logger, "NDK.LinkSo")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -218,7 +218,7 @@ func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.E
 }
 
 func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.LinkExe")
+	env.Logger = log.Enter(env.Logger, "NDK.LinkExe")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -246,7 +246,7 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.LinkApk")
+	env.Logger = log.Enter(env.Logger, "NDK.LinkApk")
 
 	paths, err := ResolvePaths()
 	if err != nil {
@@ -320,7 +320,7 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func depsFor(output build.File, cfg cpp.Config, env build.Environment) (deps build.FileSet, valid bool) {
-	env.Logger = env.Logger.Enter("NDK.Deps")
+	env.Logger = log.Enter(env.Logger, "NDK.Deps")
 
 	depfile := depFileFor(output, cfg, env)
 

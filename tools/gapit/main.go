@@ -53,7 +53,7 @@ func run() error {
 		info = nil
 	}
 	logger := log.Writer(info, os.Stdout, os.Stderr, nil)
-	defer logger.Flush()
+	defer log.Close(logger)
 
 	d, err := getDevice(logger, *device)
 	if err != nil {

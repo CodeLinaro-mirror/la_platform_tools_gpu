@@ -51,7 +51,7 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	if err != nil {
 		panic(err)
 	}
-	defer logger.Close()
+	defer log.Close(logger)
 	fmt.Printf("Server log file created at: %s\n", config.LogfilePath)
 
 	// Initialize the resource database and replay manager for RPC requests.

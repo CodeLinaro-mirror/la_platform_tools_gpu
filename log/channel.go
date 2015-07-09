@@ -44,7 +44,7 @@ type channel struct {
 	out     chan<- interface{}
 }
 
-func (c *channel) Log(severity Severity, msg string, args ...interface{}) {
+func (c *channel) log(severity Severity, msg string, args ...interface{}) {
 	c.out <- Entry{
 		Severity:  severity,
 		Message:   fmt.Sprintf(msg, args...),
@@ -54,7 +54,7 @@ func (c *channel) Log(severity Severity, msg string, args ...interface{}) {
 	}
 }
 
-func (c *channel) Enter(name string) Logger {
+func (c *channel) enter(name string) Logger {
 	return &channel{
 		uid:     c.uid,
 		nextUid: c.nextUid,
@@ -63,7 +63,7 @@ func (c *channel) Enter(name string) Logger {
 	}
 }
 
-func (c *channel) Fork() Logger {
+func (c *channel) fork() Logger {
 	return &channel{
 		uid:     atomic.AddUint32(c.nextUid, 1) - 1,
 		nextUid: c.nextUid,
@@ -72,13 +72,9 @@ func (c *channel) Fork() Logger {
 	}
 }
 
-func (c *channel) Flush() {
+func (c *channel) close() {
 	flush := make(FlushRequest)
 	c.out <- flush
 	<-flush
-}
-
-func (c *channel) Close() {
-	c.Flush()
 	close(c.out)
 }
