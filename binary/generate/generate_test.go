@@ -28,7 +28,7 @@ import (
 )
 
 var (
-	structType = &schema.Struct{Name: "objects.Terminator"}
+	structType = &schema.Struct{Name: "TestObject"}
 	fields     = []schema.Field{
 		{Declared: "u8", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "u16", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -49,7 +49,6 @@ var (
 		{Declared: "object", Type: &schema.Interface{Name: "binary.Object"}},
 		{Declared: "slice", Type: &schema.Slice{ValueType: structType}},
 		{Declared: "alias", Type: &schema.Slice{Alias: "Other", ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}}},
-		{Declared: "stream", Type: &schema.Stream{ValueType: structType}},
 		{Declared: "array", Type: &schema.Array{ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}, Size: 10}},
 		{Declared: "dict", Type: &schema.Map{KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: structType}},
 		{Declared: "data", Type: &schema.Slice{ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
@@ -69,8 +68,10 @@ func parseStructs(source string) []*Struct {
 	testId++
 	fakeFile := fmt.Sprintf(`
 	package fake
-	import "android.googlesource.com/platform/tools/gpu/binary/objects"
 	import "android.googlesource.com/platform/tools/gpu/binary"
+	type TestObject struct{}
+	func (*TestObject) Class() binary.Class { return nil }
+
 	%s`, source)
 	name := fmt.Sprintf("fake_%d.go", testId)
 	loader.ScanFile(name, fakeFile)
@@ -193,11 +194,7 @@ func TestTypes(t *testing.T) {
 	fmt.Fprintln(source, prefix)
 	fmt.Fprint(source, "type MyStruct struct {binary.Generate;\n")
 	for _, f := range fields {
-		fmt.Fprintf(source, "  %s %s", f.Declared, f.Type)
-		if _, isstream := f.Type.(*schema.Stream); isstream {
-			fmt.Fprint(source, " `stream:\"true\"`")
-		}
-		fmt.Fprintln(source)
+		fmt.Fprintf(source, "  %s %s\n", f.Declared, f.Type)
 	}
 	fmt.Fprint(source, "}\n")
 	s := parseStruct(t, "MyStruct", source.String())

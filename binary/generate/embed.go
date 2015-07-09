@@ -45,7 +45,6 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
-{{define "Cpp.Type.Stream"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
 
 {{define "Cpp.Method#ID"}}Id{{end}}
@@ -82,9 +81,7 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Cpp.Encode.Stream"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
-
-{{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ stream encoding not supported");{{end}}
+{{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
 {{define "Cpp.File"}}{{$.Copyright}}
@@ -226,15 +223,6 @@ var schema{{.Name}} = &schema.Class{
 			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
 		}{{end}}
 
-{{define "Go.Encode.Stream"}}for _, o := range {{.Name}} {
-			if err := e.Object(o); err != nil {
-				return err
-			}
-		}
-		if err := e.Object((*objects.Terminator)(nil)); err != nil {
-			return err
-		}{{end}}
-
 {{define "Go.Encode.Map"}} {{template "Go.Encode_Length" $}}
 		for k, v := range {{.Name}} {
 			{{Call "Go.Encode" (Var .Type.KeyType "k")}}
@@ -296,16 +284,6 @@ var schema{{.Name}} = &schema.Class{
 				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
 			}{{end}}
 
-{{define "Go.Decode.Stream"}}for {
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if _, end := obj.(*objects.Terminator); end {
-				break
-			} else {
-				{{.Name}} = append({{.Name}}, obj.({{.Type.ValueType}}))
-			}
-		} {{end}}
-
 {{define "Go.Decode.Map"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
@@ -344,14 +322,6 @@ var schema{{.Name}} = &schema.Class{
 		}{{end}}
 
 
-{{define "Go.Skip.Stream"}}for {
-			if id, err := d.SkipObject(); err != nil {
-				return err
-			} else if id == objects.TerminatorID {
-				break
-			}
-		} {{end}}
-
 {{define "Go.Skip.Map"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
@@ -368,7 +338,6 @@ var schema{{.Name}} = &schema.Class{
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
 {{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 {{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
-{{define "Go.Schema.Stream"}}&schema.Stream{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 {{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 
 {{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
@@ -494,8 +463,6 @@ const java_tmpl = `{{/*
 »»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»}{{end}}
 
-{{define "Java.Encode.Stream"}}TODO: Java stream handling{{end}}
-
 {{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
@@ -520,7 +487,6 @@ const java_tmpl = `{{/*
 »»}{{end}}
 
 {{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
-{{define "Java.Decode.Stream"}}TODO: Java stream handling{{end}}
 
 {{define "Java.File"}}{{$.Copyright}}package {{.BasePackage}}.{{.RelativePackage}};
 
