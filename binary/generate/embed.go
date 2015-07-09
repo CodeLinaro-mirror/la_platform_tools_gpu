@@ -433,8 +433,8 @@ const java_tmpl = `{{/*
  {{define "Java.Type#uint64"}}long{{end}}
  {{define "Java.Type#float32"}}float{{end}}
  {{define "Java.Type#float64"}}double{{end}}
- {{define "Java.Type#string"}}char*{{end}}
- {{define "Java.Type#binary.ID"}}gapic::Id{{end}}
+ {{define "Java.Type#string"}}String{{end}}
+ {{define "Java.Type#binary.ID"}}BinaryID{{end}}
  {{define "Java.Type.Any"}}Object{{end}}
  {{define "Java.Type.Struct"}}{{.Name | CppName}}{{end}}
  {{define "Java.Type.Interface"}}BinaryObject{{end}}
@@ -444,7 +444,9 @@ const java_tmpl = `{{/*
 
 
 {{define "Java.Encoder"}}
-»»public static void encode(Encoder e, {{.Name}} o) throws IOException {
+»»@Override
+»»public void encode(Encoder e, BinaryObject obj) throws IOException {
+»»»{{.Name}} o = ({{.Name}})obj;
 {{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -467,7 +469,9 @@ const java_tmpl = `{{/*
 {{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
 
 {{define "Java.Decoder"}}
-»»public static void decode(Decoder d, {{.Name}} o) throws IOException {
+»»@Override
+»»public void decode(Decoder d, BinaryObject obj) throws IOException {
+»»»{{.Name}} o = ({{.Name}})obj;
 {{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -505,35 +509,38 @@ const java_tmpl = `{{/*
 {{define "Java.File"}}{{$.Copyright}}
 package {{.BasePackage}}.{{.RelativePackage}};
 
+import com.android.tools.rpclib.binary.BinaryClass;
+import com.android.tools.rpclib.binary.BinaryID;
 import com.android.tools.rpclib.binary.BinaryObject;
-import com.android.tools.rpclib.binary.BinaryObjectCreator;
 import com.android.tools.rpclib.binary.Decoder;
 import com.android.tools.rpclib.binary.Encoder;
-import com.android.tools.rpclib.binary.ObjectTypeID;
+import com.android.tools.rpclib.binary.Namespace;
 import java.io.IOException;
 
 public final class {{.Struct.Name}} implements BinaryObject {
 {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
-  // Constructs a default-initialized {@link {{.Struct.Name}}}.
-  public {{.Struct.Name}}() {
-  }
+»// Constructs a default-initialized {@link {{.Struct.Name}}}.
+»public {{.Struct.Name}}() {
+»}
 
-  // Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
-  public {{.Struct.Name}}(Decoder d) throws IOException {
-    //TODO: decode(d);
-  }
+»// Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
+»public {{.Struct.Name}}(Decoder d) throws IOException {
+»»//TODO: decode(d);
+»}
 {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
+»@Override
+»public BinaryClass klass() { return Class.INSTANCE; }
+
 »public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
-»public static ObjectTypeID ID = new ObjectTypeID(IDBytes);
-»public enum Class {
+»public static BinaryID ID = new BinaryID(IDBytes);
+»public enum Class implements BinaryClass {
 »»INSTANCE;
 {{template "Java.Encoder" .Struct}}
 {{template "Java.Decoder" .Struct}}
 »}
 »static {
-»»ObjectTypeID.register(ID, Class.INSTANCE);
+  Namespace.register(ID, Class.INSTANCE);
 »}
-{{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
 }
 {{end}}
 `
