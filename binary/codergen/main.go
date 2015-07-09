@@ -166,10 +166,10 @@ func output(t *generate.Templates, file *generate.File) error {
 		indent, _ := file.Directives["java.indent"]
 		gen.MemberPrefix, _ = file.Directives["java.member_prefix"]
 		gen.ClassPrefix, _ = file.Directives["java.class_prefix"]
-		gen.Copyright = copyright.Build(
+		gen.Copyright = strings.TrimSpace(copyright.Build(
 			"generated_aosp_java", copyright.Info{
 				Year: "2015",
-			})
+			}))
 		gen.Indent = strings.Trim(indent, `"`)
 		if gen.Indent == "" {
 			gen.Indent = "    "
