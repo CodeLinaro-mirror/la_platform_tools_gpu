@@ -136,14 +136,6 @@ func Captures(db database.Database, logger log.Logger) ([]service.CaptureId, err
 	return captures, nil
 }
 
-func loadAtoms(streamID service.AtomStreamId, d database.Database, l log.Logger) (atom.List, error) {
-	stream, err := service.ResolveAtomStream(streamID, d, l)
-	if err != nil {
-		return atom.List{}, err
-	}
-	return stream.Atoms, nil
-}
-
 // getAtomFramebufferDimensions returns the framebuffer dimensions after a given
 // atom in the given capture and context.
 // The first call to getAtomFramebufferDimensions for a given capture/context
