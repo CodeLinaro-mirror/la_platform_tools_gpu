@@ -276,7 +276,7 @@ func (l *Loader) scan(dir *Directory, module *Module, isTest bool) error {
 }
 
 func (l *Loader) addConst(module *Module, source *Source, c *types.Const) {
-	t := fromType(module.Types, c.Type(), "", module.Output.Imports)
+	t := fromType(module.Types, c.Type(), "", module.Output.Imports, nil)
 	name := c.Name()
 	directive := fmt.Sprintf("%s#%s", t, name)
 	if d, found := source.Directives[directive]; found {
