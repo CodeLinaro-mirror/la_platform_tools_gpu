@@ -36,7 +36,7 @@ type Templates struct {
 	funcs     template.FuncMap
 	active    *template.Template
 	writer    io.Writer
-	File      *File
+	File      interface{}
 	counters  map[string]*counter
 }
 
@@ -56,6 +56,31 @@ func (c *counter) String() string {
 	return fmt.Sprint(*c)
 }
 
+func isPublic(s string) bool {
+	r, _ := utf8.DecodeRuneInString(s)
+	return unicode.IsUpper(r)
+}
+
+func installMethods(v reflect.Value, funcs template.FuncMap) {
+	ty := v.Type()
+	for i := 0; i < ty.NumMethod(); i++ {
+		m := ty.Method(i)
+		if isPublic(m.Name) {
+			funcs[m.Name] = v.Method(i).Interface()
+		}
+	}
+}
+
+func installFields(v reflect.Value, funcs template.FuncMap) {
+	ty := v.Type()
+	for i := 0; i < ty.NumField(); i++ {
+		m := ty.Field(i)
+		if isPublic(m.Name) {
+			funcs[m.Name] = v.Field(i).Interface
+		}
+	}
+}
+
 func NewTemplates() *Templates {
 	f := &Templates{
 		templates: template.New("FunctionHolder"),
@@ -63,15 +88,8 @@ func NewTemplates() *Templates {
 		counters:  map[string]*counter{},
 	}
 	v := reflect.ValueOf(f)
-	t := v.Type()
-	for i := 0; i < t.NumMethod(); i++ {
-		m := t.Method(i)
-		r, _ := utf8.DecodeRuneInString(m.Name)
-		if unicode.IsUpper(r) {
-			c := v.MethodByName(m.Name)
-			f.funcs[m.Name] = c.Interface()
-		}
-	}
+	installMethods(v, f.funcs)
+	installFields(v.Elem(), f.funcs)
 	f.templates.Funcs(f.funcs)
 	template.Must(f.templates.New("go.tmpl").Parse(string(go_tmpl)))
 	template.Must(f.templates.New("java.tmpl").Parse(string(java_tmpl)))
@@ -81,7 +99,7 @@ func NewTemplates() *Templates {
 
 type PostProcess func([]byte) []byte
 
-func (t *Templates) generate(f *File, name string, arg interface{}, out string, post PostProcess) (bool, error) {
+func (t *Templates) generate(f interface{}, name string, arg interface{}, out string, post PostProcess) (bool, error) {
 	t.File = f
 	defer func() { t.File = nil }()
 
@@ -179,12 +197,16 @@ func (*Templates) Upper(s interface{}) string {
 	return strings.ToUpper(fmt.Sprint(s))
 }
 
+func (*Templates) Contains(test, s interface{}) bool {
+	return strings.Contains(fmt.Sprint(s), fmt.Sprint(test))
+}
+
 func (*Templates) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
 }
 
-func (t *Templates) Directive(name string, notset interface{}) interface{} {
-	d, ok := t.File.Directives[name]
+func (f *File) Directive(name string, notset interface{}) interface{} {
+	d, ok := f.Directives[name]
 	if !ok {
 		return notset
 	}
