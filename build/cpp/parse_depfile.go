@@ -45,15 +45,7 @@ func ParseDepFile(file build.File, env build.Environment) (deps build.FileSet, d
 		return build.FileSet{}, false
 	}
 
-	valid := true
-	for _, dep := range deps {
-		if !dep.Exists() {
-			log.Infof(env.Logger, "'%v' has missing dependency '%s'", file, dep)
-			valid = false
-		}
-	}
-
-	return deps, valid
+	return deps, true
 }
 
 func parseDeps(s string) (build.FileSet, error) {
