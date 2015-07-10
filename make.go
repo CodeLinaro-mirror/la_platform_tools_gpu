@@ -71,7 +71,7 @@ func init() {
 		Tools.Embed = GoInstall(GPURoot + "/tools/embed")
 		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
 		Tools.Apic = GoInstall(GPURoot + "/api/apic")
-		Tools.Codergen = GoInstall(GPURoot + "/binary/codergen")
+		Tools.Codergen = GoInstall(GPURoot + "/tools/codergen")
 		Tools.Gapit = GoInstall(GPURoot + "/tools/gapit")
 		List("gapit").DependsOn(Tools.Gapit)
 		List("tools").DependsStruct(Tools)
