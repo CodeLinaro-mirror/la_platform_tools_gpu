@@ -160,12 +160,10 @@ func output(t *generate.Templates, file *generate.File) error {
 	javaPackage, doJava := file.Directives["java.package"]
 	if *java != "" && !file.IsTest && doJava {
 		gen := generate.NewJava(file)
-		gen.BasePackage = javaPackage
-		gen.RelativePackage = file.Name
+		gen.JavaPackage = javaPackage
 		source, _ := file.Directives["java.source"]
 		indent, _ := file.Directives["java.indent"]
 		gen.MemberPrefix, _ = file.Directives["java.member_prefix"]
-		gen.ClassPrefix, _ = file.Directives["java.class_prefix"]
 		gen.Copyright = strings.TrimSpace(copyright.Build(
 			"generated_aosp_java", copyright.Info{
 				Year: "2015",
@@ -176,8 +174,8 @@ func output(t *generate.Templates, file *generate.File) error {
 		}
 		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
 		for _, s := range file.Structs {
-			out := filepath.Join(*java, source, pkgPath, file.Name, s.Name+".java")
-			gen.Struct = s
+			gen.Struct.Struct = s
+			out := filepath.Join(*java, source, pkgPath, gen.Struct.Name()+".java")
 			if err := Generate(gen, t, out); err != nil {
 				return err
 			}

@@ -20,7 +20,7 @@ package service
 import "android.googlesource.com/platform/tools/gpu/atom"
 
 // binary: java.source = adt/idea/android/src
-// binary: java.package = com.android.tools.idea.editors.gfxtrace
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
 
