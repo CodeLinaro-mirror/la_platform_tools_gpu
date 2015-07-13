@@ -38,7 +38,7 @@ type Java struct {
 
 func NewJava(file *File) *Java { return &Java{File: file} }
 func (file *Java) Run(t *Templates, out string) (bool, error) {
-	return t.generate(file.File, "Java.File", file, out, func(b []byte) []byte {
+	return t.generate(file, "Java.File", file, out, func(b []byte) []byte {
 		s := string(b)
 		s = strings.Replace(s, indent, file.Indent, -1)
 		s = strings.Replace(s, memberPrefix, file.MemberPrefix, -1)

@@ -39,7 +39,7 @@ func (t *Templates) CppName(n string) string {
 
 func NewCpp(file *File) *Cpp { return &Cpp{File: file, Indent: "    "} }
 func (file *Cpp) Run(t *Templates, out string) (bool, error) {
-	return t.generate(file.File, "Cpp.File", file, out, func(b []byte) []byte {
+	return t.generate(file, "Cpp.File", file, out, func(b []byte) []byte {
 		return []byte(strings.Replace(string(b), indent, file.Indent, -1))
 	})
 }
