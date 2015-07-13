@@ -16,11 +16,8 @@ package client
 
 import (
 	"fmt"
-	"image"
-	"image/color"
 	"os"
 	"path/filepath"
-	"sync"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
@@ -45,7 +42,7 @@ type app struct {
 }
 
 func createPanels(appCtx *ApplicationContext, window gxui.Window) gxui.Control {
-	theme, driver := appCtx.Theme(), appCtx.Theme().Driver()
+	theme, driver := appCtx.theme, appCtx.theme.Driver()
 
 	vSplitter := theme.CreateSplitterLayout()
 	vSplitter.SetOrientation(gxui.Vertical)
@@ -108,39 +105,66 @@ type capture struct {
 	info service.Capture
 }
 
-func (d *capture) String() string { return d.info.Name }
+type captureAdapter struct {
+	gxui.AdapterBase
+	items []capture
+}
+
+func (a *captureAdapter) Count() int {
+	return len(a.items)
+}
+
+func (a *captureAdapter) ItemAt(index int) gxui.AdapterItem {
+	return a.items[index].id
+}
+
+func (a *captureAdapter) ItemIndex(item gxui.AdapterItem) int {
+	id := item.(service.CaptureId)
+	for i := range a.items {
+		if a.items[i].id == id {
+			return i
+		}
+	}
+	return -1
+}
+
+func (a *captureAdapter) Create(theme gxui.Theme, index int) gxui.Control {
+	l := theme.CreateLabel()
+	l.SetText(a.items[index].info.Name)
+	return l
+}
+
+func (a *captureAdapter) Size(gxui.Theme) math.Size {
+	return math.Size{W: 250, H: 18}
+}
 
 func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
-	theme, r := appCtx.Theme(), appCtx.Rpc()
-
-	adapter := gxui.CreateDefaultAdapter()
-
-	list := theme.CreateDropDownList()
-	list.SetBubbleOverlay(appCtx.DropDownOverlay())
+	adapter := &captureAdapter{}
+	list := appCtx.theme.CreateDropDownList()
+	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.LoadCapture(item.(*capture).id, true)
+		appCtx.events.Select(item.(service.CaptureId).Path())
 	})
 
-	go func() {
-		l := log.Enter(log.Fork(appCtx.Logger()), "CreateCaptureList")
-		ids, err := r.GetCaptures(l)
-		if err != nil {
-			return
-		}
-		captures := make([]*capture, 0, len(ids))
-		for _, id := range ids {
-			id := id
-			go func() {
-				if info, err := r.ResolveCapture(id, l); err == nil {
+	list.OnAttach(func() {
+		go func() {
+			for list.Attached() { // While the list control is visible
+				if captures, err := appCtx.rpc.GetCaptures(); err == nil {
+					items := make([]capture, 0, len(captures))
+					for i, c := range captures {
+						items = append(items, capture{id: i, info: c})
+					}
 					appCtx.Run(func() {
-						captures = append(captures, &capture{id, info})
-						adapter.SetItems(captures)
+						adapter.items = items
+						adapter.DataChanged()
 					})
 				}
-			}()
-		}
-	}()
+				time.Sleep(10 * time.Second)
+			}
+		}()
+	})
+
 	return list
 }
 
@@ -149,57 +173,68 @@ type device struct {
 	info service.Device
 }
 
+type deviceAdapter struct {
+	gxui.AdapterBase
+	items []device
+}
+
+func (a *deviceAdapter) Count() int {
+	return len(a.items)
+}
+
+func (a *deviceAdapter) ItemAt(index int) gxui.AdapterItem {
+	return a.items[index].id
+}
+
+func (a *deviceAdapter) ItemIndex(item gxui.AdapterItem) int {
+	id := item.(service.DeviceId)
+	for i := range a.items {
+		if a.items[i].id == id {
+			return i
+		}
+	}
+	return -1
+}
+
+func (a *deviceAdapter) Create(theme gxui.Theme, index int) gxui.Control {
+	l := theme.CreateLabel()
+	l.SetText(a.items[index].info.Name)
+	return l
+}
+
+func (a *deviceAdapter) Size(gxui.Theme) math.Size {
+	return math.Size{W: 250, H: 18}
+}
+
 func (d *device) String() string { return d.info.Name }
 
 func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
-	theme, r := appCtx.Theme(), appCtx.Rpc()
-	driver := theme.Driver()
-
-	adapter := gxui.CreateDefaultAdapter()
-	wanted := appCtx.ReplayDevice
-
-	list := theme.CreateDropDownList()
-	list.SetBubbleOverlay(appCtx.DropDownOverlay())
+	adapter := &deviceAdapter{}
+	list := appCtx.theme.CreateDropDownList()
+	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.SelectDevice(item.(*device).id)
-		wanted = ""
+		appCtx.events.Select(item.(service.DeviceId).Path())
 	})
 
 	list.OnAttach(func() {
 		go func() {
-			l := log.Enter(log.Fork(appCtx.Logger()), "DeviceListUpdate")
-
 			for list.Attached() { // While the list control is visible
-				if ids, err := r.GetDevices(l); err == nil {
-					devices := make([]*device, 0, len(ids))
-					found := -1
-					for _, id := range ids {
-						if info, err := r.ResolveDevice(id, l); err == nil {
-							devices = append(devices, &device{id, info})
-							if info.Name == wanted {
-								found = len(devices) - 1
-								wanted = ""
-							}
-						}
+				if devices, err := appCtx.rpc.GetDevices(); err == nil {
+					items := make([]device, 0, len(devices))
+					for i, d := range devices {
+						items = append(items, device{id: i, info: d})
 					}
-
 					appCtx.Run(func() {
-						adapter.SetItems(devices)
-						if found >= 0 {
-							list.Select(devices[found])
+						adapter.items = items
+						adapter.DataChanged()
+						if list.Selected() == nil && len(items) > 0 {
+							list.Select(items[0].id)
 						}
 					})
 				}
 
-				var selected service.DeviceId
-				driver.CallSync(func() { selected = appCtx.SelectedDevice() })
-
-				if !selected.Valid() {
-					time.Sleep(250 * time.Millisecond)
-				} else {
-					time.Sleep(30 * time.Second)
-				}
+				time.Sleep(10 * time.Second)
 			}
 		}()
 	})
@@ -208,7 +243,7 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 }
 
 func createToolbar(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
+	theme := appCtx.theme
 
 	takeCapture := theme.CreateButton()
 	takeCapture.SetText("Take capture")
@@ -232,170 +267,6 @@ func createToolbar(appCtx *ApplicationContext) gxui.Control {
 	layout.AddChild(deviceLabel)
 	layout.AddChild(deviceList)
 	return layout
-}
-
-func loadTiming(appCtx *ApplicationContext) {
-	deviceID := appCtx.SelectedDevice()
-	captureID := appCtx.CaptureID()
-
-	appCtx.Run(func() { appCtx.timingInfo = service.TimingInfo{} })
-
-	go func() {
-		timingInfo := service.TimingInfo{}
-		timingPerCommand := map[uint64]uint64{}
-		wg := sync.WaitGroup{}
-		wg.Add(2)
-
-		go func() {
-			l := log.Enter(log.Fork(appCtx.Logger()), "Replay: CPU command timing")
-			flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand
-			cpuCommandTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
-			if err != nil {
-				return
-			}
-			cpuCommandTimingInfo, err := appCtx.rpc.ResolveTimingInfo(cpuCommandTimingInfoID, l)
-			if err != nil {
-				return
-			}
-			for _, t := range cpuCommandTimingInfo.PerCommand {
-				timingPerCommand[t.AtomId] = t.Nanoseconds
-			}
-			wg.Done()
-		}()
-
-		go func() {
-			l := log.Enter(log.Fork(appCtx.Logger()), "Replay: GPU frame timing")
-			flags := service.TimingFlagsTimingGPU | service.TimingFlagsTimingPerFrame
-			gpuFrameTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
-			if err != nil {
-				return
-			}
-			gpuFrameTimingInfo, err := appCtx.rpc.ResolveTimingInfo(gpuFrameTimingInfoID, l)
-			if err != nil {
-				return
-			}
-			timingInfo = gpuFrameTimingInfo
-			wg.Done()
-		}()
-
-		wg.Wait()
-		appCtx.Run(func() {
-			appCtx.timingPerCommand = timingPerCommand
-			appCtx.timingInfo = timingInfo
-			appCtx.onTimingInfoUpdated.Fire()
-		})
-	}()
-}
-
-func DoReplay(appCtx *ApplicationContext) {
-	driver, r := appCtx.Theme().Driver(), appCtx.Rpc()
-	deviceID := appCtx.SelectedDevice()
-	captureID := appCtx.CaptureID()
-	atomID := appCtx.SelectedAtomID()
-	settings := service.RenderSettings{
-		MaxWidth:  65536,
-		MaxHeight: 65536,
-		Wireframe: appCtx.Wireframe(),
-	}
-
-	if atomID == InvalidAtomID {
-		return
-	}
-
-	go func() {
-		l := log.Enter(log.Fork(appCtx.Logger()), "Replay: color-buffer")
-		p := captureID.Path().Atoms().Index(uint64(atomID))
-		imageID, err := r.GetFramebufferColor(deviceID.Path(), p, settings, l)
-		if err != nil {
-			return
-		}
-
-		imageInfo, err := r.ResolveImageInfo(imageID, l)
-		if err != nil {
-			return
-		}
-
-		imageData, err := r.ResolveBinary(imageInfo.Data, l)
-		if err != nil {
-			return
-		}
-
-		width, height := int(imageInfo.Width), int(imageInfo.Height)
-
-		var img *image.RGBA
-		if width > 0 && height > 0 {
-			img = image.NewRGBA(image.Rect(0, 0, width, height))
-			img.Pix = imageData
-		}
-
-		appCtx.Run(func() {
-			if appCtx.colorBuffer != nil {
-				appCtx.colorBuffer.Release()
-			}
-			appCtx.colorBuffer = nil
-			if img != nil {
-				appCtx.colorBuffer = driver.CreateTexture(img, 1)
-				appCtx.colorBuffer.SetFlipY(true)
-			}
-			appCtx.onColorBufferUpdate.Fire()
-		})
-
-	}()
-
-	go func() {
-		l := log.Enter(log.Fork(appCtx.Logger()), "Replay: depth-buffer")
-		p := captureID.Path().Atoms().Index(uint64(atomID))
-		imageID, err := r.GetFramebufferDepth(deviceID.Path(), p, l)
-		if err != nil {
-			return
-		}
-
-		imageInfo, err := r.ResolveImageInfo(imageID, l)
-		if err != nil {
-			return
-		}
-
-		imageData, err := r.ResolveBinary(imageInfo.Data, l)
-		if err != nil {
-			return
-		}
-
-		buffer := imageData
-
-		width, height := int(imageInfo.Width), int(imageInfo.Height)
-
-		var img *image.RGBA
-		if width > 0 && height > 0 {
-			img = image.NewRGBA(image.Rect(0, 0, width, height))
-			for y := 0; y < height; y++ {
-				for x := 0; x < width; x++ {
-					r, g, b, a := float32(buffer[0]), float32(buffer[1])/255.0, float32(buffer[2])/65025.0, float32(buffer[3])/160581375.0
-					depth := (r + g + b + a) / 255.0
-					buffer = buffer[4:]
-					d := 0.01 / (1.0 - depth)
-					c := color.RGBA{
-						R: byte(math.Cosf(d+math.TwoPi*0.000)*127.0 + 128.0),
-						G: byte(math.Cosf(d+math.TwoPi*0.333)*127.0 + 128.0),
-						B: byte(math.Cosf(d+math.TwoPi*0.666)*127.0 + 128.0),
-						A: byte(0xFF),
-					}
-					img.Set(x, y, c)
-				}
-			}
-		}
-
-		appCtx.Run(func() {
-			if appCtx.depthBuffer != nil {
-				appCtx.depthBuffer.Release()
-			}
-			appCtx.depthBuffer = nil
-			if img != nil {
-				appCtx.depthBuffer = driver.CreateTexture(img, 1)
-				appCtx.depthBuffer.SetFlipY(true)
-			}
-			appCtx.onDepthBufferUpdate.Fire()
-		})
-	}()
 }
 
 type EnableDebugger interface {
@@ -424,7 +295,7 @@ func (a app) main(driver gxui.Driver) {
 		panic(err)
 	}
 	atexit.Register(func() { log.Close(logFile) }, time.Second)
-	appCtx.Logger().Add(logFile)
+	appCtx.logger.Add(logFile)
 
 	window := theme.CreateWindow(800, 600, "Main")
 
@@ -435,18 +306,8 @@ func (a app) main(driver gxui.Driver) {
 
 	window.OnClose(driver.Terminate)
 	window.AddChild(layout)
-	window.AddChild(appCtx.DropDownOverlay())
-	window.AddChild(appCtx.ToolTipOverlay())
-
-	// Perhaps add button to disable this?
-	appCtx.OnAtomSelected(appCtx.RequestReplay)
-	appCtx.OnAtomsUpdated(appCtx.LoadHierarchy)
-	appCtx.OnAtomsUpdated(appCtx.LoadReport)
-	appCtx.OnAtomsUpdated(func() { loadTiming(appCtx) })
-	appCtx.OnRequestReplay(func() { DoReplay(appCtx) })
-	appCtx.OnAtomSelected(appCtx.LoadState)
-
-	appCtx.UpdateSchema()
+	window.AddChild(appCtx.dropDownOverlay)
+	window.AddChild(appCtx.toolTipOverlay)
 
 	if appCtx.InitialCapture != "" {
 		ImportCapture(appCtx, appCtx.InitialCapture, appCtx.logger)

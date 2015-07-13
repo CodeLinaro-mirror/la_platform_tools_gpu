@@ -168,7 +168,7 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, captur
 }
 
 func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
-	theme := appCtx.Theme()
+	theme := appCtx.theme
 	window := theme.CreateWindow(500, 200, "Take capture")
 
 	launch := theme.CreateButton()
@@ -197,7 +197,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	row.AddChild(name)
 	top.AddChild(row)
 
-	statusAdapter := CreateLogAdapter(1024, appCtx.Theme().Driver().Call)
+	statusAdapter := CreateLogAdapter(1024, appCtx.Run)
 	statusLogger := statusAdapter.Logger()
 	status := theme.CreateList()
 	status.SetAdapter(statusAdapter)
@@ -235,20 +235,22 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 			if count > 0 {
 				data := buf.Bytes()
 				log.Infof(statusLogger, "Importing...")
-				id, err := appCtx.Rpc().Import(name.Text(), data, appCtx.Logger())
+				id, err := appCtx.rpc.Import(name.Text(), data)
 				if err != nil {
 					panic(err)
 				}
 
 				log.Infof(statusLogger, "Loading...")
-				appCtx.LoadCapture(id, true)
 
-				theme.Driver().Call(window.Close)
+				appCtx.Run(func() {
+					appCtx.events.Select(id.Path())
+					window.Close()
+				})
 			} else {
 				if err != nil {
 					log.Errorf(statusLogger, "%T %s", err, err.Error())
 				}
-				theme.Driver().Call(func() {
+				appCtx.Run(func() {
 					button.SetText("Close")
 					button.OnClick(func(gxui.MouseEvent) {
 						window.Close()
@@ -286,11 +288,11 @@ func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Log
 		log.Infof(statusLogger, "Zero size file %s", path)
 	} else {
 		log.Infof(statusLogger, "Importing...")
-		id, err := appCtx.Rpc().Import(path, data, appCtx.Logger())
+		id, err := appCtx.rpc.Import(path, data)
 		if err != nil {
 			panic(err)
 		}
 		log.Infof(statusLogger, "Loading...")
-		appCtx.LoadCapture(id, true)
+		appCtx.events.Select(id.Path())
 	}
 }

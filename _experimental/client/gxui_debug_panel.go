@@ -22,7 +22,7 @@ import (
 )
 
 func CreateGxuiDebug(appCtx *ApplicationContext, window gxui.Window, driver gxui.Driver) gxui.Control {
-	theme := appCtx.Theme()
+	theme := appCtx.theme
 
 	layout := theme.CreateLinearLayout()
 	layout.SetDirection(gxui.TopToBottom)

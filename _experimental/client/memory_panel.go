@@ -15,6 +15,9 @@
 package client
 
 import (
+	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 )
 
@@ -24,7 +27,6 @@ func CreateMemoryPanelReinterpretButtons(
 	rawAdapter *MemoryAdapter,
 	imgAdapter *MemoryImageAdapter) gxui.Control {
 
-	theme := appCtx.Theme()
 	modes := []string{}
 	actions := map[string]func(){}
 
@@ -59,16 +61,16 @@ func CreateMemoryPanelReinterpretButtons(
 	adapter := gxui.CreateDefaultAdapter()
 	adapter.SetItems(modes)
 
-	label := theme.CreateLabel()
+	label := appCtx.theme.CreateLabel()
 	label.SetText("Type:")
 
-	list := theme.CreateDropDownList()
-	list.SetBubbleOverlay(appCtx.DropDownOverlay())
+	list := appCtx.theme.CreateDropDownList()
+	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) { actions[item.(string)]() })
 	list.Select(modes[0])
 
-	layout := theme.CreateLinearLayout()
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 	layout.AddChild(label)
 	layout.AddChild(list)
@@ -76,31 +78,56 @@ func CreateMemoryPanelReinterpretButtons(
 }
 
 func CreateMemoryPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
 	rawAdapter := CreateMemoryAdapter(appCtx)
 	imgAdapter := CreateMemoryImageAdapter(appCtx)
 
-	list := theme.CreateList()
+	list := appCtx.theme.CreateList()
 	list.SetAdapter(rawAdapter)
-	appCtx.OnAtomsUpdated(func() {
-		rawAdapter.DataReplaced()
-		imgAdapter.DataReplaced()
+
+	var address uint64
+	var after *path.Atom
+
+	update := func() {
+		rawAdapter.Update(after, address)
+		imgAdapter.Update(after, address)
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if a := path.FindAtom(p); a != nil && !path.Equal(a, after) {
+			after = a
+			update()
+		}
+		if s, a := path.FindAtomSlice(p); s != nil && a != nil {
+			if a := a.Index(s.End - 1); !path.Equal(a, after) {
+				after = a
+				update()
+			}
+		}
+		// TODO: Address
 	})
-	appCtx.OnAtomSelected(func() {
-		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedPointer().Address
-		rawAdapter.SetData(selectedAtomID, selectedAddress)
-		imgAdapter.SetData(selectedAtomID, selectedAddress)
-	})
-	appCtx.OnPointerSelected(func() {
-		selectedAtomID, selectedAddress := appCtx.SelectedAtomID(), appCtx.SelectedPointer().Address
-		rawAdapter.SetData(selectedAtomID, selectedAddress)
-		imgAdapter.SetData(selectedAtomID, selectedAddress)
-		list.ScrollTo(selectedAddress)
-	})
-	layout := theme.CreateLinearLayout()
+
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.TopToBottom)
 	layout.AddChild(CreateMemoryPanelReinterpretButtons(appCtx, list, rawAdapter, imgAdapter))
 	layout.AddChild(list)
 	return layout
+}
+
+type requestMemory struct {
+	context  *ApplicationContext
+	after    *path.Atom
+	address  uint64
+	size     uint64
+	callback func(service.MemoryInfo)
+}
+
+func (t requestMemory) Run(c task.CancelSignal) {
+	res, err := t.context.rpc.RequestMemory(t.after, t.address, t.size)
+	if err != nil {
+		return
+	}
+	c.Check()
+	t.context.Run(func() {
+		t.callback(res)
+	})
 }

@@ -18,26 +18,61 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
 
 func CreateReportPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
+	adapter := &ReportAdapter{}
+	l := appCtx.theme.CreateList()
+	l.SetAdapter(adapter)
 
-	l := theme.CreateList()
+	var capture *path.Capture
 
-	appCtx.OnReportUpdated(func() {
-		l.SetAdapter(&ReportAdapter{appCtx: appCtx, report: &appCtx.report})
+	t := task.New()
+	update := func() {
+		if capture != nil {
+			t.Run(updateReportAdapter{appCtx, capture, adapter})
+		}
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if c := path.FindCapture(p); p != nil && !path.Equal(c, capture) {
+			capture = c
+			update()
+		}
 	})
 
 	return l
 }
 
+type updateReportAdapter struct {
+	context *ApplicationContext
+	capture *path.Capture
+	adapter *ReportAdapter
+}
+
+func (t updateReportAdapter) Run(c task.CancelSignal) {
+	report, err := t.context.rpc.LoadReport(t.capture)
+	if err != nil {
+		return
+	}
+	c.Check()
+	t.context.Run(func() {
+		t.adapter.Update(report)
+	})
+}
+
 type ReportAdapter struct {
 	gxui.AdapterBase
-	appCtx *ApplicationContext
-	report *service.Report
+	report service.Report
+}
+
+func (a *ReportAdapter) Update(report service.Report) {
+	a.report = report
+	a.DataReplaced()
 }
 
 func (a *ReportAdapter) Count() int {

@@ -26,18 +26,14 @@ import (
 )
 
 func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
-	ll := theme.CreateLinearLayout()
-	appCtx.OnAtomSelected(func() {
-		/*
-			ll.RemoveAll()
-			a := appCtx.Atoms()[appCtx.SelectedAtomID()]
-			docs := gpuatom.MetadataOf(a).DocumentationUrl
-			loadHtml(theme, docs, ll)
-		*/
-	})
-	sl := theme.CreateScrollLayout()
+	ll := appCtx.theme.CreateLinearLayout()
+	//	appCtx.OnAtomSelected(func() {
+	//			ll.RemoveAll()
+	//			a := appCtx.Atoms()[appCtx.SelectedAtomID()]
+	//			docs := gpuatom.MetadataOf(a).DocumentationUrl
+	//			loadHtml(theme, docs, ll)
+	//	})
+	sl := appCtx.theme.CreateScrollLayout()
 	sl.SetChild(ll)
 	return sl
 }

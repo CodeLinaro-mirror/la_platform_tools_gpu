@@ -17,9 +17,10 @@ package client
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -27,7 +28,7 @@ import (
 type MemoryAdapter struct {
 	gxui.AdapterBase
 	appCtx       *ApplicationContext
-	commandID    atom.ID
+	after        *path.Atom
 	baseAddress  uint64
 	bytesPerLine uint64
 	dataType     DataType
@@ -41,20 +42,18 @@ func CreateMemoryAdapter(appCtx *ApplicationContext) *MemoryAdapter {
 	}
 }
 
+func (a *MemoryAdapter) Update(after *path.Atom, baseAddress uint64) {
+	a.after = after
+	a.baseAddress = baseAddress
+	a.DataReplaced()
+}
+
 func (a *MemoryAdapter) IndexOfAddress(addr uint64) int {
 	return int(addr/a.bytesPerLine - a.baseAddress)
 }
 
 func (a *MemoryAdapter) AddressAtIndex(index int) uint64 {
 	return a.baseAddress + uint64(index)*a.bytesPerLine
-}
-
-func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress uint64) {
-	if atomID != InvalidAtomID {
-		a.commandID = atomID
-	}
-	a.baseAddress = baseAddress
-	a.DataReplaced()
 }
 
 func (a *MemoryAdapter) SetDataType(dataType DataType) {
@@ -67,7 +66,7 @@ func (a *MemoryAdapter) Size(theme gxui.Theme) math.Size {
 }
 
 func (a *MemoryAdapter) Count() int {
-	if a.appCtx.CaptureID().Valid() {
+	if a.after != nil {
 		return 10000 //Who knows?
 	} else {
 		return 0
@@ -83,15 +82,16 @@ func (a *MemoryAdapter) ItemIndex(item gxui.AdapterItem) int {
 	return a.IndexOfAddress(addr)
 }
 
-func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
-	ll := t.CreateLinearLayout()
+func (a *MemoryAdapter) Create(theme gxui.Theme, index int) gxui.Control {
+	ll := theme.CreateLinearLayout()
 	ll.SetDirection(gxui.LeftToRight)
 	base := a.AddressAtIndex(index)
-	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
 
-	var cancel chan<- struct{}
-	ll.OnAttach(func() {
-		cancel = a.appCtx.RequestMemory(a.commandID, base, a.bytesPerLine, func(info service.MemoryInfo) {
+	t := task.New()
+	update := func() {
+		t.Run(requestMemory{a.appCtx, a.after, base, a.bytesPerLine, func(info service.MemoryInfo) {
+			ll.RemoveAll()
+			ll.AddChild(CreateLabel(theme, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
 			offset := uint64(0)
 			data := info.Data
 			dataType := a.dataType
@@ -110,8 +110,10 @@ func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control {
 				offset += uint64(dataTypeSize)
 				data = data[dataTypeSize:]
 			}
-		})
-	})
-	ll.OnDetach(func() { close(cancel) })
+		}})
+	}
+
+	ll.OnAttach(update)
+	ll.OnDetach(t.Cancel)
 	return ll
 }
