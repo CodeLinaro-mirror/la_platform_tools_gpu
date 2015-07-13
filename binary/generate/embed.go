@@ -422,6 +422,8 @@ const java_tmpl = `{{/*
  * limitations under the License.
  */}}
 
+ {{define "Java.ClassName"}}{{if . | Contains "."}}{{File.JavaPackage}}.{{end}}{{.}}{{end}}
+
  {{define "Java.Type#bool"}}boolean{{end}}
  {{define "Java.Type#int8"}}byte{{end}}
  {{define "Java.Type#uint8"}}byte{{end}}
@@ -436,7 +438,7 @@ const java_tmpl = `{{/*
  {{define "Java.Type#string"}}String{{end}}
  {{define "Java.Type#binary.ID"}}BinaryID{{end}}
  {{define "Java.Type.Any"}}Object{{end}}
- {{define "Java.Type.Struct"}}{{.Name | CppName}}{{end}}
+ {{define "Java.Type.Struct"}}{{template "Java.ClassName" .Name}}{{end}}
  {{define "Java.Type.Interface"}}BinaryObject{{end}}
  {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
  {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
@@ -445,7 +447,7 @@ const java_tmpl = `{{/*
 
 {{define "Java.Encoder"}}
 »»@Override
-»»public void encode(Encoder e, BinaryObject obj) throws IOException {
+»»public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {
 »»»{{.Name}} o = ({{.Name}})obj;
 {{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»»}{{end}}
@@ -454,7 +456,7 @@ const java_tmpl = `{{/*
 {{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
-{{define "Java.Encode.Any"}}// TODO: Java any handling{{end}}
+{{define "Java.Encode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»»for (int i = 0; i < {{.Name}}.length; i++) {
@@ -466,11 +468,11 @@ const java_tmpl = `{{/*
 »»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Java.Encode.Map"}}TODO: Java map handling{{end}}
+{{define "Java.Encode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
 {{define "Java.Decoder"}}
 »»@Override
-»»public void decode(Decoder d, BinaryObject obj) throws IOException {
+»»public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {
 »»»{{.Name}} o = ({{.Name}})obj;
 {{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
 {{end}}»»}{{end}}
@@ -479,7 +481,7 @@ const java_tmpl = `{{/*
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
-{{define "Java.Decode.Any"}}// TODO: Java any handling{{end}}
+{{define "Java.Decode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
 »»»for (int i = 0; i <{{.Name}}.length; i++) {
@@ -491,7 +493,7 @@ const java_tmpl = `{{/*
 »»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
 »»»}{{end}}
 
-{{define "Java.Decode.Map"}}TODO: Java map handling{{end}}
+{{define "Java.Decode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
 {{define "Java.Field"}}»{{Call "Java.Type" .Type}} {{JavaFieldName .Name}};
 {{end}}
@@ -507,7 +509,9 @@ const java_tmpl = `{{/*
 {{end}}
 
 {{define "Java.File"}}{{$.Copyright}}
-package {{.BasePackage}}.{{.RelativePackage}};
+package {{.JavaPackage}};
+
+import org.jetbrains.annotations.NotNull;
 
 import com.android.tools.rpclib.binary.BinaryClass;
 import com.android.tools.rpclib.binary.BinaryID;
@@ -525,21 +529,27 @@ public final class {{.Struct.Name}} implements BinaryObject {
 
 »// Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
 »public {{.Struct.Name}}(Decoder d) throws IOException {
-»»//TODO: decode(d);
+»»Class.INSTANCE.decode(d, this);
 »}
 {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
-»@Override
+»@Override @NotNull
 »public BinaryClass klass() { return Class.INSTANCE; }
 
 »public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
 »public static BinaryID ID = new BinaryID(IDBytes);
 »public enum Class implements BinaryClass {
 »»INSTANCE;
+
+»»@Override @NotNull
+»»public BinaryID id() { return ID; }
+
+»»@Override @NotNull
+»»public BinaryObject create() { return new {{.Struct.Name}}(); }
 {{template "Java.Encoder" .Struct}}
 {{template "Java.Decoder" .Struct}}
 »}
 »static {
-  Namespace.register(ID, Class.INSTANCE);
+»»Namespace.register(ID, Class.INSTANCE);
 »}
 }
 {{end}}

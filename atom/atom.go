@@ -17,7 +17,7 @@ package atom
 
 // binary: cpp = atom
 // binary: java.source = adt/idea/android/src
-// binary: java.package = com.android.tools.idea.editors.gfxtrace
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc.atom
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
 
