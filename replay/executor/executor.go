@@ -149,7 +149,7 @@ func (r executor) handleDataResponse(postbacks io.Writer) error {
 }
 
 func (r executor) handleGetData() error {
-	logger := r.logger.Enter("handleGetData")
+	logger := log.Enter(r.logger, "handleGetData")
 	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
 	resourceCount, err := d.Uint32()

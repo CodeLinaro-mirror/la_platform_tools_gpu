@@ -64,7 +64,7 @@ func logger(env build.Environment, name string) log.Logger {
 	if env.Verbose {
 		log.Infof(rootLogger, "Building %s", name)
 	}
-	return rootLogger.Enter(name)
+	return log.Enter(rootLogger, name)
 }
 
 // Add make steps to compile all the specified source files.
@@ -89,8 +89,8 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 		}
 		s := makeStep("", object, build.Files(source), env.ForceBuild,
 			func(*maker.Step) error {
-				env.Logger = env.Logger.Enter(object.Name())
-				env.Logger.Enter("C++.Compile")
+				env.Logger = log.Enter(env.Logger, object.Name())
+				env.Logger = log.Enter(env.Logger, "C++.Compile")
 				return cfg.Toolchain.Compiler(source, object, cfg, env)
 			})
 		depsFor := cfg.Toolchain.DepsFor
@@ -140,7 +140,7 @@ func MakeStaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) 
 
 	makeStep("", output, objects, env.ForceBuild,
 		func(*maker.Step) error {
-			env.Logger = logger(env, cfg.Name).Enter("C++.StaticLibrary")
+			env.Logger = log.Enter(logger(env, cfg.Name), "C++.StaticLibrary")
 			return cfg.Toolchain.Archiver(objects, output, cfg, env)
 		})
 	return output
@@ -173,7 +173,7 @@ func MakeDynamicLibrary(name string, inputs build.FileSet, cfg Config, env build
 	deps := libs.Append(objects...)
 	makeStep(name, output, deps, env.ForceBuild,
 		func(*maker.Step) error {
-			env.Logger = logger(env, cfg.Name).Enter("C++.DynamicLibrary")
+			env.Logger = log.Enter(logger(env, cfg.Name), "C++.DynamicLibrary")
 			return cfg.Toolchain.DllLinker(objects, output, cfg, env)
 		})
 	return output
@@ -205,7 +205,7 @@ func MakeExecutable(name string, inputs build.FileSet, cfg Config, env build.Env
 	deps := libs.Append(objects...)
 	makeStep(name, output, deps, env.ForceBuild,
 		func(*maker.Step) error {
-			env.Logger = logger(env, cfg.Name).Enter("C++.Executable")
+			env.Logger = log.Enter(logger(env, cfg.Name), "C++.Executable")
 			return cfg.Toolchain.ExeLinker(objects, output, cfg, env)
 		})
 	return output

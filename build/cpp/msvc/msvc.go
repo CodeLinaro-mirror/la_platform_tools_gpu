@@ -21,6 +21,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
+	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 var MSVC = &cpp.Toolchain{
@@ -49,7 +50,7 @@ type Paths struct {
 }
 
 func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("MSVC.Compile")
+	env.Logger = log.Enter(env.Logger, "MSVC.Compile")
 
 	paths, err := ResolvePaths()
 	if err != nil {
@@ -96,7 +97,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("MSVC.Archive")
+	env.Logger = log.Enter(env.Logger, "MSVC.Archive")
 
 	paths, err := ResolvePaths()
 	if err != nil {
@@ -115,7 +116,7 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("MSVC.LinkDll")
+	env.Logger = log.Enter(env.Logger, "MSVC.LinkDll")
 
 	paths, err := ResolvePaths()
 	if err != nil {
@@ -145,7 +146,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("MSVC.LinkExe")
+	env.Logger = log.Enter(env.Logger, "MSVC.LinkExe")
 
 	paths, err := ResolvePaths()
 	if err != nil {

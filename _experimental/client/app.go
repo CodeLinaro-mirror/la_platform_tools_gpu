@@ -123,7 +123,7 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 	})
 
 	go func() {
-		l := appCtx.Logger().Fork().Enter("CreateCaptureList")
+		l := log.Enter(log.Fork(appCtx.Logger()), "CreateCaptureList")
 		ids, err := r.GetCaptures(l)
 		if err != nil {
 			return
@@ -168,7 +168,7 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 
 	list.OnAttach(func() {
 		go func() {
-			l := appCtx.Logger().Fork().Enter("DeviceListUpdate")
+			l := log.Enter(log.Fork(appCtx.Logger()), "DeviceListUpdate")
 
 			for list.Attached() { // While the list control is visible
 				if ids, err := r.GetDevices(l); err == nil {
@@ -247,7 +247,7 @@ func loadTiming(appCtx *ApplicationContext) {
 		wg.Add(2)
 
 		go func() {
-			l := appCtx.Logger().Fork().Enter("Replay: CPU command timing")
+			l := log.Enter(log.Fork(appCtx.Logger()), "Replay: CPU command timing")
 			flags := service.TimingFlagsTimingCPU | service.TimingFlagsTimingPerCommand
 			cpuCommandTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
 			if err != nil {
@@ -264,7 +264,7 @@ func loadTiming(appCtx *ApplicationContext) {
 		}()
 
 		go func() {
-			l := appCtx.Logger().Fork().Enter("Replay: GPU frame timing")
+			l := log.Enter(log.Fork(appCtx.Logger()), "Replay: GPU frame timing")
 			flags := service.TimingFlagsTimingGPU | service.TimingFlagsTimingPerFrame
 			gpuFrameTimingInfoID, err := appCtx.rpc.GetTimingInfo(deviceID.Path(), captureID.Path(), flags, l)
 			if err != nil {
@@ -303,7 +303,7 @@ func DoReplay(appCtx *ApplicationContext) {
 	}
 
 	go func() {
-		l := appCtx.Logger().Fork().Enter("Replay: color-buffer")
+		l := log.Enter(log.Fork(appCtx.Logger()), "Replay: color-buffer")
 		p := captureID.Path().Atoms().Index(uint64(atomID))
 		imageID, err := r.GetFramebufferColor(deviceID.Path(), p, settings, l)
 		if err != nil {
@@ -343,7 +343,7 @@ func DoReplay(appCtx *ApplicationContext) {
 	}()
 
 	go func() {
-		l := appCtx.Logger().Fork().Enter("Replay: depth-buffer")
+		l := log.Enter(log.Fork(appCtx.Logger()), "Replay: depth-buffer")
 		p := captureID.Path().Atoms().Index(uint64(atomID))
 		imageID, err := r.GetFramebufferDepth(deviceID.Path(), p, l)
 		if err != nil {
@@ -423,7 +423,7 @@ func (a app) main(driver gxui.Driver) {
 	if err != nil {
 		panic(err)
 	}
-	atexit.Register(logFile.Close, time.Second)
+	atexit.Register(func() { log.Close(logFile) }, time.Second)
 	appCtx.Logger().Add(logFile)
 
 	window := theme.CreateWindow(800, 600, "Main")

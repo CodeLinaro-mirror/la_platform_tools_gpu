@@ -21,7 +21,7 @@ import (
 )
 
 func sayHelloTo(l log.Logger, name string) {
-	l = l.Enter("sayHello")
+	l = log.Enter(l, "sayHello")
 	log.Infof(l, "Hello %s!", name)
 }
 
