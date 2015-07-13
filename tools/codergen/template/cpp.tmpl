@@ -71,6 +71,8 @@
 
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
 {{define "Cpp.File"}}{{$.Copyright}}
+
+
 #ifndef {{template "HeaderGuard" .}}
 #define {{template "HeaderGuard" .}}
 

@@ -12,27 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package generate
+package template
 
-import (
-	"path/filepath"
-	"strings"
+import "fmt"
 
-	"android.googlesource.com/platform/tools/gpu/tools/copyright"
-)
+type counter int
 
-type CppNamespace struct {
-	*Module
-	Namespace string
-	Copyright string
+func (c *counter) Set(value int) string {
+	*c = counter(value)
+	return ""
 }
 
-func Cpp(m *Module, info copyright.Info, gen Generator, path string) error {
-	ns := CppNamespace{
-		Module:    m,
-		Namespace: m.Directives["cpp"],
-		Copyright: strings.TrimSpace(copyright.Build("generated_by", info)),
+func (c *counter) AddLen(value string) string {
+	*c += counter(len(value))
+	return ""
+}
+
+func (c *counter) String() string {
+	return fmt.Sprint(*c)
+}
+
+func (t *Templates) Counter(name string) *counter {
+	c, ok := t.counters[name]
+	if !ok {
+		c = new(counter)
+		t.counters[name] = c
 	}
-	out := filepath.Join(path, ns.Namespace+".h")
-	return gen("Cpp.File", ns, out, indentor("    "))
+	return c
 }

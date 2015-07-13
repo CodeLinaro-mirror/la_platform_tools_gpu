@@ -19,15 +19,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go/build"
 	"os"
-	"path"
 	"path/filepath"
 	"runtime"
-	"sort"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
@@ -45,36 +43,6 @@ Usage: codergen [--go] [--java=file] <args>...
   -help: show this help message
 `
 
-func scan(entry string, loader *generate.Loader) error {
-	base := strings.TrimSuffix(entry, "...")
-	pkg, err := build.Default.Import(base, loader.Path, build.FindOnly)
-	if err != nil {
-		return err
-	}
-	if *verbose {
-		fmt.Printf("%s from %s\n", pkg.ImportPath, pkg.Dir)
-	}
-	if len(base) == len(entry) {
-		loader.ScanPackage(pkg.ImportPath)
-		return nil
-	} else {
-		return filepath.Walk(pkg.Dir, func(path string, info os.FileInfo, err error) error {
-			if !info.IsDir() {
-				return nil
-			}
-			if filepath.Base(path)[0] == '.' || filepath.Base(path)[0] == '_' {
-				return filepath.SkipDir
-			}
-			name := pkg.ImportPath + strings.TrimPrefix(path, pkg.Dir)
-			if *verbose {
-				fmt.Printf("Reading %s\n", name)
-			}
-			loader.ScanPackage(name)
-			return nil
-		})
-	}
-}
-
 func run() error {
 	if os.Getenv("GOMAXPROCS") == "" {
 		runtime.GOMAXPROCS(runtime.NumCPU())
@@ -88,7 +56,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	loader := generate.NewLoader(wd, *forceSource)
+	scanner := scan.New(wd, *forceSource)
 	if *verbose {
 		fmt.Printf("Scanning\n")
 	}
@@ -97,128 +65,66 @@ func run() error {
 		args = append(args, "./...")
 	}
 	for _, arg := range args {
-		if err := scan(arg, loader); err != nil {
+		if err := scanner.Scan(arg, *verbose); err != nil {
 			return err
 		}
 	}
 	if *verbose {
 		fmt.Printf("Processing\n")
 	}
-	if err := loader.Process(); err != nil {
+	if err := scanner.Process(); err != nil {
+		return err
+	}
+	modules, err := generate.From(scanner)
+	if err != nil {
 		return err
 	}
 	if *verbose {
 		fmt.Printf("Generating\n")
 	}
-	t := generate.NewTemplates()
-	for _, dir := range loader.Directories {
-		if !dir.Scan {
-			continue
-		}
-		if dir.Module.Output != nil {
-			if err := output(t, dir.Module.Output); err != nil {
-				return err
-			}
-		}
-		if dir.Test.Output != nil {
-			if err := output(t, dir.Test.Output); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func output(t *generate.Templates, file *generate.File) error {
-	if len(file.Structs) == 0 && len(file.Constants) == 0 {
-		return nil
-	}
-	if _, ignored := file.Directives["ignore"]; ignored {
-		return nil
-	}
-	generate.Sort(file.Structs)
-	sort.Sort(&file.Constants)
-	for i := range file.Constants {
-		sort.Sort(&file.Constants[i])
-	}
-	if *golang {
-		gen := generate.NewGo(file)
-		gen.Copyright = copyright.Build(
-			"generated_by", copyright.Info{
-				Tool: "codergen -go",
-				Year: "2015",
-			})
-		out := file.Name + "_binary.go"
-		if file.IsTest {
-			out = file.Name + "_binary_test.go"
-		}
-		out = path.Join(file.Path, out)
-		if err := Generate(gen, t, out); err != nil {
-			return err
-		}
-	}
-	javaPackage, doJava := file.Directives["java.package"]
-	if *java != "" && !file.IsTest && doJava {
-		gen := generate.NewJava(file)
-		gen.JavaPackage = javaPackage
-		source, _ := file.Directives["java.source"]
-		indent, _ := file.Directives["java.indent"]
-		gen.MemberPrefix, _ = file.Directives["java.member_prefix"]
-		gen.Copyright = strings.TrimSpace(copyright.Build(
-			"generated_aosp_java", copyright.Info{
-				Year: "2015",
-			}))
-		gen.Indent = strings.Trim(indent, `"`)
-		if gen.Indent == "" {
-			gen.Indent = "    "
-		}
-		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
-		for _, s := range file.Structs {
-			gen.Struct.Struct = s
-			out := filepath.Join(*java, source, pkgPath, gen.Struct.Name()+".java")
-			if err := Generate(gen, t, out); err != nil {
-				return err
-			}
-		}
-	}
-	cppNamespace, doCpp := file.Directives["cpp"]
-	if *cpp != "" && !file.IsTest && doCpp {
-		gen := generate.NewCpp(file)
-		gen.Namespace = cppNamespace
-		gen.Copyright = copyright.Build(
-			"generated_by", copyright.Info{
-				Tool: fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp)),
-				Year: "2015",
-			})
-		out := filepath.Join(*cpp, cppNamespace+".h")
-		if err := Generate(gen, t, out); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-type generator interface {
-	Run(t *generate.Templates, out string) (bool, error)
-}
-
-func Generate(g generator, t *generate.Templates, path string) error {
-	out := path
-	if *nowrite {
-		out = ""
-	}
-	changed, err := g.Run(t, out)
-	if err != nil {
-		return err
-	}
-	if changed {
+	t := template.New()
+	goinfo := copyright.Info{Tool: "codergen -go", Year: "2015"}
+	cppinfo := copyright.Info{Tool: fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp)), Year: "2015"}
+	javainfo := copyright.Info{Year: "2015"}
+	gen := func(name string, arg interface{}, output string, reflow template.PostProcess) error {
+		out := output
 		if *nowrite {
-			fmt.Printf("Not writing %s\n", path)
-		} else if *verbose {
-			fmt.Printf("Generated %s\n", path)
+			out = ""
 		}
-	} else if *verbose {
-		fmt.Printf("No change for %s\n", path)
+		changed, err := t.Generate(arg, name, arg, out, reflow)
+		if err != nil {
+			return err
+		}
+		if changed {
+			if *nowrite {
+				fmt.Printf("Not writing %s\n", output)
+			} else if *verbose {
+				fmt.Printf("Generated %s\n", output)
+			}
+		} else if *verbose {
+			fmt.Printf("No change for %s\n", output)
+		}
+		return nil
+	}
+
+	for _, m := range modules {
+		if *golang {
+			if err := generate.Go(m, goinfo, gen); err != nil {
+				return err
+			}
+		}
+		_, doJava := m.Directives["java.package"]
+		if *java != "" && !m.IsTest && doJava {
+			if err := generate.Java(m, javainfo, gen, *java); err != nil {
+				return err
+			}
+		}
+		_, doCpp := m.Directives["cpp"]
+		if *cpp != "" && !m.IsTest && doCpp {
+			if err := generate.Cpp(m, cppinfo, gen, *cpp); err != nil {
+				return err
+			}
+		}
 	}
 	return nil
 }

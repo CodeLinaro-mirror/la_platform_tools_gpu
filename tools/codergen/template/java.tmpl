@@ -41,7 +41,7 @@
 »»@Override
 »»public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {
 »»»{{.Name}} o = ({{.Name}})obj;
-{{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (JavaFieldName .Name))}}
+{{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
 {{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
@@ -66,7 +66,7 @@
 »»@Override
 »»public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {
 »»»{{.Name}} o = ({{.Name}})obj;
-{{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (JavaFieldName .Name))}}
+{{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
@@ -87,16 +87,16 @@
 
 {{define "Java.Decode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
-{{define "Java.Field"}}»{{Call "Java.Type" .Type}} {{JavaFieldName .Name}};
+{{define "Java.Field"}}»{{Call "Java.Type" .Type}} {{File.FieldName .Name}};
 {{end}}
 
 {{define "Java.Accessors"}}
 »public {{Call "Java.Type" .Type}} get{{.Name}}() {
-»»return {{JavaFieldName .Name}};
+»»return {{File.FieldName .Name}};
 »}
 
 »public void set{{.Name}}({{Call "Java.Type" .Type}} v) {
-»»{{JavaFieldName .Name}} = v;
+»»{{File.FieldName .Name}} = v;
 »}
 {{end}}
 

@@ -15,15 +15,13 @@
 package generate
 
 import (
+	"path/filepath"
 	"strings"
 	"unicode"
 	"unicode/utf8"
-)
 
-func (*Templates) JavaFieldName(s string) string {
-	r, n := utf8.DecodeRuneInString(s)
-	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
-}
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+)
 
 type JavaStruct struct {
 	*Struct
@@ -38,21 +36,36 @@ func (s *JavaStruct) Name() string {
 	return name
 }
 
-type Java struct {
-	*File
+type JavaClass struct {
+	*Module
 	Struct       JavaStruct
 	JavaPackage  string
 	Copyright    string
-	Indent       string
 	MemberPrefix string
 }
 
-func NewJava(file *File) *Java { return &Java{File: file} }
-func (file *Java) Run(t *Templates, out string) (bool, error) {
-	return t.generate(file, "Java.File", file, out, func(b []byte) []byte {
-		s := string(b)
-		s = strings.Replace(s, indent, file.Indent, -1)
-		s = strings.Replace(s, memberPrefix, file.MemberPrefix, -1)
-		return []byte(s)
-	})
+func Java(m *Module, info copyright.Info, gen Generator, path string) error {
+	class := &JavaClass{
+		Module:      m,
+		JavaPackage: m.Directives["java.package"],
+		Copyright:   strings.TrimSpace(copyright.Build("generated_aosp_java", info)),
+	}
+	class.MemberPrefix, _ = m.Directives["java.member_prefix"]
+	source, _ := m.Directives["java.source"]
+	indent, _ := m.Directives["java.indent"]
+	reflow := indentor(indent)
+	pkgPath := strings.Replace(class.JavaPackage, ".", "/", -1)
+	for _, s := range m.Structs {
+		class.Struct.Struct = s
+		out := filepath.Join(path, source, pkgPath, class.Struct.Name()+".java")
+		if err := gen("Java.File", class, out, reflow); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (class *JavaClass) FieldName(s string) string {
+	r, n := utf8.DecodeRuneInString(s)
+	return class.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
