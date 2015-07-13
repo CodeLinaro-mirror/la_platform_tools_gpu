@@ -14,27 +14,8 @@
  * limitations under the License.
  */}}
 
-{{Global "module" ""}}
-{{Global "indent" "  "}}
-{{Global "member" "my"}}
 {{$ | Macro "ClientInterface" | Reflow 2 | Write "Client.java"}}
 {{$ | Macro "ClientImplementation" | Reflow 2 | Write "ClientImpl.java"}}
-{{$ | Macro "Commands" | Reflow 2 | Write "Commands.java"}}
-{{range $_, $h := $.Pseudonyms}}
-  {{if GetAnnotation $h "handle"}}
-    {{$h | Macro "Handle" | Reflow 2 | Write (print $h.Name ".java")}}
-  {{end}}
-{{end}}
-{{range $_, $e := $.Enums}}
-  {{$e | Macro "Enum" | Reflow 2 | Write (print $e.Name ".java")}}
-{{end}}
-{{range $i, $c := $.Classes  }}
-  {{if GetAnnotation $c "Interface"}}
-    {{$c | Macro "Interface" | Reflow 2 | Write (print $c.Name ".java")}}
-  {{else}}
-    {{$c | Macro "Class" | Reflow 2 | Write (print $c.Name ".java")}}
-  {{end}}
-{{end}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -46,72 +27,27 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the fully qualified name (prefixed with the package) of the specified
-  type or variable.
--------------------------------------------------------------------------------
-*/}}
-{{define "QualifiedName"}}{{Global "module"}}{{$.Name}}{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   Emits the java type for the provided type.
 -------------------------------------------------------------------------------
 */}}
-{{define "Type"}}
-  {{AssertType $ "Type"}}
-
-  {{if GetAnnotation $ "handle"}}{{Macro "QualifiedName" $}}
-  {{else if IsSlice       $}}{{Macro "Type" $.To}}[]
-  {{else if IsMap         $}}{{Macro "QualifiedName" $}}
-  {{else if IsClass       $}}{{Macro "QualifiedName" $}}
-  {{else if IsPointer     $}}{{Macro "QualifiedName" $.To}}
-  {{else if IsEnum        $}}{{Macro "QualifiedName" $}}
-  {{else if IsBool        $}}boolean
-  {{else if IsS8          $}}byte
-  {{else if IsU8          $}}byte
-  {{else if IsS16         $}}short
-  {{else if IsU16         $}}short
-  {{else if IsS32         $}}int
-  {{else if IsU32         $}}int
-  {{else if IsF32         $}}float
-  {{else if IsS64         $}}long
-  {{else if IsU64         $}}long
-  {{else if IsF64         $}}double
-  {{else if IsString      $}}String
-  {{else}}{{Error "macro Type called with unsupported type: %v" $.Name}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Walks a class hierarchy to visit all the fields, calling the specified macro
-  for each field.
--------------------------------------------------------------------------------
-*/}}
-{{define "AllFields"}}
-  {{AssertType $.Class "Class"}}
-  {{AssertType $.Macro "string"}}
-
-  {{Macro "TraverseFields" "Derived" false "Class" $.Class "Macro" $.Macro}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Walks a class hierarchy to visit all the fields, calling the specified macro
-  for each field.
--------------------------------------------------------------------------------
-*/}}
-{{define "TraverseFields"}}
-  {{AssertType $.Class   "Class"}}  {{/* the class holding the fields to traverse */}}
-  {{AssertType $.Macro   "string"}} {{/* the macro to invoke */}}
-
-  {{range $_, $f := $.Class.Fields}}
-    {{Macro $.Macro "Derived" $.Derived "Class" $.Class "Field" $f}}
-  {{end}}
-{{end}}
+{{define "Type#any"      }}Object{{end}}
+{{define "Type#bool"     }}boolean{{end}}
+{{define "Type#s8"       }}byte{{end}}
+{{define "Type#u8"       }}byte{{end}}
+{{define "Type#s16"      }}short{{end}}
+{{define "Type#u16"      }}short{{end}}
+{{define "Type#s32"      }}int{{end}}
+{{define "Type#u32"      }}int{{end}}
+{{define "Type#f32"      }}float{{end}}
+{{define "Type#s64"      }}long{{end}}
+{{define "Type#u64"      }}long{{end}}
+{{define "Type#f64"      }}double{{end}}
+{{define "Type#string"   }}String{{end}}
+{{define "Type.Slice"    }}{{Node "Type" .Type.To}}[]{{end}}
+{{define "Type.Class"    }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
+{{define "Type.Pseudonym"}}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
+{{define "Type.Enum"     }}{{if $p := PackageOf .Type}}{{$p}}.{{end}}{{.Type.Name}}{{end}}
+{{define "Type.Pointer"  }}{{Node "Type" .Type.To}}{{end}}
 
 
 {{/*
@@ -138,21 +74,8 @@
   {{AssertType $ "Function"}}
 
   {{range $i, $p := $.CallParameters}}
-    {{if $i}}, {{end}}{{Macro "Parameter" "Type" (TypeOf $p) "Name" $p.Name}}§
+    {{if $i}}, {{end}}{{Node "Type" $p}} {{$p.Name}}§
   {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits a single java type-name pair for a given RPC parameter.
--------------------------------------------------------------------------------
-*/}}
-{{define "Parameter"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
-
-  {{Macro "Type" $.Type}} {{$.Name}}
 {{end}}
 
 
@@ -162,7 +85,7 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "ClientInterface"}}
-  {{AssertType $ "API"}}
+  {{AssertType . "API"}}
 
   {{template "CopyrightHeader"}}
   package {{Global "package"}};
@@ -173,8 +96,8 @@
   import java.util.concurrent.Future;
 ¶
   public interface Client {
-    {{range $_, $c := $.Functions}}
-      Future<{{Macro "Type" $c.Return.Type}}> {{$c.Name}}({{Macro "Parameters" $c}}) throws IOException, RpcException;
+    {{range .Externs}}
+      Future<{{Node "Type" .Return}}> {{.Name}}({{Macro "Parameters" .}}) throws IOException, RpcException;
     {{end}}
   }
 {{end}}
@@ -186,7 +109,7 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "ClientImplementation"}}
-  {{AssertType $ "API"}}
+  {{AssertType . "API"}}
 
   {{template "CopyrightHeader"}}
   package {{Global "package"}};
@@ -208,361 +131,27 @@
       myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);
     }
 ¶
-    {{range $_, $c := $.Functions}}
+    {{range .Externs}}
       @Override
-      public Future<{{Macro "Type" $c.Return.Type}}> {{$c.Name}}({{Macro "Parameters" $c}}) {
-        return myExecutorService.submit(new {{$c.Name}}Callable({{Macro "Arguments" $c}}));
+      public Future<{{Node "Type" .Return}}> {{.Name}}({{Macro "Parameters" .}}) {
+        return myExecutorService.submit(new {{.Name}}Callable({{Macro "Arguments" .}}));
       }¶
     {{end}}
 ¶
-    {{range $i, $c := $.Functions}}
-      private class {{$c.Name}}Callable implements Callable<{{Macro "Type" $c.Return.Type}}> {
-          private final Commands.{{$c.Name}}.Call myCall;
+    {{range .Externs}}
+      private class {{.Name}}Callable implements Callable<{{Node "Type" .Return}}> {
+          private final call{{.Name}} myCall;
 ¶
-          private {{$c.Name}}Callable({{Macro "Parameters" $c}}) {
-            myCall = new Commands.{{$c.Name}}.Call({{Macro "Arguments" $c}});
+          private {{.Name}}Callable({{Macro "Parameters" .}}) {
+            myCall = new call{{.Name}}({{Macro "Arguments" .}});
           }
 ¶
           @Override
-          public {{Macro "Type" $c.Return.Type}} call() throws Exception {
-              Commands.{{$c.Name}}.Result result = (Commands.{{$c.Name}}.Result)myBroadcaster.Send(myCall);
+          public {{Node "Type" .Return}} call() throws Exception {
+            result{{.Name}} result = (result{{.Name}})myBroadcaster.Send(myCall);
               return result.myValue;
           }
       }
     {{end}}
-  }
-{{end}}
-
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits a java class containing all the command calls and results.
--------------------------------------------------------------------------------
-*/}}
-{{define "Commands"}}
-  {{AssertType $ "API"}}
-
-  {{template "CopyrightHeader"}}
-  package {{Global "package"}};
-¶
-  import com.android.tools.rpclib.binary.Decoder;
-  import com.android.tools.rpclib.binary.Encoder;
-  import com.android.tools.rpclib.binary.ObjectTypeID;
-  import org.jetbrains.annotations.NotNull;
-¶
-  import java.io.IOException;
-¶
-  final class Commands {
-    {{range $i, $c := $.Functions}}
-¶
-      static final class {{$c.Name}} {
-        {{Macro "Call"   $c}}¶
-        {{Macro "Result" $c}}¶
-      }
-    {{end}}
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java call class for a single command.
--------------------------------------------------------------------------------
-*/}}
-{{define "Call"}}
-  {{AssertType $ "Function"}}
-
-  static final class Call implements com.android.tools.rpclib.rpccore.Call {
-    {{range $i, $p := $.CallParameters}}
-      {{Macro "Type" (TypeOf $p)}} {{Macro "ParameterAsFieldName" $p}};
-    {{end}}
-    {{if len ($.CallParameters)}}¶{{end}}
-    Call() {
-    }
-    {{if len $.CallParameters}}¶
-      Call({{Macro "Parameters" $}}) {
-        {{range $i, $p := $.CallParameters}}
-          {{Macro "ParameterAsFieldName" $p}} = {{$p.Name}};
-        {{end}}
-      }
-    {{end}}
-¶
-    @Override
-    public ObjectTypeID type() {
-      return ObjectFactory.call{{$.Name}}ID;
-    }
-¶
-    @Override
-    public void encode(@NotNull Encoder e) throws IOException {
-      ObjectFactory.encode(e, this);
-    }
-¶
-    @Override
-    public void decode(@NotNull Decoder d) throws IOException {
-      ObjectFactory.decode(d, this);
-    }
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java result structure for a single command.
--------------------------------------------------------------------------------
-*/}}
-{{define "Result"}}
-  {{AssertType $ "Function"}}
-
-  static final class Result implements com.android.tools.rpclib.rpccore.Result {
-    {{if not (IsVoid $.Return.Type)}}
-      {{Macro "Type" $.Return.Type}} myValue;
-¶
-    {{end}}
-    @Override
-    public ObjectTypeID type() {
-      return ObjectFactory.result{{$.Name}}ID;
-    }
-¶
-    @Override
-    public void encode(@NotNull Encoder e) throws IOException {
-      ObjectFactory.encode(e, this);
-    }
-¶
-    @Override
-    public void decode(@NotNull Decoder d) throws IOException {
-      ObjectFactory.decode(d, this);
-    }
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java implements statement for an RPC class.
--------------------------------------------------------------------------------
-*/}}
-{{define "ClassImplements"}}
-  {{AssertType $ "Class"}}
-
-  implements BinaryObject§
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java interface for an RPC class annotated with @Interface.
--------------------------------------------------------------------------------
-*/}}
-{{define "Interface"}}
-  {{AssertType $ "Class"}}
-
-  {{template "CopyrightHeader"}}
-  package {{Global "package"}};
-¶
-  import com.android.tools.rpclib.binary.BinaryObject;
-¶
-  public interface {{$.Name}} extends BinaryObject {
-    {{range $_, $f := $.Fields}}
-      {{Macro "Type" (TypeOf $f)}} get{{$f.Name}}();¶
-      void set{{$f.Name}}({{Macro "Type" (TypeOf $f)}} v);¶
-    {{end}}§
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the Java name for the given field
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldName"}}{{AssertType $ "Field"}}my{{Title $.Name}}{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the Java field name inferred from the given field
--------------------------------------------------------------------------------
-*/}}
-{{define "ParameterAsFieldName"}}{{AssertType $ "Parameter"}}my{{Title $.Name}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Declares a single class field
--------------------------------------------------------------------------------
-*/}}
-{{define "DeclareField"}}
-  {{AssertType $.Field "Field"}}
-
-  {{Macro "Type" (TypeOf $.Field)}} {{Macro "FieldName" $.Field}};
-{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits a getter/setter pair implementation of a single field
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldGetterSetter"}}
-  {{AssertType $.Field "Field"}}
-
-  {{Macro "FieldGetter" $}}¶
-  {{Macro "FieldSetter" $}}¶
-{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the getter implementation of a single field
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldGetter"}}
-  {{AssertType $.Field "Field"}}
-
-  {{if $.Derived}}@Override{{end}}
-  public {{Macro "Type" (TypeOf $.Field)}} get{{$.Field.Name}}() {
-    return {{Macro "FieldName" $.Field}};
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the setter implementation of a single field
--------------------------------------------------------------------------------
-*/}}
-{{define "FieldSetter"}}
-  {{AssertType $.Field "Field"}}
-
-  {{if $.Derived}}@Override{{end}}
-  public void set{{$.Field.Name}}({{Macro "Type" (TypeOf $.Field)}} v) {
-    {{Macro "FieldName" $.Field}} = v;
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java class for an RPC class.
--------------------------------------------------------------------------------
-*/}}
-{{define "Class"}}
-  {{AssertType $ "Class"}}
-
-  {{template "CopyrightHeader"}}
-  package {{Global "package"}};
-¶
-  import com.android.tools.rpclib.binary.BinaryObject;
-  import com.android.tools.rpclib.binary.Decoder;
-  import com.android.tools.rpclib.binary.Encoder;
-  import com.android.tools.rpclib.binary.ObjectTypeID;
-  import org.jetbrains.annotations.NotNull;
-¶
-  import java.io.IOException;
-¶
-  public class {{$.Name}} {{Macro "ClassImplements" $}} {
-    {{Macro "AllFields" "Class" $ "Macro" "DeclareField"}}
-¶
-    // Constructs a default-initialized {@link {{$.Name}}}.
-    public {{$.Name}}() {
-    }
-¶
-    // Constructs and decodes a {@link {{$.Name}}} from the {@link Decoder} d.
-    public {{$.Name}}(Decoder d) throws IOException {
-      decode(d);
-    }
-¶
-    {{Macro "AllFields" "Class" $ "Macro" "FieldGetterSetter"}}
-
-    @Override
-    public void encode(@NotNull Encoder e) throws IOException {
-      ObjectFactory.encode(e, this);
-    }
-¶
-    @Override
-    public void decode(@NotNull Decoder d) throws IOException {
-      ObjectFactory.decode(d, this);
-    }
-¶
-    @Override
-    public ObjectTypeID type() {
-      return ObjectFactory.{{$.Name}}ID;
-    }
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the java class for an RPC enum.
--------------------------------------------------------------------------------
-*/}}
-{{define "Enum"}}
-  {{AssertType $ "Enum"}}
-
-  {{template "CopyrightHeader"}}
-  package {{Global "package"}};
-¶
-  import com.android.tools.rpclib.binary.Decoder;
-  import com.android.tools.rpclib.binary.Encoder;
-  import org.jetbrains.annotations.NotNull;
-¶
-  import java.io.IOException;
-¶
-  public enum {{$.Name}} {
-    {{range $i, $e := $.Entries}}
-      {{if $i}}§,{{end}}
-      {{$e.Name}}({{$e.Value}})
-    {{end}}§;
-¶
-    final int myValue;
-¶
-    {{$.Name}}(int value) {
-      myValue = value;
-    }
-¶
-    public static {{$.Name}} decode(@NotNull Decoder d) throws IOException {
-      int id = d.int32();
-      switch (id) {
-        {{range $i, $e := $.Entries}}
-          case {{$e.Value}}:»
-            return {{$e.Name}};«
-        {{end}}
-        default:»
-          throw new RuntimeException("Unknown {{$.Name}} " + id);«
-      }
-    }
-¶
-    public void encode(@NotNull Encoder e) throws IOException {
-      e.int32(myValue);
-    }
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the definition of a single resource identifier.
--------------------------------------------------------------------------------
-*/}}
-{{define "Handle"}}
-  {{AssertType $ "Pseudonym"}}
-
-  {{template "CopyrightHeader"}}
-  package {{Global "package"}};
-¶
-  import com.android.tools.rpclib.binary.Decoder;
-  import com.android.tools.rpclib.binary.Handle;
-  import org.jetbrains.annotations.NotNull;
-¶
-  import java.io.IOException;
-¶
-  public class {{$.Name}} extends Handle {
-    public {{$.Name}}(@NotNull byte[] value) {
-        super(value);
-    }
-¶
-    public {{$.Name}}(@NotNull Decoder d) throws IOException {
-        super(d);
-    }
   }
 {{end}}
