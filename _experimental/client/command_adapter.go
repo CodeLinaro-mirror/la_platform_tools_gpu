@@ -22,7 +22,9 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -45,7 +47,7 @@ func createEnumList(t gxui.Theme, appCtx *ApplicationContext, values interface{}
 	})
 	l := t.CreateDropDownList()
 	l.SetAdapter(a)
-	l.SetBubbleOverlay(appCtx.DropDownOverlay())
+	l.SetBubbleOverlay(appCtx.dropDownOverlay)
 	l.Select(selected)
 	l.OnSelectionChanged(onChange)
 	return l
@@ -154,42 +156,41 @@ func createFloatField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v i
 	})
 }
 
-func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gxui.Control {
-	atomPath := appCtx.CaptureID().Path().Atoms().Index(uint64(id))
-	a := appCtx.Atoms()[id].(*Atom)
+func createAtomControls(ctx *commandAdapterCtx, id atom.ID) gxui.Control {
+	t := ctx.appCtx.theme
+	p := ctx.capture.Atoms().Index(uint64(id))
+	a := ctx.atoms[p.Index].(*Atom)
 	active := true
 
-	ll := t.CreateLinearLayout()
-	ll.SetDirection(gxui.LeftToRight)
-	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.6d ", id), LINE_NUMBER_COLOR, active))
+	layout := t.CreateLinearLayout()
+	layout.SetDirection(gxui.LeftToRight)
+	layout.AddChild(CreateLabel(t, fmt.Sprintf("%.6d ", p.Index), LINE_NUMBER_COLOR, active))
 
-	if active {
-		//appCtx.OnTimingInfoUpdated(func() {
+	if ns, ok := ctx.timings.AtomDuration(id); ok {
 		timeLbl := t.CreateLabel()
-		milliseconds := float64(appCtx.timingPerCommand[uint64(id)]) / 1000000.
+		milliseconds := float64(ns) / 1000000.
 		timeLbl.SetText(fmt.Sprintf("%6.3f ms ", milliseconds))
-		if milliseconds >= 1. {
+		switch {
+		case milliseconds >= 1.0:
 			timeLbl.SetColor(gxui.ColorFromHex(0xFFFC19 + 0xFF<<24))
-		}
-		if milliseconds >= 5. {
+		case milliseconds >= 5.0:
 			timeLbl.SetColor(gxui.ColorFromHex(0xD21212 + 0xFF<<24))
 		}
-		ll.AddChild(timeLbl)
-		//})
+		layout.AddChild(timeLbl)
 	}
 
 	nameLbl := CreateLabel(t, atom.MetadataOf(a).DisplayName, COMMAND_COLOR, active)
-	ll.AddChild(nameLbl)
+	layout.AddChild(nameLbl)
 
-	ll.AddChild(CreateLabel(t, "(", CODE_COLOR, active))
+	layout.AddChild(CreateLabel(t, "(", CODE_COLOR, active))
 	needcomma := false
 	for i := 0; i < a.FieldCount(); i++ {
 		argIdx := i // capture for closures
 		info, v := a.Field(argIdx)
-		constants := findConstants(info.Type, appCtx)
-		p := atomPath.Field(info.Name())
+		constants := findConstants(info.Type, ctx.appCtx)
+		p := p.Field(info.Name())
 		if needcomma {
-			ll.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
+			layout.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
 		}
 		var c gxui.Control
 
@@ -199,95 +200,91 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 			b.SetMargin(math.Spacing{})
 			//b.SetPadding(math.Spacing{})
 			b.AddChild(CreateLabel(t, v.String(), CONSTANT_COLOR, active))
-			b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(*v) })
+			//b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(*v) }) // [BENC]: TODO
 			c = b
 
 		case *atom.Observations:
 			continue //don't display observations as a parameter
 
 		case bool:
-			c = createEnumList(t, appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
-				appCtx.Change(p, v)
+			c = createEnumList(t, ctx.appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
+				ctx.appCtx.Change(p, v)
 			})
 
 		case int8, int16, int32, int64:
-			c = createIntField(t, appCtx, p, v, constants)
+			c = createIntField(t, ctx.appCtx, p, v, constants)
 
 		case uint8, uint16, uint32, uint64:
-			c = createUintField(t, appCtx, p, v, constants)
+			c = createUintField(t, ctx.appCtx, p, v, constants)
 
 		case float32, float64:
-			c = createFloatField(t, appCtx, p, v)
+			c = createFloatField(t, ctx.appCtx, p, v)
 
 		default:
 			c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
 		}
 
-		ll.AddChild(c)
+		layout.AddChild(c)
 		needcomma = true
-		appCtx.ToolTipController().AddToolTip(c, 0.7, func(math.Point) gxui.Control {
+
+		ctx.appCtx.toolTipController.AddToolTip(c, 0.7, func(math.Point) gxui.Control {
 			l := t.CreateLabel()
 			l.SetText(p.Path())
 			return l
 		})
 	}
 
-	ll.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
-	return ll
+	layout.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
+	return layout
 }
 
-func createAtomGroupControls(t gxui.Theme, appCtx *ApplicationContext, g atom.Group) gxui.Control {
-	layout := t.CreateLinearLayout()
+func createAtomGroupControls(ctx *commandAdapterCtx, g atom.Group) gxui.Control {
+	theme := ctx.appCtx.theme
+
+	layout := theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
-	img := t.CreateImage()
+	img := theme.CreateImage()
 	img.SetExplicitSize(math.Size{W: kCommandAdapterItemHeight, H: kCommandAdapterItemHeight})
 	img.SetAspectMode(gxui.AspectCorrectLetterbox)
 	layout.AddChild(img)
 
-	atomID := g.Range.Last()
-	atom := appCtx.Atoms()[atomID]
-	if atom.Flags().IsDrawCall() || atom.Flags().IsEndOfFrame() {
-		var cancel chan<- struct{}
-		cancelThumbnail := func() {
-			if cancel != nil {
-				close(cancel)
-				cancel = nil
-			}
+	if ns, ok := ctx.timings.RangeDuration(g.Range); ok {
+		timeLbl := theme.CreateLabel()
+		milliseconds := float64(ns) / 1000000.
+		timeLbl.SetText(fmt.Sprintf("%6.3f ms ", milliseconds))
+		switch {
+		case milliseconds >= 1.0:
+			timeLbl.SetColor(gxui.ColorFromHex(0xFFFC19 + 0xFF<<24))
+		case milliseconds >= 5.0:
+			timeLbl.SetColor(gxui.ColorFromHex(0xD21212 + 0xFF<<24))
 		}
-		requestThumbnail := func() {
-			cancelThumbnail()
-			cancel = appCtx.RequestThumbnail(atomID, kFilmStripAdapterItemWidth, kFilmStripAdapterItemHeight, func(tex gxui.Texture) {
-				img.SetTexture(tex)
-				appCtx.ToolTipController().AddToolTip(img, 0.7, func(math.Point) gxui.Control {
-					large := t.CreateImage()
-					large.SetTexture(tex)
-					large.SetAspectMode(gxui.AspectCorrectLetterbox)
-					return large
-				})
-			})
-		}
-
-		var subscription gxui.EventSubscription
-		img.OnAttach(func() {
-			requestThumbnail()
-			subscription = appCtx.OnDeviceSelected(requestThumbnail)
-		})
-		img.OnDetach(func() {
-			cancelThumbnail()
-			subscription.Unlisten()
-		})
+		layout.AddChild(timeLbl)
 	}
 
-	label := t.CreateLabel()
+	atomID := g.Range.Last()
+	appCtx := ctx.appCtx
+
+	t := task.New()
+	update := func() {
+		t.Cancel()
+		if ctx.device != nil {
+			if flags := ctx.atoms[atomID].Flags(); flags.IsDrawCall() || flags.IsEndOfFrame() {
+				after := ctx.capture.Atoms().Index(uint64(atomID))
+				t.Run(updateThumbnail{appCtx, ctx.device, after, img})
+			}
+		}
+	}
+
+	// TODO: When trees can be updated, this should listen for capture / device changes.
+	img.OnAttach(update)
+	img.OnDetach(t.Cancel)
+
+	label := theme.CreateLabel()
 	label.SetText(g.Name)
 	layout.AddChild(label)
 
 	return layout
-}
-
-type cmdNode interface {
-	atomRange() atom.Range
 }
 
 type observationsItem struct {
@@ -306,12 +303,12 @@ func (i hierarchyItem) atomRange() atom.Range {
 }
 
 type observationsNode struct {
-	appCtx *ApplicationContext
+	ctx    *commandAdapterCtx
 	atomID atom.ID
 }
 
 func (n observationsNode) Count() int {
-	atom := n.appCtx.Atoms()[n.atomID]
+	atom := n.ctx.atoms[n.atomID]
 	observations := atom.Observations()
 	return len(observations.Reads) + len(observations.Writes)
 }
@@ -329,7 +326,7 @@ func (n observationsNode) ItemIndex(item gxui.AdapterItem) int {
 }
 
 func (n observationsNode) Create(theme gxui.Theme, index int) gxui.Control {
-	atom := n.appCtx.Atoms()[n.atomID]
+	atom := n.ctx.atoms[n.atomID]
 	observations := atom.Observations()
 	var r memory.Range
 	var c gxui.Color
@@ -342,18 +339,18 @@ func (n observationsNode) Create(theme gxui.Theme, index int) gxui.Control {
 		c = gxui.Red
 	}
 
-	ptr := memory.Pointer{Address: r.Base, Pool: memory.ApplicationPool}
 	b := theme.CreateButton()
 	b.SetMargin(math.Spacing{})
 	b.AddChild(CreateLabel(theme, r.String(), c, true))
-	b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectPointer(ptr) })
+	// ptr := memory.Pointer{Address: r.Base, Pool: memory.ApplicationPool}
+	// b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectPointer(ptr) }) // [BENC]: TODO
 	return b
 }
 
 type hierarchyNode struct {
-	appCtx *ApplicationContext
-	group  atom.Group
-	depth  uint
+	ctx   *commandAdapterCtx
+	group atom.Group
+	depth uint
 }
 
 func (n hierarchyNode) Count() int {
@@ -363,12 +360,12 @@ func (n hierarchyNode) Count() int {
 func (n hierarchyNode) NodeAt(index int) gxui.TreeNode {
 	if id, subgroup := n.group.Index(uint64(index)); subgroup != nil {
 		return &hierarchyNode{
-			appCtx: n.appCtx,
-			group:  *subgroup,
-			depth:  n.depth + 1,
+			ctx:   n.ctx,
+			group: *subgroup,
+			depth: n.depth + 1,
 		}
 	} else {
-		return observationsNode{n.appCtx, id}
+		return observationsNode{n.ctx, id}
 	}
 }
 
@@ -381,48 +378,105 @@ func (n hierarchyNode) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (n hierarchyNode) ItemIndex(item gxui.AdapterItem) int {
-	return int(n.group.IndexOf(item.(cmdNode).atomRange().Start))
+	var id atom.ID
+
+	switch i := item.(type) {
+	case hierarchyItem:
+		id = i.Start
+	case observationsItem:
+		id = i.atomID
+	default:
+		panic(fmt.Errorf("Unknown item type %T", i))
+	}
+
+	return int(n.group.IndexOf(id))
 }
 
 func (n hierarchyNode) Create(theme gxui.Theme, index int) gxui.Control {
 	id, subgroup := n.group.Index(uint64(index))
 	if subgroup != nil {
-		return createAtomGroupControls(theme, n.appCtx, *subgroup)
+		return createAtomGroupControls(n.ctx, *subgroup)
 	} else {
-		return createAtomControls(theme, n.appCtx, id)
+		return createAtomControls(n.ctx, id)
 	}
 }
 
 type CommandAdapter struct {
 	gxui.AdapterBase
 	hierarchyNode
-	appCtx *ApplicationContext
+	ctx commandAdapterCtx
 }
 
 func CreateCommandAdapter(appCtx *ApplicationContext) *CommandAdapter {
-	a := &CommandAdapter{
-		hierarchyNode: hierarchyNode{appCtx: appCtx},
-	}
+	a := &CommandAdapter{}
+	a.ctx = commandAdapterCtx{appCtx: appCtx}
+	a.hierarchyNode.ctx = &a.ctx
 	return a
 }
 
-func (a *CommandAdapter) SetRoot(root atom.Group) {
-	a.group = root
+func (a *CommandAdapter) UpdateAtoms(capture *path.Capture, atoms []atom.Atom, root atom.Group) {
+	a.ctx.capture = capture
+	a.ctx.atoms = atoms
+	a.hierarchyNode.group = root
 	a.DataReplaced()
 }
 
-func (a CommandAdapter) AtomRange(item gxui.AdapterItem) atom.Range {
-	if item == nil {
-		return atom.Range{}
-	}
-	return item.(cmdNode).atomRange()
+func (a *CommandAdapter) UpdateTimings(timings service.TimingInfo) {
+	a.ctx.timings = timings
+	a.DataReplaced()
 }
 
-func (a CommandAdapter) Item(id atom.ID) gxui.AdapterItem {
-	return hierarchyItem{Start: id, End: id + 1}
+func (a *CommandAdapter) UpdateDevice(device *path.Device) {
+	a.ctx.device = device
+	a.DataReplaced()
+}
+
+func (a CommandAdapter) Path(item gxui.AdapterItem) path.Path {
+	switch i := item.(type) {
+	case nil:
+		return nil
+	case hierarchyItem:
+		span := i.atomRange().Span()
+		if span.Start+1 != span.End {
+			return a.ctx.capture.Atoms().Slice(span.Start, span.End)
+		} else {
+			return a.ctx.capture.Atoms().Index(span.Start)
+		}
+	case observationsItem:
+		return a.ctx.capture.Atoms().Index(uint64(i.atomID)).Field("Observations").ArrayIndex(uint64(i.index))
+	default:
+		panic(fmt.Errorf("Unknown item type %T", i))
+	}
+}
+
+func (a CommandAdapter) Item(p path.Path) gxui.AdapterItem {
+	if s, _ := path.FindAtomSlice(p); s != nil {
+		return hierarchyItem{Start: atom.ID(s.Start), End: atom.ID(s.End)}
+	}
+	if i := path.FindArrayIndex(p); i != nil {
+		if f, ok := i.Array.(*path.Field); ok && f.Name == "Observations" {
+			if a, ok := f.Struct.(*path.Atom); ok { // Observations of an atom
+				id := atom.ID(a.Index)
+				return observationsItem{atomID: id, index: int(i.Index)}
+			}
+		}
+	}
+	if a := path.FindAtom(p); a != nil {
+		id := atom.ID(a.Index)
+		return hierarchyItem{Start: id, End: id + 1}
+	}
+	return nil
 }
 
 // gxui.TreeAdapter compliance
 func (a CommandAdapter) Size(theme gxui.Theme) math.Size {
 	return math.Size{W: math.MaxSize.W, H: kCommandAdapterItemHeight}
+}
+
+type commandAdapterCtx struct {
+	appCtx  *ApplicationContext
+	capture *path.Capture
+	device  *path.Device
+	atoms   []atom.Atom
+	timings service.TimingInfo
 }
