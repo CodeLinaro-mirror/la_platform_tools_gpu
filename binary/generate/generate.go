@@ -34,7 +34,6 @@ import (
 
 const (
 	indent       = "»"
-	classPrefix  = "⊹"
 	memberPrefix = "∍"
 )
 
@@ -61,17 +60,17 @@ const (
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
 	schema.Class
-	IDName    string // The name to give the ID of the type.
+	Tags      Tags   // The tags associated with the type.
 	Signature string // The full string type signature of the Struct.
 }
 
-type tag string
+type Tags string
 
-func (t tag) Get(name string) string {
+func (t Tags) Get(name string) string {
 	return reflect.StructTag(t).Get(name)
 }
 
-func (t tag) Flag(name string) bool {
+func (t Tags) Flag(name string) bool {
 	v := reflect.StructTag(t).Get(name)
 	if len(v) == 0 {
 		return false
@@ -96,19 +95,19 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
-		tag := tag(t.Tag(i))
+		tags := Tags(t.Tag(i))
 		if decl.Anonymous() &&
 			decl.Type().String() == binaryGenerate &&
-			!tag.Flag("disable") {
+			!tags.Flag("disable") {
 			tagged = true
-			s.IDName = tag.Get("id")
+			s.Tags = tags
 			continue
 		}
 		f := schema.Field{}
 		if !decl.Anonymous() {
 			f.Declared = decl.Name()
 		}
-		f.Type = fromType(pkg, decl.Type(), tag, imports, b)
+		f.Type = fromType(pkg, decl.Type(), tags, imports, b)
 		delete(imports, pkg.Path())
 		s.Fields = append(s.Fields, f)
 	}
@@ -117,6 +116,15 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 	}
 	s.UpdateID()
 	return s
+}
+
+// IDName returns the name to give the ID of the type.
+func (s *Struct) IDName() string {
+	name := s.Tags.Get("id")
+	if name == "" {
+		name = "binaryID" + s.Name
+	}
+	return name
 }
 
 // UpdateID recalculates the struct ID from the current signature.
@@ -132,9 +140,6 @@ func (s *Struct) UpdateID() {
 	fmt.Fprint(b, " }")
 	s.Signature = b.String()
 	s.TypeID = binary.NewID([]byte(s.Signature))
-	if s.IDName == "" {
-		s.IDName = "binaryID" + s.Name
-	}
 }
 
 func spaceToUnderscore(r rune) rune {
@@ -158,7 +163,7 @@ func findBinaryObject(pkg *types.Package) *types.Interface {
 }
 
 // fromType creates a appropriate schema.Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports, binObj *types.Interface) schema.Type {
+func fromType(pkg *types.Package, from types.Type, tags Tags, imports Imports, binObj *types.Interface) schema.Type {
 	alias := ""
 	fullname := types.TypeString(pkg, from) // fully-qualified name including full package path
 	name := strings.Map(spaceToUnderscore, path.Base(fullname))
@@ -188,7 +193,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports, bin
 			return &schema.Primitive{Name: name, Method: m}
 		}
 	case *types.Pointer:
-		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tag, imports, binObj)}
+		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tags, imports, binObj)}
 	case *types.Interface:
 		if binObj != nil && !types.Implements(from, binObj) {
 			return &any.Any{}
