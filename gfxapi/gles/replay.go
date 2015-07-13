@@ -212,7 +212,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	a, d, l := t.state.Architecture, t.db, t.logger
 
 	// Delete all Renderbuffers.
-	renderbuffers := []RenderbufferId{}
+	renderbuffers := make([]RenderbufferId, 0, len(c.Instances.Renderbuffers)-3)
 	for renderbufferId := range c.Instances.Renderbuffers {
 		// Skip virtual renderbuffers: backbuffer_color(-1), backbuffer_depth(-2), backbuffer_stencil(-3).
 		if renderbufferId < 0xf0000000 {
@@ -226,7 +226,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 
 	// Delete all Textures.
-	textures := []TextureId{}
+	textures := make([]TextureId, 0, len(c.Instances.Textures))
 	for textureId := range c.Instances.Textures {
 		textures = append(textures, textureId)
 	}
@@ -237,7 +237,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 
 	// Delete all Framebuffers.
-	framebuffers := []FramebufferId{}
+	framebuffers := make([]FramebufferId, 0, len(c.Instances.Framebuffers))
 	for framebufferId := range c.Instances.Framebuffers {
 		framebuffers = append(framebuffers, framebufferId)
 	}
@@ -248,7 +248,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 
 	// Delete all Buffers.
-	buffers := []BufferId{}
+	buffers := make([]BufferId, 0, len(c.Instances.Buffers))
 	for bufferId := range c.Instances.Buffers {
 		buffers = append(buffers, bufferId)
 	}
@@ -259,7 +259,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 
 	// Delete all VertexArrays.
-	vertexArrays := []VertexArrayId{}
+	vertexArrays := make([]VertexArrayId, 0, len(c.Instances.VertexArrays))
 	for vertexArrayId := range c.Instances.VertexArrays {
 		vertexArrays = append(vertexArrays, vertexArrayId)
 	}
@@ -277,5 +277,16 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	// Delete all Programs.
 	for programId := range c.Instances.Programs {
 		out.Write(id, NewGlDeleteProgram(programId))
+	}
+
+	// Delete all Queries.
+	queries := make([]QueryId, 0, len(c.Instances.Queries))
+	for queryId := range c.Instances.Queries {
+		queries = append(queries, queryId)
+	}
+	if len(queries) > 0 {
+		out.Write(id,
+			NewGlDeleteQueries(int32(len(queries)), memory.Tmp).
+				AddRead(atom.Data(a, d, l, memory.Tmp, queries)))
 	}
 }
