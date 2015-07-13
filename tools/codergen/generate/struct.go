@@ -33,8 +33,7 @@ type Struct struct {
 	Signature string // The full string type signature of the Struct.
 }
 
-func (m *Module) addStruct(n *types.TypeName) {
-	b := findBinaryObject(m.Source.Types)
+func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Class: schema.Class{
 		Name:    n.Name(),
@@ -127,19 +126,16 @@ func walkStructs(name string, byname map[string]*sortEntry, structs []*Struct, i
 	return i + 1
 }
 
-// sortStructs is used to ensure stable ordering of Struct slices.
-// This is to ensure automatically generated code has minimum diffs.
-// The sort order is by Struct name, but guarantees dependencies occur first.
-func sortStructs(structs []*Struct) {
-	names := make(sort.StringSlice, len(structs))
-	byname := make(map[string]*sortEntry, len(structs))
-	for i, s := range structs {
+func (m *Module) finaliseStructs() {
+	names := make(sort.StringSlice, len(m.Structs))
+	byname := make(map[string]*sortEntry, len(m.Structs))
+	for i, s := range m.Structs {
 		names[i] = s.Name
 		byname[s.Name] = &sortEntry{s, false}
 	}
 	names.Sort()
 	i := 0
 	for _, name := range names {
-		i = walkStructs(name, byname, structs, i)
+		i = walkStructs(name, byname, m.Structs, i)
 	}
 }
