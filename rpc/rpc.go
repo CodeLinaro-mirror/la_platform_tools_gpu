@@ -20,7 +20,6 @@ package rpc
 
 // binary: java.source = base/rpclib/src/main/java
 // binary: java.package = com.android.tools.rpclib.rpccore
-// binary: java.class_prefix = Rpc
 // binary: java.member_prefix = m
 
 import (
@@ -42,8 +41,8 @@ func NewError(msg string, args ...interface{}) *Error {
 
 // Error is an implementation of error that can be sent over the wire.
 type Error struct {
-	binary.Generate
-	message string
+	binary.Generate `java:"RpcError"`
+	message         string
 }
 
 func (e *Error) Error() string { return e.message }

@@ -25,15 +25,26 @@ func (*Templates) JavaFieldName(s string) string {
 	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
+type JavaStruct struct {
+	*Struct
+}
+
+// Name returns the Java name to give the type.
+func (s *JavaStruct) Name() string {
+	name := s.Tags.Get("java")
+	if name == "" {
+		name = s.Struct.Name
+	}
+	return name
+}
+
 type Java struct {
 	*File
-	Struct          *Struct
-	BasePackage     string
-	RelativePackage string
-	Copyright       string
-	Indent          string
-	MemberPrefix    string
-	ClassPrefix     string
+	Struct       JavaStruct
+	JavaPackage  string
+	Copyright    string
+	Indent       string
+	MemberPrefix string
 }
 
 func NewJava(file *File) *Java { return &Java{File: file} }
@@ -42,7 +53,6 @@ func (file *Java) Run(t *Templates, out string) (bool, error) {
 		s := string(b)
 		s = strings.Replace(s, indent, file.Indent, -1)
 		s = strings.Replace(s, memberPrefix, file.MemberPrefix, -1)
-		s = strings.Replace(s, classPrefix, file.ClassPrefix, -1)
 		return []byte(s)
 	})
 }
