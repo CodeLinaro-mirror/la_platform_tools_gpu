@@ -20,7 +20,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"path/filepath"
 	"runtime"
 
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
@@ -83,9 +82,7 @@ func run() error {
 		fmt.Printf("Generating\n")
 	}
 	t := template.New()
-	goinfo := copyright.Info{Tool: "codergen -go", Year: "2015"}
-	cppinfo := copyright.Info{Tool: fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp)), Year: "2015"}
-	javainfo := copyright.Info{Year: "2015"}
+	info := copyright.Info{Tool: "codergen", Year: "2015"}
 	gen := func(name string, arg interface{}, output string, reflow template.PostProcess) error {
 		out := output
 		if *nowrite {
@@ -109,19 +106,19 @@ func run() error {
 
 	for _, m := range modules {
 		if *golang {
-			if err := generate.Go(m, goinfo, gen); err != nil {
+			if err := generate.Go(m, info, gen); err != nil {
 				return err
 			}
 		}
 		_, doJava := m.Directives["java.package"]
 		if *java != "" && !m.IsTest && doJava {
-			if err := generate.Java(m, javainfo, gen, *java); err != nil {
+			if err := generate.Java(m, info, gen, *java); err != nil {
 				return err
 			}
 		}
 		_, doCpp := m.Directives["cpp"]
 		if *cpp != "" && !m.IsTest && doCpp {
-			if err := generate.Cpp(m, cppinfo, gen, *cpp); err != nil {
+			if err := generate.Cpp(m, info, gen, *cpp); err != nil {
 				return err
 			}
 		}
