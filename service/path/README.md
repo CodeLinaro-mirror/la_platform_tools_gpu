@@ -10,6 +10,13 @@ Package path contains types that represent data references.
 var Namespace = registry.NewNamespace()
 ```
 
+#### func  Equal
+
+```go
+func Equal(a, b Path) bool
+```
+Equal returns true if the paths a and b are equal, otherwise false.
+
 #### func  Flatten
 
 ```go
