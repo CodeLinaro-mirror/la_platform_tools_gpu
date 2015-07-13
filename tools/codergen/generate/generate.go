@@ -12,34 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package generate has support for generating encode and decode methods
-// for the binary package automatically.
+// Package generate has support processing loaded go code, finding the items
+// that require generated code, and converting them to a form the templates can
+// easily consume.
 package generate
 
 import (
-	"bytes"
 	"fmt"
-	"path"
-	"reflect"
 	"sort"
 	"strconv"
 	"strings"
-	"unicode"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"golang.org/x/tools/go/exact"
 	"golang.org/x/tools/go/types"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 )
+
+type Generator func(name string, arg interface{}, output string, reflow template.PostProcess) error
 
 const (
-	indent       = "»"
-	memberPrefix = "∍"
+	indentRune = "»"
 )
 
-type Imports map[string]struct{}
+func indentor(indent string) template.PostProcess {
+	indent = strings.Trim(indent, `"`)
+	if indent == "" {
+		indent = "    "
+	}
+	return func(b []byte) []byte {
+		return []byte(strings.Replace(string(b), indentRune, indent, -1))
+	}
+}
 
-type File struct {
+type Module struct {
+	Source     *scan.Module
 	Name       string
 	Import     string
 	IsTest     bool
@@ -50,233 +59,170 @@ type File struct {
 	Imports    Imports
 }
 
-const (
-	binaryPackage  = "android.googlesource.com/platform/tools/gpu/binary"
-	binaryGenerate = binaryPackage + ".Generate"
-)
+type Imports map[string]struct{}
 
-// Struct is a description of an encodable struct.
-// Signature includes the package, name and name and type of all the fields.
-// Any change to the Signature will cause the ID to change.
-type Struct struct {
-	schema.Class
-	Tags      Tags   // The tags associated with the type.
-	Signature string // The full string type signature of the Struct.
-}
-
-type Tags string
-
-func (t Tags) Get(name string) string {
-	return reflect.StructTag(t).Get(name)
-}
-
-func (t Tags) Flag(name string) bool {
-	v := reflect.StructTag(t).Get(name)
-	if len(v) == 0 {
-		return false
+func (m *Module) Directive(name string, notset interface{}) interface{} {
+	d, ok := m.Directives[name]
+	if !ok {
+		return notset
 	}
-	b, err := strconv.ParseBool(v)
-	if err != nil {
-		panic(fmt.Errorf("Malformed struct tag %q in %q: %v", name, t, err))
+	if _, isbool := notset.(bool); isbool {
+		//coerce the string to bool
+		if b, err := strconv.ParseBool(d); err == nil {
+			return b
+		}
 	}
-	return b
+	return d
 }
 
-// FromTypename creates and initializes a Struct from a types.Typename.
-// It assumes that the typename will map to a types.Struct, and adds all the
-// fields of that struct to the Struct information.
-func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
-	b := findBinaryObject(pkg)
-	t := n.Type().Underlying().(*types.Struct)
-	s := &Struct{Class: schema.Class{
-		Name:    n.Name(),
-		Package: pkg.Name(),
-	}}
-	tagged := false
-	for i := 0; i < t.NumFields(); i++ {
-		decl := t.Field(i)
-		tags := Tags(t.Tag(i))
-		if decl.Anonymous() &&
-			decl.Type().String() == binaryGenerate &&
-			!tags.Flag("disable") {
-			tagged = true
-			s.Tags = tags
+func From(scanner *scan.Scanner) ([]*Module, error) {
+	result := []*Module{}
+	for _, dir := range scanner.Directories {
+		if !dir.Scan {
 			continue
 		}
-		f := schema.Field{}
-		if !decl.Anonymous() {
-			f.Declared = decl.Name()
+		if m, err := convert(scanner, &dir.Module, false); err != nil {
+			return nil, err
+		} else if m != nil {
+			result = append(result, m)
 		}
-		f.Type = fromType(pkg, decl.Type(), tags, imports, b)
-		delete(imports, pkg.Path())
-		s.Fields = append(s.Fields, f)
-	}
-	if !tagged {
-		return nil
-	}
-	s.UpdateID()
-	return s
-}
-
-// IDName returns the name to give the ID of the type.
-func (s *Struct) IDName() string {
-	name := s.Tags.Get("id")
-	if name == "" {
-		name = "binaryID" + s.Name
-	}
-	return name
-}
-
-// UpdateID recalculates the struct ID from the current signature.
-func (s *Struct) UpdateID() {
-	b := &bytes.Buffer{}
-	fmt.Fprintf(b, "struct %s.%s {", s.Package, s.Name)
-	for i, f := range s.Fields {
-		if i != 0 {
-			fmt.Fprint(b, ",")
+		if m, err := convert(scanner, &dir.Test, true); err != nil {
+			return nil, err
+		} else if m != nil {
+			result = append(result, m)
 		}
-		fmt.Fprintf(b, " %s:%s", f.Name(), f.Type)
 	}
-	fmt.Fprint(b, " }")
-	s.Signature = b.String()
-	s.TypeID = binary.NewID([]byte(s.Signature))
+	return result, nil
 }
 
-func spaceToUnderscore(r rune) rune {
-	if unicode.IsSpace(r) {
-		return '_'
+func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, error) {
+	if src.Types == nil {
+		return nil, nil
 	}
-	return r
-}
-
-// findBinaryObject looks for the binary.Object type in the imports, returning it
-// if it is found, or nil if it is not.
-func findBinaryObject(pkg *types.Package) *types.Interface {
-	for _, p := range pkg.Imports() {
-		if p.Path() == binaryPackage {
-			if o := p.Scope().Lookup("Object"); o != nil {
-				return o.Type().Underlying().(*types.Interface)
+	directives := map[string]string{}
+	for _, file := range src.Sources {
+		for k, v := range file.Directives {
+			directives[k] = v
+		}
+	}
+	if _, ignored := directives["ignore"]; ignored {
+		return nil, nil
+	}
+	m := &Module{
+		Source:     src,
+		Name:       src.Directory.Name,
+		Path:       src.Directory.Dir,
+		Import:     src.Directory.ImportPath,
+		Imports:    make(map[string]struct{}),
+		Directives: directives,
+		IsTest:     isTest,
+	}
+	scope := src.Types.Scope()
+	for _, name := range scope.Names() {
+		obj := scope.Lookup(name)
+		f := scanner.FileSet.File(obj.Pos())
+		filename := f.Name()
+		var source *scan.Source
+		for i := range src.Sources {
+			if src.Sources[i].Filename == filename {
+				source = &src.Sources[i]
+				break
+			}
+		}
+		if source == nil {
+			continue
+		}
+		if n, ok := obj.(*types.TypeName); ok {
+			if t, ok := n.Type().(*types.Named); ok {
+				if _, ok := t.Underlying().(*types.Struct); ok {
+					m.addStruct(n)
+				}
+			}
+		}
+		if c, ok := obj.(*types.Const); ok && c.Exported() {
+			if t, ok := c.Type().(*types.Named); ok {
+				if t.Obj().Pkg() == obj.Pkg() {
+					if _, ok := c.Type().Underlying().(*types.Basic); ok {
+						m.addConst(c)
+					}
+				}
 			}
 		}
 	}
-	return nil
+	sortStructs(m.Structs)
+	sort.Sort(&m.Constants)
+	for i := range m.Constants {
+		sort.Sort(&m.Constants[i])
+	}
+	return m, nil
 }
 
-// fromType creates a appropriate schema.Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tags Tags, imports Imports, binObj *types.Interface) schema.Type {
-	alias := ""
-	fullname := types.TypeString(pkg, from) // fully-qualified name including full package path
-	name := strings.Map(spaceToUnderscore, path.Base(fullname))
-	if named, isNamed := from.(*types.Named); isNamed {
-		alias = name
-		from = from.Underlying()
-		p := named.Obj().Pkg()
-		if p != nil && p != pkg {
-			imports[p.Path()] = struct{}{}
-		}
-	}
-	gotype := strings.Map(spaceToUnderscore, from.String())
-	switch from := from.(type) {
-	case *types.Basic:
-		switch from.Kind() {
-		case types.Int:
-			return &schema.Primitive{Name: name, Method: schema.Int32}
-		case types.Byte:
-			return &schema.Primitive{Name: name, Method: schema.Uint8}
-		case types.Rune:
-			return &schema.Primitive{Name: name, Method: schema.Int32}
-		default:
-			m, err := schema.ParseMethod(strings.Title(gotype))
-			if err != nil {
-				return &schema.Primitive{Name: fmt.Sprintf("%s_bad_%s", name, gotype), Method: schema.String}
-			}
-			return &schema.Primitive{Name: name, Method: m}
-		}
-	case *types.Pointer:
-		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tags, imports, binObj)}
-	case *types.Interface:
-		if binObj != nil && !types.Implements(from, binObj) {
-			return &any.Any{}
-		} else {
-			return &schema.Interface{Name: name}
-		}
-	case *types.Slice:
-		vt := fromType(pkg, from.Elem(), "", imports, binObj)
-		return &schema.Slice{Alias: alias, ValueType: vt}
-	case *types.Array:
-		length := uint32(from.Len())
-		if elem, ok := from.Elem().(*types.Basic); ok {
-			if elem.Kind() == types.Byte && length == binary.IDSize {
-				return &schema.Primitive{Name: name, Method: schema.ID}
-			}
-		}
-		return &schema.Array{
-			Alias:     alias,
-			ValueType: fromType(pkg, from.Elem(), "", imports, binObj),
-			Size:      length,
-		}
-	case *types.Map:
-		return &schema.Map{
-			Alias:     alias,
-			KeyType:   fromType(pkg, from.Key(), "", imports, binObj),
-			ValueType: fromType(pkg, from.Elem(), "", imports, binObj),
-		}
-	default:
-		return &schema.Struct{Name: name}
+func (m *Module) addStruct(n *types.TypeName) {
+	if s := NewStruct(m.Source.Types, n, m.Imports); s != nil {
+		m.Structs = append(m.Structs, s)
 	}
 }
 
-type sortEntry struct {
-	s       *Struct
-	visited bool
-}
-
-func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
-	switch t := t.(type) {
-	case *schema.Primitive:
-	case *schema.Struct:
-		i = walk(t.Name, byname, structs, i)
-	case *schema.Interface:
-		i = walk(t.Name, byname, structs, i)
-	case *schema.Pointer:
-		i = walkType(t.Type, byname, structs, i)
-	case *schema.Array:
-		i = walkType(t.ValueType, byname, structs, i)
-	case *schema.Slice:
-		i = walkType(t.ValueType, byname, structs, i)
-	case *schema.Map:
-		i = walkType(t.KeyType, byname, structs, i)
-		i = walkType(t.ValueType, byname, structs, i)
+func (m *Module) addConst(c *types.Const) {
+	t := fromType(m.Source.Types, c.Type(), "", m.Imports, nil)
+	name := c.Name()
+	directive := fmt.Sprintf("%s#%s", t, name)
+	if d, found := m.Directives[directive]; found {
+		name = d
+	} else {
+		name = strings.TrimPrefix(name, t.String())
+		name = strings.Trim(name, "_")
 	}
-	return i
-}
-
-func walk(name string, byname map[string]*sortEntry, structs []*Struct, i int) int {
-	entry, found := byname[name]
-	if !found || entry.visited {
-		return i
-	}
-	entry.visited = true
-	for _, f := range entry.s.Fields {
-		i = walkType(f.Type, byname, structs, i)
-	}
-	structs[i] = entry.s
-	return i + 1
-}
-
-// Sort is used to ensure stable ordering of Struct slices.
-// This is to ensure automatically generated code has minimum diffs.
-// The sort order is by Struct name, but guarantees dependencies occur first.
-func Sort(structs []*Struct) {
-	names := make(sort.StringSlice, len(structs))
-	byname := make(map[string]*sortEntry, len(structs))
-	for i, s := range structs {
-		names[i] = s.Name
-		byname[s.Name] = &sortEntry{s, false}
-	}
-	names.Sort()
-	i := 0
-	for _, name := range names {
-		i = walk(name, byname, structs, i)
+	if p, ok := t.(*schema.Primitive); ok {
+		switch p.Method {
+		case schema.Int8:
+			v, _ := exact.Int64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: int8(v),
+			})
+		case schema.Uint8:
+			v, _ := exact.Uint64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: uint8(v),
+			})
+		case schema.Int16:
+			v, _ := exact.Int64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: int16(v),
+			})
+		case schema.Uint16:
+			v, _ := exact.Uint64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: uint16(v),
+			})
+		case schema.Int32:
+			v, _ := exact.Int64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: int32(v),
+			})
+		case schema.Uint32:
+			v, _ := exact.Uint64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: uint32(v),
+			})
+		case schema.Int64:
+			v, _ := exact.Int64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: v,
+			})
+		case schema.Uint64:
+			v, _ := exact.Uint64Val(c.Val())
+			m.Constants.Add(t, schema.Constant{
+				Name:  name,
+				Value: v,
+			})
+		}
 	}
 }

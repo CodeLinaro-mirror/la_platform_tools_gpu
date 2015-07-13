@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package generate
+package template
 
 import (
 	"bytes"
@@ -22,7 +22,6 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
-	"strconv"
 	"strings"
 	"text/template"
 	"unicode"
@@ -38,22 +37,6 @@ type Templates struct {
 	writer    io.Writer
 	File      interface{}
 	counters  map[string]*counter
-}
-
-type counter int
-
-func (c *counter) Set(value int) string {
-	*c = counter(value)
-	return ""
-}
-
-func (c *counter) AddLen(value string) string {
-	*c += counter(len(value))
-	return ""
-}
-
-func (c *counter) String() string {
-	return fmt.Sprint(*c)
 }
 
 func isPublic(s string) bool {
@@ -81,7 +64,7 @@ func installFields(v reflect.Value, funcs template.FuncMap) {
 	}
 }
 
-func NewTemplates() *Templates {
+func New() *Templates {
 	f := &Templates{
 		templates: template.New("FunctionHolder"),
 		funcs:     template.FuncMap{},
@@ -99,7 +82,7 @@ func NewTemplates() *Templates {
 
 type PostProcess func([]byte) []byte
 
-func (t *Templates) generate(f interface{}, name string, arg interface{}, out string, post PostProcess) (bool, error) {
+func (t *Templates) Generate(f interface{}, name string, arg interface{}, out string, post PostProcess) (bool, error) {
 	t.File = f
 	defer func() { t.File = nil }()
 
@@ -167,63 +150,4 @@ func (t *Templates) execute(name string, w io.Writer, data interface{}) error {
 		return fmt.Errorf("Cannot find template %s", name)
 	}
 	return tmpl.Execute(w, data)
-}
-
-type variable struct {
-	Name string
-	Type interface{}
-}
-
-func (*Templates) Var(t schema.Type, args ...interface{}) *variable {
-	return &variable{
-		Name: fmt.Sprint(args...),
-		Type: t,
-	}
-}
-
-func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
-	tmpl, err := t.getTemplate(prefix, arg)
-	if err != nil {
-		return "", err
-	}
-	return "", tmpl.Execute(t.writer, arg)
-}
-
-func (*Templates) Lower(s interface{}) string {
-	return strings.ToLower(fmt.Sprint(s))
-}
-
-func (*Templates) Upper(s interface{}) string {
-	return strings.ToUpper(fmt.Sprint(s))
-}
-
-func (*Templates) Contains(test, s interface{}) bool {
-	return strings.Contains(fmt.Sprint(s), fmt.Sprint(test))
-}
-
-func (*Templates) ToS8(val byte) string {
-	return fmt.Sprint(int8(val))
-}
-
-func (f *File) Directive(name string, notset interface{}) interface{} {
-	d, ok := f.Directives[name]
-	if !ok {
-		return notset
-	}
-	if _, isbool := notset.(bool); isbool {
-		//coerce the string to bool
-		if b, err := strconv.ParseBool(d); err == nil {
-			return b
-		}
-	}
-	return d
-}
-
-func (t *Templates) Counter(name string) *counter {
-	c, ok := t.counters[name]
-	if !ok {
-		c = new(counter)
-		t.counters[name] = c
-	}
-	return c
 }

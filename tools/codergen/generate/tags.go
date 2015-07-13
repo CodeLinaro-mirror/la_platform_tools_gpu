@@ -12,27 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package generate has support for generating encode and decode methods
+// for the binary package automatically.
 package generate
 
 import (
-	"path/filepath"
-	"strings"
-
-	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+	"fmt"
+	"reflect"
+	"strconv"
 )
 
-type CppNamespace struct {
-	*Module
-	Namespace string
-	Copyright string
+type Tags string
+
+func (t Tags) Get(name string) string {
+	return reflect.StructTag(t).Get(name)
 }
 
-func Cpp(m *Module, info copyright.Info, gen Generator, path string) error {
-	ns := CppNamespace{
-		Module:    m,
-		Namespace: m.Directives["cpp"],
-		Copyright: strings.TrimSpace(copyright.Build("generated_by", info)),
+func (t Tags) Flag(name string) bool {
+	v := reflect.StructTag(t).Get(name)
+	if len(v) == 0 {
+		return false
 	}
-	out := filepath.Join(path, ns.Namespace+".h")
-	return gen("Cpp.File", ns, out, indentor("    "))
+	b, err := strconv.ParseBool(v)
+	if err != nil {
+		panic(fmt.Errorf("Malformed tag %q in %q: %v", name, t, err))
+	}
+	return b
 }

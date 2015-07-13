@@ -78,7 +78,7 @@ func init() {
 		// All the embed rules
 		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
 		embedCopyright := Embed(Path(gpusrc, "tools/copyright"))
-		embedCodergen := Embed(Path(gpusrc, "tools/codergen/generate"))
+		embedCodergen := Embed(Path(gpusrc, "tools/codergen/template"))
 		Creator(Tools.Rpcapi).DependsOn(embedCopyright, embedRPC)
 		Creator(Tools.Apic).DependsOn(embedCopyright)
 		Creator(Tools.Codergen).DependsOn(embedCopyright, embedCodergen)
