@@ -62,7 +62,7 @@ func CreateFramesPanel(appCtx *ApplicationContext) gxui.Control
 #### func  CreateGotoCommandDialog
 
 ```go
-func CreateGotoCommandDialog(appCtx *ApplicationContext) gxui.Window
+func CreateGotoCommandDialog(appCtx *ApplicationContext, atoms *path.Atoms) gxui.Window
 ```
 
 #### func  CreateGxuiDebug
@@ -144,13 +144,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext)
 #### func  CreateWireframeButton
 
 ```go
-func CreateWireframeButton(appCtx *ApplicationContext) gxui.Button
-```
-
-#### func  DoReplay
-
-```go
-func DoReplay(appCtx *ApplicationContext)
+func CreateWireframeButton(appCtx *ApplicationContext, changed func(bool)) gxui.Button
 ```
 
 #### func  ImportCapture
@@ -158,6 +152,20 @@ func DoReplay(appCtx *ApplicationContext)
 ```go
 func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Logger)
 ```
+
+#### func  NewColorTexture
+
+```go
+func NewColorTexture(driver gxui.Driver, width, height int, rgba []byte) gxui.Texture
+```
+NewColorTexture returns a gxui.Texture from the rgba-8888 data.
+
+#### func  NewDepthTexture
+
+```go
+func NewDepthTexture(driver gxui.Driver, width, height int, depths []byte) gxui.Texture
+```
+NewDepthTexture returns a gxui.Texture from the depth data.
 
 #### func  Run
 
@@ -217,276 +225,28 @@ type ApplicationContext struct {
 func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationContext, error)
 ```
 
-#### func (*ApplicationContext) Atoms
-
-```go
-func (c *ApplicationContext) Atoms() []atom.Atom
-```
-
-#### func (*ApplicationContext) Capture
-
-```go
-func (c *ApplicationContext) Capture() service.Capture
-```
-
-#### func (*ApplicationContext) CaptureID
-
-```go
-func (c *ApplicationContext) CaptureID() service.CaptureId
-```
-
 #### func (*ApplicationContext) Change
 
 ```go
-func (c *ApplicationContext) Change(p path.Path, v interface{})
+func (c *ApplicationContext) Change(p path.Path, v interface{}) error
 ```
-
-#### func (*ApplicationContext) ColorBuffer
-
-```go
-func (c *ApplicationContext) ColorBuffer() gxui.Texture
-```
-
-#### func (*ApplicationContext) DepthBuffer
-
-```go
-func (c *ApplicationContext) DepthBuffer() gxui.Texture
-```
-
-#### func (*ApplicationContext) DropDownOverlay
-
-```go
-func (c *ApplicationContext) DropDownOverlay() gxui.BubbleOverlay
-```
-
-#### func (*ApplicationContext) Hierarchy
-
-```go
-func (c *ApplicationContext) Hierarchy() atom.Group
-```
-
-#### func (*ApplicationContext) LoadCapture
-
-```go
-func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelected bool)
-```
-
-#### func (*ApplicationContext) LoadHierarchy
-
-```go
-func (c *ApplicationContext) LoadHierarchy()
-```
-
-#### func (*ApplicationContext) LoadReport
-
-```go
-func (c *ApplicationContext) LoadReport()
-```
-
-#### func (*ApplicationContext) LoadState
-
-```go
-func (c *ApplicationContext) LoadState()
-```
-
-#### func (*ApplicationContext) Logger
-
-```go
-func (c *ApplicationContext) Logger() *log.Splitter
-```
-
-#### func (*ApplicationContext) OnAtomSelected
-
-```go
-func (c *ApplicationContext) OnAtomSelected(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnAtomsUpdated
-
-```go
-func (c *ApplicationContext) OnAtomsUpdated(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnColorBufferUpdate
-
-```go
-func (c *ApplicationContext) OnColorBufferUpdate(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnDepthBufferUpdate
-
-```go
-func (c *ApplicationContext) OnDepthBufferUpdate(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnDeviceSelected
-
-```go
-func (c *ApplicationContext) OnDeviceSelected(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnHierarchyUpdated
-
-```go
-func (c *ApplicationContext) OnHierarchyUpdated(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnObjectSelected
-
-```go
-func (c *ApplicationContext) OnObjectSelected(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnPointerSelected
-
-```go
-func (c *ApplicationContext) OnPointerSelected(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnReportUpdated
-
-```go
-func (c *ApplicationContext) OnReportUpdated(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnRequestReplay
-
-```go
-func (c *ApplicationContext) OnRequestReplay(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnStateUpdated
-
-```go
-func (c *ApplicationContext) OnStateUpdated(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnTimingInfoUpdated
-
-```go
-func (c *ApplicationContext) OnTimingInfoUpdated(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) OnWireframeChanged
-
-```go
-func (c *ApplicationContext) OnWireframeChanged(f func()) gxui.EventSubscription
-```
-
-#### func (*ApplicationContext) RequestMemory
-
-```go
-func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint64, callback MemoryCallback) chan<- struct{}
-```
-
-#### func (*ApplicationContext) RequestReplay
-
-```go
-func (c *ApplicationContext) RequestReplay()
-```
-
-#### func (*ApplicationContext) RequestThumbnail
-
-```go
-func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight uint32, callback ImageCallback) chan<- struct{}
-```
-
-#### func (*ApplicationContext) Rpc
-
-```go
-func (c *ApplicationContext) Rpc() service.RPC
-```
+Change modifies the value at p to v, and selects the new path. The call is
+blocking.
 
 #### func (*ApplicationContext) Run
 
 ```go
-func (c *ApplicationContext) Run(f func())
+func (c *ApplicationContext) Run(f func()) bool
 ```
+Run enqueues f to be called on the UI go-routine. Run can return before f is
+called.
 
-#### func (*ApplicationContext) SelectAtom
+#### func (*ApplicationContext) RunSync
 
 ```go
-func (c *ApplicationContext) SelectAtom(id atom.ID)
+func (c *ApplicationContext) RunSync(f func()) bool
 ```
-
-#### func (*ApplicationContext) SelectDevice
-
-```go
-func (c *ApplicationContext) SelectDevice(device service.DeviceId)
-```
-
-#### func (*ApplicationContext) SelectObject
-
-```go
-func (c *ApplicationContext) SelectObject(object interface{})
-```
-
-#### func (*ApplicationContext) SelectPointer
-
-```go
-func (c *ApplicationContext) SelectPointer(ptr memory.Pointer)
-```
-
-#### func (*ApplicationContext) SelectedAtomID
-
-```go
-func (c *ApplicationContext) SelectedAtomID() atom.ID
-```
-func (c *ApplicationContext) State() schema.Struct { return c.state }
-
-#### func (*ApplicationContext) SelectedDevice
-
-```go
-func (c *ApplicationContext) SelectedDevice() service.DeviceId
-```
-
-#### func (*ApplicationContext) SelectedObject
-
-```go
-func (c *ApplicationContext) SelectedObject() interface{}
-```
-
-#### func (*ApplicationContext) SelectedPointer
-
-```go
-func (c *ApplicationContext) SelectedPointer() memory.Pointer
-```
-
-#### func (*ApplicationContext) SetWireframe
-
-```go
-func (c *ApplicationContext) SetWireframe(value bool)
-```
-
-#### func (*ApplicationContext) Theme
-
-```go
-func (c *ApplicationContext) Theme() gxui.Theme
-```
-
-#### func (*ApplicationContext) ToolTipController
-
-```go
-func (c *ApplicationContext) ToolTipController() *gxui.ToolTipController
-```
-
-#### func (*ApplicationContext) ToolTipOverlay
-
-```go
-func (c *ApplicationContext) ToolTipOverlay() gxui.BubbleOverlay
-```
-
-#### func (*ApplicationContext) UpdateSchema
-
-```go
-func (c *ApplicationContext) UpdateSchema()
-```
-
-#### func (*ApplicationContext) Wireframe
-
-```go
-func (c *ApplicationContext) Wireframe() bool
-```
+RunSync calls f on the UI go-routine, blocking until f has returned.
 
 #### type Atom
 
@@ -615,12 +375,6 @@ type CommandAdapter struct {
 func CreateCommandAdapter(appCtx *ApplicationContext) *CommandAdapter
 ```
 
-#### func (CommandAdapter) AtomRange
-
-```go
-func (a CommandAdapter) AtomRange(item gxui.AdapterItem) atom.Range
-```
-
 #### func (CommandAdapter) Count
 
 ```go
@@ -636,7 +390,7 @@ func (n CommandAdapter) Create(theme gxui.Theme, index int) gxui.Control
 #### func (CommandAdapter) Item
 
 ```go
-func (a CommandAdapter) Item(id atom.ID) gxui.AdapterItem
+func (a CommandAdapter) Item(p path.Path) gxui.AdapterItem
 ```
 
 #### func (CommandAdapter) ItemAt
@@ -657,10 +411,10 @@ func (n CommandAdapter) ItemIndex(item gxui.AdapterItem) int
 func (n CommandAdapter) NodeAt(index int) gxui.TreeNode
 ```
 
-#### func (*CommandAdapter) SetRoot
+#### func (CommandAdapter) Path
 
 ```go
-func (a *CommandAdapter) SetRoot(root atom.Group)
+func (a CommandAdapter) Path(item gxui.AdapterItem) path.Path
 ```
 
 #### func (CommandAdapter) Size
@@ -669,6 +423,24 @@ func (a *CommandAdapter) SetRoot(root atom.Group)
 func (a CommandAdapter) Size(theme gxui.Theme) math.Size
 ```
 gxui.TreeAdapter compliance
+
+#### func (*CommandAdapter) UpdateAtoms
+
+```go
+func (a *CommandAdapter) UpdateAtoms(capture *path.Capture, atoms []atom.Atom, root atom.Group)
+```
+
+#### func (*CommandAdapter) UpdateDevice
+
+```go
+func (a *CommandAdapter) UpdateDevice(device *path.Device)
+```
+
+#### func (*CommandAdapter) UpdateTimings
+
+```go
+func (a *CommandAdapter) UpdateTimings(timings service.TimingInfo)
+```
 
 #### type Config
 
@@ -704,6 +476,32 @@ type EnableDebugger interface {
 }
 ```
 
+
+#### type Events
+
+```go
+type Events struct {
+}
+```
+
+
+#### func (*Events) Init
+
+```go
+func (e *Events) Init()
+```
+
+#### func (*Events) OnSelect
+
+```go
+func (e *Events) OnSelect(f func(p path.Path)) gxui.EventSubscription
+```
+
+#### func (*Events) Select
+
+```go
+func (e *Events) Select(p path.Path)
+```
 
 #### type F32
 
@@ -803,7 +601,7 @@ func (a *FilmStripAdapter) Count() int
 #### func (*FilmStripAdapter) Create
 
 ```go
-func (a *FilmStripAdapter) Create(t gxui.Theme, index int) gxui.Control
+func (a *FilmStripAdapter) Create(theme gxui.Theme, index int) gxui.Control
 ```
 
 #### func (*FilmStripAdapter) ItemAt
@@ -818,24 +616,23 @@ func (a *FilmStripAdapter) ItemAt(index int) gxui.AdapterItem
 func (a *FilmStripAdapter) ItemIndex(item gxui.AdapterItem) int
 ```
 
-#### func (*FilmStripAdapter) SetAtoms
-
-```go
-func (a *FilmStripAdapter) SetAtoms(atoms []atom.Atom)
-```
-
 #### func (*FilmStripAdapter) Size
 
 ```go
 func (a *FilmStripAdapter) Size(theme gxui.Theme) math.Size
 ```
 
-#### type ImageCallback
+#### func (*FilmStripAdapter) UpdateDevice
 
 ```go
-type ImageCallback func(gxui.Texture)
+func (a *FilmStripAdapter) UpdateDevice(device *path.Device)
 ```
 
+#### func (*FilmStripAdapter) UpdateFrames
+
+```go
+func (a *FilmStripAdapter) UpdateFrames(capture *path.Capture, frames []uint64)
+```
 
 #### type InvokationHandler
 
@@ -938,7 +735,7 @@ func (a *MemoryAdapter) Count() int
 #### func (*MemoryAdapter) Create
 
 ```go
-func (a *MemoryAdapter) Create(t gxui.Theme, index int) gxui.Control
+func (a *MemoryAdapter) Create(theme gxui.Theme, index int) gxui.Control
 ```
 
 #### func (*MemoryAdapter) IndexOfAddress
@@ -959,12 +756,6 @@ func (a *MemoryAdapter) ItemAt(index int) gxui.AdapterItem
 func (a *MemoryAdapter) ItemIndex(item gxui.AdapterItem) int
 ```
 
-#### func (*MemoryAdapter) SetData
-
-```go
-func (a *MemoryAdapter) SetData(atomID atom.ID, baseAddress uint64)
-```
-
 #### func (*MemoryAdapter) SetDataType
 
 ```go
@@ -977,12 +768,11 @@ func (a *MemoryAdapter) SetDataType(dataType DataType)
 func (a *MemoryAdapter) Size(theme gxui.Theme) math.Size
 ```
 
-#### type MemoryCallback
+#### func (*MemoryAdapter) Update
 
 ```go
-type MemoryCallback func(service.MemoryInfo)
+func (a *MemoryAdapter) Update(after *path.Atom, baseAddress uint64)
 ```
-
 
 #### type MemoryImageAdapter
 
@@ -1017,7 +807,7 @@ func (a *MemoryImageAdapter) Count() int
 #### func (*MemoryImageAdapter) Create
 
 ```go
-func (a *MemoryImageAdapter) Create(t gxui.Theme, index int) gxui.Control
+func (a *MemoryImageAdapter) Create(theme gxui.Theme, index int) gxui.Control
 ```
 
 #### func (*MemoryImageAdapter) IndexOfAddress
@@ -1038,12 +828,6 @@ func (a *MemoryImageAdapter) ItemAt(index int) gxui.AdapterItem
 func (a *MemoryImageAdapter) ItemIndex(item gxui.AdapterItem) int
 ```
 
-#### func (*MemoryImageAdapter) SetData
-
-```go
-func (a *MemoryImageAdapter) SetData(atomID atom.ID, baseAddress uint64)
-```
-
 #### func (*MemoryImageAdapter) SetPixelType
 
 ```go
@@ -1054,6 +838,12 @@ func (a *MemoryImageAdapter) SetPixelType(pixelType PixelType)
 
 ```go
 func (a *MemoryImageAdapter) Size(theme gxui.Theme) math.Size
+```
+
+#### func (*MemoryImageAdapter) Update
+
+```go
+func (a *MemoryImageAdapter) Update(after *path.Atom, baseAddress uint64)
 ```
 
 #### type MemoryRequestCallback
@@ -1170,6 +960,12 @@ func (a *ReportAdapter) ItemIndex(item gxui.AdapterItem) int
 
 ```go
 func (a *ReportAdapter) Size(theme gxui.Theme) math.Size
+```
+
+#### func (*ReportAdapter) Update
+
+```go
+func (a *ReportAdapter) Update(report service.Report)
 ```
 
 #### type S16
@@ -1342,6 +1138,12 @@ func NewStateAdapter(appCtx *ApplicationContext) *StateAdapter
 func (r *StateAdapter) Size(theme gxui.Theme) math.Size
 ```
 
+#### func (*StateAdapter) Update
+
+```go
+func (a *StateAdapter) Update(value interface{}, path *path.State)
+```
+
 #### type StateAdapterNode
 
 ```go
@@ -1412,12 +1214,6 @@ type TimingData struct {
 }
 ```
 
-
-#### func  NewTimingData
-
-```go
-func NewTimingData(t service.TimingInfo) TimingData
-```
 
 #### func (TimingData) BarBrush
 

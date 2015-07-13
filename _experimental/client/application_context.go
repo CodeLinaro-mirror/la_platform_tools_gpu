@@ -16,7 +16,6 @@ package client
 
 import (
 	"fmt"
-	"image"
 	"net"
 	"os"
 	"os/exec"
@@ -24,10 +23,8 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -43,44 +40,17 @@ var (
 
 type ApplicationContext struct {
 	Config
-	theme               gxui.Theme
-	monospace           gxui.Font
-	logger              *log.Splitter
-	rpc                 service.Client
-	captureID           service.CaptureId
-	capture             service.Capture
-	dropDownOverlay     gxui.BubbleOverlay
-	toolTipOverlay      gxui.BubbleOverlay
-	toolTipController   *gxui.ToolTipController
-	onAtomSelected      gxui.Event
-	onObjectSelected    gxui.Event
-	onPointerSelected   gxui.Event
-	onColorBufferUpdate gxui.Event
-	onDepthBufferUpdate gxui.Event
-	onRequestReplay     gxui.Event
-	onWireframeChanged  gxui.Event
-	onDeviceSelected    gxui.Event
-	onAtomsUpdated      gxui.Event
-	onHierarchyUpdated  gxui.Event
-	onReportUpdated     gxui.Event
-	onStateUpdated      gxui.Event
-	onTimingInfoUpdated gxui.Event
-	atoms               []atom.Atom
-	state               *schema.Object
-	hierarchy           atom.Group
-	report              service.Report
-	selectedAtomID      atom.ID
-	selectedPointer     memory.Pointer
-	selectedObject      interface{}
-	selectedDevice      service.DeviceId
-	wireframe           bool
-	colorBuffer         gxui.Texture
-	depthBuffer         gxui.Texture
-	timingInfo          service.TimingInfo
-	timingPerCommand    map[uint64]uint64
-	namespace           *registry.Namespace // The namespace to use in coders
-	schemaNamespace     *registry.Namespace // The namespace that holds the schema classes
-	constants           map[string]schema.ConstantSet
+	theme             gxui.Theme
+	monospace         gxui.Font
+	logger            *log.Splitter
+	rpc               rpc
+	dropDownOverlay   gxui.BubbleOverlay
+	toolTipOverlay    gxui.BubbleOverlay
+	toolTipController *gxui.ToolTipController
+	events            Events
+	atoms             []atom.Atom
+	device            service.DeviceId
+	constants         map[string]schema.ConstantSet
 }
 
 func connectServer(config Config) (net.Conn, error) {
@@ -113,7 +83,7 @@ func connectServer(config Config) (net.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
-	// We are running a server,  shut it down when we are done
+	// We are running a server, shut it down when we are done
 	atexit.Register(func() {
 		proc.Kill()
 		proc.Wait()
@@ -137,408 +107,48 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	if err != nil {
 		return nil, err
 	}
-	// Start the client with the global namespace. This will be replaced when
-	// the schema has been fetched from the server.
-	rpc := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, mtu, nil), nil)
 
 	monospace, _ := theme.Driver().CreateFont(gxfont.Monospace, 12)
 
 	appCtx := &ApplicationContext{
-		Config:              config,
-		theme:               theme,
-		monospace:           monospace,
-		logger:              &log.Splitter{},
-		rpc:                 rpc,
-		dropDownOverlay:     dropDownOverlay,
-		toolTipOverlay:      toolTipOverlay,
-		toolTipController:   gxui.CreateToolTipController(toolTipOverlay, theme.Driver()),
-		onAtomSelected:      gxui.CreateEvent(func() {}),
-		onObjectSelected:    gxui.CreateEvent(func() {}),
-		onPointerSelected:   gxui.CreateEvent(func() {}),
-		onColorBufferUpdate: gxui.CreateEvent(func() {}),
-		onDepthBufferUpdate: gxui.CreateEvent(func() {}),
-		onRequestReplay:     gxui.CreateEvent(func() {}),
-		onWireframeChanged:  gxui.CreateEvent(func() {}),
-		onDeviceSelected:    gxui.CreateEvent(func() {}),
-		onAtomsUpdated:      gxui.CreateEvent(func() {}),
-		onHierarchyUpdated:  gxui.CreateEvent(func() {}),
-		onReportUpdated:     gxui.CreateEvent(func() {}),
-		onStateUpdated:      gxui.CreateEvent(func() {}),
-		onTimingInfoUpdated: gxui.CreateEvent(func() {}),
-		selectedAtomID:      InvalidAtomID,
-		constants:           map[string]schema.ConstantSet{},
+		Config:            config,
+		theme:             theme,
+		monospace:         monospace,
+		logger:            &log.Splitter{},
+		dropDownOverlay:   dropDownOverlay,
+		toolTipOverlay:    toolTipOverlay,
+		toolTipController: gxui.CreateToolTipController(toolTipOverlay, theme.Driver()),
+		constants:         map[string]schema.ConstantSet{},
 	}
-	appCtx.schemaNamespace = registry.NewNamespace()
-	// make the decoder namespace try the global namespace before the schema one
-	appCtx.namespace = registry.NewNamespace(registry.Global, appCtx.schemaNamespace)
+
+	client := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, mtu, nil), nil)
+	appCtx.rpc.init(log.Enter(appCtx.logger, "rpc"), client, appCtx.constants)
+	appCtx.events.Init()
 	return appCtx, nil
 }
 
-func (c *ApplicationContext) UpdateSchema() {
-	go func() {
-		s, err := c.rpc.GetSchema(c.logger)
-		if err != nil {
-			log.Errorf(c.logger, "Error resolving schema: %v", err)
-			return
-		}
-		log.Infof(c.logger, "Schema with %d classes, %d constant sets", len(s.Classes), len(s.Constants))
-		atoms := 0
-		for _, class := range s.Classes {
-			// Find the atom metadata, if present
-			if meta := atom.FindMetadata(class); meta != nil {
-				atoms++
-				c.schemaNamespace.Add(NewAtomClass(class, meta))
-			} else {
-				c.schemaNamespace.Add(class)
-			}
-		}
-		log.Infof(c.logger, "Schema with %d atoms", atoms)
-		for _, s := range s.Constants {
-			c.constants[s.Type.String()] = s
-		}
-		// Replace the current RPC
-		c.rpc = service.NewClient(c.rpc.Multiplexer(), c.namespace)
-	}()
+// Run enqueues f to be called on the UI go-routine.
+// Run can return before f is called.
+func (c *ApplicationContext) Run(f func()) bool {
+	return c.theme.Driver().Call(f)
 }
 
-func (c *ApplicationContext) Run(f func()) {
-	c.theme.Driver().Call(f)
+// RunSync calls f on the UI go-routine, blocking until f has returned.
+func (c *ApplicationContext) RunSync(f func()) bool {
+	return c.theme.Driver().CallSync(f)
 }
 
-func (c *ApplicationContext) SelectAtom(id atom.ID) {
-	if c.selectedAtomID != id {
-		log.Infof(c.logger, "SelectAtom(%v)", id)
-		c.selectedAtomID = id
-		c.onAtomSelected.Fire()
-	}
-}
-
-func (c *ApplicationContext) SelectPointer(ptr memory.Pointer) {
-	if c.selectedPointer != ptr {
-		log.Infof(c.logger, "SelectPointer(%v)", ptr)
-		c.selectedPointer = ptr
-		c.onPointerSelected.Fire()
-	}
-}
-
-func (c *ApplicationContext) SelectObject(object interface{}) {
-	if c.selectedObject != object {
-		log.Infof(c.logger, "SelectObject(%v)", object)
-		c.selectedObject = object
-		c.onObjectSelected.Fire()
-	}
-}
-
-func (c *ApplicationContext) SelectDevice(device service.DeviceId) {
-	if c.selectedDevice != device {
-		log.Infof(c.logger, "SelectDevice(%v)", device)
-		c.selectedDevice = device
-		c.onDeviceSelected.Fire()
-	}
-}
-
-func (c *ApplicationContext) SetWireframe(value bool) {
-	if c.wireframe != value {
-		log.Infof(c.logger, "SetWireframe(%v)", value)
-		c.wireframe = value
-		c.onWireframeChanged.Fire()
-	}
-}
-
-func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelected bool) {
-	if captureID == c.captureID {
-		return
-	}
-
-	l := log.Enter(log.Fork(c.logger), "LoadCapture")
-	log.Infof(l, "(capture: %v)", captureID)
-
-	go func() {
-		capture, err := c.rpc.Get(captureID.Path(), l)
-		if err != nil {
-			log.Errorf(l, "Error getting capture: %v", err)
-			return
-		}
-
-		stream, err := c.rpc.Get(captureID.Path().Atoms(), l)
-		if err != nil {
-			log.Errorf(l, "Error getting atom stream: %v", err)
-			return
-		}
-
-		c.Run(func() {
-			c.captureID = captureID
-			c.capture = *capture.(*service.Capture)
-			c.atoms = stream.(*service.AtomStream).Atoms
-			if resetSelected {
-				c.selectedAtomID = InvalidAtomID
-				c.selectedPointer = memory.Pointer{}
-				c.selectedObject = nil
-			}
-			c.onAtomsUpdated.Fire()
-			c.RequestReplay()
-			log.Infof(l, "Capture '%s' loaded: %d atoms", c.capture.GetName(), len(c.atoms))
-		})
-	}()
-}
-
-func (c *ApplicationContext) LoadHierarchy() {
-	captureID := c.captureID
-	l := log.Enter(log.Fork(c.logger), "LoadHierarchy")
-	log.Infof(l, "(capture: %v)", captureID)
-
-	go func() {
-		hierarchy, err := c.rpc.Get(captureID.Path().Hierarchy(), l)
-		if err != nil {
-			return
-		}
-		c.Run(func() {
-			c.hierarchy = hierarchy.(*service.Hierarchy).Root
-			c.onHierarchyUpdated.Fire()
-			log.Infof(l, "Hierarchy loaded")
-		})
-	}()
-}
-
-func (c *ApplicationContext) LoadReport() {
-	captureID := c.captureID
-	l := log.Enter(log.Fork(c.logger), "LoadReport")
-	log.Infof(l, "(capture: %v)", captureID)
-
-	go func() {
-		report, err := c.rpc.Get(c.captureID.Path().Report(), l)
-		if err != nil {
-			return
-		}
-		c.Run(func() {
-			c.report = *report.(*service.Report)
-			c.onReportUpdated.Fire()
-			log.Infof(l, "Report loaded")
-		})
-	}()
-}
-
-func (c *ApplicationContext) LoadState() {
-	captureID := c.captureID
-	after := c.selectedAtomID
-	l := log.Enter(log.Fork(c.logger), "LoadState")
-
-	go func() {
-		path := captureID.Path().Atoms().Index(uint64(after)).StateAfter()
-		state, err := c.rpc.Get(path, l)
-		if err != nil {
-			log.E(l, "%v", err)
-			return
-		}
-		c.Run(func() {
-			c.state = state.(*schema.Object)
-			c.onStateUpdated.Fire()
-		})
-	}()
-}
-
-func (c *ApplicationContext) RequestReplay() {
-	c.onRequestReplay.Fire()
-}
-
-type ImageCallback func(gxui.Texture)
-
-func isClosed(c <-chan struct{}) bool {
-	select {
-	case <-c:
-		return true
-	default:
-		return false
-	}
-}
-
-func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight uint32, callback ImageCallback) chan<- struct{} {
-	l := log.Enter(log.Fork(c.logger), "RequestThumbnail")
-	log.Infof(l, "(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
-
-	cancel := make(chan struct{})
-	device := c.selectedDevice
-	captureID := c.captureID
-	settings := service.RenderSettings{
-		MaxWidth:  maxWidth,
-		MaxHeight: maxHeight,
-		Wireframe: false,
-	}
-
-	if !device.Valid() {
-		log.Warningf(l, "No device selected")
-		return nil
-	}
-
-	go func() {
-		p := captureID.Path().Atoms().Index(uint64(after))
-		imageID, err := c.rpc.GetFramebufferColor(device.Path(), p, settings, l)
-		if err != nil {
-			return
-		}
-		if isClosed(cancel) {
-			log.Infof(l, "Request cancelled")
-			return
-		}
-
-		imageInfo, err := c.rpc.ResolveImageInfo(imageID, l)
-		if err != nil {
-			return
-		}
-		if isClosed(cancel) {
-			log.Infof(l, "Request cancelled")
-			return
-		}
-
-		log.Infof(l, "Image info resolved")
-		imageData, err := c.rpc.ResolveBinary(imageInfo.Data, l)
-		if err != nil {
-			return
-		}
-		if isClosed(cancel) {
-			log.Infof(l, "Request cancelled")
-			return
-		}
-
-		log.Infof(l, "Image %dx%d resolved", imageInfo.Width, imageInfo.Height)
-		if imageInfo.Width > 0 && imageInfo.Height > 0 {
-			img := image.NewRGBA(image.Rect(0, 0, int(imageInfo.Width), int(imageInfo.Height)))
-			img.Pix = imageData
-			c.Run(func() {
-				tex := c.theme.Driver().CreateTexture(img, 1)
-				tex.SetFlipY(true)
-				callback(tex)
-			})
-		}
-	}()
-
-	return cancel
-}
-
-type MemoryCallback func(service.MemoryInfo)
-
-func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint64, callback MemoryCallback) chan<- struct{} {
-	l := log.Enter(log.Fork(c.logger), "RequestMemory")
-	log.Infof(l, "(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
-
-	cancel := make(chan struct{})
-	captureID := c.captureID
-	if c.captureID.Valid() {
-		go func() {
-			rng := memory.Range{Base: base, Size: size}
-			id, err := c.rpc.GetMemoryInfo(captureID.Path().Atoms().Index(uint64(after)), rng, l)
-			if err != nil {
-				return
-			}
-			if isClosed(cancel) {
-				log.Infof(l, "Request cancelled")
-				return
-			}
-
-			info, err := c.rpc.ResolveMemoryInfo(id, l)
-			if err != nil {
-				return
-			}
-			if isClosed(cancel) {
-				log.Infof(l, "Request cancelled")
-				return
-			}
-
-			c.Run(func() {
-				callback(info)
-			})
-		}()
-	}
-	return cancel
-}
-
-func (c *ApplicationContext) Change(p path.Path, v interface{}) {
-	l := log.Enter(c.logger, "Change")
-	log.I(l, "%v -> %v", p, v)
-	p, err := c.rpc.Set(p, v, l)
+// Change modifies the value at p to v, and selects the new path.
+// The call is blocking.
+func (c *ApplicationContext) Change(p path.Path, v interface{}) error {
+	n, err := c.rpc.Change(p, v)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	for _, p := range path.Flatten(p) {
-		switch p := p.(type) {
-		case *path.Capture:
-			c.LoadCapture(service.CaptureId{ID: p.ID}, false)
-
-		case *path.Atom:
-			c.SelectAtom(atom.ID(p.Index))
-		}
+	if p != n {
+		c.events.Select(n)
 	}
-}
 
-func (c *ApplicationContext) Theme() gxui.Theme                          { return c.theme }
-func (c *ApplicationContext) Logger() *log.Splitter                      { return c.logger }
-func (c *ApplicationContext) Rpc() service.RPC                           { return c.rpc }
-func (c *ApplicationContext) DropDownOverlay() gxui.BubbleOverlay        { return c.dropDownOverlay }
-func (c *ApplicationContext) ToolTipOverlay() gxui.BubbleOverlay         { return c.toolTipOverlay }
-func (c *ApplicationContext) ToolTipController() *gxui.ToolTipController { return c.toolTipController }
-func (c *ApplicationContext) Atoms() []atom.Atom                         { return c.atoms }
-func (c *ApplicationContext) Hierarchy() atom.Group                      { return c.hierarchy }
-
-//func (c *ApplicationContext) State() schema.Struct                       { return c.state }
-func (c *ApplicationContext) SelectedAtomID() atom.ID          { return c.selectedAtomID }
-func (c *ApplicationContext) SelectedPointer() memory.Pointer  { return c.selectedPointer }
-func (c *ApplicationContext) SelectedObject() interface{}      { return c.selectedObject }
-func (c *ApplicationContext) SelectedDevice() service.DeviceId { return c.selectedDevice }
-func (c *ApplicationContext) Wireframe() bool                  { return c.wireframe }
-func (c *ApplicationContext) ColorBuffer() gxui.Texture        { return c.colorBuffer }
-func (c *ApplicationContext) DepthBuffer() gxui.Texture        { return c.depthBuffer }
-func (c *ApplicationContext) CaptureID() service.CaptureId     { return c.captureID }
-func (c *ApplicationContext) Capture() service.Capture         { return c.capture }
-
-func (c *ApplicationContext) OnAtomSelected(f func()) gxui.EventSubscription {
-	return c.onAtomSelected.Listen(f)
-}
-
-func (c *ApplicationContext) OnObjectSelected(f func()) gxui.EventSubscription {
-	return c.onObjectSelected.Listen(f)
-}
-
-func (c *ApplicationContext) OnPointerSelected(f func()) gxui.EventSubscription {
-	return c.onPointerSelected.Listen(f)
-}
-
-func (c *ApplicationContext) OnColorBufferUpdate(f func()) gxui.EventSubscription {
-	return c.onColorBufferUpdate.Listen(f)
-}
-
-func (c *ApplicationContext) OnDepthBufferUpdate(f func()) gxui.EventSubscription {
-	return c.onDepthBufferUpdate.Listen(f)
-}
-
-func (c *ApplicationContext) OnRequestReplay(f func()) gxui.EventSubscription {
-	return c.onRequestReplay.Listen(f)
-}
-
-func (c *ApplicationContext) OnWireframeChanged(f func()) gxui.EventSubscription {
-	return c.onWireframeChanged.Listen(f)
-}
-
-func (c *ApplicationContext) OnDeviceSelected(f func()) gxui.EventSubscription {
-	return c.onDeviceSelected.Listen(f)
-}
-
-func (c *ApplicationContext) OnAtomsUpdated(f func()) gxui.EventSubscription {
-	return c.onAtomsUpdated.Listen(f)
-}
-
-func (c *ApplicationContext) OnHierarchyUpdated(f func()) gxui.EventSubscription {
-	return c.onHierarchyUpdated.Listen(f)
-}
-
-func (c *ApplicationContext) OnReportUpdated(f func()) gxui.EventSubscription {
-	return c.onReportUpdated.Listen(f)
-}
-
-func (c *ApplicationContext) OnStateUpdated(f func()) gxui.EventSubscription {
-	return c.onStateUpdated.Listen(f)
-}
-
-func (c *ApplicationContext) OnTimingInfoUpdated(f func()) gxui.EventSubscription {
-	return c.onTimingInfoUpdated.Listen(f)
+	return nil
 }

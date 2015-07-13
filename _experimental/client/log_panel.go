@@ -19,20 +19,17 @@ import (
 )
 
 func CreateLogPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-	logger := appCtx.Logger()
+	adapter := CreateLogAdapter(1024, appCtx.Run)
+	appCtx.logger.Add(adapter.Logger())
 
-	adapter := CreateLogAdapter(1024, appCtx.Theme().Driver().Call)
-	logger.Add(adapter.Logger())
-
-	clear := theme.CreateButton()
+	clear := appCtx.theme.CreateButton()
 	clear.SetText("Clear")
 	clear.OnClick(func(gxui.MouseEvent) { adapter.Clear() })
 
-	list := theme.CreateList()
+	list := appCtx.theme.CreateList()
 	list.SetAdapter(adapter)
 
-	layout := theme.CreateLinearLayout()
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.TopToBottom)
 	layout.AddChild(clear)
 	layout.AddChild(list)

@@ -16,8 +16,9 @@ package client
 
 import (
 	"android.googlesource.com/platform/tools/gpu/_experimental/client/charts"
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -28,38 +29,87 @@ func CreateProfilerPanel(appCtx *ApplicationContext) gxui.Control {
 	gridlines := charts.DefaultGridlines
 	gridlines.Format = func(t int) string { return μs(t).String() }
 	gridlines.Multiples = []int{20, 50}
-	chart := charts.NewBarChart(appCtx.Theme())
+	chart := charts.NewBarChart(appCtx.theme)
 	chart.SetOrientation(gxui.Horizontal)
 	chart.SetBackgroundBrush(gxui.CreateBrush(gxui.Gray10))
 	chart.SetGridlines(gridlines)
-	chart.OnBarDoubleClicked(func(idx int, ev gxui.MouseEvent) {
-		frameId := appCtx.timingInfo.PerFrame[idx].ToAtomId
-		appCtx.SelectAtom(atom.ID(frameId))
+
+	var device *path.Device
+	var capture *path.Capture
+
+	t := task.New()
+	update := func() {
+		if device != nil && capture != nil {
+			t.Run(updateProfilerPanel{appCtx, device, capture, chart})
+		}
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if d := path.FindDevice(p); d != nil && !path.Equal(d, device) {
+			device = d
+			update()
+		}
+		if c := path.FindCapture(p); c != nil && !path.Equal(c, capture) {
+			capture = c
+			update()
+		}
 	})
 
-	appCtx.OnTimingInfoUpdated(func() {
-		chart.SetData(NewTimingData(appCtx.timingInfo))
+	chart.OnBarDoubleClicked(func(idx int, ev gxui.MouseEvent) {
+		data := chart.Data().(TimingData)
+		atomIndex := data.timings.PerFrame[idx].ToAtomId
+		appCtx.events.Select(capture.Atoms().Index(atomIndex))
 	})
 
 	return chart
 }
 
+type updateProfilerPanel struct {
+	context *ApplicationContext
+	device  *path.Device
+	capture *path.Capture
+	chart   *charts.BarChart
+}
+
+func (t updateProfilerPanel) Run(c task.CancelSignal) {
+	flags := service.TimingFlagsTimingGPU |
+		service.TimingFlagsTimingPerFrame
+	timings, err := t.context.rpc.LoadTiming(t.device, t.capture, flags)
+	if err == nil {
+		c.Check()
+		μsMin, μsMax := math.MaxInt, math.MinInt
+		for _, timer := range timings.PerFrame {
+			μs := int(timer.Nanoseconds / 1e3)
+			μsMin = math.Min(μsMin, μs)
+			μsMax = math.Max(μsMax, μs)
+		}
+		data := TimingData{
+			timings: timings,
+			μsMin:   μsMin,
+			μsMax:   μsMax,
+		}
+		c.Check()
+		t.context.Run(func() { t.chart.SetData(data) })
+	}
+}
+
 type TimingData struct {
-	frames   []int
-	min, max int
+	timings      service.TimingInfo
+	μsMin, μsMax int
 }
 
 func (d TimingData) Count() int {
-	return len(d.frames)
+	return len(d.timings.PerFrame)
 }
 
 func (d TimingData) Values(i int) []int {
-	return []int{d.frames[i]}
+	μs := int(d.timings.PerFrame[i].Nanoseconds / 1e3)
+	return []int{μs}
 }
 
 func (d TimingData) Limits() (int, int) {
-	rng := d.max - d.min
-	return d.min - rng/10, d.max + rng/10
+	rng := d.μsMax - d.μsMin
+	return d.μsMin - rng/10, d.μsMax + rng/10
 }
 
 func (d TimingData) BarBrush(bar int, stack int, highlighted bool) gxui.Brush {
@@ -79,20 +129,4 @@ func (d TimingData) LabelBackgroundBrush(bar int, stack int) gxui.Brush {
 
 func (d TimingData) LabelTextColor(bar int, stack int) gxui.Color {
 	return gxui.Gray80
-}
-
-func NewTimingData(t service.TimingInfo) TimingData {
-	frames := []int{}
-	min, max := math.MaxInt, math.MinInt
-	for _, timer := range t.PerFrame {
-		μs := int(timer.Nanoseconds / 1e3)
-		frames = append(frames, μs)
-		min = math.Min(min, μs)
-		max = math.Max(max, μs)
-	}
-	return TimingData{
-		frames: frames,
-		min:    min,
-		max:    max,
-	}
 }

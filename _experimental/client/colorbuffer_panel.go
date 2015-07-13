@@ -17,38 +17,33 @@ package client
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
 
 func AddTextToolTip(appCtx *ApplicationContext, target gxui.Control, text string) {
-	appCtx.ToolTipController().AddToolTip(target, 0.7, func(p math.Point) gxui.Control {
-		label := appCtx.Theme().CreateLabel()
+	appCtx.toolTipController.AddToolTip(target, 0.7, func(p math.Point) gxui.Control {
+		label := appCtx.theme.CreateLabel()
 		label.SetText(text)
 		return label
 	})
 }
 
-func CreateWireframeButton(appCtx *ApplicationContext) gxui.Button {
-	theme := appCtx.Theme()
-
-	canvas := theme.Driver().CreateCanvas(math.Size{W: 15, H: 15})
+func CreateWireframeButton(appCtx *ApplicationContext, changed func(bool)) gxui.Button {
+	canvas := appCtx.theme.Driver().CreateCanvas(math.Size{W: 15, H: 15})
 	canvas.DrawPolygon(wireframeIconPoly, gxui.TransparentPen, gxui.CreateBrush(gxui.Gray80))
 	canvas.Complete()
 
-	icon := theme.CreateImage()
+	icon := appCtx.theme.CreateImage()
 	icon.SetCanvas(canvas)
 
-	button := theme.CreateButton()
+	button := appCtx.theme.CreateButton()
 	button.AddChild(icon)
 	button.SetType(gxui.ToggleButton)
-	button.OnClick(func(gxui.MouseEvent) {
-		appCtx.SetWireframe(button.IsChecked())
-		appCtx.RequestReplay()
-	})
-	appCtx.OnWireframeChanged(func() {
-		button.SetChecked(appCtx.Wireframe())
-	})
+	button.OnClick(func(gxui.MouseEvent) { changed(button.IsChecked()) })
 	button.SetPadding(math.CreateSpacing(4))
 
 	AddTextToolTip(appCtx, button, "Wireframe")
@@ -57,13 +52,13 @@ func CreateWireframeButton(appCtx *ApplicationContext) gxui.Button {
 }
 
 func CreateColorBufferPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
+	theme := appCtx.theme
 
 	image := theme.CreateImage()
 	image.SetScalingMode(gxui.ScalingExpandGreedy)
 	image.SetAspectMode(gxui.AspectCorrectLetterbox)
 
-	appCtx.ToolTipController().AddToolTip(image, 1.0, func(p math.Point) gxui.Control {
+	appCtx.toolTipController.AddToolTip(image, 1.0, func(p math.Point) gxui.Control {
 		tex := image.Texture()
 		if tex == nil {
 			return nil
@@ -110,14 +105,65 @@ func CreateColorBufferPanel(appCtx *ApplicationContext) gxui.Control {
 		return layout
 	})
 
-	appCtx.OnColorBufferUpdate(func() {
-		image.SetTexture(appCtx.ColorBuffer())
+	var device *path.Device
+	var after *path.Atom
+	var wireframe bool
+
+	t := task.New()
+	update := func() {
+		if device != nil && after != nil {
+			t.Run(updateColorBuffer{appCtx, device, after, wireframe, image})
+		}
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if d := path.FindDevice(p); d != nil && !path.Equal(d, device) {
+			device = d
+			update()
+		}
+		if a := path.FindAtom(p); a != nil && !path.Equal(a, after) {
+			after = a
+			update()
+		}
+		if s, a := path.FindAtomSlice(p); s != nil {
+			if i := a.Index(s.End - 1); !path.Equal(i, after) {
+				after = i
+				update()
+			}
+		}
 	})
+
+	wireframeChanged := func(w bool) {
+		wireframe = w
+		update()
+	}
 
 	layout := theme.CreateLinearLayout()
 	layout.SetDirection(gxui.TopToBottom)
-	layout.AddChild(CreateWireframeButton(appCtx))
+	layout.AddChild(CreateWireframeButton(appCtx, wireframeChanged))
 	layout.AddChild(image)
 
 	return layout
+}
+
+type updateColorBuffer struct {
+	context   *ApplicationContext
+	device    *path.Device
+	after     *path.Atom
+	wireframe bool
+	image     gxui.Image
+}
+
+func (t updateColorBuffer) Run(c task.CancelSignal) {
+	settings := service.RenderSettings{
+		MaxWidth:  0xffff,
+		MaxHeight: 0xffff,
+		Wireframe: t.wireframe,
+	}
+	if w, h, d, err := t.context.rpc.RequestColorBuffer(t.device, t.after, settings); err == nil {
+		c.Check()
+		t.context.Run(func() {
+			t.image.SetTexture(NewColorTexture(t.context.theme.Driver(), w, h, d))
+		})
+	}
 }

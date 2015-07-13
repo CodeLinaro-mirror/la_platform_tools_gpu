@@ -28,13 +28,11 @@ import (
 const kStateAdapterNodeHeight = 18
 
 func createControls(appCtx *ApplicationContext, name string, value interface{}, path path.Path) gxui.Control {
-	theme := appCtx.Theme()
-
-	layout := theme.CreateLinearLayout()
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
 	addLabel := func(format string, args ...interface{}) gxui.Label {
-		label := theme.CreateLabel()
+		label := appCtx.theme.CreateLabel()
 		label.SetText(fmt.Sprintf(format, args...))
 		label.SetMargin(math.ZeroSpacing)
 		label.SetMultiline(false)
@@ -51,7 +49,7 @@ func createControls(appCtx *ApplicationContext, name string, value interface{}, 
 	//	}
 
 	label := addLabel("%s: ", name)
-	appCtx.ToolTipController().AddToolTip(label, 0.7, func(math.Point) gxui.Control {
+	appCtx.toolTipController.AddToolTip(label, 0.7, func(math.Point) gxui.Control {
 		return CreateLabel(appCtx.theme, path.Path(), gxui.White, true)
 	})
 
@@ -108,6 +106,7 @@ func (n *StateAdapterNode) add(name string, value interface{}, path path.Value) 
 }
 
 func (n *StateAdapterNode) init() {
+	n.children = nil
 	if v, ok := n.value.(*schema.Object); ok {
 		for i := range v.Fields {
 			name := v.Type.Fields[i].Declared
@@ -182,13 +181,14 @@ func (r *StateAdapter) Size(theme gxui.Theme) math.Size {
 }
 
 func NewStateAdapter(appCtx *ApplicationContext) *StateAdapter {
-	a := &StateAdapter{
-		StateAdapterNode: StateAdapterNode{
-			appCtx: appCtx,
-			path:   appCtx.CaptureID().Path().Atoms().Index(uint64(appCtx.SelectedAtomID())).StateAfter(),
-			value:  appCtx.state,
-		},
+	return &StateAdapter{
+		StateAdapterNode: StateAdapterNode{appCtx: appCtx},
 	}
+}
+
+func (a *StateAdapter) Update(value interface{}, path *path.State) {
+	a.value = value
+	a.path = path
 	a.init()
-	return a
+	a.DataReplaced()
 }

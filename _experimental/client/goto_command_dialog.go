@@ -17,34 +17,32 @@ package client
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 )
 
-func CreateGotoCommandDialog(appCtx *ApplicationContext) gxui.Window {
-	theme := appCtx.Theme()
-
-	label := theme.CreateLabel()
+func CreateGotoCommandDialog(appCtx *ApplicationContext, atoms *path.Atoms) gxui.Window {
+	label := appCtx.theme.CreateLabel()
 	label.SetText("Goto command:")
 
-	textbox := theme.CreateTextBox()
-	textbox.SetText(fmt.Sprintf("%v", appCtx.SelectedAtomID()))
+	textbox := appCtx.theme.CreateTextBox()
+	// textbox.SetText(fmt.Sprintf("%v", appCtx.SelectedAtomID())) // TODO
 	textbox.SelectAll()
 
-	layout := theme.CreateLinearLayout()
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 	layout.AddChild(label)
 	layout.AddChild(textbox)
 
-	wnd := theme.CreateWindow(200, 30, "Goto Command")
+	wnd := appCtx.theme.CreateWindow(200, 30, "Goto Command")
 	wnd.AddChild(layout)
 
 	wnd.OnKeyDown(func(ev gxui.KeyboardEvent) {
 		if ev.Key == gxui.KeyEnter {
-			var atomID atom.ID
-			_, err := fmt.Sscanf(textbox.Text(), "%d", &atomID)
+			var index uint64
+			_, err := fmt.Sscanf(textbox.Text(), "%d", &index)
 			if err == nil {
-				appCtx.SelectAtom(atomID)
+				appCtx.events.Select(atoms.Index(index))
 				wnd.Close()
 			}
 		}

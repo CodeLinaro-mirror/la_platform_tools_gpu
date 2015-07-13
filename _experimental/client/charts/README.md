@@ -72,6 +72,12 @@ func NewBarChart(theme gxui.Theme) *BarChart
 func (c *BarChart) Click(e gxui.MouseEvent) bool
 ```
 
+#### func (*BarChart) Data
+
+```go
+func (c *BarChart) Data() BarChartData
+```
+
 #### func (*BarChart) DesiredSize
 
 ```go

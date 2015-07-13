@@ -17,24 +17,22 @@ package client
 import (
 	"time"
 
+	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 )
 
 func CreateCommandsPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
 	adapter := CreateCommandAdapter(appCtx)
 
-	tree := theme.CreateTree()
+	tree := appCtx.theme.CreateTree()
 	tree.SetAdapter(adapter)
 
 	timer := (*time.Timer)(nil)
 	selectSelection := func() {
 		appCtx.Run(func() {
-			r := adapter.AtomRange(tree.Selected())
-			if !r.Contains(appCtx.SelectedAtomID()) {
-				appCtx.SelectAtom(r.Last())
-			}
+			appCtx.events.Select(adapter.Path(tree.Selected()))
 		})
 	}
 
@@ -47,24 +45,73 @@ func CreateCommandsPanel(appCtx *ApplicationContext) gxui.Control {
 		}
 	})
 
-	appCtx.OnHierarchyUpdated(func() {
-		adapter.SetRoot(appCtx.Hierarchy())
-	})
-	appCtx.OnTimingInfoUpdated(func() {
-		adapter.SetRoot(appCtx.Hierarchy())
-	})
-	appCtx.OnAtomSelected(func() {
-		r := adapter.AtomRange(tree.Selected())
-		if appCtx.SelectedAtomID() != r.Last() {
-			tree.Select(adapter.Item(appCtx.SelectedAtomID()))
+	var device *path.Device
+	var capture *path.Capture
+	t := task.New()
+	update := func() {
+		if device != nil && capture != nil {
+			t.Run(updateCommandAdapter{appCtx, device, capture, adapter})
+		}
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if d := path.FindDevice(p); d != nil && !path.Equal(d, device) {
+			device = d
+			update()
+		}
+		if c := path.FindCapture(p); c != nil && !path.Equal(c, capture) {
+			capture = c
+			update()
+		}
+		if a := path.FindAtom(p); a != nil {
+			if item := adapter.Item(a); item != nil {
+				tree.Select(item)
+			}
 		}
 	})
 
 	tree.OnKeyPress(func(ev gxui.KeyboardEvent) {
 		if ev.Key == gxui.KeyG && ev.Modifier&gxui.ModControl != 0 {
-			CreateGotoCommandDialog(appCtx)
+			CreateGotoCommandDialog(appCtx, capture.Atoms())
 		}
 	})
 
 	return tree
+}
+
+type updateCommandAdapter struct {
+	context *ApplicationContext
+	device  *path.Device
+	capture *path.Capture
+	adapter *CommandAdapter
+}
+
+func (t updateCommandAdapter) Run(c task.CancelSignal) {
+	atoms, err := t.context.rpc.LoadAtoms(t.capture.Atoms())
+	if err != nil {
+		return
+	}
+	c.Check()
+	hierarchy, err := t.context.rpc.LoadHierarchy(t.capture.Hierarchy())
+	if err != nil {
+		return
+	}
+	c.Check()
+	t.context.RunSync(func() {
+		t.adapter.UpdateDevice(t.device)
+		t.adapter.UpdateTimings(service.TimingInfo{})
+		t.adapter.UpdateAtoms(t.capture, atoms, hierarchy)
+	})
+	flags := service.TimingFlagsTimingCPU |
+		service.TimingFlagsTimingPerCommand |
+		service.TimingFlagsTimingPerDrawCall |
+		service.TimingFlagsTimingPerFrame
+	timings, err := t.context.rpc.LoadTiming(t.device, t.capture, flags)
+	if err != nil {
+		return
+	}
+	c.Check()
+	t.context.Run(func() {
+		t.adapter.UpdateTimings(timings)
+	})
 }

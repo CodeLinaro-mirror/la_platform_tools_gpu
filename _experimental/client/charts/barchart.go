@@ -86,6 +86,10 @@ func (c *BarChart) SetData(data BarChartData) {
 	c.resetZoom()
 }
 
+func (c *BarChart) Data() BarChartData {
+	return c.data
+}
+
 func (c *BarChart) Orientation() gxui.Orientation {
 	return c.orientation
 }
