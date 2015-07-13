@@ -1786,11 +1786,15 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, int32_t location, int32
         observe(observations.mReads);
         mImports.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written,
                                    vector_count, type, name);
-        int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
-        write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+        if (buffer_bytes_written != nullptr) {
+            int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
+            write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+            write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
+        } else {
+            write(slice(name, 0, 256));
+        }
         write(slice(vector_count, 0, 1), 0, (int32_t)(slice(vector_count, 0, 1)[0]));
         write(slice(type, 0, 1), 0, (uint32_t)(slice(type, 0, 1)[0]));
-        write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
     observe(observations.mWrites);
 
@@ -1818,11 +1822,15 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
         observe(observations.mReads);
         mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written,
                                     vector_count, type, name);
-        int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
-        write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+        if (buffer_bytes_written != nullptr) {
+            int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
+            write(slice(buffer_bytes_written, 0, 1), 0, l_l);
+            write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
+        } else {
+            write(slice(name, 0, 256));
+        }
         write(slice(vector_count, 0, 1), 0, (int32_t)(slice(vector_count, 0, 1)[0]));
         write(slice(type, 0, 1), 0, (uint32_t)(slice(type, 0, 1)[0]));
-        write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
     observe(observations.mWrites);
 
