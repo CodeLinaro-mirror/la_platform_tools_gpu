@@ -15,29 +15,64 @@
 package client
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 )
 
 func CreateFramesPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
 	adapter := CreateFilmStripAdapter(appCtx)
 
-	list := theme.CreateList()
+	list := appCtx.theme.CreateList()
 	list.SetAdapter(adapter)
 	list.SetOrientation(gxui.Horizontal)
-	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		id := item.(atom.ID)
-		if id != appCtx.SelectedAtomID() {
-			appCtx.SelectAtom(id)
+
+	var capture *path.Capture
+	var device *path.Device
+
+	t := task.New()
+	update := func() {
+		t.Run(updateFilmStripAdapter{appCtx, capture, adapter})
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if c := path.FindCapture(p); c != nil && !path.Equal(c, capture) {
+			capture = c
+			update()
+		}
+		if d := path.FindDevice(p); d != nil && !path.Equal(d, device) {
+			device = d
+			adapter.UpdateDevice(d)
 		}
 	})
-	appCtx.OnAtomSelected(func() {
-		list.Select(appCtx.SelectedAtomID())
+
+	list.OnSelectionChanged(func(item gxui.AdapterItem) {
+		appCtx.events.Select(capture.Atoms().Index(item.(uint64)))
 	})
-	appCtx.OnAtomsUpdated(func() {
-		adapter.SetAtoms(appCtx.Atoms())
-	})
+
 	return list
+}
+
+type updateFilmStripAdapter struct {
+	context *ApplicationContext
+	capture *path.Capture
+	adapter *FilmStripAdapter
+}
+
+func (t updateFilmStripAdapter) Run(c task.CancelSignal) {
+	atoms, err := t.context.rpc.LoadAtoms(t.capture.Atoms())
+	if err != nil {
+		return
+	}
+	c.Check()
+	frames := []uint64{}
+	for i, t := range atoms {
+		if t.Flags().IsEndOfFrame() {
+			frames = append(frames, uint64(i))
+		}
+	}
+	c.Check()
+	t.context.Run(func() {
+		t.adapter.UpdateFrames(t.capture, frames)
+	})
 }

@@ -15,16 +15,54 @@
 package client
 
 import (
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 )
 
 func CreateStatePanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-	tree := theme.CreateTree()
+	adapter := NewStateAdapter(appCtx)
+	tree := appCtx.theme.CreateTree()
+	tree.SetAdapter(adapter)
 
-	appCtx.OnStateUpdated(func() {
-		tree.SetAdapter(NewStateAdapter(appCtx))
+	var state *path.State
+
+	t := task.New()
+	update := func() {
+		t.Run(updateStateAdapter{appCtx, state, adapter})
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if a := path.FindAtom(p); a != nil {
+			if s := a.StateAfter(); !path.Equal(s, state) {
+				state = s
+				update()
+			}
+		}
+		if s, a := path.FindAtomSlice(p); s != nil && a != nil {
+			if s := a.Index(s.End - 1).StateAfter(); !path.Equal(s, state) {
+				state = s
+				update()
+			}
+		}
 	})
 
 	return tree
+}
+
+type updateStateAdapter struct {
+	context *ApplicationContext
+	state   *path.State
+	adapter *StateAdapter
+}
+
+func (t updateStateAdapter) Run(c task.CancelSignal) {
+	state, err := t.context.rpc.LoadState(t.state)
+	if err != nil {
+		return
+	}
+	c.Check()
+	t.context.Run(func() {
+		t.adapter.Update(state, t.state)
+	})
 }

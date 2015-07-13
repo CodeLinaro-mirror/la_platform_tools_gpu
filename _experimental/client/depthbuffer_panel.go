@@ -14,21 +14,62 @@
 
 package client
 
-import "github.com/google/gxui"
+import (
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
+	"github.com/google/gxui"
+)
 
 func CreateDepthBufferPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
-	image := theme.CreateImage()
+	image := appCtx.theme.CreateImage()
 	image.SetScalingMode(gxui.ScalingExpandGreedy)
 	image.SetAspectMode(gxui.AspectCorrectLetterbox)
 
-	appCtx.OnDepthBufferUpdate(func() {
-		image.SetTexture(appCtx.DepthBuffer())
+	var device *path.Device
+	var after *path.Atom
+
+	t := task.New()
+	update := func() {
+		if device != nil && after != nil {
+			t.Run(updateDepthBuffer{appCtx, device, after, image})
+		}
+	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		if d := path.FindDevice(p); d != nil && !path.Equal(d, device) {
+			device = d
+			update()
+		}
+		if a := path.FindAtom(p); a != nil && !path.Equal(a, after) {
+			after = a
+			update()
+		}
+		if s, a := path.FindAtomSlice(p); s != nil {
+			if i := a.Index(s.End - 1); !path.Equal(i, after) {
+				after = i
+				update()
+			}
+		}
 	})
 
-	layout := theme.CreateLinearLayout()
+	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.TopToBottom)
 	layout.AddChild(image)
 	return layout
+}
+
+type updateDepthBuffer struct {
+	context *ApplicationContext
+	device  *path.Device
+	after   *path.Atom
+	image   gxui.Image
+}
+
+func (t updateDepthBuffer) Run(c task.CancelSignal) {
+	if w, h, d, err := t.context.rpc.RequestDepthBuffer(t.device, t.after); err == nil {
+		c.Check()
+		t.context.Run(func() {
+			t.image.SetTexture(NewDepthTexture(t.context.theme.Driver(), w, h, d))
+		})
+	}
 }

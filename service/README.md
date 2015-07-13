@@ -1182,6 +1182,16 @@ func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (res 
 ResolveTimingInfo loads and returns the TimingInfo stored in the database d,
 using id.
 
+#### func (TimingInfo) AtomDuration
+
+```go
+func (t TimingInfo) AtomDuration(id atom.ID) (uint64, bool)
+```
+Duration looks up the timing-record for the range of atoms, r. If the TimingInfo
+holds a timing-record for r then the duration in nanoseconds and true is
+returned. If no timing-record for r is contained in the TimingInfo then 0 and
+false is returned.
+
 #### func (*TimingInfo) Class
 
 ```go
@@ -1205,6 +1215,16 @@ func (c *TimingInfo) GetPerDrawCall() []AtomRangeTimer
 ```go
 func (c *TimingInfo) GetPerFrame() []AtomRangeTimer
 ```
+
+#### func (TimingInfo) RangeDuration
+
+```go
+func (t TimingInfo) RangeDuration(r atom.Range) (uint64, bool)
+```
+RangeDuration looks up the timing-record for the range of atoms, r. If the
+TimingInfo holds a timing-record for r then the duration in nanoseconds and true
+is returned. If no timing-record for r is contained in the TimingInfo then 0 and
+false is returned.
 
 #### type TimingInfoId
 

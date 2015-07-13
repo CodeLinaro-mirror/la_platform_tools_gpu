@@ -19,19 +19,17 @@ import (
 )
 
 func CreateImageViewerPanel(appCtx *ApplicationContext) gxui.Control {
-	theme := appCtx.Theme()
-
-	image := theme.CreateImage()
+	image := appCtx.theme.CreateImage()
 	image.SetAspectMode(gxui.AspectCorrectLetterbox)
 
+	/* TODO
 	update := func() {
-		/* TODO
 		if i, ok := appCtx.SelectedObject.(capture.Image); ok {
 			SetImage(appCtx, image, capture.ImageToBitmap(i, appCtx.Capture))
 		}
-		*/
 	}
 	appCtx.OnAtomSelected(update)
 	appCtx.OnObjectSelected(update)
+	*/
 	return image
 }

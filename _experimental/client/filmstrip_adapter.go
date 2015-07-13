@@ -18,7 +18,9 @@ import (
 	"fmt"
 	"sort"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/task"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -28,21 +30,24 @@ const kFilmStripAdapterItemHeight = 150
 
 type FilmStripAdapter struct {
 	gxui.AdapterBase
-	appCtx *ApplicationContext
-	frames []atom.ID
+	appCtx  *ApplicationContext
+	device  *path.Device
+	capture *path.Capture
+	frames  []uint64
 }
 
 func CreateFilmStripAdapter(appCtx *ApplicationContext) *FilmStripAdapter {
 	return &FilmStripAdapter{appCtx: appCtx}
 }
 
-func (a *FilmStripAdapter) SetAtoms(atoms []atom.Atom) {
-	a.frames = []atom.ID{}
-	for i, t := range atoms {
-		if t.Flags().IsEndOfFrame() {
-			a.frames = append(a.frames, atom.ID(i))
-		}
-	}
+func (a *FilmStripAdapter) UpdateFrames(capture *path.Capture, frames []uint64) {
+	a.capture = capture
+	a.frames = frames
+	a.DataReplaced()
+}
+
+func (a *FilmStripAdapter) UpdateDevice(device *path.Device) {
+	a.device = device
 	a.DataReplaced()
 }
 
@@ -55,9 +60,9 @@ func (a *FilmStripAdapter) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (a *FilmStripAdapter) ItemIndex(item gxui.AdapterItem) int {
-	atomID := item.(atom.ID)
+	index := item.(uint64)
 	return sort.Search(len(a.frames), func(i int) bool {
-		return a.frames[i] >= atomID
+		return a.frames[i] >= index
 	})
 }
 
@@ -65,43 +70,53 @@ func (a *FilmStripAdapter) Count() int {
 	return len(a.frames)
 }
 
-func (a *FilmStripAdapter) Create(t gxui.Theme, index int) gxui.Control {
-	atomID := a.frames[index]
-	i := t.CreateImage()
-	i.SetAspectMode(gxui.AspectCorrectCrop)
-	i.SetExplicitSize(math.Size{W: kFilmStripAdapterItemWidth, H: kFilmStripAdapterItemHeight})
+func (a *FilmStripAdapter) Create(theme gxui.Theme, index int) gxui.Control {
+	w, h := kFilmStripAdapterItemWidth, kFilmStripAdapterItemHeight
+	atomIndex := a.frames[index]
+	p := a.capture.Atoms().Index(atomIndex)
 
-	b := t.CreateButton()
+	i := theme.CreateImage()
+	i.SetAspectMode(gxui.AspectCorrectCrop)
+	i.SetExplicitSize(math.Size{W: w, H: h})
+
+	b := theme.CreateButton()
 	b.SetDirection(gxui.TopToBottom)
-	b.SetText(fmt.Sprintf("%.6d - Frame %d", atomID, index))
+	b.SetText(fmt.Sprintf("%.6d - Frame %d", atomIndex, index))
 	b.SetPadding(math.Spacing{L: 3, T: 3, R: 3, B: 3})
 	b.SetMargin(math.Spacing{L: 3, T: 3, R: 3, B: 3})
-	b.OnClick(func(gxui.MouseEvent) {
-		a.appCtx.SelectAtom(atomID)
-	})
+	b.OnClick(func(gxui.MouseEvent) { a.appCtx.events.Select(p) })
 	b.AddChild(i)
 
-	var cancel chan<- struct{}
-	cancelThumbnail := func() {
-		if cancel != nil {
-			close(cancel)
-			cancel = nil
-		}
-	}
-	requestThumbnail := func() {
-		cancelThumbnail()
-		cancel = a.appCtx.RequestThumbnail(atomID, kFilmStripAdapterItemWidth, kFilmStripAdapterItemHeight, i.SetTexture)
-	}
-
-	var subscription gxui.EventSubscription
-	b.OnAttach(func() {
-		requestThumbnail()
-		subscription = a.appCtx.OnDeviceSelected(requestThumbnail)
-	})
-	b.OnDetach(func() {
-		cancelThumbnail()
-		subscription.Unlisten()
-	})
+	t := task.New()
+	b.OnAttach(func() { t.Run(updateThumbnail{a.appCtx, a.device, p, i}) })
+	b.OnDetach(t.Cancel)
 
 	return b
+}
+
+type updateThumbnail struct {
+	context *ApplicationContext
+	device  *path.Device
+	after   *path.Atom
+	image   gxui.Image
+}
+
+func (t updateThumbnail) Run(c task.CancelSignal) {
+	settings := service.RenderSettings{
+		MaxWidth:  kFilmStripAdapterItemWidth,
+		MaxHeight: kFilmStripAdapterItemHeight,
+	}
+	if w, h, d, err := t.context.rpc.RequestColorBuffer(t.device, t.after, settings); err == nil {
+		c.Check()
+		t.context.Run(func() {
+			tex := NewColorTexture(t.context.theme.Driver(), w, h, d)
+			t.image.SetTexture(tex)
+			t.context.toolTipController.AddToolTip(t.image, 0.7, func(math.Point) gxui.Control {
+				large := t.context.theme.CreateImage()
+				large.SetTexture(tex)
+				large.SetAspectMode(gxui.AspectCorrectLetterbox)
+				return large
+			})
+		})
+	}
 }
