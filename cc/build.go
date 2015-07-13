@@ -109,7 +109,7 @@ func run(targetNames []string, logger log.Logger) int {
 	}
 
 	for i := range targets {
-		env.Logger = logger.Fork().Enter(targetNames[i])
+		env.Logger = log.Enter(log.Fork(logger), targetNames[i])
 		targets[i].Build(env)
 	}
 

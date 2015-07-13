@@ -250,7 +250,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 		return
 	}
 
-	l := c.logger.Fork().Enter("LoadCapture")
+	l := log.Enter(log.Fork(c.logger), "LoadCapture")
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
@@ -284,7 +284,7 @@ func (c *ApplicationContext) LoadCapture(captureID service.CaptureId, resetSelec
 
 func (c *ApplicationContext) LoadHierarchy() {
 	captureID := c.captureID
-	l := c.logger.Fork().Enter("LoadHierarchy")
+	l := log.Enter(log.Fork(c.logger), "LoadHierarchy")
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
@@ -302,7 +302,7 @@ func (c *ApplicationContext) LoadHierarchy() {
 
 func (c *ApplicationContext) LoadReport() {
 	captureID := c.captureID
-	l := c.logger.Fork().Enter("LoadReport")
+	l := log.Enter(log.Fork(c.logger), "LoadReport")
 	log.Infof(l, "(capture: %v)", captureID)
 
 	go func() {
@@ -321,7 +321,7 @@ func (c *ApplicationContext) LoadReport() {
 func (c *ApplicationContext) LoadState() {
 	captureID := c.captureID
 	after := c.selectedAtomID
-	l := c.logger.Fork().Enter("LoadState")
+	l := log.Enter(log.Fork(c.logger), "LoadState")
 
 	go func() {
 		path := captureID.Path().Atoms().Index(uint64(after)).StateAfter()
@@ -353,7 +353,7 @@ func isClosed(c <-chan struct{}) bool {
 }
 
 func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight uint32, callback ImageCallback) chan<- struct{} {
-	l := c.logger.Fork().Enter("RequestThumbnail")
+	l := log.Enter(log.Fork(c.logger), "RequestThumbnail")
 	log.Infof(l, "(device: %v, after: %v, max size: %dx%d)", c.selectedDevice, after, maxWidth, maxHeight)
 
 	cancel := make(chan struct{})
@@ -418,7 +418,7 @@ func (c *ApplicationContext) RequestThumbnail(after atom.ID, maxWidth, maxHeight
 type MemoryCallback func(service.MemoryInfo)
 
 func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint64, callback MemoryCallback) chan<- struct{} {
-	l := c.logger.Fork().Enter("RequestMemory")
+	l := log.Enter(log.Fork(c.logger), "RequestMemory")
 	log.Infof(l, "(after: %v, base: 0x%x, size: 0x%x)", after, base, size)
 
 	cancel := make(chan struct{})
@@ -453,7 +453,7 @@ func (c *ApplicationContext) RequestMemory(after atom.ID, base uint64, size uint
 }
 
 func (c *ApplicationContext) Change(p path.Path, v interface{}) {
-	l := c.logger.Enter("Change")
+	l := log.Enter(c.logger, "Change")
 	log.I(l, "%v -> %v", p, v)
 	p, err := c.rpc.Set(p, v, l)
 	if err != nil {

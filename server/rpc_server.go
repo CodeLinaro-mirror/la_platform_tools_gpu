@@ -48,7 +48,7 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 
 	for {
 		if conn, err := listener.Accept(); err == nil {
-			service.BindServer(conn, conn, mtu, logger.Fork(), &s)
+			service.BindServer(conn, conn, mtu, log.Fork(logger), &s)
 		} else {
 			return err
 		}

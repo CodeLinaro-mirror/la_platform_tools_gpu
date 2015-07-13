@@ -45,8 +45,6 @@ type batcher struct {
 }
 
 func (b *batcher) run() {
-	defer b.logger.Flush()
-
 	// Gather all the batchEntries that are added to feed within maxBatchDelay.
 	for r := range b.feed {
 		requests := []Request{r}

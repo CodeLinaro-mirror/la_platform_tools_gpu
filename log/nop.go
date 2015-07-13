@@ -19,16 +19,13 @@ package log
 type Nop struct{}
 
 // Log does nothing
-func (Nop) Log(s Severity, msg string, args ...interface{}) {}
+func (Nop) log(s Severity, msg string, args ...interface{}) {}
 
-// Enter returns the same Nop implementation of Logger
-func (Nop) Enter(name string) Logger { return Nop{} }
+// enter returns the same Nop implementation of Logger
+func (Nop) enter(name string) Logger { return Nop{} }
 
-// Fork returns the same Nop implementation of Logger
-func (Nop) Fork() Logger { return Nop{} }
+// fork returns the same Nop implementation of Logger
+func (Nop) fork() Logger { return Nop{} }
 
-// Flush does nothing
-func (Nop) Flush() {}
-
-// Close does nothing
-func (Nop) Close() {}
+// close does nothing
+func (Nop) close() {}

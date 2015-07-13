@@ -31,7 +31,7 @@ import (
 // wireframe returns an atom transform that replaces all draw calls of triangle
 // primitives with draw calls of a wireframe equivalent.
 func wireframe(d database.Database, l log.Logger) atom.Transformer {
-	l = l.Enter("Wireframe")
+	l = log.Enter(l, "Wireframe")
 
 	s := gfxapi.NewState()
 	return atom.Transform("Wireframe", func(id atom.ID, a atom.Atom, out atom.Writer) {
