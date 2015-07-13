@@ -82,7 +82,7 @@ func run() error {
 		fmt.Printf("Generating\n")
 	}
 	t := template.New()
-	info := copyright.Info{Tool: "codergen", Year: "2015"}
+	info := copyright.Info{Tool: scan.Tool, Year: "2015"}
 	gen := func(name string, arg interface{}, output string, reflow template.PostProcess) error {
 		out := output
 		if *nowrite {

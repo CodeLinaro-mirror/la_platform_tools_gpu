@@ -142,7 +142,7 @@ func (s *Scanner) ScanFile(filename, source string) {
 	dir := s.GetDir(filename)
 	dir.Scan = true
 	dir.loaded = true
-	dir.Module.Sources = append(dir.Module.Sources, Source{Filename: filename, Content: source})
+	dir.Module.addSource(filename, source)
 }
 
 // ScanPackage marks the directory specified by the import path as needing to be
