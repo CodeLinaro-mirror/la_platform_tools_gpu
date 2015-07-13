@@ -17,11 +17,40 @@ package scan
 import (
 	"fmt"
 	"go/parser"
+	"io/ioutil"
 	"path/filepath"
 	"regexp"
 
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+
 	"golang.org/x/tools/go/types"
 )
+
+const Tool = "codergen"
+
+func (m *Module) addSource(filename, content string) error {
+	if content == "" {
+		file, err := ioutil.ReadFile(filename)
+		if err != nil {
+			return err
+		}
+		content = string(file)
+	}
+
+	for _, re := range copyright.Generated {
+		match := re.FindStringSubmatch(content)
+		if len(match) > 1 {
+			for _, test := range match[1:] {
+				if test == Tool {
+					return nil
+				}
+			}
+		}
+	}
+
+	m.Sources = append(m.Sources, Source{Filename: filename, Content: content})
+	return nil
+}
 
 func (s *Scanner) load(dir *Directory) {
 	dir.loaded = true
@@ -33,11 +62,11 @@ func (s *Scanner) load(dir *Directory) {
 	dir.ImportPath = imp.ImportPath
 	dir.Dir = imp.Dir
 	for _, filename := range imp.GoFiles {
-		dir.Module.Sources = append(dir.Module.Sources, Source{Filename: filepath.Join(dir.Dir, filename)})
+		dir.Module.addSource(filepath.Join(dir.Dir, filename), "")
 	}
 	if dir.Scan {
 		for _, filename := range imp.TestGoFiles {
-			dir.Test.Sources = append(dir.Test.Sources, Source{Filename: filepath.Join(dir.Dir, filename)})
+			dir.Test.addSource(filepath.Join(dir.Dir, filename), "")
 		}
 	}
 }
