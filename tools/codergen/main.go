@@ -27,7 +27,7 @@ import (
 	"sort"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary/generate"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
