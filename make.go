@@ -78,10 +78,10 @@ func init() {
 		// All the embed rules
 		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
 		embedCopyright := Embed(Path(gpusrc, "tools/copyright"))
-		embedBinary := Embed(Path(gpusrc, "binary/generate"))
+		embedCodergen := Embed(Path(gpusrc, "tools/codergen/generate"))
 		Creator(Tools.Rpcapi).DependsOn(embedCopyright, embedRPC)
 		Creator(Tools.Apic).DependsOn(embedCopyright)
-		Creator(Tools.Codergen).DependsOn(embedCopyright, embedBinary)
+		Creator(Tools.Codergen).DependsOn(embedCopyright, embedCodergen)
 		// All the rpc rules
 		servicerpc := File(gpusrc, "service/service.api")
 		RpcApiGo(File(gpusrc, "rpc/test/rpc_test.api"))
