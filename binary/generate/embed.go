@@ -156,7 +156,7 @@ func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {
 func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
 func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
 func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
-{{if Directive "Schema" true}}func (*binaryClass{{.Name}}) Schema() *schema.Class { return schema{{.Name}} }
+{{if File.Directive "Schema" true}}func (*binaryClass{{.Name}}) Schema() *schema.Class { return schema{{.Name}} }
 var schema{{.Name}} = &schema.Class{
 	TypeID: {{.IDName}},
 	Package: "{{.Package}}",
@@ -340,7 +340,7 @@ var schema{{.Name}} = &schema.Class{
 {{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
 {{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
 
-{{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
+{{define "Go.Constants"}}{{if File.Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
 const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
 
 var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Entries}}
@@ -399,7 +399,7 @@ var (
 {{range .Structs}} {{template "Go.Class" .}}
 {{end}}
 
-{{if and (Directive "Schema" true) (len .Constants)}}
+{{if and (File.Directive "Schema" true) (len .Constants)}}
 var ConstantValues schema.Constants
 {{range .Constants}}{{template "Go.Constants" .}}
 {{end}}
