@@ -14,27 +14,44 @@
 
 package generate
 
-import "golang.org/x/tools/imports"
+import (
+	"path"
 
-type Go struct {
-	*File
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+	"golang.org/x/tools/imports"
+)
+
+type GoPackage struct {
+	*Module
 	Copyright string
 }
 
-func NewGo(file *File) *Go { return &Go{File: file} }
+func Go(m *Module, info copyright.Info, gen Generator) error {
+	if len(m.Structs) == 0 && len(m.Constants) == 0 {
+		return nil
+	}
+	pkg := &GoPackage{
+		Module:    m,
+		Copyright: copyright.Build("generated_by", info),
+	}
+	out := m.Name + "_binary.go"
+	if m.IsTest {
+		out = m.Name + "_binary_test.go"
+	}
+	out = path.Join(m.Path, out)
+	return gen("Go.File", pkg, out, reflowGo)
+}
 
-func (file *Go) Run(t *Templates, out string) (bool, error) {
-	return t.generate(file, "Go.File", file, out, func(b []byte) []byte {
-		options := &imports.Options{
-			TabWidth:  8,
-			TabIndent: true,
-			Comments:  true,
-			Fragment:  true,
-		}
-		if result, err := imports.Process("", b, options); err != nil {
-			return b
-		} else {
-			return result
-		}
-	})
+func reflowGo(b []byte) []byte {
+	options := &imports.Options{
+		TabWidth:  8,
+		TabIndent: true,
+		Comments:  true,
+		Fragment:  true,
+	}
+	if result, err := imports.Process("", b, options); err != nil {
+		return b
+	} else {
+		return result
+	}
 }

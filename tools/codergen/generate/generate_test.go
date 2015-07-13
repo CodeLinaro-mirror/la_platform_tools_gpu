@@ -25,6 +25,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
 )
 
 var (
@@ -56,13 +57,7 @@ var (
 		{Declared: "", Type: structType},
 	}
 )
-var loader *Loader
 var testId int
-
-func init() {
-	pwd, _ := filepath.Abs(".")
-	loader = NewLoader(pwd, false)
-}
 
 func parseStructs(source string) []*Struct {
 	testId++
@@ -74,12 +69,23 @@ func parseStructs(source string) []*Struct {
 
 	%s`, source)
 	name := fmt.Sprintf("fake_%d.go", testId)
-	loader.ScanFile(name, fakeFile)
-	if err := loader.Process(); err != nil {
+	pwd, _ := filepath.Abs(".")
+	scanner := scan.New(pwd, false)
+	scanner.ScanFile(name, fakeFile)
+	if err := scanner.Process(); err != nil {
 		log.Fatal("Process failed:", err)
 	}
-	dir := loader.GetDir(name)
-	return dir.Module.Output.Structs
+	modules, err := From(scanner)
+	if err != nil {
+		log.Fatal("Scan failed:", err)
+	}
+	for _, m := range modules {
+		if m.Source.Directory.ImportPath == name && !m.IsTest {
+			return m.Structs
+		}
+	}
+	log.Fatal("Module find failed")
+	return nil
 }
 
 func parseStruct(t *testing.T, name string, source string) *Struct {
