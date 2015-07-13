@@ -195,7 +195,6 @@ func (t *timingInfoGpuTransform) Flush(out atom.Writer) {
 
 	// Account for all pending timers into the last drawcall and frame counters.
 	t.appendQuery(atom.NoID, rangeEnd, out)
-	t.destroyQueries(out)
 
 	// Synchronize on a final empty post before aggregating and returning query results.
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
@@ -218,12 +217,6 @@ func (t *timingInfoGpuTransform) generateNewQueries(count int, out atom.Writer) 
 		NewGlGenQueries(int32(count), transientPointer).
 			AddRead(atom.Data(t.device.Architecture(), t.db, t.logger, transientPointer, newQueries)))
 	t.availableQueryIds = append(t.availableQueryIds, newQueries...)
-}
-
-func (t *timingInfoGpuTransform) destroyQueries(out atom.Writer) {
-	out.Write(atom.NoID,
-		NewGlDeleteQueries(int32(len(t.availableQueryIds)), transientPointer).
-			AddRead(atom.Data(t.device.Architecture(), t.db, t.logger, transientPointer, t.availableQueryIds)))
 }
 
 func (t *timingInfoGpuTransform) appendQuery(id atom.ID, et eventType, out atom.Writer) {
