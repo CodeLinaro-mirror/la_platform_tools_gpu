@@ -24,7 +24,7 @@ type Go struct {
 func NewGo(file *File) *Go { return &Go{File: file} }
 
 func (file *Go) Run(t *Templates, out string) (bool, error) {
-	return t.generate(file.File, "Go.File", file, out, func(b []byte) []byte {
+	return t.generate(file, "Go.File", file, out, func(b []byte) []byte {
 		options := &imports.Options{
 			TabWidth:  8,
 			TabIndent: true,
