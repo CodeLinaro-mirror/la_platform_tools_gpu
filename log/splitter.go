@@ -31,50 +31,41 @@ func (s *Splitter) Add(l Logger) {
 }
 
 // Logf will call Logf with the same arguments on all logs passed to Add.
-func (s *Splitter) Log(severity Severity, msg string, args ...interface{}) {
+func (s *Splitter) log(severity Severity, msg string, args ...interface{}) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		l.Log(severity, msg, args...)
+		l.log(severity, msg, args...)
 	}
 }
 
-// Enter will call Enter with the same argument on all logs passed to Add.
-func (s *Splitter) Enter(name string) Logger {
+// enter will call enter with the same argument on all logs passed to Add.
+func (s *Splitter) enter(name string) Logger {
 	n := Splitter{}
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		n.listeners = append(n.listeners, l.Enter(name))
+		n.listeners = append(n.listeners, l.enter(name))
 	}
 	return &n
 }
 
-// Fork will call Fork on all logs passed to Add.
-func (s *Splitter) Fork() Logger {
+// fork will call fork on all logs passed to Add.
+func (s *Splitter) fork() Logger {
 	n := Splitter{}
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		n.listeners = append(n.listeners, l.Fork())
+		n.listeners = append(n.listeners, l.fork())
 	}
 	return &n
 }
 
-// Flush will call Flush on all logs passed to Add.
-func (s *Splitter) Flush() {
+// close will call close on all logs passed to Add.
+func (s *Splitter) close() {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		l.Flush()
-	}
-}
-
-// Close will call Close on all logs passed to Add.
-func (s *Splitter) Close() {
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-	for _, l := range s.listeners {
-		l.Close()
+		l.close()
 	}
 }

@@ -17,20 +17,4 @@ package log
 // Logger is the interface for types that implement a hierarchical message logger.
 type Logger interface {
 	Interface
-
-	// Enter creates a new logger scoped within the existing logger. This can be used to produce
-	// hierarchical log messages.
-	Enter(name string) Logger
-
-	// Fork creates a new logger with the same scope as the existing logger, but with a new context
-	// identifier. It is good practice to fork logs before passing to another goroutine so that
-	// messages can be associated with their goroutine of execution.
-	Fork() Logger
-
-	// Flush ensures that any pending messages are written by the logger.
-	Flush()
-
-	// Close closes the logger, automatically flushing any remaining messages.
-	// After calling Close, no other methods can be called on the logger.
-	Close()
 }

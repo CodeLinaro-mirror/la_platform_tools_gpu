@@ -95,7 +95,7 @@ func (s *server) GetListNodeChainArray(l log.Logger) ([]*ListNode, error) {
 }
 
 func create(t *testing.T) (RPC, *server) {
-	l := log.Testing(t).Enter("Server")
+	l := log.Enter(log.Testing(t), "Server")
 	mtu := 64
 	s2c, c2s := ringbuffer.New(64), ringbuffer.New(64)
 	server := &server{}

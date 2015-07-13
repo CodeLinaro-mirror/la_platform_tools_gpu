@@ -436,7 +436,7 @@ func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 // sent to the replay virtual-machine and a ResponseDecoder for interpreting
 // the responses.
 func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
-	logger = logger.Enter("Build")
+	logger = log.Enter(logger, "Build")
 	if config.DebugReplayBuilder {
 		log.Infof(logger, "Instruction count: %d", len(b.instructions))
 	}
