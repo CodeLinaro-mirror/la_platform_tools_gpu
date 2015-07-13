@@ -19,7 +19,7 @@ import (
 
 func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 	rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
-		l := l.Fork().Enter(fmt.Sprintf("%T", in))
+		l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
 		defer func() {
 			if err := recover(); err == nil {
 				if config.DebugRPCCalls {

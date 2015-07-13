@@ -21,6 +21,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker"
 )
 
@@ -102,7 +103,7 @@ func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.
 }
 
 func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("GCC.Compile")
+	env.Logger = log.Enter(env.Logger, "GCC.Compile")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -132,7 +133,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("GCC.Archive")
+	env.Logger = log.Enter(env.Logger, "GCC.Archive")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -149,7 +150,7 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("GCC.LinkDll")
+	env.Logger = log.Enter(env.Logger, "GCC.LinkDll")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -185,7 +186,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("GCC.LinkExe")
+	env.Logger = log.Enter(env.Logger, "GCC.LinkExe")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -210,7 +211,7 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 }
 
 func depsFor(output build.File, cfg cpp.Config, env build.Environment) (deps build.FileSet, valid bool) {
-	env.Logger = env.Logger.Enter("GCC.Deps")
+	env.Logger = log.Enter(env.Logger, "GCC.Deps")
 
 	depfile := depFileFor(output, cfg, env)
 
