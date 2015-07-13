@@ -33,15 +33,12 @@ type Struct struct {
 	Signature string // The full string type signature of the Struct.
 }
 
-// FromTypename creates and initializes a Struct from a types.Typename.
-// It assumes that the typename will map to a types.Struct, and adds all the
-// fields of that struct to the Struct information.
-func NewStruct(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
-	b := findBinaryObject(pkg)
+func (m *Module) addStruct(n *types.TypeName) {
+	b := findBinaryObject(m.Source.Types)
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Class: schema.Class{
 		Name:    n.Name(),
-		Package: pkg.Name(),
+		Package: m.Source.Types.Name(),
 	}}
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
@@ -58,15 +55,14 @@ func NewStruct(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
 		if !decl.Anonymous() {
 			f.Declared = decl.Name()
 		}
-		f.Type = fromType(pkg, decl.Type(), tags, imports, b)
-		delete(imports, pkg.Path())
+		f.Type = fromType(m.Source.Types, decl.Type(), tags, m.Imports, b)
+		delete(m.Imports, m.Source.Types.Path())
 		s.Fields = append(s.Fields, f)
 	}
-	if !tagged {
-		return nil
+	if tagged {
+		s.UpdateID()
+		m.Structs = append(m.Structs, s)
 	}
-	s.UpdateID()
-	return s
 }
 
 // IDName returns the name to give the ID of the type.
