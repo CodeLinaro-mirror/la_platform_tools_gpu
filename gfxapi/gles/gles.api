@@ -931,11 +931,16 @@ cmd void glGetActiveAttrib(ProgramId            program,
                            s32*                 vector_count,
                            ShaderAttribType*    type,
                            char*                name) {
-    l := as!s32(?)
-    buffer_bytes_written[0] = l
+    if buffer_bytes_written != null {
+        l := as!s32(?)
+        buffer_bytes_written[0] = l
+        write(name[0:l])
+    } else {
+        write(name[0:256]) // HACK: Non-deterministic string length!
+    }
+
     vector_count[0] = as!s32(?)
     type[0] = as!ShaderAttribType(?)
-    write(name[0:l])
 }
 
 // TODO: This method cannot use UniformLocation as the location type
@@ -949,11 +954,16 @@ cmd void glGetActiveUniform(ProgramId             program,
                             s32*                  vector_count,
                             ShaderUniformType*    type,
                             char*                 name) {
-    l := as!s32(?)
-    buffer_bytes_written[0] = l
+    if buffer_bytes_written != null {
+        l := as!s32(?)
+        buffer_bytes_written[0] = l
+        write(name[0:l])
+    } else {
+        write(name[0:256]) // HACK: Non-deterministic string length!
+    }
+
     vector_count[0] = as!s32(?)
     type[0] = as!ShaderUniformType(?)
-    write(name[0:l])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml

@@ -926,12 +926,16 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveAttrib)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
-	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
+	if (ϟa.BufferBytesWritten) != (S32ᵖ{}) {
+		l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
+		ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = l
+	} else {
+		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	}
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	_ = l
 	return nil
 }
 
@@ -953,12 +957,16 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Name.value())
 	ϟb.Call(funcInfoGlGetActiveUniform)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
-	ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
+	if (ϟa.BufferBytesWritten) != (S32ᵖ{}) {
+		l := int32(ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // s32
+		ϟa.BufferBytesWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_ = l
+	} else {
+		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	}
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.Name.Slice(uint64(int32(0)), uint64(l), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	_ = l
 	return nil
 }
 
