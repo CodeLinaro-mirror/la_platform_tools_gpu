@@ -23,48 +23,6 @@ func (c callEnumToString) Format(f fmt.State, r rune) {
 func (r resultEnumToString) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callGetStruct) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetStruct()")
-}
-func (r resultGetStruct) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callSetStruct) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "SetStruct(s: %v)",
-		c.s,
-	)
-}
-func (r resultSetStruct) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "void")
-}
-func (c callGetResource) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetResource()")
-}
-func (r resultGetResource) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callUseResource) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "UseResource(r: %v)",
-		c.r,
-	)
-}
-func (r resultUseResource) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "void")
-}
-func (c callResolveResource) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveResource(r: %v)",
-		c.r,
-	)
-}
-func (r resultResolveResource) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callGetSingleListNode) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetSingleListNode()")
-}
-func (r resultGetSingleListNode) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callGetListNodeChain) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetListNodeChain()")
 }
@@ -76,6 +34,48 @@ func (c callGetListNodeChainArray) Format(f fmt.State, r rune) {
 }
 func (r resultGetListNodeChainArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callGetResource) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetResource()")
+}
+func (r resultGetResource) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callGetSingleListNode) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetSingleListNode()")
+}
+func (r resultGetSingleListNode) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callGetStruct) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetStruct()")
+}
+func (r resultGetStruct) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callResolveResource) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "ResolveResource(r: %v)",
+		c.r,
+	)
+}
+func (r resultResolveResource) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callSetStruct) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "SetStruct(s: %v)",
+		c.s,
+	)
+}
+func (r resultSetStruct) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "void")
+}
+func (c callUseResource) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "UseResource(r: %v)",
+		c.r,
+	)
+}
+func (r resultUseResource) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "void")
 }
 
 func (h ResourceId) Valid() bool {

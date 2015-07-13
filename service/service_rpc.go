@@ -15,17 +15,16 @@ import (
 )
 
 type RPC interface {
-	GetSchema(l log.Logger) (Schema, error)
-	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
+	Get(p path.Path, l log.Logger) (interface{}, error)
 	GetCaptures(l log.Logger) ([]CaptureId, error)
 	GetDevices(l log.Logger) ([]DeviceId, error)
-	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoId, error)
 	GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (ImageInfoId, error)
 	GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (ImageInfoId, error)
+	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoId, error)
+	GetSchema(l log.Logger) (Schema, error)
 	GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (TimingInfoId, error)
+	Import(name string, Data []uint8, l log.Logger) (CaptureId, error)
 	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (BinaryId, error)
-	Get(p path.Path, l log.Logger) (interface{}, error)
-	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 	ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryId, l log.Logger) ([]uint8, error)
 	ResolveCapture(id CaptureId, l log.Logger) (Capture, error)
@@ -33,6 +32,7 @@ type RPC interface {
 	ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error)
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
+	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 }
 
 // Handle ApiId

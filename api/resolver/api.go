@@ -117,6 +117,7 @@ func resolve(ctx *context) {
 	for _, m := range ctx.api.Methods {
 		method(ctx, m)
 	}
+	sort.Sort(functionsByName(ctx.api.Externs))
 	sort.Sort(slicesByName(ctx.api.Slices))
 	sort.Sort(mapsByName(ctx.api.Maps))
 }
@@ -169,3 +170,10 @@ type mapsByName []*semantic.Map
 func (a mapsByName) Len() int           { return len(a) }
 func (a mapsByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a mapsByName) Less(i, j int) bool { return a[i].Name() < a[j].Name() }
+
+// mapsByName is used to sort the map list by name for generated code stability
+type functionsByName []*semantic.Function
+
+func (a functionsByName) Len() int           { return len(a) }
+func (a functionsByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a functionsByName) Less(i, j int) bool { return a[i].Name() < a[j].Name() }

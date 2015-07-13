@@ -44,42 +44,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callGetStruct:
-			if res, err := server.GetStruct(l); err == nil {
-				return &resultGetStruct{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callSetStruct:
-			if err := server.SetStruct(call.s, l); err == nil {
-				return &resultSetStruct{}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callGetResource:
-			if res, err := server.GetResource(l); err == nil {
-				return &resultGetResource{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callUseResource:
-			if err := server.UseResource(call.r, l); err == nil {
-				return &resultUseResource{}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveResource:
-			if res, err := server.ResolveResource(call.r, l); err == nil {
-				return &resultResolveResource{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callGetSingleListNode:
-			if res, err := server.GetSingleListNode(l); err == nil {
-				return &resultGetSingleListNode{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callGetListNodeChain:
 			if res, err := server.GetListNodeChain(l); err == nil {
 				return &resultGetListNodeChain{value: res}
@@ -89,6 +53,42 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		case *callGetListNodeChainArray:
 			if res, err := server.GetListNodeChainArray(l); err == nil {
 				return &resultGetListNodeChainArray{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callGetResource:
+			if res, err := server.GetResource(l); err == nil {
+				return &resultGetResource{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callGetSingleListNode:
+			if res, err := server.GetSingleListNode(l); err == nil {
+				return &resultGetSingleListNode{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callGetStruct:
+			if res, err := server.GetStruct(l); err == nil {
+				return &resultGetStruct{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callResolveResource:
+			if res, err := server.ResolveResource(call.r, l); err == nil {
+				return &resultResolveResource{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callSetStruct:
+			if err := server.SetStruct(call.s, l); err == nil {
+				return &resultSetStruct{}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callUseResource:
+			if err := server.UseResource(call.r, l); err == nil {
+				return &resultUseResource{}
 			} else {
 				return rpc.NewError(err.Error())
 			}
