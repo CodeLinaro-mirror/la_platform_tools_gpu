@@ -10,6 +10,7 @@ var embedded = map[string]string{
 	go_binary_tmpl_file:   go_binary_tmpl,
 	go_client_tmpl_file:   go_client_tmpl,
 	go_common_tmpl_file:   go_common_tmpl,
+	go_server_tmpl_file:   go_server_tmpl,
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
 }
@@ -491,6 +492,54 @@ import (
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+`
+const go_server_tmpl_file = `go_server.tmpl`
+const go_server_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Server"}}{{template "Go.Prelude" .}}
+
+{{$s := .Service}}
+func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
+  rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
+    l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
+    defer func() {
+      if err := recover(); err == nil {
+        if config.DebugRPCCalls {
+          log.Infof(l, "returned: %v", res)
+        }
+      } else {
+        msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
+        log.Errorf(l, msg)
+        res = rpc.NewError(msg)
+      }
+    }()
+    switch call := in.(type) { {{range $s.Methods}}
+        case *{{.Call.Name}}:
+          if {{if .Result.Type}}res,{{end}} err := server.{{.Name}}({{range .Call.Params}}call.{{.Name}}, {{end}}l); err == nil {
+            return &{{.Result.Name}}{ {{if .Result.Type}}value:res{{end}} }
+          } else {
+            return rpc.NewError(err.Error())
+          }{{end}}
+        default:
+          return rpc.NewError("Unexpected RPC function: %T", call)
+    }
+  })
+}
+{{end}}
 `
 const java_binary_tmpl_file = `java_binary.tmpl`
 const java_binary_tmpl = `{{/*
