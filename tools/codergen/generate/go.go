@@ -58,6 +58,9 @@ func Go(m *Module, info copyright.Info, gen Generator) error {
 		if err := gen("Go.Server", arg, goFileName(m, s.Prefix, "server"), reflowGo); err != nil {
 			return err
 		}
+		if err := gen("Go.Helpers", arg, goFileName(m, s.Prefix, "helpers"), reflowGo); err != nil {
+			return err
+		}
 	}
 	return nil
 }
