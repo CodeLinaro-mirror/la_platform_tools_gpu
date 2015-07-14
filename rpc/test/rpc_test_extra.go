@@ -32,73 +32,6 @@ type resultEnumToString struct {
 	value string
 }
 
-// Call GetStruct
-type callGetStruct struct {
-	binary.Generate
-}
-
-// Result GetStruct
-type resultGetStruct struct {
-	binary.Generate
-	value Struct
-}
-
-// Call SetStruct
-type callSetStruct struct {
-	binary.Generate
-	s Struct
-}
-
-// Result SetStruct
-type resultSetStruct struct {
-	binary.Generate
-}
-
-// Call GetResource
-type callGetResource struct {
-	binary.Generate
-}
-
-// Result GetResource
-type resultGetResource struct {
-	binary.Generate
-	value ResourceId
-}
-
-// Call UseResource
-type callUseResource struct {
-	binary.Generate
-	r ResourceId
-}
-
-// Result UseResource
-type resultUseResource struct {
-	binary.Generate
-}
-
-// Call ResolveResource
-type callResolveResource struct {
-	binary.Generate
-	r ResourceId
-}
-
-// Result ResolveResource
-type resultResolveResource struct {
-	binary.Generate
-	value Resource
-}
-
-// Call GetSingleListNode
-type callGetSingleListNode struct {
-	binary.Generate
-}
-
-// Result GetSingleListNode
-type resultGetSingleListNode struct {
-	binary.Generate
-	value *ListNode
-}
-
 // Call GetListNodeChain
 type callGetListNodeChain struct {
 	binary.Generate
@@ -119,4 +52,71 @@ type callGetListNodeChainArray struct {
 type resultGetListNodeChainArray struct {
 	binary.Generate
 	value []*ListNode
+}
+
+// Call GetResource
+type callGetResource struct {
+	binary.Generate
+}
+
+// Result GetResource
+type resultGetResource struct {
+	binary.Generate
+	value ResourceId
+}
+
+// Call GetSingleListNode
+type callGetSingleListNode struct {
+	binary.Generate
+}
+
+// Result GetSingleListNode
+type resultGetSingleListNode struct {
+	binary.Generate
+	value *ListNode
+}
+
+// Call GetStruct
+type callGetStruct struct {
+	binary.Generate
+}
+
+// Result GetStruct
+type resultGetStruct struct {
+	binary.Generate
+	value Struct
+}
+
+// Call ResolveResource
+type callResolveResource struct {
+	binary.Generate
+	r ResourceId
+}
+
+// Result ResolveResource
+type resultResolveResource struct {
+	binary.Generate
+	value Resource
+}
+
+// Call SetStruct
+type callSetStruct struct {
+	binary.Generate
+	s Struct
+}
+
+// Result SetStruct
+type resultSetStruct struct {
+	binary.Generate
+}
+
+// Call UseResource
+type callUseResource struct {
+	binary.Generate
+	r ResourceId
+}
+
+// Result UseResource
+type resultUseResource struct {
+	binary.Generate
 }

@@ -34,22 +34,12 @@ func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
 }
 
 // Client compliance
-func (c client) GetSchema(l log.Logger) (res Schema, err error) {
+func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetSchema{}); err == nil {
-		res = val.(*resultGetSchema).value
+	if val, err = c.Send(&callGet{p: p}); err == nil {
+		res = val.(*resultGet).value
 	} else {
-		log.Errorf(l, "RPC GetSchema failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) Import(name string, Data []uint8, l log.Logger) (res CaptureId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
-		res = val.(*resultImport).value
-	} else {
-		log.Errorf(l, "RPC Import failed with error: %v", err)
+		log.Errorf(l, "RPC Get failed with error: %v", err)
 	}
 	return
 }
@@ -74,16 +64,6 @@ func (c client) GetDevices(l log.Logger) (res []DeviceId, err error) {
 	return
 }
 
-func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetMemoryInfo{after: after, rng: rng}); err == nil {
-		res = val.(*resultGetMemoryInfo).value
-	} else {
-		log.Errorf(l, "RPC GetMemoryInfo failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (res ImageInfoId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetFramebufferColor{device: device, after: after, settings: settings}); err == nil {
@@ -104,6 +84,26 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 	return
 }
 
+func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res MemoryInfoId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetMemoryInfo{after: after, rng: rng}); err == nil {
+		res = val.(*resultGetMemoryInfo).value
+	} else {
+		log.Errorf(l, "RPC GetMemoryInfo failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) GetSchema(l log.Logger) (res Schema, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetSchema{}); err == nil {
+		res = val.(*resultGetSchema).value
+	} else {
+		log.Errorf(l, "RPC GetSchema failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (res TimingInfoId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, flags: flags}); err == nil {
@@ -114,32 +114,22 @@ func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags 
 	return
 }
 
+func (c client) Import(name string, Data []uint8, l log.Logger) (res CaptureId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
+		res = val.(*resultImport).value
+	} else {
+		log.Errorf(l, "RPC Import failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiId, width uint32, height uint32, atomIds []uint64, l log.Logger) (res BinaryId, err error) {
 	var val interface{}
 	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIds: atomIds}); err == nil {
 		res = val.(*resultPrerenderFramebuffers).value
 	} else {
 		log.Errorf(l, "RPC PrerenderFramebuffers failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGet{p: p}); err == nil {
-		res = val.(*resultGet).value
-	} else {
-		log.Errorf(l, "RPC Get failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
-	var val interface{}
-	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {
-		res = val.(*resultSet).value
-	} else {
-		log.Errorf(l, "RPC Set failed with error: %v", err)
 	}
 	return
 }
@@ -210,6 +200,16 @@ func (c client) ResolveTimingInfo(id TimingInfoId, l log.Logger) (res TimingInfo
 		res = val.(*resultResolveTimingInfo).value
 	} else {
 		log.Errorf(l, "RPC ResolveTimingInfo failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
+	var val interface{}
+	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {
+		res = val.(*resultSet).value
+	} else {
+		log.Errorf(l, "RPC Set failed with error: %v", err)
 	}
 	return
 }
