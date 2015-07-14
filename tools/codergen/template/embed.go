@@ -8,6 +8,8 @@ package template
 var embedded = map[string]string{
 	cpp_binary_tmpl_file:  cpp_binary_tmpl,
 	go_binary_tmpl_file:   go_binary_tmpl,
+	go_client_tmpl_file:   go_client_tmpl,
+	go_common_tmpl_file:   go_common_tmpl,
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
 }
@@ -377,17 +379,7 @@ func (v *{{$name}}) Parse(s string) error {
 }
 {{end}}{{end}}
 
-{{define "Go.File"}}
-{{$.Copyright}}
-
-package {{.Name}}
-
-import (
-	"reflect"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	{{range $imp, $v := .Imports}}"{{$imp}}"
-{{end}})
+{{define "Go.Binary"}}{{template "Go.Prelude" .}}
 
 {{if len .Structs}}{{if not .IsTest}}var Namespace = registry.NewNamespace(){{end}}
 func init() {
@@ -407,6 +399,98 @@ var ConstantValues schema.Constants
 {{range .Constants}}{{template "Go.Constants" .}}
 {{end}}
 {{end}}{{end}}
+`
+const go_client_tmpl_file = `go_client.tmpl`
+const go_client_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Client"}}{{template "Go.Prelude" .}}
+
+{{$s := .Service}}
+// Client is the client interface for {{$s.Name}} calls.
+type Client interface {
+  // Client exposes all the {{$s.Name}} interface methods.
+  {{$s.Name}}
+  // Multiplexer returns the multiplexer used for communication to the server.
+  Multiplexer() *multiplexer.Multiplexer
+  // Namespace returns the custom namespace used for decoding responses from the
+  // server, or nil if no custom namespace has been specified.
+  Namespace() *registry.Namespace
+}
+type client struct { rpc.Client }
+
+// NewClient creates a new rpc client object that uses the multiplexer m for
+// communication the namespace n for decoding objects. If n is nil then the
+// global namespace is used.
+func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
+  return client{rpc.NewClient(m, n)}
+}
+
+// Client compliance{{range $s.Methods}}{{if .Result.Type}}
+func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) (res {{Call "Go.Type" .Result.Type}}, err error) {
+  var val interface{}
+  if val, err = c.Send(&{{.Call.Struct.Name}}{ {{range .Call.Params}}{{.Name}}: {{.Name}},{{end}} }); err == nil {
+    res = val.(*{{.Result.Struct.Name}}).value
+  } else {
+    log.Errorf(l, "{{$s.Name}} {{.Name}} failed with error: %v", err)
+  }
+  return
+}{{else}}
+func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) error {
+  _, err := c.Send(&{{.Call.Struct.Name}}{ {{range .Call.Params}}{{.Name}}: {{.Name}},{{end}} })
+  return err
+}{{end}}
+{{end}}
+{{end}}
+`
+const go_common_tmpl_file = `go_common.tmpl`
+const go_common_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Prelude"}}
+{{$.Copyright}}
+
+package {{.Name}}
+
+import (
+	"reflect"
+	"android.googlesource.com/platform/tools/gpu/binary/any"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/rpc"
+	{{range $imp, $v := .Imports}}"{{$imp}}"
+{{end}}){{end}}
+
+{{define "Go.Type"}}{{.Name}}{{end}}
+{{define "Go.Type.Any"}}interface{}{{end}}
+{{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
+{{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
+{{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
 `
 const java_binary_tmpl_file = `java_binary.tmpl`
 const java_binary_tmpl = `{{/*

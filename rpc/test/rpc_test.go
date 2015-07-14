@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package test is a pure test package to do full testing of the rpc package.
 package test
 
 import (
