@@ -32,15 +32,9 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		}()
 		switch call := in.(type) {
-		case *callGetSchema:
-			if res, err := server.GetSchema(l); err == nil {
-				return &resultGetSchema{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callImport:
-			if res, err := server.Import(call.name, call.Data, l); err == nil {
-				return &resultImport{value: res}
+		case *callGet:
+			if res, err := server.Get(call.p, l); err == nil {
+				return &resultGet{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -56,12 +50,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callGetMemoryInfo:
-			if res, err := server.GetMemoryInfo(call.after, call.rng, l); err == nil {
-				return &resultGetMemoryInfo{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callGetFramebufferColor:
 			if res, err := server.GetFramebufferColor(call.device, call.after, call.settings, l); err == nil {
 				return &resultGetFramebufferColor{value: res}
@@ -74,27 +62,33 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callGetMemoryInfo:
+			if res, err := server.GetMemoryInfo(call.after, call.rng, l); err == nil {
+				return &resultGetMemoryInfo{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callGetSchema:
+			if res, err := server.GetSchema(l); err == nil {
+				return &resultGetSchema{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callGetTimingInfo:
 			if res, err := server.GetTimingInfo(call.device, call.capture, call.flags, l); err == nil {
 				return &resultGetTimingInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
+		case *callImport:
+			if res, err := server.Import(call.name, call.Data, l); err == nil {
+				return &resultImport{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callPrerenderFramebuffers:
 			if res, err := server.PrerenderFramebuffers(call.device, call.capture, call.api, call.width, call.height, call.atomIds, l); err == nil {
 				return &resultPrerenderFramebuffers{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callGet:
-			if res, err := server.Get(call.p, l); err == nil {
-				return &resultGet{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callSet:
-			if res, err := server.Set(call.p, call.v, l); err == nil {
-				return &resultSet{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -137,6 +131,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		case *callResolveTimingInfo:
 			if res, err := server.ResolveTimingInfo(call.id, l); err == nil {
 				return &resultResolveTimingInfo{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callSet:
+			if res, err := server.Set(call.p, call.v, l); err == nil {
+				return &resultSet{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}

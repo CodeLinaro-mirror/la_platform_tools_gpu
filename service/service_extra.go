@@ -11,28 +11,16 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-// Call GetSchema
-type callGetSchema struct {
+// Call Get
+type callGet struct {
 	binary.Generate
+	p path.Path
 }
 
-// Result GetSchema
-type resultGetSchema struct {
+// Result Get
+type resultGet struct {
 	binary.Generate
-	value Schema
-}
-
-// Call Import
-type callImport struct {
-	binary.Generate
-	name string
-	Data []uint8
-}
-
-// Result Import
-type resultImport struct {
-	binary.Generate
-	value CaptureId
+	value interface{}
 }
 
 // Call GetCaptures
@@ -55,19 +43,6 @@ type callGetDevices struct {
 type resultGetDevices struct {
 	binary.Generate
 	value []DeviceId
-}
-
-// Call GetMemoryInfo
-type callGetMemoryInfo struct {
-	binary.Generate
-	after *path.Atom
-	rng   memory.Range
-}
-
-// Result GetMemoryInfo
-type resultGetMemoryInfo struct {
-	binary.Generate
-	value MemoryInfoId
 }
 
 // Call GetFramebufferColor
@@ -97,6 +72,30 @@ type resultGetFramebufferDepth struct {
 	value ImageInfoId
 }
 
+// Call GetMemoryInfo
+type callGetMemoryInfo struct {
+	binary.Generate
+	after *path.Atom
+	rng   memory.Range
+}
+
+// Result GetMemoryInfo
+type resultGetMemoryInfo struct {
+	binary.Generate
+	value MemoryInfoId
+}
+
+// Call GetSchema
+type callGetSchema struct {
+	binary.Generate
+}
+
+// Result GetSchema
+type resultGetSchema struct {
+	binary.Generate
+	value Schema
+}
+
 // Call GetTimingInfo
 type callGetTimingInfo struct {
 	binary.Generate
@@ -109,6 +108,19 @@ type callGetTimingInfo struct {
 type resultGetTimingInfo struct {
 	binary.Generate
 	value TimingInfoId
+}
+
+// Call Import
+type callImport struct {
+	binary.Generate
+	name string
+	Data []uint8
+}
+
+// Result Import
+type resultImport struct {
+	binary.Generate
+	value CaptureId
 }
 
 // Call PrerenderFramebuffers
@@ -126,31 +138,6 @@ type callPrerenderFramebuffers struct {
 type resultPrerenderFramebuffers struct {
 	binary.Generate
 	value BinaryId
-}
-
-// Call Get
-type callGet struct {
-	binary.Generate
-	p path.Path
-}
-
-// Result Get
-type resultGet struct {
-	binary.Generate
-	value interface{}
-}
-
-// Call Set
-type callSet struct {
-	binary.Generate
-	p path.Path
-	v interface{}
-}
-
-// Result Set
-type resultSet struct {
-	binary.Generate
-	value path.Path
 }
 
 // Call ResolveAtomStream
@@ -235,4 +222,17 @@ type callResolveTimingInfo struct {
 type resultResolveTimingInfo struct {
 	binary.Generate
 	value TimingInfo
+}
+
+// Call Set
+type callSet struct {
+	binary.Generate
+	p path.Path
+	v interface{}
+}
+
+// Result Set
+type resultSet struct {
+	binary.Generate
+	value path.Path
 }

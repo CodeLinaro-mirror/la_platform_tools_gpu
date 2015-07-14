@@ -52,56 +52,6 @@ func (c client) EnumToString(e Enum, l log.Logger) (res string, err error) {
 	return
 }
 
-func (c client) GetStruct(l log.Logger) (res Struct, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetStruct{}); err == nil {
-		res = val.(*resultGetStruct).value
-	} else {
-		log.Errorf(l, "RPC GetStruct failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) SetStruct(s Struct, l log.Logger) error {
-	_, err := c.Send(&callSetStruct{s: s})
-	return err
-}
-
-func (c client) GetResource(l log.Logger) (res ResourceId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetResource{}); err == nil {
-		res = val.(*resultGetResource).value
-	} else {
-		log.Errorf(l, "RPC GetResource failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) UseResource(r ResourceId, l log.Logger) error {
-	_, err := c.Send(&callUseResource{r: r})
-	return err
-}
-
-func (c client) ResolveResource(r ResourceId, l log.Logger) (res Resource, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveResource{r: r}); err == nil {
-		res = val.(*resultResolveResource).value
-	} else {
-		log.Errorf(l, "RPC ResolveResource failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) GetSingleListNode(l log.Logger) (res *ListNode, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetSingleListNode{}); err == nil {
-		res = val.(*resultGetSingleListNode).value
-	} else {
-		log.Errorf(l, "RPC GetSingleListNode failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) GetListNodeChain(l log.Logger) (res *ListNode, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetListNodeChain{}); err == nil {
@@ -120,4 +70,54 @@ func (c client) GetListNodeChainArray(l log.Logger) (res []*ListNode, err error)
 		log.Errorf(l, "RPC GetListNodeChainArray failed with error: %v", err)
 	}
 	return
+}
+
+func (c client) GetResource(l log.Logger) (res ResourceId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetResource{}); err == nil {
+		res = val.(*resultGetResource).value
+	} else {
+		log.Errorf(l, "RPC GetResource failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) GetSingleListNode(l log.Logger) (res *ListNode, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetSingleListNode{}); err == nil {
+		res = val.(*resultGetSingleListNode).value
+	} else {
+		log.Errorf(l, "RPC GetSingleListNode failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) GetStruct(l log.Logger) (res Struct, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetStruct{}); err == nil {
+		res = val.(*resultGetStruct).value
+	} else {
+		log.Errorf(l, "RPC GetStruct failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) ResolveResource(r ResourceId, l log.Logger) (res Resource, err error) {
+	var val interface{}
+	if val, err = c.Send(&callResolveResource{r: r}); err == nil {
+		res = val.(*resultResolveResource).value
+	} else {
+		log.Errorf(l, "RPC ResolveResource failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) SetStruct(s Struct, l log.Logger) error {
+	_, err := c.Send(&callSetStruct{s: s})
+	return err
+}
+
+func (c client) UseResource(r ResourceId, l log.Logger) error {
+	_, err := c.Send(&callUseResource{r: r})
+	return err
 }

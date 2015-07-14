@@ -13,18 +13,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-func (c callGetSchema) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetSchema()")
-}
-func (r resultGetSchema) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callImport) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "Import(name: %v, Data: %v)",
-		c.name, c.Data,
+func (c callGet) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Get(p: %v)",
+		c.p,
 	)
 }
-func (r resultImport) Format(f fmt.State, c rune) {
+func (r resultGet) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetCaptures) Format(f fmt.State, r rune) {
@@ -37,14 +31,6 @@ func (c callGetDevices) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetDevices()")
 }
 func (r resultGetDevices) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetMemoryInfo(after: %v, rng: %v)",
-		c.after, c.rng,
-	)
-}
-func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetFramebufferColor) Format(f fmt.State, r rune) {
@@ -63,6 +49,20 @@ func (c callGetFramebufferDepth) Format(f fmt.State, r rune) {
 func (r resultGetFramebufferDepth) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetMemoryInfo(after: %v, rng: %v)",
+		c.after, c.rng,
+	)
+}
+func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callGetSchema) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetSchema()")
+}
+func (r resultGetSchema) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callGetTimingInfo) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetTimingInfo(device: %v, capture: %v, flags: %v)",
 		c.device, c.capture, c.flags,
@@ -71,28 +71,20 @@ func (c callGetTimingInfo) Format(f fmt.State, r rune) {
 func (r resultGetTimingInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
+func (c callImport) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Import(name: %v, Data: %v)",
+		c.name, c.Data,
+	)
+}
+func (r resultImport) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIds: %v)",
 		c.device, c.capture, c.api, c.width, c.height, c.atomIds,
 	)
 }
 func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callGet) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "Get(p: %v)",
-		c.p,
-	)
-}
-func (r resultGet) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callSet) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "Set(p: %v, v: %v)",
-		c.p, c.v,
-	)
-}
-func (r resultSet) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callResolveAtomStream) Format(f fmt.State, r rune) {
@@ -149,6 +141,14 @@ func (c callResolveTimingInfo) Format(f fmt.State, r rune) {
 	)
 }
 func (r resultResolveTimingInfo) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callSet) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Set(p: %v, v: %v)",
+		c.p, c.v,
+	)
+}
+func (r resultSet) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 
