@@ -59,7 +59,7 @@ type Result struct {
 
 // Type returns the schema type of the return value if present, nil if not.
 func (r Result) Type() schema.Type {
-	if r.Struct == nil {
+	if len(r.Struct.Class.Fields) < 1 {
 		return nil
 	}
 	return r.Struct.Class.Fields[0].Type
@@ -110,9 +110,7 @@ func (m *Module) addService(n *types.TypeName, b *types.Interface) error {
 		}
 		method := &Method{Name: decl.Name()}
 		method.Call.Struct = serviceStruct(m, "call"+decl.Name(), sig.Params(), paramCount-1, b)
-		if resultCount > 1 {
-			method.Result.Struct = serviceStruct(m, "result"+decl.Name(), sig.Results(), resultCount-1, b)
-		}
+		method.Result.Struct = serviceStruct(m, "result"+decl.Name(), sig.Results(), resultCount-1, b)
 		s.Methods = append(s.Methods, method)
 	}
 	m.Services = append(m.Services, s)
