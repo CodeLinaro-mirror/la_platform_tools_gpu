@@ -35,6 +35,7 @@ const rpc_go_tmpl = `{{/*
 {{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write (print $api "_helpers.go")}}
 {{$ | Macro "Client" | GoFmt | Write (print $api "_client.go")}}
 {{$ | Macro "Server" | GoFmt | Write (print $api "_server.go")}}
+{{$ | Macro "Database" | GoFmt | Write (print $api "_database.go")}}
 
 {{define "Rpc"}}
   {{template "GeneratedHeader"}}
@@ -544,6 +545,17 @@ func (h {{$.Name}}) Valid() bool {
       }
     })
   }
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the database helper implementation
+-------------------------------------------------------------------------------
+*/}}
+{{define "Database"}}
+  {{AssertType $ "API"}}
+
+  {{template "GeneratedHeader"}}
 
   type Resolver struct {
     Database database.Database
