@@ -125,7 +125,9 @@ func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Temp
 	}
 	r := reflect.TypeOf(node)
 	// using the reflected typename
-	try = append(try, fmt.Sprint(prefix, ".", r.Name()))
+	if r.Name() != "" {
+		try = append(try, fmt.Sprint(prefix, ".", r.Name()))
+	}
 	if r.Kind() == reflect.Ptr {
 		try = append(try, fmt.Sprint(prefix, ".", r.Elem().Name()))
 	}
