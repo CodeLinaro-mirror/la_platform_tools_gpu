@@ -74,9 +74,9 @@ func New() *Templates {
 	installMethods(v, f.funcs)
 	installFields(v.Elem(), f.funcs)
 	f.templates.Funcs(f.funcs)
-	template.Must(f.templates.New("go.tmpl").Parse(string(go_tmpl)))
-	template.Must(f.templates.New("java.tmpl").Parse(string(java_tmpl)))
-	template.Must(f.templates.New("cpp.tmpl").Parse(string(cpp_tmpl)))
+	for name, content := range embedded {
+		template.Must(f.templates.New(name).Parse(content))
+	}
 	return f
 }
 
