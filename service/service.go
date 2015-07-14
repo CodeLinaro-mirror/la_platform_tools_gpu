@@ -23,6 +23,7 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 // binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
+// binary: service = RPC
 
 // Clone returns a new AtomStream holding a shallow-copy of the Atoms slice.
 func (s *AtomStream) Clone() *AtomStream {

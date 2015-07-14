@@ -21,25 +21,42 @@ import (
 	"golang.org/x/tools/imports"
 )
 
-type GoPackage struct {
+type GoBinary struct {
 	*Module
 	Copyright string
+}
+
+type GoService struct {
+	GoBinary
+	Service *Service
+}
+
+func goFileName(m *Module, prefix string, category string) string {
+	name := prefix + "_" + category
+	if m.IsTest {
+		name += "_test"
+	}
+	return path.Join(m.Path, name+".go")
 }
 
 func Go(m *Module, info copyright.Info, gen Generator) error {
 	if len(m.Structs) == 0 && len(m.Constants) == 0 {
 		return nil
 	}
-	pkg := &GoPackage{
+	pkg := GoBinary{
 		Module:    m,
 		Copyright: copyright.Build("generated_by", info),
 	}
-	out := m.Name + "_binary.go"
-	if m.IsTest {
-		out = m.Name + "_binary_test.go"
+	if err := gen("Go.Binary", pkg, goFileName(m, m.Name, "binary"), reflowGo); err != nil {
+		return err
 	}
-	out = path.Join(m.Path, out)
-	return gen("Go.File", pkg, out, reflowGo)
+	for _, s := range m.Services {
+		arg := GoService{GoBinary: pkg, Service: s}
+		if err := gen("Go.Client", arg, goFileName(m, s.Prefix, "client"), reflowGo); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func reflowGo(b []byte) []byte {

@@ -258,17 +258,7 @@ func (v *{{$name}}) Parse(s string) error {
 }
 {{end}}{{end}}
 
-{{define "Go.File"}}
-{{$.Copyright}}
-
-package {{.Name}}
-
-import (
-	"reflect"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	{{range $imp, $v := .Imports}}"{{$imp}}"
-{{end}})
+{{define "Go.Binary"}}{{template "Go.Prelude" .}}
 
 {{if len .Structs}}{{if not .IsTest}}var Namespace = registry.NewNamespace(){{end}}
 func init() {
