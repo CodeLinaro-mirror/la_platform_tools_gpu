@@ -271,17 +271,7 @@ const rpc_go_tmpl = `{{/*
 
 {{define "ClassExtra"}}{{end}}
 
-{{define "ClassHelpers"}}
-  func Create{{$.Name}}(
-    {{Macro "AllFields" "Class" $ "Macro" "CreateClassParameter"}}
-  ) *{{$.Name}} {
-    return &{{$.Name}} {
-      {{Macro "AllFields" "Class" $ "Macro" "AssignClassParameter"}}
-    }
-  }
-¶
-  {{Macro "AllFields" "Class" $ "Macro" "DefineClassFieldAccessor"}}
-{{end}}
+{{define "ClassHelpers"}}{{end}}
 
 
 {{/*
@@ -300,11 +290,7 @@ const rpc_go_tmpl = `{{/*
 {{end}}
 
 {{define "HandleExtra"}}{{end}}
-{{define "HandleHelpers"}}
-func (h {{$.Name}}) Valid() bool {
-  return h.ID.Valid()
-}
-{{end}}
+{{define "HandleHelpers"}}{{end}}
 
 
 {{/*
@@ -344,13 +330,7 @@ func (h {{$.Name}}) Valid() bool {
   {{AssertType $ "Enum"}}
 {{end}}
 
-{{define "EnumHelpers"}}
-  {{AssertType $ "Enum"}}
-
-  {{range $_, $e := $.Entries}}
-    func (i {{$.Name}}) Is{{$e.Name}}() bool { return i == {{$.Name}}{{$e.Name}} }
-  {{end}}
-{{end}}
+{{define "EnumHelpers"}}{{end}}
 
 
 {{/*
