@@ -12,7 +12,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
@@ -96,27 +95,4 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			return rpc.NewError("Unexpected RPC function: %T", call)
 		}
 	})
-}
-
-type Resolver struct {
-	Database database.Database
-}
-
-// StoreResource stores v into the database d, returning the ResourceId.
-func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceId, error) {
-	id, err := database.Store(v, d, l)
-	return ResourceId{ID: id}, err
-}
-
-// ResolveResource loads and returns the Resource stored in the database d, using id.
-func ResolveResource(id ResourceId, d database.Database, l log.Logger) (res Resource, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*Resource))
-	}
-	return res, err
-}
-
-// ResolveResource loads and returns the Resource stored in the resolver's database, using id.
-func (r Resolver) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
-	return ResolveResource(id, r.Database, l)
 }
