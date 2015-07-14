@@ -49,10 +49,10 @@
 ¶
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "no_mutate")}}
-      func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+      func (ϟa *{{Template "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
         ϟc := getState(ϟs)
         _ = ϟc
-        {{Macro "Go.CommandLogic" $c}}
+        {{Template "Go.CommandLogic" $c}}
         return nil
       }
     {{end}}

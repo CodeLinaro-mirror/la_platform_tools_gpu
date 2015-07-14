@@ -32,16 +32,16 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Type"}}
-  {{if not (IsType $)}}{{Macro "Go.Type" (TypeOf $)}}
+  {{if not (IsType $)}}{{Template "Go.Type" (TypeOf $)}}
   {{else if IsAny           $}}interface{}
-  {{else if IsPseudonym     $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsStaticArray   $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsMap           $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsClass         $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsEnum          $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsPointer       $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsSlice         $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsReference     $}}(*{{Macro "Go.Type" $.To}})
+  {{else if IsPseudonym     $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsStaticArray   $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsMap           $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsClass         $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsEnum          $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsPointer       $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsSlice         $}}{{Template "Go.QualifiedName" $}}
+  {{else if IsReference     $}}(*{{Template "Go.Type" $.To}})
   {{else if IsBool          $}}bool
   {{else if IsInt           $}}int64
   {{else if IsUint          $}}uint64
@@ -70,8 +70,8 @@
 */}}
 {{define "Go.Null"}}
   {{AssertType $ "Type"}}
-  {{     if IsPointer       $}}{{Macro "Go.Type" $}}{}
-  {{else if IsReference     $}}{{Macro "Go.Type" $}}(nil)
+  {{     if IsPointer       $}}{{Template "Go.Type" $}}{}
+  {{else if IsReference     $}}{{Template "Go.Type" $}}(nil)
   {{else if IsBool          $}}false
   {{else if IsInt           $}}int(0)
   {{else if IsUint          $}}uint(0)
@@ -86,7 +86,7 @@
   {{else if IsU64           $}}uint64(0)
   {{else if IsF64           $}}float64(0)
   {{else if IsString        $}}""
-  {{else if IsPseudonym     $}}{{Macro "Go.Type" $}}({{Macro "Go.Null" $.To}})
+  {{else if IsPseudonym     $}}{{Template "Go.Type" $}}({{Template "Go.Null" $.To}})
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
@@ -104,7 +104,7 @@
   {{AssertType $.Name       "string"      }}
   {{AssertType $.ErrHandler "string" "nil"}}
 
-  {{     if not $.ErrHandler}}{{Macro "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
+  {{     if not $.ErrHandler}}{{Template "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
   {{else if IsStaticArray $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
   {{else if IsMap         $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
   {{else if IsClass       $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
@@ -115,9 +115,9 @@
     {{else if IsMap         $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
     {{else if IsClass       $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
     {{else if IsPointer     $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
-    {{else}}{{Macro "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
+    {{else}}{{Template "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
     {{end}}
-  {{else}}{{Macro "Go.DecodePOD" "Type" $.Type "Name" $.Name "ErrHandler" $.ErrHandler}}
+  {{else}}{{Template "Go.DecodePOD" "Type" $.Type "Name" $.Name "ErrHandler" $.ErrHandler}}
   {{end}}
 {{end}}
 
@@ -130,7 +130,7 @@
   Cast can be used to cast the value type before assigment to Name.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.DecodePOD_cast"}}{{if $}}{{Macro "Go.Type" $}}(v){{else}}v{{end}}{{end}}
+{{define "Go.DecodePOD_cast"}}{{if $}}{{Template "Go.Type" $}}(v){{else}}v{{end}}{{end}}
 {{define "Go.DecodePOD"}}
   {{AssertType $.Type       "Type"        }}
   {{AssertType $.Name       "string"      }}
@@ -177,7 +177,7 @@
   {{$ty       := $.Type | Underlying}}
   {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
 
-  {{     if not $.ErrHandler}}{{Macro "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
+  {{     if not $.ErrHandler}}{{Template "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
   {{else if IsStaticArray $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
   {{else if IsMap         $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
   {{else if IsClass       $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
@@ -237,7 +237,7 @@
   Emits the expression to lookup the given parameter.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.Parameter"}}{{AssertType $ "Parameter"}}{{Macro "Go.Public" $.Name}}{{end}}
+{{define "Go.Parameter"}}{{AssertType $ "Parameter"}}{{Template "Go.Public" $.Name}}{{end}}
 
 
 {{/*
@@ -248,7 +248,7 @@
 {{define "Go.CmdName"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "Go.Public" (Macro "CmdName" $)}}
+  {{Template "Go.Public" (Macro "CmdName" $)}}
 {{end}}
 
 
@@ -261,7 +261,7 @@
   {{AssertType $ "Function"}}
 
   ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-  {{Macro "Go.Block" $.Block}}
+  {{Template "Go.Block" $.Block}}
 {{end}}
 
 
@@ -289,9 +289,9 @@
 */}}
 {{define "Go.Statement"}}
   {{if $override := Global "Go.Statement.Override"}}
-    {{Macro $override $}}
+    {{Template $override $}}
   {{else}}
-    {{Macro "Go.Statement.Default" $}}
+    {{Template "Go.Statement.Default" $}}
   {{end}}
 {{end}}
 
@@ -302,21 +302,21 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Statement.Default"}}
-  {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Go.Read" $.Local.Value}} {{Macro "Go.TypeComment" (TypeOf $.Local)}}
+  {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Template "Go.Read" $.Local.Value}} {{Template "Go.TypeComment" (TypeOf $.Local)}}
   {{else if IsAssert       $}}
-  {{else if IsAssign       $}}{{Macro "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
-  {{else if IsArrayAssign  $}}{{Macro "Go.ArrayAssign" $}}
-  {{else if IsMapAssign    $}}{{Macro "Go.MapAssign" $}}
-  {{else if IsSliceAssign  $}}{{Macro "Go.SliceAssign" $}}
-  {{else if IsCopy         $}}{{Macro "Go.Copy" $}}
-  {{else if IsReturn       $}}{{Macro "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
-  {{else if IsIteration    $}}{{Macro "Go.Iteration" $}}
-  {{else if IsCall         $}}{{Macro "Go.Call" $}}
-  {{else if IsRead         $}}{{Macro "Go.Read" $.Slice}}.OnRead(ϟs)
-  {{else if IsWrite        $}}{{Macro "Go.Read" $.Slice}}.OnWrite(ϟs)
-  {{else if IsFence        $}}{{Macro "Go.Fence" $}}
-  {{else if IsBranch       $}}{{Macro "Go.Branch" $}}
-  {{else if IsSwitch       $}}{{Macro "Go.Switch" $}}
+  {{else if IsAssign       $}}{{Template "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
+  {{else if IsArrayAssign  $}}{{Template "Go.ArrayAssign" $}}
+  {{else if IsMapAssign    $}}{{Template "Go.MapAssign" $}}
+  {{else if IsSliceAssign  $}}{{Template "Go.SliceAssign" $}}
+  {{else if IsCopy         $}}{{Template "Go.Copy" $}}
+  {{else if IsReturn       $}}{{Template "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
+  {{else if IsIteration    $}}{{Template "Go.Iteration" $}}
+  {{else if IsCall         $}}{{Template "Go.Call" $}}
+  {{else if IsRead         $}}{{Template "Go.Read" $.Slice}}.OnRead(ϟs)
+  {{else if IsWrite        $}}{{Template "Go.Read" $.Slice}}.OnWrite(ϟs)
+  {{else if IsFence        $}}{{Template "Go.Fence" $}}
+  {{else if IsBranch       $}}{{Template "Go.Branch" $}}
+  {{else if IsSwitch       $}}{{Template "Go.Switch" $}}
   {{else}}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
 {{end}}
@@ -330,18 +330,18 @@
 {{define "Go.Range"}}
   {{AssertType $.Name "string"}}
   {{AssertType $.Range "BinaryOp"}}
-  for {{$.Name}} := {{Macro "Go.Type" $.Range.RHS}}({{Macro "Go.Read" $.Range.LHS}}); {{$.Name}} < {{Macro "Go.Read" $.Range.RHS}}; {{$.Name}}++
+  for {{$.Name}} := {{Template "Go.Type" $.Range.RHS}}({{Template "Go.Read" $.Range.LHS}}); {{$.Name}} < {{Template "Go.Read" $.Range.RHS}}; {{$.Name}}++
 {{end}}
 
 {{define "Go.Iteration"}}
   {{AssertType $ "Iteration"}}
   {{     if IsBinaryOp $.Iterable}}
-    {{Macro "Go.Range" "Name" $.Iterator.Name "Range" $.Iterable}} {
-      {{Macro "Go.Block" $.Block}}
+    {{Template "Go.Range" "Name" $.Iterator.Name "Range" $.Iterable}} {
+      {{Template "Go.Block" $.Block}}
     }
   {{else}}
-    for _, {{$.Iterator.Name}} := range {{Macro "Go.Read" $.Iterable}}.Range() {
-      {{Macro "Go.Block" $.Block}}
+    for _, {{$.Iterator.Name}} := range {{Template "Go.Read" $.Iterable}}.Range() {
+      {{Template "Go.Block" $.Block}}
     }
   {{end}}
 {{end}}
@@ -356,7 +356,7 @@
   {{AssertType $ "Call"}}
   {{$args := ForEach $.Arguments "Go.Read" | JoinWith ", "}}
   {{if $.Target.Object}}
-    {{Macro "Go.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{$args}})
+    {{Template "Go.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{$args}})
   {{else}}
     externs{ϟs, ϟd, ϟl}.{{$.Target.Function.Name}}({{$args}})
   {{end}}
@@ -371,7 +371,7 @@
 {{define "Go.Fence"}}
   {{AssertType $ "Fence"}}
   ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-  {{if not (IsNil $.Statement)}}{{Macro "Go.Statement" $.Statement}}{{end}}
+  {{if not (IsNil $.Statement)}}{{Template "Go.Statement" $.Statement}}{{end}}
 {{end}}
 
 
@@ -382,11 +382,11 @@
 */}}
 {{define "Go.Branch"}}
   {{AssertType $ "Branch"}}
-  if {{Macro "Go.Read" $.Condition}} {
-    {{Macro "Go.Block" $.True}}
+  if {{Template "Go.Read" $.Condition}} {
+    {{Template "Go.Block" $.True}}
   {{if len $.False.Statements}}
   } else {
-    {{Macro "Go.Block" $.False}}
+    {{Template "Go.Block" $.False}}
   {{end}}
   }
 {{end}}
@@ -399,15 +399,15 @@
 */}}
 {{define "Go.Switch"}}
   {{AssertType $ "Switch"}}
-  switch {{Macro "Go.Read" $.Value}} {
+  switch {{Template "Go.Read" $.Value}} {
     {{range $c := $.Cases}}
       case {{range $i, $cond := $c.Conditions}}§
-        {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
+        {{if $i}}, {{end}}{{Template "Go.Read" $cond}}§
         {{end}}:
-          {{Macro "Go.Block" $c.Block}}
+          {{Template "Go.Block" $c.Block}}
     {{end}}
     default:
-      v := {{Macro "Go.Read" $.Value}}
+      v := {{Template "Go.Read" $.Value}}
       return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
   }
 {{end}}
@@ -420,7 +420,7 @@
 */}}
 {{define "Go.Copy"}}
   {{AssertType $ "Copy"}}
-  {{Macro "Go.Read" $.Dst}}.Copy({{Macro "Go.Read" $.Src}}, ϟs, ϟd, ϟl)
+  {{Template "Go.Read" $.Dst}}.Copy({{Template "Go.Read" $.Src}}, ϟs, ϟd, ϟl)
 {{end}}
 
 
@@ -432,9 +432,9 @@
 {{define "Go.Assign"}}
   {{if IsIgnore $.LHS}}
     {{if ne $.Operator "="}}{{Error "Compound assignments to '_' are not supported (%s)" $.Operator}}{{end}}
-    _ = {{Macro "Go.Read" $.RHS}}
+    _ = {{Template "Go.Read" $.RHS}}
   {{else}}
-    {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
+    {{Template "Go.Read" $.LHS}} {{$.Operator}} {{Template "Go.Read" $.RHS}}
   {{end}}
 {{end}}
 
@@ -446,7 +446,7 @@
 */}}
 {{define "Go.ArrayAssign"}}
   {{AssertType $ "ArrayAssign"}}
-  {{Macro "Go.Read" $.To.Array}}.Elements[{{Macro "Go.Read" $.To.Index}}] {{$.Operator}} {{Macro "Go.Read" $.Value}}
+  {{Template "Go.Read" $.To.Array}}.Elements[{{Template "Go.Read" $.To.Index}}] {{$.Operator}} {{Template "Go.Read" $.Value}}
 {{end}}
 
 
@@ -457,7 +457,7 @@
 */}}
 {{define "Go.MapAssign"}}
   {{AssertType $ "MapAssign"}}
-  {{if eq $.Operator "="}}{{Macro "Go.Read" $.To.Map}}[{{Macro "Go.Read" $.To.Index}}] = {{Macro "Go.Read" $.Value}}
+  {{if eq $.Operator "="}}{{Template "Go.Read" $.To.Map}}[{{Template "Go.Read" $.To.Index}}] = {{Template "Go.Read" $.Value}}
   {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
@@ -469,7 +469,7 @@
 */}}
 {{define "Go.SliceAssign"}}
   {{AssertType $ "SliceAssign"}}
-  {{if eq $.Operator "="}}{{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).Write({{Macro "Go.Read" $.Value}}, ϟs)
+  {{if eq $.Operator "="}}{{Template "Go.Read" $.To.Slice}}.Index({{Template "Go.Read" $.To.Index}}, ϟs).Write({{Template "Go.Read" $.Value}}, ϟs)
   {{else}}{{Error "Unsupported SliceAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
@@ -483,9 +483,9 @@
 */}}
 {{define "Go.Read"}}
   {{if $override := Global "Go.Read.Override"}}
-    {{Macro $override $}}
+    {{Template $override $}}
   {{else}}
-    {{Macro "Go.Read.Default" $}}
+    {{Template "Go.Read.Default" $}}
   {{end}}
 {{end}}
 
@@ -497,34 +497,34 @@
 */}}
 {{define "Go.Read.Default"}}
   {{     if IsBoolValue        $}}{{$}}
-  {{else if IsNumericValue     $}}{{Macro "Go.Type" $}}({{$}})
-  {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "Go.Read" $.Expression}})
+  {{else if IsNumericValue     $}}{{Template "Go.Type" $}}({{$}})
+  {{else if IsUnaryOp          $}}{{$.Operator}}({{Template "Go.Read" $.Expression}})
   {{else if IsStringValue      $}}{{printf "%q" $}}
   {{else if IsEnumEntry        $}}{{$.Owner.Name}}_{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
-  {{else if IsBitTest          $}}(({{Macro "Go.Read" $.Bits}}) & ({{Macro "Go.Read" $.Bitfield}}) != 0)
-  {{else if IsBinaryOp         $}}({{Macro "Go.Read" $.LHS}}) {{$.Operator}} ({{Macro "Go.Read" $.RHS}})
-  {{else if IsCast             $}}{{Macro "Go.Cast" $}}
-  {{else if IsCall             $}}{{Macro "Go.Call" $}}
-  {{else if IsUnknown          $}}{{Global "Go.InferredExpression" "1"}}{{Macro "Go.Read" $.Inferred}}{{Global "Go.InferredExpression" ""}}
-  {{else if IsObserved         $}}{{Macro "Go.ReadParameter" $.Parameter}}
-  {{else if IsMember           $}}{{Macro "Go.Read" $.Object}}.{{Macro "Go.Public" $.Field.Name}}
+  {{else if IsBitTest          $}}(({{Template "Go.Read" $.Bits}}) & ({{Template "Go.Read" $.Bitfield}}) != 0)
+  {{else if IsBinaryOp         $}}({{Template "Go.Read" $.LHS}}) {{$.Operator}} ({{Template "Go.Read" $.RHS}})
+  {{else if IsCast             $}}{{Template "Go.Cast" $}}
+  {{else if IsCall             $}}{{Template "Go.Call" $}}
+  {{else if IsUnknown          $}}{{Global "Go.InferredExpression" "1"}}{{Template "Go.Read" $.Inferred}}{{Global "Go.InferredExpression" ""}}
+  {{else if IsObserved         $}}{{Template "Go.ReadParameter" $.Parameter}}
+  {{else if IsMember           $}}{{Template "Go.Read" $.Object}}.{{Template "Go.Public" $.Field.Name}}
   {{else if IsGlobal           $}}ϟc.{{Title $.Name}}
-  {{else if IsParameter        $}}{{Macro "Go.ReadParameter" $}}
-  {{else if IsMapIndex         $}}{{Macro "Go.Read" $.Map}}.Get({{Macro "Go.Read" $.Index}})
-  {{else if IsMapContains      $}}{{Macro "Go.Read" $.Map}}.Contains({{Macro "Go.Read" $.Key}})
-  {{else if IsLength           $}}{{Macro "Go.Type" $.Type}}({{Macro "Go.ReadLength" "Type" (TypeOf $.Object) "Value" $.Object}})
-  {{else if IsNull             $}}{{Macro "Go.Null" $.Type}}
-  {{else if IsNew              $}}new {{Macro "Go.Type" $.Type}}
-  {{else if IsSliceIndex       $}}{{Macro "Go.Read" $.Slice  }}.Index({{Macro "Go.Read" $.Index}}, ϟs).Read(ϟs, ϟd, ϟl)
-  {{else if IsSliceRange       $}}{{Macro "Go.Read" $.Slice  }}.Slice({{Macro "Go.Read" $.Range.LHS}}, {{Macro "Go.Read" $.Range.RHS}}, ϟs)
-  {{else if IsPointerRange     $}}{{Macro "Go.Read" $.Pointer}}.Slice({{Macro "Go.Read" $.Range.LHS}}, {{Macro "Go.Read" $.Range.RHS}}, ϟs)
-  {{else if IsClone            $}}{{Macro "Go.Read" $.Slice  }}.Clone(ϟs)
-  {{else if IsMake             $}}Make{{Macro "Go.Type" $.Type}}({{Macro "Go.Read" $.Size}}, ϟs)
-  {{else if IsSelect           $}}{{Macro "Go.Select" $}}
-  {{else if IsArrayInitializer $}}{{Macro "Go.ArrayInitializer" $}}
-  {{else if IsClassInitializer $}}{{Macro "Go.ClassInitializer" $}}
-  {{else if IsCreate           $}}{{Macro "Go.Create" $}}
+  {{else if IsParameter        $}}{{Template "Go.ReadParameter" $}}
+  {{else if IsMapIndex         $}}{{Template "Go.Read" $.Map}}.Get({{Template "Go.Read" $.Index}})
+  {{else if IsMapContains      $}}{{Template "Go.Read" $.Map}}.Contains({{Template "Go.Read" $.Key}})
+  {{else if IsLength           $}}{{Template "Go.Type" $.Type}}({{Template "Go.ReadLength" "Type" (TypeOf $.Object) "Value" $.Object}})
+  {{else if IsNull             $}}{{Template "Go.Null" $.Type}}
+  {{else if IsNew              $}}new {{Template "Go.Type" $.Type}}
+  {{else if IsSliceIndex       $}}{{Template "Go.Read" $.Slice  }}.Index({{Template "Go.Read" $.Index}}, ϟs).Read(ϟs, ϟd, ϟl)
+  {{else if IsSliceRange       $}}{{Template "Go.Read" $.Slice  }}.Slice({{Template "Go.Read" $.Range.LHS}}, {{Template "Go.Read" $.Range.RHS}}, ϟs)
+  {{else if IsPointerRange     $}}{{Template "Go.Read" $.Pointer}}.Slice({{Template "Go.Read" $.Range.LHS}}, {{Template "Go.Read" $.Range.RHS}}, ϟs)
+  {{else if IsClone            $}}{{Template "Go.Read" $.Slice  }}.Clone(ϟs)
+  {{else if IsMake             $}}Make{{Template "Go.Type" $.Type}}({{Template "Go.Read" $.Size}}, ϟs)
+  {{else if IsSelect           $}}{{Template "Go.Select" $}}
+  {{else if IsArrayInitializer $}}{{Template "Go.ArrayInitializer" $}}
+  {{else if IsClassInitializer $}}{{Template "Go.ClassInitializer" $}}
+  {{else if IsCreate           $}}{{Template "Go.Create" $}}
   {{else}}{{Error "macro Go.Read called with unsupported type: %T" $}}
   {{end}}
 {{end}}
@@ -543,19 +543,19 @@
   {{$src    := Macro "Go.Read" $.Object}}
 
   {{/* T* -> number */}}{{if and (IsPointer $src_ty) (IsNumericType $dst_ty)}}
-    {{Macro "Go.Type" $.Type}}({{$src}}.Address)
+    {{Template "Go.Type" $.Type}}({{$src}}.Address)
   {{/* A[] -> B[] */}}{{else if and (IsSlice $src_ty) (IsSlice $dst_ty)}}
-    As{{Macro "Go.Type" $.Type}}({{$src}}, ϟs)
+    As{{Template "Go.Type" $.Type}}({{$src}}, ϟs)
   {{/* T[] -> T* */}}{{else if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
-    {{Macro "Go.Type" $.Type}}({{$src}}.Index(0, ϟs))
+    {{Template "Go.Type" $.Type}}({{$src}}.Index(0, ϟs))
   {{/* char* -> string */}}{{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
     string({{$src}}.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
   {{/* char[] -> string */}}{{else if and (IsSlice $src_ty) (IsString $dst_ty)}}
     string({{$src}}.Read(ϟs, ϟd, ϟl))
   {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
-    Make{{Macro "Go.Type" $.Type}}FromString({{$src}}, ϟs)
+    Make{{Template "Go.Type" $.Type}}FromString({{$src}}, ϟs)
   {{else}}
-    {{Macro "Go.Type" $.Type}}({{$src}})
+    {{Template "Go.Type" $.Type}}({{$src}})
   {{end}}
 {{end}}
 
@@ -568,7 +568,7 @@
 {{define "Go.ReadParameter"}}
   {{AssertType $ "Parameter"}}
 
-  ϟa.{{Macro "Go.Public" $.Name}}
+  ϟa.{{Template "Go.Public" $.Name}}
 {{end}}
 
 
@@ -580,17 +580,17 @@
 {{define "Go.Select"}}
   {{AssertType $ "Select"}}
 
-  func() (result {{Macro "Go.Type" $}}) {
-    switch {{Macro "Go.Read" $.Value}} {
+  func() (result {{Template "Go.Type" $}}) {
+    switch {{Template "Go.Read" $.Value}} {
       {{range $c := $.Choices}}
         case {{range $i, $cond := $c.Conditions}}§
-          {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
+          {{if $i}}, {{end}}{{Template "Go.Read" $cond}}§
           {{end}}:
-            return {{Macro "Go.Read" $c.Expression}}
+            return {{Template "Go.Read" $c.Expression}}
       {{end}}
     default:
       // TODO: better unmatched handling
-      panic(fmt.Errorf("Unmatched switch(%v) in atom %T", {{Macro "Go.Read" $.Value}}, ϟa))
+      panic(fmt.Errorf("Unmatched switch(%v) in atom %T", {{Template "Go.Read" $.Value}}, ϟa))
       return result
     }
   }()
@@ -606,7 +606,7 @@
   {{AssertType $ "ArrayInitializer"}}
 
   {{$a := $.Array | Underlying | Unpack}}
-  {{Macro "Go.Type" $}}{ Elements: [{{$a.Size}}]{{Macro "Go.Type" $a.ValueType}}{ {{ForEach $.Values "Go.Read" | JoinWith ", "}} } }
+  {{Template "Go.Type" $}}{ Elements: [{{$a.Size}}]{{Template "Go.Type" $a.ValueType}}{ {{ForEach $.Values "Go.Read" | JoinWith ", "}} } }
 {{end}}
 
 
@@ -618,11 +618,11 @@
 {{define "Go.ClassInitializer"}}
   {{AssertType $ "ClassInitializer"}}
 
-  func(){{Macro "Go.Type" $}}{
-    s := {{Macro "Go.Type" $}}{}
+  func(){{Template "Go.Type" $}}{
+    s := {{Template "Go.Type" $}}{}
     s.Init()
     {{range $f := $.Fields}}
-      s.{{$f.Field.Name}} = {{Macro "Go.Read" $f.Value}}
+      s.{{$f.Field.Name}} = {{Template "Go.Read" $f.Value}}
     {{end}}
     return s
   }()
@@ -637,11 +637,11 @@
 {{define "Go.Create"}}
   {{AssertType $ "Create"}}
 
-  func(){{Macro "Go.Type" $}}{
-    s := &{{Macro "Go.Type" (Unpack $.Type).To}}{}
+  func(){{Template "Go.Type" $}}{
+    s := &{{Template "Go.Type" (Unpack $.Type).To}}{}
     s.Init()
     {{range $f := $.Initializer.Fields}}
-      s.{{$f.Field.Name}} = {{Macro "Go.Read" $f.Value}}
+      s.{{$f.Field.Name}} = {{Template "Go.Read" $f.Value}}
     {{end}}
     return s
   }()
@@ -670,10 +670,10 @@
   {{AssertType $.Type "Type"}}
 
   {{$ty := Unpack $.Type}}
-  {{     if IsPseudonym   $ty}}{{Macro "Go.ReadLength" "Type" $ty.To "Value" $.Value}}
-  {{else if IsSlice       $ty}}{{Macro "Go.Read" $.Value}}.Count
-  {{else if IsString      $ty}}len({{Macro "Go.Read" $.Value}})
-  {{else if IsMap         $ty}}len({{Macro "Go.Read" $.Value}})
+  {{     if IsPseudonym   $ty}}{{Template "Go.ReadLength" "Type" $ty.To "Value" $.Value}}
+  {{else if IsSlice       $ty}}{{Template "Go.Read" $.Value}}.Count
+  {{else if IsString      $ty}}len({{Template "Go.Read" $.Value}})
+  {{else if IsMap         $ty}}len({{Template "Go.Read" $.Value}})
   {{else                     }}{{Error "macro Go.ReadLength called with unsupported type: %v" $.Type}}
   {{end}}
 {{end}}
@@ -686,7 +686,7 @@
 */}}
 {{define "Go.LocalNames"}}
   {{if IsDeclareLocal $}}{{$.Local.Name}}
-  {{else if IsFence $}}{{Macro "Go.LocalNames" $.Statement}}
+  {{else if IsFence $}}{{Template "Go.LocalNames" $.Statement}}
   {{end}}
 {{end}}
 
@@ -707,7 +707,7 @@
 {{define "Go.SizeOf"}}
   {{AssertType $ "Type"}}
 
-  {{     if IsPseudonym   $}}{{Macro "Go.SizeOf" $.To}}
+  {{     if IsPseudonym   $}}{{Template "Go.SizeOf" $.To}}
   {{else if IsVoid        $}}uint64(1)
   {{else if IsBool        $}}uint64(1)
   {{else if IsChar        $}}uint64(1)
@@ -726,7 +726,7 @@
   {{else if IsPointer     $}}uint64(ϟs.Architecture.PointerSize)
   {{else if IsInt         $}}uint64(ϟs.Architecture.IntegerSize)
   {{else if IsUint        $}}uint64(ϟs.Architecture.IntegerSize)
-  {{else if IsStaticArray $}}{{Macro "Go.SizeOf" $.ValueType}}*{{$.Size}}
+  {{else if IsStaticArray $}}{{Template "Go.SizeOf" $.ValueType}}*{{$.Size}}
   {{else                   }}{{Error "macro Go.SizeOf called with unsupported type: %v" $}}
   {{end}}
 {{end}}
