@@ -18,12 +18,10 @@
 package generate
 
 import (
-	"fmt"
 	"sort"
 	"strconv"
 	"strings"
 
-	"golang.org/x/tools/go/exact"
 	"golang.org/x/tools/go/types"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -155,74 +153,4 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		sort.Sort(&m.Constants[i])
 	}
 	return m, nil
-}
-
-func (m *Module) addStruct(n *types.TypeName) {
-	if s := NewStruct(m.Source.Types, n, m.Imports); s != nil {
-		m.Structs = append(m.Structs, s)
-	}
-}
-
-func (m *Module) addConst(c *types.Const) {
-	t := fromType(m.Source.Types, c.Type(), "", m.Imports, nil)
-	name := c.Name()
-	directive := fmt.Sprintf("%s#%s", t, name)
-	if d, found := m.Directives[directive]; found {
-		name = d
-	} else {
-		name = strings.TrimPrefix(name, t.String())
-		name = strings.Trim(name, "_")
-	}
-	if p, ok := t.(*schema.Primitive); ok {
-		switch p.Method {
-		case schema.Int8:
-			v, _ := exact.Int64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: int8(v),
-			})
-		case schema.Uint8:
-			v, _ := exact.Uint64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: uint8(v),
-			})
-		case schema.Int16:
-			v, _ := exact.Int64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: int16(v),
-			})
-		case schema.Uint16:
-			v, _ := exact.Uint64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: uint16(v),
-			})
-		case schema.Int32:
-			v, _ := exact.Int64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: int32(v),
-			})
-		case schema.Uint32:
-			v, _ := exact.Uint64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: uint32(v),
-			})
-		case schema.Int64:
-			v, _ := exact.Int64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: v,
-			})
-		case schema.Uint64:
-			v, _ := exact.Uint64Val(c.Val())
-			m.Constants.Add(t, schema.Constant{
-				Name:  name,
-				Value: v,
-			})
-		}
-	}
 }
