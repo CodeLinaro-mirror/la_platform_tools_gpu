@@ -19,6 +19,7 @@ package generate
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 
 	"golang.org/x/tools/go/exact"
@@ -88,5 +89,12 @@ func (m *Module) addConst(c *types.Const) {
 				Value: v,
 			})
 		}
+	}
+}
+
+func (m *Module) finaliseConstants() {
+	sort.Sort(&m.Constants)
+	for i := range m.Constants {
+		sort.Sort(&m.Constants[i])
 	}
 }

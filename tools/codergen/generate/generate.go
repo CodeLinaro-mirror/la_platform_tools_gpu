@@ -18,7 +18,6 @@
 package generate
 
 import (
-	"sort"
 	"strconv"
 	"strings"
 
@@ -54,6 +53,7 @@ type Module struct {
 	Directives map[string]string
 	Structs    []*Struct
 	Constants  schema.Constants
+	Services   []*Service
 	Imports    Imports
 }
 
@@ -115,6 +115,7 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		Directives: directives,
 		IsTest:     isTest,
 	}
+	b := findBinaryObject(m.Source.Types)
 	scope := src.Types.Scope()
 	for _, name := range scope.Names() {
 		obj := scope.Lookup(name)
@@ -133,7 +134,12 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		if n, ok := obj.(*types.TypeName); ok {
 			if t, ok := n.Type().(*types.Named); ok {
 				if _, ok := t.Underlying().(*types.Struct); ok {
-					m.addStruct(n)
+					m.addStruct(n, b)
+				}
+				if _, ok := t.Underlying().(*types.Interface); ok {
+					if err := m.addService(n, b); err != nil {
+						return nil, err
+					}
 				}
 			}
 		}
@@ -147,10 +153,8 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 			}
 		}
 	}
-	sortStructs(m.Structs)
-	sort.Sort(&m.Constants)
-	for i := range m.Constants {
-		sort.Sort(&m.Constants[i])
-	}
+	m.finaliseStructs()
+	m.finaliseConstants()
+	m.finaliseServices()
 	return m, nil
 }
