@@ -32,8 +32,8 @@ var testStruct = Struct{
 }
 var testResourceId = ResourceId{ID: binary.NewID([]byte("Test resource id"))}
 var testResource = Resource{Int: 10, Float: 20, String: "30"}
-var testSingleListNode = CreateListNode("Single ListNode", nil)
-var testListNodeChain = CreateListNode("ListNodeA", CreateListNode("ListNodeB", CreateListNode("ListNodeC", nil)))
+var testSingleListNode = &ListNode{Name: "Single ListNode"}
+var testListNodeChain = &ListNode{Name: "ListNodeA", Next: &ListNode{Name: "ListNodeB", Next: &ListNode{Name: "ListNodeC"}}}
 var testListNodeChainArray = []*ListNode{
 	testListNodeChain, testListNodeChain, testListNodeChain,
 }
