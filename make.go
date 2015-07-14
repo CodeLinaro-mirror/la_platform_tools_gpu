@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// The fab command is used to build the gpu project.
 package main
 
 import (
@@ -20,7 +19,6 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -128,11 +126,8 @@ func init() {
 		// Utilties
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
 		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
-		// Markdown documentation
-		docs := List("docs").DependsOn("code")
-		MarkdownDocs(docs)
 		// The default rules
-		List(Default).DependsOn("apps", "test", "docs")
+		List(Default).DependsOn("apps", "test")
 	})
 }
 
@@ -181,34 +176,6 @@ func Apic(path string, api string, template string) {
 
 func Codergen(name string, args ...string) {
 	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic").Access(GoPkgResources)
-}
-
-func MarkdownDocs(docs *Step) {
-	godocdown := GoInstall("github.com/robertkrimen/godocdown/godocdown")
-	packages := map[string][]string{}
-	root, _ := OSPath(GoSrcPath(GPURoot))
-	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if info.IsDir() && strings.HasPrefix(info.Name(), ".") {
-			return filepath.SkipDir
-		}
-		if filepath.Ext(path) == ".go" {
-			pkg, _ := filepath.Split(path)
-			pkg, path = strings.TrimRight(CommonPath(pkg), "/"), CommonPath(path)
-			packages[pkg] = append(packages[pkg], path)
-		}
-		return nil
-	})
-	if err != nil {
-		panic(err)
-	}
-	for pkg, files := range packages {
-		out := File(pkg, "README.md")
-		step := Command(godocdown, "--output="+out.Name(), pkg).Creates(out)
-		for _, file := range files {
-			step.DependsOn(File(file))
-		}
-		docs.DependsOn(out)
-	}
 }
 
 func ShutdownReplayd() Entity {
