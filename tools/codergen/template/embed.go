@@ -6,13 +6,14 @@
 package template
 
 var embedded = map[string]string{
-	cpp_tmpl_file:  cpp_tmpl,
-	go_tmpl_file:   go_tmpl,
-	java_tmpl_file: java_tmpl,
+	cpp_binary_tmpl_file:  cpp_binary_tmpl,
+	go_binary_tmpl_file:   go_binary_tmpl,
+	java_binary_tmpl_file: java_binary_tmpl,
+	java_common_tmpl_file: java_common_tmpl,
 }
 
-const cpp_tmpl_file = `cpp.tmpl`
-const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
+const cpp_binary_tmpl_file = `cpp_binary.tmpl`
+const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -115,8 +116,8 @@ namespace {{.Namespace}} {
 #endif // {{template "HeaderGuard" .}}
 {{end}}
 `
-const go_tmpl_file = `go.tmpl`
-const go_tmpl = `{{/*
+const go_binary_tmpl_file = `go_binary.tmpl`
+const go_binary_tmpl = `{{/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -407,8 +408,8 @@ var ConstantValues schema.Constants
 {{end}}
 {{end}}{{end}}
 `
-const java_tmpl_file = `java.tmpl`
-const java_tmpl = `{{/*
+const java_binary_tmpl_file = `java_binary.tmpl`
+const java_binary_tmpl = `{{/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -423,28 +424,6 @@ const java_tmpl = `{{/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */}}
-
- {{define "Java.ClassName"}}{{if . | Contains "."}}{{File.JavaPackage}}.{{end}}{{.}}{{end}}
-
- {{define "Java.Type#bool"}}boolean{{end}}
- {{define "Java.Type#int8"}}byte{{end}}
- {{define "Java.Type#uint8"}}byte{{end}}
- {{define "Java.Type#int16"}}short{{end}}
- {{define "Java.Type#uint16"}}short{{end}}
- {{define "Java.Type#int32"}}int{{end}}
- {{define "Java.Type#uint32"}}int{{end}}
- {{define "Java.Type#int64"}}long{{end}}
- {{define "Java.Type#uint64"}}long{{end}}
- {{define "Java.Type#float32"}}float{{end}}
- {{define "Java.Type#float64"}}double{{end}}
- {{define "Java.Type#string"}}String{{end}}
- {{define "Java.Type#binary.ID"}}BinaryID{{end}}
- {{define "Java.Type.Any"}}Object{{end}}
- {{define "Java.Type.Struct"}}{{template "Java.ClassName" .Name}}{{end}}
- {{define "Java.Type.Interface"}}BinaryObject{{end}}
- {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
- {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
- {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 
 
 {{define "Java.Encoder"}}
@@ -555,4 +534,43 @@ public final class {{.Struct.Name}} implements BinaryObject {
 »}
 }
 {{end}}
+`
+const java_common_tmpl_file = `java_common.tmpl`
+const java_common_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Java.ClassName"}}{{if . | Contains "."}}{{File.JavaPackage}}.{{end}}{{.}}{{end}}
+
+{{define "Java.Type#bool"}}boolean{{end}}
+{{define "Java.Type#int8"}}byte{{end}}
+{{define "Java.Type#uint8"}}byte{{end}}
+{{define "Java.Type#int16"}}short{{end}}
+{{define "Java.Type#uint16"}}short{{end}}
+{{define "Java.Type#int32"}}int{{end}}
+{{define "Java.Type#uint32"}}int{{end}}
+{{define "Java.Type#int64"}}long{{end}}
+{{define "Java.Type#uint64"}}long{{end}}
+{{define "Java.Type#float32"}}float{{end}}
+{{define "Java.Type#float64"}}double{{end}}
+{{define "Java.Type#string"}}String{{end}}
+{{define "Java.Type#binary.ID"}}BinaryID{{end}}
+{{define "Java.Type.Any"}}Object{{end}}
+{{define "Java.Type.Struct"}}{{template "Java.ClassName" .Name}}{{end}}
+{{define "Java.Type.Interface"}}BinaryObject{{end}}
+{{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
+{{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
+{{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 `
