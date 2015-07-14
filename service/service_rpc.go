@@ -93,10 +93,7 @@ type Resolver struct {
 	Database database.Database
 }
 
-type ApiId struct {
-	binary.Generate
-	ID binary.ID
-}
+type ApiId binary.ID
 
 type AtomStreamId struct {
 	binary.Generate `handle:"AtomStream"`
