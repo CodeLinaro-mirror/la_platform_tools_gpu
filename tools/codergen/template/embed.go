@@ -10,6 +10,7 @@ var embedded = map[string]string{
 	go_binary_tmpl_file:   go_binary_tmpl,
 	go_client_tmpl_file:   go_client_tmpl,
 	go_common_tmpl_file:   go_common_tmpl,
+	go_helpers_tmpl_file:  go_helpers_tmpl,
 	go_server_tmpl_file:   go_server_tmpl,
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
@@ -492,6 +493,35 @@ import (
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+`
+const go_helpers_tmpl_file = `go_helpers.tmpl`
+const go_helpers_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Helpers"}}{{template "Go.Prelude" .}}
+
+{{$s := .Service}}{{range $s.Methods}}
+func (c {{.Call.Name}}) Format(f fmt.State, r rune) {
+  fmt.Fprintf(f, "{{.Name}}({{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{$p.Name}}: %v{{end}})",
+    {{range $i, $p := .Call.Params}}c.{{$p.Name}},{{end}}
+  )
+}
+func (r {{.Result.Name}}) Format(f fmt.State, c rune) {
+  {{if .Result.Type}}fmt.Fprintf(f, "res: %#v", r.value){{else}}fmt.Fprintf(f, "void"){{end}}
+}{{end}}{{end}}
 `
 const go_server_tmpl_file = `go_server.tmpl`
 const go_server_tmpl = `{{/*
