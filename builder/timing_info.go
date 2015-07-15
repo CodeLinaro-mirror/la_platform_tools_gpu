@@ -44,7 +44,7 @@ func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 
 	results, count := make(chan replay.CallTiming, len(apis)), 0
 	for _, apiID := range apis {
-		api := gfxapi.Find(gfxapi.ID(apiID.ID))
+		api := gfxapi.Find(gfxapi.ID(apiID))
 		if api == nil {
 			continue
 		}
