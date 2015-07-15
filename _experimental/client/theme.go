@@ -14,10 +14,7 @@
 
 package client
 
-import (
-	"github.com/google/gxui"
-	"github.com/google/gxui/math"
-)
+import "github.com/google/gxui"
 
 var (
 	LINE_NUMBER_COLOR        gxui.Color = gxui.ColorFromHex(0xFF1CAFFF)
@@ -30,21 +27,3 @@ var (
 	WRITE_MEMORY_COLOR       gxui.Color = gxui.Red
 	STALE_MEMORY_COLOR       gxui.Color = gxui.ColorFromHex(0xFF8A7753)
 )
-
-func CreateLabel(t gxui.Theme, s string, c gxui.Color, active bool) gxui.Label {
-	l := t.CreateLabel()
-	l.SetText(s)
-	if active {
-		l.SetColor(c)
-	} else {
-		l.SetColor(INACTIVE_COLOR)
-	}
-	l.SetMargin(math.Spacing{})
-	return l
-}
-
-func CreateMonospaceLabel(appCtx *ApplicationContext, s string, c gxui.Color, active bool) gxui.Label {
-	l := CreateLabel(appCtx.theme, s, c, active)
-	l.SetFont(appCtx.monospace)
-	return l
-}

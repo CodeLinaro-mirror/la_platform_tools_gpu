@@ -45,6 +45,9 @@ func CreateStatePanel(appCtx *ApplicationContext) gxui.Control {
 				update()
 			}
 		}
+		if tree.Select(p.Path()) {
+			tree.Show(p.Path())
+		}
 	})
 
 	return tree
