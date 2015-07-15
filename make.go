@@ -50,7 +50,6 @@ var (
 
 	Tools struct {
 		Embed    Entity
-		Rpcapi   Entity
 		Apic     Entity
 		Codergen Entity
 		Gapit    Entity
@@ -67,33 +66,23 @@ func init() {
 	Register(func() {
 		// Install rules for the build tools
 		Tools.Embed = GoInstall(GPURoot + "/tools/embed")
-		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
 		Tools.Apic = GoInstall(GPURoot + "/api/apic")
 		Tools.Codergen = GoInstall(GPURoot + "/tools/codergen")
 		Tools.Gapit = GoInstall(GPURoot + "/tools/gapit")
 		List("gapit").DependsOn(Tools.Gapit)
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
-		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
 		embedCopyright := Embed(Path(gpusrc, "tools/copyright"))
 		embedCodergen := Embed(Path(gpusrc, "tools/codergen/template"))
-		Creator(Tools.Rpcapi).DependsOn(embedCopyright, embedRPC)
 		Creator(Tools.Apic).DependsOn(embedCopyright)
 		Creator(Tools.Codergen).DependsOn(embedCopyright, embedCodergen)
-		// All the rpc rules
-		servicerpc := File(gpusrc, "service/service.api")
-		RpcApiGo(File(gpusrc, "rpc/test/rpc_test.api"))
-		RpcApiGo(servicerpc)
 		// All the apic rules
 		GfxApi("test", "gfxapi_test.api")
 		GfxApi("gles", "gles.api")
 		// The codergen rule
 		Codergen("codergen", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
-		// The java code generation rules
-		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
-		List("java").DependsOn("codergen", "javarpc")
 		//
-		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
+		List("code").DependsOn("embed", "apic", "codergen")
 		// The native code rules
 		cctargets := []string{*targetOS}
 		if os.Getenv("ANDROID_NDK_ROOT") != "" {
@@ -148,16 +137,6 @@ func Embed(path string) Entity {
 	return out
 }
 
-func RpcApiGo(api Entity) {
-	out := File(strings.TrimSuffix(api.Name(), ".api") + "_rpc.go")
-	RpcApi("--go", DirOf(api).Name(), api).Creates(out)
-	List("rpcapi").DependsOn(out)
-}
-
-func RpcApi(language string, path string, api Entity) *Step {
-	return Command(Tools.Rpcapi, "--dir", path, language, api.Name()).DependsOn(api)
-}
-
 func Apic(path string, api string, template string) {
 	dst := Dir(path)
 	a := File(api)
@@ -175,7 +154,7 @@ func Apic(path string, api string, template string) {
 }
 
 func Codergen(name string, args ...string) {
-	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic").Access(GoPkgResources)
+	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("apic").Access(GoPkgResources)
 }
 
 func ShutdownReplayd() Entity {
