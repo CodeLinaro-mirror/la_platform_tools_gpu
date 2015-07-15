@@ -110,7 +110,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 		if api := a.API(); api.Valid() {
 			if _, found := apis[api]; !found {
 				apis[api] = struct{}{}
-				apiIDs = append(apiIDs, service.ApiId{ID: binary.ID(api)})
+				apiIDs = append(apiIDs, service.ApiId(api))
 			}
 		}
 	}

@@ -717,7 +717,7 @@ func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) e
 	} else if err := e.Object(nil); err != nil {
 		return err
 	}
-	if err := e.Value(&o.API); err != nil {
+	if err := e.ID(binary.ID(o.API)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.AtomIDs))); err != nil {
@@ -751,8 +751,10 @@ func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) e
 	} else {
 		o.Capture = nil
 	}
-	if err := d.Value(&o.API); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.API = service.ApiId(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
@@ -785,7 +787,7 @@ func doSkipPrerenderFramebuffers(d binary.Decoder) error {
 	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*service.ApiId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -829,7 +831,7 @@ var schemaPrerenderFramebuffers = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
-		{Declared: "API", Type: &schema.Struct{Name: "service.ApiId", ID: (*service.ApiId)(nil).Class().ID()}},
+		{Declared: "API", Type: &schema.Primitive{Name: "service.ApiId", Method: schema.ID}},
 		{Declared: "AtomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
