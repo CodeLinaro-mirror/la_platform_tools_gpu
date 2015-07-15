@@ -31,6 +31,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		}()
 		switch call := in.(type) {
+		case *callFollow:
+			if res, err := server.Follow(call.p, l); err == nil {
+				return &resultFollow{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callGet:
 			if res, err := server.Get(call.p, l); err == nil {
 				return &resultGet{value: res}

@@ -126,6 +126,13 @@ type Set struct {
 	Value interface{}
 }
 
+// Follow returns the path to the object that the value at Path links to.
+// If the value at Path does not link to anything then nil is returned.
+type Follow struct {
+	binary.Generate
+	Path path.Path
+}
+
 // getCaptureFramebufferDimensions records the parameters of an internal request.
 type getCaptureFramebufferDimensions struct {
 	binary.Generate
