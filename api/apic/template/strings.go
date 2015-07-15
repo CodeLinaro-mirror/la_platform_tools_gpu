@@ -242,6 +242,18 @@ func (Functions) TrimRight(cutset string, v ...interface{}) stringList {
 	return out
 }
 
+func (Functions) TrimPrefix(prefix string, v ...interface{}) stringList {
+	l := stringify(v...)
+	out := stringList{}
+	for _, s := range l {
+		s = strings.TrimPrefix(s, prefix)
+		if len(s) > 0 {
+			out = append(out, s)
+		}
+	}
+	return out
+}
+
 // FilterOut returns from with all occurances of v removed.
 func (Functions) FilterOut(v, from stringList) stringList {
 	m := make(map[string]struct{}, len(v))
