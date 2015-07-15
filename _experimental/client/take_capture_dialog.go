@@ -52,10 +52,6 @@ func (n *launchNode) NodeAt(index int) gxui.TreeNode {
 	return n.items[index]
 }
 
-func (n *launchNode) ItemAt(index int) gxui.AdapterItem {
-	return n.items[index]
-}
-
 func (n *launchNode) ItemIndex(item gxui.AdapterItem) int {
 	find, ok := item.(*launchNode)
 	if !ok {
@@ -69,9 +65,13 @@ func (n *launchNode) ItemIndex(item gxui.AdapterItem) int {
 	return -1
 }
 
-func (n *launchNode) Create(theme gxui.Theme, index int) gxui.Control {
+func (n *launchNode) Item() gxui.AdapterItem {
+	return n
+}
+
+func (n *launchNode) Create(theme gxui.Theme) gxui.Control {
 	label := theme.CreateLabel()
-	label.SetText(n.items[index].text)
+	label.SetText(n.text)
 	return label
 }
 
