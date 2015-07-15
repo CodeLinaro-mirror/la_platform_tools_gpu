@@ -64,13 +64,29 @@ func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 	}
 }
 
+// Tag returns the named tag if present, missing otherwise.
+func (s *Struct) Tag(name string, missing string) string {
+	result := s.Tags.Get(name)
+	if result == "" {
+		result = missing
+	}
+	return result
+}
+
 // IDName returns the name to give the ID of the type.
 func (s *Struct) IDName() string {
-	name := s.Tags.Get("id")
-	if name == "" {
-		name = "binaryID" + s.Name
+	return s.Tag("id", "binaryID"+s.Name)
+}
+
+// HasStructTag returns true if any struct in the module has the named tag.
+func (m *Module) HasStructTag(name string) bool {
+	for _, s := range m.Structs {
+		result := s.Tags.Get(name)
+		if result != "" {
+			return true
+		}
 	}
-	return name
+	return false
 }
 
 // UpdateID recalculates the struct ID from the current signature.

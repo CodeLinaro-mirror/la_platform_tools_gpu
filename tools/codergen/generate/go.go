@@ -51,6 +51,11 @@ func Go(m *Module, info copyright.Info, gen Generator) error {
 	if err := gen("Go.Binary", pkg, goFileName(m, m.Name, "binary"), reflowGo); err != nil {
 		return err
 	}
+	if m.HasStructTag("handle") {
+		if err := gen("Go.Database", pkg, goFileName(m, m.Name, "database"), reflowGo); err != nil {
+			return err
+		}
+	}
 	for _, s := range m.Services {
 		arg := GoService{GoBinary: pkg, Service: s}
 		for _, e := range []string{"client", "server", "helpers", "extra"} {

@@ -10,6 +10,7 @@ var embedded = map[string]string{
 	go_binary_tmpl_file:   go_binary_tmpl,
 	go_client_tmpl_file:   go_client_tmpl,
 	go_common_tmpl_file:   go_common_tmpl,
+	go_database_tmpl_file: go_database_tmpl,
 	go_extra_tmpl_file:    go_extra_tmpl,
 	go_helpers_tmpl_file:  go_helpers_tmpl,
 	go_server_tmpl_file:   go_server_tmpl,
@@ -485,6 +486,7 @@ import (
 	"reflect"
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 	{{range $imp, $v := .Imports}}"{{$imp}}"
 {{end}}){{end}}
@@ -494,6 +496,45 @@ import (
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+`
+const go_database_tmpl_file = `go_database.tmpl`
+const go_database_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Database"}}{{template "Go.Prelude" .}}
+
+{{range .Structs}}{{if $h := .Tag "handle" ""}}// Store{{$h}} stores v into the database d, returning the {{.Name}}.
+func Store{{$h}}(v *{{$h}}, d database.Database, l log.Logger) ({{.Name}}, error) {
+	id, err := database.Store(v, d, l)
+	return {{.Name}}{ID: id}, err
+}
+
+// Resolve{{$h}} loads and returns the {{$h}} stored in the database d, using id.
+func Resolve{{$h}}(id {{.Name}}, d database.Database, l log.Logger) (res {{$h}}, err error) {
+	if out, err := d.Resolve(id.ID, l); err == nil {
+		res = *(out.(*{{$h}}))
+	}
+	return res, err
+}
+
+// Resolve{{$h}} loads and returns the {{$h}} stored in the resolver's database, using id.
+func (r Resolver) Resolve{{$h}}(id {{$h}}Id, l log.Logger) ({{$h}}, error) {
+	return Resolve{{$h}}(id, r.Database, l)
+}
+{{end}}{{end}}{{end}}
 `
 const go_extra_tmpl_file = `go_extra.tmpl`
 const go_extra_tmpl = `{{/*

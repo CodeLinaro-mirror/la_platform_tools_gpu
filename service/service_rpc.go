@@ -18,6 +18,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -88,52 +89,48 @@ type RPC interface {
 	ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error)
 }
 
-// Handle ApiId
+type Resolver struct {
+	Database database.Database
+}
+
 type ApiId struct {
 	binary.Generate
 	ID binary.ID
 }
 
-// Handle AtomStreamId
 type AtomStreamId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"AtomStream"`
+	ID              binary.ID
 }
 
-// Handle BinaryId
 type BinaryId struct {
 	binary.Generate
 	ID binary.ID
 }
 
-// Handle CaptureId
 type CaptureId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"Capture"`
+	ID              binary.ID
 }
 
-// Handle DeviceId
 type DeviceId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"Device"`
+	ID              binary.ID
 }
 
-// Handle ImageInfoId
 type ImageInfoId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"ImageInfo"`
+	ID              binary.ID
 }
 
-// Handle MemoryInfoId
 type MemoryInfoId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"MemoryInfo"`
+	ID              binary.ID
 }
 
-// Handle TimingInfoId
 type TimingInfoId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"TimingInfo"`
+	ID              binary.ID
 }
 
 // Enum Severity
