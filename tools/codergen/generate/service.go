@@ -65,6 +65,11 @@ func (r Result) Type() schema.Type {
 	return r.Struct.Class.Fields[0].Type
 }
 
+// Params returns the schema field list that represent the method parameters.
+func (r Result) List() schema.FieldList {
+	return r.Struct.Class.Fields
+}
+
 func serviceStruct(m *Module, name string, tuple *types.Tuple, count int, b *types.Interface) *Struct {
 	class := schema.Class{Name: name, Package: m.Source.Types.Name()}
 	for i := 0; i < count; i++ {
@@ -75,7 +80,8 @@ func serviceStruct(m *Module, name string, tuple *types.Tuple, count int, b *typ
 		})
 	}
 	s := &Struct{Class: class}
-	s.UpdateID()
+	// The generated structs will not be parsed by codergen, so they must be self registered.
+	m.Structs = append(m.Structs, s)
 	return s
 }
 
@@ -111,6 +117,12 @@ func (m *Module) addService(n *types.TypeName, b *types.Interface) error {
 		method := &Method{Name: decl.Name()}
 		method.Call.Struct = serviceStruct(m, "call"+decl.Name(), sig.Params(), paramCount-1, b)
 		method.Result.Struct = serviceStruct(m, "result"+decl.Name(), sig.Results(), resultCount-1, b)
+		if resultCount > 1 && method.Result.Struct.Class.Fields[0].Declared == "" {
+			// for methods with an unnamed first return value, default the name to "value" to match legacy behaviour.
+			method.Result.Struct.Class.Fields[0].Declared = "value"
+		}
+		method.Call.UpdateID()
+		method.Result.UpdateID()
 		s.Methods = append(s.Methods, method)
 	}
 	m.Services = append(m.Services, s)
