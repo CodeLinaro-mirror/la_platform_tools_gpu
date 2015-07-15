@@ -16,6 +16,7 @@ package test
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -32,10 +33,13 @@ type RPC interface {
 	UseResource(r ResourceId, l log.Logger) error
 }
 
-// Handle ResourceId
+type Resolver struct {
+	Database database.Database
+}
+
 type ResourceId struct {
-	binary.Generate
-	ID binary.ID
+	binary.Generate `handle:"Resource"`
+	ID              binary.ID
 }
 
 // Enum Enum
