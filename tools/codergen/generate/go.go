@@ -16,6 +16,7 @@ package generate
 
 import (
 	"path"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 	"golang.org/x/tools/imports"
@@ -52,14 +53,10 @@ func Go(m *Module, info copyright.Info, gen Generator) error {
 	}
 	for _, s := range m.Services {
 		arg := GoService{GoBinary: pkg, Service: s}
-		if err := gen("Go.Client", arg, goFileName(m, s.Prefix, "client"), reflowGo); err != nil {
-			return err
-		}
-		if err := gen("Go.Server", arg, goFileName(m, s.Prefix, "server"), reflowGo); err != nil {
-			return err
-		}
-		if err := gen("Go.Helpers", arg, goFileName(m, s.Prefix, "helpers"), reflowGo); err != nil {
-			return err
+		for _, e := range []string{"client", "server", "helpers", "extra"} {
+			if err := gen("Go."+strings.Title(e), arg, goFileName(m, s.Prefix, e), reflowGo); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
