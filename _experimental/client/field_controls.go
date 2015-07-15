@@ -192,6 +192,13 @@ func createField(appCtx *ApplicationContext, p path.Path, t schema.Type, v inter
 		c = createLabel(appCtx, fmt.Sprintf("%v", v), CONSTANT_COLOR)
 	}
 
+	c.OnClick(func(gxui.MouseEvent) {
+		l, err := appCtx.rpc.Follow(p)
+		if err == nil && l != nil {
+			appCtx.events.Select(l)
+		}
+	})
+
 	appCtx.toolTipController.AddToolTip(c, 0.7, func(math.Point) gxui.Control {
 		l := appCtx.theme.CreateLabel()
 		l.SetText(p.Path())

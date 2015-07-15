@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
 	"github.com/google/gxui/drivers/gl"
 	"github.com/google/gxui/math"
@@ -312,6 +313,10 @@ func (a app) main(driver gxui.Driver) {
 	if appCtx.InitialCapture != "" {
 		ImportCapture(appCtx, appCtx.InitialCapture, appCtx.logger)
 	}
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		log.Infof(appCtx.logger, "Select '%v'", p)
+	})
 }
 
 func Run(config Config) {
