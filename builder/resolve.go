@@ -53,14 +53,14 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 	for i, p := range paths {
 		switch p := p.(type) {
 		case *path.Capture:
-			capture, err := service.ResolveCapture(service.CaptureId{ID: p.ID}, d, l)
+			capture, err := service.ResolveCapture(service.CaptureID(p.ID), d, l)
 			if err != nil {
 				return nil, err
 			}
 			v[i] = &capture
 
 		case *path.Device:
-			device, err := service.ResolveDevice(service.DeviceId{ID: p.ID}, d, l)
+			device, err := service.ResolveDevice(service.DeviceID(p.ID), d, l)
 			if err != nil {
 				return nil, err
 			}
@@ -68,11 +68,11 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)
-			atoms, err := d.Resolve(capture.Atoms.ID, l)
+			atoms, err := service.ResolveAtomStream(capture.Atoms, d, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = atoms.(*service.AtomStream)
+			v[i] = &atoms
 
 		case *path.Report:
 			report, err := database.Build(&BuildReport{Capture: p.Capture}, d, l)

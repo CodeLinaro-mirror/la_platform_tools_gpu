@@ -50,7 +50,7 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 		Format: service.ImageFormatRGBA8, // TODO: Add support for other formats.
 		Width:  imgWidth,
 		Height: imgHeight,
-		Data:   service.BinaryId{ID: data},
+		Data:   service.BinaryID(data),
 	}, nil
 }
 
@@ -60,8 +60,8 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		DeviceID:  service.DeviceId{ID: r.Device.ID},
-		CaptureID: service.CaptureId{ID: r.After.Atoms.Capture.ID},
+		DeviceID:  service.DeviceID(r.Device.ID),
+		CaptureID: service.CaptureID(r.After.Atoms.Capture.ID),
 	}
 
 	after, err := ResolveAtom(r.After, d, l)

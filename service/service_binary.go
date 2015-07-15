@@ -23,24 +23,17 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*AtomRangeTimer)(nil).Class())
 	Namespace.Add((*AtomStream)(nil).Class())
-	Namespace.Add((*AtomStreamId)(nil).Class())
 	Namespace.Add((*AtomTimer)(nil).Class())
-	Namespace.Add((*BinaryId)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
-	Namespace.Add((*CaptureId)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
-	Namespace.Add((*DeviceId)(nil).Class())
 	Namespace.Add((*Hierarchy)(nil).Class())
 	Namespace.Add((*ImageInfo)(nil).Class())
-	Namespace.Add((*ImageInfoId)(nil).Class())
 	Namespace.Add((*MemoryInfo)(nil).Class())
-	Namespace.Add((*MemoryInfoId)(nil).Class())
 	Namespace.Add((*RenderSettings)(nil).Class())
 	Namespace.Add((*ReportItem)(nil).Class())
 	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*Schema)(nil).Class())
 	Namespace.Add((*TimingInfo)(nil).Class())
-	Namespace.Add((*TimingInfoId)(nil).Class())
 	Namespace.Add((*callGet)(nil).Class())
 	Namespace.Add((*callGetCaptures)(nil).Class())
 	Namespace.Add((*callGetDevices)(nil).Class())
@@ -80,26 +73,19 @@ func init() {
 }
 
 var (
-	binaryIDAtomRangeTimer              = binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}
+	binaryIDAtomRangeTimer              = binary.ID{0x2a, 0x69, 0xe8, 0xa2, 0x17, 0xc3, 0x2d, 0xe8, 0x4e, 0x9c, 0x00, 0x01, 0x5b, 0x63, 0xde, 0xb4, 0xf1, 0xf6, 0x27, 0x64}
 	binaryIDAtomStream                  = binary.ID{0xdc, 0x12, 0x10, 0xc5, 0x76, 0x8a, 0xe7, 0x10, 0xb5, 0x5f, 0x27, 0xad, 0x15, 0xfe, 0x72, 0x74, 0xff, 0xdf, 0x0e, 0x0b}
-	binaryIDAtomStreamId                = binary.ID{0xbe, 0x90, 0x3c, 0x40, 0x28, 0xee, 0x58, 0x7e, 0xab, 0x8c, 0xde, 0x44, 0x43, 0xb3, 0x94, 0x88, 0xff, 0x6b, 0xa0, 0x12}
-	binaryIDAtomTimer                   = binary.ID{0x7b, 0x64, 0x0c, 0x00, 0x25, 0xee, 0x98, 0xa3, 0x51, 0x7b, 0x1b, 0x0d, 0x98, 0x73, 0x20, 0x93, 0x12, 0x9a, 0x7d, 0xc4}
-	binaryIDBinaryId                    = binary.ID{0x71, 0x35, 0xf5, 0x97, 0xf9, 0x3a, 0x8a, 0x25, 0x88, 0xf6, 0x5b, 0xe6, 0x99, 0xf5, 0x1c, 0x9c, 0x97, 0xf5, 0x68, 0x3b}
-	binaryIDCapture                     = binary.ID{0x06, 0xc4, 0xee, 0x21, 0xc8, 0x29, 0x86, 0x7c, 0xd0, 0xa8, 0xa4, 0x67, 0xc6, 0x00, 0xee, 0x07, 0x93, 0x0d, 0xa7, 0xf1}
-	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
+	binaryIDAtomTimer                   = binary.ID{0xa9, 0xad, 0x32, 0xa8, 0xd8, 0xa8, 0xc3, 0xff, 0x44, 0x94, 0x47, 0xd3, 0xaa, 0xd2, 0xce, 0x8f, 0x70, 0xc6, 0xc6, 0x04}
+	binaryIDCapture                     = binary.ID{0x4f, 0x4f, 0x28, 0x50, 0x65, 0x83, 0xfc, 0xbf, 0xb7, 0xa7, 0x97, 0x80, 0x54, 0x3e, 0x9a, 0xa8, 0x23, 0x46, 0x50, 0x92}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
-	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
 	binaryIDHierarchy                   = binary.ID{0x26, 0x8b, 0xf1, 0xcb, 0xd8, 0xc8, 0xc2, 0x60, 0x1e, 0xfa, 0x3f, 0x8e, 0xde, 0xc9, 0xe1, 0x01, 0x43, 0x9f, 0x4c, 0xff}
-	binaryIDImageInfo                   = binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}
-	binaryIDImageInfoId                 = binary.ID{0xb1, 0x03, 0x2c, 0x17, 0x12, 0xab, 0x40, 0x23, 0x1d, 0x01, 0xb9, 0x4b, 0x9b, 0x8c, 0x9d, 0x5a, 0x19, 0x45, 0xaf, 0x70}
+	binaryIDImageInfo                   = binary.ID{0xdc, 0xf1, 0x9b, 0xdf, 0x62, 0x62, 0xa7, 0x0a, 0x12, 0x32, 0x7d, 0x69, 0x42, 0x00, 0xca, 0xee, 0xb9, 0x79, 0xaa, 0x08}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
-	binaryIDMemoryInfoId                = binary.ID{0x84, 0x64, 0x1a, 0xae, 0xde, 0x19, 0x1a, 0xa3, 0xae, 0xc7, 0x31, 0x9f, 0x5e, 0x46, 0xa0, 0x51, 0x54, 0xc5, 0x46, 0x15}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
 	binaryIDReportItem                  = binary.ID{0x85, 0x03, 0xdb, 0x94, 0x41, 0x27, 0x21, 0x23, 0xcc, 0x45, 0x1d, 0xae, 0xef, 0xff, 0xeb, 0x26, 0xc9, 0xf6, 0xa6, 0x20}
 	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
 	binaryIDSchema                      = binary.ID{0x74, 0xe2, 0x21, 0xf1, 0x49, 0x8f, 0x1b, 0x90, 0xf3, 0x8b, 0xe8, 0x56, 0xef, 0xbf, 0x17, 0x79, 0xdf, 0xfc, 0x38, 0x25}
 	binaryIDTimingInfo                  = binary.ID{0xf8, 0xfe, 0x88, 0x50, 0x3d, 0x72, 0xb3, 0x55, 0xb0, 0x01, 0x73, 0xfe, 0x8a, 0x82, 0xbd, 0x1e, 0xb7, 0xc9, 0x5b, 0xb1}
-	binaryIDTimingInfoId                = binary.ID{0x71, 0x9c, 0x16, 0xeb, 0x4e, 0x5f, 0xa1, 0x6b, 0x71, 0x0c, 0xae, 0xbc, 0x5a, 0xe8, 0x6c, 0x29, 0x97, 0xaa, 0x52, 0x0f}
 	binaryIDcallGet                     = binary.ID{0x5c, 0xaa, 0xed, 0xc9, 0xd2, 0x90, 0xe7, 0xb2, 0xae, 0x34, 0x5d, 0x9f, 0x32, 0x67, 0x6c, 0x27, 0xc6, 0x0e, 0x33, 0x96}
 	binaryIDcallGetCaptures             = binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
@@ -109,25 +95,25 @@ var (
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetTimingInfo           = binary.ID{0x00, 0xed, 0x86, 0x08, 0xac, 0xd7, 0xd9, 0x7d, 0x3f, 0xf4, 0x38, 0xf4, 0xb3, 0xde, 0xc8, 0x9b, 0xd6, 0xc9, 0xc2, 0xb0}
 	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
-	binaryIDcallPrerenderFramebuffers   = binary.ID{0x93, 0x15, 0x52, 0x63, 0x96, 0x8d, 0xb2, 0xd8, 0x50, 0xc8, 0x70, 0x21, 0xf5, 0x19, 0x96, 0x38, 0x9c, 0x37, 0x2e, 0xa2}
-	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
-	binaryIDcallResolveBinary           = binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}
-	binaryIDcallResolveCapture          = binary.ID{0x4e, 0x6e, 0x5b, 0x49, 0x61, 0xef, 0xfc, 0x3c, 0x4a, 0xf8, 0xf6, 0xae, 0xc0, 0xca, 0xa1, 0x67, 0x17, 0x73, 0xff, 0xf8}
-	binaryIDcallResolveDevice           = binary.ID{0x86, 0x54, 0x88, 0xf5, 0x8f, 0x3e, 0x97, 0x57, 0xe2, 0x98, 0x19, 0x7e, 0x67, 0x25, 0xfb, 0xa2, 0x75, 0xeb, 0x30, 0x0a}
-	binaryIDcallResolveImageInfo        = binary.ID{0x4e, 0x51, 0x41, 0x13, 0x68, 0x6f, 0x58, 0x5a, 0xed, 0xe0, 0x0a, 0x05, 0x0d, 0x01, 0x9d, 0x28, 0x9c, 0x21, 0x8c, 0xbb}
-	binaryIDcallResolveMemoryInfo       = binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}
-	binaryIDcallResolveTimingInfo       = binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}
+	binaryIDcallPrerenderFramebuffers   = binary.ID{0xce, 0xd0, 0x43, 0x9a, 0x0a, 0x96, 0xbd, 0x47, 0xe1, 0x4e, 0x08, 0xf0, 0x67, 0x37, 0x96, 0x84, 0x1a, 0x06, 0xb0, 0xfc}
+	binaryIDcallResolveAtomStream       = binary.ID{0xf6, 0x44, 0x79, 0x4e, 0x89, 0x71, 0x7b, 0x54, 0x13, 0xbc, 0xa7, 0x18, 0x32, 0xb0, 0xa7, 0x34, 0xa9, 0x4a, 0x7f, 0xe7}
+	binaryIDcallResolveBinary           = binary.ID{0x66, 0x2b, 0x48, 0xb6, 0x65, 0x55, 0xc3, 0x76, 0x0b, 0x74, 0x40, 0x50, 0xd3, 0xbd, 0xfd, 0x65, 0x8b, 0x61, 0x2a, 0x77}
+	binaryIDcallResolveCapture          = binary.ID{0x5c, 0x66, 0xb4, 0x71, 0xfa, 0x2f, 0xa1, 0x8f, 0x10, 0xc8, 0xea, 0xc0, 0x5f, 0x8b, 0x2c, 0xf9, 0xcf, 0x8b, 0x7d, 0xa7}
+	binaryIDcallResolveDevice           = binary.ID{0x48, 0xf3, 0xd3, 0xbd, 0x29, 0x59, 0x29, 0xf6, 0xf2, 0xce, 0xa3, 0x87, 0xcb, 0xb2, 0xe9, 0xd4, 0xd3, 0xfc, 0xf0, 0x21}
+	binaryIDcallResolveImageInfo        = binary.ID{0x77, 0xdf, 0xf2, 0x6b, 0xf5, 0x1a, 0xa3, 0x65, 0x46, 0xac, 0xe4, 0x2d, 0x97, 0x22, 0x47, 0x5b, 0x8f, 0xa0, 0x52, 0xc9}
+	binaryIDcallResolveMemoryInfo       = binary.ID{0xb6, 0xd6, 0x5f, 0x4e, 0xd9, 0xdc, 0x07, 0x08, 0x4c, 0x8e, 0x3f, 0x8d, 0x80, 0x41, 0x85, 0x29, 0xf9, 0x27, 0xd5, 0x28}
+	binaryIDcallResolveTimingInfo       = binary.ID{0x14, 0x04, 0x9a, 0xe5, 0x1d, 0x0e, 0x02, 0xfd, 0x50, 0xf2, 0xe1, 0xcf, 0x35, 0x64, 0x5d, 0x64, 0x61, 0x8f, 0x4d, 0x9a}
 	binaryIDcallSet                     = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
 	binaryIDresultGet                   = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
-	binaryIDresultGetCaptures           = binary.ID{0x6e, 0x42, 0x42, 0x6b, 0x9b, 0x47, 0xf5, 0xfc, 0x53, 0x66, 0xa1, 0x5a, 0x6e, 0x5c, 0x60, 0xb3, 0x14, 0x0b, 0xf6, 0x7b}
-	binaryIDresultGetDevices            = binary.ID{0x94, 0x2a, 0xed, 0x69, 0xb7, 0x1a, 0xd3, 0xb0, 0x44, 0xab, 0x25, 0x38, 0xfc, 0x81, 0xbc, 0xd2, 0x19, 0x65, 0x1e, 0xfe}
-	binaryIDresultGetFramebufferColor   = binary.ID{0xd1, 0xf2, 0x9c, 0x48, 0xeb, 0xb0, 0x4e, 0x4e, 0x82, 0xcf, 0xac, 0xe9, 0xc6, 0x71, 0x27, 0x04, 0x57, 0x7e, 0xe4, 0x25}
-	binaryIDresultGetFramebufferDepth   = binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}
-	binaryIDresultGetMemoryInfo         = binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}
+	binaryIDresultGetCaptures           = binary.ID{0x59, 0x90, 0x21, 0xca, 0x4f, 0xcb, 0x75, 0xa6, 0xe0, 0x20, 0x8b, 0x5f, 0xf5, 0x78, 0x1d, 0x37, 0x13, 0x27, 0xa5, 0xd3}
+	binaryIDresultGetDevices            = binary.ID{0x08, 0x5e, 0x98, 0x51, 0xfe, 0xc0, 0xaa, 0x95, 0xbc, 0x62, 0x1a, 0x28, 0x0b, 0x9f, 0xfa, 0x5d, 0x13, 0xaf, 0x21, 0x94}
+	binaryIDresultGetFramebufferColor   = binary.ID{0xd8, 0xbf, 0x39, 0xf4, 0x4c, 0xb5, 0x36, 0xf6, 0x40, 0x70, 0x32, 0x5c, 0x46, 0xdc, 0x0a, 0x2c, 0x43, 0x81, 0xec, 0xdc}
+	binaryIDresultGetFramebufferDepth   = binary.ID{0xf8, 0x20, 0xf3, 0xa8, 0xb3, 0xe6, 0x33, 0x99, 0x25, 0x10, 0x2d, 0xd4, 0x20, 0x8c, 0x99, 0xd7, 0xe6, 0x3a, 0x40, 0xef}
+	binaryIDresultGetMemoryInfo         = binary.ID{0xa4, 0x0a, 0xdc, 0x2b, 0xe8, 0x36, 0x53, 0x72, 0xb9, 0x4e, 0x41, 0x09, 0x0f, 0x70, 0xb3, 0xec, 0xdb, 0x56, 0xb8, 0x87}
 	binaryIDresultGetSchema             = binary.ID{0xd0, 0x54, 0xb1, 0x58, 0x23, 0xd7, 0x0d, 0x2b, 0x65, 0xee, 0xcc, 0x2a, 0xb8, 0x12, 0x27, 0x6c, 0x8f, 0xcd, 0x75, 0x8a}
-	binaryIDresultGetTimingInfo         = binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}
-	binaryIDresultImport                = binary.ID{0x1e, 0x86, 0x40, 0xb0, 0xc2, 0xb8, 0xa5, 0xa1, 0xf3, 0xc8, 0x51, 0x29, 0x87, 0x4d, 0x0c, 0xd9, 0x49, 0xd8, 0xbe, 0xed}
-	binaryIDresultPrerenderFramebuffers = binary.ID{0xc2, 0x9e, 0x11, 0x61, 0x22, 0xcb, 0xd8, 0xfc, 0x6c, 0x5c, 0xb9, 0x0f, 0x07, 0x81, 0x67, 0xc9, 0x2e, 0x1f, 0x2f, 0xf8}
+	binaryIDresultGetTimingInfo         = binary.ID{0xf5, 0xad, 0xed, 0x14, 0x7b, 0x35, 0xf9, 0x94, 0x10, 0xbb, 0x14, 0x8a, 0xa3, 0xc1, 0x69, 0xf2, 0xfe, 0xfe, 0x7a, 0xba}
+	binaryIDresultImport                = binary.ID{0x5e, 0x7a, 0x25, 0xeb, 0xe1, 0x14, 0xba, 0xe2, 0x5d, 0x04, 0xd4, 0x21, 0x2c, 0x30, 0xa9, 0x9d, 0xc4, 0x9c, 0x90, 0x50}
+	binaryIDresultPrerenderFramebuffers = binary.ID{0xb3, 0x13, 0x48, 0x75, 0x2a, 0xf4, 0xab, 0xf7, 0x59, 0x96, 0x1b, 0x20, 0x61, 0xfe, 0x3d, 0x4c, 0xc5, 0x47, 0x4c, 0xf9}
 	binaryIDresultResolveAtomStream     = binary.ID{0x05, 0xb9, 0x98, 0x3d, 0x6f, 0x5f, 0xc0, 0x23, 0xb2, 0xe1, 0x2e, 0x55, 0xf4, 0x37, 0x71, 0xe6, 0xd3, 0x98, 0xbf, 0x52}
 	binaryIDresultResolveBinary         = binary.ID{0xa4, 0x6a, 0xe4, 0xfe, 0x13, 0x16, 0xb3, 0x2a, 0x70, 0x6e, 0x71, 0xea, 0x47, 0xf0, 0x4c, 0xe6, 0x47, 0xc9, 0xb0, 0x42}
 	binaryIDresultResolveCapture        = binary.ID{0xb3, 0x47, 0xd0, 0x3f, 0x28, 0x63, 0xfe, 0xa4, 0x32, 0xc6, 0xf0, 0x2c, 0xec, 0x6d, 0x33, 0x8a, 0xb2, 0x38, 0xf7, 0x37}
@@ -144,10 +130,10 @@ func (*AtomRangeTimer) Class() binary.Class {
 	return (*binaryClassAtomRangeTimer)(nil)
 }
 func doEncodeAtomRangeTimer(e binary.Encoder, o *AtomRangeTimer) error {
-	if err := e.Uint64(o.FromAtomId); err != nil {
+	if err := e.Uint64(o.FromAtomID); err != nil {
 		return err
 	}
-	if err := e.Uint64(o.ToAtomId); err != nil {
+	if err := e.Uint64(o.ToAtomID); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Nanoseconds); err != nil {
@@ -159,12 +145,12 @@ func doDecodeAtomRangeTimer(d binary.Decoder, o *AtomRangeTimer) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.FromAtomId = uint64(obj)
+		o.FromAtomID = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.ToAtomId = uint64(obj)
+		o.ToAtomID = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -205,8 +191,8 @@ var schemaAtomRangeTimer = &schema.Class{
 	Package: "service",
 	Name:    "AtomRangeTimer",
 	Fields: []schema.Field{
-		{Declared: "FromAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "ToAtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "FromAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "ToAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -284,62 +270,13 @@ var schemaAtomStream = &schema.Class{
 	},
 }
 
-type binaryClassAtomStreamId struct{}
-
-func (*AtomStreamId) Class() binary.Class {
-	return (*binaryClassAtomStreamId)(nil)
-}
-func doEncodeAtomStreamId(e binary.Encoder, o *AtomStreamId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeAtomStreamId(d binary.Decoder, o *AtomStreamId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipAtomStreamId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassAtomStreamId) ID() binary.ID      { return binaryIDAtomStreamId }
-func (*binaryClassAtomStreamId) New() binary.Object { return &AtomStreamId{} }
-func (*binaryClassAtomStreamId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomStreamId(e, obj.(*AtomStreamId))
-}
-func (*binaryClassAtomStreamId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &AtomStreamId{}
-	return obj, doDecodeAtomStreamId(d, obj)
-}
-func (*binaryClassAtomStreamId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomStreamId(d, obj.(*AtomStreamId))
-}
-func (*binaryClassAtomStreamId) Skip(d binary.Decoder) error { return doSkipAtomStreamId(d) }
-func (*binaryClassAtomStreamId) Schema() *schema.Class       { return schemaAtomStreamId }
-
-var schemaAtomStreamId = &schema.Class{
-	TypeID:  binaryIDAtomStreamId,
-	Package: "service",
-	Name:    "AtomStreamId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-	},
-}
-
 type binaryClassAtomTimer struct{}
 
 func (*AtomTimer) Class() binary.Class {
 	return (*binaryClassAtomTimer)(nil)
 }
 func doEncodeAtomTimer(e binary.Encoder, o *AtomTimer) error {
-	if err := e.Uint64(o.AtomId); err != nil {
+	if err := e.Uint64(o.AtomID); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Nanoseconds); err != nil {
@@ -351,7 +288,7 @@ func doDecodeAtomTimer(d binary.Decoder, o *AtomTimer) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.AtomId = uint64(obj)
+		o.AtomID = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -389,57 +326,8 @@ var schemaAtomTimer = &schema.Class{
 	Package: "service",
 	Name:    "AtomTimer",
 	Fields: []schema.Field{
-		{Declared: "AtomId", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "AtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
-
-type binaryClassBinaryId struct{}
-
-func (*BinaryId) Class() binary.Class {
-	return (*binaryClassBinaryId)(nil)
-}
-func doEncodeBinaryId(e binary.Encoder, o *BinaryId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeBinaryId(d binary.Decoder, o *BinaryId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipBinaryId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassBinaryId) ID() binary.ID      { return binaryIDBinaryId }
-func (*binaryClassBinaryId) New() binary.Object { return &BinaryId{} }
-func (*binaryClassBinaryId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeBinaryId(e, obj.(*BinaryId))
-}
-func (*binaryClassBinaryId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &BinaryId{}
-	return obj, doDecodeBinaryId(d, obj)
-}
-func (*binaryClassBinaryId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeBinaryId(d, obj.(*BinaryId))
-}
-func (*binaryClassBinaryId) Skip(d binary.Decoder) error { return doSkipBinaryId(d) }
-func (*binaryClassBinaryId) Schema() *schema.Class       { return schemaBinaryId }
-
-var schemaBinaryId = &schema.Class{
-	TypeID:  binaryIDBinaryId,
-	Package: "service",
-	Name:    "BinaryId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -452,7 +340,7 @@ func doEncodeCapture(e binary.Encoder, o *Capture) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Atoms); err != nil {
+	if err := e.ID(binary.ID(o.Atoms)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Apis))); err != nil {
@@ -471,18 +359,20 @@ func doDecodeCapture(d binary.Decoder, o *Capture) error {
 	} else {
 		o.Name = string(obj)
 	}
-	if err := d.Value(&o.Atoms); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.Atoms = AtomStreamID(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Apis = make([]ApiId, count)
+		o.Apis = make([]ApiID, count)
 		for i := range o.Apis {
 			if obj, err := d.ID(); err != nil {
 				return err
 			} else {
-				o.Apis[i] = ApiId(obj)
+				o.Apis[i] = ApiID(obj)
 			}
 		}
 	}
@@ -492,7 +382,7 @@ func doSkipCapture(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*AtomStreamId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -527,57 +417,8 @@ var schemaCapture = &schema.Class{
 	Name:    "Capture",
 	Fields: []schema.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Atoms", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
-		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "ApiId", Method: schema.ID}}},
-	},
-}
-
-type binaryClassCaptureId struct{}
-
-func (*CaptureId) Class() binary.Class {
-	return (*binaryClassCaptureId)(nil)
-}
-func doEncodeCaptureId(e binary.Encoder, o *CaptureId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCaptureId(d binary.Decoder, o *CaptureId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipCaptureId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCaptureId) ID() binary.ID      { return binaryIDCaptureId }
-func (*binaryClassCaptureId) New() binary.Object { return &CaptureId{} }
-func (*binaryClassCaptureId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCaptureId(e, obj.(*CaptureId))
-}
-func (*binaryClassCaptureId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CaptureId{}
-	return obj, doDecodeCaptureId(d, obj)
-}
-func (*binaryClassCaptureId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCaptureId(d, obj.(*CaptureId))
-}
-func (*binaryClassCaptureId) Skip(d binary.Decoder) error { return doSkipCaptureId(d) }
-func (*binaryClassCaptureId) Schema() *schema.Class       { return schemaCaptureId }
-
-var schemaCaptureId = &schema.Class{
-	TypeID:  binaryIDCaptureId,
-	Package: "service",
-	Name:    "CaptureId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Atoms", Type: &schema.Primitive{Name: "AtomStreamID", Method: schema.ID}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "ApiID", Method: schema.ID}}},
 	},
 }
 
@@ -738,55 +579,6 @@ var schemaDevice = &schema.Class{
 	},
 }
 
-type binaryClassDeviceId struct{}
-
-func (*DeviceId) Class() binary.Class {
-	return (*binaryClassDeviceId)(nil)
-}
-func doEncodeDeviceId(e binary.Encoder, o *DeviceId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeDeviceId(d binary.Decoder, o *DeviceId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipDeviceId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassDeviceId) ID() binary.ID      { return binaryIDDeviceId }
-func (*binaryClassDeviceId) New() binary.Object { return &DeviceId{} }
-func (*binaryClassDeviceId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeDeviceId(e, obj.(*DeviceId))
-}
-func (*binaryClassDeviceId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &DeviceId{}
-	return obj, doDecodeDeviceId(d, obj)
-}
-func (*binaryClassDeviceId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeDeviceId(d, obj.(*DeviceId))
-}
-func (*binaryClassDeviceId) Skip(d binary.Decoder) error { return doSkipDeviceId(d) }
-func (*binaryClassDeviceId) Schema() *schema.Class       { return schemaDeviceId }
-
-var schemaDeviceId = &schema.Class{
-	TypeID:  binaryIDDeviceId,
-	Package: "service",
-	Name:    "DeviceId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-	},
-}
-
 type binaryClassHierarchy struct{}
 
 func (*Hierarchy) Class() binary.Class {
@@ -849,7 +641,7 @@ func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
 	if err := e.Uint32(o.Height); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Data); err != nil {
+	if err := e.ID(binary.ID(o.Data)); err != nil {
 		return err
 	}
 	return nil
@@ -870,8 +662,10 @@ func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
 	} else {
 		o.Height = uint32(obj)
 	}
-	if err := d.Value(&o.Data); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.Data = BinaryID(obj)
 	}
 	return nil
 }
@@ -885,7 +679,7 @@ func doSkipImageInfo(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*BinaryId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -913,56 +707,7 @@ var schemaImageInfo = &schema.Class{
 		{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassImageInfoId struct{}
-
-func (*ImageInfoId) Class() binary.Class {
-	return (*binaryClassImageInfoId)(nil)
-}
-func doEncodeImageInfoId(e binary.Encoder, o *ImageInfoId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeImageInfoId(d binary.Decoder, o *ImageInfoId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipImageInfoId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassImageInfoId) ID() binary.ID      { return binaryIDImageInfoId }
-func (*binaryClassImageInfoId) New() binary.Object { return &ImageInfoId{} }
-func (*binaryClassImageInfoId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeImageInfoId(e, obj.(*ImageInfoId))
-}
-func (*binaryClassImageInfoId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ImageInfoId{}
-	return obj, doDecodeImageInfoId(d, obj)
-}
-func (*binaryClassImageInfoId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeImageInfoId(d, obj.(*ImageInfoId))
-}
-func (*binaryClassImageInfoId) Skip(d binary.Decoder) error { return doSkipImageInfoId(d) }
-func (*binaryClassImageInfoId) Schema() *schema.Class       { return schemaImageInfoId }
-
-var schemaImageInfoId = &schema.Class{
-	TypeID:  binaryIDImageInfoId,
-	Package: "service",
-	Name:    "ImageInfoId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Data", Type: &schema.Primitive{Name: "BinaryID", Method: schema.ID}},
 	},
 }
 
@@ -1106,55 +851,6 @@ var schemaMemoryInfo = &schema.Class{
 		{Declared: "Reads", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
 		{Declared: "Writes", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
 		{Declared: "Observed", Type: &schema.Slice{Alias: "memory.RangeList", ValueType: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}}},
-	},
-}
-
-type binaryClassMemoryInfoId struct{}
-
-func (*MemoryInfoId) Class() binary.Class {
-	return (*binaryClassMemoryInfoId)(nil)
-}
-func doEncodeMemoryInfoId(e binary.Encoder, o *MemoryInfoId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMemoryInfoId(d binary.Decoder, o *MemoryInfoId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipMemoryInfoId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMemoryInfoId) ID() binary.ID      { return binaryIDMemoryInfoId }
-func (*binaryClassMemoryInfoId) New() binary.Object { return &MemoryInfoId{} }
-func (*binaryClassMemoryInfoId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMemoryInfoId(e, obj.(*MemoryInfoId))
-}
-func (*binaryClassMemoryInfoId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &MemoryInfoId{}
-	return obj, doDecodeMemoryInfoId(d, obj)
-}
-func (*binaryClassMemoryInfoId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMemoryInfoId(d, obj.(*MemoryInfoId))
-}
-func (*binaryClassMemoryInfoId) Skip(d binary.Decoder) error { return doSkipMemoryInfoId(d) }
-func (*binaryClassMemoryInfoId) Schema() *schema.Class       { return schemaMemoryInfoId }
-
-var schemaMemoryInfoId = &schema.Class{
-	TypeID:  binaryIDMemoryInfoId,
-	Package: "service",
-	Name:    "MemoryInfoId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -1588,55 +1284,6 @@ var schemaTimingInfo = &schema.Class{
 		{Declared: "PerCommand", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomTimer", ID: (*AtomTimer)(nil).Class().ID()}}},
 		{Declared: "PerDrawCall", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
 		{Declared: "PerFrame", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "AtomRangeTimer", ID: (*AtomRangeTimer)(nil).Class().ID()}}},
-	},
-}
-
-type binaryClassTimingInfoId struct{}
-
-func (*TimingInfoId) Class() binary.Class {
-	return (*binaryClassTimingInfoId)(nil)
-}
-func doEncodeTimingInfoId(e binary.Encoder, o *TimingInfoId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeTimingInfoId(d binary.Decoder, o *TimingInfoId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipTimingInfoId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassTimingInfoId) ID() binary.ID      { return binaryIDTimingInfoId }
-func (*binaryClassTimingInfoId) New() binary.Object { return &TimingInfoId{} }
-func (*binaryClassTimingInfoId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeTimingInfoId(e, obj.(*TimingInfoId))
-}
-func (*binaryClassTimingInfoId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &TimingInfoId{}
-	return obj, doDecodeTimingInfoId(d, obj)
-}
-func (*binaryClassTimingInfoId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeTimingInfoId(d, obj.(*TimingInfoId))
-}
-func (*binaryClassTimingInfoId) Skip(d binary.Decoder) error { return doSkipTimingInfoId(d) }
-func (*binaryClassTimingInfoId) Schema() *schema.Class       { return schemaTimingInfoId }
-
-var schemaTimingInfoId = &schema.Class{
-	TypeID:  binaryIDTimingInfoId,
-	Package: "service",
-	Name:    "TimingInfoId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -2217,11 +1864,11 @@ func doEncodecallPrerenderFramebuffers(e binary.Encoder, o *callPrerenderFramebu
 	if err := e.Uint32(o.height); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.atomIds))); err != nil {
+	if err := e.Uint32(uint32(len(o.atomIDs))); err != nil {
 		return err
 	}
-	for i := range o.atomIds {
-		if err := e.Uint64(o.atomIds[i]); err != nil {
+	for i := range o.atomIDs {
+		if err := e.Uint64(o.atomIDs[i]); err != nil {
 			return err
 		}
 	}
@@ -2245,7 +1892,7 @@ func doDecodecallPrerenderFramebuffers(d binary.Decoder, o *callPrerenderFramebu
 	if obj, err := d.ID(); err != nil {
 		return err
 	} else {
-		o.api = ApiId(obj)
+		o.api = ApiID(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -2260,12 +1907,12 @@ func doDecodecallPrerenderFramebuffers(d binary.Decoder, o *callPrerenderFramebu
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.atomIds = make([]uint64, count)
-		for i := range o.atomIds {
+		o.atomIDs = make([]uint64, count)
+		for i := range o.atomIDs {
 			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
-				o.atomIds[i] = uint64(obj)
+				o.atomIDs[i] = uint64(obj)
 			}
 		}
 	}
@@ -2324,10 +1971,10 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
 		{Declared: "capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
-		{Declared: "api", Type: &schema.Primitive{Name: "ApiId", Method: schema.ID}},
+		{Declared: "api", Type: &schema.Primitive{Name: "ApiID", Method: schema.ID}},
 		{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "atomIds", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		{Declared: "atomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 	},
 }
 
@@ -2337,19 +1984,21 @@ func (*callResolveAtomStream) Class() binary.Class {
 	return (*binaryClasscallResolveAtomStream)(nil)
 }
 func doEncodecallResolveAtomStream(e binary.Encoder, o *callResolveAtomStream) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveAtomStream(d binary.Decoder, o *callResolveAtomStream) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = AtomStreamID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveAtomStream(d binary.Decoder) error {
-	if err := d.SkipValue((*AtomStreamId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2376,7 +2025,7 @@ var schemacallResolveAtomStream = &schema.Class{
 	Package: "service",
 	Name:    "callResolveAtomStream",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "AtomStreamId", ID: (*AtomStreamId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "AtomStreamID", Method: schema.ID}},
 	},
 }
 
@@ -2386,19 +2035,21 @@ func (*callResolveBinary) Class() binary.Class {
 	return (*binaryClasscallResolveBinary)(nil)
 }
 func doEncodecallResolveBinary(e binary.Encoder, o *callResolveBinary) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveBinary(d binary.Decoder, o *callResolveBinary) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = BinaryID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveBinary(d binary.Decoder) error {
-	if err := d.SkipValue((*BinaryId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2423,7 +2074,7 @@ var schemacallResolveBinary = &schema.Class{
 	Package: "service",
 	Name:    "callResolveBinary",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "BinaryID", Method: schema.ID}},
 	},
 }
 
@@ -2433,19 +2084,21 @@ func (*callResolveCapture) Class() binary.Class {
 	return (*binaryClasscallResolveCapture)(nil)
 }
 func doEncodecallResolveCapture(e binary.Encoder, o *callResolveCapture) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveCapture(d binary.Decoder, o *callResolveCapture) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = CaptureID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveCapture(d binary.Decoder) error {
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2470,7 +2123,7 @@ var schemacallResolveCapture = &schema.Class{
 	Package: "service",
 	Name:    "callResolveCapture",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "CaptureID", Method: schema.ID}},
 	},
 }
 
@@ -2480,19 +2133,21 @@ func (*callResolveDevice) Class() binary.Class {
 	return (*binaryClasscallResolveDevice)(nil)
 }
 func doEncodecallResolveDevice(e binary.Encoder, o *callResolveDevice) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveDevice(d binary.Decoder, o *callResolveDevice) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = DeviceID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveDevice(d binary.Decoder) error {
-	if err := d.SkipValue((*DeviceId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2517,7 +2172,7 @@ var schemacallResolveDevice = &schema.Class{
 	Package: "service",
 	Name:    "callResolveDevice",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "DeviceID", Method: schema.ID}},
 	},
 }
 
@@ -2527,19 +2182,21 @@ func (*callResolveImageInfo) Class() binary.Class {
 	return (*binaryClasscallResolveImageInfo)(nil)
 }
 func doEncodecallResolveImageInfo(e binary.Encoder, o *callResolveImageInfo) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveImageInfo(d binary.Decoder, o *callResolveImageInfo) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = ImageInfoID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveImageInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*ImageInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2566,7 +2223,7 @@ var schemacallResolveImageInfo = &schema.Class{
 	Package: "service",
 	Name:    "callResolveImageInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "ImageInfoID", Method: schema.ID}},
 	},
 }
 
@@ -2576,19 +2233,21 @@ func (*callResolveMemoryInfo) Class() binary.Class {
 	return (*binaryClasscallResolveMemoryInfo)(nil)
 }
 func doEncodecallResolveMemoryInfo(e binary.Encoder, o *callResolveMemoryInfo) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveMemoryInfo(d binary.Decoder, o *callResolveMemoryInfo) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = MemoryInfoID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveMemoryInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*MemoryInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2615,7 +2274,7 @@ var schemacallResolveMemoryInfo = &schema.Class{
 	Package: "service",
 	Name:    "callResolveMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "MemoryInfoId", ID: (*MemoryInfoId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "MemoryInfoID", Method: schema.ID}},
 	},
 }
 
@@ -2625,19 +2284,21 @@ func (*callResolveTimingInfo) Class() binary.Class {
 	return (*binaryClasscallResolveTimingInfo)(nil)
 }
 func doEncodecallResolveTimingInfo(e binary.Encoder, o *callResolveTimingInfo) error {
-	if err := e.Value(&o.id); err != nil {
+	if err := e.ID(binary.ID(o.id)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveTimingInfo(d binary.Decoder, o *callResolveTimingInfo) error {
-	if err := d.Value(&o.id); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = TimingInfoID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveTimingInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*TimingInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2664,7 +2325,7 @@ var schemacallResolveTimingInfo = &schema.Class{
 	Package: "service",
 	Name:    "callResolveTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Struct{Name: "TimingInfoId", ID: (*TimingInfoId)(nil).Class().ID()}},
+		{Declared: "id", Type: &schema.Primitive{Name: "TimingInfoID", Method: schema.ID}},
 	},
 }
 
@@ -2820,7 +2481,7 @@ func doEncoderesultGetCaptures(e binary.Encoder, o *resultGetCaptures) error {
 		return err
 	}
 	for i := range o.value {
-		if err := e.Value(&o.value[i]); err != nil {
+		if err := e.ID(binary.ID(o.value[i])); err != nil {
 			return err
 		}
 	}
@@ -2830,10 +2491,12 @@ func doDecoderesultGetCaptures(d binary.Decoder, o *resultGetCaptures) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.value = make([]CaptureId, count)
+		o.value = make([]CaptureID, count)
 		for i := range o.value {
-			if err := d.Value(&o.value[i]); err != nil {
+			if obj, err := d.ID(); err != nil {
 				return err
+			} else {
+				o.value[i] = CaptureID(obj)
 			}
 		}
 	}
@@ -2844,7 +2507,7 @@ func doSkipresultGetCaptures(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*CaptureId)(nil)); err != nil {
+			if err := d.SkipID(); err != nil {
 				return err
 			}
 		}
@@ -2871,7 +2534,7 @@ var schemaresultGetCaptures = &schema.Class{
 	Package: "service",
 	Name:    "resultGetCaptures",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "CaptureID", Method: schema.ID}}},
 	},
 }
 
@@ -2885,7 +2548,7 @@ func doEncoderesultGetDevices(e binary.Encoder, o *resultGetDevices) error {
 		return err
 	}
 	for i := range o.value {
-		if err := e.Value(&o.value[i]); err != nil {
+		if err := e.ID(binary.ID(o.value[i])); err != nil {
 			return err
 		}
 	}
@@ -2895,10 +2558,12 @@ func doDecoderesultGetDevices(d binary.Decoder, o *resultGetDevices) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.value = make([]DeviceId, count)
+		o.value = make([]DeviceID, count)
 		for i := range o.value {
-			if err := d.Value(&o.value[i]); err != nil {
+			if obj, err := d.ID(); err != nil {
 				return err
+			} else {
+				o.value[i] = DeviceID(obj)
 			}
 		}
 	}
@@ -2909,7 +2574,7 @@ func doSkipresultGetDevices(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*DeviceId)(nil)); err != nil {
+			if err := d.SkipID(); err != nil {
 				return err
 			}
 		}
@@ -2936,7 +2601,7 @@ var schemaresultGetDevices = &schema.Class{
 	Package: "service",
 	Name:    "resultGetDevices",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "DeviceId", ID: (*DeviceId)(nil).Class().ID()}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "DeviceID", Method: schema.ID}}},
 	},
 }
 
@@ -2946,19 +2611,21 @@ func (*resultGetFramebufferColor) Class() binary.Class {
 	return (*binaryClassresultGetFramebufferColor)(nil)
 }
 func doEncoderesultGetFramebufferColor(e binary.Encoder, o *resultGetFramebufferColor) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultGetFramebufferColor(d binary.Decoder, o *resultGetFramebufferColor) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = ImageInfoID(obj)
 	}
 	return nil
 }
 func doSkipresultGetFramebufferColor(d binary.Decoder) error {
-	if err := d.SkipValue((*ImageInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -2987,7 +2654,7 @@ var schemaresultGetFramebufferColor = &schema.Class{
 	Package: "service",
 	Name:    "resultGetFramebufferColor",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "ImageInfoID", Method: schema.ID}},
 	},
 }
 
@@ -2997,19 +2664,21 @@ func (*resultGetFramebufferDepth) Class() binary.Class {
 	return (*binaryClassresultGetFramebufferDepth)(nil)
 }
 func doEncoderesultGetFramebufferDepth(e binary.Encoder, o *resultGetFramebufferDepth) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultGetFramebufferDepth(d binary.Decoder, o *resultGetFramebufferDepth) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = ImageInfoID(obj)
 	}
 	return nil
 }
 func doSkipresultGetFramebufferDepth(d binary.Decoder) error {
-	if err := d.SkipValue((*ImageInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -3038,7 +2707,7 @@ var schemaresultGetFramebufferDepth = &schema.Class{
 	Package: "service",
 	Name:    "resultGetFramebufferDepth",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ImageInfoId", ID: (*ImageInfoId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "ImageInfoID", Method: schema.ID}},
 	},
 }
 
@@ -3048,19 +2717,21 @@ func (*resultGetMemoryInfo) Class() binary.Class {
 	return (*binaryClassresultGetMemoryInfo)(nil)
 }
 func doEncoderesultGetMemoryInfo(e binary.Encoder, o *resultGetMemoryInfo) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultGetMemoryInfo(d binary.Decoder, o *resultGetMemoryInfo) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = MemoryInfoID(obj)
 	}
 	return nil
 }
 func doSkipresultGetMemoryInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*MemoryInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -3087,7 +2758,7 @@ var schemaresultGetMemoryInfo = &schema.Class{
 	Package: "service",
 	Name:    "resultGetMemoryInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "MemoryInfoId", ID: (*MemoryInfoId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "MemoryInfoID", Method: schema.ID}},
 	},
 }
 
@@ -3144,19 +2815,21 @@ func (*resultGetTimingInfo) Class() binary.Class {
 	return (*binaryClassresultGetTimingInfo)(nil)
 }
 func doEncoderesultGetTimingInfo(e binary.Encoder, o *resultGetTimingInfo) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultGetTimingInfo(d binary.Decoder, o *resultGetTimingInfo) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = TimingInfoID(obj)
 	}
 	return nil
 }
 func doSkipresultGetTimingInfo(d binary.Decoder) error {
-	if err := d.SkipValue((*TimingInfoId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -3183,7 +2856,7 @@ var schemaresultGetTimingInfo = &schema.Class{
 	Package: "service",
 	Name:    "resultGetTimingInfo",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "TimingInfoId", ID: (*TimingInfoId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "TimingInfoID", Method: schema.ID}},
 	},
 }
 
@@ -3193,19 +2866,21 @@ func (*resultImport) Class() binary.Class {
 	return (*binaryClassresultImport)(nil)
 }
 func doEncoderesultImport(e binary.Encoder, o *resultImport) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultImport(d binary.Decoder, o *resultImport) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = CaptureID(obj)
 	}
 	return nil
 }
 func doSkipresultImport(d binary.Decoder) error {
-	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -3230,7 +2905,7 @@ var schemaresultImport = &schema.Class{
 	Package: "service",
 	Name:    "resultImport",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "CaptureId", ID: (*CaptureId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "CaptureID", Method: schema.ID}},
 	},
 }
 
@@ -3240,19 +2915,21 @@ func (*resultPrerenderFramebuffers) Class() binary.Class {
 	return (*binaryClassresultPrerenderFramebuffers)(nil)
 }
 func doEncoderesultPrerenderFramebuffers(e binary.Encoder, o *resultPrerenderFramebuffers) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultPrerenderFramebuffers(d binary.Decoder, o *resultPrerenderFramebuffers) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = BinaryID(obj)
 	}
 	return nil
 }
 func doSkipresultPrerenderFramebuffers(d binary.Decoder) error {
-	if err := d.SkipValue((*BinaryId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -3285,7 +2962,7 @@ var schemaresultPrerenderFramebuffers = &schema.Class{
 	Package: "service",
 	Name:    "resultPrerenderFramebuffers",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "BinaryId", ID: (*BinaryId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "BinaryID", Method: schema.ID}},
 	},
 }
 

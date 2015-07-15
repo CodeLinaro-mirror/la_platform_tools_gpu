@@ -30,13 +30,13 @@ import (
 // Android devices.
 type discovery struct {
 	sync.Mutex
-	devices map[service.DeviceId]Device
+	devices map[service.DeviceID]Device
 	logger  log.Logger
 }
 
 func newDiscovery(db database.Database, logger log.Logger) *discovery {
 	m := &discovery{
-		devices: make(map[service.DeviceId]Device),
+		devices: make(map[service.DeviceID]Device),
 		logger:  logger,
 	}
 
@@ -46,7 +46,7 @@ func newDiscovery(db database.Database, logger log.Logger) *discovery {
 	return m
 }
 
-func (d *discovery) device(id service.DeviceId) Device {
+func (d *discovery) device(id service.DeviceID) Device {
 	d.Lock()
 	defer d.Unlock()
 
@@ -75,7 +75,7 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 		if err != nil {
 			panic(err)
 		}
-		d.id.ID = id
+		d.id = service.DeviceID(id)
 
 		m.Lock()
 		defer m.Unlock()
@@ -96,7 +96,7 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 		if err != nil {
 			panic(err)
 		}
-		d.id.ID = id
+		d.id = service.DeviceID(id)
 
 		m.Lock()
 		defer m.Unlock()

@@ -31,8 +31,8 @@ func (r *GetTimingInfo) BuildLazy(c interface{}, d database.Database, l log.Logg
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		DeviceID:  service.DeviceId{ID: r.Device.ID},
-		CaptureID: service.CaptureId{ID: r.Capture.ID},
+		DeviceID:  service.DeviceID(r.Device.ID),
+		CaptureID: service.CaptureID(r.Capture.ID),
 	}
 
 	capture, err := ResolveCapture(r.Capture, d, l)

@@ -46,7 +46,7 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 		Format: service.ImageFormatFloat32, // TODO: Add support for other formats.
 		Width:  fbWidth,
 		Height: fbHeight,
-		Data:   service.BinaryId{ID: data},
+		Data:   service.BinaryID(data),
 	}, nil
 }
 
@@ -56,8 +56,8 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		DeviceID:  service.DeviceId{ID: r.Device.ID},
-		CaptureID: service.CaptureId{ID: r.After.Atoms.Capture.ID},
+		DeviceID:  service.DeviceID(r.Device.ID),
+		CaptureID: service.CaptureID(r.After.Atoms.Capture.ID),
 	}
 
 	after, err := ResolveAtom(r.After, d, l)
