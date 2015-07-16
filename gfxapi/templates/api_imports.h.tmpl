@@ -30,7 +30,7 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "imports.h"}}
-  {{Macro "C++.AOSP.Copyright"}}
+  {{Template "C++.AOSP.Copyright"}}
   {{$guard := print "GAPII_" (Upper (Global "API")) "_IMPORTS_H"}}
 ¶
   #ifndef {{$guard}}
@@ -42,7 +42,7 @@
 ¶
   namespace gapii {
 ¶
-  struct {{Macro "ApiClassnames.Imports"}} {
+  struct {{Template "ApiClassnames.Imports"}} {
     void Resolve();
 ¶
     {{range $c := AllCommands $}}
@@ -53,7 +53,7 @@
 ¶
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{template "C++.FunctionPtrDecl" $c}};
+        {{Template "C++.FunctionPtrDecl" $c}};
       {{end}}
     {{end}}
 ¶
@@ -63,4 +63,3 @@
   #endif // {{$guard}}
 ¶
 {{end}}
-

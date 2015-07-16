@@ -25,7 +25,7 @@
 
 {{define "Types"}}
   {{AssertType $ "API"}}
-  {{Macro "C++.AOSP.Copyright"}}
+  {{Template "C++.AOSP.Copyright"}}
   {{$guard := print "GAPII_" (Upper (Global "API")) "_TYPES_H"}}
 ¶
   #ifndef {{$guard}}
@@ -44,16 +44,16 @@
   namespace gapii {«
 ¶
   {{range $e := $.Enums}}
-    {{Macro "DeclareType" $e}}
+    {{Template "DeclareType" $e}}
   {{end}}
   {{range $p := $.Pseudonyms}}
-    {{Macro "DeclareType" $p}}
+    {{Template "DeclareType" $p}}
   {{end}}
   {{range $m := $.Maps}}
-    {{Macro "DeclareType" $m}}
+    {{Template "DeclareType" $m}}
   {{end}}
   {{range $c := $.Classes}}
-    {{Macro "DeclareType" $c}}
+    {{Template "DeclareType" $c}}
   {{end}}
 ¶
   »} // namespace gapii
@@ -74,13 +74,13 @@
     {{$key  := printf "ApiType%dDeclared" $.Name}}
     {{if not (Global $key)}}
       {{Global $key "true"}}
-      {{     if IsClass       $}}{{Macro "DeclareClass"     $}}
-      {{else if IsEnum        $}}{{Macro "DeclareEnum"      $}}
-      {{else if IsMap         $}}{{Macro "DeclareMap"       $}}
-      {{else if IsPseudonym   $}}{{Macro "DeclarePseudonym" $}}
-      {{else if IsPointer     $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsReference   $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsStaticArray $}}{{Macro "DeclareType"      $.ValueType}}
+      {{     if IsClass       $}}{{Template "DeclareClass"     $}}
+      {{else if IsEnum        $}}{{Template "DeclareEnum"      $}}
+      {{else if IsMap         $}}{{Template "DeclareMap"       $}}
+      {{else if IsPseudonym   $}}{{Template "DeclarePseudonym" $}}
+      {{else if IsPointer     $}}{{Template "DeclareType"      $.To}}
+      {{else if IsReference   $}}{{Template "DeclareType"      $.To}}
+      {{else if IsStaticArray $}}{{Template "DeclareType"      $.ValueType}}
       {{else if IsReference   $}}
       {{else if IsSlice       $}}
       {{else}}{{Error "DeclareType does not support type '%T'" $}}
@@ -101,15 +101,15 @@
   {{AssertType $ "Class"}}
 
   {{range $f := $.Fields}}
-    {{Macro "DeclareType" (TypeOf $f)}}
+    {{Template "DeclareType" (TypeOf $f)}}
   {{end}}
 
-  struct {{Macro "C++.Type" $}} {
+  struct {{Template "C++.Type" $}} {
     {{range $f := $.Fields}}
-      inline {{Macro "C++.Type" $}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v{{Macro "C++.StaticArraySuffix" $f}}) {
+      inline {{Template "C++.Type" $}}& Set{{$f.Name}}({{Template "C++.Type" $f}} v{{Template "C++.StaticArraySuffix" $f}}) {
       {{if IsStaticArray $f.Type}}
         {{$sa := Unpack $f.Type}}
-        memcpy(m{{$f.Name}}, v, sizeof({{Macro "C++.Type" $f}}) * {{$sa.Size}});
+        memcpy(m{{$f.Name}}, v, sizeof({{Template "C++.Type" $f}}) * {{$sa.Size}});
       {{else}}
         m{{$f.Name}} = v;
       {{end}}
@@ -118,7 +118,7 @@
     {{end}}
 ¶
     {{range $f := $.Fields}}
-      {{Macro "C++.Type" $f}} m{{$f.Name}}{{Macro "C++.StaticArraySuffix" $f}};
+      {{Template "C++.Type" $f}} m{{$f.Name}}{{Template "C++.StaticArraySuffix" $f}};
     {{end}}
   };
 {{end}}
@@ -133,9 +133,9 @@
   {{AssertType $ "Enum"}}
 
   {{range $entry := $.Entries}}
-  static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
+  static const uint32_t {{Template "C++.EnumEntryName" $entry}} = {{$entry.Value}};
   {{end}}
-  {{range $p := $.Extends}}{{Macro "DeclareEnumEntries" $p}}{{end}}
+  {{range $p := $.Extends}}{{Template "DeclareEnumEntries" $p}}{{end}}
 {{end}}
 
 
@@ -147,8 +147,8 @@
 {{define "DeclareEnum"}}
   {{AssertType $ "Enum"}}
 
-  namespace {{Macro "C++.EnumName" $}} {
-    {{Macro "DeclareEnumEntries" $}}
+  namespace {{Template "C++.EnumName" $}} {
+    {{Template "DeclareEnumEntries" $}}
   }
 {{end}}
 
@@ -162,9 +162,9 @@
 {{define "DeclarePseudonym"}}
   {{AssertType $ "Pseudonym"}}
 
-  {{Macro "DeclareType" $.To}}
+  {{Template "DeclareType" $.To}}
 
-  typedef {{Macro "C++.Type" $.To}} {{Macro "C++.Type" $}}{{Macro "C++.StaticArraySuffix" $.To}};
+  typedef {{Template "C++.Type" $.To}} {{Template "C++.Type" $}}{{Template "C++.StaticArraySuffix" $.To}};
 {{end}}
 
 
@@ -177,8 +177,8 @@
 {{define "DeclareMap"}}
   {{AssertType $ "Map"}}
 
-  {{Macro "DeclareType" $.KeyType}}
-  {{Macro "DeclareType" $.ValueType}}
+  {{Template "DeclareType" $.KeyType}}
+  {{Template "DeclareType" $.ValueType}}
 
-  typedef std::unordered_map<{{Macro "C++.Type" $.KeyType}}, {{Macro "C++.Type" $.ValueType}}> {{Macro "C++.Type" $}};
+  typedef std::unordered_map<{{Template "C++.Type" $.KeyType}}, {{Template "C++.Type" $.ValueType}}> {{Template "C++.Type" $}};
 {{end}}

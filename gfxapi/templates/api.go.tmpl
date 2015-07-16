@@ -54,7 +54,7 @@
   {{end}}
 
   {{range $i, $c := AllCommands $}}
-    {{Macro "CommandEntry" "Command" $c "Index" $i}}
+    {{Template "CommandEntry" "Command" $c "Index" $i}}
   {{end}}
 
   {{range $c := $.Classes}}
@@ -114,9 +114,9 @@
   {{AssertType $ "Pseudonym"}}
 
   {{$u := $ | Underlying}}
-  {{     if IsPointer  $u}}{{Macro "Pointer" $}}
-  {{else if IsSlice    $u}}{{Macro "Slice"   $}}
-  {{else                 }}type {{$.Name}} {{Macro "Go.Type" $.To}}
+  {{     if IsPointer  $u}}{{Template "Pointer" $}}
+  {{else if IsSlice    $u}}{{Template "Slice"   $}}
+  {{else                 }}type {{$.Name}} {{Template "Go.Type" $.To}}
   {{end}}
 {{end}}
 
@@ -129,9 +129,9 @@
 {{define "Array"}}
   {{AssertType $ "StaticArray"}}
 
-  type {{Macro "Go.Type" $}} struct {
+  type {{Template "Go.Type" $}} struct {
     binary.Generate
-    Elements [{{$.Size}}]{{Macro "Go.Type" $.ValueType}}
+    Elements [{{$.Size}}]{{Template "Go.Type" $.ValueType}}
   }
 {{end}}
 
@@ -179,7 +179,7 @@
         return 12
       }
     {{else}}
-      return {{Macro "Go.SizeOf" $p.To}}
+      return {{Template "Go.SizeOf" $p.To}}
     {{end}}
   }
 
@@ -305,7 +305,7 @@
         return 12
       }
     {{else}}
-      return {{Macro "Go.SizeOf" $s.To}}
+      return {{Template "Go.SizeOf" $s.To}}
     {{end}}
   }
 
@@ -358,7 +358,7 @@
             res[i] = New{{$el_ty}}(ptr)
           } else {
         {{end}}
-          {{Macro "Go.Decode" "Name" "res[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Decode" "Name" "res[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
         {{if $el_is_ptr}} } {{end}}
       }
       return res
@@ -378,7 +378,7 @@
             }
           } else {
         {{end}}
-          {{Macro "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
+          {{Template "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
         {{if $el_is_ptr}} } {{end}}
       }
       s.OnWrite(ϟs)
@@ -450,9 +450,9 @@
 */}}
 {{define "StaticArray"}}
   {{AssertType $ "StaticArray"}}
-  type {{$.Name}} [{{$.Size}}]{{Macro "Go.Type" $.ValueType}}
+  type {{$.Name}} [{{$.Size}}]{{Template "Go.Type" $.ValueType}}
   func (s {{$.Name}}) Len() int { return {{$.Size}} }
-  func (s {{$.Name}}) Range() [{{$.Size}}]{{Macro "Go.Type" $.ValueType}} { return s}
+  func (s {{$.Name}}) Range() [{{$.Size}}]{{Template "Go.Type" $.ValueType}} { return s}
 {{end}}
 
 
@@ -510,7 +510,7 @@
   {{AssertType $.Type "Type"}}
   {{AssertType $.Name "string"}}
 
-  {{     if IsMap   $.Type}}{{$.Name}} = make({{Macro "Go.Type" $.Type}})
+  {{     if IsMap   $.Type}}{{$.Name}} = make({{Template "Go.Type" $.Type}})
   {{else if IsClass $.Type}}{{$.Name}}.Init()
   {{end}}
 {{end}}
@@ -531,19 +531,19 @@
     binary.Generate
     observations atom.Observations
     {{range $p := $.Command.FullParameters}}
-      {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
+      {{Template "Go.Public" $p.Name}} {{Template "Go.Type" $p}}
     {{end}}
   }
 
   func (a *{{$name}}) String() string {
-    return fmt.Sprintf("{{Macro "CmdName" $.Command}}(§
+    return fmt.Sprintf("{{Template "CmdName" $.Command}}(§
       {{range $i, $p := $.Command.CallParameters}}
         {{if $i}}, §{{end}}
         {{$p.Name}}: %v§
       {{end}}
       ){{if $ret}} → %v{{end}}",§
       {{range $i, $p := $.Command.CallParameters}}
-        a.{{Macro "Go.Parameter" $p}}, §
+        a.{{Template "Go.Parameter" $p}}, §
       {{end}}
       {{if $ret}}a.Result§{{end}}
     )
@@ -584,18 +584,18 @@
   {{template "Go.CommentHeader" print "class " $.Name }}
   {{if GetAnnotation $ "Interface"}}
     type {{$.Name}} interface {
-      {{Macro "ClassInterface" $}}
+      {{Template "ClassInterface" $}}
     }
   {{else}}
 
     type {{$.Name}} struct {
       binary.Generate
       CreatedAt atom.ID
-      {{Macro "ClassFields" $}}
+      {{Template "ClassFields" $}}
     }
 
     func (c *{{$.Name}}) Init() {
-      {{Macro "FieldsInit" "Type" $ "Name" "c"}}
+      {{Template "FieldsInit" "Type" $ "Name" "c"}}
     }
 
     func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
@@ -612,8 +612,8 @@
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
     {{$type := TypeOf $v}}
-    Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
-    Set{{Title $v.Name}}({{Macro "Go.Type" $type}})
+    Get{{Title $v.Name}}() {{Template "Go.Type" $type}}
+    Set{{Title $v.Name}}({{Template "Go.Type" $type}})
   {{end}}
 {{end}}
 
@@ -626,7 +626,7 @@
 {{define "ClassFields"}}
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
-    {{Title $v.Name}} {{Macro "Go.Type" $v}}
+    {{Title $v.Name}} {{Template "Go.Type" $v}}
   {{end}}
 {{end}}
 
@@ -640,7 +640,7 @@
   {{AssertType $.Type "Class"  "API"}}
   {{AssertType $.Name "string"}}
   {{range $v := $.Type.Fields}}
-    {{Macro "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
+    {{Template "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
   {{end}}
 {{end}}
 
@@ -654,8 +654,8 @@
   {{AssertType $.Field "Field"  "Global"}}
   {{AssertType $.Name "string"}}
 
-  {{if $.Field.Default}}{{$.Name}} = {{Macro "Default" $.Field.Default}}
-  {{else              }}{{Macro "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
+  {{if $.Field.Default}}{{$.Name}} = {{Template "Default" $.Field.Default}}
+  {{else              }}{{Template "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
   {{end}}
 {{end}}
 
@@ -670,7 +670,7 @@
   {{else if IsNumericValue $}}{{$}}
   {{else if IsStringValue  $}}{{$}}
   {{else if IsEnumEntry    $}}{{$.Owner.Name}}_{{$.Name}}
-  {{else if IsCast         $}}{{Macro "Default" $.Object}}
+  {{else if IsCast         $}}{{Template "Default" $.Object}}
   {{else}}{{Error "macro Default called with unsupported type: %T" $}}
   {{end}}
 {{end}}
@@ -703,7 +703,7 @@
   {{template "Go.CommentHeader" print "enum " $.Name }}
   type {{$.Name}} uint32
 
-  {{Macro "EnumConstants" "Enum" $ "Name" $.Name}}
+  {{Template "EnumConstants" "Enum" $ "Name" $.Name}}
 {{end}}
 
 
@@ -722,7 +722,7 @@
    )
    {{range $e := $.Enum.Extends}}
      // {{$e.Name}}
-     {{Macro "EnumConstants" "Enum" $e "Name" $.Name}}
+     {{Template "EnumConstants" "Enum" $e "Name" $.Name}}
    {{end}}
 {{end}}
 
@@ -739,7 +739,7 @@
    {{end}}
    {{range $e := $.Extends}}
      // {{$e.Name}}
-     {{Macro "EnumStringCases" $e}}
+     {{Template "EnumStringCases" $e}}
    {{end}}
 {{end}}
 
@@ -754,13 +754,13 @@
   type State struct {
     binary.Generate
     {{range $g := $.Globals}}
-      {{Title $g.Name}} {{Macro "Go.Type" $g}}
+      {{Title $g.Name}} {{Template "Go.Type" $g}}
     {{end}}
   }
 
   func (g *State) Init() {
     {{range $g := $.Globals}}
-      {{Macro "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
+      {{Template "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
     {{end}}
   }
 {{end}}
@@ -814,7 +814,7 @@
 {{define "Equal"}}
   {{AssertType $.Type "Type"}}
 
-  {{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "==" "Name" "Equal"}}
+  {{Template "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "==" "Name" "Equal"}}
 {{end}}
 
 
@@ -827,7 +827,7 @@
   {{AssertType $.Type "Type"}}
 
   {{if IsBool $.Type}}false
-  {{else            }}{{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "<" "Name" "Less"}}
+  {{else            }}{{Template "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "<" "Name" "Less"}}
   {{end}}
 {{end}}
 
@@ -877,16 +877,16 @@
           {{if $p | TypeOf | Underlying | IsPointer}}
             {{Title $p.Name}} memory.Pointer,§
           {{else}}
-            {{Title $p.Name}} {{Macro "Go.Type" $p}},§
+            {{Title $p.Name}} {{Template "Go.Type" $p}},§
           {{end}}
         {{end}}
       ) *{{$name}} {
       return &{{$name}} {§
         {{range $p := $c.FullParameters}}
           {{if $p | TypeOf | Underlying | IsPointer}}
-            {{Macro "Go.Public" $p.Name}}: {{Macro "Go.Type" $p}}{ Pointer: {{Title $p.Name}} },§
+            {{Template "Go.Public" $p.Name}}: {{Template "Go.Type" $p}}{ Pointer: {{Title $p.Name}} },§
           {{else}}
-            {{Macro "Go.Public" $p.Name}}: {{Title $p.Name}},§
+            {{Template "Go.Public" $p.Name}}: {{Title $p.Name}},§
           {{end}}
         {{end}}
       }
