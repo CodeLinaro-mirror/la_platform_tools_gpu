@@ -122,10 +122,6 @@ func (n *StateAdapterNode) NodeAt(index int) gxui.TreeNode {
 	return n.children[index]
 }
 
-func (n *StateAdapterNode) ItemAt(index int) gxui.AdapterItem {
-	return n.children[index].item
-}
-
 func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
 	// Brute-force search
 	for i, c := range n.children {
@@ -139,12 +135,15 @@ func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
 	return -1
 }
 
-func (n *StateAdapterNode) Create(t gxui.Theme, index int) gxui.Control {
-	c := n.children[index]
-	if len(c.children) > 0 {
-		return createControls(n.appCtx, c.name, c.path, nil)
+func (n *StateAdapterNode) Item() gxui.AdapterItem {
+	return n.item
+}
+
+func (n *StateAdapterNode) Create(t gxui.Theme) gxui.Control {
+	if len(n.children) > 0 {
+		return createControls(n.appCtx, n.name, n.path, nil)
 	} else {
-		return createControls(n.appCtx, c.name, c.path, c.value)
+		return createControls(n.appCtx, n.name, n.path, n.value)
 	}
 }
 
