@@ -91,7 +91,7 @@ func (a *MemoryAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	update := func() {
 		t.Run(requestMemory{a.appCtx, a.after, base, a.bytesPerLine, func(info service.MemoryInfo) {
 			ll.RemoveAll()
-			ll.AddChild(CreateLabel(theme, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
+			ll.AddChild(createLabel(a.appCtx, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR))
 			offset := uint64(0)
 			data := info.Data
 			dataType := a.dataType
@@ -99,13 +99,13 @@ func (a *MemoryAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 			for len(data) >= dataTypeSize {
 				switch {
 				case interval.Contains(&info.Writes, offset):
-					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR, true))
+					ll.AddChild(createMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", WRITE_MEMORY_COLOR))
 				case interval.Contains(&info.Reads, offset):
-					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", READ_MEMORY_COLOR, true))
+					ll.AddChild(createMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", READ_MEMORY_COLOR))
 				case interval.Contains(&info.Observed, offset):
-					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR, true))
+					ll.AddChild(createMonospaceLabel(a.appCtx, dataType.Read(data).String()+" ", STALE_MEMORY_COLOR))
 				default:
-					ll.AddChild(CreateMonospaceLabel(a.appCtx, dataType.Unknown()+" ", STALE_MEMORY_COLOR, true))
+					ll.AddChild(createMonospaceLabel(a.appCtx, dataType.Unknown()+" ", STALE_MEMORY_COLOR))
 				}
 				offset += uint64(dataTypeSize)
 				data = data[dataTypeSize:]

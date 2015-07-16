@@ -27,7 +27,7 @@ import (
 
 const kStateAdapterNodeHeight = 18
 
-func createControls(appCtx *ApplicationContext, name string, value interface{}, path path.Path) gxui.Control {
+func createControls(appCtx *ApplicationContext, name string, p path.Path, v interface{}) gxui.Control {
 	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
@@ -39,44 +39,19 @@ func createControls(appCtx *ApplicationContext, name string, value interface{}, 
 		layout.AddChild(label)
 		return label
 	}
-	//	addButton := func(format string, args ...interface{}) gxui.Button {
-	//		button := theme.CreateButton()
-	//		button.SetText(fmt.Sprintf(format, args...))
-	//		// button.SetPadding(math.ZeroSpacing)
-	//		button.SetMargin(math.ZeroSpacing)
-	//		layout.AddChild(button)
-	//		return button
-	//	}
 
 	label := addLabel("%s: ", name)
 	appCtx.toolTipController.AddToolTip(label, 0.7, func(math.Point) gxui.Control {
-		return CreateLabel(appCtx.theme, path.Path(), gxui.White, true)
+		return createLabel(appCtx, p.Path(), gxui.White)
 	})
 
-	if value != nil {
-		addLabel(fmt.Sprintf("%v", value))
+	if v != nil {
+		c := createField(appCtx, p, nil, v)
+		if c != nil {
+			layout.AddChild(c)
+		}
 	}
-	//	switch ty := value.(type) {
-	//	case atom.ID:
-	//		addButton(fmt.Sprintf("0x%.8x", ty)).OnClick(func(gxui.MouseEvent) {
-	//			appCtx.SelectAtom(ty)
-	//		})
-	//	case memory.Pointer:
-	//		addButton(fmt.Sprintf("0x%.8x", ty)).OnClick(func(gxui.MouseEvent) {
-	//			appCtx.SelectAddress(ty)
-	//		})
-	//	/*
-	//		case schema.EnumValue:
-	//			addLabel(fmt.Sprintf("%v", ty))
-	//	*/
-	//	case string, int, uint, int32, uint32, int16, uint16, int8, uint8, float32, float64, bool:
-	//		// TODO: Click to select object
-	//		// obj := state.LookupId(ty)
-	//		// addButton(ty.String()).OnClick(func(gxui.MouseEvent) {
-	//		// 	appCtx.SelectObject(obj)
-	//		// })
-	//		addLabel(fmt.Sprintf("%v", ty))
-	//	}
+
 	return layout
 }
 
@@ -85,6 +60,7 @@ type StateAdapterNode struct {
 	name     string
 	value    interface{}
 	path     path.Value
+	item     string
 	children StateAdapterNodeList
 	parent   *StateAdapterNode
 }
@@ -101,6 +77,7 @@ func (n *StateAdapterNode) add(name string, value interface{}, path path.Value) 
 		name:   name,
 		value:  value,
 		path:   path,
+		item:   path.Path(),
 		parent: n,
 	})
 }
@@ -146,13 +123,13 @@ func (n *StateAdapterNode) NodeAt(index int) gxui.TreeNode {
 }
 
 func (n *StateAdapterNode) ItemAt(index int) gxui.AdapterItem {
-	return n.children[index].path
+	return n.children[index].item
 }
 
 func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
-	// Brute force search
+	// Brute-force search
 	for i, c := range n.children {
-		if c.path == item {
+		if c.item == item {
 			return i
 		}
 		if c.ItemIndex(item) >= 0 {
@@ -165,9 +142,9 @@ func (n *StateAdapterNode) ItemIndex(item gxui.AdapterItem) int {
 func (n *StateAdapterNode) Create(t gxui.Theme, index int) gxui.Control {
 	c := n.children[index]
 	if len(c.children) > 0 {
-		return createControls(n.appCtx, c.name, nil, c.path)
+		return createControls(n.appCtx, c.name, c.path, nil)
 	} else {
-		return createControls(n.appCtx, c.name, c.value, c.path)
+		return createControls(n.appCtx, c.name, c.path, c.value)
 	}
 }
 
