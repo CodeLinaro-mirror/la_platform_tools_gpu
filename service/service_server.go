@@ -109,12 +109,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callResolveCapture:
-			if res, err := server.ResolveCapture(call.id, l); err == nil {
-				return &resultResolveCapture{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callResolveDevice:
 			if res, err := server.ResolveDevice(call.id, l); err == nil {
 				return &resultResolveDevice{value: res}
