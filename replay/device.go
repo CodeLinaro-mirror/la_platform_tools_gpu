@@ -79,7 +79,7 @@ func (os deviceOS) String() string {
 // Device is the interface for a discovered replay device.
 type Device interface {
 	// ID returns the identifier for the replay device.
-	ID() service.DeviceId
+	ID() service.DeviceID
 	// Info returns the service Device describing the replay device.
 	Info() *service.Device
 	// Connect opens a connection to the replay device.
@@ -87,11 +87,11 @@ type Device interface {
 }
 
 type deviceBase struct {
-	id     service.DeviceId
+	id     service.DeviceID
 	device *service.Device
 }
 
-func (d deviceBase) ID() service.DeviceId {
+func (d deviceBase) ID() service.DeviceID {
 	return d.id
 }
 

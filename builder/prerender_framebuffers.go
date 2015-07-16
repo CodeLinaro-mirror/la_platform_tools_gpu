@@ -17,6 +17,7 @@ package builder
 import (
 	"sync"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -46,9 +47,9 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 			go func() {
 				defer wg.Done()
 
-				imageInfo, err := service.ResolveImageInfo(service.ImageInfoId{ID: id}, d, l)
+				imageInfo, err := service.ResolveImageInfo(service.ImageInfoID(id), d, l)
 				if err == nil {
-					d.Resolve(imageInfo.Data.ID, l)
+					d.Resolve(binary.ID(imageInfo.Data), l)
 				}
 			}()
 		}

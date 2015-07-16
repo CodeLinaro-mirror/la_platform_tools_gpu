@@ -6,25 +6,26 @@
 package test
 
 import (
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-// StoreResource stores v into the database d, returning the ResourceId.
-func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceId, error) {
+// StoreResource stores v into the database d, returning the ResourceID.
+func StoreResource(v *Resource, d database.Database, l log.Logger) (ResourceID, error) {
 	id, err := database.Store(v, d, l)
-	return ResourceId{ID: id}, err
+	return ResourceID(id), err
 }
 
 // ResolveResource loads and returns the Resource stored in the database d, using id.
-func ResolveResource(id ResourceId, d database.Database, l log.Logger) (res Resource, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveResource(id ResourceID, d database.Database, l log.Logger) (res Resource, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*Resource))
 	}
 	return res, err
 }
 
 // ResolveResource loads and returns the Resource stored in the resolver's database, using id.
-func (r Resolver) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
+func (r Resolver) ResolveResource(id ResourceID, l log.Logger) (Resource, error) {
 	return ResolveResource(id, r.Database, l)
 }

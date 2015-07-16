@@ -19,6 +19,7 @@ import (
 	"net/http"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -51,7 +52,7 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 
 	if id := req.URL.Query().Get(idParamName); id != "" {
 		for _, cid := range captures {
-			if strings.EqualFold(cid.ID.String(), id) {
+			if strings.EqualFold(binary.ID(cid).String(), id) {
 				capture, err = service.ResolveCapture(cid, h, logger)
 				break
 			}

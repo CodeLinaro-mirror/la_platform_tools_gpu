@@ -35,7 +35,7 @@ import (
 
 // The list of captures currently imported.
 // TODO: This needs to be moved to persistent storage.
-var captures = []service.CaptureId{}
+var captures = []service.CaptureID{}
 
 // Context is the type that should be passed to the database constructor's
 // buildContext parameter.
@@ -91,26 +91,26 @@ func extractResources(atoms atom.List, d database.Database, l log.Logger) (atom.
 
 // ImportCapture builds a new capture containing atoms, stores it into db and
 // returns the new capture identifier.
-func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (service.CaptureId, error) {
+func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (service.CaptureID, error) {
 	atoms, err := extractResources(atoms, d, l)
 	if err != nil {
-		return service.CaptureId{}, err
+		return service.CaptureID{}, err
 	}
 
 	stream := service.AtomStream{Atoms: atoms}
 	streamID, err := service.StoreAtomStream(&stream, d, l)
 	if err != nil {
-		return service.CaptureId{}, err
+		return service.CaptureID{}, err
 	}
 
 	// Gather all the APIs used by the capture
 	apis := map[gfxapi.ID]struct{}{}
-	apiIDs := []service.ApiId{}
+	apiIDs := []service.ApiID{}
 	for _, a := range atoms {
 		if api := a.API(); api.Valid() {
 			if _, found := apis[api]; !found {
 				apis[api] = struct{}{}
-				apiIDs = append(apiIDs, service.ApiId(api))
+				apiIDs = append(apiIDs, service.ApiID(api))
 			}
 		}
 	}
@@ -123,7 +123,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 
 	captureID, err := service.StoreCapture(capture, d, l)
 	if err != nil {
-		return service.CaptureId{}, err
+		return service.CaptureID{}, err
 	}
 
 	captures = append(captures, captureID)
@@ -132,7 +132,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 }
 
 // Captures returns all the captures stored by the database by identifier.
-func Captures(db database.Database, logger log.Logger) ([]service.CaptureId, error) {
+func Captures(db database.Database, logger log.Logger) ([]service.CaptureID, error) {
 	return captures, nil
 }
 

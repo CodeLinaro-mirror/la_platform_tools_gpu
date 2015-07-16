@@ -75,7 +75,7 @@ func (r *rpc) beginRPC(name string) log.Logger {
 	return log.Enter(log.Fork(r.logger), name)
 }
 
-func (r *rpc) GetCaptures() (map[service.CaptureId]service.Capture, error) {
+func (r *rpc) GetCaptures() (map[service.CaptureID]service.Capture, error) {
 	l := r.beginRPC("GetCaptures")
 	ids, err := r.client.GetCaptures(l)
 	if err != nil {
@@ -98,7 +98,7 @@ func (r *rpc) GetCaptures() (map[service.CaptureId]service.Capture, error) {
 	}
 	wg.Wait()
 
-	m := make(map[service.CaptureId]service.Capture, len(ids))
+	m := make(map[service.CaptureID]service.Capture, len(ids))
 	for i := range ids {
 		if c := captures[i]; c != nil {
 			m[ids[i]] = *c
@@ -107,7 +107,7 @@ func (r *rpc) GetCaptures() (map[service.CaptureId]service.Capture, error) {
 	return m, nil
 }
 
-func (r *rpc) GetDevices() (map[service.DeviceId]service.Device, error) {
+func (r *rpc) GetDevices() (map[service.DeviceID]service.Device, error) {
 	l := r.beginRPC("GetDevices")
 	ids, err := r.client.GetDevices(l)
 	if err != nil {
@@ -130,7 +130,7 @@ func (r *rpc) GetDevices() (map[service.DeviceId]service.Device, error) {
 	}
 	wg.Wait()
 
-	m := make(map[service.DeviceId]service.Device, len(ids))
+	m := make(map[service.DeviceID]service.Device, len(ids))
 	for i := range ids {
 		if d := devices[i]; d != nil {
 			m[ids[i]] = *d
@@ -139,7 +139,7 @@ func (r *rpc) GetDevices() (map[service.DeviceId]service.Device, error) {
 	return m, nil
 }
 
-func (r *rpc) Import(name string, data []byte) (service.CaptureId, error) {
+func (r *rpc) Import(name string, data []byte) (service.CaptureID, error) {
 	l := r.beginRPC("Import")
 
 	id, err := r.client.Import(name, data, l)
@@ -150,7 +150,7 @@ func (r *rpc) Import(name string, data []byte) (service.CaptureId, error) {
 	return id, err
 }
 
-func (r *rpc) LoadCapture(captureID service.CaptureId) (service.Capture, error) {
+func (r *rpc) LoadCapture(captureID service.CaptureID) (service.Capture, error) {
 	l := r.beginRPC("LoadCapture")
 
 	capture, err := r.client.Get(captureID.Path(), l)

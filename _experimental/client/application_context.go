@@ -49,7 +49,7 @@ type ApplicationContext struct {
 	toolTipController *gxui.ToolTipController
 	events            Events
 	atoms             []atom.Atom
-	device            service.DeviceId
+	device            service.DeviceID
 	constants         map[string]schema.ConstantSet
 }
 

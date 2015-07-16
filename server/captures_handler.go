@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -54,7 +55,7 @@ func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		capture, err := service.ResolveCapture(id, h.d, h.l)
 		if err == nil {
 			fmt.Fprintf(res, `			<a href="%s%s?%s=%s">%s</a><br/>`,
-				h.c.HttpAddress, atomsRoute, idParamName, id.ID, capture.Name)
+				h.c.HttpAddress, atomsRoute, idParamName, binary.ID(id), capture.Name)
 		}
 	}
 	fmt.Fprint(res, "	</body>\n</html>")

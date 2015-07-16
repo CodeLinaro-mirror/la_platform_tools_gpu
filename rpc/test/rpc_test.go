@@ -30,7 +30,7 @@ var testStruct = Struct{
 	U32:    42,
 	Enum:   EnumOne,
 }
-var testResourceId = ResourceId{ID: binary.NewID([]byte("Test resource id"))}
+var testResourceID = ResourceID(binary.NewID([]byte("Test resource id")))
 var testResource = Resource{Int: 10, Float: 20, String: "30"}
 var testSingleListNode = &ListNode{Name: "Single ListNode"}
 var testListNodeChain = &ListNode{Name: "ListNodeA", Next: &ListNode{Name: "ListNodeB", Next: &ListNode{Name: "ListNodeC"}}}
@@ -63,17 +63,17 @@ func (s *server) SetStruct(str Struct, l log.Logger) error {
 	return s.err
 }
 
-func (s *server) GetResource(l log.Logger) (ResourceId, error) {
+func (s *server) GetResource(l log.Logger) (ResourceID, error) {
 	s.calls = append(s.calls, "GetResource()")
-	return testResourceId, s.err
+	return testResourceID, s.err
 }
 
-func (s *server) ResolveResource(id ResourceId, l log.Logger) (Resource, error) {
+func (s *server) ResolveResource(id ResourceID, l log.Logger) (Resource, error) {
 	s.calls = append(s.calls, fmt.Sprintf("ResolveResource(%v)", id))
 	return testResource, s.err
 }
 
-func (s *server) UseResource(r ResourceId, l log.Logger) error {
+func (s *server) UseResource(r ResourceID, l log.Logger) error {
 	s.calls = append(s.calls, fmt.Sprintf("UseResource(%v)", r))
 	return s.err
 }
@@ -160,20 +160,20 @@ func TestCallGetResource(t *testing.T) {
 	client, server := create(t)
 	res, err := client.GetResource(log.Testing(t))
 	verifyCalls(t, server, err, "GetResource()")
-	verifyResult(t, testResourceId, res)
+	verifyResult(t, testResourceID, res)
 }
 
 func TestCallResolveResource(t *testing.T) {
 	client, server := create(t)
-	res, err := client.ResolveResource(testResourceId, log.Testing(t))
-	verifyCalls(t, server, err, fmt.Sprintf("ResolveResource(%v)", testResourceId))
+	res, err := client.ResolveResource(testResourceID, log.Testing(t))
+	verifyCalls(t, server, err, fmt.Sprintf("ResolveResource(%v)", testResourceID))
 	verifyResult(t, testResource, res)
 }
 
 func TestCallUseResource(t *testing.T) {
 	client, server := create(t)
-	client.UseResource(testResourceId, log.Testing(t))
-	verifyCalls(t, server, nil, fmt.Sprintf("UseResource(%v)", testResourceId))
+	client.UseResource(testResourceID, log.Testing(t))
+	verifyCalls(t, server, nil, fmt.Sprintf("UseResource(%v)", testResourceID))
 }
 
 func TestCallGetSingleListNode(t *testing.T) {

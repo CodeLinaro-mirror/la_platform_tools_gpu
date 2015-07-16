@@ -70,7 +70,7 @@ type PrerenderFramebuffers struct {
 	binary.Generate
 	Device  *path.Device
 	Capture *path.Capture
-	API     service.ApiId
+	API     service.ApiID
 	AtomIDs []uint64
 	Width   uint32
 	Height  uint32
