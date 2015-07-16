@@ -1,0 +1,402 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindVertexArray.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindVertexArray.xhtml","OpenGL ES 3.1")
+cmd void glBindVertexArray(VertexArrayId array) {
+  minRequiredVersion(3, 0)
+
+  ctx := GetContext()
+  if !(array in ctx.Instances.VertexArrays) {
+    ctx.Instances.VertexArrays[array] = new!VertexArray()
+  }
+  ctx.BoundVertexArray = array
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindVertexBuffer.xhtml","OpenGL ES 3.1")
+cmd void glBindVertexBuffer(GLuint bindingindex, BufferId buffer, GLintptr offset, GLsizei stride) {
+  minRequiredVersion(3, 1)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteVertexArrays.xhtml","OpenGL ES 3.1")
+cmd void glDeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
+  minRequiredVersion(3, 0)
+
+  ctx := GetContext()
+  a := arrays[0:count]
+  for i in (0 .. count) {
+    ctx.Instances.VertexArrays[a[i]] = null
+  }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.1")
+cmd void glDisableVertexAttribArray(AttributeLocation location) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.VertexAttributeArrays[location].Enabled = false
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.1")
+cmd void glEnableVertexAttribArray(AttributeLocation location) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.VertexAttributeArrays[location].Enabled = true
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGenVertexArrays.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenVertexArrays.xhtml","OpenGL ES 3.1")
+cmd void glGenVertexArrays(GLsizei count, VertexArrayId* arrays) {
+  minRequiredVersion(3, 0)
+
+  a := arrays[0:count]
+  ctx := GetContext()
+  for i in (0 .. count) {
+    id := as!VertexArrayId(?)
+    ctx.Instances.VertexArrays[id] = new!VertexArray()
+    a[i] = id
+  }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glGetVertexAttribIiv(AttributeLocation index, GLenum pname, GLint* params) {
+  minRequiredVersion(3, 0)
+  switch (pname) {
+    case GL_CURRENT_VERTEX_ATTRIB, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,
+        GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GL_VERTEX_ATTRIB_ARRAY_ENABLED,
+        GL_VERTEX_ATTRIB_ARRAY_INTEGER, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,
+        GL_VERTEX_ATTRIB_ARRAY_SIZE, GL_VERTEX_ATTRIB_ARRAY_STRIDE, GL_VERTEX_ATTRIB_ARRAY_TYPE: {
+      // version 3.0
+    }
+    case GL_VERTEX_ATTRIB_BINDING: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glGetVertexAttribIuiv(AttributeLocation index, GLenum pname, GLuint* params) {
+  minRequiredVersion(3, 0)
+  switch (pname) {
+    case GL_CURRENT_VERTEX_ATTRIB, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,
+        GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GL_VERTEX_ATTRIB_ARRAY_ENABLED,
+        GL_VERTEX_ATTRIB_ARRAY_INTEGER, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,
+        GL_VERTEX_ATTRIB_ARRAY_SIZE, GL_VERTEX_ATTRIB_ARRAY_STRIDE, GL_VERTEX_ATTRIB_ARRAY_TYPE: {
+      // version 3.0
+    }
+    case GL_VERTEX_ATTRIB_BINDING: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttribPointerv.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.1")
+cmd void glGetVertexAttribPointerv(AttributeLocation index, GLenum pname, void** pointer) {
+  minRequiredVersion(2, 0)
+  switch (pname) {
+    case GL_VERTEX_ATTRIB_ARRAY_POINTER: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glGetVertexAttribfv(AttributeLocation index, GLenum pname, GLfloat* params) {
+  minRequiredVersion(2, 0)
+  switch (pname) {
+    case GL_CURRENT_VERTEX_ATTRIB, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,
+        GL_VERTEX_ATTRIB_ARRAY_ENABLED, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,
+        GL_VERTEX_ATTRIB_ARRAY_SIZE, GL_VERTEX_ATTRIB_ARRAY_STRIDE, GL_VERTEX_ATTRIB_ARRAY_TYPE: {
+      // version 2.0
+    }
+    case GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_VERTEX_ATTRIB_BINDING: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* params) {
+  minRequiredVersion(2, 0)
+  switch (pname) {
+    case GL_CURRENT_VERTEX_ATTRIB, GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,
+        GL_VERTEX_ATTRIB_ARRAY_ENABLED, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,
+        GL_VERTEX_ATTRIB_ARRAY_SIZE, GL_VERTEX_ATTRIB_ARRAY_STRIDE, GL_VERTEX_ATTRIB_ARRAY_TYPE: {
+      // version 2.0
+    }
+    case GL_VERTEX_ATTRIB_ARRAY_DIVISOR, GL_VERTEX_ATTRIB_ARRAY_INTEGER: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_VERTEX_ATTRIB_BINDING: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsVertexArray.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsVertexArray.xhtml","OpenGL ES 3.1")
+cmd bool glIsVertexArray(VertexArrayId array) {
+  minRequiredVersion(3, 0)
+  // TODO
+  return ?
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib1f(AttributeLocation location, GLfloat value0) {
+  minRequiredVersion(2, 0)
+
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib1fv(AttributeLocation location, const GLfloat* value) {
+  minRequiredVersion(2, 0)
+
+  read(value[0:1])
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib2f(AttributeLocation location, GLfloat value0, GLfloat value1) {
+  minRequiredVersion(2, 0)
+
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib2fv(AttributeLocation location, const GLfloat* value) {
+  minRequiredVersion(2, 0)
+
+  read(value[0:2])
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib3f(AttributeLocation location,
+                          GLfloat           value0,
+                          GLfloat           value1,
+                          GLfloat           value2) {
+  minRequiredVersion(2, 0)
+
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib3fv(AttributeLocation location, const GLfloat* value) {
+  minRequiredVersion(2, 0)
+
+  read(value[0:3])
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib4f(AttributeLocation location,
+                          GLfloat           value0,
+                          GLfloat           value1,
+                          GLfloat           value2,
+                          GLfloat           value3) {
+  minRequiredVersion(2, 0)
+
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttrib4fv(AttributeLocation location, const GLfloat* value) {
+  minRequiredVersion(2, 0)
+
+  read(value[0:4])
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribBinding.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribBinding(GLuint attribindex, GLuint bindingindex) {
+  minRequiredVersion(3, 1)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribDivisor.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribDivisor(AttributeLocation index, GLuint divisor) {
+  minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribFormat.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribFormat(GLuint    attribindex,
+                              GLint     size,
+                              GLenum    type,
+                              GLboolean normalized,
+                              GLuint    relativeoffset) {
+  minRequiredVersion(3, 1)
+  switch (type) {
+    case GL_BYTE, GL_FIXED, GL_FLOAT, GL_HALF_FLOAT, GL_INT, GL_INT_2_10_10_10_REV, GL_SHORT,
+        GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_SHORT: {
+      // version 3.1
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribI4i(AttributeLocation index, GLint x, GLint y, GLint z, GLint w) {
+  minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribI4iv(AttributeLocation index, const GLint* v) {
+  minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribI4ui(AttributeLocation index, GLuint x, GLuint y, GLuint z, GLuint w) {
+  minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttrib.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttrib.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribI4uiv(AttributeLocation index, const GLuint* v) {
+  minRequiredVersion(3, 0)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribFormat.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) {
+  minRequiredVersion(3, 1)
+  switch (type) {
+    case GL_BYTE, GL_FIXED, GL_FLOAT, GL_HALF_FLOAT, GL_INT, GL_INT_2_10_10_10_REV, GL_SHORT,
+        GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_SHORT: {
+      // version 3.1
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribPointer.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribPointer.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribIPointer(AttributeLocation index,
+                                GLint             size,
+                                GLenum            type,
+                                GLsizei           stride,
+                                const void*       pointer) {
+  minRequiredVersion(3, 0)
+  switch (type) {
+    case GL_BYTE, GL_INT, GL_SHORT, GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glVertexAttribPointer.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexAttribPointer.xhtml","OpenGL ES 3.1")
+cmd void glVertexAttribPointer(AttributeLocation location,
+                               GLint             size,
+                               GLenum            type,
+                               GLboolean         normalized,
+                               GLsizei           stride,
+                               VertexPointer     data) {
+  minRequiredVersion(2, 0)
+  switch (type) {
+    case GL_BYTE, GL_FIXED, GL_FLOAT, GL_SHORT, GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT: {
+      // version 2.0
+    }
+    case GL_HALF_FLOAT, GL_INT, GL_INT_2_10_10_10_REV, GL_UNSIGNED_INT,
+        GL_UNSIGNED_INT_2_10_10_10_REV: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(type)
+    }
+  }
+
+  assert((size >= 1) && (size <= 4))
+  assert(stride >= 0)
+  ctx := GetContext()
+  a := ctx.VertexAttributeArrays[location]
+  a.Size = as!u32(size)
+  a.Type = type
+  a.Normalized = normalized
+  a.Stride = stride
+  a.Pointer = data
+  a.Buffer = ctx.BoundBuffers[GL_ARRAY_BUFFER]
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glVertexBindingDivisor.xhtml","OpenGL ES 3.1")
+cmd void glVertexBindingDivisor(GLuint bindingindex, GLuint divisor) {
+  minRequiredVersion(3, 1)
+  // TODO
+}
+
