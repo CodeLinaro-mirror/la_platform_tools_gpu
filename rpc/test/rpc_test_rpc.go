@@ -25,21 +25,16 @@ type RPC interface {
 	EnumToString(e Enum, l log.Logger) (string, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
 	GetListNodeChainArray(l log.Logger) ([]*ListNode, error)
-	GetResource(l log.Logger) (ResourceId, error)
+	GetResource(l log.Logger) (ResourceID, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetStruct(l log.Logger) (Struct, error)
-	ResolveResource(r ResourceId, l log.Logger) (Resource, error)
+	ResolveResource(r ResourceID, l log.Logger) (Resource, error)
 	SetStruct(s Struct, l log.Logger) error
-	UseResource(r ResourceId, l log.Logger) error
+	UseResource(r ResourceID, l log.Logger) error
 }
 
 type Resolver struct {
 	Database database.Database
-}
-
-type ResourceId struct {
-	binary.Generate `handle:"Resource"`
-	ID              binary.ID
 }
 
 // Enum Enum
@@ -57,12 +52,14 @@ type Base interface {
 	GetName() string
 }
 
+type ResourceID binary.ID
+
 // Class Resource
 type Resource struct {
-	binary.Generate
-	Int    uint32
-	Float  float32
-	String string
+	binary.Generate `handle:"ResourceID"`
+	Int             uint32
+	Float           float32
+	String          string
 }
 
 // Class Struct

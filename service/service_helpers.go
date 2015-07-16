@@ -74,8 +74,8 @@ func (r resultImport) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIds: %v)",
-		c.device, c.capture, c.api, c.width, c.height, c.atomIds,
+	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIDs: %v)",
+		c.device, c.capture, c.api, c.width, c.height, c.atomIDs,
 	)
 }
 func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {

@@ -6,120 +6,121 @@
 package service
 
 import (
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-// StoreAtomStream stores v into the database d, returning the AtomStreamId.
-func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStreamId, error) {
+// StoreAtomStream stores v into the database d, returning the AtomStreamID.
+func StoreAtomStream(v *AtomStream, d database.Database, l log.Logger) (AtomStreamID, error) {
 	id, err := database.Store(v, d, l)
-	return AtomStreamId{ID: id}, err
+	return AtomStreamID(id), err
 }
 
 // ResolveAtomStream loads and returns the AtomStream stored in the database d, using id.
-func ResolveAtomStream(id AtomStreamId, d database.Database, l log.Logger) (res AtomStream, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveAtomStream(id AtomStreamID, d database.Database, l log.Logger) (res AtomStream, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*AtomStream))
 	}
 	return res, err
 }
 
 // ResolveAtomStream loads and returns the AtomStream stored in the resolver's database, using id.
-func (r Resolver) ResolveAtomStream(id AtomStreamId, l log.Logger) (AtomStream, error) {
+func (r Resolver) ResolveAtomStream(id AtomStreamID, l log.Logger) (AtomStream, error) {
 	return ResolveAtomStream(id, r.Database, l)
 }
 
-// StoreCapture stores v into the database d, returning the CaptureId.
-func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureId, error) {
+// StoreCapture stores v into the database d, returning the CaptureID.
+func StoreCapture(v *Capture, d database.Database, l log.Logger) (CaptureID, error) {
 	id, err := database.Store(v, d, l)
-	return CaptureId{ID: id}, err
+	return CaptureID(id), err
 }
 
 // ResolveCapture loads and returns the Capture stored in the database d, using id.
-func ResolveCapture(id CaptureId, d database.Database, l log.Logger) (res Capture, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveCapture(id CaptureID, d database.Database, l log.Logger) (res Capture, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*Capture))
 	}
 	return res, err
 }
 
 // ResolveCapture loads and returns the Capture stored in the resolver's database, using id.
-func (r Resolver) ResolveCapture(id CaptureId, l log.Logger) (Capture, error) {
+func (r Resolver) ResolveCapture(id CaptureID, l log.Logger) (Capture, error) {
 	return ResolveCapture(id, r.Database, l)
 }
 
-// StoreDevice stores v into the database d, returning the DeviceId.
-func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceId, error) {
+// StoreDevice stores v into the database d, returning the DeviceID.
+func StoreDevice(v *Device, d database.Database, l log.Logger) (DeviceID, error) {
 	id, err := database.Store(v, d, l)
-	return DeviceId{ID: id}, err
+	return DeviceID(id), err
 }
 
 // ResolveDevice loads and returns the Device stored in the database d, using id.
-func ResolveDevice(id DeviceId, d database.Database, l log.Logger) (res Device, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveDevice(id DeviceID, d database.Database, l log.Logger) (res Device, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*Device))
 	}
 	return res, err
 }
 
 // ResolveDevice loads and returns the Device stored in the resolver's database, using id.
-func (r Resolver) ResolveDevice(id DeviceId, l log.Logger) (Device, error) {
+func (r Resolver) ResolveDevice(id DeviceID, l log.Logger) (Device, error) {
 	return ResolveDevice(id, r.Database, l)
 }
 
-// StoreImageInfo stores v into the database d, returning the ImageInfoId.
-func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoId, error) {
+// StoreImageInfo stores v into the database d, returning the ImageInfoID.
+func StoreImageInfo(v *ImageInfo, d database.Database, l log.Logger) (ImageInfoID, error) {
 	id, err := database.Store(v, d, l)
-	return ImageInfoId{ID: id}, err
+	return ImageInfoID(id), err
 }
 
 // ResolveImageInfo loads and returns the ImageInfo stored in the database d, using id.
-func ResolveImageInfo(id ImageInfoId, d database.Database, l log.Logger) (res ImageInfo, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveImageInfo(id ImageInfoID, d database.Database, l log.Logger) (res ImageInfo, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*ImageInfo))
 	}
 	return res, err
 }
 
 // ResolveImageInfo loads and returns the ImageInfo stored in the resolver's database, using id.
-func (r Resolver) ResolveImageInfo(id ImageInfoId, l log.Logger) (ImageInfo, error) {
+func (r Resolver) ResolveImageInfo(id ImageInfoID, l log.Logger) (ImageInfo, error) {
 	return ResolveImageInfo(id, r.Database, l)
 }
 
-// StoreMemoryInfo stores v into the database d, returning the MemoryInfoId.
-func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryInfoId, error) {
+// StoreMemoryInfo stores v into the database d, returning the MemoryInfoID.
+func StoreMemoryInfo(v *MemoryInfo, d database.Database, l log.Logger) (MemoryInfoID, error) {
 	id, err := database.Store(v, d, l)
-	return MemoryInfoId{ID: id}, err
+	return MemoryInfoID(id), err
 }
 
 // ResolveMemoryInfo loads and returns the MemoryInfo stored in the database d, using id.
-func ResolveMemoryInfo(id MemoryInfoId, d database.Database, l log.Logger) (res MemoryInfo, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveMemoryInfo(id MemoryInfoID, d database.Database, l log.Logger) (res MemoryInfo, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*MemoryInfo))
 	}
 	return res, err
 }
 
 // ResolveMemoryInfo loads and returns the MemoryInfo stored in the resolver's database, using id.
-func (r Resolver) ResolveMemoryInfo(id MemoryInfoId, l log.Logger) (MemoryInfo, error) {
+func (r Resolver) ResolveMemoryInfo(id MemoryInfoID, l log.Logger) (MemoryInfo, error) {
 	return ResolveMemoryInfo(id, r.Database, l)
 }
 
-// StoreTimingInfo stores v into the database d, returning the TimingInfoId.
-func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingInfoId, error) {
+// StoreTimingInfo stores v into the database d, returning the TimingInfoID.
+func StoreTimingInfo(v *TimingInfo, d database.Database, l log.Logger) (TimingInfoID, error) {
 	id, err := database.Store(v, d, l)
-	return TimingInfoId{ID: id}, err
+	return TimingInfoID(id), err
 }
 
 // ResolveTimingInfo loads and returns the TimingInfo stored in the database d, using id.
-func ResolveTimingInfo(id TimingInfoId, d database.Database, l log.Logger) (res TimingInfo, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
+func ResolveTimingInfo(id TimingInfoID, d database.Database, l log.Logger) (res TimingInfo, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
 		res = *(out.(*TimingInfo))
 	}
 	return res, err
 }
 
 // ResolveTimingInfo loads and returns the TimingInfo stored in the resolver's database, using id.
-func (r Resolver) ResolveTimingInfo(id TimingInfoId, l log.Logger) (TimingInfo, error) {
+func (r Resolver) ResolveTimingInfo(id TimingInfoID, l log.Logger) (TimingInfo, error) {
 	return ResolveTimingInfo(id, r.Database, l)
 }

@@ -57,7 +57,7 @@ func CreateProfilerPanel(appCtx *ApplicationContext) gxui.Control {
 
 	chart.OnBarDoubleClicked(func(idx int, ev gxui.MouseEvent) {
 		data := chart.Data().(TimingData)
-		atomIndex := data.timings.PerFrame[idx].ToAtomId
+		atomIndex := data.timings.PerFrame[idx].ToAtomID
 		appCtx.events.Select(capture.Atoms().Index(atomIndex))
 	})
 

@@ -41,8 +41,8 @@ type Generator interface {
 // Context describes the source capture and replay target information used for
 // issuing a replay request.
 type Context struct {
-	DeviceID  service.DeviceId  // The identifier of the device being used for replay.
-	CaptureID service.CaptureId // The identifier of the capture that is being replayed.
+	DeviceID  service.DeviceID  // The identifier of the device being used for replay.
+	CaptureID service.CaptureID // The identifier of the capture that is being replayed.
 }
 
 // Config is a user-defined type used to describe the type of replay being

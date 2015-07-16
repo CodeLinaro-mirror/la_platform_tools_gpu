@@ -14,14 +14,17 @@
 
 package service
 
-import "android.googlesource.com/platform/tools/gpu/service/path"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+)
 
 // Path returns a path.Capture representing the capture with this identifier.
-func (c CaptureId) Path() *path.Capture {
-	return &path.Capture{ID: c.ID}
+func (c CaptureID) Path() *path.Capture {
+	return &path.Capture{ID: binary.ID(c)}
 }
 
 // Path returns a path.Device representing the device with this identifier.
-func (c DeviceId) Path() *path.Device {
-	return &path.Device{ID: c.ID}
+func (c DeviceID) Path() *path.Device {
+	return &path.Device{ID: binary.ID(c)}
 }

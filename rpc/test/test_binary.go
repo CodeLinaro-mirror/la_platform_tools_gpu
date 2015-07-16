@@ -19,7 +19,6 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*ListNode)(nil).Class())
 	Namespace.Add((*Resource)(nil).Class())
-	Namespace.Add((*ResourceId)(nil).Class())
 	Namespace.Add((*Struct)(nil).Class())
 	Namespace.Add((*callAdd)(nil).Class())
 	Namespace.Add((*callEnumToString)(nil).Class())
@@ -46,7 +45,6 @@ func init() {
 var (
 	binaryIDListNode                    = binary.ID{0xd4, 0x62, 0x72, 0x4c, 0xa0, 0x8b, 0xae, 0x1b, 0xad, 0x98, 0x12, 0x6d, 0x2f, 0x95, 0x38, 0xe7, 0x74, 0x4f, 0xb7, 0x6e}
 	binaryIDResource                    = binary.ID{0x28, 0x69, 0x24, 0xfd, 0x18, 0x32, 0x76, 0xf6, 0x52, 0x91, 0xd4, 0xf3, 0x70, 0x6e, 0xc9, 0x55, 0x30, 0x59, 0x55, 0x1a}
-	binaryIDResourceId                  = binary.ID{0x90, 0xae, 0xdc, 0x2b, 0xca, 0x22, 0x65, 0x8f, 0xca, 0xff, 0x86, 0x19, 0xc6, 0x73, 0x1b, 0x71, 0x6e, 0x54, 0x99, 0xc2}
 	binaryIDStruct                      = binary.ID{0x1b, 0x23, 0x6b, 0xfa, 0x68, 0x0a, 0x1a, 0x1a, 0xa6, 0x15, 0xfe, 0x89, 0x8c, 0x05, 0x91, 0xa2, 0x92, 0x56, 0x1d, 0x58}
 	binaryIDcallAdd                     = binary.ID{0x9c, 0xb8, 0x89, 0x5a, 0x48, 0xc9, 0x85, 0x6e, 0x1d, 0x35, 0x40, 0x50, 0xa1, 0x38, 0x3b, 0x6f, 0xcb, 0xa0, 0x6c, 0xb8}
 	binaryIDcallEnumToString            = binary.ID{0x58, 0x2d, 0x2b, 0xe3, 0x41, 0xac, 0xce, 0x57, 0x0c, 0x0e, 0x45, 0x50, 0xfd, 0xab, 0xae, 0x64, 0x1b, 0xca, 0x46, 0xca}
@@ -55,14 +53,14 @@ var (
 	binaryIDcallGetResource             = binary.ID{0x77, 0x3f, 0xbc, 0xe2, 0x64, 0xc6, 0x25, 0xb9, 0xd3, 0x1e, 0x82, 0xa5, 0x29, 0x94, 0x99, 0x60, 0x63, 0x66, 0xde, 0x5f}
 	binaryIDcallGetSingleListNode       = binary.ID{0x6d, 0x63, 0x54, 0xb7, 0x28, 0xf3, 0x2c, 0x5f, 0xcf, 0xc5, 0x61, 0xef, 0xa6, 0xd8, 0x89, 0x67, 0x46, 0xb1, 0x87, 0x34}
 	binaryIDcallGetStruct               = binary.ID{0xf1, 0xb4, 0x06, 0x21, 0xfa, 0x76, 0x1d, 0x55, 0x86, 0x0a, 0x96, 0x85, 0x34, 0x26, 0x05, 0x30, 0xd6, 0xb2, 0x97, 0xeb}
-	binaryIDcallResolveResource         = binary.ID{0xdc, 0x4e, 0xa1, 0x9f, 0xfb, 0x65, 0x5f, 0xed, 0x37, 0x13, 0x5f, 0x21, 0xe4, 0x57, 0x5d, 0xe5, 0xef, 0xbf, 0x87, 0xc2}
+	binaryIDcallResolveResource         = binary.ID{0x70, 0x71, 0x92, 0x48, 0x7c, 0x3e, 0x65, 0x58, 0x27, 0xa5, 0x0c, 0xc0, 0x87, 0x65, 0x61, 0x8a, 0xb3, 0x28, 0xc0, 0x0a}
 	binaryIDcallSetStruct               = binary.ID{0x63, 0x7e, 0x8e, 0x85, 0x9d, 0x23, 0x3f, 0x28, 0xd8, 0x3d, 0x81, 0x27, 0x0e, 0x8d, 0xe2, 0x11, 0x75, 0xbf, 0x73, 0x76}
-	binaryIDcallUseResource             = binary.ID{0x96, 0x12, 0x10, 0xa9, 0x67, 0xea, 0xf9, 0x3b, 0x5f, 0x44, 0xa0, 0xfe, 0xbe, 0xf9, 0x0a, 0xb6, 0xc9, 0x6c, 0x27, 0x21}
+	binaryIDcallUseResource             = binary.ID{0x58, 0x91, 0xd1, 0x9c, 0x05, 0x9c, 0xe5, 0x96, 0xf1, 0x22, 0xf9, 0x61, 0x83, 0xfb, 0x34, 0x4e, 0x2d, 0xad, 0x3d, 0x02}
 	binaryIDresultAdd                   = binary.ID{0x1c, 0x34, 0x05, 0xbf, 0x9a, 0x3c, 0xe5, 0xce, 0x1f, 0x5c, 0x2d, 0xf9, 0xdd, 0xab, 0x33, 0xb6, 0xfa, 0xa1, 0xd5, 0x2b}
 	binaryIDresultEnumToString          = binary.ID{0x82, 0xf6, 0xd5, 0x1a, 0x4d, 0xec, 0x38, 0xa6, 0x47, 0xa2, 0x1f, 0x6c, 0xc6, 0xa8, 0x69, 0x7f, 0x28, 0x5b, 0x21, 0x2e}
 	binaryIDresultGetListNodeChain      = binary.ID{0x8f, 0x0f, 0xb2, 0x7b, 0xbe, 0x33, 0x17, 0x99, 0x39, 0x6b, 0x64, 0x9b, 0xe5, 0x6a, 0x99, 0x14, 0x59, 0xc3, 0x6b, 0x94}
 	binaryIDresultGetListNodeChainArray = binary.ID{0x36, 0xbe, 0x44, 0x9b, 0x46, 0x33, 0x15, 0x48, 0x1d, 0x66, 0xd0, 0x2c, 0xad, 0x5d, 0x15, 0x8c, 0x2a, 0xc4, 0x17, 0x86}
-	binaryIDresultGetResource           = binary.ID{0xc1, 0x36, 0x88, 0xd8, 0x61, 0xde, 0xe9, 0xe6, 0x82, 0x5b, 0xb1, 0xfb, 0x67, 0xd1, 0x11, 0x30, 0xb9, 0xcf, 0x72, 0x23}
+	binaryIDresultGetResource           = binary.ID{0xd9, 0xc1, 0x1d, 0xc1, 0xa6, 0x84, 0x25, 0x9a, 0x59, 0x1e, 0xe1, 0x29, 0x92, 0x6b, 0x7b, 0x04, 0x27, 0x68, 0xcd, 0xfd}
 	binaryIDresultGetSingleListNode     = binary.ID{0x53, 0x57, 0x00, 0x9c, 0xea, 0x9d, 0x01, 0x7e, 0xbb, 0x14, 0x01, 0x8e, 0x15, 0xe5, 0x12, 0xbd, 0x50, 0xd3, 0x82, 0x13}
 	binaryIDresultGetStruct             = binary.ID{0xd5, 0x07, 0x0f, 0x6d, 0xf2, 0x2d, 0xdf, 0x7b, 0x43, 0xaf, 0x9e, 0x3d, 0x5b, 0x82, 0xb1, 0xa2, 0x26, 0xc1, 0x9b, 0x35}
 	binaryIDresultResolveResource       = binary.ID{0x04, 0xe4, 0x8a, 0xdd, 0x2c, 0xf1, 0x1b, 0xf4, 0xeb, 0x48, 0xf1, 0xd3, 0x69, 0xe0, 0x2d, 0x75, 0xdd, 0x76, 0xa7, 0x5f}
@@ -207,55 +205,6 @@ var schemaResource = &schema.Class{
 		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassResourceId struct{}
-
-func (*ResourceId) Class() binary.Class {
-	return (*binaryClassResourceId)(nil)
-}
-func doEncodeResourceId(e binary.Encoder, o *ResourceId) error {
-	if err := e.ID(o.ID); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeResourceId(d binary.Decoder, o *ResourceId) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.ID = binary.ID(obj)
-	}
-	return nil
-}
-func doSkipResourceId(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassResourceId) ID() binary.ID      { return binaryIDResourceId }
-func (*binaryClassResourceId) New() binary.Object { return &ResourceId{} }
-func (*binaryClassResourceId) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeResourceId(e, obj.(*ResourceId))
-}
-func (*binaryClassResourceId) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ResourceId{}
-	return obj, doDecodeResourceId(d, obj)
-}
-func (*binaryClassResourceId) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeResourceId(d, obj.(*ResourceId))
-}
-func (*binaryClassResourceId) Skip(d binary.Decoder) error { return doSkipResourceId(d) }
-func (*binaryClassResourceId) Schema() *schema.Class       { return schemaResourceId }
-
-var schemaResourceId = &schema.Class{
-	TypeID:  binaryIDResourceId,
-	Package: "test",
-	Name:    "ResourceId",
-	Fields: []schema.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -636,19 +585,21 @@ func (*callResolveResource) Class() binary.Class {
 	return (*binaryClasscallResolveResource)(nil)
 }
 func doEncodecallResolveResource(e binary.Encoder, o *callResolveResource) error {
-	if err := e.Value(&o.r); err != nil {
+	if err := e.ID(binary.ID(o.r)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallResolveResource(d binary.Decoder, o *callResolveResource) error {
-	if err := d.Value(&o.r); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.r = ResourceID(obj)
 	}
 	return nil
 }
 func doSkipcallResolveResource(d binary.Decoder) error {
-	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -675,7 +626,7 @@ var schemacallResolveResource = &schema.Class{
 	Package: "test",
 	Name:    "callResolveResource",
 	Fields: []schema.Field{
-		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
+		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
 
@@ -732,19 +683,21 @@ func (*callUseResource) Class() binary.Class {
 	return (*binaryClasscallUseResource)(nil)
 }
 func doEncodecallUseResource(e binary.Encoder, o *callUseResource) error {
-	if err := e.Value(&o.r); err != nil {
+	if err := e.ID(binary.ID(o.r)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodecallUseResource(d binary.Decoder, o *callUseResource) error {
-	if err := d.Value(&o.r); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.r = ResourceID(obj)
 	}
 	return nil
 }
 func doSkipcallUseResource(d binary.Decoder) error {
-	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -769,7 +722,7 @@ var schemacallUseResource = &schema.Class{
 	Package: "test",
 	Name:    "callUseResource",
 	Fields: []schema.Field{
-		{Declared: "r", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
+		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
 
@@ -1015,19 +968,21 @@ func (*resultGetResource) Class() binary.Class {
 	return (*binaryClassresultGetResource)(nil)
 }
 func doEncoderesultGetResource(e binary.Encoder, o *resultGetResource) error {
-	if err := e.Value(&o.value); err != nil {
+	if err := e.ID(binary.ID(o.value)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecoderesultGetResource(d binary.Decoder, o *resultGetResource) error {
-	if err := d.Value(&o.value); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.value = ResourceID(obj)
 	}
 	return nil
 }
 func doSkipresultGetResource(d binary.Decoder) error {
-	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
 	return nil
@@ -1052,7 +1007,7 @@ var schemaresultGetResource = &schema.Class{
 	Package: "test",
 	Name:    "resultGetResource",
 	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "ResourceId", ID: (*ResourceId)(nil).Class().ID()}},
+		{Declared: "value", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
 
