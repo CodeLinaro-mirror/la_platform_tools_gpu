@@ -98,7 +98,7 @@ func (a *MemoryImageAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	update := func() {
 		t.Run(requestMemory{a.appCtx, a.after, base, bytesPerLine, func(info service.MemoryInfo) {
 			ll.RemoveAll()
-			ll.AddChild(CreateLabel(theme, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR, true))
+			ll.AddChild(createLabel(a.appCtx, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR))
 			addr := base
 			data := info.Data
 			pixelSizeDips := a.Size(theme).H
