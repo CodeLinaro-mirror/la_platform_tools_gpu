@@ -51,8 +51,8 @@ func Go(m *Module, info copyright.Info, gen Generator) error {
 	if err := gen("Go.Binary", pkg, goFileName(m, m.Name, "binary"), reflowGo); err != nil {
 		return err
 	}
-	if m.HasStructTag("handle") {
-		if err := gen("Go.Database", pkg, goFileName(m, m.Name, "database"), reflowGo); err != nil {
+	if m.HasStructTag("path") {
+		if err := gen("Go.Path", pkg, goFileName(m, m.Name, "path"), reflowGo); err != nil {
 			return err
 		}
 	}

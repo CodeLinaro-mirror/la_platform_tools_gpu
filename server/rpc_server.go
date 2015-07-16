@@ -36,7 +36,7 @@ import (
 )
 
 type rpcServer struct {
-	service.Resolver
+	database.Database
 	ReplayManager *replay.Manager
 }
 
@@ -77,7 +77,7 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-func (s rpcServer) Import(name string, data []uint8, l log.Logger) (service.CaptureID, error) {
+func (s rpcServer) Import(name string, data []uint8, l log.Logger) (*path.Capture, error) {
 	atoms := []atom.Atom{}
 	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 	for {
@@ -91,30 +91,26 @@ func (s rpcServer) Import(name string, data []uint8, l log.Logger) (service.Capt
 		}
 	}
 	if len(atoms) == 0 {
-		return service.CaptureID{}, nil
+		return nil, nil
 	}
-	id, err := builder.ImportCapture(name, atoms, s.Database, l)
-	if err != nil {
-		return service.CaptureID{}, err
-	}
-	return id, nil
+	return builder.ImportCapture(name, atoms, s.Database, l)
 }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
-func (s rpcServer) GetCaptures(l log.Logger) ([]service.CaptureID, error) {
+func (s rpcServer) GetCaptures(l log.Logger) ([]*path.Capture, error) {
 	return builder.Captures(s.Database, l)
 }
 
 // GetDevices returns the full list of replay devices avaliable to the server.
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
-func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceID, error) {
+func (s rpcServer) GetDevices(l log.Logger) ([]*path.Device, error) {
 	devices := s.ReplayManager.Devices()
-	ids := make([]service.DeviceID, len(devices))
+	paths := make([]*path.Device, len(devices))
 	for i, d := range devices {
-		ids[i] = d.ID()
+		paths[i] = d.Path()
 	}
-	return ids, nil
+	return paths, nil
 }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
@@ -122,16 +118,16 @@ func (s rpcServer) GetDevices(l log.Logger) ([]service.DeviceID, error) {
 func (s rpcServer) GetMemoryInfo(
 	after *path.Atom,
 	rng memory.Range,
-	l log.Logger) (service.MemoryInfoID, error) {
+	l log.Logger) (*path.MemoryInfo, error) {
 
 	if err := after.Validate(); err != nil {
-		return service.MemoryInfoID{}, err
+		return nil, err
 	}
 	id, err := database.Store(&builder.GetMemoryInfo{
 		After: after,
 		Range: memory.Range{Base: rng.Base, Size: rng.Size},
 	}, s.Database, l)
-	return service.MemoryInfoID(id), err
+	return &path.MemoryInfo{ID: id}, err
 }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
@@ -143,20 +139,20 @@ func (s rpcServer) GetFramebufferColor(
 	device *path.Device,
 	after *path.Atom,
 	settings service.RenderSettings,
-	l log.Logger) (service.ImageInfoID, error) {
+	l log.Logger) (*path.ImageInfo, error) {
 
 	if err := device.Validate(); err != nil {
-		return service.ImageInfoID{}, err
+		return nil, err
 	}
 	if err := after.Validate(); err != nil {
-		return service.ImageInfoID{}, err
+		return nil, err
 	}
 	id, err := database.Store(&builder.GetFramebufferColor{
 		Device:   device,
 		After:    after,
 		Settings: settings,
 	}, s.Database, l)
-	return service.ImageInfoID(id), err
+	return &path.ImageInfo{ID: id}, err
 }
 
 // GetFramebufferDepth returns the ImageInfo identifier describing the bound
@@ -165,19 +161,19 @@ func (s rpcServer) GetFramebufferColor(
 func (s rpcServer) GetFramebufferDepth(
 	device *path.Device,
 	after *path.Atom,
-	l log.Logger) (service.ImageInfoID, error) {
+	l log.Logger) (*path.ImageInfo, error) {
 
 	if err := device.Validate(); err != nil {
-		return service.ImageInfoID{}, err
+		return nil, err
 	}
 	if err := after.Validate(); err != nil {
-		return service.ImageInfoID{}, err
+		return nil, err
 	}
 	id, err := database.Store(&builder.GetFramebufferDepth{
 		Device: device,
 		After:  after,
 	}, s.Database, l)
-	return service.ImageInfoID(id), err
+	return &path.ImageInfo{ID: id}, err
 }
 
 // GetTimingInfo performs timings of the given capture on the given device and
@@ -187,20 +183,20 @@ func (s rpcServer) GetTimingInfo(
 	device *path.Device,
 	capture *path.Capture,
 	flags service.TimingFlags,
-	l log.Logger) (service.TimingInfoID, error) {
+	l log.Logger) (*path.TimingInfo, error) {
 
 	if err := device.Validate(); err != nil {
-		return service.TimingInfoID{}, err
+		return nil, err
 	}
 	if err := capture.Validate(); err != nil {
-		return service.TimingInfoID{}, err
+		return nil, err
 	}
 	id, err := database.Store(&builder.GetTimingInfo{
 		Device:  device,
 		Capture: capture,
 		Flags:   flags,
 	}, s.Database, l)
-	return service.TimingInfoID(id), err
+	return &path.TimingInfo{ID: id}, err
 }
 
 // PrerenderFramebuffers renders the framebuffer contents after each of the
@@ -216,13 +212,13 @@ func (s rpcServer) PrerenderFramebuffers(
 	apiID service.ApiID,
 	width, height uint32,
 	atomIDs []uint64,
-	l log.Logger) (service.BinaryID, error) {
+	l log.Logger) (*path.Blob, error) {
 
 	if err := device.Validate(); err != nil {
-		return service.BinaryID{}, err
+		return nil, err
 	}
 	if err := capture.Validate(); err != nil {
-		return service.BinaryID{}, err
+		return nil, err
 	}
 	id, err := database.Store(&builder.PrerenderFramebuffers{
 		Device:  device,
@@ -232,7 +228,7 @@ func (s rpcServer) PrerenderFramebuffers(
 		Height:  height,
 		AtomIDs: atomIDs,
 	}, s.Database, l)
-	return service.BinaryID(id), err
+	return &path.Blob{ID: id}, err
 }
 
 // Get resolves and returns the object, value or memory at the path p.

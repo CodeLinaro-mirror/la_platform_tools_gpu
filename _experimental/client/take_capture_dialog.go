@@ -235,7 +235,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 			if count > 0 {
 				data := buf.Bytes()
 				log.Infof(statusLogger, "Importing...")
-				id, err := appCtx.rpc.Import(name.Text(), data)
+				p, err := appCtx.rpc.Import(name.Text(), data)
 				if err != nil {
 					panic(err)
 				}
@@ -243,7 +243,7 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 				log.Infof(statusLogger, "Loading...")
 
 				appCtx.Run(func() {
-					appCtx.events.Select(id.Path())
+					appCtx.events.Select(p)
 					window.Close()
 				})
 			} else {
@@ -288,11 +288,11 @@ func ImportCapture(appCtx *ApplicationContext, path string, statusLogger log.Log
 		log.Infof(statusLogger, "Zero size file %s", path)
 	} else {
 		log.Infof(statusLogger, "Importing...")
-		id, err := appCtx.rpc.Import(path, data)
+		p, err := appCtx.rpc.Import(path, data)
 		if err != nil {
 			panic(err)
 		}
 		log.Infof(statusLogger, "Loading...")
-		appCtx.events.Select(id.Path())
+		appCtx.events.Select(p)
 	}
 }

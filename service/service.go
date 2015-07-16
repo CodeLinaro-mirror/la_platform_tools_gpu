@@ -17,7 +17,15 @@
 // It is not the actual implementation of the service functionality.
 package service
 
-import "android.googlesource.com/platform/tools/gpu/atom"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+)
 
 // binary: java.source = adt/idea/android/src
 // binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc
@@ -30,4 +38,26 @@ func (s *AtomStream) Clone() *AtomStream {
 	atoms := make([]atom.Atom, len(s.Atoms))
 	copy(atoms, s.Atoms)
 	return &AtomStream{Atoms: atoms}
+}
+
+// ResolveBlob resolves a binary.ID safely casts the result to a []byte.
+func ResolveBlob(id binary.ID, d database.Database, l log.Logger) ([]byte, error) {
+	if v, err := database.Resolve(id, d, l); err != nil {
+		return nil, err
+	} else if r, ok := v.([]byte); !ok {
+		return nil, fmt.Errorf("ID %s gave %T, expected []byte", id, v)
+	} else {
+		return r, nil
+	}
+}
+
+// GetBlob calls s.Get with p and then safely casts the result to a []byte.
+func GetBlob(p *path.Blob, s RPC, l log.Logger) ([]byte, error) {
+	if v, err := s.Get(p, l); err != nil {
+		return nil, err
+	} else if r, ok := v.([]byte); !ok {
+		return nil, fmt.Errorf("path %s gave %T, expected []byte", p, v)
+	} else {
+		return r, nil
+	}
 }

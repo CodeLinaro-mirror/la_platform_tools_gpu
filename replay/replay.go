@@ -20,6 +20,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // Generator is the interface for types that support replay generation.
@@ -41,8 +42,8 @@ type Generator interface {
 // Context describes the source capture and replay target information used for
 // issuing a replay request.
 type Context struct {
-	DeviceID  service.DeviceID  // The identifier of the device being used for replay.
-	CaptureID service.CaptureID // The identifier of the capture that is being replayed.
+	Device  *path.Device  // The identifier of the device being used for replay.
+	Capture *path.Capture // The identifier of the capture that is being replayed.
 }
 
 // Config is a user-defined type used to describe the type of replay being

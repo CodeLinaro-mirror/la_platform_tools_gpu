@@ -97,36 +97,6 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callResolveAtomStream:
-			if res, err := server.ResolveAtomStream(call.id, l); err == nil {
-				return &resultResolveAtomStream{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveBinary:
-			if res, err := server.ResolveBinary(call.id, l); err == nil {
-				return &resultResolveBinary{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveImageInfo:
-			if res, err := server.ResolveImageInfo(call.id, l); err == nil {
-				return &resultResolveImageInfo{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveMemoryInfo:
-			if res, err := server.ResolveMemoryInfo(call.id, l); err == nil {
-				return &resultResolveMemoryInfo{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callResolveTimingInfo:
-			if res, err := server.ResolveTimingInfo(call.id, l); err == nil {
-				return &resultResolveTimingInfo{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
 		case *callSet:
 			if res, err := server.Set(call.p, call.v, l); err == nil {
 				return &resultSet{value: res}

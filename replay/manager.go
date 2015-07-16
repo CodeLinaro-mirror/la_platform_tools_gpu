@@ -40,9 +40,9 @@ func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 	// Rework to free the batcher after execution.
 	b, found := m.batchers[ctx]
 	if !found {
-		device := m.discovery.device(ctx.DeviceID)
+		device := m.discovery.device(ctx.Device)
 		if device == nil {
-			return nil, fmt.Errorf("Unknown device %v", ctx.DeviceID)
+			return nil, fmt.Errorf("Unknown device %v", ctx.Device)
 		}
 		b = &batcher{
 			context:  ctx,

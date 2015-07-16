@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // BuildLazy returns the *service.ImageInfo resulting from the given
@@ -46,7 +47,7 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 		Format: service.ImageFormatFloat32, // TODO: Add support for other formats.
 		Width:  fbWidth,
 		Height: fbHeight,
-		Data:   service.BinaryID(data),
+		Data:   &path.Blob{ID: data},
 	}, nil
 }
 
@@ -56,8 +57,8 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		DeviceID:  service.DeviceID(r.Device.ID),
-		CaptureID: service.CaptureID(r.After.Atoms.Capture.ID),
+		Device:  r.Device,
+		Capture: r.After.Atoms.Capture,
 	}
 
 	after, err := ResolveAtom(r.After, d, l)

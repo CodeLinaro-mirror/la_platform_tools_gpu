@@ -89,46 +89,6 @@ func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
 func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveAtomStream) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveAtomStream(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveAtomStream) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callResolveBinary) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveBinary(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveBinary) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callResolveImageInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveImageInfo(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveImageInfo) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callResolveMemoryInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveMemoryInfo(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveMemoryInfo) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callResolveTimingInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveTimingInfo(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveTimingInfo) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callSet) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Set(p: %v, v: %v)",
 		c.p, c.v,

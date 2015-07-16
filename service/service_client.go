@@ -54,7 +54,7 @@ func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
 	return
 }
 
-func (c client) GetCaptures(l log.Logger) (res []CaptureID, err error) {
+func (c client) GetCaptures(l log.Logger) (res []*path.Capture, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetCaptures{}); err == nil {
 		res = val.(*resultGetCaptures).value
@@ -64,7 +64,7 @@ func (c client) GetCaptures(l log.Logger) (res []CaptureID, err error) {
 	return
 }
 
-func (c client) GetDevices(l log.Logger) (res []DeviceID, err error) {
+func (c client) GetDevices(l log.Logger) (res []*path.Device, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetDevices{}); err == nil {
 		res = val.(*resultGetDevices).value
@@ -74,7 +74,7 @@ func (c client) GetDevices(l log.Logger) (res []DeviceID, err error) {
 	return
 }
 
-func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (res ImageInfoID, err error) {
+func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (res *path.ImageInfo, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetFramebufferColor{device: device, after: after, settings: settings}); err == nil {
 		res = val.(*resultGetFramebufferColor).value
@@ -84,7 +84,7 @@ func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, setti
 	return
 }
 
-func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (res ImageInfoID, err error) {
+func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (res *path.ImageInfo, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetFramebufferDepth{device: device, after: after}); err == nil {
 		res = val.(*resultGetFramebufferDepth).value
@@ -94,7 +94,7 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 	return
 }
 
-func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res MemoryInfoID, err error) {
+func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res *path.MemoryInfo, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetMemoryInfo{after: after, rng: rng}); err == nil {
 		res = val.(*resultGetMemoryInfo).value
@@ -114,7 +114,7 @@ func (c client) GetSchema(l log.Logger) (res Schema, err error) {
 	return
 }
 
-func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (res TimingInfoID, err error) {
+func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (res *path.TimingInfo, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, flags: flags}); err == nil {
 		res = val.(*resultGetTimingInfo).value
@@ -124,7 +124,7 @@ func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags 
 	return
 }
 
-func (c client) Import(name string, Data []uint8, l log.Logger) (res CaptureID, err error) {
+func (c client) Import(name string, Data []uint8, l log.Logger) (res *path.Capture, err error) {
 	var val interface{}
 	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
 		res = val.(*resultImport).value
@@ -134,62 +134,12 @@ func (c client) Import(name string, Data []uint8, l log.Logger) (res CaptureID, 
 	return
 }
 
-func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (res BinaryID, err error) {
+func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (res *path.Blob, err error) {
 	var val interface{}
 	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIDs: atomIDs}); err == nil {
 		res = val.(*resultPrerenderFramebuffers).value
 	} else {
 		log.Errorf(l, "RPC PrerenderFramebuffers failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveAtomStream(id AtomStreamID, l log.Logger) (res AtomStream, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveAtomStream{id: id}); err == nil {
-		res = val.(*resultResolveAtomStream).value
-	} else {
-		log.Errorf(l, "RPC ResolveAtomStream failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveBinary(id BinaryID, l log.Logger) (res []uint8, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveBinary{id: id}); err == nil {
-		res = val.(*resultResolveBinary).value
-	} else {
-		log.Errorf(l, "RPC ResolveBinary failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveImageInfo(id ImageInfoID, l log.Logger) (res ImageInfo, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveImageInfo{id: id}); err == nil {
-		res = val.(*resultResolveImageInfo).value
-	} else {
-		log.Errorf(l, "RPC ResolveImageInfo failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveMemoryInfo(id MemoryInfoID, l log.Logger) (res MemoryInfo, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveMemoryInfo{id: id}); err == nil {
-		res = val.(*resultResolveMemoryInfo).value
-	} else {
-		log.Errorf(l, "RPC ResolveMemoryInfo failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) ResolveTimingInfo(id TimingInfoID, l log.Logger) (res TimingInfo, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveTimingInfo{id: id}); err == nil {
-		res = val.(*resultResolveTimingInfo).value
-	} else {
-		log.Errorf(l, "RPC ResolveTimingInfo failed with error: %v", err)
 	}
 	return
 }

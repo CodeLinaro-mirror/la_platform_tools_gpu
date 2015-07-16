@@ -62,11 +62,11 @@ func (testAtom) Mutate(*gfxapi.State, database.Database, log.Logger) error { ret
 
 func newPathTest(t *testing.T, atoms ...atom.Atom) (*path.Capture, database.Database, log.Logger) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
-	id, err := ImportCapture("test", atoms, d, l)
+	p, err := ImportCapture("test", atoms, d, l)
 	if err != nil {
 		t.Fatalf("Failed to create capture: %v", err)
 	}
-	return id.Path(), d, l
+	return p, d, l
 }
 
 func TestGet(t *testing.T) {

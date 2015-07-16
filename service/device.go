@@ -27,7 +27,7 @@ type DeviceID binary.ID
 
 // Device describes replay target avaliable to the server.
 type Device struct {
-	binary.Generate  `handle:"DeviceID"`
+	binary.Generate  `path:"path.Device"`
 	Name             string // The name of the device. e.g. "Bob's phone"
 	Model            string // The model of the device. e.g. "Nexus 5"
 	OS               string // The operating system of the device. e.g. "Android 5.0"

@@ -43,7 +43,7 @@ type callGetCaptures struct {
 // Result GetCaptures
 type resultGetCaptures struct {
 	binary.Generate
-	value []CaptureID
+	value []*path.Capture
 }
 
 // Call GetDevices
@@ -54,7 +54,7 @@ type callGetDevices struct {
 // Result GetDevices
 type resultGetDevices struct {
 	binary.Generate
-	value []DeviceID
+	value []*path.Device
 }
 
 // Call GetFramebufferColor
@@ -68,7 +68,7 @@ type callGetFramebufferColor struct {
 // Result GetFramebufferColor
 type resultGetFramebufferColor struct {
 	binary.Generate
-	value ImageInfoID
+	value *path.ImageInfo
 }
 
 // Call GetFramebufferDepth
@@ -81,7 +81,7 @@ type callGetFramebufferDepth struct {
 // Result GetFramebufferDepth
 type resultGetFramebufferDepth struct {
 	binary.Generate
-	value ImageInfoID
+	value *path.ImageInfo
 }
 
 // Call GetMemoryInfo
@@ -94,7 +94,7 @@ type callGetMemoryInfo struct {
 // Result GetMemoryInfo
 type resultGetMemoryInfo struct {
 	binary.Generate
-	value MemoryInfoID
+	value *path.MemoryInfo
 }
 
 // Call GetSchema
@@ -119,7 +119,7 @@ type callGetTimingInfo struct {
 // Result GetTimingInfo
 type resultGetTimingInfo struct {
 	binary.Generate
-	value TimingInfoID
+	value *path.TimingInfo
 }
 
 // Call Import
@@ -132,7 +132,7 @@ type callImport struct {
 // Result Import
 type resultImport struct {
 	binary.Generate
-	value CaptureID
+	value *path.Capture
 }
 
 // Call PrerenderFramebuffers
@@ -149,67 +149,7 @@ type callPrerenderFramebuffers struct {
 // Result PrerenderFramebuffers
 type resultPrerenderFramebuffers struct {
 	binary.Generate
-	value BinaryID
-}
-
-// Call ResolveAtomStream
-type callResolveAtomStream struct {
-	binary.Generate
-	id AtomStreamID
-}
-
-// Result ResolveAtomStream
-type resultResolveAtomStream struct {
-	binary.Generate
-	value AtomStream
-}
-
-// Call ResolveBinary
-type callResolveBinary struct {
-	binary.Generate
-	id BinaryID
-}
-
-// Result ResolveBinary
-type resultResolveBinary struct {
-	binary.Generate
-	value []uint8
-}
-
-// Call ResolveImageInfo
-type callResolveImageInfo struct {
-	binary.Generate
-	id ImageInfoID
-}
-
-// Result ResolveImageInfo
-type resultResolveImageInfo struct {
-	binary.Generate
-	value ImageInfo
-}
-
-// Call ResolveMemoryInfo
-type callResolveMemoryInfo struct {
-	binary.Generate
-	id MemoryInfoID
-}
-
-// Result ResolveMemoryInfo
-type resultResolveMemoryInfo struct {
-	binary.Generate
-	value MemoryInfo
-}
-
-// Call ResolveTimingInfo
-type callResolveTimingInfo struct {
-	binary.Generate
-	id TimingInfoID
-}
-
-// Result ResolveTimingInfo
-type resultResolveTimingInfo struct {
-	binary.Generate
-	value TimingInfo
+	value *path.Blob
 }
 
 // Call Set

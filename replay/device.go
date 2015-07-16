@@ -24,6 +24,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // DisableLocalDeviceCache can be used to disable the disk-cache for the local
@@ -78,8 +79,8 @@ func (os deviceOS) String() string {
 
 // Device is the interface for a discovered replay device.
 type Device interface {
-	// ID returns the identifier for the replay device.
-	ID() service.DeviceID
+	// Path returns the path for the replay device.
+	Path() *path.Device
 	// Info returns the service Device describing the replay device.
 	Info() *service.Device
 	// Connect opens a connection to the replay device.
@@ -87,12 +88,12 @@ type Device interface {
 }
 
 type deviceBase struct {
-	id     service.DeviceID
+	path   *path.Device
 	device *service.Device
 }
 
-func (d deviceBase) ID() service.DeviceID {
-	return d.id
+func (d deviceBase) Path() *path.Device {
+	return d.path
 }
 
 func (d deviceBase) Info() *service.Device {
