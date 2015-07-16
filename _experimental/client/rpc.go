@@ -300,3 +300,13 @@ func (r *rpc) Change(p path.Path, v interface{}) (path.Path, error) {
 	}
 	return p, nil
 }
+
+func (r *rpc) Follow(p path.Path) (path.Path, error) {
+	l := r.beginRPC("Follow")
+	p, err := r.client.Follow(p, l)
+	if err != nil {
+		log.E(l, "%v", err)
+		return nil, err
+	}
+	return p, nil
+}
