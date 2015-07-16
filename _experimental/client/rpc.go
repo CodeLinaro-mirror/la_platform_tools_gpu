@@ -123,8 +123,9 @@ func (r *rpc) GetDevices() (map[service.DeviceID]service.Device, error) {
 		i := i
 		go func() {
 			defer wg.Done()
-			if device, err := r.client.ResolveDevice(ids[i], l); err == nil {
-				devices[i] = &device
+			p := &path.Device{ID: binary.ID(ids[i])}
+			if device, err := r.client.Get(p, l); err == nil {
+				devices[i] = device.(*service.Device)
 			} else {
 				log.E(l, "Failed to resolve device %v: %v", ids[i], err)
 			}

@@ -48,7 +48,6 @@ func init() {
 	Namespace.Add((*callPrerenderFramebuffers)(nil).Class())
 	Namespace.Add((*callResolveAtomStream)(nil).Class())
 	Namespace.Add((*callResolveBinary)(nil).Class())
-	Namespace.Add((*callResolveDevice)(nil).Class())
 	Namespace.Add((*callResolveImageInfo)(nil).Class())
 	Namespace.Add((*callResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*callResolveTimingInfo)(nil).Class())
@@ -66,7 +65,6 @@ func init() {
 	Namespace.Add((*resultPrerenderFramebuffers)(nil).Class())
 	Namespace.Add((*resultResolveAtomStream)(nil).Class())
 	Namespace.Add((*resultResolveBinary)(nil).Class())
-	Namespace.Add((*resultResolveDevice)(nil).Class())
 	Namespace.Add((*resultResolveImageInfo)(nil).Class())
 	Namespace.Add((*resultResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*resultResolveTimingInfo)(nil).Class())
@@ -100,7 +98,6 @@ var (
 	binaryIDcallPrerenderFramebuffers   = binary.ID{0xce, 0xd0, 0x43, 0x9a, 0x0a, 0x96, 0xbd, 0x47, 0xe1, 0x4e, 0x08, 0xf0, 0x67, 0x37, 0x96, 0x84, 0x1a, 0x06, 0xb0, 0xfc}
 	binaryIDcallResolveAtomStream       = binary.ID{0xf6, 0x44, 0x79, 0x4e, 0x89, 0x71, 0x7b, 0x54, 0x13, 0xbc, 0xa7, 0x18, 0x32, 0xb0, 0xa7, 0x34, 0xa9, 0x4a, 0x7f, 0xe7}
 	binaryIDcallResolveBinary           = binary.ID{0x66, 0x2b, 0x48, 0xb6, 0x65, 0x55, 0xc3, 0x76, 0x0b, 0x74, 0x40, 0x50, 0xd3, 0xbd, 0xfd, 0x65, 0x8b, 0x61, 0x2a, 0x77}
-	binaryIDcallResolveDevice           = binary.ID{0x48, 0xf3, 0xd3, 0xbd, 0x29, 0x59, 0x29, 0xf6, 0xf2, 0xce, 0xa3, 0x87, 0xcb, 0xb2, 0xe9, 0xd4, 0xd3, 0xfc, 0xf0, 0x21}
 	binaryIDcallResolveImageInfo        = binary.ID{0x77, 0xdf, 0xf2, 0x6b, 0xf5, 0x1a, 0xa3, 0x65, 0x46, 0xac, 0xe4, 0x2d, 0x97, 0x22, 0x47, 0x5b, 0x8f, 0xa0, 0x52, 0xc9}
 	binaryIDcallResolveMemoryInfo       = binary.ID{0xb6, 0xd6, 0x5f, 0x4e, 0xd9, 0xdc, 0x07, 0x08, 0x4c, 0x8e, 0x3f, 0x8d, 0x80, 0x41, 0x85, 0x29, 0xf9, 0x27, 0xd5, 0x28}
 	binaryIDcallResolveTimingInfo       = binary.ID{0x14, 0x04, 0x9a, 0xe5, 0x1d, 0x0e, 0x02, 0xfd, 0x50, 0xf2, 0xe1, 0xcf, 0x35, 0x64, 0x5d, 0x64, 0x61, 0x8f, 0x4d, 0x9a}
@@ -118,7 +115,6 @@ var (
 	binaryIDresultPrerenderFramebuffers = binary.ID{0xb3, 0x13, 0x48, 0x75, 0x2a, 0xf4, 0xab, 0xf7, 0x59, 0x96, 0x1b, 0x20, 0x61, 0xfe, 0x3d, 0x4c, 0xc5, 0x47, 0x4c, 0xf9}
 	binaryIDresultResolveAtomStream     = binary.ID{0x05, 0xb9, 0x98, 0x3d, 0x6f, 0x5f, 0xc0, 0x23, 0xb2, 0xe1, 0x2e, 0x55, 0xf4, 0x37, 0x71, 0xe6, 0xd3, 0x98, 0xbf, 0x52}
 	binaryIDresultResolveBinary         = binary.ID{0xa4, 0x6a, 0xe4, 0xfe, 0x13, 0x16, 0xb3, 0x2a, 0x70, 0x6e, 0x71, 0xea, 0x47, 0xf0, 0x4c, 0xe6, 0x47, 0xc9, 0xb0, 0x42}
-	binaryIDresultResolveDevice         = binary.ID{0x7f, 0xd2, 0x9f, 0x67, 0xe3, 0xbe, 0x0e, 0x46, 0x07, 0xdf, 0x8f, 0x6e, 0x6e, 0x85, 0x6d, 0x26, 0xcf, 0xd1, 0xa6, 0xa3}
 	binaryIDresultResolveImageInfo      = binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}
 	binaryIDresultResolveMemoryInfo     = binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}
 	binaryIDresultResolveTimingInfo     = binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}
@@ -2134,55 +2130,6 @@ var schemacallResolveBinary = &schema.Class{
 	},
 }
 
-type binaryClasscallResolveDevice struct{}
-
-func (*callResolveDevice) Class() binary.Class {
-	return (*binaryClasscallResolveDevice)(nil)
-}
-func doEncodecallResolveDevice(e binary.Encoder, o *callResolveDevice) error {
-	if err := e.ID(binary.ID(o.id)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallResolveDevice(d binary.Decoder, o *callResolveDevice) error {
-	if obj, err := d.ID(); err != nil {
-		return err
-	} else {
-		o.id = DeviceID(obj)
-	}
-	return nil
-}
-func doSkipcallResolveDevice(d binary.Decoder) error {
-	if err := d.SkipID(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallResolveDevice) ID() binary.ID      { return binaryIDcallResolveDevice }
-func (*binaryClasscallResolveDevice) New() binary.Object { return &callResolveDevice{} }
-func (*binaryClasscallResolveDevice) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallResolveDevice(e, obj.(*callResolveDevice))
-}
-func (*binaryClasscallResolveDevice) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callResolveDevice{}
-	return obj, doDecodecallResolveDevice(d, obj)
-}
-func (*binaryClasscallResolveDevice) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallResolveDevice(d, obj.(*callResolveDevice))
-}
-func (*binaryClasscallResolveDevice) Skip(d binary.Decoder) error { return doSkipcallResolveDevice(d) }
-func (*binaryClasscallResolveDevice) Schema() *schema.Class       { return schemacallResolveDevice }
-
-var schemacallResolveDevice = &schema.Class{
-	TypeID:  binaryIDcallResolveDevice,
-	Package: "service",
-	Name:    "callResolveDevice",
-	Fields: []schema.Field{
-		{Declared: "id", Type: &schema.Primitive{Name: "DeviceID", Method: schema.ID}},
-	},
-}
-
 type binaryClasscallResolveImageInfo struct{}
 
 func (*callResolveImageInfo) Class() binary.Class {
@@ -3137,55 +3084,6 @@ var schemaresultResolveBinary = &schema.Class{
 	Name:    "resultResolveBinary",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-	},
-}
-
-type binaryClassresultResolveDevice struct{}
-
-func (*resultResolveDevice) Class() binary.Class {
-	return (*binaryClassresultResolveDevice)(nil)
-}
-func doEncoderesultResolveDevice(e binary.Encoder, o *resultResolveDevice) error {
-	if err := e.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultResolveDevice(d binary.Decoder, o *resultResolveDevice) error {
-	if err := d.Value(&o.value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipresultResolveDevice(d binary.Decoder) error {
-	if err := d.SkipValue((*Device)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultResolveDevice) ID() binary.ID      { return binaryIDresultResolveDevice }
-func (*binaryClassresultResolveDevice) New() binary.Object { return &resultResolveDevice{} }
-func (*binaryClassresultResolveDevice) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultResolveDevice(e, obj.(*resultResolveDevice))
-}
-func (*binaryClassresultResolveDevice) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultResolveDevice{}
-	return obj, doDecoderesultResolveDevice(d, obj)
-}
-func (*binaryClassresultResolveDevice) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultResolveDevice(d, obj.(*resultResolveDevice))
-}
-func (*binaryClassresultResolveDevice) Skip(d binary.Decoder) error {
-	return doSkipresultResolveDevice(d)
-}
-func (*binaryClassresultResolveDevice) Schema() *schema.Class { return schemaresultResolveDevice }
-
-var schemaresultResolveDevice = &schema.Class{
-	TypeID:  binaryIDresultResolveDevice,
-	Package: "service",
-	Name:    "resultResolveDevice",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Struct{Name: "Device", ID: (*Device)(nil).Class().ID()}},
 	},
 }
 
