@@ -44,13 +44,13 @@ func timingInfoGpu(flags service.TimingFlags, out chan<- replay.CallTiming, devi
 		mark := false
 		if timeFrames && a.Flags().IsEndOfFrame() {
 			if _, ok := seen[id]; !ok {
-				timingInfo.PerFrame = append(timingInfo.PerFrame, service.AtomRangeTimer{ToAtomId: uint64(id)})
+				timingInfo.PerFrame = append(timingInfo.PerFrame, service.AtomRangeTimer{ToAtomID: uint64(id)})
 			}
 			mark = true
 		}
 		if timeDrawCalls && a.Flags().IsDrawCall() {
 			if _, ok := seen[id]; !ok {
-				timingInfo.PerDrawCall = append(timingInfo.PerDrawCall, service.AtomRangeTimer{ToAtomId: uint64(id)})
+				timingInfo.PerDrawCall = append(timingInfo.PerDrawCall, service.AtomRangeTimer{ToAtomID: uint64(id)})
 			}
 			mark = true
 		}
@@ -74,9 +74,9 @@ func timingInfoGpu(flags service.TimingFlags, out chan<- replay.CallTiming, devi
 				// TODO: Refactor to find and use frame/draw overlaps with query intervals.
 
 				// Skip frames and draw calls that don't have any overlapping query values.
-				for ; len(frames) > 0 && frames[0].ToAtomId < uint64(query.endId); frames = frames[1:] {
+				for ; len(frames) > 0 && frames[0].ToAtomID < uint64(query.endId); frames = frames[1:] {
 				}
-				for ; len(draws) > 0 && draws[0].ToAtomId < uint64(query.endId); draws = draws[1:] {
+				for ; len(draws) > 0 && draws[0].ToAtomID < uint64(query.endId); draws = draws[1:] {
 				}
 
 				// Attribute delta time to the enclosing frame, assuming no gaps.

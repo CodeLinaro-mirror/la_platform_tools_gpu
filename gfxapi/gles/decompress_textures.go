@@ -33,7 +33,7 @@ import (
 //   GL_ATC_RGB_AMD
 //   GL_ATC_RGBA_EXPLICIT_ALPHA_AMD
 //   GL_ETC1_RGB8_OES
-func decompressTextures(device *service.Device, capture service.CaptureId, d database.Database, l log.Logger) atom.Transformer {
+func decompressTextures(device *service.Device, capture service.CaptureID, d database.Database, l log.Logger) atom.Transformer {
 	l = log.Enter(l, "decompressTextures")
 	s := gfxapi.NewState()
 	supportedFormats := getCompressedFormats(device)

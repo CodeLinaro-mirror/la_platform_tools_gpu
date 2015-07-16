@@ -62,7 +62,7 @@ type callGetResource struct {
 // Result GetResource
 type resultGetResource struct {
 	binary.Generate
-	value ResourceId
+	value ResourceID
 }
 
 // Call GetSingleListNode
@@ -90,7 +90,7 @@ type resultGetStruct struct {
 // Call ResolveResource
 type callResolveResource struct {
 	binary.Generate
-	r ResourceId
+	r ResourceID
 }
 
 // Result ResolveResource
@@ -113,7 +113,7 @@ type resultSetStruct struct {
 // Call UseResource
 type callUseResource struct {
 	binary.Generate
-	r ResourceId
+	r ResourceID
 }
 
 // Result UseResource

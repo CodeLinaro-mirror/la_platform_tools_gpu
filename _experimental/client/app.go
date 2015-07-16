@@ -101,7 +101,7 @@ func createPanels(appCtx *ApplicationContext, window gxui.Window) gxui.Control {
 }
 
 type capture struct {
-	id   service.CaptureId
+	id   service.CaptureID
 	info service.Capture
 }
 
@@ -119,7 +119,7 @@ func (a *captureAdapter) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (a *captureAdapter) ItemIndex(item gxui.AdapterItem) int {
-	id := item.(service.CaptureId)
+	id := item.(service.CaptureID)
 	for i := range a.items {
 		if a.items[i].id == id {
 			return i
@@ -144,7 +144,7 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.events.Select(item.(service.CaptureId).Path())
+		appCtx.events.Select(item.(service.CaptureID).Path())
 	})
 
 	list.OnAttach(func() {
@@ -169,7 +169,7 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 }
 
 type device struct {
-	id   service.DeviceId
+	id   service.DeviceID
 	info service.Device
 }
 
@@ -187,7 +187,7 @@ func (a *deviceAdapter) ItemAt(index int) gxui.AdapterItem {
 }
 
 func (a *deviceAdapter) ItemIndex(item gxui.AdapterItem) int {
-	id := item.(service.DeviceId)
+	id := item.(service.DeviceID)
 	for i := range a.items {
 		if a.items[i].id == id {
 			return i
@@ -214,7 +214,7 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.events.Select(item.(service.DeviceId).Path())
+		appCtx.events.Select(item.(service.DeviceID).Path())
 	})
 
 	list.OnAttach(func() {

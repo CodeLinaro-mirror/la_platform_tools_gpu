@@ -72,7 +72,7 @@ func (c client) GetListNodeChainArray(l log.Logger) (res []*ListNode, err error)
 	return
 }
 
-func (c client) GetResource(l log.Logger) (res ResourceId, err error) {
+func (c client) GetResource(l log.Logger) (res ResourceID, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetResource{}); err == nil {
 		res = val.(*resultGetResource).value
@@ -102,7 +102,7 @@ func (c client) GetStruct(l log.Logger) (res Struct, err error) {
 	return
 }
 
-func (c client) ResolveResource(r ResourceId, l log.Logger) (res Resource, err error) {
+func (c client) ResolveResource(r ResourceID, l log.Logger) (res Resource, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveResource{r: r}); err == nil {
 		res = val.(*resultResolveResource).value
@@ -117,7 +117,7 @@ func (c client) SetStruct(s Struct, l log.Logger) error {
 	return err
 }
 
-func (c client) UseResource(r ResourceId, l log.Logger) error {
+func (c client) UseResource(r ResourceID, l log.Logger) error {
 	_, err := c.Send(&callUseResource{r: r})
 	return err
 }
