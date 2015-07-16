@@ -279,8 +279,8 @@ func Box(v interface{}) (binary.Object, error) {
 		return &intSlice{value: v}, nil
 	case []string:
 		return &stringSlice{value: v}, nil
-
 	}
+
 	return nil, ErrUnboxable{Value: v}
 }
 

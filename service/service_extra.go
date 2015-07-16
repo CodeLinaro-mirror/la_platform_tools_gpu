@@ -11,6 +11,18 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
+// Call Follow
+type callFollow struct {
+	binary.Generate
+	p path.Path
+}
+
+// Result Follow
+type resultFollow struct {
+	binary.Generate
+	value path.Path
+}
+
 // Call Get
 type callGet struct {
 	binary.Generate
