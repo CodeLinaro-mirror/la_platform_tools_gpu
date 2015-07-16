@@ -13,6 +13,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -84,7 +85,7 @@ var (
 	binaryIDImageInfo                   = binary.ID{0xdc, 0xf1, 0x9b, 0xdf, 0x62, 0x62, 0xa7, 0x0a, 0x12, 0x32, 0x7d, 0x69, 0x42, 0x00, 0xca, 0xee, 0xb9, 0x79, 0xaa, 0x08}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
-	binaryIDReportItem                  = binary.ID{0x85, 0x03, 0xdb, 0x94, 0x41, 0x27, 0x21, 0x23, 0xcc, 0x45, 0x1d, 0xae, 0xef, 0xff, 0xeb, 0x26, 0xc9, 0xf6, 0xa6, 0x20}
+	binaryIDReportItem                  = binary.ID{0x8a, 0xb2, 0x14, 0x6f, 0x40, 0xb0, 0x0b, 0x10, 0xa9, 0x02, 0xfb, 0xa1, 0x76, 0x1a, 0xe9, 0xd7, 0x9c, 0x62, 0x40, 0x93}
 	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
 	binaryIDSchema                      = binary.ID{0x74, 0xe2, 0x21, 0xf1, 0x49, 0x8f, 0x1b, 0x90, 0xf3, 0x8b, 0xe8, 0x56, 0xef, 0xbf, 0x17, 0x79, 0xdf, 0xfc, 0x38, 0x25}
 	binaryIDTimingInfo                  = binary.ID{0xf8, 0xfe, 0x88, 0x50, 0x3d, 0x72, 0xb3, 0x55, 0xb0, 0x01, 0x73, 0xfe, 0x8a, 0x82, 0xbd, 0x1e, 0xb7, 0xc9, 0x5b, 0xb1}
@@ -952,7 +953,7 @@ func doDecodeReportItem(d binary.Decoder, o *ReportItem) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.Severity = Severity(obj)
+		o.Severity = log.Severity(obj)
 	}
 	if obj, err := d.String(); err != nil {
 		return err
@@ -998,7 +999,7 @@ var schemaReportItem = &schema.Class{
 	Package: "service",
 	Name:    "ReportItem",
 	Fields: []schema.Field{
-		{Declared: "Severity", Type: &schema.Primitive{Name: "Severity", Method: schema.Int32}},
+		{Declared: "Severity", Type: &schema.Primitive{Name: "log.Severity", Method: schema.Int32}},
 		{Declared: "Message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Atom", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -3530,52 +3531,6 @@ func (v *ImageFormat) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in ImageFormat", s)
-}
-
-const _Severity_name = "EmergencyAlertCriticalErrorWarningNoticeInformationalDebug"
-
-var _Severity_map = map[Severity]string{
-	0: _Severity_name[0:9],
-	1: _Severity_name[9:14],
-	2: _Severity_name[14:22],
-	3: _Severity_name[22:27],
-	4: _Severity_name[27:34],
-	5: _Severity_name[34:40],
-	6: _Severity_name[40:53],
-	7: _Severity_name[53:58],
-}
-
-func init() {
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Severity", Method: schema.Int32},
-		Entries: []schema.Constant{
-			{Name: _Severity_name[0:9], Value: int32(0)},
-			{Name: _Severity_name[9:14], Value: int32(1)},
-			{Name: _Severity_name[14:22], Value: int32(2)},
-			{Name: _Severity_name[22:27], Value: int32(3)},
-			{Name: _Severity_name[27:34], Value: int32(4)},
-			{Name: _Severity_name[34:40], Value: int32(5)},
-			{Name: _Severity_name[40:53], Value: int32(6)},
-			{Name: _Severity_name[53:58], Value: int32(7)},
-		},
-	})
-}
-
-func (v Severity) String() string {
-	if s, ok := _Severity_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Severity(%d)", v)
-}
-
-func (v *Severity) Parse(s string) error {
-	for k, t := range _Severity_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Severity", s)
 }
 
 const _TimingFlags_name = "TimingCPUTimingGPUTimingPerCommandTimingPerDrawCallTimingPerFrame"
