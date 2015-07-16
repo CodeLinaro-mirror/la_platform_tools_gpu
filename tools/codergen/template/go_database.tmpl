@@ -16,22 +16,22 @@
 
 {{define "Go.Database"}}{{template "Go.Prelude" .}}
 
-{{range .Structs}}{{if $h := .Tag "handle" ""}}// Store{{$h}} stores v into the database d, returning the {{.Name}}.
-func Store{{$h}}(v *{{$h}}, d database.Database, l log.Logger) ({{.Name}}, error) {
+{{range .Structs}}{{if $handle := .Tag "handle" ""}}// Store{{.Name}} stores v into the database d, returning the {{$handle}}.
+func Store{{.Name}}(v *{{.Name}}, d database.Database, l log.Logger) ({{$handle}}, error) {
 	id, err := database.Store(v, d, l)
-	return {{.Name}}{ID: id}, err
+	return {{$handle}}(id), err
 }
 
-// Resolve{{$h}} loads and returns the {{$h}} stored in the database d, using id.
-func Resolve{{$h}}(id {{.Name}}, d database.Database, l log.Logger) (res {{$h}}, err error) {
-	if out, err := d.Resolve(id.ID, l); err == nil {
-		res = *(out.(*{{$h}}))
+// Resolve{{.Name}} loads and returns the {{.Name}} stored in the database d, using id.
+func Resolve{{.Name}}(id {{$handle}}, d database.Database, l log.Logger) (res {{.Name}}, err error) {
+	if out, err := d.Resolve(binary.ID(id), l); err == nil {
+		res = *(out.(*{{.Name}}))
 	}
 	return res, err
 }
 
-// Resolve{{$h}} loads and returns the {{$h}} stored in the resolver's database, using id.
-func (r Resolver) Resolve{{$h}}(id {{$h}}Id, l log.Logger) ({{$h}}, error) {
-	return Resolve{{$h}}(id, r.Database, l)
+// Resolve{{.Name}} loads and returns the {{.Name}} stored in the resolver's database, using id.
+func (r Resolver) Resolve{{.Name}}(id {{$handle}}, l log.Logger) ({{.Name}}, error) {
+	return Resolve{{.Name}}(id, r.Database, l)
 }
 {{end}}{{end}}{{end}}
