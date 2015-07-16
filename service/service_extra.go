@@ -176,18 +176,6 @@ type resultResolveBinary struct {
 	value []uint8
 }
 
-// Call ResolveDevice
-type callResolveDevice struct {
-	binary.Generate
-	id DeviceID
-}
-
-// Result ResolveDevice
-type resultResolveDevice struct {
-	binary.Generate
-	value Device
-}
-
 // Call ResolveImageInfo
 type callResolveImageInfo struct {
 	binary.Generate
