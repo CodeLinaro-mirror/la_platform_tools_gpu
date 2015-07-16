@@ -96,35 +96,35 @@
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
         {{$name := Macro "CmdName" $c}}
-        {{$name}} = reinterpret_cast<{{Macro "C++.FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
+        {{$name}} = reinterpret_cast<{{Template "C++.FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
       {{end}}
     {{end}}
   }
 {{end}}
 
 
-{{define "CommandHandler"}}
+`{{define "CommandHandler"}}
   {{AssertType $ "Function"}}
 
   {{$name := Macro "CmdName" $}}
 
-  bool call{{Macro "C++.Public" $name}}(Stack* stack, bool pushReturn) {
+  bool call{{Template "C++.Public" $name}}(Stack* stack, bool pushReturn) {
     {{range $p := (Reverse $.CallParameters)}}
-      {{Macro "C++.ParameterType" $p}} {{$p.Name}} = stack->pop<{{Macro "C++.ParameterType" $p}}>();
+      {{Template "C++.ParameterType" $p}} {{$p.Name}} = stack->pop<{{Template "C++.ParameterType" $p}}>();
     {{end}}
 
     if (stack->isValid()) {
-    GAPID_INFO({{Macro "C++.PrintfCommandCall" $}});
+    GAPID_INFO({{Template "C++.PrintfCommandCall" $}});
 
       if ({{$name}} != nullptr) {
         {{if not (IsVoid $.Return.Type)}}
-          {{Macro "C++.ReturnType" $}} return_value = {{Macro "Call" $}};
-          GAPID_INFO("Returned: {{Macro "C++.PrintfFormatCode" $.Return.Type}}\n", return_value);
+          {{Template "C++.ReturnType" $}} return_value = {{Template "Call" $}};
+          GAPID_INFO("Returned: {{Template "C++.PrintfFormatCode" $.Return.Type}}\n", return_value);
           if (pushReturn) {
-            stack->push<{{Macro "C++.ReturnType" $}}>(return_value);
+            stack->push<{{Template "C++.ReturnType" $}}>(return_value);
           }
         {{else}}
-          {{Macro "Call" $}};
+          {{Template "Call" $}};
         {{end}}
 
         {{if 0}} {{/* Enable for debugging */}}
@@ -155,7 +155,7 @@
 {{define "Call"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "CmdName" $}}(§
+  {{Template "CmdName" $}}(§
     {{range $i, $p := $.CallParameters}}
       {{if $i}}, {{end}}{{$p.Name}}§
     {{end}})

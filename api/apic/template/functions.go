@@ -224,7 +224,7 @@ func (f *Functions) Macro(name string, arguments ...interface{}) (string, error)
 	}
 	buf := &bytes.Buffer{}
 	err = f.execute(t, buf, arg)
-	return strings.TrimSpace(buf.String()), err
+	return buf.String(), err
 }
 
 // Template invokes the template with the specified name writing the output to
@@ -305,5 +305,5 @@ func (f *Functions) Node(prefix string, node interface{}, arguments ...interface
 func (f *Functions) SNode(prefix string, node interface{}, arguments ...interface{}) (string, error) {
 	buf := &bytes.Buffer{}
 	err := f.node(buf, prefix, node, arguments...)
-	return strings.TrimSpace(buf.String()), err
+	return buf.String(), err
 }

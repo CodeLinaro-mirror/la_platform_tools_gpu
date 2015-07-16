@@ -50,41 +50,41 @@ namespace Ids {
   // List of the function ids for the API functions. This list have to be consistent with the
   // function ids on the server side because they are part of the communication protocol
   {{range $i, $c := AllCommands $}}
-    static const uint16_t {{Macro "C++.Public" (Macro "CmdName" $c)}} = {{$i}};
+    static const uint16_t {{Template "C++.Public" (Macro "CmdName" $c)}} = {{$i}};
   {{end}}
 } // namespace FunctionIds
 ¶
 {{range $e := $.Enums}}
-  enum class {{Macro "C++.EnumName" $e}} : uint32_t {
+  enum class {{Template "C++.EnumName" $e}} : uint32_t {
     {{range $entry := $e.Entries}}
-      {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}},
+      {{Template "C++.EnumEntryName" $entry}} = {{$entry.Value}},
     {{end}}
   };¶
 {{end}}
 
 {{range $p := $.Pseudonyms}}
-  typedef {{Macro "C++.Type" $p.To}} {{Macro "C++.Type" $p}};
+  typedef {{Template "C++.Type" $p.To}} {{Template "C++.Type" $p}};
 {{end}}
 ¶
 {{range $c := $.Classes}}
   {{if not (GetAnnotation $c "internal")}}
   typedef {{if GetAnnotation $c "union"}}union{{else}}struct{{end}} {
     {{range $f := $c.Fields}}
-      {{Macro "C++.Type" $f}} {{$f.Name}}{{Macro "C++.ArrayPostfix" $f}};
+      {{Template "C++.Type" $f}} {{$f.Name}}{{Template "C++.ArrayPostfix" $f}};
     {{end}}
-  } {{Macro "C++.Type" $c}};¶
+  } {{Template "C++.Type" $c}};¶
   {{end}}
 {{end}}
 ¶
 {{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
-    {{Macro "C++.TypedefFunctionPtr" $c}}
+    {{Template "C++.TypedefFunctionPtr" $c}}
   {{end}}
 {{end}}
 ¶
 {{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
-    extern {{Macro "C++.FunctionPtrDecl" $c}};
+    extern {{Template "C++.FunctionPtrDecl" $c}};
   {{end}}
 {{end}}
 ¶

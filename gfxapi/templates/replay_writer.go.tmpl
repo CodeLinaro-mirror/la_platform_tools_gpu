@@ -52,7 +52,7 @@
     }
   }
 
-  {{Macro "DeclareBuilderFunctionInfos" $}}
+  {{Template "DeclareBuilderFunctionInfos" $}}
 
   {{ForEach $.Pseudonyms "DeclarePseudonymValue" | JoinWith "\n"}}
 
@@ -83,7 +83,7 @@
     {{Global "CurrentCommand" $}}
 
     {{/* Simulate the call */}}
-    {{Macro "Go.CommandLogic" $}}
+    {{Template "Go.CommandLogic" $}}
 
     return nil
   }
@@ -102,12 +102,12 @@
 
   {{if (GetAnnotation $.Type "replay_remap")}}
     if key, remap := {{$.Name}}.remap(ϟa, ϟs); remap {
-      loadRemap(ϟb, key, {{Macro "BuilderType" $.Type}}, {{Macro "Value" "Type" $.Type "Name" $.Name}})
+      loadRemap(ϟb, key, {{Template "BuilderType" $.Type}}, {{Template "Value" "Type" $.Type "Name" $.Name}})
     } else {
-      ϟb.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+      ϟb.Push({{Template "Value" "Type" $.Type "Name" $.Name}})
     }
   {{else}}
-    ϟb.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+    ϟb.Push({{Template "Value" "Type" $.Type "Name" $.Name}})
   {{end}}
 {{end}}
 
@@ -158,7 +158,7 @@
   {{if or (IsNumericType $u) (IsPointer $u)}}
     {{if not (GetAnnotation $ "replay_custom_value")}}
       {{$v := print (Macro "Go.Type" $.To) "(c)"}}
-      func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+      func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Template "Value" "Type" $.To "Name" $v}} }
     {{end}}
   {{end}}
 {{end}}
@@ -173,10 +173,10 @@
   {{AssertType $ "Array" "StaticArray"}}
 
   {{if not (or (Macro "IsInternal" $.ValueType) (IsAny $.ValueType))}}
-    func (arr {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+    func (arr {{Template "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
       if len(arr) > 0 {
         for _, e := range arr {
-          {{Macro "PushInput" "Type" $.ValueType "Name" "e"}}
+          {{Template "PushInput" "Type" $.ValueType "Name" "e"}}
         }
         return ϟb.Buffer(len(arr))
       } else {
@@ -197,9 +197,9 @@
   {{AssertType $ "API"}}
 
   {{range $i, $c := AllCommands $}}
-    var {{Macro "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
+    var {{Template "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
       ID:         {{$i}},§
-      ReturnType: {{Macro "BuilderType" $c.Return.Type}},§
+      ReturnType: {{Template "BuilderType" $c.Return.Type}},§
       Parameters: {{len $c.CallParameters}},§
     }
   {{end}}
@@ -211,7 +211,7 @@
   Emits the name of the variable holding the specified command's function id.
 -------------------------------------------------------------------------------
 */}}
-{{define "BuilderFunctionInfo"}}{{AssertType $ "Function"}}funcInfo{{Macro "Go.CmdName" $}}{{end}}
+{{define "BuilderFunctionInfo"}}{{AssertType $ "Function"}}funcInfo{{Template "Go.CmdName" $}}{{end}}
 
 
 {{/*
@@ -222,7 +222,7 @@
 {{define "BuilderType"}}
   {{AssertType $ "Type"}}
 
-  {{     if IsPseudonym $}}{{Macro "BuilderType" $.To}}
+  {{     if IsPseudonym $}}{{Template "BuilderType" $.To}}
   {{else if IsEnum      $}}protocol.TypeUint32
   {{else if IsBool      $}}protocol.TypeBool
   {{else if IsInt       $}}protocol.TypeInt64
@@ -252,19 +252,19 @@
 */}}
 {{define "Statement"}}
   {{if IsRead $}}
-    {{Macro "Go.Statement.Default" $}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Template "Go.Statement.Default" $}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsWrite $}}
-    {{Macro "Go.Statement.Default" $}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Template "Go.Statement.Default" $}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsCopy $}}
     {{Error "Copy statement found outside of a Fence"}}
   {{else if IsSliceAssign $}}
     {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
-    {{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Template "Go.Read" $.To.Slice}}.Index({{Template "Go.Read" $.To.Index}}, ϟs).replayWrite({{Template "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsFence $}}
-    {{Macro "Fence" $}}
+    {{Template "Fence" $}}
   {{else if IsReturn $}}{{/* no-op */}}
   {{else}}
-    {{Macro "Go.Statement.Default" $}}
+    {{Template "Go.Statement.Default" $}}
   {{end}}
 {{end}}
 
@@ -283,7 +283,7 @@
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}}
       {{/* Apply the fenced-copy read */}}
-      ϟdst, ϟsrc := {{Macro "Go.Read" $.Statement.Dst}}.Copy({{Macro "Go.Read" $.Statement.Src}}, ϟs, ϟd, ϟl)
+      ϟdst, ϟsrc := {{Template "Go.Read" $.Statement.Dst}}.Copy({{Template "Go.Read" $.Statement.Src}}, ϟs, ϟd, ϟl)
       ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{end}}
   {{end}}
@@ -292,11 +292,11 @@
   {{range $p := $c.CallParameters}}
     {{$type := TypeOf $p}}
     {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-    {{Macro "PushInput" "Type" $type "Name" $name}}
+    {{Template "PushInput" "Type" $type "Name" $name}}
   {{end}}
 
   {{/* Call the function */}}
-  ϟb.Call({{Macro "BuilderFunctionInfo" $c}})
+  ϟb.Call({{Template "BuilderFunctionInfo" $c}})
 
   {{/* Store the return value into a remapping table, if required */}}
   {{$rty := TypeOf $c.Return}}
@@ -304,7 +304,7 @@
     if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
       ptr, found := ϟb.Remappings[key]
       if !found {
-        ptr = ϟb.AllocateMemory({{Macro "Go.SizeOf" $rty}})
+        ptr = ϟb.AllocateMemory({{Template "Go.SizeOf" $rty}})
         ϟb.Remappings[key] = ptr
       }
       ϟb.Clone(0)
@@ -320,7 +320,7 @@
     {{if IsCopy $.Statement}}
       ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{else}}
-      {{Macro "Go.Statement" $.Statement}}
+      {{Template "Go.Statement" $.Statement}}
     {{end}}
   {{end}}
 {{end}}
@@ -333,7 +333,7 @@
 */}}
 {{define "Read"}}
   {{if IsSliceIndex $}}
-    {{Macro "Go.Read" $.Slice}}.Index({{Macro "Go.Read" $.Index}}, ϟs).§
+    {{Template "Go.Read" $.Slice}}.Index({{Template "Go.Read" $.Index}}, ϟs).§
     {{if Global "Go.InferredExpression"}}
       replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{else}}
@@ -351,12 +351,12 @@
     {{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
       strings.TrimRight(string({{$src}}.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
     {{else}}
-      {{Macro "Go.Cast" $}}
+      {{Template "Go.Cast" $}}
     {{end}}
   {{else if IsClone $}}
-    {{Macro "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
+    {{Template "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
   {{else}}
-    {{Macro "Go.Read.Default" $}}
+    {{Template "Go.Read.Default" $}}
   {{end}}
 {{end}}
 
@@ -423,9 +423,9 @@
         ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
           if key, remap := v.remap(ϟa, ϟs); remap {
-            loadRemap(ϟb, key, {{Macro "BuilderType" $s.To}}, {{Macro "Value" "Type" $s.To "Name" "v"}})
+            loadRemap(ϟb, key, {{Template "BuilderType" $s.To}}, {{Template "Value" "Type" $s.To "Name" "v"}})
           } else {
-            ϟb.Push({{Macro "Value" "Type" $s.To "Name" "v"}})
+            ϟb.Push({{Template "Value" "Type" $s.To "Name" "v"}})
           }
           ϟb.Store(ptr)
           ptr += step
@@ -433,7 +433,7 @@
       {{else if IsPointer ($s.To | Underlying)}}
         ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
         for _, v := range s.Read(ϟs, ϟd, ϟl) {
-          ϟb.Push({{Macro "Value" "Type" $s.To "Name" "v"}})
+          ϟb.Push({{Template "Value" "Type" $s.To "Name" "v"}})
           ϟb.Store(ptr)
           ptr += step
         }
@@ -457,7 +457,7 @@
               dst = ϟb.AllocateMemory(size)
               ϟb.Remappings[key] = dst
             }
-            ϟb.Load({{Macro "BuilderType" $s.To}}, ptr)
+            ϟb.Load({{Template "BuilderType" $s.To}}, ptr)
             ϟb.Store(dst)
           }
           ptr += step
@@ -481,4 +481,3 @@
     }
   {{end}}
 {{end}}
-
