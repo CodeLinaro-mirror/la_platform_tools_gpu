@@ -164,16 +164,6 @@ func (c client) ResolveBinary(id BinaryID, l log.Logger) (res []uint8, err error
 	return
 }
 
-func (c client) ResolveCapture(id CaptureID, l log.Logger) (res Capture, err error) {
-	var val interface{}
-	if val, err = c.Send(&callResolveCapture{id: id}); err == nil {
-		res = val.(*resultResolveCapture).value
-	} else {
-		log.Errorf(l, "RPC ResolveCapture failed with error: %v", err)
-	}
-	return
-}
-
 func (c client) ResolveDevice(id DeviceID, l log.Logger) (res Device, err error) {
 	var val interface{}
 	if val, err = c.Send(&callResolveDevice{id: id}); err == nil {

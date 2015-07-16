@@ -105,14 +105,6 @@ func (c callResolveBinary) Format(f fmt.State, r rune) {
 func (r resultResolveBinary) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callResolveCapture) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "ResolveCapture(id: %v)",
-		c.id,
-	)
-}
-func (r resultResolveCapture) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callResolveDevice) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "ResolveDevice(id: %v)",
 		c.id,
