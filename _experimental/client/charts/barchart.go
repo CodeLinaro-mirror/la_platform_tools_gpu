@@ -200,9 +200,9 @@ func (c *BarChart) resetZoom() {
 		var r math.Rect
 		min, max := c.data.Limits()
 		if c.orientation.Horizontal() {
-			r = math.CreateRect(0, -max, c.barWidth*c.data.Count(), -min)
+			r = math.CreateRect(0, -max, c.barSeparation()*c.data.Count(), -min)
 		} else {
-			r = math.CreateRect(min, 0, max, c.barWidth*c.data.Count())
+			r = math.CreateRect(min, 0, max, c.barSeparation()*c.data.Count())
 		}
 		c.SetZoomBounds(r)
 		c.SetZoomWindow(r)
