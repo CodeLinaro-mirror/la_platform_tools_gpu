@@ -25,7 +25,7 @@
 
 {{define "Exports"}}
   {{AssertType $ "API"}}
-  {{Macro "C++.AOSP.Copyright"}}
+  {{Template "C++.AOSP.Copyright"}}
 ¶
   #include "{{Global "API"}}_imports.h"
   #include "{{Global "API"}}_types.h"
@@ -45,7 +45,7 @@
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "CmdName" $c}}
-      EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}});
+      EXPORT {{Template "C++.ReturnType" $c}} STDCALL {{$name}}({{Template "C++.CallParameters" $c}});
     {{end}}
   {{end}}
 ¶
@@ -96,9 +96,9 @@
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "CmdName" $c}}
-      EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
+      EXPORT {{Template "C++.ReturnType" $c}} STDCALL {{$name}}({{Template "C++.CallParameters" $c}}) {
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
-        spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
+        spy()->{{$name}}({{Template "C++.CallArguments" $c}});
       }
     {{end}}
   {{end}}
@@ -110,4 +110,3 @@
 ¶
   »} // extern "C"
 {{end}}
-

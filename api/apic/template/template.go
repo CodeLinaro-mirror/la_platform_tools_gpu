@@ -22,7 +22,9 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"text/template"
+	"unicode/utf8"
 
 	"android.googlesource.com/platform/tools/gpu/api"
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
@@ -86,14 +88,107 @@ func writeDeps() error {
 	return file.Close()
 }
 
-func (f *Functions) execute(active *template.Template, writer io.Writer, data interface{}) error {
+// Note isTrimSpace is only testing the Latin1 spaces.
+func isTrimSpace(b byte) bool {
+	switch b {
+	case ' ', '\n':
+		return true
+	}
+	return false
+}
+
+// trimWriter, writes to the underlying io.Writer, but with leading
+// and trailing spaces trimmed from the output. Only current trailing
+// spaces are saved between calls to Write().
+type trimWriter struct {
+	out     io.Writer
+	atStart bool   // at the start we throw away leading spaces.
+	spaces  []byte // spaces which are currently trailing.
+}
+
+func newTrimWriter(out io.Writer) io.Writer {
+	return &trimWriter{out: out, atStart: true}
+}
+
+func (t *trimWriter) Write(buf []byte) (int, error) {
+	l := len(buf)
+	if l == 0 {
+		return 0, nil
+	}
+
+	begin := 0 // index of the first byte to output
+	if t.atStart {
+		// Skip over leading spaces
+		// Find the start of the interesting content.
+		for ; begin < len(buf); begin++ {
+			b := buf[begin]
+			// If the character is in Latin1, it is safe to treat it is a byte
+			if b >= utf8.RuneSelf || !isTrimSpace(b) {
+				t.atStart = false
+				break
+			}
+		}
+
+		if t.atStart {
+			// The whole buffer is leading spaces
+			return l, nil
+		}
+	}
+
+	// Find the end of the interesting content (remove trailing spaces).
+	end := len(buf) // index one beyond the end of the interesting content
+	for ; end > begin; end-- {
+		b := buf[end-1]
+		// If the character is in Latin1, it is safe to treat it is a byte
+		if b >= utf8.RuneSelf || !isTrimSpace(b) {
+			break
+		}
+	}
+
+	if begin == end {
+		// The whole buffer is trailing spaces
+		t.spaces = append(t.spaces, buf...)
+		return l, nil
+	}
+
+	// The buffer has some content to output.
+	// First output any trailing spaces from the previous call
+	if len(t.spaces) != 0 {
+		if ws, err := t.out.Write(t.spaces); err != nil || ws != len(t.spaces) {
+			return ws, err
+		}
+		// We are done with previous trailing spaces
+		t.spaces = nil
+	}
+
+	// Output the content.
+	if ws, err := t.out.Write(buf[begin:end]); err != nil || ws != end-begin {
+		return ws, err
+	}
+
+	if end != len(buf) {
+		// Save any trailing spaces
+		t.spaces = append(t.spaces, buf[end:]...)
+	}
+
+	return l, nil
+}
+
+func (f *Functions) execute(active *template.Template, writer io.Writer, data interface{}) (err error) {
 	olda := f.active
 	oldw := f.writer
 	f.active = active
 	if writer != nil {
 		f.writer = writer
 	}
+	f.writer = newTrimWriter(f.writer)
 	defer func() {
+		if r := recover(); r != nil {
+			// There doesn't appear to be a clean way to get both the panic stack
+			// and the template stack. This is the closest I can figure.
+			err = fmt.Errorf("panic executing template %v: %v %v", f.active.Name(), r, string(debug.Stack()))
+		}
+
 		f.active = olda
 		f.writer = oldw
 	}()
@@ -132,6 +227,7 @@ func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
 	commands.Logf("Writing output to %q\n", outputPath)
 	outputDep(outputPath)
+
 	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
 }
 
