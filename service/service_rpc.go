@@ -80,6 +80,10 @@ type RPC interface {
 	// the base changed to refer to the new capture.
 	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
 
+	// Follow returns the path to the object that the value at p links to.
+	// If the value at p does not link to anything then nil is returned.
+	Follow(p path.Path, l log.Logger) (path.Path, error)
+
 	ResolveAtomStream(id AtomStreamID, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryID, l log.Logger) ([]uint8, error)
 	ResolveCapture(id CaptureID, l log.Logger) (Capture, error)

@@ -34,6 +34,7 @@ func init() {
 	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*Schema)(nil).Class())
 	Namespace.Add((*TimingInfo)(nil).Class())
+	Namespace.Add((*callFollow)(nil).Class())
 	Namespace.Add((*callGet)(nil).Class())
 	Namespace.Add((*callGetCaptures)(nil).Class())
 	Namespace.Add((*callGetDevices)(nil).Class())
@@ -52,6 +53,7 @@ func init() {
 	Namespace.Add((*callResolveMemoryInfo)(nil).Class())
 	Namespace.Add((*callResolveTimingInfo)(nil).Class())
 	Namespace.Add((*callSet)(nil).Class())
+	Namespace.Add((*resultFollow)(nil).Class())
 	Namespace.Add((*resultGet)(nil).Class())
 	Namespace.Add((*resultGetCaptures)(nil).Class())
 	Namespace.Add((*resultGetDevices)(nil).Class())
@@ -86,6 +88,7 @@ var (
 	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
 	binaryIDSchema                      = binary.ID{0x74, 0xe2, 0x21, 0xf1, 0x49, 0x8f, 0x1b, 0x90, 0xf3, 0x8b, 0xe8, 0x56, 0xef, 0xbf, 0x17, 0x79, 0xdf, 0xfc, 0x38, 0x25}
 	binaryIDTimingInfo                  = binary.ID{0xf8, 0xfe, 0x88, 0x50, 0x3d, 0x72, 0xb3, 0x55, 0xb0, 0x01, 0x73, 0xfe, 0x8a, 0x82, 0xbd, 0x1e, 0xb7, 0xc9, 0x5b, 0xb1}
+	binaryIDcallFollow                  = binary.ID{0xe1, 0x2c, 0x0d, 0x00, 0xd2, 0x83, 0xe0, 0xd5, 0x61, 0xf9, 0x0f, 0xce, 0xfe, 0xb7, 0x3a, 0x65, 0x6d, 0x3e, 0xb9, 0x8e}
 	binaryIDcallGet                     = binary.ID{0x5c, 0xaa, 0xed, 0xc9, 0xd2, 0x90, 0xe7, 0xb2, 0xae, 0x34, 0x5d, 0x9f, 0x32, 0x67, 0x6c, 0x27, 0xc6, 0x0e, 0x33, 0x96}
 	binaryIDcallGetCaptures             = binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
@@ -104,6 +107,7 @@ var (
 	binaryIDcallResolveMemoryInfo       = binary.ID{0xb6, 0xd6, 0x5f, 0x4e, 0xd9, 0xdc, 0x07, 0x08, 0x4c, 0x8e, 0x3f, 0x8d, 0x80, 0x41, 0x85, 0x29, 0xf9, 0x27, 0xd5, 0x28}
 	binaryIDcallResolveTimingInfo       = binary.ID{0x14, 0x04, 0x9a, 0xe5, 0x1d, 0x0e, 0x02, 0xfd, 0x50, 0xf2, 0xe1, 0xcf, 0x35, 0x64, 0x5d, 0x64, 0x61, 0x8f, 0x4d, 0x9a}
 	binaryIDcallSet                     = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
+	binaryIDresultFollow                = binary.ID{0x9b, 0xd0, 0xad, 0xb0, 0x41, 0x98, 0x0d, 0xf5, 0x6e, 0x07, 0xe3, 0x9b, 0xc2, 0x03, 0x48, 0xfa, 0xca, 0xef, 0x4a, 0xb3}
 	binaryIDresultGet                   = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
 	binaryIDresultGetCaptures           = binary.ID{0x59, 0x90, 0x21, 0xca, 0x4f, 0xcb, 0x75, 0xa6, 0xe0, 0x20, 0x8b, 0x5f, 0xf5, 0x78, 0x1d, 0x37, 0x13, 0x27, 0xa5, 0xd3}
 	binaryIDresultGetDevices            = binary.ID{0x08, 0x5e, 0x98, 0x51, 0xfe, 0xc0, 0xaa, 0x95, 0xbc, 0x62, 0x1a, 0x28, 0x0b, 0x9f, 0xfa, 0x5d, 0x13, 0xaf, 0x21, 0x94}
@@ -1287,6 +1291,61 @@ var schemaTimingInfo = &schema.Class{
 	},
 }
 
+type binaryClasscallFollow struct{}
+
+func (*callFollow) Class() binary.Class {
+	return (*binaryClasscallFollow)(nil)
+}
+func doEncodecallFollow(e binary.Encoder, o *callFollow) error {
+	if o.p != nil {
+		if err := e.Object(o.p); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodecallFollow(d binary.Decoder, o *callFollow) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.p = obj.(path.Path)
+	} else {
+		o.p = nil
+	}
+	return nil
+}
+func doSkipcallFollow(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClasscallFollow) ID() binary.ID      { return binaryIDcallFollow }
+func (*binaryClasscallFollow) New() binary.Object { return &callFollow{} }
+func (*binaryClasscallFollow) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecallFollow(e, obj.(*callFollow))
+}
+func (*binaryClasscallFollow) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &callFollow{}
+	return obj, doDecodecallFollow(d, obj)
+}
+func (*binaryClasscallFollow) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecallFollow(d, obj.(*callFollow))
+}
+func (*binaryClasscallFollow) Skip(d binary.Decoder) error { return doSkipcallFollow(d) }
+func (*binaryClasscallFollow) Schema() *schema.Class       { return schemacallFollow }
+
+var schemacallFollow = &schema.Class{
+	TypeID:  binaryIDcallFollow,
+	Package: "service",
+	Name:    "callFollow",
+	Fields: []schema.Field{
+		{Declared: "p", Type: &schema.Interface{Name: "path.Path"}},
+	},
+}
+
 type binaryClasscallGet struct{}
 
 func (*callGet) Class() binary.Class {
@@ -2406,6 +2465,61 @@ var schemacallSet = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "p", Type: &schema.Interface{Name: "path.Path"}},
 		{Declared: "v", Type: &any.Any{}},
+	},
+}
+
+type binaryClassresultFollow struct{}
+
+func (*resultFollow) Class() binary.Class {
+	return (*binaryClassresultFollow)(nil)
+}
+func doEncoderesultFollow(e binary.Encoder, o *resultFollow) error {
+	if o.value != nil {
+		if err := e.Object(o.value); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecoderesultFollow(d binary.Decoder, o *resultFollow) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.value = obj.(path.Path)
+	} else {
+		o.value = nil
+	}
+	return nil
+}
+func doSkipresultFollow(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassresultFollow) ID() binary.ID      { return binaryIDresultFollow }
+func (*binaryClassresultFollow) New() binary.Object { return &resultFollow{} }
+func (*binaryClassresultFollow) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderesultFollow(e, obj.(*resultFollow))
+}
+func (*binaryClassresultFollow) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &resultFollow{}
+	return obj, doDecoderesultFollow(d, obj)
+}
+func (*binaryClassresultFollow) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderesultFollow(d, obj.(*resultFollow))
+}
+func (*binaryClassresultFollow) Skip(d binary.Decoder) error { return doSkipresultFollow(d) }
+func (*binaryClassresultFollow) Schema() *schema.Class       { return schemaresultFollow }
+
+var schemaresultFollow = &schema.Class{
+	TypeID:  binaryIDresultFollow,
+	Package: "service",
+	Name:    "resultFollow",
+	Fields: []schema.Field{
+		{Declared: "value", Type: &schema.Interface{Name: "path.Path"}},
 	},
 }
 

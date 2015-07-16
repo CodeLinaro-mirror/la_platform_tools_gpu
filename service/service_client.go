@@ -34,6 +34,16 @@ func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
 }
 
 // Client compliance
+func (c client) Follow(p path.Path, l log.Logger) (res path.Path, err error) {
+	var val interface{}
+	if val, err = c.Send(&callFollow{p: p}); err == nil {
+		res = val.(*resultFollow).value
+	} else {
+		log.Errorf(l, "RPC Follow failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGet{p: p}); err == nil {

@@ -23,6 +23,7 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*BuildReport)(nil).Class())
 	Namespace.Add((*ConvertImage)(nil).Class())
+	Namespace.Add((*Follow)(nil).Class())
 	Namespace.Add((*Get)(nil).Class())
 	Namespace.Add((*GetFramebufferColor)(nil).Class())
 	Namespace.Add((*GetFramebufferDepth)(nil).Class())
@@ -42,6 +43,7 @@ func init() {
 var (
 	binaryIDBuildReport                     = binary.ID{0x0d, 0xe5, 0xe5, 0x3d, 0xda, 0x87, 0xb3, 0x58, 0x27, 0x4f, 0x23, 0xcc, 0xfa, 0xa3, 0xd8, 0xd0, 0xda, 0x69, 0x46, 0x9c}
 	binaryIDConvertImage                    = binary.ID{0x13, 0xc1, 0xbc, 0x41, 0x0c, 0xa1, 0x37, 0xf7, 0xf8, 0x64, 0x8c, 0xc5, 0xff, 0x10, 0xd3, 0x32, 0x49, 0xbb, 0xf9, 0x64}
+	binaryIDFollow                          = binary.ID{0x48, 0x95, 0x04, 0x17, 0x0e, 0xe4, 0xc2, 0x25, 0x69, 0xe6, 0x51, 0xa5, 0x21, 0xf1, 0xa2, 0x7f, 0x5c, 0x9e, 0x32, 0xa7}
 	binaryIDGet                             = binary.ID{0x82, 0xb2, 0x02, 0xb1, 0xbc, 0x47, 0xaa, 0x54, 0xed, 0xd7, 0xad, 0x46, 0x6e, 0x1d, 0xa3, 0x41, 0x16, 0x54, 0xd9, 0x15}
 	binaryIDGetFramebufferColor             = binary.ID{0x1a, 0xcc, 0x5f, 0x4b, 0xe4, 0x22, 0xd7, 0x61, 0x00, 0xc8, 0xd8, 0x41, 0x30, 0xeb, 0xfe, 0x59, 0x7d, 0x4c, 0xbe, 0x9f}
 	binaryIDGetFramebufferDepth             = binary.ID{0xa7, 0x03, 0x08, 0x3d, 0x42, 0xbc, 0x22, 0x83, 0x51, 0x9f, 0xc0, 0x5f, 0xa6, 0xa2, 0x1e, 0xa7, 0x5e, 0xd6, 0xc8, 0x03}
@@ -219,6 +221,61 @@ var schemaConvertImage = &schema.Class{
 		{Declared: "Height", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 		{Declared: "FormatFrom", Type: &schema.Interface{Name: "image.Format"}},
 		{Declared: "FormatTo", Type: &schema.Interface{Name: "image.Format"}},
+	},
+}
+
+type binaryClassFollow struct{}
+
+func (*Follow) Class() binary.Class {
+	return (*binaryClassFollow)(nil)
+}
+func doEncodeFollow(e binary.Encoder, o *Follow) error {
+	if o.Path != nil {
+		if err := e.Object(o.Path); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeFollow(d binary.Decoder, o *Follow) error {
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Path = obj.(path.Path)
+	} else {
+		o.Path = nil
+	}
+	return nil
+}
+func doSkipFollow(d binary.Decoder) error {
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassFollow) ID() binary.ID      { return binaryIDFollow }
+func (*binaryClassFollow) New() binary.Object { return &Follow{} }
+func (*binaryClassFollow) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeFollow(e, obj.(*Follow))
+}
+func (*binaryClassFollow) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Follow{}
+	return obj, doDecodeFollow(d, obj)
+}
+func (*binaryClassFollow) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeFollow(d, obj.(*Follow))
+}
+func (*binaryClassFollow) Skip(d binary.Decoder) error { return doSkipFollow(d) }
+func (*binaryClassFollow) Schema() *schema.Class       { return schemaFollow }
+
+var schemaFollow = &schema.Class{
+	TypeID:  binaryIDFollow,
+	Package: "builder",
+	Name:    "Follow",
+	Fields: []schema.Field{
+		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
 	},
 }
 

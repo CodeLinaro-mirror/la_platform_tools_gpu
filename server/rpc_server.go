@@ -256,3 +256,16 @@ func (s rpcServer) Set(p path.Path, v interface{}, l log.Logger) (path.Path, err
 	}
 	return res.(path.Path), nil
 }
+
+// Follow returns the path to the object that the value at p links to.
+// If the value at p does not link to anything then nil is returned.
+func (s rpcServer) Follow(p path.Path, l log.Logger) (path.Path, error) {
+	if err := p.Validate(); err != nil {
+		return nil, err
+	}
+	res, err := database.Build(&builder.Follow{Path: p}, s.Database, l)
+	if err != nil {
+		return nil, err
+	}
+	return res.(path.Path), nil
+}
