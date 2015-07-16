@@ -28,7 +28,7 @@
 
 {{define "Spy"}}
   {{AssertType $ "API"}}
-  {{Macro "C++.AOSP.Copyright"}}
+  {{Template "C++.AOSP.Copyright"}}
   {{$spyname := Global "SpyName"}}
   {{$guard := print "GAPII_" (Upper (Global "API")) "_SPY_H"}}
 ¶
@@ -59,11 +59,11 @@
     {{ForEach (AllCommands $) "MethodDefinitions" | JoinWith "\n"}}
 ¶
   «protected:»
-    {{Macro "ApiClassnames.Imports"}} mImports;
+    {{Template "ApiClassnames.Imports"}} mImports;
 ¶
     // Globals
     {{range $g := $.Globals}}
-      {{Macro "C++.Type" $g}} {{$g.Name}};
+      {{Template "C++.Type" $g}} {{$g.Name}};
     {{end}}
 ¶
     #include "{{Global "API"}}_state_externs.inl"
@@ -92,7 +92,7 @@
 {{define "ID"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "CmdName" $ | SplitPascalCase | Upper | JoinWith "_"}}_ID
+  {{Template "CmdName" $ | SplitPascalCase | Upper | JoinWith "_"}}_ID
 {{end}}
 
 
@@ -104,7 +104,7 @@
 {{define "MethodDefinitions"}}
   {{AssertType $ "Function"}}
 
-  inline {{Macro "C++.ReturnType" $}} {{Macro "CmdName" $}}({{Macro "C++.CallParameters" $}});
+  inline {{Template "C++.ReturnType" $}} {{Template "CmdName" $}}({{Template "C++.CallParameters" $}});
 {{end}}
 
 
@@ -145,20 +145,20 @@
   {{$name    := Macro "CmdName" $}}
   {{$spyname := Global "SpyName"}}
 
-  inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
-    GAPID_INFO({{Macro "C++.PrintfCommandCall" $}});
+  inline {{Template "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Template "C++.CallParameters" $}}) {
+    GAPID_INFO({{Template "C++.PrintfCommandCall" $}});
     {{if not (IsVoid $.Return.Type)}}¶
-      {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
+      {{Template "C++.ReturnType" $}} result = {{Template "C++.Null" (TypeOf $.Return)}};
     {{end}}
 ¶
     Observations observations;
     do {
       {{Global "CurrentCommand" $}}
-      {{Macro "C++.Block" $.Block}}
+      {{Template "C++.Block" $.Block}}
     } while(false);
     observe(observations.mWrites);
 ¶
-    gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Macro "C++.CoderArguments" $}});
+    gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
     mEncoder->Object(&coder);
 
     {{if not (IsVoid $.Return.Type)}}¶
@@ -178,7 +178,7 @@
   {{AssertType $.Name      "string"}}
   {{AssertType $.Parameter "Parameter"}}
 
-  {{     if IsPseudonym   $.Type}}{{Macro "Encode" "Type" $.Type.To "Name" $.Name "Parameter" $.Parameter}}
+  {{     if IsPseudonym   $.Type}}{{Template "Encode" "Type" $.Type.To "Name" $.Name "Parameter" $.Parameter}}
   {{else if IsBool        $.Type}}mEncoder->Bool({{$.Name}});
   {{else if IsU8          $.Type}}mEncoder->Uint8({{$.Name}});
   {{else if IsS8          $.Type}}mEncoder->Int8({{$.Name}});
@@ -197,12 +197,12 @@
   {{else if IsPointer     $.Type}}mEncoder->Pointer({{$.Name}});
   {{else if IsStaticArray $.Type}}
     for (int i = 0; i < {{$.Type.Size}}; i++) {
-      {{Macro "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}
+      {{Template "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}
     }
   {{else if IsClass       $.Type}}
     mEncoder->Uint64(0); // CreatedAt
     {{range $f := $.Type.Fields}}
-      {{Macro "Encode" "Type" $f.Type "Name" (print $.Name ".m" $f.Name) "Parameter" $.Parameter}}
+      {{Template "Encode" "Type" $f.Type "Name" (print $.Name ".m" $f.Name) "Parameter" $.Parameter}}
     {{end}}
   {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
   {{end}}
@@ -216,9 +216,9 @@
 */}}
 {{define "Statement"}}
   {{     if IsReturn $}}break;
-  {{else if IsFence  $}}{{Macro "Fence" $}}
+  {{else if IsFence  $}}{{Template "Fence" $}}
   {{else if IsCopy   $}}{{Error "Copy statement found outside of a Fence"}}
-  {{else              }}{{Macro "C++.Statement.Default" $}}
+  {{else              }}{{Template "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 
@@ -237,7 +237,7 @@
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}}
       {{/* Apply the fenced-copy read */}}
-      {{Macro "C++.Type" $.Statement.Dst}} copy__dst__ = copy({{Macro "C++.Read" $.Statement.Dst}}, {{Macro "C++.Read" $.Statement.Src}});
+      {{Template "C++.Type" $.Statement.Dst}} copy__dst__ = copy({{Template "C++.Read" $.Statement.Dst}}, {{Template "C++.Read" $.Statement.Src}});
     {{end}}
   {{end}}
 
@@ -246,7 +246,7 @@
 
   {{/* Perform the call */}}
   {{if not (GetAnnotation $c "synthetic")}}
-    {{if not (IsVoid $c.Return.Type)}}result = {{end}}mImports.{{Macro "CmdName" $c}}({{Macro "C++.CallArguments" $c}});
+    {{if not (IsVoid $c.Return.Type)}}result = {{end}}mImports.{{Template "CmdName" $c}}({{Template "C++.CallArguments" $c}});
   {{end}}
 
   {{/* Perform the fenced statement */}}
@@ -254,7 +254,7 @@
     {{if IsCopy $.Statement}}
       write(copy__dst__);
     {{else}}
-      {{Macro "C++.Statement" $.Statement}}
+      {{Template "C++.Statement" $.Statement}}
     {{end}}
   {{end}}
 {{end}}

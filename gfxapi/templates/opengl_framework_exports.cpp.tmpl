@@ -33,7 +33,7 @@
   {{/* This is list of functions we need to expose. */}}
   {{$expose := $opengl_framework_exports | FilterOut $api_exports}}
 
-  {{Macro "C++.AOSP.Copyright"}}
+  {{Template "C++.AOSP.Copyright"}}
 ¶
 #include <gapic/get_gfx_proc_address.h>
 #include <gapic/target.h>
