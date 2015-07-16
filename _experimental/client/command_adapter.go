@@ -16,11 +16,8 @@ package client
 
 import (
 	"fmt"
-	"reflect"
-	"strconv"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -31,140 +28,14 @@ import (
 
 const kCommandAdapterItemHeight = 18
 
-type parser func(s string) (interface{}, bool)
-type committer func(interface{})
-
-func createEnumList(t gxui.Theme, appCtx *ApplicationContext, values interface{}, selected gxui.AdapterItem, active bool, onChange func(item gxui.AdapterItem)) gxui.DropDownList {
-	a := gxui.CreateDefaultAdapter()
-	a.SetItems(values)
-	a.SetSizeAsLargest(t)
-	a.SetStyleLabel(func(t gxui.Theme, l gxui.Label) {
-		if active {
-			l.SetColor(CONSTANT_COLOR)
-		} else {
-			l.SetColor(INACTIVE_COLOR)
-		}
-	})
-	l := t.CreateDropDownList()
-	l.SetAdapter(a)
-	l.SetBubbleOverlay(appCtx.dropDownOverlay)
-	l.Select(selected)
-	l.OnSelectionChanged(onChange)
-	return l
-}
-
-func createTextbox(t gxui.Theme, value interface{}, active bool, parse parser, commit committer) gxui.TextBox {
-	newvalue := value
-	tb := t.CreateTextBox()
-	tb.SetMargin(math.Spacing{})
-	tb.SetPadding(math.Spacing{})
-	tb.SetText(fmt.Sprintf("%v", value))
-	b := &gxui.TextBlock{Runes: []rune(tb.Text())}
-	tb.SetDesiredWidth(tb.Font().Measure(b).W + 4)
-	tb.OnTextChanged(func([]gxui.TextBoxEdit) {
-		text := tb.Text()
-		b := &gxui.TextBlock{Runes: []rune(text)}
-		tb.SetDesiredWidth(tb.Font().Measure(b).W + 4)
-		if v, ok := parse(text); ok {
-			tb.SetTextColor(CONSTANT_COLOR)
-			newvalue = v
-		} else {
-			tb.SetTextColor(gxui.Red)
-		}
-	})
-	tb.OnLostFocus(func() {
-		if value != newvalue {
-			commit(newvalue)
-		}
-	})
-	if active {
-		tb.SetTextColor(CONSTANT_COLOR)
-	} else {
-		tb.SetTextColor(INACTIVE_COLOR)
-	}
-	return tb
-}
-
-func findConstants(t schema.Type, appCtx *ApplicationContext) schema.ConstantSet {
-	set, _ := appCtx.constants[t.String()]
-	return set
-}
-
-func findConstant(s schema.ConstantSet, v interface{}) schema.Constant {
-	for _, entry := range s.Entries {
-		if entry.Value == v {
-			return entry
-		}
-	}
-	return schema.Constant{}
-}
-
-func createIntField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}, s schema.ConstantSet) gxui.Control {
-	if len(s.Entries) > 0 {
-		c := findConstant(s, v)
-		return createEnumList(t, appCtx, s.Entries, c, true, func(v gxui.AdapterItem) {
-			appCtx.Change(p, v.(schema.Constant).Value)
-		})
-	}
-	ty := reflect.TypeOf(v)
-	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
-		if i, err := strconv.ParseInt(s, 0, ty.Bits()); err == nil {
-			v := reflect.New(ty).Elem()
-			v.SetInt(i)
-			return v.Interface(), true
-		} else {
-			return nil, false
-		}
-	}, func(v interface{}) {
-		appCtx.Change(p, v)
-	})
-}
-
-func createUintField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}, s schema.ConstantSet) gxui.Control {
-	if len(s.Entries) > 0 {
-		c := findConstant(s, v)
-		return createEnumList(t, appCtx, s.Entries, c, true, func(v gxui.AdapterItem) {
-			appCtx.Change(p, v.(schema.Constant).Value)
-		})
-	}
-	ty := reflect.TypeOf(v)
-	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
-		if i, err := strconv.ParseUint(s, 0, ty.Bits()); err == nil {
-			v := reflect.New(ty).Elem()
-			v.SetUint(i)
-			return v.Interface(), true
-		} else {
-			return nil, false
-		}
-	}, func(v interface{}) {
-		appCtx.Change(p, v)
-	})
-}
-
-func createFloatField(t gxui.Theme, appCtx *ApplicationContext, p path.Path, v interface{}) gxui.Control {
-	ty := reflect.TypeOf(v)
-	return createTextbox(t, v, true, func(s string) (interface{}, bool) {
-		if i, err := strconv.ParseFloat(s, ty.Bits()); err == nil {
-			v := reflect.New(ty).Elem()
-			v.SetFloat(i)
-			return v.Interface(), true
-		} else {
-			return nil, false
-		}
-	}, func(v interface{}) {
-		appCtx.Change(p, v)
-	})
-}
-
 func createAtomControls(ctx *commandAdapterCtx, id atom.ID) gxui.Control {
 	t := ctx.appCtx.theme
 	p := ctx.capture.Atoms().Index(uint64(id))
 	a := ctx.atoms[p.Index].(*Atom)
-	active := true
 
 	layout := t.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
-	layout.AddChild(CreateLabel(t, fmt.Sprintf("%.6d ", p.Index), LINE_NUMBER_COLOR, active))
+	layout.AddChild(createLabel(ctx.appCtx, fmt.Sprintf("%.6d ", p.Index), LINE_NUMBER_COLOR))
 
 	if ns, ok := ctx.timings.AtomDuration(id); ok {
 		timeLbl := t.CreateLabel()
@@ -179,62 +50,30 @@ func createAtomControls(ctx *commandAdapterCtx, id atom.ID) gxui.Control {
 		layout.AddChild(timeLbl)
 	}
 
-	nameLbl := CreateLabel(t, atom.MetadataOf(a).DisplayName, COMMAND_COLOR, active)
+	nameLbl := createLabel(ctx.appCtx, atom.MetadataOf(a).DisplayName, COMMAND_COLOR)
 	layout.AddChild(nameLbl)
 
-	layout.AddChild(CreateLabel(t, "(", CODE_COLOR, active))
+	layout.AddChild(createLabel(ctx.appCtx, "(", CODE_COLOR))
 	needcomma := false
 	for i := 0; i < a.FieldCount(); i++ {
 		argIdx := i // capture for closures
-		info, v := a.Field(argIdx)
-		constants := findConstants(info.Type, ctx.appCtx)
-		p := p.Field(info.Name())
+		f, v := a.Field(argIdx)
+		p := p.Field(f.Name())
+		c := createField(ctx.appCtx, p, f.Type, v)
+
 		if needcomma {
-			layout.AddChild(CreateLabel(t, ", ", CODE_COLOR, active))
+			layout.AddChild(createLabel(ctx.appCtx, ", ", CODE_COLOR))
 		}
-		var c gxui.Control
 
-		switch v := schema.Underlying(v).(type) {
-		case *memory.Pointer:
-			b := t.CreateButton()
-			b.SetMargin(math.Spacing{})
-			//b.SetPadding(math.Spacing{})
-			b.AddChild(CreateLabel(t, v.String(), CONSTANT_COLOR, active))
-			//b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(*v) }) // [BENC]: TODO
-			c = b
-
-		case *atom.Observations:
-			continue //don't display observations as a parameter
-
-		case bool:
-			c = createEnumList(t, ctx.appCtx, []bool{false, true}, v, active, func(v gxui.AdapterItem) {
-				ctx.appCtx.Change(p, v)
-			})
-
-		case int8, int16, int32, int64:
-			c = createIntField(t, ctx.appCtx, p, v, constants)
-
-		case uint8, uint16, uint32, uint64:
-			c = createUintField(t, ctx.appCtx, p, v, constants)
-
-		case float32, float64:
-			c = createFloatField(t, ctx.appCtx, p, v)
-
-		default:
-			c = CreateLabel(t, fmt.Sprintf("%v", v), CONSTANT_COLOR, active)
+		if c == nil {
+			continue
 		}
 
 		layout.AddChild(c)
 		needcomma = true
-
-		ctx.appCtx.toolTipController.AddToolTip(c, 0.7, func(math.Point) gxui.Control {
-			l := t.CreateLabel()
-			l.SetText(p.Path())
-			return l
-		})
 	}
 
-	layout.AddChild(CreateLabel(t, ")", CODE_COLOR, active))
+	layout.AddChild(createLabel(ctx.appCtx, ")", CODE_COLOR))
 	return layout
 }
 
@@ -341,7 +180,7 @@ func (n observationsNode) Create(theme gxui.Theme, index int) gxui.Control {
 
 	b := theme.CreateButton()
 	b.SetMargin(math.Spacing{})
-	b.AddChild(CreateLabel(theme, r.String(), c, true))
+	b.AddChild(createLabel(n.ctx.appCtx, r.String(), c))
 	// ptr := memory.Pointer{Address: r.Base, Pool: memory.ApplicationPool}
 	// b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectPointer(ptr) }) // [BENC]: TODO
 	return b
