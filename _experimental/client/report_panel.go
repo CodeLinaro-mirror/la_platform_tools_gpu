@@ -17,6 +17,7 @@ package client
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 	"android.googlesource.com/platform/tools/gpu/task"
@@ -103,9 +104,9 @@ func (a *ReportAdapter) Create(t gxui.Theme, index int) gxui.Control {
 	label.SetText(fmt.Sprintf("%.5d %s %s", item.Atom, item.Severity, item.Message))
 
 	switch item.Severity {
-	case service.SeverityWarning:
+	case log.Warning:
 		label.SetColor(gxui.Yellow)
-	case service.SeverityError, service.SeverityCritical:
+	case log.Error, log.Critical:
 		label.SetColor(gxui.Red)
 	}
 

@@ -39,7 +39,7 @@ func (r *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger
 		defer func() {
 			if err := recover(); err != nil {
 				report.Items = append(report.Items, service.ReportItem{
-					Severity: service.SeverityCritical,
+					Severity: log.Critical,
 					Message:  fmt.Sprintf("%s", err),
 					Atom:     uint64(i),
 				})
@@ -47,7 +47,7 @@ func (r *BuildReport) BuildLazy(c interface{}, d database.Database, l log.Logger
 		}()
 		if err := a.Mutate(s, d, l); err != nil {
 			report.Items = append(report.Items, service.ReportItem{
-				Severity: service.SeverityError,
+				Severity: log.Error,
 				Message:  err.Error(),
 				Atom:     uint64(i),
 			})
