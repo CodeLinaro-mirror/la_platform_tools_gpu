@@ -107,20 +107,6 @@ func (r Resolver) ResolveBinary(id BinaryID, l log.Logger) (res []uint8, err err
 type ApiID binary.ID
 type BinaryID binary.ID
 
-// Enum Severity
-type Severity int
-
-const (
-	SeverityEmergency     Severity = 0 // Errors that indicate a failure of the server, no further data should be trusted.
-	SeverityAlert         Severity = 1 // Errors that indicate a failure of the server, possibly recoverable.
-	SeverityCritical      Severity = 2 // Errors so severe that no further analysis or replay can be performed beyond this point.
-	SeverityError         Severity = 3 // Errors describing problems that should be fixed. Likely to result in undefined behavior.
-	SeverityWarning       Severity = 4 // Warnings describe issues that might affect performance or compatibility, but could be ignored.
-	SeverityNotice        Severity = 5 // Normal but significant condition message.
-	SeverityInformational Severity = 6 // Informational messages, safe to ignore.
-	SeverityDebug         Severity = 7 // Verbose, debug-level messages.
-)
-
 // The enumerator of image formats. Will expand.
 type ImageFormat int
 
@@ -184,9 +170,9 @@ type Report struct {
 // ReportItem represents an entry in a report.
 type ReportItem struct {
 	binary.Generate
-	Severity Severity // The severity of the report item.
-	Message  string   // The message for the item.
-	Atom     uint64   // The index of the atom the item refers to.
+	Severity log.Severity // The severity of the report item.
+	Message  string       // The message for the item.
+	Atom     uint64       // The index of the atom the item refers to.
 }
 
 type AtomStreamID binary.ID
