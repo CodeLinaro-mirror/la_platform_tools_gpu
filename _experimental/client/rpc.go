@@ -19,6 +19,7 @@ import (
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -89,8 +90,9 @@ func (r *rpc) GetCaptures() (map[service.CaptureID]service.Capture, error) {
 		i := i
 		go func() {
 			defer wg.Done()
-			if capture, err := r.client.ResolveCapture(ids[i], l); err == nil {
-				captures[i] = &capture
+			p := &path.Capture{ID: binary.ID(ids[i])}
+			if capture, err := r.client.Get(p, l); err == nil {
+				captures[i] = capture.(*service.Capture)
 			} else {
 				log.E(l, "Failed to resolve capture %v: %v", ids[i], err)
 			}
