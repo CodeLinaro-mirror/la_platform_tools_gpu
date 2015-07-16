@@ -7,6 +7,14 @@ package service
 
 import "fmt"
 
+func (c callFollow) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Follow(p: %v)",
+		c.p,
+	)
+}
+func (r resultFollow) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callGet) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Get(p: %v)",
 		c.p,
