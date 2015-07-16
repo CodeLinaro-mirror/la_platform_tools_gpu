@@ -86,7 +86,6 @@ type RPC interface {
 
 	ResolveAtomStream(id AtomStreamID, l log.Logger) (AtomStream, error)
 	ResolveBinary(id BinaryID, l log.Logger) ([]uint8, error)
-	ResolveCapture(id CaptureID, l log.Logger) (Capture, error)
 	ResolveDevice(id DeviceID, l log.Logger) (Device, error)
 	ResolveImageInfo(id ImageInfoID, l log.Logger) (ImageInfo, error)
 	ResolveMemoryInfo(id MemoryInfoID, l log.Logger) (MemoryInfo, error)
