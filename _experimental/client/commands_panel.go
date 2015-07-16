@@ -32,7 +32,9 @@ func CreateCommandsPanel(appCtx *ApplicationContext) gxui.Control {
 	timer := (*time.Timer)(nil)
 	selectSelection := func() {
 		appCtx.Run(func() {
-			appCtx.events.Select(adapter.Path(tree.Selected()))
+			if p := adapter.Path(tree.Selected()); p != nil {
+				appCtx.events.Select(p)
+			}
 		})
 	}
 
