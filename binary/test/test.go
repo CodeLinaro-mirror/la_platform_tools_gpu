@@ -23,6 +23,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/objects"
 )
 
+// binary: java.source = base/rpclib/src/test/java
+// binary: java.package = com.android.tools.rpclib.binary
+// binary: java.member_prefix = m
+
 type TypeA struct {
 	binary.Generate `id:"TypeAID"`
 	Data            string
