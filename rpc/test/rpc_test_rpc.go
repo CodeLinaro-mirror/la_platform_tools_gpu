@@ -16,7 +16,6 @@ package test
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -31,10 +30,6 @@ type RPC interface {
 	ResolveResource(r ResourceID, l log.Logger) (Resource, error)
 	SetStruct(s Struct, l log.Logger) error
 	UseResource(r ResourceID, l log.Logger) error
-}
-
-type Resolver struct {
-	Database database.Database
 }
 
 // Enum Enum
@@ -56,10 +51,10 @@ type ResourceID binary.ID
 
 // Class Resource
 type Resource struct {
-	binary.Generate `handle:"ResourceID"`
-	Int             uint32
-	Float           float32
-	String          string
+	binary.Generate
+	Int    uint32
+	Float  float32
+	String string
 }
 
 // Class Struct

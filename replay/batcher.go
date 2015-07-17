@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -69,12 +70,12 @@ func (b *batcher) run() {
 }
 
 func (b *batcher) send(requests []Request) (err error) {
-	c, err := service.ResolveCapture(b.context.CaptureID, b.database, b.logger)
+	c, err := service.ResolveCapture(b.context.Capture.ID, b.database, b.logger)
 	if err != nil {
-		return fmt.Errorf("Failed to load capture (%s): %v", b.context.CaptureID, err)
+		return fmt.Errorf("Failed to load capture (%s): %v", b.context.Capture, err)
 	}
 
-	stream, err := service.ResolveAtomStream(c.Atoms, b.database, b.logger)
+	stream, err := service.ResolveAtomStream(binary.ID(c.Atoms), b.database, b.logger)
 	if err != nil {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}

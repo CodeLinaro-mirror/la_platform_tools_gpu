@@ -35,7 +35,7 @@ import (
 
 // The list of captures currently imported.
 // TODO: This needs to be moved to persistent storage.
-var captures = []service.CaptureID{}
+var captures = []*path.Capture{}
 
 // Context is the type that should be passed to the database constructor's
 // buildContext parameter.
@@ -91,16 +91,16 @@ func extractResources(atoms atom.List, d database.Database, l log.Logger) (atom.
 
 // ImportCapture builds a new capture containing atoms, stores it into db and
 // returns the new capture identifier.
-func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (service.CaptureID, error) {
+func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (*path.Capture, error) {
 	atoms, err := extractResources(atoms, d, l)
 	if err != nil {
-		return service.CaptureID{}, err
+		return nil, err
 	}
 
-	stream := service.AtomStream{Atoms: atoms}
-	streamID, err := service.StoreAtomStream(&stream, d, l)
+	stream := &service.AtomStream{Atoms: atoms}
+	streamID, err := database.Store(stream, d, l)
 	if err != nil {
-		return service.CaptureID{}, err
+		return nil, err
 	}
 
 	// Gather all the APIs used by the capture
@@ -118,21 +118,22 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 	capture := &service.Capture{
 		Apis:  apiIDs,
 		Name:  name,
-		Atoms: streamID,
+		Atoms: service.AtomsID(streamID),
 	}
 
-	captureID, err := service.StoreCapture(capture, d, l)
+	captureID, err := database.Store(capture, d, l)
 	if err != nil {
-		return service.CaptureID{}, err
+		return nil, err
 	}
 
-	captures = append(captures, captureID)
+	p := &path.Capture{ID: captureID}
+	captures = append(captures, p)
 
-	return captureID, nil
+	return p, nil
 }
 
 // Captures returns all the captures stored by the database by identifier.
-func Captures(db database.Database, logger log.Logger) ([]service.CaptureID, error) {
+func Captures(db database.Database, logger log.Logger) ([]*path.Capture, error) {
 	return captures, nil
 }
 

@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -51,11 +50,11 @@ func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	<body>
 `)
 
-	for _, id := range captures {
-		capture, err := service.ResolveCapture(id, h.d, h.l)
+	for _, p := range captures {
+		capture, err := service.ResolveCapture(p.ID, h.d, h.l)
 		if err == nil {
 			fmt.Fprintf(res, `			<a href="%s%s?%s=%s">%s</a><br/>`,
-				h.c.HttpAddress, atomsRoute, idParamName, binary.ID(id), capture.Name)
+				h.c.HttpAddress, atomsRoute, idParamName, p.ID, capture.Name)
 		}
 	}
 	fmt.Fprint(res, "	</body>\n</html>")

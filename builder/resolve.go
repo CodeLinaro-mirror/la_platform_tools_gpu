@@ -5,6 +5,7 @@ import (
 	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -53,26 +54,54 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 	for i, p := range paths {
 		switch p := p.(type) {
 		case *path.Capture:
-			capture, err := service.ResolveCapture(service.CaptureID(p.ID), d, l)
+			capture, err := service.ResolveCapture(p.ID, d, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = &capture
+			v[i] = capture
 
 		case *path.Device:
-			device, err := service.ResolveDevice(service.DeviceID(p.ID), d, l)
+			device, err := service.ResolveDevice(p.ID, d, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = &device
+			v[i] = device
+
+		case *path.ImageInfo:
+			r, err := service.ResolveImageInfo(p.ID, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = r
+
+		case *path.MemoryInfo:
+			r, err := service.ResolveMemoryInfo(p.ID, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = r
+
+		case *path.TimingInfo:
+			r, err := service.ResolveTimingInfo(p.ID, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = r
+
+		case *path.Blob:
+			blob, err := service.ResolveBlob(p.ID, d, l)
+			if err != nil {
+				return nil, err
+			}
+			v[i] = blob
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)
-			atoms, err := service.ResolveAtomStream(capture.Atoms, d, l)
+			atoms, err := service.ResolveAtomStream(binary.ID(capture.Atoms), d, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = &atoms
+			v[i] = atoms
 
 		case *path.Report:
 			report, err := database.Build(&BuildReport{Capture: p.Capture}, d, l)
