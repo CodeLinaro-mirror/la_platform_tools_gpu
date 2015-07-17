@@ -102,8 +102,8 @@ func createPanels(appCtx *ApplicationContext, window gxui.Window) gxui.Control {
 }
 
 type capture struct {
-	id   service.CaptureID
-	info service.Capture
+	path *path.Capture
+	info *service.Capture
 }
 
 type captureAdapter struct {
@@ -116,13 +116,13 @@ func (a *captureAdapter) Count() int {
 }
 
 func (a *captureAdapter) ItemAt(index int) gxui.AdapterItem {
-	return a.items[index].id
+	return a.items[index].path.ID
 }
 
 func (a *captureAdapter) ItemIndex(item gxui.AdapterItem) int {
-	id := item.(service.CaptureID)
+	p := item.(*path.Capture)
 	for i := range a.items {
-		if a.items[i].id == id {
+		if path.Equal(a.items[i].path, p) {
 			return i
 		}
 	}
@@ -145,19 +145,15 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.events.Select(item.(service.CaptureID).Path())
+		appCtx.events.Select(item.(*path.Capture))
 	})
 
 	list.OnAttach(func() {
 		go func() {
 			for list.Attached() { // While the list control is visible
 				if captures, err := appCtx.rpc.GetCaptures(); err == nil {
-					items := make([]capture, 0, len(captures))
-					for i, c := range captures {
-						items = append(items, capture{id: i, info: c})
-					}
 					appCtx.Run(func() {
-						adapter.items = items
+						adapter.items = captures
 						adapter.DataChanged()
 					})
 				}
@@ -170,8 +166,8 @@ func createCaptureList(appCtx *ApplicationContext) gxui.DropDownList {
 }
 
 type device struct {
-	id   service.DeviceID
-	info service.Device
+	path *path.Device
+	info *service.Device
 }
 
 type deviceAdapter struct {
@@ -184,13 +180,13 @@ func (a *deviceAdapter) Count() int {
 }
 
 func (a *deviceAdapter) ItemAt(index int) gxui.AdapterItem {
-	return a.items[index].id
+	return a.items[index].path.ID
 }
 
 func (a *deviceAdapter) ItemIndex(item gxui.AdapterItem) int {
-	id := item.(service.DeviceID)
+	p := item.(*path.Device)
 	for i := range a.items {
-		if a.items[i].id == id {
+		if path.Equal(a.items[i].path, p) {
 			return i
 		}
 	}
@@ -215,22 +211,18 @@ func createDeviceList(appCtx *ApplicationContext) gxui.DropDownList {
 	list.SetBubbleOverlay(appCtx.dropDownOverlay)
 	list.SetAdapter(adapter)
 	list.OnSelectionChanged(func(item gxui.AdapterItem) {
-		appCtx.events.Select(item.(service.DeviceID).Path())
+		appCtx.events.Select(item.(*path.Device))
 	})
 
 	list.OnAttach(func() {
 		go func() {
 			for list.Attached() { // While the list control is visible
 				if devices, err := appCtx.rpc.GetDevices(); err == nil {
-					items := make([]device, 0, len(devices))
-					for i, d := range devices {
-						items = append(items, device{id: i, info: d})
-					}
 					appCtx.Run(func() {
-						adapter.items = items
+						adapter.items = devices
 						adapter.DataChanged()
-						if list.Selected() == nil && len(items) > 0 {
-							list.Select(items[0].id)
+						if list.Selected() == nil && len(devices) > 0 {
+							list.Select(devices[0].path)
 						}
 					})
 				}

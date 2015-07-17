@@ -18,7 +18,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -32,36 +31,36 @@ type RPC interface {
 
 	// Import imports capture data emitted by the graphics spy, returning the new
 	// capture identifier.
-	Import(name string, Data []uint8, l log.Logger) (CaptureID, error)
+	Import(name string, Data []uint8, l log.Logger) (*path.Capture, error)
 
 	// GetCaptures returns the full list of capture identifiers avaliable on the
 	// server.
-	GetCaptures(l log.Logger) ([]CaptureID, error)
+	GetCaptures(l log.Logger) ([]*path.Capture, error)
 
 	// GetDevices returns the full list of replay devices avaliable to the server.
 	// These include local replay devices and any connected Android devices.
 	// This list may change over time, as devices are connected and disconnected.
-	GetDevices(l log.Logger) ([]DeviceID, error)
+	GetDevices(l log.Logger) ([]*path.Device, error)
 
 	// GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 	// for the given capture and range, immediately following the atom
 	// after.
-	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (MemoryInfoID, error)
+	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (*path.MemoryInfo, error)
 
 	// GetFramebufferColor returns the ImageInfo identifier describing the bound
 	// color buffer for the given device, immediately following the atom after.
 	// The provided RenderSettings structure can be used to adjust maximum desired
 	// dimensions of the image, as well as applying debug visualizations.
-	GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (ImageInfoID, error)
+	GetFramebufferColor(device *path.Device, after *path.Atom, settings RenderSettings, l log.Logger) (*path.ImageInfo, error)
 
 	// GetFramebufferDepth returns the ImageInfo identifier describing the bound
 	// depth buffer for the given device, immediately following the atom after.
-	GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (ImageInfoID, error)
+	GetFramebufferDepth(device *path.Device, after *path.Atom, l log.Logger) (*path.ImageInfo, error)
 
 	// GetTimingInfo performs timings of the given capture on the given device,
 	// returning an identifier to the results.
 	// This function is experimental and will change signature.
-	GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (TimingInfoID, error)
+	GetTimingInfo(device *path.Device, capture *path.Capture, flags TimingFlags, l log.Logger) (*path.TimingInfo, error)
 
 	// PrerenderFramebuffers renders the framebuffer contents after each of the
 	// given atoms of interest in the given capture on the given device for the
@@ -70,7 +69,7 @@ type RPC interface {
 	// return any data, as it is used to pre-populate the cache of framebuffer
 	// thumbnails that later get queried by the client. This function is
 	// experimental and may change signature.
-	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (BinaryID, error)
+	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (*path.Blob, error)
 
 	// Get resolves and returns the object, value or memory at the path p.
 	Get(p path.Path, l log.Logger) (interface{}, error)
@@ -83,27 +82,10 @@ type RPC interface {
 	// Follow returns the path to the object that the value at p links to.
 	// If the value at p does not link to anything then nil is returned.
 	Follow(p path.Path, l log.Logger) (path.Path, error)
-
-	ResolveAtomStream(id AtomStreamID, l log.Logger) (AtomStream, error)
-	ResolveBinary(id BinaryID, l log.Logger) ([]uint8, error)
-	ResolveImageInfo(id ImageInfoID, l log.Logger) (ImageInfo, error)
-	ResolveMemoryInfo(id MemoryInfoID, l log.Logger) (MemoryInfo, error)
-	ResolveTimingInfo(id TimingInfoID, l log.Logger) (TimingInfo, error)
-}
-
-type Resolver struct {
-	Database database.Database
-}
-
-func (r Resolver) ResolveBinary(id BinaryID, l log.Logger) (res []uint8, err error) {
-	if out, err := r.Database.Resolve(binary.ID(id), l); err == nil {
-		res = out.([]uint8)
-	}
-	return res, err
 }
 
 type ApiID binary.ID
-type BinaryID binary.ID
+type AtomsID binary.ID
 
 // The enumerator of image formats. Will expand.
 type ImageFormat int
@@ -132,14 +114,12 @@ type Schema struct {
 	Constants []schema.ConstantSet // All the constants the schema includes
 }
 
-type CaptureID binary.ID
-
 // Capture describes single capture file held by the server.
 type Capture struct {
-	binary.Generate `handle:"CaptureID"`
-	Name            string       // Name given to the capture. e.g. "KittyWorld"
-	Atoms           AtomStreamID // The identifier of the stream of atoms in this capture.
-	Apis            []ApiID      // List of graphics APIs used by this capture.
+	binary.Generate `path:"path.Capture"`
+	Name            string  // Name given to the capture. e.g. "KittyWorld"
+	Atoms           AtomsID // The path to the stream of atoms in this capture.
+	Apis            []ApiID // List of graphics APIs used by this capture.
 }
 
 // Report describes all warnings and errors found by a capture.
@@ -156,11 +136,9 @@ type ReportItem struct {
 	Atom     uint64       // The index of the atom the item refers to.
 }
 
-type AtomStreamID binary.ID
-
 // AtomStream holds a stream of atoms.
 type AtomStream struct {
-	binary.Generate `handle:"AtomStreamID"`
+	binary.Generate `path:"path.Atoms"`
 	Atoms           []atom.Atom
 }
 
@@ -170,36 +148,30 @@ type Hierarchy struct {
 	Root atom.Group
 }
 
-type MemoryInfoID binary.ID
-
 // MemoryInfo describes the state of a range of memory at a specific point in
 // the atom stream.
 type MemoryInfo struct {
-	binary.Generate `handle:"MemoryInfoID"`
+	binary.Generate `path:"path.MemoryInfo"`
 	Data            []uint8          // The memory values for the span.
 	Reads           memory.RangeList // The Data-relative ranges that were read-from at the specified atom.
 	Writes          memory.RangeList // The Data-relative ranges that were written-to at the specified atom.
 	Observed        memory.RangeList // The Data-relative ranges that have been observed.
 }
 
-type ImageInfoID binary.ID
-
 // ImageInfo describes an image, such as a texture or framebuffer at a specific
 // point in the atom stream.
 type ImageInfo struct {
-	binary.Generate `handle:"ImageInfoID"`
+	binary.Generate `path:"path.ImageInfo"`
 	Format          ImageFormat // The format of the image.
 	Width           uint32      // The width of the image in pixels.
 	Height          uint32      // The height of the image in pixels.
-	Data            BinaryID    // The pixel data of the image.
+	Data            *path.Blob  // The pixel data of the image.
 }
-
-type TimingInfoID binary.ID
 
 // TimingInfo holds the results of a resolved GetTimingInfo request.
 // This is experimental and will change in the near future.
 type TimingInfo struct {
-	binary.Generate `handle:"TimingInfoID"`
+	binary.Generate `path:"path.TimingInfo"`
 	PerCommand      []AtomTimer      // The timing results of each command.
 	PerDrawCall     []AtomRangeTimer // The timing results of each draw call.
 	PerFrame        []AtomRangeTimer // The timing results of each frame.

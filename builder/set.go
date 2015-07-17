@@ -58,15 +58,15 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 
 		case *path.Atoms:
 			stream := v[i].(*service.AtomStream)
-			streamID, err := service.StoreAtomStream(stream, d, l)
+			streamID, err := database.Store(stream, d, l)
 			if err != nil {
 				return nil, err
 			}
 
-			capture := v[i-1].(*service.Capture)
+			capture := *v[i-1].(*service.Capture)
 			capture.Name = capture.Name + "*"
-			capture.Atoms = streamID
-			v[i-1] = capture
+			capture.Atoms = service.AtomsID(streamID)
+			v[i-1] = &capture
 
 		case *path.Report:
 			return nil, fmt.Errorf("Reports are immutable")

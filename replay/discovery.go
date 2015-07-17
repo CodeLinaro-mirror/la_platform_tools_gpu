@@ -24,44 +24,41 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // discovery is used to find replay devices on the local machine and connected
 // Android devices.
 type discovery struct {
 	sync.Mutex
-	devices map[service.DeviceID]Device
+	devices []Device
 	logger  log.Logger
 }
 
 func newDiscovery(db database.Database, logger log.Logger) *discovery {
-	m := &discovery{
-		devices: make(map[service.DeviceID]Device),
-		logger:  logger,
-	}
-
+	m := &discovery{logger: logger}
 	go m.discoverLocalDevices(db)
 	go m.discoverAndroidDevices(db)
 
 	return m
 }
 
-func (d *discovery) device(id service.DeviceID) Device {
+func (d *discovery) device(p *path.Device) Device {
 	d.Lock()
 	defer d.Unlock()
-
-	return d.devices[id]
+	for _, d := range d.devices {
+		if path.Equal(d.Path(), p) {
+			return d
+		}
+	}
+	return nil
 }
 
 func (d *discovery) getDevices() []Device {
 	d.Lock()
 	defer d.Unlock()
 
-	out := make([]Device, 0, len(d.devices))
-	for _, d := range d.devices {
-		out = append(out, d)
-	}
-	return out
+	return d.devices
 }
 
 func (m *discovery) discoverAndroidDevices(db database.Database) {
@@ -75,11 +72,11 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 		if err != nil {
 			panic(err)
 		}
-		d.id = service.DeviceID(id)
+		d.path = &path.Device{ID: id}
 
 		m.Lock()
 		defer m.Unlock()
-		m.devices[d.id] = d
+		m.devices = append(m.devices, d)
 	} else {
 		log.Infof(m.logger, "Failed to communicate with Android device '%s': %v", d.Info().Name, err)
 	}
@@ -96,11 +93,11 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 		if err != nil {
 			panic(err)
 		}
-		d.id = service.DeviceID(id)
+		d.path = &path.Device{ID: id}
 
 		m.Lock()
 		defer m.Unlock()
-		m.devices[d.id] = d
+		m.devices = append(m.devices, d)
 	} else {
 		log.Warningf(m.logger, "Failed to communicate with local device '%s': %v", d.Info().Name, err)
 	}

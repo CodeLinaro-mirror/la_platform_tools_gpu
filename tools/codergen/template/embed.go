@@ -10,9 +10,9 @@ var embedded = map[string]string{
 	go_binary_tmpl_file:   go_binary_tmpl,
 	go_client_tmpl_file:   go_client_tmpl,
 	go_common_tmpl_file:   go_common_tmpl,
-	go_database_tmpl_file: go_database_tmpl,
 	go_extra_tmpl_file:    go_extra_tmpl,
 	go_helpers_tmpl_file:  go_helpers_tmpl,
+	go_path_tmpl_file:     go_path_tmpl,
 	go_server_tmpl_file:   go_server_tmpl,
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
@@ -497,45 +497,6 @@ import (
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
 `
-const go_database_tmpl_file = `go_database.tmpl`
-const go_database_tmpl = `{{/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */}}
-
-{{define "Go.Database"}}{{template "Go.Prelude" .}}
-
-{{range .Structs}}{{if $handle := .Tag "handle" ""}}// Store{{.Name}} stores v into the database d, returning the {{$handle}}.
-func Store{{.Name}}(v *{{.Name}}, d database.Database, l log.Logger) ({{$handle}}, error) {
-	id, err := database.Store(v, d, l)
-	return {{$handle}}(id), err
-}
-
-// Resolve{{.Name}} loads and returns the {{.Name}} stored in the database d, using id.
-func Resolve{{.Name}}(id {{$handle}}, d database.Database, l log.Logger) (res {{.Name}}, err error) {
-	if out, err := d.Resolve(binary.ID(id), l); err == nil {
-		res = *(out.(*{{.Name}}))
-	}
-	return res, err
-}
-
-// Resolve{{.Name}} loads and returns the {{.Name}} stored in the resolver's database, using id.
-func (r Resolver) Resolve{{.Name}}(id {{$handle}}, l log.Logger) ({{.Name}}, error) {
-	return Resolve{{.Name}}(id, r.Database, l)
-}
-{{end}}{{end}}{{end}}
-`
 const go_extra_tmpl_file = `go_extra.tmpl`
 const go_extra_tmpl = `{{/*
  * Copyright (C) 2015 The Android Open Source Project
@@ -598,6 +559,47 @@ func (c {{.Call.Name}}) Format(f fmt.State, r rune) {
 func (r {{.Result.Name}}) Format(f fmt.State, c rune) {
   {{if .Result.Type}}fmt.Fprintf(f, "res: %#v", r.value){{else}}fmt.Fprintf(f, "void"){{end}}
 }{{end}}{{end}}
+`
+const go_path_tmpl_file = `go_path.tmpl`
+const go_path_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Go.Path"}}{{template "Go.Prelude" .}}
+{{range .Structs}}{{if $path := .Tag "path" ""}}
+// Resolve{{.Name}} resolves a binary.ID and then safely casts the result to a *{{.Name}}.
+func Resolve{{.Name}}(id binary.ID, d database.Database, l log.Logger) (*{{.Name}}, error) {
+  if v, err := database.Resolve(id, d, l); err != nil {
+	   return nil, err
+	} else if r, ok := v.(*{{.Name}}); !ok {
+		return nil, fmt.Errorf("ID %s gave %T, expected {{.Name}}", id, v)
+	} else {
+		return r, nil
+	}
+}
+
+// Get{{.Name}} calls s.Get with p and then safely casts the result to a *{{.Name}}.
+func Get{{.Name}}(p *{{$path}}, s RPC, l log.Logger) (*{{.Name}}, error) {
+  if v, err := s.Get(p, l); err != nil {
+     return nil, err
+  } else if r, ok := v.(*{{.Name}}); !ok {
+    return nil, fmt.Errorf("path %s gave %T, expected {{.Name}}", p, v)
+  } else {
+    return r, nil
+  }
+} {{end}}{{end}}{{end}}
 `
 const go_server_tmpl_file = `go_server.tmpl`
 const go_server_tmpl = `{{/*
