@@ -48,18 +48,18 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	var capture service.Capture
+	var capture *service.Capture
 
 	if id := req.URL.Query().Get(idParamName); id != "" {
-		for _, cid := range captures {
-			if strings.EqualFold(binary.ID(cid).String(), id) {
-				capture, err = service.ResolveCapture(cid, h, logger)
+		for _, p := range captures {
+			if strings.EqualFold(p.ID.String(), id) {
+				capture, err = service.ResolveCapture(p.ID, h, logger)
 				break
 			}
 		}
 	} else if name := req.URL.Query().Get(nameParamName); name != "" {
-		for _, id := range captures {
-			capture, err = service.ResolveCapture(id, h, logger)
+		for _, p := range captures {
+			capture, err = service.ResolveCapture(p.ID, h, logger)
 			if strings.EqualFold(capture.Name, name) {
 				break
 			}
@@ -75,7 +75,7 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	stream, err := service.ResolveAtomStream(capture.Atoms, h, log.Nop{})
+	stream, err := service.ResolveAtomStream(binary.ID(capture.Atoms), h, log.Nop{})
 	if err != nil {
 		panic(err)
 	}

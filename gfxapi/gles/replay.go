@@ -114,7 +114,7 @@ func (a api) ReplayTransforms(
 
 	// Device-dependent transforms.
 	transforms.Add(
-		decompressTextures(device, ctx.CaptureID, db, logger),
+		decompressTextures(device, ctx.Capture, db, logger),
 		precisionStrip(device, db, logger),
 		halfFloatOESToHalfFloatARB(device))
 

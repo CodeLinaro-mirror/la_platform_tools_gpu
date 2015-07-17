@@ -19,7 +19,6 @@ import (
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -76,7 +75,7 @@ func (r *rpc) beginRPC(name string) log.Logger {
 	return log.Enter(log.Fork(r.logger), name)
 }
 
-func (r *rpc) GetCaptures() (map[service.CaptureID]service.Capture, error) {
+func (r *rpc) GetCaptures() ([]capture, error) {
 	l := r.beginRPC("GetCaptures")
 	ids, err := r.client.GetCaptures(l)
 	if err != nil {
@@ -85,31 +84,24 @@ func (r *rpc) GetCaptures() (map[service.CaptureID]service.Capture, error) {
 
 	wg := sync.WaitGroup{}
 	wg.Add(len(ids))
-	captures := make([]*service.Capture, len(ids))
+	captures := make([]capture, len(ids))
 	for i := range ids {
 		i := i
 		go func() {
 			defer wg.Done()
-			p := &path.Capture{ID: binary.ID(ids[i])}
-			if capture, err := r.client.Get(p, l); err == nil {
-				captures[i] = capture.(*service.Capture)
+			captures[i].path = ids[i]
+			if c, err := service.GetCapture(captures[i].path, r.client, l); err == nil {
+				captures[i].info = c
 			} else {
 				log.E(l, "Failed to resolve capture %v: %v", ids[i], err)
 			}
 		}()
 	}
 	wg.Wait()
-
-	m := make(map[service.CaptureID]service.Capture, len(ids))
-	for i := range ids {
-		if c := captures[i]; c != nil {
-			m[ids[i]] = *c
-		}
-	}
-	return m, nil
+	return captures, nil
 }
 
-func (r *rpc) GetDevices() (map[service.DeviceID]service.Device, error) {
+func (r *rpc) GetDevices() ([]device, error) {
 	l := r.beginRPC("GetDevices")
 	ids, err := r.client.GetDevices(l)
 	if err != nil {
@@ -118,31 +110,24 @@ func (r *rpc) GetDevices() (map[service.DeviceID]service.Device, error) {
 
 	wg := sync.WaitGroup{}
 	wg.Add(len(ids))
-	devices := make([]*service.Device, len(ids))
+	devices := make([]device, len(ids))
 	for i := range ids {
 		i := i
 		go func() {
 			defer wg.Done()
-			p := &path.Device{ID: binary.ID(ids[i])}
-			if device, err := r.client.Get(p, l); err == nil {
-				devices[i] = device.(*service.Device)
+			devices[i].path = ids[i]
+			if d, err := service.GetDevice(devices[i].path, r.client, l); err == nil {
+				devices[i].info = d
 			} else {
-				log.E(l, "Failed to resolve device %v: %v", ids[i], err)
+				log.E(l, "Failed to resolve device %v: %v", devices[i].path, err)
 			}
 		}()
 	}
 	wg.Wait()
-
-	m := make(map[service.DeviceID]service.Device, len(ids))
-	for i := range ids {
-		if d := devices[i]; d != nil {
-			m[ids[i]] = *d
-		}
-	}
-	return m, nil
+	return devices, nil
 }
 
-func (r *rpc) Import(name string, data []byte) (service.CaptureID, error) {
+func (r *rpc) Import(name string, data []byte) (*path.Capture, error) {
 	l := r.beginRPC("Import")
 
 	id, err := r.client.Import(name, data, l)
@@ -153,16 +138,15 @@ func (r *rpc) Import(name string, data []byte) (service.CaptureID, error) {
 	return id, err
 }
 
-func (r *rpc) LoadCapture(captureID service.CaptureID) (service.Capture, error) {
+func (r *rpc) LoadCapture(p *path.Capture) (service.Capture, error) {
 	l := r.beginRPC("LoadCapture")
 
-	capture, err := r.client.Get(captureID.Path(), l)
-	if err != nil {
+	if capture, err := service.GetCapture(p, r.client, l); err == nil {
 		log.E(l, "Error getting capture: %v", err)
 		return service.Capture{}, err
+	} else {
+		return *capture, nil
 	}
-
-	return *capture.(*service.Capture), nil
 }
 
 func (r *rpc) LoadAtoms(p *path.Atoms) ([]atom.Atom, error) {
@@ -192,17 +176,17 @@ func (r *rpc) LoadHierarchy(p *path.Hierarchy) (atom.Group, error) {
 func (r *rpc) LoadTiming(device *path.Device, capture *path.Capture, flags service.TimingFlags) (service.TimingInfo, error) {
 	l := r.beginRPC("LoadTiming")
 
-	timingInfoID, err := r.client.GetTimingInfo(device, capture, flags, l)
+	p, err := r.client.GetTimingInfo(device, capture, flags, l)
 	if err != nil {
 		return service.TimingInfo{}, err
 	}
 
-	timingInfo, err := r.client.ResolveTimingInfo(timingInfoID, l)
+	timingInfo, err := service.GetTimingInfo(p, r.client, l)
 	if err != nil {
 		return service.TimingInfo{}, err
 	}
 
-	return timingInfo, nil
+	return *timingInfo, nil
 }
 
 func (r *rpc) LoadReport(capture *path.Capture) (service.Report, error) {
@@ -237,12 +221,12 @@ func (r *rpc) RequestColorBuffer(device *path.Device, after *path.Atom, settings
 		return 0, 0, nil, err
 	}
 
-	imageInfo, err := r.client.ResolveImageInfo(imageID, l)
+	imageInfo, err := service.GetImageInfo(imageID, r.client, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}
 
-	data, err := r.client.ResolveBinary(imageInfo.Data, l)
+	data, err := service.GetBlob(imageInfo.Data, r.client, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}
@@ -261,12 +245,12 @@ func (r *rpc) RequestDepthBuffer(device *path.Device, after *path.Atom) (w, h in
 		return 0, 0, nil, err
 	}
 
-	imageInfo, err := r.client.ResolveImageInfo(imageID, l)
+	imageInfo, err := service.GetImageInfo(imageID, r.client, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}
 
-	data, err := r.client.ResolveBinary(imageInfo.Data, l)
+	data, err := service.GetBlob(imageInfo.Data, r.client, l)
 	if err != nil {
 		return 0, 0, nil, err
 	}
@@ -286,12 +270,12 @@ func (r *rpc) RequestMemory(after *path.Atom, base uint64, size uint64) (service
 		return service.MemoryInfo{}, err
 	}
 
-	info, err := r.client.ResolveMemoryInfo(id, l)
+	info, err := service.GetMemoryInfo(id, r.client, l)
 	if err != nil {
 		return service.MemoryInfo{}, err
 	}
 
-	return info, nil
+	return *info, nil
 }
 
 func (r *rpc) Change(p path.Path, v interface{}) (path.Path, error) {

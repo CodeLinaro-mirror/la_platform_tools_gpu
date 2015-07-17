@@ -20,13 +20,17 @@ func init() {
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Atoms)(nil).Class())
 	Namespace.Add((*Atom)(nil).Class())
+	Namespace.Add((*Blob)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
 	Namespace.Add((*Field)(nil).Class())
 	Namespace.Add((*Hierarchy)(nil).Class())
+	Namespace.Add((*ImageInfo)(nil).Class())
 	Namespace.Add((*MapIndex)(nil).Class())
+	Namespace.Add((*MemoryInfo)(nil).Class())
 	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*Slice)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
+	Namespace.Add((*TimingInfo)(nil).Class())
 }
 
 var (
@@ -34,13 +38,17 @@ var (
 	binaryIDCapture    = binary.ID{0x0e, 0x9b, 0xe3, 0x62, 0x7b, 0x67, 0x5b, 0xe0, 0x44, 0x7b, 0x7b, 0x21, 0xa1, 0x50, 0x6d, 0x1b, 0xfb, 0xc7, 0x47, 0xe6}
 	binaryIDAtoms      = binary.ID{0x17, 0x6b, 0x7c, 0x08, 0xc2, 0x36, 0x2c, 0xe3, 0x1b, 0x17, 0xd5, 0x3a, 0x0a, 0x98, 0x5b, 0x76, 0xc5, 0x1d, 0x01, 0xa7}
 	binaryIDAtom       = binary.ID{0x58, 0x11, 0xbe, 0x6d, 0xfc, 0xe2, 0xe0, 0x12, 0x6c, 0x42, 0x55, 0x2d, 0xf3, 0x5e, 0x11, 0x1a, 0xc1, 0x6b, 0xfe, 0x3b}
+	binaryIDBlob       = binary.ID{0xc4, 0x1a, 0xa9, 0xab, 0x6b, 0x4f, 0x1b, 0xf8, 0x21, 0x87, 0xdc, 0x25, 0x6a, 0x17, 0x4f, 0x6f, 0xc8, 0x1a, 0x61, 0xd7}
 	binaryIDDevice     = binary.ID{0xe6, 0xca, 0x6e, 0x0d, 0xa7, 0xca, 0xb0, 0xcb, 0xd5, 0x9e, 0x18, 0xa1, 0xcb, 0x83, 0xc8, 0x93, 0xef, 0xec, 0x12, 0xc0}
 	binaryIDField      = binary.ID{0xd2, 0x4f, 0x7f, 0x64, 0xec, 0x81, 0x92, 0x06, 0x6c, 0x25, 0x60, 0xfa, 0x5a, 0x0b, 0x9c, 0x6e, 0x73, 0xf7, 0x4b, 0x4c}
 	binaryIDHierarchy  = binary.ID{0x9f, 0x69, 0x5b, 0x87, 0x7f, 0x8b, 0x5c, 0xa3, 0xaa, 0x9d, 0xb4, 0x6e, 0xa9, 0x39, 0x2f, 0xd5, 0x77, 0x92, 0x8a, 0xad}
+	binaryIDImageInfo  = binary.ID{0x25, 0x45, 0x6f, 0xb8, 0x75, 0x8a, 0x10, 0x97, 0x84, 0x5d, 0x5a, 0x6e, 0xa0, 0xe0, 0xe1, 0x2f, 0x2c, 0x8e, 0x55, 0xcb}
 	binaryIDMapIndex   = binary.ID{0x0d, 0x46, 0x56, 0xf3, 0x1d, 0xba, 0xf9, 0xd8, 0x5e, 0xcf, 0xcc, 0x0e, 0x84, 0x93, 0x38, 0x5b, 0xbb, 0xd2, 0xec, 0xde}
+	binaryIDMemoryInfo = binary.ID{0x02, 0x43, 0x5b, 0x41, 0x94, 0xbc, 0x33, 0xbd, 0x3c, 0xc5, 0xaa, 0xc5, 0x2a, 0xa2, 0x51, 0x37, 0x81, 0xcb, 0x59, 0x54}
 	binaryIDReport     = binary.ID{0xc3, 0x15, 0x30, 0x12, 0xb4, 0xa6, 0x7e, 0x71, 0x3a, 0xa3, 0xec, 0xb5, 0x93, 0x21, 0xf6, 0x2f, 0xd2, 0xf1, 0x4f, 0xa9}
 	binaryIDSlice      = binary.ID{0xd2, 0x2a, 0x0c, 0x1e, 0x91, 0x2e, 0x6b, 0x8d, 0xc1, 0xde, 0x05, 0xf2, 0x17, 0x1e, 0xf4, 0x42, 0x3b, 0x12, 0xd9, 0x76}
 	binaryIDState      = binary.ID{0xf1, 0xa4, 0x19, 0x51, 0x01, 0xc4, 0xe2, 0x90, 0xc2, 0xca, 0x28, 0x00, 0x17, 0x08, 0x72, 0xb9, 0x46, 0x3a, 0xd1, 0x7b}
+	binaryIDTimingInfo = binary.ID{0xad, 0xc7, 0xb9, 0x1b, 0xaa, 0x9c, 0x98, 0xc2, 0x28, 0xb0, 0xdc, 0x3a, 0x6f, 0xdb, 0xa8, 0xff, 0x9c, 0xb6, 0x9a, 0x89}
 )
 
 type binaryClassArrayIndex struct{}
@@ -281,6 +289,55 @@ var schemaAtom = &schema.Class{
 	},
 }
 
+type binaryClassBlob struct{}
+
+func (*Blob) Class() binary.Class {
+	return (*binaryClassBlob)(nil)
+}
+func doEncodeBlob(e binary.Encoder, o *Blob) error {
+	if err := e.ID(o.ID); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeBlob(d binary.Decoder, o *Blob) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipBlob(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassBlob) ID() binary.ID      { return binaryIDBlob }
+func (*binaryClassBlob) New() binary.Object { return &Blob{} }
+func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBlob(e, obj.(*Blob))
+}
+func (*binaryClassBlob) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Blob{}
+	return obj, doDecodeBlob(d, obj)
+}
+func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBlob(d, obj.(*Blob))
+}
+func (*binaryClassBlob) Skip(d binary.Decoder) error { return doSkipBlob(d) }
+func (*binaryClassBlob) Schema() *schema.Class       { return schemaBlob }
+
+var schemaBlob = &schema.Class{
+	TypeID:  binaryIDBlob,
+	Package: "path",
+	Name:    "Blob",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+	},
+}
+
 type binaryClassDevice struct{}
 
 func (*Device) Class() binary.Class {
@@ -452,6 +509,55 @@ var schemaHierarchy = &schema.Class{
 	},
 }
 
+type binaryClassImageInfo struct{}
+
+func (*ImageInfo) Class() binary.Class {
+	return (*binaryClassImageInfo)(nil)
+}
+func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
+	if err := e.ID(o.ID); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipImageInfo(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassImageInfo) ID() binary.ID      { return binaryIDImageInfo }
+func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
+func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeImageInfo(e, obj.(*ImageInfo))
+}
+func (*binaryClassImageInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ImageInfo{}
+	return obj, doDecodeImageInfo(d, obj)
+}
+func (*binaryClassImageInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeImageInfo(d, obj.(*ImageInfo))
+}
+func (*binaryClassImageInfo) Skip(d binary.Decoder) error { return doSkipImageInfo(d) }
+func (*binaryClassImageInfo) Schema() *schema.Class       { return schemaImageInfo }
+
+var schemaImageInfo = &schema.Class{
+	TypeID:  binaryIDImageInfo,
+	Package: "path",
+	Name:    "ImageInfo",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+	},
+}
+
 type binaryClassMapIndex struct{}
 
 func (*MapIndex) Class() binary.Class {
@@ -529,6 +635,55 @@ var schemaMapIndex = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "Map", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Key", Type: &any.Any{}},
+	},
+}
+
+type binaryClassMemoryInfo struct{}
+
+func (*MemoryInfo) Class() binary.Class {
+	return (*binaryClassMemoryInfo)(nil)
+}
+func doEncodeMemoryInfo(e binary.Encoder, o *MemoryInfo) error {
+	if err := e.ID(o.ID); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipMemoryInfo(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMemoryInfo) ID() binary.ID      { return binaryIDMemoryInfo }
+func (*binaryClassMemoryInfo) New() binary.Object { return &MemoryInfo{} }
+func (*binaryClassMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMemoryInfo(e, obj.(*MemoryInfo))
+}
+func (*binaryClassMemoryInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &MemoryInfo{}
+	return obj, doDecodeMemoryInfo(d, obj)
+}
+func (*binaryClassMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMemoryInfo(d, obj.(*MemoryInfo))
+}
+func (*binaryClassMemoryInfo) Skip(d binary.Decoder) error { return doSkipMemoryInfo(d) }
+func (*binaryClassMemoryInfo) Schema() *schema.Class       { return schemaMemoryInfo }
+
+var schemaMemoryInfo = &schema.Class{
+	TypeID:  binaryIDMemoryInfo,
+	Package: "path",
+	Name:    "MemoryInfo",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -718,5 +873,54 @@ var schemaState = &schema.Class{
 	Name:    "State",
 	Fields: []schema.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "Atom", ID: (*Atom)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassTimingInfo struct{}
+
+func (*TimingInfo) Class() binary.Class {
+	return (*binaryClassTimingInfo)(nil)
+}
+func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) error {
+	if err := e.ID(o.ID); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) error {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipTimingInfo(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassTimingInfo) ID() binary.ID      { return binaryIDTimingInfo }
+func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }
+func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTimingInfo(e, obj.(*TimingInfo))
+}
+func (*binaryClassTimingInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &TimingInfo{}
+	return obj, doDecodeTimingInfo(d, obj)
+}
+func (*binaryClassTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTimingInfo(d, obj.(*TimingInfo))
+}
+func (*binaryClassTimingInfo) Skip(d binary.Decoder) error { return doSkipTimingInfo(d) }
+func (*binaryClassTimingInfo) Schema() *schema.Class       { return schemaTimingInfo }
+
+var schemaTimingInfo = &schema.Class{
+	TypeID:  binaryIDTimingInfo,
+	Package: "path",
+	Name:    "TimingInfo",
+	Fields: []schema.Field{
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }

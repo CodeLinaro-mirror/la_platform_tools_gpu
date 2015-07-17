@@ -26,6 +26,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // decompressTextures returns an atom transform that replaces GlCompressedTexImage2D atoms with
@@ -33,7 +34,7 @@ import (
 //   GL_ATC_RGB_AMD
 //   GL_ATC_RGBA_EXPLICIT_ALPHA_AMD
 //   GL_ETC1_RGB8_OES
-func decompressTextures(device *service.Device, capture service.CaptureID, d database.Database, l log.Logger) atom.Transformer {
+func decompressTextures(device *service.Device, capture *path.Capture, d database.Database, l log.Logger) atom.Transformer {
 	l = log.Enter(l, "decompressTextures")
 	s := gfxapi.NewState()
 	supportedFormats := getCompressedFormats(device)
