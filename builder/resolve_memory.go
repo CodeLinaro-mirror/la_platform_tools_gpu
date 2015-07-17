@@ -17,6 +17,7 @@ package builder
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/interval"
@@ -25,39 +26,41 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-// BuildLazy returns the *service.MemoryInfo resulting from the given
-// GetMemoryInfo request.
-func (r *GetMemoryInfo) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	atoms, err := ResolveAtoms(r.After.Atoms, d, l)
-	if err != nil {
-		return nil, err
-	}
-
-	if r.After.Index >= uint64(len(atoms)) {
-		return nil, fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", r.After, len(atoms)-1)
-	}
+// ResolveMemoryRange returns the MemoryInfo describing the range of memory r in
+// pool p immediately following the atom i in the list a.
+func ResolveMemoryRange(
+	a []atom.Atom,
+	i atom.ID,
+	p memory.PoolID,
+	r memory.Range,
+	d database.Database,
+	l log.Logger) (*service.MemoryInfo, error) {
 
 	s := gfxapi.NewState()
-	pool := s.Memory[memory.ApplicationPool]
 
-	for _, a := range atoms[:r.After.Index] {
+	for _, a := range a[:i] {
 		a.Mutate(s, d, l)
+	}
+
+	pool, ok := s.Memory[p]
+	if !ok {
+		return nil, fmt.Errorf("Pool %d not found", p)
 	}
 
 	var reads, writes memory.RangeList
 	pool.OnRead = func(rng memory.Range) {
-		if rng.Overlaps(r.Range) {
-			interval.Merge(&reads, rng.Window(r.Range).Span(), false)
+		if rng.Overlaps(r) {
+			interval.Merge(&reads, rng.Window(r).Span(), false)
 		}
 	}
 	pool.OnWrite = func(rng memory.Range) {
-		if rng.Overlaps(r.Range) {
-			interval.Merge(&writes, rng.Window(r.Range).Span(), false)
+		if rng.Overlaps(r) {
+			interval.Merge(&writes, rng.Window(r).Span(), false)
 		}
 	}
-	atoms[r.After.Index].Mutate(s, d, l)
+	a[i].Mutate(s, d, l)
 
-	slice := pool.Slice(r.Range)
+	slice := pool.Slice(r)
 	data, err := slice.Get(d, l)
 	if err != nil {
 		return nil, err

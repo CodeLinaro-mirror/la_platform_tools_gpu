@@ -44,11 +44,6 @@ type RPC interface {
 	// This list may change over time, as devices are connected and disconnected.
 	GetDevices(l log.Logger) ([]*path.Device, error)
 
-	// GetMemoryInfo returns the MemoryInfo identifier describing the memory state
-	// for the given capture and range, immediately following the atom
-	// after.
-	GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (*path.MemoryInfo, error)
-
 	// GetFramebufferColor returns the ImageInfo identifier describing the bound
 	// color buffer for the given device, immediately following the atom after.
 	// The provided RenderSettings structure can be used to adjust maximum desired
@@ -127,11 +122,11 @@ type Hierarchy struct {
 // MemoryInfo describes the state of a range of memory at a specific point in
 // the atom stream.
 type MemoryInfo struct {
-	binary.Generate `path:"path.MemoryInfo"`
-	Data            []uint8          // The memory values for the span.
-	Reads           memory.RangeList // The Data-relative ranges that were read-from at the specified atom.
-	Writes          memory.RangeList // The Data-relative ranges that were written-to at the specified atom.
-	Observed        memory.RangeList // The Data-relative ranges that have been observed.
+	binary.Generate
+	Data     []uint8          // The memory values for the span.
+	Reads    memory.RangeList // The Data-relative ranges that were read-from at the specified atom.
+	Writes   memory.RangeList // The Data-relative ranges that were written-to at the specified atom.
+	Observed memory.RangeList // The Data-relative ranges that have been observed.
 }
 
 // ImageInfo describes an image, such as a texture or framebuffer at a specific

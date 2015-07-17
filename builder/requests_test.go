@@ -29,7 +29,6 @@ func TestLazyInterfaceCompliance(t *testing.T) {
 		(*GetFramebufferColor)(nil),
 		(*GetFramebufferDepth)(nil),
 		(*GetHierarchy)(nil),
-		(*GetMemoryInfo)(nil),
 		(*GetState)(nil),
 		(*GetTimingInfo)(nil),
 		(*PrerenderFramebuffers)(nil),
