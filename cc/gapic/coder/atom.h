@@ -58,6 +58,25 @@ namespace atom {
         Array<Group> mSubGroups;
     };
 
+    class List: public Encodable {
+    public:
+        List() = default;
+        List(Array<gapic::Encodable*> Atoms) :
+            mAtoms(Atoms) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x02, 0x6b, 0xec, 0xdd, 0x57, 0x69, 0x25, 0xab, 0xfc, 0x6c, 0x21, 0x8e, 0xa6, 0xe1, 0x51, 0xc5, 0x04, 0xf3, 0x8b, 0x2f,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint32(this->mAtoms.size());
+            for (int i = 0; i < this->mAtoms.size(); i++) {
+                e->Object(this->mAtoms[i]);
+            }
+        }
+
+        Array<gapic::Encodable*> mAtoms;
+    };
+
     class Metadata: public Encodable {
     public:
         Metadata() = default;

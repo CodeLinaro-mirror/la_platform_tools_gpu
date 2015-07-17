@@ -19,7 +19,6 @@ import (
 	"net/http"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -75,14 +74,14 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	stream, err := service.ResolveAtomStream(binary.ID(capture.Atoms), h, log.Nop{})
+	list, err := service.ResolveAtomList(capture.Atoms, h, log.Nop{})
 	if err != nil {
 		panic(err)
 	}
 
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
-	for i, a := range stream.Atoms {
+	for i, a := range list.Atoms {
 		fmt.Fprintf(res, "%.6d %s\n", i, a)
 	}
 }

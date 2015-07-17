@@ -19,7 +19,6 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -75,12 +74,10 @@ func (b *batcher) send(requests []Request) (err error) {
 		return fmt.Errorf("Failed to load capture (%s): %v", b.context.Capture, err)
 	}
 
-	stream, err := service.ResolveAtomStream(binary.ID(c.Atoms), b.database, b.logger)
+	list, err := service.ResolveAtomList(c.Atoms, b.database, b.logger)
 	if err != nil {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}
-
-	atoms := stream.Atoms
 
 	td := b.device.Info()
 
@@ -93,7 +90,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.logger)
 
 	if config.DebugReplay {
-		log.Infof(b.logger, "Replaying %d atoms using transform chain:", len(atoms))
+		log.Infof(b.logger, "Replaying %d atoms using transform chain:", len(list.Atoms))
 		for i, t := range transforms {
 			log.Infof(b.logger, "(%d) %#v", i, t)
 		}
@@ -108,7 +105,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		// This is temporary, as atoms should return errors instead of causing
 		// runtime panics.
 		defer func() { err = recover() }()
-		transforms.Transform(atoms, &adapter{
+		transforms.Transform(*list, &adapter{
 			state:   gfxapi.NewState(),
 			db:      b.database,
 			logger:  b.logger,

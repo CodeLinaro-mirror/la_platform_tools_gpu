@@ -33,14 +33,7 @@ import (
 // binary: java.member_prefix = my
 // binary: service = RPC
 
-// Clone returns a new AtomStream holding a shallow-copy of the Atoms slice.
-func (s *AtomStream) Clone() *AtomStream {
-	atoms := make([]atom.Atom, len(s.Atoms))
-	copy(atoms, s.Atoms)
-	return &AtomStream{Atoms: atoms}
-}
-
-// ResolveBlob resolves a binary.ID safely casts the result to a []byte.
+// ResolveBlob resolves a binary.ID and then safely casts the result to a []byte.
 func ResolveBlob(id binary.ID, d database.Database, l log.Logger) ([]byte, error) {
 	if v, err := database.Resolve(id, d, l); err != nil {
 		return nil, err
@@ -57,6 +50,17 @@ func GetBlob(p *path.Blob, s RPC, l log.Logger) ([]byte, error) {
 		return nil, err
 	} else if r, ok := v.([]byte); !ok {
 		return nil, fmt.Errorf("path %s gave %T, expected []byte", p, v)
+	} else {
+		return r, nil
+	}
+}
+
+// ResolveAtomList resolves an AtomsID and then safely casts the result to a *atom.List.
+func ResolveAtomList(id AtomsID, d database.Database, l log.Logger) (*atom.List, error) {
+	if v, err := database.Resolve(binary.ID(id), d, l); err != nil {
+		return nil, err
+	} else if r, ok := v.(*atom.List); !ok {
+		return nil, fmt.Errorf("ID %s gave %T, expected *atom.List", id, v)
 	} else {
 		return r, nil
 	}

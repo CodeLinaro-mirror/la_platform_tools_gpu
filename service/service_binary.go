@@ -23,7 +23,6 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*AtomRangeTimer)(nil).Class())
-	Namespace.Add((*AtomStream)(nil).Class())
 	Namespace.Add((*AtomTimer)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
@@ -63,7 +62,6 @@ func init() {
 
 var (
 	binaryIDAtomRangeTimer              = binary.ID{0x2a, 0x69, 0xe8, 0xa2, 0x17, 0xc3, 0x2d, 0xe8, 0x4e, 0x9c, 0x00, 0x01, 0x5b, 0x63, 0xde, 0xb4, 0xf1, 0xf6, 0x27, 0x64}
-	binaryIDAtomStream                  = binary.ID{0xdc, 0x12, 0x10, 0xc5, 0x76, 0x8a, 0xe7, 0x10, 0xb5, 0x5f, 0x27, 0xad, 0x15, 0xfe, 0x72, 0x74, 0xff, 0xdf, 0x0e, 0x0b}
 	binaryIDAtomTimer                   = binary.ID{0xa9, 0xad, 0x32, 0xa8, 0xd8, 0xa8, 0xc3, 0xff, 0x44, 0x94, 0x47, 0xd3, 0xaa, 0xd2, 0xce, 0x8f, 0x70, 0xc6, 0xc6, 0x04}
 	binaryIDCapture                     = binary.ID{0x53, 0x83, 0xdc, 0x37, 0x1e, 0x26, 0x9f, 0xb9, 0xc9, 0xf8, 0x6f, 0x4b, 0x42, 0x3b, 0xcd, 0xbc, 0x01, 0x83, 0x76, 0xe2}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
@@ -171,79 +169,6 @@ var schemaAtomRangeTimer = &schema.Class{
 		{Declared: "FromAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "ToAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
-
-type binaryClassAtomStream struct{}
-
-func (*AtomStream) Class() binary.Class {
-	return (*binaryClassAtomStream)(nil)
-}
-func doEncodeAtomStream(e binary.Encoder, o *AtomStream) error {
-	if err := e.Uint32(uint32(len(o.Atoms))); err != nil {
-		return err
-	}
-	for i := range o.Atoms {
-		if o.Atoms[i] != nil {
-			if err := e.Object(o.Atoms[i]); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeAtomStream(d binary.Decoder, o *AtomStream) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Atoms = make([]atom.Atom, count)
-		for i := range o.Atoms {
-			if obj, err := d.Object(); err != nil {
-				return err
-			} else if obj != nil {
-				o.Atoms[i] = obj.(atom.Atom)
-			} else {
-				o.Atoms[i] = nil
-			}
-		}
-	}
-	return nil
-}
-func doSkipAtomStream(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.SkipObject(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassAtomStream) ID() binary.ID      { return binaryIDAtomStream }
-func (*binaryClassAtomStream) New() binary.Object { return &AtomStream{} }
-func (*binaryClassAtomStream) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomStream(e, obj.(*AtomStream))
-}
-func (*binaryClassAtomStream) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &AtomStream{}
-	return obj, doDecodeAtomStream(d, obj)
-}
-func (*binaryClassAtomStream) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomStream(d, obj.(*AtomStream))
-}
-func (*binaryClassAtomStream) Skip(d binary.Decoder) error { return doSkipAtomStream(d) }
-func (*binaryClassAtomStream) Schema() *schema.Class       { return schemaAtomStream }
-
-var schemaAtomStream = &schema.Class{
-	TypeID:  binaryIDAtomStream,
-	Package: "service",
-	Name:    "AtomStream",
-	Fields: []schema.Field{
-		{Declared: "Atoms", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "atom.Atom"}}},
 	},
 }
 

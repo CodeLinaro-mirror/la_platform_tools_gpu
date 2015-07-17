@@ -70,7 +70,7 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 	}
 }
 
-func initContext(a device.Architecture, d database.Database, l log.Logger, width, height uint32) atom.List {
+func initContext(a device.Architecture, d database.Database, l log.Logger, width, height uint32) *atom.List {
 	eglDisplay := p(0x1000)
 	eglConfig := p(0x2000)
 	eglShareContext := memory.Nullptr
@@ -81,12 +81,12 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 	color := gles.RenderbufferFormat_GL_RGB565
 	depth := gles.RenderbufferFormat_GL_DEPTH_COMPONENT16
 	stencil := gles.RenderbufferFormat_GL_STENCIL_INDEX8
-	return atom.List{
+	return atom.NewList(
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
 		gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */),
-	}
+	)
 }
 
 func TestClear(t *testing.T) {
@@ -113,7 +113,7 @@ func TestClear(t *testing.T) {
 	)
 
 	ctx := &replay.Context{
-		Capture: utils.StoreCapture(t, atom.List(atoms), d, l),
+		Capture: utils.StoreCapture(t, atoms, d, l),
 		Device:  device.Path(),
 	}
 
@@ -165,7 +165,7 @@ func TestDrawTriangle(t *testing.T) {
 	)
 
 	ctx := &replay.Context{
-		Capture: utils.StoreCapture(t, atom.List(atoms), d, l),
+		Capture: utils.StoreCapture(t, atoms, d, l),
 		Device:  device.Path(),
 	}
 

@@ -24,7 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
@@ -60,9 +59,9 @@ func (testAtom) Flags() atom.Flags                                         { ret
 func (testAtom) Observations() *atom.Observations                          { return &atom.Observations{} }
 func (testAtom) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 
-func newPathTest(t *testing.T, atoms ...atom.Atom) (*path.Capture, database.Database, log.Logger) {
+func newPathTest(t *testing.T, a *atom.List) (*path.Capture, database.Database, log.Logger) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
-	p, err := ImportCapture("test", atoms, d, l)
+	p, err := ImportCapture("test", a, d, l)
 	if err != nil {
 		t.Fatalf("Failed to create capture: %v", err)
 	}
@@ -85,8 +84,8 @@ func TestGet(t *testing.T) {
 		Any: &testStruct{Str: "www"},
 		Map: map[string]string{"bird": "tweet", "fox": "?"},
 	}
-	atoms := atom.List{atomA, atomB}
-	p, d, l := newPathTest(t, atoms...)
+	a := atom.NewList(atomA, atomB)
+	p, d, l := newPathTest(t, a)
 
 	// Get tests
 	for _, test := range []struct {
@@ -94,7 +93,7 @@ func TestGet(t *testing.T) {
 		val  interface{}
 		err  error
 	}{
-		{p.Atoms().Index(1), atoms[1], nil},
+		{p.Atoms().Index(1), a.Atoms[1], nil},
 		{p.Atoms().Index(1).Field("Str"), "xyz", nil},
 		{p.Atoms().Index(1).Field("Sli"), []bool{false, true, false}, nil},
 		{p.Atoms().Index(1).Field("Any"), &testStruct{Str: "www"}, nil},
@@ -150,7 +149,7 @@ func TestGet(t *testing.T) {
 		val  interface{}
 		err  error
 	}{
-		{path: p.Atoms(), val: &service.AtomStream{Atoms: atom.List{atomB}}},
+		{path: p.Atoms(), val: atom.NewList(atomB)},
 		{path: p.Atoms().Index(0), val: atomB}, {path: p.Atoms().Index(0).Field("Str"), val: "bbb"},
 		{path: p.Atoms().Index(0).Field("Sli"), val: []bool{false, true, false}},
 		{path: p.Atoms().Index(0).Field("Any"), val: 0.123},

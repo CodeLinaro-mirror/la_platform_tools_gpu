@@ -14,28 +14,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-// ResolveAtomStream resolves a binary.ID and then safely casts the result to a *AtomStream.
-func ResolveAtomStream(id binary.ID, d database.Database, l log.Logger) (*AtomStream, error) {
-	if v, err := database.Resolve(id, d, l); err != nil {
-		return nil, err
-	} else if r, ok := v.(*AtomStream); !ok {
-		return nil, fmt.Errorf("ID %s gave %T, expected AtomStream", id, v)
-	} else {
-		return r, nil
-	}
-}
-
-// GetAtomStream calls s.Get with p and then safely casts the result to a *AtomStream.
-func GetAtomStream(p *path.Atoms, s RPC, l log.Logger) (*AtomStream, error) {
-	if v, err := s.Get(p, l); err != nil {
-		return nil, err
-	} else if r, ok := v.(*AtomStream); !ok {
-		return nil, fmt.Errorf("path %s gave %T, expected AtomStream", p, v)
-	} else {
-		return r, nil
-	}
-}
-
 // ResolveCapture resolves a binary.ID and then safely casts the result to a *Capture.
 func ResolveCapture(id binary.ID, d database.Database, l log.Logger) (*Capture, error) {
 	if v, err := database.Resolve(id, d, l); err != nil {

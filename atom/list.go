@@ -14,34 +14,43 @@
 
 package atom
 
+import "android.googlesource.com/platform/tools/gpu/binary"
+
 // List is a list of atoms.
-type List []Atom
+type List struct {
+	binary.Generate
+	Atoms []Atom
+}
+
+func NewList(atoms ...Atom) *List {
+	return &List{Atoms: atoms}
+}
 
 // WriteTo writes all atoms in the list to w, terminating with a single EOS
 // atom.
 func (l *List) WriteTo(w Writer) {
-	for i, a := range *l {
+	for i, a := range l.Atoms {
 		w.Write(ID(i), a)
 	}
 }
 
 // Clone makes and returns a shallow copy of the atom list.
-func (l *List) Clone() List {
-	c := make(List, len(*l))
-	copy(c, *l)
+func (l *List) Clone() *List {
+	c := &List{Atoms: make([]Atom, len(l.Atoms))}
+	copy(c.Atoms, l.Atoms)
 	return c
 }
 
 // Add appends a to the end of the atom list, returning the id of the last added
 // atom.
 func (l *List) Add(a ...Atom) ID {
-	*l = append(*l, a...)
-	return ID(len(*l) - 1)
+	l.Atoms = append(l.Atoms, a...)
+	return ID(len(l.Atoms) - 1)
 }
 
 // Add adds a to the list before the atom at id.
 func (l *List) AddAt(a Atom, id ID) {
-	*l = append(*l, nil)
-	copy((*l)[id+1:], (*l)[id:])
-	(*l)[id] = a
+	l.Atoms = append(l.Atoms, nil)
+	copy(l.Atoms[id+1:], l.Atoms[id:])
+	l.Atoms[id] = a
 }
