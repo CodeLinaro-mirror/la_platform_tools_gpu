@@ -72,8 +72,8 @@ type updateProfilerPanel struct {
 }
 
 func (t updateProfilerPanel) Run(c task.CancelSignal) {
-	flags := service.TimingFlagsTimingGPU |
-		service.TimingFlagsTimingPerFrame
+	flags := service.TimingGPU |
+		service.TimingPerFrame
 	timings, err := t.context.rpc.LoadTiming(t.device, t.capture, flags)
 	if err == nil {
 		c.Check()

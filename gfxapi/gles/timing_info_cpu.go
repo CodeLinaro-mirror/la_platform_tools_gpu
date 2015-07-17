@@ -27,14 +27,14 @@ import (
 )
 
 func timingInfo(flags service.TimingFlags, out chan<- replay.CallTiming, device *service.Device, db database.Database, logger log.Logger) atom.Transformer {
-	if flags&service.TimingFlagsTimingGPU != 0 {
+	if flags&service.TimingGPU != 0 {
 		return timingInfoGpu(flags, out, device, db, logger)
 	}
 	return &timingInfoCpuTransform{
 		out:          out,
-		perCommand:   flags&service.TimingFlagsTimingPerCommand != 0,
-		perDrawCall:  flags&service.TimingFlagsTimingPerDrawCall != 0,
-		perFrame:     flags&service.TimingFlagsTimingPerFrame != 0,
+		perCommand:   flags&service.TimingPerCommand != 0,
+		perDrawCall:  flags&service.TimingPerDrawCall != 0,
+		perFrame:     flags&service.TimingPerFrame != 0,
 		timerStartId: map[uint8]atom.ID{},
 	}
 }
@@ -79,18 +79,18 @@ func (t *timingInfoCpuTransform) stopTimer(toID atom.ID, index uint8, flags serv
 			}
 
 			switch flags {
-			case service.TimingFlagsTimingPerCommand:
+			case service.TimingPerCommand:
 				t.timingInfo.PerCommand = append(t.timingInfo.PerCommand, service.AtomTimer{
 					AtomID:      uint64(toID),
 					Nanoseconds: nanoseconds,
 				})
-			case service.TimingFlagsTimingPerDrawCall:
+			case service.TimingPerDrawCall:
 				t.timingInfo.PerDrawCall = append(t.timingInfo.PerDrawCall, service.AtomRangeTimer{
 					FromAtomID:  uint64(fromID),
 					ToAtomID:    uint64(toID),
 					Nanoseconds: nanoseconds,
 				})
-			case service.TimingFlagsTimingPerFrame:
+			case service.TimingPerFrame:
 				t.timingInfo.PerFrame = append(t.timingInfo.PerFrame, service.AtomRangeTimer{
 					FromAtomID:  uint64(fromID),
 					ToAtomID:    uint64(toID),
@@ -103,9 +103,9 @@ func (t *timingInfoCpuTransform) stopTimer(toID atom.ID, index uint8, flags serv
 	}))
 
 	switch flags {
-	case service.TimingFlagsTimingPerFrame:
+	case service.TimingPerFrame:
 		out.Write(toID, NewFlushPostBuffer())
-	case service.TimingFlagsTimingPerDrawCall:
+	case service.TimingPerDrawCall:
 		if !t.perFrame {
 			out.Write(toID, NewFlushPostBuffer())
 		}
@@ -127,23 +127,23 @@ func (t *timingInfoCpuTransform) Transform(id atom.ID, a atom.Atom, out atom.Wri
 
 	atomFlags := a.Flags()
 	if t.perCommand {
-		t.stopTimer(id, commandThreadTimer, service.TimingFlagsTimingPerCommand, out)
+		t.stopTimer(id, commandThreadTimer, service.TimingPerCommand, out)
 	}
 	if t.perDrawCall && (atomFlags.IsDrawCall() || atomFlags.IsEndOfFrame()) {
-		t.stopTimer(id, drawCallThreadTimer, service.TimingFlagsTimingPerDrawCall, out)
+		t.stopTimer(id, drawCallThreadTimer, service.TimingPerDrawCall, out)
 	}
 	if t.perFrame && atomFlags.IsEndOfFrame() {
-		t.stopTimer(id, frameThreadTimer, service.TimingFlagsTimingPerFrame, out)
+		t.stopTimer(id, frameThreadTimer, service.TimingPerFrame, out)
 	}
 }
 
 func (t *timingInfoCpuTransform) Flush(out atom.Writer) {
 	id := atom.NoID
 	if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {
-		t.stopTimer(id, drawCallThreadTimer, service.TimingFlagsTimingPerDrawCall, out)
+		t.stopTimer(id, drawCallThreadTimer, service.TimingPerDrawCall, out)
 	}
 	if _, frameStarted := t.timerStartId[frameThreadTimer]; frameStarted && t.perFrame {
-		t.stopTimer(id, frameThreadTimer, service.TimingFlagsTimingPerFrame, out)
+		t.stopTimer(id, frameThreadTimer, service.TimingPerFrame, out)
 	}
 
 	out.Write(id, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
