@@ -19,10 +19,9 @@ import (
 	"net/http"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/builder"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 const (
@@ -33,7 +32,7 @@ const (
 // AtomsHandler is an HTTP request handler that returns a human-readable description
 // of the atoms for a given capture and context.
 type atomsHandler struct {
-	database.Database
+	s service.RPC
 }
 
 // ServeHTTP writes to res a human-readable plain text description for each of the
@@ -42,39 +41,32 @@ type atomsHandler struct {
 func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	logger := log.Nop{}
 
-	captures, err := builder.Captures(h, logger)
+	captures, err := h.s.GetCaptures(logger)
 	if err != nil {
 		panic(err)
 	}
 
-	var capture *service.Capture
+	var capture *path.Capture
 
 	if id := req.URL.Query().Get(idParamName); id != "" {
 		for _, p := range captures {
 			if strings.EqualFold(p.ID.String(), id) {
-				capture, err = service.ResolveCapture(p.ID, h, logger)
+				capture = p
 				break
 			}
 		}
 	} else if name := req.URL.Query().Get(nameParamName); name != "" {
 		for _, p := range captures {
-			capture, err = service.ResolveCapture(p.ID, h, logger)
-			if strings.EqualFold(capture.Name, name) {
+			if c, err := service.GetCapture(p, h.s, logger); err != nil {
+				panic(err)
+			} else if strings.EqualFold(c.Name, name) {
+				capture = p
 				break
 			}
 		}
 	}
 
-	if err != nil {
-		panic(err)
-	}
-
-	if capture.Name == "" {
-		http.NotFound(res, req)
-		return
-	}
-
-	list, err := service.ResolveAtomList(capture.Atoms, h, log.Nop{})
+	list, err := service.GetAtomList(capture.Atoms(), h.s, logger)
 	if err != nil {
 		panic(err)
 	}
