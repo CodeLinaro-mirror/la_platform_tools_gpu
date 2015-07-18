@@ -33,17 +33,6 @@ import (
 // binary: java.member_prefix = my
 // binary: service = RPC
 
-// ResolveBlob resolves a binary.ID and then safely casts the result to a []byte.
-func ResolveBlob(id binary.ID, d database.Database, l log.Logger) ([]byte, error) {
-	if v, err := database.Resolve(id, d, l); err != nil {
-		return nil, err
-	} else if r, ok := v.([]byte); !ok {
-		return nil, fmt.Errorf("ID %s gave %T, expected []byte", id, v)
-	} else {
-		return r, nil
-	}
-}
-
 // GetBlob calls s.Get with p and then safely casts the result to a []byte.
 func GetBlob(p *path.Blob, s RPC, l log.Logger) ([]byte, error) {
 	if v, err := s.Get(p, l); err != nil {
