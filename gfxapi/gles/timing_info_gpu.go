@@ -32,8 +32,8 @@ import (
 // timingInfoGpu returns a transform used to measure and retrieve frame and draw call GPU timing information.
 // Note: this is experimental and is likely to change in the near future.
 func timingInfoGpu(flags service.TimingFlags, out chan<- replay.CallTiming, device *service.Device, db database.Database, logger log.Logger) atom.Transformer {
-	timeFrames := flags&service.TimingFlagsTimingPerFrame != 0
-	timeDrawCalls := flags&service.TimingFlagsTimingPerDrawCall != 0
+	timeFrames := flags&service.TimingPerFrame != 0
+	timeDrawCalls := flags&service.TimingPerDrawCall != 0
 
 	seen := map[atom.ID]struct{}{}
 	timingInfo := service.TimingInfo{}

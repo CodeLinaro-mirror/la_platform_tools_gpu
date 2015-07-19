@@ -89,11 +89,11 @@ const (
 type TimingFlags int
 
 const (
-	TimingFlagsTimingCPU         TimingFlags = 0 // Time using CPU timers (default).
-	TimingFlagsTimingGPU         TimingFlags = 1 // Time using GPU timers
-	TimingFlagsTimingPerCommand  TimingFlags = 2 // Time individual commands.
-	TimingFlagsTimingPerDrawCall TimingFlags = 4 // Time each draw call.
-	TimingFlagsTimingPerFrame    TimingFlags = 8 // Time each frame.
+	TimingCPU         TimingFlags = 0 // Time using CPU timers (default).
+	TimingGPU         TimingFlags = 1 // Time using GPU timers
+	TimingPerCommand  TimingFlags = 2 // Time individual commands.
+	TimingPerDrawCall TimingFlags = 4 // Time each draw call.
+	TimingPerFrame    TimingFlags = 8 // Time each frame.
 )
 
 // Schema holds all the rtti information for dynamic types in the service.

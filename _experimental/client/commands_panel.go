@@ -104,10 +104,10 @@ func (t updateCommandAdapter) Run(c task.CancelSignal) {
 		t.adapter.UpdateTimings(service.TimingInfo{})
 		t.adapter.UpdateAtoms(t.capture, atoms, hierarchy)
 	})
-	flags := service.TimingFlagsTimingCPU |
-		service.TimingFlagsTimingPerCommand |
-		service.TimingFlagsTimingPerDrawCall |
-		service.TimingFlagsTimingPerFrame
+	flags := service.TimingCPU |
+		service.TimingPerCommand |
+		service.TimingPerDrawCall |
+		service.TimingPerFrame
 	timings, err := t.context.rpc.LoadTiming(t.device, t.capture, flags)
 	if err != nil {
 		return
