@@ -22,7 +22,7 @@ import (
 
 // binary: Schema = false
 
-// Type represents the common iterface to all type objects in the schema.
+// Type represents the common interface to all type objects in the schema.
 type Type interface {
 	binary.Object
 	String() string

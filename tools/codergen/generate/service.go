@@ -95,8 +95,8 @@ func (m *Module) addService(n *types.TypeName, b *types.Interface) error {
 		Prefix:  fmt.Sprint(m.Directive("service.prefix", m.Source.Types.Name())),
 		Package: m.Source.Types.Name(),
 	}
-	for i := 0; i < t.NumExplicitMethods(); i++ {
-		decl := t.ExplicitMethod(i)
+	for i := 0; i < t.NumMethods(); i++ {
+		decl := t.Method(i)
 		sig := decl.Type().(*types.Signature)
 		paramCount := sig.Params().Len()
 		if paramCount <= 0 {

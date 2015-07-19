@@ -23,9 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/device"
 )
 
-type DeviceID binary.ID
-
-// Device describes replay target avaliable to the server.
+// Device describes replay target available to the server.
 type Device struct {
 	binary.Generate  `path:"path.Device"`
 	Name             string // The name of the device. e.g. "Bob's phone"
