@@ -125,12 +125,6 @@ type ReportItem struct {
 	Atom     uint64       // The index of the atom the item refers to.
 }
 
-// AtomStream holds a stream of atoms.
-type AtomStream struct {
-	binary.Generate `path:"path.Atoms"`
-	Atoms           []atom.Atom
-}
-
 // Hierarchy holds the root to an AtomGroup hierarchy.
 type Hierarchy struct {
 	binary.Generate

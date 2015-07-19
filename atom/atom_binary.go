@@ -21,6 +21,7 @@ func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Range)(nil).Class())
 	Namespace.Add((*Group)(nil).Class())
+	Namespace.Add((*List)(nil).Class())
 	Namespace.Add((*Metadata)(nil).Class())
 	Namespace.Add((*Observation)(nil).Class())
 	Namespace.Add((*Observations)(nil).Class())
@@ -30,6 +31,7 @@ func init() {
 var (
 	binaryIDRange        = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
 	binaryIDGroup        = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
+	binaryIDList         = binary.ID{0x02, 0x6b, 0xec, 0xdd, 0x57, 0x69, 0x25, 0xab, 0xfc, 0x6c, 0x21, 0x8e, 0xa6, 0xe1, 0x51, 0xc5, 0x04, 0xf3, 0x8b, 0x2f}
 	binaryIDMetadata     = binary.ID{0xb0, 0x6e, 0x0a, 0xcb, 0x6d, 0x82, 0x36, 0x07, 0xa8, 0x83, 0x7c, 0xe9, 0xd3, 0xa6, 0xbc, 0x20, 0x42, 0xe0, 0x28, 0xff}
 	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
 	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
@@ -181,6 +183,79 @@ var schemaGroup = &schema.Class{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Name: "Range", ID: (*Range)(nil).Class().ID()}},
 		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Name: "Group", ID: (*Group)(nil).Class().ID()}}},
+	},
+}
+
+type binaryClassList struct{}
+
+func (*List) Class() binary.Class {
+	return (*binaryClassList)(nil)
+}
+func doEncodeList(e binary.Encoder, o *List) error {
+	if err := e.Uint32(uint32(len(o.Atoms))); err != nil {
+		return err
+	}
+	for i := range o.Atoms {
+		if o.Atoms[i] != nil {
+			if err := e.Object(o.Atoms[i]); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeList(d binary.Decoder, o *List) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Atoms = make([]Atom, count)
+		for i := range o.Atoms {
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if obj != nil {
+				o.Atoms[i] = obj.(Atom)
+			} else {
+				o.Atoms[i] = nil
+			}
+		}
+	}
+	return nil
+}
+func doSkipList(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassList) ID() binary.ID      { return binaryIDList }
+func (*binaryClassList) New() binary.Object { return &List{} }
+func (*binaryClassList) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeList(e, obj.(*List))
+}
+func (*binaryClassList) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &List{}
+	return obj, doDecodeList(d, obj)
+}
+func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeList(d, obj.(*List))
+}
+func (*binaryClassList) Skip(d binary.Decoder) error { return doSkipList(d) }
+func (*binaryClassList) Schema() *schema.Class       { return schemaList }
+
+var schemaList = &schema.Class{
+	TypeID:  binaryIDList,
+	Package: "atom",
+	Name:    "List",
+	Fields: []schema.Field{
+		{Declared: "Atoms", Type: &schema.Slice{Alias: "", ValueType: &schema.Interface{Name: "Atom"}}},
 	},
 }
 

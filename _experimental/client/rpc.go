@@ -158,7 +158,7 @@ func (r *rpc) LoadAtoms(p *path.Atoms) ([]atom.Atom, error) {
 		return nil, err
 	}
 
-	return stream.(*service.AtomStream).Atoms, nil
+	return stream.(*atom.List).Atoms, nil
 }
 
 func (r *rpc) LoadHierarchy(p *path.Hierarchy) (atom.Group, error) {
