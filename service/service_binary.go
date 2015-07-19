@@ -13,6 +13,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -66,7 +67,7 @@ var (
 	binaryIDCapture                     = binary.ID{0x53, 0x83, 0xdc, 0x37, 0x1e, 0x26, 0x9f, 0xb9, 0xc9, 0xf8, 0x6f, 0x4b, 0x42, 0x3b, 0xcd, 0xbc, 0x01, 0x83, 0x76, 0xe2}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDHierarchy                   = binary.ID{0x26, 0x8b, 0xf1, 0xcb, 0xd8, 0xc8, 0xc2, 0x60, 0x1e, 0xfa, 0x3f, 0x8e, 0xde, 0xc9, 0xe1, 0x01, 0x43, 0x9f, 0x4c, 0xff}
-	binaryIDImageInfo                   = binary.ID{0x2f, 0x81, 0x95, 0x59, 0xcc, 0x86, 0xb6, 0x81, 0xb9, 0x09, 0xcd, 0x07, 0x13, 0xc0, 0xd1, 0xec, 0xa3, 0xd2, 0x4a, 0xec}
+	binaryIDImageInfo                   = binary.ID{0x2d, 0xaa, 0x5c, 0x7f, 0x36, 0x92, 0xad, 0xf2, 0x8d, 0xfc, 0xc0, 0x47, 0x69, 0x59, 0x60, 0xcc, 0xdd, 0x06, 0xf1, 0xa6}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
 	binaryIDReportItem                  = binary.ID{0x8a, 0xb2, 0x14, 0x6f, 0x40, 0xb0, 0x0b, 0x10, 0xa9, 0x02, 0xfb, 0xa1, 0x76, 0x1a, 0xe9, 0xd7, 0x9c, 0x62, 0x40, 0x93}
@@ -534,7 +535,11 @@ func (*ImageInfo) Class() binary.Class {
 	return (*binaryClassImageInfo)(nil)
 }
 func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
-	if err := e.Int32(int32(o.Format)); err != nil {
+	if o.Format != nil {
+		if err := e.Object(o.Format); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
 		return err
 	}
 	if err := e.Uint32(o.Width); err != nil {
@@ -553,10 +558,12 @@ func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) error {
 	return nil
 }
 func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Object(); err != nil {
 		return err
+	} else if obj != nil {
+		o.Format = obj.(image.Format)
 	} else {
-		o.Format = ImageFormat(obj)
+		o.Format = nil
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -578,7 +585,7 @@ func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) error {
 	return nil
 }
 func doSkipImageInfo(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -612,7 +619,7 @@ var schemaImageInfo = &schema.Class{
 	Package: "service",
 	Name:    "ImageInfo",
 	Fields: []schema.Field{
-		{Declared: "Format", Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Interface{Name: "image.Format"}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Blob", ID: (*path.Blob)(nil).Class().ID()}}},
@@ -2737,40 +2744,6 @@ var schemaresultSet = &schema.Class{
 }
 
 var ConstantValues schema.Constants
-
-const _ImageFormat_name = "RGBA8Float32"
-
-var _ImageFormat_map = map[ImageFormat]string{
-	0: _ImageFormat_name[0:5],
-	1: _ImageFormat_name[5:12],
-}
-
-func init() {
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageFormat", Method: schema.Int32},
-		Entries: []schema.Constant{
-			{Name: _ImageFormat_name[0:5], Value: int32(0)},
-			{Name: _ImageFormat_name[5:12], Value: int32(1)},
-		},
-	})
-}
-
-func (v ImageFormat) String() string {
-	if s, ok := _ImageFormat_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageFormat(%d)", v)
-}
-
-func (v *ImageFormat) Parse(s string) error {
-	for k, t := range _ImageFormat_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageFormat", s)
-}
 
 const _TimingFlags_name = "TimingCPUTimingGPUTimingPerCommandTimingPerDrawCallTimingPerFrame"
 

@@ -19,6 +19,7 @@ func init() {
 	Namespace.Add((*fmtATC_RGB_AMD)(nil).Class())
 	Namespace.Add((*fmtAlpha)(nil).Class())
 	Namespace.Add((*fmtETC1_RGB8_OES)(nil).Class())
+	Namespace.Add((*fmtFloat32)(nil).Class())
 	Namespace.Add((*fmtLuminance)(nil).Class())
 	Namespace.Add((*fmtLuminanceAlpha)(nil).Class())
 	Namespace.Add((*fmtPNG)(nil).Class())
@@ -31,6 +32,7 @@ var (
 	binaryIDfmtATC_RGB_AMD                 = binary.ID{0x8b, 0x48, 0x62, 0x86, 0x18, 0xe9, 0x20, 0x62, 0x5f, 0xf5, 0x80, 0xa5, 0xba, 0xb9, 0x5e, 0x69, 0x6b, 0xa5, 0x32, 0xf6}
 	binaryIDfmtAlpha                       = binary.ID{0xaa, 0x3d, 0x3b, 0xac, 0x9b, 0x5c, 0x60, 0x12, 0xdd, 0xd9, 0x45, 0x4c, 0xc5, 0xdd, 0xd1, 0x1f, 0xfd, 0x42, 0xf5, 0xdc}
 	binaryIDfmtETC1_RGB8_OES               = binary.ID{0xc5, 0x5a, 0x15, 0x42, 0x59, 0x53, 0x5b, 0x92, 0xbc, 0xf7, 0xeb, 0xbd, 0x6b, 0xe9, 0xa7, 0x6a, 0xa4, 0xdc, 0xb6, 0x3e}
+	binaryIDfmtFloat32                     = binary.ID{0xe4, 0x1b, 0xb4, 0x3f, 0xd4, 0xbf, 0x3c, 0xa1, 0x94, 0x5f, 0x9a, 0x30, 0x22, 0x43, 0x2c, 0xc0, 0x61, 0xdc, 0x00, 0x5d}
 	binaryIDfmtLuminance                   = binary.ID{0x9b, 0xe5, 0x58, 0x28, 0x9c, 0xbc, 0x1a, 0xaa, 0x1d, 0x9c, 0x91, 0xf9, 0x46, 0xa8, 0x9a, 0x79, 0x70, 0xfe, 0xd7, 0x94}
 	binaryIDfmtLuminanceAlpha              = binary.ID{0xd7, 0x3c, 0xfd, 0xf8, 0x86, 0x2b, 0x6b, 0xb4, 0xc2, 0x7d, 0xa9, 0xb5, 0xbd, 0xca, 0x62, 0xd7, 0xb3, 0xb4, 0xbb, 0xf3}
 	binaryIDfmtPNG                         = binary.ID{0xcd, 0xf0, 0x38, 0xd9, 0x6b, 0x5d, 0x0e, 0xab, 0xd9, 0xcf, 0xd2, 0xe1, 0xbf, 0x4d, 0xcc, 0xad, 0x0f, 0xd1, 0xcb, 0x50}
@@ -187,6 +189,42 @@ var schemafmtETC1_RGB8_OES = &schema.Class{
 	TypeID:  binaryIDfmtETC1_RGB8_OES,
 	Package: "image",
 	Name:    "fmtETC1_RGB8_OES",
+	Fields:  []schema.Field{},
+}
+
+type binaryClassfmtFloat32 struct{}
+
+func (*fmtFloat32) Class() binary.Class {
+	return (*binaryClassfmtFloat32)(nil)
+}
+func doEncodefmtFloat32(e binary.Encoder, o *fmtFloat32) error {
+	return nil
+}
+func doDecodefmtFloat32(d binary.Decoder, o *fmtFloat32) error {
+	return nil
+}
+func doSkipfmtFloat32(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassfmtFloat32) ID() binary.ID      { return binaryIDfmtFloat32 }
+func (*binaryClassfmtFloat32) New() binary.Object { return &fmtFloat32{} }
+func (*binaryClassfmtFloat32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodefmtFloat32(e, obj.(*fmtFloat32))
+}
+func (*binaryClassfmtFloat32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &fmtFloat32{}
+	return obj, doDecodefmtFloat32(d, obj)
+}
+func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodefmtFloat32(d, obj.(*fmtFloat32))
+}
+func (*binaryClassfmtFloat32) Skip(d binary.Decoder) error { return doSkipfmtFloat32(d) }
+func (*binaryClassfmtFloat32) Schema() *schema.Class       { return schemafmtFloat32 }
+
+var schemafmtFloat32 = &schema.Class{
+	TypeID:  binaryIDfmtFloat32,
+	Package: "image",
+	Name:    "fmtFloat32",
 	Fields:  []schema.Field{},
 }
 
