@@ -130,15 +130,22 @@ func (b *batcher) send(requests []Request) (err error) {
 	}
 
 	defer func() {
-		if err == nil {
-			err, _ = recover().(error)
+		caught := recover()
+		if err == nil && caught != nil {
+			err, _ = caught.(error)
+			if err == nil {
+				// If we are panicing, we always want an error to send.
+				err = fmt.Errorf("%s", caught)
+			}
 		}
 		if err != nil {
 			// An error was returned or thrown after the replay postbacks were requested.
 			// Inform each postback handler that they're not going to get data,
 			// to avoid chans blocking forever.
 			decoder(nil, err)
-			panic(err)
+		}
+		if caught != nil {
+			panic(caught)
 		}
 	}()
 
