@@ -57,14 +57,14 @@ func decode(data []byte) (binary.Object, error) {
 
 // extractResources returns a new atom list with all the resources extracted
 // and placed into the database.
-func extractResources(atoms atom.List, d database.Database, l log.Logger) (atom.List, error) {
-	out := make(atom.List, 0, len(atoms))
+func extractResources(a *atom.List, d database.Database, l log.Logger) (*atom.List, error) {
+	out := atom.NewList(make([]atom.Atom, 0, len(a.Atoms))...)
 	idmap := map[binary.ID]binary.ID{}
-	for _, a := range atoms {
+	for _, a := range a.Atoms {
 		switch a := a.(type) {
 		case *atom.Resource:
 			if id, err := database.Store(a.Data, d, l); err != nil {
-				return nil, err
+				return out, err
 			} else {
 				idmap[a.ID] = id
 			}
@@ -83,22 +83,21 @@ func extractResources(atoms atom.List, d database.Database, l log.Logger) (atom.
 					observations.Writes[i].ID = id
 				}
 			}
-			out = append(out, a)
+			out.Atoms = append(out.Atoms, a)
 		}
 	}
 	return out, nil
 }
 
-// ImportCapture builds a new capture containing atoms, stores it into db and
-// returns the new capture identifier.
-func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logger) (*path.Capture, error) {
-	atoms, err := extractResources(atoms, d, l)
+// ImportCapture builds a new capture containing a, stores it into d and
+// returns the new capture path.
+func ImportCapture(name string, a *atom.List, d database.Database, l log.Logger) (*path.Capture, error) {
+	a, err := extractResources(a, d, l)
 	if err != nil {
 		return nil, err
 	}
 
-	stream := &service.AtomStream{Atoms: atoms}
-	streamID, err := database.Store(stream, d, l)
+	streamID, err := database.Store(a, d, l)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +105,7 @@ func ImportCapture(name string, atoms atom.List, d database.Database, l log.Logg
 	// Gather all the APIs used by the capture
 	apis := map[gfxapi.ID]struct{}{}
 	apiIDs := []service.ApiID{}
-	for _, a := range atoms {
+	for _, a := range a.Atoms {
 		if api := a.API(); api.Valid() {
 			if _, found := apis[api]; !found {
 				apis[api] = struct{}{}

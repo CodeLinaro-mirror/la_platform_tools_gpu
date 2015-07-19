@@ -78,22 +78,22 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
 func (s rpcServer) Import(name string, data []uint8, l log.Logger) (*path.Capture, error) {
-	atoms := []atom.Atom{}
+	list := atom.NewList()
 	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 	for {
 		if obj, err := d.Object(); err != nil {
 			if err != io.EOF {
-				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
+				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), err)
 			}
 			break
 		} else {
-			atoms = append(atoms, obj.(atom.Atom))
+			list.Atoms = append(list.Atoms, obj.(atom.Atom))
 		}
 	}
-	if len(atoms) == 0 {
+	if len(list.Atoms) == 0 {
 		return nil, nil
 	}
-	return builder.ImportCapture(name, atoms, s.Database, l)
+	return builder.ImportCapture(name, list, s.Database, l)
 }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
