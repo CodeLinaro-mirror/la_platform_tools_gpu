@@ -24,6 +24,7 @@ import (
 )
 
 type RPC interface {
+	path.Service
 	// The GetSchema returns the type and constant schema descriptions for all
 	// objects used in the api.
 	// This includes all the types included in or referenced from the atom stream.
@@ -70,18 +71,6 @@ type RPC interface {
 	// thumbnails that later get queried by the client. This function is
 	// experimental and may change signature.
 	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (*path.Blob, error)
-
-	// Get resolves and returns the object, value or memory at the path p.
-	Get(p path.Path, l log.Logger) (interface{}, error)
-
-	// Set creates a copy of the capture referenced by p, but with the object, value
-	// or memory at p replaced with v. The path returned is identical to p, but with
-	// the base changed to refer to the new capture.
-	Set(p path.Path, v interface{}, l log.Logger) (path.Path, error)
-
-	// Follow returns the path to the object that the value at p links to.
-	// If the value at p does not link to anything then nil is returned.
-	Follow(p path.Path, l log.Logger) (path.Path, error)
 }
 
 type ApiID binary.ID
