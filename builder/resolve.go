@@ -34,7 +34,7 @@ func ResolveCapture(p *path.Capture, d database.Database, l log.Logger) (service
 // ResolveAtoms resolves and returns the atom list from the path p.
 func ResolveAtoms(p *path.Atoms, d database.Database, l log.Logger) ([]atom.Atom, error) {
 	if res, err := Resolve(p, d, l); err == nil {
-		return res.(*service.AtomStream).Atoms, nil
+		return res.(*atom.List).Atoms, nil
 	} else {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)
-			atoms, err := service.ResolveAtomStream(binary.ID(capture.Atoms), d, l)
+			atoms, err := database.Resolve(binary.ID(capture.Atoms), d, l)
 			if err != nil {
 				return nil, err
 			}
@@ -118,7 +118,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = hierarchy.(*service.Hierarchy)
 
 		case *path.Atom:
-			atoms := v[i-1].(*service.AtomStream).Atoms
+			atoms := v[i-1].(*atom.List).Atoms
 			if p.Index >= uint64(len(atoms)) {
 				return nil, fmt.Errorf("Atom at %s is out of bounds [0-%d]",
 					p.Path(), len(atoms)-1)
@@ -126,7 +126,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = atoms[p.Index]
 
 		case *path.State:
-			atoms := v[i-2].(*service.AtomStream).Atoms
+			atoms := v[i-2].(*atom.List).Atoms
 			api := gfxapi.Find(atoms[p.After.Index].API())
 			if api == nil {
 				return nil, fmt.Errorf("Atom at %s has no API",

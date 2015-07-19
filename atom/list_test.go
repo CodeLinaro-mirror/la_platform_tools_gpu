@@ -22,11 +22,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
-var testList = atom.List{
+var testList = atom.NewList(
 	&test.AtomA{},
 	&test.AtomB{Bool: true},
 	&test.AtomC{String: "Pizza"},
-}
+)
 
 type writeRecord struct {
 	id   atom.ID

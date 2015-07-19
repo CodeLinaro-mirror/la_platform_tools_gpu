@@ -57,7 +57,7 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			panic("Unreachable")
 
 		case *path.Atoms:
-			stream := v[i].(*service.AtomStream)
+			stream := v[i].(*atom.List)
 			streamID, err := database.Store(stream, d, l)
 			if err != nil {
 				return nil, err
@@ -75,7 +75,7 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			if v[i] == nil {
 				return nil, fmt.Errorf("Atom cannot be nil")
 			}
-			stream := v[i-1].(*service.AtomStream).Clone()
+			stream := v[i-1].(*atom.List).Clone()
 			stream.Atoms[p.Index] = v[i].(atom.Atom)
 			v[i-1] = stream
 
