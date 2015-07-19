@@ -20,6 +20,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -44,7 +45,7 @@ func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l lo
 	}
 
 	return &service.ImageInfo{
-		Format: service.ImageFormatFloat32, // TODO: Add support for other formats.
+		Format: image.Float32(), // TODO: Add support for other formats.
 		Width:  fbWidth,
 		Height: fbHeight,
 		Data:   &path.Blob{ID: data},

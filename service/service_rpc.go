@@ -18,6 +18,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -75,14 +76,6 @@ type RPC interface {
 
 type ApiID binary.ID
 type AtomsID binary.ID
-
-// The enumerator of image formats. Will expand.
-type ImageFormat int
-
-const (
-	ImageFormatRGBA8   ImageFormat = 0
-	ImageFormatFloat32 ImageFormat = 1
-)
 
 // TimingFlags is a bitfield describing what should be timed.
 // This is experimental and will change in the near future.
@@ -145,10 +138,10 @@ type MemoryInfo struct {
 // point in the atom stream.
 type ImageInfo struct {
 	binary.Generate `path:"path.ImageInfo"`
-	Format          ImageFormat // The format of the image.
-	Width           uint32      // The width of the image in pixels.
-	Height          uint32      // The height of the image in pixels.
-	Data            *path.Blob  // The pixel data of the image.
+	Format          image.Format // The format of the image.
+	Width           uint32       // The width of the image in pixels.
+	Height          uint32       // The height of the image in pixels.
+	Data            *path.Blob   // The pixel data of the image.
 }
 
 // TimingInfo holds the results of a resolved GetTimingInfo request.
