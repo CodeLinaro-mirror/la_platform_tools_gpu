@@ -15,6 +15,7 @@
 package generate
 
 import (
+	"fmt"
 	"path/filepath"
 	"strings"
 	"unicode"
@@ -68,4 +69,22 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 func (class *JavaClass) FieldName(s string) string {
 	r, n := utf8.DecodeRuneInString(s)
 	return class.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
+}
+
+// Name returns the Java name to give the type.
+func (class *JavaClass) ClassName(s string) string {
+	pkg, name := "", s
+	if i := strings.LastIndexAny(s, "."); i >= 0 {
+		pkg = s[:i]
+		name = s[i+1:]
+	}
+	name = strings.Title(name)
+	if pkg != "" {
+		if m := class.FindImport(pkg); m != nil {
+			name = fmt.Sprintf("%v.%s", m.Directive("java.package", "JoJava."), name)
+		} else {
+			name = "Unknown." + pkg + "." + name
+		}
+	}
+	return name
 }

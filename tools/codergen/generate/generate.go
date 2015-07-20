@@ -18,6 +18,7 @@
 package generate
 
 import (
+	"path"
 	"strconv"
 	"strings"
 
@@ -44,7 +45,10 @@ func indentor(indent string) template.PostProcess {
 	}
 }
 
+type Modules []*Module
+
 type Module struct {
+	Modules    *Modules
 	Source     *scan.Module
 	Name       string
 	Import     string
@@ -57,7 +61,11 @@ type Module struct {
 	Imports    Imports
 }
 
-type Imports map[string]struct{}
+type Import struct {
+	Name string
+	Path string
+}
+type Imports []Import
 
 func (m *Module) Directive(name string, notset interface{}) interface{} {
 	d, ok := m.Directives[name]
@@ -73,8 +81,43 @@ func (m *Module) Directive(name string, notset interface{}) interface{} {
 	return d
 }
 
-func From(scanner *scan.Scanner) ([]*Module, error) {
-	result := []*Module{}
+func (i *Imports) Add(v Import) {
+	*i = append(*i, v)
+}
+
+func (i Imports) FindName(name string) Import {
+	for _, e := range i {
+		if e.Name == name {
+			return e
+		}
+	}
+	return Import{}
+}
+
+func (i Imports) FindPath(path string) Import {
+	for _, e := range i {
+		if e.Path == path {
+			return e
+		}
+	}
+	return Import{}
+}
+
+func (m *Module) FindImport(name string) *Module {
+	path := m.Imports.FindName(name).Path
+	if path == "" {
+		return nil
+	}
+	for _, o := range *m.Modules {
+		if o.Import == path {
+			return o
+		}
+	}
+	return nil
+}
+
+func From(scanner *scan.Scanner) (Modules, error) {
+	result := Modules{}
 	for _, dir := range scanner.Directories {
 		if !dir.Scan {
 			continue
@@ -82,11 +125,13 @@ func From(scanner *scan.Scanner) ([]*Module, error) {
 		if m, err := convert(scanner, &dir.Module, false); err != nil {
 			return nil, err
 		} else if m != nil {
+			m.Modules = &result
 			result = append(result, m)
 		}
 		if m, err := convert(scanner, &dir.Test, true); err != nil {
 			return nil, err
 		} else if m != nil {
+			m.Modules = &result
 			result = append(result, m)
 		}
 	}
@@ -110,8 +155,7 @@ func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, err
 		Source:     src,
 		Name:       src.Directory.Name,
 		Path:       src.Directory.Dir,
-		Import:     src.Directory.ImportPath,
-		Imports:    make(map[string]struct{}),
+		Import:     path.Clean(src.Directory.ImportPath),
 		Directives: directives,
 		IsTest:     isTest,
 	}
