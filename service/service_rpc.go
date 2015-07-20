@@ -66,7 +66,7 @@ type RPC interface {
 	// return any data, as it is used to pre-populate the cache of framebuffer
 	// thumbnails that later get queried by the client. This function is
 	// experimental and may change signature.
-	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (*path.Blob, error)
+	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) error
 }
 
 type ApiID binary.ID
