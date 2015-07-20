@@ -54,7 +54,7 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 	}
 }
 
-// Compliance with the service.RPC interface.
+// Compliance with the service.Service interface.
 
 // The GetSchema returns the type and constant schema descriptions for all
 // objects used in the api.

@@ -25,7 +25,7 @@ import (
 // CapturesHandler is an HTTP request handler that returns a HTML list of
 // captures held in the database.
 type capturesHandler struct {
-	s service.RPC
+	s service.Service
 	l log.Logger
 	c Config
 }
