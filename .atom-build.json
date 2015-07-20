@@ -1,6 +1,6 @@
 {
   "cmd": "go",
   "args": ["run", "{PROJECT_PATH}/make.go"],
-  "sh": true,
+  "sh": false,
   "errorMatch": "android.googlesource.com/platform/tools/gpu/(?<file>[^:\\.\\(\\s]+.go):(?<line>\\d+):((?<col>\\d+):)?"
 }
