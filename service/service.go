@@ -31,9 +31,9 @@ import (
 // binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
-// binary: service = RPC
+// binary: service = Service
 
-type RPC interface {
+type Service interface {
 	path.Service
 	// The GetSchema returns the type and constant schema descriptions for all
 	// objects used in the api.

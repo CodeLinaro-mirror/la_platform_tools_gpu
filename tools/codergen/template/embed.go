@@ -12,7 +12,6 @@ var embedded = map[string]string{
 	go_common_tmpl_file:   go_common_tmpl,
 	go_extra_tmpl_file:    go_extra_tmpl,
 	go_helpers_tmpl_file:  go_helpers_tmpl,
-	go_path_tmpl_file:     go_path_tmpl,
 	go_server_tmpl_file:   go_server_tmpl,
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
@@ -560,47 +559,6 @@ func (r {{.Result.Name}}) Format(f fmt.State, c rune) {
   {{if .Result.Type}}fmt.Fprintf(f, "res: %#v", r.value){{else}}fmt.Fprintf(f, "void"){{end}}
 }{{end}}{{end}}
 `
-const go_path_tmpl_file = `go_path.tmpl`
-const go_path_tmpl = `{{/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */}}
-
-{{define "Go.Path"}}{{template "Go.Prelude" .}}
-{{range .Structs}}{{if $path := .Tag "path" ""}}
-// Resolve{{.Name}} resolves a binary.ID and then safely casts the result to a *{{.Name}}.
-func Resolve{{.Name}}(id binary.ID, d database.Database, l log.Logger) (*{{.Name}}, error) {
-  if v, err := database.Resolve(id, d, l); err != nil {
-	   return nil, err
-	} else if r, ok := v.(*{{.Name}}); !ok {
-		return nil, fmt.Errorf("ID %s gave %T, expected {{.Name}}", id, v)
-	} else {
-		return r, nil
-	}
-}
-
-// Get{{.Name}} calls s.Get with p and then safely casts the result to a *{{.Name}}.
-func Get{{.Name}}(p *{{$path}}, s RPC, l log.Logger) (*{{.Name}}, error) {
-  if v, err := s.Get(p, l); err != nil {
-     return nil, err
-  } else if r, ok := v.(*{{.Name}}); !ok {
-    return nil, fmt.Errorf("path %s gave %T, expected {{.Name}}", p, v)
-  } else {
-    return r, nil
-  }
-} {{end}}{{end}}{{end}}
-`
 const go_server_tmpl_file = `go_server.tmpl`
 const go_server_tmpl = `{{/*
  * Copyright (C) 2015 The Android Open Source Project
@@ -621,7 +579,7 @@ const go_server_tmpl = `{{/*
 {{define "Go.Server"}}{{template "Go.Prelude" .}}
 
 {{$s := .Service}}
-func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
+func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server {{$s.Name}}) {
   rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
     l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
     defer func() {
@@ -643,7 +601,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
             return rpc.NewError(err.Error())
           }{{end}}
         default:
-          return rpc.NewError("Unexpected RPC function: %T", call)
+          return rpc.NewError("Unexpected {{$s.Name}} function: %T", call)
     }
   })
 }

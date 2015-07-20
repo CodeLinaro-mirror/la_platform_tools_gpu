@@ -16,7 +16,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/rpc"
 )
 
-func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
+func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server Service) {
 	rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
 		l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
 		defer func() {
@@ -98,7 +98,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		default:
-			return rpc.NewError("Unexpected RPC function: %T", call)
+			return rpc.NewError("Unexpected Service function: %T", call)
 		}
 	})
 }
