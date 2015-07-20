@@ -8,7 +8,6 @@ package service
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/any"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
@@ -27,7 +26,6 @@ func init() {
 	Namespace.Add((*AtomTimer)(nil).Class())
 	Namespace.Add((*Capture)(nil).Class())
 	Namespace.Add((*Device)(nil).Class())
-	Namespace.Add((*Hierarchy)(nil).Class())
 	Namespace.Add((*ImageInfo)(nil).Class())
 	Namespace.Add((*MemoryInfo)(nil).Class())
 	Namespace.Add((*RenderSettings)(nil).Class())
@@ -64,7 +62,6 @@ var (
 	binaryIDAtomTimer                   = binary.ID{0xa9, 0xad, 0x32, 0xa8, 0xd8, 0xa8, 0xc3, 0xff, 0x44, 0x94, 0x47, 0xd3, 0xaa, 0xd2, 0xce, 0x8f, 0x70, 0xc6, 0xc6, 0x04}
 	binaryIDCapture                     = binary.ID{0x53, 0x83, 0xdc, 0x37, 0x1e, 0x26, 0x9f, 0xb9, 0xc9, 0xf8, 0x6f, 0x4b, 0x42, 0x3b, 0xcd, 0xbc, 0x01, 0x83, 0x76, 0xe2}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
-	binaryIDHierarchy                   = binary.ID{0x26, 0x8b, 0xf1, 0xcb, 0xd8, 0xc8, 0xc2, 0x60, 0x1e, 0xfa, 0x3f, 0x8e, 0xde, 0xc9, 0xe1, 0x01, 0x43, 0x9f, 0x4c, 0xff}
 	binaryIDImageInfo                   = binary.ID{0x2d, 0xaa, 0x5c, 0x7f, 0x36, 0x92, 0xad, 0xf2, 0x8d, 0xfc, 0xc0, 0x47, 0x69, 0x59, 0x60, 0xcc, 0xdd, 0x06, 0xf1, 0xa6}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
 	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
@@ -475,53 +472,6 @@ var schemaDevice = &schema.Class{
 		{Declared: "Renderer", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassHierarchy struct{}
-
-func (*Hierarchy) Class() binary.Class {
-	return (*binaryClassHierarchy)(nil)
-}
-func doEncodeHierarchy(e binary.Encoder, o *Hierarchy) error {
-	if err := e.Value(&o.Root); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) error {
-	if err := d.Value(&o.Root); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipHierarchy(d binary.Decoder) error {
-	if err := d.SkipValue((*atom.Group)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassHierarchy) ID() binary.ID      { return binaryIDHierarchy }
-func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
-func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeHierarchy(e, obj.(*Hierarchy))
-}
-func (*binaryClassHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Hierarchy{}
-	return obj, doDecodeHierarchy(d, obj)
-}
-func (*binaryClassHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeHierarchy(d, obj.(*Hierarchy))
-}
-func (*binaryClassHierarchy) Skip(d binary.Decoder) error { return doSkipHierarchy(d) }
-func (*binaryClassHierarchy) Schema() *schema.Class       { return schemaHierarchy }
-
-var schemaHierarchy = &schema.Class{
-	TypeID:  binaryIDHierarchy,
-	Package: "service",
-	Name:    "Hierarchy",
-	Fields: []schema.Field{
-		{Declared: "Root", Type: &schema.Struct{Name: "atom.Group", ID: (*atom.Group)(nil).Class().ID()}},
 	},
 }
 

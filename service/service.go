@@ -18,7 +18,6 @@
 package service
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/image"
@@ -120,12 +119,6 @@ type ReportItem struct {
 	Severity log.Severity // The severity of the report item.
 	Message  string       // The message for the item.
 	Atom     uint64       // The index of the atom the item refers to.
-}
-
-// Hierarchy holds the root to an AtomGroup hierarchy.
-type Hierarchy struct {
-	binary.Generate
-	Root atom.Group
 }
 
 // MemoryInfo describes the state of a range of memory at a specific point in
