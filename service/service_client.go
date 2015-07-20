@@ -13,10 +13,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-// Client is the client interface for RPC calls.
+// Client is the client interface for Service calls.
 type Client interface {
-	// Client exposes all the RPC interface methods.
-	RPC
+	// Client exposes all the Service interface methods.
+	Service
 	// Multiplexer returns the multiplexer used for communication to the server.
 	Multiplexer() *multiplexer.Multiplexer
 	// Namespace returns the custom namespace used for decoding responses from the
@@ -38,7 +38,7 @@ func (c client) Follow(p path.Path, l log.Logger) (res path.Path, err error) {
 	if val, err = c.Send(&callFollow{p: p}); err == nil {
 		res = val.(*resultFollow).value
 	} else {
-		log.Errorf(l, "RPC Follow failed with error: %v", err)
+		log.Errorf(l, "Service Follow failed with error: %v", err)
 	}
 	return
 }
@@ -48,7 +48,7 @@ func (c client) Get(p path.Path, l log.Logger) (res interface{}, err error) {
 	if val, err = c.Send(&callGet{p: p}); err == nil {
 		res = val.(*resultGet).value
 	} else {
-		log.Errorf(l, "RPC Get failed with error: %v", err)
+		log.Errorf(l, "Service Get failed with error: %v", err)
 	}
 	return
 }
@@ -58,7 +58,7 @@ func (c client) GetCaptures(l log.Logger) (res []*path.Capture, err error) {
 	if val, err = c.Send(&callGetCaptures{}); err == nil {
 		res = val.(*resultGetCaptures).value
 	} else {
-		log.Errorf(l, "RPC GetCaptures failed with error: %v", err)
+		log.Errorf(l, "Service GetCaptures failed with error: %v", err)
 	}
 	return
 }
@@ -68,7 +68,7 @@ func (c client) GetDevices(l log.Logger) (res []*path.Device, err error) {
 	if val, err = c.Send(&callGetDevices{}); err == nil {
 		res = val.(*resultGetDevices).value
 	} else {
-		log.Errorf(l, "RPC GetDevices failed with error: %v", err)
+		log.Errorf(l, "Service GetDevices failed with error: %v", err)
 	}
 	return
 }
@@ -78,7 +78,7 @@ func (c client) GetFramebufferColor(device *path.Device, after *path.Atom, setti
 	if val, err = c.Send(&callGetFramebufferColor{device: device, after: after, settings: settings}); err == nil {
 		res = val.(*resultGetFramebufferColor).value
 	} else {
-		log.Errorf(l, "RPC GetFramebufferColor failed with error: %v", err)
+		log.Errorf(l, "Service GetFramebufferColor failed with error: %v", err)
 	}
 	return
 }
@@ -88,7 +88,7 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 	if val, err = c.Send(&callGetFramebufferDepth{device: device, after: after}); err == nil {
 		res = val.(*resultGetFramebufferDepth).value
 	} else {
-		log.Errorf(l, "RPC GetFramebufferDepth failed with error: %v", err)
+		log.Errorf(l, "Service GetFramebufferDepth failed with error: %v", err)
 	}
 	return
 }
@@ -98,7 +98,7 @@ func (c client) GetSchema(l log.Logger) (res Schema, err error) {
 	if val, err = c.Send(&callGetSchema{}); err == nil {
 		res = val.(*resultGetSchema).value
 	} else {
-		log.Errorf(l, "RPC GetSchema failed with error: %v", err)
+		log.Errorf(l, "Service GetSchema failed with error: %v", err)
 	}
 	return
 }
@@ -108,7 +108,7 @@ func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags 
 	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, flags: flags}); err == nil {
 		res = val.(*resultGetTimingInfo).value
 	} else {
-		log.Errorf(l, "RPC GetTimingInfo failed with error: %v", err)
+		log.Errorf(l, "Service GetTimingInfo failed with error: %v", err)
 	}
 	return
 }
@@ -118,7 +118,7 @@ func (c client) Import(name string, Data []uint8, l log.Logger) (res *path.Captu
 	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
 		res = val.(*resultImport).value
 	} else {
-		log.Errorf(l, "RPC Import failed with error: %v", err)
+		log.Errorf(l, "Service Import failed with error: %v", err)
 	}
 	return
 }
@@ -133,7 +133,7 @@ func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, er
 	if val, err = c.Send(&callSet{p: p, v: v}); err == nil {
 		res = val.(*resultSet).value
 	} else {
-		log.Errorf(l, "RPC Set failed with error: %v", err)
+		log.Errorf(l, "Service Set failed with error: %v", err)
 	}
 	return
 }
