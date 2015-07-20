@@ -60,7 +60,7 @@ func (c closer) Close() error {
 	return c.conn.Close()
 }
 
-func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error {
+func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger, shutdownOnDisconnect bool) error {
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Errorf(logger, "Error binding to port: %v: %v", addr, err)
@@ -68,26 +68,31 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 	}
 
 	shutdown := false
-	var numConn *sync.WaitGroup
-	newCloser := func(conn net.Conn) closer {
-		if numConn == nil {
-			// First call to new Closer.
-			numConn = &sync.WaitGroup{}
-			numConn.Add(1)
+	var newCloser func(conn net.Conn) io.Closer
+	if shutdownOnDisconnect {
+		var numConn *sync.WaitGroup
+		newCloser = func(conn net.Conn) io.Closer {
+			if numConn == nil {
+				// First call to new Closer.
+				numConn = &sync.WaitGroup{}
+				numConn.Add(1)
 
-			// Wait for the number of connection to fall to zero and
-			// then Close() the listener.
-			go func() {
-				numConn.Wait()
-				shutdown = true
-				if err := listener.Close(); err != nil {
-					log.Errorf(logger, "Closing listener failed: %v", err)
-				}
-			}()
-		} else {
-			numConn.Add(1)
+				// Wait for the number of connection to fall to zero and
+				// then Close() the listener.
+				go func() {
+					numConn.Wait()
+					shutdown = true
+					if err := listener.Close(); err != nil {
+						log.Errorf(logger, "Closing listener failed: %v", err)
+					}
+				}()
+			} else {
+				numConn.Add(1)
+			}
+			return closer{numConn: numConn, conn: conn}
 		}
-		return closer{numConn: numConn, conn: conn}
+	} else {
+		newCloser = func(conn net.Conn) io.Closer { return conn }
 	}
 
 	for !shutdown {
