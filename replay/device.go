@@ -18,11 +18,8 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"os"
-	"os/exec"
-	"time"
 
-	"android.googlesource.com/platform/tools/gpu/atexit"
+	"android.googlesource.com/platform/tools/gpu/process"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -114,49 +111,13 @@ func (androidDevice) Connect() (io.ReadWriteCloser, error) {
 
 func (localDevice) Connect() (io.ReadWriteCloser, error) {
 	endpoint := fmt.Sprintf("localhost:%d", localDevicePort)
-	conn, err := net.Dial("tcp", endpoint)
-	if err != nil {
-		if err := spawnChild(localReplayBinary); err != nil {
-			return nil, err
-		}
-		for i := 0; i < 10; i++ {
-			conn, err = net.Dial("tcp", endpoint)
-			if err == nil {
-				return conn, err
-			}
-			time.Sleep(100 * time.Millisecond)
-		}
-	}
-	return conn, err
-}
 
-func spawnChild(path string) error {
-	null, err := os.OpenFile(os.DevNull, os.O_RDWR, 0)
-	if err != nil {
-		return err
-	}
-	path, err = exec.LookPath(path)
-	if err != nil {
-		return err
-	}
-	args := []string{path}
+	args := []string{}
 	if disableLocalDeviceCache {
 		args = append(args, "--nocache")
 	}
 	args = append(args, "--port")
 	args = append(args, fmt.Sprintf("%d", localDevicePort))
-	proc, err := os.StartProcess(path, args, &os.ProcAttr{
-		Files: []*os.File{null, null, null},
-	})
-	if err != nil {
-		return err
-	}
 
-	// Kill the child process on parent exit.
-	atexit.Register(func() {
-		proc.Kill()
-		proc.Wait()
-	}, time.Second)
-
-	return nil
+	return process.ConnectStartIfNeeded(endpoint, localReplayBinary, args...)
 }

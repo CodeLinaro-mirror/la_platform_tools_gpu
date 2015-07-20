@@ -16,8 +16,10 @@ package server
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"net"
+	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -39,19 +41,69 @@ type rpcServer struct {
 	ReplayManager *replay.Manager
 }
 
+// closer, provide connection closing which knows when the last connection
+// has gone away.
+type closer struct {
+	numConn *sync.WaitGroup
+	conn    net.Conn
+}
+
+func (c closer) Close() error {
+	if c.numConn == nil {
+		return fmt.Errorf("Multiple calls to Close")
+	}
+	c.numConn.Done()
+	defer func() {
+		c.numConn = nil
+		c.conn = nil
+	}()
+	return c.conn.Close()
+}
+
 func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error {
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
+		log.Errorf(logger, "Error binding to port: %v: %v", addr, err)
 		return err
 	}
 
-	for {
-		if conn, err := listener.Accept(); err == nil {
-			service.BindServer(conn, conn, mtu, log.Fork(logger), &s)
+	shutdown := false
+	var numConn *sync.WaitGroup
+	newCloser := func(conn net.Conn) closer {
+		if numConn == nil {
+			// First call to new Closer.
+			numConn = &sync.WaitGroup{}
+			numConn.Add(1)
+
+			// Wait for the number of connection to fall to zero and
+			// then Close() the listener.
+			go func() {
+				numConn.Wait()
+				shutdown = true
+				if err := listener.Close(); err != nil {
+					log.Errorf(logger, "Closing listener failed: %v", err)
+				}
+			}()
 		} else {
-			return err
+			numConn.Add(1)
+		}
+		return closer{numConn: numConn, conn: conn}
+	}
+
+	for !shutdown {
+		if conn, err := listener.Accept(); err == nil {
+			service.BindServer(conn, conn, newCloser(conn), mtu, log.Fork(logger), &s)
+		} else {
+			if shutdown {
+				log.Infof(logger, "Shutdown requested")
+				return nil
+			} else {
+				log.Errorf(logger, "Error accepting connection: %v", err)
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 // Compliance with the service.Service interface.

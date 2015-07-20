@@ -53,5 +53,5 @@ func main() {
 		RpcAddress:  *rpc,
 		DataPath:    dataAbsPath,
 		LogfilePath: logfileAbsPath,
-	}, nil)
+	})
 }
