@@ -18,6 +18,9 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // Nullptr is a zero-address pointer in the application pool.
@@ -42,4 +45,12 @@ func (p Pointer) Range(s uint64) Range {
 
 func (p Pointer) String() string {
 	return fmt.Sprintf("0x%.16x@%d", uint64(p.Address), p.Pool)
+}
+
+// Link return the path to the memory pointed-to by p.
+func (p Pointer) Link(pth path.Path, d database.Database, l log.Logger) (path.Path, error) {
+	if a := path.FindAtom(pth); a != nil {
+		return a.MemoryAfter(uint64(p.Pool), p.Address, 0), nil
+	}
+	return nil, nil
 }
