@@ -28,8 +28,7 @@ import (
 type MemoryAdapter struct {
 	gxui.AdapterBase
 	appCtx       *ApplicationContext
-	after        *path.Atom
-	baseAddress  uint64
+	path         *path.MemoryRange
 	bytesPerLine uint64
 	dataType     DataType
 }
@@ -42,18 +41,25 @@ func CreateMemoryAdapter(appCtx *ApplicationContext) *MemoryAdapter {
 	}
 }
 
-func (a *MemoryAdapter) Update(after *path.Atom, baseAddress uint64) {
-	a.after = after
-	a.baseAddress = baseAddress
+func (a *MemoryAdapter) Update(p *path.MemoryRange) {
+	a.path = p
 	a.DataReplaced()
 }
 
 func (a *MemoryAdapter) IndexOfAddress(addr uint64) int {
-	return int(addr/a.bytesPerLine - a.baseAddress)
+	if a.path != nil {
+		return int(addr/a.bytesPerLine - a.path.Address)
+	} else {
+		return 0
+	}
 }
 
 func (a *MemoryAdapter) AddressAtIndex(index int) uint64 {
-	return a.baseAddress + uint64(index)*a.bytesPerLine
+	if a.path != nil {
+		return a.path.Address + uint64(index)*a.bytesPerLine
+	} else {
+		return 0
+	}
 }
 
 func (a *MemoryAdapter) SetDataType(dataType DataType) {
@@ -66,7 +72,7 @@ func (a *MemoryAdapter) Size(theme gxui.Theme) math.Size {
 }
 
 func (a *MemoryAdapter) Count() int {
-	if a.after != nil {
+	if a.path != nil {
 		return 10000 //Who knows?
 	} else {
 		return 0
@@ -85,11 +91,14 @@ func (a *MemoryAdapter) ItemIndex(item gxui.AdapterItem) int {
 func (a *MemoryAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	ll := theme.CreateLinearLayout()
 	ll.SetDirection(gxui.LeftToRight)
-	base := a.AddressAtIndex(index)
+	base, size := a.AddressAtIndex(index), a.bytesPerLine
 
 	t := task.New()
 	update := func() {
-		t.Run(requestMemory{a.appCtx, a.after, base, a.bytesPerLine, func(info service.MemoryInfo) {
+		p := a.path.Clone().(*path.MemoryRange)
+		p.Address = base
+		p.Size = size
+		t.Run(requestMemory{a.appCtx, p, func(info service.MemoryInfo) {
 			ll.RemoveAll()
 			ll.AddChild(createLabel(a.appCtx, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR))
 			offset := uint64(0)
