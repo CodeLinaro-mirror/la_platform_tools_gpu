@@ -72,7 +72,7 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	}
 
 	// Setup and run the (blocking) HTTP listener.
-	http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{database}))
-	http.Handle(capturesRoute, http.StripPrefix(capturesRoute, capturesHandler{database, logger, config}))
+	http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{rpc}))
+	http.Handle(capturesRoute, http.StripPrefix(capturesRoute, capturesHandler{rpc, logger, config}))
 	http.ListenAndServe(config.HttpAddress, nil)
 }

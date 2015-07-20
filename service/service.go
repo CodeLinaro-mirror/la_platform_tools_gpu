@@ -54,3 +54,14 @@ func ResolveAtomList(id AtomsID, d database.Database, l log.Logger) (*atom.List,
 		return r, nil
 	}
 }
+
+// GetAtomList resolves an AtomsID and then safely casts the result to a *atom.List.
+func GetAtomList(p *path.Atoms, s RPC, l log.Logger) (*atom.List, error) {
+	if v, err := s.Get(p, l); err != nil {
+		return nil, err
+	} else if r, ok := v.(*atom.List); !ok {
+		return nil, fmt.Errorf("path %s gave %T, expected *atom.List", p, v)
+	} else {
+		return r, nil
+	}
+}
