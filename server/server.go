@@ -29,10 +29,11 @@ import (
 )
 
 type Config struct {
-	HttpAddress string
-	RpcAddress  string
-	DataPath    string
-	LogfilePath string
+	HttpAddress          string
+	RpcAddress           string
+	DataPath             string
+	LogfilePath          string
+	ShutdownOnDisconnect bool
 }
 
 const (
@@ -76,7 +77,7 @@ func Run(config Config) {
 	}()
 
 	// Run the blocking RPC listener
-	if err := rpc.ListenAndServe(config.RpcAddress, mtu, logger); err != nil {
+	if err := rpc.ListenAndServe(config.RpcAddress, mtu, logger, config.ShutdownOnDisconnect); err != nil {
 		log.Errorf(logger, "RPC Server shutdown with error %v", err)
 		atexit.Exit(1)
 	}

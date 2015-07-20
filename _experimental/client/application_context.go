@@ -54,6 +54,7 @@ func connectServer(config Config) (net.Conn, error) {
 	args := []string{
 		"--rpc", config.Gapis,
 		"--data", config.DataPath,
+		"--shutdown_on_disconnect",
 	}
 	return process.ConnectStartIfNeeded(config.Gapis, "gapis", args...)
 }
