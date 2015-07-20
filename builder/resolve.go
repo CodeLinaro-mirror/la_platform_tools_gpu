@@ -83,11 +83,13 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = r
 
 		case *path.Blob:
-			blob, err := service.ResolveBlob(p.ID, d, l)
-			if err != nil {
+			if blob, err := database.Resolve(p.ID, d, l); err != nil {
 				return nil, err
+			} else if data, ok := blob.([]byte); !ok {
+				return nil, fmt.Errorf("ID %s gave %T, expected []byte", p.ID, blob)
+			} else {
+				v[i] = data
 			}
-			v[i] = blob
 
 		case *path.Atoms:
 			capture := v[i-1].(*service.Capture)
