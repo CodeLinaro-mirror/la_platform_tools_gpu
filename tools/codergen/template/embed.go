@@ -701,7 +701,7 @@ import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
 import java.io.IOException;
 
-public final class {{.Struct.Name}} implements BinaryObject {
+{{if .Struct.Exported}}public {{end}}final class {{.Struct.Name}} implements BinaryObject {
 {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
 »// Constructs a default-initialized {@link {{.Struct.Name}}}.
 »public {{.Struct.Name}}() {

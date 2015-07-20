@@ -21,6 +21,9 @@ import (
 )
 
 // binary: Schema = false
+// binary: java.source = base/rpclib/src/main/java
+// binary: java.package = com.android.tools.rpclib.schema
+// binary: java.member_prefix = m
 
 // Type represents the common interface to all type objects in the schema.
 type Type interface {

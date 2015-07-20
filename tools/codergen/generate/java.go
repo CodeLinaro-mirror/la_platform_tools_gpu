@@ -31,7 +31,7 @@ type JavaStruct struct {
 func (s *JavaStruct) Name() string {
 	name := s.Tags.Get("java")
 	if name == "" {
-		name = s.Struct.Name
+		name = strings.Title(s.Struct.Name)
 	}
 	return name
 }
