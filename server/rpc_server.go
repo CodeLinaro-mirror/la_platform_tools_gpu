@@ -194,15 +194,15 @@ func (s rpcServer) PrerenderFramebuffers(
 	apiID service.ApiID,
 	width, height uint32,
 	atomIDs []uint64,
-	l log.Logger) (*path.Blob, error) {
+	l log.Logger) error {
 
 	if err := device.Validate(); err != nil {
-		return nil, err
+		return err
 	}
 	if err := capture.Validate(); err != nil {
-		return nil, err
+		return err
 	}
-	id, err := database.Store(&builder.PrerenderFramebuffers{
+	_, err := database.Build(&builder.PrerenderFramebuffers{
 		Device:  device,
 		Capture: capture,
 		API:     apiID,
@@ -210,7 +210,7 @@ func (s rpcServer) PrerenderFramebuffers(
 		Height:  height,
 		AtomIDs: atomIDs,
 	}, s.Database, l)
-	return &path.Blob{ID: id}, err
+	return err
 }
 
 // Get resolves and returns the object, value or memory at the path p.

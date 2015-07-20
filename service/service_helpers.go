@@ -79,7 +79,7 @@ func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
 	)
 }
 func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
+	fmt.Fprintf(f, "void")
 }
 func (c callSet) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "Set(p: %v, v: %v)",
