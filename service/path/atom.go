@@ -67,6 +67,11 @@ func (n *Atom) StateAfter() *State {
 	return &State{After: n}
 }
 
+// MemoryAfter returns the path to the memory immediately following this atom.
+func (n *Atom) MemoryAfter(pool uint64, address, size uint64) *MemoryRange {
+	return &MemoryRange{After: n, Pool: pool, Address: address, Size: size}
+}
+
 // FindAtom returns the first Atom found traversing the path p.
 // If no Atom was found, then nil is returned.
 func FindAtom(p Path) *Atom {

@@ -8,7 +8,6 @@ package service
 import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -90,16 +89,6 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 		res = val.(*resultGetFramebufferDepth).value
 	} else {
 		log.Errorf(l, "RPC GetFramebufferDepth failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) GetMemoryInfo(after *path.Atom, rng memory.Range, l log.Logger) (res *path.MemoryInfo, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetMemoryInfo{after: after, rng: rng}); err == nil {
-		res = val.(*resultGetMemoryInfo).value
-	} else {
-		log.Errorf(l, "RPC GetMemoryInfo failed with error: %v", err)
 	}
 	return
 }

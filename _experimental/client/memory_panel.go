@@ -122,7 +122,8 @@ type requestMemory struct {
 }
 
 func (t requestMemory) Run(c task.CancelSignal) {
-	res, err := t.context.rpc.RequestMemory(t.after, t.address, t.size)
+	p := t.after.MemoryAfter(0, t.address, t.size)
+	res, err := t.context.rpc.LoadMemory(p)
 	if err != nil {
 		return
 	}

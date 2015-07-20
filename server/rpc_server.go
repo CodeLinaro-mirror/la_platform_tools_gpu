@@ -29,7 +29,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -111,23 +110,6 @@ func (s rpcServer) GetDevices(l log.Logger) ([]*path.Device, error) {
 		paths[i] = d.Path()
 	}
 	return paths, nil
-}
-
-// GetMemoryInfo returns the MemoryInfo identifier describing the memory state
-// for the given capture and memory range, immediately following the atom after.
-func (s rpcServer) GetMemoryInfo(
-	after *path.Atom,
-	rng memory.Range,
-	l log.Logger) (*path.MemoryInfo, error) {
-
-	if err := after.Validate(); err != nil {
-		return nil, err
-	}
-	id, err := database.Store(&builder.GetMemoryInfo{
-		After: after,
-		Range: memory.Range{Base: rng.Base, Size: rng.Size},
-	}, s.Database, l)
-	return &path.MemoryInfo{ID: id}, err
 }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
