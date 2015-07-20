@@ -93,10 +93,10 @@ type Schema struct {
 
 // Capture describes single capture file held by the server.
 type Capture struct {
-	binary.Generate `path:"path.Capture"`
-	Name            string  // Name given to the capture. e.g. "KittyWorld"
-	Atoms           AtomsID // The path to the stream of atoms in this capture.
-	Apis            []ApiID // List of graphics APIs used by this capture.
+	binary.Generate
+	Name  string  // Name given to the capture. e.g. "KittyWorld"
+	Atoms AtomsID // The path to the stream of atoms in this capture.
+	Apis  []ApiID // List of graphics APIs used by this capture.
 }
 
 // Report describes all warnings and errors found by a capture.
@@ -132,20 +132,20 @@ type MemoryInfo struct {
 // ImageInfo describes an image, such as a texture or framebuffer at a specific
 // point in the atom stream.
 type ImageInfo struct {
-	binary.Generate `path:"path.ImageInfo"`
-	Format          image.Format // The format of the image.
-	Width           uint32       // The width of the image in pixels.
-	Height          uint32       // The height of the image in pixels.
-	Data            *path.Blob   // The pixel data of the image.
+	binary.Generate
+	Format image.Format // The format of the image.
+	Width  uint32       // The width of the image in pixels.
+	Height uint32       // The height of the image in pixels.
+	Data   *path.Blob   // The pixel data of the image.
 }
 
 // TimingInfo holds the results of a resolved GetTimingInfo request.
 // This is experimental and will change in the near future.
 type TimingInfo struct {
-	binary.Generate `path:"path.TimingInfo"`
-	PerCommand      []AtomTimer      // The timing results of each command.
-	PerDrawCall     []AtomRangeTimer // The timing results of each draw call.
-	PerFrame        []AtomRangeTimer // The timing results of each frame.
+	binary.Generate
+	PerCommand  []AtomTimer      // The timing results of each command.
+	PerDrawCall []AtomRangeTimer // The timing results of each draw call.
+	PerFrame    []AtomRangeTimer // The timing results of each frame.
 }
 
 // AtomTimer holds the timing information for a single atom.
