@@ -135,7 +135,6 @@ type callPrerenderFramebuffers struct {
 // Result PrerenderFramebuffers
 type resultPrerenderFramebuffers struct {
 	binary.Generate
-	value *path.Blob
 }
 
 // Call Set
