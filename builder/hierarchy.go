@@ -20,7 +20,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // BuildLazy returns the *service.Hierarchy resulting from the given
@@ -31,7 +30,7 @@ func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logge
 		return nil, err
 	}
 
-	root := atom.Group{
+	root := &atom.Group{
 		Range: atom.Range{Start: 0, End: atom.ID(len(atoms))},
 	}
 	var frameIndex, drawIndex int
@@ -52,7 +51,5 @@ func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logge
 		}
 	}
 
-	return &service.Hierarchy{
-		Root: root,
-	}, nil
+	return root, nil
 }
