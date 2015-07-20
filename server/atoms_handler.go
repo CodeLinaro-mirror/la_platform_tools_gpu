@@ -32,7 +32,7 @@ const (
 // AtomsHandler is an HTTP request handler that returns a human-readable description
 // of the atoms for a given capture and context.
 type atomsHandler struct {
-	s service.RPC
+	s service.Service
 }
 
 // ServeHTTP writes to res a human-readable plain text description for each of the

@@ -25,7 +25,7 @@ import (
 )
 
 // GetBlob calls s.Get with p and then safely casts the result to a []byte.
-func GetBlob(p *path.Blob, s RPC, l log.Logger) ([]byte, error) {
+func GetBlob(p *path.Blob, s Service, l log.Logger) ([]byte, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.([]byte); !ok {
@@ -47,7 +47,7 @@ func ResolveAtomList(id AtomsID, d database.Database, l log.Logger) (*atom.List,
 }
 
 // GetAtomList resolves an AtomsID and then safely casts the result to a *atom.List.
-func GetAtomList(p *path.Atoms, s RPC, l log.Logger) (*atom.List, error) {
+func GetAtomList(p *path.Atoms, s Service, l log.Logger) (*atom.List, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*atom.List); !ok {
@@ -69,7 +69,7 @@ func ResolveCapture(id binary.ID, d database.Database, l log.Logger) (*Capture, 
 }
 
 // GetCapture calls s.Get with p and then safely casts the result to a *Capture.
-func GetCapture(p *path.Capture, s RPC, l log.Logger) (*Capture, error) {
+func GetCapture(p *path.Capture, s Service, l log.Logger) (*Capture, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*Capture); !ok {
@@ -91,7 +91,7 @@ func ResolveDevice(id binary.ID, d database.Database, l log.Logger) (*Device, er
 }
 
 // GetDevice calls s.Get with p and then safely casts the result to a *Device.
-func GetDevice(p *path.Device, s RPC, l log.Logger) (*Device, error) {
+func GetDevice(p *path.Device, s Service, l log.Logger) (*Device, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*Device); !ok {
@@ -113,7 +113,7 @@ func ResolveImageInfo(id binary.ID, d database.Database, l log.Logger) (*ImageIn
 }
 
 // GetImageInfo calls s.Get with p and then safely casts the result to a *ImageInfo.
-func GetImageInfo(p *path.ImageInfo, s RPC, l log.Logger) (*ImageInfo, error) {
+func GetImageInfo(p *path.ImageInfo, s Service, l log.Logger) (*ImageInfo, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*ImageInfo); !ok {
@@ -135,7 +135,7 @@ func ResolveTimingInfo(id binary.ID, d database.Database, l log.Logger) (*Timing
 }
 
 // GetTimingInfo calls s.Get with p and then safely casts the result to a *TimingInfo.
-func GetTimingInfo(p *path.TimingInfo, s RPC, l log.Logger) (*TimingInfo, error) {
+func GetTimingInfo(p *path.TimingInfo, s Service, l log.Logger) (*TimingInfo, error) {
 	if v, err := s.Get(p, l); err != nil {
 		return nil, err
 	} else if r, ok := v.(*TimingInfo); !ok {
