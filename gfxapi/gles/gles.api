@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import "glenum.api"
+import "types.api"
 import "synthetic.api"
 
 alias map!(TextureUnit, map!(TextureTarget, TextureId)) TextureUnitMap
