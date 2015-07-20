@@ -123,14 +123,9 @@ func (c client) Import(name string, Data []uint8, l log.Logger) (res *path.Captu
 	return
 }
 
-func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) (res *path.Blob, err error) {
-	var val interface{}
-	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIDs: atomIDs}); err == nil {
-		res = val.(*resultPrerenderFramebuffers).value
-	} else {
-		log.Errorf(l, "RPC PrerenderFramebuffers failed with error: %v", err)
-	}
-	return
+func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) error {
+	_, err := c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIDs: atomIDs})
+	return err
 }
 
 func (c client) Set(p path.Path, v interface{}, l log.Logger) (res path.Path, err error) {
