@@ -30,8 +30,7 @@ import (
 type MemoryImageAdapter struct {
 	gxui.AdapterBase
 	appCtx        *ApplicationContext
-	after         *path.Atom
-	baseAddress   uint64
+	path          *path.MemoryRange
 	pixelsPerLine uint64
 	pixelType     PixelType
 }
@@ -44,20 +43,27 @@ func CreateMemoryImageAdapter(appCtx *ApplicationContext) *MemoryImageAdapter {
 	}
 }
 
-func (a *MemoryImageAdapter) Update(after *path.Atom, baseAddress uint64) {
-	a.after = after
-	a.baseAddress = baseAddress
+func (a *MemoryImageAdapter) Update(p *path.MemoryRange) {
+	a.path = p
 	a.DataReplaced()
 }
 
 func (a *MemoryImageAdapter) IndexOfAddress(addr uint64) int {
-	return int(addr/a.pixelsPerLine - a.baseAddress)
+	if a.path != nil {
+		return int(addr/a.pixelsPerLine - a.path.Address)
+	} else {
+		return 0
+	}
 }
 
 func (a *MemoryImageAdapter) AddressAtIndex(index int) uint64 {
-	bytesPerPixel := uint64(a.pixelType.SizeBytes())
-	bytesPerLine := a.pixelsPerLine * bytesPerPixel
-	return a.baseAddress + uint64(index)*bytesPerLine
+	if a.path != nil {
+		bytesPerPixel := uint64(a.pixelType.SizeBytes())
+		bytesPerLine := a.pixelsPerLine * bytesPerPixel
+		return a.path.Address + uint64(index)*bytesPerLine
+	} else {
+		return 0
+	}
 }
 
 func (a *MemoryImageAdapter) SetPixelType(pixelType PixelType) {
@@ -70,7 +76,7 @@ func (a *MemoryImageAdapter) Size(theme gxui.Theme) math.Size {
 }
 
 func (a *MemoryImageAdapter) Count() int {
-	if a.after != nil {
+	if a.path != nil {
 		return 10000 //Who knows?
 	} else {
 		return 0
@@ -88,15 +94,17 @@ func (a *MemoryImageAdapter) ItemIndex(item gxui.AdapterItem) int {
 
 func (a *MemoryImageAdapter) Create(theme gxui.Theme, index int) gxui.Control {
 	bytesPerPixel := uint64(a.pixelType.SizeBytes())
-	bytesPerLine := a.pixelsPerLine * bytesPerPixel
-	base := a.AddressAtIndex(index)
+	base, size := a.AddressAtIndex(index), a.pixelsPerLine*bytesPerPixel
 
 	ll := theme.CreateLinearLayout()
 	ll.SetDirection(gxui.LeftToRight)
 
 	t := task.New()
 	update := func() {
-		t.Run(requestMemory{a.appCtx, a.after, base, bytesPerLine, func(info service.MemoryInfo) {
+		p := a.path.Clone().(*path.MemoryRange)
+		p.Address = base
+		p.Size = size
+		t.Run(requestMemory{a.appCtx, p, func(info service.MemoryInfo) {
 			ll.RemoveAll()
 			ll.AddChild(createLabel(a.appCtx, fmt.Sprintf("%.16x ", base), LINE_NUMBER_COLOR))
 			addr := base
