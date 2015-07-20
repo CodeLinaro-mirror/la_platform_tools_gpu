@@ -166,9 +166,7 @@ func createField(appCtx *ApplicationContext, p path.Path, t schema.Type, v inter
 	case *memory.Pointer:
 		b := appCtx.theme.CreateButton()
 		b.SetMargin(math.Spacing{})
-		//b.SetPadding(math.Spacing{})
 		b.AddChild(createLabel(appCtx, v.String(), CONSTANT_COLOR))
-		//b.OnClick(func(gxui.MouseEvent) { appCtx.SelectPointer(*v) }) // [BENC]: TODO
 		c = b
 
 	case *atom.Observations:
