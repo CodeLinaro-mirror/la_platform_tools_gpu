@@ -41,7 +41,6 @@ func init() {
 	Namespace.Add((*callGetDevices)(nil).Class())
 	Namespace.Add((*callGetFramebufferColor)(nil).Class())
 	Namespace.Add((*callGetFramebufferDepth)(nil).Class())
-	Namespace.Add((*callGetMemoryInfo)(nil).Class())
 	Namespace.Add((*callGetSchema)(nil).Class())
 	Namespace.Add((*callGetTimingInfo)(nil).Class())
 	Namespace.Add((*callImport)(nil).Class())
@@ -53,7 +52,6 @@ func init() {
 	Namespace.Add((*resultGetDevices)(nil).Class())
 	Namespace.Add((*resultGetFramebufferColor)(nil).Class())
 	Namespace.Add((*resultGetFramebufferDepth)(nil).Class())
-	Namespace.Add((*resultGetMemoryInfo)(nil).Class())
 	Namespace.Add((*resultGetSchema)(nil).Class())
 	Namespace.Add((*resultGetTimingInfo)(nil).Class())
 	Namespace.Add((*resultImport)(nil).Class())
@@ -80,7 +78,6 @@ var (
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
 	binaryIDcallGetFramebufferColor     = binary.ID{0xb3, 0x38, 0x68, 0x8d, 0x4f, 0xfa, 0x98, 0x22, 0x57, 0xe0, 0x73, 0x90, 0xa7, 0x07, 0x5a, 0x5d, 0xb5, 0x01, 0xfa, 0xe1}
 	binaryIDcallGetFramebufferDepth     = binary.ID{0x96, 0x26, 0xb8, 0x24, 0x39, 0x5b, 0xc4, 0x53, 0xd4, 0xfd, 0x0d, 0xa3, 0x54, 0xbc, 0xfa, 0x78, 0xaf, 0xd2, 0xf6, 0x9d}
-	binaryIDcallGetMemoryInfo           = binary.ID{0x8b, 0x23, 0xd7, 0xa0, 0x04, 0x26, 0x5a, 0x0a, 0x1d, 0xa9, 0xb3, 0x14, 0x32, 0x79, 0x7c, 0x0e, 0x82, 0x93, 0x3c, 0x83}
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetTimingInfo           = binary.ID{0x00, 0xed, 0x86, 0x08, 0xac, 0xd7, 0xd9, 0x7d, 0x3f, 0xf4, 0x38, 0xf4, 0xb3, 0xde, 0xc8, 0x9b, 0xd6, 0xc9, 0xc2, 0xb0}
 	binaryIDcallImport                  = binary.ID{0xa8, 0x48, 0x6d, 0xd8, 0xc4, 0xf4, 0x48, 0x53, 0xc4, 0x74, 0xb1, 0xcf, 0xad, 0x37, 0xca, 0x5b, 0x1e, 0xfd, 0x1a, 0xb3}
@@ -92,7 +89,6 @@ var (
 	binaryIDresultGetDevices            = binary.ID{0x33, 0xf5, 0xb9, 0xd1, 0x24, 0x9d, 0x0d, 0x9f, 0x2c, 0x00, 0x4f, 0xed, 0xd6, 0x2f, 0x76, 0xa8, 0x76, 0x74, 0x3c, 0x09}
 	binaryIDresultGetFramebufferColor   = binary.ID{0xc2, 0x21, 0x36, 0xf1, 0xf5, 0xd9, 0x4f, 0x63, 0x51, 0x79, 0x9a, 0xc1, 0xb2, 0x2f, 0x0c, 0xe4, 0x52, 0x50, 0xf2, 0xac}
 	binaryIDresultGetFramebufferDepth   = binary.ID{0xeb, 0x6a, 0x50, 0x23, 0x07, 0x9f, 0xe3, 0x4d, 0xa1, 0x83, 0x1e, 0xe8, 0x1b, 0x77, 0x9e, 0x69, 0x5f, 0xd7, 0x5c, 0x9c}
-	binaryIDresultGetMemoryInfo         = binary.ID{0x6c, 0x3d, 0xae, 0x50, 0xd6, 0xbd, 0x2b, 0xb8, 0x8a, 0x33, 0x33, 0x9d, 0xa7, 0x3c, 0x11, 0xf7, 0x41, 0xd5, 0x42, 0x14}
 	binaryIDresultGetSchema             = binary.ID{0xd0, 0x54, 0xb1, 0x58, 0x23, 0xd7, 0x0d, 0x2b, 0x65, 0xee, 0xcc, 0x2a, 0xb8, 0x12, 0x27, 0x6c, 0x8f, 0xcd, 0x75, 0x8a}
 	binaryIDresultGetTimingInfo         = binary.ID{0xb0, 0x3b, 0x55, 0xec, 0xe2, 0xf1, 0x87, 0x15, 0x8c, 0x11, 0x5d, 0x12, 0x3a, 0xc7, 0x1f, 0x7f, 0xfd, 0xe9, 0x20, 0xd3}
 	binaryIDresultImport                = binary.ID{0x25, 0x0d, 0x7b, 0xc7, 0x15, 0xd0, 0x88, 0x75, 0x71, 0xf0, 0xe4, 0x79, 0x84, 0xd9, 0xb8, 0xe8, 0x98, 0x27, 0x33, 0xa4}
@@ -1548,71 +1544,6 @@ var schemacallGetFramebufferDepth = &schema.Class{
 	},
 }
 
-type binaryClasscallGetMemoryInfo struct{}
-
-func (*callGetMemoryInfo) Class() binary.Class {
-	return (*binaryClasscallGetMemoryInfo)(nil)
-}
-func doEncodecallGetMemoryInfo(e binary.Encoder, o *callGetMemoryInfo) error {
-	if o.after != nil {
-		if err := e.Object(o.after); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Value(&o.rng); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodecallGetMemoryInfo(d binary.Decoder, o *callGetMemoryInfo) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.after = obj.(*path.Atom)
-	} else {
-		o.after = nil
-	}
-	if err := d.Value(&o.rng); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipcallGetMemoryInfo(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*memory.Range)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClasscallGetMemoryInfo) ID() binary.ID      { return binaryIDcallGetMemoryInfo }
-func (*binaryClasscallGetMemoryInfo) New() binary.Object { return &callGetMemoryInfo{} }
-func (*binaryClasscallGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodecallGetMemoryInfo(e, obj.(*callGetMemoryInfo))
-}
-func (*binaryClasscallGetMemoryInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &callGetMemoryInfo{}
-	return obj, doDecodecallGetMemoryInfo(d, obj)
-}
-func (*binaryClasscallGetMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodecallGetMemoryInfo(d, obj.(*callGetMemoryInfo))
-}
-func (*binaryClasscallGetMemoryInfo) Skip(d binary.Decoder) error { return doSkipcallGetMemoryInfo(d) }
-func (*binaryClasscallGetMemoryInfo) Schema() *schema.Class       { return schemacallGetMemoryInfo }
-
-var schemacallGetMemoryInfo = &schema.Class{
-	TypeID:  binaryIDcallGetMemoryInfo,
-	Package: "service",
-	Name:    "callGetMemoryInfo",
-	Fields: []schema.Field{
-		{Declared: "after", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
-		{Declared: "rng", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
-	},
-}
-
 type binaryClasscallGetSchema struct{}
 
 func (*callGetSchema) Class() binary.Class {
@@ -2406,63 +2337,6 @@ var schemaresultGetFramebufferDepth = &schema.Class{
 	Name:    "resultGetFramebufferDepth",
 	Fields: []schema.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.ImageInfo", ID: (*path.ImageInfo)(nil).Class().ID()}}},
-	},
-}
-
-type binaryClassresultGetMemoryInfo struct{}
-
-func (*resultGetMemoryInfo) Class() binary.Class {
-	return (*binaryClassresultGetMemoryInfo)(nil)
-}
-func doEncoderesultGetMemoryInfo(e binary.Encoder, o *resultGetMemoryInfo) error {
-	if o.value != nil {
-		if err := e.Object(o.value); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecoderesultGetMemoryInfo(d binary.Decoder, o *resultGetMemoryInfo) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.value = obj.(*path.MemoryInfo)
-	} else {
-		o.value = nil
-	}
-	return nil
-}
-func doSkipresultGetMemoryInfo(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassresultGetMemoryInfo) ID() binary.ID      { return binaryIDresultGetMemoryInfo }
-func (*binaryClassresultGetMemoryInfo) New() binary.Object { return &resultGetMemoryInfo{} }
-func (*binaryClassresultGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncoderesultGetMemoryInfo(e, obj.(*resultGetMemoryInfo))
-}
-func (*binaryClassresultGetMemoryInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &resultGetMemoryInfo{}
-	return obj, doDecoderesultGetMemoryInfo(d, obj)
-}
-func (*binaryClassresultGetMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecoderesultGetMemoryInfo(d, obj.(*resultGetMemoryInfo))
-}
-func (*binaryClassresultGetMemoryInfo) Skip(d binary.Decoder) error {
-	return doSkipresultGetMemoryInfo(d)
-}
-func (*binaryClassresultGetMemoryInfo) Schema() *schema.Class { return schemaresultGetMemoryInfo }
-
-var schemaresultGetMemoryInfo = &schema.Class{
-	TypeID:  binaryIDresultGetMemoryInfo,
-	Package: "service",
-	Name:    "resultGetMemoryInfo",
-	Fields: []schema.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.MemoryInfo", ID: (*path.MemoryInfo)(nil).Class().ID()}}},
 	},
 }
 

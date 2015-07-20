@@ -20,46 +20,57 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-// MemoryInfo is a path that refers to a memory information.
-type MemoryInfo struct {
+// MemoryRange is a path that refers to a range of memory for a specific pool at
+// a specific point in the capture.
+type MemoryRange struct {
 	binary.Generate
-	ID binary.ID // The MemoryInfo's unique identifier.
+	After *Atom // The path to the atom the memory snapshot immediately follows.
+
+	Pool    uint64 // The pool identifier.
+	Address uint64 // The memory base address.
+	Size    uint64 // The size in bytes of this memory range.
 }
 
 // String returns the string representation of the path.
-func (m *MemoryInfo) String() string { return m.Path() }
+func (n *MemoryRange) String() string { return n.Path() }
 
 // Path implements the Path interface.
-func (m *MemoryInfo) Path() string {
-	return fmt.Sprintf("MemoryInfo(%v)", m.ID)
+func (n *MemoryRange) Path() string {
+	return fmt.Sprintf("%v.MemoryRange<%v>[0x%x:0x%x]",
+		n.After, n.Pool, n.Address, n.Address+n.Size-1)
 }
 
-// Base implements the Path interface, returning nil as this is a root.
-func (m *MemoryInfo) Base() Path {
-	return nil
+// Base implements the Path interface, returning the path to the atom list.
+func (n *MemoryRange) Base() Path {
+	return n.After
 }
 
 // Clone implements the Path interface, returning a deep-copy of this path.
-func (m *MemoryInfo) Clone() Path {
-	return &MemoryInfo{ID: m.ID}
+func (n *MemoryRange) Clone() Path {
+	return &MemoryRange{
+		After:   n.After.Clone().(*Atom),
+		Pool:    n.Pool,
+		Address: n.Address,
+		Size:    n.Size,
+	}
 }
 
 // Validate implements the Path interface.
-func (m *MemoryInfo) Validate() error {
+func (n *MemoryRange) Validate() error {
 	switch {
-	case m == nil:
-		return fmt.Errorf("MemoryInfo is nil")
-	case !m.ID.Valid():
-		return fmt.Errorf("MemoryInfo.ID is invalid")
+	case n == nil:
+		return fmt.Errorf("MemoryRange is nil")
+	case n.After == nil:
+		return fmt.Errorf("MemoryRange.After is nil")
 	}
-	return nil
+	return n.After.Validate()
 }
 
-// FindMemoryInfo returns the first MemoryInfo found traversing the path p.
-// If no MemoryInfo was found, then nil is returned.
-func FindMemoryInfo(p Path) *MemoryInfo {
+// FindMemoryRange returns the first MemoryRange found traversing the path p.
+// If no MemoryRange was found, then nil is returned.
+func FindMemoryRange(p Path) *MemoryRange {
 	for p != nil {
-		if p, ok := p.(*MemoryInfo); ok {
+		if p, ok := p.(*MemoryRange); ok {
 			return p
 		}
 		p = p.Base()

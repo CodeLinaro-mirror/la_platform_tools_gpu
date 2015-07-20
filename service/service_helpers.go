@@ -51,14 +51,6 @@ func (c callGetFramebufferDepth) Format(f fmt.State, r rune) {
 func (r resultGetFramebufferDepth) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetMemoryInfo(after: %v, rng: %v)",
-		c.after, c.rng,
-	)
-}
-func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
 func (c callGetSchema) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetSchema()")
 }

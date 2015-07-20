@@ -7,7 +7,6 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
@@ -82,19 +81,6 @@ type callGetFramebufferDepth struct {
 type resultGetFramebufferDepth struct {
 	binary.Generate
 	value *path.ImageInfo
-}
-
-// Call GetMemoryInfo
-type callGetMemoryInfo struct {
-	binary.Generate
-	after *path.Atom
-	rng   memory.Range
-}
-
-// Result GetMemoryInfo
-type resultGetMemoryInfo struct {
-	binary.Generate
-	value *path.MemoryInfo
 }
 
 // Call GetSchema

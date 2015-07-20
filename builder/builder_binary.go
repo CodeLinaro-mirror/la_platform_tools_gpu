@@ -12,7 +12,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/image"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -28,7 +27,6 @@ func init() {
 	Namespace.Add((*GetFramebufferColor)(nil).Class())
 	Namespace.Add((*GetFramebufferDepth)(nil).Class())
 	Namespace.Add((*GetHierarchy)(nil).Class())
-	Namespace.Add((*GetMemoryInfo)(nil).Class())
 	Namespace.Add((*GetState)(nil).Class())
 	Namespace.Add((*GetTimingInfo)(nil).Class())
 	Namespace.Add((*PrerenderFramebuffers)(nil).Class())
@@ -48,7 +46,6 @@ var (
 	binaryIDGetFramebufferColor             = binary.ID{0x1a, 0xcc, 0x5f, 0x4b, 0xe4, 0x22, 0xd7, 0x61, 0x00, 0xc8, 0xd8, 0x41, 0x30, 0xeb, 0xfe, 0x59, 0x7d, 0x4c, 0xbe, 0x9f}
 	binaryIDGetFramebufferDepth             = binary.ID{0xa7, 0x03, 0x08, 0x3d, 0x42, 0xbc, 0x22, 0x83, 0x51, 0x9f, 0xc0, 0x5f, 0xa6, 0xa2, 0x1e, 0xa7, 0x5e, 0xd6, 0xc8, 0x03}
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
-	binaryIDGetMemoryInfo                   = binary.ID{0xf0, 0x9e, 0x21, 0x69, 0x43, 0xaf, 0xf8, 0xdb, 0x59, 0x80, 0xa0, 0x33, 0x66, 0xda, 0xd9, 0xae, 0xdf, 0x5a, 0x0a, 0x10}
 	binaryIDGetState                        = binary.ID{0x40, 0xfb, 0x42, 0x18, 0xf5, 0x5c, 0xff, 0x11, 0x85, 0x82, 0xaf, 0xf4, 0x6d, 0xc5, 0xde, 0x19, 0x0b, 0x41, 0xba, 0x38}
 	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
 	binaryIDPrerenderFramebuffers           = binary.ID{0xe5, 0x39, 0x5a, 0x38, 0x7e, 0xd7, 0xfd, 0x1d, 0xfd, 0xc8, 0x41, 0x0b, 0x7a, 0x55, 0x93, 0x3d, 0xdb, 0x51, 0x28, 0xce}
@@ -546,71 +543,6 @@ var schemaGetHierarchy = &schema.Class{
 	Name:    "GetHierarchy",
 	Fields: []schema.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
-	},
-}
-
-type binaryClassGetMemoryInfo struct{}
-
-func (*GetMemoryInfo) Class() binary.Class {
-	return (*binaryClassGetMemoryInfo)(nil)
-}
-func doEncodeGetMemoryInfo(e binary.Encoder, o *GetMemoryInfo) error {
-	if o.After != nil {
-		if err := e.Object(o.After); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Range); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeGetMemoryInfo(d binary.Decoder, o *GetMemoryInfo) error {
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.After = obj.(*path.Atom)
-	} else {
-		o.After = nil
-	}
-	if err := d.Value(&o.Range); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipGetMemoryInfo(d binary.Decoder) error {
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*memory.Range)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassGetMemoryInfo) ID() binary.ID      { return binaryIDGetMemoryInfo }
-func (*binaryClassGetMemoryInfo) New() binary.Object { return &GetMemoryInfo{} }
-func (*binaryClassGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeGetMemoryInfo(e, obj.(*GetMemoryInfo))
-}
-func (*binaryClassGetMemoryInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &GetMemoryInfo{}
-	return obj, doDecodeGetMemoryInfo(d, obj)
-}
-func (*binaryClassGetMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeGetMemoryInfo(d, obj.(*GetMemoryInfo))
-}
-func (*binaryClassGetMemoryInfo) Skip(d binary.Decoder) error { return doSkipGetMemoryInfo(d) }
-func (*binaryClassGetMemoryInfo) Schema() *schema.Class       { return schemaGetMemoryInfo }
-
-var schemaGetMemoryInfo = &schema.Class{
-	TypeID:  binaryIDGetMemoryInfo,
-	Package: "builder",
-	Name:    "GetMemoryInfo",
-	Fields: []schema.Field{
-		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Atom", ID: (*path.Atom)(nil).Class().ID()}}},
-		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range", ID: (*memory.Range)(nil).Class().ID()}},
 	},
 }
 

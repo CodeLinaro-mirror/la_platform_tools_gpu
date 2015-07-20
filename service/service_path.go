@@ -80,28 +80,6 @@ func GetImageInfo(p *path.ImageInfo, s RPC, l log.Logger) (*ImageInfo, error) {
 	}
 }
 
-// ResolveMemoryInfo resolves a binary.ID and then safely casts the result to a *MemoryInfo.
-func ResolveMemoryInfo(id binary.ID, d database.Database, l log.Logger) (*MemoryInfo, error) {
-	if v, err := database.Resolve(id, d, l); err != nil {
-		return nil, err
-	} else if r, ok := v.(*MemoryInfo); !ok {
-		return nil, fmt.Errorf("ID %s gave %T, expected MemoryInfo", id, v)
-	} else {
-		return r, nil
-	}
-}
-
-// GetMemoryInfo calls s.Get with p and then safely casts the result to a *MemoryInfo.
-func GetMemoryInfo(p *path.MemoryInfo, s RPC, l log.Logger) (*MemoryInfo, error) {
-	if v, err := s.Get(p, l); err != nil {
-		return nil, err
-	} else if r, ok := v.(*MemoryInfo); !ok {
-		return nil, fmt.Errorf("path %s gave %T, expected MemoryInfo", p, v)
-	} else {
-		return r, nil
-	}
-}
-
 // ResolveTimingInfo resolves a binary.ID and then safely casts the result to a *TimingInfo.
 func ResolveTimingInfo(id binary.ID, d database.Database, l log.Logger) (*TimingInfo, error) {
 	if v, err := database.Resolve(id, d, l); err != nil {

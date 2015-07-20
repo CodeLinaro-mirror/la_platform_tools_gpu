@@ -31,7 +31,7 @@ func (n *State) String() string { return n.Path() }
 
 // Path implements the Path interface.
 func (n *State) Path() string {
-	return fmt.Sprintf("State(After: %v)", n.After)
+	return fmt.Sprintf("%v.State", n.After)
 }
 
 // Base implements the Path interface, returning the path to the atom the state
