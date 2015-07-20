@@ -163,13 +163,13 @@ func (r *rpc) LoadAtoms(p *path.Atoms) ([]atom.Atom, error) {
 func (r *rpc) LoadHierarchy(p *path.Hierarchy) (atom.Group, error) {
 	l := r.beginRPC("LoadHierarchy")
 
-	hierarchy, err := r.client.Get(p, l)
+	root, err := r.client.Get(p, l)
 	if err != nil {
 		log.E(l, "Error getting hierarchy: %v", err)
 		return atom.Group{}, err
 	}
 
-	return hierarchy.(*service.Hierarchy).Root, nil
+	return *root.(*atom.Group), nil
 }
 
 func (r *rpc) LoadTiming(device *path.Device, capture *path.Capture, flags service.TimingFlags) (service.TimingInfo, error) {

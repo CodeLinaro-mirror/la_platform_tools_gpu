@@ -107,11 +107,11 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = report.(*service.Report)
 
 		case *path.Hierarchy:
-			hierarchy, err := database.Build(&GetHierarchy{Capture: p.Capture}, d, l)
+			root, err := database.Build(&GetHierarchy{Capture: p.Capture}, d, l)
 			if err != nil {
 				return nil, err
 			}
-			v[i] = hierarchy.(*service.Hierarchy)
+			v[i] = root.(*atom.Group)
 
 		case *path.Atom:
 			atoms := v[i-1].(*atom.List).Atoms
