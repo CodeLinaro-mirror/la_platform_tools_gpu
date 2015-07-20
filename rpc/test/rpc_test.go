@@ -94,12 +94,13 @@ func (s *server) GetListNodeChainArray(l log.Logger) ([]*ListNode, error) {
 }
 
 func create(t *testing.T) (RPC, *server) {
-	l := log.Enter(log.Testing(t), "Server")
+	lc := log.Enter(log.Testing(t), "Client")
+	ls := log.Enter(log.Testing(t), "Server")
 	mtu := 64
 	s2c, c2s := ringbuffer.New(64), ringbuffer.New(64)
 	server := &server{}
-	client := NewClient(multiplexer.New(s2c, c2s, mtu, nil), nil)
-	BindServer(c2s, s2c, mtu, l, server)
+	client := NewClient(multiplexer.New(s2c, c2s, c2s, mtu, lc, nil), nil)
+	BindServer(c2s, s2c, s2c, mtu, ls, server)
 	return client, server
 }
 

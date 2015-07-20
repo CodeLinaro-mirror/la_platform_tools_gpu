@@ -579,8 +579,8 @@ const go_server_tmpl = `{{/*
 {{define "Go.Server"}}{{template "Go.Prelude" .}}
 
 {{$s := .Service}}
-func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server {{$s.Name}}) {
-  rpc.Serve(r, w, mtu, l, func(in interface{}) (res binary.Object) {
+func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, server {{$s.Name}}) {
+  rpc.Serve(r, w, c, mtu, l, func(in interface{}) (res binary.Object) {
     l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
     defer func() {
       if err := recover(); err == nil {

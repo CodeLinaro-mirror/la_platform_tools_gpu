@@ -45,7 +45,7 @@ func create(t *testing.T) Client {
 	pass := make(chan string, 1)
 	sr, cw := io.Pipe()
 	cr, sw := io.Pipe()
-	Serve(sr, sw, mtu, l, func(call interface{}) binary.Object {
+	Serve(sr, sw, sw, mtu, l, func(call interface{}) binary.Object {
 		switch o := call.(type) {
 		case *request:
 			pass <- o.data
@@ -56,7 +56,7 @@ func create(t *testing.T) Client {
 			return NewError("Invalid call type %T", o)
 		}
 	})
-	return NewClient(multiplexer.New(cr, cw, mtu, nil), nil)
+	return NewClient(multiplexer.New(cr, cw, cw, mtu, l, nil), nil)
 }
 
 func simpleRequest(t *testing.T, c Client, v string) {
