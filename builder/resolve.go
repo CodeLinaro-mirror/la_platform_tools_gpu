@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -74,13 +75,6 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			}
 			v[i] = r
 
-		case *path.MemoryInfo:
-			r, err := service.ResolveMemoryInfo(p.ID, d, l)
-			if err != nil {
-				return nil, err
-			}
-			v[i] = r
-
 		case *path.TimingInfo:
 			r, err := service.ResolveTimingInfo(p.ID, d, l)
 			if err != nil {
@@ -127,6 +121,9 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 
 		case *path.State:
 			atoms := v[i-2].(*atom.List).Atoms
+			if p.After.Index >= uint64(len(atoms)) {
+				return nil, fmt.Errorf("%v is out of bounds. [0-%d]", p, len(atoms)-1)
+			}
 			api := gfxapi.Find(atoms[p.After.Index].API())
 			if api == nil {
 				return nil, fmt.Errorf("Atom at %s has no API",
@@ -140,6 +137,23 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			if !found {
 				return nil, fmt.Errorf("No state for API '%v' after %v",
 					api.Name(), paths[i-1].Path())
+			}
+			v[i] = res
+
+		case *path.MemoryRange:
+			atoms := v[i-2].(*atom.List).Atoms
+			if p.After.Index >= uint64(len(atoms)) {
+				return nil, fmt.Errorf("%v is out of bounds. [0-%d]", p, len(atoms)-1)
+			}
+
+			res, err := ResolveMemoryRange(
+				atoms,
+				atom.ID(p.After.Index),
+				memory.PoolID(p.Pool),
+				memory.Range{Base: p.Address, Size: p.Size},
+				d, l)
+			if err != nil {
+				return nil, err
 			}
 			v[i] = res
 

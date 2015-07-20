@@ -20,11 +20,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-// ArrayIndex is a path that refers to a single element of an array.
+// ArrayIndex is a path that refers to a single element of an array or slice.
 type ArrayIndex struct {
 	binary.Generate
-	Array Path   // The path to the array.
-	Index uint64 // The index of the element in the array.
+	Array Path   // The path to the array or slice.
+	Index uint64 // The index of the element in the array or slice.
 }
 
 // String returns the string representation of the path.
@@ -35,7 +35,7 @@ func (n *ArrayIndex) Path() string {
 	return fmt.Sprintf("%v[%d]", n.Array, n.Index)
 }
 
-// Base implements the Path interface, returning the path to the array.
+// Base implements the Path interface, returning the path to the array or slice.
 func (n *ArrayIndex) Base() Path {
 	return n.Array
 }

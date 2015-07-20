@@ -22,7 +22,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -213,6 +212,18 @@ func (r *rpc) LoadState(state *path.State) (*schema.Object, error) {
 	return object.(*schema.Object), nil
 }
 
+func (r *rpc) LoadMemory(rng *path.MemoryRange) (service.MemoryInfo, error) {
+	l := r.beginRPC("LoadMemory")
+
+	object, err := r.client.Get(rng, l)
+	if err != nil {
+		log.E(l, "Error loading memory: %v", err)
+		return service.MemoryInfo{}, err
+	}
+
+	return *object.(*service.MemoryInfo), nil
+}
+
 func (r *rpc) RequestColorBuffer(device *path.Device, after *path.Atom, settings service.RenderSettings) (w, h int, d []byte, e error) {
 	l := r.beginRPC("RequestColorBuffer")
 
@@ -259,23 +270,6 @@ func (r *rpc) RequestDepthBuffer(device *path.Device, after *path.Atom) (w, h in
 		return 0, 0, nil, fmt.Errorf("Invalid image dimensions %dx%d", imageInfo.Width, imageInfo.Height)
 	}
 	return int(imageInfo.Width), int(imageInfo.Height), data, nil
-}
-
-func (r *rpc) RequestMemory(after *path.Atom, base uint64, size uint64) (service.MemoryInfo, error) {
-	l := r.beginRPC("RequestMemory")
-
-	rng := memory.Range{Base: base, Size: size}
-	id, err := r.client.GetMemoryInfo(after, rng, l)
-	if err != nil {
-		return service.MemoryInfo{}, err
-	}
-
-	info, err := service.GetMemoryInfo(id, r.client, l)
-	if err != nil {
-		return service.MemoryInfo{}, err
-	}
-
-	return *info, nil
 }
 
 func (r *rpc) Change(p path.Path, v interface{}) (path.Path, error) {

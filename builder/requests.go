@@ -18,7 +18,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/image"
-	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
@@ -33,13 +32,6 @@ type GetState struct {
 type GetHierarchy struct {
 	binary.Generate
 	Capture *path.Capture
-}
-
-// GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.
-type GetMemoryInfo struct {
-	binary.Generate
-	After *path.Atom
-	Range memory.Range
 }
 
 // GetFramebufferColor records the parameters of a service.GetFramebufferColor RPC request.
