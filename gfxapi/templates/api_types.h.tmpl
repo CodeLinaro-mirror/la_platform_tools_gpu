@@ -71,7 +71,7 @@
 */}}
 {{define "DeclareType"}}
   {{if not (IsBuiltin $)}}
-    {{$key  := printf "ApiType%dDeclared" $.Name}}
+    {{$key  := printf "ApiType%vDeclared" $.Name}}
     {{if not (Global $key)}}
       {{Global $key "true"}}
       {{     if IsClass       $}}{{Template "DeclareClass"     $}}
