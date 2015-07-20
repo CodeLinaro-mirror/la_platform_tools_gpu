@@ -148,7 +148,6 @@ namespace Ids {
   {{AssertType $ "Class"}}
 
   {{if not (GetAnnotation $ "internal")}}
-
     {{range $f := $.Fields}}
       {{Template "DeclareType" (TypeOf $f)}}
     {{end}}
