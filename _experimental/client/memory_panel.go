@@ -84,26 +84,14 @@ func CreateMemoryPanel(appCtx *ApplicationContext) gxui.Control {
 	list := appCtx.theme.CreateList()
 	list.SetAdapter(rawAdapter)
 
-	var address uint64
-	var after *path.Atom
-
-	update := func() {
-		rawAdapter.Update(after, address)
-		imgAdapter.Update(after, address)
-	}
+	var memory *path.MemoryRange
 
 	appCtx.events.OnSelect(func(p path.Path) {
-		if a := path.FindAtom(p); a != nil && !path.Equal(a, after) {
-			after = a
-			update()
+		if m := path.FindMemoryRange(p); m != nil && !path.Equal(m, memory) {
+			memory = m
+			rawAdapter.Update(memory)
+			imgAdapter.Update(memory)
 		}
-		if s, a := path.FindAtomSlice(p); s != nil && a != nil {
-			if a := a.Index(s.End - 1); !path.Equal(a, after) {
-				after = a
-				update()
-			}
-		}
-		// TODO: Address
 	})
 
 	layout := appCtx.theme.CreateLinearLayout()
@@ -115,15 +103,12 @@ func CreateMemoryPanel(appCtx *ApplicationContext) gxui.Control {
 
 type requestMemory struct {
 	context  *ApplicationContext
-	after    *path.Atom
-	address  uint64
-	size     uint64
+	path     *path.MemoryRange
 	callback func(service.MemoryInfo)
 }
 
 func (t requestMemory) Run(c task.CancelSignal) {
-	p := t.after.MemoryAfter(0, t.address, t.size)
-	res, err := t.context.rpc.LoadMemory(p)
+	res, err := t.context.rpc.LoadMemory(t.path)
 	if err != nil {
 		return
 	}
