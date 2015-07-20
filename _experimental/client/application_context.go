@@ -15,17 +15,14 @@
 package client
 
 import (
-	"fmt"
 	"net"
-	"os"
-	"os/exec"
 	"time"
 
-	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
+	"android.googlesource.com/platform/tools/gpu/process"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
@@ -54,55 +51,18 @@ type ApplicationContext struct {
 }
 
 func connectServer(config Config) (net.Conn, error) {
-	conn, err := net.Dial("tcp", config.Gapis)
-	if err == nil {
-		return conn, nil
-	}
-	// connection failed, was it localhost?
-	host, _, err2 := net.SplitHostPort(config.Gapis)
-	if host != "localhost" {
-		return nil, err
-	}
-	if err2 != nil {
-		return nil, err2
-	}
-	// try to run the server ourselves
-	null, err := os.OpenFile(os.DevNull, os.O_RDWR, 0)
-	if err != nil {
-		return nil, err
-	}
-	path, err := exec.LookPath("gapis")
-	if err != nil {
-		return nil, err
-	}
-	args := []string{path,
+	args := []string{
 		"--rpc", config.Gapis,
 		"--data", config.DataPath,
 	}
-	proc, err := os.StartProcess(path, args, &os.ProcAttr{Files: []*os.File{null, null, null}})
-	if err != nil {
-		return nil, err
-	}
-	// We are running a server, shut it down when we are done
-	atexit.Register(func() {
-		proc.Kill()
-		proc.Wait()
-	}, time.Second)
-	// and try to connect to it (for a while)
-	for i := 0; i < 30; i++ {
-		conn, err = net.Dial("tcp", config.Gapis)
-		if err == nil {
-			return conn, nil
-		}
-		time.Sleep(100 * time.Millisecond)
-	}
-	return nil, fmt.Errorf("Failed to spawn %v in time", path)
+	return process.ConnectStartIfNeeded(config.Gapis, "gapis", args...)
 }
 
 func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationContext, error) {
 	dropDownOverlay := theme.CreateBubbleOverlay()
 	toolTipOverlay := theme.CreateBubbleOverlay()
 
+	logger := &log.Splitter{}
 	rpcSocket, err := connectServer(config)
 	if err != nil {
 		return nil, err
@@ -114,14 +74,14 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 		Config:            config,
 		theme:             theme,
 		monospace:         monospace,
-		logger:            &log.Splitter{},
+		logger:            logger,
 		dropDownOverlay:   dropDownOverlay,
 		toolTipOverlay:    toolTipOverlay,
 		toolTipController: gxui.CreateToolTipController(toolTipOverlay, theme.Driver()),
 		constants:         map[string]schema.ConstantSet{},
 	}
 
-	client := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, mtu, nil), nil)
+	client := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, rpcSocket, mtu, logger, nil), nil)
 	appCtx.rpc.init(log.Enter(appCtx.logger, "rpc"), client, appCtx.constants)
 	appCtx.events.Init()
 	return appCtx, nil

@@ -31,8 +31,8 @@ type Handler func(interface{}) binary.Object
 // Server implements the receiving side of a client server rpc pair.
 // It listens on the reader for calls, and dispatches them to the supplied handler.
 // Any result returned from the handler is then sent back down the writer.
-func Serve(r io.Reader, w io.Writer, mtu int, l log.Logger, handler Handler) {
-	multiplexer.New(r, w, mtu, func(channel io.ReadWriteCloser) {
+func Serve(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, handler Handler) {
+	multiplexer.New(r, w, c, mtu, l, func(channel io.ReadWriteCloser) {
 		// If Close fails, multiplexer already knows, so we ignore the error
 		defer channel.Close()
 

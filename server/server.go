@@ -21,6 +21,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
+	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -42,9 +43,8 @@ const (
 )
 
 // Run listens on the HTTP and RPC TCP ports given in config, initializes the resource database,
-// the replay manager and handles HTTP and RPC requests on incoming connections. If not nil, the
-// rpcReady channel is closed as soon as incoming RPC requests can start being issued.
-func Run(config Config, rpcReady chan<- struct{}) {
+// the replay manager and handles HTTP and RPC requests on incoming connections.
+func Run(config Config) {
 	// Create the server logfile.
 	logger, err := log.File(config.LogfilePath)
 	if err != nil {
@@ -59,20 +59,27 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	replayManager := replay.New(database, logger)
 	b.ReplayManager = replayManager
 
-	// Setup and run the (blocking) RPC listener on a separate goroutine.
+	// Setup the RPC listener.
 	rpc := &rpcServer{
 		Database:      database,
 		ReplayManager: replayManager,
 	}
-	go rpc.ListenAndServe(config.RpcAddress, mtu, logger)
 
-	// If provided, tell the caller chan that the RPC listener is ready.
-	if nil != rpcReady {
-		close(rpcReady)
+	// Setup and run the (blocking) HTTP listener on a separate goroutine.
+	go func() {
+		http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{rpc}))
+		http.Handle(capturesRoute, http.StripPrefix(capturesRoute, capturesHandler{rpc, logger, config}))
+		if err := http.ListenAndServe(config.HttpAddress, nil); err != nil {
+			log.Errorf(logger, "HTTP server shutdown with error %v", err)
+		}
+		log.Infof(logger, "HTTP server shutdown")
+	}()
+
+	// Run the blocking RPC listener
+	if err := rpc.ListenAndServe(config.RpcAddress, mtu, logger); err != nil {
+		log.Errorf(logger, "RPC Server shutdown with error %v", err)
+		atexit.Exit(1)
 	}
 
-	// Setup and run the (blocking) HTTP listener.
-	http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{rpc}))
-	http.Handle(capturesRoute, http.StripPrefix(capturesRoute, capturesHandler{rpc, logger, config}))
-	http.ListenAndServe(config.HttpAddress, nil)
+	log.Infof(logger, "RPC Server shutdown")
 }

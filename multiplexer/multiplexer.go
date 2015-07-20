@@ -22,6 +22,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 var ErrChannelClosed = errors.New("Channel closed")
@@ -35,6 +36,8 @@ const sendChanSize = 256
 type Multiplexer struct {
 	in                    io.Reader
 	out                   io.Writer
+	close                 io.Closer
+	logger                log.Interface
 	mtu                   int
 	channelOpenedCallback func(io.ReadWriteCloser)
 	channels              map[channelId]*channel
@@ -89,18 +92,29 @@ func (m *Multiplexer) writeChannel(id channelId, data []byte) (n int, err error)
 	}
 }
 
+func (m *Multiplexer) closeConnection() {
+	if err := m.close.Close(); err != nil {
+		log.Warningf(m.logger, "Failed to close connection: %v", err)
+	}
+}
+
 func (m *Multiplexer) recv() {
 	defer m.closeAllChannels()
+	defer m.closeConnection()
 	d := cyclic.Decoder(vle.Reader(m.in))
 	for {
 		var ty msgType
 		if err := ty.decode(d); err != nil {
+			if err != io.EOF {
+				log.Warningf(m.logger, "Multiplexer failed to decode message type: %v", err)
+			}
 			return
 		}
 		switch ty {
 		case msgTypeOpenChannel:
 			msg := &msgOpenChannel{}
 			if err := d.Value(msg); err != nil {
+				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
 				return
 			}
 			s := m.createChannel(remote(msg.channelId))
@@ -109,6 +123,7 @@ func (m *Multiplexer) recv() {
 		case msgTypeCloseChannel:
 			msg := &msgCloseChannel{}
 			if err := d.Value(msg); err != nil {
+				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
 				return
 			}
 			m.closeChannel(remote(msg.channelId), false)
@@ -116,6 +131,7 @@ func (m *Multiplexer) recv() {
 		case msgTypeData:
 			msg := &msgData{}
 			if err := d.Value(msg); err != nil {
+				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
 				return
 			}
 			id := remote(msg.c)
@@ -164,11 +180,13 @@ func (m *Multiplexer) MTU() int { return m.mtu }
 // New creates and returns a new Multiplexer using the specified reader and writer for
 // communication. mtu defines the maximum size of each packet of data. channelOpenedCallback will be
 // called for each channel that was opened by the remote endpoint.
-func New(in io.Reader, out io.Writer, mtu int, channelOpenedCallback func(io.ReadWriteCloser)) *Multiplexer {
+func New(in io.Reader, out io.Writer, close io.Closer, mtu int, logger log.Interface, channelOpenedCallback func(io.ReadWriteCloser)) *Multiplexer {
 	m := &Multiplexer{
-		in:  in,
-		out: out,
-		mtu: mtu,
+		in:     in,
+		out:    out,
+		close:  close,
+		logger: logger,
+		mtu:    mtu,
 		channelOpenedCallback: channelOpenedCallback,
 		channels:              make(map[channelId]*channel),
 		channelLock:           &sync.Mutex{},
