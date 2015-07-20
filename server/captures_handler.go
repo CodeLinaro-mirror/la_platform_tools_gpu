@@ -18,8 +18,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"android.googlesource.com/platform/tools/gpu/builder"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -27,14 +25,14 @@ import (
 // CapturesHandler is an HTTP request handler that returns a HTML list of
 // captures held in the database.
 type capturesHandler struct {
-	d database.Database
+	s service.RPC
 	l log.Logger
 	c Config
 }
 
 // ServeHTTP writes to res a HTML list of captures held in the database.
 func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	captures, err := builder.Captures(h.d, h.l)
+	captures, err := h.s.GetCaptures(h.l)
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +49,7 @@ func (h capturesHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 `)
 
 	for _, p := range captures {
-		capture, err := service.ResolveCapture(p.ID, h.d, h.l)
+		capture, err := service.GetCapture(p, h.s, h.l)
 		if err == nil {
 			fmt.Fprintf(res, `			<a href="%s%s?%s=%s">%s</a><br/>`,
 				h.c.HttpAddress, atomsRoute, idParamName, p.ID, capture.Name)
