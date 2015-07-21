@@ -163,7 +163,7 @@ func TestStripPassthrough(t *testing.T) {
 	s.Transform(0, a, mw)
 
 	if len(mw.atoms) != 1 {
-		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
+		t.Errorf("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
 	}
 
 	if mw.atoms[0] != a {
