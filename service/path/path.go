@@ -21,6 +21,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // binary: java.package = com.android.tools.idea.editors.gfxtrace.service.path
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
+// binary: java.class_suffix = Path
 
 // Path is the interface for types that represent a reference to a capture,
 // atom list, single atom, memory, state or sub-object. A path can be
