@@ -187,7 +187,7 @@ func TestGet(t *testing.T) {
 			t.Errorf("Set(%s) did not return expected error:\nGot:      %v\nExpected: %v",
 				test.path.Path(), err, expected)
 		} else if (res == nil) == (err == nil) {
-			t.Errorf("Set(%s) returned %T %v and %v.", res, res, err)
+			t.Errorf("Set(%s) returned %T %v and %v.", test.path.Path(), res, res, err)
 		}
 
 		if err == nil {
@@ -195,7 +195,7 @@ func TestGet(t *testing.T) {
 
 			// Check the paths have changed
 			if reflect.DeepEqual(test.path, p) {
-				t.Errorf("Set(%s) returned an unchanged path")
+				t.Errorf("Set(%s) returned an unchanged path", test.path.Path())
 			}
 
 			// Get the changed value

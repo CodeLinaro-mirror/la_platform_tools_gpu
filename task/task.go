@@ -51,8 +51,8 @@ type Task struct {
 }
 
 // New constructs and returns a new Task.
-func New() Task {
-	return Task{}
+func New() *Task {
+	return &Task{}
 }
 
 // Runner is the interface implemented by types that implement the Run method.
