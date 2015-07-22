@@ -138,7 +138,7 @@ func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
 	}
 	titled := strings.Title(name)
 	m := settings.Module
-	if pkg != "" {
+	if pkg != "" && pkg != "binary" {
 		m = settings.FindImport(pkg)
 		if m == nil {
 			m = &Module{Name: "Missing"}
@@ -172,7 +172,7 @@ func (settings JavaSettings) Import(v interface{}) string {
 	}
 	fullname := pkg + "." + name
 	if _, ok := settings.Imported[fullname]; ok {
-		return "" // ALready imported
+		return "" // Already imported
 	}
 	settings.Imported[fullname] = struct{}{}
 	return fullname
