@@ -21,6 +21,7 @@ var embedded = map[string]string{
 	generated_file:           generated,
 	generated_aosp_c_file:    generated_aosp_c,
 	generated_aosp_java_file: generated_aosp_java,
+	generated_bad_java_file:  generated_bad_java,
 	generated_by_file:        generated_by,
 	generated_protoc_file:    generated_protoc,
 	generated_stringer_file:  generated_stringer,
@@ -255,6 +256,25 @@ const generated_aosp_java = `/*
  * THIS WILL BE REMOVED ONCE THE CODE GENERATOR IS INTEGRATED INTO THE BUILD.
  */
 
+`
+const generated_bad_java_file = `generated_bad_java`
+const generated_bad_java = `/*
+* Copyright (C) «Year» The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* THIS WILL BE REMOVED ONCE THE CODE GENERATOR IS INTEGRATED INTO THE BUILD.
+*/
 `
 const generated_by_file = `generated_by`
 const generated_by = `////////////////////////////////////////////////////////////////////////////////
