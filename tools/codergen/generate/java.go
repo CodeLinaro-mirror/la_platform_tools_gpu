@@ -25,24 +25,28 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
+// JavaSettings holds the information and methods common to all java generators.
 type JavaSettings struct {
-	*Module
-	JavaPackage  string
-	Copyright    string
-	MemberPrefix string
-	Imported     map[string]struct{}
+	*Module                          // The module we are generating for.
+	JavaPackage  string              // The java package name for this module.
+	Copyright    string              // The copyright header to put on generatated files.
+	MemberPrefix string              // The prefix to give all field members of classes.
+	Imported     map[string]struct{} // The set of imports generated for the file.
 }
 
+// JavaClass is the struct handed to java binary coder generation templates.
 type JavaClass struct {
 	JavaSettings
 	Struct *Struct
 }
 
+// JavaService is the struct handed to java rpc service generation templates.
 type JavaService struct {
 	JavaSettings
 	Service *Service
 }
 
+// Java is called by codergen to prepare and generate java code for a given module.
 func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	settings := JavaSettings{
 		Module:      m,
@@ -75,6 +79,7 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	return nil
 }
 
+// FieldName converts from a go struct field name to the correct java member name.
 func (settings JavaSettings) FieldName(s string) string {
 	r, n := utf8.DecodeRuneInString(s)
 	return settings.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]

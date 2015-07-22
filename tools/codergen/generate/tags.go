@@ -22,12 +22,15 @@ import (
 	"strconv"
 )
 
+// Tags wraps a go field tag string, and adds method to extract it's values.
 type Tags string
 
+// Get returns a single value by name.
 func (t Tags) Get(name string) string {
 	return reflect.StructTag(t).Get(name)
 }
 
+// Flag returns a boolean value by name.
 func (t Tags) Flag(name string) bool {
 	v := reflect.StructTag(t).Get(name)
 	if len(v) == 0 {
