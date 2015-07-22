@@ -85,6 +85,18 @@ func (settings JavaSettings) FieldName(s string) string {
 	return settings.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
+// Getter converts from a go struct field name to the correct java getter name.
+func (settings JavaSettings) Getter(s string) string {
+	r, n := utf8.DecodeRuneInString(s)
+	return "get" + string(unicode.ToUpper(r)) + s[n:]
+}
+
+// Setter converts from a go struct field name to the correct java getter name.
+func (settings JavaSettings) Setter(s string) string {
+	r, n := utf8.DecodeRuneInString(s)
+	return "set" + string(unicode.ToUpper(r)) + s[n:]
+}
+
 func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
 	name := ""
 	switch v := v.(type) {
