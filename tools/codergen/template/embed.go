@@ -703,7 +703,6 @@ import com.android.tools.rpclib.binary.BinaryObject;
 import com.android.tools.rpclib.binary.Decoder;
 import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
-import com.android.tools.rpclib.any.Box;
 {{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
 import java.io.IOException;
 
@@ -881,6 +880,8 @@ const java_common_tmpl = `{{/*
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
+{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
+{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
 `
 const java_enum_tmpl_file = `java_enum.tmpl`
