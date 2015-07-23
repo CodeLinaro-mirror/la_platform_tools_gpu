@@ -883,6 +883,12 @@ const java_common_tmpl = `{{/*
 {{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
 {{end}}{{end}}
 {{define "Java.Import"}}{{end}}
+
+{{define "Java.ConstSuffix#int64"}}L{{end}}
+{{define "Java.ConstSuffix#uint64"}}L{{end}}
+{{define "Java.ConstSuffix#float32"}}f{{end}}
+{{define "Java.ConstSuffix#float64"}}d{{end}}
+{{define "Java.ConstSuffix"}}{{end}}
 `
 const java_enum_tmpl_file = `java_enum.tmpl`
 const java_enum_tmpl = `{{/*
@@ -917,10 +923,10 @@ import java.io.IOException;
 
 public enum {{File.ClassName .Type}} {
 {{range $i, $e := .Entries}}{{if $i}},
-{{end}}»{{$e.Name}}({{$e.Value}}){{end}};
+{{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
 
-»private final int {{"value" | File.FieldName}};
-»{{File.ClassName .Type}}(int value) {
+»private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
+»{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
 »»{{"value" | File.FieldName}} = value;
 »}
 }
