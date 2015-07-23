@@ -143,7 +143,7 @@ func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string, stri
 	if pkg != "" && pkg != "binary" {
 		m = settings.FindImport(pkg)
 		if m == nil {
-			m = &Module{Name: "Missing"}
+			m = &Module{Name: pkg}
 		}
 	}
 	return m, name, java
