@@ -34,9 +34,10 @@ type Branch struct {
 
 // Switch represents a resolved ast.Switch statement.
 type Switch struct {
-	AST   *ast.Switch // the underlying syntax node this was built from
-	Value Expression  // the value to match the cases against
-	Cases []*Case     // the set of case statements to choose from
+	AST     *ast.Switch // the underlying syntax node this was built from
+	Value   Expression  // the value to match the cases against
+	Cases   []*Case     // the set of case statements to choose from
+	Default *Block      // the block to use if no condition matches
 }
 
 // Case represents a possible choice in a switch.

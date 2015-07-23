@@ -192,11 +192,17 @@ func Visit(node Node, visitor func(Node)) {
 		for _, c := range n.Choices {
 			visitor(c)
 		}
+		if n.Default != nil {
+			visitor(n.Default)
+		}
 	case StringValue:
 	case *Switch:
 		visitor(n.Value)
 		for _, c := range n.Cases {
 			visitor(c)
+		}
+		if n.Default != nil {
+			visitor(n.Default)
 		}
 	case Uint8Value:
 	case Uint16Value:

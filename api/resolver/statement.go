@@ -169,6 +169,9 @@ func switch_(ctx *context, in *ast.Switch) *semantic.Switch {
 	for _, c := range in.Cases {
 		out.Cases = append(out.Cases, case_(ctx, c, vt))
 	}
+	if in.Default != nil {
+		out.Default = block(ctx, in.Default.Block, out)
+	}
 	ctx.mappings[in] = out
 	return out
 }
