@@ -22,6 +22,7 @@ type Select struct {
 	Type    Type        // the return type of the select if valid
 	Value   Expression  // the value to match the cases against
 	Choices []*Choice   // The set of possible choices to match
+	Default *Expression // the expression to use if no condition matches
 }
 
 // ExpressionType implements Expression with the unified type of the choices

@@ -50,9 +50,10 @@ func (t Iteration) Node() parse.Node { return t.CST }
 // If a switch is used as an expression, the case blocks must all be a single
 // expression.
 type Switch struct {
-	CST   *parse.Branch // underlying parse structure for this node
-	Value Node          // the value to match against
-	Cases []*Case       // the set of cases to match the value with
+	CST     *parse.Branch // underlying parse structure for this node
+	Value   Node          // the value to match against
+	Cases   []*Case       // the set of cases to match the value with
+	Default *Default      // the block which is used if no case is matched
 }
 
 func (t Switch) Node() parse.Node { return t.CST }
@@ -67,6 +68,14 @@ type Case struct {
 }
 
 func (t Case) Node() parse.Node { return t.CST }
+
+// Default represents a «"default": block» structure within a switch statement.
+type Default struct {
+	CST   *parse.Branch // underlying parse structure for this node.
+	Block *Block        // the block to run if the default is selected
+}
+
+func (t Default) Node() parse.Node { return t.CST }
 
 // Group represents the «(expression)» construct, a single parenthesized expression.
 type Group struct {
