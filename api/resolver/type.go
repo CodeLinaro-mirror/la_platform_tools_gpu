@@ -63,6 +63,16 @@ func type_(ctx *context, in interface{}) semantic.Type {
 			}
 		})
 		return getStaticArrayType(ctx, in, of, size, sizeExpr)
+	case *ast.PreConst:
+		if ptr, ok := in.Type.(*ast.PointerType); ok {
+			if ptr.Const {
+				ctx.errorf(in.Type, "Pointer type declared const twice (pre-const and post-const)")
+			}
+			to := type_(ctx, ptr.To)
+			return getPointerType(ctx, ptr, to, true)
+		}
+		ctx.errorf(in.Type, "Type %T cannot be declared const", in.Type)
+		return semantic.VoidType
 	case *ast.PointerType:
 		to := type_(ctx, in.To)
 		return getPointerType(ctx, in, to, in.Const)

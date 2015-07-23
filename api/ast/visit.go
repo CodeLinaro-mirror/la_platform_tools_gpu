@@ -197,6 +197,9 @@ func Visit(node Node, visitor func(Node)) {
 	case *PointerType:
 		visitor(n.To)
 
+	case *PreConst:
+		visitor(n.Type)
+
 	case *Pseudonym:
 		for _, a := range n.Annotations {
 			visitor(a)
