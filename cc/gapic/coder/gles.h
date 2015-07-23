@@ -1890,6 +1890,22 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
+    class GLsync: public Encodable {
+    public:
+        GLsync() = default;
+        GLsync(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x26, 0xf8, 0x18, 0xb0, 0xf5, 0xde, 0x4e, 0xc0, 0x05, 0x45, 0x7a, 0x4f, 0x9d, 0xa1, 0x51, 0xf4, 0x24, 0x30, 0x3e, 0x62,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
     class GlActiveTexture: public Encodable {
     public:
         GlActiveTexture() = default;
@@ -8271,6 +8287,54 @@ namespace gles {
 
         atom::Observations mobservations;
         HDC mHdc;
+    };
+
+    class __GLsync: public Encodable {
+    public:
+        __GLsync() = default;
+        __GLsync(uint64_t CreatedAt) :
+            mCreatedAt(CreatedAt) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xee, 0x85, 0x09, 0x86, 0xec, 0x16, 0xad, 0xa9, 0xaa, 0x94, 0xde, 0x43, 0xe8, 0xe3, 0x26, 0x1f, 0xb8, 0x64, 0x69, 0xce,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mCreatedAt);
+        }
+
+        uint64_t mCreatedAt;
+    };
+
+    class __GLsync__S: public Encodable {
+    public:
+        __GLsync__S() = default;
+        __GLsync__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x38, 0x06, 0x78, 0xdb, 0x2a, 0xc8, 0x7c, 0xb0, 0xf2, 0xbc, 0x99, 0xda, 0x4c, 0xd9, 0x81, 0x33, 0xb4, 0x6a, 0xef, 0xbb,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
+    };
+
+    class __GLsync__P: public Encodable {
+    public:
+        __GLsync__P() = default;
+        __GLsync__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xf3, 0x34, 0xc8, 0x3f, 0x32, 0x56, 0xc8, 0xda, 0x01, 0x47, 0x1f, 0xd5, 0x8f, 0x02, 0x35, 0x60, 0x51, 0x2b, 0x21, 0x9a,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
     };
 
 

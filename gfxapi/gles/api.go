@@ -689,6 +689,74 @@ func (p ImageOES) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 }
 
 type SyncObject uint64
+type GLboolean uint8
+type GLbyte int8
+type GLubyte uint8
+type GLchar byte
+type GLshort int16
+type GLushort uint16
+type GLint int32
+type GLuint uint32
+type GLint64 int64
+type GLuint64 uint64
+type GLfixed int32
+type GLsizei uint32
+type GLenum uint32
+
+// GLsync is a pointer to a __GLsync element.
+type GLsync struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLsync returns a GLsync that points to addr in the application pool.
+func NewGLsync(addr uint64) GLsync {
+	return GLsync{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLsync points to.
+func (p GLsync) ElementSize(ϟs *gfxapi.State) uint64 {
+	return func() uint64 { panic("Sizeof class is not yet implemented") }()
+}
+
+// Read reads and returns the __GLsync element at the pointer.
+func (p GLsync) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) __GLsync {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the __GLsync element at the pointer.
+func (p GLsync) Write(value __GLsync, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]__GLsync{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLsync) OnRead(ϟs *gfxapi.State) GLsync {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLsync) OnWrite(ϟs *gfxapi.State) GLsync {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new __GLsyncˢ from the pointer using start and end indices.
+func (p GLsync) Slice(start, end uint64, ϟs *gfxapi.State) __GLsyncˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return __GLsyncˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+type GLbitfield uint32
+type GLhalf uint16
+type GLfloat float32
+type GLclampf float32
 
 // Voidᶜᵖ is a pointer to a void element.
 type Voidᶜᵖ struct {
@@ -768,6 +836,56 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// __GLsyncᵖ is a pointer to a __GLsync element.
+type __GLsyncᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// New__GLsyncᵖ returns a __GLsyncᵖ that points to addr in the application pool.
+func New__GLsyncᵖ(addr uint64) __GLsyncᵖ {
+	return __GLsyncᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that __GLsyncᵖ points to.
+func (p __GLsyncᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return func() uint64 { panic("Sizeof class is not yet implemented") }()
+}
+
+// Read reads and returns the __GLsync element at the pointer.
+func (p __GLsyncᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) __GLsync {
+	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+}
+
+// Write writes value to the __GLsync element at the pointer.
+func (p __GLsyncᵖ) Write(value __GLsync, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]__GLsync{value}, ϟs)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p __GLsyncᵖ) OnRead(ϟs *gfxapi.State) __GLsyncᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p __GLsyncᵖ) OnWrite(ϟs *gfxapi.State) __GLsyncᵖ {
+	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
+		f(p.Pointer.Range(p.ElementSize(ϟs)))
+	}
+	return p
+}
+
+// Slice returns a new __GLsyncˢ from the pointer using start and end indices.
+func (p __GLsyncᵖ) Slice(start, end uint64, ϟs *gfxapi.State) __GLsyncˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return __GLsyncˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U8ᵖ is a pointer to a uint8 element.
@@ -8563,6 +8681,147 @@ func (s Voidˢ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 // String returns a string description of the Voidˢ slice.
 func (s Voidˢ) String() string {
 	return fmt.Sprintf("void(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// __GLsyncˢ is a slice of __GLsync.
+type __GLsyncˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// Make__GLsyncˢ returns a __GLsyncˢ backed by a new memory pool.
+func Make__GLsyncˢ(count uint64, ϟs *gfxapi.State) __GLsyncˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return __GLsyncˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the __GLsyncˢ in a new memory pool.
+func (s __GLsyncˢ) Clone(ϟs *gfxapi.State) __GLsyncˢ {
+	s.OnRead(ϟs)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := __GLsyncˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that __GLsyncˢ points to.
+func (s __GLsyncˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return func() uint64 { panic("Sizeof class is not yet implemented") }()
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s __GLsyncˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s __GLsyncˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s __GLsyncˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s __GLsyncˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// As__GLsyncˢ returns s cast to a __GLsyncˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func As__GLsyncˢ(s Slice, ϟs *gfxapi.State) __GLsyncˢ {
+	out := __GLsyncˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the __GLsync elements in this __GLsyncˢ.
+func (s __GLsyncˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []__GLsync {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]__GLsync, s.Count)
+	s.OnRead(ϟs)
+	for i := range res {
+		if err := d.Value(&res[i]); err != nil {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s __GLsyncˢ) Write(src []__GLsync, ϟs *gfxapi.State) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Value(&src[i]); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟs)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst __GLsyncˢ) Copy(src __GLsyncˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s __GLsyncˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟs)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟs)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s __GLsyncˢ) OnRead(ϟs *gfxapi.State) __GLsyncˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s __GLsyncˢ) OnWrite(ϟs *gfxapi.State) __GLsyncˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	return s
+}
+
+// Index returns a __GLsyncᵖ to the i'th element in this __GLsyncˢ.
+func (s __GLsyncˢ) Index(i uint64, ϟs *gfxapi.State) __GLsyncᵖ {
+	return __GLsyncᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the __GLsyncˢ using start and end indices.
+func (s __GLsyncˢ) Slice(start, end uint64, ϟs *gfxapi.State) __GLsyncˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return __GLsyncˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the __GLsyncˢ slice.
+func (s __GLsyncˢ) String() string {
+	return fmt.Sprintf("__GLsync(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 type AttributeLocationːVertexAttributeArrayʳᵐ map[AttributeLocation](*VertexAttributeArray)
@@ -17177,6 +17436,18 @@ func (c *Context) Init() {
 	c.Instances.Init()
 }
 func (c *Context) GetCreatedAt() atom.ID { return c.CreatedAt }
+
+////////////////////////////////////////////////////////////////////////////////
+// class __GLsync
+////////////////////////////////////////////////////////////////////////////////
+type __GLsync struct {
+	binary.Generate
+	CreatedAt atom.ID
+}
+
+func (c *__GLsync) Init() {
+}
+func (c *__GLsync) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum DrawMode

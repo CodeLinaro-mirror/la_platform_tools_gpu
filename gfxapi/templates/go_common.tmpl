@@ -727,6 +727,7 @@
   {{else if IsInt         $}}uint64(ϟs.Architecture.IntegerSize)
   {{else if IsUint        $}}uint64(ϟs.Architecture.IntegerSize)
   {{else if IsStaticArray $}}{{Template "Go.SizeOf" $.ValueType}}*{{$.Size}}
+  {{else if IsClass       $}}func() uint64 { panic("Sizeof class is not yet implemented") }()
   {{else                   }}{{Error "macro Go.SizeOf called with unsupported type: %v" $}}
   {{end}}
 {{end}}
