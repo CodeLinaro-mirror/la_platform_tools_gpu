@@ -606,14 +606,14 @@ func (v *Flags) Parse(s string) error {
 const _ID_name = "NoID"
 
 var _ID_map = map[ID]string{
-	18446744073709551615: _ID_name[0:4],
+	9223372036854775807: _ID_name[0:4],
 }
 
 func init() {
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ID", Method: schema.Uint64},
 		Entries: []schema.Constant{
-			{Name: _ID_name[0:4], Value: uint64(18446744073709551615)},
+			{Name: _ID_name[0:4], Value: uint64(9223372036854775807)},
 		},
 	})
 }
