@@ -34,11 +34,11 @@ var (
 	command = &commands.Command{
 		Name:      "validate",
 		ShortHelp: "Validates an api file for correctness",
+		Run:       doValidate,
 	}
 )
 
 func init() {
-	command.Run = doValidate
 	commands.Register(command)
 }
 
