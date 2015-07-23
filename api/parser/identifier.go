@@ -42,12 +42,17 @@ func requireIdentifier(p *parse.Parser, cst *parse.Branch) *ast.Identifier {
 
 // name '!' ( type | '(' type [ ',' type ] ')' )
 func generic(p *parse.Parser, cst *parse.Branch) *ast.Generic {
-	i := identifier(p, cst)
-	if i == nil {
+	name := identifier(p, cst)
+	if name == nil {
 		return nil
 	}
-	g := &ast.Generic{Name: i}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+	return extendGeneric(p, name)
+}
+
+// '!' ( type | '(' type [ ',' type ] ')' )
+func extendGeneric(p *parse.Parser, name *ast.Identifier) *ast.Generic {
+	g := &ast.Generic{Name: name}
+	p.Extend(name.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		g.CST = cst
 		if operator(ast.OpGeneric, p, cst) {
 			if operator(ast.OpListStart, p, cst) {

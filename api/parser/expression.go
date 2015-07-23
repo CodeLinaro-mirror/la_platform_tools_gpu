@@ -23,7 +23,7 @@ import (
 func requireExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	lhs := requireLHSExpression(p, cst)
 	for {
-		if e := extendExpression(p, cst, lhs); e != nil {
+		if e := extendExpression(p, lhs); e != nil {
 			lhs = e
 		} else {
 			break
@@ -54,17 +54,17 @@ func requireLHSExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 }
 
 // lhs (index | call | binary_op | member)
-func extendExpression(p *parse.Parser, cst *parse.Branch, lhs ast.Node) ast.Node {
-	if i := index(p, cst, lhs); i != nil {
+func extendExpression(p *parse.Parser, lhs ast.Node) ast.Node {
+	if i := index(p, lhs); i != nil {
 		return i
 	}
-	if c := call(p, cst, lhs); c != nil {
+	if c := call(p, lhs); c != nil {
 		return c
 	}
-	if e := binaryOp(p, cst, lhs); e != nil {
+	if e := binaryOp(p, lhs); e != nil {
 		return e
 	}
-	if m := member(p, cst, lhs); m != nil {
+	if m := member(p, lhs); m != nil {
 		return m
 	}
 	return nil
@@ -190,12 +190,12 @@ func switch_(p *parse.Parser, cst *parse.Branch) *ast.Switch {
 }
 
 // lhs '[' expression [ ':' [ expression ] ] ']'
-func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
+func index(p *parse.Parser, lhs ast.Node) *ast.Index {
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
 	}
 	e := &ast.Index{Object: lhs}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+	p.Extend(lhs.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		e.CST = cst
 		requireOperator(ast.OpIndexStart, p, cst)
 		e.Index = requireExpression(p, cst)
@@ -215,12 +215,12 @@ func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 }
 
 // lhs '(' [ expression { ',' expression } ] ')'
-func call(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Call {
+func call(p *parse.Parser, lhs ast.Node) *ast.Call {
 	if !peekOperator(ast.OpListStart, p) {
 		return nil
 	}
 	e := &ast.Call{Target: lhs}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+	p.Extend(lhs.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		e.CST = cst
 		requireOperator(ast.OpListStart, p, cst)
 		for !operator(ast.OpListEnd, p, cst) {
@@ -244,12 +244,12 @@ func call(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Call {
 }
 
 // lhs '.' identifier
-func member(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Member {
+func member(p *parse.Parser, lhs ast.Node) *ast.Member {
 	if !peekOperator(ast.OpMember, p) {
 		return nil
 	}
 	e := &ast.Member{Object: lhs}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+	p.Extend(lhs.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		e.CST = cst
 		requireOperator(ast.OpMember, p, cst)
 		e.Name = requireIdentifier(p, cst)

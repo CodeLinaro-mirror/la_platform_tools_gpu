@@ -36,12 +36,12 @@ cmd void foo() { a := A(1,2,3) }`,
 			name: "StaticArray initializer. Error: too many values",
 			source: `type u32[3] A
 cmd void foo() { a := A(1,2,3,4) }`,
-			errors: []string{"2:24: expected 3 values, got 4"},
+			errors: []string{"2:23: expected 3 values, got 4"},
 		}, {
 			name: "StaticArray initializer. Error: too few values",
 			source: `type u32[3] A
 cmd void foo() { a := A(1,2) }`,
-			errors: []string{"2:24: expected 3 values, got 2"},
+			errors: []string{"2:23: expected 3 values, got 2"},
 		},
 
 		{
@@ -56,7 +56,7 @@ cmd void foo() { a := A(1,2,3) a[2] = 2 }`,
 			name: "StaticArray index read. Error: out of bounds",
 			source: `type u32[3] A
 cmd void foo() { a := A(1,2,3) i := a[3] }`,
-			errors: []string{"2:38: array index 3 is out of bounds for u32[3]"},
+			errors: []string{"2:37: array index 3 is out of bounds for u32[3]"},
 		},
 	} {
 		astAPI, errs := parser.Parse(test.source)
