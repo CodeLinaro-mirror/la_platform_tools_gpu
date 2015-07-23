@@ -28,7 +28,7 @@
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
-{{define "Java.Type.Any"}}Object{{end}}
+{{define "Java.Type.Any"}}Box{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
