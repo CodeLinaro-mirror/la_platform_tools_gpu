@@ -637,7 +637,8 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
-{{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
@@ -662,7 +663,8 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
-{{define "Java.Decode.Interface"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
+{{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
+{{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
