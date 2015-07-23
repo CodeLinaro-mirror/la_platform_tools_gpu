@@ -22,7 +22,7 @@ type Number struct {
 	Value string      // the string representation of the constant
 }
 
-func (t Number) Fragment() parse.Fragment { return t.CST }
+func (t Number) Node() parse.Node { return t.CST }
 
 // Bool is used for the "true" and "false" keywords.
 type Bool struct {
@@ -30,7 +30,7 @@ type Bool struct {
 	Value bool        // The value of the boolean
 }
 
-func (t Bool) Fragment() parse.Fragment { return t.CST }
+func (t Bool) Node() parse.Node { return t.CST }
 
 // String represents a quoted string constant.
 type String struct {
@@ -38,7 +38,7 @@ type String struct {
 	Value string      // The body of the string, not including the delimiters
 }
 
-func (t String) Fragment() parse.Fragment { return t.CST }
+func (t String) Node() parse.Node { return t.CST }
 
 // Unknown represents the "?" construct. This is used in places where an
 // expression takes a value that is implementation defined.
@@ -46,7 +46,7 @@ type Unknown struct {
 	CST *parse.Leaf // underlying parse leaf for this node
 }
 
-func (t Unknown) Fragment() parse.Fragment { return t.CST }
+func (t Unknown) Node() parse.Node { return t.CST }
 
 // Null represents the null literal. This is the default value for the inferred
 // type, and must be used in a context where the type can be inferred.
@@ -54,4 +54,4 @@ type Null struct {
 	CST *parse.Leaf // underlying parse leaf for this node
 }
 
-func (t Null) Fragment() parse.Fragment { return t.CST }
+func (t Null) Node() parse.Node { return t.CST }

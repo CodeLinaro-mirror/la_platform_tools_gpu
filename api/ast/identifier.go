@@ -22,7 +22,7 @@ type Identifier struct {
 	Value string      // the identifier
 }
 
-func (t Identifier) Fragment() parse.Fragment { return t.CST }
+func (t Identifier) Node() parse.Node { return t.CST }
 
 // Generic represents a identifier modified by type arguments. It looks like:
 // «identifier ! ( arg | <arg {, arg} )>»
@@ -32,7 +32,7 @@ type Generic struct {
 	Arguments []Node        // the type arguments to the generic.
 }
 
-func (t Generic) Fragment() parse.Fragment { return t.CST }
+func (t Generic) Node() parse.Node { return t.CST }
 
 const (
 	// Keyword strings represent places in the syntax where a word has special

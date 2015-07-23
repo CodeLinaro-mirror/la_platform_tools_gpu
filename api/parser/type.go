@@ -169,7 +169,7 @@ func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 		}
 	}
 	if preconst {
-		p.ErrorAt(ref.Fragment(), "const only applies to pointer types")
+		p.ErrorAt(ref.Node(), "const only applies to pointer types")
 	}
 	return ref
 }
@@ -180,7 +180,7 @@ func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref ast.Node, preconst bo
 		return e
 	}
 	if preconst {
-		p.ErrorAt(ref.Fragment(), "const only applies to pointer types")
+		p.ErrorAt(ref.Node(), "const only applies to pointer types")
 	}
 	if s := indexedType(p, cst, ref); s != nil {
 		return s

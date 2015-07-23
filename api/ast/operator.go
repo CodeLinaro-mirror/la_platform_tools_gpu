@@ -78,7 +78,7 @@ type UnaryOp struct {
 	Expression Node          // the expression the operator is being applied to
 }
 
-func (t UnaryOp) Fragment() parse.Fragment { return t.CST }
+func (t UnaryOp) Node() parse.Node { return t.CST }
 
 // BinaryOp represents any binary operation applied to two expressions.
 type BinaryOp struct {
@@ -88,7 +88,7 @@ type BinaryOp struct {
 	RHS      Node          // the expression on the right of the operator
 }
 
-func (t BinaryOp) Fragment() parse.Fragment { return t.CST }
+func (t BinaryOp) Node() parse.Node { return t.CST }
 
 func init() {
 	for _, op := range []string{
