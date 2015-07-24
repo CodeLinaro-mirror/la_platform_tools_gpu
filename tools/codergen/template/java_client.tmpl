@@ -1,0 +1,90 @@
+{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+{{define "Java.Value"}}{{Call "Java.Type" .}}{{end}}
+{{define "Java.Value.nil"}}Void{{end}}
+
+{{define "Java.Future"}}Future<{{Call "Java.Value" .}}>{{end}}
+{{define "Java.Callable"}}Callable<{{Call "Java.Value" .}}>{{end}}
+
+{{define "Java.Parameters"}}{{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{Call "Java.Type" $p.Type}} {{$p.Name}}{{end}}{{end}}
+{{define "Java.Arguments"}}{{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{$p.Name}}{{end}}{{end}}
+
+{{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{.Name}}({{template "Java.Parameters" .}}){{end}}
+
+{{define "Java.Client"}}{{$.Copyright}}
+package {{.JavaPackage}};
+
+import com.android.tools.rpclib.binary.BinaryID;
+import com.android.tools.rpclib.binary.BinaryObject;
+import com.android.tools.rpclib.rpccore.RpcException;
+
+import java.io.IOException;
+import java.util.concurrent.Future;
+
+public interface {{.Service.Name}}Client {
+»{{range .Service.Methods}}{{template "Java.Method" .}} throws IOException, RpcException;
+»{{end}}
+}
+{{end}}
+
+{{define "Java.ClientImpl"}}{{$.Copyright}}
+package {{.JavaPackage}};
+
+import com.android.tools.rpclib.binary.BinaryID;
+import com.android.tools.rpclib.binary.BinaryObject;
+import com.android.tools.rpclib.rpccore.Broadcaster;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
+»private final Broadcaster myBroadcaster;
+»private final ExecutorService myExecutorService;
+
+»public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {
+»»myExecutorService = executorService;
+»»myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);
+»}
+{{range .Service.Methods}}
+»@Override
+»public {{template "Java.Method" .}} {
+»»return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));
+»}
+{{end}}
+
+{{range .Service.Methods}}
+»private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {
+»»private final {{File.ClassName .Call.Struct.Name}} myCall;
+
+»»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
+»»»myCall = new {{File.ClassName .Call.Struct.Name}}();
+{{range .Call.Params}}»»»myCall.set{{.Name}}({{.Name}});
+{{end}}
+»»}
+»»@Override
+»»public {{Call "Java.Value" .Result.Type}} call() throws Exception {
+»»»{{if .Result.Type}}{{File.ClassName .Result.Struct.Name}} result = ({{File.ClassName .Result.Struct.Name}})myBroadcaster.Send(myCall);
+»»»return result.myValue;{{else}}myBroadcaster.Send(myCall);
+»»»return null;{{end}}
+»»}
+»}
+{{end}}
+}
+{{end}}

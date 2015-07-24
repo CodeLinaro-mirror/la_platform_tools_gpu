@@ -29,7 +29,7 @@ type JavaStruct struct {
 }
 
 // Name returns the Java name to give the type.
-func (s *JavaStruct) Name() string {
+func (s JavaStruct) Name() string {
 	name := s.Tags.Get("java")
 	if name == "" {
 		name = strings.Title(s.Struct.Name)
@@ -37,42 +37,60 @@ func (s *JavaStruct) Name() string {
 	return name
 }
 
-type JavaClass struct {
+type JavaSettings struct {
 	*Module
-	Struct       JavaStruct
 	JavaPackage  string
 	Copyright    string
 	MemberPrefix string
 }
 
+type JavaClass struct {
+	JavaSettings
+	Struct JavaStruct
+}
+
+type JavaService struct {
+	JavaSettings
+	Service *Service
+}
+
 func Java(m *Module, info copyright.Info, gen Generator, path string) error {
-	class := &JavaClass{
+	settings := JavaSettings{
 		Module:      m,
 		JavaPackage: m.Directives["java.package"],
 		Copyright:   strings.TrimSpace(copyright.Build("generated_aosp_java", info)),
 	}
-	class.MemberPrefix, _ = m.Directives["java.member_prefix"]
+	settings.MemberPrefix, _ = m.Directives["java.member_prefix"]
 	source, _ := m.Directives["java.source"]
 	indent, _ := m.Directives["java.indent"]
 	reflow := indentor(indent)
-	pkgPath := strings.Replace(class.JavaPackage, ".", "/", -1)
+	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
-		class.Struct.Struct = s
+		class := JavaClass{JavaSettings: settings, Struct: JavaStruct{s}}
 		out := filepath.Join(path, source, pkgPath, class.Struct.Name()+".java")
 		if err := gen("Java.File", class, out, reflow); err != nil {
 			return err
 		}
 	}
+	for _, s := range m.Services {
+		service := JavaService{JavaSettings: settings, Service: s}
+		for _, e := range []string{"Client", "ClientImpl"} {
+			out := filepath.Join(path, source, pkgPath, service.Service.Name+e+".java")
+			if err := gen("Java."+e, service, out, reflow); err != nil {
+				return err
+			}
+		}
+	}
 	return nil
 }
 
-func (class *JavaClass) FieldName(s string) string {
+func (settings JavaSettings) FieldName(s string) string {
 	r, n := utf8.DecodeRuneInString(s)
-	return class.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
+	return settings.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
 // Name returns the Java name to give the type.
-func (class *JavaClass) ClassName(s string) string {
+func (settings JavaSettings) ClassName(s string) string {
 	pkg, name := "", s
 	if i := strings.LastIndexAny(s, "."); i >= 0 {
 		pkg = s[:i]
@@ -80,8 +98,8 @@ func (class *JavaClass) ClassName(s string) string {
 	}
 	name = strings.Title(name)
 	if pkg != "" {
-		if m := class.FindImport(pkg); m != nil {
-			name = fmt.Sprintf("%v.%s", m.Directive("java.package", "JoJava."), name)
+		if m := settings.FindImport(pkg); m != nil {
+			name = fmt.Sprintf("%v.%s", m.Directive("java.package", "NotJava."+m.Name), name)
 		} else {
 			name = "Unknown." + pkg + "." + name
 		}
