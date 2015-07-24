@@ -55,8 +55,7 @@ func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 		if !decl.Anonymous() {
 			f.Declared = decl.Name()
 		}
-		f.Type = fromType(m.Source.Types, decl.Type(), tags, m.Imports, b)
-		delete(m.Imports, m.Source.Types.Path())
+		f.Type = fromType(m.Source.Types, decl.Type(), tags, &m.Imports, b)
 		s.Fields = append(s.Fields, f)
 	}
 	if tagged {

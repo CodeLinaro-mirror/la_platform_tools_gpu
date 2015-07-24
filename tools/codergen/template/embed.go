@@ -658,7 +658,7 @@ const java_binary_tmpl = `{{/*
 {{end}}»»}{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
@@ -751,8 +751,6 @@ const java_common_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Java.ClassName"}}{{if . | Contains "."}}{{File.JavaPackage}}.{{end}}{{.}}{{end}}
-
 {{define "Java.Type#bool"}}boolean{{end}}
 {{define "Java.Type#int8"}}byte{{end}}
 {{define "Java.Type#uint8"}}byte{{end}}
@@ -767,7 +765,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
-{{define "Java.Type.Struct"}}{{template "Java.ClassName" .Name}}{{end}}
+{{define "Java.Type.Struct"}}{{File.ClassName .Name}}{{end}}
 {{define "Java.Type.Interface"}}BinaryObject{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}

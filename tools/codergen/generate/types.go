@@ -52,7 +52,7 @@ func spaceToUnderscore(r rune) rune {
 }
 
 // fromType creates a appropriate schema.Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tags Tags, imports Imports, binObj *types.Interface) schema.Type {
+func fromType(pkg *types.Package, from types.Type, tags Tags, imports *Imports, binObj *types.Interface) schema.Type {
 	alias := ""
 	fullname := types.TypeString(pkg, from) // fully-qualified name including full package path
 	name := strings.Map(spaceToUnderscore, path.Base(fullname))
@@ -61,7 +61,7 @@ func fromType(pkg *types.Package, from types.Type, tags Tags, imports Imports, b
 		from = from.Underlying()
 		p := named.Obj().Pkg()
 		if p != nil && p != pkg {
-			imports[p.Path()] = struct{}{}
+			imports.Add(Import{Name: p.Name(), Path: p.Path()})
 		}
 	}
 	gotype := strings.Map(spaceToUnderscore, from.String())
