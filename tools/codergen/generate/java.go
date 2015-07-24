@@ -114,6 +114,8 @@ func (settings JavaSettings) findClass(v interface{}) (string, string) {
 		if t.Name == name {
 			if n := fmt.Sprint(t.Tags.Get("java")); n != "" {
 				titled = n
+			} else {
+				titled += fmt.Sprint(m.Directive("java.class_suffix", ""))
 			}
 		}
 	}
