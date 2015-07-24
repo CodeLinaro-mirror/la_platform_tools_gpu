@@ -16,6 +16,7 @@ package endian
 
 import (
 	eb "encoding/binary"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"math"
@@ -56,7 +57,10 @@ type writer struct {
 }
 
 func (r *reader) Data(p []byte) error {
-	_, err := io.ReadFull(r.reader, p)
+	n, err := io.ReadFull(r.reader, p)
+	if err != nil {
+		err = fmt.Errorf("%v after reading %d bytes", err, n)
+	}
 	return err
 }
 

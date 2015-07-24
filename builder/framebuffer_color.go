@@ -32,7 +32,7 @@ import (
 func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	fbWidth, fbHeight, err := getAtomFramebufferDimensions(r.After, d, l)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed to get framebuffer dimensions: %v\n", err)
 	}
 	imgWidth, imgHeight := uniformScale(fbWidth, fbHeight, r.Settings.MaxWidth, r.Settings.MaxHeight)
 
@@ -68,7 +68,7 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 
 	after, err := ResolveAtom(r.After, d, l)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Could not resolve atom '%v': %v", r.After, err)
 	}
 
 	apiID := after.API()
@@ -84,8 +84,9 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 
 	img := <-query.QueryColorBuffer(ctx, mgr, atom.ID(r.After.Index), r.Width, r.Height, r.Wireframe)
 	if img.Error != nil {
-		log.Errorf(l, "%v", img.Error)
-		return nil, img.Error
+		err := fmt.Errorf("Failed to retrieve framebuffer: %v", img.Error)
+		log.Errorf(l, "%v", err)
+		return nil, err
 	}
 
 	return img.Data, nil
