@@ -120,16 +120,21 @@ func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Temp
 		try = append(try, prefix+node)
 	case schema.Method:
 		try = append(try, fmt.Sprint(prefix, "#", node.String()))
+	case nil:
 	default:
 		return nil, fmt.Errorf("Invalid call dispatch type %T", node)
 	}
-	r := reflect.TypeOf(node)
-	// using the reflected typename
-	if r.Name() != "" {
-		try = append(try, fmt.Sprint(prefix, ".", r.Name()))
-	}
-	if r.Kind() == reflect.Ptr {
-		try = append(try, fmt.Sprint(prefix, ".", r.Elem().Name()))
+	if node != nil {
+		r := reflect.TypeOf(node)
+		// using the reflected typename
+		if r.Name() != "" {
+			try = append(try, fmt.Sprint(prefix, ".", r.Name()))
+		}
+		if r.Kind() == reflect.Ptr {
+			try = append(try, fmt.Sprint(prefix, ".", r.Elem().Name()))
+		}
+	} else {
+		try = append(try, fmt.Sprint(prefix, ".nil"))
 	}
 	// default case is just the prefix
 	try = append(try, prefix)
