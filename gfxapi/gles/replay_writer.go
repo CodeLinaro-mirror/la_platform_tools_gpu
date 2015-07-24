@@ -332,6 +332,57 @@ func (c CGSSurfaceID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.Sta
 func (c SyncObject) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U64(uint64(c))
 }
+func (c GLboolean) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U8(uint8(c))
+}
+func (c GLbyte) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.S8(int8(c))
+}
+func (c GLubyte) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U8(uint8(c))
+}
+func (c GLshort) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.S16(int16(c))
+}
+func (c GLushort) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U16(uint16(c))
+}
+func (c GLint) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.S32(int32(c))
+}
+func (c GLuint) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U32(uint32(c))
+}
+func (c GLint64) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.S64(int64(c))
+}
+func (c GLuint64) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U64(uint64(c))
+}
+func (c GLfixed) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.S32(int32(c))
+}
+func (c GLsizei) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U32(uint32(c))
+}
+func (c GLenum) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U32(uint32(c))
+}
+func (c GLsync) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return __GLsyncᵖ(c).value()
+}
+func (c GLbitfield) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U32(uint32(c))
+}
+func (c GLhalf) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.U16(uint16(c))
+}
+func (c GLfloat) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.F32(float32(c))
+}
+func (c GLclampf) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	return value.F32(float32(c))
+}
 
 var _ = replay.Replayer(&GlEnableClientState{}) // interface compliance check
 func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
@@ -5212,6 +5263,25 @@ func (p Voidᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
+func (p __GLsyncᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) __GLsync {
+	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p __GLsyncᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) __GLsync {
+	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p.Read(ϟs, ϟd, ϟl)
+}
+func (p __GLsyncᵖ) replayWrite(value __GLsync, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Write(value, ϟs)
+	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+func (p __GLsyncᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (p U8ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
 	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p.Read(ϟs, ϟd, ϟl)
@@ -7146,4 +7216,27 @@ func (s Voidˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 		rng := s.Range(ϟs)
 		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
+}
+func (s __GLsyncˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) __GLsyncˢ {
+	if s.Root.Pool == memory.ApplicationPool {
+		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+func (s __GLsyncˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) __GLsyncˢ {
+	if s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s __GLsyncˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	if s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+}
+func (s __GLsyncˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []__GLsync {
+	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return s.Read(ϟs, ϟd, ϟl)
 }

@@ -104,6 +104,7 @@ func init() {
 	Namespace.Add((*FramebufferIdᶜᵖ)(nil).Class())
 	Namespace.Add((*GLXContext)(nil).Class())
 	Namespace.Add((*GLXDrawable)(nil).Class())
+	Namespace.Add((*GLsync)(nil).Class())
 	Namespace.Add((*GlActiveTexture)(nil).Class())
 	Namespace.Add((*GlAttachShader)(nil).Class())
 	Namespace.Add((*GlBeginQuery)(nil).Class())
@@ -385,6 +386,9 @@ func init() {
 	Namespace.Add((*WglCreateContextAttribsARB)(nil).Class())
 	Namespace.Add((*WglMakeCurrent)(nil).Class())
 	Namespace.Add((*WglSwapBuffers)(nil).Class())
+	Namespace.Add((*__GLsync)(nil).Class())
+	Namespace.Add((*__GLsyncˢ)(nil).Class())
+	Namespace.Add((*__GLsyncᵖ)(nil).Class())
 }
 
 var (
@@ -473,6 +477,7 @@ var (
 	binaryIDFramebufferIdᶜᵖ                        = binary.ID{0x8c, 0xa3, 0xf6, 0xdf, 0xc9, 0x8e, 0x08, 0xea, 0x92, 0x56, 0x02, 0x6e, 0x96, 0x2c, 0x3c, 0xdc, 0x63, 0x7b, 0x3b, 0x50}
 	binaryIDGLXContext                             = binary.ID{0xf7, 0x65, 0x8c, 0x4a, 0x4f, 0xdf, 0x00, 0xcc, 0xb8, 0x97, 0x64, 0x1a, 0xfd, 0x6c, 0x55, 0x30, 0x4a, 0x0f, 0x1e, 0x25}
 	binaryIDGLXDrawable                            = binary.ID{0xe8, 0x9a, 0x82, 0x65, 0x61, 0x45, 0x3f, 0x8b, 0x8b, 0x50, 0xeb, 0x6a, 0x04, 0x78, 0x5c, 0xdc, 0x6b, 0xb5, 0xdc, 0x63}
+	binaryIDGLsync                                 = binary.ID{0x26, 0xf8, 0x18, 0xb0, 0xf5, 0xde, 0x4e, 0xc0, 0x05, 0x45, 0x7a, 0x4f, 0x9d, 0xa1, 0x51, 0xf4, 0x24, 0x30, 0x3e, 0x62}
 	binaryIDGlActiveTexture                        = binary.ID{0x86, 0x43, 0x07, 0xe6, 0xb5, 0x8c, 0x5b, 0x40, 0xd6, 0x5b, 0x88, 0x2a, 0x03, 0x47, 0x22, 0x92, 0x84, 0xd6, 0xd1, 0x71}
 	binaryIDGlAttachShader                         = binary.ID{0x25, 0x23, 0xee, 0xce, 0x3c, 0x37, 0xb6, 0x03, 0x61, 0xc4, 0xb6, 0xbf, 0x06, 0x38, 0xb9, 0x7f, 0x78, 0x85, 0xee, 0x77}
 	binaryIDGlBeginQuery                           = binary.ID{0x42, 0xe9, 0xe3, 0x0b, 0x3b, 0x9a, 0x1f, 0x86, 0x6f, 0x95, 0xc8, 0x3a, 0x15, 0x06, 0xb2, 0x84, 0x6a, 0x95, 0xd2, 0xf4}
@@ -754,6 +759,9 @@ var (
 	binaryIDWglCreateContextAttribsARB             = binary.ID{0x28, 0x15, 0x85, 0xa3, 0xab, 0x16, 0x84, 0xed, 0xe0, 0xe6, 0xec, 0x92, 0xe8, 0x14, 0x8e, 0xbe, 0x5f, 0x32, 0x72, 0x42}
 	binaryIDWglMakeCurrent                         = binary.ID{0x86, 0xd3, 0x02, 0xb5, 0xf6, 0x1b, 0x7f, 0x3e, 0xb1, 0x23, 0x36, 0x2b, 0x9d, 0xa2, 0x13, 0xa6, 0xf6, 0xbc, 0xb3, 0x8a}
 	binaryIDWglSwapBuffers                         = binary.ID{0xa1, 0x23, 0xcd, 0xfc, 0xb1, 0x9b, 0xcf, 0x24, 0x77, 0xab, 0x3b, 0xb0, 0x75, 0x58, 0x9b, 0x35, 0x54, 0x11, 0x3f, 0xc8}
+	binaryID__GLsync                               = binary.ID{0xee, 0x85, 0x09, 0x86, 0xec, 0x16, 0xad, 0xa9, 0xaa, 0x94, 0xde, 0x43, 0xe8, 0xe3, 0x26, 0x1f, 0xb8, 0x64, 0x69, 0xce}
+	binaryID__GLsyncˢ                              = binary.ID{0x38, 0x06, 0x78, 0xdb, 0x2a, 0xc8, 0x7c, 0xb0, 0xf2, 0xbc, 0x99, 0xda, 0x4c, 0xd9, 0x81, 0x33, 0xb4, 0x6a, 0xef, 0xbb}
+	binaryID__GLsyncᵖ                              = binary.ID{0xf3, 0x34, 0xc8, 0x3f, 0x32, 0x56, 0xc8, 0xda, 0x01, 0x47, 0x1f, 0xd5, 0x8f, 0x02, 0x35, 0x60, 0x51, 0x2b, 0x21, 0x9a}
 )
 
 type binaryClassArchitecture struct{}
@@ -7659,6 +7667,53 @@ var schemaGLXDrawable = &schema.Class{
 	TypeID:  binaryIDGLXDrawable,
 	Package: "gles",
 	Name:    "GLXDrawable",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGLsync struct{}
+
+func (*GLsync) Class() binary.Class {
+	return (*binaryClassGLsync)(nil)
+}
+func doEncodeGLsync(e binary.Encoder, o *GLsync) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGLsync(d binary.Decoder, o *GLsync) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGLsync(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGLsync) ID() binary.ID      { return binaryIDGLsync }
+func (*binaryClassGLsync) New() binary.Object { return &GLsync{} }
+func (*binaryClassGLsync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLsync(e, obj.(*GLsync))
+}
+func (*binaryClassGLsync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLsync{}
+	return obj, doDecodeGLsync(d, obj)
+}
+func (*binaryClassGLsync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLsync(d, obj.(*GLsync))
+}
+func (*binaryClassGLsync) Skip(d binary.Decoder) error { return doSkipGLsync(d) }
+func (*binaryClassGLsync) Schema() *schema.Class       { return schemaGLsync }
+
+var schemaGLsync = &schema.Class{
+	TypeID:  binaryIDGLsync,
+	Package: "gles",
+	Name:    "GLsync",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -28495,6 +28550,149 @@ var schemaWglSwapBuffers = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},
+	},
+}
+
+type binaryClass__GLsync struct{}
+
+func (*__GLsync) Class() binary.Class {
+	return (*binaryClass__GLsync)(nil)
+}
+func doEncode__GLsync(e binary.Encoder, o *__GLsync) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecode__GLsync(d binary.Decoder, o *__GLsync) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	return nil
+}
+func doSkip__GLsync(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClass__GLsync) ID() binary.ID      { return binaryID__GLsync }
+func (*binaryClass__GLsync) New() binary.Object { return &__GLsync{} }
+func (*binaryClass__GLsync) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncode__GLsync(e, obj.(*__GLsync))
+}
+func (*binaryClass__GLsync) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &__GLsync{}
+	return obj, doDecode__GLsync(d, obj)
+}
+func (*binaryClass__GLsync) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecode__GLsync(d, obj.(*__GLsync))
+}
+func (*binaryClass__GLsync) Skip(d binary.Decoder) error { return doSkip__GLsync(d) }
+func (*binaryClass__GLsync) Schema() *schema.Class       { return schema__GLsync }
+
+var schema__GLsync = &schema.Class{
+	TypeID:  binaryID__GLsync,
+	Package: "gles",
+	Name:    "__GLsync",
+	Fields: []schema.Field{
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+	},
+}
+
+type binaryClass__GLsyncˢ struct{}
+
+func (*__GLsyncˢ) Class() binary.Class {
+	return (*binaryClass__GLsyncˢ)(nil)
+}
+func doEncode__GLsyncˢ(e binary.Encoder, o *__GLsyncˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecode__GLsyncˢ(d binary.Decoder, o *__GLsyncˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkip__GLsyncˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClass__GLsyncˢ) ID() binary.ID      { return binaryID__GLsyncˢ }
+func (*binaryClass__GLsyncˢ) New() binary.Object { return &__GLsyncˢ{} }
+func (*binaryClass__GLsyncˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncode__GLsyncˢ(e, obj.(*__GLsyncˢ))
+}
+func (*binaryClass__GLsyncˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &__GLsyncˢ{}
+	return obj, doDecode__GLsyncˢ(d, obj)
+}
+func (*binaryClass__GLsyncˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecode__GLsyncˢ(d, obj.(*__GLsyncˢ))
+}
+func (*binaryClass__GLsyncˢ) Skip(d binary.Decoder) error { return doSkip__GLsyncˢ(d) }
+func (*binaryClass__GLsyncˢ) Schema() *schema.Class       { return schema__GLsyncˢ }
+
+var schema__GLsyncˢ = &schema.Class{
+	TypeID:  binaryID__GLsyncˢ,
+	Package: "gles",
+	Name:    "__GLsyncˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClass__GLsyncᵖ struct{}
+
+func (*__GLsyncᵖ) Class() binary.Class {
+	return (*binaryClass__GLsyncᵖ)(nil)
+}
+func doEncode__GLsyncᵖ(e binary.Encoder, o *__GLsyncᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecode__GLsyncᵖ(d binary.Decoder, o *__GLsyncᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkip__GLsyncᵖ(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClass__GLsyncᵖ) ID() binary.ID      { return binaryID__GLsyncᵖ }
+func (*binaryClass__GLsyncᵖ) New() binary.Object { return &__GLsyncᵖ{} }
+func (*binaryClass__GLsyncᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncode__GLsyncᵖ(e, obj.(*__GLsyncᵖ))
+}
+func (*binaryClass__GLsyncᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &__GLsyncᵖ{}
+	return obj, doDecode__GLsyncᵖ(d, obj)
+}
+func (*binaryClass__GLsyncᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecode__GLsyncᵖ(d, obj.(*__GLsyncᵖ))
+}
+func (*binaryClass__GLsyncᵖ) Skip(d binary.Decoder) error { return doSkip__GLsyncᵖ(d) }
+func (*binaryClass__GLsyncᵖ) Schema() *schema.Class       { return schema__GLsyncᵖ }
+
+var schema__GLsyncᵖ = &schema.Class{
+	TypeID:  binaryID__GLsyncᵖ,
+	Package: "gles",
+	Name:    "__GLsyncᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 

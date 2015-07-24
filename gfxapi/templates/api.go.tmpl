@@ -116,6 +116,7 @@
   {{$u := $ | Underlying}}
   {{     if IsPointer  $u}}{{Template "Pointer" $}}
   {{else if IsSlice    $u}}{{Template "Slice"   $}}
+  {{else if IsVoid     $u}}
   {{else                 }}type {{$.Name}} {{Template "Go.Type" $.To}}
   {{end}}
 {{end}}
