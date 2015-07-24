@@ -36,8 +36,9 @@ type Struct struct {
 func (m *Module) addStruct(n *types.TypeName, b *types.Interface) {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Class: schema.Class{
-		Name:    n.Name(),
-		Package: m.Source.Types.Name(),
+		Name:     n.Name(),
+		Package:  m.Source.Types.Name(),
+		Exported: n.Exported(),
 	}}
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
