@@ -179,7 +179,7 @@ func switch_(p *parse.Parser, cst *parse.Branch) *ast.Switch {
 		requireKeyword(ast.KeywordSwitch, p, cst)
 		e.Value = requireExpression(p, cst)
 		requireOperator(ast.OpBlockStart, p, cst)
-		for !operator(ast.OpBlockEnd, p, cst) {
+		for peekKeyword(ast.KeywordCase, p) {
 			p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 				entry := &ast.Case{}
 				entry.CST = cst
@@ -194,6 +194,17 @@ func switch_(p *parse.Parser, cst *parse.Branch) *ast.Switch {
 				e.Cases = append(e.Cases, entry)
 			})
 		}
+		if peekKeyword(ast.KeywordDefault, p) {
+			p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+				entry := &ast.Default{}
+				entry.CST = cst
+				requireKeyword(ast.KeywordDefault, p, cst)
+				requireOperator(ast.OpInitialise, p, cst)
+				entry.Block = requireBlock(p, cst)
+				e.Default = entry
+			})
+		}
+		requireOperator(ast.OpBlockEnd, p, cst)
 	})
 	return e
 }
