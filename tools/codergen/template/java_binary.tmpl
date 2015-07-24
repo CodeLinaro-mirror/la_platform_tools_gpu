@@ -18,7 +18,7 @@
 {{define "Java.Encoder"}}
 »»@Override
 »»public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {
-»»»{{.Name}} o = ({{.Name}})obj;
+»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
 {{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -43,7 +43,7 @@
 {{define "Java.Decoder"}}
 »»@Override
 »»public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {
-»»»{{.Name}} o = ({{.Name}})obj;
+»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
 {{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -91,14 +91,14 @@ import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
 import java.io.IOException;
 
-{{if .Struct.Exported}}public {{end}}final class {{.Struct.Name}} implements BinaryObject {
+{{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}} implements BinaryObject {
 {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
-»// Constructs a default-initialized {@link {{.Struct.Name}}}.
-»public {{.Struct.Name}}() {
+»// Constructs a default-initialized {@link {{File.ClassName .Struct}}}.
+»public {{File.ClassName .Struct}}() {
 »}
 
-»// Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
-»public {{.Struct.Name}}(Decoder d) throws IOException {
+»// Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.
+»public {{File.ClassName .Struct}}(Decoder d) throws IOException {
 »»Klass.INSTANCE.decode(d, this);
 »}
 {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
@@ -114,7 +114,7 @@ import java.io.IOException;
 »»public BinaryID id() { return ID; }
 
 »»@Override @NotNull
-»»public BinaryObject create() { return new {{.Struct.Name}}(); }
+»»public BinaryObject create() { return new {{File.ClassName .Struct}}(); }
 {{template "Java.Encoder" .Struct}}
 {{template "Java.Decoder" .Struct}}
 »}
