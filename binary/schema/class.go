@@ -26,6 +26,7 @@ type Class struct {
 	TypeID   binary.ID       // The unique type identifier for the Object.
 	Package  string          // The package that declared the struct.
 	Name     string          // The simple name of the Object.
+	Exported bool            // Whether the class is exported from it's package
 	Fields   FieldList       // Descriptions of the fields of the Object.
 	Metadata []binary.Object // The metadata for the class.
 }
