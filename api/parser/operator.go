@@ -75,13 +75,14 @@ func binaryOp(p *parse.Parser, lhs ast.Node) *ast.BinaryOp {
 // operator expression
 func unaryOp(p *parse.Parser, cst *parse.Branch) *ast.UnaryOp {
 	op := scanOperator(p)
+	p.Rollback()
 	if _, found := ast.UnaryOperators[op]; !found {
-		p.Rollback()
 		return nil
 	}
-	p.ParseLeaf(cst, nil)
 	n := &ast.UnaryOp{Operator: op}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		requireOperator(op, p, cst)
+		p.ParseLeaf(cst, nil)
 		n.CST = cst
 		n.Expression = requireExpression(p, cst)
 	})
