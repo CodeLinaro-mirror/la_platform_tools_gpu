@@ -21,21 +21,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
-
-type JavaStruct struct {
-	*Struct
-}
-
-// Name returns the Java name to give the type.
-func (s JavaStruct) Name() string {
-	name := s.Tags.Get("java")
-	if name == "" {
-		name = strings.Title(s.Struct.Name)
-	}
-	return name
-}
 
 type JavaSettings struct {
 	*Module
@@ -46,7 +34,7 @@ type JavaSettings struct {
 
 type JavaClass struct {
 	JavaSettings
-	Struct JavaStruct
+	Struct *Struct
 }
 
 type JavaService struct {
@@ -66,8 +54,8 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	reflow := indentor(indent)
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
-		class := JavaClass{JavaSettings: settings, Struct: JavaStruct{s}}
-		out := filepath.Join(path, source, pkgPath, class.Struct.Name()+".java")
+		class := JavaClass{JavaSettings: settings, Struct: s}
+		out := filepath.Join(path, source, pkgPath, settings.ClassName(class.Struct.Name)+".java")
 		if err := gen("Java.File", class, out, reflow); err != nil {
 			return err
 		}
@@ -90,19 +78,44 @@ func (settings JavaSettings) FieldName(s string) string {
 }
 
 // Name returns the Java name to give the type.
-func (settings JavaSettings) ClassName(s string) string {
-	pkg, name := "", s
-	if i := strings.LastIndexAny(s, "."); i >= 0 {
-		pkg = s[:i]
-		name = s[i+1:]
+func (settings JavaSettings) ClassName(v interface{}) string {
+	name := ""
+	switch v := v.(type) {
+	case string:
+		name = v
+	case *Struct:
+		name = v.Name
+	case Call:
+		name = v.Struct.Name
+	case Result:
+		name = v.Struct.Name
+	case *schema.Struct:
+		name = v.Name
+	default:
+		panic(fmt.Errorf("Invalid type %T to ClassName", v))
 	}
-	name = strings.Title(name)
+	pkg, name := "", name
+	if i := strings.LastIndexAny(name, "."); i >= 0 {
+		pkg = name[:i]
+		name = name[i+1:]
+	}
+	titled := strings.Title(name)
+	m := settings.Module
 	if pkg != "" {
-		if m := settings.FindImport(pkg); m != nil {
-			name = fmt.Sprintf("%v.%s", m.Directive("java.package", "NotJava."+m.Name), name)
-		} else {
-			name = "Unknown." + pkg + "." + name
+		m = settings.FindImport(pkg)
+		if m == nil {
+			return "Unknown." + pkg + "." + titled
 		}
 	}
-	return name
+	for _, t := range m.Structs {
+		if t.Name == name {
+			if n := fmt.Sprint(t.Tags.Get("java")); n != "" {
+				titled = n
+			}
+		}
+	}
+	if m == settings.Module {
+		return titled
+	}
+	return fmt.Sprintf("%v.%s", m.Directive("java.package", "NotJava."+m.Name), titled)
 }

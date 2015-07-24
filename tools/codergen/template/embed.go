@@ -629,7 +629,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encoder"}}
 »»@Override
 »»public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {
-»»»{{.Name}} o = ({{.Name}})obj;
+»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
 {{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -654,7 +654,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decoder"}}
 »»@Override
 »»public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {
-»»»{{.Name}} o = ({{.Name}})obj;
+»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
 {{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (File.FieldName .Name))}}
 {{end}}»»}{{end}}
 
@@ -702,14 +702,14 @@ import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
 import java.io.IOException;
 
-{{if .Struct.Exported}}public {{end}}final class {{.Struct.Name}} implements BinaryObject {
+{{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}} implements BinaryObject {
 {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
-»// Constructs a default-initialized {@link {{.Struct.Name}}}.
-»public {{.Struct.Name}}() {
+»// Constructs a default-initialized {@link {{File.ClassName .Struct}}}.
+»public {{File.ClassName .Struct}}() {
 »}
 
-»// Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
-»public {{.Struct.Name}}(Decoder d) throws IOException {
+»// Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.
+»public {{File.ClassName .Struct}}(Decoder d) throws IOException {
 »»Klass.INSTANCE.decode(d, this);
 »}
 {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
@@ -725,7 +725,7 @@ import java.io.IOException;
 »»public BinaryID id() { return ID; }
 
 »»@Override @NotNull
-»»public BinaryObject create() { return new {{.Struct.Name}}(); }
+»»public BinaryObject create() { return new {{File.ClassName .Struct}}(); }
 {{template "Java.Encoder" .Struct}}
 {{template "Java.Decoder" .Struct}}
 »}
@@ -809,16 +809,16 @@ public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
 
 {{range .Service.Methods}}
 »private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {
-»»private final {{File.ClassName .Call.Struct.Name}} myCall;
+»»private final {{File.ClassName .Call}} myCall;
 
 »»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
-»»»myCall = new {{File.ClassName .Call.Struct.Name}}();
+»»»myCall = new {{File.ClassName .Call}}();
 {{range .Call.Params}}»»»myCall.set{{.Name}}({{.Name}});
 {{end}}
 »»}
 »»@Override
 »»public {{Call "Java.Value" .Result.Type}} call() throws Exception {
-»»»{{if .Result.Type}}{{File.ClassName .Result.Struct.Name}} result = ({{File.ClassName .Result.Struct.Name}})myBroadcaster.Send(myCall);
+»»»{{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);
 »»»return result.myValue;{{else}}myBroadcaster.Send(myCall);
 »»»return null;{{end}}
 »»}
@@ -858,7 +858,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
-{{define "Java.Type.Struct"}}{{File.ClassName .Name}}{{end}}
+{{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}BinaryObject{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}

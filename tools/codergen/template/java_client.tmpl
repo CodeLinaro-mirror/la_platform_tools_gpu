@@ -71,16 +71,16 @@ public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
 
 {{range .Service.Methods}}
 »private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {
-»»private final {{File.ClassName .Call.Struct.Name}} myCall;
+»»private final {{File.ClassName .Call}} myCall;
 
 »»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
-»»»myCall = new {{File.ClassName .Call.Struct.Name}}();
+»»»myCall = new {{File.ClassName .Call}}();
 {{range .Call.Params}}»»»myCall.set{{.Name}}({{.Name}});
 {{end}}
 »»}
 »»@Override
 »»public {{Call "Java.Value" .Result.Type}} call() throws Exception {
-»»»{{if .Result.Type}}{{File.ClassName .Result.Struct.Name}} result = ({{File.ClassName .Result.Struct.Name}})myBroadcaster.Send(myCall);
+»»»{{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);
 »»»return result.myValue;{{else}}myBroadcaster.Send(myCall);
 »»»return null;{{end}}
 »»}
