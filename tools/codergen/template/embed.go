@@ -633,7 +633,7 @@ const java_binary_tmpl = `{{/*
 {{end}}»»}{{end}}
 
 {{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
-{{define "Java.Encode.Struct"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
@@ -709,15 +709,15 @@ import java.io.IOException;
 
 »// Constructs and decodes a {@link {{.Struct.Name}}} from the {@link Decoder} d.
 »public {{.Struct.Name}}(Decoder d) throws IOException {
-»»Class.INSTANCE.decode(d, this);
+»»Klass.INSTANCE.decode(d, this);
 »}
 {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
 »@Override @NotNull
-»public BinaryClass klass() { return Class.INSTANCE; }
+»public BinaryClass klass() { return Klass.INSTANCE; }
 
 »public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
 »public static BinaryID ID = new BinaryID(IDBytes);
-»public enum Class implements BinaryClass {
+»public enum Klass implements BinaryClass {
 »»INSTANCE;
 
 »»@Override @NotNull
@@ -729,7 +729,7 @@ import java.io.IOException;
 {{template "Java.Decoder" .Struct}}
 »}
 »static {
-»»Namespace.register(ID, Class.INSTANCE);
+»»Namespace.register(ID, Klass.INSTANCE);
 »}
 }
 {{end}}
