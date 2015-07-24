@@ -862,6 +862,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#float64"}}double{{end}}
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
+{{define "Java.Type#binary.Object"}}BinaryObject{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
