@@ -85,8 +85,7 @@ func (settings JavaSettings) FieldName(s string) string {
 	return settings.MemberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
-// Name returns the Java name to give the type.
-func (settings JavaSettings) findClass(v interface{}) (string, string) {
+func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
 	name := ""
 	switch v := v.(type) {
 	case string:
@@ -99,8 +98,10 @@ func (settings JavaSettings) findClass(v interface{}) (string, string) {
 		name = v.Struct.Name
 	case *schema.Struct:
 		name = v.Name
+	case *schema.Interface:
+		name = v.Name
 	default:
-		panic(fmt.Errorf("Invalid type %T to ClassName", v))
+		panic(fmt.Errorf("Invalid type %T to moduleAndName", v))
 	}
 	pkg, name := "", name
 	if i := strings.LastIndexAny(name, "."); i >= 0 {
@@ -112,22 +113,27 @@ func (settings JavaSettings) findClass(v interface{}) (string, string) {
 	if pkg != "" {
 		m = settings.FindImport(pkg)
 		if m == nil {
-			return "Unknown." + pkg, titled
+			m = &Module{Name: "Missing"}
 		}
 	}
+	return m, titled
+}
+
+func (settings JavaSettings) findClass(v interface{}) (string, string) {
+	m, name := settings.moduleAndName(v)
 	for _, t := range m.Structs {
 		if t.Name == name {
 			if n := fmt.Sprint(t.Tags.Get("java")); n != "" {
-				titled = n
+				name = n
 			} else {
-				titled += fmt.Sprint(m.Directive("java.class_suffix", ""))
+				name += fmt.Sprint(m.Directive("java.class_suffix", ""))
 			}
 		}
 	}
 	if m == settings.Module {
-		return "", titled
+		return "", name
 	}
-	return fmt.Sprint(m.Directive("java.package", "NotJava."+m.Name)), titled
+	return fmt.Sprint(m.Directive("java.package", "NotJava."+m.Name)), name
 }
 
 // Import returns the fully qualified name for the type, if not previously encountered.
@@ -144,8 +150,14 @@ func (settings JavaSettings) Import(v interface{}) string {
 	return fullname
 }
 
-// ClassName returns the Java name to give the type.
+// ClassName returns the Java name to give the class type.
 func (settings JavaSettings) ClassName(v interface{}) string {
 	_, name := settings.findClass(v)
+	return name
+}
+
+// InterfaceName returns the Java name to give the interface type.
+func (settings JavaSettings) InterfaceName(v interface{}) string {
+	_, name := settings.moduleAndName(v)
 	return name
 }
