@@ -76,7 +76,7 @@ func serviceStruct(m *Module, name string, tuple *types.Tuple, count int, b *typ
 		entry := tuple.At(i)
 		class.Fields = append(class.Fields, schema.Field{
 			Declared: entry.Name(),
-			Type:     fromType(m.Source.Types, entry.Type(), "", m.Imports, b),
+			Type:     fromType(m.Source.Types, entry.Type(), "", &m.Imports, b),
 		})
 	}
 	s := &Struct{Class: class}
