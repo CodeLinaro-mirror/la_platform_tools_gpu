@@ -60,10 +60,10 @@ import (
 //    └─── Item[6] ─── Atom[9]
 //
 type Group struct {
-	binary.Generate
-	Name      string    // Name of this group.
-	Range     Range     // The range of atoms this group (and sub-groups) represents.
-	SubGroups GroupList // All sub-groups of this group.
+	binary.Generate `java:"AtomGroup"`
+	Name            string    // Name of this group.
+	Range           Range     // The range of atoms this group (and sub-groups) represents.
+	SubGroups       GroupList // All sub-groups of this group.
 }
 
 func (g Group) info(depth int) string {
