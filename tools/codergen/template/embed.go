@@ -700,6 +700,7 @@ import com.android.tools.rpclib.binary.BinaryObject;
 import com.android.tools.rpclib.binary.Decoder;
 import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
+{{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
 import java.io.IOException;
 
 {{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}} implements BinaryObject {
@@ -763,11 +764,15 @@ const java_client_tmpl = `{{/*
 
 {{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{.Name}}({{template "Java.Parameters" .}}){{end}}
 
+{{define "Java.Imports"}}
+import com.android.tools.rpclib.binary.BinaryID;
+import com.android.tools.rpclib.binary.BinaryObject;
+{{range .Service.Methods}}{{Call "Java.Import" .Result.Type}}{{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}{{end}}{{end}}
+
 {{define "Java.Client"}}{{$.Copyright}}
 package {{.JavaPackage}};
 
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
+{{template "Java.Imports" .}}
 import com.android.tools.rpclib.rpccore.RpcException;
 
 import java.io.IOException;
@@ -782,8 +787,7 @@ public interface {{.Service.Name}}Client {
 {{define "Java.ClientImpl"}}{{$.Copyright}}
 package {{.JavaPackage}};
 
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
+{{template "Java.Imports" .}}
 import com.android.tools.rpclib.rpccore.Broadcaster;
 
 import java.io.InputStream;
@@ -864,4 +868,11 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.nil"}}void{{end}}
+
+{{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};
+{{end}}{{end}}
+{{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
+{{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
+{{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
+{{define "Java.Import"}}{{end}}
 `
