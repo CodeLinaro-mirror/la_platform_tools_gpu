@@ -76,7 +76,7 @@ func (test test) check(t *testing.T, a device.Architecture, d database.Database,
 		}()
 	}
 
-	payload, _, err := b.Build(log.Nop{})
+	payload, _, err := b.Build(l)
 	if err != nil {
 		t.Errorf("Failed to build opcodes: %v", err)
 	}

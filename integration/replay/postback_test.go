@@ -64,6 +64,7 @@ func TestPostbackString(t *testing.T) {
 	doReplay(t, func(b *builder.Builder) {
 		ptr := b.String(expected)
 		b.Post(ptr, uint64(len(expected)), func(d binary.Decoder, err error) error {
+			defer close(done)
 			if err != nil {
 				t.Errorf("Postback returned error: %v", err)
 				return err
@@ -77,7 +78,6 @@ func TestPostbackString(t *testing.T) {
 			if expected != string(data) {
 				t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
 			}
-			close(done)
 			return err
 		})
 	})
