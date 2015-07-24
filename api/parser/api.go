@@ -59,10 +59,11 @@ func requireAPI(p *parse.Parser, cst *parse.Branch) *ast.API {
 
 // { '@' name [ '(' { expression ',' } ')' ] }
 func parseAnnotations(annotations *ast.Annotations, p *parse.Parser, cst *parse.Branch) {
-	for operator(ast.OpAnnotation, p, cst) {
+	for peekOperator(ast.OpAnnotation, p) {
 		a := &ast.Annotation{}
 		*annotations = append(*annotations, a)
 		p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+			requireOperator(ast.OpAnnotation, p, cst)
 			a.CST = cst
 			a.Name = requireIdentifier(p, cst)
 			if operator(ast.OpListStart, p, cst) {
