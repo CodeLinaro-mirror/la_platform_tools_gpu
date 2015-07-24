@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
@@ -56,14 +55,4 @@ func (*Templates) Contains(test, s interface{}) bool {
 
 func (*Templates) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
-}
-
-func (t *Templates) CppName(n string) string {
-	n = strings.Replace(n, ".", "::", -1)
-	n = strings.Replace(n, resolver.ConstSuffix+resolver.PointerSuffix, "__CP", -1)
-	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
-	n = strings.Replace(n, resolver.SliceSuffix, "__S", -1)
-	n = strings.Replace(n, resolver.ArraySuffix, "__A", -1)
-	n = strings.Replace(n, resolver.TypeInfix, "__", -1)
-	return n
 }

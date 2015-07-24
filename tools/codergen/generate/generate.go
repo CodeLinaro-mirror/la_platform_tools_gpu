@@ -29,6 +29,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 )
 
+// Generator is the func handed in to language specific code generation functions.
+// They will call the generator once per output file they want to produce.
 type Generator func(name string, arg interface{}, output string, reflow template.PostProcess) error
 
 const (
@@ -45,28 +47,38 @@ func indentor(indent string) template.PostProcess {
 	}
 }
 
+// Modules holds a the list of all modules in a single scan.
 type Modules []*Module
 
+// Module represents a go package. In normal go layout, there will be at most
+// two modules per directory, one normal module and one test module.
 type Module struct {
-	Modules    *Modules
-	Source     *scan.Module
-	Name       string
-	Import     string
-	IsTest     bool
-	Path       string
-	Directives map[string]string
-	Structs    []*Struct
-	Constants  schema.Constants
-	Services   []*Service
-	Imports    Imports
+	Modules    *Modules          // The set of modules this module belongs to.
+	Source     *scan.Module      // The source module this was generated from.
+	Name       string            // The name of the module.
+	Import     string            // The import path of this module.
+	IsTest     bool              // Wether this module is for a test package.
+	Path       string            // The directory name this module was scanned from.
+	Directives map[string]string // The set of codergen directives encountered in the files.
+	Structs    []*Struct         // The structs encountered.
+	Constants  schema.Constants  // All the const declarations and their types.
+	Services   []*Service        // The service interfaces discovered.
+	Imports    Imports           // The set of package imports encountered.
 }
 
+// Import represents a go import declaration.
 type Import struct {
-	Name string
-	Path string
+	Name string // The name if present.
+	Path string // The full import path.
 }
+
+// Imports represetns a list of Import declarations.
 type Imports []Import
 
+// Directive looks up a directive by name, and returns notset if the directive
+// is not found.
+// It will make an attempt to coerce the return type to match that of notset if
+// it is a bool.
 func (m *Module) Directive(name string, notset interface{}) interface{} {
 	d, ok := m.Directives[name]
 	if !ok {
@@ -81,10 +93,13 @@ func (m *Module) Directive(name string, notset interface{}) interface{} {
 	return d
 }
 
+// Add adds a new import to the import list.
 func (i *Imports) Add(v Import) {
 	*i = append(*i, v)
 }
 
+// FindName returns the import that matches the supplied name, or an empty
+// import if not present. Test the returned .Path to detect this.
 func (i Imports) FindName(name string) Import {
 	for _, e := range i {
 		if e.Name == name {
@@ -94,6 +109,8 @@ func (i Imports) FindName(name string) Import {
 	return Import{}
 }
 
+// FindPath finds the import for the specified import path, or an empty
+// import if not present. Test the returned .Path to detect this.
 func (i Imports) FindPath(path string) Import {
 	for _, e := range i {
 		if e.Path == path {
@@ -103,6 +120,11 @@ func (i Imports) FindPath(path string) Import {
 	return Import{}
 }
 
+// FindImport searches the modules imports for the specified name, and then
+// searches the parent module set for the module that matches the import path
+// found.
+// It will return nil if either the name is not valid or the module cannot be
+// found.
 func (m *Module) FindImport(name string) *Module {
 	path := m.Imports.FindName(name).Path
 	if path == "" {
@@ -116,6 +138,7 @@ func (m *Module) FindImport(name string) *Module {
 	return nil
 }
 
+// From processes scanned source code to produce the module set it represents.
 func From(scanner *scan.Scanner) (Modules, error) {
 	result := Modules{}
 	for _, dir := range scanner.Directories {
@@ -138,6 +161,7 @@ func From(scanner *scan.Scanner) (Modules, error) {
 	return result, nil
 }
 
+// convert processes a single module from a scan set.
 func convert(scanner *scan.Scanner, src *scan.Module, isTest bool) (*Module, error) {
 	if src.Types == nil {
 		return nil, nil
