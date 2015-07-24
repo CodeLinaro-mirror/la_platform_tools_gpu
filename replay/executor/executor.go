@@ -81,13 +81,27 @@ func (r executor) execute() error {
 	responseR, responseW := io.Pipe()
 	comErr := make(chan error)
 	go func() {
-		comErr <- r.handleReplayCommunication(id, uint32(len(data)), responseW)
+		err := r.handleReplayCommunication(id, uint32(len(data)), responseW)
+		if err != nil {
+			if closeErr := responseW.CloseWithError(err); closeErr != nil {
+				log.Warningf(r.logger, "Replay execute pipe writer CloseWithError failed: %v after error %v", closeErr, err)
+			}
+		} else {
+			if closeErr := responseW.Close(); closeErr != nil {
+				log.Warningf(r.logger, "Replay execute pipe writer Close failed: %v", closeErr)
+			}
+		}
+		comErr <- err
 	}()
 
 	// Decode and handle postbacks as they are received
 	r.decoder(responseR, nil)
 
-	return <-comErr
+	err = <-comErr
+	if closeErr := responseR.Close(); closeErr != nil {
+		log.Warningf(r.logger, "Replay execute pipe reader Close failed: %v", closeErr)
+	}
+	return err
 }
 
 func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) error {
