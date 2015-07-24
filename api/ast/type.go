@@ -25,7 +25,7 @@ type Class struct {
 	Fields      []*Field      // the fields of the class
 }
 
-func (t Class) Fragment() parse.Fragment { return t.CST }
+func (t Class) Node() parse.Node { return t.CST }
 
 // Field represents a field of a class or api, with the structure
 // «type name = expression»
@@ -37,7 +37,7 @@ type Field struct {
 	Default     Node          // the default value expression for the field
 }
 
-func (t Field) Fragment() parse.Fragment { return t.CST }
+func (t Field) Node() parse.Node { return t.CST }
 
 // EnumEntry represents a single value in an enumerated type.
 type EnumEntry struct {
@@ -47,7 +47,7 @@ type EnumEntry struct {
 	Value *Number       // the value of this entry
 }
 
-func (t EnumEntry) Fragment() parse.Fragment { return t.CST }
+func (t EnumEntry) Node() parse.Node { return t.CST }
 
 // Enum represents an enumerated type declaration, of the form
 // «"enum" name { entries }» where entries is a comma separated list of «name = value»
@@ -60,7 +60,7 @@ type Enum struct {
 	Extends     []*Identifier // deprecated list of enums this extends
 }
 
-func (t Enum) Fragment() parse.Fragment { return t.CST }
+func (t Enum) Node() parse.Node { return t.CST }
 
 // IndexedType represents a type declaration with an indexing suffix,
 // which looks like «type[index]»
@@ -70,7 +70,7 @@ type IndexedType struct {
 	Index     Node          // the index of the type
 }
 
-func (t IndexedType) Fragment() parse.Fragment { return t.CST }
+func (t IndexedType) Node() parse.Node { return t.CST }
 
 // PointerType represents a pointer type declaration, of the form «type*»
 type PointerType struct {
@@ -79,7 +79,7 @@ type PointerType struct {
 	Const bool          // wether the pointer type has the const modifier applied
 }
 
-func (t PointerType) Fragment() parse.Fragment { return t.CST }
+func (t PointerType) Node() parse.Node { return t.CST }
 
 // Alias represents a weak type alias, with structure «"alias" type name».
 // An alias does not declare a new type, just a reusable name for a common type.
@@ -90,7 +90,7 @@ type Alias struct {
 	To          Node          // the type it is an alias for
 }
 
-func (t Alias) Fragment() parse.Fragment { return t.CST }
+func (t Alias) Node() parse.Node { return t.CST }
 
 // Pseudonym declares a new type in terms of another type.
 // Has the form «"type" type name»
@@ -102,7 +102,7 @@ type Pseudonym struct {
 	To          Node          // the underlying type
 }
 
-func (t Pseudonym) Fragment() parse.Fragment { return t.CST }
+func (t Pseudonym) Node() parse.Node { return t.CST }
 
 // Imported represents an imported type name.
 type Imported struct {
@@ -111,7 +111,7 @@ type Imported struct {
 	Name *Identifier   // the name being imported
 }
 
-func (t Imported) Fragment() parse.Fragment { return t.CST }
+func (t Imported) Node() parse.Node { return t.CST }
 
 // Definition declares a new named literal, has the form «"define" name value».
 type Definition struct {
@@ -121,4 +121,4 @@ type Definition struct {
 	Expression  Node          // the expression this definition expands to
 }
 
-func (t Definition) Fragment() parse.Fragment { return t.CST }
+func (t Definition) Node() parse.Node { return t.CST }
