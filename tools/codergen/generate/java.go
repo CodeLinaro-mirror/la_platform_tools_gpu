@@ -46,6 +46,12 @@ type JavaService struct {
 	Service *Service
 }
 
+// JavaEnum is the struct handed to java enum generation templates.
+type JavaEnum struct {
+	JavaSettings
+	schema.ConstantSet
+}
+
 // Java is called by codergen to prepare and generate java code for a given module.
 func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	settings := JavaSettings{
@@ -63,6 +69,14 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 		class.Imported = map[string]struct{}{}
 		out := filepath.Join(path, source, pkgPath, settings.ClassName(class.Struct.Name)+".java")
 		if err := gen("Java.File", class, out, reflow); err != nil {
+			return err
+		}
+	}
+	for _, s := range m.Constants {
+		enum := JavaEnum{JavaSettings: settings, ConstantSet: s}
+		enum.Imported = map[string]struct{}{}
+		out := filepath.Join(path, source, pkgPath, settings.ClassName(enum.Type.String())+".java")
+		if err := gen("Java.Enum", enum, out, reflow); err != nil {
 			return err
 		}
 	}
@@ -111,6 +125,8 @@ func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
 	case *schema.Struct:
 		name = v.Name
 	case *schema.Interface:
+		name = v.Name
+	case *schema.Primitive:
 		name = v.Name
 	default:
 		panic(fmt.Errorf("Invalid type %T to moduleAndName", v))
