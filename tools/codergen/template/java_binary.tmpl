@@ -48,7 +48,7 @@
 {{end}}»»}{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
