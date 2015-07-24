@@ -17,3 +17,7 @@
 package memory
 
 // binary: cpp = memory
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.service.memory
+// binary: java.indent = "  "
+// binary: java.member_prefix = my
