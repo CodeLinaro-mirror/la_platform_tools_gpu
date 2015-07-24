@@ -30,6 +30,7 @@ type JavaSettings struct {
 	JavaPackage  string
 	Copyright    string
 	MemberPrefix string
+	Imported     map[string]struct{}
 }
 
 type JavaClass struct {
@@ -55,6 +56,7 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
 		class := JavaClass{JavaSettings: settings, Struct: s}
+		class.Imported = map[string]struct{}{}
 		out := filepath.Join(path, source, pkgPath, settings.ClassName(class.Struct.Name)+".java")
 		if err := gen("Java.File", class, out, reflow); err != nil {
 			return err
@@ -63,6 +65,7 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	for _, s := range m.Services {
 		service := JavaService{JavaSettings: settings, Service: s}
 		for _, e := range []string{"Client", "ClientImpl"} {
+			service.Imported = map[string]struct{}{}
 			out := filepath.Join(path, source, pkgPath, service.Service.Name+e+".java")
 			if err := gen("Java."+e, service, out, reflow); err != nil {
 				return err
@@ -78,7 +81,7 @@ func (settings JavaSettings) FieldName(s string) string {
 }
 
 // Name returns the Java name to give the type.
-func (settings JavaSettings) ClassName(v interface{}) string {
+func (settings JavaSettings) findClass(v interface{}) (string, string) {
 	name := ""
 	switch v := v.(type) {
 	case string:
@@ -104,7 +107,7 @@ func (settings JavaSettings) ClassName(v interface{}) string {
 	if pkg != "" {
 		m = settings.FindImport(pkg)
 		if m == nil {
-			return "Unknown." + pkg + "." + titled
+			return "Unknown." + pkg, titled
 		}
 	}
 	for _, t := range m.Structs {
@@ -115,7 +118,27 @@ func (settings JavaSettings) ClassName(v interface{}) string {
 		}
 	}
 	if m == settings.Module {
-		return titled
+		return "", titled
 	}
-	return fmt.Sprintf("%v.%s", m.Directive("java.package", "NotJava."+m.Name), titled)
+	return fmt.Sprint(m.Directive("java.package", "NotJava."+m.Name)), titled
+}
+
+// Import returns the fully qualified name for the type, if not previously encountered.
+func (settings JavaSettings) Import(v interface{}) string {
+	pkg, name := settings.findClass(v)
+	if pkg == "" {
+		return "" // Not an import
+	}
+	fullname := pkg + "." + name
+	if _, ok := settings.Imported[fullname]; ok {
+		return "" // ALready imported
+	}
+	settings.Imported[fullname] = struct{}{}
+	return fullname
+}
+
+// ClassName returns the Java name to give the type.
+func (settings JavaSettings) ClassName(v interface{}) string {
+	_, name := settings.findClass(v)
+	return name
 }

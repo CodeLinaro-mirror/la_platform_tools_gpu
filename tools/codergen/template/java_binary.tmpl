@@ -89,6 +89,7 @@ import com.android.tools.rpclib.binary.BinaryObject;
 import com.android.tools.rpclib.binary.Decoder;
 import com.android.tools.rpclib.binary.Encoder;
 import com.android.tools.rpclib.binary.Namespace;
+{{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
 import java.io.IOException;
 
 {{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}} implements BinaryObject {
