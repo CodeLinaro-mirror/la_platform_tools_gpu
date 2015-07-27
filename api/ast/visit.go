@@ -108,6 +108,9 @@ func Visit(node Node, visitor func(Node)) {
 		visitor(n.Name)
 		visitor(n.RHS)
 
+	case *Default:
+		visitor(n.Block)
+
 	case *Enum:
 		for _, a := range n.Annotations {
 			visitor(a)
@@ -216,6 +219,9 @@ func Visit(node Node, visitor func(Node)) {
 		visitor(n.Value)
 		for _, c := range n.Cases {
 			visitor(c)
+		}
+		if n.Default != nil {
+			visitor(n.Default)
 		}
 
 	case *UnaryOp:

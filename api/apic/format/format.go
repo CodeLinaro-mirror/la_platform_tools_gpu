@@ -153,17 +153,15 @@ func (p *printer) markup(n ast.Node) {
 		p.inject(n, beforePrefix, "•")
 		p.inject(n, afterSuffix, "•")
 
-		if len(n.Statements) > 0 {
-			if c := len(n.CST.Children); c > 0 {
-				if bracketed(n) {
-					// {•» statements... «•}
-					p.inject(n.CST.Children[0], beforeSuffix, "•»")
-					p.inject(n.CST.Children[c-1], afterPrefix, "«•")
-				} else {
-					// »statement«
-					p.inject(n, beforePrefix, "»")
-					p.inject(n, afterSuffix, "«")
-				}
+		if c := len(n.CST.Children); c > 0 {
+			if bracketed(n) {
+				// {•» statements... «•}
+				p.inject(n.CST.Children[0], beforeSuffix, "•»")
+				p.inject(n.CST.Children[c-1], afterPrefix, "«•")
+			} else {
+				// »statement«
+				p.inject(n, beforePrefix, "»")
+				p.inject(n, afterSuffix, "«")
 			}
 		}
 
@@ -207,6 +205,15 @@ func (p *printer) markup(n ast.Node) {
 		if c := len(n.Fields); c > 0 {
 			p.inject(n.Name, beforeSuffix, "»")
 			p.inject(n.Fields[c-1], beforeSuffix, "«")
+		}
+
+	case *ast.Default:
+		p.inject(n, afterPrefix, "•")
+		if !isNewline(n.Block.CST) {
+			// align:
+			// case Foo: |•{ ... }•
+			// case Blah:|•{ ... }•
+			p.inject(n.Block, afterPrefix, "\t")
 		}
 
 	case *ast.DeclareLocal:
@@ -293,10 +300,8 @@ func (p *printer) markup(n ast.Node) {
 		p.align(n)
 		p.inject(n.Value, afterPrefix, "•")
 		p.inject(n.Value, beforeSuffix, "•")
-		if c := len(n.Cases); c > 0 {
-			p.inject(n.Value, beforeSuffix, "»")
-			p.inject(n.Cases[c-1], beforeSuffix, "«")
-		}
+		p.inject(n.Value, afterSuffix, "»")
+		p.inject(n.CST.Children[len(n.CST.Children)-1], beforePrefix, "«")
 	}
 
 	ast.Visit(n, p.markup)
