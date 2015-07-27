@@ -90,7 +90,7 @@ std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
                 break;
             }
             case SHUTDOWN_REQUEST: {
-                GAPID_INFO("Shutdown request received!\n")
+                GAPID_INFO("Shutdown request received!\n");
                 return nullptr;
             }
             default: {

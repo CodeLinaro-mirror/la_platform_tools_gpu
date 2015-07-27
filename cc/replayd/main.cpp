@@ -91,7 +91,9 @@ void listenConnections(const char* listenerPort, const char* cachePath,
         }
 
         resourceProvider->updateSize(context->getInMemoryCacheSize());
-        context->interpret();
+        if (!context->interpret()) {
+          GAPID_DEBUG("Interpret returned false\n");
+        }
     }
 }
 
