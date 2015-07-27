@@ -46,7 +46,7 @@ func function(f *ast.Function, p *parse.Parser, cst *parse.Branch, withBlock boo
 	return f
 }
 
-// [ annotations ] [ 'this' | 'in' | 'out' | 'inout' ] type [annotations] name
+// [ annotations ] [ 'this' ] type [annotations] name
 func parameter(p *parse.Parser, cst *parse.Branch) *ast.Parameter {
 	param := &ast.Parameter{}
 	parseAnnotations(&param.Annotations, p, cst)

@@ -72,11 +72,19 @@ type IndexedType struct {
 
 func (t IndexedType) Node() parse.Node { return t.CST }
 
+// PreConst represents a pre-const type declaration, of the form «const type»
+type PreConst struct {
+	CST  *parse.Branch // underlying parse structure for this node
+	Type Node          // the underlying type that is constant
+}
+
+func (t PreConst) Node() parse.Node { return t.CST }
+
 // PointerType represents a pointer type declaration, of the form «type*»
 type PointerType struct {
 	CST   *parse.Branch // underlying parse structure for this node
 	To    Node          // the underlying type this pointer points to
-	Const bool          // wether the pointer type has the const modifier applied
+	Const bool          // whether the pointer type has the post-const modifier applied
 }
 
 func (t PointerType) Node() parse.Node { return t.CST }
