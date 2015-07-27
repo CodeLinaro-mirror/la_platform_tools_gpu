@@ -47,6 +47,10 @@ uint32_t baseTypeSize(BaseType type);
 // Return the name of the given BaseType
 const char* baseTypeName(BaseType type);
 
+inline bool isValid(BaseType type) {
+  return type >= BaseType::Bool && type <= BaseType::VolatilePointer;
+}
+
 // Provide the BaseType value corresponding to the type specified in T.
 // For pointers the corresponding base type is AbsolutePointer
 // For enums the corresponding base type is uint32_t
@@ -72,6 +76,17 @@ template<typename T>
 struct TypeToBaseType<T, typename std::enable_if<std::is_enum<T>::value>::type> {
     static const BaseType type = BaseType::Uint32;
 };
+
+// isPointerType returns true if values of 'type' translate to a pointer.
+inline bool isPointerType(BaseType type) {
+  switch (type) {
+    case BaseType::AbsolutePointer:
+    case BaseType::ConstantPointer:
+    case BaseType::VolatilePointer:
+      return true;
+  }
+  return false;
+}
 
 }  // namespace gapir
 

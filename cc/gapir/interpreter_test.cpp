@@ -105,8 +105,8 @@ TEST_F(InterpreterTest, LoadC) {
     mMemoryManager->setReplayDataSize(10);
     uint8_t constantMemory[7] = {0x00, 0x00, 0x12, 0x34, 0x56, 0x78, 0x9a};
     uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress()) + 2;
-    memcpy(constantBaseAddress, &constantMemory, 7);
-    mMemoryManager->setConstantMemory({constantBaseAddress, 7});
+    memcpy(constantBaseAddress, &constantMemory, sizeof(constantMemory));
+    mMemoryManager->setConstantMemory({constantBaseAddress, sizeof(constantMemory)});
 
     mInterpreter->registerFunction(0, CheckTopOfStack<uint16_t>{0x7856});
 

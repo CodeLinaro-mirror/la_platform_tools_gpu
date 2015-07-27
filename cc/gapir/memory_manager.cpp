@@ -88,32 +88,8 @@ void MemoryManager::setConstantMemory(const std::pair<const void*, uint32_t>& co
         mConstantMemory.base, mConstantMemory.base + mConstantMemory.size - 1);
 }
 
-const void* MemoryManager::constantToAbsolute(uint32_t offset) const {
-    return mConstantMemory.base + offset;
-}
-
-void* MemoryManager::volatileToAbsolute(uint32_t offset) const {
-    return mVolatileMemory.base + offset;
-}
-
-uint32_t MemoryManager::absoluteToConstant(const void* address) const {
-    return static_cast<uint32_t>(static_cast<const uint8_t*>(address) - mConstantMemory.base);
-}
-
-uint32_t MemoryManager::absoluteToVolatile(const void* address) const {
-    return static_cast<uint32_t>(static_cast<const uint8_t*>(address) - mVolatileMemory.base);
-}
-
-bool MemoryManager::isConstantAddress(const void* address) const {
-    return address >= mConstantMemory.base && address < mConstantMemory.end();
-}
-
-bool MemoryManager::isVolatileAddress(const void* address) const {
-    return address >= mVolatileMemory.base && address < mVolatileMemory.end();
-}
-
 uint8_t* MemoryManager::align(uint8_t* addr) const {
-    size_t x = reinterpret_cast<size_t>(addr);
+    uintptr_t x = reinterpret_cast<uintptr_t>(addr);
     x -= x % MemoryManager::kAlignment;
     return reinterpret_cast<uint8_t*>(x);
 }

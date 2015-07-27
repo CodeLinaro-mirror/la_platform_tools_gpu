@@ -25,6 +25,34 @@
 
 namespace gapir {
 
+bool Stack::pushCheck(const char * what) {
+    if (!mValid) {
+        GAPID_WARNING("%s on invalid stack\n", what);
+        return false;
+    }
+
+    if (mTop > mStack.size() - 1) {
+        mValid = false;
+        GAPID_WARNING("%s with invalid stack head, offset: %d\n", what, mTop);
+        return false;
+    }
+    return true;
+}
+
+bool Stack::popCheck(const char * what) {
+    if (!mValid) {
+        GAPID_WARNING("%s on invalid stack\n", what);
+        return false;
+    }
+
+    if (mTop == 0 || mTop > mStack.size()) {
+        mValid = false;
+        GAPID_WARNING("%s with invalid stack head, offset: %d\n", what, mTop);
+        return false;
+    }
+    return true;
+}
+
 const char* Stack::Entry::debugInfo(const MemoryManager* memoryManager) const {
     static const size_t size = 256;
     static char buf[size];
@@ -62,19 +90,33 @@ const char* Stack::Entry::debugInfo(const MemoryManager* memoryManager) const {
     case BaseType::Double:
         snprintf(buf, size, "double<%f>", value<double>());
         break;
-    case BaseType::AbsolutePointer:
-        snprintf(buf, size, "absolute-ptr<%p>", value<void*>());
+    case BaseType::AbsolutePointer: {
+        const void* pointer = value<void*>();
+        if (memoryManager->isNotObservedAbsoluteAddress(pointer)) {
+            snprintf(buf, size, "absolute-ptr<%p> SPECIAL", value<void*>());
+        } else {
+            snprintf(buf, size, "absolute-ptr<%p> valid", value<void*>());
+        }
         break;
+    }
     case BaseType::ConstantPointer: {
         uint32_t offset = value<uint32_t>();
         const void* pointer = memoryManager->constantToAbsolute(offset);
-        snprintf(buf, size, "constant-ptr<0x%x> (%p)", offset, pointer);
+        if (memoryManager->isConstantAddress(pointer)) {
+            snprintf(buf, size, "constant-ptr<0x%x> valid (%p)", offset, pointer);
+        } else {
+            snprintf(buf, size, "constant-ptr<0x%x> INVALID (%p)", offset, pointer);
+        }
         break;
     }
     case BaseType::VolatilePointer: {
         uint32_t offset = value<uint32_t>();
         const void* pointer = memoryManager->volatileToAbsolute(offset);
-        snprintf(buf, size, "volatile-ptr<0x%x> (%p)", offset, pointer);
+        if (memoryManager->isVolatileAddress(pointer)) {
+            snprintf(buf, size, "volatile-ptr<0x%x> valid (%p)", offset, pointer);
+        } else {
+            snprintf(buf, size, "volatile-ptr<0x%x> INVALID (%p)", offset, pointer);
+        }
         break;
     }
     default:
@@ -111,15 +153,13 @@ BaseType Stack::getTopType() {
 }
 
 void Stack::pushFrom(BaseType type, const void* data) {
-    if (!mValid) {
-        GAPID_WARNING("PushFrom on invalid stack\n");
+    if (!pushCheck("pushFrom")) {
         return;
     }
 
-    if (mTop > mStack.size() - 1) {
+    if (data == nullptr) {
+        GAPID_WARNING("pushFrom nullptr");
         mValid = false;
-        GAPID_WARNING("PushFrom with invalid stack head: %u (size: %lu)\n", mTop,
-                     static_cast<unsigned long>(mStack.size()));
         return;
     }
 
@@ -128,40 +168,23 @@ void Stack::pushFrom(BaseType type, const void* data) {
     mTop++;
 }
 
-void Stack::popTo(void* address, bool castPtrsToAbsolute) {
-    if (!mValid) {
-        GAPID_WARNING("PopTo on invalid stack\n");
+void Stack::popTo(void* address) {
+    if (!popCheck("popTo")) {
         return;
     }
 
-    if (mTop == 0 || mTop > mStack.size()) {
-        mValid = false;
-        GAPID_WARNING("PopTo with invalid stack head: %u (size: %lu)\n", mTop,
-                     static_cast<unsigned long>(mStack.size()));
-        return;
+    switch (getTopType()) {
+        case BaseType::ConstantPointer:
+        case BaseType::VolatilePointer: {
+            void* pointer = pop<void*>();
+            // Note we are copying the pointer not what is pointed to.
+            memcpy(address, &pointer, sizeof(pointer));
+            return;
+        }
     }
 
     mTop--;
     DEBUG_STACK("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
-
-    if (castPtrsToAbsolute) {
-        switch (mStack[mTop].type()) {
-            case BaseType::ConstantPointer: {
-                uint32_t offset = mStack[mTop].value<uint32_t>();
-                void* pointer = const_cast<void*>(mMemoryManager->constantToAbsolute(offset));
-                *reinterpret_cast<void**>(address) = pointer;
-                return;
-            }
-            case BaseType::VolatilePointer: {
-                uint32_t offset = mStack[mTop].value<uint32_t>();
-                void* pointer = mMemoryManager->volatileToAbsolute(offset);
-                *reinterpret_cast<void**>(address) = pointer;
-                return;
-            }
-            default:
-                break;
-        }
-    }
 
     memcpy(address, mStack[mTop].valuePtr(), baseTypeSize(mStack[mTop].type()));
 }
@@ -208,8 +231,50 @@ void Stack::clone(uint32_t n) {
     mTop++;
 }
 
-bool Stack::isValid() const {
-    return mValid;
+const void* Stack::checkAndGetTopPointer(const char* what) {
+    auto type = mStack[mTop].type();
+    switch (type) {
+        case BaseType::AbsolutePointer: {
+            return mStack[mTop].value<const void*>();
+        }
+        case BaseType::ConstantPointer: {
+            uint32_t offset = mStack[mTop].value<uint32_t>();
+            const void* pointer = mMemoryManager->constantToAbsolute(offset);
+            if (!mMemoryManager->isConstantAddress(pointer)) {
+                GAPID_WARNING("%s: Invalid constant address %p offset %u\n", what, pointer, offset);
+                mValid = false;
+                return nullptr;
+            }
+            return pointer;
+        }
+        case BaseType::VolatilePointer: {
+            uint32_t offset = mStack[mTop].value<uint32_t>();
+            void* pointer = mMemoryManager->volatileToAbsolute(offset);
+            if (!mMemoryManager->isVolatileAddress(pointer)) {
+                GAPID_WARNING("%s Invalid volatile address %p offset %u\n", what, pointer, offset);
+                mValid = false;
+                return nullptr;
+            }
+            return pointer;
+        }
+        default:
+            GAPID_WARNING("%s top was not a pointer type: %s\n", what, baseTypeName(type));
+            mValid = false;
+            return nullptr;
+    }
+    return nullptr;
+}
+
+bool Stack::checkTopForInvalidPointer(const char* what) {
+    auto type = mStack[mTop].type();
+    switch (type) {
+        case BaseType::ConstantPointer:
+        case BaseType::VolatilePointer: {
+            checkAndGetTopPointer(what);
+            return isValid();
+        }
+    }
+    return true;
 }
 
 }  // namespace gapir

@@ -73,11 +73,19 @@ public:
     uint32_t absoluteToConstant(const void* address) const;
     uint32_t absoluteToVolatile(const void* address) const;
 
-    // Checks if the given absolute pointer is points inside the constant or inside the volatile
+    // Checks if the given absolute pointer points inside the constant or inside the volatile
     // memory
     bool isConstantAddress(const void* address) const;
     bool isVolatileAddress(const void* address) const;
 
+    // Checks if the given absolute pointer points inside the constant or inside
+    // the volatile memory. Check that address+size is also in the same range.
+    bool isConstantAddressWithSize(const void* address, size_t size) const;
+    bool isVolatileAddressWithSize(const void* address, size_t size) const;
+
+    // Returns true if address is marker absolute address value which is used
+    // to indicate a value which should not be observed.
+    bool isNotObservedAbsoluteAddress(const void* address) const;
 private:
     // Struct to represent a memory interval inside the memory manager with its base address and its
     // size
@@ -85,6 +93,24 @@ private:
         MemoryRange();
         MemoryRange(uint8_t* base, uint32_t size);
         uint8_t* end() const { return base + size; }
+
+        void* toAbsolute(uint32_t offset) const {
+            return base + offset;
+        }
+
+        bool isInRange(const void* address) const {
+            return address >= base && address < base + size;
+        }
+
+        bool isInRangeWithSize(const void* address, size_t s) const {
+            const uint8_t* addr = static_cast<const uint8_t*>(address);
+            return address >= base && addr + s <= base + size;
+        }
+
+        uint32_t toOffset(const void* address) const {
+            const uint8_t* addr = static_cast<const uint8_t*>(address);
+            return addr - base;
+        }
 
         uint8_t* base;
         uint32_t size;
@@ -115,6 +141,48 @@ private:
     // values have to specify a subset of the memory managed by the memory manager.
     MemoryRange mVolatileMemory;
 };
+
+inline const void* MemoryManager::constantToAbsolute(uint32_t offset) const {
+    return mConstantMemory.toAbsolute(offset);
+}
+
+inline void* MemoryManager::volatileToAbsolute(uint32_t offset) const {
+    return mVolatileMemory.toAbsolute(offset);
+}
+
+inline uint32_t MemoryManager::absoluteToConstant(const void* address) const {
+    return mConstantMemory.toOffset(address);
+}
+
+inline uint32_t MemoryManager::absoluteToVolatile(const void* address) const {
+    return mVolatileMemory.toOffset(address);
+}
+
+inline bool MemoryManager::isConstantAddress(const void* address) const {
+    return mConstantMemory.isInRange(address);
+}
+
+inline bool MemoryManager::isVolatileAddress(const void* address) const {
+    return mVolatileMemory.isInRange(address);
+}
+
+inline bool MemoryManager::isConstantAddressWithSize(const void* address, size_t size) const {
+    return mConstantMemory.isInRangeWithSize(address, size);
+}
+
+inline bool MemoryManager::isVolatileAddressWithSize(const void* address, size_t size) const {
+    return mVolatileMemory.isInRangeWithSize(address, size);
+}
+
+inline bool MemoryManager::isNotObservedAbsoluteAddress(const void* address) const {
+    // Pointer is not observed. This can be legal - for example
+    // glVertexAttribPointer may have been passed a pointer that was never
+    // observed. In this situation we pass a pointer that should cause an access
+    // violation if it is dereferenced. We opt to not use 0x00 as this is often
+    // overloaded to mean something else.
+    // Must match value used in replay/builder/builder.go
+    return address == reinterpret_cast<const void*>(uintptr_t(0xBADF00D));
+}
 
 }  // namespace gapir
 
