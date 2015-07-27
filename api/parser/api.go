@@ -25,35 +25,33 @@ func requireAPI(p *parse.Parser, cst *parse.Branch) *ast.API {
 	api.CST = cst
 
 	annotations := &ast.Annotations{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		for !p.IsEOF() {
-			parseAnnotations(annotations, p, cst)
-			if i := import_(p, cst, annotations); i != nil {
-				api.Imports = append(api.Imports, i)
-			} else if m := macro(p, cst, annotations); m != nil {
-				api.Macros = append(api.Macros, m)
-			} else if e := extern(p, cst, annotations); e != nil {
-				api.Externs = append(api.Externs, e)
-			} else if e := enum(p, cst, annotations); e != nil {
-				api.Enums = append(api.Enums, e)
-			} else if a := alias(p, cst, annotations); a != nil {
-				api.Aliases = append(api.Aliases, a)
-			} else if pn := pseudonym(p, cst, annotations); pn != nil {
-				api.Pseudonyms = append(api.Pseudonyms, pn)
-			} else if c := class(p, cst, annotations); c != nil {
-				api.Classes = append(api.Classes, c)
-			} else if c := command(p, cst, annotations); c != nil {
-				api.Commands = append(api.Commands, c)
-			} else if c := definition(p, cst, annotations); c != nil {
-				api.Definitions = append(api.Definitions, c)
-			} else {
-				api.Fields = append(api.Fields, requireField(p, cst, annotations))
-			}
-			if len(*annotations) != 0 {
-				p.ErrorAt((*annotations)[0].CST, "Annotation not consumed")
-			}
+	for !p.IsEOF() {
+		parseAnnotations(annotations, p, cst)
+		if i := import_(p, cst, annotations); i != nil {
+			api.Imports = append(api.Imports, i)
+		} else if m := macro(p, cst, annotations); m != nil {
+			api.Macros = append(api.Macros, m)
+		} else if e := extern(p, cst, annotations); e != nil {
+			api.Externs = append(api.Externs, e)
+		} else if e := enum(p, cst, annotations); e != nil {
+			api.Enums = append(api.Enums, e)
+		} else if a := alias(p, cst, annotations); a != nil {
+			api.Aliases = append(api.Aliases, a)
+		} else if pn := pseudonym(p, cst, annotations); pn != nil {
+			api.Pseudonyms = append(api.Pseudonyms, pn)
+		} else if c := class(p, cst, annotations); c != nil {
+			api.Classes = append(api.Classes, c)
+		} else if c := command(p, cst, annotations); c != nil {
+			api.Commands = append(api.Commands, c)
+		} else if c := definition(p, cst, annotations); c != nil {
+			api.Definitions = append(api.Definitions, c)
+		} else {
+			api.Fields = append(api.Fields, requireField(p, cst, annotations))
 		}
-	})
+		if len(*annotations) != 0 {
+			p.ErrorAt((*annotations)[0].CST, "Annotation not consumed")
+		}
+	}
 	return api
 }
 
