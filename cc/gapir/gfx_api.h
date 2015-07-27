@@ -248,7 +248,13 @@ static const uint16_t StopTimer = 220;
 static const uint16_t FlushPostBuffer = 221;
 }  // namespace FunctionIds
 
-enum class DrawMode : uint32_t {
+enum class TextureKind : uint32_t {
+    UNDEFINED = 0,
+    TEXTURE2D = 1,
+    CUBEMAP = 2,
+};
+
+enum class GLenum : uint32_t {
     GL_LINE_LOOP = 2,
     GL_LINE_STRIP = 3,
     GL_LINES = 1,
@@ -256,55 +262,23 @@ enum class DrawMode : uint32_t {
     GL_TRIANGLE_FAN = 6,
     GL_TRIANGLE_STRIP = 5,
     GL_TRIANGLES = 4,
-};
-
-enum class IndicesType : uint32_t {
     GL_UNSIGNED_BYTE = 5121,
     GL_UNSIGNED_SHORT = 5123,
     GL_UNSIGNED_INT = 5125,
-};
-
-enum class TextureTarget_GLES_1_1 : uint32_t {
     GL_TEXTURE_2D = 3553,
-};
-
-enum class TextureTarget_GLES_2_0 : uint32_t {
     GL_TEXTURE_CUBE_MAP = 34067,
-};
-
-enum class TextureTarget_OES_EGL_image_external : uint32_t {
     GL_TEXTURE_EXTERNAL_OES = 36197,
-};
-
-enum class TextureTarget : uint32_t {};
-
-enum class CubeMapImageTarget : uint32_t {
     GL_TEXTURE_CUBE_MAP_NEGATIVE_X = 34070,
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072,
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074,
     GL_TEXTURE_CUBE_MAP_POSITIVE_X = 34069,
     GL_TEXTURE_CUBE_MAP_POSITIVE_Y = 34071,
     GL_TEXTURE_CUBE_MAP_POSITIVE_Z = 34073,
-};
-
-enum class Texture2DImageTarget : uint32_t {
-    GL_TEXTURE_2D = 3553,
-};
-
-enum class TextureImageTarget : uint32_t {};
-
-enum class BaseTexelFormat : uint32_t {
     GL_ALPHA = 6406,
     GL_RGB = 6407,
     GL_RGBA = 6408,
-};
-
-enum class TexelFormat_GLES_1_1 : uint32_t {
     GL_LUMINANCE = 6409,
     GL_LUMINANCE_ALPHA = 6410,
-};
-
-enum class TexelFormat_GLES_3_0 : uint32_t {
     GL_RED = 6403,
     GL_RED_INTEGER = 36244,
     GL_RG = 33319,
@@ -315,48 +289,21 @@ enum class TexelFormat_GLES_3_0 : uint32_t {
     GL_DEPTH_COMPONENT16 = 33189,
     GL_DEPTH_STENCIL = 34041,
     GL_DEPTH24_STENCIL8 = 35056,
-};
-
-enum class TexelFormat : uint32_t {};
-
-enum class RenderbufferFormat : uint32_t {
     GL_RGBA4 = 32854,
     GL_RGB5_A1 = 32855,
     GL_RGB565 = 36194,
     GL_RGBA8 = 32856,
-    GL_DEPTH_COMPONENT16 = 33189,
     GL_STENCIL_INDEX8 = 36168,
-};
-
-enum class Type_ARB_half_float_vertex : uint32_t {
     GL_HALF_FLOAT_ARB = 5131,
-};
-
-enum class Type_OES_vertex_half_float : uint32_t {
     GL_HALF_FLOAT_OES = 36193,
-};
-
-enum class CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture : uint32_t {
     GL_ETC1_RGB8_OES = 36196,
-};
-
-enum class CompressedTexelFormat_AMD_compressed_ATC_texture : uint32_t {
     GL_ATC_RGB_AMD = 35986,
     GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 35987,
     GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = 34798,
-};
-
-enum class CompressedTexelFormat_EXT_texture_compression_dxt1 : uint32_t {
     GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 33776,
     GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777,
-};
-
-enum class CompressedTexelFormat_EXT_texture_compression_s3tc : uint32_t {
     GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778,
     GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779,
-};
-
-enum class CompressedTexelFormat_KHR_texture_compression_astc_ldr : uint32_t {
     GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 37808,
     GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 37809,
     GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 37810,
@@ -385,73 +332,33 @@ enum class CompressedTexelFormat_KHR_texture_compression_astc_ldr : uint32_t {
     GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 37851,
     GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 37852,
     GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 37853,
-};
-
-enum class CompressedTexelFormat_NV_texture_compression_latc : uint32_t {
     GL_COMPRESSED_LUMINANCE_LATC1_NV = 35952,
     GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV = 35953,
     GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV = 35954,
     GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = 35955,
-};
-
-enum class CompressedTexelFormat : uint32_t {};
-
-enum class ImageTexelFormat : uint32_t {};
-
-enum class TexelType : uint32_t {
-    GL_UNSIGNED_BYTE = 5121,
-    GL_UNSIGNED_SHORT = 5123,
-    GL_UNSIGNED_INT = 5125,
     GL_FLOAT = 5126,
     GL_UNSIGNED_SHORT_4_4_4_4 = 32819,
     GL_UNSIGNED_SHORT_5_5_5_1 = 32820,
     GL_UNSIGNED_SHORT_5_6_5 = 33635,
     GL_UNSIGNED_INT_24_8 = 34042,
-};
-
-enum class FramebufferAttachment : uint32_t {
     GL_COLOR_ATTACHMENT0 = 36064,
     GL_DEPTH_ATTACHMENT = 36096,
     GL_STENCIL_ATTACHMENT = 36128,
-};
-
-enum class FramebufferAttachmentType : uint32_t {
     GL_NONE = 0,
     GL_RENDERBUFFER = 36161,
     GL_TEXTURE = 5890,
-};
-
-enum class FramebufferTarget_GLES_2_0 : uint32_t {
     GL_FRAMEBUFFER = 36160,
-};
-
-enum class FramebufferTarget_GLES_3_1 : uint32_t {
     GL_READ_FRAMEBUFFER = 36008,
     GL_DRAW_FRAMEBUFFER = 36009,
-};
-
-enum class FramebufferTarget : uint32_t {};
-
-enum class FramebufferAttachmentParameter : uint32_t {
     GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 36048,
     GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 36049,
     GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 36050,
     GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 36051,
-};
-
-enum class FramebufferStatus : uint32_t {
     GL_FRAMEBUFFER_COMPLETE = 36053,
     GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 36054,
     GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 36055,
     GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 36057,
     GL_FRAMEBUFFER_UNSUPPORTED = 36061,
-};
-
-enum class RenderbufferTarget : uint32_t {
-    GL_RENDERBUFFER = 36161,
-};
-
-enum class RenderbufferParameter : uint32_t {
     GL_RENDERBUFFER_WIDTH = 36162,
     GL_RENDERBUFFER_HEIGHT = 36163,
     GL_RENDERBUFFER_INTERNAL_FORMAT = 36164,
@@ -461,14 +368,8 @@ enum class RenderbufferParameter : uint32_t {
     GL_RENDERBUFFER_ALPHA_SIZE = 36179,
     GL_RENDERBUFFER_DEPTH_SIZE = 36180,
     GL_RENDERBUFFER_STENCIL_SIZE = 36181,
-};
-
-enum class BufferParameter : uint32_t {
     GL_BUFFER_SIZE = 34660,
     GL_BUFFER_USAGE = 34661,
-};
-
-enum class TextureUnit : uint32_t {
     GL_TEXTURE0 = 33984,
     GL_TEXTURE1 = 33985,
     GL_TEXTURE2 = 33986,
@@ -501,20 +402,11 @@ enum class TextureUnit : uint32_t {
     GL_TEXTURE29 = 34013,
     GL_TEXTURE30 = 34014,
     GL_TEXTURE31 = 34015,
-};
-
-enum class BufferUsage : uint32_t {
     GL_DYNAMIC_DRAW = 35048,
     GL_STATIC_DRAW = 35044,
     GL_STREAM_DRAW = 35040,
-};
-
-enum class ShaderType : uint32_t {
     GL_VERTEX_SHADER = 35633,
     GL_FRAGMENT_SHADER = 35632,
-};
-
-enum class StateVariable_GLES_2_0 : uint32_t {
     GL_ACTIVE_TEXTURE = 34016,
     GL_ALIASED_LINE_WIDTH_RANGE = 33902,
     GL_ALIASED_POINT_SIZE_RANGE = 33901,
@@ -601,84 +493,30 @@ enum class StateVariable_GLES_2_0 : uint32_t {
     GL_TEXTURE_BINDING_CUBE_MAP = 34068,
     GL_UNPACK_ALIGNMENT = 3317,
     GL_VIEWPORT = 2978,
-};
-
-enum class StateVariable_GLES_3_1 : uint32_t {
     GL_READ_FRAMEBUFFER_BINDING = 36010,
-};
-
-enum class StateVariable_EXT_texture_filter_anisotropic : uint32_t {
     GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047,
-};
-
-enum class StateVariable_EXT_disjoint_timer_query : uint32_t {
     GL_GPU_DISJOINT_EXT = 36795,
-};
-
-enum class StateVariable : uint32_t {};
-
-enum class FaceMode : uint32_t {
     GL_FRONT = 1028,
     GL_BACK = 1029,
     GL_FRONT_AND_BACK = 1032,
-};
-
-enum class ArrayType_GLES_1_1 : uint32_t {
     GL_VERTEX_ARRAY = 32884,
     GL_NORMAL_ARRAY = 32885,
     GL_COLOR_ARRAY = 32886,
     GL_TEXTURE_COORD_ARRAY = 32888,
-};
-
-enum class ArrayType_OES_point_size_array : uint32_t {
     GL_POINT_SIZE_ARRAY_OES = 35740,
-};
-
-enum class ArrayType : uint32_t {};
-
-enum class Capability : uint32_t {
-    GL_BLEND = 3042,
-    GL_CULL_FACE = 2884,
-    GL_DEPTH_TEST = 2929,
-    GL_DITHER = 3024,
-    GL_POLYGON_OFFSET_FILL = 32823,
-    GL_SAMPLE_ALPHA_TO_COVERAGE = 32926,
-    GL_SAMPLE_COVERAGE = 32928,
-    GL_SCISSOR_TEST = 3089,
-    GL_STENCIL_TEST = 2960,
-};
-
-enum class StringConstant : uint32_t {
     GL_EXTENSIONS = 7939,
     GL_RENDERER = 7937,
     GL_VENDOR = 7936,
     GL_VERSION = 7938,
-};
-
-enum class VertexAttribType : uint32_t {
     GL_BYTE = 5120,
     GL_FIXED = 5132,
-    GL_FLOAT = 5126,
     GL_SHORT = 5122,
-    GL_UNSIGNED_BYTE = 5121,
-    GL_UNSIGNED_SHORT = 5123,
-};
-
-enum class ShaderAttribType : uint32_t {
-    GL_FLOAT = 5126,
     GL_FLOAT_VEC2 = 35664,
     GL_FLOAT_VEC3 = 35665,
     GL_FLOAT_VEC4 = 35666,
     GL_FLOAT_MAT2 = 35674,
     GL_FLOAT_MAT3 = 35675,
     GL_FLOAT_MAT4 = 35676,
-};
-
-enum class ShaderUniformType : uint32_t {
-    GL_FLOAT = 5126,
-    GL_FLOAT_VEC2 = 35664,
-    GL_FLOAT_VEC3 = 35665,
-    GL_FLOAT_VEC4 = 35666,
     GL_INT = 5124,
     GL_INT_VEC2 = 35667,
     GL_INT_VEC3 = 35668,
@@ -687,39 +525,20 @@ enum class ShaderUniformType : uint32_t {
     GL_BOOL_VEC2 = 35671,
     GL_BOOL_VEC3 = 35672,
     GL_BOOL_VEC4 = 35673,
-    GL_FLOAT_MAT2 = 35674,
-    GL_FLOAT_MAT3 = 35675,
-    GL_FLOAT_MAT4 = 35676,
     GL_SAMPLER_2D = 35678,
     GL_SAMPLER_CUBE = 35680,
-};
-
-enum class Error : uint32_t {
     GL_NO_ERROR = 0,
     GL_INVALID_ENUM = 1280,
     GL_INVALID_VALUE = 1281,
     GL_INVALID_OPERATION = 1282,
     GL_INVALID_FRAMEBUFFER_OPERATION = 1286,
     GL_OUT_OF_MEMORY = 1285,
-};
-
-enum class HintTarget : uint32_t {
-    GL_GENERATE_MIPMAP_HINT = 33170,
-};
-
-enum class HintMode : uint32_t {
     GL_DONT_CARE = 4352,
     GL_FASTEST = 4353,
     GL_NICEST = 4354,
-};
-
-enum class DiscardFramebufferAttachment : uint32_t {
     GL_COLOR_EXT = 6144,
     GL_DEPTH_EXT = 6145,
     GL_STENCIL_EXT = 6146,
-};
-
-enum class ProgramParameter : uint32_t {
     GL_DELETE_STATUS = 35712,
     GL_LINK_STATUS = 35714,
     GL_VALIDATE_STATUS = 35715,
@@ -729,67 +548,29 @@ enum class ProgramParameter : uint32_t {
     GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 35722,
     GL_ACTIVE_UNIFORMS = 35718,
     GL_ACTIVE_UNIFORM_MAX_LENGTH = 35719,
-};
-
-enum class ShaderParameter : uint32_t {
     GL_SHADER_TYPE = 35663,
-    GL_DELETE_STATUS = 35712,
     GL_COMPILE_STATUS = 35713,
-    GL_INFO_LOG_LENGTH = 35716,
     GL_SHADER_SOURCE_LENGTH = 35720,
-};
-
-enum class PixelStoreParameter : uint32_t {
-    GL_PACK_ALIGNMENT = 3333,
-    GL_UNPACK_ALIGNMENT = 3317,
-};
-
-enum class TextureParameter_FilterMode : uint32_t {
     GL_TEXTURE_MIN_FILTER = 10241,
     GL_TEXTURE_MAG_FILTER = 10240,
-};
-
-enum class TextureParameter_WrapMode : uint32_t {
     GL_TEXTURE_WRAP_S = 10242,
     GL_TEXTURE_WRAP_T = 10243,
-};
-
-enum class TextureParameter_EXT_texture_filter_anisotropic : uint32_t {
     GL_TEXTURE_MAX_ANISOTROPY_EXT = 34046,
-};
-
-enum class TextureParameter_SwizzleMode : uint32_t {
     GL_TEXTURE_SWIZZLE_R = 36418,
     GL_TEXTURE_SWIZZLE_G = 36419,
     GL_TEXTURE_SWIZZLE_B = 36420,
     GL_TEXTURE_SWIZZLE_A = 36421,
-};
-
-enum class TextureParameter : uint32_t {};
-
-enum class TextureFilterMode : uint32_t {
     GL_NEAREST = 9728,
     GL_LINEAR = 9729,
     GL_NEAREST_MIPMAP_NEAREST = 9984,
     GL_LINEAR_MIPMAP_NEAREST = 9985,
     GL_NEAREST_MIPMAP_LINEAR = 9986,
     GL_LINEAR_MIPMAP_LINEAR = 9987,
-};
-
-enum class TextureWrapMode : uint32_t {
     GL_CLAMP_TO_EDGE = 33071,
     GL_MIRRORED_REPEAT = 33648,
     GL_REPEAT = 10497,
-};
-
-enum class TexelComponent : uint32_t {
-    GL_RED = 6403,
     GL_GREEN = 6404,
     GL_BLUE = 6405,
-    GL_ALPHA = 6406,
-};
-
-enum class BlendFactor : uint32_t {
     GL_ZERO = 0,
     GL_ONE = 1,
     GL_SRC_COLOR = 768,
@@ -805,18 +586,12 @@ enum class BlendFactor : uint32_t {
     GL_CONSTANT_ALPHA = 32771,
     GL_ONE_MINUS_CONSTANT_ALPHA = 32772,
     GL_SRC_ALPHA_SATURATE = 776,
-};
-
-enum class PrecisionType : uint32_t {
     GL_LOW_FLOAT = 36336,
     GL_MEDIUM_FLOAT = 36337,
     GL_HIGH_FLOAT = 36338,
     GL_LOW_INT = 36339,
     GL_MEDIUM_INT = 36340,
     GL_HIGH_INT = 36341,
-};
-
-enum class TestFunction : uint32_t {
     GL_NEVER = 512,
     GL_LESS = 513,
     GL_EQUAL = 514,
@@ -825,31 +600,18 @@ enum class TestFunction : uint32_t {
     GL_NOTEQUAL = 517,
     GL_GEQUAL = 518,
     GL_ALWAYS = 519,
-};
-
-enum class StencilAction : uint32_t {
     GL_KEEP = 7680,
-    GL_ZERO = 0,
     GL_REPLACE = 7681,
     GL_INCR = 7682,
     GL_INCR_WRAP = 34055,
     GL_DECR = 7683,
     GL_DECR_WRAP = 34056,
     GL_INVERT = 5386,
-};
-
-enum class FaceOrientation : uint32_t {
     GL_CW = 2304,
     GL_CCW = 2305,
-};
-
-enum class BlendEquation : uint32_t {
     GL_FUNC_ADD = 32774,
     GL_FUNC_SUBTRACT = 32778,
     GL_FUNC_REVERSE_SUBTRACT = 32779,
-};
-
-enum class BufferTarget : uint32_t {
     GL_ARRAY_BUFFER = 34962,
     GL_COPY_READ_BUFFER = 36662,
     GL_COPY_WRITE_BUFFER = 36663,
@@ -858,68 +620,19 @@ enum class BufferTarget : uint32_t {
     GL_PIXEL_UNPACK_BUFFER = 35052,
     GL_TRANSFORM_FEEDBACK_BUFFER = 35982,
     GL_UNIFORM_BUFFER = 35345,
-};
-
-enum class ImageTargetTexture_OES_EGL_image : uint32_t {
-    GL_TEXTURE_2D = 3553,
-};
-
-enum class ImageTargetTexture_OES_EGL_image_external : uint32_t {
-    GL_TEXTURE_EXTERNAL_OES = 36197,
-};
-
-enum class ImageTargetTexture : uint32_t {};
-
-enum class ImageTargetRenderbufferStorage : uint32_t {
     GL_RENDERBUFFER_OES = 36161,
-};
-
-enum class ResetStatus : uint32_t {
-    GL_NO_ERROR = 0,
     GL_GUILTY_CONTEXT_RESET_EXT = 33363,
     GL_INNOCENT_CONTEXT_RESET_EXT = 33364,
     GL_UNKNOWN_CONTEXT_RESET_EXT = 33365,
-};
-
-enum class TextureKind : uint32_t {
-    UNDEFINED = 0,
-    TEXTURE2D = 1,
-    CUBEMAP = 2,
-};
-
-enum class QueryParameter_GLES_3 : uint32_t {
     GL_CURRENT_QUERY = 34917,
-};
-
-enum class QueryParameter_EXT_disjoint_timer_query : uint32_t {
     GL_QUERY_COUNTER_BITS_EXT = 34916,
-};
-
-enum class QueryParameter : uint32_t {};
-
-enum class QueryObjectParameter_GLES_3 : uint32_t {
     GL_QUERY_RESULT = 34918,
     GL_QUERY_RESULT_AVAILABLE = 34919,
-};
-
-enum class QueryObjectParameter_EXT_disjoint_timer_query : uint32_t {};
-
-enum class QueryObjectParameter : uint32_t {};
-
-enum class QueryTarget_GLES_3 : uint32_t {
     GL_ANY_SAMPLES_PASSED = 35887,
     GL_ANY_SAMPLES_PASSED_CONSERVATIVE = 36202,
     GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 35976,
-};
-
-enum class QueryTarget_EXT_disjoint_timer_query : uint32_t {
     GL_TIME_ELAPSED_EXT = 35007,
     GL_TIMESTAMP_EXT = 36392,
-};
-
-enum class QueryTarget : uint32_t {};
-
-enum class UniformBlockParameter : uint32_t {
     GL_UNIFORM_BLOCK_BINDING = 35391,
     GL_UNIFORM_BLOCK_DATA_SIZE = 35392,
     GL_UNIFORM_BLOCK_NAME_LENGTH = 35393,
@@ -930,12 +643,7 @@ enum class UniformBlockParameter : uint32_t {
     GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 35398,
 };
 
-enum class IndexedBufferTarget : uint32_t {
-    GL_TRANSFORM_FEEDBACK_BUFFER = 35982,
-    GL_UNIFORM_BUFFER = 35345,
-};
-
-enum class TilePreserveMaskQCOM : uint32_t {
+enum class GLbitfield : uint32_t {
     GL_COLOR_BUFFER_BIT0_QCOM = 1,
     GL_COLOR_BUFFER_BIT1_QCOM = 2,
     GL_COLOR_BUFFER_BIT2_QCOM = 4,
@@ -968,15 +676,9 @@ enum class TilePreserveMaskQCOM : uint32_t {
     GL_MULTISAMPLE_BUFFER_BIT5_QCOM = 536870912,
     GL_MULTISAMPLE_BUFFER_BIT6_QCOM = 1073741824,
     GL_MULTISAMPLE_BUFFER_BIT7_QCOM = 2147483648,
-};
-
-enum class ClearMask : uint32_t {
     GL_COLOR_BUFFER_BIT = 16384,
     GL_DEPTH_BUFFER_BIT = 256,
     GL_STENCIL_BUFFER_BIT = 1024,
-};
-
-enum class MapBufferRangeAccess : uint32_t {
     GL_MAP_READ_BIT = 1,
     GL_MAP_WRITE_BIT = 2,
     GL_MAP_INVALIDATE_RANGE_BIT = 4,
@@ -1057,12 +759,10 @@ typedef int64_t GLint64;
 typedef uint64_t GLuint64;
 typedef int32_t GLfixed;
 typedef uint32_t GLsizei;
-typedef uint32_t GLenum;
 typedef struct {
 } __GLsync;
 
 typedef __GLsync *GLsync;
-typedef uint32_t GLbitfield;
 typedef uint16_t GLhalf;
 typedef float GLfloat;
 typedef float GLclampf;
@@ -1091,80 +791,68 @@ typedef int(STDCALL *PFNCGLSETCURRENTCONTEXT)(void *ctx);
 typedef int(STDCALL *PFNCGLGETSURFACE)(void *ctx, void **cid, int32_t *wid, int32_t *sid);
 typedef int(STDCALL *PFNCGSGETSURFACEBOUNDS)(void *cid, int32_t wid, int32_t sid, double *bounds);
 typedef int(STDCALL *PFNCGLFLUSHDRAWABLE)(void *ctx);
-typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(ArrayType type);
-typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(ArrayType type);
+typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(GLenum type);
+typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(GLenum type);
 typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(uint32_t program, int32_t buffer_size,
                                                 int32_t *bytes_written, uint32_t *binary_format,
                                                 void *binary);
 typedef void(STDCALL *PFNGLPROGRAMBINARYOES)(uint32_t program, uint32_t binary_format, void *binary,
                                              int32_t binary_size);
 typedef void(STDCALL *PFNGLSTARTTILINGQCOM)(int32_t x, int32_t y, int32_t width, int32_t height,
-                                            TilePreserveMaskQCOM preserveMask);
-typedef void(STDCALL *PFNGLENDTILINGQCOM)(TilePreserveMaskQCOM preserve_mask);
-typedef void(STDCALL *PFNGLDISCARDFRAMEBUFFEREXT)(FramebufferTarget target, int32_t numAttachments,
-                                                  DiscardFramebufferAttachment *attachments);
+                                            GLbitfield preserveMask);
+typedef void(STDCALL *PFNGLENDTILINGQCOM)(GLbitfield preserve_mask);
+typedef void(STDCALL *PFNGLDISCARDFRAMEBUFFEREXT)(GLenum target, int32_t numAttachments,
+                                                  GLenum *attachments);
 typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
 typedef void(STDCALL *PFNGLPUSHGROUPMARKEREXT)(int32_t length, char *marker);
 typedef void(STDCALL *PFNGLPOPGROUPMARKEREXT)();
-typedef void(STDCALL *PFNGLTEXSTORAGE1DEXT)(TextureTarget target, int32_t levels,
-                                            TexelFormat format, int32_t width);
-typedef void(STDCALL *PFNGLTEXSTORAGE2DEXT)(TextureTarget target, int32_t levels,
-                                            TexelFormat format, int32_t width, int32_t height);
-typedef void(STDCALL *PFNGLTEXSTORAGE3DEXT)(TextureTarget target, int32_t levels,
-                                            TexelFormat format, int32_t width, int32_t height,
-                                            int32_t depth);
-typedef void(STDCALL *PFNGLTEXTURESTORAGE1DEXT)(uint32_t texture, TextureTarget target,
-                                                int32_t levels, TexelFormat format, int32_t width);
-typedef void(STDCALL *PFNGLTEXTURESTORAGE2DEXT)(uint32_t texture, TextureTarget target,
-                                                int32_t levels, TexelFormat format, int32_t width,
-                                                int32_t height);
-typedef void(STDCALL *PFNGLTEXTURESTORAGE3DEXT)(uint32_t texture, TextureTarget target,
-                                                int32_t levels, TexelFormat format, int32_t width,
-                                                int32_t height, int32_t depth);
+typedef void(STDCALL *PFNGLTEXSTORAGE1DEXT)(GLenum target, int32_t levels, GLenum format,
+                                            int32_t width);
+typedef void(STDCALL *PFNGLTEXSTORAGE2DEXT)(GLenum target, int32_t levels, GLenum format,
+                                            int32_t width, int32_t height);
+typedef void(STDCALL *PFNGLTEXSTORAGE3DEXT)(GLenum target, int32_t levels, GLenum format,
+                                            int32_t width, int32_t height, int32_t depth);
+typedef void(STDCALL *PFNGLTEXTURESTORAGE1DEXT)(uint32_t texture, GLenum target, int32_t levels,
+                                                GLenum format, int32_t width);
+typedef void(STDCALL *PFNGLTEXTURESTORAGE2DEXT)(uint32_t texture, GLenum target, int32_t levels,
+                                                GLenum format, int32_t width, int32_t height);
+typedef void(STDCALL *PFNGLTEXTURESTORAGE3DEXT)(uint32_t texture, GLenum target, int32_t levels,
+                                                GLenum format, int32_t width, int32_t height,
+                                                int32_t depth);
 typedef void(STDCALL *PFNGLGENVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
 typedef void(STDCALL *PFNGLBINDVERTEXARRAYOES)(uint32_t array);
 typedef void(STDCALL *PFNGLDELETEVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
 typedef bool(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
-typedef void(STDCALL *PFNGLEGLIMAGETARGETTEXTURE2DOES)(ImageTargetTexture target, void *image);
-typedef void(STDCALL *PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES)(
-        ImageTargetRenderbufferStorage target, void *image);
-typedef ResetStatus(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
+typedef void(STDCALL *PFNGLEGLIMAGETARGETTEXTURE2DOES)(GLenum target, void *image);
+typedef void(STDCALL *PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES)(GLenum target, void *image);
+typedef GLenum(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
 typedef void(STDCALL *PFNGLBINDATTRIBLOCATION)(uint32_t program, int32_t location, char *name);
-typedef void(STDCALL *PFNGLBLENDFUNC)(BlendFactor src_factor, BlendFactor dst_factor);
-typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(BlendFactor src_factor_rgb,
-                                              BlendFactor dst_factor_rgb,
-                                              BlendFactor src_factor_alpha,
-                                              BlendFactor dst_factor_alpha);
-typedef void(STDCALL *PFNGLBLENDEQUATION)(BlendEquation equation);
-typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(BlendEquation rgb, BlendEquation alpha);
+typedef void(STDCALL *PFNGLBLENDFUNC)(GLenum src_factor, GLenum dst_factor);
+typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(GLenum src_factor_rgb, GLenum dst_factor_rgb,
+                                              GLenum src_factor_alpha, GLenum dst_factor_alpha);
+typedef void(STDCALL *PFNGLBLENDEQUATION)(GLenum equation);
+typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(GLenum rgb, GLenum alpha);
 typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
 typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(int32_t location);
 typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(int32_t location);
-typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(int32_t location, int32_t size,
-                                                VertexAttribType type, bool normalized,
-                                                int32_t stride, void *data);
+typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(int32_t location, int32_t size, GLenum type,
+                                                bool normalized, int32_t stride, void *data);
 typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, int32_t location, int32_t buffer_size,
                                             int32_t *buffer_bytes_written, int32_t *vector_count,
-                                            ShaderAttribType *type, char *name);
+                                            GLenum *type, char *name);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, int32_t location,
                                              int32_t buffer_size, int32_t *buffer_bytes_written,
-                                             int32_t *vector_count, ShaderUniformType *type,
-                                             char *name);
-typedef Error(STDCALL *PFNGLGETERROR)();
-typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, ProgramParameter parameter,
-                                         int32_t *value);
-typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, ShaderParameter parameter, int32_t *value);
+                                             int32_t *vector_count, GLenum *type, char *name);
+typedef GLenum(STDCALL *PFNGLGETERROR)();
+typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, GLenum parameter, int32_t *value);
+typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, GLenum parameter, int32_t *value);
 typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
 typedef int32_t(STDCALL *PFNGLGETATTRIBLOCATION)(uint32_t program, char *name);
-typedef void(STDCALL *PFNGLPIXELSTOREI)(PixelStoreParameter parameter, int32_t value);
-typedef void(STDCALL *PFNGLTEXPARAMETERI)(TextureTarget target, TextureParameter parameter,
-                                          int32_t value);
-typedef void(STDCALL *PFNGLTEXPARAMETERF)(TextureTarget target, TextureParameter parameter,
-                                          float value);
-typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(TextureTarget target, TextureParameter parameter,
-                                              int32_t *values);
-typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(TextureTarget target, TextureParameter parameter,
-                                              float *values);
+typedef void(STDCALL *PFNGLPIXELSTOREI)(GLenum parameter, int32_t value);
+typedef void(STDCALL *PFNGLTEXPARAMETERI)(GLenum target, GLenum parameter, int32_t value);
+typedef void(STDCALL *PFNGLTEXPARAMETERF)(GLenum target, GLenum parameter, float value);
+typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(GLenum target, GLenum parameter, int32_t *values);
+typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(GLenum target, GLenum parameter, float *values);
 typedef void(STDCALL *PFNGLUNIFORM1I)(int32_t location, int32_t value);
 typedef void(STDCALL *PFNGLUNIFORM2I)(int32_t location, int32_t value0, int32_t value1);
 typedef void(STDCALL *PFNGLUNIFORM3I)(int32_t location, int32_t value0, int32_t value1,
@@ -1202,78 +890,69 @@ typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(int32_t location, float *value);
 typedef void(STDCALL *PFNGLVERTEXATTRIB2FV)(int32_t location, float *value);
 typedef void(STDCALL *PFNGLVERTEXATTRIB3FV)(int32_t location, float *value);
 typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(int32_t location, float *value);
-typedef void(STDCALL *PFNGLGETSHADERPRECISIONFORMAT)(ShaderType shader_type,
-                                                     PrecisionType precision_type, int32_t *range,
-                                                     int32_t *precision);
+typedef void(STDCALL *PFNGLGETSHADERPRECISIONFORMAT)(GLenum shader_type, GLenum precision_type,
+                                                     int32_t *range, int32_t *precision);
 typedef void(STDCALL *PFNGLDEPTHMASK)(bool enabled);
-typedef void(STDCALL *PFNGLDEPTHFUNC)(TestFunction function);
+typedef void(STDCALL *PFNGLDEPTHFUNC)(GLenum function);
 typedef void(STDCALL *PFNGLDEPTHRANGEF)(float near, float far);
 typedef void(STDCALL *PFNGLCOLORMASK)(bool red, bool green, bool blue, bool alpha);
 typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
-typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(FaceMode face, uint32_t mask);
-typedef void(STDCALL *PFNGLSTENCILFUNCSEPARATE)(FaceMode face, TestFunction function,
+typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(GLenum face, uint32_t mask);
+typedef void(STDCALL *PFNGLSTENCILFUNCSEPARATE)(GLenum face, GLenum function,
                                                 int32_t reference_value, int32_t mask);
-typedef void(STDCALL *PFNGLSTENCILOPSEPARATE)(FaceMode face, StencilAction stencil_fail,
-                                              StencilAction stencil_pass_depth_fail,
-                                              StencilAction stencil_pass_depth_pass);
-typedef void(STDCALL *PFNGLFRONTFACE)(FaceOrientation orientation);
+typedef void(STDCALL *PFNGLSTENCILOPSEPARATE)(GLenum face, GLenum stencil_fail,
+                                              GLenum stencil_pass_depth_fail,
+                                              GLenum stencil_pass_depth_pass);
+typedef void(STDCALL *PFNGLFRONTFACE)(GLenum orientation);
 typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
 typedef void(STDCALL *PFNGLSCISSOR)(int32_t x, int32_t y, int32_t width, int32_t height);
-typedef void(STDCALL *PFNGLACTIVETEXTURE)(TextureUnit unit);
+typedef void(STDCALL *PFNGLACTIVETEXTURE)(GLenum unit);
 typedef void(STDCALL *PFNGLGENTEXTURES)(int32_t count, uint32_t *textures);
 typedef void(STDCALL *PFNGLDELETETEXTURES)(int32_t count, uint32_t *textures);
 typedef bool(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
-typedef void(STDCALL *PFNGLBINDTEXTURE)(TextureTarget target, uint32_t texture);
-typedef void(STDCALL *PFNGLTEXIMAGE2D)(TextureImageTarget target, int32_t level,
-                                       TexelFormat internal_format, int32_t width, int32_t height,
-                                       int32_t border, TexelFormat format, TexelType type,
-                                       void *data);
-typedef void(STDCALL *PFNGLTEXSUBIMAGE2D)(TextureImageTarget target, int32_t level, int32_t xoffset,
+typedef void(STDCALL *PFNGLBINDTEXTURE)(GLenum target, uint32_t texture);
+typedef void(STDCALL *PFNGLTEXIMAGE2D)(GLenum target, int32_t level, GLenum internal_format,
+                                       int32_t width, int32_t height, int32_t border, GLenum format,
+                                       GLenum type, void *data);
+typedef void(STDCALL *PFNGLTEXSUBIMAGE2D)(GLenum target, int32_t level, int32_t xoffset,
                                           int32_t yoffset, int32_t width, int32_t height,
-                                          TexelFormat format, TexelType type, void *data);
-typedef void(STDCALL *PFNGLCOPYTEXIMAGE2D)(TextureImageTarget target, int32_t level,
-                                           TexelFormat format, int32_t x, int32_t y, int32_t width,
-                                           int32_t height, int32_t border);
-typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE2D)(TextureImageTarget target, int32_t level,
-                                              int32_t xoffset, int32_t yoffset, int32_t x,
-                                              int32_t y, int32_t width, int32_t height);
-typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE2D)(TextureImageTarget target, int32_t level,
-                                                 CompressedTexelFormat format, int32_t width,
-                                                 int32_t height, int32_t border, int32_t image_size,
-                                                 void *data);
-typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE2D)(TextureImageTarget target, int32_t level,
-                                                    int32_t xoffset, int32_t yoffset, int32_t width,
-                                                    int32_t height, CompressedTexelFormat format,
-                                                    int32_t image_size, void *data);
-typedef void(STDCALL *PFNGLGENERATEMIPMAP)(TextureImageTarget target);
+                                          GLenum format, GLenum type, void *data);
+typedef void(STDCALL *PFNGLCOPYTEXIMAGE2D)(GLenum target, int32_t level, GLenum format, int32_t x,
+                                           int32_t y, int32_t width, int32_t height,
+                                           int32_t border);
+typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE2D)(GLenum target, int32_t level, int32_t xoffset,
+                                              int32_t yoffset, int32_t x, int32_t y, int32_t width,
+                                              int32_t height);
+typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE2D)(GLenum target, int32_t level, GLenum format,
+                                                 int32_t width, int32_t height, int32_t border,
+                                                 int32_t image_size, void *data);
+typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE2D)(GLenum target, int32_t level, int32_t xoffset,
+                                                    int32_t yoffset, int32_t width, int32_t height,
+                                                    GLenum format, int32_t image_size, void *data);
+typedef void(STDCALL *PFNGLGENERATEMIPMAP)(GLenum target);
 typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
-                                       BaseTexelFormat format, TexelType type, void *data);
+                                       GLenum format, GLenum type, void *data);
 typedef void(STDCALL *PFNGLGENFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
-typedef void(STDCALL *PFNGLBINDFRAMEBUFFER)(FramebufferTarget target, uint32_t framebuffer);
-typedef FramebufferStatus(STDCALL *PFNGLCHECKFRAMEBUFFERSTATUS)(FramebufferTarget target);
+typedef void(STDCALL *PFNGLBINDFRAMEBUFFER)(GLenum target, uint32_t framebuffer);
+typedef GLenum(STDCALL *PFNGLCHECKFRAMEBUFFERSTATUS)(GLenum target);
 typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
 typedef bool(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
 typedef void(STDCALL *PFNGLGENRENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
-typedef void(STDCALL *PFNGLBINDRENDERBUFFER)(RenderbufferTarget target, uint32_t renderbuffer);
-typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGE)(RenderbufferTarget target,
-                                                RenderbufferFormat format, int32_t width,
+typedef void(STDCALL *PFNGLBINDRENDERBUFFER)(GLenum target, uint32_t renderbuffer);
+typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGE)(GLenum target, GLenum format, int32_t width,
                                                 int32_t height);
 typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
 typedef bool(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
-typedef void(STDCALL *PFNGLGETRENDERBUFFERPARAMETERIV)(RenderbufferTarget target,
-                                                       RenderbufferParameter parameter,
+typedef void(STDCALL *PFNGLGETRENDERBUFFERPARAMETERIV)(GLenum target, GLenum parameter,
                                                        int32_t *values);
 typedef void(STDCALL *PFNGLGENBUFFERS)(int32_t count, uint32_t *buffers);
-typedef void(STDCALL *PFNGLBINDBUFFER)(BufferTarget target, uint32_t buffer);
-typedef void(STDCALL *PFNGLBUFFERDATA)(BufferTarget target, int32_t size, void *data,
-                                       BufferUsage usage);
-typedef void(STDCALL *PFNGLBUFFERSUBDATA)(BufferTarget target, int32_t offset, int32_t size,
-                                          void *data);
+typedef void(STDCALL *PFNGLBINDBUFFER)(GLenum target, uint32_t buffer);
+typedef void(STDCALL *PFNGLBUFFERDATA)(GLenum target, int32_t size, void *data, GLenum usage);
+typedef void(STDCALL *PFNGLBUFFERSUBDATA)(GLenum target, int32_t offset, int32_t size, void *data);
 typedef void(STDCALL *PFNGLDELETEBUFFERS)(int32_t count, uint32_t *buffers);
 typedef bool(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
-typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(BufferTarget target, BufferParameter parameter,
-                                                 int32_t *value);
-typedef uint32_t(STDCALL *PFNGLCREATESHADER)(ShaderType type);
+typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(GLenum target, GLenum parameter, int32_t *value);
+typedef uint32_t(STDCALL *PFNGLCREATESHADER)(GLenum type);
 typedef void(STDCALL *PFNGLDELETESHADER)(uint32_t shader);
 typedef void(STDCALL *PFNGLSHADERSOURCE)(uint32_t shader, int32_t count, char **source,
                                          int32_t *length);
@@ -1301,100 +980,87 @@ typedef void(STDCALL *PFNGLVALIDATEPROGRAM)(uint32_t program);
 typedef void(STDCALL *PFNGLCLEARCOLOR)(float r, float g, float b, float a);
 typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
 typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
-typedef void(STDCALL *PFNGLCLEAR)(ClearMask mask);
-typedef void(STDCALL *PFNGLCULLFACE)(FaceMode mode);
+typedef void(STDCALL *PFNGLCLEAR)(GLbitfield mask);
+typedef void(STDCALL *PFNGLCULLFACE)(GLenum mode);
 typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
 typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
 typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, bool invert);
-typedef void(STDCALL *PFNGLHINT)(HintTarget target, HintMode mode);
-typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(FramebufferTarget framebuffer_target,
-                                                    FramebufferAttachment framebuffer_attachment,
-                                                    RenderbufferTarget renderbuffer_target,
+typedef void(STDCALL *PFNGLHINT)(GLenum target, GLenum mode);
+typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(GLenum framebuffer_target,
+                                                    GLenum framebuffer_attachment,
+                                                    GLenum renderbuffer_target,
                                                     uint32_t renderbuffer);
-typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(FramebufferTarget framebuffer_target,
-                                                 FramebufferAttachment framebuffer_attachment,
-                                                 TextureImageTarget texture_target,
-                                                 uint32_t texture, int32_t level);
-typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV)(
-        FramebufferTarget framebuffer_target, FramebufferAttachment attachment,
-        FramebufferAttachmentParameter parameter, int32_t *value);
-typedef void(STDCALL *PFNGLDRAWELEMENTS)(DrawMode draw_mode, int32_t element_count,
-                                         IndicesType indices_type, void *indices);
-typedef void(STDCALL *PFNGLDRAWARRAYS)(DrawMode draw_mode, int32_t first_index,
-                                       int32_t index_count);
+typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(GLenum framebuffer_target,
+                                                 GLenum framebuffer_attachment,
+                                                 GLenum texture_target, uint32_t texture,
+                                                 int32_t level);
+typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV)(GLenum framebuffer_target,
+                                                                GLenum attachment, GLenum parameter,
+                                                                int32_t *value);
+typedef void(STDCALL *PFNGLDRAWELEMENTS)(GLenum draw_mode, int32_t element_count,
+                                         GLenum indices_type, void *indices);
+typedef void(STDCALL *PFNGLDRAWARRAYS)(GLenum draw_mode, int32_t first_index, int32_t index_count);
 typedef void(STDCALL *PFNGLFLUSH)();
 typedef void(STDCALL *PFNGLFINISH)();
-typedef void(STDCALL *PFNGLGETBOOLEANV)(StateVariable param, bool *values);
-typedef void(STDCALL *PFNGLGETFLOATV)(StateVariable param, float *values);
-typedef void(STDCALL *PFNGLGETINTEGERV)(StateVariable param, int32_t *values);
-typedef char *(STDCALL *PFNGLGETSTRING)(StringConstant param);
-typedef void(STDCALL *PFNGLENABLE)(Capability capability);
-typedef void(STDCALL *PFNGLDISABLE)(Capability capability);
-typedef bool(STDCALL *PFNGLISENABLED)(Capability capability);
+typedef void(STDCALL *PFNGLGETBOOLEANV)(GLenum param, bool *values);
+typedef void(STDCALL *PFNGLGETFLOATV)(GLenum param, float *values);
+typedef void(STDCALL *PFNGLGETINTEGERV)(GLenum param, int32_t *values);
+typedef char *(STDCALL *PFNGLGETSTRING)(GLenum param);
+typedef void(STDCALL *PFNGLENABLE)(GLenum capability);
+typedef void(STDCALL *PFNGLDISABLE)(GLenum capability);
+typedef bool(STDCALL *PFNGLISENABLED)(GLenum capability);
 typedef uint64_t(STDCALL *PFNGLFENCESYNC)(SyncCondition condition, SyncFlags syncFlags);
 typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
 typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, SyncFlags syncFlags, uint64_t timeout);
 typedef ClientWaitSyncSignal(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, SyncFlags syncFlags,
                                                            uint64_t timeout);
-typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(BufferTarget target, int32_t offset, int32_t length,
-                                             MapBufferRangeAccess access);
-typedef void(STDCALL *PFNGLUNMAPBUFFER)(BufferTarget target);
-typedef void(STDCALL *PFNGLINVALIDATEFRAMEBUFFER)(FramebufferTarget target, int32_t count,
-                                                  FramebufferAttachment *attachments);
-typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(RenderbufferTarget target,
-                                                           int32_t samples,
-                                                           RenderbufferFormat format, int32_t width,
+typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(GLenum target, int32_t offset, int32_t length,
+                                             GLbitfield access);
+typedef void(STDCALL *PFNGLUNMAPBUFFER)(GLenum target);
+typedef void(STDCALL *PFNGLINVALIDATEFRAMEBUFFER)(GLenum target, int32_t count,
+                                                  GLenum *attachments);
+typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(GLenum target, int32_t samples,
+                                                           GLenum format, int32_t width,
                                                            int32_t height);
 typedef void(STDCALL *PFNGLBLITFRAMEBUFFER)(int32_t srcX0, int32_t srcY0, int32_t srcX1,
                                             int32_t srcY1, int32_t dstX0, int32_t dstY0,
-                                            int32_t dstX1, int32_t dstY1, ClearMask mask,
-                                            TextureFilterMode filter);
+                                            int32_t dstX1, int32_t dstY1, GLbitfield mask,
+                                            GLenum filter);
 typedef void(STDCALL *PFNGLGENQUERIES)(int32_t count, uint32_t *queries);
-typedef void(STDCALL *PFNGLBEGINQUERY)(QueryTarget target, uint32_t query);
-typedef void(STDCALL *PFNGLENDQUERY)(QueryTarget target);
+typedef void(STDCALL *PFNGLBEGINQUERY)(GLenum target, uint32_t query);
+typedef void(STDCALL *PFNGLENDQUERY)(GLenum target);
 typedef void(STDCALL *PFNGLDELETEQUERIES)(int32_t count, uint32_t *queries);
 typedef bool(STDCALL *PFNGLISQUERY)(uint32_t query);
-typedef void(STDCALL *PFNGLGETQUERYIV)(QueryTarget target, QueryParameter parameter,
-                                       int32_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, QueryObjectParameter parameter,
-                                              uint32_t *value);
+typedef void(STDCALL *PFNGLGETQUERYIV)(GLenum target, GLenum parameter, int32_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, GLenum parameter, uint32_t *value);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
                                                       uint32_t uniform_block_index,
                                                       int32_t buffer_size,
                                                       int32_t *buffer_bytes_written, char *name);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKIV)(uint32_t program, uint32_t uniform_block_index,
-                                                    UniformBlockParameter parameter_name,
-                                                    int32_t *parameters);
+                                                    GLenum parameter_name, int32_t *parameters);
 typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
                                                 uint32_t uniform_block_binding);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORMSIV)(uint32_t program, uint32_t uniform_count,
-                                                uint32_t *uniform_indices,
-                                                UniformBlockParameter parameter_name,
+                                                uint32_t *uniform_indices, GLenum parameter_name,
                                                 int32_t *parameters);
-typedef void(STDCALL *PFNGLBINDBUFFERBASE)(IndexedBufferTarget target, uint32_t index,
-                                           uint32_t buffer);
+typedef void(STDCALL *PFNGLBINDBUFFERBASE)(GLenum target, uint32_t index, uint32_t buffer);
 typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
 typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
 typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, QueryObjectParameter parameter,
-                                               int64_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, QueryObjectParameter parameter,
-                                                uint64_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, GLenum parameter, int64_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, GLenum parameter, uint64_t *value);
 typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
-typedef void(STDCALL *PFNGLBEGINQUERYEXT)(QueryTarget target, uint32_t query);
-typedef void(STDCALL *PFNGLENDQUERYEXT)(QueryTarget target);
+typedef void(STDCALL *PFNGLBEGINQUERYEXT)(GLenum target, uint32_t query);
+typedef void(STDCALL *PFNGLENDQUERYEXT)(GLenum target);
 typedef void(STDCALL *PFNGLDELETEQUERIESEXT)(int32_t count, uint32_t *queries);
 typedef bool(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
-typedef void(STDCALL *PFNGLQUERYCOUNTEREXT)(uint32_t query, QueryTarget target);
-typedef void(STDCALL *PFNGLGETQUERYIVEXT)(QueryTarget target, QueryParameter parameter,
-                                          int32_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTIVEXT)(uint32_t query, QueryObjectParameter parameter,
-                                                int32_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTUIVEXT)(uint32_t query, QueryObjectParameter parameter,
-                                                 uint32_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTI64VEXT)(uint32_t query, QueryObjectParameter parameter,
-                                                  int64_t *value);
-typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64VEXT)(uint32_t query, QueryObjectParameter parameter,
+typedef void(STDCALL *PFNGLQUERYCOUNTEREXT)(uint32_t query, GLenum target);
+typedef void(STDCALL *PFNGLGETQUERYIVEXT)(GLenum target, GLenum parameter, int32_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTIVEXT)(uint32_t query, GLenum parameter, int32_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTUIVEXT)(uint32_t query, GLenum parameter, uint32_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTI64VEXT)(uint32_t query, GLenum parameter, int64_t *value);
+typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64VEXT)(uint32_t query, GLenum parameter,
                                                    uint64_t *value);
 
 extern PFNEGLINITIALIZE eglInitialize;

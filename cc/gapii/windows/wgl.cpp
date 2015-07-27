@@ -39,20 +39,20 @@ void getFramebufferInfo(void* hdcUntyped, FramebufferInfo& info) {
     int a = pfd.cAlphaBits;
 
     if (r == 8 && g == 8 && b == 8 && a == 8) {
-        info.colorFormat = RenderbufferFormat::GL_RGBA8;
+        info.colorFormat = GLenum::GL_RGBA8;
     } else if (r == 4 && g == 4 && b == 4 && a == 4) {
-        info.colorFormat = RenderbufferFormat::GL_RGBA4;
+        info.colorFormat = GLenum::GL_RGBA4;
     } else if (r == 5 && g == 5 && b == 5 && a == 1) {
-        info.colorFormat = RenderbufferFormat::GL_RGB5_A1;
+        info.colorFormat = GLenum::GL_RGB5_A1;
     } else if (r == 5 && g == 6 && b == 5 && a == 0) {
-        info.colorFormat = RenderbufferFormat::GL_RGB565;
+        info.colorFormat = GLenum::GL_RGB565;
     } else {
-        info.colorFormat = RenderbufferFormat::GL_RGBA8;
+        info.colorFormat = GLenum::GL_RGBA8;
     }
 
     // No options for these yet.
-    info.stencilFormat = RenderbufferFormat::GL_STENCIL_INDEX8;
-    info.depthFormat = RenderbufferFormat::GL_DEPTH_COMPONENT16;
+    info.stencilFormat = GLenum::GL_STENCIL_INDEX8;
+    info.depthFormat = GLenum::GL_DEPTH_COMPONENT16;
 }
 
 } // namespace wgl

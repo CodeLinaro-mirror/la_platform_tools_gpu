@@ -20,17 +20,17 @@ template<typename T> T inline max(T a, T b) { return (a > b) ? a : b; }
 inline uint32_t minIndex(const uint8_t* indices, uint32_t indices_type, uint32_t offset, uint32_t count) {
     uint32_t v = ~(uint32_t)0;
     switch (indices_type) {
-        case gapii::IndicesType::GL_UNSIGNED_BYTE: {
+        case gapii::GLenum::GL_UNSIGNED_BYTE: {
             const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
         }
-        case gapii::IndicesType::GL_UNSIGNED_SHORT: {
+        case gapii::GLenum::GL_UNSIGNED_SHORT: {
             const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
         }
-        case gapii::IndicesType::GL_UNSIGNED_INT: {
+        case gapii::GLenum::GL_UNSIGNED_INT: {
             const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[i]); }
             break;
@@ -42,17 +42,17 @@ inline uint32_t minIndex(const uint8_t* indices, uint32_t indices_type, uint32_t
 inline uint32_t maxIndex(const uint8_t* indices, uint32_t indices_type, uint32_t offset, uint32_t count) {
     uint32_t v = 0;
     switch (indices_type) {
-        case gapii::IndicesType::GL_UNSIGNED_BYTE: {
+        case gapii::GLenum::GL_UNSIGNED_BYTE: {
             const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
         }
-        case gapii::IndicesType::GL_UNSIGNED_SHORT: {
+        case gapii::GLenum::GL_UNSIGNED_SHORT: {
             const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
         }
-        case gapii::IndicesType::GL_UNSIGNED_INT: {
+        case gapii::GLenum::GL_UNSIGNED_INT: {
             const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[offset]);
             for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[i]); }
             break;
@@ -63,177 +63,177 @@ inline uint32_t maxIndex(const uint8_t* indices, uint32_t indices_type, uint32_t
 
 inline int stateVariableSize(uint32_t v) {
     switch (v) {
-    case StateVariable::GL_ACTIVE_TEXTURE:
+    case GLenum::GL_ACTIVE_TEXTURE:
         return 1;
-    case StateVariable::GL_ALIASED_LINE_WIDTH_RANGE:
+    case GLenum::GL_ALIASED_LINE_WIDTH_RANGE:
         return 2;
-    case StateVariable::GL_ALIASED_POINT_SIZE_RANGE:
+    case GLenum::GL_ALIASED_POINT_SIZE_RANGE:
         return 2;
-    case StateVariable::GL_ALPHA_BITS:
+    case GLenum::GL_ALPHA_BITS:
         return 1;
-    case StateVariable::GL_ARRAY_BUFFER_BINDING:
+    case GLenum::GL_ARRAY_BUFFER_BINDING:
         return 1;
-    case StateVariable::GL_BLEND:
+    case GLenum::GL_BLEND:
         return 1;
-    case StateVariable::GL_BLEND_COLOR:
+    case GLenum::GL_BLEND_COLOR:
         return 4;
-    case StateVariable::GL_BLEND_DST_ALPHA:
+    case GLenum::GL_BLEND_DST_ALPHA:
         return 1;
-    case StateVariable::GL_BLEND_DST_RGB:
+    case GLenum::GL_BLEND_DST_RGB:
         return 1;
-    case StateVariable::GL_BLEND_EQUATION_ALPHA:
+    case GLenum::GL_BLEND_EQUATION_ALPHA:
         return 1;
-    case StateVariable::GL_BLEND_EQUATION_RGB:
+    case GLenum::GL_BLEND_EQUATION_RGB:
         return 1;
-    case StateVariable::GL_BLEND_SRC_ALPHA:
+    case GLenum::GL_BLEND_SRC_ALPHA:
         return 1;
-    case StateVariable::GL_BLEND_SRC_RGB:
+    case GLenum::GL_BLEND_SRC_RGB:
         return 1;
-    case StateVariable::GL_BLUE_BITS:
+    case GLenum::GL_BLUE_BITS:
         return 1;
-    case StateVariable::GL_COLOR_CLEAR_VALUE:
+    case GLenum::GL_COLOR_CLEAR_VALUE:
         return 4;
-    case StateVariable::GL_COLOR_WRITEMASK:
+    case GLenum::GL_COLOR_WRITEMASK:
         return 4;
-    case StateVariable::GL_CULL_FACE:
+    case GLenum::GL_CULL_FACE:
         return 1;
-    case StateVariable::GL_CULL_FACE_MODE:
+    case GLenum::GL_CULL_FACE_MODE:
         return 1;
-    case StateVariable::GL_CURRENT_PROGRAM:
+    case GLenum::GL_CURRENT_PROGRAM:
         return 1;
-    case StateVariable::GL_DEPTH_BITS:
+    case GLenum::GL_DEPTH_BITS:
         return 1;
-    case StateVariable::GL_DEPTH_CLEAR_VALUE:
+    case GLenum::GL_DEPTH_CLEAR_VALUE:
         return 1;
-    case StateVariable::GL_DEPTH_FUNC:
+    case GLenum::GL_DEPTH_FUNC:
         return 1;
-    case StateVariable::GL_DEPTH_RANGE:
+    case GLenum::GL_DEPTH_RANGE:
         return 2;
-    case StateVariable::GL_DEPTH_TEST:
+    case GLenum::GL_DEPTH_TEST:
         return 1;
-    case StateVariable::GL_DEPTH_WRITEMASK:
+    case GLenum::GL_DEPTH_WRITEMASK:
         return 1;
-    case StateVariable::GL_DITHER:
+    case GLenum::GL_DITHER:
         return 1;
-    case StateVariable::GL_ELEMENT_ARRAY_BUFFER_BINDING:
+    case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING:
         return 1;
-    case StateVariable::GL_FRAMEBUFFER_BINDING:
+    case GLenum::GL_FRAMEBUFFER_BINDING:
         return 1;
-    case StateVariable::GL_FRONT_FACE:
+    case GLenum::GL_FRONT_FACE:
         return 1;
-    case StateVariable::GL_GENERATE_MIPMAP_HINT:
+    case GLenum::GL_GENERATE_MIPMAP_HINT:
         return 1;
-    case StateVariable::GL_GREEN_BITS:
+    case GLenum::GL_GREEN_BITS:
         return 1;
-    case StateVariable::GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+    case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT:
         return 1;
-    case StateVariable::GL_IMPLEMENTATION_COLOR_READ_TYPE:
+    case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE:
         return 1;
-    case StateVariable::GL_LINE_WIDTH:
+    case GLenum::GL_LINE_WIDTH:
         return 1;
-    case StateVariable::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+    case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
         return 1;
-    case StateVariable::GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+    case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE:
         return 1;
-    case StateVariable::GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+    case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS:
         return 1;
-    case StateVariable::GL_MAX_RENDERBUFFER_SIZE:
+    case GLenum::GL_MAX_RENDERBUFFER_SIZE:
         return 1;
-    case StateVariable::GL_MAX_TEXTURE_IMAGE_UNITS:
+    case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS:
         return 1;
-    case StateVariable::GL_MAX_TEXTURE_SIZE:
+    case GLenum::GL_MAX_TEXTURE_SIZE:
         return 1;
-    case StateVariable::GL_MAX_VARYING_VECTORS:
+    case GLenum::GL_MAX_VARYING_VECTORS:
         return 1;
-    case StateVariable::GL_MAX_VERTEX_ATTRIBS:
+    case GLenum::GL_MAX_VERTEX_ATTRIBS:
         return 1;
-    case StateVariable::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+    case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
         return 1;
-    case StateVariable::GL_MAX_VERTEX_UNIFORM_VECTORS:
+    case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS:
         return 1;
-    case StateVariable::GL_MAX_VIEWPORT_DIMS:
+    case GLenum::GL_MAX_VIEWPORT_DIMS:
         return 2;
-    case StateVariable::GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+    case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS:
         return 1;
-    case StateVariable::GL_NUM_SHADER_BINARY_FORMATS:
+    case GLenum::GL_NUM_SHADER_BINARY_FORMATS:
         return 1;
-    case StateVariable::GL_PACK_ALIGNMENT:
+    case GLenum::GL_PACK_ALIGNMENT:
         return 1;
-    case StateVariable::GL_POLYGON_OFFSET_FACTOR:
+    case GLenum::GL_POLYGON_OFFSET_FACTOR:
         return 1;
-    case StateVariable::GL_POLYGON_OFFSET_FILL:
+    case GLenum::GL_POLYGON_OFFSET_FILL:
         return 1;
-    case StateVariable::GL_POLYGON_OFFSET_UNITS:
+    case GLenum::GL_POLYGON_OFFSET_UNITS:
         return 1;
-    case StateVariable::GL_RED_BITS:
+    case GLenum::GL_RED_BITS:
         return 1;
-    case StateVariable::GL_RENDERBUFFER_BINDING:
+    case GLenum::GL_RENDERBUFFER_BINDING:
         return 1;
-    case StateVariable::GL_SAMPLE_ALPHA_TO_COVERAGE:
+    case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE:
         return 1;
-    case StateVariable::GL_SAMPLE_BUFFERS:
+    case GLenum::GL_SAMPLE_BUFFERS:
         return 1;
-    case StateVariable::GL_SAMPLE_COVERAGE:
+    case GLenum::GL_SAMPLE_COVERAGE:
         return 1;
-    case StateVariable::GL_SAMPLE_COVERAGE_INVERT:
+    case GLenum::GL_SAMPLE_COVERAGE_INVERT:
         return 1;
-    case StateVariable::GL_SAMPLE_COVERAGE_VALUE:
+    case GLenum::GL_SAMPLE_COVERAGE_VALUE:
         return 1;
-    case StateVariable::GL_SAMPLES:
+    case GLenum::GL_SAMPLES:
         return 1;
-    case StateVariable::GL_SCISSOR_BOX:
+    case GLenum::GL_SCISSOR_BOX:
         return 4;
-    case StateVariable::GL_SCISSOR_TEST:
+    case GLenum::GL_SCISSOR_TEST:
         return 1;
-    case StateVariable::GL_SHADER_COMPILER:
+    case GLenum::GL_SHADER_COMPILER:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_FAIL:
+    case GLenum::GL_STENCIL_BACK_FAIL:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_FUNC:
+    case GLenum::GL_STENCIL_BACK_FUNC:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+    case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_PASS_DEPTH_PASS:
+    case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_REF:
+    case GLenum::GL_STENCIL_BACK_REF:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_VALUE_MASK:
+    case GLenum::GL_STENCIL_BACK_VALUE_MASK:
         return 1;
-    case StateVariable::GL_STENCIL_BACK_WRITEMASK:
+    case GLenum::GL_STENCIL_BACK_WRITEMASK:
         return 1;
-    case StateVariable::GL_STENCIL_BITS:
+    case GLenum::GL_STENCIL_BITS:
         return 1;
-    case StateVariable::GL_STENCIL_CLEAR_VALUE:
+    case GLenum::GL_STENCIL_CLEAR_VALUE:
         return 1;
-    case StateVariable::GL_STENCIL_FAIL:
+    case GLenum::GL_STENCIL_FAIL:
         return 1;
-    case StateVariable::GL_STENCIL_FUNC:
+    case GLenum::GL_STENCIL_FUNC:
         return 1;
-    case StateVariable::GL_STENCIL_PASS_DEPTH_FAIL:
+    case GLenum::GL_STENCIL_PASS_DEPTH_FAIL:
         return 1;
-    case StateVariable::GL_STENCIL_PASS_DEPTH_PASS:
+    case GLenum::GL_STENCIL_PASS_DEPTH_PASS:
         return 1;
-    case StateVariable::GL_STENCIL_REF:
+    case GLenum::GL_STENCIL_REF:
         return 1;
-    case StateVariable::GL_STENCIL_TEST:
+    case GLenum::GL_STENCIL_TEST:
         return 1;
-    case StateVariable::GL_STENCIL_VALUE_MASK:
+    case GLenum::GL_STENCIL_VALUE_MASK:
         return 1;
-    case StateVariable::GL_STENCIL_WRITEMASK:
+    case GLenum::GL_STENCIL_WRITEMASK:
         return 1;
-    case StateVariable::GL_SUBPIXEL_BITS:
+    case GLenum::GL_SUBPIXEL_BITS:
         return 1;
-    case StateVariable::GL_TEXTURE_BINDING_2D:
+    case GLenum::GL_TEXTURE_BINDING_2D:
         return 1;
-    case StateVariable::GL_TEXTURE_BINDING_CUBE_MAP:
+    case GLenum::GL_TEXTURE_BINDING_CUBE_MAP:
         return 1;
-    case StateVariable::GL_UNPACK_ALIGNMENT:
+    case GLenum::GL_UNPACK_ALIGNMENT:
         return 1;
-    case StateVariable::GL_VIEWPORT:
+    case GLenum::GL_VIEWPORT:
         return 4;
-    case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
+    case GLenum::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
         return 1;
-    case StateVariable::GL_GPU_DISJOINT_EXT:
+    case GLenum::GL_GPU_DISJOINT_EXT:
         return 1;
     default:
         return 0; // TODO: Assert?
@@ -242,33 +242,33 @@ inline int stateVariableSize(uint32_t v) {
 
 int imageSize(int width, int height, uint32_t format, uint32_t type) {
     switch (format) {
-        // TexelFormat::GLES1
-    case TexelFormat::GL_ALPHA:
+        // GLenum::GLES1
+    case GLenum::GL_ALPHA:
         return width * height;
-    case TexelFormat::GL_LUMINANCE:
+    case GLenum::GL_LUMINANCE:
         return width * height;
-    case TexelFormat::GL_LUMINANCE_ALPHA:
+    case GLenum::GL_LUMINANCE_ALPHA:
         return 2 * width * height;
-    case TexelFormat::GL_RGB:
+    case GLenum::GL_RGB:
         return 3 * width * height;
-    case TexelFormat::GL_RGBA:
+    case GLenum::GL_RGBA:
         return 4 * width * height;
-            // TexelFormat::GLES3
-    case TexelFormat::GL_RED:
+            // GLenum::GLES3
+    case GLenum::GL_RED:
         return width * height;
-    case TexelFormat::GL_RED_INTEGER:
+    case GLenum::GL_RED_INTEGER:
         return width * height;
-    case TexelFormat::GL_RG:
+    case GLenum::GL_RG:
         return width * height * 2;
-    case TexelFormat::GL_RG_INTEGER:
+    case GLenum::GL_RG_INTEGER:
         return width * height * 2;
-    case TexelFormat::GL_RGB_INTEGER:
+    case GLenum::GL_RGB_INTEGER:
         return width * height * 3;
-    case TexelFormat::GL_RGBA_INTEGER:
+    case GLenum::GL_RGBA_INTEGER:
         return width * height * 3;
-    case TexelFormat::GL_DEPTH_COMPONENT:
+    case GLenum::GL_DEPTH_COMPONENT:
         return width * height;
-    case TexelFormat::GL_DEPTH_STENCIL:
+    case GLenum::GL_DEPTH_STENCIL:
         return width * height;
     default:
         return 0; // TODO: Assert?

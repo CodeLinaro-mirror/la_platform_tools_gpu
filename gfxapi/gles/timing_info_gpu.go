@@ -234,14 +234,14 @@ func (t *timingInfoGpuTransform) appendQuery(id atom.ID, et eventType, out atom.
 		query := &timerQuery{queryId: queryId, startId: id, state: queryIncomplete}
 		t.queries = append(t.queries, query)
 		t.pendingQueries = append(t.pendingQueries, query)
-		out.Write(atom.NoID, NewGlBeginQuery(QueryTarget_GL_TIME_ELAPSED_EXT, queryId))
+		out.Write(atom.NoID, NewGlBeginQuery(GLenum_GL_TIME_ELAPSED_EXT, queryId))
 	}
 
 	endQuery := func(id atom.ID) {
 		query := t.pendingQueries[len(t.pendingQueries)-1]
 		query.endId = id
 		query.state = queryPending
-		out.Write(atom.NoID, NewGlEndQuery(QueryTarget_GL_TIME_ELAPSED_EXT))
+		out.Write(atom.NoID, NewGlEndQuery(GLenum_GL_TIME_ELAPSED_EXT))
 	}
 
 	switch et {
@@ -262,7 +262,7 @@ func (t *timingInfoGpuTransform) appendQuery(id atom.ID, et eventType, out atom.
 // checkDisjoint retrieves the GPU disjoint timer flag, optionally saving its status to t.
 func (t *timingInfoGpuTransform) checkDisjoint(checkType disjointCheckType, out atom.Writer) {
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-		NewGlGetIntegerv(StateVariable_GL_GPU_DISJOINT_EXT, transientPointer).Replay(i, s, d, l, b)
+		NewGlGetIntegerv(GLenum_GL_GPU_DISJOINT_EXT, transientPointer).Replay(i, s, d, l, b)
 		b.Post(value.RemappedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
 			if err != nil {
 				return err
@@ -290,7 +290,7 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 			out.Write(atom.NoID, NewGlClientWaitSync(syncId, SyncFlags_GL_SYNC_FLUSH_COMMANDS_BIT, 0xFFFFFFFFFFFFFFFF, 0))
 			out.Write(atom.NoID, NewGlDeleteSync(syncId))
 		} else {
-			out.Write(atom.NoID, NewGlReadPixels(0, 0, 1, 1, BaseTexelFormat_GL_RGBA, TexelType_GL_UNSIGNED_BYTE, transientPointer))
+			out.Write(atom.NoID, NewGlReadPixels(0, 0, 1, 1, GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, transientPointer))
 		}
 		t.checkDisjoint(checkAndReset, out)
 	}
@@ -307,7 +307,7 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 		case gpuTimerQueryDisjointExt:
 			// GLES results retrieval is asynchronous, depends on result availability.
 			out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-				NewGlGetQueryObjectivEXT(query.queryId, QueryObjectParameter_GL_QUERY_RESULT_AVAILABLE, transientPointer).Replay(i, s, d, l, b)
+				NewGlGetQueryObjectivEXT(query.queryId, GLenum_GL_QUERY_RESULT_AVAILABLE, transientPointer).Replay(i, s, d, l, b)
 				b.Post(value.RemappedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
 					if err != nil {
 						return err
@@ -329,9 +329,9 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 		out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 			switch t.timerQueryType {
 			case gpuTimerQueryCore:
-				NewGlGetQueryObjectui64v(query.queryId, QueryObjectParameter_GL_QUERY_RESULT, transientPointer).Replay(i, s, d, l, b)
+				NewGlGetQueryObjectui64v(query.queryId, GLenum_GL_QUERY_RESULT, transientPointer).Replay(i, s, d, l, b)
 			case gpuTimerQueryExt, gpuTimerQueryDisjointExt:
-				NewGlGetQueryObjectui64vEXT(query.queryId, QueryObjectParameter_GL_QUERY_RESULT, transientPointer).Replay(i, s, d, l, b)
+				NewGlGetQueryObjectui64vEXT(query.queryId, GLenum_GL_QUERY_RESULT, transientPointer).Replay(i, s, d, l, b)
 			default:
 				return nil
 			}

@@ -173,11 +173,11 @@ func halfFloatOESToHalfFloatARB(device *service.Device) atom.Transformer {
 	// TODO: fallback to full GL_FLOAT unpacking if GL_ARB_half_float_vertex isn't supported.
 	return atom.Transform("HalfFloatOESToHalfFloatARB", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
-			cmd.Type == VertexAttribType_GL_HALF_FLOAT_OES {
+			cmd.Type == GLenum_GL_HALF_FLOAT_OES {
 			out.Write(id, &GlVertexAttribPointer{
 				Location:   cmd.Location,
 				Size:       cmd.Size,
-				Type:       VertexAttribType_GL_HALF_FLOAT_ARB,
+				Type:       GLenum_GL_HALF_FLOAT_ARB,
 				Normalized: cmd.Normalized,
 				Stride:     cmd.Stride,
 				Data:       cmd.Data,

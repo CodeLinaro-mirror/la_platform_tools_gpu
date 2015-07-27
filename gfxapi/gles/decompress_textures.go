@@ -66,12 +66,12 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 			out.Write(i, NewGlTexImage2D(
 				a.Target,
 				a.Level,
-				TexelFormat_GL_RGBA,
+				GLenum_GL_RGBA,
 				a.Width,
 				a.Height,
 				a.Border,
-				TexelFormat_GL_RGBA,
-				TexelType_GL_UNSIGNED_BYTE,
+				GLenum_GL_RGBA,
+				GLenum_GL_UNSIGNED_BYTE,
 				memory.Tmp,
 			).AddRead(memory.Tmp.Range(uint64(size)), id))
 
@@ -81,21 +81,21 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 	})
 }
 
-func getImageFormat(f CompressedTexelFormat) image.Format {
+func getImageFormat(f GLenum) image.Format {
 	switch f {
-	case CompressedTexelFormat_GL_ATC_RGB_AMD:
+	case GLenum_GL_ATC_RGB_AMD:
 		return image.ATC_RGB_AMD()
-	case CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
+	case GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
 		return image.ATC_RGBA_EXPLICIT_ALPHA_AMD()
-	case CompressedTexelFormat_GL_ETC1_RGB8_OES:
+	case GLenum_GL_ETC1_RGB8_OES:
 		return image.ETC1_RGB8_OES()
 	}
 	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
 }
 
 // getCompressedFormats returns the set of supported compressed texture formats for a given device
-func getCompressedFormats(device *service.Device) map[CompressedTexelFormat]struct{} {
-	ret := map[CompressedTexelFormat]struct{}{}
+func getCompressedFormats(device *service.Device) map[GLenum]struct{} {
+	ret := map[GLenum]struct{}{}
 	for _, extension := range strings.Split(device.Extensions, " ") {
 		for _, format := range getExtensionFormats(extension) {
 			ret[format] = struct{}{}
@@ -105,69 +105,69 @@ func getCompressedFormats(device *service.Device) map[CompressedTexelFormat]stru
 }
 
 // getExtensionFormats returns the list of compressed texture formats enabled by a given extension
-func getExtensionFormats(extension string) []CompressedTexelFormat {
+func getExtensionFormats(extension string) []GLenum {
 	switch extension {
 	case "GL_AMD_compressed_ATC_texture":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_ATC_RGB_AMD,
-			CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD,
-			CompressedTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD,
+		return []GLenum{
+			GLenum_GL_ATC_RGB_AMD,
+			GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD,
+			GLenum_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD,
 		}
 	case "GL_OES_compressed_ETC1_RGB8_texture":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_ETC1_RGB8_OES,
+		return []GLenum{
+			GLenum_GL_ETC1_RGB8_OES,
 		}
 	case "GL_EXT_texture_compression_dxt1":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+		return []GLenum{
+			GLenum_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
+			GLenum_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
 		}
 	case "GL_EXT_texture_compression_s3tc", "GL_NV_texture_compression_s3tc":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
+		return []GLenum{
+			GLenum_GL_COMPRESSED_RGB_S3TC_DXT1_EXT,
+			GLenum_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+			GLenum_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
+			GLenum_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
 		}
 	case "GL_KHR_texture_compression_astc_ldr":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR,
-			CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR,
+		return []GLenum{
+			GLenum_GL_COMPRESSED_RGBA_ASTC_4x4_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_5x4_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_5x5_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_6x5_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_6x6_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_8x5_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_8x6_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_8x8_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_10x5_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_10x6_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_10x8_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_10x10_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_12x10_KHR,
+			GLenum_GL_COMPRESSED_RGBA_ASTC_12x12_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR,
+			GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR,
 		}
 	case "GL_EXT_texture_compression_latc", "GL_NV_texture_compression_latc":
-		return []CompressedTexelFormat{
-			CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV,
-			CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV,
-			CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV,
-			CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV,
+		return []GLenum{
+			GLenum_GL_COMPRESSED_LUMINANCE_LATC1_NV,
+			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV,
+			GLenum_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV,
+			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV,
 		}
 	default:
-		return []CompressedTexelFormat{}
+		return []GLenum{}
 	}
 }

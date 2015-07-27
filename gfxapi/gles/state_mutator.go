@@ -95,37 +95,37 @@ func (ϟa *EglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -219,37 +219,37 @@ func (ϟa *GlXCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -315,37 +315,37 @@ func (ϟa *GlXCreateNewContext) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -449,37 +449,37 @@ func (ϟa *WglCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -545,37 +545,37 @@ func (ϟa *WglCreateContextAttribsARB) Mutate(ϟs *gfxapi.State, ϟd database.Da
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -659,37 +659,37 @@ func (ϟa *CGLCreateContext) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		s.Init()
 		return s
 	}() // Framebufferʳ
-	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(color_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_DEPTH_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(depth_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
-	backbuffer.Attachments[FramebufferAttachment_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
+	backbuffer.Attachments[GLenum_GL_STENCIL_ATTACHMENT] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
 		s.Object = uint32(stencil_id)
-		s.Type = FramebufferAttachmentType_GL_RENDERBUFFER
-		s.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		s.Type = GLenum_GL_RENDERBUFFER
+		s.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		return s
 	}()
 	ctx.Instances.Framebuffers[FramebufferId(uint32(0))] = backbuffer
-	ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
-	ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
-	ctx.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = FramebufferId(uint32(0))
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = uint32(4294967295)
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = uint32(4294967295)
+	ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT] = int32(4)
+	ctx.PixelStorage[GLenum_GL_UNPACK_ALIGNMENT] = int32(4)
 	for i := int32(int32(0)); i < int32(64); i++ {
 		ctx.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
@@ -750,7 +750,7 @@ func (ϟa *GlEnableClientState) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_11_result := context              // Contextʳ
 	ctx := GetContext_11_result                  // Contextʳ
-	ctx.Capabilities[Capability(ϟa.Type)] = true
+	ctx.Capabilities[ϟa.Type] = true
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = context, GetContext_11_result, ctx
 	return nil
@@ -762,7 +762,7 @@ func (ϟa *GlDisableClientState) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_12_result := context              // Contextʳ
 	ctx := GetContext_12_result                  // Contextʳ
-	ctx.Capabilities[Capability(ϟa.Type)] = false
+	ctx.Capabilities[ϟa.Type] = false
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = context, GetContext_12_result, ctx
 	return nil
@@ -1096,7 +1096,7 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	a.Normalized = ϟa.Normalized
 	a.Stride = ϟa.Stride
 	a.Pointer = ϟa.Data
-	a.Buffer = ctx.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER)
+	a.Buffer = ctx.BoundBuffers.Get(GLenum_GL_ARRAY_BUFFER)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = context, GetContext_25_result, ctx, a
 	return nil
@@ -1115,7 +1115,7 @@ func (ϟa *GlGetActiveAttrib) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟs)
 	}
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
-	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderAttribType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
 	return nil
 }
 func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -1132,7 +1132,7 @@ func (ϟa *GlGetActiveUniform) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟa.Name.Slice(uint64(0), uint64(256), ϟs).OnWrite(ϟs)
 	}
 	ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(ϟa.VectorCount.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
-	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ShaderUniformType(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
+	ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(GLenum(ϟa.Type.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)), ϟs)
 	return nil
 }
 func (ϟa *GlGetError) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -1162,9 +1162,9 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result int32) {
 		switch ϟa.Parameter {
-		case ShaderParameter_GL_SHADER_TYPE:
+		case GLenum_GL_SHADER_TYPE:
 			return int32(s.Type)
-		case ShaderParameter_GL_DELETE_STATUS:
+		case GLenum_GL_DELETE_STATUS:
 			return func() (result int32) {
 				switch s.Deletable {
 				case true:
@@ -1177,7 +1177,7 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 					return result
 				}
 			}()
-		case ShaderParameter_GL_COMPILE_STATUS:
+		case GLenum_GL_COMPILE_STATUS:
 			return func() (result int32) {
 				switch s.Compiled {
 				case true:
@@ -1190,9 +1190,9 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 					return result
 				}
 			}()
-		case ShaderParameter_GL_INFO_LOG_LENGTH:
+		case GLenum_GL_INFO_LOG_LENGTH:
 			return int32(s.InfoLog.Count)
-		case ShaderParameter_GL_SHADER_SOURCE_LENGTH:
+		case GLenum_GL_SHADER_SOURCE_LENGTH:
 			return int32(len(s.Source))
 		default:
 			// TODO: better unmatched handling
@@ -1241,24 +1241,24 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
-	case TextureParameter_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = TextureFilterMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = TextureFilterMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_WRAP_S:
-		t.WrapS = TextureWrapMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_WRAP_T:
-		t.WrapT = TextureWrapMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT:
+	case GLenum_GL_TEXTURE_MAG_FILTER:
+		t.MagFilter = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_MIN_FILTER:
+		t.MinFilter = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_WRAP_S:
+		t.WrapS = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_WRAP_T:
+		t.WrapT = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
 		t.MaxAnisotropy = float32(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = TexelComponent(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_R:
+		t.SwizzleR = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_G:
+		t.SwizzleG = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_B:
+		t.SwizzleB = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_A:
+		t.SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -1277,24 +1277,24 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(ϟa.Target) // TextureId
 	t := ctx.Instances.Textures.Get(id)                              // Textureʳ
 	switch ϟa.Parameter {
-	case TextureParameter_GL_TEXTURE_MAG_FILTER:
-		t.MagFilter = TextureFilterMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_MIN_FILTER:
-		t.MinFilter = TextureFilterMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_WRAP_S:
-		t.WrapS = TextureWrapMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_WRAP_T:
-		t.WrapT = TextureWrapMode(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT:
+	case GLenum_GL_TEXTURE_MAG_FILTER:
+		t.MagFilter = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_MIN_FILTER:
+		t.MinFilter = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_WRAP_S:
+		t.WrapS = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_WRAP_T:
+		t.WrapT = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
 		t.MaxAnisotropy = ϟa.Value
-	case TextureParameter_GL_TEXTURE_SWIZZLE_R:
-		t.SwizzleR = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_G:
-		t.SwizzleG = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_B:
-		t.SwizzleB = TexelComponent(ϟa.Value)
-	case TextureParameter_GL_TEXTURE_SWIZZLE_A:
-		t.SwizzleA = TexelComponent(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_R:
+		t.SwizzleR = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_G:
+		t.SwizzleG = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_B:
+		t.SwizzleB = GLenum(ϟa.Value)
+	case GLenum_GL_TEXTURE_SWIZZLE_A:
+		t.SwizzleA = GLenum(ϟa.Value)
 	default:
 		v := ϟa.Parameter
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -1315,23 +1315,23 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result int32) {
 		switch ϟa.Parameter {
-		case TextureParameter_GL_TEXTURE_MAG_FILTER:
+		case GLenum_GL_TEXTURE_MAG_FILTER:
 			return int32(t.MagFilter)
-		case TextureParameter_GL_TEXTURE_MIN_FILTER:
+		case GLenum_GL_TEXTURE_MIN_FILTER:
 			return int32(t.MinFilter)
-		case TextureParameter_GL_TEXTURE_WRAP_S:
+		case GLenum_GL_TEXTURE_WRAP_S:
 			return int32(t.WrapS)
-		case TextureParameter_GL_TEXTURE_WRAP_T:
+		case GLenum_GL_TEXTURE_WRAP_T:
 			return int32(t.WrapT)
-		case TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT:
+		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
 			return int32(t.MaxAnisotropy)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_R:
+		case GLenum_GL_TEXTURE_SWIZZLE_R:
 			return int32(t.SwizzleR)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_G:
+		case GLenum_GL_TEXTURE_SWIZZLE_G:
 			return int32(t.SwizzleG)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_B:
+		case GLenum_GL_TEXTURE_SWIZZLE_B:
 			return int32(t.SwizzleB)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_A:
+		case GLenum_GL_TEXTURE_SWIZZLE_A:
 			return int32(t.SwizzleA)
 		default:
 			// TODO: better unmatched handling
@@ -1354,23 +1354,23 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *gfxapi.State, ϟd database.Database,
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result float32) {
 		switch ϟa.Parameter {
-		case TextureParameter_GL_TEXTURE_MAG_FILTER:
+		case GLenum_GL_TEXTURE_MAG_FILTER:
 			return float32(t.MagFilter)
-		case TextureParameter_GL_TEXTURE_MIN_FILTER:
+		case GLenum_GL_TEXTURE_MIN_FILTER:
 			return float32(t.MinFilter)
-		case TextureParameter_GL_TEXTURE_WRAP_S:
+		case GLenum_GL_TEXTURE_WRAP_S:
 			return float32(t.WrapS)
-		case TextureParameter_GL_TEXTURE_WRAP_T:
+		case GLenum_GL_TEXTURE_WRAP_T:
 			return float32(t.WrapT)
-		case TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT:
+		case GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT:
 			return t.MaxAnisotropy
-		case TextureParameter_GL_TEXTURE_SWIZZLE_R:
+		case GLenum_GL_TEXTURE_SWIZZLE_R:
 			return float32(t.SwizzleR)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_G:
+		case GLenum_GL_TEXTURE_SWIZZLE_G:
 			return float32(t.SwizzleG)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_B:
+		case GLenum_GL_TEXTURE_SWIZZLE_B:
 			return float32(t.SwizzleB)
-		case TextureParameter_GL_TEXTURE_SWIZZLE_A:
+		case GLenum_GL_TEXTURE_SWIZZLE_A:
 			return float32(t.SwizzleA)
 		default:
 			// TODO: better unmatched handling
@@ -1393,7 +1393,7 @@ func (ϟa *GlUniform1i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT
+	uniform.Type = GLenum_GL_INT
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_32_result, ctx, v, program, uniform
@@ -1411,7 +1411,7 @@ func (ϟa *GlUniform2i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec2i{Elements: [2]int32{ϟa.Value0, ϟa.Value1}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC2
+	uniform.Type = GLenum_GL_INT_VEC2
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_33_result, ctx, v, program, uniform
@@ -1429,7 +1429,7 @@ func (ϟa *GlUniform3i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec3i{Elements: [3]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC3
+	uniform.Type = GLenum_GL_INT_VEC3
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_34_result, ctx, v, program, uniform
@@ -1447,7 +1447,7 @@ func (ϟa *GlUniform4i) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec4i{Elements: [4]int32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC4
+	uniform.Type = GLenum_GL_INT_VEC4
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_35_result, ctx, v, program, uniform
@@ -1463,7 +1463,7 @@ func (ϟa *GlUniform1iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // S32ˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
-	uniform.Type = ShaderUniformType_GL_INT
+	uniform.Type = GLenum_GL_INT
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1480,7 +1480,7 @@ func (ϟa *GlUniform2iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec2iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2iˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC2
+	uniform.Type = GLenum_GL_INT_VEC2
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1497,7 +1497,7 @@ func (ϟa *GlUniform3iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec3iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3iˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC3
+	uniform.Type = GLenum_GL_INT_VEC3
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1514,7 +1514,7 @@ func (ϟa *GlUniform4iv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec4iᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4iˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_INT_VEC4
+	uniform.Type = GLenum_GL_INT_VEC4
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1533,7 +1533,7 @@ func (ϟa *GlUniform1f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(ϟa.Value, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT
+	uniform.Type = GLenum_GL_FLOAT
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_40_result, ctx, v, program, uniform
@@ -1551,7 +1551,7 @@ func (ϟa *GlUniform2f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec2f{Elements: [2]float32{ϟa.Value0, ϟa.Value1}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
+	uniform.Type = GLenum_GL_FLOAT_VEC2
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_41_result, ctx, v, program, uniform
@@ -1569,7 +1569,7 @@ func (ϟa *GlUniform3f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec3f{Elements: [3]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
+	uniform.Type = GLenum_GL_FLOAT_VEC3
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_42_result, ctx, v, program, uniform
@@ -1587,7 +1587,7 @@ func (ϟa *GlUniform4f) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	v.Index(uint64(0), ϟs).Write(Vec4f{Elements: [4]float32{ϟa.Value0, ϟa.Value1, ϟa.Value2, ϟa.Value3}}, ϟs)
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram) // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)            // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
+	uniform.Type = GLenum_GL_FLOAT_VEC4
 	uniform.Value = AsU8ˢ(v, ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	_, _, _, _, _, _ = context, GetContext_43_result, ctx, v, program, uniform
@@ -1603,7 +1603,7 @@ func (ϟa *GlUniform1fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := ϟa.Values.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // F32ˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)      // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                 // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT
+	uniform.Type = GLenum_GL_FLOAT
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1620,7 +1620,7 @@ func (ϟa *GlUniform2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec2fˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
+	uniform.Type = GLenum_GL_FLOAT_VEC2
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1637,7 +1637,7 @@ func (ϟa *GlUniform3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec3fˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
+	uniform.Type = GLenum_GL_FLOAT_VEC3
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1654,7 +1654,7 @@ func (ϟa *GlUniform4fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	v := Vec4fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Vec4fˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
+	uniform.Type = GLenum_GL_FLOAT_VEC4
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1671,7 +1671,7 @@ func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	v := Mat2fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat2fˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_MAT2
+	uniform.Type = GLenum_GL_FLOAT_MAT2
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1688,7 +1688,7 @@ func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	v := Mat3fᵖ(ϟa.Values).Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Mat3fˢ
 	program := ctx.Instances.Programs.Get(ctx.BoundProgram)              // Programʳ
 	uniform := program.Uniforms.Get(ϟa.Location)                         // Uniform
-	uniform.Type = ShaderUniformType_GL_FLOAT_MAT3
+	uniform.Type = GLenum_GL_FLOAT_MAT3
 	uniform.Value = AsU8ˢ(v, ϟs).Clone(ϟs)
 	program.Uniforms[ϟa.Location] = uniform
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -1853,8 +1853,8 @@ func (ϟa *GlStencilMask) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_55_result := context              // Contextʳ
 	ctx := GetContext_55_result                  // Contextʳ
-	ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = ϟa.Mask
-	ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = ϟa.Mask
+	ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = ϟa.Mask
+	ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = ϟa.Mask
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = context, GetContext_55_result, ctx
 	return nil
@@ -1867,13 +1867,13 @@ func (ϟa *GlStencilMaskSeparate) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	GetContext_56_result := context              // Contextʳ
 	ctx := GetContext_56_result                  // Contextʳ
 	switch ϟa.Face {
-	case FaceMode_GL_FRONT:
-		ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = ϟa.Mask
-	case FaceMode_GL_BACK:
-		ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = ϟa.Mask
-	case FaceMode_GL_FRONT_AND_BACK:
-		ctx.Rasterizing.StencilMask[FaceMode_GL_FRONT] = ϟa.Mask
-		ctx.Rasterizing.StencilMask[FaceMode_GL_BACK] = ϟa.Mask
+	case GLenum_GL_FRONT:
+		ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = ϟa.Mask
+	case GLenum_GL_BACK:
+		ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = ϟa.Mask
+	case GLenum_GL_FRONT_AND_BACK:
+		ctx.Rasterizing.StencilMask[GLenum_GL_FRONT] = ϟa.Mask
+		ctx.Rasterizing.StencilMask[GLenum_GL_BACK] = ϟa.Mask
 	default:
 		v := ϟa.Face
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
@@ -2039,20 +2039,20 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_65_result := context              // Contextʳ
 	ctx := GetContext_65_result                  // Contextʳ
 	switch ϟa.Target {
-	case TextureImageTarget_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                // Textureʳ
+	case GLenum_GL_TEXTURE_2D:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
-			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
+			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 			}
 		} else {
@@ -2060,32 +2060,32 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		}
 		t.Texture2D[ϟa.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _ = id, t, l
-	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                      // Textureʳ
+	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
-			if (ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
+			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 			}
 		} else {
 			l.Data = MakeU8ˢ(uint64(l.Size), ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
-		cube.Faces[CubeMapImageTarget(ϟa.Target)] = l
+		cube.Faces[ϟa.Target] = l
 		t.Cubemap[ϟa.Level] = cube
 		t.Kind = TextureKind_CUBEMAP
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -2103,45 +2103,45 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_66_result := context              // Contextʳ
 	ctx := GetContext_66_result                  // Contextʳ
 	switch ϟa.Target {
-	case TextureImageTarget_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                // Textureʳ
+	case GLenum_GL_TEXTURE_2D:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _ = id, t, l
-	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                      // Textureʳ
+	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
-		cube.Faces[CubeMapImageTarget(ϟa.Target)] = l
+		cube.Faces[ϟa.Target] = l
 		t.Cubemap[ϟa.Level] = cube
 		t.Kind = TextureKind_CUBEMAP
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -2173,45 +2173,45 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	GetContext_67_result := context              // Contextʳ
 	ctx := GetContext_67_result                  // Contextʳ
 	switch ϟa.Target {
-	case TextureImageTarget_GL_TEXTURE_2D:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                // Textureʳ
+	case GLenum_GL_TEXTURE_2D:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                         // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = uint32(ϟa.ImageSize)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		t.Texture2D[ϟa.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _ = id, t, l
-	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                      // Textureʳ
+	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+		id := ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP) // TextureId
+		t := ctx.Instances.Textures.Get(id)                                               // Textureʳ
 		l := func() Image {
 			s := Image{}
 			s.Init()
 			s.Width = ϟa.Width
 			s.Height = ϟa.Height
 			s.Size = uint32(ϟa.ImageSize)
-			s.Format = ImageTexelFormat(ϟa.Format)
+			s.Format = ϟa.Format
 			return s
 		}() // Image
-		if ((ctx.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
+		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟs)
 		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
-		cube.Faces[CubeMapImageTarget(ϟa.Target)] = l
+		cube.Faces[ϟa.Target] = l
 		t.Cubemap[ϟa.Level] = cube
 		t.Kind = TextureKind_CUBEMAP
-		t.Format = ImageTexelFormat(ϟa.Format)
+		t.Format = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -2240,7 +2240,7 @@ func (ϟa *GlReadPixels) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Data.Slice(uint64(uint32(0)), uint64(externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), TexelFormat(ϟa.Format), ϟa.Type)), ϟs).OnWrite(ϟs)
+	ϟa.Data.Slice(uint64(uint32(0)), uint64(externs{ϟs, ϟd, ϟl}.imageSize(uint32(ϟa.Width), uint32(ϟa.Height), ϟa.Format, ϟa.Type)), ϟs).OnWrite(ϟs)
 	return nil
 }
 func (ϟa *GlGenFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -2279,9 +2279,9 @@ func (ϟa *GlBindFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 			return s
 		}()
 	}
-	if (ϟa.Target) == (FramebufferTarget_GL_FRAMEBUFFER) {
-		ctx.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = ϟa.Framebuffer
-		ctx.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = ϟa.Framebuffer
+	if (ϟa.Target) == (GLenum_GL_FRAMEBUFFER) {
+		ctx.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER] = ϟa.Framebuffer
+		ctx.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER] = ϟa.Framebuffer
 	} else {
 		ctx.BoundFramebuffers[ϟa.Target] = ϟa.Framebuffer
 	}
@@ -2420,11 +2420,11 @@ func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Values.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result int32) {
 		switch ϟa.Parameter {
-		case RenderbufferParameter_GL_RENDERBUFFER_WIDTH:
+		case GLenum_GL_RENDERBUFFER_WIDTH:
 			return rb.Width
-		case RenderbufferParameter_GL_RENDERBUFFER_HEIGHT:
+		case GLenum_GL_RENDERBUFFER_HEIGHT:
 			return rb.Height
-		case RenderbufferParameter_GL_RENDERBUFFER_INTERNAL_FORMAT:
+		case GLenum_GL_RENDERBUFFER_INTERNAL_FORMAT:
 			return int32(rb.Format)
 		default:
 			// TODO: better unmatched handling
@@ -2550,9 +2550,9 @@ func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result int32) {
 		switch ϟa.Parameter {
-		case BufferParameter_GL_BUFFER_SIZE:
+		case GLenum_GL_BUFFER_SIZE:
 			return b.Size
-		case BufferParameter_GL_BUFFER_USAGE:
+		case GLenum_GL_BUFFER_USAGE:
 			return int32(b.Usage)
 		default:
 			// TODO: better unmatched handling
@@ -2921,7 +2921,7 @@ func (ϟa *GlClear) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	if (ClearMask_GL_COLOR_BUFFER_BIT)&(ϟa.Mask) != 0 {
+	if (GLbitfield_GL_COLOR_BUFFER_BIT)&(ϟa.Mask) != 0 {
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -2995,31 +2995,31 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Dat
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_110_result := context             // Contextʳ
 	ctx := GetContext_110_result                 // Contextʳ
-	target := func() (result FramebufferTarget) {
+	target := func() (result GLenum) {
 		switch ϟa.FramebufferTarget {
-		case FramebufferTarget_GL_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_READ_FRAMEBUFFER:
-			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		case GLenum_GL_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_DRAW_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_READ_FRAMEBUFFER:
+			return GLenum_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.FramebufferTarget, ϟa))
 			return result
 		}
-	}() // FramebufferTarget
+	}() // GLenum
 	framebufferId := ctx.BoundFramebuffers.Get(target)                  // FramebufferId
 	framebuffer := ctx.Instances.Framebuffers.Get(framebufferId)        // Framebufferʳ
 	attachment := framebuffer.Attachments.Get(ϟa.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.Renderbuffer) == (RenderbufferId(uint32(0))) {
-		attachment.Type = FramebufferAttachmentType_GL_NONE
+		attachment.Type = GLenum_GL_NONE
 	} else {
-		attachment.Type = FramebufferAttachmentType_GL_RENDERBUFFER
+		attachment.Type = GLenum_GL_RENDERBUFFER
 	}
 	attachment.Object = uint32(ϟa.Renderbuffer)
 	attachment.TextureLevel = int32(0)
-	attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+	attachment.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	framebuffer.Attachments[ϟa.FramebufferAttachment] = attachment
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _ = context, GetContext_110_result, ctx, target, framebufferId, framebuffer, attachment
@@ -3032,48 +3032,48 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_111_result := context             // Contextʳ
 	ctx := GetContext_111_result                 // Contextʳ
-	target := func() (result FramebufferTarget) {
+	target := func() (result GLenum) {
 		switch ϟa.FramebufferTarget {
-		case FramebufferTarget_GL_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_READ_FRAMEBUFFER:
-			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		case GLenum_GL_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_DRAW_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_READ_FRAMEBUFFER:
+			return GLenum_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.FramebufferTarget, ϟa))
 			return result
 		}
-	}() // FramebufferTarget
+	}() // GLenum
 	framebufferId := ctx.BoundFramebuffers.Get(target)                  // FramebufferId
 	framebuffer := ctx.Instances.Framebuffers.Get(framebufferId)        // Framebufferʳ
 	attachment := framebuffer.Attachments.Get(ϟa.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.Texture) == (TextureId(uint32(0))) {
-		attachment.Type = FramebufferAttachmentType_GL_NONE
+		attachment.Type = GLenum_GL_NONE
 		attachment.Object = uint32(0)
 		attachment.TextureLevel = int32(0)
-		attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+		attachment.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	} else {
-		attachment.Type = FramebufferAttachmentType_GL_TEXTURE
+		attachment.Type = GLenum_GL_TEXTURE
 		attachment.Object = uint32(ϟa.Texture)
 		attachment.TextureLevel = ϟa.Level
-		attachment.CubeMapFace = func() (result CubeMapImageTarget) {
+		attachment.CubeMapFace = func() (result GLenum) {
 			switch ϟa.TextureTarget {
-			case TextureImageTarget_GL_TEXTURE_2D:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
-			case TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+			case GLenum_GL_TEXTURE_2D:
+				return GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+			case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+				return GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
+			case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+				return GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y
+			case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+				return GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+			case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+				return GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X
+			case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+				return GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
+			case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+				return GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 			default:
 				// TODO: better unmatched handling
 				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.TextureTarget, ϟa))
@@ -3093,33 +3093,33 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *gfxapi.State, ϟd 
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_112_result := context             // Contextʳ
 	ctx := GetContext_112_result                 // Contextʳ
-	target := func() (result FramebufferTarget) {
+	target := func() (result GLenum) {
 		switch ϟa.FramebufferTarget {
-		case FramebufferTarget_GL_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
-			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
-		case FramebufferTarget_GL_READ_FRAMEBUFFER:
-			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		case GLenum_GL_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_DRAW_FRAMEBUFFER:
+			return GLenum_GL_DRAW_FRAMEBUFFER
+		case GLenum_GL_READ_FRAMEBUFFER:
+			return GLenum_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.FramebufferTarget, ϟa))
 			return result
 		}
-	}() // FramebufferTarget
+	}() // GLenum
 	framebufferId := ctx.BoundFramebuffers.Get(target)           // FramebufferId
 	framebuffer := ctx.Instances.Framebuffers.Get(framebufferId) // Framebufferʳ
 	a := framebuffer.Attachments.Get(ϟa.Attachment)              // FramebufferAttachmentInfo
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Value.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(func() (result int32) {
 		switch ϟa.Parameter {
-		case FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:
+		case GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:
 			return int32(a.Type)
-		case FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME:
+		case GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME:
 			return int32(a.Object)
-		case FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL:
+		case GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL:
 			return a.TextureLevel
-		case FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE:
+		case GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE:
 			return int32(a.CubeMapFace)
 		default:
 			// TODO: better unmatched handling
@@ -3134,11 +3134,11 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                     // Contextʳ
-	GetContext_113_result := context                                 // Contextʳ
-	ctx := GetContext_113_result                                     // Contextʳ
-	count := uint32(ϟa.ElementCount)                                 // u32
-	id := ctx.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER) // BufferId
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)               // Contextʳ
+	GetContext_113_result := context                           // Contextʳ
+	ctx := GetContext_113_result                               // Contextʳ
+	count := uint32(ϟa.ElementCount)                           // u32
+	id := ctx.BoundBuffers.Get(GLenum_GL_ELEMENT_ARRAY_BUFFER) // BufferId
 	if (id) != (BufferId(uint32(0))) {
 		index_data := ctx.Instances.Buffers.Get(id).Data                                                   // U8ˢ
 		offset := uint32(uint64(ϟa.Indices.Address))                                                       // u32
@@ -3150,24 +3150,24 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		for i := int32(int32(0)); i < int32(len(ReadVertexArrays_114_ctx.VertexAttributeArrays)); i++ {
 			arr := ReadVertexArrays_114_ctx.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayʳ
 			if (arr.Enabled) && ((arr.Buffer) == (BufferId(uint32(0)))) {
-				vertexAttribTypeSize_115_t := arr.Type // VertexAttribType
+				vertexAttribTypeSize_115_t := arr.Type // GLenum
 				vertexAttribTypeSize_115_result := func() (result uint32) {
 					switch vertexAttribTypeSize_115_t {
-					case VertexAttribType_GL_BYTE:
+					case GLenum_GL_BYTE:
 						return uint32(1)
-					case VertexAttribType_GL_UNSIGNED_BYTE:
+					case GLenum_GL_UNSIGNED_BYTE:
 						return uint32(1)
-					case VertexAttribType_GL_SHORT:
+					case GLenum_GL_SHORT:
 						return uint32(2)
-					case VertexAttribType_GL_UNSIGNED_SHORT:
+					case GLenum_GL_UNSIGNED_SHORT:
 						return uint32(2)
-					case VertexAttribType_GL_FIXED:
+					case GLenum_GL_FIXED:
 						return uint32(4)
-					case VertexAttribType_GL_FLOAT:
+					case GLenum_GL_FLOAT:
 						return uint32(4)
-					case VertexAttribType_GL_HALF_FLOAT_ARB:
+					case GLenum_GL_HALF_FLOAT_ARB:
 						return uint32(2)
-					case VertexAttribType_GL_HALF_FLOAT_OES:
+					case GLenum_GL_HALF_FLOAT_OES:
 						return uint32(2)
 					default:
 						// TODO: better unmatched handling
@@ -3208,24 +3208,24 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		for i := int32(int32(0)); i < int32(len(ReadVertexArrays_116_ctx.VertexAttributeArrays)); i++ {
 			arr := ReadVertexArrays_116_ctx.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayʳ
 			if (arr.Enabled) && ((arr.Buffer) == (BufferId(uint32(0)))) {
-				vertexAttribTypeSize_117_t := arr.Type // VertexAttribType
+				vertexAttribTypeSize_117_t := arr.Type // GLenum
 				vertexAttribTypeSize_117_result := func() (result uint32) {
 					switch vertexAttribTypeSize_117_t {
-					case VertexAttribType_GL_BYTE:
+					case GLenum_GL_BYTE:
 						return uint32(1)
-					case VertexAttribType_GL_UNSIGNED_BYTE:
+					case GLenum_GL_UNSIGNED_BYTE:
 						return uint32(1)
-					case VertexAttribType_GL_SHORT:
+					case GLenum_GL_SHORT:
 						return uint32(2)
-					case VertexAttribType_GL_UNSIGNED_SHORT:
+					case GLenum_GL_UNSIGNED_SHORT:
 						return uint32(2)
-					case VertexAttribType_GL_FIXED:
+					case GLenum_GL_FIXED:
 						return uint32(4)
-					case VertexAttribType_GL_FLOAT:
+					case GLenum_GL_FLOAT:
 						return uint32(4)
-					case VertexAttribType_GL_HALF_FLOAT_ARB:
+					case GLenum_GL_HALF_FLOAT_ARB:
 						return uint32(2)
-					case VertexAttribType_GL_HALF_FLOAT_OES:
+					case GLenum_GL_HALF_FLOAT_OES:
 						return uint32(2)
 					default:
 						// TODO: better unmatched handling
@@ -3255,14 +3255,14 @@ func (ϟa *GlDrawElements) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 			}
 			_ = arr
 		}
-		IndexSize_118_indices_type := ϟa.IndicesType // IndicesType
+		IndexSize_118_indices_type := ϟa.IndicesType // GLenum
 		IndexSize_118_result := func() (result uint32) {
 			switch IndexSize_118_indices_type {
-			case IndicesType_GL_UNSIGNED_BYTE:
+			case GLenum_GL_UNSIGNED_BYTE:
 				return uint32(1)
-			case IndicesType_GL_UNSIGNED_SHORT:
+			case GLenum_GL_UNSIGNED_SHORT:
 				return uint32(2)
-			case IndicesType_GL_UNSIGNED_INT:
+			case GLenum_GL_UNSIGNED_INT:
 				return uint32(4)
 			default:
 				// TODO: better unmatched handling
@@ -3291,24 +3291,24 @@ func (ϟa *GlDrawArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	for i := int32(int32(0)); i < int32(len(ReadVertexArrays_120_ctx.VertexAttributeArrays)); i++ {
 		arr := ReadVertexArrays_120_ctx.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayʳ
 		if (arr.Enabled) && ((arr.Buffer) == (BufferId(uint32(0)))) {
-			vertexAttribTypeSize_121_t := arr.Type // VertexAttribType
+			vertexAttribTypeSize_121_t := arr.Type // GLenum
 			vertexAttribTypeSize_121_result := func() (result uint32) {
 				switch vertexAttribTypeSize_121_t {
-				case VertexAttribType_GL_BYTE:
+				case GLenum_GL_BYTE:
 					return uint32(1)
-				case VertexAttribType_GL_UNSIGNED_BYTE:
+				case GLenum_GL_UNSIGNED_BYTE:
 					return uint32(1)
-				case VertexAttribType_GL_SHORT:
+				case GLenum_GL_SHORT:
 					return uint32(2)
-				case VertexAttribType_GL_UNSIGNED_SHORT:
+				case GLenum_GL_UNSIGNED_SHORT:
 					return uint32(2)
-				case VertexAttribType_GL_FIXED:
+				case GLenum_GL_FIXED:
 					return uint32(4)
-				case VertexAttribType_GL_FLOAT:
+				case GLenum_GL_FLOAT:
 					return uint32(4)
-				case VertexAttribType_GL_HALF_FLOAT_ARB:
+				case GLenum_GL_HALF_FLOAT_ARB:
 					return uint32(2)
-				case VertexAttribType_GL_HALF_FLOAT_OES:
+				case GLenum_GL_HALF_FLOAT_OES:
 					return uint32(2)
 				default:
 					// TODO: better unmatched handling
@@ -3366,36 +3366,36 @@ func (ϟa *GlGetBooleanv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ctx := GetContext_122_result                                                                        // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
-	case StateVariable_GL_BLEND:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_BLEND), ϟs)
-	case StateVariable_GL_CULL_FACE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_CULL_FACE), ϟs)
-	case StateVariable_GL_DEPTH_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_DEPTH_TEST), ϟs)
-	case StateVariable_GL_DITHER:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_DITHER), ϟs)
-	case StateVariable_GL_POLYGON_OFFSET_FILL:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_POLYGON_OFFSET_FILL), ϟs)
-	case StateVariable_GL_SAMPLE_ALPHA_TO_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_SAMPLE_ALPHA_TO_COVERAGE), ϟs)
-	case StateVariable_GL_SAMPLE_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_SAMPLE_COVERAGE), ϟs)
-	case StateVariable_GL_SCISSOR_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_SCISSOR_TEST), ϟs)
-	case StateVariable_GL_STENCIL_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(Capability_GL_STENCIL_TEST), ϟs)
-	case StateVariable_GL_DEPTH_WRITEMASK:
+	case GLenum_GL_BLEND:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_BLEND), ϟs)
+	case GLenum_GL_CULL_FACE:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_CULL_FACE), ϟs)
+	case GLenum_GL_DEPTH_TEST:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DEPTH_TEST), ϟs)
+	case GLenum_GL_DITHER:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DITHER), ϟs)
+	case GLenum_GL_POLYGON_OFFSET_FILL:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_POLYGON_OFFSET_FILL), ϟs)
+	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE), ϟs)
+	case GLenum_GL_SAMPLE_COVERAGE:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_COVERAGE), ϟs)
+	case GLenum_GL_SCISSOR_TEST:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SCISSOR_TEST), ϟs)
+	case GLenum_GL_STENCIL_TEST:
+		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_STENCIL_TEST), ϟs)
+	case GLenum_GL_DEPTH_WRITEMASK:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.DepthMask, ϟs)
-	case StateVariable_GL_COLOR_WRITEMASK:
+	case GLenum_GL_COLOR_WRITEMASK:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.ColorMaskRed, ϟs)
 		v.Index(uint64(1), ϟs).Write(ctx.Rasterizing.ColorMaskGreen, ϟs)
 		v.Index(uint64(2), ϟs).Write(ctx.Rasterizing.ColorMaskBlue, ϟs)
 		v.Index(uint64(3), ϟs).Write(ctx.Rasterizing.ColorMaskAlpha, ϟs)
-	case StateVariable_GL_SAMPLE_COVERAGE_INVERT:
+	case GLenum_GL_SAMPLE_COVERAGE_INVERT:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.SampleCoverageInvert, ϟs)
-	case StateVariable_GL_SHADER_COMPILER:
+	case GLenum_GL_SHADER_COMPILER:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
+	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	default:
 		v := ϟa.Param
@@ -3414,31 +3414,31 @@ func (ϟa *GlGetFloatv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ctx := GetContext_123_result                                                                        // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
-	case StateVariable_GL_DEPTH_RANGE:
+	case GLenum_GL_DEPTH_RANGE:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.DepthNear, ϟs)
 		v.Index(uint64(1), ϟs).Write(ctx.Rasterizing.DepthFar, ϟs)
-	case StateVariable_GL_LINE_WIDTH:
+	case GLenum_GL_LINE_WIDTH:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.LineWidth, ϟs)
-	case StateVariable_GL_POLYGON_OFFSET_FACTOR:
+	case GLenum_GL_POLYGON_OFFSET_FACTOR:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.PolygonOffsetFactor, ϟs)
-	case StateVariable_GL_POLYGON_OFFSET_UNITS:
+	case GLenum_GL_POLYGON_OFFSET_UNITS:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.PolygonOffsetUnits, ϟs)
-	case StateVariable_GL_SAMPLE_COVERAGE_VALUE:
+	case GLenum_GL_SAMPLE_COVERAGE_VALUE:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.SampleCoverageValue, ϟs)
-	case StateVariable_GL_COLOR_CLEAR_VALUE:
+	case GLenum_GL_COLOR_CLEAR_VALUE:
 		v.Index(uint64(0), ϟs).Write(ctx.Clearing.ClearColor.Red, ϟs)
 		v.Index(uint64(1), ϟs).Write(ctx.Clearing.ClearColor.Green, ϟs)
 		v.Index(uint64(2), ϟs).Write(ctx.Clearing.ClearColor.Blue, ϟs)
 		v.Index(uint64(3), ϟs).Write(ctx.Clearing.ClearColor.Alpha, ϟs)
-	case StateVariable_GL_DEPTH_CLEAR_VALUE:
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
 		v.Index(uint64(0), ϟs).Write(ctx.Clearing.ClearDepth, ϟs)
-	case StateVariable_GL_ALIASED_LINE_WIDTH_RANGE:
+	case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_ALIASED_POINT_SIZE_RANGE:
+	case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 		v.Index(uint64(1), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
+	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	default:
 		v := ϟa.Param
@@ -3457,150 +3457,150 @@ func (ϟa *GlGetIntegerv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ctx := GetContext_124_result                                                                        // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
-	case StateVariable_GL_ACTIVE_TEXTURE:
+	case GLenum_GL_ACTIVE_TEXTURE:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.ActiveTextureUnit), ϟs)
-	case StateVariable_GL_ARRAY_BUFFER_BINDING:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER)), ϟs)
-	case StateVariable_GL_ELEMENT_ARRAY_BUFFER_BINDING:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER)), ϟs)
-	case StateVariable_GL_BLEND_SRC_ALPHA:
+	case GLenum_GL_ARRAY_BUFFER_BINDING:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundBuffers.Get(GLenum_GL_ARRAY_BUFFER)), ϟs)
+	case GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundBuffers.Get(GLenum_GL_ELEMENT_ARRAY_BUFFER)), ϟs)
+	case GLenum_GL_BLEND_SRC_ALPHA:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.SrcAlphaBlendFactor), ϟs)
-	case StateVariable_GL_BLEND_SRC_RGB:
+	case GLenum_GL_BLEND_SRC_RGB:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.SrcRgbBlendFactor), ϟs)
-	case StateVariable_GL_BLEND_DST_ALPHA:
+	case GLenum_GL_BLEND_DST_ALPHA:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.DstAlphaBlendFactor), ϟs)
-	case StateVariable_GL_BLEND_DST_RGB:
+	case GLenum_GL_BLEND_DST_RGB:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.DstRgbBlendFactor), ϟs)
-	case StateVariable_GL_BLEND_EQUATION_RGB:
+	case GLenum_GL_BLEND_EQUATION_RGB:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.BlendEquationRgb), ϟs)
-	case StateVariable_GL_BLEND_EQUATION_ALPHA:
+	case GLenum_GL_BLEND_EQUATION_ALPHA:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.BlendEquationAlpha), ϟs)
-	case StateVariable_GL_BLEND_COLOR:
+	case GLenum_GL_BLEND_COLOR:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Blending.BlendColor.Red), ϟs)
 		v.Index(uint64(1), ϟs).Write(int32(ctx.Blending.BlendColor.Green), ϟs)
 		v.Index(uint64(2), ϟs).Write(int32(ctx.Blending.BlendColor.Blue), ϟs)
 		v.Index(uint64(3), ϟs).Write(int32(ctx.Blending.BlendColor.Alpha), ϟs)
-	case StateVariable_GL_DEPTH_FUNC:
+	case GLenum_GL_DEPTH_FUNC:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.DepthTestFunction), ϟs)
-	case StateVariable_GL_DEPTH_CLEAR_VALUE:
+	case GLenum_GL_DEPTH_CLEAR_VALUE:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Clearing.ClearDepth), ϟs)
-	case StateVariable_GL_STENCIL_WRITEMASK:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.StencilMask.Get(FaceMode_GL_FRONT)), ϟs)
-	case StateVariable_GL_STENCIL_BACK_WRITEMASK:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.StencilMask.Get(FaceMode_GL_BACK)), ϟs)
-	case StateVariable_GL_VIEWPORT:
+	case GLenum_GL_STENCIL_WRITEMASK:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.StencilMask.Get(GLenum_GL_FRONT)), ϟs)
+	case GLenum_GL_STENCIL_BACK_WRITEMASK:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.StencilMask.Get(GLenum_GL_BACK)), ϟs)
+	case GLenum_GL_VIEWPORT:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.Viewport.X, ϟs)
 		v.Index(uint64(1), ϟs).Write(ctx.Rasterizing.Viewport.Y, ϟs)
 		v.Index(uint64(2), ϟs).Write(ctx.Rasterizing.Viewport.Width, ϟs)
 		v.Index(uint64(3), ϟs).Write(ctx.Rasterizing.Viewport.Height, ϟs)
-	case StateVariable_GL_SCISSOR_BOX:
+	case GLenum_GL_SCISSOR_BOX:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.Scissor.X, ϟs)
 		v.Index(uint64(1), ϟs).Write(ctx.Rasterizing.Scissor.Y, ϟs)
 		v.Index(uint64(2), ϟs).Write(ctx.Rasterizing.Scissor.Width, ϟs)
 		v.Index(uint64(3), ϟs).Write(ctx.Rasterizing.Scissor.Height, ϟs)
-	case StateVariable_GL_FRONT_FACE:
+	case GLenum_GL_FRONT_FACE:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.FrontFace), ϟs)
-	case StateVariable_GL_CULL_FACE_MODE:
+	case GLenum_GL_CULL_FACE_MODE:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.Rasterizing.CullFace), ϟs)
-	case StateVariable_GL_STENCIL_CLEAR_VALUE:
+	case GLenum_GL_STENCIL_CLEAR_VALUE:
 		v.Index(uint64(0), ϟs).Write(ctx.Clearing.ClearStencil, ϟs)
-	case StateVariable_GL_FRAMEBUFFER_BINDING:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundFramebuffers.Get(FramebufferTarget_GL_FRAMEBUFFER)), ϟs)
-	case StateVariable_GL_READ_FRAMEBUFFER_BINDING:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundFramebuffers.Get(FramebufferTarget_GL_READ_FRAMEBUFFER)), ϟs)
-	case StateVariable_GL_RENDERBUFFER_BINDING:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundRenderbuffers.Get(RenderbufferTarget_GL_RENDERBUFFER)), ϟs)
-	case StateVariable_GL_CURRENT_PROGRAM:
+	case GLenum_GL_FRAMEBUFFER_BINDING:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundFramebuffers.Get(GLenum_GL_FRAMEBUFFER)), ϟs)
+	case GLenum_GL_READ_FRAMEBUFFER_BINDING:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundFramebuffers.Get(GLenum_GL_READ_FRAMEBUFFER)), ϟs)
+	case GLenum_GL_RENDERBUFFER_BINDING:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundRenderbuffers.Get(GLenum_GL_RENDERBUFFER)), ϟs)
+	case GLenum_GL_CURRENT_PROGRAM:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.BoundProgram), ϟs)
-	case StateVariable_GL_TEXTURE_BINDING_2D:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D)), ϟs)
-	case StateVariable_GL_TEXTURE_BINDING_CUBE_MAP:
-		v.Index(uint64(0), ϟs).Write(int32(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP)), ϟs)
-	case StateVariable_GL_GENERATE_MIPMAP_HINT:
+	case GLenum_GL_TEXTURE_BINDING_2D:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_2D)), ϟs)
+	case GLenum_GL_TEXTURE_BINDING_CUBE_MAP:
+		v.Index(uint64(0), ϟs).Write(int32(ctx.TextureUnits.Get(ctx.ActiveTextureUnit).Get(GLenum_GL_TEXTURE_CUBE_MAP)), ϟs)
+	case GLenum_GL_GENERATE_MIPMAP_HINT:
 		v.Index(uint64(0), ϟs).Write(int32(ctx.GenerateMipmapHint), ϟs)
-	case StateVariable_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
+	case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
+	case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
+	case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_RENDERBUFFER_SIZE:
+	case GLenum_GL_MAX_RENDERBUFFER_SIZE:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_TEXTURE_IMAGE_UNITS:
+	case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_TEXTURE_SIZE:
+	case GLenum_GL_MAX_TEXTURE_SIZE:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_VARYING_VECTORS:
+	case GLenum_GL_MAX_VARYING_VECTORS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_VERTEX_ATTRIBS:
+	case GLenum_GL_MAX_VERTEX_ATTRIBS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
+	case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_MAX_VERTEX_UNIFORM_VECTORS:
+	case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_MAX_VIEWPORT_DIMS:
+	case GLenum_GL_MAX_VIEWPORT_DIMS:
 		max_width := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl)  // any
 		max_height := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(max_width, ϟs)
 		v.Index(uint64(1), ϟs).Write(max_height, ϟs)
 		_, _ = max_width, max_height
-	case StateVariable_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
+	case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_NUM_SHADER_BINARY_FORMATS:
+	case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_PACK_ALIGNMENT:
-		v.Index(uint64(0), ϟs).Write(ctx.PixelStorage.Get(PixelStoreParameter_GL_PACK_ALIGNMENT), ϟs)
-	case StateVariable_GL_UNPACK_ALIGNMENT:
-		v.Index(uint64(0), ϟs).Write(ctx.PixelStorage.Get(PixelStoreParameter_GL_UNPACK_ALIGNMENT), ϟs)
-	case StateVariable_GL_ALPHA_BITS:
+	case GLenum_GL_PACK_ALIGNMENT:
+		v.Index(uint64(0), ϟs).Write(ctx.PixelStorage.Get(GLenum_GL_PACK_ALIGNMENT), ϟs)
+	case GLenum_GL_UNPACK_ALIGNMENT:
+		v.Index(uint64(0), ϟs).Write(ctx.PixelStorage.Get(GLenum_GL_UNPACK_ALIGNMENT), ϟs)
+	case GLenum_GL_ALPHA_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_BLUE_BITS:
+	case GLenum_GL_BLUE_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_GREEN_BITS:
+	case GLenum_GL_GREEN_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_RED_BITS:
+	case GLenum_GL_RED_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_DEPTH_BITS:
+	case GLenum_GL_DEPTH_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_SAMPLE_BUFFERS:
+	case GLenum_GL_SAMPLE_BUFFERS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_SAMPLES:
+	case GLenum_GL_SAMPLES:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_STENCIL_BITS:
+	case GLenum_GL_STENCIL_BITS:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_SUBPIXEL_BITS:
+	case GLenum_GL_SUBPIXEL_BITS:
 		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // any
 		v.Index(uint64(0), ϟs).Write(result, ϟs)
 		_ = result
-	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_TYPE:
+	case GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
+	case GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
-	case StateVariable_GL_GPU_DISJOINT_EXT:
+	case GLenum_GL_GPU_DISJOINT_EXT:
 		v.Index(uint64(0), ϟs).Write(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	default:
 		v := ϟa.Param
@@ -4040,16 +4040,16 @@ func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                 // Contextʳ
-	GetContext_137_result := context                                                                             // Contextʳ
-	ctx := GetContext_137_result                                                                                 // Contextʳ
-	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                                       // Framebufferʳ
-	color_id := RenderbufferId(backbuffer.Attachments.Get(FramebufferAttachment_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
-	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                                    // Renderbufferʳ
-	depth_id := RenderbufferId(backbuffer.Attachments.Get(FramebufferAttachment_GL_DEPTH_ATTACHMENT).Object)     // RenderbufferId
-	depth_buffer := ctx.Instances.Renderbuffers.Get(depth_id)                                                    // Renderbufferʳ
-	stencil_id := RenderbufferId(backbuffer.Attachments.Get(FramebufferAttachment_GL_STENCIL_ATTACHMENT).Object) // RenderbufferId
-	stencil_buffer := ctx.Instances.Renderbuffers.Get(stencil_id)                                                // Renderbufferʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                  // Contextʳ
+	GetContext_137_result := context                                                              // Contextʳ
+	ctx := GetContext_137_result                                                                  // Contextʳ
+	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
+	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
+	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
+	depth_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_DEPTH_ATTACHMENT).Object)     // RenderbufferId
+	depth_buffer := ctx.Instances.Renderbuffers.Get(depth_id)                                     // Renderbufferʳ
+	stencil_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_STENCIL_ATTACHMENT).Object) // RenderbufferId
+	stencil_buffer := ctx.Instances.Renderbuffers.Get(stencil_id)                                 // Renderbufferʳ
 	color_buffer.Width = ϟa.Width
 	color_buffer.Height = ϟa.Height
 	color_buffer.Format = ϟa.ColorFmt
