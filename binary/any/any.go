@@ -48,73 +48,73 @@ func (e ErrNotBoxedValue) Error() string {
 }
 
 type object_ struct {
-	binary.Generate
-	value binary.Object
+	binary.Generate `java:"ObjectBox" implements:"Box"`
+	value           binary.Object
 }
 
 type bool_ struct {
-	binary.Generate
-	value bool
+	binary.Generate `implements:"Box"`
+	value           bool
 }
 
 type uint8_ struct {
-	binary.Generate
-	value uint8
+	binary.Generate `implements:"Box"`
+	value           uint8
 }
 
 type int8_ struct {
-	binary.Generate
-	value int8
+	binary.Generate `implements:"Box"`
+	value           int8
 }
 
 type uint16_ struct {
-	binary.Generate
-	value uint16
+	binary.Generate `implements:"Box"`
+	value           uint16
 }
 
 type int16_ struct {
-	binary.Generate
-	value int16
+	binary.Generate `implements:"Box"`
+	value           int16
 }
 
 type float32_ struct {
-	binary.Generate
-	value float32
+	binary.Generate `implements:"Box"`
+	value           float32
 }
 
 type uint32_ struct {
-	binary.Generate
-	value uint32
+	binary.Generate `implements:"Box"`
+	value           uint32
 }
 
 type int32_ struct {
-	binary.Generate
-	value int32
+	binary.Generate `implements:"Box"`
+	value           int32
 }
 
 type float64_ struct {
-	binary.Generate
-	value float64
+	binary.Generate `implements:"Box"`
+	value           float64
 }
 
 type uint64_ struct {
-	binary.Generate
-	value uint64
+	binary.Generate `implements:"Box"`
+	value           uint64
 }
 
 type int64_ struct {
-	binary.Generate
-	value int64
+	binary.Generate `implements:"Box"`
+	value           int64
 }
 
 type int_ struct {
-	binary.Generate
-	value int
+	binary.Generate `implements:"Box"`
+	value           int
 }
 
 type string_ struct {
-	binary.Generate
-	value string
+	binary.Generate `java:"StringBox" implements:"Box"`
+	value           string
 }
 
 func (v object_) unbox() interface{}  { return v.value }
@@ -133,73 +133,73 @@ func (v int_) unbox() interface{}     { return v.value }
 func (v string_) unbox() interface{}  { return v.value }
 
 type objectSlice struct {
-	binary.Generate
-	value []binary.Object
+	binary.Generate `implements:"Box"`
+	value           []binary.Object
 }
 
 type boolSlice struct {
-	binary.Generate
-	value []bool
+	binary.Generate `implements:"Box"`
+	value           []bool
 }
 
 type uint8Slice struct {
-	binary.Generate
-	value []uint8
+	binary.Generate `implements:"Box"`
+	value           []uint8
 }
 
 type int8Slice struct {
-	binary.Generate
-	value []int8
+	binary.Generate `implements:"Box"`
+	value           []int8
 }
 
 type uint16Slice struct {
-	binary.Generate
-	value []uint16
+	binary.Generate `implements:"Box"`
+	value           []uint16
 }
 
 type int16Slice struct {
-	binary.Generate
-	value []int16
+	binary.Generate `implements:"Box"`
+	value           []int16
 }
 
 type float32Slice struct {
-	binary.Generate
-	value []float32
+	binary.Generate `implements:"Box"`
+	value           []float32
 }
 
 type uint32Slice struct {
-	binary.Generate
-	value []uint32
+	binary.Generate `implements:"Box"`
+	value           []uint32
 }
 
 type int32Slice struct {
-	binary.Generate
-	value []int32
+	binary.Generate `implements:"Box"`
+	value           []int32
 }
 
 type float64Slice struct {
-	binary.Generate
-	value []float64
+	binary.Generate `implements:"Box"`
+	value           []float64
 }
 
 type uint64Slice struct {
-	binary.Generate
-	value []uint64
+	binary.Generate `implements:"Box"`
+	value           []uint64
 }
 
 type int64Slice struct {
-	binary.Generate
-	value []int64
+	binary.Generate `implements:"Box"`
+	value           []int64
 }
 
 type intSlice struct {
-	binary.Generate
-	value []int
+	binary.Generate `implements:"Box"`
+	value           []int
 }
 
 type stringSlice struct {
-	binary.Generate
-	value []string
+	binary.Generate `implements:"Box"`
+	value           []string
 }
 
 func (v objectSlice) unbox() interface{}  { return v.value }
@@ -299,7 +299,7 @@ func Unbox(o binary.Object) (interface{}, error) {
 // Any is the schema Type descriptor for a field who's underlying type requires
 // boxing and unboxing. The type is usually declared as an empty interface.
 type Any struct {
-	binary.Generate
+	binary.Generate `java:"AnyType"`
 }
 
 func (i *Any) Basename() string {

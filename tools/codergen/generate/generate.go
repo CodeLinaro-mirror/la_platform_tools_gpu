@@ -128,6 +128,11 @@ func (i Imports) FindPath(path string) Import {
 func (m *Module) FindImport(name string) *Module {
 	path := m.Imports.FindName(name).Path
 	if path == "" {
+		for _, o := range *m.Modules {
+			if strings.HasSuffix(o.Import, name) {
+				return o
+			}
+		}
 		return nil
 	}
 	for _, o := range *m.Modules {

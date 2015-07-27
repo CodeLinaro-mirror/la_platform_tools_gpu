@@ -30,10 +30,10 @@ import java.io.IOException;
 
 public enum {{File.ClassName .Type}} {
 {{range $i, $e := .Entries}}{{if $i}},
-{{end}}»{{$e.Name}}({{$e.Value}}){{end}};
+{{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
 
-»private final int {{"value" | File.FieldName}};
-»{{File.ClassName .Type}}(int value) {
+»private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
+»{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
 »»{{"value" | File.FieldName}} = value;
 »}
 }
