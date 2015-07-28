@@ -15,13 +15,13 @@ var ConstantValues schema.Constants
 
 const _FramebufferAttachment_name = "ColorDepthStencil"
 
-var _FramebufferAttachment_map = map[FramebufferAttachment]string{
-	0: _FramebufferAttachment_name[0:5],
-	1: _FramebufferAttachment_name[5:10],
-	2: _FramebufferAttachment_name[10:17],
-}
+var _FramebufferAttachment_map = map[FramebufferAttachment]string{}
 
 func init() {
+	_FramebufferAttachment_map[0] = _FramebufferAttachment_name[0:5]
+	_FramebufferAttachment_map[1] = _FramebufferAttachment_name[5:10]
+	_FramebufferAttachment_map[2] = _FramebufferAttachment_name[10:17]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32},
 		Entries: []schema.Constant{

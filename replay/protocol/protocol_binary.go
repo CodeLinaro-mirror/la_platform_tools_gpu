@@ -224,13 +224,13 @@ var ConstantValues schema.Constants
 
 const _ConnectionType_name = "DeviceInfoReplayShutdown"
 
-var _ConnectionType_map = map[ConnectionType]string{
-	0: _ConnectionType_name[0:10],
-	1: _ConnectionType_name[10:16],
-	2: _ConnectionType_name[16:24],
-}
+var _ConnectionType_map = map[ConnectionType]string{}
 
 func init() {
+	_ConnectionType_map[0] = _ConnectionType_name[0:10]
+	_ConnectionType_map[1] = _ConnectionType_name[10:16]
+	_ConnectionType_map[2] = _ConnectionType_name[16:24]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ConnectionType", Method: schema.Uint8},
 		Entries: []schema.Constant{
@@ -260,12 +260,12 @@ func (v *ConnectionType) Parse(s string) error {
 
 const _MessageType_name = "GetPost"
 
-var _MessageType_map = map[MessageType]string{
-	0: _MessageType_name[0:3],
-	1: _MessageType_name[3:7],
-}
+var _MessageType_map = map[MessageType]string{}
 
 func init() {
+	_MessageType_map[0] = _MessageType_name[0:3]
+	_MessageType_map[1] = _MessageType_name[3:7]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "MessageType", Method: schema.Uint8},
 		Entries: []schema.Constant{
@@ -294,25 +294,25 @@ func (v *MessageType) Parse(s string) error {
 
 const _Type_name = "BoolInt8Int16Int32Int64Uint8Uint16Uint32Uint64FloatDoubleAbsolutePointerConstantPointerVolatilePointerVoid"
 
-var _Type_map = map[Type]string{
-	0:          _Type_name[0:4],
-	1:          _Type_name[4:8],
-	2:          _Type_name[8:13],
-	3:          _Type_name[13:18],
-	4:          _Type_name[18:23],
-	5:          _Type_name[23:28],
-	6:          _Type_name[28:34],
-	7:          _Type_name[34:40],
-	8:          _Type_name[40:46],
-	9:          _Type_name[46:51],
-	10:         _Type_name[51:57],
-	11:         _Type_name[57:72],
-	12:         _Type_name[72:87],
-	13:         _Type_name[87:102],
-	4294967295: _Type_name[102:106],
-}
+var _Type_map = map[Type]string{}
 
 func init() {
+	_Type_map[0] = _Type_name[0:4]
+	_Type_map[1] = _Type_name[4:8]
+	_Type_map[2] = _Type_name[8:13]
+	_Type_map[3] = _Type_name[13:18]
+	_Type_map[4] = _Type_name[18:23]
+	_Type_map[5] = _Type_name[23:28]
+	_Type_map[6] = _Type_name[28:34]
+	_Type_map[7] = _Type_name[34:40]
+	_Type_map[8] = _Type_name[40:46]
+	_Type_map[9] = _Type_name[46:51]
+	_Type_map[10] = _Type_name[51:57]
+	_Type_map[11] = _Type_name[57:72]
+	_Type_map[12] = _Type_name[72:87]
+	_Type_map[13] = _Type_name[87:102]
+	_Type_map[4294967295] = _Type_name[102:106]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Type", Method: schema.Uint32},
 		Entries: []schema.Constant{

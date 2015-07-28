@@ -2552,15 +2552,15 @@ var ConstantValues schema.Constants
 
 const _TimingFlags_name = "TimingCPUTimingGPUTimingPerCommandTimingPerDrawCallTimingPerFrame"
 
-var _TimingFlags_map = map[TimingFlags]string{
-	0: _TimingFlags_name[0:9],
-	1: _TimingFlags_name[9:18],
-	2: _TimingFlags_name[18:34],
-	4: _TimingFlags_name[34:51],
-	8: _TimingFlags_name[51:65],
-}
+var _TimingFlags_map = map[TimingFlags]string{}
 
 func init() {
+	_TimingFlags_map[0] = _TimingFlags_name[0:9]
+	_TimingFlags_map[1] = _TimingFlags_name[9:18]
+	_TimingFlags_map[2] = _TimingFlags_name[18:34]
+	_TimingFlags_map[4] = _TimingFlags_name[34:51]
+	_TimingFlags_map[8] = _TimingFlags_name[51:65]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32},
 		Entries: []schema.Constant{

@@ -1242,13 +1242,13 @@ var ConstantValues schema.Constants
 
 const _Enum_name = "OneTwoThree"
 
-var _Enum_map = map[Enum]string{
-	1: _Enum_name[0:3],
-	2: _Enum_name[3:6],
-	3: _Enum_name[6:11],
-}
+var _Enum_map = map[Enum]string{}
 
 func init() {
+	_Enum_map[1] = _Enum_name[0:3]
+	_Enum_map[2] = _Enum_name[3:6]
+	_Enum_map[3] = _Enum_name[6:11]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Enum", Method: schema.Int32},
 		Entries: []schema.Constant{

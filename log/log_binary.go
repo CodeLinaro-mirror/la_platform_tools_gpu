@@ -15,18 +15,18 @@ var ConstantValues schema.Constants
 
 const _Severity_name = "EmergencyAlertCriticalErrorWarningNoticeInfoDebug"
 
-var _Severity_map = map[Severity]string{
-	0: _Severity_name[0:9],
-	1: _Severity_name[9:14],
-	2: _Severity_name[14:22],
-	3: _Severity_name[22:27],
-	4: _Severity_name[27:34],
-	5: _Severity_name[34:40],
-	6: _Severity_name[40:44],
-	7: _Severity_name[44:49],
-}
+var _Severity_map = map[Severity]string{}
 
 func init() {
+	_Severity_map[0] = _Severity_name[0:9]
+	_Severity_map[1] = _Severity_name[9:14]
+	_Severity_map[2] = _Severity_name[14:22]
+	_Severity_map[3] = _Severity_name[22:27]
+	_Severity_map[4] = _Severity_name[27:34]
+	_Severity_map[5] = _Severity_name[34:40]
+	_Severity_map[6] = _Severity_name[40:44]
+	_Severity_map[7] = _Severity_name[44:49]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Severity", Method: schema.Int32},
 		Entries: []schema.Constant{
