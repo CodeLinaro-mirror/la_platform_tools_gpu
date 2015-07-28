@@ -42,24 +42,27 @@ func init() {
 	commands.Register(command)
 }
 
-func doValidate(flags flag.FlagSet) {
+func doValidate(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		commands.Usage("Missing api file\n")
+		return commands.Usage("Missing api file\n")
 	}
 	mappings := resolver.ASTToSemantic{}
 	for _, apiName := range args {
 		compiled, errs := api.Resolve(apiName, mappings)
-		commands.CheckErrors(apiName, errs)
+		if err := commands.CheckErrors(apiName, errs); err != nil {
+			return err
+		}
 		commands.Logf("Validating api file %q\n", apiName)
 		errors := Validate(apiName, compiled)
 		for _, err := range errors {
 			fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 		}
 		if len(errors) > 0 {
-			os.Exit(3)
+			return errors[0]
 		}
 	}
+	return nil
 }
 
 // Validate performs a number of checks on the api file for correctness.

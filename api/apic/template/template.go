@@ -210,12 +210,18 @@ func (f *Functions) Include(templates ...string) error {
 			commands.Logf("Reading template %q\n", t)
 			inputDep(t)
 			tmplData, err := f.loader(t)
-			commands.MaybeError(t, err)
+			if err != nil {
+				return fmt.Errorf("%s: %s\n", t, err)
+			}
 			tmpl, err := f.templates.New(t).Parse(string(tmplData))
-			commands.MaybeError(t, err)
+			if err != nil {
+				return fmt.Errorf("%s: %s\n", t, err)
+			}
 			commands.Logf("Executing template %q\n", tmpl.Name())
 			var buf bytes.Buffer
-			commands.MaybeError(tmpl.Name(), f.execute(tmpl, &buf, f.api))
+			if err = f.execute(tmpl, &buf, f.api); err != nil {
+				return fmt.Errorf("%s: %s\n", tmpl.Name(), err)
+			}
 		}
 	}
 	return nil
@@ -236,14 +242,14 @@ func (f *Functions) Copyright(name string, tool string) (string, error) {
 	return copyright.Build(name, copyright.Info{Year: "2015", Tool: tool}), nil
 }
 
-func doTemplate(flags flag.FlagSet) {
+func doTemplate(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		commands.Usage("Missing api file\n")
+		return commands.Usage("Missing api file\n")
 	}
 	apiName := args[0]
 	if len(args) < 2 {
-		commands.Usage("Missing template file\n")
+		return commands.Usage("Missing template file\n")
 	}
 	mainTemplate := args[1]
 	commands.Logf("Reading api file %q\n", apiName)
@@ -252,8 +258,16 @@ func doTemplate(flags flag.FlagSet) {
 	commands.Logf("Compiling api file %q\n", apiName)
 	mappings := resolver.ASTToSemantic{}
 	compiled, errs := api.Resolve(apiName, mappings)
-	commands.CheckErrors(apiName, errs)
-	f := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
-	commands.MaybeError(mainTemplate, f.Include(mainTemplate))
+	if err := commands.CheckErrors(apiName, errs); err != nil {
+		return err
+	}
+	f, err := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
+	if err != nil {
+		return err
+	}
+	if err := f.Include(mainTemplate); err != nil {
+		return fmt.Errorf("%s: %s\n", mainTemplate, err)
+	}
 	writeDeps()
+	return nil
 }

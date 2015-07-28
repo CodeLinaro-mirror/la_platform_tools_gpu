@@ -24,12 +24,16 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
-func compile(t *testing.T, source string) *semantic.API {
+func compile(t *testing.T, source string) (*semantic.API, error) {
 	parsed, errs := parser.Parse(source)
-	commands.CheckErrors(source, errs)
+	if err := commands.CheckErrors(source, errs); err != nil {
+		return nil, err
+	}
 	compiled, errs := resolver.Resolve([]*ast.API{parsed}, nil, resolver.ASTToSemantic{})
-	commands.CheckErrors(source, errs)
-	return compiled
+	if err := commands.CheckErrors(source, errs); err != nil {
+		return nil, err
+	}
+	return compiled, nil
 }
 
 type expectedError struct {
@@ -207,25 +211,32 @@ func TestSimpleUnreachable(t *testing.T) {
 			unreachable(6, 21),
 		)},
 	} {
-		if api := compile(t, test.source); api != nil {
-			got := noUnreachables(api)
-			ok := true
-			if len(got) == len(test.expected) {
-				for i := range got {
-					l, c := got[i].At.Token().Cursor()
-					if l != test.expected[i].line ||
-						c != test.expected[i].column ||
-						got[i].Message != test.expected[i].msg {
-						ok = false
-					}
+		api, err := compile(t, test.source)
+		if err != nil {
+			t.Errorf("API compile failed with %s", err)
+			return
+		}
+		if api == nil {
+			t.Errorf("API compiled but was nil")
+			return
+		}
+		got := noUnreachables(api)
+		ok := true
+		if len(got) == len(test.expected) {
+			for i := range got {
+				l, c := got[i].At.Token().Cursor()
+				if l != test.expected[i].line ||
+					c != test.expected[i].column ||
+					got[i].Message != test.expected[i].msg {
+					ok = false
 				}
-			} else {
-				ok = false
 			}
+		} else {
+			ok = false
+		}
 
-			if !ok {
-				t.Errorf("Errors were not as expected for:\n%s\n\n Got: %+v, Wanted: %+v", test.source, got, test.expected)
-			}
+		if !ok {
+			t.Errorf("Errors were not as expected for:\n%s\n\n Got: %+v, Wanted: %+v", test.source, got, test.expected)
 		}
 	}
 }
