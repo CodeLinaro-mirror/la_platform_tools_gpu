@@ -152,11 +152,11 @@ var ConstantValues schema.Constants
 
 const _PoolID_name = "ApplicationPool"
 
-var _PoolID_map = map[PoolID]string{
-	0: _PoolID_name[0:15],
-}
+var _PoolID_map = map[PoolID]string{}
 
 func init() {
+	_PoolID_map[0] = _PoolID_name[0:15]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32},
 		Entries: []schema.Constant{
