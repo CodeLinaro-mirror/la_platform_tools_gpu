@@ -447,7 +447,7 @@ bool callCGLFlushDrawable(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnableClientState(Stack* stack, bool pushReturn) {
-    ArrayType type = stack->pop<ArrayType>();
+    GLenum type = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEnableClientState(%u)\n", type);
         if (glEnableClientState != nullptr) {
@@ -463,7 +463,7 @@ bool callGlEnableClientState(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisableClientState(Stack* stack, bool pushReturn) {
-    ArrayType type = stack->pop<ArrayType>();
+    GLenum type = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDisableClientState(%u)\n", type);
         if (glDisableClientState != nullptr) {
@@ -520,7 +520,7 @@ bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
-    TilePreserveMaskQCOM preserveMask = stack->pop<TilePreserveMaskQCOM>();
+    GLbitfield preserveMask = stack->pop<GLbitfield>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
@@ -540,7 +540,7 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
-    TilePreserveMaskQCOM preserve_mask = stack->pop<TilePreserveMaskQCOM>();
+    GLbitfield preserve_mask = stack->pop<GLbitfield>();
     if (stack->isValid()) {
         GAPID_INFO("glEndTilingQCOM(%u)\n", preserve_mask);
         if (glEndTilingQCOM != nullptr) {
@@ -556,9 +556,9 @@ bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
-    DiscardFramebufferAttachment* attachments = stack->pop<DiscardFramebufferAttachment*>();
+    GLenum* attachments = stack->pop<GLenum*>();
     int32_t numAttachments = stack->pop<int32_t>();
-    FramebufferTarget target = stack->pop<FramebufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDiscardFramebufferEXT(%u, %d, %p)\n", target, numAttachments, attachments);
         if (glDiscardFramebufferEXT != nullptr) {
@@ -624,9 +624,9 @@ bool callGlPopGroupMarkerEXT(Stack* stack, bool pushReturn) {
 
 bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexStorage1DEXT(%u, %d, %u, %d)\n", target, levels, format, width);
         if (glTexStorage1DEXT != nullptr) {
@@ -644,9 +644,9 @@ bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
 bool callGlTexStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexStorage2DEXT(%u, %d, %u, %d, %d)\n", target, levels, format, width,
                    height);
@@ -666,9 +666,9 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexStorage3DEXT(%u, %d, %u, %d, %d, %d)\n", target, levels, format, width,
                    height, depth);
@@ -686,9 +686,9 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
 
 bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
@@ -708,9 +708,9 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
 bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
@@ -731,9 +731,9 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t levels = stack->pop<int32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
@@ -822,7 +822,7 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
 
 bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
     void* image = stack->pop<void*>();
-    ImageTargetTexture target = stack->pop<ImageTargetTexture>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
         if (glEGLImageTargetTexture2DOES != nullptr) {
@@ -839,7 +839,7 @@ bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
 
 bool callGlEGLImageTargetRenderbufferStorageOES(Stack* stack, bool pushReturn) {
     void* image = stack->pop<void*>();
-    ImageTargetRenderbufferStorage target = stack->pop<ImageTargetRenderbufferStorage>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
         if (glEGLImageTargetRenderbufferStorageOES != nullptr) {
@@ -860,10 +860,10 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glGetGraphicsResetStatusEXT()\n");
         if (glGetGraphicsResetStatusEXT != nullptr) {
-            ResetStatus return_value = glGetGraphicsResetStatusEXT();
+            GLenum return_value = glGetGraphicsResetStatusEXT();
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<ResetStatus>(return_value);
+                stack->push<GLenum>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT\n");
@@ -894,8 +894,8 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendFunc(Stack* stack, bool pushReturn) {
-    BlendFactor dst_factor = stack->pop<BlendFactor>();
-    BlendFactor src_factor = stack->pop<BlendFactor>();
+    GLenum dst_factor = stack->pop<GLenum>();
+    GLenum src_factor = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBlendFunc(%u, %u)\n", src_factor, dst_factor);
         if (glBlendFunc != nullptr) {
@@ -911,10 +911,10 @@ bool callGlBlendFunc(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
-    BlendFactor dst_factor_alpha = stack->pop<BlendFactor>();
-    BlendFactor src_factor_alpha = stack->pop<BlendFactor>();
-    BlendFactor dst_factor_rgb = stack->pop<BlendFactor>();
-    BlendFactor src_factor_rgb = stack->pop<BlendFactor>();
+    GLenum dst_factor_alpha = stack->pop<GLenum>();
+    GLenum src_factor_alpha = stack->pop<GLenum>();
+    GLenum dst_factor_rgb = stack->pop<GLenum>();
+    GLenum src_factor_rgb = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBlendFuncSeparate(%u, %u, %u, %u)\n", src_factor_rgb, dst_factor_rgb,
                    src_factor_alpha, dst_factor_alpha);
@@ -931,7 +931,7 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendEquation(Stack* stack, bool pushReturn) {
-    BlendEquation equation = stack->pop<BlendEquation>();
+    GLenum equation = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBlendEquation(%u)\n", equation);
         if (glBlendEquation != nullptr) {
@@ -947,8 +947,8 @@ bool callGlBlendEquation(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendEquationSeparate(Stack* stack, bool pushReturn) {
-    BlendEquation alpha = stack->pop<BlendEquation>();
-    BlendEquation rgb = stack->pop<BlendEquation>();
+    GLenum alpha = stack->pop<GLenum>();
+    GLenum rgb = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBlendEquationSeparate(%u, %u)\n", rgb, alpha);
         if (glBlendEquationSeparate != nullptr) {
@@ -1018,7 +1018,7 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     int32_t stride = stack->pop<int32_t>();
     bool normalized = stack->pop<bool>();
-    VertexAttribType type = stack->pop<VertexAttribType>();
+    GLenum type = stack->pop<GLenum>();
     int32_t size = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
@@ -1038,7 +1038,7 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
-    ShaderAttribType* type = stack->pop<ShaderAttribType*>();
+    GLenum* type = stack->pop<GLenum*>();
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
@@ -1062,7 +1062,7 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
-    ShaderUniformType* type = stack->pop<ShaderUniformType*>();
+    GLenum* type = stack->pop<GLenum*>();
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
@@ -1088,10 +1088,10 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glGetError()\n");
         if (glGetError != nullptr) {
-            Error return_value = glGetError();
+            GLenum return_value = glGetError();
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<Error>(return_value);
+                stack->push<GLenum>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetError\n");
@@ -1105,7 +1105,7 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
 
 bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    ProgramParameter parameter = stack->pop<ProgramParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
@@ -1123,7 +1123,7 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
 
 bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    ShaderParameter parameter = stack->pop<ShaderParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
@@ -1183,7 +1183,7 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
 
 bool callGlPixelStorei(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
-    PixelStoreParameter parameter = stack->pop<PixelStoreParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glPixelStorei(%u, %d)\n", parameter, value);
         if (glPixelStorei != nullptr) {
@@ -1200,8 +1200,8 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
 
 bool callGlTexParameteri(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
-    TextureParameter parameter = stack->pop<TextureParameter>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexParameteri(%u, %u, %d)\n", target, parameter, value);
         if (glTexParameteri != nullptr) {
@@ -1218,8 +1218,8 @@ bool callGlTexParameteri(Stack* stack, bool pushReturn) {
 
 bool callGlTexParameterf(Stack* stack, bool pushReturn) {
     float value = stack->pop<float>();
-    TextureParameter parameter = stack->pop<TextureParameter>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexParameterf(%u, %u, %f)\n", target, parameter, value);
         if (glTexParameterf != nullptr) {
@@ -1236,8 +1236,8 @@ bool callGlTexParameterf(Stack* stack, bool pushReturn) {
 
 bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    TextureParameter parameter = stack->pop<TextureParameter>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetTexParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameteriv != nullptr) {
@@ -1254,8 +1254,8 @@ bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
 
 bool callGlGetTexParameterfv(Stack* stack, bool pushReturn) {
     float* values = stack->pop<float*>();
-    TextureParameter parameter = stack->pop<TextureParameter>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetTexParameterfv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameterfv != nullptr) {
@@ -1801,8 +1801,8 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
 bool callGlGetShaderPrecisionFormat(Stack* stack, bool pushReturn) {
     int32_t* precision = stack->pop<int32_t*>();
     int32_t* range = stack->pop<int32_t*>();
-    PrecisionType precision_type = stack->pop<PrecisionType>();
-    ShaderType shader_type = stack->pop<ShaderType>();
+    GLenum precision_type = stack->pop<GLenum>();
+    GLenum shader_type = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)\n", shader_type, precision_type,
                    range, precision);
@@ -1835,7 +1835,7 @@ bool callGlDepthMask(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDepthFunc(Stack* stack, bool pushReturn) {
-    TestFunction function = stack->pop<TestFunction>();
+    GLenum function = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDepthFunc(%u)\n", function);
         if (glDepthFunc != nullptr) {
@@ -1904,7 +1904,7 @@ bool callGlStencilMask(Stack* stack, bool pushReturn) {
 
 bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
-    FaceMode face = stack->pop<FaceMode>();
+    GLenum face = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glStencilMaskSeparate(%u, %u)\n", face, mask);
         if (glStencilMaskSeparate != nullptr) {
@@ -1922,8 +1922,8 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
 bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
     int32_t mask = stack->pop<int32_t>();
     int32_t reference_value = stack->pop<int32_t>();
-    TestFunction function = stack->pop<TestFunction>();
-    FaceMode face = stack->pop<FaceMode>();
+    GLenum function = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glStencilFuncSeparate(%u, %u, %d, %d)\n", face, function, reference_value,
                    mask);
@@ -1940,10 +1940,10 @@ bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
-    StencilAction stencil_pass_depth_pass = stack->pop<StencilAction>();
-    StencilAction stencil_pass_depth_fail = stack->pop<StencilAction>();
-    StencilAction stencil_fail = stack->pop<StencilAction>();
-    FaceMode face = stack->pop<FaceMode>();
+    GLenum stencil_pass_depth_pass = stack->pop<GLenum>();
+    GLenum stencil_pass_depth_fail = stack->pop<GLenum>();
+    GLenum stencil_fail = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glStencilOpSeparate(%u, %u, %u, %u)\n", face, stencil_fail,
                    stencil_pass_depth_fail, stencil_pass_depth_pass);
@@ -1961,7 +1961,7 @@ bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlFrontFace(Stack* stack, bool pushReturn) {
-    FaceOrientation orientation = stack->pop<FaceOrientation>();
+    GLenum orientation = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glFrontFace(%u)\n", orientation);
         if (glFrontFace != nullptr) {
@@ -2015,7 +2015,7 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
 }
 
 bool callGlActiveTexture(Stack* stack, bool pushReturn) {
-    TextureUnit unit = stack->pop<TextureUnit>();
+    GLenum unit = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glActiveTexture(%u)\n", unit);
         if (glActiveTexture != nullptr) {
@@ -2086,7 +2086,7 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
 
 bool callGlBindTexture(Stack* stack, bool pushReturn) {
     uint32_t texture = stack->pop<uint32_t>();
-    TextureTarget target = stack->pop<TextureTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBindTexture(%u, %u)\n", target, texture);
         if (glBindTexture != nullptr) {
@@ -2103,14 +2103,14 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
 
 bool callGlTexImage2D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    TexelType type = stack->pop<TexelType>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum format = stack->pop<GLenum>();
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    TexelFormat internal_format = stack->pop<TexelFormat>();
+    GLenum internal_format = stack->pop<GLenum>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexImage2D(%u, %d, %u, %d, %d, %d, %u, %u, %p)\n", target, level,
                    internal_format, width, height, border, format, type, data);
@@ -2128,14 +2128,14 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
 
 bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    TexelType type = stack->pop<TexelType>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum format = stack->pop<GLenum>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %u, %p)\n", target, level, xoffset,
                    yoffset, width, height, format, type, data);
@@ -2157,9 +2157,9 @@ bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
-    TexelFormat format = stack->pop<TexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCopyTexImage2D(%u, %d, %u, %d, %d, %d, %d, %d)\n", target, level, format, x,
                    y, width, height, border);
@@ -2183,7 +2183,7 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCopyTexSubImage2D(%u, %d, %d, %d, %d, %d, %d, %d)\n", target, level, xoffset,
                    yoffset, x, y, width, height);
@@ -2205,9 +2205,9 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    CompressedTexelFormat format = stack->pop<CompressedTexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCompressedTexImage2D(%u, %d, %u, %d, %d, %d, %d, %p)\n", target, level,
                    format, width, height, border, image_size, data);
@@ -2226,13 +2226,13 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
 bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     int32_t image_size = stack->pop<int32_t>();
-    CompressedTexelFormat format = stack->pop<CompressedTexelFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCompressedTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %d, %p)\n", target, level,
                    xoffset, yoffset, width, height, format, image_size, data);
@@ -2250,7 +2250,7 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
-    TextureImageTarget target = stack->pop<TextureImageTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGenerateMipmap(%u)\n", target);
         if (glGenerateMipmap != nullptr) {
@@ -2267,8 +2267,8 @@ bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
 
 bool callGlReadPixels(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    TexelType type = stack->pop<TexelType>();
-    BaseTexelFormat format = stack->pop<BaseTexelFormat>();
+    GLenum type = stack->pop<GLenum>();
+    GLenum format = stack->pop<GLenum>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
@@ -2307,7 +2307,7 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
     uint32_t framebuffer = stack->pop<uint32_t>();
-    FramebufferTarget target = stack->pop<FramebufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
         if (glBindFramebuffer != nullptr) {
@@ -2323,14 +2323,14 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
-    FramebufferTarget target = stack->pop<FramebufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCheckFramebufferStatus(%u)\n", target);
         if (glCheckFramebufferStatus != nullptr) {
-            FramebufferStatus return_value = glCheckFramebufferStatus(target);
+            GLenum return_value = glCheckFramebufferStatus(target);
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<FramebufferStatus>(return_value);
+                stack->push<GLenum>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCheckFramebufferStatus\n");
@@ -2398,7 +2398,7 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
     uint32_t renderbuffer = stack->pop<uint32_t>();
-    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
         if (glBindRenderbuffer != nullptr) {
@@ -2416,8 +2416,8 @@ bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
 bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    RenderbufferFormat format = stack->pop<RenderbufferFormat>();
-    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
+    GLenum format = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glRenderbufferStorage(%u, %u, %d, %d)\n", target, format, width, height);
         if (glRenderbufferStorage != nullptr) {
@@ -2471,8 +2471,8 @@ bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
 
 bool callGlGetRenderbufferParameteriv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    RenderbufferParameter parameter = stack->pop<RenderbufferParameter>();
-    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetRenderbufferParameteriv != nullptr) {
@@ -2506,7 +2506,7 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindBuffer(Stack* stack, bool pushReturn) {
     uint32_t buffer = stack->pop<uint32_t>();
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBindBuffer(%u, %u)\n", target, buffer);
         if (glBindBuffer != nullptr) {
@@ -2522,10 +2522,10 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBufferData(Stack* stack, bool pushReturn) {
-    BufferUsage usage = stack->pop<BufferUsage>();
+    GLenum usage = stack->pop<GLenum>();
     void* data = stack->pop<void*>();
     int32_t size = stack->pop<int32_t>();
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBufferData(%u, %d, %p, %u)\n", target, size, data, usage);
         if (glBufferData != nullptr) {
@@ -2544,7 +2544,7 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     int32_t size = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBufferSubData(%u, %d, %d, %p)\n", target, offset, size, data);
         if (glBufferSubData != nullptr) {
@@ -2598,8 +2598,8 @@ bool callGlIsBuffer(Stack* stack, bool pushReturn) {
 
 bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    BufferParameter parameter = stack->pop<BufferParameter>();
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)\n", target, parameter, value);
         if (glGetBufferParameteriv != nullptr) {
@@ -2615,7 +2615,7 @@ bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCreateShader(Stack* stack, bool pushReturn) {
-    ShaderType type = stack->pop<ShaderType>();
+    GLenum type = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
@@ -3010,7 +3010,7 @@ bool callGlClearStencil(Stack* stack, bool pushReturn) {
 }
 
 bool callGlClear(Stack* stack, bool pushReturn) {
-    ClearMask mask = stack->pop<ClearMask>();
+    GLbitfield mask = stack->pop<GLbitfield>();
     if (stack->isValid()) {
         GAPID_INFO("glClear(%u)\n", mask);
         if (glClear != nullptr) {
@@ -3026,7 +3026,7 @@ bool callGlClear(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCullFace(Stack* stack, bool pushReturn) {
-    FaceMode mode = stack->pop<FaceMode>();
+    GLenum mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glCullFace(%u)\n", mode);
         if (glCullFace != nullptr) {
@@ -3092,8 +3092,8 @@ bool callGlSampleCoverage(Stack* stack, bool pushReturn) {
 }
 
 bool callGlHint(Stack* stack, bool pushReturn) {
-    HintMode mode = stack->pop<HintMode>();
-    HintTarget target = stack->pop<HintTarget>();
+    GLenum mode = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glHint(%u, %u)\n", target, mode);
         if (glHint != nullptr) {
@@ -3110,9 +3110,9 @@ bool callGlHint(Stack* stack, bool pushReturn) {
 
 bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
     uint32_t renderbuffer = stack->pop<uint32_t>();
-    RenderbufferTarget renderbuffer_target = stack->pop<RenderbufferTarget>();
-    FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
-    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
+    GLenum renderbuffer_target = stack->pop<GLenum>();
+    GLenum framebuffer_attachment = stack->pop<GLenum>();
+    GLenum framebuffer_target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %u)\n", framebuffer_target,
                    framebuffer_attachment, renderbuffer_target, renderbuffer);
@@ -3132,9 +3132,9 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
 bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     uint32_t texture = stack->pop<uint32_t>();
-    TextureImageTarget texture_target = stack->pop<TextureImageTarget>();
-    FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
-    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
+    GLenum texture_target = stack->pop<GLenum>();
+    GLenum framebuffer_attachment = stack->pop<GLenum>();
+    GLenum framebuffer_target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %u, %d)\n", framebuffer_target,
                    framebuffer_attachment, texture_target, texture, level);
@@ -3153,9 +3153,9 @@ bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
 
 bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    FramebufferAttachmentParameter parameter = stack->pop<FramebufferAttachmentParameter>();
-    FramebufferAttachment attachment = stack->pop<FramebufferAttachment>();
-    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum framebuffer_target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", framebuffer_target,
                    attachment, parameter, value);
@@ -3175,9 +3175,9 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
 
 bool callGlDrawElements(Stack* stack, bool pushReturn) {
     void* indices = stack->pop<void*>();
-    IndicesType indices_type = stack->pop<IndicesType>();
+    GLenum indices_type = stack->pop<GLenum>();
     int32_t element_count = stack->pop<int32_t>();
-    DrawMode draw_mode = stack->pop<DrawMode>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDrawElements(%u, %d, %u, %p)\n", draw_mode, element_count, indices_type,
                    indices);
@@ -3196,7 +3196,7 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
 bool callGlDrawArrays(Stack* stack, bool pushReturn) {
     int32_t index_count = stack->pop<int32_t>();
     int32_t first_index = stack->pop<int32_t>();
-    DrawMode draw_mode = stack->pop<DrawMode>();
+    GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDrawArrays(%u, %d, %d)\n", draw_mode, first_index, index_count);
         if (glDrawArrays != nullptr) {
@@ -3243,7 +3243,7 @@ bool callGlFinish(Stack* stack, bool pushReturn) {
 
 bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
     bool* values = stack->pop<bool*>();
-    StateVariable param = stack->pop<StateVariable>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetBooleanv(%u, %p)\n", param, values);
         if (glGetBooleanv != nullptr) {
@@ -3260,7 +3260,7 @@ bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
 
 bool callGlGetFloatv(Stack* stack, bool pushReturn) {
     float* values = stack->pop<float*>();
-    StateVariable param = stack->pop<StateVariable>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetFloatv(%u, %p)\n", param, values);
         if (glGetFloatv != nullptr) {
@@ -3277,7 +3277,7 @@ bool callGlGetFloatv(Stack* stack, bool pushReturn) {
 
 bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    StateVariable param = stack->pop<StateVariable>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetIntegerv(%u, %p)\n", param, values);
         if (glGetIntegerv != nullptr) {
@@ -3293,7 +3293,7 @@ bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetString(Stack* stack, bool pushReturn) {
-    StringConstant param = stack->pop<StringConstant>();
+    GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetString(%u)\n", param);
         if (glGetString != nullptr) {
@@ -3313,7 +3313,7 @@ bool callGlGetString(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnable(Stack* stack, bool pushReturn) {
-    Capability capability = stack->pop<Capability>();
+    GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEnable(%u)\n", capability);
         if (glEnable != nullptr) {
@@ -3329,7 +3329,7 @@ bool callGlEnable(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisable(Stack* stack, bool pushReturn) {
-    Capability capability = stack->pop<Capability>();
+    GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glDisable(%u)\n", capability);
         if (glDisable != nullptr) {
@@ -3345,7 +3345,7 @@ bool callGlDisable(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsEnabled(Stack* stack, bool pushReturn) {
-    Capability capability = stack->pop<Capability>();
+    GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glIsEnabled(%u)\n", capability);
         if (glIsEnabled != nullptr) {
@@ -3442,10 +3442,10 @@ bool callGlClientWaitSync(Stack* stack, bool pushReturn) {
 }
 
 bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
-    MapBufferRangeAccess access = stack->pop<MapBufferRangeAccess>();
+    GLbitfield access = stack->pop<GLbitfield>();
     int32_t length = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
         if (glMapBufferRange != nullptr) {
@@ -3465,7 +3465,7 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
-    BufferTarget target = stack->pop<BufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glUnmapBuffer(%u)\n", target);
         if (glUnmapBuffer != nullptr) {
@@ -3481,9 +3481,9 @@ bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
-    FramebufferAttachment* attachments = stack->pop<FramebufferAttachment*>();
+    GLenum* attachments = stack->pop<GLenum*>();
     int32_t count = stack->pop<int32_t>();
-    FramebufferTarget target = stack->pop<FramebufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glInvalidateFramebuffer(%u, %d, %p)\n", target, count, attachments);
         if (glInvalidateFramebuffer != nullptr) {
@@ -3501,9 +3501,9 @@ bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
 bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    RenderbufferFormat format = stack->pop<RenderbufferFormat>();
+    GLenum format = stack->pop<GLenum>();
     int32_t samples = stack->pop<int32_t>();
-    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glRenderbufferStorageMultisample(%u, %d, %u, %d, %d)\n", target, samples,
                    format, width, height);
@@ -3521,8 +3521,8 @@ bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
-    TextureFilterMode filter = stack->pop<TextureFilterMode>();
-    ClearMask mask = stack->pop<ClearMask>();
+    GLenum filter = stack->pop<GLenum>();
+    GLbitfield mask = stack->pop<GLbitfield>();
     int32_t dstY1 = stack->pop<int32_t>();
     int32_t dstX1 = stack->pop<int32_t>();
     int32_t dstY0 = stack->pop<int32_t>();
@@ -3565,7 +3565,7 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
 
 bool callGlBeginQuery(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBeginQuery(%u, %u)\n", target, query);
         if (glBeginQuery != nullptr) {
@@ -3581,7 +3581,7 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndQuery(Stack* stack, bool pushReturn) {
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEndQuery(%u)\n", target);
         if (glEndQuery != nullptr) {
@@ -3635,8 +3635,8 @@ bool callGlIsQuery(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    QueryParameter parameter = stack->pop<QueryParameter>();
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryiv != nullptr) {
@@ -3653,7 +3653,7 @@ bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
@@ -3693,7 +3693,7 @@ bool callGlGetActiveUniformBlockName(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveUniformBlockiv(Stack* stack, bool pushReturn) {
     int32_t* parameters = stack->pop<int32_t*>();
-    UniformBlockParameter parameter_name = stack->pop<UniformBlockParameter>();
+    GLenum parameter_name = stack->pop<GLenum>();
     uint32_t uniform_block_index = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
@@ -3732,7 +3732,7 @@ bool callGlUniformBlockBinding(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveUniformsiv(Stack* stack, bool pushReturn) {
     int32_t* parameters = stack->pop<int32_t*>();
-    UniformBlockParameter parameter_name = stack->pop<UniformBlockParameter>();
+    GLenum parameter_name = stack->pop<GLenum>();
     uint32_t* uniform_indices = stack->pop<uint32_t*>();
     uint32_t uniform_count = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
@@ -3755,7 +3755,7 @@ bool callGlGetActiveUniformsiv(Stack* stack, bool pushReturn) {
 bool callGlBindBufferBase(Stack* stack, bool pushReturn) {
     uint32_t buffer = stack->pop<uint32_t>();
     uint32_t index = stack->pop<uint32_t>();
-    IndexedBufferTarget target = stack->pop<IndexedBufferTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBindBufferBase(%u, %u, %u)\n", target, index, buffer);
         if (glBindBufferBase != nullptr) {
@@ -3822,7 +3822,7 @@ bool callGlDeleteVertexArrays(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjecti64v(Stack* stack, bool pushReturn) {
     int64_t* value = stack->pop<int64_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjecti64v(%u, %u, %p)\n", query, parameter, value);
@@ -3840,7 +3840,7 @@ bool callGlGetQueryObjecti64v(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectui64v(Stack* stack, bool pushReturn) {
     uint64_t* value = stack->pop<uint64_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectui64v(%u, %u, %p)\n", query, parameter, value);
@@ -3875,7 +3875,7 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
 
 bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
         if (glBeginQueryEXT != nullptr) {
@@ -3891,7 +3891,7 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glEndQueryEXT(%u)\n", target);
         if (glEndQueryEXT != nullptr) {
@@ -3944,7 +3944,7 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum target = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
@@ -3962,8 +3962,8 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    QueryParameter parameter = stack->pop<QueryParameter>();
-    QueryTarget target = stack->pop<QueryTarget>();
+    GLenum parameter = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryivEXT != nullptr) {
@@ -3980,7 +3980,7 @@ bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
@@ -3998,7 +3998,7 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
@@ -4016,7 +4016,7 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
     int64_t* value = stack->pop<int64_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
@@ -4034,7 +4034,7 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
     uint64_t* value = stack->pop<uint64_t*>();
-    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
+    GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);

@@ -34,21 +34,21 @@ func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (
 		return 0, 0, fmt.Errorf("No context bound")
 	}
 
-	framebufferID := c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
+	framebufferID := c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
 
 	framebuffer, ok := c.Instances.Framebuffers[framebufferID]
 	if !ok {
 		return 0, 0, fmt.Errorf("No GL_FRAMEBUFFER bound")
 	}
 
-	var attachment FramebufferAttachment
+	var attachment GLenum
 	switch att {
 	case gfxapi.FramebufferAttachmentColor:
-		attachment = FramebufferAttachment_GL_COLOR_ATTACHMENT0
+		attachment = GLenum_GL_COLOR_ATTACHMENT0
 	case gfxapi.FramebufferAttachmentDepth:
-		attachment = FramebufferAttachment_GL_DEPTH_ATTACHMENT
+		attachment = GLenum_GL_DEPTH_ATTACHMENT
 	case gfxapi.FramebufferAttachmentStencil:
-		attachment = FramebufferAttachment_GL_STENCIL_ATTACHMENT
+		attachment = GLenum_GL_STENCIL_ATTACHMENT
 	default:
 		return 0, 0, fmt.Errorf("Framebuffer attachment %v unsupported by gles", att)
 	}
@@ -59,7 +59,7 @@ func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (
 	}
 
 	switch a.Type {
-	case FramebufferAttachmentType_GL_TEXTURE:
+	case GLenum_GL_TEXTURE:
 		id := TextureId(a.Object)
 		t := c.Instances.Textures[id]
 		switch t.Kind {
@@ -73,7 +73,7 @@ func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (
 		default:
 			return 0, 0, fmt.Errorf("Unknown texture kind %v", t.Kind)
 		}
-	case FramebufferAttachmentType_GL_RENDERBUFFER:
+	case GLenum_GL_RENDERBUFFER:
 		id := RenderbufferId(a.Object)
 		r := c.Instances.Renderbuffers[id]
 		return uint32(r.Width), uint32(r.Height), nil

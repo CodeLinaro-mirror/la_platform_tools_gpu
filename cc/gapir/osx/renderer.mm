@@ -167,22 +167,22 @@ void RendererImpl::unbind() {
 
 const char* RendererImpl::name() {
     return reinterpret_cast<const char*>(
-        gfxapi::glGetString(gfxapi::StringConstant::GL_RENDERER));
+        gfxapi::glGetString(gfxapi::GLenum::GL_RENDERER));
 }
 
 const char* RendererImpl::extensions() {
     return reinterpret_cast<const char*>(
-        gfxapi::glGetString(gfxapi::StringConstant::GL_EXTENSIONS));
+        gfxapi::glGetString(gfxapi::GLenum::GL_EXTENSIONS));
 }
 
 const char* RendererImpl::vendor() {
     return reinterpret_cast<const char*>(
-        gfxapi::glGetString(gfxapi::StringConstant::GL_VENDOR));
+        gfxapi::glGetString(gfxapi::GLenum::GL_VENDOR));
 }
 
 const char* RendererImpl::version() {
     return reinterpret_cast<const char*>(
-        gfxapi::glGetString(gfxapi::StringConstant::GL_VERSION));
+        gfxapi::glGetString(gfxapi::GLenum::GL_VERSION));
 }
 
 } // anonymous namespace
