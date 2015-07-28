@@ -21,10 +21,12 @@ import (
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/format"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/template"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/validate"
+	"android.googlesource.com/platform/tools/gpu/tools/profile"
 )
 
 func main() {
 	flag.Parse()
+	defer profile.CPU()()
 	args := flag.Args()
 	if len(args) < 1 {
 		commands.Usage("Must supply a verb\n")
