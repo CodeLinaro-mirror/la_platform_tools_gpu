@@ -83,6 +83,8 @@ func detectFence(ctx *context, n semantic.Node, fence *semantic.Fence, istop boo
 		info := detectFenceChildren(ctx, n, fence)
 		info.post = true
 		return info
+	case semantic.Type:
+		return info
 	default:
 		return detectFenceChildren(ctx, n, fence)
 	}
