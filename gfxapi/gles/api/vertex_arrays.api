@@ -349,6 +349,9 @@ cmd void glVertexAttribIPointer(AttributeLocation index,
                                 const void*       pointer) {
   minRequiredVersion(3, 0)
   switch (type) {
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_vertex_half_float)
+    }
     case GL_BYTE, GL_INT, GL_SHORT, GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_SHORT: {
       // version 3.0
     }
@@ -365,13 +368,16 @@ cmd void glVertexAttribIPointer(AttributeLocation index,
 cmd void glVertexAttribPointer(AttributeLocation location,
                                GLint             size,
                                GLenum            type,
-                               GLboolean         normalized,
+                               bool              normalized,
                                GLsizei           stride,
                                VertexPointer     data) {
   minRequiredVersion(2, 0)
   switch (type) {
     case GL_BYTE, GL_FIXED, GL_FLOAT, GL_SHORT, GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT: {
       // version 2.0
+    }
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_vertex_half_float)
     }
     case GL_HALF_FLOAT, GL_INT, GL_INT_2_10_10_10_REV, GL_UNSIGNED_INT,
         GL_UNSIGNED_INT_2_10_10_10_REV: {

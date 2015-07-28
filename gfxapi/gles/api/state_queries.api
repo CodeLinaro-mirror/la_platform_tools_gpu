@@ -93,16 +93,17 @@ cmd void glGetBooleani_v(GLenum target, GLuint index, GLboolean* data) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGet.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGet.xhtml","OpenGL ES 3.1")
-cmd void glGetBooleanv(GLenum param, GLboolean* values) {
+cmd void glGetBooleanv(GLenum param, bool* values) {
   minRequiredVersion(2, 0)
   switch (param) {
+    // GL_FRAMEBUFFER_BINDING was renamed to GL_DRAW_FRAMEBUFFER_BINDING in 3.0
     case GL_ACTIVE_TEXTURE, GL_ALIASED_LINE_WIDTH_RANGE, GL_ALIASED_POINT_SIZE_RANGE,
         GL_ALPHA_BITS, GL_ARRAY_BUFFER_BINDING, GL_BLEND, GL_BLEND_COLOR, GL_BLEND_DST_ALPHA,
         GL_BLEND_DST_RGB, GL_BLEND_EQUATION_ALPHA, GL_BLEND_EQUATION_RGB, GL_BLEND_SRC_ALPHA,
         GL_BLEND_SRC_RGB, GL_BLUE_BITS, GL_COLOR_CLEAR_VALUE, GL_COLOR_WRITEMASK,
         GL_COMPRESSED_TEXTURE_FORMATS, GL_CULL_FACE, GL_CULL_FACE_MODE, GL_CURRENT_PROGRAM,
         GL_DEPTH_BITS, GL_DEPTH_CLEAR_VALUE, GL_DEPTH_FUNC, GL_DEPTH_RANGE, GL_DEPTH_TEST,
-        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_FRAMEBUFFER_BINDING,
+        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_DRAW_FRAMEBUFFER_BINDING,
         GL_FRONT_FACE, GL_GENERATE_MIPMAP_HINT, GL_GREEN_BITS, GL_IMPLEMENTATION_COLOR_READ_FORMAT,
         GL_IMPLEMENTATION_COLOR_READ_TYPE, GL_LINE_WIDTH, GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
         GL_MAX_CUBE_MAP_TEXTURE_SIZE, GL_MAX_FRAGMENT_UNIFORM_VECTORS, GL_MAX_RENDERBUFFER_SIZE,
@@ -122,9 +123,8 @@ cmd void glGetBooleanv(GLenum param, GLboolean* values) {
         GL_UNPACK_ALIGNMENT, GL_VIEWPORT: {
       // version 2.0
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.0
     case GL_COPY_READ_BUFFER_BINDING, GL_COPY_WRITE_BUFFER_BINDING, GL_DRAW_BUFFER,
-        GL_DRAW_FRAMEBUFFER_BINDING, GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
+        GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
         GL_MAX_3D_TEXTURE_SIZE, GL_MAX_ARRAY_TEXTURE_LAYERS, GL_MAX_COLOR_ATTACHMENTS,
         GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GL_MAX_COMBINED_UNIFORM_BLOCKS,
         GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GL_MAX_DRAW_BUFFERS, GL_MAX_ELEMENTS_INDICES,
@@ -149,7 +149,6 @@ cmd void glGetBooleanv(GLenum param, GLboolean* values) {
         GL_UNPACK_SKIP_ROWS, GL_VERTEX_ARRAY_BINDING: {
       minRequiredVersion(3, 0)
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.1
     case GL_DISPATCH_INDIRECT_BUFFER_BINDING, GL_IMAGE_BINDING_LAYERED,
         GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GL_MAX_COLOR_TEXTURE_SAMPLES,
         GL_MAX_COMBINED_ATOMIC_COUNTERS, GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS,
@@ -224,13 +223,14 @@ cmd void glGetBooleanv(GLenum param, GLboolean* values) {
 cmd void glGetFloatv(GLenum param, GLfloat* values) {
   minRequiredVersion(2, 0)
   switch (param) {
+    // GL_FRAMEBUFFER_BINDING was renamed to GL_DRAW_FRAMEBUFFER_BINDING in 3.0
     case GL_ACTIVE_TEXTURE, GL_ALIASED_LINE_WIDTH_RANGE, GL_ALIASED_POINT_SIZE_RANGE,
         GL_ALPHA_BITS, GL_ARRAY_BUFFER_BINDING, GL_BLEND, GL_BLEND_COLOR, GL_BLEND_DST_ALPHA,
         GL_BLEND_DST_RGB, GL_BLEND_EQUATION_ALPHA, GL_BLEND_EQUATION_RGB, GL_BLEND_SRC_ALPHA,
         GL_BLEND_SRC_RGB, GL_BLUE_BITS, GL_COLOR_CLEAR_VALUE, GL_COLOR_WRITEMASK,
         GL_COMPRESSED_TEXTURE_FORMATS, GL_CULL_FACE, GL_CULL_FACE_MODE, GL_CURRENT_PROGRAM,
         GL_DEPTH_BITS, GL_DEPTH_CLEAR_VALUE, GL_DEPTH_FUNC, GL_DEPTH_RANGE, GL_DEPTH_TEST,
-        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_FRAMEBUFFER_BINDING,
+        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_DRAW_FRAMEBUFFER_BINDING,
         GL_FRONT_FACE, GL_GENERATE_MIPMAP_HINT, GL_GREEN_BITS, GL_IMPLEMENTATION_COLOR_READ_FORMAT,
         GL_IMPLEMENTATION_COLOR_READ_TYPE, GL_LINE_WIDTH, GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
         GL_MAX_CUBE_MAP_TEXTURE_SIZE, GL_MAX_FRAGMENT_UNIFORM_VECTORS, GL_MAX_RENDERBUFFER_SIZE,
@@ -250,9 +250,8 @@ cmd void glGetFloatv(GLenum param, GLfloat* values) {
         GL_UNPACK_ALIGNMENT, GL_VIEWPORT: {
       // version 2.0
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.0
     case GL_COPY_READ_BUFFER_BINDING, GL_COPY_WRITE_BUFFER_BINDING, GL_DRAW_BUFFER,
-        GL_DRAW_FRAMEBUFFER_BINDING, GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
+        GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
         GL_MAX_3D_TEXTURE_SIZE, GL_MAX_ARRAY_TEXTURE_LAYERS, GL_MAX_COLOR_ATTACHMENTS,
         GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GL_MAX_COMBINED_UNIFORM_BLOCKS,
         GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GL_MAX_DRAW_BUFFERS, GL_MAX_ELEMENTS_INDICES,
@@ -277,7 +276,6 @@ cmd void glGetFloatv(GLenum param, GLfloat* values) {
         GL_UNPACK_SKIP_ROWS, GL_VERTEX_ARRAY_BINDING: {
       minRequiredVersion(3, 0)
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.1
     case GL_DISPATCH_INDIRECT_BUFFER_BINDING, GL_IMAGE_BINDING_LAYERED,
         GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GL_MAX_COLOR_TEXTURE_SAMPLES,
         GL_MAX_COMBINED_ATOMIC_COUNTERS, GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS,
@@ -591,13 +589,14 @@ cmd void glGetIntegeri_v(GLenum target, GLuint index, GLint* data) {
 cmd void glGetIntegerv(GLenum param, GLint* values) {
   minRequiredVersion(2, 0)
   switch (param) {
+    // GL_FRAMEBUFFER_BINDING was renamed to GL_DRAW_FRAMEBUFFER_BINDING in 3.0
     case GL_ACTIVE_TEXTURE, GL_ALIASED_LINE_WIDTH_RANGE, GL_ALIASED_POINT_SIZE_RANGE,
         GL_ALPHA_BITS, GL_ARRAY_BUFFER_BINDING, GL_BLEND, GL_BLEND_COLOR, GL_BLEND_DST_ALPHA,
         GL_BLEND_DST_RGB, GL_BLEND_EQUATION_ALPHA, GL_BLEND_EQUATION_RGB, GL_BLEND_SRC_ALPHA,
         GL_BLEND_SRC_RGB, GL_BLUE_BITS, GL_COLOR_CLEAR_VALUE, GL_COLOR_WRITEMASK,
         GL_COMPRESSED_TEXTURE_FORMATS, GL_CULL_FACE, GL_CULL_FACE_MODE, GL_CURRENT_PROGRAM,
         GL_DEPTH_BITS, GL_DEPTH_CLEAR_VALUE, GL_DEPTH_FUNC, GL_DEPTH_RANGE, GL_DEPTH_TEST,
-        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_FRAMEBUFFER_BINDING,
+        GL_DEPTH_WRITEMASK, GL_DITHER, GL_ELEMENT_ARRAY_BUFFER_BINDING, GL_DRAW_FRAMEBUFFER_BINDING,
         GL_FRONT_FACE, GL_GENERATE_MIPMAP_HINT, GL_GREEN_BITS, GL_IMPLEMENTATION_COLOR_READ_FORMAT,
         GL_IMPLEMENTATION_COLOR_READ_TYPE, GL_LINE_WIDTH, GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS,
         GL_MAX_CUBE_MAP_TEXTURE_SIZE, GL_MAX_FRAGMENT_UNIFORM_VECTORS, GL_MAX_RENDERBUFFER_SIZE,
@@ -617,9 +616,8 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
         GL_UNPACK_ALIGNMENT, GL_VIEWPORT: {
       // version 2.0
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.0
     case GL_COPY_READ_BUFFER_BINDING, GL_COPY_WRITE_BUFFER_BINDING, GL_DRAW_BUFFER,
-        GL_DRAW_FRAMEBUFFER_BINDING, GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
+        GL_FRAGMENT_SHADER_DERIVATIVE_HINT, GL_MAJOR_VERSION,
         GL_MAX_3D_TEXTURE_SIZE, GL_MAX_ARRAY_TEXTURE_LAYERS, GL_MAX_COLOR_ATTACHMENTS,
         GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, GL_MAX_COMBINED_UNIFORM_BLOCKS,
         GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS, GL_MAX_DRAW_BUFFERS, GL_MAX_ELEMENTS_INDICES,
@@ -644,7 +642,6 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
         GL_UNPACK_SKIP_ROWS, GL_VERTEX_ARRAY_BINDING: {
       minRequiredVersion(3, 0)
     }
-    // TODO: GL_FRAMEBUFFER_BINDING seems to be removed in 3.1
     case GL_DISPATCH_INDIRECT_BUFFER_BINDING, GL_IMAGE_BINDING_LAYERED,
         GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS, GL_MAX_COLOR_TEXTURE_SAMPLES,
         GL_MAX_COMBINED_ATOMIC_COUNTERS, GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS,
@@ -674,69 +671,69 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
   ctx := GetContext()
   switch (param) {
     case GL_ACTIVE_TEXTURE:
-      v[0] = as!s32(ctx.ActiveTextureUnit)
+      v[0] = as!GLint(ctx.ActiveTextureUnit)
     case GL_ARRAY_BUFFER_BINDING:
-      v[0] = as!s32(ctx.BoundBuffers[GL_ARRAY_BUFFER])
+      v[0] = as!GLint(ctx.BoundBuffers[GL_ARRAY_BUFFER])
     case GL_ELEMENT_ARRAY_BUFFER_BINDING:
-      v[0] = as!s32(ctx.BoundBuffers[GL_ELEMENT_ARRAY_BUFFER])
+      v[0] = as!GLint(ctx.BoundBuffers[GL_ELEMENT_ARRAY_BUFFER])
     case GL_BLEND_SRC_ALPHA:
-      v[0] = as!s32(ctx.Blending.SrcAlphaBlendFactor)
+      v[0] = as!GLint(ctx.Blending.SrcAlphaBlendFactor)
     case GL_BLEND_SRC_RGB:
-      v[0] = as!s32(ctx.Blending.SrcRgbBlendFactor)
+      v[0] = as!GLint(ctx.Blending.SrcRgbBlendFactor)
     case GL_BLEND_DST_ALPHA:
-      v[0] = as!s32(ctx.Blending.DstAlphaBlendFactor)
+      v[0] = as!GLint(ctx.Blending.DstAlphaBlendFactor)
     case GL_BLEND_DST_RGB:
-      v[0] = as!s32(ctx.Blending.DstRgbBlendFactor)
+      v[0] = as!GLint(ctx.Blending.DstRgbBlendFactor)
     case GL_BLEND_EQUATION_RGB:
-      v[0] = as!s32(ctx.Blending.BlendEquationRgb)
+      v[0] = as!GLint(ctx.Blending.BlendEquationRgb)
     case GL_BLEND_EQUATION_ALPHA:
-      v[0] = as!s32(ctx.Blending.BlendEquationAlpha)
+      v[0] = as!GLint(ctx.Blending.BlendEquationAlpha)
     case GL_BLEND_COLOR: {
-      v[0] = as!s32(ctx.Blending.BlendColor.Red)
-      v[1] = as!s32(ctx.Blending.BlendColor.Green)
-      v[2] = as!s32(ctx.Blending.BlendColor.Blue)
-      v[3] = as!s32(ctx.Blending.BlendColor.Alpha)
+      v[0] = as!GLint(ctx.Blending.BlendColor.Red)
+      v[1] = as!GLint(ctx.Blending.BlendColor.Green)
+      v[2] = as!GLint(ctx.Blending.BlendColor.Blue)
+      v[3] = as!GLint(ctx.Blending.BlendColor.Alpha)
     }
     case GL_DEPTH_FUNC:
-      v[0] = as!s32(ctx.Rasterizing.DepthTestFunction)
+      v[0] = as!GLint(ctx.Rasterizing.DepthTestFunction)
     case GL_DEPTH_CLEAR_VALUE:
-      v[0] = as!s32(ctx.Clearing.ClearDepth)
+      v[0] = as!GLint(ctx.Clearing.ClearDepth)
     case GL_STENCIL_WRITEMASK:
-      v[0] = as!s32(ctx.Rasterizing.StencilMask[GL_FRONT])
+      v[0] = as!GLint(ctx.Rasterizing.StencilMask[GL_FRONT])
     case GL_STENCIL_BACK_WRITEMASK:
-      v[0] = as!s32(ctx.Rasterizing.StencilMask[GL_BACK])
+      v[0] = as!GLint(ctx.Rasterizing.StencilMask[GL_BACK])
     case GL_VIEWPORT: {
-      v[0] = ctx.Rasterizing.Viewport.X
-      v[1] = ctx.Rasterizing.Viewport.Y
-      v[2] = ctx.Rasterizing.Viewport.Width
-      v[3] = ctx.Rasterizing.Viewport.Height
+      v[0] = as!GLint(ctx.Rasterizing.Viewport.X)
+      v[1] = as!GLint(ctx.Rasterizing.Viewport.Y)
+      v[2] = as!GLint(ctx.Rasterizing.Viewport.Width)
+      v[3] = as!GLint(ctx.Rasterizing.Viewport.Height)
     }
     case GL_SCISSOR_BOX: {
-      v[0] = ctx.Rasterizing.Scissor.X
-      v[1] = ctx.Rasterizing.Scissor.Y
-      v[2] = ctx.Rasterizing.Scissor.Width
-      v[3] = ctx.Rasterizing.Scissor.Height
+      v[0] = as!GLint(ctx.Rasterizing.Scissor.X)
+      v[1] = as!GLint(ctx.Rasterizing.Scissor.Y)
+      v[2] = as!GLint(ctx.Rasterizing.Scissor.Width)
+      v[3] = as!GLint(ctx.Rasterizing.Scissor.Height)
     }
     case GL_FRONT_FACE:
-      v[0] = as!s32(ctx.Rasterizing.FrontFace)
+      v[0] = as!GLint(ctx.Rasterizing.FrontFace)
     case GL_CULL_FACE_MODE:
-      v[0] = as!s32(ctx.Rasterizing.CullFace)
+      v[0] = as!GLint(ctx.Rasterizing.CullFace)
     case GL_STENCIL_CLEAR_VALUE:
       v[0] = ctx.Clearing.ClearStencil
-    case GL_FRAMEBUFFER_BINDING:
-      v[0] = as!s32(ctx.BoundFramebuffers[GL_FRAMEBUFFER])
+    case GL_DRAW_FRAMEBUFFER_BINDING:
+      v[0] = as!GLint(ctx.BoundFramebuffers[GL_FRAMEBUFFER])
     case GL_READ_FRAMEBUFFER_BINDING:
-      v[0] = as!s32(ctx.BoundFramebuffers[GL_READ_FRAMEBUFFER])
+      v[0] = as!GLint(ctx.BoundFramebuffers[GL_READ_FRAMEBUFFER])
     case GL_RENDERBUFFER_BINDING:
-      v[0] = as!s32(ctx.BoundRenderbuffers[GL_RENDERBUFFER])
+      v[0] = as!GLint(ctx.BoundRenderbuffers[GL_RENDERBUFFER])
     case GL_CURRENT_PROGRAM:
-      v[0] = as!s32(ctx.BoundProgram)
+      v[0] = as!GLint(ctx.BoundProgram)
     case GL_TEXTURE_BINDING_2D:
-      v[0] = as!s32(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D])
+      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D])
     case GL_TEXTURE_BINDING_CUBE_MAP:
-      v[0] = as!s32(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP])
+      v[0] = as!GLint(ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP])
     case GL_GENERATE_MIPMAP_HINT:
-      v[0] = as!s32(ctx.GenerateMipmapHint)
+      v[0] = as!GLint(ctx.GenerateMipmapHint)
     case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
       result := ?
       assert(result > 7)

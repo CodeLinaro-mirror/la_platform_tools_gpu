@@ -28,8 +28,8 @@ cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei index_count) 
   }
 
   ctx := GetContext()
-  last_index := first_index + index_count - 1
-  ReadVertexArrays(ctx, as!u32(first_index), as!u32(last_index))
+  last_index := as!u32(first_index) + as!u32(index_count) - 1
+  ReadVertexArrays(ctx, as!u32(first_index), last_index)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArraysIndirect.xhtml","OpenGL ES 3.1")

@@ -157,7 +157,7 @@ const (
 )
 
 var (
-	syncId           = SyncObject(0x0FFFFFFF0FFFFFFF)
+	syncId           = GLsync(0x0FFFFFFF0FFFFFFF)
 	transientPointer = memory.Tmp
 )
 
@@ -214,7 +214,7 @@ func (t *timingInfoGpuTransform) generateNewQueries(count int, out atom.Writer) 
 		newQueries[i] = QueryId(0xF0FF0000 + offset + i)
 	}
 	out.Write(atom.NoID,
-		NewGlGenQueries(int32(count), transientPointer).
+		NewGlGenQueries(GLsizei(count), transientPointer).
 			AddRead(atom.Data(t.device.Architecture(), t.db, t.logger, transientPointer, newQueries)))
 	t.availableQueryIds = append(t.availableQueryIds, newQueries...)
 }
@@ -286,8 +286,8 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 	// Wait for all commands to complete and check the disjoint timer flag before retrieving results.
 	if t.timerQueryType == gpuTimerQueryDisjointExt {
 		if t.hasFences {
-			out.Write(atom.NoID, NewGlFenceSync(SyncCondition_GL_SYNC_GPU_COMMANDS_COMPLETE, 0, syncId))
-			out.Write(atom.NoID, NewGlClientWaitSync(syncId, SyncFlags_GL_SYNC_FLUSH_COMMANDS_BIT, 0xFFFFFFFFFFFFFFFF, 0))
+			out.Write(atom.NoID, NewGlFenceSync(GLenum_GL_SYNC_GPU_COMMANDS_COMPLETE, 0, syncId))
+			out.Write(atom.NoID, NewGlClientWaitSync(syncId, GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT, 0xFFFFFFFFFFFFFFFF, 0))
 			out.Write(atom.NoID, NewGlDeleteSync(syncId))
 		} else {
 			out.Write(atom.NoID, NewGlReadPixels(0, 0, 1, 1, GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, transientPointer))

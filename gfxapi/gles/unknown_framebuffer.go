@@ -122,7 +122,7 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 	// Restore buffer/vertexAttrib state.
 	if origVertexAttrib.Buffer != 0 || origVertexAttrib.Pointer.Address != 0 {
 		out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origVertexAttrib.Buffer))
-		out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, int32(origVertexAttrib.Size), origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
+		out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, GLint(origVertexAttrib.Size), origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, origVertexAttrib.Pointer.Pointer))
 	}
 	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID))
 	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID))

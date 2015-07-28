@@ -79,7 +79,7 @@ func (i QueryId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap boo
 	return
 }
 
-func (i SyncObject) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
+func (i GLsync) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
 		key, remap = i, true
 	}
@@ -135,7 +135,7 @@ func (i BufferDataPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.Stat
 	}
 }
 
-func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
+func (i GLeglImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	return value.AbsolutePointer(i.Pointer.Address)
 }
 

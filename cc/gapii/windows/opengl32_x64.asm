@@ -106,11 +106,13 @@ TRAMPOLINE glCopyTexSubImage1D, real__glCopyTexSubImage1D
 TRAMPOLINE glDebugEntry, real__glDebugEntry
 TRAMPOLINE glDeleteLists, real__glDeleteLists
 TRAMPOLINE glDepthRange, real__glDepthRange
+TRAMPOLINE glDisableClientState, real__glDisableClientState
 TRAMPOLINE glDrawBuffer, real__glDrawBuffer
 TRAMPOLINE glDrawPixels, real__glDrawPixels
 TRAMPOLINE glEdgeFlag, real__glEdgeFlag
 TRAMPOLINE glEdgeFlagPointer, real__glEdgeFlagPointer
 TRAMPOLINE glEdgeFlagv, real__glEdgeFlagv
+TRAMPOLINE glEnableClientState, real__glEnableClientState
 TRAMPOLINE glEnd, real__glEnd
 TRAMPOLINE glEndList, real__glEndList
 TRAMPOLINE glEvalCoord1d, real__glEvalCoord1d
@@ -152,8 +154,6 @@ TRAMPOLINE glGetTexGendv, real__glGetTexGendv
 TRAMPOLINE glGetTexGenfv, real__glGetTexGenfv
 TRAMPOLINE glGetTexGeniv, real__glGetTexGeniv
 TRAMPOLINE glGetTexImage, real__glGetTexImage
-TRAMPOLINE glGetTexLevelParameterfv, real__glGetTexLevelParameterfv
-TRAMPOLINE glGetTexLevelParameteriv, real__glGetTexLevelParameteriv
 TRAMPOLINE glIndexd, real__glIndexd
 TRAMPOLINE glIndexdv, real__glIndexdv
 TRAMPOLINE glIndexf, real__glIndexf
@@ -262,7 +262,6 @@ TRAMPOLINE glRasterPos4i, real__glRasterPos4i
 TRAMPOLINE glRasterPos4iv, real__glRasterPos4iv
 TRAMPOLINE glRasterPos4s, real__glRasterPos4s
 TRAMPOLINE glRasterPos4sv, real__glRasterPos4sv
-TRAMPOLINE glReadBuffer, real__glReadBuffer
 TRAMPOLINE glRectd, real__glRectd
 TRAMPOLINE glRectdv, real__glRectdv
 TRAMPOLINE glRectf, real__glRectf
@@ -278,8 +277,6 @@ TRAMPOLINE glScaled, real__glScaled
 TRAMPOLINE glScalef, real__glScalef
 TRAMPOLINE glSelectBuffer, real__glSelectBuffer
 TRAMPOLINE glShadeModel, real__glShadeModel
-TRAMPOLINE glStencilFunc, real__glStencilFunc
-TRAMPOLINE glStencilOp, real__glStencilOp
 TRAMPOLINE glTexCoord1d, real__glTexCoord1d
 TRAMPOLINE glTexCoord1dv, real__glTexCoord1dv
 TRAMPOLINE glTexCoord1f, real__glTexCoord1f
@@ -324,8 +321,6 @@ TRAMPOLINE glTexGenfv, real__glTexGenfv
 TRAMPOLINE glTexGeni, real__glTexGeni
 TRAMPOLINE glTexGeniv, real__glTexGeniv
 TRAMPOLINE glTexImage1D, real__glTexImage1D
-TRAMPOLINE glTexParameterfv, real__glTexParameterfv
-TRAMPOLINE glTexParameteriv, real__glTexParameteriv
 TRAMPOLINE glTexSubImage1D, real__glTexSubImage1D
 TRAMPOLINE glTranslated, real__glTranslated
 TRAMPOLINE glTranslatef, real__glTranslatef

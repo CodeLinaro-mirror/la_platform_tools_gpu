@@ -18,15 +18,15 @@
 cmd void architecture(u32  pointer_alignment,
                       u32  pointer_size,
                       u32  integer_size,
-                      bool little_endian) {}
+                      bool little_endian) {  }
 
 // replayCreateRenderer constructs a GLES renderer for replay without making it active.
 @synthetic
-cmd void replayCreateRenderer(u32 id) {}
+cmd void replayCreateRenderer(u32 id) {  }
 
 // replayBindRenderer makes the renderer constructed with replayCreateRenderer active.
 @synthetic
-cmd void replayBindRenderer(u32 id) {}
+cmd void replayBindRenderer(u32 id) {  }
 
 // switchThread changes the current thread to the thread with the specified identifier.
 @synthetic @no_replay
@@ -35,13 +35,13 @@ cmd void switchThread(ThreadID threadID) {
 }
 
 @synthetic
-cmd void backbufferInfo(s32    width,
-                        s32    height,
-                        GLenum color_fmt,
-                        GLenum depth_fmt,
-                        GLenum stencil_fmt,
-                        bool   resetViewportScissor,
-                        bool   preserveBuffersOnSwap) {
+cmd void backbufferInfo(GLsizei width,
+                        GLsizei height,
+                        GLenum  color_fmt,
+                        GLenum  depth_fmt,
+                        GLenum  stencil_fmt,
+                        bool    resetViewportScissor,
+                        bool    preserveBuffersOnSwap) {
   ctx := GetContext()
   ctx.PreserveBuffersOnSwap = preserveBuffersOnSwap
   backbuffer := ctx.Instances.Framebuffers[0]
@@ -76,10 +76,10 @@ cmd void backbufferInfo(s32    width,
 }
 
 @synthetic
-cmd void startTimer(u8 index) {}
+cmd void startTimer(u8 index) {  }
 
 @synthetic
 cmd u64 stopTimer(u8 index) { return ? }  // Time returned in nanoseconds
 
 @synthetic
-cmd void flushPostBuffer() {}
+cmd void flushPostBuffer() {  }

@@ -26,7 +26,7 @@ func remapAttributes() atom.Transformer {
 		case *GlGetAttribLocation:
 			if a.Result != -1 {
 				pendingLink[a.Program] = struct{}{} // Mark program as requiring linking before use.
-				out.Write(i, NewGlBindAttribLocation(a.Program, a.Result, a.Name))
+				out.Write(i, NewGlBindAttribLocation(a.Program, AttributeLocation(a.Result), a.Name))
 			}
 
 		case *GlLinkProgram:

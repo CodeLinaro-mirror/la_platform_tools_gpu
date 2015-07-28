@@ -28,6 +28,1255 @@ namespace gapii {
 struct GlesImports {
     void Resolve();
 
+    typedef void(STDCALL *PFNGLBLENDBARRIERKHR)();
+    typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATEIEXT)(uint32_t buf, uint32_t modeRGB,
+                                                          uint32_t modeAlpha);
+    typedef void(STDCALL *PFNGLBLENDEQUATIONIEXT)(uint32_t buf, uint32_t mode);
+    typedef void(STDCALL *PFNGLBLENDFUNCSEPARATEIEXT)(uint32_t buf, uint32_t srcRGB,
+                                                      uint32_t dstRGB, uint32_t srcAlpha,
+                                                      uint32_t dstAlpha);
+    typedef void(STDCALL *PFNGLBLENDFUNCIEXT)(uint32_t buf, uint32_t src, uint32_t dst);
+    typedef void(STDCALL *PFNGLCOLORMASKIEXT)(uint32_t index, uint8_t r, uint8_t g, uint8_t b,
+                                              uint8_t a);
+    typedef void(STDCALL *PFNGLCOPYIMAGESUBDATAEXT)(
+            uint32_t srcName, uint32_t srcTarget, int32_t srcLevel, int32_t srcX, int32_t srcY,
+            int32_t srcZ, uint32_t dstName, uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
+            int32_t dstY, int32_t dstZ, int32_t srcWidth, int32_t srcHeight, int32_t srcDepth);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGECALLBACKKHR)(void *callback, void *userParam);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGECONTROLKHR)(uint32_t source, uint32_t type,
+                                                       uint32_t severity, int32_t count,
+                                                       uint32_t *ids, uint8_t enabled);
+    typedef void(STDCALL *PFNGLDEBUGMESSAGEINSERTKHR)(uint32_t source, uint32_t type, uint32_t id,
+                                                      uint32_t severity, int32_t length, char *buf);
+    typedef void(STDCALL *PFNGLDISABLEIEXT)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLENABLEIEXT)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREEXT)(uint32_t target, uint32_t attachment,
+                                                      uint32_t texture, int32_t level);
+    typedef uint32_t(STDCALL *PFNGLGETDEBUGMESSAGELOGKHR)(uint32_t count, int32_t bufSize,
+                                                          uint32_t *sources, uint32_t *types,
+                                                          uint32_t *ids, uint32_t *severities,
+                                                          int32_t *lengths, char *messageLog);
+    typedef void(STDCALL *PFNGLGETOBJECTLABELKHR)(uint32_t identifier, uint32_t name,
+                                                  int32_t bufSize, int32_t *length, char *label);
+    typedef void(STDCALL *PFNGLGETOBJECTPTRLABELKHR)(void *ptr, int32_t bufSize, int32_t *length,
+                                                     char *label);
+    typedef void(STDCALL *PFNGLGETPOINTERVKHR)(uint32_t pname, void **params);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIIVEXT)(uint32_t sampler, uint32_t pname,
+                                                          int32_t *params);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIUIVEXT)(uint32_t sampler, uint32_t pname,
+                                                           uint32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIIVEXT)(uint32_t target, uint32_t pname,
+                                                      int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIUIVEXT)(uint32_t target, uint32_t pname,
+                                                       uint32_t *params);
+    typedef bool(STDCALL *PFNGLISENABLEDIEXT)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLMINSAMPLESHADINGOES)(float value);
+    typedef void(STDCALL *PFNGLOBJECTLABELKHR)(uint32_t identifier, uint32_t name, int32_t length,
+                                               char *label);
+    typedef void(STDCALL *PFNGLOBJECTPTRLABELKHR)(void *ptr, int32_t length, char *label);
+    typedef void(STDCALL *PFNGLPATCHPARAMETERIEXT)(uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLPOPDEBUGGROUPKHR)();
+    typedef void(STDCALL *PFNGLPRIMITIVEBOUNDINGBOXEXT)(float minX, float minY, float minZ,
+                                                        float minW, float maxX, float maxY,
+                                                        float maxZ, float maxW);
+    typedef void(STDCALL *PFNGLPUSHDEBUGGROUPKHR)(uint32_t source, uint32_t id, int32_t length,
+                                                  char *message);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIIVEXT)(uint32_t sampler, uint32_t pname,
+                                                       int32_t *param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIUIVEXT)(uint32_t sampler, uint32_t pname,
+                                                        uint32_t *param);
+    typedef void(STDCALL *PFNGLTEXBUFFEREXT)(uint32_t target, uint32_t internalformat,
+                                             uint32_t buffer);
+    typedef void(STDCALL *PFNGLTEXBUFFERRANGEEXT)(uint32_t target, uint32_t internalformat,
+                                                  uint32_t buffer, int32_t offset, int32_t size);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIIVEXT)(uint32_t target, uint32_t pname,
+                                                   int32_t *params);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIUIVEXT)(uint32_t target, uint32_t pname,
+                                                    uint32_t *params);
+    typedef void(STDCALL *PFNGLTEXSTORAGE3DMULTISAMPLEOES)(uint32_t target, int32_t samples,
+                                                           uint32_t internalformat, int32_t width,
+                                                           int32_t height, int32_t depth,
+                                                           uint8_t fixedsamplelocations);
+    typedef void(STDCALL *PFNGLBEGINQUERY)(uint32_t target, uint32_t query);
+    typedef void(STDCALL *PFNGLDELETEQUERIES)(int32_t count, uint32_t *queries);
+    typedef void(STDCALL *PFNGLENDQUERY)(uint32_t target);
+    typedef void(STDCALL *PFNGLGENQUERIES)(int32_t count, uint32_t *queries);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, uint32_t parameter,
+                                                  uint32_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYIV)(uint32_t target, uint32_t parameter, int32_t *value);
+    typedef bool(STDCALL *PFNGLISQUERY)(uint32_t query);
+    typedef void(STDCALL *PFNGLBINDBUFFER)(uint32_t target, uint32_t buffer);
+    typedef void(STDCALL *PFNGLBINDBUFFERBASE)(uint32_t target, uint32_t index, uint32_t buffer);
+    typedef void(STDCALL *PFNGLBINDBUFFERRANGE)(uint32_t target, uint32_t index, uint32_t buffer,
+                                                int32_t offset, int32_t size);
+    typedef void(STDCALL *PFNGLBUFFERDATA)(uint32_t target, int32_t size, void *data,
+                                           uint32_t usage);
+    typedef void(STDCALL *PFNGLBUFFERSUBDATA)(uint32_t target, int32_t offset, int32_t size,
+                                              void *data);
+    typedef void(STDCALL *PFNGLCOPYBUFFERSUBDATA)(uint32_t readTarget, uint32_t writeTarget,
+                                                  int32_t readOffset, int32_t writeOffset,
+                                                  int32_t size);
+    typedef void(STDCALL *PFNGLDELETEBUFFERS)(int32_t count, uint32_t *buffers);
+    typedef void(STDCALL *PFNGLGENBUFFERS)(int32_t count, uint32_t *buffers);
+    typedef void(STDCALL *PFNGLGETBUFFERPARAMETERI64V)(uint32_t target, uint32_t pname,
+                                                       int64_t *params);
+    typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(uint32_t target, uint32_t parameter,
+                                                     int32_t *value);
+    typedef void(STDCALL *PFNGLGETBUFFERPOINTERV)(uint32_t target, uint32_t pname, void **params);
+    typedef bool(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
+    typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(uint32_t target, int32_t offset, int32_t length,
+                                                 uint32_t access);
+    typedef uint8_t(STDCALL *PFNGLUNMAPBUFFER)(uint32_t target);
+    typedef void(STDCALL *PFNGLDRAWARRAYS)(uint32_t draw_mode, int32_t first_index,
+                                           int32_t index_count);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINDIRECT)(uint32_t mode, void *indirect);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCED)(uint32_t mode, int32_t first, int32_t count,
+                                                    int32_t instancecount);
+    typedef void(STDCALL *PFNGLDRAWBUFFERS)(int32_t n, uint32_t *bufs);
+    typedef void(STDCALL *PFNGLDRAWELEMENTS)(uint32_t draw_mode, int32_t element_count,
+                                             uint32_t indices_type, void *indices);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINDIRECT)(uint32_t mode, uint32_t type, void *indirect);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCED)(uint32_t mode, int32_t count, uint32_t type,
+                                                      void *indices, int32_t instancecount);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTS)(uint32_t mode, uint32_t start, uint32_t end,
+                                                  int32_t count, uint32_t type, void *indices);
+    typedef void(STDCALL *PFNGLACTIVESHADERPROGRAMEXT)(uint32_t pipeline, uint32_t program);
+    typedef void(STDCALL *PFNGLALPHAFUNCQCOM)(uint32_t func, float ref);
+    typedef void(STDCALL *PFNGLBEGINCONDITIONALRENDERNV)(uint32_t id, uint32_t mode);
+    typedef void(STDCALL *PFNGLBEGINPERFMONITORAMD)(uint32_t monitor);
+    typedef void(STDCALL *PFNGLBEGINPERFQUERYINTEL)(uint32_t queryHandle);
+    typedef void(STDCALL *PFNGLBEGINQUERYEXT)(uint32_t target, uint32_t query);
+    typedef void(STDCALL *PFNGLBINDPROGRAMPIPELINEEXT)(uint32_t pipeline);
+    typedef void(STDCALL *PFNGLBINDVERTEXARRAYOES)(uint32_t array);
+    typedef void(STDCALL *PFNGLBLENDBARRIERNV)();
+    typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATEIOES)(uint32_t buf, uint32_t modeRGB,
+                                                          uint32_t modeAlpha);
+    typedef void(STDCALL *PFNGLBLENDEQUATIONIOES)(uint32_t buf, uint32_t mode);
+    typedef void(STDCALL *PFNGLBLENDFUNCSEPARATEIOES)(uint32_t buf, uint32_t srcRGB,
+                                                      uint32_t dstRGB, uint32_t srcAlpha,
+                                                      uint32_t dstAlpha);
+    typedef void(STDCALL *PFNGLBLENDFUNCIOES)(uint32_t buf, uint32_t src, uint32_t dst);
+    typedef void(STDCALL *PFNGLBLENDPARAMETERINV)(uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLBLITFRAMEBUFFERANGLE)(int32_t srcX0, int32_t srcY0, int32_t srcX1,
+                                                     int32_t srcY1, int32_t dstX0, int32_t dstY0,
+                                                     int32_t dstX1, int32_t dstY1, uint32_t mask,
+                                                     uint32_t filter);
+    typedef void(STDCALL *PFNGLBLITFRAMEBUFFERNV)(int32_t srcX0, int32_t srcY0, int32_t srcX1,
+                                                  int32_t srcY1, int32_t dstX0, int32_t dstY0,
+                                                  int32_t dstX1, int32_t dstY1, uint32_t mask,
+                                                  uint32_t filter);
+    typedef void(STDCALL *PFNGLBUFFERSTORAGEEXT)(uint32_t target, int32_t size, void *data,
+                                                 uint32_t flag);
+    typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNCAPPLE)(uint64_t sync, uint32_t flag,
+                                                        uint64_t timeout);
+    typedef void(STDCALL *PFNGLCOLORMASKIOES)(uint32_t index, uint8_t r, uint8_t g, uint8_t b,
+                                              uint8_t a);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE3DOES)(uint32_t target, int32_t level,
+                                                        uint32_t internalformat, int32_t width,
+                                                        int32_t height, int32_t depth,
+                                                        int32_t border, int32_t imageSize,
+                                                        void *data);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE3DOES)(uint32_t target, int32_t level,
+                                                           int32_t xoffset, int32_t yoffset,
+                                                           int32_t zoffset, int32_t width,
+                                                           int32_t height, int32_t depth,
+                                                           uint32_t format, int32_t imageSize,
+                                                           void *data);
+    typedef void(STDCALL *PFNGLCOPYBUFFERSUBDATANV)(uint32_t readTarget, uint32_t writeTarget,
+                                                    int32_t readOffset, int32_t writeOffset,
+                                                    int32_t size);
+    typedef void(STDCALL *PFNGLCOPYIMAGESUBDATAOES)(
+            uint32_t srcName, uint32_t srcTarget, int32_t srcLevel, int32_t srcX, int32_t srcY,
+            int32_t srcZ, uint32_t dstName, uint32_t dstTarget, int32_t dstLevel, int32_t dstX,
+            int32_t dstY, int32_t dstZ, int32_t srcWidth, int32_t srcHeight, int32_t srcDepth);
+    typedef void(STDCALL *PFNGLCOPYPATHNV)(uint32_t resultPath, uint32_t srcPath);
+    typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE3DOES)(uint32_t target, int32_t level,
+                                                     int32_t xoffset, int32_t yoffset,
+                                                     int32_t zoffset, int32_t x, int32_t y,
+                                                     int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLCOPYTEXTURELEVELSAPPLE)(uint32_t destinationTexture,
+                                                       uint32_t sourceTexture,
+                                                       int32_t sourceBaseLevel,
+                                                       int32_t sourceLevelCount);
+    typedef void(STDCALL *PFNGLCOVERFILLPATHINSTANCEDNV)(int32_t numPaths, uint32_t pathNameType,
+                                                         void *paths, uint32_t pathBase,
+                                                         uint32_t coverMode, uint32_t transformType,
+                                                         float *transformValues);
+    typedef void(STDCALL *PFNGLCOVERFILLPATHNV)(uint32_t path, uint32_t coverMode);
+    typedef void(STDCALL *PFNGLCOVERSTROKEPATHINSTANCEDNV)(int32_t numPaths, uint32_t pathNameType,
+                                                           void *paths, uint32_t pathBase,
+                                                           uint32_t coverMode,
+                                                           uint32_t transformType,
+                                                           float *transformValues);
+    typedef void(STDCALL *PFNGLCOVERSTROKEPATHNV)(uint32_t path, uint32_t coverMode);
+    typedef void(STDCALL *PFNGLCOVERAGEMASKNV)(uint8_t mask);
+    typedef void(STDCALL *PFNGLCOVERAGEOPERATIONNV)(uint32_t operation);
+    typedef void(STDCALL *PFNGLCREATEPERFQUERYINTEL)(uint32_t queryId, uint32_t *queryHandle);
+    typedef uint32_t(STDCALL *PFNGLCREATESHADERPROGRAMVEXT)(uint32_t type, int32_t count,
+                                                            char **strings);
+    typedef void(STDCALL *PFNGLDELETEFENCESNV)(int32_t n, uint32_t *fences);
+    typedef void(STDCALL *PFNGLDELETEPATHSNV)(uint32_t path, int32_t range);
+    typedef void(STDCALL *PFNGLDELETEPERFMONITORSAMD)(int32_t n, uint32_t *monitors);
+    typedef void(STDCALL *PFNGLDELETEPERFQUERYINTEL)(uint32_t queryHandle);
+    typedef void(STDCALL *PFNGLDELETEPROGRAMPIPELINESEXT)(int32_t n, uint32_t *pipelines);
+    typedef void(STDCALL *PFNGLDELETEQUERIESEXT)(int32_t count, uint32_t *queries);
+    typedef void(STDCALL *PFNGLDELETESYNCAPPLE)(uint64_t sync);
+    typedef void(STDCALL *PFNGLDELETEVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLDEPTHRANGEARRAYFVNV)(uint32_t first, int32_t count, float *v);
+    typedef void(STDCALL *PFNGLDEPTHRANGEINDEXEDFNV)(uint32_t index, float n, float f);
+    typedef void(STDCALL *PFNGLDISABLEDRIVERCONTROLQCOM)(uint32_t driverControl);
+    typedef void(STDCALL *PFNGLDISABLEINV)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLDISABLEIOES)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLDISCARDFRAMEBUFFEREXT)(uint32_t target, int32_t numAttachments,
+                                                      uint32_t *attachments);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCEDANGLE)(uint32_t mode, int32_t first,
+                                                         int32_t count, int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEEXT)(uint32_t mode, int32_t first,
+                                                                   int32_t count,
+                                                                   int32_t instancecount,
+                                                                   uint32_t baseinstance);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCEDEXT)(uint32_t mode, int32_t start, int32_t count,
+                                                       int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWARRAYSINSTANCEDNV)(uint32_t mode, int32_t first, int32_t count,
+                                                      int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWBUFFERSEXT)(int32_t n, uint32_t *bufs);
+    typedef void(STDCALL *PFNGLDRAWBUFFERSINDEXEDEXT)(int32_t n, uint32_t *location,
+                                                      int32_t *indices);
+    typedef void(STDCALL *PFNGLDRAWBUFFERSNV)(int32_t n, uint32_t *bufs);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSBASEVERTEXEXT)(uint32_t mode, int32_t count,
+                                                          uint32_t type, void *indices,
+                                                          int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSBASEVERTEXOES)(uint32_t mode, int32_t count,
+                                                          uint32_t type, void *indices,
+                                                          int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDANGLE)(uint32_t mode, int32_t count,
+                                                           uint32_t type, void *indices,
+                                                           int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT)(uint32_t mode, int32_t count,
+                                                                     uint32_t type, void *indices,
+                                                                     int32_t instancecount,
+                                                                     uint32_t baseinstance);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT)(uint32_t mode, int32_t count,
+                                                                   uint32_t type, void *indices,
+                                                                   int32_t instancecount,
+                                                                   int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES)(uint32_t mode, int32_t count,
+                                                                   uint32_t type, void *indices,
+                                                                   int32_t instancecount,
+                                                                   int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT)(
+            uint32_t mode, int32_t count, uint32_t type, void *indices, int32_t instancecount,
+            int32_t basevertex, uint32_t baseinstance);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDEXT)(uint32_t mode, int32_t count,
+                                                         uint32_t type, void *indices,
+                                                         int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWELEMENTSINSTANCEDNV)(uint32_t mode, int32_t count, uint32_t type,
+                                                        void *indices, int32_t primcount);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTSBASEVERTEXEXT)(uint32_t mode, uint32_t start,
+                                                               uint32_t end, int32_t count,
+                                                               uint32_t type, void *indices,
+                                                               int32_t basevertex);
+    typedef void(STDCALL *PFNGLDRAWRANGEELEMENTSBASEVERTEXOES)(uint32_t mode, uint32_t start,
+                                                               uint32_t end, int32_t count,
+                                                               uint32_t type, void *indices,
+                                                               int32_t basevertex);
+    typedef void(STDCALL *PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES)(uint32_t target, void *image);
+    typedef void(STDCALL *PFNGLEGLIMAGETARGETTEXTURE2DOES)(uint32_t target, void *image);
+    typedef void(STDCALL *PFNGLENABLEDRIVERCONTROLQCOM)(uint32_t driverControl);
+    typedef void(STDCALL *PFNGLENABLEINV)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLENABLEIOES)(uint32_t target, uint32_t index);
+    typedef void(STDCALL *PFNGLENDCONDITIONALRENDERNV)();
+    typedef void(STDCALL *PFNGLENDPERFMONITORAMD)(uint32_t monitor);
+    typedef void(STDCALL *PFNGLENDPERFQUERYINTEL)(uint32_t queryHandle);
+    typedef void(STDCALL *PFNGLENDQUERYEXT)(uint32_t target);
+    typedef void(STDCALL *PFNGLENDTILINGQCOM)(uint32_t preserve_mask);
+    typedef void(STDCALL *PFNGLEXTGETBUFFERPOINTERVQCOM)(uint32_t target, void **params);
+    typedef void(STDCALL *PFNGLEXTGETBUFFERSQCOM)(uint32_t *buffers, int32_t maxBuffers,
+                                                  int32_t *numBuffers);
+    typedef void(STDCALL *PFNGLEXTGETFRAMEBUFFERSQCOM)(uint32_t *framebuffers,
+                                                       int32_t maxFramebuffers,
+                                                       int32_t *numFramebuffers);
+    typedef void(STDCALL *PFNGLEXTGETPROGRAMBINARYSOURCEQCOM)(uint32_t program, uint32_t shadertype,
+                                                              char *source, int32_t *length);
+    typedef void(STDCALL *PFNGLEXTGETPROGRAMSQCOM)(uint32_t *programs, int32_t maxPrograms,
+                                                   int32_t *numPrograms);
+    typedef void(STDCALL *PFNGLEXTGETRENDERBUFFERSQCOM)(uint32_t *renderbuffers,
+                                                        int32_t maxRenderbuffers,
+                                                        int32_t *numRenderbuffers);
+    typedef void(STDCALL *PFNGLEXTGETSHADERSQCOM)(uint32_t *shaders, int32_t maxShaders,
+                                                  int32_t *numShaders);
+    typedef void(STDCALL *PFNGLEXTGETTEXLEVELPARAMETERIVQCOM)(uint32_t texture, uint32_t face,
+                                                              int32_t level, uint32_t pname,
+                                                              int32_t *params);
+    typedef void(STDCALL *PFNGLEXTGETTEXSUBIMAGEQCOM)(uint32_t target, int32_t level,
+                                                      int32_t xoffset, int32_t yoffset,
+                                                      int32_t zoffset, int32_t width,
+                                                      int32_t height, int32_t depth,
+                                                      uint32_t format, uint32_t type, void *texels);
+    typedef void(STDCALL *PFNGLEXTGETTEXTURESQCOM)(uint32_t *textures, int32_t maxTextures,
+                                                   int32_t *numTextures);
+    typedef uint8_t(STDCALL *PFNGLEXTISPROGRAMBINARYQCOM)(uint32_t program);
+    typedef void(STDCALL *PFNGLEXTTEXOBJECTSTATEOVERRIDEIQCOM)(uint32_t target, uint32_t pname,
+                                                               int32_t param);
+    typedef uint64_t(STDCALL *PFNGLFENCESYNCAPPLE)(uint32_t condition, uint32_t flag);
+    typedef void(STDCALL *PFNGLFINISHFENCENV)(uint32_t fence);
+    typedef void(STDCALL *PFNGLFLUSHMAPPEDBUFFERRANGEEXT)(uint32_t target, int32_t offset,
+                                                          int32_t length);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT)(uint32_t target,
+                                                                   uint32_t attachment,
+                                                                   uint32_t textarget,
+                                                                   uint32_t texture, int32_t level,
+                                                                   int32_t samples);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMG)(uint32_t target,
+                                                                   uint32_t attachment,
+                                                                   uint32_t textarget,
+                                                                   uint32_t texture, int32_t level,
+                                                                   int32_t samples);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE3DOES)(uint32_t target, uint32_t attachment,
+                                                        uint32_t textarget, uint32_t texture,
+                                                        int32_t level, int32_t zoffset);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREOES)(uint32_t target, uint32_t attachment,
+                                                      uint32_t texture, int32_t level);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR)(uint32_t target, uint32_t attachment,
+                                                               uint32_t texture, int32_t level,
+                                                               int32_t baseViewIndex,
+                                                               int32_t numViews);
+    typedef void(STDCALL *PFNGLGENFENCESNV)(int32_t n, uint32_t *fences);
+    typedef uint32_t(STDCALL *PFNGLGENPATHSNV)(int32_t range);
+    typedef void(STDCALL *PFNGLGENPERFMONITORSAMD)(int32_t n, uint32_t *monitors);
+    typedef void(STDCALL *PFNGLGENPROGRAMPIPELINESEXT)(int32_t n, uint32_t *pipelines);
+    typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
+    typedef void(STDCALL *PFNGLGENVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLGETBUFFERPOINTERVOES)(uint32_t target, uint32_t pname,
+                                                     void **params);
+    typedef void(STDCALL *PFNGLGETDRIVERCONTROLSTRINGQCOM)(uint32_t driverControl, int32_t bufSize,
+                                                           int32_t *length,
+                                                           char *driverControlString);
+    typedef void(STDCALL *PFNGLGETDRIVERCONTROLSQCOM)(int32_t *num, int32_t size,
+                                                      uint32_t *driverControls);
+    typedef void(STDCALL *PFNGLGETFENCEIVNV)(uint32_t fence, uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLGETFIRSTPERFQUERYIDINTEL)(uint32_t *queryId);
+    typedef void(STDCALL *PFNGLGETFLOATI_VNV)(uint32_t target, uint32_t index, float *data);
+    typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
+    typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSKHR)();
+    typedef uint64_t(STDCALL *PFNGLGETIMAGEHANDLENV)(uint32_t texture, int32_t level,
+                                                     uint8_t layered, int32_t layer,
+                                                     uint32_t format);
+    typedef void(STDCALL *PFNGLGETINTEGER64VAPPLE)(uint32_t pname, int64_t *params);
+    typedef void(STDCALL *PFNGLGETINTEGERI_VEXT)(uint32_t target, uint32_t index, int32_t *data);
+    typedef void(STDCALL *PFNGLGETINTERNALFORMATSAMPLEIVNV)(uint32_t target,
+                                                            uint32_t internalformat,
+                                                            int32_t samples, uint32_t pname,
+                                                            int32_t bufSize, int32_t *params);
+    typedef void(STDCALL *PFNGLGETNEXTPERFQUERYIDINTEL)(uint32_t queryId, uint32_t *nextQueryId);
+    typedef void(STDCALL *PFNGLGETOBJECTLABELEXT)(uint32_t type, uint32_t object, int32_t bufSize,
+                                                  int32_t *length, char *label);
+    typedef void(STDCALL *PFNGLGETPATHCOMMANDSNV)(uint32_t path, uint8_t *commands);
+    typedef void(STDCALL *PFNGLGETPATHCOORDSNV)(uint32_t path, float *coords);
+    typedef void(STDCALL *PFNGLGETPATHDASHARRAYNV)(uint32_t path, float *dashArray);
+    typedef float(STDCALL *PFNGLGETPATHLENGTHNV)(uint32_t path, int32_t startSegment,
+                                                 int32_t numSegments);
+    typedef void(STDCALL *PFNGLGETPATHMETRICRANGENV)(uint32_t metricQueryMask,
+                                                     uint32_t firstPathName, int32_t numPaths,
+                                                     int32_t stride, float *metrics);
+    typedef void(STDCALL *PFNGLGETPATHMETRICSNV)(uint32_t metricQueryMask, int32_t numPaths,
+                                                 uint32_t pathNameType, void *paths,
+                                                 uint32_t pathBase, int32_t stride, float *metrics);
+    typedef void(STDCALL *PFNGLGETPATHPARAMETERFVNV)(uint32_t path, uint32_t pname, float *value);
+    typedef void(STDCALL *PFNGLGETPATHPARAMETERIVNV)(uint32_t path, uint32_t pname, int32_t *value);
+    typedef void(STDCALL *PFNGLGETPATHSPACINGNV)(uint32_t pathListMode, int32_t numPaths,
+                                                 uint32_t pathNameType, void *paths,
+                                                 uint32_t pathBase, float advanceScale,
+                                                 float kerningScale, uint32_t transformType,
+                                                 float *returnedSpacing);
+    typedef void(STDCALL *PFNGLGETPERFCOUNTERINFOINTEL)(
+            uint32_t queryId, uint32_t counterId, uint32_t counterNameLength, char *counterName,
+            uint32_t counterDescLength, char *counterDesc, uint32_t *counterOffset,
+            uint32_t *counterDataSize, uint32_t *counterTypeEnum, uint32_t *counterDataTypeEnum,
+            uint64_t *rawCounterMaxValue);
+    typedef void(STDCALL *PFNGLGETPERFMONITORCOUNTERDATAAMD)(uint32_t monitor, uint32_t pname,
+                                                             int32_t dataSize, uint32_t *data,
+                                                             int32_t *bytesWritten);
+    typedef void(STDCALL *PFNGLGETPERFMONITORCOUNTERINFOAMD)(uint32_t group, uint32_t counter,
+                                                             uint32_t pname, void *data);
+    typedef void(STDCALL *PFNGLGETPERFMONITORCOUNTERSTRINGAMD)(uint32_t group, uint32_t counter,
+                                                               int32_t bufSize, int32_t *length,
+                                                               char *counterString);
+    typedef void(STDCALL *PFNGLGETPERFMONITORCOUNTERSAMD)(uint32_t group, int32_t *numCounters,
+                                                          int32_t *maxActiveCounters,
+                                                          int32_t counterSize, uint32_t *counters);
+    typedef void(STDCALL *PFNGLGETPERFMONITORGROUPSTRINGAMD)(uint32_t group, int32_t bufSize,
+                                                             int32_t *length, char *groupString);
+    typedef void(STDCALL *PFNGLGETPERFMONITORGROUPSAMD)(int32_t *numGroups, int32_t groupsSize,
+                                                        uint32_t *groups);
+    typedef void(STDCALL *PFNGLGETPERFQUERYDATAINTEL)(uint32_t queryHandle, uint32_t flag,
+                                                      int32_t dataSize, void *data,
+                                                      uint32_t *bytesWritten);
+    typedef void(STDCALL *PFNGLGETPERFQUERYIDBYNAMEINTEL)(char *queryName, uint32_t *queryId);
+    typedef void(STDCALL *PFNGLGETPERFQUERYINFOINTEL)(uint32_t queryId, uint32_t queryNameLength,
+                                                      char *queryName, uint32_t *dataSize,
+                                                      uint32_t *noCounters, uint32_t *noInstances,
+                                                      uint32_t *capsMask);
+    typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(uint32_t program, int32_t buffer_size,
+                                                    int32_t *bytes_written, uint32_t *binary_format,
+                                                    void *binary);
+    typedef void(STDCALL *PFNGLGETPROGRAMPIPELINEINFOLOGEXT)(uint32_t pipeline, int32_t bufSize,
+                                                             int32_t *length, char *infoLog);
+    typedef void(STDCALL *PFNGLGETPROGRAMPIPELINEIVEXT)(uint32_t pipeline, uint32_t pname,
+                                                        int32_t *params);
+    typedef void(STDCALL *PFNGLGETPROGRAMRESOURCEFVNV)(uint32_t program, uint32_t programInterface,
+                                                       uint32_t index, int32_t propCount,
+                                                       uint32_t *props, int32_t bufSize,
+                                                       int32_t *length, float *params);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTI64VEXT)(uint32_t query, uint32_t parameter,
+                                                      int64_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTIVEXT)(uint32_t query, uint32_t parameter,
+                                                    int32_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64VEXT)(uint32_t query, uint32_t parameter,
+                                                       uint64_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYOBJECTUIVEXT)(uint32_t query, uint32_t parameter,
+                                                     uint32_t *value);
+    typedef void(STDCALL *PFNGLGETQUERYIVEXT)(uint32_t target, uint32_t parameter, int32_t *value);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIIVOES)(uint32_t sampler, uint32_t pname,
+                                                          int32_t *params);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIUIVOES)(uint32_t sampler, uint32_t pname,
+                                                           uint32_t *params);
+    typedef void(STDCALL *PFNGLGETSYNCIVAPPLE)(uint64_t sync, uint32_t pname, int32_t bufSize,
+                                               int32_t *length, int32_t *values);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIIVOES)(uint32_t target, uint32_t pname,
+                                                      int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIUIVOES)(uint32_t target, uint32_t pname,
+                                                       uint32_t *params);
+    typedef uint64_t(STDCALL *PFNGLGETTEXTUREHANDLENV)(uint32_t texture);
+    typedef uint64_t(STDCALL *PFNGLGETTEXTURESAMPLERHANDLENV)(uint32_t texture, uint32_t sampler);
+    typedef void(STDCALL *PFNGLGETTRANSLATEDSHADERSOURCEANGLE)(uint32_t shader, int32_t bufsize,
+                                                               int32_t *length, char *source);
+    typedef void(STDCALL *PFNGLGETNUNIFORMFVEXT)(uint32_t program, int32_t location,
+                                                 int32_t bufSize, float *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMFVKHR)(uint32_t program, int32_t location,
+                                                 int32_t bufSize, float *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMIVEXT)(uint32_t program, int32_t location,
+                                                 int32_t bufSize, int32_t *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMIVKHR)(uint32_t program, int32_t location,
+                                                 int32_t bufSize, int32_t *params);
+    typedef void(STDCALL *PFNGLGETNUNIFORMUIVKHR)(uint32_t program, int32_t location,
+                                                  int32_t bufSize, uint32_t *params);
+    typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
+    typedef void(STDCALL *PFNGLINTERPOLATEPATHSNV)(uint32_t resultPath, uint32_t pathA,
+                                                   uint32_t pathB, float weight);
+    typedef bool(STDCALL *PFNGLISENABLEDIOES)(uint32_t target, uint32_t index);
+    typedef bool(STDCALL *PFNGLISENABLEDINV)(uint32_t target, uint32_t index);
+    typedef bool(STDCALL *PFNGLISFENCENV)(uint32_t fence);
+    typedef bool(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
+    typedef bool(STDCALL *PFNGLISPATHNV)(uint32_t path);
+    typedef bool(STDCALL *PFNGLISPOINTINFILLPATHNV)(uint32_t path, uint32_t mask, float x, float y);
+    typedef bool(STDCALL *PFNGLISPOINTINSTROKEPATHNV)(uint32_t path, float x, float y);
+    typedef bool(STDCALL *PFNGLISPROGRAMPIPELINEEXT)(uint32_t pipeline);
+    typedef bool(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
+    typedef bool(STDCALL *PFNGLISSYNCAPPLE)(uint64_t sync);
+    typedef bool(STDCALL *PFNGLISTEXTUREHANDLERESIDENTNV)(uint64_t handle);
+    typedef bool(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
+    typedef void(STDCALL *PFNGLLABELOBJECTEXT)(uint32_t type, uint32_t object, int32_t length,
+                                               char *label);
+    typedef void(STDCALL *PFNGLMAKEIMAGEHANDLENONRESIDENTNV)(uint64_t handle);
+    typedef void(STDCALL *PFNGLMAKEIMAGEHANDLERESIDENTNV)(uint64_t handle, uint32_t access);
+    typedef void(STDCALL *PFNGLMAKETEXTUREHANDLENONRESIDENTNV)(uint64_t handle);
+    typedef void(STDCALL *PFNGLMAKETEXTUREHANDLERESIDENTNV)(uint64_t handle);
+    typedef void *(STDCALL *PFNGLMAPBUFFEROES)(uint32_t target, uint32_t access);
+    typedef void *(STDCALL *PFNGLMAPBUFFERRANGEEXT)(uint32_t target, int32_t offset, int32_t length,
+                                                    uint32_t access);
+    typedef void(STDCALL *PFNGLMATRIXLOAD3X2FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMATRIXLOAD3X3FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMATRIXLOADTRANSPOSE3X3FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMATRIXMULT3X2FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMATRIXMULT3X3FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMATRIXMULTTRANSPOSE3X3FNV)(uint32_t matrixMode, float *m);
+    typedef void(STDCALL *PFNGLMULTIDRAWARRAYSEXT)(uint32_t mode, int32_t *first, int32_t *count,
+                                                   int32_t primcount);
+    typedef void(STDCALL *PFNGLMULTIDRAWARRAYSINDIRECTEXT)(uint32_t mode, void *indirect,
+                                                           int32_t drawcount, int32_t stride);
+    typedef void(STDCALL *PFNGLMULTIDRAWELEMENTSBASEVERTEXEXT)(uint32_t mode, int32_t *count,
+                                                               uint32_t type, void **indices,
+                                                               int32_t primcount,
+                                                               int32_t *basevertex);
+    typedef void(STDCALL *PFNGLMULTIDRAWELEMENTSBASEVERTEXOES)(uint32_t mode, int32_t *count,
+                                                               uint32_t type, void **indices,
+                                                               int32_t primcount,
+                                                               int32_t *basevertex);
+    typedef void(STDCALL *PFNGLMULTIDRAWELEMENTSEXT)(uint32_t mode, int32_t *count, uint32_t type,
+                                                     void **indices, int32_t primcount);
+    typedef void(STDCALL *PFNGLMULTIDRAWELEMENTSINDIRECTEXT)(uint32_t mode, uint32_t type,
+                                                             void *indirect, int32_t drawcount,
+                                                             int32_t stride);
+    typedef void(STDCALL *PFNGLPATCHPARAMETERIOES)(uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLPATHCOMMANDSNV)(uint32_t path, int32_t numCommands,
+                                               uint8_t *commands, int32_t numCoords,
+                                               uint32_t coordType, void *coords);
+    typedef void(STDCALL *PFNGLPATHCOORDSNV)(uint32_t path, int32_t numCoords, uint32_t coordType,
+                                             void *coords);
+    typedef void(STDCALL *PFNGLPATHCOVERDEPTHFUNCNV)(uint32_t func);
+    typedef void(STDCALL *PFNGLPATHDASHARRAYNV)(uint32_t path, int32_t dashCount, float *dashArray);
+    typedef uint32_t(STDCALL *PFNGLPATHGLYPHINDEXARRAYNV)(
+            uint32_t firstPathName, uint32_t fontTarget, void *fontName, uint32_t fontStyle,
+            uint32_t firstGlyphIndex, int32_t numGlyphs, uint32_t pathParameterTemplate,
+            float emScale);
+    typedef uint32_t(STDCALL *PFNGLPATHGLYPHINDEXRANGENV)(uint32_t fontTarget, void *fontName,
+                                                          uint32_t fontStyle,
+                                                          uint32_t pathParameterTemplate,
+                                                          float emScale, uint32_t baseAndCount);
+    typedef void(STDCALL *PFNGLPATHGLYPHRANGENV)(uint32_t firstPathName, uint32_t fontTarget,
+                                                 void *fontName, uint32_t fontStyle,
+                                                 uint32_t firstGlyph, int32_t numGlyphs,
+                                                 uint32_t handleMissingGlyphs,
+                                                 uint32_t pathParameterTemplate, float emScale);
+    typedef void(STDCALL *PFNGLPATHGLYPHSNV)(uint32_t firstPathName, uint32_t fontTarget,
+                                             void *fontName, uint32_t fontStyle, int32_t numGlyphs,
+                                             uint32_t type, void *charcodes,
+                                             uint32_t handleMissingGlyphs,
+                                             uint32_t pathParameterTemplate, float emScale);
+    typedef uint32_t(STDCALL *PFNGLPATHMEMORYGLYPHINDEXARRAYNV)(
+            uint32_t firstPathName, uint32_t fontTarget, int32_t fontSize, void *fontData,
+            int32_t faceIndex, uint32_t firstGlyphIndex, int32_t numGlyphs,
+            uint32_t pathParameterTemplate, float emScale);
+    typedef void(STDCALL *PFNGLPATHPARAMETERFNV)(uint32_t path, uint32_t pname, float value);
+    typedef void(STDCALL *PFNGLPATHPARAMETERFVNV)(uint32_t path, uint32_t pname, float *value);
+    typedef void(STDCALL *PFNGLPATHPARAMETERINV)(uint32_t path, uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLPATHPARAMETERIVNV)(uint32_t path, uint32_t pname, int32_t *value);
+    typedef void(STDCALL *PFNGLPATHSTENCILDEPTHOFFSETNV)(float factor, float units);
+    typedef void(STDCALL *PFNGLPATHSTENCILFUNCNV)(uint32_t func, int32_t ref, uint32_t mask);
+    typedef void(STDCALL *PFNGLPATHSTRINGNV)(uint32_t path, uint32_t format, int32_t length,
+                                             void *pathString);
+    typedef void(STDCALL *PFNGLPATHSUBCOMMANDSNV)(uint32_t path, int32_t commandStart,
+                                                  int32_t commandsToDelete, int32_t numCommands,
+                                                  uint8_t *commands, int32_t numCoords,
+                                                  uint32_t coordType, void *coords);
+    typedef void(STDCALL *PFNGLPATHSUBCOORDSNV)(uint32_t path, int32_t coordStart,
+                                                int32_t numCoords, uint32_t coordType,
+                                                void *coords);
+    typedef uint8_t(STDCALL *PFNGLPOINTALONGPATHNV)(uint32_t path, int32_t startSegment,
+                                                    int32_t numSegments, float distance, float *x,
+                                                    float *y, float *tangentX, float *tangentY);
+    typedef void(STDCALL *PFNGLPOLYGONMODENV)(uint32_t face, uint32_t mode);
+    typedef void(STDCALL *PFNGLPOPGROUPMARKEREXT)();
+    typedef void(STDCALL *PFNGLPRIMITIVEBOUNDINGBOXOES)(float minX, float minY, float minZ,
+                                                        float minW, float maxX, float maxY,
+                                                        float maxZ, float maxW);
+    typedef void(STDCALL *PFNGLPROGRAMBINARYOES)(uint32_t program, uint32_t binary_format,
+                                                 void *binary, int32_t binary_size);
+    typedef void(STDCALL *PFNGLPROGRAMPARAMETERIEXT)(uint32_t program, uint32_t pname,
+                                                     int32_t value);
+    typedef void(STDCALL *PFNGLPROGRAMPATHFRAGMENTINPUTGENNV)(uint32_t program, int32_t location,
+                                                              uint32_t genMode, int32_t components,
+                                                              float *coeffs);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1FEXT)(uint32_t program, int32_t location, float v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1FVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1IEXT)(uint32_t program, int32_t location, int32_t v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1IVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UIEXT)(uint32_t program, int32_t location,
+                                                     uint32_t v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UIVEXT)(uint32_t program, int32_t location,
+                                                      int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2FEXT)(uint32_t program, int32_t location, float v0,
+                                                    float v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2FVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2IEXT)(uint32_t program, int32_t location, int32_t v0,
+                                                    int32_t v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2IVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UIEXT)(uint32_t program, int32_t location,
+                                                     uint32_t v0, uint32_t v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UIVEXT)(uint32_t program, int32_t location,
+                                                      int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3FEXT)(uint32_t program, int32_t location, float v0,
+                                                    float v1, float v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3FVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3IEXT)(uint32_t program, int32_t location, int32_t v0,
+                                                    int32_t v1, int32_t v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3IVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UIEXT)(uint32_t program, int32_t location,
+                                                     uint32_t v0, uint32_t v1, uint32_t v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UIVEXT)(uint32_t program, int32_t location,
+                                                      int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4FEXT)(uint32_t program, int32_t location, float v0,
+                                                    float v1, float v2, float v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4FVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4IEXT)(uint32_t program, int32_t location, int32_t v0,
+                                                    int32_t v1, int32_t v2, int32_t v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4IVEXT)(uint32_t program, int32_t location,
+                                                     int32_t count, int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UIEXT)(uint32_t program, int32_t location,
+                                                     uint32_t v0, uint32_t v1, uint32_t v2,
+                                                     uint32_t v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UIVEXT)(uint32_t program, int32_t location,
+                                                      int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMHANDLEUI64NV)(uint32_t program, int32_t location,
+                                                           uint64_t value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMHANDLEUI64VNV)(uint32_t program, int32_t location,
+                                                            int32_t count, uint64_t *values);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2FVEXT)(uint32_t program, int32_t location,
+                                                           int32_t count, uint8_t transpose,
+                                                           float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X3FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X4FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3FVEXT)(uint32_t program, int32_t location,
+                                                           int32_t count, uint8_t transpose,
+                                                           float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X2FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X4FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4FVEXT)(uint32_t program, int32_t location,
+                                                           int32_t count, uint8_t transpose,
+                                                           float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X2FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X3FVEXT)(uint32_t program, int32_t location,
+                                                             int32_t count, uint8_t transpose,
+                                                             float *value);
+    typedef void(STDCALL *PFNGLPUSHGROUPMARKEREXT)(int32_t length, char *marker);
+    typedef void(STDCALL *PFNGLQUERYCOUNTEREXT)(uint32_t query, uint32_t target);
+    typedef void(STDCALL *PFNGLREADBUFFERINDEXEDEXT)(uint32_t src, int32_t index);
+    typedef void(STDCALL *PFNGLREADBUFFERNV)(uint32_t mode);
+    typedef void(STDCALL *PFNGLREADNPIXELSEXT)(int32_t x, int32_t y, int32_t width, int32_t height,
+                                               uint32_t format, uint32_t type, int32_t bufSize,
+                                               void *data);
+    typedef void(STDCALL *PFNGLREADNPIXELSKHR)(int32_t x, int32_t y, int32_t width, int32_t height,
+                                               uint32_t format, uint32_t type, int32_t bufSize,
+                                               void *data);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLE)(uint32_t target,
+                                                                    int32_t samples,
+                                                                    uint32_t internalformat,
+                                                                    int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLE)(uint32_t target,
+                                                                    int32_t samples,
+                                                                    uint32_t internalformat,
+                                                                    int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXT)(uint32_t target, int32_t samples,
+                                                                  uint32_t internalformat,
+                                                                  int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMG)(uint32_t target, int32_t samples,
+                                                                  uint32_t internalformat,
+                                                                  int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV)(uint32_t target, int32_t samples,
+                                                                 uint32_t internalformat,
+                                                                 int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE)();
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIIVOES)(uint32_t sampler, uint32_t pname,
+                                                       int32_t *param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIUIVOES)(uint32_t sampler, uint32_t pname,
+                                                        uint32_t *param);
+    typedef void(STDCALL *PFNGLSCISSORARRAYVNV)(uint32_t first, int32_t count, int32_t *v);
+    typedef void(STDCALL *PFNGLSCISSORINDEXEDNV)(uint32_t index, int32_t left, int32_t bottom,
+                                                 int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLSCISSORINDEXEDVNV)(uint32_t index, int32_t *v);
+    typedef void(STDCALL *PFNGLSELECTPERFMONITORCOUNTERSAMD)(uint32_t monitor, uint8_t enable,
+                                                             uint32_t group, int32_t numCounters,
+                                                             uint32_t *counterList);
+    typedef void(STDCALL *PFNGLSETFENCENV)(uint32_t fence, uint32_t condition);
+    typedef void(STDCALL *PFNGLSTARTTILINGQCOM)(uint32_t x, uint32_t y, uint32_t width,
+                                                uint32_t height, uint32_t preserveMask);
+    typedef void(STDCALL *PFNGLSTENCILFILLPATHINSTANCEDNV)(int32_t numPaths, uint32_t pathNameType,
+                                                           void *paths, uint32_t pathBase,
+                                                           uint32_t fillMode, uint32_t mask,
+                                                           uint32_t transformType,
+                                                           float *transformValues);
+    typedef void(STDCALL *PFNGLSTENCILFILLPATHNV)(uint32_t path, uint32_t fillMode, uint32_t mask);
+    typedef void(STDCALL *PFNGLSTENCILSTROKEPATHINSTANCEDNV)(int32_t numPaths,
+                                                             uint32_t pathNameType, void *paths,
+                                                             uint32_t pathBase, int32_t reference,
+                                                             uint32_t mask, uint32_t transformType,
+                                                             float *transformValues);
+    typedef void(STDCALL *PFNGLSTENCILSTROKEPATHNV)(uint32_t path, int32_t reference,
+                                                    uint32_t mask);
+    typedef void(STDCALL *PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNV)(
+            int32_t numPaths, uint32_t pathNameType, void *paths, uint32_t pathBase,
+            uint32_t fillMode, uint32_t mask, uint32_t coverMode, uint32_t transformType,
+            float *transformValues);
+    typedef void(STDCALL *PFNGLSTENCILTHENCOVERFILLPATHNV)(uint32_t path, uint32_t fillMode,
+                                                           uint32_t mask, uint32_t coverMode);
+    typedef void(STDCALL *PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNV)(
+            int32_t numPaths, uint32_t pathNameType, void *paths, uint32_t pathBase,
+            int32_t reference, uint32_t mask, uint32_t coverMode, uint32_t transformType,
+            float *transformValues);
+    typedef void(STDCALL *PFNGLSTENCILTHENCOVERSTROKEPATHNV)(uint32_t path, int32_t reference,
+                                                             uint32_t mask, uint32_t coverMode);
+    typedef uint8_t(STDCALL *PFNGLTESTFENCENV)(uint32_t fence);
+    typedef void(STDCALL *PFNGLTEXBUFFEROES)(uint32_t target, uint32_t internalformat,
+                                             uint32_t buffer);
+    typedef void(STDCALL *PFNGLTEXBUFFERRANGEOES)(uint32_t target, uint32_t internalformat,
+                                                  uint32_t buffer, int32_t offset, int32_t size);
+    typedef void(STDCALL *PFNGLTEXIMAGE3DOES)(uint32_t target, int32_t level,
+                                              uint32_t internalformat, int32_t width,
+                                              int32_t height, int32_t depth, int32_t border,
+                                              uint32_t format, uint32_t type, void *pixels);
+    typedef void(STDCALL *PFNGLTEXPAGECOMMITMENTARB)(uint32_t target, int32_t level,
+                                                     int32_t xoffset, int32_t yoffset,
+                                                     int32_t zoffset, int32_t width, int32_t height,
+                                                     int32_t depth, uint8_t commit);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIIVOES)(uint32_t target, uint32_t pname,
+                                                   int32_t *params);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIUIVOES)(uint32_t target, uint32_t pname,
+                                                    uint32_t *params);
+    typedef void(STDCALL *PFNGLTEXSTORAGE1DEXT)(uint32_t target, int32_t levels, uint32_t format,
+                                                int32_t width);
+    typedef void(STDCALL *PFNGLTEXSTORAGE2DEXT)(uint32_t target, int32_t levels, uint32_t format,
+                                                int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLTEXSTORAGE3DEXT)(uint32_t target, int32_t levels, uint32_t format,
+                                                int32_t width, int32_t height, int32_t depth);
+    typedef void(STDCALL *PFNGLTEXSUBIMAGE3DOES)(uint32_t target, int32_t level, int32_t xoffset,
+                                                 int32_t yoffset, int32_t zoffset, int32_t width,
+                                                 int32_t height, int32_t depth, uint32_t format,
+                                                 uint32_t type, void *pixels);
+    typedef void(STDCALL *PFNGLTEXTURESTORAGE1DEXT)(uint32_t texture, uint32_t target,
+                                                    int32_t levels, uint32_t format, int32_t width);
+    typedef void(STDCALL *PFNGLTEXTURESTORAGE2DEXT)(uint32_t texture, uint32_t target,
+                                                    int32_t levels, uint32_t format, int32_t width,
+                                                    int32_t height);
+    typedef void(STDCALL *PFNGLTEXTURESTORAGE3DEXT)(uint32_t texture, uint32_t target,
+                                                    int32_t levels, uint32_t format, int32_t width,
+                                                    int32_t height, int32_t depth);
+    typedef void(STDCALL *PFNGLTEXTUREVIEWEXT)(uint32_t texture, uint32_t target,
+                                               uint32_t origtexture, uint32_t internalformat,
+                                               uint32_t minlevel, uint32_t numlevels,
+                                               uint32_t minlayer, uint32_t numlayers);
+    typedef void(STDCALL *PFNGLTEXTUREVIEWOES)(uint32_t texture, uint32_t target,
+                                               uint32_t origtexture, uint32_t internalformat,
+                                               uint32_t minlevel, uint32_t numlevels,
+                                               uint32_t minlayer, uint32_t numlayers);
+    typedef void(STDCALL *PFNGLTRANSFORMPATHNV)(uint32_t resultPath, uint32_t srcPath,
+                                                uint32_t transformType, float *transformValues);
+    typedef void(STDCALL *PFNGLUNIFORMHANDLEUI64NV)(int32_t location, uint64_t value);
+    typedef void(STDCALL *PFNGLUNIFORMHANDLEUI64VNV)(int32_t location, int32_t count,
+                                                     uint64_t *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX2X3FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX2X4FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX3X2FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX3X4FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX4X2FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX4X3FVNV)(int32_t location, int32_t count,
+                                                     uint8_t transpose, float *value);
+    typedef uint8_t(STDCALL *PFNGLUNMAPBUFFEROES)(uint32_t target);
+    typedef void(STDCALL *PFNGLUSEPROGRAMSTAGESEXT)(uint32_t pipeline, uint32_t stages,
+                                                    uint32_t program);
+    typedef void(STDCALL *PFNGLVALIDATEPROGRAMPIPELINEEXT)(uint32_t pipeline);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBDIVISORANGLE)(uint32_t index, uint32_t divisor);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBDIVISOREXT)(uint32_t index, uint32_t divisor);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBDIVISORNV)(uint32_t index, uint32_t divisor);
+    typedef void(STDCALL *PFNGLVIEWPORTARRAYVNV)(uint32_t first, int32_t count, float *v);
+    typedef void(STDCALL *PFNGLVIEWPORTINDEXEDFNV)(uint32_t index, float x, float y, float w,
+                                                   float h);
+    typedef void(STDCALL *PFNGLVIEWPORTINDEXEDFVNV)(uint32_t index, float *v);
+    typedef void(STDCALL *PFNGLWAITSYNCAPPLE)(uint64_t sync, uint32_t flag, uint64_t timeout);
+    typedef void(STDCALL *PFNGLWEIGHTPATHSNV)(uint32_t resultPath, int32_t numPaths,
+                                              uint32_t *paths, float *weights);
+    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONNV)(uint32_t components);
+    typedef void(STDCALL *PFNGLCOVERAGEMODULATIONTABLENV)(int32_t n, float *v);
+    typedef void(STDCALL *PFNGLFRAGMENTCOVERAGECOLORNV)(uint32_t color);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t target, uint32_t start,
+                                                               int32_t count, float *v);
+    typedef void(STDCALL *PFNGLGETCOVERAGEMODULATIONTABLENV)(int32_t bufsize, float *v);
+    typedef void(STDCALL *PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV)(uint32_t framebuffer,
+                                                                    uint32_t start, int32_t count,
+                                                                    float *v);
+    typedef void(STDCALL *PFNGLRASTERSAMPLESEXT)(uint32_t samples, uint8_t fixedsamplelocations);
+    typedef void(STDCALL *PFNGLRESOLVEDEPTHVALUESNV)();
+    typedef void(STDCALL *PFNGLSUBPIXELPRECISIONBIASNV)(uint32_t xbits, uint32_t ybits);
+    typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
+    typedef void(STDCALL *PFNGLBLENDEQUATION)(uint32_t equation);
+    typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(uint32_t rgb, uint32_t alpha);
+    typedef void(STDCALL *PFNGLBLENDFUNC)(uint32_t src_factor, uint32_t dst_factor);
+    typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
+                                                  uint32_t src_factor_alpha,
+                                                  uint32_t dst_factor_alpha);
+    typedef void(STDCALL *PFNGLDEPTHFUNC)(uint32_t function);
+    typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, bool invert);
+    typedef void(STDCALL *PFNGLSAMPLEMASKI)(uint32_t maskNumber, uint32_t mask);
+    typedef void(STDCALL *PFNGLSCISSOR)(int32_t x, int32_t y, int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLSTENCILFUNC)(uint32_t func, int32_t ref, uint32_t mask);
+    typedef void(STDCALL *PFNGLSTENCILFUNCSEPARATE)(uint32_t face, uint32_t function,
+                                                    int32_t reference_value, uint32_t mask);
+    typedef void(STDCALL *PFNGLSTENCILOP)(uint32_t fail, uint32_t zfail, uint32_t zpass);
+    typedef void(STDCALL *PFNGLSTENCILOPSEPARATE)(uint32_t face, uint32_t stencil_fail,
+                                                  uint32_t stencil_pass_depth_fail,
+                                                  uint32_t stencil_pass_depth_pass);
+    typedef void(STDCALL *PFNGLBINDFRAMEBUFFER)(uint32_t target, uint32_t framebuffer);
+    typedef void(STDCALL *PFNGLBINDRENDERBUFFER)(uint32_t target, uint32_t renderbuffer);
+    typedef void(STDCALL *PFNGLBLITFRAMEBUFFER)(int32_t srcX0, int32_t srcY0, int32_t srcX1,
+                                                int32_t srcY1, int32_t dstX0, int32_t dstY0,
+                                                int32_t dstX1, int32_t dstY1, uint32_t mask,
+                                                uint32_t filter);
+    typedef uint32_t(STDCALL *PFNGLCHECKFRAMEBUFFERSTATUS)(uint32_t target);
+    typedef void(STDCALL *PFNGLCLEAR)(uint32_t mask);
+    typedef void(STDCALL *PFNGLCLEARBUFFERFI)(uint32_t buffer, int32_t drawbuffer, float depth,
+                                              int32_t stencil);
+    typedef void(STDCALL *PFNGLCLEARBUFFERFV)(uint32_t buffer, int32_t drawbuffer, float *value);
+    typedef void(STDCALL *PFNGLCLEARBUFFERIV)(uint32_t buffer, int32_t drawbuffer, int32_t *value);
+    typedef void(STDCALL *PFNGLCLEARBUFFERUIV)(uint32_t buffer, int32_t drawbuffer,
+                                               uint32_t *value);
+    typedef void(STDCALL *PFNGLCLEARCOLOR)(float r, float g, float b, float a);
+    typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
+    typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
+    typedef void(STDCALL *PFNGLCOLORMASK)(bool red, bool green, bool blue, bool alpha);
+    typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
+    typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
+    typedef void(STDCALL *PFNGLDEPTHMASK)(bool enabled);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERPARAMETERI)(uint32_t target, uint32_t pname,
+                                                      int32_t param);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(uint32_t framebuffer_target,
+                                                        uint32_t framebuffer_attachment,
+                                                        uint32_t renderbuffer_target,
+                                                        uint32_t renderbuffer);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(uint32_t framebuffer_target,
+                                                     uint32_t framebuffer_attachment,
+                                                     uint32_t texture_target, uint32_t texture,
+                                                     int32_t level);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURELAYER)(uint32_t target, uint32_t attachment,
+                                                        uint32_t texture, int32_t level,
+                                                        int32_t layer);
+    typedef void(STDCALL *PFNGLGENFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
+    typedef void(STDCALL *PFNGLGENRENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
+    typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV)(uint32_t framebuffer_target,
+                                                                    uint32_t attachment,
+                                                                    uint32_t parameter,
+                                                                    int32_t *value);
+    typedef void(STDCALL *PFNGLGETFRAMEBUFFERPARAMETERIV)(uint32_t target, uint32_t pname,
+                                                          int32_t *params);
+    typedef void(STDCALL *PFNGLGETRENDERBUFFERPARAMETERIV)(uint32_t target, uint32_t parameter,
+                                                           int32_t *values);
+    typedef void(STDCALL *PFNGLINVALIDATEFRAMEBUFFER)(uint32_t target, int32_t count,
+                                                      uint32_t *attachments);
+    typedef void(STDCALL *PFNGLINVALIDATESUBFRAMEBUFFER)(uint32_t target, int32_t numAttachments,
+                                                         uint32_t *attachments, int32_t x,
+                                                         int32_t y, int32_t width, int32_t height);
+    typedef bool(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
+    typedef bool(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
+    typedef void(STDCALL *PFNGLREADBUFFER)(uint32_t src);
+    typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
+                                           uint32_t format, uint32_t type, void *data);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGE)(uint32_t target, uint32_t format, int32_t width,
+                                                    int32_t height);
+    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(uint32_t target, int32_t samples,
+                                                               uint32_t format, int32_t width,
+                                                               int32_t height);
+    typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
+    typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(uint32_t face, uint32_t mask);
+    typedef void(STDCALL *PFNGLDISABLE)(uint32_t capability);
+    typedef void(STDCALL *PFNGLENABLE)(uint32_t capability);
+    typedef void(STDCALL *PFNGLFINISH)();
+    typedef void(STDCALL *PFNGLFLUSH)();
+    typedef void(STDCALL *PFNGLFLUSHMAPPEDBUFFERRANGE)(uint32_t target, int32_t offset,
+                                                       int32_t length);
+    typedef uint32_t(STDCALL *PFNGLGETERROR)();
+    typedef void(STDCALL *PFNGLHINT)(uint32_t target, uint32_t mode);
+    typedef void(STDCALL *PFNGLACTIVESHADERPROGRAM)(uint32_t pipeline, uint32_t program);
+    typedef void(STDCALL *PFNGLATTACHSHADER)(uint32_t program, uint32_t shader);
+    typedef void(STDCALL *PFNGLBINDATTRIBLOCATION)(uint32_t program, uint32_t location, char *name);
+    typedef void(STDCALL *PFNGLBINDPROGRAMPIPELINE)(uint32_t pipeline);
+    typedef void(STDCALL *PFNGLCOMPILESHADER)(uint32_t shader);
+    typedef uint32_t(STDCALL *PFNGLCREATEPROGRAM)();
+    typedef uint32_t(STDCALL *PFNGLCREATESHADER)(uint32_t type);
+    typedef uint32_t(STDCALL *PFNGLCREATESHADERPROGRAMV)(uint32_t type, int32_t count,
+                                                         char **strings);
+    typedef void(STDCALL *PFNGLDELETEPROGRAM)(uint32_t program);
+    typedef void(STDCALL *PFNGLDELETEPROGRAMPIPELINES)(int32_t n, uint32_t *pipelines);
+    typedef void(STDCALL *PFNGLDELETESHADER)(uint32_t shader);
+    typedef void(STDCALL *PFNGLDETACHSHADER)(uint32_t program, uint32_t shader);
+    typedef void(STDCALL *PFNGLDISPATCHCOMPUTE)(uint32_t num_groups_x, uint32_t num_groups_y,
+                                                uint32_t num_groups_z);
+    typedef void(STDCALL *PFNGLDISPATCHCOMPUTEINDIRECT)(int32_t indirect);
+    typedef void(STDCALL *PFNGLGENPROGRAMPIPELINES)(int32_t n, uint32_t *pipelines);
+    typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, uint32_t location,
+                                                int32_t buffer_size, int32_t *buffer_bytes_written,
+                                                int32_t *vector_count, uint32_t *type, char *name);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, uint32_t location,
+                                                 int32_t buffer_size, int32_t *buffer_bytes_written,
+                                                 int32_t *vector_count, uint32_t *type, char *name);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
+                                                          uint32_t uniform_block_index,
+                                                          int32_t buffer_size,
+                                                          int32_t *buffer_bytes_written,
+                                                          char *name);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKIV)(uint32_t program,
+                                                        uint32_t uniform_block_index,
+                                                        uint32_t parameter_name,
+                                                        int32_t *parameters);
+    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMSIV)(uint32_t program, int32_t uniform_count,
+                                                    uint32_t *uniform_indices,
+                                                    uint32_t parameter_name, int32_t *parameters);
+    typedef void(STDCALL *PFNGLGETATTACHEDSHADERS)(uint32_t program, int32_t buffer_length,
+                                                   int32_t *shaders_length_written,
+                                                   uint32_t *shaders);
+    typedef int32_t(STDCALL *PFNGLGETATTRIBLOCATION)(uint32_t program, char *name);
+    typedef int32_t(STDCALL *PFNGLGETFRAGDATALOCATION)(uint32_t program, char *name);
+    typedef void(STDCALL *PFNGLGETPROGRAMBINARY)(uint32_t program, int32_t bufSize, int32_t *length,
+                                                 uint32_t *binaryFormat, void *binary);
+    typedef void(STDCALL *PFNGLGETPROGRAMINFOLOG)(uint32_t program, int32_t buffer_length,
+                                                  int32_t *string_length_written, char *info);
+    typedef void(STDCALL *PFNGLGETPROGRAMINTERFACEIV)(uint32_t program, uint32_t programInterface,
+                                                      uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLGETPROGRAMPIPELINEINFOLOG)(uint32_t pipeline, int32_t bufSize,
+                                                          int32_t *length, char *infoLog);
+    typedef void(STDCALL *PFNGLGETPROGRAMPIPELINEIV)(uint32_t pipeline, uint32_t pname,
+                                                     int32_t *params);
+    typedef uint32_t(STDCALL *PFNGLGETPROGRAMRESOURCEINDEX)(uint32_t program,
+                                                            uint32_t programInterface, char *name);
+    typedef int32_t(STDCALL *PFNGLGETPROGRAMRESOURCELOCATION)(uint32_t program,
+                                                              uint32_t programInterface,
+                                                              char *name);
+    typedef void(STDCALL *PFNGLGETPROGRAMRESOURCENAME)(uint32_t program, uint32_t programInterface,
+                                                       uint32_t index, int32_t bufSize,
+                                                       int32_t *length, char *name);
+    typedef void(STDCALL *PFNGLGETPROGRAMRESOURCEIV)(uint32_t program, uint32_t programInterface,
+                                                     uint32_t index, int32_t propCount,
+                                                     uint32_t *props, int32_t bufSize,
+                                                     int32_t *length, int32_t *params);
+    typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, uint32_t parameter, int32_t *value);
+    typedef void(STDCALL *PFNGLGETSHADERINFOLOG)(uint32_t shader, int32_t buffer_length,
+                                                 int32_t *string_length_written, char *info);
+    typedef void(STDCALL *PFNGLGETSHADERPRECISIONFORMAT)(uint32_t shader_type,
+                                                         uint32_t precision_type, int32_t *range,
+                                                         int32_t *precision);
+    typedef void(STDCALL *PFNGLGETSHADERSOURCE)(uint32_t shader, int32_t buffer_length,
+                                                int32_t *string_length_written, char *source);
+    typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, uint32_t parameter, int32_t *value);
+    typedef uint32_t(STDCALL *PFNGLGETUNIFORMBLOCKINDEX)(uint32_t program, char *uniformBlockName);
+    typedef void(STDCALL *PFNGLGETUNIFORMINDICES)(uint32_t program, int32_t uniformCount,
+                                                  char **uniformNames, uint32_t *uniformIndices);
+    typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
+    typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
+    typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
+    typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *params);
+    typedef bool(STDCALL *PFNGLISPROGRAM)(uint32_t program);
+    typedef bool(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
+    typedef bool(STDCALL *PFNGLISSHADER)(uint32_t shader);
+    typedef void(STDCALL *PFNGLLINKPROGRAM)(uint32_t program);
+    typedef void(STDCALL *PFNGLMEMORYBARRIER)(uint32_t barriers);
+    typedef void(STDCALL *PFNGLMEMORYBARRIERBYREGION)(uint32_t barriers);
+    typedef void(STDCALL *PFNGLPROGRAMBINARY)(uint32_t program, uint32_t binaryFormat, void *binary,
+                                              int32_t length);
+    typedef void(STDCALL *PFNGLPROGRAMPARAMETERI)(uint32_t program, uint32_t pname, int32_t value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1F)(uint32_t program, int32_t location, float v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1FV)(uint32_t program, int32_t location, int32_t count,
+                                                  float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1I)(uint32_t program, int32_t location, int32_t v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1IV)(uint32_t program, int32_t location, int32_t count,
+                                                  int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UI)(uint32_t program, int32_t location, uint32_t v0);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM1UIV)(uint32_t program, int32_t location,
+                                                   int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2F)(uint32_t program, int32_t location, float v0,
+                                                 float v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2FV)(uint32_t program, int32_t location, int32_t count,
+                                                  float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2I)(uint32_t program, int32_t location, int32_t v0,
+                                                 int32_t v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2IV)(uint32_t program, int32_t location, int32_t count,
+                                                  int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UI)(uint32_t program, int32_t location, uint32_t v0,
+                                                  uint32_t v1);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM2UIV)(uint32_t program, int32_t location,
+                                                   int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3F)(uint32_t program, int32_t location, float v0,
+                                                 float v1, float v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3FV)(uint32_t program, int32_t location, int32_t count,
+                                                  float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3I)(uint32_t program, int32_t location, int32_t v0,
+                                                 int32_t v1, int32_t v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3IV)(uint32_t program, int32_t location, int32_t count,
+                                                  int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UI)(uint32_t program, int32_t location, uint32_t v0,
+                                                  uint32_t v1, uint32_t v2);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM3UIV)(uint32_t program, int32_t location,
+                                                   int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4F)(uint32_t program, int32_t location, float v0,
+                                                 float v1, float v2, float v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4FV)(uint32_t program, int32_t location, int32_t count,
+                                                  float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4I)(uint32_t program, int32_t location, int32_t v0,
+                                                 int32_t v1, int32_t v2, int32_t v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4IV)(uint32_t program, int32_t location, int32_t count,
+                                                  int32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UI)(uint32_t program, int32_t location, uint32_t v0,
+                                                  uint32_t v1, uint32_t v2, uint32_t v3);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORM4UIV)(uint32_t program, int32_t location,
+                                                   int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2FV)(uint32_t program, int32_t location,
+                                                        int32_t count, uint8_t transpose,
+                                                        float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X3FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX2X4FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3FV)(uint32_t program, int32_t location,
+                                                        int32_t count, uint8_t transpose,
+                                                        float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X2FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX3X4FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4FV)(uint32_t program, int32_t location,
+                                                        int32_t count, uint8_t transpose,
+                                                        float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X2FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLPROGRAMUNIFORMMATRIX4X3FV)(uint32_t program, int32_t location,
+                                                          int32_t count, uint8_t transpose,
+                                                          float *value);
+    typedef void(STDCALL *PFNGLRELEASESHADERCOMPILER)();
+    typedef void(STDCALL *PFNGLSHADERBINARY)(int32_t count, uint32_t *shaders,
+                                             uint32_t binary_format, void *binary,
+                                             int32_t binary_size);
+    typedef void(STDCALL *PFNGLSHADERSOURCE)(uint32_t shader, int32_t count, char **source,
+                                             int32_t *length);
+    typedef void(STDCALL *PFNGLUNIFORM1F)(int32_t location, float value);
+    typedef void(STDCALL *PFNGLUNIFORM1FV)(int32_t location, int32_t count, float *values);
+    typedef void(STDCALL *PFNGLUNIFORM1I)(int32_t location, int32_t value);
+    typedef void(STDCALL *PFNGLUNIFORM1IV)(int32_t location, int32_t count, int32_t *values);
+    typedef void(STDCALL *PFNGLUNIFORM1UI)(int32_t location, uint32_t v0);
+    typedef void(STDCALL *PFNGLUNIFORM1UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM2F)(int32_t location, float value0, float value1);
+    typedef void(STDCALL *PFNGLUNIFORM2FV)(int32_t location, int32_t count, float *values);
+    typedef void(STDCALL *PFNGLUNIFORM2I)(int32_t location, int32_t value0, int32_t value1);
+    typedef void(STDCALL *PFNGLUNIFORM2IV)(int32_t location, int32_t count, int32_t *values);
+    typedef void(STDCALL *PFNGLUNIFORM2UI)(int32_t location, uint32_t v0, uint32_t v1);
+    typedef void(STDCALL *PFNGLUNIFORM2UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM3F)(int32_t location, float value0, float value1,
+                                          float value2);
+    typedef void(STDCALL *PFNGLUNIFORM3FV)(int32_t location, int32_t count, float *values);
+    typedef void(STDCALL *PFNGLUNIFORM3I)(int32_t location, int32_t value0, int32_t value1,
+                                          int32_t value2);
+    typedef void(STDCALL *PFNGLUNIFORM3IV)(int32_t location, int32_t count, int32_t *values);
+    typedef void(STDCALL *PFNGLUNIFORM3UI)(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2);
+    typedef void(STDCALL *PFNGLUNIFORM3UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORM4F)(int32_t location, float value0, float value1,
+                                          float value2, float value3);
+    typedef void(STDCALL *PFNGLUNIFORM4FV)(int32_t location, int32_t count, float *values);
+    typedef void(STDCALL *PFNGLUNIFORM4I)(int32_t location, int32_t value0, int32_t value1,
+                                          int32_t value2, int32_t value3);
+    typedef void(STDCALL *PFNGLUNIFORM4IV)(int32_t location, int32_t count, int32_t *values);
+    typedef void(STDCALL *PFNGLUNIFORM4UI)(int32_t location, uint32_t v0, uint32_t v1, uint32_t v2,
+                                           uint32_t v3);
+    typedef void(STDCALL *PFNGLUNIFORM4UIV)(int32_t location, int32_t count, uint32_t *value);
+    typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
+                                                    uint32_t uniform_block_binding);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX2FV)(int32_t location, int32_t count, uint8_t transpose,
+                                                 float *values);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX2X3FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX2X4FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX3FV)(int32_t location, int32_t count, uint8_t transpose,
+                                                 float *values);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX3X2FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX3X4FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX4FV)(int32_t location, int32_t count, uint8_t transpose,
+                                                 float *values);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX4X2FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUNIFORMMATRIX4X3FV)(int32_t location, int32_t count,
+                                                   uint8_t transpose, float *value);
+    typedef void(STDCALL *PFNGLUSEPROGRAM)(uint32_t program);
+    typedef void(STDCALL *PFNGLUSEPROGRAMSTAGES)(uint32_t pipeline, uint32_t stages,
+                                                 uint32_t program);
+    typedef void(STDCALL *PFNGLVALIDATEPROGRAM)(uint32_t program);
+    typedef void(STDCALL *PFNGLVALIDATEPROGRAMPIPELINE)(uint32_t pipeline);
+    typedef void(STDCALL *PFNGLCULLFACE)(uint32_t mode);
+    typedef void(STDCALL *PFNGLDEPTHRANGEF)(float near, float far);
+    typedef void(STDCALL *PFNGLFRONTFACE)(uint32_t orientation);
+    typedef void(STDCALL *PFNGLGETMULTISAMPLEFV)(uint32_t pname, uint32_t index, float *val);
+    typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
+    typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
+    typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLGETBOOLEANI_V)(uint32_t target, uint32_t index, uint8_t *data);
+    typedef void(STDCALL *PFNGLGETBOOLEANV)(uint32_t param, bool *values);
+    typedef void(STDCALL *PFNGLGETFLOATV)(uint32_t param, float *values);
+    typedef void(STDCALL *PFNGLGETINTEGER64I_V)(uint32_t target, uint32_t index, int64_t *data);
+    typedef void(STDCALL *PFNGLGETINTEGER64V)(uint32_t pname, int64_t *data);
+    typedef void(STDCALL *PFNGLGETINTEGERI_V)(uint32_t target, uint32_t index, int32_t *data);
+    typedef void(STDCALL *PFNGLGETINTEGERV)(uint32_t param, int32_t *values);
+    typedef void(STDCALL *PFNGLGETINTERNALFORMATIV)(uint32_t target, uint32_t internalformat,
+                                                    uint32_t pname, int32_t bufSize,
+                                                    int32_t *params);
+    typedef uint8_t *(STDCALL *PFNGLGETSTRING)(uint32_t param);
+    typedef uint8_t *(STDCALL *PFNGLGETSTRINGI)(uint32_t name, uint32_t index);
+    typedef bool(STDCALL *PFNGLISENABLED)(uint32_t capability);
+    typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, uint32_t syncFlags,
+                                                   uint64_t timeout);
+    typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
+    typedef uint64_t(STDCALL *PFNGLFENCESYNC)(uint32_t condition, uint32_t syncFlags);
+    typedef void(STDCALL *PFNGLGETSYNCIV)(uint64_t sync, uint32_t pname, int32_t bufSize,
+                                          int32_t *length, int32_t *values);
+    typedef bool(STDCALL *PFNGLISSYNC)(uint64_t sync);
+    typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
+    typedef void(STDCALL *PFNGLACTIVETEXTURE)(uint32_t unit);
+    typedef void(STDCALL *PFNGLBINDIMAGETEXTURE)(uint32_t unit, uint32_t texture, int32_t level,
+                                                 uint8_t layered, int32_t layer, uint32_t access,
+                                                 uint32_t format);
+    typedef void(STDCALL *PFNGLBINDSAMPLER)(uint32_t unit, uint32_t sampler);
+    typedef void(STDCALL *PFNGLBINDTEXTURE)(uint32_t target, uint32_t texture);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE2D)(uint32_t target, int32_t level,
+                                                     uint32_t format, int32_t width, int32_t height,
+                                                     int32_t border, int32_t image_size,
+                                                     void *data);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE3D)(uint32_t target, int32_t level,
+                                                     uint32_t internalformat, int32_t width,
+                                                     int32_t height, int32_t depth, int32_t border,
+                                                     int32_t imageSize, void *data);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE2D)(uint32_t target, int32_t level,
+                                                        int32_t xoffset, int32_t yoffset,
+                                                        int32_t width, int32_t height,
+                                                        uint32_t format, int32_t image_size,
+                                                        void *data);
+    typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE3D)(uint32_t target, int32_t level,
+                                                        int32_t xoffset, int32_t yoffset,
+                                                        int32_t zoffset, int32_t width,
+                                                        int32_t height, int32_t depth,
+                                                        uint32_t format, int32_t imageSize,
+                                                        void *data);
+    typedef void(STDCALL *PFNGLCOPYTEXIMAGE2D)(uint32_t target, int32_t level, uint32_t format,
+                                               int32_t x, int32_t y, int32_t width, int32_t height,
+                                               int32_t border);
+    typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE2D)(uint32_t target, int32_t level, int32_t xoffset,
+                                                  int32_t yoffset, int32_t x, int32_t y,
+                                                  int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE3D)(uint32_t target, int32_t level, int32_t xoffset,
+                                                  int32_t yoffset, int32_t zoffset, int32_t x,
+                                                  int32_t y, int32_t width, int32_t height);
+    typedef void(STDCALL *PFNGLDELETESAMPLERS)(int32_t count, uint32_t *samplers);
+    typedef void(STDCALL *PFNGLDELETETEXTURES)(int32_t count, uint32_t *textures);
+    typedef void(STDCALL *PFNGLGENSAMPLERS)(int32_t count, uint32_t *samplers);
+    typedef void(STDCALL *PFNGLGENTEXTURES)(int32_t count, uint32_t *textures);
+    typedef void(STDCALL *PFNGLGENERATEMIPMAP)(uint32_t target);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERFV)(uint32_t sampler, uint32_t pname,
+                                                      float *params);
+    typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIV)(uint32_t sampler, uint32_t pname,
+                                                      int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXLEVELPARAMETERFV)(uint32_t target, int32_t level,
+                                                       uint32_t pname, float *params);
+    typedef void(STDCALL *PFNGLGETTEXLEVELPARAMETERIV)(uint32_t target, int32_t level,
+                                                       uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(uint32_t target, uint32_t parameter,
+                                                  float *values);
+    typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(uint32_t target, uint32_t parameter,
+                                                  int32_t *values);
+    typedef bool(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
+    typedef bool(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
+    typedef void(STDCALL *PFNGLPIXELSTOREI)(uint32_t parameter, int32_t value);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERF)(uint32_t sampler, uint32_t pname, float param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERFV)(uint32_t sampler, uint32_t pname, float *param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERI)(uint32_t sampler, uint32_t pname, int32_t param);
+    typedef void(STDCALL *PFNGLSAMPLERPARAMETERIV)(uint32_t sampler, uint32_t pname,
+                                                   int32_t *param);
+    typedef void(STDCALL *PFNGLTEXIMAGE2D)(uint32_t target, int32_t level, int32_t internal_format,
+                                           int32_t width, int32_t height, int32_t border,
+                                           uint32_t format, uint32_t type, void *data);
+    typedef void(STDCALL *PFNGLTEXIMAGE3D)(uint32_t target, int32_t level, int32_t internalformat,
+                                           int32_t width, int32_t height, int32_t depth,
+                                           int32_t border, uint32_t format, uint32_t type,
+                                           void *pixels);
+    typedef void(STDCALL *PFNGLTEXPARAMETERF)(uint32_t target, uint32_t parameter, float value);
+    typedef void(STDCALL *PFNGLTEXPARAMETERFV)(uint32_t target, uint32_t pname, float *params);
+    typedef void(STDCALL *PFNGLTEXPARAMETERI)(uint32_t target, uint32_t parameter, int32_t value);
+    typedef void(STDCALL *PFNGLTEXPARAMETERIV)(uint32_t target, uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLTEXSTORAGE2D)(uint32_t target, int32_t levels,
+                                             uint32_t internalformat, int32_t width,
+                                             int32_t height);
+    typedef void(STDCALL *PFNGLTEXSTORAGE2DMULTISAMPLE)(uint32_t target, int32_t samples,
+                                                        uint32_t internalformat, int32_t width,
+                                                        int32_t height,
+                                                        uint8_t fixedsamplelocations);
+    typedef void(STDCALL *PFNGLTEXSTORAGE3D)(uint32_t target, int32_t levels,
+                                             uint32_t internalformat, int32_t width, int32_t height,
+                                             int32_t depth);
+    typedef void(STDCALL *PFNGLTEXSUBIMAGE2D)(uint32_t target, int32_t level, int32_t xoffset,
+                                              int32_t yoffset, int32_t width, int32_t height,
+                                              uint32_t format, uint32_t type, void *data);
+    typedef void(STDCALL *PFNGLTEXSUBIMAGE3D)(uint32_t target, int32_t level, int32_t xoffset,
+                                              int32_t yoffset, int32_t zoffset, int32_t width,
+                                              int32_t height, int32_t depth, uint32_t format,
+                                              uint32_t type, void *pixels);
+    typedef void(STDCALL *PFNGLBEGINTRANSFORMFEEDBACK)(uint32_t primitiveMode);
+    typedef void(STDCALL *PFNGLBINDTRANSFORMFEEDBACK)(uint32_t target, uint32_t id);
+    typedef void(STDCALL *PFNGLDELETETRANSFORMFEEDBACKS)(int32_t n, uint32_t *ids);
+    typedef void(STDCALL *PFNGLENDTRANSFORMFEEDBACK)();
+    typedef void(STDCALL *PFNGLGENTRANSFORMFEEDBACKS)(int32_t n, uint32_t *ids);
+    typedef void(STDCALL *PFNGLGETTRANSFORMFEEDBACKVARYING)(uint32_t program, uint32_t index,
+                                                            int32_t bufSize, int32_t *length,
+                                                            int32_t *size, uint32_t *type,
+                                                            char *name);
+    typedef bool(STDCALL *PFNGLISTRANSFORMFEEDBACK)(uint32_t id);
+    typedef void(STDCALL *PFNGLPAUSETRANSFORMFEEDBACK)();
+    typedef void(STDCALL *PFNGLRESUMETRANSFORMFEEDBACK)();
+    typedef void(STDCALL *PFNGLTRANSFORMFEEDBACKVARYINGS)(uint32_t program, int32_t count,
+                                                          char **varyings, uint32_t bufferMode);
+    typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
+    typedef void(STDCALL *PFNGLBINDVERTEXBUFFER)(uint32_t bindingindex, uint32_t buffer,
+                                                 int32_t offset, int32_t stride);
+    typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(int32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(uint32_t location);
+    typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(uint32_t location);
+    typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
+    typedef void(STDCALL *PFNGLGETVERTEXATTRIBIIV)(uint32_t index, uint32_t pname, int32_t *params);
+    typedef void(STDCALL *PFNGLGETVERTEXATTRIBIUIV)(uint32_t index, uint32_t pname,
+                                                    uint32_t *params);
+    typedef void(STDCALL *PFNGLGETVERTEXATTRIBPOINTERV)(uint32_t index, uint32_t pname,
+                                                        void **pointer);
+    typedef void(STDCALL *PFNGLGETVERTEXATTRIBFV)(uint32_t index, uint32_t pname, float *params);
+    typedef void(STDCALL *PFNGLGETVERTEXATTRIBIV)(uint32_t index, uint32_t pname, int32_t *params);
+    typedef bool(STDCALL *PFNGLISVERTEXARRAY)(uint32_t array);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(uint32_t location, float value0);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(uint32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(uint32_t location, float value0, float value1);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB2FV)(uint32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB3F)(uint32_t location, float value0, float value1,
+                                               float value2);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB3FV)(uint32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB4F)(uint32_t location, float value0, float value1,
+                                               float value2, float value3);
+    typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(uint32_t location, float *value);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBBINDING)(uint32_t attribindex, uint32_t bindingindex);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBDIVISOR)(uint32_t index, uint32_t divisor);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBFORMAT)(uint32_t attribindex, int32_t size,
+                                                   uint32_t type, uint8_t normalized,
+                                                   uint32_t relativeoffset);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4I)(uint32_t index, int32_t x, int32_t y, int32_t z,
+                                                int32_t w);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4IV)(uint32_t index, int32_t *v);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4UI)(uint32_t index, uint32_t x, uint32_t y, uint32_t z,
+                                                 uint32_t w);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBI4UIV)(uint32_t index, uint32_t *v);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBIFORMAT)(uint32_t attribindex, int32_t size,
+                                                    uint32_t type, uint32_t relativeoffset);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBIPOINTER)(uint32_t index, int32_t size, uint32_t type,
+                                                     int32_t stride, void *pointer);
+    typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(uint32_t location, int32_t size, uint32_t type,
+                                                    bool normalized, int32_t stride, void *data);
+    typedef void(STDCALL *PFNGLVERTEXBINDINGDIVISOR)(uint32_t bindingindex, uint32_t divisor);
     typedef int(STDCALL *PFNEGLINITIALIZE)(void *dpy, int *major, int *minor);
     typedef void *(STDCALL *PFNEGLCREATECONTEXT)(void *display, void *config, void *share_context,
                                                  int *attrib_list);
@@ -55,303 +1304,686 @@ struct GlesImports {
     typedef int(STDCALL *PFNCGSGETSURFACEBOUNDS)(void *cid, int32_t wid, int32_t sid,
                                                  double *bounds);
     typedef int(STDCALL *PFNCGLFLUSHDRAWABLE)(void *ctx);
-    typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(uint32_t type);
-    typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(uint32_t type);
-    typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(uint32_t program, int32_t buffer_size,
-                                                    int32_t *bytes_written, uint32_t *binary_format,
-                                                    void *binary);
-    typedef void(STDCALL *PFNGLPROGRAMBINARYOES)(uint32_t program, uint32_t binary_format,
-                                                 void *binary, int32_t binary_size);
-    typedef void(STDCALL *PFNGLSTARTTILINGQCOM)(int32_t x, int32_t y, int32_t width, int32_t height,
-                                                uint32_t preserveMask);
-    typedef void(STDCALL *PFNGLENDTILINGQCOM)(uint32_t preserve_mask);
-    typedef void(STDCALL *PFNGLDISCARDFRAMEBUFFEREXT)(uint32_t target, int32_t numAttachments,
-                                                      uint32_t *attachments);
-    typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
-    typedef void(STDCALL *PFNGLPUSHGROUPMARKEREXT)(int32_t length, char *marker);
-    typedef void(STDCALL *PFNGLPOPGROUPMARKEREXT)();
-    typedef void(STDCALL *PFNGLTEXSTORAGE1DEXT)(uint32_t target, int32_t levels, uint32_t format,
-                                                int32_t width);
-    typedef void(STDCALL *PFNGLTEXSTORAGE2DEXT)(uint32_t target, int32_t levels, uint32_t format,
-                                                int32_t width, int32_t height);
-    typedef void(STDCALL *PFNGLTEXSTORAGE3DEXT)(uint32_t target, int32_t levels, uint32_t format,
-                                                int32_t width, int32_t height, int32_t depth);
-    typedef void(STDCALL *PFNGLTEXTURESTORAGE1DEXT)(uint32_t texture, uint32_t target,
-                                                    int32_t levels, uint32_t format, int32_t width);
-    typedef void(STDCALL *PFNGLTEXTURESTORAGE2DEXT)(uint32_t texture, uint32_t target,
-                                                    int32_t levels, uint32_t format, int32_t width,
-                                                    int32_t height);
-    typedef void(STDCALL *PFNGLTEXTURESTORAGE3DEXT)(uint32_t texture, uint32_t target,
-                                                    int32_t levels, uint32_t format, int32_t width,
-                                                    int32_t height, int32_t depth);
-    typedef void(STDCALL *PFNGLGENVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
-    typedef void(STDCALL *PFNGLBINDVERTEXARRAYOES)(uint32_t array);
-    typedef void(STDCALL *PFNGLDELETEVERTEXARRAYSOES)(int32_t count, uint32_t *arrays);
-    typedef bool(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
-    typedef void(STDCALL *PFNGLEGLIMAGETARGETTEXTURE2DOES)(uint32_t target, void *image);
-    typedef void(STDCALL *PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES)(uint32_t target, void *image);
-    typedef uint32_t(STDCALL *PFNGLGETGRAPHICSRESETSTATUSEXT)();
-    typedef void(STDCALL *PFNGLBINDATTRIBLOCATION)(uint32_t program, int32_t location, char *name);
-    typedef void(STDCALL *PFNGLBLENDFUNC)(uint32_t src_factor, uint32_t dst_factor);
-    typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
-                                                  uint32_t src_factor_alpha,
-                                                  uint32_t dst_factor_alpha);
-    typedef void(STDCALL *PFNGLBLENDEQUATION)(uint32_t equation);
-    typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(uint32_t rgb, uint32_t alpha);
-    typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
-    typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(int32_t location);
-    typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(int32_t location);
-    typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(int32_t location, int32_t size, uint32_t type,
-                                                    bool normalized, int32_t stride, void *data);
-    typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, int32_t location,
-                                                int32_t buffer_size, int32_t *buffer_bytes_written,
-                                                int32_t *vector_count, uint32_t *type, char *name);
-    typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, int32_t location,
-                                                 int32_t buffer_size, int32_t *buffer_bytes_written,
-                                                 int32_t *vector_count, uint32_t *type, char *name);
-    typedef uint32_t(STDCALL *PFNGLGETERROR)();
-    typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, uint32_t parameter, int32_t *value);
-    typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, uint32_t parameter, int32_t *value);
-    typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
-    typedef int32_t(STDCALL *PFNGLGETATTRIBLOCATION)(uint32_t program, char *name);
-    typedef void(STDCALL *PFNGLPIXELSTOREI)(uint32_t parameter, int32_t value);
-    typedef void(STDCALL *PFNGLTEXPARAMETERI)(uint32_t target, uint32_t parameter, int32_t value);
-    typedef void(STDCALL *PFNGLTEXPARAMETERF)(uint32_t target, uint32_t parameter, float value);
-    typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(uint32_t target, uint32_t parameter,
-                                                  int32_t *values);
-    typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(uint32_t target, uint32_t parameter,
-                                                  float *values);
-    typedef void(STDCALL *PFNGLUNIFORM1I)(int32_t location, int32_t value);
-    typedef void(STDCALL *PFNGLUNIFORM2I)(int32_t location, int32_t value0, int32_t value1);
-    typedef void(STDCALL *PFNGLUNIFORM3I)(int32_t location, int32_t value0, int32_t value1,
-                                          int32_t value2);
-    typedef void(STDCALL *PFNGLUNIFORM4I)(int32_t location, int32_t value0, int32_t value1,
-                                          int32_t value2, int32_t value3);
-    typedef void(STDCALL *PFNGLUNIFORM1IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM2IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM3IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM4IV)(int32_t location, int32_t count, int32_t *values);
-    typedef void(STDCALL *PFNGLUNIFORM1F)(int32_t location, float value);
-    typedef void(STDCALL *PFNGLUNIFORM2F)(int32_t location, float value0, float value1);
-    typedef void(STDCALL *PFNGLUNIFORM3F)(int32_t location, float value0, float value1,
-                                          float value2);
-    typedef void(STDCALL *PFNGLUNIFORM4F)(int32_t location, float value0, float value1,
-                                          float value2, float value3);
-    typedef void(STDCALL *PFNGLUNIFORM1FV)(int32_t location, int32_t count, float *values);
-    typedef void(STDCALL *PFNGLUNIFORM2FV)(int32_t location, int32_t count, float *values);
-    typedef void(STDCALL *PFNGLUNIFORM3FV)(int32_t location, int32_t count, float *values);
-    typedef void(STDCALL *PFNGLUNIFORM4FV)(int32_t location, int32_t count, float *values);
-    typedef void(STDCALL *PFNGLUNIFORMMATRIX2FV)(int32_t location, int32_t count, bool transpose,
-                                                 float *values);
-    typedef void(STDCALL *PFNGLUNIFORMMATRIX3FV)(int32_t location, int32_t count, bool transpose,
-                                                 float *values);
-    typedef void(STDCALL *PFNGLUNIFORMMATRIX4FV)(int32_t location, int32_t count, bool transpose,
-                                                 float *values);
-    typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
-    typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(int32_t location, float value0);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(int32_t location, float value0, float value1);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB3F)(int32_t location, float value0, float value1,
-                                               float value2);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB4F)(int32_t location, float value0, float value1,
-                                               float value2, float value3);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(int32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB2FV)(int32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB3FV)(int32_t location, float *value);
-    typedef void(STDCALL *PFNGLVERTEXATTRIB4FV)(int32_t location, float *value);
-    typedef void(STDCALL *PFNGLGETSHADERPRECISIONFORMAT)(uint32_t shader_type,
-                                                         uint32_t precision_type, int32_t *range,
-                                                         int32_t *precision);
-    typedef void(STDCALL *PFNGLDEPTHMASK)(bool enabled);
-    typedef void(STDCALL *PFNGLDEPTHFUNC)(uint32_t function);
-    typedef void(STDCALL *PFNGLDEPTHRANGEF)(float near, float far);
-    typedef void(STDCALL *PFNGLCOLORMASK)(bool red, bool green, bool blue, bool alpha);
-    typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
-    typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(uint32_t face, uint32_t mask);
-    typedef void(STDCALL *PFNGLSTENCILFUNCSEPARATE)(uint32_t face, uint32_t function,
-                                                    int32_t reference_value, int32_t mask);
-    typedef void(STDCALL *PFNGLSTENCILOPSEPARATE)(uint32_t face, uint32_t stencil_fail,
-                                                  uint32_t stencil_pass_depth_fail,
-                                                  uint32_t stencil_pass_depth_pass);
-    typedef void(STDCALL *PFNGLFRONTFACE)(uint32_t orientation);
-    typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
-    typedef void(STDCALL *PFNGLSCISSOR)(int32_t x, int32_t y, int32_t width, int32_t height);
-    typedef void(STDCALL *PFNGLACTIVETEXTURE)(uint32_t unit);
-    typedef void(STDCALL *PFNGLGENTEXTURES)(int32_t count, uint32_t *textures);
-    typedef void(STDCALL *PFNGLDELETETEXTURES)(int32_t count, uint32_t *textures);
-    typedef bool(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
-    typedef void(STDCALL *PFNGLBINDTEXTURE)(uint32_t target, uint32_t texture);
-    typedef void(STDCALL *PFNGLTEXIMAGE2D)(uint32_t target, int32_t level, uint32_t internal_format,
-                                           int32_t width, int32_t height, int32_t border,
-                                           uint32_t format, uint32_t type, void *data);
-    typedef void(STDCALL *PFNGLTEXSUBIMAGE2D)(uint32_t target, int32_t level, int32_t xoffset,
-                                              int32_t yoffset, int32_t width, int32_t height,
-                                              uint32_t format, uint32_t type, void *data);
-    typedef void(STDCALL *PFNGLCOPYTEXIMAGE2D)(uint32_t target, int32_t level, uint32_t format,
-                                               int32_t x, int32_t y, int32_t width, int32_t height,
-                                               int32_t border);
-    typedef void(STDCALL *PFNGLCOPYTEXSUBIMAGE2D)(uint32_t target, int32_t level, int32_t xoffset,
-                                                  int32_t yoffset, int32_t x, int32_t y,
-                                                  int32_t width, int32_t height);
-    typedef void(STDCALL *PFNGLCOMPRESSEDTEXIMAGE2D)(uint32_t target, int32_t level,
-                                                     uint32_t format, int32_t width, int32_t height,
-                                                     int32_t border, int32_t image_size,
-                                                     void *data);
-    typedef void(STDCALL *PFNGLCOMPRESSEDTEXSUBIMAGE2D)(uint32_t target, int32_t level,
-                                                        int32_t xoffset, int32_t yoffset,
-                                                        int32_t width, int32_t height,
-                                                        uint32_t format, int32_t image_size,
-                                                        void *data);
-    typedef void(STDCALL *PFNGLGENERATEMIPMAP)(uint32_t target);
-    typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
-                                           uint32_t format, uint32_t type, void *data);
-    typedef void(STDCALL *PFNGLGENFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
-    typedef void(STDCALL *PFNGLBINDFRAMEBUFFER)(uint32_t target, uint32_t framebuffer);
-    typedef uint32_t(STDCALL *PFNGLCHECKFRAMEBUFFERSTATUS)(uint32_t target);
-    typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
-    typedef bool(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
-    typedef void(STDCALL *PFNGLGENRENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
-    typedef void(STDCALL *PFNGLBINDRENDERBUFFER)(uint32_t target, uint32_t renderbuffer);
-    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGE)(uint32_t target, uint32_t format, int32_t width,
-                                                    int32_t height);
-    typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
-    typedef bool(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
-    typedef void(STDCALL *PFNGLGETRENDERBUFFERPARAMETERIV)(uint32_t target, uint32_t parameter,
-                                                           int32_t *values);
-    typedef void(STDCALL *PFNGLGENBUFFERS)(int32_t count, uint32_t *buffers);
-    typedef void(STDCALL *PFNGLBINDBUFFER)(uint32_t target, uint32_t buffer);
-    typedef void(STDCALL *PFNGLBUFFERDATA)(uint32_t target, int32_t size, void *data,
-                                           uint32_t usage);
-    typedef void(STDCALL *PFNGLBUFFERSUBDATA)(uint32_t target, int32_t offset, int32_t size,
-                                              void *data);
-    typedef void(STDCALL *PFNGLDELETEBUFFERS)(int32_t count, uint32_t *buffers);
-    typedef bool(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
-    typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(uint32_t target, uint32_t parameter,
-                                                     int32_t *value);
-    typedef uint32_t(STDCALL *PFNGLCREATESHADER)(uint32_t type);
-    typedef void(STDCALL *PFNGLDELETESHADER)(uint32_t shader);
-    typedef void(STDCALL *PFNGLSHADERSOURCE)(uint32_t shader, int32_t count, char **source,
-                                             int32_t *length);
-    typedef void(STDCALL *PFNGLSHADERBINARY)(int32_t count, uint32_t *shaders,
-                                             uint32_t binary_format, void *binary,
-                                             int32_t binary_size);
-    typedef void(STDCALL *PFNGLGETSHADERINFOLOG)(uint32_t shader, int32_t buffer_length,
-                                                 int32_t *string_length_written, char *info);
-    typedef void(STDCALL *PFNGLGETSHADERSOURCE)(uint32_t shader, int32_t buffer_length,
-                                                int32_t *string_length_written, char *source);
-    typedef void(STDCALL *PFNGLRELEASESHADERCOMPILER)();
-    typedef void(STDCALL *PFNGLCOMPILESHADER)(uint32_t shader);
-    typedef bool(STDCALL *PFNGLISSHADER)(uint32_t shader);
-    typedef uint32_t(STDCALL *PFNGLCREATEPROGRAM)();
-    typedef void(STDCALL *PFNGLDELETEPROGRAM)(uint32_t program);
-    typedef void(STDCALL *PFNGLATTACHSHADER)(uint32_t program, uint32_t shader);
-    typedef void(STDCALL *PFNGLDETACHSHADER)(uint32_t program, uint32_t shader);
-    typedef void(STDCALL *PFNGLGETATTACHEDSHADERS)(uint32_t program, int32_t buffer_length,
-                                                   int32_t *shaders_length_written,
-                                                   uint32_t *shaders);
-    typedef void(STDCALL *PFNGLLINKPROGRAM)(uint32_t program);
-    typedef void(STDCALL *PFNGLGETPROGRAMINFOLOG)(uint32_t program, int32_t buffer_length,
-                                                  int32_t *string_length_written, char *info);
-    typedef void(STDCALL *PFNGLUSEPROGRAM)(uint32_t program);
-    typedef bool(STDCALL *PFNGLISPROGRAM)(uint32_t program);
-    typedef void(STDCALL *PFNGLVALIDATEPROGRAM)(uint32_t program);
-    typedef void(STDCALL *PFNGLCLEARCOLOR)(float r, float g, float b, float a);
-    typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
-    typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
-    typedef void(STDCALL *PFNGLCLEAR)(uint32_t mask);
-    typedef void(STDCALL *PFNGLCULLFACE)(uint32_t mode);
-    typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
-    typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
-    typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, bool invert);
-    typedef void(STDCALL *PFNGLHINT)(uint32_t target, uint32_t mode);
-    typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(uint32_t framebuffer_target,
-                                                        uint32_t framebuffer_attachment,
-                                                        uint32_t renderbuffer_target,
-                                                        uint32_t renderbuffer);
-    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(uint32_t framebuffer_target,
-                                                     uint32_t framebuffer_attachment,
-                                                     uint32_t texture_target, uint32_t texture,
-                                                     int32_t level);
-    typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV)(uint32_t framebuffer_target,
-                                                                    uint32_t attachment,
-                                                                    uint32_t parameter,
-                                                                    int32_t *value);
-    typedef void(STDCALL *PFNGLDRAWELEMENTS)(uint32_t draw_mode, int32_t element_count,
-                                             uint32_t indices_type, void *indices);
-    typedef void(STDCALL *PFNGLDRAWARRAYS)(uint32_t draw_mode, int32_t first_index,
-                                           int32_t index_count);
-    typedef void(STDCALL *PFNGLFLUSH)();
-    typedef void(STDCALL *PFNGLFINISH)();
-    typedef void(STDCALL *PFNGLGETBOOLEANV)(uint32_t param, bool *values);
-    typedef void(STDCALL *PFNGLGETFLOATV)(uint32_t param, float *values);
-    typedef void(STDCALL *PFNGLGETINTEGERV)(uint32_t param, int32_t *values);
-    typedef char *(STDCALL *PFNGLGETSTRING)(uint32_t param);
-    typedef void(STDCALL *PFNGLENABLE)(uint32_t capability);
-    typedef void(STDCALL *PFNGLDISABLE)(uint32_t capability);
-    typedef bool(STDCALL *PFNGLISENABLED)(uint32_t capability);
-    typedef uint64_t(STDCALL *PFNGLFENCESYNC)(uint32_t condition, uint32_t syncFlags);
-    typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
-    typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
-    typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, uint32_t syncFlags,
-                                                   uint64_t timeout);
-    typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(uint32_t target, int32_t offset, int32_t length,
-                                                 uint32_t access);
-    typedef void(STDCALL *PFNGLUNMAPBUFFER)(uint32_t target);
-    typedef void(STDCALL *PFNGLINVALIDATEFRAMEBUFFER)(uint32_t target, int32_t count,
-                                                      uint32_t *attachments);
-    typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(uint32_t target, int32_t samples,
-                                                               uint32_t format, int32_t width,
-                                                               int32_t height);
-    typedef void(STDCALL *PFNGLBLITFRAMEBUFFER)(int32_t srcX0, int32_t srcY0, int32_t srcX1,
-                                                int32_t srcY1, int32_t dstX0, int32_t dstY0,
-                                                int32_t dstX1, int32_t dstY1, uint32_t mask,
-                                                uint32_t filter);
-    typedef void(STDCALL *PFNGLGENQUERIES)(int32_t count, uint32_t *queries);
-    typedef void(STDCALL *PFNGLBEGINQUERY)(uint32_t target, uint32_t query);
-    typedef void(STDCALL *PFNGLENDQUERY)(uint32_t target);
-    typedef void(STDCALL *PFNGLDELETEQUERIES)(int32_t count, uint32_t *queries);
-    typedef bool(STDCALL *PFNGLISQUERY)(uint32_t query);
-    typedef void(STDCALL *PFNGLGETQUERYIV)(uint32_t target, uint32_t parameter, int32_t *value);
-    typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, uint32_t parameter,
-                                                  uint32_t *value);
-    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKNAME)(uint32_t program,
-                                                          uint32_t uniform_block_index,
-                                                          int32_t buffer_size,
-                                                          int32_t *buffer_bytes_written,
-                                                          char *name);
-    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMBLOCKIV)(uint32_t program,
-                                                        uint32_t uniform_block_index,
-                                                        uint32_t parameter_name,
-                                                        int32_t *parameters);
-    typedef void(STDCALL *PFNGLUNIFORMBLOCKBINDING)(uint32_t program, uint32_t uniform_block_index,
-                                                    uint32_t uniform_block_binding);
-    typedef void(STDCALL *PFNGLGETACTIVEUNIFORMSIV)(uint32_t program, uint32_t uniform_count,
-                                                    uint32_t *uniform_indices,
-                                                    uint32_t parameter_name, int32_t *parameters);
-    typedef void(STDCALL *PFNGLBINDBUFFERBASE)(uint32_t target, uint32_t index, uint32_t buffer);
-    typedef void(STDCALL *PFNGLGENVERTEXARRAYS)(int32_t count, uint32_t *arrays);
-    typedef void(STDCALL *PFNGLBINDVERTEXARRAY)(uint32_t array);
-    typedef void(STDCALL *PFNGLDELETEVERTEXARRAYS)(uint32_t count, uint32_t *arrays);
     typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, uint32_t parameter,
                                                    int64_t *value);
     typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, uint32_t parameter,
                                                     uint64_t *value);
-    typedef void(STDCALL *PFNGLGENQUERIESEXT)(int32_t count, uint32_t *queries);
-    typedef void(STDCALL *PFNGLBEGINQUERYEXT)(uint32_t target, uint32_t query);
-    typedef void(STDCALL *PFNGLENDQUERYEXT)(uint32_t target);
-    typedef void(STDCALL *PFNGLDELETEQUERIESEXT)(int32_t count, uint32_t *queries);
-    typedef bool(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
-    typedef void(STDCALL *PFNGLQUERYCOUNTEREXT)(uint32_t query, uint32_t target);
-    typedef void(STDCALL *PFNGLGETQUERYIVEXT)(uint32_t target, uint32_t parameter, int32_t *value);
-    typedef void(STDCALL *PFNGLGETQUERYOBJECTIVEXT)(uint32_t query, uint32_t parameter,
-                                                    int32_t *value);
-    typedef void(STDCALL *PFNGLGETQUERYOBJECTUIVEXT)(uint32_t query, uint32_t parameter,
-                                                     uint32_t *value);
-    typedef void(STDCALL *PFNGLGETQUERYOBJECTI64VEXT)(uint32_t query, uint32_t parameter,
-                                                      int64_t *value);
-    typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64VEXT)(uint32_t query, uint32_t parameter,
-                                                       uint64_t *value);
 
+    PFNGLBLENDBARRIERKHR glBlendBarrierKHR;
+    PFNGLBLENDEQUATIONSEPARATEIEXT glBlendEquationSeparateiEXT;
+    PFNGLBLENDEQUATIONIEXT glBlendEquationiEXT;
+    PFNGLBLENDFUNCSEPARATEIEXT glBlendFuncSeparateiEXT;
+    PFNGLBLENDFUNCIEXT glBlendFunciEXT;
+    PFNGLCOLORMASKIEXT glColorMaskiEXT;
+    PFNGLCOPYIMAGESUBDATAEXT glCopyImageSubDataEXT;
+    PFNGLDEBUGMESSAGECALLBACKKHR glDebugMessageCallbackKHR;
+    PFNGLDEBUGMESSAGECONTROLKHR glDebugMessageControlKHR;
+    PFNGLDEBUGMESSAGEINSERTKHR glDebugMessageInsertKHR;
+    PFNGLDISABLEIEXT glDisableiEXT;
+    PFNGLENABLEIEXT glEnableiEXT;
+    PFNGLFRAMEBUFFERTEXTUREEXT glFramebufferTextureEXT;
+    PFNGLGETDEBUGMESSAGELOGKHR glGetDebugMessageLogKHR;
+    PFNGLGETOBJECTLABELKHR glGetObjectLabelKHR;
+    PFNGLGETOBJECTPTRLABELKHR glGetObjectPtrLabelKHR;
+    PFNGLGETPOINTERVKHR glGetPointervKHR;
+    PFNGLGETSAMPLERPARAMETERIIVEXT glGetSamplerParameterIivEXT;
+    PFNGLGETSAMPLERPARAMETERIUIVEXT glGetSamplerParameterIuivEXT;
+    PFNGLGETTEXPARAMETERIIVEXT glGetTexParameterIivEXT;
+    PFNGLGETTEXPARAMETERIUIVEXT glGetTexParameterIuivEXT;
+    PFNGLISENABLEDIEXT glIsEnablediEXT;
+    PFNGLMINSAMPLESHADINGOES glMinSampleShadingOES;
+    PFNGLOBJECTLABELKHR glObjectLabelKHR;
+    PFNGLOBJECTPTRLABELKHR glObjectPtrLabelKHR;
+    PFNGLPATCHPARAMETERIEXT glPatchParameteriEXT;
+    PFNGLPOPDEBUGGROUPKHR glPopDebugGroupKHR;
+    PFNGLPRIMITIVEBOUNDINGBOXEXT glPrimitiveBoundingBoxEXT;
+    PFNGLPUSHDEBUGGROUPKHR glPushDebugGroupKHR;
+    PFNGLSAMPLERPARAMETERIIVEXT glSamplerParameterIivEXT;
+    PFNGLSAMPLERPARAMETERIUIVEXT glSamplerParameterIuivEXT;
+    PFNGLTEXBUFFEREXT glTexBufferEXT;
+    PFNGLTEXBUFFERRANGEEXT glTexBufferRangeEXT;
+    PFNGLTEXPARAMETERIIVEXT glTexParameterIivEXT;
+    PFNGLTEXPARAMETERIUIVEXT glTexParameterIuivEXT;
+    PFNGLTEXSTORAGE3DMULTISAMPLEOES glTexStorage3DMultisampleOES;
+    PFNGLBEGINQUERY glBeginQuery;
+    PFNGLDELETEQUERIES glDeleteQueries;
+    PFNGLENDQUERY glEndQuery;
+    PFNGLGENQUERIES glGenQueries;
+    PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv;
+    PFNGLGETQUERYIV glGetQueryiv;
+    PFNGLISQUERY glIsQuery;
+    PFNGLBINDBUFFER glBindBuffer;
+    PFNGLBINDBUFFERBASE glBindBufferBase;
+    PFNGLBINDBUFFERRANGE glBindBufferRange;
+    PFNGLBUFFERDATA glBufferData;
+    PFNGLBUFFERSUBDATA glBufferSubData;
+    PFNGLCOPYBUFFERSUBDATA glCopyBufferSubData;
+    PFNGLDELETEBUFFERS glDeleteBuffers;
+    PFNGLGENBUFFERS glGenBuffers;
+    PFNGLGETBUFFERPARAMETERI64V glGetBufferParameteri64v;
+    PFNGLGETBUFFERPARAMETERIV glGetBufferParameteriv;
+    PFNGLGETBUFFERPOINTERV glGetBufferPointerv;
+    PFNGLISBUFFER glIsBuffer;
+    PFNGLMAPBUFFERRANGE glMapBufferRange;
+    PFNGLUNMAPBUFFER glUnmapBuffer;
+    PFNGLDRAWARRAYS glDrawArrays;
+    PFNGLDRAWARRAYSINDIRECT glDrawArraysIndirect;
+    PFNGLDRAWARRAYSINSTANCED glDrawArraysInstanced;
+    PFNGLDRAWBUFFERS glDrawBuffers;
+    PFNGLDRAWELEMENTS glDrawElements;
+    PFNGLDRAWELEMENTSINDIRECT glDrawElementsIndirect;
+    PFNGLDRAWELEMENTSINSTANCED glDrawElementsInstanced;
+    PFNGLDRAWRANGEELEMENTS glDrawRangeElements;
+    PFNGLACTIVESHADERPROGRAMEXT glActiveShaderProgramEXT;
+    PFNGLALPHAFUNCQCOM glAlphaFuncQCOM;
+    PFNGLBEGINCONDITIONALRENDERNV glBeginConditionalRenderNV;
+    PFNGLBEGINPERFMONITORAMD glBeginPerfMonitorAMD;
+    PFNGLBEGINPERFQUERYINTEL glBeginPerfQueryINTEL;
+    PFNGLBEGINQUERYEXT glBeginQueryEXT;
+    PFNGLBINDPROGRAMPIPELINEEXT glBindProgramPipelineEXT;
+    PFNGLBINDVERTEXARRAYOES glBindVertexArrayOES;
+    PFNGLBLENDBARRIERNV glBlendBarrierNV;
+    PFNGLBLENDEQUATIONSEPARATEIOES glBlendEquationSeparateiOES;
+    PFNGLBLENDEQUATIONIOES glBlendEquationiOES;
+    PFNGLBLENDFUNCSEPARATEIOES glBlendFuncSeparateiOES;
+    PFNGLBLENDFUNCIOES glBlendFunciOES;
+    PFNGLBLENDPARAMETERINV glBlendParameteriNV;
+    PFNGLBLITFRAMEBUFFERANGLE glBlitFramebufferANGLE;
+    PFNGLBLITFRAMEBUFFERNV glBlitFramebufferNV;
+    PFNGLBUFFERSTORAGEEXT glBufferStorageEXT;
+    PFNGLCLIENTWAITSYNCAPPLE glClientWaitSyncAPPLE;
+    PFNGLCOLORMASKIOES glColorMaskiOES;
+    PFNGLCOMPRESSEDTEXIMAGE3DOES glCompressedTexImage3DOES;
+    PFNGLCOMPRESSEDTEXSUBIMAGE3DOES glCompressedTexSubImage3DOES;
+    PFNGLCOPYBUFFERSUBDATANV glCopyBufferSubDataNV;
+    PFNGLCOPYIMAGESUBDATAOES glCopyImageSubDataOES;
+    PFNGLCOPYPATHNV glCopyPathNV;
+    PFNGLCOPYTEXSUBIMAGE3DOES glCopyTexSubImage3DOES;
+    PFNGLCOPYTEXTURELEVELSAPPLE glCopyTextureLevelsAPPLE;
+    PFNGLCOVERFILLPATHINSTANCEDNV glCoverFillPathInstancedNV;
+    PFNGLCOVERFILLPATHNV glCoverFillPathNV;
+    PFNGLCOVERSTROKEPATHINSTANCEDNV glCoverStrokePathInstancedNV;
+    PFNGLCOVERSTROKEPATHNV glCoverStrokePathNV;
+    PFNGLCOVERAGEMASKNV glCoverageMaskNV;
+    PFNGLCOVERAGEOPERATIONNV glCoverageOperationNV;
+    PFNGLCREATEPERFQUERYINTEL glCreatePerfQueryINTEL;
+    PFNGLCREATESHADERPROGRAMVEXT glCreateShaderProgramvEXT;
+    PFNGLDELETEFENCESNV glDeleteFencesNV;
+    PFNGLDELETEPATHSNV glDeletePathsNV;
+    PFNGLDELETEPERFMONITORSAMD glDeletePerfMonitorsAMD;
+    PFNGLDELETEPERFQUERYINTEL glDeletePerfQueryINTEL;
+    PFNGLDELETEPROGRAMPIPELINESEXT glDeleteProgramPipelinesEXT;
+    PFNGLDELETEQUERIESEXT glDeleteQueriesEXT;
+    PFNGLDELETESYNCAPPLE glDeleteSyncAPPLE;
+    PFNGLDELETEVERTEXARRAYSOES glDeleteVertexArraysOES;
+    PFNGLDEPTHRANGEARRAYFVNV glDepthRangeArrayfvNV;
+    PFNGLDEPTHRANGEINDEXEDFNV glDepthRangeIndexedfNV;
+    PFNGLDISABLEDRIVERCONTROLQCOM glDisableDriverControlQCOM;
+    PFNGLDISABLEINV glDisableiNV;
+    PFNGLDISABLEIOES glDisableiOES;
+    PFNGLDISCARDFRAMEBUFFEREXT glDiscardFramebufferEXT;
+    PFNGLDRAWARRAYSINSTANCEDANGLE glDrawArraysInstancedANGLE;
+    PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEEXT glDrawArraysInstancedBaseInstanceEXT;
+    PFNGLDRAWARRAYSINSTANCEDEXT glDrawArraysInstancedEXT;
+    PFNGLDRAWARRAYSINSTANCEDNV glDrawArraysInstancedNV;
+    PFNGLDRAWBUFFERSEXT glDrawBuffersEXT;
+    PFNGLDRAWBUFFERSINDEXEDEXT glDrawBuffersIndexedEXT;
+    PFNGLDRAWBUFFERSNV glDrawBuffersNV;
+    PFNGLDRAWELEMENTSBASEVERTEXEXT glDrawElementsBaseVertexEXT;
+    PFNGLDRAWELEMENTSBASEVERTEXOES glDrawElementsBaseVertexOES;
+    PFNGLDRAWELEMENTSINSTANCEDANGLE glDrawElementsInstancedANGLE;
+    PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT glDrawElementsInstancedBaseInstanceEXT;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT glDrawElementsInstancedBaseVertexEXT;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES glDrawElementsInstancedBaseVertexOES;
+    PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT
+            glDrawElementsInstancedBaseVertexBaseInstanceEXT;
+    PFNGLDRAWELEMENTSINSTANCEDEXT glDrawElementsInstancedEXT;
+    PFNGLDRAWELEMENTSINSTANCEDNV glDrawElementsInstancedNV;
+    PFNGLDRAWRANGEELEMENTSBASEVERTEXEXT glDrawRangeElementsBaseVertexEXT;
+    PFNGLDRAWRANGEELEMENTSBASEVERTEXOES glDrawRangeElementsBaseVertexOES;
+    PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES glEGLImageTargetRenderbufferStorageOES;
+    PFNGLEGLIMAGETARGETTEXTURE2DOES glEGLImageTargetTexture2DOES;
+    PFNGLENABLEDRIVERCONTROLQCOM glEnableDriverControlQCOM;
+    PFNGLENABLEINV glEnableiNV;
+    PFNGLENABLEIOES glEnableiOES;
+    PFNGLENDCONDITIONALRENDERNV glEndConditionalRenderNV;
+    PFNGLENDPERFMONITORAMD glEndPerfMonitorAMD;
+    PFNGLENDPERFQUERYINTEL glEndPerfQueryINTEL;
+    PFNGLENDQUERYEXT glEndQueryEXT;
+    PFNGLENDTILINGQCOM glEndTilingQCOM;
+    PFNGLEXTGETBUFFERPOINTERVQCOM glExtGetBufferPointervQCOM;
+    PFNGLEXTGETBUFFERSQCOM glExtGetBuffersQCOM;
+    PFNGLEXTGETFRAMEBUFFERSQCOM glExtGetFramebuffersQCOM;
+    PFNGLEXTGETPROGRAMBINARYSOURCEQCOM glExtGetProgramBinarySourceQCOM;
+    PFNGLEXTGETPROGRAMSQCOM glExtGetProgramsQCOM;
+    PFNGLEXTGETRENDERBUFFERSQCOM glExtGetRenderbuffersQCOM;
+    PFNGLEXTGETSHADERSQCOM glExtGetShadersQCOM;
+    PFNGLEXTGETTEXLEVELPARAMETERIVQCOM glExtGetTexLevelParameterivQCOM;
+    PFNGLEXTGETTEXSUBIMAGEQCOM glExtGetTexSubImageQCOM;
+    PFNGLEXTGETTEXTURESQCOM glExtGetTexturesQCOM;
+    PFNGLEXTISPROGRAMBINARYQCOM glExtIsProgramBinaryQCOM;
+    PFNGLEXTTEXOBJECTSTATEOVERRIDEIQCOM glExtTexObjectStateOverrideiQCOM;
+    PFNGLFENCESYNCAPPLE glFenceSyncAPPLE;
+    PFNGLFINISHFENCENV glFinishFenceNV;
+    PFNGLFLUSHMAPPEDBUFFERRANGEEXT glFlushMappedBufferRangeEXT;
+    PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT glFramebufferTexture2DMultisampleEXT;
+    PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMG glFramebufferTexture2DMultisampleIMG;
+    PFNGLFRAMEBUFFERTEXTURE3DOES glFramebufferTexture3DOES;
+    PFNGLFRAMEBUFFERTEXTUREOES glFramebufferTextureOES;
+    PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR glFramebufferTextureMultiviewOVR;
+    PFNGLGENFENCESNV glGenFencesNV;
+    PFNGLGENPATHSNV glGenPathsNV;
+    PFNGLGENPERFMONITORSAMD glGenPerfMonitorsAMD;
+    PFNGLGENPROGRAMPIPELINESEXT glGenProgramPipelinesEXT;
+    PFNGLGENQUERIESEXT glGenQueriesEXT;
+    PFNGLGENVERTEXARRAYSOES glGenVertexArraysOES;
+    PFNGLGETBUFFERPOINTERVOES glGetBufferPointervOES;
+    PFNGLGETDRIVERCONTROLSTRINGQCOM glGetDriverControlStringQCOM;
+    PFNGLGETDRIVERCONTROLSQCOM glGetDriverControlsQCOM;
+    PFNGLGETFENCEIVNV glGetFenceivNV;
+    PFNGLGETFIRSTPERFQUERYIDINTEL glGetFirstPerfQueryIdINTEL;
+    PFNGLGETFLOATI_VNV glGetFloati_vNV;
+    PFNGLGETGRAPHICSRESETSTATUSEXT glGetGraphicsResetStatusEXT;
+    PFNGLGETGRAPHICSRESETSTATUSKHR glGetGraphicsResetStatusKHR;
+    PFNGLGETIMAGEHANDLENV glGetImageHandleNV;
+    PFNGLGETINTEGER64VAPPLE glGetInteger64vAPPLE;
+    PFNGLGETINTEGERI_VEXT glGetIntegeri_vEXT;
+    PFNGLGETINTERNALFORMATSAMPLEIVNV glGetInternalformatSampleivNV;
+    PFNGLGETNEXTPERFQUERYIDINTEL glGetNextPerfQueryIdINTEL;
+    PFNGLGETOBJECTLABELEXT glGetObjectLabelEXT;
+    PFNGLGETPATHCOMMANDSNV glGetPathCommandsNV;
+    PFNGLGETPATHCOORDSNV glGetPathCoordsNV;
+    PFNGLGETPATHDASHARRAYNV glGetPathDashArrayNV;
+    PFNGLGETPATHLENGTHNV glGetPathLengthNV;
+    PFNGLGETPATHMETRICRANGENV glGetPathMetricRangeNV;
+    PFNGLGETPATHMETRICSNV glGetPathMetricsNV;
+    PFNGLGETPATHPARAMETERFVNV glGetPathParameterfvNV;
+    PFNGLGETPATHPARAMETERIVNV glGetPathParameterivNV;
+    PFNGLGETPATHSPACINGNV glGetPathSpacingNV;
+    PFNGLGETPERFCOUNTERINFOINTEL glGetPerfCounterInfoINTEL;
+    PFNGLGETPERFMONITORCOUNTERDATAAMD glGetPerfMonitorCounterDataAMD;
+    PFNGLGETPERFMONITORCOUNTERINFOAMD glGetPerfMonitorCounterInfoAMD;
+    PFNGLGETPERFMONITORCOUNTERSTRINGAMD glGetPerfMonitorCounterStringAMD;
+    PFNGLGETPERFMONITORCOUNTERSAMD glGetPerfMonitorCountersAMD;
+    PFNGLGETPERFMONITORGROUPSTRINGAMD glGetPerfMonitorGroupStringAMD;
+    PFNGLGETPERFMONITORGROUPSAMD glGetPerfMonitorGroupsAMD;
+    PFNGLGETPERFQUERYDATAINTEL glGetPerfQueryDataINTEL;
+    PFNGLGETPERFQUERYIDBYNAMEINTEL glGetPerfQueryIdByNameINTEL;
+    PFNGLGETPERFQUERYINFOINTEL glGetPerfQueryInfoINTEL;
+    PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;
+    PFNGLGETPROGRAMPIPELINEINFOLOGEXT glGetProgramPipelineInfoLogEXT;
+    PFNGLGETPROGRAMPIPELINEIVEXT glGetProgramPipelineivEXT;
+    PFNGLGETPROGRAMRESOURCEFVNV glGetProgramResourcefvNV;
+    PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT;
+    PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT;
+    PFNGLGETQUERYOBJECTUI64VEXT glGetQueryObjectui64vEXT;
+    PFNGLGETQUERYOBJECTUIVEXT glGetQueryObjectuivEXT;
+    PFNGLGETQUERYIVEXT glGetQueryivEXT;
+    PFNGLGETSAMPLERPARAMETERIIVOES glGetSamplerParameterIivOES;
+    PFNGLGETSAMPLERPARAMETERIUIVOES glGetSamplerParameterIuivOES;
+    PFNGLGETSYNCIVAPPLE glGetSyncivAPPLE;
+    PFNGLGETTEXPARAMETERIIVOES glGetTexParameterIivOES;
+    PFNGLGETTEXPARAMETERIUIVOES glGetTexParameterIuivOES;
+    PFNGLGETTEXTUREHANDLENV glGetTextureHandleNV;
+    PFNGLGETTEXTURESAMPLERHANDLENV glGetTextureSamplerHandleNV;
+    PFNGLGETTRANSLATEDSHADERSOURCEANGLE glGetTranslatedShaderSourceANGLE;
+    PFNGLGETNUNIFORMFVEXT glGetnUniformfvEXT;
+    PFNGLGETNUNIFORMFVKHR glGetnUniformfvKHR;
+    PFNGLGETNUNIFORMIVEXT glGetnUniformivEXT;
+    PFNGLGETNUNIFORMIVKHR glGetnUniformivKHR;
+    PFNGLGETNUNIFORMUIVKHR glGetnUniformuivKHR;
+    PFNGLINSERTEVENTMARKEREXT glInsertEventMarkerEXT;
+    PFNGLINTERPOLATEPATHSNV glInterpolatePathsNV;
+    PFNGLISENABLEDIOES glIsEnablediOES;
+    PFNGLISENABLEDINV glIsEnablediNV;
+    PFNGLISFENCENV glIsFenceNV;
+    PFNGLISIMAGEHANDLERESIDENTNV glIsImageHandleResidentNV;
+    PFNGLISPATHNV glIsPathNV;
+    PFNGLISPOINTINFILLPATHNV glIsPointInFillPathNV;
+    PFNGLISPOINTINSTROKEPATHNV glIsPointInStrokePathNV;
+    PFNGLISPROGRAMPIPELINEEXT glIsProgramPipelineEXT;
+    PFNGLISQUERYEXT glIsQueryEXT;
+    PFNGLISSYNCAPPLE glIsSyncAPPLE;
+    PFNGLISTEXTUREHANDLERESIDENTNV glIsTextureHandleResidentNV;
+    PFNGLISVERTEXARRAYOES glIsVertexArrayOES;
+    PFNGLLABELOBJECTEXT glLabelObjectEXT;
+    PFNGLMAKEIMAGEHANDLENONRESIDENTNV glMakeImageHandleNonResidentNV;
+    PFNGLMAKEIMAGEHANDLERESIDENTNV glMakeImageHandleResidentNV;
+    PFNGLMAKETEXTUREHANDLENONRESIDENTNV glMakeTextureHandleNonResidentNV;
+    PFNGLMAKETEXTUREHANDLERESIDENTNV glMakeTextureHandleResidentNV;
+    PFNGLMAPBUFFEROES glMapBufferOES;
+    PFNGLMAPBUFFERRANGEEXT glMapBufferRangeEXT;
+    PFNGLMATRIXLOAD3X2FNV glMatrixLoad3x2fNV;
+    PFNGLMATRIXLOAD3X3FNV glMatrixLoad3x3fNV;
+    PFNGLMATRIXLOADTRANSPOSE3X3FNV glMatrixLoadTranspose3x3fNV;
+    PFNGLMATRIXMULT3X2FNV glMatrixMult3x2fNV;
+    PFNGLMATRIXMULT3X3FNV glMatrixMult3x3fNV;
+    PFNGLMATRIXMULTTRANSPOSE3X3FNV glMatrixMultTranspose3x3fNV;
+    PFNGLMULTIDRAWARRAYSEXT glMultiDrawArraysEXT;
+    PFNGLMULTIDRAWARRAYSINDIRECTEXT glMultiDrawArraysIndirectEXT;
+    PFNGLMULTIDRAWELEMENTSBASEVERTEXEXT glMultiDrawElementsBaseVertexEXT;
+    PFNGLMULTIDRAWELEMENTSBASEVERTEXOES glMultiDrawElementsBaseVertexOES;
+    PFNGLMULTIDRAWELEMENTSEXT glMultiDrawElementsEXT;
+    PFNGLMULTIDRAWELEMENTSINDIRECTEXT glMultiDrawElementsIndirectEXT;
+    PFNGLPATCHPARAMETERIOES glPatchParameteriOES;
+    PFNGLPATHCOMMANDSNV glPathCommandsNV;
+    PFNGLPATHCOORDSNV glPathCoordsNV;
+    PFNGLPATHCOVERDEPTHFUNCNV glPathCoverDepthFuncNV;
+    PFNGLPATHDASHARRAYNV glPathDashArrayNV;
+    PFNGLPATHGLYPHINDEXARRAYNV glPathGlyphIndexArrayNV;
+    PFNGLPATHGLYPHINDEXRANGENV glPathGlyphIndexRangeNV;
+    PFNGLPATHGLYPHRANGENV glPathGlyphRangeNV;
+    PFNGLPATHGLYPHSNV glPathGlyphsNV;
+    PFNGLPATHMEMORYGLYPHINDEXARRAYNV glPathMemoryGlyphIndexArrayNV;
+    PFNGLPATHPARAMETERFNV glPathParameterfNV;
+    PFNGLPATHPARAMETERFVNV glPathParameterfvNV;
+    PFNGLPATHPARAMETERINV glPathParameteriNV;
+    PFNGLPATHPARAMETERIVNV glPathParameterivNV;
+    PFNGLPATHSTENCILDEPTHOFFSETNV glPathStencilDepthOffsetNV;
+    PFNGLPATHSTENCILFUNCNV glPathStencilFuncNV;
+    PFNGLPATHSTRINGNV glPathStringNV;
+    PFNGLPATHSUBCOMMANDSNV glPathSubCommandsNV;
+    PFNGLPATHSUBCOORDSNV glPathSubCoordsNV;
+    PFNGLPOINTALONGPATHNV glPointAlongPathNV;
+    PFNGLPOLYGONMODENV glPolygonModeNV;
+    PFNGLPOPGROUPMARKEREXT glPopGroupMarkerEXT;
+    PFNGLPRIMITIVEBOUNDINGBOXOES glPrimitiveBoundingBoxOES;
+    PFNGLPROGRAMBINARYOES glProgramBinaryOES;
+    PFNGLPROGRAMPARAMETERIEXT glProgramParameteriEXT;
+    PFNGLPROGRAMPATHFRAGMENTINPUTGENNV glProgramPathFragmentInputGenNV;
+    PFNGLPROGRAMUNIFORM1FEXT glProgramUniform1fEXT;
+    PFNGLPROGRAMUNIFORM1FVEXT glProgramUniform1fvEXT;
+    PFNGLPROGRAMUNIFORM1IEXT glProgramUniform1iEXT;
+    PFNGLPROGRAMUNIFORM1IVEXT glProgramUniform1ivEXT;
+    PFNGLPROGRAMUNIFORM1UIEXT glProgramUniform1uiEXT;
+    PFNGLPROGRAMUNIFORM1UIVEXT glProgramUniform1uivEXT;
+    PFNGLPROGRAMUNIFORM2FEXT glProgramUniform2fEXT;
+    PFNGLPROGRAMUNIFORM2FVEXT glProgramUniform2fvEXT;
+    PFNGLPROGRAMUNIFORM2IEXT glProgramUniform2iEXT;
+    PFNGLPROGRAMUNIFORM2IVEXT glProgramUniform2ivEXT;
+    PFNGLPROGRAMUNIFORM2UIEXT glProgramUniform2uiEXT;
+    PFNGLPROGRAMUNIFORM2UIVEXT glProgramUniform2uivEXT;
+    PFNGLPROGRAMUNIFORM3FEXT glProgramUniform3fEXT;
+    PFNGLPROGRAMUNIFORM3FVEXT glProgramUniform3fvEXT;
+    PFNGLPROGRAMUNIFORM3IEXT glProgramUniform3iEXT;
+    PFNGLPROGRAMUNIFORM3IVEXT glProgramUniform3ivEXT;
+    PFNGLPROGRAMUNIFORM3UIEXT glProgramUniform3uiEXT;
+    PFNGLPROGRAMUNIFORM3UIVEXT glProgramUniform3uivEXT;
+    PFNGLPROGRAMUNIFORM4FEXT glProgramUniform4fEXT;
+    PFNGLPROGRAMUNIFORM4FVEXT glProgramUniform4fvEXT;
+    PFNGLPROGRAMUNIFORM4IEXT glProgramUniform4iEXT;
+    PFNGLPROGRAMUNIFORM4IVEXT glProgramUniform4ivEXT;
+    PFNGLPROGRAMUNIFORM4UIEXT glProgramUniform4uiEXT;
+    PFNGLPROGRAMUNIFORM4UIVEXT glProgramUniform4uivEXT;
+    PFNGLPROGRAMUNIFORMHANDLEUI64NV glProgramUniformHandleui64NV;
+    PFNGLPROGRAMUNIFORMHANDLEUI64VNV glProgramUniformHandleui64vNV;
+    PFNGLPROGRAMUNIFORMMATRIX2FVEXT glProgramUniformMatrix2fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX2X3FVEXT glProgramUniformMatrix2x3fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX2X4FVEXT glProgramUniformMatrix2x4fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX3FVEXT glProgramUniformMatrix3fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX3X2FVEXT glProgramUniformMatrix3x2fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX3X4FVEXT glProgramUniformMatrix3x4fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX4FVEXT glProgramUniformMatrix4fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX4X2FVEXT glProgramUniformMatrix4x2fvEXT;
+    PFNGLPROGRAMUNIFORMMATRIX4X3FVEXT glProgramUniformMatrix4x3fvEXT;
+    PFNGLPUSHGROUPMARKEREXT glPushGroupMarkerEXT;
+    PFNGLQUERYCOUNTEREXT glQueryCounterEXT;
+    PFNGLREADBUFFERINDEXEDEXT glReadBufferIndexedEXT;
+    PFNGLREADBUFFERNV glReadBufferNV;
+    PFNGLREADNPIXELSEXT glReadnPixelsEXT;
+    PFNGLREADNPIXELSKHR glReadnPixelsKHR;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLE glRenderbufferStorageMultisampleANGLE;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLE glRenderbufferStorageMultisampleAPPLE;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXT glRenderbufferStorageMultisampleEXT;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMG glRenderbufferStorageMultisampleIMG;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV glRenderbufferStorageMultisampleNV;
+    PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE glResolveMultisampleFramebufferAPPLE;
+    PFNGLSAMPLERPARAMETERIIVOES glSamplerParameterIivOES;
+    PFNGLSAMPLERPARAMETERIUIVOES glSamplerParameterIuivOES;
+    PFNGLSCISSORARRAYVNV glScissorArrayvNV;
+    PFNGLSCISSORINDEXEDNV glScissorIndexedNV;
+    PFNGLSCISSORINDEXEDVNV glScissorIndexedvNV;
+    PFNGLSELECTPERFMONITORCOUNTERSAMD glSelectPerfMonitorCountersAMD;
+    PFNGLSETFENCENV glSetFenceNV;
+    PFNGLSTARTTILINGQCOM glStartTilingQCOM;
+    PFNGLSTENCILFILLPATHINSTANCEDNV glStencilFillPathInstancedNV;
+    PFNGLSTENCILFILLPATHNV glStencilFillPathNV;
+    PFNGLSTENCILSTROKEPATHINSTANCEDNV glStencilStrokePathInstancedNV;
+    PFNGLSTENCILSTROKEPATHNV glStencilStrokePathNV;
+    PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNV glStencilThenCoverFillPathInstancedNV;
+    PFNGLSTENCILTHENCOVERFILLPATHNV glStencilThenCoverFillPathNV;
+    PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNV glStencilThenCoverStrokePathInstancedNV;
+    PFNGLSTENCILTHENCOVERSTROKEPATHNV glStencilThenCoverStrokePathNV;
+    PFNGLTESTFENCENV glTestFenceNV;
+    PFNGLTEXBUFFEROES glTexBufferOES;
+    PFNGLTEXBUFFERRANGEOES glTexBufferRangeOES;
+    PFNGLTEXIMAGE3DOES glTexImage3DOES;
+    PFNGLTEXPAGECOMMITMENTARB glTexPageCommitmentARB;
+    PFNGLTEXPARAMETERIIVOES glTexParameterIivOES;
+    PFNGLTEXPARAMETERIUIVOES glTexParameterIuivOES;
+    PFNGLTEXSTORAGE1DEXT glTexStorage1DEXT;
+    PFNGLTEXSTORAGE2DEXT glTexStorage2DEXT;
+    PFNGLTEXSTORAGE3DEXT glTexStorage3DEXT;
+    PFNGLTEXSUBIMAGE3DOES glTexSubImage3DOES;
+    PFNGLTEXTURESTORAGE1DEXT glTextureStorage1DEXT;
+    PFNGLTEXTURESTORAGE2DEXT glTextureStorage2DEXT;
+    PFNGLTEXTURESTORAGE3DEXT glTextureStorage3DEXT;
+    PFNGLTEXTUREVIEWEXT glTextureViewEXT;
+    PFNGLTEXTUREVIEWOES glTextureViewOES;
+    PFNGLTRANSFORMPATHNV glTransformPathNV;
+    PFNGLUNIFORMHANDLEUI64NV glUniformHandleui64NV;
+    PFNGLUNIFORMHANDLEUI64VNV glUniformHandleui64vNV;
+    PFNGLUNIFORMMATRIX2X3FVNV glUniformMatrix2x3fvNV;
+    PFNGLUNIFORMMATRIX2X4FVNV glUniformMatrix2x4fvNV;
+    PFNGLUNIFORMMATRIX3X2FVNV glUniformMatrix3x2fvNV;
+    PFNGLUNIFORMMATRIX3X4FVNV glUniformMatrix3x4fvNV;
+    PFNGLUNIFORMMATRIX4X2FVNV glUniformMatrix4x2fvNV;
+    PFNGLUNIFORMMATRIX4X3FVNV glUniformMatrix4x3fvNV;
+    PFNGLUNMAPBUFFEROES glUnmapBufferOES;
+    PFNGLUSEPROGRAMSTAGESEXT glUseProgramStagesEXT;
+    PFNGLVALIDATEPROGRAMPIPELINEEXT glValidateProgramPipelineEXT;
+    PFNGLVERTEXATTRIBDIVISORANGLE glVertexAttribDivisorANGLE;
+    PFNGLVERTEXATTRIBDIVISOREXT glVertexAttribDivisorEXT;
+    PFNGLVERTEXATTRIBDIVISORNV glVertexAttribDivisorNV;
+    PFNGLVIEWPORTARRAYVNV glViewportArrayvNV;
+    PFNGLVIEWPORTINDEXEDFNV glViewportIndexedfNV;
+    PFNGLVIEWPORTINDEXEDFVNV glViewportIndexedfvNV;
+    PFNGLWAITSYNCAPPLE glWaitSyncAPPLE;
+    PFNGLWEIGHTPATHSNV glWeightPathsNV;
+    PFNGLCOVERAGEMODULATIONNV glCoverageModulationNV;
+    PFNGLCOVERAGEMODULATIONTABLENV glCoverageModulationTableNV;
+    PFNGLFRAGMENTCOVERAGECOLORNV glFragmentCoverageColorNV;
+    PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV glFramebufferSampleLocationsfvNV;
+    PFNGLGETCOVERAGEMODULATIONTABLENV glGetCoverageModulationTableNV;
+    PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV glNamedFramebufferSampleLocationsfvNV;
+    PFNGLRASTERSAMPLESEXT glRasterSamplesEXT;
+    PFNGLRESOLVEDEPTHVALUESNV glResolveDepthValuesNV;
+    PFNGLSUBPIXELPRECISIONBIASNV glSubpixelPrecisionBiasNV;
+    PFNGLBLENDCOLOR glBlendColor;
+    PFNGLBLENDEQUATION glBlendEquation;
+    PFNGLBLENDEQUATIONSEPARATE glBlendEquationSeparate;
+    PFNGLBLENDFUNC glBlendFunc;
+    PFNGLBLENDFUNCSEPARATE glBlendFuncSeparate;
+    PFNGLDEPTHFUNC glDepthFunc;
+    PFNGLSAMPLECOVERAGE glSampleCoverage;
+    PFNGLSAMPLEMASKI glSampleMaski;
+    PFNGLSCISSOR glScissor;
+    PFNGLSTENCILFUNC glStencilFunc;
+    PFNGLSTENCILFUNCSEPARATE glStencilFuncSeparate;
+    PFNGLSTENCILOP glStencilOp;
+    PFNGLSTENCILOPSEPARATE glStencilOpSeparate;
+    PFNGLBINDFRAMEBUFFER glBindFramebuffer;
+    PFNGLBINDRENDERBUFFER glBindRenderbuffer;
+    PFNGLBLITFRAMEBUFFER glBlitFramebuffer;
+    PFNGLCHECKFRAMEBUFFERSTATUS glCheckFramebufferStatus;
+    PFNGLCLEAR glClear;
+    PFNGLCLEARBUFFERFI glClearBufferfi;
+    PFNGLCLEARBUFFERFV glClearBufferfv;
+    PFNGLCLEARBUFFERIV glClearBufferiv;
+    PFNGLCLEARBUFFERUIV glClearBufferuiv;
+    PFNGLCLEARCOLOR glClearColor;
+    PFNGLCLEARDEPTHF glClearDepthf;
+    PFNGLCLEARSTENCIL glClearStencil;
+    PFNGLCOLORMASK glColorMask;
+    PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers;
+    PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers;
+    PFNGLDEPTHMASK glDepthMask;
+    PFNGLFRAMEBUFFERPARAMETERI glFramebufferParameteri;
+    PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer;
+    PFNGLFRAMEBUFFERTEXTURE2D glFramebufferTexture2D;
+    PFNGLFRAMEBUFFERTEXTURELAYER glFramebufferTextureLayer;
+    PFNGLGENFRAMEBUFFERS glGenFramebuffers;
+    PFNGLGENRENDERBUFFERS glGenRenderbuffers;
+    PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV glGetFramebufferAttachmentParameteriv;
+    PFNGLGETFRAMEBUFFERPARAMETERIV glGetFramebufferParameteriv;
+    PFNGLGETRENDERBUFFERPARAMETERIV glGetRenderbufferParameteriv;
+    PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer;
+    PFNGLINVALIDATESUBFRAMEBUFFER glInvalidateSubFramebuffer;
+    PFNGLISFRAMEBUFFER glIsFramebuffer;
+    PFNGLISRENDERBUFFER glIsRenderbuffer;
+    PFNGLREADBUFFER glReadBuffer;
+    PFNGLREADPIXELS glReadPixels;
+    PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage;
+    PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
+    PFNGLSTENCILMASK glStencilMask;
+    PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate;
+    PFNGLDISABLE glDisable;
+    PFNGLENABLE glEnable;
+    PFNGLFINISH glFinish;
+    PFNGLFLUSH glFlush;
+    PFNGLFLUSHMAPPEDBUFFERRANGE glFlushMappedBufferRange;
+    PFNGLGETERROR glGetError;
+    PFNGLHINT glHint;
+    PFNGLACTIVESHADERPROGRAM glActiveShaderProgram;
+    PFNGLATTACHSHADER glAttachShader;
+    PFNGLBINDATTRIBLOCATION glBindAttribLocation;
+    PFNGLBINDPROGRAMPIPELINE glBindProgramPipeline;
+    PFNGLCOMPILESHADER glCompileShader;
+    PFNGLCREATEPROGRAM glCreateProgram;
+    PFNGLCREATESHADER glCreateShader;
+    PFNGLCREATESHADERPROGRAMV glCreateShaderProgramv;
+    PFNGLDELETEPROGRAM glDeleteProgram;
+    PFNGLDELETEPROGRAMPIPELINES glDeleteProgramPipelines;
+    PFNGLDELETESHADER glDeleteShader;
+    PFNGLDETACHSHADER glDetachShader;
+    PFNGLDISPATCHCOMPUTE glDispatchCompute;
+    PFNGLDISPATCHCOMPUTEINDIRECT glDispatchComputeIndirect;
+    PFNGLGENPROGRAMPIPELINES glGenProgramPipelines;
+    PFNGLGETACTIVEATTRIB glGetActiveAttrib;
+    PFNGLGETACTIVEUNIFORM glGetActiveUniform;
+    PFNGLGETACTIVEUNIFORMBLOCKNAME glGetActiveUniformBlockName;
+    PFNGLGETACTIVEUNIFORMBLOCKIV glGetActiveUniformBlockiv;
+    PFNGLGETACTIVEUNIFORMSIV glGetActiveUniformsiv;
+    PFNGLGETATTACHEDSHADERS glGetAttachedShaders;
+    PFNGLGETATTRIBLOCATION glGetAttribLocation;
+    PFNGLGETFRAGDATALOCATION glGetFragDataLocation;
+    PFNGLGETPROGRAMBINARY glGetProgramBinary;
+    PFNGLGETPROGRAMINFOLOG glGetProgramInfoLog;
+    PFNGLGETPROGRAMINTERFACEIV glGetProgramInterfaceiv;
+    PFNGLGETPROGRAMPIPELINEINFOLOG glGetProgramPipelineInfoLog;
+    PFNGLGETPROGRAMPIPELINEIV glGetProgramPipelineiv;
+    PFNGLGETPROGRAMRESOURCEINDEX glGetProgramResourceIndex;
+    PFNGLGETPROGRAMRESOURCELOCATION glGetProgramResourceLocation;
+    PFNGLGETPROGRAMRESOURCENAME glGetProgramResourceName;
+    PFNGLGETPROGRAMRESOURCEIV glGetProgramResourceiv;
+    PFNGLGETPROGRAMIV glGetProgramiv;
+    PFNGLGETSHADERINFOLOG glGetShaderInfoLog;
+    PFNGLGETSHADERPRECISIONFORMAT glGetShaderPrecisionFormat;
+    PFNGLGETSHADERSOURCE glGetShaderSource;
+    PFNGLGETSHADERIV glGetShaderiv;
+    PFNGLGETUNIFORMBLOCKINDEX glGetUniformBlockIndex;
+    PFNGLGETUNIFORMINDICES glGetUniformIndices;
+    PFNGLGETUNIFORMLOCATION glGetUniformLocation;
+    PFNGLGETUNIFORMFV glGetUniformfv;
+    PFNGLGETUNIFORMIV glGetUniformiv;
+    PFNGLGETUNIFORMUIV glGetUniformuiv;
+    PFNGLISPROGRAM glIsProgram;
+    PFNGLISPROGRAMPIPELINE glIsProgramPipeline;
+    PFNGLISSHADER glIsShader;
+    PFNGLLINKPROGRAM glLinkProgram;
+    PFNGLMEMORYBARRIER glMemoryBarrier;
+    PFNGLMEMORYBARRIERBYREGION glMemoryBarrierByRegion;
+    PFNGLPROGRAMBINARY glProgramBinary;
+    PFNGLPROGRAMPARAMETERI glProgramParameteri;
+    PFNGLPROGRAMUNIFORM1F glProgramUniform1f;
+    PFNGLPROGRAMUNIFORM1FV glProgramUniform1fv;
+    PFNGLPROGRAMUNIFORM1I glProgramUniform1i;
+    PFNGLPROGRAMUNIFORM1IV glProgramUniform1iv;
+    PFNGLPROGRAMUNIFORM1UI glProgramUniform1ui;
+    PFNGLPROGRAMUNIFORM1UIV glProgramUniform1uiv;
+    PFNGLPROGRAMUNIFORM2F glProgramUniform2f;
+    PFNGLPROGRAMUNIFORM2FV glProgramUniform2fv;
+    PFNGLPROGRAMUNIFORM2I glProgramUniform2i;
+    PFNGLPROGRAMUNIFORM2IV glProgramUniform2iv;
+    PFNGLPROGRAMUNIFORM2UI glProgramUniform2ui;
+    PFNGLPROGRAMUNIFORM2UIV glProgramUniform2uiv;
+    PFNGLPROGRAMUNIFORM3F glProgramUniform3f;
+    PFNGLPROGRAMUNIFORM3FV glProgramUniform3fv;
+    PFNGLPROGRAMUNIFORM3I glProgramUniform3i;
+    PFNGLPROGRAMUNIFORM3IV glProgramUniform3iv;
+    PFNGLPROGRAMUNIFORM3UI glProgramUniform3ui;
+    PFNGLPROGRAMUNIFORM3UIV glProgramUniform3uiv;
+    PFNGLPROGRAMUNIFORM4F glProgramUniform4f;
+    PFNGLPROGRAMUNIFORM4FV glProgramUniform4fv;
+    PFNGLPROGRAMUNIFORM4I glProgramUniform4i;
+    PFNGLPROGRAMUNIFORM4IV glProgramUniform4iv;
+    PFNGLPROGRAMUNIFORM4UI glProgramUniform4ui;
+    PFNGLPROGRAMUNIFORM4UIV glProgramUniform4uiv;
+    PFNGLPROGRAMUNIFORMMATRIX2FV glProgramUniformMatrix2fv;
+    PFNGLPROGRAMUNIFORMMATRIX2X3FV glProgramUniformMatrix2x3fv;
+    PFNGLPROGRAMUNIFORMMATRIX2X4FV glProgramUniformMatrix2x4fv;
+    PFNGLPROGRAMUNIFORMMATRIX3FV glProgramUniformMatrix3fv;
+    PFNGLPROGRAMUNIFORMMATRIX3X2FV glProgramUniformMatrix3x2fv;
+    PFNGLPROGRAMUNIFORMMATRIX3X4FV glProgramUniformMatrix3x4fv;
+    PFNGLPROGRAMUNIFORMMATRIX4FV glProgramUniformMatrix4fv;
+    PFNGLPROGRAMUNIFORMMATRIX4X2FV glProgramUniformMatrix4x2fv;
+    PFNGLPROGRAMUNIFORMMATRIX4X3FV glProgramUniformMatrix4x3fv;
+    PFNGLRELEASESHADERCOMPILER glReleaseShaderCompiler;
+    PFNGLSHADERBINARY glShaderBinary;
+    PFNGLSHADERSOURCE glShaderSource;
+    PFNGLUNIFORM1F glUniform1f;
+    PFNGLUNIFORM1FV glUniform1fv;
+    PFNGLUNIFORM1I glUniform1i;
+    PFNGLUNIFORM1IV glUniform1iv;
+    PFNGLUNIFORM1UI glUniform1ui;
+    PFNGLUNIFORM1UIV glUniform1uiv;
+    PFNGLUNIFORM2F glUniform2f;
+    PFNGLUNIFORM2FV glUniform2fv;
+    PFNGLUNIFORM2I glUniform2i;
+    PFNGLUNIFORM2IV glUniform2iv;
+    PFNGLUNIFORM2UI glUniform2ui;
+    PFNGLUNIFORM2UIV glUniform2uiv;
+    PFNGLUNIFORM3F glUniform3f;
+    PFNGLUNIFORM3FV glUniform3fv;
+    PFNGLUNIFORM3I glUniform3i;
+    PFNGLUNIFORM3IV glUniform3iv;
+    PFNGLUNIFORM3UI glUniform3ui;
+    PFNGLUNIFORM3UIV glUniform3uiv;
+    PFNGLUNIFORM4F glUniform4f;
+    PFNGLUNIFORM4FV glUniform4fv;
+    PFNGLUNIFORM4I glUniform4i;
+    PFNGLUNIFORM4IV glUniform4iv;
+    PFNGLUNIFORM4UI glUniform4ui;
+    PFNGLUNIFORM4UIV glUniform4uiv;
+    PFNGLUNIFORMBLOCKBINDING glUniformBlockBinding;
+    PFNGLUNIFORMMATRIX2FV glUniformMatrix2fv;
+    PFNGLUNIFORMMATRIX2X3FV glUniformMatrix2x3fv;
+    PFNGLUNIFORMMATRIX2X4FV glUniformMatrix2x4fv;
+    PFNGLUNIFORMMATRIX3FV glUniformMatrix3fv;
+    PFNGLUNIFORMMATRIX3X2FV glUniformMatrix3x2fv;
+    PFNGLUNIFORMMATRIX3X4FV glUniformMatrix3x4fv;
+    PFNGLUNIFORMMATRIX4FV glUniformMatrix4fv;
+    PFNGLUNIFORMMATRIX4X2FV glUniformMatrix4x2fv;
+    PFNGLUNIFORMMATRIX4X3FV glUniformMatrix4x3fv;
+    PFNGLUSEPROGRAM glUseProgram;
+    PFNGLUSEPROGRAMSTAGES glUseProgramStages;
+    PFNGLVALIDATEPROGRAM glValidateProgram;
+    PFNGLVALIDATEPROGRAMPIPELINE glValidateProgramPipeline;
+    PFNGLCULLFACE glCullFace;
+    PFNGLDEPTHRANGEF glDepthRangef;
+    PFNGLFRONTFACE glFrontFace;
+    PFNGLGETMULTISAMPLEFV glGetMultisamplefv;
+    PFNGLLINEWIDTH glLineWidth;
+    PFNGLPOLYGONOFFSET glPolygonOffset;
+    PFNGLVIEWPORT glViewport;
+    PFNGLGETBOOLEANI_V glGetBooleani_v;
+    PFNGLGETBOOLEANV glGetBooleanv;
+    PFNGLGETFLOATV glGetFloatv;
+    PFNGLGETINTEGER64I_V glGetInteger64i_v;
+    PFNGLGETINTEGER64V glGetInteger64v;
+    PFNGLGETINTEGERI_V glGetIntegeri_v;
+    PFNGLGETINTEGERV glGetIntegerv;
+    PFNGLGETINTERNALFORMATIV glGetInternalformativ;
+    PFNGLGETSTRING glGetString;
+    PFNGLGETSTRINGI glGetStringi;
+    PFNGLISENABLED glIsEnabled;
+    PFNGLCLIENTWAITSYNC glClientWaitSync;
+    PFNGLDELETESYNC glDeleteSync;
+    PFNGLFENCESYNC glFenceSync;
+    PFNGLGETSYNCIV glGetSynciv;
+    PFNGLISSYNC glIsSync;
+    PFNGLWAITSYNC glWaitSync;
+    PFNGLACTIVETEXTURE glActiveTexture;
+    PFNGLBINDIMAGETEXTURE glBindImageTexture;
+    PFNGLBINDSAMPLER glBindSampler;
+    PFNGLBINDTEXTURE glBindTexture;
+    PFNGLCOMPRESSEDTEXIMAGE2D glCompressedTexImage2D;
+    PFNGLCOMPRESSEDTEXIMAGE3D glCompressedTexImage3D;
+    PFNGLCOMPRESSEDTEXSUBIMAGE2D glCompressedTexSubImage2D;
+    PFNGLCOMPRESSEDTEXSUBIMAGE3D glCompressedTexSubImage3D;
+    PFNGLCOPYTEXIMAGE2D glCopyTexImage2D;
+    PFNGLCOPYTEXSUBIMAGE2D glCopyTexSubImage2D;
+    PFNGLCOPYTEXSUBIMAGE3D glCopyTexSubImage3D;
+    PFNGLDELETESAMPLERS glDeleteSamplers;
+    PFNGLDELETETEXTURES glDeleteTextures;
+    PFNGLGENSAMPLERS glGenSamplers;
+    PFNGLGENTEXTURES glGenTextures;
+    PFNGLGENERATEMIPMAP glGenerateMipmap;
+    PFNGLGETSAMPLERPARAMETERFV glGetSamplerParameterfv;
+    PFNGLGETSAMPLERPARAMETERIV glGetSamplerParameteriv;
+    PFNGLGETTEXLEVELPARAMETERFV glGetTexLevelParameterfv;
+    PFNGLGETTEXLEVELPARAMETERIV glGetTexLevelParameteriv;
+    PFNGLGETTEXPARAMETERFV glGetTexParameterfv;
+    PFNGLGETTEXPARAMETERIV glGetTexParameteriv;
+    PFNGLISSAMPLER glIsSampler;
+    PFNGLISTEXTURE glIsTexture;
+    PFNGLPIXELSTOREI glPixelStorei;
+    PFNGLSAMPLERPARAMETERF glSamplerParameterf;
+    PFNGLSAMPLERPARAMETERFV glSamplerParameterfv;
+    PFNGLSAMPLERPARAMETERI glSamplerParameteri;
+    PFNGLSAMPLERPARAMETERIV glSamplerParameteriv;
+    PFNGLTEXIMAGE2D glTexImage2D;
+    PFNGLTEXIMAGE3D glTexImage3D;
+    PFNGLTEXPARAMETERF glTexParameterf;
+    PFNGLTEXPARAMETERFV glTexParameterfv;
+    PFNGLTEXPARAMETERI glTexParameteri;
+    PFNGLTEXPARAMETERIV glTexParameteriv;
+    PFNGLTEXSTORAGE2D glTexStorage2D;
+    PFNGLTEXSTORAGE2DMULTISAMPLE glTexStorage2DMultisample;
+    PFNGLTEXSTORAGE3D glTexStorage3D;
+    PFNGLTEXSUBIMAGE2D glTexSubImage2D;
+    PFNGLTEXSUBIMAGE3D glTexSubImage3D;
+    PFNGLBEGINTRANSFORMFEEDBACK glBeginTransformFeedback;
+    PFNGLBINDTRANSFORMFEEDBACK glBindTransformFeedback;
+    PFNGLDELETETRANSFORMFEEDBACKS glDeleteTransformFeedbacks;
+    PFNGLENDTRANSFORMFEEDBACK glEndTransformFeedback;
+    PFNGLGENTRANSFORMFEEDBACKS glGenTransformFeedbacks;
+    PFNGLGETTRANSFORMFEEDBACKVARYING glGetTransformFeedbackVarying;
+    PFNGLISTRANSFORMFEEDBACK glIsTransformFeedback;
+    PFNGLPAUSETRANSFORMFEEDBACK glPauseTransformFeedback;
+    PFNGLRESUMETRANSFORMFEEDBACK glResumeTransformFeedback;
+    PFNGLTRANSFORMFEEDBACKVARYINGS glTransformFeedbackVaryings;
+    PFNGLBINDVERTEXARRAY glBindVertexArray;
+    PFNGLBINDVERTEXBUFFER glBindVertexBuffer;
+    PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
+    PFNGLDISABLEVERTEXATTRIBARRAY glDisableVertexAttribArray;
+    PFNGLENABLEVERTEXATTRIBARRAY glEnableVertexAttribArray;
+    PFNGLGENVERTEXARRAYS glGenVertexArrays;
+    PFNGLGETVERTEXATTRIBIIV glGetVertexAttribIiv;
+    PFNGLGETVERTEXATTRIBIUIV glGetVertexAttribIuiv;
+    PFNGLGETVERTEXATTRIBPOINTERV glGetVertexAttribPointerv;
+    PFNGLGETVERTEXATTRIBFV glGetVertexAttribfv;
+    PFNGLGETVERTEXATTRIBIV glGetVertexAttribiv;
+    PFNGLISVERTEXARRAY glIsVertexArray;
+    PFNGLVERTEXATTRIB1F glVertexAttrib1f;
+    PFNGLVERTEXATTRIB1FV glVertexAttrib1fv;
+    PFNGLVERTEXATTRIB2F glVertexAttrib2f;
+    PFNGLVERTEXATTRIB2FV glVertexAttrib2fv;
+    PFNGLVERTEXATTRIB3F glVertexAttrib3f;
+    PFNGLVERTEXATTRIB3FV glVertexAttrib3fv;
+    PFNGLVERTEXATTRIB4F glVertexAttrib4f;
+    PFNGLVERTEXATTRIB4FV glVertexAttrib4fv;
+    PFNGLVERTEXATTRIBBINDING glVertexAttribBinding;
+    PFNGLVERTEXATTRIBDIVISOR glVertexAttribDivisor;
+    PFNGLVERTEXATTRIBFORMAT glVertexAttribFormat;
+    PFNGLVERTEXATTRIBI4I glVertexAttribI4i;
+    PFNGLVERTEXATTRIBI4IV glVertexAttribI4iv;
+    PFNGLVERTEXATTRIBI4UI glVertexAttribI4ui;
+    PFNGLVERTEXATTRIBI4UIV glVertexAttribI4uiv;
+    PFNGLVERTEXATTRIBIFORMAT glVertexAttribIFormat;
+    PFNGLVERTEXATTRIBIPOINTER glVertexAttribIPointer;
+    PFNGLVERTEXATTRIBPOINTER glVertexAttribPointer;
+    PFNGLVERTEXBINDINGDIVISOR glVertexBindingDivisor;
     PFNEGLINITIALIZE eglInitialize;
     PFNEGLCREATECONTEXT eglCreateContext;
     PFNEGLMAKECURRENT eglMakeCurrent;
@@ -372,201 +2004,8 @@ struct GlesImports {
     PFNCGLGETSURFACE CGLGetSurface;
     PFNCGSGETSURFACEBOUNDS CGSGetSurfaceBounds;
     PFNCGLFLUSHDRAWABLE CGLFlushDrawable;
-    PFNGLENABLECLIENTSTATE glEnableClientState;
-    PFNGLDISABLECLIENTSTATE glDisableClientState;
-    PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;
-    PFNGLPROGRAMBINARYOES glProgramBinaryOES;
-    PFNGLSTARTTILINGQCOM glStartTilingQCOM;
-    PFNGLENDTILINGQCOM glEndTilingQCOM;
-    PFNGLDISCARDFRAMEBUFFEREXT glDiscardFramebufferEXT;
-    PFNGLINSERTEVENTMARKEREXT glInsertEventMarkerEXT;
-    PFNGLPUSHGROUPMARKEREXT glPushGroupMarkerEXT;
-    PFNGLPOPGROUPMARKEREXT glPopGroupMarkerEXT;
-    PFNGLTEXSTORAGE1DEXT glTexStorage1DEXT;
-    PFNGLTEXSTORAGE2DEXT glTexStorage2DEXT;
-    PFNGLTEXSTORAGE3DEXT glTexStorage3DEXT;
-    PFNGLTEXTURESTORAGE1DEXT glTextureStorage1DEXT;
-    PFNGLTEXTURESTORAGE2DEXT glTextureStorage2DEXT;
-    PFNGLTEXTURESTORAGE3DEXT glTextureStorage3DEXT;
-    PFNGLGENVERTEXARRAYSOES glGenVertexArraysOES;
-    PFNGLBINDVERTEXARRAYOES glBindVertexArrayOES;
-    PFNGLDELETEVERTEXARRAYSOES glDeleteVertexArraysOES;
-    PFNGLISVERTEXARRAYOES glIsVertexArrayOES;
-    PFNGLEGLIMAGETARGETTEXTURE2DOES glEGLImageTargetTexture2DOES;
-    PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES glEGLImageTargetRenderbufferStorageOES;
-    PFNGLGETGRAPHICSRESETSTATUSEXT glGetGraphicsResetStatusEXT;
-    PFNGLBINDATTRIBLOCATION glBindAttribLocation;
-    PFNGLBLENDFUNC glBlendFunc;
-    PFNGLBLENDFUNCSEPARATE glBlendFuncSeparate;
-    PFNGLBLENDEQUATION glBlendEquation;
-    PFNGLBLENDEQUATIONSEPARATE glBlendEquationSeparate;
-    PFNGLBLENDCOLOR glBlendColor;
-    PFNGLENABLEVERTEXATTRIBARRAY glEnableVertexAttribArray;
-    PFNGLDISABLEVERTEXATTRIBARRAY glDisableVertexAttribArray;
-    PFNGLVERTEXATTRIBPOINTER glVertexAttribPointer;
-    PFNGLGETACTIVEATTRIB glGetActiveAttrib;
-    PFNGLGETACTIVEUNIFORM glGetActiveUniform;
-    PFNGLGETERROR glGetError;
-    PFNGLGETPROGRAMIV glGetProgramiv;
-    PFNGLGETSHADERIV glGetShaderiv;
-    PFNGLGETUNIFORMLOCATION glGetUniformLocation;
-    PFNGLGETATTRIBLOCATION glGetAttribLocation;
-    PFNGLPIXELSTOREI glPixelStorei;
-    PFNGLTEXPARAMETERI glTexParameteri;
-    PFNGLTEXPARAMETERF glTexParameterf;
-    PFNGLGETTEXPARAMETERIV glGetTexParameteriv;
-    PFNGLGETTEXPARAMETERFV glGetTexParameterfv;
-    PFNGLUNIFORM1I glUniform1i;
-    PFNGLUNIFORM2I glUniform2i;
-    PFNGLUNIFORM3I glUniform3i;
-    PFNGLUNIFORM4I glUniform4i;
-    PFNGLUNIFORM1IV glUniform1iv;
-    PFNGLUNIFORM2IV glUniform2iv;
-    PFNGLUNIFORM3IV glUniform3iv;
-    PFNGLUNIFORM4IV glUniform4iv;
-    PFNGLUNIFORM1F glUniform1f;
-    PFNGLUNIFORM2F glUniform2f;
-    PFNGLUNIFORM3F glUniform3f;
-    PFNGLUNIFORM4F glUniform4f;
-    PFNGLUNIFORM1FV glUniform1fv;
-    PFNGLUNIFORM2FV glUniform2fv;
-    PFNGLUNIFORM3FV glUniform3fv;
-    PFNGLUNIFORM4FV glUniform4fv;
-    PFNGLUNIFORMMATRIX2FV glUniformMatrix2fv;
-    PFNGLUNIFORMMATRIX3FV glUniformMatrix3fv;
-    PFNGLUNIFORMMATRIX4FV glUniformMatrix4fv;
-    PFNGLGETUNIFORMFV glGetUniformfv;
-    PFNGLGETUNIFORMIV glGetUniformiv;
-    PFNGLVERTEXATTRIB1F glVertexAttrib1f;
-    PFNGLVERTEXATTRIB2F glVertexAttrib2f;
-    PFNGLVERTEXATTRIB3F glVertexAttrib3f;
-    PFNGLVERTEXATTRIB4F glVertexAttrib4f;
-    PFNGLVERTEXATTRIB1FV glVertexAttrib1fv;
-    PFNGLVERTEXATTRIB2FV glVertexAttrib2fv;
-    PFNGLVERTEXATTRIB3FV glVertexAttrib3fv;
-    PFNGLVERTEXATTRIB4FV glVertexAttrib4fv;
-    PFNGLGETSHADERPRECISIONFORMAT glGetShaderPrecisionFormat;
-    PFNGLDEPTHMASK glDepthMask;
-    PFNGLDEPTHFUNC glDepthFunc;
-    PFNGLDEPTHRANGEF glDepthRangef;
-    PFNGLCOLORMASK glColorMask;
-    PFNGLSTENCILMASK glStencilMask;
-    PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate;
-    PFNGLSTENCILFUNCSEPARATE glStencilFuncSeparate;
-    PFNGLSTENCILOPSEPARATE glStencilOpSeparate;
-    PFNGLFRONTFACE glFrontFace;
-    PFNGLVIEWPORT glViewport;
-    PFNGLSCISSOR glScissor;
-    PFNGLACTIVETEXTURE glActiveTexture;
-    PFNGLGENTEXTURES glGenTextures;
-    PFNGLDELETETEXTURES glDeleteTextures;
-    PFNGLISTEXTURE glIsTexture;
-    PFNGLBINDTEXTURE glBindTexture;
-    PFNGLTEXIMAGE2D glTexImage2D;
-    PFNGLTEXSUBIMAGE2D glTexSubImage2D;
-    PFNGLCOPYTEXIMAGE2D glCopyTexImage2D;
-    PFNGLCOPYTEXSUBIMAGE2D glCopyTexSubImage2D;
-    PFNGLCOMPRESSEDTEXIMAGE2D glCompressedTexImage2D;
-    PFNGLCOMPRESSEDTEXSUBIMAGE2D glCompressedTexSubImage2D;
-    PFNGLGENERATEMIPMAP glGenerateMipmap;
-    PFNGLREADPIXELS glReadPixels;
-    PFNGLGENFRAMEBUFFERS glGenFramebuffers;
-    PFNGLBINDFRAMEBUFFER glBindFramebuffer;
-    PFNGLCHECKFRAMEBUFFERSTATUS glCheckFramebufferStatus;
-    PFNGLDELETEFRAMEBUFFERS glDeleteFramebuffers;
-    PFNGLISFRAMEBUFFER glIsFramebuffer;
-    PFNGLGENRENDERBUFFERS glGenRenderbuffers;
-    PFNGLBINDRENDERBUFFER glBindRenderbuffer;
-    PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage;
-    PFNGLDELETERENDERBUFFERS glDeleteRenderbuffers;
-    PFNGLISRENDERBUFFER glIsRenderbuffer;
-    PFNGLGETRENDERBUFFERPARAMETERIV glGetRenderbufferParameteriv;
-    PFNGLGENBUFFERS glGenBuffers;
-    PFNGLBINDBUFFER glBindBuffer;
-    PFNGLBUFFERDATA glBufferData;
-    PFNGLBUFFERSUBDATA glBufferSubData;
-    PFNGLDELETEBUFFERS glDeleteBuffers;
-    PFNGLISBUFFER glIsBuffer;
-    PFNGLGETBUFFERPARAMETERIV glGetBufferParameteriv;
-    PFNGLCREATESHADER glCreateShader;
-    PFNGLDELETESHADER glDeleteShader;
-    PFNGLSHADERSOURCE glShaderSource;
-    PFNGLSHADERBINARY glShaderBinary;
-    PFNGLGETSHADERINFOLOG glGetShaderInfoLog;
-    PFNGLGETSHADERSOURCE glGetShaderSource;
-    PFNGLRELEASESHADERCOMPILER glReleaseShaderCompiler;
-    PFNGLCOMPILESHADER glCompileShader;
-    PFNGLISSHADER glIsShader;
-    PFNGLCREATEPROGRAM glCreateProgram;
-    PFNGLDELETEPROGRAM glDeleteProgram;
-    PFNGLATTACHSHADER glAttachShader;
-    PFNGLDETACHSHADER glDetachShader;
-    PFNGLGETATTACHEDSHADERS glGetAttachedShaders;
-    PFNGLLINKPROGRAM glLinkProgram;
-    PFNGLGETPROGRAMINFOLOG glGetProgramInfoLog;
-    PFNGLUSEPROGRAM glUseProgram;
-    PFNGLISPROGRAM glIsProgram;
-    PFNGLVALIDATEPROGRAM glValidateProgram;
-    PFNGLCLEARCOLOR glClearColor;
-    PFNGLCLEARDEPTHF glClearDepthf;
-    PFNGLCLEARSTENCIL glClearStencil;
-    PFNGLCLEAR glClear;
-    PFNGLCULLFACE glCullFace;
-    PFNGLPOLYGONOFFSET glPolygonOffset;
-    PFNGLLINEWIDTH glLineWidth;
-    PFNGLSAMPLECOVERAGE glSampleCoverage;
-    PFNGLHINT glHint;
-    PFNGLFRAMEBUFFERRENDERBUFFER glFramebufferRenderbuffer;
-    PFNGLFRAMEBUFFERTEXTURE2D glFramebufferTexture2D;
-    PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV glGetFramebufferAttachmentParameteriv;
-    PFNGLDRAWELEMENTS glDrawElements;
-    PFNGLDRAWARRAYS glDrawArrays;
-    PFNGLFLUSH glFlush;
-    PFNGLFINISH glFinish;
-    PFNGLGETBOOLEANV glGetBooleanv;
-    PFNGLGETFLOATV glGetFloatv;
-    PFNGLGETINTEGERV glGetIntegerv;
-    PFNGLGETSTRING glGetString;
-    PFNGLENABLE glEnable;
-    PFNGLDISABLE glDisable;
-    PFNGLISENABLED glIsEnabled;
-    PFNGLFENCESYNC glFenceSync;
-    PFNGLDELETESYNC glDeleteSync;
-    PFNGLWAITSYNC glWaitSync;
-    PFNGLCLIENTWAITSYNC glClientWaitSync;
-    PFNGLMAPBUFFERRANGE glMapBufferRange;
-    PFNGLUNMAPBUFFER glUnmapBuffer;
-    PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer;
-    PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
-    PFNGLBLITFRAMEBUFFER glBlitFramebuffer;
-    PFNGLGENQUERIES glGenQueries;
-    PFNGLBEGINQUERY glBeginQuery;
-    PFNGLENDQUERY glEndQuery;
-    PFNGLDELETEQUERIES glDeleteQueries;
-    PFNGLISQUERY glIsQuery;
-    PFNGLGETQUERYIV glGetQueryiv;
-    PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv;
-    PFNGLGETACTIVEUNIFORMBLOCKNAME glGetActiveUniformBlockName;
-    PFNGLGETACTIVEUNIFORMBLOCKIV glGetActiveUniformBlockiv;
-    PFNGLUNIFORMBLOCKBINDING glUniformBlockBinding;
-    PFNGLGETACTIVEUNIFORMSIV glGetActiveUniformsiv;
-    PFNGLBINDBUFFERBASE glBindBufferBase;
-    PFNGLGENVERTEXARRAYS glGenVertexArrays;
-    PFNGLBINDVERTEXARRAY glBindVertexArray;
-    PFNGLDELETEVERTEXARRAYS glDeleteVertexArrays;
     PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v;
     PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v;
-    PFNGLGENQUERIESEXT glGenQueriesEXT;
-    PFNGLBEGINQUERYEXT glBeginQueryEXT;
-    PFNGLENDQUERYEXT glEndQueryEXT;
-    PFNGLDELETEQUERIESEXT glDeleteQueriesEXT;
-    PFNGLISQUERYEXT glIsQueryEXT;
-    PFNGLQUERYCOUNTEREXT glQueryCounterEXT;
-    PFNGLGETQUERYIVEXT glGetQueryivEXT;
-    PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT;
-    PFNGLGETQUERYOBJECTUIVEXT glGetQueryObjectuivEXT;
-    PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT;
-    PFNGLGETQUERYOBJECTUI64VEXT glGetQueryObjectui64vEXT;
 };
 }  // namespace gapii
 

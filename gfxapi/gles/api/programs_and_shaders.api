@@ -180,14 +180,14 @@ cmd void glGetActiveAttrib(ProgramId         program,
   minRequiredVersion(2, 0)
 
   if buffer_bytes_written != null {
-    l := as!s32(?)
+    l := as!GLsizei(?)
     buffer_bytes_written[0] = l
     write(name[0:l])
   } else {
     write(name[0:256]) // HACK: Non-deterministic string length!
   }
 
-  vector_count[0] = as!s32(?)
+  vector_count[0] = as!GLint(?)
   type[0] = as!GLenum(?)
 }
 
@@ -204,14 +204,14 @@ cmd void glGetActiveUniform(ProgramId program,
   minRequiredVersion(2, 0)
 
   if buffer_bytes_written != null {
-    l := as!s32(?)
+    l := as!GLsizei(?)
     buffer_bytes_written[0] = l
     write(name[0:l])
   } else {
     write(name[0:256]) // HACK: Non-deterministic string length!
   }
 
-  vector_count[0] = as!s32(?)
+  vector_count[0] = as!GLint(?)
   type[0] = as!GLenum(?)
 }
 
@@ -224,7 +224,7 @@ cmd void glGetActiveUniformBlockName(ProgramId      program,
                                      GLchar*        name) {
   minRequiredVersion(3, 0)
 
-  l := as!s32(?)
+  l := as!GLsizei(?)
   buffer_bytes_written[0] = l
   write(name[0:l])
 }
@@ -285,8 +285,8 @@ cmd void glGetAttachedShaders(ProgramId program,
 
   ctx := GetContext()
   p := ctx.Instances.Programs[program]
-  l := min(buffer_length, len(p.Shaders))
-  shaders_length_written[0] = l
+  l := min(as!s32(buffer_length), len(p.Shaders))
+  shaders_length_written[0] = as!GLsizei(l)
   // TODO: Requires language support.
   // for i, k, v in p.Shaders {
   //     if i < l {
@@ -334,9 +334,9 @@ cmd void glGetProgramInfoLog(ProgramId program,
 
   ctx := GetContext()
   p := ctx.Instances.Programs[program]
-  l := min(buffer_length, as!s32(len(p.InfoLog)))
+  l := min(as!s32(buffer_length), as!s32(len(p.InfoLog)))
   copy(info[0:l], p.InfoLog[0:l])
-  string_length_written[0] = l
+  string_length_written[0] = as!GLsizei(l)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetProgramInterface.xhtml","OpenGL ES 3.1")
@@ -506,9 +506,9 @@ cmd void glGetShaderInfoLog(ShaderId shader,
 
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
-  l := min(buffer_length, as!s32(len(s.InfoLog)))
+  l := min(as!s32(buffer_length), as!s32(len(s.InfoLog)))
   copy(info[0:l], s.InfoLog[0:l])
-  string_length_written[0] = l
+  string_length_written[0] = as!GLsizei(l)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml","OpenGL ES 2.0")
@@ -551,9 +551,9 @@ cmd void glGetShaderSource(ShaderId shader,
 
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
-  l := min(buffer_length, as!s32(len(s.Source)))
-  copy(source[0:l], as!char[](s.Source)[0:l])
-  string_length_written[0] = l
+  l := min(as!s32(buffer_length), as!s32(len(s.Source)))
+  copy(as!char*(source)[0:l], as!char[](s.Source)[0:l])
+  string_length_written[0] = as!GLsizei(l)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml","OpenGL ES 2.0")
@@ -574,11 +574,11 @@ cmd void glGetShaderiv(ShaderId shader, GLenum parameter, GLint* value) {
   ctx := GetContext()
   s := ctx.Instances.Shaders[shader]
   value[0] = switch (parameter) {
-    case GL_SHADER_TYPE:          as!s32(s.Type)
+    case GL_SHADER_TYPE:          as!GLint(s.Type)
     case GL_DELETE_STATUS:        switch (s.Deletable) { case true: 1  case false: 0 }
     case GL_COMPILE_STATUS:       switch (s.Compiled) { case true: 1  case false: 0 }
-    case GL_INFO_LOG_LENGTH:      as!s32(len(s.InfoLog))
-    case GL_SHADER_SOURCE_LENGTH: as!s32(len(s.Source))
+    case GL_INFO_LOG_LENGTH:      as!GLint(len(s.InfoLog))
+    case GL_SHADER_SOURCE_LENGTH: as!GLint(len(s.Source))
   }
 }
 
@@ -1118,8 +1118,8 @@ cmd void glShaderSource(ShaderId             shader,
   s := ctx.Instances.Shaders[shader]
   for i in (0 .. count) {
     str := switch ((length == null) || (lengths[i] < 0)) {
-      case true:  as!string(sources[i])
-      case false: as!string(sources[i][0:lengths[i]])
+      case true:  as!string(as!char*(sources[i]))
+      case false: as!string(as!char*(sources[i])[0:lengths[i]])
     }
     // TODO: We should have a newline between sources to avoid unintentional
     // concatenation. The language currently does not support string literals.
@@ -1134,7 +1134,7 @@ cmd void glUniform1f(UniformLocation location, GLfloat value) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  v := make!f32(1)
+  v := make!GLfloat(1)
   v[0] = value
   program := ctx.Instances.Programs[ctx.BoundProgram]
   uniform := program.Uniforms[location]
@@ -1165,7 +1165,7 @@ cmd void glUniform1i(UniformLocation location, GLint value) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  v := make!s32(1)
+  v := make!GLint(1)
   v[0] = value
   program := ctx.Instances.Programs[ctx.BoundProgram]
   uniform := program.Uniforms[location]

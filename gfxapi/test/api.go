@@ -266,9 +266,9 @@ func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	for {
 		if b, _ := d.Uint8(); b == 0 {
 			if incNullTerm {
-				return p.Slice(0, i+1, ϟs)
+				return Charˢ(p.Slice(0, i+1, ϟs))
 			} else {
-				return p.Slice(0, i, ϟs)
+				return Charˢ(p.Slice(0, i, ϟs))
 			}
 		}
 		i++

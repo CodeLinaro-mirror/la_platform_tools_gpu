@@ -265,7 +265,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(renderbuffers) > 0 {
 		out.Write(id,
-			NewGlDeleteRenderbuffers(int32(len(renderbuffers)), memory.Tmp).
+			NewGlDeleteRenderbuffers(GLsizei(len(renderbuffers)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, renderbuffers)))
 	}
 
@@ -276,7 +276,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(textures) > 0 {
 		out.Write(id,
-			NewGlDeleteTextures(int32(len(textures)), memory.Tmp).
+			NewGlDeleteTextures(GLsizei(len(textures)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, textures)))
 	}
 
@@ -287,7 +287,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(framebuffers) > 0 {
 		out.Write(id,
-			NewGlDeleteFramebuffers(int32(len(framebuffers)), memory.Tmp).
+			NewGlDeleteFramebuffers(GLsizei(len(framebuffers)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, framebuffers)))
 	}
 
@@ -298,7 +298,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(buffers) > 0 {
 		out.Write(id,
-			NewGlDeleteBuffers(int32(len(buffers)), memory.Tmp).
+			NewGlDeleteBuffers(GLsizei(len(buffers)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, buffers)))
 	}
 
@@ -309,7 +309,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(vertexArrays) > 0 {
 		out.Write(id,
-			NewGlDeleteVertexArraysOES(int32(len(vertexArrays)), memory.Tmp).
+			NewGlDeleteVertexArraysOES(GLsizei(len(vertexArrays)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, vertexArrays)))
 	}
 
@@ -330,7 +330,7 @@ func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
 	}
 	if len(queries) > 0 {
 		out.Write(id,
-			NewGlDeleteQueries(int32(len(queries)), memory.Tmp).
+			NewGlDeleteQueries(GLsizei(len(queries)), memory.Tmp).
 				AddRead(atom.Data(a, d, l, memory.Tmp, queries)))
 	}
 }

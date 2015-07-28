@@ -107,7 +107,7 @@ func drawWireframe(i atom.ID, a atom.Atom, s *gfxapi.State, d database.Database,
 
 	// Draw the wire-frame
 	out.Write(i, NewGlDrawElements(
-		drawMode, int32(len(indices)), wireframeDataType, memory.Tmp))
+		drawMode, GLsizei(len(indices)), wireframeDataType, memory.Tmp))
 
 	// Rebind the old index buffer
 	out.Write(atom.NoID, NewGlBindBuffer(

@@ -215,14 +215,14 @@
   {{if $el_is_char}}
     // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
     // If incNullTerm is true then the null-terminator is included in the slice.
-    func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) {{$slice_ty}} {
+    func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
       i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
       for {
         if b, _ := d.Uint8(); b == 0 {
           if incNullTerm {
-            return p.Slice(0, i + 1, ϟs)
+            return Charˢ(p.Slice(0, i + 1, ϟs))
           } else {
-            return p.Slice(0, i, ϟs)
+            return Charˢ(p.Slice(0, i, ϟs))
           }
         }
         i++

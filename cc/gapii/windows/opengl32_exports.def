@@ -52,11 +52,13 @@ EXPORTS
   glDebugEntry
   glDeleteLists
   glDepthRange
+  glDisableClientState
   glDrawBuffer
   glDrawPixels
   glEdgeFlag
   glEdgeFlagPointer
   glEdgeFlagv
+  glEnableClientState
   glEnd
   glEndList
   glEvalCoord1d
@@ -98,8 +100,6 @@ EXPORTS
   glGetTexGenfv
   glGetTexGeniv
   glGetTexImage
-  glGetTexLevelParameterfv
-  glGetTexLevelParameteriv
   glIndexd
   glIndexdv
   glIndexf
@@ -208,7 +208,6 @@ EXPORTS
   glRasterPos4iv
   glRasterPos4s
   glRasterPos4sv
-  glReadBuffer
   glRectd
   glRectdv
   glRectf
@@ -224,8 +223,6 @@ EXPORTS
   glScalef
   glSelectBuffer
   glShadeModel
-  glStencilFunc
-  glStencilOp
   glTexCoord1d
   glTexCoord1dv
   glTexCoord1f
@@ -270,8 +267,6 @@ EXPORTS
   glTexGeni
   glTexGeniv
   glTexImage1D
-  glTexParameterfv
-  glTexParameteriv
   glTexSubImage1D
   glTranslated
   glTranslatef

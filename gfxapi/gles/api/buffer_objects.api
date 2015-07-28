@@ -271,8 +271,8 @@ cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
   id := ctx.BoundBuffers[target]
   b := ctx.Instances.Buffers[id]
   value[0] = switch (parameter) {
-    case GL_BUFFER_SIZE:  as!s32(b.Size)
-    case GL_BUFFER_USAGE: as!s32(b.Usage)
+    case GL_BUFFER_SIZE:  as!GLint(b.Size)
+    case GL_BUFFER_USAGE: as!GLint(b.Usage)
   }
 }
 
@@ -351,7 +351,7 @@ cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GL
   b.MappingAccess = access
   b.MappingData = ptr[0:length]
   if GL_MAP_READ_BIT in access {
-    src := b.Data[offset:offset + length]
+    src := b.Data[offset:offset + as!GLintptr(length)]
     dst := b.MappingData
     // copy(dst, src) // TEMP HACK: copy cannot be used here as this is a copy after a fence (ptr := ?)
     write(dst)
@@ -384,5 +384,6 @@ cmd GLboolean glUnmapBuffer(GLenum target) {
   // if GL_MAP_WRITE_BIT in b.MappingAccess { // TEMP HACK: Commented as 'fence not allowed in *semantic.Branch'
   copy(b.Data[b.MappingOffset:b.MappingOffset + len(b.MappingData)], b.MappingData)
   // }
+  return ?
 }
 

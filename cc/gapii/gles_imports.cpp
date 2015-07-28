@@ -24,6 +24,1244 @@ namespace gapii {
 
 void GlesImports::Resolve() {
     using namespace gapic;
+    glBlendBarrierKHR =
+            reinterpret_cast<PFNGLBLENDBARRIERKHR>(GetGfxProcAddress("glBlendBarrierKHR", true));
+    glBlendEquationSeparateiEXT = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATEIEXT>(
+            GetGfxProcAddress("glBlendEquationSeparateiEXT", true));
+    glBlendEquationiEXT = reinterpret_cast<PFNGLBLENDEQUATIONIEXT>(
+            GetGfxProcAddress("glBlendEquationiEXT", true));
+    glBlendFuncSeparateiEXT = reinterpret_cast<PFNGLBLENDFUNCSEPARATEIEXT>(
+            GetGfxProcAddress("glBlendFuncSeparateiEXT", true));
+    glBlendFunciEXT =
+            reinterpret_cast<PFNGLBLENDFUNCIEXT>(GetGfxProcAddress("glBlendFunciEXT", true));
+    glColorMaskiEXT =
+            reinterpret_cast<PFNGLCOLORMASKIEXT>(GetGfxProcAddress("glColorMaskiEXT", true));
+    glCopyImageSubDataEXT = reinterpret_cast<PFNGLCOPYIMAGESUBDATAEXT>(
+            GetGfxProcAddress("glCopyImageSubDataEXT", true));
+    glDebugMessageCallbackKHR = reinterpret_cast<PFNGLDEBUGMESSAGECALLBACKKHR>(
+            GetGfxProcAddress("glDebugMessageCallbackKHR", true));
+    glDebugMessageControlKHR = reinterpret_cast<PFNGLDEBUGMESSAGECONTROLKHR>(
+            GetGfxProcAddress("glDebugMessageControlKHR", true));
+    glDebugMessageInsertKHR = reinterpret_cast<PFNGLDEBUGMESSAGEINSERTKHR>(
+            GetGfxProcAddress("glDebugMessageInsertKHR", true));
+    glDisableiEXT = reinterpret_cast<PFNGLDISABLEIEXT>(GetGfxProcAddress("glDisableiEXT", true));
+    glEnableiEXT = reinterpret_cast<PFNGLENABLEIEXT>(GetGfxProcAddress("glEnableiEXT", true));
+    glFramebufferTextureEXT = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREEXT>(
+            GetGfxProcAddress("glFramebufferTextureEXT", true));
+    glGetDebugMessageLogKHR = reinterpret_cast<PFNGLGETDEBUGMESSAGELOGKHR>(
+            GetGfxProcAddress("glGetDebugMessageLogKHR", true));
+    glGetObjectLabelKHR = reinterpret_cast<PFNGLGETOBJECTLABELKHR>(
+            GetGfxProcAddress("glGetObjectLabelKHR", true));
+    glGetObjectPtrLabelKHR = reinterpret_cast<PFNGLGETOBJECTPTRLABELKHR>(
+            GetGfxProcAddress("glGetObjectPtrLabelKHR", true));
+    glGetPointervKHR =
+            reinterpret_cast<PFNGLGETPOINTERVKHR>(GetGfxProcAddress("glGetPointervKHR", true));
+    glGetSamplerParameterIivEXT = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIIVEXT>(
+            GetGfxProcAddress("glGetSamplerParameterIivEXT", true));
+    glGetSamplerParameterIuivEXT = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIUIVEXT>(
+            GetGfxProcAddress("glGetSamplerParameterIuivEXT", true));
+    glGetTexParameterIivEXT = reinterpret_cast<PFNGLGETTEXPARAMETERIIVEXT>(
+            GetGfxProcAddress("glGetTexParameterIivEXT", true));
+    glGetTexParameterIuivEXT = reinterpret_cast<PFNGLGETTEXPARAMETERIUIVEXT>(
+            GetGfxProcAddress("glGetTexParameterIuivEXT", true));
+    glIsEnablediEXT =
+            reinterpret_cast<PFNGLISENABLEDIEXT>(GetGfxProcAddress("glIsEnablediEXT", true));
+    glMinSampleShadingOES = reinterpret_cast<PFNGLMINSAMPLESHADINGOES>(
+            GetGfxProcAddress("glMinSampleShadingOES", true));
+    glObjectLabelKHR =
+            reinterpret_cast<PFNGLOBJECTLABELKHR>(GetGfxProcAddress("glObjectLabelKHR", true));
+    glObjectPtrLabelKHR = reinterpret_cast<PFNGLOBJECTPTRLABELKHR>(
+            GetGfxProcAddress("glObjectPtrLabelKHR", true));
+    glPatchParameteriEXT = reinterpret_cast<PFNGLPATCHPARAMETERIEXT>(
+            GetGfxProcAddress("glPatchParameteriEXT", true));
+    glPopDebugGroupKHR =
+            reinterpret_cast<PFNGLPOPDEBUGGROUPKHR>(GetGfxProcAddress("glPopDebugGroupKHR", true));
+    glPrimitiveBoundingBoxEXT = reinterpret_cast<PFNGLPRIMITIVEBOUNDINGBOXEXT>(
+            GetGfxProcAddress("glPrimitiveBoundingBoxEXT", true));
+    glPushDebugGroupKHR = reinterpret_cast<PFNGLPUSHDEBUGGROUPKHR>(
+            GetGfxProcAddress("glPushDebugGroupKHR", true));
+    glSamplerParameterIivEXT = reinterpret_cast<PFNGLSAMPLERPARAMETERIIVEXT>(
+            GetGfxProcAddress("glSamplerParameterIivEXT", true));
+    glSamplerParameterIuivEXT = reinterpret_cast<PFNGLSAMPLERPARAMETERIUIVEXT>(
+            GetGfxProcAddress("glSamplerParameterIuivEXT", true));
+    glTexBufferEXT = reinterpret_cast<PFNGLTEXBUFFEREXT>(GetGfxProcAddress("glTexBufferEXT", true));
+    glTexBufferRangeEXT = reinterpret_cast<PFNGLTEXBUFFERRANGEEXT>(
+            GetGfxProcAddress("glTexBufferRangeEXT", true));
+    glTexParameterIivEXT = reinterpret_cast<PFNGLTEXPARAMETERIIVEXT>(
+            GetGfxProcAddress("glTexParameterIivEXT", true));
+    glTexParameterIuivEXT = reinterpret_cast<PFNGLTEXPARAMETERIUIVEXT>(
+            GetGfxProcAddress("glTexParameterIuivEXT", true));
+    glTexStorage3DMultisampleOES = reinterpret_cast<PFNGLTEXSTORAGE3DMULTISAMPLEOES>(
+            GetGfxProcAddress("glTexStorage3DMultisampleOES", true));
+    glBeginQuery = reinterpret_cast<PFNGLBEGINQUERY>(GetGfxProcAddress("glBeginQuery", true));
+    glDeleteQueries =
+            reinterpret_cast<PFNGLDELETEQUERIES>(GetGfxProcAddress("glDeleteQueries", true));
+    glEndQuery = reinterpret_cast<PFNGLENDQUERY>(GetGfxProcAddress("glEndQuery", true));
+    glGenQueries = reinterpret_cast<PFNGLGENQUERIES>(GetGfxProcAddress("glGenQueries", true));
+    glGetQueryObjectuiv = reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(
+            GetGfxProcAddress("glGetQueryObjectuiv", true));
+    glGetQueryiv = reinterpret_cast<PFNGLGETQUERYIV>(GetGfxProcAddress("glGetQueryiv", true));
+    glIsQuery = reinterpret_cast<PFNGLISQUERY>(GetGfxProcAddress("glIsQuery", true));
+    glBindBuffer = reinterpret_cast<PFNGLBINDBUFFER>(GetGfxProcAddress("glBindBuffer", true));
+    glBindBufferBase =
+            reinterpret_cast<PFNGLBINDBUFFERBASE>(GetGfxProcAddress("glBindBufferBase", true));
+    glBindBufferRange =
+            reinterpret_cast<PFNGLBINDBUFFERRANGE>(GetGfxProcAddress("glBindBufferRange", true));
+    glBufferData = reinterpret_cast<PFNGLBUFFERDATA>(GetGfxProcAddress("glBufferData", true));
+    glBufferSubData =
+            reinterpret_cast<PFNGLBUFFERSUBDATA>(GetGfxProcAddress("glBufferSubData", true));
+    glCopyBufferSubData = reinterpret_cast<PFNGLCOPYBUFFERSUBDATA>(
+            GetGfxProcAddress("glCopyBufferSubData", true));
+    glDeleteBuffers =
+            reinterpret_cast<PFNGLDELETEBUFFERS>(GetGfxProcAddress("glDeleteBuffers", true));
+    glGenBuffers = reinterpret_cast<PFNGLGENBUFFERS>(GetGfxProcAddress("glGenBuffers", true));
+    glGetBufferParameteri64v = reinterpret_cast<PFNGLGETBUFFERPARAMETERI64V>(
+            GetGfxProcAddress("glGetBufferParameteri64v", true));
+    glGetBufferParameteriv = reinterpret_cast<PFNGLGETBUFFERPARAMETERIV>(
+            GetGfxProcAddress("glGetBufferParameteriv", true));
+    glGetBufferPointerv = reinterpret_cast<PFNGLGETBUFFERPOINTERV>(
+            GetGfxProcAddress("glGetBufferPointerv", true));
+    glIsBuffer = reinterpret_cast<PFNGLISBUFFER>(GetGfxProcAddress("glIsBuffer", true));
+    glMapBufferRange =
+            reinterpret_cast<PFNGLMAPBUFFERRANGE>(GetGfxProcAddress("glMapBufferRange", true));
+    glUnmapBuffer = reinterpret_cast<PFNGLUNMAPBUFFER>(GetGfxProcAddress("glUnmapBuffer", true));
+    glDrawArrays = reinterpret_cast<PFNGLDRAWARRAYS>(GetGfxProcAddress("glDrawArrays", true));
+    glDrawArraysIndirect = reinterpret_cast<PFNGLDRAWARRAYSINDIRECT>(
+            GetGfxProcAddress("glDrawArraysIndirect", true));
+    glDrawArraysInstanced = reinterpret_cast<PFNGLDRAWARRAYSINSTANCED>(
+            GetGfxProcAddress("glDrawArraysInstanced", true));
+    glDrawBuffers = reinterpret_cast<PFNGLDRAWBUFFERS>(GetGfxProcAddress("glDrawBuffers", true));
+    glDrawElements = reinterpret_cast<PFNGLDRAWELEMENTS>(GetGfxProcAddress("glDrawElements", true));
+    glDrawElementsIndirect = reinterpret_cast<PFNGLDRAWELEMENTSINDIRECT>(
+            GetGfxProcAddress("glDrawElementsIndirect", true));
+    glDrawElementsInstanced = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCED>(
+            GetGfxProcAddress("glDrawElementsInstanced", true));
+    glDrawRangeElements = reinterpret_cast<PFNGLDRAWRANGEELEMENTS>(
+            GetGfxProcAddress("glDrawRangeElements", true));
+    glActiveShaderProgramEXT = reinterpret_cast<PFNGLACTIVESHADERPROGRAMEXT>(
+            GetGfxProcAddress("glActiveShaderProgramEXT", true));
+    glAlphaFuncQCOM =
+            reinterpret_cast<PFNGLALPHAFUNCQCOM>(GetGfxProcAddress("glAlphaFuncQCOM", true));
+    glBeginConditionalRenderNV = reinterpret_cast<PFNGLBEGINCONDITIONALRENDERNV>(
+            GetGfxProcAddress("glBeginConditionalRenderNV", true));
+    glBeginPerfMonitorAMD = reinterpret_cast<PFNGLBEGINPERFMONITORAMD>(
+            GetGfxProcAddress("glBeginPerfMonitorAMD", true));
+    glBeginPerfQueryINTEL = reinterpret_cast<PFNGLBEGINPERFQUERYINTEL>(
+            GetGfxProcAddress("glBeginPerfQueryINTEL", true));
+    glBeginQueryEXT =
+            reinterpret_cast<PFNGLBEGINQUERYEXT>(GetGfxProcAddress("glBeginQueryEXT", true));
+    glBindProgramPipelineEXT = reinterpret_cast<PFNGLBINDPROGRAMPIPELINEEXT>(
+            GetGfxProcAddress("glBindProgramPipelineEXT", true));
+    glBindVertexArrayOES = reinterpret_cast<PFNGLBINDVERTEXARRAYOES>(
+            GetGfxProcAddress("glBindVertexArrayOES", true));
+    glBlendBarrierNV =
+            reinterpret_cast<PFNGLBLENDBARRIERNV>(GetGfxProcAddress("glBlendBarrierNV", true));
+    glBlendEquationSeparateiOES = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATEIOES>(
+            GetGfxProcAddress("glBlendEquationSeparateiOES", true));
+    glBlendEquationiOES = reinterpret_cast<PFNGLBLENDEQUATIONIOES>(
+            GetGfxProcAddress("glBlendEquationiOES", true));
+    glBlendFuncSeparateiOES = reinterpret_cast<PFNGLBLENDFUNCSEPARATEIOES>(
+            GetGfxProcAddress("glBlendFuncSeparateiOES", true));
+    glBlendFunciOES =
+            reinterpret_cast<PFNGLBLENDFUNCIOES>(GetGfxProcAddress("glBlendFunciOES", true));
+    glBlendParameteriNV = reinterpret_cast<PFNGLBLENDPARAMETERINV>(
+            GetGfxProcAddress("glBlendParameteriNV", true));
+    glBlitFramebufferANGLE = reinterpret_cast<PFNGLBLITFRAMEBUFFERANGLE>(
+            GetGfxProcAddress("glBlitFramebufferANGLE", true));
+    glBlitFramebufferNV = reinterpret_cast<PFNGLBLITFRAMEBUFFERNV>(
+            GetGfxProcAddress("glBlitFramebufferNV", true));
+    glBufferStorageEXT =
+            reinterpret_cast<PFNGLBUFFERSTORAGEEXT>(GetGfxProcAddress("glBufferStorageEXT", true));
+    glClientWaitSyncAPPLE = reinterpret_cast<PFNGLCLIENTWAITSYNCAPPLE>(
+            GetGfxProcAddress("glClientWaitSyncAPPLE", true));
+    glColorMaskiOES =
+            reinterpret_cast<PFNGLCOLORMASKIOES>(GetGfxProcAddress("glColorMaskiOES", true));
+    glCompressedTexImage3DOES = reinterpret_cast<PFNGLCOMPRESSEDTEXIMAGE3DOES>(
+            GetGfxProcAddress("glCompressedTexImage3DOES", true));
+    glCompressedTexSubImage3DOES = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE3DOES>(
+            GetGfxProcAddress("glCompressedTexSubImage3DOES", true));
+    glCopyBufferSubDataNV = reinterpret_cast<PFNGLCOPYBUFFERSUBDATANV>(
+            GetGfxProcAddress("glCopyBufferSubDataNV", true));
+    glCopyImageSubDataOES = reinterpret_cast<PFNGLCOPYIMAGESUBDATAOES>(
+            GetGfxProcAddress("glCopyImageSubDataOES", true));
+    glCopyPathNV = reinterpret_cast<PFNGLCOPYPATHNV>(GetGfxProcAddress("glCopyPathNV", true));
+    glCopyTexSubImage3DOES = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE3DOES>(
+            GetGfxProcAddress("glCopyTexSubImage3DOES", true));
+    glCopyTextureLevelsAPPLE = reinterpret_cast<PFNGLCOPYTEXTURELEVELSAPPLE>(
+            GetGfxProcAddress("glCopyTextureLevelsAPPLE", true));
+    glCoverFillPathInstancedNV = reinterpret_cast<PFNGLCOVERFILLPATHINSTANCEDNV>(
+            GetGfxProcAddress("glCoverFillPathInstancedNV", true));
+    glCoverFillPathNV =
+            reinterpret_cast<PFNGLCOVERFILLPATHNV>(GetGfxProcAddress("glCoverFillPathNV", true));
+    glCoverStrokePathInstancedNV = reinterpret_cast<PFNGLCOVERSTROKEPATHINSTANCEDNV>(
+            GetGfxProcAddress("glCoverStrokePathInstancedNV", true));
+    glCoverStrokePathNV = reinterpret_cast<PFNGLCOVERSTROKEPATHNV>(
+            GetGfxProcAddress("glCoverStrokePathNV", true));
+    glCoverageMaskNV =
+            reinterpret_cast<PFNGLCOVERAGEMASKNV>(GetGfxProcAddress("glCoverageMaskNV", true));
+    glCoverageOperationNV = reinterpret_cast<PFNGLCOVERAGEOPERATIONNV>(
+            GetGfxProcAddress("glCoverageOperationNV", true));
+    glCreatePerfQueryINTEL = reinterpret_cast<PFNGLCREATEPERFQUERYINTEL>(
+            GetGfxProcAddress("glCreatePerfQueryINTEL", true));
+    glCreateShaderProgramvEXT = reinterpret_cast<PFNGLCREATESHADERPROGRAMVEXT>(
+            GetGfxProcAddress("glCreateShaderProgramvEXT", true));
+    glDeleteFencesNV =
+            reinterpret_cast<PFNGLDELETEFENCESNV>(GetGfxProcAddress("glDeleteFencesNV", true));
+    glDeletePathsNV =
+            reinterpret_cast<PFNGLDELETEPATHSNV>(GetGfxProcAddress("glDeletePathsNV", true));
+    glDeletePerfMonitorsAMD = reinterpret_cast<PFNGLDELETEPERFMONITORSAMD>(
+            GetGfxProcAddress("glDeletePerfMonitorsAMD", true));
+    glDeletePerfQueryINTEL = reinterpret_cast<PFNGLDELETEPERFQUERYINTEL>(
+            GetGfxProcAddress("glDeletePerfQueryINTEL", true));
+    glDeleteProgramPipelinesEXT = reinterpret_cast<PFNGLDELETEPROGRAMPIPELINESEXT>(
+            GetGfxProcAddress("glDeleteProgramPipelinesEXT", true));
+    glDeleteQueriesEXT =
+            reinterpret_cast<PFNGLDELETEQUERIESEXT>(GetGfxProcAddress("glDeleteQueriesEXT", true));
+    glDeleteSyncAPPLE =
+            reinterpret_cast<PFNGLDELETESYNCAPPLE>(GetGfxProcAddress("glDeleteSyncAPPLE", true));
+    glDeleteVertexArraysOES = reinterpret_cast<PFNGLDELETEVERTEXARRAYSOES>(
+            GetGfxProcAddress("glDeleteVertexArraysOES", true));
+    glDepthRangeArrayfvNV = reinterpret_cast<PFNGLDEPTHRANGEARRAYFVNV>(
+            GetGfxProcAddress("glDepthRangeArrayfvNV", true));
+    glDepthRangeIndexedfNV = reinterpret_cast<PFNGLDEPTHRANGEINDEXEDFNV>(
+            GetGfxProcAddress("glDepthRangeIndexedfNV", true));
+    glDisableDriverControlQCOM = reinterpret_cast<PFNGLDISABLEDRIVERCONTROLQCOM>(
+            GetGfxProcAddress("glDisableDriverControlQCOM", true));
+    glDisableiNV = reinterpret_cast<PFNGLDISABLEINV>(GetGfxProcAddress("glDisableiNV", true));
+    glDisableiOES = reinterpret_cast<PFNGLDISABLEIOES>(GetGfxProcAddress("glDisableiOES", true));
+    glDiscardFramebufferEXT = reinterpret_cast<PFNGLDISCARDFRAMEBUFFEREXT>(
+            GetGfxProcAddress("glDiscardFramebufferEXT", true));
+    glDrawArraysInstancedANGLE = reinterpret_cast<PFNGLDRAWARRAYSINSTANCEDANGLE>(
+            GetGfxProcAddress("glDrawArraysInstancedANGLE", true));
+    glDrawArraysInstancedBaseInstanceEXT =
+            reinterpret_cast<PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEEXT>(
+                    GetGfxProcAddress("glDrawArraysInstancedBaseInstanceEXT", true));
+    glDrawArraysInstancedEXT = reinterpret_cast<PFNGLDRAWARRAYSINSTANCEDEXT>(
+            GetGfxProcAddress("glDrawArraysInstancedEXT", true));
+    glDrawArraysInstancedNV = reinterpret_cast<PFNGLDRAWARRAYSINSTANCEDNV>(
+            GetGfxProcAddress("glDrawArraysInstancedNV", true));
+    glDrawBuffersEXT =
+            reinterpret_cast<PFNGLDRAWBUFFERSEXT>(GetGfxProcAddress("glDrawBuffersEXT", true));
+    glDrawBuffersIndexedEXT = reinterpret_cast<PFNGLDRAWBUFFERSINDEXEDEXT>(
+            GetGfxProcAddress("glDrawBuffersIndexedEXT", true));
+    glDrawBuffersNV =
+            reinterpret_cast<PFNGLDRAWBUFFERSNV>(GetGfxProcAddress("glDrawBuffersNV", true));
+    glDrawElementsBaseVertexEXT = reinterpret_cast<PFNGLDRAWELEMENTSBASEVERTEXEXT>(
+            GetGfxProcAddress("glDrawElementsBaseVertexEXT", true));
+    glDrawElementsBaseVertexOES = reinterpret_cast<PFNGLDRAWELEMENTSBASEVERTEXOES>(
+            GetGfxProcAddress("glDrawElementsBaseVertexOES", true));
+    glDrawElementsInstancedANGLE = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDANGLE>(
+            GetGfxProcAddress("glDrawElementsInstancedANGLE", true));
+    glDrawElementsInstancedBaseInstanceEXT =
+            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEEXT>(
+                    GetGfxProcAddress("glDrawElementsInstancedBaseInstanceEXT", true));
+    glDrawElementsInstancedBaseVertexEXT =
+            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXEXT>(
+                    GetGfxProcAddress("glDrawElementsInstancedBaseVertexEXT", true));
+    glDrawElementsInstancedBaseVertexOES =
+            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXOES>(
+                    GetGfxProcAddress("glDrawElementsInstancedBaseVertexOES", true));
+    glDrawElementsInstancedBaseVertexBaseInstanceEXT =
+            reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEEXT>(
+                    GetGfxProcAddress("glDrawElementsInstancedBaseVertexBaseInstanceEXT", true));
+    glDrawElementsInstancedEXT = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDEXT>(
+            GetGfxProcAddress("glDrawElementsInstancedEXT", true));
+    glDrawElementsInstancedNV = reinterpret_cast<PFNGLDRAWELEMENTSINSTANCEDNV>(
+            GetGfxProcAddress("glDrawElementsInstancedNV", true));
+    glDrawRangeElementsBaseVertexEXT = reinterpret_cast<PFNGLDRAWRANGEELEMENTSBASEVERTEXEXT>(
+            GetGfxProcAddress("glDrawRangeElementsBaseVertexEXT", true));
+    glDrawRangeElementsBaseVertexOES = reinterpret_cast<PFNGLDRAWRANGEELEMENTSBASEVERTEXOES>(
+            GetGfxProcAddress("glDrawRangeElementsBaseVertexOES", true));
+    glEGLImageTargetRenderbufferStorageOES =
+            reinterpret_cast<PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES>(
+                    GetGfxProcAddress("glEGLImageTargetRenderbufferStorageOES", true));
+    glEGLImageTargetTexture2DOES = reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOES>(
+            GetGfxProcAddress("glEGLImageTargetTexture2DOES", true));
+    glEnableDriverControlQCOM = reinterpret_cast<PFNGLENABLEDRIVERCONTROLQCOM>(
+            GetGfxProcAddress("glEnableDriverControlQCOM", true));
+    glEnableiNV = reinterpret_cast<PFNGLENABLEINV>(GetGfxProcAddress("glEnableiNV", true));
+    glEnableiOES = reinterpret_cast<PFNGLENABLEIOES>(GetGfxProcAddress("glEnableiOES", true));
+    glEndConditionalRenderNV = reinterpret_cast<PFNGLENDCONDITIONALRENDERNV>(
+            GetGfxProcAddress("glEndConditionalRenderNV", true));
+    glEndPerfMonitorAMD = reinterpret_cast<PFNGLENDPERFMONITORAMD>(
+            GetGfxProcAddress("glEndPerfMonitorAMD", true));
+    glEndPerfQueryINTEL = reinterpret_cast<PFNGLENDPERFQUERYINTEL>(
+            GetGfxProcAddress("glEndPerfQueryINTEL", true));
+    glEndQueryEXT = reinterpret_cast<PFNGLENDQUERYEXT>(GetGfxProcAddress("glEndQueryEXT", true));
+    glEndTilingQCOM =
+            reinterpret_cast<PFNGLENDTILINGQCOM>(GetGfxProcAddress("glEndTilingQCOM", true));
+    glExtGetBufferPointervQCOM = reinterpret_cast<PFNGLEXTGETBUFFERPOINTERVQCOM>(
+            GetGfxProcAddress("glExtGetBufferPointervQCOM", true));
+    glExtGetBuffersQCOM = reinterpret_cast<PFNGLEXTGETBUFFERSQCOM>(
+            GetGfxProcAddress("glExtGetBuffersQCOM", true));
+    glExtGetFramebuffersQCOM = reinterpret_cast<PFNGLEXTGETFRAMEBUFFERSQCOM>(
+            GetGfxProcAddress("glExtGetFramebuffersQCOM", true));
+    glExtGetProgramBinarySourceQCOM = reinterpret_cast<PFNGLEXTGETPROGRAMBINARYSOURCEQCOM>(
+            GetGfxProcAddress("glExtGetProgramBinarySourceQCOM", true));
+    glExtGetProgramsQCOM = reinterpret_cast<PFNGLEXTGETPROGRAMSQCOM>(
+            GetGfxProcAddress("glExtGetProgramsQCOM", true));
+    glExtGetRenderbuffersQCOM = reinterpret_cast<PFNGLEXTGETRENDERBUFFERSQCOM>(
+            GetGfxProcAddress("glExtGetRenderbuffersQCOM", true));
+    glExtGetShadersQCOM = reinterpret_cast<PFNGLEXTGETSHADERSQCOM>(
+            GetGfxProcAddress("glExtGetShadersQCOM", true));
+    glExtGetTexLevelParameterivQCOM = reinterpret_cast<PFNGLEXTGETTEXLEVELPARAMETERIVQCOM>(
+            GetGfxProcAddress("glExtGetTexLevelParameterivQCOM", true));
+    glExtGetTexSubImageQCOM = reinterpret_cast<PFNGLEXTGETTEXSUBIMAGEQCOM>(
+            GetGfxProcAddress("glExtGetTexSubImageQCOM", true));
+    glExtGetTexturesQCOM = reinterpret_cast<PFNGLEXTGETTEXTURESQCOM>(
+            GetGfxProcAddress("glExtGetTexturesQCOM", true));
+    glExtIsProgramBinaryQCOM = reinterpret_cast<PFNGLEXTISPROGRAMBINARYQCOM>(
+            GetGfxProcAddress("glExtIsProgramBinaryQCOM", true));
+    glExtTexObjectStateOverrideiQCOM = reinterpret_cast<PFNGLEXTTEXOBJECTSTATEOVERRIDEIQCOM>(
+            GetGfxProcAddress("glExtTexObjectStateOverrideiQCOM", true));
+    glFenceSyncAPPLE =
+            reinterpret_cast<PFNGLFENCESYNCAPPLE>(GetGfxProcAddress("glFenceSyncAPPLE", true));
+    glFinishFenceNV =
+            reinterpret_cast<PFNGLFINISHFENCENV>(GetGfxProcAddress("glFinishFenceNV", true));
+    glFlushMappedBufferRangeEXT = reinterpret_cast<PFNGLFLUSHMAPPEDBUFFERRANGEEXT>(
+            GetGfxProcAddress("glFlushMappedBufferRangeEXT", true));
+    glFramebufferTexture2DMultisampleEXT =
+            reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEEXT>(
+                    GetGfxProcAddress("glFramebufferTexture2DMultisampleEXT", true));
+    glFramebufferTexture2DMultisampleIMG =
+            reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DMULTISAMPLEIMG>(
+                    GetGfxProcAddress("glFramebufferTexture2DMultisampleIMG", true));
+    glFramebufferTexture3DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE3DOES>(
+            GetGfxProcAddress("glFramebufferTexture3DOES", true));
+    glFramebufferTextureOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREOES>(
+            GetGfxProcAddress("glFramebufferTextureOES", true));
+    glFramebufferTextureMultiviewOVR = reinterpret_cast<PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVR>(
+            GetGfxProcAddress("glFramebufferTextureMultiviewOVR", true));
+    glGenFencesNV = reinterpret_cast<PFNGLGENFENCESNV>(GetGfxProcAddress("glGenFencesNV", true));
+    glGenPathsNV = reinterpret_cast<PFNGLGENPATHSNV>(GetGfxProcAddress("glGenPathsNV", true));
+    glGenPerfMonitorsAMD = reinterpret_cast<PFNGLGENPERFMONITORSAMD>(
+            GetGfxProcAddress("glGenPerfMonitorsAMD", true));
+    glGenProgramPipelinesEXT = reinterpret_cast<PFNGLGENPROGRAMPIPELINESEXT>(
+            GetGfxProcAddress("glGenProgramPipelinesEXT", true));
+    glGenQueriesEXT =
+            reinterpret_cast<PFNGLGENQUERIESEXT>(GetGfxProcAddress("glGenQueriesEXT", true));
+    glGenVertexArraysOES = reinterpret_cast<PFNGLGENVERTEXARRAYSOES>(
+            GetGfxProcAddress("glGenVertexArraysOES", true));
+    glGetBufferPointervOES = reinterpret_cast<PFNGLGETBUFFERPOINTERVOES>(
+            GetGfxProcAddress("glGetBufferPointervOES", true));
+    glGetDriverControlStringQCOM = reinterpret_cast<PFNGLGETDRIVERCONTROLSTRINGQCOM>(
+            GetGfxProcAddress("glGetDriverControlStringQCOM", true));
+    glGetDriverControlsQCOM = reinterpret_cast<PFNGLGETDRIVERCONTROLSQCOM>(
+            GetGfxProcAddress("glGetDriverControlsQCOM", true));
+    glGetFenceivNV = reinterpret_cast<PFNGLGETFENCEIVNV>(GetGfxProcAddress("glGetFenceivNV", true));
+    glGetFirstPerfQueryIdINTEL = reinterpret_cast<PFNGLGETFIRSTPERFQUERYIDINTEL>(
+            GetGfxProcAddress("glGetFirstPerfQueryIdINTEL", true));
+    glGetFloati_vNV =
+            reinterpret_cast<PFNGLGETFLOATI_VNV>(GetGfxProcAddress("glGetFloati_vNV", true));
+    glGetGraphicsResetStatusEXT = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSEXT>(
+            GetGfxProcAddress("glGetGraphicsResetStatusEXT", true));
+    glGetGraphicsResetStatusKHR = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSKHR>(
+            GetGfxProcAddress("glGetGraphicsResetStatusKHR", true));
+    glGetImageHandleNV =
+            reinterpret_cast<PFNGLGETIMAGEHANDLENV>(GetGfxProcAddress("glGetImageHandleNV", true));
+    glGetInteger64vAPPLE = reinterpret_cast<PFNGLGETINTEGER64VAPPLE>(
+            GetGfxProcAddress("glGetInteger64vAPPLE", true));
+    glGetIntegeri_vEXT =
+            reinterpret_cast<PFNGLGETINTEGERI_VEXT>(GetGfxProcAddress("glGetIntegeri_vEXT", true));
+    glGetInternalformatSampleivNV = reinterpret_cast<PFNGLGETINTERNALFORMATSAMPLEIVNV>(
+            GetGfxProcAddress("glGetInternalformatSampleivNV", true));
+    glGetNextPerfQueryIdINTEL = reinterpret_cast<PFNGLGETNEXTPERFQUERYIDINTEL>(
+            GetGfxProcAddress("glGetNextPerfQueryIdINTEL", true));
+    glGetObjectLabelEXT = reinterpret_cast<PFNGLGETOBJECTLABELEXT>(
+            GetGfxProcAddress("glGetObjectLabelEXT", true));
+    glGetPathCommandsNV = reinterpret_cast<PFNGLGETPATHCOMMANDSNV>(
+            GetGfxProcAddress("glGetPathCommandsNV", true));
+    glGetPathCoordsNV =
+            reinterpret_cast<PFNGLGETPATHCOORDSNV>(GetGfxProcAddress("glGetPathCoordsNV", true));
+    glGetPathDashArrayNV = reinterpret_cast<PFNGLGETPATHDASHARRAYNV>(
+            GetGfxProcAddress("glGetPathDashArrayNV", true));
+    glGetPathLengthNV =
+            reinterpret_cast<PFNGLGETPATHLENGTHNV>(GetGfxProcAddress("glGetPathLengthNV", true));
+    glGetPathMetricRangeNV = reinterpret_cast<PFNGLGETPATHMETRICRANGENV>(
+            GetGfxProcAddress("glGetPathMetricRangeNV", true));
+    glGetPathMetricsNV =
+            reinterpret_cast<PFNGLGETPATHMETRICSNV>(GetGfxProcAddress("glGetPathMetricsNV", true));
+    glGetPathParameterfvNV = reinterpret_cast<PFNGLGETPATHPARAMETERFVNV>(
+            GetGfxProcAddress("glGetPathParameterfvNV", true));
+    glGetPathParameterivNV = reinterpret_cast<PFNGLGETPATHPARAMETERIVNV>(
+            GetGfxProcAddress("glGetPathParameterivNV", true));
+    glGetPathSpacingNV =
+            reinterpret_cast<PFNGLGETPATHSPACINGNV>(GetGfxProcAddress("glGetPathSpacingNV", true));
+    glGetPerfCounterInfoINTEL = reinterpret_cast<PFNGLGETPERFCOUNTERINFOINTEL>(
+            GetGfxProcAddress("glGetPerfCounterInfoINTEL", true));
+    glGetPerfMonitorCounterDataAMD = reinterpret_cast<PFNGLGETPERFMONITORCOUNTERDATAAMD>(
+            GetGfxProcAddress("glGetPerfMonitorCounterDataAMD", true));
+    glGetPerfMonitorCounterInfoAMD = reinterpret_cast<PFNGLGETPERFMONITORCOUNTERINFOAMD>(
+            GetGfxProcAddress("glGetPerfMonitorCounterInfoAMD", true));
+    glGetPerfMonitorCounterStringAMD = reinterpret_cast<PFNGLGETPERFMONITORCOUNTERSTRINGAMD>(
+            GetGfxProcAddress("glGetPerfMonitorCounterStringAMD", true));
+    glGetPerfMonitorCountersAMD = reinterpret_cast<PFNGLGETPERFMONITORCOUNTERSAMD>(
+            GetGfxProcAddress("glGetPerfMonitorCountersAMD", true));
+    glGetPerfMonitorGroupStringAMD = reinterpret_cast<PFNGLGETPERFMONITORGROUPSTRINGAMD>(
+            GetGfxProcAddress("glGetPerfMonitorGroupStringAMD", true));
+    glGetPerfMonitorGroupsAMD = reinterpret_cast<PFNGLGETPERFMONITORGROUPSAMD>(
+            GetGfxProcAddress("glGetPerfMonitorGroupsAMD", true));
+    glGetPerfQueryDataINTEL = reinterpret_cast<PFNGLGETPERFQUERYDATAINTEL>(
+            GetGfxProcAddress("glGetPerfQueryDataINTEL", true));
+    glGetPerfQueryIdByNameINTEL = reinterpret_cast<PFNGLGETPERFQUERYIDBYNAMEINTEL>(
+            GetGfxProcAddress("glGetPerfQueryIdByNameINTEL", true));
+    glGetPerfQueryInfoINTEL = reinterpret_cast<PFNGLGETPERFQUERYINFOINTEL>(
+            GetGfxProcAddress("glGetPerfQueryInfoINTEL", true));
+    glGetProgramBinaryOES = reinterpret_cast<PFNGLGETPROGRAMBINARYOES>(
+            GetGfxProcAddress("glGetProgramBinaryOES", true));
+    glGetProgramPipelineInfoLogEXT = reinterpret_cast<PFNGLGETPROGRAMPIPELINEINFOLOGEXT>(
+            GetGfxProcAddress("glGetProgramPipelineInfoLogEXT", true));
+    glGetProgramPipelineivEXT = reinterpret_cast<PFNGLGETPROGRAMPIPELINEIVEXT>(
+            GetGfxProcAddress("glGetProgramPipelineivEXT", true));
+    glGetProgramResourcefvNV = reinterpret_cast<PFNGLGETPROGRAMRESOURCEFVNV>(
+            GetGfxProcAddress("glGetProgramResourcefvNV", true));
+    glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
+            GetGfxProcAddress("glGetQueryObjecti64vEXT", true));
+    glGetQueryObjectivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTIVEXT>(
+            GetGfxProcAddress("glGetQueryObjectivEXT", true));
+    glGetQueryObjectui64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUI64VEXT>(
+            GetGfxProcAddress("glGetQueryObjectui64vEXT", true));
+    glGetQueryObjectuivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUIVEXT>(
+            GetGfxProcAddress("glGetQueryObjectuivEXT", true));
+    glGetQueryivEXT =
+            reinterpret_cast<PFNGLGETQUERYIVEXT>(GetGfxProcAddress("glGetQueryivEXT", true));
+    glGetSamplerParameterIivOES = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIIVOES>(
+            GetGfxProcAddress("glGetSamplerParameterIivOES", true));
+    glGetSamplerParameterIuivOES = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIUIVOES>(
+            GetGfxProcAddress("glGetSamplerParameterIuivOES", true));
+    glGetSyncivAPPLE =
+            reinterpret_cast<PFNGLGETSYNCIVAPPLE>(GetGfxProcAddress("glGetSyncivAPPLE", true));
+    glGetTexParameterIivOES = reinterpret_cast<PFNGLGETTEXPARAMETERIIVOES>(
+            GetGfxProcAddress("glGetTexParameterIivOES", true));
+    glGetTexParameterIuivOES = reinterpret_cast<PFNGLGETTEXPARAMETERIUIVOES>(
+            GetGfxProcAddress("glGetTexParameterIuivOES", true));
+    glGetTextureHandleNV = reinterpret_cast<PFNGLGETTEXTUREHANDLENV>(
+            GetGfxProcAddress("glGetTextureHandleNV", true));
+    glGetTextureSamplerHandleNV = reinterpret_cast<PFNGLGETTEXTURESAMPLERHANDLENV>(
+            GetGfxProcAddress("glGetTextureSamplerHandleNV", true));
+    glGetTranslatedShaderSourceANGLE = reinterpret_cast<PFNGLGETTRANSLATEDSHADERSOURCEANGLE>(
+            GetGfxProcAddress("glGetTranslatedShaderSourceANGLE", true));
+    glGetnUniformfvEXT =
+            reinterpret_cast<PFNGLGETNUNIFORMFVEXT>(GetGfxProcAddress("glGetnUniformfvEXT", true));
+    glGetnUniformfvKHR =
+            reinterpret_cast<PFNGLGETNUNIFORMFVKHR>(GetGfxProcAddress("glGetnUniformfvKHR", true));
+    glGetnUniformivEXT =
+            reinterpret_cast<PFNGLGETNUNIFORMIVEXT>(GetGfxProcAddress("glGetnUniformivEXT", true));
+    glGetnUniformivKHR =
+            reinterpret_cast<PFNGLGETNUNIFORMIVKHR>(GetGfxProcAddress("glGetnUniformivKHR", true));
+    glGetnUniformuivKHR = reinterpret_cast<PFNGLGETNUNIFORMUIVKHR>(
+            GetGfxProcAddress("glGetnUniformuivKHR", true));
+    glInsertEventMarkerEXT = reinterpret_cast<PFNGLINSERTEVENTMARKEREXT>(
+            GetGfxProcAddress("glInsertEventMarkerEXT", true));
+    glInterpolatePathsNV = reinterpret_cast<PFNGLINTERPOLATEPATHSNV>(
+            GetGfxProcAddress("glInterpolatePathsNV", true));
+    glIsEnablediOES =
+            reinterpret_cast<PFNGLISENABLEDIOES>(GetGfxProcAddress("glIsEnablediOES", true));
+    glIsEnablediNV = reinterpret_cast<PFNGLISENABLEDINV>(GetGfxProcAddress("glIsEnablediNV", true));
+    glIsFenceNV = reinterpret_cast<PFNGLISFENCENV>(GetGfxProcAddress("glIsFenceNV", true));
+    glIsImageHandleResidentNV = reinterpret_cast<PFNGLISIMAGEHANDLERESIDENTNV>(
+            GetGfxProcAddress("glIsImageHandleResidentNV", true));
+    glIsPathNV = reinterpret_cast<PFNGLISPATHNV>(GetGfxProcAddress("glIsPathNV", true));
+    glIsPointInFillPathNV = reinterpret_cast<PFNGLISPOINTINFILLPATHNV>(
+            GetGfxProcAddress("glIsPointInFillPathNV", true));
+    glIsPointInStrokePathNV = reinterpret_cast<PFNGLISPOINTINSTROKEPATHNV>(
+            GetGfxProcAddress("glIsPointInStrokePathNV", true));
+    glIsProgramPipelineEXT = reinterpret_cast<PFNGLISPROGRAMPIPELINEEXT>(
+            GetGfxProcAddress("glIsProgramPipelineEXT", true));
+    glIsQueryEXT = reinterpret_cast<PFNGLISQUERYEXT>(GetGfxProcAddress("glIsQueryEXT", true));
+    glIsSyncAPPLE = reinterpret_cast<PFNGLISSYNCAPPLE>(GetGfxProcAddress("glIsSyncAPPLE", true));
+    glIsTextureHandleResidentNV = reinterpret_cast<PFNGLISTEXTUREHANDLERESIDENTNV>(
+            GetGfxProcAddress("glIsTextureHandleResidentNV", true));
+    glIsVertexArrayOES =
+            reinterpret_cast<PFNGLISVERTEXARRAYOES>(GetGfxProcAddress("glIsVertexArrayOES", true));
+    glLabelObjectEXT =
+            reinterpret_cast<PFNGLLABELOBJECTEXT>(GetGfxProcAddress("glLabelObjectEXT", true));
+    glMakeImageHandleNonResidentNV = reinterpret_cast<PFNGLMAKEIMAGEHANDLENONRESIDENTNV>(
+            GetGfxProcAddress("glMakeImageHandleNonResidentNV", true));
+    glMakeImageHandleResidentNV = reinterpret_cast<PFNGLMAKEIMAGEHANDLERESIDENTNV>(
+            GetGfxProcAddress("glMakeImageHandleResidentNV", true));
+    glMakeTextureHandleNonResidentNV = reinterpret_cast<PFNGLMAKETEXTUREHANDLENONRESIDENTNV>(
+            GetGfxProcAddress("glMakeTextureHandleNonResidentNV", true));
+    glMakeTextureHandleResidentNV = reinterpret_cast<PFNGLMAKETEXTUREHANDLERESIDENTNV>(
+            GetGfxProcAddress("glMakeTextureHandleResidentNV", true));
+    glMapBufferOES = reinterpret_cast<PFNGLMAPBUFFEROES>(GetGfxProcAddress("glMapBufferOES", true));
+    glMapBufferRangeEXT = reinterpret_cast<PFNGLMAPBUFFERRANGEEXT>(
+            GetGfxProcAddress("glMapBufferRangeEXT", true));
+    glMatrixLoad3x2fNV =
+            reinterpret_cast<PFNGLMATRIXLOAD3X2FNV>(GetGfxProcAddress("glMatrixLoad3x2fNV", true));
+    glMatrixLoad3x3fNV =
+            reinterpret_cast<PFNGLMATRIXLOAD3X3FNV>(GetGfxProcAddress("glMatrixLoad3x3fNV", true));
+    glMatrixLoadTranspose3x3fNV = reinterpret_cast<PFNGLMATRIXLOADTRANSPOSE3X3FNV>(
+            GetGfxProcAddress("glMatrixLoadTranspose3x3fNV", true));
+    glMatrixMult3x2fNV =
+            reinterpret_cast<PFNGLMATRIXMULT3X2FNV>(GetGfxProcAddress("glMatrixMult3x2fNV", true));
+    glMatrixMult3x3fNV =
+            reinterpret_cast<PFNGLMATRIXMULT3X3FNV>(GetGfxProcAddress("glMatrixMult3x3fNV", true));
+    glMatrixMultTranspose3x3fNV = reinterpret_cast<PFNGLMATRIXMULTTRANSPOSE3X3FNV>(
+            GetGfxProcAddress("glMatrixMultTranspose3x3fNV", true));
+    glMultiDrawArraysEXT = reinterpret_cast<PFNGLMULTIDRAWARRAYSEXT>(
+            GetGfxProcAddress("glMultiDrawArraysEXT", true));
+    glMultiDrawArraysIndirectEXT = reinterpret_cast<PFNGLMULTIDRAWARRAYSINDIRECTEXT>(
+            GetGfxProcAddress("glMultiDrawArraysIndirectEXT", true));
+    glMultiDrawElementsBaseVertexEXT = reinterpret_cast<PFNGLMULTIDRAWELEMENTSBASEVERTEXEXT>(
+            GetGfxProcAddress("glMultiDrawElementsBaseVertexEXT", true));
+    glMultiDrawElementsBaseVertexOES = reinterpret_cast<PFNGLMULTIDRAWELEMENTSBASEVERTEXOES>(
+            GetGfxProcAddress("glMultiDrawElementsBaseVertexOES", true));
+    glMultiDrawElementsEXT = reinterpret_cast<PFNGLMULTIDRAWELEMENTSEXT>(
+            GetGfxProcAddress("glMultiDrawElementsEXT", true));
+    glMultiDrawElementsIndirectEXT = reinterpret_cast<PFNGLMULTIDRAWELEMENTSINDIRECTEXT>(
+            GetGfxProcAddress("glMultiDrawElementsIndirectEXT", true));
+    glPatchParameteriOES = reinterpret_cast<PFNGLPATCHPARAMETERIOES>(
+            GetGfxProcAddress("glPatchParameteriOES", true));
+    glPathCommandsNV =
+            reinterpret_cast<PFNGLPATHCOMMANDSNV>(GetGfxProcAddress("glPathCommandsNV", true));
+    glPathCoordsNV = reinterpret_cast<PFNGLPATHCOORDSNV>(GetGfxProcAddress("glPathCoordsNV", true));
+    glPathCoverDepthFuncNV = reinterpret_cast<PFNGLPATHCOVERDEPTHFUNCNV>(
+            GetGfxProcAddress("glPathCoverDepthFuncNV", true));
+    glPathDashArrayNV =
+            reinterpret_cast<PFNGLPATHDASHARRAYNV>(GetGfxProcAddress("glPathDashArrayNV", true));
+    glPathGlyphIndexArrayNV = reinterpret_cast<PFNGLPATHGLYPHINDEXARRAYNV>(
+            GetGfxProcAddress("glPathGlyphIndexArrayNV", true));
+    glPathGlyphIndexRangeNV = reinterpret_cast<PFNGLPATHGLYPHINDEXRANGENV>(
+            GetGfxProcAddress("glPathGlyphIndexRangeNV", true));
+    glPathGlyphRangeNV =
+            reinterpret_cast<PFNGLPATHGLYPHRANGENV>(GetGfxProcAddress("glPathGlyphRangeNV", true));
+    glPathGlyphsNV = reinterpret_cast<PFNGLPATHGLYPHSNV>(GetGfxProcAddress("glPathGlyphsNV", true));
+    glPathMemoryGlyphIndexArrayNV = reinterpret_cast<PFNGLPATHMEMORYGLYPHINDEXARRAYNV>(
+            GetGfxProcAddress("glPathMemoryGlyphIndexArrayNV", true));
+    glPathParameterfNV =
+            reinterpret_cast<PFNGLPATHPARAMETERFNV>(GetGfxProcAddress("glPathParameterfNV", true));
+    glPathParameterfvNV = reinterpret_cast<PFNGLPATHPARAMETERFVNV>(
+            GetGfxProcAddress("glPathParameterfvNV", true));
+    glPathParameteriNV =
+            reinterpret_cast<PFNGLPATHPARAMETERINV>(GetGfxProcAddress("glPathParameteriNV", true));
+    glPathParameterivNV = reinterpret_cast<PFNGLPATHPARAMETERIVNV>(
+            GetGfxProcAddress("glPathParameterivNV", true));
+    glPathStencilDepthOffsetNV = reinterpret_cast<PFNGLPATHSTENCILDEPTHOFFSETNV>(
+            GetGfxProcAddress("glPathStencilDepthOffsetNV", true));
+    glPathStencilFuncNV = reinterpret_cast<PFNGLPATHSTENCILFUNCNV>(
+            GetGfxProcAddress("glPathStencilFuncNV", true));
+    glPathStringNV = reinterpret_cast<PFNGLPATHSTRINGNV>(GetGfxProcAddress("glPathStringNV", true));
+    glPathSubCommandsNV = reinterpret_cast<PFNGLPATHSUBCOMMANDSNV>(
+            GetGfxProcAddress("glPathSubCommandsNV", true));
+    glPathSubCoordsNV =
+            reinterpret_cast<PFNGLPATHSUBCOORDSNV>(GetGfxProcAddress("glPathSubCoordsNV", true));
+    glPointAlongPathNV =
+            reinterpret_cast<PFNGLPOINTALONGPATHNV>(GetGfxProcAddress("glPointAlongPathNV", true));
+    glPolygonModeNV =
+            reinterpret_cast<PFNGLPOLYGONMODENV>(GetGfxProcAddress("glPolygonModeNV", true));
+    glPopGroupMarkerEXT = reinterpret_cast<PFNGLPOPGROUPMARKEREXT>(
+            GetGfxProcAddress("glPopGroupMarkerEXT", true));
+    glPrimitiveBoundingBoxOES = reinterpret_cast<PFNGLPRIMITIVEBOUNDINGBOXOES>(
+            GetGfxProcAddress("glPrimitiveBoundingBoxOES", true));
+    glProgramBinaryOES =
+            reinterpret_cast<PFNGLPROGRAMBINARYOES>(GetGfxProcAddress("glProgramBinaryOES", true));
+    glProgramParameteriEXT = reinterpret_cast<PFNGLPROGRAMPARAMETERIEXT>(
+            GetGfxProcAddress("glProgramParameteriEXT", true));
+    glProgramPathFragmentInputGenNV = reinterpret_cast<PFNGLPROGRAMPATHFRAGMENTINPUTGENNV>(
+            GetGfxProcAddress("glProgramPathFragmentInputGenNV", true));
+    glProgramUniform1fEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1FEXT>(
+            GetGfxProcAddress("glProgramUniform1fEXT", true));
+    glProgramUniform1fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1FVEXT>(
+            GetGfxProcAddress("glProgramUniform1fvEXT", true));
+    glProgramUniform1iEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1IEXT>(
+            GetGfxProcAddress("glProgramUniform1iEXT", true));
+    glProgramUniform1ivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1IVEXT>(
+            GetGfxProcAddress("glProgramUniform1ivEXT", true));
+    glProgramUniform1uiEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1UIEXT>(
+            GetGfxProcAddress("glProgramUniform1uiEXT", true));
+    glProgramUniform1uivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM1UIVEXT>(
+            GetGfxProcAddress("glProgramUniform1uivEXT", true));
+    glProgramUniform2fEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2FEXT>(
+            GetGfxProcAddress("glProgramUniform2fEXT", true));
+    glProgramUniform2fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2FVEXT>(
+            GetGfxProcAddress("glProgramUniform2fvEXT", true));
+    glProgramUniform2iEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2IEXT>(
+            GetGfxProcAddress("glProgramUniform2iEXT", true));
+    glProgramUniform2ivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2IVEXT>(
+            GetGfxProcAddress("glProgramUniform2ivEXT", true));
+    glProgramUniform2uiEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2UIEXT>(
+            GetGfxProcAddress("glProgramUniform2uiEXT", true));
+    glProgramUniform2uivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM2UIVEXT>(
+            GetGfxProcAddress("glProgramUniform2uivEXT", true));
+    glProgramUniform3fEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3FEXT>(
+            GetGfxProcAddress("glProgramUniform3fEXT", true));
+    glProgramUniform3fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3FVEXT>(
+            GetGfxProcAddress("glProgramUniform3fvEXT", true));
+    glProgramUniform3iEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3IEXT>(
+            GetGfxProcAddress("glProgramUniform3iEXT", true));
+    glProgramUniform3ivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3IVEXT>(
+            GetGfxProcAddress("glProgramUniform3ivEXT", true));
+    glProgramUniform3uiEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3UIEXT>(
+            GetGfxProcAddress("glProgramUniform3uiEXT", true));
+    glProgramUniform3uivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM3UIVEXT>(
+            GetGfxProcAddress("glProgramUniform3uivEXT", true));
+    glProgramUniform4fEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4FEXT>(
+            GetGfxProcAddress("glProgramUniform4fEXT", true));
+    glProgramUniform4fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4FVEXT>(
+            GetGfxProcAddress("glProgramUniform4fvEXT", true));
+    glProgramUniform4iEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4IEXT>(
+            GetGfxProcAddress("glProgramUniform4iEXT", true));
+    glProgramUniform4ivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4IVEXT>(
+            GetGfxProcAddress("glProgramUniform4ivEXT", true));
+    glProgramUniform4uiEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4UIEXT>(
+            GetGfxProcAddress("glProgramUniform4uiEXT", true));
+    glProgramUniform4uivEXT = reinterpret_cast<PFNGLPROGRAMUNIFORM4UIVEXT>(
+            GetGfxProcAddress("glProgramUniform4uivEXT", true));
+    glProgramUniformHandleui64NV = reinterpret_cast<PFNGLPROGRAMUNIFORMHANDLEUI64NV>(
+            GetGfxProcAddress("glProgramUniformHandleui64NV", true));
+    glProgramUniformHandleui64vNV = reinterpret_cast<PFNGLPROGRAMUNIFORMHANDLEUI64VNV>(
+            GetGfxProcAddress("glProgramUniformHandleui64vNV", true));
+    glProgramUniformMatrix2fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix2fvEXT", true));
+    glProgramUniformMatrix2x3fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2X3FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix2x3fvEXT", true));
+    glProgramUniformMatrix2x4fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2X4FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix2x4fvEXT", true));
+    glProgramUniformMatrix3fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix3fvEXT", true));
+    glProgramUniformMatrix3x2fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3X2FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix3x2fvEXT", true));
+    glProgramUniformMatrix3x4fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3X4FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix3x4fvEXT", true));
+    glProgramUniformMatrix4fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix4fvEXT", true));
+    glProgramUniformMatrix4x2fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4X2FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix4x2fvEXT", true));
+    glProgramUniformMatrix4x3fvEXT = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4X3FVEXT>(
+            GetGfxProcAddress("glProgramUniformMatrix4x3fvEXT", true));
+    glPushGroupMarkerEXT = reinterpret_cast<PFNGLPUSHGROUPMARKEREXT>(
+            GetGfxProcAddress("glPushGroupMarkerEXT", true));
+    glQueryCounterEXT =
+            reinterpret_cast<PFNGLQUERYCOUNTEREXT>(GetGfxProcAddress("glQueryCounterEXT", true));
+    glReadBufferIndexedEXT = reinterpret_cast<PFNGLREADBUFFERINDEXEDEXT>(
+            GetGfxProcAddress("glReadBufferIndexedEXT", true));
+    glReadBufferNV = reinterpret_cast<PFNGLREADBUFFERNV>(GetGfxProcAddress("glReadBufferNV", true));
+    glReadnPixelsEXT =
+            reinterpret_cast<PFNGLREADNPIXELSEXT>(GetGfxProcAddress("glReadnPixelsEXT", true));
+    glReadnPixelsKHR =
+            reinterpret_cast<PFNGLREADNPIXELSKHR>(GetGfxProcAddress("glReadnPixelsKHR", true));
+    glRenderbufferStorageMultisampleANGLE =
+            reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLE>(
+                    GetGfxProcAddress("glRenderbufferStorageMultisampleANGLE", true));
+    glRenderbufferStorageMultisampleAPPLE =
+            reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLEAPPLE>(
+                    GetGfxProcAddress("glRenderbufferStorageMultisampleAPPLE", true));
+    glRenderbufferStorageMultisampleEXT = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXT>(
+            GetGfxProcAddress("glRenderbufferStorageMultisampleEXT", true));
+    glRenderbufferStorageMultisampleIMG = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLEIMG>(
+            GetGfxProcAddress("glRenderbufferStorageMultisampleIMG", true));
+    glRenderbufferStorageMultisampleNV = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLENV>(
+            GetGfxProcAddress("glRenderbufferStorageMultisampleNV", true));
+    glResolveMultisampleFramebufferAPPLE =
+            reinterpret_cast<PFNGLRESOLVEMULTISAMPLEFRAMEBUFFERAPPLE>(
+                    GetGfxProcAddress("glResolveMultisampleFramebufferAPPLE", true));
+    glSamplerParameterIivOES = reinterpret_cast<PFNGLSAMPLERPARAMETERIIVOES>(
+            GetGfxProcAddress("glSamplerParameterIivOES", true));
+    glSamplerParameterIuivOES = reinterpret_cast<PFNGLSAMPLERPARAMETERIUIVOES>(
+            GetGfxProcAddress("glSamplerParameterIuivOES", true));
+    glScissorArrayvNV =
+            reinterpret_cast<PFNGLSCISSORARRAYVNV>(GetGfxProcAddress("glScissorArrayvNV", true));
+    glScissorIndexedNV =
+            reinterpret_cast<PFNGLSCISSORINDEXEDNV>(GetGfxProcAddress("glScissorIndexedNV", true));
+    glScissorIndexedvNV = reinterpret_cast<PFNGLSCISSORINDEXEDVNV>(
+            GetGfxProcAddress("glScissorIndexedvNV", true));
+    glSelectPerfMonitorCountersAMD = reinterpret_cast<PFNGLSELECTPERFMONITORCOUNTERSAMD>(
+            GetGfxProcAddress("glSelectPerfMonitorCountersAMD", true));
+    glSetFenceNV = reinterpret_cast<PFNGLSETFENCENV>(GetGfxProcAddress("glSetFenceNV", true));
+    glStartTilingQCOM =
+            reinterpret_cast<PFNGLSTARTTILINGQCOM>(GetGfxProcAddress("glStartTilingQCOM", true));
+    glStencilFillPathInstancedNV = reinterpret_cast<PFNGLSTENCILFILLPATHINSTANCEDNV>(
+            GetGfxProcAddress("glStencilFillPathInstancedNV", true));
+    glStencilFillPathNV = reinterpret_cast<PFNGLSTENCILFILLPATHNV>(
+            GetGfxProcAddress("glStencilFillPathNV", true));
+    glStencilStrokePathInstancedNV = reinterpret_cast<PFNGLSTENCILSTROKEPATHINSTANCEDNV>(
+            GetGfxProcAddress("glStencilStrokePathInstancedNV", true));
+    glStencilStrokePathNV = reinterpret_cast<PFNGLSTENCILSTROKEPATHNV>(
+            GetGfxProcAddress("glStencilStrokePathNV", true));
+    glStencilThenCoverFillPathInstancedNV =
+            reinterpret_cast<PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNV>(
+                    GetGfxProcAddress("glStencilThenCoverFillPathInstancedNV", true));
+    glStencilThenCoverFillPathNV = reinterpret_cast<PFNGLSTENCILTHENCOVERFILLPATHNV>(
+            GetGfxProcAddress("glStencilThenCoverFillPathNV", true));
+    glStencilThenCoverStrokePathInstancedNV =
+            reinterpret_cast<PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNV>(
+                    GetGfxProcAddress("glStencilThenCoverStrokePathInstancedNV", true));
+    glStencilThenCoverStrokePathNV = reinterpret_cast<PFNGLSTENCILTHENCOVERSTROKEPATHNV>(
+            GetGfxProcAddress("glStencilThenCoverStrokePathNV", true));
+    glTestFenceNV = reinterpret_cast<PFNGLTESTFENCENV>(GetGfxProcAddress("glTestFenceNV", true));
+    glTexBufferOES = reinterpret_cast<PFNGLTEXBUFFEROES>(GetGfxProcAddress("glTexBufferOES", true));
+    glTexBufferRangeOES = reinterpret_cast<PFNGLTEXBUFFERRANGEOES>(
+            GetGfxProcAddress("glTexBufferRangeOES", true));
+    glTexImage3DOES =
+            reinterpret_cast<PFNGLTEXIMAGE3DOES>(GetGfxProcAddress("glTexImage3DOES", true));
+    glTexPageCommitmentARB = reinterpret_cast<PFNGLTEXPAGECOMMITMENTARB>(
+            GetGfxProcAddress("glTexPageCommitmentARB", true));
+    glTexParameterIivOES = reinterpret_cast<PFNGLTEXPARAMETERIIVOES>(
+            GetGfxProcAddress("glTexParameterIivOES", true));
+    glTexParameterIuivOES = reinterpret_cast<PFNGLTEXPARAMETERIUIVOES>(
+            GetGfxProcAddress("glTexParameterIuivOES", true));
+    glTexStorage1DEXT =
+            reinterpret_cast<PFNGLTEXSTORAGE1DEXT>(GetGfxProcAddress("glTexStorage1DEXT", true));
+    glTexStorage2DEXT =
+            reinterpret_cast<PFNGLTEXSTORAGE2DEXT>(GetGfxProcAddress("glTexStorage2DEXT", true));
+    glTexStorage3DEXT =
+            reinterpret_cast<PFNGLTEXSTORAGE3DEXT>(GetGfxProcAddress("glTexStorage3DEXT", true));
+    glTexSubImage3DOES =
+            reinterpret_cast<PFNGLTEXSUBIMAGE3DOES>(GetGfxProcAddress("glTexSubImage3DOES", true));
+    glTextureStorage1DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE1DEXT>(
+            GetGfxProcAddress("glTextureStorage1DEXT", true));
+    glTextureStorage2DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE2DEXT>(
+            GetGfxProcAddress("glTextureStorage2DEXT", true));
+    glTextureStorage3DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE3DEXT>(
+            GetGfxProcAddress("glTextureStorage3DEXT", true));
+    glTextureViewEXT =
+            reinterpret_cast<PFNGLTEXTUREVIEWEXT>(GetGfxProcAddress("glTextureViewEXT", true));
+    glTextureViewOES =
+            reinterpret_cast<PFNGLTEXTUREVIEWOES>(GetGfxProcAddress("glTextureViewOES", true));
+    glTransformPathNV =
+            reinterpret_cast<PFNGLTRANSFORMPATHNV>(GetGfxProcAddress("glTransformPathNV", true));
+    glUniformHandleui64NV = reinterpret_cast<PFNGLUNIFORMHANDLEUI64NV>(
+            GetGfxProcAddress("glUniformHandleui64NV", true));
+    glUniformHandleui64vNV = reinterpret_cast<PFNGLUNIFORMHANDLEUI64VNV>(
+            GetGfxProcAddress("glUniformHandleui64vNV", true));
+    glUniformMatrix2x3fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX2X3FVNV>(
+            GetGfxProcAddress("glUniformMatrix2x3fvNV", true));
+    glUniformMatrix2x4fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX2X4FVNV>(
+            GetGfxProcAddress("glUniformMatrix2x4fvNV", true));
+    glUniformMatrix3x2fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX3X2FVNV>(
+            GetGfxProcAddress("glUniformMatrix3x2fvNV", true));
+    glUniformMatrix3x4fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX3X4FVNV>(
+            GetGfxProcAddress("glUniformMatrix3x4fvNV", true));
+    glUniformMatrix4x2fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX4X2FVNV>(
+            GetGfxProcAddress("glUniformMatrix4x2fvNV", true));
+    glUniformMatrix4x3fvNV = reinterpret_cast<PFNGLUNIFORMMATRIX4X3FVNV>(
+            GetGfxProcAddress("glUniformMatrix4x3fvNV", true));
+    glUnmapBufferOES =
+            reinterpret_cast<PFNGLUNMAPBUFFEROES>(GetGfxProcAddress("glUnmapBufferOES", true));
+    glUseProgramStagesEXT = reinterpret_cast<PFNGLUSEPROGRAMSTAGESEXT>(
+            GetGfxProcAddress("glUseProgramStagesEXT", true));
+    glValidateProgramPipelineEXT = reinterpret_cast<PFNGLVALIDATEPROGRAMPIPELINEEXT>(
+            GetGfxProcAddress("glValidateProgramPipelineEXT", true));
+    glVertexAttribDivisorANGLE = reinterpret_cast<PFNGLVERTEXATTRIBDIVISORANGLE>(
+            GetGfxProcAddress("glVertexAttribDivisorANGLE", true));
+    glVertexAttribDivisorEXT = reinterpret_cast<PFNGLVERTEXATTRIBDIVISOREXT>(
+            GetGfxProcAddress("glVertexAttribDivisorEXT", true));
+    glVertexAttribDivisorNV = reinterpret_cast<PFNGLVERTEXATTRIBDIVISORNV>(
+            GetGfxProcAddress("glVertexAttribDivisorNV", true));
+    glViewportArrayvNV =
+            reinterpret_cast<PFNGLVIEWPORTARRAYVNV>(GetGfxProcAddress("glViewportArrayvNV", true));
+    glViewportIndexedfNV = reinterpret_cast<PFNGLVIEWPORTINDEXEDFNV>(
+            GetGfxProcAddress("glViewportIndexedfNV", true));
+    glViewportIndexedfvNV = reinterpret_cast<PFNGLVIEWPORTINDEXEDFVNV>(
+            GetGfxProcAddress("glViewportIndexedfvNV", true));
+    glWaitSyncAPPLE =
+            reinterpret_cast<PFNGLWAITSYNCAPPLE>(GetGfxProcAddress("glWaitSyncAPPLE", true));
+    glWeightPathsNV =
+            reinterpret_cast<PFNGLWEIGHTPATHSNV>(GetGfxProcAddress("glWeightPathsNV", true));
+    glCoverageModulationNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONNV>(
+            GetGfxProcAddress("glCoverageModulationNV", true));
+    glCoverageModulationTableNV = reinterpret_cast<PFNGLCOVERAGEMODULATIONTABLENV>(
+            GetGfxProcAddress("glCoverageModulationTableNV", true));
+    glFragmentCoverageColorNV = reinterpret_cast<PFNGLFRAGMENTCOVERAGECOLORNV>(
+            GetGfxProcAddress("glFragmentCoverageColorNV", true));
+    glFramebufferSampleLocationsfvNV = reinterpret_cast<PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNV>(
+            GetGfxProcAddress("glFramebufferSampleLocationsfvNV", true));
+    glGetCoverageModulationTableNV = reinterpret_cast<PFNGLGETCOVERAGEMODULATIONTABLENV>(
+            GetGfxProcAddress("glGetCoverageModulationTableNV", true));
+    glNamedFramebufferSampleLocationsfvNV =
+            reinterpret_cast<PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNV>(
+                    GetGfxProcAddress("glNamedFramebufferSampleLocationsfvNV", true));
+    glRasterSamplesEXT =
+            reinterpret_cast<PFNGLRASTERSAMPLESEXT>(GetGfxProcAddress("glRasterSamplesEXT", true));
+    glResolveDepthValuesNV = reinterpret_cast<PFNGLRESOLVEDEPTHVALUESNV>(
+            GetGfxProcAddress("glResolveDepthValuesNV", true));
+    glSubpixelPrecisionBiasNV = reinterpret_cast<PFNGLSUBPIXELPRECISIONBIASNV>(
+            GetGfxProcAddress("glSubpixelPrecisionBiasNV", true));
+    glBlendColor = reinterpret_cast<PFNGLBLENDCOLOR>(GetGfxProcAddress("glBlendColor", true));
+    glBlendEquation =
+            reinterpret_cast<PFNGLBLENDEQUATION>(GetGfxProcAddress("glBlendEquation", true));
+    glBlendEquationSeparate = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATE>(
+            GetGfxProcAddress("glBlendEquationSeparate", true));
+    glBlendFunc = reinterpret_cast<PFNGLBLENDFUNC>(GetGfxProcAddress("glBlendFunc", true));
+    glBlendFuncSeparate = reinterpret_cast<PFNGLBLENDFUNCSEPARATE>(
+            GetGfxProcAddress("glBlendFuncSeparate", true));
+    glDepthFunc = reinterpret_cast<PFNGLDEPTHFUNC>(GetGfxProcAddress("glDepthFunc", true));
+    glSampleCoverage =
+            reinterpret_cast<PFNGLSAMPLECOVERAGE>(GetGfxProcAddress("glSampleCoverage", true));
+    glSampleMaski = reinterpret_cast<PFNGLSAMPLEMASKI>(GetGfxProcAddress("glSampleMaski", true));
+    glScissor = reinterpret_cast<PFNGLSCISSOR>(GetGfxProcAddress("glScissor", true));
+    glStencilFunc = reinterpret_cast<PFNGLSTENCILFUNC>(GetGfxProcAddress("glStencilFunc", true));
+    glStencilFuncSeparate = reinterpret_cast<PFNGLSTENCILFUNCSEPARATE>(
+            GetGfxProcAddress("glStencilFuncSeparate", true));
+    glStencilOp = reinterpret_cast<PFNGLSTENCILOP>(GetGfxProcAddress("glStencilOp", true));
+    glStencilOpSeparate = reinterpret_cast<PFNGLSTENCILOPSEPARATE>(
+            GetGfxProcAddress("glStencilOpSeparate", true));
+    glBindFramebuffer =
+            reinterpret_cast<PFNGLBINDFRAMEBUFFER>(GetGfxProcAddress("glBindFramebuffer", true));
+    glBindRenderbuffer =
+            reinterpret_cast<PFNGLBINDRENDERBUFFER>(GetGfxProcAddress("glBindRenderbuffer", true));
+    glBlitFramebuffer =
+            reinterpret_cast<PFNGLBLITFRAMEBUFFER>(GetGfxProcAddress("glBlitFramebuffer", true));
+    glCheckFramebufferStatus = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUS>(
+            GetGfxProcAddress("glCheckFramebufferStatus", true));
+    glClear = reinterpret_cast<PFNGLCLEAR>(GetGfxProcAddress("glClear", true));
+    glClearBufferfi =
+            reinterpret_cast<PFNGLCLEARBUFFERFI>(GetGfxProcAddress("glClearBufferfi", true));
+    glClearBufferfv =
+            reinterpret_cast<PFNGLCLEARBUFFERFV>(GetGfxProcAddress("glClearBufferfv", true));
+    glClearBufferiv =
+            reinterpret_cast<PFNGLCLEARBUFFERIV>(GetGfxProcAddress("glClearBufferiv", true));
+    glClearBufferuiv =
+            reinterpret_cast<PFNGLCLEARBUFFERUIV>(GetGfxProcAddress("glClearBufferuiv", true));
+    glClearColor = reinterpret_cast<PFNGLCLEARCOLOR>(GetGfxProcAddress("glClearColor", true));
+    glClearDepthf = reinterpret_cast<PFNGLCLEARDEPTHF>(GetGfxProcAddress("glClearDepthf", true));
+    glClearStencil = reinterpret_cast<PFNGLCLEARSTENCIL>(GetGfxProcAddress("glClearStencil", true));
+    glColorMask = reinterpret_cast<PFNGLCOLORMASK>(GetGfxProcAddress("glColorMask", true));
+    glDeleteFramebuffers = reinterpret_cast<PFNGLDELETEFRAMEBUFFERS>(
+            GetGfxProcAddress("glDeleteFramebuffers", true));
+    glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
+            GetGfxProcAddress("glDeleteRenderbuffers", true));
+    glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(GetGfxProcAddress("glDepthMask", true));
+    glFramebufferParameteri = reinterpret_cast<PFNGLFRAMEBUFFERPARAMETERI>(
+            GetGfxProcAddress("glFramebufferParameteri", true));
+    glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(
+            GetGfxProcAddress("glFramebufferRenderbuffer", true));
+    glFramebufferTexture2D = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2D>(
+            GetGfxProcAddress("glFramebufferTexture2D", true));
+    glFramebufferTextureLayer = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURELAYER>(
+            GetGfxProcAddress("glFramebufferTextureLayer", true));
+    glGenFramebuffers =
+            reinterpret_cast<PFNGLGENFRAMEBUFFERS>(GetGfxProcAddress("glGenFramebuffers", true));
+    glGenRenderbuffers =
+            reinterpret_cast<PFNGLGENRENDERBUFFERS>(GetGfxProcAddress("glGenRenderbuffers", true));
+    glGetFramebufferAttachmentParameteriv =
+            reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV>(
+                    GetGfxProcAddress("glGetFramebufferAttachmentParameteriv", true));
+    glGetFramebufferParameteriv = reinterpret_cast<PFNGLGETFRAMEBUFFERPARAMETERIV>(
+            GetGfxProcAddress("glGetFramebufferParameteriv", true));
+    glGetRenderbufferParameteriv = reinterpret_cast<PFNGLGETRENDERBUFFERPARAMETERIV>(
+            GetGfxProcAddress("glGetRenderbufferParameteriv", true));
+    glInvalidateFramebuffer = reinterpret_cast<PFNGLINVALIDATEFRAMEBUFFER>(
+            GetGfxProcAddress("glInvalidateFramebuffer", true));
+    glInvalidateSubFramebuffer = reinterpret_cast<PFNGLINVALIDATESUBFRAMEBUFFER>(
+            GetGfxProcAddress("glInvalidateSubFramebuffer", true));
+    glIsFramebuffer =
+            reinterpret_cast<PFNGLISFRAMEBUFFER>(GetGfxProcAddress("glIsFramebuffer", true));
+    glIsRenderbuffer =
+            reinterpret_cast<PFNGLISRENDERBUFFER>(GetGfxProcAddress("glIsRenderbuffer", true));
+    glReadBuffer = reinterpret_cast<PFNGLREADBUFFER>(GetGfxProcAddress("glReadBuffer", true));
+    glReadPixels = reinterpret_cast<PFNGLREADPIXELS>(GetGfxProcAddress("glReadPixels", true));
+    glRenderbufferStorage = reinterpret_cast<PFNGLRENDERBUFFERSTORAGE>(
+            GetGfxProcAddress("glRenderbufferStorage", true));
+    glRenderbufferStorageMultisample = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLE>(
+            GetGfxProcAddress("glRenderbufferStorageMultisample", true));
+    glStencilMask = reinterpret_cast<PFNGLSTENCILMASK>(GetGfxProcAddress("glStencilMask", true));
+    glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
+            GetGfxProcAddress("glStencilMaskSeparate", true));
+    glDisable = reinterpret_cast<PFNGLDISABLE>(GetGfxProcAddress("glDisable", true));
+    glEnable = reinterpret_cast<PFNGLENABLE>(GetGfxProcAddress("glEnable", true));
+    glFinish = reinterpret_cast<PFNGLFINISH>(GetGfxProcAddress("glFinish", true));
+    glFlush = reinterpret_cast<PFNGLFLUSH>(GetGfxProcAddress("glFlush", true));
+    glFlushMappedBufferRange = reinterpret_cast<PFNGLFLUSHMAPPEDBUFFERRANGE>(
+            GetGfxProcAddress("glFlushMappedBufferRange", true));
+    glGetError = reinterpret_cast<PFNGLGETERROR>(GetGfxProcAddress("glGetError", true));
+    glHint = reinterpret_cast<PFNGLHINT>(GetGfxProcAddress("glHint", true));
+    glActiveShaderProgram = reinterpret_cast<PFNGLACTIVESHADERPROGRAM>(
+            GetGfxProcAddress("glActiveShaderProgram", true));
+    glAttachShader = reinterpret_cast<PFNGLATTACHSHADER>(GetGfxProcAddress("glAttachShader", true));
+    glBindAttribLocation = reinterpret_cast<PFNGLBINDATTRIBLOCATION>(
+            GetGfxProcAddress("glBindAttribLocation", true));
+    glBindProgramPipeline = reinterpret_cast<PFNGLBINDPROGRAMPIPELINE>(
+            GetGfxProcAddress("glBindProgramPipeline", true));
+    glCompileShader =
+            reinterpret_cast<PFNGLCOMPILESHADER>(GetGfxProcAddress("glCompileShader", true));
+    glCreateProgram =
+            reinterpret_cast<PFNGLCREATEPROGRAM>(GetGfxProcAddress("glCreateProgram", true));
+    glCreateShader = reinterpret_cast<PFNGLCREATESHADER>(GetGfxProcAddress("glCreateShader", true));
+    glCreateShaderProgramv = reinterpret_cast<PFNGLCREATESHADERPROGRAMV>(
+            GetGfxProcAddress("glCreateShaderProgramv", true));
+    glDeleteProgram =
+            reinterpret_cast<PFNGLDELETEPROGRAM>(GetGfxProcAddress("glDeleteProgram", true));
+    glDeleteProgramPipelines = reinterpret_cast<PFNGLDELETEPROGRAMPIPELINES>(
+            GetGfxProcAddress("glDeleteProgramPipelines", true));
+    glDeleteShader = reinterpret_cast<PFNGLDELETESHADER>(GetGfxProcAddress("glDeleteShader", true));
+    glDetachShader = reinterpret_cast<PFNGLDETACHSHADER>(GetGfxProcAddress("glDetachShader", true));
+    glDispatchCompute =
+            reinterpret_cast<PFNGLDISPATCHCOMPUTE>(GetGfxProcAddress("glDispatchCompute", true));
+    glDispatchComputeIndirect = reinterpret_cast<PFNGLDISPATCHCOMPUTEINDIRECT>(
+            GetGfxProcAddress("glDispatchComputeIndirect", true));
+    glGenProgramPipelines = reinterpret_cast<PFNGLGENPROGRAMPIPELINES>(
+            GetGfxProcAddress("glGenProgramPipelines", true));
+    glGetActiveAttrib =
+            reinterpret_cast<PFNGLGETACTIVEATTRIB>(GetGfxProcAddress("glGetActiveAttrib", true));
+    glGetActiveUniform =
+            reinterpret_cast<PFNGLGETACTIVEUNIFORM>(GetGfxProcAddress("glGetActiveUniform", true));
+    glGetActiveUniformBlockName = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKNAME>(
+            GetGfxProcAddress("glGetActiveUniformBlockName", true));
+    glGetActiveUniformBlockiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKIV>(
+            GetGfxProcAddress("glGetActiveUniformBlockiv", true));
+    glGetActiveUniformsiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMSIV>(
+            GetGfxProcAddress("glGetActiveUniformsiv", true));
+    glGetAttachedShaders = reinterpret_cast<PFNGLGETATTACHEDSHADERS>(
+            GetGfxProcAddress("glGetAttachedShaders", true));
+    glGetAttribLocation = reinterpret_cast<PFNGLGETATTRIBLOCATION>(
+            GetGfxProcAddress("glGetAttribLocation", true));
+    glGetFragDataLocation = reinterpret_cast<PFNGLGETFRAGDATALOCATION>(
+            GetGfxProcAddress("glGetFragDataLocation", true));
+    glGetProgramBinary =
+            reinterpret_cast<PFNGLGETPROGRAMBINARY>(GetGfxProcAddress("glGetProgramBinary", true));
+    glGetProgramInfoLog = reinterpret_cast<PFNGLGETPROGRAMINFOLOG>(
+            GetGfxProcAddress("glGetProgramInfoLog", true));
+    glGetProgramInterfaceiv = reinterpret_cast<PFNGLGETPROGRAMINTERFACEIV>(
+            GetGfxProcAddress("glGetProgramInterfaceiv", true));
+    glGetProgramPipelineInfoLog = reinterpret_cast<PFNGLGETPROGRAMPIPELINEINFOLOG>(
+            GetGfxProcAddress("glGetProgramPipelineInfoLog", true));
+    glGetProgramPipelineiv = reinterpret_cast<PFNGLGETPROGRAMPIPELINEIV>(
+            GetGfxProcAddress("glGetProgramPipelineiv", true));
+    glGetProgramResourceIndex = reinterpret_cast<PFNGLGETPROGRAMRESOURCEINDEX>(
+            GetGfxProcAddress("glGetProgramResourceIndex", true));
+    glGetProgramResourceLocation = reinterpret_cast<PFNGLGETPROGRAMRESOURCELOCATION>(
+            GetGfxProcAddress("glGetProgramResourceLocation", true));
+    glGetProgramResourceName = reinterpret_cast<PFNGLGETPROGRAMRESOURCENAME>(
+            GetGfxProcAddress("glGetProgramResourceName", true));
+    glGetProgramResourceiv = reinterpret_cast<PFNGLGETPROGRAMRESOURCEIV>(
+            GetGfxProcAddress("glGetProgramResourceiv", true));
+    glGetProgramiv = reinterpret_cast<PFNGLGETPROGRAMIV>(GetGfxProcAddress("glGetProgramiv", true));
+    glGetShaderInfoLog =
+            reinterpret_cast<PFNGLGETSHADERINFOLOG>(GetGfxProcAddress("glGetShaderInfoLog", true));
+    glGetShaderPrecisionFormat = reinterpret_cast<PFNGLGETSHADERPRECISIONFORMAT>(
+            GetGfxProcAddress("glGetShaderPrecisionFormat", true));
+    glGetShaderSource =
+            reinterpret_cast<PFNGLGETSHADERSOURCE>(GetGfxProcAddress("glGetShaderSource", true));
+    glGetShaderiv = reinterpret_cast<PFNGLGETSHADERIV>(GetGfxProcAddress("glGetShaderiv", true));
+    glGetUniformBlockIndex = reinterpret_cast<PFNGLGETUNIFORMBLOCKINDEX>(
+            GetGfxProcAddress("glGetUniformBlockIndex", true));
+    glGetUniformIndices = reinterpret_cast<PFNGLGETUNIFORMINDICES>(
+            GetGfxProcAddress("glGetUniformIndices", true));
+    glGetUniformLocation = reinterpret_cast<PFNGLGETUNIFORMLOCATION>(
+            GetGfxProcAddress("glGetUniformLocation", true));
+    glGetUniformfv = reinterpret_cast<PFNGLGETUNIFORMFV>(GetGfxProcAddress("glGetUniformfv", true));
+    glGetUniformiv = reinterpret_cast<PFNGLGETUNIFORMIV>(GetGfxProcAddress("glGetUniformiv", true));
+    glGetUniformuiv =
+            reinterpret_cast<PFNGLGETUNIFORMUIV>(GetGfxProcAddress("glGetUniformuiv", true));
+    glIsProgram = reinterpret_cast<PFNGLISPROGRAM>(GetGfxProcAddress("glIsProgram", true));
+    glIsProgramPipeline = reinterpret_cast<PFNGLISPROGRAMPIPELINE>(
+            GetGfxProcAddress("glIsProgramPipeline", true));
+    glIsShader = reinterpret_cast<PFNGLISSHADER>(GetGfxProcAddress("glIsShader", true));
+    glLinkProgram = reinterpret_cast<PFNGLLINKPROGRAM>(GetGfxProcAddress("glLinkProgram", true));
+    glMemoryBarrier =
+            reinterpret_cast<PFNGLMEMORYBARRIER>(GetGfxProcAddress("glMemoryBarrier", true));
+    glMemoryBarrierByRegion = reinterpret_cast<PFNGLMEMORYBARRIERBYREGION>(
+            GetGfxProcAddress("glMemoryBarrierByRegion", true));
+    glProgramBinary =
+            reinterpret_cast<PFNGLPROGRAMBINARY>(GetGfxProcAddress("glProgramBinary", true));
+    glProgramParameteri = reinterpret_cast<PFNGLPROGRAMPARAMETERI>(
+            GetGfxProcAddress("glProgramParameteri", true));
+    glProgramUniform1f =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM1F>(GetGfxProcAddress("glProgramUniform1f", true));
+    glProgramUniform1fv = reinterpret_cast<PFNGLPROGRAMUNIFORM1FV>(
+            GetGfxProcAddress("glProgramUniform1fv", true));
+    glProgramUniform1i =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM1I>(GetGfxProcAddress("glProgramUniform1i", true));
+    glProgramUniform1iv = reinterpret_cast<PFNGLPROGRAMUNIFORM1IV>(
+            GetGfxProcAddress("glProgramUniform1iv", true));
+    glProgramUniform1ui = reinterpret_cast<PFNGLPROGRAMUNIFORM1UI>(
+            GetGfxProcAddress("glProgramUniform1ui", true));
+    glProgramUniform1uiv = reinterpret_cast<PFNGLPROGRAMUNIFORM1UIV>(
+            GetGfxProcAddress("glProgramUniform1uiv", true));
+    glProgramUniform2f =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM2F>(GetGfxProcAddress("glProgramUniform2f", true));
+    glProgramUniform2fv = reinterpret_cast<PFNGLPROGRAMUNIFORM2FV>(
+            GetGfxProcAddress("glProgramUniform2fv", true));
+    glProgramUniform2i =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM2I>(GetGfxProcAddress("glProgramUniform2i", true));
+    glProgramUniform2iv = reinterpret_cast<PFNGLPROGRAMUNIFORM2IV>(
+            GetGfxProcAddress("glProgramUniform2iv", true));
+    glProgramUniform2ui = reinterpret_cast<PFNGLPROGRAMUNIFORM2UI>(
+            GetGfxProcAddress("glProgramUniform2ui", true));
+    glProgramUniform2uiv = reinterpret_cast<PFNGLPROGRAMUNIFORM2UIV>(
+            GetGfxProcAddress("glProgramUniform2uiv", true));
+    glProgramUniform3f =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM3F>(GetGfxProcAddress("glProgramUniform3f", true));
+    glProgramUniform3fv = reinterpret_cast<PFNGLPROGRAMUNIFORM3FV>(
+            GetGfxProcAddress("glProgramUniform3fv", true));
+    glProgramUniform3i =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM3I>(GetGfxProcAddress("glProgramUniform3i", true));
+    glProgramUniform3iv = reinterpret_cast<PFNGLPROGRAMUNIFORM3IV>(
+            GetGfxProcAddress("glProgramUniform3iv", true));
+    glProgramUniform3ui = reinterpret_cast<PFNGLPROGRAMUNIFORM3UI>(
+            GetGfxProcAddress("glProgramUniform3ui", true));
+    glProgramUniform3uiv = reinterpret_cast<PFNGLPROGRAMUNIFORM3UIV>(
+            GetGfxProcAddress("glProgramUniform3uiv", true));
+    glProgramUniform4f =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM4F>(GetGfxProcAddress("glProgramUniform4f", true));
+    glProgramUniform4fv = reinterpret_cast<PFNGLPROGRAMUNIFORM4FV>(
+            GetGfxProcAddress("glProgramUniform4fv", true));
+    glProgramUniform4i =
+            reinterpret_cast<PFNGLPROGRAMUNIFORM4I>(GetGfxProcAddress("glProgramUniform4i", true));
+    glProgramUniform4iv = reinterpret_cast<PFNGLPROGRAMUNIFORM4IV>(
+            GetGfxProcAddress("glProgramUniform4iv", true));
+    glProgramUniform4ui = reinterpret_cast<PFNGLPROGRAMUNIFORM4UI>(
+            GetGfxProcAddress("glProgramUniform4ui", true));
+    glProgramUniform4uiv = reinterpret_cast<PFNGLPROGRAMUNIFORM4UIV>(
+            GetGfxProcAddress("glProgramUniform4uiv", true));
+    glProgramUniformMatrix2fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2FV>(
+            GetGfxProcAddress("glProgramUniformMatrix2fv", true));
+    glProgramUniformMatrix2x3fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2X3FV>(
+            GetGfxProcAddress("glProgramUniformMatrix2x3fv", true));
+    glProgramUniformMatrix2x4fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX2X4FV>(
+            GetGfxProcAddress("glProgramUniformMatrix2x4fv", true));
+    glProgramUniformMatrix3fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3FV>(
+            GetGfxProcAddress("glProgramUniformMatrix3fv", true));
+    glProgramUniformMatrix3x2fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3X2FV>(
+            GetGfxProcAddress("glProgramUniformMatrix3x2fv", true));
+    glProgramUniformMatrix3x4fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX3X4FV>(
+            GetGfxProcAddress("glProgramUniformMatrix3x4fv", true));
+    glProgramUniformMatrix4fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4FV>(
+            GetGfxProcAddress("glProgramUniformMatrix4fv", true));
+    glProgramUniformMatrix4x2fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4X2FV>(
+            GetGfxProcAddress("glProgramUniformMatrix4x2fv", true));
+    glProgramUniformMatrix4x3fv = reinterpret_cast<PFNGLPROGRAMUNIFORMMATRIX4X3FV>(
+            GetGfxProcAddress("glProgramUniformMatrix4x3fv", true));
+    glReleaseShaderCompiler = reinterpret_cast<PFNGLRELEASESHADERCOMPILER>(
+            GetGfxProcAddress("glReleaseShaderCompiler", true));
+    glShaderBinary = reinterpret_cast<PFNGLSHADERBINARY>(GetGfxProcAddress("glShaderBinary", true));
+    glShaderSource = reinterpret_cast<PFNGLSHADERSOURCE>(GetGfxProcAddress("glShaderSource", true));
+    glUniform1f = reinterpret_cast<PFNGLUNIFORM1F>(GetGfxProcAddress("glUniform1f", true));
+    glUniform1fv = reinterpret_cast<PFNGLUNIFORM1FV>(GetGfxProcAddress("glUniform1fv", true));
+    glUniform1i = reinterpret_cast<PFNGLUNIFORM1I>(GetGfxProcAddress("glUniform1i", true));
+    glUniform1iv = reinterpret_cast<PFNGLUNIFORM1IV>(GetGfxProcAddress("glUniform1iv", true));
+    glUniform1ui = reinterpret_cast<PFNGLUNIFORM1UI>(GetGfxProcAddress("glUniform1ui", true));
+    glUniform1uiv = reinterpret_cast<PFNGLUNIFORM1UIV>(GetGfxProcAddress("glUniform1uiv", true));
+    glUniform2f = reinterpret_cast<PFNGLUNIFORM2F>(GetGfxProcAddress("glUniform2f", true));
+    glUniform2fv = reinterpret_cast<PFNGLUNIFORM2FV>(GetGfxProcAddress("glUniform2fv", true));
+    glUniform2i = reinterpret_cast<PFNGLUNIFORM2I>(GetGfxProcAddress("glUniform2i", true));
+    glUniform2iv = reinterpret_cast<PFNGLUNIFORM2IV>(GetGfxProcAddress("glUniform2iv", true));
+    glUniform2ui = reinterpret_cast<PFNGLUNIFORM2UI>(GetGfxProcAddress("glUniform2ui", true));
+    glUniform2uiv = reinterpret_cast<PFNGLUNIFORM2UIV>(GetGfxProcAddress("glUniform2uiv", true));
+    glUniform3f = reinterpret_cast<PFNGLUNIFORM3F>(GetGfxProcAddress("glUniform3f", true));
+    glUniform3fv = reinterpret_cast<PFNGLUNIFORM3FV>(GetGfxProcAddress("glUniform3fv", true));
+    glUniform3i = reinterpret_cast<PFNGLUNIFORM3I>(GetGfxProcAddress("glUniform3i", true));
+    glUniform3iv = reinterpret_cast<PFNGLUNIFORM3IV>(GetGfxProcAddress("glUniform3iv", true));
+    glUniform3ui = reinterpret_cast<PFNGLUNIFORM3UI>(GetGfxProcAddress("glUniform3ui", true));
+    glUniform3uiv = reinterpret_cast<PFNGLUNIFORM3UIV>(GetGfxProcAddress("glUniform3uiv", true));
+    glUniform4f = reinterpret_cast<PFNGLUNIFORM4F>(GetGfxProcAddress("glUniform4f", true));
+    glUniform4fv = reinterpret_cast<PFNGLUNIFORM4FV>(GetGfxProcAddress("glUniform4fv", true));
+    glUniform4i = reinterpret_cast<PFNGLUNIFORM4I>(GetGfxProcAddress("glUniform4i", true));
+    glUniform4iv = reinterpret_cast<PFNGLUNIFORM4IV>(GetGfxProcAddress("glUniform4iv", true));
+    glUniform4ui = reinterpret_cast<PFNGLUNIFORM4UI>(GetGfxProcAddress("glUniform4ui", true));
+    glUniform4uiv = reinterpret_cast<PFNGLUNIFORM4UIV>(GetGfxProcAddress("glUniform4uiv", true));
+    glUniformBlockBinding = reinterpret_cast<PFNGLUNIFORMBLOCKBINDING>(
+            GetGfxProcAddress("glUniformBlockBinding", true));
+    glUniformMatrix2fv =
+            reinterpret_cast<PFNGLUNIFORMMATRIX2FV>(GetGfxProcAddress("glUniformMatrix2fv", true));
+    glUniformMatrix2x3fv = reinterpret_cast<PFNGLUNIFORMMATRIX2X3FV>(
+            GetGfxProcAddress("glUniformMatrix2x3fv", true));
+    glUniformMatrix2x4fv = reinterpret_cast<PFNGLUNIFORMMATRIX2X4FV>(
+            GetGfxProcAddress("glUniformMatrix2x4fv", true));
+    glUniformMatrix3fv =
+            reinterpret_cast<PFNGLUNIFORMMATRIX3FV>(GetGfxProcAddress("glUniformMatrix3fv", true));
+    glUniformMatrix3x2fv = reinterpret_cast<PFNGLUNIFORMMATRIX3X2FV>(
+            GetGfxProcAddress("glUniformMatrix3x2fv", true));
+    glUniformMatrix3x4fv = reinterpret_cast<PFNGLUNIFORMMATRIX3X4FV>(
+            GetGfxProcAddress("glUniformMatrix3x4fv", true));
+    glUniformMatrix4fv =
+            reinterpret_cast<PFNGLUNIFORMMATRIX4FV>(GetGfxProcAddress("glUniformMatrix4fv", true));
+    glUniformMatrix4x2fv = reinterpret_cast<PFNGLUNIFORMMATRIX4X2FV>(
+            GetGfxProcAddress("glUniformMatrix4x2fv", true));
+    glUniformMatrix4x3fv = reinterpret_cast<PFNGLUNIFORMMATRIX4X3FV>(
+            GetGfxProcAddress("glUniformMatrix4x3fv", true));
+    glUseProgram = reinterpret_cast<PFNGLUSEPROGRAM>(GetGfxProcAddress("glUseProgram", true));
+    glUseProgramStages =
+            reinterpret_cast<PFNGLUSEPROGRAMSTAGES>(GetGfxProcAddress("glUseProgramStages", true));
+    glValidateProgram =
+            reinterpret_cast<PFNGLVALIDATEPROGRAM>(GetGfxProcAddress("glValidateProgram", true));
+    glValidateProgramPipeline = reinterpret_cast<PFNGLVALIDATEPROGRAMPIPELINE>(
+            GetGfxProcAddress("glValidateProgramPipeline", true));
+    glCullFace = reinterpret_cast<PFNGLCULLFACE>(GetGfxProcAddress("glCullFace", true));
+    glDepthRangef = reinterpret_cast<PFNGLDEPTHRANGEF>(GetGfxProcAddress("glDepthRangef", true));
+    glFrontFace = reinterpret_cast<PFNGLFRONTFACE>(GetGfxProcAddress("glFrontFace", true));
+    glGetMultisamplefv =
+            reinterpret_cast<PFNGLGETMULTISAMPLEFV>(GetGfxProcAddress("glGetMultisamplefv", true));
+    glLineWidth = reinterpret_cast<PFNGLLINEWIDTH>(GetGfxProcAddress("glLineWidth", true));
+    glPolygonOffset =
+            reinterpret_cast<PFNGLPOLYGONOFFSET>(GetGfxProcAddress("glPolygonOffset", true));
+    glViewport = reinterpret_cast<PFNGLVIEWPORT>(GetGfxProcAddress("glViewport", true));
+    glGetBooleani_v =
+            reinterpret_cast<PFNGLGETBOOLEANI_V>(GetGfxProcAddress("glGetBooleani_v", true));
+    glGetBooleanv = reinterpret_cast<PFNGLGETBOOLEANV>(GetGfxProcAddress("glGetBooleanv", true));
+    glGetFloatv = reinterpret_cast<PFNGLGETFLOATV>(GetGfxProcAddress("glGetFloatv", true));
+    glGetInteger64i_v =
+            reinterpret_cast<PFNGLGETINTEGER64I_V>(GetGfxProcAddress("glGetInteger64i_v", true));
+    glGetInteger64v =
+            reinterpret_cast<PFNGLGETINTEGER64V>(GetGfxProcAddress("glGetInteger64v", true));
+    glGetIntegeri_v =
+            reinterpret_cast<PFNGLGETINTEGERI_V>(GetGfxProcAddress("glGetIntegeri_v", true));
+    glGetIntegerv = reinterpret_cast<PFNGLGETINTEGERV>(GetGfxProcAddress("glGetIntegerv", true));
+    glGetInternalformativ = reinterpret_cast<PFNGLGETINTERNALFORMATIV>(
+            GetGfxProcAddress("glGetInternalformativ", true));
+    glGetString = reinterpret_cast<PFNGLGETSTRING>(GetGfxProcAddress("glGetString", true));
+    glGetStringi = reinterpret_cast<PFNGLGETSTRINGI>(GetGfxProcAddress("glGetStringi", true));
+    glIsEnabled = reinterpret_cast<PFNGLISENABLED>(GetGfxProcAddress("glIsEnabled", true));
+    glClientWaitSync =
+            reinterpret_cast<PFNGLCLIENTWAITSYNC>(GetGfxProcAddress("glClientWaitSync", true));
+    glDeleteSync = reinterpret_cast<PFNGLDELETESYNC>(GetGfxProcAddress("glDeleteSync", true));
+    glFenceSync = reinterpret_cast<PFNGLFENCESYNC>(GetGfxProcAddress("glFenceSync", true));
+    glGetSynciv = reinterpret_cast<PFNGLGETSYNCIV>(GetGfxProcAddress("glGetSynciv", true));
+    glIsSync = reinterpret_cast<PFNGLISSYNC>(GetGfxProcAddress("glIsSync", true));
+    glWaitSync = reinterpret_cast<PFNGLWAITSYNC>(GetGfxProcAddress("glWaitSync", true));
+    glActiveTexture =
+            reinterpret_cast<PFNGLACTIVETEXTURE>(GetGfxProcAddress("glActiveTexture", true));
+    glBindImageTexture =
+            reinterpret_cast<PFNGLBINDIMAGETEXTURE>(GetGfxProcAddress("glBindImageTexture", true));
+    glBindSampler = reinterpret_cast<PFNGLBINDSAMPLER>(GetGfxProcAddress("glBindSampler", true));
+    glBindTexture = reinterpret_cast<PFNGLBINDTEXTURE>(GetGfxProcAddress("glBindTexture", true));
+    glCompressedTexImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXIMAGE2D>(
+            GetGfxProcAddress("glCompressedTexImage2D", true));
+    glCompressedTexImage3D = reinterpret_cast<PFNGLCOMPRESSEDTEXIMAGE3D>(
+            GetGfxProcAddress("glCompressedTexImage3D", true));
+    glCompressedTexSubImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE2D>(
+            GetGfxProcAddress("glCompressedTexSubImage2D", true));
+    glCompressedTexSubImage3D = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE3D>(
+            GetGfxProcAddress("glCompressedTexSubImage3D", true));
+    glCopyTexImage2D =
+            reinterpret_cast<PFNGLCOPYTEXIMAGE2D>(GetGfxProcAddress("glCopyTexImage2D", true));
+    glCopyTexSubImage2D = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE2D>(
+            GetGfxProcAddress("glCopyTexSubImage2D", true));
+    glCopyTexSubImage3D = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE3D>(
+            GetGfxProcAddress("glCopyTexSubImage3D", true));
+    glDeleteSamplers =
+            reinterpret_cast<PFNGLDELETESAMPLERS>(GetGfxProcAddress("glDeleteSamplers", true));
+    glDeleteTextures =
+            reinterpret_cast<PFNGLDELETETEXTURES>(GetGfxProcAddress("glDeleteTextures", true));
+    glGenSamplers = reinterpret_cast<PFNGLGENSAMPLERS>(GetGfxProcAddress("glGenSamplers", true));
+    glGenTextures = reinterpret_cast<PFNGLGENTEXTURES>(GetGfxProcAddress("glGenTextures", true));
+    glGenerateMipmap =
+            reinterpret_cast<PFNGLGENERATEMIPMAP>(GetGfxProcAddress("glGenerateMipmap", true));
+    glGetSamplerParameterfv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERFV>(
+            GetGfxProcAddress("glGetSamplerParameterfv", true));
+    glGetSamplerParameteriv = reinterpret_cast<PFNGLGETSAMPLERPARAMETERIV>(
+            GetGfxProcAddress("glGetSamplerParameteriv", true));
+    glGetTexLevelParameterfv = reinterpret_cast<PFNGLGETTEXLEVELPARAMETERFV>(
+            GetGfxProcAddress("glGetTexLevelParameterfv", true));
+    glGetTexLevelParameteriv = reinterpret_cast<PFNGLGETTEXLEVELPARAMETERIV>(
+            GetGfxProcAddress("glGetTexLevelParameteriv", true));
+    glGetTexParameterfv = reinterpret_cast<PFNGLGETTEXPARAMETERFV>(
+            GetGfxProcAddress("glGetTexParameterfv", true));
+    glGetTexParameteriv = reinterpret_cast<PFNGLGETTEXPARAMETERIV>(
+            GetGfxProcAddress("glGetTexParameteriv", true));
+    glIsSampler = reinterpret_cast<PFNGLISSAMPLER>(GetGfxProcAddress("glIsSampler", true));
+    glIsTexture = reinterpret_cast<PFNGLISTEXTURE>(GetGfxProcAddress("glIsTexture", true));
+    glPixelStorei = reinterpret_cast<PFNGLPIXELSTOREI>(GetGfxProcAddress("glPixelStorei", true));
+    glSamplerParameterf = reinterpret_cast<PFNGLSAMPLERPARAMETERF>(
+            GetGfxProcAddress("glSamplerParameterf", true));
+    glSamplerParameterfv = reinterpret_cast<PFNGLSAMPLERPARAMETERFV>(
+            GetGfxProcAddress("glSamplerParameterfv", true));
+    glSamplerParameteri = reinterpret_cast<PFNGLSAMPLERPARAMETERI>(
+            GetGfxProcAddress("glSamplerParameteri", true));
+    glSamplerParameteriv = reinterpret_cast<PFNGLSAMPLERPARAMETERIV>(
+            GetGfxProcAddress("glSamplerParameteriv", true));
+    glTexImage2D = reinterpret_cast<PFNGLTEXIMAGE2D>(GetGfxProcAddress("glTexImage2D", true));
+    glTexImage3D = reinterpret_cast<PFNGLTEXIMAGE3D>(GetGfxProcAddress("glTexImage3D", true));
+    glTexParameterf =
+            reinterpret_cast<PFNGLTEXPARAMETERF>(GetGfxProcAddress("glTexParameterf", true));
+    glTexParameterfv =
+            reinterpret_cast<PFNGLTEXPARAMETERFV>(GetGfxProcAddress("glTexParameterfv", true));
+    glTexParameteri =
+            reinterpret_cast<PFNGLTEXPARAMETERI>(GetGfxProcAddress("glTexParameteri", true));
+    glTexParameteriv =
+            reinterpret_cast<PFNGLTEXPARAMETERIV>(GetGfxProcAddress("glTexParameteriv", true));
+    glTexStorage2D = reinterpret_cast<PFNGLTEXSTORAGE2D>(GetGfxProcAddress("glTexStorage2D", true));
+    glTexStorage2DMultisample = reinterpret_cast<PFNGLTEXSTORAGE2DMULTISAMPLE>(
+            GetGfxProcAddress("glTexStorage2DMultisample", true));
+    glTexStorage3D = reinterpret_cast<PFNGLTEXSTORAGE3D>(GetGfxProcAddress("glTexStorage3D", true));
+    glTexSubImage2D =
+            reinterpret_cast<PFNGLTEXSUBIMAGE2D>(GetGfxProcAddress("glTexSubImage2D", true));
+    glTexSubImage3D =
+            reinterpret_cast<PFNGLTEXSUBIMAGE3D>(GetGfxProcAddress("glTexSubImage3D", true));
+    glBeginTransformFeedback = reinterpret_cast<PFNGLBEGINTRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glBeginTransformFeedback", true));
+    glBindTransformFeedback = reinterpret_cast<PFNGLBINDTRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glBindTransformFeedback", true));
+    glDeleteTransformFeedbacks = reinterpret_cast<PFNGLDELETETRANSFORMFEEDBACKS>(
+            GetGfxProcAddress("glDeleteTransformFeedbacks", true));
+    glEndTransformFeedback = reinterpret_cast<PFNGLENDTRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glEndTransformFeedback", true));
+    glGenTransformFeedbacks = reinterpret_cast<PFNGLGENTRANSFORMFEEDBACKS>(
+            GetGfxProcAddress("glGenTransformFeedbacks", true));
+    glGetTransformFeedbackVarying = reinterpret_cast<PFNGLGETTRANSFORMFEEDBACKVARYING>(
+            GetGfxProcAddress("glGetTransformFeedbackVarying", true));
+    glIsTransformFeedback = reinterpret_cast<PFNGLISTRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glIsTransformFeedback", true));
+    glPauseTransformFeedback = reinterpret_cast<PFNGLPAUSETRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glPauseTransformFeedback", true));
+    glResumeTransformFeedback = reinterpret_cast<PFNGLRESUMETRANSFORMFEEDBACK>(
+            GetGfxProcAddress("glResumeTransformFeedback", true));
+    glTransformFeedbackVaryings = reinterpret_cast<PFNGLTRANSFORMFEEDBACKVARYINGS>(
+            GetGfxProcAddress("glTransformFeedbackVaryings", true));
+    glBindVertexArray =
+            reinterpret_cast<PFNGLBINDVERTEXARRAY>(GetGfxProcAddress("glBindVertexArray", true));
+    glBindVertexBuffer =
+            reinterpret_cast<PFNGLBINDVERTEXBUFFER>(GetGfxProcAddress("glBindVertexBuffer", true));
+    glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
+            GetGfxProcAddress("glDeleteVertexArrays", true));
+    glDisableVertexAttribArray = reinterpret_cast<PFNGLDISABLEVERTEXATTRIBARRAY>(
+            GetGfxProcAddress("glDisableVertexAttribArray", true));
+    glEnableVertexAttribArray = reinterpret_cast<PFNGLENABLEVERTEXATTRIBARRAY>(
+            GetGfxProcAddress("glEnableVertexAttribArray", true));
+    glGenVertexArrays =
+            reinterpret_cast<PFNGLGENVERTEXARRAYS>(GetGfxProcAddress("glGenVertexArrays", true));
+    glGetVertexAttribIiv = reinterpret_cast<PFNGLGETVERTEXATTRIBIIV>(
+            GetGfxProcAddress("glGetVertexAttribIiv", true));
+    glGetVertexAttribIuiv = reinterpret_cast<PFNGLGETVERTEXATTRIBIUIV>(
+            GetGfxProcAddress("glGetVertexAttribIuiv", true));
+    glGetVertexAttribPointerv = reinterpret_cast<PFNGLGETVERTEXATTRIBPOINTERV>(
+            GetGfxProcAddress("glGetVertexAttribPointerv", true));
+    glGetVertexAttribfv = reinterpret_cast<PFNGLGETVERTEXATTRIBFV>(
+            GetGfxProcAddress("glGetVertexAttribfv", true));
+    glGetVertexAttribiv = reinterpret_cast<PFNGLGETVERTEXATTRIBIV>(
+            GetGfxProcAddress("glGetVertexAttribiv", true));
+    glIsVertexArray =
+            reinterpret_cast<PFNGLISVERTEXARRAY>(GetGfxProcAddress("glIsVertexArray", true));
+    glVertexAttrib1f =
+            reinterpret_cast<PFNGLVERTEXATTRIB1F>(GetGfxProcAddress("glVertexAttrib1f", true));
+    glVertexAttrib1fv =
+            reinterpret_cast<PFNGLVERTEXATTRIB1FV>(GetGfxProcAddress("glVertexAttrib1fv", true));
+    glVertexAttrib2f =
+            reinterpret_cast<PFNGLVERTEXATTRIB2F>(GetGfxProcAddress("glVertexAttrib2f", true));
+    glVertexAttrib2fv =
+            reinterpret_cast<PFNGLVERTEXATTRIB2FV>(GetGfxProcAddress("glVertexAttrib2fv", true));
+    glVertexAttrib3f =
+            reinterpret_cast<PFNGLVERTEXATTRIB3F>(GetGfxProcAddress("glVertexAttrib3f", true));
+    glVertexAttrib3fv =
+            reinterpret_cast<PFNGLVERTEXATTRIB3FV>(GetGfxProcAddress("glVertexAttrib3fv", true));
+    glVertexAttrib4f =
+            reinterpret_cast<PFNGLVERTEXATTRIB4F>(GetGfxProcAddress("glVertexAttrib4f", true));
+    glVertexAttrib4fv =
+            reinterpret_cast<PFNGLVERTEXATTRIB4FV>(GetGfxProcAddress("glVertexAttrib4fv", true));
+    glVertexAttribBinding = reinterpret_cast<PFNGLVERTEXATTRIBBINDING>(
+            GetGfxProcAddress("glVertexAttribBinding", true));
+    glVertexAttribDivisor = reinterpret_cast<PFNGLVERTEXATTRIBDIVISOR>(
+            GetGfxProcAddress("glVertexAttribDivisor", true));
+    glVertexAttribFormat = reinterpret_cast<PFNGLVERTEXATTRIBFORMAT>(
+            GetGfxProcAddress("glVertexAttribFormat", true));
+    glVertexAttribI4i =
+            reinterpret_cast<PFNGLVERTEXATTRIBI4I>(GetGfxProcAddress("glVertexAttribI4i", true));
+    glVertexAttribI4iv =
+            reinterpret_cast<PFNGLVERTEXATTRIBI4IV>(GetGfxProcAddress("glVertexAttribI4iv", true));
+    glVertexAttribI4ui =
+            reinterpret_cast<PFNGLVERTEXATTRIBI4UI>(GetGfxProcAddress("glVertexAttribI4ui", true));
+    glVertexAttribI4uiv = reinterpret_cast<PFNGLVERTEXATTRIBI4UIV>(
+            GetGfxProcAddress("glVertexAttribI4uiv", true));
+    glVertexAttribIFormat = reinterpret_cast<PFNGLVERTEXATTRIBIFORMAT>(
+            GetGfxProcAddress("glVertexAttribIFormat", true));
+    glVertexAttribIPointer = reinterpret_cast<PFNGLVERTEXATTRIBIPOINTER>(
+            GetGfxProcAddress("glVertexAttribIPointer", true));
+    glVertexAttribPointer = reinterpret_cast<PFNGLVERTEXATTRIBPOINTER>(
+            GetGfxProcAddress("glVertexAttribPointer", true));
+    glVertexBindingDivisor = reinterpret_cast<PFNGLVERTEXBINDINGDIVISOR>(
+            GetGfxProcAddress("glVertexBindingDivisor", true));
     eglInitialize = reinterpret_cast<PFNEGLINITIALIZE>(GetGfxProcAddress("eglInitialize", true));
     eglCreateContext =
             reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext", true));
@@ -56,318 +1294,10 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("CGSGetSurfaceBounds", true));
     CGLFlushDrawable =
             reinterpret_cast<PFNCGLFLUSHDRAWABLE>(GetGfxProcAddress("CGLFlushDrawable", true));
-    glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
-            GetGfxProcAddress("glEnableClientState", true));
-    glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(
-            GetGfxProcAddress("glDisableClientState", true));
-    glGetProgramBinaryOES = reinterpret_cast<PFNGLGETPROGRAMBINARYOES>(
-            GetGfxProcAddress("glGetProgramBinaryOES", true));
-    glProgramBinaryOES =
-            reinterpret_cast<PFNGLPROGRAMBINARYOES>(GetGfxProcAddress("glProgramBinaryOES", true));
-    glStartTilingQCOM =
-            reinterpret_cast<PFNGLSTARTTILINGQCOM>(GetGfxProcAddress("glStartTilingQCOM", true));
-    glEndTilingQCOM =
-            reinterpret_cast<PFNGLENDTILINGQCOM>(GetGfxProcAddress("glEndTilingQCOM", true));
-    glDiscardFramebufferEXT = reinterpret_cast<PFNGLDISCARDFRAMEBUFFEREXT>(
-            GetGfxProcAddress("glDiscardFramebufferEXT", true));
-    glInsertEventMarkerEXT = reinterpret_cast<PFNGLINSERTEVENTMARKEREXT>(
-            GetGfxProcAddress("glInsertEventMarkerEXT", true));
-    glPushGroupMarkerEXT = reinterpret_cast<PFNGLPUSHGROUPMARKEREXT>(
-            GetGfxProcAddress("glPushGroupMarkerEXT", true));
-    glPopGroupMarkerEXT = reinterpret_cast<PFNGLPOPGROUPMARKEREXT>(
-            GetGfxProcAddress("glPopGroupMarkerEXT", true));
-    glTexStorage1DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE1DEXT>(GetGfxProcAddress("glTexStorage1DEXT", true));
-    glTexStorage2DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE2DEXT>(GetGfxProcAddress("glTexStorage2DEXT", true));
-    glTexStorage3DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE3DEXT>(GetGfxProcAddress("glTexStorage3DEXT", true));
-    glTextureStorage1DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE1DEXT>(
-            GetGfxProcAddress("glTextureStorage1DEXT", true));
-    glTextureStorage2DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE2DEXT>(
-            GetGfxProcAddress("glTextureStorage2DEXT", true));
-    glTextureStorage3DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE3DEXT>(
-            GetGfxProcAddress("glTextureStorage3DEXT", true));
-    glGenVertexArraysOES = reinterpret_cast<PFNGLGENVERTEXARRAYSOES>(
-            GetGfxProcAddress("glGenVertexArraysOES", true));
-    glBindVertexArrayOES = reinterpret_cast<PFNGLBINDVERTEXARRAYOES>(
-            GetGfxProcAddress("glBindVertexArrayOES", true));
-    glDeleteVertexArraysOES = reinterpret_cast<PFNGLDELETEVERTEXARRAYSOES>(
-            GetGfxProcAddress("glDeleteVertexArraysOES", true));
-    glIsVertexArrayOES =
-            reinterpret_cast<PFNGLISVERTEXARRAYOES>(GetGfxProcAddress("glIsVertexArrayOES", true));
-    glEGLImageTargetTexture2DOES = reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOES>(
-            GetGfxProcAddress("glEGLImageTargetTexture2DOES", true));
-    glEGLImageTargetRenderbufferStorageOES =
-            reinterpret_cast<PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES>(
-                    GetGfxProcAddress("glEGLImageTargetRenderbufferStorageOES", true));
-    glGetGraphicsResetStatusEXT = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSEXT>(
-            GetGfxProcAddress("glGetGraphicsResetStatusEXT", true));
-    glBindAttribLocation = reinterpret_cast<PFNGLBINDATTRIBLOCATION>(
-            GetGfxProcAddress("glBindAttribLocation", true));
-    glBlendFunc = reinterpret_cast<PFNGLBLENDFUNC>(GetGfxProcAddress("glBlendFunc", true));
-    glBlendFuncSeparate = reinterpret_cast<PFNGLBLENDFUNCSEPARATE>(
-            GetGfxProcAddress("glBlendFuncSeparate", true));
-    glBlendEquation =
-            reinterpret_cast<PFNGLBLENDEQUATION>(GetGfxProcAddress("glBlendEquation", true));
-    glBlendEquationSeparate = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATE>(
-            GetGfxProcAddress("glBlendEquationSeparate", true));
-    glBlendColor = reinterpret_cast<PFNGLBLENDCOLOR>(GetGfxProcAddress("glBlendColor", true));
-    glEnableVertexAttribArray = reinterpret_cast<PFNGLENABLEVERTEXATTRIBARRAY>(
-            GetGfxProcAddress("glEnableVertexAttribArray", true));
-    glDisableVertexAttribArray = reinterpret_cast<PFNGLDISABLEVERTEXATTRIBARRAY>(
-            GetGfxProcAddress("glDisableVertexAttribArray", true));
-    glVertexAttribPointer = reinterpret_cast<PFNGLVERTEXATTRIBPOINTER>(
-            GetGfxProcAddress("glVertexAttribPointer", true));
-    glGetActiveAttrib =
-            reinterpret_cast<PFNGLGETACTIVEATTRIB>(GetGfxProcAddress("glGetActiveAttrib", true));
-    glGetActiveUniform =
-            reinterpret_cast<PFNGLGETACTIVEUNIFORM>(GetGfxProcAddress("glGetActiveUniform", true));
-    glGetError = reinterpret_cast<PFNGLGETERROR>(GetGfxProcAddress("glGetError", true));
-    glGetProgramiv = reinterpret_cast<PFNGLGETPROGRAMIV>(GetGfxProcAddress("glGetProgramiv", true));
-    glGetShaderiv = reinterpret_cast<PFNGLGETSHADERIV>(GetGfxProcAddress("glGetShaderiv", true));
-    glGetUniformLocation = reinterpret_cast<PFNGLGETUNIFORMLOCATION>(
-            GetGfxProcAddress("glGetUniformLocation", true));
-    glGetAttribLocation = reinterpret_cast<PFNGLGETATTRIBLOCATION>(
-            GetGfxProcAddress("glGetAttribLocation", true));
-    glPixelStorei = reinterpret_cast<PFNGLPIXELSTOREI>(GetGfxProcAddress("glPixelStorei", true));
-    glTexParameteri =
-            reinterpret_cast<PFNGLTEXPARAMETERI>(GetGfxProcAddress("glTexParameteri", true));
-    glTexParameterf =
-            reinterpret_cast<PFNGLTEXPARAMETERF>(GetGfxProcAddress("glTexParameterf", true));
-    glGetTexParameteriv = reinterpret_cast<PFNGLGETTEXPARAMETERIV>(
-            GetGfxProcAddress("glGetTexParameteriv", true));
-    glGetTexParameterfv = reinterpret_cast<PFNGLGETTEXPARAMETERFV>(
-            GetGfxProcAddress("glGetTexParameterfv", true));
-    glUniform1i = reinterpret_cast<PFNGLUNIFORM1I>(GetGfxProcAddress("glUniform1i", true));
-    glUniform2i = reinterpret_cast<PFNGLUNIFORM2I>(GetGfxProcAddress("glUniform2i", true));
-    glUniform3i = reinterpret_cast<PFNGLUNIFORM3I>(GetGfxProcAddress("glUniform3i", true));
-    glUniform4i = reinterpret_cast<PFNGLUNIFORM4I>(GetGfxProcAddress("glUniform4i", true));
-    glUniform1iv = reinterpret_cast<PFNGLUNIFORM1IV>(GetGfxProcAddress("glUniform1iv", true));
-    glUniform2iv = reinterpret_cast<PFNGLUNIFORM2IV>(GetGfxProcAddress("glUniform2iv", true));
-    glUniform3iv = reinterpret_cast<PFNGLUNIFORM3IV>(GetGfxProcAddress("glUniform3iv", true));
-    glUniform4iv = reinterpret_cast<PFNGLUNIFORM4IV>(GetGfxProcAddress("glUniform4iv", true));
-    glUniform1f = reinterpret_cast<PFNGLUNIFORM1F>(GetGfxProcAddress("glUniform1f", true));
-    glUniform2f = reinterpret_cast<PFNGLUNIFORM2F>(GetGfxProcAddress("glUniform2f", true));
-    glUniform3f = reinterpret_cast<PFNGLUNIFORM3F>(GetGfxProcAddress("glUniform3f", true));
-    glUniform4f = reinterpret_cast<PFNGLUNIFORM4F>(GetGfxProcAddress("glUniform4f", true));
-    glUniform1fv = reinterpret_cast<PFNGLUNIFORM1FV>(GetGfxProcAddress("glUniform1fv", true));
-    glUniform2fv = reinterpret_cast<PFNGLUNIFORM2FV>(GetGfxProcAddress("glUniform2fv", true));
-    glUniform3fv = reinterpret_cast<PFNGLUNIFORM3FV>(GetGfxProcAddress("glUniform3fv", true));
-    glUniform4fv = reinterpret_cast<PFNGLUNIFORM4FV>(GetGfxProcAddress("glUniform4fv", true));
-    glUniformMatrix2fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX2FV>(GetGfxProcAddress("glUniformMatrix2fv", true));
-    glUniformMatrix3fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX3FV>(GetGfxProcAddress("glUniformMatrix3fv", true));
-    glUniformMatrix4fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX4FV>(GetGfxProcAddress("glUniformMatrix4fv", true));
-    glGetUniformfv = reinterpret_cast<PFNGLGETUNIFORMFV>(GetGfxProcAddress("glGetUniformfv", true));
-    glGetUniformiv = reinterpret_cast<PFNGLGETUNIFORMIV>(GetGfxProcAddress("glGetUniformiv", true));
-    glVertexAttrib1f =
-            reinterpret_cast<PFNGLVERTEXATTRIB1F>(GetGfxProcAddress("glVertexAttrib1f", true));
-    glVertexAttrib2f =
-            reinterpret_cast<PFNGLVERTEXATTRIB2F>(GetGfxProcAddress("glVertexAttrib2f", true));
-    glVertexAttrib3f =
-            reinterpret_cast<PFNGLVERTEXATTRIB3F>(GetGfxProcAddress("glVertexAttrib3f", true));
-    glVertexAttrib4f =
-            reinterpret_cast<PFNGLVERTEXATTRIB4F>(GetGfxProcAddress("glVertexAttrib4f", true));
-    glVertexAttrib1fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB1FV>(GetGfxProcAddress("glVertexAttrib1fv", true));
-    glVertexAttrib2fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB2FV>(GetGfxProcAddress("glVertexAttrib2fv", true));
-    glVertexAttrib3fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB3FV>(GetGfxProcAddress("glVertexAttrib3fv", true));
-    glVertexAttrib4fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB4FV>(GetGfxProcAddress("glVertexAttrib4fv", true));
-    glGetShaderPrecisionFormat = reinterpret_cast<PFNGLGETSHADERPRECISIONFORMAT>(
-            GetGfxProcAddress("glGetShaderPrecisionFormat", true));
-    glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(GetGfxProcAddress("glDepthMask", true));
-    glDepthFunc = reinterpret_cast<PFNGLDEPTHFUNC>(GetGfxProcAddress("glDepthFunc", true));
-    glDepthRangef = reinterpret_cast<PFNGLDEPTHRANGEF>(GetGfxProcAddress("glDepthRangef", true));
-    glColorMask = reinterpret_cast<PFNGLCOLORMASK>(GetGfxProcAddress("glColorMask", true));
-    glStencilMask = reinterpret_cast<PFNGLSTENCILMASK>(GetGfxProcAddress("glStencilMask", true));
-    glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
-            GetGfxProcAddress("glStencilMaskSeparate", true));
-    glStencilFuncSeparate = reinterpret_cast<PFNGLSTENCILFUNCSEPARATE>(
-            GetGfxProcAddress("glStencilFuncSeparate", true));
-    glStencilOpSeparate = reinterpret_cast<PFNGLSTENCILOPSEPARATE>(
-            GetGfxProcAddress("glStencilOpSeparate", true));
-    glFrontFace = reinterpret_cast<PFNGLFRONTFACE>(GetGfxProcAddress("glFrontFace", true));
-    glViewport = reinterpret_cast<PFNGLVIEWPORT>(GetGfxProcAddress("glViewport", true));
-    glScissor = reinterpret_cast<PFNGLSCISSOR>(GetGfxProcAddress("glScissor", true));
-    glActiveTexture =
-            reinterpret_cast<PFNGLACTIVETEXTURE>(GetGfxProcAddress("glActiveTexture", true));
-    glGenTextures = reinterpret_cast<PFNGLGENTEXTURES>(GetGfxProcAddress("glGenTextures", true));
-    glDeleteTextures =
-            reinterpret_cast<PFNGLDELETETEXTURES>(GetGfxProcAddress("glDeleteTextures", true));
-    glIsTexture = reinterpret_cast<PFNGLISTEXTURE>(GetGfxProcAddress("glIsTexture", true));
-    glBindTexture = reinterpret_cast<PFNGLBINDTEXTURE>(GetGfxProcAddress("glBindTexture", true));
-    glTexImage2D = reinterpret_cast<PFNGLTEXIMAGE2D>(GetGfxProcAddress("glTexImage2D", true));
-    glTexSubImage2D =
-            reinterpret_cast<PFNGLTEXSUBIMAGE2D>(GetGfxProcAddress("glTexSubImage2D", true));
-    glCopyTexImage2D =
-            reinterpret_cast<PFNGLCOPYTEXIMAGE2D>(GetGfxProcAddress("glCopyTexImage2D", true));
-    glCopyTexSubImage2D = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE2D>(
-            GetGfxProcAddress("glCopyTexSubImage2D", true));
-    glCompressedTexImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXIMAGE2D>(
-            GetGfxProcAddress("glCompressedTexImage2D", true));
-    glCompressedTexSubImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE2D>(
-            GetGfxProcAddress("glCompressedTexSubImage2D", true));
-    glGenerateMipmap =
-            reinterpret_cast<PFNGLGENERATEMIPMAP>(GetGfxProcAddress("glGenerateMipmap", true));
-    glReadPixels = reinterpret_cast<PFNGLREADPIXELS>(GetGfxProcAddress("glReadPixels", true));
-    glGenFramebuffers =
-            reinterpret_cast<PFNGLGENFRAMEBUFFERS>(GetGfxProcAddress("glGenFramebuffers", true));
-    glBindFramebuffer =
-            reinterpret_cast<PFNGLBINDFRAMEBUFFER>(GetGfxProcAddress("glBindFramebuffer", true));
-    glCheckFramebufferStatus = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUS>(
-            GetGfxProcAddress("glCheckFramebufferStatus", true));
-    glDeleteFramebuffers = reinterpret_cast<PFNGLDELETEFRAMEBUFFERS>(
-            GetGfxProcAddress("glDeleteFramebuffers", true));
-    glIsFramebuffer =
-            reinterpret_cast<PFNGLISFRAMEBUFFER>(GetGfxProcAddress("glIsFramebuffer", true));
-    glGenRenderbuffers =
-            reinterpret_cast<PFNGLGENRENDERBUFFERS>(GetGfxProcAddress("glGenRenderbuffers", true));
-    glBindRenderbuffer =
-            reinterpret_cast<PFNGLBINDRENDERBUFFER>(GetGfxProcAddress("glBindRenderbuffer", true));
-    glRenderbufferStorage = reinterpret_cast<PFNGLRENDERBUFFERSTORAGE>(
-            GetGfxProcAddress("glRenderbufferStorage", true));
-    glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
-            GetGfxProcAddress("glDeleteRenderbuffers", true));
-    glIsRenderbuffer =
-            reinterpret_cast<PFNGLISRENDERBUFFER>(GetGfxProcAddress("glIsRenderbuffer", true));
-    glGetRenderbufferParameteriv = reinterpret_cast<PFNGLGETRENDERBUFFERPARAMETERIV>(
-            GetGfxProcAddress("glGetRenderbufferParameteriv", true));
-    glGenBuffers = reinterpret_cast<PFNGLGENBUFFERS>(GetGfxProcAddress("glGenBuffers", true));
-    glBindBuffer = reinterpret_cast<PFNGLBINDBUFFER>(GetGfxProcAddress("glBindBuffer", true));
-    glBufferData = reinterpret_cast<PFNGLBUFFERDATA>(GetGfxProcAddress("glBufferData", true));
-    glBufferSubData =
-            reinterpret_cast<PFNGLBUFFERSUBDATA>(GetGfxProcAddress("glBufferSubData", true));
-    glDeleteBuffers =
-            reinterpret_cast<PFNGLDELETEBUFFERS>(GetGfxProcAddress("glDeleteBuffers", true));
-    glIsBuffer = reinterpret_cast<PFNGLISBUFFER>(GetGfxProcAddress("glIsBuffer", true));
-    glGetBufferParameteriv = reinterpret_cast<PFNGLGETBUFFERPARAMETERIV>(
-            GetGfxProcAddress("glGetBufferParameteriv", true));
-    glCreateShader = reinterpret_cast<PFNGLCREATESHADER>(GetGfxProcAddress("glCreateShader", true));
-    glDeleteShader = reinterpret_cast<PFNGLDELETESHADER>(GetGfxProcAddress("glDeleteShader", true));
-    glShaderSource = reinterpret_cast<PFNGLSHADERSOURCE>(GetGfxProcAddress("glShaderSource", true));
-    glShaderBinary = reinterpret_cast<PFNGLSHADERBINARY>(GetGfxProcAddress("glShaderBinary", true));
-    glGetShaderInfoLog =
-            reinterpret_cast<PFNGLGETSHADERINFOLOG>(GetGfxProcAddress("glGetShaderInfoLog", true));
-    glGetShaderSource =
-            reinterpret_cast<PFNGLGETSHADERSOURCE>(GetGfxProcAddress("glGetShaderSource", true));
-    glReleaseShaderCompiler = reinterpret_cast<PFNGLRELEASESHADERCOMPILER>(
-            GetGfxProcAddress("glReleaseShaderCompiler", true));
-    glCompileShader =
-            reinterpret_cast<PFNGLCOMPILESHADER>(GetGfxProcAddress("glCompileShader", true));
-    glIsShader = reinterpret_cast<PFNGLISSHADER>(GetGfxProcAddress("glIsShader", true));
-    glCreateProgram =
-            reinterpret_cast<PFNGLCREATEPROGRAM>(GetGfxProcAddress("glCreateProgram", true));
-    glDeleteProgram =
-            reinterpret_cast<PFNGLDELETEPROGRAM>(GetGfxProcAddress("glDeleteProgram", true));
-    glAttachShader = reinterpret_cast<PFNGLATTACHSHADER>(GetGfxProcAddress("glAttachShader", true));
-    glDetachShader = reinterpret_cast<PFNGLDETACHSHADER>(GetGfxProcAddress("glDetachShader", true));
-    glGetAttachedShaders = reinterpret_cast<PFNGLGETATTACHEDSHADERS>(
-            GetGfxProcAddress("glGetAttachedShaders", true));
-    glLinkProgram = reinterpret_cast<PFNGLLINKPROGRAM>(GetGfxProcAddress("glLinkProgram", true));
-    glGetProgramInfoLog = reinterpret_cast<PFNGLGETPROGRAMINFOLOG>(
-            GetGfxProcAddress("glGetProgramInfoLog", true));
-    glUseProgram = reinterpret_cast<PFNGLUSEPROGRAM>(GetGfxProcAddress("glUseProgram", true));
-    glIsProgram = reinterpret_cast<PFNGLISPROGRAM>(GetGfxProcAddress("glIsProgram", true));
-    glValidateProgram =
-            reinterpret_cast<PFNGLVALIDATEPROGRAM>(GetGfxProcAddress("glValidateProgram", true));
-    glClearColor = reinterpret_cast<PFNGLCLEARCOLOR>(GetGfxProcAddress("glClearColor", true));
-    glClearDepthf = reinterpret_cast<PFNGLCLEARDEPTHF>(GetGfxProcAddress("glClearDepthf", true));
-    glClearStencil = reinterpret_cast<PFNGLCLEARSTENCIL>(GetGfxProcAddress("glClearStencil", true));
-    glClear = reinterpret_cast<PFNGLCLEAR>(GetGfxProcAddress("glClear", true));
-    glCullFace = reinterpret_cast<PFNGLCULLFACE>(GetGfxProcAddress("glCullFace", true));
-    glPolygonOffset =
-            reinterpret_cast<PFNGLPOLYGONOFFSET>(GetGfxProcAddress("glPolygonOffset", true));
-    glLineWidth = reinterpret_cast<PFNGLLINEWIDTH>(GetGfxProcAddress("glLineWidth", true));
-    glSampleCoverage =
-            reinterpret_cast<PFNGLSAMPLECOVERAGE>(GetGfxProcAddress("glSampleCoverage", true));
-    glHint = reinterpret_cast<PFNGLHINT>(GetGfxProcAddress("glHint", true));
-    glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(
-            GetGfxProcAddress("glFramebufferRenderbuffer", true));
-    glFramebufferTexture2D = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2D>(
-            GetGfxProcAddress("glFramebufferTexture2D", true));
-    glGetFramebufferAttachmentParameteriv =
-            reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV>(
-                    GetGfxProcAddress("glGetFramebufferAttachmentParameteriv", true));
-    glDrawElements = reinterpret_cast<PFNGLDRAWELEMENTS>(GetGfxProcAddress("glDrawElements", true));
-    glDrawArrays = reinterpret_cast<PFNGLDRAWARRAYS>(GetGfxProcAddress("glDrawArrays", true));
-    glFlush = reinterpret_cast<PFNGLFLUSH>(GetGfxProcAddress("glFlush", true));
-    glFinish = reinterpret_cast<PFNGLFINISH>(GetGfxProcAddress("glFinish", true));
-    glGetBooleanv = reinterpret_cast<PFNGLGETBOOLEANV>(GetGfxProcAddress("glGetBooleanv", true));
-    glGetFloatv = reinterpret_cast<PFNGLGETFLOATV>(GetGfxProcAddress("glGetFloatv", true));
-    glGetIntegerv = reinterpret_cast<PFNGLGETINTEGERV>(GetGfxProcAddress("glGetIntegerv", true));
-    glGetString = reinterpret_cast<PFNGLGETSTRING>(GetGfxProcAddress("glGetString", true));
-    glEnable = reinterpret_cast<PFNGLENABLE>(GetGfxProcAddress("glEnable", true));
-    glDisable = reinterpret_cast<PFNGLDISABLE>(GetGfxProcAddress("glDisable", true));
-    glIsEnabled = reinterpret_cast<PFNGLISENABLED>(GetGfxProcAddress("glIsEnabled", true));
-    glFenceSync = reinterpret_cast<PFNGLFENCESYNC>(GetGfxProcAddress("glFenceSync", true));
-    glDeleteSync = reinterpret_cast<PFNGLDELETESYNC>(GetGfxProcAddress("glDeleteSync", true));
-    glWaitSync = reinterpret_cast<PFNGLWAITSYNC>(GetGfxProcAddress("glWaitSync", true));
-    glClientWaitSync =
-            reinterpret_cast<PFNGLCLIENTWAITSYNC>(GetGfxProcAddress("glClientWaitSync", true));
-    glMapBufferRange =
-            reinterpret_cast<PFNGLMAPBUFFERRANGE>(GetGfxProcAddress("glMapBufferRange", true));
-    glUnmapBuffer = reinterpret_cast<PFNGLUNMAPBUFFER>(GetGfxProcAddress("glUnmapBuffer", true));
-    glInvalidateFramebuffer = reinterpret_cast<PFNGLINVALIDATEFRAMEBUFFER>(
-            GetGfxProcAddress("glInvalidateFramebuffer", true));
-    glRenderbufferStorageMultisample = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLE>(
-            GetGfxProcAddress("glRenderbufferStorageMultisample", true));
-    glBlitFramebuffer =
-            reinterpret_cast<PFNGLBLITFRAMEBUFFER>(GetGfxProcAddress("glBlitFramebuffer", true));
-    glGenQueries = reinterpret_cast<PFNGLGENQUERIES>(GetGfxProcAddress("glGenQueries", true));
-    glBeginQuery = reinterpret_cast<PFNGLBEGINQUERY>(GetGfxProcAddress("glBeginQuery", true));
-    glEndQuery = reinterpret_cast<PFNGLENDQUERY>(GetGfxProcAddress("glEndQuery", true));
-    glDeleteQueries =
-            reinterpret_cast<PFNGLDELETEQUERIES>(GetGfxProcAddress("glDeleteQueries", true));
-    glIsQuery = reinterpret_cast<PFNGLISQUERY>(GetGfxProcAddress("glIsQuery", true));
-    glGetQueryiv = reinterpret_cast<PFNGLGETQUERYIV>(GetGfxProcAddress("glGetQueryiv", true));
-    glGetQueryObjectuiv = reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(
-            GetGfxProcAddress("glGetQueryObjectuiv", true));
-    glGetActiveUniformBlockName = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKNAME>(
-            GetGfxProcAddress("glGetActiveUniformBlockName", true));
-    glGetActiveUniformBlockiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMBLOCKIV>(
-            GetGfxProcAddress("glGetActiveUniformBlockiv", true));
-    glUniformBlockBinding = reinterpret_cast<PFNGLUNIFORMBLOCKBINDING>(
-            GetGfxProcAddress("glUniformBlockBinding", true));
-    glGetActiveUniformsiv = reinterpret_cast<PFNGLGETACTIVEUNIFORMSIV>(
-            GetGfxProcAddress("glGetActiveUniformsiv", true));
-    glBindBufferBase =
-            reinterpret_cast<PFNGLBINDBUFFERBASE>(GetGfxProcAddress("glBindBufferBase", true));
-    glGenVertexArrays =
-            reinterpret_cast<PFNGLGENVERTEXARRAYS>(GetGfxProcAddress("glGenVertexArrays", true));
-    glBindVertexArray =
-            reinterpret_cast<PFNGLBINDVERTEXARRAY>(GetGfxProcAddress("glBindVertexArray", true));
-    glDeleteVertexArrays = reinterpret_cast<PFNGLDELETEVERTEXARRAYS>(
-            GetGfxProcAddress("glDeleteVertexArrays", true));
     glGetQueryObjecti64v = reinterpret_cast<PFNGLGETQUERYOBJECTI64V>(
             GetGfxProcAddress("glGetQueryObjecti64v", true));
     glGetQueryObjectui64v = reinterpret_cast<PFNGLGETQUERYOBJECTUI64V>(
             GetGfxProcAddress("glGetQueryObjectui64v", true));
-    glGenQueriesEXT =
-            reinterpret_cast<PFNGLGENQUERIESEXT>(GetGfxProcAddress("glGenQueriesEXT", true));
-    glBeginQueryEXT =
-            reinterpret_cast<PFNGLBEGINQUERYEXT>(GetGfxProcAddress("glBeginQueryEXT", true));
-    glEndQueryEXT = reinterpret_cast<PFNGLENDQUERYEXT>(GetGfxProcAddress("glEndQueryEXT", true));
-    glDeleteQueriesEXT =
-            reinterpret_cast<PFNGLDELETEQUERIESEXT>(GetGfxProcAddress("glDeleteQueriesEXT", true));
-    glIsQueryEXT = reinterpret_cast<PFNGLISQUERYEXT>(GetGfxProcAddress("glIsQueryEXT", true));
-    glQueryCounterEXT =
-            reinterpret_cast<PFNGLQUERYCOUNTEREXT>(GetGfxProcAddress("glQueryCounterEXT", true));
-    glGetQueryivEXT =
-            reinterpret_cast<PFNGLGETQUERYIVEXT>(GetGfxProcAddress("glGetQueryivEXT", true));
-    glGetQueryObjectivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTIVEXT>(
-            GetGfxProcAddress("glGetQueryObjectivEXT", true));
-    glGetQueryObjectuivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUIVEXT>(
-            GetGfxProcAddress("glGetQueryObjectuivEXT", true));
-    glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
-            GetGfxProcAddress("glGetQueryObjecti64vEXT", true));
-    glGetQueryObjectui64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUI64VEXT>(
-            GetGfxProcAddress("glGetQueryObjectui64vEXT", true));
 }
 
 }  // namespace gapii

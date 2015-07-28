@@ -139,13 +139,13 @@ cmd void glBlitFramebufferNV(GLint      srcX0,
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_buffer_storage.txt","GL_EXT_buffer_storage")
-cmd void glBufferStorageEXT(GLenum target, GLsizeiptr size, const void* data, GLbitfield flags) {
+cmd void glBufferStorageEXT(GLenum target, GLsizeiptr size, const void* data, GLbitfield flag) {
   requiresExtension(GL_EXT_buffer_storage)
   // TODO
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/APPLE/APPLE_sync.txt","GL_APPLE_sync")
-cmd GLenum glClientWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout) {
+cmd GLenum glClientWaitSyncAPPLE(GLsync sync, GLbitfield flag, GLuint64 timeout) {
   requiresExtension(GL_APPLE_sync)
   // TODO
   return ?
@@ -735,7 +735,7 @@ cmd void glExtTexObjectStateOverrideiQCOM(GLenum target, GLenum pname, GLint par
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/APPLE/APPLE_sync.txt","GL_APPLE_sync")
-cmd GLsync glFenceSyncAPPLE(GLenum condition, GLbitfield flags) {
+cmd GLsync glFenceSyncAPPLE(GLenum condition, GLbitfield flag) {
   requiresExtension(GL_APPLE_sync)
   // TODO
   return ?
@@ -1102,7 +1102,7 @@ cmd void glGetPerfMonitorGroupsAMD(GLint* numGroups, GLsizei groupsSize, GLuint*
 
 @Doc("https://www.khronos.org/registry/gles/extensions/INTEL/performance_query.txt","GL_INTEL_performance_query")
 cmd void glGetPerfQueryDataINTEL(GLuint  queryHandle,
-                                 GLuint  flags,
+                                 GLuint  flag,
                                  GLsizei dataSize,
                                  GLvoid* data,
                                  GLuint* bytesWritten) {
@@ -1136,7 +1136,7 @@ cmd void glGetProgramBinaryOES(ProgramId program,
                                void*     binary) {
   requiresExtension(GL_OES_get_program_binary)
 
-  l := as!s32(?)
+  l := as!GLsizei(?)
   bytes_written[0] = l
   binary_format[0] = ?
   write(binary[0:l])
@@ -1320,7 +1320,8 @@ cmd void glInsertEventMarkerEXT(GLsizei length, const GLchar* marker) {
   if length > 0 {
     read(marker[0:length])
   } else {
-    _ = as!string(marker)
+    // TODO: Remove the extra cast.
+    _ = as!string(as!char*(marker))
   }
 }
 
@@ -2117,7 +2118,7 @@ cmd void glPushGroupMarkerEXT(GLsizei length, const GLchar* marker) {
   if length > 0 {
     read(marker[0:length])
   } else {
-    _ = as!string(marker)
+    _ = as!string(as!char*(marker))
   }
 }
 
@@ -2655,7 +2656,7 @@ cmd void glViewportIndexedfvNV(GLuint index, const GLfloat* v) {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/APPLE/APPLE_sync.txt","GL_APPLE_sync")
-cmd void glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout) {
+cmd void glWaitSyncAPPLE(GLsync sync, GLbitfield flag, GLuint64 timeout) {
   requiresExtension(GL_APPLE_sync)
   // TODO
 }
