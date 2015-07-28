@@ -571,12 +571,12 @@ var ConstantValues schema.Constants
 
 const _Flags_name = "DrawCallEndOfFrame"
 
-var _Flags_map = map[Flags]string{
-	1: _Flags_name[0:8],
-	2: _Flags_name[8:18],
-}
+var _Flags_map = map[Flags]string{}
 
 func init() {
+	_Flags_map[1] = _Flags_name[0:8]
+	_Flags_map[2] = _Flags_name[8:18]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -605,11 +605,11 @@ func (v *Flags) Parse(s string) error {
 
 const _ID_name = "NoID"
 
-var _ID_map = map[ID]string{
-	9223372036854775807: _ID_name[0:4],
-}
+var _ID_map = map[ID]string{}
 
 func init() {
+	_ID_map[9223372036854775807] = _ID_name[0:4]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ID", Method: schema.Uint64},
 		Entries: []schema.Constant{
