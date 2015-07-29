@@ -16,6 +16,8 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"os"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/format"
@@ -24,12 +26,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/profile"
 )
 
-func main() {
+func run() error {
 	flag.Parse()
 	defer profile.CPU()()
 	args := flag.Args()
 	if len(args) < 1 {
-		commands.Usage("Must supply a verb\n")
+		return commands.Usage("Must supply a verb\n")
 	}
 	verb := args[0]
 	matches := commands.Filter(verb)
@@ -38,10 +40,17 @@ func main() {
 		c := matches[0]
 		commands.Logf("Running %q\n", c.Name)
 		c.Flags.Parse(args[1:])
-		c.Run(c.Flags)
+		return c.Run(c.Flags)
 	case 0:
-		commands.Usage("Verb '%s' is unknown\n", verb)
+		return commands.Usage("Verb '%s' is unknown\n", verb)
 	default:
-		commands.Usage("Verb '%s' is ambiguous\n", verb)
+		return commands.Usage("Verb '%s' is ambiguous\n", verb)
+	}
+}
+
+func main() {
+	if err := run(); err != nil {
+		fmt.Fprintf(os.Stderr, "apic failed: %v\n", err)
+		os.Exit(1)
 	}
 }

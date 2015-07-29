@@ -27,7 +27,6 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
@@ -49,11 +48,10 @@ type Functions struct {
 // including other templates.
 // The functions in funcs are made available to the templates, and can override the functions from this
 // package if needed.
-func NewFunctions(apiFile string, api *semantic.API, loader func(filename string) ([]byte, error), funcs template.FuncMap) *Functions {
+func NewFunctions(apiFile string, api *semantic.API, loader func(filename string) ([]byte, error), funcs template.FuncMap) (*Functions, error) {
 	basePath, err := filepath.Abs(*dir)
 	if err != nil {
-		err := fmt.Errorf("Could not get absolute path to directory: '%s'. %v", *dir, err)
-		commands.MaybeError("", err)
+		return nil, fmt.Errorf("Could not get absolute path to directory: '%s'. %v", *dir, err)
 	}
 	f := &Functions{
 		templates: template.New("FunctionHolder"),
@@ -92,7 +90,7 @@ func NewFunctions(apiFile string, api *semantic.API, loader func(filename string
 		}
 	}
 	f.templates.Funcs(f.funcs)
-	return f
+	return f, nil
 }
 
 func trace(name string, f interface{}) func(values ...interface{}) (interface{}, error) {

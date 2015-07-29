@@ -25,10 +25,10 @@ import (
 
 // Command holds information about a runnable api command.
 type Command struct {
-	Name      string                   // The name of the command
-	Run       func(flags flag.FlagSet) // the action for the command
-	ShortHelp string                   // Help for how to use the command
-	Flags     flag.FlagSet             // The command line flags it accepts
+	Name      string                         // The name of the command
+	Run       func(flags flag.FlagSet) error // the action for the command
+	ShortHelp string                         // Help for how to use the command
+	Flags     flag.FlagSet                   // The command line flags it accepts
 }
 
 const (
@@ -60,33 +60,20 @@ func Filter(prefix string) (result []*Command) {
 	return result
 }
 
-// MaybeError will, if err is not nil, print the error err along with the
-// optional file path to stderr and then terminate the program. If err is nil,
-// MaybeError does nothing.
-func MaybeError(file string, err error) {
-	if err == nil {
-		return
-	}
-	if len(file) == 0 {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-	} else {
-		fmt.Fprintf(os.Stderr, "%s: %s\n", file, err)
-	}
-	os.Exit(1)
-}
-
 // Usage prints message with the formatting args (if not empty) to stderr,
 // prints the command usage information to stderr and then terminates the program.
-func Usage(message string, args ...interface{}) {
+func Usage(message string, args ...interface{}) error {
+	err := ""
 	if len(message) > 0 {
-		fmt.Fprintf(os.Stderr, message, args...)
+		err = fmt.Sprintf(message, args...)
+		fmt.Fprint(os.Stderr, err)
 	}
 	fmt.Fprintf(os.Stderr, "\nApic is a tool for managing api source files\n\n")
 	fmt.Fprintf(os.Stderr, "Available commands\n")
 	for _, c := range commands {
 		fmt.Fprintf(os.Stderr, "  %s : %s\n", c.Name, c.ShortHelp)
 	}
-	os.Exit(1)
+	return fmt.Errorf(err)
 }
 
 // Log prints message with the formatting args to stdout.
@@ -99,9 +86,9 @@ func Logf(message string, args ...interface{}) {
 // CheckErrors will, if len(errs) > 0, print each of the error messages for the
 // specified api and then terminate the program. If errs is zero length,
 // CheckErrors does nothing.
-func CheckErrors(apiName string, errs parse.ErrorList) {
+func CheckErrors(apiName string, errs parse.ErrorList) error {
 	if len(errs) == 0 {
-		return
+		return nil
 	}
 	if len(errs) > maxErrors {
 		errs = errs[:maxErrors]
@@ -118,5 +105,5 @@ func CheckErrors(apiName string, errs parse.ErrorList) {
 		fmt.Fprintf(os.Stderr, "And %d more errors\n", len(errs)-maxErrors)
 	}
 	fmt.Fprintf(os.Stderr, "Stack of first error:\n%s\n", errs[0].Stack)
-	os.Exit(3)
+	return errs
 }

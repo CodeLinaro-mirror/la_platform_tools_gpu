@@ -47,10 +47,10 @@ func init() {
 	commands.Register(command)
 }
 
-func doFormat(flags flag.FlagSet) {
+func doFormat(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		commands.Usage("Missing api file\n")
+		return commands.Usage("Missing api file\n")
 	}
 	for _, path := range args {
 		f, err := ioutil.ReadFile(path)
@@ -74,6 +74,7 @@ func doFormat(flags flag.FlagSet) {
 			fmt.Fprintf(os.Stderr, "Failed to write formatted api file '%s': %v\n", path, err)
 		}
 	}
+	return nil
 }
 
 // Format prints the full re-formatted AST tree to w.
