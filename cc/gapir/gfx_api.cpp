@@ -9,6 +9,9 @@
 #include <gapic/get_gfx_proc_address.h>
 #include <gapic/log.h>
 
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 namespace gapir {
 namespace gfxapi {
 namespace {
@@ -156,8 +159,8 @@ bool callGlXCreateNewContext(Stack* stack, bool pushReturn) {
     void* fbconfig = stack->pop<void*>();
     void* display = stack->pop<void*>();
     if (stack->isValid()) {
-        GAPID_INFO("glXCreateNewContext(%p, %p, %u, %p, %d)\n", display, fbconfig, type, shared,
-                   direct);
+        GAPID_INFO("glXCreateNewContext(%p, %p, %" PRIu32 ", %p, %d)\n", display, fbconfig, type,
+                   shared, direct);
         if (glXCreateNewContext != nullptr) {
             void* return_value = glXCreateNewContext(display, fbconfig, type, shared, direct);
             GAPID_INFO("Returned: %p\n", return_value);
@@ -409,7 +412,8 @@ bool callCGSGetSurfaceBounds(Stack* stack, bool pushReturn) {
     int32_t wid = stack->pop<int32_t>();
     void* cid = stack->pop<void*>();
     if (stack->isValid()) {
-        GAPID_INFO("CGSGetSurfaceBounds(%p, %d, %d, %p)\n", cid, wid, sid, bounds);
+        GAPID_INFO("CGSGetSurfaceBounds(%p, %" PRId32 ", %" PRId32 ", %p)\n", cid, wid, sid,
+                   bounds);
         if (CGSGetSurfaceBounds != nullptr) {
             int return_value = CGSGetSurfaceBounds(cid, wid, sid, bounds);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -485,8 +489,8 @@ bool callGlGetProgramBinaryOES(Stack* stack, bool pushReturn) {
     int32_t buffer_size = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramBinaryOES(%u, %d, %p, %p, %p)\n", program, buffer_size,
-                   bytes_written, binary_format, binary);
+        GAPID_INFO("glGetProgramBinaryOES(%" PRIu32 ", %" PRId32 ", %p, %p, %p)\n", program,
+                   buffer_size, bytes_written, binary_format, binary);
         if (glGetProgramBinaryOES != nullptr) {
             glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
         } else {
@@ -505,8 +509,8 @@ bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
     uint32_t binary_format = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glProgramBinaryOES(%u, %u, %p, %d)\n", program, binary_format, binary,
-                   binary_size);
+        GAPID_INFO("glProgramBinaryOES(%" PRIu32 ", %" PRIu32 ", %p, %" PRId32 ")\n", program,
+                   binary_format, binary, binary_size);
         if (glProgramBinaryOES != nullptr) {
             glProgramBinaryOES(program, binary_format, binary, binary_size);
         } else {
@@ -526,7 +530,8 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glStartTilingQCOM(%d, %d, %d, %d, %u)\n", x, y, width, height, preserveMask);
+        GAPID_INFO("glStartTilingQCOM(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u)\n", x,
+                   y, width, height, preserveMask);
         if (glStartTilingQCOM != nullptr) {
             glStartTilingQCOM(x, y, width, height, preserveMask);
         } else {
@@ -560,7 +565,8 @@ bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
     int32_t numAttachments = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDiscardFramebufferEXT(%u, %d, %p)\n", target, numAttachments, attachments);
+        GAPID_INFO("glDiscardFramebufferEXT(%u, %" PRId32 ", %p)\n", target, numAttachments,
+                   attachments);
         if (glDiscardFramebufferEXT != nullptr) {
             glDiscardFramebufferEXT(target, numAttachments, attachments);
         } else {
@@ -577,7 +583,7 @@ bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
     char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glInsertEventMarkerEXT(%d, %p)\n", length, marker);
+        GAPID_INFO("glInsertEventMarkerEXT(%" PRId32 ", %p)\n", length, marker);
         if (glInsertEventMarkerEXT != nullptr) {
             glInsertEventMarkerEXT(length, marker);
         } else {
@@ -594,7 +600,7 @@ bool callGlPushGroupMarkerEXT(Stack* stack, bool pushReturn) {
     char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glPushGroupMarkerEXT(%d, %p)\n", length, marker);
+        GAPID_INFO("glPushGroupMarkerEXT(%" PRId32 ", %p)\n", length, marker);
         if (glPushGroupMarkerEXT != nullptr) {
             glPushGroupMarkerEXT(length, marker);
         } else {
@@ -628,7 +634,8 @@ bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexStorage1DEXT(%u, %d, %u, %d)\n", target, levels, format, width);
+        GAPID_INFO("glTexStorage1DEXT(%u, %" PRId32 ", %u, %" PRId32 ")\n", target, levels, format,
+                   width);
         if (glTexStorage1DEXT != nullptr) {
             glTexStorage1DEXT(target, levels, format, width);
         } else {
@@ -648,8 +655,8 @@ bool callGlTexStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexStorage2DEXT(%u, %d, %u, %d, %d)\n", target, levels, format, width,
-                   height);
+        GAPID_INFO("glTexStorage2DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ")\n", target,
+                   levels, format, width, height);
         if (glTexStorage2DEXT != nullptr) {
             glTexStorage2DEXT(target, levels, format, width, height);
         } else {
@@ -670,8 +677,9 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexStorage3DEXT(%u, %d, %u, %d, %d, %d)\n", target, levels, format, width,
-                   height, depth);
+        GAPID_INFO("glTexStorage3DEXT(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
+                   ")\n",
+                   target, levels, format, width, height, depth);
         if (glTexStorage3DEXT != nullptr) {
             glTexStorage3DEXT(target, levels, format, width, height, depth);
         } else {
@@ -691,8 +699,8 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
     GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
-                   width);
+        GAPID_INFO("glTextureStorage1DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ")\n",
+                   texture, target, levels, format, width);
         if (glTextureStorage1DEXT != nullptr) {
             glTextureStorage1DEXT(texture, target, levels, format, width);
         } else {
@@ -713,8 +721,9 @@ bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
     GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
-                   format, width, height);
+        GAPID_INFO("glTextureStorage2DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
+                   ")\n",
+                   texture, target, levels, format, width, height);
         if (glTextureStorage2DEXT != nullptr) {
             glTextureStorage2DEXT(texture, target, levels, format, width, height);
         } else {
@@ -736,8 +745,9 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
     GLenum target = stack->pop<GLenum>();
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
-                   format, width, height, depth);
+        GAPID_INFO("glTextureStorage3DEXT(%" PRIu32 ", %u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
+                   ", %" PRId32 ")\n",
+                   texture, target, levels, format, width, height, depth);
         if (glTextureStorage3DEXT != nullptr) {
             glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
         } else {
@@ -754,7 +764,7 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
     uint32_t* arrays = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenVertexArraysOES(%d, %p)\n", count, arrays);
+        GAPID_INFO("glGenVertexArraysOES(%" PRId32 ", %p)\n", count, arrays);
         if (glGenVertexArraysOES != nullptr) {
             glGenVertexArraysOES(count, arrays);
         } else {
@@ -770,7 +780,7 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
 bool callGlBindVertexArrayOES(Stack* stack, bool pushReturn) {
     uint32_t array = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindVertexArrayOES(%u)\n", array);
+        GAPID_INFO("glBindVertexArrayOES(%" PRIu32 ")\n", array);
         if (glBindVertexArrayOES != nullptr) {
             glBindVertexArrayOES(array);
         } else {
@@ -787,7 +797,7 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
     uint32_t* arrays = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteVertexArraysOES(%d, %p)\n", count, arrays);
+        GAPID_INFO("glDeleteVertexArraysOES(%" PRId32 ", %p)\n", count, arrays);
         if (glDeleteVertexArraysOES != nullptr) {
             glDeleteVertexArraysOES(count, arrays);
         } else {
@@ -803,7 +813,7 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
 bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
     uint32_t array = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsVertexArrayOES(%u)\n", array);
+        GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")\n", array);
         if (glIsVertexArrayOES != nullptr) {
             bool return_value = glIsVertexArrayOES(array);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -880,7 +890,7 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindAttribLocation(%u, %d, %s)\n", program, location, name);
+        GAPID_INFO("glBindAttribLocation(%" PRIu32 ", %" PRId32 ", %s)\n", program, location, name);
         if (glBindAttribLocation != nullptr) {
             glBindAttribLocation(program, location, name);
         } else {
@@ -985,7 +995,7 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
 bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glEnableVertexAttribArray(%d)\n", location);
+        GAPID_INFO("glEnableVertexAttribArray(%" PRId32 ")\n", location);
         if (glEnableVertexAttribArray != nullptr) {
             glEnableVertexAttribArray(location);
         } else {
@@ -1001,7 +1011,7 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
 bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDisableVertexAttribArray(%d)\n", location);
+        GAPID_INFO("glDisableVertexAttribArray(%" PRId32 ")\n", location);
         if (glDisableVertexAttribArray != nullptr) {
             glDisableVertexAttribArray(location);
         } else {
@@ -1022,8 +1032,8 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     int32_t size = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribPointer(%d, %d, %u, %d, %d, %p)\n", location, size, type,
-                   normalized, stride, data);
+        GAPID_INFO("glVertexAttribPointer(%" PRId32 ", %" PRId32 ", %u, %d, %" PRId32 ", %p)\n",
+                   location, size, type, normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);
         } else {
@@ -1045,8 +1055,8 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveAttrib(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
-                   buffer_size, buffer_bytes_written, vector_count, type, name);
+        GAPID_INFO("glGetActiveAttrib(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p, %p, %p, %p)\n",
+                   program, location, buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveAttrib != nullptr) {
             glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                               type, name);
@@ -1069,8 +1079,8 @@ bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveUniform(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
-                   buffer_size, buffer_bytes_written, vector_count, type, name);
+        GAPID_INFO("glGetActiveUniform(%" PRIu32 ", %" PRId32 ", %" PRId32 ", %p, %p, %p, %p)\n",
+                   program, location, buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveUniform != nullptr) {
             glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
                                type, name);
@@ -1108,7 +1118,7 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
+        GAPID_INFO("glGetProgramiv(%" PRIu32 ", %u, %p)\n", program, parameter, value);
         if (glGetProgramiv != nullptr) {
             glGetProgramiv(program, parameter, value);
         } else {
@@ -1126,7 +1136,7 @@ bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
+        GAPID_INFO("glGetShaderiv(%" PRIu32 ", %u, %p)\n", shader, parameter, value);
         if (glGetShaderiv != nullptr) {
             glGetShaderiv(shader, parameter, value);
         } else {
@@ -1143,10 +1153,10 @@ bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetUniformLocation(%u, %s)\n", program, name);
+        GAPID_INFO("glGetUniformLocation(%" PRIu32 ", %s)\n", program, name);
         if (glGetUniformLocation != nullptr) {
             int32_t return_value = glGetUniformLocation(program, name);
-            GAPID_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %" PRId32 "\n", return_value);
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
             }
@@ -1164,10 +1174,10 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetAttribLocation(%u, %s)\n", program, name);
+        GAPID_INFO("glGetAttribLocation(%" PRIu32 ", %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
             int32_t return_value = glGetAttribLocation(program, name);
-            GAPID_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %" PRId32 "\n", return_value);
             if (pushReturn) {
                 stack->push<int32_t>(return_value);
             }
@@ -1185,7 +1195,7 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
     GLenum parameter = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glPixelStorei(%u, %d)\n", parameter, value);
+        GAPID_INFO("glPixelStorei(%u, %" PRId32 ")\n", parameter, value);
         if (glPixelStorei != nullptr) {
             glPixelStorei(parameter, value);
         } else {
@@ -1203,7 +1213,7 @@ bool callGlTexParameteri(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexParameteri(%u, %u, %d)\n", target, parameter, value);
+        GAPID_INFO("glTexParameteri(%u, %u, %" PRId32 ")\n", target, parameter, value);
         if (glTexParameteri != nullptr) {
             glTexParameteri(target, parameter, value);
         } else {
@@ -1274,7 +1284,7 @@ bool callGlUniform1i(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1i(%d, %d)\n", location, value);
+        GAPID_INFO("glUniform1i(%" PRId32 ", %" PRId32 ")\n", location, value);
         if (glUniform1i != nullptr) {
             glUniform1i(location, value);
         } else {
@@ -1292,7 +1302,8 @@ bool callGlUniform2i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2i(%d, %d, %d)\n", location, value0, value1);
+        GAPID_INFO("glUniform2i(%" PRId32 ", %" PRId32 ", %" PRId32 ")\n", location, value0,
+                   value1);
         if (glUniform2i != nullptr) {
             glUniform2i(location, value0, value1);
         } else {
@@ -1311,7 +1322,8 @@ bool callGlUniform3i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3i(%d, %d, %d, %d)\n", location, value0, value1, value2);
+        GAPID_INFO("glUniform3i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", location,
+                   value0, value1, value2);
         if (glUniform3i != nullptr) {
             glUniform3i(location, value0, value1, value2);
         } else {
@@ -1331,7 +1343,8 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4i(%d, %d, %d, %d, %d)\n", location, value0, value1, value2, value3);
+        GAPID_INFO("glUniform4i(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+                   location, value0, value1, value2, value3);
         if (glUniform4i != nullptr) {
             glUniform4i(location, value0, value1, value2, value3);
         } else {
@@ -1349,7 +1362,7 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform1iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform1iv != nullptr) {
             glUniform1iv(location, count, values);
         } else {
@@ -1367,7 +1380,7 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform2iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform2iv != nullptr) {
             glUniform2iv(location, count, values);
         } else {
@@ -1385,7 +1398,7 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform3iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform3iv != nullptr) {
             glUniform3iv(location, count, values);
         } else {
@@ -1403,7 +1416,7 @@ bool callGlUniform4iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform4iv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform4iv != nullptr) {
             glUniform4iv(location, count, values);
         } else {
@@ -1420,7 +1433,7 @@ bool callGlUniform1f(Stack* stack, bool pushReturn) {
     float value = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1f(%d, %f)\n", location, value);
+        GAPID_INFO("glUniform1f(%" PRId32 ", %f)\n", location, value);
         if (glUniform1f != nullptr) {
             glUniform1f(location, value);
         } else {
@@ -1438,7 +1451,7 @@ bool callGlUniform2f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2f(%d, %f, %f)\n", location, value0, value1);
+        GAPID_INFO("glUniform2f(%" PRId32 ", %f, %f)\n", location, value0, value1);
         if (glUniform2f != nullptr) {
             glUniform2f(location, value0, value1);
         } else {
@@ -1457,7 +1470,7 @@ bool callGlUniform3f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
+        GAPID_INFO("glUniform3f(%" PRId32 ", %f, %f, %f)\n", location, value0, value1, value2);
         if (glUniform3f != nullptr) {
             glUniform3f(location, value0, value1, value2);
         } else {
@@ -1477,7 +1490,8 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2, value3);
+        GAPID_INFO("glUniform4f(%" PRId32 ", %f, %f, %f, %f)\n", location, value0, value1, value2,
+                   value3);
         if (glUniform4f != nullptr) {
             glUniform4f(location, value0, value1, value2, value3);
         } else {
@@ -1495,7 +1509,7 @@ bool callGlUniform1fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform1fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform1fv != nullptr) {
             glUniform1fv(location, count, values);
         } else {
@@ -1513,7 +1527,7 @@ bool callGlUniform2fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform2fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform2fv != nullptr) {
             glUniform2fv(location, count, values);
         } else {
@@ -1531,7 +1545,7 @@ bool callGlUniform3fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform3fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform3fv != nullptr) {
             glUniform3fv(location, count, values);
         } else {
@@ -1549,7 +1563,7 @@ bool callGlUniform4fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, values);
+        GAPID_INFO("glUniform4fv(%" PRId32 ", %" PRId32 ", %p)\n", location, count, values);
         if (glUniform4fv != nullptr) {
             glUniform4fv(location, count, values);
         } else {
@@ -1568,7 +1582,8 @@ bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniformMatrix2fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix2fv(%" PRId32 ", %" PRId32 ", %d, %p)\n", location, count,
+                   transpose, values);
         if (glUniformMatrix2fv != nullptr) {
             glUniformMatrix2fv(location, count, transpose, values);
         } else {
@@ -1587,7 +1602,8 @@ bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniformMatrix3fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix3fv(%" PRId32 ", %" PRId32 ", %d, %p)\n", location, count,
+                   transpose, values);
         if (glUniformMatrix3fv != nullptr) {
             glUniformMatrix3fv(location, count, transpose, values);
         } else {
@@ -1606,7 +1622,8 @@ bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniformMatrix4fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix4fv(%" PRId32 ", %" PRId32 ", %d, %p)\n", location, count,
+                   transpose, values);
         if (glUniformMatrix4fv != nullptr) {
             glUniformMatrix4fv(location, count, transpose, values);
         } else {
@@ -1624,7 +1641,7 @@ bool callGlGetUniformfv(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetUniformfv(%u, %d, %p)\n", program, location, values);
+        GAPID_INFO("glGetUniformfv(%" PRIu32 ", %" PRId32 ", %p)\n", program, location, values);
         if (glGetUniformfv != nullptr) {
             glGetUniformfv(program, location, values);
         } else {
@@ -1642,7 +1659,7 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetUniformiv(%u, %d, %p)\n", program, location, values);
+        GAPID_INFO("glGetUniformiv(%" PRIu32 ", %" PRId32 ", %p)\n", program, location, values);
         if (glGetUniformiv != nullptr) {
             glGetUniformiv(program, location, values);
         } else {
@@ -1659,7 +1676,7 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib1f(%d, %f)\n", location, value0);
+        GAPID_INFO("glVertexAttrib1f(%" PRId32 ", %f)\n", location, value0);
         if (glVertexAttrib1f != nullptr) {
             glVertexAttrib1f(location, value0);
         } else {
@@ -1677,7 +1694,7 @@ bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib2f(%d, %f, %f)\n", location, value0, value1);
+        GAPID_INFO("glVertexAttrib2f(%" PRId32 ", %f, %f)\n", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
             glVertexAttrib2f(location, value0, value1);
         } else {
@@ -1696,7 +1713,7 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
+        GAPID_INFO("glVertexAttrib3f(%" PRId32 ", %f, %f, %f)\n", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
             glVertexAttrib3f(location, value0, value1, value2);
         } else {
@@ -1716,8 +1733,8 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2,
-                   value3);
+        GAPID_INFO("glVertexAttrib4f(%" PRId32 ", %f, %f, %f, %f)\n", location, value0, value1,
+                   value2, value3);
         if (glVertexAttrib4f != nullptr) {
             glVertexAttrib4f(location, value0, value1, value2, value3);
         } else {
@@ -1734,7 +1751,7 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib1fv(%d, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib1fv(%" PRId32 ", %p)\n", location, value);
         if (glVertexAttrib1fv != nullptr) {
             glVertexAttrib1fv(location, value);
         } else {
@@ -1751,7 +1768,7 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib2fv(%d, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib2fv(%" PRId32 ", %p)\n", location, value);
         if (glVertexAttrib2fv != nullptr) {
             glVertexAttrib2fv(location, value);
         } else {
@@ -1768,7 +1785,7 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib3fv(%d, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib3fv(%" PRId32 ", %p)\n", location, value);
         if (glVertexAttrib3fv != nullptr) {
             glVertexAttrib3fv(location, value);
         } else {
@@ -1785,7 +1802,7 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttrib4fv(%d, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib4fv(%" PRId32 ", %p)\n", location, value);
         if (glVertexAttrib4fv != nullptr) {
             glVertexAttrib4fv(location, value);
         } else {
@@ -1889,7 +1906,7 @@ bool callGlColorMask(Stack* stack, bool pushReturn) {
 bool callGlStencilMask(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glStencilMask(%u)\n", mask);
+        GAPID_INFO("glStencilMask(%" PRIu32 ")\n", mask);
         if (glStencilMask != nullptr) {
             glStencilMask(mask);
         } else {
@@ -1906,7 +1923,7 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
     GLenum face = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glStencilMaskSeparate(%u, %u)\n", face, mask);
+        GAPID_INFO("glStencilMaskSeparate(%u, %" PRIu32 ")\n", face, mask);
         if (glStencilMaskSeparate != nullptr) {
             glStencilMaskSeparate(face, mask);
         } else {
@@ -1925,8 +1942,8 @@ bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
     GLenum function = stack->pop<GLenum>();
     GLenum face = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glStencilFuncSeparate(%u, %u, %d, %d)\n", face, function, reference_value,
-                   mask);
+        GAPID_INFO("glStencilFuncSeparate(%u, %u, %" PRId32 ", %" PRId32 ")\n", face, function,
+                   reference_value, mask);
         if (glStencilFuncSeparate != nullptr) {
             glStencilFuncSeparate(face, function, reference_value, mask);
         } else {
@@ -1982,7 +1999,8 @@ bool callGlViewport(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glViewport(%d, %d, %d, %d)\n", x, y, width, height);
+        GAPID_INFO("glViewport(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", x, y, width,
+                   height);
         if (glViewport != nullptr) {
             glViewport(x, y, width, height);
         } else {
@@ -2001,7 +2019,8 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glScissor(%d, %d, %d, %d)\n", x, y, width, height);
+        GAPID_INFO("glScissor(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n", x, y, width,
+                   height);
         if (glScissor != nullptr) {
             glScissor(x, y, width, height);
         } else {
@@ -2034,7 +2053,7 @@ bool callGlGenTextures(Stack* stack, bool pushReturn) {
     uint32_t* textures = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenTextures(%d, %p)\n", count, textures);
+        GAPID_INFO("glGenTextures(%" PRId32 ", %p)\n", count, textures);
         if (glGenTextures != nullptr) {
             glGenTextures(count, textures);
         } else {
@@ -2051,7 +2070,7 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
     uint32_t* textures = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteTextures(%d, %p)\n", count, textures);
+        GAPID_INFO("glDeleteTextures(%" PRId32 ", %p)\n", count, textures);
         if (glDeleteTextures != nullptr) {
             glDeleteTextures(count, textures);
         } else {
@@ -2067,7 +2086,7 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
 bool callGlIsTexture(Stack* stack, bool pushReturn) {
     uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsTexture(%u)\n", texture);
+        GAPID_INFO("glIsTexture(%" PRIu32 ")\n", texture);
         if (glIsTexture != nullptr) {
             bool return_value = glIsTexture(texture);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2088,7 +2107,7 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
     uint32_t texture = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindTexture(%u, %u)\n", target, texture);
+        GAPID_INFO("glBindTexture(%u, %" PRIu32 ")\n", target, texture);
         if (glBindTexture != nullptr) {
             glBindTexture(target, texture);
         } else {
@@ -2112,8 +2131,9 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexImage2D(%u, %d, %u, %d, %d, %d, %u, %u, %p)\n", target, level,
-                   internal_format, width, height, border, format, type, data);
+        GAPID_INFO("glTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %u, %u, %p)\n",
+                   target, level, internal_format, width, height, border, format, type, data);
         if (glTexImage2D != nullptr) {
             glTexImage2D(target, level, internal_format, width, height, border, format, type, data);
         } else {
@@ -2137,8 +2157,9 @@ bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %u, %p)\n", target, level, xoffset,
-                   yoffset, width, height, format, type, data);
+        GAPID_INFO("glTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %u, %u, %p)\n",
+                   target, level, xoffset, yoffset, width, height, format, type, data);
         if (glTexSubImage2D != nullptr) {
             glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
         } else {
@@ -2161,8 +2182,9 @@ bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glCopyTexImage2D(%u, %d, %u, %d, %d, %d, %d, %d)\n", target, level, format, x,
-                   y, width, height, border);
+        GAPID_INFO("glCopyTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRId32 ")\n",
+                   target, level, format, x, y, width, height, border);
         if (glCopyTexImage2D != nullptr) {
             glCopyTexImage2D(target, level, format, x, y, width, height, border);
         } else {
@@ -2185,8 +2207,9 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glCopyTexSubImage2D(%u, %d, %d, %d, %d, %d, %d, %d)\n", target, level, xoffset,
-                   yoffset, x, y, width, height);
+        GAPID_INFO("glCopyTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRId32 ", %" PRId32 ")\n",
+                   target, level, xoffset, yoffset, x, y, width, height);
         if (glCopyTexSubImage2D != nullptr) {
             glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
         } else {
@@ -2209,8 +2232,9 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glCompressedTexImage2D(%u, %d, %u, %d, %d, %d, %d, %p)\n", target, level,
-                   format, width, height, border, image_size, data);
+        GAPID_INFO("glCompressedTexImage2D(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %p)\n",
+                   target, level, format, width, height, border, image_size, data);
         if (glCompressedTexImage2D != nullptr) {
             glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
         } else {
@@ -2234,8 +2258,9 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glCompressedTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %d, %p)\n", target, level,
-                   xoffset, yoffset, width, height, format, image_size, data);
+        GAPID_INFO("glCompressedTexSubImage2D(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %u, %" PRId32 ", %p)\n",
+                   target, level, xoffset, yoffset, width, height, format, image_size, data);
         if (glCompressedTexSubImage2D != nullptr) {
             glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
                                       image_size, data);
@@ -2274,8 +2299,8 @@ bool callGlReadPixels(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glReadPixels(%d, %d, %d, %d, %u, %u, %p)\n", x, y, width, height, format, type,
-                   data);
+        GAPID_INFO("glReadPixels(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u, %p)\n",
+                   x, y, width, height, format, type, data);
         if (glReadPixels != nullptr) {
             glReadPixels(x, y, width, height, format, type, data);
         } else {
@@ -2292,7 +2317,7 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
     uint32_t* framebuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenFramebuffers(%d, %p)\n", count, framebuffers);
+        GAPID_INFO("glGenFramebuffers(%" PRId32 ", %p)\n", count, framebuffers);
         if (glGenFramebuffers != nullptr) {
             glGenFramebuffers(count, framebuffers);
         } else {
@@ -2309,7 +2334,7 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
     uint32_t framebuffer = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
+        GAPID_INFO("glBindFramebuffer(%u, %" PRIu32 ")\n", target, framebuffer);
         if (glBindFramebuffer != nullptr) {
             glBindFramebuffer(target, framebuffer);
         } else {
@@ -2346,7 +2371,7 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
     uint32_t* framebuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteFramebuffers(%d, %p)\n", count, framebuffers);
+        GAPID_INFO("glDeleteFramebuffers(%" PRId32 ", %p)\n", count, framebuffers);
         if (glDeleteFramebuffers != nullptr) {
             glDeleteFramebuffers(count, framebuffers);
         } else {
@@ -2362,7 +2387,7 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
 bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
     uint32_t framebuffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsFramebuffer(%u)\n", framebuffer);
+        GAPID_INFO("glIsFramebuffer(%" PRIu32 ")\n", framebuffer);
         if (glIsFramebuffer != nullptr) {
             bool return_value = glIsFramebuffer(framebuffer);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2383,7 +2408,7 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
     uint32_t* renderbuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenRenderbuffers(%d, %p)\n", count, renderbuffers);
+        GAPID_INFO("glGenRenderbuffers(%" PRId32 ", %p)\n", count, renderbuffers);
         if (glGenRenderbuffers != nullptr) {
             glGenRenderbuffers(count, renderbuffers);
         } else {
@@ -2400,7 +2425,7 @@ bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
     uint32_t renderbuffer = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
+        GAPID_INFO("glBindRenderbuffer(%u, %" PRIu32 ")\n", target, renderbuffer);
         if (glBindRenderbuffer != nullptr) {
             glBindRenderbuffer(target, renderbuffer);
         } else {
@@ -2419,7 +2444,8 @@ bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
     GLenum format = stack->pop<GLenum>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glRenderbufferStorage(%u, %u, %d, %d)\n", target, format, width, height);
+        GAPID_INFO("glRenderbufferStorage(%u, %u, %" PRId32 ", %" PRId32 ")\n", target, format,
+                   width, height);
         if (glRenderbufferStorage != nullptr) {
             glRenderbufferStorage(target, format, width, height);
         } else {
@@ -2436,7 +2462,7 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
     uint32_t* renderbuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteRenderbuffers(%d, %p)\n", count, renderbuffers);
+        GAPID_INFO("glDeleteRenderbuffers(%" PRId32 ", %p)\n", count, renderbuffers);
         if (glDeleteRenderbuffers != nullptr) {
             glDeleteRenderbuffers(count, renderbuffers);
         } else {
@@ -2452,7 +2478,7 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
 bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
     uint32_t renderbuffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsRenderbuffer(%u)\n", renderbuffer);
+        GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")\n", renderbuffer);
         if (glIsRenderbuffer != nullptr) {
             bool return_value = glIsRenderbuffer(renderbuffer);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2491,7 +2517,7 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
     uint32_t* buffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenBuffers(%d, %p)\n", count, buffers);
+        GAPID_INFO("glGenBuffers(%" PRId32 ", %p)\n", count, buffers);
         if (glGenBuffers != nullptr) {
             glGenBuffers(count, buffers);
         } else {
@@ -2508,7 +2534,7 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
     uint32_t buffer = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindBuffer(%u, %u)\n", target, buffer);
+        GAPID_INFO("glBindBuffer(%u, %" PRIu32 ")\n", target, buffer);
         if (glBindBuffer != nullptr) {
             glBindBuffer(target, buffer);
         } else {
@@ -2527,7 +2553,7 @@ bool callGlBufferData(Stack* stack, bool pushReturn) {
     int32_t size = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBufferData(%u, %d, %p, %u)\n", target, size, data, usage);
+        GAPID_INFO("glBufferData(%u, %" PRId32 ", %p, %u)\n", target, size, data, usage);
         if (glBufferData != nullptr) {
             glBufferData(target, size, data, usage);
         } else {
@@ -2546,7 +2572,8 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
     int32_t offset = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBufferSubData(%u, %d, %d, %p)\n", target, offset, size, data);
+        GAPID_INFO("glBufferSubData(%u, %" PRId32 ", %" PRId32 ", %p)\n", target, offset, size,
+                   data);
         if (glBufferSubData != nullptr) {
             glBufferSubData(target, offset, size, data);
         } else {
@@ -2563,7 +2590,7 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
     uint32_t* buffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteBuffers(%d, %p)\n", count, buffers);
+        GAPID_INFO("glDeleteBuffers(%" PRId32 ", %p)\n", count, buffers);
         if (glDeleteBuffers != nullptr) {
             glDeleteBuffers(count, buffers);
         } else {
@@ -2579,7 +2606,7 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
 bool callGlIsBuffer(Stack* stack, bool pushReturn) {
     uint32_t buffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsBuffer(%u)\n", buffer);
+        GAPID_INFO("glIsBuffer(%" PRIu32 ")\n", buffer);
         if (glIsBuffer != nullptr) {
             bool return_value = glIsBuffer(buffer);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2620,7 +2647,7 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
             uint32_t return_value = glCreateShader(type);
-            GAPID_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %" PRIu32 "\n", return_value);
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
@@ -2637,7 +2664,7 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
 bool callGlDeleteShader(Stack* stack, bool pushReturn) {
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteShader(%u)\n", shader);
+        GAPID_INFO("glDeleteShader(%" PRIu32 ")\n", shader);
         if (glDeleteShader != nullptr) {
             glDeleteShader(shader);
         } else {
@@ -2656,7 +2683,8 @@ bool callGlShaderSource(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glShaderSource(%u, %d, %p, %p)\n", shader, count, source, length);
+        GAPID_INFO("glShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, count, source,
+                   length);
         if (glShaderSource != nullptr) {
             glShaderSource(shader, count, source, length);
         } else {
@@ -2676,8 +2704,8 @@ bool callGlShaderBinary(Stack* stack, bool pushReturn) {
     uint32_t* shaders = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glShaderBinary(%d, %p, %u, %p, %d)\n", count, shaders, binary_format, binary,
-                   binary_size);
+        GAPID_INFO("glShaderBinary(%" PRId32 ", %p, %" PRIu32 ", %p, %" PRId32 ")\n", count,
+                   shaders, binary_format, binary, binary_size);
         if (glShaderBinary != nullptr) {
             glShaderBinary(count, shaders, binary_format, binary, binary_size);
         } else {
@@ -2696,7 +2724,7 @@ bool callGlGetShaderInfoLog(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetShaderInfoLog(%u, %d, %p, %p)\n", shader, buffer_length,
+        GAPID_INFO("glGetShaderInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, buffer_length,
                    string_length_written, info);
         if (glGetShaderInfoLog != nullptr) {
             glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
@@ -2716,7 +2744,7 @@ bool callGlGetShaderSource(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetShaderSource(%u, %d, %p, %p)\n", shader, buffer_length,
+        GAPID_INFO("glGetShaderSource(%" PRIu32 ", %" PRId32 ", %p, %p)\n", shader, buffer_length,
                    string_length_written, source);
         if (glGetShaderSource != nullptr) {
             glGetShaderSource(shader, buffer_length, string_length_written, source);
@@ -2748,7 +2776,7 @@ bool callGlReleaseShaderCompiler(Stack* stack, bool pushReturn) {
 bool callGlCompileShader(Stack* stack, bool pushReturn) {
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glCompileShader(%u)\n", shader);
+        GAPID_INFO("glCompileShader(%" PRIu32 ")\n", shader);
         if (glCompileShader != nullptr) {
             glCompileShader(shader);
         } else {
@@ -2764,7 +2792,7 @@ bool callGlCompileShader(Stack* stack, bool pushReturn) {
 bool callGlIsShader(Stack* stack, bool pushReturn) {
     uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsShader(%u)\n", shader);
+        GAPID_INFO("glIsShader(%" PRIu32 ")\n", shader);
         if (glIsShader != nullptr) {
             bool return_value = glIsShader(shader);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2786,7 +2814,7 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
         GAPID_INFO("glCreateProgram()\n");
         if (glCreateProgram != nullptr) {
             uint32_t return_value = glCreateProgram();
-            GAPID_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %" PRIu32 "\n", return_value);
             if (pushReturn) {
                 stack->push<uint32_t>(return_value);
             }
@@ -2803,7 +2831,7 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
 bool callGlDeleteProgram(Stack* stack, bool pushReturn) {
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteProgram(%u)\n", program);
+        GAPID_INFO("glDeleteProgram(%" PRIu32 ")\n", program);
         if (glDeleteProgram != nullptr) {
             glDeleteProgram(program);
         } else {
@@ -2820,7 +2848,7 @@ bool callGlAttachShader(Stack* stack, bool pushReturn) {
     uint32_t shader = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glAttachShader(%u, %u)\n", program, shader);
+        GAPID_INFO("glAttachShader(%" PRIu32 ", %" PRIu32 ")\n", program, shader);
         if (glAttachShader != nullptr) {
             glAttachShader(program, shader);
         } else {
@@ -2837,7 +2865,7 @@ bool callGlDetachShader(Stack* stack, bool pushReturn) {
     uint32_t shader = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDetachShader(%u, %u)\n", program, shader);
+        GAPID_INFO("glDetachShader(%" PRIu32 ", %" PRIu32 ")\n", program, shader);
         if (glDetachShader != nullptr) {
             glDetachShader(program, shader);
         } else {
@@ -2856,8 +2884,8 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetAttachedShaders(%u, %d, %p, %p)\n", program, buffer_length,
-                   shaders_length_written, shaders);
+        GAPID_INFO("glGetAttachedShaders(%" PRIu32 ", %" PRId32 ", %p, %p)\n", program,
+                   buffer_length, shaders_length_written, shaders);
         if (glGetAttachedShaders != nullptr) {
             glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
         } else {
@@ -2873,7 +2901,7 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
 bool callGlLinkProgram(Stack* stack, bool pushReturn) {
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glLinkProgram(%u)\n", program);
+        GAPID_INFO("glLinkProgram(%" PRIu32 ")\n", program);
         if (glLinkProgram != nullptr) {
             glLinkProgram(program);
         } else {
@@ -2892,8 +2920,8 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetProgramInfoLog(%u, %d, %p, %p)\n", program, buffer_length,
-                   string_length_written, info);
+        GAPID_INFO("glGetProgramInfoLog(%" PRIu32 ", %" PRId32 ", %p, %p)\n", program,
+                   buffer_length, string_length_written, info);
         if (glGetProgramInfoLog != nullptr) {
             glGetProgramInfoLog(program, buffer_length, string_length_written, info);
         } else {
@@ -2909,7 +2937,7 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
 bool callGlUseProgram(Stack* stack, bool pushReturn) {
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUseProgram(%u)\n", program);
+        GAPID_INFO("glUseProgram(%" PRIu32 ")\n", program);
         if (glUseProgram != nullptr) {
             glUseProgram(program);
         } else {
@@ -2925,7 +2953,7 @@ bool callGlUseProgram(Stack* stack, bool pushReturn) {
 bool callGlIsProgram(Stack* stack, bool pushReturn) {
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsProgram(%u)\n", program);
+        GAPID_INFO("glIsProgram(%" PRIu32 ")\n", program);
         if (glIsProgram != nullptr) {
             bool return_value = glIsProgram(program);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -2945,7 +2973,7 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
 bool callGlValidateProgram(Stack* stack, bool pushReturn) {
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glValidateProgram(%u)\n", program);
+        GAPID_INFO("glValidateProgram(%" PRIu32 ")\n", program);
         if (glValidateProgram != nullptr) {
             glValidateProgram(program);
         } else {
@@ -2996,7 +3024,7 @@ bool callGlClearDepthf(Stack* stack, bool pushReturn) {
 bool callGlClearStencil(Stack* stack, bool pushReturn) {
     int32_t stencil = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glClearStencil(%d)\n", stencil);
+        GAPID_INFO("glClearStencil(%" PRId32 ")\n", stencil);
         if (glClearStencil != nullptr) {
             glClearStencil(stencil);
         } else {
@@ -3114,7 +3142,7 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
     GLenum framebuffer_attachment = stack->pop<GLenum>();
     GLenum framebuffer_target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %u)\n", framebuffer_target,
+        GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %" PRIu32 ")\n", framebuffer_target,
                    framebuffer_attachment, renderbuffer_target, renderbuffer);
         if (glFramebufferRenderbuffer != nullptr) {
             glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
@@ -3136,8 +3164,8 @@ bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
     GLenum framebuffer_attachment = stack->pop<GLenum>();
     GLenum framebuffer_target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %u, %d)\n", framebuffer_target,
-                   framebuffer_attachment, texture_target, texture, level);
+        GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %" PRIu32 ", %" PRId32 ")\n",
+                   framebuffer_target, framebuffer_attachment, texture_target, texture, level);
         if (glFramebufferTexture2D != nullptr) {
             glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
                                    texture, level);
@@ -3179,8 +3207,8 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
     int32_t element_count = stack->pop<int32_t>();
     GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawElements(%u, %d, %u, %p)\n", draw_mode, element_count, indices_type,
-                   indices);
+        GAPID_INFO("glDrawElements(%u, %" PRId32 ", %u, %p)\n", draw_mode, element_count,
+                   indices_type, indices);
         if (glDrawElements != nullptr) {
             glDrawElements(draw_mode, element_count, indices_type, indices);
         } else {
@@ -3198,7 +3226,8 @@ bool callGlDrawArrays(Stack* stack, bool pushReturn) {
     int32_t first_index = stack->pop<int32_t>();
     GLenum draw_mode = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glDrawArrays(%u, %d, %d)\n", draw_mode, first_index, index_count);
+        GAPID_INFO("glDrawArrays(%u, %" PRId32 ", %" PRId32 ")\n", draw_mode, first_index,
+                   index_count);
         if (glDrawArrays != nullptr) {
             glDrawArrays(draw_mode, first_index, index_count);
         } else {
@@ -3371,7 +3400,7 @@ bool callGlFenceSync(Stack* stack, bool pushReturn) {
         GAPID_INFO("glFenceSync(%u, %u)\n", condition, syncFlags);
         if (glFenceSync != nullptr) {
             uint64_t return_value = glFenceSync(condition, syncFlags);
-            GAPID_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %" PRIu64 "\n", return_value);
             if (pushReturn) {
                 stack->push<uint64_t>(return_value);
             }
@@ -3388,7 +3417,7 @@ bool callGlFenceSync(Stack* stack, bool pushReturn) {
 bool callGlDeleteSync(Stack* stack, bool pushReturn) {
     uint64_t sync = stack->pop<uint64_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteSync(%u)\n", sync);
+        GAPID_INFO("glDeleteSync(%" PRIu64 ")\n", sync);
         if (glDeleteSync != nullptr) {
             glDeleteSync(sync);
         } else {
@@ -3406,7 +3435,7 @@ bool callGlWaitSync(Stack* stack, bool pushReturn) {
     SyncFlags syncFlags = stack->pop<SyncFlags>();
     uint64_t sync = stack->pop<uint64_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+        GAPID_INFO("glWaitSync(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, syncFlags, timeout);
         if (glWaitSync != nullptr) {
             glWaitSync(sync, syncFlags, timeout);
         } else {
@@ -3424,7 +3453,7 @@ bool callGlClientWaitSync(Stack* stack, bool pushReturn) {
     SyncFlags syncFlags = stack->pop<SyncFlags>();
     uint64_t sync = stack->pop<uint64_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glClientWaitSync(%u, %u, %u)\n", sync, syncFlags, timeout);
+        GAPID_INFO("glClientWaitSync(%" PRIu64 ", %u, %" PRIu64 ")\n", sync, syncFlags, timeout);
         if (glClientWaitSync != nullptr) {
             ClientWaitSyncSignal return_value = glClientWaitSync(sync, syncFlags, timeout);
             GAPID_INFO("Returned: %u\n", return_value);
@@ -3447,7 +3476,8 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
     int32_t offset = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
+        GAPID_INFO("glMapBufferRange(%u, %" PRId32 ", %" PRId32 ", %u)\n", target, offset, length,
+                   access);
         if (glMapBufferRange != nullptr) {
             void* return_value = glMapBufferRange(target, offset, length, access);
             GAPID_INFO("Returned: %p\n", return_value);
@@ -3485,7 +3515,7 @@ bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glInvalidateFramebuffer(%u, %d, %p)\n", target, count, attachments);
+        GAPID_INFO("glInvalidateFramebuffer(%u, %" PRId32 ", %p)\n", target, count, attachments);
         if (glInvalidateFramebuffer != nullptr) {
             glInvalidateFramebuffer(target, count, attachments);
         } else {
@@ -3505,8 +3535,9 @@ bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
     int32_t samples = stack->pop<int32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glRenderbufferStorageMultisample(%u, %d, %u, %d, %d)\n", target, samples,
-                   format, width, height);
+        GAPID_INFO("glRenderbufferStorageMultisample(%u, %" PRId32 ", %u, %" PRId32 ", %" PRId32
+                   ")\n",
+                   target, samples, format, width, height);
         if (glRenderbufferStorageMultisample != nullptr) {
             glRenderbufferStorageMultisample(target, samples, format, width, height);
         } else {
@@ -3532,8 +3563,9 @@ bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
     int32_t srcY0 = stack->pop<int32_t>();
     int32_t srcX0 = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBlitFramebuffer(%d, %d, %d, %d, %d, %d, %d, %d, %u, %u)\n", srcX0, srcY0,
-                   srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+        GAPID_INFO("glBlitFramebuffer(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %u, %u)\n",
+                   srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
         if (glBlitFramebuffer != nullptr) {
             glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
         } else {
@@ -3550,7 +3582,7 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenQueries(%d, %p)\n", count, queries);
+        GAPID_INFO("glGenQueries(%" PRId32 ", %p)\n", count, queries);
         if (glGenQueries != nullptr) {
             glGenQueries(count, queries);
         } else {
@@ -3567,7 +3599,7 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBeginQuery(%u, %u)\n", target, query);
+        GAPID_INFO("glBeginQuery(%u, %" PRIu32 ")\n", target, query);
         if (glBeginQuery != nullptr) {
             glBeginQuery(target, query);
         } else {
@@ -3600,7 +3632,7 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteQueries(%d, %p)\n", count, queries);
+        GAPID_INFO("glDeleteQueries(%" PRId32 ", %p)\n", count, queries);
         if (glDeleteQueries != nullptr) {
             glDeleteQueries(count, queries);
         } else {
@@ -3616,7 +3648,7 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
 bool callGlIsQuery(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsQuery(%u)\n", query);
+        GAPID_INFO("glIsQuery(%" PRIu32 ")\n", query);
         if (glIsQuery != nullptr) {
             bool return_value = glIsQuery(query);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -3656,7 +3688,7 @@ bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectuiv(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuiv != nullptr) {
             glGetQueryObjectuiv(query, parameter, value);
         } else {
@@ -3676,8 +3708,8 @@ bool callGlGetActiveUniformBlockName(Stack* stack, bool pushReturn) {
     uint32_t uniform_block_index = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveUniformBlockName(%u, %u, %d, %p, %p)\n", program,
-                   uniform_block_index, buffer_size, buffer_bytes_written, name);
+        GAPID_INFO("glGetActiveUniformBlockName(%" PRIu32 ", %" PRIu32 ", %" PRId32 ", %p, %p)\n",
+                   program, uniform_block_index, buffer_size, buffer_bytes_written, name);
         if (glGetActiveUniformBlockName != nullptr) {
             glGetActiveUniformBlockName(program, uniform_block_index, buffer_size,
                                         buffer_bytes_written, name);
@@ -3697,8 +3729,8 @@ bool callGlGetActiveUniformBlockiv(Stack* stack, bool pushReturn) {
     uint32_t uniform_block_index = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveUniformBlockiv(%u, %u, %u, %p)\n", program, uniform_block_index,
-                   parameter_name, parameters);
+        GAPID_INFO("glGetActiveUniformBlockiv(%" PRIu32 ", %" PRIu32 ", %u, %p)\n", program,
+                   uniform_block_index, parameter_name, parameters);
         if (glGetActiveUniformBlockiv != nullptr) {
             glGetActiveUniformBlockiv(program, uniform_block_index, parameter_name, parameters);
         } else {
@@ -3716,8 +3748,8 @@ bool callGlUniformBlockBinding(Stack* stack, bool pushReturn) {
     uint32_t uniform_block_index = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glUniformBlockBinding(%u, %u, %u)\n", program, uniform_block_index,
-                   uniform_block_binding);
+        GAPID_INFO("glUniformBlockBinding(%" PRIu32 ", %" PRIu32 ", %" PRIu32 ")\n", program,
+                   uniform_block_index, uniform_block_binding);
         if (glUniformBlockBinding != nullptr) {
             glUniformBlockBinding(program, uniform_block_index, uniform_block_binding);
         } else {
@@ -3737,8 +3769,8 @@ bool callGlGetActiveUniformsiv(Stack* stack, bool pushReturn) {
     uint32_t uniform_count = stack->pop<uint32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetActiveUniformsiv(%u, %u, %p, %u, %p)\n", program, uniform_count,
-                   uniform_indices, parameter_name, parameters);
+        GAPID_INFO("glGetActiveUniformsiv(%" PRIu32 ", %" PRIu32 ", %p, %u, %p)\n", program,
+                   uniform_count, uniform_indices, parameter_name, parameters);
         if (glGetActiveUniformsiv != nullptr) {
             glGetActiveUniformsiv(program, uniform_count, uniform_indices, parameter_name,
                                   parameters);
@@ -3757,7 +3789,7 @@ bool callGlBindBufferBase(Stack* stack, bool pushReturn) {
     uint32_t index = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindBufferBase(%u, %u, %u)\n", target, index, buffer);
+        GAPID_INFO("glBindBufferBase(%u, %" PRIu32 ", %" PRIu32 ")\n", target, index, buffer);
         if (glBindBufferBase != nullptr) {
             glBindBufferBase(target, index, buffer);
         } else {
@@ -3774,7 +3806,7 @@ bool callGlGenVertexArrays(Stack* stack, bool pushReturn) {
     uint32_t* arrays = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenVertexArrays(%d, %p)\n", count, arrays);
+        GAPID_INFO("glGenVertexArrays(%" PRId32 ", %p)\n", count, arrays);
         if (glGenVertexArrays != nullptr) {
             glGenVertexArrays(count, arrays);
         } else {
@@ -3790,7 +3822,7 @@ bool callGlGenVertexArrays(Stack* stack, bool pushReturn) {
 bool callGlBindVertexArray(Stack* stack, bool pushReturn) {
     uint32_t array = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glBindVertexArray(%u)\n", array);
+        GAPID_INFO("glBindVertexArray(%" PRIu32 ")\n", array);
         if (glBindVertexArray != nullptr) {
             glBindVertexArray(array);
         } else {
@@ -3807,7 +3839,7 @@ bool callGlDeleteVertexArrays(Stack* stack, bool pushReturn) {
     uint32_t* arrays = stack->pop<uint32_t*>();
     uint32_t count = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteVertexArrays(%u, %p)\n", count, arrays);
+        GAPID_INFO("glDeleteVertexArrays(%" PRIu32 ", %p)\n", count, arrays);
         if (glDeleteVertexArrays != nullptr) {
             glDeleteVertexArrays(count, arrays);
         } else {
@@ -3825,7 +3857,7 @@ bool callGlGetQueryObjecti64v(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjecti64v(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjecti64v(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjecti64v != nullptr) {
             glGetQueryObjecti64v(query, parameter, value);
         } else {
@@ -3843,7 +3875,7 @@ bool callGlGetQueryObjectui64v(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjectui64v(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectui64v(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectui64v != nullptr) {
             glGetQueryObjectui64v(query, parameter, value);
         } else {
@@ -3860,7 +3892,7 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGenQueriesEXT(%d, %p)\n", count, queries);
+        GAPID_INFO("glGenQueriesEXT(%" PRId32 ", %p)\n", count, queries);
         if (glGenQueriesEXT != nullptr) {
             glGenQueriesEXT(count, queries);
         } else {
@@ -3877,7 +3909,7 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
     GLenum target = stack->pop<GLenum>();
     if (stack->isValid()) {
-        GAPID_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
+        GAPID_INFO("glBeginQueryEXT(%u, %" PRIu32 ")\n", target, query);
         if (glBeginQueryEXT != nullptr) {
             glBeginQueryEXT(target, query);
         } else {
@@ -3910,7 +3942,7 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
     uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDeleteQueriesEXT(%d, %p)\n", count, queries);
+        GAPID_INFO("glDeleteQueriesEXT(%" PRId32 ", %p)\n", count, queries);
         if (glDeleteQueriesEXT != nullptr) {
             glDeleteQueriesEXT(count, queries);
         } else {
@@ -3926,7 +3958,7 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
 bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glIsQueryEXT(%u)\n", query);
+        GAPID_INFO("glIsQueryEXT(%" PRIu32 ")\n", query);
         if (glIsQueryEXT != nullptr) {
             bool return_value = glIsQueryEXT(query);
             GAPID_INFO("Returned: %d\n", return_value);
@@ -3947,7 +3979,7 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
     GLenum target = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
+        GAPID_INFO("glQueryCounterEXT(%" PRIu32 ", %u)\n", query, target);
         if (glQueryCounterEXT != nullptr) {
             glQueryCounterEXT(query, target);
         } else {
@@ -3983,7 +4015,7 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectivEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectivEXT != nullptr) {
             glGetQueryObjectivEXT(query, parameter, value);
         } else {
@@ -4001,7 +4033,7 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectuivEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuivEXT != nullptr) {
             glGetQueryObjectuivEXT(query, parameter, value);
         } else {
@@ -4019,7 +4051,7 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjecti64vEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjecti64vEXT != nullptr) {
             glGetQueryObjecti64vEXT(query, parameter, value);
         } else {
@@ -4037,7 +4069,7 @@ bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
     GLenum parameter = stack->pop<GLenum>();
     uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectui64vEXT(%" PRIu32 ", %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectui64vEXT != nullptr) {
             glGetQueryObjectui64vEXT(query, parameter, value);
         } else {
