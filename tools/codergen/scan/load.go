@@ -48,7 +48,7 @@ func (m *Module) addSource(filename, content string) error {
 		}
 	}
 
-	m.Sources = append(m.Sources, Source{Filename: filename, Content: content})
+	m.Sources = append(m.Sources, Source{Filename: filename, Content: content, Parsed: make(chan struct{})})
 	return nil
 }
 
@@ -64,10 +64,22 @@ func (s *Scanner) load(dir *Directory) {
 	for _, filename := range imp.GoFiles {
 		dir.Module.addSource(filepath.Join(dir.Dir, filename), "")
 	}
+	s.preParse(&dir.Module)
 	if dir.Scan {
 		for _, filename := range imp.TestGoFiles {
 			dir.Test.addSource(filepath.Join(dir.Dir, filename), "")
 		}
+		s.preParse(&dir.Test)
+	}
+}
+
+func (s *Scanner) preParse(module *Module) {
+	for i := range module.Sources {
+		src := &module.Sources[i]
+		go func() {
+			src.AST, src.Error = parser.ParseFile(s.FileSet, src.Filename, src.Content, parser.ParseComments)
+			close(src.Parsed)
+		}()
 	}
 }
 
@@ -76,14 +88,13 @@ var directive = regexp.MustCompile(`binary: *([^= ]+) *(= *(.+))? *`)
 func (s *Scanner) parse(module *Module) error {
 	for i := range module.Sources {
 		src := &module.Sources[i]
-		file, err := parser.ParseFile(s.FileSet, src.Filename, src.Content, parser.ParseComments)
-		if err != nil {
-			return err
+		<-src.Parsed
+		if src.Error != nil {
+			return src.Error
 		}
-		src.AST = file
-		module.Files = append(module.Files, file)
+		module.Files = append(module.Files, src.AST)
 		src.Directives = make(map[string]string)
-		for _, group := range file.Comments {
+		for _, group := range src.AST.Comments {
 			for _, comment := range group.List {
 				if matches := directive.FindStringSubmatch(comment.Text); len(matches) >= 1 {
 					k := matches[1]

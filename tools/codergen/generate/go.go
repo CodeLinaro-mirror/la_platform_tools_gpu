@@ -43,7 +43,7 @@ func goFileName(m *Module, prefix string, category string) string {
 }
 
 // Go is called by codergen to prepare and generate go code for a given module.
-func Go(m *Module, info copyright.Info, gen Generator) error {
+func Go(m *Module, info copyright.Info, gen chan Generate) error {
 	if len(m.Structs) == 0 && len(m.Constants) == 0 {
 		return nil
 	}
@@ -51,14 +51,19 @@ func Go(m *Module, info copyright.Info, gen Generator) error {
 		Module:    m,
 		Copyright: copyright.Build("generated_by", info),
 	}
-	if err := gen("Go.Binary", pkg, goFileName(m, m.Name, "binary"), reflowGo); err != nil {
-		return err
+	gen <- Generate{
+		Name:   "Go.Binary",
+		Arg:    pkg,
+		Output: goFileName(m, m.Name, "binary"),
+		Reflow: reflowGo,
 	}
 	for _, s := range m.Services {
-		arg := GoService{GoBinary: pkg, Service: s}
 		for _, e := range []string{"client", "server", "helpers", "extra"} {
-			if err := gen("Go."+strings.Title(e), arg, goFileName(m, s.Prefix, e), reflowGo); err != nil {
-				return err
+			gen <- Generate{
+				Name:   "Go." + strings.Title(e),
+				Arg:    GoService{GoBinary: pkg, Service: s},
+				Output: goFileName(m, s.Prefix, e),
+				Reflow: reflowGo,
 			}
 		}
 	}

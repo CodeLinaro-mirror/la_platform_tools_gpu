@@ -30,14 +30,18 @@ type CppNamespace struct {
 }
 
 // Called by codergen to prepare and generate cpp code for a given module.
-func Cpp(m *Module, info copyright.Info, gen Generator, path string) error {
-	ns := CppNamespace{
-		Module:    m,
-		Namespace: m.Directives["cpp"],
-		Copyright: strings.TrimSpace(copyright.Build("generated_by", info)),
+func Cpp(m *Module, info copyright.Info, gen chan Generate, path string) {
+	namespace := m.Directives["cpp"]
+	gen <- Generate{
+		Name: "Cpp.File",
+		Arg: CppNamespace{
+			Module:    m,
+			Namespace: namespace,
+			Copyright: strings.TrimSpace(copyright.Build("generated_by", info)),
+		},
+		Output: filepath.Join(path, namespace+".h"),
+		Reflow: indentor("    "),
 	}
-	out := filepath.Join(path, ns.Namespace+".h")
-	return gen("Cpp.File", ns, out, indentor("    "))
 }
 
 // Converts a typename to cpp form by replacing the unicode characters.

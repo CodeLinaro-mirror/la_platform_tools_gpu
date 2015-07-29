@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
@@ -35,12 +36,54 @@ var (
 	golang  = flag.Bool("go", false, "generate go code")
 	java    = flag.String("java", "", "the path to generate files in")
 	cpp     = flag.String("cpp", "", "the path to generate files in")
+	workers = flag.Int("workers", 15, "The numer of output workers to use")
 )
 
 const usage = `codergen: A tool to generate coders for go structs.
 Usage: codergen [--go] [--java=file] <args>...
   -help: show this help message
 `
+
+type errors struct {
+	list []error
+	mu   sync.Mutex
+}
+
+func (l *errors) Add(err error) {
+	l.mu.Lock()
+	l.list = append(l.list, err)
+	l.mu.Unlock()
+}
+
+type Errors struct {
+	list []error
+}
+
+func worker(wg *sync.WaitGroup, errs *errors, tasks chan generate.Generate) {
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		t := template.New()
+		for task := range tasks {
+			out := task.Output
+			if *nowrite {
+				out = ""
+			}
+			changed, err := t.Generate(task.Name, task.Arg, out, task.Reflow)
+			if err != nil {
+				errs.Add(err)
+			} else if changed {
+				if *nowrite {
+					fmt.Printf("Not writing %s\n", task.Output)
+				} else if *verbose {
+					fmt.Printf("Generated %s\n", task.Output)
+				}
+			} else if *verbose {
+				fmt.Printf("No change for %s\n", task.Output)
+			}
+		}
+	}()
+}
 
 func run() error {
 	if os.Getenv("GOMAXPROCS") == "" {
@@ -82,47 +125,33 @@ func run() error {
 	if *verbose {
 		fmt.Printf("Generating\n")
 	}
-	t := template.New()
-	info := copyright.Info{Tool: scan.Tool, Year: "2015"}
-	gen := func(name string, arg interface{}, output string, reflow template.PostProcess) error {
-		out := output
-		if *nowrite {
-			out = ""
-		}
-		changed, err := t.Generate(arg, name, arg, out, reflow)
-		if err != nil {
-			return err
-		}
-		if changed {
-			if *nowrite {
-				fmt.Printf("Not writing %s\n", output)
-			} else if *verbose {
-				fmt.Printf("Generated %s\n", output)
-			}
-		} else if *verbose {
-			fmt.Printf("No change for %s\n", output)
-		}
-		return nil
+	wg := sync.WaitGroup{}
+	errs := errors{}
+	gen := make(chan generate.Generate)
+	for i := 0; i < *workers; i++ {
+		worker(&wg, &errs, gen)
 	}
-
+	info := copyright.Info{Tool: scan.Tool, Year: "2015"}
 	for _, m := range modules {
 		if *golang {
-			if err := generate.Go(m, info, gen); err != nil {
-				return err
-			}
+			generate.Go(m, info, gen)
 		}
 		_, doJava := m.Directives["java.package"]
 		if *java != "" && !m.IsTest && doJava {
-			if err := generate.Java(m, info, gen, *java); err != nil {
-				return err
-			}
+			generate.Java(m, info, gen, *java)
 		}
 		_, doCpp := m.Directives["cpp"]
 		if *cpp != "" && !m.IsTest && doCpp {
-			if err := generate.Cpp(m, info, gen, *cpp); err != nil {
-				return err
-			}
+			generate.Cpp(m, info, gen, *cpp)
 		}
+	}
+	close(gen)
+	wg.Wait()
+	if len(errs.list) > 0 {
+		for _, err := range errs.list {
+			fmt.Print(err)
+		}
+		return errs.list[0]
 	}
 	return nil
 }
