@@ -18,13 +18,13 @@ import (
 	"fmt"
 	"sync"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/service"
-	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // discovery is used to find replay devices on the local machine and connected
@@ -43,11 +43,11 @@ func newDiscovery(db database.Database, logger log.Logger) *discovery {
 	return m
 }
 
-func (d *discovery) device(p *path.Device) Device {
+func (d *discovery) device(id binary.ID) Device {
 	d.Lock()
 	defer d.Unlock()
 	for _, d := range d.devices {
-		if path.Equal(d.Path(), p) {
+		if d.ID() == id {
 			return d
 		}
 	}
@@ -61,45 +61,45 @@ func (d *discovery) getDevices() []Device {
 	return d.devices
 }
 
-func (m *discovery) discoverAndroidDevices(db database.Database) {
-	d := &androidDevice{deviceBase{device: &service.Device{
+func (d *discovery) discoverAndroidDevices(db database.Database) {
+	dev := &androidDevice{deviceBase{device: &service.Device{
 		Name:  "Android device",
 		Model: "Unknown",
 	}}}
 
-	if err := loadDeviceConfig(d, db, m.logger); err == nil {
-		id, err := database.Store(d.device, db, log.Nop{})
+	if err := loadDeviceConfig(dev, db, d.logger); err == nil {
+		id, err := database.Store(dev.device, db, log.Nop{})
 		if err != nil {
 			panic(err)
 		}
-		d.path = &path.Device{ID: id}
+		dev.id = id
 
-		m.Lock()
-		defer m.Unlock()
-		m.devices = append(m.devices, d)
+		d.Lock()
+		defer d.Unlock()
+		d.devices = append(d.devices, dev)
 	} else {
-		log.Infof(m.logger, "Failed to communicate with Android device '%s': %v", d.Info().Name, err)
+		log.Infof(d.logger, "Failed to communicate with Android device '%s': %v", dev.Info().Name, err)
 	}
 }
 
-func (m *discovery) discoverLocalDevices(db database.Database) {
-	d := &localDevice{deviceBase{device: &service.Device{
+func (d *discovery) discoverLocalDevices(db database.Database) {
+	dev := &localDevice{deviceBase{device: &service.Device{
 		Name:  "Local machine",
 		Model: "Unknown",
 	}}}
 
-	if err := loadDeviceConfig(d, db, m.logger); err == nil {
-		id, err := database.Store(d.device, db, log.Nop{})
+	if err := loadDeviceConfig(dev, db, d.logger); err == nil {
+		id, err := database.Store(dev.device, db, log.Nop{})
 		if err != nil {
 			panic(err)
 		}
-		d.path = &path.Device{ID: id}
+		dev.id = id
 
-		m.Lock()
-		defer m.Unlock()
-		m.devices = append(m.devices, d)
+		d.Lock()
+		defer d.Unlock()
+		d.devices = append(d.devices, dev)
 	} else {
-		log.Warningf(m.logger, "Failed to communicate with local device '%s': %v", d.Info().Name, err)
+		log.Warningf(d.logger, "Failed to communicate with local device '%s': %v", dev.Info().Name, err)
 	}
 }
 

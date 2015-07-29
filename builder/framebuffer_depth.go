@@ -58,8 +58,8 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 	mgr := c.(*Context).ReplayManager
 
 	ctx := &replay.Context{
-		Device:  r.Device,
-		Capture: r.After.Atoms.Capture,
+		Device:  r.Device.ID,
+		Capture: r.After.Atoms.Capture.ID,
 	}
 
 	after, err := ResolveAtom(r.After, d, l)

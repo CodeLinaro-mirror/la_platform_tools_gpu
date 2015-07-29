@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 var (
@@ -114,7 +115,7 @@ func (a api) ReplayTransforms(
 
 	// Device-dependent transforms.
 	transforms.Add(
-		decompressTextures(device, ctx.Capture, db, logger),
+		decompressTextures(device, &path.Capture{ID: ctx.Capture}, db, logger),
 		precisionStrip(device, db, logger),
 		halfFloatOESToHalfFloatARB(device))
 
