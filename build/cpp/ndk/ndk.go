@@ -166,8 +166,8 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		for n, v := range cfg.Defines {
 			a = append(a, fmt.Sprintf("-D%s=%s", n, v))
 		}
-		a = append(a, input.Absolute(), "-o", string(output))
-		return tools.cc.Exec(env, a...)
+		a = append(a, input.Name(), "-o", output.Absolute())
+		return tools.cc.ExecAt(env, build.File(input.Dir()), a...)
 	}
 }
 
