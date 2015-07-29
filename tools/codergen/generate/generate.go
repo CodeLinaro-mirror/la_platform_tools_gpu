@@ -29,9 +29,15 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 )
 
-// Generator is the func handed in to language specific code generation functions.
-// They will call the generator once per output file they want to produce.
-type Generator func(name string, arg interface{}, output string, reflow template.PostProcess) error
+// Generate is a file generation request.
+// It holds all the information needed to generate the file, and is passed in
+// to a work queue.
+type Generate struct {
+	Name   string
+	Arg    interface{}
+	Output string
+	Reflow template.PostProcess
+}
 
 const (
 	indentRune = "»"
