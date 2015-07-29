@@ -147,7 +147,7 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, statusLogger log.Logger, captur
 				if item.action != nil {
 					go func() {
 						driver.Call(window.Close)
-						gapii.AdbStart(statusLogger, item.action, adb.TCPPort(*spyport))
+						gapii.AdbStart(statusLogger, item.action, adb.TCPPort(*spyport), false)
 						capture()
 					}()
 				}

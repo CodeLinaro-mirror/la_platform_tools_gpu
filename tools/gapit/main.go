@@ -34,6 +34,7 @@ var (
 	spyport  = flag.Int("i", 9286, "gapii TCP port to connect to")
 	duration = flag.Duration("d", 10*time.Second, "duration to trace for")
 	output   = flag.String("out", "gapit.gfxtrace", "the file to generate")
+	debug    = flag.Bool("debug", false, "use the debug spy .so")
 )
 
 const usage = `gapit: A tool to trace graphics calls on android.
@@ -81,7 +82,7 @@ func run() error {
 	}
 	defer file.Close()
 
-	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport))
+	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport), *debug)
 	if err != nil {
 		return err
 	}
