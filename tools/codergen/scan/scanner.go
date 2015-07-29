@@ -64,7 +64,6 @@ type Directory struct {
 // Scanner is the main interface to loading and scanning go code for codergen.
 type Scanner struct {
 	Path        string                // The base path of file scanning
-	ForceSource bool                  // If true, forces source only imports
 	Directories map[string]*Directory // The set of directories considered
 	FileSet     *token.FileSet        // The parser file set
 	context     build.Context
@@ -72,10 +71,9 @@ type Scanner struct {
 }
 
 // New creates a new go source scanner.
-func New(path string, forceSource bool) *Scanner {
+func New(path string) *Scanner {
 	l := &Scanner{
 		Path:        path,
-		ForceSource: forceSource,
 		Directories: map[string]*Directory{},
 		FileSet:     token.NewFileSet(),
 		context:     build.Default,

@@ -14,8 +14,6 @@
 
 package scan
 
-import "golang.org/x/tools/go/gcimporter"
-
 // Process resolves all type informtaion for the loaded sources.
 func (s *Scanner) Process() error {
 	dirs := make([]*Directory, 0, len(s.Directories))
@@ -33,13 +31,6 @@ func (s *Scanner) Process() error {
 }
 
 func (s *Scanner) process(dir *Directory) error {
-	if !dir.Scan && !dir.Module.processed && !s.ForceSource {
-		t, err := gcimporter.Import(s.config.Packages, dir.ImportPath)
-		if err == nil {
-			dir.Module.processed = true
-			dir.Module.Types = t
-		}
-	}
 	if !dir.loaded {
 		s.load(dir)
 	}
