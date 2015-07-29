@@ -19,9 +19,9 @@ import (
 	"io"
 	"net"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/process"
 	"android.googlesource.com/platform/tools/gpu/service"
-	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // DisableLocalDeviceCache can be used to disable the disk-cache for the local
@@ -35,7 +35,7 @@ var localReplayBinary = Replayd
 // Port number of the "replayd" running on the local device
 var localDevicePort = 9284
 
-// Allow adjusting the settings for replayd.
+// ConfigureLocalReplayDevice adjusts the settings for replayd.
 func ConfigureLocalReplayDevice(disableCache bool, binary string, port int) {
 	disableLocalDeviceCache = disableCache
 	localReplayBinary = binary
@@ -76,8 +76,8 @@ func (os deviceOS) String() string {
 
 // Device is the interface for a discovered replay device.
 type Device interface {
-	// Path returns the path for the replay device.
-	Path() *path.Device
+	// ID returns the unique identifier for the replay device.
+	ID() binary.ID
 	// Info returns the service Device describing the replay device.
 	Info() *service.Device
 	// Connect opens a connection to the replay device.
@@ -85,12 +85,12 @@ type Device interface {
 }
 
 type deviceBase struct {
-	path   *path.Device
+	id     binary.ID
 	device *service.Device
 }
 
-func (d deviceBase) Path() *path.Device {
-	return d.path
+func (d deviceBase) ID() binary.ID {
+	return d.id
 }
 
 func (d deviceBase) Info() *service.Device {

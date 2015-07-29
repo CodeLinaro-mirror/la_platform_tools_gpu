@@ -69,7 +69,7 @@ func (b *batcher) run() {
 }
 
 func (b *batcher) send(requests []Request) (err error) {
-	c, err := service.ResolveCapture(b.context.Capture.ID, b.database, b.logger)
+	c, err := service.ResolveCapture(b.context.Capture, b.database, b.logger)
 	if err != nil {
 		return fmt.Errorf("Failed to load capture (%s): %v", b.context.Capture, err)
 	}
