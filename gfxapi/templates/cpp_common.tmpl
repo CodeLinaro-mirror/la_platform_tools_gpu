@@ -123,9 +123,10 @@
   {{else if IsPseudonym  $}}{{Template "C++.Null" $.To}}
   {{else if IsClass      $}}{{Template "C++.Type" $}}()
   {{else if IsSlice      $}}{{Template "C++.Type" $}}()
+  {{else if IsMap        $}}{{Template "C++.Type" $}}()
   {{else if IsPointer    $}}nullptr
   {{else if IsReference  $}}{{Template "C++.Type" $}}()
-  {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
+  {{else}}{{Error "macro Null called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
 

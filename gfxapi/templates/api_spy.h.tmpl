@@ -73,6 +73,14 @@
   inline void {{$spyname}}::init(std::shared_ptr<gapic::Encoder> encoder) {
     SpyBase::init(encoder);
     mImports.Resolve();
+    {{range $g := $.Globals}}
+      {{$g.Name}} = §
+        {{if $g.Default}}
+          {{Macro "C++.Read" $g.Default}};
+        {{else}}
+          {{Macro "C++.Null" (TypeOf $g)}};
+        {{end}}
+    {{end}}
   }
 ¶
   {{ForEach (AllCommands $) "MethodImplementation" | JoinWith "\n¶"}}
