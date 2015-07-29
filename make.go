@@ -45,9 +45,12 @@ var (
 	gapiiosxpath = Path(gpusrc, "cc/gapii/osx")
 	cppcoder     = Path(gpusrc, "cc/gapic/coder")
 	javabase     = Path(Paths.Root, "../")
-	javarpclib   = Path(javabase, "base/rpclib/src/main/java/com/android/tools/rpclib")
-	javagfxtrace = Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace")
-	gpusrc       = GoSrcPath(GPURoot)
+	javapaths    = []string{
+		Path(javabase, "base/rpclib/src/main/java/com/android/tools/rpclib"),
+		Path(javabase, "base/rpclib/src/test/java/com/android/tools/rpclib"),
+		Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace"),
+	}
+	gpusrc = GoSrcPath(GPURoot)
 
 	Tools struct {
 		Embed    Entity
@@ -115,7 +118,7 @@ func init() {
 		Command(Apps.Gapid, "--gxuidebug").Creates(Virtual("gapid")).DependsOn(Apps.Gapis, "runtime")
 		// Utilties
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
-		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), javarpclib, javagfxtrace).Creates(Virtual("clean_java"))
+		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), javapaths...).Creates(Virtual("clean_java"))
 		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
 		// The default rules
 		List(Default).DependsOn("apps", "test")
