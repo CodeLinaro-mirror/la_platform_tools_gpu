@@ -32,6 +32,7 @@
   #include "spy.h"
 ¶
   #include <gapic/get_gfx_proc_address.h>
+  #include <gapic/lock.h>
   #include <gapic/log.h>
   #include <gapic/target.h> // STDCALL
 ¶
@@ -57,12 +58,14 @@
 ¶
   namespace {«
 ¶
-  std::unique_ptr<Spy> gSpy; // Must be accessed via spy() below, gets destroyed with the library.
+  gapic::Mutex         gMutex;  // Guards gSpy.
+  std::unique_ptr<Spy> gSpy;    // Must be accessed via spy() below, gets destroyed with the library.
 ¶
   // spy lazily constructs and returns the instance to the spy.
   Spy* spy() {
-    static bool initializedOnce = false;
-    if (!initializedOnce) {
+    gapic::Lock<gapic::Mutex> lock(&gMutex);
+    if (!gSpy) {
+      GAPID_INFO("Constructing spy...\n");
       gSpy.reset(new Spy());
       GAPID_INFO("Registering spy symbols...\n");
       {{range $i, $c := AllCommands $}}
@@ -75,7 +78,6 @@
       gSpy->RegisterSymbol("wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress));
       gSpy->RegisterSymbol("glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress));
       gSpy->RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
-      initializedOnce = true;
     }
     return gSpy.get();
   }
@@ -97,8 +99,10 @@
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "CmdName" $c}}
       EXPORT {{Template "C++.ReturnType" $c}} STDCALL {{$name}}({{Template "C++.CallParameters" $c}}) {
+        Spy* s = spy();
+        gapic::Lock<Spy> lock__(s);
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
-        spy()->{{$name}}({{Template "C++.CallArguments" $c}});
+        s->{{$name}}({{Template "C++.CallArguments" $c}});
       }
     {{end}}
   {{end}}
