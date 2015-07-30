@@ -1305,9 +1305,9 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     Observations observations;
     do {
         if (length > 0) {
-            string(marker);
-        } else {
             read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        } else {
+            string(marker);
         }
         observe(observations.mReads);
         mImports.glInsertEventMarkerEXT(length, marker);
@@ -1326,9 +1326,9 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     Observations observations;
     do {
         if (length > 0) {
-            string(marker);
-        } else {
             read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        } else {
+            string(marker);
         }
         observe(observations.mReads);
         mImports.glPushGroupMarkerEXT(length, marker);

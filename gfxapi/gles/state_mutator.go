@@ -812,9 +812,9 @@ func (ϟa *GlInsertEventMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Databa
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs)
+	} else {
+		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -824,9 +824,9 @@ func (ϟa *GlPushGroupMarkerEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs)
+	} else {
+		_ = string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil

@@ -498,9 +498,9 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	} else {
+		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())
@@ -515,9 +515,9 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	} else {
+		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())

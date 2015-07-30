@@ -130,9 +130,9 @@
           {{Template "Call" $}};
         {{end}}
 
-        {{if 0}} {{/* Enable for debugging */}}
-          const Error err = glGetError();
-          if (err != Error::GL_NO_ERROR) {
+        {{if 1}} {{/* Enable for debugging */}}
+          const GLenum err = glGetError();
+          if (err != GLenum::GL_NO_ERROR) {
             GAPID_WARNING("{{$name}} returned error: 0x%x\n", err);
           }
         {{end}}
