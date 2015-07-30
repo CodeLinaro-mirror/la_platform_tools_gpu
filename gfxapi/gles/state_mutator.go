@@ -3687,15 +3687,35 @@ func (ϟa *GlMapBufferRange) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                    // Contextʳ
+	GetContext_128_result := context                                // Contextʳ
+	ctx := GetContext_128_result                                    // Contextʳ
+	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(ϟa.Target)) // Bufferʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ϟa.Result
+	ptr := U8ᵖ(ϟa.Result) // U8ᵖ
+	b.MappingAccess = ϟa.Access
+	b.MappingData = ptr.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs)
+	if (GLbitfield_GL_MAP_READ_BIT)&(ϟa.Access) != 0 {
+		src := b.Data.Slice(uint64(ϟa.Offset), uint64((ϟa.Offset)+(ϟa.Length)), ϟs) // U8ˢ
+		dst := b.MappingData                                                        // U8ˢ
+		dst.OnWrite(ϟs)
+		_, _ = src, dst
+	}
+	ϟa.Result = Voidᵖ(ptr)
+	_, _, _, _, _ = context, GetContext_128_result, ctx, b, ptr
 	return nil
 }
 func (ϟa *GlUnmapBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                    // Contextʳ
+	GetContext_129_result := context                                // Contextʳ
+	ctx := GetContext_129_result                                    // Contextʳ
+	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(ϟa.Target)) // Bufferʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	b.Data.Slice(uint64(b.MappingOffset), uint64((b.MappingOffset)+(int32(b.MappingData.Count))), ϟs).Copy(b.MappingData, ϟs, ϟd, ϟl)
+	_, _, _, _ = context, GetContext_129_result, ctx, b
 	return nil
 }
 func (ϟa *GlInvalidateFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3725,8 +3745,8 @@ func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_128_result := context                              // Contextʳ
-	ctx := GetContext_128_result                                  // Contextʳ
+	GetContext_130_result := context                              // Contextʳ
+	ctx := GetContext_130_result                                  // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // QueryId
@@ -3738,7 +3758,7 @@ func (ϟa *GlGenQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		q.Index(uint64(i), ϟs).Write(id, ϟs)
 		_ = id
 	}
-	_, _, _, _ = q, context, GetContext_128_result, ctx
+	_, _, _, _ = q, context, GetContext_130_result, ctx
 	return nil
 }
 func (ϟa *GlBeginQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3761,13 +3781,13 @@ func (ϟa *GlDeleteQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_129_result := context                              // Contextʳ
-	ctx := GetContext_129_result                                  // Contextʳ
+	GetContext_131_result := context                              // Contextʳ
+	ctx := GetContext_131_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.Queries[q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Query)(nil)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = q, context, GetContext_129_result, ctx
+	_, _, _, _ = q, context, GetContext_131_result, ctx
 	return nil
 }
 func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3775,11 +3795,11 @@ func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_130_result := context             // Contextʳ
-	ctx := GetContext_130_result                 // Contextʳ
+	GetContext_132_result := context             // Contextʳ
+	ctx := GetContext_132_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ctx.Instances.Queries.Contains(ϟa.Query)
-	_, _, _ = context, GetContext_130_result, ctx
+	_, _, _ = context, GetContext_132_result, ctx
 	return nil
 }
 func (ϟa *GlGetQueryiv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3846,8 +3866,8 @@ func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	a := ϟa.Arrays.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
-	GetContext_131_result := context                             // Contextʳ
-	ctx := GetContext_131_result                                 // Contextʳ
+	GetContext_133_result := context                             // Contextʳ
+	ctx := GetContext_133_result                                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		id := VertexArrayId(ϟa.Arrays.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // VertexArrayId
@@ -3859,7 +3879,7 @@ func (ϟa *GlGenVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 		a.Index(uint64(i), ϟs).Write(id, ϟs)
 		_ = id
 	}
-	_, _, _, _ = a, context, GetContext_131_result, ctx
+	_, _, _, _ = a, context, GetContext_133_result, ctx
 	return nil
 }
 func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3867,8 +3887,8 @@ func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_132_result := context             // Contextʳ
-	ctx := GetContext_132_result                 // Contextʳ
+	GetContext_134_result := context             // Contextʳ
+	ctx := GetContext_134_result                 // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
 		ctx.Instances.VertexArrays[ϟa.Array] = func() *VertexArray {
 			s := &VertexArray{}
@@ -3878,7 +3898,7 @@ func (ϟa *GlBindVertexArray) Mutate(ϟs *gfxapi.State, ϟd database.Database, �
 	}
 	ctx.BoundVertexArray = ϟa.Array
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = context, GetContext_132_result, ctx
+	_, _, _ = context, GetContext_134_result, ctx
 	return nil
 }
 func (ϟa *GlDeleteVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3886,14 +3906,14 @@ func (ϟa *GlDeleteVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_133_result := context                              // Contextʳ
-	ctx := GetContext_133_result                                  // Contextʳ
+	GetContext_135_result := context                              // Contextʳ
+	ctx := GetContext_135_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(uint32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := uint32(uint32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*VertexArray)(nil)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = context, GetContext_133_result, ctx, a
+	_, _, _, _ = context, GetContext_135_result, ctx, a
 	return nil
 }
 func (ϟa *GlGetQueryObjecti64v) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3918,8 +3938,8 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_134_result := context                              // Contextʳ
-	ctx := GetContext_134_result                                  // Contextʳ
+	GetContext_136_result := context                              // Contextʳ
+	ctx := GetContext_136_result                                  // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		id := QueryId(ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // QueryId
@@ -3931,7 +3951,7 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		q.Index(uint64(i), ϟs).Write(id, ϟs)
 		_ = id
 	}
-	_, _, _, _ = q, context, GetContext_134_result, ctx
+	_, _, _, _ = q, context, GetContext_136_result, ctx
 	return nil
 }
 func (ϟa *GlBeginQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3954,13 +3974,13 @@ func (ϟa *GlDeleteQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_135_result := context                              // Contextʳ
-	ctx := GetContext_135_result                                  // Contextʳ
+	GetContext_137_result := context                              // Contextʳ
+	ctx := GetContext_137_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.Queries[q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Query)(nil)
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = q, context, GetContext_135_result, ctx
+	_, _, _, _ = q, context, GetContext_137_result, ctx
 	return nil
 }
 func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -3968,11 +3988,11 @@ func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_136_result := context             // Contextʳ
-	ctx := GetContext_136_result                 // Contextʳ
+	GetContext_138_result := context             // Contextʳ
+	ctx := GetContext_138_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ctx.Instances.Queries.Contains(ϟa.Query)
-	_, _, _ = context, GetContext_136_result, ctx
+	_, _, _ = context, GetContext_138_result, ctx
 	return nil
 }
 func (ϟa *GlQueryCounterEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -4049,8 +4069,8 @@ func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                  // Contextʳ
-	GetContext_137_result := context                                                              // Contextʳ
-	ctx := GetContext_137_result                                                                  // Contextʳ
+	GetContext_139_result := context                                                              // Contextʳ
+	ctx := GetContext_139_result                                                                  // Contextʳ
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
@@ -4074,7 +4094,7 @@ func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		ctx.Rasterizing.Viewport.Height = ϟa.Height
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _ = context, GetContext_137_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
+	_, _, _, _, _, _, _, _, _, _ = context, GetContext_139_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil
 }
 func (ϟa *StartTimer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {

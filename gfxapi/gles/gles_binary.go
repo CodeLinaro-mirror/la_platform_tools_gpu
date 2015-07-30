@@ -395,7 +395,7 @@ var (
 	binaryIDBoolˢ                                  = binary.ID{0xf9, 0x44, 0xf2, 0x44, 0xbb, 0x78, 0x01, 0x7e, 0x56, 0xa1, 0x2f, 0x0d, 0x73, 0x9c, 0xa1, 0x77, 0x23, 0x5d, 0x47, 0xa8}
 	binaryIDBoolᵖ                                  = binary.ID{0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24}
 	binaryIDU8ˢ                                    = binary.ID{0xf7, 0xd9, 0x83, 0x86, 0x77, 0xcc, 0x52, 0xb0, 0x80, 0x2f, 0xfc, 0x47, 0xa5, 0x91, 0x72, 0xd9, 0x3b, 0xcd, 0x65, 0x01}
-	binaryIDBuffer                                 = binary.ID{0xcc, 0x78, 0x3b, 0xbb, 0x05, 0x07, 0x86, 0x3c, 0xfc, 0x92, 0xdd, 0x10, 0x8d, 0xf9, 0xd0, 0x8a, 0x67, 0xfb, 0x22, 0x3b}
+	binaryIDBuffer                                 = binary.ID{0xbf, 0x58, 0x47, 0xec, 0xfd, 0xaa, 0xcf, 0x97, 0x9d, 0xc2, 0xa3, 0x19, 0x7c, 0x17, 0x13, 0x81, 0x92, 0xcf, 0x16, 0x6c}
 	binaryIDBufferDataPointer                      = binary.ID{0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b}
 	binaryIDBufferIdˢ                              = binary.ID{0xfc, 0xf6, 0xb4, 0xce, 0x3b, 0x26, 0x76, 0xbb, 0xcc, 0x8f, 0x7e, 0xb8, 0x5c, 0xd5, 0x83, 0x62, 0x52, 0x48, 0x48, 0x78}
 	binaryIDBufferIdᵖ                              = binary.ID{0xdd, 0x87, 0xfa, 0xe3, 0xdf, 0x7b, 0x94, 0x84, 0xf3, 0x9b, 0xcb, 0xce, 0x6b, 0xbd, 0x3c, 0x5e, 0x9d, 0x78, 0xe5, 0x6d}
@@ -1426,6 +1426,15 @@ func doEncodeBuffer(e binary.Encoder, o *Buffer) error {
 	if err := e.Uint32(uint32(o.Usage)); err != nil {
 		return err
 	}
+	if err := e.Uint32(uint32(o.MappingAccess)); err != nil {
+		return err
+	}
+	if err := e.Int32(o.MappingOffset); err != nil {
+		return err
+	}
+	if err := e.Value(&o.MappingData); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeBuffer(d binary.Decoder, o *Buffer) error {
@@ -1447,6 +1456,19 @@ func doDecodeBuffer(d binary.Decoder, o *Buffer) error {
 	} else {
 		o.Usage = GLenum(obj)
 	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.MappingAccess = GLbitfield(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.MappingOffset = int32(obj)
+	}
+	if err := d.Value(&o.MappingData); err != nil {
+		return err
+	}
 	return nil
 }
 func doSkipBuffer(d binary.Decoder) error {
@@ -1460,6 +1482,15 @@ func doSkipBuffer(d binary.Decoder) error {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1488,6 +1519,9 @@ var schemaBuffer = &schema.Class{
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "MappingAccess", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
+		{Declared: "MappingOffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "MappingData", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 	},
 }
 

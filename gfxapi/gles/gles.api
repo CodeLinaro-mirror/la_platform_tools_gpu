@@ -229,6 +229,10 @@ class Buffer {
   u8[]   Data
   s32    Size  = 0
   GLenum Usage = GL_STATIC_DRAW
+
+  GLbitfield MappingAccess // The mapping access passed to glMapBufferRange.
+  s32        MappingOffset // The mapping offset passed to glMapBufferRange.
+  u8[]       MappingData   // The mapping data returned from glMapBufferRange.
 }
 
 @internal
@@ -2619,11 +2623,30 @@ cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags syncFlags, 
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd void* glMapBufferRange(GLenum target, s32 offset, s32 length, GLbitfield access) {
-  return ?
+  ctx := GetContext()
+  b := ctx.Instances.Buffers[ctx.BoundBuffers[target]]
+
+  ptr := as!u8*(?)
+
+  b.MappingAccess = access
+  b.MappingData = ptr[0:length]
+  if GL_MAP_READ_BIT in access {
+    src := b.Data[offset:offset+length]
+    dst := b.MappingData
+    // copy(dst, src) // TEMP HACK: copy cannot be used here as this is a copy after a fence (ptr := ?)
+    write(dst)
+  }
+
+  return as!void*(ptr)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd void glUnmapBuffer(GLenum target) {
+  ctx := GetContext()
+  b := ctx.Instances.Buffers[ctx.BoundBuffers[target]]
+  // if GL_MAP_WRITE_BIT in b.MappingAccess { // TEMP HACK: Commented as 'fence not allowed in *semantic.Branch'
+    copy(b.Data[b.MappingOffset:b.MappingOffset+len(b.MappingData)], b.MappingData)
+  // }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml

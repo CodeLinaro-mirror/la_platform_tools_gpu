@@ -16597,10 +16597,13 @@ func (c *Framebuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 ////////////////////////////////////////////////////////////////////////////////
 type Buffer struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Data      U8ˢ
-	Size      int32
-	Usage     GLenum
+	CreatedAt     atom.ID
+	Data          U8ˢ
+	Size          int32
+	Usage         GLenum
+	MappingAccess GLbitfield
+	MappingOffset int32
+	MappingData   U8ˢ
 }
 
 func (c *Buffer) Init() {

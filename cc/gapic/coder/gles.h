@@ -214,13 +214,16 @@ namespace gles {
     class Buffer: public Encodable {
     public:
         Buffer() = default;
-        Buffer(uint64_t CreatedAt, U8__S Data, int32_t Size, uint32_t Usage) :
+        Buffer(uint64_t CreatedAt, U8__S Data, int32_t Size, uint32_t Usage, uint32_t MappingAccess, int32_t MappingOffset, U8__S MappingData) :
             mCreatedAt(CreatedAt),
             mData(Data),
             mSize(Size),
-            mUsage(Usage) {}
+            mUsage(Usage),
+            mMappingAccess(MappingAccess),
+            mMappingOffset(MappingOffset),
+            mMappingData(MappingData) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xcc, 0x78, 0x3b, 0xbb, 0x05, 0x07, 0x86, 0x3c, 0xfc, 0x92, 0xdd, 0x10, 0x8d, 0xf9, 0xd0, 0x8a, 0x67, 0xfb, 0x22, 0x3b,  } };
+            static gapic::Id ID{ { 0xbf, 0x58, 0x47, 0xec, 0xfd, 0xaa, 0xcf, 0x97, 0x9d, 0xc2, 0xa3, 0x19, 0x7c, 0x17, 0x13, 0x81, 0x92, 0xcf, 0x16, 0x6c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -228,12 +231,18 @@ namespace gles {
             e->Value(this->mData);
             e->Int32(this->mSize);
             e->Uint32(this->mUsage);
+            e->Uint32(this->mMappingAccess);
+            e->Int32(this->mMappingOffset);
+            e->Value(this->mMappingData);
         }
 
         uint64_t mCreatedAt;
         U8__S mData;
         int32_t mSize;
         uint32_t mUsage;
+        uint32_t mMappingAccess;
+        int32_t mMappingOffset;
+        U8__S mMappingData;
     };
 
     class BufferDataPointer: public Encodable {
