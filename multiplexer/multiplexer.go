@@ -17,6 +17,7 @@ package multiplexer
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"sync"
 
@@ -44,12 +45,17 @@ type Multiplexer struct {
 	channelLock           *sync.Mutex
 	sender                sender
 	nextChannelId         channelId
+	err                   error // only modified by recv()
 }
 
 func (m *Multiplexer) createChannel(id channelId) *channel {
 	m.channelLock.Lock()
 	defer m.channelLock.Unlock()
 
+	if m.channels == nil {
+		// recv has died
+		return nil
+	}
 	if len(m.channels) == 0 {
 		m.sender.begin(sendChanSize, m.mtu, m.out)
 	}
@@ -61,7 +67,9 @@ func (m *Multiplexer) createChannel(id channelId) *channel {
 func (m *Multiplexer) closeChannel(id channelId, sendMsg bool) error {
 	m.channelLock.Lock()
 	defer m.channelLock.Unlock()
-
+	if m.channels == nil {
+		return m.err
+	}
 	if channel, found := m.channels[id]; found {
 		var err error
 		if sendMsg {
@@ -82,9 +90,11 @@ func (m *Multiplexer) closeChannel(id channelId, sendMsg bool) error {
 
 func (m *Multiplexer) writeChannel(id channelId, data []byte) (n int, err error) {
 	m.channelLock.Lock()
-	_, found := m.channels[id]
 	defer m.channelLock.Unlock()
-
+	if m.channels == nil {
+		return 0, m.err
+	}
+	_, found := m.channels[id]
 	if found {
 		return m.sender.sendData(id, data)
 	} else {
@@ -99,14 +109,21 @@ func (m *Multiplexer) closeConnection() {
 }
 
 func (m *Multiplexer) recv() {
-	defer m.closeAllChannels()
-	defer m.closeConnection()
+	defer func() {
+		if r := recover(); r != nil {
+			m.err = fmt.Errorf("Panic in multiplexer %v", r)
+			panic(r)
+		}
+		m.closeAllChannels()
+		m.closeConnection()
+	}()
 	d := cyclic.Decoder(vle.Reader(m.in))
 	for {
 		var ty msgType
 		if err := ty.decode(d); err != nil {
 			if err != io.EOF {
-				log.Warningf(m.logger, "Multiplexer failed to decode message type: %v", err)
+				m.err = fmt.Errorf("Multiplexer failed to decode message type: %v", err)
+				log.Warningf(m.logger, "%v", m.err)
 			}
 			return
 		}
@@ -114,7 +131,8 @@ func (m *Multiplexer) recv() {
 		case msgTypeOpenChannel:
 			msg := &msgOpenChannel{}
 			if err := d.Value(msg); err != nil {
-				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
 			s := m.createChannel(remote(msg.channelId))
@@ -123,7 +141,8 @@ func (m *Multiplexer) recv() {
 		case msgTypeCloseChannel:
 			msg := &msgCloseChannel{}
 			if err := d.Value(msg); err != nil {
-				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
 			m.closeChannel(remote(msg.channelId), false)
@@ -131,7 +150,8 @@ func (m *Multiplexer) recv() {
 		case msgTypeData:
 			msg := &msgData{}
 			if err := d.Value(msg); err != nil {
-				log.Warningf(m.logger, "Multiplexer failed to decode %T message %v", msg, err)
+				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, err)
+				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
 			id := remote(msg.c)
@@ -166,6 +186,9 @@ func (m *Multiplexer) closeAllChannels() {
 func (m *Multiplexer) OpenChannel() (io.ReadWriteCloser, error) {
 	id := m.nextChannelId.increment()
 	s := m.createChannel(id)
+	if s == nil {
+		return nil, m.err
+	}
 	if err := m.sender.sendOpenChannel(id); err == nil {
 		return s, nil
 	} else {
@@ -190,6 +213,7 @@ func New(in io.Reader, out io.Writer, close io.Closer, mtu int, logger log.Inter
 		channelOpenedCallback: channelOpenedCallback,
 		channels:              make(map[channelId]*channel),
 		channelLock:           &sync.Mutex{},
+		err:                   fmt.Errorf("Multiplexer unknown error"),
 	}
 	go m.recv()
 	return m
