@@ -320,6 +320,7 @@ public:
                              uint32_t integer_size, bool little_endian);
     inline void replayCreateRenderer(uint32_t id);
     inline void replayBindRenderer(uint32_t id);
+    inline void switchThread(uint64_t threadID);
     inline void backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                uint32_t depth_fmt, uint32_t stencil_fmt, bool resetViewportScissor);
     inline void startTimer(uint8_t index);
@@ -6165,6 +6166,20 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
     observe(observations.mWrites);
 
     gapic::coder::gles::ReplayBindRenderer coder(observations, id);
+    mEncoder->Object(&coder);
+}
+
+inline void GlesSpy::switchThread(uint64_t threadID) {
+    GAPID_INFO("switchThread(%" PRIu64 ")\n", threadID);
+
+    Observations observations;
+    do {
+        this->CurrentThread = threadID;
+        observe(observations.mReads);
+    } while (false);
+    observe(observations.mWrites);
+
+    gapic::coder::gles::SwitchThread coder(observations, threadID);
     mEncoder->Object(&coder);
 }
 

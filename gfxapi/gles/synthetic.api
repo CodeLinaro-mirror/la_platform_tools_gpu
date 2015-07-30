@@ -28,6 +28,12 @@ cmd void replayCreateRenderer(u32 id) {}
 @synthetic
 cmd void replayBindRenderer(u32 id) {}
 
+// switchThread changes the current thread to the thread with the specified identifier.
+@synthetic @no_replay
+cmd void switchThread(ThreadID threadID) {
+  CurrentThread = threadID
+}
+
 @synthetic
 cmd void backbufferInfo(s32    width,
                         s32    height,

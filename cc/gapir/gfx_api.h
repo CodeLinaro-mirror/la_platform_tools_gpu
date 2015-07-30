@@ -242,10 +242,11 @@ static const uint16_t GlGetQueryObjectui64vEXT = 214;
 static const uint16_t Architecture = 215;
 static const uint16_t ReplayCreateRenderer = 216;
 static const uint16_t ReplayBindRenderer = 217;
-static const uint16_t BackbufferInfo = 218;
-static const uint16_t StartTimer = 219;
-static const uint16_t StopTimer = 220;
-static const uint16_t FlushPostBuffer = 221;
+static const uint16_t SwitchThread = 218;
+static const uint16_t BackbufferInfo = 219;
+static const uint16_t StartTimer = 220;
+static const uint16_t StopTimer = 221;
+static const uint16_t FlushPostBuffer = 222;
 }  // namespace FunctionIds
 
 enum class TextureKind : uint32_t {
@@ -726,7 +727,7 @@ typedef void *VertexPointer;
 typedef void *TexturePointer;
 typedef void *BufferDataPointer;
 typedef uint32_t ContextID;
-typedef uint32_t ThreadID;
+typedef uint64_t ThreadID;
 typedef int EGLBoolean;
 typedef int EGLint;
 typedef void *EGLConfig;

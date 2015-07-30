@@ -533,7 +533,7 @@ typedef void* BufferDataPointer;
 
 typedef uint32_t ContextID;
 
-typedef uint32_t ThreadID;
+typedef uint64_t ThreadID;
 
 typedef int EGLBoolean;
 

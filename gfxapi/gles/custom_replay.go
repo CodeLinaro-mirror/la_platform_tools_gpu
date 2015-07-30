@@ -139,6 +139,17 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.
 	return value.AbsolutePointer(i.Pointer.Address)
 }
 
+func (ω *SwitchThread) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+	ω.Mutate(gs, d, l)
+	s := getState(gs)
+	context := s.Contexts[s.CurrentThread]
+	if context == nil {
+		return nil
+	}
+	ctxID := uint32(context.Identifier)
+	return NewReplayBindRenderer(ctxID).Replay(i, gs, d, l, b)
+}
+
 func (ω *EglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
 	ctxID := uint32(getState(s).EGLContexts[ω.Result].Identifier)

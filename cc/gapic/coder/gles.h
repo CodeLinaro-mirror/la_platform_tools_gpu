@@ -7644,7 +7644,7 @@ namespace gles {
     class State: public Encodable {
     public:
         State() = default;
-        State(uint32_t NextContextID, uint32_t CurrentThread, std::unordered_map<uint32_t,Context*>* Contexts, std::unordered_map<EGLContext,Context*>* EGLContexts, std::unordered_map<GLXContext,Context*>* GLXContexts, std::unordered_map<HGLRC,Context*>* WGLContexts, std::unordered_map<CGLContextObj,Context*>* CGLContexts) :
+        State(uint32_t NextContextID, uint64_t CurrentThread, std::unordered_map<uint64_t,Context*>* Contexts, std::unordered_map<EGLContext,Context*>* EGLContexts, std::unordered_map<GLXContext,Context*>* GLXContexts, std::unordered_map<HGLRC,Context*>* WGLContexts, std::unordered_map<CGLContextObj,Context*>* CGLContexts) :
             mNextContextID(NextContextID),
             mCurrentThread(CurrentThread),
             mContexts(Contexts),
@@ -7658,7 +7658,7 @@ namespace gles {
         }
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mNextContextID);
-            e->Uint32(this->mCurrentThread);
+            e->Uint64(this->mCurrentThread);
             GAPID_FATAL("C++ map encoding not supported");
             GAPID_FATAL("C++ map encoding not supported");
             GAPID_FATAL("C++ map encoding not supported");
@@ -7667,8 +7667,8 @@ namespace gles {
         }
 
         uint32_t mNextContextID;
-        uint32_t mCurrentThread;
-        std::unordered_map<uint32_t,Context*>* mContexts;
+        uint64_t mCurrentThread;
+        std::unordered_map<uint64_t,Context*>* mContexts;
         std::unordered_map<EGLContext,Context*>* mEGLContexts;
         std::unordered_map<GLXContext,Context*>* mGLXContexts;
         std::unordered_map<HGLRC,Context*>* mWGLContexts;
@@ -7695,6 +7695,25 @@ namespace gles {
         atom::Observations mobservations;
         uint8_t mIndex;
         uint64_t mResult;
+    };
+
+    class SwitchThread: public Encodable {
+    public:
+        SwitchThread() = default;
+        SwitchThread(atom::Observations observations, uint64_t ThreadID) :
+            mobservations(observations),
+            mThreadID(ThreadID) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x82, 0x4e, 0xdc, 0x09, 0x39, 0x98, 0x76, 0xf4, 0x8a, 0x87, 0x2d, 0x58, 0x44, 0x40, 0x0f, 0x33, 0x33, 0x08, 0xb4, 0x8f,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mobservations);
+            e->Uint64(this->mThreadID);
+        }
+
+        atom::Observations mobservations;
+        uint64_t mThreadID;
     };
 
     class TextureId__S: public Encodable {

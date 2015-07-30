@@ -4036,6 +4036,14 @@ func (ϟa *ReplayBindRenderer) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
+func (ϟa *SwitchThread) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.CurrentThread = ϟa.ThreadID
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
 func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc

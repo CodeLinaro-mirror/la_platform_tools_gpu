@@ -352,6 +352,7 @@ func init() {
 	Namespace.Add((*StartTimer)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
 	Namespace.Add((*StopTimer)(nil).Class())
+	Namespace.Add((*SwitchThread)(nil).Class())
 	Namespace.Add((*TextureIdˢ)(nil).Class())
 	Namespace.Add((*U32ˢ)(nil).Class())
 	Namespace.Add((*U64ˢ)(nil).Class())
@@ -719,6 +720,7 @@ var (
 	binaryIDStartTimer                             = binary.ID{0x23, 0x7b, 0x88, 0x65, 0x96, 0xf3, 0x0d, 0x5d, 0x50, 0x56, 0xad, 0x18, 0xc8, 0x0a, 0xe8, 0x57, 0xa0, 0x21, 0x1c, 0x9b}
 	binaryIDState                                  = binary.ID{0x9a, 0x1a, 0xdb, 0xe0, 0xa0, 0x77, 0x65, 0xd3, 0x62, 0x31, 0x3f, 0xcb, 0x81, 0xbd, 0x45, 0xc3, 0x24, 0xe7, 0x94, 0x2d}
 	binaryIDStopTimer                              = binary.ID{0xe8, 0x9f, 0x7c, 0xb1, 0xa4, 0xf8, 0x37, 0x81, 0x6b, 0x01, 0x71, 0x0e, 0xbc, 0xf2, 0x92, 0xd2, 0x39, 0x2e, 0xca, 0x5f}
+	binaryIDSwitchThread                           = binary.ID{0x82, 0x4e, 0xdc, 0x09, 0x39, 0x98, 0x76, 0xf4, 0x8a, 0x87, 0x2d, 0x58, 0x44, 0x40, 0x0f, 0x33, 0x33, 0x08, 0xb4, 0x8f}
 	binaryIDTextureIdˢ                             = binary.ID{0x4a, 0xe8, 0xe0, 0x14, 0x09, 0x7c, 0x25, 0x10, 0x88, 0xb0, 0xf9, 0x39, 0x88, 0xd0, 0x7d, 0x81, 0xc6, 0xb6, 0xed, 0x2f}
 	binaryIDU32ˢ                                   = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
 	binaryIDU64ˢ                                   = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
@@ -26383,14 +26385,14 @@ func doEncodeState(e binary.Encoder, o *State) error {
 	if err := e.Uint32(uint32(o.NextContextID)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.CurrentThread)); err != nil {
+	if err := e.Uint64(uint64(o.CurrentThread)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Contexts))); err != nil {
 		return err
 	}
 	for k, v := range o.Contexts {
-		if err := e.Uint32(uint32(k)); err != nil {
+		if err := e.Uint64(uint64(k)); err != nil {
 			return err
 		}
 		if v != nil {
@@ -26469,7 +26471,7 @@ func doDecodeState(d binary.Decoder, o *State) error {
 	} else {
 		o.NextContextID = ContextID(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
 		o.CurrentThread = ThreadID(obj)
@@ -26482,7 +26484,7 @@ func doDecodeState(d binary.Decoder, o *State) error {
 		for i := uint32(0); i < count; i++ {
 			var k ThreadID
 			var v *Context
-			if obj, err := d.Uint32(); err != nil {
+			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
 				k = ThreadID(obj)
@@ -26587,14 +26589,14 @@ func doSkipState(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
+			if _, err := d.Uint64(); err != nil {
 				return err
 			}
 			if _, err := d.SkipObject(); err != nil {
@@ -26673,8 +26675,8 @@ var schemaState = &schema.Class{
 	Name:    "State",
 	Fields: []schema.Field{
 		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
-		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
-		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
+		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
+		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
 		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Name: "EGLContext", ID: (*EGLContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
 		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Name: "GLXContext", ID: (*GLXContext)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
 		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Name: "HGLRC", ID: (*HGLRC)(nil).Class().ID()}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context", ID: (*Context)(nil).Class().ID()}}}},
@@ -26750,6 +26752,65 @@ var schemaStopTimer = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
+
+type binaryClassSwitchThread struct{}
+
+func (*SwitchThread) Class() binary.Class {
+	return (*binaryClassSwitchThread)(nil)
+}
+func doEncodeSwitchThread(e binary.Encoder, o *SwitchThread) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.ThreadID)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeSwitchThread(d binary.Decoder, o *SwitchThread) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.ThreadID = ThreadID(obj)
+	}
+	return nil
+}
+func doSkipSwitchThread(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassSwitchThread) ID() binary.ID      { return binaryIDSwitchThread }
+func (*binaryClassSwitchThread) New() binary.Object { return &SwitchThread{} }
+func (*binaryClassSwitchThread) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeSwitchThread(e, obj.(*SwitchThread))
+}
+func (*binaryClassSwitchThread) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &SwitchThread{}
+	return obj, doDecodeSwitchThread(d, obj)
+}
+func (*binaryClassSwitchThread) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeSwitchThread(d, obj.(*SwitchThread))
+}
+func (*binaryClassSwitchThread) Skip(d binary.Decoder) error { return doSkipSwitchThread(d) }
+func (*binaryClassSwitchThread) Schema() *schema.Class       { return schemaSwitchThread }
+
+var schemaSwitchThread = &schema.Class{
+	TypeID:  binaryIDSwitchThread,
+	Package: "gles",
+	Name:    "SwitchThread",
+	Fields: []schema.Field{
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
+		{Declared: "ThreadID", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
 	},
 }
 

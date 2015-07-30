@@ -388,7 +388,7 @@ class Context {
   Objects                                           Instances
 }
 
-type u32 ThreadID
+type u64 ThreadID
 
 // Globals
 ContextID                   NextContextID

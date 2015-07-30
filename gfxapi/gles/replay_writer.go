@@ -249,10 +249,11 @@ var funcInfoGlGetQueryObjectui64vEXT = builder.FunctionInfo{ID: 214, ReturnType:
 var funcInfoArchitecture = builder.FunctionInfo{ID: 215, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoReplayCreateRenderer = builder.FunctionInfo{ID: 216, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoReplayBindRenderer = builder.FunctionInfo{ID: 217, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 218, ReturnType: protocol.TypeVoid, Parameters: 6}
-var funcInfoStartTimer = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoStopTimer = builder.FunctionInfo{ID: 220, ReturnType: protocol.TypeUint64, Parameters: 1}
-var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoSwitchThread = builder.FunctionInfo{ID: 218, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoStartTimer = builder.FunctionInfo{ID: 220, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoStopTimer = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeUint64, Parameters: 1}
+var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 222, ReturnType: protocol.TypeVoid, Parameters: 0}
 
 func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
@@ -288,7 +289,7 @@ func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 	return value.U32(uint32(c))
 }
 func (c ThreadID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return value.U64(uint64(c))
 }
 func (c EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return Voidᵖ(c).value()
