@@ -69,7 +69,7 @@ func worker(wg *sync.WaitGroup, errs *errors, tasks chan generate.Generate) {
 			if *nowrite {
 				out = ""
 			}
-			changed, err := t.Generate(task.Name, task.Arg, out, task.Reflow)
+			changed, err := t.Generate(task.Name, task.Arg, out, task.Indent)
 			if err != nil {
 				errs.Add(err)
 			} else if changed {

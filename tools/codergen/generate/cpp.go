@@ -40,7 +40,7 @@ func Cpp(m *Module, info copyright.Info, gen chan Generate, path string) {
 			Copyright: strings.TrimSpace(copyright.Build("generated_by", info)),
 		},
 		Output: filepath.Join(path, namespace+".h"),
-		Reflow: indentor("    "),
+		Indent: "    ",
 	}
 }
 
