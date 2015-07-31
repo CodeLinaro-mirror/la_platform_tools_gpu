@@ -79,6 +79,7 @@ public:
 
 private:
     void reset();
+    void createPbuffer(int width, int height);
 
     int mWidth;
     int mHeight;
@@ -89,6 +90,7 @@ private:
     Display *mDisplay;
     GLXContext mContext;
     GLXPbuffer mPbuffer;
+    GLXFBConfig mFBConfig;
 };
 
 RendererImpl::RendererImpl()
@@ -143,6 +145,19 @@ void RendererImpl::reset() {
     mStencilSize = 0;
 }
 
+void RendererImpl::createPbuffer(int width, int height) {
+    if (mPbuffer != 0) {
+        glXDestroyPbuffer(mDisplay, mPbuffer);
+        mPbuffer = 0;
+    }
+    const int pbufferAttribs[] = {
+        GLX_PBUFFER_WIDTH, width,
+        GLX_PBUFFER_HEIGHT, height,
+        None
+    };
+    mPbuffer = glXCreatePbuffer(mDisplay, mFBConfig, pbufferAttribs);
+}
+
 void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stencilSize) {
     if (mContext != nullptr &&
         mWidth == width &&
@@ -153,7 +168,17 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         return;
     }
 
-    // TODO: Check for and handle resizing path.
+    if (mContext != nullptr &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+        // Resize only
+        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d\n", mWidth, mHeight, width, height);
+        createPbuffer(width, height);
+        glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext);
+        mWidth = width;
+        mHeight = height;
+        return;
+    }
 
     const bool wasBound = mBound;
 
@@ -176,21 +201,16 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     if (fbConfigs == nullptr) {
         GAPID_FATAL("Unable to find a suitable X framebuffer config\n");
     }
-    GLXFBConfig fbConfig = fbConfigs[0];
+    mFBConfig = fbConfigs[0];
     XFree(fbConfigs);
 
-    mContext = glXCreateNewContext(mDisplay, fbConfig, GLX_RGBA_TYPE, nullptr, True);
+    mContext = glXCreateNewContext(mDisplay, mFBConfig, GLX_RGBA_TYPE, nullptr, True);
     if (mContext == nullptr) {
         GAPID_FATAL("Failed to create glX context\n");
     }
     XSync(mDisplay, False);
 
-    const int pbufferAttribs[] = {
-        GLX_PBUFFER_WIDTH, width,
-        GLX_PBUFFER_HEIGHT, height,
-        None
-    };
-    mPbuffer = glXCreatePbuffer(mDisplay, fbConfig, pbufferAttribs);
+    createPbuffer(width, height);
 
     mWidth = width;
     mHeight = height;
