@@ -15,3 +15,8 @@
 // Package image provides functions for converting between various image
 // formats.
 package image
+
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.service.image
+// binary: java.indent = "  "
+// binary: java.member_prefix = my
