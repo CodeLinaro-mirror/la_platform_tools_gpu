@@ -79,22 +79,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}
 
-	td := b.device.Info()
-
-	transforms := b.context.Generator.ReplayTransforms(
-		b.context.Context,
-		b.context.Config,
-		requests,
-		td,
-		b.database,
-		b.logger)
-
-	if config.DebugReplay {
-		log.Infof(b.logger, "Replaying %d atoms using transform chain:", len(list.Atoms))
-		for i, t := range transforms {
-			log.Infof(b.logger, "(%d) %#v", i, t)
-		}
-	}
+	device := b.device.Info()
 
 	architecture := b.device.Info().Architecture()
 
@@ -102,18 +87,28 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	if err := func() (err interface{}) {
 		// Prevent panics from causing GAPIS to fall over.
-		// This is temporary, as atoms should return errors instead of causing
-		// runtime panics.
+		// This is temporary, as state mutators should return errors instead of
+		// causing runtime panics.
 		defer func() { err = recover() }()
-		transforms.Transform(*list, &adapter{
+
+		out := &adapter{
 			state:   gfxapi.NewState(),
 			db:      b.database,
 			logger:  b.logger,
 			builder: builder,
-		})
-		return
+		}
+
+		return b.context.Generator.Replay(
+			b.context.Context,
+			b.context.Config,
+			requests,
+			device,
+			*list,
+			out,
+			b.database,
+			b.logger)
 	}(); err != nil {
-		log.Errorf(b.logger, "Panic raised while transforming atoms for replay: %v", err)
+		log.Errorf(b.logger, "Panic raised while writing atoms for replay: %v", err)
 		return fmt.Errorf("%v", err)
 	}
 
@@ -148,12 +143,12 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	connection, err := b.device.Connect()
 	if err != nil {
-		return fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
+		return fmt.Errorf("Failed to connect to device %v: %v", device.Name, err)
 	}
 	defer connection.Close()
 
 	if config.DebugReplay {
-		log.Infof(b.logger, "Sending payload to %v.", td.Name)
+		log.Infof(b.logger, "Sending payload to %v.", device.Name)
 	}
 
 	return executor.Execute(
