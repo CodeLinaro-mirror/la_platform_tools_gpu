@@ -26,68 +26,79 @@
 {{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{.Name}}({{template "Java.Parameters" .}}){{end}}
 
 {{define "Java.Imports"}}
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
-{{range .Service.Methods}}{{Call "Java.Import" .Result.Type}}{{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}{{end}}{{end}}
-
-{{define "Java.Client"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-{{template "Java.Imports" .}}
-import com.android.tools.rpclib.rpccore.RpcException;
-
-import java.io.IOException;
-import java.util.concurrent.Future;
-
-public interface {{.Service.Name}}Client {
-»{{range .Service.Methods}}{{template "Java.Method" .}} throws IOException, RpcException;
-»{{end}}
-}
+  import com.android.tools.rpclib.binary.BinaryID;
+  import com.android.tools.rpclib.binary.BinaryObject;
+  {{range .Service.Methods}}
+    {{Call "Java.Import" .Result.Type}}
+    {{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}
+  {{end}}
 {{end}}
 
-{{define "Java.ClientImpl"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-{{template "Java.Imports" .}}
-import com.android.tools.rpclib.rpccore.Broadcaster;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-
-public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
-»private final Broadcaster myBroadcaster;
-»private final ExecutorService myExecutorService;
-
-»public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {
-»»myExecutorService = executorService;
-»»myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);
-»}
-{{range .Service.Methods}}
-»@Override
-»public {{template "Java.Method" .}} {
-»»return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));
-»}
+{{define "Java.Client"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  {{template "Java.Imports" .}}
+  import com.android.tools.rpclib.rpccore.RpcException;¶
+  ¶
+  import java.io.IOException;¶
+  import java.util.concurrent.Future;¶
+  ¶
+  public interface {{.Service.Name}}Client {»¶
+    {{range .Service.Methods}}
+      {{template "Java.Method" .}} throws IOException, RpcException;¶
+    {{end}}
+  «}¶
 {{end}}
 
-{{range .Service.Methods}}
-»private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {
-»»private final {{File.ClassName .Call}} myCall;
+{{define "Java.ClientImpl"}}
+  §{{$.Copyright}}§
+  package {{.JavaPackage}};¶
+  ¶
+  {{template "Java.Imports" .}}
+  import com.android.tools.rpclib.rpccore.Broadcaster;
 
-»»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
-»»»myCall = new {{File.ClassName .Call}}();
-{{range .Call.Params}}»»»myCall.{{File.Setter .Name}}({{.Name}});
-{{end}}
-»»}
-»»@Override
-»»public {{Call "Java.Value" .Result.Type}} call() throws Exception {
-»»»{{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);
-»»»return result.myValue;{{else}}myBroadcaster.Send(myCall);
-»»»return null;{{end}}
-»»}
-»}
-{{end}}
-}
+  import java.io.InputStream;
+  import java.io.OutputStream;
+  import java.util.concurrent.Callable;
+  import java.util.concurrent.ExecutorService;
+  import java.util.concurrent.Future;
+
+  public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {»¶
+    private final Broadcaster myBroadcaster;¶
+    private final ExecutorService myExecutorService;¶
+
+    public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
+      myExecutorService = executorService;¶
+      myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
+    «}¶
+    {{range .Service.Methods}}
+      @Override¶
+      public {{template "Java.Method" .}} {»¶
+        return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
+      «}¶
+    {{end}}
+    ¶
+    {{range .Service.Methods}}
+      private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
+        private final {{File.ClassName .Call}} myCall;¶
+        ¶
+        private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
+          myCall = new {{File.ClassName .Call}}();¶
+          {{range .Call.Params}}
+            myCall.{{File.Setter .Name}}({{.Name}});¶
+          {{end}}
+        «}¶
+        @Override¶
+        public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
+          {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
+            return result.myValue;¶
+          {{else}}
+            myBroadcaster.Send(myCall);¶
+            return null;¶
+          {{end}}
+        «}¶
+      «}¶
+    {{end}}
+  «}¶
 {{end}}
