@@ -28,6 +28,7 @@ type InstalledPackage struct {
 	Name    string    // Name of the package.
 	Device  *Device   // The device this package is installed on.
 	Actions []*Action // The actions this package supports.
+	ABI     string    // The ABI of the package or empty
 }
 
 // WrapProperties returns the list of wrap-properties for the given installed
@@ -113,6 +114,41 @@ func (d *Device) parsePackages(str string) (Packages, error) {
 				Name:     strings.TrimRight(action.text, ":"),
 				Activity: parts[1],
 			})
+		}
+	}
+	// Read the "Packages:" section if it is present and use it to set ABI
+	packSection := tree.find("Packages:")
+	if packSection != nil {
+		for _, pack := range packSection.children {
+			// Package [com.google.foo] (ffffffc):
+			fields := strings.Fields(pack.text)
+			if len(fields) != 3 {
+				continue
+			}
+			name := strings.Trim(fields[1], "[]")
+			ip, ok := packageMap[name]
+			if !ok {
+				// We didn't find an action for this package
+				continue
+			}
+
+			for _, attr := range pack.children {
+				// primaryCpuAbi=arm64-v8a
+				// primaryCpuAbi=null
+				av := strings.TrimSpace(attr.text)
+				if !strings.HasPrefix(av, "primaryCpuAbi=") {
+					continue
+				}
+				splits := strings.SplitN(av, "=", 2)
+				if len(splits) < 2 {
+					break
+				}
+				if splits[1] == "null" {
+					// This means the package manager will select the platform ABI
+					break
+				}
+				ip.ABI = splits[1]
+			}
 		}
 	}
 	packages := make(Packages, 0, len(packageMap))
