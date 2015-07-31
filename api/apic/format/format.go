@@ -95,170 +95,204 @@ func Format(api *ast.API, w io.Writer) {
 }
 
 type printer struct {
-	tabbers  []*tabwriter.Writer
-	indenter indenter
-	out      io.Writer
-	prefixes map[parse.Node]string
-	suffixes map[parse.Node]string
-	aligns   map[parse.Node]struct{}
+	tabbers    []*tabwriter.Writer
+	indenter   indenter
+	out        io.Writer
+	injections map[injectKey]string
+	aligns     map[parse.Node]struct{}
+}
+
+// isNewline returns true if n starts on a new line.
+func isNewline(n parse.Node) bool {
+	for _, s := range n.Prefix() {
+		if strings.Contains(s.Token().String(), "\n") {
+			return true
+		}
+	}
+	if b, ok := n.(*parse.Branch); ok && len(b.Children) > 0 {
+		return isNewline(b.Children[0])
+	}
+	return false
+}
+
+// bracketed returns true if the block b was declared with {} brackets.
+func bracketed(b *ast.Block) bool {
+	if len(b.CST.Children) == 0 {
+		return false
+	}
+	return b.CST.Children[0].Token().String() == ast.OpBlockStart
 }
 
 // markup populates the parse.Node maps with information based on the ast tree.
 func (p *printer) markup(n ast.Node) {
 	switch n := n.(type) {
 	case *ast.Alias:
-		p.prefix(n.To, "•")
-		p.prefix(n.Name, "\t•")
+		p.inject(n.To, afterPrefix, "•")
+		p.inject(n.Name, afterPrefix, "\t•")
 
 	case *ast.Annotation:
-		p.suffix(n, "•")
+		p.inject(n, beforeSuffix, "•")
 
 	case *ast.API:
 		p.align(n)
 
 	case *ast.Assign:
-		p.suffix(n.LHS, "•")
-		p.prefix(n.RHS, "•")
+		p.inject(n.LHS, beforeSuffix, "•")
+		p.inject(n.RHS, afterPrefix, "•")
 
 	case *ast.BinaryOp:
 		if n.Operator != ":" {
-			p.suffix(n.LHS, "•")
-			p.prefix(n.RHS, "•")
+			p.inject(n.LHS, beforeSuffix, "•")
+			p.inject(n.RHS, afterPrefix, "•")
 		}
 
 	case *ast.Block:
 		p.align(n)
-		p.prefix(n, "•")
-		if c := len(n.Statements); c > 0 {
-			p.prefix(n, "»")
-			p.suffix(n.Statements[c-1], "«")
+
+		// •{}•
+		p.inject(n, beforePrefix, "•")
+		p.inject(n, afterSuffix, "•")
+
+		if len(n.Statements) > 0 {
+			if c := len(n.CST.Children); c > 0 {
+				if bracketed(n) {
+					// {•» statements... «•}
+					p.inject(n.CST.Children[0], beforeSuffix, "•»")
+					p.inject(n.CST.Children[c-1], afterPrefix, "«•")
+				} else {
+					// »statement«
+					p.inject(n, beforePrefix, "»")
+					p.inject(n, afterSuffix, "«")
+				}
+			}
 		}
 
 	case *ast.Branch:
-		p.prefix(n.Condition, "•")
-		if n.False != nil {
-			p.suffix(n.True, "•")
-		}
+		p.inject(n.Condition, afterPrefix, "•")
 
 	case *ast.Call:
 		p.align(n)
 		if c := len(n.Arguments); c > 0 {
 			for i, v := range n.Arguments {
 				if i == 0 {
-					p.prefix(v, "\t")
+					p.inject(v, afterPrefix, "\t")
 				} else {
-					p.prefix(v, "•\t")
+					p.inject(v, afterPrefix, "•\t")
 				}
 			}
-			p.suffix(n.Target, "»")
-			p.suffix(n.Arguments[c-1], "«")
+			p.inject(n.Target, beforeSuffix, "»")
+			p.inject(n.Arguments[c-1], beforeSuffix, "«")
 		}
 
 	case *ast.Case:
-		p.prefix(n, "•")
+		p.inject(n, afterPrefix, "•")
 		if c := len(n.Conditions); c > 0 {
 			for _, c := range n.Conditions {
-				p.prefix(c, "•")
+				p.inject(c, afterPrefix, "•")
 			}
-			p.prefix(n.Conditions[0], "»»")
-			p.suffix(n.Conditions[c-1], "««")
+			p.inject(n.Conditions[0], afterPrefix, "»»")
+			p.inject(n.Conditions[c-1], beforeSuffix, "««")
 		}
-		p.prefix(n.Block, "\t")
-		p.suffix(n.Block, "•")
+		if !isNewline(n.Block.CST) {
+			// align:
+			// case Foo: |•{ ... }•
+			// case Blah:|•{ ... }•
+			p.inject(n.Block, afterPrefix, "\t")
+		}
 
 	case *ast.Class:
 		p.align(n)
-		p.prefix(n.Name, "•")
-		p.suffix(n.Name, "•")
+		p.inject(n.Name, afterPrefix, "•")
+		p.inject(n.Name, beforeSuffix, "•")
 		if c := len(n.Fields); c > 0 {
-			p.suffix(n.Name, "»")
-			p.suffix(n.Fields[c-1], "«")
+			p.inject(n.Name, beforeSuffix, "»")
+			p.inject(n.Fields[c-1], beforeSuffix, "«")
 		}
 
 	case *ast.DeclareLocal:
-		p.suffix(n.Name, "•")
-		p.prefix(n.RHS, "•")
+		p.inject(n.Name, beforeSuffix, "•")
+		p.inject(n.RHS, afterPrefix, "•")
 
 	case *ast.Enum:
 		p.align(n)
-		p.prefix(n.Name, "•")
-		p.suffix(n.Name, "•")
+		p.inject(n.Name, afterPrefix, "•")
+		p.inject(n.Name, beforeSuffix, "•")
 		if c := len(n.Entries); c > 0 {
-			p.suffix(n.Name, "»")
-			p.suffix(n.Entries[c-1], "«")
+			p.inject(n.Name, beforeSuffix, "»")
+			p.inject(n.Entries[c-1], beforeSuffix, "«")
 		}
 
 	case *ast.EnumEntry:
 		//name[A•   ]=[B•]value[C    ]••// comment
-		p.suffix(n.Name, "\t•")  // A
-		p.prefix(n.Value, "\t•") // B
-		p.suffix(n.Value, "\t")  // C
+		p.inject(n.Name, beforeSuffix, "\t•") // A
+		p.inject(n.Value, afterPrefix, "\t•") // B
+		p.inject(n.Value, beforeSuffix, "\t") // C
 
 	case *ast.Field:
-		//type[A•   ]name[B•   ]=[C•]default[D    ]••// comment
-		p.prefix(n.Name, "\t•") // A
+		//type[A•   ]name[B•   ]=[C•]default[D    ]•// comment
+		p.inject(n.Name, afterPrefix, "\t•") // A
 		if n.Default != nil {
-			p.suffix(n.Name, "\t•")   // B
-			p.prefix(n.Default, "•")  // C
-			p.suffix(n.Default, "\t") // D
+			p.inject(n.Name, beforeSuffix, "\t•")   // B
+			p.inject(n.Default, afterPrefix, "•")   // C
+			p.inject(n.Default, beforeSuffix, "\t") // D
 		} else {
-			p.suffix(n.Name, "\t\t")
+			p.inject(n.Name, beforeSuffix, "\t\t")
 		}
 
 	case *ast.Function:
 		p.align(n)
 		ret := n.Parameters[len(n.Parameters)-1]
-		p.prefix(n.Name, "•")
-		p.prefix(ret, "•")
+		p.inject(n.Name, afterPrefix, "•")
+		p.inject(ret, afterPrefix, "•")
 		for i, v := range n.Parameters[:len(n.Parameters)-1] {
 			if i == 0 {
-				p.prefix(v.Type, "\t")
+				p.inject(v.Type, afterPrefix, "\t")
 			} else {
-				p.prefix(v.Type, "•\t")
+				p.inject(v.Type, afterPrefix, "•\t")
 			}
-			p.prefix(v.Name, "•\t")
+			p.inject(v.Name, afterPrefix, "•\t")
 		}
 
 	case *ast.Generic:
 		if len(n.Arguments) > 0 {
 			for _, a := range n.Arguments[1:] {
-				p.prefix(a, "•")
+				p.inject(a, afterPrefix, "•")
 			}
 		}
 
 	case *ast.Iteration:
-		p.prefix(n.Variable, "•")
-		p.suffix(n.Variable, "•")
-		p.prefix(n.Iterable, "•")
+		p.inject(n.Variable, afterPrefix, "•")
+		p.inject(n.Variable, beforeSuffix, "•")
+		p.inject(n.Iterable, afterPrefix, "•")
 
 	case *ast.Import:
 		if n.Name != nil {
-			p.prefix(n.Name, "•")
+			p.inject(n.Name, afterPrefix, "•")
 		}
-		p.prefix(n.Path, "•")
+		p.inject(n.Path, afterPrefix, "•")
 
 	case *ast.NamedArg:
-		p.prefix(n.Value, "•\t")
+		p.inject(n.Value, afterPrefix, "•\t")
 
 	case *ast.PointerType:
 		if n.Const {
-			p.prefix(n.To, "•")
+			p.inject(n.To, afterPrefix, "•")
 		}
 
 	case *ast.Pseudonym:
-		p.prefix(n.To, "•")
-		p.prefix(n.Name, "\t•")
+		p.inject(n.To, afterPrefix, "•")
+		p.inject(n.Name, afterPrefix, "\t•")
 
 	case *ast.Return:
-		p.prefix(n.Value, "•")
+		p.inject(n.Value, afterPrefix, "•")
 
 	case *ast.Switch:
 		p.align(n)
-		p.prefix(n.Value, "•")
-		p.suffix(n.Value, "•")
+		p.inject(n.Value, afterPrefix, "•")
+		p.inject(n.Value, beforeSuffix, "•")
 		if c := len(n.Cases); c > 0 {
-			p.suffix(n.Value, "»")
-			p.suffix(n.Cases[c-1], "«")
+			p.inject(n.Value, beforeSuffix, "»")
+			p.inject(n.Cases[c-1], beforeSuffix, "«")
 		}
 	}
 
@@ -268,13 +302,18 @@ func (p *printer) markup(n ast.Node) {
 // print traverses and prints the CST, applying modifications based on the
 // markup pass.
 func (p *printer) print(n parse.Node) {
-	// emit any custom prefixes.
-	if prefix, ok := p.prefixes[n]; ok {
-		p.write(prefix)
+	// emit any beforePrefix injections.
+	if s, ok := p.injections[injectKey{n, beforePrefix}]; ok {
+		p.write(s)
 	}
 
 	// print the prefix comments.
 	p.separator(n.Prefix())
+
+	// emit any afterPrefix injections.
+	if s, ok := p.injections[injectKey{n, afterPrefix}]; ok {
+		p.write(s)
+	}
 
 	switch n := n.(type) {
 	case *parse.Branch:
@@ -297,12 +336,17 @@ func (p *printer) print(n parse.Node) {
 		panic("Unknown parse node type")
 	}
 
+	// emit any beforeSuffix injections.
+	if s, ok := p.injections[injectKey{n, beforeSuffix}]; ok {
+		p.write(s)
+	}
+
 	// print the suffix comments.
 	p.separator(n.Suffix())
 
-	// print any custom suffixes.
-	if suffix, ok := p.suffixes[n]; ok {
-		p.write(suffix)
+	// emit any afterSuffix injections.
+	if s, ok := p.injections[injectKey{n, afterSuffix}]; ok {
+		p.write(s)
 	}
 }
 
@@ -343,20 +387,36 @@ func (p *printer) popTabber() {
 	}
 }
 
-// prefix prefixes the node n with s when it is printed.
-func (p *printer) prefix(n ast.Node, s string) {
-	if p.prefixes == nil {
-		p.prefixes = make(map[parse.Node]string)
-	}
-	p.prefixes[n.Node()] = p.prefixes[n.Node()] + s
+type position int
+
+const (
+	beforePrefix = position(iota)
+	afterPrefix
+	beforeSuffix
+	afterSuffix
+)
+
+type injectKey struct {
+	n parse.Node
+	p position
 }
 
-// prefix suffixes the node n with s when it is printed.
-func (p *printer) suffix(n ast.Node, s string) {
-	if p.suffixes == nil {
-		p.suffixes = make(map[parse.Node]string)
+// inject adds s using r relative to the AST or CST node n.
+func (p *printer) inject(n interface{}, r position, s string) {
+	if p.injections == nil {
+		p.injections = make(map[injectKey]string)
 	}
-	p.suffixes[n.Node()] = p.suffixes[n.Node()] + s
+	var key injectKey
+	key.p = r
+	switch n := n.(type) {
+	case parse.Node:
+		key.n = n
+	case ast.Node:
+		key.n = n.Node()
+	default:
+		panic(fmt.Errorf("n must be a parse.Node or ast.Node. Got %T", n))
+	}
+	p.injections[key] = p.injections[key] + s
 }
 
 // align marks up n's children to be printed with a new tabwriter.
@@ -368,13 +428,13 @@ func (p *printer) align(n ast.Node) {
 }
 
 // separator writes sep to the indenter iff it is a comment.
-// All comments are preceeded with two soft whitespaces.
+// All comments are preceeded with a soft whitespace.
 func (p *printer) separator(sep parse.Separator) {
 	for _, sep := range sep {
 		s := sep.Token().String()
 		switch {
 		case strings.HasPrefix(s, "//"), strings.HasPrefix(s, "/*"):
-			p.write("••")
+			p.write("•")
 			p.write(s)
 
 		case strings.HasPrefix(s, "\n"):
