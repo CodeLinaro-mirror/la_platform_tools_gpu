@@ -863,7 +863,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
-{{define "Java.Type.Interface"}}BinaryObject{{end}}
+{{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
