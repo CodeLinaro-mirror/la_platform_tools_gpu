@@ -93,14 +93,15 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 	}
 }
 
-func setBackbuffer(width, height int) atom.Atom {
+func setBackbuffer(width, height int, preserveBuffersOnSwap bool) atom.Atom {
 	color := gles.GLenum_GL_RGB565
 	depth := gles.GLenum_GL_DEPTH_COMPONENT16
 	stencil := gles.GLenum_GL_STENCIL_INDEX8
-	return gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */)
+	return gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil,
+		true /* resetViewportScissor */, preserveBuffersOnSwap)
 }
 
-func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int) *atom.List {
+func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) *atom.List {
 	eglDisplay := p(0x1000)
 	eglConfig := p(0x2000)
 	eglShareContext := memory.Nullptr
@@ -113,7 +114,7 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
-		setBackbuffer(width, height),
+		setBackbuffer(width, height, preserveBuffersOnSwap),
 	)
 	return atoms
 }
@@ -122,7 +123,7 @@ func TestClear(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
-	atoms := initContext(device.Info().Architecture(), d, l, 64, 64)
+	atoms := initContext(device.Info().Architecture(), d, l, 64, 64, false)
 	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
@@ -157,7 +158,7 @@ func TestDrawTriangle(t *testing.T) {
 	device := utils.FindLocalDevice(t, mgr)
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
-	atoms := initContext(a, d, l, 64, 64)
+	atoms := initContext(a, d, l, 64, 64, false)
 	clear := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
@@ -182,14 +183,15 @@ func TestDrawTriangle(t *testing.T) {
 	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle", triangle)
 }
 
-// TestResizeRenderer checks that backbuffers can be resized without destroying the current context.
+// TestResizeRenderer checks that backbuffers can be resized without destroying
+// the current context.
 func TestResizeRenderer(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
-	atoms := initContext(a, d, l, 8, 8) // start with a small backbuffer
+	atoms := initContext(a, d, l, 8, 8, false) // start with a small backbuffer
 	atoms.Add(gles.NewProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
 	atoms.Add(
 		gles.NewGlLinkProgram(prog),
@@ -200,7 +202,7 @@ func TestResizeRenderer(t *testing.T) {
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 	)
 	triangle := atoms.Add(
-		setBackbuffer(64, 64), // Resize just before clearing and drawing.
+		setBackbuffer(64, 64, false), // Resize just before clearing and drawing.
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
@@ -212,4 +214,31 @@ func TestResizeRenderer(t *testing.T) {
 	}
 
 	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle_2", triangle)
+}
+
+// TestPreserveBuffersOnSwap checks that when the preserveBuffersOnSwap flag is
+// set, the backbuffer is preserved between calls to eglSwapBuffers().
+func TestPreserveBuffersOnSwap(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
+	a := device.Info().Architecture()
+	atoms := initContext(a, d, l, 64, 64, true)
+	clear := atoms.Add(
+		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
+	)
+	swapA := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
+	swapB := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
+	swapC := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
+
+	ctx := &replay.Context{
+		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Device:  device.ID(),
+	}
+
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", clear)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapA)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapB)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-blue", swapC)
 }
