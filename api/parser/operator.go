@@ -57,16 +57,16 @@ func scanOperator(p *parse.Parser) string {
 }
 
 // lhs operator expression
-func binaryOp(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.BinaryOp {
+func binaryOp(p *parse.Parser, lhs ast.Node) *ast.BinaryOp {
 	op := scanOperator(p)
 	if _, found := ast.BinaryOperators[op]; !found {
 		p.Rollback()
 		return nil
 	}
-	p.ParseLeaf(cst, nil)
 	n := &ast.BinaryOp{LHS: lhs, Operator: op}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+	p.Extend(lhs.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		n.CST = cst
+		p.ParseLeaf(cst, nil)
 		n.RHS = requireExpression(p, cst)
 	})
 	return n
