@@ -21,6 +21,7 @@
 
 #include <gapic/encoder.h>
 #include <gapic/interval_list.h>
+#include <gapic/mutex.h>
 
 #include <gapic/coder/memory.h>
 #include <gapic/coder/atom.h>
@@ -37,6 +38,12 @@ namespace gapii {
 class SpyBase {
 public:
     void init(std::shared_ptr<gapic::Encoder> encoder);
+
+    // lock must be called before invoking any command.
+    inline void lock();
+
+    // unlock must be called after invoking any command.
+    inline void unlock();
 
 protected:
     typedef gapic::coder::atom::Observation Observation;
@@ -111,7 +118,8 @@ protected:
     // slice is observed as a read operation.
     inline std::string string(const Slice<char>& slice);
 
-    EncoderSPtr mEncoder;       // The output stream encoder.
+    // The output stream encoder.
+    EncoderSPtr mEncoder;
 
 private:
     // writes a value to i'th element in the slice dst.
@@ -126,13 +134,23 @@ private:
     template <typename T, size_t N>
     inline void write_(const Slice<T[N]>& dst, uint64_t i, const T(&value)[N], int);
 
-
     // The list of pending reads or writes observations that are yet to be made.
     gapic::IntervalList<uintptr_t> mPendingObservations;
 
     // The list of observations that have already been encoded.
     IdSet mResources;
+
+    // The mutex that should be locked for the duration of each of the intercepted commands.
+    gapic::Mutex mMutex;
 };
+
+inline void SpyBase::lock() {
+    mMutex.lock();
+}
+
+inline void SpyBase::unlock() {
+    mMutex.unlock();
+}
 
 template <typename T>
 inline void SpyBase::read(const Slice<T>& slice) {

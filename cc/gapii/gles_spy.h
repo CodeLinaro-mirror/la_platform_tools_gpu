@@ -320,6 +320,7 @@ public:
                              uint32_t integer_size, bool little_endian);
     inline void replayCreateRenderer(uint32_t id);
     inline void replayBindRenderer(uint32_t id);
+    inline void switchThread(uint64_t threadID);
     inline void backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                uint32_t depth_fmt, uint32_t stencil_fmt, bool resetViewportScissor);
     inline void startTimer(uint8_t index);
@@ -1304,9 +1305,9 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, char* marker) {
     Observations observations;
     do {
         if (length > 0) {
-            string(marker);
-        } else {
             read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        } else {
+            string(marker);
         }
         observe(observations.mReads);
         mImports.glInsertEventMarkerEXT(length, marker);
@@ -1325,9 +1326,9 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, char* marker) {
     Observations observations;
     do {
         if (length > 0) {
-            string(marker);
-        } else {
             read(slice(marker, (uint64_t)(0), (uint64_t)(length)));
+        } else {
+            string(marker);
         }
         observe(observations.mReads);
         mImports.glPushGroupMarkerEXT(length, marker);
@@ -5491,8 +5492,21 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
 
     Observations observations;
     do {
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        std::shared_ptr<Context> l_GetContext_128_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_128_result;
+        std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_ctx->mBoundBuffers[target]];
         observe(observations.mReads);
         result = mImports.glMapBufferRange(target, offset, length, access);
+        uint8_t* l_ptr = (uint8_t*)(result);
+        l_b->mMappingAccess = access;
+        l_b->mMappingData = slice(l_ptr, (uint64_t)(0), (uint64_t)(length));
+        if ((access & GLbitfield::GL_MAP_READ_BIT) != 0) {
+            Slice<uint8_t> l_src =
+                    slice(l_b->mData, (uint64_t)(offset), (uint64_t)(offset + length));
+            Slice<uint8_t> l_dst = l_b->mMappingData;
+            write(l_dst);
+        }
         break;
     } while (false);
     observe(observations.mWrites);
@@ -5511,8 +5525,17 @@ inline void GlesSpy::glUnmapBuffer(uint32_t target) {
 
     Observations observations;
     do {
+        std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+        std::shared_ptr<Context> l_GetContext_129_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_129_result;
+        std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_ctx->mBoundBuffers[target]];
+        Slice<uint8_t> copy__dst__ =
+                copy(slice(l_b->mData, (uint64_t)(l_b->mMappingOffset),
+                           (uint64_t)(l_b->mMappingOffset + int32_t((l_b->mMappingData.count())))),
+                     l_b->mMappingData);
         observe(observations.mReads);
         mImports.glUnmapBuffer(target);
+        write(copy__dst__);
     } while (false);
     observe(observations.mWrites);
 
@@ -5583,8 +5606,8 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_128_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_128_result;
+        std::shared_ptr<Context> l_GetContext_130_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
         observe(observations.mReads);
         mImports.glGenQueries(count, queries);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5637,8 +5660,8 @@ inline void GlesSpy::glDeleteQueries(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_129_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_129_result;
+        std::shared_ptr<Context> l_GetContext_131_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mQueries[read(l_q, (uint64_t)(l_i))] = std::shared_ptr<Query>();
         }
@@ -5661,8 +5684,8 @@ inline bool GlesSpy::glIsQuery(uint32_t query) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_130_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
+        std::shared_ptr<Context> l_GetContext_132_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_132_result;
         observe(observations.mReads);
         result = mImports.glIsQuery(query);
         break;
@@ -5820,8 +5843,8 @@ inline void GlesSpy::glGenVertexArrays(int32_t count, uint32_t* arrays) {
     do {
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_131_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
+        std::shared_ptr<Context> l_GetContext_133_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_133_result;
         observe(observations.mReads);
         mImports.glGenVertexArrays(count, arrays);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5846,8 +5869,8 @@ inline void GlesSpy::glBindVertexArray(uint32_t array) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_132_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_132_result;
+        std::shared_ptr<Context> l_GetContext_134_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_134_result;
         if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
             l_ctx->mInstances.mVertexArrays[array] =
                     std::shared_ptr<VertexArray>((new VertexArray()));
@@ -5868,8 +5891,8 @@ inline void GlesSpy::glDeleteVertexArrays(uint32_t count, uint32_t* arrays) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_133_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_133_result;
+        std::shared_ptr<Context> l_GetContext_135_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_135_result;
         Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
         for (uint32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mVertexArrays[read(l_a, (uint64_t)(l_i))] =
@@ -5930,8 +5953,8 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_134_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_134_result;
+        std::shared_ptr<Context> l_GetContext_136_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_136_result;
         observe(observations.mReads);
         mImports.glGenQueriesEXT(count, queries);
         for (int32_t l_i = 0; l_i < count; ++l_i) {
@@ -5984,8 +6007,8 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, uint32_t* queries) {
     do {
         Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_135_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_135_result;
+        std::shared_ptr<Context> l_GetContext_137_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_137_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             l_ctx->mInstances.mQueries[read(l_q, (uint64_t)(l_i))] = std::shared_ptr<Query>();
         }
@@ -6008,8 +6031,8 @@ inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_136_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_136_result;
+        std::shared_ptr<Context> l_GetContext_138_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_138_result;
         observe(observations.mReads);
         result = mImports.glIsQueryEXT(query);
         break;
@@ -6168,6 +6191,20 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
     mEncoder->Object(&coder);
 }
 
+inline void GlesSpy::switchThread(uint64_t threadID) {
+    GAPID_INFO("switchThread(%" PRIu64 ")\n", threadID);
+
+    Observations observations;
+    do {
+        this->CurrentThread = threadID;
+        observe(observations.mReads);
+    } while (false);
+    observe(observations.mWrites);
+
+    gapic::coder::gles::SwitchThread coder(observations, threadID);
+    mEncoder->Object(&coder);
+}
+
 inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                     uint32_t depth_fmt, uint32_t stencil_fmt,
                                     bool resetViewportScissor) {
@@ -6177,8 +6214,8 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-        std::shared_ptr<Context> l_GetContext_137_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_137_result;
+        std::shared_ptr<Context> l_GetContext_139_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_139_result;
         std::shared_ptr<Framebuffer> l_backbuffer =
                 l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)];
         RenderbufferId l_color_id =
