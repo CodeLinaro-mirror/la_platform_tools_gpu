@@ -78,7 +78,7 @@ public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
 
 »»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
 »»»myCall = new {{File.ClassName .Call}}();
-{{range .Call.Params}}»»»myCall.set{{.Name}}({{.Name}});
+{{range .Call.Params}}»»»myCall.{{File.Setter .Name}}({{.Name}});
 {{end}}
 »»}
 »»@Override
