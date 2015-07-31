@@ -37,9 +37,9 @@ type Service struct {
 
 // Method describes a method of a service.
 type Method struct {
-	Name   string
-	Call   Call
-	Result Result
+	Name   string // The name the method was given in go.
+	Call   Call   // The method call parameter information.
+	Result Result // The method return value information.
 }
 
 // Call wraps parameters to a service method.
