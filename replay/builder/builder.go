@@ -561,6 +561,7 @@ func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.
 		// observed. In this situation we pass a pointer that should cause an access
 		// violation if it is dereferenced. We opt to not use 0x00 as this is often
 		// overloaded to mean something else.
+		// Must match value used in cc/gapir/memory_manager.h
 		return protocol.TypeAbsolutePointer, 0xBADF00D
 	}
 	bufferStart := l.mappedMemory[bufferIdx].First()
