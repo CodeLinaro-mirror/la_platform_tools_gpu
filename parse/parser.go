@@ -88,6 +88,7 @@ func (p *Parser) addChild(in *Branch, child Node) {
 	child.AddPrefix(p.prefix)
 	p.prefix = nil
 	in.Children = append(in.Children, child)
+	p.setParent(child, in)
 }
 
 // ParseLeaf adds a new Leaf to cst and then calls the do function to
@@ -121,6 +122,49 @@ func (p *Parser) ParseBranch(cst *Branch, do BranchParser) {
 		p.Error("Finishing ParseBranch with parsed but unconsumed tokens")
 	}
 	p.last = b
+}
+
+// Extend inserts a new branch between n and its parent, and calls do() with
+// the newly insterted branch.
+//
+// Extend will transform:
+//     n.parent ──> n
+// to:
+//     n.parent ──> b ──> n
+// where b is passed as the second argument to do().
+func (p *Parser) Extend(n Node, do BranchParser) {
+	base := n.Parent()
+	if base == nil {
+		p.Error("Branch did not have a parent")
+		return
+	}
+
+	g := &Branch{}
+	g.parent = base
+	g.Children = []Node{n}
+	p.setParent(n, g)
+
+	// Replace n with g in base.children.
+	for i := len(base.Children) - 1; i >= 0; i-- {
+		if base.Children[i] == n {
+			base.Children[i] = g
+			do(p, g)
+			return
+		}
+	}
+
+	p.Error("Branches parent did not contain branch")
+}
+
+func (p *Parser) setParent(child Node, parent *Branch) {
+	switch n := child.(type) {
+	case *Branch:
+		n.parent = parent
+	case *Leaf:
+		n.parent = parent
+	default:
+		p.Error("Cannot set parent of node type %T", n)
+	}
 }
 
 // Error adds a new error to the parser error list. It will attempt to consume
