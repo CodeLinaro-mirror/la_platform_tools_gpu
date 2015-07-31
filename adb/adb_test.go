@@ -114,9 +114,17 @@ Activity Resolver Table:
       43178558 com.google.foo/.FooActivity filter 431d7db8
     android.intent.action.SEARCH:
       43178558 com.google.foo/.FooActivity filter 4327cc40
+
+Packages:
+  Package [com.google.foo] (ffffffc):
+    userId=12345
+    primaryCpuAbi=armeabi-v7a
+    secondaryCpuAbi=null
+    versionCode=902107 targetSdk=15
 `
 	expected := &InstalledPackage{
 		Name: "com.google.foo",
+		ABI:  "armeabi-v7a",
 	}
 	expected.Actions = []*Action{
 		{
@@ -150,6 +158,12 @@ Activity Resolver Table:
 			if a.Activity != expected.Actions[i].Activity {
 				t.Errorf("[%d] Expected activity %s got %s", i, a.Activity, expected.Actions[i].Activity)
 			}
+		}
+		if packages[0].Name != expected.Name {
+			t.Errorf("Expected package name %s got %s", expected.Name, packages[0].Name)
+		}
+		if packages[0].ABI != expected.ABI {
+			t.Errorf("Expected ABI name %s got %s", expected.ABI, packages[0].ABI)
 		}
 	}
 }

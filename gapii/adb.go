@@ -31,7 +31,10 @@ var abiToSo = map[string]string{
 }
 
 func getSoName(a *adb.Action) (string, error) {
-	abi := a.Package.Device.Abi()
+	abi := a.Package.ABI
+	if abi == "" {
+		abi = a.Package.Device.Abi()
+	}
 	so, ok := abiToSo[abi]
 	if !ok {
 		return "", fmt.Errorf("Unknown device abi: %s", abi)
