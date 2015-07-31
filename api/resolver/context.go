@@ -60,7 +60,7 @@ func (ctx *context) errorf(at interface{}, message string, args ...interface{}) 
 	} else if n == nil || reflect.ValueOf(n).IsNil() {
 		ctx.errors.Add(nil, nil, "Error nil node %T", at)
 	} else {
-		f = n.Fragment()
+		f = n.Node()
 		if f == nil {
 			ctx.errors.Add(nil, nil, "Error at %T node with nil fragment", at)
 		}

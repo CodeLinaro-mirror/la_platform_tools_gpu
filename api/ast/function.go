@@ -27,7 +27,7 @@ type Function struct {
 	Block       *Block        // the body of the function if present
 }
 
-func (t Function) Fragment() parse.Fragment { return t.CST }
+func (t Function) Node() parse.Node { return t.CST }
 
 // Parameter represents a single parameter in the set of parameters for a Function.
 // It has the structure «["in"|"out"|"inout"|"this"] type name»
@@ -39,7 +39,7 @@ type Parameter struct {
 	Name        *Identifier   // the name the parameter as exposed to the body
 }
 
-func (t Parameter) Fragment() parse.Fragment { return t.CST }
+func (t Parameter) Node() parse.Node { return t.CST }
 
 // Call is an expression that invokes a function with a set of arguments.
 // It has the structure «target(arguments)» where target must be a function and
@@ -50,7 +50,7 @@ type Call struct {
 	Arguments []Node        // the arguments to the function
 }
 
-func (t Call) Fragment() parse.Fragment { return t.CST }
+func (t Call) Node() parse.Node { return t.CST }
 
 // NamedArg represents a «name = value» expressionas a function argument.
 type NamedArg struct {
@@ -59,4 +59,4 @@ type NamedArg struct {
 	Value Node          // the value to use for that parameter
 }
 
-func (t NamedArg) Fragment() parse.Fragment { return t.CST }
+func (t NamedArg) Node() parse.Node { return t.CST }
