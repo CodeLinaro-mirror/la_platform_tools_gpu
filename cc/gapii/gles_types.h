@@ -533,7 +533,7 @@ typedef void* BufferDataPointer;
 
 typedef uint32_t ContextID;
 
-typedef uint32_t ThreadID;
+typedef uint64_t ThreadID;
 
 typedef int EGLBoolean;
 
@@ -666,10 +666,25 @@ struct Buffer {
         mUsage = v;
         return *this;
     }
+    inline Buffer& SetMappingAccess(uint32_t v) {
+        mMappingAccess = v;
+        return *this;
+    }
+    inline Buffer& SetMappingOffset(int32_t v) {
+        mMappingOffset = v;
+        return *this;
+    }
+    inline Buffer& SetMappingData(Slice<uint8_t> v) {
+        mMappingData = v;
+        return *this;
+    }
 
     Slice<uint8_t> mData;
     int32_t mSize;
     uint32_t mUsage;
+    uint32_t mMappingAccess;
+    int32_t mMappingOffset;
+    Slice<uint8_t> mMappingData;
 };
 
 typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferIdToBuffer__R;

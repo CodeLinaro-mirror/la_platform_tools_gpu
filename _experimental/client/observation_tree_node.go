@@ -55,7 +55,8 @@ func (n observationTreeNode) Create(theme gxui.Theme) gxui.Control {
 	b := theme.CreateButton()
 	b.SetMargin(math.Spacing{})
 	b.AddChild(createLabel(n.ctx.appCtx, r.String(), c))
-	// ptr := memory.Pointer{Address: r.Base, Pool: memory.ApplicationPool}
-	// b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectPointer(ptr) }) // [BENC]: TODO
+
+	p := n.ctx.capture.Atoms().Index(uint64(n.item.atomID)).MemoryAfter(uint64(memory.ApplicationPool), r.Base, r.Size)
+	b.OnClick(func(gxui.MouseEvent) { n.ctx.appCtx.events.Select(p) })
 	return b
 }

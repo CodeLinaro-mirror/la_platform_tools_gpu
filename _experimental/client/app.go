@@ -262,6 +262,18 @@ func createToolbar(appCtx *ApplicationContext) gxui.Control {
 	return layout
 }
 
+func createStatusBar(appCtx *ApplicationContext) gxui.Control {
+	theme := appCtx.theme
+
+	label := theme.CreateLabel()
+
+	appCtx.events.OnSelect(func(p path.Path) {
+		label.SetText(fmt.Sprintf("Selected: %v", p.Path()))
+	})
+
+	return label
+}
+
 type EnableDebugger interface {
 	EnableDebug(bool)
 }
@@ -297,8 +309,13 @@ func (a app) main(driver gxui.Driver) {
 	layout.AddChild(createToolbar(appCtx))
 	layout.AddChild(createPanels(appCtx, window))
 
+	status := theme.CreateLinearLayout()
+	status.SetDirection(gxui.BottomToTop)
+	status.AddChild(createStatusBar(appCtx))
+	status.AddChild(layout)
+
 	window.OnClose(driver.Terminate)
-	window.AddChild(layout)
+	window.AddChild(status)
 	window.AddChild(appCtx.dropDownOverlay)
 	window.AddChild(appCtx.toolTipOverlay)
 

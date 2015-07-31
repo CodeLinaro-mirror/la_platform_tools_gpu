@@ -20,6 +20,7 @@
 #include <gapic/encoder.h>
 #include <gapic/log.h>
 #include <gapic/target.h>
+#include <gapic/thread.h>
 
 #if TARGET_OS == GAPID_OS_WINDOWS
 #include "windows/wgl.h"
@@ -59,6 +60,15 @@ Spy::Spy() {
     auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
     GlesSpy::init(encoder);
     GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
+}
+
+void Spy::lock() {
+    SpyBase::lock();
+    auto threadID = gapic::Thread::current().id();
+    if (threadID != CurrentThread) {
+        GAPID_INFO("Changing threads: %" PRIu64 "-> %" PRIu64 "\n", CurrentThread, threadID);
+        GlesSpy::switchThread(threadID);
+    }
 }
 
 EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {

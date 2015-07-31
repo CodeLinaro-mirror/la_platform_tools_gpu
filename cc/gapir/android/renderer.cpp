@@ -131,9 +131,11 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         mHeight == height &&
         mDepthSize == depthSize &&
         mStencilSize == stencilSize) {
-
+        // No change
         return;
     }
+
+    // TODO: Check for and handle resizing path.
 
     const bool wasBound = mBound;
 

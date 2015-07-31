@@ -33,7 +33,7 @@ func instances(p path.Path, d database.Database, l log.Logger) (path.Value, erro
 		state := statei.(*State)
 		return atomp.StateAfter().
 			Field("Contexts").
-			MapIndex(int64(state.CurrentThread)).
+			MapIndex(uint64(state.CurrentThread)).
 			Field("Instances"), nil
 	}
 	return nil, nil

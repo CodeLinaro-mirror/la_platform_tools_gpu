@@ -111,5 +111,5 @@ func (i Range) Span() interval.U64Span {
 }
 
 func (i Range) String() string {
-	return fmt.Sprintf("[%v-%v]", i.First(), i.Last())
+	return fmt.Sprintf("[0x%.16x-0x%.16x]", i.First(), i.Last())
 }
