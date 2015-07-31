@@ -1133,6 +1133,46 @@ typedef void* ImageOES;
 
 typedef uint64_t SyncObject;
 
+typedef uint8_t GLboolean;
+
+typedef int8_t GLbyte;
+
+typedef uint8_t GLubyte;
+
+typedef char GLchar;
+
+typedef int16_t GLshort;
+
+typedef uint16_t GLushort;
+
+typedef int32_t GLint;
+
+typedef uint32_t GLuint;
+
+typedef int64_t GLint64;
+
+typedef uint64_t GLuint64;
+
+typedef int32_t GLfixed;
+
+typedef uint32_t GLsizei;
+
+typedef uint32_t GLenum;
+
+struct __GLsync {};
+
+typedef __GLsync* GLsync;
+
+typedef uint32_t GLbitfield;
+
+typedef uint16_t GLhalf;
+
+typedef float GLfloat;
+
+typedef float GLclampf;
+
+typedef void GLvoid;
+
 struct VertexAttributeArray {
     inline VertexAttributeArray& SetEnabled(bool v) {
         mEnabled = v;
