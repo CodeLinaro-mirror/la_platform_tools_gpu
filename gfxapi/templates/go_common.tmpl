@@ -457,8 +457,15 @@
 */}}
 {{define "Go.MapAssign"}}
   {{AssertType $ "MapAssign"}}
-  {{if eq $.Operator "="}}{{Template "Go.Read" $.To.Map}}[{{Template "Go.Read" $.To.Index}}] = {{Template "Go.Read" $.Value}}
-  {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
+  {{if eq $.Operator "="}}
+    {{if IsNull $.Value}}
+      delete({{Template "Go.Read" $.To.Map}}, {{Template "Go.Read" $.To.Index}})
+    {{else}}
+      {{Template "Go.Read" $.To.Map}}[{{Template "Go.Read" $.To.Index}}] = {{Template "Go.Read" $.Value}}
+    {{end}}
+  {{else}}
+    {{Error "Unsupported MapAssign operator %s" $.Operator}}
+  {{end}}
 {{end}}
 
 
