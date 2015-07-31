@@ -97,7 +97,17 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         return;
     }
 
-    // TODO: Check for and handle resizing path.
+    if (mWindow != nullptr &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+        // Resize only
+        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d\n", mWidth, mHeight, width, height);
+        [mWindow setContentSize: NSMakeSize(width, height)];
+        [mContext update];
+        mWidth = width;
+        mHeight = height;
+        return;
+    }
 
     const bool wasBound = mBound;
 
@@ -106,10 +116,9 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
     reset();
 
     NSRect rect = NSMakeRect(0, 0, width, height);
-
     mWindow = [[NSWindow alloc]
         initWithContentRect:rect
-        styleMask:NSTitledWindowMask
+        styleMask:NSBorderlessWindowMask
         backing:NSBackingStoreBuffered
         defer:NO
     ];
@@ -194,4 +203,3 @@ Renderer* Renderer::create() {
 }
 
 }  // namespace gapir
-
