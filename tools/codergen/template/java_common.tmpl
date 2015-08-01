@@ -28,7 +28,7 @@
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
-{{define "Java.Type.Any"}}Object{{end}}
+{{define "Java.Type.Any"}}Box{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
@@ -43,4 +43,12 @@
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
+{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
+{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
+
+{{define "Java.ConstSuffix#int64"}}L{{end}}
+{{define "Java.ConstSuffix#uint64"}}L{{end}}
+{{define "Java.ConstSuffix#float32"}}f{{end}}
+{{define "Java.ConstSuffix#float64"}}d{{end}}
+{{define "Java.ConstSuffix"}}{{end}}
