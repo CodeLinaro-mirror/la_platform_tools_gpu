@@ -342,6 +342,13 @@ protected:
 inline void GlesSpy::init(std::shared_ptr<gapic::Encoder> encoder) {
     SpyBase::init(encoder);
     mImports.Resolve();
+    NextContextID = 0;
+    CurrentThread = 0;
+    Contexts = ThreadIDToContext__R();
+    EGLContexts = EGLContextToContext__R();
+    GLXContexts = GLXContextToContext__R();
+    WGLContexts = HGLRCToContext__R();
+    CGLContexts = CGLContextObjToContext__R();
 }
 
 inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
