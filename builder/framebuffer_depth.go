@@ -32,7 +32,7 @@ import (
 func (r *GetFramebufferDepth) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
 	fbWidth, fbHeight, err := getAtomFramebufferDimensions(r.After, d, l)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed to get framebuffer dimensions: %v\n", err)
 	}
 
 	data, err := database.Store(&RenderFramebufferDepth{
@@ -64,7 +64,7 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 
 	after, err := ResolveAtom(r.After, d, l)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Could not resolve atom '%v': %v", r.After, err)
 	}
 
 	apiID := after.API()
@@ -80,8 +80,9 @@ func (r *RenderFramebufferDepth) BuildLazy(c interface{}, d database.Database, l
 
 	img := <-query.QueryDepthBuffer(ctx, mgr, atom.ID(r.After.Index))
 	if img.Error != nil {
-		log.Errorf(l, "%v", img.Error)
-		return nil, img.Error
+		err := fmt.Errorf("Failed to retrieve framebuffer: %v", img.Error)
+		log.Errorf(l, "%v", err)
+		return nil, err
 	}
 
 	return img.Data, nil

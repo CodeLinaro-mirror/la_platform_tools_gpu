@@ -83,6 +83,7 @@ func (r executor) execute() error {
 	go func() {
 		err := r.handleReplayCommunication(id, uint32(len(data)), responseW)
 		if err != nil {
+			log.Warningf(r.logger, "Replay communication failed with error: %v", err)
 			if closeErr := responseW.CloseWithError(err); closeErr != nil {
 				log.Warningf(r.logger, "Replay execute pipe writer CloseWithError failed: %v after error %v", closeErr, err)
 			}
@@ -134,11 +135,11 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 		switch protocol.MessageType(msg) {
 		case protocol.MessageTypeGet:
 			if err := r.handleGetData(); err != nil {
-				return err
+				return fmt.Errorf("Failed to read replay postback data: %v", err)
 			}
 		case protocol.MessageTypePost:
 			if err := r.handleDataResponse(postbacks); err != nil {
-				return err
+				return fmt.Errorf("Failed to send replay resource data: %v", err)
 			}
 		default:
 			return fmt.Errorf("Unknown message type: %v\n", msg)
