@@ -70,7 +70,7 @@ func parseStructs(source string) []*Struct {
 	%s`, source)
 	name := fmt.Sprintf("fake_%d.go", testId)
 	pwd, _ := filepath.Abs(".")
-	scanner := scan.New(pwd, false)
+	scanner := scan.New(pwd)
 	scanner.ScanFile(name, fakeFile)
 	if err := scanner.Process(); err != nil {
 		log.Fatal("Process failed:", err)
