@@ -26,19 +26,19 @@ void* GetGfxProcAddress(const char *name, bool bypassLocal) {
         static DlLoader libgl("libGL.so");
         if (GPAPROC gpa = reinterpret_cast<GPAPROC>(libgl.lookup("glXGetProcAddress"))) {
             if (void* proc = gpa(name)) {
-                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via libGL glXGetProcAddress)", name, bypassLocal, proc);
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via libGL glXGetProcAddress)\n", name, bypassLocal, proc);
                 return proc;
             }
         }
         if (void* proc = libgl.lookup(name)) {
-            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGL dlsym)", name, bypassLocal, proc);
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGL dlsym)\n", name, bypassLocal, proc);
             return proc;
         }
     } else {
         static DlLoader local(nullptr);
         if (GPAPROC gpa = reinterpret_cast<GPAPROC>(local.lookup("glXGetProcAddress"))) {
             if (void* proc = gpa(name)) {
-                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via local glXGetProcAddress)", name, bypassLocal, proc);
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via local glXGetProcAddress)\n", name, bypassLocal, proc);
                 return proc;
             }
         }
@@ -48,7 +48,7 @@ void* GetGfxProcAddress(const char *name, bool bypassLocal) {
         }
     }
 
-    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found", name, bypassLocal);
+    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found\n", name, bypassLocal);
     return nullptr;
 }
 

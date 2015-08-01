@@ -37,41 +37,41 @@ void* ResolveSymbol(const char* name, bool bypassLocal) {
         static DlLoader libegl(SYSTEM_LIB_PATH "libEGL.so");
         if (GPAPROC gpa = reinterpret_cast<GPAPROC>(libegl.lookup("eglGetProcAddress"))) {
             if (void* proc = gpa(name)) {
-                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via libEGL eglGetProcAddress)", name, bypassLocal, proc);
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via libEGL eglGetProcAddress)\n", name, bypassLocal, proc);
                 return proc;
             }
         }
         if (void* proc = libegl.lookup(name)) {
-            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libEGL dlsym)", name, bypassLocal, proc);
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libEGL dlsym)\n", name, bypassLocal, proc);
             return proc;
         }
 
         static DlLoader libglesv2(SYSTEM_LIB_PATH "libGLESv2.so");
         if (void* proc = libglesv2.lookup(name)) {
-            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGLESv2 dlsym)", name, bypassLocal, proc);
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGLESv2 dlsym)\n", name, bypassLocal, proc);
             return proc;
         }
 
         static DlLoader libglesv1(SYSTEM_LIB_PATH "libGLESv1_CM.so");
         if (void* proc = libglesv1.lookup(name)) {
-            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGLESv1_CM dlsym)", name, bypassLocal, proc);
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGLESv1_CM dlsym)\n", name, bypassLocal, proc);
             return proc;
         }
     } else {
         static DlLoader local(nullptr);
         if (GPAPROC gpa = reinterpret_cast<GPAPROC>(local.lookup("eglGetProcAddress"))) {
             if (void* proc = gpa(name)) {
-                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via local eglGetProcAddress)", name, bypassLocal, proc);
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via local eglGetProcAddress)\n", name, bypassLocal, proc);
                 return proc;
             }
         }
         if (void* proc = local.lookup(name)) {
-            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from local dlsym)", name, bypassLocal, proc);
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from local dlsym)\n", name, bypassLocal, proc);
             return proc;
         }
     }
 
-    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found", name, bypassLocal);
+    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found\n", name, bypassLocal);
     return nullptr;
 }
 
@@ -85,7 +85,7 @@ void* GetGfxProcAddress(const char* name, bool bypassLocal) {
     const std::string cacheKey = std::string(name) + (bypassLocal ? "/direct" : "/local");
     auto it = cache.find(cacheKey);
     if (it != cache.end()) {
-        GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from cache)", name, bypassLocal, it->second);
+        GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from cache)\n", name, bypassLocal, it->second);
         return it->second;
     }
 
@@ -95,4 +95,3 @@ void* GetGfxProcAddress(const char* name, bool bypassLocal) {
 }
 
 }  // namespace gapic
-
