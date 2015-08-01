@@ -227,11 +227,12 @@ var schema{{.Name}} = &schema.Class{
 {{define "Go.Constants"}}{{if File.Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
 const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
 
-var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Entries}}
-	{{.Value}}: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}],{{end}}
-}
+var _{{$name}}_map = map[{{.Type}}]string{}
 
 func init() {
+	{{$c.Set 0}}{{range .Entries}}_{{$name}}_map[{{.Value}}] = _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}]
+	{{end}}
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: {{Call "Go.Schema" .Type}}, {{if len .Entries}}{{$c.Set 0}}
 		Entries: []schema.Constant{
