@@ -249,10 +249,11 @@ var funcInfoGlGetQueryObjectui64vEXT = builder.FunctionInfo{ID: 214, ReturnType:
 var funcInfoArchitecture = builder.FunctionInfo{ID: 215, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoReplayCreateRenderer = builder.FunctionInfo{ID: 216, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoReplayBindRenderer = builder.FunctionInfo{ID: 217, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 218, ReturnType: protocol.TypeVoid, Parameters: 6}
-var funcInfoStartTimer = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoStopTimer = builder.FunctionInfo{ID: 220, ReturnType: protocol.TypeUint64, Parameters: 1}
-var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoSwitchThread = builder.FunctionInfo{ID: 218, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoStartTimer = builder.FunctionInfo{ID: 220, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoStopTimer = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeUint64, Parameters: 1}
+var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 222, ReturnType: protocol.TypeVoid, Parameters: 0}
 
 func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
@@ -288,7 +289,7 @@ func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 	return value.U32(uint32(c))
 }
 func (c ThreadID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return value.U32(uint32(c))
+	return value.U64(uint64(c))
 }
 func (c EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return Voidᵖ(c).value()
@@ -497,9 +498,9 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	} else {
+		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())
@@ -514,9 +515,9 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	if (ϟa.Length) > (int32(0)) {
-		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
-	} else {
 		ϟa.Marker.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	} else {
+		_ = strings.TrimRight(string(ϟa.Marker.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	}
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(ϟa.Marker.value())
@@ -4553,12 +4554,26 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                    // Contextʳ
+	GetContext_128_result := context                                // Contextʳ
+	ctx := GetContext_128_result                                    // Contextʳ
+	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(ϟa.Target)) // Bufferʳ
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.S32(ϟa.Offset))
 	ϟb.Push(value.S32(ϟa.Length))
 	ϟb.Push(value.U32(ϟa.Access))
 	ϟb.Call(funcInfoGlMapBufferRange)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ptr := U8ᵖ(ϟa.Result) // U8ᵖ
+	b.MappingAccess = ϟa.Access
+	b.MappingData = ptr.Slice(uint64(int32(0)), uint64(ϟa.Length), ϟs)
+	if (GLbitfield_GL_MAP_READ_BIT)&(ϟa.Access) != 0 {
+		src := b.Data.Slice(uint64(ϟa.Offset), uint64((ϟa.Offset)+(ϟa.Length)), ϟs) // U8ˢ
+		dst := b.MappingData                                                        // U8ˢ
+		dst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+		_, _ = src, dst
+	}
+	_, _, _, _, _ = context, GetContext_128_result, ctx, b, ptr
 	return nil
 }
 
@@ -4567,9 +4582,17 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	context := ϟc.Contexts.Get(ϟc.CurrentThread)                    // Contextʳ
+	GetContext_129_result := context                                // Contextʳ
+	ctx := GetContext_129_result                                    // Contextʳ
+	b := ctx.Instances.Buffers.Get(ctx.BoundBuffers.Get(ϟa.Target)) // Bufferʳ
+	ϟdst, ϟsrc := b.Data.Slice(uint64(b.MappingOffset), uint64((b.MappingOffset)+(int32(b.MappingData.Count))), ϟs).Copy(b.MappingData, ϟs, ϟd, ϟl)
+	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Call(funcInfoGlUnmapBuffer)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	_, _, _, _ = context, GetContext_129_result, ctx, b
 	return nil
 }
 
@@ -4628,8 +4651,8 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_128_result := context                              // Contextʳ
-	ctx := GetContext_128_result                                  // Contextʳ
+	GetContext_130_result := context                              // Contextʳ
+	ctx := GetContext_130_result                                  // Contextʳ
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlGenQueries)
@@ -4644,7 +4667,7 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		q.Index(uint64(i), ϟs).replayWrite(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _ = q, context, GetContext_128_result, ctx
+	_, _, _, _ = q, context, GetContext_130_result, ctx
 	return nil
 }
 
@@ -4682,8 +4705,8 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_129_result := context                              // Contextʳ
-	ctx := GetContext_129_result                                  // Contextʳ
+	GetContext_131_result := context                              // Contextʳ
+	ctx := GetContext_131_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.Queries[q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Query)(nil)
 	}
@@ -4691,7 +4714,7 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlDeleteQueries)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = q, context, GetContext_129_result, ctx
+	_, _, _, _ = q, context, GetContext_131_result, ctx
 	return nil
 }
 
@@ -4701,8 +4724,8 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_130_result := context             // Contextʳ
-	ctx := GetContext_130_result                 // Contextʳ
+	GetContext_132_result := context             // Contextʳ
+	ctx := GetContext_132_result                 // Contextʳ
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
@@ -4710,7 +4733,7 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	}
 	ϟb.Call(funcInfoGlIsQuery)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = context, GetContext_130_result, ctx
+	_, _, _ = context, GetContext_132_result, ctx
 	return nil
 }
 
@@ -4850,8 +4873,8 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	a := ϟa.Arrays.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                 // Contextʳ
-	GetContext_131_result := context                             // Contextʳ
-	ctx := GetContext_131_result                                 // Contextʳ
+	GetContext_133_result := context                             // Contextʳ
+	ctx := GetContext_133_result                                 // Contextʳ
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlGenVertexArrays)
@@ -4866,7 +4889,7 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		a.Index(uint64(i), ϟs).replayWrite(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _ = a, context, GetContext_131_result, ctx
+	_, _, _, _ = a, context, GetContext_133_result, ctx
 	return nil
 }
 
@@ -4876,8 +4899,8 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_132_result := context             // Contextʳ
-	ctx := GetContext_132_result                 // Contextʳ
+	GetContext_134_result := context             // Contextʳ
+	ctx := GetContext_134_result                 // Contextʳ
 	if !(ctx.Instances.VertexArrays.Contains(ϟa.Array)) {
 		ctx.Instances.VertexArrays[ϟa.Array] = func() *VertexArray {
 			s := &VertexArray{}
@@ -4893,7 +4916,7 @@ func (ϟa *GlBindVertexArray) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	}
 	ϟb.Call(funcInfoGlBindVertexArray)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = context, GetContext_132_result, ctx
+	_, _, _ = context, GetContext_134_result, ctx
 	return nil
 }
 
@@ -4903,8 +4926,8 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_133_result := context                              // Contextʳ
-	ctx := GetContext_133_result                                  // Contextʳ
+	GetContext_135_result := context                              // Contextʳ
+	ctx := GetContext_135_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(uint32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := uint32(uint32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*VertexArray)(nil)
@@ -4913,7 +4936,7 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Push(ϟa.Arrays.value())
 	ϟb.Call(funcInfoGlDeleteVertexArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = context, GetContext_133_result, ctx, a
+	_, _, _, _ = context, GetContext_135_result, ctx, a
 	return nil
 }
 
@@ -4960,8 +4983,8 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_134_result := context                              // Contextʳ
-	ctx := GetContext_134_result                                  // Contextʳ
+	GetContext_136_result := context                              // Contextʳ
+	ctx := GetContext_136_result                                  // Contextʳ
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlGenQueriesEXT)
@@ -4976,7 +4999,7 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 		q.Index(uint64(i), ϟs).replayWrite(id, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = id
 	}
-	_, _, _, _ = q, context, GetContext_134_result, ctx
+	_, _, _, _ = q, context, GetContext_136_result, ctx
 	return nil
 }
 
@@ -5014,8 +5037,8 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	q := ϟa.Queries.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // QueryIdˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                  // Contextʳ
-	GetContext_135_result := context                              // Contextʳ
-	ctx := GetContext_135_result                                  // Contextʳ
+	GetContext_137_result := context                              // Contextʳ
+	ctx := GetContext_137_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
 		ctx.Instances.Queries[q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Query)(nil)
 	}
@@ -5023,7 +5046,7 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.Queries.value())
 	ϟb.Call(funcInfoGlDeleteQueriesEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = q, context, GetContext_135_result, ctx
+	_, _, _, _ = q, context, GetContext_137_result, ctx
 	return nil
 }
 
@@ -5033,8 +5056,8 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
-	GetContext_136_result := context             // Contextʳ
-	ctx := GetContext_136_result                 // Contextʳ
+	GetContext_138_result := context             // Contextʳ
+	ctx := GetContext_138_result                 // Contextʳ
 	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
@@ -5042,7 +5065,7 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Call(funcInfoGlIsQueryEXT)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _ = context, GetContext_136_result, ctx
+	_, _, _ = context, GetContext_138_result, ctx
 	return nil
 }
 
@@ -5176,8 +5199,8 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                  // Contextʳ
-	GetContext_137_result := context                                                              // Contextʳ
-	ctx := GetContext_137_result                                                                  // Contextʳ
+	GetContext_139_result := context                                                              // Contextʳ
+	ctx := GetContext_139_result                                                                  // Contextʳ
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
@@ -5208,7 +5231,7 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.Bool(ϟa.ResetViewportScissor))
 	ϟb.Call(funcInfoBackbufferInfo)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _ = context, GetContext_137_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
+	_, _, _, _, _, _, _, _, _, _ = context, GetContext_139_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil
 }
 

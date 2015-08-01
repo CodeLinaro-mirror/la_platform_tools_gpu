@@ -1754,6 +1754,14 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_SwitchThread := schema.Of((*SwitchThread)(nil).Class())
+	sc_SwitchThread.Metadata = append(sc_SwitchThread.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "switchThread",
+		Flags:            0,
+		DocumentationUrl: "[]",
+	})
+
 	sc_BackbufferInfo := schema.Of((*BackbufferInfo)(nil).Class())
 	sc_BackbufferInfo.Metadata = append(sc_BackbufferInfo.Metadata, &atom.Metadata{
 		API:              apiID,

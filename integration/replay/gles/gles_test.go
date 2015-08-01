@@ -31,7 +31,30 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 )
 
-const replayTimeout = time.Second * 5
+const (
+	replayTimeout = time.Second * 5
+
+	simpleVSSource = `
+		precision mediump float;
+		attribute vec2 position;
+		void main() {
+			gl_Position = vec4(position, 0.5, 1.0);
+		}`
+
+	simpleFSSource = `
+		precision mediump float;
+		void main() {
+			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		}`
+)
+
+var (
+	triangleVertices = []float32{
+		+0.0, -0.5,
+		-0.5, +0.5,
+		+0.5, +0.5,
+	}
+)
 
 var generateReferenceImages = flag.Bool("generate", false, "generate reference images")
 
@@ -70,7 +93,14 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 	}
 }
 
-func initContext(a device.Architecture, d database.Database, l log.Logger, width, height uint32) *atom.List {
+func setBackbuffer(width, height int) atom.Atom {
+	color := gles.GLenum_GL_RGB565
+	depth := gles.GLenum_GL_DEPTH_COMPONENT16
+	stencil := gles.GLenum_GL_STENCIL_INDEX8
+	return gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */)
+}
+
+func initContext(a device.Architecture, d database.Database, l log.Logger, width, height int) *atom.List {
 	eglDisplay := p(0x1000)
 	eglConfig := p(0x2000)
 	eglShareContext := memory.Nullptr
@@ -78,23 +108,21 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 	eglSurface := p(0x3000)
 	eglContext := p(0x5000)
 	eglTrue := gles.EGLBoolean(1)
-	color := gles.GLenum_GL_RGB565
-	depth := gles.GLenum_GL_DEPTH_COMPONENT16
-	stencil := gles.GLenum_GL_STENCIL_INDEX8
-	return atom.NewList(
+
+	atoms := atom.NewList(
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
-		gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */),
+		setBackbuffer(width, height),
 	)
+	return atoms
 }
 
 func TestClear(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
-	w, h := uint32(64), uint32(64)
-	atoms := initContext(device.Info().Architecture(), d, l, w, h)
+	atoms := initContext(device.Info().Architecture(), d, l, 64, 64)
 	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
@@ -117,10 +145,10 @@ func TestClear(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, w, h, 0, "solid-red", red)
-	checkColorBuffer(t, ctx, mgr, w, h, 0, "solid-green", green)
-	checkColorBuffer(t, ctx, mgr, w, h, 0, "solid-blue", blue)
-	checkColorBuffer(t, ctx, mgr, w, h, 0, "solid-black", black)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-red", red)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-green", green)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-blue", blue)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0, "solid-black", black)
 }
 
 func TestDrawTriangle(t *testing.T) {
@@ -128,39 +156,20 @@ func TestDrawTriangle(t *testing.T) {
 	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
 	a := device.Info().Architecture()
-	w, h := uint32(64), uint32(64)
-	vs, fs := gles.ShaderId(0x10), gles.ShaderId(0x20)
-	program := gles.ProgramId(0x30)
-	position := gles.AttributeLocation(0)
-	vsSource := `
-		precision mediump float;
-		attribute vec2 position;
-		void main() {
-			gl_Position = vec4(position, 0.5, 1.0);
-		}`
-	fsSource := `
-		precision mediump float;
-		void main() {
-			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-		}`
-	atoms := initContext(a, d, l, w, h)
-	vertices := []float32{
-		+0.0, -0.5,
-		-0.5, +0.5,
-		+0.5, +0.5,
-	}
+	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
+	atoms := initContext(a, d, l, 64, 64)
 	clear := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
-	atoms.Add(gles.NewProgram(a, d, l, vs, fs, program, vsSource, fsSource)...)
+	atoms.Add(gles.NewProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
 	triangle := atoms.Add(
-		gles.NewGlLinkProgram(program),
-		gles.NewGlUseProgram(program),
-		gles.NewGlGetAttribLocation(program, "position", position),
-		gles.NewGlEnableVertexAttribArray(position),
-		gles.NewGlVertexAttribPointer(position, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
-			AddRead(atom.Data(a, d, l, p(0x100000), vertices)),
+		gles.NewGlLinkProgram(prog),
+		gles.NewGlUseProgram(prog),
+		gles.NewGlGetAttribLocation(prog, "position", pos),
+		gles.NewGlEnableVertexAttribArray(pos),
+		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
+			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
 
@@ -169,6 +178,38 @@ func TestDrawTriangle(t *testing.T) {
 		Device:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, w, h, 0.0, "solid-green", clear)
-	checkColorBuffer(t, ctx, mgr, w, h, 0.01, "triangle", triangle)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.0, "solid-green", clear)
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle", triangle)
+}
+
+// TestResizeRenderer checks that backbuffers can be resized without destroying the current context.
+func TestResizeRenderer(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
+	a := device.Info().Architecture()
+	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
+	atoms := initContext(a, d, l, 8, 8) // start with a small backbuffer
+	atoms.Add(gles.NewProgram(a, d, l, vs, fs, prog, simpleVSSource, simpleFSSource)...)
+	atoms.Add(
+		gles.NewGlLinkProgram(prog),
+		gles.NewGlUseProgram(prog),
+		gles.NewGlGetAttribLocation(prog, "position", pos),
+		gles.NewGlEnableVertexAttribArray(pos),
+		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
+			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
+	)
+	triangle := atoms.Add(
+		setBackbuffer(64, 64), // Resize just before clearing and drawing.
+		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
+		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
+	)
+
+	ctx := &replay.Context{
+		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Device:  device.ID(),
+	}
+
+	checkColorBuffer(t, ctx, mgr, 64, 64, 0.01, "triangle_2", triangle)
 }

@@ -124,7 +124,18 @@ void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stenc
         mHeight == height &&
         mDepthSize == depthSize &&
         mStencilSize == stencilSize) {
+        // No change
+        return;
+    }
 
+    if (mWindow != nullptr &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+        // Resize only
+        GAPID_INFO("Resizing renderer: %dx%d -> %dx%d\n", mWidth, mHeight, width, height);
+        SetWindowPos(mWindow, nullptr, 0, 0, width, height, SWP_NOMOVE);
+        mWidth = width;
+        mHeight = height;
         return;
     }
 

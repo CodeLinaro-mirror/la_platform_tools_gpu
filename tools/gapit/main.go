@@ -20,6 +20,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
@@ -30,15 +31,14 @@ import (
 var (
 	verbose  = flag.Bool("v", false, "verbose messages")
 	device   = flag.String("device", "", "the device to capture on")
-	activity = flag.String("activity", "", "the activity to launch")
 	spyport  = flag.Int("i", 9286, "gapii TCP port to connect to")
 	duration = flag.Duration("d", 10*time.Second, "duration to trace for")
-	output   = flag.String("out", "gapit.gfxtrace", "the file to generate")
+	output   = flag.String("out", "", "the file to generate")
 	debug    = flag.Bool("debug", false, "use the debug spy .so")
 )
 
 const usage = `gapit: A tool to trace graphics calls on android.
-Usage: gapit [--out=file] <inputs>...
+Usage: gapit [--out=file] <activity>
   -help: show this help message
 `
 
@@ -48,6 +48,13 @@ func run() error {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
+
+	if flag.NArg() != 1 {
+		flag.Usage()
+		return fmt.Errorf("Invalid number of arguments. Expected 1, got %d", flag.NArg())
+	}
+
+	activity := flag.Arg(0)
 
 	info := os.Stdout
 	if *verbose == false {
@@ -69,14 +76,23 @@ func run() error {
 		return fmt.Errorf("Failed to restart ADB as root: %v", err)
 	}
 	log.Infof(logger, "Device is rooted")
-	a, err := getAction(logger, d, *activity)
+	a, err := getAction(logger, d, activity)
 	if err != nil {
 		return err
 	}
 
-	log.Infof(logger, "Creating file %s", *output)
-	os.MkdirAll(filepath.Dir(*output), 0755)
-	file, err := os.Create(*output)
+	out := *output
+	if out == "" { // No name specified? Use package name.
+		name := a.Package.Name
+		if i := strings.LastIndex(name, "."); i > 0 { // trim namespace
+			name = name[i+1:]
+		}
+		out = name + ".gfxtrace"
+	}
+
+	log.Infof(logger, "Creating file %s", out)
+	os.MkdirAll(filepath.Dir(out), 0755)
+	file, err := os.Create(out)
 	if err != nil {
 		return err
 	}

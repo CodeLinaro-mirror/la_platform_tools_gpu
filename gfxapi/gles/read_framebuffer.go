@@ -238,7 +238,11 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 		if inW == outW && inH == outH {
 			postColorData(i, s, d, l, b, outW, outH, out)
 		} else {
+			ctx := getContext(s)
+			origScissor := ctx.Rasterizing.Scissor
+
 			replayEach(i, s, d, l, b,
+				NewGlScissor(0, 0, int32(colorW), int32(colorH)),
 				NewGlGenFramebuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
 				NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
@@ -261,6 +265,7 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 					AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 				NewGlDeleteFramebuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
+				NewGlScissor(origScissor.X, origScissor.Y, origScissor.Width, origScissor.Height),
 			)
 		}
 
