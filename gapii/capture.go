@@ -49,6 +49,9 @@ var formats = []string{
 }
 
 func (s siSize) String() string {
+	if s == 0 {
+		return "0.0B"
+	}
 	size := float64(s)
 	e := math.Floor(math.Log(size) / math.Log(1000))
 	f := formats[int(e)]
