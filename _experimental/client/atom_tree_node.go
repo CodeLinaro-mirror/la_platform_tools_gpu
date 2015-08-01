@@ -102,24 +102,28 @@ func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
 
 	layout.AddChild(createLabel(n.ctx.appCtx, "(", CODE_COLOR))
 	needcomma := false
-	for i := 0; i < a.FieldCount(); i++ {
-		argIdx := i // capture for closures
-		f, v := a.Field(argIdx)
-		p := p.Field(f.Name())
-		c := createField(n.ctx.appCtx, p, f.Type, v)
+	for i := 0; i < a.ParameterCount(); i++ {
+		f, v := a.Parameter(i)
 
-		if needcomma {
-			layout.AddChild(createLabel(n.ctx.appCtx, ", ", CODE_COLOR))
+		if c := createField(n.ctx.appCtx, p.Field(f.Name()), f.Type, v); c != nil {
+			if needcomma {
+				layout.AddChild(createLabel(n.ctx.appCtx, ", ", CODE_COLOR))
+			}
+
+			layout.AddChild(c)
+			needcomma = true
 		}
-
-		if c == nil {
-			continue
-		}
-
-		layout.AddChild(c)
-		needcomma = true
 	}
 
 	layout.AddChild(createLabel(n.ctx.appCtx, ")", CODE_COLOR))
+
+	if f, v := a.Result(); f != nil {
+		layout.AddChild(createLabel(n.ctx.appCtx, " -> ", COMMAND_COLOR))
+		if c := createField(n.ctx.appCtx, p.Field(f.Name()), f.Type, v); c != nil {
+			layout.AddChild(c)
+			needcomma = true
+		}
+	}
+
 	return layout
 }

@@ -196,7 +196,7 @@ func (p BufferDataPointer) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 }
 
 type ContextID uint32
-type ThreadID uint32
+type ThreadID uint64
 type EGLBoolean int64
 type EGLint int64
 
@@ -16283,6 +16283,38 @@ func (c *ReplayBindRenderer) Flags() atom.Flags                { return 0 }
 func (a *ReplayBindRenderer) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// SwitchThread
+////////////////////////////////////////////////////////////////////////////////
+type SwitchThread struct {
+	binary.Generate
+	observations atom.Observations
+	ThreadID     ThreadID
+}
+
+func (a *SwitchThread) String() string {
+	return fmt.Sprintf("switchThread(threadID: %v)", a.ThreadID)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The SwitchThread pointer is returned so that calls can be chained.
+func (a *SwitchThread) AddRead(rng memory.Range, id binary.ID) *SwitchThread {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The SwitchThread pointer is returned so that calls can be chained.
+func (a *SwitchThread) AddWrite(rng memory.Range, id binary.ID) *SwitchThread {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *SwitchThread) API() gfxapi.ID                   { return api{}.ID() }
+func (c *SwitchThread) Flags() atom.Flags                { return 0 }
+func (a *SwitchThread) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // BackbufferInfo
 ////////////////////////////////////////////////////////////////////////////////
 type BackbufferInfo struct {
@@ -16565,10 +16597,13 @@ func (c *Framebuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 ////////////////////////////////////////////////////////////////////////////////
 type Buffer struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Data      U8ˢ
-	Size      int32
-	Usage     GLenum
+	CreatedAt     atom.ID
+	Data          U8ˢ
+	Size          int32
+	Usage         GLenum
+	MappingAccess GLbitfield
+	MappingOffset int32
+	MappingData   U8ˢ
 }
 
 func (c *Buffer) Init() {
@@ -18026,6 +18061,9 @@ func NewReplayCreateRenderer(Id uint32) *ReplayCreateRenderer {
 }
 func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer {
 	return &ReplayBindRenderer{Id: Id}
+}
+func NewSwitchThread(ThreadID ThreadID) *SwitchThread {
+	return &SwitchThread{ThreadID: ThreadID}
 }
 func NewBackbufferInfo(Width int32, Height int32, Color_fmt GLenum, Depth_fmt GLenum, Stencil_fmt GLenum, ResetViewportScissor bool) *BackbufferInfo {
 	return &BackbufferInfo{Width: Width, Height: Height, ColorFmt: Color_fmt, DepthFmt: Depth_fmt, StencilFmt: Stencil_fmt, ResetViewportScissor: ResetViewportScissor}

@@ -416,19 +416,21 @@ func (b *Builder) MapMemory(rng memory.Range) {
 // Write fills the memory range in capture address-space rng with the data
 // of resourceID.
 func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
-	idx, found := b.resourceIDToIdx[resourceID]
-	if !found {
-		idx = uint32(len(b.resources))
-		b.resourceIDToIdx[resourceID] = idx
-		b.resources = append(b.resources, protocol.ResourceInfo{
-			ID:   resourceID.String(),
-			Size: uint32(rng.Size),
+	if rng.Size > 0 {
+		idx, found := b.resourceIDToIdx[resourceID]
+		if !found {
+			idx = uint32(len(b.resources))
+			b.resourceIDToIdx[resourceID] = idx
+			b.resources = append(b.resources, protocol.ResourceInfo{
+				ID:   resourceID.String(),
+				Size: uint32(rng.Size),
+			})
+		}
+		b.instructions = append(b.instructions, asm.Resource{
+			Index:       idx,
+			Destination: rng.Base,
 		})
 	}
-	b.instructions = append(b.instructions, asm.Resource{
-		Index:       idx,
-		Destination: rng.Base,
-	})
 	b.MapMemory(rng)
 }
 

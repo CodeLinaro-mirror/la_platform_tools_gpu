@@ -49,16 +49,37 @@ func (*Atom) Mutate(*gfxapi.State, database.Database, log.Logger) error {
 	return fmt.Errorf("Mutate not implemented for client atoms")
 }
 
-func (a *Atom) FieldCount() int {
-	return len(a.object.Fields)
+func (a *Atom) ParameterCount() int {
+	if r, _ := a.Result(); r != nil {
+		return len(a.object.Fields) - 1
+	} else {
+		return len(a.object.Fields)
+	}
 }
 
-func (a *Atom) Field(index int) (schema.Field, interface{}) {
+func (a *Atom) Parameter(index int) (schema.Field, interface{}) {
 	return a.object.Type.Fields[index], a.object.Fields[index]
 }
 
-func (a *Atom) SetField(index int, value interface{}) {
+func (a *Atom) SetParameter(index int, value interface{}) {
 	a.object.Fields[index] = value
+}
+
+func (a *Atom) Result() (*schema.Field, interface{}) {
+	idx := len(a.object.Type.Fields) - 1
+	if idx >= 0 && a.object.Type.Fields[idx].Name() == "Result" {
+		return &a.object.Type.Fields[idx], a.object.Fields[idx]
+	}
+	return nil, nil
+}
+
+func (a *Atom) SetResult(value interface{}) {
+	idx := len(a.object.Type.Fields) - 1
+	if idx >= 0 && a.object.Type.Fields[idx].Name() == "Result" {
+		a.object.Fields[idx] = value
+	} else {
+		panic("Atom has no result")
+	}
 }
 
 func (a *Atom) Class() binary.Class {
