@@ -15,6 +15,7 @@
 package gles
 
 import (
+	"fmt"
 	"math/rand"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -288,6 +289,7 @@ func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger
 			err = d.Data(data)
 		}
 		if err != nil {
+			err = fmt.Errorf("Could not read framebuffer data (expected length %d bytes): %v", imageSize, err)
 			data = nil
 		}
 		img <- replay.Image{Data: data, Error: err}
