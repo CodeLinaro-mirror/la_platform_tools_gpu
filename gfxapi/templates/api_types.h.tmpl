@@ -81,7 +81,6 @@
       {{else if IsPointer     $}}{{Template "DeclareType"      $.To}}
       {{else if IsReference   $}}{{Template "DeclareType"      $.To}}
       {{else if IsStaticArray $}}{{Template "DeclareType"      $.ValueType}}
-      {{else if IsReference   $}}
       {{else if IsSlice       $}}
       {{else}}{{Error "DeclareType does not support type '%T'" $}}
       {{end}}
