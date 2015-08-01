@@ -28,6 +28,9 @@ namespace {
 
 const uint32_t MEMORY_SIZE = 4096;
 const uint32_t STACK_CAPACITY = 128;
+const uint32_t CONSTANT_SIZE = 128;
+
+static const uint8_t CONSTANT_MEMORY[CONSTANT_SIZE] = {};
 
 class StackTest : public ::testing::Test {
 protected:
@@ -35,6 +38,7 @@ protected:
         std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
         mMemoryManager.reset(new MemoryManager(memorySizes));
         mStack.reset(new Stack(STACK_CAPACITY, mMemoryManager.get()));
+        mMemoryManager->setConstantMemory(std::make_pair(&CONSTANT_MEMORY, CONSTANT_SIZE));
     }
 
     std::unique_ptr<MemoryManager> mMemoryManager;
@@ -74,83 +78,82 @@ TEST_F(StackTest, GetTypeErrorEmptyStack) {
     EXPECT_FALSE(mStack->isValid());
 }
 
-TEST_F(StackTest, PushFrom) {
+TEST_F(StackTest, PushValue) {
     uint32_t x = 123456789;
-    mStack->pushFrom(BaseType::Uint32, &x);
+    mStack->pushValue(BaseType::Uint32, x);
     EXPECT_EQ(123456789, mStack->pop<uint32_t>());
     EXPECT_TRUE(mStack->isValid());
 }
 
-TEST_F(StackTest, PushFromErrorStackOverflow) {
+TEST_F(StackTest, PushValueErrorStackOverflow) {
     fillStack(mStack.get(), STACK_CAPACITY);
     EXPECT_TRUE(mStack->isValid());
 
     uint32_t x = 123456789;
-    mStack->pushFrom(BaseType::Uint32, &x);
+    mStack->pushValue(BaseType::Uint32, x);
     EXPECT_FALSE(mStack->isValid());
 
-    mStack->pushFrom(BaseType::Uint32, &x);
+    mStack->pushValue(BaseType::Uint32, x);
     EXPECT_FALSE(mStack->isValid());
 }
 
-TEST_F(StackTest, PopTo) {
-    uint32_t x;
-    mStack->push<uint32_t>(123456);
-    mStack->popTo(&x, false);
-    EXPECT_EQ(123456, x);
-}
+TEST_F(StackTest, PopVolatilePtrWithoutConvert) {
+    uint32_t offset = 0x123;
+    mStack->pushValue(BaseType::VolatilePointer, offset);
 
-TEST_F(StackTest, PopToVolatilePtrWithoutConvert) {
-    uint32_t offset = 0x1234;
-    mStack->pushFrom(BaseType::VolatilePointer, &offset);
-
-    uint32_t pointer = 0x0;
-    mStack->popTo(&pointer, false);
+    uint32_t pointer = mStack->popBaseValue();
     EXPECT_TRUE(mStack->isValid());
 
     EXPECT_EQ(offset, pointer);
 }
 
-TEST_F(StackTest, PopToVolatilePtrWithConvert) {
-    uint32_t offset = 0x1234;
-    mStack->pushFrom(BaseType::VolatilePointer, &offset);
+TEST_F(StackTest, PopVolatilePtrWithConvert) {
+    uint32_t offset = 0x123;
+    mStack->pushValue(BaseType::VolatilePointer, offset);
 
-    void* pointer = 0x0;
-    mStack->popTo(&pointer, true);
+    const void* pointer = mStack->popVolatile<const void*>();
     EXPECT_TRUE(mStack->isValid());
 
     EXPECT_EQ(mMemoryManager->volatileToAbsolute(offset), pointer);
 }
 
-TEST_F(StackTest, PopToConstantPtrWithoutConvert) {
-    uint32_t offset = 0x1234;
-    mStack->pushFrom(BaseType::VolatilePointer, &offset);
+TEST_F(StackTest, PopConstantPtrWithoutConvert) {
+    uint32_t offset = 0x12;
+    mStack->pushValue(BaseType::ConstantPointer, offset);
 
-    uint32_t pointer = 0x0;
-    mStack->popTo(&pointer, false);
+    uint32_t pointer = mStack->popBaseValue();
     EXPECT_TRUE(mStack->isValid());
 
     EXPECT_EQ(offset, pointer);
 }
 
-TEST_F(StackTest, PopToConstantPtrWithConvert) {
-    uint32_t offset = 0x1234;
-    mStack->pushFrom(BaseType::ConstantPointer, &offset);
+TEST_F(StackTest, PopConstantPtrWithConvert) {
+    uint32_t offset = 0x12;
+    mStack->pushValue(BaseType::ConstantPointer, offset);
 
-    void* pointer = 0x0;
-    mStack->popTo(&pointer, true);
+    const void* pointer = mStack->popConstant<const void*>();
     EXPECT_TRUE(mStack->isValid());
 
     EXPECT_EQ(mMemoryManager->constantToAbsolute(offset), pointer);
 }
 
-TEST_F(StackTest, PopToErrorEmptyStack) {
-    uint32_t x;
-
-    mStack->popTo(&x, false);
+TEST_F(StackTest, PopErrorEmptyStack) {
+    mStack->pop<uint32_t>();
     EXPECT_FALSE(mStack->isValid());
+}
 
-    mStack->popTo(&x, false);
+TEST_F(StackTest, PopConstantErrorEmptyStack) {
+    mStack->popConstant<const void*>();
+    EXPECT_FALSE(mStack->isValid());
+}
+
+TEST_F(StackTest, PopVolatileErrorEmptyStack) {
+    mStack->popVolatile<void*>();
+    EXPECT_FALSE(mStack->isValid());
+}
+
+TEST_F(StackTest, PopBaseValueErrorEmptyStack) {
+    mStack->popBaseValue();
     EXPECT_FALSE(mStack->isValid());
 }
 
@@ -240,16 +243,16 @@ TEST_F(StackTest, PushPop) {
 
 TEST_F(StackTest, PopVolatilePointer) {
     uint32_t a = 0;
-    mStack->pushFrom(BaseType::VolatilePointer, &a);
+    mStack->pushValue(BaseType::VolatilePointer, a);
     EXPECT_TRUE(mStack->isValid());
     EXPECT_EQ(mMemoryManager->volatileToAbsolute(0), mStack->pop<void*>());
 }
 
 TEST_F(StackTest, PopConstantPointer) {
     uint32_t a = 0;
-    mStack->pushFrom(BaseType::ConstantPointer, &a);
+    mStack->pushValue(BaseType::ConstantPointer, a);
     EXPECT_TRUE(mStack->isValid());
-    EXPECT_EQ(mMemoryManager->constantToAbsolute(0), mStack->pop<void*>());
+    EXPECT_EQ(mMemoryManager->constantToAbsolute(0), mStack->pop<const void*>());
 }
 
 TEST_F(StackTest, PopAbsolutePointer) {
@@ -279,7 +282,7 @@ TEST_F(StackTest, PopErrorMismatchingPointerType) {
     mStack->push<uint32_t>(123);
     EXPECT_TRUE(mStack->isValid());
 
-    mStack->pop<uint32_t*>();
+    mStack->pop<void*>();
     EXPECT_FALSE(mStack->isValid());
 }
 

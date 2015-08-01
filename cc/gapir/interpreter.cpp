@@ -74,7 +74,11 @@ bool Interpreter::call(uint32_t opcode) {
 
 bool Interpreter::pushI(uint32_t opcode) {
     BaseType type = extractType(opcode);
-    uint64_t data = extract20bitData(opcode);
+    if (!isValid(type)) {
+        GAPID_WARNING("Error: pushI basic type invalid %u\n", type);
+        return false;
+    }
+    Stack::BaseValue data = extract20bitData(opcode);
     switch (type) {
         // Sign extension for signed types
         case BaseType::Int32:
@@ -93,27 +97,51 @@ bool Interpreter::pushI(uint32_t opcode) {
         default:
             break;
     }
-    mStack.pushFrom(type, &data);
+    mStack.pushValue(type, data);
     return mStack.isValid();
 }
 
 bool Interpreter::loadC(uint32_t opcode) {
     BaseType type = extractType(opcode);
+    if (!isValid(type)) {
+      GAPID_WARNING("Error: loadC basic type invalid %u\n", type);
+      return false;
+    }
     const void* address = mMemoryManager->constantToAbsolute(extract20bitData(opcode));
+    if (!isConstantAddressForType(address, type)) {
+      GAPID_WARNING("Error: loadC not constant address %p\n", address);
+      return false;
+    }
     mStack.pushFrom(type, address);
     return mStack.isValid();
 }
 
 bool Interpreter::loadV(uint32_t opcode) {
     BaseType type = extractType(opcode);
+    if (!isValid(type)) {
+      GAPID_WARNING("Error: loadV basic type invalid %u\n", type);
+      return false;
+    }
     const void* address = mMemoryManager->volatileToAbsolute(extract20bitData(opcode));
+    if (!isVolatileAddressForType(address, type)) {
+      GAPID_WARNING("Error: loadV not volatile address %p\n", address);
+      return false;
+    }
     mStack.pushFrom(type, address);
     return mStack.isValid();
 }
 
 bool Interpreter::load(uint32_t opcode) {
     BaseType type = extractType(opcode);
+    if (!isValid(type)) {
+      GAPID_WARNING("Error: load basic type invalid %u\n", type);
+      return false;
+    }
     const void* address = mStack.pop<const void*>();
+    if (!isReadAddress(address)) {
+      GAPID_WARNING("Error: load not readable address %p\n", address);
+      return false;
+    }
     mStack.pushFrom(type, address);
     return mStack.isValid();
 }
@@ -125,13 +153,22 @@ bool Interpreter::pop(uint32_t opcode) {
 
 bool Interpreter::storeV(uint32_t opcode) {
     void* address = mMemoryManager->volatileToAbsolute(extract26bitData(opcode));
-    mStack.popTo(address, true);
+    if (!isVolatileAddressForType(address, mStack.getTopType())) {
+      GAPID_WARNING("Error: storeV not volatile address %p\n", address);
+      return false;
+    }
+
+    mStack.popTo(address);
     return mStack.isValid();
 }
 
 bool Interpreter::store() {
     void* address = mStack.pop<void*>();
-    mStack.popTo(address, true);
+    if (!isWriteAddress(address)) {
+      GAPID_WARNING("Error: store not write address %p\n", address);
+      return false;
+    }
+    mStack.popTo(address);
     return mStack.isValid();
 }
 
@@ -148,6 +185,14 @@ bool Interpreter::copy(uint32_t opcode) {
     uint32_t count = extract26bitData(opcode);
     void* target = mStack.pop<void*>();
     const void* source = mStack.pop<const void*>();
+    if (!isWriteAddress(target)) {
+        GAPID_WARNING("Error: copy target is invalid %p %d\n", target, count);
+        return false;
+    }
+    if (!isReadAddress(source)) {
+        GAPID_WARNING("Error: copy source is invalid %p %d\n", target, count);
+        return false;
+    }
     if (source == nullptr) {
         GAPID_WARNING("Error: copy source address is null\n");
         return false;
@@ -169,6 +214,15 @@ bool Interpreter::strcpy(uint32_t opcode) {
     uint32_t count = extract26bitData(opcode);
     char* target = mStack.pop<char*>();
     const char* source = mStack.pop<const char*>();
+    // Requires that the whole count is available, even if source is shorter.
+    if (!isWriteAddress(target)) {
+        GAPID_WARNING("Error: copy target is invalid %p %d\n", target, count);
+        return false;
+    }
+    if (!isReadAddress(source)) {
+        GAPID_WARNING("Error: copy source is invalid %p %d\n", target, count);
+        return false;
+    }
     if (source == nullptr) {
         GAPID_WARNING("Error: strcpy source address is null\n");
         return false;
@@ -192,10 +246,9 @@ bool Interpreter::strcpy(uint32_t opcode) {
 }
 
 bool Interpreter::extend(uint32_t opcode) {
-    BaseType type = mStack.getTopType();
     uint32_t data = extract26bitData(opcode);
-    uint64_t value;
-    mStack.popTo(&value, false);
+    auto type = mStack.getTopType();
+    auto value = mStack.popBaseValue();
     switch (type) {
         // Masking out the mantissa end extending it with the new bits for floating point types
         case BaseType::Float: {
@@ -216,7 +269,7 @@ bool Interpreter::extend(uint32_t opcode) {
             break;
         }
     }
-    mStack.pushFrom(type, &value);
+    mStack.pushValue(type, value);
     return mStack.isValid();
 }
 

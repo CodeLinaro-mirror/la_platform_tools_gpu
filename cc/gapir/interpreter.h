@@ -121,6 +121,15 @@ private:
     bool extend(uint32_t opcode);
     bool label(uint32_t opcode);
 
+    // Returns true, if address..address+size(type) is "constant" memory.
+    bool isConstantAddressForType(const void *address, BaseType type) const;
+    // Returns true, if address..address+size(type) is "volatile" memory.
+    bool isVolatileAddressForType(const void *address, BaseType type) const;
+    // Returns false, if address is known not safe to read from.
+    bool isReadAddress(const void * address) const;
+    // Returns false, if address is known not safe to write to.
+    bool isWriteAddress(void* address) const;
+
     // Interpret one specific opcode. Returns true if it was successful false otherwise
     bool interpret(uint32_t opcode);
 
@@ -136,6 +145,28 @@ private:
     // The last reached label value.
     uint32_t mLabel;
 };
+
+inline bool Interpreter::isConstantAddressForType(const void *address, BaseType type) const {
+    // Treat all pointer types as sizeof(void*)
+    size_t size = isPointerType(type) ? sizeof(void*) : baseTypeSize(type);
+    return mMemoryManager->isConstantAddressWithSize(address, size);
+}
+
+inline bool Interpreter::isVolatileAddressForType(const void *address, BaseType type) const {
+    size_t size = isPointerType(type) ? sizeof(void*) : baseTypeSize(type);
+    return mMemoryManager->isVolatileAddressWithSize(address, baseTypeSize(type));
+}
+
+inline bool Interpreter::isReadAddress(const void * address) const {
+    return address != nullptr && !mMemoryManager->isNotObservedAbsoluteAddress(address);
+}
+
+inline bool Interpreter::isWriteAddress(void* address) const {
+    return address != nullptr &&
+            !mMemoryManager->isNotObservedAbsoluteAddress(address) &&
+            !mMemoryManager->isConstantAddress(address);
+}
+
 
 }  // namespace gapir
 

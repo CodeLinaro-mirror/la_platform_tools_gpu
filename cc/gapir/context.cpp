@@ -160,6 +160,11 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         uint32_t color_fmt = stack->pop<uint32_t>();
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
+        if (!stack->isValid()) {
+            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+            return false;
+        }
+
         uint32_t depthSize = 0;
         switch (depth_fmt) {
             case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH_COMPONENT16):
@@ -175,23 +180,18 @@ void Context::registerCallbacks(Interpreter* interpreter) {
             case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH24_STENCIL8):
                 stencilSize = 8;
         }
-         if (stack->isValid()) {
-            GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
-                    width, height, color_fmt, depth_fmt, stencil_fmt);
-            if (mBoundRenderer == nullptr) {
-                GAPID_INFO("backbufferInfo called without a bound renderer\n");
-                return false;
-            }
-            mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
-            if (resetViewportScissor) {
-                gfxapi::glViewport(0, 0, width, height);
-                gfxapi::glScissor(0, 0, width, height);
-            }
-            return true;
-        } else {
-            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+        GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
+                   width, height, color_fmt, depth_fmt, stencil_fmt);
+        if (mBoundRenderer == nullptr) {
+            GAPID_INFO("backbufferInfo called without a bound renderer\n");
             return false;
         }
+        mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
+        if (resetViewportScissor) {
+            gfxapi::glViewport(0, 0, width, height);
+            gfxapi::glScissor(0, 0, width, height);
+        }
+        return true;
     });
 }
 
@@ -205,6 +205,11 @@ bool Context::loadResource(Stack* stack) {
     }
 
     const auto& resourceData = mReplayRequest->getResourceData(resourceId);
+    if (!mMemoryManager->isVolatileAddressWithSize(address, resourceData.second)) {
+        GAPID_WARNING("Invalid volatile address in loadResource %p\n", address);
+        return false;
+    }
+
     if (!mResourceProvider->get(resourceData.first, mServer, address, resourceData.second)) {
         GAPID_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
         return false;
