@@ -276,8 +276,11 @@ func (p *printer) markup(n ast.Node) {
 
 	case *ast.PointerType:
 		if n.Const {
-			p.inject(n.To, afterPrefix, "•")
+			p.inject(n.To, beforeSuffix, "•")
 		}
+
+	case *ast.PreConst:
+		p.inject(n.Type, afterPrefix, "•")
 
 	case *ast.Pseudonym:
 		p.inject(n.To, afterPrefix, "•")
@@ -358,18 +361,11 @@ func (p *printer) write(s string) {
 
 // pushTabber injects a new tabwriter after the indenter in the writer chain.
 func (p *printer) pushTabber() {
-	var out io.Writer
-	if c := len(p.tabbers); c > 0 {
-		out = p.tabbers[c-1]
-	} else {
-		out = p.out
-	}
-
 	var t *tabwriter.Writer
 	if debug {
-		t = tabwriter.NewWriter(out, 0, 2, 0, ' ', tabwriter.Debug)
+		t = tabwriter.NewWriter(p.indenter.out, 0, 2, 0, ' ', tabwriter.Debug)
 	} else {
-		t = tabwriter.NewWriter(out, 0, 2, 0, ' ', 0)
+		t = tabwriter.NewWriter(p.indenter.out, 0, 2, 0, ' ', 0)
 	}
 	p.tabbers = append(p.tabbers, t)
 	p.indenter.out = t
@@ -435,7 +431,11 @@ func (p *printer) separator(sep parse.Separator) {
 		switch {
 		case strings.HasPrefix(s, "//"), strings.HasPrefix(s, "/*"):
 			p.write("•")
-			p.write(s)
+			// Write the '/' to the indenter to get new lines indented.
+			p.write(s[:1])
+			// Write the rest of the comment skipping the indenter, as we don't want
+			// to change new-line indentation within the comments.
+			p.indenter.out.Write([]byte(s[1:]))
 
 		case strings.HasPrefix(s, "\n"):
 			p.write(s)
