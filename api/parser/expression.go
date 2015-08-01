@@ -84,18 +84,27 @@ func literal(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if s := string_(p, cst); s != nil {
 		return s
 	}
-	if peekOperator(ast.OpUnknown, p) {
-		n := &ast.Unknown{}
-		p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
-			n.CST = l
-			requireOperator(ast.OpUnknown, p, cst)
-		})
-		return n
+	if u := unknown(p, cst); u != nil {
+		return u
 	}
 	if n := number(p, cst); n != nil {
 		return n
 	}
 	return nil
+}
+
+func unknown(p *parse.Parser, cst *parse.Branch) *ast.Unknown {
+	scanned := scanOperator(p)
+	if ast.OpUnknown != scanned {
+		p.Rollback()
+		return nil
+	}
+	n := &ast.Unknown{}
+	p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
+		n.CST = l
+		l.SetToken(p.Consume())
+	})
+	return n
 }
 
 // '"' string '"'
