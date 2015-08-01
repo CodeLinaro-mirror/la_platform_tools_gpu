@@ -18,6 +18,6 @@ import "android.googlesource.com/platform/tools/gpu/parse"
 
 // Node represents any AST-node type.
 type Node interface {
-	// Fragment returns the CST parse Fragment for this AST node.
-	Fragment() parse.Fragment
+	// Node returns the CST parse Node for this AST node.
+	Node() parse.Node
 }
