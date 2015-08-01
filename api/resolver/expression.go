@@ -191,6 +191,19 @@ func select_(ctx *context, in *ast.Switch) *semantic.Select {
 			out.Type = semantic.VoidType
 		}
 	}
+	if d := in.Default; d != nil {
+		if len(in.Default.Block.Statements) != 1 {
+			ctx.errorf(in, "switch default is not a single expression")
+		}
+		e := expression(ctx, in.Default.Block.Statements[0])
+		out.Default = &e
+		if out.Type == nil {
+			out.Type = e.ExpressionType()
+		} else if !equal(out.Type, e.ExpressionType()) {
+			// TODO: This could be a common ancestor type instead?
+			out.Type = semantic.VoidType
+		}
+	}
 	if out.Type == nil {
 		ctx.errorf(in, "could not determine type of switch")
 		out.Type = semantic.VoidType
