@@ -56,4 +56,4 @@ type Atom interface {
 type ID uint64
 
 // NoID is used when you have to pass an ID, but don't have one to use.
-const NoID = ^ID(0)
+const NoID = ID(1<<63 - 1) // use max int64 for the benefit of java
