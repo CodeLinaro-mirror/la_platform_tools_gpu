@@ -46,11 +46,7 @@ func generic(p *parse.Parser, cst *parse.Branch) *ast.Generic {
 	if name == nil {
 		return nil
 	}
-	return extendGeneric(p, name)
-}
 
-// '!' ( type | '(' type [ ',' type ] ')' )
-func extendGeneric(p *parse.Parser, name *ast.Identifier) *ast.Generic {
 	g := &ast.Generic{Name: name}
 	p.Extend(name.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		g.CST = cst

@@ -142,56 +142,74 @@ func pseudonym(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Pseu
 	return s
 }
 
-// generic { extend_type }
+// [const] generic [.name] { extend_type }
 func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	var ref ast.Node
-	var preconst parse.Node
 
 	if peekKeyword(ast.KeywordConst, p) {
+		c := &ast.PreConst{}
 		p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+			c.CST = cst
 			requireKeyword(ast.KeywordConst, p, cst)
-			name := requireIdentifier(p, cst)
-			ref = extendGeneric(p, name)
-			preconst = cst
+			el := requireTypeBase(p, cst)
+			ptr := &ast.PointerType{To: el}
+			p.Extend(el.Node(), func(p *parse.Parser, cst *parse.Branch) {
+				ptr.CST = cst
+				requireOperator(ast.OpPointer, p, cst)
+			})
+			c.Type = ptr
 		})
+		ref = c
 	} else {
-		if g := generic(p, cst); g == nil {
-			return nil
-		} else {
-			ref = g
-		}
+		ref = typeBase(p, cst)
 	}
 
-	if id, isid := ref.(*ast.Generic); isid && peekOperator(ast.OpMember, p) {
-		t := &ast.Imported{From: id.Name}
-		p.Extend(ref.Node(), func(p *parse.Parser, cst *parse.Branch) {
-			t.CST = cst
-			requireOperator(ast.OpMember, p, cst)
-			t.Name = requireIdentifier(p, cst)
-		})
-		ref = t
+	if ref == nil {
+		return nil
 	}
+
 	for {
-		if t := extendTypeRef(p, ref, preconst); t != nil {
-			preconst = nil
+		if t := extendTypeRef(p, ref); t != nil {
 			ref = t
 		} else {
 			break
 		}
 	}
-	if preconst != nil {
-		p.ErrorAt(ref.Node(), "const only applies to pointer types")
-	}
 	return ref
 }
 
-// generic ( pointer_type | static_array_type )
-func extendTypeRef(p *parse.Parser, ref ast.Node, preconst parse.Node) ast.Node {
-	if e := pointerType(p, ref, preconst); e != nil {
-		return e
+// generic [.name]
+func typeBase(p *parse.Parser, cst *parse.Branch) ast.Node {
+	g := generic(p, cst)
+	if g == nil {
+		return nil
 	}
-	if preconst != nil {
-		p.ErrorAt(ref.Node(), "const only applies to pointer types")
+
+	if peekOperator(ast.OpMember, p) {
+		t := &ast.Imported{From: g.Name}
+		p.Extend(g.CST, func(p *parse.Parser, cst *parse.Branch) {
+			t.CST = cst
+			requireOperator(ast.OpMember, p, cst)
+			t.Name = requireIdentifier(p, cst)
+		})
+		return t
+	} else {
+		return g
+	}
+}
+
+func requireTypeBase(p *parse.Parser, cst *parse.Branch) ast.Node {
+	t := typeBase(p, cst)
+	if t == nil {
+		p.Expected("type")
+	}
+	return t
+}
+
+// ref ( pointer_type | static_array_type )
+func extendTypeRef(p *parse.Parser, ref ast.Node) ast.Node {
+	if e := extendPointerType(p, ref); e != nil {
+		return e
 	}
 	if s := indexedType(p, ref); s != nil {
 		return s
@@ -208,20 +226,14 @@ func requireTypeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 }
 
 // lhs_type ['const'] '*'
-func pointerType(p *parse.Parser, ref ast.Node, preconst parse.Node) *ast.PointerType {
+func extendPointerType(p *parse.Parser, ref ast.Node) *ast.PointerType {
 	if !peekOperator(ast.OpPointer, p) && !peekKeyword(ast.KeywordConst, p) {
 		return nil
 	}
-	base := ref.Node()
-	if preconst != nil {
-		base = preconst
-	}
-	t := &ast.PointerType{To: ref, Const: preconst != nil}
-	p.Extend(base, func(p *parse.Parser, cst *parse.Branch) {
+	t := &ast.PointerType{To: ref}
+	p.Extend(ref.Node(), func(p *parse.Parser, cst *parse.Branch) {
 		t.CST = cst
-		if !t.Const {
-			t.Const = keyword(ast.KeywordConst, p, cst) != nil
-		}
+		t.Const = keyword(ast.KeywordConst, p, cst) != nil
 		requireOperator(ast.OpPointer, p, cst)
 	})
 	return t
