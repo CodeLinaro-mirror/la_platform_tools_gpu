@@ -680,11 +680,11 @@ const java_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Java.Accessors"}}
-»public {{Call "Java.Type" .Type}} get{{.Name}}() {
+»public {{Call "Java.Type" .Type}} {{File.Getter .Name}}() {
 »»return {{File.FieldName .Name}};
 »}
 
-»public void set{{.Name}}({{Call "Java.Type" .Type}} v) {
+»public void {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {
 »»{{File.FieldName .Name}} = v;
 »}
 {{end}}
@@ -817,7 +817,7 @@ public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
 
 »»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
 »»»myCall = new {{File.ClassName .Call}}();
-{{range .Call.Params}}»»»myCall.set{{.Name}}({{.Name}});
+{{range .Call.Params}}»»»myCall.{{File.Setter .Name}}({{.Name}});
 {{end}}
 »»}
 »»@Override
