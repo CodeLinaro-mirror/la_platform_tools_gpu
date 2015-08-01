@@ -78,9 +78,9 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 	eglSurface := p(0x3000)
 	eglContext := p(0x5000)
 	eglTrue := gles.EGLBoolean(1)
-	color := gles.RenderbufferFormat_GL_RGB565
-	depth := gles.RenderbufferFormat_GL_DEPTH_COMPONENT16
-	stencil := gles.RenderbufferFormat_GL_STENCIL_INDEX8
+	color := gles.GLenum_GL_RGB565
+	depth := gles.GLenum_GL_DEPTH_COMPONENT16
+	stencil := gles.GLenum_GL_STENCIL_INDEX8
 	return atom.NewList(
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
@@ -97,19 +97,19 @@ func TestClear(t *testing.T) {
 	atoms := initContext(device.Info().Architecture(), d, l, w, h)
 	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
-		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 	green := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
-		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 	blue := atoms.Add(
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
-		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 	black := atoms.Add(
 		gles.NewGlClearColor(0.0, 0.0, 0.0, 1.0),
-		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 
 	ctx := &replay.Context{
@@ -151,7 +151,7 @@ func TestDrawTriangle(t *testing.T) {
 	}
 	clear := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
-		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 	)
 	atoms.Add(gles.NewProgram(a, d, l, vs, fs, program, vsSource, fsSource)...)
 	triangle := atoms.Add(
@@ -159,9 +159,9 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(program),
 		gles.NewGlGetAttribLocation(program, "position", position),
 		gles.NewGlEnableVertexAttribArray(position),
-		gles.NewGlVertexAttribPointer(position, 2, gles.VertexAttribType_GL_FLOAT, false, 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(position, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), vertices)),
-		gles.NewGlDrawArrays(gles.DrawMode_GL_TRIANGLES, 0, 3),
+		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
 
 	ctx := &replay.Context{

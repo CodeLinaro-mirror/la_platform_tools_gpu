@@ -60,9 +60,9 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 			}
 
 			// Unbind the index buffer
-			oldIndexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
+			oldIndexBufferID := c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
 			out.Write(id,
-				NewGlBindBuffer(BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0).
+				NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0).
 					AddRead(memory.Tmp.Range(uint64(len(wireframeData))), resID))
 
 			// Draw the wire-frame
@@ -71,7 +71,7 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 
 			// Rebind the old index buffer
 			out.Write(id, NewGlBindBuffer(
-				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), oldIndexBufferID))
+				GLenum_GL_ELEMENT_ARRAY_BUFFER, oldIndexBufferID))
 		} else {
 			out.Write(id, a)
 		}
@@ -82,10 +82,10 @@ type index uint32
 
 // TODO: The decode/encode methods below assume little endian
 
-func decodeIndices(d binary.Decoder, indicesType IndicesType) ([]index, error) {
+func decodeIndices(d binary.Decoder, indicesType GLenum) ([]index, error) {
 	indices := make([]index, 0)
 	switch indicesType {
-	case IndicesType_GL_UNSIGNED_BYTE:
+	case GLenum_GL_UNSIGNED_BYTE:
 		for {
 			if val, err := d.Uint8(); err == nil {
 				indices = append(indices, index(val))
@@ -94,7 +94,7 @@ func decodeIndices(d binary.Decoder, indicesType IndicesType) ([]index, error) {
 			}
 		}
 
-	case IndicesType_GL_UNSIGNED_SHORT:
+	case GLenum_GL_UNSIGNED_SHORT:
 		for {
 			if val, err := d.Uint16(); err == nil {
 				indices = append(indices, index(val))
@@ -103,7 +103,7 @@ func decodeIndices(d binary.Decoder, indicesType IndicesType) ([]index, error) {
 			}
 		}
 
-	case IndicesType_GL_UNSIGNED_INT:
+	case GLenum_GL_UNSIGNED_INT:
 		for {
 			if val, err := d.Uint32(); err == nil {
 				indices = append(indices, index(val))
@@ -117,7 +117,7 @@ func decodeIndices(d binary.Decoder, indicesType IndicesType) ([]index, error) {
 	}
 }
 
-func encodeIndices(indices []index) ([]byte, IndicesType) {
+func encodeIndices(indices []index) ([]byte, GLenum) {
 	maxIndex := index(0)
 	for _, v := range indices {
 		if v > maxIndex {
@@ -132,19 +132,19 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 		for _, v := range indices {
 			enc.Uint32(uint32(v))
 		}
-		return buf.Bytes(), IndicesType_GL_UNSIGNED_INT
+		return buf.Bytes(), GLenum_GL_UNSIGNED_INT
 
 	case maxIndex > 0xFF:
 		for _, v := range indices {
 			enc.Uint16(uint16(v))
 		}
-		return buf.Bytes(), IndicesType_GL_UNSIGNED_SHORT
+		return buf.Bytes(), GLenum_GL_UNSIGNED_SHORT
 
 	default:
 		for _, v := range indices {
 			enc.Uint8(uint8(v))
 		}
-		return buf.Bytes(), IndicesType_GL_UNSIGNED_BYTE
+		return buf.Bytes(), GLenum_GL_UNSIGNED_BYTE
 	}
 }
 
@@ -155,7 +155,7 @@ func getIndices(
 	c *Context,
 	s *gfxapi.State,
 	d database.Database,
-	l log.Logger) ([]index, DrawMode, error) {
+	l log.Logger) ([]index, GLenum, error) {
 
 	switch a := a.(type) {
 	case *GlDrawArrays:
@@ -166,12 +166,12 @@ func getIndices(
 		return indices, a.DrawMode, nil
 
 	case *GlDrawElements:
-		indexSize := map[IndicesType]uint64{
-			IndicesType_GL_UNSIGNED_BYTE:  1,
-			IndicesType_GL_UNSIGNED_SHORT: 2,
-			IndicesType_GL_UNSIGNED_INT:   4,
+		indexSize := map[GLenum]uint64{
+			GLenum_GL_UNSIGNED_BYTE:  1,
+			GLenum_GL_UNSIGNED_SHORT: 2,
+			GLenum_GL_UNSIGNED_INT:   4,
 		}[a.IndicesType]
-		indexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
+		indexBufferID := c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
 		size := uint64(a.ElementCount) * indexSize
 
 		var decoder binary.Decoder
@@ -204,40 +204,40 @@ func appendWireframeOfTriangle(lines []index, v0, v1, v2 index) []index {
 	}
 }
 
-func makeWireframe(indices []index, drawMode DrawMode) ([]index, DrawMode, error) {
+func makeWireframe(indices []index, drawMode GLenum) ([]index, GLenum, error) {
 	switch drawMode {
-	case DrawMode_GL_POINTS, DrawMode_GL_LINES, DrawMode_GL_LINE_STRIP, DrawMode_GL_LINE_LOOP:
+	case GLenum_GL_POINTS, GLenum_GL_LINES, GLenum_GL_LINE_STRIP, GLenum_GL_LINE_LOOP:
 		return indices, drawMode, nil
 
-	case DrawMode_GL_TRIANGLES:
+	case GLenum_GL_TRIANGLES:
 		numTriangles := len(indices) / 3
 		lines := make([]index, 0, numTriangles*6)
 		for i := 0; i < numTriangles; i++ {
 			lines = appendWireframeOfTriangle(lines, indices[i*3], indices[i*3+1], indices[i*3+2])
 		}
-		return lines, DrawMode_GL_LINES, nil
+		return lines, GLenum_GL_LINES, nil
 
-	case DrawMode_GL_TRIANGLE_STRIP:
+	case GLenum_GL_TRIANGLE_STRIP:
 		numTriangles := len(indices) - 2
 		if numTriangles > 0 {
 			lines := make([]index, 0, numTriangles*6)
 			for i := 0; i < numTriangles; i++ {
 				lines = appendWireframeOfTriangle(lines, indices[i], indices[i+1], indices[i+2])
 			}
-			return lines, DrawMode_GL_LINES, nil
+			return lines, GLenum_GL_LINES, nil
 		}
-		return []index{}, DrawMode_GL_LINES, nil
+		return []index{}, GLenum_GL_LINES, nil
 
-	case DrawMode_GL_TRIANGLE_FAN:
+	case GLenum_GL_TRIANGLE_FAN:
 		numTriangles := len(indices) - 2
 		if numTriangles > 0 {
 			lines := make([]index, 0, numTriangles*6)
 			for i := 0; i < numTriangles; i++ {
 				lines = appendWireframeOfTriangle(lines, indices[0], indices[i+1], indices[i+2])
 			}
-			return lines, DrawMode_GL_LINES, nil
+			return lines, GLenum_GL_LINES, nil
 		}
-		return []index{}, DrawMode_GL_LINES, nil
+		return []index{}, GLenum_GL_LINES, nil
 
 	default:
 		return nil, 0, fmt.Errorf("Unknown mode: %v", drawMode)

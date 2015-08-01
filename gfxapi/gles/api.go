@@ -701,7 +701,6 @@ type GLint64 int64
 type GLuint64 uint64
 type GLfixed int32
 type GLsizei uint32
-type GLenum uint32
 
 // GLsync is a pointer to a __GLsync element.
 type GLsync struct {
@@ -753,7 +752,6 @@ func (p GLsync) Slice(start, end uint64, ϟs *gfxapi.State) __GLsyncˢ {
 	return __GLsyncˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-type GLbitfield uint32
 type GLhalf uint16
 type GLfloat float32
 type GLclampf float32
@@ -1470,34 +1468,34 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// DiscardFramebufferAttachmentᵖ is a pointer to a DiscardFramebufferAttachment element.
-type DiscardFramebufferAttachmentᵖ struct {
+// GLenumᵖ is a pointer to a GLenum element.
+type GLenumᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewDiscardFramebufferAttachmentᵖ returns a DiscardFramebufferAttachmentᵖ that points to addr in the application pool.
-func NewDiscardFramebufferAttachmentᵖ(addr uint64) DiscardFramebufferAttachmentᵖ {
-	return DiscardFramebufferAttachmentᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewGLenumᵖ returns a GLenumᵖ that points to addr in the application pool.
+func NewGLenumᵖ(addr uint64) GLenumᵖ {
+	return GLenumᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that DiscardFramebufferAttachmentᵖ points to.
-func (p DiscardFramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that GLenumᵖ points to.
+func (p GLenumᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
 }
 
-// Read reads and returns the DiscardFramebufferAttachment element at the pointer.
-func (p DiscardFramebufferAttachmentᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) DiscardFramebufferAttachment {
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) GLenum {
 	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
 }
 
-// Write writes value to the DiscardFramebufferAttachment element at the pointer.
-func (p DiscardFramebufferAttachmentᵖ) Write(value DiscardFramebufferAttachment, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]DiscardFramebufferAttachment{value}, ϟs)
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᵖ) Write(value GLenum, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟs)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p DiscardFramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) DiscardFramebufferAttachmentᵖ {
+func (p GLenumᵖ) OnRead(ϟs *gfxapi.State) GLenumᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
@@ -1505,19 +1503,19 @@ func (p DiscardFramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) DiscardFrameb
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p DiscardFramebufferAttachmentᵖ) OnWrite(ϟs *gfxapi.State) DiscardFramebufferAttachmentᵖ {
+func (p GLenumᵖ) OnWrite(ϟs *gfxapi.State) GLenumᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
-// Slice returns a new DiscardFramebufferAttachmentˢ from the pointer using start and end indices.
-func (p DiscardFramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // VertexArrayIdᵖ is a pointer to a VertexArrayId element.
@@ -1618,106 +1616,6 @@ func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexA
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// ShaderAttribTypeᵖ is a pointer to a ShaderAttribType element.
-type ShaderAttribTypeᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewShaderAttribTypeᵖ returns a ShaderAttribTypeᵖ that points to addr in the application pool.
-func NewShaderAttribTypeᵖ(addr uint64) ShaderAttribTypeᵖ {
-	return ShaderAttribTypeᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that ShaderAttribTypeᵖ points to.
-func (p ShaderAttribTypeᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the ShaderAttribType element at the pointer.
-func (p ShaderAttribTypeᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) ShaderAttribType {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the ShaderAttribType element at the pointer.
-func (p ShaderAttribTypeᵖ) Write(value ShaderAttribType, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]ShaderAttribType{value}, ϟs)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p ShaderAttribTypeᵖ) OnRead(ϟs *gfxapi.State) ShaderAttribTypeᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p ShaderAttribTypeᵖ) OnWrite(ϟs *gfxapi.State) ShaderAttribTypeᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// Slice returns a new ShaderAttribTypeˢ from the pointer using start and end indices.
-func (p ShaderAttribTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// ShaderUniformTypeᵖ is a pointer to a ShaderUniformType element.
-type ShaderUniformTypeᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewShaderUniformTypeᵖ returns a ShaderUniformTypeᵖ that points to addr in the application pool.
-func NewShaderUniformTypeᵖ(addr uint64) ShaderUniformTypeᵖ {
-	return ShaderUniformTypeᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that ShaderUniformTypeᵖ points to.
-func (p ShaderUniformTypeᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the ShaderUniformType element at the pointer.
-func (p ShaderUniformTypeᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) ShaderUniformType {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the ShaderUniformType element at the pointer.
-func (p ShaderUniformTypeᵖ) Write(value ShaderUniformType, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]ShaderUniformType{value}, ϟs)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p ShaderUniformTypeᵖ) OnRead(ϟs *gfxapi.State) ShaderUniformTypeᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p ShaderUniformTypeᵖ) OnWrite(ϟs *gfxapi.State) ShaderUniformTypeᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// Slice returns a new ShaderUniformTypeˢ from the pointer using start and end indices.
-func (p ShaderUniformTypeᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // F32ᶜᵖ is a pointer to a float32 element.
@@ -3052,34 +2950,34 @@ func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
 	return Boolˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// FramebufferAttachmentᶜᵖ is a pointer to a FramebufferAttachment element.
-type FramebufferAttachmentᶜᵖ struct {
+// GLenumᶜᵖ is a pointer to a GLenum element.
+type GLenumᶜᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewFramebufferAttachmentᶜᵖ returns a FramebufferAttachmentᶜᵖ that points to addr in the application pool.
-func NewFramebufferAttachmentᶜᵖ(addr uint64) FramebufferAttachmentᶜᵖ {
-	return FramebufferAttachmentᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewGLenumᶜᵖ returns a GLenumᶜᵖ that points to addr in the application pool.
+func NewGLenumᶜᵖ(addr uint64) GLenumᶜᵖ {
+	return GLenumᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that FramebufferAttachmentᶜᵖ points to.
-func (p FramebufferAttachmentᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that GLenumᶜᵖ points to.
+func (p GLenumᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(4)
 }
 
-// Read reads and returns the FramebufferAttachment element at the pointer.
-func (p FramebufferAttachmentᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferAttachment {
+// Read reads and returns the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) GLenum {
 	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
 }
 
-// Write writes value to the FramebufferAttachment element at the pointer.
-func (p FramebufferAttachmentᶜᵖ) Write(value FramebufferAttachment, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]FramebufferAttachment{value}, ϟs)
+// Write writes value to the GLenum element at the pointer.
+func (p GLenumᶜᵖ) Write(value GLenum, ϟs *gfxapi.State) {
+	p.Slice(0, 1, ϟs).Write([]GLenum{value}, ϟs)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p FramebufferAttachmentᶜᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentᶜᵖ {
+func (p GLenumᶜᵖ) OnRead(ϟs *gfxapi.State) GLenumᶜᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
@@ -3087,69 +2985,19 @@ func (p FramebufferAttachmentᶜᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttach
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p FramebufferAttachmentᶜᵖ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentᶜᵖ {
+func (p GLenumᶜᵖ) OnWrite(ϟs *gfxapi.State) GLenumᶜᵖ {
 	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
 		f(p.Pointer.Range(p.ElementSize(ϟs)))
 	}
 	return p
 }
 
-// Slice returns a new FramebufferAttachmentˢ from the pointer using start and end indices.
-func (p FramebufferAttachmentᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ {
+// Slice returns a new GLenumˢ from the pointer using start and end indices.
+func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// FramebufferAttachmentᵖ is a pointer to a FramebufferAttachment element.
-type FramebufferAttachmentᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewFramebufferAttachmentᵖ returns a FramebufferAttachmentᵖ that points to addr in the application pool.
-func NewFramebufferAttachmentᵖ(addr uint64) FramebufferAttachmentᵖ {
-	return FramebufferAttachmentᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that FramebufferAttachmentᵖ points to.
-func (p FramebufferAttachmentᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Read reads and returns the FramebufferAttachment element at the pointer.
-func (p FramebufferAttachmentᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) FramebufferAttachment {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
-}
-
-// Write writes value to the FramebufferAttachment element at the pointer.
-func (p FramebufferAttachmentᵖ) Write(value FramebufferAttachment, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]FramebufferAttachment{value}, ϟs)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p FramebufferAttachmentᵖ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p FramebufferAttachmentᵖ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
-	return p
-}
-
-// Slice returns a new FramebufferAttachmentˢ from the pointer using start and end indices.
-func (p FramebufferAttachmentᵖ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // QueryIdᵖ is a pointer to a QueryId element.
@@ -4604,149 +4452,6 @@ func (s Charᶜᵖˢ) String() string {
 	return fmt.Sprintf("Charᶜᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
-// DiscardFramebufferAttachmentˢ is a slice of DiscardFramebufferAttachment.
-type DiscardFramebufferAttachmentˢ struct {
-	binary.Generate
-	SliceInfo
-}
-
-// MakeDiscardFramebufferAttachmentˢ returns a DiscardFramebufferAttachmentˢ backed by a new memory pool.
-func MakeDiscardFramebufferAttachmentˢ(count uint64, ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = &memory.Pool{}
-	ϟs.NextPoolID++
-	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
-}
-
-// Clone returns a copy of the DiscardFramebufferAttachmentˢ in a new memory pool.
-func (s DiscardFramebufferAttachmentˢ) Clone(ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	s.OnRead(ϟs)
-	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = pool
-	ϟs.NextPoolID++
-	dst := DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
-	return dst
-}
-
-// ElementSize returns the size in bytes of an element that DiscardFramebufferAttachmentˢ points to.
-func (s DiscardFramebufferAttachmentˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Range returns the memory range this slice represents in the underlying pool.
-func (s DiscardFramebufferAttachmentˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
-}
-
-// ResourceID returns an identifier to a resource representing the data of
-// this slice.
-func (s DiscardFramebufferAttachmentˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
-	if err != nil {
-		panic(err)
-	}
-	return id
-}
-
-// Decoder returns a memory decoder for the slice.
-func (s DiscardFramebufferAttachmentˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
-}
-
-// Encoder returns a memory encoder for the slice.
-func (s DiscardFramebufferAttachmentˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
-}
-
-// AsDiscardFramebufferAttachmentˢ returns s cast to a DiscardFramebufferAttachmentˢ.
-// The returned slice length will be calculated so that the returned slice is
-// no longer (in bytes) than s.
-func AsDiscardFramebufferAttachmentˢ(s Slice, ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	out := DiscardFramebufferAttachmentˢ{SliceInfo: s.Info()}
-	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
-	return out
-}
-
-// Read reads and returns all the DiscardFramebufferAttachment elements in this DiscardFramebufferAttachmentˢ.
-func (s DiscardFramebufferAttachmentˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []DiscardFramebufferAttachment {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]DiscardFramebufferAttachment, s.Count)
-	s.OnRead(ϟs)
-	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = DiscardFramebufferAttachment(v)
-		} else {
-			panic(err)
-		}
-	}
-	return res
-}
-
-// Write copies elements from src to this slice. The number of elements copied is returned
-// which is the minimum of s.Count and len(src).
-func (s DiscardFramebufferAttachmentˢ) Write(src []DiscardFramebufferAttachment, ϟs *gfxapi.State) uint64 {
-	count := min(s.Count, uint64(len(src)))
-	s = s.Slice(0, count, ϟs)
-	e := s.Encoder(ϟs)
-	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
-		}
-	}
-	s.OnWrite(ϟs)
-	return count
-}
-
-// Copy copies elements from src to this slice.
-// The number of elements copied is the minimum of dst.Count and src.Count.
-// The slices of this and dst to the copied elements is returned.
-func (dst DiscardFramebufferAttachmentˢ) Copy(src DiscardFramebufferAttachmentˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s DiscardFramebufferAttachmentˢ) {
-	count := min(dst.Count, src.Count)
-	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
-	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
-	return dst, src
-}
-
-// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s DiscardFramebufferAttachmentˢ) OnRead(ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s DiscardFramebufferAttachmentˢ) OnWrite(ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// Index returns a DiscardFramebufferAttachmentᵖ to the i'th element in this DiscardFramebufferAttachmentˢ.
-func (s DiscardFramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) DiscardFramebufferAttachmentᵖ {
-	return DiscardFramebufferAttachmentᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
-}
-
-// Slice returns a sub-slice from the DiscardFramebufferAttachmentˢ using start and end indices.
-func (s DiscardFramebufferAttachmentˢ) Slice(start, end uint64, ϟs *gfxapi.State) DiscardFramebufferAttachmentˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
-	}
-	if end > s.Count {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
-	}
-	return DiscardFramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
-}
-
-// String returns a string description of the DiscardFramebufferAttachmentˢ slice.
-func (s DiscardFramebufferAttachmentˢ) String() string {
-	return fmt.Sprintf("DiscardFramebufferAttachment(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
-}
-
 // EGLintˢ is a slice of EGLint.
 type EGLintˢ struct {
 	binary.Generate
@@ -5176,149 +4881,6 @@ func (s F64ˢ) String() string {
 	return fmt.Sprintf("float64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
-// FramebufferAttachmentˢ is a slice of FramebufferAttachment.
-type FramebufferAttachmentˢ struct {
-	binary.Generate
-	SliceInfo
-}
-
-// MakeFramebufferAttachmentˢ returns a FramebufferAttachmentˢ backed by a new memory pool.
-func MakeFramebufferAttachmentˢ(count uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = &memory.Pool{}
-	ϟs.NextPoolID++
-	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
-}
-
-// Clone returns a copy of the FramebufferAttachmentˢ in a new memory pool.
-func (s FramebufferAttachmentˢ) Clone(ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	s.OnRead(ϟs)
-	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = pool
-	ϟs.NextPoolID++
-	dst := FramebufferAttachmentˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
-	return dst
-}
-
-// ElementSize returns the size in bytes of an element that FramebufferAttachmentˢ points to.
-func (s FramebufferAttachmentˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Range returns the memory range this slice represents in the underlying pool.
-func (s FramebufferAttachmentˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
-}
-
-// ResourceID returns an identifier to a resource representing the data of
-// this slice.
-func (s FramebufferAttachmentˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
-	if err != nil {
-		panic(err)
-	}
-	return id
-}
-
-// Decoder returns a memory decoder for the slice.
-func (s FramebufferAttachmentˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
-}
-
-// Encoder returns a memory encoder for the slice.
-func (s FramebufferAttachmentˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
-}
-
-// AsFramebufferAttachmentˢ returns s cast to a FramebufferAttachmentˢ.
-// The returned slice length will be calculated so that the returned slice is
-// no longer (in bytes) than s.
-func AsFramebufferAttachmentˢ(s Slice, ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	out := FramebufferAttachmentˢ{SliceInfo: s.Info()}
-	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
-	return out
-}
-
-// Read reads and returns all the FramebufferAttachment elements in this FramebufferAttachmentˢ.
-func (s FramebufferAttachmentˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []FramebufferAttachment {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]FramebufferAttachment, s.Count)
-	s.OnRead(ϟs)
-	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = FramebufferAttachment(v)
-		} else {
-			panic(err)
-		}
-	}
-	return res
-}
-
-// Write copies elements from src to this slice. The number of elements copied is returned
-// which is the minimum of s.Count and len(src).
-func (s FramebufferAttachmentˢ) Write(src []FramebufferAttachment, ϟs *gfxapi.State) uint64 {
-	count := min(s.Count, uint64(len(src)))
-	s = s.Slice(0, count, ϟs)
-	e := s.Encoder(ϟs)
-	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
-		}
-	}
-	s.OnWrite(ϟs)
-	return count
-}
-
-// Copy copies elements from src to this slice.
-// The number of elements copied is the minimum of dst.Count and src.Count.
-// The slices of this and dst to the copied elements is returned.
-func (dst FramebufferAttachmentˢ) Copy(src FramebufferAttachmentˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s FramebufferAttachmentˢ) {
-	count := min(dst.Count, src.Count)
-	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
-	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
-	return dst, src
-}
-
-// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s FramebufferAttachmentˢ) OnRead(ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s FramebufferAttachmentˢ) OnWrite(ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// Index returns a FramebufferAttachmentᵖ to the i'th element in this FramebufferAttachmentˢ.
-func (s FramebufferAttachmentˢ) Index(i uint64, ϟs *gfxapi.State) FramebufferAttachmentᵖ {
-	return FramebufferAttachmentᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
-}
-
-// Slice returns a sub-slice from the FramebufferAttachmentˢ using start and end indices.
-func (s FramebufferAttachmentˢ) Slice(start, end uint64, ϟs *gfxapi.State) FramebufferAttachmentˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
-	}
-	if end > s.Count {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
-	}
-	return FramebufferAttachmentˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
-}
-
-// String returns a string description of the FramebufferAttachmentˢ slice.
-func (s FramebufferAttachmentˢ) String() string {
-	return fmt.Sprintf("FramebufferAttachment(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
-}
-
 // FramebufferIdˢ is a slice of FramebufferId.
 type FramebufferIdˢ struct {
 	binary.Generate
@@ -5460,6 +5022,149 @@ func (s FramebufferIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffer
 // String returns a string description of the FramebufferIdˢ slice.
 func (s FramebufferIdˢ) String() string {
 	return fmt.Sprintf("FramebufferId(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// GLenumˢ is a slice of GLenum.
+type GLenumˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeGLenumˢ returns a GLenumˢ backed by a new memory pool.
+func MakeGLenumˢ(count uint64, ϟs *gfxapi.State) GLenumˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return GLenumˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the GLenumˢ in a new memory pool.
+func (s GLenumˢ) Clone(ϟs *gfxapi.State) GLenumˢ {
+	s.OnRead(ϟs)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := GLenumˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that GLenumˢ points to.
+func (s GLenumˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s GLenumˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s GLenumˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s GLenumˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s GLenumˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsGLenumˢ returns s cast to a GLenumˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsGLenumˢ(s Slice, ϟs *gfxapi.State) GLenumˢ {
+	out := GLenumˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the GLenum elements in this GLenumˢ.
+func (s GLenumˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []GLenum {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLenum, s.Count)
+	s.OnRead(ϟs)
+	for i := range res {
+		if v, err := d.Uint32(); err == nil {
+			res[i] = GLenum(v)
+		} else {
+			panic(err)
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s GLenumˢ) Write(src []GLenum, ϟs *gfxapi.State) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if err := e.Uint32(uint32(src[i])); err != nil {
+			panic(err)
+		}
+	}
+	s.OnWrite(ϟs)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst GLenumˢ) Copy(src GLenumˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s GLenumˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟs)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟs)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s GLenumˢ) OnRead(ϟs *gfxapi.State) GLenumˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s GLenumˢ) OnWrite(ϟs *gfxapi.State) GLenumˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	return s
+}
+
+// Index returns a GLenumᵖ to the i'th element in this GLenumˢ.
+func (s GLenumˢ) Index(i uint64, ϟs *gfxapi.State) GLenumᵖ {
+	return GLenumᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the GLenumˢ using start and end indices.
+func (s GLenumˢ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
+	if start >= end {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return GLenumˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the GLenumˢ slice.
+func (s GLenumˢ) String() string {
+	return fmt.Sprintf("GLenum(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Intˢ is a slice of int64.
@@ -6600,149 +6305,6 @@ func (s S64ˢ) String() string {
 	return fmt.Sprintf("int64(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
-// ShaderAttribTypeˢ is a slice of ShaderAttribType.
-type ShaderAttribTypeˢ struct {
-	binary.Generate
-	SliceInfo
-}
-
-// MakeShaderAttribTypeˢ returns a ShaderAttribTypeˢ backed by a new memory pool.
-func MakeShaderAttribTypeˢ(count uint64, ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = &memory.Pool{}
-	ϟs.NextPoolID++
-	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
-}
-
-// Clone returns a copy of the ShaderAttribTypeˢ in a new memory pool.
-func (s ShaderAttribTypeˢ) Clone(ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	s.OnRead(ϟs)
-	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = pool
-	ϟs.NextPoolID++
-	dst := ShaderAttribTypeˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
-	return dst
-}
-
-// ElementSize returns the size in bytes of an element that ShaderAttribTypeˢ points to.
-func (s ShaderAttribTypeˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Range returns the memory range this slice represents in the underlying pool.
-func (s ShaderAttribTypeˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
-}
-
-// ResourceID returns an identifier to a resource representing the data of
-// this slice.
-func (s ShaderAttribTypeˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
-	if err != nil {
-		panic(err)
-	}
-	return id
-}
-
-// Decoder returns a memory decoder for the slice.
-func (s ShaderAttribTypeˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
-}
-
-// Encoder returns a memory encoder for the slice.
-func (s ShaderAttribTypeˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
-}
-
-// AsShaderAttribTypeˢ returns s cast to a ShaderAttribTypeˢ.
-// The returned slice length will be calculated so that the returned slice is
-// no longer (in bytes) than s.
-func AsShaderAttribTypeˢ(s Slice, ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	out := ShaderAttribTypeˢ{SliceInfo: s.Info()}
-	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
-	return out
-}
-
-// Read reads and returns all the ShaderAttribType elements in this ShaderAttribTypeˢ.
-func (s ShaderAttribTypeˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []ShaderAttribType {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]ShaderAttribType, s.Count)
-	s.OnRead(ϟs)
-	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = ShaderAttribType(v)
-		} else {
-			panic(err)
-		}
-	}
-	return res
-}
-
-// Write copies elements from src to this slice. The number of elements copied is returned
-// which is the minimum of s.Count and len(src).
-func (s ShaderAttribTypeˢ) Write(src []ShaderAttribType, ϟs *gfxapi.State) uint64 {
-	count := min(s.Count, uint64(len(src)))
-	s = s.Slice(0, count, ϟs)
-	e := s.Encoder(ϟs)
-	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
-		}
-	}
-	s.OnWrite(ϟs)
-	return count
-}
-
-// Copy copies elements from src to this slice.
-// The number of elements copied is the minimum of dst.Count and src.Count.
-// The slices of this and dst to the copied elements is returned.
-func (dst ShaderAttribTypeˢ) Copy(src ShaderAttribTypeˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s ShaderAttribTypeˢ) {
-	count := min(dst.Count, src.Count)
-	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
-	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
-	return dst, src
-}
-
-// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s ShaderAttribTypeˢ) OnRead(ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s ShaderAttribTypeˢ) OnWrite(ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// Index returns a ShaderAttribTypeᵖ to the i'th element in this ShaderAttribTypeˢ.
-func (s ShaderAttribTypeˢ) Index(i uint64, ϟs *gfxapi.State) ShaderAttribTypeᵖ {
-	return ShaderAttribTypeᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
-}
-
-// Slice returns a sub-slice from the ShaderAttribTypeˢ using start and end indices.
-func (s ShaderAttribTypeˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderAttribTypeˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
-	}
-	if end > s.Count {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
-	}
-	return ShaderAttribTypeˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
-}
-
-// String returns a string description of the ShaderAttribTypeˢ slice.
-func (s ShaderAttribTypeˢ) String() string {
-	return fmt.Sprintf("ShaderAttribType(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
-}
-
 // ShaderIdˢ is a slice of ShaderId.
 type ShaderIdˢ struct {
 	binary.Generate
@@ -6884,149 +6446,6 @@ func (s ShaderIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 // String returns a string description of the ShaderIdˢ slice.
 func (s ShaderIdˢ) String() string {
 	return fmt.Sprintf("ShaderId(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
-}
-
-// ShaderUniformTypeˢ is a slice of ShaderUniformType.
-type ShaderUniformTypeˢ struct {
-	binary.Generate
-	SliceInfo
-}
-
-// MakeShaderUniformTypeˢ returns a ShaderUniformTypeˢ backed by a new memory pool.
-func MakeShaderUniformTypeˢ(count uint64, ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = &memory.Pool{}
-	ϟs.NextPoolID++
-	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
-}
-
-// Clone returns a copy of the ShaderUniformTypeˢ in a new memory pool.
-func (s ShaderUniformTypeˢ) Clone(ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	s.OnRead(ϟs)
-	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = pool
-	ϟs.NextPoolID++
-	dst := ShaderUniformTypeˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
-	return dst
-}
-
-// ElementSize returns the size in bytes of an element that ShaderUniformTypeˢ points to.
-func (s ShaderUniformTypeˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(4)
-}
-
-// Range returns the memory range this slice represents in the underlying pool.
-func (s ShaderUniformTypeˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
-}
-
-// ResourceID returns an identifier to a resource representing the data of
-// this slice.
-func (s ShaderUniformTypeˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
-	if err != nil {
-		panic(err)
-	}
-	return id
-}
-
-// Decoder returns a memory decoder for the slice.
-func (s ShaderUniformTypeˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
-}
-
-// Encoder returns a memory encoder for the slice.
-func (s ShaderUniformTypeˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
-}
-
-// AsShaderUniformTypeˢ returns s cast to a ShaderUniformTypeˢ.
-// The returned slice length will be calculated so that the returned slice is
-// no longer (in bytes) than s.
-func AsShaderUniformTypeˢ(s Slice, ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	out := ShaderUniformTypeˢ{SliceInfo: s.Info()}
-	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
-	return out
-}
-
-// Read reads and returns all the ShaderUniformType elements in this ShaderUniformTypeˢ.
-func (s ShaderUniformTypeˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []ShaderUniformType {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]ShaderUniformType, s.Count)
-	s.OnRead(ϟs)
-	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = ShaderUniformType(v)
-		} else {
-			panic(err)
-		}
-	}
-	return res
-}
-
-// Write copies elements from src to this slice. The number of elements copied is returned
-// which is the minimum of s.Count and len(src).
-func (s ShaderUniformTypeˢ) Write(src []ShaderUniformType, ϟs *gfxapi.State) uint64 {
-	count := min(s.Count, uint64(len(src)))
-	s = s.Slice(0, count, ϟs)
-	e := s.Encoder(ϟs)
-	for i := uint64(0); i < count; i++ {
-		if err := e.Uint32(uint32(src[i])); err != nil {
-			panic(err)
-		}
-	}
-	s.OnWrite(ϟs)
-	return count
-}
-
-// Copy copies elements from src to this slice.
-// The number of elements copied is the minimum of dst.Count and src.Count.
-// The slices of this and dst to the copied elements is returned.
-func (dst ShaderUniformTypeˢ) Copy(src ShaderUniformTypeˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s ShaderUniformTypeˢ) {
-	count := min(dst.Count, src.Count)
-	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
-	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
-	return dst, src
-}
-
-// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s ShaderUniformTypeˢ) OnRead(ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s ShaderUniformTypeˢ) OnWrite(ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
-		f(s.Range(ϟs))
-	}
-	return s
-}
-
-// Index returns a ShaderUniformTypeᵖ to the i'th element in this ShaderUniformTypeˢ.
-func (s ShaderUniformTypeˢ) Index(i uint64, ϟs *gfxapi.State) ShaderUniformTypeᵖ {
-	return ShaderUniformTypeᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
-}
-
-// Slice returns a sub-slice from the ShaderUniformTypeˢ using start and end indices.
-func (s ShaderUniformTypeˢ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderUniformTypeˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
-	}
-	if end > s.Count {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
-	}
-	return ShaderUniformTypeˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
-}
-
-// String returns a string description of the ShaderUniformTypeˢ slice.
-func (s ShaderUniformTypeˢ) String() string {
-	return fmt.Sprintf("ShaderUniformType(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // TextureIdˢ is a slice of TextureId.
@@ -8864,26 +8283,6 @@ func (m BufferIdːBufferʳᵐ) Range() [](*Buffer) {
 	return values
 }
 
-type BufferTargetːBufferIdᵐ map[BufferTarget]BufferId
-
-func (m BufferTargetːBufferIdᵐ) Get(key BufferTarget) BufferId {
-	return m[key]
-}
-func (m BufferTargetːBufferIdᵐ) Contains(key BufferTarget) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m BufferTargetːBufferIdᵐ) Delete(key BufferTarget) {
-	delete(m, key)
-}
-func (m BufferTargetːBufferIdᵐ) Range() []BufferId {
-	values := make([]BufferId, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
 type CGLContextObjːContextʳᵐ map[CGLContextObj](*Context)
 
 func (m CGLContextObjːContextʳᵐ) Get(key CGLContextObj) *Context {
@@ -8898,50 +8297,6 @@ func (m CGLContextObjːContextʳᵐ) Delete(key CGLContextObj) {
 }
 func (m CGLContextObjːContextʳᵐ) Range() [](*Context) {
 	values := make([](*Context), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type Capabilityːboolᵐ map[Capability]bool
-
-func (m Capabilityːboolᵐ) Get(key Capability) bool {
-	return m[key]
-}
-func (m Capabilityːboolᵐ) Contains(key Capability) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m Capabilityːboolᵐ) Delete(key Capability) {
-	delete(m, key)
-}
-func (m Capabilityːboolᵐ) Range() []bool {
-	values := make([]bool, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type CubeMapImageTargetːImageᵐ map[CubeMapImageTarget]Image
-
-func (m CubeMapImageTargetːImageᵐ) Get(key CubeMapImageTarget) Image {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
-}
-func (m CubeMapImageTargetːImageᵐ) Contains(key CubeMapImageTarget) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m CubeMapImageTargetːImageᵐ) Delete(key CubeMapImageTarget) {
-	delete(m, key)
-}
-func (m CubeMapImageTargetːImageᵐ) Range() []Image {
-	values := make([]Image, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -8968,50 +8323,6 @@ func (m EGLContextːContextʳᵐ) Range() [](*Context) {
 	return values
 }
 
-type FaceModeːu32ᵐ map[FaceMode]uint32
-
-func (m FaceModeːu32ᵐ) Get(key FaceMode) uint32 {
-	return m[key]
-}
-func (m FaceModeːu32ᵐ) Contains(key FaceMode) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m FaceModeːu32ᵐ) Delete(key FaceMode) {
-	delete(m, key)
-}
-func (m FaceModeːu32ᵐ) Range() []uint32 {
-	values := make([]uint32, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type FramebufferAttachmentːFramebufferAttachmentInfoᵐ map[FramebufferAttachment]FramebufferAttachmentInfo
-
-func (m FramebufferAttachmentːFramebufferAttachmentInfoᵐ) Get(key FramebufferAttachment) FramebufferAttachmentInfo {
-	v, ok := m[key]
-	if !ok {
-		v.Init()
-	}
-	return v
-}
-func (m FramebufferAttachmentːFramebufferAttachmentInfoᵐ) Contains(key FramebufferAttachment) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m FramebufferAttachmentːFramebufferAttachmentInfoᵐ) Delete(key FramebufferAttachment) {
-	delete(m, key)
-}
-func (m FramebufferAttachmentːFramebufferAttachmentInfoᵐ) Range() []FramebufferAttachmentInfo {
-	values := make([]FramebufferAttachmentInfo, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
 type FramebufferIdːFramebufferʳᵐ map[FramebufferId](*Framebuffer)
 
 func (m FramebufferIdːFramebufferʳᵐ) Get(key FramebufferId) *Framebuffer {
@@ -9026,26 +8337,6 @@ func (m FramebufferIdːFramebufferʳᵐ) Delete(key FramebufferId) {
 }
 func (m FramebufferIdːFramebufferʳᵐ) Range() [](*Framebuffer) {
 	values := make([](*Framebuffer), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type FramebufferTargetːFramebufferIdᵐ map[FramebufferTarget]FramebufferId
-
-func (m FramebufferTargetːFramebufferIdᵐ) Get(key FramebufferTarget) FramebufferId {
-	return m[key]
-}
-func (m FramebufferTargetːFramebufferIdᵐ) Contains(key FramebufferTarget) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m FramebufferTargetːFramebufferIdᵐ) Delete(key FramebufferTarget) {
-	delete(m, key)
-}
-func (m FramebufferTargetːFramebufferIdᵐ) Range() []FramebufferId {
-	values := make([]FramebufferId, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -9072,6 +8363,238 @@ func (m GLXContextːContextʳᵐ) Range() [](*Context) {
 	return values
 }
 
+type GLenumːBufferIdᵐ map[GLenum]BufferId
+
+func (m GLenumːBufferIdᵐ) Get(key GLenum) BufferId {
+	return m[key]
+}
+func (m GLenumːBufferIdᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːBufferIdᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːBufferIdᵐ) Range() []BufferId {
+	values := make([]BufferId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːFramebufferAttachmentInfoᵐ map[GLenum]FramebufferAttachmentInfo
+
+func (m GLenumːFramebufferAttachmentInfoᵐ) Get(key GLenum) FramebufferAttachmentInfo {
+	v, ok := m[key]
+	if !ok {
+		v.Init()
+	}
+	return v
+}
+func (m GLenumːFramebufferAttachmentInfoᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːFramebufferAttachmentInfoᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːFramebufferAttachmentInfoᵐ) Range() []FramebufferAttachmentInfo {
+	values := make([]FramebufferAttachmentInfo, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːFramebufferIdᵐ map[GLenum]FramebufferId
+
+func (m GLenumːFramebufferIdᵐ) Get(key GLenum) FramebufferId {
+	return m[key]
+}
+func (m GLenumːFramebufferIdᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːFramebufferIdᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːFramebufferIdᵐ) Range() []FramebufferId {
+	values := make([]FramebufferId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːGLenumːTextureIdᵐᵐ map[GLenum]GLenumːTextureIdᵐ
+
+func (m GLenumːGLenumːTextureIdᵐᵐ) Get(key GLenum) GLenumːTextureIdᵐ {
+	v, ok := m[key]
+	if !ok {
+		v = make(GLenumːTextureIdᵐ)
+	}
+	return v
+}
+func (m GLenumːGLenumːTextureIdᵐᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːGLenumːTextureIdᵐᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːGLenumːTextureIdᵐᵐ) Range() []GLenumːTextureIdᵐ {
+	values := make([]GLenumːTextureIdᵐ, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːImageᵐ map[GLenum]Image
+
+func (m GLenumːImageᵐ) Get(key GLenum) Image {
+	v, ok := m[key]
+	if !ok {
+		v.Init()
+	}
+	return v
+}
+func (m GLenumːImageᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːImageᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːImageᵐ) Range() []Image {
+	values := make([]Image, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːRenderbufferIdᵐ map[GLenum]RenderbufferId
+
+func (m GLenumːRenderbufferIdᵐ) Get(key GLenum) RenderbufferId {
+	return m[key]
+}
+func (m GLenumːRenderbufferIdᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːRenderbufferIdᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːRenderbufferIdᵐ) Range() []RenderbufferId {
+	values := make([]RenderbufferId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːShaderIdᵐ map[GLenum]ShaderId
+
+func (m GLenumːShaderIdᵐ) Get(key GLenum) ShaderId {
+	return m[key]
+}
+func (m GLenumːShaderIdᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːShaderIdᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːShaderIdᵐ) Range() []ShaderId {
+	values := make([]ShaderId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːTextureIdᵐ map[GLenum]TextureId
+
+func (m GLenumːTextureIdᵐ) Get(key GLenum) TextureId {
+	return m[key]
+}
+func (m GLenumːTextureIdᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːTextureIdᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːTextureIdᵐ) Range() []TextureId {
+	values := make([]TextureId, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːboolᵐ map[GLenum]bool
+
+func (m GLenumːboolᵐ) Get(key GLenum) bool {
+	return m[key]
+}
+func (m GLenumːboolᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːboolᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːboolᵐ) Range() []bool {
+	values := make([]bool, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːs32ᵐ map[GLenum]int32
+
+func (m GLenumːs32ᵐ) Get(key GLenum) int32 {
+	return m[key]
+}
+func (m GLenumːs32ᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːs32ᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːs32ᵐ) Range() []int32 {
+	values := make([]int32, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
+type GLenumːu32ᵐ map[GLenum]uint32
+
+func (m GLenumːu32ᵐ) Get(key GLenum) uint32 {
+	return m[key]
+}
+func (m GLenumːu32ᵐ) Contains(key GLenum) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m GLenumːu32ᵐ) Delete(key GLenum) {
+	delete(m, key)
+}
+func (m GLenumːu32ᵐ) Range() []uint32 {
+	values := make([]uint32, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
 type HGLRCːContextʳᵐ map[HGLRC](*Context)
 
 func (m HGLRCːContextʳᵐ) Get(key HGLRC) *Context {
@@ -9086,26 +8609,6 @@ func (m HGLRCːContextʳᵐ) Delete(key HGLRC) {
 }
 func (m HGLRCːContextʳᵐ) Range() [](*Context) {
 	values := make([](*Context), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type PixelStoreParameterːs32ᵐ map[PixelStoreParameter]int32
-
-func (m PixelStoreParameterːs32ᵐ) Get(key PixelStoreParameter) int32 {
-	return m[key]
-}
-func (m PixelStoreParameterːs32ᵐ) Contains(key PixelStoreParameter) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m PixelStoreParameterːs32ᵐ) Delete(key PixelStoreParameter) {
-	delete(m, key)
-}
-func (m PixelStoreParameterːs32ᵐ) Range() []int32 {
-	values := make([]int32, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -9166,26 +8669,6 @@ func (m RenderbufferIdːRenderbufferʳᵐ) Delete(key RenderbufferId) {
 }
 func (m RenderbufferIdːRenderbufferʳᵐ) Range() [](*Renderbuffer) {
 	values := make([](*Renderbuffer), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type RenderbufferTargetːRenderbufferIdᵐ map[RenderbufferTarget]RenderbufferId
-
-func (m RenderbufferTargetːRenderbufferIdᵐ) Get(key RenderbufferTarget) RenderbufferId {
-	return m[key]
-}
-func (m RenderbufferTargetːRenderbufferIdᵐ) Contains(key RenderbufferTarget) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m RenderbufferTargetːRenderbufferIdᵐ) Delete(key RenderbufferTarget) {
-	delete(m, key)
-}
-func (m RenderbufferTargetːRenderbufferIdᵐ) Range() []RenderbufferId {
-	values := make([]RenderbufferId, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -9284,26 +8767,6 @@ func (m ShaderIdːShaderʳᵐ) Range() [](*Shader) {
 	return values
 }
 
-type ShaderTypeːShaderIdᵐ map[ShaderType]ShaderId
-
-func (m ShaderTypeːShaderIdᵐ) Get(key ShaderType) ShaderId {
-	return m[key]
-}
-func (m ShaderTypeːShaderIdᵐ) Contains(key ShaderType) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m ShaderTypeːShaderIdᵐ) Delete(key ShaderType) {
-	delete(m, key)
-}
-func (m ShaderTypeːShaderIdᵐ) Range() []ShaderId {
-	values := make([]ShaderId, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
 type StringːAttributeLocationᵐ map[string]AttributeLocation
 
 func (m StringːAttributeLocationᵐ) Get(key string) AttributeLocation {
@@ -9338,50 +8801,6 @@ func (m TextureIdːTextureʳᵐ) Delete(key TextureId) {
 }
 func (m TextureIdːTextureʳᵐ) Range() [](*Texture) {
 	values := make([](*Texture), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type TextureTargetːTextureIdᵐ map[TextureTarget]TextureId
-
-func (m TextureTargetːTextureIdᵐ) Get(key TextureTarget) TextureId {
-	return m[key]
-}
-func (m TextureTargetːTextureIdᵐ) Contains(key TextureTarget) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m TextureTargetːTextureIdᵐ) Delete(key TextureTarget) {
-	delete(m, key)
-}
-func (m TextureTargetːTextureIdᵐ) Range() []TextureId {
-	values := make([]TextureId, 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type TextureUnitːTextureTargetːTextureIdᵐᵐ map[TextureUnit]TextureTargetːTextureIdᵐ
-
-func (m TextureUnitːTextureTargetːTextureIdᵐᵐ) Get(key TextureUnit) TextureTargetːTextureIdᵐ {
-	v, ok := m[key]
-	if !ok {
-		v = make(TextureTargetːTextureIdᵐ)
-	}
-	return v
-}
-func (m TextureUnitːTextureTargetːTextureIdᵐᵐ) Contains(key TextureUnit) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m TextureUnitːTextureTargetːTextureIdᵐᵐ) Delete(key TextureUnit) {
-	delete(m, key)
-}
-func (m TextureUnitːTextureTargetːTextureIdᵐᵐ) Range() []TextureTargetːTextureIdᵐ {
-	values := make([]TextureTargetːTextureIdᵐ, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -10155,7 +9574,7 @@ func (a *CGLFlushDrawable) Observations() *atom.Observations { return &a.observa
 type GlEnableClientState struct {
 	binary.Generate
 	observations atom.Observations
-	Type         ArrayType
+	Type         GLenum
 }
 
 func (a *GlEnableClientState) String() string {
@@ -10187,7 +9606,7 @@ func (a *GlEnableClientState) Observations() *atom.Observations { return &a.obse
 type GlDisableClientState struct {
 	binary.Generate
 	observations atom.Observations
-	Type         ArrayType
+	Type         GLenum
 }
 
 func (a *GlDisableClientState) String() string {
@@ -10294,7 +9713,7 @@ type GlStartTilingQCOM struct {
 	Y            int32
 	Width        int32
 	Height       int32
-	PreserveMask TilePreserveMaskQCOM
+	PreserveMask GLbitfield
 }
 
 func (a *GlStartTilingQCOM) String() string {
@@ -10326,7 +9745,7 @@ func (a *GlStartTilingQCOM) Observations() *atom.Observations { return &a.observ
 type GlEndTilingQCOM struct {
 	binary.Generate
 	observations atom.Observations
-	PreserveMask TilePreserveMaskQCOM
+	PreserveMask GLbitfield
 }
 
 func (a *GlEndTilingQCOM) String() string {
@@ -10358,9 +9777,9 @@ func (a *GlEndTilingQCOM) Observations() *atom.Observations { return &a.observat
 type GlDiscardFramebufferEXT struct {
 	binary.Generate
 	observations   atom.Observations
-	Target         FramebufferTarget
+	Target         GLenum
 	NumAttachments int32
-	Attachments    DiscardFramebufferAttachmentᵖ
+	Attachments    GLenumᵖ
 }
 
 func (a *GlDiscardFramebufferEXT) String() string {
@@ -10489,9 +9908,9 @@ func (a *GlPopGroupMarkerEXT) Observations() *atom.Observations { return &a.obse
 type GlTexStorage1DEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 }
 
@@ -10524,9 +9943,9 @@ func (a *GlTexStorage1DEXT) Observations() *atom.Observations { return &a.observ
 type GlTexStorage2DEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 }
@@ -10560,9 +9979,9 @@ func (a *GlTexStorage2DEXT) Observations() *atom.Observations { return &a.observ
 type GlTexStorage3DEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 	Depth        int32
@@ -10598,9 +10017,9 @@ type GlTextureStorage1DEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Texture      TextureId
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 }
 
@@ -10634,9 +10053,9 @@ type GlTextureStorage2DEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Texture      TextureId
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 }
@@ -10671,9 +10090,9 @@ type GlTextureStorage3DEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Texture      TextureId
-	Target       TextureTarget
+	Target       GLenum
 	Levels       int32
-	Format       TexelFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 	Depth        int32
@@ -10839,7 +10258,7 @@ func (a *GlIsVertexArrayOES) Observations() *atom.Observations { return &a.obser
 type GlEGLImageTargetTexture2DOES struct {
 	binary.Generate
 	observations atom.Observations
-	Target       ImageTargetTexture
+	Target       GLenum
 	Image        ImageOES
 }
 
@@ -10872,7 +10291,7 @@ func (a *GlEGLImageTargetTexture2DOES) Observations() *atom.Observations { retur
 type GlEGLImageTargetRenderbufferStorageOES struct {
 	binary.Generate
 	observations atom.Observations
-	Target       ImageTargetRenderbufferStorage
+	Target       GLenum
 	Image        TexturePointer
 }
 
@@ -10907,7 +10326,7 @@ func (a *GlEGLImageTargetRenderbufferStorageOES) Observations() *atom.Observatio
 type GlGetGraphicsResetStatusEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Result       ResetStatus
+	Result       GLenum
 }
 
 func (a *GlGetGraphicsResetStatusEXT) String() string {
@@ -10973,8 +10392,8 @@ func (a *GlBindAttribLocation) Observations() *atom.Observations { return &a.obs
 type GlBlendFunc struct {
 	binary.Generate
 	observations atom.Observations
-	SrcFactor    BlendFactor
-	DstFactor    BlendFactor
+	SrcFactor    GLenum
+	DstFactor    GLenum
 }
 
 func (a *GlBlendFunc) String() string {
@@ -11006,10 +10425,10 @@ func (a *GlBlendFunc) Observations() *atom.Observations { return &a.observations
 type GlBlendFuncSeparate struct {
 	binary.Generate
 	observations   atom.Observations
-	SrcFactorRgb   BlendFactor
-	DstFactorRgb   BlendFactor
-	SrcFactorAlpha BlendFactor
-	DstFactorAlpha BlendFactor
+	SrcFactorRgb   GLenum
+	DstFactorRgb   GLenum
+	SrcFactorAlpha GLenum
+	DstFactorAlpha GLenum
 }
 
 func (a *GlBlendFuncSeparate) String() string {
@@ -11041,7 +10460,7 @@ func (a *GlBlendFuncSeparate) Observations() *atom.Observations { return &a.obse
 type GlBlendEquation struct {
 	binary.Generate
 	observations atom.Observations
-	Equation     BlendEquation
+	Equation     GLenum
 }
 
 func (a *GlBlendEquation) String() string {
@@ -11073,8 +10492,8 @@ func (a *GlBlendEquation) Observations() *atom.Observations { return &a.observat
 type GlBlendEquationSeparate struct {
 	binary.Generate
 	observations atom.Observations
-	Rgb          BlendEquation
-	Alpha        BlendEquation
+	Rgb          GLenum
+	Alpha        GLenum
 }
 
 func (a *GlBlendEquationSeparate) String() string {
@@ -11207,7 +10626,7 @@ type GlVertexAttribPointer struct {
 	observations atom.Observations
 	Location     AttributeLocation
 	Size         int32
-	Type         VertexAttribType
+	Type         GLenum
 	Normalized   bool
 	Stride       int32
 	Data         VertexPointer
@@ -11247,7 +10666,7 @@ type GlGetActiveAttrib struct {
 	BufferSize         int32
 	BufferBytesWritten S32ᵖ
 	VectorCount        S32ᵖ
-	Type               ShaderAttribTypeᵖ
+	Type               GLenumᵖ
 	Name               Charᵖ
 }
 
@@ -11285,7 +10704,7 @@ type GlGetActiveUniform struct {
 	BufferSize         int32
 	BufferBytesWritten S32ᵖ
 	VectorCount        S32ᵖ
-	Type               ShaderUniformTypeᵖ
+	Type               GLenumᵖ
 	Name               Charᵖ
 }
 
@@ -11318,7 +10737,7 @@ func (a *GlGetActiveUniform) Observations() *atom.Observations { return &a.obser
 type GlGetError struct {
 	binary.Generate
 	observations atom.Observations
-	Result       Error
+	Result       GLenum
 }
 
 func (a *GlGetError) String() string {
@@ -11351,7 +10770,7 @@ type GlGetProgramiv struct {
 	binary.Generate
 	observations atom.Observations
 	Program      ProgramId
-	Parameter    ProgramParameter
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -11385,7 +10804,7 @@ type GlGetShaderiv struct {
 	binary.Generate
 	observations atom.Observations
 	Shader       ShaderId
-	Parameter    ShaderParameter
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -11486,7 +10905,7 @@ func (a *GlGetAttribLocation) Observations() *atom.Observations { return &a.obse
 type GlPixelStorei struct {
 	binary.Generate
 	observations atom.Observations
-	Parameter    PixelStoreParameter
+	Parameter    GLenum
 	Value        int32
 }
 
@@ -11519,8 +10938,8 @@ func (a *GlPixelStorei) Observations() *atom.Observations { return &a.observatio
 type GlTexParameteri struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
-	Parameter    TextureParameter
+	Target       GLenum
+	Parameter    GLenum
 	Value        int32
 }
 
@@ -11553,8 +10972,8 @@ func (a *GlTexParameteri) Observations() *atom.Observations { return &a.observat
 type GlTexParameterf struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
-	Parameter    TextureParameter
+	Target       GLenum
+	Parameter    GLenum
 	Value        float32
 }
 
@@ -11587,8 +11006,8 @@ func (a *GlTexParameterf) Observations() *atom.Observations { return &a.observat
 type GlGetTexParameteriv struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
-	Parameter    TextureParameter
+	Target       GLenum
+	Parameter    GLenum
 	Values       S32ᵖ
 }
 
@@ -11621,8 +11040,8 @@ func (a *GlGetTexParameteriv) Observations() *atom.Observations { return &a.obse
 type GlGetTexParameterfv struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
-	Parameter    TextureParameter
+	Target       GLenum
+	Parameter    GLenum
 	Values       F32ᶜᵖ
 }
 
@@ -12646,8 +12065,8 @@ func (a *GlVertexAttrib4fv) Observations() *atom.Observations { return &a.observ
 type GlGetShaderPrecisionFormat struct {
 	binary.Generate
 	observations  atom.Observations
-	ShaderType    ShaderType
-	PrecisionType PrecisionType
+	ShaderType    GLenum
+	PrecisionType GLenum
 	Range         S32ᵖ
 	Precision     S32ᵖ
 }
@@ -12713,7 +12132,7 @@ func (a *GlDepthMask) Observations() *atom.Observations { return &a.observations
 type GlDepthFunc struct {
 	binary.Generate
 	observations atom.Observations
-	Function     TestFunction
+	Function     GLenum
 }
 
 func (a *GlDepthFunc) String() string {
@@ -12845,7 +12264,7 @@ func (a *GlStencilMask) Observations() *atom.Observations { return &a.observatio
 type GlStencilMaskSeparate struct {
 	binary.Generate
 	observations atom.Observations
-	Face         FaceMode
+	Face         GLenum
 	Mask         uint32
 }
 
@@ -12878,8 +12297,8 @@ func (a *GlStencilMaskSeparate) Observations() *atom.Observations { return &a.ob
 type GlStencilFuncSeparate struct {
 	binary.Generate
 	observations   atom.Observations
-	Face           FaceMode
-	Function       TestFunction
+	Face           GLenum
+	Function       GLenum
 	ReferenceValue int32
 	Mask           int32
 }
@@ -12913,10 +12332,10 @@ func (a *GlStencilFuncSeparate) Observations() *atom.Observations { return &a.ob
 type GlStencilOpSeparate struct {
 	binary.Generate
 	observations         atom.Observations
-	Face                 FaceMode
-	StencilFail          StencilAction
-	StencilPassDepthFail StencilAction
-	StencilPassDepthPass StencilAction
+	Face                 GLenum
+	StencilFail          GLenum
+	StencilPassDepthFail GLenum
+	StencilPassDepthPass GLenum
 }
 
 func (a *GlStencilOpSeparate) String() string {
@@ -12948,7 +12367,7 @@ func (a *GlStencilOpSeparate) Observations() *atom.Observations { return &a.obse
 type GlFrontFace struct {
 	binary.Generate
 	observations atom.Observations
-	Orientation  FaceOrientation
+	Orientation  GLenum
 }
 
 func (a *GlFrontFace) String() string {
@@ -13050,7 +12469,7 @@ func (a *GlScissor) Observations() *atom.Observations { return &a.observations }
 type GlActiveTexture struct {
 	binary.Generate
 	observations atom.Observations
-	Unit         TextureUnit
+	Unit         GLenum
 }
 
 func (a *GlActiveTexture) String() string {
@@ -13181,7 +12600,7 @@ func (a *GlIsTexture) Observations() *atom.Observations { return &a.observations
 type GlBindTexture struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureTarget
+	Target       GLenum
 	Texture      TextureId
 }
 
@@ -13214,14 +12633,14 @@ func (a *GlBindTexture) Observations() *atom.Observations { return &a.observatio
 type GlTexImage2D struct {
 	binary.Generate
 	observations   atom.Observations
-	Target         TextureImageTarget
+	Target         GLenum
 	Level          int32
-	InternalFormat TexelFormat
+	InternalFormat GLenum
 	Width          int32
 	Height         int32
 	Border         int32
-	Format         TexelFormat
-	Type           TexelType
+	Format         GLenum
+	Type           GLenum
 	Data           TexturePointer
 }
 
@@ -13254,14 +12673,14 @@ func (a *GlTexImage2D) Observations() *atom.Observations { return &a.observation
 type GlTexSubImage2D struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 	Level        int32
 	Xoffset      int32
 	Yoffset      int32
 	Width        int32
 	Height       int32
-	Format       TexelFormat
-	Type         TexelType
+	Format       GLenum
+	Type         GLenum
 	Data         TexturePointer
 }
 
@@ -13294,9 +12713,9 @@ func (a *GlTexSubImage2D) Observations() *atom.Observations { return &a.observat
 type GlCopyTexImage2D struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 	Level        int32
-	Format       TexelFormat
+	Format       GLenum
 	X            int32
 	Y            int32
 	Width        int32
@@ -13333,7 +12752,7 @@ func (a *GlCopyTexImage2D) Observations() *atom.Observations { return &a.observa
 type GlCopyTexSubImage2D struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 	Level        int32
 	Xoffset      int32
 	Yoffset      int32
@@ -13372,9 +12791,9 @@ func (a *GlCopyTexSubImage2D) Observations() *atom.Observations { return &a.obse
 type GlCompressedTexImage2D struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 	Level        int32
-	Format       CompressedTexelFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 	Border       int32
@@ -13411,13 +12830,13 @@ func (a *GlCompressedTexImage2D) Observations() *atom.Observations { return &a.o
 type GlCompressedTexSubImage2D struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 	Level        int32
 	Xoffset      int32
 	Yoffset      int32
 	Width        int32
 	Height       int32
-	Format       CompressedTexelFormat
+	Format       GLenum
 	ImageSize    int32
 	Data         TexturePointer
 }
@@ -13451,7 +12870,7 @@ func (a *GlCompressedTexSubImage2D) Observations() *atom.Observations { return &
 type GlGenerateMipmap struct {
 	binary.Generate
 	observations atom.Observations
-	Target       TextureImageTarget
+	Target       GLenum
 }
 
 func (a *GlGenerateMipmap) String() string {
@@ -13487,8 +12906,8 @@ type GlReadPixels struct {
 	Y            int32
 	Width        int32
 	Height       int32
-	Format       BaseTexelFormat
-	Type         TexelType
+	Format       GLenum
+	Type         GLenum
 	Data         Voidᵖ
 }
 
@@ -13554,7 +12973,7 @@ func (a *GlGenFramebuffers) Observations() *atom.Observations { return &a.observ
 type GlBindFramebuffer struct {
 	binary.Generate
 	observations atom.Observations
-	Target       FramebufferTarget
+	Target       GLenum
 	Framebuffer  FramebufferId
 }
 
@@ -13587,8 +13006,8 @@ func (a *GlBindFramebuffer) Observations() *atom.Observations { return &a.observ
 type GlCheckFramebufferStatus struct {
 	binary.Generate
 	observations atom.Observations
-	Target       FramebufferTarget
-	Result       FramebufferStatus
+	Target       GLenum
+	Result       GLenum
 }
 
 func (a *GlCheckFramebufferStatus) String() string {
@@ -13719,7 +13138,7 @@ func (a *GlGenRenderbuffers) Observations() *atom.Observations { return &a.obser
 type GlBindRenderbuffer struct {
 	binary.Generate
 	observations atom.Observations
-	Target       RenderbufferTarget
+	Target       GLenum
 	Renderbuffer RenderbufferId
 }
 
@@ -13752,8 +13171,8 @@ func (a *GlBindRenderbuffer) Observations() *atom.Observations { return &a.obser
 type GlRenderbufferStorage struct {
 	binary.Generate
 	observations atom.Observations
-	Target       RenderbufferTarget
-	Format       RenderbufferFormat
+	Target       GLenum
+	Format       GLenum
 	Width        int32
 	Height       int32
 }
@@ -13853,8 +13272,8 @@ func (a *GlIsRenderbuffer) Observations() *atom.Observations { return &a.observa
 type GlGetRenderbufferParameteriv struct {
 	binary.Generate
 	observations atom.Observations
-	Target       RenderbufferTarget
-	Parameter    RenderbufferParameter
+	Target       GLenum
+	Parameter    GLenum
 	Values       S32ᵖ
 }
 
@@ -13920,7 +13339,7 @@ func (a *GlGenBuffers) Observations() *atom.Observations { return &a.observation
 type GlBindBuffer struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
+	Target       GLenum
 	Buffer       BufferId
 }
 
@@ -13953,10 +13372,10 @@ func (a *GlBindBuffer) Observations() *atom.Observations { return &a.observation
 type GlBufferData struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
+	Target       GLenum
 	Size         int32
 	Data         BufferDataPointer
-	Usage        BufferUsage
+	Usage        GLenum
 }
 
 func (a *GlBufferData) String() string {
@@ -13988,7 +13407,7 @@ func (a *GlBufferData) Observations() *atom.Observations { return &a.observation
 type GlBufferSubData struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
+	Target       GLenum
 	Offset       int32
 	Size         int32
 	Data         BufferDataPointer
@@ -14089,8 +13508,8 @@ func (a *GlIsBuffer) Observations() *atom.Observations { return &a.observations 
 type GlGetBufferParameteriv struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
-	Parameter    BufferParameter
+	Target       GLenum
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -14123,7 +13542,7 @@ func (a *GlGetBufferParameteriv) Observations() *atom.Observations { return &a.o
 type GlCreateShader struct {
 	binary.Generate
 	observations atom.Observations
-	Type         ShaderType
+	Type         GLenum
 	Result       ShaderId
 }
 
@@ -14853,7 +14272,7 @@ func (a *GlClearStencil) Observations() *atom.Observations { return &a.observati
 type GlClear struct {
 	binary.Generate
 	observations atom.Observations
-	Mask         ClearMask
+	Mask         GLbitfield
 }
 
 func (a *GlClear) String() string {
@@ -14885,7 +14304,7 @@ func (a *GlClear) Observations() *atom.Observations { return &a.observations }
 type GlCullFace struct {
 	binary.Generate
 	observations atom.Observations
-	Mode         FaceMode
+	Mode         GLenum
 }
 
 func (a *GlCullFace) String() string {
@@ -15015,8 +14434,8 @@ func (a *GlSampleCoverage) Observations() *atom.Observations { return &a.observa
 type GlHint struct {
 	binary.Generate
 	observations atom.Observations
-	Target       HintTarget
-	Mode         HintMode
+	Target       GLenum
+	Mode         GLenum
 }
 
 func (a *GlHint) String() string {
@@ -15048,9 +14467,9 @@ func (a *GlHint) Observations() *atom.Observations { return &a.observations }
 type GlFramebufferRenderbuffer struct {
 	binary.Generate
 	observations          atom.Observations
-	FramebufferTarget     FramebufferTarget
-	FramebufferAttachment FramebufferAttachment
-	RenderbufferTarget    RenderbufferTarget
+	FramebufferTarget     GLenum
+	FramebufferAttachment GLenum
+	RenderbufferTarget    GLenum
 	Renderbuffer          RenderbufferId
 }
 
@@ -15083,9 +14502,9 @@ func (a *GlFramebufferRenderbuffer) Observations() *atom.Observations { return &
 type GlFramebufferTexture2D struct {
 	binary.Generate
 	observations          atom.Observations
-	FramebufferTarget     FramebufferTarget
-	FramebufferAttachment FramebufferAttachment
-	TextureTarget         TextureImageTarget
+	FramebufferTarget     GLenum
+	FramebufferAttachment GLenum
+	TextureTarget         GLenum
 	Texture               TextureId
 	Level                 int32
 }
@@ -15119,9 +14538,9 @@ func (a *GlFramebufferTexture2D) Observations() *atom.Observations { return &a.o
 type GlGetFramebufferAttachmentParameteriv struct {
 	binary.Generate
 	observations      atom.Observations
-	FramebufferTarget FramebufferTarget
-	Attachment        FramebufferAttachment
-	Parameter         FramebufferAttachmentParameter
+	FramebufferTarget GLenum
+	Attachment        GLenum
+	Parameter         GLenum
 	Value             S32ᵖ
 }
 
@@ -15156,9 +14575,9 @@ func (a *GlGetFramebufferAttachmentParameteriv) Observations() *atom.Observation
 type GlDrawElements struct {
 	binary.Generate
 	observations atom.Observations
-	DrawMode     DrawMode
+	DrawMode     GLenum
 	ElementCount int32
-	IndicesType  IndicesType
+	IndicesType  GLenum
 	Indices      IndicesPointer
 }
 
@@ -15191,7 +14610,7 @@ func (a *GlDrawElements) Observations() *atom.Observations { return &a.observati
 type GlDrawArrays struct {
 	binary.Generate
 	observations atom.Observations
-	DrawMode     DrawMode
+	DrawMode     GLenum
 	FirstIndex   int32
 	IndexCount   int32
 }
@@ -15287,7 +14706,7 @@ func (a *GlFinish) Observations() *atom.Observations { return &a.observations }
 type GlGetBooleanv struct {
 	binary.Generate
 	observations atom.Observations
-	Param        StateVariable
+	Param        GLenum
 	Values       Boolᵖ
 }
 
@@ -15320,7 +14739,7 @@ func (a *GlGetBooleanv) Observations() *atom.Observations { return &a.observatio
 type GlGetFloatv struct {
 	binary.Generate
 	observations atom.Observations
-	Param        StateVariable
+	Param        GLenum
 	Values       F32ᵖ
 }
 
@@ -15353,7 +14772,7 @@ func (a *GlGetFloatv) Observations() *atom.Observations { return &a.observations
 type GlGetIntegerv struct {
 	binary.Generate
 	observations atom.Observations
-	Param        StateVariable
+	Param        GLenum
 	Values       S32ᵖ
 }
 
@@ -15386,7 +14805,7 @@ func (a *GlGetIntegerv) Observations() *atom.Observations { return &a.observatio
 type GlGetString struct {
 	binary.Generate
 	observations atom.Observations
-	Param        StringConstant
+	Param        GLenum
 	Result       Charᶜᵖ
 }
 
@@ -15419,7 +14838,7 @@ func (a *GlGetString) Observations() *atom.Observations { return &a.observations
 type GlEnable struct {
 	binary.Generate
 	observations atom.Observations
-	Capability   Capability
+	Capability   GLenum
 }
 
 func (a *GlEnable) String() string {
@@ -15451,7 +14870,7 @@ func (a *GlEnable) Observations() *atom.Observations { return &a.observations }
 type GlDisable struct {
 	binary.Generate
 	observations atom.Observations
-	Capability   Capability
+	Capability   GLenum
 }
 
 func (a *GlDisable) String() string {
@@ -15483,7 +14902,7 @@ func (a *GlDisable) Observations() *atom.Observations { return &a.observations }
 type GlIsEnabled struct {
 	binary.Generate
 	observations atom.Observations
-	Capability   Capability
+	Capability   GLenum
 	Result       bool
 }
 
@@ -15651,10 +15070,10 @@ func (a *GlClientWaitSync) Observations() *atom.Observations { return &a.observa
 type GlMapBufferRange struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
+	Target       GLenum
 	Offset       int32
 	Length       int32
-	Access       MapBufferRangeAccess
+	Access       GLbitfield
 	Result       Voidᵖ
 }
 
@@ -15687,7 +15106,7 @@ func (a *GlMapBufferRange) Observations() *atom.Observations { return &a.observa
 type GlUnmapBuffer struct {
 	binary.Generate
 	observations atom.Observations
-	Target       BufferTarget
+	Target       GLenum
 }
 
 func (a *GlUnmapBuffer) String() string {
@@ -15719,9 +15138,9 @@ func (a *GlUnmapBuffer) Observations() *atom.Observations { return &a.observatio
 type GlInvalidateFramebuffer struct {
 	binary.Generate
 	observations atom.Observations
-	Target       FramebufferTarget
+	Target       GLenum
 	Count        int32
-	Attachments  FramebufferAttachmentᶜᵖ
+	Attachments  GLenumᶜᵖ
 }
 
 func (a *GlInvalidateFramebuffer) String() string {
@@ -15753,9 +15172,9 @@ func (a *GlInvalidateFramebuffer) Observations() *atom.Observations { return &a.
 type GlRenderbufferStorageMultisample struct {
 	binary.Generate
 	observations atom.Observations
-	Target       RenderbufferTarget
+	Target       GLenum
 	Samples      int32
-	Format       RenderbufferFormat
+	Format       GLenum
 	Width        int32
 	Height       int32
 }
@@ -15797,8 +15216,8 @@ type GlBlitFramebuffer struct {
 	DstY0        int32
 	DstX1        int32
 	DstY1        int32
-	Mask         ClearMask
-	Filter       TextureFilterMode
+	Mask         GLbitfield
+	Filter       GLenum
 }
 
 func (a *GlBlitFramebuffer) String() string {
@@ -15863,7 +15282,7 @@ func (a *GlGenQueries) Observations() *atom.Observations { return &a.observation
 type GlBeginQuery struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
+	Target       GLenum
 	Query        QueryId
 }
 
@@ -15896,7 +15315,7 @@ func (a *GlBeginQuery) Observations() *atom.Observations { return &a.observation
 type GlEndQuery struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
+	Target       GLenum
 }
 
 func (a *GlEndQuery) String() string {
@@ -15994,8 +15413,8 @@ func (a *GlIsQuery) Observations() *atom.Observations { return &a.observations }
 type GlGetQueryiv struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
-	Parameter    QueryParameter
+	Target       GLenum
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -16029,7 +15448,7 @@ type GlGetQueryObjectuiv struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        U32ᵖ
 }
 
@@ -16100,7 +15519,7 @@ type GlGetActiveUniformBlockiv struct {
 	observations      atom.Observations
 	Program           ProgramId
 	UniformBlockIndex uint32
-	ParameterName     UniformBlockParameter
+	ParameterName     GLenum
 	Parameters        S32ᵖ
 }
 
@@ -16170,7 +15589,7 @@ type GlGetActiveUniformsiv struct {
 	Program        ProgramId
 	UniformCount   uint32
 	UniformIndices U32ᵖ
-	ParameterName  UniformBlockParameter
+	ParameterName  GLenum
 	Parameters     S32ᵖ
 }
 
@@ -16203,7 +15622,7 @@ func (a *GlGetActiveUniformsiv) Observations() *atom.Observations { return &a.ob
 type GlBindBufferBase struct {
 	binary.Generate
 	observations atom.Observations
-	Target       IndexedBufferTarget
+	Target       GLenum
 	Index        uint32
 	Buffer       BufferId
 }
@@ -16336,7 +15755,7 @@ type GlGetQueryObjecti64v struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        S64ᵖ
 }
 
@@ -16370,7 +15789,7 @@ type GlGetQueryObjectui64v struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        U64ᵖ
 }
 
@@ -16436,7 +15855,7 @@ func (a *GlGenQueriesEXT) Observations() *atom.Observations { return &a.observat
 type GlBeginQueryEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
+	Target       GLenum
 	Query        QueryId
 }
 
@@ -16469,7 +15888,7 @@ func (a *GlBeginQueryEXT) Observations() *atom.Observations { return &a.observat
 type GlEndQueryEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
+	Target       GLenum
 }
 
 func (a *GlEndQueryEXT) String() string {
@@ -16568,7 +15987,7 @@ type GlQueryCounterEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Target       QueryTarget
+	Target       GLenum
 }
 
 func (a *GlQueryCounterEXT) String() string {
@@ -16600,8 +16019,8 @@ func (a *GlQueryCounterEXT) Observations() *atom.Observations { return &a.observ
 type GlGetQueryivEXT struct {
 	binary.Generate
 	observations atom.Observations
-	Target       QueryTarget
-	Parameter    QueryParameter
+	Target       GLenum
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -16635,7 +16054,7 @@ type GlGetQueryObjectivEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        S32ᵖ
 }
 
@@ -16669,7 +16088,7 @@ type GlGetQueryObjectuivEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        U32ᵖ
 }
 
@@ -16703,7 +16122,7 @@ type GlGetQueryObjecti64vEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        S64ᵖ
 }
 
@@ -16737,7 +16156,7 @@ type GlGetQueryObjectui64vEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Parameter    QueryObjectParameter
+	Parameter    GLenum
 	Value        U64ᵖ
 }
 
@@ -16871,9 +16290,9 @@ type BackbufferInfo struct {
 	observations         atom.Observations
 	Width                int32
 	Height               int32
-	ColorFmt             RenderbufferFormat
-	DepthFmt             RenderbufferFormat
-	StencilFmt           RenderbufferFormat
+	ColorFmt             GLenum
+	DepthFmt             GLenum
+	StencilFmt           GLenum
 	ResetViewportScissor bool
 }
 
@@ -17038,7 +16457,7 @@ type Image struct {
 	Height    int32
 	Data      U8ˢ
 	Size      uint32
-	Format    ImageTexelFormat
+	Format    GLenum
 }
 
 func (c *Image) Init() {
@@ -17054,7 +16473,7 @@ type Renderbuffer struct {
 	Width     int32
 	Height    int32
 	Data      U8ˢ
-	Format    RenderbufferFormat
+	Format    GLenum
 }
 
 func (c *Renderbuffer) Init() {
@@ -17068,31 +16487,31 @@ type Texture struct {
 	binary.Generate
 	CreatedAt     atom.ID
 	Kind          TextureKind
-	Format        ImageTexelFormat
+	Format        GLenum
 	Texture2D     S32ːImageᵐ
 	Cubemap       S32ːCubemapLevelᵐ
-	MagFilter     TextureFilterMode
-	MinFilter     TextureFilterMode
-	WrapS         TextureWrapMode
-	WrapT         TextureWrapMode
-	SwizzleR      TexelComponent
-	SwizzleG      TexelComponent
-	SwizzleB      TexelComponent
-	SwizzleA      TexelComponent
+	MagFilter     GLenum
+	MinFilter     GLenum
+	WrapS         GLenum
+	WrapT         GLenum
+	SwizzleR      GLenum
+	SwizzleG      GLenum
+	SwizzleB      GLenum
+	SwizzleA      GLenum
 	MaxAnisotropy float32
 }
 
 func (c *Texture) Init() {
 	c.Texture2D = make(S32ːImageᵐ)
 	c.Cubemap = make(S32ːCubemapLevelᵐ)
-	c.MagFilter = TextureFilterMode_GL_LINEAR
-	c.MinFilter = TextureFilterMode_GL_NEAREST_MIPMAP_LINEAR
-	c.WrapS = TextureWrapMode_GL_REPEAT
-	c.WrapT = TextureWrapMode_GL_REPEAT
-	c.SwizzleR = TexelComponent_GL_RED
-	c.SwizzleG = TexelComponent_GL_GREEN
-	c.SwizzleB = TexelComponent_GL_BLUE
-	c.SwizzleA = TexelComponent_GL_ALPHA
+	c.MagFilter = GLenum_GL_LINEAR
+	c.MinFilter = GLenum_GL_NEAREST_MIPMAP_LINEAR
+	c.WrapS = GLenum_GL_REPEAT
+	c.WrapT = GLenum_GL_REPEAT
+	c.SwizzleR = GLenum_GL_RED
+	c.SwizzleG = GLenum_GL_GREEN
+	c.SwizzleB = GLenum_GL_BLUE
+	c.SwizzleA = GLenum_GL_ALPHA
 	c.MaxAnisotropy = 1
 }
 func (c *Texture) GetCreatedAt() atom.ID { return c.CreatedAt }
@@ -17103,11 +16522,11 @@ func (c *Texture) GetCreatedAt() atom.ID { return c.CreatedAt }
 type CubemapLevel struct {
 	binary.Generate
 	CreatedAt atom.ID
-	Faces     CubeMapImageTargetːImageᵐ
+	Faces     GLenumːImageᵐ
 }
 
 func (c *CubemapLevel) Init() {
-	c.Faces = make(CubeMapImageTargetːImageᵐ)
+	c.Faces = make(GLenumːImageᵐ)
 }
 func (c *CubemapLevel) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -17118,9 +16537,9 @@ type FramebufferAttachmentInfo struct {
 	binary.Generate
 	CreatedAt    atom.ID
 	Object       uint32
-	Type         FramebufferAttachmentType
+	Type         GLenum
 	TextureLevel int32
-	CubeMapFace  CubeMapImageTarget
+	CubeMapFace  GLenum
 }
 
 func (c *FramebufferAttachmentInfo) Init() {
@@ -17133,11 +16552,11 @@ func (c *FramebufferAttachmentInfo) GetCreatedAt() atom.ID { return c.CreatedAt 
 type Framebuffer struct {
 	binary.Generate
 	CreatedAt   atom.ID
-	Attachments FramebufferAttachmentːFramebufferAttachmentInfoᵐ
+	Attachments GLenumːFramebufferAttachmentInfoᵐ
 }
 
 func (c *Framebuffer) Init() {
-	c.Attachments = make(FramebufferAttachmentːFramebufferAttachmentInfoᵐ)
+	c.Attachments = make(GLenumːFramebufferAttachmentInfoᵐ)
 }
 func (c *Framebuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -17149,12 +16568,12 @@ type Buffer struct {
 	CreatedAt atom.ID
 	Data      U8ˢ
 	Size      int32
-	Usage     BufferUsage
+	Usage     GLenum
 }
 
 func (c *Buffer) Init() {
 	c.Size = 0
-	c.Usage = BufferUsage_GL_STATIC_DRAW
+	c.Usage = GLenum_GL_STATIC_DRAW
 }
 func (c *Buffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -17169,7 +16588,7 @@ type Shader struct {
 	Deletable bool
 	InfoLog   Charˢ
 	Source    string
-	Type      ShaderType
+	Type      GLenum
 }
 
 func (c *Shader) Init() {
@@ -17186,7 +16605,7 @@ type VertexAttribute struct {
 	CreatedAt   atom.ID
 	Name        Charˢ
 	VectorCount int32
-	Type        ShaderAttribType
+	Type        GLenum
 }
 
 func (c *VertexAttribute) Init() {
@@ -17200,7 +16619,7 @@ type Uniform struct {
 	binary.Generate
 	CreatedAt atom.ID
 	Name      string
-	Type      ShaderUniformType
+	Type      GLenum
 	Value     U8ˢ
 }
 
@@ -17214,7 +16633,7 @@ func (c *Uniform) GetCreatedAt() atom.ID { return c.CreatedAt }
 type Program struct {
 	binary.Generate
 	CreatedAt         atom.ID
-	Shaders           ShaderTypeːShaderIdᵐ
+	Shaders           GLenumːShaderIdᵐ
 	Linked            bool
 	Binary            U8ˢ
 	AttributeBindings StringːAttributeLocationᵐ
@@ -17224,7 +16643,7 @@ type Program struct {
 }
 
 func (c *Program) Init() {
-	c.Shaders = make(ShaderTypeːShaderIdᵐ)
+	c.Shaders = make(GLenumːShaderIdᵐ)
 	c.AttributeBindings = make(StringːAttributeLocationᵐ)
 	c.Attributes = make(S32ːVertexAttributeᵐ)
 	c.Uniforms = make(UniformLocationːUniformᵐ)
@@ -17251,7 +16670,7 @@ type VertexAttributeArray struct {
 	CreatedAt  atom.ID
 	Enabled    bool
 	Size       uint32
-	Type       VertexAttribType
+	Type       GLenum
 	Normalized bool
 	Stride     int32
 	Buffer     BufferId
@@ -17261,7 +16680,7 @@ type VertexAttributeArray struct {
 func (c *VertexAttributeArray) Init() {
 	c.Enabled = false
 	c.Size = 4
-	c.Type = VertexAttribType_GL_FLOAT
+	c.Type = GLenum_GL_FLOAT
 	c.Normalized = false
 	c.Stride = 0
 	c.Buffer = 0
@@ -17286,22 +16705,22 @@ func (c *Query) GetCreatedAt() atom.ID { return c.CreatedAt }
 type BlendState struct {
 	binary.Generate
 	CreatedAt           atom.ID
-	SrcRgbBlendFactor   BlendFactor
-	SrcAlphaBlendFactor BlendFactor
-	DstRgbBlendFactor   BlendFactor
-	DstAlphaBlendFactor BlendFactor
-	BlendEquationRgb    BlendEquation
-	BlendEquationAlpha  BlendEquation
+	SrcRgbBlendFactor   GLenum
+	SrcAlphaBlendFactor GLenum
+	DstRgbBlendFactor   GLenum
+	DstAlphaBlendFactor GLenum
+	BlendEquationRgb    GLenum
+	BlendEquationAlpha  GLenum
 	BlendColor          Color
 }
 
 func (c *BlendState) Init() {
-	c.SrcRgbBlendFactor = BlendFactor_GL_ONE
-	c.SrcAlphaBlendFactor = BlendFactor_GL_ZERO
-	c.DstRgbBlendFactor = BlendFactor_GL_ONE
-	c.DstAlphaBlendFactor = BlendFactor_GL_ZERO
-	c.BlendEquationRgb = BlendEquation_GL_FUNC_ADD
-	c.BlendEquationAlpha = BlendEquation_GL_FUNC_ADD
+	c.SrcRgbBlendFactor = GLenum_GL_ONE
+	c.SrcAlphaBlendFactor = GLenum_GL_ZERO
+	c.DstRgbBlendFactor = GLenum_GL_ONE
+	c.DstAlphaBlendFactor = GLenum_GL_ZERO
+	c.BlendEquationRgb = GLenum_GL_FUNC_ADD
+	c.BlendEquationAlpha = GLenum_GL_FUNC_ADD
 	c.BlendColor.Init()
 }
 func (c *BlendState) GetCreatedAt() atom.ID { return c.CreatedAt }
@@ -17313,18 +16732,18 @@ type RasterizerState struct {
 	binary.Generate
 	CreatedAt            atom.ID
 	DepthMask            bool
-	DepthTestFunction    TestFunction
+	DepthTestFunction    GLenum
 	DepthNear            float32
 	DepthFar             float32
 	ColorMaskRed         bool
 	ColorMaskGreen       bool
 	ColorMaskBlue        bool
 	ColorMaskAlpha       bool
-	StencilMask          FaceModeːu32ᵐ
+	StencilMask          GLenumːu32ᵐ
 	Viewport             Rect
 	Scissor              Rect
-	FrontFace            FaceOrientation
-	CullFace             FaceMode
+	FrontFace            GLenum
+	CullFace             GLenum
 	LineWidth            float32
 	PolygonOffsetFactor  float32
 	PolygonOffsetUnits   float32
@@ -17334,18 +16753,18 @@ type RasterizerState struct {
 
 func (c *RasterizerState) Init() {
 	c.DepthMask = true
-	c.DepthTestFunction = TestFunction_GL_LESS
+	c.DepthTestFunction = GLenum_GL_LESS
 	c.DepthNear = 0
 	c.DepthFar = 1
 	c.ColorMaskRed = true
 	c.ColorMaskGreen = true
 	c.ColorMaskBlue = true
 	c.ColorMaskAlpha = true
-	c.StencilMask = make(FaceModeːu32ᵐ)
+	c.StencilMask = make(GLenumːu32ᵐ)
 	c.Viewport.Init()
 	c.Scissor.Init()
-	c.FrontFace = FaceOrientation_GL_CCW
-	c.CullFace = FaceMode_GL_BACK
+	c.FrontFace = GLenum_GL_CCW
+	c.CullFace = GLenum_GL_BACK
 	c.LineWidth = 1
 	c.SampleCoverageValue = 1
 }
@@ -17406,17 +16825,17 @@ type Context struct {
 	Blending              BlendState
 	Rasterizing           RasterizerState
 	Clearing              ClearState
-	BoundFramebuffers     FramebufferTargetːFramebufferIdᵐ
-	BoundRenderbuffers    RenderbufferTargetːRenderbufferIdᵐ
-	BoundBuffers          BufferTargetːBufferIdᵐ
+	BoundFramebuffers     GLenumːFramebufferIdᵐ
+	BoundRenderbuffers    GLenumːRenderbufferIdᵐ
+	BoundBuffers          GLenumːBufferIdᵐ
 	BoundProgram          ProgramId
 	BoundVertexArray      VertexArrayId
 	VertexAttributeArrays AttributeLocationːVertexAttributeArrayʳᵐ
-	TextureUnits          TextureUnitːTextureTargetːTextureIdᵐᵐ
-	ActiveTextureUnit     TextureUnit
-	Capabilities          Capabilityːboolᵐ
-	GenerateMipmapHint    HintMode
-	PixelStorage          PixelStoreParameterːs32ᵐ
+	TextureUnits          GLenumːGLenumːTextureIdᵐᵐ
+	ActiveTextureUnit     GLenum
+	Capabilities          GLenumːboolᵐ
+	GenerateMipmapHint    GLenum
+	PixelStorage          GLenumːs32ᵐ
 	Instances             Objects
 }
 
@@ -17424,15 +16843,15 @@ func (c *Context) Init() {
 	c.Blending.Init()
 	c.Rasterizing.Init()
 	c.Clearing.Init()
-	c.BoundFramebuffers = make(FramebufferTargetːFramebufferIdᵐ)
-	c.BoundRenderbuffers = make(RenderbufferTargetːRenderbufferIdᵐ)
-	c.BoundBuffers = make(BufferTargetːBufferIdᵐ)
+	c.BoundFramebuffers = make(GLenumːFramebufferIdᵐ)
+	c.BoundRenderbuffers = make(GLenumːRenderbufferIdᵐ)
+	c.BoundBuffers = make(GLenumːBufferIdᵐ)
 	c.VertexAttributeArrays = make(AttributeLocationːVertexAttributeArrayʳᵐ)
-	c.TextureUnits = make(TextureUnitːTextureTargetːTextureIdᵐᵐ)
-	c.ActiveTextureUnit = TextureUnit_GL_TEXTURE0
-	c.Capabilities = make(Capabilityːboolᵐ)
-	c.GenerateMipmapHint = HintMode_GL_DONT_CARE
-	c.PixelStorage = make(PixelStoreParameterːs32ᵐ)
+	c.TextureUnits = make(GLenumːGLenumːTextureIdᵐᵐ)
+	c.ActiveTextureUnit = GLenum_GL_TEXTURE0
+	c.Capabilities = make(GLenumːboolᵐ)
+	c.GenerateMipmapHint = GLenum_GL_DONT_CARE
+	c.PixelStorage = make(GLenumːs32ᵐ)
 	c.Instances.Init()
 }
 func (c *Context) GetCreatedAt() atom.ID { return c.CreatedAt }
@@ -17450,1449 +16869,6 @@ func (c *__GLsync) Init() {
 func (c *__GLsync) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
-// enum DrawMode
-////////////////////////////////////////////////////////////////////////////////
-type DrawMode uint32
-
-const (
-	DrawMode_GL_LINE_LOOP      = DrawMode(2)
-	DrawMode_GL_LINE_STRIP     = DrawMode(3)
-	DrawMode_GL_LINES          = DrawMode(1)
-	DrawMode_GL_POINTS         = DrawMode(0)
-	DrawMode_GL_TRIANGLE_FAN   = DrawMode(6)
-	DrawMode_GL_TRIANGLE_STRIP = DrawMode(5)
-	DrawMode_GL_TRIANGLES      = DrawMode(4)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum IndicesType
-////////////////////////////////////////////////////////////////////////////////
-type IndicesType uint32
-
-const (
-	IndicesType_GL_UNSIGNED_BYTE  = IndicesType(5121)
-	IndicesType_GL_UNSIGNED_SHORT = IndicesType(5123)
-	IndicesType_GL_UNSIGNED_INT   = IndicesType(5125)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureTarget_GLES_1_1
-////////////////////////////////////////////////////////////////////////////////
-type TextureTarget_GLES_1_1 uint32
-
-const (
-	TextureTarget_GLES_1_1_GL_TEXTURE_2D = TextureTarget_GLES_1_1(3553)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureTarget_GLES_2_0
-////////////////////////////////////////////////////////////////////////////////
-type TextureTarget_GLES_2_0 uint32
-
-const (
-	TextureTarget_GLES_2_0_GL_TEXTURE_CUBE_MAP = TextureTarget_GLES_2_0(34067)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureTarget_OES_EGL_image_external
-////////////////////////////////////////////////////////////////////////////////
-type TextureTarget_OES_EGL_image_external uint32
-
-const (
-	TextureTarget_OES_EGL_image_external_GL_TEXTURE_EXTERNAL_OES = TextureTarget_OES_EGL_image_external(36197)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureTarget
-////////////////////////////////////////////////////////////////////////////////
-type TextureTarget uint32
-
-const ()
-
-// TextureTarget_GLES_1_1
-const (
-	TextureTarget_GL_TEXTURE_2D = TextureTarget(3553)
-)
-
-// TextureTarget_GLES_2_0
-const (
-	TextureTarget_GL_TEXTURE_CUBE_MAP = TextureTarget(34067)
-)
-
-// TextureTarget_OES_EGL_image_external
-const (
-	TextureTarget_GL_TEXTURE_EXTERNAL_OES = TextureTarget(36197)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CubeMapImageTarget
-////////////////////////////////////////////////////////////////////////////////
-type CubeMapImageTarget uint32
-
-const (
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X = CubeMapImageTarget(34070)
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y = CubeMapImageTarget(34072)
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = CubeMapImageTarget(34074)
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X = CubeMapImageTarget(34069)
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y = CubeMapImageTarget(34071)
-	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z = CubeMapImageTarget(34073)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum Texture2DImageTarget
-////////////////////////////////////////////////////////////////////////////////
-type Texture2DImageTarget uint32
-
-const (
-	Texture2DImageTarget_GL_TEXTURE_2D = Texture2DImageTarget(3553)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureImageTarget
-////////////////////////////////////////////////////////////////////////////////
-type TextureImageTarget uint32
-
-const ()
-
-// CubeMapImageTarget
-const (
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X = TextureImageTarget(34070)
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y = TextureImageTarget(34072)
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = TextureImageTarget(34074)
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X = TextureImageTarget(34069)
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y = TextureImageTarget(34071)
-	TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z = TextureImageTarget(34073)
-)
-
-// Texture2DImageTarget
-const (
-	TextureImageTarget_GL_TEXTURE_2D = TextureImageTarget(3553)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BaseTexelFormat
-////////////////////////////////////////////////////////////////////////////////
-type BaseTexelFormat uint32
-
-const (
-	BaseTexelFormat_GL_ALPHA = BaseTexelFormat(6406)
-	BaseTexelFormat_GL_RGB   = BaseTexelFormat(6407)
-	BaseTexelFormat_GL_RGBA  = BaseTexelFormat(6408)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TexelFormat_GLES_1_1
-////////////////////////////////////////////////////////////////////////////////
-type TexelFormat_GLES_1_1 uint32
-
-const (
-	TexelFormat_GLES_1_1_GL_LUMINANCE       = TexelFormat_GLES_1_1(6409)
-	TexelFormat_GLES_1_1_GL_LUMINANCE_ALPHA = TexelFormat_GLES_1_1(6410)
-)
-
-// BaseTexelFormat
-const (
-	TexelFormat_GLES_1_1_GL_ALPHA = TexelFormat_GLES_1_1(6406)
-	TexelFormat_GLES_1_1_GL_RGB   = TexelFormat_GLES_1_1(6407)
-	TexelFormat_GLES_1_1_GL_RGBA  = TexelFormat_GLES_1_1(6408)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TexelFormat_GLES_3_0
-////////////////////////////////////////////////////////////////////////////////
-type TexelFormat_GLES_3_0 uint32
-
-const (
-	TexelFormat_GLES_3_0_GL_RED               = TexelFormat_GLES_3_0(6403)
-	TexelFormat_GLES_3_0_GL_RED_INTEGER       = TexelFormat_GLES_3_0(36244)
-	TexelFormat_GLES_3_0_GL_RG                = TexelFormat_GLES_3_0(33319)
-	TexelFormat_GLES_3_0_GL_RG_INTEGER        = TexelFormat_GLES_3_0(33320)
-	TexelFormat_GLES_3_0_GL_RGB_INTEGER       = TexelFormat_GLES_3_0(36248)
-	TexelFormat_GLES_3_0_GL_RGBA_INTEGER      = TexelFormat_GLES_3_0(36249)
-	TexelFormat_GLES_3_0_GL_DEPTH_COMPONENT   = TexelFormat_GLES_3_0(6402)
-	TexelFormat_GLES_3_0_GL_DEPTH_COMPONENT16 = TexelFormat_GLES_3_0(33189)
-	TexelFormat_GLES_3_0_GL_DEPTH_STENCIL     = TexelFormat_GLES_3_0(34041)
-	TexelFormat_GLES_3_0_GL_DEPTH24_STENCIL8  = TexelFormat_GLES_3_0(35056)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TexelFormat
-////////////////////////////////////////////////////////////////////////////////
-type TexelFormat uint32
-
-const ()
-
-// TexelFormat_GLES_1_1
-const (
-	TexelFormat_GL_LUMINANCE       = TexelFormat(6409)
-	TexelFormat_GL_LUMINANCE_ALPHA = TexelFormat(6410)
-)
-
-// BaseTexelFormat
-const (
-	TexelFormat_GL_ALPHA = TexelFormat(6406)
-	TexelFormat_GL_RGB   = TexelFormat(6407)
-	TexelFormat_GL_RGBA  = TexelFormat(6408)
-)
-
-// TexelFormat_GLES_3_0
-const (
-	TexelFormat_GL_RED               = TexelFormat(6403)
-	TexelFormat_GL_RED_INTEGER       = TexelFormat(36244)
-	TexelFormat_GL_RG                = TexelFormat(33319)
-	TexelFormat_GL_RG_INTEGER        = TexelFormat(33320)
-	TexelFormat_GL_RGB_INTEGER       = TexelFormat(36248)
-	TexelFormat_GL_RGBA_INTEGER      = TexelFormat(36249)
-	TexelFormat_GL_DEPTH_COMPONENT   = TexelFormat(6402)
-	TexelFormat_GL_DEPTH_COMPONENT16 = TexelFormat(33189)
-	TexelFormat_GL_DEPTH_STENCIL     = TexelFormat(34041)
-	TexelFormat_GL_DEPTH24_STENCIL8  = TexelFormat(35056)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum RenderbufferFormat
-////////////////////////////////////////////////////////////////////////////////
-type RenderbufferFormat uint32
-
-const (
-	RenderbufferFormat_GL_RGBA4             = RenderbufferFormat(32854)
-	RenderbufferFormat_GL_RGB5_A1           = RenderbufferFormat(32855)
-	RenderbufferFormat_GL_RGB565            = RenderbufferFormat(36194)
-	RenderbufferFormat_GL_RGBA8             = RenderbufferFormat(32856)
-	RenderbufferFormat_GL_DEPTH_COMPONENT16 = RenderbufferFormat(33189)
-	RenderbufferFormat_GL_STENCIL_INDEX8    = RenderbufferFormat(36168)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum Type_ARB_half_float_vertex
-////////////////////////////////////////////////////////////////////////////////
-type Type_ARB_half_float_vertex uint32
-
-const (
-	Type_ARB_half_float_vertex_GL_HALF_FLOAT_ARB = Type_ARB_half_float_vertex(5131)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum Type_OES_vertex_half_float
-////////////////////////////////////////////////////////////////////////////////
-type Type_OES_vertex_half_float uint32
-
-const (
-	Type_OES_vertex_half_float_GL_HALF_FLOAT_OES = Type_OES_vertex_half_float(36193)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture uint32
-
-const (
-	CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_GL_ETC1_RGB8_OES = CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(36196)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_AMD_compressed_ATC_texture
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_AMD_compressed_ATC_texture uint32
-
-const (
-	CompressedTexelFormat_AMD_compressed_ATC_texture_GL_ATC_RGB_AMD                     = CompressedTexelFormat_AMD_compressed_ATC_texture(35986)
-	CompressedTexelFormat_AMD_compressed_ATC_texture_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = CompressedTexelFormat_AMD_compressed_ATC_texture(35987)
-	CompressedTexelFormat_AMD_compressed_ATC_texture_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = CompressedTexelFormat_AMD_compressed_ATC_texture(34798)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_EXT_texture_compression_dxt1
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_EXT_texture_compression_dxt1 uint32
-
-const (
-	CompressedTexelFormat_EXT_texture_compression_dxt1_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = CompressedTexelFormat_EXT_texture_compression_dxt1(33776)
-	CompressedTexelFormat_EXT_texture_compression_dxt1_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = CompressedTexelFormat_EXT_texture_compression_dxt1(33777)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_EXT_texture_compression_s3tc
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_EXT_texture_compression_s3tc uint32
-
-const (
-	CompressedTexelFormat_EXT_texture_compression_s3tc_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = CompressedTexelFormat_EXT_texture_compression_s3tc(33778)
-	CompressedTexelFormat_EXT_texture_compression_s3tc_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = CompressedTexelFormat_EXT_texture_compression_s3tc(33779)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_KHR_texture_compression_astc_ldr
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_KHR_texture_compression_astc_ldr uint32
-
-const (
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37808)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37809)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37810)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37811)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37812)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37813)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37814)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37815)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37816)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37817)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37818)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37819)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37820)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37821)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37840)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37841)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37842)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37843)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37844)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37845)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37846)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37847)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37848)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37849)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37850)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37851)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37852)
-	CompressedTexelFormat_KHR_texture_compression_astc_ldr_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = CompressedTexelFormat_KHR_texture_compression_astc_ldr(37853)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat_NV_texture_compression_latc
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat_NV_texture_compression_latc uint32
-
-const (
-	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_LUMINANCE_LATC1_NV              = CompressedTexelFormat_NV_texture_compression_latc(35952)
-	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = CompressedTexelFormat_NV_texture_compression_latc(35953)
-	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = CompressedTexelFormat_NV_texture_compression_latc(35954)
-	CompressedTexelFormat_NV_texture_compression_latc_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = CompressedTexelFormat_NV_texture_compression_latc(35955)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum CompressedTexelFormat
-////////////////////////////////////////////////////////////////////////////////
-type CompressedTexelFormat uint32
-
-const ()
-
-// CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
-const (
-	CompressedTexelFormat_GL_ETC1_RGB8_OES = CompressedTexelFormat(36196)
-)
-
-// CompressedTexelFormat_AMD_compressed_ATC_texture
-const (
-	CompressedTexelFormat_GL_ATC_RGB_AMD                     = CompressedTexelFormat(35986)
-	CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = CompressedTexelFormat(35987)
-	CompressedTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = CompressedTexelFormat(34798)
-)
-
-// CompressedTexelFormat_EXT_texture_compression_dxt1
-const (
-	CompressedTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = CompressedTexelFormat(33776)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = CompressedTexelFormat(33777)
-)
-
-// CompressedTexelFormat_EXT_texture_compression_s3tc
-const (
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = CompressedTexelFormat(33778)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = CompressedTexelFormat(33779)
-)
-
-// CompressedTexelFormat_KHR_texture_compression_astc_ldr
-const (
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = CompressedTexelFormat(37808)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = CompressedTexelFormat(37809)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = CompressedTexelFormat(37810)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = CompressedTexelFormat(37811)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = CompressedTexelFormat(37812)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = CompressedTexelFormat(37813)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = CompressedTexelFormat(37814)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = CompressedTexelFormat(37815)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = CompressedTexelFormat(37816)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = CompressedTexelFormat(37817)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = CompressedTexelFormat(37818)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = CompressedTexelFormat(37819)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = CompressedTexelFormat(37820)
-	CompressedTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = CompressedTexelFormat(37821)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = CompressedTexelFormat(37840)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = CompressedTexelFormat(37841)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = CompressedTexelFormat(37842)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = CompressedTexelFormat(37843)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = CompressedTexelFormat(37844)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = CompressedTexelFormat(37845)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = CompressedTexelFormat(37846)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = CompressedTexelFormat(37847)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = CompressedTexelFormat(37848)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = CompressedTexelFormat(37849)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = CompressedTexelFormat(37850)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = CompressedTexelFormat(37851)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = CompressedTexelFormat(37852)
-	CompressedTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = CompressedTexelFormat(37853)
-)
-
-// CompressedTexelFormat_NV_texture_compression_latc
-const (
-	CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV              = CompressedTexelFormat(35952)
-	CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = CompressedTexelFormat(35953)
-	CompressedTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = CompressedTexelFormat(35954)
-	CompressedTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = CompressedTexelFormat(35955)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ImageTexelFormat
-////////////////////////////////////////////////////////////////////////////////
-type ImageTexelFormat uint32
-
-const ()
-
-// TexelFormat
-const ()
-
-// TexelFormat_GLES_1_1
-const (
-	ImageTexelFormat_GL_LUMINANCE       = ImageTexelFormat(6409)
-	ImageTexelFormat_GL_LUMINANCE_ALPHA = ImageTexelFormat(6410)
-)
-
-// BaseTexelFormat
-const (
-	ImageTexelFormat_GL_ALPHA = ImageTexelFormat(6406)
-	ImageTexelFormat_GL_RGB   = ImageTexelFormat(6407)
-	ImageTexelFormat_GL_RGBA  = ImageTexelFormat(6408)
-)
-
-// TexelFormat_GLES_3_0
-const (
-	ImageTexelFormat_GL_RED               = ImageTexelFormat(6403)
-	ImageTexelFormat_GL_RED_INTEGER       = ImageTexelFormat(36244)
-	ImageTexelFormat_GL_RG                = ImageTexelFormat(33319)
-	ImageTexelFormat_GL_RG_INTEGER        = ImageTexelFormat(33320)
-	ImageTexelFormat_GL_RGB_INTEGER       = ImageTexelFormat(36248)
-	ImageTexelFormat_GL_RGBA_INTEGER      = ImageTexelFormat(36249)
-	ImageTexelFormat_GL_DEPTH_COMPONENT   = ImageTexelFormat(6402)
-	ImageTexelFormat_GL_DEPTH_COMPONENT16 = ImageTexelFormat(33189)
-	ImageTexelFormat_GL_DEPTH_STENCIL     = ImageTexelFormat(34041)
-	ImageTexelFormat_GL_DEPTH24_STENCIL8  = ImageTexelFormat(35056)
-)
-
-// CompressedTexelFormat
-const ()
-
-// CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
-const (
-	ImageTexelFormat_GL_ETC1_RGB8_OES = ImageTexelFormat(36196)
-)
-
-// CompressedTexelFormat_AMD_compressed_ATC_texture
-const (
-	ImageTexelFormat_GL_ATC_RGB_AMD                     = ImageTexelFormat(35986)
-	ImageTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = ImageTexelFormat(35987)
-	ImageTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = ImageTexelFormat(34798)
-)
-
-// CompressedTexelFormat_EXT_texture_compression_dxt1
-const (
-	ImageTexelFormat_GL_COMPRESSED_RGB_S3TC_DXT1_EXT  = ImageTexelFormat(33776)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = ImageTexelFormat(33777)
-)
-
-// CompressedTexelFormat_EXT_texture_compression_s3tc
-const (
-	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = ImageTexelFormat(33778)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = ImageTexelFormat(33779)
-)
-
-// CompressedTexelFormat_KHR_texture_compression_astc_ldr
-const (
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = ImageTexelFormat(37808)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = ImageTexelFormat(37809)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_5x5_KHR           = ImageTexelFormat(37810)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x5_KHR           = ImageTexelFormat(37811)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_6x6_KHR           = ImageTexelFormat(37812)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x5_KHR           = ImageTexelFormat(37813)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x6_KHR           = ImageTexelFormat(37814)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_8x8_KHR           = ImageTexelFormat(37815)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x5_KHR          = ImageTexelFormat(37816)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x6_KHR          = ImageTexelFormat(37817)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x8_KHR          = ImageTexelFormat(37818)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_10x10_KHR         = ImageTexelFormat(37819)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x10_KHR         = ImageTexelFormat(37820)
-	ImageTexelFormat_GL_COMPRESSED_RGBA_ASTC_12x12_KHR         = ImageTexelFormat(37821)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR   = ImageTexelFormat(37840)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR   = ImageTexelFormat(37841)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR   = ImageTexelFormat(37842)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR   = ImageTexelFormat(37843)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR   = ImageTexelFormat(37844)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR   = ImageTexelFormat(37845)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR   = ImageTexelFormat(37846)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR   = ImageTexelFormat(37847)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR  = ImageTexelFormat(37848)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR  = ImageTexelFormat(37849)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR  = ImageTexelFormat(37850)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = ImageTexelFormat(37851)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = ImageTexelFormat(37852)
-	ImageTexelFormat_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = ImageTexelFormat(37853)
-)
-
-// CompressedTexelFormat_NV_texture_compression_latc
-const (
-	ImageTexelFormat_GL_COMPRESSED_LUMINANCE_LATC1_NV              = ImageTexelFormat(35952)
-	ImageTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV       = ImageTexelFormat(35953)
-	ImageTexelFormat_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV        = ImageTexelFormat(35954)
-	ImageTexelFormat_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = ImageTexelFormat(35955)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TexelType
-////////////////////////////////////////////////////////////////////////////////
-type TexelType uint32
-
-const (
-	TexelType_GL_UNSIGNED_BYTE          = TexelType(5121)
-	TexelType_GL_UNSIGNED_SHORT         = TexelType(5123)
-	TexelType_GL_UNSIGNED_INT           = TexelType(5125)
-	TexelType_GL_FLOAT                  = TexelType(5126)
-	TexelType_GL_UNSIGNED_SHORT_4_4_4_4 = TexelType(32819)
-	TexelType_GL_UNSIGNED_SHORT_5_5_5_1 = TexelType(32820)
-	TexelType_GL_UNSIGNED_SHORT_5_6_5   = TexelType(33635)
-	TexelType_GL_UNSIGNED_INT_24_8      = TexelType(34042)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferAttachment
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferAttachment uint32
-
-const (
-	FramebufferAttachment_GL_COLOR_ATTACHMENT0  = FramebufferAttachment(36064)
-	FramebufferAttachment_GL_DEPTH_ATTACHMENT   = FramebufferAttachment(36096)
-	FramebufferAttachment_GL_STENCIL_ATTACHMENT = FramebufferAttachment(36128)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferAttachmentType
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferAttachmentType uint32
-
-const (
-	FramebufferAttachmentType_GL_NONE         = FramebufferAttachmentType(0)
-	FramebufferAttachmentType_GL_RENDERBUFFER = FramebufferAttachmentType(36161)
-	FramebufferAttachmentType_GL_TEXTURE      = FramebufferAttachmentType(5890)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferTarget_GLES_2_0
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferTarget_GLES_2_0 uint32
-
-const (
-	FramebufferTarget_GLES_2_0_GL_FRAMEBUFFER = FramebufferTarget_GLES_2_0(36160)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferTarget_GLES_3_1
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferTarget_GLES_3_1 uint32
-
-const (
-	FramebufferTarget_GLES_3_1_GL_READ_FRAMEBUFFER = FramebufferTarget_GLES_3_1(36008)
-	FramebufferTarget_GLES_3_1_GL_DRAW_FRAMEBUFFER = FramebufferTarget_GLES_3_1(36009)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferTarget
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferTarget uint32
-
-const ()
-
-// FramebufferTarget_GLES_2_0
-const (
-	FramebufferTarget_GL_FRAMEBUFFER = FramebufferTarget(36160)
-)
-
-// FramebufferTarget_GLES_3_1
-const (
-	FramebufferTarget_GL_READ_FRAMEBUFFER = FramebufferTarget(36008)
-	FramebufferTarget_GL_DRAW_FRAMEBUFFER = FramebufferTarget(36009)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferAttachmentParameter
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferAttachmentParameter uint32
-
-const (
-	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE           = FramebufferAttachmentParameter(36048)
-	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           = FramebufferAttachmentParameter(36049)
-	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         = FramebufferAttachmentParameter(36050)
-	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = FramebufferAttachmentParameter(36051)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferStatus
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferStatus uint32
-
-const (
-	FramebufferStatus_GL_FRAMEBUFFER_COMPLETE                      = FramebufferStatus(36053)
-	FramebufferStatus_GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT         = FramebufferStatus(36054)
-	FramebufferStatus_GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = FramebufferStatus(36055)
-	FramebufferStatus_GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS         = FramebufferStatus(36057)
-	FramebufferStatus_GL_FRAMEBUFFER_UNSUPPORTED                   = FramebufferStatus(36061)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum RenderbufferTarget
-////////////////////////////////////////////////////////////////////////////////
-type RenderbufferTarget uint32
-
-const (
-	RenderbufferTarget_GL_RENDERBUFFER = RenderbufferTarget(36161)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum RenderbufferParameter
-////////////////////////////////////////////////////////////////////////////////
-type RenderbufferParameter uint32
-
-const (
-	RenderbufferParameter_GL_RENDERBUFFER_WIDTH           = RenderbufferParameter(36162)
-	RenderbufferParameter_GL_RENDERBUFFER_HEIGHT          = RenderbufferParameter(36163)
-	RenderbufferParameter_GL_RENDERBUFFER_INTERNAL_FORMAT = RenderbufferParameter(36164)
-	RenderbufferParameter_GL_RENDERBUFFER_RED_SIZE        = RenderbufferParameter(36176)
-	RenderbufferParameter_GL_RENDERBUFFER_GREEN_SIZE      = RenderbufferParameter(36177)
-	RenderbufferParameter_GL_RENDERBUFFER_BLUE_SIZE       = RenderbufferParameter(36178)
-	RenderbufferParameter_GL_RENDERBUFFER_ALPHA_SIZE      = RenderbufferParameter(36179)
-	RenderbufferParameter_GL_RENDERBUFFER_DEPTH_SIZE      = RenderbufferParameter(36180)
-	RenderbufferParameter_GL_RENDERBUFFER_STENCIL_SIZE    = RenderbufferParameter(36181)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BufferParameter
-////////////////////////////////////////////////////////////////////////////////
-type BufferParameter uint32
-
-const (
-	BufferParameter_GL_BUFFER_SIZE  = BufferParameter(34660)
-	BufferParameter_GL_BUFFER_USAGE = BufferParameter(34661)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureUnit
-////////////////////////////////////////////////////////////////////////////////
-type TextureUnit uint32
-
-const (
-	TextureUnit_GL_TEXTURE0  = TextureUnit(33984)
-	TextureUnit_GL_TEXTURE1  = TextureUnit(33985)
-	TextureUnit_GL_TEXTURE2  = TextureUnit(33986)
-	TextureUnit_GL_TEXTURE3  = TextureUnit(33987)
-	TextureUnit_GL_TEXTURE4  = TextureUnit(33988)
-	TextureUnit_GL_TEXTURE5  = TextureUnit(33989)
-	TextureUnit_GL_TEXTURE6  = TextureUnit(33990)
-	TextureUnit_GL_TEXTURE7  = TextureUnit(33991)
-	TextureUnit_GL_TEXTURE8  = TextureUnit(33992)
-	TextureUnit_GL_TEXTURE9  = TextureUnit(33993)
-	TextureUnit_GL_TEXTURE10 = TextureUnit(33994)
-	TextureUnit_GL_TEXTURE11 = TextureUnit(33995)
-	TextureUnit_GL_TEXTURE12 = TextureUnit(33996)
-	TextureUnit_GL_TEXTURE13 = TextureUnit(33997)
-	TextureUnit_GL_TEXTURE14 = TextureUnit(33998)
-	TextureUnit_GL_TEXTURE15 = TextureUnit(33999)
-	TextureUnit_GL_TEXTURE16 = TextureUnit(34000)
-	TextureUnit_GL_TEXTURE17 = TextureUnit(34001)
-	TextureUnit_GL_TEXTURE18 = TextureUnit(34002)
-	TextureUnit_GL_TEXTURE19 = TextureUnit(34003)
-	TextureUnit_GL_TEXTURE20 = TextureUnit(34004)
-	TextureUnit_GL_TEXTURE21 = TextureUnit(34005)
-	TextureUnit_GL_TEXTURE22 = TextureUnit(34006)
-	TextureUnit_GL_TEXTURE23 = TextureUnit(34007)
-	TextureUnit_GL_TEXTURE24 = TextureUnit(34008)
-	TextureUnit_GL_TEXTURE25 = TextureUnit(34009)
-	TextureUnit_GL_TEXTURE26 = TextureUnit(34010)
-	TextureUnit_GL_TEXTURE27 = TextureUnit(34011)
-	TextureUnit_GL_TEXTURE28 = TextureUnit(34012)
-	TextureUnit_GL_TEXTURE29 = TextureUnit(34013)
-	TextureUnit_GL_TEXTURE30 = TextureUnit(34014)
-	TextureUnit_GL_TEXTURE31 = TextureUnit(34015)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BufferUsage
-////////////////////////////////////////////////////////////////////////////////
-type BufferUsage uint32
-
-const (
-	BufferUsage_GL_DYNAMIC_DRAW = BufferUsage(35048)
-	BufferUsage_GL_STATIC_DRAW  = BufferUsage(35044)
-	BufferUsage_GL_STREAM_DRAW  = BufferUsage(35040)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ShaderType
-////////////////////////////////////////////////////////////////////////////////
-type ShaderType uint32
-
-const (
-	ShaderType_GL_VERTEX_SHADER   = ShaderType(35633)
-	ShaderType_GL_FRAGMENT_SHADER = ShaderType(35632)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StateVariable_GLES_2_0
-////////////////////////////////////////////////////////////////////////////////
-type StateVariable_GLES_2_0 uint32
-
-const (
-	StateVariable_GLES_2_0_GL_ACTIVE_TEXTURE                   = StateVariable_GLES_2_0(34016)
-	StateVariable_GLES_2_0_GL_ALIASED_LINE_WIDTH_RANGE         = StateVariable_GLES_2_0(33902)
-	StateVariable_GLES_2_0_GL_ALIASED_POINT_SIZE_RANGE         = StateVariable_GLES_2_0(33901)
-	StateVariable_GLES_2_0_GL_ALPHA_BITS                       = StateVariable_GLES_2_0(3413)
-	StateVariable_GLES_2_0_GL_ARRAY_BUFFER_BINDING             = StateVariable_GLES_2_0(34964)
-	StateVariable_GLES_2_0_GL_BLEND                            = StateVariable_GLES_2_0(3042)
-	StateVariable_GLES_2_0_GL_BLEND_COLOR                      = StateVariable_GLES_2_0(32773)
-	StateVariable_GLES_2_0_GL_BLEND_DST_ALPHA                  = StateVariable_GLES_2_0(32970)
-	StateVariable_GLES_2_0_GL_BLEND_DST_RGB                    = StateVariable_GLES_2_0(32968)
-	StateVariable_GLES_2_0_GL_BLEND_EQUATION_ALPHA             = StateVariable_GLES_2_0(34877)
-	StateVariable_GLES_2_0_GL_BLEND_EQUATION_RGB               = StateVariable_GLES_2_0(32777)
-	StateVariable_GLES_2_0_GL_BLEND_SRC_ALPHA                  = StateVariable_GLES_2_0(32971)
-	StateVariable_GLES_2_0_GL_BLEND_SRC_RGB                    = StateVariable_GLES_2_0(32969)
-	StateVariable_GLES_2_0_GL_BLUE_BITS                        = StateVariable_GLES_2_0(3412)
-	StateVariable_GLES_2_0_GL_COLOR_CLEAR_VALUE                = StateVariable_GLES_2_0(3106)
-	StateVariable_GLES_2_0_GL_COLOR_WRITEMASK                  = StateVariable_GLES_2_0(3107)
-	StateVariable_GLES_2_0_GL_COMPRESSED_TEXTURE_FORMATS       = StateVariable_GLES_2_0(34467)
-	StateVariable_GLES_2_0_GL_CULL_FACE                        = StateVariable_GLES_2_0(2884)
-	StateVariable_GLES_2_0_GL_CULL_FACE_MODE                   = StateVariable_GLES_2_0(2885)
-	StateVariable_GLES_2_0_GL_CURRENT_PROGRAM                  = StateVariable_GLES_2_0(35725)
-	StateVariable_GLES_2_0_GL_DEPTH_BITS                       = StateVariable_GLES_2_0(3414)
-	StateVariable_GLES_2_0_GL_DEPTH_CLEAR_VALUE                = StateVariable_GLES_2_0(2931)
-	StateVariable_GLES_2_0_GL_DEPTH_FUNC                       = StateVariable_GLES_2_0(2932)
-	StateVariable_GLES_2_0_GL_DEPTH_RANGE                      = StateVariable_GLES_2_0(2928)
-	StateVariable_GLES_2_0_GL_DEPTH_TEST                       = StateVariable_GLES_2_0(2929)
-	StateVariable_GLES_2_0_GL_DEPTH_WRITEMASK                  = StateVariable_GLES_2_0(2930)
-	StateVariable_GLES_2_0_GL_DITHER                           = StateVariable_GLES_2_0(3024)
-	StateVariable_GLES_2_0_GL_ELEMENT_ARRAY_BUFFER_BINDING     = StateVariable_GLES_2_0(34965)
-	StateVariable_GLES_2_0_GL_FRAMEBUFFER_BINDING              = StateVariable_GLES_2_0(36006)
-	StateVariable_GLES_2_0_GL_FRONT_FACE                       = StateVariable_GLES_2_0(2886)
-	StateVariable_GLES_2_0_GL_GENERATE_MIPMAP_HINT             = StateVariable_GLES_2_0(33170)
-	StateVariable_GLES_2_0_GL_GREEN_BITS                       = StateVariable_GLES_2_0(3411)
-	StateVariable_GLES_2_0_GL_IMPLEMENTATION_COLOR_READ_FORMAT = StateVariable_GLES_2_0(35739)
-	StateVariable_GLES_2_0_GL_IMPLEMENTATION_COLOR_READ_TYPE   = StateVariable_GLES_2_0(35738)
-	StateVariable_GLES_2_0_GL_LINE_WIDTH                       = StateVariable_GLES_2_0(2849)
-	StateVariable_GLES_2_0_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS = StateVariable_GLES_2_0(35661)
-	StateVariable_GLES_2_0_GL_MAX_CUBE_MAP_TEXTURE_SIZE        = StateVariable_GLES_2_0(34076)
-	StateVariable_GLES_2_0_GL_MAX_FRAGMENT_UNIFORM_VECTORS     = StateVariable_GLES_2_0(36349)
-	StateVariable_GLES_2_0_GL_MAX_RENDERBUFFER_SIZE            = StateVariable_GLES_2_0(34024)
-	StateVariable_GLES_2_0_GL_MAX_TEXTURE_IMAGE_UNITS          = StateVariable_GLES_2_0(34930)
-	StateVariable_GLES_2_0_GL_MAX_TEXTURE_SIZE                 = StateVariable_GLES_2_0(3379)
-	StateVariable_GLES_2_0_GL_MAX_VARYING_VECTORS              = StateVariable_GLES_2_0(36348)
-	StateVariable_GLES_2_0_GL_MAX_VERTEX_ATTRIBS               = StateVariable_GLES_2_0(34921)
-	StateVariable_GLES_2_0_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS   = StateVariable_GLES_2_0(35660)
-	StateVariable_GLES_2_0_GL_MAX_VERTEX_UNIFORM_VECTORS       = StateVariable_GLES_2_0(36347)
-	StateVariable_GLES_2_0_GL_MAX_VIEWPORT_DIMS                = StateVariable_GLES_2_0(3386)
-	StateVariable_GLES_2_0_GL_NUM_COMPRESSED_TEXTURE_FORMATS   = StateVariable_GLES_2_0(34466)
-	StateVariable_GLES_2_0_GL_NUM_SHADER_BINARY_FORMATS        = StateVariable_GLES_2_0(36345)
-	StateVariable_GLES_2_0_GL_PACK_ALIGNMENT                   = StateVariable_GLES_2_0(3333)
-	StateVariable_GLES_2_0_GL_POLYGON_OFFSET_FACTOR            = StateVariable_GLES_2_0(32824)
-	StateVariable_GLES_2_0_GL_POLYGON_OFFSET_FILL              = StateVariable_GLES_2_0(32823)
-	StateVariable_GLES_2_0_GL_POLYGON_OFFSET_UNITS             = StateVariable_GLES_2_0(10752)
-	StateVariable_GLES_2_0_GL_RED_BITS                         = StateVariable_GLES_2_0(3410)
-	StateVariable_GLES_2_0_GL_RENDERBUFFER_BINDING             = StateVariable_GLES_2_0(36007)
-	StateVariable_GLES_2_0_GL_SAMPLE_ALPHA_TO_COVERAGE         = StateVariable_GLES_2_0(32926)
-	StateVariable_GLES_2_0_GL_SAMPLE_BUFFERS                   = StateVariable_GLES_2_0(32936)
-	StateVariable_GLES_2_0_GL_SAMPLE_COVERAGE                  = StateVariable_GLES_2_0(32928)
-	StateVariable_GLES_2_0_GL_SAMPLE_COVERAGE_INVERT           = StateVariable_GLES_2_0(32939)
-	StateVariable_GLES_2_0_GL_SAMPLE_COVERAGE_VALUE            = StateVariable_GLES_2_0(32938)
-	StateVariable_GLES_2_0_GL_SAMPLES                          = StateVariable_GLES_2_0(32937)
-	StateVariable_GLES_2_0_GL_SCISSOR_BOX                      = StateVariable_GLES_2_0(3088)
-	StateVariable_GLES_2_0_GL_SCISSOR_TEST                     = StateVariable_GLES_2_0(3089)
-	StateVariable_GLES_2_0_GL_SHADER_BINARY_FORMATS            = StateVariable_GLES_2_0(36344)
-	StateVariable_GLES_2_0_GL_SHADER_COMPILER                  = StateVariable_GLES_2_0(36346)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_FAIL                = StateVariable_GLES_2_0(34817)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_FUNC                = StateVariable_GLES_2_0(34816)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_PASS_DEPTH_FAIL     = StateVariable_GLES_2_0(34818)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_PASS_DEPTH_PASS     = StateVariable_GLES_2_0(34819)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_REF                 = StateVariable_GLES_2_0(36003)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_VALUE_MASK          = StateVariable_GLES_2_0(36004)
-	StateVariable_GLES_2_0_GL_STENCIL_BACK_WRITEMASK           = StateVariable_GLES_2_0(36005)
-	StateVariable_GLES_2_0_GL_STENCIL_BITS                     = StateVariable_GLES_2_0(3415)
-	StateVariable_GLES_2_0_GL_STENCIL_CLEAR_VALUE              = StateVariable_GLES_2_0(2961)
-	StateVariable_GLES_2_0_GL_STENCIL_FAIL                     = StateVariable_GLES_2_0(2964)
-	StateVariable_GLES_2_0_GL_STENCIL_FUNC                     = StateVariable_GLES_2_0(2962)
-	StateVariable_GLES_2_0_GL_STENCIL_PASS_DEPTH_FAIL          = StateVariable_GLES_2_0(2965)
-	StateVariable_GLES_2_0_GL_STENCIL_PASS_DEPTH_PASS          = StateVariable_GLES_2_0(2966)
-	StateVariable_GLES_2_0_GL_STENCIL_REF                      = StateVariable_GLES_2_0(2967)
-	StateVariable_GLES_2_0_GL_STENCIL_TEST                     = StateVariable_GLES_2_0(2960)
-	StateVariable_GLES_2_0_GL_STENCIL_VALUE_MASK               = StateVariable_GLES_2_0(2963)
-	StateVariable_GLES_2_0_GL_STENCIL_WRITEMASK                = StateVariable_GLES_2_0(2968)
-	StateVariable_GLES_2_0_GL_SUBPIXEL_BITS                    = StateVariable_GLES_2_0(3408)
-	StateVariable_GLES_2_0_GL_TEXTURE_BINDING_2D               = StateVariable_GLES_2_0(32873)
-	StateVariable_GLES_2_0_GL_TEXTURE_BINDING_CUBE_MAP         = StateVariable_GLES_2_0(34068)
-	StateVariable_GLES_2_0_GL_UNPACK_ALIGNMENT                 = StateVariable_GLES_2_0(3317)
-	StateVariable_GLES_2_0_GL_VIEWPORT                         = StateVariable_GLES_2_0(2978)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StateVariable_GLES_3_1
-////////////////////////////////////////////////////////////////////////////////
-type StateVariable_GLES_3_1 uint32
-
-const (
-	StateVariable_GLES_3_1_GL_READ_FRAMEBUFFER_BINDING = StateVariable_GLES_3_1(36010)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StateVariable_EXT_texture_filter_anisotropic
-////////////////////////////////////////////////////////////////////////////////
-type StateVariable_EXT_texture_filter_anisotropic uint32
-
-const (
-	StateVariable_EXT_texture_filter_anisotropic_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = StateVariable_EXT_texture_filter_anisotropic(34047)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StateVariable_EXT_disjoint_timer_query
-////////////////////////////////////////////////////////////////////////////////
-type StateVariable_EXT_disjoint_timer_query uint32
-
-const (
-	StateVariable_EXT_disjoint_timer_query_GL_GPU_DISJOINT_EXT = StateVariable_EXT_disjoint_timer_query(36795)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StateVariable
-////////////////////////////////////////////////////////////////////////////////
-type StateVariable uint32
-
-const ()
-
-// StateVariable_GLES_2_0
-const (
-	StateVariable_GL_ACTIVE_TEXTURE                   = StateVariable(34016)
-	StateVariable_GL_ALIASED_LINE_WIDTH_RANGE         = StateVariable(33902)
-	StateVariable_GL_ALIASED_POINT_SIZE_RANGE         = StateVariable(33901)
-	StateVariable_GL_ALPHA_BITS                       = StateVariable(3413)
-	StateVariable_GL_ARRAY_BUFFER_BINDING             = StateVariable(34964)
-	StateVariable_GL_BLEND                            = StateVariable(3042)
-	StateVariable_GL_BLEND_COLOR                      = StateVariable(32773)
-	StateVariable_GL_BLEND_DST_ALPHA                  = StateVariable(32970)
-	StateVariable_GL_BLEND_DST_RGB                    = StateVariable(32968)
-	StateVariable_GL_BLEND_EQUATION_ALPHA             = StateVariable(34877)
-	StateVariable_GL_BLEND_EQUATION_RGB               = StateVariable(32777)
-	StateVariable_GL_BLEND_SRC_ALPHA                  = StateVariable(32971)
-	StateVariable_GL_BLEND_SRC_RGB                    = StateVariable(32969)
-	StateVariable_GL_BLUE_BITS                        = StateVariable(3412)
-	StateVariable_GL_COLOR_CLEAR_VALUE                = StateVariable(3106)
-	StateVariable_GL_COLOR_WRITEMASK                  = StateVariable(3107)
-	StateVariable_GL_COMPRESSED_TEXTURE_FORMATS       = StateVariable(34467)
-	StateVariable_GL_CULL_FACE                        = StateVariable(2884)
-	StateVariable_GL_CULL_FACE_MODE                   = StateVariable(2885)
-	StateVariable_GL_CURRENT_PROGRAM                  = StateVariable(35725)
-	StateVariable_GL_DEPTH_BITS                       = StateVariable(3414)
-	StateVariable_GL_DEPTH_CLEAR_VALUE                = StateVariable(2931)
-	StateVariable_GL_DEPTH_FUNC                       = StateVariable(2932)
-	StateVariable_GL_DEPTH_RANGE                      = StateVariable(2928)
-	StateVariable_GL_DEPTH_TEST                       = StateVariable(2929)
-	StateVariable_GL_DEPTH_WRITEMASK                  = StateVariable(2930)
-	StateVariable_GL_DITHER                           = StateVariable(3024)
-	StateVariable_GL_ELEMENT_ARRAY_BUFFER_BINDING     = StateVariable(34965)
-	StateVariable_GL_FRAMEBUFFER_BINDING              = StateVariable(36006)
-	StateVariable_GL_FRONT_FACE                       = StateVariable(2886)
-	StateVariable_GL_GENERATE_MIPMAP_HINT             = StateVariable(33170)
-	StateVariable_GL_GREEN_BITS                       = StateVariable(3411)
-	StateVariable_GL_IMPLEMENTATION_COLOR_READ_FORMAT = StateVariable(35739)
-	StateVariable_GL_IMPLEMENTATION_COLOR_READ_TYPE   = StateVariable(35738)
-	StateVariable_GL_LINE_WIDTH                       = StateVariable(2849)
-	StateVariable_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS = StateVariable(35661)
-	StateVariable_GL_MAX_CUBE_MAP_TEXTURE_SIZE        = StateVariable(34076)
-	StateVariable_GL_MAX_FRAGMENT_UNIFORM_VECTORS     = StateVariable(36349)
-	StateVariable_GL_MAX_RENDERBUFFER_SIZE            = StateVariable(34024)
-	StateVariable_GL_MAX_TEXTURE_IMAGE_UNITS          = StateVariable(34930)
-	StateVariable_GL_MAX_TEXTURE_SIZE                 = StateVariable(3379)
-	StateVariable_GL_MAX_VARYING_VECTORS              = StateVariable(36348)
-	StateVariable_GL_MAX_VERTEX_ATTRIBS               = StateVariable(34921)
-	StateVariable_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS   = StateVariable(35660)
-	StateVariable_GL_MAX_VERTEX_UNIFORM_VECTORS       = StateVariable(36347)
-	StateVariable_GL_MAX_VIEWPORT_DIMS                = StateVariable(3386)
-	StateVariable_GL_NUM_COMPRESSED_TEXTURE_FORMATS   = StateVariable(34466)
-	StateVariable_GL_NUM_SHADER_BINARY_FORMATS        = StateVariable(36345)
-	StateVariable_GL_PACK_ALIGNMENT                   = StateVariable(3333)
-	StateVariable_GL_POLYGON_OFFSET_FACTOR            = StateVariable(32824)
-	StateVariable_GL_POLYGON_OFFSET_FILL              = StateVariable(32823)
-	StateVariable_GL_POLYGON_OFFSET_UNITS             = StateVariable(10752)
-	StateVariable_GL_RED_BITS                         = StateVariable(3410)
-	StateVariable_GL_RENDERBUFFER_BINDING             = StateVariable(36007)
-	StateVariable_GL_SAMPLE_ALPHA_TO_COVERAGE         = StateVariable(32926)
-	StateVariable_GL_SAMPLE_BUFFERS                   = StateVariable(32936)
-	StateVariable_GL_SAMPLE_COVERAGE                  = StateVariable(32928)
-	StateVariable_GL_SAMPLE_COVERAGE_INVERT           = StateVariable(32939)
-	StateVariable_GL_SAMPLE_COVERAGE_VALUE            = StateVariable(32938)
-	StateVariable_GL_SAMPLES                          = StateVariable(32937)
-	StateVariable_GL_SCISSOR_BOX                      = StateVariable(3088)
-	StateVariable_GL_SCISSOR_TEST                     = StateVariable(3089)
-	StateVariable_GL_SHADER_BINARY_FORMATS            = StateVariable(36344)
-	StateVariable_GL_SHADER_COMPILER                  = StateVariable(36346)
-	StateVariable_GL_STENCIL_BACK_FAIL                = StateVariable(34817)
-	StateVariable_GL_STENCIL_BACK_FUNC                = StateVariable(34816)
-	StateVariable_GL_STENCIL_BACK_PASS_DEPTH_FAIL     = StateVariable(34818)
-	StateVariable_GL_STENCIL_BACK_PASS_DEPTH_PASS     = StateVariable(34819)
-	StateVariable_GL_STENCIL_BACK_REF                 = StateVariable(36003)
-	StateVariable_GL_STENCIL_BACK_VALUE_MASK          = StateVariable(36004)
-	StateVariable_GL_STENCIL_BACK_WRITEMASK           = StateVariable(36005)
-	StateVariable_GL_STENCIL_BITS                     = StateVariable(3415)
-	StateVariable_GL_STENCIL_CLEAR_VALUE              = StateVariable(2961)
-	StateVariable_GL_STENCIL_FAIL                     = StateVariable(2964)
-	StateVariable_GL_STENCIL_FUNC                     = StateVariable(2962)
-	StateVariable_GL_STENCIL_PASS_DEPTH_FAIL          = StateVariable(2965)
-	StateVariable_GL_STENCIL_PASS_DEPTH_PASS          = StateVariable(2966)
-	StateVariable_GL_STENCIL_REF                      = StateVariable(2967)
-	StateVariable_GL_STENCIL_TEST                     = StateVariable(2960)
-	StateVariable_GL_STENCIL_VALUE_MASK               = StateVariable(2963)
-	StateVariable_GL_STENCIL_WRITEMASK                = StateVariable(2968)
-	StateVariable_GL_SUBPIXEL_BITS                    = StateVariable(3408)
-	StateVariable_GL_TEXTURE_BINDING_2D               = StateVariable(32873)
-	StateVariable_GL_TEXTURE_BINDING_CUBE_MAP         = StateVariable(34068)
-	StateVariable_GL_UNPACK_ALIGNMENT                 = StateVariable(3317)
-	StateVariable_GL_VIEWPORT                         = StateVariable(2978)
-)
-
-// StateVariable_GLES_3_1
-const (
-	StateVariable_GL_READ_FRAMEBUFFER_BINDING = StateVariable(36010)
-)
-
-// StateVariable_EXT_texture_filter_anisotropic
-const (
-	StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = StateVariable(34047)
-)
-
-// StateVariable_EXT_disjoint_timer_query
-const (
-	StateVariable_GL_GPU_DISJOINT_EXT = StateVariable(36795)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FaceMode
-////////////////////////////////////////////////////////////////////////////////
-type FaceMode uint32
-
-const (
-	FaceMode_GL_FRONT          = FaceMode(1028)
-	FaceMode_GL_BACK           = FaceMode(1029)
-	FaceMode_GL_FRONT_AND_BACK = FaceMode(1032)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ArrayType_GLES_1_1
-////////////////////////////////////////////////////////////////////////////////
-type ArrayType_GLES_1_1 uint32
-
-const (
-	ArrayType_GLES_1_1_GL_VERTEX_ARRAY        = ArrayType_GLES_1_1(32884)
-	ArrayType_GLES_1_1_GL_NORMAL_ARRAY        = ArrayType_GLES_1_1(32885)
-	ArrayType_GLES_1_1_GL_COLOR_ARRAY         = ArrayType_GLES_1_1(32886)
-	ArrayType_GLES_1_1_GL_TEXTURE_COORD_ARRAY = ArrayType_GLES_1_1(32888)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ArrayType_OES_point_size_array
-////////////////////////////////////////////////////////////////////////////////
-type ArrayType_OES_point_size_array uint32
-
-const (
-	ArrayType_OES_point_size_array_GL_POINT_SIZE_ARRAY_OES = ArrayType_OES_point_size_array(35740)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ArrayType
-////////////////////////////////////////////////////////////////////////////////
-type ArrayType uint32
-
-const ()
-
-// ArrayType_GLES_1_1
-const (
-	ArrayType_GL_VERTEX_ARRAY        = ArrayType(32884)
-	ArrayType_GL_NORMAL_ARRAY        = ArrayType(32885)
-	ArrayType_GL_COLOR_ARRAY         = ArrayType(32886)
-	ArrayType_GL_TEXTURE_COORD_ARRAY = ArrayType(32888)
-)
-
-// ArrayType_OES_point_size_array
-const (
-	ArrayType_GL_POINT_SIZE_ARRAY_OES = ArrayType(35740)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum Capability
-////////////////////////////////////////////////////////////////////////////////
-type Capability uint32
-
-const (
-	Capability_GL_BLEND                    = Capability(3042)
-	Capability_GL_CULL_FACE                = Capability(2884)
-	Capability_GL_DEPTH_TEST               = Capability(2929)
-	Capability_GL_DITHER                   = Capability(3024)
-	Capability_GL_POLYGON_OFFSET_FILL      = Capability(32823)
-	Capability_GL_SAMPLE_ALPHA_TO_COVERAGE = Capability(32926)
-	Capability_GL_SAMPLE_COVERAGE          = Capability(32928)
-	Capability_GL_SCISSOR_TEST             = Capability(3089)
-	Capability_GL_STENCIL_TEST             = Capability(2960)
-)
-
-// ArrayType
-const ()
-
-// ArrayType_GLES_1_1
-const (
-	Capability_GL_VERTEX_ARRAY        = Capability(32884)
-	Capability_GL_NORMAL_ARRAY        = Capability(32885)
-	Capability_GL_COLOR_ARRAY         = Capability(32886)
-	Capability_GL_TEXTURE_COORD_ARRAY = Capability(32888)
-)
-
-// ArrayType_OES_point_size_array
-const (
-	Capability_GL_POINT_SIZE_ARRAY_OES = Capability(35740)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StringConstant
-////////////////////////////////////////////////////////////////////////////////
-type StringConstant uint32
-
-const (
-	StringConstant_GL_EXTENSIONS = StringConstant(7939)
-	StringConstant_GL_RENDERER   = StringConstant(7937)
-	StringConstant_GL_VENDOR     = StringConstant(7936)
-	StringConstant_GL_VERSION    = StringConstant(7938)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum VertexAttribType
-////////////////////////////////////////////////////////////////////////////////
-type VertexAttribType uint32
-
-const (
-	VertexAttribType_GL_BYTE           = VertexAttribType(5120)
-	VertexAttribType_GL_FIXED          = VertexAttribType(5132)
-	VertexAttribType_GL_FLOAT          = VertexAttribType(5126)
-	VertexAttribType_GL_SHORT          = VertexAttribType(5122)
-	VertexAttribType_GL_UNSIGNED_BYTE  = VertexAttribType(5121)
-	VertexAttribType_GL_UNSIGNED_SHORT = VertexAttribType(5123)
-)
-
-// Type_OES_vertex_half_float
-const (
-	VertexAttribType_GL_HALF_FLOAT_OES = VertexAttribType(36193)
-)
-
-// Type_ARB_half_float_vertex
-const (
-	VertexAttribType_GL_HALF_FLOAT_ARB = VertexAttribType(5131)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ShaderAttribType
-////////////////////////////////////////////////////////////////////////////////
-type ShaderAttribType uint32
-
-const (
-	ShaderAttribType_GL_FLOAT      = ShaderAttribType(5126)
-	ShaderAttribType_GL_FLOAT_VEC2 = ShaderAttribType(35664)
-	ShaderAttribType_GL_FLOAT_VEC3 = ShaderAttribType(35665)
-	ShaderAttribType_GL_FLOAT_VEC4 = ShaderAttribType(35666)
-	ShaderAttribType_GL_FLOAT_MAT2 = ShaderAttribType(35674)
-	ShaderAttribType_GL_FLOAT_MAT3 = ShaderAttribType(35675)
-	ShaderAttribType_GL_FLOAT_MAT4 = ShaderAttribType(35676)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ShaderUniformType
-////////////////////////////////////////////////////////////////////////////////
-type ShaderUniformType uint32
-
-const (
-	ShaderUniformType_GL_FLOAT        = ShaderUniformType(5126)
-	ShaderUniformType_GL_FLOAT_VEC2   = ShaderUniformType(35664)
-	ShaderUniformType_GL_FLOAT_VEC3   = ShaderUniformType(35665)
-	ShaderUniformType_GL_FLOAT_VEC4   = ShaderUniformType(35666)
-	ShaderUniformType_GL_INT          = ShaderUniformType(5124)
-	ShaderUniformType_GL_INT_VEC2     = ShaderUniformType(35667)
-	ShaderUniformType_GL_INT_VEC3     = ShaderUniformType(35668)
-	ShaderUniformType_GL_INT_VEC4     = ShaderUniformType(35669)
-	ShaderUniformType_GL_BOOL         = ShaderUniformType(35670)
-	ShaderUniformType_GL_BOOL_VEC2    = ShaderUniformType(35671)
-	ShaderUniformType_GL_BOOL_VEC3    = ShaderUniformType(35672)
-	ShaderUniformType_GL_BOOL_VEC4    = ShaderUniformType(35673)
-	ShaderUniformType_GL_FLOAT_MAT2   = ShaderUniformType(35674)
-	ShaderUniformType_GL_FLOAT_MAT3   = ShaderUniformType(35675)
-	ShaderUniformType_GL_FLOAT_MAT4   = ShaderUniformType(35676)
-	ShaderUniformType_GL_SAMPLER_2D   = ShaderUniformType(35678)
-	ShaderUniformType_GL_SAMPLER_CUBE = ShaderUniformType(35680)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum Error
-////////////////////////////////////////////////////////////////////////////////
-type Error uint32
-
-const (
-	Error_GL_NO_ERROR                      = Error(0)
-	Error_GL_INVALID_ENUM                  = Error(1280)
-	Error_GL_INVALID_VALUE                 = Error(1281)
-	Error_GL_INVALID_OPERATION             = Error(1282)
-	Error_GL_INVALID_FRAMEBUFFER_OPERATION = Error(1286)
-	Error_GL_OUT_OF_MEMORY                 = Error(1285)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum HintTarget
-////////////////////////////////////////////////////////////////////////////////
-type HintTarget uint32
-
-const (
-	HintTarget_GL_GENERATE_MIPMAP_HINT = HintTarget(33170)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum HintMode
-////////////////////////////////////////////////////////////////////////////////
-type HintMode uint32
-
-const (
-	HintMode_GL_DONT_CARE = HintMode(4352)
-	HintMode_GL_FASTEST   = HintMode(4353)
-	HintMode_GL_NICEST    = HintMode(4354)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum DiscardFramebufferAttachment
-////////////////////////////////////////////////////////////////////////////////
-type DiscardFramebufferAttachment uint32
-
-const (
-	DiscardFramebufferAttachment_GL_COLOR_EXT   = DiscardFramebufferAttachment(6144)
-	DiscardFramebufferAttachment_GL_DEPTH_EXT   = DiscardFramebufferAttachment(6145)
-	DiscardFramebufferAttachment_GL_STENCIL_EXT = DiscardFramebufferAttachment(6146)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ProgramParameter
-////////////////////////////////////////////////////////////////////////////////
-type ProgramParameter uint32
-
-const (
-	ProgramParameter_GL_DELETE_STATUS               = ProgramParameter(35712)
-	ProgramParameter_GL_LINK_STATUS                 = ProgramParameter(35714)
-	ProgramParameter_GL_VALIDATE_STATUS             = ProgramParameter(35715)
-	ProgramParameter_GL_INFO_LOG_LENGTH             = ProgramParameter(35716)
-	ProgramParameter_GL_ATTACHED_SHADERS            = ProgramParameter(35717)
-	ProgramParameter_GL_ACTIVE_ATTRIBUTES           = ProgramParameter(35721)
-	ProgramParameter_GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = ProgramParameter(35722)
-	ProgramParameter_GL_ACTIVE_UNIFORMS             = ProgramParameter(35718)
-	ProgramParameter_GL_ACTIVE_UNIFORM_MAX_LENGTH   = ProgramParameter(35719)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ShaderParameter
-////////////////////////////////////////////////////////////////////////////////
-type ShaderParameter uint32
-
-const (
-	ShaderParameter_GL_SHADER_TYPE          = ShaderParameter(35663)
-	ShaderParameter_GL_DELETE_STATUS        = ShaderParameter(35712)
-	ShaderParameter_GL_COMPILE_STATUS       = ShaderParameter(35713)
-	ShaderParameter_GL_INFO_LOG_LENGTH      = ShaderParameter(35716)
-	ShaderParameter_GL_SHADER_SOURCE_LENGTH = ShaderParameter(35720)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum PixelStoreParameter
-////////////////////////////////////////////////////////////////////////////////
-type PixelStoreParameter uint32
-
-const (
-	PixelStoreParameter_GL_PACK_ALIGNMENT   = PixelStoreParameter(3333)
-	PixelStoreParameter_GL_UNPACK_ALIGNMENT = PixelStoreParameter(3317)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureParameter_FilterMode
-////////////////////////////////////////////////////////////////////////////////
-type TextureParameter_FilterMode uint32
-
-const (
-	TextureParameter_FilterMode_GL_TEXTURE_MIN_FILTER = TextureParameter_FilterMode(10241)
-	TextureParameter_FilterMode_GL_TEXTURE_MAG_FILTER = TextureParameter_FilterMode(10240)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureParameter_WrapMode
-////////////////////////////////////////////////////////////////////////////////
-type TextureParameter_WrapMode uint32
-
-const (
-	TextureParameter_WrapMode_GL_TEXTURE_WRAP_S = TextureParameter_WrapMode(10242)
-	TextureParameter_WrapMode_GL_TEXTURE_WRAP_T = TextureParameter_WrapMode(10243)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureParameter_EXT_texture_filter_anisotropic
-////////////////////////////////////////////////////////////////////////////////
-type TextureParameter_EXT_texture_filter_anisotropic uint32
-
-const (
-	TextureParameter_EXT_texture_filter_anisotropic_GL_TEXTURE_MAX_ANISOTROPY_EXT = TextureParameter_EXT_texture_filter_anisotropic(34046)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureParameter_SwizzleMode
-////////////////////////////////////////////////////////////////////////////////
-type TextureParameter_SwizzleMode uint32
-
-const (
-	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_R = TextureParameter_SwizzleMode(36418)
-	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_G = TextureParameter_SwizzleMode(36419)
-	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_B = TextureParameter_SwizzleMode(36420)
-	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_A = TextureParameter_SwizzleMode(36421)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureParameter
-////////////////////////////////////////////////////////////////////////////////
-type TextureParameter uint32
-
-const ()
-
-// TextureParameter_FilterMode
-const (
-	TextureParameter_GL_TEXTURE_MIN_FILTER = TextureParameter(10241)
-	TextureParameter_GL_TEXTURE_MAG_FILTER = TextureParameter(10240)
-)
-
-// TextureParameter_WrapMode
-const (
-	TextureParameter_GL_TEXTURE_WRAP_S = TextureParameter(10242)
-	TextureParameter_GL_TEXTURE_WRAP_T = TextureParameter(10243)
-)
-
-// TextureParameter_SwizzleMode
-const (
-	TextureParameter_GL_TEXTURE_SWIZZLE_R = TextureParameter(36418)
-	TextureParameter_GL_TEXTURE_SWIZZLE_G = TextureParameter(36419)
-	TextureParameter_GL_TEXTURE_SWIZZLE_B = TextureParameter(36420)
-	TextureParameter_GL_TEXTURE_SWIZZLE_A = TextureParameter(36421)
-)
-
-// TextureParameter_EXT_texture_filter_anisotropic
-const (
-	TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT = TextureParameter(34046)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureFilterMode
-////////////////////////////////////////////////////////////////////////////////
-type TextureFilterMode uint32
-
-const (
-	TextureFilterMode_GL_NEAREST                = TextureFilterMode(9728)
-	TextureFilterMode_GL_LINEAR                 = TextureFilterMode(9729)
-	TextureFilterMode_GL_NEAREST_MIPMAP_NEAREST = TextureFilterMode(9984)
-	TextureFilterMode_GL_LINEAR_MIPMAP_NEAREST  = TextureFilterMode(9985)
-	TextureFilterMode_GL_NEAREST_MIPMAP_LINEAR  = TextureFilterMode(9986)
-	TextureFilterMode_GL_LINEAR_MIPMAP_LINEAR   = TextureFilterMode(9987)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TextureWrapMode
-////////////////////////////////////////////////////////////////////////////////
-type TextureWrapMode uint32
-
-const (
-	TextureWrapMode_GL_CLAMP_TO_EDGE   = TextureWrapMode(33071)
-	TextureWrapMode_GL_MIRRORED_REPEAT = TextureWrapMode(33648)
-	TextureWrapMode_GL_REPEAT          = TextureWrapMode(10497)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TexelComponent
-////////////////////////////////////////////////////////////////////////////////
-type TexelComponent uint32
-
-const (
-	TexelComponent_GL_RED   = TexelComponent(6403)
-	TexelComponent_GL_GREEN = TexelComponent(6404)
-	TexelComponent_GL_BLUE  = TexelComponent(6405)
-	TexelComponent_GL_ALPHA = TexelComponent(6406)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BlendFactor
-////////////////////////////////////////////////////////////////////////////////
-type BlendFactor uint32
-
-const (
-	BlendFactor_GL_ZERO                     = BlendFactor(0)
-	BlendFactor_GL_ONE                      = BlendFactor(1)
-	BlendFactor_GL_SRC_COLOR                = BlendFactor(768)
-	BlendFactor_GL_ONE_MINUS_SRC_COLOR      = BlendFactor(769)
-	BlendFactor_GL_DST_COLOR                = BlendFactor(774)
-	BlendFactor_GL_ONE_MINUS_DST_COLOR      = BlendFactor(775)
-	BlendFactor_GL_SRC_ALPHA                = BlendFactor(770)
-	BlendFactor_GL_ONE_MINUS_SRC_ALPHA      = BlendFactor(771)
-	BlendFactor_GL_DST_ALPHA                = BlendFactor(772)
-	BlendFactor_GL_ONE_MINUS_DST_ALPHA      = BlendFactor(773)
-	BlendFactor_GL_CONSTANT_COLOR           = BlendFactor(32769)
-	BlendFactor_GL_ONE_MINUS_CONSTANT_COLOR = BlendFactor(32770)
-	BlendFactor_GL_CONSTANT_ALPHA           = BlendFactor(32771)
-	BlendFactor_GL_ONE_MINUS_CONSTANT_ALPHA = BlendFactor(32772)
-	BlendFactor_GL_SRC_ALPHA_SATURATE       = BlendFactor(776)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum PrecisionType
-////////////////////////////////////////////////////////////////////////////////
-type PrecisionType uint32
-
-const (
-	PrecisionType_GL_LOW_FLOAT    = PrecisionType(36336)
-	PrecisionType_GL_MEDIUM_FLOAT = PrecisionType(36337)
-	PrecisionType_GL_HIGH_FLOAT   = PrecisionType(36338)
-	PrecisionType_GL_LOW_INT      = PrecisionType(36339)
-	PrecisionType_GL_MEDIUM_INT   = PrecisionType(36340)
-	PrecisionType_GL_HIGH_INT     = PrecisionType(36341)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TestFunction
-////////////////////////////////////////////////////////////////////////////////
-type TestFunction uint32
-
-const (
-	TestFunction_GL_NEVER    = TestFunction(512)
-	TestFunction_GL_LESS     = TestFunction(513)
-	TestFunction_GL_EQUAL    = TestFunction(514)
-	TestFunction_GL_LEQUAL   = TestFunction(515)
-	TestFunction_GL_GREATER  = TestFunction(516)
-	TestFunction_GL_NOTEQUAL = TestFunction(517)
-	TestFunction_GL_GEQUAL   = TestFunction(518)
-	TestFunction_GL_ALWAYS   = TestFunction(519)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum StencilAction
-////////////////////////////////////////////////////////////////////////////////
-type StencilAction uint32
-
-const (
-	StencilAction_GL_KEEP      = StencilAction(7680)
-	StencilAction_GL_ZERO      = StencilAction(0)
-	StencilAction_GL_REPLACE   = StencilAction(7681)
-	StencilAction_GL_INCR      = StencilAction(7682)
-	StencilAction_GL_INCR_WRAP = StencilAction(34055)
-	StencilAction_GL_DECR      = StencilAction(7683)
-	StencilAction_GL_DECR_WRAP = StencilAction(34056)
-	StencilAction_GL_INVERT    = StencilAction(5386)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FaceOrientation
-////////////////////////////////////////////////////////////////////////////////
-type FaceOrientation uint32
-
-const (
-	FaceOrientation_GL_CW  = FaceOrientation(2304)
-	FaceOrientation_GL_CCW = FaceOrientation(2305)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BlendEquation
-////////////////////////////////////////////////////////////////////////////////
-type BlendEquation uint32
-
-const (
-	BlendEquation_GL_FUNC_ADD              = BlendEquation(32774)
-	BlendEquation_GL_FUNC_SUBTRACT         = BlendEquation(32778)
-	BlendEquation_GL_FUNC_REVERSE_SUBTRACT = BlendEquation(32779)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum BufferTarget
-////////////////////////////////////////////////////////////////////////////////
-type BufferTarget uint32
-
-const (
-	BufferTarget_GL_ARRAY_BUFFER              = BufferTarget(34962)
-	BufferTarget_GL_COPY_READ_BUFFER          = BufferTarget(36662)
-	BufferTarget_GL_COPY_WRITE_BUFFER         = BufferTarget(36663)
-	BufferTarget_GL_ELEMENT_ARRAY_BUFFER      = BufferTarget(34963)
-	BufferTarget_GL_PIXEL_PACK_BUFFER         = BufferTarget(35051)
-	BufferTarget_GL_PIXEL_UNPACK_BUFFER       = BufferTarget(35052)
-	BufferTarget_GL_TRANSFORM_FEEDBACK_BUFFER = BufferTarget(35982)
-	BufferTarget_GL_UNIFORM_BUFFER            = BufferTarget(35345)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ImageTargetTexture_OES_EGL_image
-////////////////////////////////////////////////////////////////////////////////
-type ImageTargetTexture_OES_EGL_image uint32
-
-const (
-	ImageTargetTexture_OES_EGL_image_GL_TEXTURE_2D = ImageTargetTexture_OES_EGL_image(3553)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ImageTargetTexture_OES_EGL_image_external
-////////////////////////////////////////////////////////////////////////////////
-type ImageTargetTexture_OES_EGL_image_external uint32
-
-const (
-	ImageTargetTexture_OES_EGL_image_external_GL_TEXTURE_EXTERNAL_OES = ImageTargetTexture_OES_EGL_image_external(36197)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ImageTargetTexture
-////////////////////////////////////////////////////////////////////////////////
-type ImageTargetTexture uint32
-
-const ()
-
-// ImageTargetTexture_OES_EGL_image
-const (
-	ImageTargetTexture_GL_TEXTURE_2D = ImageTargetTexture(3553)
-)
-
-// ImageTargetTexture_OES_EGL_image_external
-const (
-	ImageTargetTexture_GL_TEXTURE_EXTERNAL_OES = ImageTargetTexture(36197)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ImageTargetRenderbufferStorage
-////////////////////////////////////////////////////////////////////////////////
-type ImageTargetRenderbufferStorage uint32
-
-const (
-	ImageTargetRenderbufferStorage_GL_RENDERBUFFER_OES = ImageTargetRenderbufferStorage(36161)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ResetStatus
-////////////////////////////////////////////////////////////////////////////////
-type ResetStatus uint32
-
-const (
-	ResetStatus_GL_NO_ERROR                   = ResetStatus(0)
-	ResetStatus_GL_GUILTY_CONTEXT_RESET_EXT   = ResetStatus(33363)
-	ResetStatus_GL_INNOCENT_CONTEXT_RESET_EXT = ResetStatus(33364)
-	ResetStatus_GL_UNKNOWN_CONTEXT_RESET_EXT  = ResetStatus(33365)
-)
-
-////////////////////////////////////////////////////////////////////////////////
 // enum TextureKind
 ////////////////////////////////////////////////////////////////////////////////
 type TextureKind uint32
@@ -18904,203 +16880,446 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
-// enum QueryParameter_GLES_3
+// enum GLenum
 ////////////////////////////////////////////////////////////////////////////////
-type QueryParameter_GLES_3 uint32
+type GLenum uint32
 
 const (
-	QueryParameter_GLES_3_GL_CURRENT_QUERY = QueryParameter_GLES_3(34917)
+	GLenum_GL_LINE_LOOP                                    = GLenum(2)
+	GLenum_GL_LINE_STRIP                                   = GLenum(3)
+	GLenum_GL_LINES                                        = GLenum(1)
+	GLenum_GL_POINTS                                       = GLenum(0)
+	GLenum_GL_TRIANGLE_FAN                                 = GLenum(6)
+	GLenum_GL_TRIANGLE_STRIP                               = GLenum(5)
+	GLenum_GL_TRIANGLES                                    = GLenum(4)
+	GLenum_GL_UNSIGNED_BYTE                                = GLenum(5121)
+	GLenum_GL_UNSIGNED_SHORT                               = GLenum(5123)
+	GLenum_GL_UNSIGNED_INT                                 = GLenum(5125)
+	GLenum_GL_TEXTURE_2D                                   = GLenum(3553)
+	GLenum_GL_TEXTURE_CUBE_MAP                             = GLenum(34067)
+	GLenum_GL_TEXTURE_EXTERNAL_OES                         = GLenum(36197)
+	GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X                  = GLenum(34070)
+	GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y                  = GLenum(34072)
+	GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z                  = GLenum(34074)
+	GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X                  = GLenum(34069)
+	GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y                  = GLenum(34071)
+	GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z                  = GLenum(34073)
+	GLenum_GL_ALPHA                                        = GLenum(6406)
+	GLenum_GL_RGB                                          = GLenum(6407)
+	GLenum_GL_RGBA                                         = GLenum(6408)
+	GLenum_GL_LUMINANCE                                    = GLenum(6409)
+	GLenum_GL_LUMINANCE_ALPHA                              = GLenum(6410)
+	GLenum_GL_RED                                          = GLenum(6403)
+	GLenum_GL_RED_INTEGER                                  = GLenum(36244)
+	GLenum_GL_RG                                           = GLenum(33319)
+	GLenum_GL_RG_INTEGER                                   = GLenum(33320)
+	GLenum_GL_RGB_INTEGER                                  = GLenum(36248)
+	GLenum_GL_RGBA_INTEGER                                 = GLenum(36249)
+	GLenum_GL_DEPTH_COMPONENT                              = GLenum(6402)
+	GLenum_GL_DEPTH_COMPONENT16                            = GLenum(33189)
+	GLenum_GL_DEPTH_STENCIL                                = GLenum(34041)
+	GLenum_GL_DEPTH24_STENCIL8                             = GLenum(35056)
+	GLenum_GL_RGBA4                                        = GLenum(32854)
+	GLenum_GL_RGB5_A1                                      = GLenum(32855)
+	GLenum_GL_RGB565                                       = GLenum(36194)
+	GLenum_GL_RGBA8                                        = GLenum(32856)
+	GLenum_GL_STENCIL_INDEX8                               = GLenum(36168)
+	GLenum_GL_HALF_FLOAT_ARB                               = GLenum(5131)
+	GLenum_GL_HALF_FLOAT_OES                               = GLenum(36193)
+	GLenum_GL_ETC1_RGB8_OES                                = GLenum(36196)
+	GLenum_GL_ATC_RGB_AMD                                  = GLenum(35986)
+	GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD                  = GLenum(35987)
+	GLenum_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD              = GLenum(34798)
+	GLenum_GL_COMPRESSED_RGB_S3TC_DXT1_EXT                 = GLenum(33776)
+	GLenum_GL_COMPRESSED_RGBA_S3TC_DXT1_EXT                = GLenum(33777)
+	GLenum_GL_COMPRESSED_RGBA_S3TC_DXT3_EXT                = GLenum(33778)
+	GLenum_GL_COMPRESSED_RGBA_S3TC_DXT5_EXT                = GLenum(33779)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_4x4_KHR                 = GLenum(37808)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_5x4_KHR                 = GLenum(37809)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_5x5_KHR                 = GLenum(37810)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_6x5_KHR                 = GLenum(37811)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_6x6_KHR                 = GLenum(37812)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_8x5_KHR                 = GLenum(37813)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_8x6_KHR                 = GLenum(37814)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_8x8_KHR                 = GLenum(37815)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_10x5_KHR                = GLenum(37816)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_10x6_KHR                = GLenum(37817)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_10x8_KHR                = GLenum(37818)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_10x10_KHR               = GLenum(37819)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_12x10_KHR               = GLenum(37820)
+	GLenum_GL_COMPRESSED_RGBA_ASTC_12x12_KHR               = GLenum(37821)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR         = GLenum(37840)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR         = GLenum(37841)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR         = GLenum(37842)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR         = GLenum(37843)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR         = GLenum(37844)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR         = GLenum(37845)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR         = GLenum(37846)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR         = GLenum(37847)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR        = GLenum(37848)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR        = GLenum(37849)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR        = GLenum(37850)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR       = GLenum(37851)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR       = GLenum(37852)
+	GLenum_GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR       = GLenum(37853)
+	GLenum_GL_COMPRESSED_LUMINANCE_LATC1_NV                = GLenum(35952)
+	GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV         = GLenum(35953)
+	GLenum_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV          = GLenum(35954)
+	GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV   = GLenum(35955)
+	GLenum_GL_FLOAT                                        = GLenum(5126)
+	GLenum_GL_UNSIGNED_SHORT_4_4_4_4                       = GLenum(32819)
+	GLenum_GL_UNSIGNED_SHORT_5_5_5_1                       = GLenum(32820)
+	GLenum_GL_UNSIGNED_SHORT_5_6_5                         = GLenum(33635)
+	GLenum_GL_UNSIGNED_INT_24_8                            = GLenum(34042)
+	GLenum_GL_COLOR_ATTACHMENT0                            = GLenum(36064)
+	GLenum_GL_DEPTH_ATTACHMENT                             = GLenum(36096)
+	GLenum_GL_STENCIL_ATTACHMENT                           = GLenum(36128)
+	GLenum_GL_NONE                                         = GLenum(0)
+	GLenum_GL_RENDERBUFFER                                 = GLenum(36161)
+	GLenum_GL_TEXTURE                                      = GLenum(5890)
+	GLenum_GL_FRAMEBUFFER                                  = GLenum(36160)
+	GLenum_GL_READ_FRAMEBUFFER                             = GLenum(36008)
+	GLenum_GL_DRAW_FRAMEBUFFER                             = GLenum(36009)
+	GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE           = GLenum(36048)
+	GLenum_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           = GLenum(36049)
+	GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         = GLenum(36050)
+	GLenum_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = GLenum(36051)
+	GLenum_GL_FRAMEBUFFER_COMPLETE                         = GLenum(36053)
+	GLenum_GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT            = GLenum(36054)
+	GLenum_GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT    = GLenum(36055)
+	GLenum_GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS            = GLenum(36057)
+	GLenum_GL_FRAMEBUFFER_UNSUPPORTED                      = GLenum(36061)
+	GLenum_GL_RENDERBUFFER_WIDTH                           = GLenum(36162)
+	GLenum_GL_RENDERBUFFER_HEIGHT                          = GLenum(36163)
+	GLenum_GL_RENDERBUFFER_INTERNAL_FORMAT                 = GLenum(36164)
+	GLenum_GL_RENDERBUFFER_RED_SIZE                        = GLenum(36176)
+	GLenum_GL_RENDERBUFFER_GREEN_SIZE                      = GLenum(36177)
+	GLenum_GL_RENDERBUFFER_BLUE_SIZE                       = GLenum(36178)
+	GLenum_GL_RENDERBUFFER_ALPHA_SIZE                      = GLenum(36179)
+	GLenum_GL_RENDERBUFFER_DEPTH_SIZE                      = GLenum(36180)
+	GLenum_GL_RENDERBUFFER_STENCIL_SIZE                    = GLenum(36181)
+	GLenum_GL_BUFFER_SIZE                                  = GLenum(34660)
+	GLenum_GL_BUFFER_USAGE                                 = GLenum(34661)
+	GLenum_GL_TEXTURE0                                     = GLenum(33984)
+	GLenum_GL_TEXTURE1                                     = GLenum(33985)
+	GLenum_GL_TEXTURE2                                     = GLenum(33986)
+	GLenum_GL_TEXTURE3                                     = GLenum(33987)
+	GLenum_GL_TEXTURE4                                     = GLenum(33988)
+	GLenum_GL_TEXTURE5                                     = GLenum(33989)
+	GLenum_GL_TEXTURE6                                     = GLenum(33990)
+	GLenum_GL_TEXTURE7                                     = GLenum(33991)
+	GLenum_GL_TEXTURE8                                     = GLenum(33992)
+	GLenum_GL_TEXTURE9                                     = GLenum(33993)
+	GLenum_GL_TEXTURE10                                    = GLenum(33994)
+	GLenum_GL_TEXTURE11                                    = GLenum(33995)
+	GLenum_GL_TEXTURE12                                    = GLenum(33996)
+	GLenum_GL_TEXTURE13                                    = GLenum(33997)
+	GLenum_GL_TEXTURE14                                    = GLenum(33998)
+	GLenum_GL_TEXTURE15                                    = GLenum(33999)
+	GLenum_GL_TEXTURE16                                    = GLenum(34000)
+	GLenum_GL_TEXTURE17                                    = GLenum(34001)
+	GLenum_GL_TEXTURE18                                    = GLenum(34002)
+	GLenum_GL_TEXTURE19                                    = GLenum(34003)
+	GLenum_GL_TEXTURE20                                    = GLenum(34004)
+	GLenum_GL_TEXTURE21                                    = GLenum(34005)
+	GLenum_GL_TEXTURE22                                    = GLenum(34006)
+	GLenum_GL_TEXTURE23                                    = GLenum(34007)
+	GLenum_GL_TEXTURE24                                    = GLenum(34008)
+	GLenum_GL_TEXTURE25                                    = GLenum(34009)
+	GLenum_GL_TEXTURE26                                    = GLenum(34010)
+	GLenum_GL_TEXTURE27                                    = GLenum(34011)
+	GLenum_GL_TEXTURE28                                    = GLenum(34012)
+	GLenum_GL_TEXTURE29                                    = GLenum(34013)
+	GLenum_GL_TEXTURE30                                    = GLenum(34014)
+	GLenum_GL_TEXTURE31                                    = GLenum(34015)
+	GLenum_GL_DYNAMIC_DRAW                                 = GLenum(35048)
+	GLenum_GL_STATIC_DRAW                                  = GLenum(35044)
+	GLenum_GL_STREAM_DRAW                                  = GLenum(35040)
+	GLenum_GL_VERTEX_SHADER                                = GLenum(35633)
+	GLenum_GL_FRAGMENT_SHADER                              = GLenum(35632)
+	GLenum_GL_ACTIVE_TEXTURE                               = GLenum(34016)
+	GLenum_GL_ALIASED_LINE_WIDTH_RANGE                     = GLenum(33902)
+	GLenum_GL_ALIASED_POINT_SIZE_RANGE                     = GLenum(33901)
+	GLenum_GL_ALPHA_BITS                                   = GLenum(3413)
+	GLenum_GL_ARRAY_BUFFER_BINDING                         = GLenum(34964)
+	GLenum_GL_BLEND                                        = GLenum(3042)
+	GLenum_GL_BLEND_COLOR                                  = GLenum(32773)
+	GLenum_GL_BLEND_DST_ALPHA                              = GLenum(32970)
+	GLenum_GL_BLEND_DST_RGB                                = GLenum(32968)
+	GLenum_GL_BLEND_EQUATION_ALPHA                         = GLenum(34877)
+	GLenum_GL_BLEND_EQUATION_RGB                           = GLenum(32777)
+	GLenum_GL_BLEND_SRC_ALPHA                              = GLenum(32971)
+	GLenum_GL_BLEND_SRC_RGB                                = GLenum(32969)
+	GLenum_GL_BLUE_BITS                                    = GLenum(3412)
+	GLenum_GL_COLOR_CLEAR_VALUE                            = GLenum(3106)
+	GLenum_GL_COLOR_WRITEMASK                              = GLenum(3107)
+	GLenum_GL_COMPRESSED_TEXTURE_FORMATS                   = GLenum(34467)
+	GLenum_GL_CULL_FACE                                    = GLenum(2884)
+	GLenum_GL_CULL_FACE_MODE                               = GLenum(2885)
+	GLenum_GL_CURRENT_PROGRAM                              = GLenum(35725)
+	GLenum_GL_DEPTH_BITS                                   = GLenum(3414)
+	GLenum_GL_DEPTH_CLEAR_VALUE                            = GLenum(2931)
+	GLenum_GL_DEPTH_FUNC                                   = GLenum(2932)
+	GLenum_GL_DEPTH_RANGE                                  = GLenum(2928)
+	GLenum_GL_DEPTH_TEST                                   = GLenum(2929)
+	GLenum_GL_DEPTH_WRITEMASK                              = GLenum(2930)
+	GLenum_GL_DITHER                                       = GLenum(3024)
+	GLenum_GL_ELEMENT_ARRAY_BUFFER_BINDING                 = GLenum(34965)
+	GLenum_GL_FRAMEBUFFER_BINDING                          = GLenum(36006)
+	GLenum_GL_FRONT_FACE                                   = GLenum(2886)
+	GLenum_GL_GENERATE_MIPMAP_HINT                         = GLenum(33170)
+	GLenum_GL_GREEN_BITS                                   = GLenum(3411)
+	GLenum_GL_IMPLEMENTATION_COLOR_READ_FORMAT             = GLenum(35739)
+	GLenum_GL_IMPLEMENTATION_COLOR_READ_TYPE               = GLenum(35738)
+	GLenum_GL_LINE_WIDTH                                   = GLenum(2849)
+	GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS             = GLenum(35661)
+	GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE                    = GLenum(34076)
+	GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS                 = GLenum(36349)
+	GLenum_GL_MAX_RENDERBUFFER_SIZE                        = GLenum(34024)
+	GLenum_GL_MAX_TEXTURE_IMAGE_UNITS                      = GLenum(34930)
+	GLenum_GL_MAX_TEXTURE_SIZE                             = GLenum(3379)
+	GLenum_GL_MAX_VARYING_VECTORS                          = GLenum(36348)
+	GLenum_GL_MAX_VERTEX_ATTRIBS                           = GLenum(34921)
+	GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS               = GLenum(35660)
+	GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS                   = GLenum(36347)
+	GLenum_GL_MAX_VIEWPORT_DIMS                            = GLenum(3386)
+	GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS               = GLenum(34466)
+	GLenum_GL_NUM_SHADER_BINARY_FORMATS                    = GLenum(36345)
+	GLenum_GL_PACK_ALIGNMENT                               = GLenum(3333)
+	GLenum_GL_POLYGON_OFFSET_FACTOR                        = GLenum(32824)
+	GLenum_GL_POLYGON_OFFSET_FILL                          = GLenum(32823)
+	GLenum_GL_POLYGON_OFFSET_UNITS                         = GLenum(10752)
+	GLenum_GL_RED_BITS                                     = GLenum(3410)
+	GLenum_GL_RENDERBUFFER_BINDING                         = GLenum(36007)
+	GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE                     = GLenum(32926)
+	GLenum_GL_SAMPLE_BUFFERS                               = GLenum(32936)
+	GLenum_GL_SAMPLE_COVERAGE                              = GLenum(32928)
+	GLenum_GL_SAMPLE_COVERAGE_INVERT                       = GLenum(32939)
+	GLenum_GL_SAMPLE_COVERAGE_VALUE                        = GLenum(32938)
+	GLenum_GL_SAMPLES                                      = GLenum(32937)
+	GLenum_GL_SCISSOR_BOX                                  = GLenum(3088)
+	GLenum_GL_SCISSOR_TEST                                 = GLenum(3089)
+	GLenum_GL_SHADER_BINARY_FORMATS                        = GLenum(36344)
+	GLenum_GL_SHADER_COMPILER                              = GLenum(36346)
+	GLenum_GL_STENCIL_BACK_FAIL                            = GLenum(34817)
+	GLenum_GL_STENCIL_BACK_FUNC                            = GLenum(34816)
+	GLenum_GL_STENCIL_BACK_PASS_DEPTH_FAIL                 = GLenum(34818)
+	GLenum_GL_STENCIL_BACK_PASS_DEPTH_PASS                 = GLenum(34819)
+	GLenum_GL_STENCIL_BACK_REF                             = GLenum(36003)
+	GLenum_GL_STENCIL_BACK_VALUE_MASK                      = GLenum(36004)
+	GLenum_GL_STENCIL_BACK_WRITEMASK                       = GLenum(36005)
+	GLenum_GL_STENCIL_BITS                                 = GLenum(3415)
+	GLenum_GL_STENCIL_CLEAR_VALUE                          = GLenum(2961)
+	GLenum_GL_STENCIL_FAIL                                 = GLenum(2964)
+	GLenum_GL_STENCIL_FUNC                                 = GLenum(2962)
+	GLenum_GL_STENCIL_PASS_DEPTH_FAIL                      = GLenum(2965)
+	GLenum_GL_STENCIL_PASS_DEPTH_PASS                      = GLenum(2966)
+	GLenum_GL_STENCIL_REF                                  = GLenum(2967)
+	GLenum_GL_STENCIL_TEST                                 = GLenum(2960)
+	GLenum_GL_STENCIL_VALUE_MASK                           = GLenum(2963)
+	GLenum_GL_STENCIL_WRITEMASK                            = GLenum(2968)
+	GLenum_GL_SUBPIXEL_BITS                                = GLenum(3408)
+	GLenum_GL_TEXTURE_BINDING_2D                           = GLenum(32873)
+	GLenum_GL_TEXTURE_BINDING_CUBE_MAP                     = GLenum(34068)
+	GLenum_GL_UNPACK_ALIGNMENT                             = GLenum(3317)
+	GLenum_GL_VIEWPORT                                     = GLenum(2978)
+	GLenum_GL_READ_FRAMEBUFFER_BINDING                     = GLenum(36010)
+	GLenum_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT               = GLenum(34047)
+	GLenum_GL_GPU_DISJOINT_EXT                             = GLenum(36795)
+	GLenum_GL_FRONT                                        = GLenum(1028)
+	GLenum_GL_BACK                                         = GLenum(1029)
+	GLenum_GL_FRONT_AND_BACK                               = GLenum(1032)
+	GLenum_GL_VERTEX_ARRAY                                 = GLenum(32884)
+	GLenum_GL_NORMAL_ARRAY                                 = GLenum(32885)
+	GLenum_GL_COLOR_ARRAY                                  = GLenum(32886)
+	GLenum_GL_TEXTURE_COORD_ARRAY                          = GLenum(32888)
+	GLenum_GL_POINT_SIZE_ARRAY_OES                         = GLenum(35740)
+	GLenum_GL_EXTENSIONS                                   = GLenum(7939)
+	GLenum_GL_RENDERER                                     = GLenum(7937)
+	GLenum_GL_VENDOR                                       = GLenum(7936)
+	GLenum_GL_VERSION                                      = GLenum(7938)
+	GLenum_GL_BYTE                                         = GLenum(5120)
+	GLenum_GL_FIXED                                        = GLenum(5132)
+	GLenum_GL_SHORT                                        = GLenum(5122)
+	GLenum_GL_FLOAT_VEC2                                   = GLenum(35664)
+	GLenum_GL_FLOAT_VEC3                                   = GLenum(35665)
+	GLenum_GL_FLOAT_VEC4                                   = GLenum(35666)
+	GLenum_GL_FLOAT_MAT2                                   = GLenum(35674)
+	GLenum_GL_FLOAT_MAT3                                   = GLenum(35675)
+	GLenum_GL_FLOAT_MAT4                                   = GLenum(35676)
+	GLenum_GL_INT                                          = GLenum(5124)
+	GLenum_GL_INT_VEC2                                     = GLenum(35667)
+	GLenum_GL_INT_VEC3                                     = GLenum(35668)
+	GLenum_GL_INT_VEC4                                     = GLenum(35669)
+	GLenum_GL_BOOL                                         = GLenum(35670)
+	GLenum_GL_BOOL_VEC2                                    = GLenum(35671)
+	GLenum_GL_BOOL_VEC3                                    = GLenum(35672)
+	GLenum_GL_BOOL_VEC4                                    = GLenum(35673)
+	GLenum_GL_SAMPLER_2D                                   = GLenum(35678)
+	GLenum_GL_SAMPLER_CUBE                                 = GLenum(35680)
+	GLenum_GL_NO_ERROR                                     = GLenum(0)
+	GLenum_GL_INVALID_ENUM                                 = GLenum(1280)
+	GLenum_GL_INVALID_VALUE                                = GLenum(1281)
+	GLenum_GL_INVALID_OPERATION                            = GLenum(1282)
+	GLenum_GL_INVALID_FRAMEBUFFER_OPERATION                = GLenum(1286)
+	GLenum_GL_OUT_OF_MEMORY                                = GLenum(1285)
+	GLenum_GL_DONT_CARE                                    = GLenum(4352)
+	GLenum_GL_FASTEST                                      = GLenum(4353)
+	GLenum_GL_NICEST                                       = GLenum(4354)
+	GLenum_GL_COLOR_EXT                                    = GLenum(6144)
+	GLenum_GL_DEPTH_EXT                                    = GLenum(6145)
+	GLenum_GL_STENCIL_EXT                                  = GLenum(6146)
+	GLenum_GL_DELETE_STATUS                                = GLenum(35712)
+	GLenum_GL_LINK_STATUS                                  = GLenum(35714)
+	GLenum_GL_VALIDATE_STATUS                              = GLenum(35715)
+	GLenum_GL_INFO_LOG_LENGTH                              = GLenum(35716)
+	GLenum_GL_ATTACHED_SHADERS                             = GLenum(35717)
+	GLenum_GL_ACTIVE_ATTRIBUTES                            = GLenum(35721)
+	GLenum_GL_ACTIVE_ATTRIBUTE_MAX_LENGTH                  = GLenum(35722)
+	GLenum_GL_ACTIVE_UNIFORMS                              = GLenum(35718)
+	GLenum_GL_ACTIVE_UNIFORM_MAX_LENGTH                    = GLenum(35719)
+	GLenum_GL_SHADER_TYPE                                  = GLenum(35663)
+	GLenum_GL_COMPILE_STATUS                               = GLenum(35713)
+	GLenum_GL_SHADER_SOURCE_LENGTH                         = GLenum(35720)
+	GLenum_GL_TEXTURE_MIN_FILTER                           = GLenum(10241)
+	GLenum_GL_TEXTURE_MAG_FILTER                           = GLenum(10240)
+	GLenum_GL_TEXTURE_WRAP_S                               = GLenum(10242)
+	GLenum_GL_TEXTURE_WRAP_T                               = GLenum(10243)
+	GLenum_GL_TEXTURE_MAX_ANISOTROPY_EXT                   = GLenum(34046)
+	GLenum_GL_TEXTURE_SWIZZLE_R                            = GLenum(36418)
+	GLenum_GL_TEXTURE_SWIZZLE_G                            = GLenum(36419)
+	GLenum_GL_TEXTURE_SWIZZLE_B                            = GLenum(36420)
+	GLenum_GL_TEXTURE_SWIZZLE_A                            = GLenum(36421)
+	GLenum_GL_NEAREST                                      = GLenum(9728)
+	GLenum_GL_LINEAR                                       = GLenum(9729)
+	GLenum_GL_NEAREST_MIPMAP_NEAREST                       = GLenum(9984)
+	GLenum_GL_LINEAR_MIPMAP_NEAREST                        = GLenum(9985)
+	GLenum_GL_NEAREST_MIPMAP_LINEAR                        = GLenum(9986)
+	GLenum_GL_LINEAR_MIPMAP_LINEAR                         = GLenum(9987)
+	GLenum_GL_CLAMP_TO_EDGE                                = GLenum(33071)
+	GLenum_GL_MIRRORED_REPEAT                              = GLenum(33648)
+	GLenum_GL_REPEAT                                       = GLenum(10497)
+	GLenum_GL_GREEN                                        = GLenum(6404)
+	GLenum_GL_BLUE                                         = GLenum(6405)
+	GLenum_GL_ZERO                                         = GLenum(0)
+	GLenum_GL_ONE                                          = GLenum(1)
+	GLenum_GL_SRC_COLOR                                    = GLenum(768)
+	GLenum_GL_ONE_MINUS_SRC_COLOR                          = GLenum(769)
+	GLenum_GL_DST_COLOR                                    = GLenum(774)
+	GLenum_GL_ONE_MINUS_DST_COLOR                          = GLenum(775)
+	GLenum_GL_SRC_ALPHA                                    = GLenum(770)
+	GLenum_GL_ONE_MINUS_SRC_ALPHA                          = GLenum(771)
+	GLenum_GL_DST_ALPHA                                    = GLenum(772)
+	GLenum_GL_ONE_MINUS_DST_ALPHA                          = GLenum(773)
+	GLenum_GL_CONSTANT_COLOR                               = GLenum(32769)
+	GLenum_GL_ONE_MINUS_CONSTANT_COLOR                     = GLenum(32770)
+	GLenum_GL_CONSTANT_ALPHA                               = GLenum(32771)
+	GLenum_GL_ONE_MINUS_CONSTANT_ALPHA                     = GLenum(32772)
+	GLenum_GL_SRC_ALPHA_SATURATE                           = GLenum(776)
+	GLenum_GL_LOW_FLOAT                                    = GLenum(36336)
+	GLenum_GL_MEDIUM_FLOAT                                 = GLenum(36337)
+	GLenum_GL_HIGH_FLOAT                                   = GLenum(36338)
+	GLenum_GL_LOW_INT                                      = GLenum(36339)
+	GLenum_GL_MEDIUM_INT                                   = GLenum(36340)
+	GLenum_GL_HIGH_INT                                     = GLenum(36341)
+	GLenum_GL_NEVER                                        = GLenum(512)
+	GLenum_GL_LESS                                         = GLenum(513)
+	GLenum_GL_EQUAL                                        = GLenum(514)
+	GLenum_GL_LEQUAL                                       = GLenum(515)
+	GLenum_GL_GREATER                                      = GLenum(516)
+	GLenum_GL_NOTEQUAL                                     = GLenum(517)
+	GLenum_GL_GEQUAL                                       = GLenum(518)
+	GLenum_GL_ALWAYS                                       = GLenum(519)
+	GLenum_GL_KEEP                                         = GLenum(7680)
+	GLenum_GL_REPLACE                                      = GLenum(7681)
+	GLenum_GL_INCR                                         = GLenum(7682)
+	GLenum_GL_INCR_WRAP                                    = GLenum(34055)
+	GLenum_GL_DECR                                         = GLenum(7683)
+	GLenum_GL_DECR_WRAP                                    = GLenum(34056)
+	GLenum_GL_INVERT                                       = GLenum(5386)
+	GLenum_GL_CW                                           = GLenum(2304)
+	GLenum_GL_CCW                                          = GLenum(2305)
+	GLenum_GL_FUNC_ADD                                     = GLenum(32774)
+	GLenum_GL_FUNC_SUBTRACT                                = GLenum(32778)
+	GLenum_GL_FUNC_REVERSE_SUBTRACT                        = GLenum(32779)
+	GLenum_GL_ARRAY_BUFFER                                 = GLenum(34962)
+	GLenum_GL_COPY_READ_BUFFER                             = GLenum(36662)
+	GLenum_GL_COPY_WRITE_BUFFER                            = GLenum(36663)
+	GLenum_GL_ELEMENT_ARRAY_BUFFER                         = GLenum(34963)
+	GLenum_GL_PIXEL_PACK_BUFFER                            = GLenum(35051)
+	GLenum_GL_PIXEL_UNPACK_BUFFER                          = GLenum(35052)
+	GLenum_GL_TRANSFORM_FEEDBACK_BUFFER                    = GLenum(35982)
+	GLenum_GL_UNIFORM_BUFFER                               = GLenum(35345)
+	GLenum_GL_RENDERBUFFER_OES                             = GLenum(36161)
+	GLenum_GL_GUILTY_CONTEXT_RESET_EXT                     = GLenum(33363)
+	GLenum_GL_INNOCENT_CONTEXT_RESET_EXT                   = GLenum(33364)
+	GLenum_GL_UNKNOWN_CONTEXT_RESET_EXT                    = GLenum(33365)
+	GLenum_GL_CURRENT_QUERY                                = GLenum(34917)
+	GLenum_GL_QUERY_COUNTER_BITS_EXT                       = GLenum(34916)
+	GLenum_GL_QUERY_RESULT                                 = GLenum(34918)
+	GLenum_GL_QUERY_RESULT_AVAILABLE                       = GLenum(34919)
+	GLenum_GL_ANY_SAMPLES_PASSED                           = GLenum(35887)
+	GLenum_GL_ANY_SAMPLES_PASSED_CONSERVATIVE              = GLenum(36202)
+	GLenum_GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN        = GLenum(35976)
+	GLenum_GL_TIME_ELAPSED_EXT                             = GLenum(35007)
+	GLenum_GL_TIMESTAMP_EXT                                = GLenum(36392)
+	GLenum_GL_UNIFORM_BLOCK_BINDING                        = GLenum(35391)
+	GLenum_GL_UNIFORM_BLOCK_DATA_SIZE                      = GLenum(35392)
+	GLenum_GL_UNIFORM_BLOCK_NAME_LENGTH                    = GLenum(35393)
+	GLenum_GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS                = GLenum(35394)
+	GLenum_GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES         = GLenum(35395)
+	GLenum_GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER    = GLenum(35396)
+	GLenum_GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER  = GLenum(35397)
+	GLenum_GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER  = GLenum(35398)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
-// enum QueryParameter_EXT_disjoint_timer_query
+// enum GLbitfield
 ////////////////////////////////////////////////////////////////////////////////
-type QueryParameter_EXT_disjoint_timer_query uint32
+type GLbitfield uint32
 
 const (
-	QueryParameter_EXT_disjoint_timer_query_GL_QUERY_COUNTER_BITS_EXT = QueryParameter_EXT_disjoint_timer_query(34916)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryParameter
-////////////////////////////////////////////////////////////////////////////////
-type QueryParameter uint32
-
-const ()
-
-// QueryParameter_GLES_3
-const (
-	QueryParameter_GL_CURRENT_QUERY = QueryParameter(34917)
-)
-
-// QueryParameter_EXT_disjoint_timer_query
-const (
-	QueryParameter_GL_QUERY_COUNTER_BITS_EXT = QueryParameter(34916)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryObjectParameter_GLES_3
-////////////////////////////////////////////////////////////////////////////////
-type QueryObjectParameter_GLES_3 uint32
-
-const (
-	QueryObjectParameter_GLES_3_GL_QUERY_RESULT           = QueryObjectParameter_GLES_3(34918)
-	QueryObjectParameter_GLES_3_GL_QUERY_RESULT_AVAILABLE = QueryObjectParameter_GLES_3(34919)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryObjectParameter_EXT_disjoint_timer_query
-////////////////////////////////////////////////////////////////////////////////
-type QueryObjectParameter_EXT_disjoint_timer_query uint32
-
-const ()
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryObjectParameter
-////////////////////////////////////////////////////////////////////////////////
-type QueryObjectParameter uint32
-
-const ()
-
-// QueryObjectParameter_GLES_3
-const (
-	QueryObjectParameter_GL_QUERY_RESULT           = QueryObjectParameter(34918)
-	QueryObjectParameter_GL_QUERY_RESULT_AVAILABLE = QueryObjectParameter(34919)
-)
-
-// QueryObjectParameter_EXT_disjoint_timer_query
-const ()
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryTarget_GLES_3
-////////////////////////////////////////////////////////////////////////////////
-type QueryTarget_GLES_3 uint32
-
-const (
-	QueryTarget_GLES_3_GL_ANY_SAMPLES_PASSED                    = QueryTarget_GLES_3(35887)
-	QueryTarget_GLES_3_GL_ANY_SAMPLES_PASSED_CONSERVATIVE       = QueryTarget_GLES_3(36202)
-	QueryTarget_GLES_3_GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = QueryTarget_GLES_3(35976)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryTarget_EXT_disjoint_timer_query
-////////////////////////////////////////////////////////////////////////////////
-type QueryTarget_EXT_disjoint_timer_query uint32
-
-const (
-	QueryTarget_EXT_disjoint_timer_query_GL_TIME_ELAPSED_EXT = QueryTarget_EXT_disjoint_timer_query(35007)
-	QueryTarget_EXT_disjoint_timer_query_GL_TIMESTAMP_EXT    = QueryTarget_EXT_disjoint_timer_query(36392)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum QueryTarget
-////////////////////////////////////////////////////////////////////////////////
-type QueryTarget uint32
-
-const ()
-
-// QueryTarget_GLES_3
-const (
-	QueryTarget_GL_ANY_SAMPLES_PASSED                    = QueryTarget(35887)
-	QueryTarget_GL_ANY_SAMPLES_PASSED_CONSERVATIVE       = QueryTarget(36202)
-	QueryTarget_GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = QueryTarget(35976)
-)
-
-// QueryTarget_EXT_disjoint_timer_query
-const (
-	QueryTarget_GL_TIME_ELAPSED_EXT = QueryTarget(35007)
-	QueryTarget_GL_TIMESTAMP_EXT    = QueryTarget(36392)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum UniformBlockParameter
-////////////////////////////////////////////////////////////////////////////////
-type UniformBlockParameter uint32
-
-const (
-	UniformBlockParameter_GL_UNIFORM_BLOCK_BINDING                       = UniformBlockParameter(35391)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_DATA_SIZE                     = UniformBlockParameter(35392)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_NAME_LENGTH                   = UniformBlockParameter(35393)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS               = UniformBlockParameter(35394)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES        = UniformBlockParameter(35395)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER   = UniformBlockParameter(35396)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER = UniformBlockParameter(35397)
-	UniformBlockParameter_GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = UniformBlockParameter(35398)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum IndexedBufferTarget
-////////////////////////////////////////////////////////////////////////////////
-type IndexedBufferTarget uint32
-
-const (
-	IndexedBufferTarget_GL_TRANSFORM_FEEDBACK_BUFFER = IndexedBufferTarget(35982)
-	IndexedBufferTarget_GL_UNIFORM_BUFFER            = IndexedBufferTarget(35345)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum TilePreserveMaskQCOM
-////////////////////////////////////////////////////////////////////////////////
-type TilePreserveMaskQCOM uint32
-
-const (
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT0_QCOM       = TilePreserveMaskQCOM(1)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT1_QCOM       = TilePreserveMaskQCOM(2)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT2_QCOM       = TilePreserveMaskQCOM(4)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT3_QCOM       = TilePreserveMaskQCOM(8)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT4_QCOM       = TilePreserveMaskQCOM(16)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT5_QCOM       = TilePreserveMaskQCOM(32)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT6_QCOM       = TilePreserveMaskQCOM(64)
-	TilePreserveMaskQCOM_GL_COLOR_BUFFER_BIT7_QCOM       = TilePreserveMaskQCOM(128)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT0_QCOM       = TilePreserveMaskQCOM(256)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT1_QCOM       = TilePreserveMaskQCOM(512)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT2_QCOM       = TilePreserveMaskQCOM(1024)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT3_QCOM       = TilePreserveMaskQCOM(2048)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT4_QCOM       = TilePreserveMaskQCOM(4096)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT5_QCOM       = TilePreserveMaskQCOM(8192)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT6_QCOM       = TilePreserveMaskQCOM(16384)
-	TilePreserveMaskQCOM_GL_DEPTH_BUFFER_BIT7_QCOM       = TilePreserveMaskQCOM(32768)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT0_QCOM     = TilePreserveMaskQCOM(65536)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT1_QCOM     = TilePreserveMaskQCOM(131072)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT2_QCOM     = TilePreserveMaskQCOM(262144)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT3_QCOM     = TilePreserveMaskQCOM(524288)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT4_QCOM     = TilePreserveMaskQCOM(1048576)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT5_QCOM     = TilePreserveMaskQCOM(2097152)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT6_QCOM     = TilePreserveMaskQCOM(4194304)
-	TilePreserveMaskQCOM_GL_STENCIL_BUFFER_BIT7_QCOM     = TilePreserveMaskQCOM(8388608)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT0_QCOM = TilePreserveMaskQCOM(16777216)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT1_QCOM = TilePreserveMaskQCOM(33554432)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT2_QCOM = TilePreserveMaskQCOM(67108864)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT3_QCOM = TilePreserveMaskQCOM(134217728)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT4_QCOM = TilePreserveMaskQCOM(268435456)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT5_QCOM = TilePreserveMaskQCOM(536870912)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT6_QCOM = TilePreserveMaskQCOM(1073741824)
-	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT7_QCOM = TilePreserveMaskQCOM(2147483648)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum ClearMask
-////////////////////////////////////////////////////////////////////////////////
-type ClearMask uint32
-
-const (
-	ClearMask_GL_COLOR_BUFFER_BIT   = ClearMask(16384)
-	ClearMask_GL_DEPTH_BUFFER_BIT   = ClearMask(256)
-	ClearMask_GL_STENCIL_BUFFER_BIT = ClearMask(1024)
-)
-
-////////////////////////////////////////////////////////////////////////////////
-// enum MapBufferRangeAccess
-////////////////////////////////////////////////////////////////////////////////
-type MapBufferRangeAccess uint32
-
-const (
-	MapBufferRangeAccess_GL_MAP_READ_BIT              = MapBufferRangeAccess(1)
-	MapBufferRangeAccess_GL_MAP_WRITE_BIT             = MapBufferRangeAccess(2)
-	MapBufferRangeAccess_GL_MAP_INVALIDATE_RANGE_BIT  = MapBufferRangeAccess(4)
-	MapBufferRangeAccess_GL_MAP_INVALIDATE_BUFFER_BIT = MapBufferRangeAccess(8)
-	MapBufferRangeAccess_GL_MAP_FLUSH_EXPLICIT_BIT    = MapBufferRangeAccess(16)
-	MapBufferRangeAccess_GL_MAP_UNSYNCHRONIZED_BIT    = MapBufferRangeAccess(32)
+	GLbitfield_GL_COLOR_BUFFER_BIT0_QCOM       = GLbitfield(1)
+	GLbitfield_GL_COLOR_BUFFER_BIT1_QCOM       = GLbitfield(2)
+	GLbitfield_GL_COLOR_BUFFER_BIT2_QCOM       = GLbitfield(4)
+	GLbitfield_GL_COLOR_BUFFER_BIT3_QCOM       = GLbitfield(8)
+	GLbitfield_GL_COLOR_BUFFER_BIT4_QCOM       = GLbitfield(16)
+	GLbitfield_GL_COLOR_BUFFER_BIT5_QCOM       = GLbitfield(32)
+	GLbitfield_GL_COLOR_BUFFER_BIT6_QCOM       = GLbitfield(64)
+	GLbitfield_GL_COLOR_BUFFER_BIT7_QCOM       = GLbitfield(128)
+	GLbitfield_GL_DEPTH_BUFFER_BIT0_QCOM       = GLbitfield(256)
+	GLbitfield_GL_DEPTH_BUFFER_BIT1_QCOM       = GLbitfield(512)
+	GLbitfield_GL_DEPTH_BUFFER_BIT2_QCOM       = GLbitfield(1024)
+	GLbitfield_GL_DEPTH_BUFFER_BIT3_QCOM       = GLbitfield(2048)
+	GLbitfield_GL_DEPTH_BUFFER_BIT4_QCOM       = GLbitfield(4096)
+	GLbitfield_GL_DEPTH_BUFFER_BIT5_QCOM       = GLbitfield(8192)
+	GLbitfield_GL_DEPTH_BUFFER_BIT6_QCOM       = GLbitfield(16384)
+	GLbitfield_GL_DEPTH_BUFFER_BIT7_QCOM       = GLbitfield(32768)
+	GLbitfield_GL_STENCIL_BUFFER_BIT0_QCOM     = GLbitfield(65536)
+	GLbitfield_GL_STENCIL_BUFFER_BIT1_QCOM     = GLbitfield(131072)
+	GLbitfield_GL_STENCIL_BUFFER_BIT2_QCOM     = GLbitfield(262144)
+	GLbitfield_GL_STENCIL_BUFFER_BIT3_QCOM     = GLbitfield(524288)
+	GLbitfield_GL_STENCIL_BUFFER_BIT4_QCOM     = GLbitfield(1048576)
+	GLbitfield_GL_STENCIL_BUFFER_BIT5_QCOM     = GLbitfield(2097152)
+	GLbitfield_GL_STENCIL_BUFFER_BIT6_QCOM     = GLbitfield(4194304)
+	GLbitfield_GL_STENCIL_BUFFER_BIT7_QCOM     = GLbitfield(8388608)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT0_QCOM = GLbitfield(16777216)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT1_QCOM = GLbitfield(33554432)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT2_QCOM = GLbitfield(67108864)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT3_QCOM = GLbitfield(134217728)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT4_QCOM = GLbitfield(268435456)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT5_QCOM = GLbitfield(536870912)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT6_QCOM = GLbitfield(1073741824)
+	GLbitfield_GL_MULTISAMPLE_BUFFER_BIT7_QCOM = GLbitfield(2147483648)
+	GLbitfield_GL_COLOR_BUFFER_BIT             = GLbitfield(16384)
+	GLbitfield_GL_DEPTH_BUFFER_BIT             = GLbitfield(256)
+	GLbitfield_GL_STENCIL_BUFFER_BIT           = GLbitfield(1024)
+	GLbitfield_GL_MAP_READ_BIT                 = GLbitfield(1)
+	GLbitfield_GL_MAP_WRITE_BIT                = GLbitfield(2)
+	GLbitfield_GL_MAP_INVALIDATE_RANGE_BIT     = GLbitfield(4)
+	GLbitfield_GL_MAP_INVALIDATE_BUFFER_BIT    = GLbitfield(8)
+	GLbitfield_GL_MAP_FLUSH_EXPLICIT_BIT       = GLbitfield(16)
+	GLbitfield_GL_MAP_UNSYNCHRONIZED_BIT       = GLbitfield(32)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19214,10 +17433,10 @@ func NewCGSGetSurfaceBounds(Cid memory.Pointer, Wid CGSWindowID, Sid CGSSurfaceI
 func NewCGLFlushDrawable(Ctx memory.Pointer, Result CGLError) *CGLFlushDrawable {
 	return &CGLFlushDrawable{Ctx: CGLContextObj{Pointer: Ctx}, Result: Result}
 }
-func NewGlEnableClientState(Type ArrayType) *GlEnableClientState {
+func NewGlEnableClientState(Type GLenum) *GlEnableClientState {
 	return &GlEnableClientState{Type: Type}
 }
-func NewGlDisableClientState(Type ArrayType) *GlDisableClientState {
+func NewGlDisableClientState(Type GLenum) *GlDisableClientState {
 	return &GlDisableClientState{Type: Type}
 }
 func NewGlGetProgramBinaryOES(Program ProgramId, Buffer_size int32, Bytes_written memory.Pointer, Binary_format memory.Pointer, Binary memory.Pointer) *GlGetProgramBinaryOES {
@@ -19226,14 +17445,14 @@ func NewGlGetProgramBinaryOES(Program ProgramId, Buffer_size int32, Bytes_writte
 func NewGlProgramBinaryOES(Program ProgramId, Binary_format uint32, Binary memory.Pointer, Binary_size int32) *GlProgramBinaryOES {
 	return &GlProgramBinaryOES{Program: Program, BinaryFormat: Binary_format, Binary: Voidᵖ{Pointer: Binary}, BinarySize: Binary_size}
 }
-func NewGlStartTilingQCOM(X int32, Y int32, Width int32, Height int32, PreserveMask TilePreserveMaskQCOM) *GlStartTilingQCOM {
+func NewGlStartTilingQCOM(X int32, Y int32, Width int32, Height int32, PreserveMask GLbitfield) *GlStartTilingQCOM {
 	return &GlStartTilingQCOM{X: X, Y: Y, Width: Width, Height: Height, PreserveMask: PreserveMask}
 }
-func NewGlEndTilingQCOM(Preserve_mask TilePreserveMaskQCOM) *GlEndTilingQCOM {
+func NewGlEndTilingQCOM(Preserve_mask GLbitfield) *GlEndTilingQCOM {
 	return &GlEndTilingQCOM{PreserveMask: Preserve_mask}
 }
-func NewGlDiscardFramebufferEXT(Target FramebufferTarget, NumAttachments int32, Attachments memory.Pointer) *GlDiscardFramebufferEXT {
-	return &GlDiscardFramebufferEXT{Target: Target, NumAttachments: NumAttachments, Attachments: DiscardFramebufferAttachmentᵖ{Pointer: Attachments}}
+func NewGlDiscardFramebufferEXT(Target GLenum, NumAttachments int32, Attachments memory.Pointer) *GlDiscardFramebufferEXT {
+	return &GlDiscardFramebufferEXT{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᵖ{Pointer: Attachments}}
 }
 func NewGlInsertEventMarkerEXT(Length int32, Marker memory.Pointer) *GlInsertEventMarkerEXT {
 	return &GlInsertEventMarkerEXT{Length: Length, Marker: Charᵖ{Pointer: Marker}}
@@ -19244,22 +17463,22 @@ func NewGlPushGroupMarkerEXT(Length int32, Marker memory.Pointer) *GlPushGroupMa
 func NewGlPopGroupMarkerEXT() *GlPopGroupMarkerEXT {
 	return &GlPopGroupMarkerEXT{}
 }
-func NewGlTexStorage1DEXT(Target TextureTarget, Levels int32, Format TexelFormat, Width int32) *GlTexStorage1DEXT {
+func NewGlTexStorage1DEXT(Target GLenum, Levels int32, Format GLenum, Width int32) *GlTexStorage1DEXT {
 	return &GlTexStorage1DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width}
 }
-func NewGlTexStorage2DEXT(Target TextureTarget, Levels int32, Format TexelFormat, Width int32, Height int32) *GlTexStorage2DEXT {
+func NewGlTexStorage2DEXT(Target GLenum, Levels int32, Format GLenum, Width int32, Height int32) *GlTexStorage2DEXT {
 	return &GlTexStorage2DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height}
 }
-func NewGlTexStorage3DEXT(Target TextureTarget, Levels int32, Format TexelFormat, Width int32, Height int32, Depth int32) *GlTexStorage3DEXT {
+func NewGlTexStorage3DEXT(Target GLenum, Levels int32, Format GLenum, Width int32, Height int32, Depth int32) *GlTexStorage3DEXT {
 	return &GlTexStorage3DEXT{Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height, Depth: Depth}
 }
-func NewGlTextureStorage1DEXT(Texture TextureId, Target TextureTarget, Levels int32, Format TexelFormat, Width int32) *GlTextureStorage1DEXT {
+func NewGlTextureStorage1DEXT(Texture TextureId, Target GLenum, Levels int32, Format GLenum, Width int32) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{Texture: Texture, Target: Target, Levels: Levels, Format: Format, Width: Width}
 }
-func NewGlTextureStorage2DEXT(Texture TextureId, Target TextureTarget, Levels int32, Format TexelFormat, Width int32, Height int32) *GlTextureStorage2DEXT {
+func NewGlTextureStorage2DEXT(Texture TextureId, Target GLenum, Levels int32, Format GLenum, Width int32, Height int32) *GlTextureStorage2DEXT {
 	return &GlTextureStorage2DEXT{Texture: Texture, Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height}
 }
-func NewGlTextureStorage3DEXT(Texture TextureId, Target TextureTarget, Levels int32, Format TexelFormat, Width int32, Height int32, Depth int32) *GlTextureStorage3DEXT {
+func NewGlTextureStorage3DEXT(Texture TextureId, Target GLenum, Levels int32, Format GLenum, Width int32, Height int32, Depth int32) *GlTextureStorage3DEXT {
 	return &GlTextureStorage3DEXT{Texture: Texture, Target: Target, Levels: Levels, Format: Format, Width: Width, Height: Height, Depth: Depth}
 }
 func NewGlGenVertexArraysOES(Count int32, Arrays memory.Pointer) *GlGenVertexArraysOES {
@@ -19274,28 +17493,28 @@ func NewGlDeleteVertexArraysOES(Count int32, Arrays memory.Pointer) *GlDeleteVer
 func NewGlIsVertexArrayOES(Array VertexArrayId, Result bool) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{Array: Array, Result: Result}
 }
-func NewGlEGLImageTargetTexture2DOES(Target ImageTargetTexture, Image memory.Pointer) *GlEGLImageTargetTexture2DOES {
+func NewGlEGLImageTargetTexture2DOES(Target GLenum, Image memory.Pointer) *GlEGLImageTargetTexture2DOES {
 	return &GlEGLImageTargetTexture2DOES{Target: Target, Image: ImageOES{Pointer: Image}}
 }
-func NewGlEGLImageTargetRenderbufferStorageOES(Target ImageTargetRenderbufferStorage, Image memory.Pointer) *GlEGLImageTargetRenderbufferStorageOES {
+func NewGlEGLImageTargetRenderbufferStorageOES(Target GLenum, Image memory.Pointer) *GlEGLImageTargetRenderbufferStorageOES {
 	return &GlEGLImageTargetRenderbufferStorageOES{Target: Target, Image: TexturePointer{Pointer: Image}}
 }
-func NewGlGetGraphicsResetStatusEXT(Result ResetStatus) *GlGetGraphicsResetStatusEXT {
+func NewGlGetGraphicsResetStatusEXT(Result GLenum) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{Result: Result}
 }
 func NewGlBindAttribLocation(Program ProgramId, Location AttributeLocation, Name string) *GlBindAttribLocation {
 	return &GlBindAttribLocation{Program: Program, Location: Location, Name: Name}
 }
-func NewGlBlendFunc(Src_factor BlendFactor, Dst_factor BlendFactor) *GlBlendFunc {
+func NewGlBlendFunc(Src_factor GLenum, Dst_factor GLenum) *GlBlendFunc {
 	return &GlBlendFunc{SrcFactor: Src_factor, DstFactor: Dst_factor}
 }
-func NewGlBlendFuncSeparate(Src_factor_rgb BlendFactor, Dst_factor_rgb BlendFactor, Src_factor_alpha BlendFactor, Dst_factor_alpha BlendFactor) *GlBlendFuncSeparate {
+func NewGlBlendFuncSeparate(Src_factor_rgb GLenum, Dst_factor_rgb GLenum, Src_factor_alpha GLenum, Dst_factor_alpha GLenum) *GlBlendFuncSeparate {
 	return &GlBlendFuncSeparate{SrcFactorRgb: Src_factor_rgb, DstFactorRgb: Dst_factor_rgb, SrcFactorAlpha: Src_factor_alpha, DstFactorAlpha: Dst_factor_alpha}
 }
-func NewGlBlendEquation(Equation BlendEquation) *GlBlendEquation {
+func NewGlBlendEquation(Equation GLenum) *GlBlendEquation {
 	return &GlBlendEquation{Equation: Equation}
 }
-func NewGlBlendEquationSeparate(Rgb BlendEquation, Alpha BlendEquation) *GlBlendEquationSeparate {
+func NewGlBlendEquationSeparate(Rgb GLenum, Alpha GLenum) *GlBlendEquationSeparate {
 	return &GlBlendEquationSeparate{Rgb: Rgb, Alpha: Alpha}
 }
 func NewGlBlendColor(Red float32, Green float32, Blue float32, Alpha float32) *GlBlendColor {
@@ -19307,22 +17526,22 @@ func NewGlEnableVertexAttribArray(Location AttributeLocation) *GlEnableVertexAtt
 func NewGlDisableVertexAttribArray(Location AttributeLocation) *GlDisableVertexAttribArray {
 	return &GlDisableVertexAttribArray{Location: Location}
 }
-func NewGlVertexAttribPointer(Location AttributeLocation, Size int32, Type VertexAttribType, Normalized bool, Stride int32, Data memory.Pointer) *GlVertexAttribPointer {
+func NewGlVertexAttribPointer(Location AttributeLocation, Size int32, Type GLenum, Normalized bool, Stride int32, Data memory.Pointer) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{Location: Location, Size: Size, Type: Type, Normalized: Normalized, Stride: Stride, Data: VertexPointer{Pointer: Data}}
 }
 func NewGlGetActiveAttrib(Program ProgramId, Location AttributeLocation, Buffer_size int32, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveAttrib {
-	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: S32ᵖ{Pointer: Buffer_bytes_written}, VectorCount: S32ᵖ{Pointer: Vector_count}, Type: ShaderAttribTypeᵖ{Pointer: Type}, Name: Charᵖ{Pointer: Name}}
+	return &GlGetActiveAttrib{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: S32ᵖ{Pointer: Buffer_bytes_written}, VectorCount: S32ᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: Charᵖ{Pointer: Name}}
 }
 func NewGlGetActiveUniform(Program ProgramId, Location int32, Buffer_size int32, Buffer_bytes_written memory.Pointer, Vector_count memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetActiveUniform {
-	return &GlGetActiveUniform{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: S32ᵖ{Pointer: Buffer_bytes_written}, VectorCount: S32ᵖ{Pointer: Vector_count}, Type: ShaderUniformTypeᵖ{Pointer: Type}, Name: Charᵖ{Pointer: Name}}
+	return &GlGetActiveUniform{Program: Program, Location: Location, BufferSize: Buffer_size, BufferBytesWritten: S32ᵖ{Pointer: Buffer_bytes_written}, VectorCount: S32ᵖ{Pointer: Vector_count}, Type: GLenumᵖ{Pointer: Type}, Name: Charᵖ{Pointer: Name}}
 }
-func NewGlGetError(Result Error) *GlGetError {
+func NewGlGetError(Result GLenum) *GlGetError {
 	return &GlGetError{Result: Result}
 }
-func NewGlGetProgramiv(Program ProgramId, Parameter ProgramParameter, Value memory.Pointer) *GlGetProgramiv {
+func NewGlGetProgramiv(Program ProgramId, Parameter GLenum, Value memory.Pointer) *GlGetProgramiv {
 	return &GlGetProgramiv{Program: Program, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlGetShaderiv(Shader ShaderId, Parameter ShaderParameter, Value memory.Pointer) *GlGetShaderiv {
+func NewGlGetShaderiv(Shader ShaderId, Parameter GLenum, Value memory.Pointer) *GlGetShaderiv {
 	return &GlGetShaderiv{Shader: Shader, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
 func NewGlGetUniformLocation(Program ProgramId, Name string, Result UniformLocation) *GlGetUniformLocation {
@@ -19331,19 +17550,19 @@ func NewGlGetUniformLocation(Program ProgramId, Name string, Result UniformLocat
 func NewGlGetAttribLocation(Program ProgramId, Name string, Result AttributeLocation) *GlGetAttribLocation {
 	return &GlGetAttribLocation{Program: Program, Name: Name, Result: Result}
 }
-func NewGlPixelStorei(Parameter PixelStoreParameter, Value int32) *GlPixelStorei {
+func NewGlPixelStorei(Parameter GLenum, Value int32) *GlPixelStorei {
 	return &GlPixelStorei{Parameter: Parameter, Value: Value}
 }
-func NewGlTexParameteri(Target TextureTarget, Parameter TextureParameter, Value int32) *GlTexParameteri {
+func NewGlTexParameteri(Target GLenum, Parameter GLenum, Value int32) *GlTexParameteri {
 	return &GlTexParameteri{Target: Target, Parameter: Parameter, Value: Value}
 }
-func NewGlTexParameterf(Target TextureTarget, Parameter TextureParameter, Value float32) *GlTexParameterf {
+func NewGlTexParameterf(Target GLenum, Parameter GLenum, Value float32) *GlTexParameterf {
 	return &GlTexParameterf{Target: Target, Parameter: Parameter, Value: Value}
 }
-func NewGlGetTexParameteriv(Target TextureTarget, Parameter TextureParameter, Values memory.Pointer) *GlGetTexParameteriv {
+func NewGlGetTexParameteriv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetTexParameteriv {
 	return &GlGetTexParameteriv{Target: Target, Parameter: Parameter, Values: S32ᵖ{Pointer: Values}}
 }
-func NewGlGetTexParameterfv(Target TextureTarget, Parameter TextureParameter, Values memory.Pointer) *GlGetTexParameterfv {
+func NewGlGetTexParameterfv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetTexParameterfv {
 	return &GlGetTexParameterfv{Target: Target, Parameter: Parameter, Values: F32ᶜᵖ{Pointer: Values}}
 }
 func NewGlUniform1i(Location UniformLocation, Value int32) *GlUniform1i {
@@ -19433,13 +17652,13 @@ func NewGlVertexAttrib3fv(Location AttributeLocation, Value memory.Pointer) *GlV
 func NewGlVertexAttrib4fv(Location AttributeLocation, Value memory.Pointer) *GlVertexAttrib4fv {
 	return &GlVertexAttrib4fv{Location: Location, Value: F32ᶜᵖ{Pointer: Value}}
 }
-func NewGlGetShaderPrecisionFormat(Shader_type ShaderType, Precision_type PrecisionType, Range memory.Pointer, Precision memory.Pointer) *GlGetShaderPrecisionFormat {
+func NewGlGetShaderPrecisionFormat(Shader_type GLenum, Precision_type GLenum, Range memory.Pointer, Precision memory.Pointer) *GlGetShaderPrecisionFormat {
 	return &GlGetShaderPrecisionFormat{ShaderType: Shader_type, PrecisionType: Precision_type, Range: S32ᵖ{Pointer: Range}, Precision: S32ᵖ{Pointer: Precision}}
 }
 func NewGlDepthMask(Enabled bool) *GlDepthMask {
 	return &GlDepthMask{Enabled: Enabled}
 }
-func NewGlDepthFunc(Function TestFunction) *GlDepthFunc {
+func NewGlDepthFunc(Function GLenum) *GlDepthFunc {
 	return &GlDepthFunc{Function: Function}
 }
 func NewGlDepthRangef(Near float32, Far float32) *GlDepthRangef {
@@ -19451,16 +17670,16 @@ func NewGlColorMask(Red bool, Green bool, Blue bool, Alpha bool) *GlColorMask {
 func NewGlStencilMask(Mask uint32) *GlStencilMask {
 	return &GlStencilMask{Mask: Mask}
 }
-func NewGlStencilMaskSeparate(Face FaceMode, Mask uint32) *GlStencilMaskSeparate {
+func NewGlStencilMaskSeparate(Face GLenum, Mask uint32) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{Face: Face, Mask: Mask}
 }
-func NewGlStencilFuncSeparate(Face FaceMode, Function TestFunction, Reference_value int32, Mask int32) *GlStencilFuncSeparate {
+func NewGlStencilFuncSeparate(Face GLenum, Function GLenum, Reference_value int32, Mask int32) *GlStencilFuncSeparate {
 	return &GlStencilFuncSeparate{Face: Face, Function: Function, ReferenceValue: Reference_value, Mask: Mask}
 }
-func NewGlStencilOpSeparate(Face FaceMode, Stencil_fail StencilAction, Stencil_pass_depth_fail StencilAction, Stencil_pass_depth_pass StencilAction) *GlStencilOpSeparate {
+func NewGlStencilOpSeparate(Face GLenum, Stencil_fail GLenum, Stencil_pass_depth_fail GLenum, Stencil_pass_depth_pass GLenum) *GlStencilOpSeparate {
 	return &GlStencilOpSeparate{Face: Face, StencilFail: Stencil_fail, StencilPassDepthFail: Stencil_pass_depth_fail, StencilPassDepthPass: Stencil_pass_depth_pass}
 }
-func NewGlFrontFace(Orientation FaceOrientation) *GlFrontFace {
+func NewGlFrontFace(Orientation GLenum) *GlFrontFace {
 	return &GlFrontFace{Orientation: Orientation}
 }
 func NewGlViewport(X int32, Y int32, Width int32, Height int32) *GlViewport {
@@ -19469,7 +17688,7 @@ func NewGlViewport(X int32, Y int32, Width int32, Height int32) *GlViewport {
 func NewGlScissor(X int32, Y int32, Width int32, Height int32) *GlScissor {
 	return &GlScissor{X: X, Y: Y, Width: Width, Height: Height}
 }
-func NewGlActiveTexture(Unit TextureUnit) *GlActiveTexture {
+func NewGlActiveTexture(Unit GLenum) *GlActiveTexture {
 	return &GlActiveTexture{Unit: Unit}
 }
 func NewGlGenTextures(Count int32, Textures memory.Pointer) *GlGenTextures {
@@ -19481,40 +17700,40 @@ func NewGlDeleteTextures(Count int32, Textures memory.Pointer) *GlDeleteTextures
 func NewGlIsTexture(Texture TextureId, Result bool) *GlIsTexture {
 	return &GlIsTexture{Texture: Texture, Result: Result}
 }
-func NewGlBindTexture(Target TextureTarget, Texture TextureId) *GlBindTexture {
+func NewGlBindTexture(Target GLenum, Texture TextureId) *GlBindTexture {
 	return &GlBindTexture{Target: Target, Texture: Texture}
 }
-func NewGlTexImage2D(Target TextureImageTarget, Level int32, Internal_format TexelFormat, Width int32, Height int32, Border int32, Format TexelFormat, Type TexelType, Data memory.Pointer) *GlTexImage2D {
+func NewGlTexImage2D(Target GLenum, Level int32, Internal_format GLenum, Width int32, Height int32, Border int32, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexImage2D {
 	return &GlTexImage2D{Target: Target, Level: Level, InternalFormat: Internal_format, Width: Width, Height: Height, Border: Border, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlTexSubImage2D(Target TextureImageTarget, Level int32, Xoffset int32, Yoffset int32, Width int32, Height int32, Format TexelFormat, Type TexelType, Data memory.Pointer) *GlTexSubImage2D {
+func NewGlTexSubImage2D(Target GLenum, Level int32, Xoffset int32, Yoffset int32, Width int32, Height int32, Format GLenum, Type GLenum, Data memory.Pointer) *GlTexSubImage2D {
 	return &GlTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, Type: Type, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlCopyTexImage2D(Target TextureImageTarget, Level int32, Format TexelFormat, X int32, Y int32, Width int32, Height int32, Border int32) *GlCopyTexImage2D {
+func NewGlCopyTexImage2D(Target GLenum, Level int32, Format GLenum, X int32, Y int32, Width int32, Height int32, Border int32) *GlCopyTexImage2D {
 	return &GlCopyTexImage2D{Target: Target, Level: Level, Format: Format, X: X, Y: Y, Width: Width, Height: Height, Border: Border}
 }
-func NewGlCopyTexSubImage2D(Target TextureImageTarget, Level int32, Xoffset int32, Yoffset int32, X int32, Y int32, Width int32, Height int32) *GlCopyTexSubImage2D {
+func NewGlCopyTexSubImage2D(Target GLenum, Level int32, Xoffset int32, Yoffset int32, X int32, Y int32, Width int32, Height int32) *GlCopyTexSubImage2D {
 	return &GlCopyTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, X: X, Y: Y, Width: Width, Height: Height}
 }
-func NewGlCompressedTexImage2D(Target TextureImageTarget, Level int32, Format CompressedTexelFormat, Width int32, Height int32, Border int32, Image_size int32, Data memory.Pointer) *GlCompressedTexImage2D {
+func NewGlCompressedTexImage2D(Target GLenum, Level int32, Format GLenum, Width int32, Height int32, Border int32, Image_size int32, Data memory.Pointer) *GlCompressedTexImage2D {
 	return &GlCompressedTexImage2D{Target: Target, Level: Level, Format: Format, Width: Width, Height: Height, Border: Border, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlCompressedTexSubImage2D(Target TextureImageTarget, Level int32, Xoffset int32, Yoffset int32, Width int32, Height int32, Format CompressedTexelFormat, Image_size int32, Data memory.Pointer) *GlCompressedTexSubImage2D {
+func NewGlCompressedTexSubImage2D(Target GLenum, Level int32, Xoffset int32, Yoffset int32, Width int32, Height int32, Format GLenum, Image_size int32, Data memory.Pointer) *GlCompressedTexSubImage2D {
 	return &GlCompressedTexSubImage2D{Target: Target, Level: Level, Xoffset: Xoffset, Yoffset: Yoffset, Width: Width, Height: Height, Format: Format, ImageSize: Image_size, Data: TexturePointer{Pointer: Data}}
 }
-func NewGlGenerateMipmap(Target TextureImageTarget) *GlGenerateMipmap {
+func NewGlGenerateMipmap(Target GLenum) *GlGenerateMipmap {
 	return &GlGenerateMipmap{Target: Target}
 }
-func NewGlReadPixels(X int32, Y int32, Width int32, Height int32, Format BaseTexelFormat, Type TexelType, Data memory.Pointer) *GlReadPixels {
+func NewGlReadPixels(X int32, Y int32, Width int32, Height int32, Format GLenum, Type GLenum, Data memory.Pointer) *GlReadPixels {
 	return &GlReadPixels{X: X, Y: Y, Width: Width, Height: Height, Format: Format, Type: Type, Data: Voidᵖ{Pointer: Data}}
 }
 func NewGlGenFramebuffers(Count int32, Framebuffers memory.Pointer) *GlGenFramebuffers {
 	return &GlGenFramebuffers{Count: Count, Framebuffers: FramebufferIdᵖ{Pointer: Framebuffers}}
 }
-func NewGlBindFramebuffer(Target FramebufferTarget, Framebuffer FramebufferId) *GlBindFramebuffer {
+func NewGlBindFramebuffer(Target GLenum, Framebuffer FramebufferId) *GlBindFramebuffer {
 	return &GlBindFramebuffer{Target: Target, Framebuffer: Framebuffer}
 }
-func NewGlCheckFramebufferStatus(Target FramebufferTarget, Result FramebufferStatus) *GlCheckFramebufferStatus {
+func NewGlCheckFramebufferStatus(Target GLenum, Result GLenum) *GlCheckFramebufferStatus {
 	return &GlCheckFramebufferStatus{Target: Target, Result: Result}
 }
 func NewGlDeleteFramebuffers(Count int32, Framebuffers memory.Pointer) *GlDeleteFramebuffers {
@@ -19526,10 +17745,10 @@ func NewGlIsFramebuffer(Framebuffer FramebufferId, Result bool) *GlIsFramebuffer
 func NewGlGenRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlGenRenderbuffers {
 	return &GlGenRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᵖ{Pointer: Renderbuffers}}
 }
-func NewGlBindRenderbuffer(Target RenderbufferTarget, Renderbuffer RenderbufferId) *GlBindRenderbuffer {
+func NewGlBindRenderbuffer(Target GLenum, Renderbuffer RenderbufferId) *GlBindRenderbuffer {
 	return &GlBindRenderbuffer{Target: Target, Renderbuffer: Renderbuffer}
 }
-func NewGlRenderbufferStorage(Target RenderbufferTarget, Format RenderbufferFormat, Width int32, Height int32) *GlRenderbufferStorage {
+func NewGlRenderbufferStorage(Target GLenum, Format GLenum, Width int32, Height int32) *GlRenderbufferStorage {
 	return &GlRenderbufferStorage{Target: Target, Format: Format, Width: Width, Height: Height}
 }
 func NewGlDeleteRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlDeleteRenderbuffers {
@@ -19538,19 +17757,19 @@ func NewGlDeleteRenderbuffers(Count int32, Renderbuffers memory.Pointer) *GlDele
 func NewGlIsRenderbuffer(Renderbuffer RenderbufferId, Result bool) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{Renderbuffer: Renderbuffer, Result: Result}
 }
-func NewGlGetRenderbufferParameteriv(Target RenderbufferTarget, Parameter RenderbufferParameter, Values memory.Pointer) *GlGetRenderbufferParameteriv {
+func NewGlGetRenderbufferParameteriv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetRenderbufferParameteriv {
 	return &GlGetRenderbufferParameteriv{Target: Target, Parameter: Parameter, Values: S32ᵖ{Pointer: Values}}
 }
 func NewGlGenBuffers(Count int32, Buffers memory.Pointer) *GlGenBuffers {
 	return &GlGenBuffers{Count: Count, Buffers: BufferIdᵖ{Pointer: Buffers}}
 }
-func NewGlBindBuffer(Target BufferTarget, Buffer BufferId) *GlBindBuffer {
+func NewGlBindBuffer(Target GLenum, Buffer BufferId) *GlBindBuffer {
 	return &GlBindBuffer{Target: Target, Buffer: Buffer}
 }
-func NewGlBufferData(Target BufferTarget, Size int32, Data memory.Pointer, Usage BufferUsage) *GlBufferData {
+func NewGlBufferData(Target GLenum, Size int32, Data memory.Pointer, Usage GLenum) *GlBufferData {
 	return &GlBufferData{Target: Target, Size: Size, Data: BufferDataPointer{Pointer: Data}, Usage: Usage}
 }
-func NewGlBufferSubData(Target BufferTarget, Offset int32, Size int32, Data memory.Pointer) *GlBufferSubData {
+func NewGlBufferSubData(Target GLenum, Offset int32, Size int32, Data memory.Pointer) *GlBufferSubData {
 	return &GlBufferSubData{Target: Target, Offset: Offset, Size: Size, Data: BufferDataPointer{Pointer: Data}}
 }
 func NewGlDeleteBuffers(Count int32, Buffers memory.Pointer) *GlDeleteBuffers {
@@ -19559,10 +17778,10 @@ func NewGlDeleteBuffers(Count int32, Buffers memory.Pointer) *GlDeleteBuffers {
 func NewGlIsBuffer(Buffer BufferId, Result bool) *GlIsBuffer {
 	return &GlIsBuffer{Buffer: Buffer, Result: Result}
 }
-func NewGlGetBufferParameteriv(Target BufferTarget, Parameter BufferParameter, Value memory.Pointer) *GlGetBufferParameteriv {
+func NewGlGetBufferParameteriv(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetBufferParameteriv {
 	return &GlGetBufferParameteriv{Target: Target, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlCreateShader(Type ShaderType, Result ShaderId) *GlCreateShader {
+func NewGlCreateShader(Type GLenum, Result ShaderId) *GlCreateShader {
 	return &GlCreateShader{Type: Type, Result: Result}
 }
 func NewGlDeleteShader(Shader ShaderId) *GlDeleteShader {
@@ -19628,10 +17847,10 @@ func NewGlClearDepthf(Depth float32) *GlClearDepthf {
 func NewGlClearStencil(Stencil int32) *GlClearStencil {
 	return &GlClearStencil{Stencil: Stencil}
 }
-func NewGlClear(Mask ClearMask) *GlClear {
+func NewGlClear(Mask GLbitfield) *GlClear {
 	return &GlClear{Mask: Mask}
 }
-func NewGlCullFace(Mode FaceMode) *GlCullFace {
+func NewGlCullFace(Mode GLenum) *GlCullFace {
 	return &GlCullFace{Mode: Mode}
 }
 func NewGlPolygonOffset(Scale_factor float32, Units float32) *GlPolygonOffset {
@@ -19643,22 +17862,22 @@ func NewGlLineWidth(Width float32) *GlLineWidth {
 func NewGlSampleCoverage(Value float32, Invert bool) *GlSampleCoverage {
 	return &GlSampleCoverage{Value: Value, Invert: Invert}
 }
-func NewGlHint(Target HintTarget, Mode HintMode) *GlHint {
+func NewGlHint(Target GLenum, Mode GLenum) *GlHint {
 	return &GlHint{Target: Target, Mode: Mode}
 }
-func NewGlFramebufferRenderbuffer(Framebuffer_target FramebufferTarget, Framebuffer_attachment FramebufferAttachment, Renderbuffer_target RenderbufferTarget, Renderbuffer RenderbufferId) *GlFramebufferRenderbuffer {
+func NewGlFramebufferRenderbuffer(Framebuffer_target GLenum, Framebuffer_attachment GLenum, Renderbuffer_target GLenum, Renderbuffer RenderbufferId) *GlFramebufferRenderbuffer {
 	return &GlFramebufferRenderbuffer{FramebufferTarget: Framebuffer_target, FramebufferAttachment: Framebuffer_attachment, RenderbufferTarget: Renderbuffer_target, Renderbuffer: Renderbuffer}
 }
-func NewGlFramebufferTexture2D(Framebuffer_target FramebufferTarget, Framebuffer_attachment FramebufferAttachment, Texture_target TextureImageTarget, Texture TextureId, Level int32) *GlFramebufferTexture2D {
+func NewGlFramebufferTexture2D(Framebuffer_target GLenum, Framebuffer_attachment GLenum, Texture_target GLenum, Texture TextureId, Level int32) *GlFramebufferTexture2D {
 	return &GlFramebufferTexture2D{FramebufferTarget: Framebuffer_target, FramebufferAttachment: Framebuffer_attachment, TextureTarget: Texture_target, Texture: Texture, Level: Level}
 }
-func NewGlGetFramebufferAttachmentParameteriv(Framebuffer_target FramebufferTarget, Attachment FramebufferAttachment, Parameter FramebufferAttachmentParameter, Value memory.Pointer) *GlGetFramebufferAttachmentParameteriv {
+func NewGlGetFramebufferAttachmentParameteriv(Framebuffer_target GLenum, Attachment GLenum, Parameter GLenum, Value memory.Pointer) *GlGetFramebufferAttachmentParameteriv {
 	return &GlGetFramebufferAttachmentParameteriv{FramebufferTarget: Framebuffer_target, Attachment: Attachment, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlDrawElements(Draw_mode DrawMode, Element_count int32, Indices_type IndicesType, Indices memory.Pointer) *GlDrawElements {
+func NewGlDrawElements(Draw_mode GLenum, Element_count int32, Indices_type GLenum, Indices memory.Pointer) *GlDrawElements {
 	return &GlDrawElements{DrawMode: Draw_mode, ElementCount: Element_count, IndicesType: Indices_type, Indices: IndicesPointer{Pointer: Indices}}
 }
-func NewGlDrawArrays(Draw_mode DrawMode, First_index int32, Index_count int32) *GlDrawArrays {
+func NewGlDrawArrays(Draw_mode GLenum, First_index int32, Index_count int32) *GlDrawArrays {
 	return &GlDrawArrays{DrawMode: Draw_mode, FirstIndex: First_index, IndexCount: Index_count}
 }
 func NewGlFlush() *GlFlush {
@@ -19667,25 +17886,25 @@ func NewGlFlush() *GlFlush {
 func NewGlFinish() *GlFinish {
 	return &GlFinish{}
 }
-func NewGlGetBooleanv(Param StateVariable, Values memory.Pointer) *GlGetBooleanv {
+func NewGlGetBooleanv(Param GLenum, Values memory.Pointer) *GlGetBooleanv {
 	return &GlGetBooleanv{Param: Param, Values: Boolᵖ{Pointer: Values}}
 }
-func NewGlGetFloatv(Param StateVariable, Values memory.Pointer) *GlGetFloatv {
+func NewGlGetFloatv(Param GLenum, Values memory.Pointer) *GlGetFloatv {
 	return &GlGetFloatv{Param: Param, Values: F32ᵖ{Pointer: Values}}
 }
-func NewGlGetIntegerv(Param StateVariable, Values memory.Pointer) *GlGetIntegerv {
+func NewGlGetIntegerv(Param GLenum, Values memory.Pointer) *GlGetIntegerv {
 	return &GlGetIntegerv{Param: Param, Values: S32ᵖ{Pointer: Values}}
 }
-func NewGlGetString(Param StringConstant, Result memory.Pointer) *GlGetString {
+func NewGlGetString(Param GLenum, Result memory.Pointer) *GlGetString {
 	return &GlGetString{Param: Param, Result: Charᶜᵖ{Pointer: Result}}
 }
-func NewGlEnable(Capability Capability) *GlEnable {
+func NewGlEnable(Capability GLenum) *GlEnable {
 	return &GlEnable{Capability: Capability}
 }
-func NewGlDisable(Capability Capability) *GlDisable {
+func NewGlDisable(Capability GLenum) *GlDisable {
 	return &GlDisable{Capability: Capability}
 }
-func NewGlIsEnabled(Capability Capability, Result bool) *GlIsEnabled {
+func NewGlIsEnabled(Capability GLenum, Result bool) *GlIsEnabled {
 	return &GlIsEnabled{Capability: Capability, Result: Result}
 }
 func NewGlFenceSync(Condition SyncCondition, SyncFlags SyncFlags, Result SyncObject) *GlFenceSync {
@@ -19700,28 +17919,28 @@ func NewGlWaitSync(Sync SyncObject, SyncFlags SyncFlags, Timeout uint64) *GlWait
 func NewGlClientWaitSync(Sync SyncObject, SyncFlags SyncFlags, Timeout uint64, Result ClientWaitSyncSignal) *GlClientWaitSync {
 	return &GlClientWaitSync{Sync: Sync, SyncFlags: SyncFlags, Timeout: Timeout, Result: Result}
 }
-func NewGlMapBufferRange(Target BufferTarget, Offset int32, Length int32, Access MapBufferRangeAccess, Result memory.Pointer) *GlMapBufferRange {
+func NewGlMapBufferRange(Target GLenum, Offset int32, Length int32, Access GLbitfield, Result memory.Pointer) *GlMapBufferRange {
 	return &GlMapBufferRange{Target: Target, Offset: Offset, Length: Length, Access: Access, Result: Voidᵖ{Pointer: Result}}
 }
-func NewGlUnmapBuffer(Target BufferTarget) *GlUnmapBuffer {
+func NewGlUnmapBuffer(Target GLenum) *GlUnmapBuffer {
 	return &GlUnmapBuffer{Target: Target}
 }
-func NewGlInvalidateFramebuffer(Target FramebufferTarget, Count int32, Attachments memory.Pointer) *GlInvalidateFramebuffer {
-	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: FramebufferAttachmentᶜᵖ{Pointer: Attachments}}
+func NewGlInvalidateFramebuffer(Target GLenum, Count int32, Attachments memory.Pointer) *GlInvalidateFramebuffer {
+	return &GlInvalidateFramebuffer{Target: Target, Count: Count, Attachments: GLenumᶜᵖ{Pointer: Attachments}}
 }
-func NewGlRenderbufferStorageMultisample(Target RenderbufferTarget, Samples int32, Format RenderbufferFormat, Width int32, Height int32) *GlRenderbufferStorageMultisample {
+func NewGlRenderbufferStorageMultisample(Target GLenum, Samples int32, Format GLenum, Width int32, Height int32) *GlRenderbufferStorageMultisample {
 	return &GlRenderbufferStorageMultisample{Target: Target, Samples: Samples, Format: Format, Width: Width, Height: Height}
 }
-func NewGlBlitFramebuffer(SrcX0 int32, SrcY0 int32, SrcX1 int32, SrcY1 int32, DstX0 int32, DstY0 int32, DstX1 int32, DstY1 int32, Mask ClearMask, Filter TextureFilterMode) *GlBlitFramebuffer {
+func NewGlBlitFramebuffer(SrcX0 int32, SrcY0 int32, SrcX1 int32, SrcY1 int32, DstX0 int32, DstY0 int32, DstX1 int32, DstY1 int32, Mask GLbitfield, Filter GLenum) *GlBlitFramebuffer {
 	return &GlBlitFramebuffer{SrcX0: SrcX0, SrcY0: SrcY0, SrcX1: SrcX1, SrcY1: SrcY1, DstX0: DstX0, DstY0: DstY0, DstX1: DstX1, DstY1: DstY1, Mask: Mask, Filter: Filter}
 }
 func NewGlGenQueries(Count int32, Queries memory.Pointer) *GlGenQueries {
 	return &GlGenQueries{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
 }
-func NewGlBeginQuery(Target QueryTarget, Query QueryId) *GlBeginQuery {
+func NewGlBeginQuery(Target GLenum, Query QueryId) *GlBeginQuery {
 	return &GlBeginQuery{Target: Target, Query: Query}
 }
-func NewGlEndQuery(Target QueryTarget) *GlEndQuery {
+func NewGlEndQuery(Target GLenum) *GlEndQuery {
 	return &GlEndQuery{Target: Target}
 }
 func NewGlDeleteQueries(Count int32, Queries memory.Pointer) *GlDeleteQueries {
@@ -19730,25 +17949,25 @@ func NewGlDeleteQueries(Count int32, Queries memory.Pointer) *GlDeleteQueries {
 func NewGlIsQuery(Query QueryId, Result bool) *GlIsQuery {
 	return &GlIsQuery{Query: Query, Result: Result}
 }
-func NewGlGetQueryiv(Target QueryTarget, Parameter QueryParameter, Value memory.Pointer) *GlGetQueryiv {
+func NewGlGetQueryiv(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetQueryiv {
 	return &GlGetQueryiv{Target: Target, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjectuiv(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectuiv {
+func NewGlGetQueryObjectuiv(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectuiv {
 	return &GlGetQueryObjectuiv{Query: Query, Parameter: Parameter, Value: U32ᵖ{Pointer: Value}}
 }
 func NewGlGetActiveUniformBlockName(Program ProgramId, Uniform_block_index uint32, Buffer_size int32, Buffer_bytes_written memory.Pointer, Name memory.Pointer) *GlGetActiveUniformBlockName {
 	return &GlGetActiveUniformBlockName{Program: Program, UniformBlockIndex: Uniform_block_index, BufferSize: Buffer_size, BufferBytesWritten: S32ᵖ{Pointer: Buffer_bytes_written}, Name: Charᵖ{Pointer: Name}}
 }
-func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index uint32, Parameter_name UniformBlockParameter, Parameters memory.Pointer) *GlGetActiveUniformBlockiv {
+func NewGlGetActiveUniformBlockiv(Program ProgramId, Uniform_block_index uint32, Parameter_name GLenum, Parameters memory.Pointer) *GlGetActiveUniformBlockiv {
 	return &GlGetActiveUniformBlockiv{Program: Program, UniformBlockIndex: Uniform_block_index, ParameterName: Parameter_name, Parameters: S32ᵖ{Pointer: Parameters}}
 }
 func NewGlUniformBlockBinding(Program ProgramId, Uniform_block_index uint32, Uniform_block_binding uint32) *GlUniformBlockBinding {
 	return &GlUniformBlockBinding{Program: Program, UniformBlockIndex: Uniform_block_index, UniformBlockBinding: Uniform_block_binding}
 }
-func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count uint32, Uniform_indices memory.Pointer, Parameter_name UniformBlockParameter, Parameters memory.Pointer) *GlGetActiveUniformsiv {
+func NewGlGetActiveUniformsiv(Program ProgramId, Uniform_count uint32, Uniform_indices memory.Pointer, Parameter_name GLenum, Parameters memory.Pointer) *GlGetActiveUniformsiv {
 	return &GlGetActiveUniformsiv{Program: Program, UniformCount: Uniform_count, UniformIndices: U32ᵖ{Pointer: Uniform_indices}, ParameterName: Parameter_name, Parameters: S32ᵖ{Pointer: Parameters}}
 }
-func NewGlBindBufferBase(Target IndexedBufferTarget, Index uint32, Buffer BufferId) *GlBindBufferBase {
+func NewGlBindBufferBase(Target GLenum, Index uint32, Buffer BufferId) *GlBindBufferBase {
 	return &GlBindBufferBase{Target: Target, Index: Index, Buffer: Buffer}
 }
 func NewGlGenVertexArrays(Count int32, Arrays memory.Pointer) *GlGenVertexArrays {
@@ -19760,19 +17979,19 @@ func NewGlBindVertexArray(Array VertexArrayId) *GlBindVertexArray {
 func NewGlDeleteVertexArrays(Count uint32, Arrays memory.Pointer) *GlDeleteVertexArrays {
 	return &GlDeleteVertexArrays{Count: Count, Arrays: VertexArrayIdᶜᵖ{Pointer: Arrays}}
 }
-func NewGlGetQueryObjecti64v(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjecti64v {
+func NewGlGetQueryObjecti64v(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjecti64v {
 	return &GlGetQueryObjecti64v{Query: Query, Parameter: Parameter, Value: S64ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjectui64v(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectui64v {
+func NewGlGetQueryObjectui64v(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectui64v {
 	return &GlGetQueryObjectui64v{Query: Query, Parameter: Parameter, Value: U64ᵖ{Pointer: Value}}
 }
 func NewGlGenQueriesEXT(Count int32, Queries memory.Pointer) *GlGenQueriesEXT {
 	return &GlGenQueriesEXT{Count: Count, Queries: QueryIdᵖ{Pointer: Queries}}
 }
-func NewGlBeginQueryEXT(Target QueryTarget, Query QueryId) *GlBeginQueryEXT {
+func NewGlBeginQueryEXT(Target GLenum, Query QueryId) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{Target: Target, Query: Query}
 }
-func NewGlEndQueryEXT(Target QueryTarget) *GlEndQueryEXT {
+func NewGlEndQueryEXT(Target GLenum) *GlEndQueryEXT {
 	return &GlEndQueryEXT{Target: Target}
 }
 func NewGlDeleteQueriesEXT(Count int32, Queries memory.Pointer) *GlDeleteQueriesEXT {
@@ -19781,22 +18000,22 @@ func NewGlDeleteQueriesEXT(Count int32, Queries memory.Pointer) *GlDeleteQueries
 func NewGlIsQueryEXT(Query QueryId, Result bool) *GlIsQueryEXT {
 	return &GlIsQueryEXT{Query: Query, Result: Result}
 }
-func NewGlQueryCounterEXT(Query QueryId, Target QueryTarget) *GlQueryCounterEXT {
+func NewGlQueryCounterEXT(Query QueryId, Target GLenum) *GlQueryCounterEXT {
 	return &GlQueryCounterEXT{Query: Query, Target: Target}
 }
-func NewGlGetQueryivEXT(Target QueryTarget, Parameter QueryParameter, Value memory.Pointer) *GlGetQueryivEXT {
+func NewGlGetQueryivEXT(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetQueryivEXT {
 	return &GlGetQueryivEXT{Target: Target, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjectivEXT(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectivEXT {
+func NewGlGetQueryObjectivEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectivEXT {
 	return &GlGetQueryObjectivEXT{Query: Query, Parameter: Parameter, Value: S32ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjectuivEXT(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectuivEXT {
+func NewGlGetQueryObjectuivEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectuivEXT {
 	return &GlGetQueryObjectuivEXT{Query: Query, Parameter: Parameter, Value: U32ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjecti64vEXT(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjecti64vEXT {
+func NewGlGetQueryObjecti64vEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjecti64vEXT {
 	return &GlGetQueryObjecti64vEXT{Query: Query, Parameter: Parameter, Value: S64ᵖ{Pointer: Value}}
 }
-func NewGlGetQueryObjectui64vEXT(Query QueryId, Parameter QueryObjectParameter, Value memory.Pointer) *GlGetQueryObjectui64vEXT {
+func NewGlGetQueryObjectui64vEXT(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectui64vEXT {
 	return &GlGetQueryObjectui64vEXT{Query: Query, Parameter: Parameter, Value: U64ᵖ{Pointer: Value}}
 }
 func NewArchitecture(Pointer_alignment uint32, Pointer_size uint32, Integer_size uint32, Little_endian bool) *Architecture {
@@ -19808,7 +18027,7 @@ func NewReplayCreateRenderer(Id uint32) *ReplayCreateRenderer {
 func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer {
 	return &ReplayBindRenderer{Id: Id}
 }
-func NewBackbufferInfo(Width int32, Height int32, Color_fmt RenderbufferFormat, Depth_fmt RenderbufferFormat, Stencil_fmt RenderbufferFormat, ResetViewportScissor bool) *BackbufferInfo {
+func NewBackbufferInfo(Width int32, Height int32, Color_fmt GLenum, Depth_fmt GLenum, Stencil_fmt GLenum, ResetViewportScissor bool) *BackbufferInfo {
 	return &BackbufferInfo{Width: Width, Height: Height, ColorFmt: Color_fmt, DepthFmt: Depth_fmt, StencilFmt: Stencil_fmt, ResetViewportScissor: ResetViewportScissor}
 }
 func NewStartTimer(Index uint8) *StartTimer {

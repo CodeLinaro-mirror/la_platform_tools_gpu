@@ -29,49 +29,49 @@ cmd void replayCreateRenderer(u32 id) {}
 cmd void replayBindRenderer(u32 id) {}
 
 @synthetic
-cmd void backbufferInfo(s32                width,
-                        s32                height,
-                        RenderbufferFormat color_fmt,
-                        RenderbufferFormat depth_fmt,
-                        RenderbufferFormat stencil_fmt,
-                        bool               resetViewportScissor) {
-    ctx := GetContext()
-    backbuffer := ctx.Instances.Framebuffers[0]
+cmd void backbufferInfo(s32    width,
+                        s32    height,
+                        GLenum color_fmt,
+                        GLenum depth_fmt,
+                        GLenum stencil_fmt,
+                        bool   resetViewportScissor) {
+  ctx := GetContext()
+  backbuffer := ctx.Instances.Framebuffers[0]
 
-    color_id     := as!RenderbufferId(backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object)
-    color_buffer := ctx.Instances.Renderbuffers[color_id]
+  color_id := as!RenderbufferId(backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object)
+  color_buffer := ctx.Instances.Renderbuffers[color_id]
 
-    depth_id     := as!RenderbufferId(backbuffer.Attachments[GL_DEPTH_ATTACHMENT].Object)
-    depth_buffer := ctx.Instances.Renderbuffers[depth_id]
+  depth_id := as!RenderbufferId(backbuffer.Attachments[GL_DEPTH_ATTACHMENT].Object)
+  depth_buffer := ctx.Instances.Renderbuffers[depth_id]
 
-    stencil_id     := as!RenderbufferId(backbuffer.Attachments[GL_STENCIL_ATTACHMENT].Object)
-    stencil_buffer := ctx.Instances.Renderbuffers[stencil_id]
+  stencil_id := as!RenderbufferId(backbuffer.Attachments[GL_STENCIL_ATTACHMENT].Object)
+  stencil_buffer := ctx.Instances.Renderbuffers[stencil_id]
 
-    color_buffer.Width    = width
-    color_buffer.Height   = height
-    color_buffer.Format   = color_fmt
+  color_buffer.Width = width
+  color_buffer.Height = height
+  color_buffer.Format = color_fmt
 
-    depth_buffer.Width    = width
-    depth_buffer.Height   = height
-    depth_buffer.Format   = depth_fmt
+  depth_buffer.Width = width
+  depth_buffer.Height = height
+  depth_buffer.Format = depth_fmt
 
-    stencil_buffer.Width  = width
-    stencil_buffer.Height = height
-    stencil_buffer.Format = stencil_fmt
+  stencil_buffer.Width = width
+  stencil_buffer.Height = height
+  stencil_buffer.Format = stencil_fmt
 
-    if resetViewportScissor {
-        ctx.Rasterizing.Scissor.Width   = width
-        ctx.Rasterizing.Scissor.Height  = height
-        ctx.Rasterizing.Viewport.Width  = width
-        ctx.Rasterizing.Viewport.Height = height
-    }
+  if resetViewportScissor {
+    ctx.Rasterizing.Scissor.Width = width
+    ctx.Rasterizing.Scissor.Height = height
+    ctx.Rasterizing.Viewport.Width = width
+    ctx.Rasterizing.Viewport.Height = height
+  }
 }
 
 @synthetic
 cmd void startTimer(u8 index) {}
 
 @synthetic
-cmd u64 stopTimer(u8 index) { return ? } // Time returned in nanoseconds
+cmd u64 stopTimer(u8 index) { return ? }  // Time returned in nanoseconds
 
 @synthetic
 cmd void flushPostBuffer() {}

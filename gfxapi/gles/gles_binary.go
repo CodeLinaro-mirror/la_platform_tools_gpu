@@ -74,8 +74,6 @@ func init() {
 	Namespace.Add((*Query)(nil).Class())
 	Namespace.Add((*Objects)(nil).Class())
 	Namespace.Add((*Context)(nil).Class())
-	Namespace.Add((*DiscardFramebufferAttachmentˢ)(nil).Class())
-	Namespace.Add((*DiscardFramebufferAttachmentᵖ)(nil).Class())
 	Namespace.Add((*EGLConfig)(nil).Class())
 	Namespace.Add((*EGLContext)(nil).Class())
 	Namespace.Add((*EGLDisplay)(nil).Class())
@@ -96,14 +94,14 @@ func init() {
 	Namespace.Add((*F32ᶜᵖ)(nil).Class())
 	Namespace.Add((*F64ˢ)(nil).Class())
 	Namespace.Add((*FlushPostBuffer)(nil).Class())
-	Namespace.Add((*FramebufferAttachmentˢ)(nil).Class())
-	Namespace.Add((*FramebufferAttachmentᵖ)(nil).Class())
-	Namespace.Add((*FramebufferAttachmentᶜᵖ)(nil).Class())
 	Namespace.Add((*FramebufferIdˢ)(nil).Class())
 	Namespace.Add((*FramebufferIdᵖ)(nil).Class())
 	Namespace.Add((*FramebufferIdᶜᵖ)(nil).Class())
 	Namespace.Add((*GLXContext)(nil).Class())
 	Namespace.Add((*GLXDrawable)(nil).Class())
+	Namespace.Add((*GLenumˢ)(nil).Class())
+	Namespace.Add((*GLenumᵖ)(nil).Class())
+	Namespace.Add((*GLenumᶜᵖ)(nil).Class())
 	Namespace.Add((*GLsync)(nil).Class())
 	Namespace.Add((*GlActiveTexture)(nil).Class())
 	Namespace.Add((*GlAttachShader)(nil).Class())
@@ -196,9 +194,7 @@ func init() {
 	Namespace.Add((*GlGenVertexArraysOES)(nil).Class())
 	Namespace.Add((*GlGenerateMipmap)(nil).Class())
 	Namespace.Add((*S32ᵖ)(nil).Class())
-	Namespace.Add((*ShaderAttribTypeᵖ)(nil).Class())
 	Namespace.Add((*GlGetActiveAttrib)(nil).Class())
-	Namespace.Add((*ShaderUniformTypeᵖ)(nil).Class())
 	Namespace.Add((*GlGetActiveUniform)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformBlockName)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformBlockiv)(nil).Class())
@@ -352,9 +348,7 @@ func init() {
 	Namespace.Add((*S32ː4ᵃ)(nil).Class())
 	Namespace.Add((*S32ˢ)(nil).Class())
 	Namespace.Add((*S64ˢ)(nil).Class())
-	Namespace.Add((*ShaderAttribTypeˢ)(nil).Class())
 	Namespace.Add((*ShaderIdˢ)(nil).Class())
-	Namespace.Add((*ShaderUniformTypeˢ)(nil).Class())
 	Namespace.Add((*StartTimer)(nil).Class())
 	Namespace.Add((*State)(nil).Class())
 	Namespace.Add((*StopTimer)(nil).Class())
@@ -393,14 +387,14 @@ func init() {
 
 var (
 	binaryIDArchitecture                           = binary.ID{0x14, 0x53, 0xe8, 0x31, 0x7d, 0x20, 0x5f, 0xbd, 0xad, 0x68, 0x48, 0x67, 0xeb, 0xf6, 0x1c, 0x4f, 0xe8, 0xfc, 0x0e, 0x01}
-	binaryIDBackbufferInfo                         = binary.ID{0x44, 0xeb, 0x57, 0x06, 0xf9, 0xfd, 0x06, 0xab, 0xc2, 0xa7, 0xdc, 0xa2, 0xba, 0xd0, 0xe3, 0x8f, 0x76, 0x7c, 0x81, 0x0f}
+	binaryIDBackbufferInfo                         = binary.ID{0x18, 0x3c, 0x07, 0xe1, 0x0c, 0x71, 0x64, 0xee, 0xaa, 0x70, 0x7a, 0xb3, 0xca, 0xbe, 0x36, 0x00, 0xe8, 0xeb, 0x8c, 0xed}
 	binaryIDColor                                  = binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}
-	binaryIDBlendState                             = binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}
+	binaryIDBlendState                             = binary.ID{0x54, 0x6b, 0x98, 0xbd, 0x32, 0x48, 0x57, 0xe0, 0x34, 0x7a, 0xfa, 0x8d, 0x92, 0x95, 0x4b, 0x07, 0xdd, 0x96, 0x3a, 0x2a}
 	binaryIDSliceInfo                              = binary.ID{0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9}
 	binaryIDBoolˢ                                  = binary.ID{0xf9, 0x44, 0xf2, 0x44, 0xbb, 0x78, 0x01, 0x7e, 0x56, 0xa1, 0x2f, 0x0d, 0x73, 0x9c, 0xa1, 0x77, 0x23, 0x5d, 0x47, 0xa8}
 	binaryIDBoolᵖ                                  = binary.ID{0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24}
 	binaryIDU8ˢ                                    = binary.ID{0xf7, 0xd9, 0x83, 0x86, 0x77, 0xcc, 0x52, 0xb0, 0x80, 0x2f, 0xfc, 0x47, 0xa5, 0x91, 0x72, 0xd9, 0x3b, 0xcd, 0x65, 0x01}
-	binaryIDBuffer                                 = binary.ID{0xcb, 0x13, 0xd8, 0x5c, 0x1e, 0x96, 0x94, 0x10, 0x35, 0x50, 0xc5, 0x56, 0x64, 0xc7, 0xa6, 0x9e, 0x0c, 0xe2, 0x7d, 0x9e}
+	binaryIDBuffer                                 = binary.ID{0xcc, 0x78, 0x3b, 0xbb, 0x05, 0x07, 0x86, 0x3c, 0xfc, 0x92, 0xdd, 0x10, 0x8d, 0xf9, 0xd0, 0x8a, 0x67, 0xfb, 0x22, 0x3b}
 	binaryIDBufferDataPointer                      = binary.ID{0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b}
 	binaryIDBufferIdˢ                              = binary.ID{0xfc, 0xf6, 0xb4, 0xce, 0x3b, 0x26, 0x76, 0xbb, 0xcc, 0x8f, 0x7e, 0xb8, 0x5c, 0xd5, 0x83, 0x62, 0x52, 0x48, 0x48, 0x78}
 	binaryIDBufferIdᵖ                              = binary.ID{0xdd, 0x87, 0xfa, 0xe3, 0xdf, 0x7b, 0x94, 0x84, 0xf3, 0x9b, 0xcb, 0xce, 0x6b, 0xbd, 0x3c, 0x5e, 0x9d, 0x78, 0xe5, 0x6d}
@@ -430,25 +424,23 @@ var (
 	binaryIDCharᶜᵖᶜᵖ                               = binary.ID{0xee, 0x02, 0x3f, 0x29, 0xac, 0x36, 0xe2, 0xdd, 0xb9, 0x07, 0xbf, 0xb2, 0x3c, 0xac, 0x09, 0x03, 0x21, 0xa9, 0x00, 0x5f}
 	binaryIDClearState                             = binary.ID{0xd3, 0xbe, 0x8f, 0x85, 0x49, 0x55, 0xe3, 0x17, 0x03, 0xb1, 0x02, 0x1c, 0xe0, 0x2d, 0x25, 0x8c, 0x17, 0x53, 0xc5, 0x62}
 	binaryIDRect                                   = binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}
-	binaryIDRasterizerState                        = binary.ID{0x51, 0x6b, 0x55, 0xed, 0xe3, 0x43, 0x1c, 0xe8, 0x28, 0x3f, 0x1d, 0xeb, 0x3b, 0x37, 0x21, 0x9f, 0x89, 0xbc, 0xdb, 0x28}
+	binaryIDRasterizerState                        = binary.ID{0x23, 0x1f, 0xe4, 0xa2, 0xde, 0xde, 0xae, 0xa6, 0xdf, 0x68, 0xbf, 0x76, 0xb3, 0x50, 0xb4, 0x33, 0x74, 0x21, 0x78, 0xd5}
 	binaryIDVertexPointer                          = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
-	binaryIDVertexAttributeArray                   = binary.ID{0xa4, 0x7d, 0x5e, 0xd9, 0x3b, 0x4e, 0x4e, 0xc2, 0xc4, 0x2b, 0x81, 0xe9, 0xc8, 0x56, 0xf6, 0xf9, 0x63, 0x47, 0xca, 0x11}
-	binaryIDRenderbuffer                           = binary.ID{0x84, 0x68, 0xd5, 0xd8, 0xde, 0xfc, 0xbd, 0x62, 0xda, 0xc3, 0x55, 0x74, 0xbf, 0xc5, 0x6c, 0xe8, 0xa5, 0xa3, 0xe7, 0x70}
-	binaryIDImage                                  = binary.ID{0x0a, 0x10, 0xd1, 0xf9, 0x89, 0x9f, 0x2a, 0xa6, 0xd6, 0xbf, 0x08, 0x1a, 0xf9, 0x7c, 0xb7, 0xa1, 0x48, 0xa1, 0xd8, 0xea}
-	binaryIDCubemapLevel                           = binary.ID{0x51, 0xd8, 0xc2, 0xc5, 0x3b, 0xfd, 0x61, 0x52, 0x9f, 0xaa, 0xee, 0x67, 0x5e, 0x16, 0x51, 0xe7, 0x92, 0x04, 0x17, 0xd6}
-	binaryIDTexture                                = binary.ID{0xa0, 0xdb, 0xfc, 0x07, 0xdf, 0x4d, 0x1d, 0x3c, 0x05, 0x98, 0x63, 0x48, 0x82, 0xd8, 0xc8, 0x09, 0x24, 0xa9, 0xe4, 0xb7}
-	binaryIDFramebufferAttachmentInfo              = binary.ID{0x28, 0x1b, 0x2d, 0xbd, 0x74, 0xc0, 0x84, 0xc8, 0xe5, 0xe1, 0x3e, 0xe3, 0x46, 0x08, 0xc7, 0xd0, 0x61, 0xb9, 0xa0, 0xb5}
-	binaryIDFramebuffer                            = binary.ID{0xb2, 0x34, 0xfe, 0x22, 0x59, 0xe9, 0xe0, 0xaa, 0x31, 0xca, 0xad, 0xc9, 0x51, 0x2a, 0x24, 0x04, 0xb4, 0xfd, 0xa3, 0xa4}
-	binaryIDShader                                 = binary.ID{0x40, 0x98, 0xcd, 0x17, 0xd2, 0xcf, 0x4f, 0x55, 0x35, 0x5a, 0xb1, 0x03, 0x70, 0x31, 0x41, 0x01, 0x5b, 0x8d, 0x83, 0xf6}
-	binaryIDVertexAttribute                        = binary.ID{0x88, 0x44, 0xf7, 0x6b, 0x96, 0x07, 0x99, 0x03, 0xe3, 0x56, 0xab, 0x34, 0x20, 0x80, 0xc6, 0x13, 0xbc, 0xd0, 0x53, 0xe8}
-	binaryIDUniform                                = binary.ID{0x0a, 0x74, 0x76, 0xe0, 0x20, 0x63, 0xb8, 0x20, 0x73, 0xd7, 0x15, 0x85, 0x4b, 0x0e, 0xcf, 0x31, 0x05, 0x80, 0x2e, 0x94}
-	binaryIDProgram                                = binary.ID{0x7f, 0x2e, 0x5d, 0xa3, 0x21, 0x31, 0xb3, 0x68, 0x3a, 0xae, 0x2d, 0x85, 0xc1, 0x89, 0xac, 0xe2, 0xa6, 0x14, 0x42, 0x2d}
+	binaryIDVertexAttributeArray                   = binary.ID{0xac, 0xbd, 0x9b, 0xb2, 0xb9, 0x78, 0xfb, 0xf5, 0xa6, 0x90, 0x6c, 0x37, 0xa9, 0x38, 0xd0, 0x40, 0x2c, 0xb7, 0xf6, 0x8b}
+	binaryIDRenderbuffer                           = binary.ID{0x02, 0x80, 0xb1, 0x19, 0xb0, 0xe1, 0x73, 0xf0, 0xff, 0xdd, 0x61, 0x87, 0x89, 0x4a, 0xe8, 0x50, 0xdc, 0xbe, 0xe9, 0x37}
+	binaryIDImage                                  = binary.ID{0x71, 0x5c, 0xa7, 0x78, 0xcc, 0x62, 0xad, 0xc0, 0x0b, 0xfa, 0x83, 0xce, 0x54, 0x6f, 0x53, 0xbe, 0x5e, 0xe1, 0xe1, 0x83}
+	binaryIDCubemapLevel                           = binary.ID{0xca, 0xda, 0x9d, 0xaa, 0x3b, 0xf7, 0x43, 0x62, 0xef, 0x77, 0x38, 0xc5, 0x78, 0xeb, 0xb4, 0x0c, 0xcd, 0xb5, 0x87, 0xe1}
+	binaryIDTexture                                = binary.ID{0x24, 0xbf, 0xc7, 0x4e, 0xd5, 0x3a, 0xd7, 0x7a, 0x27, 0xde, 0xbc, 0x0f, 0x87, 0x13, 0x15, 0x4b, 0x7b, 0xa1, 0x3f, 0x3c}
+	binaryIDFramebufferAttachmentInfo              = binary.ID{0x1f, 0x5f, 0x6f, 0xe8, 0x2b, 0x01, 0x3e, 0xd5, 0x64, 0xf6, 0x0e, 0x43, 0x1d, 0x93, 0x70, 0x18, 0x31, 0xb7, 0x21, 0xdc}
+	binaryIDFramebuffer                            = binary.ID{0xab, 0x11, 0xed, 0xff, 0xf3, 0x6b, 0x0f, 0x36, 0xb8, 0xfb, 0x8a, 0x28, 0x9d, 0x38, 0x55, 0x8b, 0x8d, 0x5c, 0x39, 0xc7}
+	binaryIDShader                                 = binary.ID{0x18, 0xa9, 0x63, 0xb4, 0x2f, 0xee, 0x43, 0xb4, 0xc8, 0xcc, 0x48, 0x28, 0x7c, 0x4b, 0x7e, 0x0b, 0x72, 0xd5, 0x68, 0xdb}
+	binaryIDVertexAttribute                        = binary.ID{0x40, 0x6b, 0xa4, 0xbe, 0x27, 0xa1, 0x09, 0x3f, 0xfa, 0xed, 0x1b, 0x5d, 0x4f, 0x4b, 0xe1, 0xf3, 0xdb, 0x99, 0x5a, 0x8b}
+	binaryIDUniform                                = binary.ID{0x27, 0x30, 0x49, 0xde, 0x65, 0x8d, 0x9d, 0x3f, 0x58, 0x98, 0x30, 0x5d, 0x6b, 0xe1, 0x43, 0x79, 0xb4, 0x61, 0x08, 0xf8}
+	binaryIDProgram                                = binary.ID{0x7c, 0x34, 0x1a, 0x7f, 0x26, 0x11, 0x44, 0x79, 0xe2, 0xe6, 0x9a, 0x8f, 0x4c, 0x04, 0x9b, 0x2d, 0xe3, 0x7d, 0x48, 0x69}
 	binaryIDVertexArray                            = binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}
 	binaryIDQuery                                  = binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}
 	binaryIDObjects                                = binary.ID{0x8a, 0x05, 0xaa, 0xf5, 0xa8, 0x57, 0xb0, 0xf1, 0x13, 0x48, 0x39, 0x76, 0xec, 0x1e, 0x47, 0x0b, 0x6c, 0x3b, 0xf6, 0xe0}
-	binaryIDContext                                = binary.ID{0xc6, 0x81, 0x84, 0x13, 0x02, 0x9b, 0x76, 0x8b, 0x5b, 0x09, 0x10, 0xe4, 0x96, 0x22, 0xb2, 0x60, 0x14, 0xbd, 0x65, 0x01}
-	binaryIDDiscardFramebufferAttachmentˢ          = binary.ID{0xae, 0xbe, 0xc1, 0x3d, 0xe7, 0xac, 0x54, 0x61, 0xb0, 0x38, 0xe0, 0xab, 0x04, 0x96, 0x6c, 0x77, 0x78, 0x29, 0x2f, 0xdf}
-	binaryIDDiscardFramebufferAttachmentᵖ          = binary.ID{0x6d, 0x1c, 0x44, 0xa8, 0x5c, 0xba, 0x63, 0x54, 0xbe, 0x8e, 0xbe, 0x16, 0x40, 0x3f, 0xbe, 0xdb, 0xd7, 0xc0, 0x82, 0xb5}
+	binaryIDContext                                = binary.ID{0x5d, 0x15, 0x38, 0x06, 0x50, 0x11, 0xdd, 0x3b, 0xf6, 0x52, 0x52, 0xca, 0xc5, 0x29, 0x63, 0xdc, 0xe5, 0x1d, 0x52, 0x4a}
 	binaryIDEGLConfig                              = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
 	binaryIDEGLContext                             = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
 	binaryIDEGLDisplay                             = binary.ID{0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10}
@@ -469,37 +461,37 @@ var (
 	binaryIDF32ᶜᵖ                                  = binary.ID{0xfc, 0x91, 0x0c, 0x6f, 0xee, 0xad, 0xfb, 0x03, 0xd8, 0x95, 0x9f, 0xdb, 0x3a, 0x31, 0x96, 0xc9, 0xb4, 0x03, 0x4e, 0x2a}
 	binaryIDF64ˢ                                   = binary.ID{0x6a, 0xef, 0x25, 0x73, 0x5b, 0x6a, 0x6b, 0x8e, 0xcd, 0x9c, 0x2f, 0x95, 0x76, 0x64, 0x3d, 0x9d, 0x20, 0x0f, 0x94, 0x39}
 	binaryIDFlushPostBuffer                        = binary.ID{0x26, 0x4e, 0x20, 0xbb, 0xf9, 0x53, 0x75, 0xcd, 0x08, 0x98, 0x6d, 0x82, 0x25, 0x7d, 0xb5, 0xb6, 0x1e, 0xbb, 0xe1, 0xbf}
-	binaryIDFramebufferAttachmentˢ                 = binary.ID{0x96, 0x6f, 0x1f, 0xa4, 0x3c, 0xa5, 0xd5, 0x57, 0xcd, 0xaf, 0xae, 0x97, 0x82, 0xbc, 0xda, 0xeb, 0xae, 0x2c, 0x93, 0xfc}
-	binaryIDFramebufferAttachmentᵖ                 = binary.ID{0x1a, 0x5e, 0x91, 0xc8, 0x94, 0x7c, 0x32, 0x00, 0x6b, 0xe6, 0x9a, 0xb5, 0x4d, 0xd0, 0x33, 0x12, 0x00, 0x60, 0x34, 0x6d}
-	binaryIDFramebufferAttachmentᶜᵖ                = binary.ID{0xfe, 0x86, 0x43, 0x17, 0xab, 0x74, 0xf2, 0x1e, 0xfd, 0x7b, 0xa8, 0xee, 0x7d, 0x25, 0xff, 0xb8, 0xf9, 0x28, 0x3a, 0x67}
 	binaryIDFramebufferIdˢ                         = binary.ID{0xf9, 0xf6, 0x67, 0x3a, 0x17, 0x5d, 0xd4, 0x54, 0x8c, 0xa7, 0x85, 0xc0, 0x9c, 0xa3, 0x75, 0x13, 0x6f, 0x10, 0xdd, 0x79}
 	binaryIDFramebufferIdᵖ                         = binary.ID{0xa8, 0x8f, 0xf4, 0xfd, 0x2d, 0xaa, 0xd4, 0x59, 0x93, 0x48, 0xe6, 0xd8, 0x5d, 0x6b, 0xe8, 0x99, 0x72, 0xfa, 0xac, 0xec}
 	binaryIDFramebufferIdᶜᵖ                        = binary.ID{0x8c, 0xa3, 0xf6, 0xdf, 0xc9, 0x8e, 0x08, 0xea, 0x92, 0x56, 0x02, 0x6e, 0x96, 0x2c, 0x3c, 0xdc, 0x63, 0x7b, 0x3b, 0x50}
 	binaryIDGLXContext                             = binary.ID{0xf7, 0x65, 0x8c, 0x4a, 0x4f, 0xdf, 0x00, 0xcc, 0xb8, 0x97, 0x64, 0x1a, 0xfd, 0x6c, 0x55, 0x30, 0x4a, 0x0f, 0x1e, 0x25}
 	binaryIDGLXDrawable                            = binary.ID{0xe8, 0x9a, 0x82, 0x65, 0x61, 0x45, 0x3f, 0x8b, 0x8b, 0x50, 0xeb, 0x6a, 0x04, 0x78, 0x5c, 0xdc, 0x6b, 0xb5, 0xdc, 0x63}
+	binaryIDGLenumˢ                                = binary.ID{0x82, 0x4a, 0x40, 0x44, 0xe6, 0xe7, 0x0e, 0x84, 0xb2, 0x27, 0x74, 0x13, 0x53, 0xa7, 0x81, 0xcb, 0xfe, 0xf4, 0x6f, 0xbe}
+	binaryIDGLenumᵖ                                = binary.ID{0xe8, 0xaa, 0x82, 0x45, 0xc1, 0x4e, 0x0f, 0x89, 0x14, 0xc8, 0x57, 0x33, 0xbb, 0x84, 0xe6, 0xff, 0x7f, 0x08, 0x33, 0xd3}
+	binaryIDGLenumᶜᵖ                               = binary.ID{0xae, 0x16, 0x11, 0x10, 0x2a, 0x41, 0x1a, 0xda, 0x08, 0x37, 0xbc, 0x46, 0x77, 0xf8, 0xe3, 0xe0, 0xc2, 0xd9, 0xb7, 0x2f}
 	binaryIDGLsync                                 = binary.ID{0x26, 0xf8, 0x18, 0xb0, 0xf5, 0xde, 0x4e, 0xc0, 0x05, 0x45, 0x7a, 0x4f, 0x9d, 0xa1, 0x51, 0xf4, 0x24, 0x30, 0x3e, 0x62}
-	binaryIDGlActiveTexture                        = binary.ID{0x86, 0x43, 0x07, 0xe6, 0xb5, 0x8c, 0x5b, 0x40, 0xd6, 0x5b, 0x88, 0x2a, 0x03, 0x47, 0x22, 0x92, 0x84, 0xd6, 0xd1, 0x71}
+	binaryIDGlActiveTexture                        = binary.ID{0xd4, 0xe8, 0xee, 0x4a, 0x90, 0xf5, 0x2d, 0x73, 0x2d, 0x28, 0x19, 0x31, 0x46, 0x5d, 0x2e, 0xac, 0x53, 0x19, 0x86, 0x54}
 	binaryIDGlAttachShader                         = binary.ID{0x25, 0x23, 0xee, 0xce, 0x3c, 0x37, 0xb6, 0x03, 0x61, 0xc4, 0xb6, 0xbf, 0x06, 0x38, 0xb9, 0x7f, 0x78, 0x85, 0xee, 0x77}
-	binaryIDGlBeginQuery                           = binary.ID{0x42, 0xe9, 0xe3, 0x0b, 0x3b, 0x9a, 0x1f, 0x86, 0x6f, 0x95, 0xc8, 0x3a, 0x15, 0x06, 0xb2, 0x84, 0x6a, 0x95, 0xd2, 0xf4}
-	binaryIDGlBeginQueryEXT                        = binary.ID{0x35, 0x2d, 0x3a, 0x78, 0xe5, 0xf5, 0xbe, 0x4d, 0x23, 0xd9, 0x25, 0xb4, 0x7c, 0xf5, 0x52, 0x5a, 0x7b, 0x3b, 0x51, 0x1b}
+	binaryIDGlBeginQuery                           = binary.ID{0x0a, 0xfd, 0xcf, 0xcb, 0x70, 0x71, 0xa7, 0x04, 0x67, 0xf5, 0x84, 0xb6, 0xb4, 0x77, 0x8f, 0x99, 0x1c, 0x69, 0x87, 0x97}
+	binaryIDGlBeginQueryEXT                        = binary.ID{0xc7, 0xa5, 0xb7, 0x25, 0xdb, 0xcc, 0x9c, 0xfe, 0x43, 0xbb, 0xe6, 0x45, 0xc5, 0xe9, 0x7c, 0x4b, 0x6f, 0x84, 0x69, 0x30}
 	binaryIDGlBindAttribLocation                   = binary.ID{0xab, 0xe2, 0x34, 0x53, 0x26, 0xbc, 0x1d, 0x86, 0xd6, 0x8b, 0xd8, 0xaa, 0xd9, 0x38, 0x2f, 0xca, 0x5a, 0x1d, 0xc0, 0x10}
-	binaryIDGlBindBuffer                           = binary.ID{0xb3, 0xb1, 0xb5, 0x5e, 0xc2, 0xe9, 0x44, 0x46, 0x28, 0x6f, 0x55, 0x56, 0xc0, 0xa9, 0x57, 0xc2, 0x09, 0x9f, 0xbb, 0x04}
-	binaryIDGlBindBufferBase                       = binary.ID{0x1d, 0x75, 0x02, 0x08, 0x0d, 0xd4, 0xce, 0xc8, 0x1f, 0x20, 0x21, 0x6f, 0x73, 0x11, 0xfc, 0x8b, 0x11, 0x48, 0x1c, 0xfd}
-	binaryIDGlBindFramebuffer                      = binary.ID{0x3b, 0x20, 0x3d, 0xca, 0x34, 0xac, 0x3e, 0x7c, 0x8b, 0xd7, 0xe0, 0xd8, 0x23, 0x84, 0xdb, 0x5b, 0xac, 0x43, 0x56, 0xa2}
-	binaryIDGlBindRenderbuffer                     = binary.ID{0xc4, 0xd9, 0xb9, 0x94, 0x42, 0x83, 0xf5, 0x48, 0xd1, 0x68, 0x54, 0x9d, 0x7d, 0x9c, 0x49, 0x6d, 0x0a, 0xcf, 0xdb, 0xa7}
-	binaryIDGlBindTexture                          = binary.ID{0xf9, 0x83, 0xaa, 0x55, 0xc0, 0x52, 0xe8, 0x65, 0xb0, 0x66, 0x1c, 0x7a, 0x33, 0xc9, 0x4a, 0xfd, 0xd1, 0xda, 0xf0, 0x69}
+	binaryIDGlBindBuffer                           = binary.ID{0x77, 0x0e, 0x5d, 0x2a, 0xdd, 0x4c, 0x52, 0xb8, 0x60, 0xdb, 0x05, 0x08, 0x8a, 0x39, 0x2b, 0x58, 0xe4, 0xf7, 0x72, 0xad}
+	binaryIDGlBindBufferBase                       = binary.ID{0xa3, 0x04, 0x63, 0xe0, 0x4d, 0xcc, 0x82, 0x48, 0x75, 0xc1, 0xbe, 0x4b, 0xd2, 0x89, 0xc7, 0xe8, 0xdb, 0xe1, 0x58, 0xbf}
+	binaryIDGlBindFramebuffer                      = binary.ID{0x69, 0x1e, 0xac, 0x99, 0x53, 0x08, 0xb7, 0x91, 0x2d, 0x45, 0xb5, 0x58, 0xa6, 0x56, 0x07, 0xea, 0xba, 0x86, 0x4b, 0x07}
+	binaryIDGlBindRenderbuffer                     = binary.ID{0x62, 0xaa, 0x4d, 0x08, 0x50, 0x1d, 0x16, 0x00, 0x12, 0xe6, 0x25, 0xbd, 0x79, 0xca, 0x02, 0x5c, 0xe2, 0x5b, 0x9a, 0x6f}
+	binaryIDGlBindTexture                          = binary.ID{0x49, 0x18, 0x21, 0x98, 0xab, 0xff, 0xcf, 0x46, 0xfb, 0xd5, 0xd8, 0x31, 0x8d, 0xf3, 0x0e, 0x86, 0x16, 0xa3, 0x0e, 0xb2}
 	binaryIDGlBindVertexArray                      = binary.ID{0x23, 0x61, 0xb4, 0x30, 0xbe, 0x1c, 0x45, 0xfe, 0x34, 0x7d, 0xaf, 0x2f, 0xb9, 0xf3, 0x4e, 0xef, 0xa3, 0x25, 0x61, 0x46}
 	binaryIDGlBindVertexArrayOES                   = binary.ID{0x2c, 0x88, 0xbc, 0x5d, 0x79, 0xf5, 0x34, 0x2a, 0x35, 0xca, 0x72, 0x5c, 0xcf, 0x78, 0xee, 0x4b, 0xe5, 0x5f, 0xc8, 0xb4}
 	binaryIDGlBlendColor                           = binary.ID{0x60, 0xbd, 0x6d, 0x61, 0x66, 0xd6, 0x47, 0xea, 0x9c, 0xa7, 0x16, 0xba, 0xf4, 0x59, 0x00, 0x75, 0xaf, 0x03, 0x5a, 0x2b}
-	binaryIDGlBlendEquation                        = binary.ID{0xe1, 0x81, 0x90, 0xcf, 0x2b, 0xd7, 0x3e, 0xfc, 0xa7, 0x45, 0x6d, 0xd6, 0x60, 0xa3, 0xbd, 0xbd, 0xbe, 0x14, 0xe5, 0x56}
-	binaryIDGlBlendEquationSeparate                = binary.ID{0x8e, 0x3a, 0xa3, 0x46, 0xe9, 0xaa, 0xb3, 0x99, 0xbc, 0x96, 0x61, 0x40, 0xc8, 0x26, 0x4d, 0xb0, 0xb0, 0xe5, 0x34, 0x0f}
-	binaryIDGlBlendFunc                            = binary.ID{0x7a, 0x77, 0xed, 0x51, 0x85, 0x8e, 0x92, 0xde, 0xef, 0x7d, 0x54, 0x4e, 0xf3, 0x38, 0xc1, 0x50, 0x61, 0x2d, 0xc2, 0x10}
-	binaryIDGlBlendFuncSeparate                    = binary.ID{0xe5, 0xce, 0xe6, 0x57, 0x98, 0xac, 0x75, 0x43, 0x39, 0xd4, 0xc6, 0xf2, 0xa9, 0xfc, 0xfa, 0x55, 0xe0, 0xb0, 0x67, 0x33}
-	binaryIDGlBlitFramebuffer                      = binary.ID{0x1d, 0xc8, 0x10, 0x98, 0x4a, 0x04, 0x29, 0x7d, 0xc7, 0xa9, 0xca, 0xd3, 0x36, 0x40, 0xce, 0xfc, 0x3c, 0x98, 0x21, 0xf0}
-	binaryIDGlBufferData                           = binary.ID{0x84, 0x06, 0x18, 0x83, 0xbc, 0x39, 0xac, 0xad, 0x06, 0xb7, 0x9a, 0x64, 0xa2, 0x81, 0x4d, 0x92, 0x3e, 0xf7, 0x11, 0xb0}
-	binaryIDGlBufferSubData                        = binary.ID{0x2e, 0xfd, 0xce, 0x77, 0x7f, 0x67, 0xea, 0x20, 0x0e, 0x5e, 0xb8, 0x62, 0x8d, 0x51, 0xb7, 0xc3, 0x73, 0x54, 0x17, 0x69}
-	binaryIDGlCheckFramebufferStatus               = binary.ID{0x0e, 0x53, 0x9b, 0x07, 0x3d, 0xec, 0x3a, 0x84, 0xf5, 0x1c, 0x0a, 0xfb, 0x31, 0x6a, 0x69, 0x88, 0xed, 0x78, 0x99, 0xba}
-	binaryIDGlClear                                = binary.ID{0x4a, 0x0e, 0x2c, 0xc5, 0x7c, 0xbe, 0xd1, 0xa7, 0xeb, 0x57, 0xa1, 0x35, 0xcd, 0xb5, 0x0a, 0x42, 0x71, 0xfc, 0x13, 0xef}
+	binaryIDGlBlendEquation                        = binary.ID{0x4a, 0xbd, 0xaa, 0x8a, 0x2f, 0x42, 0xdc, 0xff, 0x13, 0x37, 0xfb, 0xb1, 0x2a, 0x25, 0x1d, 0x32, 0x36, 0x31, 0x12, 0xe0}
+	binaryIDGlBlendEquationSeparate                = binary.ID{0x3e, 0x0d, 0xbd, 0xc2, 0x0b, 0x0a, 0x81, 0xd4, 0x58, 0xa4, 0x37, 0x7d, 0x58, 0xdc, 0x4f, 0xcc, 0x5b, 0xa6, 0x09, 0xf4}
+	binaryIDGlBlendFunc                            = binary.ID{0xb8, 0x52, 0x83, 0x14, 0x14, 0xff, 0x0c, 0xad, 0xe0, 0x0f, 0x97, 0xb6, 0x07, 0x6c, 0x80, 0xd4, 0x78, 0xf1, 0xf0, 0x91}
+	binaryIDGlBlendFuncSeparate                    = binary.ID{0x66, 0xd2, 0xff, 0xf8, 0xf7, 0x95, 0xda, 0x57, 0x16, 0xfb, 0x01, 0x2c, 0x5f, 0x29, 0x53, 0xd5, 0xf7, 0xd0, 0xc0, 0xd2}
+	binaryIDGlBlitFramebuffer                      = binary.ID{0x28, 0xab, 0xcb, 0x42, 0xb8, 0x5b, 0x35, 0x11, 0x7a, 0xce, 0xbb, 0xe8, 0x91, 0xe0, 0x82, 0x3c, 0x5f, 0x4c, 0xa3, 0x59}
+	binaryIDGlBufferData                           = binary.ID{0xbb, 0x15, 0x3d, 0x13, 0x7e, 0xa9, 0x13, 0x5f, 0x22, 0xdc, 0xac, 0x65, 0xa5, 0x62, 0x5d, 0xe8, 0xdb, 0x26, 0x9e, 0x2e}
+	binaryIDGlBufferSubData                        = binary.ID{0xce, 0x96, 0x90, 0x01, 0xe2, 0xd8, 0x22, 0x27, 0xb0, 0x51, 0xc4, 0xdc, 0xac, 0x99, 0x4b, 0x54, 0x36, 0x89, 0xf4, 0x15}
+	binaryIDGlCheckFramebufferStatus               = binary.ID{0xba, 0xea, 0x19, 0xe9, 0xb9, 0xea, 0x6b, 0x8f, 0x6f, 0x9d, 0x8b, 0xd3, 0x5a, 0x2f, 0x44, 0xe5, 0x4a, 0xd5, 0x08, 0xcb}
+	binaryIDGlClear                                = binary.ID{0x03, 0xca, 0x54, 0x0f, 0x2b, 0xe1, 0xf4, 0x2c, 0x82, 0xc2, 0x77, 0x8f, 0x5a, 0x56, 0x20, 0x96, 0x0e, 0x9a, 0xff, 0xe0}
 	binaryIDGlClearColor                           = binary.ID{0x3b, 0x2c, 0x7f, 0xdf, 0xca, 0xea, 0x73, 0xe9, 0x9d, 0xaa, 0xb9, 0x94, 0x97, 0xc8, 0xc0, 0x1d, 0x7e, 0x0f, 0xa6, 0xc2}
 	binaryIDGlClearDepthf                          = binary.ID{0x64, 0x57, 0xb0, 0xf4, 0x14, 0x5f, 0xfd, 0x32, 0x8a, 0x6d, 0x28, 0xec, 0xb9, 0x33, 0x25, 0xc9, 0x28, 0x9c, 0x97, 0x04}
 	binaryIDGlClearStencil                         = binary.ID{0x7c, 0xd3, 0x47, 0x40, 0xf0, 0x5d, 0xcc, 0xec, 0x2e, 0x49, 0xea, 0x0d, 0x3e, 0x90, 0xda, 0xf2, 0x95, 0xb8, 0xcb, 0xe2}
@@ -507,13 +499,13 @@ var (
 	binaryIDGlColorMask                            = binary.ID{0x0b, 0x72, 0x03, 0xf6, 0x51, 0x6a, 0xe3, 0xca, 0x0c, 0x5d, 0x08, 0x46, 0xf6, 0x8b, 0x71, 0xdf, 0x67, 0xe5, 0xae, 0xf9}
 	binaryIDGlCompileShader                        = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
 	binaryIDTexturePointer                         = binary.ID{0x34, 0x65, 0x45, 0xf1, 0x2d, 0xda, 0x70, 0xcb, 0x48, 0xb2, 0x29, 0x9b, 0xb3, 0x7f, 0xe4, 0xa6, 0x96, 0xb2, 0x64, 0xe7}
-	binaryIDGlCompressedTexImage2D                 = binary.ID{0x88, 0x11, 0xf4, 0x37, 0xd8, 0xc0, 0xe3, 0x49, 0xc1, 0xc3, 0xdd, 0xcf, 0x50, 0xbf, 0xda, 0x61, 0xfb, 0xb4, 0x85, 0x1c}
-	binaryIDGlCompressedTexSubImage2D              = binary.ID{0x4c, 0xe3, 0x8f, 0x52, 0x17, 0x8b, 0x87, 0xa1, 0x2f, 0xd4, 0x8c, 0xb6, 0xc9, 0xbe, 0x9e, 0xe3, 0x0a, 0xb5, 0xc6, 0x77}
-	binaryIDGlCopyTexImage2D                       = binary.ID{0x47, 0x75, 0x3a, 0x4b, 0x07, 0x67, 0x51, 0x2b, 0x76, 0xd3, 0xab, 0x41, 0x5d, 0xa3, 0x7a, 0xa6, 0x90, 0x28, 0x7f, 0xc3}
-	binaryIDGlCopyTexSubImage2D                    = binary.ID{0x59, 0x01, 0xd8, 0x9f, 0xb0, 0x22, 0x09, 0xff, 0x3a, 0x95, 0x20, 0x68, 0xf8, 0xbf, 0x2c, 0x38, 0x55, 0xac, 0x69, 0x51}
+	binaryIDGlCompressedTexImage2D                 = binary.ID{0x06, 0x5a, 0xab, 0x88, 0xbc, 0x1d, 0x3f, 0xfc, 0x32, 0x50, 0x01, 0x08, 0x67, 0x59, 0xbd, 0xd9, 0x94, 0xec, 0x61, 0x46}
+	binaryIDGlCompressedTexSubImage2D              = binary.ID{0xc1, 0x23, 0x77, 0xf8, 0x92, 0xb0, 0x62, 0x29, 0xe9, 0xf8, 0xc8, 0xe7, 0x76, 0xa7, 0x33, 0xb4, 0x1f, 0x24, 0x6c, 0x27}
+	binaryIDGlCopyTexImage2D                       = binary.ID{0xc8, 0x4b, 0x61, 0xb4, 0x46, 0x2a, 0xd4, 0xa5, 0xb0, 0xb6, 0xf4, 0xfe, 0x3a, 0x74, 0x61, 0x72, 0x1d, 0x1c, 0x06, 0x27}
+	binaryIDGlCopyTexSubImage2D                    = binary.ID{0x5b, 0x88, 0xc4, 0x04, 0x3f, 0x5e, 0xf5, 0x45, 0x32, 0xd7, 0x56, 0x93, 0x83, 0x12, 0x55, 0x6c, 0x87, 0x2b, 0x8b, 0x40}
 	binaryIDGlCreateProgram                        = binary.ID{0x54, 0xa2, 0x4c, 0x27, 0x9f, 0x12, 0x2c, 0xfb, 0x4f, 0x47, 0x54, 0xd8, 0xfa, 0x4b, 0x69, 0xf6, 0x3e, 0x65, 0x36, 0xc2}
-	binaryIDGlCreateShader                         = binary.ID{0xcc, 0x3f, 0x4b, 0x85, 0x80, 0xf2, 0x9f, 0x1d, 0x95, 0x89, 0x7f, 0xcd, 0x2e, 0xd6, 0xc7, 0x9f, 0x0a, 0x4b, 0xbf, 0x01}
-	binaryIDGlCullFace                             = binary.ID{0xc3, 0x30, 0x1b, 0x5a, 0x8a, 0x39, 0xc5, 0x2f, 0x95, 0xba, 0x14, 0x8f, 0xdb, 0xf5, 0x16, 0x1f, 0xcb, 0xb9, 0x0a, 0x87}
+	binaryIDGlCreateShader                         = binary.ID{0x90, 0x0e, 0x1e, 0xd1, 0xfa, 0xbf, 0xa9, 0xae, 0x70, 0x9c, 0xa0, 0xde, 0x0d, 0x4e, 0x72, 0x24, 0x68, 0x5f, 0xff, 0x17}
+	binaryIDGlCullFace                             = binary.ID{0xbb, 0xec, 0x72, 0x6d, 0xbc, 0x88, 0x95, 0xe8, 0xe0, 0x4d, 0x83, 0xd4, 0x75, 0xc2, 0xa1, 0x5d, 0x25, 0xdf, 0x38, 0x1f}
 	binaryIDGlDeleteBuffers                        = binary.ID{0xca, 0xca, 0x15, 0xc4, 0x58, 0x31, 0xc2, 0x68, 0x53, 0x5e, 0x32, 0x8e, 0x2e, 0x2a, 0xd5, 0xcf, 0x8c, 0x17, 0xae, 0x9b}
 	binaryIDGlDeleteFramebuffers                   = binary.ID{0x20, 0xf9, 0xa2, 0xd4, 0x33, 0x28, 0xdc, 0x8e, 0xbc, 0x00, 0x5a, 0x99, 0xa4, 0x13, 0xce, 0x1a, 0x45, 0x90, 0x49, 0x8c}
 	binaryIDGlDeleteProgram                        = binary.ID{0x3d, 0x9f, 0xd2, 0xe3, 0xa2, 0x70, 0x3d, 0x38, 0x17, 0x8a, 0x71, 0xca, 0xbe, 0xb4, 0x8c, 0x97, 0x00, 0x75, 0x9f, 0x2f}
@@ -529,32 +521,32 @@ var (
 	binaryIDVertexArrayIdᶜᵖ                        = binary.ID{0xff, 0x46, 0x4e, 0xb5, 0x6a, 0xae, 0xa6, 0x74, 0x6e, 0x2e, 0x3c, 0x2e, 0x8b, 0x0a, 0x0d, 0xde, 0x56, 0xdd, 0x2a, 0x13}
 	binaryIDGlDeleteVertexArrays                   = binary.ID{0xe9, 0xeb, 0x4b, 0xa7, 0xf5, 0xbe, 0x2c, 0xdd, 0x93, 0x0c, 0xe8, 0x52, 0xda, 0xbd, 0x6c, 0x8a, 0x14, 0xe8, 0x84, 0x5e}
 	binaryIDGlDeleteVertexArraysOES                = binary.ID{0x74, 0xf6, 0xd1, 0x4e, 0xcb, 0x6c, 0x3e, 0x9c, 0x2d, 0xef, 0xa8, 0x65, 0x75, 0x19, 0x4a, 0x2b, 0x56, 0x66, 0x35, 0x59}
-	binaryIDGlDepthFunc                            = binary.ID{0xa7, 0x7e, 0x09, 0x94, 0x5c, 0x20, 0x03, 0xac, 0x59, 0x2f, 0xe6, 0xfd, 0x3e, 0xcc, 0x20, 0x33, 0xa8, 0x09, 0xce, 0x0b}
+	binaryIDGlDepthFunc                            = binary.ID{0xda, 0xba, 0x70, 0x40, 0xec, 0x50, 0xc2, 0x08, 0x20, 0x33, 0xbb, 0x87, 0x31, 0x5e, 0x01, 0x49, 0xdb, 0xf7, 0x8b, 0x60}
 	binaryIDGlDepthMask                            = binary.ID{0xc5, 0x6d, 0x4e, 0x1a, 0x87, 0x06, 0xec, 0xa4, 0xe8, 0xb4, 0x2e, 0x82, 0xff, 0x78, 0x0a, 0x83, 0x79, 0x82, 0xce, 0xf1}
 	binaryIDGlDepthRangef                          = binary.ID{0x78, 0x1b, 0x34, 0xe8, 0x78, 0x4e, 0x71, 0xa9, 0xe2, 0x5f, 0x8c, 0xb7, 0x13, 0x10, 0x6f, 0x22, 0xbe, 0x5c, 0x85, 0x96}
 	binaryIDGlDetachShader                         = binary.ID{0xd1, 0xf8, 0x03, 0x27, 0x0d, 0xc3, 0xbb, 0x7b, 0x58, 0xa8, 0x8a, 0x4d, 0x7b, 0x24, 0x57, 0xa3, 0x00, 0xcf, 0xc4, 0xce}
-	binaryIDGlDisable                              = binary.ID{0x79, 0x79, 0x54, 0xb0, 0x72, 0xfd, 0x82, 0xa8, 0x02, 0x84, 0x02, 0x24, 0xd8, 0x72, 0x8c, 0xf8, 0x1d, 0x1c, 0x4b, 0xc4}
-	binaryIDGlDisableClientState                   = binary.ID{0xba, 0x1b, 0xf5, 0xf6, 0x05, 0x90, 0x12, 0x0a, 0xdd, 0x26, 0x72, 0x28, 0xcf, 0xe0, 0xd8, 0x82, 0xbf, 0x60, 0xd6, 0x21}
+	binaryIDGlDisable                              = binary.ID{0x8b, 0xbf, 0x48, 0xf5, 0x2a, 0xf6, 0x13, 0x86, 0x86, 0xfb, 0x54, 0x21, 0x35, 0x6d, 0x05, 0x45, 0x9b, 0xcb, 0x6e, 0x19}
+	binaryIDGlDisableClientState                   = binary.ID{0x5a, 0xc1, 0xf8, 0x34, 0xd4, 0x8c, 0xf2, 0x1e, 0x49, 0xd8, 0xe4, 0xf7, 0xe7, 0x2a, 0xc2, 0x43, 0x1f, 0xb9, 0xe3, 0xdf}
 	binaryIDGlDisableVertexAttribArray             = binary.ID{0x0e, 0x71, 0x56, 0x6a, 0x0a, 0x8d, 0xc7, 0x6b, 0x76, 0x8f, 0x05, 0xca, 0xeb, 0x95, 0x01, 0x46, 0x44, 0xf6, 0xf3, 0x52}
-	binaryIDGlDiscardFramebufferEXT                = binary.ID{0x70, 0xae, 0x75, 0x3e, 0x8d, 0x47, 0xfa, 0xcd, 0x76, 0x68, 0xa1, 0x25, 0x90, 0x55, 0xb0, 0xd5, 0x30, 0x09, 0x62, 0x27}
-	binaryIDGlDrawArrays                           = binary.ID{0x7f, 0xea, 0xee, 0x65, 0x7d, 0xf9, 0x1f, 0x13, 0xae, 0x78, 0x1b, 0x1c, 0xbb, 0x29, 0x62, 0xe6, 0x6a, 0xd4, 0x67, 0x8f}
+	binaryIDGlDiscardFramebufferEXT                = binary.ID{0xdd, 0x56, 0xfa, 0x7d, 0x2b, 0xd3, 0xa6, 0xca, 0x46, 0x3c, 0x0e, 0x21, 0xdc, 0x94, 0xd9, 0x39, 0x38, 0x66, 0xfc, 0x8d}
+	binaryIDGlDrawArrays                           = binary.ID{0xdf, 0x25, 0x6e, 0x56, 0x43, 0x8b, 0x96, 0x87, 0x23, 0xf8, 0x16, 0x58, 0xcf, 0x52, 0x0a, 0xc8, 0x0d, 0xed, 0x97, 0x0b}
 	binaryIDIndicesPointer                         = binary.ID{0x7e, 0xb8, 0x8d, 0x27, 0x89, 0x30, 0x52, 0x1b, 0x7e, 0x06, 0x18, 0xa0, 0x43, 0x8e, 0x88, 0xaa, 0x0c, 0xe6, 0x72, 0x10}
-	binaryIDGlDrawElements                         = binary.ID{0x18, 0xba, 0xb0, 0xb5, 0x2d, 0xca, 0xbb, 0x23, 0xb0, 0x0a, 0xc4, 0x9f, 0xb7, 0xd5, 0xc2, 0xa7, 0xab, 0x41, 0x6b, 0x21}
-	binaryIDGlEGLImageTargetRenderbufferStorageOES = binary.ID{0x53, 0x5e, 0x99, 0x02, 0x81, 0xd9, 0x2d, 0x36, 0xa1, 0xc6, 0x25, 0xd8, 0x3d, 0x5e, 0xa1, 0xb2, 0xfb, 0xda, 0xb4, 0x8d}
+	binaryIDGlDrawElements                         = binary.ID{0x28, 0xb5, 0xab, 0xbd, 0xb2, 0xf5, 0x81, 0x5a, 0x81, 0x37, 0x89, 0x18, 0x53, 0xda, 0x0b, 0x1a, 0xc4, 0xd1, 0x86, 0xf6}
+	binaryIDGlEGLImageTargetRenderbufferStorageOES = binary.ID{0x89, 0x18, 0xf4, 0x78, 0x67, 0xae, 0xf0, 0x7a, 0x17, 0xe1, 0x5f, 0x64, 0x3f, 0xd4, 0x49, 0xcf, 0x75, 0xc4, 0xeb, 0xde}
 	binaryIDImageOES                               = binary.ID{0x74, 0x38, 0x47, 0x49, 0x56, 0x92, 0x04, 0x39, 0x2b, 0x43, 0xe3, 0x99, 0x13, 0xbd, 0x74, 0x9c, 0x39, 0xd4, 0x80, 0xa4}
-	binaryIDGlEGLImageTargetTexture2DOES           = binary.ID{0x56, 0x39, 0x9e, 0x74, 0x52, 0x6e, 0xa3, 0x41, 0xc9, 0xab, 0x03, 0x18, 0x30, 0x25, 0x3a, 0x08, 0x6d, 0xae, 0xe7, 0x35}
-	binaryIDGlEnable                               = binary.ID{0x48, 0xaa, 0x9b, 0x21, 0xfc, 0xc7, 0xe6, 0x29, 0xf7, 0xcf, 0xda, 0x40, 0x88, 0x59, 0x9c, 0x23, 0xb4, 0xb0, 0xfe, 0x74}
-	binaryIDGlEnableClientState                    = binary.ID{0x82, 0x27, 0xe0, 0xfe, 0xce, 0xe9, 0x44, 0xf2, 0x48, 0x00, 0xc4, 0x51, 0x95, 0x03, 0xe3, 0xe3, 0x97, 0x3e, 0x73, 0x92}
+	binaryIDGlEGLImageTargetTexture2DOES           = binary.ID{0xfa, 0x62, 0xa8, 0x40, 0x04, 0xc0, 0x9b, 0x9b, 0x8e, 0x76, 0xef, 0x5a, 0x04, 0x56, 0xbd, 0x6b, 0x68, 0xe1, 0x2f, 0x68}
+	binaryIDGlEnable                               = binary.ID{0xa2, 0x43, 0xf9, 0xb3, 0x0e, 0xf8, 0x8b, 0x33, 0x2b, 0xc0, 0x38, 0x39, 0x72, 0x7b, 0x53, 0xcb, 0xf0, 0x38, 0x29, 0x01}
+	binaryIDGlEnableClientState                    = binary.ID{0x51, 0x3d, 0x55, 0x4e, 0x08, 0xa2, 0x7b, 0xb5, 0xe7, 0xee, 0x30, 0x11, 0xf2, 0xf2, 0x6e, 0x41, 0x6f, 0xcc, 0x14, 0xfc}
 	binaryIDGlEnableVertexAttribArray              = binary.ID{0xe7, 0x92, 0xb4, 0x99, 0xeb, 0x7e, 0xdc, 0x7a, 0xbb, 0x5b, 0x49, 0x71, 0x82, 0xd3, 0x09, 0x49, 0xb4, 0x0f, 0xfc, 0x66}
-	binaryIDGlEndQuery                             = binary.ID{0xb0, 0xc0, 0x56, 0x8b, 0xa4, 0xc3, 0x2b, 0xde, 0xb0, 0xaa, 0x61, 0xa9, 0x06, 0x63, 0x1b, 0xc6, 0xe2, 0x5b, 0xa0, 0x42}
-	binaryIDGlEndQueryEXT                          = binary.ID{0x12, 0x04, 0x23, 0x20, 0x96, 0x9c, 0x40, 0xb8, 0x80, 0xfe, 0x76, 0x70, 0x48, 0xdf, 0x81, 0x60, 0xb1, 0x23, 0xab, 0x12}
-	binaryIDGlEndTilingQCOM                        = binary.ID{0x51, 0x3b, 0x7d, 0x13, 0xa0, 0xbc, 0xcf, 0x24, 0x84, 0x9a, 0xc3, 0x78, 0x7e, 0x2c, 0xe4, 0x23, 0x6e, 0x23, 0xdd, 0x9a}
+	binaryIDGlEndQuery                             = binary.ID{0x99, 0x4c, 0x6c, 0x09, 0x13, 0xed, 0x42, 0x85, 0x32, 0x5d, 0xea, 0x47, 0x1c, 0xb5, 0xbf, 0x7f, 0x8c, 0xc5, 0x8b, 0xc9}
+	binaryIDGlEndQueryEXT                          = binary.ID{0x7e, 0x0b, 0x88, 0x53, 0xd1, 0x82, 0xd9, 0xa6, 0x6d, 0xb0, 0x06, 0x93, 0x5a, 0x35, 0x78, 0x08, 0xb3, 0xf2, 0xa5, 0x4f}
+	binaryIDGlEndTilingQCOM                        = binary.ID{0x7a, 0x5f, 0xdc, 0x25, 0xf8, 0x3d, 0x05, 0xaf, 0x8f, 0x7b, 0x62, 0xbd, 0x13, 0x0f, 0x28, 0x9f, 0xf8, 0xfc, 0x05, 0x3f}
 	binaryIDGlFenceSync                            = binary.ID{0x30, 0x0f, 0xf7, 0x76, 0x20, 0x97, 0x0a, 0x1b, 0xcb, 0x08, 0xeb, 0x6f, 0x98, 0x6f, 0xfd, 0x5f, 0x88, 0x85, 0x23, 0x2f}
 	binaryIDGlFinish                               = binary.ID{0x62, 0xe9, 0xca, 0xf4, 0x39, 0xd8, 0x39, 0x1e, 0x49, 0x43, 0x1f, 0x40, 0xbb, 0x3d, 0x1b, 0x11, 0xc9, 0x5c, 0x9a, 0xf9}
 	binaryIDGlFlush                                = binary.ID{0x63, 0x83, 0x26, 0x9a, 0x10, 0x6b, 0x68, 0x9f, 0x90, 0x65, 0x54, 0xba, 0x66, 0x25, 0xc8, 0x09, 0x24, 0xe3, 0x21, 0x00}
-	binaryIDGlFramebufferRenderbuffer              = binary.ID{0x08, 0x60, 0xdc, 0xd3, 0x3d, 0xe4, 0xdf, 0xea, 0xb9, 0x9c, 0xa5, 0xd2, 0x51, 0x4b, 0x35, 0x5a, 0xf0, 0xc7, 0xd6, 0xe2}
-	binaryIDGlFramebufferTexture2D                 = binary.ID{0x10, 0x30, 0x07, 0x4c, 0xd1, 0xfc, 0x8a, 0xb5, 0xa6, 0x3d, 0x8f, 0x3d, 0xc4, 0x89, 0x04, 0x9d, 0x45, 0x46, 0x4f, 0x08}
-	binaryIDGlFrontFace                            = binary.ID{0x1e, 0x28, 0xc7, 0x47, 0x97, 0xc9, 0x1c, 0x7f, 0x57, 0xde, 0x5e, 0x6f, 0xce, 0x21, 0x17, 0xf4, 0xb0, 0xd8, 0xa9, 0x44}
+	binaryIDGlFramebufferRenderbuffer              = binary.ID{0x84, 0x49, 0x2e, 0xdd, 0x19, 0x60, 0xcf, 0xf5, 0x05, 0xce, 0xd4, 0xf8, 0x5e, 0x70, 0x38, 0x4e, 0xdb, 0x6f, 0xf4, 0x46}
+	binaryIDGlFramebufferTexture2D                 = binary.ID{0x15, 0xc2, 0x34, 0x65, 0xd3, 0x62, 0xe8, 0xad, 0x37, 0x71, 0xec, 0xe6, 0x92, 0x08, 0x44, 0x02, 0xb4, 0xaf, 0x5f, 0x38}
+	binaryIDGlFrontFace                            = binary.ID{0x6c, 0xf1, 0xae, 0xbd, 0xd4, 0xb5, 0x64, 0xcb, 0xea, 0x37, 0x0e, 0x83, 0x70, 0xe1, 0x0b, 0xe1, 0x88, 0x7e, 0x76, 0xe6}
 	binaryIDGlGenBuffers                           = binary.ID{0x32, 0x53, 0x4b, 0x2a, 0xe7, 0xc6, 0x48, 0x67, 0xd2, 0x7b, 0x7f, 0x3b, 0x84, 0xa6, 0x7c, 0x78, 0x84, 0x3d, 0xf0, 0xdf}
 	binaryIDGlGenFramebuffers                      = binary.ID{0x1f, 0xc4, 0xb4, 0x78, 0xb4, 0x9a, 0xa1, 0x24, 0x35, 0x98, 0x6f, 0x28, 0x1b, 0xbb, 0xea, 0x8f, 0xec, 0x0b, 0xe7, 0xb6}
 	binaryIDQueryIdᵖ                               = binary.ID{0xeb, 0x17, 0x82, 0xad, 0x2a, 0x8d, 0x90, 0x53, 0x42, 0x82, 0x61, 0x49, 0x70, 0xb2, 0xde, 0x5e, 0x4a, 0xce, 0x10, 0x9a}
@@ -567,57 +559,55 @@ var (
 	binaryIDVertexArrayIdᵖ                         = binary.ID{0x06, 0x33, 0x83, 0xad, 0xcf, 0x1c, 0x8f, 0x00, 0x5d, 0x52, 0x0a, 0xc4, 0x29, 0xca, 0xe3, 0x06, 0x6a, 0x5e, 0x71, 0x5f}
 	binaryIDGlGenVertexArrays                      = binary.ID{0xd2, 0x6e, 0x78, 0x1d, 0x4f, 0x80, 0xa0, 0x4b, 0x65, 0x54, 0x54, 0x08, 0x63, 0x7c, 0x73, 0x1b, 0x70, 0xdc, 0x31, 0xb5}
 	binaryIDGlGenVertexArraysOES                   = binary.ID{0xe0, 0x5b, 0x77, 0xc1, 0x67, 0x6d, 0xa5, 0xa2, 0xc7, 0x21, 0x8c, 0x2b, 0x0c, 0xd5, 0xab, 0x25, 0x91, 0xb2, 0x4d, 0x9c}
-	binaryIDGlGenerateMipmap                       = binary.ID{0x42, 0xea, 0x5b, 0xaa, 0xcc, 0x26, 0x78, 0xf5, 0xf0, 0x10, 0x98, 0x9f, 0xa8, 0xb6, 0x7b, 0xae, 0xf8, 0xbd, 0x42, 0x3e}
+	binaryIDGlGenerateMipmap                       = binary.ID{0x57, 0x53, 0x3c, 0x04, 0x55, 0x37, 0x78, 0xfa, 0x25, 0x8d, 0x25, 0x02, 0xde, 0x9c, 0x0c, 0xaf, 0x9a, 0xd8, 0x38, 0x31}
 	binaryIDS32ᵖ                                   = binary.ID{0xac, 0x84, 0x1f, 0xd1, 0xb4, 0x53, 0xd7, 0x22, 0x81, 0xfc, 0xae, 0x94, 0x33, 0xc5, 0x1b, 0xa1, 0xa8, 0xa1, 0x30, 0xd4}
-	binaryIDShaderAttribTypeᵖ                      = binary.ID{0x2e, 0xb0, 0xf4, 0x06, 0x40, 0xe7, 0x30, 0xf4, 0xea, 0x13, 0x18, 0xff, 0xf0, 0xba, 0xed, 0x70, 0x8e, 0xed, 0x13, 0x9a}
-	binaryIDGlGetActiveAttrib                      = binary.ID{0xa6, 0x71, 0x22, 0x04, 0xa2, 0x0e, 0x8a, 0x5b, 0x9e, 0x05, 0x76, 0x4a, 0x54, 0x82, 0x91, 0xce, 0xfb, 0x76, 0x4b, 0x97}
-	binaryIDShaderUniformTypeᵖ                     = binary.ID{0xe6, 0xcf, 0x8f, 0x73, 0xe4, 0x9e, 0x21, 0xc2, 0x68, 0xbb, 0x56, 0xfe, 0x27, 0x04, 0x5d, 0xcd, 0xff, 0x5c, 0xa0, 0x68}
-	binaryIDGlGetActiveUniform                     = binary.ID{0x6e, 0xac, 0x3c, 0x92, 0xee, 0x19, 0x7e, 0x39, 0x44, 0x04, 0x5d, 0xec, 0xb0, 0xa2, 0xdc, 0x94, 0x6e, 0x5b, 0x05, 0x3c}
+	binaryIDGlGetActiveAttrib                      = binary.ID{0x1e, 0x55, 0xb4, 0x42, 0x49, 0xcf, 0xe6, 0xb9, 0x80, 0xd6, 0xde, 0x25, 0xea, 0xa0, 0x42, 0x85, 0x30, 0xda, 0xd4, 0x19}
+	binaryIDGlGetActiveUniform                     = binary.ID{0xf6, 0x23, 0x15, 0x70, 0xf7, 0x2a, 0xae, 0xdd, 0xbf, 0x33, 0xee, 0x44, 0xde, 0x15, 0x8e, 0x3c, 0xc2, 0x5a, 0xb4, 0xe2}
 	binaryIDGlGetActiveUniformBlockName            = binary.ID{0x8c, 0x0b, 0xa2, 0x61, 0x99, 0xb3, 0xf4, 0x5f, 0x45, 0xea, 0x15, 0xca, 0x29, 0x4b, 0x04, 0xcf, 0x25, 0xde, 0xc2, 0xbc}
-	binaryIDGlGetActiveUniformBlockiv              = binary.ID{0x61, 0xa9, 0x41, 0x52, 0x0b, 0xb2, 0x9f, 0x02, 0xcc, 0x2f, 0xf0, 0xfb, 0x75, 0x44, 0xdb, 0x1e, 0x63, 0x59, 0x96, 0x25}
+	binaryIDGlGetActiveUniformBlockiv              = binary.ID{0xaf, 0x89, 0xee, 0x96, 0x56, 0xe8, 0x58, 0xeb, 0xa5, 0xdb, 0xe1, 0x0d, 0x60, 0xad, 0xd4, 0xb8, 0x1b, 0xe3, 0xa0, 0xb6}
 	binaryIDU32ᵖ                                   = binary.ID{0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf}
-	binaryIDGlGetActiveUniformsiv                  = binary.ID{0xbb, 0x92, 0x01, 0x42, 0x71, 0x55, 0x77, 0x57, 0x88, 0x3b, 0x27, 0x92, 0x9c, 0x05, 0x62, 0x6f, 0x4a, 0xca, 0xfd, 0x41}
+	binaryIDGlGetActiveUniformsiv                  = binary.ID{0x7f, 0xee, 0x95, 0x10, 0xf5, 0x5e, 0xd1, 0x25, 0x4a, 0x5a, 0xd7, 0x39, 0x33, 0x4d, 0x0a, 0x16, 0x85, 0x8a, 0x22, 0x09}
 	binaryIDShaderIdᵖ                              = binary.ID{0x08, 0x71, 0x0c, 0xb0, 0x87, 0xa9, 0x21, 0x1b, 0xe0, 0x32, 0x0c, 0x9f, 0x24, 0xe3, 0xfb, 0x8e, 0xd5, 0x60, 0x80, 0x1d}
 	binaryIDGlGetAttachedShaders                   = binary.ID{0xc3, 0xf9, 0x1d, 0xd0, 0xcc, 0x89, 0x4c, 0x62, 0xad, 0x92, 0x44, 0x25, 0x6d, 0x63, 0x8b, 0x92, 0x1a, 0x01, 0xeb, 0xb4}
 	binaryIDGlGetAttribLocation                    = binary.ID{0x31, 0x3d, 0x4f, 0xb6, 0x80, 0x95, 0xce, 0x6a, 0x65, 0x25, 0x0a, 0xb5, 0xff, 0x15, 0x44, 0x1d, 0x3e, 0x91, 0xc7, 0xef}
-	binaryIDGlGetBooleanv                          = binary.ID{0xbf, 0x1d, 0xb7, 0x81, 0xa0, 0x1f, 0x6b, 0x03, 0x21, 0xe3, 0x51, 0x7c, 0x73, 0x4f, 0xf9, 0x9a, 0x62, 0x0a, 0xfd, 0xa4}
-	binaryIDGlGetBufferParameteriv                 = binary.ID{0xc3, 0xad, 0xb9, 0xd4, 0x86, 0x78, 0x8e, 0x05, 0x73, 0x0d, 0x21, 0x3e, 0x98, 0xb8, 0x6c, 0x68, 0x13, 0x06, 0xb4, 0x56}
-	binaryIDGlGetError                             = binary.ID{0x32, 0xd4, 0xe6, 0xb7, 0x2f, 0x3a, 0x06, 0xc9, 0xe3, 0x7c, 0x56, 0x38, 0x38, 0x95, 0xa4, 0x28, 0x38, 0x57, 0x2c, 0x9e}
-	binaryIDGlGetFloatv                            = binary.ID{0x3b, 0xdb, 0xfd, 0xab, 0xa4, 0xad, 0x98, 0xf5, 0x0d, 0x91, 0xdb, 0xe3, 0x45, 0xe3, 0x71, 0xf1, 0x6e, 0xd1, 0x59, 0x11}
-	binaryIDGlGetFramebufferAttachmentParameteriv  = binary.ID{0xea, 0x0f, 0x37, 0x28, 0xa8, 0x59, 0x9e, 0x90, 0x50, 0x4a, 0xa4, 0x6d, 0xa2, 0xe3, 0x43, 0xf2, 0xd2, 0x6d, 0x09, 0x40}
-	binaryIDGlGetGraphicsResetStatusEXT            = binary.ID{0x05, 0xbe, 0x22, 0x49, 0x59, 0x3a, 0x7c, 0x01, 0xa0, 0x5c, 0x5c, 0xf3, 0x08, 0xa2, 0xc6, 0xfa, 0x87, 0x3e, 0xdd, 0x53}
-	binaryIDGlGetIntegerv                          = binary.ID{0x93, 0xaa, 0x39, 0x40, 0xc7, 0xf4, 0x20, 0x49, 0x7b, 0x61, 0xfc, 0x8f, 0x9d, 0x2d, 0xe9, 0x9c, 0x8c, 0xb3, 0xc7, 0x62}
+	binaryIDGlGetBooleanv                          = binary.ID{0x97, 0xc0, 0xb6, 0x7f, 0x15, 0xec, 0xa2, 0x39, 0x64, 0x28, 0x0a, 0xac, 0x21, 0xda, 0xc1, 0x48, 0x10, 0x1b, 0x0d, 0x99}
+	binaryIDGlGetBufferParameteriv                 = binary.ID{0xfd, 0xec, 0xcc, 0x5d, 0xf2, 0xf1, 0xa7, 0x32, 0xac, 0x4e, 0x5d, 0x82, 0x15, 0x76, 0x1b, 0x22, 0x5f, 0xba, 0x9c, 0x88}
+	binaryIDGlGetError                             = binary.ID{0x1e, 0x4f, 0x5f, 0x38, 0x56, 0xec, 0xc9, 0x35, 0x5b, 0xfb, 0xb0, 0x61, 0x09, 0xfa, 0x63, 0x69, 0xe0, 0x7a, 0x2a, 0x8c}
+	binaryIDGlGetFloatv                            = binary.ID{0x83, 0x9d, 0x25, 0x62, 0xd4, 0x60, 0xdd, 0x47, 0xfa, 0x00, 0x7f, 0xde, 0x7f, 0x30, 0x6f, 0xa2, 0x04, 0x55, 0x42, 0x5e}
+	binaryIDGlGetFramebufferAttachmentParameteriv  = binary.ID{0x09, 0xe1, 0x7a, 0x8d, 0x2c, 0xa4, 0x4c, 0xcf, 0x93, 0xcc, 0x38, 0xbc, 0xd6, 0x39, 0xa6, 0xfa, 0xb1, 0x88, 0xa2, 0x39}
+	binaryIDGlGetGraphicsResetStatusEXT            = binary.ID{0x8d, 0x3f, 0x9e, 0x9d, 0x27, 0xd7, 0x66, 0xad, 0x95, 0x1f, 0xf9, 0x73, 0x27, 0xd8, 0x87, 0x5b, 0x64, 0xba, 0xc5, 0xb7}
+	binaryIDGlGetIntegerv                          = binary.ID{0x97, 0x1b, 0x43, 0x9c, 0x7d, 0xa5, 0xcb, 0xef, 0x24, 0x3b, 0x8c, 0x3b, 0x07, 0x26, 0x1f, 0x30, 0x91, 0xb9, 0x3d, 0x30}
 	binaryIDGlGetProgramBinaryOES                  = binary.ID{0x41, 0xe1, 0x61, 0x7a, 0xa2, 0x17, 0x6f, 0x2f, 0xd4, 0xaf, 0x47, 0x68, 0xce, 0x51, 0x64, 0x3a, 0x97, 0xbb, 0xf3, 0xec}
 	binaryIDGlGetProgramInfoLog                    = binary.ID{0x7f, 0xd8, 0xe7, 0x8b, 0xf6, 0xa4, 0x9e, 0xe4, 0xcd, 0xbf, 0x72, 0x0d, 0xc9, 0xc0, 0xdc, 0xb0, 0x5e, 0x3c, 0x52, 0x21}
-	binaryIDGlGetProgramiv                         = binary.ID{0x0c, 0x30, 0x8a, 0xb8, 0x12, 0x64, 0xb2, 0x25, 0xfe, 0x4c, 0x3e, 0xaf, 0x2c, 0x0d, 0x05, 0x67, 0x8f, 0x95, 0xb2, 0x41}
+	binaryIDGlGetProgramiv                         = binary.ID{0x7f, 0x64, 0x7d, 0x2f, 0x09, 0x1d, 0x32, 0x6e, 0x5f, 0xe4, 0x64, 0x72, 0x63, 0x85, 0x0c, 0xee, 0x7e, 0x0d, 0xe0, 0xf6}
 	binaryIDS64ᵖ                                   = binary.ID{0xe9, 0x1c, 0x9a, 0xfd, 0xd1, 0xe3, 0x35, 0x1c, 0x32, 0xfd, 0x2c, 0x3f, 0xbc, 0x25, 0xaa, 0xbd, 0xcf, 0x3e, 0x7f, 0xbb}
-	binaryIDGlGetQueryObjecti64v                   = binary.ID{0x64, 0xaa, 0xa7, 0x71, 0xe5, 0xb1, 0x66, 0x92, 0x4b, 0xe7, 0x40, 0x95, 0x8d, 0xa8, 0xa7, 0x4f, 0x9a, 0x6b, 0xcc, 0xc8}
-	binaryIDGlGetQueryObjecti64vEXT                = binary.ID{0x4d, 0xad, 0xff, 0x92, 0xcd, 0xd0, 0xac, 0xe7, 0x0e, 0x9f, 0xa7, 0x7b, 0x91, 0x31, 0xfb, 0x37, 0xea, 0x2c, 0xbd, 0x9c}
-	binaryIDGlGetQueryObjectivEXT                  = binary.ID{0x83, 0xd8, 0xfe, 0x13, 0x5b, 0xce, 0x42, 0x6f, 0x82, 0xbc, 0x0b, 0xfe, 0x33, 0xae, 0xd6, 0x73, 0x87, 0xe4, 0x95, 0xad}
+	binaryIDGlGetQueryObjecti64v                   = binary.ID{0xfe, 0x93, 0xaa, 0x70, 0x07, 0x88, 0xa9, 0xfc, 0x4d, 0x31, 0xd0, 0x47, 0x68, 0xb8, 0x85, 0xf8, 0x0a, 0x78, 0x1d, 0x6c}
+	binaryIDGlGetQueryObjecti64vEXT                = binary.ID{0x9f, 0xd8, 0xfd, 0xf2, 0xd0, 0xb7, 0x4e, 0x1c, 0x4a, 0x6f, 0xc1, 0x4f, 0x6c, 0x33, 0xe0, 0xf7, 0xc9, 0x5c, 0x97, 0x37}
+	binaryIDGlGetQueryObjectivEXT                  = binary.ID{0x37, 0xfd, 0x68, 0xf1, 0x7a, 0xed, 0x43, 0xf1, 0xad, 0xc7, 0xf3, 0x6c, 0x18, 0x67, 0xa8, 0x19, 0xdf, 0xab, 0xc4, 0xa5}
 	binaryIDU64ᵖ                                   = binary.ID{0x00, 0x08, 0x7a, 0x1a, 0x40, 0x52, 0x66, 0xee, 0xbe, 0xb5, 0x0a, 0x76, 0xc8, 0xf9, 0x4a, 0x7d, 0x20, 0xd0, 0x0b, 0x8d}
-	binaryIDGlGetQueryObjectui64v                  = binary.ID{0xcb, 0xd2, 0x0b, 0x21, 0x98, 0x10, 0x2c, 0x9c, 0x98, 0xbb, 0x71, 0x6e, 0xc2, 0x2c, 0x5b, 0x24, 0x3a, 0xc2, 0x11, 0x66}
-	binaryIDGlGetQueryObjectui64vEXT               = binary.ID{0x5d, 0x7e, 0xa2, 0xff, 0x4b, 0x0c, 0x64, 0x67, 0xbf, 0x8e, 0xe0, 0x4c, 0x78, 0xd5, 0x6c, 0xb3, 0xf9, 0xc1, 0x47, 0xe5}
-	binaryIDGlGetQueryObjectuiv                    = binary.ID{0xac, 0x6d, 0xbf, 0x24, 0x6d, 0xf4, 0xd4, 0x03, 0x1b, 0x6f, 0xfe, 0xc4, 0xa0, 0xa7, 0xf7, 0x21, 0xe9, 0x73, 0x96, 0x06}
-	binaryIDGlGetQueryObjectuivEXT                 = binary.ID{0xa5, 0xa4, 0x75, 0x56, 0xa4, 0x9f, 0xc4, 0x89, 0xa3, 0xd6, 0x58, 0x74, 0xfc, 0xd1, 0x52, 0xd7, 0xd0, 0x3e, 0x83, 0x66}
-	binaryIDGlGetQueryiv                           = binary.ID{0x0e, 0x7c, 0xf0, 0x23, 0x65, 0x05, 0x0c, 0x47, 0x0f, 0xb0, 0xa1, 0xb5, 0x1b, 0x6a, 0x28, 0x1e, 0x11, 0x0b, 0x6b, 0xbc}
-	binaryIDGlGetQueryivEXT                        = binary.ID{0xc5, 0x52, 0xdf, 0xab, 0xb0, 0x07, 0x60, 0x2b, 0x5e, 0x73, 0xc6, 0x30, 0x5b, 0xd4, 0xda, 0x9b, 0xf6, 0xb9, 0x5b, 0x8c}
-	binaryIDGlGetRenderbufferParameteriv           = binary.ID{0x87, 0xc3, 0x18, 0x1d, 0xdb, 0x8c, 0x12, 0xc5, 0x99, 0x36, 0x7d, 0x42, 0xcf, 0x94, 0xfe, 0xa9, 0x7b, 0x98, 0xfe, 0xad}
+	binaryIDGlGetQueryObjectui64v                  = binary.ID{0x66, 0x29, 0x57, 0xdf, 0xbf, 0xaf, 0x4b, 0x28, 0xeb, 0xef, 0x0e, 0x6d, 0x2a, 0xae, 0xc8, 0x44, 0x4c, 0x9e, 0x00, 0xfe}
+	binaryIDGlGetQueryObjectui64vEXT               = binary.ID{0xfa, 0xc8, 0xbf, 0x95, 0x21, 0x81, 0xa2, 0x6d, 0x8e, 0x10, 0x9b, 0xab, 0x7f, 0x10, 0x21, 0x9c, 0xff, 0xbb, 0x61, 0x44}
+	binaryIDGlGetQueryObjectuiv                    = binary.ID{0xd6, 0xc9, 0x55, 0xda, 0x30, 0xca, 0x5b, 0x6b, 0x76, 0x3b, 0x21, 0x6d, 0x34, 0x01, 0x26, 0x7d, 0xcc, 0x7f, 0xd9, 0xe6}
+	binaryIDGlGetQueryObjectuivEXT                 = binary.ID{0xbd, 0xce, 0x69, 0xff, 0xb0, 0xbb, 0xae, 0x83, 0xef, 0xb9, 0x07, 0xc8, 0x43, 0x1b, 0xd9, 0x80, 0x03, 0xab, 0xe9, 0x15}
+	binaryIDGlGetQueryiv                           = binary.ID{0x69, 0x49, 0x4e, 0x05, 0x4a, 0xfb, 0x04, 0x8d, 0x26, 0x75, 0xaa, 0x19, 0x1d, 0x2c, 0x77, 0x4f, 0x21, 0x3c, 0x23, 0xd7}
+	binaryIDGlGetQueryivEXT                        = binary.ID{0x8a, 0xc8, 0xde, 0x66, 0x92, 0x00, 0x2a, 0x28, 0xcf, 0x6b, 0x7a, 0x68, 0x99, 0x82, 0x72, 0x8d, 0x2f, 0x2b, 0xd7, 0xe2}
+	binaryIDGlGetRenderbufferParameteriv           = binary.ID{0x98, 0x5e, 0xb4, 0x32, 0x3c, 0x5a, 0xd5, 0xd6, 0xf7, 0x29, 0x91, 0x9c, 0x5f, 0x77, 0x79, 0x60, 0x79, 0xf9, 0x25, 0xf8}
 	binaryIDGlGetShaderInfoLog                     = binary.ID{0x92, 0xca, 0x29, 0xdb, 0xad, 0x52, 0xb1, 0x8f, 0x63, 0xc1, 0xf8, 0x50, 0x9b, 0xd5, 0x22, 0x71, 0x9f, 0x9c, 0xc3, 0x39}
-	binaryIDGlGetShaderPrecisionFormat             = binary.ID{0x5c, 0x87, 0x98, 0x4b, 0x36, 0xe8, 0xc8, 0xff, 0x5f, 0x0d, 0x3c, 0xf7, 0xb0, 0xf6, 0x70, 0x01, 0x07, 0x6c, 0xc2, 0x26}
+	binaryIDGlGetShaderPrecisionFormat             = binary.ID{0xd8, 0x5a, 0xf9, 0x47, 0x25, 0x55, 0xc5, 0xc7, 0x88, 0xd2, 0xea, 0xfe, 0xd3, 0xb5, 0xe5, 0xf8, 0x4e, 0x9a, 0x34, 0x29}
 	binaryIDGlGetShaderSource                      = binary.ID{0x40, 0x17, 0xc7, 0x81, 0x4a, 0xc0, 0x92, 0x81, 0x0b, 0xc7, 0x7e, 0x46, 0x29, 0x90, 0x9a, 0x5f, 0xe8, 0xfc, 0x2c, 0xf4}
-	binaryIDGlGetShaderiv                          = binary.ID{0x39, 0x6e, 0x5d, 0xe0, 0x98, 0x44, 0x05, 0xb2, 0x40, 0xc0, 0xbf, 0x6f, 0xec, 0x6b, 0x96, 0x01, 0x70, 0x0c, 0x3b, 0xe9}
-	binaryIDGlGetString                            = binary.ID{0x34, 0xd2, 0x3d, 0x5f, 0xc4, 0x6e, 0x47, 0xee, 0x9c, 0x37, 0xee, 0x7c, 0x92, 0x80, 0x2d, 0x19, 0xdf, 0xbf, 0x2c, 0x06}
-	binaryIDGlGetTexParameterfv                    = binary.ID{0x99, 0x59, 0xca, 0xef, 0x93, 0x7d, 0x77, 0x73, 0x9e, 0x0d, 0x03, 0xa1, 0x9a, 0x1b, 0xbd, 0xea, 0x0f, 0x0e, 0x56, 0xb3}
-	binaryIDGlGetTexParameteriv                    = binary.ID{0xc3, 0x09, 0xc1, 0xba, 0x0d, 0x1b, 0xdb, 0xb2, 0x65, 0x4a, 0xbd, 0x90, 0x70, 0x65, 0x79, 0x08, 0x93, 0x8f, 0x33, 0x28}
+	binaryIDGlGetShaderiv                          = binary.ID{0x5c, 0x86, 0x6b, 0x6e, 0xd5, 0x6b, 0x0c, 0xe8, 0x0f, 0x82, 0xae, 0xde, 0x58, 0xeb, 0xbb, 0xa2, 0xe3, 0xfd, 0xe6, 0x3c}
+	binaryIDGlGetString                            = binary.ID{0x59, 0x2c, 0x15, 0xc4, 0xc4, 0x5d, 0xd8, 0x65, 0xba, 0x29, 0xb3, 0x39, 0x10, 0xff, 0xb5, 0x43, 0xa1, 0x4e, 0x0e, 0x6f}
+	binaryIDGlGetTexParameterfv                    = binary.ID{0xa8, 0xf6, 0x75, 0x47, 0x9b, 0xf4, 0x0a, 0xf9, 0x52, 0xc2, 0x36, 0x00, 0x0d, 0x70, 0xbd, 0xfe, 0x1b, 0x13, 0xd2, 0x24}
+	binaryIDGlGetTexParameteriv                    = binary.ID{0x8b, 0x4f, 0x00, 0x2e, 0xd9, 0x37, 0x2e, 0xf2, 0x84, 0x99, 0x3a, 0x90, 0x8a, 0x72, 0x60, 0x26, 0x69, 0xae, 0x5d, 0xca}
 	binaryIDGlGetUniformLocation                   = binary.ID{0xd9, 0x4d, 0x1e, 0x3c, 0xe5, 0x99, 0xab, 0xf3, 0x3c, 0x4e, 0x27, 0xad, 0xd6, 0xd0, 0x7c, 0x6d, 0xb9, 0x4b, 0x2d, 0xc4}
 	binaryIDGlGetUniformfv                         = binary.ID{0xfd, 0x52, 0x9a, 0xf2, 0xfd, 0xc4, 0xe1, 0x15, 0xfd, 0x14, 0x8b, 0xab, 0x9b, 0xa5, 0x6b, 0x01, 0xb0, 0x62, 0x5e, 0xfb}
 	binaryIDS32ᶜᵖ                                  = binary.ID{0xe5, 0x75, 0xbd, 0x22, 0xa3, 0xcc, 0x6c, 0xc6, 0xf4, 0x71, 0x96, 0xdf, 0xf5, 0xa6, 0x9f, 0x89, 0xc5, 0x79, 0x3a, 0x7a}
 	binaryIDGlGetUniformiv                         = binary.ID{0x47, 0xad, 0xe1, 0x62, 0x21, 0xc2, 0xec, 0xf6, 0x68, 0x2c, 0x75, 0xa7, 0x63, 0x3d, 0x82, 0xde, 0xa3, 0x23, 0x92, 0xdb}
-	binaryIDGlHint                                 = binary.ID{0x48, 0xaf, 0x97, 0x70, 0xba, 0x4b, 0xbd, 0x3a, 0x72, 0xc8, 0xd6, 0x25, 0x05, 0x00, 0x7e, 0x86, 0x38, 0x90, 0xd7, 0xff}
+	binaryIDGlHint                                 = binary.ID{0x99, 0x8a, 0x57, 0x73, 0xe0, 0x3c, 0x8c, 0x3a, 0x80, 0xb7, 0x02, 0xcc, 0xf5, 0x66, 0x58, 0x95, 0x5a, 0xf5, 0x02, 0x81}
 	binaryIDGlInsertEventMarkerEXT                 = binary.ID{0xe1, 0x4b, 0x4f, 0x0b, 0x55, 0x5a, 0x51, 0x47, 0xff, 0xb8, 0x3e, 0xd9, 0x68, 0xd2, 0x80, 0x26, 0x7c, 0x18, 0x58, 0xf1}
-	binaryIDGlInvalidateFramebuffer                = binary.ID{0x29, 0x42, 0x05, 0x0d, 0x53, 0xcf, 0x6f, 0x08, 0x28, 0x80, 0x4e, 0xd5, 0xca, 0xb7, 0x90, 0xb0, 0x0f, 0xb2, 0xd2, 0x0a}
+	binaryIDGlInvalidateFramebuffer                = binary.ID{0xa7, 0x5b, 0xac, 0x05, 0xea, 0xad, 0xad, 0x6f, 0xb4, 0xa3, 0x68, 0xed, 0x66, 0x62, 0x53, 0x3e, 0xc6, 0x29, 0x61, 0x17}
 	binaryIDGlIsBuffer                             = binary.ID{0x25, 0xf9, 0x53, 0xf4, 0x60, 0x55, 0xc5, 0xfe, 0x8a, 0x0f, 0xd4, 0x1a, 0x88, 0xe7, 0xf4, 0x4c, 0xcc, 0x81, 0x3b, 0xb7}
-	binaryIDGlIsEnabled                            = binary.ID{0x49, 0x3f, 0xc2, 0x32, 0x2c, 0x37, 0x0c, 0x4c, 0xe9, 0x45, 0x95, 0x51, 0x1c, 0x46, 0x31, 0x20, 0x8d, 0xc2, 0xb6, 0x15}
+	binaryIDGlIsEnabled                            = binary.ID{0x1e, 0x76, 0x5e, 0x33, 0x18, 0x3f, 0x49, 0x72, 0x76, 0x25, 0x26, 0xfc, 0x02, 0xba, 0xec, 0x57, 0xbf, 0xcd, 0x0e, 0xa6}
 	binaryIDGlIsFramebuffer                        = binary.ID{0x0b, 0xdd, 0x4e, 0xe8, 0x9f, 0x9d, 0xcc, 0xd2, 0xea, 0x1a, 0xa6, 0xc5, 0xef, 0x65, 0x2e, 0x02, 0x80, 0xe0, 0xc4, 0x63}
 	binaryIDGlIsProgram                            = binary.ID{0x62, 0xbd, 0xde, 0xd6, 0x51, 0x60, 0x50, 0x3e, 0x3d, 0x54, 0x0a, 0xec, 0xb2, 0xcd, 0xf5, 0x54, 0xfb, 0x79, 0x3c, 0xdd}
 	binaryIDGlIsQuery                              = binary.ID{0x3b, 0x6f, 0x09, 0x4b, 0x89, 0xdc, 0x6b, 0x2f, 0x74, 0xd6, 0x51, 0x3b, 0x3f, 0xfe, 0x6d, 0x60, 0x72, 0x60, 0x61, 0xe2}
@@ -628,38 +618,38 @@ var (
 	binaryIDGlIsVertexArrayOES                     = binary.ID{0xab, 0xa3, 0xb5, 0xac, 0x9c, 0x32, 0x14, 0xdb, 0x82, 0x00, 0xa7, 0xbd, 0xe0, 0xb2, 0x40, 0x64, 0xac, 0x30, 0xb8, 0xc7}
 	binaryIDGlLineWidth                            = binary.ID{0x52, 0x6f, 0x5c, 0x5b, 0xcb, 0xf6, 0xfb, 0xfb, 0x29, 0x3d, 0x64, 0x86, 0x07, 0x05, 0x67, 0x26, 0xba, 0x3c, 0xb8, 0xfb}
 	binaryIDGlLinkProgram                          = binary.ID{0x17, 0xf0, 0x30, 0xba, 0x15, 0x5a, 0xf7, 0x20, 0x04, 0x04, 0xea, 0xd7, 0xc3, 0xba, 0x6a, 0x4c, 0x9e, 0x0d, 0x96, 0x41}
-	binaryIDGlMapBufferRange                       = binary.ID{0xc0, 0x75, 0x4f, 0x53, 0xa9, 0x4a, 0x24, 0x26, 0x84, 0x2f, 0xfb, 0xf0, 0x64, 0xd3, 0xae, 0xb9, 0x5b, 0xe4, 0xc7, 0xd5}
-	binaryIDGlPixelStorei                          = binary.ID{0xdd, 0x40, 0xad, 0x0f, 0xff, 0xb4, 0xf6, 0x1b, 0xef, 0xcf, 0xc3, 0x98, 0x37, 0xed, 0x0f, 0x55, 0x4b, 0x8b, 0x1d, 0x0d}
+	binaryIDGlMapBufferRange                       = binary.ID{0x35, 0x95, 0x2e, 0x2e, 0x17, 0x26, 0xcb, 0x56, 0xa8, 0xac, 0x1e, 0x37, 0x7d, 0x6d, 0x02, 0x90, 0xdb, 0x97, 0x89, 0x66}
+	binaryIDGlPixelStorei                          = binary.ID{0xeb, 0x28, 0x67, 0x9f, 0xdc, 0x21, 0x52, 0x20, 0xa6, 0x39, 0x6d, 0x28, 0x66, 0xf4, 0x1e, 0xef, 0xf7, 0x3a, 0x9e, 0x8c}
 	binaryIDGlPolygonOffset                        = binary.ID{0xb8, 0xb4, 0x99, 0x5e, 0x5c, 0x92, 0xdf, 0xc5, 0xce, 0xbc, 0x85, 0xd0, 0xad, 0x3e, 0xba, 0x10, 0x0b, 0x50, 0x20, 0x23}
 	binaryIDGlPopGroupMarkerEXT                    = binary.ID{0x63, 0xb8, 0xb9, 0x5e, 0x5d, 0xf9, 0x13, 0xbb, 0xc7, 0xce, 0x02, 0x0f, 0xc7, 0x14, 0x03, 0x22, 0xe5, 0x70, 0x9f, 0x87}
 	binaryIDGlProgramBinaryOES                     = binary.ID{0xc6, 0x5f, 0x91, 0x9e, 0x1e, 0xfe, 0x8c, 0xfb, 0xdd, 0x3c, 0x9b, 0x02, 0xc6, 0x13, 0xab, 0x58, 0x36, 0xa0, 0xe3, 0x30}
 	binaryIDGlPushGroupMarkerEXT                   = binary.ID{0xbc, 0xfe, 0x9c, 0x74, 0x61, 0x24, 0x36, 0x50, 0xf2, 0x59, 0xdb, 0x58, 0x87, 0xaa, 0xea, 0x45, 0xf7, 0x67, 0xef, 0xab}
-	binaryIDGlQueryCounterEXT                      = binary.ID{0x24, 0xfc, 0x89, 0xbe, 0x08, 0x35, 0xd1, 0xd7, 0x0f, 0xc7, 0xe4, 0x39, 0x79, 0xb1, 0x22, 0x49, 0x57, 0x58, 0x6e, 0x2b}
-	binaryIDGlReadPixels                           = binary.ID{0xbe, 0x23, 0x91, 0x78, 0x3a, 0xe3, 0xb5, 0x9c, 0xe3, 0x88, 0x3a, 0x59, 0xe5, 0x90, 0x43, 0xb3, 0x79, 0x6b, 0xc3, 0x86}
+	binaryIDGlQueryCounterEXT                      = binary.ID{0x88, 0xcc, 0x38, 0xb0, 0xd2, 0x9a, 0xbd, 0x37, 0xd7, 0x6f, 0x4f, 0xb3, 0xba, 0x95, 0xd8, 0x6a, 0xda, 0x18, 0x5e, 0x18}
+	binaryIDGlReadPixels                           = binary.ID{0xf3, 0x57, 0x02, 0x04, 0x86, 0x0e, 0x74, 0xb7, 0xef, 0x0a, 0x19, 0xfe, 0x31, 0x93, 0xa8, 0x47, 0x5d, 0x5f, 0xda, 0xca}
 	binaryIDGlReleaseShaderCompiler                = binary.ID{0x75, 0x57, 0x32, 0x6e, 0x7b, 0x73, 0x9d, 0x61, 0x34, 0xf4, 0xfe, 0x45, 0xb6, 0xb2, 0x1d, 0x6e, 0xd0, 0xab, 0xbb, 0x78}
-	binaryIDGlRenderbufferStorage                  = binary.ID{0xb6, 0x7f, 0xe4, 0x65, 0x99, 0x3d, 0xe3, 0x4d, 0x4a, 0x0b, 0x1e, 0x5e, 0x14, 0x7c, 0xb4, 0x0e, 0x0b, 0xa7, 0x49, 0x22}
-	binaryIDGlRenderbufferStorageMultisample       = binary.ID{0x77, 0x47, 0x04, 0xde, 0x5b, 0x64, 0x6b, 0x24, 0x7e, 0x3e, 0x58, 0x82, 0xdf, 0x38, 0x3e, 0xb8, 0xf2, 0x27, 0x15, 0x79}
+	binaryIDGlRenderbufferStorage                  = binary.ID{0xb9, 0xd0, 0x75, 0x69, 0x9b, 0x00, 0xe2, 0x2b, 0x44, 0xef, 0x8a, 0x80, 0x3d, 0x77, 0x4d, 0xe1, 0x28, 0xf8, 0x8e, 0x62}
+	binaryIDGlRenderbufferStorageMultisample       = binary.ID{0x6d, 0x33, 0xc0, 0xb6, 0x0b, 0xe2, 0x6c, 0xfb, 0x0d, 0x68, 0x5a, 0xc6, 0xd3, 0xd4, 0x9c, 0x73, 0xa0, 0xc6, 0xd5, 0x9d}
 	binaryIDGlSampleCoverage                       = binary.ID{0xdb, 0x2a, 0x80, 0xc6, 0x8a, 0x74, 0x81, 0x89, 0x6f, 0x52, 0x38, 0xf2, 0x8a, 0x46, 0x7b, 0xf1, 0x67, 0xe3, 0x07, 0x42}
 	binaryIDGlScissor                              = binary.ID{0xa5, 0x41, 0xe6, 0x77, 0xf6, 0x30, 0x6c, 0xdc, 0x47, 0x80, 0x42, 0x8d, 0xb6, 0x13, 0x10, 0x30, 0x25, 0xfc, 0xb6, 0xca}
 	binaryIDShaderIdᶜᵖ                             = binary.ID{0xa8, 0xd0, 0xe6, 0x52, 0xb7, 0x1b, 0xa4, 0xd0, 0xa9, 0x83, 0x04, 0x34, 0x15, 0x15, 0x04, 0x58, 0x1f, 0x94, 0x75, 0x23}
 	binaryIDVoidᶜᵖ                                 = binary.ID{0x39, 0xf4, 0x9d, 0x8a, 0x00, 0x6a, 0x81, 0x37, 0x87, 0x17, 0xac, 0x25, 0x1d, 0xd9, 0x72, 0xb4, 0x88, 0x19, 0x6c, 0x13}
 	binaryIDGlShaderBinary                         = binary.ID{0xe5, 0xb6, 0x4d, 0xe4, 0x03, 0xd0, 0x67, 0xe3, 0x83, 0xa8, 0xa9, 0xbd, 0x8a, 0x8a, 0x79, 0xea, 0xa8, 0xb4, 0x8f, 0x3b}
 	binaryIDGlShaderSource                         = binary.ID{0xc9, 0xbb, 0xdb, 0x99, 0x2a, 0xd6, 0x09, 0xe9, 0xcd, 0x6c, 0x72, 0xdc, 0x87, 0x5a, 0x47, 0x9f, 0xb9, 0x09, 0xb1, 0x3f}
-	binaryIDGlStartTilingQCOM                      = binary.ID{0x87, 0x76, 0x34, 0xf8, 0x30, 0x7e, 0xb3, 0x9e, 0x0f, 0xed, 0x9e, 0xa4, 0xe4, 0x73, 0x88, 0xbc, 0xa4, 0xed, 0x69, 0x7e}
-	binaryIDGlStencilFuncSeparate                  = binary.ID{0x83, 0x37, 0xed, 0xe5, 0xee, 0x51, 0x7b, 0x34, 0x8c, 0xbc, 0x87, 0x0e, 0xa5, 0x6b, 0xfd, 0xfd, 0x06, 0x35, 0x65, 0xfa}
+	binaryIDGlStartTilingQCOM                      = binary.ID{0x0d, 0xe0, 0xc0, 0xec, 0x18, 0xb6, 0xe2, 0x23, 0xec, 0x5e, 0xee, 0xd8, 0xf0, 0x79, 0x9c, 0xed, 0xc9, 0x24, 0xb9, 0x6d}
+	binaryIDGlStencilFuncSeparate                  = binary.ID{0x43, 0x5b, 0xb6, 0xa1, 0x82, 0xbd, 0x85, 0xaf, 0x65, 0x42, 0x98, 0xa7, 0x2a, 0xb7, 0x5a, 0x55, 0xe0, 0xd9, 0x9b, 0xf6}
 	binaryIDGlStencilMask                          = binary.ID{0x73, 0x1d, 0xc0, 0x01, 0xcf, 0xbe, 0x91, 0x96, 0x36, 0xf2, 0x73, 0xa4, 0xb4, 0x9d, 0xd7, 0xf3, 0x5e, 0xd8, 0x74, 0x37}
-	binaryIDGlStencilMaskSeparate                  = binary.ID{0xb7, 0xe8, 0x35, 0x90, 0xf1, 0x79, 0xd9, 0x29, 0xbe, 0xab, 0xf1, 0x2d, 0x31, 0x2e, 0xb8, 0xa4, 0x67, 0x91, 0xa8, 0x0c}
-	binaryIDGlStencilOpSeparate                    = binary.ID{0x9d, 0xe2, 0xc4, 0xb4, 0x72, 0x55, 0x3d, 0x06, 0xcd, 0xe7, 0x6d, 0x3c, 0xbc, 0xa6, 0x5b, 0xc1, 0xff, 0x09, 0xec, 0x00}
-	binaryIDGlTexImage2D                           = binary.ID{0x75, 0x47, 0xbd, 0xaa, 0x7a, 0xe5, 0xc5, 0x97, 0x9f, 0xe3, 0x56, 0xd0, 0xdc, 0x77, 0xa2, 0x3a, 0xb1, 0xfa, 0x3d, 0x18}
-	binaryIDGlTexParameterf                        = binary.ID{0x71, 0x53, 0x54, 0x52, 0xd4, 0xc1, 0x72, 0x77, 0x6e, 0xaa, 0xb4, 0x93, 0xea, 0xb2, 0x95, 0xf2, 0x01, 0xbe, 0xae, 0x06}
-	binaryIDGlTexParameteri                        = binary.ID{0xd9, 0xec, 0x83, 0xf4, 0x8a, 0xf8, 0x43, 0xc3, 0xde, 0x41, 0xee, 0xfb, 0x9a, 0x3d, 0xaf, 0xfc, 0xb1, 0xd4, 0xe5, 0xbe}
-	binaryIDGlTexStorage1DEXT                      = binary.ID{0x82, 0xe5, 0xba, 0x13, 0x88, 0xf4, 0xc5, 0xdf, 0x67, 0xb6, 0x1f, 0x1c, 0xab, 0x00, 0x8c, 0x18, 0x03, 0x2d, 0x9c, 0x94}
-	binaryIDGlTexStorage2DEXT                      = binary.ID{0x22, 0x01, 0xae, 0xf0, 0xdf, 0xef, 0xe7, 0xc1, 0xb8, 0xf9, 0x1a, 0xf1, 0x20, 0xff, 0xbf, 0x8f, 0x28, 0x40, 0x8d, 0xc6}
-	binaryIDGlTexStorage3DEXT                      = binary.ID{0x8f, 0xe9, 0x78, 0x84, 0x96, 0x0a, 0x60, 0xdf, 0xf8, 0x7a, 0xc4, 0xe8, 0xf7, 0x93, 0x27, 0xfd, 0x65, 0xed, 0xde, 0xaa}
-	binaryIDGlTexSubImage2D                        = binary.ID{0x8e, 0xb2, 0x9e, 0x94, 0xf9, 0xe8, 0xd4, 0xa9, 0x27, 0xf1, 0xe4, 0xa9, 0xa1, 0x25, 0x5a, 0x2b, 0xf8, 0x8a, 0x61, 0x2b}
-	binaryIDGlTextureStorage1DEXT                  = binary.ID{0x0a, 0x69, 0xa0, 0xa4, 0xc1, 0xa6, 0x81, 0xd8, 0x94, 0xe3, 0x54, 0xe1, 0xa1, 0xa7, 0x53, 0xc0, 0x6a, 0x55, 0x7e, 0xfb}
-	binaryIDGlTextureStorage2DEXT                  = binary.ID{0xaa, 0x63, 0x10, 0x72, 0xaf, 0x48, 0x52, 0xce, 0x02, 0x08, 0x02, 0xac, 0xf5, 0xf9, 0xb8, 0x03, 0x87, 0x02, 0xcc, 0x3a}
-	binaryIDGlTextureStorage3DEXT                  = binary.ID{0xc3, 0x4b, 0xb7, 0x25, 0xcd, 0x73, 0x0d, 0x77, 0x57, 0x84, 0xb6, 0xc0, 0x9c, 0x0f, 0x3e, 0xaf, 0x93, 0xd7, 0xc0, 0xe6}
+	binaryIDGlStencilMaskSeparate                  = binary.ID{0xd9, 0xb0, 0x61, 0x4f, 0x14, 0x9a, 0x37, 0xfa, 0xf9, 0x6f, 0x7d, 0x41, 0x49, 0x5a, 0xa3, 0x7d, 0x2f, 0xd6, 0x35, 0xcb}
+	binaryIDGlStencilOpSeparate                    = binary.ID{0xa0, 0x11, 0x77, 0x8d, 0xd9, 0xd5, 0xb2, 0x0f, 0x80, 0x49, 0xfb, 0xa7, 0xa0, 0x3a, 0x8d, 0xc0, 0x43, 0x62, 0x45, 0x84}
+	binaryIDGlTexImage2D                           = binary.ID{0xcf, 0xcf, 0xb9, 0xed, 0x5d, 0x01, 0x52, 0xe7, 0x97, 0x28, 0xe1, 0x74, 0x46, 0xb1, 0x96, 0x4f, 0x68, 0x2a, 0xcc, 0x12}
+	binaryIDGlTexParameterf                        = binary.ID{0x92, 0x6f, 0xa8, 0xb8, 0xbb, 0x19, 0x5f, 0xe5, 0xf5, 0x22, 0xe8, 0xff, 0xf8, 0x26, 0x54, 0x66, 0x95, 0x85, 0xb7, 0x4a}
+	binaryIDGlTexParameteri                        = binary.ID{0x01, 0x91, 0x54, 0xd3, 0x41, 0xcf, 0xcc, 0xb0, 0x67, 0x69, 0x6b, 0x97, 0x9f, 0xf0, 0xc5, 0x60, 0xcc, 0xe5, 0xb9, 0x87}
+	binaryIDGlTexStorage1DEXT                      = binary.ID{0x70, 0x71, 0x06, 0x6f, 0xbf, 0x42, 0xd1, 0xfd, 0xf3, 0x2f, 0x97, 0x7a, 0xf8, 0x93, 0x03, 0xa1, 0xef, 0xda, 0x3a, 0xe4}
+	binaryIDGlTexStorage2DEXT                      = binary.ID{0x07, 0x47, 0x77, 0x71, 0x69, 0xf9, 0x55, 0xbe, 0xa5, 0xf2, 0xe5, 0x20, 0x39, 0x73, 0x20, 0xd8, 0xe8, 0x6d, 0x31, 0x91}
+	binaryIDGlTexStorage3DEXT                      = binary.ID{0xdf, 0x00, 0x58, 0x96, 0x41, 0xe1, 0x7a, 0xc3, 0x27, 0xe8, 0xb8, 0xd1, 0xb9, 0x06, 0x1e, 0x59, 0xc6, 0xbb, 0x81, 0xa4}
+	binaryIDGlTexSubImage2D                        = binary.ID{0xb3, 0x3f, 0x71, 0x25, 0x76, 0xca, 0xd5, 0xcf, 0x62, 0x8e, 0x3c, 0xab, 0x1a, 0x48, 0x50, 0x57, 0x99, 0xa1, 0x06, 0x50}
+	binaryIDGlTextureStorage1DEXT                  = binary.ID{0x32, 0x52, 0xb4, 0x35, 0xde, 0x5d, 0x5e, 0x15, 0xef, 0xd4, 0x59, 0x09, 0x28, 0x65, 0xed, 0x4d, 0x35, 0x58, 0x9e, 0x2e}
+	binaryIDGlTextureStorage2DEXT                  = binary.ID{0x0a, 0x92, 0xe0, 0x1d, 0xca, 0x74, 0x8b, 0xb7, 0x6e, 0x0f, 0x0b, 0x46, 0x60, 0x69, 0x20, 0xdc, 0xc0, 0xb8, 0x79, 0x9b}
+	binaryIDGlTextureStorage3DEXT                  = binary.ID{0x08, 0x7e, 0xd0, 0x95, 0xfa, 0xb6, 0xcc, 0x81, 0x38, 0x8e, 0xb2, 0x1c, 0x20, 0xea, 0xa8, 0xe6, 0xc3, 0xeb, 0x5d, 0xc7}
 	binaryIDGlUniform1f                            = binary.ID{0xdc, 0x09, 0x5b, 0x59, 0xd2, 0xff, 0x8d, 0xd9, 0xab, 0xf7, 0x80, 0xbb, 0xc4, 0x33, 0xf6, 0x28, 0xf3, 0x93, 0x52, 0x4e}
 	binaryIDGlUniform1fv                           = binary.ID{0x15, 0x33, 0x71, 0x42, 0x7d, 0x13, 0x97, 0xb7, 0xbc, 0x79, 0x14, 0xef, 0x14, 0xa7, 0xe7, 0x37, 0xa0, 0xc0, 0x03, 0xa2}
 	binaryIDGlUniform1i                            = binary.ID{0xdc, 0xc5, 0xf9, 0x9f, 0xe8, 0xdf, 0x34, 0x63, 0x92, 0x71, 0x0c, 0xc1, 0xb5, 0xa9, 0xed, 0xa0, 0xfb, 0x74, 0x32, 0xd9}
@@ -680,7 +670,7 @@ var (
 	binaryIDGlUniformMatrix2fv                     = binary.ID{0x1a, 0x90, 0xb3, 0x37, 0x1f, 0x96, 0x97, 0x12, 0x0d, 0xf0, 0x12, 0xbd, 0x12, 0x5b, 0x76, 0x29, 0x05, 0x19, 0x49, 0x16}
 	binaryIDGlUniformMatrix3fv                     = binary.ID{0x2b, 0x4c, 0x99, 0x4f, 0x25, 0x45, 0xe5, 0xcf, 0xff, 0x0b, 0xb7, 0xca, 0xef, 0x85, 0x41, 0xba, 0x87, 0xeb, 0xb0, 0x12}
 	binaryIDGlUniformMatrix4fv                     = binary.ID{0x50, 0x9b, 0x98, 0xdf, 0x5c, 0x02, 0xa2, 0x31, 0x3f, 0xd4, 0x61, 0x27, 0xf1, 0xc0, 0xa8, 0x3e, 0x53, 0x4e, 0xd4, 0x1d}
-	binaryIDGlUnmapBuffer                          = binary.ID{0xb8, 0x33, 0x76, 0xd5, 0x25, 0x8b, 0xf1, 0x9a, 0x95, 0x99, 0x11, 0x51, 0x68, 0x3f, 0x38, 0xaa, 0x42, 0x88, 0x74, 0xd9}
+	binaryIDGlUnmapBuffer                          = binary.ID{0x50, 0xc4, 0x6c, 0x13, 0x03, 0xa1, 0x9a, 0x75, 0xd4, 0xfb, 0x1c, 0x27, 0x4a, 0x2d, 0xd0, 0x57, 0x8b, 0x20, 0xe0, 0x9c}
 	binaryIDGlUseProgram                           = binary.ID{0x4b, 0x8d, 0xa5, 0x92, 0x0f, 0xae, 0x78, 0xf9, 0xa4, 0xae, 0x29, 0x3c, 0xa1, 0x5b, 0x2c, 0xe4, 0xe2, 0xf6, 0x0b, 0x9b}
 	binaryIDGlValidateProgram                      = binary.ID{0x51, 0xe9, 0x87, 0x35, 0x9c, 0x27, 0xef, 0x70, 0xbf, 0xce, 0x08, 0x9c, 0xe0, 0xa7, 0x47, 0xac, 0xab, 0xe5, 0xed, 0xd5}
 	binaryIDGlVertexAttrib1f                       = binary.ID{0x7e, 0xf1, 0xf8, 0x90, 0x37, 0x0b, 0x9b, 0xd8, 0x33, 0xb5, 0x36, 0x74, 0x76, 0x55, 0xd1, 0xef, 0x24, 0xe8, 0x95, 0xa7}
@@ -691,7 +681,7 @@ var (
 	binaryIDGlVertexAttrib3fv                      = binary.ID{0x8f, 0x7a, 0xb1, 0x53, 0xad, 0x9e, 0x2b, 0xe0, 0x89, 0x50, 0x2c, 0x3a, 0xc3, 0x68, 0xec, 0xf3, 0x4d, 0x10, 0xf4, 0x21}
 	binaryIDGlVertexAttrib4f                       = binary.ID{0x26, 0x2d, 0x3c, 0xc8, 0x49, 0x62, 0xf6, 0x27, 0x48, 0xe9, 0x61, 0x1d, 0xcd, 0x09, 0xbd, 0x81, 0x3a, 0xdf, 0x39, 0x76}
 	binaryIDGlVertexAttrib4fv                      = binary.ID{0x02, 0x2c, 0xf2, 0x04, 0x4f, 0x64, 0x87, 0x52, 0x9e, 0xb3, 0xf3, 0xca, 0x70, 0xc5, 0x17, 0x56, 0xd4, 0xe8, 0xc4, 0xe4}
-	binaryIDGlVertexAttribPointer                  = binary.ID{0x9d, 0xd0, 0xda, 0x47, 0xd9, 0x9e, 0x24, 0x1d, 0x75, 0x48, 0x0f, 0x8d, 0x27, 0x76, 0x63, 0x2d, 0x79, 0x41, 0xb8, 0xca}
+	binaryIDGlVertexAttribPointer                  = binary.ID{0x7c, 0x9c, 0x8f, 0x22, 0x0a, 0x9e, 0x18, 0x18, 0x86, 0xc5, 0x97, 0xcd, 0x92, 0xdb, 0xe1, 0xf2, 0x32, 0x87, 0x02, 0x17}
 	binaryIDGlViewport                             = binary.ID{0x96, 0x41, 0xef, 0xd3, 0x17, 0x6b, 0x50, 0x3c, 0xeb, 0x46, 0x86, 0x49, 0x1c, 0x1b, 0xec, 0x65, 0xe1, 0xe0, 0xa7, 0xcb}
 	binaryIDGlWaitSync                             = binary.ID{0x96, 0xae, 0xf7, 0x2a, 0x78, 0xbc, 0x46, 0xe3, 0xbb, 0x46, 0x02, 0xce, 0x80, 0x2a, 0xa9, 0xed, 0x43, 0xfc, 0xb1, 0x58}
 	binaryIDGlXCreateContext                       = binary.ID{0x69, 0xd6, 0x87, 0x67, 0x9c, 0x50, 0x4f, 0xe6, 0x49, 0x6b, 0x1a, 0x51, 0x2f, 0xd7, 0x22, 0x72, 0x8e, 0x01, 0xda, 0x6e}
@@ -725,9 +715,7 @@ var (
 	binaryIDS32ː4ᵃ                                 = binary.ID{0x87, 0xe0, 0xb2, 0x47, 0xdf, 0x91, 0x9c, 0x2a, 0x41, 0xd2, 0x23, 0x25, 0x6d, 0x21, 0xd7, 0x1f, 0x3d, 0x85, 0x5c, 0x01}
 	binaryIDS32ˢ                                   = binary.ID{0xbc, 0xd6, 0x9a, 0xa9, 0x35, 0x5d, 0xfe, 0xc7, 0x17, 0xb7, 0x2d, 0x64, 0xa7, 0x4a, 0xee, 0xb1, 0x4e, 0x16, 0x85, 0x9c}
 	binaryIDS64ˢ                                   = binary.ID{0xf2, 0x00, 0xfb, 0x5a, 0xa6, 0x5d, 0x3a, 0xcb, 0x0c, 0x2e, 0x2d, 0xa5, 0x81, 0xbb, 0x08, 0x09, 0x13, 0x3a, 0xae, 0xb5}
-	binaryIDShaderAttribTypeˢ                      = binary.ID{0x37, 0x6b, 0xf4, 0x67, 0x43, 0x8f, 0x81, 0xc8, 0x1e, 0x12, 0x8c, 0x34, 0xc3, 0xd3, 0x5c, 0xda, 0x94, 0x28, 0xfb, 0xb4}
 	binaryIDShaderIdˢ                              = binary.ID{0x45, 0x01, 0xd6, 0x03, 0x00, 0x91, 0x9a, 0x24, 0xe3, 0x7e, 0x26, 0x7e, 0x7d, 0xda, 0xf1, 0x06, 0x42, 0x59, 0x3e, 0x03}
-	binaryIDShaderUniformTypeˢ                     = binary.ID{0x99, 0x72, 0xc7, 0xc6, 0x1f, 0xed, 0x46, 0x4b, 0xbd, 0xe8, 0xf5, 0x96, 0x30, 0x3a, 0x1a, 0xa1, 0xc9, 0xd4, 0x8c, 0x0e}
 	binaryIDStartTimer                             = binary.ID{0x23, 0x7b, 0x88, 0x65, 0x96, 0xf3, 0x0d, 0x5d, 0x50, 0x56, 0xad, 0x18, 0xc8, 0x0a, 0xe8, 0x57, 0xa0, 0x21, 0x1c, 0x9b}
 	binaryIDState                                  = binary.ID{0x9a, 0x1a, 0xdb, 0xe0, 0xa0, 0x77, 0x65, 0xd3, 0x62, 0x31, 0x3f, 0xcb, 0x81, 0xbd, 0x45, 0xc3, 0x24, 0xe7, 0x94, 0x2d}
 	binaryIDStopTimer                              = binary.ID{0xe8, 0x9f, 0x7c, 0xb1, 0xa4, 0xf8, 0x37, 0x81, 0x6b, 0x01, 0x71, 0x0e, 0xbc, 0xf2, 0x92, 0xd2, 0x39, 0x2e, 0xca, 0x5f}
@@ -905,17 +893,17 @@ func doDecodeBackbufferInfo(d binary.Decoder, o *BackbufferInfo) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ColorFmt = RenderbufferFormat(obj)
+		o.ColorFmt = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DepthFmt = RenderbufferFormat(obj)
+		o.DepthFmt = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.StencilFmt = RenderbufferFormat(obj)
+		o.StencilFmt = GLenum(obj)
 	}
 	if obj, err := d.Bool(); err != nil {
 		return err
@@ -971,9 +959,9 @@ var schemaBackbufferInfo = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "ColorFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		{Declared: "DepthFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		{Declared: "StencilFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "ColorFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DepthFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "StencilFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -1116,32 +1104,32 @@ func doDecodeBlendState(d binary.Decoder, o *BlendState) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SrcRgbBlendFactor = BlendFactor(obj)
+		o.SrcRgbBlendFactor = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SrcAlphaBlendFactor = BlendFactor(obj)
+		o.SrcAlphaBlendFactor = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DstRgbBlendFactor = BlendFactor(obj)
+		o.DstRgbBlendFactor = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DstAlphaBlendFactor = BlendFactor(obj)
+		o.DstAlphaBlendFactor = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.BlendEquationRgb = BlendEquation(obj)
+		o.BlendEquationRgb = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.BlendEquationAlpha = BlendEquation(obj)
+		o.BlendEquationAlpha = GLenum(obj)
 	}
 	if err := d.Value(&o.BlendColor); err != nil {
 		return err
@@ -1196,12 +1184,12 @@ var schemaBlendState = &schema.Class{
 	Name:    "BlendState",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
-		{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BlendColor", Type: &schema.Struct{Name: "Color", ID: (*Color)(nil).Class().ID()}},
 	},
 }
@@ -1455,7 +1443,7 @@ func doDecodeBuffer(d binary.Decoder, o *Buffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Usage = BufferUsage(obj)
+		o.Usage = GLenum(obj)
 	}
 	return nil
 }
@@ -1497,7 +1485,7 @@ var schemaBuffer = &schema.Class{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -3235,7 +3223,7 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DepthTestFunction = TestFunction(obj)
+		o.DepthTestFunction = GLenum(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
@@ -3270,15 +3258,15 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.StencilMask = make(FaceModeːu32ᵐ, count)
+		o.StencilMask = make(GLenumːu32ᵐ, count)
 		m := o.StencilMask
 		for i := uint32(0); i < count; i++ {
-			var k FaceMode
+			var k GLenum
 			var v uint32
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = FaceMode(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Uint32(); err != nil {
 				return err
@@ -3297,12 +3285,12 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FrontFace = FaceOrientation(obj)
+		o.FrontFace = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.CullFace = FaceMode(obj)
+		o.CullFace = GLenum(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
@@ -3422,18 +3410,18 @@ var schemaRasterizerState = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DepthNear", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "DepthFar", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "StencilMask", Type: &schema.Map{Alias: "FaceModeːu32ᵐ", KeyType: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+		{Declared: "StencilMask", Type: &schema.Map{Alias: "GLenumːu32ᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
 		{Declared: "Viewport", Type: &schema.Struct{Name: "Rect", ID: (*Rect)(nil).Class().ID()}},
 		{Declared: "Scissor", Type: &schema.Struct{Name: "Rect", ID: (*Rect)(nil).Class().ID()}},
-		{Declared: "FrontFace", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
-		{Declared: "CullFace", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "FrontFace", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "CullFace", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "LineWidth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "PolygonOffsetFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "PolygonOffsetUnits", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -3540,7 +3528,7 @@ func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) err
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = VertexAttribType(obj)
+		o.Type = GLenum(obj)
 	}
 	if obj, err := d.Bool(); err != nil {
 		return err
@@ -3614,7 +3602,7 @@ var schemaVertexAttributeArray = &schema.Class{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -3667,7 +3655,7 @@ func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = RenderbufferFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	return nil
 }
@@ -3713,7 +3701,7 @@ var schemaRenderbuffer = &schema.Class{
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -3770,7 +3758,7 @@ func doDecodeImage(d binary.Decoder, o *Image) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = ImageTexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	return nil
 }
@@ -3820,7 +3808,7 @@ var schemaImage = &schema.Class{
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -3855,15 +3843,15 @@ func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Faces = make(CubeMapImageTargetːImageᵐ, count)
+		o.Faces = make(GLenumːImageᵐ, count)
 		m := o.Faces
 		for i := uint32(0); i < count; i++ {
-			var k CubeMapImageTarget
+			var k GLenum
 			var v Image
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = CubeMapImageTarget(obj)
+				k = GLenum(obj)
 			}
 			if err := d.Value(&v); err != nil {
 				return err
@@ -3912,7 +3900,7 @@ var schemaCubemapLevel = &schema.Class{
 	Name:    "CubemapLevel",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Faces", Type: &schema.Map{Alias: "CubeMapImageTargetːImageᵐ", KeyType: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
+		{Declared: "Faces", Type: &schema.Map{Alias: "GLenumːImageᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
 	},
 }
 
@@ -3996,7 +3984,7 @@ func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = ImageTexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
@@ -4039,42 +4027,42 @@ func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.MagFilter = TextureFilterMode(obj)
+		o.MagFilter = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.MinFilter = TextureFilterMode(obj)
+		o.MinFilter = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.WrapS = TextureWrapMode(obj)
+		o.WrapS = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.WrapT = TextureWrapMode(obj)
+		o.WrapT = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SwizzleR = TexelComponent(obj)
+		o.SwizzleR = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SwizzleG = TexelComponent(obj)
+		o.SwizzleG = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SwizzleB = TexelComponent(obj)
+		o.SwizzleB = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SwizzleA = TexelComponent(obj)
+		o.SwizzleA = GLenum(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
@@ -4168,17 +4156,17 @@ var schemaTexture = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture2D", Type: &schema.Map{Alias: "S32ːImageᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
 		{Declared: "Cubemap", Type: &schema.Map{Alias: "S32ːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "CubemapLevel", ID: (*CubemapLevel)(nil).Class().ID()}}},
-		{Declared: "MagFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
-		{Declared: "MinFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
-		{Declared: "WrapS", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
-		{Declared: "WrapT", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
-		{Declared: "SwizzleR", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		{Declared: "SwizzleG", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		{Declared: "SwizzleB", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		{Declared: "SwizzleA", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		{Declared: "MagFilter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "MinFilter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "WrapS", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "WrapT", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SwizzleR", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SwizzleG", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SwizzleB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SwizzleA", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "MaxAnisotropy", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -4220,7 +4208,7 @@ func doDecodeFramebufferAttachmentInfo(d binary.Decoder, o *FramebufferAttachmen
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = FramebufferAttachmentType(obj)
+		o.Type = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -4230,7 +4218,7 @@ func doDecodeFramebufferAttachmentInfo(d binary.Decoder, o *FramebufferAttachmen
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.CubeMapFace = CubeMapImageTarget(obj)
+		o.CubeMapFace = GLenum(obj)
 	}
 	return nil
 }
@@ -4278,9 +4266,9 @@ var schemaFramebufferAttachmentInfo = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TextureLevel", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "CubeMapFace", Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}},
+		{Declared: "CubeMapFace", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -4315,15 +4303,15 @@ func doDecodeFramebuffer(d binary.Decoder, o *Framebuffer) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Attachments = make(FramebufferAttachmentːFramebufferAttachmentInfoᵐ, count)
+		o.Attachments = make(GLenumːFramebufferAttachmentInfoᵐ, count)
 		m := o.Attachments
 		for i := uint32(0); i < count; i++ {
-			var k FramebufferAttachment
+			var k GLenum
 			var v FramebufferAttachmentInfo
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = FramebufferAttachment(obj)
+				k = GLenum(obj)
 			}
 			if err := d.Value(&v); err != nil {
 				return err
@@ -4372,7 +4360,7 @@ var schemaFramebuffer = &schema.Class{
 	Name:    "Framebuffer",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Attachments", Type: &schema.Map{Alias: "FramebufferAttachmentːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo", ID: (*FramebufferAttachmentInfo)(nil).Class().ID()}}},
+		{Declared: "Attachments", Type: &schema.Map{Alias: "GLenumːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo", ID: (*FramebufferAttachmentInfo)(nil).Class().ID()}}},
 	},
 }
 
@@ -4435,7 +4423,7 @@ func doDecodeShader(d binary.Decoder, o *Shader) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ShaderType(obj)
+		o.Type = GLenum(obj)
 	}
 	return nil
 }
@@ -4489,7 +4477,7 @@ var schemaShader = &schema.Class{
 		{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ", ID: (*Charˢ)(nil).Class().ID()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -4530,7 +4518,7 @@ func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ShaderAttribType(obj)
+		o.Type = GLenum(obj)
 	}
 	return nil
 }
@@ -4572,7 +4560,7 @@ var schemaVertexAttribute = &schema.Class{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charˢ", ID: (*Charˢ)(nil).Class().ID()}},
 		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -4610,7 +4598,7 @@ func doDecodeUniform(d binary.Decoder, o *Uniform) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ShaderUniformType(obj)
+		o.Type = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -4654,7 +4642,7 @@ var schemaUniform = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 	},
 }
@@ -4732,15 +4720,15 @@ func doDecodeProgram(d binary.Decoder, o *Program) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Shaders = make(ShaderTypeːShaderIdᵐ, count)
+		o.Shaders = make(GLenumːShaderIdᵐ, count)
 		m := o.Shaders
 		for i := uint32(0); i < count; i++ {
-			var k ShaderType
+			var k GLenum
 			var v ShaderId
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = ShaderType(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Uint32(); err != nil {
 				return err
@@ -4906,7 +4894,7 @@ var schemaProgram = &schema.Class{
 	Name:    "Program",
 	Fields: []schema.Field{
 		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderTypeːShaderIdᵐ", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
+		{Declared: "Shaders", Type: &schema.Map{Alias: "GLenumːShaderIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}}},
@@ -5621,15 +5609,15 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.BoundFramebuffers = make(FramebufferTargetːFramebufferIdᵐ, count)
+		o.BoundFramebuffers = make(GLenumːFramebufferIdᵐ, count)
 		m := o.BoundFramebuffers
 		for i := uint32(0); i < count; i++ {
-			var k FramebufferTarget
+			var k GLenum
 			var v FramebufferId
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = FramebufferTarget(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Uint32(); err != nil {
 				return err
@@ -5642,15 +5630,15 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.BoundRenderbuffers = make(RenderbufferTargetːRenderbufferIdᵐ, count)
+		o.BoundRenderbuffers = make(GLenumːRenderbufferIdᵐ, count)
 		m := o.BoundRenderbuffers
 		for i := uint32(0); i < count; i++ {
-			var k RenderbufferTarget
+			var k GLenum
 			var v RenderbufferId
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = RenderbufferTarget(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Uint32(); err != nil {
 				return err
@@ -5663,15 +5651,15 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.BoundBuffers = make(BufferTargetːBufferIdᵐ, count)
+		o.BoundBuffers = make(GLenumːBufferIdᵐ, count)
 		m := o.BoundBuffers
 		for i := uint32(0); i < count; i++ {
-			var k BufferTarget
+			var k GLenum
 			var v BufferId
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = BufferTarget(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Uint32(); err != nil {
 				return err
@@ -5717,28 +5705,28 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.TextureUnits = make(TextureUnitːTextureTargetːTextureIdᵐᵐ, count)
+		o.TextureUnits = make(GLenumːGLenumːTextureIdᵐᵐ, count)
 		m := o.TextureUnits
 		for i := uint32(0); i < count; i++ {
-			var k TextureUnit
-			var v TextureTargetːTextureIdᵐ
+			var k GLenum
+			var v GLenumːTextureIdᵐ
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = TextureUnit(obj)
+				k = GLenum(obj)
 			}
 			if count, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				v = make(TextureTargetːTextureIdᵐ, count)
+				v = make(GLenumːTextureIdᵐ, count)
 				m := v
 				for i := uint32(0); i < count; i++ {
-					var k TextureTarget
+					var k GLenum
 					var v TextureId
 					if obj, err := d.Uint32(); err != nil {
 						return err
 					} else {
-						k = TextureTarget(obj)
+						k = GLenum(obj)
 					}
 					if obj, err := d.Uint32(); err != nil {
 						return err
@@ -5754,20 +5742,20 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ActiveTextureUnit = TextureUnit(obj)
+		o.ActiveTextureUnit = GLenum(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Capabilities = make(Capabilityːboolᵐ, count)
+		o.Capabilities = make(GLenumːboolᵐ, count)
 		m := o.Capabilities
 		for i := uint32(0); i < count; i++ {
-			var k Capability
+			var k GLenum
 			var v bool
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = Capability(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Bool(); err != nil {
 				return err
@@ -5780,20 +5768,20 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.GenerateMipmapHint = HintMode(obj)
+		o.GenerateMipmapHint = GLenum(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PixelStorage = make(PixelStoreParameterːs32ᵐ, count)
+		o.PixelStorage = make(GLenumːs32ᵐ, count)
 		m := o.PixelStorage
 		for i := uint32(0); i < count; i++ {
-			var k PixelStoreParameter
+			var k GLenum
 			var v int32
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
-				k = PixelStoreParameter(obj)
+				k = GLenum(obj)
 			}
 			if obj, err := d.Int32(); err != nil {
 				return err
@@ -5959,128 +5947,18 @@ var schemaContext = &schema.Class{
 		{Declared: "Blending", Type: &schema.Struct{Name: "BlendState", ID: (*BlendState)(nil).Class().ID()}},
 		{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState", ID: (*RasterizerState)(nil).Class().ID()}},
 		{Declared: "Clearing", Type: &schema.Struct{Name: "ClearState", ID: (*ClearState)(nil).Class().ID()}},
-		{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "FramebufferTargetːFramebufferIdᵐ", KeyType: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
-		{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "RenderbufferTargetːRenderbufferIdᵐ", KeyType: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
-		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "BufferTargetːBufferIdᵐ", KeyType: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
+		{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "GLenumːFramebufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
+		{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "GLenumːRenderbufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
+		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "GLenumːBufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
 		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray", ID: (*VertexAttributeArray)(nil).Class().ID()}}}},
-		{Declared: "TextureUnits", Type: &schema.Map{Alias: "TextureUnitːTextureTargetːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "TextureTargetːTextureIdᵐ", KeyType: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
-		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
-		{Declared: "Capabilities", Type: &schema.Map{Alias: "Capabilityːboolᵐ", KeyType: &schema.Primitive{Name: "Capability", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
-		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
-		{Declared: "PixelStorage", Type: &schema.Map{Alias: "PixelStoreParameterːs32ᵐ", KeyType: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːGLenumːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "GLenumːTextureIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
+		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Capabilities", Type: &schema.Map{Alias: "GLenumːboolᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "PixelStorage", Type: &schema.Map{Alias: "GLenumːs32ᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
 		{Declared: "Instances", Type: &schema.Struct{Name: "Objects", ID: (*Objects)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassDiscardFramebufferAttachmentˢ struct{}
-
-func (*DiscardFramebufferAttachmentˢ) Class() binary.Class {
-	return (*binaryClassDiscardFramebufferAttachmentˢ)(nil)
-}
-func doEncodeDiscardFramebufferAttachmentˢ(e binary.Encoder, o *DiscardFramebufferAttachmentˢ) error {
-	if err := e.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeDiscardFramebufferAttachmentˢ(d binary.Decoder, o *DiscardFramebufferAttachmentˢ) error {
-	if err := d.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipDiscardFramebufferAttachmentˢ(d binary.Decoder) error {
-	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) ID() binary.ID {
-	return binaryIDDiscardFramebufferAttachmentˢ
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) New() binary.Object {
-	return &DiscardFramebufferAttachmentˢ{}
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeDiscardFramebufferAttachmentˢ(e, obj.(*DiscardFramebufferAttachmentˢ))
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &DiscardFramebufferAttachmentˢ{}
-	return obj, doDecodeDiscardFramebufferAttachmentˢ(d, obj)
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeDiscardFramebufferAttachmentˢ(d, obj.(*DiscardFramebufferAttachmentˢ))
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) Skip(d binary.Decoder) error {
-	return doSkipDiscardFramebufferAttachmentˢ(d)
-}
-func (*binaryClassDiscardFramebufferAttachmentˢ) Schema() *schema.Class {
-	return schemaDiscardFramebufferAttachmentˢ
-}
-
-var schemaDiscardFramebufferAttachmentˢ = &schema.Class{
-	TypeID:  binaryIDDiscardFramebufferAttachmentˢ,
-	Package: "gles",
-	Name:    "DiscardFramebufferAttachmentˢ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassDiscardFramebufferAttachmentᵖ struct{}
-
-func (*DiscardFramebufferAttachmentᵖ) Class() binary.Class {
-	return (*binaryClassDiscardFramebufferAttachmentᵖ)(nil)
-}
-func doEncodeDiscardFramebufferAttachmentᵖ(e binary.Encoder, o *DiscardFramebufferAttachmentᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeDiscardFramebufferAttachmentᵖ(d binary.Decoder, o *DiscardFramebufferAttachmentᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipDiscardFramebufferAttachmentᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) ID() binary.ID {
-	return binaryIDDiscardFramebufferAttachmentᵖ
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) New() binary.Object {
-	return &DiscardFramebufferAttachmentᵖ{}
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeDiscardFramebufferAttachmentᵖ(e, obj.(*DiscardFramebufferAttachmentᵖ))
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &DiscardFramebufferAttachmentᵖ{}
-	return obj, doDecodeDiscardFramebufferAttachmentᵖ(d, obj)
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeDiscardFramebufferAttachmentᵖ(d, obj.(*DiscardFramebufferAttachmentᵖ))
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) Skip(d binary.Decoder) error {
-	return doSkipDiscardFramebufferAttachmentᵖ(d)
-}
-func (*binaryClassDiscardFramebufferAttachmentᵖ) Schema() *schema.Class {
-	return schemaDiscardFramebufferAttachmentᵖ
-}
-
-var schemaDiscardFramebufferAttachmentᵖ = &schema.Class{
-	TypeID:  binaryIDDiscardFramebufferAttachmentᵖ,
-	Package: "gles",
-	Name:    "DiscardFramebufferAttachmentᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -7278,163 +7156,6 @@ var schemaFlushPostBuffer = &schema.Class{
 	},
 }
 
-type binaryClassFramebufferAttachmentˢ struct{}
-
-func (*FramebufferAttachmentˢ) Class() binary.Class {
-	return (*binaryClassFramebufferAttachmentˢ)(nil)
-}
-func doEncodeFramebufferAttachmentˢ(e binary.Encoder, o *FramebufferAttachmentˢ) error {
-	if err := e.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeFramebufferAttachmentˢ(d binary.Decoder, o *FramebufferAttachmentˢ) error {
-	if err := d.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipFramebufferAttachmentˢ(d binary.Decoder) error {
-	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassFramebufferAttachmentˢ) ID() binary.ID      { return binaryIDFramebufferAttachmentˢ }
-func (*binaryClassFramebufferAttachmentˢ) New() binary.Object { return &FramebufferAttachmentˢ{} }
-func (*binaryClassFramebufferAttachmentˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeFramebufferAttachmentˢ(e, obj.(*FramebufferAttachmentˢ))
-}
-func (*binaryClassFramebufferAttachmentˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &FramebufferAttachmentˢ{}
-	return obj, doDecodeFramebufferAttachmentˢ(d, obj)
-}
-func (*binaryClassFramebufferAttachmentˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeFramebufferAttachmentˢ(d, obj.(*FramebufferAttachmentˢ))
-}
-func (*binaryClassFramebufferAttachmentˢ) Skip(d binary.Decoder) error {
-	return doSkipFramebufferAttachmentˢ(d)
-}
-func (*binaryClassFramebufferAttachmentˢ) Schema() *schema.Class {
-	return schemaFramebufferAttachmentˢ
-}
-
-var schemaFramebufferAttachmentˢ = &schema.Class{
-	TypeID:  binaryIDFramebufferAttachmentˢ,
-	Package: "gles",
-	Name:    "FramebufferAttachmentˢ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassFramebufferAttachmentᵖ struct{}
-
-func (*FramebufferAttachmentᵖ) Class() binary.Class {
-	return (*binaryClassFramebufferAttachmentᵖ)(nil)
-}
-func doEncodeFramebufferAttachmentᵖ(e binary.Encoder, o *FramebufferAttachmentᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeFramebufferAttachmentᵖ(d binary.Decoder, o *FramebufferAttachmentᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipFramebufferAttachmentᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassFramebufferAttachmentᵖ) ID() binary.ID      { return binaryIDFramebufferAttachmentᵖ }
-func (*binaryClassFramebufferAttachmentᵖ) New() binary.Object { return &FramebufferAttachmentᵖ{} }
-func (*binaryClassFramebufferAttachmentᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeFramebufferAttachmentᵖ(e, obj.(*FramebufferAttachmentᵖ))
-}
-func (*binaryClassFramebufferAttachmentᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &FramebufferAttachmentᵖ{}
-	return obj, doDecodeFramebufferAttachmentᵖ(d, obj)
-}
-func (*binaryClassFramebufferAttachmentᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeFramebufferAttachmentᵖ(d, obj.(*FramebufferAttachmentᵖ))
-}
-func (*binaryClassFramebufferAttachmentᵖ) Skip(d binary.Decoder) error {
-	return doSkipFramebufferAttachmentᵖ(d)
-}
-func (*binaryClassFramebufferAttachmentᵖ) Schema() *schema.Class {
-	return schemaFramebufferAttachmentᵖ
-}
-
-var schemaFramebufferAttachmentᵖ = &schema.Class{
-	TypeID:  binaryIDFramebufferAttachmentᵖ,
-	Package: "gles",
-	Name:    "FramebufferAttachmentᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassFramebufferAttachmentᶜᵖ struct{}
-
-func (*FramebufferAttachmentᶜᵖ) Class() binary.Class {
-	return (*binaryClassFramebufferAttachmentᶜᵖ)(nil)
-}
-func doEncodeFramebufferAttachmentᶜᵖ(e binary.Encoder, o *FramebufferAttachmentᶜᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeFramebufferAttachmentᶜᵖ(d binary.Decoder, o *FramebufferAttachmentᶜᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipFramebufferAttachmentᶜᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) ID() binary.ID {
-	return binaryIDFramebufferAttachmentᶜᵖ
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) New() binary.Object {
-	return &FramebufferAttachmentᶜᵖ{}
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeFramebufferAttachmentᶜᵖ(e, obj.(*FramebufferAttachmentᶜᵖ))
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &FramebufferAttachmentᶜᵖ{}
-	return obj, doDecodeFramebufferAttachmentᶜᵖ(d, obj)
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeFramebufferAttachmentᶜᵖ(d, obj.(*FramebufferAttachmentᶜᵖ))
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) Skip(d binary.Decoder) error {
-	return doSkipFramebufferAttachmentᶜᵖ(d)
-}
-func (*binaryClassFramebufferAttachmentᶜᵖ) Schema() *schema.Class {
-	return schemaFramebufferAttachmentᶜᵖ
-}
-
-var schemaFramebufferAttachmentᶜᵖ = &schema.Class{
-	TypeID:  binaryIDFramebufferAttachmentᶜᵖ,
-	Package: "gles",
-	Name:    "FramebufferAttachmentᶜᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
-	},
-}
-
 type binaryClassFramebufferIdˢ struct{}
 
 func (*FramebufferIdˢ) Class() binary.Class {
@@ -7672,6 +7393,147 @@ var schemaGLXDrawable = &schema.Class{
 	},
 }
 
+type binaryClassGLenumˢ struct{}
+
+func (*GLenumˢ) Class() binary.Class {
+	return (*binaryClassGLenumˢ)(nil)
+}
+func doEncodeGLenumˢ(e binary.Encoder, o *GLenumˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGLenumˢ(d binary.Decoder, o *GLenumˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGLenumˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGLenumˢ) ID() binary.ID      { return binaryIDGLenumˢ }
+func (*binaryClassGLenumˢ) New() binary.Object { return &GLenumˢ{} }
+func (*binaryClassGLenumˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLenumˢ(e, obj.(*GLenumˢ))
+}
+func (*binaryClassGLenumˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLenumˢ{}
+	return obj, doDecodeGLenumˢ(d, obj)
+}
+func (*binaryClassGLenumˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLenumˢ(d, obj.(*GLenumˢ))
+}
+func (*binaryClassGLenumˢ) Skip(d binary.Decoder) error { return doSkipGLenumˢ(d) }
+func (*binaryClassGLenumˢ) Schema() *schema.Class       { return schemaGLenumˢ }
+
+var schemaGLenumˢ = &schema.Class{
+	TypeID:  binaryIDGLenumˢ,
+	Package: "gles",
+	Name:    "GLenumˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGLenumᵖ struct{}
+
+func (*GLenumᵖ) Class() binary.Class {
+	return (*binaryClassGLenumᵖ)(nil)
+}
+func doEncodeGLenumᵖ(e binary.Encoder, o *GLenumᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGLenumᵖ(d binary.Decoder, o *GLenumᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGLenumᵖ(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGLenumᵖ) ID() binary.ID      { return binaryIDGLenumᵖ }
+func (*binaryClassGLenumᵖ) New() binary.Object { return &GLenumᵖ{} }
+func (*binaryClassGLenumᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLenumᵖ(e, obj.(*GLenumᵖ))
+}
+func (*binaryClassGLenumᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLenumᵖ{}
+	return obj, doDecodeGLenumᵖ(d, obj)
+}
+func (*binaryClassGLenumᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLenumᵖ(d, obj.(*GLenumᵖ))
+}
+func (*binaryClassGLenumᵖ) Skip(d binary.Decoder) error { return doSkipGLenumᵖ(d) }
+func (*binaryClassGLenumᵖ) Schema() *schema.Class       { return schemaGLenumᵖ }
+
+var schemaGLenumᵖ = &schema.Class{
+	TypeID:  binaryIDGLenumᵖ,
+	Package: "gles",
+	Name:    "GLenumᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassGLenumᶜᵖ struct{}
+
+func (*GLenumᶜᵖ) Class() binary.Class {
+	return (*binaryClassGLenumᶜᵖ)(nil)
+}
+func doEncodeGLenumᶜᵖ(e binary.Encoder, o *GLenumᶜᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGLenumᶜᵖ(d binary.Decoder, o *GLenumᶜᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipGLenumᶜᵖ(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGLenumᶜᵖ) ID() binary.ID      { return binaryIDGLenumᶜᵖ }
+func (*binaryClassGLenumᶜᵖ) New() binary.Object { return &GLenumᶜᵖ{} }
+func (*binaryClassGLenumᶜᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGLenumᶜᵖ(e, obj.(*GLenumᶜᵖ))
+}
+func (*binaryClassGLenumᶜᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GLenumᶜᵖ{}
+	return obj, doDecodeGLenumᶜᵖ(d, obj)
+}
+func (*binaryClassGLenumᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGLenumᶜᵖ(d, obj.(*GLenumᶜᵖ))
+}
+func (*binaryClassGLenumᶜᵖ) Skip(d binary.Decoder) error { return doSkipGLenumᶜᵖ(d) }
+func (*binaryClassGLenumᶜᵖ) Schema() *schema.Class       { return schemaGLenumᶜᵖ }
+
+var schemaGLenumᶜᵖ = &schema.Class{
+	TypeID:  binaryIDGLenumᶜᵖ,
+	Package: "gles",
+	Name:    "GLenumᶜᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassGLsync struct{}
 
 func (*GLsync) Class() binary.Class {
@@ -7740,7 +7602,7 @@ func doDecodeGlActiveTexture(d binary.Decoder, o *GlActiveTexture) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Unit = TextureUnit(obj)
+		o.Unit = GLenum(obj)
 	}
 	return nil
 }
@@ -7774,7 +7636,7 @@ var schemaGlActiveTexture = &schema.Class{
 	Name:    "GlActiveTexture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Unit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
+		{Declared: "Unit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -7873,7 +7735,7 @@ func doDecodeGlBeginQuery(d binary.Decoder, o *GlBeginQuery) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -7915,7 +7777,7 @@ var schemaGlBeginQuery = &schema.Class{
 	Name:    "GlBeginQuery",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
 }
@@ -7944,7 +7806,7 @@ func doDecodeGlBeginQueryEXT(d binary.Decoder, o *GlBeginQueryEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -7986,7 +7848,7 @@ var schemaGlBeginQueryEXT = &schema.Class{
 	Name:    "GlBeginQueryEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
 }
@@ -8100,7 +7962,7 @@ func doDecodeGlBindBuffer(d binary.Decoder, o *GlBindBuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -8142,7 +8004,7 @@ var schemaGlBindBuffer = &schema.Class{
 	Name:    "GlBindBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 	},
 }
@@ -8174,7 +8036,7 @@ func doDecodeGlBindBufferBase(d binary.Decoder, o *GlBindBufferBase) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = IndexedBufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -8224,7 +8086,7 @@ var schemaGlBindBufferBase = &schema.Class{
 	Name:    "GlBindBufferBase",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 	},
@@ -8254,7 +8116,7 @@ func doDecodeGlBindFramebuffer(d binary.Decoder, o *GlBindFramebuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = FramebufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -8296,7 +8158,7 @@ var schemaGlBindFramebuffer = &schema.Class{
 	Name:    "GlBindFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 	},
 }
@@ -8325,7 +8187,7 @@ func doDecodeGlBindRenderbuffer(d binary.Decoder, o *GlBindRenderbuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = RenderbufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -8367,7 +8229,7 @@ var schemaGlBindRenderbuffer = &schema.Class{
 	Name:    "GlBindRenderbuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 	},
 }
@@ -8396,7 +8258,7 @@ func doDecodeGlBindTexture(d binary.Decoder, o *GlBindTexture) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -8438,7 +8300,7 @@ var schemaGlBindTexture = &schema.Class{
 	Name:    "GlBindTexture",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 	},
 }
@@ -8679,7 +8541,7 @@ func doDecodeGlBlendEquation(d binary.Decoder, o *GlBlendEquation) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Equation = BlendEquation(obj)
+		o.Equation = GLenum(obj)
 	}
 	return nil
 }
@@ -8713,7 +8575,7 @@ var schemaGlBlendEquation = &schema.Class{
 	Name:    "GlBlendEquation",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Equation", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -8741,12 +8603,12 @@ func doDecodeGlBlendEquationSeparate(d binary.Decoder, o *GlBlendEquationSeparat
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Rgb = BlendEquation(obj)
+		o.Rgb = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Alpha = BlendEquation(obj)
+		o.Alpha = GLenum(obj)
 	}
 	return nil
 }
@@ -8787,8 +8649,8 @@ var schemaGlBlendEquationSeparate = &schema.Class{
 	Name:    "GlBlendEquationSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Rgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
-		{Declared: "Alpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "Rgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -8816,12 +8678,12 @@ func doDecodeGlBlendFunc(d binary.Decoder, o *GlBlendFunc) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SrcFactor = BlendFactor(obj)
+		o.SrcFactor = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DstFactor = BlendFactor(obj)
+		o.DstFactor = GLenum(obj)
 	}
 	return nil
 }
@@ -8858,8 +8720,8 @@ var schemaGlBlendFunc = &schema.Class{
 	Name:    "GlBlendFunc",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "DstFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -8893,22 +8755,22 @@ func doDecodeGlBlendFuncSeparate(d binary.Decoder, o *GlBlendFuncSeparate) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SrcFactorRgb = BlendFactor(obj)
+		o.SrcFactorRgb = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DstFactorRgb = BlendFactor(obj)
+		o.DstFactorRgb = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.SrcFactorAlpha = BlendFactor(obj)
+		o.SrcFactorAlpha = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DstFactorAlpha = BlendFactor(obj)
+		o.DstFactorAlpha = GLenum(obj)
 	}
 	return nil
 }
@@ -8953,10 +8815,10 @@ var schemaGlBlendFuncSeparate = &schema.Class{
 	Name:    "GlBlendFuncSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -9048,12 +8910,12 @@ func doDecodeGlBlitFramebuffer(d binary.Decoder, o *GlBlitFramebuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Mask = ClearMask(obj)
+		o.Mask = GLbitfield(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Filter = TextureFilterMode(obj)
+		o.Filter = GLenum(obj)
 	}
 	return nil
 }
@@ -9122,8 +8984,8 @@ var schemaGlBlitFramebuffer = &schema.Class{
 		{Declared: "DstY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "DstX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "DstY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
-		{Declared: "Filter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
+		{Declared: "Filter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -9157,7 +9019,7 @@ func doDecodeGlBufferData(d binary.Decoder, o *GlBufferData) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -9170,7 +9032,7 @@ func doDecodeGlBufferData(d binary.Decoder, o *GlBufferData) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Usage = BufferUsage(obj)
+		o.Usage = GLenum(obj)
 	}
 	return nil
 }
@@ -9213,10 +9075,10 @@ var schemaGlBufferData = &schema.Class{
 	Name:    "GlBufferData",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "BufferDataPointer", ID: (*BufferDataPointer)(nil).Class().ID()}},
-		{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -9250,7 +9112,7 @@ func doDecodeGlBufferSubData(d binary.Decoder, o *GlBufferSubData) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -9306,7 +9168,7 @@ var schemaGlBufferSubData = &schema.Class{
 	Name:    "GlBufferSubData",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "BufferDataPointer", ID: (*BufferDataPointer)(nil).Class().ID()}},
@@ -9337,12 +9199,12 @@ func doDecodeGlCheckFramebufferStatus(d binary.Decoder, o *GlCheckFramebufferSta
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = FramebufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Result = FramebufferStatus(obj)
+		o.Result = GLenum(obj)
 	}
 	return nil
 }
@@ -9383,8 +9245,8 @@ var schemaGlCheckFramebufferStatus = &schema.Class{
 	Name:    "GlCheckFramebufferStatus",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -9409,7 +9271,7 @@ func doDecodeGlClear(d binary.Decoder, o *GlClear) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Mask = ClearMask(obj)
+		o.Mask = GLbitfield(obj)
 	}
 	return nil
 }
@@ -9443,7 +9305,7 @@ var schemaGlClear = &schema.Class{
 	Name:    "GlClear",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
 
@@ -9998,7 +9860,7 @@ func doDecodeGlCompressedTexImage2D(d binary.Decoder, o *GlCompressedTexImage2D)
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10008,7 +9870,7 @@ func doDecodeGlCompressedTexImage2D(d binary.Decoder, o *GlCompressedTexImage2D)
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = CompressedTexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10088,9 +9950,9 @@ var schemaGlCompressedTexImage2D = &schema.Class{
 	Name:    "GlCompressedTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10144,7 +10006,7 @@ func doDecodeGlCompressedTexSubImage2D(d binary.Decoder, o *GlCompressedTexSubIm
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10174,7 +10036,7 @@ func doDecodeGlCompressedTexSubImage2D(d binary.Decoder, o *GlCompressedTexSubIm
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = CompressedTexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10244,13 +10106,13 @@ var schemaGlCompressedTexSubImage2D = &schema.Class{
 	Name:    "GlCompressedTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
@@ -10298,7 +10160,7 @@ func doDecodeGlCopyTexImage2D(d binary.Decoder, o *GlCopyTexImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10308,7 +10170,7 @@ func doDecodeGlCopyTexImage2D(d binary.Decoder, o *GlCopyTexImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10388,9 +10250,9 @@ var schemaGlCopyTexImage2D = &schema.Class{
 	Name:    "GlCopyTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10441,7 +10303,7 @@ func doDecodeGlCopyTexSubImage2D(d binary.Decoder, o *GlCopyTexSubImage2D) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -10533,7 +10395,7 @@ var schemaGlCopyTexSubImage2D = &schema.Class{
 	Name:    "GlCopyTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -10627,7 +10489,7 @@ func doDecodeGlCreateShader(d binary.Decoder, o *GlCreateShader) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ShaderType(obj)
+		o.Type = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -10669,7 +10531,7 @@ var schemaGlCreateShader = &schema.Class{
 	Name:    "GlCreateShader",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
@@ -10695,7 +10557,7 @@ func doDecodeGlCullFace(d binary.Decoder, o *GlCullFace) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Mode = FaceMode(obj)
+		o.Mode = GLenum(obj)
 	}
 	return nil
 }
@@ -10729,7 +10591,7 @@ var schemaGlCullFace = &schema.Class{
 	Name:    "GlCullFace",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -11685,7 +11547,7 @@ func doDecodeGlDepthFunc(d binary.Decoder, o *GlDepthFunc) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Function = TestFunction(obj)
+		o.Function = GLenum(obj)
 	}
 	return nil
 }
@@ -11719,7 +11581,7 @@ var schemaGlDepthFunc = &schema.Class{
 	Name:    "GlDepthFunc",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -11945,7 +11807,7 @@ func doDecodeGlDisable(d binary.Decoder, o *GlDisable) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Capability = Capability(obj)
+		o.Capability = GLenum(obj)
 	}
 	return nil
 }
@@ -11979,7 +11841,7 @@ var schemaGlDisable = &schema.Class{
 	Name:    "GlDisable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12004,7 +11866,7 @@ func doDecodeGlDisableClientState(d binary.Decoder, o *GlDisableClientState) err
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ArrayType(obj)
+		o.Type = GLenum(obj)
 	}
 	return nil
 }
@@ -12040,7 +11902,7 @@ var schemaGlDisableClientState = &schema.Class{
 	Name:    "GlDisableClientState",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12138,7 +12000,7 @@ func doDecodeGlDiscardFramebufferEXT(d binary.Decoder, o *GlDiscardFramebufferEX
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = FramebufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -12160,7 +12022,7 @@ func doSkipGlDiscardFramebufferEXT(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*DiscardFramebufferAttachmentᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*GLenumᵖ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -12190,9 +12052,9 @@ var schemaGlDiscardFramebufferEXT = &schema.Class{
 	Name:    "GlDiscardFramebufferEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Attachments", Type: &schema.Struct{Name: "DiscardFramebufferAttachmentᵖ", ID: (*DiscardFramebufferAttachmentᵖ)(nil).Class().ID()}},
+		{Declared: "Attachments", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -12223,7 +12085,7 @@ func doDecodeGlDrawArrays(d binary.Decoder, o *GlDrawArrays) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DrawMode = DrawMode(obj)
+		o.DrawMode = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -12273,7 +12135,7 @@ var schemaGlDrawArrays = &schema.Class{
 	Name:    "GlDrawArrays",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "IndexCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -12356,7 +12218,7 @@ func doDecodeGlDrawElements(d binary.Decoder, o *GlDrawElements) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.DrawMode = DrawMode(obj)
+		o.DrawMode = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -12366,7 +12228,7 @@ func doDecodeGlDrawElements(d binary.Decoder, o *GlDrawElements) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.IndicesType = IndicesType(obj)
+		o.IndicesType = GLenum(obj)
 	}
 	if err := d.Value(&o.Indices); err != nil {
 		return err
@@ -12412,9 +12274,9 @@ var schemaGlDrawElements = &schema.Class{
 	Name:    "GlDrawElements",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ElementCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "IndicesType", Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer", ID: (*IndicesPointer)(nil).Class().ID()}},
 	},
 }
@@ -12443,7 +12305,7 @@ func doDecodeGlEGLImageTargetRenderbufferStorageOES(d binary.Decoder, o *GlEGLIm
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = ImageTargetRenderbufferStorage(obj)
+		o.Target = GLenum(obj)
 	}
 	if err := d.Value(&o.Image); err != nil {
 		return err
@@ -12491,7 +12353,7 @@ var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Class{
 	Name:    "GlEGLImageTargetRenderbufferStorageOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Image", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
@@ -12567,7 +12429,7 @@ func doDecodeGlEGLImageTargetTexture2DOES(d binary.Decoder, o *GlEGLImageTargetT
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = ImageTargetTexture(obj)
+		o.Target = GLenum(obj)
 	}
 	if err := d.Value(&o.Image); err != nil {
 		return err
@@ -12615,7 +12477,7 @@ var schemaGlEGLImageTargetTexture2DOES = &schema.Class{
 	Name:    "GlEGLImageTargetTexture2DOES",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Image", Type: &schema.Struct{Name: "ImageOES", ID: (*ImageOES)(nil).Class().ID()}},
 	},
 }
@@ -12641,7 +12503,7 @@ func doDecodeGlEnable(d binary.Decoder, o *GlEnable) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Capability = Capability(obj)
+		o.Capability = GLenum(obj)
 	}
 	return nil
 }
@@ -12675,7 +12537,7 @@ var schemaGlEnable = &schema.Class{
 	Name:    "GlEnable",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12700,7 +12562,7 @@ func doDecodeGlEnableClientState(d binary.Decoder, o *GlEnableClientState) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = ArrayType(obj)
+		o.Type = GLenum(obj)
 	}
 	return nil
 }
@@ -12736,7 +12598,7 @@ var schemaGlEnableClientState = &schema.Class{
 	Name:    "GlEnableClientState",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12824,7 +12686,7 @@ func doDecodeGlEndQuery(d binary.Decoder, o *GlEndQuery) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	return nil
 }
@@ -12858,7 +12720,7 @@ var schemaGlEndQuery = &schema.Class{
 	Name:    "GlEndQuery",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12883,7 +12745,7 @@ func doDecodeGlEndQueryEXT(d binary.Decoder, o *GlEndQueryEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	return nil
 }
@@ -12917,7 +12779,7 @@ var schemaGlEndQueryEXT = &schema.Class{
 	Name:    "GlEndQueryEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -12942,7 +12804,7 @@ func doDecodeGlEndTilingQCOM(d binary.Decoder, o *GlEndTilingQCOM) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PreserveMask = TilePreserveMaskQCOM(obj)
+		o.PreserveMask = GLbitfield(obj)
 	}
 	return nil
 }
@@ -12976,7 +12838,7 @@ var schemaGlEndTilingQCOM = &schema.Class{
 	Name:    "GlEndTilingQCOM",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
 
@@ -13187,17 +13049,17 @@ func doDecodeGlFramebufferRenderbuffer(d binary.Decoder, o *GlFramebufferRenderb
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FramebufferTarget = FramebufferTarget(obj)
+		o.FramebufferTarget = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FramebufferAttachment = FramebufferAttachment(obj)
+		o.FramebufferAttachment = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.RenderbufferTarget = RenderbufferTarget(obj)
+		o.RenderbufferTarget = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -13249,9 +13111,9 @@ var schemaGlFramebufferRenderbuffer = &schema.Class{
 	Name:    "GlFramebufferRenderbuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 	},
 }
@@ -13289,17 +13151,17 @@ func doDecodeGlFramebufferTexture2D(d binary.Decoder, o *GlFramebufferTexture2D)
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FramebufferTarget = FramebufferTarget(obj)
+		o.FramebufferTarget = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FramebufferAttachment = FramebufferAttachment(obj)
+		o.FramebufferAttachment = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.TextureTarget = TextureImageTarget(obj)
+		o.TextureTarget = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -13357,9 +13219,9 @@ var schemaGlFramebufferTexture2D = &schema.Class{
 	Name:    "GlFramebufferTexture2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -13386,7 +13248,7 @@ func doDecodeGlFrontFace(d binary.Decoder, o *GlFrontFace) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Orientation = FaceOrientation(obj)
+		o.Orientation = GLenum(obj)
 	}
 	return nil
 }
@@ -13420,7 +13282,7 @@ var schemaGlFrontFace = &schema.Class{
 	Name:    "GlFrontFace",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Orientation", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
+		{Declared: "Orientation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -14187,7 +14049,7 @@ func doDecodeGlGenerateMipmap(d binary.Decoder, o *GlGenerateMipmap) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	return nil
 }
@@ -14221,7 +14083,7 @@ var schemaGlGenerateMipmap = &schema.Class{
 	Name:    "GlGenerateMipmap",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -14267,55 +14129,6 @@ var schemaS32ᵖ = &schema.Class{
 	TypeID:  binaryIDS32ᵖ,
 	Package: "gles",
 	Name:    "S32ᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassShaderAttribTypeᵖ struct{}
-
-func (*ShaderAttribTypeᵖ) Class() binary.Class {
-	return (*binaryClassShaderAttribTypeᵖ)(nil)
-}
-func doEncodeShaderAttribTypeᵖ(e binary.Encoder, o *ShaderAttribTypeᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeShaderAttribTypeᵖ(d binary.Decoder, o *ShaderAttribTypeᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipShaderAttribTypeᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassShaderAttribTypeᵖ) ID() binary.ID      { return binaryIDShaderAttribTypeᵖ }
-func (*binaryClassShaderAttribTypeᵖ) New() binary.Object { return &ShaderAttribTypeᵖ{} }
-func (*binaryClassShaderAttribTypeᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeShaderAttribTypeᵖ(e, obj.(*ShaderAttribTypeᵖ))
-}
-func (*binaryClassShaderAttribTypeᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ShaderAttribTypeᵖ{}
-	return obj, doDecodeShaderAttribTypeᵖ(d, obj)
-}
-func (*binaryClassShaderAttribTypeᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeShaderAttribTypeᵖ(d, obj.(*ShaderAttribTypeᵖ))
-}
-func (*binaryClassShaderAttribTypeᵖ) Skip(d binary.Decoder) error {
-	return doSkipShaderAttribTypeᵖ(d)
-}
-func (*binaryClassShaderAttribTypeᵖ) Schema() *schema.Class { return schemaShaderAttribTypeᵖ }
-
-var schemaShaderAttribTypeᵖ = &schema.Class{
-	TypeID:  binaryIDShaderAttribTypeᵖ,
-	Package: "gles",
-	Name:    "ShaderAttribTypeᵖ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
@@ -14405,7 +14218,7 @@ func doSkipGlGetActiveAttrib(d binary.Decoder) error {
 	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*ShaderAttribTypeᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*GLenumᵖ)(nil)); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*Charᵖ)(nil)); err != nil {
@@ -14439,57 +14252,8 @@ var schemaGlGetActiveAttrib = &schema.Class{
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
-		{Declared: "Type", Type: &schema.Struct{Name: "ShaderAttribTypeᵖ", ID: (*ShaderAttribTypeᵖ)(nil).Class().ID()}},
+		{Declared: "Type", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassShaderUniformTypeᵖ struct{}
-
-func (*ShaderUniformTypeᵖ) Class() binary.Class {
-	return (*binaryClassShaderUniformTypeᵖ)(nil)
-}
-func doEncodeShaderUniformTypeᵖ(e binary.Encoder, o *ShaderUniformTypeᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeShaderUniformTypeᵖ(d binary.Decoder, o *ShaderUniformTypeᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipShaderUniformTypeᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassShaderUniformTypeᵖ) ID() binary.ID      { return binaryIDShaderUniformTypeᵖ }
-func (*binaryClassShaderUniformTypeᵖ) New() binary.Object { return &ShaderUniformTypeᵖ{} }
-func (*binaryClassShaderUniformTypeᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeShaderUniformTypeᵖ(e, obj.(*ShaderUniformTypeᵖ))
-}
-func (*binaryClassShaderUniformTypeᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ShaderUniformTypeᵖ{}
-	return obj, doDecodeShaderUniformTypeᵖ(d, obj)
-}
-func (*binaryClassShaderUniformTypeᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeShaderUniformTypeᵖ(d, obj.(*ShaderUniformTypeᵖ))
-}
-func (*binaryClassShaderUniformTypeᵖ) Skip(d binary.Decoder) error {
-	return doSkipShaderUniformTypeᵖ(d)
-}
-func (*binaryClassShaderUniformTypeᵖ) Schema() *schema.Class { return schemaShaderUniformTypeᵖ }
-
-var schemaShaderUniformTypeᵖ = &schema.Class{
-	TypeID:  binaryIDShaderUniformTypeᵖ,
-	Package: "gles",
-	Name:    "ShaderUniformTypeᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -14577,7 +14341,7 @@ func doSkipGlGetActiveUniform(d binary.Decoder) error {
 	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*ShaderUniformTypeᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*GLenumᵖ)(nil)); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*Charᵖ)(nil)); err != nil {
@@ -14611,7 +14375,7 @@ var schemaGlGetActiveUniform = &schema.Class{
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
-		{Declared: "Type", Type: &schema.Struct{Name: "ShaderUniformTypeᵖ", ID: (*ShaderUniformTypeᵖ)(nil).Class().ID()}},
+		{Declared: "Type", Type: &schema.Struct{Name: "GLenumᵖ", ID: (*GLenumᵖ)(nil).Class().ID()}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ", ID: (*Charᵖ)(nil).Class().ID()}},
 	},
 }
@@ -14767,7 +14531,7 @@ func doDecodeGlGetActiveUniformBlockiv(d binary.Decoder, o *GlGetActiveUniformBl
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ParameterName = UniformBlockParameter(obj)
+		o.ParameterName = GLenum(obj)
 	}
 	if err := d.Value(&o.Parameters); err != nil {
 		return err
@@ -14819,7 +14583,7 @@ var schemaGlGetActiveUniformBlockiv = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "ParameterName", Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32}},
+		{Declared: "ParameterName", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameters", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -14917,7 +14681,7 @@ func doDecodeGlGetActiveUniformsiv(d binary.Decoder, o *GlGetActiveUniformsiv) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ParameterName = UniformBlockParameter(obj)
+		o.ParameterName = GLenum(obj)
 	}
 	if err := d.Value(&o.Parameters); err != nil {
 		return err
@@ -14971,7 +14735,7 @@ var schemaGlGetActiveUniformsiv = &schema.Class{
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "UniformIndices", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
-		{Declared: "ParameterName", Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32}},
+		{Declared: "ParameterName", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameters", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15225,7 +14989,7 @@ func doDecodeGlGetBooleanv(d binary.Decoder, o *GlGetBooleanv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Param = StateVariable(obj)
+		o.Param = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -15265,7 +15029,7 @@ var schemaGlGetBooleanv = &schema.Class{
 	Name:    "GlGetBooleanv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15297,12 +15061,12 @@ func doDecodeGlGetBufferParameteriv(d binary.Decoder, o *GlGetBufferParameteriv)
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = BufferParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -15347,8 +15111,8 @@ var schemaGlGetBufferParameteriv = &schema.Class{
 	Name:    "GlGetBufferParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15374,7 +15138,7 @@ func doDecodeGlGetError(d binary.Decoder, o *GlGetError) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Result = Error(obj)
+		o.Result = GLenum(obj)
 	}
 	return nil
 }
@@ -15408,7 +15172,7 @@ var schemaGlGetError = &schema.Class{
 	Name:    "GlGetError",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "Error", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -15436,7 +15200,7 @@ func doDecodeGlGetFloatv(d binary.Decoder, o *GlGetFloatv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Param = StateVariable(obj)
+		o.Param = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -15476,7 +15240,7 @@ var schemaGlGetFloatv = &schema.Class{
 	Name:    "GlGetFloatv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ", ID: (*F32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15511,17 +15275,17 @@ func doDecodeGlGetFramebufferAttachmentParameteriv(d binary.Decoder, o *GlGetFra
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.FramebufferTarget = FramebufferTarget(obj)
+		o.FramebufferTarget = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Attachment = FramebufferAttachment(obj)
+		o.Attachment = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = FramebufferAttachmentParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -15575,9 +15339,9 @@ var schemaGlGetFramebufferAttachmentParameteriv = &schema.Class{
 	Name:    "GlGetFramebufferAttachmentParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		{Declared: "Attachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15603,7 +15367,7 @@ func doDecodeGlGetGraphicsResetStatusEXT(d binary.Decoder, o *GlGetGraphicsReset
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Result = ResetStatus(obj)
+		o.Result = GLenum(obj)
 	}
 	return nil
 }
@@ -15645,7 +15409,7 @@ var schemaGlGetGraphicsResetStatusEXT = &schema.Class{
 	Name:    "GlGetGraphicsResetStatusEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -15673,7 +15437,7 @@ func doDecodeGlGetIntegerv(d binary.Decoder, o *GlGetIntegerv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Param = StateVariable(obj)
+		o.Param = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -15713,7 +15477,7 @@ var schemaGlGetIntegerv = &schema.Class{
 	Name:    "GlGetIntegerv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -15946,7 +15710,7 @@ func doDecodeGlGetProgramiv(d binary.Decoder, o *GlGetProgramiv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = ProgramParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -15990,7 +15754,7 @@ var schemaGlGetProgramiv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16074,7 +15838,7 @@ func doDecodeGlGetQueryObjecti64v(d binary.Decoder, o *GlGetQueryObjecti64v) err
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16120,7 +15884,7 @@ var schemaGlGetQueryObjecti64v = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16157,7 +15921,7 @@ func doDecodeGlGetQueryObjecti64vEXT(d binary.Decoder, o *GlGetQueryObjecti64vEX
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16205,7 +15969,7 @@ var schemaGlGetQueryObjecti64vEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S64ᵖ", ID: (*S64ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16242,7 +16006,7 @@ func doDecodeGlGetQueryObjectivEXT(d binary.Decoder, o *GlGetQueryObjectivEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16288,7 +16052,7 @@ var schemaGlGetQueryObjectivEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16372,7 +16136,7 @@ func doDecodeGlGetQueryObjectui64v(d binary.Decoder, o *GlGetQueryObjectui64v) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16418,7 +16182,7 @@ var schemaGlGetQueryObjectui64v = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16455,7 +16219,7 @@ func doDecodeGlGetQueryObjectui64vEXT(d binary.Decoder, o *GlGetQueryObjectui64v
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16503,7 +16267,7 @@ var schemaGlGetQueryObjectui64vEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U64ᵖ", ID: (*U64ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16540,7 +16304,7 @@ func doDecodeGlGetQueryObjectuiv(d binary.Decoder, o *GlGetQueryObjectuiv) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16586,7 +16350,7 @@ var schemaGlGetQueryObjectuiv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16623,7 +16387,7 @@ func doDecodeGlGetQueryObjectuivEXT(d binary.Decoder, o *GlGetQueryObjectuivEXT)
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryObjectParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16669,7 +16433,7 @@ var schemaGlGetQueryObjectuivEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ", ID: (*U32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16701,12 +16465,12 @@ func doDecodeGlGetQueryiv(d binary.Decoder, o *GlGetQueryiv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16749,8 +16513,8 @@ var schemaGlGetQueryiv = &schema.Class{
 	Name:    "GlGetQueryiv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16782,12 +16546,12 @@ func doDecodeGlGetQueryivEXT(d binary.Decoder, o *GlGetQueryivEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = QueryParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -16830,8 +16594,8 @@ var schemaGlGetQueryivEXT = &schema.Class{
 	Name:    "GlGetQueryivEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -16863,12 +16627,12 @@ func doDecodeGlGetRenderbufferParameteriv(d binary.Decoder, o *GlGetRenderbuffer
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = RenderbufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = RenderbufferParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -16919,8 +16683,8 @@ var schemaGlGetRenderbufferParameteriv = &schema.Class{
 	Name:    "GlGetRenderbufferParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -17046,12 +16810,12 @@ func doDecodeGlGetShaderPrecisionFormat(d binary.Decoder, o *GlGetShaderPrecisio
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.ShaderType = ShaderType(obj)
+		o.ShaderType = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PrecisionType = PrecisionType(obj)
+		o.PrecisionType = GLenum(obj)
 	}
 	if err := d.Value(&o.Range); err != nil {
 		return err
@@ -17108,8 +16872,8 @@ var schemaGlGetShaderPrecisionFormat = &schema.Class{
 	Name:    "GlGetShaderPrecisionFormat",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "ShaderType", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
-		{Declared: "PrecisionType", Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32}},
+		{Declared: "ShaderType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "PrecisionType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Range", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 		{Declared: "Precision", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
@@ -17238,7 +17002,7 @@ func doDecodeGlGetShaderiv(d binary.Decoder, o *GlGetShaderiv) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = ShaderParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Value); err != nil {
 		return err
@@ -17282,7 +17046,7 @@ var schemaGlGetShaderiv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -17311,7 +17075,7 @@ func doDecodeGlGetString(d binary.Decoder, o *GlGetString) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Param = StringConstant(obj)
+		o.Param = GLenum(obj)
 	}
 	if err := d.Value(&o.Result); err != nil {
 		return err
@@ -17351,7 +17115,7 @@ var schemaGlGetString = &schema.Class{
 	Name:    "GlGetString",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Param", Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Struct{Name: "Charᶜᵖ", ID: (*Charᶜᵖ)(nil).Class().ID()}},
 	},
 }
@@ -17383,12 +17147,12 @@ func doDecodeGlGetTexParameterfv(d binary.Decoder, o *GlGetTexParameterfv) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = TextureParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -17433,8 +17197,8 @@ var schemaGlGetTexParameterfv = &schema.Class{
 	Name:    "GlGetTexParameterfv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "F32ᶜᵖ", ID: (*F32ᶜᵖ)(nil).Class().ID()}},
 	},
 }
@@ -17466,12 +17230,12 @@ func doDecodeGlGetTexParameteriv(d binary.Decoder, o *GlGetTexParameteriv) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = TextureParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if err := d.Value(&o.Values); err != nil {
 		return err
@@ -17516,8 +17280,8 @@ var schemaGlGetTexParameteriv = &schema.Class{
 	Name:    "GlGetTexParameteriv",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ", ID: (*S32ᵖ)(nil).Class().ID()}},
 	},
 }
@@ -17840,12 +17604,12 @@ func doDecodeGlHint(d binary.Decoder, o *GlHint) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = HintTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Mode = HintMode(obj)
+		o.Mode = GLenum(obj)
 	}
 	return nil
 }
@@ -17882,8 +17646,8 @@ var schemaGlHint = &schema.Class{
 	Name:    "GlHint",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32}},
-		{Declared: "Mode", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -17985,7 +17749,7 @@ func doDecodeGlInvalidateFramebuffer(d binary.Decoder, o *GlInvalidateFramebuffe
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = FramebufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -18007,7 +17771,7 @@ func doSkipGlInvalidateFramebuffer(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*FramebufferAttachmentᶜᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*GLenumᶜᵖ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -18037,9 +17801,9 @@ var schemaGlInvalidateFramebuffer = &schema.Class{
 	Name:    "GlInvalidateFramebuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Attachments", Type: &schema.Struct{Name: "FramebufferAttachmentᶜᵖ", ID: (*FramebufferAttachmentᶜᵖ)(nil).Class().ID()}},
+		{Declared: "Attachments", Type: &schema.Struct{Name: "GLenumᶜᵖ", ID: (*GLenumᶜᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -18138,7 +17902,7 @@ func doDecodeGlIsEnabled(d binary.Decoder, o *GlIsEnabled) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Capability = Capability(obj)
+		o.Capability = GLenum(obj)
 	}
 	if obj, err := d.Bool(); err != nil {
 		return err
@@ -18180,7 +17944,7 @@ var schemaGlIsEnabled = &schema.Class{
 	Name:    "GlIsEnabled",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -18904,7 +18668,7 @@ func doDecodeGlMapBufferRange(d binary.Decoder, o *GlMapBufferRange) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -18919,7 +18683,7 @@ func doDecodeGlMapBufferRange(d binary.Decoder, o *GlMapBufferRange) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Access = MapBufferRangeAccess(obj)
+		o.Access = GLbitfield(obj)
 	}
 	if err := d.Value(&o.Result); err != nil {
 		return err
@@ -18968,10 +18732,10 @@ var schemaGlMapBufferRange = &schema.Class{
 	Name:    "GlMapBufferRange",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Access", Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32}},
+		{Declared: "Access", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
 	},
 }
@@ -19000,7 +18764,7 @@ func doDecodeGlPixelStorei(d binary.Decoder, o *GlPixelStorei) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = PixelStoreParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -19042,7 +18806,7 @@ var schemaGlPixelStorei = &schema.Class{
 	Name:    "GlPixelStorei",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -19360,7 +19124,7 @@ func doDecodeGlQueryCounterEXT(d binary.Decoder, o *GlQueryCounterEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = QueryTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	return nil
 }
@@ -19398,7 +19162,7 @@ var schemaGlQueryCounterEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -19461,12 +19225,12 @@ func doDecodeGlReadPixels(d binary.Decoder, o *GlReadPixels) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = BaseTexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = TexelType(obj)
+		o.Type = GLenum(obj)
 	}
 	if err := d.Value(&o.Data); err != nil {
 		return err
@@ -19525,8 +19289,8 @@ var schemaGlReadPixels = &schema.Class{
 		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ", ID: (*Voidᵖ)(nil).Class().ID()}},
 	},
 }
@@ -19612,12 +19376,12 @@ func doDecodeGlRenderbufferStorage(d binary.Decoder, o *GlRenderbufferStorage) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = RenderbufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = RenderbufferFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -19672,8 +19436,8 @@ var schemaGlRenderbufferStorage = &schema.Class{
 	Name:    "GlRenderbufferStorage",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -19712,7 +19476,7 @@ func doDecodeGlRenderbufferStorageMultisample(d binary.Decoder, o *GlRenderbuffe
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = RenderbufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -19722,7 +19486,7 @@ func doDecodeGlRenderbufferStorageMultisample(d binary.Decoder, o *GlRenderbuffe
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = RenderbufferFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -19786,9 +19550,9 @@ var schemaGlRenderbufferStorageMultisample = &schema.Class{
 	Name:    "GlRenderbufferStorageMultisample",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -20301,7 +20065,7 @@ func doDecodeGlStartTilingQCOM(d binary.Decoder, o *GlStartTilingQCOM) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.PreserveMask = TilePreserveMaskQCOM(obj)
+		o.PreserveMask = GLbitfield(obj)
 	}
 	return nil
 }
@@ -20351,7 +20115,7 @@ var schemaGlStartTilingQCOM = &schema.Class{
 		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
 
@@ -20385,12 +20149,12 @@ func doDecodeGlStencilFuncSeparate(d binary.Decoder, o *GlStencilFuncSeparate) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Face = FaceMode(obj)
+		o.Face = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Function = TestFunction(obj)
+		o.Function = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -20445,8 +20209,8 @@ var schemaGlStencilFuncSeparate = &schema.Class{
 	Name:    "GlStencilFuncSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ReferenceValue", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -20535,7 +20299,7 @@ func doDecodeGlStencilMaskSeparate(d binary.Decoder, o *GlStencilMaskSeparate) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Face = FaceMode(obj)
+		o.Face = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -20579,7 +20343,7 @@ var schemaGlStencilMaskSeparate = &schema.Class{
 	Name:    "GlStencilMaskSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -20614,22 +20378,22 @@ func doDecodeGlStencilOpSeparate(d binary.Decoder, o *GlStencilOpSeparate) error
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Face = FaceMode(obj)
+		o.Face = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.StencilFail = StencilAction(obj)
+		o.StencilFail = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.StencilPassDepthFail = StencilAction(obj)
+		o.StencilPassDepthFail = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.StencilPassDepthPass = StencilAction(obj)
+		o.StencilPassDepthPass = GLenum(obj)
 	}
 	return nil
 }
@@ -20674,10 +20438,10 @@ var schemaGlStencilOpSeparate = &schema.Class{
 	Name:    "GlStencilOpSeparate",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		{Declared: "StencilFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
-		{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
-		{Declared: "StencilPassDepthPass", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "StencilFail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "StencilPassDepthPass", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -20726,7 +20490,7 @@ func doDecodeGlTexImage2D(d binary.Decoder, o *GlTexImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -20736,7 +20500,7 @@ func doDecodeGlTexImage2D(d binary.Decoder, o *GlTexImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.InternalFormat = TexelFormat(obj)
+		o.InternalFormat = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -20756,12 +20520,12 @@ func doDecodeGlTexImage2D(d binary.Decoder, o *GlTexImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = TexelType(obj)
+		o.Type = GLenum(obj)
 	}
 	if err := d.Value(&o.Data); err != nil {
 		return err
@@ -20822,14 +20586,14 @@ var schemaGlTexImage2D = &schema.Class{
 	Name:    "GlTexImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "InternalFormat", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "InternalFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
@@ -20861,12 +20625,12 @@ func doDecodeGlTexParameterf(d binary.Decoder, o *GlTexParameterf) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = TextureParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if obj, err := d.Float32(); err != nil {
 		return err
@@ -20911,8 +20675,8 @@ var schemaGlTexParameterf = &schema.Class{
 	Name:    "GlTexParameterf",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -20944,12 +20708,12 @@ func doDecodeGlTexParameteri(d binary.Decoder, o *GlTexParameteri) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Parameter = TextureParameter(obj)
+		o.Parameter = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -20994,8 +20758,8 @@ var schemaGlTexParameteri = &schema.Class{
 	Name:    "GlTexParameteri",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -21030,7 +20794,7 @@ func doDecodeGlTexStorage1DEXT(d binary.Decoder, o *GlTexStorage1DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21040,7 +20804,7 @@ func doDecodeGlTexStorage1DEXT(d binary.Decoder, o *GlTexStorage1DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21088,9 +20852,9 @@ var schemaGlTexStorage1DEXT = &schema.Class{
 	Name:    "GlTexStorage1DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -21128,7 +20892,7 @@ func doDecodeGlTexStorage2DEXT(d binary.Decoder, o *GlTexStorage2DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21138,7 +20902,7 @@ func doDecodeGlTexStorage2DEXT(d binary.Decoder, o *GlTexStorage2DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21194,9 +20958,9 @@ var schemaGlTexStorage2DEXT = &schema.Class{
 	Name:    "GlTexStorage2DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -21238,7 +21002,7 @@ func doDecodeGlTexStorage3DEXT(d binary.Decoder, o *GlTexStorage3DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21248,7 +21012,7 @@ func doDecodeGlTexStorage3DEXT(d binary.Decoder, o *GlTexStorage3DEXT) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21312,9 +21076,9 @@ var schemaGlTexStorage3DEXT = &schema.Class{
 	Name:    "GlTexStorage3DEXT",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -21366,7 +21130,7 @@ func doDecodeGlTexSubImage2D(d binary.Decoder, o *GlTexSubImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureImageTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21396,12 +21160,12 @@ func doDecodeGlTexSubImage2D(d binary.Decoder, o *GlTexSubImage2D) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = TexelType(obj)
+		o.Type = GLenum(obj)
 	}
 	if err := d.Value(&o.Data); err != nil {
 		return err
@@ -21462,14 +21226,14 @@ var schemaGlTexSubImage2D = &schema.Class{
 	Name:    "GlTexSubImage2D",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer", ID: (*TexturePointer)(nil).Class().ID()}},
 	},
 }
@@ -21512,7 +21276,7 @@ func doDecodeGlTextureStorage1DEXT(d binary.Decoder, o *GlTextureStorage1DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21522,7 +21286,7 @@ func doDecodeGlTextureStorage1DEXT(d binary.Decoder, o *GlTextureStorage1DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21576,9 +21340,9 @@ var schemaGlTextureStorage1DEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -21624,7 +21388,7 @@ func doDecodeGlTextureStorage2DEXT(d binary.Decoder, o *GlTextureStorage2DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21634,7 +21398,7 @@ func doDecodeGlTextureStorage2DEXT(d binary.Decoder, o *GlTextureStorage2DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21696,9 +21460,9 @@ var schemaGlTextureStorage2DEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -21748,7 +21512,7 @@ func doDecodeGlTextureStorage3DEXT(d binary.Decoder, o *GlTextureStorage3DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = TextureTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21758,7 +21522,7 @@ func doDecodeGlTextureStorage3DEXT(d binary.Decoder, o *GlTextureStorage3DEXT) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Format = TexelFormat(obj)
+		o.Format = GLenum(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -21828,9 +21592,9 @@ var schemaGlTextureStorage3DEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
@@ -23582,7 +23346,7 @@ func doDecodeGlUnmapBuffer(d binary.Decoder, o *GlUnmapBuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = BufferTarget(obj)
+		o.Target = GLenum(obj)
 	}
 	return nil
 }
@@ -23616,7 +23380,7 @@ var schemaGlUnmapBuffer = &schema.Class{
 	Name:    "GlUnmapBuffer",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -24416,7 +24180,7 @@ func doDecodeGlVertexAttribPointer(d binary.Decoder, o *GlVertexAttribPointer) e
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Type = VertexAttribType(obj)
+		o.Type = GLenum(obj)
 	}
 	if obj, err := d.Bool(); err != nil {
 		return err
@@ -24482,7 +24246,7 @@ var schemaGlVertexAttribPointer = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
@@ -26504,53 +26268,6 @@ var schemaS64ˢ = &schema.Class{
 	},
 }
 
-type binaryClassShaderAttribTypeˢ struct{}
-
-func (*ShaderAttribTypeˢ) Class() binary.Class {
-	return (*binaryClassShaderAttribTypeˢ)(nil)
-}
-func doEncodeShaderAttribTypeˢ(e binary.Encoder, o *ShaderAttribTypeˢ) error {
-	if err := e.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeShaderAttribTypeˢ(d binary.Decoder, o *ShaderAttribTypeˢ) error {
-	if err := d.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipShaderAttribTypeˢ(d binary.Decoder) error {
-	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassShaderAttribTypeˢ) ID() binary.ID      { return binaryIDShaderAttribTypeˢ }
-func (*binaryClassShaderAttribTypeˢ) New() binary.Object { return &ShaderAttribTypeˢ{} }
-func (*binaryClassShaderAttribTypeˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeShaderAttribTypeˢ(e, obj.(*ShaderAttribTypeˢ))
-}
-func (*binaryClassShaderAttribTypeˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ShaderAttribTypeˢ{}
-	return obj, doDecodeShaderAttribTypeˢ(d, obj)
-}
-func (*binaryClassShaderAttribTypeˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeShaderAttribTypeˢ(d, obj.(*ShaderAttribTypeˢ))
-}
-func (*binaryClassShaderAttribTypeˢ) Skip(d binary.Decoder) error { return doSkipShaderAttribTypeˢ(d) }
-func (*binaryClassShaderAttribTypeˢ) Schema() *schema.Class       { return schemaShaderAttribTypeˢ }
-
-var schemaShaderAttribTypeˢ = &schema.Class{
-	TypeID:  binaryIDShaderAttribTypeˢ,
-	Package: "gles",
-	Name:    "ShaderAttribTypeˢ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
-	},
-}
-
 type binaryClassShaderIdˢ struct{}
 
 func (*ShaderIdˢ) Class() binary.Class {
@@ -26593,55 +26310,6 @@ var schemaShaderIdˢ = &schema.Class{
 	TypeID:  binaryIDShaderIdˢ,
 	Package: "gles",
 	Name:    "ShaderIdˢ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassShaderUniformTypeˢ struct{}
-
-func (*ShaderUniformTypeˢ) Class() binary.Class {
-	return (*binaryClassShaderUniformTypeˢ)(nil)
-}
-func doEncodeShaderUniformTypeˢ(e binary.Encoder, o *ShaderUniformTypeˢ) error {
-	if err := e.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeShaderUniformTypeˢ(d binary.Decoder, o *ShaderUniformTypeˢ) error {
-	if err := d.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipShaderUniformTypeˢ(d binary.Decoder) error {
-	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassShaderUniformTypeˢ) ID() binary.ID      { return binaryIDShaderUniformTypeˢ }
-func (*binaryClassShaderUniformTypeˢ) New() binary.Object { return &ShaderUniformTypeˢ{} }
-func (*binaryClassShaderUniformTypeˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeShaderUniformTypeˢ(e, obj.(*ShaderUniformTypeˢ))
-}
-func (*binaryClassShaderUniformTypeˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ShaderUniformTypeˢ{}
-	return obj, doDecodeShaderUniformTypeˢ(d, obj)
-}
-func (*binaryClassShaderUniformTypeˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeShaderUniformTypeˢ(d, obj.(*ShaderUniformTypeˢ))
-}
-func (*binaryClassShaderUniformTypeˢ) Skip(d binary.Decoder) error {
-	return doSkipShaderUniformTypeˢ(d)
-}
-func (*binaryClassShaderUniformTypeˢ) Schema() *schema.Class { return schemaShaderUniformTypeˢ }
-
-var schemaShaderUniformTypeˢ = &schema.Class{
-	TypeID:  binaryIDShaderUniformTypeˢ,
-	Package: "gles",
-	Name:    "ShaderUniformTypeˢ",
 	Fields: []schema.Field{
 		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
 	},
@@ -28698,458 +28366,6 @@ var schema__GLsyncᵖ = &schema.Class{
 
 var ConstantValues schema.Constants
 
-const _ArrayType_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_POINT_SIZE_ARRAY_OES"
-
-var _ArrayType_map = map[ArrayType]string{}
-
-func init() {
-	_ArrayType_map[32884] = _ArrayType_name[0:15]
-	_ArrayType_map[32885] = _ArrayType_name[15:30]
-	_ArrayType_map[32886] = _ArrayType_name[30:44]
-	_ArrayType_map[32888] = _ArrayType_name[44:66]
-	_ArrayType_map[35740] = _ArrayType_name[66:89]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ArrayType_name[0:15], Value: uint32(32884)},
-			{Name: _ArrayType_name[15:30], Value: uint32(32885)},
-			{Name: _ArrayType_name[30:44], Value: uint32(32886)},
-			{Name: _ArrayType_name[44:66], Value: uint32(32888)},
-			{Name: _ArrayType_name[66:89], Value: uint32(35740)},
-		},
-	})
-}
-
-func (v ArrayType) String() string {
-	if s, ok := _ArrayType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ArrayType(%d)", v)
-}
-
-func (v *ArrayType) Parse(s string) error {
-	for k, t := range _ArrayType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ArrayType", s)
-}
-
-const _ArrayType_GLES_1_1_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAY"
-
-var _ArrayType_GLES_1_1_map = map[ArrayType_GLES_1_1]string{}
-
-func init() {
-	_ArrayType_GLES_1_1_map[32884] = _ArrayType_GLES_1_1_name[0:15]
-	_ArrayType_GLES_1_1_map[32885] = _ArrayType_GLES_1_1_name[15:30]
-	_ArrayType_GLES_1_1_map[32886] = _ArrayType_GLES_1_1_name[30:44]
-	_ArrayType_GLES_1_1_map[32888] = _ArrayType_GLES_1_1_name[44:66]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ArrayType_GLES_1_1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ArrayType_GLES_1_1_name[0:15], Value: uint32(32884)},
-			{Name: _ArrayType_GLES_1_1_name[15:30], Value: uint32(32885)},
-			{Name: _ArrayType_GLES_1_1_name[30:44], Value: uint32(32886)},
-			{Name: _ArrayType_GLES_1_1_name[44:66], Value: uint32(32888)},
-		},
-	})
-}
-
-func (v ArrayType_GLES_1_1) String() string {
-	if s, ok := _ArrayType_GLES_1_1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ArrayType_GLES_1_1(%d)", v)
-}
-
-func (v *ArrayType_GLES_1_1) Parse(s string) error {
-	for k, t := range _ArrayType_GLES_1_1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ArrayType_GLES_1_1", s)
-}
-
-const _ArrayType_OES_point_size_array_name = "GL_POINT_SIZE_ARRAY_OES"
-
-var _ArrayType_OES_point_size_array_map = map[ArrayType_OES_point_size_array]string{}
-
-func init() {
-	_ArrayType_OES_point_size_array_map[35740] = _ArrayType_OES_point_size_array_name[0:23]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ArrayType_OES_point_size_array", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ArrayType_OES_point_size_array_name[0:23], Value: uint32(35740)},
-		},
-	})
-}
-
-func (v ArrayType_OES_point_size_array) String() string {
-	if s, ok := _ArrayType_OES_point_size_array_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ArrayType_OES_point_size_array(%d)", v)
-}
-
-func (v *ArrayType_OES_point_size_array) Parse(s string) error {
-	for k, t := range _ArrayType_OES_point_size_array_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ArrayType_OES_point_size_array", s)
-}
-
-const _BaseTexelFormat_name = "GL_ALPHAGL_RGBGL_RGBA"
-
-var _BaseTexelFormat_map = map[BaseTexelFormat]string{}
-
-func init() {
-	_BaseTexelFormat_map[6406] = _BaseTexelFormat_name[0:8]
-	_BaseTexelFormat_map[6407] = _BaseTexelFormat_name[8:14]
-	_BaseTexelFormat_map[6408] = _BaseTexelFormat_name[14:21]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BaseTexelFormat_name[0:8], Value: uint32(6406)},
-			{Name: _BaseTexelFormat_name[8:14], Value: uint32(6407)},
-			{Name: _BaseTexelFormat_name[14:21], Value: uint32(6408)},
-		},
-	})
-}
-
-func (v BaseTexelFormat) String() string {
-	if s, ok := _BaseTexelFormat_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BaseTexelFormat(%d)", v)
-}
-
-func (v *BaseTexelFormat) Parse(s string) error {
-	for k, t := range _BaseTexelFormat_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BaseTexelFormat", s)
-}
-
-const _BlendEquation_name = "GL_FUNC_ADDGL_FUNC_SUBTRACTGL_FUNC_REVERSE_SUBTRACT"
-
-var _BlendEquation_map = map[BlendEquation]string{}
-
-func init() {
-	_BlendEquation_map[32774] = _BlendEquation_name[0:11]
-	_BlendEquation_map[32778] = _BlendEquation_name[11:27]
-	_BlendEquation_map[32779] = _BlendEquation_name[27:51]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BlendEquation_name[0:11], Value: uint32(32774)},
-			{Name: _BlendEquation_name[11:27], Value: uint32(32778)},
-			{Name: _BlendEquation_name[27:51], Value: uint32(32779)},
-		},
-	})
-}
-
-func (v BlendEquation) String() string {
-	if s, ok := _BlendEquation_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BlendEquation(%d)", v)
-}
-
-func (v *BlendEquation) Parse(s string) error {
-	for k, t := range _BlendEquation_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BlendEquation", s)
-}
-
-const _BlendFactor_name = "GL_ZEROGL_ONEGL_SRC_COLORGL_ONE_MINUS_SRC_COLORGL_SRC_ALPHAGL_ONE_MINUS_SRC_ALPHAGL_DST_ALPHAGL_ONE_MINUS_DST_ALPHAGL_DST_COLORGL_ONE_MINUS_DST_COLORGL_SRC_ALPHA_SATURATEGL_CONSTANT_COLORGL_ONE_MINUS_CONSTANT_COLORGL_CONSTANT_ALPHAGL_ONE_MINUS_CONSTANT_ALPHA"
-
-var _BlendFactor_map = map[BlendFactor]string{}
-
-func init() {
-	_BlendFactor_map[0] = _BlendFactor_name[0:7]
-	_BlendFactor_map[1] = _BlendFactor_name[7:13]
-	_BlendFactor_map[768] = _BlendFactor_name[13:25]
-	_BlendFactor_map[769] = _BlendFactor_name[25:47]
-	_BlendFactor_map[770] = _BlendFactor_name[47:59]
-	_BlendFactor_map[771] = _BlendFactor_name[59:81]
-	_BlendFactor_map[772] = _BlendFactor_name[81:93]
-	_BlendFactor_map[773] = _BlendFactor_name[93:115]
-	_BlendFactor_map[774] = _BlendFactor_name[115:127]
-	_BlendFactor_map[775] = _BlendFactor_name[127:149]
-	_BlendFactor_map[776] = _BlendFactor_name[149:170]
-	_BlendFactor_map[32769] = _BlendFactor_name[170:187]
-	_BlendFactor_map[32770] = _BlendFactor_name[187:214]
-	_BlendFactor_map[32771] = _BlendFactor_name[214:231]
-	_BlendFactor_map[32772] = _BlendFactor_name[231:258]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BlendFactor_name[0:7], Value: uint32(0)},
-			{Name: _BlendFactor_name[7:13], Value: uint32(1)},
-			{Name: _BlendFactor_name[13:25], Value: uint32(768)},
-			{Name: _BlendFactor_name[25:47], Value: uint32(769)},
-			{Name: _BlendFactor_name[47:59], Value: uint32(770)},
-			{Name: _BlendFactor_name[59:81], Value: uint32(771)},
-			{Name: _BlendFactor_name[81:93], Value: uint32(772)},
-			{Name: _BlendFactor_name[93:115], Value: uint32(773)},
-			{Name: _BlendFactor_name[115:127], Value: uint32(774)},
-			{Name: _BlendFactor_name[127:149], Value: uint32(775)},
-			{Name: _BlendFactor_name[149:170], Value: uint32(776)},
-			{Name: _BlendFactor_name[170:187], Value: uint32(32769)},
-			{Name: _BlendFactor_name[187:214], Value: uint32(32770)},
-			{Name: _BlendFactor_name[214:231], Value: uint32(32771)},
-			{Name: _BlendFactor_name[231:258], Value: uint32(32772)},
-		},
-	})
-}
-
-func (v BlendFactor) String() string {
-	if s, ok := _BlendFactor_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BlendFactor(%d)", v)
-}
-
-func (v *BlendFactor) Parse(s string) error {
-	for k, t := range _BlendFactor_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BlendFactor", s)
-}
-
-const _BufferParameter_name = "GL_BUFFER_SIZEGL_BUFFER_USAGE"
-
-var _BufferParameter_map = map[BufferParameter]string{}
-
-func init() {
-	_BufferParameter_map[34660] = _BufferParameter_name[0:14]
-	_BufferParameter_map[34661] = _BufferParameter_name[14:29]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BufferParameter_name[0:14], Value: uint32(34660)},
-			{Name: _BufferParameter_name[14:29], Value: uint32(34661)},
-		},
-	})
-}
-
-func (v BufferParameter) String() string {
-	if s, ok := _BufferParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BufferParameter(%d)", v)
-}
-
-func (v *BufferParameter) Parse(s string) error {
-	for k, t := range _BufferParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BufferParameter", s)
-}
-
-const _BufferTarget_name = "GL_ARRAY_BUFFERGL_ELEMENT_ARRAY_BUFFERGL_PIXEL_PACK_BUFFERGL_PIXEL_UNPACK_BUFFERGL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFERGL_COPY_READ_BUFFERGL_COPY_WRITE_BUFFER"
-
-var _BufferTarget_map = map[BufferTarget]string{}
-
-func init() {
-	_BufferTarget_map[34962] = _BufferTarget_name[0:15]
-	_BufferTarget_map[34963] = _BufferTarget_name[15:38]
-	_BufferTarget_map[35051] = _BufferTarget_name[38:58]
-	_BufferTarget_map[35052] = _BufferTarget_name[58:80]
-	_BufferTarget_map[35345] = _BufferTarget_name[80:97]
-	_BufferTarget_map[35982] = _BufferTarget_name[97:125]
-	_BufferTarget_map[36662] = _BufferTarget_name[125:144]
-	_BufferTarget_map[36663] = _BufferTarget_name[144:164]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BufferTarget_name[0:15], Value: uint32(34962)},
-			{Name: _BufferTarget_name[15:38], Value: uint32(34963)},
-			{Name: _BufferTarget_name[38:58], Value: uint32(35051)},
-			{Name: _BufferTarget_name[58:80], Value: uint32(35052)},
-			{Name: _BufferTarget_name[80:97], Value: uint32(35345)},
-			{Name: _BufferTarget_name[97:125], Value: uint32(35982)},
-			{Name: _BufferTarget_name[125:144], Value: uint32(36662)},
-			{Name: _BufferTarget_name[144:164], Value: uint32(36663)},
-		},
-	})
-}
-
-func (v BufferTarget) String() string {
-	if s, ok := _BufferTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BufferTarget(%d)", v)
-}
-
-func (v *BufferTarget) Parse(s string) error {
-	for k, t := range _BufferTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BufferTarget", s)
-}
-
-const _BufferUsage_name = "GL_STREAM_DRAWGL_STATIC_DRAWGL_DYNAMIC_DRAW"
-
-var _BufferUsage_map = map[BufferUsage]string{}
-
-func init() {
-	_BufferUsage_map[35040] = _BufferUsage_name[0:14]
-	_BufferUsage_map[35044] = _BufferUsage_name[14:28]
-	_BufferUsage_map[35048] = _BufferUsage_name[28:43]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _BufferUsage_name[0:14], Value: uint32(35040)},
-			{Name: _BufferUsage_name[14:28], Value: uint32(35044)},
-			{Name: _BufferUsage_name[28:43], Value: uint32(35048)},
-		},
-	})
-}
-
-func (v BufferUsage) String() string {
-	if s, ok := _BufferUsage_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("BufferUsage(%d)", v)
-}
-
-func (v *BufferUsage) Parse(s string) error {
-	for k, t := range _BufferUsage_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in BufferUsage", s)
-}
-
-const _Capability_name = "GL_CULL_FACEGL_DEPTH_TESTGL_STENCIL_TESTGL_DITHERGL_BLENDGL_SCISSOR_TESTGL_POLYGON_OFFSET_FILLGL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_POINT_SIZE_ARRAY_OES"
-
-var _Capability_map = map[Capability]string{}
-
-func init() {
-	_Capability_map[2884] = _Capability_name[0:12]
-	_Capability_map[2929] = _Capability_name[12:25]
-	_Capability_map[2960] = _Capability_name[25:40]
-	_Capability_map[3024] = _Capability_name[40:49]
-	_Capability_map[3042] = _Capability_name[49:57]
-	_Capability_map[3089] = _Capability_name[57:72]
-	_Capability_map[32823] = _Capability_name[72:94]
-	_Capability_map[32884] = _Capability_name[94:109]
-	_Capability_map[32885] = _Capability_name[109:124]
-	_Capability_map[32886] = _Capability_name[124:138]
-	_Capability_map[32888] = _Capability_name[138:160]
-	_Capability_map[32926] = _Capability_name[160:187]
-	_Capability_map[32928] = _Capability_name[187:205]
-	_Capability_map[35740] = _Capability_name[205:228]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _Capability_name[0:12], Value: uint32(2884)},
-			{Name: _Capability_name[12:25], Value: uint32(2929)},
-			{Name: _Capability_name[25:40], Value: uint32(2960)},
-			{Name: _Capability_name[40:49], Value: uint32(3024)},
-			{Name: _Capability_name[49:57], Value: uint32(3042)},
-			{Name: _Capability_name[57:72], Value: uint32(3089)},
-			{Name: _Capability_name[72:94], Value: uint32(32823)},
-			{Name: _Capability_name[94:109], Value: uint32(32884)},
-			{Name: _Capability_name[109:124], Value: uint32(32885)},
-			{Name: _Capability_name[124:138], Value: uint32(32886)},
-			{Name: _Capability_name[138:160], Value: uint32(32888)},
-			{Name: _Capability_name[160:187], Value: uint32(32926)},
-			{Name: _Capability_name[187:205], Value: uint32(32928)},
-			{Name: _Capability_name[205:228], Value: uint32(35740)},
-		},
-	})
-}
-
-func (v Capability) String() string {
-	if s, ok := _Capability_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Capability(%d)", v)
-}
-
-func (v *Capability) Parse(s string) error {
-	for k, t := range _Capability_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Capability", s)
-}
-
-const _ClearMask_name = "GL_DEPTH_BUFFER_BITGL_STENCIL_BUFFER_BITGL_COLOR_BUFFER_BIT"
-
-var _ClearMask_map = map[ClearMask]string{}
-
-func init() {
-	_ClearMask_map[256] = _ClearMask_name[0:19]
-	_ClearMask_map[1024] = _ClearMask_name[19:40]
-	_ClearMask_map[16384] = _ClearMask_name[40:59]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ClearMask_name[0:19], Value: uint32(256)},
-			{Name: _ClearMask_name[19:40], Value: uint32(1024)},
-			{Name: _ClearMask_name[40:59], Value: uint32(16384)},
-		},
-	})
-}
-
-func (v ClearMask) String() string {
-	if s, ok := _ClearMask_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ClearMask(%d)", v)
-}
-
-func (v *ClearMask) Parse(s string) error {
-	for k, t := range _ClearMask_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ClearMask", s)
-}
-
 const _ClientWaitSyncSignal_name = "GL_ALREADY_SIGNALEDGL_TIMEOUT_EXPIREDGL_CONDITION_SATISFIEDGL_WAIT_FAILED"
 
 var _ClientWaitSyncSignal_map = map[ClientWaitSyncSignal]string{}
@@ -29188,2642 +28404,918 @@ func (v *ClientWaitSyncSignal) Parse(s string) error {
 	return fmt.Errorf("%s not in ClientWaitSyncSignal", s)
 }
 
-const _CompressedTexelFormat_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
+const _GLbitfield_name = "GL_COLOR_BUFFER_BIT0_QCOMGL_MAP_READ_BITGL_MAP_WRITE_BITGL_COLOR_BUFFER_BIT1_QCOMGL_MAP_INVALIDATE_RANGE_BITGL_COLOR_BUFFER_BIT2_QCOMGL_COLOR_BUFFER_BIT3_QCOMGL_MAP_INVALIDATE_BUFFER_BITGL_COLOR_BUFFER_BIT4_QCOMGL_MAP_FLUSH_EXPLICIT_BITGL_MAP_UNSYNCHRONIZED_BITGL_COLOR_BUFFER_BIT5_QCOMGL_COLOR_BUFFER_BIT6_QCOMGL_COLOR_BUFFER_BIT7_QCOMGL_DEPTH_BUFFER_BIT0_QCOMGL_DEPTH_BUFFER_BITGL_DEPTH_BUFFER_BIT1_QCOMGL_DEPTH_BUFFER_BIT2_QCOMGL_STENCIL_BUFFER_BITGL_DEPTH_BUFFER_BIT3_QCOMGL_DEPTH_BUFFER_BIT4_QCOMGL_DEPTH_BUFFER_BIT5_QCOMGL_COLOR_BUFFER_BITGL_DEPTH_BUFFER_BIT6_QCOMGL_DEPTH_BUFFER_BIT7_QCOMGL_STENCIL_BUFFER_BIT0_QCOMGL_STENCIL_BUFFER_BIT1_QCOMGL_STENCIL_BUFFER_BIT2_QCOMGL_STENCIL_BUFFER_BIT3_QCOMGL_STENCIL_BUFFER_BIT4_QCOMGL_STENCIL_BUFFER_BIT5_QCOMGL_STENCIL_BUFFER_BIT6_QCOMGL_STENCIL_BUFFER_BIT7_QCOMGL_MULTISAMPLE_BUFFER_BIT0_QCOMGL_MULTISAMPLE_BUFFER_BIT1_QCOMGL_MULTISAMPLE_BUFFER_BIT2_QCOMGL_MULTISAMPLE_BUFFER_BIT3_QCOMGL_MULTISAMPLE_BUFFER_BIT4_QCOMGL_MULTISAMPLE_BUFFER_BIT5_QCOMGL_MULTISAMPLE_BUFFER_BIT6_QCOMGL_MULTISAMPLE_BUFFER_BIT7_QCOM"
 
-var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{}
+var _GLbitfield_map = map[GLbitfield]string{}
 
 func init() {
-	_CompressedTexelFormat_map[33776] = _CompressedTexelFormat_name[0:31]
-	_CompressedTexelFormat_map[33777] = _CompressedTexelFormat_name[31:63]
-	_CompressedTexelFormat_map[33778] = _CompressedTexelFormat_name[63:95]
-	_CompressedTexelFormat_map[33779] = _CompressedTexelFormat_name[95:127]
-	_CompressedTexelFormat_map[34798] = _CompressedTexelFormat_name[127:161]
-	_CompressedTexelFormat_map[35952] = _CompressedTexelFormat_name[161:193]
-	_CompressedTexelFormat_map[35953] = _CompressedTexelFormat_name[193:232]
-	_CompressedTexelFormat_map[35954] = _CompressedTexelFormat_name[232:270]
-	_CompressedTexelFormat_map[35955] = _CompressedTexelFormat_name[270:315]
-	_CompressedTexelFormat_map[35986] = _CompressedTexelFormat_name[315:329]
-	_CompressedTexelFormat_map[35987] = _CompressedTexelFormat_name[329:359]
-	_CompressedTexelFormat_map[36196] = _CompressedTexelFormat_name[359:375]
-	_CompressedTexelFormat_map[37808] = _CompressedTexelFormat_name[375:406]
-	_CompressedTexelFormat_map[37809] = _CompressedTexelFormat_name[406:437]
-	_CompressedTexelFormat_map[37810] = _CompressedTexelFormat_name[437:468]
-	_CompressedTexelFormat_map[37811] = _CompressedTexelFormat_name[468:499]
-	_CompressedTexelFormat_map[37812] = _CompressedTexelFormat_name[499:530]
-	_CompressedTexelFormat_map[37813] = _CompressedTexelFormat_name[530:561]
-	_CompressedTexelFormat_map[37814] = _CompressedTexelFormat_name[561:592]
-	_CompressedTexelFormat_map[37815] = _CompressedTexelFormat_name[592:623]
-	_CompressedTexelFormat_map[37816] = _CompressedTexelFormat_name[623:655]
-	_CompressedTexelFormat_map[37817] = _CompressedTexelFormat_name[655:687]
-	_CompressedTexelFormat_map[37818] = _CompressedTexelFormat_name[687:719]
-	_CompressedTexelFormat_map[37819] = _CompressedTexelFormat_name[719:752]
-	_CompressedTexelFormat_map[37820] = _CompressedTexelFormat_name[752:785]
-	_CompressedTexelFormat_map[37821] = _CompressedTexelFormat_name[785:818]
-	_CompressedTexelFormat_map[37840] = _CompressedTexelFormat_name[818:857]
-	_CompressedTexelFormat_map[37841] = _CompressedTexelFormat_name[857:896]
-	_CompressedTexelFormat_map[37842] = _CompressedTexelFormat_name[896:935]
-	_CompressedTexelFormat_map[37843] = _CompressedTexelFormat_name[935:974]
-	_CompressedTexelFormat_map[37844] = _CompressedTexelFormat_name[974:1013]
-	_CompressedTexelFormat_map[37845] = _CompressedTexelFormat_name[1013:1052]
-	_CompressedTexelFormat_map[37846] = _CompressedTexelFormat_name[1052:1091]
-	_CompressedTexelFormat_map[37847] = _CompressedTexelFormat_name[1091:1130]
-	_CompressedTexelFormat_map[37848] = _CompressedTexelFormat_name[1130:1170]
-	_CompressedTexelFormat_map[37849] = _CompressedTexelFormat_name[1170:1210]
-	_CompressedTexelFormat_map[37850] = _CompressedTexelFormat_name[1210:1250]
-	_CompressedTexelFormat_map[37851] = _CompressedTexelFormat_name[1250:1291]
-	_CompressedTexelFormat_map[37852] = _CompressedTexelFormat_name[1291:1332]
-	_CompressedTexelFormat_map[37853] = _CompressedTexelFormat_name[1332:1373]
+	_GLbitfield_map[1] = _GLbitfield_name[0:25]
+	_GLbitfield_map[1] = _GLbitfield_name[25:40]
+	_GLbitfield_map[2] = _GLbitfield_name[40:56]
+	_GLbitfield_map[2] = _GLbitfield_name[56:81]
+	_GLbitfield_map[4] = _GLbitfield_name[81:108]
+	_GLbitfield_map[4] = _GLbitfield_name[108:133]
+	_GLbitfield_map[8] = _GLbitfield_name[133:158]
+	_GLbitfield_map[8] = _GLbitfield_name[158:186]
+	_GLbitfield_map[16] = _GLbitfield_name[186:211]
+	_GLbitfield_map[16] = _GLbitfield_name[211:236]
+	_GLbitfield_map[32] = _GLbitfield_name[236:261]
+	_GLbitfield_map[32] = _GLbitfield_name[261:286]
+	_GLbitfield_map[64] = _GLbitfield_name[286:311]
+	_GLbitfield_map[128] = _GLbitfield_name[311:336]
+	_GLbitfield_map[256] = _GLbitfield_name[336:361]
+	_GLbitfield_map[256] = _GLbitfield_name[361:380]
+	_GLbitfield_map[512] = _GLbitfield_name[380:405]
+	_GLbitfield_map[1024] = _GLbitfield_name[405:430]
+	_GLbitfield_map[1024] = _GLbitfield_name[430:451]
+	_GLbitfield_map[2048] = _GLbitfield_name[451:476]
+	_GLbitfield_map[4096] = _GLbitfield_name[476:501]
+	_GLbitfield_map[8192] = _GLbitfield_name[501:526]
+	_GLbitfield_map[16384] = _GLbitfield_name[526:545]
+	_GLbitfield_map[16384] = _GLbitfield_name[545:570]
+	_GLbitfield_map[32768] = _GLbitfield_name[570:595]
+	_GLbitfield_map[65536] = _GLbitfield_name[595:622]
+	_GLbitfield_map[131072] = _GLbitfield_name[622:649]
+	_GLbitfield_map[262144] = _GLbitfield_name[649:676]
+	_GLbitfield_map[524288] = _GLbitfield_name[676:703]
+	_GLbitfield_map[1048576] = _GLbitfield_name[703:730]
+	_GLbitfield_map[2097152] = _GLbitfield_name[730:757]
+	_GLbitfield_map[4194304] = _GLbitfield_name[757:784]
+	_GLbitfield_map[8388608] = _GLbitfield_name[784:811]
+	_GLbitfield_map[16777216] = _GLbitfield_name[811:842]
+	_GLbitfield_map[33554432] = _GLbitfield_name[842:873]
+	_GLbitfield_map[67108864] = _GLbitfield_name[873:904]
+	_GLbitfield_map[134217728] = _GLbitfield_name[904:935]
+	_GLbitfield_map[268435456] = _GLbitfield_name[935:966]
+	_GLbitfield_map[536870912] = _GLbitfield_name[966:997]
+	_GLbitfield_map[1073741824] = _GLbitfield_name[997:1028]
+	_GLbitfield_map[2147483648] = _GLbitfield_name[1028:1059]
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32},
+		Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_name[0:31], Value: uint32(33776)},
-			{Name: _CompressedTexelFormat_name[31:63], Value: uint32(33777)},
-			{Name: _CompressedTexelFormat_name[63:95], Value: uint32(33778)},
-			{Name: _CompressedTexelFormat_name[95:127], Value: uint32(33779)},
-			{Name: _CompressedTexelFormat_name[127:161], Value: uint32(34798)},
-			{Name: _CompressedTexelFormat_name[161:193], Value: uint32(35952)},
-			{Name: _CompressedTexelFormat_name[193:232], Value: uint32(35953)},
-			{Name: _CompressedTexelFormat_name[232:270], Value: uint32(35954)},
-			{Name: _CompressedTexelFormat_name[270:315], Value: uint32(35955)},
-			{Name: _CompressedTexelFormat_name[315:329], Value: uint32(35986)},
-			{Name: _CompressedTexelFormat_name[329:359], Value: uint32(35987)},
-			{Name: _CompressedTexelFormat_name[359:375], Value: uint32(36196)},
-			{Name: _CompressedTexelFormat_name[375:406], Value: uint32(37808)},
-			{Name: _CompressedTexelFormat_name[406:437], Value: uint32(37809)},
-			{Name: _CompressedTexelFormat_name[437:468], Value: uint32(37810)},
-			{Name: _CompressedTexelFormat_name[468:499], Value: uint32(37811)},
-			{Name: _CompressedTexelFormat_name[499:530], Value: uint32(37812)},
-			{Name: _CompressedTexelFormat_name[530:561], Value: uint32(37813)},
-			{Name: _CompressedTexelFormat_name[561:592], Value: uint32(37814)},
-			{Name: _CompressedTexelFormat_name[592:623], Value: uint32(37815)},
-			{Name: _CompressedTexelFormat_name[623:655], Value: uint32(37816)},
-			{Name: _CompressedTexelFormat_name[655:687], Value: uint32(37817)},
-			{Name: _CompressedTexelFormat_name[687:719], Value: uint32(37818)},
-			{Name: _CompressedTexelFormat_name[719:752], Value: uint32(37819)},
-			{Name: _CompressedTexelFormat_name[752:785], Value: uint32(37820)},
-			{Name: _CompressedTexelFormat_name[785:818], Value: uint32(37821)},
-			{Name: _CompressedTexelFormat_name[818:857], Value: uint32(37840)},
-			{Name: _CompressedTexelFormat_name[857:896], Value: uint32(37841)},
-			{Name: _CompressedTexelFormat_name[896:935], Value: uint32(37842)},
-			{Name: _CompressedTexelFormat_name[935:974], Value: uint32(37843)},
-			{Name: _CompressedTexelFormat_name[974:1013], Value: uint32(37844)},
-			{Name: _CompressedTexelFormat_name[1013:1052], Value: uint32(37845)},
-			{Name: _CompressedTexelFormat_name[1052:1091], Value: uint32(37846)},
-			{Name: _CompressedTexelFormat_name[1091:1130], Value: uint32(37847)},
-			{Name: _CompressedTexelFormat_name[1130:1170], Value: uint32(37848)},
-			{Name: _CompressedTexelFormat_name[1170:1210], Value: uint32(37849)},
-			{Name: _CompressedTexelFormat_name[1210:1250], Value: uint32(37850)},
-			{Name: _CompressedTexelFormat_name[1250:1291], Value: uint32(37851)},
-			{Name: _CompressedTexelFormat_name[1291:1332], Value: uint32(37852)},
-			{Name: _CompressedTexelFormat_name[1332:1373], Value: uint32(37853)},
+			{Name: _GLbitfield_name[0:25], Value: uint32(1)},
+			{Name: _GLbitfield_name[25:40], Value: uint32(1)},
+			{Name: _GLbitfield_name[40:56], Value: uint32(2)},
+			{Name: _GLbitfield_name[56:81], Value: uint32(2)},
+			{Name: _GLbitfield_name[81:108], Value: uint32(4)},
+			{Name: _GLbitfield_name[108:133], Value: uint32(4)},
+			{Name: _GLbitfield_name[133:158], Value: uint32(8)},
+			{Name: _GLbitfield_name[158:186], Value: uint32(8)},
+			{Name: _GLbitfield_name[186:211], Value: uint32(16)},
+			{Name: _GLbitfield_name[211:236], Value: uint32(16)},
+			{Name: _GLbitfield_name[236:261], Value: uint32(32)},
+			{Name: _GLbitfield_name[261:286], Value: uint32(32)},
+			{Name: _GLbitfield_name[286:311], Value: uint32(64)},
+			{Name: _GLbitfield_name[311:336], Value: uint32(128)},
+			{Name: _GLbitfield_name[336:361], Value: uint32(256)},
+			{Name: _GLbitfield_name[361:380], Value: uint32(256)},
+			{Name: _GLbitfield_name[380:405], Value: uint32(512)},
+			{Name: _GLbitfield_name[405:430], Value: uint32(1024)},
+			{Name: _GLbitfield_name[430:451], Value: uint32(1024)},
+			{Name: _GLbitfield_name[451:476], Value: uint32(2048)},
+			{Name: _GLbitfield_name[476:501], Value: uint32(4096)},
+			{Name: _GLbitfield_name[501:526], Value: uint32(8192)},
+			{Name: _GLbitfield_name[526:545], Value: uint32(16384)},
+			{Name: _GLbitfield_name[545:570], Value: uint32(16384)},
+			{Name: _GLbitfield_name[570:595], Value: uint32(32768)},
+			{Name: _GLbitfield_name[595:622], Value: uint32(65536)},
+			{Name: _GLbitfield_name[622:649], Value: uint32(131072)},
+			{Name: _GLbitfield_name[649:676], Value: uint32(262144)},
+			{Name: _GLbitfield_name[676:703], Value: uint32(524288)},
+			{Name: _GLbitfield_name[703:730], Value: uint32(1048576)},
+			{Name: _GLbitfield_name[730:757], Value: uint32(2097152)},
+			{Name: _GLbitfield_name[757:784], Value: uint32(4194304)},
+			{Name: _GLbitfield_name[784:811], Value: uint32(8388608)},
+			{Name: _GLbitfield_name[811:842], Value: uint32(16777216)},
+			{Name: _GLbitfield_name[842:873], Value: uint32(33554432)},
+			{Name: _GLbitfield_name[873:904], Value: uint32(67108864)},
+			{Name: _GLbitfield_name[904:935], Value: uint32(134217728)},
+			{Name: _GLbitfield_name[935:966], Value: uint32(268435456)},
+			{Name: _GLbitfield_name[966:997], Value: uint32(536870912)},
+			{Name: _GLbitfield_name[997:1028], Value: uint32(1073741824)},
+			{Name: _GLbitfield_name[1028:1059], Value: uint32(2147483648)},
 		},
 	})
 }
 
-func (v CompressedTexelFormat) String() string {
-	if s, ok := _CompressedTexelFormat_map[v]; ok {
+func (v GLbitfield) String() string {
+	if s, ok := _GLbitfield_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CompressedTexelFormat(%d)", v)
+	return fmt.Sprintf("GLbitfield(%d)", v)
 }
 
-func (v *CompressedTexelFormat) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_map {
+func (v *GLbitfield) Parse(s string) error {
+	for k, t := range _GLbitfield_map {
 		if s == t {
 			*v = k
 			return nil
 		}
 	}
-	return fmt.Errorf("%s not in CompressedTexelFormat", s)
+	return fmt.Errorf("%s not in GLbitfield", s)
 }
 
-const _CompressedTexelFormat_AMD_compressed_ATC_texture_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
+const _GLenum_name = "GL_ZEROGL_NO_ERRORGL_POINTSGL_NONEGL_LINESGL_ONEGL_LINE_LOOPGL_LINE_STRIPGL_TRIANGLESGL_TRIANGLE_STRIPGL_TRIANGLE_FANGL_NEVERGL_LESSGL_EQUALGL_LEQUALGL_GREATERGL_NOTEQUALGL_GEQUALGL_ALWAYSGL_SRC_COLORGL_ONE_MINUS_SRC_COLORGL_SRC_ALPHAGL_ONE_MINUS_SRC_ALPHAGL_DST_ALPHAGL_ONE_MINUS_DST_ALPHAGL_DST_COLORGL_ONE_MINUS_DST_COLORGL_SRC_ALPHA_SATURATEGL_FRONTGL_BACKGL_FRONT_AND_BACKGL_INVALID_ENUMGL_INVALID_VALUEGL_INVALID_OPERATIONGL_OUT_OF_MEMORYGL_INVALID_FRAMEBUFFER_OPERATIONGL_CWGL_CCWGL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_TEXTURE_2DGL_DONT_CAREGL_FASTESTGL_NICESTGL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_INTGL_UNSIGNED_INTGL_FLOATGL_HALF_FLOAT_ARBGL_FIXEDGL_INVERTGL_TEXTUREGL_COLOR_EXTGL_DEPTH_EXTGL_STENCIL_EXTGL_DEPTH_COMPONENTGL_REDGL_GREENGL_BLUEGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_KEEPGL_REPLACEGL_INCRGL_DECRGL_VENDORGL_RENDERERGL_VERSIONGL_EXTENSIONSGL_NEARESTGL_LINEARGL_NEAREST_MIPMAP_NEARESTGL_LINEAR_MIPMAP_NEARESTGL_NEAREST_MIPMAP_LINEARGL_LINEAR_MIPMAP_LINEARGL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTERGL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_TGL_REPEATGL_POLYGON_OFFSET_UNITSGL_CONSTANT_COLORGL_ONE_MINUS_CONSTANT_COLORGL_CONSTANT_ALPHAGL_ONE_MINUS_CONSTANT_ALPHAGL_BLEND_COLORGL_FUNC_ADDGL_BLEND_EQUATION_RGBGL_FUNC_SUBTRACTGL_FUNC_REVERSE_SUBTRACTGL_UNSIGNED_SHORT_4_4_4_4GL_UNSIGNED_SHORT_5_5_5_1GL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_RGBA4GL_RGB5_A1GL_RGBA8GL_TEXTURE_BINDING_2DGL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_CLAMP_TO_EDGEGL_GENERATE_MIPMAP_HINTGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_GUILTY_CONTEXT_RESET_EXTGL_INNOCENT_CONTEXT_RESET_EXTGL_UNKNOWN_CONTEXT_RESET_EXTGL_UNSIGNED_SHORT_5_6_5GL_MIRRORED_REPEATGL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_TEXTURE0GL_TEXTURE1GL_TEXTURE2GL_TEXTURE3GL_TEXTURE4GL_TEXTURE5GL_TEXTURE6GL_TEXTURE7GL_TEXTURE8GL_TEXTURE9GL_TEXTURE10GL_TEXTURE11GL_TEXTURE12GL_TEXTURE13GL_TEXTURE14GL_TEXTURE15GL_TEXTURE16GL_TEXTURE17GL_TEXTURE18GL_TEXTURE19GL_TEXTURE20GL_TEXTURE21GL_TEXTURE22GL_TEXTURE23GL_TEXTURE24GL_TEXTURE25GL_TEXTURE26GL_TEXTURE27GL_TEXTURE28GL_TEXTURE29GL_TEXTURE30GL_TEXTURE31GL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_DEPTH_STENCILGL_UNSIGNED_INT_24_8GL_TEXTURE_MAX_ANISOTROPY_EXTGL_MAX_TEXTURE_MAX_ANISOTROPY_EXTGL_INCR_WRAPGL_DECR_WRAPGL_TEXTURE_CUBE_MAPGL_TEXTURE_BINDING_CUBE_MAPGL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_ZGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_BUFFER_SIZEGL_BUFFER_USAGEGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_QUERY_COUNTER_BITS_EXTGL_CURRENT_QUERYGL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLEGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFERGL_ELEMENT_ARRAY_BUFFERGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_TIME_ELAPSED_EXTGL_STREAM_DRAWGL_STATIC_DRAWGL_DYNAMIC_DRAWGL_PIXEL_PACK_BUFFERGL_PIXEL_UNPACK_BUFFERGL_DEPTH24_STENCIL8GL_UNIFORM_BUFFERGL_UNIFORM_BLOCK_BINDINGGL_UNIFORM_BLOCK_DATA_SIZEGL_UNIFORM_BLOCK_NAME_LENGTHGL_UNIFORM_BLOCK_ACTIVE_UNIFORMSGL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICESGL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADERGL_FRAGMENT_SHADERGL_VERTEX_SHADERGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_SHADER_TYPEGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_INT_VEC2GL_INT_VEC3GL_INT_VEC4GL_BOOLGL_BOOL_VEC2GL_BOOL_VEC3GL_BOOL_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4GL_SAMPLER_2DGL_SAMPLER_CUBEGL_DELETE_STATUSGL_COMPILE_STATUSGL_LINK_STATUSGL_VALIDATE_STATUSGL_INFO_LOG_LENGTHGL_ATTACHED_SHADERSGL_ACTIVE_UNIFORMSGL_ACTIVE_UNIFORM_MAX_LENGTHGL_SHADER_SOURCE_LENGTHGL_ACTIVE_ATTRIBUTESGL_ACTIVE_ATTRIBUTE_MAX_LENGTHGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_POINT_SIZE_ARRAY_OESGL_ANY_SAMPLES_PASSEDGL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_TRANSFORM_FEEDBACK_BUFFERGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFERGL_READ_FRAMEBUFFER_BINDINGGL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPEGL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAMEGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVELGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACEGL_FRAMEBUFFER_COMPLETEGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONSGL_FRAMEBUFFER_UNSUPPORTEDGL_COLOR_ATTACHMENT0GL_DEPTH_ATTACHMENTGL_STENCIL_ATTACHMENTGL_FRAMEBUFFERGL_RENDERBUFFERGL_RENDERBUFFER_OESGL_RENDERBUFFER_WIDTHGL_RENDERBUFFER_HEIGHTGL_RENDERBUFFER_INTERNAL_FORMATGL_STENCIL_INDEX8GL_RENDERBUFFER_RED_SIZEGL_RENDERBUFFER_GREEN_SIZEGL_RENDERBUFFER_BLUE_SIZEGL_RENDERBUFFER_ALPHA_SIZEGL_RENDERBUFFER_DEPTH_SIZEGL_RENDERBUFFER_STENCIL_SIZEGL_HALF_FLOAT_OESGL_RGB565GL_ETC1_RGB8_OESGL_TEXTURE_EXTERNAL_OESGL_ANY_SAMPLES_PASSED_CONSERVATIVEGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGERGL_LOW_FLOATGL_MEDIUM_FLOATGL_HIGH_FLOATGL_LOW_INTGL_MEDIUM_INTGL_HIGH_INTGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORSGL_TIMESTAMP_EXTGL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_AGL_COPY_READ_BUFFERGL_COPY_WRITE_BUFFERGL_GPU_DISJOINT_EXTGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
-var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelFormat_AMD_compressed_ATC_texture]string{}
+var _GLenum_map = map[GLenum]string{}
 
 func init() {
-	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[34798] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34]
-	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[35986] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48]
-	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[35987] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78]
+	_GLenum_map[0] = _GLenum_name[0:7]
+	_GLenum_map[0] = _GLenum_name[7:18]
+	_GLenum_map[0] = _GLenum_name[18:27]
+	_GLenum_map[0] = _GLenum_name[27:34]
+	_GLenum_map[1] = _GLenum_name[34:42]
+	_GLenum_map[1] = _GLenum_name[42:48]
+	_GLenum_map[2] = _GLenum_name[48:60]
+	_GLenum_map[3] = _GLenum_name[60:73]
+	_GLenum_map[4] = _GLenum_name[73:85]
+	_GLenum_map[5] = _GLenum_name[85:102]
+	_GLenum_map[6] = _GLenum_name[102:117]
+	_GLenum_map[512] = _GLenum_name[117:125]
+	_GLenum_map[513] = _GLenum_name[125:132]
+	_GLenum_map[514] = _GLenum_name[132:140]
+	_GLenum_map[515] = _GLenum_name[140:149]
+	_GLenum_map[516] = _GLenum_name[149:159]
+	_GLenum_map[517] = _GLenum_name[159:170]
+	_GLenum_map[518] = _GLenum_name[170:179]
+	_GLenum_map[519] = _GLenum_name[179:188]
+	_GLenum_map[768] = _GLenum_name[188:200]
+	_GLenum_map[769] = _GLenum_name[200:222]
+	_GLenum_map[770] = _GLenum_name[222:234]
+	_GLenum_map[771] = _GLenum_name[234:256]
+	_GLenum_map[772] = _GLenum_name[256:268]
+	_GLenum_map[773] = _GLenum_name[268:290]
+	_GLenum_map[774] = _GLenum_name[290:302]
+	_GLenum_map[775] = _GLenum_name[302:324]
+	_GLenum_map[776] = _GLenum_name[324:345]
+	_GLenum_map[1028] = _GLenum_name[345:353]
+	_GLenum_map[1029] = _GLenum_name[353:360]
+	_GLenum_map[1032] = _GLenum_name[360:377]
+	_GLenum_map[1280] = _GLenum_name[377:392]
+	_GLenum_map[1281] = _GLenum_name[392:408]
+	_GLenum_map[1282] = _GLenum_name[408:428]
+	_GLenum_map[1285] = _GLenum_name[428:444]
+	_GLenum_map[1286] = _GLenum_name[444:476]
+	_GLenum_map[2304] = _GLenum_name[476:481]
+	_GLenum_map[2305] = _GLenum_name[481:487]
+	_GLenum_map[2849] = _GLenum_name[487:500]
+	_GLenum_map[2884] = _GLenum_name[500:512]
+	_GLenum_map[2885] = _GLenum_name[512:529]
+	_GLenum_map[2886] = _GLenum_name[529:542]
+	_GLenum_map[2928] = _GLenum_name[542:556]
+	_GLenum_map[2929] = _GLenum_name[556:569]
+	_GLenum_map[2930] = _GLenum_name[569:587]
+	_GLenum_map[2931] = _GLenum_name[587:607]
+	_GLenum_map[2932] = _GLenum_name[607:620]
+	_GLenum_map[2960] = _GLenum_name[620:635]
+	_GLenum_map[2961] = _GLenum_name[635:657]
+	_GLenum_map[2962] = _GLenum_name[657:672]
+	_GLenum_map[2963] = _GLenum_name[672:693]
+	_GLenum_map[2964] = _GLenum_name[693:708]
+	_GLenum_map[2965] = _GLenum_name[708:734]
+	_GLenum_map[2966] = _GLenum_name[734:760]
+	_GLenum_map[2967] = _GLenum_name[760:774]
+	_GLenum_map[2968] = _GLenum_name[774:794]
+	_GLenum_map[2978] = _GLenum_name[794:805]
+	_GLenum_map[3024] = _GLenum_name[805:814]
+	_GLenum_map[3042] = _GLenum_name[814:822]
+	_GLenum_map[3088] = _GLenum_name[822:836]
+	_GLenum_map[3089] = _GLenum_name[836:851]
+	_GLenum_map[3106] = _GLenum_name[851:871]
+	_GLenum_map[3107] = _GLenum_name[871:889]
+	_GLenum_map[3317] = _GLenum_name[889:908]
+	_GLenum_map[3333] = _GLenum_name[908:925]
+	_GLenum_map[3379] = _GLenum_name[925:944]
+	_GLenum_map[3386] = _GLenum_name[944:964]
+	_GLenum_map[3408] = _GLenum_name[964:980]
+	_GLenum_map[3410] = _GLenum_name[980:991]
+	_GLenum_map[3411] = _GLenum_name[991:1004]
+	_GLenum_map[3412] = _GLenum_name[1004:1016]
+	_GLenum_map[3413] = _GLenum_name[1016:1029]
+	_GLenum_map[3414] = _GLenum_name[1029:1042]
+	_GLenum_map[3415] = _GLenum_name[1042:1057]
+	_GLenum_map[3553] = _GLenum_name[1057:1070]
+	_GLenum_map[4352] = _GLenum_name[1070:1082]
+	_GLenum_map[4353] = _GLenum_name[1082:1092]
+	_GLenum_map[4354] = _GLenum_name[1092:1101]
+	_GLenum_map[5120] = _GLenum_name[1101:1108]
+	_GLenum_map[5121] = _GLenum_name[1108:1124]
+	_GLenum_map[5122] = _GLenum_name[1124:1132]
+	_GLenum_map[5123] = _GLenum_name[1132:1149]
+	_GLenum_map[5124] = _GLenum_name[1149:1155]
+	_GLenum_map[5125] = _GLenum_name[1155:1170]
+	_GLenum_map[5126] = _GLenum_name[1170:1178]
+	_GLenum_map[5131] = _GLenum_name[1178:1195]
+	_GLenum_map[5132] = _GLenum_name[1195:1203]
+	_GLenum_map[5386] = _GLenum_name[1203:1212]
+	_GLenum_map[5890] = _GLenum_name[1212:1222]
+	_GLenum_map[6144] = _GLenum_name[1222:1234]
+	_GLenum_map[6145] = _GLenum_name[1234:1246]
+	_GLenum_map[6146] = _GLenum_name[1246:1260]
+	_GLenum_map[6402] = _GLenum_name[1260:1278]
+	_GLenum_map[6403] = _GLenum_name[1278:1284]
+	_GLenum_map[6404] = _GLenum_name[1284:1292]
+	_GLenum_map[6405] = _GLenum_name[1292:1299]
+	_GLenum_map[6406] = _GLenum_name[1299:1307]
+	_GLenum_map[6407] = _GLenum_name[1307:1313]
+	_GLenum_map[6408] = _GLenum_name[1313:1320]
+	_GLenum_map[6409] = _GLenum_name[1320:1332]
+	_GLenum_map[6410] = _GLenum_name[1332:1350]
+	_GLenum_map[7680] = _GLenum_name[1350:1357]
+	_GLenum_map[7681] = _GLenum_name[1357:1367]
+	_GLenum_map[7682] = _GLenum_name[1367:1374]
+	_GLenum_map[7683] = _GLenum_name[1374:1381]
+	_GLenum_map[7936] = _GLenum_name[1381:1390]
+	_GLenum_map[7937] = _GLenum_name[1390:1401]
+	_GLenum_map[7938] = _GLenum_name[1401:1411]
+	_GLenum_map[7939] = _GLenum_name[1411:1424]
+	_GLenum_map[9728] = _GLenum_name[1424:1434]
+	_GLenum_map[9729] = _GLenum_name[1434:1443]
+	_GLenum_map[9984] = _GLenum_name[1443:1468]
+	_GLenum_map[9985] = _GLenum_name[1468:1492]
+	_GLenum_map[9986] = _GLenum_name[1492:1516]
+	_GLenum_map[9987] = _GLenum_name[1516:1539]
+	_GLenum_map[10240] = _GLenum_name[1539:1560]
+	_GLenum_map[10241] = _GLenum_name[1560:1581]
+	_GLenum_map[10242] = _GLenum_name[1581:1598]
+	_GLenum_map[10243] = _GLenum_name[1598:1615]
+	_GLenum_map[10497] = _GLenum_name[1615:1624]
+	_GLenum_map[10752] = _GLenum_name[1624:1647]
+	_GLenum_map[32769] = _GLenum_name[1647:1664]
+	_GLenum_map[32770] = _GLenum_name[1664:1691]
+	_GLenum_map[32771] = _GLenum_name[1691:1708]
+	_GLenum_map[32772] = _GLenum_name[1708:1735]
+	_GLenum_map[32773] = _GLenum_name[1735:1749]
+	_GLenum_map[32774] = _GLenum_name[1749:1760]
+	_GLenum_map[32777] = _GLenum_name[1760:1781]
+	_GLenum_map[32778] = _GLenum_name[1781:1797]
+	_GLenum_map[32779] = _GLenum_name[1797:1821]
+	_GLenum_map[32819] = _GLenum_name[1821:1846]
+	_GLenum_map[32820] = _GLenum_name[1846:1871]
+	_GLenum_map[32823] = _GLenum_name[1871:1893]
+	_GLenum_map[32824] = _GLenum_name[1893:1917]
+	_GLenum_map[32854] = _GLenum_name[1917:1925]
+	_GLenum_map[32855] = _GLenum_name[1925:1935]
+	_GLenum_map[32856] = _GLenum_name[1935:1943]
+	_GLenum_map[32873] = _GLenum_name[1943:1964]
+	_GLenum_map[32884] = _GLenum_name[1964:1979]
+	_GLenum_map[32885] = _GLenum_name[1979:1994]
+	_GLenum_map[32886] = _GLenum_name[1994:2008]
+	_GLenum_map[32888] = _GLenum_name[2008:2030]
+	_GLenum_map[32926] = _GLenum_name[2030:2057]
+	_GLenum_map[32928] = _GLenum_name[2057:2075]
+	_GLenum_map[32936] = _GLenum_name[2075:2092]
+	_GLenum_map[32937] = _GLenum_name[2092:2102]
+	_GLenum_map[32938] = _GLenum_name[2102:2126]
+	_GLenum_map[32939] = _GLenum_name[2126:2151]
+	_GLenum_map[32968] = _GLenum_name[2151:2167]
+	_GLenum_map[32969] = _GLenum_name[2167:2183]
+	_GLenum_map[32970] = _GLenum_name[2183:2201]
+	_GLenum_map[32971] = _GLenum_name[2201:2219]
+	_GLenum_map[33071] = _GLenum_name[2219:2235]
+	_GLenum_map[33170] = _GLenum_name[2235:2258]
+	_GLenum_map[33189] = _GLenum_name[2258:2278]
+	_GLenum_map[33319] = _GLenum_name[2278:2283]
+	_GLenum_map[33320] = _GLenum_name[2283:2296]
+	_GLenum_map[33363] = _GLenum_name[2296:2323]
+	_GLenum_map[33364] = _GLenum_name[2323:2352]
+	_GLenum_map[33365] = _GLenum_name[2352:2380]
+	_GLenum_map[33635] = _GLenum_name[2380:2403]
+	_GLenum_map[33648] = _GLenum_name[2403:2421]
+	_GLenum_map[33776] = _GLenum_name[2421:2452]
+	_GLenum_map[33777] = _GLenum_name[2452:2484]
+	_GLenum_map[33778] = _GLenum_name[2484:2516]
+	_GLenum_map[33779] = _GLenum_name[2516:2548]
+	_GLenum_map[33901] = _GLenum_name[2548:2575]
+	_GLenum_map[33902] = _GLenum_name[2575:2602]
+	_GLenum_map[33984] = _GLenum_name[2602:2613]
+	_GLenum_map[33985] = _GLenum_name[2613:2624]
+	_GLenum_map[33986] = _GLenum_name[2624:2635]
+	_GLenum_map[33987] = _GLenum_name[2635:2646]
+	_GLenum_map[33988] = _GLenum_name[2646:2657]
+	_GLenum_map[33989] = _GLenum_name[2657:2668]
+	_GLenum_map[33990] = _GLenum_name[2668:2679]
+	_GLenum_map[33991] = _GLenum_name[2679:2690]
+	_GLenum_map[33992] = _GLenum_name[2690:2701]
+	_GLenum_map[33993] = _GLenum_name[2701:2712]
+	_GLenum_map[33994] = _GLenum_name[2712:2724]
+	_GLenum_map[33995] = _GLenum_name[2724:2736]
+	_GLenum_map[33996] = _GLenum_name[2736:2748]
+	_GLenum_map[33997] = _GLenum_name[2748:2760]
+	_GLenum_map[33998] = _GLenum_name[2760:2772]
+	_GLenum_map[33999] = _GLenum_name[2772:2784]
+	_GLenum_map[34000] = _GLenum_name[2784:2796]
+	_GLenum_map[34001] = _GLenum_name[2796:2808]
+	_GLenum_map[34002] = _GLenum_name[2808:2820]
+	_GLenum_map[34003] = _GLenum_name[2820:2832]
+	_GLenum_map[34004] = _GLenum_name[2832:2844]
+	_GLenum_map[34005] = _GLenum_name[2844:2856]
+	_GLenum_map[34006] = _GLenum_name[2856:2868]
+	_GLenum_map[34007] = _GLenum_name[2868:2880]
+	_GLenum_map[34008] = _GLenum_name[2880:2892]
+	_GLenum_map[34009] = _GLenum_name[2892:2904]
+	_GLenum_map[34010] = _GLenum_name[2904:2916]
+	_GLenum_map[34011] = _GLenum_name[2916:2928]
+	_GLenum_map[34012] = _GLenum_name[2928:2940]
+	_GLenum_map[34013] = _GLenum_name[2940:2952]
+	_GLenum_map[34014] = _GLenum_name[2952:2964]
+	_GLenum_map[34015] = _GLenum_name[2964:2976]
+	_GLenum_map[34016] = _GLenum_name[2976:2993]
+	_GLenum_map[34024] = _GLenum_name[2993:3017]
+	_GLenum_map[34041] = _GLenum_name[3017:3033]
+	_GLenum_map[34042] = _GLenum_name[3033:3053]
+	_GLenum_map[34046] = _GLenum_name[3053:3082]
+	_GLenum_map[34047] = _GLenum_name[3082:3115]
+	_GLenum_map[34055] = _GLenum_name[3115:3127]
+	_GLenum_map[34056] = _GLenum_name[3127:3139]
+	_GLenum_map[34067] = _GLenum_name[3139:3158]
+	_GLenum_map[34068] = _GLenum_name[3158:3185]
+	_GLenum_map[34069] = _GLenum_name[3185:3215]
+	_GLenum_map[34070] = _GLenum_name[3215:3245]
+	_GLenum_map[34071] = _GLenum_name[3245:3275]
+	_GLenum_map[34072] = _GLenum_name[3275:3305]
+	_GLenum_map[34073] = _GLenum_name[3305:3335]
+	_GLenum_map[34074] = _GLenum_name[3335:3365]
+	_GLenum_map[34076] = _GLenum_name[3365:3393]
+	_GLenum_map[34466] = _GLenum_name[3393:3426]
+	_GLenum_map[34467] = _GLenum_name[3426:3455]
+	_GLenum_map[34660] = _GLenum_name[3455:3469]
+	_GLenum_map[34661] = _GLenum_name[3469:3484]
+	_GLenum_map[34798] = _GLenum_name[3484:3518]
+	_GLenum_map[34816] = _GLenum_name[3518:3538]
+	_GLenum_map[34817] = _GLenum_name[3538:3558]
+	_GLenum_map[34818] = _GLenum_name[3558:3589]
+	_GLenum_map[34819] = _GLenum_name[3589:3620]
+	_GLenum_map[34877] = _GLenum_name[3620:3643]
+	_GLenum_map[34916] = _GLenum_name[3643:3668]
+	_GLenum_map[34917] = _GLenum_name[3668:3684]
+	_GLenum_map[34918] = _GLenum_name[3684:3699]
+	_GLenum_map[34919] = _GLenum_name[3699:3724]
+	_GLenum_map[34921] = _GLenum_name[3724:3745]
+	_GLenum_map[34930] = _GLenum_name[3745:3771]
+	_GLenum_map[34962] = _GLenum_name[3771:3786]
+	_GLenum_map[34963] = _GLenum_name[3786:3809]
+	_GLenum_map[34964] = _GLenum_name[3809:3832]
+	_GLenum_map[34965] = _GLenum_name[3832:3863]
+	_GLenum_map[35007] = _GLenum_name[3863:3882]
+	_GLenum_map[35040] = _GLenum_name[3882:3896]
+	_GLenum_map[35044] = _GLenum_name[3896:3910]
+	_GLenum_map[35048] = _GLenum_name[3910:3925]
+	_GLenum_map[35051] = _GLenum_name[3925:3945]
+	_GLenum_map[35052] = _GLenum_name[3945:3967]
+	_GLenum_map[35056] = _GLenum_name[3967:3986]
+	_GLenum_map[35345] = _GLenum_name[3986:4003]
+	_GLenum_map[35391] = _GLenum_name[4003:4027]
+	_GLenum_map[35392] = _GLenum_name[4027:4053]
+	_GLenum_map[35393] = _GLenum_name[4053:4081]
+	_GLenum_map[35394] = _GLenum_name[4081:4113]
+	_GLenum_map[35395] = _GLenum_name[4113:4152]
+	_GLenum_map[35396] = _GLenum_name[4152:4196]
+	_GLenum_map[35397] = _GLenum_name[4196:4242]
+	_GLenum_map[35398] = _GLenum_name[4242:4288]
+	_GLenum_map[35632] = _GLenum_name[4288:4306]
+	_GLenum_map[35633] = _GLenum_name[4306:4322]
+	_GLenum_map[35660] = _GLenum_name[4322:4355]
+	_GLenum_map[35661] = _GLenum_name[4355:4390]
+	_GLenum_map[35663] = _GLenum_name[4390:4404]
+	_GLenum_map[35664] = _GLenum_name[4404:4417]
+	_GLenum_map[35665] = _GLenum_name[4417:4430]
+	_GLenum_map[35666] = _GLenum_name[4430:4443]
+	_GLenum_map[35667] = _GLenum_name[4443:4454]
+	_GLenum_map[35668] = _GLenum_name[4454:4465]
+	_GLenum_map[35669] = _GLenum_name[4465:4476]
+	_GLenum_map[35670] = _GLenum_name[4476:4483]
+	_GLenum_map[35671] = _GLenum_name[4483:4495]
+	_GLenum_map[35672] = _GLenum_name[4495:4507]
+	_GLenum_map[35673] = _GLenum_name[4507:4519]
+	_GLenum_map[35674] = _GLenum_name[4519:4532]
+	_GLenum_map[35675] = _GLenum_name[4532:4545]
+	_GLenum_map[35676] = _GLenum_name[4545:4558]
+	_GLenum_map[35678] = _GLenum_name[4558:4571]
+	_GLenum_map[35680] = _GLenum_name[4571:4586]
+	_GLenum_map[35712] = _GLenum_name[4586:4602]
+	_GLenum_map[35713] = _GLenum_name[4602:4619]
+	_GLenum_map[35714] = _GLenum_name[4619:4633]
+	_GLenum_map[35715] = _GLenum_name[4633:4651]
+	_GLenum_map[35716] = _GLenum_name[4651:4669]
+	_GLenum_map[35717] = _GLenum_name[4669:4688]
+	_GLenum_map[35718] = _GLenum_name[4688:4706]
+	_GLenum_map[35719] = _GLenum_name[4706:4734]
+	_GLenum_map[35720] = _GLenum_name[4734:4757]
+	_GLenum_map[35721] = _GLenum_name[4757:4777]
+	_GLenum_map[35722] = _GLenum_name[4777:4807]
+	_GLenum_map[35725] = _GLenum_name[4807:4825]
+	_GLenum_map[35738] = _GLenum_name[4825:4858]
+	_GLenum_map[35739] = _GLenum_name[4858:4893]
+	_GLenum_map[35740] = _GLenum_name[4893:4916]
+	_GLenum_map[35887] = _GLenum_name[4916:4937]
+	_GLenum_map[35952] = _GLenum_name[4937:4969]
+	_GLenum_map[35953] = _GLenum_name[4969:5008]
+	_GLenum_map[35954] = _GLenum_name[5008:5046]
+	_GLenum_map[35955] = _GLenum_name[5046:5091]
+	_GLenum_map[35976] = _GLenum_name[5091:5131]
+	_GLenum_map[35982] = _GLenum_name[5131:5159]
+	_GLenum_map[35986] = _GLenum_name[5159:5173]
+	_GLenum_map[35987] = _GLenum_name[5173:5203]
+	_GLenum_map[36003] = _GLenum_name[5203:5222]
+	_GLenum_map[36004] = _GLenum_name[5222:5248]
+	_GLenum_map[36005] = _GLenum_name[5248:5273]
+	_GLenum_map[36006] = _GLenum_name[5273:5295]
+	_GLenum_map[36007] = _GLenum_name[5295:5318]
+	_GLenum_map[36008] = _GLenum_name[5318:5337]
+	_GLenum_map[36009] = _GLenum_name[5337:5356]
+	_GLenum_map[36010] = _GLenum_name[5356:5383]
+	_GLenum_map[36048] = _GLenum_name[5383:5420]
+	_GLenum_map[36049] = _GLenum_name[5420:5457]
+	_GLenum_map[36050] = _GLenum_name[5457:5496]
+	_GLenum_map[36051] = _GLenum_name[5496:5543]
+	_GLenum_map[36053] = _GLenum_name[5543:5566]
+	_GLenum_map[36054] = _GLenum_name[5566:5602]
+	_GLenum_map[36055] = _GLenum_name[5602:5646]
+	_GLenum_map[36057] = _GLenum_name[5646:5682]
+	_GLenum_map[36061] = _GLenum_name[5682:5708]
+	_GLenum_map[36064] = _GLenum_name[5708:5728]
+	_GLenum_map[36096] = _GLenum_name[5728:5747]
+	_GLenum_map[36128] = _GLenum_name[5747:5768]
+	_GLenum_map[36160] = _GLenum_name[5768:5782]
+	_GLenum_map[36161] = _GLenum_name[5782:5797]
+	_GLenum_map[36161] = _GLenum_name[5797:5816]
+	_GLenum_map[36162] = _GLenum_name[5816:5837]
+	_GLenum_map[36163] = _GLenum_name[5837:5859]
+	_GLenum_map[36164] = _GLenum_name[5859:5890]
+	_GLenum_map[36168] = _GLenum_name[5890:5907]
+	_GLenum_map[36176] = _GLenum_name[5907:5931]
+	_GLenum_map[36177] = _GLenum_name[5931:5957]
+	_GLenum_map[36178] = _GLenum_name[5957:5982]
+	_GLenum_map[36179] = _GLenum_name[5982:6008]
+	_GLenum_map[36180] = _GLenum_name[6008:6034]
+	_GLenum_map[36181] = _GLenum_name[6034:6062]
+	_GLenum_map[36193] = _GLenum_name[6062:6079]
+	_GLenum_map[36194] = _GLenum_name[6079:6088]
+	_GLenum_map[36196] = _GLenum_name[6088:6104]
+	_GLenum_map[36197] = _GLenum_name[6104:6127]
+	_GLenum_map[36202] = _GLenum_name[6127:6161]
+	_GLenum_map[36244] = _GLenum_name[6161:6175]
+	_GLenum_map[36248] = _GLenum_name[6175:6189]
+	_GLenum_map[36249] = _GLenum_name[6189:6204]
+	_GLenum_map[36336] = _GLenum_name[6204:6216]
+	_GLenum_map[36337] = _GLenum_name[6216:6231]
+	_GLenum_map[36338] = _GLenum_name[6231:6244]
+	_GLenum_map[36339] = _GLenum_name[6244:6254]
+	_GLenum_map[36340] = _GLenum_name[6254:6267]
+	_GLenum_map[36341] = _GLenum_name[6267:6278]
+	_GLenum_map[36344] = _GLenum_name[6278:6302]
+	_GLenum_map[36345] = _GLenum_name[6302:6330]
+	_GLenum_map[36346] = _GLenum_name[6330:6348]
+	_GLenum_map[36347] = _GLenum_name[6348:6377]
+	_GLenum_map[36348] = _GLenum_name[6377:6399]
+	_GLenum_map[36349] = _GLenum_name[6399:6430]
+	_GLenum_map[36392] = _GLenum_name[6430:6446]
+	_GLenum_map[36418] = _GLenum_name[6446:6466]
+	_GLenum_map[36419] = _GLenum_name[6466:6486]
+	_GLenum_map[36420] = _GLenum_name[6486:6506]
+	_GLenum_map[36421] = _GLenum_name[6506:6526]
+	_GLenum_map[36662] = _GLenum_name[6526:6545]
+	_GLenum_map[36663] = _GLenum_name[6545:6565]
+	_GLenum_map[36795] = _GLenum_name[6565:6584]
+	_GLenum_map[37808] = _GLenum_name[6584:6615]
+	_GLenum_map[37809] = _GLenum_name[6615:6646]
+	_GLenum_map[37810] = _GLenum_name[6646:6677]
+	_GLenum_map[37811] = _GLenum_name[6677:6708]
+	_GLenum_map[37812] = _GLenum_name[6708:6739]
+	_GLenum_map[37813] = _GLenum_name[6739:6770]
+	_GLenum_map[37814] = _GLenum_name[6770:6801]
+	_GLenum_map[37815] = _GLenum_name[6801:6832]
+	_GLenum_map[37816] = _GLenum_name[6832:6864]
+	_GLenum_map[37817] = _GLenum_name[6864:6896]
+	_GLenum_map[37818] = _GLenum_name[6896:6928]
+	_GLenum_map[37819] = _GLenum_name[6928:6961]
+	_GLenum_map[37820] = _GLenum_name[6961:6994]
+	_GLenum_map[37821] = _GLenum_name[6994:7027]
+	_GLenum_map[37840] = _GLenum_name[7027:7066]
+	_GLenum_map[37841] = _GLenum_name[7066:7105]
+	_GLenum_map[37842] = _GLenum_name[7105:7144]
+	_GLenum_map[37843] = _GLenum_name[7144:7183]
+	_GLenum_map[37844] = _GLenum_name[7183:7222]
+	_GLenum_map[37845] = _GLenum_name[7222:7261]
+	_GLenum_map[37846] = _GLenum_name[7261:7300]
+	_GLenum_map[37847] = _GLenum_name[7300:7339]
+	_GLenum_map[37848] = _GLenum_name[7339:7379]
+	_GLenum_map[37849] = _GLenum_name[7379:7419]
+	_GLenum_map[37850] = _GLenum_name[7419:7459]
+	_GLenum_map[37851] = _GLenum_name[7459:7500]
+	_GLenum_map[37852] = _GLenum_name[7500:7541]
+	_GLenum_map[37853] = _GLenum_name[7541:7582]
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_AMD_compressed_ATC_texture", Method: schema.Uint32},
+		Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34], Value: uint32(34798)},
-			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48], Value: uint32(35986)},
-			{Name: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78], Value: uint32(35987)},
+			{Name: _GLenum_name[0:7], Value: uint32(0)},
+			{Name: _GLenum_name[7:18], Value: uint32(0)},
+			{Name: _GLenum_name[18:27], Value: uint32(0)},
+			{Name: _GLenum_name[27:34], Value: uint32(0)},
+			{Name: _GLenum_name[34:42], Value: uint32(1)},
+			{Name: _GLenum_name[42:48], Value: uint32(1)},
+			{Name: _GLenum_name[48:60], Value: uint32(2)},
+			{Name: _GLenum_name[60:73], Value: uint32(3)},
+			{Name: _GLenum_name[73:85], Value: uint32(4)},
+			{Name: _GLenum_name[85:102], Value: uint32(5)},
+			{Name: _GLenum_name[102:117], Value: uint32(6)},
+			{Name: _GLenum_name[117:125], Value: uint32(512)},
+			{Name: _GLenum_name[125:132], Value: uint32(513)},
+			{Name: _GLenum_name[132:140], Value: uint32(514)},
+			{Name: _GLenum_name[140:149], Value: uint32(515)},
+			{Name: _GLenum_name[149:159], Value: uint32(516)},
+			{Name: _GLenum_name[159:170], Value: uint32(517)},
+			{Name: _GLenum_name[170:179], Value: uint32(518)},
+			{Name: _GLenum_name[179:188], Value: uint32(519)},
+			{Name: _GLenum_name[188:200], Value: uint32(768)},
+			{Name: _GLenum_name[200:222], Value: uint32(769)},
+			{Name: _GLenum_name[222:234], Value: uint32(770)},
+			{Name: _GLenum_name[234:256], Value: uint32(771)},
+			{Name: _GLenum_name[256:268], Value: uint32(772)},
+			{Name: _GLenum_name[268:290], Value: uint32(773)},
+			{Name: _GLenum_name[290:302], Value: uint32(774)},
+			{Name: _GLenum_name[302:324], Value: uint32(775)},
+			{Name: _GLenum_name[324:345], Value: uint32(776)},
+			{Name: _GLenum_name[345:353], Value: uint32(1028)},
+			{Name: _GLenum_name[353:360], Value: uint32(1029)},
+			{Name: _GLenum_name[360:377], Value: uint32(1032)},
+			{Name: _GLenum_name[377:392], Value: uint32(1280)},
+			{Name: _GLenum_name[392:408], Value: uint32(1281)},
+			{Name: _GLenum_name[408:428], Value: uint32(1282)},
+			{Name: _GLenum_name[428:444], Value: uint32(1285)},
+			{Name: _GLenum_name[444:476], Value: uint32(1286)},
+			{Name: _GLenum_name[476:481], Value: uint32(2304)},
+			{Name: _GLenum_name[481:487], Value: uint32(2305)},
+			{Name: _GLenum_name[487:500], Value: uint32(2849)},
+			{Name: _GLenum_name[500:512], Value: uint32(2884)},
+			{Name: _GLenum_name[512:529], Value: uint32(2885)},
+			{Name: _GLenum_name[529:542], Value: uint32(2886)},
+			{Name: _GLenum_name[542:556], Value: uint32(2928)},
+			{Name: _GLenum_name[556:569], Value: uint32(2929)},
+			{Name: _GLenum_name[569:587], Value: uint32(2930)},
+			{Name: _GLenum_name[587:607], Value: uint32(2931)},
+			{Name: _GLenum_name[607:620], Value: uint32(2932)},
+			{Name: _GLenum_name[620:635], Value: uint32(2960)},
+			{Name: _GLenum_name[635:657], Value: uint32(2961)},
+			{Name: _GLenum_name[657:672], Value: uint32(2962)},
+			{Name: _GLenum_name[672:693], Value: uint32(2963)},
+			{Name: _GLenum_name[693:708], Value: uint32(2964)},
+			{Name: _GLenum_name[708:734], Value: uint32(2965)},
+			{Name: _GLenum_name[734:760], Value: uint32(2966)},
+			{Name: _GLenum_name[760:774], Value: uint32(2967)},
+			{Name: _GLenum_name[774:794], Value: uint32(2968)},
+			{Name: _GLenum_name[794:805], Value: uint32(2978)},
+			{Name: _GLenum_name[805:814], Value: uint32(3024)},
+			{Name: _GLenum_name[814:822], Value: uint32(3042)},
+			{Name: _GLenum_name[822:836], Value: uint32(3088)},
+			{Name: _GLenum_name[836:851], Value: uint32(3089)},
+			{Name: _GLenum_name[851:871], Value: uint32(3106)},
+			{Name: _GLenum_name[871:889], Value: uint32(3107)},
+			{Name: _GLenum_name[889:908], Value: uint32(3317)},
+			{Name: _GLenum_name[908:925], Value: uint32(3333)},
+			{Name: _GLenum_name[925:944], Value: uint32(3379)},
+			{Name: _GLenum_name[944:964], Value: uint32(3386)},
+			{Name: _GLenum_name[964:980], Value: uint32(3408)},
+			{Name: _GLenum_name[980:991], Value: uint32(3410)},
+			{Name: _GLenum_name[991:1004], Value: uint32(3411)},
+			{Name: _GLenum_name[1004:1016], Value: uint32(3412)},
+			{Name: _GLenum_name[1016:1029], Value: uint32(3413)},
+			{Name: _GLenum_name[1029:1042], Value: uint32(3414)},
+			{Name: _GLenum_name[1042:1057], Value: uint32(3415)},
+			{Name: _GLenum_name[1057:1070], Value: uint32(3553)},
+			{Name: _GLenum_name[1070:1082], Value: uint32(4352)},
+			{Name: _GLenum_name[1082:1092], Value: uint32(4353)},
+			{Name: _GLenum_name[1092:1101], Value: uint32(4354)},
+			{Name: _GLenum_name[1101:1108], Value: uint32(5120)},
+			{Name: _GLenum_name[1108:1124], Value: uint32(5121)},
+			{Name: _GLenum_name[1124:1132], Value: uint32(5122)},
+			{Name: _GLenum_name[1132:1149], Value: uint32(5123)},
+			{Name: _GLenum_name[1149:1155], Value: uint32(5124)},
+			{Name: _GLenum_name[1155:1170], Value: uint32(5125)},
+			{Name: _GLenum_name[1170:1178], Value: uint32(5126)},
+			{Name: _GLenum_name[1178:1195], Value: uint32(5131)},
+			{Name: _GLenum_name[1195:1203], Value: uint32(5132)},
+			{Name: _GLenum_name[1203:1212], Value: uint32(5386)},
+			{Name: _GLenum_name[1212:1222], Value: uint32(5890)},
+			{Name: _GLenum_name[1222:1234], Value: uint32(6144)},
+			{Name: _GLenum_name[1234:1246], Value: uint32(6145)},
+			{Name: _GLenum_name[1246:1260], Value: uint32(6146)},
+			{Name: _GLenum_name[1260:1278], Value: uint32(6402)},
+			{Name: _GLenum_name[1278:1284], Value: uint32(6403)},
+			{Name: _GLenum_name[1284:1292], Value: uint32(6404)},
+			{Name: _GLenum_name[1292:1299], Value: uint32(6405)},
+			{Name: _GLenum_name[1299:1307], Value: uint32(6406)},
+			{Name: _GLenum_name[1307:1313], Value: uint32(6407)},
+			{Name: _GLenum_name[1313:1320], Value: uint32(6408)},
+			{Name: _GLenum_name[1320:1332], Value: uint32(6409)},
+			{Name: _GLenum_name[1332:1350], Value: uint32(6410)},
+			{Name: _GLenum_name[1350:1357], Value: uint32(7680)},
+			{Name: _GLenum_name[1357:1367], Value: uint32(7681)},
+			{Name: _GLenum_name[1367:1374], Value: uint32(7682)},
+			{Name: _GLenum_name[1374:1381], Value: uint32(7683)},
+			{Name: _GLenum_name[1381:1390], Value: uint32(7936)},
+			{Name: _GLenum_name[1390:1401], Value: uint32(7937)},
+			{Name: _GLenum_name[1401:1411], Value: uint32(7938)},
+			{Name: _GLenum_name[1411:1424], Value: uint32(7939)},
+			{Name: _GLenum_name[1424:1434], Value: uint32(9728)},
+			{Name: _GLenum_name[1434:1443], Value: uint32(9729)},
+			{Name: _GLenum_name[1443:1468], Value: uint32(9984)},
+			{Name: _GLenum_name[1468:1492], Value: uint32(9985)},
+			{Name: _GLenum_name[1492:1516], Value: uint32(9986)},
+			{Name: _GLenum_name[1516:1539], Value: uint32(9987)},
+			{Name: _GLenum_name[1539:1560], Value: uint32(10240)},
+			{Name: _GLenum_name[1560:1581], Value: uint32(10241)},
+			{Name: _GLenum_name[1581:1598], Value: uint32(10242)},
+			{Name: _GLenum_name[1598:1615], Value: uint32(10243)},
+			{Name: _GLenum_name[1615:1624], Value: uint32(10497)},
+			{Name: _GLenum_name[1624:1647], Value: uint32(10752)},
+			{Name: _GLenum_name[1647:1664], Value: uint32(32769)},
+			{Name: _GLenum_name[1664:1691], Value: uint32(32770)},
+			{Name: _GLenum_name[1691:1708], Value: uint32(32771)},
+			{Name: _GLenum_name[1708:1735], Value: uint32(32772)},
+			{Name: _GLenum_name[1735:1749], Value: uint32(32773)},
+			{Name: _GLenum_name[1749:1760], Value: uint32(32774)},
+			{Name: _GLenum_name[1760:1781], Value: uint32(32777)},
+			{Name: _GLenum_name[1781:1797], Value: uint32(32778)},
+			{Name: _GLenum_name[1797:1821], Value: uint32(32779)},
+			{Name: _GLenum_name[1821:1846], Value: uint32(32819)},
+			{Name: _GLenum_name[1846:1871], Value: uint32(32820)},
+			{Name: _GLenum_name[1871:1893], Value: uint32(32823)},
+			{Name: _GLenum_name[1893:1917], Value: uint32(32824)},
+			{Name: _GLenum_name[1917:1925], Value: uint32(32854)},
+			{Name: _GLenum_name[1925:1935], Value: uint32(32855)},
+			{Name: _GLenum_name[1935:1943], Value: uint32(32856)},
+			{Name: _GLenum_name[1943:1964], Value: uint32(32873)},
+			{Name: _GLenum_name[1964:1979], Value: uint32(32884)},
+			{Name: _GLenum_name[1979:1994], Value: uint32(32885)},
+			{Name: _GLenum_name[1994:2008], Value: uint32(32886)},
+			{Name: _GLenum_name[2008:2030], Value: uint32(32888)},
+			{Name: _GLenum_name[2030:2057], Value: uint32(32926)},
+			{Name: _GLenum_name[2057:2075], Value: uint32(32928)},
+			{Name: _GLenum_name[2075:2092], Value: uint32(32936)},
+			{Name: _GLenum_name[2092:2102], Value: uint32(32937)},
+			{Name: _GLenum_name[2102:2126], Value: uint32(32938)},
+			{Name: _GLenum_name[2126:2151], Value: uint32(32939)},
+			{Name: _GLenum_name[2151:2167], Value: uint32(32968)},
+			{Name: _GLenum_name[2167:2183], Value: uint32(32969)},
+			{Name: _GLenum_name[2183:2201], Value: uint32(32970)},
+			{Name: _GLenum_name[2201:2219], Value: uint32(32971)},
+			{Name: _GLenum_name[2219:2235], Value: uint32(33071)},
+			{Name: _GLenum_name[2235:2258], Value: uint32(33170)},
+			{Name: _GLenum_name[2258:2278], Value: uint32(33189)},
+			{Name: _GLenum_name[2278:2283], Value: uint32(33319)},
+			{Name: _GLenum_name[2283:2296], Value: uint32(33320)},
+			{Name: _GLenum_name[2296:2323], Value: uint32(33363)},
+			{Name: _GLenum_name[2323:2352], Value: uint32(33364)},
+			{Name: _GLenum_name[2352:2380], Value: uint32(33365)},
+			{Name: _GLenum_name[2380:2403], Value: uint32(33635)},
+			{Name: _GLenum_name[2403:2421], Value: uint32(33648)},
+			{Name: _GLenum_name[2421:2452], Value: uint32(33776)},
+			{Name: _GLenum_name[2452:2484], Value: uint32(33777)},
+			{Name: _GLenum_name[2484:2516], Value: uint32(33778)},
+			{Name: _GLenum_name[2516:2548], Value: uint32(33779)},
+			{Name: _GLenum_name[2548:2575], Value: uint32(33901)},
+			{Name: _GLenum_name[2575:2602], Value: uint32(33902)},
+			{Name: _GLenum_name[2602:2613], Value: uint32(33984)},
+			{Name: _GLenum_name[2613:2624], Value: uint32(33985)},
+			{Name: _GLenum_name[2624:2635], Value: uint32(33986)},
+			{Name: _GLenum_name[2635:2646], Value: uint32(33987)},
+			{Name: _GLenum_name[2646:2657], Value: uint32(33988)},
+			{Name: _GLenum_name[2657:2668], Value: uint32(33989)},
+			{Name: _GLenum_name[2668:2679], Value: uint32(33990)},
+			{Name: _GLenum_name[2679:2690], Value: uint32(33991)},
+			{Name: _GLenum_name[2690:2701], Value: uint32(33992)},
+			{Name: _GLenum_name[2701:2712], Value: uint32(33993)},
+			{Name: _GLenum_name[2712:2724], Value: uint32(33994)},
+			{Name: _GLenum_name[2724:2736], Value: uint32(33995)},
+			{Name: _GLenum_name[2736:2748], Value: uint32(33996)},
+			{Name: _GLenum_name[2748:2760], Value: uint32(33997)},
+			{Name: _GLenum_name[2760:2772], Value: uint32(33998)},
+			{Name: _GLenum_name[2772:2784], Value: uint32(33999)},
+			{Name: _GLenum_name[2784:2796], Value: uint32(34000)},
+			{Name: _GLenum_name[2796:2808], Value: uint32(34001)},
+			{Name: _GLenum_name[2808:2820], Value: uint32(34002)},
+			{Name: _GLenum_name[2820:2832], Value: uint32(34003)},
+			{Name: _GLenum_name[2832:2844], Value: uint32(34004)},
+			{Name: _GLenum_name[2844:2856], Value: uint32(34005)},
+			{Name: _GLenum_name[2856:2868], Value: uint32(34006)},
+			{Name: _GLenum_name[2868:2880], Value: uint32(34007)},
+			{Name: _GLenum_name[2880:2892], Value: uint32(34008)},
+			{Name: _GLenum_name[2892:2904], Value: uint32(34009)},
+			{Name: _GLenum_name[2904:2916], Value: uint32(34010)},
+			{Name: _GLenum_name[2916:2928], Value: uint32(34011)},
+			{Name: _GLenum_name[2928:2940], Value: uint32(34012)},
+			{Name: _GLenum_name[2940:2952], Value: uint32(34013)},
+			{Name: _GLenum_name[2952:2964], Value: uint32(34014)},
+			{Name: _GLenum_name[2964:2976], Value: uint32(34015)},
+			{Name: _GLenum_name[2976:2993], Value: uint32(34016)},
+			{Name: _GLenum_name[2993:3017], Value: uint32(34024)},
+			{Name: _GLenum_name[3017:3033], Value: uint32(34041)},
+			{Name: _GLenum_name[3033:3053], Value: uint32(34042)},
+			{Name: _GLenum_name[3053:3082], Value: uint32(34046)},
+			{Name: _GLenum_name[3082:3115], Value: uint32(34047)},
+			{Name: _GLenum_name[3115:3127], Value: uint32(34055)},
+			{Name: _GLenum_name[3127:3139], Value: uint32(34056)},
+			{Name: _GLenum_name[3139:3158], Value: uint32(34067)},
+			{Name: _GLenum_name[3158:3185], Value: uint32(34068)},
+			{Name: _GLenum_name[3185:3215], Value: uint32(34069)},
+			{Name: _GLenum_name[3215:3245], Value: uint32(34070)},
+			{Name: _GLenum_name[3245:3275], Value: uint32(34071)},
+			{Name: _GLenum_name[3275:3305], Value: uint32(34072)},
+			{Name: _GLenum_name[3305:3335], Value: uint32(34073)},
+			{Name: _GLenum_name[3335:3365], Value: uint32(34074)},
+			{Name: _GLenum_name[3365:3393], Value: uint32(34076)},
+			{Name: _GLenum_name[3393:3426], Value: uint32(34466)},
+			{Name: _GLenum_name[3426:3455], Value: uint32(34467)},
+			{Name: _GLenum_name[3455:3469], Value: uint32(34660)},
+			{Name: _GLenum_name[3469:3484], Value: uint32(34661)},
+			{Name: _GLenum_name[3484:3518], Value: uint32(34798)},
+			{Name: _GLenum_name[3518:3538], Value: uint32(34816)},
+			{Name: _GLenum_name[3538:3558], Value: uint32(34817)},
+			{Name: _GLenum_name[3558:3589], Value: uint32(34818)},
+			{Name: _GLenum_name[3589:3620], Value: uint32(34819)},
+			{Name: _GLenum_name[3620:3643], Value: uint32(34877)},
+			{Name: _GLenum_name[3643:3668], Value: uint32(34916)},
+			{Name: _GLenum_name[3668:3684], Value: uint32(34917)},
+			{Name: _GLenum_name[3684:3699], Value: uint32(34918)},
+			{Name: _GLenum_name[3699:3724], Value: uint32(34919)},
+			{Name: _GLenum_name[3724:3745], Value: uint32(34921)},
+			{Name: _GLenum_name[3745:3771], Value: uint32(34930)},
+			{Name: _GLenum_name[3771:3786], Value: uint32(34962)},
+			{Name: _GLenum_name[3786:3809], Value: uint32(34963)},
+			{Name: _GLenum_name[3809:3832], Value: uint32(34964)},
+			{Name: _GLenum_name[3832:3863], Value: uint32(34965)},
+			{Name: _GLenum_name[3863:3882], Value: uint32(35007)},
+			{Name: _GLenum_name[3882:3896], Value: uint32(35040)},
+			{Name: _GLenum_name[3896:3910], Value: uint32(35044)},
+			{Name: _GLenum_name[3910:3925], Value: uint32(35048)},
+			{Name: _GLenum_name[3925:3945], Value: uint32(35051)},
+			{Name: _GLenum_name[3945:3967], Value: uint32(35052)},
+			{Name: _GLenum_name[3967:3986], Value: uint32(35056)},
+			{Name: _GLenum_name[3986:4003], Value: uint32(35345)},
+			{Name: _GLenum_name[4003:4027], Value: uint32(35391)},
+			{Name: _GLenum_name[4027:4053], Value: uint32(35392)},
+			{Name: _GLenum_name[4053:4081], Value: uint32(35393)},
+			{Name: _GLenum_name[4081:4113], Value: uint32(35394)},
+			{Name: _GLenum_name[4113:4152], Value: uint32(35395)},
+			{Name: _GLenum_name[4152:4196], Value: uint32(35396)},
+			{Name: _GLenum_name[4196:4242], Value: uint32(35397)},
+			{Name: _GLenum_name[4242:4288], Value: uint32(35398)},
+			{Name: _GLenum_name[4288:4306], Value: uint32(35632)},
+			{Name: _GLenum_name[4306:4322], Value: uint32(35633)},
+			{Name: _GLenum_name[4322:4355], Value: uint32(35660)},
+			{Name: _GLenum_name[4355:4390], Value: uint32(35661)},
+			{Name: _GLenum_name[4390:4404], Value: uint32(35663)},
+			{Name: _GLenum_name[4404:4417], Value: uint32(35664)},
+			{Name: _GLenum_name[4417:4430], Value: uint32(35665)},
+			{Name: _GLenum_name[4430:4443], Value: uint32(35666)},
+			{Name: _GLenum_name[4443:4454], Value: uint32(35667)},
+			{Name: _GLenum_name[4454:4465], Value: uint32(35668)},
+			{Name: _GLenum_name[4465:4476], Value: uint32(35669)},
+			{Name: _GLenum_name[4476:4483], Value: uint32(35670)},
+			{Name: _GLenum_name[4483:4495], Value: uint32(35671)},
+			{Name: _GLenum_name[4495:4507], Value: uint32(35672)},
+			{Name: _GLenum_name[4507:4519], Value: uint32(35673)},
+			{Name: _GLenum_name[4519:4532], Value: uint32(35674)},
+			{Name: _GLenum_name[4532:4545], Value: uint32(35675)},
+			{Name: _GLenum_name[4545:4558], Value: uint32(35676)},
+			{Name: _GLenum_name[4558:4571], Value: uint32(35678)},
+			{Name: _GLenum_name[4571:4586], Value: uint32(35680)},
+			{Name: _GLenum_name[4586:4602], Value: uint32(35712)},
+			{Name: _GLenum_name[4602:4619], Value: uint32(35713)},
+			{Name: _GLenum_name[4619:4633], Value: uint32(35714)},
+			{Name: _GLenum_name[4633:4651], Value: uint32(35715)},
+			{Name: _GLenum_name[4651:4669], Value: uint32(35716)},
+			{Name: _GLenum_name[4669:4688], Value: uint32(35717)},
+			{Name: _GLenum_name[4688:4706], Value: uint32(35718)},
+			{Name: _GLenum_name[4706:4734], Value: uint32(35719)},
+			{Name: _GLenum_name[4734:4757], Value: uint32(35720)},
+			{Name: _GLenum_name[4757:4777], Value: uint32(35721)},
+			{Name: _GLenum_name[4777:4807], Value: uint32(35722)},
+			{Name: _GLenum_name[4807:4825], Value: uint32(35725)},
+			{Name: _GLenum_name[4825:4858], Value: uint32(35738)},
+			{Name: _GLenum_name[4858:4893], Value: uint32(35739)},
+			{Name: _GLenum_name[4893:4916], Value: uint32(35740)},
+			{Name: _GLenum_name[4916:4937], Value: uint32(35887)},
+			{Name: _GLenum_name[4937:4969], Value: uint32(35952)},
+			{Name: _GLenum_name[4969:5008], Value: uint32(35953)},
+			{Name: _GLenum_name[5008:5046], Value: uint32(35954)},
+			{Name: _GLenum_name[5046:5091], Value: uint32(35955)},
+			{Name: _GLenum_name[5091:5131], Value: uint32(35976)},
+			{Name: _GLenum_name[5131:5159], Value: uint32(35982)},
+			{Name: _GLenum_name[5159:5173], Value: uint32(35986)},
+			{Name: _GLenum_name[5173:5203], Value: uint32(35987)},
+			{Name: _GLenum_name[5203:5222], Value: uint32(36003)},
+			{Name: _GLenum_name[5222:5248], Value: uint32(36004)},
+			{Name: _GLenum_name[5248:5273], Value: uint32(36005)},
+			{Name: _GLenum_name[5273:5295], Value: uint32(36006)},
+			{Name: _GLenum_name[5295:5318], Value: uint32(36007)},
+			{Name: _GLenum_name[5318:5337], Value: uint32(36008)},
+			{Name: _GLenum_name[5337:5356], Value: uint32(36009)},
+			{Name: _GLenum_name[5356:5383], Value: uint32(36010)},
+			{Name: _GLenum_name[5383:5420], Value: uint32(36048)},
+			{Name: _GLenum_name[5420:5457], Value: uint32(36049)},
+			{Name: _GLenum_name[5457:5496], Value: uint32(36050)},
+			{Name: _GLenum_name[5496:5543], Value: uint32(36051)},
+			{Name: _GLenum_name[5543:5566], Value: uint32(36053)},
+			{Name: _GLenum_name[5566:5602], Value: uint32(36054)},
+			{Name: _GLenum_name[5602:5646], Value: uint32(36055)},
+			{Name: _GLenum_name[5646:5682], Value: uint32(36057)},
+			{Name: _GLenum_name[5682:5708], Value: uint32(36061)},
+			{Name: _GLenum_name[5708:5728], Value: uint32(36064)},
+			{Name: _GLenum_name[5728:5747], Value: uint32(36096)},
+			{Name: _GLenum_name[5747:5768], Value: uint32(36128)},
+			{Name: _GLenum_name[5768:5782], Value: uint32(36160)},
+			{Name: _GLenum_name[5782:5797], Value: uint32(36161)},
+			{Name: _GLenum_name[5797:5816], Value: uint32(36161)},
+			{Name: _GLenum_name[5816:5837], Value: uint32(36162)},
+			{Name: _GLenum_name[5837:5859], Value: uint32(36163)},
+			{Name: _GLenum_name[5859:5890], Value: uint32(36164)},
+			{Name: _GLenum_name[5890:5907], Value: uint32(36168)},
+			{Name: _GLenum_name[5907:5931], Value: uint32(36176)},
+			{Name: _GLenum_name[5931:5957], Value: uint32(36177)},
+			{Name: _GLenum_name[5957:5982], Value: uint32(36178)},
+			{Name: _GLenum_name[5982:6008], Value: uint32(36179)},
+			{Name: _GLenum_name[6008:6034], Value: uint32(36180)},
+			{Name: _GLenum_name[6034:6062], Value: uint32(36181)},
+			{Name: _GLenum_name[6062:6079], Value: uint32(36193)},
+			{Name: _GLenum_name[6079:6088], Value: uint32(36194)},
+			{Name: _GLenum_name[6088:6104], Value: uint32(36196)},
+			{Name: _GLenum_name[6104:6127], Value: uint32(36197)},
+			{Name: _GLenum_name[6127:6161], Value: uint32(36202)},
+			{Name: _GLenum_name[6161:6175], Value: uint32(36244)},
+			{Name: _GLenum_name[6175:6189], Value: uint32(36248)},
+			{Name: _GLenum_name[6189:6204], Value: uint32(36249)},
+			{Name: _GLenum_name[6204:6216], Value: uint32(36336)},
+			{Name: _GLenum_name[6216:6231], Value: uint32(36337)},
+			{Name: _GLenum_name[6231:6244], Value: uint32(36338)},
+			{Name: _GLenum_name[6244:6254], Value: uint32(36339)},
+			{Name: _GLenum_name[6254:6267], Value: uint32(36340)},
+			{Name: _GLenum_name[6267:6278], Value: uint32(36341)},
+			{Name: _GLenum_name[6278:6302], Value: uint32(36344)},
+			{Name: _GLenum_name[6302:6330], Value: uint32(36345)},
+			{Name: _GLenum_name[6330:6348], Value: uint32(36346)},
+			{Name: _GLenum_name[6348:6377], Value: uint32(36347)},
+			{Name: _GLenum_name[6377:6399], Value: uint32(36348)},
+			{Name: _GLenum_name[6399:6430], Value: uint32(36349)},
+			{Name: _GLenum_name[6430:6446], Value: uint32(36392)},
+			{Name: _GLenum_name[6446:6466], Value: uint32(36418)},
+			{Name: _GLenum_name[6466:6486], Value: uint32(36419)},
+			{Name: _GLenum_name[6486:6506], Value: uint32(36420)},
+			{Name: _GLenum_name[6506:6526], Value: uint32(36421)},
+			{Name: _GLenum_name[6526:6545], Value: uint32(36662)},
+			{Name: _GLenum_name[6545:6565], Value: uint32(36663)},
+			{Name: _GLenum_name[6565:6584], Value: uint32(36795)},
+			{Name: _GLenum_name[6584:6615], Value: uint32(37808)},
+			{Name: _GLenum_name[6615:6646], Value: uint32(37809)},
+			{Name: _GLenum_name[6646:6677], Value: uint32(37810)},
+			{Name: _GLenum_name[6677:6708], Value: uint32(37811)},
+			{Name: _GLenum_name[6708:6739], Value: uint32(37812)},
+			{Name: _GLenum_name[6739:6770], Value: uint32(37813)},
+			{Name: _GLenum_name[6770:6801], Value: uint32(37814)},
+			{Name: _GLenum_name[6801:6832], Value: uint32(37815)},
+			{Name: _GLenum_name[6832:6864], Value: uint32(37816)},
+			{Name: _GLenum_name[6864:6896], Value: uint32(37817)},
+			{Name: _GLenum_name[6896:6928], Value: uint32(37818)},
+			{Name: _GLenum_name[6928:6961], Value: uint32(37819)},
+			{Name: _GLenum_name[6961:6994], Value: uint32(37820)},
+			{Name: _GLenum_name[6994:7027], Value: uint32(37821)},
+			{Name: _GLenum_name[7027:7066], Value: uint32(37840)},
+			{Name: _GLenum_name[7066:7105], Value: uint32(37841)},
+			{Name: _GLenum_name[7105:7144], Value: uint32(37842)},
+			{Name: _GLenum_name[7144:7183], Value: uint32(37843)},
+			{Name: _GLenum_name[7183:7222], Value: uint32(37844)},
+			{Name: _GLenum_name[7222:7261], Value: uint32(37845)},
+			{Name: _GLenum_name[7261:7300], Value: uint32(37846)},
+			{Name: _GLenum_name[7300:7339], Value: uint32(37847)},
+			{Name: _GLenum_name[7339:7379], Value: uint32(37848)},
+			{Name: _GLenum_name[7379:7419], Value: uint32(37849)},
+			{Name: _GLenum_name[7419:7459], Value: uint32(37850)},
+			{Name: _GLenum_name[7459:7500], Value: uint32(37851)},
+			{Name: _GLenum_name[7500:7541], Value: uint32(37852)},
+			{Name: _GLenum_name[7541:7582], Value: uint32(37853)},
 		},
 	})
 }
 
-func (v CompressedTexelFormat_AMD_compressed_ATC_texture) String() string {
-	if s, ok := _CompressedTexelFormat_AMD_compressed_ATC_texture_map[v]; ok {
+func (v GLenum) String() string {
+	if s, ok := _GLenum_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CompressedTexelFormat_AMD_compressed_ATC_texture(%d)", v)
+	return fmt.Sprintf("GLenum(%d)", v)
 }
 
-func (v *CompressedTexelFormat_AMD_compressed_ATC_texture) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_AMD_compressed_ATC_texture_map {
+func (v *GLenum) Parse(s string) error {
+	for k, t := range _GLenum_map {
 		if s == t {
 			*v = k
 			return nil
 		}
 	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_AMD_compressed_ATC_texture", s)
-}
-
-const _CompressedTexelFormat_EXT_texture_compression_dxt1_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXT"
-
-var _CompressedTexelFormat_EXT_texture_compression_dxt1_map = map[CompressedTexelFormat_EXT_texture_compression_dxt1]string{}
-
-func init() {
-	_CompressedTexelFormat_EXT_texture_compression_dxt1_map[33776] = _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31]
-	_CompressedTexelFormat_EXT_texture_compression_dxt1_map[33777] = _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_dxt1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31], Value: uint32(33776)},
-			{Name: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63], Value: uint32(33777)},
-		},
-	})
-}
-
-func (v CompressedTexelFormat_EXT_texture_compression_dxt1) String() string {
-	if s, ok := _CompressedTexelFormat_EXT_texture_compression_dxt1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CompressedTexelFormat_EXT_texture_compression_dxt1(%d)", v)
-}
-
-func (v *CompressedTexelFormat_EXT_texture_compression_dxt1) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_EXT_texture_compression_dxt1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_EXT_texture_compression_dxt1", s)
-}
-
-const _CompressedTexelFormat_EXT_texture_compression_s3tc_name = "GL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXT"
-
-var _CompressedTexelFormat_EXT_texture_compression_s3tc_map = map[CompressedTexelFormat_EXT_texture_compression_s3tc]string{}
-
-func init() {
-	_CompressedTexelFormat_EXT_texture_compression_s3tc_map[33778] = _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32]
-	_CompressedTexelFormat_EXT_texture_compression_s3tc_map[33779] = _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_s3tc", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32], Value: uint32(33778)},
-			{Name: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64], Value: uint32(33779)},
-		},
-	})
-}
-
-func (v CompressedTexelFormat_EXT_texture_compression_s3tc) String() string {
-	if s, ok := _CompressedTexelFormat_EXT_texture_compression_s3tc_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CompressedTexelFormat_EXT_texture_compression_s3tc(%d)", v)
-}
-
-func (v *CompressedTexelFormat_EXT_texture_compression_s3tc) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_EXT_texture_compression_s3tc_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_EXT_texture_compression_s3tc", s)
-}
-
-const _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name = "GL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
-
-var _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map = map[CompressedTexelFormat_KHR_texture_compression_astc_ldr]string{}
-
-func init() {
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37808] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37809] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37810] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37811] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37812] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37813] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37814] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37815] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37816] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37817] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37818] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37819] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37820] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37821] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37840] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37841] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37842] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37843] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37844] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37845] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37846] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37847] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37848] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37849] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37850] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37851] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37852] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957]
-	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37853] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_KHR_texture_compression_astc_ldr", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31], Value: uint32(37808)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62], Value: uint32(37809)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93], Value: uint32(37810)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124], Value: uint32(37811)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155], Value: uint32(37812)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186], Value: uint32(37813)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217], Value: uint32(37814)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248], Value: uint32(37815)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280], Value: uint32(37816)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312], Value: uint32(37817)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344], Value: uint32(37818)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377], Value: uint32(37819)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410], Value: uint32(37820)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443], Value: uint32(37821)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482], Value: uint32(37840)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521], Value: uint32(37841)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560], Value: uint32(37842)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599], Value: uint32(37843)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638], Value: uint32(37844)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677], Value: uint32(37845)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716], Value: uint32(37846)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755], Value: uint32(37847)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795], Value: uint32(37848)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835], Value: uint32(37849)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875], Value: uint32(37850)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916], Value: uint32(37851)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957], Value: uint32(37852)},
-			{Name: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998], Value: uint32(37853)},
-		},
-	})
-}
-
-func (v CompressedTexelFormat_KHR_texture_compression_astc_ldr) String() string {
-	if s, ok := _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CompressedTexelFormat_KHR_texture_compression_astc_ldr(%d)", v)
-}
-
-func (v *CompressedTexelFormat_KHR_texture_compression_astc_ldr) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_KHR_texture_compression_astc_ldr", s)
-}
-
-const _CompressedTexelFormat_NV_texture_compression_latc_name = "GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV"
-
-var _CompressedTexelFormat_NV_texture_compression_latc_map = map[CompressedTexelFormat_NV_texture_compression_latc]string{}
-
-func init() {
-	_CompressedTexelFormat_NV_texture_compression_latc_map[35952] = _CompressedTexelFormat_NV_texture_compression_latc_name[0:32]
-	_CompressedTexelFormat_NV_texture_compression_latc_map[35953] = _CompressedTexelFormat_NV_texture_compression_latc_name[32:71]
-	_CompressedTexelFormat_NV_texture_compression_latc_map[35954] = _CompressedTexelFormat_NV_texture_compression_latc_name[71:109]
-	_CompressedTexelFormat_NV_texture_compression_latc_map[35955] = _CompressedTexelFormat_NV_texture_compression_latc_name[109:154]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_NV_texture_compression_latc", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[0:32], Value: uint32(35952)},
-			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[32:71], Value: uint32(35953)},
-			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[71:109], Value: uint32(35954)},
-			{Name: _CompressedTexelFormat_NV_texture_compression_latc_name[109:154], Value: uint32(35955)},
-		},
-	})
-}
-
-func (v CompressedTexelFormat_NV_texture_compression_latc) String() string {
-	if s, ok := _CompressedTexelFormat_NV_texture_compression_latc_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CompressedTexelFormat_NV_texture_compression_latc(%d)", v)
-}
-
-func (v *CompressedTexelFormat_NV_texture_compression_latc) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_NV_texture_compression_latc_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_NV_texture_compression_latc", s)
-}
-
-const _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name = "GL_ETC1_RGB8_OES"
-
-var _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map = map[CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture]string{}
-
-func init() {
-	_CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map[36196] = _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16], Value: uint32(36196)},
-		},
-	})
-}
-
-func (v CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) String() string {
-	if s, ok := _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(%d)", v)
-}
-
-func (v *CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) Parse(s string) error {
-	for k, t := range _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture", s)
-}
-
-const _CubeMapImageTarget_name = "GL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
-
-var _CubeMapImageTarget_map = map[CubeMapImageTarget]string{}
-
-func init() {
-	_CubeMapImageTarget_map[34069] = _CubeMapImageTarget_name[0:30]
-	_CubeMapImageTarget_map[34070] = _CubeMapImageTarget_name[30:60]
-	_CubeMapImageTarget_map[34071] = _CubeMapImageTarget_name[60:90]
-	_CubeMapImageTarget_map[34072] = _CubeMapImageTarget_name[90:120]
-	_CubeMapImageTarget_map[34073] = _CubeMapImageTarget_name[120:150]
-	_CubeMapImageTarget_map[34074] = _CubeMapImageTarget_name[150:180]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _CubeMapImageTarget_name[0:30], Value: uint32(34069)},
-			{Name: _CubeMapImageTarget_name[30:60], Value: uint32(34070)},
-			{Name: _CubeMapImageTarget_name[60:90], Value: uint32(34071)},
-			{Name: _CubeMapImageTarget_name[90:120], Value: uint32(34072)},
-			{Name: _CubeMapImageTarget_name[120:150], Value: uint32(34073)},
-			{Name: _CubeMapImageTarget_name[150:180], Value: uint32(34074)},
-		},
-	})
-}
-
-func (v CubeMapImageTarget) String() string {
-	if s, ok := _CubeMapImageTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("CubeMapImageTarget(%d)", v)
-}
-
-func (v *CubeMapImageTarget) Parse(s string) error {
-	for k, t := range _CubeMapImageTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in CubeMapImageTarget", s)
-}
-
-const _DiscardFramebufferAttachment_name = "GL_COLOR_EXTGL_DEPTH_EXTGL_STENCIL_EXT"
-
-var _DiscardFramebufferAttachment_map = map[DiscardFramebufferAttachment]string{}
-
-func init() {
-	_DiscardFramebufferAttachment_map[6144] = _DiscardFramebufferAttachment_name[0:12]
-	_DiscardFramebufferAttachment_map[6145] = _DiscardFramebufferAttachment_name[12:24]
-	_DiscardFramebufferAttachment_map[6146] = _DiscardFramebufferAttachment_name[24:38]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "DiscardFramebufferAttachment", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _DiscardFramebufferAttachment_name[0:12], Value: uint32(6144)},
-			{Name: _DiscardFramebufferAttachment_name[12:24], Value: uint32(6145)},
-			{Name: _DiscardFramebufferAttachment_name[24:38], Value: uint32(6146)},
-		},
-	})
-}
-
-func (v DiscardFramebufferAttachment) String() string {
-	if s, ok := _DiscardFramebufferAttachment_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("DiscardFramebufferAttachment(%d)", v)
-}
-
-func (v *DiscardFramebufferAttachment) Parse(s string) error {
-	for k, t := range _DiscardFramebufferAttachment_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in DiscardFramebufferAttachment", s)
-}
-
-const _DrawMode_name = "GL_POINTSGL_LINESGL_LINE_LOOPGL_LINE_STRIPGL_TRIANGLESGL_TRIANGLE_STRIPGL_TRIANGLE_FAN"
-
-var _DrawMode_map = map[DrawMode]string{}
-
-func init() {
-	_DrawMode_map[0] = _DrawMode_name[0:9]
-	_DrawMode_map[1] = _DrawMode_name[9:17]
-	_DrawMode_map[2] = _DrawMode_name[17:29]
-	_DrawMode_map[3] = _DrawMode_name[29:42]
-	_DrawMode_map[4] = _DrawMode_name[42:54]
-	_DrawMode_map[5] = _DrawMode_name[54:71]
-	_DrawMode_map[6] = _DrawMode_name[71:86]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _DrawMode_name[0:9], Value: uint32(0)},
-			{Name: _DrawMode_name[9:17], Value: uint32(1)},
-			{Name: _DrawMode_name[17:29], Value: uint32(2)},
-			{Name: _DrawMode_name[29:42], Value: uint32(3)},
-			{Name: _DrawMode_name[42:54], Value: uint32(4)},
-			{Name: _DrawMode_name[54:71], Value: uint32(5)},
-			{Name: _DrawMode_name[71:86], Value: uint32(6)},
-		},
-	})
-}
-
-func (v DrawMode) String() string {
-	if s, ok := _DrawMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("DrawMode(%d)", v)
-}
-
-func (v *DrawMode) Parse(s string) error {
-	for k, t := range _DrawMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in DrawMode", s)
-}
-
-const _Error_name = "GL_NO_ERRORGL_INVALID_ENUMGL_INVALID_VALUEGL_INVALID_OPERATIONGL_OUT_OF_MEMORYGL_INVALID_FRAMEBUFFER_OPERATION"
-
-var _Error_map = map[Error]string{}
-
-func init() {
-	_Error_map[0] = _Error_name[0:11]
-	_Error_map[1280] = _Error_name[11:26]
-	_Error_map[1281] = _Error_name[26:42]
-	_Error_map[1282] = _Error_name[42:62]
-	_Error_map[1285] = _Error_name[62:78]
-	_Error_map[1286] = _Error_name[78:110]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Error", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _Error_name[0:11], Value: uint32(0)},
-			{Name: _Error_name[11:26], Value: uint32(1280)},
-			{Name: _Error_name[26:42], Value: uint32(1281)},
-			{Name: _Error_name[42:62], Value: uint32(1282)},
-			{Name: _Error_name[62:78], Value: uint32(1285)},
-			{Name: _Error_name[78:110], Value: uint32(1286)},
-		},
-	})
-}
-
-func (v Error) String() string {
-	if s, ok := _Error_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Error(%d)", v)
-}
-
-func (v *Error) Parse(s string) error {
-	for k, t := range _Error_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Error", s)
-}
-
-const _FaceMode_name = "GL_FRONTGL_BACKGL_FRONT_AND_BACK"
-
-var _FaceMode_map = map[FaceMode]string{}
-
-func init() {
-	_FaceMode_map[1028] = _FaceMode_name[0:8]
-	_FaceMode_map[1029] = _FaceMode_name[8:15]
-	_FaceMode_map[1032] = _FaceMode_name[15:32]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FaceMode_name[0:8], Value: uint32(1028)},
-			{Name: _FaceMode_name[8:15], Value: uint32(1029)},
-			{Name: _FaceMode_name[15:32], Value: uint32(1032)},
-		},
-	})
-}
-
-func (v FaceMode) String() string {
-	if s, ok := _FaceMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FaceMode(%d)", v)
-}
-
-func (v *FaceMode) Parse(s string) error {
-	for k, t := range _FaceMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FaceMode", s)
-}
-
-const _FaceOrientation_name = "GL_CWGL_CCW"
-
-var _FaceOrientation_map = map[FaceOrientation]string{}
-
-func init() {
-	_FaceOrientation_map[2304] = _FaceOrientation_name[0:5]
-	_FaceOrientation_map[2305] = _FaceOrientation_name[5:11]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FaceOrientation_name[0:5], Value: uint32(2304)},
-			{Name: _FaceOrientation_name[5:11], Value: uint32(2305)},
-		},
-	})
-}
-
-func (v FaceOrientation) String() string {
-	if s, ok := _FaceOrientation_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FaceOrientation(%d)", v)
-}
-
-func (v *FaceOrientation) Parse(s string) error {
-	for k, t := range _FaceOrientation_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FaceOrientation", s)
-}
-
-const _FramebufferAttachment_name = "GL_COLOR_ATTACHMENT0GL_DEPTH_ATTACHMENTGL_STENCIL_ATTACHMENT"
-
-var _FramebufferAttachment_map = map[FramebufferAttachment]string{}
-
-func init() {
-	_FramebufferAttachment_map[36064] = _FramebufferAttachment_name[0:20]
-	_FramebufferAttachment_map[36096] = _FramebufferAttachment_name[20:39]
-	_FramebufferAttachment_map[36128] = _FramebufferAttachment_name[39:60]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferAttachment_name[0:20], Value: uint32(36064)},
-			{Name: _FramebufferAttachment_name[20:39], Value: uint32(36096)},
-			{Name: _FramebufferAttachment_name[39:60], Value: uint32(36128)},
-		},
-	})
-}
-
-func (v FramebufferAttachment) String() string {
-	if s, ok := _FramebufferAttachment_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferAttachment(%d)", v)
-}
-
-func (v *FramebufferAttachment) Parse(s string) error {
-	for k, t := range _FramebufferAttachment_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferAttachment", s)
-}
-
-const _FramebufferAttachmentParameter_name = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPEGL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAMEGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVELGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE"
-
-var _FramebufferAttachmentParameter_map = map[FramebufferAttachmentParameter]string{}
-
-func init() {
-	_FramebufferAttachmentParameter_map[36048] = _FramebufferAttachmentParameter_name[0:37]
-	_FramebufferAttachmentParameter_map[36049] = _FramebufferAttachmentParameter_name[37:74]
-	_FramebufferAttachmentParameter_map[36050] = _FramebufferAttachmentParameter_name[74:113]
-	_FramebufferAttachmentParameter_map[36051] = _FramebufferAttachmentParameter_name[113:160]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferAttachmentParameter_name[0:37], Value: uint32(36048)},
-			{Name: _FramebufferAttachmentParameter_name[37:74], Value: uint32(36049)},
-			{Name: _FramebufferAttachmentParameter_name[74:113], Value: uint32(36050)},
-			{Name: _FramebufferAttachmentParameter_name[113:160], Value: uint32(36051)},
-		},
-	})
-}
-
-func (v FramebufferAttachmentParameter) String() string {
-	if s, ok := _FramebufferAttachmentParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferAttachmentParameter(%d)", v)
-}
-
-func (v *FramebufferAttachmentParameter) Parse(s string) error {
-	for k, t := range _FramebufferAttachmentParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferAttachmentParameter", s)
-}
-
-const _FramebufferAttachmentType_name = "GL_NONEGL_TEXTUREGL_RENDERBUFFER"
-
-var _FramebufferAttachmentType_map = map[FramebufferAttachmentType]string{}
-
-func init() {
-	_FramebufferAttachmentType_map[0] = _FramebufferAttachmentType_name[0:7]
-	_FramebufferAttachmentType_map[5890] = _FramebufferAttachmentType_name[7:17]
-	_FramebufferAttachmentType_map[36161] = _FramebufferAttachmentType_name[17:32]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferAttachmentType_name[0:7], Value: uint32(0)},
-			{Name: _FramebufferAttachmentType_name[7:17], Value: uint32(5890)},
-			{Name: _FramebufferAttachmentType_name[17:32], Value: uint32(36161)},
-		},
-	})
-}
-
-func (v FramebufferAttachmentType) String() string {
-	if s, ok := _FramebufferAttachmentType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferAttachmentType(%d)", v)
-}
-
-func (v *FramebufferAttachmentType) Parse(s string) error {
-	for k, t := range _FramebufferAttachmentType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferAttachmentType", s)
-}
-
-const _FramebufferStatus_name = "GL_FRAMEBUFFER_COMPLETEGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONSGL_FRAMEBUFFER_UNSUPPORTED"
-
-var _FramebufferStatus_map = map[FramebufferStatus]string{}
-
-func init() {
-	_FramebufferStatus_map[36053] = _FramebufferStatus_name[0:23]
-	_FramebufferStatus_map[36054] = _FramebufferStatus_name[23:59]
-	_FramebufferStatus_map[36055] = _FramebufferStatus_name[59:103]
-	_FramebufferStatus_map[36057] = _FramebufferStatus_name[103:139]
-	_FramebufferStatus_map[36061] = _FramebufferStatus_name[139:165]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferStatus_name[0:23], Value: uint32(36053)},
-			{Name: _FramebufferStatus_name[23:59], Value: uint32(36054)},
-			{Name: _FramebufferStatus_name[59:103], Value: uint32(36055)},
-			{Name: _FramebufferStatus_name[103:139], Value: uint32(36057)},
-			{Name: _FramebufferStatus_name[139:165], Value: uint32(36061)},
-		},
-	})
-}
-
-func (v FramebufferStatus) String() string {
-	if s, ok := _FramebufferStatus_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferStatus(%d)", v)
-}
-
-func (v *FramebufferStatus) Parse(s string) error {
-	for k, t := range _FramebufferStatus_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferStatus", s)
-}
-
-const _FramebufferTarget_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFERGL_FRAMEBUFFER"
-
-var _FramebufferTarget_map = map[FramebufferTarget]string{}
-
-func init() {
-	_FramebufferTarget_map[36008] = _FramebufferTarget_name[0:19]
-	_FramebufferTarget_map[36009] = _FramebufferTarget_name[19:38]
-	_FramebufferTarget_map[36160] = _FramebufferTarget_name[38:52]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferTarget_name[0:19], Value: uint32(36008)},
-			{Name: _FramebufferTarget_name[19:38], Value: uint32(36009)},
-			{Name: _FramebufferTarget_name[38:52], Value: uint32(36160)},
-		},
-	})
-}
-
-func (v FramebufferTarget) String() string {
-	if s, ok := _FramebufferTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferTarget(%d)", v)
-}
-
-func (v *FramebufferTarget) Parse(s string) error {
-	for k, t := range _FramebufferTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferTarget", s)
-}
-
-const _FramebufferTarget_GLES_2_0_name = "GL_FRAMEBUFFER"
-
-var _FramebufferTarget_GLES_2_0_map = map[FramebufferTarget_GLES_2_0]string{}
-
-func init() {
-	_FramebufferTarget_GLES_2_0_map[36160] = _FramebufferTarget_GLES_2_0_name[0:14]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_2_0", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferTarget_GLES_2_0_name[0:14], Value: uint32(36160)},
-		},
-	})
-}
-
-func (v FramebufferTarget_GLES_2_0) String() string {
-	if s, ok := _FramebufferTarget_GLES_2_0_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferTarget_GLES_2_0(%d)", v)
-}
-
-func (v *FramebufferTarget_GLES_2_0) Parse(s string) error {
-	for k, t := range _FramebufferTarget_GLES_2_0_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferTarget_GLES_2_0", s)
-}
-
-const _FramebufferTarget_GLES_3_1_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFER"
-
-var _FramebufferTarget_GLES_3_1_map = map[FramebufferTarget_GLES_3_1]string{}
-
-func init() {
-	_FramebufferTarget_GLES_3_1_map[36008] = _FramebufferTarget_GLES_3_1_name[0:19]
-	_FramebufferTarget_GLES_3_1_map[36009] = _FramebufferTarget_GLES_3_1_name[19:38]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_3_1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _FramebufferTarget_GLES_3_1_name[0:19], Value: uint32(36008)},
-			{Name: _FramebufferTarget_GLES_3_1_name[19:38], Value: uint32(36009)},
-		},
-	})
-}
-
-func (v FramebufferTarget_GLES_3_1) String() string {
-	if s, ok := _FramebufferTarget_GLES_3_1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferTarget_GLES_3_1(%d)", v)
-}
-
-func (v *FramebufferTarget_GLES_3_1) Parse(s string) error {
-	for k, t := range _FramebufferTarget_GLES_3_1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferTarget_GLES_3_1", s)
-}
-
-const _HintMode_name = "GL_DONT_CAREGL_FASTESTGL_NICEST"
-
-var _HintMode_map = map[HintMode]string{}
-
-func init() {
-	_HintMode_map[4352] = _HintMode_name[0:12]
-	_HintMode_map[4353] = _HintMode_name[12:22]
-	_HintMode_map[4354] = _HintMode_name[22:31]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _HintMode_name[0:12], Value: uint32(4352)},
-			{Name: _HintMode_name[12:22], Value: uint32(4353)},
-			{Name: _HintMode_name[22:31], Value: uint32(4354)},
-		},
-	})
-}
-
-func (v HintMode) String() string {
-	if s, ok := _HintMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("HintMode(%d)", v)
-}
-
-func (v *HintMode) Parse(s string) error {
-	for k, t := range _HintMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in HintMode", s)
-}
-
-const _HintTarget_name = "GL_GENERATE_MIPMAP_HINT"
-
-var _HintTarget_map = map[HintTarget]string{}
-
-func init() {
-	_HintTarget_map[33170] = _HintTarget_name[0:23]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _HintTarget_name[0:23], Value: uint32(33170)},
-		},
-	})
-}
-
-func (v HintTarget) String() string {
-	if s, ok := _HintTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("HintTarget(%d)", v)
-}
-
-func (v *HintTarget) Parse(s string) error {
-	for k, t := range _HintTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in HintTarget", s)
-}
-
-const _ImageTargetRenderbufferStorage_name = "GL_RENDERBUFFER_OES"
-
-var _ImageTargetRenderbufferStorage_map = map[ImageTargetRenderbufferStorage]string{}
-
-func init() {
-	_ImageTargetRenderbufferStorage_map[36161] = _ImageTargetRenderbufferStorage_name[0:19]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ImageTargetRenderbufferStorage_name[0:19], Value: uint32(36161)},
-		},
-	})
-}
-
-func (v ImageTargetRenderbufferStorage) String() string {
-	if s, ok := _ImageTargetRenderbufferStorage_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageTargetRenderbufferStorage(%d)", v)
-}
-
-func (v *ImageTargetRenderbufferStorage) Parse(s string) error {
-	for k, t := range _ImageTargetRenderbufferStorage_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageTargetRenderbufferStorage", s)
-}
-
-const _ImageTargetTexture_name = "GL_TEXTURE_2DGL_TEXTURE_EXTERNAL_OES"
-
-var _ImageTargetTexture_map = map[ImageTargetTexture]string{}
-
-func init() {
-	_ImageTargetTexture_map[3553] = _ImageTargetTexture_name[0:13]
-	_ImageTargetTexture_map[36197] = _ImageTargetTexture_name[13:36]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ImageTargetTexture_name[0:13], Value: uint32(3553)},
-			{Name: _ImageTargetTexture_name[13:36], Value: uint32(36197)},
-		},
-	})
-}
-
-func (v ImageTargetTexture) String() string {
-	if s, ok := _ImageTargetTexture_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageTargetTexture(%d)", v)
-}
-
-func (v *ImageTargetTexture) Parse(s string) error {
-	for k, t := range _ImageTargetTexture_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageTargetTexture", s)
-}
-
-const _ImageTargetTexture_OES_EGL_image_name = "GL_TEXTURE_2D"
-
-var _ImageTargetTexture_OES_EGL_image_map = map[ImageTargetTexture_OES_EGL_image]string{}
-
-func init() {
-	_ImageTargetTexture_OES_EGL_image_map[3553] = _ImageTargetTexture_OES_EGL_image_name[0:13]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ImageTargetTexture_OES_EGL_image_name[0:13], Value: uint32(3553)},
-		},
-	})
-}
-
-func (v ImageTargetTexture_OES_EGL_image) String() string {
-	if s, ok := _ImageTargetTexture_OES_EGL_image_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image(%d)", v)
-}
-
-func (v *ImageTargetTexture_OES_EGL_image) Parse(s string) error {
-	for k, t := range _ImageTargetTexture_OES_EGL_image_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageTargetTexture_OES_EGL_image", s)
-}
-
-const _ImageTargetTexture_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
-
-var _ImageTargetTexture_OES_EGL_image_external_map = map[ImageTargetTexture_OES_EGL_image_external]string{}
-
-func init() {
-	_ImageTargetTexture_OES_EGL_image_external_map[36197] = _ImageTargetTexture_OES_EGL_image_external_name[0:23]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image_external", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ImageTargetTexture_OES_EGL_image_external_name[0:23], Value: uint32(36197)},
-		},
-	})
-}
-
-func (v ImageTargetTexture_OES_EGL_image_external) String() string {
-	if s, ok := _ImageTargetTexture_OES_EGL_image_external_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image_external(%d)", v)
-}
-
-func (v *ImageTargetTexture_OES_EGL_image_external) Parse(s string) error {
-	for k, t := range _ImageTargetTexture_OES_EGL_image_external_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageTargetTexture_OES_EGL_image_external", s)
-}
-
-const _ImageTexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_DEPTH_STENCILGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_DEPTH24_STENCIL8GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGERGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
-
-var _ImageTexelFormat_map = map[ImageTexelFormat]string{}
-
-func init() {
-	_ImageTexelFormat_map[6402] = _ImageTexelFormat_name[0:18]
-	_ImageTexelFormat_map[6403] = _ImageTexelFormat_name[18:24]
-	_ImageTexelFormat_map[6406] = _ImageTexelFormat_name[24:32]
-	_ImageTexelFormat_map[6407] = _ImageTexelFormat_name[32:38]
-	_ImageTexelFormat_map[6408] = _ImageTexelFormat_name[38:45]
-	_ImageTexelFormat_map[6409] = _ImageTexelFormat_name[45:57]
-	_ImageTexelFormat_map[6410] = _ImageTexelFormat_name[57:75]
-	_ImageTexelFormat_map[33189] = _ImageTexelFormat_name[75:95]
-	_ImageTexelFormat_map[33319] = _ImageTexelFormat_name[95:100]
-	_ImageTexelFormat_map[33320] = _ImageTexelFormat_name[100:113]
-	_ImageTexelFormat_map[33776] = _ImageTexelFormat_name[113:144]
-	_ImageTexelFormat_map[33777] = _ImageTexelFormat_name[144:176]
-	_ImageTexelFormat_map[33778] = _ImageTexelFormat_name[176:208]
-	_ImageTexelFormat_map[33779] = _ImageTexelFormat_name[208:240]
-	_ImageTexelFormat_map[34041] = _ImageTexelFormat_name[240:256]
-	_ImageTexelFormat_map[34798] = _ImageTexelFormat_name[256:290]
-	_ImageTexelFormat_map[35056] = _ImageTexelFormat_name[290:309]
-	_ImageTexelFormat_map[35952] = _ImageTexelFormat_name[309:341]
-	_ImageTexelFormat_map[35953] = _ImageTexelFormat_name[341:380]
-	_ImageTexelFormat_map[35954] = _ImageTexelFormat_name[380:418]
-	_ImageTexelFormat_map[35955] = _ImageTexelFormat_name[418:463]
-	_ImageTexelFormat_map[35986] = _ImageTexelFormat_name[463:477]
-	_ImageTexelFormat_map[35987] = _ImageTexelFormat_name[477:507]
-	_ImageTexelFormat_map[36196] = _ImageTexelFormat_name[507:523]
-	_ImageTexelFormat_map[36244] = _ImageTexelFormat_name[523:537]
-	_ImageTexelFormat_map[36248] = _ImageTexelFormat_name[537:551]
-	_ImageTexelFormat_map[36249] = _ImageTexelFormat_name[551:566]
-	_ImageTexelFormat_map[37808] = _ImageTexelFormat_name[566:597]
-	_ImageTexelFormat_map[37809] = _ImageTexelFormat_name[597:628]
-	_ImageTexelFormat_map[37810] = _ImageTexelFormat_name[628:659]
-	_ImageTexelFormat_map[37811] = _ImageTexelFormat_name[659:690]
-	_ImageTexelFormat_map[37812] = _ImageTexelFormat_name[690:721]
-	_ImageTexelFormat_map[37813] = _ImageTexelFormat_name[721:752]
-	_ImageTexelFormat_map[37814] = _ImageTexelFormat_name[752:783]
-	_ImageTexelFormat_map[37815] = _ImageTexelFormat_name[783:814]
-	_ImageTexelFormat_map[37816] = _ImageTexelFormat_name[814:846]
-	_ImageTexelFormat_map[37817] = _ImageTexelFormat_name[846:878]
-	_ImageTexelFormat_map[37818] = _ImageTexelFormat_name[878:910]
-	_ImageTexelFormat_map[37819] = _ImageTexelFormat_name[910:943]
-	_ImageTexelFormat_map[37820] = _ImageTexelFormat_name[943:976]
-	_ImageTexelFormat_map[37821] = _ImageTexelFormat_name[976:1009]
-	_ImageTexelFormat_map[37840] = _ImageTexelFormat_name[1009:1048]
-	_ImageTexelFormat_map[37841] = _ImageTexelFormat_name[1048:1087]
-	_ImageTexelFormat_map[37842] = _ImageTexelFormat_name[1087:1126]
-	_ImageTexelFormat_map[37843] = _ImageTexelFormat_name[1126:1165]
-	_ImageTexelFormat_map[37844] = _ImageTexelFormat_name[1165:1204]
-	_ImageTexelFormat_map[37845] = _ImageTexelFormat_name[1204:1243]
-	_ImageTexelFormat_map[37846] = _ImageTexelFormat_name[1243:1282]
-	_ImageTexelFormat_map[37847] = _ImageTexelFormat_name[1282:1321]
-	_ImageTexelFormat_map[37848] = _ImageTexelFormat_name[1321:1361]
-	_ImageTexelFormat_map[37849] = _ImageTexelFormat_name[1361:1401]
-	_ImageTexelFormat_map[37850] = _ImageTexelFormat_name[1401:1441]
-	_ImageTexelFormat_map[37851] = _ImageTexelFormat_name[1441:1482]
-	_ImageTexelFormat_map[37852] = _ImageTexelFormat_name[1482:1523]
-	_ImageTexelFormat_map[37853] = _ImageTexelFormat_name[1523:1564]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ImageTexelFormat_name[0:18], Value: uint32(6402)},
-			{Name: _ImageTexelFormat_name[18:24], Value: uint32(6403)},
-			{Name: _ImageTexelFormat_name[24:32], Value: uint32(6406)},
-			{Name: _ImageTexelFormat_name[32:38], Value: uint32(6407)},
-			{Name: _ImageTexelFormat_name[38:45], Value: uint32(6408)},
-			{Name: _ImageTexelFormat_name[45:57], Value: uint32(6409)},
-			{Name: _ImageTexelFormat_name[57:75], Value: uint32(6410)},
-			{Name: _ImageTexelFormat_name[75:95], Value: uint32(33189)},
-			{Name: _ImageTexelFormat_name[95:100], Value: uint32(33319)},
-			{Name: _ImageTexelFormat_name[100:113], Value: uint32(33320)},
-			{Name: _ImageTexelFormat_name[113:144], Value: uint32(33776)},
-			{Name: _ImageTexelFormat_name[144:176], Value: uint32(33777)},
-			{Name: _ImageTexelFormat_name[176:208], Value: uint32(33778)},
-			{Name: _ImageTexelFormat_name[208:240], Value: uint32(33779)},
-			{Name: _ImageTexelFormat_name[240:256], Value: uint32(34041)},
-			{Name: _ImageTexelFormat_name[256:290], Value: uint32(34798)},
-			{Name: _ImageTexelFormat_name[290:309], Value: uint32(35056)},
-			{Name: _ImageTexelFormat_name[309:341], Value: uint32(35952)},
-			{Name: _ImageTexelFormat_name[341:380], Value: uint32(35953)},
-			{Name: _ImageTexelFormat_name[380:418], Value: uint32(35954)},
-			{Name: _ImageTexelFormat_name[418:463], Value: uint32(35955)},
-			{Name: _ImageTexelFormat_name[463:477], Value: uint32(35986)},
-			{Name: _ImageTexelFormat_name[477:507], Value: uint32(35987)},
-			{Name: _ImageTexelFormat_name[507:523], Value: uint32(36196)},
-			{Name: _ImageTexelFormat_name[523:537], Value: uint32(36244)},
-			{Name: _ImageTexelFormat_name[537:551], Value: uint32(36248)},
-			{Name: _ImageTexelFormat_name[551:566], Value: uint32(36249)},
-			{Name: _ImageTexelFormat_name[566:597], Value: uint32(37808)},
-			{Name: _ImageTexelFormat_name[597:628], Value: uint32(37809)},
-			{Name: _ImageTexelFormat_name[628:659], Value: uint32(37810)},
-			{Name: _ImageTexelFormat_name[659:690], Value: uint32(37811)},
-			{Name: _ImageTexelFormat_name[690:721], Value: uint32(37812)},
-			{Name: _ImageTexelFormat_name[721:752], Value: uint32(37813)},
-			{Name: _ImageTexelFormat_name[752:783], Value: uint32(37814)},
-			{Name: _ImageTexelFormat_name[783:814], Value: uint32(37815)},
-			{Name: _ImageTexelFormat_name[814:846], Value: uint32(37816)},
-			{Name: _ImageTexelFormat_name[846:878], Value: uint32(37817)},
-			{Name: _ImageTexelFormat_name[878:910], Value: uint32(37818)},
-			{Name: _ImageTexelFormat_name[910:943], Value: uint32(37819)},
-			{Name: _ImageTexelFormat_name[943:976], Value: uint32(37820)},
-			{Name: _ImageTexelFormat_name[976:1009], Value: uint32(37821)},
-			{Name: _ImageTexelFormat_name[1009:1048], Value: uint32(37840)},
-			{Name: _ImageTexelFormat_name[1048:1087], Value: uint32(37841)},
-			{Name: _ImageTexelFormat_name[1087:1126], Value: uint32(37842)},
-			{Name: _ImageTexelFormat_name[1126:1165], Value: uint32(37843)},
-			{Name: _ImageTexelFormat_name[1165:1204], Value: uint32(37844)},
-			{Name: _ImageTexelFormat_name[1204:1243], Value: uint32(37845)},
-			{Name: _ImageTexelFormat_name[1243:1282], Value: uint32(37846)},
-			{Name: _ImageTexelFormat_name[1282:1321], Value: uint32(37847)},
-			{Name: _ImageTexelFormat_name[1321:1361], Value: uint32(37848)},
-			{Name: _ImageTexelFormat_name[1361:1401], Value: uint32(37849)},
-			{Name: _ImageTexelFormat_name[1401:1441], Value: uint32(37850)},
-			{Name: _ImageTexelFormat_name[1441:1482], Value: uint32(37851)},
-			{Name: _ImageTexelFormat_name[1482:1523], Value: uint32(37852)},
-			{Name: _ImageTexelFormat_name[1523:1564], Value: uint32(37853)},
-		},
-	})
-}
-
-func (v ImageTexelFormat) String() string {
-	if s, ok := _ImageTexelFormat_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ImageTexelFormat(%d)", v)
-}
-
-func (v *ImageTexelFormat) Parse(s string) error {
-	for k, t := range _ImageTexelFormat_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ImageTexelFormat", s)
-}
-
-const _IndexedBufferTarget_name = "GL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFER"
-
-var _IndexedBufferTarget_map = map[IndexedBufferTarget]string{}
-
-func init() {
-	_IndexedBufferTarget_map[35345] = _IndexedBufferTarget_name[0:17]
-	_IndexedBufferTarget_map[35982] = _IndexedBufferTarget_name[17:45]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _IndexedBufferTarget_name[0:17], Value: uint32(35345)},
-			{Name: _IndexedBufferTarget_name[17:45], Value: uint32(35982)},
-		},
-	})
-}
-
-func (v IndexedBufferTarget) String() string {
-	if s, ok := _IndexedBufferTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("IndexedBufferTarget(%d)", v)
-}
-
-func (v *IndexedBufferTarget) Parse(s string) error {
-	for k, t := range _IndexedBufferTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in IndexedBufferTarget", s)
-}
-
-const _IndicesType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INT"
-
-var _IndicesType_map = map[IndicesType]string{}
-
-func init() {
-	_IndicesType_map[5121] = _IndicesType_name[0:16]
-	_IndicesType_map[5123] = _IndicesType_name[16:33]
-	_IndicesType_map[5125] = _IndicesType_name[33:48]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _IndicesType_name[0:16], Value: uint32(5121)},
-			{Name: _IndicesType_name[16:33], Value: uint32(5123)},
-			{Name: _IndicesType_name[33:48], Value: uint32(5125)},
-		},
-	})
-}
-
-func (v IndicesType) String() string {
-	if s, ok := _IndicesType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("IndicesType(%d)", v)
-}
-
-func (v *IndicesType) Parse(s string) error {
-	for k, t := range _IndicesType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in IndicesType", s)
-}
-
-const _MapBufferRangeAccess_name = "GL_MAP_READ_BITGL_MAP_WRITE_BITGL_MAP_INVALIDATE_RANGE_BITGL_MAP_INVALIDATE_BUFFER_BITGL_MAP_FLUSH_EXPLICIT_BITGL_MAP_UNSYNCHRONIZED_BIT"
-
-var _MapBufferRangeAccess_map = map[MapBufferRangeAccess]string{}
-
-func init() {
-	_MapBufferRangeAccess_map[1] = _MapBufferRangeAccess_name[0:15]
-	_MapBufferRangeAccess_map[2] = _MapBufferRangeAccess_name[15:31]
-	_MapBufferRangeAccess_map[4] = _MapBufferRangeAccess_name[31:58]
-	_MapBufferRangeAccess_map[8] = _MapBufferRangeAccess_name[58:86]
-	_MapBufferRangeAccess_map[16] = _MapBufferRangeAccess_name[86:111]
-	_MapBufferRangeAccess_map[32] = _MapBufferRangeAccess_name[111:136]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _MapBufferRangeAccess_name[0:15], Value: uint32(1)},
-			{Name: _MapBufferRangeAccess_name[15:31], Value: uint32(2)},
-			{Name: _MapBufferRangeAccess_name[31:58], Value: uint32(4)},
-			{Name: _MapBufferRangeAccess_name[58:86], Value: uint32(8)},
-			{Name: _MapBufferRangeAccess_name[86:111], Value: uint32(16)},
-			{Name: _MapBufferRangeAccess_name[111:136], Value: uint32(32)},
-		},
-	})
-}
-
-func (v MapBufferRangeAccess) String() string {
-	if s, ok := _MapBufferRangeAccess_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("MapBufferRangeAccess(%d)", v)
-}
-
-func (v *MapBufferRangeAccess) Parse(s string) error {
-	for k, t := range _MapBufferRangeAccess_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in MapBufferRangeAccess", s)
-}
-
-const _PixelStoreParameter_name = "GL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENT"
-
-var _PixelStoreParameter_map = map[PixelStoreParameter]string{}
-
-func init() {
-	_PixelStoreParameter_map[3317] = _PixelStoreParameter_name[0:19]
-	_PixelStoreParameter_map[3333] = _PixelStoreParameter_name[19:36]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _PixelStoreParameter_name[0:19], Value: uint32(3317)},
-			{Name: _PixelStoreParameter_name[19:36], Value: uint32(3333)},
-		},
-	})
-}
-
-func (v PixelStoreParameter) String() string {
-	if s, ok := _PixelStoreParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("PixelStoreParameter(%d)", v)
-}
-
-func (v *PixelStoreParameter) Parse(s string) error {
-	for k, t := range _PixelStoreParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in PixelStoreParameter", s)
-}
-
-const _PrecisionType_name = "GL_LOW_FLOATGL_MEDIUM_FLOATGL_HIGH_FLOATGL_LOW_INTGL_MEDIUM_INTGL_HIGH_INT"
-
-var _PrecisionType_map = map[PrecisionType]string{}
-
-func init() {
-	_PrecisionType_map[36336] = _PrecisionType_name[0:12]
-	_PrecisionType_map[36337] = _PrecisionType_name[12:27]
-	_PrecisionType_map[36338] = _PrecisionType_name[27:40]
-	_PrecisionType_map[36339] = _PrecisionType_name[40:50]
-	_PrecisionType_map[36340] = _PrecisionType_name[50:63]
-	_PrecisionType_map[36341] = _PrecisionType_name[63:74]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _PrecisionType_name[0:12], Value: uint32(36336)},
-			{Name: _PrecisionType_name[12:27], Value: uint32(36337)},
-			{Name: _PrecisionType_name[27:40], Value: uint32(36338)},
-			{Name: _PrecisionType_name[40:50], Value: uint32(36339)},
-			{Name: _PrecisionType_name[50:63], Value: uint32(36340)},
-			{Name: _PrecisionType_name[63:74], Value: uint32(36341)},
-		},
-	})
-}
-
-func (v PrecisionType) String() string {
-	if s, ok := _PrecisionType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("PrecisionType(%d)", v)
-}
-
-func (v *PrecisionType) Parse(s string) error {
-	for k, t := range _PrecisionType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in PrecisionType", s)
-}
-
-const _ProgramParameter_name = "GL_DELETE_STATUSGL_LINK_STATUSGL_VALIDATE_STATUSGL_INFO_LOG_LENGTHGL_ATTACHED_SHADERSGL_ACTIVE_UNIFORMSGL_ACTIVE_UNIFORM_MAX_LENGTHGL_ACTIVE_ATTRIBUTESGL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
-
-var _ProgramParameter_map = map[ProgramParameter]string{}
-
-func init() {
-	_ProgramParameter_map[35712] = _ProgramParameter_name[0:16]
-	_ProgramParameter_map[35714] = _ProgramParameter_name[16:30]
-	_ProgramParameter_map[35715] = _ProgramParameter_name[30:48]
-	_ProgramParameter_map[35716] = _ProgramParameter_name[48:66]
-	_ProgramParameter_map[35717] = _ProgramParameter_name[66:85]
-	_ProgramParameter_map[35718] = _ProgramParameter_name[85:103]
-	_ProgramParameter_map[35719] = _ProgramParameter_name[103:131]
-	_ProgramParameter_map[35721] = _ProgramParameter_name[131:151]
-	_ProgramParameter_map[35722] = _ProgramParameter_name[151:181]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ProgramParameter_name[0:16], Value: uint32(35712)},
-			{Name: _ProgramParameter_name[16:30], Value: uint32(35714)},
-			{Name: _ProgramParameter_name[30:48], Value: uint32(35715)},
-			{Name: _ProgramParameter_name[48:66], Value: uint32(35716)},
-			{Name: _ProgramParameter_name[66:85], Value: uint32(35717)},
-			{Name: _ProgramParameter_name[85:103], Value: uint32(35718)},
-			{Name: _ProgramParameter_name[103:131], Value: uint32(35719)},
-			{Name: _ProgramParameter_name[131:151], Value: uint32(35721)},
-			{Name: _ProgramParameter_name[151:181], Value: uint32(35722)},
-		},
-	})
-}
-
-func (v ProgramParameter) String() string {
-	if s, ok := _ProgramParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ProgramParameter(%d)", v)
-}
-
-func (v *ProgramParameter) Parse(s string) error {
-	for k, t := range _ProgramParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ProgramParameter", s)
-}
-
-const _QueryObjectParameter_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
-
-var _QueryObjectParameter_map = map[QueryObjectParameter]string{}
-
-func init() {
-	_QueryObjectParameter_map[34918] = _QueryObjectParameter_name[0:15]
-	_QueryObjectParameter_map[34919] = _QueryObjectParameter_name[15:40]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryObjectParameter_name[0:15], Value: uint32(34918)},
-			{Name: _QueryObjectParameter_name[15:40], Value: uint32(34919)},
-		},
-	})
-}
-
-func (v QueryObjectParameter) String() string {
-	if s, ok := _QueryObjectParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryObjectParameter(%d)", v)
-}
-
-func (v *QueryObjectParameter) Parse(s string) error {
-	for k, t := range _QueryObjectParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryObjectParameter", s)
-}
-
-const _QueryObjectParameter_GLES_3_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
-
-var _QueryObjectParameter_GLES_3_map = map[QueryObjectParameter_GLES_3]string{}
-
-func init() {
-	_QueryObjectParameter_GLES_3_map[34918] = _QueryObjectParameter_GLES_3_name[0:15]
-	_QueryObjectParameter_GLES_3_map[34919] = _QueryObjectParameter_GLES_3_name[15:40]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryObjectParameter_GLES_3", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryObjectParameter_GLES_3_name[0:15], Value: uint32(34918)},
-			{Name: _QueryObjectParameter_GLES_3_name[15:40], Value: uint32(34919)},
-		},
-	})
-}
-
-func (v QueryObjectParameter_GLES_3) String() string {
-	if s, ok := _QueryObjectParameter_GLES_3_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryObjectParameter_GLES_3(%d)", v)
-}
-
-func (v *QueryObjectParameter_GLES_3) Parse(s string) error {
-	for k, t := range _QueryObjectParameter_GLES_3_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryObjectParameter_GLES_3", s)
-}
-
-const _QueryParameter_name = "GL_QUERY_COUNTER_BITS_EXTGL_CURRENT_QUERY"
-
-var _QueryParameter_map = map[QueryParameter]string{}
-
-func init() {
-	_QueryParameter_map[34916] = _QueryParameter_name[0:25]
-	_QueryParameter_map[34917] = _QueryParameter_name[25:41]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryParameter_name[0:25], Value: uint32(34916)},
-			{Name: _QueryParameter_name[25:41], Value: uint32(34917)},
-		},
-	})
-}
-
-func (v QueryParameter) String() string {
-	if s, ok := _QueryParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryParameter(%d)", v)
-}
-
-func (v *QueryParameter) Parse(s string) error {
-	for k, t := range _QueryParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryParameter", s)
-}
-
-const _QueryParameter_EXT_disjoint_timer_query_name = "GL_QUERY_COUNTER_BITS_EXT"
-
-var _QueryParameter_EXT_disjoint_timer_query_map = map[QueryParameter_EXT_disjoint_timer_query]string{}
-
-func init() {
-	_QueryParameter_EXT_disjoint_timer_query_map[34916] = _QueryParameter_EXT_disjoint_timer_query_name[0:25]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryParameter_EXT_disjoint_timer_query", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryParameter_EXT_disjoint_timer_query_name[0:25], Value: uint32(34916)},
-		},
-	})
-}
-
-func (v QueryParameter_EXT_disjoint_timer_query) String() string {
-	if s, ok := _QueryParameter_EXT_disjoint_timer_query_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryParameter_EXT_disjoint_timer_query(%d)", v)
-}
-
-func (v *QueryParameter_EXT_disjoint_timer_query) Parse(s string) error {
-	for k, t := range _QueryParameter_EXT_disjoint_timer_query_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryParameter_EXT_disjoint_timer_query", s)
-}
-
-const _QueryParameter_GLES_3_name = "GL_CURRENT_QUERY"
-
-var _QueryParameter_GLES_3_map = map[QueryParameter_GLES_3]string{}
-
-func init() {
-	_QueryParameter_GLES_3_map[34917] = _QueryParameter_GLES_3_name[0:16]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryParameter_GLES_3", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryParameter_GLES_3_name[0:16], Value: uint32(34917)},
-		},
-	})
-}
-
-func (v QueryParameter_GLES_3) String() string {
-	if s, ok := _QueryParameter_GLES_3_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryParameter_GLES_3(%d)", v)
-}
-
-func (v *QueryParameter_GLES_3) Parse(s string) error {
-	for k, t := range _QueryParameter_GLES_3_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryParameter_GLES_3", s)
-}
-
-const _QueryTarget_name = "GL_TIME_ELAPSED_EXTGL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVEGL_TIMESTAMP_EXT"
-
-var _QueryTarget_map = map[QueryTarget]string{}
-
-func init() {
-	_QueryTarget_map[35007] = _QueryTarget_name[0:19]
-	_QueryTarget_map[35887] = _QueryTarget_name[19:40]
-	_QueryTarget_map[35976] = _QueryTarget_name[40:80]
-	_QueryTarget_map[36202] = _QueryTarget_name[80:114]
-	_QueryTarget_map[36392] = _QueryTarget_name[114:130]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryTarget_name[0:19], Value: uint32(35007)},
-			{Name: _QueryTarget_name[19:40], Value: uint32(35887)},
-			{Name: _QueryTarget_name[40:80], Value: uint32(35976)},
-			{Name: _QueryTarget_name[80:114], Value: uint32(36202)},
-			{Name: _QueryTarget_name[114:130], Value: uint32(36392)},
-		},
-	})
-}
-
-func (v QueryTarget) String() string {
-	if s, ok := _QueryTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryTarget(%d)", v)
-}
-
-func (v *QueryTarget) Parse(s string) error {
-	for k, t := range _QueryTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryTarget", s)
-}
-
-const _QueryTarget_EXT_disjoint_timer_query_name = "GL_TIME_ELAPSED_EXTGL_TIMESTAMP_EXT"
-
-var _QueryTarget_EXT_disjoint_timer_query_map = map[QueryTarget_EXT_disjoint_timer_query]string{}
-
-func init() {
-	_QueryTarget_EXT_disjoint_timer_query_map[35007] = _QueryTarget_EXT_disjoint_timer_query_name[0:19]
-	_QueryTarget_EXT_disjoint_timer_query_map[36392] = _QueryTarget_EXT_disjoint_timer_query_name[19:35]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryTarget_EXT_disjoint_timer_query", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryTarget_EXT_disjoint_timer_query_name[0:19], Value: uint32(35007)},
-			{Name: _QueryTarget_EXT_disjoint_timer_query_name[19:35], Value: uint32(36392)},
-		},
-	})
-}
-
-func (v QueryTarget_EXT_disjoint_timer_query) String() string {
-	if s, ok := _QueryTarget_EXT_disjoint_timer_query_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryTarget_EXT_disjoint_timer_query(%d)", v)
-}
-
-func (v *QueryTarget_EXT_disjoint_timer_query) Parse(s string) error {
-	for k, t := range _QueryTarget_EXT_disjoint_timer_query_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryTarget_EXT_disjoint_timer_query", s)
-}
-
-const _QueryTarget_GLES_3_name = "GL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVE"
-
-var _QueryTarget_GLES_3_map = map[QueryTarget_GLES_3]string{}
-
-func init() {
-	_QueryTarget_GLES_3_map[35887] = _QueryTarget_GLES_3_name[0:21]
-	_QueryTarget_GLES_3_map[35976] = _QueryTarget_GLES_3_name[21:61]
-	_QueryTarget_GLES_3_map[36202] = _QueryTarget_GLES_3_name[61:95]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "QueryTarget_GLES_3", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _QueryTarget_GLES_3_name[0:21], Value: uint32(35887)},
-			{Name: _QueryTarget_GLES_3_name[21:61], Value: uint32(35976)},
-			{Name: _QueryTarget_GLES_3_name[61:95], Value: uint32(36202)},
-		},
-	})
-}
-
-func (v QueryTarget_GLES_3) String() string {
-	if s, ok := _QueryTarget_GLES_3_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("QueryTarget_GLES_3(%d)", v)
-}
-
-func (v *QueryTarget_GLES_3) Parse(s string) error {
-	for k, t := range _QueryTarget_GLES_3_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in QueryTarget_GLES_3", s)
-}
-
-const _RenderbufferFormat_name = "GL_RGBA4GL_RGB5_A1GL_RGBA8GL_DEPTH_COMPONENT16GL_STENCIL_INDEX8GL_RGB565"
-
-var _RenderbufferFormat_map = map[RenderbufferFormat]string{}
-
-func init() {
-	_RenderbufferFormat_map[32854] = _RenderbufferFormat_name[0:8]
-	_RenderbufferFormat_map[32855] = _RenderbufferFormat_name[8:18]
-	_RenderbufferFormat_map[32856] = _RenderbufferFormat_name[18:26]
-	_RenderbufferFormat_map[33189] = _RenderbufferFormat_name[26:46]
-	_RenderbufferFormat_map[36168] = _RenderbufferFormat_name[46:63]
-	_RenderbufferFormat_map[36194] = _RenderbufferFormat_name[63:72]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _RenderbufferFormat_name[0:8], Value: uint32(32854)},
-			{Name: _RenderbufferFormat_name[8:18], Value: uint32(32855)},
-			{Name: _RenderbufferFormat_name[18:26], Value: uint32(32856)},
-			{Name: _RenderbufferFormat_name[26:46], Value: uint32(33189)},
-			{Name: _RenderbufferFormat_name[46:63], Value: uint32(36168)},
-			{Name: _RenderbufferFormat_name[63:72], Value: uint32(36194)},
-		},
-	})
-}
-
-func (v RenderbufferFormat) String() string {
-	if s, ok := _RenderbufferFormat_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("RenderbufferFormat(%d)", v)
-}
-
-func (v *RenderbufferFormat) Parse(s string) error {
-	for k, t := range _RenderbufferFormat_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in RenderbufferFormat", s)
-}
-
-const _RenderbufferParameter_name = "GL_RENDERBUFFER_WIDTHGL_RENDERBUFFER_HEIGHTGL_RENDERBUFFER_INTERNAL_FORMATGL_RENDERBUFFER_RED_SIZEGL_RENDERBUFFER_GREEN_SIZEGL_RENDERBUFFER_BLUE_SIZEGL_RENDERBUFFER_ALPHA_SIZEGL_RENDERBUFFER_DEPTH_SIZEGL_RENDERBUFFER_STENCIL_SIZE"
-
-var _RenderbufferParameter_map = map[RenderbufferParameter]string{}
-
-func init() {
-	_RenderbufferParameter_map[36162] = _RenderbufferParameter_name[0:21]
-	_RenderbufferParameter_map[36163] = _RenderbufferParameter_name[21:43]
-	_RenderbufferParameter_map[36164] = _RenderbufferParameter_name[43:74]
-	_RenderbufferParameter_map[36176] = _RenderbufferParameter_name[74:98]
-	_RenderbufferParameter_map[36177] = _RenderbufferParameter_name[98:124]
-	_RenderbufferParameter_map[36178] = _RenderbufferParameter_name[124:149]
-	_RenderbufferParameter_map[36179] = _RenderbufferParameter_name[149:175]
-	_RenderbufferParameter_map[36180] = _RenderbufferParameter_name[175:201]
-	_RenderbufferParameter_map[36181] = _RenderbufferParameter_name[201:229]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _RenderbufferParameter_name[0:21], Value: uint32(36162)},
-			{Name: _RenderbufferParameter_name[21:43], Value: uint32(36163)},
-			{Name: _RenderbufferParameter_name[43:74], Value: uint32(36164)},
-			{Name: _RenderbufferParameter_name[74:98], Value: uint32(36176)},
-			{Name: _RenderbufferParameter_name[98:124], Value: uint32(36177)},
-			{Name: _RenderbufferParameter_name[124:149], Value: uint32(36178)},
-			{Name: _RenderbufferParameter_name[149:175], Value: uint32(36179)},
-			{Name: _RenderbufferParameter_name[175:201], Value: uint32(36180)},
-			{Name: _RenderbufferParameter_name[201:229], Value: uint32(36181)},
-		},
-	})
-}
-
-func (v RenderbufferParameter) String() string {
-	if s, ok := _RenderbufferParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("RenderbufferParameter(%d)", v)
-}
-
-func (v *RenderbufferParameter) Parse(s string) error {
-	for k, t := range _RenderbufferParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in RenderbufferParameter", s)
-}
-
-const _RenderbufferTarget_name = "GL_RENDERBUFFER"
-
-var _RenderbufferTarget_map = map[RenderbufferTarget]string{}
-
-func init() {
-	_RenderbufferTarget_map[36161] = _RenderbufferTarget_name[0:15]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _RenderbufferTarget_name[0:15], Value: uint32(36161)},
-		},
-	})
-}
-
-func (v RenderbufferTarget) String() string {
-	if s, ok := _RenderbufferTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("RenderbufferTarget(%d)", v)
-}
-
-func (v *RenderbufferTarget) Parse(s string) error {
-	for k, t := range _RenderbufferTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in RenderbufferTarget", s)
-}
-
-const _ResetStatus_name = "GL_NO_ERRORGL_GUILTY_CONTEXT_RESET_EXTGL_INNOCENT_CONTEXT_RESET_EXTGL_UNKNOWN_CONTEXT_RESET_EXT"
-
-var _ResetStatus_map = map[ResetStatus]string{}
-
-func init() {
-	_ResetStatus_map[0] = _ResetStatus_name[0:11]
-	_ResetStatus_map[33363] = _ResetStatus_name[11:38]
-	_ResetStatus_map[33364] = _ResetStatus_name[38:67]
-	_ResetStatus_map[33365] = _ResetStatus_name[67:95]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ResetStatus_name[0:11], Value: uint32(0)},
-			{Name: _ResetStatus_name[11:38], Value: uint32(33363)},
-			{Name: _ResetStatus_name[38:67], Value: uint32(33364)},
-			{Name: _ResetStatus_name[67:95], Value: uint32(33365)},
-		},
-	})
-}
-
-func (v ResetStatus) String() string {
-	if s, ok := _ResetStatus_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ResetStatus(%d)", v)
-}
-
-func (v *ResetStatus) Parse(s string) error {
-	for k, t := range _ResetStatus_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ResetStatus", s)
-}
-
-const _ShaderAttribType_name = "GL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4"
-
-var _ShaderAttribType_map = map[ShaderAttribType]string{}
-
-func init() {
-	_ShaderAttribType_map[5126] = _ShaderAttribType_name[0:8]
-	_ShaderAttribType_map[35664] = _ShaderAttribType_name[8:21]
-	_ShaderAttribType_map[35665] = _ShaderAttribType_name[21:34]
-	_ShaderAttribType_map[35666] = _ShaderAttribType_name[34:47]
-	_ShaderAttribType_map[35674] = _ShaderAttribType_name[47:60]
-	_ShaderAttribType_map[35675] = _ShaderAttribType_name[60:73]
-	_ShaderAttribType_map[35676] = _ShaderAttribType_name[73:86]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ShaderAttribType_name[0:8], Value: uint32(5126)},
-			{Name: _ShaderAttribType_name[8:21], Value: uint32(35664)},
-			{Name: _ShaderAttribType_name[21:34], Value: uint32(35665)},
-			{Name: _ShaderAttribType_name[34:47], Value: uint32(35666)},
-			{Name: _ShaderAttribType_name[47:60], Value: uint32(35674)},
-			{Name: _ShaderAttribType_name[60:73], Value: uint32(35675)},
-			{Name: _ShaderAttribType_name[73:86], Value: uint32(35676)},
-		},
-	})
-}
-
-func (v ShaderAttribType) String() string {
-	if s, ok := _ShaderAttribType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ShaderAttribType(%d)", v)
-}
-
-func (v *ShaderAttribType) Parse(s string) error {
-	for k, t := range _ShaderAttribType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ShaderAttribType", s)
-}
-
-const _ShaderParameter_name = "GL_SHADER_TYPEGL_DELETE_STATUSGL_COMPILE_STATUSGL_INFO_LOG_LENGTHGL_SHADER_SOURCE_LENGTH"
-
-var _ShaderParameter_map = map[ShaderParameter]string{}
-
-func init() {
-	_ShaderParameter_map[35663] = _ShaderParameter_name[0:14]
-	_ShaderParameter_map[35712] = _ShaderParameter_name[14:30]
-	_ShaderParameter_map[35713] = _ShaderParameter_name[30:47]
-	_ShaderParameter_map[35716] = _ShaderParameter_name[47:65]
-	_ShaderParameter_map[35720] = _ShaderParameter_name[65:88]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ShaderParameter_name[0:14], Value: uint32(35663)},
-			{Name: _ShaderParameter_name[14:30], Value: uint32(35712)},
-			{Name: _ShaderParameter_name[30:47], Value: uint32(35713)},
-			{Name: _ShaderParameter_name[47:65], Value: uint32(35716)},
-			{Name: _ShaderParameter_name[65:88], Value: uint32(35720)},
-		},
-	})
-}
-
-func (v ShaderParameter) String() string {
-	if s, ok := _ShaderParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ShaderParameter(%d)", v)
-}
-
-func (v *ShaderParameter) Parse(s string) error {
-	for k, t := range _ShaderParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ShaderParameter", s)
-}
-
-const _ShaderType_name = "GL_FRAGMENT_SHADERGL_VERTEX_SHADER"
-
-var _ShaderType_map = map[ShaderType]string{}
-
-func init() {
-	_ShaderType_map[35632] = _ShaderType_name[0:18]
-	_ShaderType_map[35633] = _ShaderType_name[18:34]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ShaderType_name[0:18], Value: uint32(35632)},
-			{Name: _ShaderType_name[18:34], Value: uint32(35633)},
-		},
-	})
-}
-
-func (v ShaderType) String() string {
-	if s, ok := _ShaderType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ShaderType(%d)", v)
-}
-
-func (v *ShaderType) Parse(s string) error {
-	for k, t := range _ShaderType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ShaderType", s)
-}
-
-const _ShaderUniformType_name = "GL_INTGL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_INT_VEC2GL_INT_VEC3GL_INT_VEC4GL_BOOLGL_BOOL_VEC2GL_BOOL_VEC3GL_BOOL_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4GL_SAMPLER_2DGL_SAMPLER_CUBE"
-
-var _ShaderUniformType_map = map[ShaderUniformType]string{}
-
-func init() {
-	_ShaderUniformType_map[5124] = _ShaderUniformType_name[0:6]
-	_ShaderUniformType_map[5126] = _ShaderUniformType_name[6:14]
-	_ShaderUniformType_map[35664] = _ShaderUniformType_name[14:27]
-	_ShaderUniformType_map[35665] = _ShaderUniformType_name[27:40]
-	_ShaderUniformType_map[35666] = _ShaderUniformType_name[40:53]
-	_ShaderUniformType_map[35667] = _ShaderUniformType_name[53:64]
-	_ShaderUniformType_map[35668] = _ShaderUniformType_name[64:75]
-	_ShaderUniformType_map[35669] = _ShaderUniformType_name[75:86]
-	_ShaderUniformType_map[35670] = _ShaderUniformType_name[86:93]
-	_ShaderUniformType_map[35671] = _ShaderUniformType_name[93:105]
-	_ShaderUniformType_map[35672] = _ShaderUniformType_name[105:117]
-	_ShaderUniformType_map[35673] = _ShaderUniformType_name[117:129]
-	_ShaderUniformType_map[35674] = _ShaderUniformType_name[129:142]
-	_ShaderUniformType_map[35675] = _ShaderUniformType_name[142:155]
-	_ShaderUniformType_map[35676] = _ShaderUniformType_name[155:168]
-	_ShaderUniformType_map[35678] = _ShaderUniformType_name[168:181]
-	_ShaderUniformType_map[35680] = _ShaderUniformType_name[181:196]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _ShaderUniformType_name[0:6], Value: uint32(5124)},
-			{Name: _ShaderUniformType_name[6:14], Value: uint32(5126)},
-			{Name: _ShaderUniformType_name[14:27], Value: uint32(35664)},
-			{Name: _ShaderUniformType_name[27:40], Value: uint32(35665)},
-			{Name: _ShaderUniformType_name[40:53], Value: uint32(35666)},
-			{Name: _ShaderUniformType_name[53:64], Value: uint32(35667)},
-			{Name: _ShaderUniformType_name[64:75], Value: uint32(35668)},
-			{Name: _ShaderUniformType_name[75:86], Value: uint32(35669)},
-			{Name: _ShaderUniformType_name[86:93], Value: uint32(35670)},
-			{Name: _ShaderUniformType_name[93:105], Value: uint32(35671)},
-			{Name: _ShaderUniformType_name[105:117], Value: uint32(35672)},
-			{Name: _ShaderUniformType_name[117:129], Value: uint32(35673)},
-			{Name: _ShaderUniformType_name[129:142], Value: uint32(35674)},
-			{Name: _ShaderUniformType_name[142:155], Value: uint32(35675)},
-			{Name: _ShaderUniformType_name[155:168], Value: uint32(35676)},
-			{Name: _ShaderUniformType_name[168:181], Value: uint32(35678)},
-			{Name: _ShaderUniformType_name[181:196], Value: uint32(35680)},
-		},
-	})
-}
-
-func (v ShaderUniformType) String() string {
-	if s, ok := _ShaderUniformType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("ShaderUniformType(%d)", v)
-}
-
-func (v *ShaderUniformType) Parse(s string) error {
-	for k, t := range _ShaderUniformType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in ShaderUniformType", s)
-}
-
-const _StateVariable_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_MAX_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_READ_FRAMEBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORSGL_GPU_DISJOINT_EXT"
-
-var _StateVariable_map = map[StateVariable]string{}
-
-func init() {
-	_StateVariable_map[2849] = _StateVariable_name[0:13]
-	_StateVariable_map[2884] = _StateVariable_name[13:25]
-	_StateVariable_map[2885] = _StateVariable_name[25:42]
-	_StateVariable_map[2886] = _StateVariable_name[42:55]
-	_StateVariable_map[2928] = _StateVariable_name[55:69]
-	_StateVariable_map[2929] = _StateVariable_name[69:82]
-	_StateVariable_map[2930] = _StateVariable_name[82:100]
-	_StateVariable_map[2931] = _StateVariable_name[100:120]
-	_StateVariable_map[2932] = _StateVariable_name[120:133]
-	_StateVariable_map[2960] = _StateVariable_name[133:148]
-	_StateVariable_map[2961] = _StateVariable_name[148:170]
-	_StateVariable_map[2962] = _StateVariable_name[170:185]
-	_StateVariable_map[2963] = _StateVariable_name[185:206]
-	_StateVariable_map[2964] = _StateVariable_name[206:221]
-	_StateVariable_map[2965] = _StateVariable_name[221:247]
-	_StateVariable_map[2966] = _StateVariable_name[247:273]
-	_StateVariable_map[2967] = _StateVariable_name[273:287]
-	_StateVariable_map[2968] = _StateVariable_name[287:307]
-	_StateVariable_map[2978] = _StateVariable_name[307:318]
-	_StateVariable_map[3024] = _StateVariable_name[318:327]
-	_StateVariable_map[3042] = _StateVariable_name[327:335]
-	_StateVariable_map[3088] = _StateVariable_name[335:349]
-	_StateVariable_map[3089] = _StateVariable_name[349:364]
-	_StateVariable_map[3106] = _StateVariable_name[364:384]
-	_StateVariable_map[3107] = _StateVariable_name[384:402]
-	_StateVariable_map[3317] = _StateVariable_name[402:421]
-	_StateVariable_map[3333] = _StateVariable_name[421:438]
-	_StateVariable_map[3379] = _StateVariable_name[438:457]
-	_StateVariable_map[3386] = _StateVariable_name[457:477]
-	_StateVariable_map[3408] = _StateVariable_name[477:493]
-	_StateVariable_map[3410] = _StateVariable_name[493:504]
-	_StateVariable_map[3411] = _StateVariable_name[504:517]
-	_StateVariable_map[3412] = _StateVariable_name[517:529]
-	_StateVariable_map[3413] = _StateVariable_name[529:542]
-	_StateVariable_map[3414] = _StateVariable_name[542:555]
-	_StateVariable_map[3415] = _StateVariable_name[555:570]
-	_StateVariable_map[10752] = _StateVariable_name[570:593]
-	_StateVariable_map[32773] = _StateVariable_name[593:607]
-	_StateVariable_map[32777] = _StateVariable_name[607:628]
-	_StateVariable_map[32823] = _StateVariable_name[628:650]
-	_StateVariable_map[32824] = _StateVariable_name[650:674]
-	_StateVariable_map[32873] = _StateVariable_name[674:695]
-	_StateVariable_map[32926] = _StateVariable_name[695:722]
-	_StateVariable_map[32928] = _StateVariable_name[722:740]
-	_StateVariable_map[32936] = _StateVariable_name[740:757]
-	_StateVariable_map[32937] = _StateVariable_name[757:767]
-	_StateVariable_map[32938] = _StateVariable_name[767:791]
-	_StateVariable_map[32939] = _StateVariable_name[791:816]
-	_StateVariable_map[32968] = _StateVariable_name[816:832]
-	_StateVariable_map[32969] = _StateVariable_name[832:848]
-	_StateVariable_map[32970] = _StateVariable_name[848:866]
-	_StateVariable_map[32971] = _StateVariable_name[866:884]
-	_StateVariable_map[33170] = _StateVariable_name[884:907]
-	_StateVariable_map[33901] = _StateVariable_name[907:934]
-	_StateVariable_map[33902] = _StateVariable_name[934:961]
-	_StateVariable_map[34016] = _StateVariable_name[961:978]
-	_StateVariable_map[34024] = _StateVariable_name[978:1002]
-	_StateVariable_map[34047] = _StateVariable_name[1002:1035]
-	_StateVariable_map[34068] = _StateVariable_name[1035:1062]
-	_StateVariable_map[34076] = _StateVariable_name[1062:1090]
-	_StateVariable_map[34466] = _StateVariable_name[1090:1123]
-	_StateVariable_map[34467] = _StateVariable_name[1123:1152]
-	_StateVariable_map[34816] = _StateVariable_name[1152:1172]
-	_StateVariable_map[34817] = _StateVariable_name[1172:1192]
-	_StateVariable_map[34818] = _StateVariable_name[1192:1223]
-	_StateVariable_map[34819] = _StateVariable_name[1223:1254]
-	_StateVariable_map[34877] = _StateVariable_name[1254:1277]
-	_StateVariable_map[34921] = _StateVariable_name[1277:1298]
-	_StateVariable_map[34930] = _StateVariable_name[1298:1324]
-	_StateVariable_map[34964] = _StateVariable_name[1324:1347]
-	_StateVariable_map[34965] = _StateVariable_name[1347:1378]
-	_StateVariable_map[35660] = _StateVariable_name[1378:1411]
-	_StateVariable_map[35661] = _StateVariable_name[1411:1446]
-	_StateVariable_map[35725] = _StateVariable_name[1446:1464]
-	_StateVariable_map[35738] = _StateVariable_name[1464:1497]
-	_StateVariable_map[35739] = _StateVariable_name[1497:1532]
-	_StateVariable_map[36003] = _StateVariable_name[1532:1551]
-	_StateVariable_map[36004] = _StateVariable_name[1551:1577]
-	_StateVariable_map[36005] = _StateVariable_name[1577:1602]
-	_StateVariable_map[36006] = _StateVariable_name[1602:1624]
-	_StateVariable_map[36007] = _StateVariable_name[1624:1647]
-	_StateVariable_map[36010] = _StateVariable_name[1647:1674]
-	_StateVariable_map[36344] = _StateVariable_name[1674:1698]
-	_StateVariable_map[36345] = _StateVariable_name[1698:1726]
-	_StateVariable_map[36346] = _StateVariable_name[1726:1744]
-	_StateVariable_map[36347] = _StateVariable_name[1744:1773]
-	_StateVariable_map[36348] = _StateVariable_name[1773:1795]
-	_StateVariable_map[36349] = _StateVariable_name[1795:1826]
-	_StateVariable_map[36795] = _StateVariable_name[1826:1845]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StateVariable_name[0:13], Value: uint32(2849)},
-			{Name: _StateVariable_name[13:25], Value: uint32(2884)},
-			{Name: _StateVariable_name[25:42], Value: uint32(2885)},
-			{Name: _StateVariable_name[42:55], Value: uint32(2886)},
-			{Name: _StateVariable_name[55:69], Value: uint32(2928)},
-			{Name: _StateVariable_name[69:82], Value: uint32(2929)},
-			{Name: _StateVariable_name[82:100], Value: uint32(2930)},
-			{Name: _StateVariable_name[100:120], Value: uint32(2931)},
-			{Name: _StateVariable_name[120:133], Value: uint32(2932)},
-			{Name: _StateVariable_name[133:148], Value: uint32(2960)},
-			{Name: _StateVariable_name[148:170], Value: uint32(2961)},
-			{Name: _StateVariable_name[170:185], Value: uint32(2962)},
-			{Name: _StateVariable_name[185:206], Value: uint32(2963)},
-			{Name: _StateVariable_name[206:221], Value: uint32(2964)},
-			{Name: _StateVariable_name[221:247], Value: uint32(2965)},
-			{Name: _StateVariable_name[247:273], Value: uint32(2966)},
-			{Name: _StateVariable_name[273:287], Value: uint32(2967)},
-			{Name: _StateVariable_name[287:307], Value: uint32(2968)},
-			{Name: _StateVariable_name[307:318], Value: uint32(2978)},
-			{Name: _StateVariable_name[318:327], Value: uint32(3024)},
-			{Name: _StateVariable_name[327:335], Value: uint32(3042)},
-			{Name: _StateVariable_name[335:349], Value: uint32(3088)},
-			{Name: _StateVariable_name[349:364], Value: uint32(3089)},
-			{Name: _StateVariable_name[364:384], Value: uint32(3106)},
-			{Name: _StateVariable_name[384:402], Value: uint32(3107)},
-			{Name: _StateVariable_name[402:421], Value: uint32(3317)},
-			{Name: _StateVariable_name[421:438], Value: uint32(3333)},
-			{Name: _StateVariable_name[438:457], Value: uint32(3379)},
-			{Name: _StateVariable_name[457:477], Value: uint32(3386)},
-			{Name: _StateVariable_name[477:493], Value: uint32(3408)},
-			{Name: _StateVariable_name[493:504], Value: uint32(3410)},
-			{Name: _StateVariable_name[504:517], Value: uint32(3411)},
-			{Name: _StateVariable_name[517:529], Value: uint32(3412)},
-			{Name: _StateVariable_name[529:542], Value: uint32(3413)},
-			{Name: _StateVariable_name[542:555], Value: uint32(3414)},
-			{Name: _StateVariable_name[555:570], Value: uint32(3415)},
-			{Name: _StateVariable_name[570:593], Value: uint32(10752)},
-			{Name: _StateVariable_name[593:607], Value: uint32(32773)},
-			{Name: _StateVariable_name[607:628], Value: uint32(32777)},
-			{Name: _StateVariable_name[628:650], Value: uint32(32823)},
-			{Name: _StateVariable_name[650:674], Value: uint32(32824)},
-			{Name: _StateVariable_name[674:695], Value: uint32(32873)},
-			{Name: _StateVariable_name[695:722], Value: uint32(32926)},
-			{Name: _StateVariable_name[722:740], Value: uint32(32928)},
-			{Name: _StateVariable_name[740:757], Value: uint32(32936)},
-			{Name: _StateVariable_name[757:767], Value: uint32(32937)},
-			{Name: _StateVariable_name[767:791], Value: uint32(32938)},
-			{Name: _StateVariable_name[791:816], Value: uint32(32939)},
-			{Name: _StateVariable_name[816:832], Value: uint32(32968)},
-			{Name: _StateVariable_name[832:848], Value: uint32(32969)},
-			{Name: _StateVariable_name[848:866], Value: uint32(32970)},
-			{Name: _StateVariable_name[866:884], Value: uint32(32971)},
-			{Name: _StateVariable_name[884:907], Value: uint32(33170)},
-			{Name: _StateVariable_name[907:934], Value: uint32(33901)},
-			{Name: _StateVariable_name[934:961], Value: uint32(33902)},
-			{Name: _StateVariable_name[961:978], Value: uint32(34016)},
-			{Name: _StateVariable_name[978:1002], Value: uint32(34024)},
-			{Name: _StateVariable_name[1002:1035], Value: uint32(34047)},
-			{Name: _StateVariable_name[1035:1062], Value: uint32(34068)},
-			{Name: _StateVariable_name[1062:1090], Value: uint32(34076)},
-			{Name: _StateVariable_name[1090:1123], Value: uint32(34466)},
-			{Name: _StateVariable_name[1123:1152], Value: uint32(34467)},
-			{Name: _StateVariable_name[1152:1172], Value: uint32(34816)},
-			{Name: _StateVariable_name[1172:1192], Value: uint32(34817)},
-			{Name: _StateVariable_name[1192:1223], Value: uint32(34818)},
-			{Name: _StateVariable_name[1223:1254], Value: uint32(34819)},
-			{Name: _StateVariable_name[1254:1277], Value: uint32(34877)},
-			{Name: _StateVariable_name[1277:1298], Value: uint32(34921)},
-			{Name: _StateVariable_name[1298:1324], Value: uint32(34930)},
-			{Name: _StateVariable_name[1324:1347], Value: uint32(34964)},
-			{Name: _StateVariable_name[1347:1378], Value: uint32(34965)},
-			{Name: _StateVariable_name[1378:1411], Value: uint32(35660)},
-			{Name: _StateVariable_name[1411:1446], Value: uint32(35661)},
-			{Name: _StateVariable_name[1446:1464], Value: uint32(35725)},
-			{Name: _StateVariable_name[1464:1497], Value: uint32(35738)},
-			{Name: _StateVariable_name[1497:1532], Value: uint32(35739)},
-			{Name: _StateVariable_name[1532:1551], Value: uint32(36003)},
-			{Name: _StateVariable_name[1551:1577], Value: uint32(36004)},
-			{Name: _StateVariable_name[1577:1602], Value: uint32(36005)},
-			{Name: _StateVariable_name[1602:1624], Value: uint32(36006)},
-			{Name: _StateVariable_name[1624:1647], Value: uint32(36007)},
-			{Name: _StateVariable_name[1647:1674], Value: uint32(36010)},
-			{Name: _StateVariable_name[1674:1698], Value: uint32(36344)},
-			{Name: _StateVariable_name[1698:1726], Value: uint32(36345)},
-			{Name: _StateVariable_name[1726:1744], Value: uint32(36346)},
-			{Name: _StateVariable_name[1744:1773], Value: uint32(36347)},
-			{Name: _StateVariable_name[1773:1795], Value: uint32(36348)},
-			{Name: _StateVariable_name[1795:1826], Value: uint32(36349)},
-			{Name: _StateVariable_name[1826:1845], Value: uint32(36795)},
-		},
-	})
-}
-
-func (v StateVariable) String() string {
-	if s, ok := _StateVariable_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StateVariable(%d)", v)
-}
-
-func (v *StateVariable) Parse(s string) error {
-	for k, t := range _StateVariable_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StateVariable", s)
-}
-
-const _StateVariable_EXT_disjoint_timer_query_name = "GL_GPU_DISJOINT_EXT"
-
-var _StateVariable_EXT_disjoint_timer_query_map = map[StateVariable_EXT_disjoint_timer_query]string{}
-
-func init() {
-	_StateVariable_EXT_disjoint_timer_query_map[36795] = _StateVariable_EXT_disjoint_timer_query_name[0:19]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StateVariable_EXT_disjoint_timer_query", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StateVariable_EXT_disjoint_timer_query_name[0:19], Value: uint32(36795)},
-		},
-	})
-}
-
-func (v StateVariable_EXT_disjoint_timer_query) String() string {
-	if s, ok := _StateVariable_EXT_disjoint_timer_query_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StateVariable_EXT_disjoint_timer_query(%d)", v)
-}
-
-func (v *StateVariable_EXT_disjoint_timer_query) Parse(s string) error {
-	for k, t := range _StateVariable_EXT_disjoint_timer_query_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StateVariable_EXT_disjoint_timer_query", s)
-}
-
-const _StateVariable_EXT_texture_filter_anisotropic_name = "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
-
-var _StateVariable_EXT_texture_filter_anisotropic_map = map[StateVariable_EXT_texture_filter_anisotropic]string{}
-
-func init() {
-	_StateVariable_EXT_texture_filter_anisotropic_map[34047] = _StateVariable_EXT_texture_filter_anisotropic_name[0:33]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StateVariable_EXT_texture_filter_anisotropic", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StateVariable_EXT_texture_filter_anisotropic_name[0:33], Value: uint32(34047)},
-		},
-	})
-}
-
-func (v StateVariable_EXT_texture_filter_anisotropic) String() string {
-	if s, ok := _StateVariable_EXT_texture_filter_anisotropic_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StateVariable_EXT_texture_filter_anisotropic(%d)", v)
-}
-
-func (v *StateVariable_EXT_texture_filter_anisotropic) Parse(s string) error {
-	for k, t := range _StateVariable_EXT_texture_filter_anisotropic_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StateVariable_EXT_texture_filter_anisotropic", s)
-}
-
-const _StateVariable_GLES_2_0_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORS"
-
-var _StateVariable_GLES_2_0_map = map[StateVariable_GLES_2_0]string{}
-
-func init() {
-	_StateVariable_GLES_2_0_map[2849] = _StateVariable_GLES_2_0_name[0:13]
-	_StateVariable_GLES_2_0_map[2884] = _StateVariable_GLES_2_0_name[13:25]
-	_StateVariable_GLES_2_0_map[2885] = _StateVariable_GLES_2_0_name[25:42]
-	_StateVariable_GLES_2_0_map[2886] = _StateVariable_GLES_2_0_name[42:55]
-	_StateVariable_GLES_2_0_map[2928] = _StateVariable_GLES_2_0_name[55:69]
-	_StateVariable_GLES_2_0_map[2929] = _StateVariable_GLES_2_0_name[69:82]
-	_StateVariable_GLES_2_0_map[2930] = _StateVariable_GLES_2_0_name[82:100]
-	_StateVariable_GLES_2_0_map[2931] = _StateVariable_GLES_2_0_name[100:120]
-	_StateVariable_GLES_2_0_map[2932] = _StateVariable_GLES_2_0_name[120:133]
-	_StateVariable_GLES_2_0_map[2960] = _StateVariable_GLES_2_0_name[133:148]
-	_StateVariable_GLES_2_0_map[2961] = _StateVariable_GLES_2_0_name[148:170]
-	_StateVariable_GLES_2_0_map[2962] = _StateVariable_GLES_2_0_name[170:185]
-	_StateVariable_GLES_2_0_map[2963] = _StateVariable_GLES_2_0_name[185:206]
-	_StateVariable_GLES_2_0_map[2964] = _StateVariable_GLES_2_0_name[206:221]
-	_StateVariable_GLES_2_0_map[2965] = _StateVariable_GLES_2_0_name[221:247]
-	_StateVariable_GLES_2_0_map[2966] = _StateVariable_GLES_2_0_name[247:273]
-	_StateVariable_GLES_2_0_map[2967] = _StateVariable_GLES_2_0_name[273:287]
-	_StateVariable_GLES_2_0_map[2968] = _StateVariable_GLES_2_0_name[287:307]
-	_StateVariable_GLES_2_0_map[2978] = _StateVariable_GLES_2_0_name[307:318]
-	_StateVariable_GLES_2_0_map[3024] = _StateVariable_GLES_2_0_name[318:327]
-	_StateVariable_GLES_2_0_map[3042] = _StateVariable_GLES_2_0_name[327:335]
-	_StateVariable_GLES_2_0_map[3088] = _StateVariable_GLES_2_0_name[335:349]
-	_StateVariable_GLES_2_0_map[3089] = _StateVariable_GLES_2_0_name[349:364]
-	_StateVariable_GLES_2_0_map[3106] = _StateVariable_GLES_2_0_name[364:384]
-	_StateVariable_GLES_2_0_map[3107] = _StateVariable_GLES_2_0_name[384:402]
-	_StateVariable_GLES_2_0_map[3317] = _StateVariable_GLES_2_0_name[402:421]
-	_StateVariable_GLES_2_0_map[3333] = _StateVariable_GLES_2_0_name[421:438]
-	_StateVariable_GLES_2_0_map[3379] = _StateVariable_GLES_2_0_name[438:457]
-	_StateVariable_GLES_2_0_map[3386] = _StateVariable_GLES_2_0_name[457:477]
-	_StateVariable_GLES_2_0_map[3408] = _StateVariable_GLES_2_0_name[477:493]
-	_StateVariable_GLES_2_0_map[3410] = _StateVariable_GLES_2_0_name[493:504]
-	_StateVariable_GLES_2_0_map[3411] = _StateVariable_GLES_2_0_name[504:517]
-	_StateVariable_GLES_2_0_map[3412] = _StateVariable_GLES_2_0_name[517:529]
-	_StateVariable_GLES_2_0_map[3413] = _StateVariable_GLES_2_0_name[529:542]
-	_StateVariable_GLES_2_0_map[3414] = _StateVariable_GLES_2_0_name[542:555]
-	_StateVariable_GLES_2_0_map[3415] = _StateVariable_GLES_2_0_name[555:570]
-	_StateVariable_GLES_2_0_map[10752] = _StateVariable_GLES_2_0_name[570:593]
-	_StateVariable_GLES_2_0_map[32773] = _StateVariable_GLES_2_0_name[593:607]
-	_StateVariable_GLES_2_0_map[32777] = _StateVariable_GLES_2_0_name[607:628]
-	_StateVariable_GLES_2_0_map[32823] = _StateVariable_GLES_2_0_name[628:650]
-	_StateVariable_GLES_2_0_map[32824] = _StateVariable_GLES_2_0_name[650:674]
-	_StateVariable_GLES_2_0_map[32873] = _StateVariable_GLES_2_0_name[674:695]
-	_StateVariable_GLES_2_0_map[32926] = _StateVariable_GLES_2_0_name[695:722]
-	_StateVariable_GLES_2_0_map[32928] = _StateVariable_GLES_2_0_name[722:740]
-	_StateVariable_GLES_2_0_map[32936] = _StateVariable_GLES_2_0_name[740:757]
-	_StateVariable_GLES_2_0_map[32937] = _StateVariable_GLES_2_0_name[757:767]
-	_StateVariable_GLES_2_0_map[32938] = _StateVariable_GLES_2_0_name[767:791]
-	_StateVariable_GLES_2_0_map[32939] = _StateVariable_GLES_2_0_name[791:816]
-	_StateVariable_GLES_2_0_map[32968] = _StateVariable_GLES_2_0_name[816:832]
-	_StateVariable_GLES_2_0_map[32969] = _StateVariable_GLES_2_0_name[832:848]
-	_StateVariable_GLES_2_0_map[32970] = _StateVariable_GLES_2_0_name[848:866]
-	_StateVariable_GLES_2_0_map[32971] = _StateVariable_GLES_2_0_name[866:884]
-	_StateVariable_GLES_2_0_map[33170] = _StateVariable_GLES_2_0_name[884:907]
-	_StateVariable_GLES_2_0_map[33901] = _StateVariable_GLES_2_0_name[907:934]
-	_StateVariable_GLES_2_0_map[33902] = _StateVariable_GLES_2_0_name[934:961]
-	_StateVariable_GLES_2_0_map[34016] = _StateVariable_GLES_2_0_name[961:978]
-	_StateVariable_GLES_2_0_map[34024] = _StateVariable_GLES_2_0_name[978:1002]
-	_StateVariable_GLES_2_0_map[34068] = _StateVariable_GLES_2_0_name[1002:1029]
-	_StateVariable_GLES_2_0_map[34076] = _StateVariable_GLES_2_0_name[1029:1057]
-	_StateVariable_GLES_2_0_map[34466] = _StateVariable_GLES_2_0_name[1057:1090]
-	_StateVariable_GLES_2_0_map[34467] = _StateVariable_GLES_2_0_name[1090:1119]
-	_StateVariable_GLES_2_0_map[34816] = _StateVariable_GLES_2_0_name[1119:1139]
-	_StateVariable_GLES_2_0_map[34817] = _StateVariable_GLES_2_0_name[1139:1159]
-	_StateVariable_GLES_2_0_map[34818] = _StateVariable_GLES_2_0_name[1159:1190]
-	_StateVariable_GLES_2_0_map[34819] = _StateVariable_GLES_2_0_name[1190:1221]
-	_StateVariable_GLES_2_0_map[34877] = _StateVariable_GLES_2_0_name[1221:1244]
-	_StateVariable_GLES_2_0_map[34921] = _StateVariable_GLES_2_0_name[1244:1265]
-	_StateVariable_GLES_2_0_map[34930] = _StateVariable_GLES_2_0_name[1265:1291]
-	_StateVariable_GLES_2_0_map[34964] = _StateVariable_GLES_2_0_name[1291:1314]
-	_StateVariable_GLES_2_0_map[34965] = _StateVariable_GLES_2_0_name[1314:1345]
-	_StateVariable_GLES_2_0_map[35660] = _StateVariable_GLES_2_0_name[1345:1378]
-	_StateVariable_GLES_2_0_map[35661] = _StateVariable_GLES_2_0_name[1378:1413]
-	_StateVariable_GLES_2_0_map[35725] = _StateVariable_GLES_2_0_name[1413:1431]
-	_StateVariable_GLES_2_0_map[35738] = _StateVariable_GLES_2_0_name[1431:1464]
-	_StateVariable_GLES_2_0_map[35739] = _StateVariable_GLES_2_0_name[1464:1499]
-	_StateVariable_GLES_2_0_map[36003] = _StateVariable_GLES_2_0_name[1499:1518]
-	_StateVariable_GLES_2_0_map[36004] = _StateVariable_GLES_2_0_name[1518:1544]
-	_StateVariable_GLES_2_0_map[36005] = _StateVariable_GLES_2_0_name[1544:1569]
-	_StateVariable_GLES_2_0_map[36006] = _StateVariable_GLES_2_0_name[1569:1591]
-	_StateVariable_GLES_2_0_map[36007] = _StateVariable_GLES_2_0_name[1591:1614]
-	_StateVariable_GLES_2_0_map[36344] = _StateVariable_GLES_2_0_name[1614:1638]
-	_StateVariable_GLES_2_0_map[36345] = _StateVariable_GLES_2_0_name[1638:1666]
-	_StateVariable_GLES_2_0_map[36346] = _StateVariable_GLES_2_0_name[1666:1684]
-	_StateVariable_GLES_2_0_map[36347] = _StateVariable_GLES_2_0_name[1684:1713]
-	_StateVariable_GLES_2_0_map[36348] = _StateVariable_GLES_2_0_name[1713:1735]
-	_StateVariable_GLES_2_0_map[36349] = _StateVariable_GLES_2_0_name[1735:1766]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StateVariable_GLES_2_0", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StateVariable_GLES_2_0_name[0:13], Value: uint32(2849)},
-			{Name: _StateVariable_GLES_2_0_name[13:25], Value: uint32(2884)},
-			{Name: _StateVariable_GLES_2_0_name[25:42], Value: uint32(2885)},
-			{Name: _StateVariable_GLES_2_0_name[42:55], Value: uint32(2886)},
-			{Name: _StateVariable_GLES_2_0_name[55:69], Value: uint32(2928)},
-			{Name: _StateVariable_GLES_2_0_name[69:82], Value: uint32(2929)},
-			{Name: _StateVariable_GLES_2_0_name[82:100], Value: uint32(2930)},
-			{Name: _StateVariable_GLES_2_0_name[100:120], Value: uint32(2931)},
-			{Name: _StateVariable_GLES_2_0_name[120:133], Value: uint32(2932)},
-			{Name: _StateVariable_GLES_2_0_name[133:148], Value: uint32(2960)},
-			{Name: _StateVariable_GLES_2_0_name[148:170], Value: uint32(2961)},
-			{Name: _StateVariable_GLES_2_0_name[170:185], Value: uint32(2962)},
-			{Name: _StateVariable_GLES_2_0_name[185:206], Value: uint32(2963)},
-			{Name: _StateVariable_GLES_2_0_name[206:221], Value: uint32(2964)},
-			{Name: _StateVariable_GLES_2_0_name[221:247], Value: uint32(2965)},
-			{Name: _StateVariable_GLES_2_0_name[247:273], Value: uint32(2966)},
-			{Name: _StateVariable_GLES_2_0_name[273:287], Value: uint32(2967)},
-			{Name: _StateVariable_GLES_2_0_name[287:307], Value: uint32(2968)},
-			{Name: _StateVariable_GLES_2_0_name[307:318], Value: uint32(2978)},
-			{Name: _StateVariable_GLES_2_0_name[318:327], Value: uint32(3024)},
-			{Name: _StateVariable_GLES_2_0_name[327:335], Value: uint32(3042)},
-			{Name: _StateVariable_GLES_2_0_name[335:349], Value: uint32(3088)},
-			{Name: _StateVariable_GLES_2_0_name[349:364], Value: uint32(3089)},
-			{Name: _StateVariable_GLES_2_0_name[364:384], Value: uint32(3106)},
-			{Name: _StateVariable_GLES_2_0_name[384:402], Value: uint32(3107)},
-			{Name: _StateVariable_GLES_2_0_name[402:421], Value: uint32(3317)},
-			{Name: _StateVariable_GLES_2_0_name[421:438], Value: uint32(3333)},
-			{Name: _StateVariable_GLES_2_0_name[438:457], Value: uint32(3379)},
-			{Name: _StateVariable_GLES_2_0_name[457:477], Value: uint32(3386)},
-			{Name: _StateVariable_GLES_2_0_name[477:493], Value: uint32(3408)},
-			{Name: _StateVariable_GLES_2_0_name[493:504], Value: uint32(3410)},
-			{Name: _StateVariable_GLES_2_0_name[504:517], Value: uint32(3411)},
-			{Name: _StateVariable_GLES_2_0_name[517:529], Value: uint32(3412)},
-			{Name: _StateVariable_GLES_2_0_name[529:542], Value: uint32(3413)},
-			{Name: _StateVariable_GLES_2_0_name[542:555], Value: uint32(3414)},
-			{Name: _StateVariable_GLES_2_0_name[555:570], Value: uint32(3415)},
-			{Name: _StateVariable_GLES_2_0_name[570:593], Value: uint32(10752)},
-			{Name: _StateVariable_GLES_2_0_name[593:607], Value: uint32(32773)},
-			{Name: _StateVariable_GLES_2_0_name[607:628], Value: uint32(32777)},
-			{Name: _StateVariable_GLES_2_0_name[628:650], Value: uint32(32823)},
-			{Name: _StateVariable_GLES_2_0_name[650:674], Value: uint32(32824)},
-			{Name: _StateVariable_GLES_2_0_name[674:695], Value: uint32(32873)},
-			{Name: _StateVariable_GLES_2_0_name[695:722], Value: uint32(32926)},
-			{Name: _StateVariable_GLES_2_0_name[722:740], Value: uint32(32928)},
-			{Name: _StateVariable_GLES_2_0_name[740:757], Value: uint32(32936)},
-			{Name: _StateVariable_GLES_2_0_name[757:767], Value: uint32(32937)},
-			{Name: _StateVariable_GLES_2_0_name[767:791], Value: uint32(32938)},
-			{Name: _StateVariable_GLES_2_0_name[791:816], Value: uint32(32939)},
-			{Name: _StateVariable_GLES_2_0_name[816:832], Value: uint32(32968)},
-			{Name: _StateVariable_GLES_2_0_name[832:848], Value: uint32(32969)},
-			{Name: _StateVariable_GLES_2_0_name[848:866], Value: uint32(32970)},
-			{Name: _StateVariable_GLES_2_0_name[866:884], Value: uint32(32971)},
-			{Name: _StateVariable_GLES_2_0_name[884:907], Value: uint32(33170)},
-			{Name: _StateVariable_GLES_2_0_name[907:934], Value: uint32(33901)},
-			{Name: _StateVariable_GLES_2_0_name[934:961], Value: uint32(33902)},
-			{Name: _StateVariable_GLES_2_0_name[961:978], Value: uint32(34016)},
-			{Name: _StateVariable_GLES_2_0_name[978:1002], Value: uint32(34024)},
-			{Name: _StateVariable_GLES_2_0_name[1002:1029], Value: uint32(34068)},
-			{Name: _StateVariable_GLES_2_0_name[1029:1057], Value: uint32(34076)},
-			{Name: _StateVariable_GLES_2_0_name[1057:1090], Value: uint32(34466)},
-			{Name: _StateVariable_GLES_2_0_name[1090:1119], Value: uint32(34467)},
-			{Name: _StateVariable_GLES_2_0_name[1119:1139], Value: uint32(34816)},
-			{Name: _StateVariable_GLES_2_0_name[1139:1159], Value: uint32(34817)},
-			{Name: _StateVariable_GLES_2_0_name[1159:1190], Value: uint32(34818)},
-			{Name: _StateVariable_GLES_2_0_name[1190:1221], Value: uint32(34819)},
-			{Name: _StateVariable_GLES_2_0_name[1221:1244], Value: uint32(34877)},
-			{Name: _StateVariable_GLES_2_0_name[1244:1265], Value: uint32(34921)},
-			{Name: _StateVariable_GLES_2_0_name[1265:1291], Value: uint32(34930)},
-			{Name: _StateVariable_GLES_2_0_name[1291:1314], Value: uint32(34964)},
-			{Name: _StateVariable_GLES_2_0_name[1314:1345], Value: uint32(34965)},
-			{Name: _StateVariable_GLES_2_0_name[1345:1378], Value: uint32(35660)},
-			{Name: _StateVariable_GLES_2_0_name[1378:1413], Value: uint32(35661)},
-			{Name: _StateVariable_GLES_2_0_name[1413:1431], Value: uint32(35725)},
-			{Name: _StateVariable_GLES_2_0_name[1431:1464], Value: uint32(35738)},
-			{Name: _StateVariable_GLES_2_0_name[1464:1499], Value: uint32(35739)},
-			{Name: _StateVariable_GLES_2_0_name[1499:1518], Value: uint32(36003)},
-			{Name: _StateVariable_GLES_2_0_name[1518:1544], Value: uint32(36004)},
-			{Name: _StateVariable_GLES_2_0_name[1544:1569], Value: uint32(36005)},
-			{Name: _StateVariable_GLES_2_0_name[1569:1591], Value: uint32(36006)},
-			{Name: _StateVariable_GLES_2_0_name[1591:1614], Value: uint32(36007)},
-			{Name: _StateVariable_GLES_2_0_name[1614:1638], Value: uint32(36344)},
-			{Name: _StateVariable_GLES_2_0_name[1638:1666], Value: uint32(36345)},
-			{Name: _StateVariable_GLES_2_0_name[1666:1684], Value: uint32(36346)},
-			{Name: _StateVariable_GLES_2_0_name[1684:1713], Value: uint32(36347)},
-			{Name: _StateVariable_GLES_2_0_name[1713:1735], Value: uint32(36348)},
-			{Name: _StateVariable_GLES_2_0_name[1735:1766], Value: uint32(36349)},
-		},
-	})
-}
-
-func (v StateVariable_GLES_2_0) String() string {
-	if s, ok := _StateVariable_GLES_2_0_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StateVariable_GLES_2_0(%d)", v)
-}
-
-func (v *StateVariable_GLES_2_0) Parse(s string) error {
-	for k, t := range _StateVariable_GLES_2_0_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StateVariable_GLES_2_0", s)
-}
-
-const _StateVariable_GLES_3_1_name = "GL_READ_FRAMEBUFFER_BINDING"
-
-var _StateVariable_GLES_3_1_map = map[StateVariable_GLES_3_1]string{}
-
-func init() {
-	_StateVariable_GLES_3_1_map[36010] = _StateVariable_GLES_3_1_name[0:27]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StateVariable_GLES_3_1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StateVariable_GLES_3_1_name[0:27], Value: uint32(36010)},
-		},
-	})
-}
-
-func (v StateVariable_GLES_3_1) String() string {
-	if s, ok := _StateVariable_GLES_3_1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StateVariable_GLES_3_1(%d)", v)
-}
-
-func (v *StateVariable_GLES_3_1) Parse(s string) error {
-	for k, t := range _StateVariable_GLES_3_1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StateVariable_GLES_3_1", s)
-}
-
-const _StencilAction_name = "GL_ZEROGL_INVERTGL_KEEPGL_REPLACEGL_INCRGL_DECRGL_INCR_WRAPGL_DECR_WRAP"
-
-var _StencilAction_map = map[StencilAction]string{}
-
-func init() {
-	_StencilAction_map[0] = _StencilAction_name[0:7]
-	_StencilAction_map[5386] = _StencilAction_name[7:16]
-	_StencilAction_map[7680] = _StencilAction_name[16:23]
-	_StencilAction_map[7681] = _StencilAction_name[23:33]
-	_StencilAction_map[7682] = _StencilAction_name[33:40]
-	_StencilAction_map[7683] = _StencilAction_name[40:47]
-	_StencilAction_map[34055] = _StencilAction_name[47:59]
-	_StencilAction_map[34056] = _StencilAction_name[59:71]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StencilAction_name[0:7], Value: uint32(0)},
-			{Name: _StencilAction_name[7:16], Value: uint32(5386)},
-			{Name: _StencilAction_name[16:23], Value: uint32(7680)},
-			{Name: _StencilAction_name[23:33], Value: uint32(7681)},
-			{Name: _StencilAction_name[33:40], Value: uint32(7682)},
-			{Name: _StencilAction_name[40:47], Value: uint32(7683)},
-			{Name: _StencilAction_name[47:59], Value: uint32(34055)},
-			{Name: _StencilAction_name[59:71], Value: uint32(34056)},
-		},
-	})
-}
-
-func (v StencilAction) String() string {
-	if s, ok := _StencilAction_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StencilAction(%d)", v)
-}
-
-func (v *StencilAction) Parse(s string) error {
-	for k, t := range _StencilAction_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StencilAction", s)
-}
-
-const _StringConstant_name = "GL_VENDORGL_RENDERERGL_VERSIONGL_EXTENSIONS"
-
-var _StringConstant_map = map[StringConstant]string{}
-
-func init() {
-	_StringConstant_map[7936] = _StringConstant_name[0:9]
-	_StringConstant_map[7937] = _StringConstant_name[9:20]
-	_StringConstant_map[7938] = _StringConstant_name[20:30]
-	_StringConstant_map[7939] = _StringConstant_name[30:43]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _StringConstant_name[0:9], Value: uint32(7936)},
-			{Name: _StringConstant_name[9:20], Value: uint32(7937)},
-			{Name: _StringConstant_name[20:30], Value: uint32(7938)},
-			{Name: _StringConstant_name[30:43], Value: uint32(7939)},
-		},
-	})
-}
-
-func (v StringConstant) String() string {
-	if s, ok := _StringConstant_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("StringConstant(%d)", v)
-}
-
-func (v *StringConstant) Parse(s string) error {
-	for k, t := range _StringConstant_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in StringConstant", s)
+	return fmt.Errorf("%s not in GLenum", s)
 }
 
 const _SyncCondition_name = "GL_SYNC_GPU_COMMANDS_COMPLETE"
@@ -31890,404 +29382,6 @@ func (v *SyncFlags) Parse(s string) error {
 	return fmt.Errorf("%s not in SyncFlags", s)
 }
 
-const _TestFunction_name = "GL_NEVERGL_LESSGL_EQUALGL_LEQUALGL_GREATERGL_NOTEQUALGL_GEQUALGL_ALWAYS"
-
-var _TestFunction_map = map[TestFunction]string{}
-
-func init() {
-	_TestFunction_map[512] = _TestFunction_name[0:8]
-	_TestFunction_map[513] = _TestFunction_name[8:15]
-	_TestFunction_map[514] = _TestFunction_name[15:23]
-	_TestFunction_map[515] = _TestFunction_name[23:32]
-	_TestFunction_map[516] = _TestFunction_name[32:42]
-	_TestFunction_map[517] = _TestFunction_name[42:53]
-	_TestFunction_map[518] = _TestFunction_name[53:62]
-	_TestFunction_map[519] = _TestFunction_name[62:71]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TestFunction_name[0:8], Value: uint32(512)},
-			{Name: _TestFunction_name[8:15], Value: uint32(513)},
-			{Name: _TestFunction_name[15:23], Value: uint32(514)},
-			{Name: _TestFunction_name[23:32], Value: uint32(515)},
-			{Name: _TestFunction_name[32:42], Value: uint32(516)},
-			{Name: _TestFunction_name[42:53], Value: uint32(517)},
-			{Name: _TestFunction_name[53:62], Value: uint32(518)},
-			{Name: _TestFunction_name[62:71], Value: uint32(519)},
-		},
-	})
-}
-
-func (v TestFunction) String() string {
-	if s, ok := _TestFunction_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TestFunction(%d)", v)
-}
-
-func (v *TestFunction) Parse(s string) error {
-	for k, t := range _TestFunction_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TestFunction", s)
-}
-
-const _TexelComponent_name = "GL_REDGL_GREENGL_BLUEGL_ALPHA"
-
-var _TexelComponent_map = map[TexelComponent]string{}
-
-func init() {
-	_TexelComponent_map[6403] = _TexelComponent_name[0:6]
-	_TexelComponent_map[6404] = _TexelComponent_name[6:14]
-	_TexelComponent_map[6405] = _TexelComponent_name[14:21]
-	_TexelComponent_map[6406] = _TexelComponent_name[21:29]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TexelComponent_name[0:6], Value: uint32(6403)},
-			{Name: _TexelComponent_name[6:14], Value: uint32(6404)},
-			{Name: _TexelComponent_name[14:21], Value: uint32(6405)},
-			{Name: _TexelComponent_name[21:29], Value: uint32(6406)},
-		},
-	})
-}
-
-func (v TexelComponent) String() string {
-	if s, ok := _TexelComponent_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TexelComponent(%d)", v)
-}
-
-func (v *TexelComponent) Parse(s string) error {
-	for k, t := range _TexelComponent_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TexelComponent", s)
-}
-
-const _TexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
-
-var _TexelFormat_map = map[TexelFormat]string{}
-
-func init() {
-	_TexelFormat_map[6402] = _TexelFormat_name[0:18]
-	_TexelFormat_map[6403] = _TexelFormat_name[18:24]
-	_TexelFormat_map[6406] = _TexelFormat_name[24:32]
-	_TexelFormat_map[6407] = _TexelFormat_name[32:38]
-	_TexelFormat_map[6408] = _TexelFormat_name[38:45]
-	_TexelFormat_map[6409] = _TexelFormat_name[45:57]
-	_TexelFormat_map[6410] = _TexelFormat_name[57:75]
-	_TexelFormat_map[33189] = _TexelFormat_name[75:95]
-	_TexelFormat_map[33319] = _TexelFormat_name[95:100]
-	_TexelFormat_map[33320] = _TexelFormat_name[100:113]
-	_TexelFormat_map[34041] = _TexelFormat_name[113:129]
-	_TexelFormat_map[35056] = _TexelFormat_name[129:148]
-	_TexelFormat_map[36244] = _TexelFormat_name[148:162]
-	_TexelFormat_map[36248] = _TexelFormat_name[162:176]
-	_TexelFormat_map[36249] = _TexelFormat_name[176:191]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TexelFormat_name[0:18], Value: uint32(6402)},
-			{Name: _TexelFormat_name[18:24], Value: uint32(6403)},
-			{Name: _TexelFormat_name[24:32], Value: uint32(6406)},
-			{Name: _TexelFormat_name[32:38], Value: uint32(6407)},
-			{Name: _TexelFormat_name[38:45], Value: uint32(6408)},
-			{Name: _TexelFormat_name[45:57], Value: uint32(6409)},
-			{Name: _TexelFormat_name[57:75], Value: uint32(6410)},
-			{Name: _TexelFormat_name[75:95], Value: uint32(33189)},
-			{Name: _TexelFormat_name[95:100], Value: uint32(33319)},
-			{Name: _TexelFormat_name[100:113], Value: uint32(33320)},
-			{Name: _TexelFormat_name[113:129], Value: uint32(34041)},
-			{Name: _TexelFormat_name[129:148], Value: uint32(35056)},
-			{Name: _TexelFormat_name[148:162], Value: uint32(36244)},
-			{Name: _TexelFormat_name[162:176], Value: uint32(36248)},
-			{Name: _TexelFormat_name[176:191], Value: uint32(36249)},
-		},
-	})
-}
-
-func (v TexelFormat) String() string {
-	if s, ok := _TexelFormat_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TexelFormat(%d)", v)
-}
-
-func (v *TexelFormat) Parse(s string) error {
-	for k, t := range _TexelFormat_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TexelFormat", s)
-}
-
-const _TexelFormat_GLES_1_1_name = "GL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHA"
-
-var _TexelFormat_GLES_1_1_map = map[TexelFormat_GLES_1_1]string{}
-
-func init() {
-	_TexelFormat_GLES_1_1_map[6406] = _TexelFormat_GLES_1_1_name[0:8]
-	_TexelFormat_GLES_1_1_map[6407] = _TexelFormat_GLES_1_1_name[8:14]
-	_TexelFormat_GLES_1_1_map[6408] = _TexelFormat_GLES_1_1_name[14:21]
-	_TexelFormat_GLES_1_1_map[6409] = _TexelFormat_GLES_1_1_name[21:33]
-	_TexelFormat_GLES_1_1_map[6410] = _TexelFormat_GLES_1_1_name[33:51]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TexelFormat_GLES_1_1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TexelFormat_GLES_1_1_name[0:8], Value: uint32(6406)},
-			{Name: _TexelFormat_GLES_1_1_name[8:14], Value: uint32(6407)},
-			{Name: _TexelFormat_GLES_1_1_name[14:21], Value: uint32(6408)},
-			{Name: _TexelFormat_GLES_1_1_name[21:33], Value: uint32(6409)},
-			{Name: _TexelFormat_GLES_1_1_name[33:51], Value: uint32(6410)},
-		},
-	})
-}
-
-func (v TexelFormat_GLES_1_1) String() string {
-	if s, ok := _TexelFormat_GLES_1_1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TexelFormat_GLES_1_1(%d)", v)
-}
-
-func (v *TexelFormat_GLES_1_1) Parse(s string) error {
-	for k, t := range _TexelFormat_GLES_1_1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TexelFormat_GLES_1_1", s)
-}
-
-const _TexelFormat_GLES_3_0_name = "GL_DEPTH_COMPONENTGL_REDGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
-
-var _TexelFormat_GLES_3_0_map = map[TexelFormat_GLES_3_0]string{}
-
-func init() {
-	_TexelFormat_GLES_3_0_map[6402] = _TexelFormat_GLES_3_0_name[0:18]
-	_TexelFormat_GLES_3_0_map[6403] = _TexelFormat_GLES_3_0_name[18:24]
-	_TexelFormat_GLES_3_0_map[33189] = _TexelFormat_GLES_3_0_name[24:44]
-	_TexelFormat_GLES_3_0_map[33319] = _TexelFormat_GLES_3_0_name[44:49]
-	_TexelFormat_GLES_3_0_map[33320] = _TexelFormat_GLES_3_0_name[49:62]
-	_TexelFormat_GLES_3_0_map[34041] = _TexelFormat_GLES_3_0_name[62:78]
-	_TexelFormat_GLES_3_0_map[35056] = _TexelFormat_GLES_3_0_name[78:97]
-	_TexelFormat_GLES_3_0_map[36244] = _TexelFormat_GLES_3_0_name[97:111]
-	_TexelFormat_GLES_3_0_map[36248] = _TexelFormat_GLES_3_0_name[111:125]
-	_TexelFormat_GLES_3_0_map[36249] = _TexelFormat_GLES_3_0_name[125:140]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TexelFormat_GLES_3_0", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TexelFormat_GLES_3_0_name[0:18], Value: uint32(6402)},
-			{Name: _TexelFormat_GLES_3_0_name[18:24], Value: uint32(6403)},
-			{Name: _TexelFormat_GLES_3_0_name[24:44], Value: uint32(33189)},
-			{Name: _TexelFormat_GLES_3_0_name[44:49], Value: uint32(33319)},
-			{Name: _TexelFormat_GLES_3_0_name[49:62], Value: uint32(33320)},
-			{Name: _TexelFormat_GLES_3_0_name[62:78], Value: uint32(34041)},
-			{Name: _TexelFormat_GLES_3_0_name[78:97], Value: uint32(35056)},
-			{Name: _TexelFormat_GLES_3_0_name[97:111], Value: uint32(36244)},
-			{Name: _TexelFormat_GLES_3_0_name[111:125], Value: uint32(36248)},
-			{Name: _TexelFormat_GLES_3_0_name[125:140], Value: uint32(36249)},
-		},
-	})
-}
-
-func (v TexelFormat_GLES_3_0) String() string {
-	if s, ok := _TexelFormat_GLES_3_0_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TexelFormat_GLES_3_0(%d)", v)
-}
-
-func (v *TexelFormat_GLES_3_0) Parse(s string) error {
-	for k, t := range _TexelFormat_GLES_3_0_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TexelFormat_GLES_3_0", s)
-}
-
-const _TexelType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INTGL_FLOATGL_UNSIGNED_SHORT_4_4_4_4GL_UNSIGNED_SHORT_5_5_5_1GL_UNSIGNED_SHORT_5_6_5GL_UNSIGNED_INT_24_8"
-
-var _TexelType_map = map[TexelType]string{}
-
-func init() {
-	_TexelType_map[5121] = _TexelType_name[0:16]
-	_TexelType_map[5123] = _TexelType_name[16:33]
-	_TexelType_map[5125] = _TexelType_name[33:48]
-	_TexelType_map[5126] = _TexelType_name[48:56]
-	_TexelType_map[32819] = _TexelType_name[56:81]
-	_TexelType_map[32820] = _TexelType_name[81:106]
-	_TexelType_map[33635] = _TexelType_name[106:129]
-	_TexelType_map[34042] = _TexelType_name[129:149]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TexelType_name[0:16], Value: uint32(5121)},
-			{Name: _TexelType_name[16:33], Value: uint32(5123)},
-			{Name: _TexelType_name[33:48], Value: uint32(5125)},
-			{Name: _TexelType_name[48:56], Value: uint32(5126)},
-			{Name: _TexelType_name[56:81], Value: uint32(32819)},
-			{Name: _TexelType_name[81:106], Value: uint32(32820)},
-			{Name: _TexelType_name[106:129], Value: uint32(33635)},
-			{Name: _TexelType_name[129:149], Value: uint32(34042)},
-		},
-	})
-}
-
-func (v TexelType) String() string {
-	if s, ok := _TexelType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TexelType(%d)", v)
-}
-
-func (v *TexelType) Parse(s string) error {
-	for k, t := range _TexelType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TexelType", s)
-}
-
-const _Texture2DImageTarget_name = "GL_TEXTURE_2D"
-
-var _Texture2DImageTarget_map = map[Texture2DImageTarget]string{}
-
-func init() {
-	_Texture2DImageTarget_map[3553] = _Texture2DImageTarget_name[0:13]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Texture2DImageTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _Texture2DImageTarget_name[0:13], Value: uint32(3553)},
-		},
-	})
-}
-
-func (v Texture2DImageTarget) String() string {
-	if s, ok := _Texture2DImageTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Texture2DImageTarget(%d)", v)
-}
-
-func (v *Texture2DImageTarget) Parse(s string) error {
-	for k, t := range _Texture2DImageTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Texture2DImageTarget", s)
-}
-
-const _TextureFilterMode_name = "GL_NEARESTGL_LINEARGL_NEAREST_MIPMAP_NEARESTGL_LINEAR_MIPMAP_NEARESTGL_NEAREST_MIPMAP_LINEARGL_LINEAR_MIPMAP_LINEAR"
-
-var _TextureFilterMode_map = map[TextureFilterMode]string{}
-
-func init() {
-	_TextureFilterMode_map[9728] = _TextureFilterMode_name[0:10]
-	_TextureFilterMode_map[9729] = _TextureFilterMode_name[10:19]
-	_TextureFilterMode_map[9984] = _TextureFilterMode_name[19:44]
-	_TextureFilterMode_map[9985] = _TextureFilterMode_name[44:68]
-	_TextureFilterMode_map[9986] = _TextureFilterMode_name[68:92]
-	_TextureFilterMode_map[9987] = _TextureFilterMode_name[92:115]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureFilterMode_name[0:10], Value: uint32(9728)},
-			{Name: _TextureFilterMode_name[10:19], Value: uint32(9729)},
-			{Name: _TextureFilterMode_name[19:44], Value: uint32(9984)},
-			{Name: _TextureFilterMode_name[44:68], Value: uint32(9985)},
-			{Name: _TextureFilterMode_name[68:92], Value: uint32(9986)},
-			{Name: _TextureFilterMode_name[92:115], Value: uint32(9987)},
-		},
-	})
-}
-
-func (v TextureFilterMode) String() string {
-	if s, ok := _TextureFilterMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureFilterMode(%d)", v)
-}
-
-func (v *TextureFilterMode) Parse(s string) error {
-	for k, t := range _TextureFilterMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureFilterMode", s)
-}
-
-const _TextureImageTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
-
-var _TextureImageTarget_map = map[TextureImageTarget]string{}
-
-func init() {
-	_TextureImageTarget_map[3553] = _TextureImageTarget_name[0:13]
-	_TextureImageTarget_map[34069] = _TextureImageTarget_name[13:43]
-	_TextureImageTarget_map[34070] = _TextureImageTarget_name[43:73]
-	_TextureImageTarget_map[34071] = _TextureImageTarget_name[73:103]
-	_TextureImageTarget_map[34072] = _TextureImageTarget_name[103:133]
-	_TextureImageTarget_map[34073] = _TextureImageTarget_name[133:163]
-	_TextureImageTarget_map[34074] = _TextureImageTarget_name[163:193]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureImageTarget_name[0:13], Value: uint32(3553)},
-			{Name: _TextureImageTarget_name[13:43], Value: uint32(34069)},
-			{Name: _TextureImageTarget_name[43:73], Value: uint32(34070)},
-			{Name: _TextureImageTarget_name[73:103], Value: uint32(34071)},
-			{Name: _TextureImageTarget_name[103:133], Value: uint32(34072)},
-			{Name: _TextureImageTarget_name[133:163], Value: uint32(34073)},
-			{Name: _TextureImageTarget_name[163:193], Value: uint32(34074)},
-		},
-	})
-}
-
-func (v TextureImageTarget) String() string {
-	if s, ok := _TextureImageTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureImageTarget(%d)", v)
-}
-
-func (v *TextureImageTarget) Parse(s string) error {
-	for k, t := range _TextureImageTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureImageTarget", s)
-}
-
 const _TextureKind_name = "UNDEFINEDTEXTURE2DCUBEMAP"
 
 var _TextureKind_map = map[TextureKind]string{}
@@ -32322,702 +29416,4 @@ func (v *TextureKind) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in TextureKind", s)
-}
-
-const _TextureParameter_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTERGL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_TGL_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
-
-var _TextureParameter_map = map[TextureParameter]string{}
-
-func init() {
-	_TextureParameter_map[10240] = _TextureParameter_name[0:21]
-	_TextureParameter_map[10241] = _TextureParameter_name[21:42]
-	_TextureParameter_map[10242] = _TextureParameter_name[42:59]
-	_TextureParameter_map[10243] = _TextureParameter_name[59:76]
-	_TextureParameter_map[34046] = _TextureParameter_name[76:105]
-	_TextureParameter_map[36418] = _TextureParameter_name[105:125]
-	_TextureParameter_map[36419] = _TextureParameter_name[125:145]
-	_TextureParameter_map[36420] = _TextureParameter_name[145:165]
-	_TextureParameter_map[36421] = _TextureParameter_name[165:185]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureParameter_name[0:21], Value: uint32(10240)},
-			{Name: _TextureParameter_name[21:42], Value: uint32(10241)},
-			{Name: _TextureParameter_name[42:59], Value: uint32(10242)},
-			{Name: _TextureParameter_name[59:76], Value: uint32(10243)},
-			{Name: _TextureParameter_name[76:105], Value: uint32(34046)},
-			{Name: _TextureParameter_name[105:125], Value: uint32(36418)},
-			{Name: _TextureParameter_name[125:145], Value: uint32(36419)},
-			{Name: _TextureParameter_name[145:165], Value: uint32(36420)},
-			{Name: _TextureParameter_name[165:185], Value: uint32(36421)},
-		},
-	})
-}
-
-func (v TextureParameter) String() string {
-	if s, ok := _TextureParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureParameter(%d)", v)
-}
-
-func (v *TextureParameter) Parse(s string) error {
-	for k, t := range _TextureParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureParameter", s)
-}
-
-const _TextureParameter_EXT_texture_filter_anisotropic_name = "GL_TEXTURE_MAX_ANISOTROPY_EXT"
-
-var _TextureParameter_EXT_texture_filter_anisotropic_map = map[TextureParameter_EXT_texture_filter_anisotropic]string{}
-
-func init() {
-	_TextureParameter_EXT_texture_filter_anisotropic_map[34046] = _TextureParameter_EXT_texture_filter_anisotropic_name[0:29]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureParameter_EXT_texture_filter_anisotropic", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureParameter_EXT_texture_filter_anisotropic_name[0:29], Value: uint32(34046)},
-		},
-	})
-}
-
-func (v TextureParameter_EXT_texture_filter_anisotropic) String() string {
-	if s, ok := _TextureParameter_EXT_texture_filter_anisotropic_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureParameter_EXT_texture_filter_anisotropic(%d)", v)
-}
-
-func (v *TextureParameter_EXT_texture_filter_anisotropic) Parse(s string) error {
-	for k, t := range _TextureParameter_EXT_texture_filter_anisotropic_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureParameter_EXT_texture_filter_anisotropic", s)
-}
-
-const _TextureParameter_FilterMode_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTER"
-
-var _TextureParameter_FilterMode_map = map[TextureParameter_FilterMode]string{}
-
-func init() {
-	_TextureParameter_FilterMode_map[10240] = _TextureParameter_FilterMode_name[0:21]
-	_TextureParameter_FilterMode_map[10241] = _TextureParameter_FilterMode_name[21:42]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureParameter_FilterMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureParameter_FilterMode_name[0:21], Value: uint32(10240)},
-			{Name: _TextureParameter_FilterMode_name[21:42], Value: uint32(10241)},
-		},
-	})
-}
-
-func (v TextureParameter_FilterMode) String() string {
-	if s, ok := _TextureParameter_FilterMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureParameter_FilterMode(%d)", v)
-}
-
-func (v *TextureParameter_FilterMode) Parse(s string) error {
-	for k, t := range _TextureParameter_FilterMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureParameter_FilterMode", s)
-}
-
-const _TextureParameter_SwizzleMode_name = "GL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
-
-var _TextureParameter_SwizzleMode_map = map[TextureParameter_SwizzleMode]string{}
-
-func init() {
-	_TextureParameter_SwizzleMode_map[36418] = _TextureParameter_SwizzleMode_name[0:20]
-	_TextureParameter_SwizzleMode_map[36419] = _TextureParameter_SwizzleMode_name[20:40]
-	_TextureParameter_SwizzleMode_map[36420] = _TextureParameter_SwizzleMode_name[40:60]
-	_TextureParameter_SwizzleMode_map[36421] = _TextureParameter_SwizzleMode_name[60:80]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureParameter_SwizzleMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureParameter_SwizzleMode_name[0:20], Value: uint32(36418)},
-			{Name: _TextureParameter_SwizzleMode_name[20:40], Value: uint32(36419)},
-			{Name: _TextureParameter_SwizzleMode_name[40:60], Value: uint32(36420)},
-			{Name: _TextureParameter_SwizzleMode_name[60:80], Value: uint32(36421)},
-		},
-	})
-}
-
-func (v TextureParameter_SwizzleMode) String() string {
-	if s, ok := _TextureParameter_SwizzleMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureParameter_SwizzleMode(%d)", v)
-}
-
-func (v *TextureParameter_SwizzleMode) Parse(s string) error {
-	for k, t := range _TextureParameter_SwizzleMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureParameter_SwizzleMode", s)
-}
-
-const _TextureParameter_WrapMode_name = "GL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_T"
-
-var _TextureParameter_WrapMode_map = map[TextureParameter_WrapMode]string{}
-
-func init() {
-	_TextureParameter_WrapMode_map[10242] = _TextureParameter_WrapMode_name[0:17]
-	_TextureParameter_WrapMode_map[10243] = _TextureParameter_WrapMode_name[17:34]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureParameter_WrapMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureParameter_WrapMode_name[0:17], Value: uint32(10242)},
-			{Name: _TextureParameter_WrapMode_name[17:34], Value: uint32(10243)},
-		},
-	})
-}
-
-func (v TextureParameter_WrapMode) String() string {
-	if s, ok := _TextureParameter_WrapMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureParameter_WrapMode(%d)", v)
-}
-
-func (v *TextureParameter_WrapMode) Parse(s string) error {
-	for k, t := range _TextureParameter_WrapMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureParameter_WrapMode", s)
-}
-
-const _TextureTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAPGL_TEXTURE_EXTERNAL_OES"
-
-var _TextureTarget_map = map[TextureTarget]string{}
-
-func init() {
-	_TextureTarget_map[3553] = _TextureTarget_name[0:13]
-	_TextureTarget_map[34067] = _TextureTarget_name[13:32]
-	_TextureTarget_map[36197] = _TextureTarget_name[32:55]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureTarget_name[0:13], Value: uint32(3553)},
-			{Name: _TextureTarget_name[13:32], Value: uint32(34067)},
-			{Name: _TextureTarget_name[32:55], Value: uint32(36197)},
-		},
-	})
-}
-
-func (v TextureTarget) String() string {
-	if s, ok := _TextureTarget_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureTarget(%d)", v)
-}
-
-func (v *TextureTarget) Parse(s string) error {
-	for k, t := range _TextureTarget_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureTarget", s)
-}
-
-const _TextureTarget_GLES_1_1_name = "GL_TEXTURE_2D"
-
-var _TextureTarget_GLES_1_1_map = map[TextureTarget_GLES_1_1]string{}
-
-func init() {
-	_TextureTarget_GLES_1_1_map[3553] = _TextureTarget_GLES_1_1_name[0:13]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureTarget_GLES_1_1", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureTarget_GLES_1_1_name[0:13], Value: uint32(3553)},
-		},
-	})
-}
-
-func (v TextureTarget_GLES_1_1) String() string {
-	if s, ok := _TextureTarget_GLES_1_1_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureTarget_GLES_1_1(%d)", v)
-}
-
-func (v *TextureTarget_GLES_1_1) Parse(s string) error {
-	for k, t := range _TextureTarget_GLES_1_1_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureTarget_GLES_1_1", s)
-}
-
-const _TextureTarget_GLES_2_0_name = "GL_TEXTURE_CUBE_MAP"
-
-var _TextureTarget_GLES_2_0_map = map[TextureTarget_GLES_2_0]string{}
-
-func init() {
-	_TextureTarget_GLES_2_0_map[34067] = _TextureTarget_GLES_2_0_name[0:19]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureTarget_GLES_2_0", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureTarget_GLES_2_0_name[0:19], Value: uint32(34067)},
-		},
-	})
-}
-
-func (v TextureTarget_GLES_2_0) String() string {
-	if s, ok := _TextureTarget_GLES_2_0_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureTarget_GLES_2_0(%d)", v)
-}
-
-func (v *TextureTarget_GLES_2_0) Parse(s string) error {
-	for k, t := range _TextureTarget_GLES_2_0_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureTarget_GLES_2_0", s)
-}
-
-const _TextureTarget_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
-
-var _TextureTarget_OES_EGL_image_external_map = map[TextureTarget_OES_EGL_image_external]string{}
-
-func init() {
-	_TextureTarget_OES_EGL_image_external_map[36197] = _TextureTarget_OES_EGL_image_external_name[0:23]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureTarget_OES_EGL_image_external", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureTarget_OES_EGL_image_external_name[0:23], Value: uint32(36197)},
-		},
-	})
-}
-
-func (v TextureTarget_OES_EGL_image_external) String() string {
-	if s, ok := _TextureTarget_OES_EGL_image_external_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureTarget_OES_EGL_image_external(%d)", v)
-}
-
-func (v *TextureTarget_OES_EGL_image_external) Parse(s string) error {
-	for k, t := range _TextureTarget_OES_EGL_image_external_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureTarget_OES_EGL_image_external", s)
-}
-
-const _TextureUnit_name = "GL_TEXTURE0GL_TEXTURE1GL_TEXTURE2GL_TEXTURE3GL_TEXTURE4GL_TEXTURE5GL_TEXTURE6GL_TEXTURE7GL_TEXTURE8GL_TEXTURE9GL_TEXTURE10GL_TEXTURE11GL_TEXTURE12GL_TEXTURE13GL_TEXTURE14GL_TEXTURE15GL_TEXTURE16GL_TEXTURE17GL_TEXTURE18GL_TEXTURE19GL_TEXTURE20GL_TEXTURE21GL_TEXTURE22GL_TEXTURE23GL_TEXTURE24GL_TEXTURE25GL_TEXTURE26GL_TEXTURE27GL_TEXTURE28GL_TEXTURE29GL_TEXTURE30GL_TEXTURE31"
-
-var _TextureUnit_map = map[TextureUnit]string{}
-
-func init() {
-	_TextureUnit_map[33984] = _TextureUnit_name[0:11]
-	_TextureUnit_map[33985] = _TextureUnit_name[11:22]
-	_TextureUnit_map[33986] = _TextureUnit_name[22:33]
-	_TextureUnit_map[33987] = _TextureUnit_name[33:44]
-	_TextureUnit_map[33988] = _TextureUnit_name[44:55]
-	_TextureUnit_map[33989] = _TextureUnit_name[55:66]
-	_TextureUnit_map[33990] = _TextureUnit_name[66:77]
-	_TextureUnit_map[33991] = _TextureUnit_name[77:88]
-	_TextureUnit_map[33992] = _TextureUnit_name[88:99]
-	_TextureUnit_map[33993] = _TextureUnit_name[99:110]
-	_TextureUnit_map[33994] = _TextureUnit_name[110:122]
-	_TextureUnit_map[33995] = _TextureUnit_name[122:134]
-	_TextureUnit_map[33996] = _TextureUnit_name[134:146]
-	_TextureUnit_map[33997] = _TextureUnit_name[146:158]
-	_TextureUnit_map[33998] = _TextureUnit_name[158:170]
-	_TextureUnit_map[33999] = _TextureUnit_name[170:182]
-	_TextureUnit_map[34000] = _TextureUnit_name[182:194]
-	_TextureUnit_map[34001] = _TextureUnit_name[194:206]
-	_TextureUnit_map[34002] = _TextureUnit_name[206:218]
-	_TextureUnit_map[34003] = _TextureUnit_name[218:230]
-	_TextureUnit_map[34004] = _TextureUnit_name[230:242]
-	_TextureUnit_map[34005] = _TextureUnit_name[242:254]
-	_TextureUnit_map[34006] = _TextureUnit_name[254:266]
-	_TextureUnit_map[34007] = _TextureUnit_name[266:278]
-	_TextureUnit_map[34008] = _TextureUnit_name[278:290]
-	_TextureUnit_map[34009] = _TextureUnit_name[290:302]
-	_TextureUnit_map[34010] = _TextureUnit_name[302:314]
-	_TextureUnit_map[34011] = _TextureUnit_name[314:326]
-	_TextureUnit_map[34012] = _TextureUnit_name[326:338]
-	_TextureUnit_map[34013] = _TextureUnit_name[338:350]
-	_TextureUnit_map[34014] = _TextureUnit_name[350:362]
-	_TextureUnit_map[34015] = _TextureUnit_name[362:374]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureUnit_name[0:11], Value: uint32(33984)},
-			{Name: _TextureUnit_name[11:22], Value: uint32(33985)},
-			{Name: _TextureUnit_name[22:33], Value: uint32(33986)},
-			{Name: _TextureUnit_name[33:44], Value: uint32(33987)},
-			{Name: _TextureUnit_name[44:55], Value: uint32(33988)},
-			{Name: _TextureUnit_name[55:66], Value: uint32(33989)},
-			{Name: _TextureUnit_name[66:77], Value: uint32(33990)},
-			{Name: _TextureUnit_name[77:88], Value: uint32(33991)},
-			{Name: _TextureUnit_name[88:99], Value: uint32(33992)},
-			{Name: _TextureUnit_name[99:110], Value: uint32(33993)},
-			{Name: _TextureUnit_name[110:122], Value: uint32(33994)},
-			{Name: _TextureUnit_name[122:134], Value: uint32(33995)},
-			{Name: _TextureUnit_name[134:146], Value: uint32(33996)},
-			{Name: _TextureUnit_name[146:158], Value: uint32(33997)},
-			{Name: _TextureUnit_name[158:170], Value: uint32(33998)},
-			{Name: _TextureUnit_name[170:182], Value: uint32(33999)},
-			{Name: _TextureUnit_name[182:194], Value: uint32(34000)},
-			{Name: _TextureUnit_name[194:206], Value: uint32(34001)},
-			{Name: _TextureUnit_name[206:218], Value: uint32(34002)},
-			{Name: _TextureUnit_name[218:230], Value: uint32(34003)},
-			{Name: _TextureUnit_name[230:242], Value: uint32(34004)},
-			{Name: _TextureUnit_name[242:254], Value: uint32(34005)},
-			{Name: _TextureUnit_name[254:266], Value: uint32(34006)},
-			{Name: _TextureUnit_name[266:278], Value: uint32(34007)},
-			{Name: _TextureUnit_name[278:290], Value: uint32(34008)},
-			{Name: _TextureUnit_name[290:302], Value: uint32(34009)},
-			{Name: _TextureUnit_name[302:314], Value: uint32(34010)},
-			{Name: _TextureUnit_name[314:326], Value: uint32(34011)},
-			{Name: _TextureUnit_name[326:338], Value: uint32(34012)},
-			{Name: _TextureUnit_name[338:350], Value: uint32(34013)},
-			{Name: _TextureUnit_name[350:362], Value: uint32(34014)},
-			{Name: _TextureUnit_name[362:374], Value: uint32(34015)},
-		},
-	})
-}
-
-func (v TextureUnit) String() string {
-	if s, ok := _TextureUnit_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureUnit(%d)", v)
-}
-
-func (v *TextureUnit) Parse(s string) error {
-	for k, t := range _TextureUnit_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureUnit", s)
-}
-
-const _TextureWrapMode_name = "GL_REPEATGL_CLAMP_TO_EDGEGL_MIRRORED_REPEAT"
-
-var _TextureWrapMode_map = map[TextureWrapMode]string{}
-
-func init() {
-	_TextureWrapMode_map[10497] = _TextureWrapMode_name[0:9]
-	_TextureWrapMode_map[33071] = _TextureWrapMode_name[9:25]
-	_TextureWrapMode_map[33648] = _TextureWrapMode_name[25:43]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TextureWrapMode_name[0:9], Value: uint32(10497)},
-			{Name: _TextureWrapMode_name[9:25], Value: uint32(33071)},
-			{Name: _TextureWrapMode_name[25:43], Value: uint32(33648)},
-		},
-	})
-}
-
-func (v TextureWrapMode) String() string {
-	if s, ok := _TextureWrapMode_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TextureWrapMode(%d)", v)
-}
-
-func (v *TextureWrapMode) Parse(s string) error {
-	for k, t := range _TextureWrapMode_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TextureWrapMode", s)
-}
-
-const _TilePreserveMaskQCOM_name = "GL_COLOR_BUFFER_BIT0_QCOMGL_COLOR_BUFFER_BIT1_QCOMGL_COLOR_BUFFER_BIT2_QCOMGL_COLOR_BUFFER_BIT3_QCOMGL_COLOR_BUFFER_BIT4_QCOMGL_COLOR_BUFFER_BIT5_QCOMGL_COLOR_BUFFER_BIT6_QCOMGL_COLOR_BUFFER_BIT7_QCOMGL_DEPTH_BUFFER_BIT0_QCOMGL_DEPTH_BUFFER_BIT1_QCOMGL_DEPTH_BUFFER_BIT2_QCOMGL_DEPTH_BUFFER_BIT3_QCOMGL_DEPTH_BUFFER_BIT4_QCOMGL_DEPTH_BUFFER_BIT5_QCOMGL_DEPTH_BUFFER_BIT6_QCOMGL_DEPTH_BUFFER_BIT7_QCOMGL_STENCIL_BUFFER_BIT0_QCOMGL_STENCIL_BUFFER_BIT1_QCOMGL_STENCIL_BUFFER_BIT2_QCOMGL_STENCIL_BUFFER_BIT3_QCOMGL_STENCIL_BUFFER_BIT4_QCOMGL_STENCIL_BUFFER_BIT5_QCOMGL_STENCIL_BUFFER_BIT6_QCOMGL_STENCIL_BUFFER_BIT7_QCOMGL_MULTISAMPLE_BUFFER_BIT0_QCOMGL_MULTISAMPLE_BUFFER_BIT1_QCOMGL_MULTISAMPLE_BUFFER_BIT2_QCOMGL_MULTISAMPLE_BUFFER_BIT3_QCOMGL_MULTISAMPLE_BUFFER_BIT4_QCOMGL_MULTISAMPLE_BUFFER_BIT5_QCOMGL_MULTISAMPLE_BUFFER_BIT6_QCOMGL_MULTISAMPLE_BUFFER_BIT7_QCOM"
-
-var _TilePreserveMaskQCOM_map = map[TilePreserveMaskQCOM]string{}
-
-func init() {
-	_TilePreserveMaskQCOM_map[1] = _TilePreserveMaskQCOM_name[0:25]
-	_TilePreserveMaskQCOM_map[2] = _TilePreserveMaskQCOM_name[25:50]
-	_TilePreserveMaskQCOM_map[4] = _TilePreserveMaskQCOM_name[50:75]
-	_TilePreserveMaskQCOM_map[8] = _TilePreserveMaskQCOM_name[75:100]
-	_TilePreserveMaskQCOM_map[16] = _TilePreserveMaskQCOM_name[100:125]
-	_TilePreserveMaskQCOM_map[32] = _TilePreserveMaskQCOM_name[125:150]
-	_TilePreserveMaskQCOM_map[64] = _TilePreserveMaskQCOM_name[150:175]
-	_TilePreserveMaskQCOM_map[128] = _TilePreserveMaskQCOM_name[175:200]
-	_TilePreserveMaskQCOM_map[256] = _TilePreserveMaskQCOM_name[200:225]
-	_TilePreserveMaskQCOM_map[512] = _TilePreserveMaskQCOM_name[225:250]
-	_TilePreserveMaskQCOM_map[1024] = _TilePreserveMaskQCOM_name[250:275]
-	_TilePreserveMaskQCOM_map[2048] = _TilePreserveMaskQCOM_name[275:300]
-	_TilePreserveMaskQCOM_map[4096] = _TilePreserveMaskQCOM_name[300:325]
-	_TilePreserveMaskQCOM_map[8192] = _TilePreserveMaskQCOM_name[325:350]
-	_TilePreserveMaskQCOM_map[16384] = _TilePreserveMaskQCOM_name[350:375]
-	_TilePreserveMaskQCOM_map[32768] = _TilePreserveMaskQCOM_name[375:400]
-	_TilePreserveMaskQCOM_map[65536] = _TilePreserveMaskQCOM_name[400:427]
-	_TilePreserveMaskQCOM_map[131072] = _TilePreserveMaskQCOM_name[427:454]
-	_TilePreserveMaskQCOM_map[262144] = _TilePreserveMaskQCOM_name[454:481]
-	_TilePreserveMaskQCOM_map[524288] = _TilePreserveMaskQCOM_name[481:508]
-	_TilePreserveMaskQCOM_map[1048576] = _TilePreserveMaskQCOM_name[508:535]
-	_TilePreserveMaskQCOM_map[2097152] = _TilePreserveMaskQCOM_name[535:562]
-	_TilePreserveMaskQCOM_map[4194304] = _TilePreserveMaskQCOM_name[562:589]
-	_TilePreserveMaskQCOM_map[8388608] = _TilePreserveMaskQCOM_name[589:616]
-	_TilePreserveMaskQCOM_map[16777216] = _TilePreserveMaskQCOM_name[616:647]
-	_TilePreserveMaskQCOM_map[33554432] = _TilePreserveMaskQCOM_name[647:678]
-	_TilePreserveMaskQCOM_map[67108864] = _TilePreserveMaskQCOM_name[678:709]
-	_TilePreserveMaskQCOM_map[134217728] = _TilePreserveMaskQCOM_name[709:740]
-	_TilePreserveMaskQCOM_map[268435456] = _TilePreserveMaskQCOM_name[740:771]
-	_TilePreserveMaskQCOM_map[536870912] = _TilePreserveMaskQCOM_name[771:802]
-	_TilePreserveMaskQCOM_map[1073741824] = _TilePreserveMaskQCOM_name[802:833]
-	_TilePreserveMaskQCOM_map[2147483648] = _TilePreserveMaskQCOM_name[833:864]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _TilePreserveMaskQCOM_name[0:25], Value: uint32(1)},
-			{Name: _TilePreserveMaskQCOM_name[25:50], Value: uint32(2)},
-			{Name: _TilePreserveMaskQCOM_name[50:75], Value: uint32(4)},
-			{Name: _TilePreserveMaskQCOM_name[75:100], Value: uint32(8)},
-			{Name: _TilePreserveMaskQCOM_name[100:125], Value: uint32(16)},
-			{Name: _TilePreserveMaskQCOM_name[125:150], Value: uint32(32)},
-			{Name: _TilePreserveMaskQCOM_name[150:175], Value: uint32(64)},
-			{Name: _TilePreserveMaskQCOM_name[175:200], Value: uint32(128)},
-			{Name: _TilePreserveMaskQCOM_name[200:225], Value: uint32(256)},
-			{Name: _TilePreserveMaskQCOM_name[225:250], Value: uint32(512)},
-			{Name: _TilePreserveMaskQCOM_name[250:275], Value: uint32(1024)},
-			{Name: _TilePreserveMaskQCOM_name[275:300], Value: uint32(2048)},
-			{Name: _TilePreserveMaskQCOM_name[300:325], Value: uint32(4096)},
-			{Name: _TilePreserveMaskQCOM_name[325:350], Value: uint32(8192)},
-			{Name: _TilePreserveMaskQCOM_name[350:375], Value: uint32(16384)},
-			{Name: _TilePreserveMaskQCOM_name[375:400], Value: uint32(32768)},
-			{Name: _TilePreserveMaskQCOM_name[400:427], Value: uint32(65536)},
-			{Name: _TilePreserveMaskQCOM_name[427:454], Value: uint32(131072)},
-			{Name: _TilePreserveMaskQCOM_name[454:481], Value: uint32(262144)},
-			{Name: _TilePreserveMaskQCOM_name[481:508], Value: uint32(524288)},
-			{Name: _TilePreserveMaskQCOM_name[508:535], Value: uint32(1048576)},
-			{Name: _TilePreserveMaskQCOM_name[535:562], Value: uint32(2097152)},
-			{Name: _TilePreserveMaskQCOM_name[562:589], Value: uint32(4194304)},
-			{Name: _TilePreserveMaskQCOM_name[589:616], Value: uint32(8388608)},
-			{Name: _TilePreserveMaskQCOM_name[616:647], Value: uint32(16777216)},
-			{Name: _TilePreserveMaskQCOM_name[647:678], Value: uint32(33554432)},
-			{Name: _TilePreserveMaskQCOM_name[678:709], Value: uint32(67108864)},
-			{Name: _TilePreserveMaskQCOM_name[709:740], Value: uint32(134217728)},
-			{Name: _TilePreserveMaskQCOM_name[740:771], Value: uint32(268435456)},
-			{Name: _TilePreserveMaskQCOM_name[771:802], Value: uint32(536870912)},
-			{Name: _TilePreserveMaskQCOM_name[802:833], Value: uint32(1073741824)},
-			{Name: _TilePreserveMaskQCOM_name[833:864], Value: uint32(2147483648)},
-		},
-	})
-}
-
-func (v TilePreserveMaskQCOM) String() string {
-	if s, ok := _TilePreserveMaskQCOM_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("TilePreserveMaskQCOM(%d)", v)
-}
-
-func (v *TilePreserveMaskQCOM) Parse(s string) error {
-	for k, t := range _TilePreserveMaskQCOM_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in TilePreserveMaskQCOM", s)
-}
-
-const _Type_ARB_half_float_vertex_name = "GL_HALF_FLOAT_ARB"
-
-var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{}
-
-func init() {
-	_Type_ARB_half_float_vertex_map[5131] = _Type_ARB_half_float_vertex_name[0:17]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Type_ARB_half_float_vertex", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _Type_ARB_half_float_vertex_name[0:17], Value: uint32(5131)},
-		},
-	})
-}
-
-func (v Type_ARB_half_float_vertex) String() string {
-	if s, ok := _Type_ARB_half_float_vertex_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Type_ARB_half_float_vertex(%d)", v)
-}
-
-func (v *Type_ARB_half_float_vertex) Parse(s string) error {
-	for k, t := range _Type_ARB_half_float_vertex_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Type_ARB_half_float_vertex", s)
-}
-
-const _Type_OES_vertex_half_float_name = "GL_HALF_FLOAT_OES"
-
-var _Type_OES_vertex_half_float_map = map[Type_OES_vertex_half_float]string{}
-
-func init() {
-	_Type_OES_vertex_half_float_map[36193] = _Type_OES_vertex_half_float_name[0:17]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Type_OES_vertex_half_float", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _Type_OES_vertex_half_float_name[0:17], Value: uint32(36193)},
-		},
-	})
-}
-
-func (v Type_OES_vertex_half_float) String() string {
-	if s, ok := _Type_OES_vertex_half_float_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Type_OES_vertex_half_float(%d)", v)
-}
-
-func (v *Type_OES_vertex_half_float) Parse(s string) error {
-	for k, t := range _Type_OES_vertex_half_float_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Type_OES_vertex_half_float", s)
-}
-
-const _UniformBlockParameter_name = "GL_UNIFORM_BLOCK_BINDINGGL_UNIFORM_BLOCK_DATA_SIZEGL_UNIFORM_BLOCK_NAME_LENGTHGL_UNIFORM_BLOCK_ACTIVE_UNIFORMSGL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICESGL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER"
-
-var _UniformBlockParameter_map = map[UniformBlockParameter]string{}
-
-func init() {
-	_UniformBlockParameter_map[35391] = _UniformBlockParameter_name[0:24]
-	_UniformBlockParameter_map[35392] = _UniformBlockParameter_name[24:50]
-	_UniformBlockParameter_map[35393] = _UniformBlockParameter_name[50:78]
-	_UniformBlockParameter_map[35394] = _UniformBlockParameter_name[78:110]
-	_UniformBlockParameter_map[35395] = _UniformBlockParameter_name[110:149]
-	_UniformBlockParameter_map[35396] = _UniformBlockParameter_name[149:193]
-	_UniformBlockParameter_map[35397] = _UniformBlockParameter_name[193:239]
-	_UniformBlockParameter_map[35398] = _UniformBlockParameter_name[239:285]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _UniformBlockParameter_name[0:24], Value: uint32(35391)},
-			{Name: _UniformBlockParameter_name[24:50], Value: uint32(35392)},
-			{Name: _UniformBlockParameter_name[50:78], Value: uint32(35393)},
-			{Name: _UniformBlockParameter_name[78:110], Value: uint32(35394)},
-			{Name: _UniformBlockParameter_name[110:149], Value: uint32(35395)},
-			{Name: _UniformBlockParameter_name[149:193], Value: uint32(35396)},
-			{Name: _UniformBlockParameter_name[193:239], Value: uint32(35397)},
-			{Name: _UniformBlockParameter_name[239:285], Value: uint32(35398)},
-		},
-	})
-}
-
-func (v UniformBlockParameter) String() string {
-	if s, ok := _UniformBlockParameter_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("UniformBlockParameter(%d)", v)
-}
-
-func (v *UniformBlockParameter) Parse(s string) error {
-	for k, t := range _UniformBlockParameter_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in UniformBlockParameter", s)
-}
-
-const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_HALF_FLOAT_ARBGL_FIXEDGL_HALF_FLOAT_OES"
-
-var _VertexAttribType_map = map[VertexAttribType]string{}
-
-func init() {
-	_VertexAttribType_map[5120] = _VertexAttribType_name[0:7]
-	_VertexAttribType_map[5121] = _VertexAttribType_name[7:23]
-	_VertexAttribType_map[5122] = _VertexAttribType_name[23:31]
-	_VertexAttribType_map[5123] = _VertexAttribType_name[31:48]
-	_VertexAttribType_map[5126] = _VertexAttribType_name[48:56]
-	_VertexAttribType_map[5131] = _VertexAttribType_name[56:73]
-	_VertexAttribType_map[5132] = _VertexAttribType_name[73:81]
-	_VertexAttribType_map[36193] = _VertexAttribType_name[81:98]
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: _VertexAttribType_name[0:7], Value: uint32(5120)},
-			{Name: _VertexAttribType_name[7:23], Value: uint32(5121)},
-			{Name: _VertexAttribType_name[23:31], Value: uint32(5122)},
-			{Name: _VertexAttribType_name[31:48], Value: uint32(5123)},
-			{Name: _VertexAttribType_name[48:56], Value: uint32(5126)},
-			{Name: _VertexAttribType_name[56:73], Value: uint32(5131)},
-			{Name: _VertexAttribType_name[73:81], Value: uint32(5132)},
-			{Name: _VertexAttribType_name[81:98], Value: uint32(36193)},
-		},
-	})
-}
-
-func (v VertexAttribType) String() string {
-	if s, ok := _VertexAttribType_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("VertexAttribType(%d)", v)
-}
-
-func (v *VertexAttribType) Parse(s string) error {
-	for k, t := range _VertexAttribType_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in VertexAttribType", s)
 }

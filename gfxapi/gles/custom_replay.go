@@ -104,7 +104,7 @@ func (i UniformLocation) remap(a atom.Atom, s *gfxapi.State) (key interface{}, r
 }
 
 func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if getContext(s).BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER] != 0 {
+	if getContext(s).BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
 		return value.RemappedPointer(i.Pointer.Address)
@@ -112,7 +112,7 @@ func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) 
 }
 
 func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if getContext(s).BoundBuffers[BufferTarget_GL_ARRAY_BUFFER] != 0 {
+	if getContext(s).BoundBuffers[GLenum_GL_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
 		return value.RemappedPointer(i.Pointer.Address)

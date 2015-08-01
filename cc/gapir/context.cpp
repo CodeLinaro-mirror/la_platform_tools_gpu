@@ -162,17 +162,17 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         int32_t width = stack->pop<int32_t>();
         uint32_t depthSize = 0;
         switch (depth_fmt) {
-            case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_DEPTH_COMPONENT16):
+            case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH_COMPONENT16):
                 depthSize = 16;
                 break;
-            case static_cast<uint32_t>(gfxapi::TexelFormat_GLES_3_0::GL_DEPTH24_STENCIL8):
+            case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH24_STENCIL8):
                 depthSize = 24;
                 break;
         }
         uint32_t stencilSize = 0;
         switch (stencil_fmt) {
-            case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_STENCIL_INDEX8):
-            case static_cast<uint32_t>(gfxapi::TexelFormat_GLES_3_0::GL_DEPTH24_STENCIL8):
+            case static_cast<uint32_t>(gfxapi::GLenum::GL_STENCIL_INDEX8):
+            case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH24_STENCIL8):
                 stencilSize = 8;
         }
          if (stack->isValid()) {

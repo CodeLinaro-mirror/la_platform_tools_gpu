@@ -406,28 +406,28 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -564,28 +564,28 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -641,28 +641,28 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -819,28 +819,28 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -890,28 +890,28 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -1007,28 +1007,28 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
                 std::shared_ptr<Renderbuffer>((new Renderbuffer()));
         std::shared_ptr<Framebuffer> l_backbuffer =
                 std::shared_ptr<Framebuffer>((new Framebuffer()));
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
+        l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_color_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_depth_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-        l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+        l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT] =
                 FramebufferAttachmentInfo()
                         .SetObject((uint32_t)(l_stencil_id))
-                        .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
-                        .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+                        .SetType(GLenum::GL_RENDERBUFFER)
+                        .SetCubeMapFace(GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
         l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)] = l_backbuffer;
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = 4294967295;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = 4294967295;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
-        l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
+        l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = (FramebufferId)(0);
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = 4294967295;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = 4294967295;
+        l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = 4;
+        l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = 4;
         for (int32_t l_i = 0; l_i < 64; ++l_i) {
             l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
                     std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
@@ -1163,7 +1163,7 @@ inline void GlesSpy::glEnableClientState(uint32_t type) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_11_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_11_result;
-        l_ctx->mCapabilities[(uint32_t)(type)] = true;
+        l_ctx->mCapabilities[type] = true;
         observe(observations.mReads);
         mImports.glEnableClientState(type);
     } while (false);
@@ -1181,7 +1181,7 @@ inline void GlesSpy::glDisableClientState(uint32_t type) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_12_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_12_result;
-        l_ctx->mCapabilities[(uint32_t)(type)] = false;
+        l_ctx->mCapabilities[type] = false;
         observe(observations.mReads);
         mImports.glDisableClientState(type);
     } while (false);
@@ -1280,7 +1280,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
 
     gapic::coder::gles::GlDiscardFramebufferEXT coder(
             observations, target, numAttachments,
-            gapic::coder::gles::DiscardFramebufferAttachment__P(
+            gapic::coder::gles::GLenum__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attachments), 0)));
     mEncoder->Object(&coder);
 }
@@ -1762,7 +1762,7 @@ inline void GlesSpy::glVertexAttribPointer(int32_t location, int32_t size, uint3
         l_a->mNormalized = normalized;
         l_a->mStride = stride;
         l_a->mPointer = data;
-        l_a->mBuffer = l_ctx->mBoundBuffers[BufferTarget::GL_ARRAY_BUFFER];
+        l_a->mBuffer = l_ctx->mBoundBuffers[GLenum::GL_ARRAY_BUFFER];
         observe(observations.mReads);
         mImports.glVertexAttribPointer(location, size, type, normalized, stride, data);
     } while (false);
@@ -1804,7 +1804,7 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, int32_t location, int32
                     reinterpret_cast<uintptr_t>(buffer_bytes_written), 0)),
             gapic::coder::gles::S32__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(vector_count), 0)),
-            gapic::coder::gles::ShaderAttribType__P(
+            gapic::coder::gles::GLenum__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(type), 0)),
             gapic::coder::gles::Char__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
@@ -1840,7 +1840,7 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
                     reinterpret_cast<uintptr_t>(buffer_bytes_written), 0)),
             gapic::coder::gles::S32__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(vector_count), 0)),
-            gapic::coder::gles::ShaderUniformType__P(
+            gapic::coder::gles::GLenum__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(type), 0)),
             gapic::coder::gles::Char__P(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(name), 0)));
@@ -1897,28 +1897,28 @@ inline void GlesSpy::glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t*
         mImports.glGetShaderiv(shader, parameter, value);
         write(slice(value, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case ShaderParameter::GL_SHADER_TYPE: */(((parameter) == (ShaderParameter::GL_SHADER_TYPE))) ? ((int32_t)(l_s->mType)) :
-            /* case ShaderParameter::GL_DELETE_STATUS: */(((parameter) == (ShaderParameter::GL_DELETE_STATUS))) ? (/* clang-format off */
+            /* case GLenum::GL_SHADER_TYPE: */(((parameter) == (GLenum::GL_SHADER_TYPE))) ? ((int32_t)(l_s->mType)) :
+            /* case GLenum::GL_DELETE_STATUS: */(((parameter) == (GLenum::GL_DELETE_STATUS))) ? (/* clang-format off */
             /* switch(l_s->mDeletable) */
                 /* case true: */(((l_s->mDeletable) == (true))) ? (1) :
                 /* case false: */(((l_s->mDeletable) == (false))) ? (0) :
                 /* default: */ 0 /* clang-format on */)
                               :
-                              /* case ShaderParameter::GL_COMPILE_STATUS: */ (
-                                      ((parameter) == (ShaderParameter::GL_COMPILE_STATUS)))
+                              /* case GLenum::GL_COMPILE_STATUS: */ (
+                                      ((parameter) == (GLenum::GL_COMPILE_STATUS)))
                                       ? (/* clang-format off */
             /* switch(l_s->mCompiled) */
                 /* case true: */(((l_s->mCompiled) == (true))) ? (1) :
                 /* case false: */(((l_s->mCompiled) == (false))) ? (0) :
                 /* default: */ 0 /* clang-format on */)
                                       :
-                                      /* case ShaderParameter::GL_INFO_LOG_LENGTH: */ ((
-                                              (parameter) == (ShaderParameter::GL_INFO_LOG_LENGTH)))
+                                      /* case GLenum::GL_INFO_LOG_LENGTH: */ (
+                                              ((parameter) == (GLenum::GL_INFO_LOG_LENGTH)))
                                               ? (int32_t((l_s->mInfoLog.count())))
                                               :
-                                              /* case ShaderParameter::GL_SHADER_SOURCE_LENGTH: */ (
+                                              /* case GLenum::GL_SHADER_SOURCE_LENGTH: */ (
                                                       ((parameter) ==
-                                                       (ShaderParameter::GL_SHADER_SOURCE_LENGTH)))
+                                                       (GLenum::GL_SHADER_SOURCE_LENGTH)))
                                                       ? (int32_t((l_s->mSource.size())))
                                                       :
                                                       /* default: */ 0 /* clang-format on */);
@@ -1999,39 +1999,39 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
-            case TextureParameter::GL_TEXTURE_MAG_FILTER: {
+            case GLenum::GL_TEXTURE_MAG_FILTER: {
                 l_t->mMagFilter = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_MIN_FILTER: {
+            case GLenum::GL_TEXTURE_MIN_FILTER: {
                 l_t->mMinFilter = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_WRAP_S: {
+            case GLenum::GL_TEXTURE_WRAP_S: {
                 l_t->mWrapS = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_WRAP_T: {
+            case GLenum::GL_TEXTURE_WRAP_T: {
                 l_t->mWrapT = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
+            case GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
                 l_t->mMaxAnisotropy = (float)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_R: {
+            case GLenum::GL_TEXTURE_SWIZZLE_R: {
                 l_t->mSwizzleR = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_G: {
+            case GLenum::GL_TEXTURE_SWIZZLE_G: {
                 l_t->mSwizzleG = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_B: {
+            case GLenum::GL_TEXTURE_SWIZZLE_B: {
                 l_t->mSwizzleB = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_A: {
+            case GLenum::GL_TEXTURE_SWIZZLE_A: {
                 l_t->mSwizzleA = (uint32_t)(value);
                 break;
             }
@@ -2056,39 +2056,39 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
         TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
         std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
         switch (parameter) {
-            case TextureParameter::GL_TEXTURE_MAG_FILTER: {
+            case GLenum::GL_TEXTURE_MAG_FILTER: {
                 l_t->mMagFilter = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_MIN_FILTER: {
+            case GLenum::GL_TEXTURE_MIN_FILTER: {
                 l_t->mMinFilter = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_WRAP_S: {
+            case GLenum::GL_TEXTURE_WRAP_S: {
                 l_t->mWrapS = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_WRAP_T: {
+            case GLenum::GL_TEXTURE_WRAP_T: {
                 l_t->mWrapT = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
+            case GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
                 l_t->mMaxAnisotropy = value;
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_R: {
+            case GLenum::GL_TEXTURE_SWIZZLE_R: {
                 l_t->mSwizzleR = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_G: {
+            case GLenum::GL_TEXTURE_SWIZZLE_G: {
                 l_t->mSwizzleG = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_B: {
+            case GLenum::GL_TEXTURE_SWIZZLE_B: {
                 l_t->mSwizzleB = (uint32_t)(value);
                 break;
             }
-            case TextureParameter::GL_TEXTURE_SWIZZLE_A: {
+            case GLenum::GL_TEXTURE_SWIZZLE_A: {
                 l_t->mSwizzleA = (uint32_t)(value);
                 break;
             }
@@ -2116,15 +2116,15 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
         mImports.glGetTexParameteriv(target, parameter, values);
         write(slice(values, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case TextureParameter::GL_TEXTURE_MAG_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MAG_FILTER))) ? ((int32_t)(l_t->mMagFilter)) :
-            /* case TextureParameter::GL_TEXTURE_MIN_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MIN_FILTER))) ? ((int32_t)(l_t->mMinFilter)) :
-            /* case TextureParameter::GL_TEXTURE_WRAP_S: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_S))) ? ((int32_t)(l_t->mWrapS)) :
-            /* case TextureParameter::GL_TEXTURE_WRAP_T: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_T))) ? ((int32_t)(l_t->mWrapT)) :
-            /* case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? ((int32_t)(l_t->mMaxAnisotropy)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_R))) ? ((int32_t)(l_t->mSwizzleR)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_G))) ? ((int32_t)(l_t->mSwizzleG)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_B))) ? ((int32_t)(l_t->mSwizzleB)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_A))) ? ((int32_t)(l_t->mSwizzleA)) :
+            /* case GLenum::GL_TEXTURE_MAG_FILTER: */(((parameter) == (GLenum::GL_TEXTURE_MAG_FILTER))) ? ((int32_t)(l_t->mMagFilter)) :
+            /* case GLenum::GL_TEXTURE_MIN_FILTER: */(((parameter) == (GLenum::GL_TEXTURE_MIN_FILTER))) ? ((int32_t)(l_t->mMinFilter)) :
+            /* case GLenum::GL_TEXTURE_WRAP_S: */(((parameter) == (GLenum::GL_TEXTURE_WRAP_S))) ? ((int32_t)(l_t->mWrapS)) :
+            /* case GLenum::GL_TEXTURE_WRAP_T: */(((parameter) == (GLenum::GL_TEXTURE_WRAP_T))) ? ((int32_t)(l_t->mWrapT)) :
+            /* case GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? ((int32_t)(l_t->mMaxAnisotropy)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_R))) ? ((int32_t)(l_t->mSwizzleR)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_G))) ? ((int32_t)(l_t->mSwizzleG)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_B))) ? ((int32_t)(l_t->mSwizzleB)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_A))) ? ((int32_t)(l_t->mSwizzleA)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -2150,15 +2150,15 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
         mImports.glGetTexParameterfv(target, parameter, values);
         write(slice(values, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case TextureParameter::GL_TEXTURE_MAG_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MAG_FILTER))) ? ((float)(l_t->mMagFilter)) :
-            /* case TextureParameter::GL_TEXTURE_MIN_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MIN_FILTER))) ? ((float)(l_t->mMinFilter)) :
-            /* case TextureParameter::GL_TEXTURE_WRAP_S: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_S))) ? ((float)(l_t->mWrapS)) :
-            /* case TextureParameter::GL_TEXTURE_WRAP_T: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_T))) ? ((float)(l_t->mWrapT)) :
-            /* case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? (l_t->mMaxAnisotropy) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_R))) ? ((float)(l_t->mSwizzleR)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_G))) ? ((float)(l_t->mSwizzleG)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_B))) ? ((float)(l_t->mSwizzleB)) :
-            /* case TextureParameter::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_A))) ? ((float)(l_t->mSwizzleA)) :
+            /* case GLenum::GL_TEXTURE_MAG_FILTER: */(((parameter) == (GLenum::GL_TEXTURE_MAG_FILTER))) ? ((float)(l_t->mMagFilter)) :
+            /* case GLenum::GL_TEXTURE_MIN_FILTER: */(((parameter) == (GLenum::GL_TEXTURE_MIN_FILTER))) ? ((float)(l_t->mMinFilter)) :
+            /* case GLenum::GL_TEXTURE_WRAP_S: */(((parameter) == (GLenum::GL_TEXTURE_WRAP_S))) ? ((float)(l_t->mWrapS)) :
+            /* case GLenum::GL_TEXTURE_WRAP_T: */(((parameter) == (GLenum::GL_TEXTURE_WRAP_T))) ? ((float)(l_t->mWrapT)) :
+            /* case GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? (l_t->mMaxAnisotropy) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_R))) ? ((float)(l_t->mSwizzleR)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_G))) ? ((float)(l_t->mSwizzleG)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_B))) ? ((float)(l_t->mSwizzleB)) :
+            /* case GLenum::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (GLenum::GL_TEXTURE_SWIZZLE_A))) ? ((float)(l_t->mSwizzleA)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -2184,7 +2184,7 @@ inline void GlesSpy::glUniform1i(int32_t location, int32_t value) {
         write(l_v, 0, value);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT;
+        l_uniform.mType = GLenum::GL_INT;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2208,7 +2208,7 @@ inline void GlesSpy::glUniform2i(int32_t location, int32_t value0, int32_t value
         write(l_v, 0, Vec2i{value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC2;
+        l_uniform.mType = GLenum::GL_INT_VEC2;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2232,7 +2232,7 @@ inline void GlesSpy::glUniform3i(int32_t location, int32_t value0, int32_t value
         write(l_v, 0, Vec3i{value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC3;
+        l_uniform.mType = GLenum::GL_INT_VEC3;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2257,7 +2257,7 @@ inline void GlesSpy::glUniform4i(int32_t location, int32_t value0, int32_t value
         write(l_v, 0, Vec4i{value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC4;
+        l_uniform.mType = GLenum::GL_INT_VEC4;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2278,7 +2278,7 @@ inline void GlesSpy::glUniform1iv(int32_t location, int32_t count, int32_t* valu
         Slice<int32_t> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT;
+        l_uniform.mType = GLenum::GL_INT;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2303,7 +2303,7 @@ inline void GlesSpy::glUniform2iv(int32_t location, int32_t count, int32_t* valu
         Slice<Vec2i> l_v = slice((Vec2i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC2;
+        l_uniform.mType = GLenum::GL_INT_VEC2;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2328,7 +2328,7 @@ inline void GlesSpy::glUniform3iv(int32_t location, int32_t count, int32_t* valu
         Slice<Vec3i> l_v = slice((Vec3i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC3;
+        l_uniform.mType = GLenum::GL_INT_VEC3;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2353,7 +2353,7 @@ inline void GlesSpy::glUniform4iv(int32_t location, int32_t count, int32_t* valu
         Slice<Vec4i> l_v = slice((Vec4i*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_INT_VEC4;
+        l_uniform.mType = GLenum::GL_INT_VEC4;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2381,7 +2381,7 @@ inline void GlesSpy::glUniform1f(int32_t location, float value) {
         write(l_v, 0, value);
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT;
+        l_uniform.mType = GLenum::GL_FLOAT;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2405,7 +2405,7 @@ inline void GlesSpy::glUniform2f(int32_t location, float value0, float value1) {
         write(l_v, 0, Vec2f{value0, value1});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC2;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2429,7 +2429,7 @@ inline void GlesSpy::glUniform3f(int32_t location, float value0, float value1, f
         write(l_v, 0, Vec3f{value0, value1, value2});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC3;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2454,7 +2454,7 @@ inline void GlesSpy::glUniform4f(int32_t location, float value0, float value1, f
         write(l_v, 0, Vec4f{value0, value1, value2, value3});
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC4;
         l_uniform.mValue = l_v.as<uint8_t>();
         l_program->mUniforms[location] = l_uniform;
     } while (false);
@@ -2475,7 +2475,7 @@ inline void GlesSpy::glUniform1fv(int32_t location, int32_t count, float* values
         Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT;
+        l_uniform.mType = GLenum::GL_FLOAT;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2501,7 +2501,7 @@ inline void GlesSpy::glUniform2fv(int32_t location, int32_t count, float* values
         Slice<Vec2f> l_v = slice((Vec2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC2;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2527,7 +2527,7 @@ inline void GlesSpy::glUniform3fv(int32_t location, int32_t count, float* values
         Slice<Vec3f> l_v = slice((Vec3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC3;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2553,7 +2553,7 @@ inline void GlesSpy::glUniform4fv(int32_t location, int32_t count, float* values
         Slice<Vec4f> l_v = slice((Vec4f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
+        l_uniform.mType = GLenum::GL_FLOAT_VEC4;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2580,7 +2580,7 @@ inline void GlesSpy::glUniformMatrix2fv(int32_t location, int32_t count, bool tr
         Slice<Mat2f> l_v = slice((Mat2f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
+        l_uniform.mType = GLenum::GL_FLOAT_MAT2;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2607,7 +2607,7 @@ inline void GlesSpy::glUniformMatrix3fv(int32_t location, int32_t count, bool tr
         Slice<Mat3f> l_v = slice((Mat3f*)(values), (uint64_t)(0), (uint64_t)(count));
         std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
         Uniform l_uniform = l_program->mUniforms[location];
-        l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT3;
+        l_uniform.mType = GLenum::GL_FLOAT_MAT3;
         l_uniform.mValue = clone(l_v.as<uint8_t>());
         l_program->mUniforms[location] = l_uniform;
         observe(observations.mReads);
@@ -2915,8 +2915,8 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_55_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_55_result;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = mask;
-        l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = mask;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = mask;
+        l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = mask;
         observe(observations.mReads);
         mImports.glStencilMask(mask);
     } while (false);
@@ -2935,17 +2935,17 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
         std::shared_ptr<Context> l_GetContext_56_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_56_result;
         switch (face) {
-            case FaceMode::GL_FRONT: {
-                l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = mask;
+            case GLenum::GL_FRONT: {
+                l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = mask;
                 break;
             }
-            case FaceMode::GL_BACK: {
-                l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = mask;
+            case GLenum::GL_BACK: {
+                l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = mask;
                 break;
             }
-            case FaceMode::GL_FRONT_AND_BACK: {
-                l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT] = mask;
-                l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK] = mask;
+            case GLenum::GL_FRONT_AND_BACK: {
+                l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT] = mask;
+                l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = mask;
                 break;
             }
         }
@@ -3172,19 +3172,18 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
         std::shared_ptr<Context> l_GetContext_65_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_65_result;
         switch (target) {
-            case TextureImageTarget::GL_TEXTURE_2D: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_2D];
+            case GLenum::GL_TEXTURE_2D: {
+                TextureId l_id =
+                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
-                                    .SetFormat((uint32_t)(format));
+                                    .SetFormat(format);
                 if (data != nullptr) {
-                    if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] ==
-                        (BufferId)(0)) {
+                    if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
                                 slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                     }
@@ -3193,27 +3192,26 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
                 }
                 l_t->mTexture2D[level] = l_l;
                 l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_CUBE_MAP];
+                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
-                                    .SetFormat((uint32_t)(format));
+                                    .SetFormat(format);
                 if (data != nullptr) {
-                    if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] ==
-                        (BufferId)(0)) {
+                    if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
                                 slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                     }
@@ -3221,10 +3219,10 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
                     l_l.mData = make<uint8_t>((uint64_t)(l_l.mSize));
                 }
                 CubemapLevel l_cube = l_t->mCubemap[level];
-                l_cube.mFaces[(uint32_t)(target)] = l_l;
+                l_cube.mFaces[target] = l_l;
                 l_t->mCubemap[level] = l_cube;
                 l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
         }
@@ -3253,51 +3251,51 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
         std::shared_ptr<Context> l_GetContext_66_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_66_result;
         switch (target) {
-            case TextureImageTarget::GL_TEXTURE_2D: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_2D];
+            case GLenum::GL_TEXTURE_2D: {
+                TextureId l_id =
+                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
-                                    .SetFormat((uint32_t)(format));
-                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                                    .SetFormat(format);
+                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
                             clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                 }
                 l_t->mTexture2D[level] = l_l;
                 l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_CUBE_MAP];
+                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize(imageSize((uint32_t)(width), (uint32_t)(height),
                                                        format, type))
-                                    .SetFormat((uint32_t)(format));
-                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                                    .SetFormat(format);
+                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
                             clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                 }
                 CubemapLevel l_cube = l_t->mCubemap[level];
-                l_cube.mFaces[(uint32_t)(target)] = l_l;
+                l_cube.mFaces[target] = l_l;
                 l_t->mCubemap[level] = l_cube;
                 l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
         }
@@ -3361,49 +3359,49 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
         std::shared_ptr<Context> l_GetContext_67_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_67_result;
         switch (target) {
-            case TextureImageTarget::GL_TEXTURE_2D: {
-                TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_2D];
+            case GLenum::GL_TEXTURE_2D: {
+                TextureId l_id =
+                        l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize((uint32_t)(image_size))
-                                    .SetFormat((uint32_t)(format));
-                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                                    .SetFormat(format);
+                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
                             clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                 }
                 l_t->mTexture2D[level] = l_l;
                 l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
-            case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
+            case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
                 TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                     [TextureTarget::GL_TEXTURE_CUBE_MAP];
+                                                     [GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
                 Image l_l = Image()
                                     .SetWidth(width)
                                     .SetHeight(height)
                                     .SetSize((uint32_t)(image_size))
-                                    .SetFormat((uint32_t)(format));
-                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                                    .SetFormat(format);
+                if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
                             clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
                 }
                 CubemapLevel l_cube = l_t->mCubemap[level];
-                l_cube.mFaces[(uint32_t)(target)] = l_l;
+                l_cube.mFaces[target] = l_l;
                 l_t->mCubemap[level] = l_cube;
                 l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = (uint32_t)(format);
+                l_t->mFormat = format;
                 break;
             }
         }
@@ -3464,8 +3462,8 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
     do {
         observe(observations.mReads);
         mImports.glReadPixels(x, y, width, height, format, type, data);
-        write(slice(data, (uint64_t)(0), (uint64_t)(imageSize((uint32_t)(width), (uint32_t)(height),
-                                                              (uint32_t)(format), type))));
+        write(slice(data, (uint64_t)(0),
+                    (uint64_t)(imageSize((uint32_t)(width), (uint32_t)(height), format, type))));
     } while (false);
     observe(observations.mWrites);
 
@@ -3515,9 +3513,9 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, uint32_t framebuffer) {
             l_ctx->mInstances.mFramebuffers[framebuffer] =
                     std::shared_ptr<Framebuffer>((new Framebuffer()));
         }
-        if (target == FramebufferTarget::GL_FRAMEBUFFER) {
-            l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = framebuffer;
-            l_ctx->mBoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = framebuffer;
+        if (target == GLenum::GL_FRAMEBUFFER) {
+            l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER] = framebuffer;
+            l_ctx->mBoundFramebuffers[GLenum::GL_DRAW_FRAMEBUFFER] = framebuffer;
         } else {
             l_ctx->mBoundFramebuffers[target] = framebuffer;
         }
@@ -3731,9 +3729,9 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
         mImports.glGetRenderbufferParameteriv(target, parameter, values);
         write(slice(values, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case RenderbufferParameter::GL_RENDERBUFFER_WIDTH: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_WIDTH))) ? (l_rb->mWidth) :
-            /* case RenderbufferParameter::GL_RENDERBUFFER_HEIGHT: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_HEIGHT))) ? (l_rb->mHeight) :
-            /* case RenderbufferParameter::GL_RENDERBUFFER_INTERNAL_FORMAT: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_INTERNAL_FORMAT))) ? ((int32_t)(l_rb->mFormat)) :
+            /* case GLenum::GL_RENDERBUFFER_WIDTH: */(((parameter) == (GLenum::GL_RENDERBUFFER_WIDTH))) ? (l_rb->mWidth) :
+            /* case GLenum::GL_RENDERBUFFER_HEIGHT: */(((parameter) == (GLenum::GL_RENDERBUFFER_HEIGHT))) ? (l_rb->mHeight) :
+            /* case GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT: */(((parameter) == (GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT))) ? ((int32_t)(l_rb->mFormat)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -3899,8 +3897,8 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
         mImports.glGetBufferParameteriv(target, parameter, value);
         write(slice(value, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case BufferParameter::GL_BUFFER_SIZE: */(((parameter) == (BufferParameter::GL_BUFFER_SIZE))) ? (l_b->mSize) :
-            /* case BufferParameter::GL_BUFFER_USAGE: */(((parameter) == (BufferParameter::GL_BUFFER_USAGE))) ? ((int32_t)(l_b->mUsage)) :
+            /* case GLenum::GL_BUFFER_SIZE: */(((parameter) == (GLenum::GL_BUFFER_SIZE))) ? (l_b->mSize) :
+            /* case GLenum::GL_BUFFER_USAGE: */(((parameter) == (GLenum::GL_BUFFER_USAGE))) ? ((int32_t)(l_b->mUsage)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -4419,7 +4417,7 @@ inline void GlesSpy::glClear(uint32_t mask) {
 
     Observations observations;
     do {
-        if ((mask & ClearMask::GL_COLOR_BUFFER_BIT) != 0) {
+        if ((mask & GLbitfield::GL_COLOR_BUFFER_BIT) != 0) {
         }
         observe(observations.mReads);
         mImports.glClear(mask);
@@ -4536,9 +4534,9 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
         std::shared_ptr<Context> l_ctx = l_GetContext_110_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+            /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_DRAW_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_READ_FRAMEBUFFER))) ? (GLenum::GL_READ_FRAMEBUFFER) :
             /* default: */ 0 /* clang-format on */;
         FramebufferId l_framebufferId = l_ctx->mBoundFramebuffers[l_target];
         std::shared_ptr<Framebuffer> l_framebuffer =
@@ -4546,13 +4544,13 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
         FramebufferAttachmentInfo l_attachment =
                 l_framebuffer->mAttachments[framebuffer_attachment];
         if (renderbuffer == (RenderbufferId)(0)) {
-            l_attachment.mType = FramebufferAttachmentType::GL_NONE;
+            l_attachment.mType = GLenum::GL_NONE;
         } else {
-            l_attachment.mType = FramebufferAttachmentType::GL_RENDERBUFFER;
+            l_attachment.mType = GLenum::GL_RENDERBUFFER;
         }
         l_attachment.mObject = (uint32_t)(renderbuffer);
         l_attachment.mTextureLevel = 0;
-        l_attachment.mCubeMapFace = CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+        l_attachment.mCubeMapFace = GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
         l_framebuffer->mAttachments[framebuffer_attachment] = l_attachment;
         observe(observations.mReads);
         mImports.glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
@@ -4580,9 +4578,9 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
         std::shared_ptr<Context> l_ctx = l_GetContext_111_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+            /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_DRAW_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_READ_FRAMEBUFFER))) ? (GLenum::GL_READ_FRAMEBUFFER) :
             /* default: */ 0 /* clang-format on */;
         FramebufferId l_framebufferId = l_ctx->mBoundFramebuffers[l_target];
         std::shared_ptr<Framebuffer> l_framebuffer =
@@ -4590,23 +4588,23 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
         FramebufferAttachmentInfo l_attachment =
                 l_framebuffer->mAttachments[framebuffer_attachment];
         if (texture == (TextureId)(0)) {
-            l_attachment.mType = FramebufferAttachmentType::GL_NONE;
+            l_attachment.mType = GLenum::GL_NONE;
             l_attachment.mObject = 0;
             l_attachment.mTextureLevel = 0;
-            l_attachment.mCubeMapFace = CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+            l_attachment.mCubeMapFace = GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
         } else {
-            l_attachment.mType = FramebufferAttachmentType::GL_TEXTURE;
+            l_attachment.mType = GLenum::GL_TEXTURE;
             l_attachment.mObject = (uint32_t)(texture);
             l_attachment.mTextureLevel = level;
             l_attachment.mCubeMapFace = /* clang-format off */
             /* switch(texture_target) */
-                /* case TextureImageTarget::GL_TEXTURE_2D: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_2D))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y) :
-                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z) :
+                /* case GLenum::GL_TEXTURE_2D: */(((texture_target) == (GLenum::GL_TEXTURE_2D))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z) :
                 /* default: */ 0 /* clang-format on */;
         }
         l_framebuffer->mAttachments[framebuffer_attachment] = l_attachment;
@@ -4635,9 +4633,9 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
         std::shared_ptr<Context> l_ctx = l_GetContext_112_result;
         uint32_t l_target = /* clang-format off */
         /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
-            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+            /* case GLenum::GL_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_DRAW_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (GLenum::GL_READ_FRAMEBUFFER))) ? (GLenum::GL_READ_FRAMEBUFFER) :
             /* default: */ 0 /* clang-format on */;
         FramebufferId l_framebufferId = l_ctx->mBoundFramebuffers[l_target];
         std::shared_ptr<Framebuffer> l_framebuffer =
@@ -4648,10 +4646,10 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
                                                        value);
         write(slice(value, 0, 1), 0, /* clang-format off */
         /* switch(parameter) */
-            /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE))) ? ((int32_t)(l_a.mType)) :
-            /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME))) ? ((int32_t)(l_a.mObject)) :
-            /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL))) ? (l_a.mTextureLevel) :
-            /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE))) ? ((int32_t)(l_a.mCubeMapFace)) :
+            /* case GLenum::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: */(((parameter) == (GLenum::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE))) ? ((int32_t)(l_a.mType)) :
+            /* case GLenum::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: */(((parameter) == (GLenum::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME))) ? ((int32_t)(l_a.mObject)) :
+            /* case GLenum::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: */(((parameter) == (GLenum::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL))) ? (l_a.mTextureLevel) :
+            /* case GLenum::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: */(((parameter) == (GLenum::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE))) ? ((int32_t)(l_a.mCubeMapFace)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -4673,7 +4671,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
         std::shared_ptr<Context> l_GetContext_113_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_113_result;
         uint32_t l_count = (uint32_t)(element_count);
-        BufferId l_id = l_ctx->mBoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER];
+        BufferId l_id = l_ctx->mBoundBuffers[GLenum::GL_ELEMENT_ARRAY_BUFFER];
         if (l_id != (BufferId)(0)) {
             Slice<uint8_t> l_index_data = l_ctx->mInstances.mBuffers[l_id]->mData;
             uint32_t l_offset = (uint32_t)((uint64_t)(indices));
@@ -4692,14 +4690,14 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                     uint32_t l_vertexAttribTypeSize_115_t = l_arr->mType;
                     uint32_t l_vertexAttribTypeSize_115_result = /* clang-format off */
                     /* switch(l_vertexAttribTypeSize_115_t) */
-                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_BYTE))) ? (1) :
+                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_SHORT))) ? (2) :
+                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_FIXED))) ? (4) :
+                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_FLOAT))) ? (4) :
+                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_115_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
                     uint32_t l_elsize = l_vertexAttribTypeSize_115_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
@@ -4732,14 +4730,14 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                     uint32_t l_vertexAttribTypeSize_117_t = l_arr->mType;
                     uint32_t l_vertexAttribTypeSize_117_result = /* clang-format off */
                     /* switch(l_vertexAttribTypeSize_117_t) */
-                        /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                        /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                        /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                        /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
-                        /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                        /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_BYTE))) ? (1) :
+                        /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                        /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_SHORT))) ? (2) :
+                        /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                        /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_FIXED))) ? (4) :
+                        /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_FLOAT))) ? (4) :
+                        /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                        /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_117_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                         /* default: */ 0 /* clang-format on */;
                     uint32_t l_elsize = l_vertexAttribTypeSize_117_result * l_arr->mSize;
                     uint32_t l_elstride = /* clang-format off */
@@ -4758,9 +4756,9 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
             uint32_t l_IndexSize_118_indices_type = indices_type;
             uint32_t l_IndexSize_118_result = /* clang-format off */
             /* switch(l_IndexSize_118_indices_type) */
-                /* case IndicesType::GL_UNSIGNED_BYTE: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
-                /* case IndicesType::GL_UNSIGNED_SHORT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
-                /* case IndicesType::GL_UNSIGNED_INT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
+                /* case GLenum::GL_UNSIGNED_BYTE: */(((l_IndexSize_118_indices_type) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case GLenum::GL_UNSIGNED_SHORT: */(((l_IndexSize_118_indices_type) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case GLenum::GL_UNSIGNED_INT: */(((l_IndexSize_118_indices_type) == (GLenum::GL_UNSIGNED_INT))) ? (4) :
                 /* default: */ 0 /* clang-format on */;
             read(slice(l_index_data, (uint64_t)(0),
                        (uint64_t)((uint32_t)(element_count)*l_IndexSize_118_result)));
@@ -4797,14 +4795,14 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
                 uint32_t l_vertexAttribTypeSize_121_t = l_arr->mType;
                 uint32_t l_vertexAttribTypeSize_121_result = /* clang-format off */
                 /* switch(l_vertexAttribTypeSize_121_t) */
-                    /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                    /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                    /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                    /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                    /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                    /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                    /* case VertexAttribType::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_ARB))) ? (2) :
-                    /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                    /* case GLenum::GL_BYTE: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_BYTE))) ? (1) :
+                    /* case GLenum::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_UNSIGNED_BYTE))) ? (1) :
+                    /* case GLenum::GL_SHORT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_SHORT))) ? (2) :
+                    /* case GLenum::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_UNSIGNED_SHORT))) ? (2) :
+                    /* case GLenum::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_FIXED))) ? (4) :
+                    /* case GLenum::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_FLOAT))) ? (4) :
+                    /* case GLenum::GL_HALF_FLOAT_ARB: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_HALF_FLOAT_ARB))) ? (2) :
+                    /* case GLenum::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (GLenum::GL_HALF_FLOAT_OES))) ? (2) :
                     /* default: */ 0 /* clang-format on */;
                 uint32_t l_elsize = l_vertexAttribTypeSize_121_result * l_arr->mSize;
                 uint32_t l_elstride = /* clang-format off */
@@ -4869,63 +4867,63 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
         observe(observations.mReads);
         mImports.glGetBooleanv(param, values);
         switch (param) {
-            case StateVariable::GL_BLEND: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_BLEND]);
+            case GLenum::GL_BLEND: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_BLEND]);
                 break;
             }
-            case StateVariable::GL_CULL_FACE: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_CULL_FACE]);
+            case GLenum::GL_CULL_FACE: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_CULL_FACE]);
                 break;
             }
-            case StateVariable::GL_DEPTH_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_DEPTH_TEST]);
+            case GLenum::GL_DEPTH_TEST: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_DEPTH_TEST]);
                 break;
             }
-            case StateVariable::GL_DITHER: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_DITHER]);
+            case GLenum::GL_DITHER: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_DITHER]);
                 break;
             }
-            case StateVariable::GL_POLYGON_OFFSET_FILL: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_POLYGON_OFFSET_FILL]);
+            case GLenum::GL_POLYGON_OFFSET_FILL: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_POLYGON_OFFSET_FILL]);
                 break;
             }
-            case StateVariable::GL_SAMPLE_ALPHA_TO_COVERAGE: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_SAMPLE_ALPHA_TO_COVERAGE]);
+            case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE]);
                 break;
             }
-            case StateVariable::GL_SAMPLE_COVERAGE: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_SAMPLE_COVERAGE]);
+            case GLenum::GL_SAMPLE_COVERAGE: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SAMPLE_COVERAGE]);
                 break;
             }
-            case StateVariable::GL_SCISSOR_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_SCISSOR_TEST]);
+            case GLenum::GL_SCISSOR_TEST: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SCISSOR_TEST]);
                 break;
             }
-            case StateVariable::GL_STENCIL_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[Capability::GL_STENCIL_TEST]);
+            case GLenum::GL_STENCIL_TEST: {
+                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_STENCIL_TEST]);
                 break;
             }
-            case StateVariable::GL_DEPTH_WRITEMASK: {
+            case GLenum::GL_DEPTH_WRITEMASK: {
                 write(l_v, 0, l_ctx->mRasterizing.mDepthMask);
                 break;
             }
-            case StateVariable::GL_COLOR_WRITEMASK: {
+            case GLenum::GL_COLOR_WRITEMASK: {
                 write(l_v, 0, l_ctx->mRasterizing.mColorMaskRed);
                 write(l_v, 1, l_ctx->mRasterizing.mColorMaskGreen);
                 write(l_v, 2, l_ctx->mRasterizing.mColorMaskBlue);
                 write(l_v, 3, l_ctx->mRasterizing.mColorMaskAlpha);
                 break;
             }
-            case StateVariable::GL_SAMPLE_COVERAGE_INVERT: {
+            case GLenum::GL_SAMPLE_COVERAGE_INVERT: {
                 write(l_v, 0, l_ctx->mRasterizing.mSampleCoverageInvert);
                 break;
             }
-            case StateVariable::GL_SHADER_COMPILER: {
+            case GLenum::GL_SHADER_COMPILER: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            case GLenum::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
@@ -4952,53 +4950,53 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
         observe(observations.mReads);
         mImports.glGetFloatv(param, values);
         switch (param) {
-            case StateVariable::GL_DEPTH_RANGE: {
+            case GLenum::GL_DEPTH_RANGE: {
                 write(l_v, 0, l_ctx->mRasterizing.mDepthNear);
                 write(l_v, 1, l_ctx->mRasterizing.mDepthFar);
                 break;
             }
-            case StateVariable::GL_LINE_WIDTH: {
+            case GLenum::GL_LINE_WIDTH: {
                 write(l_v, 0, l_ctx->mRasterizing.mLineWidth);
                 break;
             }
-            case StateVariable::GL_POLYGON_OFFSET_FACTOR: {
+            case GLenum::GL_POLYGON_OFFSET_FACTOR: {
                 write(l_v, 0, l_ctx->mRasterizing.mPolygonOffsetFactor);
                 break;
             }
-            case StateVariable::GL_POLYGON_OFFSET_UNITS: {
+            case GLenum::GL_POLYGON_OFFSET_UNITS: {
                 write(l_v, 0, l_ctx->mRasterizing.mPolygonOffsetUnits);
                 break;
             }
-            case StateVariable::GL_SAMPLE_COVERAGE_VALUE: {
+            case GLenum::GL_SAMPLE_COVERAGE_VALUE: {
                 write(l_v, 0, l_ctx->mRasterizing.mSampleCoverageValue);
                 break;
             }
-            case StateVariable::GL_COLOR_CLEAR_VALUE: {
+            case GLenum::GL_COLOR_CLEAR_VALUE: {
                 write(l_v, 0, l_ctx->mClearing.mClearColor.mRed);
                 write(l_v, 1, l_ctx->mClearing.mClearColor.mGreen);
                 write(l_v, 2, l_ctx->mClearing.mClearColor.mBlue);
                 write(l_v, 3, l_ctx->mClearing.mClearColor.mAlpha);
                 break;
             }
-            case StateVariable::GL_DEPTH_CLEAR_VALUE: {
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
                 write(l_v, 0, l_ctx->mClearing.mClearDepth);
                 break;
             }
-            case StateVariable::GL_ALIASED_LINE_WIDTH_RANGE: {
+            case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 write(l_v, 1,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1]);
                 break;
             }
-            case StateVariable::GL_ALIASED_POINT_SIZE_RANGE: {
+            case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 write(l_v, 1,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1]);
                 break;
             }
-            case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            case GLenum::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
@@ -5025,185 +5023,181 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
         observe(observations.mReads);
         mImports.glGetIntegerv(param, values);
         switch (param) {
-            case StateVariable::GL_ACTIVE_TEXTURE: {
+            case GLenum::GL_ACTIVE_TEXTURE: {
                 write(l_v, 0, (int32_t)(l_ctx->mActiveTextureUnit));
                 break;
             }
-            case StateVariable::GL_ARRAY_BUFFER_BINDING: {
-                write(l_v, 0, (int32_t)(l_ctx->mBoundBuffers[BufferTarget::GL_ARRAY_BUFFER]));
+            case GLenum::GL_ARRAY_BUFFER_BINDING: {
+                write(l_v, 0, (int32_t)(l_ctx->mBoundBuffers[GLenum::GL_ARRAY_BUFFER]));
                 break;
             }
-            case StateVariable::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
-                write(l_v, 0,
-                      (int32_t)(l_ctx->mBoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER]));
+            case GLenum::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+                write(l_v, 0, (int32_t)(l_ctx->mBoundBuffers[GLenum::GL_ELEMENT_ARRAY_BUFFER]));
                 break;
             }
-            case StateVariable::GL_BLEND_SRC_ALPHA: {
+            case GLenum::GL_BLEND_SRC_ALPHA: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mSrcAlphaBlendFactor));
                 break;
             }
-            case StateVariable::GL_BLEND_SRC_RGB: {
+            case GLenum::GL_BLEND_SRC_RGB: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mSrcRgbBlendFactor));
                 break;
             }
-            case StateVariable::GL_BLEND_DST_ALPHA: {
+            case GLenum::GL_BLEND_DST_ALPHA: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mDstAlphaBlendFactor));
                 break;
             }
-            case StateVariable::GL_BLEND_DST_RGB: {
+            case GLenum::GL_BLEND_DST_RGB: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mDstRgbBlendFactor));
                 break;
             }
-            case StateVariable::GL_BLEND_EQUATION_RGB: {
+            case GLenum::GL_BLEND_EQUATION_RGB: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mBlendEquationRgb));
                 break;
             }
-            case StateVariable::GL_BLEND_EQUATION_ALPHA: {
+            case GLenum::GL_BLEND_EQUATION_ALPHA: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mBlendEquationAlpha));
                 break;
             }
-            case StateVariable::GL_BLEND_COLOR: {
+            case GLenum::GL_BLEND_COLOR: {
                 write(l_v, 0, (int32_t)(l_ctx->mBlending.mBlendColor.mRed));
                 write(l_v, 1, (int32_t)(l_ctx->mBlending.mBlendColor.mGreen));
                 write(l_v, 2, (int32_t)(l_ctx->mBlending.mBlendColor.mBlue));
                 write(l_v, 3, (int32_t)(l_ctx->mBlending.mBlendColor.mAlpha));
                 break;
             }
-            case StateVariable::GL_DEPTH_FUNC: {
+            case GLenum::GL_DEPTH_FUNC: {
                 write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mDepthTestFunction));
                 break;
             }
-            case StateVariable::GL_DEPTH_CLEAR_VALUE: {
+            case GLenum::GL_DEPTH_CLEAR_VALUE: {
                 write(l_v, 0, (int32_t)(l_ctx->mClearing.mClearDepth));
                 break;
             }
-            case StateVariable::GL_STENCIL_WRITEMASK: {
-                write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT]));
+            case GLenum::GL_STENCIL_WRITEMASK: {
+                write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mStencilMask[GLenum::GL_FRONT]));
                 break;
             }
-            case StateVariable::GL_STENCIL_BACK_WRITEMASK: {
-                write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK]));
+            case GLenum::GL_STENCIL_BACK_WRITEMASK: {
+                write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK]));
                 break;
             }
-            case StateVariable::GL_VIEWPORT: {
+            case GLenum::GL_VIEWPORT: {
                 write(l_v, 0, l_ctx->mRasterizing.mViewport.mX);
                 write(l_v, 1, l_ctx->mRasterizing.mViewport.mY);
                 write(l_v, 2, l_ctx->mRasterizing.mViewport.mWidth);
                 write(l_v, 3, l_ctx->mRasterizing.mViewport.mHeight);
                 break;
             }
-            case StateVariable::GL_SCISSOR_BOX: {
+            case GLenum::GL_SCISSOR_BOX: {
                 write(l_v, 0, l_ctx->mRasterizing.mScissor.mX);
                 write(l_v, 1, l_ctx->mRasterizing.mScissor.mY);
                 write(l_v, 2, l_ctx->mRasterizing.mScissor.mWidth);
                 write(l_v, 3, l_ctx->mRasterizing.mScissor.mHeight);
                 break;
             }
-            case StateVariable::GL_FRONT_FACE: {
+            case GLenum::GL_FRONT_FACE: {
                 write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mFrontFace));
                 break;
             }
-            case StateVariable::GL_CULL_FACE_MODE: {
+            case GLenum::GL_CULL_FACE_MODE: {
                 write(l_v, 0, (int32_t)(l_ctx->mRasterizing.mCullFace));
                 break;
             }
-            case StateVariable::GL_STENCIL_CLEAR_VALUE: {
+            case GLenum::GL_STENCIL_CLEAR_VALUE: {
                 write(l_v, 0, l_ctx->mClearing.mClearStencil);
                 break;
             }
-            case StateVariable::GL_FRAMEBUFFER_BINDING: {
-                write(l_v, 0,
-                      (int32_t)(l_ctx->mBoundFramebuffers[FramebufferTarget::GL_FRAMEBUFFER]));
+            case GLenum::GL_FRAMEBUFFER_BINDING: {
+                write(l_v, 0, (int32_t)(l_ctx->mBoundFramebuffers[GLenum::GL_FRAMEBUFFER]));
                 break;
             }
-            case StateVariable::GL_READ_FRAMEBUFFER_BINDING: {
-                write(l_v, 0,
-                      (int32_t)(l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER]));
+            case GLenum::GL_READ_FRAMEBUFFER_BINDING: {
+                write(l_v, 0, (int32_t)(l_ctx->mBoundFramebuffers[GLenum::GL_READ_FRAMEBUFFER]));
                 break;
             }
-            case StateVariable::GL_RENDERBUFFER_BINDING: {
-                write(l_v, 0,
-                      (int32_t)(l_ctx->mBoundRenderbuffers[RenderbufferTarget::GL_RENDERBUFFER]));
+            case GLenum::GL_RENDERBUFFER_BINDING: {
+                write(l_v, 0, (int32_t)(l_ctx->mBoundRenderbuffers[GLenum::GL_RENDERBUFFER]));
                 break;
             }
-            case StateVariable::GL_CURRENT_PROGRAM: {
+            case GLenum::GL_CURRENT_PROGRAM: {
                 write(l_v, 0, (int32_t)(l_ctx->mBoundProgram));
                 break;
             }
-            case StateVariable::GL_TEXTURE_BINDING_2D: {
+            case GLenum::GL_TEXTURE_BINDING_2D: {
                 write(l_v, 0, (int32_t)(l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                            [TextureTarget::GL_TEXTURE_2D]));
+                                                            [GLenum::GL_TEXTURE_2D]));
                 break;
             }
-            case StateVariable::GL_TEXTURE_BINDING_CUBE_MAP: {
+            case GLenum::GL_TEXTURE_BINDING_CUBE_MAP: {
                 write(l_v, 0, (int32_t)(l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
-                                                            [TextureTarget::GL_TEXTURE_CUBE_MAP]));
+                                                            [GLenum::GL_TEXTURE_CUBE_MAP]));
                 break;
             }
-            case StateVariable::GL_GENERATE_MIPMAP_HINT: {
+            case GLenum::GL_GENERATE_MIPMAP_HINT: {
                 write(l_v, 0, (int32_t)(l_ctx->mGenerateMipmapHint));
                 break;
             }
-            case StateVariable::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+            case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+            case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+            case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_RENDERBUFFER_SIZE: {
+            case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_TEXTURE_IMAGE_UNITS: {
+            case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_TEXTURE_SIZE: {
+            case GLenum::GL_MAX_TEXTURE_SIZE: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_VARYING_VECTORS: {
+            case GLenum::GL_MAX_VARYING_VECTORS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_VERTEX_ATTRIBS: {
+            case GLenum::GL_MAX_VERTEX_ATTRIBS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+            case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+            case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_MAX_VIEWPORT_DIMS: {
+            case GLenum::GL_MAX_VIEWPORT_DIMS: {
                 auto l_max_width =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 auto l_max_height =
@@ -5212,88 +5206,88 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                 write(l_v, 1, l_max_height);
                 break;
             }
-            case StateVariable::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+            case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_NUM_SHADER_BINARY_FORMATS: {
+            case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_PACK_ALIGNMENT: {
-                write(l_v, 0, l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT]);
+            case GLenum::GL_PACK_ALIGNMENT: {
+                write(l_v, 0, l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT]);
                 break;
             }
-            case StateVariable::GL_UNPACK_ALIGNMENT: {
-                write(l_v, 0, l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT]);
+            case GLenum::GL_UNPACK_ALIGNMENT: {
+                write(l_v, 0, l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT]);
                 break;
             }
-            case StateVariable::GL_ALPHA_BITS: {
+            case GLenum::GL_ALPHA_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_BLUE_BITS: {
+            case GLenum::GL_BLUE_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_GREEN_BITS: {
+            case GLenum::GL_GREEN_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_RED_BITS: {
+            case GLenum::GL_RED_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_DEPTH_BITS: {
+            case GLenum::GL_DEPTH_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_SAMPLE_BUFFERS: {
+            case GLenum::GL_SAMPLE_BUFFERS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_SAMPLES: {
+            case GLenum::GL_SAMPLES: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_STENCIL_BITS: {
+            case GLenum::GL_STENCIL_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_SUBPIXEL_BITS: {
+            case GLenum::GL_SUBPIXEL_BITS: {
                 auto l_result =
                         slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
-            case StateVariable::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+            case GLenum::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            case GLenum::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
-            case StateVariable::GL_GPU_DISJOINT_EXT: {
+            case GLenum::GL_GPU_DISJOINT_EXT: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
@@ -5503,7 +5497,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
 
     gapic::coder::gles::GlInvalidateFramebuffer coder(
             observations, target, count,
-            gapic::coder::gles::FramebufferAttachment__CP(
+            gapic::coder::gles::GLenum__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(attachments), 0)));
     mEncoder->Object(&coder);
 }
@@ -6150,14 +6144,14 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
         std::shared_ptr<Context> l_ctx = l_GetContext_137_result;
         std::shared_ptr<Framebuffer> l_backbuffer =
                 l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)];
-        RenderbufferId l_color_id = (RenderbufferId)(
-                l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0].mObject);
+        RenderbufferId l_color_id =
+                (RenderbufferId)(l_backbuffer->mAttachments[GLenum::GL_COLOR_ATTACHMENT0].mObject);
         std::shared_ptr<Renderbuffer> l_color_buffer = l_ctx->mInstances.mRenderbuffers[l_color_id];
-        RenderbufferId l_depth_id = (RenderbufferId)(
-                l_backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT].mObject);
+        RenderbufferId l_depth_id =
+                (RenderbufferId)(l_backbuffer->mAttachments[GLenum::GL_DEPTH_ATTACHMENT].mObject);
         std::shared_ptr<Renderbuffer> l_depth_buffer = l_ctx->mInstances.mRenderbuffers[l_depth_id];
-        RenderbufferId l_stencil_id = (RenderbufferId)(
-                l_backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT].mObject);
+        RenderbufferId l_stencil_id =
+                (RenderbufferId)(l_backbuffer->mAttachments[GLenum::GL_STENCIL_ATTACHMENT].mObject);
         std::shared_ptr<Renderbuffer> l_stencil_buffer =
                 l_ctx->mInstances.mRenderbuffers[l_stencil_id];
         l_color_buffer->mWidth = width;

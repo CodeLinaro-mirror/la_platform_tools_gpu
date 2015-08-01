@@ -73,13 +73,13 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 
 		var (
 			origProgramID            = c.BoundProgram
-			origRenderbufferID       = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
-			origReadFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
-			origDrawFramebufferID    = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
-			origTextureID            = c.TextureUnits[c.ActiveTextureUnit][TextureTarget_GL_TEXTURE_2D]
-			origArrayBufferID        = c.BoundBuffers[BufferTarget_GL_ARRAY_BUFFER]
-			origElementArrayBufferID = c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
-			origActiveTextureUnit    = int32(c.ActiveTextureUnit - TextureUnit_GL_TEXTURE0)
+			origRenderbufferID       = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
+			origReadFramebufferID    = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
+			origDrawFramebufferID    = c.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER]
+			origTextureID            = c.TextureUnits[c.ActiveTextureUnit][GLenum_GL_TEXTURE_2D]
+			origArrayBufferID        = c.BoundBuffers[GLenum_GL_ARRAY_BUFFER]
+			origElementArrayBufferID = c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
+			origActiveTextureUnit    = int32(c.ActiveTextureUnit - GLenum_GL_TEXTURE0)
 
 			inW  = int32(depthW)
 			inH  = int32(depthH)
@@ -103,12 +103,12 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 
 		// Temporarily change rasterizing/blending state and enable VAP 0.
 		undoList := []atom.Atom{}
-		for _, cap := range []Capability{
-			Capability_GL_BLEND,
-			Capability_GL_CULL_FACE,
-			Capability_GL_DEPTH_TEST,
-			Capability_GL_SCISSOR_TEST,
-			Capability_GL_STENCIL_TEST,
+		for _, cap := range []GLenum{
+			GLenum_GL_BLEND,
+			GLenum_GL_CULL_FACE,
+			GLenum_GL_DEPTH_TEST,
+			GLenum_GL_SCISSOR_TEST,
+			GLenum_GL_STENCIL_TEST,
 		} {
 			capability := cap
 			if c.Capabilities[capability] {
@@ -125,33 +125,33 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			// Setup new framebuffer/renderbuffer.
 			NewGlGenFramebuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
-			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
+			NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
 			NewGlGenRenderbuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
-			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
-			NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
-			NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
+			NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, renderbufferID),
+			NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, outW, outH),
+			NewGlFramebufferRenderbuffer(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_RENDERBUFFER, renderbufferID),
 
 			// Setup depth texture.
 			NewGlGenTextures(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, textureID)),
-			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
-			NewGlTexImage2D(TextureImageTarget_GL_TEXTURE_2D, 0, TexelFormat_GL_DEPTH24_STENCIL8, outW, outH, 0, TexelFormat_GL_DEPTH_STENCIL, TexelType_GL_UNSIGNED_INT_24_8, memory.Nullptr),
-			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MIN_FILTER, int32(TextureFilterMode_GL_NEAREST)),
-			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MAG_FILTER, int32(TextureFilterMode_GL_NEAREST)),
-			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_S, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
-			NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_T, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
+			NewGlBindTexture(GLenum_GL_TEXTURE_2D, textureID),
+			NewGlTexImage2D(GLenum_GL_TEXTURE_2D, 0, GLenum_GL_DEPTH24_STENCIL8, outW, outH, 0, GLenum_GL_DEPTH_STENCIL, GLenum_GL_UNSIGNED_INT_24_8, memory.Nullptr),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MIN_FILTER, int32(GLenum_GL_NEAREST)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MAG_FILTER, int32(GLenum_GL_NEAREST)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_S, int32(GLenum_GL_CLAMP_TO_EDGE)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_T, int32(GLenum_GL_CLAMP_TO_EDGE)),
 
 			// Blit depth attachment.
-			NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, textureID, 0),
-			NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_DEPTH_BUFFER_BIT, TextureFilterMode_GL_NEAREST),
-			NewGlFramebufferTexture2D(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_DEPTH_ATTACHMENT, TextureImageTarget_GL_TEXTURE_2D, TextureId(0), 0),
+			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, textureID, 0),
+			NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, GLbitfield_GL_DEPTH_BUFFER_BIT, GLenum_GL_NEAREST),
+			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, TextureId(0), 0),
 
 			// Bind new framebuffer.
-			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
+			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 
 			// Render depth texture to framebuffer color attachment.
-			NewGlClear(ClearMask_GL_COLOR_BUFFER_BIT),
+			NewGlClear(GLbitfield_GL_COLOR_BUFFER_BIT),
 		)
 
 		// Create the shader program
@@ -162,13 +162,13 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
 			NewGlLinkProgram(programID),
 			NewGlUseProgram(programID),
-			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
+			NewGlBindTexture(GLenum_GL_TEXTURE_2D, textureID),
 			NewGlGetUniformLocation(programID, "uTexture", uTextureLocation),
 			NewGlUniform1i(uTextureLocation, origActiveTextureUnit),
-			NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, 0),
-			NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0),
-			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, VertexAttribType_GL_FLOAT, false, 0, memory.Tmp),
-			NewGlDrawArrays(DrawMode_GL_TRIANGLE_STRIP, 0, 4).
+			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0),
+			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0),
+			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, false, 0, memory.Tmp),
+			NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, positions)),
 		)
 
@@ -179,20 +179,20 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 
 		replayEach(i, s, d, l, b,
 			// Restore buffer/vertexAttrib state.
-			NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
-			NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, origArrayBufferID),
+			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
+			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, origArrayBufferID),
 			// Note: we're not restoring the original VertexAttribPointer as we may re-enter an inconsistent state, which would abort the current replay batch.
 			// NewGlVertexAttribPointer(aScreenCoordsLocation, origVertexAttrib.Size, origVertexAttrib.Type, origVertexAttrib.Normalized, origVertexAttrib.Stride, VertexPointer(origVertexAttrib.Data)),
 
 			// Restore texture state.
-			NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, origTextureID),
+			NewGlBindTexture(GLenum_GL_TEXTURE_2D, origTextureID),
 			NewGlDeleteTextures(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, textureID)),
 
 			// Restore framebuffer/renderbuffer state.
-			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
-			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
-			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
+			NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, origRenderbufferID),
+			NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, origReadFramebufferID),
+			NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
 			NewGlDeleteRenderbuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 			NewGlDeleteFramebuffers(1, memory.Tmp).
@@ -220,9 +220,9 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 		}
 
 		var (
-			origRenderbufferID    = c.BoundRenderbuffers[RenderbufferTarget_GL_RENDERBUFFER]
-			origReadFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
-			origDrawFramebufferID = c.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER]
+			origRenderbufferID    = c.BoundRenderbuffers[GLenum_GL_RENDERBUFFER]
+			origReadFramebufferID = c.BoundFramebuffers[GLenum_GL_READ_FRAMEBUFFER]
+			origDrawFramebufferID = c.BoundFramebuffers[GLenum_GL_DRAW_FRAMEBUFFER]
 
 			inW  = int32(colorW)
 			inH  = int32(colorH)
@@ -240,22 +240,22 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 			replayEach(i, s, d, l, b,
 				NewGlGenFramebuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
-				NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
+				NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
 				NewGlGenRenderbuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
-				NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
-				NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
-				NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
-				NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, ClearMask_GL_COLOR_BUFFER_BIT, TextureFilterMode_GL_LINEAR),
-				NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
+				NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, renderbufferID),
+				NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, outW, outH),
+				NewGlFramebufferRenderbuffer(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_RENDERBUFFER, renderbufferID),
+				NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, GLbitfield_GL_COLOR_BUFFER_BIT, GLenum_GL_LINEAR),
+				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 			)
 
 			postColorData(i, s, d, l, b, outW, outH, out)
 
 			replayEach(i, s, d, l, b,
-				NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
-				NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
-				NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
+				NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, origRenderbufferID),
+				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, origReadFramebufferID),
+				NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
 				NewGlDeleteRenderbuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 				NewGlDeleteFramebuffers(1, memory.Tmp).
@@ -269,18 +269,18 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 
 func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32, img chan<- replay.Image) {
 	ctx := getContext(s)
-	origPackAlignment := ctx.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
+	origPackAlignment := ctx.PixelStorage[GLenum_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
-		NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1).Replay(i, s, d, l, b)
-		defer NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment).Replay(i, s, d, l, b)
+		NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, 1).Replay(i, s, d, l, b)
+		defer NewGlPixelStorei(GLenum_GL_PACK_ALIGNMENT, origPackAlignment).Replay(i, s, d, l, b)
 	}
-	if origPackBuffer, ok := ctx.BoundBuffers[BufferTarget_GL_PIXEL_PACK_BUFFER]; ok && origPackBuffer != 0 {
-		NewGlBindBuffer(BufferTarget_GL_PIXEL_PACK_BUFFER, 0).Replay(i, s, d, l, b)
-		defer NewGlBindBuffer(BufferTarget_GL_PIXEL_PACK_BUFFER, origPackBuffer).Replay(i, s, d, l, b)
+	if origPackBuffer, ok := ctx.BoundBuffers[GLenum_GL_PIXEL_PACK_BUFFER]; ok && origPackBuffer != 0 {
+		NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, 0).Replay(i, s, d, l, b)
+		defer NewGlBindBuffer(GLenum_GL_PIXEL_PACK_BUFFER, origPackBuffer).Replay(i, s, d, l, b)
 	}
 
 	imageSize := uint64(width * height * 4)
-	NewGlReadPixels(0, 0, width, height, BaseTexelFormat_GL_RGBA, TexelType_GL_UNSIGNED_BYTE, memory.Tmp).Replay(i, s, d, l, b)
+	NewGlReadPixels(0, 0, width, height, GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp).Replay(i, s, d, l, b)
 	b.Post(value.RemappedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
 		var data []byte
 		if err == nil {
