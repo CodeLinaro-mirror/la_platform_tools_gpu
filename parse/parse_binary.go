@@ -15,16 +15,16 @@ var ConstantValues schema.Constants
 
 const _NumberKind_name = "NotNumericDecimalOctalHexadecimalFloatingScientific"
 
-var _NumberKind_map = map[NumberKind]string{
-	0: _NumberKind_name[0:10],
-	1: _NumberKind_name[10:17],
-	2: _NumberKind_name[17:22],
-	3: _NumberKind_name[22:33],
-	4: _NumberKind_name[33:41],
-	5: _NumberKind_name[41:51],
-}
+var _NumberKind_map = map[NumberKind]string{}
 
 func init() {
+	_NumberKind_map[0] = _NumberKind_name[0:10]
+	_NumberKind_map[1] = _NumberKind_name[10:17]
+	_NumberKind_map[2] = _NumberKind_name[17:22]
+	_NumberKind_map[3] = _NumberKind_name[22:33]
+	_NumberKind_map[4] = _NumberKind_name[33:41]
+	_NumberKind_map[5] = _NumberKind_name[41:51]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "NumberKind", Method: schema.Uint8},
 		Entries: []schema.Constant{
@@ -57,12 +57,12 @@ func (v *NumberKind) Parse(s string) error {
 
 const _SkipMode_name = "SkipPrefixSkipSuffix"
 
-var _SkipMode_map = map[SkipMode]string{
-	0: _SkipMode_name[0:10],
-	1: _SkipMode_name[10:20],
-}
+var _SkipMode_map = map[SkipMode]string{}
 
 func init() {
+	_SkipMode_map[0] = _SkipMode_name[0:10]
+	_SkipMode_map[1] = _SkipMode_name[10:20]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "SkipMode", Method: schema.Int32},
 		Entries: []schema.Constant{

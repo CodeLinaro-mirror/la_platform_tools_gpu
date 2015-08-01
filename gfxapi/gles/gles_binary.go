@@ -28700,15 +28700,15 @@ var ConstantValues schema.Constants
 
 const _ArrayType_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_POINT_SIZE_ARRAY_OES"
 
-var _ArrayType_map = map[ArrayType]string{
-	32884: _ArrayType_name[0:15],
-	32885: _ArrayType_name[15:30],
-	32886: _ArrayType_name[30:44],
-	32888: _ArrayType_name[44:66],
-	35740: _ArrayType_name[66:89],
-}
+var _ArrayType_map = map[ArrayType]string{}
 
 func init() {
+	_ArrayType_map[32884] = _ArrayType_name[0:15]
+	_ArrayType_map[32885] = _ArrayType_name[15:30]
+	_ArrayType_map[32886] = _ArrayType_name[30:44]
+	_ArrayType_map[32888] = _ArrayType_name[44:66]
+	_ArrayType_map[35740] = _ArrayType_name[66:89]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28740,14 +28740,14 @@ func (v *ArrayType) Parse(s string) error {
 
 const _ArrayType_GLES_1_1_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAY"
 
-var _ArrayType_GLES_1_1_map = map[ArrayType_GLES_1_1]string{
-	32884: _ArrayType_GLES_1_1_name[0:15],
-	32885: _ArrayType_GLES_1_1_name[15:30],
-	32886: _ArrayType_GLES_1_1_name[30:44],
-	32888: _ArrayType_GLES_1_1_name[44:66],
-}
+var _ArrayType_GLES_1_1_map = map[ArrayType_GLES_1_1]string{}
 
 func init() {
+	_ArrayType_GLES_1_1_map[32884] = _ArrayType_GLES_1_1_name[0:15]
+	_ArrayType_GLES_1_1_map[32885] = _ArrayType_GLES_1_1_name[15:30]
+	_ArrayType_GLES_1_1_map[32886] = _ArrayType_GLES_1_1_name[30:44]
+	_ArrayType_GLES_1_1_map[32888] = _ArrayType_GLES_1_1_name[44:66]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ArrayType_GLES_1_1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28778,11 +28778,11 @@ func (v *ArrayType_GLES_1_1) Parse(s string) error {
 
 const _ArrayType_OES_point_size_array_name = "GL_POINT_SIZE_ARRAY_OES"
 
-var _ArrayType_OES_point_size_array_map = map[ArrayType_OES_point_size_array]string{
-	35740: _ArrayType_OES_point_size_array_name[0:23],
-}
+var _ArrayType_OES_point_size_array_map = map[ArrayType_OES_point_size_array]string{}
 
 func init() {
+	_ArrayType_OES_point_size_array_map[35740] = _ArrayType_OES_point_size_array_name[0:23]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ArrayType_OES_point_size_array", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28810,13 +28810,13 @@ func (v *ArrayType_OES_point_size_array) Parse(s string) error {
 
 const _BaseTexelFormat_name = "GL_ALPHAGL_RGBGL_RGBA"
 
-var _BaseTexelFormat_map = map[BaseTexelFormat]string{
-	6406: _BaseTexelFormat_name[0:8],
-	6407: _BaseTexelFormat_name[8:14],
-	6408: _BaseTexelFormat_name[14:21],
-}
+var _BaseTexelFormat_map = map[BaseTexelFormat]string{}
 
 func init() {
+	_BaseTexelFormat_map[6406] = _BaseTexelFormat_name[0:8]
+	_BaseTexelFormat_map[6407] = _BaseTexelFormat_name[8:14]
+	_BaseTexelFormat_map[6408] = _BaseTexelFormat_name[14:21]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28846,13 +28846,13 @@ func (v *BaseTexelFormat) Parse(s string) error {
 
 const _BlendEquation_name = "GL_FUNC_ADDGL_FUNC_SUBTRACTGL_FUNC_REVERSE_SUBTRACT"
 
-var _BlendEquation_map = map[BlendEquation]string{
-	32774: _BlendEquation_name[0:11],
-	32778: _BlendEquation_name[11:27],
-	32779: _BlendEquation_name[27:51],
-}
+var _BlendEquation_map = map[BlendEquation]string{}
 
 func init() {
+	_BlendEquation_map[32774] = _BlendEquation_name[0:11]
+	_BlendEquation_map[32778] = _BlendEquation_name[11:27]
+	_BlendEquation_map[32779] = _BlendEquation_name[27:51]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28882,25 +28882,25 @@ func (v *BlendEquation) Parse(s string) error {
 
 const _BlendFactor_name = "GL_ZEROGL_ONEGL_SRC_COLORGL_ONE_MINUS_SRC_COLORGL_SRC_ALPHAGL_ONE_MINUS_SRC_ALPHAGL_DST_ALPHAGL_ONE_MINUS_DST_ALPHAGL_DST_COLORGL_ONE_MINUS_DST_COLORGL_SRC_ALPHA_SATURATEGL_CONSTANT_COLORGL_ONE_MINUS_CONSTANT_COLORGL_CONSTANT_ALPHAGL_ONE_MINUS_CONSTANT_ALPHA"
 
-var _BlendFactor_map = map[BlendFactor]string{
-	0:     _BlendFactor_name[0:7],
-	1:     _BlendFactor_name[7:13],
-	768:   _BlendFactor_name[13:25],
-	769:   _BlendFactor_name[25:47],
-	770:   _BlendFactor_name[47:59],
-	771:   _BlendFactor_name[59:81],
-	772:   _BlendFactor_name[81:93],
-	773:   _BlendFactor_name[93:115],
-	774:   _BlendFactor_name[115:127],
-	775:   _BlendFactor_name[127:149],
-	776:   _BlendFactor_name[149:170],
-	32769: _BlendFactor_name[170:187],
-	32770: _BlendFactor_name[187:214],
-	32771: _BlendFactor_name[214:231],
-	32772: _BlendFactor_name[231:258],
-}
+var _BlendFactor_map = map[BlendFactor]string{}
 
 func init() {
+	_BlendFactor_map[0] = _BlendFactor_name[0:7]
+	_BlendFactor_map[1] = _BlendFactor_name[7:13]
+	_BlendFactor_map[768] = _BlendFactor_name[13:25]
+	_BlendFactor_map[769] = _BlendFactor_name[25:47]
+	_BlendFactor_map[770] = _BlendFactor_name[47:59]
+	_BlendFactor_map[771] = _BlendFactor_name[59:81]
+	_BlendFactor_map[772] = _BlendFactor_name[81:93]
+	_BlendFactor_map[773] = _BlendFactor_name[93:115]
+	_BlendFactor_map[774] = _BlendFactor_name[115:127]
+	_BlendFactor_map[775] = _BlendFactor_name[127:149]
+	_BlendFactor_map[776] = _BlendFactor_name[149:170]
+	_BlendFactor_map[32769] = _BlendFactor_name[170:187]
+	_BlendFactor_map[32770] = _BlendFactor_name[187:214]
+	_BlendFactor_map[32771] = _BlendFactor_name[214:231]
+	_BlendFactor_map[32772] = _BlendFactor_name[231:258]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28942,12 +28942,12 @@ func (v *BlendFactor) Parse(s string) error {
 
 const _BufferParameter_name = "GL_BUFFER_SIZEGL_BUFFER_USAGE"
 
-var _BufferParameter_map = map[BufferParameter]string{
-	34660: _BufferParameter_name[0:14],
-	34661: _BufferParameter_name[14:29],
-}
+var _BufferParameter_map = map[BufferParameter]string{}
 
 func init() {
+	_BufferParameter_map[34660] = _BufferParameter_name[0:14]
+	_BufferParameter_map[34661] = _BufferParameter_name[14:29]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -28976,18 +28976,18 @@ func (v *BufferParameter) Parse(s string) error {
 
 const _BufferTarget_name = "GL_ARRAY_BUFFERGL_ELEMENT_ARRAY_BUFFERGL_PIXEL_PACK_BUFFERGL_PIXEL_UNPACK_BUFFERGL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFERGL_COPY_READ_BUFFERGL_COPY_WRITE_BUFFER"
 
-var _BufferTarget_map = map[BufferTarget]string{
-	34962: _BufferTarget_name[0:15],
-	34963: _BufferTarget_name[15:38],
-	35051: _BufferTarget_name[38:58],
-	35052: _BufferTarget_name[58:80],
-	35345: _BufferTarget_name[80:97],
-	35982: _BufferTarget_name[97:125],
-	36662: _BufferTarget_name[125:144],
-	36663: _BufferTarget_name[144:164],
-}
+var _BufferTarget_map = map[BufferTarget]string{}
 
 func init() {
+	_BufferTarget_map[34962] = _BufferTarget_name[0:15]
+	_BufferTarget_map[34963] = _BufferTarget_name[15:38]
+	_BufferTarget_map[35051] = _BufferTarget_name[38:58]
+	_BufferTarget_map[35052] = _BufferTarget_name[58:80]
+	_BufferTarget_map[35345] = _BufferTarget_name[80:97]
+	_BufferTarget_map[35982] = _BufferTarget_name[97:125]
+	_BufferTarget_map[36662] = _BufferTarget_name[125:144]
+	_BufferTarget_map[36663] = _BufferTarget_name[144:164]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29022,13 +29022,13 @@ func (v *BufferTarget) Parse(s string) error {
 
 const _BufferUsage_name = "GL_STREAM_DRAWGL_STATIC_DRAWGL_DYNAMIC_DRAW"
 
-var _BufferUsage_map = map[BufferUsage]string{
-	35040: _BufferUsage_name[0:14],
-	35044: _BufferUsage_name[14:28],
-	35048: _BufferUsage_name[28:43],
-}
+var _BufferUsage_map = map[BufferUsage]string{}
 
 func init() {
+	_BufferUsage_map[35040] = _BufferUsage_name[0:14]
+	_BufferUsage_map[35044] = _BufferUsage_name[14:28]
+	_BufferUsage_map[35048] = _BufferUsage_name[28:43]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29058,24 +29058,24 @@ func (v *BufferUsage) Parse(s string) error {
 
 const _Capability_name = "GL_CULL_FACEGL_DEPTH_TESTGL_STENCIL_TESTGL_DITHERGL_BLENDGL_SCISSOR_TESTGL_POLYGON_OFFSET_FILLGL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_POINT_SIZE_ARRAY_OES"
 
-var _Capability_map = map[Capability]string{
-	2884:  _Capability_name[0:12],
-	2929:  _Capability_name[12:25],
-	2960:  _Capability_name[25:40],
-	3024:  _Capability_name[40:49],
-	3042:  _Capability_name[49:57],
-	3089:  _Capability_name[57:72],
-	32823: _Capability_name[72:94],
-	32884: _Capability_name[94:109],
-	32885: _Capability_name[109:124],
-	32886: _Capability_name[124:138],
-	32888: _Capability_name[138:160],
-	32926: _Capability_name[160:187],
-	32928: _Capability_name[187:205],
-	35740: _Capability_name[205:228],
-}
+var _Capability_map = map[Capability]string{}
 
 func init() {
+	_Capability_map[2884] = _Capability_name[0:12]
+	_Capability_map[2929] = _Capability_name[12:25]
+	_Capability_map[2960] = _Capability_name[25:40]
+	_Capability_map[3024] = _Capability_name[40:49]
+	_Capability_map[3042] = _Capability_name[49:57]
+	_Capability_map[3089] = _Capability_name[57:72]
+	_Capability_map[32823] = _Capability_name[72:94]
+	_Capability_map[32884] = _Capability_name[94:109]
+	_Capability_map[32885] = _Capability_name[109:124]
+	_Capability_map[32886] = _Capability_name[124:138]
+	_Capability_map[32888] = _Capability_name[138:160]
+	_Capability_map[32926] = _Capability_name[160:187]
+	_Capability_map[32928] = _Capability_name[187:205]
+	_Capability_map[35740] = _Capability_name[205:228]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29116,13 +29116,13 @@ func (v *Capability) Parse(s string) error {
 
 const _ClearMask_name = "GL_DEPTH_BUFFER_BITGL_STENCIL_BUFFER_BITGL_COLOR_BUFFER_BIT"
 
-var _ClearMask_map = map[ClearMask]string{
-	256:   _ClearMask_name[0:19],
-	1024:  _ClearMask_name[19:40],
-	16384: _ClearMask_name[40:59],
-}
+var _ClearMask_map = map[ClearMask]string{}
 
 func init() {
+	_ClearMask_map[256] = _ClearMask_name[0:19]
+	_ClearMask_map[1024] = _ClearMask_name[19:40]
+	_ClearMask_map[16384] = _ClearMask_name[40:59]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29152,14 +29152,14 @@ func (v *ClearMask) Parse(s string) error {
 
 const _ClientWaitSyncSignal_name = "GL_ALREADY_SIGNALEDGL_TIMEOUT_EXPIREDGL_CONDITION_SATISFIEDGL_WAIT_FAILED"
 
-var _ClientWaitSyncSignal_map = map[ClientWaitSyncSignal]string{
-	37146: _ClientWaitSyncSignal_name[0:19],
-	37147: _ClientWaitSyncSignal_name[19:37],
-	37148: _ClientWaitSyncSignal_name[37:59],
-	37149: _ClientWaitSyncSignal_name[59:73],
-}
+var _ClientWaitSyncSignal_map = map[ClientWaitSyncSignal]string{}
 
 func init() {
+	_ClientWaitSyncSignal_map[37146] = _ClientWaitSyncSignal_name[0:19]
+	_ClientWaitSyncSignal_map[37147] = _ClientWaitSyncSignal_name[19:37]
+	_ClientWaitSyncSignal_map[37148] = _ClientWaitSyncSignal_name[37:59]
+	_ClientWaitSyncSignal_map[37149] = _ClientWaitSyncSignal_name[59:73]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ClientWaitSyncSignal", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29190,50 +29190,50 @@ func (v *ClientWaitSyncSignal) Parse(s string) error {
 
 const _CompressedTexelFormat_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
-var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{
-	33776: _CompressedTexelFormat_name[0:31],
-	33777: _CompressedTexelFormat_name[31:63],
-	33778: _CompressedTexelFormat_name[63:95],
-	33779: _CompressedTexelFormat_name[95:127],
-	34798: _CompressedTexelFormat_name[127:161],
-	35952: _CompressedTexelFormat_name[161:193],
-	35953: _CompressedTexelFormat_name[193:232],
-	35954: _CompressedTexelFormat_name[232:270],
-	35955: _CompressedTexelFormat_name[270:315],
-	35986: _CompressedTexelFormat_name[315:329],
-	35987: _CompressedTexelFormat_name[329:359],
-	36196: _CompressedTexelFormat_name[359:375],
-	37808: _CompressedTexelFormat_name[375:406],
-	37809: _CompressedTexelFormat_name[406:437],
-	37810: _CompressedTexelFormat_name[437:468],
-	37811: _CompressedTexelFormat_name[468:499],
-	37812: _CompressedTexelFormat_name[499:530],
-	37813: _CompressedTexelFormat_name[530:561],
-	37814: _CompressedTexelFormat_name[561:592],
-	37815: _CompressedTexelFormat_name[592:623],
-	37816: _CompressedTexelFormat_name[623:655],
-	37817: _CompressedTexelFormat_name[655:687],
-	37818: _CompressedTexelFormat_name[687:719],
-	37819: _CompressedTexelFormat_name[719:752],
-	37820: _CompressedTexelFormat_name[752:785],
-	37821: _CompressedTexelFormat_name[785:818],
-	37840: _CompressedTexelFormat_name[818:857],
-	37841: _CompressedTexelFormat_name[857:896],
-	37842: _CompressedTexelFormat_name[896:935],
-	37843: _CompressedTexelFormat_name[935:974],
-	37844: _CompressedTexelFormat_name[974:1013],
-	37845: _CompressedTexelFormat_name[1013:1052],
-	37846: _CompressedTexelFormat_name[1052:1091],
-	37847: _CompressedTexelFormat_name[1091:1130],
-	37848: _CompressedTexelFormat_name[1130:1170],
-	37849: _CompressedTexelFormat_name[1170:1210],
-	37850: _CompressedTexelFormat_name[1210:1250],
-	37851: _CompressedTexelFormat_name[1250:1291],
-	37852: _CompressedTexelFormat_name[1291:1332],
-	37853: _CompressedTexelFormat_name[1332:1373],
-}
+var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{}
 
 func init() {
+	_CompressedTexelFormat_map[33776] = _CompressedTexelFormat_name[0:31]
+	_CompressedTexelFormat_map[33777] = _CompressedTexelFormat_name[31:63]
+	_CompressedTexelFormat_map[33778] = _CompressedTexelFormat_name[63:95]
+	_CompressedTexelFormat_map[33779] = _CompressedTexelFormat_name[95:127]
+	_CompressedTexelFormat_map[34798] = _CompressedTexelFormat_name[127:161]
+	_CompressedTexelFormat_map[35952] = _CompressedTexelFormat_name[161:193]
+	_CompressedTexelFormat_map[35953] = _CompressedTexelFormat_name[193:232]
+	_CompressedTexelFormat_map[35954] = _CompressedTexelFormat_name[232:270]
+	_CompressedTexelFormat_map[35955] = _CompressedTexelFormat_name[270:315]
+	_CompressedTexelFormat_map[35986] = _CompressedTexelFormat_name[315:329]
+	_CompressedTexelFormat_map[35987] = _CompressedTexelFormat_name[329:359]
+	_CompressedTexelFormat_map[36196] = _CompressedTexelFormat_name[359:375]
+	_CompressedTexelFormat_map[37808] = _CompressedTexelFormat_name[375:406]
+	_CompressedTexelFormat_map[37809] = _CompressedTexelFormat_name[406:437]
+	_CompressedTexelFormat_map[37810] = _CompressedTexelFormat_name[437:468]
+	_CompressedTexelFormat_map[37811] = _CompressedTexelFormat_name[468:499]
+	_CompressedTexelFormat_map[37812] = _CompressedTexelFormat_name[499:530]
+	_CompressedTexelFormat_map[37813] = _CompressedTexelFormat_name[530:561]
+	_CompressedTexelFormat_map[37814] = _CompressedTexelFormat_name[561:592]
+	_CompressedTexelFormat_map[37815] = _CompressedTexelFormat_name[592:623]
+	_CompressedTexelFormat_map[37816] = _CompressedTexelFormat_name[623:655]
+	_CompressedTexelFormat_map[37817] = _CompressedTexelFormat_name[655:687]
+	_CompressedTexelFormat_map[37818] = _CompressedTexelFormat_name[687:719]
+	_CompressedTexelFormat_map[37819] = _CompressedTexelFormat_name[719:752]
+	_CompressedTexelFormat_map[37820] = _CompressedTexelFormat_name[752:785]
+	_CompressedTexelFormat_map[37821] = _CompressedTexelFormat_name[785:818]
+	_CompressedTexelFormat_map[37840] = _CompressedTexelFormat_name[818:857]
+	_CompressedTexelFormat_map[37841] = _CompressedTexelFormat_name[857:896]
+	_CompressedTexelFormat_map[37842] = _CompressedTexelFormat_name[896:935]
+	_CompressedTexelFormat_map[37843] = _CompressedTexelFormat_name[935:974]
+	_CompressedTexelFormat_map[37844] = _CompressedTexelFormat_name[974:1013]
+	_CompressedTexelFormat_map[37845] = _CompressedTexelFormat_name[1013:1052]
+	_CompressedTexelFormat_map[37846] = _CompressedTexelFormat_name[1052:1091]
+	_CompressedTexelFormat_map[37847] = _CompressedTexelFormat_name[1091:1130]
+	_CompressedTexelFormat_map[37848] = _CompressedTexelFormat_name[1130:1170]
+	_CompressedTexelFormat_map[37849] = _CompressedTexelFormat_name[1170:1210]
+	_CompressedTexelFormat_map[37850] = _CompressedTexelFormat_name[1210:1250]
+	_CompressedTexelFormat_map[37851] = _CompressedTexelFormat_name[1250:1291]
+	_CompressedTexelFormat_map[37852] = _CompressedTexelFormat_name[1291:1332]
+	_CompressedTexelFormat_map[37853] = _CompressedTexelFormat_name[1332:1373]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29300,13 +29300,13 @@ func (v *CompressedTexelFormat) Parse(s string) error {
 
 const _CompressedTexelFormat_AMD_compressed_ATC_texture_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
 
-var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelFormat_AMD_compressed_ATC_texture]string{
-	34798: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34],
-	35986: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48],
-	35987: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78],
-}
+var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelFormat_AMD_compressed_ATC_texture]string{}
 
 func init() {
+	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[34798] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34]
+	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[35986] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48]
+	_CompressedTexelFormat_AMD_compressed_ATC_texture_map[35987] = _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_AMD_compressed_ATC_texture", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29336,12 +29336,12 @@ func (v *CompressedTexelFormat_AMD_compressed_ATC_texture) Parse(s string) error
 
 const _CompressedTexelFormat_EXT_texture_compression_dxt1_name = "GL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXT"
 
-var _CompressedTexelFormat_EXT_texture_compression_dxt1_map = map[CompressedTexelFormat_EXT_texture_compression_dxt1]string{
-	33776: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31],
-	33777: _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63],
-}
+var _CompressedTexelFormat_EXT_texture_compression_dxt1_map = map[CompressedTexelFormat_EXT_texture_compression_dxt1]string{}
 
 func init() {
+	_CompressedTexelFormat_EXT_texture_compression_dxt1_map[33776] = _CompressedTexelFormat_EXT_texture_compression_dxt1_name[0:31]
+	_CompressedTexelFormat_EXT_texture_compression_dxt1_map[33777] = _CompressedTexelFormat_EXT_texture_compression_dxt1_name[31:63]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_dxt1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29370,12 +29370,12 @@ func (v *CompressedTexelFormat_EXT_texture_compression_dxt1) Parse(s string) err
 
 const _CompressedTexelFormat_EXT_texture_compression_s3tc_name = "GL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXT"
 
-var _CompressedTexelFormat_EXT_texture_compression_s3tc_map = map[CompressedTexelFormat_EXT_texture_compression_s3tc]string{
-	33778: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32],
-	33779: _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64],
-}
+var _CompressedTexelFormat_EXT_texture_compression_s3tc_map = map[CompressedTexelFormat_EXT_texture_compression_s3tc]string{}
 
 func init() {
+	_CompressedTexelFormat_EXT_texture_compression_s3tc_map[33778] = _CompressedTexelFormat_EXT_texture_compression_s3tc_name[0:32]
+	_CompressedTexelFormat_EXT_texture_compression_s3tc_map[33779] = _CompressedTexelFormat_EXT_texture_compression_s3tc_name[32:64]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_EXT_texture_compression_s3tc", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29404,38 +29404,38 @@ func (v *CompressedTexelFormat_EXT_texture_compression_s3tc) Parse(s string) err
 
 const _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name = "GL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
-var _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map = map[CompressedTexelFormat_KHR_texture_compression_astc_ldr]string{
-	37808: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31],
-	37809: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62],
-	37810: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93],
-	37811: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124],
-	37812: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155],
-	37813: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186],
-	37814: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217],
-	37815: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248],
-	37816: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280],
-	37817: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312],
-	37818: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344],
-	37819: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377],
-	37820: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410],
-	37821: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443],
-	37840: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482],
-	37841: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521],
-	37842: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560],
-	37843: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599],
-	37844: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638],
-	37845: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677],
-	37846: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716],
-	37847: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755],
-	37848: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795],
-	37849: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835],
-	37850: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875],
-	37851: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916],
-	37852: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957],
-	37853: _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998],
-}
+var _CompressedTexelFormat_KHR_texture_compression_astc_ldr_map = map[CompressedTexelFormat_KHR_texture_compression_astc_ldr]string{}
 
 func init() {
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37808] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[0:31]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37809] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[31:62]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37810] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[62:93]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37811] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[93:124]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37812] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[124:155]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37813] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[155:186]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37814] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[186:217]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37815] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[217:248]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37816] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[248:280]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37817] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[280:312]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37818] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[312:344]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37819] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[344:377]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37820] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[377:410]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37821] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[410:443]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37840] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[443:482]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37841] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[482:521]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37842] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[521:560]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37843] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[560:599]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37844] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[599:638]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37845] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[638:677]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37846] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[677:716]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37847] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[716:755]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37848] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[755:795]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37849] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[795:835]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37850] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[835:875]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37851] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[875:916]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37852] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[916:957]
+	_CompressedTexelFormat_KHR_texture_compression_astc_ldr_map[37853] = _CompressedTexelFormat_KHR_texture_compression_astc_ldr_name[957:998]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_KHR_texture_compression_astc_ldr", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29490,14 +29490,14 @@ func (v *CompressedTexelFormat_KHR_texture_compression_astc_ldr) Parse(s string)
 
 const _CompressedTexelFormat_NV_texture_compression_latc_name = "GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV"
 
-var _CompressedTexelFormat_NV_texture_compression_latc_map = map[CompressedTexelFormat_NV_texture_compression_latc]string{
-	35952: _CompressedTexelFormat_NV_texture_compression_latc_name[0:32],
-	35953: _CompressedTexelFormat_NV_texture_compression_latc_name[32:71],
-	35954: _CompressedTexelFormat_NV_texture_compression_latc_name[71:109],
-	35955: _CompressedTexelFormat_NV_texture_compression_latc_name[109:154],
-}
+var _CompressedTexelFormat_NV_texture_compression_latc_map = map[CompressedTexelFormat_NV_texture_compression_latc]string{}
 
 func init() {
+	_CompressedTexelFormat_NV_texture_compression_latc_map[35952] = _CompressedTexelFormat_NV_texture_compression_latc_name[0:32]
+	_CompressedTexelFormat_NV_texture_compression_latc_map[35953] = _CompressedTexelFormat_NV_texture_compression_latc_name[32:71]
+	_CompressedTexelFormat_NV_texture_compression_latc_map[35954] = _CompressedTexelFormat_NV_texture_compression_latc_name[71:109]
+	_CompressedTexelFormat_NV_texture_compression_latc_map[35955] = _CompressedTexelFormat_NV_texture_compression_latc_name[109:154]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_NV_texture_compression_latc", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29528,11 +29528,11 @@ func (v *CompressedTexelFormat_NV_texture_compression_latc) Parse(s string) erro
 
 const _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name = "GL_ETC1_RGB8_OES"
 
-var _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map = map[CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture]string{
-	36196: _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16],
-}
+var _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map = map[CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture]string{}
 
 func init() {
+	_CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map[36196] = _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29560,16 +29560,16 @@ func (v *CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) Parse(s string)
 
 const _CubeMapImageTarget_name = "GL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
 
-var _CubeMapImageTarget_map = map[CubeMapImageTarget]string{
-	34069: _CubeMapImageTarget_name[0:30],
-	34070: _CubeMapImageTarget_name[30:60],
-	34071: _CubeMapImageTarget_name[60:90],
-	34072: _CubeMapImageTarget_name[90:120],
-	34073: _CubeMapImageTarget_name[120:150],
-	34074: _CubeMapImageTarget_name[150:180],
-}
+var _CubeMapImageTarget_map = map[CubeMapImageTarget]string{}
 
 func init() {
+	_CubeMapImageTarget_map[34069] = _CubeMapImageTarget_name[0:30]
+	_CubeMapImageTarget_map[34070] = _CubeMapImageTarget_name[30:60]
+	_CubeMapImageTarget_map[34071] = _CubeMapImageTarget_name[60:90]
+	_CubeMapImageTarget_map[34072] = _CubeMapImageTarget_name[90:120]
+	_CubeMapImageTarget_map[34073] = _CubeMapImageTarget_name[120:150]
+	_CubeMapImageTarget_map[34074] = _CubeMapImageTarget_name[150:180]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29602,13 +29602,13 @@ func (v *CubeMapImageTarget) Parse(s string) error {
 
 const _DiscardFramebufferAttachment_name = "GL_COLOR_EXTGL_DEPTH_EXTGL_STENCIL_EXT"
 
-var _DiscardFramebufferAttachment_map = map[DiscardFramebufferAttachment]string{
-	6144: _DiscardFramebufferAttachment_name[0:12],
-	6145: _DiscardFramebufferAttachment_name[12:24],
-	6146: _DiscardFramebufferAttachment_name[24:38],
-}
+var _DiscardFramebufferAttachment_map = map[DiscardFramebufferAttachment]string{}
 
 func init() {
+	_DiscardFramebufferAttachment_map[6144] = _DiscardFramebufferAttachment_name[0:12]
+	_DiscardFramebufferAttachment_map[6145] = _DiscardFramebufferAttachment_name[12:24]
+	_DiscardFramebufferAttachment_map[6146] = _DiscardFramebufferAttachment_name[24:38]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "DiscardFramebufferAttachment", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29638,17 +29638,17 @@ func (v *DiscardFramebufferAttachment) Parse(s string) error {
 
 const _DrawMode_name = "GL_POINTSGL_LINESGL_LINE_LOOPGL_LINE_STRIPGL_TRIANGLESGL_TRIANGLE_STRIPGL_TRIANGLE_FAN"
 
-var _DrawMode_map = map[DrawMode]string{
-	0: _DrawMode_name[0:9],
-	1: _DrawMode_name[9:17],
-	2: _DrawMode_name[17:29],
-	3: _DrawMode_name[29:42],
-	4: _DrawMode_name[42:54],
-	5: _DrawMode_name[54:71],
-	6: _DrawMode_name[71:86],
-}
+var _DrawMode_map = map[DrawMode]string{}
 
 func init() {
+	_DrawMode_map[0] = _DrawMode_name[0:9]
+	_DrawMode_map[1] = _DrawMode_name[9:17]
+	_DrawMode_map[2] = _DrawMode_name[17:29]
+	_DrawMode_map[3] = _DrawMode_name[29:42]
+	_DrawMode_map[4] = _DrawMode_name[42:54]
+	_DrawMode_map[5] = _DrawMode_name[54:71]
+	_DrawMode_map[6] = _DrawMode_name[71:86]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29682,16 +29682,16 @@ func (v *DrawMode) Parse(s string) error {
 
 const _Error_name = "GL_NO_ERRORGL_INVALID_ENUMGL_INVALID_VALUEGL_INVALID_OPERATIONGL_OUT_OF_MEMORYGL_INVALID_FRAMEBUFFER_OPERATION"
 
-var _Error_map = map[Error]string{
-	0:    _Error_name[0:11],
-	1280: _Error_name[11:26],
-	1281: _Error_name[26:42],
-	1282: _Error_name[42:62],
-	1285: _Error_name[62:78],
-	1286: _Error_name[78:110],
-}
+var _Error_map = map[Error]string{}
 
 func init() {
+	_Error_map[0] = _Error_name[0:11]
+	_Error_map[1280] = _Error_name[11:26]
+	_Error_map[1281] = _Error_name[26:42]
+	_Error_map[1282] = _Error_name[42:62]
+	_Error_map[1285] = _Error_name[62:78]
+	_Error_map[1286] = _Error_name[78:110]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Error", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29724,13 +29724,13 @@ func (v *Error) Parse(s string) error {
 
 const _FaceMode_name = "GL_FRONTGL_BACKGL_FRONT_AND_BACK"
 
-var _FaceMode_map = map[FaceMode]string{
-	1028: _FaceMode_name[0:8],
-	1029: _FaceMode_name[8:15],
-	1032: _FaceMode_name[15:32],
-}
+var _FaceMode_map = map[FaceMode]string{}
 
 func init() {
+	_FaceMode_map[1028] = _FaceMode_name[0:8]
+	_FaceMode_map[1029] = _FaceMode_name[8:15]
+	_FaceMode_map[1032] = _FaceMode_name[15:32]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29760,12 +29760,12 @@ func (v *FaceMode) Parse(s string) error {
 
 const _FaceOrientation_name = "GL_CWGL_CCW"
 
-var _FaceOrientation_map = map[FaceOrientation]string{
-	2304: _FaceOrientation_name[0:5],
-	2305: _FaceOrientation_name[5:11],
-}
+var _FaceOrientation_map = map[FaceOrientation]string{}
 
 func init() {
+	_FaceOrientation_map[2304] = _FaceOrientation_name[0:5]
+	_FaceOrientation_map[2305] = _FaceOrientation_name[5:11]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29794,13 +29794,13 @@ func (v *FaceOrientation) Parse(s string) error {
 
 const _FramebufferAttachment_name = "GL_COLOR_ATTACHMENT0GL_DEPTH_ATTACHMENTGL_STENCIL_ATTACHMENT"
 
-var _FramebufferAttachment_map = map[FramebufferAttachment]string{
-	36064: _FramebufferAttachment_name[0:20],
-	36096: _FramebufferAttachment_name[20:39],
-	36128: _FramebufferAttachment_name[39:60],
-}
+var _FramebufferAttachment_map = map[FramebufferAttachment]string{}
 
 func init() {
+	_FramebufferAttachment_map[36064] = _FramebufferAttachment_name[0:20]
+	_FramebufferAttachment_map[36096] = _FramebufferAttachment_name[20:39]
+	_FramebufferAttachment_map[36128] = _FramebufferAttachment_name[39:60]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29830,14 +29830,14 @@ func (v *FramebufferAttachment) Parse(s string) error {
 
 const _FramebufferAttachmentParameter_name = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPEGL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAMEGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVELGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE"
 
-var _FramebufferAttachmentParameter_map = map[FramebufferAttachmentParameter]string{
-	36048: _FramebufferAttachmentParameter_name[0:37],
-	36049: _FramebufferAttachmentParameter_name[37:74],
-	36050: _FramebufferAttachmentParameter_name[74:113],
-	36051: _FramebufferAttachmentParameter_name[113:160],
-}
+var _FramebufferAttachmentParameter_map = map[FramebufferAttachmentParameter]string{}
 
 func init() {
+	_FramebufferAttachmentParameter_map[36048] = _FramebufferAttachmentParameter_name[0:37]
+	_FramebufferAttachmentParameter_map[36049] = _FramebufferAttachmentParameter_name[37:74]
+	_FramebufferAttachmentParameter_map[36050] = _FramebufferAttachmentParameter_name[74:113]
+	_FramebufferAttachmentParameter_map[36051] = _FramebufferAttachmentParameter_name[113:160]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29868,13 +29868,13 @@ func (v *FramebufferAttachmentParameter) Parse(s string) error {
 
 const _FramebufferAttachmentType_name = "GL_NONEGL_TEXTUREGL_RENDERBUFFER"
 
-var _FramebufferAttachmentType_map = map[FramebufferAttachmentType]string{
-	0:     _FramebufferAttachmentType_name[0:7],
-	5890:  _FramebufferAttachmentType_name[7:17],
-	36161: _FramebufferAttachmentType_name[17:32],
-}
+var _FramebufferAttachmentType_map = map[FramebufferAttachmentType]string{}
 
 func init() {
+	_FramebufferAttachmentType_map[0] = _FramebufferAttachmentType_name[0:7]
+	_FramebufferAttachmentType_map[5890] = _FramebufferAttachmentType_name[7:17]
+	_FramebufferAttachmentType_map[36161] = _FramebufferAttachmentType_name[17:32]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29904,15 +29904,15 @@ func (v *FramebufferAttachmentType) Parse(s string) error {
 
 const _FramebufferStatus_name = "GL_FRAMEBUFFER_COMPLETEGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONSGL_FRAMEBUFFER_UNSUPPORTED"
 
-var _FramebufferStatus_map = map[FramebufferStatus]string{
-	36053: _FramebufferStatus_name[0:23],
-	36054: _FramebufferStatus_name[23:59],
-	36055: _FramebufferStatus_name[59:103],
-	36057: _FramebufferStatus_name[103:139],
-	36061: _FramebufferStatus_name[139:165],
-}
+var _FramebufferStatus_map = map[FramebufferStatus]string{}
 
 func init() {
+	_FramebufferStatus_map[36053] = _FramebufferStatus_name[0:23]
+	_FramebufferStatus_map[36054] = _FramebufferStatus_name[23:59]
+	_FramebufferStatus_map[36055] = _FramebufferStatus_name[59:103]
+	_FramebufferStatus_map[36057] = _FramebufferStatus_name[103:139]
+	_FramebufferStatus_map[36061] = _FramebufferStatus_name[139:165]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29944,13 +29944,13 @@ func (v *FramebufferStatus) Parse(s string) error {
 
 const _FramebufferTarget_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFERGL_FRAMEBUFFER"
 
-var _FramebufferTarget_map = map[FramebufferTarget]string{
-	36008: _FramebufferTarget_name[0:19],
-	36009: _FramebufferTarget_name[19:38],
-	36160: _FramebufferTarget_name[38:52],
-}
+var _FramebufferTarget_map = map[FramebufferTarget]string{}
 
 func init() {
+	_FramebufferTarget_map[36008] = _FramebufferTarget_name[0:19]
+	_FramebufferTarget_map[36009] = _FramebufferTarget_name[19:38]
+	_FramebufferTarget_map[36160] = _FramebufferTarget_name[38:52]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -29980,11 +29980,11 @@ func (v *FramebufferTarget) Parse(s string) error {
 
 const _FramebufferTarget_GLES_2_0_name = "GL_FRAMEBUFFER"
 
-var _FramebufferTarget_GLES_2_0_map = map[FramebufferTarget_GLES_2_0]string{
-	36160: _FramebufferTarget_GLES_2_0_name[0:14],
-}
+var _FramebufferTarget_GLES_2_0_map = map[FramebufferTarget_GLES_2_0]string{}
 
 func init() {
+	_FramebufferTarget_GLES_2_0_map[36160] = _FramebufferTarget_GLES_2_0_name[0:14]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_2_0", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30012,12 +30012,12 @@ func (v *FramebufferTarget_GLES_2_0) Parse(s string) error {
 
 const _FramebufferTarget_GLES_3_1_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFER"
 
-var _FramebufferTarget_GLES_3_1_map = map[FramebufferTarget_GLES_3_1]string{
-	36008: _FramebufferTarget_GLES_3_1_name[0:19],
-	36009: _FramebufferTarget_GLES_3_1_name[19:38],
-}
+var _FramebufferTarget_GLES_3_1_map = map[FramebufferTarget_GLES_3_1]string{}
 
 func init() {
+	_FramebufferTarget_GLES_3_1_map[36008] = _FramebufferTarget_GLES_3_1_name[0:19]
+	_FramebufferTarget_GLES_3_1_map[36009] = _FramebufferTarget_GLES_3_1_name[19:38]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "FramebufferTarget_GLES_3_1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30046,13 +30046,13 @@ func (v *FramebufferTarget_GLES_3_1) Parse(s string) error {
 
 const _HintMode_name = "GL_DONT_CAREGL_FASTESTGL_NICEST"
 
-var _HintMode_map = map[HintMode]string{
-	4352: _HintMode_name[0:12],
-	4353: _HintMode_name[12:22],
-	4354: _HintMode_name[22:31],
-}
+var _HintMode_map = map[HintMode]string{}
 
 func init() {
+	_HintMode_map[4352] = _HintMode_name[0:12]
+	_HintMode_map[4353] = _HintMode_name[12:22]
+	_HintMode_map[4354] = _HintMode_name[22:31]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30082,11 +30082,11 @@ func (v *HintMode) Parse(s string) error {
 
 const _HintTarget_name = "GL_GENERATE_MIPMAP_HINT"
 
-var _HintTarget_map = map[HintTarget]string{
-	33170: _HintTarget_name[0:23],
-}
+var _HintTarget_map = map[HintTarget]string{}
 
 func init() {
+	_HintTarget_map[33170] = _HintTarget_name[0:23]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30114,11 +30114,11 @@ func (v *HintTarget) Parse(s string) error {
 
 const _ImageTargetRenderbufferStorage_name = "GL_RENDERBUFFER_OES"
 
-var _ImageTargetRenderbufferStorage_map = map[ImageTargetRenderbufferStorage]string{
-	36161: _ImageTargetRenderbufferStorage_name[0:19],
-}
+var _ImageTargetRenderbufferStorage_map = map[ImageTargetRenderbufferStorage]string{}
 
 func init() {
+	_ImageTargetRenderbufferStorage_map[36161] = _ImageTargetRenderbufferStorage_name[0:19]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30146,12 +30146,12 @@ func (v *ImageTargetRenderbufferStorage) Parse(s string) error {
 
 const _ImageTargetTexture_name = "GL_TEXTURE_2DGL_TEXTURE_EXTERNAL_OES"
 
-var _ImageTargetTexture_map = map[ImageTargetTexture]string{
-	3553:  _ImageTargetTexture_name[0:13],
-	36197: _ImageTargetTexture_name[13:36],
-}
+var _ImageTargetTexture_map = map[ImageTargetTexture]string{}
 
 func init() {
+	_ImageTargetTexture_map[3553] = _ImageTargetTexture_name[0:13]
+	_ImageTargetTexture_map[36197] = _ImageTargetTexture_name[13:36]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30180,11 +30180,11 @@ func (v *ImageTargetTexture) Parse(s string) error {
 
 const _ImageTargetTexture_OES_EGL_image_name = "GL_TEXTURE_2D"
 
-var _ImageTargetTexture_OES_EGL_image_map = map[ImageTargetTexture_OES_EGL_image]string{
-	3553: _ImageTargetTexture_OES_EGL_image_name[0:13],
-}
+var _ImageTargetTexture_OES_EGL_image_map = map[ImageTargetTexture_OES_EGL_image]string{}
 
 func init() {
+	_ImageTargetTexture_OES_EGL_image_map[3553] = _ImageTargetTexture_OES_EGL_image_name[0:13]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30212,11 +30212,11 @@ func (v *ImageTargetTexture_OES_EGL_image) Parse(s string) error {
 
 const _ImageTargetTexture_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
 
-var _ImageTargetTexture_OES_EGL_image_external_map = map[ImageTargetTexture_OES_EGL_image_external]string{
-	36197: _ImageTargetTexture_OES_EGL_image_external_name[0:23],
-}
+var _ImageTargetTexture_OES_EGL_image_external_map = map[ImageTargetTexture_OES_EGL_image_external]string{}
 
 func init() {
+	_ImageTargetTexture_OES_EGL_image_external_map[36197] = _ImageTargetTexture_OES_EGL_image_external_name[0:23]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ImageTargetTexture_OES_EGL_image_external", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30244,65 +30244,65 @@ func (v *ImageTargetTexture_OES_EGL_image_external) Parse(s string) error {
 
 const _ImageTexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_COMPRESSED_RGB_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT1_EXTGL_COMPRESSED_RGBA_S3TC_DXT3_EXTGL_COMPRESSED_RGBA_S3TC_DXT5_EXTGL_DEPTH_STENCILGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_DEPTH24_STENCIL8GL_COMPRESSED_LUMINANCE_LATC1_NVGL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NVGL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NVGL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NVGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGERGL_COMPRESSED_RGBA_ASTC_4x4_KHRGL_COMPRESSED_RGBA_ASTC_5x4_KHRGL_COMPRESSED_RGBA_ASTC_5x5_KHRGL_COMPRESSED_RGBA_ASTC_6x5_KHRGL_COMPRESSED_RGBA_ASTC_6x6_KHRGL_COMPRESSED_RGBA_ASTC_8x5_KHRGL_COMPRESSED_RGBA_ASTC_8x6_KHRGL_COMPRESSED_RGBA_ASTC_8x8_KHRGL_COMPRESSED_RGBA_ASTC_10x5_KHRGL_COMPRESSED_RGBA_ASTC_10x6_KHRGL_COMPRESSED_RGBA_ASTC_10x8_KHRGL_COMPRESSED_RGBA_ASTC_10x10_KHRGL_COMPRESSED_RGBA_ASTC_12x10_KHRGL_COMPRESSED_RGBA_ASTC_12x12_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHRGL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"
 
-var _ImageTexelFormat_map = map[ImageTexelFormat]string{
-	6402:  _ImageTexelFormat_name[0:18],
-	6403:  _ImageTexelFormat_name[18:24],
-	6406:  _ImageTexelFormat_name[24:32],
-	6407:  _ImageTexelFormat_name[32:38],
-	6408:  _ImageTexelFormat_name[38:45],
-	6409:  _ImageTexelFormat_name[45:57],
-	6410:  _ImageTexelFormat_name[57:75],
-	33189: _ImageTexelFormat_name[75:95],
-	33319: _ImageTexelFormat_name[95:100],
-	33320: _ImageTexelFormat_name[100:113],
-	33776: _ImageTexelFormat_name[113:144],
-	33777: _ImageTexelFormat_name[144:176],
-	33778: _ImageTexelFormat_name[176:208],
-	33779: _ImageTexelFormat_name[208:240],
-	34041: _ImageTexelFormat_name[240:256],
-	34798: _ImageTexelFormat_name[256:290],
-	35056: _ImageTexelFormat_name[290:309],
-	35952: _ImageTexelFormat_name[309:341],
-	35953: _ImageTexelFormat_name[341:380],
-	35954: _ImageTexelFormat_name[380:418],
-	35955: _ImageTexelFormat_name[418:463],
-	35986: _ImageTexelFormat_name[463:477],
-	35987: _ImageTexelFormat_name[477:507],
-	36196: _ImageTexelFormat_name[507:523],
-	36244: _ImageTexelFormat_name[523:537],
-	36248: _ImageTexelFormat_name[537:551],
-	36249: _ImageTexelFormat_name[551:566],
-	37808: _ImageTexelFormat_name[566:597],
-	37809: _ImageTexelFormat_name[597:628],
-	37810: _ImageTexelFormat_name[628:659],
-	37811: _ImageTexelFormat_name[659:690],
-	37812: _ImageTexelFormat_name[690:721],
-	37813: _ImageTexelFormat_name[721:752],
-	37814: _ImageTexelFormat_name[752:783],
-	37815: _ImageTexelFormat_name[783:814],
-	37816: _ImageTexelFormat_name[814:846],
-	37817: _ImageTexelFormat_name[846:878],
-	37818: _ImageTexelFormat_name[878:910],
-	37819: _ImageTexelFormat_name[910:943],
-	37820: _ImageTexelFormat_name[943:976],
-	37821: _ImageTexelFormat_name[976:1009],
-	37840: _ImageTexelFormat_name[1009:1048],
-	37841: _ImageTexelFormat_name[1048:1087],
-	37842: _ImageTexelFormat_name[1087:1126],
-	37843: _ImageTexelFormat_name[1126:1165],
-	37844: _ImageTexelFormat_name[1165:1204],
-	37845: _ImageTexelFormat_name[1204:1243],
-	37846: _ImageTexelFormat_name[1243:1282],
-	37847: _ImageTexelFormat_name[1282:1321],
-	37848: _ImageTexelFormat_name[1321:1361],
-	37849: _ImageTexelFormat_name[1361:1401],
-	37850: _ImageTexelFormat_name[1401:1441],
-	37851: _ImageTexelFormat_name[1441:1482],
-	37852: _ImageTexelFormat_name[1482:1523],
-	37853: _ImageTexelFormat_name[1523:1564],
-}
+var _ImageTexelFormat_map = map[ImageTexelFormat]string{}
 
 func init() {
+	_ImageTexelFormat_map[6402] = _ImageTexelFormat_name[0:18]
+	_ImageTexelFormat_map[6403] = _ImageTexelFormat_name[18:24]
+	_ImageTexelFormat_map[6406] = _ImageTexelFormat_name[24:32]
+	_ImageTexelFormat_map[6407] = _ImageTexelFormat_name[32:38]
+	_ImageTexelFormat_map[6408] = _ImageTexelFormat_name[38:45]
+	_ImageTexelFormat_map[6409] = _ImageTexelFormat_name[45:57]
+	_ImageTexelFormat_map[6410] = _ImageTexelFormat_name[57:75]
+	_ImageTexelFormat_map[33189] = _ImageTexelFormat_name[75:95]
+	_ImageTexelFormat_map[33319] = _ImageTexelFormat_name[95:100]
+	_ImageTexelFormat_map[33320] = _ImageTexelFormat_name[100:113]
+	_ImageTexelFormat_map[33776] = _ImageTexelFormat_name[113:144]
+	_ImageTexelFormat_map[33777] = _ImageTexelFormat_name[144:176]
+	_ImageTexelFormat_map[33778] = _ImageTexelFormat_name[176:208]
+	_ImageTexelFormat_map[33779] = _ImageTexelFormat_name[208:240]
+	_ImageTexelFormat_map[34041] = _ImageTexelFormat_name[240:256]
+	_ImageTexelFormat_map[34798] = _ImageTexelFormat_name[256:290]
+	_ImageTexelFormat_map[35056] = _ImageTexelFormat_name[290:309]
+	_ImageTexelFormat_map[35952] = _ImageTexelFormat_name[309:341]
+	_ImageTexelFormat_map[35953] = _ImageTexelFormat_name[341:380]
+	_ImageTexelFormat_map[35954] = _ImageTexelFormat_name[380:418]
+	_ImageTexelFormat_map[35955] = _ImageTexelFormat_name[418:463]
+	_ImageTexelFormat_map[35986] = _ImageTexelFormat_name[463:477]
+	_ImageTexelFormat_map[35987] = _ImageTexelFormat_name[477:507]
+	_ImageTexelFormat_map[36196] = _ImageTexelFormat_name[507:523]
+	_ImageTexelFormat_map[36244] = _ImageTexelFormat_name[523:537]
+	_ImageTexelFormat_map[36248] = _ImageTexelFormat_name[537:551]
+	_ImageTexelFormat_map[36249] = _ImageTexelFormat_name[551:566]
+	_ImageTexelFormat_map[37808] = _ImageTexelFormat_name[566:597]
+	_ImageTexelFormat_map[37809] = _ImageTexelFormat_name[597:628]
+	_ImageTexelFormat_map[37810] = _ImageTexelFormat_name[628:659]
+	_ImageTexelFormat_map[37811] = _ImageTexelFormat_name[659:690]
+	_ImageTexelFormat_map[37812] = _ImageTexelFormat_name[690:721]
+	_ImageTexelFormat_map[37813] = _ImageTexelFormat_name[721:752]
+	_ImageTexelFormat_map[37814] = _ImageTexelFormat_name[752:783]
+	_ImageTexelFormat_map[37815] = _ImageTexelFormat_name[783:814]
+	_ImageTexelFormat_map[37816] = _ImageTexelFormat_name[814:846]
+	_ImageTexelFormat_map[37817] = _ImageTexelFormat_name[846:878]
+	_ImageTexelFormat_map[37818] = _ImageTexelFormat_name[878:910]
+	_ImageTexelFormat_map[37819] = _ImageTexelFormat_name[910:943]
+	_ImageTexelFormat_map[37820] = _ImageTexelFormat_name[943:976]
+	_ImageTexelFormat_map[37821] = _ImageTexelFormat_name[976:1009]
+	_ImageTexelFormat_map[37840] = _ImageTexelFormat_name[1009:1048]
+	_ImageTexelFormat_map[37841] = _ImageTexelFormat_name[1048:1087]
+	_ImageTexelFormat_map[37842] = _ImageTexelFormat_name[1087:1126]
+	_ImageTexelFormat_map[37843] = _ImageTexelFormat_name[1126:1165]
+	_ImageTexelFormat_map[37844] = _ImageTexelFormat_name[1165:1204]
+	_ImageTexelFormat_map[37845] = _ImageTexelFormat_name[1204:1243]
+	_ImageTexelFormat_map[37846] = _ImageTexelFormat_name[1243:1282]
+	_ImageTexelFormat_map[37847] = _ImageTexelFormat_name[1282:1321]
+	_ImageTexelFormat_map[37848] = _ImageTexelFormat_name[1321:1361]
+	_ImageTexelFormat_map[37849] = _ImageTexelFormat_name[1361:1401]
+	_ImageTexelFormat_map[37850] = _ImageTexelFormat_name[1401:1441]
+	_ImageTexelFormat_map[37851] = _ImageTexelFormat_name[1441:1482]
+	_ImageTexelFormat_map[37852] = _ImageTexelFormat_name[1482:1523]
+	_ImageTexelFormat_map[37853] = _ImageTexelFormat_name[1523:1564]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30384,12 +30384,12 @@ func (v *ImageTexelFormat) Parse(s string) error {
 
 const _IndexedBufferTarget_name = "GL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFER"
 
-var _IndexedBufferTarget_map = map[IndexedBufferTarget]string{
-	35345: _IndexedBufferTarget_name[0:17],
-	35982: _IndexedBufferTarget_name[17:45],
-}
+var _IndexedBufferTarget_map = map[IndexedBufferTarget]string{}
 
 func init() {
+	_IndexedBufferTarget_map[35345] = _IndexedBufferTarget_name[0:17]
+	_IndexedBufferTarget_map[35982] = _IndexedBufferTarget_name[17:45]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "IndexedBufferTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30418,13 +30418,13 @@ func (v *IndexedBufferTarget) Parse(s string) error {
 
 const _IndicesType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INT"
 
-var _IndicesType_map = map[IndicesType]string{
-	5121: _IndicesType_name[0:16],
-	5123: _IndicesType_name[16:33],
-	5125: _IndicesType_name[33:48],
-}
+var _IndicesType_map = map[IndicesType]string{}
 
 func init() {
+	_IndicesType_map[5121] = _IndicesType_name[0:16]
+	_IndicesType_map[5123] = _IndicesType_name[16:33]
+	_IndicesType_map[5125] = _IndicesType_name[33:48]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30454,16 +30454,16 @@ func (v *IndicesType) Parse(s string) error {
 
 const _MapBufferRangeAccess_name = "GL_MAP_READ_BITGL_MAP_WRITE_BITGL_MAP_INVALIDATE_RANGE_BITGL_MAP_INVALIDATE_BUFFER_BITGL_MAP_FLUSH_EXPLICIT_BITGL_MAP_UNSYNCHRONIZED_BIT"
 
-var _MapBufferRangeAccess_map = map[MapBufferRangeAccess]string{
-	1:  _MapBufferRangeAccess_name[0:15],
-	2:  _MapBufferRangeAccess_name[15:31],
-	4:  _MapBufferRangeAccess_name[31:58],
-	8:  _MapBufferRangeAccess_name[58:86],
-	16: _MapBufferRangeAccess_name[86:111],
-	32: _MapBufferRangeAccess_name[111:136],
-}
+var _MapBufferRangeAccess_map = map[MapBufferRangeAccess]string{}
 
 func init() {
+	_MapBufferRangeAccess_map[1] = _MapBufferRangeAccess_name[0:15]
+	_MapBufferRangeAccess_map[2] = _MapBufferRangeAccess_name[15:31]
+	_MapBufferRangeAccess_map[4] = _MapBufferRangeAccess_name[31:58]
+	_MapBufferRangeAccess_map[8] = _MapBufferRangeAccess_name[58:86]
+	_MapBufferRangeAccess_map[16] = _MapBufferRangeAccess_name[86:111]
+	_MapBufferRangeAccess_map[32] = _MapBufferRangeAccess_name[111:136]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30496,12 +30496,12 @@ func (v *MapBufferRangeAccess) Parse(s string) error {
 
 const _PixelStoreParameter_name = "GL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENT"
 
-var _PixelStoreParameter_map = map[PixelStoreParameter]string{
-	3317: _PixelStoreParameter_name[0:19],
-	3333: _PixelStoreParameter_name[19:36],
-}
+var _PixelStoreParameter_map = map[PixelStoreParameter]string{}
 
 func init() {
+	_PixelStoreParameter_map[3317] = _PixelStoreParameter_name[0:19]
+	_PixelStoreParameter_map[3333] = _PixelStoreParameter_name[19:36]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30530,16 +30530,16 @@ func (v *PixelStoreParameter) Parse(s string) error {
 
 const _PrecisionType_name = "GL_LOW_FLOATGL_MEDIUM_FLOATGL_HIGH_FLOATGL_LOW_INTGL_MEDIUM_INTGL_HIGH_INT"
 
-var _PrecisionType_map = map[PrecisionType]string{
-	36336: _PrecisionType_name[0:12],
-	36337: _PrecisionType_name[12:27],
-	36338: _PrecisionType_name[27:40],
-	36339: _PrecisionType_name[40:50],
-	36340: _PrecisionType_name[50:63],
-	36341: _PrecisionType_name[63:74],
-}
+var _PrecisionType_map = map[PrecisionType]string{}
 
 func init() {
+	_PrecisionType_map[36336] = _PrecisionType_name[0:12]
+	_PrecisionType_map[36337] = _PrecisionType_name[12:27]
+	_PrecisionType_map[36338] = _PrecisionType_name[27:40]
+	_PrecisionType_map[36339] = _PrecisionType_name[40:50]
+	_PrecisionType_map[36340] = _PrecisionType_name[50:63]
+	_PrecisionType_map[36341] = _PrecisionType_name[63:74]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30572,19 +30572,19 @@ func (v *PrecisionType) Parse(s string) error {
 
 const _ProgramParameter_name = "GL_DELETE_STATUSGL_LINK_STATUSGL_VALIDATE_STATUSGL_INFO_LOG_LENGTHGL_ATTACHED_SHADERSGL_ACTIVE_UNIFORMSGL_ACTIVE_UNIFORM_MAX_LENGTHGL_ACTIVE_ATTRIBUTESGL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
 
-var _ProgramParameter_map = map[ProgramParameter]string{
-	35712: _ProgramParameter_name[0:16],
-	35714: _ProgramParameter_name[16:30],
-	35715: _ProgramParameter_name[30:48],
-	35716: _ProgramParameter_name[48:66],
-	35717: _ProgramParameter_name[66:85],
-	35718: _ProgramParameter_name[85:103],
-	35719: _ProgramParameter_name[103:131],
-	35721: _ProgramParameter_name[131:151],
-	35722: _ProgramParameter_name[151:181],
-}
+var _ProgramParameter_map = map[ProgramParameter]string{}
 
 func init() {
+	_ProgramParameter_map[35712] = _ProgramParameter_name[0:16]
+	_ProgramParameter_map[35714] = _ProgramParameter_name[16:30]
+	_ProgramParameter_map[35715] = _ProgramParameter_name[30:48]
+	_ProgramParameter_map[35716] = _ProgramParameter_name[48:66]
+	_ProgramParameter_map[35717] = _ProgramParameter_name[66:85]
+	_ProgramParameter_map[35718] = _ProgramParameter_name[85:103]
+	_ProgramParameter_map[35719] = _ProgramParameter_name[103:131]
+	_ProgramParameter_map[35721] = _ProgramParameter_name[131:151]
+	_ProgramParameter_map[35722] = _ProgramParameter_name[151:181]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30620,12 +30620,12 @@ func (v *ProgramParameter) Parse(s string) error {
 
 const _QueryObjectParameter_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
 
-var _QueryObjectParameter_map = map[QueryObjectParameter]string{
-	34918: _QueryObjectParameter_name[0:15],
-	34919: _QueryObjectParameter_name[15:40],
-}
+var _QueryObjectParameter_map = map[QueryObjectParameter]string{}
 
 func init() {
+	_QueryObjectParameter_map[34918] = _QueryObjectParameter_name[0:15]
+	_QueryObjectParameter_map[34919] = _QueryObjectParameter_name[15:40]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30654,12 +30654,12 @@ func (v *QueryObjectParameter) Parse(s string) error {
 
 const _QueryObjectParameter_GLES_3_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
 
-var _QueryObjectParameter_GLES_3_map = map[QueryObjectParameter_GLES_3]string{
-	34918: _QueryObjectParameter_GLES_3_name[0:15],
-	34919: _QueryObjectParameter_GLES_3_name[15:40],
-}
+var _QueryObjectParameter_GLES_3_map = map[QueryObjectParameter_GLES_3]string{}
 
 func init() {
+	_QueryObjectParameter_GLES_3_map[34918] = _QueryObjectParameter_GLES_3_name[0:15]
+	_QueryObjectParameter_GLES_3_map[34919] = _QueryObjectParameter_GLES_3_name[15:40]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryObjectParameter_GLES_3", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30688,12 +30688,12 @@ func (v *QueryObjectParameter_GLES_3) Parse(s string) error {
 
 const _QueryParameter_name = "GL_QUERY_COUNTER_BITS_EXTGL_CURRENT_QUERY"
 
-var _QueryParameter_map = map[QueryParameter]string{
-	34916: _QueryParameter_name[0:25],
-	34917: _QueryParameter_name[25:41],
-}
+var _QueryParameter_map = map[QueryParameter]string{}
 
 func init() {
+	_QueryParameter_map[34916] = _QueryParameter_name[0:25]
+	_QueryParameter_map[34917] = _QueryParameter_name[25:41]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30722,11 +30722,11 @@ func (v *QueryParameter) Parse(s string) error {
 
 const _QueryParameter_EXT_disjoint_timer_query_name = "GL_QUERY_COUNTER_BITS_EXT"
 
-var _QueryParameter_EXT_disjoint_timer_query_map = map[QueryParameter_EXT_disjoint_timer_query]string{
-	34916: _QueryParameter_EXT_disjoint_timer_query_name[0:25],
-}
+var _QueryParameter_EXT_disjoint_timer_query_map = map[QueryParameter_EXT_disjoint_timer_query]string{}
 
 func init() {
+	_QueryParameter_EXT_disjoint_timer_query_map[34916] = _QueryParameter_EXT_disjoint_timer_query_name[0:25]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryParameter_EXT_disjoint_timer_query", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30754,11 +30754,11 @@ func (v *QueryParameter_EXT_disjoint_timer_query) Parse(s string) error {
 
 const _QueryParameter_GLES_3_name = "GL_CURRENT_QUERY"
 
-var _QueryParameter_GLES_3_map = map[QueryParameter_GLES_3]string{
-	34917: _QueryParameter_GLES_3_name[0:16],
-}
+var _QueryParameter_GLES_3_map = map[QueryParameter_GLES_3]string{}
 
 func init() {
+	_QueryParameter_GLES_3_map[34917] = _QueryParameter_GLES_3_name[0:16]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryParameter_GLES_3", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30786,15 +30786,15 @@ func (v *QueryParameter_GLES_3) Parse(s string) error {
 
 const _QueryTarget_name = "GL_TIME_ELAPSED_EXTGL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVEGL_TIMESTAMP_EXT"
 
-var _QueryTarget_map = map[QueryTarget]string{
-	35007: _QueryTarget_name[0:19],
-	35887: _QueryTarget_name[19:40],
-	35976: _QueryTarget_name[40:80],
-	36202: _QueryTarget_name[80:114],
-	36392: _QueryTarget_name[114:130],
-}
+var _QueryTarget_map = map[QueryTarget]string{}
 
 func init() {
+	_QueryTarget_map[35007] = _QueryTarget_name[0:19]
+	_QueryTarget_map[35887] = _QueryTarget_name[19:40]
+	_QueryTarget_map[35976] = _QueryTarget_name[40:80]
+	_QueryTarget_map[36202] = _QueryTarget_name[80:114]
+	_QueryTarget_map[36392] = _QueryTarget_name[114:130]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30826,12 +30826,12 @@ func (v *QueryTarget) Parse(s string) error {
 
 const _QueryTarget_EXT_disjoint_timer_query_name = "GL_TIME_ELAPSED_EXTGL_TIMESTAMP_EXT"
 
-var _QueryTarget_EXT_disjoint_timer_query_map = map[QueryTarget_EXT_disjoint_timer_query]string{
-	35007: _QueryTarget_EXT_disjoint_timer_query_name[0:19],
-	36392: _QueryTarget_EXT_disjoint_timer_query_name[19:35],
-}
+var _QueryTarget_EXT_disjoint_timer_query_map = map[QueryTarget_EXT_disjoint_timer_query]string{}
 
 func init() {
+	_QueryTarget_EXT_disjoint_timer_query_map[35007] = _QueryTarget_EXT_disjoint_timer_query_name[0:19]
+	_QueryTarget_EXT_disjoint_timer_query_map[36392] = _QueryTarget_EXT_disjoint_timer_query_name[19:35]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryTarget_EXT_disjoint_timer_query", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30860,13 +30860,13 @@ func (v *QueryTarget_EXT_disjoint_timer_query) Parse(s string) error {
 
 const _QueryTarget_GLES_3_name = "GL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVE"
 
-var _QueryTarget_GLES_3_map = map[QueryTarget_GLES_3]string{
-	35887: _QueryTarget_GLES_3_name[0:21],
-	35976: _QueryTarget_GLES_3_name[21:61],
-	36202: _QueryTarget_GLES_3_name[61:95],
-}
+var _QueryTarget_GLES_3_map = map[QueryTarget_GLES_3]string{}
 
 func init() {
+	_QueryTarget_GLES_3_map[35887] = _QueryTarget_GLES_3_name[0:21]
+	_QueryTarget_GLES_3_map[35976] = _QueryTarget_GLES_3_name[21:61]
+	_QueryTarget_GLES_3_map[36202] = _QueryTarget_GLES_3_name[61:95]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "QueryTarget_GLES_3", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30896,16 +30896,16 @@ func (v *QueryTarget_GLES_3) Parse(s string) error {
 
 const _RenderbufferFormat_name = "GL_RGBA4GL_RGB5_A1GL_RGBA8GL_DEPTH_COMPONENT16GL_STENCIL_INDEX8GL_RGB565"
 
-var _RenderbufferFormat_map = map[RenderbufferFormat]string{
-	32854: _RenderbufferFormat_name[0:8],
-	32855: _RenderbufferFormat_name[8:18],
-	32856: _RenderbufferFormat_name[18:26],
-	33189: _RenderbufferFormat_name[26:46],
-	36168: _RenderbufferFormat_name[46:63],
-	36194: _RenderbufferFormat_name[63:72],
-}
+var _RenderbufferFormat_map = map[RenderbufferFormat]string{}
 
 func init() {
+	_RenderbufferFormat_map[32854] = _RenderbufferFormat_name[0:8]
+	_RenderbufferFormat_map[32855] = _RenderbufferFormat_name[8:18]
+	_RenderbufferFormat_map[32856] = _RenderbufferFormat_name[18:26]
+	_RenderbufferFormat_map[33189] = _RenderbufferFormat_name[26:46]
+	_RenderbufferFormat_map[36168] = _RenderbufferFormat_name[46:63]
+	_RenderbufferFormat_map[36194] = _RenderbufferFormat_name[63:72]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30938,19 +30938,19 @@ func (v *RenderbufferFormat) Parse(s string) error {
 
 const _RenderbufferParameter_name = "GL_RENDERBUFFER_WIDTHGL_RENDERBUFFER_HEIGHTGL_RENDERBUFFER_INTERNAL_FORMATGL_RENDERBUFFER_RED_SIZEGL_RENDERBUFFER_GREEN_SIZEGL_RENDERBUFFER_BLUE_SIZEGL_RENDERBUFFER_ALPHA_SIZEGL_RENDERBUFFER_DEPTH_SIZEGL_RENDERBUFFER_STENCIL_SIZE"
 
-var _RenderbufferParameter_map = map[RenderbufferParameter]string{
-	36162: _RenderbufferParameter_name[0:21],
-	36163: _RenderbufferParameter_name[21:43],
-	36164: _RenderbufferParameter_name[43:74],
-	36176: _RenderbufferParameter_name[74:98],
-	36177: _RenderbufferParameter_name[98:124],
-	36178: _RenderbufferParameter_name[124:149],
-	36179: _RenderbufferParameter_name[149:175],
-	36180: _RenderbufferParameter_name[175:201],
-	36181: _RenderbufferParameter_name[201:229],
-}
+var _RenderbufferParameter_map = map[RenderbufferParameter]string{}
 
 func init() {
+	_RenderbufferParameter_map[36162] = _RenderbufferParameter_name[0:21]
+	_RenderbufferParameter_map[36163] = _RenderbufferParameter_name[21:43]
+	_RenderbufferParameter_map[36164] = _RenderbufferParameter_name[43:74]
+	_RenderbufferParameter_map[36176] = _RenderbufferParameter_name[74:98]
+	_RenderbufferParameter_map[36177] = _RenderbufferParameter_name[98:124]
+	_RenderbufferParameter_map[36178] = _RenderbufferParameter_name[124:149]
+	_RenderbufferParameter_map[36179] = _RenderbufferParameter_name[149:175]
+	_RenderbufferParameter_map[36180] = _RenderbufferParameter_name[175:201]
+	_RenderbufferParameter_map[36181] = _RenderbufferParameter_name[201:229]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -30986,11 +30986,11 @@ func (v *RenderbufferParameter) Parse(s string) error {
 
 const _RenderbufferTarget_name = "GL_RENDERBUFFER"
 
-var _RenderbufferTarget_map = map[RenderbufferTarget]string{
-	36161: _RenderbufferTarget_name[0:15],
-}
+var _RenderbufferTarget_map = map[RenderbufferTarget]string{}
 
 func init() {
+	_RenderbufferTarget_map[36161] = _RenderbufferTarget_name[0:15]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31018,14 +31018,14 @@ func (v *RenderbufferTarget) Parse(s string) error {
 
 const _ResetStatus_name = "GL_NO_ERRORGL_GUILTY_CONTEXT_RESET_EXTGL_INNOCENT_CONTEXT_RESET_EXTGL_UNKNOWN_CONTEXT_RESET_EXT"
 
-var _ResetStatus_map = map[ResetStatus]string{
-	0:     _ResetStatus_name[0:11],
-	33363: _ResetStatus_name[11:38],
-	33364: _ResetStatus_name[38:67],
-	33365: _ResetStatus_name[67:95],
-}
+var _ResetStatus_map = map[ResetStatus]string{}
 
 func init() {
+	_ResetStatus_map[0] = _ResetStatus_name[0:11]
+	_ResetStatus_map[33363] = _ResetStatus_name[11:38]
+	_ResetStatus_map[33364] = _ResetStatus_name[38:67]
+	_ResetStatus_map[33365] = _ResetStatus_name[67:95]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31056,17 +31056,17 @@ func (v *ResetStatus) Parse(s string) error {
 
 const _ShaderAttribType_name = "GL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4"
 
-var _ShaderAttribType_map = map[ShaderAttribType]string{
-	5126:  _ShaderAttribType_name[0:8],
-	35664: _ShaderAttribType_name[8:21],
-	35665: _ShaderAttribType_name[21:34],
-	35666: _ShaderAttribType_name[34:47],
-	35674: _ShaderAttribType_name[47:60],
-	35675: _ShaderAttribType_name[60:73],
-	35676: _ShaderAttribType_name[73:86],
-}
+var _ShaderAttribType_map = map[ShaderAttribType]string{}
 
 func init() {
+	_ShaderAttribType_map[5126] = _ShaderAttribType_name[0:8]
+	_ShaderAttribType_map[35664] = _ShaderAttribType_name[8:21]
+	_ShaderAttribType_map[35665] = _ShaderAttribType_name[21:34]
+	_ShaderAttribType_map[35666] = _ShaderAttribType_name[34:47]
+	_ShaderAttribType_map[35674] = _ShaderAttribType_name[47:60]
+	_ShaderAttribType_map[35675] = _ShaderAttribType_name[60:73]
+	_ShaderAttribType_map[35676] = _ShaderAttribType_name[73:86]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31100,15 +31100,15 @@ func (v *ShaderAttribType) Parse(s string) error {
 
 const _ShaderParameter_name = "GL_SHADER_TYPEGL_DELETE_STATUSGL_COMPILE_STATUSGL_INFO_LOG_LENGTHGL_SHADER_SOURCE_LENGTH"
 
-var _ShaderParameter_map = map[ShaderParameter]string{
-	35663: _ShaderParameter_name[0:14],
-	35712: _ShaderParameter_name[14:30],
-	35713: _ShaderParameter_name[30:47],
-	35716: _ShaderParameter_name[47:65],
-	35720: _ShaderParameter_name[65:88],
-}
+var _ShaderParameter_map = map[ShaderParameter]string{}
 
 func init() {
+	_ShaderParameter_map[35663] = _ShaderParameter_name[0:14]
+	_ShaderParameter_map[35712] = _ShaderParameter_name[14:30]
+	_ShaderParameter_map[35713] = _ShaderParameter_name[30:47]
+	_ShaderParameter_map[35716] = _ShaderParameter_name[47:65]
+	_ShaderParameter_map[35720] = _ShaderParameter_name[65:88]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31140,12 +31140,12 @@ func (v *ShaderParameter) Parse(s string) error {
 
 const _ShaderType_name = "GL_FRAGMENT_SHADERGL_VERTEX_SHADER"
 
-var _ShaderType_map = map[ShaderType]string{
-	35632: _ShaderType_name[0:18],
-	35633: _ShaderType_name[18:34],
-}
+var _ShaderType_map = map[ShaderType]string{}
 
 func init() {
+	_ShaderType_map[35632] = _ShaderType_name[0:18]
+	_ShaderType_map[35633] = _ShaderType_name[18:34]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31174,27 +31174,27 @@ func (v *ShaderType) Parse(s string) error {
 
 const _ShaderUniformType_name = "GL_INTGL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_INT_VEC2GL_INT_VEC3GL_INT_VEC4GL_BOOLGL_BOOL_VEC2GL_BOOL_VEC3GL_BOOL_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4GL_SAMPLER_2DGL_SAMPLER_CUBE"
 
-var _ShaderUniformType_map = map[ShaderUniformType]string{
-	5124:  _ShaderUniformType_name[0:6],
-	5126:  _ShaderUniformType_name[6:14],
-	35664: _ShaderUniformType_name[14:27],
-	35665: _ShaderUniformType_name[27:40],
-	35666: _ShaderUniformType_name[40:53],
-	35667: _ShaderUniformType_name[53:64],
-	35668: _ShaderUniformType_name[64:75],
-	35669: _ShaderUniformType_name[75:86],
-	35670: _ShaderUniformType_name[86:93],
-	35671: _ShaderUniformType_name[93:105],
-	35672: _ShaderUniformType_name[105:117],
-	35673: _ShaderUniformType_name[117:129],
-	35674: _ShaderUniformType_name[129:142],
-	35675: _ShaderUniformType_name[142:155],
-	35676: _ShaderUniformType_name[155:168],
-	35678: _ShaderUniformType_name[168:181],
-	35680: _ShaderUniformType_name[181:196],
-}
+var _ShaderUniformType_map = map[ShaderUniformType]string{}
 
 func init() {
+	_ShaderUniformType_map[5124] = _ShaderUniformType_name[0:6]
+	_ShaderUniformType_map[5126] = _ShaderUniformType_name[6:14]
+	_ShaderUniformType_map[35664] = _ShaderUniformType_name[14:27]
+	_ShaderUniformType_map[35665] = _ShaderUniformType_name[27:40]
+	_ShaderUniformType_map[35666] = _ShaderUniformType_name[40:53]
+	_ShaderUniformType_map[35667] = _ShaderUniformType_name[53:64]
+	_ShaderUniformType_map[35668] = _ShaderUniformType_name[64:75]
+	_ShaderUniformType_map[35669] = _ShaderUniformType_name[75:86]
+	_ShaderUniformType_map[35670] = _ShaderUniformType_name[86:93]
+	_ShaderUniformType_map[35671] = _ShaderUniformType_name[93:105]
+	_ShaderUniformType_map[35672] = _ShaderUniformType_name[105:117]
+	_ShaderUniformType_map[35673] = _ShaderUniformType_name[117:129]
+	_ShaderUniformType_map[35674] = _ShaderUniformType_name[129:142]
+	_ShaderUniformType_map[35675] = _ShaderUniformType_name[142:155]
+	_ShaderUniformType_map[35676] = _ShaderUniformType_name[155:168]
+	_ShaderUniformType_map[35678] = _ShaderUniformType_name[168:181]
+	_ShaderUniformType_map[35680] = _ShaderUniformType_name[181:196]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31238,99 +31238,99 @@ func (v *ShaderUniformType) Parse(s string) error {
 
 const _StateVariable_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_MAX_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_READ_FRAMEBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORSGL_GPU_DISJOINT_EXT"
 
-var _StateVariable_map = map[StateVariable]string{
-	2849:  _StateVariable_name[0:13],
-	2884:  _StateVariable_name[13:25],
-	2885:  _StateVariable_name[25:42],
-	2886:  _StateVariable_name[42:55],
-	2928:  _StateVariable_name[55:69],
-	2929:  _StateVariable_name[69:82],
-	2930:  _StateVariable_name[82:100],
-	2931:  _StateVariable_name[100:120],
-	2932:  _StateVariable_name[120:133],
-	2960:  _StateVariable_name[133:148],
-	2961:  _StateVariable_name[148:170],
-	2962:  _StateVariable_name[170:185],
-	2963:  _StateVariable_name[185:206],
-	2964:  _StateVariable_name[206:221],
-	2965:  _StateVariable_name[221:247],
-	2966:  _StateVariable_name[247:273],
-	2967:  _StateVariable_name[273:287],
-	2968:  _StateVariable_name[287:307],
-	2978:  _StateVariable_name[307:318],
-	3024:  _StateVariable_name[318:327],
-	3042:  _StateVariable_name[327:335],
-	3088:  _StateVariable_name[335:349],
-	3089:  _StateVariable_name[349:364],
-	3106:  _StateVariable_name[364:384],
-	3107:  _StateVariable_name[384:402],
-	3317:  _StateVariable_name[402:421],
-	3333:  _StateVariable_name[421:438],
-	3379:  _StateVariable_name[438:457],
-	3386:  _StateVariable_name[457:477],
-	3408:  _StateVariable_name[477:493],
-	3410:  _StateVariable_name[493:504],
-	3411:  _StateVariable_name[504:517],
-	3412:  _StateVariable_name[517:529],
-	3413:  _StateVariable_name[529:542],
-	3414:  _StateVariable_name[542:555],
-	3415:  _StateVariable_name[555:570],
-	10752: _StateVariable_name[570:593],
-	32773: _StateVariable_name[593:607],
-	32777: _StateVariable_name[607:628],
-	32823: _StateVariable_name[628:650],
-	32824: _StateVariable_name[650:674],
-	32873: _StateVariable_name[674:695],
-	32926: _StateVariable_name[695:722],
-	32928: _StateVariable_name[722:740],
-	32936: _StateVariable_name[740:757],
-	32937: _StateVariable_name[757:767],
-	32938: _StateVariable_name[767:791],
-	32939: _StateVariable_name[791:816],
-	32968: _StateVariable_name[816:832],
-	32969: _StateVariable_name[832:848],
-	32970: _StateVariable_name[848:866],
-	32971: _StateVariable_name[866:884],
-	33170: _StateVariable_name[884:907],
-	33901: _StateVariable_name[907:934],
-	33902: _StateVariable_name[934:961],
-	34016: _StateVariable_name[961:978],
-	34024: _StateVariable_name[978:1002],
-	34047: _StateVariable_name[1002:1035],
-	34068: _StateVariable_name[1035:1062],
-	34076: _StateVariable_name[1062:1090],
-	34466: _StateVariable_name[1090:1123],
-	34467: _StateVariable_name[1123:1152],
-	34816: _StateVariable_name[1152:1172],
-	34817: _StateVariable_name[1172:1192],
-	34818: _StateVariable_name[1192:1223],
-	34819: _StateVariable_name[1223:1254],
-	34877: _StateVariable_name[1254:1277],
-	34921: _StateVariable_name[1277:1298],
-	34930: _StateVariable_name[1298:1324],
-	34964: _StateVariable_name[1324:1347],
-	34965: _StateVariable_name[1347:1378],
-	35660: _StateVariable_name[1378:1411],
-	35661: _StateVariable_name[1411:1446],
-	35725: _StateVariable_name[1446:1464],
-	35738: _StateVariable_name[1464:1497],
-	35739: _StateVariable_name[1497:1532],
-	36003: _StateVariable_name[1532:1551],
-	36004: _StateVariable_name[1551:1577],
-	36005: _StateVariable_name[1577:1602],
-	36006: _StateVariable_name[1602:1624],
-	36007: _StateVariable_name[1624:1647],
-	36010: _StateVariable_name[1647:1674],
-	36344: _StateVariable_name[1674:1698],
-	36345: _StateVariable_name[1698:1726],
-	36346: _StateVariable_name[1726:1744],
-	36347: _StateVariable_name[1744:1773],
-	36348: _StateVariable_name[1773:1795],
-	36349: _StateVariable_name[1795:1826],
-	36795: _StateVariable_name[1826:1845],
-}
+var _StateVariable_map = map[StateVariable]string{}
 
 func init() {
+	_StateVariable_map[2849] = _StateVariable_name[0:13]
+	_StateVariable_map[2884] = _StateVariable_name[13:25]
+	_StateVariable_map[2885] = _StateVariable_name[25:42]
+	_StateVariable_map[2886] = _StateVariable_name[42:55]
+	_StateVariable_map[2928] = _StateVariable_name[55:69]
+	_StateVariable_map[2929] = _StateVariable_name[69:82]
+	_StateVariable_map[2930] = _StateVariable_name[82:100]
+	_StateVariable_map[2931] = _StateVariable_name[100:120]
+	_StateVariable_map[2932] = _StateVariable_name[120:133]
+	_StateVariable_map[2960] = _StateVariable_name[133:148]
+	_StateVariable_map[2961] = _StateVariable_name[148:170]
+	_StateVariable_map[2962] = _StateVariable_name[170:185]
+	_StateVariable_map[2963] = _StateVariable_name[185:206]
+	_StateVariable_map[2964] = _StateVariable_name[206:221]
+	_StateVariable_map[2965] = _StateVariable_name[221:247]
+	_StateVariable_map[2966] = _StateVariable_name[247:273]
+	_StateVariable_map[2967] = _StateVariable_name[273:287]
+	_StateVariable_map[2968] = _StateVariable_name[287:307]
+	_StateVariable_map[2978] = _StateVariable_name[307:318]
+	_StateVariable_map[3024] = _StateVariable_name[318:327]
+	_StateVariable_map[3042] = _StateVariable_name[327:335]
+	_StateVariable_map[3088] = _StateVariable_name[335:349]
+	_StateVariable_map[3089] = _StateVariable_name[349:364]
+	_StateVariable_map[3106] = _StateVariable_name[364:384]
+	_StateVariable_map[3107] = _StateVariable_name[384:402]
+	_StateVariable_map[3317] = _StateVariable_name[402:421]
+	_StateVariable_map[3333] = _StateVariable_name[421:438]
+	_StateVariable_map[3379] = _StateVariable_name[438:457]
+	_StateVariable_map[3386] = _StateVariable_name[457:477]
+	_StateVariable_map[3408] = _StateVariable_name[477:493]
+	_StateVariable_map[3410] = _StateVariable_name[493:504]
+	_StateVariable_map[3411] = _StateVariable_name[504:517]
+	_StateVariable_map[3412] = _StateVariable_name[517:529]
+	_StateVariable_map[3413] = _StateVariable_name[529:542]
+	_StateVariable_map[3414] = _StateVariable_name[542:555]
+	_StateVariable_map[3415] = _StateVariable_name[555:570]
+	_StateVariable_map[10752] = _StateVariable_name[570:593]
+	_StateVariable_map[32773] = _StateVariable_name[593:607]
+	_StateVariable_map[32777] = _StateVariable_name[607:628]
+	_StateVariable_map[32823] = _StateVariable_name[628:650]
+	_StateVariable_map[32824] = _StateVariable_name[650:674]
+	_StateVariable_map[32873] = _StateVariable_name[674:695]
+	_StateVariable_map[32926] = _StateVariable_name[695:722]
+	_StateVariable_map[32928] = _StateVariable_name[722:740]
+	_StateVariable_map[32936] = _StateVariable_name[740:757]
+	_StateVariable_map[32937] = _StateVariable_name[757:767]
+	_StateVariable_map[32938] = _StateVariable_name[767:791]
+	_StateVariable_map[32939] = _StateVariable_name[791:816]
+	_StateVariable_map[32968] = _StateVariable_name[816:832]
+	_StateVariable_map[32969] = _StateVariable_name[832:848]
+	_StateVariable_map[32970] = _StateVariable_name[848:866]
+	_StateVariable_map[32971] = _StateVariable_name[866:884]
+	_StateVariable_map[33170] = _StateVariable_name[884:907]
+	_StateVariable_map[33901] = _StateVariable_name[907:934]
+	_StateVariable_map[33902] = _StateVariable_name[934:961]
+	_StateVariable_map[34016] = _StateVariable_name[961:978]
+	_StateVariable_map[34024] = _StateVariable_name[978:1002]
+	_StateVariable_map[34047] = _StateVariable_name[1002:1035]
+	_StateVariable_map[34068] = _StateVariable_name[1035:1062]
+	_StateVariable_map[34076] = _StateVariable_name[1062:1090]
+	_StateVariable_map[34466] = _StateVariable_name[1090:1123]
+	_StateVariable_map[34467] = _StateVariable_name[1123:1152]
+	_StateVariable_map[34816] = _StateVariable_name[1152:1172]
+	_StateVariable_map[34817] = _StateVariable_name[1172:1192]
+	_StateVariable_map[34818] = _StateVariable_name[1192:1223]
+	_StateVariable_map[34819] = _StateVariable_name[1223:1254]
+	_StateVariable_map[34877] = _StateVariable_name[1254:1277]
+	_StateVariable_map[34921] = _StateVariable_name[1277:1298]
+	_StateVariable_map[34930] = _StateVariable_name[1298:1324]
+	_StateVariable_map[34964] = _StateVariable_name[1324:1347]
+	_StateVariable_map[34965] = _StateVariable_name[1347:1378]
+	_StateVariable_map[35660] = _StateVariable_name[1378:1411]
+	_StateVariable_map[35661] = _StateVariable_name[1411:1446]
+	_StateVariable_map[35725] = _StateVariable_name[1446:1464]
+	_StateVariable_map[35738] = _StateVariable_name[1464:1497]
+	_StateVariable_map[35739] = _StateVariable_name[1497:1532]
+	_StateVariable_map[36003] = _StateVariable_name[1532:1551]
+	_StateVariable_map[36004] = _StateVariable_name[1551:1577]
+	_StateVariable_map[36005] = _StateVariable_name[1577:1602]
+	_StateVariable_map[36006] = _StateVariable_name[1602:1624]
+	_StateVariable_map[36007] = _StateVariable_name[1624:1647]
+	_StateVariable_map[36010] = _StateVariable_name[1647:1674]
+	_StateVariable_map[36344] = _StateVariable_name[1674:1698]
+	_StateVariable_map[36345] = _StateVariable_name[1698:1726]
+	_StateVariable_map[36346] = _StateVariable_name[1726:1744]
+	_StateVariable_map[36347] = _StateVariable_name[1744:1773]
+	_StateVariable_map[36348] = _StateVariable_name[1773:1795]
+	_StateVariable_map[36349] = _StateVariable_name[1795:1826]
+	_StateVariable_map[36795] = _StateVariable_name[1826:1845]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31446,11 +31446,11 @@ func (v *StateVariable) Parse(s string) error {
 
 const _StateVariable_EXT_disjoint_timer_query_name = "GL_GPU_DISJOINT_EXT"
 
-var _StateVariable_EXT_disjoint_timer_query_map = map[StateVariable_EXT_disjoint_timer_query]string{
-	36795: _StateVariable_EXT_disjoint_timer_query_name[0:19],
-}
+var _StateVariable_EXT_disjoint_timer_query_map = map[StateVariable_EXT_disjoint_timer_query]string{}
 
 func init() {
+	_StateVariable_EXT_disjoint_timer_query_map[36795] = _StateVariable_EXT_disjoint_timer_query_name[0:19]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StateVariable_EXT_disjoint_timer_query", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31478,11 +31478,11 @@ func (v *StateVariable_EXT_disjoint_timer_query) Parse(s string) error {
 
 const _StateVariable_EXT_texture_filter_anisotropic_name = "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
 
-var _StateVariable_EXT_texture_filter_anisotropic_map = map[StateVariable_EXT_texture_filter_anisotropic]string{
-	34047: _StateVariable_EXT_texture_filter_anisotropic_name[0:33],
-}
+var _StateVariable_EXT_texture_filter_anisotropic_map = map[StateVariable_EXT_texture_filter_anisotropic]string{}
 
 func init() {
+	_StateVariable_EXT_texture_filter_anisotropic_map[34047] = _StateVariable_EXT_texture_filter_anisotropic_name[0:33]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StateVariable_EXT_texture_filter_anisotropic", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31510,96 +31510,96 @@ func (v *StateVariable_EXT_texture_filter_anisotropic) Parse(s string) error {
 
 const _StateVariable_GLES_2_0_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORS"
 
-var _StateVariable_GLES_2_0_map = map[StateVariable_GLES_2_0]string{
-	2849:  _StateVariable_GLES_2_0_name[0:13],
-	2884:  _StateVariable_GLES_2_0_name[13:25],
-	2885:  _StateVariable_GLES_2_0_name[25:42],
-	2886:  _StateVariable_GLES_2_0_name[42:55],
-	2928:  _StateVariable_GLES_2_0_name[55:69],
-	2929:  _StateVariable_GLES_2_0_name[69:82],
-	2930:  _StateVariable_GLES_2_0_name[82:100],
-	2931:  _StateVariable_GLES_2_0_name[100:120],
-	2932:  _StateVariable_GLES_2_0_name[120:133],
-	2960:  _StateVariable_GLES_2_0_name[133:148],
-	2961:  _StateVariable_GLES_2_0_name[148:170],
-	2962:  _StateVariable_GLES_2_0_name[170:185],
-	2963:  _StateVariable_GLES_2_0_name[185:206],
-	2964:  _StateVariable_GLES_2_0_name[206:221],
-	2965:  _StateVariable_GLES_2_0_name[221:247],
-	2966:  _StateVariable_GLES_2_0_name[247:273],
-	2967:  _StateVariable_GLES_2_0_name[273:287],
-	2968:  _StateVariable_GLES_2_0_name[287:307],
-	2978:  _StateVariable_GLES_2_0_name[307:318],
-	3024:  _StateVariable_GLES_2_0_name[318:327],
-	3042:  _StateVariable_GLES_2_0_name[327:335],
-	3088:  _StateVariable_GLES_2_0_name[335:349],
-	3089:  _StateVariable_GLES_2_0_name[349:364],
-	3106:  _StateVariable_GLES_2_0_name[364:384],
-	3107:  _StateVariable_GLES_2_0_name[384:402],
-	3317:  _StateVariable_GLES_2_0_name[402:421],
-	3333:  _StateVariable_GLES_2_0_name[421:438],
-	3379:  _StateVariable_GLES_2_0_name[438:457],
-	3386:  _StateVariable_GLES_2_0_name[457:477],
-	3408:  _StateVariable_GLES_2_0_name[477:493],
-	3410:  _StateVariable_GLES_2_0_name[493:504],
-	3411:  _StateVariable_GLES_2_0_name[504:517],
-	3412:  _StateVariable_GLES_2_0_name[517:529],
-	3413:  _StateVariable_GLES_2_0_name[529:542],
-	3414:  _StateVariable_GLES_2_0_name[542:555],
-	3415:  _StateVariable_GLES_2_0_name[555:570],
-	10752: _StateVariable_GLES_2_0_name[570:593],
-	32773: _StateVariable_GLES_2_0_name[593:607],
-	32777: _StateVariable_GLES_2_0_name[607:628],
-	32823: _StateVariable_GLES_2_0_name[628:650],
-	32824: _StateVariable_GLES_2_0_name[650:674],
-	32873: _StateVariable_GLES_2_0_name[674:695],
-	32926: _StateVariable_GLES_2_0_name[695:722],
-	32928: _StateVariable_GLES_2_0_name[722:740],
-	32936: _StateVariable_GLES_2_0_name[740:757],
-	32937: _StateVariable_GLES_2_0_name[757:767],
-	32938: _StateVariable_GLES_2_0_name[767:791],
-	32939: _StateVariable_GLES_2_0_name[791:816],
-	32968: _StateVariable_GLES_2_0_name[816:832],
-	32969: _StateVariable_GLES_2_0_name[832:848],
-	32970: _StateVariable_GLES_2_0_name[848:866],
-	32971: _StateVariable_GLES_2_0_name[866:884],
-	33170: _StateVariable_GLES_2_0_name[884:907],
-	33901: _StateVariable_GLES_2_0_name[907:934],
-	33902: _StateVariable_GLES_2_0_name[934:961],
-	34016: _StateVariable_GLES_2_0_name[961:978],
-	34024: _StateVariable_GLES_2_0_name[978:1002],
-	34068: _StateVariable_GLES_2_0_name[1002:1029],
-	34076: _StateVariable_GLES_2_0_name[1029:1057],
-	34466: _StateVariable_GLES_2_0_name[1057:1090],
-	34467: _StateVariable_GLES_2_0_name[1090:1119],
-	34816: _StateVariable_GLES_2_0_name[1119:1139],
-	34817: _StateVariable_GLES_2_0_name[1139:1159],
-	34818: _StateVariable_GLES_2_0_name[1159:1190],
-	34819: _StateVariable_GLES_2_0_name[1190:1221],
-	34877: _StateVariable_GLES_2_0_name[1221:1244],
-	34921: _StateVariable_GLES_2_0_name[1244:1265],
-	34930: _StateVariable_GLES_2_0_name[1265:1291],
-	34964: _StateVariable_GLES_2_0_name[1291:1314],
-	34965: _StateVariable_GLES_2_0_name[1314:1345],
-	35660: _StateVariable_GLES_2_0_name[1345:1378],
-	35661: _StateVariable_GLES_2_0_name[1378:1413],
-	35725: _StateVariable_GLES_2_0_name[1413:1431],
-	35738: _StateVariable_GLES_2_0_name[1431:1464],
-	35739: _StateVariable_GLES_2_0_name[1464:1499],
-	36003: _StateVariable_GLES_2_0_name[1499:1518],
-	36004: _StateVariable_GLES_2_0_name[1518:1544],
-	36005: _StateVariable_GLES_2_0_name[1544:1569],
-	36006: _StateVariable_GLES_2_0_name[1569:1591],
-	36007: _StateVariable_GLES_2_0_name[1591:1614],
-	36344: _StateVariable_GLES_2_0_name[1614:1638],
-	36345: _StateVariable_GLES_2_0_name[1638:1666],
-	36346: _StateVariable_GLES_2_0_name[1666:1684],
-	36347: _StateVariable_GLES_2_0_name[1684:1713],
-	36348: _StateVariable_GLES_2_0_name[1713:1735],
-	36349: _StateVariable_GLES_2_0_name[1735:1766],
-}
+var _StateVariable_GLES_2_0_map = map[StateVariable_GLES_2_0]string{}
 
 func init() {
+	_StateVariable_GLES_2_0_map[2849] = _StateVariable_GLES_2_0_name[0:13]
+	_StateVariable_GLES_2_0_map[2884] = _StateVariable_GLES_2_0_name[13:25]
+	_StateVariable_GLES_2_0_map[2885] = _StateVariable_GLES_2_0_name[25:42]
+	_StateVariable_GLES_2_0_map[2886] = _StateVariable_GLES_2_0_name[42:55]
+	_StateVariable_GLES_2_0_map[2928] = _StateVariable_GLES_2_0_name[55:69]
+	_StateVariable_GLES_2_0_map[2929] = _StateVariable_GLES_2_0_name[69:82]
+	_StateVariable_GLES_2_0_map[2930] = _StateVariable_GLES_2_0_name[82:100]
+	_StateVariable_GLES_2_0_map[2931] = _StateVariable_GLES_2_0_name[100:120]
+	_StateVariable_GLES_2_0_map[2932] = _StateVariable_GLES_2_0_name[120:133]
+	_StateVariable_GLES_2_0_map[2960] = _StateVariable_GLES_2_0_name[133:148]
+	_StateVariable_GLES_2_0_map[2961] = _StateVariable_GLES_2_0_name[148:170]
+	_StateVariable_GLES_2_0_map[2962] = _StateVariable_GLES_2_0_name[170:185]
+	_StateVariable_GLES_2_0_map[2963] = _StateVariable_GLES_2_0_name[185:206]
+	_StateVariable_GLES_2_0_map[2964] = _StateVariable_GLES_2_0_name[206:221]
+	_StateVariable_GLES_2_0_map[2965] = _StateVariable_GLES_2_0_name[221:247]
+	_StateVariable_GLES_2_0_map[2966] = _StateVariable_GLES_2_0_name[247:273]
+	_StateVariable_GLES_2_0_map[2967] = _StateVariable_GLES_2_0_name[273:287]
+	_StateVariable_GLES_2_0_map[2968] = _StateVariable_GLES_2_0_name[287:307]
+	_StateVariable_GLES_2_0_map[2978] = _StateVariable_GLES_2_0_name[307:318]
+	_StateVariable_GLES_2_0_map[3024] = _StateVariable_GLES_2_0_name[318:327]
+	_StateVariable_GLES_2_0_map[3042] = _StateVariable_GLES_2_0_name[327:335]
+	_StateVariable_GLES_2_0_map[3088] = _StateVariable_GLES_2_0_name[335:349]
+	_StateVariable_GLES_2_0_map[3089] = _StateVariable_GLES_2_0_name[349:364]
+	_StateVariable_GLES_2_0_map[3106] = _StateVariable_GLES_2_0_name[364:384]
+	_StateVariable_GLES_2_0_map[3107] = _StateVariable_GLES_2_0_name[384:402]
+	_StateVariable_GLES_2_0_map[3317] = _StateVariable_GLES_2_0_name[402:421]
+	_StateVariable_GLES_2_0_map[3333] = _StateVariable_GLES_2_0_name[421:438]
+	_StateVariable_GLES_2_0_map[3379] = _StateVariable_GLES_2_0_name[438:457]
+	_StateVariable_GLES_2_0_map[3386] = _StateVariable_GLES_2_0_name[457:477]
+	_StateVariable_GLES_2_0_map[3408] = _StateVariable_GLES_2_0_name[477:493]
+	_StateVariable_GLES_2_0_map[3410] = _StateVariable_GLES_2_0_name[493:504]
+	_StateVariable_GLES_2_0_map[3411] = _StateVariable_GLES_2_0_name[504:517]
+	_StateVariable_GLES_2_0_map[3412] = _StateVariable_GLES_2_0_name[517:529]
+	_StateVariable_GLES_2_0_map[3413] = _StateVariable_GLES_2_0_name[529:542]
+	_StateVariable_GLES_2_0_map[3414] = _StateVariable_GLES_2_0_name[542:555]
+	_StateVariable_GLES_2_0_map[3415] = _StateVariable_GLES_2_0_name[555:570]
+	_StateVariable_GLES_2_0_map[10752] = _StateVariable_GLES_2_0_name[570:593]
+	_StateVariable_GLES_2_0_map[32773] = _StateVariable_GLES_2_0_name[593:607]
+	_StateVariable_GLES_2_0_map[32777] = _StateVariable_GLES_2_0_name[607:628]
+	_StateVariable_GLES_2_0_map[32823] = _StateVariable_GLES_2_0_name[628:650]
+	_StateVariable_GLES_2_0_map[32824] = _StateVariable_GLES_2_0_name[650:674]
+	_StateVariable_GLES_2_0_map[32873] = _StateVariable_GLES_2_0_name[674:695]
+	_StateVariable_GLES_2_0_map[32926] = _StateVariable_GLES_2_0_name[695:722]
+	_StateVariable_GLES_2_0_map[32928] = _StateVariable_GLES_2_0_name[722:740]
+	_StateVariable_GLES_2_0_map[32936] = _StateVariable_GLES_2_0_name[740:757]
+	_StateVariable_GLES_2_0_map[32937] = _StateVariable_GLES_2_0_name[757:767]
+	_StateVariable_GLES_2_0_map[32938] = _StateVariable_GLES_2_0_name[767:791]
+	_StateVariable_GLES_2_0_map[32939] = _StateVariable_GLES_2_0_name[791:816]
+	_StateVariable_GLES_2_0_map[32968] = _StateVariable_GLES_2_0_name[816:832]
+	_StateVariable_GLES_2_0_map[32969] = _StateVariable_GLES_2_0_name[832:848]
+	_StateVariable_GLES_2_0_map[32970] = _StateVariable_GLES_2_0_name[848:866]
+	_StateVariable_GLES_2_0_map[32971] = _StateVariable_GLES_2_0_name[866:884]
+	_StateVariable_GLES_2_0_map[33170] = _StateVariable_GLES_2_0_name[884:907]
+	_StateVariable_GLES_2_0_map[33901] = _StateVariable_GLES_2_0_name[907:934]
+	_StateVariable_GLES_2_0_map[33902] = _StateVariable_GLES_2_0_name[934:961]
+	_StateVariable_GLES_2_0_map[34016] = _StateVariable_GLES_2_0_name[961:978]
+	_StateVariable_GLES_2_0_map[34024] = _StateVariable_GLES_2_0_name[978:1002]
+	_StateVariable_GLES_2_0_map[34068] = _StateVariable_GLES_2_0_name[1002:1029]
+	_StateVariable_GLES_2_0_map[34076] = _StateVariable_GLES_2_0_name[1029:1057]
+	_StateVariable_GLES_2_0_map[34466] = _StateVariable_GLES_2_0_name[1057:1090]
+	_StateVariable_GLES_2_0_map[34467] = _StateVariable_GLES_2_0_name[1090:1119]
+	_StateVariable_GLES_2_0_map[34816] = _StateVariable_GLES_2_0_name[1119:1139]
+	_StateVariable_GLES_2_0_map[34817] = _StateVariable_GLES_2_0_name[1139:1159]
+	_StateVariable_GLES_2_0_map[34818] = _StateVariable_GLES_2_0_name[1159:1190]
+	_StateVariable_GLES_2_0_map[34819] = _StateVariable_GLES_2_0_name[1190:1221]
+	_StateVariable_GLES_2_0_map[34877] = _StateVariable_GLES_2_0_name[1221:1244]
+	_StateVariable_GLES_2_0_map[34921] = _StateVariable_GLES_2_0_name[1244:1265]
+	_StateVariable_GLES_2_0_map[34930] = _StateVariable_GLES_2_0_name[1265:1291]
+	_StateVariable_GLES_2_0_map[34964] = _StateVariable_GLES_2_0_name[1291:1314]
+	_StateVariable_GLES_2_0_map[34965] = _StateVariable_GLES_2_0_name[1314:1345]
+	_StateVariable_GLES_2_0_map[35660] = _StateVariable_GLES_2_0_name[1345:1378]
+	_StateVariable_GLES_2_0_map[35661] = _StateVariable_GLES_2_0_name[1378:1413]
+	_StateVariable_GLES_2_0_map[35725] = _StateVariable_GLES_2_0_name[1413:1431]
+	_StateVariable_GLES_2_0_map[35738] = _StateVariable_GLES_2_0_name[1431:1464]
+	_StateVariable_GLES_2_0_map[35739] = _StateVariable_GLES_2_0_name[1464:1499]
+	_StateVariable_GLES_2_0_map[36003] = _StateVariable_GLES_2_0_name[1499:1518]
+	_StateVariable_GLES_2_0_map[36004] = _StateVariable_GLES_2_0_name[1518:1544]
+	_StateVariable_GLES_2_0_map[36005] = _StateVariable_GLES_2_0_name[1544:1569]
+	_StateVariable_GLES_2_0_map[36006] = _StateVariable_GLES_2_0_name[1569:1591]
+	_StateVariable_GLES_2_0_map[36007] = _StateVariable_GLES_2_0_name[1591:1614]
+	_StateVariable_GLES_2_0_map[36344] = _StateVariable_GLES_2_0_name[1614:1638]
+	_StateVariable_GLES_2_0_map[36345] = _StateVariable_GLES_2_0_name[1638:1666]
+	_StateVariable_GLES_2_0_map[36346] = _StateVariable_GLES_2_0_name[1666:1684]
+	_StateVariable_GLES_2_0_map[36347] = _StateVariable_GLES_2_0_name[1684:1713]
+	_StateVariable_GLES_2_0_map[36348] = _StateVariable_GLES_2_0_name[1713:1735]
+	_StateVariable_GLES_2_0_map[36349] = _StateVariable_GLES_2_0_name[1735:1766]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StateVariable_GLES_2_0", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31712,11 +31712,11 @@ func (v *StateVariable_GLES_2_0) Parse(s string) error {
 
 const _StateVariable_GLES_3_1_name = "GL_READ_FRAMEBUFFER_BINDING"
 
-var _StateVariable_GLES_3_1_map = map[StateVariable_GLES_3_1]string{
-	36010: _StateVariable_GLES_3_1_name[0:27],
-}
+var _StateVariable_GLES_3_1_map = map[StateVariable_GLES_3_1]string{}
 
 func init() {
+	_StateVariable_GLES_3_1_map[36010] = _StateVariable_GLES_3_1_name[0:27]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StateVariable_GLES_3_1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31744,18 +31744,18 @@ func (v *StateVariable_GLES_3_1) Parse(s string) error {
 
 const _StencilAction_name = "GL_ZEROGL_INVERTGL_KEEPGL_REPLACEGL_INCRGL_DECRGL_INCR_WRAPGL_DECR_WRAP"
 
-var _StencilAction_map = map[StencilAction]string{
-	0:     _StencilAction_name[0:7],
-	5386:  _StencilAction_name[7:16],
-	7680:  _StencilAction_name[16:23],
-	7681:  _StencilAction_name[23:33],
-	7682:  _StencilAction_name[33:40],
-	7683:  _StencilAction_name[40:47],
-	34055: _StencilAction_name[47:59],
-	34056: _StencilAction_name[59:71],
-}
+var _StencilAction_map = map[StencilAction]string{}
 
 func init() {
+	_StencilAction_map[0] = _StencilAction_name[0:7]
+	_StencilAction_map[5386] = _StencilAction_name[7:16]
+	_StencilAction_map[7680] = _StencilAction_name[16:23]
+	_StencilAction_map[7681] = _StencilAction_name[23:33]
+	_StencilAction_map[7682] = _StencilAction_name[33:40]
+	_StencilAction_map[7683] = _StencilAction_name[40:47]
+	_StencilAction_map[34055] = _StencilAction_name[47:59]
+	_StencilAction_map[34056] = _StencilAction_name[59:71]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31790,14 +31790,14 @@ func (v *StencilAction) Parse(s string) error {
 
 const _StringConstant_name = "GL_VENDORGL_RENDERERGL_VERSIONGL_EXTENSIONS"
 
-var _StringConstant_map = map[StringConstant]string{
-	7936: _StringConstant_name[0:9],
-	7937: _StringConstant_name[9:20],
-	7938: _StringConstant_name[20:30],
-	7939: _StringConstant_name[30:43],
-}
+var _StringConstant_map = map[StringConstant]string{}
 
 func init() {
+	_StringConstant_map[7936] = _StringConstant_name[0:9]
+	_StringConstant_map[7937] = _StringConstant_name[9:20]
+	_StringConstant_map[7938] = _StringConstant_name[20:30]
+	_StringConstant_map[7939] = _StringConstant_name[30:43]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31828,11 +31828,11 @@ func (v *StringConstant) Parse(s string) error {
 
 const _SyncCondition_name = "GL_SYNC_GPU_COMMANDS_COMPLETE"
 
-var _SyncCondition_map = map[SyncCondition]string{
-	37143: _SyncCondition_name[0:29],
-}
+var _SyncCondition_map = map[SyncCondition]string{}
 
 func init() {
+	_SyncCondition_map[37143] = _SyncCondition_name[0:29]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "SyncCondition", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31860,11 +31860,11 @@ func (v *SyncCondition) Parse(s string) error {
 
 const _SyncFlags_name = "GL_SYNC_FLUSH_COMMANDS_BIT"
 
-var _SyncFlags_map = map[SyncFlags]string{
-	1: _SyncFlags_name[0:26],
-}
+var _SyncFlags_map = map[SyncFlags]string{}
 
 func init() {
+	_SyncFlags_map[1] = _SyncFlags_name[0:26]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "SyncFlags", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31892,18 +31892,18 @@ func (v *SyncFlags) Parse(s string) error {
 
 const _TestFunction_name = "GL_NEVERGL_LESSGL_EQUALGL_LEQUALGL_GREATERGL_NOTEQUALGL_GEQUALGL_ALWAYS"
 
-var _TestFunction_map = map[TestFunction]string{
-	512: _TestFunction_name[0:8],
-	513: _TestFunction_name[8:15],
-	514: _TestFunction_name[15:23],
-	515: _TestFunction_name[23:32],
-	516: _TestFunction_name[32:42],
-	517: _TestFunction_name[42:53],
-	518: _TestFunction_name[53:62],
-	519: _TestFunction_name[62:71],
-}
+var _TestFunction_map = map[TestFunction]string{}
 
 func init() {
+	_TestFunction_map[512] = _TestFunction_name[0:8]
+	_TestFunction_map[513] = _TestFunction_name[8:15]
+	_TestFunction_map[514] = _TestFunction_name[15:23]
+	_TestFunction_map[515] = _TestFunction_name[23:32]
+	_TestFunction_map[516] = _TestFunction_name[32:42]
+	_TestFunction_map[517] = _TestFunction_name[42:53]
+	_TestFunction_map[518] = _TestFunction_name[53:62]
+	_TestFunction_map[519] = _TestFunction_name[62:71]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31938,14 +31938,14 @@ func (v *TestFunction) Parse(s string) error {
 
 const _TexelComponent_name = "GL_REDGL_GREENGL_BLUEGL_ALPHA"
 
-var _TexelComponent_map = map[TexelComponent]string{
-	6403: _TexelComponent_name[0:6],
-	6404: _TexelComponent_name[6:14],
-	6405: _TexelComponent_name[14:21],
-	6406: _TexelComponent_name[21:29],
-}
+var _TexelComponent_map = map[TexelComponent]string{}
 
 func init() {
+	_TexelComponent_map[6403] = _TexelComponent_name[0:6]
+	_TexelComponent_map[6404] = _TexelComponent_name[6:14]
+	_TexelComponent_map[6405] = _TexelComponent_name[14:21]
+	_TexelComponent_map[6406] = _TexelComponent_name[21:29]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -31976,25 +31976,25 @@ func (v *TexelComponent) Parse(s string) error {
 
 const _TexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
 
-var _TexelFormat_map = map[TexelFormat]string{
-	6402:  _TexelFormat_name[0:18],
-	6403:  _TexelFormat_name[18:24],
-	6406:  _TexelFormat_name[24:32],
-	6407:  _TexelFormat_name[32:38],
-	6408:  _TexelFormat_name[38:45],
-	6409:  _TexelFormat_name[45:57],
-	6410:  _TexelFormat_name[57:75],
-	33189: _TexelFormat_name[75:95],
-	33319: _TexelFormat_name[95:100],
-	33320: _TexelFormat_name[100:113],
-	34041: _TexelFormat_name[113:129],
-	35056: _TexelFormat_name[129:148],
-	36244: _TexelFormat_name[148:162],
-	36248: _TexelFormat_name[162:176],
-	36249: _TexelFormat_name[176:191],
-}
+var _TexelFormat_map = map[TexelFormat]string{}
 
 func init() {
+	_TexelFormat_map[6402] = _TexelFormat_name[0:18]
+	_TexelFormat_map[6403] = _TexelFormat_name[18:24]
+	_TexelFormat_map[6406] = _TexelFormat_name[24:32]
+	_TexelFormat_map[6407] = _TexelFormat_name[32:38]
+	_TexelFormat_map[6408] = _TexelFormat_name[38:45]
+	_TexelFormat_map[6409] = _TexelFormat_name[45:57]
+	_TexelFormat_map[6410] = _TexelFormat_name[57:75]
+	_TexelFormat_map[33189] = _TexelFormat_name[75:95]
+	_TexelFormat_map[33319] = _TexelFormat_name[95:100]
+	_TexelFormat_map[33320] = _TexelFormat_name[100:113]
+	_TexelFormat_map[34041] = _TexelFormat_name[113:129]
+	_TexelFormat_map[35056] = _TexelFormat_name[129:148]
+	_TexelFormat_map[36244] = _TexelFormat_name[148:162]
+	_TexelFormat_map[36248] = _TexelFormat_name[162:176]
+	_TexelFormat_map[36249] = _TexelFormat_name[176:191]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32036,15 +32036,15 @@ func (v *TexelFormat) Parse(s string) error {
 
 const _TexelFormat_GLES_1_1_name = "GL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHA"
 
-var _TexelFormat_GLES_1_1_map = map[TexelFormat_GLES_1_1]string{
-	6406: _TexelFormat_GLES_1_1_name[0:8],
-	6407: _TexelFormat_GLES_1_1_name[8:14],
-	6408: _TexelFormat_GLES_1_1_name[14:21],
-	6409: _TexelFormat_GLES_1_1_name[21:33],
-	6410: _TexelFormat_GLES_1_1_name[33:51],
-}
+var _TexelFormat_GLES_1_1_map = map[TexelFormat_GLES_1_1]string{}
 
 func init() {
+	_TexelFormat_GLES_1_1_map[6406] = _TexelFormat_GLES_1_1_name[0:8]
+	_TexelFormat_GLES_1_1_map[6407] = _TexelFormat_GLES_1_1_name[8:14]
+	_TexelFormat_GLES_1_1_map[6408] = _TexelFormat_GLES_1_1_name[14:21]
+	_TexelFormat_GLES_1_1_map[6409] = _TexelFormat_GLES_1_1_name[21:33]
+	_TexelFormat_GLES_1_1_map[6410] = _TexelFormat_GLES_1_1_name[33:51]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TexelFormat_GLES_1_1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32076,20 +32076,20 @@ func (v *TexelFormat_GLES_1_1) Parse(s string) error {
 
 const _TexelFormat_GLES_3_0_name = "GL_DEPTH_COMPONENTGL_REDGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
 
-var _TexelFormat_GLES_3_0_map = map[TexelFormat_GLES_3_0]string{
-	6402:  _TexelFormat_GLES_3_0_name[0:18],
-	6403:  _TexelFormat_GLES_3_0_name[18:24],
-	33189: _TexelFormat_GLES_3_0_name[24:44],
-	33319: _TexelFormat_GLES_3_0_name[44:49],
-	33320: _TexelFormat_GLES_3_0_name[49:62],
-	34041: _TexelFormat_GLES_3_0_name[62:78],
-	35056: _TexelFormat_GLES_3_0_name[78:97],
-	36244: _TexelFormat_GLES_3_0_name[97:111],
-	36248: _TexelFormat_GLES_3_0_name[111:125],
-	36249: _TexelFormat_GLES_3_0_name[125:140],
-}
+var _TexelFormat_GLES_3_0_map = map[TexelFormat_GLES_3_0]string{}
 
 func init() {
+	_TexelFormat_GLES_3_0_map[6402] = _TexelFormat_GLES_3_0_name[0:18]
+	_TexelFormat_GLES_3_0_map[6403] = _TexelFormat_GLES_3_0_name[18:24]
+	_TexelFormat_GLES_3_0_map[33189] = _TexelFormat_GLES_3_0_name[24:44]
+	_TexelFormat_GLES_3_0_map[33319] = _TexelFormat_GLES_3_0_name[44:49]
+	_TexelFormat_GLES_3_0_map[33320] = _TexelFormat_GLES_3_0_name[49:62]
+	_TexelFormat_GLES_3_0_map[34041] = _TexelFormat_GLES_3_0_name[62:78]
+	_TexelFormat_GLES_3_0_map[35056] = _TexelFormat_GLES_3_0_name[78:97]
+	_TexelFormat_GLES_3_0_map[36244] = _TexelFormat_GLES_3_0_name[97:111]
+	_TexelFormat_GLES_3_0_map[36248] = _TexelFormat_GLES_3_0_name[111:125]
+	_TexelFormat_GLES_3_0_map[36249] = _TexelFormat_GLES_3_0_name[125:140]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TexelFormat_GLES_3_0", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32126,18 +32126,18 @@ func (v *TexelFormat_GLES_3_0) Parse(s string) error {
 
 const _TexelType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INTGL_FLOATGL_UNSIGNED_SHORT_4_4_4_4GL_UNSIGNED_SHORT_5_5_5_1GL_UNSIGNED_SHORT_5_6_5GL_UNSIGNED_INT_24_8"
 
-var _TexelType_map = map[TexelType]string{
-	5121:  _TexelType_name[0:16],
-	5123:  _TexelType_name[16:33],
-	5125:  _TexelType_name[33:48],
-	5126:  _TexelType_name[48:56],
-	32819: _TexelType_name[56:81],
-	32820: _TexelType_name[81:106],
-	33635: _TexelType_name[106:129],
-	34042: _TexelType_name[129:149],
-}
+var _TexelType_map = map[TexelType]string{}
 
 func init() {
+	_TexelType_map[5121] = _TexelType_name[0:16]
+	_TexelType_map[5123] = _TexelType_name[16:33]
+	_TexelType_map[5125] = _TexelType_name[33:48]
+	_TexelType_map[5126] = _TexelType_name[48:56]
+	_TexelType_map[32819] = _TexelType_name[56:81]
+	_TexelType_map[32820] = _TexelType_name[81:106]
+	_TexelType_map[33635] = _TexelType_name[106:129]
+	_TexelType_map[34042] = _TexelType_name[129:149]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32172,11 +32172,11 @@ func (v *TexelType) Parse(s string) error {
 
 const _Texture2DImageTarget_name = "GL_TEXTURE_2D"
 
-var _Texture2DImageTarget_map = map[Texture2DImageTarget]string{
-	3553: _Texture2DImageTarget_name[0:13],
-}
+var _Texture2DImageTarget_map = map[Texture2DImageTarget]string{}
 
 func init() {
+	_Texture2DImageTarget_map[3553] = _Texture2DImageTarget_name[0:13]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Texture2DImageTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32204,16 +32204,16 @@ func (v *Texture2DImageTarget) Parse(s string) error {
 
 const _TextureFilterMode_name = "GL_NEARESTGL_LINEARGL_NEAREST_MIPMAP_NEARESTGL_LINEAR_MIPMAP_NEARESTGL_NEAREST_MIPMAP_LINEARGL_LINEAR_MIPMAP_LINEAR"
 
-var _TextureFilterMode_map = map[TextureFilterMode]string{
-	9728: _TextureFilterMode_name[0:10],
-	9729: _TextureFilterMode_name[10:19],
-	9984: _TextureFilterMode_name[19:44],
-	9985: _TextureFilterMode_name[44:68],
-	9986: _TextureFilterMode_name[68:92],
-	9987: _TextureFilterMode_name[92:115],
-}
+var _TextureFilterMode_map = map[TextureFilterMode]string{}
 
 func init() {
+	_TextureFilterMode_map[9728] = _TextureFilterMode_name[0:10]
+	_TextureFilterMode_map[9729] = _TextureFilterMode_name[10:19]
+	_TextureFilterMode_map[9984] = _TextureFilterMode_name[19:44]
+	_TextureFilterMode_map[9985] = _TextureFilterMode_name[44:68]
+	_TextureFilterMode_map[9986] = _TextureFilterMode_name[68:92]
+	_TextureFilterMode_map[9987] = _TextureFilterMode_name[92:115]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32246,17 +32246,17 @@ func (v *TextureFilterMode) Parse(s string) error {
 
 const _TextureImageTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
 
-var _TextureImageTarget_map = map[TextureImageTarget]string{
-	3553:  _TextureImageTarget_name[0:13],
-	34069: _TextureImageTarget_name[13:43],
-	34070: _TextureImageTarget_name[43:73],
-	34071: _TextureImageTarget_name[73:103],
-	34072: _TextureImageTarget_name[103:133],
-	34073: _TextureImageTarget_name[133:163],
-	34074: _TextureImageTarget_name[163:193],
-}
+var _TextureImageTarget_map = map[TextureImageTarget]string{}
 
 func init() {
+	_TextureImageTarget_map[3553] = _TextureImageTarget_name[0:13]
+	_TextureImageTarget_map[34069] = _TextureImageTarget_name[13:43]
+	_TextureImageTarget_map[34070] = _TextureImageTarget_name[43:73]
+	_TextureImageTarget_map[34071] = _TextureImageTarget_name[73:103]
+	_TextureImageTarget_map[34072] = _TextureImageTarget_name[103:133]
+	_TextureImageTarget_map[34073] = _TextureImageTarget_name[133:163]
+	_TextureImageTarget_map[34074] = _TextureImageTarget_name[163:193]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32290,13 +32290,13 @@ func (v *TextureImageTarget) Parse(s string) error {
 
 const _TextureKind_name = "UNDEFINEDTEXTURE2DCUBEMAP"
 
-var _TextureKind_map = map[TextureKind]string{
-	0: _TextureKind_name[0:9],
-	1: _TextureKind_name[9:18],
-	2: _TextureKind_name[18:25],
-}
+var _TextureKind_map = map[TextureKind]string{}
 
 func init() {
+	_TextureKind_map[0] = _TextureKind_name[0:9]
+	_TextureKind_map[1] = _TextureKind_name[9:18]
+	_TextureKind_map[2] = _TextureKind_name[18:25]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32326,19 +32326,19 @@ func (v *TextureKind) Parse(s string) error {
 
 const _TextureParameter_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTERGL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_TGL_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
 
-var _TextureParameter_map = map[TextureParameter]string{
-	10240: _TextureParameter_name[0:21],
-	10241: _TextureParameter_name[21:42],
-	10242: _TextureParameter_name[42:59],
-	10243: _TextureParameter_name[59:76],
-	34046: _TextureParameter_name[76:105],
-	36418: _TextureParameter_name[105:125],
-	36419: _TextureParameter_name[125:145],
-	36420: _TextureParameter_name[145:165],
-	36421: _TextureParameter_name[165:185],
-}
+var _TextureParameter_map = map[TextureParameter]string{}
 
 func init() {
+	_TextureParameter_map[10240] = _TextureParameter_name[0:21]
+	_TextureParameter_map[10241] = _TextureParameter_name[21:42]
+	_TextureParameter_map[10242] = _TextureParameter_name[42:59]
+	_TextureParameter_map[10243] = _TextureParameter_name[59:76]
+	_TextureParameter_map[34046] = _TextureParameter_name[76:105]
+	_TextureParameter_map[36418] = _TextureParameter_name[105:125]
+	_TextureParameter_map[36419] = _TextureParameter_name[125:145]
+	_TextureParameter_map[36420] = _TextureParameter_name[145:165]
+	_TextureParameter_map[36421] = _TextureParameter_name[165:185]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32374,11 +32374,11 @@ func (v *TextureParameter) Parse(s string) error {
 
 const _TextureParameter_EXT_texture_filter_anisotropic_name = "GL_TEXTURE_MAX_ANISOTROPY_EXT"
 
-var _TextureParameter_EXT_texture_filter_anisotropic_map = map[TextureParameter_EXT_texture_filter_anisotropic]string{
-	34046: _TextureParameter_EXT_texture_filter_anisotropic_name[0:29],
-}
+var _TextureParameter_EXT_texture_filter_anisotropic_map = map[TextureParameter_EXT_texture_filter_anisotropic]string{}
 
 func init() {
+	_TextureParameter_EXT_texture_filter_anisotropic_map[34046] = _TextureParameter_EXT_texture_filter_anisotropic_name[0:29]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureParameter_EXT_texture_filter_anisotropic", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32406,12 +32406,12 @@ func (v *TextureParameter_EXT_texture_filter_anisotropic) Parse(s string) error 
 
 const _TextureParameter_FilterMode_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTER"
 
-var _TextureParameter_FilterMode_map = map[TextureParameter_FilterMode]string{
-	10240: _TextureParameter_FilterMode_name[0:21],
-	10241: _TextureParameter_FilterMode_name[21:42],
-}
+var _TextureParameter_FilterMode_map = map[TextureParameter_FilterMode]string{}
 
 func init() {
+	_TextureParameter_FilterMode_map[10240] = _TextureParameter_FilterMode_name[0:21]
+	_TextureParameter_FilterMode_map[10241] = _TextureParameter_FilterMode_name[21:42]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureParameter_FilterMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32440,14 +32440,14 @@ func (v *TextureParameter_FilterMode) Parse(s string) error {
 
 const _TextureParameter_SwizzleMode_name = "GL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
 
-var _TextureParameter_SwizzleMode_map = map[TextureParameter_SwizzleMode]string{
-	36418: _TextureParameter_SwizzleMode_name[0:20],
-	36419: _TextureParameter_SwizzleMode_name[20:40],
-	36420: _TextureParameter_SwizzleMode_name[40:60],
-	36421: _TextureParameter_SwizzleMode_name[60:80],
-}
+var _TextureParameter_SwizzleMode_map = map[TextureParameter_SwizzleMode]string{}
 
 func init() {
+	_TextureParameter_SwizzleMode_map[36418] = _TextureParameter_SwizzleMode_name[0:20]
+	_TextureParameter_SwizzleMode_map[36419] = _TextureParameter_SwizzleMode_name[20:40]
+	_TextureParameter_SwizzleMode_map[36420] = _TextureParameter_SwizzleMode_name[40:60]
+	_TextureParameter_SwizzleMode_map[36421] = _TextureParameter_SwizzleMode_name[60:80]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureParameter_SwizzleMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32478,12 +32478,12 @@ func (v *TextureParameter_SwizzleMode) Parse(s string) error {
 
 const _TextureParameter_WrapMode_name = "GL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_T"
 
-var _TextureParameter_WrapMode_map = map[TextureParameter_WrapMode]string{
-	10242: _TextureParameter_WrapMode_name[0:17],
-	10243: _TextureParameter_WrapMode_name[17:34],
-}
+var _TextureParameter_WrapMode_map = map[TextureParameter_WrapMode]string{}
 
 func init() {
+	_TextureParameter_WrapMode_map[10242] = _TextureParameter_WrapMode_name[0:17]
+	_TextureParameter_WrapMode_map[10243] = _TextureParameter_WrapMode_name[17:34]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureParameter_WrapMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32512,13 +32512,13 @@ func (v *TextureParameter_WrapMode) Parse(s string) error {
 
 const _TextureTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAPGL_TEXTURE_EXTERNAL_OES"
 
-var _TextureTarget_map = map[TextureTarget]string{
-	3553:  _TextureTarget_name[0:13],
-	34067: _TextureTarget_name[13:32],
-	36197: _TextureTarget_name[32:55],
-}
+var _TextureTarget_map = map[TextureTarget]string{}
 
 func init() {
+	_TextureTarget_map[3553] = _TextureTarget_name[0:13]
+	_TextureTarget_map[34067] = _TextureTarget_name[13:32]
+	_TextureTarget_map[36197] = _TextureTarget_name[32:55]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32548,11 +32548,11 @@ func (v *TextureTarget) Parse(s string) error {
 
 const _TextureTarget_GLES_1_1_name = "GL_TEXTURE_2D"
 
-var _TextureTarget_GLES_1_1_map = map[TextureTarget_GLES_1_1]string{
-	3553: _TextureTarget_GLES_1_1_name[0:13],
-}
+var _TextureTarget_GLES_1_1_map = map[TextureTarget_GLES_1_1]string{}
 
 func init() {
+	_TextureTarget_GLES_1_1_map[3553] = _TextureTarget_GLES_1_1_name[0:13]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureTarget_GLES_1_1", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32580,11 +32580,11 @@ func (v *TextureTarget_GLES_1_1) Parse(s string) error {
 
 const _TextureTarget_GLES_2_0_name = "GL_TEXTURE_CUBE_MAP"
 
-var _TextureTarget_GLES_2_0_map = map[TextureTarget_GLES_2_0]string{
-	34067: _TextureTarget_GLES_2_0_name[0:19],
-}
+var _TextureTarget_GLES_2_0_map = map[TextureTarget_GLES_2_0]string{}
 
 func init() {
+	_TextureTarget_GLES_2_0_map[34067] = _TextureTarget_GLES_2_0_name[0:19]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureTarget_GLES_2_0", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32612,11 +32612,11 @@ func (v *TextureTarget_GLES_2_0) Parse(s string) error {
 
 const _TextureTarget_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
 
-var _TextureTarget_OES_EGL_image_external_map = map[TextureTarget_OES_EGL_image_external]string{
-	36197: _TextureTarget_OES_EGL_image_external_name[0:23],
-}
+var _TextureTarget_OES_EGL_image_external_map = map[TextureTarget_OES_EGL_image_external]string{}
 
 func init() {
+	_TextureTarget_OES_EGL_image_external_map[36197] = _TextureTarget_OES_EGL_image_external_name[0:23]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureTarget_OES_EGL_image_external", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32644,42 +32644,42 @@ func (v *TextureTarget_OES_EGL_image_external) Parse(s string) error {
 
 const _TextureUnit_name = "GL_TEXTURE0GL_TEXTURE1GL_TEXTURE2GL_TEXTURE3GL_TEXTURE4GL_TEXTURE5GL_TEXTURE6GL_TEXTURE7GL_TEXTURE8GL_TEXTURE9GL_TEXTURE10GL_TEXTURE11GL_TEXTURE12GL_TEXTURE13GL_TEXTURE14GL_TEXTURE15GL_TEXTURE16GL_TEXTURE17GL_TEXTURE18GL_TEXTURE19GL_TEXTURE20GL_TEXTURE21GL_TEXTURE22GL_TEXTURE23GL_TEXTURE24GL_TEXTURE25GL_TEXTURE26GL_TEXTURE27GL_TEXTURE28GL_TEXTURE29GL_TEXTURE30GL_TEXTURE31"
 
-var _TextureUnit_map = map[TextureUnit]string{
-	33984: _TextureUnit_name[0:11],
-	33985: _TextureUnit_name[11:22],
-	33986: _TextureUnit_name[22:33],
-	33987: _TextureUnit_name[33:44],
-	33988: _TextureUnit_name[44:55],
-	33989: _TextureUnit_name[55:66],
-	33990: _TextureUnit_name[66:77],
-	33991: _TextureUnit_name[77:88],
-	33992: _TextureUnit_name[88:99],
-	33993: _TextureUnit_name[99:110],
-	33994: _TextureUnit_name[110:122],
-	33995: _TextureUnit_name[122:134],
-	33996: _TextureUnit_name[134:146],
-	33997: _TextureUnit_name[146:158],
-	33998: _TextureUnit_name[158:170],
-	33999: _TextureUnit_name[170:182],
-	34000: _TextureUnit_name[182:194],
-	34001: _TextureUnit_name[194:206],
-	34002: _TextureUnit_name[206:218],
-	34003: _TextureUnit_name[218:230],
-	34004: _TextureUnit_name[230:242],
-	34005: _TextureUnit_name[242:254],
-	34006: _TextureUnit_name[254:266],
-	34007: _TextureUnit_name[266:278],
-	34008: _TextureUnit_name[278:290],
-	34009: _TextureUnit_name[290:302],
-	34010: _TextureUnit_name[302:314],
-	34011: _TextureUnit_name[314:326],
-	34012: _TextureUnit_name[326:338],
-	34013: _TextureUnit_name[338:350],
-	34014: _TextureUnit_name[350:362],
-	34015: _TextureUnit_name[362:374],
-}
+var _TextureUnit_map = map[TextureUnit]string{}
 
 func init() {
+	_TextureUnit_map[33984] = _TextureUnit_name[0:11]
+	_TextureUnit_map[33985] = _TextureUnit_name[11:22]
+	_TextureUnit_map[33986] = _TextureUnit_name[22:33]
+	_TextureUnit_map[33987] = _TextureUnit_name[33:44]
+	_TextureUnit_map[33988] = _TextureUnit_name[44:55]
+	_TextureUnit_map[33989] = _TextureUnit_name[55:66]
+	_TextureUnit_map[33990] = _TextureUnit_name[66:77]
+	_TextureUnit_map[33991] = _TextureUnit_name[77:88]
+	_TextureUnit_map[33992] = _TextureUnit_name[88:99]
+	_TextureUnit_map[33993] = _TextureUnit_name[99:110]
+	_TextureUnit_map[33994] = _TextureUnit_name[110:122]
+	_TextureUnit_map[33995] = _TextureUnit_name[122:134]
+	_TextureUnit_map[33996] = _TextureUnit_name[134:146]
+	_TextureUnit_map[33997] = _TextureUnit_name[146:158]
+	_TextureUnit_map[33998] = _TextureUnit_name[158:170]
+	_TextureUnit_map[33999] = _TextureUnit_name[170:182]
+	_TextureUnit_map[34000] = _TextureUnit_name[182:194]
+	_TextureUnit_map[34001] = _TextureUnit_name[194:206]
+	_TextureUnit_map[34002] = _TextureUnit_name[206:218]
+	_TextureUnit_map[34003] = _TextureUnit_name[218:230]
+	_TextureUnit_map[34004] = _TextureUnit_name[230:242]
+	_TextureUnit_map[34005] = _TextureUnit_name[242:254]
+	_TextureUnit_map[34006] = _TextureUnit_name[254:266]
+	_TextureUnit_map[34007] = _TextureUnit_name[266:278]
+	_TextureUnit_map[34008] = _TextureUnit_name[278:290]
+	_TextureUnit_map[34009] = _TextureUnit_name[290:302]
+	_TextureUnit_map[34010] = _TextureUnit_name[302:314]
+	_TextureUnit_map[34011] = _TextureUnit_name[314:326]
+	_TextureUnit_map[34012] = _TextureUnit_name[326:338]
+	_TextureUnit_map[34013] = _TextureUnit_name[338:350]
+	_TextureUnit_map[34014] = _TextureUnit_name[350:362]
+	_TextureUnit_map[34015] = _TextureUnit_name[362:374]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32738,13 +32738,13 @@ func (v *TextureUnit) Parse(s string) error {
 
 const _TextureWrapMode_name = "GL_REPEATGL_CLAMP_TO_EDGEGL_MIRRORED_REPEAT"
 
-var _TextureWrapMode_map = map[TextureWrapMode]string{
-	10497: _TextureWrapMode_name[0:9],
-	33071: _TextureWrapMode_name[9:25],
-	33648: _TextureWrapMode_name[25:43],
-}
+var _TextureWrapMode_map = map[TextureWrapMode]string{}
 
 func init() {
+	_TextureWrapMode_map[10497] = _TextureWrapMode_name[0:9]
+	_TextureWrapMode_map[33071] = _TextureWrapMode_name[9:25]
+	_TextureWrapMode_map[33648] = _TextureWrapMode_name[25:43]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32774,42 +32774,42 @@ func (v *TextureWrapMode) Parse(s string) error {
 
 const _TilePreserveMaskQCOM_name = "GL_COLOR_BUFFER_BIT0_QCOMGL_COLOR_BUFFER_BIT1_QCOMGL_COLOR_BUFFER_BIT2_QCOMGL_COLOR_BUFFER_BIT3_QCOMGL_COLOR_BUFFER_BIT4_QCOMGL_COLOR_BUFFER_BIT5_QCOMGL_COLOR_BUFFER_BIT6_QCOMGL_COLOR_BUFFER_BIT7_QCOMGL_DEPTH_BUFFER_BIT0_QCOMGL_DEPTH_BUFFER_BIT1_QCOMGL_DEPTH_BUFFER_BIT2_QCOMGL_DEPTH_BUFFER_BIT3_QCOMGL_DEPTH_BUFFER_BIT4_QCOMGL_DEPTH_BUFFER_BIT5_QCOMGL_DEPTH_BUFFER_BIT6_QCOMGL_DEPTH_BUFFER_BIT7_QCOMGL_STENCIL_BUFFER_BIT0_QCOMGL_STENCIL_BUFFER_BIT1_QCOMGL_STENCIL_BUFFER_BIT2_QCOMGL_STENCIL_BUFFER_BIT3_QCOMGL_STENCIL_BUFFER_BIT4_QCOMGL_STENCIL_BUFFER_BIT5_QCOMGL_STENCIL_BUFFER_BIT6_QCOMGL_STENCIL_BUFFER_BIT7_QCOMGL_MULTISAMPLE_BUFFER_BIT0_QCOMGL_MULTISAMPLE_BUFFER_BIT1_QCOMGL_MULTISAMPLE_BUFFER_BIT2_QCOMGL_MULTISAMPLE_BUFFER_BIT3_QCOMGL_MULTISAMPLE_BUFFER_BIT4_QCOMGL_MULTISAMPLE_BUFFER_BIT5_QCOMGL_MULTISAMPLE_BUFFER_BIT6_QCOMGL_MULTISAMPLE_BUFFER_BIT7_QCOM"
 
-var _TilePreserveMaskQCOM_map = map[TilePreserveMaskQCOM]string{
-	1:          _TilePreserveMaskQCOM_name[0:25],
-	2:          _TilePreserveMaskQCOM_name[25:50],
-	4:          _TilePreserveMaskQCOM_name[50:75],
-	8:          _TilePreserveMaskQCOM_name[75:100],
-	16:         _TilePreserveMaskQCOM_name[100:125],
-	32:         _TilePreserveMaskQCOM_name[125:150],
-	64:         _TilePreserveMaskQCOM_name[150:175],
-	128:        _TilePreserveMaskQCOM_name[175:200],
-	256:        _TilePreserveMaskQCOM_name[200:225],
-	512:        _TilePreserveMaskQCOM_name[225:250],
-	1024:       _TilePreserveMaskQCOM_name[250:275],
-	2048:       _TilePreserveMaskQCOM_name[275:300],
-	4096:       _TilePreserveMaskQCOM_name[300:325],
-	8192:       _TilePreserveMaskQCOM_name[325:350],
-	16384:      _TilePreserveMaskQCOM_name[350:375],
-	32768:      _TilePreserveMaskQCOM_name[375:400],
-	65536:      _TilePreserveMaskQCOM_name[400:427],
-	131072:     _TilePreserveMaskQCOM_name[427:454],
-	262144:     _TilePreserveMaskQCOM_name[454:481],
-	524288:     _TilePreserveMaskQCOM_name[481:508],
-	1048576:    _TilePreserveMaskQCOM_name[508:535],
-	2097152:    _TilePreserveMaskQCOM_name[535:562],
-	4194304:    _TilePreserveMaskQCOM_name[562:589],
-	8388608:    _TilePreserveMaskQCOM_name[589:616],
-	16777216:   _TilePreserveMaskQCOM_name[616:647],
-	33554432:   _TilePreserveMaskQCOM_name[647:678],
-	67108864:   _TilePreserveMaskQCOM_name[678:709],
-	134217728:  _TilePreserveMaskQCOM_name[709:740],
-	268435456:  _TilePreserveMaskQCOM_name[740:771],
-	536870912:  _TilePreserveMaskQCOM_name[771:802],
-	1073741824: _TilePreserveMaskQCOM_name[802:833],
-	2147483648: _TilePreserveMaskQCOM_name[833:864],
-}
+var _TilePreserveMaskQCOM_map = map[TilePreserveMaskQCOM]string{}
 
 func init() {
+	_TilePreserveMaskQCOM_map[1] = _TilePreserveMaskQCOM_name[0:25]
+	_TilePreserveMaskQCOM_map[2] = _TilePreserveMaskQCOM_name[25:50]
+	_TilePreserveMaskQCOM_map[4] = _TilePreserveMaskQCOM_name[50:75]
+	_TilePreserveMaskQCOM_map[8] = _TilePreserveMaskQCOM_name[75:100]
+	_TilePreserveMaskQCOM_map[16] = _TilePreserveMaskQCOM_name[100:125]
+	_TilePreserveMaskQCOM_map[32] = _TilePreserveMaskQCOM_name[125:150]
+	_TilePreserveMaskQCOM_map[64] = _TilePreserveMaskQCOM_name[150:175]
+	_TilePreserveMaskQCOM_map[128] = _TilePreserveMaskQCOM_name[175:200]
+	_TilePreserveMaskQCOM_map[256] = _TilePreserveMaskQCOM_name[200:225]
+	_TilePreserveMaskQCOM_map[512] = _TilePreserveMaskQCOM_name[225:250]
+	_TilePreserveMaskQCOM_map[1024] = _TilePreserveMaskQCOM_name[250:275]
+	_TilePreserveMaskQCOM_map[2048] = _TilePreserveMaskQCOM_name[275:300]
+	_TilePreserveMaskQCOM_map[4096] = _TilePreserveMaskQCOM_name[300:325]
+	_TilePreserveMaskQCOM_map[8192] = _TilePreserveMaskQCOM_name[325:350]
+	_TilePreserveMaskQCOM_map[16384] = _TilePreserveMaskQCOM_name[350:375]
+	_TilePreserveMaskQCOM_map[32768] = _TilePreserveMaskQCOM_name[375:400]
+	_TilePreserveMaskQCOM_map[65536] = _TilePreserveMaskQCOM_name[400:427]
+	_TilePreserveMaskQCOM_map[131072] = _TilePreserveMaskQCOM_name[427:454]
+	_TilePreserveMaskQCOM_map[262144] = _TilePreserveMaskQCOM_name[454:481]
+	_TilePreserveMaskQCOM_map[524288] = _TilePreserveMaskQCOM_name[481:508]
+	_TilePreserveMaskQCOM_map[1048576] = _TilePreserveMaskQCOM_name[508:535]
+	_TilePreserveMaskQCOM_map[2097152] = _TilePreserveMaskQCOM_name[535:562]
+	_TilePreserveMaskQCOM_map[4194304] = _TilePreserveMaskQCOM_name[562:589]
+	_TilePreserveMaskQCOM_map[8388608] = _TilePreserveMaskQCOM_name[589:616]
+	_TilePreserveMaskQCOM_map[16777216] = _TilePreserveMaskQCOM_name[616:647]
+	_TilePreserveMaskQCOM_map[33554432] = _TilePreserveMaskQCOM_name[647:678]
+	_TilePreserveMaskQCOM_map[67108864] = _TilePreserveMaskQCOM_name[678:709]
+	_TilePreserveMaskQCOM_map[134217728] = _TilePreserveMaskQCOM_name[709:740]
+	_TilePreserveMaskQCOM_map[268435456] = _TilePreserveMaskQCOM_name[740:771]
+	_TilePreserveMaskQCOM_map[536870912] = _TilePreserveMaskQCOM_name[771:802]
+	_TilePreserveMaskQCOM_map[1073741824] = _TilePreserveMaskQCOM_name[802:833]
+	_TilePreserveMaskQCOM_map[2147483648] = _TilePreserveMaskQCOM_name[833:864]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32868,11 +32868,11 @@ func (v *TilePreserveMaskQCOM) Parse(s string) error {
 
 const _Type_ARB_half_float_vertex_name = "GL_HALF_FLOAT_ARB"
 
-var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{
-	5131: _Type_ARB_half_float_vertex_name[0:17],
-}
+var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{}
 
 func init() {
+	_Type_ARB_half_float_vertex_map[5131] = _Type_ARB_half_float_vertex_name[0:17]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Type_ARB_half_float_vertex", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32900,11 +32900,11 @@ func (v *Type_ARB_half_float_vertex) Parse(s string) error {
 
 const _Type_OES_vertex_half_float_name = "GL_HALF_FLOAT_OES"
 
-var _Type_OES_vertex_half_float_map = map[Type_OES_vertex_half_float]string{
-	36193: _Type_OES_vertex_half_float_name[0:17],
-}
+var _Type_OES_vertex_half_float_map = map[Type_OES_vertex_half_float]string{}
 
 func init() {
+	_Type_OES_vertex_half_float_map[36193] = _Type_OES_vertex_half_float_name[0:17]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Type_OES_vertex_half_float", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32932,18 +32932,18 @@ func (v *Type_OES_vertex_half_float) Parse(s string) error {
 
 const _UniformBlockParameter_name = "GL_UNIFORM_BLOCK_BINDINGGL_UNIFORM_BLOCK_DATA_SIZEGL_UNIFORM_BLOCK_NAME_LENGTHGL_UNIFORM_BLOCK_ACTIVE_UNIFORMSGL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICESGL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADERGL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER"
 
-var _UniformBlockParameter_map = map[UniformBlockParameter]string{
-	35391: _UniformBlockParameter_name[0:24],
-	35392: _UniformBlockParameter_name[24:50],
-	35393: _UniformBlockParameter_name[50:78],
-	35394: _UniformBlockParameter_name[78:110],
-	35395: _UniformBlockParameter_name[110:149],
-	35396: _UniformBlockParameter_name[149:193],
-	35397: _UniformBlockParameter_name[193:239],
-	35398: _UniformBlockParameter_name[239:285],
-}
+var _UniformBlockParameter_map = map[UniformBlockParameter]string{}
 
 func init() {
+	_UniformBlockParameter_map[35391] = _UniformBlockParameter_name[0:24]
+	_UniformBlockParameter_map[35392] = _UniformBlockParameter_name[24:50]
+	_UniformBlockParameter_map[35393] = _UniformBlockParameter_name[50:78]
+	_UniformBlockParameter_map[35394] = _UniformBlockParameter_name[78:110]
+	_UniformBlockParameter_map[35395] = _UniformBlockParameter_name[110:149]
+	_UniformBlockParameter_map[35396] = _UniformBlockParameter_name[149:193]
+	_UniformBlockParameter_map[35397] = _UniformBlockParameter_name[193:239]
+	_UniformBlockParameter_map[35398] = _UniformBlockParameter_name[239:285]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "UniformBlockParameter", Method: schema.Uint32},
 		Entries: []schema.Constant{
@@ -32978,18 +32978,18 @@ func (v *UniformBlockParameter) Parse(s string) error {
 
 const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_HALF_FLOAT_ARBGL_FIXEDGL_HALF_FLOAT_OES"
 
-var _VertexAttribType_map = map[VertexAttribType]string{
-	5120:  _VertexAttribType_name[0:7],
-	5121:  _VertexAttribType_name[7:23],
-	5122:  _VertexAttribType_name[23:31],
-	5123:  _VertexAttribType_name[31:48],
-	5126:  _VertexAttribType_name[48:56],
-	5131:  _VertexAttribType_name[56:73],
-	5132:  _VertexAttribType_name[73:81],
-	36193: _VertexAttribType_name[81:98],
-}
+var _VertexAttribType_map = map[VertexAttribType]string{}
 
 func init() {
+	_VertexAttribType_map[5120] = _VertexAttribType_name[0:7]
+	_VertexAttribType_map[5121] = _VertexAttribType_name[7:23]
+	_VertexAttribType_map[5122] = _VertexAttribType_name[23:31]
+	_VertexAttribType_map[5123] = _VertexAttribType_name[31:48]
+	_VertexAttribType_map[5126] = _VertexAttribType_name[48:56]
+	_VertexAttribType_map[5131] = _VertexAttribType_name[56:73]
+	_VertexAttribType_map[5132] = _VertexAttribType_name[73:81]
+	_VertexAttribType_map[36193] = _VertexAttribType_name[81:98]
+
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32},
 		Entries: []schema.Constant{
