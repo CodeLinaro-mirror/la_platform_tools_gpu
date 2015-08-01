@@ -34,6 +34,8 @@ type Source struct {
 	Content    interface{}       // The content of this source, see ParseFiles for details.
 	AST        *ast.File         // The parsed syntax tree
 	Directives map[string]string // the set of comment overrides
+	Parsed     chan struct{}
+	Error      error
 }
 
 // Module represents a resolvable module. Under normal go layout conditions a
@@ -141,6 +143,7 @@ func (s *Scanner) ScanFile(filename, source string) {
 	dir.Scan = true
 	dir.loaded = true
 	dir.Module.addSource(filename, source)
+	s.preParse(&dir.Module)
 }
 
 // ScanPackage marks the directory specified by the import path as needing to be
