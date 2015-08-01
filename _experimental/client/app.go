@@ -116,7 +116,7 @@ func (a *captureAdapter) Count() int {
 }
 
 func (a *captureAdapter) ItemAt(index int) gxui.AdapterItem {
-	return a.items[index].path.ID
+	return a.items[index].path
 }
 
 func (a *captureAdapter) ItemIndex(item gxui.AdapterItem) int {
@@ -180,7 +180,7 @@ func (a *deviceAdapter) Count() int {
 }
 
 func (a *deviceAdapter) ItemAt(index int) gxui.AdapterItem {
-	return a.items[index].path.ID
+	return a.items[index].path
 }
 
 func (a *deviceAdapter) ItemIndex(item gxui.AdapterItem) int {
