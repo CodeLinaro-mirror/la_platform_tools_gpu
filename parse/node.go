@@ -17,6 +17,8 @@ package parse
 // Node is a Fragment in a cst that represents unskipped tokens.
 type Node interface {
 	Fragment
+	// Parent returns the Branch that this node is under.
+	Parent() *Branch
 	// Prefix returns the set of skippable fragments associated with this Node
 	// that precede it in the stream. Association is defined by the Skip function
 	// in use.
@@ -32,8 +34,13 @@ type Node interface {
 }
 
 type node struct {
+	parent *Branch
 	prefix Separator
 	suffix Separator
+}
+
+func (n *node) Parent() *Branch {
+	return n.parent
 }
 
 func (n *node) Prefix() Separator {
