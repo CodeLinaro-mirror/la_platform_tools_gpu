@@ -70,7 +70,7 @@ EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
 }
 
 EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read, EGLContext context) {
-    using namespace RenderbufferFormat;
+    using namespace GLenum;
 
     EGLBoolean res = GlesSpy::eglMakeCurrent(display, draw, read, context);
     if (res != 0 && draw != nullptr) {
@@ -103,7 +103,7 @@ BOOL Spy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 }
 
 CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
-    using namespace RenderbufferFormat;
+    using namespace GLenum;
 
     CGLError err = GlesSpy::CGLSetCurrentContext(ctx);
     if (err == 0 && ctx != nullptr) {
@@ -125,7 +125,7 @@ CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
 }
 
 Bool Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
-    using namespace RenderbufferFormat;
+    using namespace GLenum;
 
     Bool res = GlesSpy::glXMakeContextCurrent(display, draw, read, ctx);
     if (res != 0 && display != nullptr) {
@@ -142,7 +142,7 @@ Bool Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable rea
 }
 
 Bool Spy::glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx) {
-    using namespace RenderbufferFormat;
+    using namespace GLenum;
 
     Bool res = GlesSpy::glXMakeCurrent(display, drawable, ctx);
     if (res != 0 && display != nullptr) {

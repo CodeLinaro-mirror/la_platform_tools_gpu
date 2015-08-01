@@ -29,11 +29,9 @@ type s64       GLint64    // 64 bit, signed, two's complement binary integer.
 type u64       GLuint64   // 64 bit, unsigned binary integer.
 type s32       GLfixed    // 16.16 bits, signed, two's complement fixed-point integer.
 type u32       GLsizei    // 32 bit, unsigned binary integer used to represent sizes.
-type u32       GLenum     // 32 bit, unsigned binary integer used to represent enumerators.
 // type ptrbits GLintptr   // TODO: No API datatype to represent this type.
 // type ptrbits GLsizeiptr // TODO: No API datatype to represent this type.
 type __GLsync* GLsync     // Sync object handle.
-type u32       GLbitfield // 32 bit, unsigned binary integer used to represent bitfields.
 type u16       GLhalf     // 16 bit floating-point number encoded as a unsigned 16 bit integer.
 type f32       GLfloat    // 32 bit floating-point number.
 type f32       GLclampf   // 32 bit floating-point value clamped to [0, 1]

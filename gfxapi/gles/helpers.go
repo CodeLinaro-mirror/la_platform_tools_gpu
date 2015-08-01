@@ -28,12 +28,12 @@ func NewProgram(a device.Architecture, d database.Database, l log.Logger,
 	vertexShaderID, fragmentShaderID ShaderId, programID ProgramId,
 	vertexShaderSource, fragmentShaderSource string) []atom.Atom {
 	return []atom.Atom{
-		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, vertexShaderID),
+		NewGlCreateShader(GLenum_GL_VERTEX_SHADER, vertexShaderID),
 		NewGlShaderSource(vertexShaderID, 1, memory.Tmp, memory.Nullptr).
 			AddRead(atom.Data(a, d, l, memory.Tmp, memory.Tmp.Offset(8))).
 			AddRead(atom.Data(a, d, l, memory.Tmp.Offset(8), vertexShaderSource)),
 		NewGlCompileShader(vertexShaderID),
-		NewGlCreateShader(ShaderType_GL_FRAGMENT_SHADER, fragmentShaderID),
+		NewGlCreateShader(GLenum_GL_FRAGMENT_SHADER, fragmentShaderID),
 		NewGlShaderSource(fragmentShaderID, 1, memory.Tmp, memory.Nullptr).
 			AddRead(atom.Data(a, d, l, memory.Tmp, memory.Tmp.Offset(8))).
 			AddRead(atom.Data(a, d, l, memory.Tmp.Offset(8), fragmentShaderSource)),

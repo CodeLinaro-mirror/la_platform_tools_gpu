@@ -63,7 +63,7 @@ func runTest(t *testing.T, src string, expected string) {
 	in := []atom.Atom{
 		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
 		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
-		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, 0x10),
+		NewGlCreateShader(GLenum_GL_VERTEX_SHADER, 0x10),
 		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
 			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
 			AddRead(atom.Data(a, d, l, p(0x100010), int32(len(src)))).
