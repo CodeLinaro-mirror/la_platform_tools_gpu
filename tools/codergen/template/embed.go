@@ -871,6 +871,8 @@ const java_common_tmpl = `{{/*
 
 {{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};
 {{end}}{{end}}
+{{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};
+{{end}}{{end}}
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
