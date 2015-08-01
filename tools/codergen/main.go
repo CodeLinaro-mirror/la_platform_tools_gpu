@@ -26,6 +26,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+	"android.googlesource.com/platform/tools/gpu/tools/profile"
 )
 
 var (
@@ -51,6 +52,7 @@ func run() error {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
+	defer profile.CPU()()
 	wd, err := os.Getwd()
 	if err != nil {
 		return err
