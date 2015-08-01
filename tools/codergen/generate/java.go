@@ -53,7 +53,7 @@ type JavaEnum struct {
 }
 
 // Java is called by codergen to prepare and generate java code for a given module.
-func Java(m *Module, info copyright.Info, gen Generator, path string) error {
+func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	settings := JavaSettings{
 		Module:      m,
 		JavaPackage: m.Directives["java.package"],
@@ -62,35 +62,33 @@ func Java(m *Module, info copyright.Info, gen Generator, path string) error {
 	settings.MemberPrefix, _ = m.Directives["java.member_prefix"]
 	source, _ := m.Directives["java.source"]
 	indent, _ := m.Directives["java.indent"]
-	reflow := indentor(indent)
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
-		class := JavaClass{JavaSettings: settings, Struct: s}
-		class.Imported = map[string]struct{}{}
-		out := filepath.Join(path, source, pkgPath, settings.ClassName(class.Struct.Name)+".java")
-		if err := gen("Java.File", class, out, reflow); err != nil {
-			return err
+		gen <- Generate{
+			Name:   "Java.File",
+			Arg:    JavaClass{JavaSettings: settings, Struct: s},
+			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name)+".java"),
+			Reflow: indentor(indent),
 		}
 	}
 	for _, s := range m.Constants {
-		enum := JavaEnum{JavaSettings: settings, ConstantSet: s}
-		enum.Imported = map[string]struct{}{}
-		out := filepath.Join(path, source, pkgPath, settings.ClassName(enum.Type.String())+".java")
-		if err := gen("Java.Enum", enum, out, reflow); err != nil {
-			return err
+		gen <- Generate{
+			Name:   "Java.Enum",
+			Arg:    JavaEnum{JavaSettings: settings, ConstantSet: s},
+			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Type.String())+".java"),
+			Reflow: indentor(indent),
 		}
 	}
 	for _, s := range m.Services {
-		service := JavaService{JavaSettings: settings, Service: s}
 		for _, e := range []string{"Client", "ClientImpl"} {
-			service.Imported = map[string]struct{}{}
-			out := filepath.Join(path, source, pkgPath, service.Service.Name+e+".java")
-			if err := gen("Java."+e, service, out, reflow); err != nil {
-				return err
+			gen <- Generate{
+				Name:   "Java." + e,
+				Arg:    JavaService{JavaSettings: settings, Service: s},
+				Output: filepath.Join(path, source, pkgPath, s.Name+e+".java"),
+				Reflow: indentor(indent),
 			}
 		}
 	}
-	return nil
 }
 
 // FieldName converts from a go struct field name to the correct java member name.
@@ -173,7 +171,9 @@ func (settings JavaSettings) Import(v interface{}) string {
 		return "" // Not an import
 	}
 	fullname := pkg + "." + name
-	if _, ok := settings.Imported[fullname]; ok {
+	if settings.Imported == nil {
+		settings.Imported = map[string]struct{}{}
+	} else if _, ok := settings.Imported[fullname]; ok {
 		return "" // Already imported
 	}
 	settings.Imported[fullname] = struct{}{}

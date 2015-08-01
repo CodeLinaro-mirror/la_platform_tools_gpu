@@ -89,8 +89,8 @@ func New() *Templates {
 type PostProcess func([]byte) []byte
 
 // Generate is an implementation of generate.Generator
-func (t *Templates) Generate(f interface{}, name string, arg interface{}, out string, post PostProcess) (bool, error) {
-	t.File = f
+func (t *Templates) Generate(name string, arg interface{}, out string, post PostProcess) (bool, error) {
+	t.File = arg
 	defer func() { t.File = nil }()
 
 	b := &bytes.Buffer{}
