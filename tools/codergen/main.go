@@ -30,12 +30,11 @@ import (
 )
 
 var (
-	verbose     = flag.Bool("v", false, "verbose messages")
-	nowrite     = flag.Bool("n", false, "don't write the files")
-	forceSource = flag.Bool("s", true, "force source only")
-	golang      = flag.Bool("go", false, "generate go code")
-	java        = flag.String("java", "", "the path to generate files in")
-	cpp         = flag.String("cpp", "", "the path to generate files in")
+	verbose = flag.Bool("v", false, "verbose messages")
+	nowrite = flag.Bool("n", false, "don't write the files")
+	golang  = flag.Bool("go", false, "generate go code")
+	java    = flag.String("java", "", "the path to generate files in")
+	cpp     = flag.String("cpp", "", "the path to generate files in")
 )
 
 const usage = `codergen: A tool to generate coders for go structs.
@@ -57,7 +56,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	scanner := scan.New(wd, *forceSource)
+	scanner := scan.New(wd)
 	if *verbose {
 		fmt.Printf("Scanning\n")
 	}
