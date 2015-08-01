@@ -113,8 +113,8 @@ func TestClear(t *testing.T) {
 	)
 
 	ctx := &replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l),
-		Device:  device.Path(),
+		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Device:  device.ID(),
 	}
 
 	checkColorBuffer(t, ctx, mgr, w, h, 0, "solid-red", red)
@@ -165,8 +165,8 @@ func TestDrawTriangle(t *testing.T) {
 	)
 
 	ctx := &replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l),
-		Device:  device.Path(),
+		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Device:  device.ID(),
 	}
 
 	checkColorBuffer(t, ctx, mgr, w, h, 0.0, "solid-green", clear)

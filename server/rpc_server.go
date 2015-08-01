@@ -164,7 +164,7 @@ func (s rpcServer) GetDevices(l log.Logger) ([]*path.Device, error) {
 	devices := s.ReplayManager.Devices()
 	paths := make([]*path.Device, len(devices))
 	for i, d := range devices {
-		paths[i] = d.Path()
+		paths[i] = &path.Device{ID: d.ID()}
 	}
 	return paths, nil
 }
