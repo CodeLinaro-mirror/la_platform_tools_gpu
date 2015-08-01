@@ -23,6 +23,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
 	"text/template"
 	"unicode"
@@ -92,10 +93,10 @@ func New() *Templates {
 }
 
 var (
-	sectionMarker = "<<<%s:%s>>>"
+	sectionMarker = "<<<%s:%s:%s>>>"
 	sectionStart  = "Start"
 	sectionEnd    = "End"
-	section       = regexp.MustCompile(fmt.Sprintf(sectionMarker, "(.+)", "(.+)"))
+	section       = regexp.MustCompile(fmt.Sprintf(sectionMarker, "(.+)", "(.+)", "(.+)"))
 )
 
 // Generate is an implementation of generate.Generator
@@ -114,6 +115,11 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 		for _, match := range matches {
 			mode := string(old[match[2]:match[3]])
 			name := string(old[match[4]:match[5]])
+			level := string(old[match[6]:match[7]])
+			depth, err := strconv.Atoi(string(old[match[6]:match[7]]))
+			if err != nil {
+				return false, fmt.Errorf("Indentation depth malformed, got %s in %s", level, name)
+			}
 			switch mode {
 			case sectionStart:
 				if tmpl != "" {
@@ -123,18 +129,21 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 				buf.Write(old[last:match[1]])
 				// now run the template
 				tmpl = name
+				out.Depth = depth
 				if err := t.execute(tmpl, out, g.Arg); err != nil {
 					return false, err
 				}
-				out.Flush()
 			case sectionEnd:
 				// section end marker, check it matches
 				if name != tmpl {
 					return false, fmt.Errorf("Invalid end %s found, expected %s", name, tmpl)
 				}
+				// write the end marker out throught the formatting writer
+				out.Write(old[match[0]:match[1]])
+				out.Flush()
 				// set the markers ready for the next write
 				tmpl = ""
-				last = match[0]
+				last = match[1]
 			default:
 				return false, fmt.Errorf("Invalid section marker %s:%s", mode, name)
 			}
