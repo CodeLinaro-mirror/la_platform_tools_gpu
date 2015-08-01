@@ -111,7 +111,8 @@ func (settings JavaSettings) Setter(s string) string {
 	return "set" + string(unicode.ToUpper(r)) + s[n:]
 }
 
-func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
+// returns the module if found, the extracted type name and the modified java name
+func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string, string) {
 	name := ""
 	switch v := v.(type) {
 	case string:
@@ -136,21 +137,22 @@ func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string) {
 		pkg = name[:i]
 		name = name[i+1:]
 	}
-	titled := strings.Title(name)
+	java := strings.Title(name)
+	java = strings.Title(strings.Replace(name, "_", "", -1))
 	m := settings.Module
 	if pkg != "" && pkg != "binary" {
 		m = settings.FindImport(pkg)
 		if m == nil {
-			m = &Module{Name: "Missing"}
+			m = &Module{Name: pkg}
 		}
 	}
-	return m, titled
+	return m, name, java
 }
 
 func (settings JavaSettings) findClass(v interface{}) (string, string) {
-	m, name := settings.moduleAndName(v)
+	m, original, name := settings.moduleAndName(v)
 	for _, t := range m.Structs {
-		if t.Name == name {
+		if t.Name == original {
 			if n := fmt.Sprint(t.Tags.Get("java")); n != "" {
 				name = n
 			} else {
@@ -186,6 +188,6 @@ func (settings JavaSettings) ClassName(v interface{}) string {
 
 // InterfaceName returns the Java name to give the interface type.
 func (settings JavaSettings) InterfaceName(v interface{}) string {
-	_, name := settings.moduleAndName(v)
+	_, _, name := settings.moduleAndName(v)
 	return name
 }

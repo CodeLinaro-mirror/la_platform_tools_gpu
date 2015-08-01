@@ -639,7 +639,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
-{{define "Java.Encode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
+{{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
 
 {{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
 »»»for (int i = 0; i < {{.Name}}.length; i++) {
@@ -665,7 +665,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
-{{define "Java.Decode.Any"}}throw new RuntimeException("Java 'Any' not implemented");{{end}}
+{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
 
 {{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
 »»»for (int i = 0; i <{{.Name}}.length; i++) {
@@ -706,7 +706,7 @@ import com.android.tools.rpclib.binary.Namespace;
 {{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
 import java.io.IOException;
 
-{{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}} implements BinaryObject {
+{{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}}{{if $e := .Struct.Tags.Get  "implements"}} extends {{File.ClassName $e}}{{end}} implements BinaryObject {
 {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
 »// Constructs a default-initialized {@link {{File.ClassName .Struct}}}.
 »public {{File.ClassName .Struct}}() {
@@ -865,7 +865,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#string"}}String{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
-{{define "Java.Type.Any"}}Object{{end}}
+{{define "Java.Type.Any"}}Box{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
@@ -880,7 +880,15 @@ const java_common_tmpl = `{{/*
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
+{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
+{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
+
+{{define "Java.ConstSuffix#int64"}}L{{end}}
+{{define "Java.ConstSuffix#uint64"}}L{{end}}
+{{define "Java.ConstSuffix#float32"}}f{{end}}
+{{define "Java.ConstSuffix#float64"}}d{{end}}
+{{define "Java.ConstSuffix"}}{{end}}
 `
 const java_enum_tmpl_file = `java_enum.tmpl`
 const java_enum_tmpl = `{{/*
@@ -915,10 +923,10 @@ import java.io.IOException;
 
 public enum {{File.ClassName .Type}} {
 {{range $i, $e := .Entries}}{{if $i}},
-{{end}}»{{$e.Name}}({{$e.Value}}){{end}};
+{{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
 
-»private final int {{"value" | File.FieldName}};
-»{{File.ClassName .Type}}(int value) {
+»private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
+»{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
 »»{{"value" | File.FieldName}} = value;
 »}
 }
