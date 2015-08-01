@@ -16,6 +16,7 @@ var embedded = map[string]string{
 	java_binary_tmpl_file: java_binary_tmpl,
 	java_client_tmpl_file: java_client_tmpl,
 	java_common_tmpl_file: java_common_tmpl,
+	java_enum_tmpl_file:   java_enum_tmpl,
 }
 
 const cpp_binary_tmpl_file = `cpp_binary.tmpl`
@@ -877,4 +878,46 @@ const java_common_tmpl = `{{/*
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import"}}{{end}}
+`
+const java_enum_tmpl_file = `java_enum.tmpl`
+const java_enum_tmpl = `{{/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+
+{{define "Java.Enum"}}{{$.Copyright}}
+package {{.JavaPackage}};
+
+import org.jetbrains.annotations.NotNull;
+
+import com.android.tools.rpclib.binary.BinaryClass;
+import com.android.tools.rpclib.binary.BinaryID;
+import com.android.tools.rpclib.binary.BinaryObject;
+import com.android.tools.rpclib.binary.Decoder;
+import com.android.tools.rpclib.binary.Encoder;
+import com.android.tools.rpclib.binary.Namespace;
+import java.io.IOException;
+
+public enum {{File.ClassName .Type}} {
+{{range $i, $e := .Entries}}{{if $i}},
+{{end}}»{{$e.Name}}({{$e.Value}}){{end}};
+
+»private final int {{"value" | File.FieldName}};
+»{{File.ClassName .Type}}(int value) {
+»»{{"value" | File.FieldName}} = value;
+»}
+}
+{{end}}
 `
