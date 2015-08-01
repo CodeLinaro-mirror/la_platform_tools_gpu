@@ -22,14 +22,16 @@ import (
 	"golang.org/x/tools/imports"
 )
 
+// GoBinary is the struct handed to binary coder generation templates.
 type GoBinary struct {
 	*Module
 	Copyright string
 }
 
+// GoService is the struct handed to go rpc service generation templates.
 type GoService struct {
-	GoBinary
-	Service *Service
+	GoBinary          // Needs all the same information as the binary templates
+	Service  *Service // The service to generate for.
 }
 
 func goFileName(m *Module, prefix string, category string) string {
@@ -40,6 +42,7 @@ func goFileName(m *Module, prefix string, category string) string {
 	return path.Join(m.Path, name+".go")
 }
 
+// Go is called by codergen to prepare and generate go code for a given module.
 func Go(m *Module, info copyright.Info, gen Generator) error {
 	if len(m.Structs) == 0 && len(m.Constants) == 0 {
 		return nil

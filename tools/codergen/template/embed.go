@@ -47,7 +47,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type#float64"}}double{{end}}
 {{define "Cpp.Type#string"}}char*{{end}}
 {{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
-{{define "Cpp.Type.Struct"}}{{.Name | CppName}}{{end}}
+{{define "Cpp.Type.Struct"}}{{.Name | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
@@ -57,8 +57,8 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Method#ID"}}Id{{end}}
 {{define "Cpp.Method"}}{{.}}{{end}}
 
-{{define "Cpp.Constructor"}}»»{{.Name | CppName}}() = default;
-»»{{.Name | CppName}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
+{{define "Cpp.Constructor"}}»»{{.Name | File.TypeName}}() = default;
+»»{{.Name | File.TypeName}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
 »»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
 
 {{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
@@ -104,7 +104,7 @@ class Encoder;
 
 namespace coder {
 namespace {{.Namespace}} {
-{{range .Structs}}»class {{.Name | CppName}}: public Encodable {
+{{range .Structs}}»class {{.Name | File.TypeName}}: public Encodable {
 »public:
 {{template "Cpp.Constructor" .}}
 {{template "Cpp.ID" .}}

@@ -30,6 +30,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
+// Templates manages the loaded templates and executes them on demand.
+// It exposes all it's public methods and fields to the templates.
 type Templates struct {
 	templates *template.Template
 	funcs     template.FuncMap
@@ -64,6 +66,8 @@ func installFields(v reflect.Value, funcs template.FuncMap) {
 	}
 }
 
+// New constructs and returns a new template set.
+// This parses all embedded templates automatically.
 func New() *Templates {
 	f := &Templates{
 		templates: template.New("FunctionHolder"),
@@ -80,8 +84,11 @@ func New() *Templates {
 	return f
 }
 
+// PostProcess represents a function that is run after template generation on
+// the result, for instance to reflow the text.
 type PostProcess func([]byte) []byte
 
+// Generate is an implementation of generate.Generator
 func (t *Templates) Generate(f interface{}, name string, arg interface{}, out string, post PostProcess) (bool, error) {
 	t.File = f
 	defer func() { t.File = nil }()

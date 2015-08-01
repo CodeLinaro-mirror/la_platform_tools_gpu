@@ -18,15 +18,18 @@ import (
 	"path/filepath"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
+// CppNamespace is the struct handed to the Cpp.File template.
 type CppNamespace struct {
-	*Module
-	Namespace string
-	Copyright string
+	*Module          // The go module to generate cpp binary coders for.
+	Namespace string // The name to use for the cpp namespace itself.
+	Copyright string // The copyright header to put on the file.
 }
 
+// Called by codergen to prepare and generate cpp code for a given module.
 func Cpp(m *Module, info copyright.Info, gen Generator, path string) error {
 	ns := CppNamespace{
 		Module:    m,
@@ -35,4 +38,15 @@ func Cpp(m *Module, info copyright.Info, gen Generator, path string) error {
 	}
 	out := filepath.Join(path, ns.Namespace+".h")
 	return gen("Cpp.File", ns, out, indentor("    "))
+}
+
+// Converts a typename to cpp form by replacing the unicode characters.
+func (CppNamespace) TypeName(n string) string {
+	n = strings.Replace(n, ".", "::", -1)
+	n = strings.Replace(n, resolver.ConstSuffix+resolver.PointerSuffix, "__CP", -1)
+	n = strings.Replace(n, resolver.PointerSuffix, "__P", -1)
+	n = strings.Replace(n, resolver.SliceSuffix, "__S", -1)
+	n = strings.Replace(n, resolver.ArraySuffix, "__A", -1)
+	n = strings.Replace(n, resolver.TypeInfix, "__", -1)
+	return n
 }
