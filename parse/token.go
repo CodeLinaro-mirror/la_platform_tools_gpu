@@ -35,7 +35,7 @@ func (t Token) Format(f fmt.State, c rune) {
 
 // String returns the string form of the rune range the token represents.
 func (t Token) String() string {
-	if t.Start >= t.End {
+	if t.Start >= t.End || len(t.Runes) == 0 {
 		return ""
 	}
 	return string(t.Runes[t.Start:t.End])
