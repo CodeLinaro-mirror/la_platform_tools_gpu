@@ -39,20 +39,24 @@ func getSoName(a *adb.Action) (string, error) {
 	return so, nil
 }
 
-func getSoPath(a *adb.Action) (string, error) {
+func getSoPath(a *adb.Action, debug bool) (string, error) {
 	// TODO: decide how we are going to find the so's
 	gopath := filepath.SplitList(os.Getenv("GOPATH"))[0]
 	soName, err := getSoName(a)
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(gopath, "bin", soName, "release", "spy.so"), nil
+	flavor := "release"
+	if debug {
+		flavor = "debug"
+	}
+	return filepath.Join(gopath, "bin", soName, flavor, "spy.so"), nil
 }
 
 // AdbStart launches an activity on an android device with the gapii tracer
 // enabled. Gapii will attempt to connect back on the specified host port to
 // write the trace.
-func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port) error {
+func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, debug bool) error {
 	p := a.Package
 	d := p.Device
 	enforced, err := d.SELinuxEnforcing()
@@ -76,7 +80,7 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port) error {
 		}()
 	}
 
-	gapiiPath, err := getSoPath(a)
+	gapiiPath, err := getSoPath(a, debug)
 	if err != nil {
 		log.Errorf(l, "Failed finding gapii: %s", err)
 		return err
