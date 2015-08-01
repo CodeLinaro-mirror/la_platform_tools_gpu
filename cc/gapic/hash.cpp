@@ -351,7 +351,7 @@ void MurmurHash3_x64_128_(const void * key, const int len, const uint32_t seed, 
 }
 
 void MurmurHash3_x86_32(const void * key, int len, uint32_t seed, void * out) {
-    if ((reinterpret_cast<uint64_t>(key) & 0x3) == 0) {
+    if ((reinterpret_cast<uintptr_t>(key) & 0x3) == 0) {
         MurmurHash3_x86_32_<getblock32_aligned>(key, len, seed, out);
     } else {
         MurmurHash3_x86_32_<getblock32_unaligned>(key, len, seed, out);
@@ -359,7 +359,7 @@ void MurmurHash3_x86_32(const void * key, int len, uint32_t seed, void * out) {
 }
 
 void MurmurHash3_x86_128(const void * key, const int len, uint32_t seed, void * out) {
-    if ((reinterpret_cast<uint64_t>(key) & 0x3) == 0) {
+    if ((reinterpret_cast<uintptr_t>(key) & 0x3) == 0) {
         MurmurHash3_x86_128_<getblock32_aligned>(key, len, seed, out);
     } else {
         MurmurHash3_x86_128_<getblock32_unaligned>(key, len, seed, out);
@@ -367,7 +367,7 @@ void MurmurHash3_x86_128(const void * key, const int len, uint32_t seed, void * 
 }
 
 void MurmurHash3_x64_128(const void * key, const int len, uint32_t seed, void * out) {
-    if ((reinterpret_cast<uint64_t>(key) & 0x7) == 0) {
+    if ((reinterpret_cast<uintptr_t>(key) & 0x7) == 0) {
         MurmurHash3_x64_128_<getblock64_aligned>(key, len, seed, out);
     } else {
         MurmurHash3_x64_128_<getblock64_unaligned>(key, len, seed, out);
