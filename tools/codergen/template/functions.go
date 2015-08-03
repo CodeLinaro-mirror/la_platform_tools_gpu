@@ -16,12 +16,9 @@ package template
 
 import (
 	"fmt"
-	"io"
-	"strconv"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/reflow"
 )
 
 type variable struct {
@@ -42,18 +39,6 @@ func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
 		return "", err
 	}
 	return "", tmpl.Execute(t.writer, arg)
-}
-
-func (t *Templates) Section(name string) (string, error) {
-	w, ok := t.writer.(*reflow.Writer)
-	if !ok {
-		return "", fmt.Errorf("Section called inside nested writer")
-	}
-	depth := strconv.Itoa(w.Depth)
-	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionStart, name, depth))
-	err := t.execute(name, t.writer, t.File)
-	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionEnd, name, depth))
-	return "", err
 }
 
 func (*Templates) Lower(s interface{}) string {
