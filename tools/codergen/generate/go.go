@@ -21,6 +21,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
+const (
+	goIndent = "\t"
+)
+
 // GoBinary is the struct handed to binary coder generation templates.
 type GoBinary struct {
 	*Module
@@ -54,7 +58,7 @@ func Go(m *Module, info copyright.Info, gen chan Generate) error {
 			Copyright: copyright.Build("generated_by", info),
 		},
 		Output: goFileName(m, m.Name, "binary"),
-		Indent: "\t",
+		Indent: goIndent,
 	}
 	for _, s := range m.Services {
 		for _, e := range []string{"client", "server", "helpers", "extra"} {
@@ -68,7 +72,7 @@ func Go(m *Module, info copyright.Info, gen chan Generate) error {
 					Service: s,
 				},
 				Output: goFileName(m, s.Prefix, e),
-				Indent: "\t",
+				Indent: goIndent,
 			}
 		}
 	}

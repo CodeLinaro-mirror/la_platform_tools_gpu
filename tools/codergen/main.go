@@ -67,19 +67,19 @@ func worker(wg *sync.WaitGroup, errs *errors, tasks chan generate.Generate) {
 		for task := range tasks {
 			out := task.Output
 			if *nowrite {
-				out = ""
+				task.Output = ""
 			}
-			changed, err := t.Generate(task.Name, task.Arg, out, task.Indent)
+			changed, err := t.Generate(task)
 			if err != nil {
 				errs.Add(err)
 			} else if changed {
 				if *nowrite {
-					fmt.Printf("Not writing %s\n", task.Output)
+					fmt.Printf("Not writing %s\n", out)
 				} else if *verbose {
-					fmt.Printf("Generated %s\n", task.Output)
+					fmt.Printf("Generated %s\n", out)
 				}
 			} else if *verbose {
-				fmt.Printf("No change for %s\n", task.Output)
+				fmt.Printf("No change for %s\n", out)
 			}
 		}
 	}()
