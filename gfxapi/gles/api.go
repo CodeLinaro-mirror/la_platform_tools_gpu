@@ -16319,17 +16319,18 @@ func (a *SwitchThread) Observations() *atom.Observations { return &a.observation
 ////////////////////////////////////////////////////////////////////////////////
 type BackbufferInfo struct {
 	binary.Generate
-	observations         atom.Observations
-	Width                int32
-	Height               int32
-	ColorFmt             GLenum
-	DepthFmt             GLenum
-	StencilFmt           GLenum
-	ResetViewportScissor bool
+	observations          atom.Observations
+	Width                 int32
+	Height                int32
+	ColorFmt              GLenum
+	DepthFmt              GLenum
+	StencilFmt            GLenum
+	ResetViewportScissor  bool
+	PreserveBuffersOnSwap bool
 }
 
 func (a *BackbufferInfo) String() string {
-	return fmt.Sprintf("backbufferInfo(width: %v, height: %v, color_fmt: %v, depth_fmt: %v, stencil_fmt: %v, resetViewportScissor: %v)", a.Width, a.Height, a.ColorFmt, a.DepthFmt, a.StencilFmt, a.ResetViewportScissor)
+	return fmt.Sprintf("backbufferInfo(width: %v, height: %v, color_fmt: %v, depth_fmt: %v, stencil_fmt: %v, resetViewportScissor: %v, preserveBuffersOnSwap: %v)", a.Width, a.Height, a.ColorFmt, a.DepthFmt, a.StencilFmt, a.ResetViewportScissor, a.PreserveBuffersOnSwap)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -16872,6 +16873,7 @@ type Context struct {
 	GenerateMipmapHint    GLenum
 	PixelStorage          GLenumːs32ᵐ
 	Instances             Objects
+	PreserveBuffersOnSwap bool
 }
 
 func (c *Context) Init() {
@@ -18065,8 +18067,8 @@ func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer {
 func NewSwitchThread(ThreadID ThreadID) *SwitchThread {
 	return &SwitchThread{ThreadID: ThreadID}
 }
-func NewBackbufferInfo(Width int32, Height int32, Color_fmt GLenum, Depth_fmt GLenum, Stencil_fmt GLenum, ResetViewportScissor bool) *BackbufferInfo {
-	return &BackbufferInfo{Width: Width, Height: Height, ColorFmt: Color_fmt, DepthFmt: Depth_fmt, StencilFmt: Stencil_fmt, ResetViewportScissor: ResetViewportScissor}
+func NewBackbufferInfo(Width int32, Height int32, Color_fmt GLenum, Depth_fmt GLenum, Stencil_fmt GLenum, ResetViewportScissor bool, PreserveBuffersOnSwap bool) *BackbufferInfo {
+	return &BackbufferInfo{Width: Width, Height: Height, ColorFmt: Color_fmt, DepthFmt: Depth_fmt, StencilFmt: Stencil_fmt, ResetViewportScissor: ResetViewportScissor, PreserveBuffersOnSwap: PreserveBuffersOnSwap}
 }
 func NewStartTimer(Index uint8) *StartTimer {
 	return &StartTimer{Index: Index}

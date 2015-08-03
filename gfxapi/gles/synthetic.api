@@ -40,8 +40,10 @@ cmd void backbufferInfo(s32    width,
                         GLenum color_fmt,
                         GLenum depth_fmt,
                         GLenum stencil_fmt,
-                        bool   resetViewportScissor) {
+                        bool   resetViewportScissor,
+                        bool   preserveBuffersOnSwap) {
   ctx := GetContext()
+  ctx.PreserveBuffersOnSwap = preserveBuffersOnSwap
   backbuffer := ctx.Instances.Framebuffers[0]
 
   color_id := as!RenderbufferId(backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object)
