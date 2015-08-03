@@ -1,0 +1,339 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendColor.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendColor.xhtml","OpenGL ES 3.1")
+cmd void glBlendColor(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Blending.BlendColor = Color(
+    Red:    red,
+    Green:  green,
+    Blue:   blue,
+    Alpha:  alpha,
+  )
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendEquation.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendEquation.xhtml","OpenGL ES 3.1")
+cmd void glBlendEquation(GLenum equation) {
+  minRequiredVersion(2, 0)
+  switch (equation) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT: {
+      // version 2.0
+    }
+    case GL_MAX, GL_MIN: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(equation)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Blending.BlendEquationRgb = equation
+  ctx.Blending.BlendEquationAlpha = equation
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendEquationSeparate.xhtml","OpenGL ES 3.1")
+cmd void glBlendEquationSeparate(GLenum rgb, GLenum alpha) {
+  minRequiredVersion(2, 0)
+  switch (rgb) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT: {
+      // version 2.0
+    }
+    case GL_MAX, GL_MIN: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(rgb)
+    }
+  }
+  switch (alpha) {
+    case GL_FUNC_ADD, GL_FUNC_REVERSE_SUBTRACT, GL_FUNC_SUBTRACT: {
+      // version 2.0
+    }
+    case GL_MAX, GL_MIN: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(alpha)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Blending.BlendEquationRgb = rgb
+  ctx.Blending.BlendEquationAlpha = alpha
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendFunc.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFunc.xhtml","OpenGL ES 3.1")
+cmd void glBlendFunc(GLenum src_factor, GLenum dst_factor) {
+  minRequiredVersion(2, 0)
+  switch (src_factor) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(src_factor)
+    }
+  }
+  switch (dst_factor) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(dst_factor)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Blending.SrcRgbBlendFactor = src_factor
+  ctx.Blending.SrcAlphaBlendFactor = src_factor
+  ctx.Blending.DstRgbBlendFactor = dst_factor
+  ctx.Blending.DstAlphaBlendFactor = dst_factor
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFuncSeparate.xhtml","OpenGL ES 3.1")
+cmd void glBlendFuncSeparate(GLenum src_factor_rgb,
+                             GLenum dst_factor_rgb,
+                             GLenum src_factor_alpha,
+                             GLenum dst_factor_alpha) {
+  minRequiredVersion(2, 0)
+  switch (src_factor_rgb) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(src_factor_rgb)
+    }
+  }
+  switch (dst_factor_rgb) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(dst_factor_rgb)
+    }
+  }
+  switch (src_factor_alpha) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_ALPHA_SATURATE, GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(src_factor_alpha)
+    }
+  }
+  switch (dst_factor_alpha) {
+    case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
+        GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA,
+        GL_SRC_COLOR, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(dst_factor_alpha)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Blending.SrcRgbBlendFactor = src_factor_rgb
+  ctx.Blending.DstRgbBlendFactor = dst_factor_rgb
+  ctx.Blending.SrcAlphaBlendFactor = src_factor_alpha
+  ctx.Blending.DstAlphaBlendFactor = dst_factor_alpha
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDepthFunc.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthFunc.xhtml","OpenGL ES 3.1")
+cmd void glDepthFunc(GLenum function) {
+  minRequiredVersion(2, 0)
+  switch (function) {
+    case GL_ALWAYS, GL_EQUAL, GL_GEQUAL, GL_GREATER, GL_LEQUAL, GL_LESS, GL_NEVER, GL_NOTEQUAL: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(function)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Rasterizing.DepthTestFunction = function
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glSampleCoverage.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleCoverage.xhtml","OpenGL ES 3.1")
+cmd void glSampleCoverage(GLfloat value, GLboolean invert) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.SampleCoverageValue = value
+  ctx.Rasterizing.SampleCoverageInvert = invert
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleMaski.xhtml","OpenGL ES 3.1")
+cmd void glSampleMaski(GLuint maskNumber, GLbitfield mask) {
+  minRequiredVersion(3, 1)
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glScissor.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glScissor.xhtml","OpenGL ES 3.1")
+cmd void glScissor(GLint x, GLint y, GLsizei width, GLsizei height) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.Scissor = Rect(x, y, width, height)
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFunc.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilFunc.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilFunc.xhtml","OpenGL ES 3.1")
+cmd void glStencilFunc(GLenum func, GLint ref, GLuint mask) {
+  minRequiredVersion(2, 0)
+  switch (func) {
+    case GL_ALWAYS, GL_EQUAL, GL_GEQUAL, GL_GREATER, GL_LEQUAL, GL_LESS, GL_NEVER, GL_NOTEQUAL: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(func)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilFuncSeparate.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilFuncSeparate.xhtml","OpenGL ES 3.1")
+cmd void glStencilFuncSeparate(GLenum face, GLenum function, GLint reference_value, GLuint mask) {
+  minRequiredVersion(2, 0)
+  switch (face) {
+    case GL_BACK, GL_FRONT, GL_FRONT_AND_BACK: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(face)
+    }
+  }
+  switch (function) {
+    case GL_ALWAYS, GL_EQUAL, GL_GEQUAL, GL_GREATER, GL_LEQUAL, GL_LESS, GL_NEVER, GL_NOTEQUAL: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(function)
+    }
+  }
+
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOp.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilOp.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilOp.xhtml","OpenGL ES 3.1")
+cmd void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass) {
+  minRequiredVersion(2, 0)
+  switch (fail) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(fail)
+    }
+  }
+  switch (zfail) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(zfail)
+    }
+  }
+  switch (zpass) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(zpass)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glStencilOpSeparate.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilOpSeparate.xhtml","OpenGL ES 3.1")
+cmd void glStencilOpSeparate(GLenum face,
+                             GLenum stencil_fail,
+                             GLenum stencil_pass_depth_fail,
+                             GLenum stencil_pass_depth_pass) {
+  minRequiredVersion(2, 0)
+  switch (face) {
+    case GL_BACK, GL_FRONT, GL_FRONT_AND_BACK: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(face)
+    }
+  }
+  switch (stencil_fail) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(stencil_fail)
+    }
+  }
+  switch (stencil_pass_depth_fail) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(stencil_pass_depth_fail)
+    }
+  }
+  switch (stencil_pass_depth_pass) {
+    case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(stencil_pass_depth_pass)
+    }
+  }
+
+}
+

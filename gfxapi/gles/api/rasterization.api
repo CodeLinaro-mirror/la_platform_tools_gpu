@@ -1,0 +1,106 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCullFace.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCullFace.xhtml","OpenGL ES 3.1")
+cmd void glCullFace(GLenum mode) {
+  minRequiredVersion(2, 0)
+  switch (mode) {
+    case GL_BACK, GL_FRONT, GL_FRONT_AND_BACK: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(mode)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Rasterizing.CullFace = mode
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDepthRangef.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthRangef.xhtml","OpenGL ES 3.1")
+cmd void glDepthRangef(GLfloat near, GLfloat far) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.DepthNear = near
+  ctx.Rasterizing.DepthFar = far
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glFrontFace.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFrontFace.xhtml","OpenGL ES 3.1")
+cmd void glFrontFace(GLenum orientation) {
+  minRequiredVersion(2, 0)
+  switch (orientation) {
+    case GL_CCW, GL_CW: {
+      // version 2.0
+    }
+    default: {
+      glErrorInvalidEnum(orientation)
+    }
+  }
+
+  ctx := GetContext()
+  ctx.Rasterizing.FrontFace = orientation
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetMultisamplefv.xhtml","OpenGL ES 3.1")
+cmd void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) {
+  minRequiredVersion(3, 1)
+  switch (pname) {
+    case GL_SAMPLE_POSITION: {
+      // version 3.1
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glLineWidth.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glLineWidth.xhtml","OpenGL ES 3.1")
+cmd void glLineWidth(GLfloat width) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.LineWidth = width
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glPolygonOffset.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPolygonOffset.xhtml","OpenGL ES 3.1")
+cmd void glPolygonOffset(GLfloat scale_factor, GLfloat units) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.PolygonOffsetUnits = units
+  ctx.Rasterizing.PolygonOffsetFactor = scale_factor
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glViewport.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glViewport.xhtml","OpenGL ES 3.1")
+cmd void glViewport(GLint x, GLint y, GLsizei width, GLsizei height) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  ctx.Rasterizing.Viewport = Rect(x, y, width, height)
+}
+
