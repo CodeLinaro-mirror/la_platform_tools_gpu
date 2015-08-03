@@ -22,6 +22,7 @@ import (
 	"go/build"
 	"go/token"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -105,14 +106,14 @@ func (s *Scanner) Scan(entry string, verbose bool) error {
 		s.ScanPackage(pkg.ImportPath)
 		return nil
 	} else {
-		return filepath.Walk(pkg.Dir, func(path string, info os.FileInfo, err error) error {
+		return filepath.Walk(pkg.Dir, func(p string, info os.FileInfo, err error) error {
 			if !info.IsDir() {
 				return nil
 			}
-			if filepath.Base(path)[0] == '.' || filepath.Base(path)[0] == '_' {
+			if filepath.Base(p)[0] == '.' || filepath.Base(p)[0] == '_' {
 				return filepath.SkipDir
 			}
-			name := pkg.ImportPath + strings.TrimPrefix(path, pkg.Dir)
+			name := path.Join(pkg.ImportPath, filepath.ToSlash(strings.TrimPrefix(p, pkg.Dir)))
 			if verbose {
 				fmt.Printf("Reading %s\n", name)
 			}
