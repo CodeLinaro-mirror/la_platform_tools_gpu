@@ -22,13 +22,13 @@ import (
 )
 
 const (
-	eol      = '¶' // outputs a line break
-	space    = '•' // outputs a space even where it would normally be stripped
-	column   = '║' // a column marker used to line up text
-	toggle   = '§' // switches the formatter on or off
-	indent   = '»' // increases the current indent level by 1
-	unindent = '«' // decreases the current indent level by 1
-	flush    = 'ø' // flushes text, resets column detection
+	EOL      = '¶' // outputs a line break
+	Space    = '•' // outputs a space even where it would normally be stripped
+	Column   = '║' // a column marker used to line up text
+	Toggle   = '§' // switches the formatter on or off
+	Indent   = '»' // increases the current indent level by 1
+	Unindent = '«' // decreases the current indent level by 1
+	Flush    = 'ø' // flushes text, resets column detection
 )
 
 func New(w io.Writer) *Writer {
@@ -39,13 +39,13 @@ func New(w io.Writer) *Writer {
 }
 
 type Writer struct {
+	Depth     int
+	Indent    string
+	Disabled  bool
 	out       *tabwriter.Writer
 	space     bytes.Buffer
-	depth     int
 	lastDepth int
 	newline   bool
-	Indent    string
-	disabled  bool
 	stripping bool
 	runeBuf   [4]byte
 }
@@ -53,10 +53,10 @@ type Writer struct {
 func (w *Writer) Write(data []byte) (n int, err error) {
 	n = len(data)
 	for _, r := range string(data) {
-		if w.disabled {
+		if w.Disabled {
 			switch r {
-			case toggle:
-				w.disabled = false
+			case Toggle:
+				w.Disabled = false
 			default:
 				err = w.WriteRune(r)
 			}
@@ -72,37 +72,37 @@ func (w *Writer) Write(data []byte) (n int, err error) {
 			if !w.stripping {
 				w.space.WriteRune(r)
 			}
-		case column:
+		case Column:
 			w.space.WriteRune('\t')
 			w.stripping = true
-		case toggle:
-			w.disabled = true
+		case Toggle:
+			w.Disabled = true
 			w.space.Reset()
-		case indent:
-			w.depth++
-		case unindent:
-			w.depth--
-		case space:
+		case Indent:
+			w.Depth++
+		case Unindent:
+			w.Depth--
+		case Space:
 			err = w.WriteRune(' ')
-		case eol:
+		case EOL:
 			w.newline = true
 			w.stripping = true
 			w.space.Reset()
 			err = w.WriteRune('\n')
-		case flush:
+		case Flush:
 			w.Flush()
 		default:
 			if w.newline {
 				w.newline = false
-				if w.depth != w.lastDepth {
+				if w.Depth != w.lastDepth {
 					// indentation is different to last real write, so flush the tabwriter
 					w.Flush()
-					w.lastDepth = w.depth
+					w.lastDepth = w.Depth
 				}
-				if w.depth > 0 {
+				if w.Depth > 0 {
 					w.runeBuf[0] = tabwriter.Escape
 					w.out.Write(w.runeBuf[:1])
-					for i := 0; i < w.depth; i++ {
+					for i := 0; i < w.Depth; i++ {
 						io.WriteString(w.out, w.Indent)
 					}
 					w.out.Write(w.runeBuf[:1])
