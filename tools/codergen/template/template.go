@@ -91,7 +91,12 @@ func New() *Templates {
 	return f
 }
 
-var section = regexp.MustCompile("<<<(.+):(.+)>>>\n")
+var (
+	sectionMarker = "<<<%s:%s>>>"
+	sectionStart  = "Start"
+	sectionEnd    = "End"
+	section       = regexp.MustCompile(fmt.Sprintf(sectionMarker, "(.+)", "(.+)"))
+)
 
 // Generate is an implementation of generate.Generator
 func (t *Templates) Generate(g generate.Generate) (bool, error) {
@@ -110,7 +115,7 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 			mode := string(old[match[2]:match[3]])
 			name := string(old[match[4]:match[5]])
 			switch mode {
-			case "Start":
+			case sectionStart:
 				if tmpl != "" {
 					return false, fmt.Errorf("Overlapping template %s found starting %s", tmpl, name)
 				}
@@ -122,7 +127,7 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 					return false, err
 				}
 				out.Flush()
-			case "End":
+			case sectionEnd:
 				// section end marker, check it matches
 				if name != tmpl {
 					return false, fmt.Errorf("Invalid end %s found, expected %s", name, tmpl)
