@@ -248,7 +248,7 @@
 {{define "Go.CmdName"}}
   {{AssertType $ "Function"}}
 
-  {{Template "Go.Public" (Macro "CmdName" $)}}
+  {{Macro "CmdName" $ | Title}}
 {{end}}
 
 
