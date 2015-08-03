@@ -28,6 +28,7 @@ import (
 	"unicode/utf8"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/format"
 )
 
 // Templates manages the loaded templates and executes them on demand.
@@ -71,8 +72,12 @@ func installFields(v reflect.Value, funcs template.FuncMap) {
 func New() *Templates {
 	f := &Templates{
 		templates: template.New("FunctionHolder"),
-		funcs:     template.FuncMap{},
-		counters:  map[string]*counter{},
+		funcs: template.FuncMap{
+			// fake builtin functions
+			"add": func(a, b int) int { return a + b },
+			"sub": func(a, b int) int { return a - b },
+		},
+		counters: map[string]*counter{},
 	}
 	v := reflect.ValueOf(f)
 	installMethods(v, f.funcs)
@@ -89,20 +94,19 @@ func New() *Templates {
 type PostProcess func([]byte) []byte
 
 // Generate is an implementation of generate.Generator
-func (t *Templates) Generate(name string, arg interface{}, out string, post PostProcess) (bool, error) {
+func (t *Templates) Generate(name string, arg interface{}, out string, indent string) (bool, error) {
 	t.File = arg
 	defer func() { t.File = nil }()
-
-	b := &bytes.Buffer{}
-	if err := t.execute(name, b, arg); err != nil {
+	old, _ := ioutil.ReadFile(out)
+	buf := &bytes.Buffer{}
+	fmt := format.New(buf)
+	fmt.Indent = indent
+	if err := t.execute(name, fmt, arg); err != nil {
 		return false, err
 	}
-	data := post(b.Bytes())
-	current, err := ioutil.ReadFile(out)
-	if err == nil && bytes.Equal(data, current) {
-		return false, nil
-	}
-	if out == "" {
+	fmt.Flush()
+	data := buf.Bytes()
+	if out == "" || bytes.Equal(data, old) {
 		return false, nil
 	}
 	dir, _ := filepath.Split(out)

@@ -19,13 +19,13 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
-	"golang.org/x/tools/imports"
 )
 
 // GoBinary is the struct handed to binary coder generation templates.
 type GoBinary struct {
 	*Module
 	Copyright string
+	Imports   Imports
 }
 
 // GoService is the struct handed to go rpc service generation templates.
@@ -47,39 +47,45 @@ func Go(m *Module, info copyright.Info, gen chan Generate) error {
 	if len(m.Structs) == 0 && len(m.Constants) == 0 {
 		return nil
 	}
-	pkg := GoBinary{
-		Module:    m,
-		Copyright: copyright.Build("generated_by", info),
-	}
 	gen <- Generate{
-		Name:   "Go.Binary",
-		Arg:    pkg,
+		Name: "Go.Binary",
+		Arg: &GoBinary{
+			Module:    m,
+			Copyright: copyright.Build("generated_by", info),
+		},
 		Output: goFileName(m, m.Name, "binary"),
-		Reflow: reflowGo,
+		Indent: "\t",
 	}
 	for _, s := range m.Services {
 		for _, e := range []string{"client", "server", "helpers", "extra"} {
 			gen <- Generate{
-				Name:   "Go." + strings.Title(e),
-				Arg:    GoService{GoBinary: pkg, Service: s},
+				Name: "Go." + strings.Title(e),
+				Arg: &GoService{
+					GoBinary: GoBinary{
+						Module:    m,
+						Copyright: copyright.Build("generated_by", info),
+					},
+					Service: s,
+				},
 				Output: goFileName(m, s.Prefix, e),
-				Reflow: reflowGo,
+				Indent: "\t",
 			}
 		}
 	}
 	return nil
 }
 
-func reflowGo(b []byte) []byte {
-	options := &imports.Options{
-		TabWidth:  8,
-		TabIndent: true,
-		Comments:  true,
-		Fragment:  true,
+// Import adds an import to the import set for this template.
+func (b *GoBinary) Import(path string) string {
+	b.Imports.Add(Import{Name: "", Path: path})
+	return ""
+}
+
+// ImportOwner adds an import of the package that owns the supplied object.
+func (b *GoBinary) ImportOwner(v interface{}) string {
+	m, _ := b.ModuleAndName(v)
+	if m != b.Module {
+		b.Imports.Add(Import{Name: "", Path: m.Import})
 	}
-	if result, err := imports.Process("", b, options); err != nil {
-		return b
-	} else {
-		return result
-	}
+	return ""
 }
