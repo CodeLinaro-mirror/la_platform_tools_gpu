@@ -705,7 +705,7 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ctx := GetContext_15_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*VertexArray)(nil)
+		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Arrays.value())
@@ -2300,7 +2300,7 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	GetContext_62_result := context                                // Contextʳ
 	ctx := GetContext_62_result                                    // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Textures[t.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Texture)(nil)
+		delete(ctx.Instances.Textures, t.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Textures.value())
@@ -2733,7 +2733,7 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	GetContext_70_result := context                                    // Contextʳ
 	ctx := GetContext_70_result                                        // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Framebuffers[f.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Framebuffer)(nil)
+		delete(ctx.Instances.Framebuffers, f.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Framebuffers.value())
@@ -2850,7 +2850,7 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	GetContext_75_result := context                                     // Contextʳ
 	ctx := GetContext_75_result                                         // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Renderbuffers[r.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Renderbuffer)(nil)
+		delete(ctx.Instances.Renderbuffers, r.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Renderbuffers.value())
@@ -3026,7 +3026,7 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	GetContext_81_result := context                               // Contextʳ
 	ctx := GetContext_81_result                                   // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Buffers[b.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Buffer)(nil)
+		delete(ctx.Instances.Buffers, b.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Buffers.value())
@@ -3128,7 +3128,7 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ctx := GetContext_85_result                  // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
 	s.Deletable = true
-	ctx.Instances.Shaders[ϟa.Shader] = (*Shader)(nil)
+	delete(ctx.Instances.Shaders, ϟa.Shader)
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
@@ -3363,7 +3363,7 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_93_result := context              // Contextʳ
 	ctx := GetContext_93_result                  // Contextʳ
-	ctx.Instances.Programs[ϟa.Program] = (*Program)(nil)
+	delete(ctx.Instances.Programs, ϟa.Program)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
@@ -3412,7 +3412,7 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ctx := GetContext_95_result                  // Contextʳ
 	p := ctx.Instances.Programs.Get(ϟa.Program)  // Programʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
-	p.Shaders[s.Type] = ShaderId(uint32(0))
+	delete(p.Shaders, s.Type)
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, protocol.TypeUint32, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
@@ -4708,7 +4708,7 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	GetContext_131_result := context                              // Contextʳ
 	ctx := GetContext_131_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Queries[q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Query)(nil)
+		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Queries.value())
@@ -4930,7 +4930,7 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ctx := GetContext_135_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(uint32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := uint32(uint32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*VertexArray)(nil)
+		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.U32(ϟa.Count))
 	ϟb.Push(ϟa.Arrays.value())
@@ -5040,7 +5040,7 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	GetContext_137_result := context                              // Contextʳ
 	ctx := GetContext_137_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Queries[q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)] = (*Query)(nil)
+		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
 	}
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(ϟa.Queries.value())
