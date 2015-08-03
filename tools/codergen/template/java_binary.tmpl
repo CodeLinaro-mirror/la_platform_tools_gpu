@@ -95,6 +95,50 @@
   «}¶
 {{end}}
 
+{{define "Java.ClassBody"}}
+  ¶{{/*Newline after section marker*/}}
+  {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
+  ¶
+  // Constructs a default-initialized {@link {{File.ClassName .Struct}}}.¶
+  public {{File.ClassName .Struct}}() {»¶
+  «}¶
+  ¶
+  // Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.¶
+  public {{File.ClassName .Struct}}(Decoder d) throws IOException {»¶
+    Klass.INSTANCE.decode(d, this);¶
+  «}¶
+  {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
+  ¶
+  @Override @NotNull¶
+  public BinaryClass klass() { return Klass.INSTANCE; }¶
+  ¶
+  public static byte[] IDBytes = {
+    {{range .Struct.ID}}{{ToS8 .}}, {{end}}
+  •};¶
+  public static BinaryID ID = new BinaryID(IDBytes);¶
+  ¶
+  static {»¶
+    Namespace.register(ID, Klass.INSTANCE);¶
+  «}¶
+  //{{/*Comment the following section marker*/}}
+{{end}}
+
+{{define "Java.KlassBody"}}
+  ¶{{/*Newline after section marker*/}}
+  INSTANCE;¶
+  ¶
+  @Override @NotNull¶
+  public BinaryID id() { return ID; }¶
+  ¶
+  @Override @NotNull¶
+  public BinaryObject create() { return new {{File.ClassName .Struct}}(); }¶
+  ¶
+  {{template "Java.Encoder" .Struct}}
+  ¶
+  {{template "Java.Decoder" .Struct}}
+  //{{/*Comment the following section marker*/}}
+{{end}}
+
 {{define "Java.File"}}
   §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
@@ -113,40 +157,9 @@
   ¶
   {{if .Struct.Exported}}public•{{end}}
   final class {{File.ClassName .Struct}}{{if $e := .Struct.Tags.Get  "implements"}} extends {{File.ClassName $e}}{{end}} implements BinaryObject {»¶
-    {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
-    ¶
-    // Constructs a default-initialized {@link {{File.ClassName .Struct}}}.¶
-    public {{File.ClassName .Struct}}() {»¶
-    «}¶
-    ¶
-    // Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.¶
-    public {{File.ClassName .Struct}}(Decoder d) throws IOException {»¶
-      Klass.INSTANCE.decode(d, this);¶
-    «}¶
-    {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
-    ¶
-    @Override @NotNull¶
-    public BinaryClass klass() { return Klass.INSTANCE; }¶
-    ¶
-    public static byte[] IDBytes = {
-      {{range .Struct.ID}}{{ToS8 .}}, {{end}}
-    •};¶
-    public static BinaryID ID = new BinaryID(IDBytes);¶
+    //{{Section "Java.ClassBody"}}¶
     public enum Klass implements BinaryClass {»¶
-      INSTANCE;¶
-      ¶
-      @Override @NotNull¶
-      public BinaryID id() { return ID; }¶
-      ¶
-      @Override @NotNull¶
-      public BinaryObject create() { return new {{File.ClassName .Struct}}(); }¶
-      ¶
-      {{template "Java.Encoder" .Struct}}
-      ¶
-      {{template "Java.Decoder" .Struct}}
-    «}¶
-    static {»¶
-      Namespace.register(ID, Klass.INSTANCE);¶
+      //{{Section "Java.KlassBody"}}¶
     «}¶
   «}¶
 {{end}}
