@@ -64,7 +64,7 @@ var (
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDImageInfo                   = binary.ID{0x2d, 0xaa, 0x5c, 0x7f, 0x36, 0x92, 0xad, 0xf2, 0x8d, 0xfc, 0xc0, 0x47, 0x69, 0x59, 0x60, 0xcc, 0xdd, 0x06, 0xf1, 0xa6}
 	binaryIDMemoryInfo                  = binary.ID{0xd0, 0x51, 0x4d, 0xc0, 0xeb, 0xf4, 0xbb, 0x6d, 0x46, 0xfa, 0x3e, 0x02, 0x94, 0x84, 0xcc, 0x9f, 0x82, 0xc9, 0xc4, 0x9e}
-	binaryIDRenderSettings              = binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}
+	binaryIDRenderSettings              = binary.ID{0xf8, 0x94, 0x85, 0x1d, 0x97, 0x54, 0x1c, 0xb7, 0x82, 0x93, 0x7a, 0x28, 0x65, 0xe7, 0x55, 0x95, 0x4d, 0x89, 0x7a, 0x02}
 	binaryIDReportItem                  = binary.ID{0x8a, 0xb2, 0x14, 0x6f, 0x40, 0xb0, 0x0b, 0x10, 0xa9, 0x02, 0xfb, 0xa1, 0x76, 0x1a, 0xe9, 0xd7, 0x9c, 0x62, 0x40, 0x93}
 	binaryIDReport                      = binary.ID{0xc3, 0xd0, 0x8a, 0x62, 0x38, 0x91, 0xba, 0x62, 0xc8, 0x4b, 0x71, 0x55, 0x78, 0x58, 0x73, 0xd4, 0x06, 0x52, 0x71, 0x15}
 	binaryIDSchema                      = binary.ID{0x74, 0xe2, 0x21, 0xf1, 0x49, 0x8f, 0x1b, 0x90, 0xf3, 0x8b, 0xe8, 0x56, 0xef, 0xbf, 0x17, 0x79, 0xdf, 0xfc, 0x38, 0x25}
@@ -727,7 +727,7 @@ func doEncodeRenderSettings(e binary.Encoder, o *RenderSettings) error {
 	if err := e.Uint32(o.MaxHeight); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Wireframe); err != nil {
+	if err := e.Int32(int32(o.WireframeMode)); err != nil {
 		return err
 	}
 	return nil
@@ -743,10 +743,10 @@ func doDecodeRenderSettings(d binary.Decoder, o *RenderSettings) error {
 	} else {
 		o.MaxHeight = uint32(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.Wireframe = bool(obj)
+		o.WireframeMode = WireframeMode(obj)
 	}
 	return nil
 }
@@ -757,7 +757,7 @@ func doSkipRenderSettings(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
@@ -784,7 +784,7 @@ var schemaRenderSettings = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "MaxWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "MaxHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Wireframe", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "WireframeMode", Type: &schema.Primitive{Name: "WireframeMode", Method: schema.Int32}},
 	},
 }
 
@@ -2588,4 +2588,40 @@ func (v *TimingFlags) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in TimingFlags", s)
+}
+
+const _WireframeMode_name = "NoWireframeWireframeOverlayAllWireframe"
+
+var _WireframeMode_map = map[WireframeMode]string{}
+
+func init() {
+	_WireframeMode_map[0] = _WireframeMode_name[0:11]
+	_WireframeMode_map[1] = _WireframeMode_name[11:27]
+	_WireframeMode_map[2] = _WireframeMode_name[27:39]
+
+	ConstantValues = append(ConstantValues, schema.ConstantSet{
+		Type: &schema.Primitive{Name: "WireframeMode", Method: schema.Int32},
+		Entries: []schema.Constant{
+			{Name: _WireframeMode_name[0:11], Value: int32(0)},
+			{Name: _WireframeMode_name[11:27], Value: int32(1)},
+			{Name: _WireframeMode_name[27:39], Value: int32(2)},
+		},
+	})
+}
+
+func (v WireframeMode) String() string {
+	if s, ok := _WireframeMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("WireframeMode(%d)", v)
+}
+
+func (v *WireframeMode) Parse(s string) error {
+	for k, t := range _WireframeMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in WireframeMode", s)
 }

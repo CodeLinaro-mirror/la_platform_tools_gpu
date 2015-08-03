@@ -19,10 +19,25 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+// WireframeMode is an enumerator of wireframe modes used by QueryColorBuffer.
+type WireframeMode int
+
+const (
+	// NoWireframe indicates that nothing should be drawn in wireframe.
+	NoWireframe = WireframeMode(iota)
+
+	// WireframeOverlay indicates that the single draw call should be overlayed
+	// with the wireframe of the mesh.
+	WireframeOverlay
+
+	// AllWireframe indicates that all draw calls should be displayed in wireframe.
+	AllWireframe
+)
+
 // QueryColorBuffer is the interface implemented by types that can return the
 // content of the color buffer at a particular point in a capture.
 type QueryColorBuffer interface {
-	QueryColorBuffer(ctx *Context, mgr *Manager, after atom.ID, width, height uint32, wireframe bool) <-chan Image
+	QueryColorBuffer(ctx *Context, mgr *Manager, after atom.ID, width, height uint32, wireframeMode WireframeMode) <-chan Image
 }
 
 // QueryDepthBufferer is the interface implemented by types that can return the
