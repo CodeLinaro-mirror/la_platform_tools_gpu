@@ -25,18 +25,19 @@ import (
 
 // Generator is the interface for types that support replay generation.
 type Generator interface {
-	// ReplayTransforms is called when a replay pass is ready to be sent to the
-	// replay device. ReplayTransforms returns an atom transform list that
-	// transforms the original, unaltered atom stream into a stream configured for
-	// the replay pass. The transforms should satisfy all the specified requests
-	// and config.
-	ReplayTransforms(
+	// Replay is called when a replay pass is ready to be sent to the replay
+	// device. Replay may filter or transform the list of atoms, satisfying all
+	// the specified requests and config, before outputting the final atom stream
+	// to out.
+	Replay(
 		ctx Context,
 		cfg Config,
 		requests []Request,
 		device *service.Device,
+		atoms atom.List,
+		out atom.Writer,
 		db database.Database,
-		logger log.Logger) atom.Transforms
+		logger log.Logger) error
 }
 
 // Context describes the source capture and replay target information used for

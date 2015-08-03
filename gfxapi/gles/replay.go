@@ -17,6 +17,7 @@ package gles
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/transform"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -65,13 +66,15 @@ type timeCallsRequest struct {
 	flags service.TimingFlags
 }
 
-func (a api) ReplayTransforms(
+func (a api) Replay(
 	ctx replay.Context,
-	config replay.Config,
+	cfg replay.Config,
 	requests []replay.Request,
 	device *service.Device,
+	atoms atom.List,
+	out atom.Writer,
 	db database.Database,
-	logger log.Logger) atom.Transforms {
+	logger log.Logger) error {
 
 	transforms := atom.Transforms{}
 
@@ -119,7 +122,7 @@ func (a api) ReplayTransforms(
 		precisionStrip(device, db, logger),
 		halfFloatOESToHalfFloatARB(device))
 
-	if c, ok := config.(drawConfig); ok && c.wireframe {
+	if c, ok := cfg.(drawConfig); ok && c.wireframe {
 		transforms.Add(wireframe(db, logger))
 	}
 
@@ -130,7 +133,16 @@ func (a api) ReplayTransforms(
 		logger: logger,
 	})
 
-	return transforms
+	if config.DebugReplay {
+		log.Infof(logger, "Replaying %d atoms using transform chain:", len(atoms.Atoms))
+		for i, t := range transforms {
+			log.Infof(logger, "(%d) %#v", i, t)
+		}
+	}
+
+	transforms.Transform(atoms, out)
+
+	return nil
 }
 
 func (a api) QueryColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan replay.Image {
