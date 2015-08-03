@@ -1,0 +1,60 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package main
+
+import (
+	"android.googlesource.com/platform/tools/gpu/api/ast"
+	"android.googlesource.com/platform/tools/gpu/api/parser"
+	"flag"
+	"fmt"
+	"io/ioutil"
+)
+
+var (
+	apiDir     = flag.String("api", "", "Directory for the api output files")
+	csvDir     = flag.String("csv", "", "Directory for the csv output file")
+	cacheDir   = flag.String("cache", "", "Directory for caching downloaded files")
+	oldApiPath = flag.String("oldapi", "", "Filename of the old api file to use for reference")
+	oldApi     *ast.API
+)
+
+func main() {
+	flag.Parse()
+	if *apiDir == "" && *csvDir == "" {
+		flag.PrintDefaults()
+		return
+	}
+	if *oldApiPath != "" {
+		f, err := ioutil.ReadFile(*oldApiPath)
+		if err != nil {
+			panic(err)
+		}
+		api, errs := parser.Parse(string(f))
+		if len(errs) > 0 {
+			for i, e := range errs {
+				fmt.Printf("%d: %v", i, e)
+			}
+			return
+		}
+		oldApi = api
+	}
+	reg := DownloadReg()
+	if *apiDir != "" {
+		GenerateApi(reg, GLES2API)
+	}
+	if *csvDir != "" {
+		GenerateCsv(reg, GLES2API)
+	}
+}

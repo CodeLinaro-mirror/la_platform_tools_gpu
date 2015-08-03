@@ -1,0 +1,388 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBuffer.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBuffer.xhtml","OpenGL ES 3.1")
+cmd void glBindBuffer(GLenum target, BufferId buffer) {
+  minRequiredVersion(2, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER: {
+      // version 2.0
+    }
+    case GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER,
+        GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+
+  ctx := GetContext()
+  if !(buffer in ctx.Instances.Buffers) {
+    ctx.Instances.Buffers[buffer] = new!Buffer()
+  }
+  ctx.BoundBuffers[target] = buffer
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferBase.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferBase.xhtml","OpenGL ES 3.1")
+cmd void glBindBufferBase(GLenum target, GLuint index, BufferId buffer) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindBufferRange.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindBufferRange.xhtml","OpenGL ES 3.1")
+cmd void glBindBufferRange(GLenum     target,
+                           GLuint     index,
+                           BufferId   buffer,
+                           GLintptr   offset,
+                           GLsizeiptr size) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBufferData.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBufferData.xhtml","OpenGL ES 3.1")
+cmd void glBufferData(GLenum target, GLsizeiptr size, BufferDataPointer data, GLenum usage) {
+  minRequiredVersion(2, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER: {
+      // version 2.0
+    }
+    case GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER,
+        GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (usage) {
+    case GL_DYNAMIC_DRAW, GL_STATIC_DRAW, GL_STREAM_DRAW: {
+      // version 2.0
+    }
+    case GL_DYNAMIC_COPY, GL_DYNAMIC_READ, GL_STATIC_COPY, GL_STATIC_READ, GL_STREAM_COPY,
+        GL_STREAM_READ: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(usage)
+    }
+  }
+
+  ctx := GetContext()
+  id := ctx.BoundBuffers[target]
+  b := ctx.Instances.Buffers[id]
+  b.Data = switch (data != null) {
+    case true:  clone(as!u8*(data)[0:size])
+    case false: make!u8(size)
+  }
+  b.Size = size
+  b.Usage = usage
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBufferSubData.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBufferSubData.xhtml","OpenGL ES 3.1")
+cmd void glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, BufferDataPointer data) {
+  minRequiredVersion(2, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER: {
+      // version 2.0
+    }
+    case GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER,
+        GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      minRequiredVersion(3, 0)
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+
+  read(data[0:size])
+  // TODO: Assignment to subset
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glCopyBufferSubData.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCopyBufferSubData.xhtml","OpenGL ES 3.1")
+cmd void glCopyBufferSubData(GLenum     readTarget,
+                             GLenum     writeTarget,
+                             GLintptr   readOffset,
+                             GLintptr   writeOffset,
+                             GLsizeiptr size) {
+  minRequiredVersion(3, 0)
+  switch (readTarget) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(readTarget)
+    }
+  }
+  switch (writeTarget) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(writeTarget)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteBuffers.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteBuffers.xhtml","OpenGL ES 3.1")
+cmd void glDeleteBuffers(GLsizei count, const BufferId* buffers) {
+  minRequiredVersion(2, 0)
+
+  b := buffers[0:count]
+  ctx := GetContext()
+  for i in (0 .. count) {
+    ctx.Instances.Buffers[b[i]] = null
+  }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGenBuffers.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenBuffers.xhtml","OpenGL ES 3.1")
+cmd void glGenBuffers(GLsizei count, BufferId* buffers) {
+  minRequiredVersion(2, 0)
+
+  b := buffers[0:count]
+  ctx := GetContext()
+  for i in (0 .. count) {
+    id := as!BufferId(?)
+    ctx.Instances.Buffers[id] = new!Buffer()
+    b[i] = id
+  }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferParameter.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferParameter.xhtml","OpenGL ES 3.1")
+cmd void glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64* params) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (pname) {
+    case GL_BUFFER_ACCESS_FLAGS, GL_BUFFER_MAPPED, GL_BUFFER_MAP_LENGTH, GL_BUFFER_MAP_OFFSET,
+        GL_BUFFER_SIZE, GL_BUFFER_USAGE: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferParameter.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferParameter.xhtml","OpenGL ES 3.1")
+cmd void glGetBufferParameteriv(GLenum target, GLenum parameter, GLint* value) {
+  minRequiredVersion(2, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER: {
+      // version 2.0
+    }
+    case GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER,
+        GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (parameter) {
+    case GL_BUFFER_SIZE, GL_BUFFER_USAGE: {
+      // version 2.0
+    }
+    case GL_BUFFER_ACCESS_FLAGS, GL_BUFFER_MAPPED, GL_BUFFER_MAP_LENGTH, GL_BUFFER_MAP_OFFSET: {
+      minRequiredVersion(3, 0)
+    }
+    default: {
+      glErrorInvalidEnum(parameter)
+    }
+  }
+
+  ctx := GetContext()
+  id := ctx.BoundBuffers[target]
+  b := ctx.Instances.Buffers[id]
+  value[0] = switch (parameter) {
+    case GL_BUFFER_SIZE:  as!s32(b.Size)
+    case GL_BUFFER_USAGE: as!s32(b.Usage)
+  }
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGetBufferPointerv.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetBufferPointerv.xhtml","OpenGL ES 3.1")
+cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  switch (pname) {
+    case GL_BUFFER_MAP_POINTER: {
+      // version 3.0
+    }
+    default: {
+      glErrorInvalidEnum(pname)
+    }
+  }
+  // TODO
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml","OpenGL ES 2.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsBuffer.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsBuffer.xhtml","OpenGL ES 3.1")
+cmd bool glIsBuffer(BufferId buffer) {
+  minRequiredVersion(2, 0)
+
+  ctx := GetContext()
+  return buffer in ctx.Instances.Buffers
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMapBufferRange.xhtml","OpenGL ES 3.1")
+cmd void* glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+  supportsBits(access, GL_MAP_FLUSH_EXPLICIT_BIT | GL_MAP_INVALIDATE_BUFFER_BIT | GL_MAP_INVALIDATE_RANGE_BIT | GL_MAP_READ_BIT | GL_MAP_UNSYNCHRONIZED_BIT | GL_MAP_WRITE_BIT)
+  if (GL_MAP_FLUSH_EXPLICIT_BIT in access) {
+  }
+  if (GL_MAP_INVALIDATE_BUFFER_BIT in access) {
+  }
+  if (GL_MAP_INVALIDATE_RANGE_BIT in access) {
+  }
+  if (GL_MAP_READ_BIT in access) {
+  }
+  if (GL_MAP_UNSYNCHRONIZED_BIT in access) {
+  }
+  if (GL_MAP_WRITE_BIT in access) {
+  }
+
+  ctx := GetContext()
+  b := ctx.Instances.Buffers[ctx.BoundBuffers[target]]
+
+  ptr := as!u8*(?)
+
+  b.MappingAccess = access
+  b.MappingData = ptr[0:length]
+  if GL_MAP_READ_BIT in access {
+    src := b.Data[offset:offset + length]
+    dst := b.MappingData
+    // copy(dst, src) // TEMP HACK: copy cannot be used here as this is a copy after a fence (ptr := ?)
+    write(dst)
+  }
+
+  return as!void*(ptr)
+}
+
+@Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml","OpenGL ES 3.0")
+@Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMapBufferRange.xhtml","OpenGL ES 3.1")
+cmd GLboolean glUnmapBuffer(GLenum target) {
+  minRequiredVersion(3, 0)
+  switch (target) {
+    case GL_ARRAY_BUFFER, GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, GL_ELEMENT_ARRAY_BUFFER,
+        GL_PIXEL_PACK_BUFFER, GL_PIXEL_UNPACK_BUFFER, GL_TRANSFORM_FEEDBACK_BUFFER,
+        GL_UNIFORM_BUFFER: {
+      // version 3.0
+    }
+    case GL_ATOMIC_COUNTER_BUFFER, GL_DISPATCH_INDIRECT_BUFFER, GL_DRAW_INDIRECT_BUFFER,
+        GL_SHADER_STORAGE_BUFFER: {
+      minRequiredVersion(3, 1)
+    }
+    default: {
+      glErrorInvalidEnum(target)
+    }
+  }
+
+  ctx := GetContext()
+  b := ctx.Instances.Buffers[ctx.BoundBuffers[target]]
+  // if GL_MAP_WRITE_BIT in b.MappingAccess { // TEMP HACK: Commented as 'fence not allowed in *semantic.Branch'
+  copy(b.Data[b.MappingOffset:b.MappingOffset + len(b.MappingData)], b.MappingData)
+  // }
+}
+
