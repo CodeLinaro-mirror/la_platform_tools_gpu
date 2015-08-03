@@ -3111,7 +3111,7 @@ type CmdClone struct {
 }
 
 func (a *CmdClone) String() string {
-	return fmt.Sprintf("cmd_clone(src: %v, cnt: %v)", a.Src, a.Cnt)
+	return fmt.Sprintf("cmdClone(src: %v, cnt: %v)", a.Src, a.Cnt)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3143,7 +3143,7 @@ type CmdMake struct {
 }
 
 func (a *CmdMake) String() string {
-	return fmt.Sprintf("cmd_make(cnt: %v)", a.Cnt)
+	return fmt.Sprintf("cmdMake(cnt: %v)", a.Cnt)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3176,7 +3176,7 @@ type CmdCopy struct {
 }
 
 func (a *CmdCopy) String() string {
-	return fmt.Sprintf("cmd_copy(src: %v, cnt: %v)", a.Src, a.Cnt)
+	return fmt.Sprintf("cmdCopy(src: %v, cnt: %v)", a.Src, a.Cnt)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3209,7 +3209,7 @@ type CmdCharsliceToString struct {
 }
 
 func (a *CmdCharsliceToString) String() string {
-	return fmt.Sprintf("cmd_charslice_to_string(s: %v, len: %v)", a.S, a.Len)
+	return fmt.Sprintf("cmdCharsliceToString(s: %v, len: %v)", a.S, a.Len)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3241,7 +3241,7 @@ type CmdCharptrToString struct {
 }
 
 func (a *CmdCharptrToString) String() string {
-	return fmt.Sprintf("cmd_charptr_to_string(s: %v)", a.S)
+	return fmt.Sprintf("cmdCharptrToString(s: %v)", a.S)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3274,7 +3274,7 @@ type CmdSliceCasts struct {
 }
 
 func (a *CmdSliceCasts) String() string {
-	return fmt.Sprintf("cmd_slice_casts(s: %v, l: %v)", a.S, a.L)
+	return fmt.Sprintf("cmdSliceCasts(s: %v, l: %v)", a.S, a.L)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3305,7 +3305,7 @@ type CmdVoid struct {
 }
 
 func (a *CmdVoid) String() string {
-	return fmt.Sprintf("cmd_void()")
+	return fmt.Sprintf("cmdVoid()")
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3337,7 +3337,7 @@ type CmdUnknownRet struct {
 }
 
 func (a *CmdUnknownRet) String() string {
-	return fmt.Sprintf("cmd_unknown_ret() → %v", a.Result)
+	return fmt.Sprintf("cmdUnknownRet() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3369,7 +3369,7 @@ type CmdUnknownWritePtr struct {
 }
 
 func (a *CmdUnknownWritePtr) String() string {
-	return fmt.Sprintf("cmd_unknown_write_ptr(p: %v)", a.P)
+	return fmt.Sprintf("cmdUnknownWritePtr(p: %v)", a.P)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3401,7 +3401,7 @@ type CmdUnknownWriteSlice struct {
 }
 
 func (a *CmdUnknownWriteSlice) String() string {
-	return fmt.Sprintf("cmd_unknown_write_slice(a: %v)", a.A)
+	return fmt.Sprintf("cmdUnknownWriteSlice(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3433,7 +3433,7 @@ type CmdVoidU8 struct {
 }
 
 func (a *CmdVoidU8) String() string {
-	return fmt.Sprintf("cmd_void_u8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidU8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3465,7 +3465,7 @@ type CmdVoidS8 struct {
 }
 
 func (a *CmdVoidS8) String() string {
-	return fmt.Sprintf("cmd_void_s8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidS8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3497,7 +3497,7 @@ type CmdVoidU16 struct {
 }
 
 func (a *CmdVoidU16) String() string {
-	return fmt.Sprintf("cmd_void_u16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidU16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3529,7 +3529,7 @@ type CmdVoidS16 struct {
 }
 
 func (a *CmdVoidS16) String() string {
-	return fmt.Sprintf("cmd_void_s16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidS16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3561,7 +3561,7 @@ type CmdVoidF32 struct {
 }
 
 func (a *CmdVoidF32) String() string {
-	return fmt.Sprintf("cmd_void_f32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidF32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3593,7 +3593,7 @@ type CmdVoidU32 struct {
 }
 
 func (a *CmdVoidU32) String() string {
-	return fmt.Sprintf("cmd_void_u32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidU32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3625,7 +3625,7 @@ type CmdVoidS32 struct {
 }
 
 func (a *CmdVoidS32) String() string {
-	return fmt.Sprintf("cmd_void_s32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidS32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3657,7 +3657,7 @@ type CmdVoidF64 struct {
 }
 
 func (a *CmdVoidF64) String() string {
-	return fmt.Sprintf("cmd_void_f64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidF64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3689,7 +3689,7 @@ type CmdVoidU64 struct {
 }
 
 func (a *CmdVoidU64) String() string {
-	return fmt.Sprintf("cmd_void_u64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidU64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3721,7 +3721,7 @@ type CmdVoidS64 struct {
 }
 
 func (a *CmdVoidS64) String() string {
-	return fmt.Sprintf("cmd_void_s64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidS64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3753,7 +3753,7 @@ type CmdVoidBool struct {
 }
 
 func (a *CmdVoidBool) String() string {
-	return fmt.Sprintf("cmd_void_bool(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidBool(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3785,7 +3785,7 @@ type CmdVoidString struct {
 }
 
 func (a *CmdVoidString) String() string {
-	return fmt.Sprintf("cmd_void_string(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidString(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3819,7 +3819,7 @@ type CmdVoid3Strings struct {
 }
 
 func (a *CmdVoid3Strings) String() string {
-	return fmt.Sprintf("cmd_void_3_strings(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
+	return fmt.Sprintf("cmdVoid3Strings(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3853,7 +3853,7 @@ type CmdVoid3InArrays struct {
 }
 
 func (a *CmdVoid3InArrays) String() string {
-	return fmt.Sprintf("cmd_void_3_in_arrays(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
+	return fmt.Sprintf("cmdVoid3InArrays(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3886,7 +3886,7 @@ type CmdVoidInArrayOfPointers struct {
 }
 
 func (a *CmdVoidInArrayOfPointers) String() string {
-	return fmt.Sprintf("cmd_void_in_array_of_pointers(a: %v, count: %v)", a.A, a.Count)
+	return fmt.Sprintf("cmdVoidInArrayOfPointers(a: %v, count: %v)", a.A, a.Count)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3918,7 +3918,7 @@ type CmdVoidReadU8 struct {
 }
 
 func (a *CmdVoidReadU8) String() string {
-	return fmt.Sprintf("cmd_void_read_u8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadU8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3950,7 +3950,7 @@ type CmdVoidReadS8 struct {
 }
 
 func (a *CmdVoidReadS8) String() string {
-	return fmt.Sprintf("cmd_void_read_s8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadS8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -3982,7 +3982,7 @@ type CmdVoidReadU16 struct {
 }
 
 func (a *CmdVoidReadU16) String() string {
-	return fmt.Sprintf("cmd_void_read_u16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadU16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4014,7 +4014,7 @@ type CmdVoidReadS16 struct {
 }
 
 func (a *CmdVoidReadS16) String() string {
-	return fmt.Sprintf("cmd_void_read_s16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadS16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4046,7 +4046,7 @@ type CmdVoidReadF32 struct {
 }
 
 func (a *CmdVoidReadF32) String() string {
-	return fmt.Sprintf("cmd_void_read_f32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadF32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4078,7 +4078,7 @@ type CmdVoidReadU32 struct {
 }
 
 func (a *CmdVoidReadU32) String() string {
-	return fmt.Sprintf("cmd_void_read_u32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadU32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4110,7 +4110,7 @@ type CmdVoidReadS32 struct {
 }
 
 func (a *CmdVoidReadS32) String() string {
-	return fmt.Sprintf("cmd_void_read_s32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadS32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4142,7 +4142,7 @@ type CmdVoidReadF64 struct {
 }
 
 func (a *CmdVoidReadF64) String() string {
-	return fmt.Sprintf("cmd_void_read_f64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadF64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4174,7 +4174,7 @@ type CmdVoidReadU64 struct {
 }
 
 func (a *CmdVoidReadU64) String() string {
-	return fmt.Sprintf("cmd_void_read_u64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadU64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4206,7 +4206,7 @@ type CmdVoidReadS64 struct {
 }
 
 func (a *CmdVoidReadS64) String() string {
-	return fmt.Sprintf("cmd_void_read_s64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadS64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4238,7 +4238,7 @@ type CmdVoidReadBool struct {
 }
 
 func (a *CmdVoidReadBool) String() string {
-	return fmt.Sprintf("cmd_void_read_bool(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidReadBool(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4272,7 +4272,7 @@ type CmdVoidReadPtrs struct {
 }
 
 func (a *CmdVoidReadPtrs) String() string {
-	return fmt.Sprintf("cmd_void_read_ptrs(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
+	return fmt.Sprintf("cmdVoidReadPtrs(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4304,7 +4304,7 @@ type CmdVoidWriteU8 struct {
 }
 
 func (a *CmdVoidWriteU8) String() string {
-	return fmt.Sprintf("cmd_void_write_u8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteU8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4336,7 +4336,7 @@ type CmdVoidWriteS8 struct {
 }
 
 func (a *CmdVoidWriteS8) String() string {
-	return fmt.Sprintf("cmd_void_write_s8(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteS8(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4368,7 +4368,7 @@ type CmdVoidWriteU16 struct {
 }
 
 func (a *CmdVoidWriteU16) String() string {
-	return fmt.Sprintf("cmd_void_write_u16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteU16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4400,7 +4400,7 @@ type CmdVoidWriteS16 struct {
 }
 
 func (a *CmdVoidWriteS16) String() string {
-	return fmt.Sprintf("cmd_void_write_s16(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteS16(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4432,7 +4432,7 @@ type CmdVoidWriteF32 struct {
 }
 
 func (a *CmdVoidWriteF32) String() string {
-	return fmt.Sprintf("cmd_void_write_f32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteF32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4464,7 +4464,7 @@ type CmdVoidWriteU32 struct {
 }
 
 func (a *CmdVoidWriteU32) String() string {
-	return fmt.Sprintf("cmd_void_write_u32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteU32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4496,7 +4496,7 @@ type CmdVoidWriteS32 struct {
 }
 
 func (a *CmdVoidWriteS32) String() string {
-	return fmt.Sprintf("cmd_void_write_s32(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteS32(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4528,7 +4528,7 @@ type CmdVoidWriteF64 struct {
 }
 
 func (a *CmdVoidWriteF64) String() string {
-	return fmt.Sprintf("cmd_void_write_f64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteF64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4560,7 +4560,7 @@ type CmdVoidWriteU64 struct {
 }
 
 func (a *CmdVoidWriteU64) String() string {
-	return fmt.Sprintf("cmd_void_write_u64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteU64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4592,7 +4592,7 @@ type CmdVoidWriteS64 struct {
 }
 
 func (a *CmdVoidWriteS64) String() string {
-	return fmt.Sprintf("cmd_void_write_s64(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteS64(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4624,7 +4624,7 @@ type CmdVoidWriteBool struct {
 }
 
 func (a *CmdVoidWriteBool) String() string {
-	return fmt.Sprintf("cmd_void_write_bool(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidWriteBool(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4658,7 +4658,7 @@ type CmdVoidWritePtrs struct {
 }
 
 func (a *CmdVoidWritePtrs) String() string {
-	return fmt.Sprintf("cmd_void_write_ptrs(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
+	return fmt.Sprintf("cmdVoidWritePtrs(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4690,7 +4690,7 @@ type CmdU8 struct {
 }
 
 func (a *CmdU8) String() string {
-	return fmt.Sprintf("cmd_u8() → %v", a.Result)
+	return fmt.Sprintf("cmdU8() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4722,7 +4722,7 @@ type CmdS8 struct {
 }
 
 func (a *CmdS8) String() string {
-	return fmt.Sprintf("cmd_s8() → %v", a.Result)
+	return fmt.Sprintf("cmdS8() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4754,7 +4754,7 @@ type CmdU16 struct {
 }
 
 func (a *CmdU16) String() string {
-	return fmt.Sprintf("cmd_u16() → %v", a.Result)
+	return fmt.Sprintf("cmdU16() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4786,7 +4786,7 @@ type CmdS16 struct {
 }
 
 func (a *CmdS16) String() string {
-	return fmt.Sprintf("cmd_s16() → %v", a.Result)
+	return fmt.Sprintf("cmdS16() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4818,7 +4818,7 @@ type CmdF32 struct {
 }
 
 func (a *CmdF32) String() string {
-	return fmt.Sprintf("cmd_f32() → %v", a.Result)
+	return fmt.Sprintf("cmdF32() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4850,7 +4850,7 @@ type CmdU32 struct {
 }
 
 func (a *CmdU32) String() string {
-	return fmt.Sprintf("cmd_u32() → %v", a.Result)
+	return fmt.Sprintf("cmdU32() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4882,7 +4882,7 @@ type CmdS32 struct {
 }
 
 func (a *CmdS32) String() string {
-	return fmt.Sprintf("cmd_s32() → %v", a.Result)
+	return fmt.Sprintf("cmdS32() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4914,7 +4914,7 @@ type CmdF64 struct {
 }
 
 func (a *CmdF64) String() string {
-	return fmt.Sprintf("cmd_f64() → %v", a.Result)
+	return fmt.Sprintf("cmdF64() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4946,7 +4946,7 @@ type CmdU64 struct {
 }
 
 func (a *CmdU64) String() string {
-	return fmt.Sprintf("cmd_u64() → %v", a.Result)
+	return fmt.Sprintf("cmdU64() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -4978,7 +4978,7 @@ type CmdS64 struct {
 }
 
 func (a *CmdS64) String() string {
-	return fmt.Sprintf("cmd_s64() → %v", a.Result)
+	return fmt.Sprintf("cmdS64() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5010,7 +5010,7 @@ type CmdBool struct {
 }
 
 func (a *CmdBool) String() string {
-	return fmt.Sprintf("cmd_bool() → %v", a.Result)
+	return fmt.Sprintf("cmdBool() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5042,7 +5042,7 @@ type CmdString struct {
 }
 
 func (a *CmdString) String() string {
-	return fmt.Sprintf("cmd_string() → %v", a.Result)
+	return fmt.Sprintf("cmdString() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5074,7 +5074,7 @@ type CmdPointer struct {
 }
 
 func (a *CmdPointer) String() string {
-	return fmt.Sprintf("cmd_pointer() → %v", a.Result)
+	return fmt.Sprintf("cmdPointer() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5108,7 +5108,7 @@ type CmdVoid3Remapped struct {
 }
 
 func (a *CmdVoid3Remapped) String() string {
-	return fmt.Sprintf("cmd_void_3_remapped(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
+	return fmt.Sprintf("cmdVoid3Remapped(a: %v, b: %v, c: %v)", a.A, a.B, a.C)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5140,7 +5140,7 @@ type CmdVoidInArrayOfRemapped struct {
 }
 
 func (a *CmdVoidInArrayOfRemapped) String() string {
-	return fmt.Sprintf("cmd_void_in_array_of_remapped(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidInArrayOfRemapped(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5172,7 +5172,7 @@ type CmdVoidOutArrayOfRemapped struct {
 }
 
 func (a *CmdVoidOutArrayOfRemapped) String() string {
-	return fmt.Sprintf("cmd_void_out_array_of_remapped(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidOutArrayOfRemapped(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5204,7 +5204,7 @@ type CmdVoidOutArrayOfUnknownRemapped struct {
 }
 
 func (a *CmdVoidOutArrayOfUnknownRemapped) String() string {
-	return fmt.Sprintf("cmd_void_out_array_of_unknown_remapped(a: %v)", a.A)
+	return fmt.Sprintf("cmdVoidOutArrayOfUnknownRemapped(a: %v)", a.A)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -5236,7 +5236,7 @@ type CmdRemapped struct {
 }
 
 func (a *CmdRemapped) String() string {
-	return fmt.Sprintf("cmd_remapped() → %v", a.Result)
+	return fmt.Sprintf("cmdRemapped() → %v", a.Result)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
