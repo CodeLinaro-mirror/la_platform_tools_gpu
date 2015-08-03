@@ -930,7 +930,7 @@ func (ϟa *GlDeleteVertexArraysOES) Mutate(ϟs *gfxapi.State, ϟd database.Datab
 	ctx := GetContext_15_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*VertexArray)(nil)
+		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = context, GetContext_15_result, ctx, a
@@ -1994,7 +1994,7 @@ func (ϟa *GlDeleteTextures) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	GetContext_62_result := context                                // Contextʳ
 	ctx := GetContext_62_result                                    // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Textures[t.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Texture)(nil)
+		delete(ctx.Instances.Textures, t.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = t, context, GetContext_62_result, ctx
@@ -2306,7 +2306,7 @@ func (ϟa *GlDeleteFramebuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	GetContext_70_result := context                                    // Contextʳ
 	ctx := GetContext_70_result                                        // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Framebuffers[f.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Framebuffer)(nil)
+		delete(ctx.Instances.Framebuffers, f.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = f, context, GetContext_70_result, ctx
@@ -2390,7 +2390,7 @@ func (ϟa *GlDeleteRenderbuffers) Mutate(ϟs *gfxapi.State, ϟd database.Databas
 	GetContext_75_result := context                                     // Contextʳ
 	ctx := GetContext_75_result                                         // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Renderbuffers[r.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Renderbuffer)(nil)
+		delete(ctx.Instances.Renderbuffers, r.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = r, context, GetContext_75_result, ctx
@@ -2520,7 +2520,7 @@ func (ϟa *GlDeleteBuffers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_81_result := context                               // Contextʳ
 	ctx := GetContext_81_result                                   // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Buffers[b.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Buffer)(nil)
+		delete(ctx.Instances.Buffers, b.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = b, context, GetContext_81_result, ctx
@@ -2592,7 +2592,7 @@ func (ϟa *GlDeleteShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ctx := GetContext_85_result                  // Contextʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
 	s.Deletable = true
-	ctx.Instances.Shaders[ϟa.Shader] = (*Shader)(nil)
+	delete(ctx.Instances.Shaders, ϟa.Shader)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = context, GetContext_85_result, ctx, s
 	return nil
@@ -2745,7 +2745,7 @@ func (ϟa *GlDeleteProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	GetContext_93_result := context              // Contextʳ
 	ctx := GetContext_93_result                  // Contextʳ
-	ctx.Instances.Programs[ϟa.Program] = (*Program)(nil)
+	delete(ctx.Instances.Programs, ϟa.Program)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _ = context, GetContext_93_result, ctx
 	return nil
@@ -2773,7 +2773,7 @@ func (ϟa *GlDetachShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ctx := GetContext_95_result                  // Contextʳ
 	p := ctx.Instances.Programs.Get(ϟa.Program)  // Programʳ
 	s := ctx.Instances.Shaders.Get(ϟa.Shader)    // Shaderʳ
-	p.Shaders[s.Type] = ShaderId(uint32(0))
+	delete(p.Shaders, s.Type)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = context, GetContext_95_result, ctx, p, s
 	return nil
@@ -3784,7 +3784,7 @@ func (ϟa *GlDeleteQueries) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_131_result := context                              // Contextʳ
 	ctx := GetContext_131_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Queries[q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Query)(nil)
+		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = q, context, GetContext_131_result, ctx
@@ -3910,7 +3910,7 @@ func (ϟa *GlDeleteVertexArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	ctx := GetContext_135_result                                  // Contextʳ
 	a := ϟa.Arrays.Slice(uint64(uint32(0)), uint64(ϟa.Count), ϟs) // VertexArrayIdˢ
 	for i := uint32(uint32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.VertexArrays[a.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*VertexArray)(nil)
+		delete(ctx.Instances.VertexArrays, a.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = context, GetContext_135_result, ctx, a
@@ -3977,7 +3977,7 @@ func (ϟa *GlDeleteQueriesEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	GetContext_137_result := context                              // Contextʳ
 	ctx := GetContext_137_result                                  // Contextʳ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		ctx.Instances.Queries[q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)] = (*Query)(nil)
+		delete(ctx.Instances.Queries, q.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl))
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _ = q, context, GetContext_137_result, ctx
