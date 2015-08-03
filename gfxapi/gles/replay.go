@@ -73,8 +73,8 @@ func (a api) Replay(
 	device *service.Device,
 	atoms atom.List,
 	out atom.Writer,
-	db database.Database,
-	logger log.Logger) error {
+	d database.Database,
+	l log.Logger) error {
 
 	transforms := atom.Transforms{}
 
@@ -103,7 +103,7 @@ func (a api) Replay(
 
 		case timeCallsRequest:
 			profiling = true
-			transforms.Add(timingInfo(req.flags, req.out, device, db, logger))
+			transforms.Add(timingInfo(req.flags, req.out, device, d, l))
 		}
 	}
 
@@ -112,7 +112,8 @@ func (a api) Replay(
 		transforms.Add(earlyTerminator)
 
 		// Check to see if any contexts use the 'preserveBuffersOnSwap' flag.
-		// If it is used, we can't skip draw calls.
+		// If it is used, we can't skip draw calls or display the
+		// undefined-framebuffer pattern.
 		preserveBuffersOnSwap := false
 		for _, a := range atoms.Atoms {
 			if b, ok := a.(*BackbufferInfo); ok && b.PreserveBuffersOnSwap {
@@ -122,7 +123,7 @@ func (a api) Replay(
 		}
 
 		if !preserveBuffersOnSwap {
-			transforms.Add(skipDrawCalls)
+			transforms.Add(skipDrawCalls, undefinedFramebuffer(d, l))
 		}
 	}
 
@@ -133,25 +134,25 @@ func (a api) Replay(
 
 	// Device-dependent transforms.
 	transforms.Add(
-		decompressTextures(device, &path.Capture{ID: ctx.Capture}, db, logger),
-		precisionStrip(device, db, logger),
+		decompressTextures(device, &path.Capture{ID: ctx.Capture}, d, l),
+		precisionStrip(device, d, l),
 		halfFloatOESToHalfFloatARB(device))
 
 	if c, ok := cfg.(drawConfig); ok && c.wireframe {
-		transforms.Add(wireframe(db, logger))
+		transforms.Add(wireframe(d, l))
 	}
 
 	// Cleanup
 	transforms.Add(&destroyResourcesAtEOS{
 		state:  gfxapi.NewState(),
-		db:     db,
-		logger: logger,
+		db:     d,
+		logger: l,
 	})
 
 	if config.DebugReplay {
-		log.Infof(logger, "Replaying %d atoms using transform chain:", len(atoms.Atoms))
+		log.Infof(l, "Replaying %d atoms using transform chain:", len(atoms.Atoms))
 		for i, t := range transforms {
-			log.Infof(logger, "(%d) %#v", i, t)
+			log.Infof(l, "(%d) %#v", i, t)
 		}
 	}
 
