@@ -62,6 +62,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	settings.MemberPrefix, _ = m.Directives["java.member_prefix"]
 	source, _ := m.Directives["java.source"]
 	indent, _ := m.Directives["java.indent"]
+	indent = strings.Trim(indent, `"`)
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
 		gen <- Generate{
