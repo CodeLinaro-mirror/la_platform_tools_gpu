@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
@@ -32,6 +33,8 @@ usage: clean_generated [options]
 options:`
 	noactions = flag.Bool("n", false,
 		"don't perform any actions, just print information")
+	sectionfiles = flag.Bool("sectionfiles", false,
+		"disable section processing, will delete whole files")
 	usage_footer = `
 The search is rooted at the current working directory.
 It finds files with a known extension and a known generated file header comment.
@@ -68,9 +71,45 @@ func run() error {
 			if copyright.MatchGenerated(file) == 0 {
 				return nil
 			}
-			fmt.Printf("rm %s\n", path)
-			if !*noactions {
-				os.Remove(path)
+			var sections []template.Section
+			if !*sectionfiles {
+				sections, err = template.SectionSplit(file)
+				if err != nil {
+					return err
+				}
+			}
+			if len(sections) > 0 {
+				fmt.Printf("rewrite %s\n", path)
+				if !*noactions {
+					out, err := os.Create(path)
+					if err != nil {
+						return err
+					}
+					for _, s := range sections {
+						if s.Name == "" {
+							// copy the non template section back to the file
+							_, err = out.Write(s.Body)
+							if err != nil {
+								return err
+							}
+						} else {
+							// copy the markers but drop the body
+							_, err = out.Write(s.StartMarker)
+							if err != nil {
+								return err
+							}
+							_, err = out.Write(s.EndMarker)
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			} else {
+				fmt.Printf("rm %s\n", path)
+				if !*noactions {
+					os.Remove(path)
+				}
 			}
 			return nil
 		})
