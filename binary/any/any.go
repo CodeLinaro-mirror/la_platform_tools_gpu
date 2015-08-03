@@ -24,6 +24,7 @@ import (
 // binary: Schema = false
 // binary: java.source = base/rpclib/src/main/java
 // binary: java.package = com.android.tools.rpclib.any
+// binary: java.indent = "    "
 // binary: java.member_prefix = m
 
 // ErrUnboxable is returned when a non-boxable value type is passed to Box.

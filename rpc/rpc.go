@@ -20,6 +20,7 @@ package rpc
 
 // binary: java.source = base/rpclib/src/main/java
 // binary: java.package = com.android.tools.rpclib.rpccore
+// binary: java.indent = "    "
 // binary: java.member_prefix = m
 
 import (
