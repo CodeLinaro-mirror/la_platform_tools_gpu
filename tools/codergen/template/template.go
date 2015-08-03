@@ -30,7 +30,7 @@ import (
 	"unicode/utf8"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/tools/codergen/format"
+	"android.googlesource.com/platform/tools/gpu/reflow"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
 )
 
@@ -105,7 +105,7 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 	defer func() { t.File = nil }()
 	old, _ := ioutil.ReadFile(g.Output)
 	buf := &bytes.Buffer{}
-	out := format.New(buf)
+	out := reflow.New(buf)
 	out.Indent = g.Indent
 	matches := section.FindAllSubmatchIndex(old, -1)
 	if len(matches) > 0 {

@@ -21,7 +21,7 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/tools/codergen/format"
+	"android.googlesource.com/platform/tools/gpu/reflow"
 )
 
 type variable struct {
@@ -45,7 +45,7 @@ func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
 }
 
 func (t *Templates) Section(name string) (string, error) {
-	w, ok := t.writer.(*format.Writer)
+	w, ok := t.writer.(*reflow.Writer)
 	if !ok {
 		return "", fmt.Errorf("Section called inside nested writer")
 	}
