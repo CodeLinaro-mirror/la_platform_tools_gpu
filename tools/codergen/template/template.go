@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"strings"
 	"text/template"
 	"unicode"
@@ -29,6 +30,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/format"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
 )
 
 // Templates manages the loaded templates and executes them on demand.
@@ -89,31 +91,69 @@ func New() *Templates {
 	return f
 }
 
-// PostProcess represents a function that is run after template generation on
-// the result, for instance to reflow the text.
-type PostProcess func([]byte) []byte
+var section = regexp.MustCompile("<<<(.+):(.+)>>>\n")
 
 // Generate is an implementation of generate.Generator
-func (t *Templates) Generate(name string, arg interface{}, out string, indent string) (bool, error) {
-	t.File = arg
+func (t *Templates) Generate(g generate.Generate) (bool, error) {
+	t.File = g.Arg
 	defer func() { t.File = nil }()
-	old, _ := ioutil.ReadFile(out)
+	old, _ := ioutil.ReadFile(g.Output)
 	buf := &bytes.Buffer{}
-	fmt := format.New(buf)
-	fmt.Indent = indent
-	if err := t.execute(name, fmt, arg); err != nil {
-		return false, err
+	out := format.New(buf)
+	out.Indent = g.Indent
+	matches := section.FindAllSubmatchIndex(old, -1)
+	if len(matches) > 0 {
+		last := 0
+		tmpl := ""
+		// we are doing a partial update...
+		for _, match := range matches {
+			mode := string(old[match[2]:match[3]])
+			name := string(old[match[4]:match[5]])
+			switch mode {
+			case "Start":
+				if tmpl != "" {
+					return false, fmt.Errorf("Overlapping template %s found starting %s", tmpl, name)
+				}
+				// section start, write the prefix
+				buf.Write(old[last:match[1]])
+				// now run the template
+				tmpl = name
+				if err := t.execute(tmpl, out, g.Arg); err != nil {
+					return false, err
+				}
+				out.Flush()
+			case "End":
+				// section end marker, check it matches
+				if name != tmpl {
+					return false, fmt.Errorf("Invalid end %s found, expected %s", name, tmpl)
+				}
+				// set the markers ready for the next write
+				tmpl = ""
+				last = match[0]
+			default:
+				return false, fmt.Errorf("Invalid section marker %s:%s", mode, name)
+			}
+		}
+		if tmpl != "" {
+			return false, fmt.Errorf("Unclosed template %s found", tmpl)
+		}
+		// write the prefix
+		buf.Write(old[last:])
+	} else {
+		if err := t.execute(g.Name, out, g.Arg); err != nil {
+			return false, err
+		}
+		out.Flush()
 	}
-	fmt.Flush()
 	data := buf.Bytes()
-	if out == "" || bytes.Equal(data, old) {
+	if g.Output == "" || bytes.Equal(data, old) {
 		return false, nil
 	}
-	dir, _ := filepath.Split(out)
+	dir, _ := filepath.Split(g.Output)
 	if len(dir) > 0 {
 		os.MkdirAll(dir, os.ModePerm)
 	}
-	return true, ioutil.WriteFile(out, data, 0666)
+	return true, ioutil.WriteFile(g.Output, data, 0666)
 }
 
 func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Template, error) {
