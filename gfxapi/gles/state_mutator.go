@@ -4068,9 +4068,10 @@ func (ϟa *BackbufferInfo) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                  // Contextʳ
-	GetContext_139_result := context                                                              // Contextʳ
-	ctx := GetContext_139_result                                                                  // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_139_result := context             // Contextʳ
+	ctx := GetContext_139_result                 // Contextʳ
+	ctx.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ

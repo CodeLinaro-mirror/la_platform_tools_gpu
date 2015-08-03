@@ -37,7 +37,7 @@ public:
     // Makes the current renderer active.
     virtual void bind() = 0;
 
-    //Makes the current renderer inactive.
+    // Makes the current renderer inactive.
     virtual void unbind() = 0;
 
     // Returns the name of the renderer's created graphics context.

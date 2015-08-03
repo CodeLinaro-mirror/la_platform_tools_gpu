@@ -45,16 +45,17 @@ namespace gles {
     class BackbufferInfo: public Encodable {
     public:
         BackbufferInfo() = default;
-        BackbufferInfo(atom::Observations observations, int32_t Width, int32_t Height, uint32_t ColorFmt, uint32_t DepthFmt, uint32_t StencilFmt, bool ResetViewportScissor) :
+        BackbufferInfo(atom::Observations observations, int32_t Width, int32_t Height, uint32_t ColorFmt, uint32_t DepthFmt, uint32_t StencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
             mobservations(observations),
             mWidth(Width),
             mHeight(Height),
             mColorFmt(ColorFmt),
             mDepthFmt(DepthFmt),
             mStencilFmt(StencilFmt),
-            mResetViewportScissor(ResetViewportScissor) {}
+            mResetViewportScissor(ResetViewportScissor),
+            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x18, 0x3c, 0x07, 0xe1, 0x0c, 0x71, 0x64, 0xee, 0xaa, 0x70, 0x7a, 0xb3, 0xca, 0xbe, 0x36, 0x00, 0xe8, 0xeb, 0x8c, 0xed,  } };
+            static gapic::Id ID{ { 0x3b, 0x71, 0x56, 0x1e, 0xbc, 0xdf, 0xd7, 0x44, 0xcf, 0x32, 0xc5, 0x65, 0xe5, 0x66, 0xf0, 0x8f, 0x1b, 0x28, 0x23, 0xa7,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -65,6 +66,7 @@ namespace gles {
             e->Uint32(this->mDepthFmt);
             e->Uint32(this->mStencilFmt);
             e->Bool(this->mResetViewportScissor);
+            e->Bool(this->mPreserveBuffersOnSwap);
         }
 
         atom::Observations mobservations;
@@ -74,6 +76,7 @@ namespace gles {
         uint32_t mDepthFmt;
         uint32_t mStencilFmt;
         bool mResetViewportScissor;
+        bool mPreserveBuffersOnSwap;
     };
 
     class Color: public Encodable {
@@ -1283,7 +1286,7 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint64_t CreatedAt, uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<int32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances) :
+        Context(uint64_t CreatedAt, uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<int32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
             mCreatedAt(CreatedAt),
             mIdentifier(Identifier),
             mBlending(Blending),
@@ -1300,9 +1303,10 @@ namespace gles {
             mCapabilities(Capabilities),
             mGenerateMipmapHint(GenerateMipmapHint),
             mPixelStorage(PixelStorage),
-            mInstances(Instances) {}
+            mInstances(Instances),
+            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5d, 0x15, 0x38, 0x06, 0x50, 0x11, 0xdd, 0x3b, 0xf6, 0x52, 0x52, 0xca, 0xc5, 0x29, 0x63, 0xdc, 0xe5, 0x1d, 0x52, 0x4a,  } };
+            static gapic::Id ID{ { 0x2d, 0x31, 0xd7, 0x8d, 0xe9, 0x76, 0xe7, 0x8c, 0xd4, 0xda, 0x77, 0xca, 0x1b, 0x5f, 0x8a, 0xc3, 0xa9, 0x35, 0xb2, 0x2c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -1323,6 +1327,7 @@ namespace gles {
             e->Uint32(this->mGenerateMipmapHint);
             GAPID_FATAL("C++ map encoding not supported");
             e->Value(this->mInstances);
+            e->Bool(this->mPreserveBuffersOnSwap);
         }
 
         uint64_t mCreatedAt;
@@ -1342,6 +1347,7 @@ namespace gles {
         uint32_t mGenerateMipmapHint;
         std::unordered_map<uint32_t,int32_t>* mPixelStorage;
         Objects mInstances;
+        bool mPreserveBuffersOnSwap;
     };
 
     class EGLConfig: public Encodable {
