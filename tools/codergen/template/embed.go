@@ -58,69 +58,100 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Method#ID"}}Id{{end}}
 {{define "Cpp.Method"}}{{.}}{{end}}
 
-{{define "Cpp.Constructor"}}»»{{.Name | File.TypeName}}() = default;
-»»{{.Name | File.TypeName}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
-»»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
+{{define "Cpp.Constructor"}}
+  {{.Name | File.TypeName}}() = default;¶
+  {{.Name | File.TypeName}}(
+    {{range $index, $field := .Fields}}
+      {{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}
+    {{end}}
+  )•
+  {{range $index, $field := .Fields}}»
+    {{if $index}},{{else}}:{{end}}¶m{{.Name}}({{.Name}})
+  «{{end}}
+  •{}¶
+{{end}}
 
-{{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
-»»»static gapic::Id ID{ { {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } };
-»»»return ID;
-»»}{{end}}
+{{define "Cpp.ID"}}
+  virtual const gapic::Id& Id() const {»¶
+    static gapic::Id ID{ {•
+      {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
+    ,  } };¶
+    return ID;¶
+  «}¶
+{{end}}
 
-{{define "Cpp.Encoder"}}»»virtual void Encode(Encoder* e) const {
-{{range .Fields}}»»»{{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}
-{{end}}»»}{{end}}
+{{define "Cpp.Encoder"}}
+  virtual void Encode(Encoder* e) const {»¶
+    {{range .Fields}}
+      {{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}¶
+    {{end}}
+  «}¶
+{{end}}
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
 {{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 
-{{define "Cpp.Encode#[]uint8"}}e->Uint32({{.Name}}.size());
-»»»e->Data({{.Name}}.data(), {{.Name}}.size());{{end}}
+{{define "Cpp.Encode#[]uint8"}}
+  e->Uint32({{.Name}}.size());¶
+  e->Data({{.Name}}.data(), {{.Name}}.size());
+{{end}}
 
-{{define "Cpp.Encode.Slice"}}e->Uint32({{.Name}}.size());
-»»»for (int i = 0; i < {{.Name}}.size(); i++) {
-»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+{{define "Cpp.Encode.Slice"}}
+  e->Uint32({{.Name}}.size());¶
+  for (int i = 0; i < {{.Name}}.size(); i++) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Cpp.Encode.Array"}}
-»»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+  ••••••••••••¶
+  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
-{{define "Cpp.File"}}{{$.Copyright}}
 
-
-#ifndef {{template "HeaderGuard" .}}
-#define {{template "HeaderGuard" .}}
-
-namespace gapic {
-
-class Encodable;
-class Encoder;
-
-namespace coder {
-namespace {{.Namespace}} {
-{{range .Structs}}»class {{.Name | File.TypeName}}: public Encodable {
-»public:
-{{template "Cpp.Constructor" .}}
-{{template "Cpp.ID" .}}
-{{template "Cpp.Encoder" .}}
-
-{{range .Fields}}»»{{Call "Cpp.Type" .Type}} m{{.Name}};
-{{end}}»};
-
-{{end}}
-
-} // namespace {{.Namespace}}
-} // namespace coder
-} // namespace gapic
-
-#endif // {{template "HeaderGuard" .}}
+{{define "Cpp.File"}}
+  §{{$.Copyright}}§
+  ¶
+  ¶
+  ¶
+  #ifndef {{template "HeaderGuard" .}}¶
+  #define {{template "HeaderGuard" .}}¶
+  ¶
+  namespace gapic {¶
+  ¶
+  class Encodable;¶
+  class Encoder;¶
+  ¶
+  namespace coder {¶
+  namespace {{.Namespace}} {»¶
+  {{range .Structs}}
+    class {{.Name | File.TypeName}}: public Encodable {¶
+    public:»¶
+      {{template "Cpp.Constructor" .}}
+      {{template "Cpp.ID" .}}
+      {{template "Cpp.Encoder" .}}
+      ¶
+      {{range .Fields}}
+        {{Call "Cpp.Type" .Type}} m{{.Name}};¶
+      {{end}}
+      «
+    };¶
+    ¶
+  {{end}}
+  ¶
+  ¶
+  «} // namespace {{.Namespace}}¶
+  } // namespace coder¶
+  } // namespace gapic¶
+  ¶
+  #endif // {{template "HeaderGuard" .}}¶
 {{end}}
 `
 const go_binary_tmpl_file = `go_binary.tmpl`
@@ -140,271 +171,448 @@ const go_binary_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
+{{define "Go.ID"}}
+  {{.IDName}}║= binary.ID{
+    {{range $i,$v := .ID}}
+      {{if $i}}, {{end}}{{printf "0x%2.2x" $v}}
+    {{end}}
+  }¶
+{{end}}
 
-{{define "Go.Init"}} Namespace.Add((*{{.Name}})(nil).Class()){{end}}
+{{define "Go.Init"}}
+  Namespace.Add((*{{.Name}})(nil).Class())¶
+{{end}}
 
-{{define "Go.Class"}} type binaryClass{{.Name}} struct{}
-func (*{{.Name}}) Class() binary.Class {
-	return (*binaryClass{{.Name}})(nil)
-}
-func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Call "Go.Encode" (Var .Type "o." .Name)}}
-{{end}} return nil
-}
-func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Call "Go.Decode" (Var .Type "o." .Name)}}
-{{end}} return nil
-}
-func doSkip{{.Name}}(d binary.Decoder) error {
-	{{range .Fields}}{{Call "Go.Skip" .Type}}
-{{end}} return nil
-}
-func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
-func (*binaryClass{{.Name}}) New() binary.Object { return &{{.Name}}{} }
-func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {return doEncode{{.Name}}(e, obj.(*{{.Name}})) }
-func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
-func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
-func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
-{{if File.Directive "Schema" true}}func (*binaryClass{{.Name}}) Schema() *schema.Class { return schema{{.Name}} }
-var schema{{.Name}} = &schema.Class{
-	TypeID: {{.IDName}},
-	Package: "{{.Package}}",
-	Name: "{{.Name}}",
-	Fields: []schema.Field{
-		{{range .Fields}}{ Declared:"{{.Declared}}", Type:{{Call "Go.Schema" .Type}} },
-	{{end}} },
-}
-{{end}}{{end}}
+{{define "Go.Class"}}
+  type binaryClass{{.Name}} struct{}¶
+  ¶
+  func (*{{.Name}}) Class() binary.Class {»¶
+    return (*binaryClass{{.Name}})(nil)¶
+  «}¶
+  func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Encode" (Var .Type "o." .Name)}}
+    {{end}}
+    return nil¶
+  «}¶
+  func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Decode" (Var .Type "o." .Name)}}
+    {{end}}
+    return nil¶
+  «}¶
+  func doSkip{{.Name}}(d binary.Decoder) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Skip" .Type}}
+    {{end}}
+    return nil¶
+  «}¶
+  {{$base := 18}}
+  {{$wrap := gt (len .Name) (add $base 7)}}
+  func (*binaryClass{{.Name}}) ID() binary.ID{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return {{.IDName}}{{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  {{$wrap := gt (len .Name) (add $base 7)}}
+  func (*binaryClass{{.Name}}) New() binary.Object{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return &{{.Name}}{}{{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {»¶
+    return doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
+  «}¶
+  func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {»¶
+    obj := &{{.Name}}{}¶
+    return obj, doDecode{{.Name}}(d, obj)¶
+  «}¶
+  func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {»¶
+    return doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
+  «}¶
+  {{$wrap := gt (len .Name) (add $base 0)}}
+  func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return doSkip{{.Name}}(d){{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  {{if File.Directive "Schema" true}}
+    {{$wrap := gt (len .Name) (add $base 4)}}
+    func (*binaryClass{{.Name}}) Schema() *schema.Class{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+      return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
+    «}¶
+    ¶
+    var schema{{.Name}} = &schema.Class{»¶
+      TypeID:║{{.IDName}},¶
+      Package:║"{{.Package}}",¶
+      Name:║"{{.Name}}",¶
+      {{if not (len .Fields)}}
+        Fields:║[]schema.Field{},¶
+      {{else}}
+        ø
+        Fields: []schema.Field{»¶
+          {{range .Fields}}
+            {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
+          {{end}}
+        «},¶
+      {{end}}
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Encode.Primitive"}}{{/*
-*/}}{{if eq .Type.Native .Type.Name}}{{/*
-*/}}if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{/*
-*/}}{{else}}{{/*
-*/}}if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{/*
-*/}}{{end}}{{end}}
+{{define "Go.Encode.Primitive"}}
+  {{if eq .Type.Native .Type.Name}}
+    if err := e.{{.Type.Method}}({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  {{else}}
+    if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil {»¶
+      return err¶
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Encode.Struct"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Encode.Struct"}}
+  if err := e.Value(&{{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Pointer"}} if {{.Name}} != nil {
-			if err := e.Object({{.Name}}); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Pointer"}}
+  if {{.Name}} != nil {»¶
+    if err := e.Object({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Object(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Interface"}} if {{.Name}} != nil {
-			if err := e.Object({{.Name}}); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Interface"}}
+  if {{.Name}} != nil {»¶
+    if err := e.Object({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Object(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Any"}} if {{.Name}} != nil {
-			var boxed binary.Object
-			boxed, err := any.Box({{.Name}})
-			if err != nil {
-				return err
-			}
-			if err := e.Variant(boxed); err != nil {
-				return err
-			}
-		} else if err := e.Variant(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Any"}}
+  if {{.Name}} != nil {»¶
+    var boxed binary.Object¶
+    boxed, err := any.Box({{.Name}})¶
+    if err != nil {»¶
+      return err¶
+    «}¶
+    if err := e.Variant(boxed); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Variant(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode_Length"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
-	return err
-} {{end}}
+{{define "Go.Encode_Length"}}
+  if err := e.Uint32(uint32(len({{.Name}}))); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode#[]uint8"}} {{template "Go.Encode_Length" $}}
-		if err := e.Data({{.Name}}); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode#[]uint8"}}
+  {{template "Go.Encode_Length" $}}
+  if err := e.Data({{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Slice"}} {{template "Go.Encode_Length" $}}
-		for i := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
-		}{{end}}
+{{define "Go.Encode.Slice"}}
+  {{template "Go.Encode_Length" $}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Array"}} for i := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
-		}{{end}}
+{{define "Go.Encode.Array"}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Map"}} {{template "Go.Encode_Length" $}}
-		for k, v := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.KeyType "k")}}
-			{{Call "Go.Encode" (Var .Type.ValueType "v")}}
-		} {{end}}
+{{define "Go.Encode.Map"}}
+  {{template "Go.Encode_Length" $}}
+  for k, v := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.KeyType "k")}}
+    {{Call "Go.Encode" (Var .Type.ValueType "v")}}
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Primitive"}} if obj, err := d.{{.Type.Method}}(); err != nil {
-			return err
-		} else {
-			{{.Name}} = {{.Type.Name}}(obj)
-		} {{end}}
+{{define "Go.Decode.Primitive"}}
+  if obj, err := d.{{.Type.Method}}(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = {{.Type.Name}}(obj)¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Struct"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Decode.Struct"}}
+  if err := d.Value(&{{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Pointer"}} if obj, err := d.Object(); err != nil {
-			return err
-		} else if obj != nil {
-			{{.Name}} = obj.({{.Type}})
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Pointer"}}
+  if obj, err := d.Object(); err != nil {»¶
+    return err¶
+  «} else if obj != nil {»¶
+    {{.Name}} = obj.({{.Type}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Interface"}} if obj, err := d.Object(); err != nil {
-			return err
-		} else if obj != nil {
-			{{.Name}} = obj.({{.Type.Name}})
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Interface"}}
+  if obj, err := d.Object(); err != nil {»¶
+    return err¶
+  «} else if obj != nil {»¶
+    {{.Name}} = obj.({{.Type.Name}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Any"}} if boxed, err := d.Variant(); err != nil {
-			return err
-		} else if boxed != nil {
-			if {{.Name}}, err = any.Unbox(boxed); err != nil {
-				return err
-			}
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Any"}}
+  if boxed, err := d.Variant(); err != nil {»¶
+    return err¶
+  «} else if boxed != nil {»¶
+    if {{.Name}}, err = any.Unbox(boxed); err != nil {»¶
+      return err¶
+    «}¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode_Length"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{.Name}} = make({{.Type}}, count) {{end}}
+{{define "Go.Decode_Length"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = make({{.Type}}, count)¶
+{{end}}
 
-{{define "Go.Decode#[]uint8"}} {{template "Go.Decode_Length" $}}
-			if err := d.Data({{.Name}}); err != nil {
-				return err
-			}
-		} {{end}}
+{{define "Go.Decode#[]uint8"}}
+  {{template "Go.Decode_Length" $}}
+    if err := d.Data({{.Name}}); err != nil {»¶
+      return err¶
+      «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Slice"}} {{template "Go.Decode_Length" $}}
-			for i := range {{.Name}} {
-				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
-			}
-		} {{end}}
+{{define "Go.Decode.Slice"}}
+  {{template "Go.Decode_Length" $}}
+    for i := range {{.Name}} {»¶
+      {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Array"}} for i := range {{.Name}} {
-				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
-			}{{end}}
+{{define "Go.Decode.Array"}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Map"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{.Name}} = make({{.Type}}, count)
-			m := {{.Name}}
-			for i := uint32(0); i < count; i++ {
-				var k {{.Type.KeyType}}
-				var v {{.Type.ValueType}}
-				{{Call "Go.Decode" (Var .Type.KeyType "k")}}
-				{{Call "Go.Decode" (Var .Type.ValueType "v")}}
-				m[k] = v
-			}
-		} {{end}}
+{{define "Go.Decode.Map"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = make({{.Type}}, count)¶
+    m := {{.Name}}¶
+    for i := uint32(0); i < count; i++ {»¶
+      var k {{.Type.KeyType}}¶
+      var v {{.Type.ValueType}}¶
+      {{Call "Go.Decode" (Var .Type.KeyType "k")}}
+      {{Call "Go.Decode" (Var .Type.ValueType "v")}}
+      m[k] = v¶
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Skip.Primitive"}}{{if .Method.Skippable}}if err := d.Skip{{.Method}}(); err != nil {
-	return err
-} {{else}}if _,err := d.{{.Method}}(); err != nil {
-		return err
-} {{end}} {{end}}
-{{define "Go.Skip.Struct"}} if err := d.SkipValue((*{{.Name}})(nil)); err != nil { return err } {{end}}
-{{define "Go.Skip.Pointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "Go.Skip.Interface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "Go.Skip.Any"}} if _, err := d.SkipVariant(); err != nil { return err } {{end}}
+{{define "Go.Skip.Primitive"}}
+  {{if .Method.Skippable}}
+    if err := d.Skip{{.Method}}(); err != nil {»¶
+       return err¶
+    «}¶
+  {{else}}
+    if _, err := d.{{.Method}}(); err != nil {»¶
+      return err¶
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Skip.Slice"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{$vt := print .ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Skip(count); err != nil { return err} {{else}}{{/*
-			*/}} for i := uint32(0); i < count; i++ {
-			{{Call "Go.Skip" .ValueType}}
-			}{{end}}
-		} {{end}}
+{{define "Go.Skip.Struct"}}
+  if err := d.SkipValue((*{{.Name}})(nil)); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Skip.Array"}}for i := uint32(0); i < {{.Size}}; i++ {
-			{{Call "Go.Skip" .ValueType}}
-		}{{end}}
+{{define "Go.Skip.Pointer"}}
+  if _, err := d.SkipObject(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Interface"}}
+  if _, err := d.SkipObject(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Any"}}
+  if _, err := d.SkipVariant(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Slice"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{$vt := print .ValueType}}
+    {{if or (eq $vt "uint8") (eq $vt "byte")}}
+      if err := d.Skip(count); err != nil {»¶
+        return err¶
+      «}¶
+    {{else}}
+      for i := uint32(0); i < count; i++ {»¶
+        {{Call "Go.Skip" .ValueType}}
+      «}¶
+    {{end}}
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Array"}}
+  for i := uint32(0); i < {{.Size}}; i++ {»¶
+    {{Call "Go.Skip" .ValueType}}
+  «}¶
+{{end}}
 
 
-{{define "Go.Skip.Map"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			for i := uint32(0); i < count; i++ {
-				{{Call "Go.Skip" .KeyType}}
-				{{Call "Go.Skip" .ValueType}}
-			}
-		} {{end}}
+{{define "Go.Skip.Map"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    for i := uint32(0); i < count; i++ {»¶
+      {{Call "Go.Skip" .KeyType}}
+      {{Call "Go.Skip" .ValueType}}
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Schema.Primitive"}}&schema.Primitive{ Name: "{{.Name}}", Method: schema.{{.Method}} }{{end}}
-{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
-{{define "Go.Schema.Pointer"}}&schema.Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
-{{define "Go.Schema.Interface"}}&schema.Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Primitive"}}&schema.Primitive{Name: "{{.Name}}", Method: schema.{{.Method}}}{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID: (*{{.Name}})(nil).Class().ID()}{{end}}
+{{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
+{{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
-{{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
-{{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
-{{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
+{{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}}}{{end}}
+{{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
 
-{{define "Go.Constants"}}{{if File.Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
-const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
-
-var _{{$name}}_map = map[{{.Type}}]string{}
-
-func init() {
-	{{$c.Set 0}}{{range .Entries}}_{{$name}}_map[{{.Value}}] = _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}]
-	{{end}}
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: {{Call "Go.Schema" .Type}}, {{if len .Entries}}{{$c.Set 0}}
-		Entries: []schema.Constant{
-			{{range .Entries}}{Name: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}], Value: {{printf "%T" .Value}}({{.Value}})},
-		{{end}}},
-	{{end}}})
-}
-
-func (v {{$name}}) String() string {
-	if s, ok := _{{$name}}_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("{{$name}}(%d)", v)
-}
-
-func (v *{{$name}}) Parse(s string) error {
-	for k, t := range _{{$name}}_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in {{$name}}", s)
-}
-{{end}}{{end}}
-
-{{define "Go.Binary"}}{{template "Go.Prelude" .}}
-
-{{if len .Structs}}{{if not .IsTest}}var Namespace = registry.NewNamespace(){{end}}
-func init() {
-	{{if not .IsTest}}registry.Global.AddFallbacks(Namespace)
-	{{end}}{{range .Structs}}{{template "Go.Init" .}}
-	{{end}} }
-
-var (
-{{range .Structs}} {{template "Go.ID" .}}
-{{end}} ){{end}}
-
-{{range .Structs}} {{template "Go.Class" .}}
+{{define "Go.Constants"}}
+  {{if File.Directive (print .Type ".String") true}}
+    {{$name := print .Type}}
+    {{$c := Counter "Go.Constants"}}
+    const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"¶
+    ¶
+    var _{{$name}}_map = map[{{.Type}}]string{}¶
+    ¶
+    func init() {»¶
+      {{$c.Set 0}}
+      {{range .Entries}}
+        _{{$name}}_map[{{.Value}}] = _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}]¶
+      {{end}}
+      ¶
+      ConstantValues = append(ConstantValues, schema.ConstantSet{»¶
+        Type: {{Call "Go.Schema" .Type}},¶
+        {{if len .Entries}}{{$c.Set 0}}
+          Entries: []schema.Constant{»¶
+            {{range .Entries}}
+              {Name: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}], Value: {{printf "%T" .Value}}({{.Value}})},¶
+            {{end}}
+          «},¶
+        {{end}}
+      «})¶
+    «}¶
+    ¶
+    func (v {{$name}}) String() string {»¶
+      if s, ok := _{{$name}}_map[v]; ok {»¶
+        return s¶
+      «}¶
+      return fmt.Sprintf("{{$name}}(%d)", v)¶
+    «}¶
+    ¶
+    func (v *{{$name}}) Parse(s string) error {»¶
+      for k, t := range _{{$name}}_map {»¶
+        if s == t {»¶
+          *v = k¶
+          return nil¶
+        «}¶
+      «}¶
+      return fmt.Errorf("%s not in {{$name}}", s)¶
+    «}¶
+  {{end}}
 {{end}}
 
-{{if and (File.Directive "Schema" true) (len .Constants)}}
-var ConstantValues schema.Constants
-{{range .Constants}}{{template "Go.Constants" .}}
+{{define "Go.FindAny"}}{{end}}
+{{define "Go.FindAny.Any"}}{{File.Import "android.googlesource.com/platform/tools/gpu/binary/any"}}{{end}}
+
+{{define "Go.BinaryImports"}}
+  {{if len .Structs}}
+    {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+    {{if not .IsTest}}
+      {{File.Import "android.googlesource.com/platform/tools/gpu/binary/registry"}}
+    {{end}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (or (len .Structs) (len .Constants))}}
+    {{File.Import "android.googlesource.com/platform/tools/gpu/binary/schema"}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (or (len .Constants))}}
+    {{File.Import "fmt"}}
+  {{end}}
+  {{range .Structs}}
+    {{range .Fields}}
+      {{Call "Go.Import" .Type}}
+      {{Call "Go.ImportAny" .Type}}
+    {{end}}
+  {{end}}
 {{end}}
-{{end}}{{end}}
+
+{{define "Go.Binary"}}
+  {{template "Go.BinaryImports" .}}
+  {{template "Go.Prelude" .}}
+  {{if len .Structs}}
+    {{if not .IsTest}}
+      ¶
+      var Namespace = registry.NewNamespace()¶
+    {{end}}
+    ¶
+    func init() {»¶
+      {{if not .IsTest}}
+        registry.Global.AddFallbacks(Namespace)¶
+      {{end}}
+      {{range .Structs}}{{template "Go.Init" .}}{{end}}
+    «}¶
+    ¶
+    var (»¶
+      {{range .Structs}}{{template "Go.ID" .}}{{end}}
+    «)¶
+  {{end}}
+  {{range .Structs}}
+    ¶
+    {{template "Go.Class" .}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (len .Constants)}}
+    ¶
+    var ConstantValues schema.Constants¶
+    {{range .Constants}}¶
+      {{template "Go.Constants" .}}
+    {{end}}
+  {{end}}
+{{end}}
 `
 const go_client_tmpl_file = `go_client.tmpl`
 const go_client_tmpl = `{{/*
@@ -423,43 +631,65 @@ const go_client_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.Client"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}
-// Client is the client interface for {{$s.Name}} calls.
-type Client interface {
-  // Client exposes all the {{$s.Name}} interface methods.
-  {{$s.Name}}
-  // Multiplexer returns the multiplexer used for communication to the server.
-  Multiplexer() *multiplexer.Multiplexer
-  // Namespace returns the custom namespace used for decoding responses from the
-  // server, or nil if no custom namespace has been specified.
-  Namespace() *registry.Namespace
-}
-type client struct { rpc.Client }
-
-// NewClient creates a new rpc client object that uses the multiplexer m for
-// communication the namespace n for decoding objects. If n is nil then the
-// global namespace is used.
-func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {
-  return client{rpc.NewClient(m, n)}
-}
-
-// Client compliance{{range $s.Methods}}{{if .Result.Type}}
-func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) (res {{Call "Go.Type" .Result.Type}}, err error) {
-  var val interface{}
-  if val, err = c.Send(&{{.Call.Struct.Name}}{ {{range .Call.Params}}{{.Name}}: {{.Name}},{{end}} }); err == nil {
-    res = val.(*{{.Result.Struct.Name}}).value
-  } else {
-    log.Errorf(l, "{{$s.Name}} {{.Name}} failed with error: %v", err)
-  }
-  return
-}{{else}}
-func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) error {
-  _, err := c.Send(&{{.Call.Struct.Name}}{ {{range .Call.Params}}{{.Name}}: {{.Name}},{{end}} })
-  return err
-}{{end}}
-{{end}}
+{{define "Go.Client"}}
+  {{$s := .Service}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/binary/registry"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/log"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/multiplexer"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/rpc"}}
+  {{range $s.Methods}}
+    {{range .Call.Params}}{{Call "Go.Import" .Type}}{{end}}
+    {{range .Result.List}}{{Call "Go.Import" .Type}}{{end}}
+  {{end}}
+  {{template "Go.Prelude" .}}
+  ¶
+  // Client is the client interface for {{$s.Name}} calls.¶
+  type Client interface {»¶
+    // Client exposes all the {{$s.Name}} interface methods.¶
+    {{$s.Name}}¶
+    // Multiplexer returns the multiplexer used for communication to the server.¶
+    Multiplexer() *multiplexer.Multiplexer¶
+    // Namespace returns the custom namespace used for decoding responses from the¶
+    // server, or nil if no custom namespace has been specified.¶
+    Namespace() *registry.Namespace¶
+  «}¶
+  type client struct{ rpc.Client }¶
+  ¶
+  // NewClient creates a new rpc client object that uses the multiplexer m for¶
+  // communication the namespace n for decoding objects. If n is nil then the¶
+  // global namespace is used.¶
+  func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client {»¶
+    return client{rpc.NewClient(m, n)}¶
+  «}¶
+  ¶
+  // Client compliance
+  {{range $s.Methods}}
+    ¶
+    {{if .Result.Type}}
+      func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) (res {{Call "Go.Type" .Result.Type}}, err error) {»¶
+        var val interface{}¶
+        if val, err = c.Send(&{{.Call.Struct.Name}}{
+          {{range $i, $p :=  .Call.Params}}
+            {{if $i}}, {{end}}{{.Name}}: {{.Name}}
+          {{end}}
+        }); err == nil {»¶
+          res = val.(*{{.Result.Struct.Name}}).value¶
+        «} else {»¶
+          log.Errorf(l, "{{$s.Name}} {{.Name}} failed with error: %v", err)¶
+        «}¶
+        return¶
+      «}¶
+    {{else}}
+      func (c client) {{.Name}}({{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}, {{end}}l log.Logger) error {»¶
+        _, err := c.Send(&{{.Call.Struct.Name}}{
+          {{range $i, $p :=  .Call.Params}}
+            {{if $i}}, {{end}}{{.Name}}: {{.Name}}
+          {{end}}
+        })¶
+        return err¶
+      «}¶
+    {{end}}
+  {{end}}
 {{end}}
 `
 const go_common_tmpl_file = `go_common.tmpl`
@@ -480,24 +710,45 @@ const go_common_tmpl = `{{/*
  */}}
 
 {{define "Go.Prelude"}}
-{{$.Copyright}}
-
-package {{.Name}}
-
-import (
-	"reflect"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/rpc"
-	{{range $imp, $v := .Imports}}"{{$imp}}"
-{{end}}){{end}}
+  §{{$.Copyright}}§
+  package {{.Name}}¶
+  {{if File.Imports.Count}}
+    ¶
+    {{if eq (File.Imports.Count) 1}}
+      import {{range File.Imports}}{{range .}}"{{.Path}}"{{end}}{{end}}
+    {{else}}
+      import (»
+        {{range $g, $group := File.Imports}}
+          {{if len $group}}¶{{end}}
+          {{range $imp := $group}}
+            "{{$imp.Path}}"¶
+          {{end}}
+        {{end}}
+      «)
+    {{end}}
+    ¶
+  {{end}}
+{{end}}
 
 {{define "Go.Type"}}{{.Name}}{{end}}
 {{define "Go.Type.Any"}}interface{}{{end}}
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+
+{{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Interface"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Pointer"}}{{Call "Go.Import" .Type}}{{end}}
+{{define "Go.Import.Array"}}{{Call "Go.Import" .ValueType}}{{end}}
+{{define "Go.Import.Slice"}}{{Call "Go.Import" .ValueType}}{{end}}
+{{define "Go.Import"}}{{end}}
+
+{{define "Go.ImportAny.Pointer"}}{{Call "Go.ImportAny" .Type}}{{end}}
+{{define "Go.ImportAny.Array"}}{{Call "Go.ImportAny" .ValueType}}{{end}}
+{{define "Go.ImportAny.Slice"}}{{Call "Go.ImportAny" .ValueType}}{{end}}
+{{define "Go.ImportAny.Any"}}{{File.Import "android.googlesource.com/platform/tools/gpu/binary/any"}}{{end}}
+{{define "Go.ImportAny"}}{{end}}
 `
 const go_extra_tmpl_file = `go_extra.tmpl`
 const go_extra_tmpl = `{{/*
@@ -516,22 +767,33 @@ const go_extra_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.Extra"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}{{range $s.Methods}}
-// Call {{.Name}}
-type {{.Call.Name}} struct {
-  binary.Generate
-  {{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}
+{{define "Go.Extra"}}
+  {{$s := .Service}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+  {{range $s.Methods}}
+    {{range .Call.Params}}{{Call "Go.Import" .Type}}{{end}}
+    {{range .Result.List}}{{Call "Go.Import" .Type}}{{end}}
   {{end}}
-}
-
-// Result {{.Name}}
-type {{.Result.Name}} struct {
-  binary.Generate
-  {{range .Result.List}}{{.Name}} {{Call "Go.Type" .Type}}
+  {{template "Go.Prelude" .}}
+  {{range $s.Methods}}
+    ¶
+    // Call {{.Name}}¶
+    type {{.Call.Name}} struct {»¶
+      binary.Generate¶
+      {{range .Call.Params}}
+        {{.Name}}║{{Call "Go.Type" .Type}}¶
+      {{end}}
+    «}¶
+    ¶
+    // Result {{.Name}}¶
+    type {{.Result.Name}} struct {»¶
+      binary.Generate¶
+      {{range .Result.List}}
+        {{.Name}}║{{Call "Go.Type" .Type}}¶
+      {{end}}
+    «}¶
   {{end}}
-}{{end}}{{end}}
+{{end}}
 `
 const go_helpers_tmpl_file = `go_helpers.tmpl`
 const go_helpers_tmpl = `{{/*
@@ -550,17 +812,35 @@ const go_helpers_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.Helpers"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}{{range $s.Methods}}
-func (c {{.Call.Name}}) Format(f fmt.State, r rune) {
-  fmt.Fprintf(f, "{{.Name}}({{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{$p.Name}}: %v{{end}})",
-    {{range $i, $p := .Call.Params}}c.{{$p.Name}},{{end}}
-  )
-}
-func (r {{.Result.Name}}) Format(f fmt.State, c rune) {
-  {{if .Result.Type}}fmt.Fprintf(f, "res: %#v", r.value){{else}}fmt.Fprintf(f, "void"){{end}}
-}{{end}}{{end}}
+{{define "Go.Helpers"}}
+  {{$s := .Service}}
+  {{File.Import "fmt"}}
+  {{template "Go.Prelude" .}}
+  ¶
+  {{range $s.Methods}}
+    func (c {{.Call.Name}}) Format(f fmt.State, r rune) {»¶
+      fmt.Fprintf(»f, "{{.Name}}(
+        {{range $i, $p := .Call.Params}}
+          {{if $i}}, {{end}}{{$p.Name}}: %v
+        {{end}}
+        )"
+        {{if len .Call.Params}},¶
+          {{range $i, $p := .Call.Params}}
+            {{if $i}}•{{end}}
+            c.{{$p.Name}},
+          {{end}}¶
+        {{end}}
+      «)¶
+    «}¶
+    func (r {{.Result.Name}}) Format(f fmt.State, c rune) {»¶
+      {{if .Result.Type}}
+        fmt.Fprintf(f, "res: %#v", r.value)
+      {{else}}
+        fmt.Fprintf(f, "void")
+      {{end}}¶
+    «}¶
+  {{end}}
+{{end}}
 `
 const go_server_tmpl_file = `go_server.tmpl`
 const go_server_tmpl = `{{/*
@@ -579,35 +859,53 @@ const go_server_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.Server"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}
-func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, server {{$s.Name}}) {
-  rpc.Serve(r, w, c, mtu, l, func(in interface{}) (res binary.Object) {
-    l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
-    defer func() {
-      if err := recover(); err == nil {
-        if config.DebugRPCCalls {
-          log.Infof(l, "returned: %v", res)
-        }
-      } else {
-        msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-        log.Errorf(l, msg)
-        res = rpc.NewError(msg)
-      }
-    }()
-    switch call := in.(type) { {{range $s.Methods}}
-        case *{{.Call.Name}}:
-          if {{if .Result.Type}}res,{{end}} err := server.{{.Name}}({{range .Call.Params}}call.{{.Name}}, {{end}}l); err == nil {
-            return &{{.Result.Name}}{ {{if .Result.Type}}value:res{{end}} }
-          } else {
-            return rpc.NewError(err.Error())
-          }{{end}}
-        default:
-          return rpc.NewError("Unexpected {{$s.Name}} function: %T", call)
-    }
-  })
-}
+{{define "Go.Server"}}
+  {{$s := .Service}}
+  {{File.Import "fmt"}}
+  {{File.Import "io"}}
+  {{File.Import "runtime/debug"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/log"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/config"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/rpc"}}
+  {{template "Go.Prelude" .}}
+  ¶
+  func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, server {{$s.Name}}) {»¶
+    rpc.Serve(r, w, c, mtu, l, func(in interface{}) (res binary.Object) {»¶
+      l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))¶
+      defer func() {»¶
+        if err := recover(); err == nil {»¶
+          if config.DebugRPCCalls {»¶
+            log.Infof(l, "returned: %v", res)¶
+          «}¶
+        «} else {»¶
+          msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))¶
+          log.Errorf(l, msg)¶
+          res = rpc.NewError(msg)¶
+        «}¶
+      «}()¶
+      switch call := in.(type) {¶
+        {{range $s.Methods}}
+          case *{{.Call.Name}}:»¶
+            if {{if .Result.Type}}res, {{end}}err := server.{{.Name}}(
+              {{range .Call.Params}}
+                call.{{.Name}},•
+              {{end}}
+              l); err == nil {»¶
+              return &{{.Result.Name}}{
+                {{if .Result.Type}}value: res{{end}}
+              }¶
+            «} else {»¶
+              return rpc.NewError(err.Error())¶
+            «}¶
+          «
+        {{end}}
+          default:»¶
+            return rpc.NewError("Unexpected {{$s.Name}} function: %T", call)¶
+          «
+      }¶
+    «})¶
+  «}¶
 {{end}}
 `
 const java_binary_tmpl_file = `java_binary.tmpl`
@@ -926,7 +1224,7 @@ public enum {{File.ClassName .Type}} {
 {{range $i, $e := .Entries}}{{if $i}},
 {{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
 
-»private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
+��private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
 »{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
 »»{{"value" | File.FieldName}} = value;
 »}

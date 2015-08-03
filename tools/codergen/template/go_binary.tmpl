@@ -14,268 +14,445 @@
  * limitations under the License.
  */}}
 
-{{define "Go.ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
+{{define "Go.ID"}}
+  {{.IDName}}║= binary.ID{
+    {{range $i,$v := .ID}}
+      {{if $i}}, {{end}}{{printf "0x%2.2x" $v}}
+    {{end}}
+  }¶
+{{end}}
 
-{{define "Go.Init"}} Namespace.Add((*{{.Name}})(nil).Class()){{end}}
+{{define "Go.Init"}}
+  Namespace.Add((*{{.Name}})(nil).Class())¶
+{{end}}
 
-{{define "Go.Class"}} type binaryClass{{.Name}} struct{}
-func (*{{.Name}}) Class() binary.Class {
-	return (*binaryClass{{.Name}})(nil)
-}
-func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Call "Go.Encode" (Var .Type "o." .Name)}}
-{{end}} return nil
-}
-func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {
-	{{range .Fields}}{{Call "Go.Decode" (Var .Type "o." .Name)}}
-{{end}} return nil
-}
-func doSkip{{.Name}}(d binary.Decoder) error {
-	{{range .Fields}}{{Call "Go.Skip" .Type}}
-{{end}} return nil
-}
-func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
-func (*binaryClass{{.Name}}) New() binary.Object { return &{{.Name}}{} }
-func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {return doEncode{{.Name}}(e, obj.(*{{.Name}})) }
-func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
-func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
-func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
-{{if File.Directive "Schema" true}}func (*binaryClass{{.Name}}) Schema() *schema.Class { return schema{{.Name}} }
-var schema{{.Name}} = &schema.Class{
-	TypeID: {{.IDName}},
-	Package: "{{.Package}}",
-	Name: "{{.Name}}",
-	Fields: []schema.Field{
-		{{range .Fields}}{ Declared:"{{.Declared}}", Type:{{Call "Go.Schema" .Type}} },
-	{{end}} },
-}
-{{end}}{{end}}
+{{define "Go.Class"}}
+  type binaryClass{{.Name}} struct{}¶
+  ¶
+  func (*{{.Name}}) Class() binary.Class {»¶
+    return (*binaryClass{{.Name}})(nil)¶
+  «}¶
+  func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Encode" (Var .Type "o." .Name)}}
+    {{end}}
+    return nil¶
+  «}¶
+  func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Decode" (Var .Type "o." .Name)}}
+    {{end}}
+    return nil¶
+  «}¶
+  func doSkip{{.Name}}(d binary.Decoder) error {»¶
+    {{range .Fields}}
+      {{Call "Go.Skip" .Type}}
+    {{end}}
+    return nil¶
+  «}¶
+  {{$base := 18}}
+  {{$wrap := gt (len .Name) (add $base 7)}}
+  func (*binaryClass{{.Name}}) ID() binary.ID{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return {{.IDName}}{{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  {{$wrap := gt (len .Name) (add $base 7)}}
+  func (*binaryClass{{.Name}}) New() binary.Object{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return &{{.Name}}{}{{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {»¶
+    return doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
+  «}¶
+  func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {»¶
+    obj := &{{.Name}}{}¶
+    return obj, doDecode{{.Name}}(d, obj)¶
+  «}¶
+  func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {»¶
+    return doDecode{{.Name}}(d, obj.(*{{.Name}}))¶
+  «}¶
+  {{$wrap := gt (len .Name) (add $base 0)}}
+  func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    return doSkip{{.Name}}(d){{if $wrap}}¶{{else}}•{{end}}
+  «}¶
+  {{if File.Directive "Schema" true}}
+    {{$wrap := gt (len .Name) (add $base 4)}}
+    func (*binaryClass{{.Name}}) Schema() *schema.Class{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+      return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
+    «}¶
+    ¶
+    var schema{{.Name}} = &schema.Class{»¶
+      TypeID:║{{.IDName}},¶
+      Package:║"{{.Package}}",¶
+      Name:║"{{.Name}}",¶
+      {{if not (len .Fields)}}
+        Fields:║[]schema.Field{},¶
+      {{else}}
+        ø
+        Fields: []schema.Field{»¶
+          {{range .Fields}}
+            {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
+          {{end}}
+        «},¶
+      {{end}}
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Encode.Primitive"}}{{/*
-*/}}{{if eq .Type.Native .Type.Name}}{{/*
-*/}}if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{/*
-*/}}{{else}}{{/*
-*/}}if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{/*
-*/}}{{end}}{{end}}
+{{define "Go.Encode.Primitive"}}
+  {{if eq .Type.Native .Type.Name}}
+    if err := e.{{.Type.Method}}({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  {{else}}
+    if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil {»¶
+      return err¶
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Encode.Struct"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Encode.Struct"}}
+  if err := e.Value(&{{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Pointer"}} if {{.Name}} != nil {
-			if err := e.Object({{.Name}}); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Pointer"}}
+  if {{.Name}} != nil {»¶
+    if err := e.Object({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Object(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Interface"}} if {{.Name}} != nil {
-			if err := e.Object({{.Name}}); err != nil {
-				return err
-			}
-		} else if err := e.Object(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Interface"}}
+  if {{.Name}} != nil {»¶
+    if err := e.Object({{.Name}}); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Object(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Any"}} if {{.Name}} != nil {
-			var boxed binary.Object
-			boxed, err := any.Box({{.Name}})
-			if err != nil {
-				return err
-			}
-			if err := e.Variant(boxed); err != nil {
-				return err
-			}
-		} else if err := e.Variant(nil); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode.Any"}}
+  if {{.Name}} != nil {»¶
+    var boxed binary.Object¶
+    boxed, err := any.Box({{.Name}})¶
+    if err != nil {»¶
+      return err¶
+    «}¶
+    if err := e.Variant(boxed); err != nil {»¶
+      return err¶
+    «}¶
+  «} else if err := e.Variant(nil); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode_Length"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
-	return err
-} {{end}}
+{{define "Go.Encode_Length"}}
+  if err := e.Uint32(uint32(len({{.Name}}))); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode#[]uint8"}} {{template "Go.Encode_Length" $}}
-		if err := e.Data({{.Name}}); err != nil {
-			return err
-		} {{end}}
+{{define "Go.Encode#[]uint8"}}
+  {{template "Go.Encode_Length" $}}
+  if err := e.Data({{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Slice"}} {{template "Go.Encode_Length" $}}
-		for i := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
-		}{{end}}
+{{define "Go.Encode.Slice"}}
+  {{template "Go.Encode_Length" $}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Array"}} for i := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
-		}{{end}}
+{{define "Go.Encode.Array"}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Encode.Map"}} {{template "Go.Encode_Length" $}}
-		for k, v := range {{.Name}} {
-			{{Call "Go.Encode" (Var .Type.KeyType "k")}}
-			{{Call "Go.Encode" (Var .Type.ValueType "v")}}
-		} {{end}}
+{{define "Go.Encode.Map"}}
+  {{template "Go.Encode_Length" $}}
+  for k, v := range {{.Name}} {»¶
+    {{Call "Go.Encode" (Var .Type.KeyType "k")}}
+    {{Call "Go.Encode" (Var .Type.ValueType "v")}}
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Primitive"}} if obj, err := d.{{.Type.Method}}(); err != nil {
-			return err
-		} else {
-			{{.Name}} = {{.Type.Name}}(obj)
-		} {{end}}
+{{define "Go.Decode.Primitive"}}
+  if obj, err := d.{{.Type.Method}}(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = {{.Type.Name}}(obj)¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Struct"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.Decode.Struct"}}
+  if err := d.Value(&{{.Name}}); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Pointer"}} if obj, err := d.Object(); err != nil {
-			return err
-		} else if obj != nil {
-			{{.Name}} = obj.({{.Type}})
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Pointer"}}
+  if obj, err := d.Object(); err != nil {»¶
+    return err¶
+  «} else if obj != nil {»¶
+    {{.Name}} = obj.({{.Type}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Interface"}} if obj, err := d.Object(); err != nil {
-			return err
-		} else if obj != nil {
-			{{.Name}} = obj.({{.Type.Name}})
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Interface"}}
+  if obj, err := d.Object(); err != nil {»¶
+    return err¶
+  «} else if obj != nil {»¶
+    {{.Name}} = obj.({{.Type.Name}})¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Any"}} if boxed, err := d.Variant(); err != nil {
-			return err
-		} else if boxed != nil {
-			if {{.Name}}, err = any.Unbox(boxed); err != nil {
-				return err
-			}
-		} else {
-			{{.Name}} = nil
-		} {{end}}
+{{define "Go.Decode.Any"}}
+  if boxed, err := d.Variant(); err != nil {»¶
+    return err¶
+  «} else if boxed != nil {»¶
+    if {{.Name}}, err = any.Unbox(boxed); err != nil {»¶
+      return err¶
+    «}¶
+  «} else {»¶
+    {{.Name}} = nil¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode_Length"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{.Name}} = make({{.Type}}, count) {{end}}
+{{define "Go.Decode_Length"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = make({{.Type}}, count)¶
+{{end}}
 
-{{define "Go.Decode#[]uint8"}} {{template "Go.Decode_Length" $}}
-			if err := d.Data({{.Name}}); err != nil {
-				return err
-			}
-		} {{end}}
+{{define "Go.Decode#[]uint8"}}
+  {{template "Go.Decode_Length" $}}
+    if err := d.Data({{.Name}}); err != nil {»¶
+      return err¶
+      «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Slice"}} {{template "Go.Decode_Length" $}}
-			for i := range {{.Name}} {
-				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
-			}
-		} {{end}}
+{{define "Go.Decode.Slice"}}
+  {{template "Go.Decode_Length" $}}
+    for i := range {{.Name}} {»¶
+      {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Array"}} for i := range {{.Name}} {
-				{{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
-			}{{end}}
+{{define "Go.Decode.Array"}}
+  for i := range {{.Name}} {»¶
+    {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+  «}¶
+{{end}}
 
-{{define "Go.Decode.Map"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{.Name}} = make({{.Type}}, count)
-			m := {{.Name}}
-			for i := uint32(0); i < count; i++ {
-				var k {{.Type.KeyType}}
-				var v {{.Type.ValueType}}
-				{{Call "Go.Decode" (Var .Type.KeyType "k")}}
-				{{Call "Go.Decode" (Var .Type.ValueType "v")}}
-				m[k] = v
-			}
-		} {{end}}
+{{define "Go.Decode.Map"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{.Name}} = make({{.Type}}, count)¶
+    m := {{.Name}}¶
+    for i := uint32(0); i < count; i++ {»¶
+      var k {{.Type.KeyType}}¶
+      var v {{.Type.ValueType}}¶
+      {{Call "Go.Decode" (Var .Type.KeyType "k")}}
+      {{Call "Go.Decode" (Var .Type.ValueType "v")}}
+      m[k] = v¶
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Skip.Primitive"}}{{if .Method.Skippable}}if err := d.Skip{{.Method}}(); err != nil {
-	return err
-} {{else}}if _,err := d.{{.Method}}(); err != nil {
-		return err
-} {{end}} {{end}}
-{{define "Go.Skip.Struct"}} if err := d.SkipValue((*{{.Name}})(nil)); err != nil { return err } {{end}}
-{{define "Go.Skip.Pointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "Go.Skip.Interface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "Go.Skip.Any"}} if _, err := d.SkipVariant(); err != nil { return err } {{end}}
+{{define "Go.Skip.Primitive"}}
+  {{if .Method.Skippable}}
+    if err := d.Skip{{.Method}}(); err != nil {»¶
+       return err¶
+    «}¶
+  {{else}}
+    if _, err := d.{{.Method}}(); err != nil {»¶
+      return err¶
+    «}¶
+  {{end}}
+{{end}}
 
-{{define "Go.Skip.Slice"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			{{$vt := print .ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Skip(count); err != nil { return err} {{else}}{{/*
-			*/}} for i := uint32(0); i < count; i++ {
-			{{Call "Go.Skip" .ValueType}}
-			}{{end}}
-		} {{end}}
+{{define "Go.Skip.Struct"}}
+  if err := d.SkipValue((*{{.Name}})(nil)); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
 
-{{define "Go.Skip.Array"}}for i := uint32(0); i < {{.Size}}; i++ {
-			{{Call "Go.Skip" .ValueType}}
-		}{{end}}
+{{define "Go.Skip.Pointer"}}
+  if _, err := d.SkipObject(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Interface"}}
+  if _, err := d.SkipObject(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Any"}}
+  if _, err := d.SkipVariant(); err != nil {»¶
+    return err¶
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Slice"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    {{$vt := print .ValueType}}
+    {{if or (eq $vt "uint8") (eq $vt "byte")}}
+      if err := d.Skip(count); err != nil {»¶
+        return err¶
+      «}¶
+    {{else}}
+      for i := uint32(0); i < count; i++ {»¶
+        {{Call "Go.Skip" .ValueType}}
+      «}¶
+    {{end}}
+  «}¶
+{{end}}
+
+{{define "Go.Skip.Array"}}
+  for i := uint32(0); i < {{.Size}}; i++ {»¶
+    {{Call "Go.Skip" .ValueType}}
+  «}¶
+{{end}}
 
 
-{{define "Go.Skip.Map"}} if count, err := d.Uint32(); err != nil {
-			return err
-		} else {
-			for i := uint32(0); i < count; i++ {
-				{{Call "Go.Skip" .KeyType}}
-				{{Call "Go.Skip" .ValueType}}
-			}
-		} {{end}}
+{{define "Go.Skip.Map"}}
+  if count, err := d.Uint32(); err != nil {»¶
+    return err¶
+  «} else {»¶
+    for i := uint32(0); i < count; i++ {»¶
+      {{Call "Go.Skip" .KeyType}}
+      {{Call "Go.Skip" .ValueType}}
+    «}¶
+  «}¶
+{{end}}
 
-{{define "Go.Schema.Primitive"}}&schema.Primitive{ Name: "{{.Name}}", Method: schema.{{.Method}} }{{end}}
-{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID:(*{{.Name}})(nil).Class().ID()}{{end}}
-{{define "Go.Schema.Pointer"}}&schema.Pointer{ Type: {{Call "Go.Schema" .Type}} }{{end}}
-{{define "Go.Schema.Interface"}}&schema.Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.Schema.Primitive"}}&schema.Primitive{Name: "{{.Name}}", Method: schema.{{.Method}}}{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Name: "{{.Name}}", ID: (*{{.Name}})(nil).Class().ID()}{{end}}
+{{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
+{{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Any"}}&any.Any{}{{end}}
-{{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
-{{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}} }{{end}}
-{{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}} }{{end}}
+{{define "Go.Schema.Slice"}}&schema.Slice{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
+{{define "Go.Schema.Array"}}&schema.Array{Alias: "{{.Alias}}", ValueType: {{Call "Go.Schema" .ValueType}}, Size: {{.Size}}}{{end}}
+{{define "Go.Schema.Map"}}&schema.Map{Alias: "{{.Alias}}", KeyType: {{Call "Go.Schema" .KeyType}}, ValueType: {{Call "Go.Schema" .ValueType}}}{{end}}
 
-{{define "Go.Constants"}}{{if File.Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
-const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"
-
-var _{{$name}}_map = map[{{.Type}}]string{}
-
-func init() {
-	{{$c.Set 0}}{{range .Entries}}_{{$name}}_map[{{.Value}}] = _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}]
-	{{end}}
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: {{Call "Go.Schema" .Type}}, {{if len .Entries}}{{$c.Set 0}}
-		Entries: []schema.Constant{
-			{{range .Entries}}{Name: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}], Value: {{printf "%T" .Value}}({{.Value}})},
-		{{end}}},
-	{{end}}})
-}
-
-func (v {{$name}}) String() string {
-	if s, ok := _{{$name}}_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("{{$name}}(%d)", v)
-}
-
-func (v *{{$name}}) Parse(s string) error {
-	for k, t := range _{{$name}}_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in {{$name}}", s)
-}
-{{end}}{{end}}
-
-{{define "Go.Binary"}}{{template "Go.Prelude" .}}
-
-{{if len .Structs}}{{if not .IsTest}}var Namespace = registry.NewNamespace(){{end}}
-func init() {
-	{{if not .IsTest}}registry.Global.AddFallbacks(Namespace)
-	{{end}}{{range .Structs}}{{template "Go.Init" .}}
-	{{end}} }
-
-var (
-{{range .Structs}} {{template "Go.ID" .}}
-{{end}} ){{end}}
-
-{{range .Structs}} {{template "Go.Class" .}}
+{{define "Go.Constants"}}
+  {{if File.Directive (print .Type ".String") true}}
+    {{$name := print .Type}}
+    {{$c := Counter "Go.Constants"}}
+    const _{{$name}}_name = "{{range .Entries}}{{.Name}}{{end}}"¶
+    ¶
+    var _{{$name}}_map = map[{{.Type}}]string{}¶
+    ¶
+    func init() {»¶
+      {{$c.Set 0}}
+      {{range .Entries}}
+        _{{$name}}_map[{{.Value}}] = _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}]¶
+      {{end}}
+      ¶
+      ConstantValues = append(ConstantValues, schema.ConstantSet{»¶
+        Type: {{Call "Go.Schema" .Type}},¶
+        {{if len .Entries}}{{$c.Set 0}}
+          Entries: []schema.Constant{»¶
+            {{range .Entries}}
+              {Name: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}], Value: {{printf "%T" .Value}}({{.Value}})},¶
+            {{end}}
+          «},¶
+        {{end}}
+      «})¶
+    «}¶
+    ¶
+    func (v {{$name}}) String() string {»¶
+      if s, ok := _{{$name}}_map[v]; ok {»¶
+        return s¶
+      «}¶
+      return fmt.Sprintf("{{$name}}(%d)", v)¶
+    «}¶
+    ¶
+    func (v *{{$name}}) Parse(s string) error {»¶
+      for k, t := range _{{$name}}_map {»¶
+        if s == t {»¶
+          *v = k¶
+          return nil¶
+        «}¶
+      «}¶
+      return fmt.Errorf("%s not in {{$name}}", s)¶
+    «}¶
+  {{end}}
 {{end}}
 
-{{if and (File.Directive "Schema" true) (len .Constants)}}
-var ConstantValues schema.Constants
-{{range .Constants}}{{template "Go.Constants" .}}
+{{define "Go.FindAny"}}{{end}}
+{{define "Go.FindAny.Any"}}{{File.Import "android.googlesource.com/platform/tools/gpu/binary/any"}}{{end}}
+
+{{define "Go.BinaryImports"}}
+  {{if len .Structs}}
+    {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+    {{if not .IsTest}}
+      {{File.Import "android.googlesource.com/platform/tools/gpu/binary/registry"}}
+    {{end}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (or (len .Structs) (len .Constants))}}
+    {{File.Import "android.googlesource.com/platform/tools/gpu/binary/schema"}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (or (len .Constants))}}
+    {{File.Import "fmt"}}
+  {{end}}
+  {{range .Structs}}
+    {{range .Fields}}
+      {{Call "Go.Import" .Type}}
+      {{Call "Go.ImportAny" .Type}}
+    {{end}}
+  {{end}}
 {{end}}
-{{end}}{{end}}
+
+{{define "Go.Binary"}}
+  {{template "Go.BinaryImports" .}}
+  {{template "Go.Prelude" .}}
+  {{if len .Structs}}
+    {{if not .IsTest}}
+      ¶
+      var Namespace = registry.NewNamespace()¶
+    {{end}}
+    ¶
+    func init() {»¶
+      {{if not .IsTest}}
+        registry.Global.AddFallbacks(Namespace)¶
+      {{end}}
+      {{range .Structs}}{{template "Go.Init" .}}{{end}}
+    «}¶
+    ¶
+    var (»¶
+      {{range .Structs}}{{template "Go.ID" .}}{{end}}
+    «)¶
+  {{end}}
+  {{range .Structs}}
+    ¶
+    {{template "Go.Class" .}}
+  {{end}}
+  {{if and (File.Directive "Schema" true) (len .Constants)}}
+    ¶
+    var ConstantValues schema.Constants¶
+    {{range .Constants}}¶
+      {{template "Go.Constants" .}}
+    {{end}}
+  {{end}}
+{{end}}
