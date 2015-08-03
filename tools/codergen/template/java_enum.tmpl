@@ -15,26 +15,29 @@
  */}}
 
 
-{{define "Java.Enum"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-import org.jetbrains.annotations.NotNull;
-
-import com.android.tools.rpclib.binary.BinaryClass;
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
-import com.android.tools.rpclib.binary.Decoder;
-import com.android.tools.rpclib.binary.Encoder;
-import com.android.tools.rpclib.binary.Namespace;
-import java.io.IOException;
-
-public enum {{File.ClassName .Type}} {
-{{range $i, $e := .Entries}}{{if $i}},
-{{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
-
-»private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
-»{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
-»»{{"value" | File.FieldName}} = value;
-»}
-}
+{{define "Java.Enum"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  import org.jetbrains.annotations.NotNull;¶
+  ¶
+  import com.android.tools.rpclib.binary.BinaryClass;¶
+  import com.android.tools.rpclib.binary.BinaryID;¶
+  import com.android.tools.rpclib.binary.BinaryObject;¶
+  import com.android.tools.rpclib.binary.Decoder;¶
+  import com.android.tools.rpclib.binary.Encoder;¶
+  import com.android.tools.rpclib.binary.Namespace;¶
+  import java.io.IOException;¶
+  ¶
+  public enum {{File.ClassName .Type}} {»¶
+    {{range $i, $e := .Entries}}
+      {{if $i}},¶{{end}}
+      {{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}})
+    {{end}};¶
+    ¶
+    private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};¶
+    {{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {»¶
+      {{"value" | File.FieldName}} = value;¶
+    «}¶
+  «}¶
 {{end}}

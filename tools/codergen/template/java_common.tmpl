@@ -36,15 +36,12 @@
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.nil"}}void{{end}}
 
-{{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};
-{{end}}{{end}}
-{{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};
-{{end}}{{end}}
+{{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
+{{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
-{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
-{{end}}{{end}}
+{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
 
 {{define "Java.ConstSuffix#int64"}}L{{end}}

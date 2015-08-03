@@ -927,11 +927,14 @@ const java_binary_tmpl = `{{/*
 
 
 {{define "Java.Encoder"}}
-»»@Override
-»»public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {
-»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
-{{range .Fields}}»»»{{Call "Java.Encode" (Var .Type "o." (File.FieldName .Name))}}
-{{end}}»»}{{end}}
+  @Override¶
+  public void encode(@NotNull Encoder e, BinaryObject obj) throws IOException {»¶
+    {{File.ClassName .}} o = ({{File.ClassName .}})obj;¶
+    {{range .Fields}}
+      {{Call "Java.Encode" (Var .Type "o." (File.FieldName .Name))}}¶
+    {{end}}
+  «}¶
+{{end}}
 
 {{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
@@ -940,24 +943,30 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
 
-{{define "Java.Encode.Slice"}}e.int32({{.Name}}.length);
-»»»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+{{define "Java.Encode.Slice"}}
+  e.int32({{.Name}}.length);¶
+  for (int i = 0; i < {{.Name}}.length; i++) {»¶
+    {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Java.Encode.Array"}}
-»»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
+    {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Java.Encode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
 {{define "Java.Decoder"}}
-»»@Override
-»»public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {
-»»»{{File.ClassName .}} o = ({{File.ClassName .}})obj;
-{{range .Fields}}»»»{{Call "Java.Decode" (Var .Type "o." (File.FieldName .Name))}}
-{{end}}»»}{{end}}
+  @Override¶
+  public void decode(@NotNull Decoder d, BinaryObject obj) throws IOException {»¶
+    {{File.ClassName .}} o = ({{File.ClassName .}})obj;¶
+    {{range .Fields}}
+      {{Call "Java.Decode" (Var .Type "o." (File.FieldName .Name))}}¶
+    {{end}}
+  «}¶
+{{end}}
 
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
@@ -966,76 +975,91 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
 
-{{define "Java.Decode.Slice"}}{{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];
-»»»for (int i = 0; i <{{.Name}}.length; i++) {
-»»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+{{define "Java.Decode.Slice"}}
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
+  for (int i = 0; i <{{.Name}}.length; i++) {»¶
+    {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
-{{define "Java.Decode.Array"}}{{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];
-»»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+{{define "Java.Decode.Array"}}
+  {{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];¶
+  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
+    {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Java.Decode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 
-{{define "Java.Field"}}»{{Call "Java.Type" .Type}} {{File.FieldName .Name}};
+{{define "Java.Field"}}
+  {{Call "Java.Type" .Type}} {{File.FieldName .Name}};¶
 {{end}}
 
 {{define "Java.Accessors"}}
-»public {{Call "Java.Type" .Type}} {{File.Getter .Name}}() {
-»»return {{File.FieldName .Name}};
-»}
-
-»public void {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {
-»»{{File.FieldName .Name}} = v;
-»}
+  ¶
+  public {{Call "Java.Type" .Type}} {{File.Getter .Name}}() {»¶
+    return {{File.FieldName .Name}};¶
+  «}¶
+  ¶
+  public void {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {»¶
+    {{File.FieldName .Name}} = v;¶
+  «}¶
 {{end}}
 
-{{define "Java.File"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-import org.jetbrains.annotations.NotNull;
-
-import com.android.tools.rpclib.binary.BinaryClass;
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
-import com.android.tools.rpclib.binary.Decoder;
-import com.android.tools.rpclib.binary.Encoder;
-import com.android.tools.rpclib.binary.Namespace;
-{{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
-import java.io.IOException;
-
-{{if .Struct.Exported}}public {{end}}final class {{File.ClassName .Struct}}{{if $e := .Struct.Tags.Get  "implements"}} extends {{File.ClassName $e}}{{end}} implements BinaryObject {
-{{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
-»// Constructs a default-initialized {@link {{File.ClassName .Struct}}}.
-»public {{File.ClassName .Struct}}() {
-»}
-
-»// Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.
-»public {{File.ClassName .Struct}}(Decoder d) throws IOException {
-»»Klass.INSTANCE.decode(d, this);
-»}
-{{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
-»@Override @NotNull
-»public BinaryClass klass() { return Klass.INSTANCE; }
-
-»public static byte[] IDBytes = {{"{"}}{{range .Struct.ID}}{{ToS8 .}}, {{end}}{{"}"}};
-»public static BinaryID ID = new BinaryID(IDBytes);
-»public enum Klass implements BinaryClass {
-»»INSTANCE;
-
-»»@Override @NotNull
-»»public BinaryID id() { return ID; }
-
-»»@Override @NotNull
-»»public BinaryObject create() { return new {{File.ClassName .Struct}}(); }
-{{template "Java.Encoder" .Struct}}
-{{template "Java.Decoder" .Struct}}
-»}
-»static {
-»»Namespace.register(ID, Klass.INSTANCE);
-»}
-}
+{{define "Java.File"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  import org.jetbrains.annotations.NotNull;¶
+  ¶
+  import com.android.tools.rpclib.binary.BinaryClass;¶
+  import com.android.tools.rpclib.binary.BinaryID;¶
+  import com.android.tools.rpclib.binary.BinaryObject;¶
+  import com.android.tools.rpclib.binary.Decoder;¶
+  import com.android.tools.rpclib.binary.Encoder;¶
+  import com.android.tools.rpclib.binary.Namespace;¶
+  {{range .Struct.Fields}}{{Call "Java.Import" .Type}}{{end}}
+  ¶
+  import java.io.IOException;¶
+  ¶
+  {{if .Struct.Exported}}public•{{end}}
+  final class {{File.ClassName .Struct}}{{if $e := .Struct.Tags.Get  "implements"}} extends {{File.ClassName $e}}{{end}} implements BinaryObject {»¶
+    {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
+    ¶
+    // Constructs a default-initialized {@link {{File.ClassName .Struct}}}.¶
+    public {{File.ClassName .Struct}}() {»¶
+    «}¶
+    ¶
+    // Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.¶
+    public {{File.ClassName .Struct}}(Decoder d) throws IOException {»¶
+      Klass.INSTANCE.decode(d, this);¶
+    «}¶
+    {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
+    ¶
+    @Override @NotNull¶
+    public BinaryClass klass() { return Klass.INSTANCE; }¶
+    ¶
+    public static byte[] IDBytes = {
+      {{range .Struct.ID}}{{ToS8 .}}, {{end}}
+    •};¶
+    public static BinaryID ID = new BinaryID(IDBytes);¶
+    public enum Klass implements BinaryClass {»¶
+      INSTANCE;¶
+      ¶
+      @Override @NotNull¶
+      public BinaryID id() { return ID; }¶
+      ¶
+      @Override @NotNull¶
+      public BinaryObject create() { return new {{File.ClassName .Struct}}(); }¶
+      ¶
+      {{template "Java.Encoder" .Struct}}
+      ¶
+      {{template "Java.Decoder" .Struct}}
+    «}¶
+    static {»¶
+      Namespace.register(ID, Klass.INSTANCE);¶
+    «}¶
+  «}¶
 {{end}}
 `
 const java_client_tmpl_file = `java_client.tmpl`
@@ -1067,70 +1091,81 @@ const java_client_tmpl = `{{/*
 {{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{.Name}}({{template "Java.Parameters" .}}){{end}}
 
 {{define "Java.Imports"}}
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
-{{range .Service.Methods}}{{Call "Java.Import" .Result.Type}}{{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}{{end}}{{end}}
-
-{{define "Java.Client"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-{{template "Java.Imports" .}}
-import com.android.tools.rpclib.rpccore.RpcException;
-
-import java.io.IOException;
-import java.util.concurrent.Future;
-
-public interface {{.Service.Name}}Client {
-»{{range .Service.Methods}}{{template "Java.Method" .}} throws IOException, RpcException;
-»{{end}}
-}
+  import com.android.tools.rpclib.binary.BinaryID;
+  import com.android.tools.rpclib.binary.BinaryObject;
+  {{range .Service.Methods}}
+    {{Call "Java.Import" .Result.Type}}
+    {{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}
+  {{end}}
 {{end}}
 
-{{define "Java.ClientImpl"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-{{template "Java.Imports" .}}
-import com.android.tools.rpclib.rpccore.Broadcaster;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-
-public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {
-»private final Broadcaster myBroadcaster;
-»private final ExecutorService myExecutorService;
-
-»public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {
-»»myExecutorService = executorService;
-»»myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);
-»}
-{{range .Service.Methods}}
-»@Override
-»public {{template "Java.Method" .}} {
-»»return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));
-»}
+{{define "Java.Client"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  {{template "Java.Imports" .}}
+  import com.android.tools.rpclib.rpccore.RpcException;¶
+  ¶
+  import java.io.IOException;¶
+  import java.util.concurrent.Future;¶
+  ¶
+  public interface {{.Service.Name}}Client {»¶
+    {{range .Service.Methods}}
+      {{template "Java.Method" .}} throws IOException, RpcException;¶
+    {{end}}
+  «}¶
 {{end}}
 
-{{range .Service.Methods}}
-»private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {
-»»private final {{File.ClassName .Call}} myCall;
+{{define "Java.ClientImpl"}}
+  §{{$.Copyright}}§
+  package {{.JavaPackage}};¶
+  ¶
+  {{template "Java.Imports" .}}
+  import com.android.tools.rpclib.rpccore.Broadcaster;
 
-»»private {{.Name}}Callable({{template "Java.Parameters" .}}) {
-»»»myCall = new {{File.ClassName .Call}}();
-{{range .Call.Params}}»»»myCall.{{File.Setter .Name}}({{.Name}});
-{{end}}
-»»}
-»»@Override
-»»public {{Call "Java.Value" .Result.Type}} call() throws Exception {
-»»»{{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);
-»»»return result.myValue;{{else}}myBroadcaster.Send(myCall);
-»»»return null;{{end}}
-»»}
-»}
-{{end}}
-}
+  import java.io.InputStream;
+  import java.io.OutputStream;
+  import java.util.concurrent.Callable;
+  import java.util.concurrent.ExecutorService;
+  import java.util.concurrent.Future;
+
+  public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {»¶
+    private final Broadcaster myBroadcaster;¶
+    private final ExecutorService myExecutorService;¶
+
+    public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
+      myExecutorService = executorService;¶
+      myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
+    «}¶
+    {{range .Service.Methods}}
+      @Override¶
+      public {{template "Java.Method" .}} {»¶
+        return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
+      «}¶
+    {{end}}
+    ¶
+    {{range .Service.Methods}}
+      private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
+        private final {{File.ClassName .Call}} myCall;¶
+        ¶
+        private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
+          myCall = new {{File.ClassName .Call}}();¶
+          {{range .Call.Params}}
+            myCall.{{File.Setter .Name}}({{.Name}});¶
+          {{end}}
+        «}¶
+        @Override¶
+        public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
+          {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
+            return result.myValue;¶
+          {{else}}
+            myBroadcaster.Send(myCall);¶
+            return null;¶
+          {{end}}
+        «}¶
+      «}¶
+    {{end}}
+  «}¶
 {{end}}
 `
 const java_common_tmpl_file = `java_common.tmpl`
@@ -1172,15 +1207,12 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.nil"}}void{{end}}
 
-{{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};
-{{end}}{{end}}
-{{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};
-{{end}}{{end}}
+{{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
+{{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Pointer"}}{{Call "Java.Import" .Type}}{{end}}
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
-{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};
-{{end}}{{end}}
+{{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
 
 {{define "Java.ConstSuffix#int64"}}L{{end}}
@@ -1207,27 +1239,30 @@ const java_enum_tmpl = `{{/*
  */}}
 
 
-{{define "Java.Enum"}}{{$.Copyright}}
-package {{.JavaPackage}};
-
-import org.jetbrains.annotations.NotNull;
-
-import com.android.tools.rpclib.binary.BinaryClass;
-import com.android.tools.rpclib.binary.BinaryID;
-import com.android.tools.rpclib.binary.BinaryObject;
-import com.android.tools.rpclib.binary.Decoder;
-import com.android.tools.rpclib.binary.Encoder;
-import com.android.tools.rpclib.binary.Namespace;
-import java.io.IOException;
-
-public enum {{File.ClassName .Type}} {
-{{range $i, $e := .Entries}}{{if $i}},
-{{end}}»{{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}){{end}};
-
-��private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};
-»{{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {
-»»{{"value" | File.FieldName}} = value;
-»}
-}
+{{define "Java.Enum"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  import org.jetbrains.annotations.NotNull;¶
+  ¶
+  import com.android.tools.rpclib.binary.BinaryClass;¶
+  import com.android.tools.rpclib.binary.BinaryID;¶
+  import com.android.tools.rpclib.binary.BinaryObject;¶
+  import com.android.tools.rpclib.binary.Decoder;¶
+  import com.android.tools.rpclib.binary.Encoder;¶
+  import com.android.tools.rpclib.binary.Namespace;¶
+  import java.io.IOException;¶
+  ¶
+  public enum {{File.ClassName .Type}} {»¶
+    {{range $i, $e := .Entries}}
+      {{if $i}},¶{{end}}
+      {{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}})
+    {{end}};¶
+    ¶
+    private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};¶
+    {{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {»¶
+      {{"value" | File.FieldName}} = value;¶
+    «}¶
+  «}¶
 {{end}}
 `
