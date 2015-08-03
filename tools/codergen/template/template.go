@@ -22,8 +22,6 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
-	"regexp"
-	"strconv"
 	"strings"
 	"text/template"
 	"unicode"
@@ -92,13 +90,6 @@ func New() *Templates {
 	return f
 }
 
-var (
-	sectionMarker = "<<<%s:%s:%s>>>"
-	sectionStart  = "Start"
-	sectionEnd    = "End"
-	section       = regexp.MustCompile(fmt.Sprintf(sectionMarker, "(.+)", "(.+)", "(.+)"))
-)
-
 // Generate is an implementation of generate.Generator
 func (t *Templates) Generate(g generate.Generate) (bool, error) {
 	t.File = g.Arg
@@ -107,52 +98,30 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 	buf := &bytes.Buffer{}
 	out := reflow.New(buf)
 	out.Indent = g.Indent
-	matches := section.FindAllSubmatchIndex(old, -1)
-	if len(matches) > 0 {
-		last := 0
-		tmpl := ""
+
+	sections, err := SectionSplit(old)
+	if err != nil {
+		return false, err
+	}
+	if len(sections) > 0 {
 		// we are doing a partial update...
-		for _, match := range matches {
-			mode := string(old[match[2]:match[3]])
-			name := string(old[match[4]:match[5]])
-			level := string(old[match[6]:match[7]])
-			depth, err := strconv.Atoi(string(old[match[6]:match[7]]))
-			if err != nil {
-				return false, fmt.Errorf("Indentation depth malformed, got %s in %s", level, name)
-			}
-			switch mode {
-			case sectionStart:
-				if tmpl != "" {
-					return false, fmt.Errorf("Overlapping template %s found starting %s", tmpl, name)
-				}
-				// section start, write the prefix
-				buf.Write(old[last:match[1]])
-				// now run the template
-				tmpl = name
-				out.Depth = depth
-				if err := t.execute(tmpl, out, g.Arg); err != nil {
+		for _, s := range sections {
+			if s.Name == "" {
+				// copy the non template section straight to the underlying buf
+				buf.Write(s.Body)
+			} else {
+				// Write the start marker straight to the underlying buf
+				buf.Write(s.StartMarker)
+				out.Depth = s.Indentation
+				// Execute the template to generate a new body
+				if err := t.execute(s.Name, out, g.Arg); err != nil {
 					return false, err
 				}
-			case sectionEnd:
-				// section end marker, check it matches
-				if name != tmpl {
-					return false, fmt.Errorf("Invalid end %s found, expected %s", name, tmpl)
-				}
-				// write the end marker out throught the formatting writer
-				out.Write(old[match[0]:match[1]])
+				// write the end marker out through the formatting writer
+				out.Write(s.EndMarker)
 				out.Flush()
-				// set the markers ready for the next write
-				tmpl = ""
-				last = match[1]
-			default:
-				return false, fmt.Errorf("Invalid section marker %s:%s", mode, name)
 			}
 		}
-		if tmpl != "" {
-			return false, fmt.Errorf("Unclosed template %s found", tmpl)
-		}
-		// write the prefix
-		buf.Write(old[last:])
 	} else {
 		if err := t.execute(g.Name, out, g.Arg); err != nil {
 			return false, err
