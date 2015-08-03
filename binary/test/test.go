@@ -25,6 +25,7 @@ import (
 
 // binary: java.source = base/rpclib/src/test/java
 // binary: java.package = com.android.tools.rpclib.binary
+// binary: java.indent = "    "
 // binary: java.member_prefix = m
 
 type TypeA struct {
