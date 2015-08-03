@@ -16,6 +16,7 @@ package template
 
 import (
 	"fmt"
+	"io"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -39,6 +40,13 @@ func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
 		return "", err
 	}
 	return "", tmpl.Execute(t.writer, arg)
+}
+
+func (t *Templates) Section(name string) (string, error) {
+	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionStart, name))
+	err := t.execute(name, t.writer, t.File)
+	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionEnd, name))
+	return "", err
 }
 
 func (*Templates) Lower(s interface{}) string {
