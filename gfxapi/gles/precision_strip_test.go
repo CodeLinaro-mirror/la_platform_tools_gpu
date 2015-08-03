@@ -16,6 +16,7 @@ package gles
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -102,9 +103,10 @@ func runTest(t *testing.T, src string, expected string) {
 		a.Mutate(s, d, l)
 	}
 
-	srcPtr := cmd.Source.Read(s, d, l) // 0'th glShaderSource string pointer
+	srcPtr := cmd.Source.Read(cmd, s, d, l, nil) // 0'th glShaderSource string pointer
 
-	if got := string(srcPtr.StringSlice(s, d, l, false).Read(s, d, l)); got != expected {
+	got := strings.TrimRight(string(srcPtr.StringSlice(s, d, l).Read(cmd, s, d, l, nil)), "\x00")
+	if got != expected {
 		t.Errorf("Received unexpected string at %v: got `%s`, expected `%s`.", srcPtr, got, expected)
 		t.Errorf("Application memory pool writes:\n%v", s.Memory[memory.ApplicationPool])
 	}

@@ -130,7 +130,7 @@
   Cast can be used to cast the value type before assigment to Name.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.DecodePOD_cast"}}{{if $}}{{Template "Go.Type" $}}(v){{else}}v{{end}}{{end}}
+{{define "Go.DecodePOD_cast"}}{{if $}}{{Template "Go.Type" $}}(ϟv){{else}}ϟv{{end}}{{end}}
 {{define "Go.DecodePOD"}}
   {{AssertType $.Type       "Type"        }}
   {{AssertType $.Name       "string"      }}
@@ -140,22 +140,22 @@
   {{$v        := Macro "Go.DecodePOD_cast" $.Cast}}
   {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
 
-  {{     if IsEnum        $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { {{$.ErrHandler}} }
-  {{else if IsBool        $.Type}}if v, err := d.Bool();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsChar        $.Type}}if v, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU8          $.Type}}if v, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS8          $.Type}}if v, err := d.Int8();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU16         $.Type}}if v, err := d.Uint16();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS16         $.Type}}if v, err := d.Int16();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsF32         $.Type}}if v, err := d.Float32(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU32         $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS32         $.Type}}if v, err := d.Int32();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsF64         $.Type}}if v, err := d.Float64(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsU64         $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsS64         $.Type}}if v, err := d.Int64();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsString      $.Type}}if v, err := d.String();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsInt         $.Type}}if v, err := binary.ReadInt(d,  {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
-  {{else if IsUint        $.Type}}if v, err := binary.ReadUint(d, {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{     if IsEnum        $.Type}}if ϟv, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(ϟv) } else { {{$.ErrHandler}} }
+  {{else if IsBool        $.Type}}if ϟv, err := d.Bool();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsChar        $.Type}}if ϟv, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU8          $.Type}}if ϟv, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS8          $.Type}}if ϟv, err := d.Int8();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU16         $.Type}}if ϟv, err := d.Uint16();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS16         $.Type}}if ϟv, err := d.Int16();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF32         $.Type}}if ϟv, err := d.Float32(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU32         $.Type}}if ϟv, err := d.Uint32();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS32         $.Type}}if ϟv, err := d.Int32();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF64         $.Type}}if ϟv, err := d.Float64(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU64         $.Type}}if ϟv, err := d.Uint64();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS64         $.Type}}if ϟv, err := d.Int64();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsString      $.Type}}if ϟv, err := d.String();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsInt         $.Type}}if ϟv, err := binary.ReadInt(d,  {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsUint        $.Type}}if ϟv, err := binary.ReadUint(d, {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
   {{else if IsVoid        $.Type}}
   {{else}}{{Error "macro Go.DecodePOD '%v' called with unsupported type: %v" $.Name $.Type.Name}}
   {{end}}
@@ -308,12 +308,12 @@
   {{else if IsArrayAssign  $}}{{Template "Go.ArrayAssign" $}}
   {{else if IsMapAssign    $}}{{Template "Go.MapAssign" $}}
   {{else if IsSliceAssign  $}}{{Template "Go.SliceAssign" $}}
-  {{else if IsCopy         $}}{{Template "Go.Copy" $}}
+  {{else if IsCopy         $}}{{Error "Copy statement found outside of a Fence"}}
   {{else if IsReturn       $}}{{Template "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsIteration    $}}{{Template "Go.Iteration" $}}
   {{else if IsCall         $}}{{Template "Go.Call" $}}
-  {{else if IsRead         $}}{{Template "Go.Read" $.Slice}}.OnRead(ϟs)
-  {{else if IsWrite        $}}{{Template "Go.Read" $.Slice}}.OnWrite(ϟs)
+  {{else if IsRead         $}}{{Template "Go.Read" $.Slice}}.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+  {{else if IsWrite        $}}{{Template "Go.Read" $.Slice}}.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsFence        $}}{{Template "Go.Fence" $}}
   {{else if IsBranch       $}}{{Template "Go.Branch" $}}
   {{else if IsSwitch       $}}{{Template "Go.Switch" $}}
@@ -358,7 +358,7 @@
   {{if $.Target.Object}}
     {{Template "Go.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{$args}})
   {{else}}
-    externs{ϟs, ϟd, ϟl}.{{$.Target.Function.Name}}({{$args}})
+    externs{ϟa, ϟs, ϟd, ϟl, ϟb}.{{$.Target.Function.Name}}({{$args}})
   {{end}}
 {{end}}
 
@@ -371,7 +371,13 @@
 {{define "Go.Fence"}}
   {{AssertType $ "Fence"}}
   ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-  {{if not (IsNil $.Statement)}}{{Template "Go.Statement" $.Statement}}{{end}}
+  {{if not (IsNil $.Statement)}}
+    {{if IsCopy $.Statement}} {{/* Copies are only allowed in fences */}}
+      {{Template "Go.Read" $.Statement.Dst}}.Copy({{Template "Go.Read" $.Statement.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{else}}
+      {{Template "Go.Statement" $.Statement}}
+    {{end}}
+  {{end}}
 {{end}}
 
 
@@ -410,17 +416,6 @@
       v := {{Template "Go.Read" $.Value}}
       return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the logic to copy from Src to Dst
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.Copy"}}
-  {{AssertType $ "Copy"}}
-  {{Template "Go.Read" $.Dst}}.Copy({{Template "Go.Read" $.Src}}, ϟs, ϟd, ϟl)
 {{end}}
 
 
@@ -476,8 +471,8 @@
 */}}
 {{define "Go.SliceAssign"}}
   {{AssertType $ "SliceAssign"}}
-  {{if eq $.Operator "="}}{{Template "Go.Read" $.To.Slice}}.Index({{Template "Go.Read" $.To.Index}}, ϟs).Write({{Template "Go.Read" $.Value}}, ϟs)
-  {{else}}{{Error "Unsupported SliceAssign operator %s" $.Operator}}{{end}}
+  {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
+  {{Template "Go.Read" $.To.Slice}}.Index({{Template "Go.Read" $.To.Index}}, ϟs).Write({{Template "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
 {{end}}
 
 
@@ -493,6 +488,27 @@
     {{Template $override $}}
   {{else}}
     {{Template "Go.Read.Default" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Go logic to read a slice or pointer, with special handling for
+  inferred expressions.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Memory.Read"}}
+  {{if Global "Go.InferredExpression"}}
+    {{/*
+      If the expression is inferred, then it is the output of a command.
+      When building a replay, Read with ϟb would replace the output memory with
+      observed memory which is undesirable, so instead just map the memory and
+      perform regular (non-replay-builder) read logic.
+    */}}
+    MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)
+  {{else}}
+    Read(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{end}}
 {{end}}
 
@@ -523,10 +539,10 @@
   {{else if IsLength           $}}{{Template "Go.Type" $.Type}}({{Template "Go.ReadLength" "Type" (TypeOf $.Object) "Value" $.Object}})
   {{else if IsNull             $}}{{Template "Go.Null" $.Type}}
   {{else if IsNew              $}}new {{Template "Go.Type" $.Type}}
-  {{else if IsSliceIndex       $}}{{Template "Go.Read" $.Slice  }}.Index({{Template "Go.Read" $.Index}}, ϟs).Read(ϟs, ϟd, ϟl)
+  {{else if IsSliceIndex       $}}{{Template "Go.Read" $.Slice  }}.Index({{Template "Go.Read" $.Index}}, ϟs).{{Macro "Go.Memory.Read"}}
   {{else if IsSliceRange       $}}{{Template "Go.Read" $.Slice  }}.Slice({{Template "Go.Read" $.Range.LHS}}, {{Template "Go.Read" $.Range.RHS}}, ϟs)
   {{else if IsPointerRange     $}}{{Template "Go.Read" $.Pointer}}.Slice({{Template "Go.Read" $.Range.LHS}}, {{Template "Go.Read" $.Range.RHS}}, ϟs)
-  {{else if IsClone            $}}{{Template "Go.Read" $.Slice  }}.Clone(ϟs)
+  {{else if IsClone            $}}{{Template "Go.Read" $.Slice  }}.Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsMake             $}}Make{{Template "Go.Type" $.Type}}({{Template "Go.Read" $.Size}}, ϟs)
   {{else if IsSelect           $}}{{Template "Go.Select" $}}
   {{else if IsArrayInitializer $}}{{Template "Go.ArrayInitializer" $}}
@@ -556,9 +572,9 @@
   {{/* T[] -> T* */}}{{else if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
     {{Template "Go.Type" $.Type}}({{$src}}.Index(0, ϟs))
   {{/* char* -> string */}}{{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
-    string({{$src}}.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
+    strings.TrimRight(string({{$src}}.StringSlice(ϟs, ϟd, ϟl).{{Macro "Go.Memory.Read"}}), "\x00")
   {{/* char[] -> string */}}{{else if and (IsSlice $src_ty) (IsString $dst_ty)}}
-    string({{$src}}.Read(ϟs, ϟd, ϟl))
+    string({{$src}}.{{Macro "Go.Memory.Read"}})
   {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
     Make{{Template "Go.Type" $.Type}}FromString({{$src}}, ϟs)
   {{else}}
@@ -736,6 +752,71 @@
   {{else if IsStaticArray $}}{{Template "Go.SizeOf" $.ValueType}}*{{$.Size}}
   {{else if IsClass       $}}func() uint64 { panic("Sizeof class is not yet implemented") }()
   {{else                   }}{{Error "macro Go.SizeOf called with unsupported type: %v" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Returns the replay builder Value holding the specified variable.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Replay.Value"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+
+  {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsBool        $.Type}}value.Bool({{$.Name}})
+  {{else if IsS8          $.Type}}value.S8({{$.Name}})
+  {{else if IsU8          $.Type}}value.U8({{$.Name}})
+  {{else if IsS16         $.Type}}value.S16({{$.Name}})
+  {{else if IsU16         $.Type}}value.U16({{$.Name}})
+  {{else if IsF32         $.Type}}value.F32({{$.Name}})
+  {{else if IsU32         $.Type}}value.U32({{$.Name}})
+  {{else if IsS32         $.Type}}value.S32({{$.Name}})
+  {{else if IsF64         $.Type}}value.F64({{$.Name}})
+  {{else if IsU64         $.Type}}value.U64({{$.Name}})
+  {{else if IsS64         $.Type}}value.S64({{$.Name}})
+  {{else if IsInt         $.Type}}value.S64({{$.Name}})
+  {{else if IsUint        $.Type}}value.U64({{$.Name}})
+  {{else if IsString      $.Type}}ϟb.String({{$.Name}})
+  {{else if IsPointer     $.Type}}{{$.Name}}.value()
+  {{else if IsEnum        $.Type}}value.U32({{$.Name}})
+  {{else if IsStaticArray $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsPseudonym   $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsClass       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else                        }}{{Error "macro Go.Replay.Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the replay builder type for the given command return type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Replay.Type"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym $}}{{Template "Go.Replay.Type" $.To}}
+  {{else if IsEnum      $}}protocol.TypeUint32
+  {{else if IsBool      $}}protocol.TypeBool
+  {{else if IsInt       $}}protocol.TypeInt64
+  {{else if IsUint      $}}protocol.TypeUint64
+  {{else if IsS8        $}}protocol.TypeInt8
+  {{else if IsU8        $}}protocol.TypeUint8
+  {{else if IsS16       $}}protocol.TypeInt16
+  {{else if IsU16       $}}protocol.TypeUint16
+  {{else if IsS32       $}}protocol.TypeInt32
+  {{else if IsU32       $}}protocol.TypeUint32
+  {{else if IsF32       $}}protocol.TypeFloat
+  {{else if IsS64       $}}protocol.TypeInt64
+  {{else if IsU64       $}}protocol.TypeUint64
+  {{else if IsF64       $}}protocol.TypeDouble
+  {{else if IsVoid      $}}protocol.TypeVoid
+  {{else if IsString    $}}protocol.TypeVolatilePointer
+  {{else if IsPointer   $}}protocol.TypeVolatilePointer {{/* TODO: Might be absolute... */}}
+  {{else}}{{Error "macro Go.Replay.Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
 

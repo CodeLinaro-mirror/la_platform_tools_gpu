@@ -107,7 +107,7 @@ func (ϟa *CmdClone) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.U8s = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
+	ϟc.U8s = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Src.value())
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdClone)
@@ -133,13 +133,15 @@ func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
-	ϟdst, ϟsrc := ϟc.U8s.Copy(ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs), ϟs, ϟd, ϟl)
-	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst, ϟsrc := ϟc.U8s, ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs)
+	ϟcount := min(ϟdst.Count, ϟsrc.Count)
+	ϟdst, ϟsrc = ϟdst.Slice(0, ϟcount, ϟs), ϟsrc.Slice(0, ϟcount, ϟs)
+	ϟsrcElems := ϟsrc.Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.Src.value())
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdCopy)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -148,7 +150,7 @@ func (ϟa *CmdCharsliceToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Str = string(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.Len), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
+	ϟc.Str = string(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.Len), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 	ϟb.Push(ϟa.S.value())
 	ϟb.Push(value.U32(ϟa.Len))
 	ϟb.Call(funcInfoCmdCharsliceToString)
@@ -161,7 +163,7 @@ func (ϟa *CmdCharptrToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟc.Str = strings.TrimRight(string(ϟa.S.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
+	ϟc.Str = strings.TrimRight(string(ϟa.S.StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
 	ϟb.Push(ϟa.S.value())
 	ϟb.Call(funcInfoCmdCharptrToString)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -212,7 +214,7 @@ func (ϟa *CmdUnknownWritePtr) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟb.Push(ϟa.P.value())
 	ϟb.Call(funcInfoCmdUnknownWritePtr)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -227,8 +229,8 @@ func (ϟa *CmdUnknownWriteSlice) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟb.Call(funcInfoCmdUnknownWriteSlice)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
-		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // int
-		slice.Index(uint64(i), ϟs).replayWrite(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
+		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // int
+		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = unknown
 	}
 	_, _ = count, slice
@@ -386,16 +388,18 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.U8s = MakeU8ˢ(uint64(10), ϟs)
-	ϟa.B.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.C.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟdst, ϟsrc := ϟc.U8s.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
-	ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.B.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.C.Slice(uint64(5), uint64(15), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst, ϟsrc := ϟc.U8s, ϟa.A.Slice(uint64(5), uint64(25), ϟs)
+	ϟcount := min(ϟdst.Count, ϟsrc.Count)
+	ϟdst, ϟsrc = ϟdst.Slice(0, ϟcount, ϟs), ϟsrc.Slice(0, ϟcount, ϟs)
+	ϟsrcElems := ϟsrc.Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.A.value())
 	ϟb.Push(ϟa.B.value())
 	ϟb.Push(ϟa.C.value())
 	ϟb.Call(funcInfoCmdVoid3InArrays)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -406,7 +410,7 @@ func (ϟa *CmdVoidInArrayOfPointers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	slice := ϟa.A.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		x := slice.Index(uint64(i), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // char
+		x := slice.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // char
 		_ = x
 	}
 	ϟb.Push(ϟa.A.value())
@@ -422,7 +426,7 @@ func (ϟa *CmdVoidReadU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // u8
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u8
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadU8)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -435,7 +439,7 @@ func (ϟa *CmdVoidReadS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // s8
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s8
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadS8)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -448,7 +452,7 @@ func (ϟa *CmdVoidReadU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadU16)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -461,7 +465,7 @@ func (ϟa *CmdVoidReadS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // s16
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s16
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadS16)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -474,7 +478,7 @@ func (ϟa *CmdVoidReadF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadF32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -487,7 +491,7 @@ func (ϟa *CmdVoidReadU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // u32
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u32
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadU32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -500,7 +504,7 @@ func (ϟa *CmdVoidReadS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // s32
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s32
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadS32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -513,7 +517,7 @@ func (ϟa *CmdVoidReadF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // f64
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f64
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadF64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -526,7 +530,7 @@ func (ϟa *CmdVoidReadU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // u64
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u64
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadU64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -539,7 +543,7 @@ func (ϟa *CmdVoidReadS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // s64
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // s64
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadS64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -552,7 +556,7 @@ func (ϟa *CmdVoidReadBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidReadBool)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -565,9 +569,9 @@ func (ϟa *CmdVoidReadPtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
-	y := ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
-	z := ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // f32
+	y := ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // u16
+	z := ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // bool
 	ϟb.Push(ϟa.A.value())
 	ϟb.Push(ϟa.B.value())
 	ϟb.Push(ϟa.C.value())
@@ -585,7 +589,7 @@ func (ϟa *CmdVoidWriteU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteU8)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(uint8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -597,7 +601,7 @@ func (ϟa *CmdVoidWriteS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteS8)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int8(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -609,7 +613,7 @@ func (ϟa *CmdVoidWriteU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteU16)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(uint16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -621,7 +625,7 @@ func (ϟa *CmdVoidWriteS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteS16)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int16(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -633,7 +637,7 @@ func (ϟa *CmdVoidWriteF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteF32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(float32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -645,7 +649,7 @@ func (ϟa *CmdVoidWriteU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteU32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(uint32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -657,7 +661,7 @@ func (ϟa *CmdVoidWriteS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteS32)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -669,7 +673,7 @@ func (ϟa *CmdVoidWriteF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteF64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(float64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -681,7 +685,7 @@ func (ϟa *CmdVoidWriteU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteU64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(uint64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -693,7 +697,7 @@ func (ϟa *CmdVoidWriteS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteS64)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(int64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int64(1), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -705,7 +709,7 @@ func (ϟa *CmdVoidWriteBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidWriteBool)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(true, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(true, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -719,9 +723,9 @@ func (ϟa *CmdVoidWritePtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.C.value())
 	ϟb.Call(funcInfoCmdVoidWritePtrs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(float32(10), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(uint16(20), ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(false, ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(10), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(20), ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(false, ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -885,7 +889,7 @@ func (ϟa *CmdVoidInArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnRead(ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidInArrayOfRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
@@ -900,7 +904,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟb.Push(ϟa.A.value())
 	ϟb.Call(funcInfoCmdVoidOutArrayOfRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟa.A.Slice(uint64(0), uint64(5), ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
 
@@ -915,8 +919,8 @@ func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 	ϟb.Call(funcInfoCmdVoidOutArrayOfUnknownRemapped)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
-		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)) // remapped
-		slice.Index(uint64(i), ϟs).replayWrite(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
+		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb).Read(ϟa, ϟs, ϟd, ϟl, nil)) // remapped
+		slice.Index(uint64(i), ϟs).Write(unknown, ϟa, ϟs, ϟd, ϟl, ϟb)
 		_ = unknown
 	}
 	_, _ = count, slice
@@ -941,36 +945,12 @@ func (ϟa *CmdRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (p U8ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U8ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U8ᵖ) replayWrite(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p U8ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p U16ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U16ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U16ᵖ) replayWrite(value uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p U16ᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -979,36 +959,12 @@ func (p U16ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p U32ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U32ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U32ᵖ) replayWrite(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p U32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p Intᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Intᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Intᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p Intᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1017,36 +973,12 @@ func (p Intᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p Charᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Charᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Charᵖ) replayWrite(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p Charᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p Charᵖᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Charᵖᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Charᵖᵖ) replayWrite(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p Charᵖᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1055,36 +987,12 @@ func (p Charᵖᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p S8ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int8 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S8ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int8 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S8ᵖ) replayWrite(value int8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p S8ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p S16ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int16 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S16ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int16 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S16ᵖ) replayWrite(value int16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p S16ᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1093,36 +1001,12 @@ func (p S16ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p F32ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float32 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p F32ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float32 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p F32ᵖ) replayWrite(value float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p F32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p S32ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int32 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S32ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int32 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S32ᵖ) replayWrite(value int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p S32ᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1131,36 +1015,12 @@ func (p S32ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p F64ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float64 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p F64ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float64 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p F64ᵖ) replayWrite(value float64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p F64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p U64ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U64ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p U64ᵖ) replayWrite(value uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p U64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1169,36 +1029,12 @@ func (p U64ᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p S64ᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S64ᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p S64ᵖ) replayWrite(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p S64ᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
 	}
-}
-func (p Boolᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) bool {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Boolᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) bool {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Boolᵖ) replayWrite(value bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 func (p Boolᵖ) value() value.Pointer {
 	if p.Address != 0 {
@@ -1214,414 +1050,10 @@ func (p Voidᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p Remappedᵖ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) remapped {
-	p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Remappedᵖ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) remapped {
-	p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p.Read(ϟs, ϟd, ϟl)
-}
-func (p Remappedᵖ) replayWrite(value remapped, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Write(value, ϟs)
-	p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-}
 func (p Remappedᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
 		return value.AbsolutePointer(0)
-	}
-}
-func (s Boolˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s Boolˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Boolˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s Boolˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []bool {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s Charˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s Charˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Charˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s Charˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []byte {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s Charᵖˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
-		for _, v := range s.Read(ϟs, ϟd, ϟl) {
-			ϟb.Push(v.value())
-			ϟb.Store(ptr)
-			ptr += step
-		}
-	}
-	return s
-}
-func (s Charᵖˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Charᵖˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s Charᵖˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᵖ {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s F32ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s F32ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s F32ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s F32ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []float32 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s F64ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s F64ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s F64ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s F64ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []float64 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s Intˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s Intˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Intˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s Intˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int64 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s Remappedˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
-		for _, v := range s.Read(ϟs, ϟd, ϟl) {
-			if key, remap := v.remap(ϟa, ϟs); remap {
-				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
-			} else {
-				ϟb.Push(v.value(ϟb, ϟa, ϟs))
-			}
-			ϟb.Store(ptr)
-			ptr += step
-		}
-	}
-	return s
-}
-func (s Remappedˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-		size := s.ElementSize(ϟs)
-		ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
-		for _, v := range s.Read(ϟs, ϟd, ϟl) {
-			if key, remap := v.remap(ϟa, ϟs); remap {
-				dst, found := ϟb.Remappings[key]
-				if !found {
-					dst = ϟb.AllocateMemory(size)
-					ϟb.Remappings[key] = dst
-				}
-				ϟb.Load(protocol.TypeUint32, ptr)
-				ϟb.Store(dst)
-			}
-			ptr += step
-		}
-	}
-	return s
-}
-func (s Remappedˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s Remappedˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []remapped {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s S16ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s S16ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s S16ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s S16ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int16 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s S32ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s S32ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s S32ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s S32ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int32 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s S64ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s S64ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s S64ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s S64ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int64 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s S8ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s S8ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s S8ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s S8ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int8 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s U16ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s U16ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s U16ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s U16ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint16 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s U32ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s U32ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s U32ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s U32ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint32 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s U64ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s U64ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s U64ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s U64ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint64 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s U8ˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s U8ˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s U8ˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-}
-func (s U8ˢ) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint8 {
-	s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return s.Read(ϟs, ϟd, ϟl)
-}
-func (s Voidˢ) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-func (s Voidˢ) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
-	if s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Voidˢ) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	if s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 }

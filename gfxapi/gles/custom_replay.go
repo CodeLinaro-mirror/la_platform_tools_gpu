@@ -188,7 +188,7 @@ func (ω *WglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database
 
 func (ω *CGLCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	ctxID := uint32(getState(s).CGLContexts[ω.Ctx.Read(s, d, l)].Identifier)
+	ctxID := uint32(getState(s).CGLContexts[ω.Ctx.Read(ω, s, d, l, b)].Identifier)
 	return NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 

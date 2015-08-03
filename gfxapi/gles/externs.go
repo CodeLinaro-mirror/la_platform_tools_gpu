@@ -17,23 +17,27 @@ package gles
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/replay/builder"
 )
 
 type externs struct {
+	a atom.Atom
 	s *gfxapi.State
 	d database.Database
 	l log.Logger
+	b *builder.Builder
 }
 
-func (e externs) minIndex(indices interface{}, ty GLenum, offset, count uint32) uint32 {
+func (e externs) minIndex(data U8ᵖ, ty GLenum, offset, count uint32) uint32 {
 	return 0 /* TEMP */
 }
 
-func (e externs) maxIndex(indices interface{}, ty GLenum, offset, count uint32) uint32 {
+func (e externs) maxIndex(indices U8ᵖ, ty GLenum, offset, count uint32) uint32 {
 	return 0 /* TEMP */
 }
 

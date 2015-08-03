@@ -30,6 +30,7 @@
     "android.googlesource.com/platform/tools/gpu/gfxapi"
     "android.googlesource.com/platform/tools/gpu/log"
     "android.googlesource.com/platform/tools/gpu/memory"
+    "android.googlesource.com/platform/tools/gpu/replay/builder"
   )
 
   func getState(s *gfxapi.State) *State {
@@ -50,8 +51,8 @@
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "no_mutate")}}
       func (ϟa *{{Template "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
-        ϟc := getState(ϟs)
-        _ = ϟc
+        ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+        _, _ = ϟc, ϟb
         {{Template "Go.CommandLogic" $c}}
         return nil
       }

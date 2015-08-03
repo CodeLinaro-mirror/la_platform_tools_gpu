@@ -13,6 +13,9 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
+	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
 type remapped uint32
@@ -34,28 +37,28 @@ func (p U8ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the uint8 element at the pointer.
-func (p U8ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint8 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p U8ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the uint8 element at the pointer.
-func (p U8ᵖ) Write(value uint8, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint8{value}, ϟs)
+func (p U8ᵖ) Write(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]uint8{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p U8ᵖ) OnRead(ϟs *gfxapi.State) U8ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U8ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p U8ᵖ) OnWrite(ϟs *gfxapi.State) U8ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p U8ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -84,28 +87,28 @@ func (p U16ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the uint16 element at the pointer.
-func (p U16ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint16 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p U16ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint16 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the uint16 element at the pointer.
-func (p U16ᵖ) Write(value uint16, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint16{value}, ϟs)
+func (p U16ᵖ) Write(value uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]uint16{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p U16ᵖ) OnRead(ϟs *gfxapi.State) U16ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U16ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p U16ᵖ) OnWrite(ϟs *gfxapi.State) U16ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U16ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p U16ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -134,28 +137,28 @@ func (p U32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the uint32 element at the pointer.
-func (p U32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint32 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p U32ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint32 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the uint32 element at the pointer.
-func (p U32ᵖ) Write(value uint32, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint32{value}, ϟs)
+func (p U32ᵖ) Write(value uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]uint32{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p U32ᵖ) OnRead(ϟs *gfxapi.State) U32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U32ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p U32ᵖ) OnWrite(ϟs *gfxapi.State) U32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p U32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -184,28 +187,28 @@ func (p Intᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the int64 element at the pointer.
-func (p Intᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int64 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p Intᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the int64 element at the pointer.
-func (p Intᵖ) Write(value int64, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟs)
+func (p Intᵖ) Write(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Intᵖ) OnRead(ϟs *gfxapi.State) Intᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Intᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Intᵖ) OnWrite(ϟs *gfxapi.State) Intᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Intᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Intᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -234,44 +237,39 @@ func (p Charᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the byte element at the pointer.
-func (p Charᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) byte {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p Charᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the byte element at the pointer.
-func (p Charᵖ) Write(value byte, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]byte{value}, ϟs)
+func (p Charᵖ) Write(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]byte{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Charᵖ) OnRead(ϟs *gfxapi.State) Charᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Charᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Charᵖ) OnWrite(ϟs *gfxapi.State) Charᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Charᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Charᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
-// If incNullTerm is true then the null-terminator is included in the slice.
-func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
+func (p Charᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
 	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
 	for {
-		if b, _ := d.Uint8(); b == 0 {
-			if incNullTerm {
-				return Charˢ(p.Slice(0, i+1, ϟs))
-			} else {
-				return Charˢ(p.Slice(0, i, ϟs))
-			}
-		}
 		i++
+		if b, _ := d.Uint8(); b == 0 {
+			return Charˢ(p.Slice(0, i, ϟs))
+		}
 	}
 }
 
@@ -308,28 +306,28 @@ func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charᵖ {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p Charᵖᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Write(value Charᵖ, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]Charᵖ{value}, ϟs)
+func (p Charᵖᵖ) Write(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Charᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnRead(ϟs *gfxapi.State) Charᵖᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Charᵖᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnWrite(ϟs *gfxapi.State) Charᵖᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Charᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Charᵖᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -358,28 +356,28 @@ func (p S8ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the int8 element at the pointer.
-func (p S8ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int8 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p S8ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int8 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the int8 element at the pointer.
-func (p S8ᵖ) Write(value int8, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int8{value}, ϟs)
+func (p S8ᵖ) Write(value int8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]int8{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p S8ᵖ) OnRead(ϟs *gfxapi.State) S8ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S8ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p S8ᵖ) OnWrite(ϟs *gfxapi.State) S8ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p S8ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -408,28 +406,28 @@ func (p S16ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the int16 element at the pointer.
-func (p S16ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int16 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p S16ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int16 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the int16 element at the pointer.
-func (p S16ᵖ) Write(value int16, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int16{value}, ϟs)
+func (p S16ᵖ) Write(value int16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]int16{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p S16ᵖ) OnRead(ϟs *gfxapi.State) S16ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S16ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p S16ᵖ) OnWrite(ϟs *gfxapi.State) S16ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S16ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p S16ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -458,28 +456,28 @@ func (p F32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the float32 element at the pointer.
-func (p F32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) float32 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p F32ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float32 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the float32 element at the pointer.
-func (p F32ᵖ) Write(value float32, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]float32{value}, ϟs)
+func (p F32ᵖ) Write(value float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]float32{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p F32ᵖ) OnRead(ϟs *gfxapi.State) F32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p F32ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p F32ᵖ) OnWrite(ϟs *gfxapi.State) F32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p F32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p F32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -508,28 +506,28 @@ func (p S32ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the int32 element at the pointer.
-func (p S32ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int32 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p S32ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int32 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the int32 element at the pointer.
-func (p S32ᵖ) Write(value int32, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int32{value}, ϟs)
+func (p S32ᵖ) Write(value int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]int32{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p S32ᵖ) OnRead(ϟs *gfxapi.State) S32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S32ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p S32ᵖ) OnWrite(ϟs *gfxapi.State) S32ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S32ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p S32ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -558,28 +556,28 @@ func (p F64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the float64 element at the pointer.
-func (p F64ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) float64 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p F64ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) float64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the float64 element at the pointer.
-func (p F64ᵖ) Write(value float64, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]float64{value}, ϟs)
+func (p F64ᵖ) Write(value float64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]float64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p F64ᵖ) OnRead(ϟs *gfxapi.State) F64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p F64ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p F64ᵖ) OnWrite(ϟs *gfxapi.State) F64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p F64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p F64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -608,28 +606,28 @@ func (p U64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the uint64 element at the pointer.
-func (p U64ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) uint64 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p U64ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the uint64 element at the pointer.
-func (p U64ᵖ) Write(value uint64, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]uint64{value}, ϟs)
+func (p U64ᵖ) Write(value uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]uint64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p U64ᵖ) OnRead(ϟs *gfxapi.State) U64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U64ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p U64ᵖ) OnWrite(ϟs *gfxapi.State) U64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p U64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p U64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -658,28 +656,28 @@ func (p S64ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the int64 element at the pointer.
-func (p S64ᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) int64 {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p S64ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) int64 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the int64 element at the pointer.
-func (p S64ᵖ) Write(value int64, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟs)
+func (p S64ᵖ) Write(value int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]int64{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p S64ᵖ) OnRead(ϟs *gfxapi.State) S64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S64ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p S64ᵖ) OnWrite(ϟs *gfxapi.State) S64ᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p S64ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p S64ᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -708,28 +706,28 @@ func (p Boolᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the bool element at the pointer.
-func (p Boolᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) bool {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p Boolᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) bool {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the bool element at the pointer.
-func (p Boolᵖ) Write(value bool, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]bool{value}, ϟs)
+func (p Boolᵖ) Write(value bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]bool{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Boolᵖ) OnRead(ϟs *gfxapi.State) Boolᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Boolᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Boolᵖ) OnWrite(ϟs *gfxapi.State) Boolᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Boolᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Boolᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -758,18 +756,18 @@ func (p Voidᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Voidᵖ) OnRead(ϟs *gfxapi.State) Voidᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Voidᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Voidᵖ) OnWrite(ϟs *gfxapi.State) Voidᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Voidᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Voidᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -798,28 +796,28 @@ func (p Remappedᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Read reads and returns the remapped element at the pointer.
-func (p Remappedᵖ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) remapped {
-	return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+func (p Remappedᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) remapped {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
 // Write writes value to the remapped element at the pointer.
-func (p Remappedᵖ) Write(value remapped, ϟs *gfxapi.State) {
-	p.Slice(0, 1, ϟs).Write([]remapped{value}, ϟs)
+func (p Remappedᵖ) Write(value remapped, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]remapped{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Remappedᵖ) OnRead(ϟs *gfxapi.State) Remappedᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Remappedᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Remappedᵖ) OnWrite(ϟs *gfxapi.State) Remappedᵖ {
-	if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-		f(p.Pointer.Range(p.ElementSize(ϟs)))
-	}
+func (p Remappedᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Remappedᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedᵖ {
+	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
@@ -846,8 +844,8 @@ func MakeBoolˢ(count uint64, ϟs *gfxapi.State) Boolˢ {
 }
 
 // Clone returns a copy of the Boolˢ in a new memory pool.
-func (s Boolˢ) Clone(ϟs *gfxapi.State) Boolˢ {
-	s.OnRead(ϟs)
+func (s Boolˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -897,12 +895,12 @@ func AsBoolˢ(s Slice, ϟs *gfxapi.State) Boolˢ {
 }
 
 // Read reads and returns all the bool elements in this Boolˢ.
-func (s Boolˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []bool {
+func (s Boolˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []bool {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]bool, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Bool(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Bool(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -912,7 +910,7 @@ func (s Boolˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) [
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64 {
+func (s Boolˢ) Write(src []bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -921,34 +919,48 @@ func (s Boolˢ) Write(src []bool, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Boolˢ) Copy(src Boolˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Boolˢ) {
+func (dst Boolˢ) Copy(src Boolˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Boolˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Boolˢ) OnRead(ϟs *gfxapi.State) Boolˢ {
+func (s Boolˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Boolˢ) OnWrite(ϟs *gfxapi.State) Boolˢ {
+func (s Boolˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Boolˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1000,8 +1012,8 @@ func MakeCharˢ(count uint64, ϟs *gfxapi.State) Charˢ {
 }
 
 // Clone returns a copy of the Charˢ in a new memory pool.
-func (s Charˢ) Clone(ϟs *gfxapi.State) Charˢ {
-	s.OnRead(ϟs)
+func (s Charˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1051,12 +1063,12 @@ func AsCharˢ(s Slice, ϟs *gfxapi.State) Charˢ {
 }
 
 // Read reads and returns all the byte elements in this Charˢ.
-func (s Charˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []byte {
+func (s Charˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []byte {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]byte, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint8(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Uint8(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -1066,7 +1078,7 @@ func (s Charˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) [
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64 {
+func (s Charˢ) Write(src []byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1075,34 +1087,48 @@ func (s Charˢ) Write(src []byte, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Charˢ) Copy(src Charˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charˢ) {
+func (dst Charˢ) Copy(src Charˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Charˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Charˢ) OnRead(ϟs *gfxapi.State) Charˢ {
+func (s Charˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Charˢ) OnWrite(ϟs *gfxapi.State) Charˢ {
+func (s Charˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Charˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1143,8 +1169,8 @@ func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
 }
 
 // Clone returns a copy of the Charᵖˢ in a new memory pool.
-func (s Charᵖˢ) Clone(ϟs *gfxapi.State) Charᵖˢ {
-	s.OnRead(ϟs)
+func (s Charᵖˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1198,9 +1224,9 @@ func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ {
 }
 
 // Read reads and returns all the Charᵖ elements in this Charᵖˢ.
-func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []Charᵖ {
+func (s Charᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᵖ {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᵖ, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
 			ptr, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
@@ -1219,7 +1245,7 @@ func (s Charᵖˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
+func (s Charᵖˢ) Write(src []Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1234,38 +1260,61 @@ func (s Charᵖˢ) Write(src []Charᵖ, ϟs *gfxapi.State) uint64 {
 			}
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Charᵖˢ) {
+func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Charᵖˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	if (dst.Root.Pool == memory.ApplicationPool) != (src.Root.Pool == memory.ApplicationPool) {
-		dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> Charᵖᵖ
+		dst.Write(src.Read(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb) // Element-wise copy so we can convert u64 <-> Charᵖᵖ
 	} else {
-		src.OnRead(ϟs)
+		src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-		dst.OnWrite(ϟs)
+		dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	}
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnRead(ϟs *gfxapi.State) Charᵖˢ {
+func (s Charᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		for i := uint64(0); i < s.Count; i++ {
+			v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			if err != nil {
+				panic(err)
+			}
+			ϟb.Push(NewCharᵖ(v).value())
+			ϟb.Store(ptr)
+			ptr += step
+		}
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnWrite(ϟs *gfxapi.State) Charᵖˢ {
+func (s Charᵖˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Charᵖˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1306,8 +1355,8 @@ func MakeF32ˢ(count uint64, ϟs *gfxapi.State) F32ˢ {
 }
 
 // Clone returns a copy of the F32ˢ in a new memory pool.
-func (s F32ˢ) Clone(ϟs *gfxapi.State) F32ˢ {
-	s.OnRead(ϟs)
+func (s F32ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1357,12 +1406,12 @@ func AsF32ˢ(s Slice, ϟs *gfxapi.State) F32ˢ {
 }
 
 // Read reads and returns all the float32 elements in this F32ˢ.
-func (s F32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []float32 {
+func (s F32ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []float32 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]float32, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Float32(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Float32(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -1372,7 +1421,7 @@ func (s F32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64 {
+func (s F32ˢ) Write(src []float32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1381,34 +1430,48 @@ func (s F32ˢ) Write(src []float32, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst F32ˢ) Copy(src F32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s F32ˢ) {
+func (dst F32ˢ) Copy(src F32ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s F32ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s F32ˢ) OnRead(ϟs *gfxapi.State) F32ˢ {
+func (s F32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s F32ˢ) OnWrite(ϟs *gfxapi.State) F32ˢ {
+func (s F32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s F32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F32ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1449,8 +1512,8 @@ func MakeF64ˢ(count uint64, ϟs *gfxapi.State) F64ˢ {
 }
 
 // Clone returns a copy of the F64ˢ in a new memory pool.
-func (s F64ˢ) Clone(ϟs *gfxapi.State) F64ˢ {
-	s.OnRead(ϟs)
+func (s F64ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1500,12 +1563,12 @@ func AsF64ˢ(s Slice, ϟs *gfxapi.State) F64ˢ {
 }
 
 // Read reads and returns all the float64 elements in this F64ˢ.
-func (s F64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []float64 {
+func (s F64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []float64 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]float64, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Float64(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Float64(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -1515,7 +1578,7 @@ func (s F64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64 {
+func (s F64ˢ) Write(src []float64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1524,34 +1587,48 @@ func (s F64ˢ) Write(src []float64, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst F64ˢ) Copy(src F64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s F64ˢ) {
+func (dst F64ˢ) Copy(src F64ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s F64ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s F64ˢ) OnRead(ϟs *gfxapi.State) F64ˢ {
+func (s F64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s F64ˢ) OnWrite(ϟs *gfxapi.State) F64ˢ {
+func (s F64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s F64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) F64ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1592,8 +1669,8 @@ func MakeIntˢ(count uint64, ϟs *gfxapi.State) Intˢ {
 }
 
 // Clone returns a copy of the Intˢ in a new memory pool.
-func (s Intˢ) Clone(ϟs *gfxapi.State) Intˢ {
-	s.OnRead(ϟs)
+func (s Intˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1643,12 +1720,12 @@ func AsIntˢ(s Slice, ϟs *gfxapi.State) Intˢ {
 }
 
 // Read reads and returns all the int64 elements in this Intˢ.
-func (s Intˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []int64 {
+func (s Intˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int64 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int64, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); err == nil {
-			res[i] = v
+		if ϟv, err := binary.ReadInt(d, ϟs.Architecture.IntegerSize*8); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -1658,7 +1735,7 @@ func (s Intˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64 {
+func (s Intˢ) Write(src []int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1667,34 +1744,48 @@ func (s Intˢ) Write(src []int64, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Intˢ) Copy(src Intˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Intˢ) {
+func (dst Intˢ) Copy(src Intˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Intˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Intˢ) OnRead(ϟs *gfxapi.State) Intˢ {
+func (s Intˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Intˢ) OnWrite(ϟs *gfxapi.State) Intˢ {
+func (s Intˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Intˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Intˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1735,8 +1826,8 @@ func MakeRemappedˢ(count uint64, ϟs *gfxapi.State) Remappedˢ {
 }
 
 // Clone returns a copy of the Remappedˢ in a new memory pool.
-func (s Remappedˢ) Clone(ϟs *gfxapi.State) Remappedˢ {
-	s.OnRead(ϟs)
+func (s Remappedˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1786,12 +1877,12 @@ func AsRemappedˢ(s Slice, ϟs *gfxapi.State) Remappedˢ {
 }
 
 // Read reads and returns all the remapped elements in this Remappedˢ.
-func (s Remappedˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []remapped {
+func (s Remappedˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []remapped {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]remapped, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = remapped(v)
+		if ϟv, err := d.Uint32(); err == nil {
+			res[i] = remapped(ϟv)
 		} else {
 			panic(err)
 		}
@@ -1801,7 +1892,7 @@ func (s Remappedˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logge
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Remappedˢ) Write(src []remapped, ϟs *gfxapi.State) uint64 {
+func (s Remappedˢ) Write(src []remapped, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1810,34 +1901,83 @@ func (s Remappedˢ) Write(src []remapped, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Remappedˢ) Copy(src Remappedˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s Remappedˢ) {
+func (dst Remappedˢ) Copy(src Remappedˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Remappedˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Remappedˢ) OnRead(ϟs *gfxapi.State) Remappedˢ {
+func (s Remappedˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		for i := uint64(0); i < s.Count; i++ {
+			var v remapped
+			if ϟv, err := d.Uint32(); err == nil {
+				v = remapped(ϟv)
+			} else {
+				panic(err)
+			}
+			if key, remap := v.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, protocol.TypeUint32, v.value(ϟb, ϟa, ϟs))
+			} else {
+				ϟb.Push(v.value(ϟb, ϟa, ϟs))
+			}
+			ϟb.Store(ptr)
+			ptr += step
+		}
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Remappedˢ) OnWrite(ϟs *gfxapi.State) Remappedˢ {
+func (s Remappedˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+		size := s.ElementSize(ϟs)
+		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		for i := uint64(0); i < s.Count; i++ {
+			var v remapped
+			if ϟv, err := d.Uint32(); err == nil {
+				v = remapped(ϟv)
+			} else {
+				panic(err)
+			}
+			if key, remap := v.remap(ϟa, ϟs); remap {
+				dst, found := ϟb.Remappings[key]
+				if !found {
+					dst = ϟb.AllocateMemory(size)
+					ϟb.Remappings[key] = dst
+				}
+				ϟb.Load(protocol.TypeUint32, ptr)
+				ϟb.Store(dst)
+			}
+			ptr += step
+		}
+	}
+	return s
+}
+func (s Remappedˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Remappedˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -1878,8 +2018,8 @@ func MakeS16ˢ(count uint64, ϟs *gfxapi.State) S16ˢ {
 }
 
 // Clone returns a copy of the S16ˢ in a new memory pool.
-func (s S16ˢ) Clone(ϟs *gfxapi.State) S16ˢ {
-	s.OnRead(ϟs)
+func (s S16ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -1929,12 +2069,12 @@ func AsS16ˢ(s Slice, ϟs *gfxapi.State) S16ˢ {
 }
 
 // Read reads and returns all the int16 elements in this S16ˢ.
-func (s S16ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []int16 {
+func (s S16ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int16 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int16, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Int16(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Int16(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -1944,7 +2084,7 @@ func (s S16ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s S16ˢ) Write(src []int16, ϟs *gfxapi.State) uint64 {
+func (s S16ˢ) Write(src []int16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1953,34 +2093,48 @@ func (s S16ˢ) Write(src []int16, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst S16ˢ) Copy(src S16ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s S16ˢ) {
+func (dst S16ˢ) Copy(src S16ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s S16ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s S16ˢ) OnRead(ϟs *gfxapi.State) S16ˢ {
+func (s S16ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s S16ˢ) OnWrite(ϟs *gfxapi.State) S16ˢ {
+func (s S16ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s S16ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S16ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2021,8 +2175,8 @@ func MakeS32ˢ(count uint64, ϟs *gfxapi.State) S32ˢ {
 }
 
 // Clone returns a copy of the S32ˢ in a new memory pool.
-func (s S32ˢ) Clone(ϟs *gfxapi.State) S32ˢ {
-	s.OnRead(ϟs)
+func (s S32ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2072,12 +2226,12 @@ func AsS32ˢ(s Slice, ϟs *gfxapi.State) S32ˢ {
 }
 
 // Read reads and returns all the int32 elements in this S32ˢ.
-func (s S32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []int32 {
+func (s S32ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int32 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int32, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Int32(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Int32(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2087,7 +2241,7 @@ func (s S32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64 {
+func (s S32ˢ) Write(src []int32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2096,34 +2250,48 @@ func (s S32ˢ) Write(src []int32, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst S32ˢ) Copy(src S32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s S32ˢ) {
+func (dst S32ˢ) Copy(src S32ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s S32ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s S32ˢ) OnRead(ϟs *gfxapi.State) S32ˢ {
+func (s S32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s S32ˢ) OnWrite(ϟs *gfxapi.State) S32ˢ {
+func (s S32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s S32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S32ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2164,8 +2332,8 @@ func MakeS64ˢ(count uint64, ϟs *gfxapi.State) S64ˢ {
 }
 
 // Clone returns a copy of the S64ˢ in a new memory pool.
-func (s S64ˢ) Clone(ϟs *gfxapi.State) S64ˢ {
-	s.OnRead(ϟs)
+func (s S64ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2215,12 +2383,12 @@ func AsS64ˢ(s Slice, ϟs *gfxapi.State) S64ˢ {
 }
 
 // Read reads and returns all the int64 elements in this S64ˢ.
-func (s S64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []int64 {
+func (s S64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int64 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int64, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Int64(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Int64(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2230,7 +2398,7 @@ func (s S64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64 {
+func (s S64ˢ) Write(src []int64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2239,34 +2407,48 @@ func (s S64ˢ) Write(src []int64, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst S64ˢ) Copy(src S64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s S64ˢ) {
+func (dst S64ˢ) Copy(src S64ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s S64ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s S64ˢ) OnRead(ϟs *gfxapi.State) S64ˢ {
+func (s S64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s S64ˢ) OnWrite(ϟs *gfxapi.State) S64ˢ {
+func (s S64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s S64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S64ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2307,8 +2489,8 @@ func MakeS8ˢ(count uint64, ϟs *gfxapi.State) S8ˢ {
 }
 
 // Clone returns a copy of the S8ˢ in a new memory pool.
-func (s S8ˢ) Clone(ϟs *gfxapi.State) S8ˢ {
-	s.OnRead(ϟs)
+func (s S8ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2358,12 +2540,12 @@ func AsS8ˢ(s Slice, ϟs *gfxapi.State) S8ˢ {
 }
 
 // Read reads and returns all the int8 elements in this S8ˢ.
-func (s S8ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []int8 {
+func (s S8ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []int8 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]int8, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Int8(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Int8(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2373,7 +2555,7 @@ func (s S8ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []i
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s S8ˢ) Write(src []int8, ϟs *gfxapi.State) uint64 {
+func (s S8ˢ) Write(src []int8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2382,34 +2564,48 @@ func (s S8ˢ) Write(src []int8, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst S8ˢ) Copy(src S8ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s S8ˢ) {
+func (dst S8ˢ) Copy(src S8ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s S8ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s S8ˢ) OnRead(ϟs *gfxapi.State) S8ˢ {
+func (s S8ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s S8ˢ) OnWrite(ϟs *gfxapi.State) S8ˢ {
+func (s S8ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s S8ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) S8ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2450,8 +2646,8 @@ func MakeU16ˢ(count uint64, ϟs *gfxapi.State) U16ˢ {
 }
 
 // Clone returns a copy of the U16ˢ in a new memory pool.
-func (s U16ˢ) Clone(ϟs *gfxapi.State) U16ˢ {
-	s.OnRead(ϟs)
+func (s U16ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2501,12 +2697,12 @@ func AsU16ˢ(s Slice, ϟs *gfxapi.State) U16ˢ {
 }
 
 // Read reads and returns all the uint16 elements in this U16ˢ.
-func (s U16ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []uint16 {
+func (s U16ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint16 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint16, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint16(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Uint16(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2516,7 +2712,7 @@ func (s U16ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s U16ˢ) Write(src []uint16, ϟs *gfxapi.State) uint64 {
+func (s U16ˢ) Write(src []uint16, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2525,34 +2721,48 @@ func (s U16ˢ) Write(src []uint16, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst U16ˢ) Copy(src U16ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s U16ˢ) {
+func (dst U16ˢ) Copy(src U16ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s U16ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s U16ˢ) OnRead(ϟs *gfxapi.State) U16ˢ {
+func (s U16ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s U16ˢ) OnWrite(ϟs *gfxapi.State) U16ˢ {
+func (s U16ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s U16ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U16ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2593,8 +2803,8 @@ func MakeU32ˢ(count uint64, ϟs *gfxapi.State) U32ˢ {
 }
 
 // Clone returns a copy of the U32ˢ in a new memory pool.
-func (s U32ˢ) Clone(ϟs *gfxapi.State) U32ˢ {
-	s.OnRead(ϟs)
+func (s U32ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2644,12 +2854,12 @@ func AsU32ˢ(s Slice, ϟs *gfxapi.State) U32ˢ {
 }
 
 // Read reads and returns all the uint32 elements in this U32ˢ.
-func (s U32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []uint32 {
+func (s U32ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint32 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint32, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint32(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Uint32(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2659,7 +2869,7 @@ func (s U32ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64 {
+func (s U32ˢ) Write(src []uint32, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2668,34 +2878,48 @@ func (s U32ˢ) Write(src []uint32, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst U32ˢ) Copy(src U32ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s U32ˢ) {
+func (dst U32ˢ) Copy(src U32ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s U32ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s U32ˢ) OnRead(ϟs *gfxapi.State) U32ˢ {
+func (s U32ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s U32ˢ) OnWrite(ϟs *gfxapi.State) U32ˢ {
+func (s U32ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s U32ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U32ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2736,8 +2960,8 @@ func MakeU64ˢ(count uint64, ϟs *gfxapi.State) U64ˢ {
 }
 
 // Clone returns a copy of the U64ˢ in a new memory pool.
-func (s U64ˢ) Clone(ϟs *gfxapi.State) U64ˢ {
-	s.OnRead(ϟs)
+func (s U64ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2787,12 +3011,12 @@ func AsU64ˢ(s Slice, ϟs *gfxapi.State) U64ˢ {
 }
 
 // Read reads and returns all the uint64 elements in this U64ˢ.
-func (s U64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []uint64 {
+func (s U64ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint64 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint64, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint64(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Uint64(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2802,7 +3026,7 @@ func (s U64ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64 {
+func (s U64ˢ) Write(src []uint64, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2811,34 +3035,48 @@ func (s U64ˢ) Write(src []uint64, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst U64ˢ) Copy(src U64ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s U64ˢ) {
+func (dst U64ˢ) Copy(src U64ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s U64ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s U64ˢ) OnRead(ϟs *gfxapi.State) U64ˢ {
+func (s U64ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s U64ˢ) OnWrite(ϟs *gfxapi.State) U64ˢ {
+func (s U64ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s U64ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U64ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -2879,8 +3117,8 @@ func MakeU8ˢ(count uint64, ϟs *gfxapi.State) U8ˢ {
 }
 
 // Clone returns a copy of the U8ˢ in a new memory pool.
-func (s U8ˢ) Clone(ϟs *gfxapi.State) U8ˢ {
-	s.OnRead(ϟs)
+func (s U8ˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -2930,12 +3168,12 @@ func AsU8ˢ(s Slice, ϟs *gfxapi.State) U8ˢ {
 }
 
 // Read reads and returns all the uint8 elements in this U8ˢ.
-func (s U8ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []uint8 {
+func (s U8ˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []uint8 {
 	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]uint8, s.Count)
-	s.OnRead(ϟs)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
-		if v, err := d.Uint8(); err == nil {
-			res[i] = v
+		if ϟv, err := d.Uint8(); err == nil {
+			res[i] = ϟv
 		} else {
 			panic(err)
 		}
@@ -2945,7 +3183,7 @@ func (s U8ˢ) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []u
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64 {
+func (s U8ˢ) Write(src []uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -2954,34 +3192,48 @@ func (s U8ˢ) Write(src []uint8, ϟs *gfxapi.State) uint64 {
 			panic(err)
 		}
 	}
-	s.OnWrite(ϟs)
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return count
 }
 
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst U8ˢ) Copy(src U8ˢ, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s U8ˢ) {
+func (dst U8ˢ) Copy(src U8ˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s U8ˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟs)
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return dst, src
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s U8ˢ) OnRead(ϟs *gfxapi.State) U8ˢ {
+func (s U8ˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s U8ˢ) OnWrite(ϟs *gfxapi.State) U8ˢ {
+func (s U8ˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s U8ˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }
@@ -3022,8 +3274,8 @@ func MakeVoidˢ(count uint64, ϟs *gfxapi.State) Voidˢ {
 }
 
 // Clone returns a copy of the Voidˢ in a new memory pool.
-func (s Voidˢ) Clone(ϟs *gfxapi.State) Voidˢ {
-	s.OnRead(ϟs)
+func (s Voidˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
@@ -3064,17 +3316,31 @@ func (s Voidˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Voidˢ) OnRead(ϟs *gfxapi.State) Voidˢ {
+func (s Voidˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
 	}
 	return s
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Voidˢ) OnWrite(ϟs *gfxapi.State) Voidˢ {
+func (s Voidˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s Voidˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Voidˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
 	}
 	return s
 }

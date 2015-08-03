@@ -186,46 +186,42 @@
 
   {{if not $el_is_void}}
     // Read reads and returns the {{$el_ty}} element at the pointer.
-    func (p {{$ptr_ty}}) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) {{$el_ty}} {
-      return p.Slice(0, 1, ϟs).Read(ϟs, ϟd, ϟl)[0]
+    func (p {{$ptr_ty}}) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$el_ty}} {
+      return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
     }
 
     // Write writes value to the {{$el_ty}} element at the pointer.
-    func (p {{$ptr_ty}}) Write(value {{$el_ty}}, ϟs *gfxapi.State) {
-      p.Slice(0, 1, ϟs).Write([]{{$el_ty}}{value}, ϟs)
+    func (p {{$ptr_ty}}) Write(value {{$el_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+      p.Slice(0, 1, ϟs).Write([]{{$el_ty}}{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
     }
   {{end}}
 
   // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-  func (p {{$ptr_ty}}) OnRead(ϟs *gfxapi.State) {{$ptr_ty}} {
-    if f := ϟs.Memory[p.Pointer.Pool].OnRead; f != nil {
-      f(p.Pointer.Range(p.ElementSize(ϟs)))
-    }
+  func (p {{$ptr_ty}}) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$ptr_ty}} {
+    p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
     return p
   }
 
   // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-  func (p {{$ptr_ty}}) OnWrite(ϟs *gfxapi.State) {{$ptr_ty}} {
-    if f := ϟs.Memory[p.Pointer.Pool].OnWrite; f != nil {
-      f(p.Pointer.Range(p.ElementSize(ϟs)))
-    }
+  func (p {{$ptr_ty}}) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$ptr_ty}} {
+    p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+    return p
+  }
+
+  func (p {{$ptr_ty}}) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$ptr_ty}} {
+    p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
     return p
   }
 
   {{if $el_is_char}}
     // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
-    // If incNullTerm is true then the null-terminator is included in the slice.
-    func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) Charˢ {
+    func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
       i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
       for {
-        if b, _ := d.Uint8(); b == 0 {
-          if incNullTerm {
-            return Charˢ(p.Slice(0, i + 1, ϟs))
-          } else {
-            return Charˢ(p.Slice(0, i, ϟs))
-          }
-        }
         i++
+        if b, _ := d.Uint8(); b == 0 {
+          return Charˢ(p.Slice(0, i, ϟs))
+        }
       }
     }
   {{end}}
@@ -286,8 +282,8 @@
   }
 
   // Clone returns a copy of the {{$slice_ty}} in a new memory pool.
-  func (s {{$slice_ty}}) Clone(ϟs *gfxapi.State) {{$slice_ty}} {
-    s.OnRead(ϟs)
+  func (s {{$slice_ty}}) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
+    s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
     pool := &memory.Pool{}
     pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
     id := ϟs.NextPoolID
@@ -346,9 +342,9 @@
     }
 
     // Read reads and returns all the {{$el_ty}} elements in this {{$slice_ty}}.
-    func (s {{$slice_ty}}) Read(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) []{{$el_ty}} {
+    func (s {{$slice_ty}}) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []{{$el_ty}} {
       d, res := s.Decoder(ϟs, ϟd, ϟl), make([]{{$el_ty}}, s.Count)
-      s.OnRead(ϟs)
+      s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
       for i := range res {
         {{if $el_is_ptr}}
           if s.Root.Pool == memory.ApplicationPool {
@@ -367,7 +363,7 @@
 
     // Write copies elements from src to this slice. The number of elements copied is returned
     // which is the minimum of s.Count and len(src).
-    func (s {{$slice_ty}}) Write(src []{{$el_ty}}, ϟs *gfxapi.State) uint64 {
+    func (s {{$slice_ty}}) Write(src []{{$el_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
       count := min(s.Count, uint64(len(src)))
       s = s.Slice(0, count, ϟs)
       e := s.Encoder(ϟs)
@@ -382,41 +378,101 @@
           {{Template "Go.Encode" "Name" "src[i]" "Type" $s.To "ErrHandler" "panic(err)"}}
         {{if $el_is_ptr}} } {{end}}
       }
-      s.OnWrite(ϟs)
+      s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
       return count
     }
 
     // Copy copies elements from src to this slice.
     // The number of elements copied is the minimum of dst.Count and src.Count.
     // The slices of this and dst to the copied elements is returned.
-    func (dst {{$slice_ty}}) Copy(src {{$slice_ty}}, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (d, s {{$slice_ty}}) {
+    func (dst {{$slice_ty}}) Copy(src {{$slice_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s {{$slice_ty}}) {
       count := min(dst.Count, src.Count)
       dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
     {{if $el_is_ptr}}
       if (dst.Root.Pool == memory.ApplicationPool) != (src.Root.Pool == memory.ApplicationPool) {
-        dst.Write(src.Read(ϟs, ϟd, ϟl), ϟs) // Element-wise copy so we can convert u64 <-> {{$ptr_ty}}
+        dst.Write(src.Read(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb) // Element-wise copy so we can convert u64 <-> {{$ptr_ty}}
       } else {
     {{end}}
-      src.OnRead(ϟs)
+      src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
       ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-      dst.OnWrite(ϟs)
+      dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{if $el_is_ptr}} } {{end}}
       return dst, src
     }
   {{end}}
 
   // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-  func (s {{$slice_ty}}) OnRead(ϟs *gfxapi.State) {{$slice_ty}} {
+  func (s {{$slice_ty}}) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
     if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
       f(s.Range(ϟs))
+    }
+    if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+      s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+      {{if (GetAnnotation $s.To "replay_remap")}}
+        {{/* Element type has explicitly stated it needs custom remapping */}}
+        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+        for i := uint64(0); i < s.Count; i++ {
+          var v {{$el_ty}}
+          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(err)"}}
+          if key, remap := v.remap(ϟa, ϟs); remap {
+            loadRemap(ϟb, key, {{Template "Go.Replay.Type" $s.To}}, {{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
+          } else {
+            ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
+          }
+          ϟb.Store(ptr)
+          ptr += step
+        }
+      {{else if IsPointer ($s.To | Underlying)}}
+        {{/* Pointers need remapping to replay addresses */}}
+        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+        for i := uint64(0); i < s.Count; i++ {
+          v, err := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+          if err != nil { panic(err) }
+          ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" (printf "New%s(v)" $el_ty)}})
+          ϟb.Store(ptr)
+          ptr += step
+        }
+      {{else}}
+        ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+      {{end}}
     }
     return s
   }
 
   // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-  func (s {{$slice_ty}}) OnWrite(ϟs *gfxapi.State) {{$slice_ty}} {
+  func (s {{$slice_ty}}) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
     if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
       f(s.Range(ϟs))
+    }
+    if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+      ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+      {{if (GetAnnotation $s.To "replay_remap")}}
+        {{/* Element type has explicitly stated it needs custom remapping */}}
+        size := s.ElementSize(ϟs)
+        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+        for i := uint64(0); i < s.Count; i++ {
+          var v {{$el_ty}}
+          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(err)"}}
+          if key, remap := v.remap(ϟa, ϟs); remap {
+            dst, found := ϟb.Remappings[key]
+            if !found {
+              dst = ϟb.AllocateMemory(size)
+              ϟb.Remappings[key] = dst
+            }
+            ϟb.Load({{Template "Go.Replay.Type" $s.To}}, ptr)
+            ϟb.Store(dst)
+          }
+          ptr += step
+        }
+      {{end}}
+    }
+    return s
+  }
+
+  func (s {{$slice_ty}}) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
+    if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+      rng := s.Range(ϟs)
+      ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
     }
     return s
   }
@@ -794,16 +850,6 @@
   func API() gfxapi.API {
     return api{}
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the logic to retrieve the specified value.
--------------------------------------------------------------------------------
-*/}}
-{{define "Value"}}
-  c.Get{{(TypeOf $).Name}}()
 {{end}}
 
 
