@@ -996,8 +996,9 @@ const java_binary_tmpl = `{{/*
     return {{File.FieldName .Name}};¶
   «}¶
   ¶
-  public void {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {»¶
+  public {{File.ClassName File.Struct}} {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {»¶
     {{File.FieldName .Name}} = v;¶
+    return this;¶
   «}¶
 {{end}}
 
