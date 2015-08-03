@@ -120,7 +120,7 @@ func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) v
 }
 
 func (i TexturePointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if i.Pointer.Address == 0 {
+	if i.Pointer.Address == 0 || getContext(s).BoundBuffers[GLenum_GL_PIXEL_UNPACK_BUFFER] != 0 {
 		return value.AbsolutePointer(i.Pointer.Address)
 	} else {
 		return value.RemappedPointer(i.Pointer.Address)
