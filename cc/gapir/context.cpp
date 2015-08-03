@@ -154,6 +154,7 @@ void Context::registerCallbacks(Interpreter* interpreter) {
     });
 
     interpreter->registerFunction(gfxapi::Ids::BackbufferInfo, [this](Stack* stack, bool) {
+        stack->pop<bool>(); /* preserveBuffersOnSwap - ignored */
         bool resetViewportScissor = stack->pop<bool>();
         uint32_t stencil_fmt = stack->pop<uint32_t>();
         uint32_t depth_fmt = stack->pop<uint32_t>();
@@ -180,10 +181,22 @@ void Context::registerCallbacks(Interpreter* interpreter) {
             case static_cast<uint32_t>(gfxapi::GLenum::GL_DEPTH24_STENCIL8):
                 stencilSize = 8;
         }
-        GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
-                   width, height, color_fmt, depth_fmt, stencil_fmt);
-        if (mBoundRenderer == nullptr) {
-            GAPID_INFO("backbufferInfo called without a bound renderer\n");
+        if (stack->isValid()) {
+            GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
+                    width, height, color_fmt, depth_fmt, stencil_fmt,
+                    resetViewportScissor ? "true" : "false");
+            if (mBoundRenderer == nullptr) {
+                GAPID_INFO("backbufferInfo called without a bound renderer\n");
+                return false;
+            }
+            mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
+            if (resetViewportScissor) {
+                gfxapi::glViewport(0, 0, width, height);
+                gfxapi::glScissor(0, 0, width, height);
+            }
+            return true;
+        } else {
+            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
             return false;
         }
         mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);

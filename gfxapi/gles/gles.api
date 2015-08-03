@@ -390,6 +390,7 @@ class Context {
   GLenum                                            GenerateMipmapHint    = GL_DONT_CARE
   map!(GLenum, s32)                                 PixelStorage
   Objects                                           Instances
+  bool                                              PreserveBuffersOnSwap
 }
 
 type u64 ThreadID

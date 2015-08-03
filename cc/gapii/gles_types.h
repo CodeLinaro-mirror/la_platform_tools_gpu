@@ -1326,6 +1326,10 @@ struct Context {
         mInstances = v;
         return *this;
     }
+    inline Context& SetPreserveBuffersOnSwap(bool v) {
+        mPreserveBuffersOnSwap = v;
+        return *this;
+    }
 
     ContextID mIdentifier;
     BlendState mBlending;
@@ -1343,6 +1347,7 @@ struct Context {
     uint32_t mGenerateMipmapHint;
     GLenumToS32 mPixelStorage;
     Objects mInstances;
+    bool mPreserveBuffersOnSwap;
 };
 
 typedef std::unordered_map<CGLContextObj, std::shared_ptr<Context>> CGLContextObjToContext__R;

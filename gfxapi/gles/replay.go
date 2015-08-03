@@ -109,12 +109,27 @@ func (a api) Replay(
 
 	if !profiling {
 		// Not profiling. Add optimisation transforms.
-		transforms.Add(earlyTerminator, skipDrawCalls)
+		transforms.Add(earlyTerminator)
+
+		// Check to see if any contexts use the 'preserveBuffersOnSwap' flag.
+		// If it is used, we can't skip draw calls.
+		preserveBuffersOnSwap := false
+		for _, a := range atoms.Atoms {
+			if b, ok := a.(*BackbufferInfo); ok && b.PreserveBuffersOnSwap {
+				preserveBuffersOnSwap = true
+				break
+			}
+		}
+
+		if !preserveBuffersOnSwap {
+			transforms.Add(skipDrawCalls)
+		}
 	}
 
 	transforms.Add(
 		injector,
-		remapAttributes())
+		remapAttributes(),
+	)
 
 	// Device-dependent transforms.
 	transforms.Add(

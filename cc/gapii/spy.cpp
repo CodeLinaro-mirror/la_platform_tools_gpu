@@ -28,8 +28,10 @@
 
 namespace {
 
-const uint32_t EGL_WIDTH  = 0x3057;
-const uint32_t EGL_HEIGHT = 0x3056;
+const uint32_t EGL_WIDTH            = 0x3057;
+const uint32_t EGL_HEIGHT           = 0x3056;
+const uint32_t EGL_SWAP_BEHAVIOR    = 0x3093;
+const uint32_t EGL_BUFFER_PRESERVED = 0x3094;
 
 const uint32_t GLX_WIDTH  = 0x801D;
 const uint32_t GLX_HEIGHT = 0x801E;
@@ -86,11 +88,20 @@ EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface r
     if (res != 0 && draw != nullptr) {
         int width = 0;
         int height = 0;
+        int swapBehavior = 0;
         mImports.eglQuerySurface(display, draw, EGL_WIDTH, &width);
         mImports.eglQuerySurface(display, draw, EGL_HEIGHT, &height);
+        mImports.eglQuerySurface(display, draw, EGL_SWAP_BEHAVIOR, &swapBehavior);
+
+        bool resetViewportScissor = true;
+        bool preserveBuffersOnSwap = swapBehavior == EGL_BUFFER_PRESERVED;
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+        GlesSpy::backbufferInfo(
+                width, height,
+                GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
+                resetViewportScissor,
+                preserveBuffersOnSwap);
     }
 
     return res;
@@ -104,8 +115,11 @@ BOOL Spy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 #if TARGET_OS == GAPID_OS_WINDOWS
         wgl::FramebufferInfo info;
         wgl::getFramebufferInfo(hdc, info);
-        GlesSpy::backbufferInfo(info.width, info.height,
-                info.colorFormat, info.depthFormat, info.stencilFormat, true);
+        GlesSpy::backbufferInfo(
+                info.width, info.height,
+                info.colorFormat, info.depthFormat, info.stencilFormat,
+                /* resetViewportScissor */ true,
+                /* preserveBuffersOnSwap */ false);
 #endif // TARGET_OS
     }
 
@@ -129,7 +143,11 @@ CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
         int height = bounds[3] - bounds[1]; // size.y - origin.y
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+        GlesSpy::backbufferInfo(
+                width, height,
+                GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
+                /* resetViewportScissor */ true,
+                /* preserveBuffersOnSwap */ false);
     }
     return err;
 }
@@ -145,7 +163,11 @@ Bool Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable rea
         mImports.glXQueryDrawable(display, draw, GLX_HEIGHT, &height);
 
         // TODO: Probe formats
-        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+        GlesSpy::backbufferInfo(
+                width, height,
+                GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
+                /* resetViewportScissor */ true,
+                /* preserveBuffersOnSwap */ false);
     }
 
     return res;
@@ -163,7 +185,10 @@ Bool Spy::glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx) {
 
         // TODO: Probe formats
         GlesSpy::backbufferInfo(
-            width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+                width, height,
+                GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8,
+                /* resetViewportScissor */ true,
+                /* preserveBuffersOnSwap */ false);
     }
 
     return res;

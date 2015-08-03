@@ -250,7 +250,7 @@ var funcInfoArchitecture = builder.FunctionInfo{ID: 215, ReturnType: protocol.Ty
 var funcInfoReplayCreateRenderer = builder.FunctionInfo{ID: 216, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoReplayBindRenderer = builder.FunctionInfo{ID: 217, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoSwitchThread = builder.FunctionInfo{ID: 218, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoBackbufferInfo = builder.FunctionInfo{ID: 219, ReturnType: protocol.TypeVoid, Parameters: 7}
 var funcInfoStartTimer = builder.FunctionInfo{ID: 220, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoStopTimer = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 222, ReturnType: protocol.TypeVoid, Parameters: 0}
@@ -5198,9 +5198,10 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                  // Contextʳ
-	GetContext_139_result := context                                                              // Contextʳ
-	ctx := GetContext_139_result                                                                  // Contextʳ
+	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
+	GetContext_139_result := context             // Contextʳ
+	ctx := GetContext_139_result                 // Contextʳ
+	ctx.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
 	color_id := RenderbufferId(backbuffer.Attachments.Get(GLenum_GL_COLOR_ATTACHMENT0).Object)    // RenderbufferId
 	color_buffer := ctx.Instances.Renderbuffers.Get(color_id)                                     // Renderbufferʳ
@@ -5229,6 +5230,7 @@ func (ϟa *BackbufferInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(value.U32(ϟa.DepthFmt))
 	ϟb.Push(value.U32(ϟa.StencilFmt))
 	ϟb.Push(value.Bool(ϟa.ResetViewportScissor))
+	ϟb.Push(value.Bool(ϟa.PreserveBuffersOnSwap))
 	ϟb.Call(funcInfoBackbufferInfo)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _, _, _, _, _, _ = context, GetContext_139_result, ctx, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer

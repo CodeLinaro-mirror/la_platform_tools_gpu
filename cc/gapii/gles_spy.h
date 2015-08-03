@@ -322,7 +322,8 @@ public:
     inline void replayBindRenderer(uint32_t id);
     inline void switchThread(uint64_t threadID);
     inline void backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
-                               uint32_t depth_fmt, uint32_t stencil_fmt, bool resetViewportScissor);
+                               uint32_t depth_fmt, uint32_t stencil_fmt, bool resetViewportScissor,
+                               bool preserveBuffersOnSwap);
     inline void startTimer(uint8_t index);
     inline uint64_t stopTimer(uint8_t index);
     inline void flushPostBuffer();
@@ -6207,15 +6208,16 @@ inline void GlesSpy::switchThread(uint64_t threadID) {
 
 inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                     uint32_t depth_fmt, uint32_t stencil_fmt,
-                                    bool resetViewportScissor) {
-    GAPID_INFO("backbufferInfo(%" PRId32 ", %" PRId32 ", %u, %u, %u, %d)\n", width, height,
-               color_fmt, depth_fmt, stencil_fmt, resetViewportScissor);
+                                    bool resetViewportScissor, bool preserveBuffersOnSwap) {
+    GAPID_INFO("backbufferInfo(%" PRId32 ", %" PRId32 ", %u, %u, %u, %d, %d)\n", width, height,
+               color_fmt, depth_fmt, stencil_fmt, resetViewportScissor, preserveBuffersOnSwap);
 
     Observations observations;
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_139_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_139_result;
+        l_ctx->mPreserveBuffersOnSwap = preserveBuffersOnSwap;
         std::shared_ptr<Framebuffer> l_backbuffer =
                 l_ctx->mInstances.mFramebuffers[(FramebufferId)(0)];
         RenderbufferId l_color_id =
@@ -6248,7 +6250,8 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
     observe(observations.mWrites);
 
     gapic::coder::gles::BackbufferInfo coder(observations, width, height, color_fmt, depth_fmt,
-                                             stencil_fmt, resetViewportScissor);
+                                             stencil_fmt, resetViewportScissor,
+                                             preserveBuffersOnSwap);
     mEncoder->Object(&coder);
 }
 
