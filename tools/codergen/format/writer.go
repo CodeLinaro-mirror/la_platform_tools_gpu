@@ -42,6 +42,7 @@ type Writer struct {
 	out       *tabwriter.Writer
 	space     bytes.Buffer
 	depth     int
+	lastDepth int
 	newline   bool
 	Indent    string
 	disabled  bool
@@ -93,6 +94,11 @@ func (w *Writer) Write(data []byte) (n int, err error) {
 		default:
 			if w.newline {
 				w.newline = false
+				if w.depth != w.lastDepth {
+					// indentation is different to last real write, so flush the tabwriter
+					w.Flush()
+					w.lastDepth = w.depth
+				}
 				if w.depth > 0 {
 					w.runeBuf[0] = tabwriter.Escape
 					w.out.Write(w.runeBuf[:1])

@@ -243,7 +243,6 @@ const go_binary_tmpl = `{{/*
       {{if not (len .Fields)}}
         Fields:║[]schema.Field{},¶
       {{else}}
-        ø
         Fields: []schema.Field{»¶
           {{range .Fields}}
             {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
