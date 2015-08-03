@@ -17,9 +17,11 @@ package template
 import (
 	"fmt"
 	"io"
+	"strconv"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/tools/codergen/format"
 )
 
 type variable struct {
@@ -43,9 +45,14 @@ func (t *Templates) Call(prefix string, arg interface{}) (string, error) {
 }
 
 func (t *Templates) Section(name string) (string, error) {
-	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionStart, name))
+	w, ok := t.writer.(*format.Writer)
+	if !ok {
+		return "", fmt.Errorf("Section called inside nested writer")
+	}
+	depth := strconv.Itoa(w.Depth)
+	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionStart, name, depth))
 	err := t.execute(name, t.writer, t.File)
-	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionEnd, name))
+	io.WriteString(t.writer, fmt.Sprintf(sectionMarker, sectionEnd, name, depth))
 	return "", err
 }
 
