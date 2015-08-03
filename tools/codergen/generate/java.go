@@ -68,7 +68,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 			Name:   "Java.File",
 			Arg:    JavaClass{JavaSettings: settings, Struct: s},
 			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name)+".java"),
-			Reflow: indentor(indent),
+			Indent: indent,
 		}
 	}
 	for _, s := range m.Constants {
@@ -76,7 +76,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 			Name:   "Java.Enum",
 			Arg:    JavaEnum{JavaSettings: settings, ConstantSet: s},
 			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Type.String())+".java"),
-			Reflow: indentor(indent),
+			Indent: indent,
 		}
 	}
 	for _, s := range m.Services {
@@ -85,7 +85,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 				Name:   "Java." + e,
 				Arg:    JavaService{JavaSettings: settings, Service: s},
 				Output: filepath.Join(path, source, pkgPath, s.Name+e+".java"),
-				Reflow: indentor(indent),
+				Indent: indent,
 			}
 		}
 	}
@@ -111,39 +111,9 @@ func (settings JavaSettings) Setter(s string) string {
 
 // returns the module if found, the extracted type name and the modified java name
 func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string, string) {
-	name := ""
-	switch v := v.(type) {
-	case string:
-		name = v
-	case *Struct:
-		name = v.Name
-	case Call:
-		name = v.Struct.Name
-	case Result:
-		name = v.Struct.Name
-	case *schema.Struct:
-		name = v.Name
-	case *schema.Interface:
-		name = v.Name
-	case *schema.Primitive:
-		name = v.Name
-	default:
-		panic(fmt.Errorf("Invalid type %T to moduleAndName", v))
-	}
-	pkg, name := "", name
-	if i := strings.LastIndexAny(name, "."); i >= 0 {
-		pkg = name[:i]
-		name = name[i+1:]
-	}
+	m, name := settings.ModuleAndName(v)
 	java := strings.Title(name)
 	java = strings.Title(strings.Replace(name, "_", "", -1))
-	m := settings.Module
-	if pkg != "" && pkg != "binary" {
-		m = settings.FindImport(pkg)
-		if m == nil {
-			m = &Module{Name: pkg}
-		}
-	}
 	return m, name, java
 }
 

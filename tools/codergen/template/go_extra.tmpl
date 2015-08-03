@@ -14,19 +14,30 @@
  * limitations under the License.
  */}}
 
-{{define "Go.Extra"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}{{range $s.Methods}}
-// Call {{.Name}}
-type {{.Call.Name}} struct {
-  binary.Generate
-  {{range .Call.Params}}{{.Name}} {{Call "Go.Type" .Type}}
+{{define "Go.Extra"}}
+  {{$s := .Service}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+  {{range $s.Methods}}
+    {{range .Call.Params}}{{Call "Go.Import" .Type}}{{end}}
+    {{range .Result.List}}{{Call "Go.Import" .Type}}{{end}}
   {{end}}
-}
-
-// Result {{.Name}}
-type {{.Result.Name}} struct {
-  binary.Generate
-  {{range .Result.List}}{{.Name}} {{Call "Go.Type" .Type}}
+  {{template "Go.Prelude" .}}
+  {{range $s.Methods}}
+    ¶
+    // Call {{.Name}}¶
+    type {{.Call.Name}} struct {»¶
+      binary.Generate¶
+      {{range .Call.Params}}
+        {{.Name}}║{{Call "Go.Type" .Type}}¶
+      {{end}}
+    «}¶
+    ¶
+    // Result {{.Name}}¶
+    type {{.Result.Name}} struct {»¶
+      binary.Generate¶
+      {{range .Result.List}}
+        {{.Name}}║{{Call "Go.Type" .Type}}¶
+      {{end}}
+    «}¶
   {{end}}
-}{{end}}{{end}}
+{{end}}

@@ -18,7 +18,9 @@
 package generate
 
 import (
+	"fmt"
 	"path"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -26,7 +28,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
-	"android.googlesource.com/platform/tools/gpu/tools/codergen/template"
 )
 
 // Generate is a file generation request.
@@ -36,21 +37,7 @@ type Generate struct {
 	Name   string
 	Arg    interface{}
 	Output string
-	Reflow template.PostProcess
-}
-
-const (
-	indentRune = "»"
-)
-
-func indentor(indent string) template.PostProcess {
-	indent = strings.Trim(indent, `"`)
-	if indent == "" {
-		indent = "    "
-	}
-	return func(b []byte) []byte {
-		return []byte(strings.Replace(string(b), indentRune, indent, -1))
-	}
+	Indent string
 }
 
 // Modules holds a the list of all modules in a single scan.
@@ -78,8 +65,11 @@ type Import struct {
 	Path string // The full import path.
 }
 
-// Imports represetns a list of Import declarations.
-type Imports []Import
+// Imports represents a group of sorted Import declarations.
+type ImportGroup []Import
+
+// Imports holds a set of Import declaration groups.
+type Imports []ImportGroup
 
 // Directive looks up a directive by name, and returns notset if the directive
 // is not found.
@@ -99,17 +89,86 @@ func (m *Module) Directive(name string, notset interface{}) interface{} {
 	return d
 }
 
+// ModuleAndName returns the module and type name pair.
+func (m *Module) ModuleAndName(v interface{}) (*Module, string) {
+	name := ""
+	switch v := v.(type) {
+	case string:
+		name = v
+	case *Struct:
+		name = v.Name
+	case Call:
+		name = v.Struct.Name
+	case Result:
+		name = v.Struct.Name
+	case *schema.Struct:
+		name = v.Name
+	case *schema.Interface:
+		name = v.Name
+	case *schema.Primitive:
+		name = v.Name
+	default:
+		panic(fmt.Errorf("Invalid type %T to ModuleAndName", v))
+	}
+	pkg, name := "", name
+	if i := strings.LastIndexAny(name, "."); i >= 0 {
+		pkg = name[:i]
+		name = name[i+1:]
+	}
+	found := m
+	if pkg != "" {
+		found = m.FindImport(pkg)
+		if found == nil {
+			found = &Module{Name: pkg, Import: "missing_" + pkg}
+		}
+	}
+	return found, name
+}
+
+func pathToGroup(path string) int {
+	dot := strings.IndexRune(path, '.') > 0
+	if dot {
+		return 1
+	}
+	return 0
+}
+
+func (i ImportGroup) Len() int           { return len(i) }
+func (i ImportGroup) Swap(a, b int)      { i[a], i[b] = i[b], i[a] }
+func (i ImportGroup) Less(a, b int) bool { return i[a].Path < i[b].Path }
+
 // Add adds a new import to the import list.
 func (i *Imports) Add(v Import) {
-	*i = append(*i, v)
+	g := pathToGroup(v.Path)
+	if g >= len(*i) {
+		*i = append(*i, make(Imports, (g+1)-len(*i))...)
+	}
+	group := &((*i)[g])
+	n := sort.Search(len(*group), func(n int) bool { return (*group)[n].Path >= v.Path })
+	if n < len(*group) && (*group)[n].Path == v.Path {
+		return
+	}
+	*group = append(*group, v)
+	sort.Sort(group)
+}
+
+// Count returns the total number of imports across all groups.
+func (i *Imports) Count() int {
+	count := 0
+	for _, g := range *i {
+		count += len(g)
+	}
+	return count
 }
 
 // FindName returns the import that matches the supplied name, or an empty
 // import if not present. Test the returned .Path to detect this.
 func (i Imports) FindName(name string) Import {
-	for _, e := range i {
-		if e.Name == name {
-			return e
+	for _, g := range i {
+		for _, v := range g {
+			if v.Name == name {
+				return v
+			}
 		}
 	}
 	return Import{}
@@ -118,10 +177,10 @@ func (i Imports) FindName(name string) Import {
 // FindPath finds the import for the specified import path, or an empty
 // import if not present. Test the returned .Path to detect this.
 func (i Imports) FindPath(path string) Import {
-	for _, e := range i {
-		if e.Path == path {
-			return e
-		}
+	g := pathToGroup(path)
+	n := sort.Search(len(i[g]), func(n int) bool { return i[g][n].Path >= path })
+	if n < len(i[g]) && i[g][n].Path == path {
+		return i[g][n]
 	}
 	return Import{}
 }

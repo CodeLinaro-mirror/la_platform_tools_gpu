@@ -15,21 +15,42 @@
  */}}
 
 {{define "Go.Prelude"}}
-{{$.Copyright}}
-
-package {{.Name}}
-
-import (
-	"reflect"
-	"android.googlesource.com/platform/tools/gpu/binary/any"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/rpc"
-	{{range $imp, $v := .Imports}}"{{$imp}}"
-{{end}}){{end}}
+  §{{$.Copyright}}§
+  package {{.Name}}¶
+  {{if File.Imports.Count}}
+    ¶
+    {{if eq (File.Imports.Count) 1}}
+      import {{range File.Imports}}{{range .}}"{{.Path}}"{{end}}{{end}}
+    {{else}}
+      import (»
+        {{range $g, $group := File.Imports}}
+          {{if len $group}}¶{{end}}
+          {{range $imp := $group}}
+            "{{$imp.Path}}"¶
+          {{end}}
+        {{end}}
+      «)
+    {{end}}
+    ¶
+  {{end}}
+{{end}}
 
 {{define "Go.Type"}}{{.Name}}{{end}}
 {{define "Go.Type.Any"}}interface{}{{end}}
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+
+{{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Interface"}}{{File.ImportOwner .}}{{end}}
+{{define "Go.Import.Pointer"}}{{Call "Go.Import" .Type}}{{end}}
+{{define "Go.Import.Array"}}{{Call "Go.Import" .ValueType}}{{end}}
+{{define "Go.Import.Slice"}}{{Call "Go.Import" .ValueType}}{{end}}
+{{define "Go.Import"}}{{end}}
+
+{{define "Go.ImportAny.Pointer"}}{{Call "Go.ImportAny" .Type}}{{end}}
+{{define "Go.ImportAny.Array"}}{{Call "Go.ImportAny" .ValueType}}{{end}}
+{{define "Go.ImportAny.Slice"}}{{Call "Go.ImportAny" .ValueType}}{{end}}
+{{define "Go.ImportAny.Any"}}{{File.Import "android.googlesource.com/platform/tools/gpu/binary/any"}}{{end}}
+{{define "Go.ImportAny"}}{{end}}

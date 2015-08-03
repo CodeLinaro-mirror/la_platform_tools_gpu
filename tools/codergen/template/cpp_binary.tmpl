@@ -36,67 +36,98 @@
 {{define "Cpp.Method#ID"}}Id{{end}}
 {{define "Cpp.Method"}}{{.}}{{end}}
 
-{{define "Cpp.Constructor"}}»»{{.Name | File.TypeName}}() = default;
-»»{{.Name | File.TypeName}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
-»»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
+{{define "Cpp.Constructor"}}
+  {{.Name | File.TypeName}}() = default;¶
+  {{.Name | File.TypeName}}(
+    {{range $index, $field := .Fields}}
+      {{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}
+    {{end}}
+  )•
+  {{range $index, $field := .Fields}}»
+    {{if $index}},{{else}}:{{end}}¶m{{.Name}}({{.Name}})
+  «{{end}}
+  •{}¶
+{{end}}
 
-{{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
-»»»static gapic::Id ID{ { {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } };
-»»»return ID;
-»»}{{end}}
+{{define "Cpp.ID"}}
+  virtual const gapic::Id& Id() const {»¶
+    static gapic::Id ID{ {•
+      {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
+    ,  } };¶
+    return ID;¶
+  «}¶
+{{end}}
 
-{{define "Cpp.Encoder"}}»»virtual void Encode(Encoder* e) const {
-{{range .Fields}}»»»{{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}
-{{end}}»»}{{end}}
+{{define "Cpp.Encoder"}}
+  virtual void Encode(Encoder* e) const {»¶
+    {{range .Fields}}
+      {{Call "Cpp.Encode" (Var .Type "this->m" .Name)}}¶
+    {{end}}
+  «}¶
+{{end}}
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
 {{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 
-{{define "Cpp.Encode#[]uint8"}}e->Uint32({{.Name}}.size());
-»»»e->Data({{.Name}}.data(), {{.Name}}.size());{{end}}
+{{define "Cpp.Encode#[]uint8"}}
+  e->Uint32({{.Name}}.size());¶
+  e->Data({{.Name}}.data(), {{.Name}}.size());
+{{end}}
 
-{{define "Cpp.Encode.Slice"}}e->Uint32({{.Name}}.size());
-»»»for (int i = 0; i < {{.Name}}.size(); i++) {
-»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+{{define "Cpp.Encode.Slice"}}
+  e->Uint32({{.Name}}.size());¶
+  for (int i = 0; i < {{.Name}}.size(); i++) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Cpp.Encode.Array"}}
-»»»for (int i = 0; i < {{.Type.Size}}; i++) {
-»»»»{{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}
-»»»}{{end}}
+  ••••••••••••¶
+  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
+{{end}}
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
-{{define "Cpp.File"}}{{$.Copyright}}
 
-
-#ifndef {{template "HeaderGuard" .}}
-#define {{template "HeaderGuard" .}}
-
-namespace gapic {
-
-class Encodable;
-class Encoder;
-
-namespace coder {
-namespace {{.Namespace}} {
-{{range .Structs}}»class {{.Name | File.TypeName}}: public Encodable {
-»public:
-{{template "Cpp.Constructor" .}}
-{{template "Cpp.ID" .}}
-{{template "Cpp.Encoder" .}}
-
-{{range .Fields}}»»{{Call "Cpp.Type" .Type}} m{{.Name}};
-{{end}}»};
-
-{{end}}
-
-} // namespace {{.Namespace}}
-} // namespace coder
-} // namespace gapic
-
-#endif // {{template "HeaderGuard" .}}
+{{define "Cpp.File"}}
+  §{{$.Copyright}}§
+  ¶
+  ¶
+  ¶
+  #ifndef {{template "HeaderGuard" .}}¶
+  #define {{template "HeaderGuard" .}}¶
+  ¶
+  namespace gapic {¶
+  ¶
+  class Encodable;¶
+  class Encoder;¶
+  ¶
+  namespace coder {¶
+  namespace {{.Namespace}} {»¶
+  {{range .Structs}}
+    class {{.Name | File.TypeName}}: public Encodable {¶
+    public:»¶
+      {{template "Cpp.Constructor" .}}
+      {{template "Cpp.ID" .}}
+      {{template "Cpp.Encoder" .}}
+      ¶
+      {{range .Fields}}
+        {{Call "Cpp.Type" .Type}} m{{.Name}};¶
+      {{end}}
+      «
+    };¶
+    ¶
+  {{end}}
+  ¶
+  ¶
+  «} // namespace {{.Namespace}}¶
+  } // namespace coder¶
+  } // namespace gapic¶
+  ¶
+  #endif // {{template "HeaderGuard" .}}¶
 {{end}}

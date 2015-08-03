@@ -14,33 +14,51 @@
  * limitations under the License.
  */}}
 
-{{define "Go.Server"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}
-func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, server {{$s.Name}}) {
-  rpc.Serve(r, w, c, mtu, l, func(in interface{}) (res binary.Object) {
-    l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))
-    defer func() {
-      if err := recover(); err == nil {
-        if config.DebugRPCCalls {
-          log.Infof(l, "returned: %v", res)
-        }
-      } else {
-        msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-        log.Errorf(l, msg)
-        res = rpc.NewError(msg)
-      }
-    }()
-    switch call := in.(type) { {{range $s.Methods}}
-        case *{{.Call.Name}}:
-          if {{if .Result.Type}}res,{{end}} err := server.{{.Name}}({{range .Call.Params}}call.{{.Name}}, {{end}}l); err == nil {
-            return &{{.Result.Name}}{ {{if .Result.Type}}value:res{{end}} }
-          } else {
-            return rpc.NewError(err.Error())
-          }{{end}}
-        default:
-          return rpc.NewError("Unexpected {{$s.Name}} function: %T", call)
-    }
-  })
-}
+{{define "Go.Server"}}
+  {{$s := .Service}}
+  {{File.Import "fmt"}}
+  {{File.Import "io"}}
+  {{File.Import "runtime/debug"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/log"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/config"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
+  {{File.Import "android.googlesource.com/platform/tools/gpu/rpc"}}
+  {{template "Go.Prelude" .}}
+  ¶
+  func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, server {{$s.Name}}) {»¶
+    rpc.Serve(r, w, c, mtu, l, func(in interface{}) (res binary.Object) {»¶
+      l := log.Enter(log.Fork(l), fmt.Sprintf("%T", in))¶
+      defer func() {»¶
+        if err := recover(); err == nil {»¶
+          if config.DebugRPCCalls {»¶
+            log.Infof(l, "returned: %v", res)¶
+          «}¶
+        «} else {»¶
+          msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))¶
+          log.Errorf(l, msg)¶
+          res = rpc.NewError(msg)¶
+        «}¶
+      «}()¶
+      switch call := in.(type) {¶
+        {{range $s.Methods}}
+          case *{{.Call.Name}}:»¶
+            if {{if .Result.Type}}res, {{end}}err := server.{{.Name}}(
+              {{range .Call.Params}}
+                call.{{.Name}},•
+              {{end}}
+              l); err == nil {»¶
+              return &{{.Result.Name}}{
+                {{if .Result.Type}}value: res{{end}}
+              }¶
+            «} else {»¶
+              return rpc.NewError(err.Error())¶
+            «}¶
+          «
+        {{end}}
+          default:»¶
+            return rpc.NewError("Unexpected {{$s.Name}} function: %T", call)¶
+          «
+      }¶
+    «})¶
+  «}¶
 {{end}}

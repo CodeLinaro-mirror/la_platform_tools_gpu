@@ -14,14 +14,32 @@
  * limitations under the License.
  */}}
 
-{{define "Go.Helpers"}}{{template "Go.Prelude" .}}
-
-{{$s := .Service}}{{range $s.Methods}}
-func (c {{.Call.Name}}) Format(f fmt.State, r rune) {
-  fmt.Fprintf(f, "{{.Name}}({{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{$p.Name}}: %v{{end}})",
-    {{range $i, $p := .Call.Params}}c.{{$p.Name}},{{end}}
-  )
-}
-func (r {{.Result.Name}}) Format(f fmt.State, c rune) {
-  {{if .Result.Type}}fmt.Fprintf(f, "res: %#v", r.value){{else}}fmt.Fprintf(f, "void"){{end}}
-}{{end}}{{end}}
+{{define "Go.Helpers"}}
+  {{$s := .Service}}
+  {{File.Import "fmt"}}
+  {{template "Go.Prelude" .}}
+  ¶
+  {{range $s.Methods}}
+    func (c {{.Call.Name}}) Format(f fmt.State, r rune) {»¶
+      fmt.Fprintf(»f, "{{.Name}}(
+        {{range $i, $p := .Call.Params}}
+          {{if $i}}, {{end}}{{$p.Name}}: %v
+        {{end}}
+        )"
+        {{if len .Call.Params}},¶
+          {{range $i, $p := .Call.Params}}
+            {{if $i}}•{{end}}
+            c.{{$p.Name}},
+          {{end}}¶
+        {{end}}
+      «)¶
+    «}¶
+    func (r {{.Result.Name}}) Format(f fmt.State, c rune) {»¶
+      {{if .Result.Type}}
+        fmt.Fprintf(f, "res: %#v", r.value)
+      {{else}}
+        fmt.Fprintf(f, "void")
+      {{end}}¶
+    «}¶
+  {{end}}
+{{end}}
