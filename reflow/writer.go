@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package format
+// Package reflow supports rewriting the whitespace in a stream of runes.
+package reflow
 
 import (
 	"bytes"
@@ -31,6 +32,7 @@ const (
 	Flush    = 'ø' // flushes text, resets column detection
 )
 
+// New constructs a new reflow Writer with the default indent of 2 spaces.
 func New(w io.Writer) *Writer {
 	return &Writer{
 		out:    tabwriter.NewWriter(w, 1, 2, 1, ' ', tabwriter.StripEscape),
@@ -38,10 +40,19 @@ func New(w io.Writer) *Writer {
 	}
 }
 
+// Writer is an io.Writer that uses unicode markup to reflow the text passing
+// through it.
+// Whitespace at the start and end of input lines, along with the newline
+// characters themselves will be stripped.
+// ¶ Will be replaced by a newline.
+// • Will be converted to a space.
+// It will attempt to line up columns indicated by ║ in adjacent lines using a tabwriter.
+// The indent level can be increased by » and decreased by «.
+// § can be used to disable the reflow behaviours, and reenable them again.
 type Writer struct {
-	Depth     int
-	Indent    string
-	Disabled  bool
+	Depth     int    // The current indentation depth.
+	Indent    string // The string to repeat as the indentation.
+	Disabled  bool   // The current disabled state of the writer.
 	out       *tabwriter.Writer
 	space     bytes.Buffer
 	lastDepth int
@@ -50,6 +61,7 @@ type Writer struct {
 	runeBuf   [4]byte
 }
 
+// Write implements io.Writer with the reflow logic.
 func (w *Writer) Write(data []byte) (n int, err error) {
 	n = len(data)
 	for _, r := range string(data) {
@@ -118,12 +130,15 @@ func (w *Writer) Write(data []byte) (n int, err error) {
 	return n, err
 }
 
+// WriteRune writes the UTF-8 encoding of Unicode code point r, returning an error if it cannot.
 func (w *Writer) WriteRune(r rune) error {
 	n := utf8.EncodeRune(w.runeBuf[:], r)
 	_, err := w.out.Write(w.runeBuf[:n])
 	return err
 }
 
+// Flush causes any cached bytes to be flushed to the underlying stream.
+// This has the side effect of forcing a reset of column detection.
 func (w *Writer) Flush() {
 	w.out.Flush()
 }
