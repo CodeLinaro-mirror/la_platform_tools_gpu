@@ -83,7 +83,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	}
 
 	client := service.NewClient(multiplexer.New(rpcSocket, rpcSocket, rpcSocket, mtu, logger, nil), nil)
-	appCtx.rpc.init(log.Enter(appCtx.logger, "rpc"), client, appCtx.constants)
+	appCtx.rpc.init(logger, client, appCtx.constants)
 	appCtx.events.Init()
 	return appCtx, nil
 }
