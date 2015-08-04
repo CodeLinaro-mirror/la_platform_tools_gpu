@@ -67,7 +67,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	for _, s := range m.Structs {
 		gen <- Generate{
 			Name:   "Java.File",
-			Arg:    JavaClass{JavaSettings: settings, Struct: s},
+			Arg:    JavaClass{JavaSettings: settings.clone(), Struct: s},
 			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name)+".java"),
 			Indent: indent,
 		}
@@ -75,21 +75,26 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	for _, s := range m.Constants {
 		gen <- Generate{
 			Name:   "Java.Enum",
-			Arg:    JavaEnum{JavaSettings: settings, ConstantSet: s},
+			Arg:    JavaEnum{JavaSettings: settings.clone(), ConstantSet: s},
 			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Type.String())+".java"),
 			Indent: indent,
 		}
 	}
 	for _, s := range m.Services {
-		for _, e := range []string{"Client", "ClientImpl"} {
+		for _, e := range []string{"Client", "ClientRPC", "ClientWrapper"} {
 			gen <- Generate{
 				Name:   "Java." + e,
-				Arg:    JavaService{JavaSettings: settings, Service: s},
+				Arg:    JavaService{JavaSettings: settings.clone(), Service: s},
 				Output: filepath.Join(path, source, pkgPath, s.Name+e+".java"),
 				Indent: indent,
 			}
 		}
 	}
+}
+
+func (settings JavaSettings) clone() JavaSettings {
+	settings.Imported = map[string]struct{}{}
+	return settings
 }
 
 // FieldName converts from a go struct field name to the correct java member name.
@@ -108,6 +113,12 @@ func (settings JavaSettings) Getter(s string) string {
 func (settings JavaSettings) Setter(s string) string {
 	r, n := utf8.DecodeRuneInString(s)
 	return "set" + string(unicode.ToUpper(r)) + s[n:]
+}
+
+// MethodName converts from a go public method name to a java method name.
+func (settings JavaSettings) MethodName(s string) string {
+	r, n := utf8.DecodeRuneInString(s)
+	return string(unicode.ToLower(r)) + s[n:]
 }
 
 // returns the module if found, the extracted type name and the modified java name
@@ -141,14 +152,16 @@ func (settings JavaSettings) Import(v interface{}) string {
 	if pkg == "" {
 		return "" // Not an import
 	}
-	fullname := pkg + "." + name
-	if settings.Imported == nil {
-		settings.Imported = map[string]struct{}{}
-	} else if _, ok := settings.Imported[fullname]; ok {
+	return settings.JavaImport(pkg + "." + name)
+}
+
+// JavaImport returns v unless it is already in the import map.
+func (settings JavaSettings) JavaImport(v string) string {
+	if _, ok := settings.Imported[v]; ok {
 		return "" // Already imported
 	}
-	settings.Imported[fullname] = struct{}{}
-	return fullname
+	settings.Imported[v] = struct{}{}
+	return v
 }
 
 // ClassName returns the Java name to give the class type.

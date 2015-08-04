@@ -1097,11 +1097,10 @@ const java_client_tmpl = `{{/*
 {{define "Java.Parameters"}}{{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{Call "Java.Type" $p.Type}} {{$p.Name}}{{end}}{{end}}
 {{define "Java.Arguments"}}{{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{$p.Name}}{{end}}{{end}}
 
-{{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{.Name}}({{template "Java.Parameters" .}}){{end}}
+{{define "Java.Method"}}{{Call "Java.Future" .Result.Type}} {{File.MethodName .Name}}({{template "Java.Parameters" .}}){{end}}
 
 {{define "Java.Imports"}}
-  import com.android.tools.rpclib.binary.BinaryID;
-  import com.android.tools.rpclib.binary.BinaryObject;
+  {{Call "Java.Import" "com.android.tools.rpclib.binary.BinaryID"}}
   {{range .Service.Methods}}
     {{Call "Java.Import" .Result.Type}}
     {{range .Call.Params}}{{Call "Java.Import" .Type}}{{end}}
@@ -1111,7 +1110,7 @@ const java_client_tmpl = `{{/*
 {{define "Java.ClientBody"}}
   ¶{{/*Newline after section marker*/}}
   {{range .Service.Methods}}
-    {{template "Java.Method" .}} throws IOException, RpcException;¶
+    public abstract {{template "Java.Method" .}};¶
   {{end}}
   //{{/*Comment the following section marker*/}}
 {{end}}
@@ -1121,71 +1120,83 @@ const java_client_tmpl = `{{/*
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
-  import com.android.tools.rpclib.rpccore.RpcException;¶
+  {{Call "Java.Import" "java.util.concurrent.Future"}}
   ¶
-  import java.io.IOException;¶
-  import java.util.concurrent.Future;¶
-  ¶
-  public interface {{.Service.Name}}Client {»¶
+  public abstract class {{.Service.Name}}Client {»¶
     //{{Section "Java.ClientBody"}}¶
   «}¶
 {{end}}
 
-{{define "Java.ClientImplBody"}}
-  ¶{{/*Newline after section marker*/}}
-  private final Broadcaster myBroadcaster;¶
-  private final ExecutorService myExecutorService;¶
-
-  public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
-    myExecutorService = executorService;¶
-    myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
-  «}¶
-  {{range .Service.Methods}}
-    @Override¶
-    public {{template "Java.Method" .}} {»¶
-      return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
-    «}¶
-  {{end}}
-  ¶
-  {{range .Service.Methods}}
-    private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
-      private final {{File.ClassName .Call}} myCall;¶
-      ¶
-      private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
-        myCall = new {{File.ClassName .Call}}();¶
-        {{range .Call.Params}}
-          myCall.{{File.Setter .Name}}({{.Name}});¶
-        {{end}}
-      «}¶
-      @Override¶
-      public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
-        {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
-          return result.myValue;¶
-        {{else}}
-          myBroadcaster.Send(myCall);¶
-          return null;¶
-        {{end}}
-      «}¶
-    «}¶
-  {{end}}
-  //{{/*Comment the following section marker*/}}
-{{end}}
-
-{{define "Java.ClientImpl"}}
+{{define "Java.ClientRPC"}}
   §{{$.Copyright}}§
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
-  import com.android.tools.rpclib.rpccore.Broadcaster;
+  {{Call "Java.Import" "com.android.tools.rpclib.rpccore.Broadcaster"}}
+  {{Call "Java.Import" "java.io.InputStream"}}
+  {{Call "Java.Import" "java.io.OutputStream"}}
+  {{Call "Java.Import" "java.util.concurrent.Callable"}}
+  {{Call "Java.Import" "java.util.concurrent.ExecutorService"}}
+  {{Call "Java.Import" "java.util.concurrent.Future"}}
+  ¶
+  public class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
+    private final Broadcaster myBroadcaster;¶
+    private final ExecutorService myExecutorService;¶
+    ¶
+    public {{.Service.Name}}ClientRPC(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
+      myExecutorService = executorService;¶
+      myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
+    «}¶
+    {{range .Service.Methods}}
+      @Override¶
+      public {{template "Java.Method" .}} {»¶
+        return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
+      «}¶
+    {{end}}
+    ¶
+    {{range .Service.Methods}}
+      private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
+        private final {{File.ClassName .Call}} myCall;¶
+        ¶
+        private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
+          myCall = new {{File.ClassName .Call}}();¶
+          {{range .Call.Params}}
+            myCall.{{File.Setter .Name}}({{.Name}});¶
+          {{end}}
+        «}¶
+        @Override¶
+        public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
+          {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
+            return result.myValue;¶
+          {{else}}
+            myBroadcaster.Send(myCall);¶
+            return null;¶
+          {{end}}
+        «}¶
+      «}¶
+    {{end}}
+  «}¶
+{{end}}
 
-  import java.io.InputStream;
-  import java.io.OutputStream;
-  import java.util.concurrent.Callable;
-  import java.util.concurrent.ExecutorService;
-  import java.util.concurrent.Future;
+{{define "Java.ClientWrapper"}}
+  §{{$.Copyright}}§
+  package {{.JavaPackage}};¶
+  ¶
+  {{template "Java.Imports" .}}
+  {{Call "Java.Import" "java.util.concurrent.Future"}}
+  ¶
+  public class {{.Service.Name}}ClientWrapper extends {{.Service.Name}}Client {»¶
+    private final {{.Service.Name}}Client myClient;¶
 
-  public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {»¶
-    //{{Section "Java.ClientImplBody"}}¶
+    public {{.Service.Name}}ClientWrapper({{.Service.Name}}Client client) {»¶
+      myClient = client;¶
+    «}¶
+    {{range .Service.Methods}}
+      @Override¶
+      public {{template "Java.Method" .}} {»¶
+        return myClient.{{File.MethodName .Name}}({{template "Java.Arguments" .}});¶
+      «}¶
+    {{end}}
   «}¶
 {{end}}
 `
@@ -1234,6 +1245,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Import.Array"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Slice"}}{{Call "Java.Import" .ValueType}}{{end}}
 {{define "Java.Import.Any"}}{{if $p := File.Import "any.Box"}}import {{$p}};¶{{end}}{{end}}
+{{define "Java.Import.string"}}{{if $p := File.JavaImport .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import"}}{{end}}
 
 {{define "Java.ConstSuffix#int64"}}L{{end}}
