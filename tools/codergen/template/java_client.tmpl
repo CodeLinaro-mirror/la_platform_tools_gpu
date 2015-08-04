@@ -34,6 +34,14 @@
   {{end}}
 {{end}}
 
+{{define "Java.ClientBody"}}
+  ¶{{/*Newline after section marker*/}}
+  {{range .Service.Methods}}
+    {{template "Java.Method" .}} throws IOException, RpcException;¶
+  {{end}}
+  //{{/*Comment the following section marker*/}}
+{{end}}
+
 {{define "Java.Client"}}
   §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
@@ -45,10 +53,48 @@
   import java.util.concurrent.Future;¶
   ¶
   public interface {{.Service.Name}}Client {»¶
-    {{range .Service.Methods}}
-      {{template "Java.Method" .}} throws IOException, RpcException;¶
-    {{end}}
+    //{{Section "Java.ClientBody"}}¶
   «}¶
+{{end}}
+
+{{define "Java.ClientImplBody"}}
+  ¶{{/*Newline after section marker*/}}
+  private final Broadcaster myBroadcaster;¶
+  private final ExecutorService myExecutorService;¶
+
+  public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
+    myExecutorService = executorService;¶
+    myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
+  «}¶
+  {{range .Service.Methods}}
+    @Override¶
+    public {{template "Java.Method" .}} {»¶
+      return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
+    «}¶
+  {{end}}
+  ¶
+  {{range .Service.Methods}}
+    private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
+      private final {{File.ClassName .Call}} myCall;¶
+      ¶
+      private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
+        myCall = new {{File.ClassName .Call}}();¶
+        {{range .Call.Params}}
+          myCall.{{File.Setter .Name}}({{.Name}});¶
+        {{end}}
+      «}¶
+      @Override¶
+      public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
+        {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
+          return result.myValue;¶
+        {{else}}
+          myBroadcaster.Send(myCall);¶
+          return null;¶
+        {{end}}
+      «}¶
+    «}¶
+  {{end}}
+  //{{/*Comment the following section marker*/}}
 {{end}}
 
 {{define "Java.ClientImpl"}}
@@ -65,40 +111,6 @@
   import java.util.concurrent.Future;
 
   public class {{.Service.Name}}ClientImpl implements {{.Service.Name}}Client {»¶
-    private final Broadcaster myBroadcaster;¶
-    private final ExecutorService myExecutorService;¶
-
-    public {{.Service.Name}}ClientImpl(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
-      myExecutorService = executorService;¶
-      myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
-    «}¶
-    {{range .Service.Methods}}
-      @Override¶
-      public {{template "Java.Method" .}} {»¶
-        return myExecutorService.submit(new {{.Name}}Callable({{template "Java.Arguments" .}}));¶
-      «}¶
-    {{end}}
-    ¶
-    {{range .Service.Methods}}
-      private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
-        private final {{File.ClassName .Call}} myCall;¶
-        ¶
-        private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
-          myCall = new {{File.ClassName .Call}}();¶
-          {{range .Call.Params}}
-            myCall.{{File.Setter .Name}}({{.Name}});¶
-          {{end}}
-        «}¶
-        @Override¶
-        public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
-          {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
-            return result.myValue;¶
-          {{else}}
-            myBroadcaster.Send(myCall);¶
-            return null;¶
-          {{end}}
-        «}¶
-      «}¶
-    {{end}}
+    //{{Section "Java.ClientImplBody"}}¶
   «}¶
 {{end}}
