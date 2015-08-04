@@ -103,6 +103,7 @@ func TestGet(t *testing.T) {
 		{p.Atoms().Index(1).Field("Str").ArrayIndex(1), byte('y'), nil},
 		{p.Atoms().Index(1).Field("Str").Slice(1, 3), "yz", nil},
 		{p.Atoms().Index(1).Field("Map").MapIndex("bird"), "tweet", nil},
+		{p.Atoms().Index(1).Field("Map").MapIndex([]rune("bird")), "tweet", nil},
 
 		// Test invalid paths
 		{p.Atoms().Index(5), nil, fmt.Errorf(
@@ -125,8 +126,8 @@ func TestGet(t *testing.T) {
 			"Index at Capture(%v).Atoms[1].Str[4] is out of bounds [0-2]", p.ID)},
 		{p.Atoms().Index(1).Field("Ptr").ArrayIndex(4), nil, fmt.Errorf(
 			"Type *builder.testStruct at Capture(%v).Atoms[1].Ptr is not an array, slice or string", p.ID)},
-		{p.Atoms().Index(1).Field("Map").MapIndex(10), nil, fmt.Errorf(
-			"Map at Capture(%v).Atoms[1].Map has key of type string, got type int", p.ID)},
+		{p.Atoms().Index(1).Field("Map").MapIndex(10.0), nil, fmt.Errorf(
+			"Map at Capture(%v).Atoms[1].Map has key of type string, got type float64", p.ID)},
 		{p.Atoms().Index(1).Field("Map").MapIndex("rabbit"), nil, fmt.Errorf(
 			"Map at Capture(%v).Atoms[1].Map does not contain key rabbit", p.ID)},
 		{p.Atoms().Index(1).Field("Ptr").MapIndex("foo"), nil, fmt.Errorf(
@@ -155,6 +156,9 @@ func TestGet(t *testing.T) {
 		{path: p.Atoms().Index(0).Field("Any"), val: 0.123},
 		{path: p.Atoms().Index(0).Field("Ptr"), val: &testStruct{Str: "ddd"}},
 		{path: p.Atoms().Index(0).Field("Ptr").Field("Str"), val: "purr"},
+		{path: p.Atoms().Index(1).Field("Sli").ArrayIndex(1), val: false},
+		{path: p.Atoms().Index(1).Field("Map").MapIndex("bird"), val: "churp"},
+		{path: p.Atoms().Index(1).Field("Map").MapIndex([]rune("bird")), val: "churp"},
 
 		// Test invalid paths
 		{p.Atoms().Index(5), nil, fmt.Errorf(
@@ -175,12 +179,18 @@ func TestGet(t *testing.T) {
 			"Index at Capture(%v).Atoms[1].Str[4] is out of bounds [0-2]", p.ID)},
 		{p.Atoms().Index(1).Field("Ptr").ArrayIndex(4), nil, fmt.Errorf(
 			"Type *builder.testStruct at Capture(%v).Atoms[1].Ptr is not an array, slice or string", p.ID)},
-		{p.Atoms().Index(1).Field("Map").MapIndex(10), nil, fmt.Errorf(
-			"Map at Capture(%v).Atoms[1].Map has key of type string, got type int", p.ID)},
+		{p.Atoms().Index(1).Field("Map").MapIndex(10.0), nil, fmt.Errorf(
+			"Map at Capture(%v).Atoms[1].Map has key of type string, got type float64", p.ID)},
 		{p.Atoms().Index(1).Field("Map").MapIndex("rabbit"), nil, fmt.Errorf(
 			"Map at Capture(%v).Atoms[1].Map does not contain key rabbit", p.ID)},
 		{p.Atoms().Index(1).Field("Ptr").MapIndex("foo"), nil, fmt.Errorf(
 			"Type *builder.testStruct at Capture(%v).Atoms[1].Ptr is not a map", p.ID)},
+
+		// Test invalid sets
+		{p.Atoms().Index(1).Field("Sli").ArrayIndex(2), "blah", fmt.Errorf(
+			"Slice or array at Capture(%v).Atoms[1].Sli has element of type bool, got type string", p.ID)},
+		{p.Atoms().Index(1).Field("Map").MapIndex("bird"), 10.0, fmt.Errorf(
+			"Map at Capture(%v).Atoms[1].Map has value of type string, got type float64", p.ID)},
 	} {
 		res, err := database.Build(&Set{Path: test.path, Value: test.val}, d, l)
 		if expected := test.err; !reflect.DeepEqual(err, expected) {
