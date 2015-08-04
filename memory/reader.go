@@ -23,7 +23,7 @@ import (
 )
 
 // Maximum number of bytes to buffer
-const maxReadBuffer = 1024
+const maxReadBuffer = 0xffff
 
 // Reader returns a binary reader for the specified Slice.
 func Reader(s Slice, d database.Database, l log.Logger) io.Reader {
