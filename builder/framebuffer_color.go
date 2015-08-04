@@ -37,11 +37,11 @@ func (r *GetFramebufferColor) BuildLazy(c interface{}, d database.Database, l lo
 	imgWidth, imgHeight := uniformScale(fbWidth, fbHeight, r.Settings.MaxWidth, r.Settings.MaxHeight)
 
 	data, err := database.Store(&RenderFramebufferColor{
-		Device:    r.Device,
-		After:     r.After,
-		Width:     imgWidth,
-		Height:    imgHeight,
-		Wireframe: r.Settings.Wireframe,
+		Device:        r.Device,
+		After:         r.After,
+		Width:         imgWidth,
+		Height:        imgHeight,
+		WireframeMode: r.Settings.WireframeMode,
 	}, d, l)
 
 	if err != nil {
@@ -82,7 +82,18 @@ func (r *RenderFramebufferColor) BuildLazy(c interface{}, d database.Database, l
 		return nil, fmt.Errorf("The graphics API %s does not support reading color buffers", api.Name())
 	}
 
-	img := <-query.QueryColorBuffer(ctx, mgr, atom.ID(r.After.Index), r.Width, r.Height, r.Wireframe)
+	wireframeMode := replay.NoWireframe
+	switch r.WireframeMode {
+	case service.NoWireframe:
+	case service.AllWireframe:
+		wireframeMode = replay.AllWireframe
+	case service.WireframeOverlay:
+		wireframeMode = replay.WireframeOverlay
+	default:
+		return nil, fmt.Errorf("Unknown wireframe mode %v", r.WireframeMode)
+	}
+
+	img := <-query.QueryColorBuffer(ctx, mgr, atom.ID(r.After.Index), r.Width, r.Height, wireframeMode)
 	if img.Error != nil {
 		err := fmt.Errorf("Failed to retrieve framebuffer: %v", img.Error)
 		log.Errorf(l, "%v", err)

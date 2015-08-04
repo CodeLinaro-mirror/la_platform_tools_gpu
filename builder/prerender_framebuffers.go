@@ -28,7 +28,6 @@ func (r *PrerenderFramebuffers) BuildLazy(c interface{}, d database.Database, l 
 	renderSettings := service.RenderSettings{
 		MaxWidth:  r.Width,
 		MaxHeight: r.Height,
-		Wireframe: false,
 	}
 
 	p := r.Capture.Atoms()

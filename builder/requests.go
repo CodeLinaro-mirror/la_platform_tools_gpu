@@ -80,11 +80,11 @@ type RenderFramebufferDepth struct {
 // RenderFramebufferColor records the parameters of an internal RenderFramebufferColor request.
 type RenderFramebufferColor struct {
 	binary.Generate
-	Device    *path.Device
-	After     *path.Atom
-	Width     uint32
-	Height    uint32
-	Wireframe bool
+	Device        *path.Device
+	After         *path.Atom
+	Width         uint32
+	Height        uint32
+	WireframeMode service.WireframeMode
 }
 
 // ConvertImage is a request to decode a compressed texture.
