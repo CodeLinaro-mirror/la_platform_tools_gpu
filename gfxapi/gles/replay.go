@@ -37,7 +37,8 @@ var (
 // drawConfig is a replay Config used by colorBufferRequest and
 // depthBufferRequests.
 type drawConfig struct {
-	wireframe bool
+	wireframeMode      replay.WireframeMode
+	wireframeOverlayID atom.ID // used when wireframeMode == WireframeOverlay
 }
 
 // uniqueConfig returns a replay.Config that is guaranteed to be unique.
@@ -49,9 +50,10 @@ func uniqueConfig() replay.Config {
 
 // colorBufferRequest requests a postback of the framebuffer's color attachment.
 type colorBufferRequest struct {
-	after         atom.ID
-	width, height uint32
-	out           chan replay.Image
+	after            atom.ID
+	width, height    uint32
+	out              chan replay.Image
+	wireframeOverlay bool
 }
 
 // colorBufferRequest requests a postback of the framebuffer's depth attachment.
@@ -96,6 +98,14 @@ func (a api) Replay(
 			skipDrawCalls.Draw(req.after)
 			injector.Inject(req.after, readFramebufferColor(req.width, req.height, req.out))
 
+			cfg := cfg.(drawConfig)
+			switch cfg.wireframeMode {
+			case replay.AllWireframe:
+				transforms.Add(wireframe(d, l))
+			case replay.WireframeOverlay:
+				transforms.Add(wireframeOverlay(req.after, d, l))
+			}
+
 		case depthBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
@@ -138,10 +148,6 @@ func (a api) Replay(
 		precisionStrip(device, d, l),
 		halfFloatOESToHalfFloatARB(device))
 
-	if c, ok := cfg.(drawConfig); ok && c.wireframe {
-		transforms.Add(wireframe(d, l))
-	}
-
 	// Cleanup
 	transforms.Add(&destroyResourcesAtEOS{
 		state:  gfxapi.NewState(),
@@ -161,9 +167,18 @@ func (a api) Replay(
 	return nil
 }
 
-func (a api) QueryColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan replay.Image {
+func (a api) QueryColorBuffer(
+	ctx *replay.Context,
+	mgr *replay.Manager,
+	after atom.ID,
+	width, height uint32,
+	wireframeMode replay.WireframeMode) <-chan replay.Image {
+
 	out := make(chan replay.Image, 1)
-	c := drawConfig{wireframe: wireframe}
+	c := drawConfig{wireframeMode: wireframeMode}
+	if wireframeMode == replay.WireframeOverlay {
+		c.wireframeOverlayID = after
+	}
 	r := colorBufferRequest{after: after, width: width, height: height, out: out}
 	if err := mgr.Replay(ctx, c, r, a); err != nil {
 		out <- replay.Image{Error: err}

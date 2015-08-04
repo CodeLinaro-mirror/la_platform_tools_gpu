@@ -158,7 +158,11 @@ func (t updateColorBuffer) Run(c task.CancelSignal) {
 	settings := service.RenderSettings{
 		MaxWidth:  0xffff,
 		MaxHeight: 0xffff,
-		Wireframe: t.wireframe,
+	}
+	if t.wireframe {
+		settings.WireframeMode = service.AllWireframe
+	} else {
+		settings.WireframeMode = service.WireframeOverlay
 	}
 	if w, h, d, err := t.context.rpc.RequestColorBuffer(t.device, t.after, settings); err == nil {
 		c.Check()

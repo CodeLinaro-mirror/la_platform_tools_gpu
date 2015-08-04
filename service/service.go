@@ -167,11 +167,27 @@ type AtomRangeTimer struct {
 	Nanoseconds uint64 // The time taken for all atoms in the range.
 }
 
+// WireframeMode is an enumerator of wireframe modes that can be used by
+// RenderSettings.
+type WireframeMode int
+
+const (
+	// NoWireframe indicates that nothing should be drawn in wireframe.
+	NoWireframe = WireframeMode(iota)
+
+	// WireframeOverlay indicates that the single draw call should be overlayed
+	// with the wireframe of the mesh.
+	WireframeOverlay
+
+	// AllWireframe indicates that all draw calls should be displayed in wireframe.
+	AllWireframe
+)
+
 // RenderSettings contains settings and flags to be used in replaying and
 // returning a bound render target's color buffer.
 type RenderSettings struct {
 	binary.Generate
-	MaxWidth  uint32 // The desired maximum width of the image. The returned image may be larger than this.
-	MaxHeight uint32 // The desired minimum height of the image. The returned image may be larger than this.
-	Wireframe bool   // True if the all geometry should be rendered as wireframe.
+	MaxWidth      uint32        // The desired maximum width of the image. The returned image may be larger than this.
+	MaxHeight     uint32        // The desired minimum height of the image. The returned image may be larger than this.
+	WireframeMode WireframeMode // The wireframe mode to use when rendering.
 }
