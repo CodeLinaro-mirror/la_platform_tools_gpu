@@ -122,10 +122,9 @@ func (r *rpc) GetDevices() ([]device, error) {
 	return devices, nil
 }
 
-func (r *rpc) Import(name string, data []byte) (*path.Capture, error) {
-	l := r.beginRPC("Import")
-
-	return r.client.Import(name, data, l)
+func (r *rpc) ImportCapture(name string, data []byte) (*path.Capture, error) {
+	l := r.beginRPC("ImportCapture")
+	return r.client.ImportCapture(name, data, l)
 }
 
 func (r *rpc) LoadCapture(p *path.Capture) (service.Capture, error) {

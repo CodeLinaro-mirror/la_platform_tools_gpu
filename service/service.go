@@ -39,9 +39,9 @@ type Service interface {
 	// This includes all the types included in or referenced from the atom stream.
 	GetSchema(l log.Logger) (Schema, error)
 
-	// Import imports capture data emitted by the graphics spy, returning the new
-	// capture identifier.
-	Import(name string, Data []uint8, l log.Logger) (*path.Capture, error)
+	// ImportCapture imports capture data emitted by the graphics spy, returning
+	// the new capture identifier.
+	ImportCapture(name string, Data []uint8, l log.Logger) (*path.Capture, error)
 
 	// GetCaptures returns the full list of capture identifiers avaliable on the
 	// server.

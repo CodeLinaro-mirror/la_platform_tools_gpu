@@ -108,15 +108,15 @@ type resultGetTimingInfo struct {
 	value *path.TimingInfo
 }
 
-// Call Import
-type callImport struct {
+// Call ImportCapture
+type callImportCapture struct {
 	binary.Generate
 	name string
 	Data []uint8
 }
 
-// Result Import
-type resultImport struct {
+// Result ImportCapture
+type resultImportCapture struct {
 	binary.Generate
 	value *path.Capture
 }

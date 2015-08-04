@@ -113,12 +113,12 @@ func (c client) GetTimingInfo(device *path.Device, capture *path.Capture, flags 
 	return
 }
 
-func (c client) Import(name string, Data []uint8, l log.Logger) (res *path.Capture, err error) {
+func (c client) ImportCapture(name string, Data []uint8, l log.Logger) (res *path.Capture, err error) {
 	var val interface{}
-	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
-		res = val.(*resultImport).value
+	if val, err = c.Send(&callImportCapture{name: name, Data: Data}); err == nil {
+		res = val.(*resultImportCapture).value
 	} else {
-		log.Errorf(l, "Service Import failed with error: %v", err)
+		log.Errorf(l, "Service ImportCapture failed with error: %v", err)
 	}
 	return
 }

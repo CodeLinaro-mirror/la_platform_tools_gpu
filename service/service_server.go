@@ -79,9 +79,9 @@ func BindServer(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, se
 			} else {
 				return rpc.NewError(err.Error())
 			}
-		case *callImport:
-			if res, err := server.Import(call.name, call.Data, l); err == nil {
-				return &resultImport{value: res}
+		case *callImportCapture:
+			if res, err := server.ImportCapture(call.name, call.Data, l); err == nil {
+				return &resultImportCapture{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}

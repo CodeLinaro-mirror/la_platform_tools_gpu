@@ -133,7 +133,7 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-func (s rpcServer) Import(name string, data []uint8, l log.Logger) (*path.Capture, error) {
+func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path.Capture, error) {
 	list := atom.NewList()
 	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 	for {
