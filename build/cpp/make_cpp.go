@@ -127,18 +127,24 @@ func MakeCompile(sources build.FileSet, cfg Config, env build.Environment) build
 // Add make steps to construct a static library. The inputs may be a
 // combination of source and / or object files. Source file inputs will
 // generate compilation steps. Returns the output library name.
+// If intermediate is true, then the output is placed in the intermediate
+// directory instead of the output directory.
 // Note we do not get a dependency on the archiver.
-func MakeStaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) build.File {
+func MakeStaticLibrary(inputs build.FileSet, cfg Config, env build.Environment, intermediate bool) build.File {
 	objects := MakeCompile(inputs.Filter(sourcePatterns...), cfg, env)
 	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
 
 	name := cfg.Toolchain.LibName(cfg)
-	output := env.Intermediates.Join(Triplet(cfg), name).ChangeExt(cfg.Toolchain.LibExt(cfg))
+	output := cfg.OutputDir
+	if intermediate {
+		output = env.Intermediates.Join(Triplet(cfg))
+	}
+	output = output.Join(name).ChangeExt(cfg.Toolchain.LibExt(cfg))
 	if cfg.OutputExt != nil {
 		output = output.ChangeExt(*cfg.OutputExt)
 	}
 
-	makeStep("", output, objects, env.ForceBuild,
+	makeStep(cfg.Name, output, objects, env.ForceBuild,
 		func(*maker.Step) error {
 			env.Logger = log.Enter(logger(env, cfg.Name), "C++.StaticLibrary")
 			return cfg.Toolchain.Archiver(objects, output, cfg, env)

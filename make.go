@@ -96,11 +96,12 @@ func init() {
 		Apps.Gapir = Virtual("cc:replayd")
 		Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		Creator("cc:spy").DependsOn("code")
+		Creator("cc:gapii").DependsOn("code")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
 		// Runtime dependencies
 		Creator(Tools.Gapit).DependsOn("cc:spy")
-		List("runtime").DependsOn(Apps.Gapir, "cc:spy")
+		List("runtime").DependsOn(Apps.Gapir, "cc:spy", "cc:gapii")
 		Creator(gotest).DependsOn("code", "runtime")
 		if *targetOS == HostOS {
 			List("test").DependsOn("go_test", "cc_test")

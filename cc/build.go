@@ -147,11 +147,11 @@ func (t Target) Extend(n Target) Target {
 func (t Target) Build(env build.Environment) {
 	// Build gtest into a library
 	gtestSource := GtestRoot.Join("src").Glob("gtest-all.cc", "gtest_main.cc")
-	gtestLib := cpp.MakeStaticLibrary(gtestSource, t.Gtest, env)
+	gtestLib := cpp.MakeStaticLibrary(gtestSource, t.Gtest, env, true)
 
 	// Build gmock into a library
 	gmockSource := GmockRoot.Join("src").Glob("gmock-all.cc")
-	gmockLib := cpp.MakeStaticLibrary(gmockSource, t.Gmock, env)
+	gmockLib := cpp.MakeStaticLibrary(gmockSource, t.Gmock, env, true)
 
 	// Gather the source files for gapic
 	gapicSource := GapicRoot.Glob(t.SourceFiles...).
@@ -159,7 +159,7 @@ func (t Target) Build(env build.Environment) {
 		Exclude("*_test.cpp")
 
 	// Build the gapic static library.
-	gapicLib := cpp.MakeStaticLibrary(gapicSource, t.Gapic, env)
+	gapicLib := cpp.MakeStaticLibrary(gapicSource, t.Gapic, env, true)
 
 	// Gather the source files for gapii
 	gapiiSource := GapiiRoot.Glob(t.SourceFiles...).
@@ -170,7 +170,7 @@ func (t Target) Build(env build.Environment) {
 		Append(GapiiRoot.Join("gles_exports.cpp"))
 
 	// Build the gapii static library.
-	gapiiLib := cpp.MakeStaticLibrary(gapiiSource, t.Gapii, env)
+	gapiiLib := cpp.MakeStaticLibrary(gapiiSource, t.Gapii, env, false)
 	_ = gapiiLib
 
 	// Gather the source files for gapir
@@ -181,7 +181,7 @@ func (t Target) Build(env build.Environment) {
 		Append(GapirRoot.Join("gfx_api.cpp"))
 
 	// Build the gapir static library.
-	gapirLib := cpp.MakeStaticLibrary(gapirSource, t.Gapir, env)
+	gapirLib := cpp.MakeStaticLibrary(gapirSource, t.Gapir, env, true)
 
 	// Build the spy from the gapii static library.
 	// TODO: using the static-lib strips symbol visibility from the
