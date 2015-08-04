@@ -32,6 +32,13 @@ import "api/vertex_arrays.api"
 import "types.api"
 import "synthetic.api"
 
+// HACK: We want to use these types in non-generated code
+@internal @no_replay
+class generate_types {
+  u16[] u16_slice
+  u32[] u32_slice
+}
+
 alias map!(GLenum, map!(GLenum, TextureId)) TextureUnitMap
 
 extern u32 imageSize(u32 width, u32 height, GLenum format, GLenum type)

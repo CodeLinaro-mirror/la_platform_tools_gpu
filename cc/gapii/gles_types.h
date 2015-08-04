@@ -6539,6 +6539,20 @@ typedef std::unordered_map<HGLRC, std::shared_ptr<Context>> HGLRCToContext__R;
 
 typedef std::unordered_map<ThreadID, std::shared_ptr<Context>> ThreadIDToContext__R;
 
+struct generate_types {
+    inline generate_types& Setu16_slice(Slice<uint16_t> v) {
+        mu16_slice = v;
+        return *this;
+    }
+    inline generate_types& Setu32_slice(Slice<uint32_t> v) {
+        mu32_slice = v;
+        return *this;
+    }
+
+    Slice<uint16_t> mu16_slice;
+    Slice<uint32_t> mu32_slice;
+};
+
 }  // namespace gapii
 
 #endif  // GAPII_GLES_TYPES_H

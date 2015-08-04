@@ -34,11 +34,57 @@ type externs struct {
 }
 
 func (e externs) minIndex(data U8ᵖ, ty GLenum, offset, count uint32) uint32 {
-	return 0 /* TEMP */
+	v := ^uint32(0)
+	switch ty {
+	case GLenum_GL_UNSIGNED_BYTE:
+		for _, i := range data.Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v > uint32(i) {
+				v = uint32(i)
+			}
+		}
+	case GLenum_GL_UNSIGNED_SHORT:
+		for _, i := range U16ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v > uint32(i) {
+				v = uint32(i)
+			}
+		}
+	case GLenum_GL_UNSIGNED_INT:
+		for _, i := range U32ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v > i {
+				v = i
+			}
+		}
+	default:
+		panic(fmt.Errorf("Unsupported index type %v", ty))
+	}
+	return v
 }
 
-func (e externs) maxIndex(indices U8ᵖ, ty GLenum, offset, count uint32) uint32 {
-	return 0 /* TEMP */
+func (e externs) maxIndex(data U8ᵖ, ty GLenum, offset, count uint32) uint32 {
+	v := uint32(0)
+	switch ty {
+	case GLenum_GL_UNSIGNED_BYTE:
+		for _, i := range data.Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v < uint32(i) {
+				v = uint32(i)
+			}
+		}
+	case GLenum_GL_UNSIGNED_SHORT:
+		for _, i := range U16ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v < uint32(i) {
+				v = uint32(i)
+			}
+		}
+	case GLenum_GL_UNSIGNED_INT:
+		for _, i := range U32ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
+			if v < i {
+				v = i
+			}
+		}
+	default:
+		panic(fmt.Errorf("Unsupported index type %v", ty))
+	}
+	return v
 }
 
 type unbounded interface {

@@ -867,6 +867,10 @@ func init() {
 	Namespace.Add((*SwitchThread)(nil).Class())
 	Namespace.Add((*TextureIdˢ)(nil).Class())
 	Namespace.Add((*TransformFeedbackIdˢ)(nil).Class())
+	Namespace.Add((*U16ˢ)(nil).Class())
+	Namespace.Add((*U16ᵖ)(nil).Class())
+	Namespace.Add((*U32ˢ)(nil).Class())
+	Namespace.Add((*U32ᵖ)(nil).Class())
 	Namespace.Add((*U64ˢ)(nil).Class())
 	Namespace.Add((*U8ᵖ)(nil).Class())
 	Namespace.Add((*Vec2fː2ᵃ)(nil).Class())
@@ -896,6 +900,7 @@ func init() {
 	Namespace.Add((*WglCreateContextAttribsARB)(nil).Class())
 	Namespace.Add((*WglMakeCurrent)(nil).Class())
 	Namespace.Add((*WglSwapBuffers)(nil).Class())
+	Namespace.Add((*generate_types)(nil).Class())
 }
 
 var (
@@ -1747,6 +1752,10 @@ var (
 	binaryIDSwitchThread                                     = binary.ID{0x82, 0x4e, 0xdc, 0x09, 0x39, 0x98, 0x76, 0xf4, 0x8a, 0x87, 0x2d, 0x58, 0x44, 0x40, 0x0f, 0x33, 0x33, 0x08, 0xb4, 0x8f}
 	binaryIDTextureIdˢ                                       = binary.ID{0x4a, 0xe8, 0xe0, 0x14, 0x09, 0x7c, 0x25, 0x10, 0x88, 0xb0, 0xf9, 0x39, 0x88, 0xd0, 0x7d, 0x81, 0xc6, 0xb6, 0xed, 0x2f}
 	binaryIDTransformFeedbackIdˢ                             = binary.ID{0xa9, 0x90, 0x44, 0x17, 0x4b, 0x82, 0x5f, 0xea, 0x8c, 0xd0, 0x7b, 0xbf, 0x88, 0x9b, 0x57, 0x07, 0x80, 0x09, 0x68, 0x37}
+	binaryIDU16ˢ                                             = binary.ID{0xab, 0xc7, 0xa4, 0xfa, 0x83, 0x18, 0xe5, 0xa4, 0x77, 0xd6, 0xe0, 0x39, 0x46, 0xe4, 0x10, 0x4a, 0x48, 0x9d, 0xb0, 0xa7}
+	binaryIDU16ᵖ                                             = binary.ID{0xba, 0xe7, 0x20, 0x23, 0x9a, 0x87, 0x4c, 0x4a, 0x81, 0x51, 0x1e, 0x87, 0xbe, 0xbf, 0xb5, 0xfe, 0x6d, 0xd4, 0x36, 0xdc}
+	binaryIDU32ˢ                                             = binary.ID{0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88}
+	binaryIDU32ᵖ                                             = binary.ID{0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf}
 	binaryIDU64ˢ                                             = binary.ID{0xe1, 0xd5, 0x02, 0xad, 0x4c, 0xbb, 0x1a, 0x36, 0xc7, 0xc8, 0x9b, 0x42, 0xfd, 0x46, 0xd0, 0xae, 0xd0, 0xa6, 0xbf, 0x6c}
 	binaryIDU8ᵖ                                              = binary.ID{0xc9, 0x85, 0x15, 0x54, 0xd3, 0x40, 0x31, 0x19, 0x7a, 0xab, 0xf9, 0x64, 0x72, 0x38, 0x96, 0xa9, 0x85, 0xc3, 0xbb, 0x4d}
 	binaryIDVec2fː2ᵃ                                         = binary.ID{0xf3, 0xfe, 0xa2, 0xa3, 0xb6, 0xdd, 0xd4, 0x15, 0x8c, 0x00, 0x2c, 0x4d, 0x78, 0x65, 0x14, 0x70, 0xe7, 0xcb, 0x7b, 0xe7}
@@ -1776,6 +1785,7 @@ var (
 	binaryIDWglCreateContextAttribsARB                       = binary.ID{0x28, 0x15, 0x85, 0xa3, 0xab, 0x16, 0x84, 0xed, 0xe0, 0xe6, 0xec, 0x92, 0xe8, 0x14, 0x8e, 0xbe, 0x5f, 0x32, 0x72, 0x42}
 	binaryIDWglMakeCurrent                                   = binary.ID{0x86, 0xd3, 0x02, 0xb5, 0xf6, 0x1b, 0x7f, 0x3e, 0xb1, 0x23, 0x36, 0x2b, 0x9d, 0xa2, 0x13, 0xa6, 0xf6, 0xbc, 0xb3, 0x8a}
 	binaryIDWglSwapBuffers                                   = binary.ID{0xa1, 0x23, 0xcd, 0xfc, 0xb1, 0x9b, 0xcf, 0x24, 0x77, 0xab, 0x3b, 0xb0, 0x75, 0x58, 0x9b, 0x35, 0x54, 0x11, 0x3f, 0xc8}
+	binaryIDgenerate_types                                   = binary.ID{0xbc, 0x1a, 0x89, 0x8b, 0xb7, 0xba, 0x8e, 0x8b, 0x59, 0x61, 0x72, 0xac, 0x82, 0x23, 0x98, 0xd7, 0x18, 0x05, 0x6b, 0x07}
 )
 
 type binaryClassArchitecture struct{}
@@ -75280,6 +75290,194 @@ var schemaTransformFeedbackIdˢ = &schema.Class{
 	},
 }
 
+type binaryClassU16ˢ struct{}
+
+func (*U16ˢ) Class() binary.Class {
+	return (*binaryClassU16ˢ)(nil)
+}
+func doEncodeU16ˢ(e binary.Encoder, o *U16ˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU16ˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU16ˢ) ID() binary.ID      { return binaryIDU16ˢ }
+func (*binaryClassU16ˢ) New() binary.Object { return &U16ˢ{} }
+func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ˢ(e, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ˢ{}
+	return obj, doDecodeU16ˢ(d, obj)
+}
+func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ˢ(d, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Skip(d binary.Decoder) error { return doSkipU16ˢ(d) }
+func (*binaryClassU16ˢ) Schema() *schema.Class       { return schemaU16ˢ }
+
+var schemaU16ˢ = &schema.Class{
+	TypeID:  binaryIDU16ˢ,
+	Package: "gles",
+	Name:    "U16ˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassU16ᵖ struct{}
+
+func (*U16ᵖ) Class() binary.Class {
+	return (*binaryClassU16ᵖ)(nil)
+}
+func doEncodeU16ᵖ(e binary.Encoder, o *U16ᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU16ᵖ(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU16ᵖ) ID() binary.ID      { return binaryIDU16ᵖ }
+func (*binaryClassU16ᵖ) New() binary.Object { return &U16ᵖ{} }
+func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ᵖ(e, obj.(*U16ᵖ))
+}
+func (*binaryClassU16ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ᵖ{}
+	return obj, doDecodeU16ᵖ(d, obj)
+}
+func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ᵖ(d, obj.(*U16ᵖ))
+}
+func (*binaryClassU16ᵖ) Skip(d binary.Decoder) error { return doSkipU16ᵖ(d) }
+func (*binaryClassU16ᵖ) Schema() *schema.Class       { return schemaU16ᵖ }
+
+var schemaU16ᵖ = &schema.Class{
+	TypeID:  binaryIDU16ᵖ,
+	Package: "gles",
+	Name:    "U16ᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassU32ˢ struct{}
+
+func (*U32ˢ) Class() binary.Class {
+	return (*binaryClassU32ˢ)(nil)
+}
+func doEncodeU32ˢ(e binary.Encoder, o *U32ˢ) error {
+	if err := e.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) error {
+	if err := d.Value(&o.SliceInfo); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU32ˢ(d binary.Decoder) error {
+	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ˢ) ID() binary.ID      { return binaryIDU32ˢ }
+func (*binaryClassU32ˢ) New() binary.Object { return &U32ˢ{} }
+func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ˢ(e, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ˢ{}
+	return obj, doDecodeU32ˢ(d, obj)
+}
+func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ˢ(d, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Skip(d binary.Decoder) error { return doSkipU32ˢ(d) }
+func (*binaryClassU32ˢ) Schema() *schema.Class       { return schemaU32ˢ }
+
+var schemaU32ˢ = &schema.Class{
+	TypeID:  binaryIDU32ˢ,
+	Package: "gles",
+	Name:    "U32ˢ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassU32ᵖ struct{}
+
+func (*U32ᵖ) Class() binary.Class {
+	return (*binaryClassU32ᵖ)(nil)
+}
+func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
+	if err := e.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
+	if err := d.Value(&o.Pointer); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipU32ᵖ(d binary.Decoder) error {
+	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
+func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
+func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ᵖ{}
+	return obj, doDecodeU32ᵖ(d, obj)
+}
+func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
+func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
+
+var schemaU32ᵖ = &schema.Class{
+	TypeID:  binaryIDU32ᵖ,
+	Package: "gles",
+	Name:    "U32ᵖ",
+	Fields: []schema.Field{
+		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
+	},
+}
+
 type binaryClassU64ˢ struct{}
 
 func (*U64ˢ) Class() binary.Class {
@@ -76792,6 +76990,75 @@ var schemaWglSwapBuffers = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC", ID: (*HDC)(nil).Class().ID()}},
+	},
+}
+
+type binaryClassgenerate_types struct{}
+
+func (*generate_types) Class() binary.Class {
+	return (*binaryClassgenerate_types)(nil)
+}
+func doEncodegenerate_types(e binary.Encoder, o *generate_types) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.U16_slice); err != nil {
+		return err
+	}
+	if err := e.Value(&o.U32_slice); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodegenerate_types(d binary.Decoder, o *generate_types) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.U16_slice); err != nil {
+		return err
+	}
+	if err := d.Value(&o.U32_slice); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipgenerate_types(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ˢ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U32ˢ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassgenerate_types) ID() binary.ID      { return binaryIDgenerate_types }
+func (*binaryClassgenerate_types) New() binary.Object { return &generate_types{} }
+func (*binaryClassgenerate_types) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodegenerate_types(e, obj.(*generate_types))
+}
+func (*binaryClassgenerate_types) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &generate_types{}
+	return obj, doDecodegenerate_types(d, obj)
+}
+func (*binaryClassgenerate_types) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodegenerate_types(d, obj.(*generate_types))
+}
+func (*binaryClassgenerate_types) Skip(d binary.Decoder) error { return doSkipgenerate_types(d) }
+func (*binaryClassgenerate_types) Schema() *schema.Class       { return schemagenerate_types }
+
+var schemagenerate_types = &schema.Class{
+	TypeID:  binaryIDgenerate_types,
+	Package: "gles",
+	Name:    "generate_types",
+	Fields: []schema.Field{
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "U16_slice", Type: &schema.Struct{Name: "U16ˢ", ID: (*U16ˢ)(nil).Class().ID()}},
+		{Declared: "U32_slice", Type: &schema.Struct{Name: "U32ˢ", ID: (*U32ˢ)(nil).Class().ID()}},
 	},
 }
 

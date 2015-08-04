@@ -21568,6 +21568,70 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
+    class U16__S: public Encodable {
+    public:
+        U16__S() = default;
+        U16__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xab, 0xc7, 0xa4, 0xfa, 0x83, 0x18, 0xe5, 0xa4, 0x77, 0xd6, 0xe0, 0x39, 0x46, 0xe4, 0x10, 0x4a, 0x48, 0x9d, 0xb0, 0xa7,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
+    };
+
+    class U16__P: public Encodable {
+    public:
+        U16__P() = default;
+        U16__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xba, 0xe7, 0x20, 0x23, 0x9a, 0x87, 0x4c, 0x4a, 0x81, 0x51, 0x1e, 0x87, 0xbe, 0xbf, 0xb5, 0xfe, 0x6d, 0xd4, 0x36, 0xdc,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
+    class U32__S: public Encodable {
+    public:
+        U32__S() = default;
+        U32__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x7e, 0xa9, 0x64, 0x54, 0xe8, 0x49, 0x13, 0xf6, 0xf7, 0xcc, 0xcf, 0x79, 0x8e, 0xe9, 0x76, 0x73, 0xe6, 0x3a, 0x78, 0x88,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mSliceInfo);
+        }
+
+        SliceInfo mSliceInfo;
+    };
+
+    class U32__P: public Encodable {
+    public:
+        U32__P() = default;
+        U32__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x16, 0xd1, 0x24, 0xcd, 0xeb, 0x2b, 0xe2, 0x05, 0xb4, 0x18, 0xea, 0xa5, 0x29, 0x58, 0x6e, 0x08, 0xd4, 0x8d, 0xdf, 0xaf,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(this->mPointer);
+        }
+
+        memory::Pointer mPointer;
+    };
+
     class U64__S: public Encodable {
     public:
         U64__S() = default;
@@ -22078,6 +22142,28 @@ namespace gles {
 
         atom::Observations mobservations;
         HDC mHdc;
+    };
+
+    class generate_types: public Encodable {
+    public:
+        generate_types() = default;
+        generate_types(uint64_t CreatedAt, U16__S U16_slice, U32__S U32_slice) :
+            mCreatedAt(CreatedAt),
+            mU16_slice(U16_slice),
+            mU32_slice(U32_slice) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0xbc, 0x1a, 0x89, 0x8b, 0xb7, 0xba, 0x8e, 0x8b, 0x59, 0x61, 0x72, 0xac, 0x82, 0x23, 0x98, 0xd7, 0x18, 0x05, 0x6b, 0x07,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Uint64(this->mCreatedAt);
+            e->Value(this->mU16_slice);
+            e->Value(this->mU32_slice);
+        }
+
+        uint64_t mCreatedAt;
+        U16__S mU16_slice;
+        U32__S mU32_slice;
     };
 
 
