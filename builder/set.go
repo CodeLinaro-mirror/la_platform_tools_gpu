@@ -29,8 +29,8 @@ import (
 // with the object, value or memory at p replaced with v. The path returned is
 // identical to p, but with the base changed to refer to the new capture.
 func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) (interface{}, error) {
-	p := path.Flatten(request.Path)
-	v, err := resolveChain(p, d, l)
+	paths := path.Flatten(request.Path)
+	v, err := resolveChain(paths, d, l)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 
 	// Propagate changes back down to the root
 	for i := len(v) - 1; i >= 0; i-- {
-		switch p := p[i].(type) {
+		switch p := paths[i].(type) {
 		case *path.Capture:
 			id, err := database.Store(v[i], d, l)
 			if err != nil {
@@ -101,6 +101,11 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			if err != nil {
 				return nil, err
 			}
+			val, ok := convert(reflect.ValueOf(v[i]), a.Type().Elem())
+			if !ok {
+				return nil, fmt.Errorf("Slice or array at %s has element of type %v, got type %v",
+					paths[i-1].Path(), a.Type().Elem(), val.Type())
+			}
 			if err := assign(a.Index(int(p.Index)), reflect.ValueOf(v[i])); err != nil {
 				return nil, err
 			}
@@ -111,9 +116,17 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 			if err != nil {
 				return nil, err
 			}
-			if err := assign(m.MapIndex(reflect.ValueOf(p.Key)), reflect.ValueOf(v[i])); err != nil {
-				return nil, err
+			key, ok := convert(reflect.ValueOf(p.Key), m.Type().Key())
+			if !ok {
+				return nil, fmt.Errorf("Map at %s has key of type %v, got type %v",
+					paths[i-1].Path(), m.Type().Key(), key.Type())
 			}
+			val, ok := convert(reflect.ValueOf(v[i]), m.Type().Elem())
+			if !ok {
+				return nil, fmt.Errorf("Map at %s has value of type %v, got type %v",
+					paths[i-1].Path(), m.Type().Elem(), val.Type())
+			}
+			m.SetMapIndex(key, val)
 			v[i-1] = m.Interface()
 
 		default:
@@ -125,7 +138,15 @@ func (request *Set) BuildLazy(c interface{}, d database.Database, l log.Logger) 
 }
 
 func clone(v reflect.Value) (reflect.Value, error) {
-	o := reflect.New(v.Type()).Elem()
+	var o reflect.Value
+	switch v.Kind() {
+	case reflect.Slice:
+		o = reflect.MakeSlice(v.Type(), v.Len(), v.Len())
+	case reflect.Map:
+		o = reflect.MakeMap(v.Type())
+	default:
+		o = reflect.New(v.Type()).Elem()
+	}
 	return o, shallowCopy(o, v)
 }
 
@@ -143,7 +164,8 @@ func shallowCopy(dst, src reflect.Value) error {
 
 	case reflect.Map:
 		for _, k := range src.MapKeys() {
-			dst.SetMapIndex(k, src.MapIndex(k))
+			val := src.MapIndex(k)
+			dst.SetMapIndex(k, val)
 		}
 
 	default:
