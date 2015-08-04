@@ -91,8 +91,6 @@ func (r *rpc) GetCaptures() ([]capture, error) {
 			captures[i].path = ids[i]
 			if c, err := service.GetCapture(captures[i].path, r.client, l); err == nil {
 				captures[i].info = c
-			} else {
-				log.E(l, "Failed to resolve capture %v: %v", ids[i], err)
 			}
 		}()
 	}
@@ -117,8 +115,6 @@ func (r *rpc) GetDevices() ([]device, error) {
 			devices[i].path = ids[i]
 			if d, err := service.GetDevice(devices[i].path, r.client, l); err == nil {
 				devices[i].info = d
-			} else {
-				log.E(l, "Failed to resolve device %v: %v", devices[i].path, err)
 			}
 		}()
 	}
@@ -129,19 +125,13 @@ func (r *rpc) GetDevices() ([]device, error) {
 func (r *rpc) Import(name string, data []byte) (*path.Capture, error) {
 	l := r.beginRPC("Import")
 
-	id, err := r.client.Import(name, data, l)
-	if err != nil {
-		log.E(l, "Error importing capture: %v", err)
-	}
-
-	return id, err
+	return r.client.Import(name, data, l)
 }
 
 func (r *rpc) LoadCapture(p *path.Capture) (service.Capture, error) {
 	l := r.beginRPC("LoadCapture")
 
 	if capture, err := service.GetCapture(p, r.client, l); err == nil {
-		log.E(l, "Error getting capture: %v", err)
 		return service.Capture{}, err
 	} else {
 		return *capture, nil
@@ -153,7 +143,6 @@ func (r *rpc) LoadAtoms(p *path.Atoms) ([]atom.Atom, error) {
 
 	stream, err := r.client.Get(p, l)
 	if err != nil {
-		log.E(l, "Error getting atom stream: %v", err)
 		return nil, err
 	}
 
@@ -165,7 +154,6 @@ func (r *rpc) LoadHierarchy(p *path.Hierarchy) (atom.Group, error) {
 
 	root, err := r.client.Get(p, l)
 	if err != nil {
-		log.E(l, "Error getting hierarchy: %v", err)
 		return atom.Group{}, err
 	}
 
@@ -193,7 +181,6 @@ func (r *rpc) LoadReport(capture *path.Capture) (service.Report, error) {
 
 	report, err := r.client.Get(capture.Report(), l)
 	if err != nil {
-		log.E(l, "Error loading report: %v", err)
 		return service.Report{}, nil
 	}
 
@@ -205,7 +192,6 @@ func (r *rpc) LoadState(state *path.State) (*schema.Object, error) {
 
 	object, err := r.client.Get(state, l)
 	if err != nil {
-		log.E(l, "Error loading state: %v", err)
 		return nil, err
 	}
 
@@ -217,7 +203,6 @@ func (r *rpc) LoadMemory(rng *path.MemoryRange) (service.MemoryInfo, error) {
 
 	object, err := r.client.Get(rng, l)
 	if err != nil {
-		log.E(l, "Error loading memory: %v", err)
 		return service.MemoryInfo{}, err
 	}
 
@@ -286,7 +271,6 @@ func (r *rpc) Follow(p path.Path) (path.Path, error) {
 	l := r.beginRPC("Follow")
 	p, err := r.client.Follow(p, l)
 	if err != nil {
-		log.E(l, "%v", err)
 		return nil, err
 	}
 	return p, nil
