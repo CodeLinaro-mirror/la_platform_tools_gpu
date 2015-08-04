@@ -34,48 +34,84 @@ func wireframe(d database.Database, l log.Logger) atom.Transformer {
 	l = log.Enter(l, "Wireframe")
 
 	s := gfxapi.NewState()
-	return atom.Transform("Wireframe", func(id atom.ID, a atom.Atom, out atom.Writer) {
+	return atom.Transform("Wireframe", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s, d, l); err != nil {
 			log.Errorf(l, "%v", err)
 		}
 
 		if a.Flags().IsDrawCall() {
-			c := getContext(s)
-			indices, drawMode, err := getIndices(id, a, c, s, d, l)
-			if err != nil {
-				log.Errorf(l, err.Error())
-				return
-			}
-			indices, drawMode, err = makeWireframe(indices, drawMode)
-			if err != nil {
-				log.Errorf(l, err.Error())
-				return
-			}
-
-			// Store the wire-frame data to a temporary address.
-			wireframeData, wireframeDataType := encodeIndices(indices)
-			resID, err := database.Store(wireframeData, d, l)
-			if err != nil {
-				panic(err)
-			}
-
-			// Unbind the index buffer
-			oldIndexBufferID := c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
-			out.Write(id,
-				NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0).
-					AddRead(memory.Tmp.Range(uint64(len(wireframeData))), resID))
-
-			// Draw the wire-frame
-			out.Write(id, NewGlDrawElements(
-				drawMode, int32(len(indices)), wireframeDataType, memory.Tmp))
-
-			// Rebind the old index buffer
-			out.Write(id, NewGlBindBuffer(
-				GLenum_GL_ELEMENT_ARRAY_BUFFER, oldIndexBufferID))
+			drawWireframe(i, a, s, d, l, out)
 		} else {
-			out.Write(id, a)
+			out.Write(i, a)
 		}
 	})
+}
+
+// wireframeOverlay returns an atom transform that renders the wireframe of the
+// mesh over of the specified draw call.
+func wireframeOverlay(id atom.ID, d database.Database, l log.Logger) atom.Transformer {
+	l = log.Enter(l, "WireframeOverlay")
+
+	s := gfxapi.NewState()
+	return atom.Transform("WireframeOverlay", func(i atom.ID, a atom.Atom, out atom.Writer) {
+		if err := a.Mutate(s, d, l); err != nil {
+			log.Errorf(l, "%v", err)
+		}
+
+		if i == id && a.Flags().IsDrawCall() {
+			out.Write(atom.NoID, a)
+
+			t := tweaker{out: out, ctx: getContext(s)}
+			t.glEnable(GLenum_GL_BLEND)
+			t.glBlendColor(1.5, 0.5, 1.0, 1.0)
+			t.glBlendFunc(GLenum_GL_CONSTANT_COLOR, GLenum_GL_DST_COLOR)
+			if t.ctx.Rasterizing.DepthMask && t.ctx.Capabilities[GLenum_GL_DEPTH_TEST] {
+				t.glDepthMask(false)
+				t.glDepthFunc(GLenum_GL_EQUAL)
+			}
+
+			drawWireframe(i, a, s, d, l, out)
+
+			t.revert()
+		} else {
+			out.Write(i, a)
+		}
+	})
+}
+
+func drawWireframe(i atom.ID, a atom.Atom, s *gfxapi.State, d database.Database, l log.Logger, out atom.Writer) {
+	c := getContext(s)
+	indices, drawMode, err := getIndices(a, c, s, d, l)
+	if err != nil {
+		log.Errorf(l, err.Error())
+		return
+	}
+	indices, drawMode, err = makeWireframe(indices, drawMode)
+	if err != nil {
+		log.Errorf(l, err.Error())
+		return
+	}
+
+	// Store the wire-frame data to a temporary address.
+	wireframeData, wireframeDataType := encodeIndices(indices)
+	resID, err := database.Store(wireframeData, d, l)
+	if err != nil {
+		panic(err)
+	}
+
+	// Unbind the index buffer
+	oldIndexBufferID := c.BoundBuffers[GLenum_GL_ELEMENT_ARRAY_BUFFER]
+	out.Write(atom.NoID,
+		NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0).
+			AddRead(memory.Tmp.Range(uint64(len(wireframeData))), resID))
+
+	// Draw the wire-frame
+	out.Write(i, NewGlDrawElements(
+		drawMode, int32(len(indices)), wireframeDataType, memory.Tmp))
+
+	// Rebind the old index buffer
+	out.Write(atom.NoID, NewGlBindBuffer(
+		GLenum_GL_ELEMENT_ARRAY_BUFFER, oldIndexBufferID))
 }
 
 type index uint32
@@ -150,7 +186,6 @@ func encodeIndices(indices []index) ([]byte, GLenum) {
 
 // Get the effective index buffer and primitive type for draw call
 func getIndices(
-	id atom.ID,
 	a atom.Atom,
 	c *Context,
 	s *gfxapi.State,
