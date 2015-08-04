@@ -64,7 +64,7 @@ func p(addr uint64) memory.Pointer {
 
 func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w, h uint32, threshold float64, name string, after atom.ID) {
 	select {
-	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, false):
+	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, replay.NoWireframe):
 		if img.Error != nil {
 			t.Errorf("Failed to read ColorBuffer at %d for %s. Reason: %v", after, name, img.Error)
 			return
