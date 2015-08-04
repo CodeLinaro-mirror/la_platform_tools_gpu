@@ -215,12 +215,12 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			m := reflect.ValueOf(v[i-1])
 			switch m.Kind() {
 			case reflect.Map:
-				key := reflect.ValueOf(p.Key)
-				if key.Type() != m.Type().Key() {
+				key, ok := convert(reflect.ValueOf(p.Key), m.Type().Key())
+				if !ok {
 					return nil, fmt.Errorf("Map at %s has key of type %v, got type %v",
 						paths[i-1].Path(), m.Type().Key(), key.Type())
 				}
-				val := m.MapIndex(reflect.ValueOf(p.Key))
+				val := m.MapIndex(key)
 				if !val.IsValid() {
 					return nil, fmt.Errorf("Map at %s does not contain key %v",
 						paths[i-1].Path(), p.Key)
@@ -238,4 +238,15 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 	}
 
 	return v, nil
+}
+
+func convert(val reflect.Value, ty reflect.Type) (reflect.Value, bool) {
+	if valTy := val.Type(); valTy != ty {
+		if valTy.ConvertibleTo(ty) {
+			val = val.Convert(ty)
+		} else {
+			return val, false
+		}
+	}
+	return val, true
 }
