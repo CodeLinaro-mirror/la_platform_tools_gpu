@@ -86,7 +86,7 @@ func (n *StateAdapterNode) init() {
 	n.children = nil
 	if v, ok := n.value.(*schema.Object); ok {
 		for i := range v.Fields {
-			name := v.Type.Fields[i].Declared
+			name := v.Type.Fields[i].Name()
 			n.add(name, v.Fields[i], n.path.Field(name))
 		}
 	} else {
