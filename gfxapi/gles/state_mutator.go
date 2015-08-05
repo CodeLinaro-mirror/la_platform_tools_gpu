@@ -480,7 +480,13 @@ func (ϟa *GlIsQuery) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	GetContext_50_result := context              // Contextʳ
 	ctx := GetContext_50_result                  // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Queries.Contains(ϟa.Query)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Queries.Contains(ϟa.Query) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_49_major, minRequiredVersion_49_minor, context, GetContext_50_result, ctx
 	return nil
 }
@@ -801,7 +807,13 @@ func (ϟa *GlIsBuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	GetContext_93_result := context              // Contextʳ
 	ctx := GetContext_93_result                  // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Buffers.Contains(ϟa.Buffer)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Buffers.Contains(ϟa.Buffer) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_92_major, minRequiredVersion_92_minor, context, GetContext_93_result, ctx
 	return nil
 }
@@ -2832,7 +2844,13 @@ func (ϟa *GlIsQueryEXT) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	GetContext_314_result := context                                        // Contextʳ
 	ctx := GetContext_314_result                                            // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Queries.Contains(ϟa.Query)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Queries.Contains(ϟa.Query) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = requiresExtension_312_ext, requiresExtension_313_ext, context, GetContext_314_result, ctx
 	return nil
 }
@@ -2865,7 +2883,13 @@ func (ϟa *GlIsVertexArrayOES) Mutate(ϟs *gfxapi.State, ϟd database.Database, 
 	GetContext_318_result := context                                    // Contextʳ
 	ctx := GetContext_318_result                                        // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.VertexArrays.Contains(ϟa.Array)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.VertexArrays.Contains(ϟa.Array) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _ = requiresExtension_317_ext, context, GetContext_318_result, ctx
 	return nil
 }
@@ -5322,7 +5346,13 @@ func (ϟa *GlIsFramebuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	GetContext_601_result := context             // Contextʳ
 	ctx := GetContext_601_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Framebuffers.Contains(ϟa.Framebuffer)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Framebuffers.Contains(ϟa.Framebuffer) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_600_major, minRequiredVersion_600_minor, context, GetContext_601_result, ctx
 	return nil
 }
@@ -5336,7 +5366,13 @@ func (ϟa *GlIsRenderbuffer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	GetContext_603_result := context             // Contextʳ
 	ctx := GetContext_603_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Renderbuffers.Contains(ϟa.Renderbuffer)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Renderbuffers.Contains(ϟa.Renderbuffer) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_602_major, minRequiredVersion_602_minor, context, GetContext_603_result, ctx
 	return nil
 }
@@ -6376,7 +6412,13 @@ func (ϟa *GlIsProgram) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_722_result := context             // Contextʳ
 	ctx := GetContext_722_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Programs.Contains(ϟa.Program)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Programs.Contains(ϟa.Program) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_721_major, minRequiredVersion_721_minor, context, GetContext_722_result, ctx
 	return nil
 }
@@ -6401,7 +6443,13 @@ func (ϟa *GlIsShader) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	GetContext_725_result := context             // Contextʳ
 	ctx := GetContext_725_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Shaders.Contains(ϟa.Shader)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Shaders.Contains(ϟa.Shader) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_724_major, minRequiredVersion_724_minor, context, GetContext_725_result, ctx
 	return nil
 }
@@ -7649,30 +7697,84 @@ func (ϟa *GlGetBooleanv) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // Boolˢ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLbooleanˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
 	GetContext_855_result := context                                                                            // Contextʳ
 	ctx := GetContext_855_result                                                                                // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
 	case GLenum_GL_BLEND:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_BLEND), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_BLEND) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_CULL_FACE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_CULL_FACE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_CULL_FACE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DEPTH_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DEPTH_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_DEPTH_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DITHER:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DITHER), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_DITHER) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_POLYGON_OFFSET_FILL:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_POLYGON_OFFSET_FILL), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_POLYGON_OFFSET_FILL) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLE_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_COVERAGE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SAMPLE_COVERAGE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SCISSOR_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SCISSOR_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SCISSOR_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_STENCIL_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_STENCIL_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_STENCIL_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DEPTH_WRITEMASK:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.DepthMask, ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_COLOR_WRITEMASK:
@@ -8076,7 +8178,13 @@ func (ϟa *GlIsEnabled) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_887_result := context             // Contextʳ
 	ctx := GetContext_887_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Capabilities.Get(ϟa.Capability)
+	ϟa.Result = func() GLboolean {
+		if ctx.Capabilities.Get(ϟa.Capability) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_884_major, minRequiredVersion_884_minor, context, GetContext_887_result, ctx
 	return nil
 }
@@ -8768,7 +8876,13 @@ func (ϟa *GlIsTexture) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	GetContext_970_result := context             // Contextʳ
 	ctx := GetContext_970_result                 // Contextʳ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ctx.Instances.Textures.Contains(ϟa.Texture)
+	ϟa.Result = func() GLboolean {
+		if ctx.Instances.Textures.Contains(ϟa.Texture) {
+			return 1
+		} else {
+			return 0
+		}
+	}()
 	_, _, _, _, _ = minRequiredVersion_969_major, minRequiredVersion_969_minor, context, GetContext_970_result, ctx
 	return nil
 }

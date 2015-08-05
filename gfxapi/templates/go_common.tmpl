@@ -577,6 +577,16 @@
     string({{$src}}.{{Macro "Go.Memory.Read"}})
   {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
     Make{{Template "Go.Type" $.Type}}FromString({{$src}}, ϟs)
+  {{/* bool -> number */}}{{else if and (IsBool $src_ty) (IsNumericType $dst_ty)}}
+    func() {{Template "Go.Type" $.Type}} {
+      if {{$src}} {
+        return 1
+      } else {
+        return 0
+      }
+    }()
+  {{/* number -> bool */}}{{else if and (IsNumericType $src_ty) (IsBool $dst_ty)}}
+    (({{$src}}) != 0)
   {{else}}
     {{Template "Go.Type" $.Type}}({{$src}})
   {{end}}

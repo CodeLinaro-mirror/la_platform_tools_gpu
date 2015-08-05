@@ -184,7 +184,7 @@ cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* param
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsVertexArray.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsVertexArray.xhtml","OpenGL ES 3.1")
-cmd bool glIsVertexArray(VertexArrayId array) {
+cmd GLboolean glIsVertexArray(VertexArrayId array) {
   minRequiredVersion(3, 0)
   // TODO
   return ?
@@ -368,7 +368,7 @@ cmd void glVertexAttribIPointer(AttributeLocation index,
 cmd void glVertexAttribPointer(AttributeLocation location,
                                GLint             size,
                                GLenum            type,
-                               bool              normalized,
+                               GLboolean         normalized,
                                GLsizei           stride,
                                VertexPointer     data) {
   minRequiredVersion(2, 0)

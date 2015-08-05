@@ -69,7 +69,7 @@ struct GlesImports {
                                                       int32_t *params);
     typedef void(STDCALL *PFNGLGETTEXPARAMETERIUIVEXT)(uint32_t target, uint32_t pname,
                                                        uint32_t *params);
-    typedef bool(STDCALL *PFNGLISENABLEDIEXT)(uint32_t target, uint32_t index);
+    typedef uint8_t(STDCALL *PFNGLISENABLEDIEXT)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLMINSAMPLESHADINGOES)(float value);
     typedef void(STDCALL *PFNGLOBJECTLABELKHR)(uint32_t identifier, uint32_t name, int32_t length,
                                                char *label);
@@ -104,7 +104,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, uint32_t parameter,
                                                   uint32_t *value);
     typedef void(STDCALL *PFNGLGETQUERYIV)(uint32_t target, uint32_t parameter, int32_t *value);
-    typedef bool(STDCALL *PFNGLISQUERY)(uint32_t query);
+    typedef uint8_t(STDCALL *PFNGLISQUERY)(uint32_t query);
     typedef void(STDCALL *PFNGLBINDBUFFER)(uint32_t target, uint32_t buffer);
     typedef void(STDCALL *PFNGLBINDBUFFERBASE)(uint32_t target, uint32_t index, uint32_t buffer);
     typedef void(STDCALL *PFNGLBINDBUFFERRANGE)(uint32_t target, uint32_t index, uint32_t buffer,
@@ -123,7 +123,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(uint32_t target, uint32_t parameter,
                                                      int32_t *value);
     typedef void(STDCALL *PFNGLGETBUFFERPOINTERV)(uint32_t target, uint32_t pname, void **params);
-    typedef bool(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
+    typedef uint8_t(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
     typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(uint32_t target, int32_t offset, int32_t length,
                                                  uint32_t access);
     typedef uint8_t(STDCALL *PFNGLUNMAPBUFFER)(uint32_t target);
@@ -464,18 +464,19 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
     typedef void(STDCALL *PFNGLINTERPOLATEPATHSNV)(uint32_t resultPath, uint32_t pathA,
                                                    uint32_t pathB, float weight);
-    typedef bool(STDCALL *PFNGLISENABLEDIOES)(uint32_t target, uint32_t index);
-    typedef bool(STDCALL *PFNGLISENABLEDINV)(uint32_t target, uint32_t index);
-    typedef bool(STDCALL *PFNGLISFENCENV)(uint32_t fence);
-    typedef bool(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
-    typedef bool(STDCALL *PFNGLISPATHNV)(uint32_t path);
-    typedef bool(STDCALL *PFNGLISPOINTINFILLPATHNV)(uint32_t path, uint32_t mask, float x, float y);
-    typedef bool(STDCALL *PFNGLISPOINTINSTROKEPATHNV)(uint32_t path, float x, float y);
-    typedef bool(STDCALL *PFNGLISPROGRAMPIPELINEEXT)(uint32_t pipeline);
-    typedef bool(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
-    typedef bool(STDCALL *PFNGLISSYNCAPPLE)(uint64_t sync);
-    typedef bool(STDCALL *PFNGLISTEXTUREHANDLERESIDENTNV)(uint64_t handle);
-    typedef bool(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
+    typedef uint8_t(STDCALL *PFNGLISENABLEDIOES)(uint32_t target, uint32_t index);
+    typedef uint8_t(STDCALL *PFNGLISENABLEDINV)(uint32_t target, uint32_t index);
+    typedef uint8_t(STDCALL *PFNGLISFENCENV)(uint32_t fence);
+    typedef uint8_t(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
+    typedef uint8_t(STDCALL *PFNGLISPATHNV)(uint32_t path);
+    typedef uint8_t(STDCALL *PFNGLISPOINTINFILLPATHNV)(uint32_t path, uint32_t mask, float x,
+                                                       float y);
+    typedef uint8_t(STDCALL *PFNGLISPOINTINSTROKEPATHNV)(uint32_t path, float x, float y);
+    typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINEEXT)(uint32_t pipeline);
+    typedef uint8_t(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
+    typedef uint8_t(STDCALL *PFNGLISSYNCAPPLE)(uint64_t sync);
+    typedef uint8_t(STDCALL *PFNGLISTEXTUREHANDLERESIDENTNV)(uint64_t handle);
+    typedef uint8_t(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
     typedef void(STDCALL *PFNGLLABELOBJECTEXT)(uint32_t type, uint32_t object, int32_t length,
                                                char *label);
     typedef void(STDCALL *PFNGLMAKEIMAGEHANDLENONRESIDENTNV)(uint64_t handle);
@@ -807,7 +808,7 @@ struct GlesImports {
                                                   uint32_t src_factor_alpha,
                                                   uint32_t dst_factor_alpha);
     typedef void(STDCALL *PFNGLDEPTHFUNC)(uint32_t function);
-    typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, bool invert);
+    typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, uint8_t invert);
     typedef void(STDCALL *PFNGLSAMPLEMASKI)(uint32_t maskNumber, uint32_t mask);
     typedef void(STDCALL *PFNGLSCISSOR)(int32_t x, int32_t y, int32_t width, int32_t height);
     typedef void(STDCALL *PFNGLSTENCILFUNC)(uint32_t func, int32_t ref, uint32_t mask);
@@ -834,10 +835,10 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLCLEARCOLOR)(float r, float g, float b, float a);
     typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
     typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
-    typedef void(STDCALL *PFNGLCOLORMASK)(bool red, bool green, bool blue, bool alpha);
+    typedef void(STDCALL *PFNGLCOLORMASK)(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
     typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
     typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
-    typedef void(STDCALL *PFNGLDEPTHMASK)(bool enabled);
+    typedef void(STDCALL *PFNGLDEPTHMASK)(uint8_t enabled);
     typedef void(STDCALL *PFNGLFRAMEBUFFERPARAMETERI)(uint32_t target, uint32_t pname,
                                                       int32_t param);
     typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(uint32_t framebuffer_target,
@@ -866,8 +867,8 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLINVALIDATESUBFRAMEBUFFER)(uint32_t target, int32_t numAttachments,
                                                          uint32_t *attachments, int32_t x,
                                                          int32_t y, int32_t width, int32_t height);
-    typedef bool(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
-    typedef bool(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
+    typedef uint8_t(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
+    typedef uint8_t(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
     typedef void(STDCALL *PFNGLREADBUFFER)(uint32_t src);
     typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
                                            uint32_t format, uint32_t type, void *data);
@@ -964,9 +965,9 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
     typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
     typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *params);
-    typedef bool(STDCALL *PFNGLISPROGRAM)(uint32_t program);
-    typedef bool(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
-    typedef bool(STDCALL *PFNGLISSHADER)(uint32_t shader);
+    typedef uint8_t(STDCALL *PFNGLISPROGRAM)(uint32_t program);
+    typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
+    typedef uint8_t(STDCALL *PFNGLISSHADER)(uint32_t shader);
     typedef void(STDCALL *PFNGLLINKPROGRAM)(uint32_t program);
     typedef void(STDCALL *PFNGLMEMORYBARRIER)(uint32_t barriers);
     typedef void(STDCALL *PFNGLMEMORYBARRIERBYREGION)(uint32_t barriers);
@@ -1113,7 +1114,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
     typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
     typedef void(STDCALL *PFNGLGETBOOLEANI_V)(uint32_t target, uint32_t index, uint8_t *data);
-    typedef void(STDCALL *PFNGLGETBOOLEANV)(uint32_t param, bool *values);
+    typedef void(STDCALL *PFNGLGETBOOLEANV)(uint32_t param, uint8_t *values);
     typedef void(STDCALL *PFNGLGETFLOATV)(uint32_t param, float *values);
     typedef void(STDCALL *PFNGLGETINTEGER64I_V)(uint32_t target, uint32_t index, int64_t *data);
     typedef void(STDCALL *PFNGLGETINTEGER64V)(uint32_t pname, int64_t *data);
@@ -1124,14 +1125,14 @@ struct GlesImports {
                                                     int32_t *params);
     typedef uint8_t *(STDCALL *PFNGLGETSTRING)(uint32_t param);
     typedef uint8_t *(STDCALL *PFNGLGETSTRINGI)(uint32_t name, uint32_t index);
-    typedef bool(STDCALL *PFNGLISENABLED)(uint32_t capability);
+    typedef uint8_t(STDCALL *PFNGLISENABLED)(uint32_t capability);
     typedef uint32_t(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, uint32_t syncFlags,
                                                    uint64_t timeout);
     typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
     typedef uint64_t(STDCALL *PFNGLFENCESYNC)(uint32_t condition, uint32_t syncFlags);
     typedef void(STDCALL *PFNGLGETSYNCIV)(uint64_t sync, uint32_t pname, int32_t bufSize,
                                           int32_t *length, int32_t *values);
-    typedef bool(STDCALL *PFNGLISSYNC)(uint64_t sync);
+    typedef uint8_t(STDCALL *PFNGLISSYNC)(uint64_t sync);
     typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
     typedef void(STDCALL *PFNGLACTIVETEXTURE)(uint32_t unit);
     typedef void(STDCALL *PFNGLBINDIMAGETEXTURE)(uint32_t unit, uint32_t texture, int32_t level,
@@ -1184,8 +1185,8 @@ struct GlesImports {
                                                   float *values);
     typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(uint32_t target, uint32_t parameter,
                                                   int32_t *values);
-    typedef bool(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
-    typedef bool(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
+    typedef uint8_t(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
+    typedef uint8_t(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
     typedef void(STDCALL *PFNGLPIXELSTOREI)(uint32_t parameter, int32_t value);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERF)(uint32_t sampler, uint32_t pname, float param);
     typedef void(STDCALL *PFNGLSAMPLERPARAMETERFV)(uint32_t sampler, uint32_t pname, float *param);
@@ -1229,7 +1230,7 @@ struct GlesImports {
                                                             int32_t bufSize, int32_t *length,
                                                             int32_t *size, uint32_t *type,
                                                             char *name);
-    typedef bool(STDCALL *PFNGLISTRANSFORMFEEDBACK)(uint32_t id);
+    typedef uint8_t(STDCALL *PFNGLISTRANSFORMFEEDBACK)(uint32_t id);
     typedef void(STDCALL *PFNGLPAUSETRANSFORMFEEDBACK)();
     typedef void(STDCALL *PFNGLRESUMETRANSFORMFEEDBACK)();
     typedef void(STDCALL *PFNGLTRANSFORMFEEDBACKVARYINGS)(uint32_t program, int32_t count,
@@ -1248,7 +1249,7 @@ struct GlesImports {
                                                         void **pointer);
     typedef void(STDCALL *PFNGLGETVERTEXATTRIBFV)(uint32_t index, uint32_t pname, float *params);
     typedef void(STDCALL *PFNGLGETVERTEXATTRIBIV)(uint32_t index, uint32_t pname, int32_t *params);
-    typedef bool(STDCALL *PFNGLISVERTEXARRAY)(uint32_t array);
+    typedef uint8_t(STDCALL *PFNGLISVERTEXARRAY)(uint32_t array);
     typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(uint32_t location, float value0);
     typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(uint32_t location, float *value);
     typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(uint32_t location, float value0, float value1);
@@ -1275,7 +1276,7 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLVERTEXATTRIBIPOINTER)(uint32_t index, int32_t size, uint32_t type,
                                                      int32_t stride, void *pointer);
     typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(uint32_t location, int32_t size, uint32_t type,
-                                                    bool normalized, int32_t stride, void *data);
+                                                    uint8_t normalized, int32_t stride, void *data);
     typedef void(STDCALL *PFNGLVERTEXBINDINGDIVISOR)(uint32_t bindingindex, uint32_t divisor);
     typedef int(STDCALL *PFNEGLINITIALIZE)(void *dpy, int *major, int *minor);
     typedef void *(STDCALL *PFNEGLCREATECONTEXT)(void *display, void *config, void *share_context,

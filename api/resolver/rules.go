@@ -109,6 +109,13 @@ func castable(from semantic.Type, to semantic.Type) bool {
 	if fromIsNumber && toIsNumber {
 		return true // any numeric conversion
 	}
+	fromIsBool, toIsBool := fromBase == semantic.BoolType, toBase == semantic.BoolType
+	if fromIsBool && toIsNumber {
+		return true // bool -> number
+	}
+	if fromIsNumber && toIsBool {
+		return true // number -> bool
+	}
 	fromPointer, fromIsPointer := fromBase.(*semantic.Pointer)
 	toPointer, toIsPointer := toBase.(*semantic.Pointer)
 	if fromIsPointer && toIsPointer { // A* -> B*

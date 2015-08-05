@@ -65,8 +65,8 @@ func wireframeOverlay(id atom.ID, d database.Database, l log.Logger) atom.Transf
 			t.glEnable(GLenum_GL_BLEND)
 			t.glBlendColor(1.5, 0.5, 1.0, 1.0)
 			t.glBlendFunc(GLenum_GL_CONSTANT_COLOR, GLenum_GL_ZERO)
-			if t.ctx.Rasterizing.DepthMask && t.ctx.Capabilities[GLenum_GL_DEPTH_TEST] {
-				t.glDepthMask(false)
+			if t.ctx.Rasterizing.DepthMask != 0 && t.ctx.Capabilities[GLenum_GL_DEPTH_TEST] {
+				t.glDepthMask(GLboolean(0))
 				t.glDepthFunc(GLenum_GL_EQUAL)
 			}
 

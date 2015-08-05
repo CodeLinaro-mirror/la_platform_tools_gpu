@@ -66,7 +66,7 @@ EXPORT void STDCALL
 glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* params);
 EXPORT void STDCALL glGetTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params);
 EXPORT void STDCALL glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params);
-EXPORT bool STDCALL glIsEnablediEXT(uint32_t target, uint32_t index);
+EXPORT uint8_t STDCALL glIsEnablediEXT(uint32_t target, uint32_t index);
 EXPORT void STDCALL glMinSampleShadingOES(float value);
 EXPORT void STDCALL
 glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t length, char* label);
@@ -94,7 +94,7 @@ EXPORT void STDCALL glEndQuery(uint32_t target);
 EXPORT void STDCALL glGenQueries(int32_t count, uint32_t* queries);
 EXPORT void STDCALL glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value);
 EXPORT void STDCALL glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value);
-EXPORT bool STDCALL glIsQuery(uint32_t query);
+EXPORT uint8_t STDCALL glIsQuery(uint32_t query);
 EXPORT void STDCALL glBindBuffer(uint32_t target, uint32_t buffer);
 EXPORT void STDCALL glBindBufferBase(uint32_t target, uint32_t index, uint32_t buffer);
 EXPORT void STDCALL
@@ -108,7 +108,7 @@ EXPORT void STDCALL glGenBuffers(int32_t count, uint32_t* buffers);
 EXPORT void STDCALL glGetBufferParameteri64v(uint32_t target, uint32_t pname, int64_t* params);
 EXPORT void STDCALL glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value);
 EXPORT void STDCALL glGetBufferPointerv(uint32_t target, uint32_t pname, void** params);
-EXPORT bool STDCALL glIsBuffer(uint32_t buffer);
+EXPORT uint8_t STDCALL glIsBuffer(uint32_t buffer);
 EXPORT void* STDCALL
 glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
 EXPORT uint8_t STDCALL glUnmapBuffer(uint32_t target);
@@ -392,18 +392,18 @@ glGetnUniformuivKHR(uint32_t program, int32_t location, int32_t bufSize, uint32_
 EXPORT void STDCALL glInsertEventMarkerEXT(int32_t length, char* marker);
 EXPORT void STDCALL
 glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB, float weight);
-EXPORT bool STDCALL glIsEnablediOES(uint32_t target, uint32_t index);
-EXPORT bool STDCALL glIsEnablediNV(uint32_t target, uint32_t index);
-EXPORT bool STDCALL glIsFenceNV(uint32_t fence);
-EXPORT bool STDCALL glIsImageHandleResidentNV(uint64_t handle);
-EXPORT bool STDCALL glIsPathNV(uint32_t path);
-EXPORT bool STDCALL glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y);
-EXPORT bool STDCALL glIsPointInStrokePathNV(uint32_t path, float x, float y);
-EXPORT bool STDCALL glIsProgramPipelineEXT(uint32_t pipeline);
-EXPORT bool STDCALL glIsQueryEXT(uint32_t query);
-EXPORT bool STDCALL glIsSyncAPPLE(uint64_t sync);
-EXPORT bool STDCALL glIsTextureHandleResidentNV(uint64_t handle);
-EXPORT bool STDCALL glIsVertexArrayOES(uint32_t array);
+EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index);
+EXPORT uint8_t STDCALL glIsEnablediNV(uint32_t target, uint32_t index);
+EXPORT uint8_t STDCALL glIsFenceNV(uint32_t fence);
+EXPORT uint8_t STDCALL glIsImageHandleResidentNV(uint64_t handle);
+EXPORT uint8_t STDCALL glIsPathNV(uint32_t path);
+EXPORT uint8_t STDCALL glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y);
+EXPORT uint8_t STDCALL glIsPointInStrokePathNV(uint32_t path, float x, float y);
+EXPORT uint8_t STDCALL glIsProgramPipelineEXT(uint32_t pipeline);
+EXPORT uint8_t STDCALL glIsQueryEXT(uint32_t query);
+EXPORT uint8_t STDCALL glIsSyncAPPLE(uint64_t sync);
+EXPORT uint8_t STDCALL glIsTextureHandleResidentNV(uint64_t handle);
+EXPORT uint8_t STDCALL glIsVertexArrayOES(uint32_t array);
 EXPORT void STDCALL glLabelObjectEXT(uint32_t type, uint32_t object, int32_t length, char* label);
 EXPORT void STDCALL glMakeImageHandleNonResidentNV(uint64_t handle);
 EXPORT void STDCALL glMakeImageHandleResidentNV(uint64_t handle, uint32_t access);
@@ -691,7 +691,7 @@ EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor);
 EXPORT void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                         uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
 EXPORT void STDCALL glDepthFunc(uint32_t function);
-EXPORT void STDCALL glSampleCoverage(float value, bool invert);
+EXPORT void STDCALL glSampleCoverage(float value, uint8_t invert);
 EXPORT void STDCALL glSampleMaski(uint32_t maskNumber, uint32_t mask);
 EXPORT void STDCALL glScissor(int32_t x, int32_t y, int32_t width, int32_t height);
 EXPORT void STDCALL glStencilFunc(uint32_t func, int32_t ref, uint32_t mask);
@@ -716,10 +716,10 @@ EXPORT void STDCALL glClearBufferuiv(uint32_t buffer, int32_t drawbuffer, uint32
 EXPORT void STDCALL glClearColor(float r, float g, float b, float a);
 EXPORT void STDCALL glClearDepthf(float depth);
 EXPORT void STDCALL glClearStencil(int32_t stencil);
-EXPORT void STDCALL glColorMask(bool red, bool green, bool blue, bool alpha);
+EXPORT void STDCALL glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 EXPORT void STDCALL glDeleteFramebuffers(int32_t count, uint32_t* framebuffers);
 EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers);
-EXPORT void STDCALL glDepthMask(bool enabled);
+EXPORT void STDCALL glDepthMask(uint8_t enabled);
 EXPORT void STDCALL glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param);
 EXPORT void STDCALL glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                               uint32_t framebuffer_attachment,
@@ -741,8 +741,8 @@ EXPORT void STDCALL glInvalidateFramebuffer(uint32_t target, int32_t count, uint
 EXPORT void STDCALL glInvalidateSubFramebuffer(uint32_t target, int32_t numAttachments,
                                                uint32_t* attachments, int32_t x, int32_t y,
                                                int32_t width, int32_t height);
-EXPORT bool STDCALL glIsFramebuffer(uint32_t framebuffer);
-EXPORT bool STDCALL glIsRenderbuffer(uint32_t renderbuffer);
+EXPORT uint8_t STDCALL glIsFramebuffer(uint32_t framebuffer);
+EXPORT uint8_t STDCALL glIsRenderbuffer(uint32_t renderbuffer);
 EXPORT void STDCALL glReadBuffer(uint32_t src);
 EXPORT void STDCALL glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
                                  uint32_t format, uint32_t type, void* data);
@@ -828,9 +828,9 @@ EXPORT int32_t STDCALL glGetUniformLocation(uint32_t program, char* name);
 EXPORT void STDCALL glGetUniformfv(uint32_t program, int32_t location, float* values);
 EXPORT void STDCALL glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
 EXPORT void STDCALL glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params);
-EXPORT bool STDCALL glIsProgram(uint32_t program);
-EXPORT bool STDCALL glIsProgramPipeline(uint32_t pipeline);
-EXPORT bool STDCALL glIsShader(uint32_t shader);
+EXPORT uint8_t STDCALL glIsProgram(uint32_t program);
+EXPORT uint8_t STDCALL glIsProgramPipeline(uint32_t pipeline);
+EXPORT uint8_t STDCALL glIsShader(uint32_t shader);
 EXPORT void STDCALL glLinkProgram(uint32_t program);
 EXPORT void STDCALL glMemoryBarrier(uint32_t barriers);
 EXPORT void STDCALL glMemoryBarrierByRegion(uint32_t barriers);
@@ -961,7 +961,7 @@ EXPORT void STDCALL glLineWidth(float width);
 EXPORT void STDCALL glPolygonOffset(float scale_factor, float units);
 EXPORT void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
 EXPORT void STDCALL glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
-EXPORT void STDCALL glGetBooleanv(uint32_t param, bool* values);
+EXPORT void STDCALL glGetBooleanv(uint32_t param, uint8_t* values);
 EXPORT void STDCALL glGetFloatv(uint32_t param, float* values);
 EXPORT void STDCALL glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data);
 EXPORT void STDCALL glGetInteger64v(uint32_t pname, int64_t* data);
@@ -971,13 +971,13 @@ EXPORT void STDCALL glGetInternalformativ(uint32_t target, uint32_t internalform
                                           int32_t bufSize, int32_t* params);
 EXPORT uint8_t* STDCALL glGetString(uint32_t param);
 EXPORT uint8_t* STDCALL glGetStringi(uint32_t name, uint32_t index);
-EXPORT bool STDCALL glIsEnabled(uint32_t capability);
+EXPORT uint8_t STDCALL glIsEnabled(uint32_t capability);
 EXPORT uint32_t STDCALL glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
 EXPORT void STDCALL glDeleteSync(uint64_t sync);
 EXPORT uint64_t STDCALL glFenceSync(uint32_t condition, uint32_t syncFlags);
 EXPORT void STDCALL
 glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length, int32_t* values);
-EXPORT bool STDCALL glIsSync(uint64_t sync);
+EXPORT uint8_t STDCALL glIsSync(uint64_t sync);
 EXPORT void STDCALL glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
 EXPORT void STDCALL glActiveTexture(uint32_t unit);
 EXPORT void STDCALL glBindImageTexture(uint32_t unit, uint32_t texture, int32_t level,
@@ -1019,8 +1019,8 @@ EXPORT void STDCALL
 glGetTexLevelParameteriv(uint32_t target, int32_t level, uint32_t pname, int32_t* params);
 EXPORT void STDCALL glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values);
 EXPORT void STDCALL glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values);
-EXPORT bool STDCALL glIsSampler(uint32_t sampler);
-EXPORT bool STDCALL glIsTexture(uint32_t texture);
+EXPORT uint8_t STDCALL glIsSampler(uint32_t sampler);
+EXPORT uint8_t STDCALL glIsTexture(uint32_t texture);
 EXPORT void STDCALL glPixelStorei(uint32_t parameter, int32_t value);
 EXPORT void STDCALL glSamplerParameterf(uint32_t sampler, uint32_t pname, float param);
 EXPORT void STDCALL glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param);
@@ -1057,7 +1057,7 @@ EXPORT void STDCALL glGenTransformFeedbacks(int32_t n, uint32_t* ids);
 EXPORT void STDCALL glGetTransformFeedbackVarying(uint32_t program, uint32_t index, int32_t bufSize,
                                                   int32_t* length, int32_t* size, uint32_t* type,
                                                   char* name);
-EXPORT bool STDCALL glIsTransformFeedback(uint32_t id);
+EXPORT uint8_t STDCALL glIsTransformFeedback(uint32_t id);
 EXPORT void STDCALL glPauseTransformFeedback();
 EXPORT void STDCALL glResumeTransformFeedback();
 EXPORT void STDCALL
@@ -1074,7 +1074,7 @@ EXPORT void STDCALL glGetVertexAttribIuiv(uint32_t index, uint32_t pname, uint32
 EXPORT void STDCALL glGetVertexAttribPointerv(uint32_t index, uint32_t pname, void** pointer);
 EXPORT void STDCALL glGetVertexAttribfv(uint32_t index, uint32_t pname, float* params);
 EXPORT void STDCALL glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t* params);
-EXPORT bool STDCALL glIsVertexArray(uint32_t array);
+EXPORT uint8_t STDCALL glIsVertexArray(uint32_t array);
 EXPORT void STDCALL glVertexAttrib1f(uint32_t location, float value0);
 EXPORT void STDCALL glVertexAttrib1fv(uint32_t location, float* value);
 EXPORT void STDCALL glVertexAttrib2f(uint32_t location, float value0, float value1);
@@ -1098,7 +1098,7 @@ glVertexAttribIFormat(uint32_t attribindex, int32_t size, uint32_t type, uint32_
 EXPORT void STDCALL
 glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride, void* pointer);
 EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
-                                          bool normalized, int32_t stride, void* data);
+                                          uint8_t normalized, int32_t stride, void* data);
 EXPORT void STDCALL glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor);
 EXPORT int STDCALL eglInitialize(void* dpy, int* major, int* minor);
 EXPORT void* STDCALL
@@ -2290,7 +2290,7 @@ EXPORT void STDCALL glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, ui
     gapic::Lock<Spy> lock__(s);
     s->glGetTexParameterIuivEXT(target, pname, params);
 }
-EXPORT bool STDCALL glIsEnablediEXT(uint32_t target, uint32_t index) {
+EXPORT uint8_t STDCALL glIsEnablediEXT(uint32_t target, uint32_t index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnablediEXT(target, index);
@@ -2403,7 +2403,7 @@ EXPORT void STDCALL glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* v
     gapic::Lock<Spy> lock__(s);
     s->glGetQueryiv(target, parameter, value);
 }
-EXPORT bool STDCALL glIsQuery(uint32_t query) {
+EXPORT uint8_t STDCALL glIsQuery(uint32_t query) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsQuery(query);
@@ -2465,7 +2465,7 @@ EXPORT void STDCALL glGetBufferPointerv(uint32_t target, uint32_t pname, void** 
     gapic::Lock<Spy> lock__(s);
     s->glGetBufferPointerv(target, pname, params);
 }
-EXPORT bool STDCALL glIsBuffer(uint32_t buffer) {
+EXPORT uint8_t STDCALL glIsBuffer(uint32_t buffer) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsBuffer(buffer);
@@ -3449,62 +3449,62 @@ glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB, float 
     gapic::Lock<Spy> lock__(s);
     s->glInterpolatePathsNV(resultPath, pathA, pathB, weight);
 }
-EXPORT bool STDCALL glIsEnablediOES(uint32_t target, uint32_t index) {
+EXPORT uint8_t STDCALL glIsEnablediOES(uint32_t target, uint32_t index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnablediOES(target, index);
 }
-EXPORT bool STDCALL glIsEnablediNV(uint32_t target, uint32_t index) {
+EXPORT uint8_t STDCALL glIsEnablediNV(uint32_t target, uint32_t index) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnablediNV(target, index);
 }
-EXPORT bool STDCALL glIsFenceNV(uint32_t fence) {
+EXPORT uint8_t STDCALL glIsFenceNV(uint32_t fence) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsFenceNV(fence);
 }
-EXPORT bool STDCALL glIsImageHandleResidentNV(uint64_t handle) {
+EXPORT uint8_t STDCALL glIsImageHandleResidentNV(uint64_t handle) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsImageHandleResidentNV(handle);
 }
-EXPORT bool STDCALL glIsPathNV(uint32_t path) {
+EXPORT uint8_t STDCALL glIsPathNV(uint32_t path) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsPathNV(path);
 }
-EXPORT bool STDCALL glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
+EXPORT uint8_t STDCALL glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsPointInFillPathNV(path, mask, x, y);
 }
-EXPORT bool STDCALL glIsPointInStrokePathNV(uint32_t path, float x, float y) {
+EXPORT uint8_t STDCALL glIsPointInStrokePathNV(uint32_t path, float x, float y) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsPointInStrokePathNV(path, x, y);
 }
-EXPORT bool STDCALL glIsProgramPipelineEXT(uint32_t pipeline) {
+EXPORT uint8_t STDCALL glIsProgramPipelineEXT(uint32_t pipeline) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsProgramPipelineEXT(pipeline);
 }
-EXPORT bool STDCALL glIsQueryEXT(uint32_t query) {
+EXPORT uint8_t STDCALL glIsQueryEXT(uint32_t query) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsQueryEXT(query);
 }
-EXPORT bool STDCALL glIsSyncAPPLE(uint64_t sync) {
+EXPORT uint8_t STDCALL glIsSyncAPPLE(uint64_t sync) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsSyncAPPLE(sync);
 }
-EXPORT bool STDCALL glIsTextureHandleResidentNV(uint64_t handle) {
+EXPORT uint8_t STDCALL glIsTextureHandleResidentNV(uint64_t handle) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsTextureHandleResidentNV(handle);
 }
-EXPORT bool STDCALL glIsVertexArrayOES(uint32_t array) {
+EXPORT uint8_t STDCALL glIsVertexArrayOES(uint32_t array) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsVertexArrayOES(array);
@@ -4449,7 +4449,7 @@ EXPORT void STDCALL glDepthFunc(uint32_t function) {
     gapic::Lock<Spy> lock__(s);
     s->glDepthFunc(function);
 }
-EXPORT void STDCALL glSampleCoverage(float value, bool invert) {
+EXPORT void STDCALL glSampleCoverage(float value, uint8_t invert) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glSampleCoverage(value, invert);
@@ -4550,7 +4550,7 @@ EXPORT void STDCALL glClearStencil(int32_t stencil) {
     gapic::Lock<Spy> lock__(s);
     s->glClearStencil(stencil);
 }
-EXPORT void STDCALL glColorMask(bool red, bool green, bool blue, bool alpha) {
+EXPORT void STDCALL glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glColorMask(red, green, blue, alpha);
@@ -4565,7 +4565,7 @@ EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers
     gapic::Lock<Spy> lock__(s);
     s->glDeleteRenderbuffers(count, renderbuffers);
 }
-EXPORT void STDCALL glDepthMask(bool enabled) {
+EXPORT void STDCALL glDepthMask(uint8_t enabled) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glDepthMask(enabled);
@@ -4637,12 +4637,12 @@ EXPORT void STDCALL glInvalidateSubFramebuffer(uint32_t target, int32_t numAttac
     gapic::Lock<Spy> lock__(s);
     s->glInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
 }
-EXPORT bool STDCALL glIsFramebuffer(uint32_t framebuffer) {
+EXPORT uint8_t STDCALL glIsFramebuffer(uint32_t framebuffer) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsFramebuffer(framebuffer);
 }
-EXPORT bool STDCALL glIsRenderbuffer(uint32_t renderbuffer) {
+EXPORT uint8_t STDCALL glIsRenderbuffer(uint32_t renderbuffer) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsRenderbuffer(renderbuffer);
@@ -4960,17 +4960,17 @@ EXPORT void STDCALL glGetUniformuiv(uint32_t program, int32_t location, uint32_t
     gapic::Lock<Spy> lock__(s);
     s->glGetUniformuiv(program, location, params);
 }
-EXPORT bool STDCALL glIsProgram(uint32_t program) {
+EXPORT uint8_t STDCALL glIsProgram(uint32_t program) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsProgram(program);
 }
-EXPORT bool STDCALL glIsProgramPipeline(uint32_t pipeline) {
+EXPORT uint8_t STDCALL glIsProgramPipeline(uint32_t pipeline) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsProgramPipeline(pipeline);
 }
-EXPORT bool STDCALL glIsShader(uint32_t shader) {
+EXPORT uint8_t STDCALL glIsShader(uint32_t shader) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsShader(shader);
@@ -5453,7 +5453,7 @@ EXPORT void STDCALL glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* da
     gapic::Lock<Spy> lock__(s);
     s->glGetBooleani_v(target, index, data);
 }
-EXPORT void STDCALL glGetBooleanv(uint32_t param, bool* values) {
+EXPORT void STDCALL glGetBooleanv(uint32_t param, uint8_t* values) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetBooleanv(param, values);
@@ -5499,7 +5499,7 @@ EXPORT uint8_t* STDCALL glGetStringi(uint32_t name, uint32_t index) {
     gapic::Lock<Spy> lock__(s);
     return s->glGetStringi(name, index);
 }
-EXPORT bool STDCALL glIsEnabled(uint32_t capability) {
+EXPORT uint8_t STDCALL glIsEnabled(uint32_t capability) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsEnabled(capability);
@@ -5525,7 +5525,7 @@ glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length, int
     gapic::Lock<Spy> lock__(s);
     s->glGetSynciv(sync, pname, bufSize, length, values);
 }
-EXPORT bool STDCALL glIsSync(uint64_t sync) {
+EXPORT uint8_t STDCALL glIsSync(uint64_t sync) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsSync(sync);
@@ -5666,12 +5666,12 @@ EXPORT void STDCALL glGetTexParameteriv(uint32_t target, uint32_t parameter, int
     gapic::Lock<Spy> lock__(s);
     s->glGetTexParameteriv(target, parameter, values);
 }
-EXPORT bool STDCALL glIsSampler(uint32_t sampler) {
+EXPORT uint8_t STDCALL glIsSampler(uint32_t sampler) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsSampler(sampler);
 }
-EXPORT bool STDCALL glIsTexture(uint32_t texture) {
+EXPORT uint8_t STDCALL glIsTexture(uint32_t texture) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsTexture(texture);
@@ -5803,7 +5803,7 @@ EXPORT void STDCALL glGetTransformFeedbackVarying(uint32_t program, uint32_t ind
     gapic::Lock<Spy> lock__(s);
     s->glGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
 }
-EXPORT bool STDCALL glIsTransformFeedback(uint32_t id) {
+EXPORT uint8_t STDCALL glIsTransformFeedback(uint32_t id) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsTransformFeedback(id);
@@ -5880,7 +5880,7 @@ EXPORT void STDCALL glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t*
     gapic::Lock<Spy> lock__(s);
     s->glGetVertexAttribiv(index, pname, params);
 }
-EXPORT bool STDCALL glIsVertexArray(uint32_t array) {
+EXPORT uint8_t STDCALL glIsVertexArray(uint32_t array) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     return s->glIsVertexArray(array);
@@ -5976,7 +5976,7 @@ glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stri
     s->glVertexAttribIPointer(index, size, type, stride, pointer);
 }
 EXPORT void STDCALL glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
-                                          bool normalized, int32_t stride, void* data) {
+                                          uint8_t normalized, int32_t stride, void* data) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glVertexAttribPointer(location, size, type, normalized, stride, data);

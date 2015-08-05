@@ -75,7 +75,7 @@ public:
     inline void glGetSamplerParameterIuivEXT(uint32_t sampler, uint32_t pname, uint32_t* params);
     inline void glGetTexParameterIivEXT(uint32_t target, uint32_t pname, int32_t* params);
     inline void glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, uint32_t* params);
-    inline bool glIsEnablediEXT(uint32_t target, uint32_t index);
+    inline uint8_t glIsEnablediEXT(uint32_t target, uint32_t index);
     inline void glMinSampleShadingOES(float value);
     inline void glObjectLabelKHR(uint32_t identifier, uint32_t name, int32_t length, char* label);
     inline void glObjectPtrLabelKHR(void* ptr, int32_t length, char* label);
@@ -100,7 +100,7 @@ public:
     inline void glGenQueries(int32_t count, uint32_t* queries);
     inline void glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uint32_t* value);
     inline void glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value);
-    inline bool glIsQuery(uint32_t query);
+    inline uint8_t glIsQuery(uint32_t query);
     inline void glBindBuffer(uint32_t target, uint32_t buffer);
     inline void glBindBufferBase(uint32_t target, uint32_t index, uint32_t buffer);
     inline void glBindBufferRange(uint32_t target, uint32_t index, uint32_t buffer, int32_t offset,
@@ -114,7 +114,7 @@ public:
     inline void glGetBufferParameteri64v(uint32_t target, uint32_t pname, int64_t* params);
     inline void glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value);
     inline void glGetBufferPointerv(uint32_t target, uint32_t pname, void** params);
-    inline bool glIsBuffer(uint32_t buffer);
+    inline uint8_t glIsBuffer(uint32_t buffer);
     inline void* glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access);
     inline uint8_t glUnmapBuffer(uint32_t target);
     inline void glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count);
@@ -386,18 +386,18 @@ public:
     inline void glInsertEventMarkerEXT(int32_t length, char* marker);
     inline void glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, uint32_t pathB,
                                      float weight);
-    inline bool glIsEnablediOES(uint32_t target, uint32_t index);
-    inline bool glIsEnablediNV(uint32_t target, uint32_t index);
-    inline bool glIsFenceNV(uint32_t fence);
-    inline bool glIsImageHandleResidentNV(uint64_t handle);
-    inline bool glIsPathNV(uint32_t path);
-    inline bool glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y);
-    inline bool glIsPointInStrokePathNV(uint32_t path, float x, float y);
-    inline bool glIsProgramPipelineEXT(uint32_t pipeline);
-    inline bool glIsQueryEXT(uint32_t query);
-    inline bool glIsSyncAPPLE(uint64_t sync);
-    inline bool glIsTextureHandleResidentNV(uint64_t handle);
-    inline bool glIsVertexArrayOES(uint32_t array);
+    inline uint8_t glIsEnablediOES(uint32_t target, uint32_t index);
+    inline uint8_t glIsEnablediNV(uint32_t target, uint32_t index);
+    inline uint8_t glIsFenceNV(uint32_t fence);
+    inline uint8_t glIsImageHandleResidentNV(uint64_t handle);
+    inline uint8_t glIsPathNV(uint32_t path);
+    inline uint8_t glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y);
+    inline uint8_t glIsPointInStrokePathNV(uint32_t path, float x, float y);
+    inline uint8_t glIsProgramPipelineEXT(uint32_t pipeline);
+    inline uint8_t glIsQueryEXT(uint32_t query);
+    inline uint8_t glIsSyncAPPLE(uint64_t sync);
+    inline uint8_t glIsTextureHandleResidentNV(uint64_t handle);
+    inline uint8_t glIsVertexArrayOES(uint32_t array);
     inline void glLabelObjectEXT(uint32_t type, uint32_t object, int32_t length, char* label);
     inline void glMakeImageHandleNonResidentNV(uint64_t handle);
     inline void glMakeImageHandleResidentNV(uint64_t handle, uint32_t access);
@@ -677,7 +677,7 @@ public:
     inline void glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                     uint32_t src_factor_alpha, uint32_t dst_factor_alpha);
     inline void glDepthFunc(uint32_t function);
-    inline void glSampleCoverage(float value, bool invert);
+    inline void glSampleCoverage(float value, uint8_t invert);
     inline void glSampleMaski(uint32_t maskNumber, uint32_t mask);
     inline void glScissor(int32_t x, int32_t y, int32_t width, int32_t height);
     inline void glStencilFunc(uint32_t func, int32_t ref, uint32_t mask);
@@ -701,10 +701,10 @@ public:
     inline void glClearColor(float r, float g, float b, float a);
     inline void glClearDepthf(float depth);
     inline void glClearStencil(int32_t stencil);
-    inline void glColorMask(bool red, bool green, bool blue, bool alpha);
+    inline void glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
     inline void glDeleteFramebuffers(int32_t count, uint32_t* framebuffers);
     inline void glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffers);
-    inline void glDepthMask(bool enabled);
+    inline void glDepthMask(uint8_t enabled);
     inline void glFramebufferParameteri(uint32_t target, uint32_t pname, int32_t param);
     inline void glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                           uint32_t framebuffer_attachment,
@@ -724,8 +724,8 @@ public:
     inline void glInvalidateSubFramebuffer(uint32_t target, int32_t numAttachments,
                                            uint32_t* attachments, int32_t x, int32_t y,
                                            int32_t width, int32_t height);
-    inline bool glIsFramebuffer(uint32_t framebuffer);
-    inline bool glIsRenderbuffer(uint32_t renderbuffer);
+    inline uint8_t glIsFramebuffer(uint32_t framebuffer);
+    inline uint8_t glIsRenderbuffer(uint32_t renderbuffer);
     inline void glReadBuffer(uint32_t src);
     inline void glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format,
                              uint32_t type, void* data);
@@ -810,9 +810,9 @@ public:
     inline void glGetUniformfv(uint32_t program, int32_t location, float* values);
     inline void glGetUniformiv(uint32_t program, int32_t location, int32_t* values);
     inline void glGetUniformuiv(uint32_t program, int32_t location, uint32_t* params);
-    inline bool glIsProgram(uint32_t program);
-    inline bool glIsProgramPipeline(uint32_t pipeline);
-    inline bool glIsShader(uint32_t shader);
+    inline uint8_t glIsProgram(uint32_t program);
+    inline uint8_t glIsProgramPipeline(uint32_t pipeline);
+    inline uint8_t glIsShader(uint32_t shader);
     inline void glLinkProgram(uint32_t program);
     inline void glMemoryBarrier(uint32_t barriers);
     inline void glMemoryBarrierByRegion(uint32_t barriers);
@@ -941,7 +941,7 @@ public:
     inline void glPolygonOffset(float scale_factor, float units);
     inline void glViewport(int32_t x, int32_t y, int32_t width, int32_t height);
     inline void glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* data);
-    inline void glGetBooleanv(uint32_t param, bool* values);
+    inline void glGetBooleanv(uint32_t param, uint8_t* values);
     inline void glGetFloatv(uint32_t param, float* values);
     inline void glGetInteger64i_v(uint32_t target, uint32_t index, int64_t* data);
     inline void glGetInteger64v(uint32_t pname, int64_t* data);
@@ -951,13 +951,13 @@ public:
                                       int32_t bufSize, int32_t* params);
     inline uint8_t* glGetString(uint32_t param);
     inline uint8_t* glGetStringi(uint32_t name, uint32_t index);
-    inline bool glIsEnabled(uint32_t capability);
+    inline uint8_t glIsEnabled(uint32_t capability);
     inline uint32_t glClientWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
     inline void glDeleteSync(uint64_t sync);
     inline uint64_t glFenceSync(uint32_t condition, uint32_t syncFlags);
     inline void glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize, int32_t* length,
                             int32_t* values);
-    inline bool glIsSync(uint64_t sync);
+    inline uint8_t glIsSync(uint64_t sync);
     inline void glWaitSync(uint64_t sync, uint32_t syncFlags, uint64_t timeout);
     inline void glActiveTexture(uint32_t unit);
     inline void glBindImageTexture(uint32_t unit, uint32_t texture, int32_t level, uint8_t layered,
@@ -998,8 +998,8 @@ public:
                                          int32_t* params);
     inline void glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values);
     inline void glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values);
-    inline bool glIsSampler(uint32_t sampler);
-    inline bool glIsTexture(uint32_t texture);
+    inline uint8_t glIsSampler(uint32_t sampler);
+    inline uint8_t glIsTexture(uint32_t texture);
     inline void glPixelStorei(uint32_t parameter, int32_t value);
     inline void glSamplerParameterf(uint32_t sampler, uint32_t pname, float param);
     inline void glSamplerParameterfv(uint32_t sampler, uint32_t pname, float* param);
@@ -1036,7 +1036,7 @@ public:
     inline void glGetTransformFeedbackVarying(uint32_t program, uint32_t index, int32_t bufSize,
                                               int32_t* length, int32_t* size, uint32_t* type,
                                               char* name);
-    inline bool glIsTransformFeedback(uint32_t id);
+    inline uint8_t glIsTransformFeedback(uint32_t id);
     inline void glPauseTransformFeedback();
     inline void glResumeTransformFeedback();
     inline void glTransformFeedbackVaryings(uint32_t program, int32_t count, char** varyings,
@@ -1053,7 +1053,7 @@ public:
     inline void glGetVertexAttribPointerv(uint32_t index, uint32_t pname, void** pointer);
     inline void glGetVertexAttribfv(uint32_t index, uint32_t pname, float* params);
     inline void glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t* params);
-    inline bool glIsVertexArray(uint32_t array);
+    inline uint8_t glIsVertexArray(uint32_t array);
     inline void glVertexAttrib1f(uint32_t location, float value0);
     inline void glVertexAttrib1fv(uint32_t location, float* value);
     inline void glVertexAttrib2f(uint32_t location, float value0, float value1);
@@ -1076,7 +1076,7 @@ public:
     inline void glVertexAttribIPointer(uint32_t index, int32_t size, uint32_t type, int32_t stride,
                                        void* pointer);
     inline void glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
-                                      bool normalized, int32_t stride, void* data);
+                                      uint8_t normalized, int32_t stride, void* data);
     inline void glVertexBindingDivisor(uint32_t bindingindex, uint32_t divisor);
     inline int eglInitialize(void* dpy, int* major, int* minor);
     inline void* eglCreateContext(void* display, void* config, void* share_context,
@@ -1545,10 +1545,10 @@ inline void GlesSpy::glGetTexParameterIuivEXT(uint32_t target, uint32_t pname, u
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
+inline uint8_t GlesSpy::glIsEnablediEXT(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediEXT(%u, %" PRIu32 ")\n", target, index);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -1973,10 +1973,10 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsQuery(uint32_t query) {
+inline uint8_t GlesSpy::glIsQuery(uint32_t query) {
     GAPID_INFO("glIsQuery(%" PRIu32 ")\n", query);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -2451,10 +2451,10 @@ inline void GlesSpy::glGetBufferPointerv(uint32_t target, uint32_t pname, void**
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsBuffer(uint32_t buffer) {
+inline uint8_t GlesSpy::glIsBuffer(uint32_t buffer) {
     GAPID_INFO("glIsBuffer(%" PRIu32 ")\n", buffer);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6104,10 +6104,10 @@ inline void GlesSpy::glInterpolatePathsNV(uint32_t resultPath, uint32_t pathA, u
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
+inline uint8_t GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")\n", target, index);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6124,10 +6124,10 @@ inline bool GlesSpy::glIsEnablediOES(uint32_t target, uint32_t index) {
     return result;
 }
 
-inline bool GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
+inline uint8_t GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
     GAPID_INFO("glIsEnablediNV(%u, %" PRIu32 ")\n", target, index);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6144,10 +6144,10 @@ inline bool GlesSpy::glIsEnablediNV(uint32_t target, uint32_t index) {
     return result;
 }
 
-inline bool GlesSpy::glIsFenceNV(uint32_t fence) {
+inline uint8_t GlesSpy::glIsFenceNV(uint32_t fence) {
     GAPID_INFO("glIsFenceNV(%" PRIu32 ")\n", fence);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6164,10 +6164,10 @@ inline bool GlesSpy::glIsFenceNV(uint32_t fence) {
     return result;
 }
 
-inline bool GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
+inline uint8_t GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
     GAPID_INFO("glIsImageHandleResidentNV(%" PRIu64 ")\n", handle);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6184,10 +6184,10 @@ inline bool GlesSpy::glIsImageHandleResidentNV(uint64_t handle) {
     return result;
 }
 
-inline bool GlesSpy::glIsPathNV(uint32_t path) {
+inline uint8_t GlesSpy::glIsPathNV(uint32_t path) {
     GAPID_INFO("glIsPathNV(%" PRIu32 ")\n", path);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6204,10 +6204,10 @@ inline bool GlesSpy::glIsPathNV(uint32_t path) {
     return result;
 }
 
-inline bool GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
+inline uint8_t GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x, float y) {
     GAPID_INFO("glIsPointInFillPathNV(%" PRIu32 ", %" PRIu32 ", %f, %f)\n", path, mask, x, y);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6224,10 +6224,10 @@ inline bool GlesSpy::glIsPointInFillPathNV(uint32_t path, uint32_t mask, float x
     return result;
 }
 
-inline bool GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y) {
+inline uint8_t GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y) {
     GAPID_INFO("glIsPointInStrokePathNV(%" PRIu32 ", %f, %f)\n", path, x, y);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6244,10 +6244,10 @@ inline bool GlesSpy::glIsPointInStrokePathNV(uint32_t path, float x, float y) {
     return result;
 }
 
-inline bool GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
+inline uint8_t GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
     GAPID_INFO("glIsProgramPipelineEXT(%" PRIu32 ")\n", pipeline);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6264,10 +6264,10 @@ inline bool GlesSpy::glIsProgramPipelineEXT(uint32_t pipeline) {
     return result;
 }
 
-inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
+inline uint8_t GlesSpy::glIsQueryEXT(uint32_t query) {
     GAPID_INFO("glIsQueryEXT(%" PRIu32 ")\n", query);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6288,10 +6288,10 @@ inline bool GlesSpy::glIsQueryEXT(uint32_t query) {
     return result;
 }
 
-inline bool GlesSpy::glIsSyncAPPLE(uint64_t sync) {
+inline uint8_t GlesSpy::glIsSyncAPPLE(uint64_t sync) {
     GAPID_INFO("glIsSyncAPPLE(%" PRIu64 ")\n", sync);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6308,10 +6308,10 @@ inline bool GlesSpy::glIsSyncAPPLE(uint64_t sync) {
     return result;
 }
 
-inline bool GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
+inline uint8_t GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
     GAPID_INFO("glIsTextureHandleResidentNV(%" PRIu64 ")\n", handle);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -6328,10 +6328,10 @@ inline bool GlesSpy::glIsTextureHandleResidentNV(uint64_t handle) {
     return result;
 }
 
-inline bool GlesSpy::glIsVertexArrayOES(uint32_t array) {
+inline uint8_t GlesSpy::glIsVertexArrayOES(uint32_t array) {
     GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")\n", array);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -9592,8 +9592,8 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
     mEncoder->Object(&coder);
 }
 
-inline void GlesSpy::glSampleCoverage(float value, bool invert) {
-    GAPID_INFO("glSampleCoverage(%f, %d)\n", value, invert);
+inline void GlesSpy::glSampleCoverage(float value, uint8_t invert) {
+    GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")\n", value, invert);
 
     Observations observations;
     do {
@@ -10156,8 +10156,9 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
     mEncoder->Object(&coder);
 }
 
-inline void GlesSpy::glColorMask(bool red, bool green, bool blue, bool alpha) {
-    GAPID_INFO("glColorMask(%d, %d, %d, %d)\n", red, green, blue, alpha);
+inline void GlesSpy::glColorMask(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
+    GAPID_INFO("glColorMask(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")\n", red, green, blue,
+               alpha);
 
     Observations observations;
     do {
@@ -10234,8 +10235,8 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, uint32_t* renderbuffer
     mEncoder->Object(&coder);
 }
 
-inline void GlesSpy::glDepthMask(bool enabled) {
-    GAPID_INFO("glDepthMask(%d)\n", enabled);
+inline void GlesSpy::glDepthMask(uint8_t enabled) {
+    GAPID_INFO("glDepthMask(%" PRIu8 ")\n", enabled);
 
     Observations observations;
     do {
@@ -10842,10 +10843,10 @@ inline void GlesSpy::glInvalidateSubFramebuffer(uint32_t target, int32_t numAtta
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
+inline uint8_t GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     GAPID_INFO("glIsFramebuffer(%" PRIu32 ")\n", framebuffer);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -10866,10 +10867,10 @@ inline bool GlesSpy::glIsFramebuffer(uint32_t framebuffer) {
     return result;
 }
 
-inline bool GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
+inline uint8_t GlesSpy::glIsRenderbuffer(uint32_t renderbuffer) {
     GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")\n", renderbuffer);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -12633,10 +12634,10 @@ inline void GlesSpy::glGetUniformuiv(uint32_t program, int32_t location, uint32_
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsProgram(uint32_t program) {
+inline uint8_t GlesSpy::glIsProgram(uint32_t program) {
     GAPID_INFO("glIsProgram(%" PRIu32 ")\n", program);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -12657,10 +12658,10 @@ inline bool GlesSpy::glIsProgram(uint32_t program) {
     return result;
 }
 
-inline bool GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
+inline uint8_t GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
     GAPID_INFO("glIsProgramPipeline(%" PRIu32 ")\n", pipeline);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -12678,10 +12679,10 @@ inline bool GlesSpy::glIsProgramPipeline(uint32_t pipeline) {
     return result;
 }
 
-inline bool GlesSpy::glIsShader(uint32_t shader) {
+inline uint8_t GlesSpy::glIsShader(uint32_t shader) {
     GAPID_INFO("glIsShader(%" PRIu32 ")\n", shader);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -14884,7 +14885,7 @@ inline void GlesSpy::glGetBooleani_v(uint32_t target, uint32_t index, uint8_t* d
     mEncoder->Object(&coder);
 }
 
-inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
+inline void GlesSpy::glGetBooleanv(uint32_t param, uint8_t* values) {
     GAPID_INFO("glGetBooleanv(%u, %p)\n", param, values);
 
     Observations observations;
@@ -15092,7 +15093,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
                 break;
             }
         }
-        Slice<bool> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
+        Slice<GLboolean> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         std::shared_ptr<Context> l_GetContext_855_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_855_result;
@@ -15100,39 +15101,40 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
         mImports.glGetBooleanv(param, values);
         switch (param) {
             case GLenum::GL_BLEND: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_BLEND]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_BLEND]));
                 break;
             }
             case GLenum::GL_CULL_FACE: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_CULL_FACE]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_CULL_FACE]));
                 break;
             }
             case GLenum::GL_DEPTH_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_DEPTH_TEST]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_DEPTH_TEST]));
                 break;
             }
             case GLenum::GL_DITHER: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_DITHER]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_DITHER]));
                 break;
             }
             case GLenum::GL_POLYGON_OFFSET_FILL: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_POLYGON_OFFSET_FILL]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_POLYGON_OFFSET_FILL]));
                 break;
             }
             case GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE]);
+                write(l_v, 0,
+                      (GLboolean)(l_ctx->mCapabilities[GLenum::GL_SAMPLE_ALPHA_TO_COVERAGE]));
                 break;
             }
             case GLenum::GL_SAMPLE_COVERAGE: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SAMPLE_COVERAGE]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_SAMPLE_COVERAGE]));
                 break;
             }
             case GLenum::GL_SCISSOR_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_SCISSOR_TEST]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_SCISSOR_TEST]));
                 break;
             }
             case GLenum::GL_STENCIL_TEST: {
-                write(l_v, 0, l_ctx->mCapabilities[GLenum::GL_STENCIL_TEST]);
+                write(l_v, 0, (GLboolean)(l_ctx->mCapabilities[GLenum::GL_STENCIL_TEST]));
                 break;
             }
             case GLenum::GL_DEPTH_WRITEMASK: {
@@ -15165,7 +15167,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
     observe(observations.mWrites);
 
     gapic::coder::gles::GlGetBooleanv coder(
-            observations, param, gapic::coder::gles::Bool__P(gapic::coder::memory::Pointer(
+            observations, param, gapic::coder::gles::GLboolean__P(gapic::coder::memory::Pointer(
                                          reinterpret_cast<uintptr_t>(values), 0)));
     mEncoder->Object(&coder);
 }
@@ -16742,10 +16744,10 @@ inline uint8_t* GlesSpy::glGetStringi(uint32_t name, uint32_t index) {
     return result;
 }
 
-inline bool GlesSpy::glIsEnabled(uint32_t capability) {
+inline uint8_t GlesSpy::glIsEnabled(uint32_t capability) {
     GAPID_INFO("glIsEnabled(%u)\n", capability);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -16883,10 +16885,10 @@ inline void GlesSpy::glGetSynciv(uint64_t sync, uint32_t pname, int32_t bufSize,
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsSync(uint64_t sync) {
+inline uint8_t GlesSpy::glIsSync(uint64_t sync) {
     GAPID_INFO("glIsSync(%" PRIu64 ")\n", sync);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -17923,10 +17925,10 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsSampler(uint32_t sampler) {
+inline uint8_t GlesSpy::glIsSampler(uint32_t sampler) {
     GAPID_INFO("glIsSampler(%" PRIu32 ")\n", sampler);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -17944,10 +17946,10 @@ inline bool GlesSpy::glIsSampler(uint32_t sampler) {
     return result;
 }
 
-inline bool GlesSpy::glIsTexture(uint32_t texture) {
+inline uint8_t GlesSpy::glIsTexture(uint32_t texture) {
     GAPID_INFO("glIsTexture(%" PRIu32 ")\n", texture);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -19286,10 +19288,10 @@ inline void GlesSpy::glGetTransformFeedbackVarying(uint32_t program, uint32_t in
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsTransformFeedback(uint32_t id) {
+inline uint8_t GlesSpy::glIsTransformFeedback(uint32_t id) {
     GAPID_INFO("glIsTransformFeedback(%" PRIu32 ")\n", id);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -19683,10 +19685,10 @@ inline void GlesSpy::glGetVertexAttribiv(uint32_t index, uint32_t pname, int32_t
     mEncoder->Object(&coder);
 }
 
-inline bool GlesSpy::glIsVertexArray(uint32_t array) {
+inline uint8_t GlesSpy::glIsVertexArray(uint32_t array) {
     GAPID_INFO("glIsVertexArray(%" PRIu32 ")\n", array);
 
-    bool result = false;
+    uint8_t result = 0;
 
     Observations observations;
     do {
@@ -20056,8 +20058,8 @@ inline void GlesSpy::glVertexAttribIPointer(uint32_t index, int32_t size, uint32
 }
 
 inline void GlesSpy::glVertexAttribPointer(uint32_t location, int32_t size, uint32_t type,
-                                           bool normalized, int32_t stride, void* data) {
-    GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %d, %" PRId32 ", %p)\n",
+                                           uint8_t normalized, int32_t stride, void* data) {
+    GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRId32 ", %p)\n",
                location, size, type, normalized, stride, data);
 
     Observations observations;

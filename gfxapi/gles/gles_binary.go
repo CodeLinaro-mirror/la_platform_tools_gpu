@@ -24,8 +24,6 @@ func init() {
 	Namespace.Add((*Color)(nil).Class())
 	Namespace.Add((*BlendState)(nil).Class())
 	Namespace.Add((*SliceInfo)(nil).Class())
-	Namespace.Add((*Boolˢ)(nil).Class())
-	Namespace.Add((*Boolᵖ)(nil).Class())
 	Namespace.Add((*U8ˢ)(nil).Class())
 	Namespace.Add((*Buffer)(nil).Class())
 	Namespace.Add((*BufferDataPointer)(nil).Class())
@@ -909,8 +907,6 @@ var (
 	binaryIDColor                                            = binary.ID{0xd0, 0x81, 0x98, 0xcb, 0xe9, 0x4c, 0xb5, 0x68, 0xdf, 0xab, 0x2e, 0xde, 0xed, 0x47, 0x59, 0xd3, 0xa7, 0xaa, 0x6c, 0x98}
 	binaryIDBlendState                                       = binary.ID{0xa0, 0x25, 0x10, 0x49, 0xe6, 0xb8, 0xfb, 0x31, 0xf9, 0x74, 0xa1, 0x14, 0x8f, 0x6d, 0x7e, 0x3b, 0x51, 0x1d, 0x3b, 0x7f}
 	binaryIDSliceInfo                                        = binary.ID{0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9}
-	binaryIDBoolˢ                                            = binary.ID{0xf9, 0x44, 0xf2, 0x44, 0xbb, 0x78, 0x01, 0x7e, 0x56, 0xa1, 0x2f, 0x0d, 0x73, 0x9c, 0xa1, 0x77, 0x23, 0x5d, 0x47, 0xa8}
-	binaryIDBoolᵖ                                            = binary.ID{0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24}
 	binaryIDU8ˢ                                              = binary.ID{0xf7, 0xd9, 0x83, 0x86, 0x77, 0xcc, 0x52, 0xb0, 0x80, 0x2f, 0xfc, 0x47, 0xa5, 0x91, 0x72, 0xd9, 0x3b, 0xcd, 0x65, 0x01}
 	binaryIDBuffer                                           = binary.ID{0x72, 0x94, 0x68, 0xa4, 0x0c, 0xe0, 0x5f, 0x61, 0x88, 0x16, 0xab, 0xc8, 0xd6, 0xe8, 0x69, 0xf4, 0x39, 0x2d, 0xc4, 0xbf}
 	binaryIDBufferDataPointer                                = binary.ID{0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b}
@@ -938,9 +934,9 @@ var (
 	binaryIDCharᵖ                                            = binary.ID{0xac, 0x44, 0x67, 0xfc, 0xf8, 0x14, 0x79, 0xb0, 0x1e, 0xd5, 0xf7, 0xb0, 0xbb, 0xcb, 0x2b, 0x24, 0x88, 0xf4, 0x59, 0xc7}
 	binaryIDClearState                                       = binary.ID{0x08, 0xa6, 0xc5, 0x64, 0x5c, 0xc4, 0x9c, 0xf0, 0xad, 0xc5, 0x82, 0x38, 0x2d, 0x37, 0x08, 0xe6, 0x5d, 0x51, 0x63, 0xa0}
 	binaryIDRect                                             = binary.ID{0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2}
-	binaryIDRasterizerState                                  = binary.ID{0x8f, 0x8a, 0x9b, 0x1a, 0xfe, 0xff, 0x2b, 0xd1, 0x64, 0x1e, 0x91, 0xda, 0x14, 0x3c, 0x05, 0x0a, 0x1d, 0xb4, 0xc1, 0xa2}
+	binaryIDRasterizerState                                  = binary.ID{0xba, 0xcc, 0xd9, 0x38, 0xef, 0x30, 0x2c, 0x2e, 0x7b, 0xd7, 0x18, 0x82, 0x47, 0x5c, 0x0f, 0xca, 0xd0, 0x70, 0x0c, 0x27}
 	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
-	binaryIDVertexAttributeArray                             = binary.ID{0x64, 0x7d, 0x26, 0xce, 0xd4, 0x3e, 0xba, 0x93, 0x29, 0xf8, 0x4f, 0xa9, 0xbe, 0x10, 0x35, 0x4c, 0x00, 0x1c, 0x5d, 0xf1}
+	binaryIDVertexAttributeArray                             = binary.ID{0xd6, 0xdb, 0x80, 0x6a, 0xa4, 0x37, 0x8a, 0xfb, 0x6f, 0x2b, 0xda, 0x40, 0x36, 0x4d, 0x5a, 0x43, 0xf8, 0x16, 0x3e, 0x41}
 	binaryIDRenderbuffer                                     = binary.ID{0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd}
 	binaryIDImage                                            = binary.ID{0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb}
 	binaryIDCubemapLevel                                     = binary.ID{0x1c, 0xc1, 0xfa, 0xd8, 0xb4, 0xda, 0xc5, 0x86, 0x02, 0xcd, 0x3a, 0x43, 0xbc, 0x10, 0x9f, 0xe4, 0x55, 0x68, 0xe2, 0x4f}
@@ -1075,7 +1071,7 @@ var (
 	binaryIDGlClearStencil                                   = binary.ID{0xcf, 0xf4, 0x84, 0x08, 0x83, 0x47, 0x09, 0x6a, 0x66, 0xac, 0xbf, 0xee, 0x05, 0xb5, 0x57, 0x40, 0xa8, 0x5d, 0x8a, 0x91}
 	binaryIDGlClientWaitSync                                 = binary.ID{0x0b, 0x68, 0xeb, 0x64, 0xf5, 0xef, 0x38, 0xd0, 0x9f, 0xbf, 0x73, 0x4c, 0xf2, 0xdd, 0xc5, 0xe5, 0xd8, 0xd7, 0xe1, 0x84}
 	binaryIDGlClientWaitSyncAPPLE                            = binary.ID{0x66, 0xc0, 0xa1, 0x35, 0xec, 0x45, 0x5d, 0xed, 0x8d, 0x2e, 0x77, 0x60, 0x07, 0xde, 0x10, 0x29, 0x7b, 0x8f, 0x5a, 0xa8}
-	binaryIDGlColorMask                                      = binary.ID{0x0b, 0x72, 0x03, 0xf6, 0x51, 0x6a, 0xe3, 0xca, 0x0c, 0x5d, 0x08, 0x46, 0xf6, 0x8b, 0x71, 0xdf, 0x67, 0xe5, 0xae, 0xf9}
+	binaryIDGlColorMask                                      = binary.ID{0x08, 0x8e, 0x3b, 0xb6, 0x7d, 0x88, 0x07, 0x6c, 0x0b, 0x69, 0xba, 0xf5, 0x56, 0x97, 0xc3, 0xde, 0x2a, 0xa6, 0xc7, 0x5b}
 	binaryIDGlColorMaskiEXT                                  = binary.ID{0xd8, 0xb9, 0x63, 0xa6, 0xb9, 0xe9, 0xbf, 0xba, 0xc9, 0x91, 0x91, 0x63, 0xa1, 0x78, 0x8c, 0xa4, 0x0f, 0x1c, 0x17, 0x95}
 	binaryIDGlColorMaskiOES                                  = binary.ID{0x22, 0xb2, 0xa8, 0x79, 0x8c, 0x2b, 0x70, 0x10, 0x7c, 0xc2, 0x79, 0xf6, 0xce, 0xe5, 0x03, 0x13, 0xd8, 0x40, 0x22, 0xc2}
 	binaryIDGlCompileShader                                  = binary.ID{0xce, 0x1e, 0x7c, 0xbf, 0xf7, 0xb7, 0x95, 0x6d, 0x38, 0x5d, 0x42, 0x6d, 0x1e, 0xba, 0x0e, 0xd5, 0xf4, 0xa9, 0xe7, 0x30}
@@ -1141,7 +1137,7 @@ var (
 	binaryIDGlDeleteVertexArrays                             = binary.ID{0x76, 0x64, 0xf9, 0x2d, 0x99, 0xa8, 0xdf, 0x1c, 0x1e, 0x0a, 0x2d, 0xe5, 0x98, 0xcc, 0x86, 0x28, 0x11, 0xae, 0x98, 0x33}
 	binaryIDGlDeleteVertexArraysOES                          = binary.ID{0x22, 0x27, 0xfa, 0x8c, 0x76, 0xe8, 0xf5, 0xfc, 0x12, 0xbd, 0xf0, 0xa5, 0xad, 0xe8, 0x7c, 0xab, 0xe8, 0xdc, 0xb0, 0x61}
 	binaryIDGlDepthFunc                                      = binary.ID{0xda, 0xba, 0x70, 0x40, 0xec, 0x50, 0xc2, 0x08, 0x20, 0x33, 0xbb, 0x87, 0x31, 0x5e, 0x01, 0x49, 0xdb, 0xf7, 0x8b, 0x60}
-	binaryIDGlDepthMask                                      = binary.ID{0xc5, 0x6d, 0x4e, 0x1a, 0x87, 0x06, 0xec, 0xa4, 0xe8, 0xb4, 0x2e, 0x82, 0xff, 0x78, 0x0a, 0x83, 0x79, 0x82, 0xce, 0xf1}
+	binaryIDGlDepthMask                                      = binary.ID{0x97, 0x3f, 0x4a, 0x6e, 0x55, 0xfe, 0x5c, 0x75, 0x97, 0x64, 0xbc, 0x51, 0xff, 0x17, 0x83, 0xc7, 0x86, 0x81, 0xde, 0xe2}
 	binaryIDGlDepthRangeArrayfvNV                            = binary.ID{0x14, 0xd6, 0x46, 0x9f, 0x02, 0x6e, 0xbc, 0xa1, 0x43, 0xeb, 0xb8, 0x7f, 0x10, 0x39, 0x01, 0x05, 0xe4, 0x78, 0x51, 0x59}
 	binaryIDGlDepthRangeIndexedfNV                           = binary.ID{0x26, 0x4b, 0x47, 0xe6, 0xd5, 0x1e, 0xbd, 0xf1, 0x29, 0x6a, 0x36, 0xec, 0xca, 0x53, 0x2a, 0x6d, 0x12, 0xdf, 0x12, 0x63}
 	binaryIDGlDepthRangef                                    = binary.ID{0x2e, 0x91, 0xbb, 0x94, 0xb7, 0x52, 0x60, 0xef, 0x28, 0x5f, 0x90, 0xc7, 0xd5, 0xad, 0xf3, 0xb0, 0xfb, 0x26, 0xcc, 0x48}
@@ -1263,7 +1259,7 @@ var (
 	binaryIDGlGetAttachedShaders                             = binary.ID{0x50, 0x20, 0x01, 0x35, 0xf4, 0x86, 0x57, 0xab, 0xd6, 0x53, 0x6f, 0x7c, 0x7f, 0x84, 0xcb, 0x83, 0x7f, 0x43, 0xf5, 0x04}
 	binaryIDGlGetAttribLocation                              = binary.ID{0x75, 0xe9, 0x55, 0x96, 0x01, 0x85, 0x1d, 0xe7, 0xa7, 0xe9, 0xef, 0x2b, 0xd9, 0x77, 0x06, 0x8f, 0xe8, 0xd1, 0xce, 0x85}
 	binaryIDGlGetBooleani_v                                  = binary.ID{0xbe, 0x62, 0xf1, 0x22, 0xe9, 0x23, 0x5a, 0x62, 0x6d, 0x83, 0xf4, 0xa2, 0x9b, 0x26, 0x67, 0xf0, 0xff, 0x5b, 0x49, 0x36}
-	binaryIDGlGetBooleanv                                    = binary.ID{0x97, 0xc0, 0xb6, 0x7f, 0x15, 0xec, 0xa2, 0x39, 0x64, 0x28, 0x0a, 0xac, 0x21, 0xda, 0xc1, 0x48, 0x10, 0x1b, 0x0d, 0x99}
+	binaryIDGlGetBooleanv                                    = binary.ID{0xb2, 0x87, 0x76, 0x95, 0xc0, 0xf9, 0xcf, 0x8f, 0x96, 0xf2, 0x88, 0x6c, 0xe2, 0x42, 0xae, 0x98, 0x8b, 0x78, 0x63, 0xfb}
 	binaryIDGlGetBufferParameteri64v                         = binary.ID{0x78, 0xf8, 0xa3, 0xa0, 0xe0, 0x61, 0x42, 0x73, 0x31, 0xfe, 0x9f, 0x5f, 0xe0, 0xe9, 0x27, 0xcb, 0x91, 0xbd, 0x10, 0xb3}
 	binaryIDGlGetBufferParameteriv                           = binary.ID{0xcb, 0x07, 0x1f, 0x27, 0x1d, 0x18, 0xbe, 0xcf, 0x2e, 0xb3, 0x4c, 0x5d, 0x9b, 0x3d, 0x6b, 0xa9, 0xfa, 0xe9, 0x80, 0x54}
 	binaryIDGlGetBufferPointerv                              = binary.ID{0xa3, 0x3f, 0x91, 0xab, 0xed, 0x6d, 0x34, 0xb9, 0x97, 0xb3, 0xcd, 0x76, 0xbd, 0x24, 0x18, 0x2f, 0xeb, 0x6b, 0xcc, 0x42}
@@ -1389,32 +1385,32 @@ var (
 	binaryIDGlInterpolatePathsNV                             = binary.ID{0xf1, 0x3f, 0x62, 0x9d, 0xc0, 0x60, 0x18, 0x46, 0x59, 0x6c, 0xa1, 0x45, 0x08, 0x2c, 0x36, 0xd2, 0xa0, 0xff, 0xae, 0xc6}
 	binaryIDGlInvalidateFramebuffer                          = binary.ID{0xdb, 0x61, 0xf4, 0xea, 0xf6, 0xd0, 0x32, 0x53, 0xd9, 0xe3, 0xb8, 0x49, 0xe3, 0x7b, 0x4e, 0x3d, 0x21, 0x57, 0xae, 0xfc}
 	binaryIDGlInvalidateSubFramebuffer                       = binary.ID{0x4e, 0xf4, 0x42, 0xeb, 0x9a, 0x66, 0xc5, 0xe3, 0x09, 0x6c, 0x2f, 0x32, 0x7a, 0x81, 0x05, 0x8c, 0xe3, 0x59, 0x49, 0x59}
-	binaryIDGlIsBuffer                                       = binary.ID{0x25, 0xf9, 0x53, 0xf4, 0x60, 0x55, 0xc5, 0xfe, 0x8a, 0x0f, 0xd4, 0x1a, 0x88, 0xe7, 0xf4, 0x4c, 0xcc, 0x81, 0x3b, 0xb7}
-	binaryIDGlIsEnabled                                      = binary.ID{0x1e, 0x76, 0x5e, 0x33, 0x18, 0x3f, 0x49, 0x72, 0x76, 0x25, 0x26, 0xfc, 0x02, 0xba, 0xec, 0x57, 0xbf, 0xcd, 0x0e, 0xa6}
-	binaryIDGlIsEnablediEXT                                  = binary.ID{0x3c, 0xda, 0x4c, 0x00, 0x38, 0x1d, 0x18, 0xda, 0x25, 0x67, 0x96, 0xb9, 0xbe, 0x6f, 0xa6, 0x42, 0xa2, 0xa1, 0x64, 0x64}
-	binaryIDGlIsEnablediNV                                   = binary.ID{0x16, 0x60, 0xa3, 0x8f, 0x2e, 0x7e, 0xfc, 0x14, 0xb6, 0xae, 0x10, 0x9e, 0xfc, 0xbc, 0xa4, 0xfa, 0xc4, 0x31, 0x90, 0xc9}
-	binaryIDGlIsEnablediOES                                  = binary.ID{0x7a, 0x7a, 0x4b, 0x7b, 0xfc, 0xc6, 0xd9, 0xf9, 0x66, 0xb6, 0xa9, 0x50, 0x9d, 0x16, 0xa5, 0x62, 0x58, 0x5f, 0x51, 0xf8}
-	binaryIDGlIsFenceNV                                      = binary.ID{0xd0, 0x36, 0x79, 0x51, 0x81, 0x82, 0xed, 0xb7, 0x37, 0xd7, 0x25, 0xb3, 0x21, 0x1d, 0x42, 0x60, 0xea, 0xeb, 0x7d, 0x36}
-	binaryIDGlIsFramebuffer                                  = binary.ID{0x0b, 0xdd, 0x4e, 0xe8, 0x9f, 0x9d, 0xcc, 0xd2, 0xea, 0x1a, 0xa6, 0xc5, 0xef, 0x65, 0x2e, 0x02, 0x80, 0xe0, 0xc4, 0x63}
-	binaryIDGlIsImageHandleResidentNV                        = binary.ID{0xb6, 0xfb, 0xff, 0xb4, 0x8c, 0x61, 0x02, 0xe7, 0x4c, 0x8a, 0xe2, 0x24, 0x61, 0xbc, 0x61, 0x74, 0xd3, 0x97, 0x7f, 0x16}
-	binaryIDGlIsPathNV                                       = binary.ID{0xfb, 0x83, 0xef, 0x93, 0x94, 0x6f, 0xad, 0x68, 0xa9, 0x9f, 0x83, 0x37, 0x8e, 0x23, 0x95, 0x6f, 0xf0, 0x4a, 0x38, 0x0b}
-	binaryIDGlIsPointInFillPathNV                            = binary.ID{0x07, 0xa7, 0x0a, 0xce, 0xd9, 0x63, 0x98, 0xc7, 0x0d, 0xe1, 0x10, 0xdb, 0xed, 0x19, 0x00, 0xe0, 0x3f, 0x61, 0xde, 0x31}
-	binaryIDGlIsPointInStrokePathNV                          = binary.ID{0x5b, 0xcc, 0x1e, 0x2f, 0xd6, 0x59, 0xc6, 0x90, 0x9b, 0x68, 0x80, 0x42, 0xea, 0x77, 0x2d, 0xa8, 0x1b, 0x20, 0x7b, 0x27}
-	binaryIDGlIsProgram                                      = binary.ID{0x62, 0xbd, 0xde, 0xd6, 0x51, 0x60, 0x50, 0x3e, 0x3d, 0x54, 0x0a, 0xec, 0xb2, 0xcd, 0xf5, 0x54, 0xfb, 0x79, 0x3c, 0xdd}
-	binaryIDGlIsProgramPipeline                              = binary.ID{0x12, 0xc3, 0x33, 0x56, 0x4d, 0x0b, 0xc2, 0x6a, 0x89, 0x06, 0x71, 0x90, 0xaf, 0xc6, 0x07, 0x5b, 0x4f, 0x57, 0xed, 0x4b}
-	binaryIDGlIsProgramPipelineEXT                           = binary.ID{0x02, 0x06, 0x86, 0x2b, 0x7f, 0x2f, 0x1c, 0xa7, 0xa8, 0x6f, 0xd1, 0x91, 0x5a, 0x8d, 0xd8, 0xcd, 0xe5, 0x0b, 0x36, 0xd2}
-	binaryIDGlIsQuery                                        = binary.ID{0x3b, 0x6f, 0x09, 0x4b, 0x89, 0xdc, 0x6b, 0x2f, 0x74, 0xd6, 0x51, 0x3b, 0x3f, 0xfe, 0x6d, 0x60, 0x72, 0x60, 0x61, 0xe2}
-	binaryIDGlIsQueryEXT                                     = binary.ID{0xb1, 0x6a, 0x0d, 0xdf, 0xb6, 0xea, 0x3d, 0x84, 0xd0, 0x8c, 0x22, 0xf5, 0xf9, 0x82, 0x88, 0xa5, 0x3e, 0xdd, 0x56, 0xea}
-	binaryIDGlIsRenderbuffer                                 = binary.ID{0xee, 0xfa, 0xeb, 0x17, 0x01, 0xe1, 0xe4, 0xc6, 0x90, 0x90, 0x9c, 0xfa, 0x28, 0x24, 0xad, 0x33, 0xc5, 0xef, 0x2f, 0xe6}
-	binaryIDGlIsSampler                                      = binary.ID{0xe7, 0x20, 0x74, 0xdd, 0xbc, 0xd4, 0x8a, 0x01, 0xe5, 0x8d, 0xf6, 0x31, 0xa0, 0xea, 0xe8, 0xc7, 0xc2, 0x9e, 0x40, 0x12}
-	binaryIDGlIsShader                                       = binary.ID{0xb5, 0x7a, 0x83, 0x39, 0x62, 0xa0, 0x1c, 0x3d, 0x08, 0x84, 0x29, 0xda, 0x1a, 0x6a, 0xe2, 0xd6, 0x24, 0x88, 0x4e, 0xe2}
-	binaryIDGlIsSync                                         = binary.ID{0x91, 0x49, 0xac, 0x3e, 0x81, 0x9f, 0x67, 0x37, 0x47, 0x69, 0x6c, 0x75, 0x87, 0x40, 0x58, 0x21, 0x3d, 0x12, 0x03, 0x81}
-	binaryIDGlIsSyncAPPLE                                    = binary.ID{0xc5, 0xd9, 0xbc, 0x70, 0x4c, 0xd1, 0x8a, 0x59, 0x8c, 0x5a, 0xde, 0xf2, 0x3c, 0x77, 0xc3, 0xb0, 0xb8, 0x6f, 0xa2, 0x52}
-	binaryIDGlIsTexture                                      = binary.ID{0xae, 0x84, 0x50, 0xca, 0xe6, 0x83, 0x45, 0x6c, 0x68, 0x8d, 0x96, 0xf2, 0xb2, 0x0f, 0x9c, 0x01, 0x78, 0x1c, 0x12, 0xdd}
-	binaryIDGlIsTextureHandleResidentNV                      = binary.ID{0x86, 0xd0, 0xaf, 0x39, 0x23, 0x63, 0x6a, 0x88, 0xca, 0xd3, 0x8b, 0xa5, 0x97, 0x3f, 0x1b, 0xd0, 0x8c, 0xd6, 0xbb, 0xb0}
-	binaryIDGlIsTransformFeedback                            = binary.ID{0x73, 0xf1, 0xcd, 0x3b, 0xc3, 0xba, 0x36, 0x0d, 0x81, 0x3f, 0x46, 0x9c, 0xc0, 0x51, 0x85, 0x45, 0x1a, 0x70, 0xbb, 0xbc}
-	binaryIDGlIsVertexArray                                  = binary.ID{0xfa, 0x3f, 0x47, 0xbd, 0xae, 0xc8, 0x4c, 0x38, 0xa1, 0x33, 0x6c, 0x4f, 0x39, 0x74, 0x9f, 0x90, 0x9e, 0x9e, 0x5d, 0x86}
-	binaryIDGlIsVertexArrayOES                               = binary.ID{0xab, 0xa3, 0xb5, 0xac, 0x9c, 0x32, 0x14, 0xdb, 0x82, 0x00, 0xa7, 0xbd, 0xe0, 0xb2, 0x40, 0x64, 0xac, 0x30, 0xb8, 0xc7}
+	binaryIDGlIsBuffer                                       = binary.ID{0xd1, 0x42, 0xad, 0xb7, 0x81, 0x67, 0x04, 0x3a, 0x6e, 0x6a, 0x0a, 0x72, 0x75, 0xcb, 0x7c, 0x15, 0xa1, 0x9a, 0xf8, 0x66}
+	binaryIDGlIsEnabled                                      = binary.ID{0xdf, 0xea, 0x56, 0xfa, 0xb1, 0x23, 0x94, 0xf6, 0x32, 0xef, 0x9e, 0x76, 0x22, 0x90, 0x9e, 0x64, 0x72, 0x78, 0x9a, 0x77}
+	binaryIDGlIsEnablediEXT                                  = binary.ID{0xae, 0x61, 0xac, 0xf0, 0xa8, 0x0a, 0xda, 0xd4, 0x62, 0x6f, 0x79, 0x2a, 0x94, 0xcc, 0x5b, 0x49, 0xde, 0xea, 0x1c, 0xfc}
+	binaryIDGlIsEnablediNV                                   = binary.ID{0x23, 0x7a, 0xc2, 0xbc, 0x0c, 0x99, 0xbd, 0xa3, 0x4a, 0x46, 0xb7, 0x73, 0xe3, 0xaf, 0xfe, 0xe9, 0x57, 0x71, 0xf8, 0xd5}
+	binaryIDGlIsEnablediOES                                  = binary.ID{0xdc, 0x6b, 0x8a, 0x3f, 0x3a, 0xcb, 0xdb, 0x01, 0xc1, 0xc6, 0x0e, 0x8e, 0xab, 0x90, 0xfb, 0x0d, 0x76, 0x5e, 0xb2, 0xad}
+	binaryIDGlIsFenceNV                                      = binary.ID{0x00, 0xbe, 0x20, 0x72, 0x2b, 0x08, 0x81, 0xee, 0x1e, 0x4c, 0xae, 0x5b, 0x5e, 0x61, 0x2c, 0x78, 0x6c, 0xcc, 0x58, 0xfa}
+	binaryIDGlIsFramebuffer                                  = binary.ID{0x18, 0x61, 0x06, 0x59, 0x8f, 0x47, 0x18, 0x3d, 0xc9, 0x38, 0x46, 0x78, 0x2e, 0x71, 0x54, 0x29, 0x9b, 0x9f, 0xc6, 0x33}
+	binaryIDGlIsImageHandleResidentNV                        = binary.ID{0x53, 0xe4, 0x84, 0xe2, 0x4e, 0x7e, 0xbf, 0x3f, 0xae, 0xac, 0x62, 0x67, 0x00, 0xc5, 0xbc, 0x10, 0x9e, 0x04, 0x11, 0xf7}
+	binaryIDGlIsPathNV                                       = binary.ID{0x11, 0x8e, 0xe3, 0x7e, 0xd5, 0x0a, 0x80, 0x9f, 0xb2, 0xb3, 0x72, 0xc6, 0xc6, 0x3a, 0x5c, 0x7d, 0xc5, 0x00, 0x48, 0xde}
+	binaryIDGlIsPointInFillPathNV                            = binary.ID{0x21, 0x3c, 0x21, 0xd4, 0xa6, 0xf1, 0xa7, 0xcf, 0xef, 0x46, 0x10, 0xe4, 0x3f, 0xa8, 0xc5, 0xf3, 0x5c, 0xe7, 0x9a, 0x46}
+	binaryIDGlIsPointInStrokePathNV                          = binary.ID{0xe2, 0x25, 0x1e, 0xa9, 0x3b, 0x3c, 0x88, 0x47, 0xde, 0x73, 0xb3, 0xd8, 0x3c, 0x22, 0x91, 0x58, 0xcd, 0xba, 0xca, 0x9a}
+	binaryIDGlIsProgram                                      = binary.ID{0x3d, 0x4b, 0x04, 0xa2, 0x10, 0x91, 0x77, 0xc4, 0x5b, 0xf7, 0x7b, 0x52, 0x88, 0xb8, 0x23, 0xb4, 0x8b, 0x1d, 0x49, 0x8a}
+	binaryIDGlIsProgramPipeline                              = binary.ID{0x65, 0x87, 0x32, 0x9b, 0x5e, 0x93, 0x56, 0x50, 0xb5, 0x80, 0x11, 0xcf, 0xa9, 0xea, 0x41, 0x79, 0x91, 0x56, 0xea, 0xf5}
+	binaryIDGlIsProgramPipelineEXT                           = binary.ID{0x20, 0x45, 0x4b, 0x4e, 0xdc, 0x7d, 0x13, 0xe1, 0xe0, 0xd8, 0x3e, 0x59, 0x26, 0x75, 0x7b, 0x9e, 0x20, 0x11, 0x92, 0x53}
+	binaryIDGlIsQuery                                        = binary.ID{0xeb, 0xf4, 0x49, 0xc3, 0xc4, 0x7f, 0xcf, 0x88, 0xd6, 0xba, 0xcd, 0xd3, 0x71, 0xf4, 0x54, 0x11, 0xc0, 0x5f, 0x39, 0x6c}
+	binaryIDGlIsQueryEXT                                     = binary.ID{0xe4, 0x92, 0x78, 0x2c, 0x94, 0x95, 0xb9, 0x72, 0xd8, 0x48, 0xa9, 0x22, 0x2e, 0xbe, 0xc9, 0x93, 0x52, 0x14, 0x68, 0x80}
+	binaryIDGlIsRenderbuffer                                 = binary.ID{0x34, 0x29, 0x3a, 0x38, 0xe1, 0xd5, 0x24, 0x3f, 0xfc, 0xc1, 0x68, 0xb5, 0x19, 0x3b, 0x96, 0xcc, 0x06, 0xd2, 0xa0, 0x78}
+	binaryIDGlIsSampler                                      = binary.ID{0x5a, 0x71, 0x95, 0xd5, 0x3d, 0x8a, 0x37, 0x3f, 0xef, 0x3c, 0x68, 0x22, 0x10, 0x11, 0x15, 0x39, 0x66, 0xde, 0x16, 0xc9}
+	binaryIDGlIsShader                                       = binary.ID{0xa7, 0x49, 0xe5, 0x16, 0x9b, 0xf3, 0x3e, 0x13, 0xba, 0x90, 0x7a, 0x71, 0x99, 0x9b, 0xd3, 0x77, 0x68, 0xa4, 0xb1, 0xe6}
+	binaryIDGlIsSync                                         = binary.ID{0xa4, 0x39, 0x5f, 0xae, 0xa8, 0xe2, 0x66, 0x9d, 0x53, 0xcc, 0x8d, 0x93, 0xa3, 0x60, 0x08, 0x19, 0x9c, 0x2e, 0xe8, 0x78}
+	binaryIDGlIsSyncAPPLE                                    = binary.ID{0x56, 0x15, 0x61, 0xaa, 0xec, 0x7f, 0x97, 0xe1, 0xad, 0x1e, 0x61, 0xea, 0x8e, 0x2b, 0xb1, 0xe5, 0x47, 0x39, 0x0c, 0x93}
+	binaryIDGlIsTexture                                      = binary.ID{0x5b, 0xe3, 0xe7, 0xfa, 0xf3, 0x8f, 0xef, 0x75, 0xff, 0xf5, 0xab, 0xe8, 0xa5, 0xf6, 0xca, 0x21, 0xfa, 0xf9, 0x44, 0x38}
+	binaryIDGlIsTextureHandleResidentNV                      = binary.ID{0x4e, 0x07, 0x08, 0x21, 0x50, 0x6f, 0x16, 0xf4, 0x6c, 0x14, 0x7a, 0x47, 0xe7, 0x3b, 0xb3, 0x3c, 0x6b, 0xc4, 0xa3, 0xb2}
+	binaryIDGlIsTransformFeedback                            = binary.ID{0x32, 0x19, 0xd3, 0xf0, 0xb0, 0x03, 0x77, 0x57, 0x2f, 0x77, 0x27, 0x12, 0x4a, 0x61, 0x32, 0xd3, 0xbb, 0xd7, 0x70, 0xc9}
+	binaryIDGlIsVertexArray                                  = binary.ID{0x05, 0x80, 0x6b, 0x17, 0xc1, 0x95, 0x55, 0x32, 0x24, 0xa9, 0xcb, 0x99, 0x7d, 0x49, 0xfc, 0x8b, 0xd2, 0xfa, 0xd3, 0x2d}
+	binaryIDGlIsVertexArrayOES                               = binary.ID{0xb7, 0x33, 0xcc, 0xf5, 0x7b, 0x60, 0x3f, 0x6e, 0xe4, 0xf6, 0xad, 0xaf, 0xd2, 0xd1, 0xad, 0xba, 0x86, 0x4c, 0x12, 0xa8}
 	binaryIDGlLabelObjectEXT                                 = binary.ID{0xb9, 0x3e, 0x8d, 0xf0, 0x23, 0xb2, 0x1b, 0x2c, 0x02, 0x10, 0x73, 0xec, 0x0b, 0x1d, 0x23, 0x7d, 0x87, 0x37, 0xe8, 0xd7}
 	binaryIDGlLineWidth                                      = binary.ID{0x93, 0x5b, 0xc3, 0x68, 0x79, 0x91, 0x57, 0xc2, 0x9c, 0x41, 0x25, 0x25, 0x06, 0x5a, 0x2c, 0xeb, 0xf5, 0x7a, 0x43, 0x85}
 	binaryIDGlLinkProgram                                    = binary.ID{0x17, 0xf0, 0x30, 0xba, 0x15, 0x5a, 0xf7, 0x20, 0x04, 0x04, 0xea, 0xd7, 0xc3, 0xba, 0x6a, 0x4c, 0x9e, 0x0d, 0x96, 0x41}
@@ -1567,7 +1563,7 @@ var (
 	binaryIDGlResolveDepthValuesNV                           = binary.ID{0x1f, 0x25, 0xbe, 0xc8, 0xff, 0xbe, 0x1b, 0x80, 0xf7, 0xdb, 0x8a, 0x7f, 0x33, 0xf6, 0x96, 0x73, 0x19, 0xd8, 0xaf, 0xe6}
 	binaryIDGlResolveMultisampleFramebufferAPPLE             = binary.ID{0xfa, 0xaf, 0x24, 0x40, 0x87, 0xc2, 0xce, 0x82, 0x78, 0x08, 0x1c, 0xc8, 0xaa, 0x86, 0xc9, 0xad, 0x72, 0xbe, 0x58, 0xd7}
 	binaryIDGlResumeTransformFeedback                        = binary.ID{0x78, 0x30, 0xbd, 0xa6, 0xf3, 0xcd, 0xd9, 0xb2, 0x78, 0x6d, 0x4e, 0x69, 0x2e, 0x69, 0xcf, 0xe5, 0x4f, 0x78, 0xd8, 0x21}
-	binaryIDGlSampleCoverage                                 = binary.ID{0xd6, 0x38, 0xca, 0xe0, 0xdf, 0x70, 0x44, 0xf0, 0xc1, 0x90, 0xf6, 0xae, 0x37, 0x92, 0xa8, 0xc5, 0x6c, 0x14, 0x5c, 0x44}
+	binaryIDGlSampleCoverage                                 = binary.ID{0x8f, 0x2d, 0x0f, 0x2a, 0x05, 0x41, 0x30, 0x62, 0xd9, 0x60, 0x92, 0x3b, 0x02, 0x58, 0xdf, 0x37, 0x82, 0xa1, 0xb7, 0xbd}
 	binaryIDGlSampleMaski                                    = binary.ID{0xf9, 0x62, 0x3a, 0x77, 0xe0, 0xab, 0x12, 0xac, 0xae, 0x9c, 0x9d, 0x2a, 0x7c, 0x46, 0x08, 0xca, 0xe1, 0x25, 0x23, 0x8f}
 	binaryIDGlSamplerParameterIivEXT                         = binary.ID{0xb2, 0x2e, 0x2b, 0x5e, 0x97, 0xb8, 0x67, 0xcd, 0x21, 0x4c, 0xf9, 0xc6, 0x05, 0x27, 0x3a, 0xcc, 0x3e, 0x6e, 0x00, 0x0c}
 	binaryIDGlSamplerParameterIivOES                         = binary.ID{0x35, 0xb2, 0x07, 0x23, 0xe3, 0xde, 0x9b, 0xad, 0xaf, 0x52, 0x20, 0x75, 0xe1, 0x09, 0x50, 0xbe, 0x60, 0x31, 0x10, 0xc8}
@@ -1706,7 +1702,7 @@ var (
 	binaryIDGlVertexAttribI4uiv                              = binary.ID{0x9e, 0x75, 0x6b, 0x92, 0xb6, 0x5b, 0xb9, 0xb8, 0x7a, 0x3e, 0xc4, 0x90, 0x03, 0x7d, 0x31, 0xb2, 0x0a, 0x09, 0x17, 0xae}
 	binaryIDGlVertexAttribIFormat                            = binary.ID{0x6f, 0x9a, 0xbc, 0xe0, 0x7f, 0x44, 0x96, 0xc3, 0xfa, 0xee, 0xc8, 0x98, 0xba, 0x8b, 0x44, 0xf3, 0x87, 0x97, 0x07, 0xb0}
 	binaryIDGlVertexAttribIPointer                           = binary.ID{0x7f, 0x10, 0x3a, 0xc4, 0x1e, 0xab, 0x53, 0x48, 0x07, 0x47, 0x52, 0xe1, 0xf0, 0xa6, 0x7f, 0xcf, 0x11, 0xa1, 0xff, 0x2e}
-	binaryIDGlVertexAttribPointer                            = binary.ID{0x8d, 0xe5, 0x21, 0x0d, 0xc4, 0xcd, 0x43, 0x00, 0xef, 0x07, 0xe3, 0x29, 0x33, 0x8c, 0x33, 0xcf, 0xd3, 0x2d, 0xac, 0x96}
+	binaryIDGlVertexAttribPointer                            = binary.ID{0xa9, 0xf4, 0x7e, 0x3b, 0x7c, 0x9d, 0x74, 0x34, 0xf5, 0x0b, 0xad, 0xb3, 0xd8, 0x9b, 0x87, 0xf9, 0xef, 0xf5, 0x5f, 0x90}
 	binaryIDGlVertexBindingDivisor                           = binary.ID{0x22, 0xb4, 0x64, 0x01, 0x30, 0xcc, 0x39, 0x6c, 0x72, 0x22, 0xc2, 0x5b, 0xc5, 0xfe, 0x55, 0xc8, 0xe4, 0x22, 0x62, 0x8f}
 	binaryIDGlViewport                                       = binary.ID{0x03, 0xfa, 0x0b, 0x41, 0x52, 0x97, 0x87, 0x00, 0x14, 0xd1, 0xf0, 0xff, 0x04, 0x25, 0x0d, 0x5c, 0x62, 0xc5, 0x50, 0xd8}
 	binaryIDGlViewportArrayvNV                               = binary.ID{0x53, 0x50, 0xaf, 0x8d, 0x81, 0x9f, 0xd8, 0xf0, 0xcd, 0xea, 0xaa, 0x5d, 0x76, 0x9f, 0x19, 0x16, 0x7c, 0xea, 0xd0, 0x0c}
@@ -2286,100 +2282,6 @@ var schemaSliceInfo = &schema.Class{
 		{Declared: "Root", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-	},
-}
-
-type binaryClassBoolˢ struct{}
-
-func (*Boolˢ) Class() binary.Class {
-	return (*binaryClassBoolˢ)(nil)
-}
-func doEncodeBoolˢ(e binary.Encoder, o *Boolˢ) error {
-	if err := e.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) error {
-	if err := d.Value(&o.SliceInfo); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipBoolˢ(d binary.Decoder) error {
-	if err := d.SkipValue((*SliceInfo)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassBoolˢ) ID() binary.ID      { return binaryIDBoolˢ }
-func (*binaryClassBoolˢ) New() binary.Object { return &Boolˢ{} }
-func (*binaryClassBoolˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeBoolˢ(e, obj.(*Boolˢ))
-}
-func (*binaryClassBoolˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Boolˢ{}
-	return obj, doDecodeBoolˢ(d, obj)
-}
-func (*binaryClassBoolˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeBoolˢ(d, obj.(*Boolˢ))
-}
-func (*binaryClassBoolˢ) Skip(d binary.Decoder) error { return doSkipBoolˢ(d) }
-func (*binaryClassBoolˢ) Schema() *schema.Class       { return schemaBoolˢ }
-
-var schemaBoolˢ = &schema.Class{
-	TypeID:  binaryIDBoolˢ,
-	Package: "gles",
-	Name:    "Boolˢ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "SliceInfo", ID: (*SliceInfo)(nil).Class().ID()}},
-	},
-}
-
-type binaryClassBoolᵖ struct{}
-
-func (*Boolᵖ) Class() binary.Class {
-	return (*binaryClassBoolᵖ)(nil)
-}
-func doEncodeBoolᵖ(e binary.Encoder, o *Boolᵖ) error {
-	if err := e.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeBoolᵖ(d binary.Decoder, o *Boolᵖ) error {
-	if err := d.Value(&o.Pointer); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipBoolᵖ(d binary.Decoder) error {
-	if err := d.SkipValue((*memory.Pointer)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassBoolᵖ) ID() binary.ID      { return binaryIDBoolᵖ }
-func (*binaryClassBoolᵖ) New() binary.Object { return &Boolᵖ{} }
-func (*binaryClassBoolᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeBoolᵖ(e, obj.(*Boolᵖ))
-}
-func (*binaryClassBoolᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Boolᵖ{}
-	return obj, doDecodeBoolᵖ(d, obj)
-}
-func (*binaryClassBoolᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeBoolᵖ(d, obj.(*Boolᵖ))
-}
-func (*binaryClassBoolᵖ) Skip(d binary.Decoder) error { return doSkipBoolᵖ(d) }
-func (*binaryClassBoolᵖ) Schema() *schema.Class       { return schemaBoolᵖ }
-
-var schemaBoolᵖ = &schema.Class{
-	TypeID:  binaryIDBoolᵖ,
-	Package: "gles",
-	Name:    "Boolᵖ",
-	Fields: []schema.Field{
-		{Declared: "", Type: &schema.Struct{Name: "memory.Pointer", ID: (*memory.Pointer)(nil).Class().ID()}},
 	},
 }
 
@@ -3976,7 +3878,7 @@ func (*RasterizerState) Class() binary.Class {
 	return (*binaryClassRasterizerState)(nil)
 }
 func doEncodeRasterizerState(e binary.Encoder, o *RasterizerState) error {
-	if err := e.Bool(o.DepthMask); err != nil {
+	if err := e.Uint8(uint8(o.DepthMask)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.DepthTestFunction)); err != nil {
@@ -3988,16 +3890,16 @@ func doEncodeRasterizerState(e binary.Encoder, o *RasterizerState) error {
 	if err := e.Float32(float32(o.DepthFar)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.ColorMaskRed); err != nil {
+	if err := e.Uint8(uint8(o.ColorMaskRed)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.ColorMaskGreen); err != nil {
+	if err := e.Uint8(uint8(o.ColorMaskGreen)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.ColorMaskBlue); err != nil {
+	if err := e.Uint8(uint8(o.ColorMaskBlue)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.ColorMaskAlpha); err != nil {
+	if err := e.Uint8(uint8(o.ColorMaskAlpha)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.StencilMask))); err != nil {
@@ -4035,16 +3937,16 @@ func doEncodeRasterizerState(e binary.Encoder, o *RasterizerState) error {
 	if err := e.Float32(float32(o.SampleCoverageValue)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.SampleCoverageInvert); err != nil {
+	if err := e.Uint8(uint8(o.SampleCoverageInvert)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.DepthMask = bool(obj)
+		o.DepthMask = GLboolean(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -4061,25 +3963,25 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	} else {
 		o.DepthFar = GLfloat(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.ColorMaskRed = bool(obj)
+		o.ColorMaskRed = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.ColorMaskGreen = bool(obj)
+		o.ColorMaskGreen = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.ColorMaskBlue = bool(obj)
+		o.ColorMaskBlue = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.ColorMaskAlpha = bool(obj)
+		o.ColorMaskAlpha = GLboolean(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
@@ -4138,15 +4040,15 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	} else {
 		o.SampleCoverageValue = GLfloat(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.SampleCoverageInvert = bool(obj)
+		o.SampleCoverageInvert = GLboolean(obj)
 	}
 	return nil
 }
 func doSkipRasterizerState(d binary.Decoder) error {
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -4158,16 +4060,16 @@ func doSkipRasterizerState(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -4206,7 +4108,7 @@ func doSkipRasterizerState(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -4231,14 +4133,14 @@ var schemaRasterizerState = &schema.Class{
 	Package: "gles",
 	Name:    "RasterizerState",
 	Fields: []schema.Field{
-		{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "DepthMask", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DepthNear", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "DepthFar", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "StencilMask", Type: &schema.Map{Alias: "GLenumːGLuintᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}}},
 		{Declared: "Viewport", Type: &schema.Struct{Name: "Rect", ID: (*Rect)(nil).Class().ID()}},
 		{Declared: "Scissor", Type: &schema.Struct{Name: "Rect", ID: (*Rect)(nil).Class().ID()}},
@@ -4248,7 +4150,7 @@ var schemaRasterizerState = &schema.Class{
 		{Declared: "PolygonOffsetFactor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "PolygonOffsetUnits", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "SampleCoverageValue", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "SampleCoverageInvert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "SampleCoverageInvert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -4314,7 +4216,7 @@ func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) err
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Normalized); err != nil {
+	if err := e.Uint8(uint8(o.Normalized)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.Stride)); err != nil {
@@ -4344,10 +4246,10 @@ func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) err
 	} else {
 		o.Type = GLenum(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Normalized = bool(obj)
+		o.Normalized = GLboolean(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -4374,7 +4276,7 @@ func doSkipVertexAttributeArray(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -4413,7 +4315,7 @@ var schemaVertexAttributeArray = &schema.Class{
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
@@ -14641,16 +14543,16 @@ func doEncodeGlColorMask(e binary.Encoder, o *GlColorMask) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Red); err != nil {
+	if err := e.Uint8(uint8(o.Red)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Green); err != nil {
+	if err := e.Uint8(uint8(o.Green)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Blue); err != nil {
+	if err := e.Uint8(uint8(o.Blue)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Alpha); err != nil {
+	if err := e.Uint8(uint8(o.Alpha)); err != nil {
 		return err
 	}
 	return nil
@@ -14659,25 +14561,25 @@ func doDecodeGlColorMask(d binary.Decoder, o *GlColorMask) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Red = bool(obj)
+		o.Red = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Green = bool(obj)
+		o.Green = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Blue = bool(obj)
+		o.Blue = GLboolean(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Alpha = bool(obj)
+		o.Alpha = GLboolean(obj)
 	}
 	return nil
 }
@@ -14685,16 +14587,16 @@ func doSkipGlColorMask(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -14720,10 +14622,10 @@ var schemaGlColorMask = &schema.Class{
 	Name:    "GlColorMask",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Red", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Green", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Blue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Alpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -20683,7 +20585,7 @@ func doEncodeGlDepthMask(e binary.Encoder, o *GlDepthMask) error {
 	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Enabled); err != nil {
+	if err := e.Uint8(uint8(o.Enabled)); err != nil {
 		return err
 	}
 	return nil
@@ -20692,10 +20594,10 @@ func doDecodeGlDepthMask(d binary.Decoder, o *GlDepthMask) error {
 	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Enabled = bool(obj)
+		o.Enabled = GLboolean(obj)
 	}
 	return nil
 }
@@ -20703,7 +20605,7 @@ func doSkipGlDepthMask(d binary.Decoder) error {
 	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -20729,7 +20631,7 @@ var schemaGlDepthMask = &schema.Class{
 	Name:    "GlDepthMask",
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
-		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -30778,7 +30680,7 @@ func doSkipGlGetBooleanv(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*Boolᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*GLbooleanᵖ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -30805,7 +30707,7 @@ var schemaGlGetBooleanv = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Name: "Boolᵖ", ID: (*Boolᵖ)(nil).Class().ID()}},
+		{Declared: "Values", Type: &schema.Struct{Name: "GLbooleanᵖ", ID: (*GLbooleanᵖ)(nil).Class().ID()}},
 	},
 }
 
@@ -42152,7 +42054,7 @@ func doEncodeGlIsBuffer(e binary.Encoder, o *GlIsBuffer) error {
 	if err := e.Uint32(uint32(o.Buffer)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42166,10 +42068,10 @@ func doDecodeGlIsBuffer(d binary.Decoder, o *GlIsBuffer) error {
 	} else {
 		o.Buffer = BufferId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42180,7 +42082,7 @@ func doSkipGlIsBuffer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42207,7 +42109,7 @@ var schemaGlIsBuffer = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42223,7 +42125,7 @@ func doEncodeGlIsEnabled(e binary.Encoder, o *GlIsEnabled) error {
 	if err := e.Uint32(uint32(o.Capability)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42237,10 +42139,10 @@ func doDecodeGlIsEnabled(d binary.Decoder, o *GlIsEnabled) error {
 	} else {
 		o.Capability = GLenum(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42251,7 +42153,7 @@ func doSkipGlIsEnabled(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42278,7 +42180,7 @@ var schemaGlIsEnabled = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42297,7 +42199,7 @@ func doEncodeGlIsEnablediEXT(e binary.Encoder, o *GlIsEnablediEXT) error {
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42316,10 +42218,10 @@ func doDecodeGlIsEnablediEXT(d binary.Decoder, o *GlIsEnablediEXT) error {
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42333,7 +42235,7 @@ func doSkipGlIsEnablediEXT(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42361,7 +42263,7 @@ var schemaGlIsEnablediEXT = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42380,7 +42282,7 @@ func doEncodeGlIsEnablediNV(e binary.Encoder, o *GlIsEnablediNV) error {
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42399,10 +42301,10 @@ func doDecodeGlIsEnablediNV(d binary.Decoder, o *GlIsEnablediNV) error {
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42416,7 +42318,7 @@ func doSkipGlIsEnablediNV(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42444,7 +42346,7 @@ var schemaGlIsEnablediNV = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42463,7 +42365,7 @@ func doEncodeGlIsEnablediOES(e binary.Encoder, o *GlIsEnablediOES) error {
 	if err := e.Uint32(uint32(o.Index)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42482,10 +42384,10 @@ func doDecodeGlIsEnablediOES(d binary.Decoder, o *GlIsEnablediOES) error {
 	} else {
 		o.Index = GLuint(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42499,7 +42401,7 @@ func doSkipGlIsEnablediOES(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42527,7 +42429,7 @@ var schemaGlIsEnablediOES = &schema.Class{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42543,7 +42445,7 @@ func doEncodeGlIsFenceNV(e binary.Encoder, o *GlIsFenceNV) error {
 	if err := e.Uint32(uint32(o.Fence)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42557,10 +42459,10 @@ func doDecodeGlIsFenceNV(d binary.Decoder, o *GlIsFenceNV) error {
 	} else {
 		o.Fence = GLuint(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42571,7 +42473,7 @@ func doSkipGlIsFenceNV(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42598,7 +42500,7 @@ var schemaGlIsFenceNV = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42614,7 +42516,7 @@ func doEncodeGlIsFramebuffer(e binary.Encoder, o *GlIsFramebuffer) error {
 	if err := e.Uint32(uint32(o.Framebuffer)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42628,10 +42530,10 @@ func doDecodeGlIsFramebuffer(d binary.Decoder, o *GlIsFramebuffer) error {
 	} else {
 		o.Framebuffer = FramebufferId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42642,7 +42544,7 @@ func doSkipGlIsFramebuffer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42669,7 +42571,7 @@ var schemaGlIsFramebuffer = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42685,7 +42587,7 @@ func doEncodeGlIsImageHandleResidentNV(e binary.Encoder, o *GlIsImageHandleResid
 	if err := e.Uint64(uint64(o.Handle)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42699,10 +42601,10 @@ func doDecodeGlIsImageHandleResidentNV(d binary.Decoder, o *GlIsImageHandleResid
 	} else {
 		o.Handle = GLuint64(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42713,7 +42615,7 @@ func doSkipGlIsImageHandleResidentNV(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42744,7 +42646,7 @@ var schemaGlIsImageHandleResidentNV = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42760,7 +42662,7 @@ func doEncodeGlIsPathNV(e binary.Encoder, o *GlIsPathNV) error {
 	if err := e.Uint32(uint32(o.Path)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42774,10 +42676,10 @@ func doDecodeGlIsPathNV(d binary.Decoder, o *GlIsPathNV) error {
 	} else {
 		o.Path = GLuint(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42788,7 +42690,7 @@ func doSkipGlIsPathNV(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42815,7 +42717,7 @@ var schemaGlIsPathNV = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42840,7 +42742,7 @@ func doEncodeGlIsPointInFillPathNV(e binary.Encoder, o *GlIsPointInFillPathNV) e
 	if err := e.Float32(float32(o.Y)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42869,10 +42771,10 @@ func doDecodeGlIsPointInFillPathNV(d binary.Decoder, o *GlIsPointInFillPathNV) e
 	} else {
 		o.Y = GLfloat(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42892,7 +42794,7 @@ func doSkipGlIsPointInFillPathNV(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -42924,7 +42826,7 @@ var schemaGlIsPointInFillPathNV = &schema.Class{
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -42946,7 +42848,7 @@ func doEncodeGlIsPointInStrokePathNV(e binary.Encoder, o *GlIsPointInStrokePathN
 	if err := e.Float32(float32(o.Y)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -42970,10 +42872,10 @@ func doDecodeGlIsPointInStrokePathNV(d binary.Decoder, o *GlIsPointInStrokePathN
 	} else {
 		o.Y = GLfloat(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -42990,7 +42892,7 @@ func doSkipGlIsPointInStrokePathNV(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43023,7 +42925,7 @@ var schemaGlIsPointInStrokePathNV = &schema.Class{
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43039,7 +42941,7 @@ func doEncodeGlIsProgram(e binary.Encoder, o *GlIsProgram) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43053,10 +42955,10 @@ func doDecodeGlIsProgram(d binary.Decoder, o *GlIsProgram) error {
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43067,7 +42969,7 @@ func doSkipGlIsProgram(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43094,7 +42996,7 @@ var schemaGlIsProgram = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43110,7 +43012,7 @@ func doEncodeGlIsProgramPipeline(e binary.Encoder, o *GlIsProgramPipeline) error
 	if err := e.Uint32(uint32(o.Pipeline)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43124,10 +43026,10 @@ func doDecodeGlIsProgramPipeline(d binary.Decoder, o *GlIsProgramPipeline) error
 	} else {
 		o.Pipeline = PipelineId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43138,7 +43040,7 @@ func doSkipGlIsProgramPipeline(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43167,7 +43069,7 @@ var schemaGlIsProgramPipeline = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43183,7 +43085,7 @@ func doEncodeGlIsProgramPipelineEXT(e binary.Encoder, o *GlIsProgramPipelineEXT)
 	if err := e.Uint32(uint32(o.Pipeline)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43197,10 +43099,10 @@ func doDecodeGlIsProgramPipelineEXT(d binary.Decoder, o *GlIsProgramPipelineEXT)
 	} else {
 		o.Pipeline = PipelineId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43211,7 +43113,7 @@ func doSkipGlIsProgramPipelineEXT(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43240,7 +43142,7 @@ var schemaGlIsProgramPipelineEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43256,7 +43158,7 @@ func doEncodeGlIsQuery(e binary.Encoder, o *GlIsQuery) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43270,10 +43172,10 @@ func doDecodeGlIsQuery(d binary.Decoder, o *GlIsQuery) error {
 	} else {
 		o.Query = QueryId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43284,7 +43186,7 @@ func doSkipGlIsQuery(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43311,7 +43213,7 @@ var schemaGlIsQuery = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43327,7 +43229,7 @@ func doEncodeGlIsQueryEXT(e binary.Encoder, o *GlIsQueryEXT) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43341,10 +43243,10 @@ func doDecodeGlIsQueryEXT(d binary.Decoder, o *GlIsQueryEXT) error {
 	} else {
 		o.Query = QueryId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43355,7 +43257,7 @@ func doSkipGlIsQueryEXT(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43382,7 +43284,7 @@ var schemaGlIsQueryEXT = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43398,7 +43300,7 @@ func doEncodeGlIsRenderbuffer(e binary.Encoder, o *GlIsRenderbuffer) error {
 	if err := e.Uint32(uint32(o.Renderbuffer)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43412,10 +43314,10 @@ func doDecodeGlIsRenderbuffer(d binary.Decoder, o *GlIsRenderbuffer) error {
 	} else {
 		o.Renderbuffer = RenderbufferId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43426,7 +43328,7 @@ func doSkipGlIsRenderbuffer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43453,7 +43355,7 @@ var schemaGlIsRenderbuffer = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43469,7 +43371,7 @@ func doEncodeGlIsSampler(e binary.Encoder, o *GlIsSampler) error {
 	if err := e.Uint32(uint32(o.Sampler)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43483,10 +43385,10 @@ func doDecodeGlIsSampler(d binary.Decoder, o *GlIsSampler) error {
 	} else {
 		o.Sampler = SamplerId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43497,7 +43399,7 @@ func doSkipGlIsSampler(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43524,7 +43426,7 @@ var schemaGlIsSampler = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43540,7 +43442,7 @@ func doEncodeGlIsShader(e binary.Encoder, o *GlIsShader) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43554,10 +43456,10 @@ func doDecodeGlIsShader(d binary.Decoder, o *GlIsShader) error {
 	} else {
 		o.Shader = ShaderId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43568,7 +43470,7 @@ func doSkipGlIsShader(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43595,7 +43497,7 @@ var schemaGlIsShader = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43611,7 +43513,7 @@ func doEncodeGlIsSync(e binary.Encoder, o *GlIsSync) error {
 	if err := e.Uint64(uint64(o.Sync)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43625,10 +43527,10 @@ func doDecodeGlIsSync(d binary.Decoder, o *GlIsSync) error {
 	} else {
 		o.Sync = GLsync(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43639,7 +43541,7 @@ func doSkipGlIsSync(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43666,7 +43568,7 @@ var schemaGlIsSync = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43682,7 +43584,7 @@ func doEncodeGlIsSyncAPPLE(e binary.Encoder, o *GlIsSyncAPPLE) error {
 	if err := e.Uint64(uint64(o.Sync)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43696,10 +43598,10 @@ func doDecodeGlIsSyncAPPLE(d binary.Decoder, o *GlIsSyncAPPLE) error {
 	} else {
 		o.Sync = GLsync(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43710,7 +43612,7 @@ func doSkipGlIsSyncAPPLE(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43737,7 +43639,7 @@ var schemaGlIsSyncAPPLE = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43753,7 +43655,7 @@ func doEncodeGlIsTexture(e binary.Encoder, o *GlIsTexture) error {
 	if err := e.Uint32(uint32(o.Texture)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43767,10 +43669,10 @@ func doDecodeGlIsTexture(d binary.Decoder, o *GlIsTexture) error {
 	} else {
 		o.Texture = TextureId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43781,7 +43683,7 @@ func doSkipGlIsTexture(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43808,7 +43710,7 @@ var schemaGlIsTexture = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43824,7 +43726,7 @@ func doEncodeGlIsTextureHandleResidentNV(e binary.Encoder, o *GlIsTextureHandleR
 	if err := e.Uint64(uint64(o.Handle)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43838,10 +43740,10 @@ func doDecodeGlIsTextureHandleResidentNV(d binary.Decoder, o *GlIsTextureHandleR
 	} else {
 		o.Handle = GLuint64(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43852,7 +43754,7 @@ func doSkipGlIsTextureHandleResidentNV(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43887,7 +43789,7 @@ var schemaGlIsTextureHandleResidentNV = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43903,7 +43805,7 @@ func doEncodeGlIsTransformFeedback(e binary.Encoder, o *GlIsTransformFeedback) e
 	if err := e.Uint32(uint32(o.Id)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43917,10 +43819,10 @@ func doDecodeGlIsTransformFeedback(d binary.Decoder, o *GlIsTransformFeedback) e
 	} else {
 		o.Id = TransformFeedbackId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -43931,7 +43833,7 @@ func doSkipGlIsTransformFeedback(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -43960,7 +43862,7 @@ var schemaGlIsTransformFeedback = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "TransformFeedbackId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -43976,7 +43878,7 @@ func doEncodeGlIsVertexArray(e binary.Encoder, o *GlIsVertexArray) error {
 	if err := e.Uint32(uint32(o.Array)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -43990,10 +43892,10 @@ func doDecodeGlIsVertexArray(d binary.Decoder, o *GlIsVertexArray) error {
 	} else {
 		o.Array = VertexArrayId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -44004,7 +43906,7 @@ func doSkipGlIsVertexArray(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -44031,7 +43933,7 @@ var schemaGlIsVertexArray = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -44047,7 +43949,7 @@ func doEncodeGlIsVertexArrayOES(e binary.Encoder, o *GlIsVertexArrayOES) error {
 	if err := e.Uint32(uint32(o.Array)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Result); err != nil {
+	if err := e.Uint8(uint8(o.Result)); err != nil {
 		return err
 	}
 	return nil
@@ -44061,10 +43963,10 @@ func doDecodeGlIsVertexArrayOES(d binary.Decoder, o *GlIsVertexArrayOES) error {
 	} else {
 		o.Array = VertexArrayId(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Result = bool(obj)
+		o.Result = GLboolean(obj)
 	}
 	return nil
 }
@@ -44075,7 +43977,7 @@ func doSkipGlIsVertexArrayOES(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -44102,7 +44004,7 @@ var schemaGlIsVertexArrayOES = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -58732,7 +58634,7 @@ func doEncodeGlSampleCoverage(e binary.Encoder, o *GlSampleCoverage) error {
 	if err := e.Float32(float32(o.Value)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Invert); err != nil {
+	if err := e.Uint8(uint8(o.Invert)); err != nil {
 		return err
 	}
 	return nil
@@ -58746,10 +58648,10 @@ func doDecodeGlSampleCoverage(d binary.Decoder, o *GlSampleCoverage) error {
 	} else {
 		o.Value = GLfloat(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Invert = bool(obj)
+		o.Invert = GLboolean(obj)
 	}
 	return nil
 }
@@ -58760,7 +58662,7 @@ func doSkipGlSampleCoverage(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
@@ -58787,7 +58689,7 @@ var schemaGlSampleCoverage = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations", ID: (*atom.Observations)(nil).Class().ID()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "Invert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
 
@@ -71843,7 +71745,7 @@ func doEncodeGlVertexAttribPointer(e binary.Encoder, o *GlVertexAttribPointer) e
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
-	if err := e.Bool(o.Normalized); err != nil {
+	if err := e.Uint8(uint8(o.Normalized)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(o.Stride)); err != nil {
@@ -71873,10 +71775,10 @@ func doDecodeGlVertexAttribPointer(d binary.Decoder, o *GlVertexAttribPointer) e
 	} else {
 		o.Type = GLenum(obj)
 	}
-	if obj, err := d.Bool(); err != nil {
+	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
-		o.Normalized = bool(obj)
+		o.Normalized = GLboolean(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -71901,7 +71803,7 @@ func doSkipGlVertexAttribPointer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
-	if _, err := d.Bool(); err != nil {
+	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -71938,7 +71840,7 @@ var schemaGlVertexAttribPointer = &schema.Class{
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "VertexPointer", ID: (*VertexPointer)(nil).Class().ID()}},
 	},

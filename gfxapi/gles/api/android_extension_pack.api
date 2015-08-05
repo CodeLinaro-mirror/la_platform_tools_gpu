@@ -182,7 +182,7 @@ cmd void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint* params) {
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_draw_buffers_indexed.txt","GL_EXT_draw_buffers_indexed")
-cmd bool glIsEnablediEXT(GLenum target, GLuint index) {
+cmd GLboolean glIsEnablediEXT(GLenum target, GLuint index) {
   requiresExtension(GL_EXT_draw_buffers_indexed)
   // TODO
   return ?

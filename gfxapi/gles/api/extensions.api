@@ -1332,56 +1332,56 @@ cmd void glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLf
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_draw_buffers_indexed.txt","GL_OES_draw_buffers_indexed")
-cmd bool glIsEnablediOES(GLenum target, GLuint index) {
+cmd GLboolean glIsEnablediOES(GLenum target, GLuint index) {
   requiresExtension(GL_OES_draw_buffers_indexed)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/NV_viewport_array.txt","GL_NV_viewport_array")
-cmd bool glIsEnablediNV(GLenum target, GLuint index) {
+cmd GLboolean glIsEnablediNV(GLenum target, GLuint index) {
   requiresExtension(GL_NV_viewport_array)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/fence.txt","GL_NV_fence")
-cmd bool glIsFenceNV(GLuint fence) {
+cmd GLboolean glIsFenceNV(GLuint fence) {
   requiresExtension(GL_NV_fence)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/bindless_texture.txt","GL_NV_bindless_texture")
-cmd bool glIsImageHandleResidentNV(GLuint64 handle) {
+cmd GLboolean glIsImageHandleResidentNV(GLuint64 handle) {
   requiresExtension(GL_NV_bindless_texture)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/path_rendering.txt","GL_NV_path_rendering")
-cmd bool glIsPathNV(GLuint path) {
+cmd GLboolean glIsPathNV(GLuint path) {
   requiresExtension(GL_NV_path_rendering)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/path_rendering.txt","GL_NV_path_rendering")
-cmd bool glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y) {
+cmd GLboolean glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y) {
   requiresExtension(GL_NV_path_rendering)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/path_rendering.txt","GL_NV_path_rendering")
-cmd bool glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y) {
+cmd GLboolean glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y) {
   requiresExtension(GL_NV_path_rendering)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_separate_shader_objects.txt","GL_EXT_separate_shader_objects")
-cmd bool glIsProgramPipelineEXT(PipelineId pipeline) {
+cmd GLboolean glIsProgramPipelineEXT(PipelineId pipeline) {
   requiresExtension(GL_EXT_separate_shader_objects)
   // TODO
   return ?
@@ -1389,35 +1389,35 @@ cmd bool glIsProgramPipelineEXT(PipelineId pipeline) {
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
-cmd bool glIsQueryEXT(QueryId query) {
+cmd GLboolean glIsQueryEXT(QueryId query) {
   requiresExtension(GL_EXT_disjoint_timer_query)
   requiresExtension(GL_EXT_occlusion_query_boolean)
   // TODO: Multiple extensions
 
   ctx := GetContext()
-  return query in ctx.Instances.Queries
+  return as!GLboolean(query in ctx.Instances.Queries)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/APPLE/APPLE_sync.txt","GL_APPLE_sync")
-cmd bool glIsSyncAPPLE(GLsync sync) {
+cmd GLboolean glIsSyncAPPLE(GLsync sync) {
   requiresExtension(GL_APPLE_sync)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/bindless_texture.txt","GL_NV_bindless_texture")
-cmd bool glIsTextureHandleResidentNV(GLuint64 handle) {
+cmd GLboolean glIsTextureHandleResidentNV(GLuint64 handle) {
   requiresExtension(GL_NV_bindless_texture)
   // TODO
   return ?
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt","GL_OES_vertex_array_object")
-cmd bool glIsVertexArrayOES(VertexArrayId array) {
+cmd GLboolean glIsVertexArrayOES(VertexArrayId array) {
   requiresExtension(GL_OES_vertex_array_object)
 
   ctx := GetContext()
-  return array in ctx.Instances.VertexArrays
+  return as!GLboolean(array in ctx.Instances.VertexArrays)
 }
 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_label.txt","GL_EXT_debug_label")
