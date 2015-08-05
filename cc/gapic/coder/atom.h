@@ -80,25 +80,28 @@ namespace atom {
     class Metadata: public Encodable {
     public:
         Metadata() = default;
-        Metadata(gapic::Id API, char* DisplayName, uint32_t Flags, char* DocumentationUrl) :
+        Metadata(gapic::Id API, char* DisplayName, bool EndOfFrame, bool DrawCall, char* DocumentationUrl) :
             mAPI(API),
             mDisplayName(DisplayName),
-            mFlags(Flags),
+            mEndOfFrame(EndOfFrame),
+            mDrawCall(DrawCall),
             mDocumentationUrl(DocumentationUrl) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xb0, 0x6e, 0x0a, 0xcb, 0x6d, 0x82, 0x36, 0x07, 0xa8, 0x83, 0x7c, 0xe9, 0xd3, 0xa6, 0xbc, 0x20, 0x42, 0xe0, 0x28, 0xff,  } };
+            static gapic::Id ID{ { 0x13, 0xf5, 0x94, 0xc3, 0x12, 0x48, 0xe3, 0xf5, 0x48, 0xef, 0x20, 0x3a, 0x2e, 0xbe, 0x48, 0x1d, 0x4a, 0x9e, 0x2d, 0x03,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Id(this->mAPI);
             e->String(this->mDisplayName);
-            e->Uint32(this->mFlags);
+            e->Bool(this->mEndOfFrame);
+            e->Bool(this->mDrawCall);
             e->String(this->mDocumentationUrl);
         }
 
         gapic::Id mAPI;
         char* mDisplayName;
-        uint32_t mFlags;
+        bool mEndOfFrame;
+        bool mDrawCall;
         char* mDocumentationUrl;
     };
 

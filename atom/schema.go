@@ -26,7 +26,8 @@ type Metadata struct {
 	binary.Generate
 	API              gfxapi.ID // The api this atom belongs to.
 	DisplayName      string    // The display name for this atom type.
-	Flags            Flags     // The atom flags for this type.
+	EndOfFrame       bool      // Indicates the atom is an end of frame marker.
+	DrawCall         bool      // Indicates the atom is a draw call.
 	DocumentationUrl string    // A url for documentation about this atom.
 }
 

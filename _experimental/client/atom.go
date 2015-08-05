@@ -29,6 +29,7 @@ type Atom struct {
 	object       *schema.Object
 	class        *AtomClass
 	observations *atom.Observations
+	flags        atom.Flags
 }
 
 var _ atom.Atom = &Atom{} // Verify that Atom implements atom.Atom.
@@ -38,7 +39,7 @@ func (a *Atom) API() gfxapi.ID {
 }
 
 func (a *Atom) Flags() atom.Flags {
-	return a.class.meta.Flags
+	return a.flags
 }
 
 func (a *Atom) Observations() *atom.Observations {
@@ -142,6 +143,12 @@ func (c *AtomClass) Decode(d binary.Decoder) (binary.Object, error) {
 		} else {
 			a.observations = observations
 		}
+	}
+	if a.class.meta.DrawCall {
+		a.flags |= atom.DrawCall
+	}
+	if a.class.meta.EndOfFrame {
+		a.flags |= atom.EndOfFrame
 	}
 	return a, nil
 }
