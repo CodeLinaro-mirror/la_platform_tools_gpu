@@ -82,25 +82,22 @@ namespace gles {
     class Color: public Encodable {
     public:
         Color() = default;
-        Color(uint64_t CreatedAt, float Red, float Green, float Blue, float Alpha) :
-            mCreatedAt(CreatedAt),
+        Color(float Red, float Green, float Blue, float Alpha) :
             mRed(Red),
             mGreen(Green),
             mBlue(Blue),
             mAlpha(Alpha) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x5d, 0xe3, 0xec, 0x4a, 0x15, 0xf1, 0xd7, 0x84, 0x59, 0x2d, 0xd4, 0xdd, 0x80, 0xc9, 0x6c, 0x8e, 0xb3, 0xc4, 0x37, 0xf3,  } };
+            static gapic::Id ID{ { 0xd0, 0x81, 0x98, 0xcb, 0xe9, 0x4c, 0xb5, 0x68, 0xdf, 0xab, 0x2e, 0xde, 0xed, 0x47, 0x59, 0xd3, 0xa7, 0xaa, 0x6c, 0x98,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Float32(this->mRed);
             e->Float32(this->mGreen);
             e->Float32(this->mBlue);
             e->Float32(this->mAlpha);
         }
 
-        uint64_t mCreatedAt;
         float mRed;
         float mGreen;
         float mBlue;
@@ -110,8 +107,7 @@ namespace gles {
     class BlendState: public Encodable {
     public:
         BlendState() = default;
-        BlendState(uint64_t CreatedAt, uint32_t SrcRgbBlendFactor, uint32_t SrcAlphaBlendFactor, uint32_t DstRgbBlendFactor, uint32_t DstAlphaBlendFactor, uint32_t BlendEquationRgb, uint32_t BlendEquationAlpha, Color BlendColor) :
-            mCreatedAt(CreatedAt),
+        BlendState(uint32_t SrcRgbBlendFactor, uint32_t SrcAlphaBlendFactor, uint32_t DstRgbBlendFactor, uint32_t DstAlphaBlendFactor, uint32_t BlendEquationRgb, uint32_t BlendEquationAlpha, Color BlendColor) :
             mSrcRgbBlendFactor(SrcRgbBlendFactor),
             mSrcAlphaBlendFactor(SrcAlphaBlendFactor),
             mDstRgbBlendFactor(DstRgbBlendFactor),
@@ -120,11 +116,10 @@ namespace gles {
             mBlendEquationAlpha(BlendEquationAlpha),
             mBlendColor(BlendColor) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x54, 0x6b, 0x98, 0xbd, 0x32, 0x48, 0x57, 0xe0, 0x34, 0x7a, 0xfa, 0x8d, 0x92, 0x95, 0x4b, 0x07, 0xdd, 0x96, 0x3a, 0x2a,  } };
+            static gapic::Id ID{ { 0xa0, 0x25, 0x10, 0x49, 0xe6, 0xb8, 0xfb, 0x31, 0xf9, 0x74, 0xa1, 0x14, 0x8f, 0x6d, 0x7e, 0x3b, 0x51, 0x1d, 0x3b, 0x7f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Uint32(this->mSrcRgbBlendFactor);
             e->Uint32(this->mSrcAlphaBlendFactor);
             e->Uint32(this->mDstRgbBlendFactor);
@@ -134,7 +129,6 @@ namespace gles {
             e->Value(this->mBlendColor);
         }
 
-        uint64_t mCreatedAt;
         uint32_t mSrcRgbBlendFactor;
         uint32_t mSrcAlphaBlendFactor;
         uint32_t mDstRgbBlendFactor;
@@ -217,8 +211,7 @@ namespace gles {
     class Buffer: public Encodable {
     public:
         Buffer() = default;
-        Buffer(uint64_t CreatedAt, U8__S Data, int32_t Size, uint32_t Usage, uint32_t MappingAccess, int32_t MappingOffset, U8__S MappingData) :
-            mCreatedAt(CreatedAt),
+        Buffer(U8__S Data, int32_t Size, uint32_t Usage, uint32_t MappingAccess, int32_t MappingOffset, U8__S MappingData) :
             mData(Data),
             mSize(Size),
             mUsage(Usage),
@@ -226,11 +219,10 @@ namespace gles {
             mMappingOffset(MappingOffset),
             mMappingData(MappingData) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xa0, 0xa5, 0x6c, 0x63, 0x6c, 0x3a, 0x98, 0x5c, 0xb1, 0xf2, 0x2d, 0xa5, 0x9a, 0x4a, 0x38, 0xc9, 0xa8, 0xa2, 0x67, 0x07,  } };
+            static gapic::Id ID{ { 0x72, 0x94, 0x68, 0xa4, 0x0c, 0xe0, 0x5f, 0x61, 0x88, 0x16, 0xab, 0xc8, 0xd6, 0xe8, 0x69, 0xf4, 0x39, 0x2d, 0xc4, 0xbf,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Value(this->mData);
             e->Int32(this->mSize);
             e->Uint32(this->mUsage);
@@ -239,7 +231,6 @@ namespace gles {
             e->Value(this->mMappingData);
         }
 
-        uint64_t mCreatedAt;
         U8__S mData;
         int32_t mSize;
         uint32_t mUsage;
@@ -673,23 +664,20 @@ namespace gles {
     class ClearState: public Encodable {
     public:
         ClearState() = default;
-        ClearState(uint64_t CreatedAt, Color ClearColor, float ClearDepth, int32_t ClearStencil) :
-            mCreatedAt(CreatedAt),
+        ClearState(Color ClearColor, float ClearDepth, int32_t ClearStencil) :
             mClearColor(ClearColor),
             mClearDepth(ClearDepth),
             mClearStencil(ClearStencil) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x1c, 0x3d, 0x21, 0xc0, 0xfe, 0xa7, 0x65, 0xb3, 0xf2, 0x86, 0xe9, 0x6e, 0x3f, 0xfd, 0x82, 0xb2, 0xd0, 0x66, 0x8a, 0xfb,  } };
+            static gapic::Id ID{ { 0x08, 0xa6, 0xc5, 0x64, 0x5c, 0xc4, 0x9c, 0xf0, 0xad, 0xc5, 0x82, 0x38, 0x2d, 0x37, 0x08, 0xe6, 0x5d, 0x51, 0x63, 0xa0,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Value(this->mClearColor);
             e->Float32(this->mClearDepth);
             e->Int32(this->mClearStencil);
         }
 
-        uint64_t mCreatedAt;
         Color mClearColor;
         float mClearDepth;
         int32_t mClearStencil;
@@ -698,25 +686,22 @@ namespace gles {
     class Rect: public Encodable {
     public:
         Rect() = default;
-        Rect(uint64_t CreatedAt, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
-            mCreatedAt(CreatedAt),
+        Rect(int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mX(X),
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x91, 0x81, 0x78, 0x6e, 0xf9, 0x21, 0xeb, 0xcb, 0x74, 0xab, 0xec, 0x50, 0x0e, 0xfe, 0x05, 0x86, 0x3a, 0x47, 0xf1, 0x00,  } };
+            static gapic::Id ID{ { 0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Int32(this->mX);
             e->Int32(this->mY);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
         }
 
-        uint64_t mCreatedAt;
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -726,8 +711,7 @@ namespace gles {
     class RasterizerState: public Encodable {
     public:
         RasterizerState() = default;
-        RasterizerState(uint64_t CreatedAt, bool DepthMask, uint32_t DepthTestFunction, float DepthNear, float DepthFar, bool ColorMaskRed, bool ColorMaskGreen, bool ColorMaskBlue, bool ColorMaskAlpha, std::unordered_map<uint32_t,uint32_t>* StencilMask, Rect Viewport, Rect Scissor, uint32_t FrontFace, uint32_t CullFace, float LineWidth, float PolygonOffsetFactor, float PolygonOffsetUnits, float SampleCoverageValue, bool SampleCoverageInvert) :
-            mCreatedAt(CreatedAt),
+        RasterizerState(bool DepthMask, uint32_t DepthTestFunction, float DepthNear, float DepthFar, bool ColorMaskRed, bool ColorMaskGreen, bool ColorMaskBlue, bool ColorMaskAlpha, std::unordered_map<uint32_t,uint32_t>* StencilMask, Rect Viewport, Rect Scissor, uint32_t FrontFace, uint32_t CullFace, float LineWidth, float PolygonOffsetFactor, float PolygonOffsetUnits, float SampleCoverageValue, bool SampleCoverageInvert) :
             mDepthMask(DepthMask),
             mDepthTestFunction(DepthTestFunction),
             mDepthNear(DepthNear),
@@ -747,11 +731,10 @@ namespace gles {
             mSampleCoverageValue(SampleCoverageValue),
             mSampleCoverageInvert(SampleCoverageInvert) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x61, 0x33, 0xd3, 0xcf, 0x10, 0xfe, 0x26, 0x25, 0xf4, 0x0d, 0xab, 0x26, 0x21, 0x06, 0x33, 0x4c, 0x9e, 0xe1, 0x75, 0xc8,  } };
+            static gapic::Id ID{ { 0x8f, 0x8a, 0x9b, 0x1a, 0xfe, 0xff, 0x2b, 0xd1, 0x64, 0x1e, 0x91, 0xda, 0x14, 0x3c, 0x05, 0x0a, 0x1d, 0xb4, 0xc1, 0xa2,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Bool(this->mDepthMask);
             e->Uint32(this->mDepthTestFunction);
             e->Float32(this->mDepthNear);
@@ -772,7 +755,6 @@ namespace gles {
             e->Bool(this->mSampleCoverageInvert);
         }
 
-        uint64_t mCreatedAt;
         bool mDepthMask;
         uint32_t mDepthTestFunction;
         float mDepthNear;
@@ -812,8 +794,7 @@ namespace gles {
     class VertexAttributeArray: public Encodable {
     public:
         VertexAttributeArray() = default;
-        VertexAttributeArray(uint64_t CreatedAt, bool Enabled, uint32_t Size, uint32_t Type, bool Normalized, int32_t Stride, uint32_t Buffer, VertexPointer Pointer) :
-            mCreatedAt(CreatedAt),
+        VertexAttributeArray(bool Enabled, uint32_t Size, uint32_t Type, bool Normalized, int32_t Stride, uint32_t Buffer, VertexPointer Pointer) :
             mEnabled(Enabled),
             mSize(Size),
             mType(Type),
@@ -822,11 +803,10 @@ namespace gles {
             mBuffer(Buffer),
             mPointer(Pointer) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xf9, 0xd6, 0xf9, 0x18, 0x53, 0xce, 0xd5, 0xbd, 0x41, 0xf5, 0xdf, 0x8a, 0x0d, 0x3f, 0xae, 0x96, 0x04, 0xa9, 0xf0, 0x88,  } };
+            static gapic::Id ID{ { 0x64, 0x7d, 0x26, 0xce, 0xd4, 0x3e, 0xba, 0x93, 0x29, 0xf8, 0x4f, 0xa9, 0xbe, 0x10, 0x35, 0x4c, 0x00, 0x1c, 0x5d, 0xf1,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Bool(this->mEnabled);
             e->Uint32(this->mSize);
             e->Uint32(this->mType);
@@ -836,7 +816,6 @@ namespace gles {
             e->Value(this->mPointer);
         }
 
-        uint64_t mCreatedAt;
         bool mEnabled;
         uint32_t mSize;
         uint32_t mType;
@@ -849,25 +828,22 @@ namespace gles {
     class Renderbuffer: public Encodable {
     public:
         Renderbuffer() = default;
-        Renderbuffer(uint64_t CreatedAt, int32_t Width, int32_t Height, U8__S Data, uint32_t Format) :
-            mCreatedAt(CreatedAt),
+        Renderbuffer(int32_t Width, int32_t Height, U8__S Data, uint32_t Format) :
             mWidth(Width),
             mHeight(Height),
             mData(Data),
             mFormat(Format) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x14, 0x62, 0xc1, 0xfd, 0x74, 0xd5, 0x58, 0xb6, 0xec, 0x95, 0x4e, 0xcd, 0x32, 0x65, 0xba, 0xeb, 0xfc, 0x42, 0xf8, 0x9b,  } };
+            static gapic::Id ID{ { 0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
             e->Value(this->mData);
             e->Uint32(this->mFormat);
         }
 
-        uint64_t mCreatedAt;
         int32_t mWidth;
         int32_t mHeight;
         U8__S mData;
@@ -877,19 +853,17 @@ namespace gles {
     class Image: public Encodable {
     public:
         Image() = default;
-        Image(uint64_t CreatedAt, int32_t Width, int32_t Height, U8__S Data, uint32_t Size, uint32_t Format) :
-            mCreatedAt(CreatedAt),
+        Image(int32_t Width, int32_t Height, U8__S Data, uint32_t Size, uint32_t Format) :
             mWidth(Width),
             mHeight(Height),
             mData(Data),
             mSize(Size),
             mFormat(Format) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x4b, 0x1b, 0xef, 0x83, 0x18, 0xbf, 0x79, 0x80, 0x91, 0x0b, 0x28, 0x36, 0x43, 0x1b, 0xd5, 0xc0, 0x92, 0xe9, 0x1a, 0x3e,  } };
+            static gapic::Id ID{ { 0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Int32(this->mWidth);
             e->Int32(this->mHeight);
             e->Value(this->mData);
@@ -897,7 +871,6 @@ namespace gles {
             e->Uint32(this->mFormat);
         }
 
-        uint64_t mCreatedAt;
         int32_t mWidth;
         int32_t mHeight;
         U8__S mData;
@@ -908,27 +881,23 @@ namespace gles {
     class CubemapLevel: public Encodable {
     public:
         CubemapLevel() = default;
-        CubemapLevel(uint64_t CreatedAt, std::unordered_map<uint32_t,Image>* Faces) :
-            mCreatedAt(CreatedAt),
+        CubemapLevel(std::unordered_map<uint32_t,Image>* Faces) :
             mFaces(Faces) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xca, 0xda, 0x9d, 0xaa, 0x3b, 0xf7, 0x43, 0x62, 0xef, 0x77, 0x38, 0xc5, 0x78, 0xeb, 0xb4, 0x0c, 0xcd, 0xb5, 0x87, 0xe1,  } };
+            static gapic::Id ID{ { 0x1c, 0xc1, 0xfa, 0xd8, 0xb4, 0xda, 0xc5, 0x86, 0x02, 0xcd, 0x3a, 0x43, 0xbc, 0x10, 0x9f, 0xe4, 0x55, 0x68, 0xe2, 0x4f,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             GAPID_FATAL("C++ map encoding not supported");
         }
 
-        uint64_t mCreatedAt;
         std::unordered_map<uint32_t,Image>* mFaces;
     };
 
     class Texture: public Encodable {
     public:
         Texture() = default;
-        Texture(uint64_t CreatedAt, uint32_t Kind, uint32_t Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, uint32_t MagFilter, uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy) :
-            mCreatedAt(CreatedAt),
+        Texture(uint32_t Kind, uint32_t Format, std::unordered_map<int32_t,Image>* Texture2D, std::unordered_map<int32_t,CubemapLevel>* Cubemap, uint32_t MagFilter, uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy) :
             mKind(Kind),
             mFormat(Format),
             mTexture2D(Texture2D),
@@ -943,11 +912,10 @@ namespace gles {
             mSwizzleA(SwizzleA),
             mMaxAnisotropy(MaxAnisotropy) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x99, 0xed, 0xa6, 0x52, 0xf7, 0x9c, 0x61, 0x5c, 0xf9, 0x26, 0x2e, 0xc8, 0x94, 0x2d, 0x0d, 0x59, 0x58, 0x56, 0xeb, 0x41,  } };
+            static gapic::Id ID{ { 0x69, 0x8a, 0xa1, 0xe4, 0xf5, 0xeb, 0x7b, 0xe1, 0x0f, 0x82, 0x1c, 0x57, 0xbe, 0xe5, 0x1d, 0xb1, 0x5c, 0xbb, 0xca, 0xee,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Uint32(this->mKind);
             e->Uint32(this->mFormat);
             GAPID_FATAL("C++ map encoding not supported");
@@ -963,7 +931,6 @@ namespace gles {
             e->Float32(this->mMaxAnisotropy);
         }
 
-        uint64_t mCreatedAt;
         uint32_t mKind;
         uint32_t mFormat;
         std::unordered_map<int32_t,Image>* mTexture2D;
@@ -982,25 +949,22 @@ namespace gles {
     class FramebufferAttachmentInfo: public Encodable {
     public:
         FramebufferAttachmentInfo() = default;
-        FramebufferAttachmentInfo(uint64_t CreatedAt, uint32_t Object, uint32_t Type, int32_t TextureLevel, uint32_t CubeMapFace) :
-            mCreatedAt(CreatedAt),
+        FramebufferAttachmentInfo(uint32_t Object, uint32_t Type, int32_t TextureLevel, uint32_t CubeMapFace) :
             mObject(Object),
             mType(Type),
             mTextureLevel(TextureLevel),
             mCubeMapFace(CubeMapFace) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xd1, 0x5d, 0x37, 0x77, 0x36, 0x87, 0x06, 0x6c, 0xe3, 0x7c, 0xf0, 0x46, 0x95, 0x2e, 0x91, 0x5f, 0x2e, 0x5f, 0xed, 0x33,  } };
+            static gapic::Id ID{ { 0x21, 0x80, 0x98, 0x42, 0x29, 0xea, 0x32, 0xcb, 0xf4, 0xb7, 0xcf, 0x20, 0x1f, 0x9d, 0x3f, 0x81, 0x0a, 0xa8, 0xa4, 0xec,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Uint32(this->mObject);
             e->Uint32(this->mType);
             e->Int32(this->mTextureLevel);
             e->Uint32(this->mCubeMapFace);
         }
 
-        uint64_t mCreatedAt;
         uint32_t mObject;
         uint32_t mType;
         int32_t mTextureLevel;
@@ -1010,19 +974,16 @@ namespace gles {
     class Framebuffer: public Encodable {
     public:
         Framebuffer() = default;
-        Framebuffer(uint64_t CreatedAt, std::unordered_map<uint32_t,FramebufferAttachmentInfo>* Attachments) :
-            mCreatedAt(CreatedAt),
+        Framebuffer(std::unordered_map<uint32_t,FramebufferAttachmentInfo>* Attachments) :
             mAttachments(Attachments) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xab, 0x11, 0xed, 0xff, 0xf3, 0x6b, 0x0f, 0x36, 0xb8, 0xfb, 0x8a, 0x28, 0x9d, 0x38, 0x55, 0x8b, 0x8d, 0x5c, 0x39, 0xc7,  } };
+            static gapic::Id ID{ { 0x28, 0x3d, 0x03, 0xaf, 0xa7, 0x8a, 0x1a, 0xd7, 0x6f, 0xe8, 0x67, 0x55, 0x11, 0xa5, 0x1c, 0x37, 0x5e, 0x07, 0x92, 0x3b,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             GAPID_FATAL("C++ map encoding not supported");
         }
 
-        uint64_t mCreatedAt;
         std::unordered_map<uint32_t,FramebufferAttachmentInfo>* mAttachments;
     };
 
@@ -1045,8 +1006,7 @@ namespace gles {
     class Shader: public Encodable {
     public:
         Shader() = default;
-        Shader(uint64_t CreatedAt, U8__S Binary, bool Compiled, bool Deletable, GLchar__S InfoLog, char* Source, uint32_t Type) :
-            mCreatedAt(CreatedAt),
+        Shader(U8__S Binary, bool Compiled, bool Deletable, GLchar__S InfoLog, char* Source, uint32_t Type) :
             mBinary(Binary),
             mCompiled(Compiled),
             mDeletable(Deletable),
@@ -1054,11 +1014,10 @@ namespace gles {
             mSource(Source),
             mType(Type) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc3, 0x12, 0x27, 0x47, 0xec, 0x8b, 0x2c, 0x59, 0x69, 0x12, 0xa7, 0xc0, 0xce, 0x5a, 0x66, 0x76, 0x86, 0x2e, 0x8d, 0xaf,  } };
+            static gapic::Id ID{ { 0xdb, 0xaa, 0x05, 0x7a, 0x88, 0xde, 0x05, 0xea, 0x19, 0x7d, 0x38, 0x42, 0xf1, 0xe6, 0x37, 0xe1, 0x0c, 0xaf, 0x22, 0x2e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Value(this->mBinary);
             e->Bool(this->mCompiled);
             e->Bool(this->mDeletable);
@@ -1067,7 +1026,6 @@ namespace gles {
             e->Uint32(this->mType);
         }
 
-        uint64_t mCreatedAt;
         U8__S mBinary;
         bool mCompiled;
         bool mDeletable;
@@ -1079,23 +1037,20 @@ namespace gles {
     class VertexAttribute: public Encodable {
     public:
         VertexAttribute() = default;
-        VertexAttribute(uint64_t CreatedAt, Char__S Name, int32_t VectorCount, uint32_t Type) :
-            mCreatedAt(CreatedAt),
+        VertexAttribute(Char__S Name, int32_t VectorCount, uint32_t Type) :
             mName(Name),
             mVectorCount(VectorCount),
             mType(Type) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x40, 0x6b, 0xa4, 0xbe, 0x27, 0xa1, 0x09, 0x3f, 0xfa, 0xed, 0x1b, 0x5d, 0x4f, 0x4b, 0xe1, 0xf3, 0xdb, 0x99, 0x5a, 0x8b,  } };
+            static gapic::Id ID{ { 0x48, 0xcc, 0xff, 0xa1, 0xa1, 0x9d, 0x30, 0x10, 0xbe, 0x7e, 0x0b, 0x66, 0xae, 0x30, 0xb0, 0x2e, 0x5f, 0x88, 0x12, 0x8c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Value(this->mName);
             e->Int32(this->mVectorCount);
             e->Uint32(this->mType);
         }
 
-        uint64_t mCreatedAt;
         Char__S mName;
         int32_t mVectorCount;
         uint32_t mType;
@@ -1104,23 +1059,20 @@ namespace gles {
     class Uniform: public Encodable {
     public:
         Uniform() = default;
-        Uniform(uint64_t CreatedAt, char* Name, uint32_t Type, U8__S Value) :
-            mCreatedAt(CreatedAt),
+        Uniform(char* Name, uint32_t Type, U8__S Value) :
             mName(Name),
             mType(Type),
             mValue(Value) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x27, 0x30, 0x49, 0xde, 0x65, 0x8d, 0x9d, 0x3f, 0x58, 0x98, 0x30, 0x5d, 0x6b, 0xe1, 0x43, 0x79, 0xb4, 0x61, 0x08, 0xf8,  } };
+            static gapic::Id ID{ { 0x08, 0x78, 0x15, 0x85, 0x85, 0xc7, 0xea, 0x3d, 0xf0, 0xc3, 0x78, 0x69, 0x2b, 0xf3, 0x79, 0x99, 0x8f, 0xbb, 0x00, 0x73,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->String(this->mName);
             e->Uint32(this->mType);
             e->Value(this->mValue);
         }
 
-        uint64_t mCreatedAt;
         char* mName;
         uint32_t mType;
         U8__S mValue;
@@ -1129,8 +1081,7 @@ namespace gles {
     class Program: public Encodable {
     public:
         Program() = default;
-        Program(uint64_t CreatedAt, std::unordered_map<uint32_t,uint32_t>* Shaders, bool Linked, U8__S Binary, std::unordered_map<char*,uint32_t>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<int32_t,Uniform>* Uniforms, GLchar__S InfoLog) :
-            mCreatedAt(CreatedAt),
+        Program(std::unordered_map<uint32_t,uint32_t>* Shaders, bool Linked, U8__S Binary, std::unordered_map<char*,uint32_t>* AttributeBindings, std::unordered_map<int32_t,VertexAttribute>* Attributes, std::unordered_map<int32_t,Uniform>* Uniforms, GLchar__S InfoLog) :
             mShaders(Shaders),
             mLinked(Linked),
             mBinary(Binary),
@@ -1139,11 +1090,10 @@ namespace gles {
             mUniforms(Uniforms),
             mInfoLog(InfoLog) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xe8, 0x5c, 0x4f, 0x1a, 0x9a, 0xa7, 0xfc, 0xf7, 0x98, 0xc4, 0x15, 0x95, 0x2b, 0xd0, 0xaf, 0x6d, 0xc9, 0x3c, 0xad, 0x09,  } };
+            static gapic::Id ID{ { 0x31, 0x7d, 0xeb, 0xd6, 0x66, 0xf0, 0xad, 0x10, 0x25, 0xbe, 0x80, 0xcd, 0xa7, 0xc5, 0xf1, 0x13, 0xf9, 0x52, 0xc2, 0x28,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             GAPID_FATAL("C++ map encoding not supported");
             e->Bool(this->mLinked);
             e->Value(this->mBinary);
@@ -1153,7 +1103,6 @@ namespace gles {
             e->Value(this->mInfoLog);
         }
 
-        uint64_t mCreatedAt;
         std::unordered_map<uint32_t,uint32_t>* mShaders;
         bool mLinked;
         U8__S mBinary;
@@ -1165,41 +1114,32 @@ namespace gles {
 
     class VertexArray: public Encodable {
     public:
-        VertexArray() = default;
-        VertexArray(uint64_t CreatedAt) :
-            mCreatedAt(CreatedAt) {}
+        VertexArray()  {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4,  } };
+            static gapic::Id ID{ { 0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
         }
 
-        uint64_t mCreatedAt;
     };
 
     class Query: public Encodable {
     public:
-        Query() = default;
-        Query(uint64_t CreatedAt) :
-            mCreatedAt(CreatedAt) {}
+        Query()  {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2,  } };
+            static gapic::Id ID{ { 0x62, 0x44, 0x8a, 0xcf, 0x74, 0x8f, 0xd4, 0xae, 0x50, 0xd3, 0xfd, 0x27, 0xe3, 0x02, 0x90, 0xfe, 0x17, 0x13, 0x0c, 0xa3,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
         }
 
-        uint64_t mCreatedAt;
     };
 
     class Objects: public Encodable {
     public:
         Objects() = default;
-        Objects(uint64_t CreatedAt, std::unordered_map<uint32_t,Renderbuffer*>* Renderbuffers, std::unordered_map<uint32_t,Texture*>* Textures, std::unordered_map<uint32_t,Framebuffer*>* Framebuffers, std::unordered_map<uint32_t,Buffer*>* Buffers, std::unordered_map<uint32_t,Shader*>* Shaders, std::unordered_map<uint32_t,Program*>* Programs, std::unordered_map<uint32_t,VertexArray*>* VertexArrays, std::unordered_map<uint32_t,Query*>* Queries) :
-            mCreatedAt(CreatedAt),
+        Objects(std::unordered_map<uint32_t,Renderbuffer*>* Renderbuffers, std::unordered_map<uint32_t,Texture*>* Textures, std::unordered_map<uint32_t,Framebuffer*>* Framebuffers, std::unordered_map<uint32_t,Buffer*>* Buffers, std::unordered_map<uint32_t,Shader*>* Shaders, std::unordered_map<uint32_t,Program*>* Programs, std::unordered_map<uint32_t,VertexArray*>* VertexArrays, std::unordered_map<uint32_t,Query*>* Queries) :
             mRenderbuffers(Renderbuffers),
             mTextures(Textures),
             mFramebuffers(Framebuffers),
@@ -1209,11 +1149,10 @@ namespace gles {
             mVertexArrays(VertexArrays),
             mQueries(Queries) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x8a, 0x05, 0xaa, 0xf5, 0xa8, 0x57, 0xb0, 0xf1, 0x13, 0x48, 0x39, 0x76, 0xec, 0x1e, 0x47, 0x0b, 0x6c, 0x3b, 0xf6, 0xe0,  } };
+            static gapic::Id ID{ { 0x12, 0x48, 0x34, 0xe0, 0x63, 0x96, 0xd4, 0xef, 0x29, 0xea, 0xb8, 0xa4, 0xe1, 0x96, 0x9f, 0x3f, 0xb0, 0xc8, 0x1b, 0xf7,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             GAPID_FATAL("C++ map encoding not supported");
             GAPID_FATAL("C++ map encoding not supported");
             GAPID_FATAL("C++ map encoding not supported");
@@ -1224,7 +1163,6 @@ namespace gles {
             GAPID_FATAL("C++ map encoding not supported");
         }
 
-        uint64_t mCreatedAt;
         std::unordered_map<uint32_t,Renderbuffer*>* mRenderbuffers;
         std::unordered_map<uint32_t,Texture*>* mTextures;
         std::unordered_map<uint32_t,Framebuffer*>* mFramebuffers;
@@ -1238,8 +1176,7 @@ namespace gles {
     class Context: public Encodable {
     public:
         Context() = default;
-        Context(uint64_t CreatedAt, uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
-            mCreatedAt(CreatedAt),
+        Context(uint32_t Identifier, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, std::unordered_map<uint32_t,uint32_t>* BoundFramebuffers, std::unordered_map<uint32_t,uint32_t>* BoundRenderbuffers, std::unordered_map<uint32_t,uint32_t>* BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, std::unordered_map<uint32_t,VertexAttributeArray*>* VertexAttributeArrays, std::unordered_map<uint32_t,std::unordered_map<uint32_t,uint32_t>*>* TextureUnits, uint32_t ActiveTextureUnit, std::unordered_map<uint32_t,bool>* Capabilities, uint32_t GenerateMipmapHint, std::unordered_map<uint32_t,int32_t>* PixelStorage, Objects Instances, bool PreserveBuffersOnSwap) :
             mIdentifier(Identifier),
             mBlending(Blending),
             mRasterizing(Rasterizing),
@@ -1258,11 +1195,10 @@ namespace gles {
             mInstances(Instances),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x7b, 0x7d, 0x73, 0x49, 0xf3, 0xae, 0xea, 0xc4, 0x60, 0x85, 0x76, 0x79, 0x71, 0xe2, 0x2d, 0xcb, 0x35, 0x97, 0x53, 0xe7,  } };
+            static gapic::Id ID{ { 0xd0, 0x13, 0xab, 0x51, 0x44, 0x9f, 0x32, 0x91, 0x7c, 0x79, 0x9d, 0x0d, 0xa7, 0x7d, 0x38, 0x90, 0x9e, 0x95, 0x9f, 0x7e,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Uint32(this->mIdentifier);
             e->Value(this->mBlending);
             e->Value(this->mRasterizing);
@@ -1282,7 +1218,6 @@ namespace gles {
             e->Bool(this->mPreserveBuffersOnSwap);
         }
 
-        uint64_t mCreatedAt;
         uint32_t mIdentifier;
         BlendState mBlending;
         RasterizerState mRasterizing;
@@ -22147,21 +22082,18 @@ namespace gles {
     class generate_types: public Encodable {
     public:
         generate_types() = default;
-        generate_types(uint64_t CreatedAt, U16__S U16_slice, U32__S U32_slice) :
-            mCreatedAt(CreatedAt),
+        generate_types(U16__S U16_slice, U32__S U32_slice) :
             mU16_slice(U16_slice),
             mU32_slice(U32_slice) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xbc, 0x1a, 0x89, 0x8b, 0xb7, 0xba, 0x8e, 0x8b, 0x59, 0x61, 0x72, 0xac, 0x82, 0x23, 0x98, 0xd7, 0x18, 0x05, 0x6b, 0x07,  } };
+            static gapic::Id ID{ { 0x66, 0x3f, 0x56, 0xa1, 0xab, 0x3d, 0x6a, 0x7f, 0x2c, 0xf4, 0x25, 0xf5, 0x2c, 0xc2, 0x7f, 0x7f, 0x56, 0x5a, 0x44, 0x05,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
-            e->Uint64(this->mCreatedAt);
             e->Value(this->mU16_slice);
             e->Value(this->mU32_slice);
         }
 
-        uint64_t mCreatedAt;
         U16__S mU16_slice;
         U32__S mU32_slice;
     };

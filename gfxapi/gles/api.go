@@ -37394,86 +37394,75 @@ func (a *FlushPostBuffer) Observations() *atom.Observations { return &a.observat
 ////////////////////////////////////////////////////////////////////////////////
 type generate_types struct {
 	binary.Generate
-	CreatedAt atom.ID
 	U16_slice U16ˢ
 	U32_slice U32ˢ
 }
 
 func (c *generate_types) Init() {
 }
-func (c *generate_types) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Color
 ////////////////////////////////////////////////////////////////////////////////
 type Color struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Red       GLfloat
-	Green     GLfloat
-	Blue      GLfloat
-	Alpha     GLfloat
+	Red   GLfloat
+	Green GLfloat
+	Blue  GLfloat
+	Alpha GLfloat
 }
 
 func (c *Color) Init() {
 }
-func (c *Color) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Rect
 ////////////////////////////////////////////////////////////////////////////////
 type Rect struct {
 	binary.Generate
-	CreatedAt atom.ID
-	X         GLint
-	Y         GLint
-	Width     GLsizei
-	Height    GLsizei
+	X      GLint
+	Y      GLint
+	Width  GLsizei
+	Height GLsizei
 }
 
 func (c *Rect) Init() {
 }
-func (c *Rect) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Image
 ////////////////////////////////////////////////////////////////////////////////
 type Image struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Width     GLsizei
-	Height    GLsizei
-	Data      U8ˢ
-	Size      uint32
-	Format    GLenum
+	Width  GLsizei
+	Height GLsizei
+	Data   U8ˢ
+	Size   uint32
+	Format GLenum
 }
 
 func (c *Image) Init() {
 }
-func (c *Image) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Renderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type Renderbuffer struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Width     GLsizei
-	Height    GLsizei
-	Data      U8ˢ
-	Format    GLenum
+	Width  GLsizei
+	Height GLsizei
+	Data   U8ˢ
+	Format GLenum
 }
 
 func (c *Renderbuffer) Init() {
 }
-func (c *Renderbuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Texture
 ////////////////////////////////////////////////////////////////////////////////
 type Texture struct {
 	binary.Generate
-	CreatedAt     atom.ID
 	Kind          TextureKind
 	Format        GLenum
 	Texture2D     GLintːImageᵐ
@@ -37502,28 +37491,24 @@ func (c *Texture) Init() {
 	c.SwizzleA = GLenum_GL_ALPHA
 	c.MaxAnisotropy = 1
 }
-func (c *Texture) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class CubemapLevel
 ////////////////////////////////////////////////////////////////////////////////
 type CubemapLevel struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Faces     GLenumːImageᵐ
+	Faces GLenumːImageᵐ
 }
 
 func (c *CubemapLevel) Init() {
 	c.Faces = make(GLenumːImageᵐ)
 }
-func (c *CubemapLevel) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class FramebufferAttachmentInfo
 ////////////////////////////////////////////////////////////////////////////////
 type FramebufferAttachmentInfo struct {
 	binary.Generate
-	CreatedAt    atom.ID
 	Object       uint32
 	Type         GLenum
 	TextureLevel GLint
@@ -37532,28 +37517,24 @@ type FramebufferAttachmentInfo struct {
 
 func (c *FramebufferAttachmentInfo) Init() {
 }
-func (c *FramebufferAttachmentInfo) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Framebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type Framebuffer struct {
 	binary.Generate
-	CreatedAt   atom.ID
 	Attachments GLenumːFramebufferAttachmentInfoᵐ
 }
 
 func (c *Framebuffer) Init() {
 	c.Attachments = make(GLenumːFramebufferAttachmentInfoᵐ)
 }
-func (c *Framebuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Buffer
 ////////////////////////////////////////////////////////////////////////////////
 type Buffer struct {
 	binary.Generate
-	CreatedAt     atom.ID
 	Data          U8ˢ
 	Size          GLsizeiptr
 	Usage         GLenum
@@ -37566,14 +37547,12 @@ func (c *Buffer) Init() {
 	c.Size = 0
 	c.Usage = GLenum_GL_STATIC_DRAW
 }
-func (c *Buffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Shader
 ////////////////////////////////////////////////////////////////////////////////
 type Shader struct {
 	binary.Generate
-	CreatedAt atom.ID
 	Binary    U8ˢ
 	Compiled  bool
 	Deletable bool
@@ -37586,14 +37565,12 @@ func (c *Shader) Init() {
 	c.Compiled = false
 	c.Deletable = false
 }
-func (c *Shader) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexAttribute
 ////////////////////////////////////////////////////////////////////////////////
 type VertexAttribute struct {
 	binary.Generate
-	CreatedAt   atom.ID
 	Name        Charˢ
 	VectorCount int32
 	Type        GLenum
@@ -37601,29 +37578,25 @@ type VertexAttribute struct {
 
 func (c *VertexAttribute) Init() {
 }
-func (c *VertexAttribute) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Uniform
 ////////////////////////////////////////////////////////////////////////////////
 type Uniform struct {
 	binary.Generate
-	CreatedAt atom.ID
-	Name      string
-	Type      GLenum
-	Value     U8ˢ
+	Name  string
+	Type  GLenum
+	Value U8ˢ
 }
 
 func (c *Uniform) Init() {
 }
-func (c *Uniform) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Program
 ////////////////////////////////////////////////////////////////////////////////
 type Program struct {
 	binary.Generate
-	CreatedAt         atom.ID
 	Shaders           GLenumːShaderIdᵐ
 	Linked            bool
 	Binary            U8ˢ
@@ -37639,26 +37612,22 @@ func (c *Program) Init() {
 	c.Attributes = make(S32ːVertexAttributeᵐ)
 	c.Uniforms = make(UniformLocationːUniformᵐ)
 }
-func (c *Program) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexArray
 ////////////////////////////////////////////////////////////////////////////////
 type VertexArray struct {
 	binary.Generate
-	CreatedAt atom.ID
 }
 
 func (c *VertexArray) Init() {
 }
-func (c *VertexArray) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexAttributeArray
 ////////////////////////////////////////////////////////////////////////////////
 type VertexAttributeArray struct {
 	binary.Generate
-	CreatedAt  atom.ID
 	Enabled    bool
 	Size       uint32
 	Type       GLenum
@@ -37676,26 +37645,22 @@ func (c *VertexAttributeArray) Init() {
 	c.Stride = 0
 	c.Buffer = 0
 }
-func (c *VertexAttributeArray) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Query
 ////////////////////////////////////////////////////////////////////////////////
 type Query struct {
 	binary.Generate
-	CreatedAt atom.ID
 }
 
 func (c *Query) Init() {
 }
-func (c *Query) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class BlendState
 ////////////////////////////////////////////////////////////////////////////////
 type BlendState struct {
 	binary.Generate
-	CreatedAt           atom.ID
 	SrcRgbBlendFactor   GLenum
 	SrcAlphaBlendFactor GLenum
 	DstRgbBlendFactor   GLenum
@@ -37714,14 +37679,12 @@ func (c *BlendState) Init() {
 	c.BlendEquationAlpha = GLenum_GL_FUNC_ADD
 	c.BlendColor.Init()
 }
-func (c *BlendState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class RasterizerState
 ////////////////////////////////////////////////////////////////////////////////
 type RasterizerState struct {
 	binary.Generate
-	CreatedAt            atom.ID
 	DepthMask            bool
 	DepthTestFunction    GLenum
 	DepthNear            GLfloat
@@ -37759,14 +37722,12 @@ func (c *RasterizerState) Init() {
 	c.LineWidth = 1
 	c.SampleCoverageValue = 1
 }
-func (c *RasterizerState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class ClearState
 ////////////////////////////////////////////////////////////////////////////////
 type ClearState struct {
 	binary.Generate
-	CreatedAt    atom.ID
 	ClearColor   Color
 	ClearDepth   GLfloat
 	ClearStencil GLint
@@ -37776,14 +37737,12 @@ func (c *ClearState) Init() {
 	c.ClearColor.Init()
 	c.ClearDepth = 1
 }
-func (c *ClearState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Objects
 ////////////////////////////////////////////////////////////////////////////////
 type Objects struct {
 	binary.Generate
-	CreatedAt     atom.ID
 	Renderbuffers RenderbufferIdːRenderbufferʳᵐ
 	Textures      TextureIdːTextureʳᵐ
 	Framebuffers  FramebufferIdːFramebufferʳᵐ
@@ -37804,14 +37763,12 @@ func (c *Objects) Init() {
 	c.VertexArrays = make(VertexArrayIdːVertexArrayʳᵐ)
 	c.Queries = make(QueryIdːQueryʳᵐ)
 }
-func (c *Objects) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Context
 ////////////////////////////////////////////////////////////////////////////////
 type Context struct {
 	binary.Generate
-	CreatedAt             atom.ID
 	Identifier            ContextID
 	Blending              BlendState
 	Rasterizing           RasterizerState
@@ -37846,7 +37803,6 @@ func (c *Context) Init() {
 	c.PixelStorage = make(GLenumːGLintᵐ)
 	c.Instances.Init()
 }
-func (c *Context) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum GLbitfield

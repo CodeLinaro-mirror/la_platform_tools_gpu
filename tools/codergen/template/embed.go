@@ -59,7 +59,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Method"}}{{.}}{{end}}
 
 {{define "Cpp.Constructor"}}
-  {{.Name | File.TypeName}}() = default;¶
+  {{if len .Fields}}{{.Name | File.TypeName}}() = default;¶{{end}}
   {{.Name | File.TypeName}}(
     {{range $index, $field := .Fields}}
       {{if $index}}, {{end}}{{Call "Cpp.Type" $field.Type}} {{$field.Name}}

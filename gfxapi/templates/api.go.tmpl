@@ -647,15 +647,12 @@
 
     type {{$.Name}} struct {
       binary.Generate
-      CreatedAt atom.ID
       {{Template "ClassFields" $}}
     }
 
     func (c *{{$.Name}}) Init() {
       {{Template "FieldsInit" "Type" $ "Name" "c"}}
     }
-
-    func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
   {{end}}
 {{end}}
 

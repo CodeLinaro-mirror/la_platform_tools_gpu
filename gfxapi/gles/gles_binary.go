@@ -906,13 +906,13 @@ func init() {
 var (
 	binaryIDArchitecture                                     = binary.ID{0x14, 0x53, 0xe8, 0x31, 0x7d, 0x20, 0x5f, 0xbd, 0xad, 0x68, 0x48, 0x67, 0xeb, 0xf6, 0x1c, 0x4f, 0xe8, 0xfc, 0x0e, 0x01}
 	binaryIDBackbufferInfo                                   = binary.ID{0x33, 0x30, 0x13, 0x32, 0x31, 0x5d, 0xce, 0x13, 0x1f, 0xa4, 0xe4, 0x27, 0x10, 0xed, 0xd6, 0x58, 0xad, 0x0a, 0x87, 0xac}
-	binaryIDColor                                            = binary.ID{0x5d, 0xe3, 0xec, 0x4a, 0x15, 0xf1, 0xd7, 0x84, 0x59, 0x2d, 0xd4, 0xdd, 0x80, 0xc9, 0x6c, 0x8e, 0xb3, 0xc4, 0x37, 0xf3}
-	binaryIDBlendState                                       = binary.ID{0x54, 0x6b, 0x98, 0xbd, 0x32, 0x48, 0x57, 0xe0, 0x34, 0x7a, 0xfa, 0x8d, 0x92, 0x95, 0x4b, 0x07, 0xdd, 0x96, 0x3a, 0x2a}
+	binaryIDColor                                            = binary.ID{0xd0, 0x81, 0x98, 0xcb, 0xe9, 0x4c, 0xb5, 0x68, 0xdf, 0xab, 0x2e, 0xde, 0xed, 0x47, 0x59, 0xd3, 0xa7, 0xaa, 0x6c, 0x98}
+	binaryIDBlendState                                       = binary.ID{0xa0, 0x25, 0x10, 0x49, 0xe6, 0xb8, 0xfb, 0x31, 0xf9, 0x74, 0xa1, 0x14, 0x8f, 0x6d, 0x7e, 0x3b, 0x51, 0x1d, 0x3b, 0x7f}
 	binaryIDSliceInfo                                        = binary.ID{0x8e, 0xab, 0xab, 0x1b, 0x89, 0x6a, 0x43, 0x9a, 0x3c, 0xa7, 0xb8, 0x43, 0x28, 0x26, 0x72, 0x30, 0x78, 0x26, 0x38, 0xf9}
 	binaryIDBoolˢ                                            = binary.ID{0xf9, 0x44, 0xf2, 0x44, 0xbb, 0x78, 0x01, 0x7e, 0x56, 0xa1, 0x2f, 0x0d, 0x73, 0x9c, 0xa1, 0x77, 0x23, 0x5d, 0x47, 0xa8}
 	binaryIDBoolᵖ                                            = binary.ID{0x99, 0x96, 0x28, 0x2f, 0x78, 0x22, 0x44, 0xc9, 0x8f, 0x89, 0x53, 0x2f, 0x40, 0x01, 0x69, 0xd1, 0xa0, 0x82, 0x72, 0x24}
 	binaryIDU8ˢ                                              = binary.ID{0xf7, 0xd9, 0x83, 0x86, 0x77, 0xcc, 0x52, 0xb0, 0x80, 0x2f, 0xfc, 0x47, 0xa5, 0x91, 0x72, 0xd9, 0x3b, 0xcd, 0x65, 0x01}
-	binaryIDBuffer                                           = binary.ID{0xa0, 0xa5, 0x6c, 0x63, 0x6c, 0x3a, 0x98, 0x5c, 0xb1, 0xf2, 0x2d, 0xa5, 0x9a, 0x4a, 0x38, 0xc9, 0xa8, 0xa2, 0x67, 0x07}
+	binaryIDBuffer                                           = binary.ID{0x72, 0x94, 0x68, 0xa4, 0x0c, 0xe0, 0x5f, 0x61, 0x88, 0x16, 0xab, 0xc8, 0xd6, 0xe8, 0x69, 0xf4, 0x39, 0x2d, 0xc4, 0xbf}
 	binaryIDBufferDataPointer                                = binary.ID{0x28, 0x86, 0x55, 0x2c, 0x45, 0xa3, 0x8f, 0x56, 0xed, 0xc2, 0x86, 0x93, 0xaa, 0xf1, 0x64, 0x7b, 0x11, 0xba, 0xff, 0x0b}
 	binaryIDBufferIdˢ                                        = binary.ID{0xfc, 0xf6, 0xb4, 0xce, 0x3b, 0x26, 0x76, 0xbb, 0xcc, 0x8f, 0x7e, 0xb8, 0x5c, 0xd5, 0x83, 0x62, 0x52, 0x48, 0x48, 0x78}
 	binaryIDBufferIdᵖ                                        = binary.ID{0xdd, 0x87, 0xfa, 0xe3, 0xdf, 0x7b, 0x94, 0x84, 0xf3, 0x9b, 0xcb, 0xce, 0x6b, 0xbd, 0x3c, 0x5e, 0x9d, 0x78, 0xe5, 0x6d}
@@ -936,26 +936,26 @@ var (
 	binaryIDCGSWindowIDˢ                                     = binary.ID{0x88, 0x07, 0x63, 0x00, 0x36, 0x4d, 0x91, 0x9e, 0x1a, 0x10, 0x78, 0x10, 0xde, 0x80, 0xd8, 0x30, 0x03, 0x4e, 0x64, 0x7a}
 	binaryIDCharˢ                                            = binary.ID{0x70, 0x6d, 0x95, 0x73, 0x2e, 0xce, 0x6e, 0x8c, 0xc5, 0x05, 0x19, 0x07, 0x10, 0xbd, 0x46, 0x47, 0x9e, 0x83, 0x55, 0x5c}
 	binaryIDCharᵖ                                            = binary.ID{0xac, 0x44, 0x67, 0xfc, 0xf8, 0x14, 0x79, 0xb0, 0x1e, 0xd5, 0xf7, 0xb0, 0xbb, 0xcb, 0x2b, 0x24, 0x88, 0xf4, 0x59, 0xc7}
-	binaryIDClearState                                       = binary.ID{0x1c, 0x3d, 0x21, 0xc0, 0xfe, 0xa7, 0x65, 0xb3, 0xf2, 0x86, 0xe9, 0x6e, 0x3f, 0xfd, 0x82, 0xb2, 0xd0, 0x66, 0x8a, 0xfb}
-	binaryIDRect                                             = binary.ID{0x91, 0x81, 0x78, 0x6e, 0xf9, 0x21, 0xeb, 0xcb, 0x74, 0xab, 0xec, 0x50, 0x0e, 0xfe, 0x05, 0x86, 0x3a, 0x47, 0xf1, 0x00}
-	binaryIDRasterizerState                                  = binary.ID{0x61, 0x33, 0xd3, 0xcf, 0x10, 0xfe, 0x26, 0x25, 0xf4, 0x0d, 0xab, 0x26, 0x21, 0x06, 0x33, 0x4c, 0x9e, 0xe1, 0x75, 0xc8}
+	binaryIDClearState                                       = binary.ID{0x08, 0xa6, 0xc5, 0x64, 0x5c, 0xc4, 0x9c, 0xf0, 0xad, 0xc5, 0x82, 0x38, 0x2d, 0x37, 0x08, 0xe6, 0x5d, 0x51, 0x63, 0xa0}
+	binaryIDRect                                             = binary.ID{0x90, 0xd2, 0x28, 0x1d, 0x44, 0xe8, 0xe1, 0x22, 0x18, 0xef, 0x0a, 0xa6, 0xe7, 0xb3, 0x7b, 0x88, 0xc0, 0x48, 0x38, 0xa2}
+	binaryIDRasterizerState                                  = binary.ID{0x8f, 0x8a, 0x9b, 0x1a, 0xfe, 0xff, 0x2b, 0xd1, 0x64, 0x1e, 0x91, 0xda, 0x14, 0x3c, 0x05, 0x0a, 0x1d, 0xb4, 0xc1, 0xa2}
 	binaryIDVertexPointer                                    = binary.ID{0xf9, 0xce, 0xac, 0x76, 0x09, 0x23, 0xf1, 0xed, 0x02, 0x01, 0xe0, 0x91, 0x9a, 0x2c, 0x78, 0xaf, 0x3d, 0x8f, 0x02, 0xa9}
-	binaryIDVertexAttributeArray                             = binary.ID{0xf9, 0xd6, 0xf9, 0x18, 0x53, 0xce, 0xd5, 0xbd, 0x41, 0xf5, 0xdf, 0x8a, 0x0d, 0x3f, 0xae, 0x96, 0x04, 0xa9, 0xf0, 0x88}
-	binaryIDRenderbuffer                                     = binary.ID{0x14, 0x62, 0xc1, 0xfd, 0x74, 0xd5, 0x58, 0xb6, 0xec, 0x95, 0x4e, 0xcd, 0x32, 0x65, 0xba, 0xeb, 0xfc, 0x42, 0xf8, 0x9b}
-	binaryIDImage                                            = binary.ID{0x4b, 0x1b, 0xef, 0x83, 0x18, 0xbf, 0x79, 0x80, 0x91, 0x0b, 0x28, 0x36, 0x43, 0x1b, 0xd5, 0xc0, 0x92, 0xe9, 0x1a, 0x3e}
-	binaryIDCubemapLevel                                     = binary.ID{0xca, 0xda, 0x9d, 0xaa, 0x3b, 0xf7, 0x43, 0x62, 0xef, 0x77, 0x38, 0xc5, 0x78, 0xeb, 0xb4, 0x0c, 0xcd, 0xb5, 0x87, 0xe1}
-	binaryIDTexture                                          = binary.ID{0x99, 0xed, 0xa6, 0x52, 0xf7, 0x9c, 0x61, 0x5c, 0xf9, 0x26, 0x2e, 0xc8, 0x94, 0x2d, 0x0d, 0x59, 0x58, 0x56, 0xeb, 0x41}
-	binaryIDFramebufferAttachmentInfo                        = binary.ID{0xd1, 0x5d, 0x37, 0x77, 0x36, 0x87, 0x06, 0x6c, 0xe3, 0x7c, 0xf0, 0x46, 0x95, 0x2e, 0x91, 0x5f, 0x2e, 0x5f, 0xed, 0x33}
-	binaryIDFramebuffer                                      = binary.ID{0xab, 0x11, 0xed, 0xff, 0xf3, 0x6b, 0x0f, 0x36, 0xb8, 0xfb, 0x8a, 0x28, 0x9d, 0x38, 0x55, 0x8b, 0x8d, 0x5c, 0x39, 0xc7}
+	binaryIDVertexAttributeArray                             = binary.ID{0x64, 0x7d, 0x26, 0xce, 0xd4, 0x3e, 0xba, 0x93, 0x29, 0xf8, 0x4f, 0xa9, 0xbe, 0x10, 0x35, 0x4c, 0x00, 0x1c, 0x5d, 0xf1}
+	binaryIDRenderbuffer                                     = binary.ID{0x76, 0xf9, 0x8d, 0xf3, 0x8e, 0xe3, 0xa9, 0xb0, 0x01, 0x9c, 0x35, 0xe6, 0xdc, 0x52, 0x1a, 0x40, 0x4d, 0xcc, 0x9b, 0xbd}
+	binaryIDImage                                            = binary.ID{0x7a, 0xc7, 0x5e, 0xb9, 0x51, 0x71, 0x08, 0x40, 0x9c, 0xda, 0x78, 0x5a, 0xc0, 0xca, 0x85, 0x97, 0x03, 0xff, 0xdf, 0xbb}
+	binaryIDCubemapLevel                                     = binary.ID{0x1c, 0xc1, 0xfa, 0xd8, 0xb4, 0xda, 0xc5, 0x86, 0x02, 0xcd, 0x3a, 0x43, 0xbc, 0x10, 0x9f, 0xe4, 0x55, 0x68, 0xe2, 0x4f}
+	binaryIDTexture                                          = binary.ID{0x69, 0x8a, 0xa1, 0xe4, 0xf5, 0xeb, 0x7b, 0xe1, 0x0f, 0x82, 0x1c, 0x57, 0xbe, 0xe5, 0x1d, 0xb1, 0x5c, 0xbb, 0xca, 0xee}
+	binaryIDFramebufferAttachmentInfo                        = binary.ID{0x21, 0x80, 0x98, 0x42, 0x29, 0xea, 0x32, 0xcb, 0xf4, 0xb7, 0xcf, 0x20, 0x1f, 0x9d, 0x3f, 0x81, 0x0a, 0xa8, 0xa4, 0xec}
+	binaryIDFramebuffer                                      = binary.ID{0x28, 0x3d, 0x03, 0xaf, 0xa7, 0x8a, 0x1a, 0xd7, 0x6f, 0xe8, 0x67, 0x55, 0x11, 0xa5, 0x1c, 0x37, 0x5e, 0x07, 0x92, 0x3b}
 	binaryIDGLcharˢ                                          = binary.ID{0xd0, 0xa5, 0xaa, 0x96, 0xb4, 0x18, 0xa8, 0x5c, 0x38, 0x0a, 0x41, 0x88, 0x4b, 0xe7, 0x5e, 0xe7, 0x06, 0xfb, 0x21, 0x73}
-	binaryIDShader                                           = binary.ID{0xc3, 0x12, 0x27, 0x47, 0xec, 0x8b, 0x2c, 0x59, 0x69, 0x12, 0xa7, 0xc0, 0xce, 0x5a, 0x66, 0x76, 0x86, 0x2e, 0x8d, 0xaf}
-	binaryIDVertexAttribute                                  = binary.ID{0x40, 0x6b, 0xa4, 0xbe, 0x27, 0xa1, 0x09, 0x3f, 0xfa, 0xed, 0x1b, 0x5d, 0x4f, 0x4b, 0xe1, 0xf3, 0xdb, 0x99, 0x5a, 0x8b}
-	binaryIDUniform                                          = binary.ID{0x27, 0x30, 0x49, 0xde, 0x65, 0x8d, 0x9d, 0x3f, 0x58, 0x98, 0x30, 0x5d, 0x6b, 0xe1, 0x43, 0x79, 0xb4, 0x61, 0x08, 0xf8}
-	binaryIDProgram                                          = binary.ID{0xe8, 0x5c, 0x4f, 0x1a, 0x9a, 0xa7, 0xfc, 0xf7, 0x98, 0xc4, 0x15, 0x95, 0x2b, 0xd0, 0xaf, 0x6d, 0xc9, 0x3c, 0xad, 0x09}
-	binaryIDVertexArray                                      = binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}
-	binaryIDQuery                                            = binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}
-	binaryIDObjects                                          = binary.ID{0x8a, 0x05, 0xaa, 0xf5, 0xa8, 0x57, 0xb0, 0xf1, 0x13, 0x48, 0x39, 0x76, 0xec, 0x1e, 0x47, 0x0b, 0x6c, 0x3b, 0xf6, 0xe0}
-	binaryIDContext                                          = binary.ID{0x7b, 0x7d, 0x73, 0x49, 0xf3, 0xae, 0xea, 0xc4, 0x60, 0x85, 0x76, 0x79, 0x71, 0xe2, 0x2d, 0xcb, 0x35, 0x97, 0x53, 0xe7}
+	binaryIDShader                                           = binary.ID{0xdb, 0xaa, 0x05, 0x7a, 0x88, 0xde, 0x05, 0xea, 0x19, 0x7d, 0x38, 0x42, 0xf1, 0xe6, 0x37, 0xe1, 0x0c, 0xaf, 0x22, 0x2e}
+	binaryIDVertexAttribute                                  = binary.ID{0x48, 0xcc, 0xff, 0xa1, 0xa1, 0x9d, 0x30, 0x10, 0xbe, 0x7e, 0x0b, 0x66, 0xae, 0x30, 0xb0, 0x2e, 0x5f, 0x88, 0x12, 0x8c}
+	binaryIDUniform                                          = binary.ID{0x08, 0x78, 0x15, 0x85, 0x85, 0xc7, 0xea, 0x3d, 0xf0, 0xc3, 0x78, 0x69, 0x2b, 0xf3, 0x79, 0x99, 0x8f, 0xbb, 0x00, 0x73}
+	binaryIDProgram                                          = binary.ID{0x31, 0x7d, 0xeb, 0xd6, 0x66, 0xf0, 0xad, 0x10, 0x25, 0xbe, 0x80, 0xcd, 0xa7, 0xc5, 0xf1, 0x13, 0xf9, 0x52, 0xc2, 0x28}
+	binaryIDVertexArray                                      = binary.ID{0xe6, 0x99, 0xf2, 0x2f, 0xe6, 0xc6, 0x7d, 0x1b, 0xb7, 0x0b, 0x44, 0xfa, 0x62, 0x23, 0xf7, 0x41, 0xad, 0x30, 0xfa, 0x33}
+	binaryIDQuery                                            = binary.ID{0x62, 0x44, 0x8a, 0xcf, 0x74, 0x8f, 0xd4, 0xae, 0x50, 0xd3, 0xfd, 0x27, 0xe3, 0x02, 0x90, 0xfe, 0x17, 0x13, 0x0c, 0xa3}
+	binaryIDObjects                                          = binary.ID{0x12, 0x48, 0x34, 0xe0, 0x63, 0x96, 0xd4, 0xef, 0x29, 0xea, 0xb8, 0xa4, 0xe1, 0x96, 0x9f, 0x3f, 0xb0, 0xc8, 0x1b, 0xf7}
+	binaryIDContext                                          = binary.ID{0xd0, 0x13, 0xab, 0x51, 0x44, 0x9f, 0x32, 0x91, 0x7c, 0x79, 0x9d, 0x0d, 0xa7, 0x7d, 0x38, 0x90, 0x9e, 0x95, 0x9f, 0x7e}
 	binaryIDEGLConfig                                        = binary.ID{0xc1, 0xea, 0x31, 0x3f, 0xd1, 0xf0, 0x52, 0x99, 0x82, 0x15, 0x2a, 0x15, 0xc0, 0x95, 0x93, 0x16, 0x2d, 0xd0, 0xaa, 0x58}
 	binaryIDEGLContext                                       = binary.ID{0x7e, 0xd7, 0x09, 0xd5, 0xdb, 0xde, 0xd4, 0xf4, 0xc2, 0x44, 0xa3, 0x47, 0xb0, 0x05, 0x91, 0x42, 0x91, 0x5f, 0x12, 0x55}
 	binaryIDEGLDisplay                                       = binary.ID{0xdd, 0x44, 0x8d, 0x9b, 0x11, 0x43, 0x6e, 0xec, 0x7b, 0xc7, 0x17, 0x93, 0x81, 0x62, 0x0b, 0xaa, 0x5f, 0xe0, 0xdd, 0x10}
@@ -1785,7 +1785,7 @@ var (
 	binaryIDWglCreateContextAttribsARB                       = binary.ID{0x28, 0x15, 0x85, 0xa3, 0xab, 0x16, 0x84, 0xed, 0xe0, 0xe6, 0xec, 0x92, 0xe8, 0x14, 0x8e, 0xbe, 0x5f, 0x32, 0x72, 0x42}
 	binaryIDWglMakeCurrent                                   = binary.ID{0x86, 0xd3, 0x02, 0xb5, 0xf6, 0x1b, 0x7f, 0x3e, 0xb1, 0x23, 0x36, 0x2b, 0x9d, 0xa2, 0x13, 0xa6, 0xf6, 0xbc, 0xb3, 0x8a}
 	binaryIDWglSwapBuffers                                   = binary.ID{0xa1, 0x23, 0xcd, 0xfc, 0xb1, 0x9b, 0xcf, 0x24, 0x77, 0xab, 0x3b, 0xb0, 0x75, 0x58, 0x9b, 0x35, 0x54, 0x11, 0x3f, 0xc8}
-	binaryIDgenerate_types                                   = binary.ID{0xbc, 0x1a, 0x89, 0x8b, 0xb7, 0xba, 0x8e, 0x8b, 0x59, 0x61, 0x72, 0xac, 0x82, 0x23, 0x98, 0xd7, 0x18, 0x05, 0x6b, 0x07}
+	binaryIDgenerate_types                                   = binary.ID{0x66, 0x3f, 0x56, 0xa1, 0xab, 0x3d, 0x6a, 0x7f, 0x2c, 0xf4, 0x25, 0xf5, 0x2c, 0xc2, 0x7f, 0x7f, 0x56, 0x5a, 0x44, 0x05}
 )
 
 type binaryClassArchitecture struct{}
@@ -2020,9 +2020,6 @@ func (*Color) Class() binary.Class {
 	return (*binaryClassColor)(nil)
 }
 func doEncodeColor(e binary.Encoder, o *Color) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Float32(float32(o.Red)); err != nil {
 		return err
 	}
@@ -2038,11 +2035,6 @@ func doEncodeColor(e binary.Encoder, o *Color) error {
 	return nil
 }
 func doDecodeColor(d binary.Decoder, o *Color) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -2066,9 +2058,6 @@ func doDecodeColor(d binary.Decoder, o *Color) error {
 	return nil
 }
 func doSkipColor(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -2103,7 +2092,6 @@ var schemaColor = &schema.Class{
 	Package: "gles",
 	Name:    "Color",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -2117,9 +2105,6 @@ func (*BlendState) Class() binary.Class {
 	return (*binaryClassBlendState)(nil)
 }
 func doEncodeBlendState(e binary.Encoder, o *BlendState) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(o.SrcRgbBlendFactor)); err != nil {
 		return err
 	}
@@ -2144,11 +2129,6 @@ func doEncodeBlendState(e binary.Encoder, o *BlendState) error {
 	return nil
 }
 func doDecodeBlendState(d binary.Decoder, o *BlendState) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2185,9 +2165,6 @@ func doDecodeBlendState(d binary.Decoder, o *BlendState) error {
 	return nil
 }
 func doSkipBlendState(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2231,7 +2208,6 @@ var schemaBlendState = &schema.Class{
 	Package: "gles",
 	Name:    "BlendState",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -2460,9 +2436,6 @@ func (*Buffer) Class() binary.Class {
 	return (*binaryClassBuffer)(nil)
 }
 func doEncodeBuffer(e binary.Encoder, o *Buffer) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Value(&o.Data); err != nil {
 		return err
 	}
@@ -2484,11 +2457,6 @@ func doEncodeBuffer(e binary.Encoder, o *Buffer) error {
 	return nil
 }
 func doDecodeBuffer(d binary.Decoder, o *Buffer) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if err := d.Value(&o.Data); err != nil {
 		return err
 	}
@@ -2518,9 +2486,6 @@ func doDecodeBuffer(d binary.Decoder, o *Buffer) error {
 	return nil
 }
 func doSkipBuffer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
 		return err
 	}
@@ -2561,7 +2526,6 @@ var schemaBuffer = &schema.Class{
 	Package: "gles",
 	Name:    "Buffer",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -3856,9 +3820,6 @@ func (*ClearState) Class() binary.Class {
 	return (*binaryClassClearState)(nil)
 }
 func doEncodeClearState(e binary.Encoder, o *ClearState) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Value(&o.ClearColor); err != nil {
 		return err
 	}
@@ -3871,11 +3832,6 @@ func doEncodeClearState(e binary.Encoder, o *ClearState) error {
 	return nil
 }
 func doDecodeClearState(d binary.Decoder, o *ClearState) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if err := d.Value(&o.ClearColor); err != nil {
 		return err
 	}
@@ -3892,9 +3848,6 @@ func doDecodeClearState(d binary.Decoder, o *ClearState) error {
 	return nil
 }
 func doSkipClearState(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipValue((*Color)(nil)); err != nil {
 		return err
 	}
@@ -3926,7 +3879,6 @@ var schemaClearState = &schema.Class{
 	Package: "gles",
 	Name:    "ClearState",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "ClearColor", Type: &schema.Struct{Name: "Color", ID: (*Color)(nil).Class().ID()}},
 		{Declared: "ClearDepth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "ClearStencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -3939,9 +3891,6 @@ func (*Rect) Class() binary.Class {
 	return (*binaryClassRect)(nil)
 }
 func doEncodeRect(e binary.Encoder, o *Rect) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Int32(int32(o.X)); err != nil {
 		return err
 	}
@@ -3957,11 +3906,6 @@ func doEncodeRect(e binary.Encoder, o *Rect) error {
 	return nil
 }
 func doDecodeRect(d binary.Decoder, o *Rect) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -3985,9 +3929,6 @@ func doDecodeRect(d binary.Decoder, o *Rect) error {
 	return nil
 }
 func doSkipRect(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -4022,7 +3963,6 @@ var schemaRect = &schema.Class{
 	Package: "gles",
 	Name:    "Rect",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -4036,9 +3976,6 @@ func (*RasterizerState) Class() binary.Class {
 	return (*binaryClassRasterizerState)(nil)
 }
 func doEncodeRasterizerState(e binary.Encoder, o *RasterizerState) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Bool(o.DepthMask); err != nil {
 		return err
 	}
@@ -4104,11 +4041,6 @@ func doEncodeRasterizerState(e binary.Encoder, o *RasterizerState) error {
 	return nil
 }
 func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -4214,9 +4146,6 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) error {
 	return nil
 }
 func doSkipRasterizerState(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -4302,7 +4231,6 @@ var schemaRasterizerState = &schema.Class{
 	Package: "gles",
 	Name:    "RasterizerState",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DepthNear", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -4377,9 +4305,6 @@ func (*VertexAttributeArray) Class() binary.Class {
 	return (*binaryClassVertexAttributeArray)(nil)
 }
 func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Bool(o.Enabled); err != nil {
 		return err
 	}
@@ -4404,11 +4329,6 @@ func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) err
 	return nil
 }
 func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -4445,9 +4365,6 @@ func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) err
 	return nil
 }
 func doSkipVertexAttributeArray(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -4493,7 +4410,6 @@ var schemaVertexAttributeArray = &schema.Class{
 	Package: "gles",
 	Name:    "VertexAttributeArray",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -4510,9 +4426,6 @@ func (*Renderbuffer) Class() binary.Class {
 	return (*binaryClassRenderbuffer)(nil)
 }
 func doEncodeRenderbuffer(e binary.Encoder, o *Renderbuffer) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Int32(int32(o.Width)); err != nil {
 		return err
 	}
@@ -4528,11 +4441,6 @@ func doEncodeRenderbuffer(e binary.Encoder, o *Renderbuffer) error {
 	return nil
 }
 func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4554,9 +4462,6 @@ func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) error {
 	return nil
 }
 func doSkipRenderbuffer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -4591,7 +4496,6 @@ var schemaRenderbuffer = &schema.Class{
 	Package: "gles",
 	Name:    "Renderbuffer",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -4605,9 +4509,6 @@ func (*Image) Class() binary.Class {
 	return (*binaryClassImage)(nil)
 }
 func doEncodeImage(e binary.Encoder, o *Image) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Int32(int32(o.Width)); err != nil {
 		return err
 	}
@@ -4626,11 +4527,6 @@ func doEncodeImage(e binary.Encoder, o *Image) error {
 	return nil
 }
 func doDecodeImage(d binary.Decoder, o *Image) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4657,9 +4553,6 @@ func doDecodeImage(d binary.Decoder, o *Image) error {
 	return nil
 }
 func doSkipImage(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -4697,7 +4590,6 @@ var schemaImage = &schema.Class{
 	Package: "gles",
 	Name:    "Image",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -4712,9 +4604,6 @@ func (*CubemapLevel) Class() binary.Class {
 	return (*binaryClassCubemapLevel)(nil)
 }
 func doEncodeCubemapLevel(e binary.Encoder, o *CubemapLevel) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.Faces))); err != nil {
 		return err
 	}
@@ -4729,11 +4618,6 @@ func doEncodeCubemapLevel(e binary.Encoder, o *CubemapLevel) error {
 	return nil
 }
 func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4756,9 +4640,6 @@ func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) error {
 	return nil
 }
 func doSkipCubemapLevel(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4793,7 +4674,6 @@ var schemaCubemapLevel = &schema.Class{
 	Package: "gles",
 	Name:    "CubemapLevel",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Faces", Type: &schema.Map{Alias: "GLenumːImageᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
 	},
 }
@@ -4804,9 +4684,6 @@ func (*Texture) Class() binary.Class {
 	return (*binaryClassTexture)(nil)
 }
 func doEncodeTexture(e binary.Encoder, o *Texture) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(o.Kind)); err != nil {
 		return err
 	}
@@ -4865,11 +4742,6 @@ func doEncodeTexture(e binary.Encoder, o *Texture) error {
 	return nil
 }
 func doDecodeTexture(d binary.Decoder, o *Texture) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4966,9 +4838,6 @@ func doDecodeTexture(d binary.Decoder, o *Texture) error {
 	return nil
 }
 func doSkipTexture(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -5048,7 +4917,6 @@ var schemaTexture = &schema.Class{
 	Package: "gles",
 	Name:    "Texture",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture2D", Type: &schema.Map{Alias: "GLintːImageᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Image", ID: (*Image)(nil).Class().ID()}}},
@@ -5071,9 +4939,6 @@ func (*FramebufferAttachmentInfo) Class() binary.Class {
 	return (*binaryClassFramebufferAttachmentInfo)(nil)
 }
 func doEncodeFramebufferAttachmentInfo(e binary.Encoder, o *FramebufferAttachmentInfo) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(o.Object); err != nil {
 		return err
 	}
@@ -5089,11 +4954,6 @@ func doEncodeFramebufferAttachmentInfo(e binary.Encoder, o *FramebufferAttachmen
 	return nil
 }
 func doDecodeFramebufferAttachmentInfo(d binary.Decoder, o *FramebufferAttachmentInfo) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5117,9 +4977,6 @@ func doDecodeFramebufferAttachmentInfo(d binary.Decoder, o *FramebufferAttachmen
 	return nil
 }
 func doSkipFramebufferAttachmentInfo(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -5158,7 +5015,6 @@ var schemaFramebufferAttachmentInfo = &schema.Class{
 	Package: "gles",
 	Name:    "FramebufferAttachmentInfo",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TextureLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -5172,9 +5028,6 @@ func (*Framebuffer) Class() binary.Class {
 	return (*binaryClassFramebuffer)(nil)
 }
 func doEncodeFramebuffer(e binary.Encoder, o *Framebuffer) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.Attachments))); err != nil {
 		return err
 	}
@@ -5189,11 +5042,6 @@ func doEncodeFramebuffer(e binary.Encoder, o *Framebuffer) error {
 	return nil
 }
 func doDecodeFramebuffer(d binary.Decoder, o *Framebuffer) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5216,9 +5064,6 @@ func doDecodeFramebuffer(d binary.Decoder, o *Framebuffer) error {
 	return nil
 }
 func doSkipFramebuffer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5253,7 +5098,6 @@ var schemaFramebuffer = &schema.Class{
 	Package: "gles",
 	Name:    "Framebuffer",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Attachments", Type: &schema.Map{Alias: "GLenumːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo", ID: (*FramebufferAttachmentInfo)(nil).Class().ID()}}},
 	},
 }
@@ -5311,9 +5155,6 @@ func (*Shader) Class() binary.Class {
 	return (*binaryClassShader)(nil)
 }
 func doEncodeShader(e binary.Encoder, o *Shader) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Value(&o.Binary); err != nil {
 		return err
 	}
@@ -5335,11 +5176,6 @@ func doEncodeShader(e binary.Encoder, o *Shader) error {
 	return nil
 }
 func doDecodeShader(d binary.Decoder, o *Shader) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if err := d.Value(&o.Binary); err != nil {
 		return err
 	}
@@ -5369,9 +5205,6 @@ func doDecodeShader(d binary.Decoder, o *Shader) error {
 	return nil
 }
 func doSkipShader(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
 		return err
 	}
@@ -5412,7 +5245,6 @@ var schemaShader = &schema.Class{
 	Package: "gles",
 	Name:    "Shader",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
 		{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -5428,9 +5260,6 @@ func (*VertexAttribute) Class() binary.Class {
 	return (*binaryClassVertexAttribute)(nil)
 }
 func doEncodeVertexAttribute(e binary.Encoder, o *VertexAttribute) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Value(&o.Name); err != nil {
 		return err
 	}
@@ -5443,11 +5272,6 @@ func doEncodeVertexAttribute(e binary.Encoder, o *VertexAttribute) error {
 	return nil
 }
 func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if err := d.Value(&o.Name); err != nil {
 		return err
 	}
@@ -5464,9 +5288,6 @@ func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) error {
 	return nil
 }
 func doSkipVertexAttribute(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipValue((*Charˢ)(nil)); err != nil {
 		return err
 	}
@@ -5498,7 +5319,6 @@ var schemaVertexAttribute = &schema.Class{
 	Package: "gles",
 	Name:    "VertexAttribute",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Struct{Name: "Charˢ", ID: (*Charˢ)(nil).Class().ID()}},
 		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -5511,9 +5331,6 @@ func (*Uniform) Class() binary.Class {
 	return (*binaryClassUniform)(nil)
 }
 func doEncodeUniform(e binary.Encoder, o *Uniform) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -5526,11 +5343,6 @@ func doEncodeUniform(e binary.Encoder, o *Uniform) error {
 	return nil
 }
 func doDecodeUniform(d binary.Decoder, o *Uniform) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -5547,9 +5359,6 @@ func doDecodeUniform(d binary.Decoder, o *Uniform) error {
 	return nil
 }
 func doSkipUniform(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -5581,7 +5390,6 @@ var schemaUniform = &schema.Class{
 	Package: "gles",
 	Name:    "Uniform",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -5594,9 +5402,6 @@ func (*Program) Class() binary.Class {
 	return (*binaryClassProgram)(nil)
 }
 func doEncodeProgram(e binary.Encoder, o *Program) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.Shaders))); err != nil {
 		return err
 	}
@@ -5653,11 +5458,6 @@ func doEncodeProgram(e binary.Encoder, o *Program) error {
 	return nil
 }
 func doDecodeProgram(d binary.Decoder, o *Program) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5752,9 +5552,6 @@ func doDecodeProgram(d binary.Decoder, o *Program) error {
 	return nil
 }
 func doSkipProgram(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5834,7 +5631,6 @@ var schemaProgram = &schema.Class{
 	Package: "gles",
 	Name:    "Program",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Shaders", Type: &schema.Map{Alias: "GLenumːShaderIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ", ID: (*U8ˢ)(nil).Class().ID()}},
@@ -5851,23 +5647,12 @@ func (*VertexArray) Class() binary.Class {
 	return (*binaryClassVertexArray)(nil)
 }
 func doEncodeVertexArray(e binary.Encoder, o *VertexArray) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodeVertexArray(d binary.Decoder, o *VertexArray) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	return nil
 }
 func doSkipVertexArray(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	return nil
 }
 func (*binaryClassVertexArray) ID() binary.ID      { return binaryIDVertexArray }
@@ -5889,9 +5674,7 @@ var schemaVertexArray = &schema.Class{
 	TypeID:  binaryIDVertexArray,
 	Package: "gles",
 	Name:    "VertexArray",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-	},
+	Fields:  []schema.Field{},
 }
 
 type binaryClassQuery struct{}
@@ -5900,23 +5683,12 @@ func (*Query) Class() binary.Class {
 	return (*binaryClassQuery)(nil)
 }
 func doEncodeQuery(e binary.Encoder, o *Query) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodeQuery(d binary.Decoder, o *Query) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	return nil
 }
 func doSkipQuery(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	return nil
 }
 func (*binaryClassQuery) ID() binary.ID      { return binaryIDQuery }
@@ -5938,9 +5710,7 @@ var schemaQuery = &schema.Class{
 	TypeID:  binaryIDQuery,
 	Package: "gles",
 	Name:    "Query",
-	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-	},
+	Fields:  []schema.Field{},
 }
 
 type binaryClassObjects struct{}
@@ -5949,9 +5719,6 @@ func (*Objects) Class() binary.Class {
 	return (*binaryClassObjects)(nil)
 }
 func doEncodeObjects(e binary.Encoder, o *Objects) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.Renderbuffers))); err != nil {
 		return err
 	}
@@ -6075,11 +5842,6 @@ func doEncodeObjects(e binary.Encoder, o *Objects) error {
 	return nil
 }
 func doDecodeObjects(d binary.Decoder, o *Objects) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6267,9 +6029,6 @@ func doDecodeObjects(d binary.Decoder, o *Objects) error {
 	return nil
 }
 func doSkipObjects(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6388,7 +6147,6 @@ var schemaObjects = &schema.Class{
 	Package: "gles",
 	Name:    "Objects",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Renderbuffer", ID: (*Renderbuffer)(nil).Class().ID()}}}},
 		{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Texture", ID: (*Texture)(nil).Class().ID()}}}},
 		{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Framebuffer", ID: (*Framebuffer)(nil).Class().ID()}}}},
@@ -6406,9 +6164,6 @@ func (*Context) Class() binary.Class {
 	return (*binaryClassContext)(nil)
 }
 func doEncodeContext(e binary.Encoder, o *Context) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(o.Identifier)); err != nil {
 		return err
 	}
@@ -6531,11 +6286,6 @@ func doEncodeContext(e binary.Encoder, o *Context) error {
 	return nil
 }
 func doDecodeContext(d binary.Decoder, o *Context) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6746,9 +6496,6 @@ func doDecodeContext(d binary.Decoder, o *Context) error {
 	return nil
 }
 func doSkipContext(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -6894,7 +6641,6 @@ var schemaContext = &schema.Class{
 	Package: "gles",
 	Name:    "Context",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
 		{Declared: "Blending", Type: &schema.Struct{Name: "BlendState", ID: (*BlendState)(nil).Class().ID()}},
 		{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState", ID: (*RasterizerState)(nil).Class().ID()}},
@@ -76999,9 +76745,6 @@ func (*generate_types) Class() binary.Class {
 	return (*binaryClassgenerate_types)(nil)
 }
 func doEncodegenerate_types(e binary.Encoder, o *generate_types) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
 	if err := e.Value(&o.U16_slice); err != nil {
 		return err
 	}
@@ -77011,11 +76754,6 @@ func doEncodegenerate_types(e binary.Encoder, o *generate_types) error {
 	return nil
 }
 func doDecodegenerate_types(d binary.Decoder, o *generate_types) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
 	if err := d.Value(&o.U16_slice); err != nil {
 		return err
 	}
@@ -77025,9 +76763,6 @@ func doDecodegenerate_types(d binary.Decoder, o *generate_types) error {
 	return nil
 }
 func doSkipgenerate_types(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
 	if err := d.SkipValue((*U16ˢ)(nil)); err != nil {
 		return err
 	}
@@ -77056,7 +76791,6 @@ var schemagenerate_types = &schema.Class{
 	Package: "gles",
 	Name:    "generate_types",
 	Fields: []schema.Field{
-		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "U16_slice", Type: &schema.Struct{Name: "U16ˢ", ID: (*U16ˢ)(nil).Class().ID()}},
 		{Declared: "U32_slice", Type: &schema.Struct{Name: "U32ˢ", ID: (*U32ˢ)(nil).Class().ID()}},
 	},

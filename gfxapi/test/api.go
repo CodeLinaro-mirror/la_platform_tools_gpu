@@ -5529,29 +5529,25 @@ func (a *CmdRemapped) Observations() *atom.Observations { return &a.observations
 ////////////////////////////////////////////////////////////////////////////////
 type Tester struct {
 	binary.Generate
-	CreatedAt atom.ID
-	A         Imported
-	B         Included
+	A Imported
+	B Included
 }
 
 func (c *Tester) Init() {
 	c.A.Init()
 	c.B.Init()
 }
-func (c *Tester) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Included
 ////////////////////////////////////////////////////////////////////////////////
 type Included struct {
 	binary.Generate
-	CreatedAt atom.ID
-	S         string
+	S string
 }
 
 func (c *Included) Init() {
 }
-func (c *Included) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // State
