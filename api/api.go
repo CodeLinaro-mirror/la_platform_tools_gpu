@@ -61,7 +61,7 @@ func (p *Processor) Parse(path string) (*ast.API, parse.ErrorList) {
 	if err != nil {
 		return nil, parse.ErrorList{parse.Error{Message: err.Error()}}
 	}
-	return parser.Parse(string(info))
+	return parser.Parse(path, string(info))
 }
 
 // Resolve resolves the api file with the DefaultProcessor.

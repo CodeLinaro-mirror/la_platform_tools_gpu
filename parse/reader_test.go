@@ -43,7 +43,7 @@ var numericTests = []struct {
 
 func TestNumeric(t *testing.T) {
 	for _, test := range numericTests {
-		r := NewReader(test.in)
+		r := NewReader("reader_test.api", test.in)
 		gotKind := r.Numeric()
 		gotTok := r.Token()
 

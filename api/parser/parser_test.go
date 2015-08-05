@@ -76,14 +76,17 @@ func printCSTTree(t *testing.T, n parse.Node, hints map[parse.Node][]ast.Node, t
 }
 
 func TestParsedCST(t *testing.T) {
-	runes := make([]rune, 0, 0xffff) // needs to be big enough to not be resized
+	source := &parse.Source{
+		Filename: "parser_test.api",
+		Runes:    make([]rune, 0, 0xffff), // needs to be big enough to not be resized
+	}
 	B := func(n ...parse.Node) *parse.Branch { return &parse.Branch{Children: n} }
 	L := func(str string) *parse.Leaf {
 		r := []rune(str)
-		s, e := len(runes), len(runes)+len(r)
-		runes = append(append(runes, r...), '·')
+		s, e := len(source.Runes), len(source.Runes)+len(r)
+		source.Runes = append(append(source.Runes, r...), '·')
 		l := &parse.Leaf{}
-		l.SetToken(parse.Token{Runes: runes, Start: s, End: e})
+		l.SetToken(parse.Token{Source: source, Start: s, End: e})
 		return l
 	}
 
@@ -104,7 +107,7 @@ func TestParsedCST(t *testing.T) {
 			expected: B(B(B(B(L("const"), B(B(L("char")), L("*"))), L("const"), L("*")), L("a"))),
 		},
 	} {
-		api, errs := Parse(test.source)
+		api, errs := Parse("parser_test.api", test.source)
 		m := map[parse.Node][]ast.Node{api.Node(): {api}}
 		var traverse func(n ast.Node)
 		traverse = func(n ast.Node) {

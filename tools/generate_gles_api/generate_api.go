@@ -375,7 +375,7 @@ func printCommand(out io.Writer, reg *Registry, cmd *Command, api KhronosAPI) {
 				if len(childs) > 0 {
 					start := apiCmd.Block.CST.Children[0].Token()
 					end := apiCmd.Block.CST.Children[len(childs)-1].Token()
-					fmt.Fprintf(out, "%s", string(start.Runes[start.End:end.Start]))
+					fmt.Fprintf(out, "%s", string(start.Source.Runes[start.End:end.Start]))
 					foundOldCode = true
 				}
 			}
@@ -408,7 +408,7 @@ func oldParamType(cmdName string, paramIndex int) (string, bool) {
 		for _, cmd := range oldApi.Commands {
 			if cmd.Name.Value == cmdName {
 				token := cmd.Parameters[paramIndex].Type.Node().Token()
-				return string(token.Runes[token.Start:token.End]), true
+				return string(token.Source.Runes[token.Start:token.End]), true
 			}
 		}
 	}

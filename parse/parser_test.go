@@ -121,7 +121,7 @@ func TestErrorLimit(t *testing.T) {
 				t.Fatalf("Parsing not terminated after %v errors", i)
 			}
 		}
-	}, "", NewSkip("//", "/*", "*/"))
+	}, "parser_test.api", "", NewSkip("//", "/*", "*/"))
 	if len(errs) != ParseErrorLimit {
 		t.Fatalf("Expected %v errors, got %v", ParseErrorLimit, len(errs))
 	}
@@ -138,7 +138,7 @@ func TestCursor(t *testing.T) {
 		content += " "
 	}
 	content += "@  \n  "
-	errs := Parse(root.parse, content, NewSkip("//", "/*", "*/"))
+	errs := Parse(root.parse, "parser_test.api", content, NewSkip("//", "/*", "*/"))
 	if len(errs) == 0 {
 		t.Fatalf("Expected errors")
 	}
@@ -161,7 +161,7 @@ func TestCustomPanic(t *testing.T) {
 			t.Fatalf("Expected custom panic recovery")
 		}
 	}()
-	Parse(func(p *Parser, _ *Branch) { panic(custom) }, "", NewSkip("//", "/*", "*/"))
+	Parse(func(p *Parser, _ *Branch) { panic(custom) }, "parser_test.api", "", NewSkip("//", "/*", "*/"))
 }
 
 func testParse(t *testing.T, content string, cst Node, ast *listNode) {
@@ -171,7 +171,7 @@ func testParse(t *testing.T, content string, cst Node, ast *listNode) {
 		gotCst = cst
 		root.parse(p, cst)
 	}
-	errs := Parse(rootParse, content, NewSkip("//", "/*", "*/"))
+	errs := Parse(rootParse, "parser_test.api", content, NewSkip("//", "/*", "*/"))
 	if len(errs) > 0 {
 		for _, e := range errs {
 			line, column := e.At.Token().Cursor()
@@ -198,7 +198,7 @@ func testParse(t *testing.T, content string, cst Node, ast *listNode) {
 }
 
 func testCustomFail(t *testing.T, content string, do BranchParser) {
-	errs := Parse(do, content, NewSkip("//", "/*", "*/"))
+	errs := Parse(do, "parser_test.api", content, NewSkip("//", "/*", "*/"))
 	if len(errs) == 0 {
 		t.Fatalf("Expected errors")
 	} else {

@@ -26,11 +26,11 @@ import (
 // If the string is not syntactically valid, it will also return the
 // errors encountered. If errors are returned, the ast returned will be
 // the incomplete tree so far, and may not be structurally valid.
-func Parse(data string) (*ast.API, parse.ErrorList) {
+func Parse(filename, data string) (*ast.API, parse.ErrorList) {
 	var api *ast.API
 	parser := func(p *parse.Parser, cst *parse.Branch) {
 		api = requireAPI(p, cst)
 	}
-	errors := parse.Parse(parser, data, parse.NewSkip("//", "/*", "*/"))
+	errors := parse.Parse(parser, filename, data, parse.NewSkip("//", "/*", "*/"))
 	return api, errors
 }

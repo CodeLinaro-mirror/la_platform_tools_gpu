@@ -41,7 +41,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		api, errs := parser.Parse(string(f))
+		api, errs := parser.Parse(*oldApiPath, string(f))
 		if len(errs) > 0 {
 			for i, e := range errs {
 				fmt.Printf("%d: %v", i, e)

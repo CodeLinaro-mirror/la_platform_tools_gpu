@@ -37,12 +37,6 @@ type TokenInfo struct {
 	Cst        *parse.Leaf // Structure containing the preceeding and following whitespace.
 }
 
-func (ti *TokenInfo) setToken(t Token) {
-	ti.Token = t
-	str := []rune(t.String())
-	ti.Cst.SetToken(parse.Token{str, 0, len(str)})
-}
-
 // Keyword represents a language keyword token returned by the preprocessor.
 type Keyword struct {
 	word *string
