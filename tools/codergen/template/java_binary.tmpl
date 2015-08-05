@@ -32,7 +32,7 @@
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
-{{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Any"}}e.variant({{.Name}});{{end}}
 
 {{define "Java.Encode#[]uint8"}}
   e.uint32({{.Name}}.length);¶
@@ -71,7 +71,7 @@
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
-{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
+{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.variant();{{end}}
 
 {{define "Java.Decode#[]uint8"}}
   {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
