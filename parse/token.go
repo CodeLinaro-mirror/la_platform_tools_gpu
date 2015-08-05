@@ -23,9 +23,9 @@ const RuneEOL = '\n'
 
 // A Token represents the smallest consumed unit input.
 type Token struct {
-	Runes []rune // The full rune array for the string this token is from.
-	Start int    // The start of the token in the full rune array.
-	End   int    // One past the end of the token.
+	Source *Source // The source object this token is from (including the full rune array).
+	Start  int     // The start of the token in the full rune array.
+	End    int     // One past the end of the token.
 }
 
 // Format implements fmt.Formatter writing the start end and value of the token.
@@ -35,10 +35,10 @@ func (t Token) Format(f fmt.State, c rune) {
 
 // String returns the string form of the rune range the token represents.
 func (t Token) String() string {
-	if t.Start >= t.End || len(t.Runes) == 0 {
+	if t.Start >= t.End || len(t.Source.Runes) == 0 {
 		return ""
 	}
-	return string(t.Runes[t.Start:t.End])
+	return string(t.Source.Runes[t.Start:t.End])
 }
 
 // Cursor is used to calculate the line and column of the start of the token.
@@ -47,7 +47,7 @@ func (t Token) String() string {
 func (t Token) Cursor() (line int, column int) {
 	line = 1
 	column = 1
-	for _, r := range t.Runes[:t.Start] {
+	for _, r := range t.Source.Runes[:t.Start] {
 		if r == RuneEOL {
 			line++
 			column = 0

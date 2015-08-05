@@ -37,11 +37,11 @@ type LeafParser func(p *Parser, cst *Leaf)
 // Given a root parse function, the input string and the Skip controller, it builds a
 // and initializes a Parser, runs the root using it, verifies it worked
 // correctly and then returns the errors generated if any.
-func Parse(root BranchParser, data string, skip Skip) []Error {
+func Parse(root BranchParser, filename, data string, skip Skip) []Error {
 	p := &Parser{
 		skip: skip,
 	}
-	p.setData(data)
+	p.setData(filename, data)
 	p.parse(root)
 	return p.Errors
 }

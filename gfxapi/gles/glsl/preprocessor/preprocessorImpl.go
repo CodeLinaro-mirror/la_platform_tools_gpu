@@ -18,6 +18,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/parse"
 	"bytes"
+	"fmt"
 )
 
 // ifEntry is a structure containing the data necessary for proper evaluation of #if*
@@ -356,7 +357,7 @@ func (p *preprocessorImpl) evaluateIf(args []TokenInfo) bool {
 	// append fake EOF
 	lastToken := args[len(args)-1].Cst.Token()
 	eof := &parse.Leaf{}
-	eof.SetToken(parse.Token{Runes: lastToken.Runes, Start: lastToken.End, End: lastToken.End})
+	eof.SetToken(parse.Token{Source: lastToken.Source, Start: lastToken.End, End: lastToken.End})
 	args = append(args, TokenInfo{Token: nil, Cst: eof})
 
 	var list []tokenExpansion
@@ -508,7 +509,7 @@ func addBuiltinMacro(macros map[string]macroDefinition, name string, expander ma
 
 func newPreprocessorImpl(data string, eval ExpressionEvaluator, file int) *preprocessorImpl {
 	p := &preprocessorImpl{
-		lexer:     newLexer(data),
+		lexer:     newLexer(fmt.Sprintf("File %v", file), data),
 		macros:    make(map[string]macroDefinition),
 		evaluator: eval,
 	}

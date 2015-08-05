@@ -220,11 +220,11 @@ func processLineContinuations(input string) string {
 
 /////////////////////////// Lexer interface below /////////////////////////////
 
-func newLexer(input string) *lexer {
+func newLexer(filename, input string) *lexer {
 	input = processLineContinuations(input)
 	l := &lexer{
 		current: TokenInfo{Newline: true, Cst: &parse.Leaf{}},
-		reader:  parse.NewReader(input),
+		reader:  parse.NewReader(filename, input),
 	}
 	l.current.Cst.AddPrefix(l.skip(parse.SkipPrefix))
 	l.read()

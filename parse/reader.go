@@ -22,18 +22,20 @@ import (
 
 // Reader is the interface to an object that converts a rune array into tokens.
 type Reader struct {
-	runes  []rune // The string being parsed.
-	offset int    // The start of the current token.
-	cursor int    // The offset of the next unparsed rune.
+	Source *Source // The source being parsed.
+	runes  []rune  // The string being parsed.
+	offset int     // The start of the current token.
+	cursor int     // The offset of the next unparsed rune.
 }
 
-func (r *Reader) setData(data string) {
+func (r *Reader) setData(filename string, data string) {
 	r.runes = bytes.Runes([]byte(data))
+	r.Source = &Source{Filename: filename, Runes: r.runes}
 }
 
 // Token peeks at the current scanned token value. It does not consume anything.
 func (r *Reader) Token() Token {
-	return Token{Runes: r.runes, Start: r.offset, End: r.cursor}
+	return Token{Source: r.Source, Start: r.offset, End: r.cursor}
 }
 
 // Consume consumes the current token.
@@ -315,8 +317,8 @@ func (r *Reader) AlphaNumeric() bool {
 }
 
 // NewReader creates a new reader which reads from the supplied string.
-func NewReader(data string) *Reader {
+func NewReader(filename string, data string) *Reader {
 	r := &Reader{}
-	r.setData(data)
+	r.setData(filename, data)
 	return r
 }

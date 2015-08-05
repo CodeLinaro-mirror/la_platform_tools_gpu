@@ -59,7 +59,7 @@ cmd void foo() { a := A(1,2,3) i := a[3] }`,
 			errors: []string{"2:37: array index 3 is out of bounds for u32[3]"},
 		},
 	} {
-		astAPI, errs := parser.Parse(test.source)
+		astAPI, errs := parser.Parse("resolve_test.api", test.source)
 		if len(errs) > 0 {
 			t.Errorf("Testing '%s' - Unexpected parse errors: %v", test.name, errs)
 			continue

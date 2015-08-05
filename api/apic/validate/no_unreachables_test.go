@@ -25,7 +25,7 @@ import (
 )
 
 func compile(t *testing.T, source string) (*semantic.API, error) {
-	parsed, errs := parser.Parse(source)
+	parsed, errs := parser.Parse("no_unreachables_test.api", source)
 	if err := commands.CheckErrors(source, errs); err != nil {
 		return nil, err
 	}

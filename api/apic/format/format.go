@@ -59,7 +59,7 @@ func doFormat(flags flag.FlagSet) error {
 			continue
 		}
 
-		api, errs := parser.Parse(string(f))
+		api, errs := parser.Parse(path, string(f))
 		if len(errs) > 0 {
 			fmt.Printf("Errors while parsing '%s':\n", path)
 			for i, e := range errs {

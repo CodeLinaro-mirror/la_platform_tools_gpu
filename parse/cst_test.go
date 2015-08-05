@@ -126,8 +126,8 @@ func compareSeparators(t *testing.T, in string, expect, got Separator) {
 }
 
 func newStringToken(value string) Token {
-	runes := bytes.Runes([]byte(value))
-	return Token{Runes: runes, Start: 0, End: len(runes)}
+	source := &Source{Filename: "cst_test.api", Runes: bytes.Runes([]byte(value))}
+	return Token{Source: source, Start: 0, End: len(source.Runes)}
 }
 
 func nodeOf(v interface{}) Node {
