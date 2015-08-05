@@ -68,7 +68,7 @@
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
 {{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
@@ -115,13 +115,8 @@
   {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
   ¶
   // Constructs a default-initialized {@link {{File.ClassName .Struct}}}.¶
-  public {{File.ClassName .Struct}}() {»¶
-  «}¶
+  public {{File.ClassName .Struct}}() {}¶
   ¶
-  // Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.¶
-  public {{File.ClassName .Struct}}(Decoder d) throws IOException {»¶
-    Klass.INSTANCE.decode(d, this);¶
-  «}¶
   {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
   ¶
   @Override @NotNull¶
