@@ -58,8 +58,8 @@ func init() {
 }
 
 var (
-	binaryIDAtomRangeTimer              = binary.ID{0x2a, 0x69, 0xe8, 0xa2, 0x17, 0xc3, 0x2d, 0xe8, 0x4e, 0x9c, 0x00, 0x01, 0x5b, 0x63, 0xde, 0xb4, 0xf1, 0xf6, 0x27, 0x64}
-	binaryIDAtomTimer                   = binary.ID{0xa9, 0xad, 0x32, 0xa8, 0xd8, 0xa8, 0xc3, 0xff, 0x44, 0x94, 0x47, 0xd3, 0xaa, 0xd2, 0xce, 0x8f, 0x70, 0xc6, 0xc6, 0x04}
+	binaryIDAtomRangeTimer              = binary.ID{0x74, 0x00, 0xc7, 0xbc, 0x80, 0xdb, 0xea, 0xb4, 0x5b, 0x94, 0xe4, 0xcf, 0x64, 0x61, 0xbc, 0x5f, 0x9c, 0xca, 0x1c, 0xf2}
+	binaryIDAtomTimer                   = binary.ID{0xdb, 0x43, 0x2a, 0x58, 0x94, 0xb7, 0x31, 0x63, 0xb2, 0xfe, 0x02, 0xf7, 0x23, 0xcd, 0xee, 0xa9, 0x24, 0x6a, 0xcf, 0xb6}
 	binaryIDCapture                     = binary.ID{0x53, 0x83, 0xdc, 0x37, 0x1e, 0x26, 0x9f, 0xb9, 0xc9, 0xf8, 0x6f, 0x4b, 0x42, 0x3b, 0xcd, 0xbc, 0x01, 0x83, 0x76, 0xe2}
 	binaryIDDevice                      = binary.ID{0x54, 0xf6, 0x8f, 0x5c, 0xcc, 0xe5, 0x1e, 0x5e, 0x3a, 0xa5, 0x96, 0xa9, 0xc7, 0x60, 0x03, 0x51, 0x67, 0x38, 0x4f, 0x51}
 	binaryIDImageInfo                   = binary.ID{0x2d, 0xaa, 0x5c, 0x7f, 0x36, 0x92, 0xad, 0xf2, 0x8d, 0xfc, 0xc0, 0x47, 0x69, 0x59, 0x60, 0xcc, 0xdd, 0x06, 0xf1, 0xa6}
@@ -78,7 +78,7 @@ var (
 	binaryIDcallGetSchema               = binary.ID{0x5f, 0xfd, 0x99, 0xc4, 0x18, 0x36, 0x9a, 0x3f, 0xc8, 0x69, 0xe8, 0xd0, 0xf4, 0xfa, 0x16, 0xc4, 0xfc, 0xea, 0x0c, 0xc2}
 	binaryIDcallGetTimingInfo           = binary.ID{0x00, 0xed, 0x86, 0x08, 0xac, 0xd7, 0xd9, 0x7d, 0x3f, 0xf4, 0x38, 0xf4, 0xb3, 0xde, 0xc8, 0x9b, 0xd6, 0xc9, 0xc2, 0xb0}
 	binaryIDcallImportCapture           = binary.ID{0xe2, 0xda, 0xa8, 0x47, 0x4b, 0x9b, 0xdc, 0x6a, 0xd8, 0xa4, 0xf9, 0x9a, 0xa7, 0x93, 0xe9, 0x4d, 0x48, 0x07, 0x7b, 0x8e}
-	binaryIDcallPrerenderFramebuffers   = binary.ID{0xce, 0xd0, 0x43, 0x9a, 0x0a, 0x96, 0xbd, 0x47, 0xe1, 0x4e, 0x08, 0xf0, 0x67, 0x37, 0x96, 0x84, 0x1a, 0x06, 0xb0, 0xfc}
+	binaryIDcallPrerenderFramebuffers   = binary.ID{0xb3, 0xb9, 0x1f, 0xea, 0xbc, 0x7e, 0xf8, 0x38, 0x2d, 0xf8, 0x5d, 0x96, 0x21, 0x05, 0xf8, 0x4e, 0x13, 0xa1, 0xe1, 0x3e}
 	binaryIDcallSet                     = binary.ID{0xb7, 0x80, 0x14, 0xe1, 0x84, 0xb1, 0x09, 0xb2, 0xff, 0x7e, 0x86, 0xb8, 0x71, 0x35, 0xce, 0xcf, 0xa2, 0xa5, 0x0d, 0xf9}
 	binaryIDresultFollow                = binary.ID{0x9b, 0xd0, 0xad, 0xb0, 0x41, 0x98, 0x0d, 0xf5, 0x6e, 0x07, 0xe3, 0x9b, 0xc2, 0x03, 0x48, 0xfa, 0xca, 0xef, 0x4a, 0xb3}
 	binaryIDresultGet                   = binary.ID{0xa5, 0xb7, 0xa2, 0xb7, 0x3b, 0x2f, 0x10, 0xc9, 0xf7, 0x8c, 0xe8, 0xdd, 0x9c, 0x60, 0x5d, 0x65, 0x54, 0x2d, 0xde, 0x29}
@@ -99,10 +99,10 @@ func (*AtomRangeTimer) Class() binary.Class {
 	return (*binaryClassAtomRangeTimer)(nil)
 }
 func doEncodeAtomRangeTimer(e binary.Encoder, o *AtomRangeTimer) error {
-	if err := e.Uint64(o.FromAtomID); err != nil {
+	if err := e.Uint64(o.FromAtomIndex); err != nil {
 		return err
 	}
-	if err := e.Uint64(o.ToAtomID); err != nil {
+	if err := e.Uint64(o.ToAtomIndex); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Nanoseconds); err != nil {
@@ -114,12 +114,12 @@ func doDecodeAtomRangeTimer(d binary.Decoder, o *AtomRangeTimer) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.FromAtomID = uint64(obj)
+		o.FromAtomIndex = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.ToAtomID = uint64(obj)
+		o.ToAtomIndex = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -160,8 +160,8 @@ var schemaAtomRangeTimer = &schema.Class{
 	Package: "service",
 	Name:    "AtomRangeTimer",
 	Fields: []schema.Field{
-		{Declared: "FromAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "ToAtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "FromAtomIndex", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "ToAtomIndex", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -172,7 +172,7 @@ func (*AtomTimer) Class() binary.Class {
 	return (*binaryClassAtomTimer)(nil)
 }
 func doEncodeAtomTimer(e binary.Encoder, o *AtomTimer) error {
-	if err := e.Uint64(o.AtomID); err != nil {
+	if err := e.Uint64(o.AtomIndex); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.Nanoseconds); err != nil {
@@ -184,7 +184,7 @@ func doDecodeAtomTimer(d binary.Decoder, o *AtomTimer) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.AtomID = uint64(obj)
+		o.AtomIndex = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -222,7 +222,7 @@ var schemaAtomTimer = &schema.Class{
 	Package: "service",
 	Name:    "AtomTimer",
 	Fields: []schema.Field{
-		{Declared: "AtomID", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "AtomIndex", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Nanoseconds", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -1715,11 +1715,11 @@ func doEncodecallPrerenderFramebuffers(e binary.Encoder, o *callPrerenderFramebu
 	if err := e.Uint32(o.height); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.atomIDs))); err != nil {
+	if err := e.Uint32(uint32(len(o.atomIndicies))); err != nil {
 		return err
 	}
-	for i := range o.atomIDs {
-		if err := e.Uint64(o.atomIDs[i]); err != nil {
+	for i := range o.atomIndicies {
+		if err := e.Uint64(o.atomIndicies[i]); err != nil {
 			return err
 		}
 	}
@@ -1758,12 +1758,12 @@ func doDecodecallPrerenderFramebuffers(d binary.Decoder, o *callPrerenderFramebu
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.atomIDs = make([]uint64, count)
-		for i := range o.atomIDs {
+		o.atomIndicies = make([]uint64, count)
+		for i := range o.atomIndicies {
 			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
-				o.atomIDs[i] = uint64(obj)
+				o.atomIndicies[i] = uint64(obj)
 			}
 		}
 	}
@@ -1825,7 +1825,7 @@ var schemacallPrerenderFramebuffers = &schema.Class{
 		{Declared: "api", Type: &schema.Primitive{Name: "ApiID", Method: schema.ID}},
 		{Declared: "width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "atomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		{Declared: "atomIndicies", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 	},
 }
 

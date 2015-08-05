@@ -22,10 +22,10 @@ type RangeList []Range
 // Length returns the number of ranges in the list.
 func (l RangeList) Length() int { return len(l) }
 
-// GetSpan returns the atom identifier span for the range at index in the list.
+// GetSpan returns the atom index span for the range at index in the list.
 func (l RangeList) GetSpan(index int) interval.U64Span { return l[index].Span() }
 
-// SetSpan sets the atom identifier span for the group at index in the list.
+// SetSpan sets the atom index span for the group at index in the list.
 func (l RangeList) SetSpan(index int, span interval.U64Span) { l[index].SetSpan(span) }
 
 // Copy copies count ranges within the list.

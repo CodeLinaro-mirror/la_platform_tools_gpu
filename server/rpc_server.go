@@ -250,7 +250,7 @@ func (s rpcServer) PrerenderFramebuffers(
 	capture *path.Capture,
 	apiID service.ApiID,
 	width, height uint32,
-	atomIDs []uint64,
+	atomIndicies []uint64,
 	l log.Logger) error {
 
 	if err := device.Validate(); err != nil {
@@ -260,12 +260,12 @@ func (s rpcServer) PrerenderFramebuffers(
 		return err
 	}
 	_, err := database.Build(&builder.PrerenderFramebuffers{
-		Device:  device,
-		Capture: capture,
-		API:     apiID,
-		Width:   width,
-		Height:  height,
-		AtomIDs: atomIDs,
+		Device:       device,
+		Capture:      capture,
+		API:          apiID,
+		Width:        width,
+		Height:       height,
+		AtomIndicies: atomIndicies,
 	}, s.Database, l)
 	return err
 }

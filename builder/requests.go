@@ -60,12 +60,12 @@ type GetTimingInfo struct {
 // PrerenderFramebuffers records the parameters of a service.PrerenderFramebuffers RPC request.
 type PrerenderFramebuffers struct {
 	binary.Generate
-	Device  *path.Device
-	Capture *path.Capture
-	API     service.ApiID
-	AtomIDs []uint64
-	Width   uint32
-	Height  uint32
+	Device       *path.Device
+	Capture      *path.Capture
+	API          service.ApiID
+	AtomIndicies []uint64
+	Width        uint32
+	Height       uint32
 }
 
 // RenderFramebufferDepth records the parameters of an internal RenderFramebufferDepth request.

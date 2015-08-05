@@ -26,10 +26,10 @@ import (
 // sub-groups. Groups are ideal for expressing nested hierarchies of atoms.
 //
 // Groups have the concept of items. An item is either an immediate sub-group,
-// or an atom identifier that is within this group's span but outside of any
+// or an atom index that is within this group's span but outside of any
 // sub-group.
 //
-// For example a Group spanning the atom identifier range [0 - 9] with two
+// For example a Group spanning the atom index range [0 - 9] with two
 // sub-groups spanning [2 - 4] and [7 - 8] would have the following tree of
 // items:
 //
@@ -91,16 +91,16 @@ func (g Group) Count() uint64 {
 }
 
 // Index returns the item at the specified index. If the item refers directly
-// to an atom identifier then the atom identifier is returned in baseAtomID and
+// to an atom index then the atom index is returned in baseAtomIndex and
 // subgroup is assigned nil.
-// If the item is a sub-group then baseAtomID is returned as the lowest atom
+// If the item is a sub-group then baseAtomIndex is returned as the lowest atom
 // identifier found in the sub-group and subgroup is assigned the sub-group
 // pointer.
-func (g Group) Index(index uint64) (baseAtomID ID, subgroup *Group) {
+func (g Group) Index(index uint64) (baseIndex uint64, subgroup *Group) {
 	base := g.Range.First()
 	for i := range g.SubGroups {
 		sg := &g.SubGroups[i]
-		if base+ID(index) < sg.Range.First() {
+		if base+index < sg.Range.First() {
 			break
 		}
 		index -= uint64(sg.Range.First() - base)
@@ -110,45 +110,45 @@ func (g Group) Index(index uint64) (baseAtomID ID, subgroup *Group) {
 		index--
 		base = sg.Range.Last() + 1
 	}
-	return base + ID(index), nil
+	return base + index, nil
 }
 
-// IndexOf returns the item index that ID refers directly to, or contains the
-// given atom identifer.
-func (g Group) IndexOf(atomID ID) uint64 {
+// IndexOf returns the item index that atomIndex refers directly to, or contains the
+// given atom index.
+func (g Group) IndexOf(atomIndex uint64) uint64 {
 	index := uint64(0)
 	base := g.Range.First()
 	for _, sg := range g.SubGroups {
-		if atomID < sg.Range.First() {
+		if atomIndex < sg.Range.First() {
 			break
 		}
 		index += uint64(sg.Range.First() - base)
 		base = sg.Range.Last() + 1
-		if atomID <= sg.Range.Last() {
+		if atomIndex <= sg.Range.Last() {
 			return index
 		}
 		index++
 	}
-	return index + uint64(atomID-base)
+	return index + (atomIndex - base)
 }
 
 // Insert adjusts the spans of this group and all subgroups for an insertion
-// of count elements at atomID.
-func (g *Group) Insert(atomID ID, count int) {
+// of count elements at atomIndex.
+func (g *Group) Insert(atomIndex uint64, count int) {
 	s, e := g.Range.Range()
-	if s >= atomID {
-		s += ID(count)
+	if s >= atomIndex {
+		s += uint64(count)
 	}
-	if e > atomID {
-		e += ID(count)
+	if e > atomIndex {
+		e += uint64(count)
 	}
 	g.Range = Range{Start: s, End: e}
 	i := interval.Search(&g.SubGroups, func(test interval.U64Span) bool {
-		return uint64(atomID) < test.End
+		return atomIndex < test.End
 	})
 	for i < len(g.SubGroups) {
 		sg := g.SubGroups[i]
-		sg.Insert(atomID, count)
+		sg.Insert(atomIndex, count)
 		g.SubGroups[i] = sg
 		i++
 	}

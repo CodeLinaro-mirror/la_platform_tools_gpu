@@ -123,8 +123,8 @@ func (c client) ImportCapture(name string, Data []uint8, l log.Logger) (res *pat
 	return
 }
 
-func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) error {
-	_, err := c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIDs: atomIDs})
+func (c client) PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIndicies []uint64, l log.Logger) error {
+	_, err := c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIndicies: atomIndicies})
 	return err
 }
 

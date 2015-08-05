@@ -29,9 +29,9 @@ func (t TimingInfo) RangeDuration(r atom.Range) (uint64, bool) {
 	s, e := uint64(r.Start), uint64(r.End)
 	for _, group := range [][]AtomRangeTimer{t.PerDrawCall, t.PerFrame} {
 		i := sort.Search(len(group), func(i int) bool {
-			return group[i].FromAtomID >= s
+			return group[i].FromAtomIndex >= s
 		})
-		if i < len(group) && group[i].FromAtomID == s && group[i].ToAtomID == e-1 {
+		if i < len(group) && group[i].FromAtomIndex == s && group[i].ToAtomIndex == e-1 {
 			return group[i].Nanoseconds, true
 		}
 	}
@@ -43,12 +43,11 @@ func (t TimingInfo) RangeDuration(r atom.Range) (uint64, bool) {
 // nanoseconds and true is returned.
 // If no timing-record for r is contained in the TimingInfo then 0 and false
 // is returned.
-func (t TimingInfo) AtomDuration(id atom.ID) (uint64, bool) {
-	a := uint64(id)
+func (t TimingInfo) AtomDuration(index uint64) (uint64, bool) {
 	i := sort.Search(len(t.PerCommand), func(i int) bool {
-		return t.PerCommand[i].AtomID >= a
+		return t.PerCommand[i].AtomIndex >= index
 	})
-	if i < len(t.PerCommand) && t.PerCommand[i].AtomID == a {
+	if i < len(t.PerCommand) && t.PerCommand[i].AtomIndex == index {
 		return t.PerCommand[i].Nanoseconds, true
 	}
 	return 0, false

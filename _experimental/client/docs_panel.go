@@ -29,7 +29,7 @@ func CreateDocsPanel(appCtx *ApplicationContext) gxui.Control {
 	ll := appCtx.theme.CreateLinearLayout()
 	//	appCtx.OnAtomSelected(func() {
 	//			ll.RemoveAll()
-	//			a := appCtx.Atoms()[appCtx.SelectedAtomID()]
+	//			a := appCtx.Atoms()[appCtx.SelectedAtomIndex()]
 	//			docs := gpuatom.MetadataOf(a).DocumentationUrl
 	//			loadHtml(theme, docs, ll)
 	//	})

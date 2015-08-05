@@ -59,11 +59,11 @@ func (a CommandAdapter) Path(item gxui.AdapterItem) path.Path {
 	case nil:
 		return nil
 	case hierarchyItem:
-		return a.ctx.capture.Atoms().Slice(uint64(i.rng.Start), uint64(i.rng.End))
+		return a.ctx.capture.Atoms().Slice(i.rng.Start, i.rng.End)
 	case atomItem:
-		return a.ctx.capture.Atoms().Index(uint64(i.atomID))
+		return a.ctx.capture.Atoms().Index(i.atomIndex)
 	case observationItem:
-		return a.ctx.capture.Atoms().Index(uint64(i.atomID)).Field("Observations").ArrayIndex(uint64(i.index))
+		return a.ctx.capture.Atoms().Index(i.atomIndex).Field("Observations").ArrayIndex(uint64(i.index))
 	default:
 		panic(fmt.Errorf("Unknown item type %T", i))
 	}
@@ -72,11 +72,11 @@ func (a CommandAdapter) Path(item gxui.AdapterItem) path.Path {
 func (a CommandAdapter) Item(p path.Path) gxui.AdapterItem {
 	if s, _ := path.FindAtomSlice(p); s != nil {
 		return hierarchyItem{
-			rng: atom.Range{Start: atom.ID(s.Start), End: atom.ID(s.End)},
+			rng: atom.Range{Start: s.Start, End: s.End},
 		}
 	}
 	if a := path.FindAtom(p); a != nil {
-		return atomItem{atomID: atom.ID(a.Index)}
+		return atomItem{atomIndex: a.Index}
 	}
 	return nil
 }

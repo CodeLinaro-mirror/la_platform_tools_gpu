@@ -26,7 +26,7 @@ func CreateGotoCommandDialog(appCtx *ApplicationContext, atoms *path.Atoms) gxui
 	label.SetText("Goto command:")
 
 	textbox := appCtx.theme.CreateTextBox()
-	// textbox.SetText(fmt.Sprintf("%v", appCtx.SelectedAtomID())) // TODO
+	// textbox.SetText(fmt.Sprintf("%v", appCtx.SelectedAtomIndex())) // TODO
 	textbox.SelectAll()
 
 	layout := appCtx.theme.CreateLinearLayout()

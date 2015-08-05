@@ -82,9 +82,9 @@ func TestGroupCount(t *testing.T) {
 func TestGroupIndex(t *testing.T) {
 	root := buildTestGroup()
 	for _, test := range []struct {
-		index              uint64
-		expectedBaseAtomID ID
-		expectedSubGroup   *Group
+		index                 uint64
+		expectedBaseAtomIndex uint64
+		expectedSubGroup      *Group
 	}{
 		{0, 0, nil},
 		{1, 1, nil},
@@ -105,10 +105,10 @@ func TestGroupIndex(t *testing.T) {
 		{353, 650, nil},
 		{402, 699, nil},
 	} {
-		gotBaseAtomID, gotSubGroup := root.Index(test.index)
-		if test.expectedBaseAtomID != gotBaseAtomID {
+		gotBaseAtomIndex, gotSubGroup := root.Index(test.index)
+		if test.expectedBaseAtomIndex != gotBaseAtomIndex {
 			t.Errorf("base atom id was not as expected for index %d.\nExpected: %d\nGot:      %d",
-				test.index, test.expectedBaseAtomID, gotBaseAtomID)
+				test.index, test.expectedBaseAtomIndex, gotBaseAtomIndex)
 		}
 		if test.expectedSubGroup != gotSubGroup {
 			t.Errorf("sub group was not as expected for index %d.\nExpected: %+v\nGot:      %+v",
@@ -120,8 +120,8 @@ func TestGroupIndex(t *testing.T) {
 func TestGroupIndexOf(t *testing.T) {
 	root := buildTestGroup()
 	for _, test := range []struct {
-		atomID   ID
-		expected uint64
+		atomIndex uint64
+		expected  uint64
 	}{
 		{0, 0},
 		{1, 1},
@@ -151,10 +151,10 @@ func TestGroupIndexOf(t *testing.T) {
 		{650, 353},
 		{699, 402},
 	} {
-		got := root.IndexOf(test.atomID)
+		got := root.IndexOf(test.atomIndex)
 		if test.expected != got {
-			t.Errorf("IndexOf(%d) returned unexpected atom id.\nExpected: %+v\nGot:      %+v",
-				test.atomID, test.expected, got)
+			t.Errorf("IndexOf(%d) returned unexpected atom index.\nExpected: %+v\nGot:      %+v",
+				test.atomIndex, test.expected, got)
 		}
 	}
 }
