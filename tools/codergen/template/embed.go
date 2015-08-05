@@ -1338,7 +1338,7 @@ const java_enum_tmpl = `{{/*
     ¶
     public static {{File.ClassName .Type}} decode(@NotNull Decoder d) throws IOException {»¶
       {{Call "Java.PrimitiveType" .Type}} value = d.{{Call "Java.Method" .Type}}();¶
-      switch (value) {
+      switch (value) {¶
       {{range $i, $e := .Entries}}
         case {{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}:»¶
           return {{$e.Name}};¶«
