@@ -110,7 +110,7 @@ func drawUndefinedFramebuffer(a atom.Atom, s *gfxapi.State, d database.Database,
 	out.Write(atom.NoID, NewGlUseProgram(programID))
 	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0))
 	out.Write(atom.NoID, NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0))
-	out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, false, 0, memory.Tmp))
+	out.Write(atom.NoID, NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Tmp))
 	out.Write(atom.NoID, NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
 		AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, positions)))
 

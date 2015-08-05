@@ -53,7 +53,7 @@ func (t *tweaker) glDisable(v GLenum) {
 	}
 }
 
-func (t *tweaker) glDepthMask(v bool) {
+func (t *tweaker) glDepthMask(v GLboolean) {
 	if o := t.ctx.Rasterizing.DepthMask; o != v {
 		t.undo = append(t.undo, func() {
 			t.out.Write(atom.NoID, NewGlDepthMask(o))

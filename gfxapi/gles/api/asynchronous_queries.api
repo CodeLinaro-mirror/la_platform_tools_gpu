@@ -113,10 +113,10 @@ cmd void glGetQueryiv(GLenum target, GLenum parameter, GLint* value) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsQuery.xhtml","OpenGL ES 3.1")
-cmd bool glIsQuery(QueryId query) {
+cmd GLboolean glIsQuery(QueryId query) {
   minRequiredVersion(3, 0)
 
   ctx := GetContext()
-  return query in ctx.Instances.Queries
+  return as!GLboolean(query in ctx.Instances.Queries)
 }
 

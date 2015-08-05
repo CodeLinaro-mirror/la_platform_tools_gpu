@@ -3547,56 +3547,6 @@ func (p GLbooleanᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLbooleanˢ {
 	return GLbooleanˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// Boolᵖ is a pointer to a bool element.
-type Boolᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewBoolᵖ returns a Boolᵖ that points to addr in the application pool.
-func NewBoolᵖ(addr uint64) Boolᵖ {
-	return Boolᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that Boolᵖ points to.
-func (p Boolᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
-}
-
-// Read reads and returns the bool element at the pointer.
-func (p Boolᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) bool {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the bool element at the pointer.
-func (p Boolᵖ) Write(value bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]bool{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Boolᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Boolᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p Boolᵖ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolᵖ {
-	p.Slice(0, 1, ϟs).MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new Boolˢ from the pointer using start and end indices.
-func (p Boolᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return Boolˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
 // SamplerIdᶜᵖ is a pointer to a SamplerId element.
 type SamplerIdᶜᵖ struct {
 	binary.Generate
@@ -4348,163 +4298,6 @@ type Vec3fː3ᵃ struct {
 type Vec4fː4ᵃ struct {
 	binary.Generate
 	Elements [4]Vec4f
-}
-
-// Boolˢ is a slice of bool.
-type Boolˢ struct {
-	binary.Generate
-	SliceInfo
-}
-
-// MakeBoolˢ returns a Boolˢ backed by a new memory pool.
-func MakeBoolˢ(count uint64, ϟs *gfxapi.State) Boolˢ {
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = &memory.Pool{}
-	ϟs.NextPoolID++
-	return Boolˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
-}
-
-// Clone returns a copy of the Boolˢ in a new memory pool.
-func (s Boolˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	pool := &memory.Pool{}
-	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
-	id := ϟs.NextPoolID
-	ϟs.Memory[id] = pool
-	ϟs.NextPoolID++
-	dst := Boolˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
-	return dst
-}
-
-// ElementSize returns the size in bytes of an element that Boolˢ points to.
-func (s Boolˢ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
-}
-
-// Range returns the memory range this slice represents in the underlying pool.
-func (s Boolˢ) Range(ϟs *gfxapi.State) memory.Range {
-	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
-}
-
-// ResourceID returns an identifier to a resource representing the data of
-// this slice.
-func (s Boolˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
-	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
-	if err != nil {
-		panic(err)
-	}
-	return id
-}
-
-// Decoder returns a memory decoder for the slice.
-func (s Boolˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
-	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
-}
-
-// Encoder returns a memory encoder for the slice.
-func (s Boolˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
-	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
-}
-
-// AsBoolˢ returns s cast to a Boolˢ.
-// The returned slice length will be calculated so that the returned slice is
-// no longer (in bytes) than s.
-func AsBoolˢ(s Slice, ϟs *gfxapi.State) Boolˢ {
-	out := Boolˢ{SliceInfo: s.Info()}
-	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
-	return out
-}
-
-// Read reads and returns all the bool elements in this Boolˢ.
-func (s Boolˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []bool {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]bool, s.Count)
-	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	for i := range res {
-		if ϟv, err := d.Bool(); err == nil {
-			res[i] = ϟv
-		} else {
-			panic(err)
-		}
-	}
-	return res
-}
-
-// Write copies elements from src to this slice. The number of elements copied is returned
-// which is the minimum of s.Count and len(src).
-func (s Boolˢ) Write(src []bool, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
-	count := min(s.Count, uint64(len(src)))
-	s = s.Slice(0, count, ϟs)
-	e := s.Encoder(ϟs)
-	for i := uint64(0); i < count; i++ {
-		if err := e.Bool(bool(src[i])); err != nil {
-			panic(err)
-		}
-	}
-	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return count
-}
-
-// Copy copies elements from src to this slice.
-// The number of elements copied is the minimum of dst.Count and src.Count.
-// The slices of this and dst to the copied elements is returned.
-func (dst Boolˢ) Copy(src Boolˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Boolˢ) {
-	count := min(dst.Count, src.Count)
-	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
-	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
-	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return dst, src
-}
-
-// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Boolˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
-		f(s.Range(ϟs))
-	}
-	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.MapMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-	}
-	return s
-}
-
-// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Boolˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
-		f(s.Range(ϟs))
-	}
-	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-	}
-	return s
-}
-func (s Boolˢ) MapMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Boolˢ {
-	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		rng := s.Range(ϟs)
-		ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-	}
-	return s
-}
-
-// Index returns a Boolᵖ to the i'th element in this Boolˢ.
-func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ {
-	return Boolᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
-}
-
-// Slice returns a sub-slice from the Boolˢ using start and end indices.
-func (s Boolˢ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
-	}
-	if end > s.Count {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
-	}
-	return Boolˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
-}
-
-// String returns a string description of the Boolˢ slice.
-func (s Boolˢ) String() string {
-	return fmt.Sprintf("bool(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // BufferIdˢ is a slice of BufferId.
@@ -13746,7 +13539,7 @@ type GlIsEnablediEXT struct {
 	observations atom.Observations
 	Target       GLenum
 	Index        GLuint
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsEnablediEXT) String() string {
@@ -14461,7 +14254,7 @@ type GlIsQuery struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsQuery) String() string {
@@ -14871,7 +14664,7 @@ type GlIsBuffer struct {
 	binary.Generate
 	observations atom.Observations
 	Buffer       BufferId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsBuffer) String() string {
@@ -20776,7 +20569,7 @@ type GlIsEnablediOES struct {
 	observations atom.Observations
 	Target       GLenum
 	Index        GLuint
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsEnablediOES) String() string {
@@ -20810,7 +20603,7 @@ type GlIsEnablediNV struct {
 	observations atom.Observations
 	Target       GLenum
 	Index        GLuint
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsEnablediNV) String() string {
@@ -20843,7 +20636,7 @@ type GlIsFenceNV struct {
 	binary.Generate
 	observations atom.Observations
 	Fence        GLuint
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsFenceNV) String() string {
@@ -20876,7 +20669,7 @@ type GlIsImageHandleResidentNV struct {
 	binary.Generate
 	observations atom.Observations
 	Handle       GLuint64
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsImageHandleResidentNV) String() string {
@@ -20909,7 +20702,7 @@ type GlIsPathNV struct {
 	binary.Generate
 	observations atom.Observations
 	Path         GLuint
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsPathNV) String() string {
@@ -20945,7 +20738,7 @@ type GlIsPointInFillPathNV struct {
 	Mask         GLuint
 	X            GLfloat
 	Y            GLfloat
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsPointInFillPathNV) String() string {
@@ -20980,7 +20773,7 @@ type GlIsPointInStrokePathNV struct {
 	Path         GLuint
 	X            GLfloat
 	Y            GLfloat
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsPointInStrokePathNV) String() string {
@@ -21013,7 +20806,7 @@ type GlIsProgramPipelineEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Pipeline     PipelineId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsProgramPipelineEXT) String() string {
@@ -21046,7 +20839,7 @@ type GlIsQueryEXT struct {
 	binary.Generate
 	observations atom.Observations
 	Query        QueryId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsQueryEXT) String() string {
@@ -21079,7 +20872,7 @@ type GlIsSyncAPPLE struct {
 	binary.Generate
 	observations atom.Observations
 	Sync         GLsync
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsSyncAPPLE) String() string {
@@ -21112,7 +20905,7 @@ type GlIsTextureHandleResidentNV struct {
 	binary.Generate
 	observations atom.Observations
 	Handle       GLuint64
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsTextureHandleResidentNV) String() string {
@@ -21145,7 +20938,7 @@ type GlIsVertexArrayOES struct {
 	binary.Generate
 	observations atom.Observations
 	Array        VertexArrayId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsVertexArrayOES) String() string {
@@ -26775,7 +26568,7 @@ type GlSampleCoverage struct {
 	binary.Generate
 	observations atom.Observations
 	Value        GLfloat
-	Invert       bool
+	Invert       GLboolean
 }
 
 func (a *GlSampleCoverage) String() string {
@@ -27421,10 +27214,10 @@ func (a *GlClearStencil) Observations() *atom.Observations { return &a.observati
 type GlColorMask struct {
 	binary.Generate
 	observations atom.Observations
-	Red          bool
-	Green        bool
-	Blue         bool
-	Alpha        bool
+	Red          GLboolean
+	Green        GLboolean
+	Blue         GLboolean
+	Alpha        GLboolean
 }
 
 func (a *GlColorMask) String() string {
@@ -27522,7 +27315,7 @@ func (a *GlDeleteRenderbuffers) Observations() *atom.Observations { return &a.ob
 type GlDepthMask struct {
 	binary.Generate
 	observations atom.Observations
-	Enabled      bool
+	Enabled      GLboolean
 }
 
 func (a *GlDepthMask) String() string {
@@ -27939,7 +27732,7 @@ type GlIsFramebuffer struct {
 	binary.Generate
 	observations atom.Observations
 	Framebuffer  FramebufferId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsFramebuffer) String() string {
@@ -27972,7 +27765,7 @@ type GlIsRenderbuffer struct {
 	binary.Generate
 	observations atom.Observations
 	Renderbuffer RenderbufferId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsRenderbuffer) String() string {
@@ -29914,7 +29707,7 @@ type GlIsProgram struct {
 	binary.Generate
 	observations atom.Observations
 	Program      ProgramId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsProgram) String() string {
@@ -29947,7 +29740,7 @@ type GlIsProgramPipeline struct {
 	binary.Generate
 	observations atom.Observations
 	Pipeline     PipelineId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsProgramPipeline) String() string {
@@ -29980,7 +29773,7 @@ type GlIsShader struct {
 	binary.Generate
 	observations atom.Observations
 	Shader       ShaderId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsShader) String() string {
@@ -33016,7 +32809,7 @@ type GlGetBooleanv struct {
 	binary.Generate
 	observations atom.Observations
 	Param        GLenum
-	Values       Boolᵖ
+	Values       GLbooleanᵖ
 }
 
 func (a *GlGetBooleanv) String() string {
@@ -33319,7 +33112,7 @@ type GlIsEnabled struct {
 	binary.Generate
 	observations atom.Observations
 	Capability   GLenum
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsEnabled) String() string {
@@ -33489,7 +33282,7 @@ type GlIsSync struct {
 	binary.Generate
 	observations atom.Observations
 	Sync         GLsync
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsSync) String() string {
@@ -34341,7 +34134,7 @@ type GlIsSampler struct {
 	binary.Generate
 	observations atom.Observations
 	Sampler      SamplerId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsSampler) String() string {
@@ -34374,7 +34167,7 @@ type GlIsTexture struct {
 	binary.Generate
 	observations atom.Observations
 	Texture      TextureId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsTexture) String() string {
@@ -35185,7 +34978,7 @@ type GlIsTransformFeedback struct {
 	binary.Generate
 	observations atom.Observations
 	Id           TransformFeedbackId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsTransformFeedback) String() string {
@@ -35682,7 +35475,7 @@ type GlIsVertexArray struct {
 	binary.Generate
 	observations atom.Observations
 	Array        VertexArrayId
-	Result       bool
+	Result       GLboolean
 }
 
 func (a *GlIsVertexArray) String() string {
@@ -36298,7 +36091,7 @@ type GlVertexAttribPointer struct {
 	Location     AttributeLocation
 	Size         GLint
 	Type         GLenum
-	Normalized   bool
+	Normalized   GLboolean
 	Stride       GLsizei
 	Data         VertexPointer
 }
@@ -37631,7 +37424,7 @@ type VertexAttributeArray struct {
 	Enabled    bool
 	Size       uint32
 	Type       GLenum
-	Normalized bool
+	Normalized GLboolean
 	Stride     GLsizei
 	Buffer     BufferId
 	Pointer    VertexPointer
@@ -37641,7 +37434,7 @@ func (c *VertexAttributeArray) Init() {
 	c.Enabled = false
 	c.Size = 4
 	c.Type = GLenum_GL_FLOAT
-	c.Normalized = false
+	c.Normalized = 0
 	c.Stride = 0
 	c.Buffer = 0
 }
@@ -37685,14 +37478,14 @@ func (c *BlendState) Init() {
 ////////////////////////////////////////////////////////////////////////////////
 type RasterizerState struct {
 	binary.Generate
-	DepthMask            bool
+	DepthMask            GLboolean
 	DepthTestFunction    GLenum
 	DepthNear            GLfloat
 	DepthFar             GLfloat
-	ColorMaskRed         bool
-	ColorMaskGreen       bool
-	ColorMaskBlue        bool
-	ColorMaskAlpha       bool
+	ColorMaskRed         GLboolean
+	ColorMaskGreen       GLboolean
+	ColorMaskBlue        GLboolean
+	ColorMaskAlpha       GLboolean
 	StencilMask          GLenumːGLuintᵐ
 	Viewport             Rect
 	Scissor              Rect
@@ -37702,18 +37495,18 @@ type RasterizerState struct {
 	PolygonOffsetFactor  GLfloat
 	PolygonOffsetUnits   GLfloat
 	SampleCoverageValue  GLfloat
-	SampleCoverageInvert bool
+	SampleCoverageInvert GLboolean
 }
 
 func (c *RasterizerState) Init() {
-	c.DepthMask = true
+	c.DepthMask = 1
 	c.DepthTestFunction = GLenum_GL_LESS
 	c.DepthNear = 0
 	c.DepthFar = 1
-	c.ColorMaskRed = true
-	c.ColorMaskGreen = true
-	c.ColorMaskBlue = true
-	c.ColorMaskAlpha = true
+	c.ColorMaskRed = 1
+	c.ColorMaskGreen = 1
+	c.ColorMaskBlue = 1
+	c.ColorMaskAlpha = 1
 	c.StencilMask = make(GLenumːGLuintᵐ)
 	c.Viewport.Init()
 	c.Scissor.Init()
@@ -43531,7 +43324,7 @@ func NewGlGetTexParameterIivEXT(Target GLenum, Pname GLenum, Params memory.Point
 func NewGlGetTexParameterIuivEXT(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterIuivEXT {
 	return &GlGetTexParameterIuivEXT{Target: Target, Pname: Pname, Params: GLuintᵖ{Pointer: Params}}
 }
-func NewGlIsEnablediEXT(Target GLenum, Index GLuint, Result bool) *GlIsEnablediEXT {
+func NewGlIsEnablediEXT(Target GLenum, Index GLuint, Result GLboolean) *GlIsEnablediEXT {
 	return &GlIsEnablediEXT{Target: Target, Index: Index, Result: Result}
 }
 func NewGlMinSampleShadingOES(Value GLfloat) *GlMinSampleShadingOES {
@@ -43594,7 +43387,7 @@ func NewGlGetQueryObjectuiv(Query QueryId, Parameter GLenum, Value memory.Pointe
 func NewGlGetQueryiv(Target GLenum, Parameter GLenum, Value memory.Pointer) *GlGetQueryiv {
 	return &GlGetQueryiv{Target: Target, Parameter: Parameter, Value: GLintᵖ{Pointer: Value}}
 }
-func NewGlIsQuery(Query QueryId, Result bool) *GlIsQuery {
+func NewGlIsQuery(Query QueryId, Result GLboolean) *GlIsQuery {
 	return &GlIsQuery{Query: Query, Result: Result}
 }
 func NewGlBindBuffer(Target GLenum, Buffer BufferId) *GlBindBuffer {
@@ -43630,7 +43423,7 @@ func NewGlGetBufferParameteriv(Target GLenum, Parameter GLenum, Value memory.Poi
 func NewGlGetBufferPointerv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetBufferPointerv {
 	return &GlGetBufferPointerv{Target: Target, Pname: Pname, Params: Voidᵖᵖ{Pointer: Params}}
 }
-func NewGlIsBuffer(Buffer BufferId, Result bool) *GlIsBuffer {
+func NewGlIsBuffer(Buffer BufferId, Result GLboolean) *GlIsBuffer {
 	return &GlIsBuffer{Buffer: Buffer, Result: Result}
 }
 func NewGlMapBufferRange(Target GLenum, Offset GLintptr, Length GLsizeiptr, Access GLbitfield, Result memory.Pointer) *GlMapBufferRange {
@@ -44140,40 +43933,40 @@ func NewGlInsertEventMarkerEXT(Length GLsizei, Marker memory.Pointer) *GlInsertE
 func NewGlInterpolatePathsNV(ResultPath GLuint, PathA GLuint, PathB GLuint, Weight GLfloat) *GlInterpolatePathsNV {
 	return &GlInterpolatePathsNV{ResultPath: ResultPath, PathA: PathA, PathB: PathB, Weight: Weight}
 }
-func NewGlIsEnablediOES(Target GLenum, Index GLuint, Result bool) *GlIsEnablediOES {
+func NewGlIsEnablediOES(Target GLenum, Index GLuint, Result GLboolean) *GlIsEnablediOES {
 	return &GlIsEnablediOES{Target: Target, Index: Index, Result: Result}
 }
-func NewGlIsEnablediNV(Target GLenum, Index GLuint, Result bool) *GlIsEnablediNV {
+func NewGlIsEnablediNV(Target GLenum, Index GLuint, Result GLboolean) *GlIsEnablediNV {
 	return &GlIsEnablediNV{Target: Target, Index: Index, Result: Result}
 }
-func NewGlIsFenceNV(Fence GLuint, Result bool) *GlIsFenceNV {
+func NewGlIsFenceNV(Fence GLuint, Result GLboolean) *GlIsFenceNV {
 	return &GlIsFenceNV{Fence: Fence, Result: Result}
 }
-func NewGlIsImageHandleResidentNV(Handle GLuint64, Result bool) *GlIsImageHandleResidentNV {
+func NewGlIsImageHandleResidentNV(Handle GLuint64, Result GLboolean) *GlIsImageHandleResidentNV {
 	return &GlIsImageHandleResidentNV{Handle: Handle, Result: Result}
 }
-func NewGlIsPathNV(Path GLuint, Result bool) *GlIsPathNV {
+func NewGlIsPathNV(Path GLuint, Result GLboolean) *GlIsPathNV {
 	return &GlIsPathNV{Path: Path, Result: Result}
 }
-func NewGlIsPointInFillPathNV(Path GLuint, Mask GLuint, X GLfloat, Y GLfloat, Result bool) *GlIsPointInFillPathNV {
+func NewGlIsPointInFillPathNV(Path GLuint, Mask GLuint, X GLfloat, Y GLfloat, Result GLboolean) *GlIsPointInFillPathNV {
 	return &GlIsPointInFillPathNV{Path: Path, Mask: Mask, X: X, Y: Y, Result: Result}
 }
-func NewGlIsPointInStrokePathNV(Path GLuint, X GLfloat, Y GLfloat, Result bool) *GlIsPointInStrokePathNV {
+func NewGlIsPointInStrokePathNV(Path GLuint, X GLfloat, Y GLfloat, Result GLboolean) *GlIsPointInStrokePathNV {
 	return &GlIsPointInStrokePathNV{Path: Path, X: X, Y: Y, Result: Result}
 }
-func NewGlIsProgramPipelineEXT(Pipeline PipelineId, Result bool) *GlIsProgramPipelineEXT {
+func NewGlIsProgramPipelineEXT(Pipeline PipelineId, Result GLboolean) *GlIsProgramPipelineEXT {
 	return &GlIsProgramPipelineEXT{Pipeline: Pipeline, Result: Result}
 }
-func NewGlIsQueryEXT(Query QueryId, Result bool) *GlIsQueryEXT {
+func NewGlIsQueryEXT(Query QueryId, Result GLboolean) *GlIsQueryEXT {
 	return &GlIsQueryEXT{Query: Query, Result: Result}
 }
-func NewGlIsSyncAPPLE(Sync GLsync, Result bool) *GlIsSyncAPPLE {
+func NewGlIsSyncAPPLE(Sync GLsync, Result GLboolean) *GlIsSyncAPPLE {
 	return &GlIsSyncAPPLE{Sync: Sync, Result: Result}
 }
-func NewGlIsTextureHandleResidentNV(Handle GLuint64, Result bool) *GlIsTextureHandleResidentNV {
+func NewGlIsTextureHandleResidentNV(Handle GLuint64, Result GLboolean) *GlIsTextureHandleResidentNV {
 	return &GlIsTextureHandleResidentNV{Handle: Handle, Result: Result}
 }
-func NewGlIsVertexArrayOES(Array VertexArrayId, Result bool) *GlIsVertexArrayOES {
+func NewGlIsVertexArrayOES(Array VertexArrayId, Result GLboolean) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{Array: Array, Result: Result}
 }
 func NewGlLabelObjectEXT(Type GLenum, Object GLuint, Length GLsizei, Label memory.Pointer) *GlLabelObjectEXT {
@@ -44653,7 +44446,7 @@ func NewGlBlendFuncSeparate(Src_factor_rgb GLenum, Dst_factor_rgb GLenum, Src_fa
 func NewGlDepthFunc(Function GLenum) *GlDepthFunc {
 	return &GlDepthFunc{Function: Function}
 }
-func NewGlSampleCoverage(Value GLfloat, Invert bool) *GlSampleCoverage {
+func NewGlSampleCoverage(Value GLfloat, Invert GLboolean) *GlSampleCoverage {
 	return &GlSampleCoverage{Value: Value, Invert: Invert}
 }
 func NewGlSampleMaski(MaskNumber GLuint, Mask GLbitfield) *GlSampleMaski {
@@ -44710,7 +44503,7 @@ func NewGlClearDepthf(Depth GLfloat) *GlClearDepthf {
 func NewGlClearStencil(Stencil GLint) *GlClearStencil {
 	return &GlClearStencil{Stencil: Stencil}
 }
-func NewGlColorMask(Red bool, Green bool, Blue bool, Alpha bool) *GlColorMask {
+func NewGlColorMask(Red GLboolean, Green GLboolean, Blue GLboolean, Alpha GLboolean) *GlColorMask {
 	return &GlColorMask{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
 }
 func NewGlDeleteFramebuffers(Count GLsizei, Framebuffers memory.Pointer) *GlDeleteFramebuffers {
@@ -44719,7 +44512,7 @@ func NewGlDeleteFramebuffers(Count GLsizei, Framebuffers memory.Pointer) *GlDele
 func NewGlDeleteRenderbuffers(Count GLsizei, Renderbuffers memory.Pointer) *GlDeleteRenderbuffers {
 	return &GlDeleteRenderbuffers{Count: Count, Renderbuffers: RenderbufferIdᶜᵖ{Pointer: Renderbuffers}}
 }
-func NewGlDepthMask(Enabled bool) *GlDepthMask {
+func NewGlDepthMask(Enabled GLboolean) *GlDepthMask {
 	return &GlDepthMask{Enabled: Enabled}
 }
 func NewGlFramebufferParameteri(Target GLenum, Pname GLenum, Param GLint) *GlFramebufferParameteri {
@@ -44755,10 +44548,10 @@ func NewGlInvalidateFramebuffer(Target GLenum, Count GLsizei, Attachments memory
 func NewGlInvalidateSubFramebuffer(Target GLenum, NumAttachments GLsizei, Attachments memory.Pointer, X GLint, Y GLint, Width GLsizei, Height GLsizei) *GlInvalidateSubFramebuffer {
 	return &GlInvalidateSubFramebuffer{Target: Target, NumAttachments: NumAttachments, Attachments: GLenumᶜᵖ{Pointer: Attachments}, X: X, Y: Y, Width: Width, Height: Height}
 }
-func NewGlIsFramebuffer(Framebuffer FramebufferId, Result bool) *GlIsFramebuffer {
+func NewGlIsFramebuffer(Framebuffer FramebufferId, Result GLboolean) *GlIsFramebuffer {
 	return &GlIsFramebuffer{Framebuffer: Framebuffer, Result: Result}
 }
-func NewGlIsRenderbuffer(Renderbuffer RenderbufferId, Result bool) *GlIsRenderbuffer {
+func NewGlIsRenderbuffer(Renderbuffer RenderbufferId, Result GLboolean) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{Renderbuffer: Renderbuffer, Result: Result}
 }
 func NewGlReadBuffer(Src GLenum) *GlReadBuffer {
@@ -44929,13 +44722,13 @@ func NewGlGetUniformiv(Program ProgramId, Location UniformLocation, Values memor
 func NewGlGetUniformuiv(Program ProgramId, Location UniformLocation, Params memory.Pointer) *GlGetUniformuiv {
 	return &GlGetUniformuiv{Program: Program, Location: Location, Params: GLuintᵖ{Pointer: Params}}
 }
-func NewGlIsProgram(Program ProgramId, Result bool) *GlIsProgram {
+func NewGlIsProgram(Program ProgramId, Result GLboolean) *GlIsProgram {
 	return &GlIsProgram{Program: Program, Result: Result}
 }
-func NewGlIsProgramPipeline(Pipeline PipelineId, Result bool) *GlIsProgramPipeline {
+func NewGlIsProgramPipeline(Pipeline PipelineId, Result GLboolean) *GlIsProgramPipeline {
 	return &GlIsProgramPipeline{Pipeline: Pipeline, Result: Result}
 }
-func NewGlIsShader(Shader ShaderId, Result bool) *GlIsShader {
+func NewGlIsShader(Shader ShaderId, Result GLboolean) *GlIsShader {
 	return &GlIsShader{Shader: Shader, Result: Result}
 }
 func NewGlLinkProgram(Program ProgramId) *GlLinkProgram {
@@ -45200,7 +44993,7 @@ func NewGlGetBooleani_v(Target GLenum, Index GLuint, Data memory.Pointer) *GlGet
 	return &GlGetBooleani_v{Target: Target, Index: Index, Data: GLbooleanᵖ{Pointer: Data}}
 }
 func NewGlGetBooleanv(Param GLenum, Values memory.Pointer) *GlGetBooleanv {
-	return &GlGetBooleanv{Param: Param, Values: Boolᵖ{Pointer: Values}}
+	return &GlGetBooleanv{Param: Param, Values: GLbooleanᵖ{Pointer: Values}}
 }
 func NewGlGetFloatv(Param GLenum, Values memory.Pointer) *GlGetFloatv {
 	return &GlGetFloatv{Param: Param, Values: GLfloatᵖ{Pointer: Values}}
@@ -45226,7 +45019,7 @@ func NewGlGetString(Param GLenum, Result memory.Pointer) *GlGetString {
 func NewGlGetStringi(Name GLenum, Index GLuint, Result memory.Pointer) *GlGetStringi {
 	return &GlGetStringi{Name: Name, Index: Index, Result: GLubyteᶜᵖ{Pointer: Result}}
 }
-func NewGlIsEnabled(Capability GLenum, Result bool) *GlIsEnabled {
+func NewGlIsEnabled(Capability GLenum, Result GLboolean) *GlIsEnabled {
 	return &GlIsEnabled{Capability: Capability, Result: Result}
 }
 func NewGlClientWaitSync(Sync GLsync, SyncFlags GLbitfield, Timeout GLuint64, Result GLenum) *GlClientWaitSync {
@@ -45241,7 +45034,7 @@ func NewGlFenceSync(Condition GLenum, SyncFlags GLbitfield, Result GLsync) *GlFe
 func NewGlGetSynciv(Sync GLsync, Pname GLenum, BufSize GLsizei, Length memory.Pointer, Values memory.Pointer) *GlGetSynciv {
 	return &GlGetSynciv{Sync: Sync, Pname: Pname, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Values: GLintᵖ{Pointer: Values}}
 }
-func NewGlIsSync(Sync GLsync, Result bool) *GlIsSync {
+func NewGlIsSync(Sync GLsync, Result GLboolean) *GlIsSync {
 	return &GlIsSync{Sync: Sync, Result: Result}
 }
 func NewGlWaitSync(Sync GLsync, SyncFlags GLbitfield, Timeout GLuint64) *GlWaitSync {
@@ -45313,10 +45106,10 @@ func NewGlGetTexParameterfv(Target GLenum, Parameter GLenum, Values memory.Point
 func NewGlGetTexParameteriv(Target GLenum, Parameter GLenum, Values memory.Pointer) *GlGetTexParameteriv {
 	return &GlGetTexParameteriv{Target: Target, Parameter: Parameter, Values: GLintᵖ{Pointer: Values}}
 }
-func NewGlIsSampler(Sampler SamplerId, Result bool) *GlIsSampler {
+func NewGlIsSampler(Sampler SamplerId, Result GLboolean) *GlIsSampler {
 	return &GlIsSampler{Sampler: Sampler, Result: Result}
 }
-func NewGlIsTexture(Texture TextureId, Result bool) *GlIsTexture {
+func NewGlIsTexture(Texture TextureId, Result GLboolean) *GlIsTexture {
 	return &GlIsTexture{Texture: Texture, Result: Result}
 }
 func NewGlPixelStorei(Parameter GLenum, Value GLint) *GlPixelStorei {
@@ -45385,7 +45178,7 @@ func NewGlGenTransformFeedbacks(N GLsizei, Ids memory.Pointer) *GlGenTransformFe
 func NewGlGetTransformFeedbackVarying(Program ProgramId, Index GLuint, BufSize GLsizei, Length memory.Pointer, Size memory.Pointer, Type memory.Pointer, Name memory.Pointer) *GlGetTransformFeedbackVarying {
 	return &GlGetTransformFeedbackVarying{Program: Program, Index: Index, BufSize: BufSize, Length: GLsizeiᵖ{Pointer: Length}, Size: GLsizeiᵖ{Pointer: Size}, Type: GLenumᵖ{Pointer: Type}, Name: GLcharᵖ{Pointer: Name}}
 }
-func NewGlIsTransformFeedback(Id TransformFeedbackId, Result bool) *GlIsTransformFeedback {
+func NewGlIsTransformFeedback(Id TransformFeedbackId, Result GLboolean) *GlIsTransformFeedback {
 	return &GlIsTransformFeedback{Id: Id, Result: Result}
 }
 func NewGlPauseTransformFeedback() *GlPauseTransformFeedback {
@@ -45430,7 +45223,7 @@ func NewGlGetVertexAttribfv(Index AttributeLocation, Pname GLenum, Params memory
 func NewGlGetVertexAttribiv(Index AttributeLocation, Pname GLenum, Params memory.Pointer) *GlGetVertexAttribiv {
 	return &GlGetVertexAttribiv{Index: Index, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
 }
-func NewGlIsVertexArray(Array VertexArrayId, Result bool) *GlIsVertexArray {
+func NewGlIsVertexArray(Array VertexArrayId, Result GLboolean) *GlIsVertexArray {
 	return &GlIsVertexArray{Array: Array, Result: Result}
 }
 func NewGlVertexAttrib1f(Location AttributeLocation, Value0 GLfloat) *GlVertexAttrib1f {
@@ -45484,7 +45277,7 @@ func NewGlVertexAttribIFormat(Attribindex GLuint, Size GLint, Type GLenum, Relat
 func NewGlVertexAttribIPointer(Index AttributeLocation, Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlVertexAttribIPointer {
 	return &GlVertexAttribIPointer{Index: Index, Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
 }
-func NewGlVertexAttribPointer(Location AttributeLocation, Size GLint, Type GLenum, Normalized bool, Stride GLsizei, Data memory.Pointer) *GlVertexAttribPointer {
+func NewGlVertexAttribPointer(Location AttributeLocation, Size GLint, Type GLenum, Normalized GLboolean, Stride GLsizei, Data memory.Pointer) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{Location: Location, Size: Size, Type: Type, Normalized: Normalized, Stride: Stride, Data: VertexPointer{Pointer: Data}}
 }
 func NewGlVertexBindingDivisor(Bindingindex GLuint, Divisor GLuint) *GlVertexBindingDivisor {

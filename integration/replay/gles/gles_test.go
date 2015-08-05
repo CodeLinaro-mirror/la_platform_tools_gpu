@@ -169,7 +169,7 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3),
 	)
@@ -198,7 +198,7 @@ func TestResizeRenderer(t *testing.T) {
 		gles.NewGlUseProgram(prog),
 		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
-		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
+		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
 	)
 	triangle := atoms.Add(

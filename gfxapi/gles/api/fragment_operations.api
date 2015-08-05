@@ -198,7 +198,7 @@ cmd void glDepthFunc(GLenum function) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glSampleCoverage.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleCoverage.xhtml","OpenGL ES 3.1")
-cmd void glSampleCoverage(GLfloat value, bool invert) {
+cmd void glSampleCoverage(GLfloat value, GLboolean invert) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()

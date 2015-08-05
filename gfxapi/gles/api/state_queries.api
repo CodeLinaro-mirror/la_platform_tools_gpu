@@ -93,7 +93,7 @@ cmd void glGetBooleani_v(GLenum target, GLuint index, GLboolean* data) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glGet.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGet.xhtml","OpenGL ES 3.1")
-cmd void glGetBooleanv(GLenum param, bool* values) {
+cmd void glGetBooleanv(GLenum param, GLboolean* values) {
   minRequiredVersion(2, 0)
   switch (param) {
     // GL_FRAMEBUFFER_BINDING was renamed to GL_DRAW_FRAMEBUFFER_BINDING in 3.0
@@ -178,34 +178,34 @@ cmd void glGetBooleanv(GLenum param, bool* values) {
   ctx := GetContext()
   switch (param) {
     case GL_BLEND:
-      v[0] = ctx.Capabilities[GL_BLEND]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_BLEND])
     case GL_CULL_FACE:
-      v[0] = ctx.Capabilities[GL_CULL_FACE]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_CULL_FACE])
     case GL_DEPTH_TEST:
-      v[0] = ctx.Capabilities[GL_DEPTH_TEST]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_DEPTH_TEST])
     case GL_DITHER:
-      v[0] = ctx.Capabilities[GL_DITHER]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_DITHER])
     case GL_POLYGON_OFFSET_FILL:
-      v[0] = ctx.Capabilities[GL_POLYGON_OFFSET_FILL]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_POLYGON_OFFSET_FILL])
     case GL_SAMPLE_ALPHA_TO_COVERAGE:
-      v[0] = ctx.Capabilities[GL_SAMPLE_ALPHA_TO_COVERAGE]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_SAMPLE_ALPHA_TO_COVERAGE])
     case GL_SAMPLE_COVERAGE:
-      v[0] = ctx.Capabilities[GL_SAMPLE_COVERAGE]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_SAMPLE_COVERAGE])
     case GL_SCISSOR_TEST:
-      v[0] = ctx.Capabilities[GL_SCISSOR_TEST]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_SCISSOR_TEST])
     case GL_STENCIL_TEST:
-      v[0] = ctx.Capabilities[GL_STENCIL_TEST]
+      v[0] = as!GLboolean(ctx.Capabilities[GL_STENCIL_TEST])
 
     case GL_DEPTH_WRITEMASK:
-      v[0] = ctx.Rasterizing.DepthMask
+      v[0] = as!GLboolean(ctx.Rasterizing.DepthMask)
     case GL_COLOR_WRITEMASK: {
-      v[0] = ctx.Rasterizing.ColorMaskRed
-      v[1] = ctx.Rasterizing.ColorMaskGreen
-      v[2] = ctx.Rasterizing.ColorMaskBlue
-      v[3] = ctx.Rasterizing.ColorMaskAlpha
+      v[0] = as!GLboolean(ctx.Rasterizing.ColorMaskRed)
+      v[1] = as!GLboolean(ctx.Rasterizing.ColorMaskGreen)
+      v[2] = as!GLboolean(ctx.Rasterizing.ColorMaskBlue)
+      v[3] = as!GLboolean(ctx.Rasterizing.ColorMaskAlpha)
     }
     case GL_SAMPLE_COVERAGE_INVERT:
-      v[0] = ctx.Rasterizing.SampleCoverageInvert
+      v[0] = as!GLboolean(ctx.Rasterizing.SampleCoverageInvert)
     case GL_SHADER_COMPILER:
       v[0] = ?
     case GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
@@ -941,7 +941,7 @@ cmd const GLubyte* glGetStringi(GLenum name, GLuint index) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsEnabled.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsEnabled.xhtml","OpenGL ES 3.1")
-cmd bool glIsEnabled(GLenum capability) {
+cmd GLboolean glIsEnabled(GLenum capability) {
   minRequiredVersion(2, 0)
   switch (capability) {
     case GL_BLEND, GL_CULL_FACE, GL_DEPTH_TEST, GL_DITHER, GL_POLYGON_OFFSET_FILL,
@@ -957,6 +957,6 @@ cmd bool glIsEnabled(GLenum capability) {
   }
 
   ctx := GetContext()
-  return ctx.Capabilities[capability]
+  return as!GLboolean(ctx.Capabilities[capability])
 }
 

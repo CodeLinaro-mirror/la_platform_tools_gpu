@@ -643,7 +643,7 @@ cmd void glGetTexParameteriv(GLenum target, GLenum parameter, GLint* values) {
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsSampler.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsSampler.xhtml","OpenGL ES 3.1")
-cmd bool glIsSampler(SamplerId sampler) {
+cmd GLboolean glIsSampler(SamplerId sampler) {
   minRequiredVersion(3, 0)
   // TODO
   return ?
@@ -652,11 +652,11 @@ cmd bool glIsSampler(SamplerId sampler) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsTexture.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsTexture.xhtml","OpenGL ES 3.1")
-cmd bool glIsTexture(TextureId texture) {
+cmd GLboolean glIsTexture(TextureId texture) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  return texture in ctx.Instances.Textures
+  return as!GLboolean(texture in ctx.Instances.Textures)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml","OpenGL ES 2.0")

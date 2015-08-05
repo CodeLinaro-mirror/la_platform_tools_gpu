@@ -78,7 +78,7 @@ cmd void glGetTransformFeedbackVarying(ProgramId program,
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsTransformFeedback.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsTransformFeedback.xhtml","OpenGL ES 3.1")
-cmd bool glIsTransformFeedback(TransformFeedbackId id) {
+cmd GLboolean glIsTransformFeedback(TransformFeedbackId id) {
   minRequiredVersion(3, 0)
   // TODO
   return ?

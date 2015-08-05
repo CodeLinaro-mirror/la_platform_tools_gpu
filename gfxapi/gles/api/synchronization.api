@@ -63,7 +63,7 @@ cmd void glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei* length
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsSync.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsSync.xhtml","OpenGL ES 3.1")
-cmd bool glIsSync(GLsync sync) {
+cmd GLboolean glIsSync(GLsync sync) {
   minRequiredVersion(3, 0)
   // TODO
   return ?

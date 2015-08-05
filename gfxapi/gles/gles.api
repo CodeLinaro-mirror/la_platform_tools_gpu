@@ -413,7 +413,7 @@ class VertexAttributeArray {
   bool          Enabled    = false
   u32           Size       = 4        // Number of components. 1, 2, 3 or 4.
   GLenum        Type       = GL_FLOAT // Type of each component.
-  bool          Normalized = false
+  GLboolean     Normalized = 0
   GLsizei       Stride     = 0        // Byte offset between each consecutive attribute, or 0 for tight.
   BufferId      Buffer     = 0
   VertexPointer Pointer               // Used if Buffer == 0
@@ -439,14 +439,14 @@ class BlendState {
 
 @internal
 class RasterizerState {
-  bool                 DepthMask            = true
+  GLboolean            DepthMask            = 1
   GLenum               DepthTestFunction    = GL_LESS
   GLfloat              DepthNear            = 0.0
   GLfloat              DepthFar             = 1.0
-  bool                 ColorMaskRed         = true
-  bool                 ColorMaskGreen       = true
-  bool                 ColorMaskBlue        = true
-  bool                 ColorMaskAlpha       = true
+  GLboolean            ColorMaskRed         = 1
+  GLboolean            ColorMaskGreen       = 1
+  GLboolean            ColorMaskBlue        = 1
+  GLboolean            ColorMaskAlpha       = 1
   map!(GLenum, GLuint) StencilMask
   Rect                 Viewport
   Rect                 Scissor
@@ -456,7 +456,7 @@ class RasterizerState {
   GLfloat              PolygonOffsetFactor
   GLfloat              PolygonOffsetUnits
   GLfloat              SampleCoverageValue  = 1.0
-  bool                 SampleCoverageInvert
+  GLboolean            SampleCoverageInvert
 }
 
 @internal
