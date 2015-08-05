@@ -940,6 +940,11 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
 
+{{define "Java.Encode#[]uint8"}}
+  e.int32({{.Name}}.length);¶
+  e.write({{.Name}}, {{.Name}}.length);¶
+{{end}}
+
 {{define "Java.Encode.Slice"}}
   e.int32({{.Name}}.length);¶
   for (int i = 0; i < {{.Name}}.length; i++) {»¶
@@ -973,6 +978,11 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
+
+{{define "Java.Decode#[]uint8"}}
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
+  d.read({{.Name}}, {{.Name}}.length);¶
+{{end}}
 
 {{define "Java.Decode.Slice"}}
   {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
