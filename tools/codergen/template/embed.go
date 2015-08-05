@@ -1219,7 +1219,7 @@ const java_client_tmpl = `{{/*
   {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
   public class {{.Service.Name}}ClientWrapper extends {{.Service.Name}}Client {»¶
-    private final {{.Service.Name}}Client myClient;¶
+    protected final {{.Service.Name}}Client myClient;¶
 
     public {{.Service.Name}}ClientWrapper({{.Service.Name}}Client client) {»¶
       myClient = client;¶
