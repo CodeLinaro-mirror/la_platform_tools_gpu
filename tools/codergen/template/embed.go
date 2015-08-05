@@ -1095,7 +1095,7 @@ const java_client_tmpl = `{{/*
 {{define "Java.Value"}}{{Call "Java.Type" .}}{{end}}
 {{define "Java.Value.nil"}}Void{{end}}
 
-{{define "Java.Future"}}Future<{{Call "Java.Value" .}}>{{end}}
+{{define "Java.Future"}}ListenableFuture<{{Call "Java.Value" .}}>{{end}}
 {{define "Java.Callable"}}Callable<{{Call "Java.Value" .}}>{{end}}
 
 {{define "Java.Parameters"}}{{range $i, $p := .Call.Params}}{{if $i}}, {{end}}{{Call "Java.Type" $p.Type}} {{$p.Name}}{{end}}{{end}}
@@ -1124,7 +1124,7 @@ const java_client_tmpl = `{{/*
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
-  {{Call "Java.Import" "java.util.concurrent.Future"}}
+  {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
   public abstract class {{.Service.Name}}Client {»¶
     //{{Section "Java.ClientBody"}}¶
@@ -1140,14 +1140,14 @@ const java_client_tmpl = `{{/*
   {{Call "Java.Import" "java.io.InputStream"}}
   {{Call "Java.Import" "java.io.OutputStream"}}
   {{Call "Java.Import" "java.util.concurrent.Callable"}}
-  {{Call "Java.Import" "java.util.concurrent.ExecutorService"}}
-  {{Call "Java.Import" "java.util.concurrent.Future"}}
+  {{Call "Java.Import" "com.google.common.util.concurrent.ListeningExecutorService"}}
+  {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
   public class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
     private final Broadcaster myBroadcaster;¶
-    private final ExecutorService myExecutorService;¶
+    private final ListeningExecutorService myExecutorService;¶
     ¶
-    public {{.Service.Name}}ClientRPC(ExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
+    public {{.Service.Name}}ClientRPC(ListeningExecutorService executorService, InputStream in, OutputStream out, int mtu) {»¶
       myExecutorService = executorService;¶
       myBroadcaster = new Broadcaster(in, out, mtu, myExecutorService);¶
     «}¶
@@ -1187,7 +1187,7 @@ const java_client_tmpl = `{{/*
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
-  {{Call "Java.Import" "java.util.concurrent.Future"}}
+  {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
   public class {{.Service.Name}}ClientWrapper extends {{.Service.Name}}Client {»¶
     private final {{.Service.Name}}Client myClient;¶
