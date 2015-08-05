@@ -145,6 +145,9 @@ func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Temp
 		try = append(try, fmt.Sprint(prefix, "#", node.Typename()))
 		if node.Typename() != node.Basename() {
 			try = append(try, fmt.Sprint(prefix, "#", node.Basename()))
+			if _, ok := node.(*schema.Primitive); ok {
+				try = append(try, fmt.Sprint(prefix, ".Alias"))
+			}
 		}
 	case *variable:
 		return t.getTemplate(prefix, node.Type)
