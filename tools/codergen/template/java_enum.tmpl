@@ -20,13 +20,8 @@
   package {{.JavaPackage}};¶
   ¶
   import org.jetbrains.annotations.NotNull;¶
-  ¶
-  import com.android.tools.rpclib.binary.BinaryClass;¶
-  import com.android.tools.rpclib.binary.BinaryID;¶
-  import com.android.tools.rpclib.binary.BinaryObject;¶
   import com.android.tools.rpclib.binary.Decoder;¶
   import com.android.tools.rpclib.binary.Encoder;¶
-  import com.android.tools.rpclib.binary.Namespace;¶
   import java.io.IOException;¶
   ¶
   public enum {{File.ClassName .Type}} {»¶
@@ -35,9 +30,25 @@
       {{$e.Name}}({{$e.Value}}{{Call "Java.ConstSuffix" $.Type}})
     {{end}};¶
     ¶
-    private final {{Call "Java.Type" .Type}} {{"value" | File.FieldName}};¶
-    {{File.ClassName .Type}}({{Call "Java.Type" .Type}} value) {»¶
+    private final {{Call "Java.PrimitiveType" .Type}} {{"value" | File.FieldName}};¶
+    {{File.ClassName .Type}}({{Call "Java.PrimitiveType" .Type}} value) {»¶
       {{"value" | File.FieldName}} = value;¶
+    «}¶
+    public {{Call "Java.PrimitiveType" .Type}} {{"value" | File.Getter}}() { return {{"value" | File.FieldName}}; }¶
+    ¶
+    public void encode(@NotNull Encoder e) throws IOException {»¶
+      e.{{Call "Java.Method" .Type}}({{"value" | File.FieldName}});¶
+    «}¶
+    ¶
+    public static {{File.ClassName .Type}} decode(@NotNull Decoder d) throws IOException {»¶
+      {{Call "Java.PrimitiveType" .Type}} value = d.{{Call "Java.Method" .Type}}();¶
+      switch (value) {
+      {{range $i, $e := .Entries}}
+        case {{$e.Value}}{{Call "Java.ConstSuffix" $.Type}}:»¶
+          return {{$e.Name}};¶«
+      {{end}}
+      }¶
+      throw new IOException("Invalid value for {{File.ClassName .Type}}");¶
     «}¶
   «}¶
 {{end}}

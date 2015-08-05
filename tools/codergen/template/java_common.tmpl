@@ -14,20 +14,24 @@
  * limitations under the License.
  */}}
 
-{{define "Java.Type#bool"}}boolean{{end}}
-{{define "Java.Type#int8"}}byte{{end}}
-{{define "Java.Type#uint8"}}byte{{end}}
-{{define "Java.Type#int16"}}short{{end}}
-{{define "Java.Type#uint16"}}short{{end}}
-{{define "Java.Type#int32"}}int{{end}}
-{{define "Java.Type#uint32"}}int{{end}}
-{{define "Java.Type#int64"}}long{{end}}
-{{define "Java.Type#uint64"}}long{{end}}
-{{define "Java.Type#float32"}}float{{end}}
-{{define "Java.Type#float64"}}double{{end}}
-{{define "Java.Type#string"}}String{{end}}
+{{define "Java.PrimitiveType#bool"}}boolean{{end}}
+{{define "Java.PrimitiveType#int8"}}byte{{end}}
+{{define "Java.PrimitiveType#uint8"}}byte{{end}}
+{{define "Java.PrimitiveType#int16"}}short{{end}}
+{{define "Java.PrimitiveType#uint16"}}short{{end}}
+{{define "Java.PrimitiveType#int32"}}int{{end}}
+{{define "Java.PrimitiveType#uint32"}}int{{end}}
+{{define "Java.PrimitiveType#int64"}}long{{end}}
+{{define "Java.PrimitiveType#uint64"}}long{{end}}
+{{define "Java.PrimitiveType#float32"}}float{{end}}
+{{define "Java.PrimitiveType#float64"}}double{{end}}
+{{define "Java.PrimitiveType#string"}}String{{end}}
+
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
+{{define "Java.Type#log.Severity"}}Severity{{end}}
+{{define "Java.Type.Primitive"}}{{Call "Java.PrimitiveType" .}}{{end}}
+{{define "Java.Type.Alias"}}{{.Typename}}{{end}}
 {{define "Java.Type.Any"}}Box{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
@@ -50,3 +54,5 @@
 {{define "Java.ConstSuffix#float32"}}f{{end}}
 {{define "Java.ConstSuffix#float64"}}d{{end}}
 {{define "Java.ConstSuffix"}}{{end}}
+
+{{define "Java.Method.Primitive"}}{{Lower .Method}}{{end}}

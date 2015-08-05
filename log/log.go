@@ -15,6 +15,11 @@
 // Package log provides a hierarchical logger interface and implementations of the interface.
 package log
 
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.service.log
+// binary: java.indent = "  "
+// binary: java.member_prefix = my
+
 // Interface declares the methods for an object that accepts logging messages.
 type Interface interface {
 	log(severity Severity, msg string, args ...interface{})

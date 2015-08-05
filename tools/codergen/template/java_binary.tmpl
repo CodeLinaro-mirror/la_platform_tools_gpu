@@ -25,10 +25,12 @@
   «}¶
 {{end}}
 
-{{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.Encode#binary.ID"}}e.id({{.Name}});{{end}}
+{{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Primitive"}}e.{{Call "Java.Method" .Type}}({{.Name}});{{end}}
+{{define "Java.Encode.Alias"}}{{.Name}}.encode(e);{{end}}
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
-{{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
 
@@ -57,10 +59,12 @@
   «}¶
 {{end}}
 
-{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
+{{define "Java.Decode#binary.ID"}}{{.Name}} = d.id();{{end}}
+{{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
+{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
+{{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
-{{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
 
