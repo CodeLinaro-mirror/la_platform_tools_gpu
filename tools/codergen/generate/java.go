@@ -65,6 +65,9 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	indent = strings.Trim(indent, `"`)
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
 	for _, s := range m.Structs {
+		if s.Tags.Get("java") == "disable" {
+			continue
+		}
 		gen <- Generate{
 			Name:   "Java.File",
 			Arg:    JavaClass{JavaSettings: settings.clone(), Struct: s},
