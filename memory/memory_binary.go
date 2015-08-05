@@ -150,17 +150,15 @@ var schemaRange = &schema.Class{
 
 var ConstantValues schema.Constants
 
-const _PoolID_name = "ApplicationPool"
-
 var _PoolID_map = map[PoolID]string{}
 
 func init() {
-	_PoolID_map[0] = _PoolID_name[0:15]
+	_PoolID_map[0] = "ApplicationPool"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: _PoolID_name[0:15], Value: uint32(0)},
+			{Name: "ApplicationPool", Value: uint32(0)},
 		},
 	})
 }

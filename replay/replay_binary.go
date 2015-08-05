@@ -13,21 +13,19 @@ import (
 
 var ConstantValues schema.Constants
 
-const _WireframeMode_name = "NoWireframeWireframeOverlayAllWireframe"
-
 var _WireframeMode_map = map[WireframeMode]string{}
 
 func init() {
-	_WireframeMode_map[0] = _WireframeMode_name[0:11]
-	_WireframeMode_map[1] = _WireframeMode_name[11:27]
-	_WireframeMode_map[2] = _WireframeMode_name[27:39]
+	_WireframeMode_map[0] = "NoWireframe"
+	_WireframeMode_map[1] = "WireframeOverlay"
+	_WireframeMode_map[2] = "AllWireframe"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "WireframeMode", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _WireframeMode_name[0:11], Value: int32(0)},
-			{Name: _WireframeMode_name[11:27], Value: int32(1)},
-			{Name: _WireframeMode_name[27:39], Value: int32(2)},
+			{Name: "NoWireframe", Value: int32(0)},
+			{Name: "WireframeOverlay", Value: int32(1)},
+			{Name: "AllWireframe", Value: int32(2)},
 		},
 	})
 }

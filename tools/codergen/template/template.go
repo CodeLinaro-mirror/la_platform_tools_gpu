@@ -40,7 +40,6 @@ type Templates struct {
 	active    *template.Template
 	writer    io.Writer
 	File      interface{}
-	counters  map[string]*counter
 }
 
 func isPublic(s string) bool {
@@ -78,7 +77,6 @@ func New() *Templates {
 			"add": func(a, b int) int { return a + b },
 			"sub": func(a, b int) int { return a - b },
 		},
-		counters: map[string]*counter{},
 	}
 	v := reflect.ValueOf(f)
 	installMethods(v, f.funcs)

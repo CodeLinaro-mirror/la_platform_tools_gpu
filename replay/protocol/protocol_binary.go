@@ -222,21 +222,19 @@ var schemaPayload = &schema.Class{
 
 var ConstantValues schema.Constants
 
-const _ConnectionType_name = "DeviceInfoReplayShutdown"
-
 var _ConnectionType_map = map[ConnectionType]string{}
 
 func init() {
-	_ConnectionType_map[0] = _ConnectionType_name[0:10]
-	_ConnectionType_map[1] = _ConnectionType_name[10:16]
-	_ConnectionType_map[2] = _ConnectionType_name[16:24]
+	_ConnectionType_map[0] = "DeviceInfo"
+	_ConnectionType_map[1] = "Replay"
+	_ConnectionType_map[2] = "Shutdown"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ConnectionType", Method: schema.Uint8},
 		Entries: []schema.Constant{
-			{Name: _ConnectionType_name[0:10], Value: uint8(0)},
-			{Name: _ConnectionType_name[10:16], Value: uint8(1)},
-			{Name: _ConnectionType_name[16:24], Value: uint8(2)},
+			{Name: "DeviceInfo", Value: uint8(0)},
+			{Name: "Replay", Value: uint8(1)},
+			{Name: "Shutdown", Value: uint8(2)},
 		},
 	})
 }
@@ -258,19 +256,17 @@ func (v *ConnectionType) Parse(s string) error {
 	return fmt.Errorf("%s not in ConnectionType", s)
 }
 
-const _MessageType_name = "GetPost"
-
 var _MessageType_map = map[MessageType]string{}
 
 func init() {
-	_MessageType_map[0] = _MessageType_name[0:3]
-	_MessageType_map[1] = _MessageType_name[3:7]
+	_MessageType_map[0] = "Get"
+	_MessageType_map[1] = "Post"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "MessageType", Method: schema.Uint8},
 		Entries: []schema.Constant{
-			{Name: _MessageType_name[0:3], Value: uint8(0)},
-			{Name: _MessageType_name[3:7], Value: uint8(1)},
+			{Name: "Get", Value: uint8(0)},
+			{Name: "Post", Value: uint8(1)},
 		},
 	})
 }
@@ -292,45 +288,43 @@ func (v *MessageType) Parse(s string) error {
 	return fmt.Errorf("%s not in MessageType", s)
 }
 
-const _Type_name = "BoolInt8Int16Int32Int64Uint8Uint16Uint32Uint64FloatDoubleAbsolutePointerConstantPointerVolatilePointerVoid"
-
 var _Type_map = map[Type]string{}
 
 func init() {
-	_Type_map[0] = _Type_name[0:4]
-	_Type_map[1] = _Type_name[4:8]
-	_Type_map[2] = _Type_name[8:13]
-	_Type_map[3] = _Type_name[13:18]
-	_Type_map[4] = _Type_name[18:23]
-	_Type_map[5] = _Type_name[23:28]
-	_Type_map[6] = _Type_name[28:34]
-	_Type_map[7] = _Type_name[34:40]
-	_Type_map[8] = _Type_name[40:46]
-	_Type_map[9] = _Type_name[46:51]
-	_Type_map[10] = _Type_name[51:57]
-	_Type_map[11] = _Type_name[57:72]
-	_Type_map[12] = _Type_name[72:87]
-	_Type_map[13] = _Type_name[87:102]
-	_Type_map[4294967295] = _Type_name[102:106]
+	_Type_map[0] = "Bool"
+	_Type_map[1] = "Int8"
+	_Type_map[2] = "Int16"
+	_Type_map[3] = "Int32"
+	_Type_map[4] = "Int64"
+	_Type_map[5] = "Uint8"
+	_Type_map[6] = "Uint16"
+	_Type_map[7] = "Uint32"
+	_Type_map[8] = "Uint64"
+	_Type_map[9] = "Float"
+	_Type_map[10] = "Double"
+	_Type_map[11] = "AbsolutePointer"
+	_Type_map[12] = "ConstantPointer"
+	_Type_map[13] = "VolatilePointer"
+	_Type_map[4294967295] = "Void"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Type", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: _Type_name[0:4], Value: uint32(0)},
-			{Name: _Type_name[4:8], Value: uint32(1)},
-			{Name: _Type_name[8:13], Value: uint32(2)},
-			{Name: _Type_name[13:18], Value: uint32(3)},
-			{Name: _Type_name[18:23], Value: uint32(4)},
-			{Name: _Type_name[23:28], Value: uint32(5)},
-			{Name: _Type_name[28:34], Value: uint32(6)},
-			{Name: _Type_name[34:40], Value: uint32(7)},
-			{Name: _Type_name[40:46], Value: uint32(8)},
-			{Name: _Type_name[46:51], Value: uint32(9)},
-			{Name: _Type_name[51:57], Value: uint32(10)},
-			{Name: _Type_name[57:72], Value: uint32(11)},
-			{Name: _Type_name[72:87], Value: uint32(12)},
-			{Name: _Type_name[87:102], Value: uint32(13)},
-			{Name: _Type_name[102:106], Value: uint32(4294967295)},
+			{Name: "Bool", Value: uint32(0)},
+			{Name: "Int8", Value: uint32(1)},
+			{Name: "Int16", Value: uint32(2)},
+			{Name: "Int32", Value: uint32(3)},
+			{Name: "Int64", Value: uint32(4)},
+			{Name: "Uint8", Value: uint32(5)},
+			{Name: "Uint16", Value: uint32(6)},
+			{Name: "Uint32", Value: uint32(7)},
+			{Name: "Uint64", Value: uint32(8)},
+			{Name: "Float", Value: uint32(9)},
+			{Name: "Double", Value: uint32(10)},
+			{Name: "AbsolutePointer", Value: uint32(11)},
+			{Name: "ConstantPointer", Value: uint32(12)},
+			{Name: "VolatilePointer", Value: uint32(13)},
+			{Name: "Void", Value: uint32(4294967295)},
 		},
 	})
 }

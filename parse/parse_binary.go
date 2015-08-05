@@ -13,27 +13,25 @@ import (
 
 var ConstantValues schema.Constants
 
-const _NumberKind_name = "NotNumericDecimalOctalHexadecimalFloatingScientific"
-
 var _NumberKind_map = map[NumberKind]string{}
 
 func init() {
-	_NumberKind_map[0] = _NumberKind_name[0:10]
-	_NumberKind_map[1] = _NumberKind_name[10:17]
-	_NumberKind_map[2] = _NumberKind_name[17:22]
-	_NumberKind_map[3] = _NumberKind_name[22:33]
-	_NumberKind_map[4] = _NumberKind_name[33:41]
-	_NumberKind_map[5] = _NumberKind_name[41:51]
+	_NumberKind_map[0] = "NotNumeric"
+	_NumberKind_map[1] = "Decimal"
+	_NumberKind_map[2] = "Octal"
+	_NumberKind_map[3] = "Hexadecimal"
+	_NumberKind_map[4] = "Floating"
+	_NumberKind_map[5] = "Scientific"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "NumberKind", Method: schema.Uint8},
 		Entries: []schema.Constant{
-			{Name: _NumberKind_name[0:10], Value: uint8(0)},
-			{Name: _NumberKind_name[10:17], Value: uint8(1)},
-			{Name: _NumberKind_name[17:22], Value: uint8(2)},
-			{Name: _NumberKind_name[22:33], Value: uint8(3)},
-			{Name: _NumberKind_name[33:41], Value: uint8(4)},
-			{Name: _NumberKind_name[41:51], Value: uint8(5)},
+			{Name: "NotNumeric", Value: uint8(0)},
+			{Name: "Decimal", Value: uint8(1)},
+			{Name: "Octal", Value: uint8(2)},
+			{Name: "Hexadecimal", Value: uint8(3)},
+			{Name: "Floating", Value: uint8(4)},
+			{Name: "Scientific", Value: uint8(5)},
 		},
 	})
 }
@@ -55,19 +53,17 @@ func (v *NumberKind) Parse(s string) error {
 	return fmt.Errorf("%s not in NumberKind", s)
 }
 
-const _SkipMode_name = "SkipPrefixSkipSuffix"
-
 var _SkipMode_map = map[SkipMode]string{}
 
 func init() {
-	_SkipMode_map[0] = _SkipMode_name[0:10]
-	_SkipMode_map[1] = _SkipMode_name[10:20]
+	_SkipMode_map[0] = "SkipPrefix"
+	_SkipMode_map[1] = "SkipSuffix"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "SkipMode", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _SkipMode_name[0:10], Value: int32(0)},
-			{Name: _SkipMode_name[10:20], Value: int32(1)},
+			{Name: "SkipPrefix", Value: int32(0)},
+			{Name: "SkipSuffix", Value: int32(1)},
 		},
 	})
 }

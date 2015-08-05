@@ -2550,25 +2550,23 @@ var schemaresultSet = &schema.Class{
 
 var ConstantValues schema.Constants
 
-const _TimingFlags_name = "TimingCPUTimingGPUTimingPerCommandTimingPerDrawCallTimingPerFrame"
-
 var _TimingFlags_map = map[TimingFlags]string{}
 
 func init() {
-	_TimingFlags_map[0] = _TimingFlags_name[0:9]
-	_TimingFlags_map[1] = _TimingFlags_name[9:18]
-	_TimingFlags_map[2] = _TimingFlags_name[18:34]
-	_TimingFlags_map[4] = _TimingFlags_name[34:51]
-	_TimingFlags_map[8] = _TimingFlags_name[51:65]
+	_TimingFlags_map[0] = "TimingCPU"
+	_TimingFlags_map[1] = "TimingGPU"
+	_TimingFlags_map[2] = "TimingPerCommand"
+	_TimingFlags_map[4] = "TimingPerDrawCall"
+	_TimingFlags_map[8] = "TimingPerFrame"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "TimingFlags", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _TimingFlags_name[0:9], Value: int32(0)},
-			{Name: _TimingFlags_name[9:18], Value: int32(1)},
-			{Name: _TimingFlags_name[18:34], Value: int32(2)},
-			{Name: _TimingFlags_name[34:51], Value: int32(4)},
-			{Name: _TimingFlags_name[51:65], Value: int32(8)},
+			{Name: "TimingCPU", Value: int32(0)},
+			{Name: "TimingGPU", Value: int32(1)},
+			{Name: "TimingPerCommand", Value: int32(2)},
+			{Name: "TimingPerDrawCall", Value: int32(4)},
+			{Name: "TimingPerFrame", Value: int32(8)},
 		},
 	})
 }
@@ -2590,21 +2588,19 @@ func (v *TimingFlags) Parse(s string) error {
 	return fmt.Errorf("%s not in TimingFlags", s)
 }
 
-const _WireframeMode_name = "NoWireframeWireframeOverlayAllWireframe"
-
 var _WireframeMode_map = map[WireframeMode]string{}
 
 func init() {
-	_WireframeMode_map[0] = _WireframeMode_name[0:11]
-	_WireframeMode_map[1] = _WireframeMode_name[11:27]
-	_WireframeMode_map[2] = _WireframeMode_name[27:39]
+	_WireframeMode_map[0] = "NoWireframe"
+	_WireframeMode_map[1] = "WireframeOverlay"
+	_WireframeMode_map[2] = "AllWireframe"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "WireframeMode", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _WireframeMode_name[0:11], Value: int32(0)},
-			{Name: _WireframeMode_name[11:27], Value: int32(1)},
-			{Name: _WireframeMode_name[27:39], Value: int32(2)},
+			{Name: "NoWireframe", Value: int32(0)},
+			{Name: "WireframeOverlay", Value: int32(1)},
+			{Name: "AllWireframe", Value: int32(2)},
 		},
 	})
 }
