@@ -35,12 +35,12 @@
 {{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
 
 {{define "Java.Encode#[]uint8"}}
-  e.int32({{.Name}}.length);¶
+  e.uint32({{.Name}}.length);¶
   e.write({{.Name}}, {{.Name}}.length);¶
 {{end}}
 
 {{define "Java.Encode.Slice"}}
-  e.int32({{.Name}}.length);¶
+  e.uint32({{.Name}}.length);¶
   for (int i = 0; i < {{.Name}}.length; i++) {»¶
     {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
@@ -74,12 +74,12 @@
 {{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
 
 {{define "Java.Decode#[]uint8"}}
-  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
   d.read({{.Name}}, {{.Name}}.length);¶
 {{end}}
 
 {{define "Java.Decode.Slice"}}
-  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
   for (int i = 0; i <{{.Name}}.length; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
