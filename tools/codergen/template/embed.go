@@ -1041,6 +1041,7 @@ const java_binary_tmpl = `{{/*
   static {»¶
     Namespace.register(ID, Klass.INSTANCE);¶
   «}¶
+  public static void register() {}¶
   //{{/*Comment the following section marker*/}}
 {{end}}
 
@@ -1081,6 +1082,24 @@ const java_binary_tmpl = `{{/*
     //{{Section "Java.ClassBody"}}¶
     public enum Klass implements BinaryClass {»¶
       //{{Section "Java.KlassBody"}}¶
+    «}¶
+  «}¶
+{{end}}
+
+
+{{define "Java.FactoryBody"}}
+  ¶{{/*Newline after section marker*/}}
+  {{range .Structs}}{{File.ClassName .}}.register();¶{{end}}
+  //{{/*Comment the following section marker*/}}
+{{end}}
+
+{{define "Java.Factory"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  public final class Factory {»¶
+    public static void register() {»¶
+    //{{Section "Java.FactoryBody"}}¶
     «}¶
   «}¶
 {{end}}

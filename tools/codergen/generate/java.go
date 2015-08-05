@@ -52,6 +52,12 @@ type JavaEnum struct {
 	schema.ConstantSet
 }
 
+// JavaFactory is the struct handed to the java factory generation template.
+type JavaFactory struct {
+	JavaSettings
+	Structs []*Struct
+}
+
 // Java is called by codergen to prepare and generate java code for a given module.
 func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	settings := JavaSettings{
@@ -64,6 +70,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 	indent, _ := m.Directives["java.indent"]
 	indent = strings.Trim(indent, `"`)
 	pkgPath := strings.Replace(settings.JavaPackage, ".", "/", -1)
+	factory := JavaFactory{JavaSettings: settings.clone(), Structs: []*Struct{}}
 	for _, s := range m.Structs {
 		if s.Tags.Get("java") == "disable" {
 			continue
@@ -72,6 +79,15 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 			Name:   "Java.File",
 			Arg:    JavaClass{JavaSettings: settings.clone(), Struct: s},
 			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name)+".java"),
+			Indent: indent,
+		}
+		factory.Structs = append(factory.Structs, s)
+	}
+	if len(factory.Structs) > 0 {
+		gen <- Generate{
+			Name:   "Java.Factory",
+			Arg:    factory,
+			Output: filepath.Join(path, source, pkgPath, "Factory.java"),
 			Indent: indent,
 		}
 	}
