@@ -76,6 +76,9 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 		}
 	}
 	for _, s := range m.Constants {
+		if _, found := m.Directives["java.disable."+s.Type.String()]; found {
+			continue
+		}
 		gen <- Generate{
 			Name:   "Java.Enum",
 			Arg:    JavaEnum{JavaSettings: settings.clone(), ConstantSet: s},

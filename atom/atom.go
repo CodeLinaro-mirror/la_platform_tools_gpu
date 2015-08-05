@@ -20,6 +20,7 @@ package atom
 // binary: java.package = com.android.tools.idea.editors.gfxtrace.service.atom
 // binary: java.indent = "  "
 // binary: java.member_prefix = my
+// binary: java.disable.ID = true
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
