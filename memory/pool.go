@@ -119,11 +119,25 @@ func (m poolSlice) Get(d database.Database, l log.Logger) ([]byte, error) {
 }
 
 func (m poolSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
-	bytes, err := m.Get(d, l)
-	if err != nil {
-		return binary.ID{}, err
+	for i := m.at - 1; i >= 0; i-- {
+		w := m.pool.writes[i]
+		if w.dst.Overlaps(m.rng) {
+			if w.dst == m.rng {
+				return w.src.ResourceID(d, l) // exact match.
+			} else {
+				// partial match - we have to construct the buffer, store and return the id.
+				s := m
+				s.at = i + 1 // continue from where we left off
+				bytes, err := s.Get(d, l)
+				if err != nil {
+					return binary.ID{}, err
+				}
+				return database.Store(bytes, d, l)
+			}
+		}
 	}
-	return database.Store(bytes, d, l)
+	// no overlaps with any writes.
+	return nullSlice(m.rng.Size).ResourceID(d, l)
 }
 
 func (m poolSlice) Slice(rng Range) Slice {

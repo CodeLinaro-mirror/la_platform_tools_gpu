@@ -18,11 +18,12 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/memory"
-	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	rb "android.googlesource.com/platform/tools/gpu/replay/builder"
 )
 
 type externs struct {
@@ -30,65 +31,39 @@ type externs struct {
 	s *gfxapi.State
 	d database.Database
 	l log.Logger
-	b *builder.Builder
+	b *rb.Builder
+}
+
+func (e externs) elSize(ty GLenum) uint64 {
+	switch ty {
+	case GLenum_GL_UNSIGNED_BYTE:
+		return 1
+	case GLenum_GL_UNSIGNED_SHORT:
+		return 2
+	case GLenum_GL_UNSIGNED_INT:
+		return 4
+	default:
+		panic(fmt.Errorf("Unsupported index type %v", ty))
+	}
+}
+
+func (e externs) calcIndexLimits(data U8ᵖ, ty GLenum, offset, count uint32) builder.IndexLimits {
+	elSize := e.elSize(ty)
+	id := data.Slice(uint64(offset), uint64(offset)+uint64(count)*elSize, e.s).ResourceID(e.s, e.d, e.l)
+	littleEndian := e.s.Architecture.ByteOrder == endian.Little
+	limits, err := builder.CalcIndexLimits(id, int(count), int(elSize), littleEndian, e.d, e.l)
+	if err != nil {
+		panic(fmt.Errorf("Could not calculate index limits: %v", err))
+	}
+	return limits
 }
 
 func (e externs) minIndex(data U8ᵖ, ty GLenum, offset, count uint32) uint32 {
-	v := ^uint32(0)
-	switch ty {
-	case GLenum_GL_UNSIGNED_BYTE:
-		for _, i := range data.Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v > uint32(i) {
-				v = uint32(i)
-			}
-		}
-	case GLenum_GL_UNSIGNED_SHORT:
-		for _, i := range U16ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v > uint32(i) {
-				v = uint32(i)
-			}
-		}
-	case GLenum_GL_UNSIGNED_INT:
-		for _, i := range U32ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v > i {
-				v = i
-			}
-		}
-	default:
-		panic(fmt.Errorf("Unsupported index type %v", ty))
-	}
-	return v
+	return e.calcIndexLimits(data, ty, offset, count).Min
 }
 
 func (e externs) maxIndex(data U8ᵖ, ty GLenum, offset, count uint32) uint32 {
-	v := uint32(0)
-	switch ty {
-	case GLenum_GL_UNSIGNED_BYTE:
-		for _, i := range data.Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v < uint32(i) {
-				v = uint32(i)
-			}
-		}
-	case GLenum_GL_UNSIGNED_SHORT:
-		for _, i := range U16ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v < uint32(i) {
-				v = uint32(i)
-			}
-		}
-	case GLenum_GL_UNSIGNED_INT:
-		for _, i := range U32ᵖ(data).Slice(0, uint64(count), e.s).Read(e.a, e.s, e.d, e.l, e.b) {
-			if v < i {
-				v = i
-			}
-		}
-	default:
-		panic(fmt.Errorf("Unsupported index type %v", ty))
-	}
-	return v
-}
-
-type unbounded interface {
-	Unbounded(ϟs *gfxapi.State) memory.Slice
+	return e.calcIndexLimits(data, ty, offset, count).Max
 }
 
 func (e externs) substr(str string, start, end int32) string {
