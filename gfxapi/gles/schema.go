@@ -527,7 +527,7 @@ func init() {
 	sc_GlDrawArrays.Metadata = append(sc_GlDrawArrays.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArrays",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -536,7 +536,7 @@ func init() {
 	sc_GlDrawArraysIndirect.Metadata = append(sc_GlDrawArraysIndirect.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysIndirect",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -545,7 +545,7 @@ func init() {
 	sc_GlDrawArraysInstanced.Metadata = append(sc_GlDrawArraysInstanced.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawArraysInstanced",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -554,7 +554,7 @@ func init() {
 	sc_GlDrawBuffers.Metadata = append(sc_GlDrawBuffers.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawBuffers",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -563,7 +563,7 @@ func init() {
 	sc_GlDrawElements.Metadata = append(sc_GlDrawElements.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElements",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -572,7 +572,7 @@ func init() {
 	sc_GlDrawElementsIndirect.Metadata = append(sc_GlDrawElementsIndirect.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsIndirect",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -581,7 +581,7 @@ func init() {
 	sc_GlDrawElementsInstanced.Metadata = append(sc_GlDrawElementsInstanced.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawElementsInstanced",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
@@ -590,7 +590,7 @@ func init() {
 	sc_GlDrawRangeElements.Metadata = append(sc_GlDrawRangeElements.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glDrawRangeElements",
-		DrawCall:         false,
+		DrawCall:         true,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})

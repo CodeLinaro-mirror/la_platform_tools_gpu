@@ -14997,7 +14997,7 @@ func (a *GlDrawArrays) AddWrite(rng memory.Range, id binary.ID) *GlDrawArrays {
 	return a
 }
 func (c *GlDrawArrays) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawArrays) Flags() atom.Flags                { return 0 }
+func (c *GlDrawArrays) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawArrays) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15030,7 +15030,7 @@ func (a *GlDrawArraysIndirect) AddWrite(rng memory.Range, id binary.ID) *GlDrawA
 	return a
 }
 func (c *GlDrawArraysIndirect) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawArraysIndirect) Flags() atom.Flags                { return 0 }
+func (c *GlDrawArraysIndirect) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawArraysIndirect) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15065,7 +15065,7 @@ func (a *GlDrawArraysInstanced) AddWrite(rng memory.Range, id binary.ID) *GlDraw
 	return a
 }
 func (c *GlDrawArraysInstanced) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawArraysInstanced) Flags() atom.Flags                { return 0 }
+func (c *GlDrawArraysInstanced) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawArraysInstanced) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15098,7 +15098,7 @@ func (a *GlDrawBuffers) AddWrite(rng memory.Range, id binary.ID) *GlDrawBuffers 
 	return a
 }
 func (c *GlDrawBuffers) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawBuffers) Flags() atom.Flags                { return 0 }
+func (c *GlDrawBuffers) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawBuffers) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15133,7 +15133,7 @@ func (a *GlDrawElements) AddWrite(rng memory.Range, id binary.ID) *GlDrawElement
 	return a
 }
 func (c *GlDrawElements) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawElements) Flags() atom.Flags                { return 0 }
+func (c *GlDrawElements) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawElements) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15167,7 +15167,7 @@ func (a *GlDrawElementsIndirect) AddWrite(rng memory.Range, id binary.ID) *GlDra
 	return a
 }
 func (c *GlDrawElementsIndirect) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawElementsIndirect) Flags() atom.Flags                { return 0 }
+func (c *GlDrawElementsIndirect) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawElementsIndirect) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15203,7 +15203,7 @@ func (a *GlDrawElementsInstanced) AddWrite(rng memory.Range, id binary.ID) *GlDr
 	return a
 }
 func (c *GlDrawElementsInstanced) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawElementsInstanced) Flags() atom.Flags                { return 0 }
+func (c *GlDrawElementsInstanced) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawElementsInstanced) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15240,7 +15240,7 @@ func (a *GlDrawRangeElements) AddWrite(rng memory.Range, id binary.ID) *GlDrawRa
 	return a
 }
 func (c *GlDrawRangeElements) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlDrawRangeElements) Flags() atom.Flags                { return 0 }
+func (c *GlDrawRangeElements) Flags() atom.Flags                { return 0 | atom.DrawCall }
 func (a *GlDrawRangeElements) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////

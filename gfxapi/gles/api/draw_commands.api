@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawArrays.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArrays.xhtml","OpenGL ES 3.1")
@@ -32,6 +33,7 @@ cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei index_count) 
   ReadVertexArrays(ctx, as!u32(first_index), last_index)
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArraysIndirect.xhtml","OpenGL ES 3.1")
 cmd void glDrawArraysIndirect(GLenum mode, const void* indirect) {
   minRequiredVersion(3, 1)
@@ -47,6 +49,7 @@ cmd void glDrawArraysIndirect(GLenum mode, const void* indirect) {
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArraysInstanced.xhtml","OpenGL ES 3.1")
 cmd void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instancecount) {
@@ -63,6 +66,7 @@ cmd void glDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei 
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawBuffers.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawBuffers.xhtml","OpenGL ES 3.1")
 cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
@@ -70,6 +74,7 @@ cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawElements.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElements.xhtml","OpenGL ES 3.1")
@@ -127,6 +132,7 @@ cmd void glDrawElements(GLenum         draw_mode,
   }
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElementsIndirect.xhtml","OpenGL ES 3.1")
 cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) {
   minRequiredVersion(3, 1)
@@ -150,6 +156,7 @@ cmd void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect) 
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawElementsInstanced.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawElementsInstanced.xhtml","OpenGL ES 3.1")
 cmd void glDrawElementsInstanced(GLenum      mode,
@@ -178,6 +185,7 @@ cmd void glDrawElementsInstanced(GLenum      mode,
   // TODO
 }
 
+@DrawCall
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDrawRangeElements.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawRangeElements.xhtml","OpenGL ES 3.1")
 cmd void glDrawRangeElements(GLenum      mode,
@@ -206,4 +214,3 @@ cmd void glDrawRangeElements(GLenum      mode,
   }
   // TODO
 }
-
