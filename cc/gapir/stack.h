@@ -414,7 +414,7 @@ private:
 
         // Union of all possible types stored on the stack for creating a unified value type with
         // getter function to access the value as a specific type
-        union {
+        union ValueType {
             bool     b;
             int8_t   i8;
             int16_t  i16;
@@ -428,9 +428,11 @@ private:
             double   d;
             void*    p;
             BaseValue bv;
-        } mValue;
+        };
 
-        static_assert(sizeof(BaseValue) >= sizeof(Entry::mValue),
+        ValueType mValue;
+
+        static_assert(sizeof(BaseValue) >= sizeof(ValueType),
                       "Stack::BaseValue is not large enough");
     };
 
