@@ -52,7 +52,7 @@ var funcInfoGlGetSamplerParameterIivEXT = builder.FunctionInfo{ID: 17, ReturnTyp
 var funcInfoGlGetSamplerParameterIuivEXT = builder.FunctionInfo{ID: 18, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetTexParameterIivEXT = builder.FunctionInfo{ID: 19, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetTexParameterIuivEXT = builder.FunctionInfo{ID: 20, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsEnablediEXT = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeBool, Parameters: 2}
+var funcInfoGlIsEnablediEXT = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeUint8, Parameters: 2}
 var funcInfoGlMinSampleShadingOES = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlObjectLabelKHR = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoGlObjectPtrLabelKHR = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -73,7 +73,7 @@ var funcInfoGlEndQuery = builder.FunctionInfo{ID: 38, ReturnType: protocol.TypeV
 var funcInfoGlGenQueries = builder.FunctionInfo{ID: 39, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlGetQueryObjectuiv = builder.FunctionInfo{ID: 40, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetQueryiv = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsQuery = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsQuery = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlBindBuffer = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlBindBufferBase = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlBindBufferRange = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 5}
@@ -85,7 +85,7 @@ var funcInfoGlGenBuffers = builder.FunctionInfo{ID: 50, ReturnType: protocol.Typ
 var funcInfoGlGetBufferParameteri64v = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetBufferParameteriv = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetBufferPointerv = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsBuffer = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsBuffer = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlMapBufferRange = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeVolatilePointer, Parameters: 4}
 var funcInfoGlUnmapBuffer = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlDrawArrays = builder.FunctionInfo{ID: 57, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -255,18 +255,18 @@ var funcInfoGlGetnUniformivKHR = builder.FunctionInfo{ID: 220, ReturnType: proto
 var funcInfoGlGetnUniformuivKHR = builder.FunctionInfo{ID: 221, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoGlInsertEventMarkerEXT = builder.FunctionInfo{ID: 222, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlInterpolatePathsNV = builder.FunctionInfo{ID: 223, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlIsEnablediOES = builder.FunctionInfo{ID: 224, ReturnType: protocol.TypeBool, Parameters: 2}
-var funcInfoGlIsEnablediNV = builder.FunctionInfo{ID: 225, ReturnType: protocol.TypeBool, Parameters: 2}
-var funcInfoGlIsFenceNV = builder.FunctionInfo{ID: 226, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsImageHandleResidentNV = builder.FunctionInfo{ID: 227, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsPathNV = builder.FunctionInfo{ID: 228, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsPointInFillPathNV = builder.FunctionInfo{ID: 229, ReturnType: protocol.TypeBool, Parameters: 4}
-var funcInfoGlIsPointInStrokePathNV = builder.FunctionInfo{ID: 230, ReturnType: protocol.TypeBool, Parameters: 3}
-var funcInfoGlIsProgramPipelineEXT = builder.FunctionInfo{ID: 231, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsQueryEXT = builder.FunctionInfo{ID: 232, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsSyncAPPLE = builder.FunctionInfo{ID: 233, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsTextureHandleResidentNV = builder.FunctionInfo{ID: 234, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsVertexArrayOES = builder.FunctionInfo{ID: 235, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsEnablediOES = builder.FunctionInfo{ID: 224, ReturnType: protocol.TypeUint8, Parameters: 2}
+var funcInfoGlIsEnablediNV = builder.FunctionInfo{ID: 225, ReturnType: protocol.TypeUint8, Parameters: 2}
+var funcInfoGlIsFenceNV = builder.FunctionInfo{ID: 226, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsImageHandleResidentNV = builder.FunctionInfo{ID: 227, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsPathNV = builder.FunctionInfo{ID: 228, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsPointInFillPathNV = builder.FunctionInfo{ID: 229, ReturnType: protocol.TypeUint8, Parameters: 4}
+var funcInfoGlIsPointInStrokePathNV = builder.FunctionInfo{ID: 230, ReturnType: protocol.TypeUint8, Parameters: 3}
+var funcInfoGlIsProgramPipelineEXT = builder.FunctionInfo{ID: 231, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsQueryEXT = builder.FunctionInfo{ID: 232, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsSyncAPPLE = builder.FunctionInfo{ID: 233, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsTextureHandleResidentNV = builder.FunctionInfo{ID: 234, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsVertexArrayOES = builder.FunctionInfo{ID: 235, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlLabelObjectEXT = builder.FunctionInfo{ID: 236, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoGlMakeImageHandleNonResidentNV = builder.FunctionInfo{ID: 237, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlMakeImageHandleResidentNV = builder.FunctionInfo{ID: 238, ReturnType: protocol.TypeVoid, Parameters: 2}
@@ -460,8 +460,8 @@ var funcInfoGlGetFramebufferParameteriv = builder.FunctionInfo{ID: 425, ReturnTy
 var funcInfoGlGetRenderbufferParameteriv = builder.FunctionInfo{ID: 426, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlInvalidateFramebuffer = builder.FunctionInfo{ID: 427, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlInvalidateSubFramebuffer = builder.FunctionInfo{ID: 428, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlIsFramebuffer = builder.FunctionInfo{ID: 429, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsRenderbuffer = builder.FunctionInfo{ID: 430, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsFramebuffer = builder.FunctionInfo{ID: 429, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsRenderbuffer = builder.FunctionInfo{ID: 430, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlReadBuffer = builder.FunctionInfo{ID: 431, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlReadPixels = builder.FunctionInfo{ID: 432, ReturnType: protocol.TypeVoid, Parameters: 7}
 var funcInfoGlRenderbufferStorage = builder.FunctionInfo{ID: 433, ReturnType: protocol.TypeVoid, Parameters: 4}
@@ -518,9 +518,9 @@ var funcInfoGlGetUniformLocation = builder.FunctionInfo{ID: 483, ReturnType: pro
 var funcInfoGlGetUniformfv = builder.FunctionInfo{ID: 484, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetUniformiv = builder.FunctionInfo{ID: 485, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetUniformuiv = builder.FunctionInfo{ID: 486, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsProgram = builder.FunctionInfo{ID: 487, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsProgramPipeline = builder.FunctionInfo{ID: 488, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsShader = builder.FunctionInfo{ID: 489, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsProgram = builder.FunctionInfo{ID: 487, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsProgramPipeline = builder.FunctionInfo{ID: 488, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsShader = builder.FunctionInfo{ID: 489, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlLinkProgram = builder.FunctionInfo{ID: 490, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlMemoryBarrier = builder.FunctionInfo{ID: 491, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlMemoryBarrierByRegion = builder.FunctionInfo{ID: 492, ReturnType: protocol.TypeVoid, Parameters: 1}
@@ -617,12 +617,12 @@ var funcInfoGlGetIntegerv = builder.FunctionInfo{ID: 582, ReturnType: protocol.T
 var funcInfoGlGetInternalformativ = builder.FunctionInfo{ID: 583, ReturnType: protocol.TypeVoid, Parameters: 5}
 var funcInfoGlGetString = builder.FunctionInfo{ID: 584, ReturnType: protocol.TypeVolatilePointer, Parameters: 1}
 var funcInfoGlGetStringi = builder.FunctionInfo{ID: 585, ReturnType: protocol.TypeVolatilePointer, Parameters: 2}
-var funcInfoGlIsEnabled = builder.FunctionInfo{ID: 586, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsEnabled = builder.FunctionInfo{ID: 586, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlClientWaitSync = builder.FunctionInfo{ID: 587, ReturnType: protocol.TypeUint32, Parameters: 3}
 var funcInfoGlDeleteSync = builder.FunctionInfo{ID: 588, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlFenceSync = builder.FunctionInfo{ID: 589, ReturnType: protocol.TypeUint64, Parameters: 2}
 var funcInfoGlGetSynciv = builder.FunctionInfo{ID: 590, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlIsSync = builder.FunctionInfo{ID: 591, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsSync = builder.FunctionInfo{ID: 591, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlWaitSync = builder.FunctionInfo{ID: 592, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlActiveTexture = builder.FunctionInfo{ID: 593, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoGlBindImageTexture = builder.FunctionInfo{ID: 594, ReturnType: protocol.TypeVoid, Parameters: 7}
@@ -646,8 +646,8 @@ var funcInfoGlGetTexLevelParameterfv = builder.FunctionInfo{ID: 611, ReturnType:
 var funcInfoGlGetTexLevelParameteriv = builder.FunctionInfo{ID: 612, ReturnType: protocol.TypeVoid, Parameters: 4}
 var funcInfoGlGetTexParameterfv = builder.FunctionInfo{ID: 613, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetTexParameteriv = builder.FunctionInfo{ID: 614, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsSampler = builder.FunctionInfo{ID: 615, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlIsTexture = builder.FunctionInfo{ID: 616, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsSampler = builder.FunctionInfo{ID: 615, ReturnType: protocol.TypeUint8, Parameters: 1}
+var funcInfoGlIsTexture = builder.FunctionInfo{ID: 616, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlPixelStorei = builder.FunctionInfo{ID: 617, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlSamplerParameterf = builder.FunctionInfo{ID: 618, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlSamplerParameterfv = builder.FunctionInfo{ID: 619, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -670,7 +670,7 @@ var funcInfoGlDeleteTransformFeedbacks = builder.FunctionInfo{ID: 635, ReturnTyp
 var funcInfoGlEndTransformFeedback = builder.FunctionInfo{ID: 636, ReturnType: protocol.TypeVoid, Parameters: 0}
 var funcInfoGlGenTransformFeedbacks = builder.FunctionInfo{ID: 637, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlGetTransformFeedbackVarying = builder.FunctionInfo{ID: 638, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlIsTransformFeedback = builder.FunctionInfo{ID: 639, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsTransformFeedback = builder.FunctionInfo{ID: 639, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlPauseTransformFeedback = builder.FunctionInfo{ID: 640, ReturnType: protocol.TypeVoid, Parameters: 0}
 var funcInfoGlResumeTransformFeedback = builder.FunctionInfo{ID: 641, ReturnType: protocol.TypeVoid, Parameters: 0}
 var funcInfoGlTransformFeedbackVaryings = builder.FunctionInfo{ID: 642, ReturnType: protocol.TypeVoid, Parameters: 4}
@@ -685,7 +685,7 @@ var funcInfoGlGetVertexAttribIuiv = builder.FunctionInfo{ID: 650, ReturnType: pr
 var funcInfoGlGetVertexAttribPointerv = builder.FunctionInfo{ID: 651, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetVertexAttribfv = builder.FunctionInfo{ID: 652, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetVertexAttribiv = builder.FunctionInfo{ID: 653, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlIsVertexArray = builder.FunctionInfo{ID: 654, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlIsVertexArray = builder.FunctionInfo{ID: 654, ReturnType: protocol.TypeUint8, Parameters: 1}
 var funcInfoGlVertexAttrib1f = builder.FunctionInfo{ID: 655, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlVertexAttrib1fv = builder.FunctionInfo{ID: 656, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlVertexAttrib2f = builder.FunctionInfo{ID: 657, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -8464,7 +8464,7 @@ func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ctx.Rasterizing.SampleCoverageValue = ϟa.Value
 	ctx.Rasterizing.SampleCoverageInvert = ϟa.Invert
 	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.Bool(ϟa.Invert))
+	ϟb.Push(ϟa.Invert.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSampleCoverage)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_499_major, minRequiredVersion_499_minor, context, GetContext_500_result, ctx
@@ -8975,10 +8975,10 @@ func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ctx.Rasterizing.ColorMaskGreen = ϟa.Green
 	ctx.Rasterizing.ColorMaskBlue = ϟa.Blue
 	ctx.Rasterizing.ColorMaskAlpha = ϟa.Alpha
-	ϟb.Push(value.Bool(ϟa.Red))
-	ϟb.Push(value.Bool(ϟa.Green))
-	ϟb.Push(value.Bool(ϟa.Blue))
-	ϟb.Push(value.Bool(ϟa.Alpha))
+	ϟb.Push(ϟa.Red.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Green.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Blue.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Alpha.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlColorMask)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_547_major, minRequiredVersion_547_minor, context, GetContext_548_result, ctx
@@ -9040,7 +9040,7 @@ func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	GetContext_554_result := context             // Contextʳ
 	ctx := GetContext_554_result                 // Contextʳ
 	ctx.Rasterizing.DepthMask = ϟa.Enabled
-	ϟb.Push(value.Bool(ϟa.Enabled))
+	ϟb.Push(ϟa.Enabled.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDepthMask)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	_, _, _, _, _ = minRequiredVersion_553_major, minRequiredVersion_553_minor, context, GetContext_554_result, ctx
@@ -13439,7 +13439,7 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 		v := ϟa.Param
 		return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
 	}
-	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // Boolˢ
+	v := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟa, ϟs, ϟd, ϟl, ϟb}.stateVariableSize(ϟa.Param)), ϟs) // GLbooleanˢ
 	context := ϟc.Contexts.Get(ϟc.CurrentThread)                                                                // Contextʳ
 	GetContext_855_result := context                                                                            // Contextʳ
 	ctx := GetContext_855_result                                                                                // Contextʳ
@@ -13449,23 +13449,77 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	switch ϟa.Param {
 	case GLenum_GL_BLEND:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_BLEND), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_BLEND) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_CULL_FACE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_CULL_FACE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_CULL_FACE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DEPTH_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DEPTH_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_DEPTH_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DITHER:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_DITHER), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_DITHER) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_POLYGON_OFFSET_FILL:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_POLYGON_OFFSET_FILL), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_POLYGON_OFFSET_FILL) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SAMPLE_ALPHA_TO_COVERAGE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SAMPLE_COVERAGE:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SAMPLE_COVERAGE), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SAMPLE_COVERAGE) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_SCISSOR_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_SCISSOR_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_SCISSOR_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_STENCIL_TEST:
-		v.Index(uint64(0), ϟs).Write(ctx.Capabilities.Get(GLenum_GL_STENCIL_TEST), ϟa, ϟs, ϟd, ϟl, ϟb)
+		v.Index(uint64(0), ϟs).Write(func() GLboolean {
+			if ctx.Capabilities.Get(GLenum_GL_STENCIL_TEST) {
+				return 1
+			} else {
+				return 0
+			}
+		}(), ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_DEPTH_WRITEMASK:
 		v.Index(uint64(0), ϟs).Write(ctx.Rasterizing.DepthMask, ϟa, ϟs, ϟd, ϟl, ϟb)
 	case GLenum_GL_COLOR_WRITEMASK:
@@ -16390,7 +16444,7 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(value.Bool(ϟa.Normalized))
+	ϟb.Push(ϟa.Normalized.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribPointer)
@@ -16926,13 +16980,6 @@ func (p Mat4fᵖ) value() value.Pointer {
 	}
 }
 func (p GLbooleanᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Boolᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {

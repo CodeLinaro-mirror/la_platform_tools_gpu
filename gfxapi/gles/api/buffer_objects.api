@@ -304,11 +304,11 @@ cmd void glGetBufferPointerv(GLenum target, GLenum pname, void** params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsBuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsBuffer.xhtml","OpenGL ES 3.1")
-cmd bool glIsBuffer(BufferId buffer) {
+cmd GLboolean glIsBuffer(BufferId buffer) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  return buffer in ctx.Instances.Buffers
+  return as!GLboolean(buffer in ctx.Instances.Buffers)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml","OpenGL ES 3.0")

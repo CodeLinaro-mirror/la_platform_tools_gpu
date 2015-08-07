@@ -5803,7 +5803,7 @@ struct VertexAttributeArray {
         mType = v;
         return *this;
     }
-    inline VertexAttributeArray& SetNormalized(bool v) {
+    inline VertexAttributeArray& SetNormalized(GLboolean v) {
         mNormalized = v;
         return *this;
     }
@@ -5823,7 +5823,7 @@ struct VertexAttributeArray {
     bool mEnabled;
     uint32_t mSize;
     uint32_t mType;
-    bool mNormalized;
+    GLboolean mNormalized;
     GLsizei mStride;
     BufferId mBuffer;
     VertexPointer mPointer;
@@ -5958,7 +5958,7 @@ struct Rect {
 };
 
 struct RasterizerState {
-    inline RasterizerState& SetDepthMask(bool v) {
+    inline RasterizerState& SetDepthMask(GLboolean v) {
         mDepthMask = v;
         return *this;
     }
@@ -5974,19 +5974,19 @@ struct RasterizerState {
         mDepthFar = v;
         return *this;
     }
-    inline RasterizerState& SetColorMaskRed(bool v) {
+    inline RasterizerState& SetColorMaskRed(GLboolean v) {
         mColorMaskRed = v;
         return *this;
     }
-    inline RasterizerState& SetColorMaskGreen(bool v) {
+    inline RasterizerState& SetColorMaskGreen(GLboolean v) {
         mColorMaskGreen = v;
         return *this;
     }
-    inline RasterizerState& SetColorMaskBlue(bool v) {
+    inline RasterizerState& SetColorMaskBlue(GLboolean v) {
         mColorMaskBlue = v;
         return *this;
     }
-    inline RasterizerState& SetColorMaskAlpha(bool v) {
+    inline RasterizerState& SetColorMaskAlpha(GLboolean v) {
         mColorMaskAlpha = v;
         return *this;
     }
@@ -6026,19 +6026,19 @@ struct RasterizerState {
         mSampleCoverageValue = v;
         return *this;
     }
-    inline RasterizerState& SetSampleCoverageInvert(bool v) {
+    inline RasterizerState& SetSampleCoverageInvert(GLboolean v) {
         mSampleCoverageInvert = v;
         return *this;
     }
 
-    bool mDepthMask;
+    GLboolean mDepthMask;
     uint32_t mDepthTestFunction;
     GLfloat mDepthNear;
     GLfloat mDepthFar;
-    bool mColorMaskRed;
-    bool mColorMaskGreen;
-    bool mColorMaskBlue;
-    bool mColorMaskAlpha;
+    GLboolean mColorMaskRed;
+    GLboolean mColorMaskGreen;
+    GLboolean mColorMaskBlue;
+    GLboolean mColorMaskAlpha;
     GLenumToGLuint mStencilMask;
     Rect mViewport;
     Rect mScissor;
@@ -6048,7 +6048,7 @@ struct RasterizerState {
     GLfloat mPolygonOffsetFactor;
     GLfloat mPolygonOffsetUnits;
     GLfloat mSampleCoverageValue;
-    bool mSampleCoverageInvert;
+    GLboolean mSampleCoverageInvert;
 };
 
 struct ClearState {

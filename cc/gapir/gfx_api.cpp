@@ -526,10 +526,10 @@ bool callGlIsEnablediEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsEnablediEXT(%u, %" PRIu32 ")\n", target, index);
         if (glIsEnablediEXT != nullptr) {
-            bool return_value = glIsEnablediEXT(target, index);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsEnablediEXT(target, index);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -999,10 +999,10 @@ bool callGlIsQuery(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsQuery(%" PRIu32 ")\n", query);
         if (glIsQuery != nullptr) {
-            bool return_value = glIsQuery(query);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsQuery(query);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -1271,10 +1271,10 @@ bool callGlIsBuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsBuffer(%" PRIu32 ")\n", buffer);
         if (glIsBuffer != nullptr) {
-            bool return_value = glIsBuffer(buffer);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsBuffer(buffer);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5323,10 +5323,10 @@ bool callGlIsEnablediOES(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsEnablediOES(%u, %" PRIu32 ")\n", target, index);
         if (glIsEnablediOES != nullptr) {
-            bool return_value = glIsEnablediOES(target, index);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsEnablediOES(target, index);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5348,10 +5348,10 @@ bool callGlIsEnablediNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsEnablediNV(%u, %" PRIu32 ")\n", target, index);
         if (glIsEnablediNV != nullptr) {
-            bool return_value = glIsEnablediNV(target, index);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsEnablediNV(target, index);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5372,10 +5372,10 @@ bool callGlIsFenceNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsFenceNV(%" PRIu32 ")\n", fence);
         if (glIsFenceNV != nullptr) {
-            bool return_value = glIsFenceNV(fence);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsFenceNV(fence);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5396,10 +5396,10 @@ bool callGlIsImageHandleResidentNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsImageHandleResidentNV(%" PRIu64 ")\n", handle);
         if (glIsImageHandleResidentNV != nullptr) {
-            bool return_value = glIsImageHandleResidentNV(handle);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsImageHandleResidentNV(handle);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5420,10 +5420,10 @@ bool callGlIsPathNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsPathNV(%" PRIu32 ")\n", path);
         if (glIsPathNV != nullptr) {
-            bool return_value = glIsPathNV(path);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsPathNV(path);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5447,10 +5447,10 @@ bool callGlIsPointInFillPathNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsPointInFillPathNV(%" PRIu32 ", %" PRIu32 ", %f, %f)\n", path, mask, x, y);
         if (glIsPointInFillPathNV != nullptr) {
-            bool return_value = glIsPointInFillPathNV(path, mask, x, y);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsPointInFillPathNV(path, mask, x, y);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5473,10 +5473,10 @@ bool callGlIsPointInStrokePathNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsPointInStrokePathNV(%" PRIu32 ", %f, %f)\n", path, x, y);
         if (glIsPointInStrokePathNV != nullptr) {
-            bool return_value = glIsPointInStrokePathNV(path, x, y);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsPointInStrokePathNV(path, x, y);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5497,10 +5497,10 @@ bool callGlIsProgramPipelineEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsProgramPipelineEXT(%" PRIu32 ")\n", pipeline);
         if (glIsProgramPipelineEXT != nullptr) {
-            bool return_value = glIsProgramPipelineEXT(pipeline);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsProgramPipelineEXT(pipeline);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5521,10 +5521,10 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsQueryEXT(%" PRIu32 ")\n", query);
         if (glIsQueryEXT != nullptr) {
-            bool return_value = glIsQueryEXT(query);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsQueryEXT(query);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5545,10 +5545,10 @@ bool callGlIsSyncAPPLE(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsSyncAPPLE(%" PRIu64 ")\n", sync);
         if (glIsSyncAPPLE != nullptr) {
-            bool return_value = glIsSyncAPPLE(sync);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsSyncAPPLE(sync);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5569,10 +5569,10 @@ bool callGlIsTextureHandleResidentNV(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsTextureHandleResidentNV(%" PRIu64 ")\n", handle);
         if (glIsTextureHandleResidentNV != nullptr) {
-            bool return_value = glIsTextureHandleResidentNV(handle);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsTextureHandleResidentNV(handle);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -5593,10 +5593,10 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsVertexArrayOES(%" PRIu32 ")\n", array);
         if (glIsVertexArrayOES != nullptr) {
-            bool return_value = glIsVertexArrayOES(array);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsVertexArrayOES(array);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -9515,10 +9515,10 @@ bool callGlDepthFunc(Stack* stack, bool pushReturn) {
 }
 
 bool callGlSampleCoverage(Stack* stack, bool pushReturn) {
-    bool invert = stack->pop<bool>();
+    uint8_t invert = stack->pop<uint8_t>();
     float value = stack->pop<float>();
     if (stack->isValid()) {
-        GAPID_INFO("glSampleCoverage(%f, %d)\n", value, invert);
+        GAPID_INFO("glSampleCoverage(%f, %" PRIu8 ")\n", value, invert);
         if (glSampleCoverage != nullptr) {
             glSampleCoverage(value, invert);
             const GLenum err = glGetError();
@@ -9944,12 +9944,13 @@ bool callGlClearStencil(Stack* stack, bool pushReturn) {
 }
 
 bool callGlColorMask(Stack* stack, bool pushReturn) {
-    bool alpha = stack->pop<bool>();
-    bool blue = stack->pop<bool>();
-    bool green = stack->pop<bool>();
-    bool red = stack->pop<bool>();
+    uint8_t alpha = stack->pop<uint8_t>();
+    uint8_t blue = stack->pop<uint8_t>();
+    uint8_t green = stack->pop<uint8_t>();
+    uint8_t red = stack->pop<uint8_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glColorMask(%d, %d, %d, %d)\n", red, green, blue, alpha);
+        GAPID_INFO("glColorMask(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")\n", red, green,
+                   blue, alpha);
         if (glColorMask != nullptr) {
             glColorMask(red, green, blue, alpha);
             const GLenum err = glGetError();
@@ -10009,9 +10010,9 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDepthMask(Stack* stack, bool pushReturn) {
-    bool enabled = stack->pop<bool>();
+    uint8_t enabled = stack->pop<uint8_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glDepthMask(%d)\n", enabled);
+        GAPID_INFO("glDepthMask(%" PRIu8 ")\n", enabled);
         if (glDepthMask != nullptr) {
             glDepthMask(enabled);
             const GLenum err = glGetError();
@@ -10293,10 +10294,10 @@ bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsFramebuffer(%" PRIu32 ")\n", framebuffer);
         if (glIsFramebuffer != nullptr) {
-            bool return_value = glIsFramebuffer(framebuffer);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsFramebuffer(framebuffer);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -10317,10 +10318,10 @@ bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsRenderbuffer(%" PRIu32 ")\n", renderbuffer);
         if (glIsRenderbuffer != nullptr) {
-            bool return_value = glIsRenderbuffer(renderbuffer);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsRenderbuffer(renderbuffer);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -11639,10 +11640,10 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsProgram(%" PRIu32 ")\n", program);
         if (glIsProgram != nullptr) {
-            bool return_value = glIsProgram(program);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsProgram(program);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -11663,10 +11664,10 @@ bool callGlIsProgramPipeline(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsProgramPipeline(%" PRIu32 ")\n", pipeline);
         if (glIsProgramPipeline != nullptr) {
-            bool return_value = glIsProgramPipeline(pipeline);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsProgramPipeline(pipeline);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -11687,10 +11688,10 @@ bool callGlIsShader(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsShader(%" PRIu32 ")\n", shader);
         if (glIsShader != nullptr) {
-            bool return_value = glIsShader(shader);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsShader(shader);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -13732,7 +13733,7 @@ bool callGlGetBooleaniV(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
-    bool* values = stack->pop<bool*>();
+    uint8_t* values = stack->pop<uint8_t*>();
     GLenum param = stack->pop<GLenum>();
     if (stack->isValid()) {
         GAPID_INFO("glGetBooleanv(%u, %p)\n", param, values);
@@ -13938,10 +13939,10 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsEnabled(%u)\n", capability);
         if (glIsEnabled != nullptr) {
-            bool return_value = glIsEnabled(capability);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsEnabled(capability);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -14058,10 +14059,10 @@ bool callGlIsSync(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsSync(%" PRIu64 ")\n", sync);
         if (glIsSync != nullptr) {
-            bool return_value = glIsSync(sync);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsSync(sync);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -14647,10 +14648,10 @@ bool callGlIsSampler(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsSampler(%" PRIu32 ")\n", sampler);
         if (glIsSampler != nullptr) {
-            bool return_value = glIsSampler(sampler);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsSampler(sampler);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -14671,10 +14672,10 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsTexture(%" PRIu32 ")\n", texture);
         if (glIsTexture != nullptr) {
-            bool return_value = glIsTexture(texture);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsTexture(texture);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -15228,10 +15229,10 @@ bool callGlIsTransformFeedback(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsTransformFeedback(%" PRIu32 ")\n", id);
         if (glIsTransformFeedback != nullptr) {
-            bool return_value = glIsTransformFeedback(id);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsTransformFeedback(id);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -15550,10 +15551,10 @@ bool callGlIsVertexArray(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glIsVertexArray(%" PRIu32 ")\n", array);
         if (glIsVertexArray != nullptr) {
-            bool return_value = glIsVertexArray(array);
-            GAPID_INFO("Returned: %d\n", return_value);
+            uint8_t return_value = glIsVertexArray(array);
+            GAPID_INFO("Returned: %" PRIu8 "\n", return_value);
             if (pushReturn) {
-                stack->push<bool>(return_value);
+                stack->push<uint8_t>(return_value);
             }
             const GLenum err = glGetError();
             if (err != GLenum::GL_NO_ERROR) {
@@ -15957,12 +15958,13 @@ bool callGlVertexAttribIPointer(Stack* stack, bool pushReturn) {
 bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     int32_t stride = stack->pop<int32_t>();
-    bool normalized = stack->pop<bool>();
+    uint8_t normalized = stack->pop<uint8_t>();
     GLenum type = stack->pop<GLenum>();
     int32_t size = stack->pop<int32_t>();
     uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %d, %" PRId32 ", %p)\n",
+        GAPID_INFO("glVertexAttribPointer(%" PRIu32 ", %" PRId32 ", %u, %" PRIu8 ", %" PRId32
+                   ", %p)\n",
                    location, size, type, normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);

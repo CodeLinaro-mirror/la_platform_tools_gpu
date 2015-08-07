@@ -639,15 +639,15 @@ cmd void glGetUniformuiv(ProgramId program, UniformLocation location, GLuint* pa
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsProgram.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsProgram.xhtml","OpenGL ES 3.1")
-cmd bool glIsProgram(ProgramId program) {
+cmd GLboolean glIsProgram(ProgramId program) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  return program in ctx.Instances.Programs
+  return as!GLboolean(program in ctx.Instances.Programs)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsProgramPipeline.xhtml","OpenGL ES 3.1")
-cmd bool glIsProgramPipeline(PipelineId pipeline) {
+cmd GLboolean glIsProgramPipeline(PipelineId pipeline) {
   minRequiredVersion(3, 1)
   // TODO
   return ?
@@ -656,11 +656,11 @@ cmd bool glIsProgramPipeline(PipelineId pipeline) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glIsShader.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsShader.xhtml","OpenGL ES 3.1")
-cmd bool glIsShader(ShaderId shader) {
+cmd GLboolean glIsShader(ShaderId shader) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
-  return shader in ctx.Instances.Shaders
+  return as!GLboolean(shader in ctx.Instances.Shaders)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml","OpenGL ES 2.0")

@@ -6461,7 +6461,7 @@ typedef void(STDCALL *PFNGLGETSAMPLERPARAMETERIUIVEXT)(uint32_t sampler, GLenum 
                                                        uint32_t *params);
 typedef void(STDCALL *PFNGLGETTEXPARAMETERIIVEXT)(GLenum target, GLenum pname, int32_t *params);
 typedef void(STDCALL *PFNGLGETTEXPARAMETERIUIVEXT)(GLenum target, GLenum pname, uint32_t *params);
-typedef bool(STDCALL *PFNGLISENABLEDIEXT)(GLenum target, uint32_t index);
+typedef uint8_t(STDCALL *PFNGLISENABLEDIEXT)(GLenum target, uint32_t index);
 typedef void(STDCALL *PFNGLMINSAMPLESHADINGOES)(float value);
 typedef void(STDCALL *PFNGLOBJECTLABELKHR)(GLenum identifier, uint32_t name, int32_t length,
                                            char *label);
@@ -6490,7 +6490,7 @@ typedef void(STDCALL *PFNGLENDQUERY)(GLenum target);
 typedef void(STDCALL *PFNGLGENQUERIES)(int32_t count, uint32_t *queries);
 typedef void(STDCALL *PFNGLGETQUERYOBJECTUIV)(uint32_t query, GLenum parameter, uint32_t *value);
 typedef void(STDCALL *PFNGLGETQUERYIV)(GLenum target, GLenum parameter, int32_t *value);
-typedef bool(STDCALL *PFNGLISQUERY)(uint32_t query);
+typedef uint8_t(STDCALL *PFNGLISQUERY)(uint32_t query);
 typedef void(STDCALL *PFNGLBINDBUFFER)(GLenum target, uint32_t buffer);
 typedef void(STDCALL *PFNGLBINDBUFFERBASE)(GLenum target, uint32_t index, uint32_t buffer);
 typedef void(STDCALL *PFNGLBINDBUFFERRANGE)(GLenum target, uint32_t index, uint32_t buffer,
@@ -6505,7 +6505,7 @@ typedef void(STDCALL *PFNGLGENBUFFERS)(int32_t count, uint32_t *buffers);
 typedef void(STDCALL *PFNGLGETBUFFERPARAMETERI64V)(GLenum target, GLenum pname, int64_t *params);
 typedef void(STDCALL *PFNGLGETBUFFERPARAMETERIV)(GLenum target, GLenum parameter, int32_t *value);
 typedef void(STDCALL *PFNGLGETBUFFERPOINTERV)(GLenum target, GLenum pname, void **params);
-typedef bool(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
+typedef uint8_t(STDCALL *PFNGLISBUFFER)(uint32_t buffer);
 typedef void *(STDCALL *PFNGLMAPBUFFERRANGE)(GLenum target, int32_t offset, int32_t length,
                                              GLbitfield access);
 typedef uint8_t(STDCALL *PFNGLUNMAPBUFFER)(GLenum target);
@@ -6812,18 +6812,18 @@ typedef void(STDCALL *PFNGLGETNUNIFORMUIVKHR)(uint32_t program, int32_t location
 typedef void(STDCALL *PFNGLINSERTEVENTMARKEREXT)(int32_t length, char *marker);
 typedef void(STDCALL *PFNGLINTERPOLATEPATHSNV)(uint32_t resultPath, uint32_t pathA, uint32_t pathB,
                                                float weight);
-typedef bool(STDCALL *PFNGLISENABLEDIOES)(GLenum target, uint32_t index);
-typedef bool(STDCALL *PFNGLISENABLEDINV)(GLenum target, uint32_t index);
-typedef bool(STDCALL *PFNGLISFENCENV)(uint32_t fence);
-typedef bool(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
-typedef bool(STDCALL *PFNGLISPATHNV)(uint32_t path);
-typedef bool(STDCALL *PFNGLISPOINTINFILLPATHNV)(uint32_t path, uint32_t mask, float x, float y);
-typedef bool(STDCALL *PFNGLISPOINTINSTROKEPATHNV)(uint32_t path, float x, float y);
-typedef bool(STDCALL *PFNGLISPROGRAMPIPELINEEXT)(uint32_t pipeline);
-typedef bool(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
-typedef bool(STDCALL *PFNGLISSYNCAPPLE)(uint64_t sync);
-typedef bool(STDCALL *PFNGLISTEXTUREHANDLERESIDENTNV)(uint64_t handle);
-typedef bool(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
+typedef uint8_t(STDCALL *PFNGLISENABLEDIOES)(GLenum target, uint32_t index);
+typedef uint8_t(STDCALL *PFNGLISENABLEDINV)(GLenum target, uint32_t index);
+typedef uint8_t(STDCALL *PFNGLISFENCENV)(uint32_t fence);
+typedef uint8_t(STDCALL *PFNGLISIMAGEHANDLERESIDENTNV)(uint64_t handle);
+typedef uint8_t(STDCALL *PFNGLISPATHNV)(uint32_t path);
+typedef uint8_t(STDCALL *PFNGLISPOINTINFILLPATHNV)(uint32_t path, uint32_t mask, float x, float y);
+typedef uint8_t(STDCALL *PFNGLISPOINTINSTROKEPATHNV)(uint32_t path, float x, float y);
+typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINEEXT)(uint32_t pipeline);
+typedef uint8_t(STDCALL *PFNGLISQUERYEXT)(uint32_t query);
+typedef uint8_t(STDCALL *PFNGLISSYNCAPPLE)(uint64_t sync);
+typedef uint8_t(STDCALL *PFNGLISTEXTUREHANDLERESIDENTNV)(uint64_t handle);
+typedef uint8_t(STDCALL *PFNGLISVERTEXARRAYOES)(uint32_t array);
 typedef void(STDCALL *PFNGLLABELOBJECTEXT)(GLenum type, uint32_t object, int32_t length,
                                            char *label);
 typedef void(STDCALL *PFNGLMAKEIMAGEHANDLENONRESIDENTNV)(uint64_t handle);
@@ -7128,7 +7128,7 @@ typedef void(STDCALL *PFNGLBLENDFUNC)(GLenum src_factor, GLenum dst_factor);
 typedef void(STDCALL *PFNGLBLENDFUNCSEPARATE)(GLenum src_factor_rgb, GLenum dst_factor_rgb,
                                               GLenum src_factor_alpha, GLenum dst_factor_alpha);
 typedef void(STDCALL *PFNGLDEPTHFUNC)(GLenum function);
-typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, bool invert);
+typedef void(STDCALL *PFNGLSAMPLECOVERAGE)(float value, uint8_t invert);
 typedef void(STDCALL *PFNGLSAMPLEMASKI)(uint32_t maskNumber, GLbitfield mask);
 typedef void(STDCALL *PFNGLSCISSOR)(int32_t x, int32_t y, int32_t width, int32_t height);
 typedef void(STDCALL *PFNGLSTENCILFUNC)(GLenum func, int32_t ref, uint32_t mask);
@@ -7154,10 +7154,10 @@ typedef void(STDCALL *PFNGLCLEARBUFFERUIV)(GLenum buffer, int32_t drawbuffer, ui
 typedef void(STDCALL *PFNGLCLEARCOLOR)(float r, float g, float b, float a);
 typedef void(STDCALL *PFNGLCLEARDEPTHF)(float depth);
 typedef void(STDCALL *PFNGLCLEARSTENCIL)(int32_t stencil);
-typedef void(STDCALL *PFNGLCOLORMASK)(bool red, bool green, bool blue, bool alpha);
+typedef void(STDCALL *PFNGLCOLORMASK)(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERS)(int32_t count, uint32_t *framebuffers);
 typedef void(STDCALL *PFNGLDELETERENDERBUFFERS)(int32_t count, uint32_t *renderbuffers);
-typedef void(STDCALL *PFNGLDEPTHMASK)(bool enabled);
+typedef void(STDCALL *PFNGLDEPTHMASK)(uint8_t enabled);
 typedef void(STDCALL *PFNGLFRAMEBUFFERPARAMETERI)(GLenum target, GLenum pname, int32_t param);
 typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFER)(GLenum framebuffer_target,
                                                     GLenum framebuffer_attachment,
@@ -7182,8 +7182,8 @@ typedef void(STDCALL *PFNGLINVALIDATEFRAMEBUFFER)(GLenum target, int32_t count,
 typedef void(STDCALL *PFNGLINVALIDATESUBFRAMEBUFFER)(GLenum target, int32_t numAttachments,
                                                      GLenum *attachments, int32_t x, int32_t y,
                                                      int32_t width, int32_t height);
-typedef bool(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
-typedef bool(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
+typedef uint8_t(STDCALL *PFNGLISFRAMEBUFFER)(uint32_t framebuffer);
+typedef uint8_t(STDCALL *PFNGLISRENDERBUFFER)(uint32_t renderbuffer);
 typedef void(STDCALL *PFNGLREADBUFFER)(GLenum src);
 typedef void(STDCALL *PFNGLREADPIXELS)(int32_t x, int32_t y, int32_t width, int32_t height,
                                        GLenum format, GLenum type, void *data);
@@ -7270,9 +7270,9 @@ typedef int32_t(STDCALL *PFNGLGETUNIFORMLOCATION)(uint32_t program, char *name);
 typedef void(STDCALL *PFNGLGETUNIFORMFV)(uint32_t program, int32_t location, float *values);
 typedef void(STDCALL *PFNGLGETUNIFORMIV)(uint32_t program, int32_t location, int32_t *values);
 typedef void(STDCALL *PFNGLGETUNIFORMUIV)(uint32_t program, int32_t location, uint32_t *params);
-typedef bool(STDCALL *PFNGLISPROGRAM)(uint32_t program);
-typedef bool(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
-typedef bool(STDCALL *PFNGLISSHADER)(uint32_t shader);
+typedef uint8_t(STDCALL *PFNGLISPROGRAM)(uint32_t program);
+typedef uint8_t(STDCALL *PFNGLISPROGRAMPIPELINE)(uint32_t pipeline);
+typedef uint8_t(STDCALL *PFNGLISSHADER)(uint32_t shader);
 typedef void(STDCALL *PFNGLLINKPROGRAM)(uint32_t program);
 typedef void(STDCALL *PFNGLMEMORYBARRIER)(GLbitfield barriers);
 typedef void(STDCALL *PFNGLMEMORYBARRIERBYREGION)(GLbitfield barriers);
@@ -7414,7 +7414,7 @@ typedef void(STDCALL *PFNGLLINEWIDTH)(float width);
 typedef void(STDCALL *PFNGLPOLYGONOFFSET)(float scale_factor, float units);
 typedef void(STDCALL *PFNGLVIEWPORT)(int32_t x, int32_t y, int32_t width, int32_t height);
 typedef void(STDCALL *PFNGLGETBOOLEANI_V)(GLenum target, uint32_t index, uint8_t *data);
-typedef void(STDCALL *PFNGLGETBOOLEANV)(GLenum param, bool *values);
+typedef void(STDCALL *PFNGLGETBOOLEANV)(GLenum param, uint8_t *values);
 typedef void(STDCALL *PFNGLGETFLOATV)(GLenum param, float *values);
 typedef void(STDCALL *PFNGLGETINTEGER64I_V)(GLenum target, uint32_t index, int64_t *data);
 typedef void(STDCALL *PFNGLGETINTEGER64V)(GLenum pname, int64_t *data);
@@ -7424,13 +7424,13 @@ typedef void(STDCALL *PFNGLGETINTERNALFORMATIV)(GLenum target, GLenum internalfo
                                                 int32_t bufSize, int32_t *params);
 typedef uint8_t *(STDCALL *PFNGLGETSTRING)(GLenum param);
 typedef uint8_t *(STDCALL *PFNGLGETSTRINGI)(GLenum name, uint32_t index);
-typedef bool(STDCALL *PFNGLISENABLED)(GLenum capability);
+typedef uint8_t(STDCALL *PFNGLISENABLED)(GLenum capability);
 typedef GLenum(STDCALL *PFNGLCLIENTWAITSYNC)(uint64_t sync, GLbitfield syncFlags, uint64_t timeout);
 typedef void(STDCALL *PFNGLDELETESYNC)(uint64_t sync);
 typedef uint64_t(STDCALL *PFNGLFENCESYNC)(GLenum condition, GLbitfield syncFlags);
 typedef void(STDCALL *PFNGLGETSYNCIV)(uint64_t sync, GLenum pname, int32_t bufSize, int32_t *length,
                                       int32_t *values);
-typedef bool(STDCALL *PFNGLISSYNC)(uint64_t sync);
+typedef uint8_t(STDCALL *PFNGLISSYNC)(uint64_t sync);
 typedef void(STDCALL *PFNGLWAITSYNC)(uint64_t sync, GLbitfield syncFlags, uint64_t timeout);
 typedef void(STDCALL *PFNGLACTIVETEXTURE)(GLenum unit);
 typedef void(STDCALL *PFNGLBINDIMAGETEXTURE)(uint32_t unit, uint32_t texture, int32_t level,
@@ -7474,8 +7474,8 @@ typedef void(STDCALL *PFNGLGETTEXLEVELPARAMETERIV)(GLenum target, int32_t level,
                                                    int32_t *params);
 typedef void(STDCALL *PFNGLGETTEXPARAMETERFV)(GLenum target, GLenum parameter, float *values);
 typedef void(STDCALL *PFNGLGETTEXPARAMETERIV)(GLenum target, GLenum parameter, int32_t *values);
-typedef bool(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
-typedef bool(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
+typedef uint8_t(STDCALL *PFNGLISSAMPLER)(uint32_t sampler);
+typedef uint8_t(STDCALL *PFNGLISTEXTURE)(uint32_t texture);
 typedef void(STDCALL *PFNGLPIXELSTOREI)(GLenum parameter, int32_t value);
 typedef void(STDCALL *PFNGLSAMPLERPARAMETERF)(uint32_t sampler, GLenum pname, float param);
 typedef void(STDCALL *PFNGLSAMPLERPARAMETERFV)(uint32_t sampler, GLenum pname, float *param);
@@ -7513,7 +7513,7 @@ typedef void(STDCALL *PFNGLGENTRANSFORMFEEDBACKS)(int32_t n, uint32_t *ids);
 typedef void(STDCALL *PFNGLGETTRANSFORMFEEDBACKVARYING)(uint32_t program, uint32_t index,
                                                         int32_t bufSize, int32_t *length,
                                                         int32_t *size, GLenum *type, char *name);
-typedef bool(STDCALL *PFNGLISTRANSFORMFEEDBACK)(uint32_t id);
+typedef uint8_t(STDCALL *PFNGLISTRANSFORMFEEDBACK)(uint32_t id);
 typedef void(STDCALL *PFNGLPAUSETRANSFORMFEEDBACK)();
 typedef void(STDCALL *PFNGLRESUMETRANSFORMFEEDBACK)();
 typedef void(STDCALL *PFNGLTRANSFORMFEEDBACKVARYINGS)(uint32_t program, int32_t count,
@@ -7530,7 +7530,7 @@ typedef void(STDCALL *PFNGLGETVERTEXATTRIBIUIV)(uint32_t index, GLenum pname, ui
 typedef void(STDCALL *PFNGLGETVERTEXATTRIBPOINTERV)(uint32_t index, GLenum pname, void **pointer);
 typedef void(STDCALL *PFNGLGETVERTEXATTRIBFV)(uint32_t index, GLenum pname, float *params);
 typedef void(STDCALL *PFNGLGETVERTEXATTRIBIV)(uint32_t index, GLenum pname, int32_t *params);
-typedef bool(STDCALL *PFNGLISVERTEXARRAY)(uint32_t array);
+typedef uint8_t(STDCALL *PFNGLISVERTEXARRAY)(uint32_t array);
 typedef void(STDCALL *PFNGLVERTEXATTRIB1F)(uint32_t location, float value0);
 typedef void(STDCALL *PFNGLVERTEXATTRIB1FV)(uint32_t location, float *value);
 typedef void(STDCALL *PFNGLVERTEXATTRIB2F)(uint32_t location, float value0, float value1);
@@ -7556,7 +7556,7 @@ typedef void(STDCALL *PFNGLVERTEXATTRIBIFORMAT)(uint32_t attribindex, int32_t si
 typedef void(STDCALL *PFNGLVERTEXATTRIBIPOINTER)(uint32_t index, int32_t size, GLenum type,
                                                  int32_t stride, void *pointer);
 typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(uint32_t location, int32_t size, GLenum type,
-                                                bool normalized, int32_t stride, void *data);
+                                                uint8_t normalized, int32_t stride, void *data);
 typedef void(STDCALL *PFNGLVERTEXBINDINGDIVISOR)(uint32_t bindingindex, uint32_t divisor);
 typedef int(STDCALL *PFNEGLINITIALIZE)(void *dpy, int *major, int *minor);
 typedef void *(STDCALL *PFNEGLCREATECONTEXT)(void *display, void *config, void *share_context,

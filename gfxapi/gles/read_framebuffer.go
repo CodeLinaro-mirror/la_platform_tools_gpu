@@ -168,7 +168,7 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlUniform1i(uTextureLocation, GLint(origActiveTextureUnit)),
 			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0),
 			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0),
-			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, false, 0, memory.Tmp),
+			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, GLboolean(0), 0, memory.Tmp),
 			NewGlDrawArrays(GLenum_GL_TRIANGLE_STRIP, 0, 4).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, positions)),
 		)
