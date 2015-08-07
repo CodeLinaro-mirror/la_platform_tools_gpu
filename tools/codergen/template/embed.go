@@ -1028,10 +1028,10 @@ const java_binary_tmpl = `{{/*
   @Override @NotNull¶
   public BinaryClass klass() { return Klass.INSTANCE; }¶
   ¶
-  public static byte[] IDBytes = {
+  private static final byte[] IDBytes = {
     {{range .Struct.ID}}{{ToS8 .}}, {{end}}
   •};¶
-  public static BinaryID ID = new BinaryID(IDBytes);¶
+  public static final BinaryID ID = new BinaryID(IDBytes);¶
   ¶
   static {»¶
     Namespace.register(ID, Klass.INSTANCE);¶
@@ -1156,7 +1156,7 @@ const java_client_tmpl = `{{/*
 {{end}}
 
 {{define "Java.ClientRPC"}}
-  §{{$.Copyright}}§
+  §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
@@ -1167,7 +1167,7 @@ const java_client_tmpl = `{{/*
   {{Call "Java.Import" "com.google.common.util.concurrent.ListeningExecutorService"}}
   {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
-  public class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
+  public final class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
     private final Broadcaster myBroadcaster;¶
     private final ListeningExecutorService myExecutorService;¶
     ¶
@@ -1207,7 +1207,7 @@ const java_client_tmpl = `{{/*
 {{end}}
 
 {{define "Java.ClientWrapper"}}
-  §{{$.Copyright}}§
+  §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}

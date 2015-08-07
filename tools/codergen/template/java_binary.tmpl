@@ -122,10 +122,10 @@
   @Override @NotNull¶
   public BinaryClass klass() { return Klass.INSTANCE; }¶
   ¶
-  public static byte[] IDBytes = {
+  private static final byte[] IDBytes = {
     {{range .Struct.ID}}{{ToS8 .}}, {{end}}
   •};¶
-  public static BinaryID ID = new BinaryID(IDBytes);¶
+  public static final BinaryID ID = new BinaryID(IDBytes);¶
   ¶
   static {»¶
     Namespace.register(ID, Klass.INSTANCE);¶

@@ -54,7 +54,7 @@
 {{end}}
 
 {{define "Java.ClientRPC"}}
-  §{{$.Copyright}}§
+  §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
@@ -65,7 +65,7 @@
   {{Call "Java.Import" "com.google.common.util.concurrent.ListeningExecutorService"}}
   {{Call "Java.Import" "com.google.common.util.concurrent.ListenableFuture"}}
   ¶
-  public class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
+  public final class {{.Service.Name}}ClientRPC extends {{.Service.Name}}Client {»¶
     private final Broadcaster myBroadcaster;¶
     private final ListeningExecutorService myExecutorService;¶
     ¶
@@ -105,7 +105,7 @@
 {{end}}
 
 {{define "Java.ClientWrapper"}}
-  §{{$.Copyright}}§
+  §{{$.Copyright}}§¶
   package {{.JavaPackage}};¶
   ¶
   {{template "Java.Imports" .}}
