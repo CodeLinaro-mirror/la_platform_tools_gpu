@@ -14,6 +14,4 @@
 
 package client
 
-import "android.googlesource.com/platform/tools/gpu/atom"
-
-const InvalidAtomID = ^atom.ID(0)
+const InvalidAtomIndex = ^uint64(0)

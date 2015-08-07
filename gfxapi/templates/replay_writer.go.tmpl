@@ -38,7 +38,6 @@
   )
 
   {{Global "Go.Statement.Override" "Statement"}}
-  {{Global "Go.Read.Override"      "Read"}}
 
   func loadRemap(ϟb *builder.Builder, key interface{}, ty protocol.Type, val value.Value) {
     if ptr, found := ϟb.Remappings[key]; found {
@@ -59,7 +58,6 @@
   {{ForEach (AllCommands $) "DeclareCommandReplay" | JoinWith "\n"}}
 
   {{ForEach $.Pointers "PointerReplayMethods" | JoinWith "\n"}}
-  {{ForEach $.Slices   "SliceReplayMethods"   | JoinWith "\n"}}
 {{end}}
 
 
@@ -102,46 +100,12 @@
 
   {{if (GetAnnotation $.Type "replay_remap")}}
     if key, remap := {{$.Name}}.remap(ϟa, ϟs); remap {
-      loadRemap(ϟb, key, {{Template "BuilderType" $.Type}}, {{Template "Value" "Type" $.Type "Name" $.Name}})
+      loadRemap(ϟb, key, {{Template "Go.Replay.Type" $.Type}}, {{Template "Go.Replay.Value" "Type" $.Type "Name" $.Name}})
     } else {
-      ϟb.Push({{Template "Value" "Type" $.Type "Name" $.Name}})
+      ϟb.Push({{Template "Go.Replay.Value" "Type" $.Type "Name" $.Name}})
     }
   {{else}}
-    ϟb.Push({{Template "Value" "Type" $.Type "Name" $.Name}})
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Returns the builder.Value holding the specified variable.
--------------------------------------------------------------------------------
-*/}}
-{{define "Value"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
-
-  {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(ϟb, ϟa, ϟs)
-  {{else if IsBool        $.Type}}value.Bool({{$.Name}})
-  {{else if IsS8          $.Type}}value.S8({{$.Name}})
-  {{else if IsU8          $.Type}}value.U8({{$.Name}})
-  {{else if IsS16         $.Type}}value.S16({{$.Name}})
-  {{else if IsU16         $.Type}}value.U16({{$.Name}})
-  {{else if IsF32         $.Type}}value.F32({{$.Name}})
-  {{else if IsU32         $.Type}}value.U32({{$.Name}})
-  {{else if IsS32         $.Type}}value.S32({{$.Name}})
-  {{else if IsF64         $.Type}}value.F64({{$.Name}})
-  {{else if IsU64         $.Type}}value.U64({{$.Name}})
-  {{else if IsS64         $.Type}}value.S64({{$.Name}})
-  {{else if IsInt         $.Type}}value.S64({{$.Name}})
-  {{else if IsUint        $.Type}}value.U64({{$.Name}})
-  {{else if IsString      $.Type}}ϟb.String({{$.Name}})
-  {{else if IsPointer     $.Type}}{{$.Name}}.value()
-  {{else if IsEnum        $.Type}}value.U32({{$.Name}})
-  {{else if IsStaticArray $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
-  {{else if IsPseudonym   $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
-  {{else if IsClass       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
-  {{else                        }}{{Error "macro Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
+    ϟb.Push({{Template "Go.Replay.Value" "Type" $.Type "Name" $.Name}})
   {{end}}
 {{end}}
 
@@ -158,7 +122,7 @@
   {{if or (IsNumericType $u) (IsPointer $u)}}
     {{if not (GetAnnotation $ "replay_custom_value")}}
       {{$v := print (Macro "Go.Type" $.To) "(c)"}}
-      func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Template "Value" "Type" $.To "Name" $v}} }
+      func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Template "Go.Replay.Value" "Type" $.To "Name" $v}} }
     {{end}}
   {{end}}
 {{end}}
@@ -187,7 +151,6 @@
 {{end}}
 
 
-
 {{/*
 -------------------------------------------------------------------------------
   Emits a function info definition for each of the commands.
@@ -199,7 +162,7 @@
   {{range $i, $c := AllCommands $}}
     var {{Template "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
       ID:         {{$i}},§
-      ReturnType: {{Template "BuilderType" $c.Return.Type}},§
+      ReturnType: {{Template "Go.Replay.Type" $c.Return.Type}},§
       Parameters: {{len $c.CallParameters}},§
     }
   {{end}}
@@ -216,55 +179,13 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the replay builder type for the given command return type.
--------------------------------------------------------------------------------
-*/}}
-{{define "BuilderType"}}
-  {{AssertType $ "Type"}}
-
-  {{     if IsPseudonym $}}{{Template "BuilderType" $.To}}
-  {{else if IsEnum      $}}protocol.TypeUint32
-  {{else if IsBool      $}}protocol.TypeBool
-  {{else if IsInt       $}}protocol.TypeInt64
-  {{else if IsUint      $}}protocol.TypeUint64
-  {{else if IsS8        $}}protocol.TypeInt8
-  {{else if IsU8        $}}protocol.TypeUint8
-  {{else if IsS16       $}}protocol.TypeInt16
-  {{else if IsU16       $}}protocol.TypeUint16
-  {{else if IsS32       $}}protocol.TypeInt32
-  {{else if IsU32       $}}protocol.TypeUint32
-  {{else if IsF32       $}}protocol.TypeFloat
-  {{else if IsS64       $}}protocol.TypeInt64
-  {{else if IsU64       $}}protocol.TypeUint64
-  {{else if IsF64       $}}protocol.TypeDouble
-  {{else if IsVoid      $}}protocol.TypeVoid
-  {{else if IsString    $}}protocol.TypeVolatilePointer
-  {{else if IsPointer   $}}protocol.TypeVolatilePointer {{/* TODO: Might be absolute... */}}
-  {{else}}{{Error "macro BuilderType called with unsupported type: %s" $.Name}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   An override for the "Go.Statement" macro.
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{if IsRead $}}
-    {{Template "Go.Statement.Default" $}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-  {{else if IsWrite $}}
-    {{Template "Go.Statement.Default" $}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-  {{else if IsCopy $}}
-    {{Error "Copy statement found outside of a Fence"}}
-  {{else if IsSliceAssign $}}
-    {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
-    {{Template "Go.Read" $.To.Slice}}.Index({{Template "Go.Read" $.To.Index}}, ϟs).replayWrite({{Template "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
-  {{else if IsFence $}}
-    {{Template "Fence" $}}
+  {{     if IsFence  $}}{{Template "Fence" $}}
   {{else if IsReturn $}}{{/* no-op */}}
-  {{else}}
-    {{Template "Go.Statement.Default" $}}
+  {{else}}{{Template "Go.Statement.Default" $}}
   {{end}}
 {{end}}
 
@@ -283,8 +204,11 @@
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}}
       {{/* Apply the fenced-copy read */}}
-      ϟdst, ϟsrc := {{Template "Go.Read" $.Statement.Dst}}.Copy({{Template "Go.Read" $.Statement.Src}}, ϟs, ϟd, ϟl)
-      ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+      {{/* TODO: Unlike Slice.Copy, this does not optimise for non-pointer copies. */}}
+      ϟdst, ϟsrc := {{Template "Go.Read" $.Statement.Dst}}, {{Template "Go.Read" $.Statement.Src}}
+      ϟcount := min(ϟdst.Count, ϟsrc.Count)
+      ϟdst, ϟsrc = ϟdst.Slice(0, ϟcount, ϟs), ϟsrc.Slice(0, ϟcount, ϟs)
+      ϟsrcElems := ϟsrc.Read(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{end}}
   {{end}}
 
@@ -318,45 +242,11 @@
   {{/* Perform the fenced statement */}}
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}}
-      ϟdst.OnWrite(ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+      {{/* Apply the fenced-copy write */}}
+      ϟdst.Write(ϟsrcElems, ϟa, ϟs, ϟd, ϟl, ϟb)
     {{else}}
       {{Template "Go.Statement" $.Statement}}
     {{end}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  An override for the "Go.Read" macro.
--------------------------------------------------------------------------------
-*/}}
-{{define "Read"}}
-  {{if IsSliceIndex $}}
-    {{Template "Go.Read" $.Slice}}.Index({{Template "Go.Read" $.Index}}, ϟs).§
-    {{if Global "Go.InferredExpression"}}
-      replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-    {{else}}
-      replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-    {{end}}
-  {{else if IsCast $}}
-    {{$src_ty := $.Object | TypeOf | Underlying | Unpack}}
-    {{$dst_ty := $.Type | Underlying}}
-    {{$src    := Macro "Go.Read" $.Object}}
-
-    {{/* char[] -> string */}}
-    {{if and (IsSlice $src_ty) (IsString $dst_ty)}}
-      string({{$src}}.replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
-    {{/* char* -> string */}}
-    {{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
-      strings.TrimRight(string({{$src}}.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
-    {{else}}
-      {{Template "Go.Cast" $}}
-    {{end}}
-  {{else if IsClone $}}
-    {{Template "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
-  {{else}}
-    {{Template "Go.Read.Default" $}}
   {{end}}
 {{end}}
 
@@ -375,23 +265,6 @@
   {{$el_ty      := Macro "Go.Type" $p.To               }}
   {{$el_is_void := IsVoid ($p.To | Underlying | Unpack)}}
 
-  {{if not $el_is_void}}
-    func (p {{$ptr_ty}}) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$el_ty}} {
-      p.Slice(0, 1, ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-      return p.Read(ϟs, ϟd, ϟl)
-    }
-
-    func (p {{$ptr_ty}}) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$el_ty}} {
-      p.Slice(0, 1, ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-      return p.Read(ϟs, ϟd, ϟl)
-    }
-
-    func (p {{$ptr_ty}}) replayWrite(value {{$el_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-      p.Write(value, ϟs)
-      p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-    }
-  {{end}}
-
   func (p {{$ptr_ty}}) value() value.Pointer {
     if p.Address != 0 {
       return value.RemappedPointer(p.Address)
@@ -399,85 +272,4 @@
       return value.AbsolutePointer(0)
     }
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits additional methods used for replay generation for the Slice type or
-  indirect type (Pseudonym) to Slice.
--------------------------------------------------------------------------------
-*/}}
-{{define "SliceReplayMethods"}}
-  {{AssertType $ "Slice" "Pseudonym"}}
-
-  {{$s          := $ | Underlying | Unpack             }}
-  {{$slice_ty   := Macro "Go.Type" $                   }}
-  {{$el_ty      := Macro "Go.Type" $s.To               }}
-  {{$el_is_void := IsVoid ($s.To | Underlying | Unpack)}}
-
-  func (s {{$slice_ty}}) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
-    if s.Root.Pool == memory.ApplicationPool {
-      s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
-      {{if (GetAnnotation $s.To "replay_remap")}}
-        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
-        for _, v := range s.Read(ϟs, ϟd, ϟl) {
-          if key, remap := v.remap(ϟa, ϟs); remap {
-            loadRemap(ϟb, key, {{Template "BuilderType" $s.To}}, {{Template "Value" "Type" $s.To "Name" "v"}})
-          } else {
-            ϟb.Push({{Template "Value" "Type" $s.To "Name" "v"}})
-          }
-          ϟb.Store(ptr)
-          ptr += step
-        }
-      {{else if IsPointer ($s.To | Underlying)}}
-        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs))
-        for _, v := range s.Read(ϟs, ϟd, ϟl) {
-          ϟb.Push({{Template "Value" "Type" $s.To "Name" "v"}})
-          ϟb.Store(ptr)
-          ptr += step
-        }
-      {{else}}
-        ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
-      {{end}}
-    }
-    return s
-  }
-
-  func (s {{$slice_ty}}) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
-    if s.Root.Pool == memory.ApplicationPool {
-      ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
-      {{if (GetAnnotation $s.To "replay_remap")}}
-        size := s.ElementSize(ϟs)
-        ptr, step := value.RemappedPointer(s.Base), value.RemappedPointer(size)
-        for _, v := range s.Read(ϟs, ϟd, ϟl) {
-          if key, remap := v.remap(ϟa, ϟs); remap {
-            dst, found := ϟb.Remappings[key]
-            if !found {
-              dst = ϟb.AllocateMemory(size)
-              ϟb.Remappings[key] = dst
-            }
-            ϟb.Load({{Template "BuilderType" $s.To}}, ptr)
-            ϟb.Store(dst)
-          }
-          ptr += step
-        }
-      {{end}}
-    }
-    return s
-  }
-
-  func (s {{$slice_ty}}) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-    if s.Root.Pool == memory.ApplicationPool {
-      rng := s.Range(ϟs)
-      ϟb.MapMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
-    }
-  }
-
-  {{if not $el_is_void}}
-    func (s {{$slice_ty}}) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []{{$el_ty}} {
-      s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-      return s.Read(ϟs, ϟd, ϟl)
-    }
-  {{end}}
 {{end}}

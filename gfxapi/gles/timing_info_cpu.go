@@ -81,20 +81,20 @@ func (t *timingInfoCpuTransform) stopTimer(toID atom.ID, index uint8, flags serv
 			switch flags {
 			case service.TimingPerCommand:
 				t.timingInfo.PerCommand = append(t.timingInfo.PerCommand, service.AtomTimer{
-					AtomID:      uint64(toID),
+					AtomIndex:   uint64(toID),
 					Nanoseconds: nanoseconds,
 				})
 			case service.TimingPerDrawCall:
 				t.timingInfo.PerDrawCall = append(t.timingInfo.PerDrawCall, service.AtomRangeTimer{
-					FromAtomID:  uint64(fromID),
-					ToAtomID:    uint64(toID),
-					Nanoseconds: nanoseconds,
+					FromAtomIndex: uint64(fromID),
+					ToAtomIndex:   uint64(toID),
+					Nanoseconds:   nanoseconds,
 				})
 			case service.TimingPerFrame:
 				t.timingInfo.PerFrame = append(t.timingInfo.PerFrame, service.AtomRangeTimer{
-					FromAtomID:  uint64(fromID),
-					ToAtomID:    uint64(toID),
-					Nanoseconds: nanoseconds,
+					FromAtomIndex: uint64(fromID),
+					ToAtomIndex:   uint64(toID),
+					Nanoseconds:   nanoseconds,
 				})
 			}
 			return err

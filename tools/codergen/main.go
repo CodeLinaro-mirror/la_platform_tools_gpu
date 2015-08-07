@@ -55,8 +55,16 @@ func (l *errors) Add(err error) {
 	l.mu.Unlock()
 }
 
-type Errors struct {
-	list []error
+func (l *errors) String() string {
+	return l.Error()
+}
+
+func (l *errors) Error() string {
+	if len(l.list) > 0 {
+		return l.list[0].Error()
+	} else {
+		return ""
+	}
 }
 
 func worker(wg *sync.WaitGroup, errs *errors, tasks chan generate.Generate) {

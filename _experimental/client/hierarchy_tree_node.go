@@ -47,7 +47,7 @@ func (n hierarchyTreeNode) NodeAt(index int) gxui.TreeNode {
 	} else {
 		return atomTreeNode{
 			ctx:  n.ctx,
-			item: atomItem{atomID: id},
+			item: atomItem{atomIndex: id},
 		}
 	}
 }
@@ -57,15 +57,15 @@ func (n hierarchyTreeNode) Item() gxui.AdapterItem {
 }
 
 func (n hierarchyTreeNode) ItemIndex(item gxui.AdapterItem) int {
-	var id atom.ID
+	var id uint64
 
 	switch i := item.(type) {
 	case hierarchyItem:
 		id = i.rng.Start
 	case atomItem:
-		id = i.atomID
+		id = i.atomIndex
 	case observationItem:
-		id = i.atomID
+		id = i.atomIndex
 	default:
 		panic(fmt.Errorf("Unknown item type %T", i))
 	}
@@ -95,15 +95,15 @@ func (n hierarchyTreeNode) Create(theme gxui.Theme) gxui.Control {
 		layout.AddChild(timeLbl)
 	}
 
-	atomID := n.group.Range.Last()
+	atomIndex := n.group.Range.Last()
 	appCtx := n.ctx.appCtx
 
 	t := task.New()
 	update := func() {
 		t.Cancel()
 		if n.ctx.device != nil {
-			if flags := n.ctx.atoms[atomID].Flags(); flags.IsDrawCall() || flags.IsEndOfFrame() {
-				after := n.ctx.capture.Atoms().Index(uint64(atomID))
+			if flags := n.ctx.atoms[atomIndex].Flags(); flags.IsDrawCall() || flags.IsEndOfFrame() {
+				after := n.ctx.capture.Atoms().Index(atomIndex)
 				t.Run(updateThumbnail{appCtx, n.ctx.device, after, img})
 			}
 		}

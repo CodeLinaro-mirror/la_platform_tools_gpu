@@ -29,10 +29,10 @@ func init() {
 }
 
 var (
-	binaryIDRange        = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
+	binaryIDRange        = binary.ID{0x17, 0x9d, 0xfb, 0x01, 0x7e, 0x79, 0x1c, 0x5b, 0x7c, 0xc8, 0xc6, 0xca, 0x9f, 0x89, 0x60, 0x1b, 0xeb, 0xe8, 0xb1, 0x14}
 	binaryIDGroup        = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
 	binaryIDList         = binary.ID{0x02, 0x6b, 0xec, 0xdd, 0x57, 0x69, 0x25, 0xab, 0xfc, 0x6c, 0x21, 0x8e, 0xa6, 0xe1, 0x51, 0xc5, 0x04, 0xf3, 0x8b, 0x2f}
-	binaryIDMetadata     = binary.ID{0xb0, 0x6e, 0x0a, 0xcb, 0x6d, 0x82, 0x36, 0x07, 0xa8, 0x83, 0x7c, 0xe9, 0xd3, 0xa6, 0xbc, 0x20, 0x42, 0xe0, 0x28, 0xff}
+	binaryIDMetadata     = binary.ID{0x13, 0xf5, 0x94, 0xc3, 0x12, 0x48, 0xe3, 0xf5, 0x48, 0xef, 0x20, 0x3a, 0x2e, 0xbe, 0x48, 0x1d, 0x4a, 0x9e, 0x2d, 0x03}
 	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
 	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
 	binaryIDResource     = binary.ID{0xdd, 0xe2, 0x00, 0x18, 0x25, 0x45, 0x71, 0xb9, 0xdb, 0x6f, 0xed, 0x39, 0xdd, 0x8e, 0x71, 0x4b, 0xf6, 0x76, 0x26, 0xce}
@@ -44,10 +44,10 @@ func (*Range) Class() binary.Class {
 	return (*binaryClassRange)(nil)
 }
 func doEncodeRange(e binary.Encoder, o *Range) error {
-	if err := e.Uint64(uint64(o.Start)); err != nil {
+	if err := e.Uint64(o.Start); err != nil {
 		return err
 	}
-	if err := e.Uint64(uint64(o.End)); err != nil {
+	if err := e.Uint64(o.End); err != nil {
 		return err
 	}
 	return nil
@@ -56,12 +56,12 @@ func doDecodeRange(d binary.Decoder, o *Range) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Start = ID(obj)
+		o.Start = uint64(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.End = ID(obj)
+		o.End = uint64(obj)
 	}
 	return nil
 }
@@ -94,8 +94,8 @@ var schemaRange = &schema.Class{
 	Package: "atom",
 	Name:    "Range",
 	Fields: []schema.Field{
-		{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
-		{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
+		{Declared: "Start", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "End", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -271,7 +271,10 @@ func doEncodeMetadata(e binary.Encoder, o *Metadata) error {
 	if err := e.String(o.DisplayName); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Flags)); err != nil {
+	if err := e.Bool(o.EndOfFrame); err != nil {
+		return err
+	}
+	if err := e.Bool(o.DrawCall); err != nil {
 		return err
 	}
 	if err := e.String(o.DocumentationUrl); err != nil {
@@ -290,10 +293,15 @@ func doDecodeMetadata(d binary.Decoder, o *Metadata) error {
 	} else {
 		o.DisplayName = string(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
-		o.Flags = Flags(obj)
+		o.EndOfFrame = bool(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.DrawCall = bool(obj)
 	}
 	if obj, err := d.String(); err != nil {
 		return err
@@ -309,7 +317,10 @@ func doSkipMetadata(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
@@ -339,7 +350,8 @@ var schemaMetadata = &schema.Class{
 	Fields: []schema.Field{
 		{Declared: "API", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
 		{Declared: "DisplayName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Flags", Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32}},
+		{Declared: "EndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "DrawCall", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "DocumentationUrl", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -569,19 +581,17 @@ var schemaResource = &schema.Class{
 
 var ConstantValues schema.Constants
 
-const _Flags_name = "DrawCallEndOfFrame"
-
 var _Flags_map = map[Flags]string{}
 
 func init() {
-	_Flags_map[1] = _Flags_name[0:8]
-	_Flags_map[2] = _Flags_name[8:18]
+	_Flags_map[1] = "DrawCall"
+	_Flags_map[2] = "EndOfFrame"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Flags", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: _Flags_name[0:8], Value: uint32(1)},
-			{Name: _Flags_name[8:18], Value: uint32(2)},
+			{Name: "DrawCall", Value: uint32(1)},
+			{Name: "EndOfFrame", Value: uint32(2)},
 		},
 	})
 }
@@ -603,17 +613,15 @@ func (v *Flags) Parse(s string) error {
 	return fmt.Errorf("%s not in Flags", s)
 }
 
-const _ID_name = "NoID"
-
 var _ID_map = map[ID]string{}
 
 func init() {
-	_ID_map[9223372036854775807] = _ID_name[0:4]
+	_ID_map[9223372036854775807] = "NoID"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ID", Method: schema.Uint64},
 		Entries: []schema.Constant{
-			{Name: _ID_name[0:4], Value: uint64(9223372036854775807)},
+			{Name: "NoID", Value: uint64(9223372036854775807)},
 		},
 	})
 }

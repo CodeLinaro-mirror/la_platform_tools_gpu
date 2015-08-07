@@ -18,7 +18,6 @@ import (
 	"bytes"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -150,6 +149,7 @@ func TestMemoryResourceWriteReadScattered(t *testing.T) {
 	resC, _ := database.Store([]byte{30, 31}, d, l)
 	resD, _ := database.Store([]byte{40, 41, 42}, d, l)
 	resE, _ := database.Store([]byte{50}, d, l)
+
 	p := Pool{}
 	p.Write(1, Resource(resA, 3))
 	p.Write(7, Resource(resB, 4))
@@ -158,30 +158,28 @@ func TestMemoryResourceWriteReadScattered(t *testing.T) {
 	p.Write(8, Resource(resE, 1))
 
 	for _, test := range []struct {
-		rng          Range
-		expectedData []byte
-		expectedID   *binary.ID
+		rng      Range
+		expected []byte
 	}{
-		{Range{Base: 0, Size: 12}, []byte{0, 10, 40, 41, 42, 00, 00, 20, 50, 22, 23, 00}, nil},
-		{Range{Base: 1, Size: 10}, []byte{10, 40, 41, 42, 00, 00, 20, 50, 22, 23}, nil},
-		{Range{Base: 2, Size: 3}, []byte{40, 41, 42}, &resD},
-		{Range{Base: 5, Size: 2}, []byte{0, 0}, nil},
-		{Range{Base: 8, Size: 1}, []byte{50}, &resE},
+		{Range{Base: 0, Size: 12}, []byte{0, 10, 40, 41, 42, 00, 00, 20, 50, 22, 23, 00}},
+		{Range{Base: 1, Size: 10}, []byte{10, 40, 41, 42, 00, 00, 20, 50, 22, 23}},
+		{Range{Base: 2, Size: 3}, []byte{40, 41, 42}},
+		{Range{Base: 5, Size: 2}, []byte{0, 0}},
+		{Range{Base: 8, Size: 1}, []byte{50}},
 	} {
 		slice := p.Slice(test.rng)
-		got, err := slice.Get(d, l)
+		gotData, err := slice.Get(d, l)
 		if err != nil {
 			t.Errorf("Unexpected error: %s", err)
 		}
-		check(t, test.expectedData, got)
-		if test.expectedID != nil {
-			got, err := slice.ResourceID(d, l)
-			if err != nil {
-				t.Errorf("Unexpected error: %s", err)
-			}
-			if got != *test.expectedID {
-				t.Errorf("Unexpected ID. Expected: %v, Got: %v", *test.expectedID, got)
-			}
+		check(t, test.expected, gotData)
+		gotID, err := slice.ResourceID(d, l)
+		if err != nil {
+			t.Errorf("Unexpected error: %s", err)
+		}
+		expectedID, _ := database.Store(test.expected, d, l)
+		if gotID != expectedID {
+			t.Errorf("Unexpected ID. Expected: %v, Got: %v", expectedID, gotID)
 		}
 	}
 }

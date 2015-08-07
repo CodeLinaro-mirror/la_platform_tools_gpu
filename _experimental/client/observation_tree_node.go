@@ -15,16 +15,15 @@
 package client
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
 
 type observationItem struct {
-	atomID atom.ID
-	isRead bool
-	index  int
+	atomIndex uint64
+	isRead    bool
+	index     int
 }
 
 // observationTreeNode is a gxui.TreeNode representing an atom's memory
@@ -40,7 +39,7 @@ func (n observationTreeNode) Item() gxui.AdapterItem              { return n.ite
 func (n observationTreeNode) ItemIndex(item gxui.AdapterItem) int { return -1 }
 
 func (n observationTreeNode) Create(theme gxui.Theme) gxui.Control {
-	atom := n.ctx.atoms[n.item.atomID]
+	atom := n.ctx.atoms[n.item.atomIndex]
 	observations := atom.Observations()
 	var r memory.Range
 	var c gxui.Color
@@ -56,7 +55,7 @@ func (n observationTreeNode) Create(theme gxui.Theme) gxui.Control {
 	b.SetMargin(math.Spacing{})
 	b.AddChild(createLabel(n.ctx.appCtx, r.String(), c))
 
-	p := n.ctx.capture.Atoms().Index(uint64(n.item.atomID)).MemoryAfter(uint64(memory.ApplicationPool), r.Base, r.Size)
+	p := n.ctx.capture.Atoms().Index(n.item.atomIndex).MemoryAfter(uint64(memory.ApplicationPool), r.Base, r.Size)
 	b.OnClick(func(gxui.MouseEvent) { n.ctx.appCtx.events.Select(p) })
 	return b
 }

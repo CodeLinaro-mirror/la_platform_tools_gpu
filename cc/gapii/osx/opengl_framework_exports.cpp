@@ -326,10 +326,6 @@ static void* real__glAccum = nullptr;
 EXPORT void __attribute__((naked)) glAccum() {
     asm("jmp *%%rax" : : "a"(real__glAccum) : );
 }
-static void* real__glActiveShaderProgram = nullptr;
-EXPORT void __attribute__((naked)) glActiveShaderProgram() {
-    asm("jmp *%%rax" : : "a"(real__glActiveShaderProgram) : );
-}
 static void* real__glActiveStencilFaceEXT = nullptr;
 EXPORT void __attribute__((naked)) glActiveStencilFaceEXT() {
     asm("jmp *%%rax" : : "a"(real__glActiveStencilFaceEXT) : );
@@ -362,10 +358,6 @@ static void* real__glBeginConditionalRender = nullptr;
 EXPORT void __attribute__((naked)) glBeginConditionalRender() {
     asm("jmp *%%rax" : : "a"(real__glBeginConditionalRender) : );
 }
-static void* real__glBeginConditionalRenderNV = nullptr;
-EXPORT void __attribute__((naked)) glBeginConditionalRenderNV() {
-    asm("jmp *%%rax" : : "a"(real__glBeginConditionalRenderNV) : );
-}
 static void* real__glBeginQueryARB = nullptr;
 EXPORT void __attribute__((naked)) glBeginQueryARB() {
     asm("jmp *%%rax" : : "a"(real__glBeginQueryARB) : );
@@ -373,10 +365,6 @@ EXPORT void __attribute__((naked)) glBeginQueryARB() {
 static void* real__glBeginQueryIndexed = nullptr;
 EXPORT void __attribute__((naked)) glBeginQueryIndexed() {
     asm("jmp *%%rax" : : "a"(real__glBeginQueryIndexed) : );
-}
-static void* real__glBeginTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glBeginTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glBeginTransformFeedback) : );
 }
 static void* real__glBeginTransformFeedbackEXT = nullptr;
 EXPORT void __attribute__((naked)) glBeginTransformFeedbackEXT() {
@@ -397,10 +385,6 @@ EXPORT void __attribute__((naked)) glBindBufferBaseEXT() {
 static void* real__glBindBufferOffsetEXT = nullptr;
 EXPORT void __attribute__((naked)) glBindBufferOffsetEXT() {
     asm("jmp *%%rax" : : "a"(real__glBindBufferOffsetEXT) : );
-}
-static void* real__glBindBufferRange = nullptr;
-EXPORT void __attribute__((naked)) glBindBufferRange() {
-    asm("jmp *%%rax" : : "a"(real__glBindBufferRange) : );
 }
 static void* real__glBindBufferRangeEXT = nullptr;
 EXPORT void __attribute__((naked)) glBindBufferRangeEXT() {
@@ -426,21 +410,9 @@ static void* real__glBindProgramARB = nullptr;
 EXPORT void __attribute__((naked)) glBindProgramARB() {
     asm("jmp *%%rax" : : "a"(real__glBindProgramARB) : );
 }
-static void* real__glBindProgramPipeline = nullptr;
-EXPORT void __attribute__((naked)) glBindProgramPipeline() {
-    asm("jmp *%%rax" : : "a"(real__glBindProgramPipeline) : );
-}
 static void* real__glBindRenderbufferEXT = nullptr;
 EXPORT void __attribute__((naked)) glBindRenderbufferEXT() {
     asm("jmp *%%rax" : : "a"(real__glBindRenderbufferEXT) : );
-}
-static void* real__glBindSampler = nullptr;
-EXPORT void __attribute__((naked)) glBindSampler() {
-    asm("jmp *%%rax" : : "a"(real__glBindSampler) : );
-}
-static void* real__glBindTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glBindTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glBindTransformFeedback) : );
 }
 static void* real__glBindVertexArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glBindVertexArrayAPPLE() {
@@ -541,22 +513,6 @@ EXPORT void __attribute__((naked)) glClampColorARB() {
 static void* real__glClearAccum = nullptr;
 EXPORT void __attribute__((naked)) glClearAccum() {
     asm("jmp *%%rax" : : "a"(real__glClearAccum) : );
-}
-static void* real__glClearBufferfi = nullptr;
-EXPORT void __attribute__((naked)) glClearBufferfi() {
-    asm("jmp *%%rax" : : "a"(real__glClearBufferfi) : );
-}
-static void* real__glClearBufferfv = nullptr;
-EXPORT void __attribute__((naked)) glClearBufferfv() {
-    asm("jmp *%%rax" : : "a"(real__glClearBufferfv) : );
-}
-static void* real__glClearBufferiv = nullptr;
-EXPORT void __attribute__((naked)) glClearBufferiv() {
-    asm("jmp *%%rax" : : "a"(real__glClearBufferiv) : );
-}
-static void* real__glClearBufferuiv = nullptr;
-EXPORT void __attribute__((naked)) glClearBufferuiv() {
-    asm("jmp *%%rax" : : "a"(real__glClearBufferuiv) : );
 }
 static void* real__glClearColorIiEXT = nullptr;
 EXPORT void __attribute__((naked)) glClearColorIiEXT() {
@@ -802,10 +758,6 @@ static void* real__glCompressedTexImage2DARB = nullptr;
 EXPORT void __attribute__((naked)) glCompressedTexImage2DARB() {
     asm("jmp *%%rax" : : "a"(real__glCompressedTexImage2DARB) : );
 }
-static void* real__glCompressedTexImage3D = nullptr;
-EXPORT void __attribute__((naked)) glCompressedTexImage3D() {
-    asm("jmp *%%rax" : : "a"(real__glCompressedTexImage3D) : );
-}
 static void* real__glCompressedTexImage3DARB = nullptr;
 EXPORT void __attribute__((naked)) glCompressedTexImage3DARB() {
     asm("jmp *%%rax" : : "a"(real__glCompressedTexImage3DARB) : );
@@ -821,10 +773,6 @@ EXPORT void __attribute__((naked)) glCompressedTexSubImage1DARB() {
 static void* real__glCompressedTexSubImage2DARB = nullptr;
 EXPORT void __attribute__((naked)) glCompressedTexSubImage2DARB() {
     asm("jmp *%%rax" : : "a"(real__glCompressedTexSubImage2DARB) : );
-}
-static void* real__glCompressedTexSubImage3D = nullptr;
-EXPORT void __attribute__((naked)) glCompressedTexSubImage3D() {
-    asm("jmp *%%rax" : : "a"(real__glCompressedTexSubImage3D) : );
 }
 static void* real__glCompressedTexSubImage3DARB = nullptr;
 EXPORT void __attribute__((naked)) glCompressedTexSubImage3DARB() {
@@ -854,10 +802,6 @@ static void* real__glConvolutionParameteriv = nullptr;
 EXPORT void __attribute__((naked)) glConvolutionParameteriv() {
     asm("jmp *%%rax" : : "a"(real__glConvolutionParameteriv) : );
 }
-static void* real__glCopyBufferSubData = nullptr;
-EXPORT void __attribute__((naked)) glCopyBufferSubData() {
-    asm("jmp *%%rax" : : "a"(real__glCopyBufferSubData) : );
-}
 static void* real__glCopyColorSubTable = nullptr;
 EXPORT void __attribute__((naked)) glCopyColorSubTable() {
     asm("jmp *%%rax" : : "a"(real__glCopyColorSubTable) : );
@@ -886,10 +830,6 @@ static void* real__glCopyTexSubImage1D = nullptr;
 EXPORT void __attribute__((naked)) glCopyTexSubImage1D() {
     asm("jmp *%%rax" : : "a"(real__glCopyTexSubImage1D) : );
 }
-static void* real__glCopyTexSubImage3D = nullptr;
-EXPORT void __attribute__((naked)) glCopyTexSubImage3D() {
-    asm("jmp *%%rax" : : "a"(real__glCopyTexSubImage3D) : );
-}
 static void* real__glCreateProgramObjectARB = nullptr;
 EXPORT void __attribute__((naked)) glCreateProgramObjectARB() {
     asm("jmp *%%rax" : : "a"(real__glCreateProgramObjectARB) : );
@@ -897,10 +837,6 @@ EXPORT void __attribute__((naked)) glCreateProgramObjectARB() {
 static void* real__glCreateShaderObjectARB = nullptr;
 EXPORT void __attribute__((naked)) glCreateShaderObjectARB() {
     asm("jmp *%%rax" : : "a"(real__glCreateShaderObjectARB) : );
-}
-static void* real__glCreateShaderProgramv = nullptr;
-EXPORT void __attribute__((naked)) glCreateShaderProgramv() {
-    asm("jmp *%%rax" : : "a"(real__glCreateShaderProgramv) : );
 }
 static void* real__glDeleteBuffersARB = nullptr;
 EXPORT void __attribute__((naked)) glDeleteBuffersARB() {
@@ -926,10 +862,6 @@ static void* real__glDeleteObjectARB = nullptr;
 EXPORT void __attribute__((naked)) glDeleteObjectARB() {
     asm("jmp *%%rax" : : "a"(real__glDeleteObjectARB) : );
 }
-static void* real__glDeleteProgramPipelines = nullptr;
-EXPORT void __attribute__((naked)) glDeleteProgramPipelines() {
-    asm("jmp *%%rax" : : "a"(real__glDeleteProgramPipelines) : );
-}
 static void* real__glDeleteProgramsARB = nullptr;
 EXPORT void __attribute__((naked)) glDeleteProgramsARB() {
     asm("jmp *%%rax" : : "a"(real__glDeleteProgramsARB) : );
@@ -941,14 +873,6 @@ EXPORT void __attribute__((naked)) glDeleteQueriesARB() {
 static void* real__glDeleteRenderbuffersEXT = nullptr;
 EXPORT void __attribute__((naked)) glDeleteRenderbuffersEXT() {
     asm("jmp *%%rax" : : "a"(real__glDeleteRenderbuffersEXT) : );
-}
-static void* real__glDeleteSamplers = nullptr;
-EXPORT void __attribute__((naked)) glDeleteSamplers() {
-    asm("jmp *%%rax" : : "a"(real__glDeleteSamplers) : );
-}
-static void* real__glDeleteTransformFeedbacks = nullptr;
-EXPORT void __attribute__((naked)) glDeleteTransformFeedbacks() {
-    asm("jmp *%%rax" : : "a"(real__glDeleteTransformFeedbacks) : );
 }
 static void* real__glDeleteVertexArraysAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glDeleteVertexArraysAPPLE() {
@@ -974,6 +898,10 @@ static void* real__glDetachObjectARB = nullptr;
 EXPORT void __attribute__((naked)) glDetachObjectARB() {
     asm("jmp *%%rax" : : "a"(real__glDetachObjectARB) : );
 }
+static void* real__glDisableClientState = nullptr;
+EXPORT void __attribute__((naked)) glDisableClientState() {
+    asm("jmp *%%rax" : : "a"(real__glDisableClientState) : );
+}
 static void* real__glDisableIndexedEXT = nullptr;
 EXPORT void __attribute__((naked)) glDisableIndexedEXT() {
     asm("jmp *%%rax" : : "a"(real__glDisableIndexedEXT) : );
@@ -990,14 +918,6 @@ static void* real__glDisablei = nullptr;
 EXPORT void __attribute__((naked)) glDisablei() {
     asm("jmp *%%rax" : : "a"(real__glDisablei) : );
 }
-static void* real__glDrawArraysIndirect = nullptr;
-EXPORT void __attribute__((naked)) glDrawArraysIndirect() {
-    asm("jmp *%%rax" : : "a"(real__glDrawArraysIndirect) : );
-}
-static void* real__glDrawArraysInstanced = nullptr;
-EXPORT void __attribute__((naked)) glDrawArraysInstanced() {
-    asm("jmp *%%rax" : : "a"(real__glDrawArraysInstanced) : );
-}
 static void* real__glDrawArraysInstancedARB = nullptr;
 EXPORT void __attribute__((naked)) glDrawArraysInstancedARB() {
     asm("jmp *%%rax" : : "a"(real__glDrawArraysInstancedARB) : );
@@ -1005,10 +925,6 @@ EXPORT void __attribute__((naked)) glDrawArraysInstancedARB() {
 static void* real__glDrawBuffer = nullptr;
 EXPORT void __attribute__((naked)) glDrawBuffer() {
     asm("jmp *%%rax" : : "a"(real__glDrawBuffer) : );
-}
-static void* real__glDrawBuffers = nullptr;
-EXPORT void __attribute__((naked)) glDrawBuffers() {
-    asm("jmp *%%rax" : : "a"(real__glDrawBuffers) : );
 }
 static void* real__glDrawBuffersARB = nullptr;
 EXPORT void __attribute__((naked)) glDrawBuffersARB() {
@@ -1021,14 +937,6 @@ EXPORT void __attribute__((naked)) glDrawElementArrayAPPLE() {
 static void* real__glDrawElementsBaseVertex = nullptr;
 EXPORT void __attribute__((naked)) glDrawElementsBaseVertex() {
     asm("jmp *%%rax" : : "a"(real__glDrawElementsBaseVertex) : );
-}
-static void* real__glDrawElementsIndirect = nullptr;
-EXPORT void __attribute__((naked)) glDrawElementsIndirect() {
-    asm("jmp *%%rax" : : "a"(real__glDrawElementsIndirect) : );
-}
-static void* real__glDrawElementsInstanced = nullptr;
-EXPORT void __attribute__((naked)) glDrawElementsInstanced() {
-    asm("jmp *%%rax" : : "a"(real__glDrawElementsInstanced) : );
 }
 static void* real__glDrawElementsInstancedARB = nullptr;
 EXPORT void __attribute__((naked)) glDrawElementsInstancedARB() {
@@ -1045,10 +953,6 @@ EXPORT void __attribute__((naked)) glDrawPixels() {
 static void* real__glDrawRangeElementArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glDrawRangeElementArrayAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glDrawRangeElementArrayAPPLE) : );
-}
-static void* real__glDrawRangeElements = nullptr;
-EXPORT void __attribute__((naked)) glDrawRangeElements() {
-    asm("jmp *%%rax" : : "a"(real__glDrawRangeElements) : );
 }
 static void* real__glDrawRangeElementsBaseVertex = nullptr;
 EXPORT void __attribute__((naked)) glDrawRangeElementsBaseVertex() {
@@ -1082,6 +986,10 @@ static void* real__glElementPointerAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glElementPointerAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glElementPointerAPPLE) : );
 }
+static void* real__glEnableClientState = nullptr;
+EXPORT void __attribute__((naked)) glEnableClientState() {
+    asm("jmp *%%rax" : : "a"(real__glEnableClientState) : );
+}
 static void* real__glEnableIndexedEXT = nullptr;
 EXPORT void __attribute__((naked)) glEnableIndexedEXT() {
     asm("jmp *%%rax" : : "a"(real__glEnableIndexedEXT) : );
@@ -1106,10 +1014,6 @@ static void* real__glEndConditionalRender = nullptr;
 EXPORT void __attribute__((naked)) glEndConditionalRender() {
     asm("jmp *%%rax" : : "a"(real__glEndConditionalRender) : );
 }
-static void* real__glEndConditionalRenderNV = nullptr;
-EXPORT void __attribute__((naked)) glEndConditionalRenderNV() {
-    asm("jmp *%%rax" : : "a"(real__glEndConditionalRenderNV) : );
-}
 static void* real__glEndList = nullptr;
 EXPORT void __attribute__((naked)) glEndList() {
     asm("jmp *%%rax" : : "a"(real__glEndList) : );
@@ -1121,10 +1025,6 @@ EXPORT void __attribute__((naked)) glEndQueryARB() {
 static void* real__glEndQueryIndexed = nullptr;
 EXPORT void __attribute__((naked)) glEndQueryIndexed() {
     asm("jmp *%%rax" : : "a"(real__glEndQueryIndexed) : );
-}
-static void* real__glEndTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glEndTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glEndTransformFeedback) : );
 }
 static void* real__glEndTransformFeedbackEXT = nullptr;
 EXPORT void __attribute__((naked)) glEndTransformFeedbackEXT() {
@@ -1197,10 +1097,6 @@ EXPORT void __attribute__((naked)) glFinishObjectAPPLE() {
 static void* real__glFinishRenderAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glFinishRenderAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glFinishRenderAPPLE) : );
-}
-static void* real__glFlushMappedBufferRange = nullptr;
-EXPORT void __attribute__((naked)) glFlushMappedBufferRange() {
-    asm("jmp *%%rax" : : "a"(real__glFlushMappedBufferRange) : );
 }
 static void* real__glFlushMappedBufferRangeAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glFlushMappedBufferRangeAPPLE() {
@@ -1298,17 +1194,9 @@ static void* real__glFramebufferTexture3DEXT = nullptr;
 EXPORT void __attribute__((naked)) glFramebufferTexture3DEXT() {
     asm("jmp *%%rax" : : "a"(real__glFramebufferTexture3DEXT) : );
 }
-static void* real__glFramebufferTextureEXT = nullptr;
-EXPORT void __attribute__((naked)) glFramebufferTextureEXT() {
-    asm("jmp *%%rax" : : "a"(real__glFramebufferTextureEXT) : );
-}
 static void* real__glFramebufferTextureFaceEXT = nullptr;
 EXPORT void __attribute__((naked)) glFramebufferTextureFaceEXT() {
     asm("jmp *%%rax" : : "a"(real__glFramebufferTextureFaceEXT) : );
-}
-static void* real__glFramebufferTextureLayer = nullptr;
-EXPORT void __attribute__((naked)) glFramebufferTextureLayer() {
-    asm("jmp *%%rax" : : "a"(real__glFramebufferTextureLayer) : );
 }
 static void* real__glFramebufferTextureLayerEXT = nullptr;
 EXPORT void __attribute__((naked)) glFramebufferTextureLayerEXT() {
@@ -1334,10 +1222,6 @@ static void* real__glGenLists = nullptr;
 EXPORT void __attribute__((naked)) glGenLists() {
     asm("jmp *%%rax" : : "a"(real__glGenLists) : );
 }
-static void* real__glGenProgramPipelines = nullptr;
-EXPORT void __attribute__((naked)) glGenProgramPipelines() {
-    asm("jmp *%%rax" : : "a"(real__glGenProgramPipelines) : );
-}
 static void* real__glGenProgramsARB = nullptr;
 EXPORT void __attribute__((naked)) glGenProgramsARB() {
     asm("jmp *%%rax" : : "a"(real__glGenProgramsARB) : );
@@ -1349,14 +1233,6 @@ EXPORT void __attribute__((naked)) glGenQueriesARB() {
 static void* real__glGenRenderbuffersEXT = nullptr;
 EXPORT void __attribute__((naked)) glGenRenderbuffersEXT() {
     asm("jmp *%%rax" : : "a"(real__glGenRenderbuffersEXT) : );
-}
-static void* real__glGenSamplers = nullptr;
-EXPORT void __attribute__((naked)) glGenSamplers() {
-    asm("jmp *%%rax" : : "a"(real__glGenSamplers) : );
-}
-static void* real__glGenTransformFeedbacks = nullptr;
-EXPORT void __attribute__((naked)) glGenTransformFeedbacks() {
-    asm("jmp *%%rax" : : "a"(real__glGenTransformFeedbacks) : );
 }
 static void* real__glGenVertexArraysAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glGenVertexArraysAPPLE() {
@@ -1402,21 +1278,9 @@ static void* real__glGetBooleanIndexedvEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetBooleanIndexedvEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetBooleanIndexedvEXT) : );
 }
-static void* real__glGetBooleani_v = nullptr;
-EXPORT void __attribute__((naked)) glGetBooleani_v() {
-    asm("jmp *%%rax" : : "a"(real__glGetBooleani_v) : );
-}
-static void* real__glGetBufferParameteri64v = nullptr;
-EXPORT void __attribute__((naked)) glGetBufferParameteri64v() {
-    asm("jmp *%%rax" : : "a"(real__glGetBufferParameteri64v) : );
-}
 static void* real__glGetBufferParameterivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetBufferParameterivARB() {
     asm("jmp *%%rax" : : "a"(real__glGetBufferParameterivARB) : );
-}
-static void* real__glGetBufferPointerv = nullptr;
-EXPORT void __attribute__((naked)) glGetBufferPointerv() {
-    asm("jmp *%%rax" : : "a"(real__glGetBufferPointerv) : );
 }
 static void* real__glGetBufferPointervARB = nullptr;
 EXPORT void __attribute__((naked)) glGetBufferPointervARB() {
@@ -1522,10 +1386,6 @@ static void* real__glGetFragDataIndex = nullptr;
 EXPORT void __attribute__((naked)) glGetFragDataIndex() {
     asm("jmp *%%rax" : : "a"(real__glGetFragDataIndex) : );
 }
-static void* real__glGetFragDataLocation = nullptr;
-EXPORT void __attribute__((naked)) glGetFragDataLocation() {
-    asm("jmp *%%rax" : : "a"(real__glGetFragDataLocation) : );
-}
 static void* real__glGetFragDataLocationEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetFragDataLocationEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetFragDataLocationEXT) : );
@@ -1554,25 +1414,9 @@ static void* real__glGetInfoLogARB = nullptr;
 EXPORT void __attribute__((naked)) glGetInfoLogARB() {
     asm("jmp *%%rax" : : "a"(real__glGetInfoLogARB) : );
 }
-static void* real__glGetInteger64i_v = nullptr;
-EXPORT void __attribute__((naked)) glGetInteger64i_v() {
-    asm("jmp *%%rax" : : "a"(real__glGetInteger64i_v) : );
-}
-static void* real__glGetInteger64v = nullptr;
-EXPORT void __attribute__((naked)) glGetInteger64v() {
-    asm("jmp *%%rax" : : "a"(real__glGetInteger64v) : );
-}
 static void* real__glGetIntegerIndexedvEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetIntegerIndexedvEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetIntegerIndexedvEXT) : );
-}
-static void* real__glGetIntegeri_v = nullptr;
-EXPORT void __attribute__((naked)) glGetIntegeri_v() {
-    asm("jmp *%%rax" : : "a"(real__glGetIntegeri_v) : );
-}
-static void* real__glGetInternalformativ = nullptr;
-EXPORT void __attribute__((naked)) glGetInternalformativ() {
-    asm("jmp *%%rax" : : "a"(real__glGetInternalformativ) : );
 }
 static void* real__glGetLightfv = nullptr;
 EXPORT void __attribute__((naked)) glGetLightfv() {
@@ -1614,10 +1458,6 @@ static void* real__glGetMinmaxParameteriv = nullptr;
 EXPORT void __attribute__((naked)) glGetMinmaxParameteriv() {
     asm("jmp *%%rax" : : "a"(real__glGetMinmaxParameteriv) : );
 }
-static void* real__glGetMultisamplefv = nullptr;
-EXPORT void __attribute__((naked)) glGetMultisamplefv() {
-    asm("jmp *%%rax" : : "a"(real__glGetMultisamplefv) : );
-}
 static void* real__glGetNamedStringARB = nullptr;
 EXPORT void __attribute__((naked)) glGetNamedStringARB() {
     asm("jmp *%%rax" : : "a"(real__glGetNamedStringARB) : );
@@ -1625,10 +1465,6 @@ EXPORT void __attribute__((naked)) glGetNamedStringARB() {
 static void* real__glGetNamedStringivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetNamedStringivARB() {
     asm("jmp *%%rax" : : "a"(real__glGetNamedStringivARB) : );
-}
-static void* real__glGetObjectLabelEXT = nullptr;
-EXPORT void __attribute__((naked)) glGetObjectLabelEXT() {
-    asm("jmp *%%rax" : : "a"(real__glGetObjectLabelEXT) : );
 }
 static void* real__glGetObjectParameterfvARB = nullptr;
 EXPORT void __attribute__((naked)) glGetObjectParameterfvARB() {
@@ -1662,10 +1498,6 @@ static void* real__glGetPolygonStipple = nullptr;
 EXPORT void __attribute__((naked)) glGetPolygonStipple() {
     asm("jmp *%%rax" : : "a"(real__glGetPolygonStipple) : );
 }
-static void* real__glGetProgramBinary = nullptr;
-EXPORT void __attribute__((naked)) glGetProgramBinary() {
-    asm("jmp *%%rax" : : "a"(real__glGetProgramBinary) : );
-}
 static void* real__glGetProgramEnvParameterdvARB = nullptr;
 EXPORT void __attribute__((naked)) glGetProgramEnvParameterdvARB() {
     asm("jmp *%%rax" : : "a"(real__glGetProgramEnvParameterdvARB) : );
@@ -1681,14 +1513,6 @@ EXPORT void __attribute__((naked)) glGetProgramLocalParameterdvARB() {
 static void* real__glGetProgramLocalParameterfvARB = nullptr;
 EXPORT void __attribute__((naked)) glGetProgramLocalParameterfvARB() {
     asm("jmp *%%rax" : : "a"(real__glGetProgramLocalParameterfvARB) : );
-}
-static void* real__glGetProgramPipelineInfoLog = nullptr;
-EXPORT void __attribute__((naked)) glGetProgramPipelineInfoLog() {
-    asm("jmp *%%rax" : : "a"(real__glGetProgramPipelineInfoLog) : );
-}
-static void* real__glGetProgramPipelineiv = nullptr;
-EXPORT void __attribute__((naked)) glGetProgramPipelineiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetProgramPipelineiv) : );
 }
 static void* real__glGetProgramStageiv = nullptr;
 EXPORT void __attribute__((naked)) glGetProgramStageiv() {
@@ -1734,14 +1558,6 @@ static void* real__glGetSamplerParameterIuiv = nullptr;
 EXPORT void __attribute__((naked)) glGetSamplerParameterIuiv() {
     asm("jmp *%%rax" : : "a"(real__glGetSamplerParameterIuiv) : );
 }
-static void* real__glGetSamplerParameterfv = nullptr;
-EXPORT void __attribute__((naked)) glGetSamplerParameterfv() {
-    asm("jmp *%%rax" : : "a"(real__glGetSamplerParameterfv) : );
-}
-static void* real__glGetSamplerParameteriv = nullptr;
-EXPORT void __attribute__((naked)) glGetSamplerParameteriv() {
-    asm("jmp *%%rax" : : "a"(real__glGetSamplerParameteriv) : );
-}
 static void* real__glGetSeparableFilter = nullptr;
 EXPORT void __attribute__((naked)) glGetSeparableFilter() {
     asm("jmp *%%rax" : : "a"(real__glGetSeparableFilter) : );
@@ -1750,10 +1566,6 @@ static void* real__glGetShaderSourceARB = nullptr;
 EXPORT void __attribute__((naked)) glGetShaderSourceARB() {
     asm("jmp *%%rax" : : "a"(real__glGetShaderSourceARB) : );
 }
-static void* real__glGetStringi = nullptr;
-EXPORT void __attribute__((naked)) glGetStringi() {
-    asm("jmp *%%rax" : : "a"(real__glGetStringi) : );
-}
 static void* real__glGetSubroutineIndex = nullptr;
 EXPORT void __attribute__((naked)) glGetSubroutineIndex() {
     asm("jmp *%%rax" : : "a"(real__glGetSubroutineIndex) : );
@@ -1761,10 +1573,6 @@ EXPORT void __attribute__((naked)) glGetSubroutineIndex() {
 static void* real__glGetSubroutineUniformLocation = nullptr;
 EXPORT void __attribute__((naked)) glGetSubroutineUniformLocation() {
     asm("jmp *%%rax" : : "a"(real__glGetSubroutineUniformLocation) : );
-}
-static void* real__glGetSynciv = nullptr;
-EXPORT void __attribute__((naked)) glGetSynciv() {
-    asm("jmp *%%rax" : : "a"(real__glGetSynciv) : );
 }
 static void* real__glGetTexEnvfv = nullptr;
 EXPORT void __attribute__((naked)) glGetTexEnvfv() {
@@ -1790,53 +1598,25 @@ static void* real__glGetTexImage = nullptr;
 EXPORT void __attribute__((naked)) glGetTexImage() {
     asm("jmp *%%rax" : : "a"(real__glGetTexImage) : );
 }
-static void* real__glGetTexLevelParameterfv = nullptr;
-EXPORT void __attribute__((naked)) glGetTexLevelParameterfv() {
-    asm("jmp *%%rax" : : "a"(real__glGetTexLevelParameterfv) : );
-}
-static void* real__glGetTexLevelParameteriv = nullptr;
-EXPORT void __attribute__((naked)) glGetTexLevelParameteriv() {
-    asm("jmp *%%rax" : : "a"(real__glGetTexLevelParameteriv) : );
-}
 static void* real__glGetTexParameterIiv = nullptr;
 EXPORT void __attribute__((naked)) glGetTexParameterIiv() {
     asm("jmp *%%rax" : : "a"(real__glGetTexParameterIiv) : );
-}
-static void* real__glGetTexParameterIivEXT = nullptr;
-EXPORT void __attribute__((naked)) glGetTexParameterIivEXT() {
-    asm("jmp *%%rax" : : "a"(real__glGetTexParameterIivEXT) : );
 }
 static void* real__glGetTexParameterIuiv = nullptr;
 EXPORT void __attribute__((naked)) glGetTexParameterIuiv() {
     asm("jmp *%%rax" : : "a"(real__glGetTexParameterIuiv) : );
 }
-static void* real__glGetTexParameterIuivEXT = nullptr;
-EXPORT void __attribute__((naked)) glGetTexParameterIuivEXT() {
-    asm("jmp *%%rax" : : "a"(real__glGetTexParameterIuivEXT) : );
-}
 static void* real__glGetTexParameterPointervAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glGetTexParameterPointervAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glGetTexParameterPointervAPPLE) : );
-}
-static void* real__glGetTransformFeedbackVarying = nullptr;
-EXPORT void __attribute__((naked)) glGetTransformFeedbackVarying() {
-    asm("jmp *%%rax" : : "a"(real__glGetTransformFeedbackVarying) : );
 }
 static void* real__glGetTransformFeedbackVaryingEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetTransformFeedbackVaryingEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetTransformFeedbackVaryingEXT) : );
 }
-static void* real__glGetUniformBlockIndex = nullptr;
-EXPORT void __attribute__((naked)) glGetUniformBlockIndex() {
-    asm("jmp *%%rax" : : "a"(real__glGetUniformBlockIndex) : );
-}
 static void* real__glGetUniformBufferSizeEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetUniformBufferSizeEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetUniformBufferSizeEXT) : );
-}
-static void* real__glGetUniformIndices = nullptr;
-EXPORT void __attribute__((naked)) glGetUniformIndices() {
-    asm("jmp *%%rax" : : "a"(real__glGetUniformIndices) : );
 }
 static void* real__glGetUniformLocationARB = nullptr;
 EXPORT void __attribute__((naked)) glGetUniformLocationARB() {
@@ -1862,25 +1642,13 @@ static void* real__glGetUniformivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetUniformivARB() {
     asm("jmp *%%rax" : : "a"(real__glGetUniformivARB) : );
 }
-static void* real__glGetUniformuiv = nullptr;
-EXPORT void __attribute__((naked)) glGetUniformuiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetUniformuiv) : );
-}
 static void* real__glGetUniformuivEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetUniformuivEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetUniformuivEXT) : );
 }
-static void* real__glGetVertexAttribIiv = nullptr;
-EXPORT void __attribute__((naked)) glGetVertexAttribIiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetVertexAttribIiv) : );
-}
 static void* real__glGetVertexAttribIivEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribIivEXT() {
     asm("jmp *%%rax" : : "a"(real__glGetVertexAttribIivEXT) : );
-}
-static void* real__glGetVertexAttribIuiv = nullptr;
-EXPORT void __attribute__((naked)) glGetVertexAttribIuiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetVertexAttribIuiv) : );
 }
 static void* real__glGetVertexAttribIuivEXT = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribIuivEXT() {
@@ -1889,10 +1657,6 @@ EXPORT void __attribute__((naked)) glGetVertexAttribIuivEXT() {
 static void* real__glGetVertexAttribLdv = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribLdv() {
     asm("jmp *%%rax" : : "a"(real__glGetVertexAttribLdv) : );
-}
-static void* real__glGetVertexAttribPointerv = nullptr;
-EXPORT void __attribute__((naked)) glGetVertexAttribPointerv() {
-    asm("jmp *%%rax" : : "a"(real__glGetVertexAttribPointerv) : );
 }
 static void* real__glGetVertexAttribPointervARB = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribPointervARB() {
@@ -1906,17 +1670,9 @@ static void* real__glGetVertexAttribdvARB = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribdvARB() {
     asm("jmp *%%rax" : : "a"(real__glGetVertexAttribdvARB) : );
 }
-static void* real__glGetVertexAttribfv = nullptr;
-EXPORT void __attribute__((naked)) glGetVertexAttribfv() {
-    asm("jmp *%%rax" : : "a"(real__glGetVertexAttribfv) : );
-}
 static void* real__glGetVertexAttribfvARB = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribfvARB() {
     asm("jmp *%%rax" : : "a"(real__glGetVertexAttribfvARB) : );
-}
-static void* real__glGetVertexAttribiv = nullptr;
-EXPORT void __attribute__((naked)) glGetVertexAttribiv() {
-    asm("jmp *%%rax" : : "a"(real__glGetVertexAttribiv) : );
 }
 static void* real__glGetVertexAttribivARB = nullptr;
 EXPORT void __attribute__((naked)) glGetVertexAttribivARB() {
@@ -2014,10 +1770,6 @@ static void* real__glIsProgramARB = nullptr;
 EXPORT void __attribute__((naked)) glIsProgramARB() {
     asm("jmp *%%rax" : : "a"(real__glIsProgramARB) : );
 }
-static void* real__glIsProgramPipeline = nullptr;
-EXPORT void __attribute__((naked)) glIsProgramPipeline() {
-    asm("jmp *%%rax" : : "a"(real__glIsProgramPipeline) : );
-}
 static void* real__glIsQueryARB = nullptr;
 EXPORT void __attribute__((naked)) glIsQueryARB() {
     asm("jmp *%%rax" : : "a"(real__glIsQueryARB) : );
@@ -2026,22 +1778,6 @@ static void* real__glIsRenderbufferEXT = nullptr;
 EXPORT void __attribute__((naked)) glIsRenderbufferEXT() {
     asm("jmp *%%rax" : : "a"(real__glIsRenderbufferEXT) : );
 }
-static void* real__glIsSampler = nullptr;
-EXPORT void __attribute__((naked)) glIsSampler() {
-    asm("jmp *%%rax" : : "a"(real__glIsSampler) : );
-}
-static void* real__glIsSync = nullptr;
-EXPORT void __attribute__((naked)) glIsSync() {
-    asm("jmp *%%rax" : : "a"(real__glIsSync) : );
-}
-static void* real__glIsTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glIsTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glIsTransformFeedback) : );
-}
-static void* real__glIsVertexArray = nullptr;
-EXPORT void __attribute__((naked)) glIsVertexArray() {
-    asm("jmp *%%rax" : : "a"(real__glIsVertexArray) : );
-}
 static void* real__glIsVertexArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glIsVertexArrayAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glIsVertexArrayAPPLE) : );
@@ -2049,10 +1785,6 @@ EXPORT void __attribute__((naked)) glIsVertexArrayAPPLE() {
 static void* real__glIsVertexAttribEnabledAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glIsVertexAttribEnabledAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glIsVertexAttribEnabledAPPLE) : );
-}
-static void* real__glLabelObjectEXT = nullptr;
-EXPORT void __attribute__((naked)) glLabelObjectEXT() {
-    asm("jmp *%%rax" : : "a"(real__glLabelObjectEXT) : );
 }
 static void* real__glLabelObjectWithResponsibleProcessAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glLabelObjectWithResponsibleProcessAPPLE() {
@@ -2258,10 +1990,6 @@ static void* real__glMultiDrawArrays = nullptr;
 EXPORT void __attribute__((naked)) glMultiDrawArrays() {
     asm("jmp *%%rax" : : "a"(real__glMultiDrawArrays) : );
 }
-static void* real__glMultiDrawArraysEXT = nullptr;
-EXPORT void __attribute__((naked)) glMultiDrawArraysEXT() {
-    asm("jmp *%%rax" : : "a"(real__glMultiDrawArraysEXT) : );
-}
 static void* real__glMultiDrawElementArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glMultiDrawElementArrayAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glMultiDrawElementArrayAPPLE) : );
@@ -2273,10 +2001,6 @@ EXPORT void __attribute__((naked)) glMultiDrawElements() {
 static void* real__glMultiDrawElementsBaseVertex = nullptr;
 EXPORT void __attribute__((naked)) glMultiDrawElementsBaseVertex() {
     asm("jmp *%%rax" : : "a"(real__glMultiDrawElementsBaseVertex) : );
-}
-static void* real__glMultiDrawElementsEXT = nullptr;
-EXPORT void __attribute__((naked)) glMultiDrawElementsEXT() {
-    asm("jmp *%%rax" : : "a"(real__glMultiDrawElementsEXT) : );
 }
 static void* real__glMultiDrawRangeElementArrayAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glMultiDrawRangeElementArrayAPPLE() {
@@ -2630,10 +2354,6 @@ static void* real__glPatchParameteri = nullptr;
 EXPORT void __attribute__((naked)) glPatchParameteri() {
     asm("jmp *%%rax" : : "a"(real__glPatchParameteri) : );
 }
-static void* real__glPauseTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glPauseTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glPauseTransformFeedback) : );
-}
 static void* real__glPixelMapfv = nullptr;
 EXPORT void __attribute__((naked)) glPixelMapfv() {
     asm("jmp *%%rax" : : "a"(real__glPixelMapfv) : );
@@ -2734,10 +2454,6 @@ static void* real__glPrioritizeTextures = nullptr;
 EXPORT void __attribute__((naked)) glPrioritizeTextures() {
     asm("jmp *%%rax" : : "a"(real__glPrioritizeTextures) : );
 }
-static void* real__glProgramBinary = nullptr;
-EXPORT void __attribute__((naked)) glProgramBinary() {
-    asm("jmp *%%rax" : : "a"(real__glProgramBinary) : );
-}
 static void* real__glProgramEnvParameter4dARB = nullptr;
 EXPORT void __attribute__((naked)) glProgramEnvParameter4dARB() {
     asm("jmp *%%rax" : : "a"(real__glProgramEnvParameter4dARB) : );
@@ -2778,14 +2494,6 @@ static void* real__glProgramLocalParameters4fvEXT = nullptr;
 EXPORT void __attribute__((naked)) glProgramLocalParameters4fvEXT() {
     asm("jmp *%%rax" : : "a"(real__glProgramLocalParameters4fvEXT) : );
 }
-static void* real__glProgramParameteri = nullptr;
-EXPORT void __attribute__((naked)) glProgramParameteri() {
-    asm("jmp *%%rax" : : "a"(real__glProgramParameteri) : );
-}
-static void* real__glProgramParameteriEXT = nullptr;
-EXPORT void __attribute__((naked)) glProgramParameteriEXT() {
-    asm("jmp *%%rax" : : "a"(real__glProgramParameteriEXT) : );
-}
 static void* real__glProgramStringARB = nullptr;
 EXPORT void __attribute__((naked)) glProgramStringARB() {
     asm("jmp *%%rax" : : "a"(real__glProgramStringARB) : );
@@ -2798,30 +2506,6 @@ static void* real__glProgramUniform1dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform1dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform1dv) : );
 }
-static void* real__glProgramUniform1f = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1f() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1f) : );
-}
-static void* real__glProgramUniform1fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1fv) : );
-}
-static void* real__glProgramUniform1i = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1i() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1i) : );
-}
-static void* real__glProgramUniform1iv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1iv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1iv) : );
-}
-static void* real__glProgramUniform1ui = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1ui() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1ui) : );
-}
-static void* real__glProgramUniform1uiv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform1uiv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform1uiv) : );
-}
 static void* real__glProgramUniform2d = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform2d() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform2d) : );
@@ -2829,30 +2513,6 @@ EXPORT void __attribute__((naked)) glProgramUniform2d() {
 static void* real__glProgramUniform2dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform2dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform2dv) : );
-}
-static void* real__glProgramUniform2f = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2f() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2f) : );
-}
-static void* real__glProgramUniform2fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2fv) : );
-}
-static void* real__glProgramUniform2i = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2i() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2i) : );
-}
-static void* real__glProgramUniform2iv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2iv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2iv) : );
-}
-static void* real__glProgramUniform2ui = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2ui() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2ui) : );
-}
-static void* real__glProgramUniform2uiv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform2uiv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform2uiv) : );
 }
 static void* real__glProgramUniform3d = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform3d() {
@@ -2862,30 +2522,6 @@ static void* real__glProgramUniform3dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform3dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform3dv) : );
 }
-static void* real__glProgramUniform3f = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3f() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3f) : );
-}
-static void* real__glProgramUniform3fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3fv) : );
-}
-static void* real__glProgramUniform3i = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3i() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3i) : );
-}
-static void* real__glProgramUniform3iv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3iv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3iv) : );
-}
-static void* real__glProgramUniform3ui = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3ui() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3ui) : );
-}
-static void* real__glProgramUniform3uiv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform3uiv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform3uiv) : );
-}
 static void* real__glProgramUniform4d = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform4d() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform4d) : );
@@ -2894,101 +2530,41 @@ static void* real__glProgramUniform4dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniform4dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniform4dv) : );
 }
-static void* real__glProgramUniform4f = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4f() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4f) : );
-}
-static void* real__glProgramUniform4fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4fv) : );
-}
-static void* real__glProgramUniform4i = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4i() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4i) : );
-}
-static void* real__glProgramUniform4iv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4iv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4iv) : );
-}
-static void* real__glProgramUniform4ui = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4ui() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4ui) : );
-}
-static void* real__glProgramUniform4uiv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniform4uiv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniform4uiv) : );
-}
 static void* real__glProgramUniformMatrix2dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix2dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2dv) : );
-}
-static void* real__glProgramUniformMatrix2fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix2fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2fv) : );
 }
 static void* real__glProgramUniformMatrix2x3dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix2x3dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2x3dv) : );
 }
-static void* real__glProgramUniformMatrix2x3fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix2x3fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2x3fv) : );
-}
 static void* real__glProgramUniformMatrix2x4dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix2x4dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2x4dv) : );
-}
-static void* real__glProgramUniformMatrix2x4fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix2x4fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix2x4fv) : );
 }
 static void* real__glProgramUniformMatrix3dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix3dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3dv) : );
 }
-static void* real__glProgramUniformMatrix3fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix3fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3fv) : );
-}
 static void* real__glProgramUniformMatrix3x2dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix3x2dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3x2dv) : );
-}
-static void* real__glProgramUniformMatrix3x2fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix3x2fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3x2fv) : );
 }
 static void* real__glProgramUniformMatrix3x4dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix3x4dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3x4dv) : );
 }
-static void* real__glProgramUniformMatrix3x4fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix3x4fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix3x4fv) : );
-}
 static void* real__glProgramUniformMatrix4dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix4dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4dv) : );
-}
-static void* real__glProgramUniformMatrix4fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix4fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4fv) : );
 }
 static void* real__glProgramUniformMatrix4x2dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix4x2dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4x2dv) : );
 }
-static void* real__glProgramUniformMatrix4x2fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix4x2fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4x2fv) : );
-}
 static void* real__glProgramUniformMatrix4x3dv = nullptr;
 EXPORT void __attribute__((naked)) glProgramUniformMatrix4x3dv() {
     asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4x3dv) : );
-}
-static void* real__glProgramUniformMatrix4x3fv = nullptr;
-EXPORT void __attribute__((naked)) glProgramUniformMatrix4x3fv() {
-    asm("jmp *%%rax" : : "a"(real__glProgramUniformMatrix4x3fv) : );
 }
 static void* real__glProvokingVertex = nullptr;
 EXPORT void __attribute__((naked)) glProvokingVertex() {
@@ -3114,10 +2690,6 @@ static void* real__glRasterPos4sv = nullptr;
 EXPORT void __attribute__((naked)) glRasterPos4sv() {
     asm("jmp *%%rax" : : "a"(real__glRasterPos4sv) : );
 }
-static void* real__glReadBuffer = nullptr;
-EXPORT void __attribute__((naked)) glReadBuffer() {
-    asm("jmp *%%rax" : : "a"(real__glReadBuffer) : );
-}
 static void* real__glRectd = nullptr;
 EXPORT void __attribute__((naked)) glRectd() {
     asm("jmp *%%rax" : : "a"(real__glRectd) : );
@@ -3158,10 +2730,6 @@ static void* real__glRenderbufferStorageEXT = nullptr;
 EXPORT void __attribute__((naked)) glRenderbufferStorageEXT() {
     asm("jmp *%%rax" : : "a"(real__glRenderbufferStorageEXT) : );
 }
-static void* real__glRenderbufferStorageMultisampleEXT = nullptr;
-EXPORT void __attribute__((naked)) glRenderbufferStorageMultisampleEXT() {
-    asm("jmp *%%rax" : : "a"(real__glRenderbufferStorageMultisampleEXT) : );
-}
 static void* real__glResetHistogram = nullptr;
 EXPORT void __attribute__((naked)) glResetHistogram() {
     asm("jmp *%%rax" : : "a"(real__glResetHistogram) : );
@@ -3169,10 +2737,6 @@ EXPORT void __attribute__((naked)) glResetHistogram() {
 static void* real__glResetMinmax = nullptr;
 EXPORT void __attribute__((naked)) glResetMinmax() {
     asm("jmp *%%rax" : : "a"(real__glResetMinmax) : );
-}
-static void* real__glResumeTransformFeedback = nullptr;
-EXPORT void __attribute__((naked)) glResumeTransformFeedback() {
-    asm("jmp *%%rax" : : "a"(real__glResumeTransformFeedback) : );
 }
 static void* real__glRotated = nullptr;
 EXPORT void __attribute__((naked)) glRotated() {
@@ -3185,10 +2749,6 @@ EXPORT void __attribute__((naked)) glRotatef() {
 static void* real__glSampleCoverageARB = nullptr;
 EXPORT void __attribute__((naked)) glSampleCoverageARB() {
     asm("jmp *%%rax" : : "a"(real__glSampleCoverageARB) : );
-}
-static void* real__glSampleMaski = nullptr;
-EXPORT void __attribute__((naked)) glSampleMaski() {
-    asm("jmp *%%rax" : : "a"(real__glSampleMaski) : );
 }
 static void* real__glSamplePass = nullptr;
 EXPORT void __attribute__((naked)) glSamplePass() {
@@ -3205,22 +2765,6 @@ EXPORT void __attribute__((naked)) glSamplerParameterIiv() {
 static void* real__glSamplerParameterIuiv = nullptr;
 EXPORT void __attribute__((naked)) glSamplerParameterIuiv() {
     asm("jmp *%%rax" : : "a"(real__glSamplerParameterIuiv) : );
-}
-static void* real__glSamplerParameterf = nullptr;
-EXPORT void __attribute__((naked)) glSamplerParameterf() {
-    asm("jmp *%%rax" : : "a"(real__glSamplerParameterf) : );
-}
-static void* real__glSamplerParameterfv = nullptr;
-EXPORT void __attribute__((naked)) glSamplerParameterfv() {
-    asm("jmp *%%rax" : : "a"(real__glSamplerParameterfv) : );
-}
-static void* real__glSamplerParameteri = nullptr;
-EXPORT void __attribute__((naked)) glSamplerParameteri() {
-    asm("jmp *%%rax" : : "a"(real__glSamplerParameteri) : );
-}
-static void* real__glSamplerParameteriv = nullptr;
-EXPORT void __attribute__((naked)) glSamplerParameteriv() {
-    asm("jmp *%%rax" : : "a"(real__glSamplerParameteriv) : );
 }
 static void* real__glScaled = nullptr;
 EXPORT void __attribute__((naked)) glScaled() {
@@ -3398,17 +2942,9 @@ static void* real__glShaderSourceARB = nullptr;
 EXPORT void __attribute__((naked)) glShaderSourceARB() {
     asm("jmp *%%rax" : : "a"(real__glShaderSourceARB) : );
 }
-static void* real__glStencilFunc = nullptr;
-EXPORT void __attribute__((naked)) glStencilFunc() {
-    asm("jmp *%%rax" : : "a"(real__glStencilFunc) : );
-}
 static void* real__glStencilFuncSeparateATI = nullptr;
 EXPORT void __attribute__((naked)) glStencilFuncSeparateATI() {
     asm("jmp *%%rax" : : "a"(real__glStencilFuncSeparateATI) : );
-}
-static void* real__glStencilOp = nullptr;
-EXPORT void __attribute__((naked)) glStencilOp() {
-    asm("jmp *%%rax" : : "a"(real__glStencilOp) : );
 }
 static void* real__glStencilOpSeparateATI = nullptr;
 EXPORT void __attribute__((naked)) glStencilOpSeparateATI() {
@@ -3610,10 +3146,6 @@ static void* real__glTexImage2DMultisample = nullptr;
 EXPORT void __attribute__((naked)) glTexImage2DMultisample() {
     asm("jmp *%%rax" : : "a"(real__glTexImage2DMultisample) : );
 }
-static void* real__glTexImage3D = nullptr;
-EXPORT void __attribute__((naked)) glTexImage3D() {
-    asm("jmp *%%rax" : : "a"(real__glTexImage3D) : );
-}
 static void* real__glTexImage3DMultisample = nullptr;
 EXPORT void __attribute__((naked)) glTexImage3DMultisample() {
     asm("jmp *%%rax" : : "a"(real__glTexImage3DMultisample) : );
@@ -3622,45 +3154,17 @@ static void* real__glTexParameterIiv = nullptr;
 EXPORT void __attribute__((naked)) glTexParameterIiv() {
     asm("jmp *%%rax" : : "a"(real__glTexParameterIiv) : );
 }
-static void* real__glTexParameterIivEXT = nullptr;
-EXPORT void __attribute__((naked)) glTexParameterIivEXT() {
-    asm("jmp *%%rax" : : "a"(real__glTexParameterIivEXT) : );
-}
 static void* real__glTexParameterIuiv = nullptr;
 EXPORT void __attribute__((naked)) glTexParameterIuiv() {
     asm("jmp *%%rax" : : "a"(real__glTexParameterIuiv) : );
-}
-static void* real__glTexParameterIuivEXT = nullptr;
-EXPORT void __attribute__((naked)) glTexParameterIuivEXT() {
-    asm("jmp *%%rax" : : "a"(real__glTexParameterIuivEXT) : );
-}
-static void* real__glTexParameterfv = nullptr;
-EXPORT void __attribute__((naked)) glTexParameterfv() {
-    asm("jmp *%%rax" : : "a"(real__glTexParameterfv) : );
-}
-static void* real__glTexParameteriv = nullptr;
-EXPORT void __attribute__((naked)) glTexParameteriv() {
-    asm("jmp *%%rax" : : "a"(real__glTexParameteriv) : );
 }
 static void* real__glTexStorage1D = nullptr;
 EXPORT void __attribute__((naked)) glTexStorage1D() {
     asm("jmp *%%rax" : : "a"(real__glTexStorage1D) : );
 }
-static void* real__glTexStorage2D = nullptr;
-EXPORT void __attribute__((naked)) glTexStorage2D() {
-    asm("jmp *%%rax" : : "a"(real__glTexStorage2D) : );
-}
-static void* real__glTexStorage3D = nullptr;
-EXPORT void __attribute__((naked)) glTexStorage3D() {
-    asm("jmp *%%rax" : : "a"(real__glTexStorage3D) : );
-}
 static void* real__glTexSubImage1D = nullptr;
 EXPORT void __attribute__((naked)) glTexSubImage1D() {
     asm("jmp *%%rax" : : "a"(real__glTexSubImage1D) : );
-}
-static void* real__glTexSubImage3D = nullptr;
-EXPORT void __attribute__((naked)) glTexSubImage3D() {
-    asm("jmp *%%rax" : : "a"(real__glTexSubImage3D) : );
 }
 static void* real__glTextureBarrierNV = nullptr;
 EXPORT void __attribute__((naked)) glTextureBarrierNV() {
@@ -3669,10 +3173,6 @@ EXPORT void __attribute__((naked)) glTextureBarrierNV() {
 static void* real__glTextureRangeAPPLE = nullptr;
 EXPORT void __attribute__((naked)) glTextureRangeAPPLE() {
     asm("jmp *%%rax" : : "a"(real__glTextureRangeAPPLE) : );
-}
-static void* real__glTransformFeedbackVaryings = nullptr;
-EXPORT void __attribute__((naked)) glTransformFeedbackVaryings() {
-    asm("jmp *%%rax" : : "a"(real__glTransformFeedbackVaryings) : );
 }
 static void* real__glTransformFeedbackVaryingsEXT = nullptr;
 EXPORT void __attribute__((naked)) glTransformFeedbackVaryingsEXT() {
@@ -3710,17 +3210,9 @@ static void* real__glUniform1ivARB = nullptr;
 EXPORT void __attribute__((naked)) glUniform1ivARB() {
     asm("jmp *%%rax" : : "a"(real__glUniform1ivARB) : );
 }
-static void* real__glUniform1ui = nullptr;
-EXPORT void __attribute__((naked)) glUniform1ui() {
-    asm("jmp *%%rax" : : "a"(real__glUniform1ui) : );
-}
 static void* real__glUniform1uiEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform1uiEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniform1uiEXT) : );
-}
-static void* real__glUniform1uiv = nullptr;
-EXPORT void __attribute__((naked)) glUniform1uiv() {
-    asm("jmp *%%rax" : : "a"(real__glUniform1uiv) : );
 }
 static void* real__glUniform1uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform1uivEXT() {
@@ -3750,17 +3242,9 @@ static void* real__glUniform2ivARB = nullptr;
 EXPORT void __attribute__((naked)) glUniform2ivARB() {
     asm("jmp *%%rax" : : "a"(real__glUniform2ivARB) : );
 }
-static void* real__glUniform2ui = nullptr;
-EXPORT void __attribute__((naked)) glUniform2ui() {
-    asm("jmp *%%rax" : : "a"(real__glUniform2ui) : );
-}
 static void* real__glUniform2uiEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform2uiEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniform2uiEXT) : );
-}
-static void* real__glUniform2uiv = nullptr;
-EXPORT void __attribute__((naked)) glUniform2uiv() {
-    asm("jmp *%%rax" : : "a"(real__glUniform2uiv) : );
 }
 static void* real__glUniform2uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform2uivEXT() {
@@ -3790,17 +3274,9 @@ static void* real__glUniform3ivARB = nullptr;
 EXPORT void __attribute__((naked)) glUniform3ivARB() {
     asm("jmp *%%rax" : : "a"(real__glUniform3ivARB) : );
 }
-static void* real__glUniform3ui = nullptr;
-EXPORT void __attribute__((naked)) glUniform3ui() {
-    asm("jmp *%%rax" : : "a"(real__glUniform3ui) : );
-}
 static void* real__glUniform3uiEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform3uiEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniform3uiEXT) : );
-}
-static void* real__glUniform3uiv = nullptr;
-EXPORT void __attribute__((naked)) glUniform3uiv() {
-    asm("jmp *%%rax" : : "a"(real__glUniform3uiv) : );
 }
 static void* real__glUniform3uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform3uivEXT() {
@@ -3830,17 +3306,9 @@ static void* real__glUniform4ivARB = nullptr;
 EXPORT void __attribute__((naked)) glUniform4ivARB() {
     asm("jmp *%%rax" : : "a"(real__glUniform4ivARB) : );
 }
-static void* real__glUniform4ui = nullptr;
-EXPORT void __attribute__((naked)) glUniform4ui() {
-    asm("jmp *%%rax" : : "a"(real__glUniform4ui) : );
-}
 static void* real__glUniform4uiEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform4uiEXT() {
     asm("jmp *%%rax" : : "a"(real__glUniform4uiEXT) : );
-}
-static void* real__glUniform4uiv = nullptr;
-EXPORT void __attribute__((naked)) glUniform4uiv() {
-    asm("jmp *%%rax" : : "a"(real__glUniform4uiv) : );
 }
 static void* real__glUniform4uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glUniform4uivEXT() {
@@ -3862,17 +3330,9 @@ static void* real__glUniformMatrix2x3dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix2x3dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix2x3dv) : );
 }
-static void* real__glUniformMatrix2x3fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix2x3fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix2x3fv) : );
-}
 static void* real__glUniformMatrix2x4dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix2x4dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix2x4dv) : );
-}
-static void* real__glUniformMatrix2x4fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix2x4fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix2x4fv) : );
 }
 static void* real__glUniformMatrix3dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix3dv() {
@@ -3886,17 +3346,9 @@ static void* real__glUniformMatrix3x2dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix3x2dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix3x2dv) : );
 }
-static void* real__glUniformMatrix3x2fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix3x2fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix3x2fv) : );
-}
 static void* real__glUniformMatrix3x4dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix3x4dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix3x4dv) : );
-}
-static void* real__glUniformMatrix3x4fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix3x4fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix3x4fv) : );
 }
 static void* real__glUniformMatrix4dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix4dv() {
@@ -3910,17 +3362,9 @@ static void* real__glUniformMatrix4x2dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix4x2dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix4x2dv) : );
 }
-static void* real__glUniformMatrix4x2fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix4x2fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix4x2fv) : );
-}
 static void* real__glUniformMatrix4x3dv = nullptr;
 EXPORT void __attribute__((naked)) glUniformMatrix4x3dv() {
     asm("jmp *%%rax" : : "a"(real__glUniformMatrix4x3dv) : );
-}
-static void* real__glUniformMatrix4x3fv = nullptr;
-EXPORT void __attribute__((naked)) glUniformMatrix4x3fv() {
-    asm("jmp *%%rax" : : "a"(real__glUniformMatrix4x3fv) : );
 }
 static void* real__glUniformSubroutinesuiv = nullptr;
 EXPORT void __attribute__((naked)) glUniformSubroutinesuiv() {
@@ -3938,17 +3382,9 @@ static void* real__glUseProgramObjectARB = nullptr;
 EXPORT void __attribute__((naked)) glUseProgramObjectARB() {
     asm("jmp *%%rax" : : "a"(real__glUseProgramObjectARB) : );
 }
-static void* real__glUseProgramStages = nullptr;
-EXPORT void __attribute__((naked)) glUseProgramStages() {
-    asm("jmp *%%rax" : : "a"(real__glUseProgramStages) : );
-}
 static void* real__glValidateProgramARB = nullptr;
 EXPORT void __attribute__((naked)) glValidateProgramARB() {
     asm("jmp *%%rax" : : "a"(real__glValidateProgramARB) : );
-}
-static void* real__glValidateProgramPipeline = nullptr;
-EXPORT void __attribute__((naked)) glValidateProgramPipeline() {
-    asm("jmp *%%rax" : : "a"(real__glValidateProgramPipeline) : );
 }
 static void* real__glVertex2d = nullptr;
 EXPORT void __attribute__((naked)) glVertex2d() {
@@ -4310,10 +3746,6 @@ static void* real__glVertexAttrib4usvARB = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttrib4usvARB() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttrib4usvARB) : );
 }
-static void* real__glVertexAttribDivisor = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribDivisor() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribDivisor) : );
-}
 static void* real__glVertexAttribDivisorARB = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribDivisorARB() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribDivisorARB) : );
@@ -4422,17 +3854,9 @@ static void* real__glVertexAttribI4bvEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4bvEXT() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribI4bvEXT) : );
 }
-static void* real__glVertexAttribI4i = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribI4i() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribI4i) : );
-}
 static void* real__glVertexAttribI4iEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4iEXT() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribI4iEXT) : );
-}
-static void* real__glVertexAttribI4iv = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribI4iv() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribI4iv) : );
 }
 static void* real__glVertexAttribI4ivEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4ivEXT() {
@@ -4454,17 +3878,9 @@ static void* real__glVertexAttribI4ubvEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4ubvEXT() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribI4ubvEXT) : );
 }
-static void* real__glVertexAttribI4ui = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribI4ui() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribI4ui) : );
-}
 static void* real__glVertexAttribI4uiEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4uiEXT() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribI4uiEXT) : );
-}
-static void* real__glVertexAttribI4uiv = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribI4uiv() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribI4uiv) : );
 }
 static void* real__glVertexAttribI4uivEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4uivEXT() {
@@ -4477,10 +3893,6 @@ EXPORT void __attribute__((naked)) glVertexAttribI4usv() {
 static void* real__glVertexAttribI4usvEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribI4usvEXT() {
     asm("jmp *%%rax" : : "a"(real__glVertexAttribI4usvEXT) : );
-}
-static void* real__glVertexAttribIPointer = nullptr;
-EXPORT void __attribute__((naked)) glVertexAttribIPointer() {
-    asm("jmp *%%rax" : : "a"(real__glVertexAttribIPointer) : );
 }
 static void* real__glVertexAttribIPointerEXT = nullptr;
 EXPORT void __attribute__((naked)) glVertexAttribIPointerEXT() {
@@ -5137,7 +4549,6 @@ static void initExports() {
     real__glcPluginDisconnect = gapic::GetGfxProcAddress("glcPluginDisconnect", true);
     real__glcRecordError = gapic::GetGfxProcAddress("glcRecordError", true);
     real__glAccum = gapic::GetGfxProcAddress("glAccum", true);
-    real__glActiveShaderProgram = gapic::GetGfxProcAddress("glActiveShaderProgram", true);
     real__glActiveStencilFaceEXT = gapic::GetGfxProcAddress("glActiveStencilFaceEXT", true);
     real__glActiveTextureARB = gapic::GetGfxProcAddress("glActiveTextureARB", true);
     real__glAlphaFunc = gapic::GetGfxProcAddress("glAlphaFunc", true);
@@ -5146,26 +4557,20 @@ static void initExports() {
     real__glAttachObjectARB = gapic::GetGfxProcAddress("glAttachObjectARB", true);
     real__glBegin = gapic::GetGfxProcAddress("glBegin", true);
     real__glBeginConditionalRender = gapic::GetGfxProcAddress("glBeginConditionalRender", true);
-    real__glBeginConditionalRenderNV = gapic::GetGfxProcAddress("glBeginConditionalRenderNV", true);
     real__glBeginQueryARB = gapic::GetGfxProcAddress("glBeginQueryARB", true);
     real__glBeginQueryIndexed = gapic::GetGfxProcAddress("glBeginQueryIndexed", true);
-    real__glBeginTransformFeedback = gapic::GetGfxProcAddress("glBeginTransformFeedback", true);
     real__glBeginTransformFeedbackEXT = gapic::GetGfxProcAddress("glBeginTransformFeedbackEXT", true);
     real__glBindAttribLocationARB = gapic::GetGfxProcAddress("glBindAttribLocationARB", true);
     real__glBindBufferARB = gapic::GetGfxProcAddress("glBindBufferARB", true);
     real__glBindBufferBaseEXT = gapic::GetGfxProcAddress("glBindBufferBaseEXT", true);
     real__glBindBufferOffsetEXT = gapic::GetGfxProcAddress("glBindBufferOffsetEXT", true);
-    real__glBindBufferRange = gapic::GetGfxProcAddress("glBindBufferRange", true);
     real__glBindBufferRangeEXT = gapic::GetGfxProcAddress("glBindBufferRangeEXT", true);
     real__glBindFragDataLocation = gapic::GetGfxProcAddress("glBindFragDataLocation", true);
     real__glBindFragDataLocationEXT = gapic::GetGfxProcAddress("glBindFragDataLocationEXT", true);
     real__glBindFragDataLocationIndexed = gapic::GetGfxProcAddress("glBindFragDataLocationIndexed", true);
     real__glBindFramebufferEXT = gapic::GetGfxProcAddress("glBindFramebufferEXT", true);
     real__glBindProgramARB = gapic::GetGfxProcAddress("glBindProgramARB", true);
-    real__glBindProgramPipeline = gapic::GetGfxProcAddress("glBindProgramPipeline", true);
     real__glBindRenderbufferEXT = gapic::GetGfxProcAddress("glBindRenderbufferEXT", true);
-    real__glBindSampler = gapic::GetGfxProcAddress("glBindSampler", true);
-    real__glBindTransformFeedback = gapic::GetGfxProcAddress("glBindTransformFeedback", true);
     real__glBindVertexArrayAPPLE = gapic::GetGfxProcAddress("glBindVertexArrayAPPLE", true);
     real__glBitmap = gapic::GetGfxProcAddress("glBitmap", true);
     real__glBlendColorEXT = gapic::GetGfxProcAddress("glBlendColorEXT", true);
@@ -5191,10 +4596,6 @@ static void initExports() {
     real__glClampColor = gapic::GetGfxProcAddress("glClampColor", true);
     real__glClampColorARB = gapic::GetGfxProcAddress("glClampColorARB", true);
     real__glClearAccum = gapic::GetGfxProcAddress("glClearAccum", true);
-    real__glClearBufferfi = gapic::GetGfxProcAddress("glClearBufferfi", true);
-    real__glClearBufferfv = gapic::GetGfxProcAddress("glClearBufferfv", true);
-    real__glClearBufferiv = gapic::GetGfxProcAddress("glClearBufferiv", true);
-    real__glClearBufferuiv = gapic::GetGfxProcAddress("glClearBufferuiv", true);
     real__glClearColorIiEXT = gapic::GetGfxProcAddress("glClearColorIiEXT", true);
     real__glClearColorIuiEXT = gapic::GetGfxProcAddress("glClearColorIuiEXT", true);
     real__glClearDepth = gapic::GetGfxProcAddress("glClearDepth", true);
@@ -5256,12 +4657,10 @@ static void initExports() {
     real__glCompressedTexImage1D = gapic::GetGfxProcAddress("glCompressedTexImage1D", true);
     real__glCompressedTexImage1DARB = gapic::GetGfxProcAddress("glCompressedTexImage1DARB", true);
     real__glCompressedTexImage2DARB = gapic::GetGfxProcAddress("glCompressedTexImage2DARB", true);
-    real__glCompressedTexImage3D = gapic::GetGfxProcAddress("glCompressedTexImage3D", true);
     real__glCompressedTexImage3DARB = gapic::GetGfxProcAddress("glCompressedTexImage3DARB", true);
     real__glCompressedTexSubImage1D = gapic::GetGfxProcAddress("glCompressedTexSubImage1D", true);
     real__glCompressedTexSubImage1DARB = gapic::GetGfxProcAddress("glCompressedTexSubImage1DARB", true);
     real__glCompressedTexSubImage2DARB = gapic::GetGfxProcAddress("glCompressedTexSubImage2DARB", true);
-    real__glCompressedTexSubImage3D = gapic::GetGfxProcAddress("glCompressedTexSubImage3D", true);
     real__glCompressedTexSubImage3DARB = gapic::GetGfxProcAddress("glCompressedTexSubImage3DARB", true);
     real__glConvolutionFilter1D = gapic::GetGfxProcAddress("glConvolutionFilter1D", true);
     real__glConvolutionFilter2D = gapic::GetGfxProcAddress("glConvolutionFilter2D", true);
@@ -5269,7 +4668,6 @@ static void initExports() {
     real__glConvolutionParameterfv = gapic::GetGfxProcAddress("glConvolutionParameterfv", true);
     real__glConvolutionParameteri = gapic::GetGfxProcAddress("glConvolutionParameteri", true);
     real__glConvolutionParameteriv = gapic::GetGfxProcAddress("glConvolutionParameteriv", true);
-    real__glCopyBufferSubData = gapic::GetGfxProcAddress("glCopyBufferSubData", true);
     real__glCopyColorSubTable = gapic::GetGfxProcAddress("glCopyColorSubTable", true);
     real__glCopyColorTable = gapic::GetGfxProcAddress("glCopyColorTable", true);
     real__glCopyConvolutionFilter1D = gapic::GetGfxProcAddress("glCopyConvolutionFilter1D", true);
@@ -5277,47 +4675,37 @@ static void initExports() {
     real__glCopyPixels = gapic::GetGfxProcAddress("glCopyPixels", true);
     real__glCopyTexImage1D = gapic::GetGfxProcAddress("glCopyTexImage1D", true);
     real__glCopyTexSubImage1D = gapic::GetGfxProcAddress("glCopyTexSubImage1D", true);
-    real__glCopyTexSubImage3D = gapic::GetGfxProcAddress("glCopyTexSubImage3D", true);
     real__glCreateProgramObjectARB = gapic::GetGfxProcAddress("glCreateProgramObjectARB", true);
     real__glCreateShaderObjectARB = gapic::GetGfxProcAddress("glCreateShaderObjectARB", true);
-    real__glCreateShaderProgramv = gapic::GetGfxProcAddress("glCreateShaderProgramv", true);
     real__glDeleteBuffersARB = gapic::GetGfxProcAddress("glDeleteBuffersARB", true);
     real__glDeleteFencesAPPLE = gapic::GetGfxProcAddress("glDeleteFencesAPPLE", true);
     real__glDeleteFramebuffersEXT = gapic::GetGfxProcAddress("glDeleteFramebuffersEXT", true);
     real__glDeleteLists = gapic::GetGfxProcAddress("glDeleteLists", true);
     real__glDeleteNamedStringARB = gapic::GetGfxProcAddress("glDeleteNamedStringARB", true);
     real__glDeleteObjectARB = gapic::GetGfxProcAddress("glDeleteObjectARB", true);
-    real__glDeleteProgramPipelines = gapic::GetGfxProcAddress("glDeleteProgramPipelines", true);
     real__glDeleteProgramsARB = gapic::GetGfxProcAddress("glDeleteProgramsARB", true);
     real__glDeleteQueriesARB = gapic::GetGfxProcAddress("glDeleteQueriesARB", true);
     real__glDeleteRenderbuffersEXT = gapic::GetGfxProcAddress("glDeleteRenderbuffersEXT", true);
-    real__glDeleteSamplers = gapic::GetGfxProcAddress("glDeleteSamplers", true);
-    real__glDeleteTransformFeedbacks = gapic::GetGfxProcAddress("glDeleteTransformFeedbacks", true);
     real__glDeleteVertexArraysAPPLE = gapic::GetGfxProcAddress("glDeleteVertexArraysAPPLE", true);
     real__glDepthBoundsEXT = gapic::GetGfxProcAddress("glDepthBoundsEXT", true);
     real__glDepthRange = gapic::GetGfxProcAddress("glDepthRange", true);
     real__glDepthRangeArrayv = gapic::GetGfxProcAddress("glDepthRangeArrayv", true);
     real__glDepthRangeIndexed = gapic::GetGfxProcAddress("glDepthRangeIndexed", true);
     real__glDetachObjectARB = gapic::GetGfxProcAddress("glDetachObjectARB", true);
+    real__glDisableClientState = gapic::GetGfxProcAddress("glDisableClientState", true);
     real__glDisableIndexedEXT = gapic::GetGfxProcAddress("glDisableIndexedEXT", true);
     real__glDisableVertexAttribAPPLE = gapic::GetGfxProcAddress("glDisableVertexAttribAPPLE", true);
     real__glDisableVertexAttribArrayARB = gapic::GetGfxProcAddress("glDisableVertexAttribArrayARB", true);
     real__glDisablei = gapic::GetGfxProcAddress("glDisablei", true);
-    real__glDrawArraysIndirect = gapic::GetGfxProcAddress("glDrawArraysIndirect", true);
-    real__glDrawArraysInstanced = gapic::GetGfxProcAddress("glDrawArraysInstanced", true);
     real__glDrawArraysInstancedARB = gapic::GetGfxProcAddress("glDrawArraysInstancedARB", true);
     real__glDrawBuffer = gapic::GetGfxProcAddress("glDrawBuffer", true);
-    real__glDrawBuffers = gapic::GetGfxProcAddress("glDrawBuffers", true);
     real__glDrawBuffersARB = gapic::GetGfxProcAddress("glDrawBuffersARB", true);
     real__glDrawElementArrayAPPLE = gapic::GetGfxProcAddress("glDrawElementArrayAPPLE", true);
     real__glDrawElementsBaseVertex = gapic::GetGfxProcAddress("glDrawElementsBaseVertex", true);
-    real__glDrawElementsIndirect = gapic::GetGfxProcAddress("glDrawElementsIndirect", true);
-    real__glDrawElementsInstanced = gapic::GetGfxProcAddress("glDrawElementsInstanced", true);
     real__glDrawElementsInstancedARB = gapic::GetGfxProcAddress("glDrawElementsInstancedARB", true);
     real__glDrawElementsInstancedBaseVertex = gapic::GetGfxProcAddress("glDrawElementsInstancedBaseVertex", true);
     real__glDrawPixels = gapic::GetGfxProcAddress("glDrawPixels", true);
     real__glDrawRangeElementArrayAPPLE = gapic::GetGfxProcAddress("glDrawRangeElementArrayAPPLE", true);
-    real__glDrawRangeElements = gapic::GetGfxProcAddress("glDrawRangeElements", true);
     real__glDrawRangeElementsBaseVertex = gapic::GetGfxProcAddress("glDrawRangeElementsBaseVertex", true);
     real__glDrawRangeElementsEXT = gapic::GetGfxProcAddress("glDrawRangeElementsEXT", true);
     real__glDrawTransformFeedback = gapic::GetGfxProcAddress("glDrawTransformFeedback", true);
@@ -5326,17 +4714,16 @@ static void initExports() {
     real__glEdgeFlagPointer = gapic::GetGfxProcAddress("glEdgeFlagPointer", true);
     real__glEdgeFlagv = gapic::GetGfxProcAddress("glEdgeFlagv", true);
     real__glElementPointerAPPLE = gapic::GetGfxProcAddress("glElementPointerAPPLE", true);
+    real__glEnableClientState = gapic::GetGfxProcAddress("glEnableClientState", true);
     real__glEnableIndexedEXT = gapic::GetGfxProcAddress("glEnableIndexedEXT", true);
     real__glEnableVertexAttribAPPLE = gapic::GetGfxProcAddress("glEnableVertexAttribAPPLE", true);
     real__glEnableVertexAttribArrayARB = gapic::GetGfxProcAddress("glEnableVertexAttribArrayARB", true);
     real__glEnablei = gapic::GetGfxProcAddress("glEnablei", true);
     real__glEnd = gapic::GetGfxProcAddress("glEnd", true);
     real__glEndConditionalRender = gapic::GetGfxProcAddress("glEndConditionalRender", true);
-    real__glEndConditionalRenderNV = gapic::GetGfxProcAddress("glEndConditionalRenderNV", true);
     real__glEndList = gapic::GetGfxProcAddress("glEndList", true);
     real__glEndQueryARB = gapic::GetGfxProcAddress("glEndQueryARB", true);
     real__glEndQueryIndexed = gapic::GetGfxProcAddress("glEndQueryIndexed", true);
-    real__glEndTransformFeedback = gapic::GetGfxProcAddress("glEndTransformFeedback", true);
     real__glEndTransformFeedbackEXT = gapic::GetGfxProcAddress("glEndTransformFeedbackEXT", true);
     real__glEvalCoord1d = gapic::GetGfxProcAddress("glEvalCoord1d", true);
     real__glEvalCoord1dv = gapic::GetGfxProcAddress("glEvalCoord1dv", true);
@@ -5355,7 +4742,6 @@ static void initExports() {
     real__glFinishFenceAPPLE = gapic::GetGfxProcAddress("glFinishFenceAPPLE", true);
     real__glFinishObjectAPPLE = gapic::GetGfxProcAddress("glFinishObjectAPPLE", true);
     real__glFinishRenderAPPLE = gapic::GetGfxProcAddress("glFinishRenderAPPLE", true);
-    real__glFlushMappedBufferRange = gapic::GetGfxProcAddress("glFlushMappedBufferRange", true);
     real__glFlushMappedBufferRangeAPPLE = gapic::GetGfxProcAddress("glFlushMappedBufferRangeAPPLE", true);
     real__glFlushRenderAPPLE = gapic::GetGfxProcAddress("glFlushRenderAPPLE", true);
     real__glFlushVertexArrayRangeAPPLE = gapic::GetGfxProcAddress("glFlushVertexArrayRangeAPPLE", true);
@@ -5380,21 +4766,16 @@ static void initExports() {
     real__glFramebufferTexture2DEXT = gapic::GetGfxProcAddress("glFramebufferTexture2DEXT", true);
     real__glFramebufferTexture3D = gapic::GetGfxProcAddress("glFramebufferTexture3D", true);
     real__glFramebufferTexture3DEXT = gapic::GetGfxProcAddress("glFramebufferTexture3DEXT", true);
-    real__glFramebufferTextureEXT = gapic::GetGfxProcAddress("glFramebufferTextureEXT", true);
     real__glFramebufferTextureFaceEXT = gapic::GetGfxProcAddress("glFramebufferTextureFaceEXT", true);
-    real__glFramebufferTextureLayer = gapic::GetGfxProcAddress("glFramebufferTextureLayer", true);
     real__glFramebufferTextureLayerEXT = gapic::GetGfxProcAddress("glFramebufferTextureLayerEXT", true);
     real__glFrustum = gapic::GetGfxProcAddress("glFrustum", true);
     real__glGenBuffersARB = gapic::GetGfxProcAddress("glGenBuffersARB", true);
     real__glGenFencesAPPLE = gapic::GetGfxProcAddress("glGenFencesAPPLE", true);
     real__glGenFramebuffersEXT = gapic::GetGfxProcAddress("glGenFramebuffersEXT", true);
     real__glGenLists = gapic::GetGfxProcAddress("glGenLists", true);
-    real__glGenProgramPipelines = gapic::GetGfxProcAddress("glGenProgramPipelines", true);
     real__glGenProgramsARB = gapic::GetGfxProcAddress("glGenProgramsARB", true);
     real__glGenQueriesARB = gapic::GetGfxProcAddress("glGenQueriesARB", true);
     real__glGenRenderbuffersEXT = gapic::GetGfxProcAddress("glGenRenderbuffersEXT", true);
-    real__glGenSamplers = gapic::GetGfxProcAddress("glGenSamplers", true);
-    real__glGenTransformFeedbacks = gapic::GetGfxProcAddress("glGenTransformFeedbacks", true);
     real__glGenVertexArraysAPPLE = gapic::GetGfxProcAddress("glGenVertexArraysAPPLE", true);
     real__glGenerateMipmapEXT = gapic::GetGfxProcAddress("glGenerateMipmapEXT", true);
     real__glGetActiveAttribARB = gapic::GetGfxProcAddress("glGetActiveAttribARB", true);
@@ -5406,10 +4787,7 @@ static void initExports() {
     real__glGetAttachedObjectsARB = gapic::GetGfxProcAddress("glGetAttachedObjectsARB", true);
     real__glGetAttribLocationARB = gapic::GetGfxProcAddress("glGetAttribLocationARB", true);
     real__glGetBooleanIndexedvEXT = gapic::GetGfxProcAddress("glGetBooleanIndexedvEXT", true);
-    real__glGetBooleani_v = gapic::GetGfxProcAddress("glGetBooleani_v", true);
-    real__glGetBufferParameteri64v = gapic::GetGfxProcAddress("glGetBufferParameteri64v", true);
     real__glGetBufferParameterivARB = gapic::GetGfxProcAddress("glGetBufferParameterivARB", true);
-    real__glGetBufferPointerv = gapic::GetGfxProcAddress("glGetBufferPointerv", true);
     real__glGetBufferPointervARB = gapic::GetGfxProcAddress("glGetBufferPointervARB", true);
     real__glGetBufferSubData = gapic::GetGfxProcAddress("glGetBufferSubData", true);
     real__glGetBufferSubDataARB = gapic::GetGfxProcAddress("glGetBufferSubDataARB", true);
@@ -5436,7 +4814,6 @@ static void initExports() {
     real__glGetFinalCombinerInputParameterivNV = gapic::GetGfxProcAddress("glGetFinalCombinerInputParameterivNV", true);
     real__glGetFloati_v = gapic::GetGfxProcAddress("glGetFloati_v", true);
     real__glGetFragDataIndex = gapic::GetGfxProcAddress("glGetFragDataIndex", true);
-    real__glGetFragDataLocation = gapic::GetGfxProcAddress("glGetFragDataLocation", true);
     real__glGetFragDataLocationEXT = gapic::GetGfxProcAddress("glGetFragDataLocationEXT", true);
     real__glGetFramebufferAttachmentParameterivEXT = gapic::GetGfxProcAddress("glGetFramebufferAttachmentParameterivEXT", true);
     real__glGetHandleARB = gapic::GetGfxProcAddress("glGetHandleARB", true);
@@ -5444,11 +4821,7 @@ static void initExports() {
     real__glGetHistogramParameterfv = gapic::GetGfxProcAddress("glGetHistogramParameterfv", true);
     real__glGetHistogramParameteriv = gapic::GetGfxProcAddress("glGetHistogramParameteriv", true);
     real__glGetInfoLogARB = gapic::GetGfxProcAddress("glGetInfoLogARB", true);
-    real__glGetInteger64i_v = gapic::GetGfxProcAddress("glGetInteger64i_v", true);
-    real__glGetInteger64v = gapic::GetGfxProcAddress("glGetInteger64v", true);
     real__glGetIntegerIndexedvEXT = gapic::GetGfxProcAddress("glGetIntegerIndexedvEXT", true);
-    real__glGetIntegeri_v = gapic::GetGfxProcAddress("glGetIntegeri_v", true);
-    real__glGetInternalformativ = gapic::GetGfxProcAddress("glGetInternalformativ", true);
     real__glGetLightfv = gapic::GetGfxProcAddress("glGetLightfv", true);
     real__glGetLightiv = gapic::GetGfxProcAddress("glGetLightiv", true);
     real__glGetMapdv = gapic::GetGfxProcAddress("glGetMapdv", true);
@@ -5459,10 +4832,8 @@ static void initExports() {
     real__glGetMinmax = gapic::GetGfxProcAddress("glGetMinmax", true);
     real__glGetMinmaxParameterfv = gapic::GetGfxProcAddress("glGetMinmaxParameterfv", true);
     real__glGetMinmaxParameteriv = gapic::GetGfxProcAddress("glGetMinmaxParameteriv", true);
-    real__glGetMultisamplefv = gapic::GetGfxProcAddress("glGetMultisamplefv", true);
     real__glGetNamedStringARB = gapic::GetGfxProcAddress("glGetNamedStringARB", true);
     real__glGetNamedStringivARB = gapic::GetGfxProcAddress("glGetNamedStringivARB", true);
-    real__glGetObjectLabelEXT = gapic::GetGfxProcAddress("glGetObjectLabelEXT", true);
     real__glGetObjectParameterfvARB = gapic::GetGfxProcAddress("glGetObjectParameterfvARB", true);
     real__glGetObjectParameterivAPPLE = gapic::GetGfxProcAddress("glGetObjectParameterivAPPLE", true);
     real__glGetObjectParameterivARB = gapic::GetGfxProcAddress("glGetObjectParameterivARB", true);
@@ -5471,13 +4842,10 @@ static void initExports() {
     real__glGetPixelMapusv = gapic::GetGfxProcAddress("glGetPixelMapusv", true);
     real__glGetPointerv = gapic::GetGfxProcAddress("glGetPointerv", true);
     real__glGetPolygonStipple = gapic::GetGfxProcAddress("glGetPolygonStipple", true);
-    real__glGetProgramBinary = gapic::GetGfxProcAddress("glGetProgramBinary", true);
     real__glGetProgramEnvParameterdvARB = gapic::GetGfxProcAddress("glGetProgramEnvParameterdvARB", true);
     real__glGetProgramEnvParameterfvARB = gapic::GetGfxProcAddress("glGetProgramEnvParameterfvARB", true);
     real__glGetProgramLocalParameterdvARB = gapic::GetGfxProcAddress("glGetProgramLocalParameterdvARB", true);
     real__glGetProgramLocalParameterfvARB = gapic::GetGfxProcAddress("glGetProgramLocalParameterfvARB", true);
-    real__glGetProgramPipelineInfoLog = gapic::GetGfxProcAddress("glGetProgramPipelineInfoLog", true);
-    real__glGetProgramPipelineiv = gapic::GetGfxProcAddress("glGetProgramPipelineiv", true);
     real__glGetProgramStageiv = gapic::GetGfxProcAddress("glGetProgramStageiv", true);
     real__glGetProgramStringARB = gapic::GetGfxProcAddress("glGetProgramStringARB", true);
     real__glGetProgramivARB = gapic::GetGfxProcAddress("glGetProgramivARB", true);
@@ -5489,52 +4857,35 @@ static void initExports() {
     real__glGetRenderbufferParameterivEXT = gapic::GetGfxProcAddress("glGetRenderbufferParameterivEXT", true);
     real__glGetSamplerParameterIiv = gapic::GetGfxProcAddress("glGetSamplerParameterIiv", true);
     real__glGetSamplerParameterIuiv = gapic::GetGfxProcAddress("glGetSamplerParameterIuiv", true);
-    real__glGetSamplerParameterfv = gapic::GetGfxProcAddress("glGetSamplerParameterfv", true);
-    real__glGetSamplerParameteriv = gapic::GetGfxProcAddress("glGetSamplerParameteriv", true);
     real__glGetSeparableFilter = gapic::GetGfxProcAddress("glGetSeparableFilter", true);
     real__glGetShaderSourceARB = gapic::GetGfxProcAddress("glGetShaderSourceARB", true);
-    real__glGetStringi = gapic::GetGfxProcAddress("glGetStringi", true);
     real__glGetSubroutineIndex = gapic::GetGfxProcAddress("glGetSubroutineIndex", true);
     real__glGetSubroutineUniformLocation = gapic::GetGfxProcAddress("glGetSubroutineUniformLocation", true);
-    real__glGetSynciv = gapic::GetGfxProcAddress("glGetSynciv", true);
     real__glGetTexEnvfv = gapic::GetGfxProcAddress("glGetTexEnvfv", true);
     real__glGetTexEnviv = gapic::GetGfxProcAddress("glGetTexEnviv", true);
     real__glGetTexGendv = gapic::GetGfxProcAddress("glGetTexGendv", true);
     real__glGetTexGenfv = gapic::GetGfxProcAddress("glGetTexGenfv", true);
     real__glGetTexGeniv = gapic::GetGfxProcAddress("glGetTexGeniv", true);
     real__glGetTexImage = gapic::GetGfxProcAddress("glGetTexImage", true);
-    real__glGetTexLevelParameterfv = gapic::GetGfxProcAddress("glGetTexLevelParameterfv", true);
-    real__glGetTexLevelParameteriv = gapic::GetGfxProcAddress("glGetTexLevelParameteriv", true);
     real__glGetTexParameterIiv = gapic::GetGfxProcAddress("glGetTexParameterIiv", true);
-    real__glGetTexParameterIivEXT = gapic::GetGfxProcAddress("glGetTexParameterIivEXT", true);
     real__glGetTexParameterIuiv = gapic::GetGfxProcAddress("glGetTexParameterIuiv", true);
-    real__glGetTexParameterIuivEXT = gapic::GetGfxProcAddress("glGetTexParameterIuivEXT", true);
     real__glGetTexParameterPointervAPPLE = gapic::GetGfxProcAddress("glGetTexParameterPointervAPPLE", true);
-    real__glGetTransformFeedbackVarying = gapic::GetGfxProcAddress("glGetTransformFeedbackVarying", true);
     real__glGetTransformFeedbackVaryingEXT = gapic::GetGfxProcAddress("glGetTransformFeedbackVaryingEXT", true);
-    real__glGetUniformBlockIndex = gapic::GetGfxProcAddress("glGetUniformBlockIndex", true);
     real__glGetUniformBufferSizeEXT = gapic::GetGfxProcAddress("glGetUniformBufferSizeEXT", true);
-    real__glGetUniformIndices = gapic::GetGfxProcAddress("glGetUniformIndices", true);
     real__glGetUniformLocationARB = gapic::GetGfxProcAddress("glGetUniformLocationARB", true);
     real__glGetUniformOffsetEXT = gapic::GetGfxProcAddress("glGetUniformOffsetEXT", true);
     real__glGetUniformSubroutineuiv = gapic::GetGfxProcAddress("glGetUniformSubroutineuiv", true);
     real__glGetUniformdv = gapic::GetGfxProcAddress("glGetUniformdv", true);
     real__glGetUniformfvARB = gapic::GetGfxProcAddress("glGetUniformfvARB", true);
     real__glGetUniformivARB = gapic::GetGfxProcAddress("glGetUniformivARB", true);
-    real__glGetUniformuiv = gapic::GetGfxProcAddress("glGetUniformuiv", true);
     real__glGetUniformuivEXT = gapic::GetGfxProcAddress("glGetUniformuivEXT", true);
-    real__glGetVertexAttribIiv = gapic::GetGfxProcAddress("glGetVertexAttribIiv", true);
     real__glGetVertexAttribIivEXT = gapic::GetGfxProcAddress("glGetVertexAttribIivEXT", true);
-    real__glGetVertexAttribIuiv = gapic::GetGfxProcAddress("glGetVertexAttribIuiv", true);
     real__glGetVertexAttribIuivEXT = gapic::GetGfxProcAddress("glGetVertexAttribIuivEXT", true);
     real__glGetVertexAttribLdv = gapic::GetGfxProcAddress("glGetVertexAttribLdv", true);
-    real__glGetVertexAttribPointerv = gapic::GetGfxProcAddress("glGetVertexAttribPointerv", true);
     real__glGetVertexAttribPointervARB = gapic::GetGfxProcAddress("glGetVertexAttribPointervARB", true);
     real__glGetVertexAttribdv = gapic::GetGfxProcAddress("glGetVertexAttribdv", true);
     real__glGetVertexAttribdvARB = gapic::GetGfxProcAddress("glGetVertexAttribdvARB", true);
-    real__glGetVertexAttribfv = gapic::GetGfxProcAddress("glGetVertexAttribfv", true);
     real__glGetVertexAttribfvARB = gapic::GetGfxProcAddress("glGetVertexAttribfvARB", true);
-    real__glGetVertexAttribiv = gapic::GetGfxProcAddress("glGetVertexAttribiv", true);
     real__glGetVertexAttribivARB = gapic::GetGfxProcAddress("glGetVertexAttribivARB", true);
     real__glHistogram = gapic::GetGfxProcAddress("glHistogram", true);
     real__glIndexMask = gapic::GetGfxProcAddress("glIndexMask", true);
@@ -5559,16 +4910,10 @@ static void initExports() {
     real__glIsList = gapic::GetGfxProcAddress("glIsList", true);
     real__glIsNamedStringARB = gapic::GetGfxProcAddress("glIsNamedStringARB", true);
     real__glIsProgramARB = gapic::GetGfxProcAddress("glIsProgramARB", true);
-    real__glIsProgramPipeline = gapic::GetGfxProcAddress("glIsProgramPipeline", true);
     real__glIsQueryARB = gapic::GetGfxProcAddress("glIsQueryARB", true);
     real__glIsRenderbufferEXT = gapic::GetGfxProcAddress("glIsRenderbufferEXT", true);
-    real__glIsSampler = gapic::GetGfxProcAddress("glIsSampler", true);
-    real__glIsSync = gapic::GetGfxProcAddress("glIsSync", true);
-    real__glIsTransformFeedback = gapic::GetGfxProcAddress("glIsTransformFeedback", true);
-    real__glIsVertexArray = gapic::GetGfxProcAddress("glIsVertexArray", true);
     real__glIsVertexArrayAPPLE = gapic::GetGfxProcAddress("glIsVertexArrayAPPLE", true);
     real__glIsVertexAttribEnabledAPPLE = gapic::GetGfxProcAddress("glIsVertexAttribEnabledAPPLE", true);
-    real__glLabelObjectEXT = gapic::GetGfxProcAddress("glLabelObjectEXT", true);
     real__glLabelObjectWithResponsibleProcessAPPLE = gapic::GetGfxProcAddress("glLabelObjectWithResponsibleProcessAPPLE", true);
     real__glLightModelf = gapic::GetGfxProcAddress("glLightModelf", true);
     real__glLightModelfv = gapic::GetGfxProcAddress("glLightModelfv", true);
@@ -5620,11 +4965,9 @@ static void initExports() {
     real__glMultTransposeMatrixf = gapic::GetGfxProcAddress("glMultTransposeMatrixf", true);
     real__glMultTransposeMatrixfARB = gapic::GetGfxProcAddress("glMultTransposeMatrixfARB", true);
     real__glMultiDrawArrays = gapic::GetGfxProcAddress("glMultiDrawArrays", true);
-    real__glMultiDrawArraysEXT = gapic::GetGfxProcAddress("glMultiDrawArraysEXT", true);
     real__glMultiDrawElementArrayAPPLE = gapic::GetGfxProcAddress("glMultiDrawElementArrayAPPLE", true);
     real__glMultiDrawElements = gapic::GetGfxProcAddress("glMultiDrawElements", true);
     real__glMultiDrawElementsBaseVertex = gapic::GetGfxProcAddress("glMultiDrawElementsBaseVertex", true);
-    real__glMultiDrawElementsEXT = gapic::GetGfxProcAddress("glMultiDrawElementsEXT", true);
     real__glMultiDrawRangeElementArrayAPPLE = gapic::GetGfxProcAddress("glMultiDrawRangeElementArrayAPPLE", true);
     real__glMultiTexCoord1d = gapic::GetGfxProcAddress("glMultiTexCoord1d", true);
     real__glMultiTexCoord1dARB = gapic::GetGfxProcAddress("glMultiTexCoord1dARB", true);
@@ -5713,7 +5056,6 @@ static void initExports() {
     real__glPassThrough = gapic::GetGfxProcAddress("glPassThrough", true);
     real__glPatchParameterfv = gapic::GetGfxProcAddress("glPatchParameterfv", true);
     real__glPatchParameteri = gapic::GetGfxProcAddress("glPatchParameteri", true);
-    real__glPauseTransformFeedback = gapic::GetGfxProcAddress("glPauseTransformFeedback", true);
     real__glPixelMapfv = gapic::GetGfxProcAddress("glPixelMapfv", true);
     real__glPixelMapuiv = gapic::GetGfxProcAddress("glPixelMapuiv", true);
     real__glPixelMapusv = gapic::GetGfxProcAddress("glPixelMapusv", true);
@@ -5739,7 +5081,6 @@ static void initExports() {
     real__glPopName = gapic::GetGfxProcAddress("glPopName", true);
     real__glPrimitiveRestartIndex = gapic::GetGfxProcAddress("glPrimitiveRestartIndex", true);
     real__glPrioritizeTextures = gapic::GetGfxProcAddress("glPrioritizeTextures", true);
-    real__glProgramBinary = gapic::GetGfxProcAddress("glProgramBinary", true);
     real__glProgramEnvParameter4dARB = gapic::GetGfxProcAddress("glProgramEnvParameter4dARB", true);
     real__glProgramEnvParameter4dvARB = gapic::GetGfxProcAddress("glProgramEnvParameter4dvARB", true);
     real__glProgramEnvParameter4fARB = gapic::GetGfxProcAddress("glProgramEnvParameter4fARB", true);
@@ -5750,59 +5091,24 @@ static void initExports() {
     real__glProgramLocalParameter4fARB = gapic::GetGfxProcAddress("glProgramLocalParameter4fARB", true);
     real__glProgramLocalParameter4fvARB = gapic::GetGfxProcAddress("glProgramLocalParameter4fvARB", true);
     real__glProgramLocalParameters4fvEXT = gapic::GetGfxProcAddress("glProgramLocalParameters4fvEXT", true);
-    real__glProgramParameteri = gapic::GetGfxProcAddress("glProgramParameteri", true);
-    real__glProgramParameteriEXT = gapic::GetGfxProcAddress("glProgramParameteriEXT", true);
     real__glProgramStringARB = gapic::GetGfxProcAddress("glProgramStringARB", true);
     real__glProgramUniform1d = gapic::GetGfxProcAddress("glProgramUniform1d", true);
     real__glProgramUniform1dv = gapic::GetGfxProcAddress("glProgramUniform1dv", true);
-    real__glProgramUniform1f = gapic::GetGfxProcAddress("glProgramUniform1f", true);
-    real__glProgramUniform1fv = gapic::GetGfxProcAddress("glProgramUniform1fv", true);
-    real__glProgramUniform1i = gapic::GetGfxProcAddress("glProgramUniform1i", true);
-    real__glProgramUniform1iv = gapic::GetGfxProcAddress("glProgramUniform1iv", true);
-    real__glProgramUniform1ui = gapic::GetGfxProcAddress("glProgramUniform1ui", true);
-    real__glProgramUniform1uiv = gapic::GetGfxProcAddress("glProgramUniform1uiv", true);
     real__glProgramUniform2d = gapic::GetGfxProcAddress("glProgramUniform2d", true);
     real__glProgramUniform2dv = gapic::GetGfxProcAddress("glProgramUniform2dv", true);
-    real__glProgramUniform2f = gapic::GetGfxProcAddress("glProgramUniform2f", true);
-    real__glProgramUniform2fv = gapic::GetGfxProcAddress("glProgramUniform2fv", true);
-    real__glProgramUniform2i = gapic::GetGfxProcAddress("glProgramUniform2i", true);
-    real__glProgramUniform2iv = gapic::GetGfxProcAddress("glProgramUniform2iv", true);
-    real__glProgramUniform2ui = gapic::GetGfxProcAddress("glProgramUniform2ui", true);
-    real__glProgramUniform2uiv = gapic::GetGfxProcAddress("glProgramUniform2uiv", true);
     real__glProgramUniform3d = gapic::GetGfxProcAddress("glProgramUniform3d", true);
     real__glProgramUniform3dv = gapic::GetGfxProcAddress("glProgramUniform3dv", true);
-    real__glProgramUniform3f = gapic::GetGfxProcAddress("glProgramUniform3f", true);
-    real__glProgramUniform3fv = gapic::GetGfxProcAddress("glProgramUniform3fv", true);
-    real__glProgramUniform3i = gapic::GetGfxProcAddress("glProgramUniform3i", true);
-    real__glProgramUniform3iv = gapic::GetGfxProcAddress("glProgramUniform3iv", true);
-    real__glProgramUniform3ui = gapic::GetGfxProcAddress("glProgramUniform3ui", true);
-    real__glProgramUniform3uiv = gapic::GetGfxProcAddress("glProgramUniform3uiv", true);
     real__glProgramUniform4d = gapic::GetGfxProcAddress("glProgramUniform4d", true);
     real__glProgramUniform4dv = gapic::GetGfxProcAddress("glProgramUniform4dv", true);
-    real__glProgramUniform4f = gapic::GetGfxProcAddress("glProgramUniform4f", true);
-    real__glProgramUniform4fv = gapic::GetGfxProcAddress("glProgramUniform4fv", true);
-    real__glProgramUniform4i = gapic::GetGfxProcAddress("glProgramUniform4i", true);
-    real__glProgramUniform4iv = gapic::GetGfxProcAddress("glProgramUniform4iv", true);
-    real__glProgramUniform4ui = gapic::GetGfxProcAddress("glProgramUniform4ui", true);
-    real__glProgramUniform4uiv = gapic::GetGfxProcAddress("glProgramUniform4uiv", true);
     real__glProgramUniformMatrix2dv = gapic::GetGfxProcAddress("glProgramUniformMatrix2dv", true);
-    real__glProgramUniformMatrix2fv = gapic::GetGfxProcAddress("glProgramUniformMatrix2fv", true);
     real__glProgramUniformMatrix2x3dv = gapic::GetGfxProcAddress("glProgramUniformMatrix2x3dv", true);
-    real__glProgramUniformMatrix2x3fv = gapic::GetGfxProcAddress("glProgramUniformMatrix2x3fv", true);
     real__glProgramUniformMatrix2x4dv = gapic::GetGfxProcAddress("glProgramUniformMatrix2x4dv", true);
-    real__glProgramUniformMatrix2x4fv = gapic::GetGfxProcAddress("glProgramUniformMatrix2x4fv", true);
     real__glProgramUniformMatrix3dv = gapic::GetGfxProcAddress("glProgramUniformMatrix3dv", true);
-    real__glProgramUniformMatrix3fv = gapic::GetGfxProcAddress("glProgramUniformMatrix3fv", true);
     real__glProgramUniformMatrix3x2dv = gapic::GetGfxProcAddress("glProgramUniformMatrix3x2dv", true);
-    real__glProgramUniformMatrix3x2fv = gapic::GetGfxProcAddress("glProgramUniformMatrix3x2fv", true);
     real__glProgramUniformMatrix3x4dv = gapic::GetGfxProcAddress("glProgramUniformMatrix3x4dv", true);
-    real__glProgramUniformMatrix3x4fv = gapic::GetGfxProcAddress("glProgramUniformMatrix3x4fv", true);
     real__glProgramUniformMatrix4dv = gapic::GetGfxProcAddress("glProgramUniformMatrix4dv", true);
-    real__glProgramUniformMatrix4fv = gapic::GetGfxProcAddress("glProgramUniformMatrix4fv", true);
     real__glProgramUniformMatrix4x2dv = gapic::GetGfxProcAddress("glProgramUniformMatrix4x2dv", true);
-    real__glProgramUniformMatrix4x2fv = gapic::GetGfxProcAddress("glProgramUniformMatrix4x2fv", true);
     real__glProgramUniformMatrix4x3dv = gapic::GetGfxProcAddress("glProgramUniformMatrix4x3dv", true);
-    real__glProgramUniformMatrix4x3fv = gapic::GetGfxProcAddress("glProgramUniformMatrix4x3fv", true);
     real__glProvokingVertex = gapic::GetGfxProcAddress("glProvokingVertex", true);
     real__glProvokingVertexEXT = gapic::GetGfxProcAddress("glProvokingVertexEXT", true);
     real__glPushAttrib = gapic::GetGfxProcAddress("glPushAttrib", true);
@@ -5834,7 +5140,6 @@ static void initExports() {
     real__glRasterPos4iv = gapic::GetGfxProcAddress("glRasterPos4iv", true);
     real__glRasterPos4s = gapic::GetGfxProcAddress("glRasterPos4s", true);
     real__glRasterPos4sv = gapic::GetGfxProcAddress("glRasterPos4sv", true);
-    real__glReadBuffer = gapic::GetGfxProcAddress("glReadBuffer", true);
     real__glRectd = gapic::GetGfxProcAddress("glRectd", true);
     real__glRectdv = gapic::GetGfxProcAddress("glRectdv", true);
     real__glRectf = gapic::GetGfxProcAddress("glRectf", true);
@@ -5845,22 +5150,15 @@ static void initExports() {
     real__glRectsv = gapic::GetGfxProcAddress("glRectsv", true);
     real__glRenderMode = gapic::GetGfxProcAddress("glRenderMode", true);
     real__glRenderbufferStorageEXT = gapic::GetGfxProcAddress("glRenderbufferStorageEXT", true);
-    real__glRenderbufferStorageMultisampleEXT = gapic::GetGfxProcAddress("glRenderbufferStorageMultisampleEXT", true);
     real__glResetHistogram = gapic::GetGfxProcAddress("glResetHistogram", true);
     real__glResetMinmax = gapic::GetGfxProcAddress("glResetMinmax", true);
-    real__glResumeTransformFeedback = gapic::GetGfxProcAddress("glResumeTransformFeedback", true);
     real__glRotated = gapic::GetGfxProcAddress("glRotated", true);
     real__glRotatef = gapic::GetGfxProcAddress("glRotatef", true);
     real__glSampleCoverageARB = gapic::GetGfxProcAddress("glSampleCoverageARB", true);
-    real__glSampleMaski = gapic::GetGfxProcAddress("glSampleMaski", true);
     real__glSamplePass = gapic::GetGfxProcAddress("glSamplePass", true);
     real__glSamplePassARB = gapic::GetGfxProcAddress("glSamplePassARB", true);
     real__glSamplerParameterIiv = gapic::GetGfxProcAddress("glSamplerParameterIiv", true);
     real__glSamplerParameterIuiv = gapic::GetGfxProcAddress("glSamplerParameterIuiv", true);
-    real__glSamplerParameterf = gapic::GetGfxProcAddress("glSamplerParameterf", true);
-    real__glSamplerParameterfv = gapic::GetGfxProcAddress("glSamplerParameterfv", true);
-    real__glSamplerParameteri = gapic::GetGfxProcAddress("glSamplerParameteri", true);
-    real__glSamplerParameteriv = gapic::GetGfxProcAddress("glSamplerParameteriv", true);
     real__glScaled = gapic::GetGfxProcAddress("glScaled", true);
     real__glScalef = gapic::GetGfxProcAddress("glScalef", true);
     real__glScissorArrayv = gapic::GetGfxProcAddress("glScissorArrayv", true);
@@ -5905,9 +5203,7 @@ static void initExports() {
     real__glSetFenceAPPLE = gapic::GetGfxProcAddress("glSetFenceAPPLE", true);
     real__glShadeModel = gapic::GetGfxProcAddress("glShadeModel", true);
     real__glShaderSourceARB = gapic::GetGfxProcAddress("glShaderSourceARB", true);
-    real__glStencilFunc = gapic::GetGfxProcAddress("glStencilFunc", true);
     real__glStencilFuncSeparateATI = gapic::GetGfxProcAddress("glStencilFuncSeparateATI", true);
-    real__glStencilOp = gapic::GetGfxProcAddress("glStencilOp", true);
     real__glStencilOpSeparateATI = gapic::GetGfxProcAddress("glStencilOpSeparateATI", true);
     real__glSwapAPPLE = gapic::GetGfxProcAddress("glSwapAPPLE", true);
     real__glTestFenceAPPLE = gapic::GetGfxProcAddress("glTestFenceAPPLE", true);
@@ -5958,22 +5254,13 @@ static void initExports() {
     real__glTexGeniv = gapic::GetGfxProcAddress("glTexGeniv", true);
     real__glTexImage1D = gapic::GetGfxProcAddress("glTexImage1D", true);
     real__glTexImage2DMultisample = gapic::GetGfxProcAddress("glTexImage2DMultisample", true);
-    real__glTexImage3D = gapic::GetGfxProcAddress("glTexImage3D", true);
     real__glTexImage3DMultisample = gapic::GetGfxProcAddress("glTexImage3DMultisample", true);
     real__glTexParameterIiv = gapic::GetGfxProcAddress("glTexParameterIiv", true);
-    real__glTexParameterIivEXT = gapic::GetGfxProcAddress("glTexParameterIivEXT", true);
     real__glTexParameterIuiv = gapic::GetGfxProcAddress("glTexParameterIuiv", true);
-    real__glTexParameterIuivEXT = gapic::GetGfxProcAddress("glTexParameterIuivEXT", true);
-    real__glTexParameterfv = gapic::GetGfxProcAddress("glTexParameterfv", true);
-    real__glTexParameteriv = gapic::GetGfxProcAddress("glTexParameteriv", true);
     real__glTexStorage1D = gapic::GetGfxProcAddress("glTexStorage1D", true);
-    real__glTexStorage2D = gapic::GetGfxProcAddress("glTexStorage2D", true);
-    real__glTexStorage3D = gapic::GetGfxProcAddress("glTexStorage3D", true);
     real__glTexSubImage1D = gapic::GetGfxProcAddress("glTexSubImage1D", true);
-    real__glTexSubImage3D = gapic::GetGfxProcAddress("glTexSubImage3D", true);
     real__glTextureBarrierNV = gapic::GetGfxProcAddress("glTextureBarrierNV", true);
     real__glTextureRangeAPPLE = gapic::GetGfxProcAddress("glTextureRangeAPPLE", true);
-    real__glTransformFeedbackVaryings = gapic::GetGfxProcAddress("glTransformFeedbackVaryings", true);
     real__glTransformFeedbackVaryingsEXT = gapic::GetGfxProcAddress("glTransformFeedbackVaryingsEXT", true);
     real__glTranslated = gapic::GetGfxProcAddress("glTranslated", true);
     real__glTranslatef = gapic::GetGfxProcAddress("glTranslatef", true);
@@ -5983,9 +5270,7 @@ static void initExports() {
     real__glUniform1fvARB = gapic::GetGfxProcAddress("glUniform1fvARB", true);
     real__glUniform1iARB = gapic::GetGfxProcAddress("glUniform1iARB", true);
     real__glUniform1ivARB = gapic::GetGfxProcAddress("glUniform1ivARB", true);
-    real__glUniform1ui = gapic::GetGfxProcAddress("glUniform1ui", true);
     real__glUniform1uiEXT = gapic::GetGfxProcAddress("glUniform1uiEXT", true);
-    real__glUniform1uiv = gapic::GetGfxProcAddress("glUniform1uiv", true);
     real__glUniform1uivEXT = gapic::GetGfxProcAddress("glUniform1uivEXT", true);
     real__glUniform2d = gapic::GetGfxProcAddress("glUniform2d", true);
     real__glUniform2dv = gapic::GetGfxProcAddress("glUniform2dv", true);
@@ -5993,9 +5278,7 @@ static void initExports() {
     real__glUniform2fvARB = gapic::GetGfxProcAddress("glUniform2fvARB", true);
     real__glUniform2iARB = gapic::GetGfxProcAddress("glUniform2iARB", true);
     real__glUniform2ivARB = gapic::GetGfxProcAddress("glUniform2ivARB", true);
-    real__glUniform2ui = gapic::GetGfxProcAddress("glUniform2ui", true);
     real__glUniform2uiEXT = gapic::GetGfxProcAddress("glUniform2uiEXT", true);
-    real__glUniform2uiv = gapic::GetGfxProcAddress("glUniform2uiv", true);
     real__glUniform2uivEXT = gapic::GetGfxProcAddress("glUniform2uivEXT", true);
     real__glUniform3d = gapic::GetGfxProcAddress("glUniform3d", true);
     real__glUniform3dv = gapic::GetGfxProcAddress("glUniform3dv", true);
@@ -6003,9 +5286,7 @@ static void initExports() {
     real__glUniform3fvARB = gapic::GetGfxProcAddress("glUniform3fvARB", true);
     real__glUniform3iARB = gapic::GetGfxProcAddress("glUniform3iARB", true);
     real__glUniform3ivARB = gapic::GetGfxProcAddress("glUniform3ivARB", true);
-    real__glUniform3ui = gapic::GetGfxProcAddress("glUniform3ui", true);
     real__glUniform3uiEXT = gapic::GetGfxProcAddress("glUniform3uiEXT", true);
-    real__glUniform3uiv = gapic::GetGfxProcAddress("glUniform3uiv", true);
     real__glUniform3uivEXT = gapic::GetGfxProcAddress("glUniform3uivEXT", true);
     real__glUniform4d = gapic::GetGfxProcAddress("glUniform4d", true);
     real__glUniform4dv = gapic::GetGfxProcAddress("glUniform4dv", true);
@@ -6013,36 +5294,26 @@ static void initExports() {
     real__glUniform4fvARB = gapic::GetGfxProcAddress("glUniform4fvARB", true);
     real__glUniform4iARB = gapic::GetGfxProcAddress("glUniform4iARB", true);
     real__glUniform4ivARB = gapic::GetGfxProcAddress("glUniform4ivARB", true);
-    real__glUniform4ui = gapic::GetGfxProcAddress("glUniform4ui", true);
     real__glUniform4uiEXT = gapic::GetGfxProcAddress("glUniform4uiEXT", true);
-    real__glUniform4uiv = gapic::GetGfxProcAddress("glUniform4uiv", true);
     real__glUniform4uivEXT = gapic::GetGfxProcAddress("glUniform4uivEXT", true);
     real__glUniformBufferEXT = gapic::GetGfxProcAddress("glUniformBufferEXT", true);
     real__glUniformMatrix2dv = gapic::GetGfxProcAddress("glUniformMatrix2dv", true);
     real__glUniformMatrix2fvARB = gapic::GetGfxProcAddress("glUniformMatrix2fvARB", true);
     real__glUniformMatrix2x3dv = gapic::GetGfxProcAddress("glUniformMatrix2x3dv", true);
-    real__glUniformMatrix2x3fv = gapic::GetGfxProcAddress("glUniformMatrix2x3fv", true);
     real__glUniformMatrix2x4dv = gapic::GetGfxProcAddress("glUniformMatrix2x4dv", true);
-    real__glUniformMatrix2x4fv = gapic::GetGfxProcAddress("glUniformMatrix2x4fv", true);
     real__glUniformMatrix3dv = gapic::GetGfxProcAddress("glUniformMatrix3dv", true);
     real__glUniformMatrix3fvARB = gapic::GetGfxProcAddress("glUniformMatrix3fvARB", true);
     real__glUniformMatrix3x2dv = gapic::GetGfxProcAddress("glUniformMatrix3x2dv", true);
-    real__glUniformMatrix3x2fv = gapic::GetGfxProcAddress("glUniformMatrix3x2fv", true);
     real__glUniformMatrix3x4dv = gapic::GetGfxProcAddress("glUniformMatrix3x4dv", true);
-    real__glUniformMatrix3x4fv = gapic::GetGfxProcAddress("glUniformMatrix3x4fv", true);
     real__glUniformMatrix4dv = gapic::GetGfxProcAddress("glUniformMatrix4dv", true);
     real__glUniformMatrix4fvARB = gapic::GetGfxProcAddress("glUniformMatrix4fvARB", true);
     real__glUniformMatrix4x2dv = gapic::GetGfxProcAddress("glUniformMatrix4x2dv", true);
-    real__glUniformMatrix4x2fv = gapic::GetGfxProcAddress("glUniformMatrix4x2fv", true);
     real__glUniformMatrix4x3dv = gapic::GetGfxProcAddress("glUniformMatrix4x3dv", true);
-    real__glUniformMatrix4x3fv = gapic::GetGfxProcAddress("glUniformMatrix4x3fv", true);
     real__glUniformSubroutinesuiv = gapic::GetGfxProcAddress("glUniformSubroutinesuiv", true);
     real__glUnlockArraysEXT = gapic::GetGfxProcAddress("glUnlockArraysEXT", true);
     real__glUnmapBufferARB = gapic::GetGfxProcAddress("glUnmapBufferARB", true);
     real__glUseProgramObjectARB = gapic::GetGfxProcAddress("glUseProgramObjectARB", true);
-    real__glUseProgramStages = gapic::GetGfxProcAddress("glUseProgramStages", true);
     real__glValidateProgramARB = gapic::GetGfxProcAddress("glValidateProgramARB", true);
-    real__glValidateProgramPipeline = gapic::GetGfxProcAddress("glValidateProgramPipeline", true);
     real__glVertex2d = gapic::GetGfxProcAddress("glVertex2d", true);
     real__glVertex2dv = gapic::GetGfxProcAddress("glVertex2dv", true);
     real__glVertex2f = gapic::GetGfxProcAddress("glVertex2f", true);
@@ -6133,7 +5404,6 @@ static void initExports() {
     real__glVertexAttrib4uivARB = gapic::GetGfxProcAddress("glVertexAttrib4uivARB", true);
     real__glVertexAttrib4usv = gapic::GetGfxProcAddress("glVertexAttrib4usv", true);
     real__glVertexAttrib4usvARB = gapic::GetGfxProcAddress("glVertexAttrib4usvARB", true);
-    real__glVertexAttribDivisor = gapic::GetGfxProcAddress("glVertexAttribDivisor", true);
     real__glVertexAttribDivisorARB = gapic::GetGfxProcAddress("glVertexAttribDivisorARB", true);
     real__glVertexAttribI1i = gapic::GetGfxProcAddress("glVertexAttribI1i", true);
     real__glVertexAttribI1iEXT = gapic::GetGfxProcAddress("glVertexAttribI1iEXT", true);
@@ -6161,21 +5431,16 @@ static void initExports() {
     real__glVertexAttribI3uivEXT = gapic::GetGfxProcAddress("glVertexAttribI3uivEXT", true);
     real__glVertexAttribI4bv = gapic::GetGfxProcAddress("glVertexAttribI4bv", true);
     real__glVertexAttribI4bvEXT = gapic::GetGfxProcAddress("glVertexAttribI4bvEXT", true);
-    real__glVertexAttribI4i = gapic::GetGfxProcAddress("glVertexAttribI4i", true);
     real__glVertexAttribI4iEXT = gapic::GetGfxProcAddress("glVertexAttribI4iEXT", true);
-    real__glVertexAttribI4iv = gapic::GetGfxProcAddress("glVertexAttribI4iv", true);
     real__glVertexAttribI4ivEXT = gapic::GetGfxProcAddress("glVertexAttribI4ivEXT", true);
     real__glVertexAttribI4sv = gapic::GetGfxProcAddress("glVertexAttribI4sv", true);
     real__glVertexAttribI4svEXT = gapic::GetGfxProcAddress("glVertexAttribI4svEXT", true);
     real__glVertexAttribI4ubv = gapic::GetGfxProcAddress("glVertexAttribI4ubv", true);
     real__glVertexAttribI4ubvEXT = gapic::GetGfxProcAddress("glVertexAttribI4ubvEXT", true);
-    real__glVertexAttribI4ui = gapic::GetGfxProcAddress("glVertexAttribI4ui", true);
     real__glVertexAttribI4uiEXT = gapic::GetGfxProcAddress("glVertexAttribI4uiEXT", true);
-    real__glVertexAttribI4uiv = gapic::GetGfxProcAddress("glVertexAttribI4uiv", true);
     real__glVertexAttribI4uivEXT = gapic::GetGfxProcAddress("glVertexAttribI4uivEXT", true);
     real__glVertexAttribI4usv = gapic::GetGfxProcAddress("glVertexAttribI4usv", true);
     real__glVertexAttribI4usvEXT = gapic::GetGfxProcAddress("glVertexAttribI4usvEXT", true);
-    real__glVertexAttribIPointer = gapic::GetGfxProcAddress("glVertexAttribIPointer", true);
     real__glVertexAttribIPointerEXT = gapic::GetGfxProcAddress("glVertexAttribIPointerEXT", true);
     real__glVertexAttribL1d = gapic::GetGfxProcAddress("glVertexAttribL1d", true);
     real__glVertexAttribL1dv = gapic::GetGfxProcAddress("glVertexAttribL1dv", true);

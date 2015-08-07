@@ -108,15 +108,15 @@ type resultGetTimingInfo struct {
 	value *path.TimingInfo
 }
 
-// Call Import
-type callImport struct {
+// Call ImportCapture
+type callImportCapture struct {
 	binary.Generate
 	name string
 	Data []uint8
 }
 
-// Result Import
-type resultImport struct {
+// Result ImportCapture
+type resultImportCapture struct {
 	binary.Generate
 	value *path.Capture
 }
@@ -124,12 +124,12 @@ type resultImport struct {
 // Call PrerenderFramebuffers
 type callPrerenderFramebuffers struct {
 	binary.Generate
-	device  *path.Device
-	capture *path.Capture
-	api     ApiID
-	width   uint32
-	height  uint32
-	atomIDs []uint64
+	device       *path.Device
+	capture      *path.Capture
+	api          ApiID
+	width        uint32
+	height       uint32
+	atomIndicies []uint64
 }
 
 // Result PrerenderFramebuffers

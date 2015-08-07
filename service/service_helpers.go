@@ -65,17 +65,17 @@ func (c callGetTimingInfo) Format(f fmt.State, r rune) {
 func (r resultGetTimingInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
-func (c callImport) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "Import(name: %v, Data: %v)",
+func (c callImportCapture) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "ImportCapture(name: %v, Data: %v)",
 		c.name, c.Data,
 	)
 }
-func (r resultImport) Format(f fmt.State, c rune) {
+func (r resultImportCapture) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIDs: %v)",
-		c.device, c.capture, c.api, c.width, c.height, c.atomIDs,
+	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIndicies: %v)",
+		c.device, c.capture, c.api, c.width, c.height, c.atomIndicies,
 	)
 }
 func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {

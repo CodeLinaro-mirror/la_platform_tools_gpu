@@ -23,10 +23,11 @@ import (
 // Metadata is the meta information about an atom type that is added to the
 // binary schema class for the atom.
 type Metadata struct {
-	binary.Generate
+	binary.Generate  `java:"AtomMetadata"`
 	API              gfxapi.ID // The api this atom belongs to.
 	DisplayName      string    // The display name for this atom type.
-	Flags            Flags     // The atom flags for this type.
+	EndOfFrame       bool      // Indicates the atom is an end of frame marker.
+	DrawCall         bool      // Indicates the atom is a draw call.
 	DocumentationUrl string    // A url for documentation about this atom.
 }
 

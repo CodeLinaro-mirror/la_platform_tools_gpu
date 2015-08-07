@@ -44,13 +44,13 @@ func timingInfoGpu(flags service.TimingFlags, out chan<- replay.CallTiming, devi
 		mark := false
 		if timeFrames && a.Flags().IsEndOfFrame() {
 			if _, ok := seen[id]; !ok {
-				timingInfo.PerFrame = append(timingInfo.PerFrame, service.AtomRangeTimer{ToAtomID: uint64(id)})
+				timingInfo.PerFrame = append(timingInfo.PerFrame, service.AtomRangeTimer{ToAtomIndex: uint64(id)})
 			}
 			mark = true
 		}
 		if timeDrawCalls && a.Flags().IsDrawCall() {
 			if _, ok := seen[id]; !ok {
-				timingInfo.PerDrawCall = append(timingInfo.PerDrawCall, service.AtomRangeTimer{ToAtomID: uint64(id)})
+				timingInfo.PerDrawCall = append(timingInfo.PerDrawCall, service.AtomRangeTimer{ToAtomIndex: uint64(id)})
 			}
 			mark = true
 		}
@@ -74,9 +74,9 @@ func timingInfoGpu(flags service.TimingFlags, out chan<- replay.CallTiming, devi
 				// TODO: Refactor to find and use frame/draw overlaps with query intervals.
 
 				// Skip frames and draw calls that don't have any overlapping query values.
-				for ; len(frames) > 0 && frames[0].ToAtomID < uint64(query.endId); frames = frames[1:] {
+				for ; len(frames) > 0 && frames[0].ToAtomIndex < uint64(query.endId); frames = frames[1:] {
 				}
-				for ; len(draws) > 0 && draws[0].ToAtomID < uint64(query.endId); draws = draws[1:] {
+				for ; len(draws) > 0 && draws[0].ToAtomIndex < uint64(query.endId); draws = draws[1:] {
 				}
 
 				// Attribute delta time to the enclosing frame, assuming no gaps.
@@ -157,7 +157,7 @@ const (
 )
 
 var (
-	syncId           = SyncObject(0x0FFFFFFF0FFFFFFF)
+	syncId           = GLsync(0x0FFFFFFF0FFFFFFF)
 	transientPointer = memory.Tmp
 )
 
@@ -214,7 +214,7 @@ func (t *timingInfoGpuTransform) generateNewQueries(count int, out atom.Writer) 
 		newQueries[i] = QueryId(0xF0FF0000 + offset + i)
 	}
 	out.Write(atom.NoID,
-		NewGlGenQueries(int32(count), transientPointer).
+		NewGlGenQueries(GLsizei(count), transientPointer).
 			AddRead(atom.Data(t.device.Architecture(), t.db, t.logger, transientPointer, newQueries)))
 	t.availableQueryIds = append(t.availableQueryIds, newQueries...)
 }
@@ -286,8 +286,8 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 	// Wait for all commands to complete and check the disjoint timer flag before retrieving results.
 	if t.timerQueryType == gpuTimerQueryDisjointExt {
 		if t.hasFences {
-			out.Write(atom.NoID, NewGlFenceSync(SyncCondition_GL_SYNC_GPU_COMMANDS_COMPLETE, 0, syncId))
-			out.Write(atom.NoID, NewGlClientWaitSync(syncId, SyncFlags_GL_SYNC_FLUSH_COMMANDS_BIT, 0xFFFFFFFFFFFFFFFF, 0))
+			out.Write(atom.NoID, NewGlFenceSync(GLenum_GL_SYNC_GPU_COMMANDS_COMPLETE, 0, syncId))
+			out.Write(atom.NoID, NewGlClientWaitSync(syncId, GLbitfield_GL_SYNC_FLUSH_COMMANDS_BIT, 0xFFFFFFFFFFFFFFFF, 0))
 			out.Write(atom.NoID, NewGlDeleteSync(syncId))
 		} else {
 			out.Write(atom.NoID, NewGlReadPixels(0, 0, 1, 1, GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, transientPointer))

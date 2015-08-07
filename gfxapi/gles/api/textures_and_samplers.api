@@ -131,6 +131,10 @@ cmd void glCompressedTexImage2D(GLenum         target,
         GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: {
       minRequiredVersion(3, 0)
     }
+    case GL_ATC_RGB_AMD, GL_ATC_RGBA_EXPLICIT_ALPHA_AMD, GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD: {
+      requiresExtension(GL_AMD_compressed_ATC_texture)
+      // TODO: Add to other commands as well.
+    }
     default: {
       glErrorInvalidEnum(format)
     }
@@ -571,15 +575,15 @@ cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
   id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
   t := ctx.Instances.Textures[id]
   values[0] = switch (parameter) {
-    case GL_TEXTURE_MAG_FILTER:         as!f32(t.MagFilter)
-    case GL_TEXTURE_MIN_FILTER:         as!f32(t.MinFilter)
-    case GL_TEXTURE_WRAP_S:             as!f32(t.WrapS)
-    case GL_TEXTURE_WRAP_T:             as!f32(t.WrapT)
-    case GL_TEXTURE_MAX_ANISOTROPY_EXT: as!f32(t.MaxAnisotropy)
-    case GL_TEXTURE_SWIZZLE_R:          as!f32(t.SwizzleR)
-    case GL_TEXTURE_SWIZZLE_G:          as!f32(t.SwizzleG)
-    case GL_TEXTURE_SWIZZLE_B:          as!f32(t.SwizzleB)
-    case GL_TEXTURE_SWIZZLE_A:          as!f32(t.SwizzleA)
+    case GL_TEXTURE_MAG_FILTER:         as!GLfloat(t.MagFilter)
+    case GL_TEXTURE_MIN_FILTER:         as!GLfloat(t.MinFilter)
+    case GL_TEXTURE_WRAP_S:             as!GLfloat(t.WrapS)
+    case GL_TEXTURE_WRAP_T:             as!GLfloat(t.WrapT)
+    case GL_TEXTURE_MAX_ANISOTROPY_EXT: as!GLfloat(t.MaxAnisotropy)
+    case GL_TEXTURE_SWIZZLE_R:          as!GLfloat(t.SwizzleR)
+    case GL_TEXTURE_SWIZZLE_G:          as!GLfloat(t.SwizzleG)
+    case GL_TEXTURE_SWIZZLE_B:          as!GLfloat(t.SwizzleB)
+    case GL_TEXTURE_SWIZZLE_A:          as!GLfloat(t.SwizzleA)
   }
 }
 
@@ -625,15 +629,15 @@ cmd void glGetTexParameteriv(GLenum target, GLenum parameter, GLint* values) {
   id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
   t := ctx.Instances.Textures[id]
   values[0] = switch (parameter) {
-    case GL_TEXTURE_MAG_FILTER:         as!s32(t.MagFilter)
-    case GL_TEXTURE_MIN_FILTER:         as!s32(t.MinFilter)
-    case GL_TEXTURE_WRAP_S:             as!s32(t.WrapS)
-    case GL_TEXTURE_WRAP_T:             as!s32(t.WrapT)
-    case GL_TEXTURE_MAX_ANISOTROPY_EXT: as!s32(t.MaxAnisotropy)
-    case GL_TEXTURE_SWIZZLE_R:          as!s32(t.SwizzleR)
-    case GL_TEXTURE_SWIZZLE_G:          as!s32(t.SwizzleG)
-    case GL_TEXTURE_SWIZZLE_B:          as!s32(t.SwizzleB)
-    case GL_TEXTURE_SWIZZLE_A:          as!s32(t.SwizzleA)
+    case GL_TEXTURE_MAG_FILTER:         as!GLint(t.MagFilter)
+    case GL_TEXTURE_MIN_FILTER:         as!GLint(t.MinFilter)
+    case GL_TEXTURE_WRAP_S:             as!GLint(t.WrapS)
+    case GL_TEXTURE_WRAP_T:             as!GLint(t.WrapT)
+    case GL_TEXTURE_MAX_ANISOTROPY_EXT: as!GLint(t.MaxAnisotropy)
+    case GL_TEXTURE_SWIZZLE_R:          as!GLint(t.SwizzleR)
+    case GL_TEXTURE_SWIZZLE_G:          as!GLint(t.SwizzleG)
+    case GL_TEXTURE_SWIZZLE_B:          as!GLint(t.SwizzleB)
+    case GL_TEXTURE_SWIZZLE_A:          as!GLint(t.SwizzleA)
   }
 }
 
@@ -787,6 +791,9 @@ cmd void glTexImage2D(GLenum         target,
         GL_UNSIGNED_SHORT_5_6_5: {
       // version 2.0
     }
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_texture_half_float)
+    }
     case GL_BYTE, GL_FLOAT, GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GL_HALF_FLOAT, GL_INT, GL_SHORT,
         GL_UNSIGNED_INT, GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_24_8,
         GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_INT_5_9_9_9_REV, GL_UNSIGNED_SHORT: {
@@ -797,7 +804,7 @@ cmd void glTexImage2D(GLenum         target,
     }
   }
 
-  assert(internal_format == format)
+  assert(internal_format == as!GLint(format))
   assert(border == 0)
   ctx := GetContext()
   switch (target) {
@@ -881,6 +888,9 @@ cmd void glTexImage3D(GLenum      target,
     }
   }
   switch (type) {
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_texture_half_float)
+    }
     case GL_BYTE, GL_FLOAT, GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GL_HALF_FLOAT, GL_INT, GL_SHORT,
         GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_24_8,
         GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_INT_5_9_9_9_REV, GL_UNSIGNED_SHORT,
@@ -1227,6 +1237,9 @@ cmd void glTexSubImage2D(GLenum         target,
         GL_UNSIGNED_SHORT_5_6_5: {
       // version 2.0
     }
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_texture_half_float)
+    }
     case GL_BYTE, GL_FLOAT, GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GL_HALF_FLOAT, GL_INT, GL_SHORT,
         GL_UNSIGNED_INT, GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_24_8,
         GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_INT_5_9_9_9_REV, GL_UNSIGNED_SHORT: {
@@ -1313,6 +1326,9 @@ cmd void glTexSubImage3D(GLenum      target,
     }
   }
   switch (type) {
+    case GL_HALF_FLOAT_OES: {
+      requiresExtension(GL_OES_texture_half_float)
+    }
     case GL_BYTE, GL_FLOAT, GL_FLOAT_32_UNSIGNED_INT_24_8_REV, GL_HALF_FLOAT, GL_INT, GL_SHORT,
         GL_UNSIGNED_BYTE, GL_UNSIGNED_INT, GL_UNSIGNED_INT_10F_11F_11F_REV, GL_UNSIGNED_INT_24_8,
         GL_UNSIGNED_INT_2_10_10_10_REV, GL_UNSIGNED_INT_5_9_9_9_REV, GL_UNSIGNED_SHORT,

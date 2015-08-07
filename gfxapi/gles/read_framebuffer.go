@@ -130,22 +130,22 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlGenRenderbuffers(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 			NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, renderbufferID),
-			NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, outW, outH),
+			NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, GLsizei(outW), GLsizei(outH)),
 			NewGlFramebufferRenderbuffer(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_RENDERBUFFER, renderbufferID),
 
 			// Setup depth texture.
 			NewGlGenTextures(1, memory.Tmp).
 				AddRead(atom.Data(arch, d, l, memory.Tmp, textureID)),
 			NewGlBindTexture(GLenum_GL_TEXTURE_2D, textureID),
-			NewGlTexImage2D(GLenum_GL_TEXTURE_2D, 0, GLenum_GL_DEPTH24_STENCIL8, outW, outH, 0, GLenum_GL_DEPTH_STENCIL, GLenum_GL_UNSIGNED_INT_24_8, memory.Nullptr),
-			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MIN_FILTER, int32(GLenum_GL_NEAREST)),
-			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MAG_FILTER, int32(GLenum_GL_NEAREST)),
-			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_S, int32(GLenum_GL_CLAMP_TO_EDGE)),
-			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_T, int32(GLenum_GL_CLAMP_TO_EDGE)),
+			NewGlTexImage2D(GLenum_GL_TEXTURE_2D, 0, GLint(GLenum_GL_DEPTH24_STENCIL8), GLsizei(outW), GLsizei(outH), 0, GLenum_GL_DEPTH_STENCIL, GLenum_GL_UNSIGNED_INT_24_8, memory.Nullptr),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MIN_FILTER, GLint(GLenum_GL_NEAREST)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_MAG_FILTER, GLint(GLenum_GL_NEAREST)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_S, GLint(GLenum_GL_CLAMP_TO_EDGE)),
+			NewGlTexParameteri(GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_WRAP_T, GLint(GLenum_GL_CLAMP_TO_EDGE)),
 
 			// Blit depth attachment.
 			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, textureID, 0),
-			NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, GLbitfield_GL_DEPTH_BUFFER_BIT, GLenum_GL_NEAREST),
+			NewGlBlitFramebuffer(0, 0, GLint(inW), GLint(inH), 0, 0, GLint(outW), GLint(outH), GLbitfield_GL_DEPTH_BUFFER_BIT, GLenum_GL_NEAREST),
 			NewGlFramebufferTexture2D(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_TEXTURE_2D, TextureId(0), 0),
 
 			// Bind new framebuffer.
@@ -165,7 +165,7 @@ func readFramebufferDepth(out chan replay.Image) atom.Atom {
 			NewGlUseProgram(programID),
 			NewGlBindTexture(GLenum_GL_TEXTURE_2D, textureID),
 			NewGlGetUniformLocation(programID, "uTexture", uTextureLocation),
-			NewGlUniform1i(uTextureLocation, origActiveTextureUnit),
+			NewGlUniform1i(uTextureLocation, GLint(origActiveTextureUnit)),
 			NewGlBindBuffer(GLenum_GL_ARRAY_BUFFER, 0),
 			NewGlBindBuffer(GLenum_GL_ELEMENT_ARRAY_BUFFER, 0),
 			NewGlVertexAttribPointer(aScreenCoordsLocation, 2, GLenum_GL_FLOAT, false, 0, memory.Tmp),
@@ -242,16 +242,16 @@ func readFramebufferColor(width, height uint32, out chan replay.Image) atom.Atom
 			origScissor := ctx.Rasterizing.Scissor
 
 			replayEach(i, s, d, l, b,
-				NewGlScissor(0, 0, int32(colorW), int32(colorH)),
+				NewGlScissor(0, 0, GLsizei(colorW), GLsizei(colorH)),
 				NewGlGenFramebuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, framebufferID)),
 				NewGlBindFramebuffer(GLenum_GL_DRAW_FRAMEBUFFER, framebufferID),
 				NewGlGenRenderbuffers(1, memory.Tmp).
 					AddRead(atom.Data(arch, d, l, memory.Tmp, renderbufferID)),
 				NewGlBindRenderbuffer(GLenum_GL_RENDERBUFFER, renderbufferID),
-				NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, outW, outH),
+				NewGlRenderbufferStorage(GLenum_GL_RENDERBUFFER, GLenum_GL_RGBA8, GLsizei(outW), GLsizei(outH)),
 				NewGlFramebufferRenderbuffer(GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_RENDERBUFFER, renderbufferID),
-				NewGlBlitFramebuffer(0, 0, inW, inH, 0, 0, outW, outH, GLbitfield_GL_COLOR_BUFFER_BIT, GLenum_GL_LINEAR),
+				NewGlBlitFramebuffer(0, 0, GLint(inW), GLint(inH), 0, 0, GLint(outW), GLint(outH), GLbitfield_GL_COLOR_BUFFER_BIT, GLenum_GL_LINEAR),
 				NewGlBindFramebuffer(GLenum_GL_READ_FRAMEBUFFER, framebufferID),
 			)
 
@@ -286,7 +286,7 @@ func postColorData(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger
 	}
 
 	imageSize := uint64(width * height * 4)
-	NewGlReadPixels(0, 0, width, height, GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp).Replay(i, s, d, l, b)
+	NewGlReadPixels(0, 0, GLsizei(width), GLsizei(height), GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp).Replay(i, s, d, l, b)
 	b.Post(value.RemappedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
 		var data []byte
 		if err == nil {

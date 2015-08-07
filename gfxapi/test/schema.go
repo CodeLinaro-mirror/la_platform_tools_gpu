@@ -14,7 +14,8 @@ func init() {
 	sc_CmdClone.Metadata = append(sc_CmdClone.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdClone",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -22,7 +23,8 @@ func init() {
 	sc_CmdMake.Metadata = append(sc_CmdMake.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdMake",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -30,7 +32,8 @@ func init() {
 	sc_CmdCopy.Metadata = append(sc_CmdCopy.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCopy",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -38,7 +41,8 @@ func init() {
 	sc_CmdCharsliceToString.Metadata = append(sc_CmdCharsliceToString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCharsliceToString",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -46,7 +50,8 @@ func init() {
 	sc_CmdCharptrToString.Metadata = append(sc_CmdCharptrToString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCharptrToString",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -54,7 +59,8 @@ func init() {
 	sc_CmdSliceCasts.Metadata = append(sc_CmdSliceCasts.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdSliceCasts",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -62,7 +68,8 @@ func init() {
 	sc_CmdVoid.Metadata = append(sc_CmdVoid.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -70,7 +77,8 @@ func init() {
 	sc_CmdUnknownRet.Metadata = append(sc_CmdUnknownRet.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownRet",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -78,7 +86,8 @@ func init() {
 	sc_CmdUnknownWritePtr.Metadata = append(sc_CmdUnknownWritePtr.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownWritePtr",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -86,7 +95,8 @@ func init() {
 	sc_CmdUnknownWriteSlice.Metadata = append(sc_CmdUnknownWriteSlice.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownWriteSlice",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -94,7 +104,8 @@ func init() {
 	sc_CmdVoidU8.Metadata = append(sc_CmdVoidU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -102,7 +113,8 @@ func init() {
 	sc_CmdVoidS8.Metadata = append(sc_CmdVoidS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -110,7 +122,8 @@ func init() {
 	sc_CmdVoidU16.Metadata = append(sc_CmdVoidU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -118,7 +131,8 @@ func init() {
 	sc_CmdVoidS16.Metadata = append(sc_CmdVoidS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -126,7 +140,8 @@ func init() {
 	sc_CmdVoidF32.Metadata = append(sc_CmdVoidF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidF32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -134,7 +149,8 @@ func init() {
 	sc_CmdVoidU32.Metadata = append(sc_CmdVoidU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -142,7 +158,8 @@ func init() {
 	sc_CmdVoidS32.Metadata = append(sc_CmdVoidS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -150,7 +167,8 @@ func init() {
 	sc_CmdVoidF64.Metadata = append(sc_CmdVoidF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidF64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -158,7 +176,8 @@ func init() {
 	sc_CmdVoidU64.Metadata = append(sc_CmdVoidU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -166,7 +185,8 @@ func init() {
 	sc_CmdVoidS64.Metadata = append(sc_CmdVoidS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -174,7 +194,8 @@ func init() {
 	sc_CmdVoidBool.Metadata = append(sc_CmdVoidBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidBool",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -182,7 +203,8 @@ func init() {
 	sc_CmdVoidString.Metadata = append(sc_CmdVoidString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidString",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -190,7 +212,8 @@ func init() {
 	sc_CmdVoid3Strings.Metadata = append(sc_CmdVoid3Strings.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3Strings",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -198,7 +221,8 @@ func init() {
 	sc_CmdVoid3InArrays.Metadata = append(sc_CmdVoid3InArrays.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3InArrays",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -206,7 +230,8 @@ func init() {
 	sc_CmdVoidInArrayOfPointers.Metadata = append(sc_CmdVoidInArrayOfPointers.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidInArrayOfPointers",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -214,7 +239,8 @@ func init() {
 	sc_CmdVoidReadU8.Metadata = append(sc_CmdVoidReadU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -222,7 +248,8 @@ func init() {
 	sc_CmdVoidReadS8.Metadata = append(sc_CmdVoidReadS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -230,7 +257,8 @@ func init() {
 	sc_CmdVoidReadU16.Metadata = append(sc_CmdVoidReadU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -238,7 +266,8 @@ func init() {
 	sc_CmdVoidReadS16.Metadata = append(sc_CmdVoidReadS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -246,7 +275,8 @@ func init() {
 	sc_CmdVoidReadF32.Metadata = append(sc_CmdVoidReadF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadF32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -254,7 +284,8 @@ func init() {
 	sc_CmdVoidReadU32.Metadata = append(sc_CmdVoidReadU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -262,7 +293,8 @@ func init() {
 	sc_CmdVoidReadS32.Metadata = append(sc_CmdVoidReadS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -270,7 +302,8 @@ func init() {
 	sc_CmdVoidReadF64.Metadata = append(sc_CmdVoidReadF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadF64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -278,7 +311,8 @@ func init() {
 	sc_CmdVoidReadU64.Metadata = append(sc_CmdVoidReadU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -286,7 +320,8 @@ func init() {
 	sc_CmdVoidReadS64.Metadata = append(sc_CmdVoidReadS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -294,7 +329,8 @@ func init() {
 	sc_CmdVoidReadBool.Metadata = append(sc_CmdVoidReadBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadBool",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -302,7 +338,8 @@ func init() {
 	sc_CmdVoidReadPtrs.Metadata = append(sc_CmdVoidReadPtrs.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadPtrs",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -310,7 +347,8 @@ func init() {
 	sc_CmdVoidWriteU8.Metadata = append(sc_CmdVoidWriteU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -318,7 +356,8 @@ func init() {
 	sc_CmdVoidWriteS8.Metadata = append(sc_CmdVoidWriteS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -326,7 +365,8 @@ func init() {
 	sc_CmdVoidWriteU16.Metadata = append(sc_CmdVoidWriteU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -334,7 +374,8 @@ func init() {
 	sc_CmdVoidWriteS16.Metadata = append(sc_CmdVoidWriteS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -342,7 +383,8 @@ func init() {
 	sc_CmdVoidWriteF32.Metadata = append(sc_CmdVoidWriteF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteF32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -350,7 +392,8 @@ func init() {
 	sc_CmdVoidWriteU32.Metadata = append(sc_CmdVoidWriteU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -358,7 +401,8 @@ func init() {
 	sc_CmdVoidWriteS32.Metadata = append(sc_CmdVoidWriteS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -366,7 +410,8 @@ func init() {
 	sc_CmdVoidWriteF64.Metadata = append(sc_CmdVoidWriteF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteF64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -374,7 +419,8 @@ func init() {
 	sc_CmdVoidWriteU64.Metadata = append(sc_CmdVoidWriteU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -382,7 +428,8 @@ func init() {
 	sc_CmdVoidWriteS64.Metadata = append(sc_CmdVoidWriteS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -390,7 +437,8 @@ func init() {
 	sc_CmdVoidWriteBool.Metadata = append(sc_CmdVoidWriteBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteBool",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -398,7 +446,8 @@ func init() {
 	sc_CmdVoidWritePtrs.Metadata = append(sc_CmdVoidWritePtrs.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWritePtrs",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -406,7 +455,8 @@ func init() {
 	sc_CmdU8.Metadata = append(sc_CmdU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -414,7 +464,8 @@ func init() {
 	sc_CmdS8.Metadata = append(sc_CmdS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS8",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -422,7 +473,8 @@ func init() {
 	sc_CmdU16.Metadata = append(sc_CmdU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -430,7 +482,8 @@ func init() {
 	sc_CmdS16.Metadata = append(sc_CmdS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS16",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -438,7 +491,8 @@ func init() {
 	sc_CmdF32.Metadata = append(sc_CmdF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdF32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -446,7 +500,8 @@ func init() {
 	sc_CmdU32.Metadata = append(sc_CmdU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -454,7 +509,8 @@ func init() {
 	sc_CmdS32.Metadata = append(sc_CmdS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS32",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -462,7 +518,8 @@ func init() {
 	sc_CmdF64.Metadata = append(sc_CmdF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdF64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -470,7 +527,8 @@ func init() {
 	sc_CmdU64.Metadata = append(sc_CmdU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -478,7 +536,8 @@ func init() {
 	sc_CmdS64.Metadata = append(sc_CmdS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS64",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -486,7 +545,8 @@ func init() {
 	sc_CmdBool.Metadata = append(sc_CmdBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdBool",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -494,7 +554,8 @@ func init() {
 	sc_CmdString.Metadata = append(sc_CmdString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdString",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -502,7 +563,8 @@ func init() {
 	sc_CmdPointer.Metadata = append(sc_CmdPointer.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdPointer",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -510,7 +572,8 @@ func init() {
 	sc_CmdVoid3Remapped.Metadata = append(sc_CmdVoid3Remapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3Remapped",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -518,7 +581,8 @@ func init() {
 	sc_CmdVoidInArrayOfRemapped.Metadata = append(sc_CmdVoidInArrayOfRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidInArrayOfRemapped",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -526,7 +590,8 @@ func init() {
 	sc_CmdVoidOutArrayOfRemapped.Metadata = append(sc_CmdVoidOutArrayOfRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidOutArrayOfRemapped",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -534,7 +599,8 @@ func init() {
 	sc_CmdVoidOutArrayOfUnknownRemapped.Metadata = append(sc_CmdVoidOutArrayOfUnknownRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidOutArrayOfUnknownRemapped",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 
@@ -542,7 +608,8 @@ func init() {
 	sc_CmdRemapped.Metadata = append(sc_CmdRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdRemapped",
-		Flags:            0,
+		DrawCall:         false,
+		EndOfFrame:       false,
 		DocumentationUrl: "[]",
 	})
 }

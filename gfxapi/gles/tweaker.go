@@ -75,7 +75,7 @@ func (t *tweaker) glDepthFunc(v GLenum) {
 	}
 }
 
-func (t *tweaker) glBlendColor(r, g, b, a float32) {
+func (t *tweaker) glBlendColor(r, g, b, a GLfloat) {
 	n := Color{Red: r, Green: g, Blue: b, Alpha: a}
 	if o := t.ctx.Blending.BlendColor; o != n {
 		t.undo = append(t.undo, func() {

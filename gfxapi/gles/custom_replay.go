@@ -79,7 +79,7 @@ func (i QueryId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap boo
 	return
 }
 
-func (i SyncObject) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
+func (i GLsync) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
 		key, remap = i, true
 	}
@@ -135,7 +135,7 @@ func (i BufferDataPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.Stat
 	}
 }
 
-func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
+func (i GLeglImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	return value.AbsolutePointer(i.Pointer.Address)
 }
 
@@ -188,7 +188,7 @@ func (ω *WglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database
 
 func (ω *CGLCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	ω.Mutate(s, d, l)
-	ctxID := uint32(getState(s).CGLContexts[ω.Ctx.Read(s, d, l)].Identifier)
+	ctxID := uint32(getState(s).CGLContexts[ω.Ctx.Read(ω, s, d, l, b)].Identifier)
 	return NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 

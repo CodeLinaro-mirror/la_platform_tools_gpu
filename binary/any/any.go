@@ -109,7 +109,7 @@ type int64_ struct {
 }
 
 type int_ struct {
-	binary.Generate `implements:"Box"`
+	binary.Generate `java:"disable"`
 	value           int
 }
 
@@ -194,7 +194,7 @@ type int64Slice struct {
 }
 
 type intSlice struct {
-	binary.Generate `implements:"Box"`
+	binary.Generate `java:"disable"`
 	value           []int
 }
 

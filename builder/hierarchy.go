@@ -31,22 +31,22 @@ func (r *GetHierarchy) BuildLazy(c interface{}, d database.Database, l log.Logge
 	}
 
 	root := &atom.Group{
-		Range: atom.Range{Start: 0, End: atom.ID(len(atoms))},
+		Range: atom.Range{Start: 0, End: uint64(len(atoms))},
 	}
 	var frameIndex, drawIndex int
-	var frameStartID, drawStartID atom.ID
+	var frameStartIndex, drawStartIndex uint64
 	for i, a := range atoms {
-		endID := atom.ID(i + 1) // Increment by one, since atom.Range's end is non-inclusive.
+		endIndex := uint64(i) + 1 // Increment by one, since atom.Range's end is non-inclusive.
 		if a.Flags().IsEndOfFrame() {
-			root.SubGroups.Add(frameStartID, endID, fmt.Sprintf("Frame %d", frameIndex))
-			frameStartID = endID
+			root.SubGroups.Add(frameStartIndex, endIndex, fmt.Sprintf("Frame %d", frameIndex))
+			frameStartIndex = endIndex
 			frameIndex++
-			drawStartID = endID
+			drawStartIndex = endIndex
 			drawIndex = 0 // Reset the draw index, it is relative to the new frame index.
 		}
 		if a.Flags().IsDrawCall() {
-			root.SubGroups.Add(drawStartID, endID, fmt.Sprintf("Draw %d", drawIndex))
-			drawStartID = endID
+			root.SubGroups.Add(drawStartIndex, endIndex, fmt.Sprintf("Draw %d", drawIndex))
+			drawStartIndex = endIndex
 			drawIndex++
 		}
 	}

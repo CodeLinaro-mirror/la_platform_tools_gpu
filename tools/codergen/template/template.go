@@ -40,7 +40,6 @@ type Templates struct {
 	active    *template.Template
 	writer    io.Writer
 	File      interface{}
-	counters  map[string]*counter
 }
 
 func isPublic(s string) bool {
@@ -78,7 +77,6 @@ func New() *Templates {
 			"add": func(a, b int) int { return a + b },
 			"sub": func(a, b int) int { return a - b },
 		},
-		counters: map[string]*counter{},
 	}
 	v := reflect.ValueOf(f)
 	installMethods(v, f.funcs)
@@ -147,6 +145,9 @@ func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Temp
 		try = append(try, fmt.Sprint(prefix, "#", node.Typename()))
 		if node.Typename() != node.Basename() {
 			try = append(try, fmt.Sprint(prefix, "#", node.Basename()))
+			if _, ok := node.(*schema.Primitive); ok {
+				try = append(try, fmt.Sprint(prefix, ".Alias"))
+			}
 		}
 	case *variable:
 		return t.getTemplate(prefix, node.Type)

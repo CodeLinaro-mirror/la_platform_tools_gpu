@@ -25,15 +25,22 @@
   «}¶
 {{end}}
 
-{{define "Java.Encode.Primitive"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.Encode#binary.ID"}}e.id({{.Name}});{{end}}
+{{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Primitive"}}e.{{Call "Java.Method" .Type}}({{.Name}});{{end}}
+{{define "Java.Encode.Alias"}}{{.Name}}.encode(e);{{end}}
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
-{{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
-{{define "Java.Encode.Any"}}e.object({{.Name}});{{end}}
+{{define "Java.Encode.Any"}}e.variant({{.Name}});{{end}}
+
+{{define "Java.Encode#[]uint8"}}
+  e.uint32({{.Name}}.length);¶
+  e.write({{.Name}}, {{.Name}}.length);¶
+{{end}}
 
 {{define "Java.Encode.Slice"}}
-  e.int32({{.Name}}.length);¶
+  e.uint32({{.Name}}.length);¶
   for (int i = 0; i < {{.Name}}.length; i++) {»¶
     {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
@@ -57,15 +64,22 @@
   «}¶
 {{end}}
 
-{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}(d);{{end}}
-{{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
+{{define "Java.Decode#binary.ID"}}{{.Name}} = d.id();{{end}}
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
+{{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
+{{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
+{{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
-{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.object();{{end}}
+{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.variant();{{end}}
+
+{{define "Java.Decode#[]uint8"}}
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
+  d.read({{.Name}}, {{.Name}}.length);¶
+{{end}}
 
 {{define "Java.Decode.Slice"}}
-  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.int32()];¶
+  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
   for (int i = 0; i <{{.Name}}.length; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
@@ -90,8 +104,9 @@
     return {{File.FieldName .Name}};¶
   «}¶
   ¶
-  public void {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {»¶
+  public {{File.ClassName File.Struct}} {{File.Setter .Name}}({{Call "Java.Type" .Type}} v) {»¶
     {{File.FieldName .Name}} = v;¶
+    return this;¶
   «}¶
 {{end}}
 
@@ -100,26 +115,22 @@
   {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
   ¶
   // Constructs a default-initialized {@link {{File.ClassName .Struct}}}.¶
-  public {{File.ClassName .Struct}}() {»¶
-  «}¶
+  public {{File.ClassName .Struct}}() {}¶
   ¶
-  // Constructs and decodes a {@link {{File.ClassName .Struct}}} from the {@link Decoder} d.¶
-  public {{File.ClassName .Struct}}(Decoder d) throws IOException {»¶
-    Klass.INSTANCE.decode(d, this);¶
-  «}¶
   {{range .Struct.Fields}}{{template "Java.Accessors" .}}{{end}}
   ¶
   @Override @NotNull¶
   public BinaryClass klass() { return Klass.INSTANCE; }¶
   ¶
-  public static byte[] IDBytes = {
+  private static final byte[] IDBytes = {
     {{range .Struct.ID}}{{ToS8 .}}, {{end}}
   •};¶
-  public static BinaryID ID = new BinaryID(IDBytes);¶
+  public static final BinaryID ID = new BinaryID(IDBytes);¶
   ¶
   static {»¶
     Namespace.register(ID, Klass.INSTANCE);¶
   «}¶
+  public static void register() {}¶
   //{{/*Comment the following section marker*/}}
 {{end}}
 
@@ -160,6 +171,24 @@
     //{{Section "Java.ClassBody"}}¶
     public enum Klass implements BinaryClass {»¶
       //{{Section "Java.KlassBody"}}¶
+    «}¶
+  «}¶
+{{end}}
+
+
+{{define "Java.FactoryBody"}}
+  ¶{{/*Newline after section marker*/}}
+  {{range .Structs}}{{File.ClassName .}}.register();¶{{end}}
+  //{{/*Comment the following section marker*/}}
+{{end}}
+
+{{define "Java.Factory"}}
+  §{{$.Copyright}}§¶
+  package {{.JavaPackage}};¶
+  ¶
+  public final class Factory {»¶
+    public static void register() {»¶
+    //{{Section "Java.FactoryBody"}}¶
     «}¶
   «}¶
 {{end}}

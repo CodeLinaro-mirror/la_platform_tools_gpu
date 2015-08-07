@@ -45,10 +45,8 @@
   sc_{{Template "Go.CmdName" $}}.Metadata = append(sc_{{Template "Go.CmdName" $}}.Metadata, &atom.Metadata{
     API: apiID,
     DisplayName: "{{Template "CmdName" $}}",
-    Flags: 0§
-    {{if GetAnnotation $ "DrawCall"}} | atom.DrawCall §{{end}}
-    {{if GetAnnotation $ "EndOfFrame"}} | atom.EndOfFrame §{{end}}
-    ,
+    DrawCall: {{if GetAnnotation $ "DrawCall"}}true{{else}}false{{end}},
+    EndOfFrame: {{if GetAnnotation $ "EndOfFrame"}}true{{else}}false{{end}},
     DocumentationUrl: "{{$.Docs}}",
   })
 {{end}}

@@ -66,7 +66,7 @@ func decompressTextures(device *service.Device, capture *path.Capture, d databas
 			out.Write(i, NewGlTexImage2D(
 				a.Target,
 				a.Level,
-				GLenum_GL_RGBA,
+				GLint(GLenum_GL_RGBA),
 				a.Width,
 				a.Height,
 				a.Border,
@@ -162,10 +162,10 @@ func getExtensionFormats(extension string) []GLenum {
 		}
 	case "GL_EXT_texture_compression_latc", "GL_NV_texture_compression_latc":
 		return []GLenum{
-			GLenum_GL_COMPRESSED_LUMINANCE_LATC1_NV,
-			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV,
-			GLenum_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV,
-			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV,
+			GLenum_GL_COMPRESSED_LUMINANCE_LATC1_EXT,
+			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT,
+			GLenum_GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT,
+			GLenum_GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT,
 		}
 	default:
 		return []GLenum{}

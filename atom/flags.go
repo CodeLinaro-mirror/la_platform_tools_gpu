@@ -14,7 +14,10 @@
 
 package atom
 
+// binary: java.disable.Flags = true
+
 // Flags is a bitfield describing characteristics of an atom.
+// TODO: Kill flags and just use the metadata instead.
 type Flags uint32
 
 const (

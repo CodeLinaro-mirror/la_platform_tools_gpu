@@ -13,21 +13,19 @@ import (
 
 var ConstantValues schema.Constants
 
-const _DeviceState_name = "offlinedeviceunauthorized"
-
 var _DeviceState_map = map[DeviceState]string{}
 
 func init() {
-	_DeviceState_map[0] = _DeviceState_name[0:7]
-	_DeviceState_map[1] = _DeviceState_name[7:13]
-	_DeviceState_map[2] = _DeviceState_name[13:25]
+	_DeviceState_map[0] = "offline"
+	_DeviceState_map[1] = "device"
+	_DeviceState_map[2] = "unauthorized"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "DeviceState", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _DeviceState_name[0:7], Value: int32(0)},
-			{Name: _DeviceState_name[7:13], Value: int32(1)},
-			{Name: _DeviceState_name[13:25], Value: int32(2)},
+			{Name: "offline", Value: int32(0)},
+			{Name: "device", Value: int32(1)},
+			{Name: "unauthorized", Value: int32(2)},
 		},
 	})
 }

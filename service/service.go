@@ -39,9 +39,9 @@ type Service interface {
 	// This includes all the types included in or referenced from the atom stream.
 	GetSchema(l log.Logger) (Schema, error)
 
-	// Import imports capture data emitted by the graphics spy, returning the new
-	// capture identifier.
-	Import(name string, Data []uint8, l log.Logger) (*path.Capture, error)
+	// ImportCapture imports capture data emitted by the graphics spy, returning
+	// the new capture identifier.
+	ImportCapture(name string, Data []uint8, l log.Logger) (*path.Capture, error)
 
 	// GetCaptures returns the full list of capture identifiers avaliable on the
 	// server.
@@ -74,7 +74,7 @@ type Service interface {
 	// return any data, as it is used to pre-populate the cache of framebuffer
 	// thumbnails that later get queried by the client. This function is
 	// experimental and may change signature.
-	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIDs []uint64, l log.Logger) error
+	PrerenderFramebuffers(device *path.Device, capture *path.Capture, api ApiID, width uint32, height uint32, atomIndicies []uint64, l log.Logger) error
 }
 
 type ApiID binary.ID
@@ -154,7 +154,7 @@ type TimingInfo struct {
 // This is experimental and will change in the near future.
 type AtomTimer struct {
 	binary.Generate
-	AtomID      uint64 // The atom that was timed.
+	AtomIndex   uint64 // The atom that was timed.
 	Nanoseconds uint64 // The time taken for that atom.
 }
 
@@ -162,9 +162,9 @@ type AtomTimer struct {
 // This is experimental and will change in the near future.
 type AtomRangeTimer struct {
 	binary.Generate
-	FromAtomID  uint64 // The first atom in the range that was timed.
-	ToAtomID    uint64 // The last atom in the range that was timed.
-	Nanoseconds uint64 // The time taken for all atoms in the range.
+	FromAtomIndex uint64 // The first atom in the range that was timed.
+	ToAtomIndex   uint64 // The last atom in the range that was timed.
+	Nanoseconds   uint64 // The time taken for all atoms in the range.
 }
 
 // WireframeMode is an enumerator of wireframe modes that can be used by

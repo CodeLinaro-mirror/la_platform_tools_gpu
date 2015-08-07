@@ -97,7 +97,7 @@ func setBackbuffer(width, height int, preserveBuffersOnSwap bool) atom.Atom {
 	color := gles.GLenum_GL_RGB565
 	depth := gles.GLenum_GL_DEPTH_COMPONENT16
 	stencil := gles.GLenum_GL_STENCIL_INDEX8
-	return gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil,
+	return gles.NewBackbufferInfo(gles.GLsizei(width), gles.GLsizei(height), color, depth, stencil,
 		true /* resetViewportScissor */, preserveBuffersOnSwap)
 }
 
@@ -167,7 +167,7 @@ func TestDrawTriangle(t *testing.T) {
 	triangle := atoms.Add(
 		gles.NewGlLinkProgram(prog),
 		gles.NewGlUseProgram(prog),
-		gles.NewGlGetAttribLocation(prog, "position", pos),
+		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
 		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),
@@ -196,7 +196,7 @@ func TestResizeRenderer(t *testing.T) {
 	atoms.Add(
 		gles.NewGlLinkProgram(prog),
 		gles.NewGlUseProgram(prog),
-		gles.NewGlGetAttribLocation(prog, "position", pos),
+		gles.NewGlGetAttribLocation(prog, "position", gles.GLint(pos)),
 		gles.NewGlEnableVertexAttribArray(pos),
 		gles.NewGlVertexAttribPointer(pos, 2, gles.GLenum_GL_FLOAT, false, 0, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), triangleVertices)),

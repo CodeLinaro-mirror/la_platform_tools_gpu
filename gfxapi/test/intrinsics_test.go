@@ -44,7 +44,7 @@ func TestClone(t *testing.T) {
 	} {
 		a.Mutate(s, d, l)
 	}
-	got := getState(s).U8s.Read(s, d, l)
+	got := getState(s).U8s.Read(nil, s, d, l, nil)
 	checkBytes(t, got, expected)
 }
 
@@ -72,7 +72,7 @@ func TestCopy(t *testing.T) {
 	} {
 		a.Mutate(s, d, l)
 	}
-	got := getState(s).U8s.Read(s, d, l)
+	got := getState(s).U8s.Read(nil, s, d, l, nil)
 	checkBytes(t, got, expected)
 }
 

@@ -227,7 +227,7 @@ cmd void glClearStencil(GLint stencil) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glColorMask.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glColorMask.xhtml","OpenGL ES 3.1")
-cmd void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha) {
+cmd void glColorMask(bool red, bool green, bool blue, bool alpha) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
@@ -266,7 +266,7 @@ cmd void glDeleteRenderbuffers(GLsizei count, const RenderbufferId* renderbuffer
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glDepthMask.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthMask.xhtml","OpenGL ES 3.1")
-cmd void glDepthMask(GLboolean enabled) {
+cmd void glDepthMask(bool enabled) {
   minRequiredVersion(2, 0)
 
   ctx := GetContext()
@@ -561,10 +561,10 @@ cmd void glGetFramebufferAttachmentParameteriv(GLenum framebuffer_target,
   framebuffer := ctx.Instances.Framebuffers[framebufferId]
   a := framebuffer.Attachments[attachment]
   value[0] = switch (parameter) {
-    case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:           as!s32(a.Type)
-    case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME:           as!s32(a.Object)
-    case GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL:         as!s32(a.TextureLevel)
-    case GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: as!s32(a.CubeMapFace)
+    case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:           as!GLint(a.Type)
+    case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME:           as!GLint(a.Object)
+    case GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL:         as!GLint(a.TextureLevel)
+    case GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: as!GLint(a.CubeMapFace)
   }
 }
 
@@ -622,9 +622,9 @@ cmd void glGetRenderbufferParameteriv(GLenum target, GLenum parameter, GLint* va
   id := ctx.BoundRenderbuffers[target]
   rb := ctx.Instances.Renderbuffers[id]
   values[0] = switch (parameter) {
-    case GL_RENDERBUFFER_WIDTH:           rb.Width
-    case GL_RENDERBUFFER_HEIGHT:          rb.Height
-    case GL_RENDERBUFFER_INTERNAL_FORMAT: as!s32(rb.Format)
+    case GL_RENDERBUFFER_WIDTH:           as!GLint(rb.Width)
+    case GL_RENDERBUFFER_HEIGHT:          as!GLint(rb.Height)
+    case GL_RENDERBUFFER_INTERNAL_FORMAT: as!GLint(rb.Format)
   // TODO:
   // case GL_RENDERBUFFER_RED_SIZE:        ?
   // case GL_RENDERBUFFER_GREEN_SIZE:      ?

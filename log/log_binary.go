@@ -13,31 +13,29 @@ import (
 
 var ConstantValues schema.Constants
 
-const _Severity_name = "EmergencyAlertCriticalErrorWarningNoticeInfoDebug"
-
 var _Severity_map = map[Severity]string{}
 
 func init() {
-	_Severity_map[0] = _Severity_name[0:9]
-	_Severity_map[1] = _Severity_name[9:14]
-	_Severity_map[2] = _Severity_name[14:22]
-	_Severity_map[3] = _Severity_name[22:27]
-	_Severity_map[4] = _Severity_name[27:34]
-	_Severity_map[5] = _Severity_name[34:40]
-	_Severity_map[6] = _Severity_name[40:44]
-	_Severity_map[7] = _Severity_name[44:49]
+	_Severity_map[0] = "Emergency"
+	_Severity_map[1] = "Alert"
+	_Severity_map[2] = "Critical"
+	_Severity_map[3] = "Error"
+	_Severity_map[4] = "Warning"
+	_Severity_map[5] = "Notice"
+	_Severity_map[6] = "Info"
+	_Severity_map[7] = "Debug"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "Severity", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: _Severity_name[0:9], Value: int32(0)},
-			{Name: _Severity_name[9:14], Value: int32(1)},
-			{Name: _Severity_name[14:22], Value: int32(2)},
-			{Name: _Severity_name[22:27], Value: int32(3)},
-			{Name: _Severity_name[27:34], Value: int32(4)},
-			{Name: _Severity_name[34:40], Value: int32(5)},
-			{Name: _Severity_name[40:44], Value: int32(6)},
-			{Name: _Severity_name[44:49], Value: int32(7)},
+			{Name: "Emergency", Value: int32(0)},
+			{Name: "Alert", Value: int32(1)},
+			{Name: "Critical", Value: int32(2)},
+			{Name: "Error", Value: int32(3)},
+			{Name: "Warning", Value: int32(4)},
+			{Name: "Notice", Value: int32(5)},
+			{Name: "Info", Value: int32(6)},
+			{Name: "Debug", Value: int32(7)},
 		},
 	})
 }

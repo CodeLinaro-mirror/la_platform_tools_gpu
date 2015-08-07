@@ -21,7 +21,7 @@ namespace atom {
             mStart(Start),
             mEnd(End) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a,  } };
+            static gapic::Id ID{ { 0x17, 0x9d, 0xfb, 0x01, 0x7e, 0x79, 0x1c, 0x5b, 0x7c, 0xc8, 0xc6, 0xca, 0x9f, 0x89, 0x60, 0x1b, 0xeb, 0xe8, 0xb1, 0x14,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -80,25 +80,28 @@ namespace atom {
     class Metadata: public Encodable {
     public:
         Metadata() = default;
-        Metadata(gapic::Id API, char* DisplayName, uint32_t Flags, char* DocumentationUrl) :
+        Metadata(gapic::Id API, char* DisplayName, bool EndOfFrame, bool DrawCall, char* DocumentationUrl) :
             mAPI(API),
             mDisplayName(DisplayName),
-            mFlags(Flags),
+            mEndOfFrame(EndOfFrame),
+            mDrawCall(DrawCall),
             mDocumentationUrl(DocumentationUrl) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xb0, 0x6e, 0x0a, 0xcb, 0x6d, 0x82, 0x36, 0x07, 0xa8, 0x83, 0x7c, 0xe9, 0xd3, 0xa6, 0xbc, 0x20, 0x42, 0xe0, 0x28, 0xff,  } };
+            static gapic::Id ID{ { 0x13, 0xf5, 0x94, 0xc3, 0x12, 0x48, 0xe3, 0xf5, 0x48, 0xef, 0x20, 0x3a, 0x2e, 0xbe, 0x48, 0x1d, 0x4a, 0x9e, 0x2d, 0x03,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
             e->Id(this->mAPI);
             e->String(this->mDisplayName);
-            e->Uint32(this->mFlags);
+            e->Bool(this->mEndOfFrame);
+            e->Bool(this->mDrawCall);
             e->String(this->mDocumentationUrl);
         }
 
         gapic::Id mAPI;
         char* mDisplayName;
-        uint32_t mFlags;
+        bool mEndOfFrame;
+        bool mDrawCall;
         char* mDocumentationUrl;
     };
 

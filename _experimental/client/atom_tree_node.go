@@ -22,7 +22,7 @@ import (
 )
 
 type atomItem struct {
-	atomID atom.ID
+	atomIndex uint64
 }
 
 // atomTreeNode is a gxui.TreeNode representing a single atom.
@@ -33,30 +33,30 @@ type atomTreeNode struct {
 }
 
 func (n atomTreeNode) Count() int {
-	atom := n.ctx.atoms[n.item.atomID]
+	atom := n.ctx.atoms[n.item.atomIndex]
 	observations := atom.Observations()
 	return len(observations.Reads) + len(observations.Writes)
 }
 
 func (n atomTreeNode) NodeAt(index int) gxui.TreeNode {
-	atom := n.ctx.atoms[n.item.atomID]
+	atom := n.ctx.atoms[n.item.atomIndex]
 	observations := atom.Observations()
 	if index < len(observations.Reads) {
 		return observationTreeNode{
 			ctx: n.ctx,
 			item: observationItem{
-				atomID: n.item.atomID,
-				isRead: true,
-				index:  index,
+				atomIndex: n.item.atomIndex,
+				isRead:    true,
+				index:     index,
 			},
 		}
 	} else {
 		return observationTreeNode{
 			ctx: n.ctx,
 			item: observationItem{
-				atomID: n.item.atomID,
-				isRead: false,
-				index:  index - len(observations.Reads),
+				atomIndex: n.item.atomIndex,
+				isRead:    false,
+				index:     index - len(observations.Reads),
 			},
 		}
 	}
@@ -70,21 +70,21 @@ func (n atomTreeNode) ItemIndex(item gxui.AdapterItem) int {
 	if i := item.(observationItem); i.isRead {
 		return i.index
 	} else {
-		atom := n.ctx.atoms[n.item.atomID]
+		atom := n.ctx.atoms[n.item.atomIndex]
 		observations := atom.Observations()
 		return len(observations.Reads) + i.index
 	}
 }
 
 func (n atomTreeNode) Create(t gxui.Theme) gxui.Control {
-	p := n.ctx.capture.Atoms().Index(uint64(n.item.atomID))
+	p := n.ctx.capture.Atoms().Index(n.item.atomIndex)
 	a := n.ctx.atoms[p.Index].(*Atom)
 
 	layout := t.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 	layout.AddChild(createLabel(n.ctx.appCtx, fmt.Sprintf("%.6d ", p.Index), LINE_NUMBER_COLOR))
 
-	if ns, ok := n.ctx.timings.AtomDuration(n.item.atomID); ok {
+	if ns, ok := n.ctx.timings.AtomDuration(n.item.atomIndex); ok {
 		timeLbl := t.CreateLabel()
 		milliseconds := float64(ns) / 1000000.
 		timeLbl.SetText(fmt.Sprintf("%6.3f ms ", milliseconds))

@@ -23,7 +23,7 @@ import (
 )
 
 // GroupList is a list of Groups. Functions in this package expect the list to
-// be in ascending atom identifier order, and maintain that order on mutation.
+// be in ascending atom index order, and maintain that order on mutation.
 type GroupList []Group
 
 func (l GroupList) info(depth int) string {
@@ -40,10 +40,10 @@ func (l GroupList) String() string {
 	return l.info(0)
 }
 
-// IndexOf returns the index of the group that contains the atom identifier or
+// IndexOf returns the index of the group that contains the atom index or
 // -1 if not found.
-func (l *GroupList) IndexOf(atomID ID) int {
-	return interval.IndexOf(l, uint64(atomID))
+func (l *GroupList) IndexOf(atomIndex uint64) int {
+	return interval.IndexOf(l, atomIndex)
 }
 
 // Add inserts a new atom group into the list with the specified range and name.
@@ -56,7 +56,7 @@ func (l *GroupList) IndexOf(atomID ID) int {
 // the new group is added to the list, keeping ascending atom-identifier order.
 // If the new group partially overlaps any existing group then the function will
 // panic.
-func (l *GroupList) Add(start, end ID, name string) {
+func (l *GroupList) Add(start, end uint64, name string) {
 	r := Range{Start: start, End: end}
 	g := Group{Name: name, Range: r}
 	s, c := interval.Intersect(l, r.Span())
@@ -95,12 +95,12 @@ func (l GroupList) Length() int {
 	return len(l)
 }
 
-// GetSpan returns the atom identifier span for the group at index in the list.
+// GetSpan returns the atom index span for the group at index in the list.
 func (l GroupList) GetSpan(index int) interval.U64Span {
 	return l[index].Range.Span()
 }
 
-// SetSpan sets the atom identifier span for the group at index in the list.
+// SetSpan sets the atom index span for the group at index in the list.
 func (l GroupList) SetSpan(index int, span interval.U64Span) {
 	l[index].Range.SetSpan(span)
 }

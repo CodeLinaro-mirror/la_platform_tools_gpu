@@ -14,13 +14,10 @@
 
 package client
 
-import (
-	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/memory"
-)
+import "android.googlesource.com/platform/tools/gpu/memory"
 
-type MemoryRequestCallback func(atomId atom.ID, address memory.Pointer, bytes []byte)
+type MemoryRequestCallback func(atomIndex uint64, address memory.Pointer, bytes []byte)
 
 type MemoryRequester interface {
-	RequestMemory(atomId atom.ID, address memory.Pointer, size uint64, callback MemoryRequestCallback)
+	RequestMemory(atomIndex uint64, address memory.Pointer, size uint64, callback MemoryRequestCallback)
 }

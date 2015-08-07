@@ -133,7 +133,7 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-func (s rpcServer) Import(name string, data []uint8, l log.Logger) (*path.Capture, error) {
+func (s rpcServer) ImportCapture(name string, data []uint8, l log.Logger) (*path.Capture, error) {
 	list := atom.NewList()
 	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 	for {
@@ -250,7 +250,7 @@ func (s rpcServer) PrerenderFramebuffers(
 	capture *path.Capture,
 	apiID service.ApiID,
 	width, height uint32,
-	atomIDs []uint64,
+	atomIndicies []uint64,
 	l log.Logger) error {
 
 	if err := device.Validate(); err != nil {
@@ -260,12 +260,12 @@ func (s rpcServer) PrerenderFramebuffers(
 		return err
 	}
 	_, err := database.Build(&builder.PrerenderFramebuffers{
-		Device:  device,
-		Capture: capture,
-		API:     apiID,
-		Width:   width,
-		Height:  height,
-		AtomIDs: atomIDs,
+		Device:       device,
+		Capture:      capture,
+		API:          apiID,
+		Width:        width,
+		Height:       height,
+		AtomIndicies: atomIndicies,
 	}, s.Database, l)
 	return err
 }

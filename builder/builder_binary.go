@@ -29,11 +29,13 @@ func init() {
 	Namespace.Add((*GetHierarchy)(nil).Class())
 	Namespace.Add((*GetState)(nil).Class())
 	Namespace.Add((*GetTimingInfo)(nil).Class())
+	Namespace.Add((*IndexLimits)(nil).Class())
 	Namespace.Add((*PrerenderFramebuffers)(nil).Class())
 	Namespace.Add((*RenderFramebufferColor)(nil).Class())
 	Namespace.Add((*RenderFramebufferDepth)(nil).Class())
 	Namespace.Add((*Set)(nil).Class())
 	Namespace.Add((*atomFramebufferDimensions)(nil).Class())
+	Namespace.Add((*calcIndexLimits)(nil).Class())
 	Namespace.Add((*captureFramebufferDimensions)(nil).Class())
 	Namespace.Add((*getCaptureFramebufferDimensions)(nil).Class())
 }
@@ -48,11 +50,13 @@ var (
 	binaryIDGetHierarchy                    = binary.ID{0xc8, 0x91, 0x63, 0x41, 0x37, 0x7e, 0x59, 0x37, 0xe2, 0x13, 0x28, 0xbc, 0xf0, 0xf1, 0x8c, 0x20, 0x26, 0x6d, 0xa7, 0x55}
 	binaryIDGetState                        = binary.ID{0x40, 0xfb, 0x42, 0x18, 0xf5, 0x5c, 0xff, 0x11, 0x85, 0x82, 0xaf, 0xf4, 0x6d, 0xc5, 0xde, 0x19, 0x0b, 0x41, 0xba, 0x38}
 	binaryIDGetTimingInfo                   = binary.ID{0x62, 0xaf, 0x98, 0x90, 0x77, 0x84, 0x30, 0xad, 0x1b, 0x37, 0x4d, 0x76, 0xdd, 0xc8, 0xd4, 0xda, 0x41, 0xe7, 0x99, 0xca}
-	binaryIDPrerenderFramebuffers           = binary.ID{0xe5, 0x39, 0x5a, 0x38, 0x7e, 0xd7, 0xfd, 0x1d, 0xfd, 0xc8, 0x41, 0x0b, 0x7a, 0x55, 0x93, 0x3d, 0xdb, 0x51, 0x28, 0xce}
+	binaryIDIndexLimits                     = binary.ID{0x28, 0x48, 0x73, 0xe2, 0x23, 0x35, 0xf2, 0x21, 0xaa, 0x3b, 0x89, 0x14, 0x5f, 0x70, 0xf7, 0x21, 0x59, 0x64, 0xe7, 0xb4}
+	binaryIDPrerenderFramebuffers           = binary.ID{0xca, 0x8f, 0xa3, 0xc5, 0x97, 0xd1, 0x84, 0x55, 0xea, 0x92, 0x85, 0x63, 0xd9, 0x5f, 0x8b, 0x0e, 0xf5, 0x30, 0xe1, 0x59}
 	binaryIDRenderFramebufferColor          = binary.ID{0xfe, 0xe2, 0x14, 0xdf, 0xc8, 0x0d, 0xed, 0x58, 0xe4, 0x56, 0xb8, 0xa9, 0x68, 0xd9, 0xc1, 0xa3, 0x50, 0xae, 0xa6, 0x78}
 	binaryIDRenderFramebufferDepth          = binary.ID{0x92, 0xb5, 0x88, 0x2a, 0x1a, 0x6f, 0xa1, 0x3c, 0xff, 0x7a, 0x90, 0xb3, 0x21, 0xa9, 0xe0, 0x67, 0xf4, 0x2c, 0x9e, 0x82}
 	binaryIDSet                             = binary.ID{0x3e, 0x3e, 0xf7, 0x61, 0xd5, 0x5c, 0x3a, 0x76, 0xc6, 0x39, 0x17, 0x5e, 0x37, 0x26, 0x78, 0xaf, 0xdf, 0x83, 0x9f, 0x4e}
 	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
+	binaryIDcalcIndexLimits                 = binary.ID{0x82, 0x11, 0xa7, 0x97, 0xb7, 0xec, 0xbb, 0xb5, 0xb7, 0x3c, 0x7b, 0x0c, 0xdd, 0x62, 0x73, 0x57, 0x53, 0x49, 0x23, 0xbb}
 	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
 	binaryIDgetCaptureFramebufferDimensions = binary.ID{0x27, 0x96, 0x78, 0xb6, 0x8e, 0x91, 0x8f, 0x13, 0x09, 0x07, 0xb7, 0x09, 0x0d, 0x2b, 0xc2, 0xf7, 0xc9, 0xa5, 0x7d, 0x08}
 )
@@ -686,6 +690,67 @@ var schemaGetTimingInfo = &schema.Class{
 	},
 }
 
+type binaryClassIndexLimits struct{}
+
+func (*IndexLimits) Class() binary.Class {
+	return (*binaryClassIndexLimits)(nil)
+}
+func doEncodeIndexLimits(e binary.Encoder, o *IndexLimits) error {
+	if err := e.Uint32(o.Min); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Max); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIndexLimits(d binary.Decoder, o *IndexLimits) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Min = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Max = uint32(obj)
+	}
+	return nil
+}
+func doSkipIndexLimits(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIndexLimits) ID() binary.ID      { return binaryIDIndexLimits }
+func (*binaryClassIndexLimits) New() binary.Object { return &IndexLimits{} }
+func (*binaryClassIndexLimits) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIndexLimits(e, obj.(*IndexLimits))
+}
+func (*binaryClassIndexLimits) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &IndexLimits{}
+	return obj, doDecodeIndexLimits(d, obj)
+}
+func (*binaryClassIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIndexLimits(d, obj.(*IndexLimits))
+}
+func (*binaryClassIndexLimits) Skip(d binary.Decoder) error { return doSkipIndexLimits(d) }
+func (*binaryClassIndexLimits) Schema() *schema.Class       { return schemaIndexLimits }
+
+var schemaIndexLimits = &schema.Class{
+	TypeID:  binaryIDIndexLimits,
+	Package: "builder",
+	Name:    "IndexLimits",
+	Fields: []schema.Field{
+		{Declared: "Min", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Max", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassPrerenderFramebuffers struct{}
 
 func (*PrerenderFramebuffers) Class() binary.Class {
@@ -709,11 +774,11 @@ func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) e
 	if err := e.ID(binary.ID(o.API)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.AtomIDs))); err != nil {
+	if err := e.Uint32(uint32(len(o.AtomIndicies))); err != nil {
 		return err
 	}
-	for i := range o.AtomIDs {
-		if err := e.Uint64(o.AtomIDs[i]); err != nil {
+	for i := range o.AtomIndicies {
+		if err := e.Uint64(o.AtomIndicies[i]); err != nil {
 			return err
 		}
 	}
@@ -748,12 +813,12 @@ func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) e
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.AtomIDs = make([]uint64, count)
-		for i := range o.AtomIDs {
+		o.AtomIndicies = make([]uint64, count)
+		for i := range o.AtomIndicies {
 			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
-				o.AtomIDs[i] = uint64(obj)
+				o.AtomIndicies[i] = uint64(obj)
 			}
 		}
 	}
@@ -821,7 +886,7 @@ var schemaPrerenderFramebuffers = &schema.Class{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Device", ID: (*path.Device)(nil).Class().ID()}}},
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Name: "path.Capture", ID: (*path.Capture)(nil).Class().ID()}}},
 		{Declared: "API", Type: &schema.Primitive{Name: "service.ApiID", Method: schema.ID}},
-		{Declared: "AtomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		{Declared: "AtomIndicies", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -1191,6 +1256,91 @@ var schemaatomFramebufferDimensions = &schema.Class{
 		{Declared: "From", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClasscalcIndexLimits struct{}
+
+func (*calcIndexLimits) Class() binary.Class {
+	return (*binaryClasscalcIndexLimits)(nil)
+}
+func doEncodecalcIndexLimits(e binary.Encoder, o *calcIndexLimits) error {
+	if err := e.Int32(int32(o.indexSize)); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(o.count)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.littleEndian); err != nil {
+		return err
+	}
+	if err := e.ID(o.data); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodecalcIndexLimits(d binary.Decoder, o *calcIndexLimits) error {
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.indexSize = int(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.count = int(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.littleEndian = bool(obj)
+	}
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.data = binary.ID(obj)
+	}
+	return nil
+}
+func doSkipcalcIndexLimits(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClasscalcIndexLimits) ID() binary.ID      { return binaryIDcalcIndexLimits }
+func (*binaryClasscalcIndexLimits) New() binary.Object { return &calcIndexLimits{} }
+func (*binaryClasscalcIndexLimits) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecalcIndexLimits(e, obj.(*calcIndexLimits))
+}
+func (*binaryClasscalcIndexLimits) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &calcIndexLimits{}
+	return obj, doDecodecalcIndexLimits(d, obj)
+}
+func (*binaryClasscalcIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecalcIndexLimits(d, obj.(*calcIndexLimits))
+}
+func (*binaryClasscalcIndexLimits) Skip(d binary.Decoder) error { return doSkipcalcIndexLimits(d) }
+func (*binaryClasscalcIndexLimits) Schema() *schema.Class       { return schemacalcIndexLimits }
+
+var schemacalcIndexLimits = &schema.Class{
+	TypeID:  binaryIDcalcIndexLimits,
+	Package: "builder",
+	Name:    "calcIndexLimits",
+	Fields: []schema.Field{
+		{Declared: "indexSize", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "count", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "littleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
