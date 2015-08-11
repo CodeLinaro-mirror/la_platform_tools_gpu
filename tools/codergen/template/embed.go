@@ -938,7 +938,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Struct"}}e.value({{.Name}});{{end}}
 {{define "Java.Encode.Pointer"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Interface"}}e.object({{.Name}}.unwrap());{{end}}
-{{define "Java.Encode.Any"}}e.variant({{.Name}});{{end}}
+{{define "Java.Encode.Any"}}e.variant(Box.wrap({{.Name}}));{{end}}
 
 {{define "Java.Encode#[]uint8"}}
   e.uint32({{.Name}}.length);¶
@@ -977,7 +977,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
-{{define "Java.Decode.Any"}}{{.Name}} = (Box)d.variant();{{end}}
+{{define "Java.Decode.Any"}}{{.Name}} = ((Box)d.variant()).unwrap();{{end}}
 
 {{define "Java.Decode#[]uint8"}}
   {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
@@ -1263,7 +1263,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#log.Severity"}}Severity{{end}}
 {{define "Java.Type.Primitive"}}{{Call "Java.PrimitiveType" .}}{{end}}
 {{define "Java.Type.Alias"}}{{.Typename}}{{end}}
-{{define "Java.Type.Any"}}Box{{end}}
+{{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
