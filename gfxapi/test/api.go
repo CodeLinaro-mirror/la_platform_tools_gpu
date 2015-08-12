@@ -972,8 +972,8 @@ func (s Boolˢ) Index(i uint64, ϟs *gfxapi.State) Boolᵖ {
 
 // Slice returns a sub-slice from the Boolˢ using start and end indices.
 func (s Boolˢ) Slice(start, end uint64, ϟs *gfxapi.State) Boolˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1140,8 +1140,8 @@ func (s Charˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖ {
 
 // Slice returns a sub-slice from the Charˢ using start and end indices.
 func (s Charˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1326,8 +1326,8 @@ func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ {
 
 // Slice returns a sub-slice from the Charᵖˢ using start and end indices.
 func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1483,8 +1483,8 @@ func (s F32ˢ) Index(i uint64, ϟs *gfxapi.State) F32ᵖ {
 
 // Slice returns a sub-slice from the F32ˢ using start and end indices.
 func (s F32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F32ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1640,8 +1640,8 @@ func (s F64ˢ) Index(i uint64, ϟs *gfxapi.State) F64ᵖ {
 
 // Slice returns a sub-slice from the F64ˢ using start and end indices.
 func (s F64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1797,8 +1797,8 @@ func (s Intˢ) Index(i uint64, ϟs *gfxapi.State) Intᵖ {
 
 // Slice returns a sub-slice from the Intˢ using start and end indices.
 func (s Intˢ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -1989,8 +1989,8 @@ func (s Remappedˢ) Index(i uint64, ϟs *gfxapi.State) Remappedᵖ {
 
 // Slice returns a sub-slice from the Remappedˢ using start and end indices.
 func (s Remappedˢ) Slice(start, end uint64, ϟs *gfxapi.State) Remappedˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2146,8 +2146,8 @@ func (s S16ˢ) Index(i uint64, ϟs *gfxapi.State) S16ᵖ {
 
 // Slice returns a sub-slice from the S16ˢ using start and end indices.
 func (s S16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S16ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2303,8 +2303,8 @@ func (s S32ˢ) Index(i uint64, ϟs *gfxapi.State) S32ᵖ {
 
 // Slice returns a sub-slice from the S32ˢ using start and end indices.
 func (s S32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S32ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2460,8 +2460,8 @@ func (s S64ˢ) Index(i uint64, ϟs *gfxapi.State) S64ᵖ {
 
 // Slice returns a sub-slice from the S64ˢ using start and end indices.
 func (s S64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2617,8 +2617,8 @@ func (s S8ˢ) Index(i uint64, ϟs *gfxapi.State) S8ᵖ {
 
 // Slice returns a sub-slice from the S8ˢ using start and end indices.
 func (s S8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) S8ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2774,8 +2774,8 @@ func (s U16ˢ) Index(i uint64, ϟs *gfxapi.State) U16ᵖ {
 
 // Slice returns a sub-slice from the U16ˢ using start and end indices.
 func (s U16ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -2931,8 +2931,8 @@ func (s U32ˢ) Index(i uint64, ϟs *gfxapi.State) U32ᵖ {
 
 // Slice returns a sub-slice from the U32ˢ using start and end indices.
 func (s U32ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -3088,8 +3088,8 @@ func (s U64ˢ) Index(i uint64, ϟs *gfxapi.State) U64ᵖ {
 
 // Slice returns a sub-slice from the U64ˢ using start and end indices.
 func (s U64ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -3245,8 +3245,8 @@ func (s U8ˢ) Index(i uint64, ϟs *gfxapi.State) U8ᵖ {
 
 // Slice returns a sub-slice from the U8ˢ using start and end indices.
 func (s U8ˢ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
@@ -3352,8 +3352,8 @@ func (s Voidˢ) Index(i uint64, ϟs *gfxapi.State) Voidᵖ {
 
 // Slice returns a sub-slice from the Voidˢ using start and end indices.
 func (s Voidˢ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
-	if start >= end {
-		panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
