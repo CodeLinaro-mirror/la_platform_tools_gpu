@@ -484,8 +484,8 @@
 
   // Slice returns a sub-slice from the {{$slice_ty}} using start and end indices.
   func (s {{$slice_ty}}) Slice(start, end uint64, ϟs *gfxapi.State) {{$slice_ty}} {
-    if start >= end {
-      panic(fmt.Errorf("%v.Slice(%d, %d) - start must be less than end", s, start, end))
+    if start > end {
+      panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
     }
     if end > s.Count {
       panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
